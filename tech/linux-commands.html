@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="tech" data-exclude="linux-commands">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux 命令行入门：30 个最常用的命令 — 资料库</title>
+    <meta name="description" content="Linux 新手必学的 30 个命令，从文件操作、权限管理到进程查看，每个带示例，收藏这一篇就够了。">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Linux 命令行入门：30 个最常用的命令",
+      "description": "Linux 新手必学的 30 个命令，从文件操作、权限管理到进程查看，每个带示例，收藏这一篇就够了。",
+      "datePublished": "2026-05-07",
+      "dateModified": "2026-05-07",
+      "author": {"@type": "Person", "name": "资料库"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://dingjiu1989-hue.github.io/"},
+        {"@type": "ListItem", "position": 2, "name": "技术教程", "item": "https://dingjiu1989-hue.github.io/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Linux 命令行入门：30 个最常用的命令"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/">首页</a> › <a href="/tech/">技术教程</a> › Linux 命令行入门：30 个最常用的命令
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Linux</span>
+        <span class="tag-cat">命令行</span>
+        <span class="tag-cat">教程</span>
+        <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 热门</span></div>
+      <h1 class="article-title">Linux 命令行入门：30 个最常用的命令</h1>
+      <div class="article-meta">发布于 2026-05-07 · 阅读 2880 · 24 回复</div>
+      <div class="article-body"><p>不管你做不做运维，Linux 命令行都是程序员的必修课。这 30 个命令覆盖 80% 日常场景。</p>
+<h2>文件操作（10 个）</h2>
+<table><tr><th>命令</th><th>用途</th><th>示例</th></tr>
+<tr><td>ls</td><td>列出目录</td><td><code>ls -la</code></td></tr>
+<tr><td>cd</td><td>切换目录</td><td><code>cd /var/log</code></td></tr>
+<tr><td>pwd</td><td>显示当前路径</td><td><code>pwd</code></td></tr>
+<tr><td>mkdir</td><td>创建目录</td><td><code>mkdir -p a/b/c</code></td></tr>
+<tr><td>cp</td><td>复制文件</td><td><code>cp -r src dst</code></td></tr>
+<tr><td>mv</td><td>移动/重命名</td><td><code>mv old.txt new.txt</code></td></tr>
+<tr><td>rm</td><td>删除</td><td><code>rm -rf dir/</code></td></tr>
+<tr><td>cat</td><td>查看文件内容</td><td><code>cat file.txt</code></td></tr>
+<tr><td>head/tail</td><td>查看头/尾行</td><td><code>tail -f log.txt</code></td></tr>
+<tr><td>find</td><td>搜索文件</td><td><code>find . -name "*.py"</code></td></tr></table>
+<h2>文本处理（6 个）</h2>
+<table><tr><th>命令</th><th>用途</th><th>示例</th></tr>
+<tr><td>grep</td><td>文本搜索</td><td><code>grep "error" log.txt</code></td></tr>
+<tr><td>wc</td><td>统计行/字数</td><td><code>wc -l file.txt</code></td></tr>
+<tr><td>sort</td><td>排序</td><td><code>sort -n data.txt</code></td></tr>
+<tr><td>uniq</td><td>去重</td><td><code>sort file.txt | uniq -c</code></td></tr>
+<tr><td>sed</td><td>流编辑器</td><td><code>sed 's/old/new/g' file.txt</code></td></tr>
+<tr><td>awk</td><td>列处理</td><td><code>awk '{print $1}' data.txt</code></td></tr></table>
+<h2>权限管理（3 个）</h2>
+<table><tr><th>命令</th><th>用途</th><th>示例</th></tr>
+<tr><td>chmod</td><td>修改权限</td><td><code>chmod +x script.sh</code></td></tr>
+<tr><td>chown</td><td>修改所有者</td><td><code>chown user:group file</code></td></tr>
+<tr><td>sudo</td><td>超级用户权限</td><td><code>sudo systemctl restart nginx</code></td></tr></table>
+<h2>系统信息（5 个）</h2>
+<table><tr><th>命令</th><th>用途</th></tr>
+<tr><td>ps aux</td><td>查看进程</td></tr>
+<tr><td>top/htop</td><td>实时资源监控</td></tr>
+<tr><td>df -h</td><td>磁盘空间</td></tr>
+<tr><td>free -h</td><td>内存使用</td></tr>
+<tr><td>uname -a</td><td>系统信息</td></tr></table>
+<h2>网络（3 个）</h2>
+<table><tr><th>命令</th><th>用途</th></tr>
+<tr><td>curl</td><td>发送 HTTP 请求</td></tr>
+<tr><td>ping</td><td>测试连通性</td></tr>
+<tr><td>netstat</td><td>网络连接状态</td></tr></table>
+<h2>管道和重定向（3 个）</h2>
+<table><tr><th>符号</th><th>用途</th><th>示例</th></tr>
+<tr><td>|</td><td>管道</td><td><code>cat log.txt | grep error | wc -l</code></td></tr>
+<tr><td>></td><td>输出重定向</td><td><code>echo "hello" > file.txt</code></td></tr>
+<tr><td>>></td><td>追加输出</td><td><code>echo "world" >> file.txt</code></td></tr></table>
+<h2>推荐学习路径</h2>
+<p>先掌握文件操作 → 文本处理 → 管道重定向（这是 Linux 的精髓）→ 权限管理 → Shell 脚本编写。</p></div>
+    </article>
+    <section class="related"><div id="related-posts"></div></section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

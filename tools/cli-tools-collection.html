@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="tools" data-exclude="cli-tools-collection">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 款开发者必备的命令行工具（2026 版） — 资料库</title>
+    <meta name="description" content="精选 10 款提升终端效率的命令行工具，涵盖文件管理、JSON 处理、Git 增强、系统监控等场景。">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "10 款开发者必备的命令行工具（2026 版）",
+      "description": "精选 10 款提升终端效率的命令行工具，涵盖文件管理、JSON 处理、Git 增强、系统监控等场景。",
+      "datePublished": "2026-05-07",
+      "dateModified": "2026-05-07",
+      "author": {"@type": "Person", "name": "资料库"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://dingjiu1989-hue.github.io/"},
+        {"@type": "ListItem", "position": 2, "name": "工具推荐", "item": "https://dingjiu1989-hue.github.io/tools/"},
+        {"@type": "ListItem", "position": 3, "name": "10 款开发者必备的命令行工具（2026 版）"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/">首页</a> › <a href="/tools/">工具推荐</a> › 10 款开发者必备的命令行工具（2026 版）
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">命令行</span>
+        <span class="tag-cat">开发工具</span>
+        <span class="tag-cat">效率</span>
+        <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 热门</span></div>
+      <h1 class="article-title">10 款开发者必备的命令行工具（2026 版）</h1>
+      <div class="article-meta">发布于 2026-05-07 · 阅读 4200 · 35 回复</div>
+      <div class="article-body"><p>终端是开发者的主战场。这些 CLI 工具能让你的命令行效率提升 10 倍。</p>
+<h2>文件与导航</h2>
+<ul><li><strong>fd</strong> — 比 <code>find</code> 快 5 倍的搜索工具，语法直观。例：<code>fd "test.*py" src/</code></li><li><strong>ripgrep (rg)</strong> — 比 <code>grep</code> 快 10 倍的文本搜索。例：<code>rg "TODO" --type py</code></li><li><strong>fzf</strong> — 模糊搜索交互工具。Ctrl+T 模糊搜文件，Ctrl+R 模糊搜历史命令，安装即生效。</li><li><strong>zoxide</strong> — 智能 <code>cd</code> 替代。不记全路径，只记文件夹名，自动跳转到你最常去的目录。例：<code>z proj</code></li></ul>
+<h2>文件内容查看</h2>
+<ul><li><strong>bat</strong> — <code>cat</code> 替代品，语法高亮、行号、分页。例：<code>bat main.py</code></li><li><strong>jq</strong> — JSON 处理的瑞士军刀。提取、筛选、转换 JSON 数据：<code>curl api.com | jq '.items[] | {name, price}'</code></li><li><strong>fx</strong> — 交互式 JSON 查看器，支持鼠标点击折叠/展开，比 <code>jq</code> 更直观。</li></ul>
+<h2>Git 增强</h2>
+<ul><li><strong>lazygit</strong> — Git 的终端 GUI。在终端内用键盘快捷键完成 commit、push、merge、rebase 等所有操作，不用记命令。</li><li><strong>delta</strong> — 增强 <code>git diff</code> 显示效果，语法高亮、行号、侧边对比。</li></ul>
+<h2>系统监控</h2>
+<ul><li><strong>btm (bottom)</strong> — Rust 写的系统资源监控，比 <code>top</code> 和 <code>htop</code> 更现代的 UI，CPU/内存/磁盘/网络/温度一屏显示。</li></ul>
+<h2>一行安装（macOS）</h2>
+<pre><code>brew install fd ripgrep fzf zoxide bat jq lazygit git-delta bottom</code></pre>
+<h2>组合使用的威力</h2>
+<pre><code># 在所有 Python 文件中搜索 "user"，模糊筛选后用 bat 查看
+rg -l "user" --type py | fzf --preview "bat --color=always {}"</code></pre>
+<p>把这些工具加到你的工作流里，两周后你会奇怪之前没有它们是怎么活下来的。</p></div>
+    </article>
+    <section class="related"><div id="related-posts"></div></section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>
