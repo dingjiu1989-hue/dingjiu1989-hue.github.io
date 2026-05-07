@@ -3,78 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Pages 演示</title>
+    <title>资料库 — 聚合优质资源，分享实用知识</title>
+    <meta name="description" content="论坛风格资料库，聚合技术教程、副业资源、工具推荐等优质内容。">
     <link rel="stylesheet" href="css/style.css">
+    <!-- Schema.org WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "资料库",
+      "url": "https://dingjiu1989-hue.github.io/",
+      "description": "聚合优质资源，分享实用知识"
+    }
+    </script>
 </head>
 <body>
-    <header>
-        <h1>GitHub Pages 演示</h1>
-        <p>用 Git 仓库免费托管静态网站</p>
-    </header>
 
-    <main>
-        <div class="card">
-            <h2>这是什么？</h2>
-            <p>
-                GitHub Pages 是 GitHub 提供的<strong>免费静态网站托管</strong>服务。
-                只要把 HTML/CSS/JS 文件推送到仓库，GitHub 就会自动构建并部署成一个可访问的网站。
-            </p>
-        </div>
+<!-- Top Nav -->
+<nav class="navbar">
+  <div class="container">
+    <a href="/" class="nav-logo">📚 资料库</a>
+    <div class="nav-links">
+      <a href="/">首页</a>
+      <a href="/tech/">技术教程</a>
+      <a href="/sidehustle/">副业资源</a>
+      <a href="/tools/">工具推荐</a>
+    </div>
+    <input class="nav-search" type="search" placeholder="搜索..." disabled title="搜索功能开发中">
+  </div>
+</nav>
 
-        <div class="card highlight">
-            <h2>部署流程</h2>
-            <ol class="steps">
-                <li>在 GitHub 创建仓库，名称为 <code>用户名.github.io</code>（必须完全一致）</li>
-                <li>把本仓库 push 上去</li>
-                <li>等待 1-2 分钟，访问 <code>https://用户名.github.io</code> 即可看到这个页面</li>
-            </ol>
-        </div>
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>📚 欢迎来到资料库</h1>
+      <p>聚合优质资源，分享实用知识</p>
+      <div class="hero-stats">
+        <span class="hero-stat">📂 3 个版块</span>
+        <span class="hero-stat">📝 6 篇文章</span>
+      </div>
+    </div>
+  </section>
 
-        <div class="card">
-            <h2>手动操作步骤</h2>
-            <pre style="background:#f6f8fa;color:#24292f;">
-# 1. 在 GitHub.com 上创建新仓库，名称设为：你的用户名.github.io
+  <div class="container">
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <span>🔥 今日: 3 篇新帖</span>
+      <span>📅 昨日: 12 篇</span>
+      <span>📊 总帖数: 6</span>
+    </div>
 
-# 2. 把本地代码推送上去
-git remote add origin git@github.com:你的用户名/你的用户名.github.io.git
-git branch -M main
-git add .
-git commit -m "初始页面"
-git push -u origin main
+    <!-- 版块 1: 技术教程 -->
+    <div class="board">
+      <div class="board-header">
+        <span class="board-icon">💻</span>
+        <span class="board-name">技术教程</span>
+        <span class="board-desc">编程 · 工具 · 效率</span>
+        <span class="board-count">共 2 帖</span>
+      </div>
+      <a href="/tech/git-cheatsheet.html" class="post-row">
+        <span class="post-pin pinned">📌</span>
+        <span class="post-title">Git 常用命令速查表</span>
+        <span class="post-replies">4 回复</span>
+        <span class="post-date">05-07</span>
+      </a>
+      <a href="/tech/macos-tools.html" class="post-row">
+        <span class="post-pin"></span>
+        <span class="post-title">macOS 效率工具推荐合集</span>
+        <span class="post-replies">12 回复</span>
+        <span class="post-date">05-06</span>
+      </a>
+    </div>
 
-# 3. 在浏览器打开
-# https://你的用户名.github.io
-            </pre>
-            <p style="margin-top: 1rem; color: #656d76; font-size: 0.85rem;">
-                GitHub Pages 也支持 Hugo、Jekyll、Next.js 等静态站点生成器。
-            </p>
-        </div>
+    <!-- 版块 2: 副业资源 -->
+    <div class="board">
+      <div class="board-header">
+        <span class="board-icon">💰</span>
+        <span class="board-name">副业资源</span>
+        <span class="board-desc">工具 · 平台 · 经验</span>
+        <span class="board-count">共 2 帖</span>
+      </div>
+      <a href="/sidehustle/free-images.html" class="post-row">
+        <span class="post-pin pinned">📌</span>
+        <span class="post-title">免费可商用图片资源汇总</span>
+        <span class="post-replies">8 回复</span>
+        <span class="post-date">05-03</span>
+      </a>
+      <a href="/sidehustle/remote-work.html" class="post-row">
+        <span class="post-pin"></span>
+        <span class="post-title">远程工作平台大盘点</span>
+        <span class="post-replies">6 回复</span>
+        <span class="post-date">04-28</span>
+      </a>
+    </div>
 
-        <div class="card">
-            <h2>三种部署方式</h2>
-            <table style="width:100%;border-collapse:collapse;">
-                <tr style="border-bottom:1px solid #d0d7de;">
-                    <td style="padding:0.5rem 0;"><strong>用户站点</strong></td>
-                    <td style="padding:0.5rem 0;"><code>用户名.github.io</code> 仓库</td>
-                    <td style="padding:0.5rem 0;">每个账号一个</td>
-                </tr>
-                <tr style="border-bottom:1px solid #d0d7de;">
-                    <td style="padding:0.5rem 0;"><strong>项目站点</strong></td>
-                    <td style="padding:0.5rem 0;">任意仓库设置中开启 Pages</td>
-                    <td style="padding:0.5rem 0;">无限个</td>
-                </tr>
-                <tr>
-                    <td style="padding:0.5rem 0;"><strong>自定义域名</strong></td>
-                    <td style="padding:0.5rem 0;">添加 CNAME 文件 + DNS 配置</td>
-                    <td style="padding:0.5rem 0;">支持 HTTPS</td>
-                </tr>
-            </table>
-        </div>
-    </main>
+    <!-- 版块 3: 工具推荐 -->
+    <div class="board">
+      <div class="board-header">
+        <span class="board-icon">🛠️</span>
+        <span class="board-name">工具推荐</span>
+        <span class="board-desc">效率 · 设计 · 开发</span>
+        <span class="board-count">共 2 帖</span>
+      </div>
+      <a href="/tools/chrome-plugins.html" class="post-row">
+        <span class="post-pin hot">🔥</span>
+        <span class="post-title">2025 年度必备 Chrome 插件推荐</span>
+        <span class="post-replies">35 回复</span>
+        <span class="post-date">04-15</span>
+      </a>
+      <a href="/tools/note-apps.html" class="post-row">
+        <span class="post-pin"></span>
+        <span class="post-title">白板/笔记/思维导图工具对比</span>
+        <span class="post-replies">9 回复</span>
+        <span class="post-date">04-10</span>
+      </a>
+    </div>
+  </div>
+</main>
 
-    <footer>
-        这是一个演示页面 — 部署于 <span id="date"></span>
-    </footer>
-    <script>document.getElementById('date').textContent = new Date().toISOString().split('T')[0];</script>
+<footer class="footer">
+  <p>📚 资料库 &copy; 2026</p>
+  <p>纯静态 · GitHub Pages 托管 · 内容仅供学习交流</p>
+  <p style="margin-top:0.5rem;">
+    <a href="/sitemap.xml">站点地图</a> ·
+    <a href="https://github.com/dingjiu1989-hue/dingjiu1989-hue.github.io">GitHub</a>
+  </p>
+</footer>
+
 </body>
 </html>
