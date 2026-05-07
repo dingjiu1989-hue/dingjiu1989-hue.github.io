@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-render="related" data-board="sidehustle" data-exclude="free-images">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,18 +31,7 @@
 </head>
 <body>
 
-<nav class="navbar">
-  <div class="container">
-    <a href="/" class="nav-logo">📚 资料库</a>
-    <div class="nav-links">
-      <a href="/">首页</a>
-      <a href="/tech/">技术教程</a>
-      <a href="/sidehustle/">副业资源</a>
-      <a href="/tools/">工具推荐</a>
-    </div>
-    <input class="nav-search" type="search" placeholder="搜索..." disabled title="搜索功能开发中">
-  </div>
-</nav>
+<div id="nav-placeholder"></div>
 
 <main>
   <div class="container article-container">
@@ -96,20 +85,13 @@
       </div>
     </article>
 
-    <section class="related">
-      <h3>相关文章</h3>
-      <div class="related-grid">
-        <a href="/sidehustle/remote-work.html" class="related-card">远程工作平台大盘点</a>
-      </div>
-    </section>
+    <section class="related"><div id="related-posts"></div></section>
   </div>
 </main>
 
-<footer class="footer">
-  <p>📚 资料库 &copy; 2026</p>
-  <p>纯静态 · GitHub Pages 托管</p>
-  <p style="margin-top:0.5rem;"><a href="/">返回首页</a></p>
-</footer>
+<div id="footer-placeholder"></div>
 
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
 </body>
 </html>
