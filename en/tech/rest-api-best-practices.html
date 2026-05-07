@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="rest-api-best-practices">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="REST API Best Practices: The Complete Guide for 2026">
+    <meta property="og:description" content="Design production-ready REST APIs with proper naming, versioning, pagination, error handling, and security. Includes OpenAPI documentation standards.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/rest-api-best-practices.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="REST API Best Practices: The Complete Guide for 2026">
+    <meta name="twitter:description" content="Design production-ready REST APIs with proper naming, versioning, pagination, error handling, and security. Includes OpenAPI documentation standards.">
+    <title>REST API Best Practices: The Complete Guide for 2026 — SourceHub</title>
+    <meta name="description" content="Design production-ready REST APIs with proper naming, versioning, pagination, error handling, and security. Includes OpenAPI documentation standards.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/rest-api-best-practices.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/rest-api-best-practices.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "REST API Best Practices: The Complete Guide for 2026",
+      "description": "Design production-ready REST APIs with proper naming, versioning, pagination, error handling, and security. Includes OpenAPI documentation standards.",
+      "datePublished": "2026-05-07",
+      "dateModified": "2026-05-07",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "REST API Best Practices: The Complete Guide for 2026"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › REST API Best Practices: The Complete Guide for 2026
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">REST API</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Best Practices</span>
+        <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
+      <h1 class="article-title">REST API Best Practices: The Complete Guide for 2026</h1>
+      <div class="article-meta">Published 2026-05-07 · 4080 views · 34 replies</div>
+      <div class="article-body"><p>REST APIs power the modern web, but most APIs are designed with subtle flaws that cause pain months later. This guide covers the conventions, patterns, and anti-patterns that separate production APIs from weekend projects.</p>
+
+<h2>1. Use Nouns, Not Verbs, for Resources</h2>
+<pre><code># Good
+GET    /users
+GET    /users/42
+POST   /users
+PUT    /users/42
+DELETE /users/42
+
+# Bad
+GET    /getUsers
+POST   /createUser
+GET    /users/42/getProfile</code></pre>
+
+<h2>2. Version Your API from Day One</h2>
+<p>Use URL prefix versioning (<code>/v1/users</code>) or header-based versioning (<code>Accept: application/vnd.api.v2+json</code>). URL versioning is simpler for public APIs. Choose one and stick with it everywhere — mixing strategies is worse than either alone.</p>
+
+<h2>3. Consistent Naming Conventions</h2>
+<pre><code>// JSON: camelCase for properties
+{{"userId": 42, "createdAt": "2026-05-07"}}
+
+// URL paths: kebab-case
+GET /user-orders/42
+
+// Query parameters: snake_case
+GET /users?sort_by=name&page_size=20</code></pre>
+
+<h2>4. Use Proper HTTP Status Codes</h2>
+<table>
+<tr><th>Code</th><th>When to Use</th></tr>
+<tr><td>200 OK</td><td>Successful GET, PUT, PATCH</td></tr>
+<tr><td>201 Created</td><td>Successful POST — always include Location header</td></tr>
+<tr><td>204 No Content</td><td>Successful DELETE (no body returned)</td></tr>
+<tr><td>400 Bad Request</td><td>Malformed input, validation failure</td></tr>
+<tr><td>401 Unauthorized</td><td>Missing or expired auth token</td></tr>
+<tr><td>403 Forbidden</td><td>Authenticated but not permitted</td></tr>
+<tr><td>404 Not Found</td><td>Resource doesn't exist</td></tr>
+<tr><td>409 Conflict</td><td>Duplicate or state conflict</td></tr>
+<tr><td>422 Unprocessable</td><td>Valid syntax but semantic error</td></tr>
+<tr><td>429 Too Many</td><td>Rate limit exceeded — include Retry-After header</td></tr>
+<tr><td>500 Internal Error</td><td>Unexpected server failure (never expose stack traces)</td></tr>
+</table>
+
+<h2>5. Error Response Format</h2>
+<p>Always return errors in a consistent structure:</p>
+<pre><code>{{
+  "error": {{
+    "code": "VALIDATION_ERROR",
+    "message": "Email is required",
+    "details": [
+      {{"field": "email", "reason": "must not be empty"}},
+      {{"field": "age", "reason": "must be positive"}}
+    ],
+    "requestId": "req_abc123"
+  }}
+}}</code></pre>
+
+<h2>6. Pagination, Filtering, and Sorting</h2>
+<pre><code># Pagination with cursor (preferred for large datasets)
+GET /users?cursor=eyJpZCI6NDJ9&limit=20
+Response: {{"data": [...], "nextCursor": "eyJpZCI6NjJ9", "hasMore": true}}
+
+# Or offset-based for simpler use cases
+GET /users?offset=0&limit=20
+
+# Filtering
+GET /users?status=active&role=admin
+
+# Sorting
+GET /users?sort=-createdAt  # descending
+GET /users?sort=+name       # ascending</code></pre>
+
+<h2>7. Security Checklist</h2>
+<ul>
+<li><strong>Always use HTTPS.</strong> No exceptions.</li>
+<li><strong>Set rate limits.</strong> At minimum: 60 req/min per IP for unauthenticated, 1000 req/min per user for authenticated.</li>
+<li><strong>Validate Content-Type.</strong> Reject requests with wrong Content-Type headers.</li>
+<li><strong>Set CORS explicitly.</strong> Never use <code>Access-Control-Allow-Origin: *</code> with credentials.</li>
+<li><strong>Use API keys or OAuth2.</strong> Never roll your own auth protocol.</li>
+<li><strong>Keep secrets out of responses.</strong> Password hashes, internal IDs, stack traces, server versions.</li>
+</ul>
+
+<h2>8. API Documentation</h2>
+<p>Use OpenAPI 3.1 (Swagger). It's the industry standard and generates interactive docs automatically. Tools like Stoplight, Redoc, and Swagger UI render beautiful docs from a single spec file. If your API doesn't have an OpenAPI spec, it's not ready for production.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

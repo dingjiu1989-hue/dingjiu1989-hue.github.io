@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="git-advanced">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Git Advanced: Interactive Rebase, Cherry-Pick, Bisect, and More">
+    <meta property="og:description" content="Master the Git commands that separate senior developers from juniors. Interactive rebase, cherry-pick, bisect, reflog recovery, and custom Git hooks.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/git-advanced.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Git Advanced: Interactive Rebase, Cherry-Pick, Bisect, and More">
+    <meta name="twitter:description" content="Master the Git commands that separate senior developers from juniors. Interactive rebase, cherry-pick, bisect, reflog recovery, and custom Git hooks.">
+    <title>Git Advanced: Interactive Rebase, Cherry-Pick, Bisect, and More — SourceHub</title>
+    <meta name="description" content="Master the Git commands that separate senior developers from juniors. Interactive rebase, cherry-pick, bisect, reflog recovery, and custom Git hooks.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/git-advanced.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/git-advanced.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Git Advanced: Interactive Rebase, Cherry-Pick, Bisect, and More",
+      "description": "Master the Git commands that separate senior developers from juniors. Interactive rebase, cherry-pick, bisect, reflog recovery, and custom Git hooks.",
+      "datePublished": "2026-05-07",
+      "dateModified": "2026-05-07",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Git Advanced: Interactive Rebase, Cherry-Pick, Bisect, and More"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Git Advanced: Interactive Rebase, Cherry-Pick, Bisect, and More
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Git</span>
+        <span class="tag-cat">Advanced</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
+      <h1 class="article-title">Git Advanced: Interactive Rebase, Cherry-Pick, Bisect, and More</h1>
+      <div class="article-meta">Published 2026-05-07 · 2520 views · 21 replies</div>
+      <div class="article-body"><p>Most developers stop at <code>add</code>, <code>commit</code>, <code>push</code>, and <code>pull</code>. But Git has a set of advanced commands that can save hours of frustration and make your commit history something you're actually proud of. Here's your guide to interactive rebase, cherry-pick, bisect, reflog, and hooks.</p>
+
+<h2>Interactive Rebase: Rewrite History Cleanly</h2>
+<p>The most powerful Git feature most developers never learn. Interactive rebase lets you reorder, squash, split, and edit commits before pushing.</p>
+<pre><code># Squash last 4 commits into 1 clean commit
+git rebase -i HEAD~4
+
+# In the editor, mark commits:
+# pick abc1234 First commit message      (keep as-is)
+# squash def5678 Fix typo                (merge into previous)
+# squash ghi9012 Format code             (merge into previous)
+# squash jkl3456 Update tests            (merge into previous)
+# Then write a single commit message</code></pre>
+
+<h3>When to Use Interactive Rebase</h3>
+<ul>
+<li><strong>Before pushing to main:</strong> Squash "WIP" and "fix typo" commits into meaningful units</li>
+<li><strong>Before opening a PR:</strong> Reorder commits so they tell a logical story</li>
+<li><strong>Never:</strong> On shared branches or commits that have been pushed. Rewriting public history causes chaos.</li>
+</ul>
+
+<h2>Cherry-Pick: Apply a Specific Commit Anywhere</h2>
+<p>When you need one specific commit from another branch without merging everything:</p>
+<pre><code># Apply a single commit to the current branch
+git cherry-pick abc1234
+
+# Apply a range of commits
+git cherry-pick abc1234..def5678
+
+# Cherry-pick without committing (stage changes only)
+git cherry-pick -n abc1234</code></pre>
+<p>Common use: a bug fix on a release branch that you need on main, but main has diverged significantly. Cherry-pick the fix commit.</p>
+
+<h2>Git Bisect: Find the Commit That Broke Everything</h2>
+<p>Binary search through your commit history to find exactly which commit introduced a bug:</p>
+<pre><code># Start bisect session
+git bisect start
+git bisect bad HEAD          # current commit is broken
+git bisect good v2.5.0       # this tag was working
+
+# Git checks out a commit halfway between. Test it.
+# If broken:  git bisect bad
+# If working: git bisect good
+
+# Repeat until Git identifies the culprit commit.
+# Then end the session:
+git bisect reset</code></pre>
+<p>For automated bisecting, provide a test script:</p>
+<pre><code>git bisect run npm test     # Git runs the test on each step
+# If the test exits with code 0 → good, non-zero → bad
+# Git finds the breaking commit automatically</code></pre>
+
+<h2>Git Reflog: The Ultimate Undo</h2>
+<p>Reflog records every movement of HEAD — commits, checkouts, rebases, resets. When you think you've lost work, reflog is your safety net:</p>
+<pre><code>git reflog
+# Shows: abc1234 HEAD@{{0}}: commit: Add login feature
+#        def5678 HEAD@{{1}}: rebase (finish): returning to refs/heads/main
+#        ghi9012 HEAD@{{2}}: reset: moving to HEAD~3
+
+# Recover that "lost" commit
+git checkout HEAD@{{2}}       # go back to before the reset
+git branch recovered-branch   # save it to a branch</code></pre>
+<table>
+<tr><th>Scenario</th><th>Recovery Command</th></tr>
+<tr><td>Undo a bad rebase</td><td><code>git reset --hard HEAD@{{1}}</code></td></tr>
+<tr><td>Recover deleted branch</td><td><code>git checkout -b recovered HEAD@{{3}}</code></td></tr>
+<tr><td>Undo amend on wrong commit</td><td><code>git reset --soft HEAD@{{1}}</code></td></tr>
+</table>
+
+<h2>Git Hooks: Automate Your Workflow</h2>
+<p>Hooks are scripts that run automatically on Git events. They live in <code>.git/hooks/</code> and can be written in any language. Use them to prevent mistakes before they happen:</p>
+<pre><code>#!/bin/bash
+# .git/hooks/pre-commit — run linter before every commit
+npm run lint
+if [ $? -ne 0 ]; then
+  echo "Linting failed. Commit aborted."
+  exit 1
+fi</code></pre>
+
+<pre><code>#!/bin/bash
+# .git/hooks/commit-msg — enforce conventional commits
+MSG=$(cat "$1")
+if ! echo "$MSG" | grep -qE "^(feat|fix|refactor|test|docs|chore)(\(.+\))?: "; then
+  echo "Commit message must follow conventional commits format"
+  echo "  feat: add feature"
+  echo "  fix: resolve bug"
+  exit 1
+fi</code></pre>
+
+<table>
+<tr><th>Hook</th><th>When It Runs</th><th>Use For</th></tr>
+<tr><td>pre-commit</td><td>Before commit is created</td><td>Linting, formatting, unit tests</td></tr>
+<tr><td>commit-msg</td><td>After message is entered</td><td>Enforce message format</td></tr>
+<tr><td>pre-push</td><td>Before push to remote</td><td>Integration tests, security scans</td></tr>
+<tr><td>post-checkout</td><td>After checkout/switching branches</td><td>Install dependencies if changed</td></tr>
+</table></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

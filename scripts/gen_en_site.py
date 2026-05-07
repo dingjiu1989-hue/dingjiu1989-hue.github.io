@@ -1223,6 +1223,302 @@ BODIES['saas-bootstrapping-guide'] = '''
 </ul>
 '''
 
+BODIES['linux-commands'] = '''
+<p>A good Linux command-line reference isn't nice to have — it's essential. This cheatsheet covers 50 commands organized by what you're actually trying to do, from file navigation to process management to networking.</p>
+
+<h2>File Navigation</h2>
+<pre><code>pwd                     # print working directory
+ls -la                  # list all files with details
+cd /path/to/dir         # change directory
+cd ..                   # go up one level
+cd -                    # go back to previous directory
+find . -name "*.py"     # find files by name pattern
+locate filename         # find file quickly (uses indexed db)</code></pre>
+
+<h2>File Operations</h2>
+<pre><code>cp source dest          # copy file
+cp -r source dest       # copy directory recursively
+mv source dest          # move or rename
+rm file                 # remove file
+rm -rf dir              # remove directory (DANGER — no undo)
+mkdir -p a/b/c          # create nested directories
+touch file              # create empty file or update timestamp
+ln -s target link       # create symbolic link</code></pre>
+
+<h2>Viewing and Editing Files</h2>
+<pre><code>cat file                # print entire file
+less file               # scroll through file (q to quit)
+head -20 file           # first 20 lines
+tail -f file            # follow file as it grows (logs)
+wc -l file              # count lines
+grep "pattern" file     # search for pattern
+grep -r "pattern" dir   # search recursively
+nano file               # simple terminal editor
+vim file                # advanced editor (:q! to quit)</code></pre>
+
+<h2>Permissions</h2>
+<pre><code>chmod 755 script.sh     # rwxr-xr-x (owner full, others read+execute)
+chmod +x script.sh      # make executable
+chown user:group file   # change owner and group
+umask 022               # set default permissions mask</code></pre>
+
+<h2>Process Management</h2>
+<pre><code>ps aux                  # list all running processes
+ps aux | grep nginx     # find specific process
+top                     # real-time process monitor (q to quit)
+htop                    # prettier top (install separately)
+kill 1234               # terminate process by PID
+kill -9 1234            # force kill (SIGKILL)
+pkill -f pattern        # kill by name pattern
+bg                      # resume suspended job in background
+fg                      # bring background job to foreground
+jobs                    # list background jobs</code></pre>
+
+<h2>Disk and Storage</h2>
+<pre><code>df -h                   # disk free (human-readable)
+du -sh dir              # directory size summary
+du -sh * | sort -h      # size of each item, sorted
+mount                   # show mounted filesystems
+lsblk                   # list block devices</code></pre>
+
+<h2>Networking</h2>
+<pre><code>ping host               # test connectivity
+curl -I url             # fetch headers only
+curl -s url | jq        # fetch JSON and pretty-print
+wget url                # download file
+ssh user@host           # connect to remote server
+scp file user@host:path # copy file to remote
+netstat -tlnp           # listening ports
+ss -tlnp                # modern alternative to netstat
+lsof -i :3000           # what's using port 3000</code></pre>
+
+<h2>Text Processing</h2>
+<pre><code>sed 's/old/new/g' file  # replace all occurrences
+awk '{{print $1}}' file  # print first column
+sort file               # sort lines
+sort -u file            # sort and deduplicate
+uniq -c file            # count occurrences
+cut -d',' -f1 file      # extract column 1 from CSV
+tr '[:lower:]' '[:upper:]' # convert case</code></pre>
+
+<h2>Compression and Archives</h2>
+<pre><code>tar -czf archive.tar.gz dir   # create gzipped tarball
+tar -xzf archive.tar.gz       # extract gzipped tarball
+gzip file                     # compress single file
+gunzip file.gz                # decompress
+zip -r archive.zip dir        # create zip</code></pre>
+
+<h2>System Info</h2>
+<pre><code>uname -a                # kernel info
+whoami                  # current user
+who                     # who is logged in
+uptime                  # how long system has been up
+free -h                 # memory usage
+date                    # current date/time
+history                 # command history
+!!                      # re-run last command
+!$                      # last argument of previous command</code></pre>
+
+<h2>Quick Reference by Task</h2>
+<table>
+<tr><th>Task</th><th>Command</th></tr>
+<tr><td>Find large files</td><td><code>find . -type f -size +100M</code></td></tr>
+<tr><td>Search in files</td><td><code>grep -rn "TODO" .</code></td></tr>
+<tr><td>Count files in directory</td><td><code>ls -1 | wc -l</code></td></tr>
+<tr><td>See disk usage of all mounts</td><td><code>df -h</code></td></tr>
+<tr><td>Check if a port is open</td><td><code>nc -zv host 443</code></td></tr>
+<tr><td>Watch command output every 2s</td><td><code>watch -n 2 command</code></td></tr>
+<tr><td>Create alias permanently</td><td><code>echo 'alias ll="ls -la"' >> ~/.bashrc</code></td></tr>
+</table>
+'''
+
+BODIES['rest-api-best-practices'] = '''
+<p>REST APIs power the modern web, but most APIs are designed with subtle flaws that cause pain months later. This guide covers the conventions, patterns, and anti-patterns that separate production APIs from weekend projects.</p>
+
+<h2>1. Use Nouns, Not Verbs, for Resources</h2>
+<pre><code># Good
+GET    /users
+GET    /users/42
+POST   /users
+PUT    /users/42
+DELETE /users/42
+
+# Bad
+GET    /getUsers
+POST   /createUser
+GET    /users/42/getProfile</code></pre>
+
+<h2>2. Version Your API from Day One</h2>
+<p>Use URL prefix versioning (<code>/v1/users</code>) or header-based versioning (<code>Accept: application/vnd.api.v2+json</code>). URL versioning is simpler for public APIs. Choose one and stick with it everywhere — mixing strategies is worse than either alone.</p>
+
+<h2>3. Consistent Naming Conventions</h2>
+<pre><code>// JSON: camelCase for properties
+{{"userId": 42, "createdAt": "2026-05-07"}}
+
+// URL paths: kebab-case
+GET /user-orders/42
+
+// Query parameters: snake_case
+GET /users?sort_by=name&page_size=20</code></pre>
+
+<h2>4. Use Proper HTTP Status Codes</h2>
+<table>
+<tr><th>Code</th><th>When to Use</th></tr>
+<tr><td>200 OK</td><td>Successful GET, PUT, PATCH</td></tr>
+<tr><td>201 Created</td><td>Successful POST — always include Location header</td></tr>
+<tr><td>204 No Content</td><td>Successful DELETE (no body returned)</td></tr>
+<tr><td>400 Bad Request</td><td>Malformed input, validation failure</td></tr>
+<tr><td>401 Unauthorized</td><td>Missing or expired auth token</td></tr>
+<tr><td>403 Forbidden</td><td>Authenticated but not permitted</td></tr>
+<tr><td>404 Not Found</td><td>Resource doesn't exist</td></tr>
+<tr><td>409 Conflict</td><td>Duplicate or state conflict</td></tr>
+<tr><td>422 Unprocessable</td><td>Valid syntax but semantic error</td></tr>
+<tr><td>429 Too Many</td><td>Rate limit exceeded — include Retry-After header</td></tr>
+<tr><td>500 Internal Error</td><td>Unexpected server failure (never expose stack traces)</td></tr>
+</table>
+
+<h2>5. Error Response Format</h2>
+<p>Always return errors in a consistent structure:</p>
+<pre><code>{{
+  "error": {{
+    "code": "VALIDATION_ERROR",
+    "message": "Email is required",
+    "details": [
+      {{"field": "email", "reason": "must not be empty"}},
+      {{"field": "age", "reason": "must be positive"}}
+    ],
+    "requestId": "req_abc123"
+  }}
+}}</code></pre>
+
+<h2>6. Pagination, Filtering, and Sorting</h2>
+<pre><code># Pagination with cursor (preferred for large datasets)
+GET /users?cursor=eyJpZCI6NDJ9&limit=20
+Response: {{"data": [...], "nextCursor": "eyJpZCI6NjJ9", "hasMore": true}}
+
+# Or offset-based for simpler use cases
+GET /users?offset=0&limit=20
+
+# Filtering
+GET /users?status=active&role=admin
+
+# Sorting
+GET /users?sort=-createdAt  # descending
+GET /users?sort=+name       # ascending</code></pre>
+
+<h2>7. Security Checklist</h2>
+<ul>
+<li><strong>Always use HTTPS.</strong> No exceptions.</li>
+<li><strong>Set rate limits.</strong> At minimum: 60 req/min per IP for unauthenticated, 1000 req/min per user for authenticated.</li>
+<li><strong>Validate Content-Type.</strong> Reject requests with wrong Content-Type headers.</li>
+<li><strong>Set CORS explicitly.</strong> Never use <code>Access-Control-Allow-Origin: *</code> with credentials.</li>
+<li><strong>Use API keys or OAuth2.</strong> Never roll your own auth protocol.</li>
+<li><strong>Keep secrets out of responses.</strong> Password hashes, internal IDs, stack traces, server versions.</li>
+</ul>
+
+<h2>8. API Documentation</h2>
+<p>Use OpenAPI 3.1 (Swagger). It's the industry standard and generates interactive docs automatically. Tools like Stoplight, Redoc, and Swagger UI render beautiful docs from a single spec file. If your API doesn't have an OpenAPI spec, it's not ready for production.</p>
+'''
+
+BODIES['git-advanced'] = '''
+<p>Most developers stop at <code>add</code>, <code>commit</code>, <code>push</code>, and <code>pull</code>. But Git has a set of advanced commands that can save hours of frustration and make your commit history something you're actually proud of. Here's your guide to interactive rebase, cherry-pick, bisect, reflog, and hooks.</p>
+
+<h2>Interactive Rebase: Rewrite History Cleanly</h2>
+<p>The most powerful Git feature most developers never learn. Interactive rebase lets you reorder, squash, split, and edit commits before pushing.</p>
+<pre><code># Squash last 4 commits into 1 clean commit
+git rebase -i HEAD~4
+
+# In the editor, mark commits:
+# pick abc1234 First commit message      (keep as-is)
+# squash def5678 Fix typo                (merge into previous)
+# squash ghi9012 Format code             (merge into previous)
+# squash jkl3456 Update tests            (merge into previous)
+# Then write a single commit message</code></pre>
+
+<h3>When to Use Interactive Rebase</h3>
+<ul>
+<li><strong>Before pushing to main:</strong> Squash "WIP" and "fix typo" commits into meaningful units</li>
+<li><strong>Before opening a PR:</strong> Reorder commits so they tell a logical story</li>
+<li><strong>Never:</strong> On shared branches or commits that have been pushed. Rewriting public history causes chaos.</li>
+</ul>
+
+<h2>Cherry-Pick: Apply a Specific Commit Anywhere</h2>
+<p>When you need one specific commit from another branch without merging everything:</p>
+<pre><code># Apply a single commit to the current branch
+git cherry-pick abc1234
+
+# Apply a range of commits
+git cherry-pick abc1234..def5678
+
+# Cherry-pick without committing (stage changes only)
+git cherry-pick -n abc1234</code></pre>
+<p>Common use: a bug fix on a release branch that you need on main, but main has diverged significantly. Cherry-pick the fix commit.</p>
+
+<h2>Git Bisect: Find the Commit That Broke Everything</h2>
+<p>Binary search through your commit history to find exactly which commit introduced a bug:</p>
+<pre><code># Start bisect session
+git bisect start
+git bisect bad HEAD          # current commit is broken
+git bisect good v2.5.0       # this tag was working
+
+# Git checks out a commit halfway between. Test it.
+# If broken:  git bisect bad
+# If working: git bisect good
+
+# Repeat until Git identifies the culprit commit.
+# Then end the session:
+git bisect reset</code></pre>
+<p>For automated bisecting, provide a test script:</p>
+<pre><code>git bisect run npm test     # Git runs the test on each step
+# If the test exits with code 0 → good, non-zero → bad
+# Git finds the breaking commit automatically</code></pre>
+
+<h2>Git Reflog: The Ultimate Undo</h2>
+<p>Reflog records every movement of HEAD — commits, checkouts, rebases, resets. When you think you've lost work, reflog is your safety net:</p>
+<pre><code>git reflog
+# Shows: abc1234 HEAD@{{0}}: commit: Add login feature
+#        def5678 HEAD@{{1}}: rebase (finish): returning to refs/heads/main
+#        ghi9012 HEAD@{{2}}: reset: moving to HEAD~3
+
+# Recover that "lost" commit
+git checkout HEAD@{{2}}       # go back to before the reset
+git branch recovered-branch   # save it to a branch</code></pre>
+<table>
+<tr><th>Scenario</th><th>Recovery Command</th></tr>
+<tr><td>Undo a bad rebase</td><td><code>git reset --hard HEAD@{{1}}</code></td></tr>
+<tr><td>Recover deleted branch</td><td><code>git checkout -b recovered HEAD@{{3}}</code></td></tr>
+<tr><td>Undo amend on wrong commit</td><td><code>git reset --soft HEAD@{{1}}</code></td></tr>
+</table>
+
+<h2>Git Hooks: Automate Your Workflow</h2>
+<p>Hooks are scripts that run automatically on Git events. They live in <code>.git/hooks/</code> and can be written in any language. Use them to prevent mistakes before they happen:</p>
+<pre><code>#!/bin/bash
+# .git/hooks/pre-commit — run linter before every commit
+npm run lint
+if [ $? -ne 0 ]; then
+  echo "Linting failed. Commit aborted."
+  exit 1
+fi</code></pre>
+
+<pre><code>#!/bin/bash
+# .git/hooks/commit-msg — enforce conventional commits
+MSG=$(cat "$1")
+if ! echo "$MSG" | grep -qE "^(feat|fix|refactor|test|docs|chore)(\\(.+\\))?: "; then
+  echo "Commit message must follow conventional commits format"
+  echo "  feat: add feature"
+  echo "  fix: resolve bug"
+  exit 1
+fi</code></pre>
+
+<table>
+<tr><th>Hook</th><th>When It Runs</th><th>Use For</th></tr>
+<tr><td>pre-commit</td><td>Before commit is created</td><td>Linting, formatting, unit tests</td></tr>
+<tr><td>commit-msg</td><td>After message is entered</td><td>Enforce message format</td></tr>
+<tr><td>pre-push</td><td>Before push to remote</td><td>Integration tests, security scans</td></tr>
+<tr><td>post-checkout</td><td>After checkout/switching branches</td><td>Install dependencies if changed</td></tr>
+</table>
+'''
+
 # FAQ data for FAQPage schema (slug → list of q/a dicts)
 FAQS = {
     'chatgpt-plus-worth': [
@@ -1253,7 +1549,7 @@ FAQS = {
 # HTML generators
 # ═══════════════════════════════════════════════════════════════════════
 
-def make_article_html(art, board_id, board_name):
+def make_article_html(art, board_id, board_name, all_posts):
     tags_h = '\n'.join(f'        <span class="tag-cat">{t}</span>' for t in art['tags'])
     pin_h = '<span class="tag-pin">📌 Pinned</span>\n' if art.get('pinned') else ''
     if art.get('hot'):
@@ -1295,6 +1591,25 @@ def make_article_html(art, board_id, board_name):
       ]
     }}
     </script>'''
+
+    # Compute related posts at build time — same board first, up to 4
+    same_board = [p for p in all_posts if p['board_id'] == board_id and p['slug'] != slug]
+    other_board = [p for p in all_posts if p['board_id'] != board_id and p['slug'] != slug]
+    related = (same_board + other_board)[:4]
+    related_html = ''
+    for r in related:
+        r_url = f"/en/{r['board_id']}/{r['slug']}.html"
+        related_html += f'<a href="{r_url}" class="related-card">{r["title"]}</a>'
+
+    # Mid-content AdSense — placed after article body at ~60% scroll depth
+    ad_mid = f'''<div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
+    </div>'''
 
     return f'''<!DOCTYPE html>
 <html lang="en" data-render="related" data-board="{board_id}" data-exclude="{slug}">
@@ -1353,7 +1668,12 @@ def make_article_html(art, board_id, board_name):
       <div class="article-meta">Published {art['date']} · {art['replies'] * 120} views · {art['replies']} replies</div>
       <div class="article-body">{BODIES[art['slug']].strip()}</div>
     </article>
-    <section class="related"><div id="related-posts"></div></section>
+    {ad_mid}
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid">{related_html}</div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
   </div>
 </main>
 <div id="footer-placeholder"></div>
@@ -1579,6 +1899,12 @@ def main():
         created += 1
         print(f'  HTML: {idx}')
 
+    # Build flat list of all posts for related posts computation
+    all_posts = []
+    for board in data['boards']:
+        for art in board['posts']:
+            all_posts.append({**art, 'board_id': board['id']})
+
     # Article pages
     for board in data['boards']:
         board_name = BOARD_NAMES[board['id']]
@@ -1590,7 +1916,7 @@ def main():
             art_dir = EN_DIR / board['id']
             art_dir.mkdir(exist_ok=True)
             p = art_dir / f'{slug}.html'
-            p.write_text(make_article_html(art, board['id'], board_name), encoding='utf-8')
+            p.write_text(make_article_html(art, board['id'], board_name, all_posts), encoding='utf-8')
             created += 1
             print(f'  HTML: {p}')
 

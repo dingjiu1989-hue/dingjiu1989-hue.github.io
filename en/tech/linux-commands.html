@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="linux-commands">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Linux Commands Cheat Sheet: 50 Commands Every Developer Should Know">
+    <meta property="og:description" content="A practical Linux command reference organized by task — file operations, process management, networking, permissions, and text processing. Bookmark this.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/linux-commands.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Linux Commands Cheat Sheet: 50 Commands Every Developer Should Know">
+    <meta name="twitter:description" content="A practical Linux command reference organized by task — file operations, process management, networking, permissions, and text processing. Bookmark this.">
+    <title>Linux Commands Cheat Sheet: 50 Commands Every Developer Should Know — SourceHub</title>
+    <meta name="description" content="A practical Linux command reference organized by task — file operations, process management, networking, permissions, and text processing. Bookmark this.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/linux-commands.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/linux-commands.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Linux Commands Cheat Sheet: 50 Commands Every Developer Should Know",
+      "description": "A practical Linux command reference organized by task — file operations, process management, networking, permissions, and text processing. Bookmark this.",
+      "datePublished": "2026-05-07",
+      "dateModified": "2026-05-07",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Linux Commands Cheat Sheet: 50 Commands Every Developer Should Know"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Linux Commands Cheat Sheet: 50 Commands Every Developer Should Know
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">Linux</span>
+        <span class="tag-cat">Command Line</span>
+        <span class="tag-cat">DevOps</span></div>
+      <h1 class="article-title">Linux Commands Cheat Sheet: 50 Commands Every Developer Should Know</h1>
+      <div class="article-meta">Published 2026-05-07 · 3240 views · 27 replies</div>
+      <div class="article-body"><p>A good Linux command-line reference isn't nice to have — it's essential. This cheatsheet covers 50 commands organized by what you're actually trying to do, from file navigation to process management to networking.</p>
+
+<h2>File Navigation</h2>
+<pre><code>pwd                     # print working directory
+ls -la                  # list all files with details
+cd /path/to/dir         # change directory
+cd ..                   # go up one level
+cd -                    # go back to previous directory
+find . -name "*.py"     # find files by name pattern
+locate filename         # find file quickly (uses indexed db)</code></pre>
+
+<h2>File Operations</h2>
+<pre><code>cp source dest          # copy file
+cp -r source dest       # copy directory recursively
+mv source dest          # move or rename
+rm file                 # remove file
+rm -rf dir              # remove directory (DANGER — no undo)
+mkdir -p a/b/c          # create nested directories
+touch file              # create empty file or update timestamp
+ln -s target link       # create symbolic link</code></pre>
+
+<h2>Viewing and Editing Files</h2>
+<pre><code>cat file                # print entire file
+less file               # scroll through file (q to quit)
+head -20 file           # first 20 lines
+tail -f file            # follow file as it grows (logs)
+wc -l file              # count lines
+grep "pattern" file     # search for pattern
+grep -r "pattern" dir   # search recursively
+nano file               # simple terminal editor
+vim file                # advanced editor (:q! to quit)</code></pre>
+
+<h2>Permissions</h2>
+<pre><code>chmod 755 script.sh     # rwxr-xr-x (owner full, others read+execute)
+chmod +x script.sh      # make executable
+chown user:group file   # change owner and group
+umask 022               # set default permissions mask</code></pre>
+
+<h2>Process Management</h2>
+<pre><code>ps aux                  # list all running processes
+ps aux | grep nginx     # find specific process
+top                     # real-time process monitor (q to quit)
+htop                    # prettier top (install separately)
+kill 1234               # terminate process by PID
+kill -9 1234            # force kill (SIGKILL)
+pkill -f pattern        # kill by name pattern
+bg                      # resume suspended job in background
+fg                      # bring background job to foreground
+jobs                    # list background jobs</code></pre>
+
+<h2>Disk and Storage</h2>
+<pre><code>df -h                   # disk free (human-readable)
+du -sh dir              # directory size summary
+du -sh * | sort -h      # size of each item, sorted
+mount                   # show mounted filesystems
+lsblk                   # list block devices</code></pre>
+
+<h2>Networking</h2>
+<pre><code>ping host               # test connectivity
+curl -I url             # fetch headers only
+curl -s url | jq        # fetch JSON and pretty-print
+wget url                # download file
+ssh user@host           # connect to remote server
+scp file user@host:path # copy file to remote
+netstat -tlnp           # listening ports
+ss -tlnp                # modern alternative to netstat
+lsof -i :3000           # what's using port 3000</code></pre>
+
+<h2>Text Processing</h2>
+<pre><code>sed 's/old/new/g' file  # replace all occurrences
+awk '{{print $1}}' file  # print first column
+sort file               # sort lines
+sort -u file            # sort and deduplicate
+uniq -c file            # count occurrences
+cut -d',' -f1 file      # extract column 1 from CSV
+tr '[:lower:]' '[:upper:]' # convert case</code></pre>
+
+<h2>Compression and Archives</h2>
+<pre><code>tar -czf archive.tar.gz dir   # create gzipped tarball
+tar -xzf archive.tar.gz       # extract gzipped tarball
+gzip file                     # compress single file
+gunzip file.gz                # decompress
+zip -r archive.zip dir        # create zip</code></pre>
+
+<h2>System Info</h2>
+<pre><code>uname -a                # kernel info
+whoami                  # current user
+who                     # who is logged in
+uptime                  # how long system has been up
+free -h                 # memory usage
+date                    # current date/time
+history                 # command history
+!!                      # re-run last command
+!$                      # last argument of previous command</code></pre>
+
+<h2>Quick Reference by Task</h2>
+<table>
+<tr><th>Task</th><th>Command</th></tr>
+<tr><td>Find large files</td><td><code>find . -type f -size +100M</code></td></tr>
+<tr><td>Search in files</td><td><code>grep -rn "TODO" .</code></td></tr>
+<tr><td>Count files in directory</td><td><code>ls -1 | wc -l</code></td></tr>
+<tr><td>See disk usage of all mounts</td><td><code>df -h</code></td></tr>
+<tr><td>Check if a port is open</td><td><code>nc -zv host 443</code></td></tr>
+<tr><td>Watch command output every 2s</td><td><code>watch -n 2 command</code></td></tr>
+<tr><td>Create alias permanently</td><td><code>echo 'alias ll="ls -la"' >> ~/.bashrc</code></td></tr>
+</table></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

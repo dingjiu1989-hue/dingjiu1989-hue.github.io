@@ -116,8 +116,12 @@ function renderCategory(data, boardId) {
 // Usage: <div id="related-posts"></div> + <script>renderRelated(data, 'tech', 'git-cheatsheet')</script>
 
 function renderRelated(data, boardId, excludeSlug) {
+  // If static related posts already exist in DOM (SEO build-time), skip JS fetch
+  var grid = document.querySelector('.related-grid');
+  if (grid && grid.children.length > 0) return;
   var container = document.getElementById('related-posts');
-  if (!container) return;
+  if (!container) { container = document.createElement('div'); }
+  else { container.style.display = ''; }
   var posts = [];
   var boards = data.boards || [];
   for (var i = 0; i < boards.length; i++) {
