@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="ai" data-exclude="stable-diffusion">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stable Diffusion 出图入门指南 — 资料库</title>
+    <meta name="description" content="零基础入门 Stable Diffusion，详解 Checkpoint、Sampler、Steps、CFG Scale 等核心参数，手把手教你从安装到出第一张高质量图片。">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Stable Diffusion 出图入门指南",
+      "description": "零基础入门 Stable Diffusion，详解 Checkpoint、Sampler、Steps、CFG Scale 等核心参数，手把手教你从安装到出第一张高质量图片。",
+      "datePublished": "2026-05-04",
+      "dateModified": "2026-05-04",
+      "author": {"@type": "Person", "name": "资料库"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://dingjiu1989-hue.github.io/"},
+        {"@type": "ListItem", "position": 2, "name": "AI 教程", "item": "https://dingjiu1989-hue.github.io/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "Stable Diffusion 出图入门指南"}
+      ]
+    }
+    </script>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/">首页</a> › <a href="/ai/">AI 教程</a> › Stable Diffusion 出图入门指南
+    </div>
+
+    <article>
+      <div class="article-tags">
+        <span class="tag-cat">Stable Diffusion</span>
+        <span class="tag-cat">AI绘画</span>
+        <span class="tag-cat">开源</span>
+      </div>
+
+      <h1 class="article-title">Stable Diffusion 出图入门指南</h1>
+      <div class="article-meta">发布于 2026-05-04 · 阅读 2.5k · 12 回复</div>
+
+      <div class="article-body">
+
+        <p>AI 绘画领域三足鼎立：Midjourney 以品质著称，DALL-E 3 以理解力见长，而 Stable Diffusion 则以其免费、开源、高度可定制性成为技术用户的首选。本文面向零基础用户，带你从安装到参数调优，完整走通 Stable Diffusion 的出图流程。</p>
+
+        <h2>三大工具的定位差异</h2>
+
+        <p>在开始之前，有必要先理解 Stable Diffusion 和其他工具的定位区别：</p>
+
+        <ul>
+          <li><strong>Midjourney</strong>——闭源、付费、零门槛。你不需要理解任何技术参数，输入一句话就能得到赏心悦目的图片。代价是你几乎没有控制权，风格局限在 Midjourney 的审美体系内。</li>
+          <li><strong>DALL-E 3</strong>——以语义理解能力著称。你说"A 在 B 的左边，C 在 A 的上面"，它真的能准确布局。但对艺术风格的控制力远不如 SD。</li>
+          <li><strong>Stable Diffusion</strong>——开源、免费、完全可控。你可以选择任意模型（Checkpoint）、调整每个参数、在本地运行、甚至可以训练自己的 LoRA。代价是学习曲线陡峭。</li>
+        </ul>
+
+        <h2>从安装到第一次出图</h2>
+
+        <p>Stable Diffusion 最流行的启动器是 <strong>Automatic1111 WebUI</strong>（适合新手）和 <strong>ComfyUI</strong>（适合追求工作流复用的用户）。建议新手从 Automatic1111 开始。</p>
+
+        <p>安装后，你至少要准备一个 Checkpoint 模型（也就是"主模型"）。初学者推荐 <strong>DreamShaper</strong> 或 <strong>Realistic Vision</strong>——前者适合艺术风格，后者追求写实感。从 Hugging Face 或 CivitAI 下载 .safetensors 文件，放入 models/Stable-diffusion/ 目录即可。</p>
+
+        <p>准备工作完成后，最基本的出图流程是：输入提示词 → 选择 Checkpoint → 点击 Generate。但如果你想让图片质量可控，就必须要理解下面这些参数。</p>
+
+        <h2>核心参数详解</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>参数</th>
+              <th>作用</th>
+              <th>推荐值</th>
+              <th>过高/过低的表现</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Sampler（采样器）</strong></td>
+              <td>控制去噪算法</td>
+              <td>Euler a / DPM++ 2M Karras</td>
+              <td>Euler a 速度快但风格偏软；DPM++ 细节更丰富但慢 30%</td>
+            </tr>
+            <tr>
+              <td><strong>Steps（步数）</strong></td>
+              <td>采样的迭代次数</td>
+              <td>20-30</td>
+              <td>低于 15 步画面粗糙；高于 50 步边际收益消失，偶尔引入噪点</td>
+            </tr>
+            <tr>
+              <td><strong>CFG Scale</strong></td>
+              <td>提示词跟随强度</td>
+              <td>7-9</td>
+              <td>低于 4 画面与提示词无关；高于 15 色彩过饱和、细节变形</td>
+            </tr>
+            <tr>
+              <td><strong>Resolution</strong></td>
+              <td>输出图片分辨率</td>
+              <td>512x512 / 768x768</td>
+              <td>超过 1024 可能导致人物崩坏；需配合高分辨率修复（Hires.fix）</td>
+            </tr>
+            <tr>
+              <td><strong>Seed（种子）</strong></td>
+              <td>随机数种子</td>
+              <td>-1 (随机)</td>
+              <td>固定种子可复现结果，微调提示词时使用相同种子来对比效果</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>提示词结构：高质量出图的基础</h2>
+
+        <p>Stable Diffusion 的提示词遵循一个经典的四段式结构：</p>
+
+        <pre>最佳画质, 主体描述, 环境/背景, 风格/艺术家参考, 技术参数</pre>
+
+        <p>一个实际例子：</p>
+
+<pre>positive prompt:
+masterpiece, best quality, (1girl:1.2), solo, detailed face,
+beautiful detailed eyes, (flower crown:1.1), soft lighting,
+cherry blossoms in background, spring atmosphere,
+art by wlop and akihiko yoshida,
+highres, 8k, cinematic lighting, depth of field
+
+negative prompt:
+worst quality, low quality, ugly, deformed, blurry,
+bad anatomy, bad hands, extra fingers, missing fingers,
+monochrome, watermark, text, signature, nsfw</pre>
+
+        <p>括号语法 <code>(keyword:weight)</code> 用于调整某个词的重要程度，权重默认 1.0，范围通常 0.5-1.5。多个关键词用逗号分隔，<strong>越靠前的词权重越高</strong>。</p>
+
+        <p>负面提示词（Negative Prompt）是 SD 区别于 Midjourney 的重要特性。你告诉 AI 不要生成什么，它就会刻意避免。常见负面词包括：低质量、畸形肢体、多余手指、水印文字等。</p>
+
+        <h2>实战调参演示</h2>
+
+        <p>假设我们要生成一张"一个女孩在樱花树下看书"的图片：</p>
+
+        <p><strong>第一次尝试（默认参数，简单提示词）：</strong><br>
+        提示词：a girl reading under cherry tree<br>
+        CFG 7, Steps 20, Euler a, 512x512<br>
+        结果：人物模糊，手部变形，背景只有模糊的粉色色块。</p>
+
+        <p><strong>优化后（结构化提示词 + 负向 + 参数调整）：</strong><br>
+        提示词：masterpiece, best quality, 1girl, reading a book, sitting under cherry blossom tree, detailed kimono, soft afternoon light, petals falling, cinematic angle<br>
+        负面提示词：worst quality, bad hands, extra fingers, blurry<br>
+        Checkpoint: DreamShaper, CFG 7, Steps 25, DPM++ 2M Karras, 768x768<br>
+        结果：人物面部清晰，手部基本正常，整体构图有了氛围感。</p>
+
+        <p>差距出在哪？第一是 Checkpoint 的选择——基础模型对特定风格的支持远不如社区微调模型。第二是提示词的颗粒度——"樱花树下"太模糊，"petals falling, soft afternoon light"给了 AI 可执行的视觉指令。第三是负面提示词排除了最常见的劣质输出模式。</p>
+
+        <h2>进阶建议</h2>
+
+        <p>当你掌握了基础出图后，可以按这个顺序进阶：先学 LoRA 模型（给特定角色或风格做微调），再学 ControlNet （用姿态图、深度图控制构图），最后学 Inpainting （局部重绘修复细节）。每一步都能显著提升你的出图质量，但前提是基础参数已经掌握扎实。</p>
+
+      </div>
+    </article>
+
+    <section class="related">
+      <div id="related-posts"></div>
+    </section>
+  </div>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

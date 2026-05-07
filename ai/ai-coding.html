@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="ai" data-exclude="ai-coding">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用 AI 辅助编程：从零到生产力 — 资料库</title>
+    <meta name="description" content="全面对比 GitHub Copilot、Cursor、Claude Code 等 AI 编程工具，教你建立人机协作的高效开发工作流，避免 AI 写代码的常见陷阱。">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "用 AI 辅助编程：从零到生产力",
+      "description": "全面对比 GitHub Copilot、Cursor、Claude Code 等 AI 编程工具，教你建立人机协作的高效开发工作流，避免 AI 写代码的常见陷阱。",
+      "datePublished": "2026-05-06",
+      "dateModified": "2026-05-06",
+      "author": {"@type": "Person", "name": "资料库"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://dingjiu1989-hue.github.io/"},
+        {"@type": "ListItem", "position": 2, "name": "AI 教程", "item": "https://dingjiu1989-hue.github.io/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "用 AI 辅助编程：从零到生产力"}
+      ]
+    }
+    </script>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/">首页</a> › <a href="/ai/">AI 教程</a> › 用 AI 辅助编程：从零到生产力
+    </div>
+
+    <article>
+      <div class="article-tags">
+        <span class="tag-cat">AI编程</span>
+        <span class="tag-cat">GitHub Copilot</span>
+        <span class="tag-cat">Claude Code</span>
+      </div>
+
+      <h1 class="article-title">用 AI 辅助编程：从零到生产力</h1>
+      <div class="article-meta">发布于 2026-05-06 · 阅读 4.1k · 23 回复</div>
+
+      <div class="article-body">
+
+        <p>2024 到 2026 年，AI 编程工具经历了爆发式增长。从最初的代码补全发展到如今的自主编码 Agent，开发者面对的选择越来越多。但工具再多，核心问题只有一个：如何让 AI 真正提升你的编程效率，而不是制造更多 Bug？本文从工具选型到实战工作流，给你一套可落地的方案。</p>
+
+        <h2>主流 AI 编程工具对比</h2>
+
+        <p>目前市面上有四款主流的 AI 编程工具，它们的侧重点和适用场景各不相同。</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>工具</th>
+              <th>工作模式</th>
+              <th>最擅长</th>
+              <th>不足之处</th>
+              <th>适合人群</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>GitHub Copilot</strong></td>
+              <td>IDE 内联补全 + Chat</td>
+              <td>代码补全速度极快，零切换成本</td>
+              <td>上下文窗口有限，复杂任务能力弱</td>
+              <td>所有开发者（VS Code / JetBrains 用户）</td>
+            </tr>
+            <tr>
+              <td><strong>Cursor</strong></td>
+              <td>AI-First IDE</td>
+              <td>多文件编辑、Composer 模式、项目级理解</td>
+              <td>重度依赖网络，大项目索引慢</td>
+              <td>追求全栈 AI 化开发的工程师</td>
+            </tr>
+            <tr>
+              <td><strong>Claude Code</strong></td>
+              <td>终端 CLI Agent</td>
+              <td>自主执行多步骤任务、读写文件、运行命令</td>
+              <td>需要授权文件系统操作，学习曲线较陡</td>
+              <td>资深开发者、DevOps、需要自动化的团队</td>
+            </tr>
+            <tr>
+              <td><strong>Cline</strong></td>
+              <td>VS Code 插件 Agent</td>
+              <td>开源免费，自定义模型，透明计费</td>
+              <td>功能迭代不及商业产品快</td>
+              <td>预算有限、需要自定义模型的开发者</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>真实工作流：不是"AI 全写"</h2>
+
+        <p>网上流传的"让 AI 写出整个应用"的视频大多经过剪辑，真实开发根本不是这样。下面是经过 12 个月实践验证的高效工作流：</p>
+
+        <ol>
+          <li><strong>需求拆解（人做）。</strong>把功能需求拆成独立的小任务。AI 擅长 100 行的函数，不擅长 10000 行的系统。你拆得越细，AI 产出质量越高。</li>
+          <li><strong>架构设计（人做）。</strong>数据库 schema、接口协议、组件树——这些需要人类做决策。AI 可以给建议，但最终拍板的是你。</li>
+          <li><strong>代码生成（AI 做）。</strong>针对每个小任务写提示词，让 AI 生成实现代码。一次只生成一个函数或一个组件。</li>
+          <li><strong>人工审查（人做）。</strong>这是最关键的一步。逐行审查 AI 生成的代码，尤其是边界条件、错误处理和安全性。</li>
+          <li><strong>测试覆盖（人 + AI）。</strong>让 AI 为你的代码生成测试用例，但你需要确认测试是否覆盖了所有重要路径。</li>
+        </ol>
+
+        <h2>代码生成提示词示例</h2>
+
+        <p>编写清晰的提示词是 AI 编程的核心技能。以下是一个经过优化的实际案例：</p>
+
+<pre>请用 TypeScript 实现一个带过期时间的 LRU 缓存。
+
+要求：
+- 支持 get(key)、set(key, value, ttlSeconds) 方法
+- ttl 过期后 get 返回 undefined 并自动删除条目
+- 内部使用 Map 保证 O(1) 读写，双向链表维护访问顺序
+- 线程安全不是必须的（单线程环境）
+- 导出类定义和类型接口
+
+输出格式：
+1. 完整的 TypeScript 代码
+2. 单元测试（使用 Vitest）
+3. 使用示例</pre>
+
+        <p>这个提示词包含了角色暗示（TypeScript 开发）、明确的功能边界（LRU + TTL）、数据结构选择提示（Map + 链表）、以及输出格式要求（代码 + 测试 + 示例）。AI 的生成结果可以直接粘贴到项目中，需要的修改通常不超过 10%。</p>
+
+        <h2>审查 AI 代码的四个必查点</h2>
+
+        <p>AI 生成的代码表面看起来可能很完美，但以下四个问题几乎必然出现在 AI 代码中：</p>
+
+        <ul>
+          <li><strong>幻影函数调用。</strong>AI 经常调用不存在的 API 或库函数。检查每个 import 和第三方调用是否真实存在。</li>
+          <li><strong>错误处理缺失。</strong>AI 倾向于只写 happy path。检查 catch 块是否为空、边界条件（空数组、null 值、极限输入）是否被处理。</li>
+          <li><strong>安全漏洞。</strong>AI 不会主动考虑 SQL 注入、XSS、CSRF 等安全问题。检查用户输入的清理和验证逻辑。</li>
+          <li><strong>性能假设错误。</strong>AI 可能会在不该用递归的地方用递归，或者在大循环中执行数据库查询。检查算法复杂度是否合理。</li>
+        </ul>
+
+        <h2>AI 编程的局限性</h2>
+
+        <p>坦诚地说，AI 在以下场景中表现很差：老旧代码库的维护（训练数据中缺乏类似代码）、需要深度业务领域知识的逻辑、跨多个服务的调试排错、以及涉及合规审计的系统。这些场景下，AI 更适合做一个"高级 StackOverflow"，而不是主力开发者。</p>
+
+        <p>总结：AI 编程工具的最佳定位是一个能力极强但判断力为零的初级工程师。它写代码的速度是你的 10 倍，但你需要像 tech lead 一样审查它每一行产出。把 AI 当成队友，而不是替代品，这才是正确的 AI 编程之道。</p>
+
+      </div>
+    </article>
+
+    <section class="related">
+      <div id="related-posts"></div>
+    </section>
+  </div>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>
