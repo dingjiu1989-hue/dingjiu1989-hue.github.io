@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全部文章 — 资料库</title>
+    <meta name="description" content="资料库全部文章索引，按版块分类列出所有文章链接，方便浏览和搜索引擎发现。">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<main>
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首页</a> › 全部文章</div>
+
+    <div class="page-header">
+      <h2>📋 全部文章</h2>
+      <span class="post-count" id="total-count"></span>
+    </div>
+
+    <div id="all-posts"></div>
+  </div>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script src="/js/include.js"></script>
+<script>
+(function () {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', '/articles.json', true);
+  xhr.onload = function () {
+    if (xhr.status < 200 || xhr.status >= 300) return;
+    var data = JSON.parse(xhr.responseText);
+    var boards = data.boards || [];
+    var total = 0;
+    boards.forEach(function (b) { total += (b.posts || []).length; });
+    document.getElementById('total-count').textContent = '共 ' + total + ' 篇文章';
+
+    var html = '';
+    boards.forEach(function (b) {
+      html += '<div class="board" style="margin-bottom:1.5rem;">';
+      html += '<div class="board-header">';
+      html += '<span class="board-icon">' + (b.icon || '') + '</span>';
+      html += '<span class="board-name">' + (b.name || '') + '</span>';
+      html += '<span class="board-count">' + (b.posts || []).length + ' 篇</span>';
+      html += '</div>';
+      html += '<ul style="padding:0.75rem 1rem;list-style:none;">';
+      (b.posts || []).forEach(function (p) {
+        var url = '/' + b.id + '/' + p.slug + '.html';
+        html += '<li style="padding:0.35rem 0;font-size:0.88rem;">';
+        html += '<a href="' + url + '">' + (p.title || '') + '</a>';
+        html += ' <span style="color:#656d76;font-size:0.75rem;">' + (p.date || '') + '</span>';
+        if (p.pinned) html += ' <span style="color:#d73a49;font-size:0.7rem;">📌</span>';
+        html += '</li>';
+      });
+      html += '</ul></div>';
+    });
+    document.getElementById('all-posts').innerHTML = html;
+  };
+  xhr.send();
+})();
+</script>
+</body>
+</html>
