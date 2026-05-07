@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-render="category" data-board="tools">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,24 +15,6 @@
       "description": "效率 · 设计 · 开发"
     }
     </script>
-</head>
-<body>
-
-<nav class="navbar">
-  <div class="container">
-    <a href="/" class="nav-logo">📚 资料库</a>
-    <div class="nav-links">
-      <a href="/">首页</a>
-      <a href="/tech/">技术教程</a>
-      <a href="/sidehustle/">副业资源</a>
-      <a href="/tools/">工具推荐</a>
-    </div>
-    <input class="nav-search" type="search" placeholder="搜索..." disabled title="搜索功能开发中">
-  </div>
-</nav>
-
-<main>
-  <div class="container">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -43,6 +25,13 @@
       ]
     }
     </script>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<main>
+  <div class="container">
     <div class="breadcrumb"><a href="/">首页</a> › 工具推荐</div>
 
     <div class="page-header">
@@ -53,34 +42,13 @@
       <select class="sort-select" disabled><option>排序：最新 ↓</option></select>
     </div>
 
-    <div class="post-table">
-      <div class="post-table-header">
-        <span class="col-pin">置顶</span>
-        <span class="col-title">标题</span>
-        <span class="col-replies">回复</span>
-        <span class="col-date">更新</span>
-      </div>
-      <a href="/tools/chrome-plugins.html" class="post-row">
-        <span class="col-pin" style="color:#d73a49;">🔥</span>
-        <span class="col-title" style="font-weight:600;">2025 年度必备 Chrome 插件推荐</span>
-        <span class="col-replies">35</span>
-        <span class="col-date">04-15</span>
-      </a>
-      <a href="/tools/note-apps.html" class="post-row">
-        <span class="col-pin"></span>
-        <span class="col-title">白板/笔记/思维导图工具对比</span>
-        <span class="col-replies">9</span>
-        <span class="col-date">04-10</span>
-      </a>
-    </div>
+    <div id="category-posts"></div>
   </div>
 </main>
 
-<footer class="footer">
-  <p>📚 资料库 &copy; 2026</p>
-  <p>纯静态 · GitHub Pages 托管</p>
-  <p style="margin-top:0.5rem;"><a href="/">返回首页</a></p>
-</footer>
+<div id="footer-placeholder"></div>
 
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
 </body>
 </html>

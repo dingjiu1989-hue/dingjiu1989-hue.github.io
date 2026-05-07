@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-render="homepage">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>资料库 — 聚合优质资源，分享实用知识</title>
     <meta name="description" content="论坛风格资料库，聚合技术教程、副业资源、工具推荐等优质内容。">
     <link rel="stylesheet" href="css/style.css">
-    <!-- Schema.org WebSite -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -19,22 +18,9 @@
 </head>
 <body>
 
-<!-- Top Nav -->
-<nav class="navbar">
-  <div class="container">
-    <a href="/" class="nav-logo">📚 资料库</a>
-    <div class="nav-links">
-      <a href="/">首页</a>
-      <a href="/tech/">技术教程</a>
-      <a href="/sidehustle/">副业资源</a>
-      <a href="/tools/">工具推荐</a>
-    </div>
-    <input class="nav-search" type="search" placeholder="搜索..." disabled title="搜索功能开发中">
-  </div>
-</nav>
+<div id="nav-placeholder"></div>
 
 <main>
-  <!-- Hero -->
   <section class="hero">
     <div class="container">
       <h1>📚 欢迎来到资料库</h1>
@@ -47,89 +33,19 @@
   </section>
 
   <div class="container">
-    <!-- Stats Bar -->
     <div class="stats-bar">
       <span>🔥 今日: 3 篇新帖</span>
       <span>📅 昨日: 12 篇</span>
       <span>📊 总帖数: 6</span>
     </div>
 
-    <!-- 版块 1: 技术教程 -->
-    <div class="board">
-      <div class="board-header">
-        <span class="board-icon">💻</span>
-        <span class="board-name">技术教程</span>
-        <span class="board-desc">编程 · 工具 · 效率</span>
-        <span class="board-count">共 2 帖</span>
-      </div>
-      <a href="/tech/git-cheatsheet.html" class="post-row">
-        <span class="post-pin pinned">📌</span>
-        <span class="post-title">Git 常用命令速查表</span>
-        <span class="post-replies">4 回复</span>
-        <span class="post-date">05-07</span>
-      </a>
-      <a href="/tech/macos-tools.html" class="post-row">
-        <span class="post-pin"></span>
-        <span class="post-title">macOS 效率工具推荐合集</span>
-        <span class="post-replies">12 回复</span>
-        <span class="post-date">05-06</span>
-      </a>
-    </div>
-
-    <!-- 版块 2: 副业资源 -->
-    <div class="board">
-      <div class="board-header">
-        <span class="board-icon">💰</span>
-        <span class="board-name">副业资源</span>
-        <span class="board-desc">工具 · 平台 · 经验</span>
-        <span class="board-count">共 2 帖</span>
-      </div>
-      <a href="/sidehustle/free-images.html" class="post-row">
-        <span class="post-pin pinned">📌</span>
-        <span class="post-title">免费可商用图片资源汇总</span>
-        <span class="post-replies">8 回复</span>
-        <span class="post-date">05-03</span>
-      </a>
-      <a href="/sidehustle/remote-work.html" class="post-row">
-        <span class="post-pin"></span>
-        <span class="post-title">远程工作平台大盘点</span>
-        <span class="post-replies">6 回复</span>
-        <span class="post-date">04-28</span>
-      </a>
-    </div>
-
-    <!-- 版块 3: 工具推荐 -->
-    <div class="board">
-      <div class="board-header">
-        <span class="board-icon">🛠️</span>
-        <span class="board-name">工具推荐</span>
-        <span class="board-desc">效率 · 设计 · 开发</span>
-        <span class="board-count">共 2 帖</span>
-      </div>
-      <a href="/tools/chrome-plugins.html" class="post-row">
-        <span class="post-pin hot">🔥</span>
-        <span class="post-title">2025 年度必备 Chrome 插件推荐</span>
-        <span class="post-replies">35 回复</span>
-        <span class="post-date">04-15</span>
-      </a>
-      <a href="/tools/note-apps.html" class="post-row">
-        <span class="post-pin"></span>
-        <span class="post-title">白板/笔记/思维导图工具对比</span>
-        <span class="post-replies">9 回复</span>
-        <span class="post-date">04-10</span>
-      </a>
-    </div>
+    <div id="homepage-boards"></div>
   </div>
 </main>
 
-<footer class="footer">
-  <p>📚 资料库 &copy; 2026</p>
-  <p>纯静态 · GitHub Pages 托管 · 内容仅供学习交流</p>
-  <p style="margin-top:0.5rem;">
-    <a href="/sitemap.xml">站点地图</a> ·
-    <a href="https://github.com/dingjiu1989-hue/dingjiu1989-hue.github.io">GitHub</a>
-  </p>
-</footer>
+<div id="footer-placeholder"></div>
 
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
 </body>
 </html>
