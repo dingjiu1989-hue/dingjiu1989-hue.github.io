@@ -1,0 +1,40 @@
+name: Daily Maintenance
+
+on:
+  schedule:
+    # 北京时间 8:00 (UTC+8) = 00:00 UTC
+    - cron: '0 0 * * *'
+    # 北京时间 20:00 (UTC+8) = 12:00 UTC
+    - cron: '0 12 * * *'
+  workflow_dispatch:  # allow manual trigger
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run maintenance script
+        run: python3 scripts/maintenance.py
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add sitemap.xml articles.json
+          git commit -m "chore: daily maintenance — refresh lastmod and stats"
+          git push

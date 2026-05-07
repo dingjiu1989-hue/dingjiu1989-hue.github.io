@@ -1,5 +1,42 @@
-// Render homepage board cards with post lists
-// Usage: <div id="homepage-boards"></div> + <script>renderHomepage()</script>
+// Render homepage stats bar and hero stats
+function renderStats(data) {
+  var boards = data.boards || [];
+  var totalBoards = boards.length;
+  var totalPosts = 0;
+  boards.forEach(function (b) { totalPosts += (b.posts || []).length; });
+
+  var heroStats = document.getElementById('hero-stats');
+  if (heroStats) {
+    heroStats.innerHTML =
+      '<span class="hero-stat">📂 ' + totalBoards + ' 个版块</span>' +
+      '<span class="hero-stat">📝 ' + totalPosts + ' 篇文章</span>';
+  }
+
+  var statsBar = document.getElementById('stats-bar');
+  if (statsBar) {
+    var s = data.site && data.site.stats;
+    if (s) {
+      statsBar.innerHTML =
+        '<span>🔥 今日: ' + s.today + ' 篇新帖</span>' +
+        '<span>📅 昨日: ' + s.yesterday + ' 篇</span>' +
+        '<span>📊 总帖数: ' + s.total + '</span>';
+    } else {
+      statsBar.innerHTML = '<span>📊 总帖数: ' + totalPosts + '</span>';
+    }
+  }
+
+  // Also update post-count spans on category pages
+  var allBoardsTotal = 0;
+  boards.forEach(function (b) { allBoardsTotal += (b.posts || []).length; });
+  var postCounts = document.querySelectorAll('.post-count');
+  for (var i = 0; i < postCounts.length; i++) {
+    // Update only the dynamic count part — leave static text alone
+    var text = postCounts[i].textContent;
+    if (text && text.indexOf('共') >= 0) {
+      postCounts[i].textContent = text.replace(/共 \d+ 篇/, '共 ' + allBoardsTotal + ' 篇');
+    }
+  }
+}
 
 function renderHomepage(data) {
   var container = document.getElementById('homepage-boards');
@@ -128,7 +165,7 @@ function esc(s) {
   xhr.onload = function () {
     if (xhr.status < 200 || xhr.status >= 300) return;
     var data = JSON.parse(xhr.responseText);
-    if (type === 'homepage')      renderHomepage(data);
+    if (type === 'homepage')      { renderStats(data); renderHomepage(data); }
     if (type === 'category')      renderCategory(data, document.documentElement.getAttribute('data-board'));
     if (type === 'related')       renderRelated(data, document.documentElement.getAttribute('data-board'), document.documentElement.getAttribute('data-exclude'));
   };
