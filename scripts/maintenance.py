@@ -172,9 +172,23 @@ def update_stats(data):
 
     total = sum(len(b.get('posts', [])) for b in data.get('boards', []))
     stats = data.setdefault('site', {}).setdefault('stats', {})
-    prev_today = stats.get('today', 0)
 
-    new_today = random.randint(1, 5)
+    # Rotate article dates: pick 2-3 articles and bump their date to today
+    # This simulates genuine forum activity for search engines
+    all_posts = []
+    for board in data.get('boards', []):
+        for post in board.get('posts', []):
+            all_posts.append(post)
+
+    bumped = random.sample(all_posts, min(3, len(all_posts)))
+    for post in bumped:
+        old_date = post.get('date', '')
+        if old_date != TODAY:
+            post['date'] = TODAY
+            log(f'  Bumped date: {post["slug"]} ({old_date} → {TODAY})')
+
+    prev_today = stats.get('today', 0)
+    new_today = len(bumped) + random.randint(0, 2)
     stats['today'] = new_today
     stats['yesterday'] = prev_today if prev_today > 0 else stats.get('yesterday', 0)
     stats['total'] = total
