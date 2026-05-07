@@ -1,0 +1,88 @@
+<h2>首页布局方案</h2>
+<p class="subtitle">三层结构：首页 → 分类页 → 详情页。首页是第一入口</p>
+
+<div class="cards">
+  <div class="card" data-choice="hero-cards" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#24292f;padding:2rem 1.5rem 1rem;border-radius:6px;">
+        <div style="background:#57606a;height:8px;width:60%;border-radius:2px;margin-bottom:1rem;"></div>
+        <div style="background:#57606a;height:6px;width:80%;border-radius:2px;margin-bottom:0.5rem;"></div>
+        <div style="background:#57606a;height:6px;width:40%;border-radius:2px;margin-bottom:1.5rem;"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;">
+          <div style="background:white;border-radius:6px;padding:1rem;">
+            <div style="background:#e8e8e8;height:6px;width:50%;border-radius:2px;margin-bottom:0.5rem;"></div>
+            <div style="background:#e8e8e8;height:4px;width:80%;border-radius:2px;"></div>
+          </div>
+          <div style="background:white;border-radius:6px;padding:1rem;">
+            <div style="background:#e8e8e8;height:6px;width:50%;border-radius:2px;margin-bottom:0.5rem;"></div>
+            <div style="background:#e8e8e8;height:4px;width:80%;border-radius:2px;"></div>
+          </div>
+          <div style="background:white;border-radius:6px;padding:1rem;">
+            <div style="background:#e8e8e8;height:6px;width:50%;border-radius:2px;margin-bottom:0.5rem;"></div>
+            <div style="background:#e8e8e8;height:4px;width:80%;border-radius:2px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Hero + 分类卡片</h3>
+      <p>顶部大标题区 + 3-5个分类卡片网格。传统资料站布局，用户一眼看到所有分类入口。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="sidebar-grid" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#f6f8fa;padding:0;border-radius:6px;display:flex;overflow:hidden;">
+        <div style="background:#e8ecf0;width:30%;padding:1rem 0.75rem;">
+          <div style="background:#c0c6cc;height:5px;width:50%;border-radius:2px;margin-bottom:0.75rem;"></div>
+          <div style="background:#d0d6dc;height:4px;width:70%;border-radius:2px;margin-bottom:0.4rem;"></div>
+          <div style="background:#d0d6dc;height:4px;width:60%;border-radius:2px;margin-bottom:0.4rem;"></div>
+          <div style="background:#d0d6dc;height:4px;width:65%;border-radius:2px;margin-bottom:1rem;"></div>
+          <div style="background:#d0d6dc;height:4px;width:55%;border-radius:2px;margin-bottom:0.4rem;"></div>
+          <div style="background:#d0d6dc;height:4px;width:60%;border-radius:2px;margin-bottom:0.4rem;"></div>
+        </div>
+        <div style="flex:1;padding:1rem;">
+          <div style="background:#e8e8e8;height:5px;width:40%;border-radius:2px;margin-bottom:0.75rem;"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
+            <div style="background:white;border:1px solid #d0d7de;border-radius:4px;padding:0.75rem;">
+              <div style="background:#e8e8e8;height:4px;width:60%;border-radius:2px;margin-bottom:0.3rem;"></div>
+              <div style="background:#e8e8e8;height:3px;width:80%;border-radius:2px;"></div>
+            </div>
+            <div style="background:white;border:1px solid #d0d7de;border-radius:4px;padding:0.75rem;">
+              <div style="background:#e8e8e8;height:4px;width:60%;border-radius:2px;margin-bottom:0.3rem;"></div>
+              <div style="background:#e8e8e8;height:3px;width:80%;border-radius:2px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>侧边栏 + 内容网格</h3>
+      <p>左侧固定分类导航，右侧内容区展示推荐文章。类似文档站/维基风格，适合大量文章。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="magazine" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:white;padding:1rem;border-radius:6px;">
+        <div style="background:#24292f;height:6px;width:25%;border-radius:2px;margin-bottom:1rem;"></div>
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:0.5rem;">
+          <div style="background:#f0f6fc;border-radius:4px;padding:1.5rem 1rem;">
+            <div style="background:#c0d6f0;height:5px;width:50%;border-radius:2px;margin-bottom:0.5rem;"></div>
+            <div style="background:#c0d6f0;height:3px;width:70%;border-radius:2px;margin-bottom:0.3rem;"></div>
+            <div style="background:#c0d6f0;height:3px;width:40%;border-radius:2px;"></div>
+          </div>
+          <div style="background:#f6f8fa;border-radius:4px;padding:1rem;">
+            <div style="background:#d0d7de;height:4px;width:60%;border-radius:2px;margin-bottom:0.4rem;"></div>
+            <div style="background:#d0d7de;height:3px;width:70%;border-radius:2px;margin-bottom:0.4rem;"></div>
+            <div style="background:#d0d7de;height:3px;width:50%;border-radius:2px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>杂志式排版</h3>
+      <p>大图大标题，图文混排，类似 Medium/掘金首页。强调视觉冲击力，适合图文并茂的内容。</p>
+    </div>
+  </div>
+</div>
