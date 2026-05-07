@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git 常用命令速查表 — 资料库</title>
+    <meta name="description" content="Git 常用命令速查，涵盖分支管理、撤销操作、暂存与提交、远程协作等核心场景，快速查找即用。">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Git 常用命令速查表",
+      "description": "Git 常用命令速查，涵盖分支管理、撤销操作、暂存与提交、远程协作等核心场景。",
+      "datePublished": "2026-05-07",
+      "dateModified": "2026-05-07",
+      "author": {"@type": "Person", "name": "资料库"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://dingjiu1989-hue.github.io/"},
+        {"@type": "ListItem", "position": 2, "name": "技术教程", "item": "https://dingjiu1989-hue.github.io/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Git 常用命令速查表"}
+      ]
+    }
+    </script>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="/" class="nav-logo">📚 资料库</a>
+    <div class="nav-links">
+      <a href="/">首页</a>
+      <a href="/tech/">技术教程</a>
+      <a href="/sidehustle/">副业资源</a>
+      <a href="/tools/">工具推荐</a>
+    </div>
+    <input class="nav-search" type="search" placeholder="搜索..." disabled title="搜索功能开发中">
+  </div>
+</nav>
+
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/">首页</a> › <a href="/tech/">技术教程</a> › Git 常用命令速查表
+    </div>
+
+    <article>
+      <div class="article-tags">
+        <span class="tag-pin">📌 置顶</span>
+        <span class="tag-cat">Git</span>
+        <span class="tag-cat">命令行</span>
+      </div>
+
+      <h1 class="article-title">Git 常用命令速查表</h1>
+      <div class="article-meta">发布于 2026-05-07 · 阅读 1.2k · 4 回复</div>
+
+      <div class="article-body">
+        <p>日常开发中 Git 是最常用的版本控制工具。这里整理了高频命令，按场景分类，方便速查。</p>
+
+        <h2>分支管理</h2>
+        <table>
+          <tr><th>命令</th><th>说明</th></tr>
+          <tr><td><code>git branch</code></td><td>查看本地分支</td></tr>
+          <tr><td><code>git branch -r</code></td><td>查看远程分支</td></tr>
+          <tr><td><code>git branch &lt;name&gt;</code></td><td>创建新分支</td></tr>
+          <tr><td><code>git checkout &lt;name&gt;</code></td><td>切换分支</td></tr>
+          <tr><td><code>git checkout -b &lt;name&gt;</code></td><td>创建并切换到新分支</td></tr>
+          <tr><td><code>git merge &lt;branch&gt;</code></td><td>合并指定分支到当前分支</td></tr>
+          <tr><td><code>git branch -d &lt;name&gt;</code></td><td>删除本地分支</td></tr>
+          <tr><td><code>git push origin --delete &lt;name&gt;</code></td><td>删除远程分支</td></tr>
+        </table>
+
+        <h2>暂存与提交</h2>
+        <table>
+          <tr><th>命令</th><th>说明</th></tr>
+          <tr><td><code>git status</code></td><td>查看工作区状态</td></tr>
+          <tr><td><code>git add &lt;file&gt;</code></td><td>添加文件到暂存区</td></tr>
+          <tr><td><code>git add .</code></td><td>添加所有更改到暂存区</td></tr>
+          <tr><td><code>git commit -m "msg"</code></td><td>提交暂存区内容</td></tr>
+          <tr><td><code>git commit --amend</code></td><td>修改上一次提交</td></tr>
+        </table>
+
+        <h2>撤销操作</h2>
+        <table>
+          <tr><th>命令</th><th>说明</th></tr>
+          <tr><td><code>git restore &lt;file&gt;</code></td><td>撤销工作区修改</td></tr>
+          <tr><td><code>git restore --staged &lt;file&gt;</code></td><td>取消暂存</td></tr>
+          <tr><td><code>git reset --soft HEAD~1</code></td><td>撤销上次 commit，保留修改</td></tr>
+          <tr><td><code>git reset --hard HEAD~1</code></td><td>撤销上次 commit，丢弃修改</td></tr>
+          <tr><td><code>git revert &lt;commit&gt;</code></td><td>安全撤销某次提交（生成新 commit）</td></tr>
+        </table>
+
+        <h2>远程协作</h2>
+        <table>
+          <tr><th>命令</th><th>说明</th></tr>
+          <tr><td><code>git remote -v</code></td><td>查看远程仓库地址</td></tr>
+          <tr><td><code>git push</code></td><td>推送当前分支到远程</td></tr>
+          <tr><td><code>git pull</code></td><td>拉取远程更新并合并</td></tr>
+          <tr><td><code>git fetch</code></td><td>拉取远程更新但不合并</td></tr>
+          <tr><td><code>git clone &lt;url&gt;</code></td><td>克隆远程仓库</td></tr>
+        </table>
+
+        <h2>日志与历史</h2>
+        <table>
+          <tr><th>命令</th><th>说明</th></tr>
+          <tr><td><code>git log --oneline</code></td><td>查看简洁提交历史</td></tr>
+          <tr><td><code>git log --graph --oneline</code></td><td>查看分支图</td></tr>
+          <tr><td><code>git diff</code></td><td>查看未暂存的修改</td></tr>
+          <tr><td><code>git diff --staged</code></td><td>查看已暂存的修改</td></tr>
+        </table>
+
+        <h2>储藏 (Stash)</h2>
+        <table>
+          <tr><th>命令</th><th>说明</th></tr>
+          <tr><td><code>git stash</code></td><td>暂存当前修改到储藏栈</td></tr>
+          <tr><td><code>git stash pop</code></td><td>恢复最近一次储藏并删除</td></tr>
+          <tr><td><code>git stash list</code></td><td>查看储藏列表</td></tr>
+          <tr><td><code>git stash drop</code></td><td>删除最近一次储藏</td></tr>
+        </table>
+      </div>
+    </article>
+
+    <section class="related">
+      <h3>相关文章</h3>
+      <div class="related-grid">
+        <a href="/tech/macos-tools.html" class="related-card">macOS 效率工具推荐合集</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="footer">
+  <p>📚 资料库 &copy; 2026</p>
+  <p>纯静态 · GitHub Pages 托管</p>
+  <p style="margin-top:0.5rem;"><a href="/">返回首页</a></p>
+</footer>
+
+</body>
+</html>
