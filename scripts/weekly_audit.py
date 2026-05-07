@@ -8,6 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 ARTICLES_JSON = ROOT / 'articles.json'
+EN_ARTICLES_JSON = ROOT / 'en' / 'articles.json'
 DATA_DIR = ROOT / 'data'
 REPORT_FILE = ROOT / 'data' / 'weekly-report.md'
 TODAY = date.today()
@@ -40,10 +41,37 @@ def content_inventory():
             for t in p.get('tags', []):
                 tags[t] += 1
 
+    # English content
+    en_total = 0
+    en_by_board = {}
+    en_ages = {'this_week': 0, '1-2_weeks': 0, '2-4_weeks': 0, 'older': 0}
+    en_tags = Counter()
+    if EN_ARTICLES_JSON.exists():
+        en_data = json.loads(EN_ARTICLES_JSON.read_text(encoding='utf-8'))
+        en_boards = en_data.get('boards', [])
+        en_total = sum(len(b.get('posts', [])) for b in en_boards)
+        en_by_board = {b['name']: len(b.get('posts', [])) for b in en_boards}
+        for b in en_boards:
+            for p in b.get('posts', []):
+                d = date.fromisoformat(p['date'])
+                days_ago = (TODAY - d).days
+                if days_ago <= 7:
+                    en_ages['this_week'] += 1
+                elif days_ago <= 14:
+                    en_ages['1-2_weeks'] += 1
+                elif days_ago <= 28:
+                    en_ages['2-4_weeks'] += 1
+                else:
+                    en_ages['older'] += 1
+                for t in p.get('tags', []):
+                    en_tags[t] += 1
+
     return {
         'total': total, 'by_board': by_board,
         'ages': ages, 'top_tags': tags.most_common(10),
         'boards': boards,
+        'en_total': en_total, 'en_by_board': en_by_board,
+        'en_ages': en_ages, 'en_top_tags': en_tags.most_common(10),
     }
 
 
@@ -93,22 +121,33 @@ def generate_recommendations(inv, gsc):
     """Generate actionable recommendations based on audit data."""
     recs = []
 
-    # Content volume check
-    if inv['total'] < 50:
-        recs.append(f"内容量：{inv['total']}/50 — 距 AdSense 门槛还差 {50 - inv['total']} 篇，预计 {(50 - inv['total']) // 5 + 1} 周达标")
-    else:
-        recs.append(f"内容量：{inv['total']} 篇，已达到 AdSense 申请门槛")
+    # Content volume check — combined Chinese + English
+    total_all = inv['total'] + inv.get('en_total', 0)
+    recs.append(f"内容总量：中文 {inv['total']} 篇 + 英文 {inv.get('en_total', 0)} 篇 = {total_all} 篇")
 
-    # Board balance
+    # Board balance (Chinese)
     counts = list(inv['by_board'].values())
     if counts and max(counts) > min(counts) * 2:
         smallest = min(inv['by_board'], key=inv['by_board'].get)
         largest = max(inv['by_board'], key=inv['by_board'].get)
-        recs.append(f"版块失衡：{largest}({inv['by_board'][largest]}篇) vs {smallest}({inv['by_board'][smallest]}篇)，建议补齐 {smallest}")
+        recs.append(f"中文版块失衡：{largest}({inv['by_board'][largest]}篇) vs {smallest}({inv['by_board'][smallest]}篇)，建议补齐 {smallest}")
 
-    # Freshness
+    # Freshness (Chinese)
     if inv['ages']['this_week'] < 3:
-        recs.append(f"本周新增仅 {inv['ages']['this_week']} 篇，建议维持每周 3-5 篇节奏，搜索引擎偏好活跃站点")
+        recs.append(f"中文本周新增仅 {inv['ages']['this_week']} 篇，建议维持每周 3-5 篇节奏，搜索引擎偏好活跃站点")
+
+    # English freshness
+    en_ages = inv.get('en_ages', {})
+    if inv.get('en_total', 0) > 0 and en_ages.get('this_week', 0) < 1:
+        recs.append(f"英文内容本周无更新，建议通过 maintenance.py 定期更新日期以保持搜索引擎活跃信号")
+
+    # English board balance
+    en_by_board = inv.get('en_by_board', {})
+    en_counts = list(en_by_board.values())
+    if en_counts and max(en_counts) > min(en_counts) * 2:
+        smallest = min(en_by_board, key=en_by_board.get)
+        largest = max(en_by_board, key=en_by_board.get)
+        recs.append(f"英文版块失衡：{largest}({en_by_board[largest]}篇) vs {smallest}({en_by_board[smallest]}篇)，建议补齐 {smallest}")
 
     # GSC insights
     if gsc.get('found') and gsc.get('summary'):
@@ -135,23 +174,48 @@ def generate_recommendations(inv, gsc):
 
 def write_report(inv, gsc, recs):
     """Generate markdown report and save to data/weekly-report.md."""
+    en_total = inv.get('en_total', 0)
+    total_all = inv['total'] + en_total
+
     lines = [
-        f'# SourceHub 周度审计报告',
+        f'# AI Study Room 周度审计报告',
         f'**日期**: {TODAY}',
         f'**审计周期**: {WEEK_AGO} → {TODAY}',
         '',
         '## 内容概览',
-        f'- 总文章数: **{inv["total"]}**',
+        f'- 总文章数: **{total_all}** (中文 {inv["total"]} + 英文 {en_total})',
+        '',
+        '### 中文内容',
         f'- 版块分布: ' + ' | '.join(f'{k}: {v}' for k, v in inv['by_board'].items()),
-        f'- 本周新增: {inv["ages"]["this_week"]} 篇',
+        f'- 本周活跃: {inv["ages"]["this_week"]} 篇',
         f'- 1-2周内: {inv["ages"]["1-2_weeks"]} 篇',
         f'- 较旧内容: {inv["ages"]["older"]} 篇',
-        '',
-        '## 热门标签',
-        ' | '.join(f'`{t}`({c})' for t, c in inv['top_tags'][:8]),
-        '',
-        '## 搜索表现',
     ]
+
+    if en_total > 0:
+        lines += [
+            '',
+            '### 英文内容',
+            f'- 版块分布: ' + ' | '.join(f'{k}: {v}' for k, v in inv.get('en_by_board', {}).items()),
+            f'- 本周活跃: {inv.get("en_ages", {}).get("this_week", 0)} 篇',
+            f'- 1-2周内: {inv.get("en_ages", {}).get("1-2_weeks", 0)} 篇',
+            f'- 较旧内容: {inv.get("en_ages", {}).get("older", 0)} 篇',
+        ]
+
+    lines += [
+        '',
+        '## 热门标签 (中文)',
+        ' | '.join(f'`{t}`({c})' for t, c in inv['top_tags'][:8]),
+    ]
+
+    if inv.get('en_top_tags'):
+        lines += [
+            '',
+            '## 热门标签 (英文)',
+            ' | '.join(f'`{t}`({c})' for t, c in inv['en_top_tags'][:8]),
+        ]
+
+    lines += ['', '## 搜索表现']
 
     if gsc.get('found') and gsc.get('summary'):
         s = gsc['summary']
@@ -175,7 +239,7 @@ def write_report(inv, gsc, recs):
     for i, r in enumerate(recs, 1):
         lines.append(f'{i}. {r}')
 
-    lines += ['', '---', f'*自动生成于 {TODAY} · SourceHub 运营系统*']
+    lines += ['', '---', f'*自动生成于 {TODAY} · AI Study Room 运营系统*']
 
     report = '\n'.join(lines) + '\n'
     REPORT_FILE.write_text(report, encoding='utf-8')

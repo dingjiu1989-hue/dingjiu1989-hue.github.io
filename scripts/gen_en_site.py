@@ -970,6 +970,259 @@ BODIES['claude-vs-chatgpt'] = '''
 <p>The gap between these models is narrowing every quarter. Pick one, learn it deeply, and don't obsess over which is slightly better this week. The time you spend comparing tools is time you could spend building something.</p>
 '''
 
+BODIES['developer-side-hustles-2026'] = '''
+<p>Software developers have an unfair advantage in the side hustle economy. You can build things. Most people can't. Here are 10 developer side hustles that generate real income in 2026, ranked by barrier to entry and earning potential.</p>
+
+<h2>1. Freelance Development</h2>
+<p>Platforms like Upwork, Toptal, and Arc connect developers with clients worldwide. Rates for experienced developers range from $50-150/hour. Specialize in one stack (React, Python/Django, or mobile) rather than marketing yourself as a generalist. The freelancers earning the most on these platforms all have deep expertise in a specific niche.</p>
+
+<h2>2. Build a SaaS Product</h2>
+<p>Bootstrapped SaaS companies like Carrd, Plausible, and Bunce generate millions in ARR with tiny teams. The playbook: identify a painful problem in a niche you understand, build an MVP in 4-6 weeks, launch on Product Hunt and Hacker News, and charge $10-50/month. The bar is higher than it was in 2020, but solo-founded SaaS businesses are still the highest-leverage side hustle for developers.</p>
+
+<h2>3. Create and Sell Boilerplates</h2>
+<p>Developers pay for code that saves them time. ShipFast ($199, Next.js starter) and MarsX ($249, full-stack boilerplate) have both done 7 figures. If you've built a SaaS, you already have a boilerplate — extract the reusable parts, document them well, and list on Gumroad or your own site.</p>
+
+<h2>4. Sell Code Templates and Themes</h2>
+<p>The Themeforest and Creative Market ecosystems still generate millions in revenue. But in 2026, the bigger opportunity is selling functional templates: Notion templates for project management, Airtable bases for marketing teams, Tailwind component libraries for frontend developers. These take days to build, not months.</p>
+
+<h2>5. Build and Monetize APIs</h2>
+<p>If you can solve a data problem at scale, developers will pay for API access. ScrapingBird ($49/mo, web scraping), Hunter.io ($49/mo, email finding), and Abstract API ($19/mo, IP geolocation) all started as solo projects. The key: pick a narrow data problem, solve it well, and price for developers.</p>
+
+<h2>6. Technical Content Creation</h2>
+<p>Developer content is in massive demand. Write tutorials on your blog (monetize with ads and affiliate links), create video courses for Udemy or YouTube, or build a paid newsletter on Substack. Developers who can explain complex topics clearly are rare — and brands pay $500-2,000 for a single sponsored post from a developer with a decent following.</p>
+
+<h2>7. Sell Digital Products on Gumroad</h2>
+<p>Ebooks, cheatsheets, and code snippet packs sell surprisingly well. A well-designed Git cheatsheet PDF at $5 sold over 40,000 copies. A Notion template for software architecture at $29 sold 2,000+ copies. The formula: pick a topic developers struggle with, package the solution beautifully, and price between $5-49.</p>
+
+<h2>8. Build a Niche Job Board</h2>
+<p>Remote tech jobs, React-specific roles, AI/ML positions — niche job boards can charge $200-400 per listing. Using a WordPress theme or Bubble, you can launch one in a weekend. Traffic takes time to build, but once established, job boards become mostly passive income.</p>
+
+<h2>9. Code Review as a Service</h2>
+<p>Companies and solo developers pay for expert code review. Platforms like PullRequest.com and CodeMentor handle matching, but you can also build a personal brand on Twitter/LinkedIn and offer code review subscriptions directly. Senior developers charge $100-300 per review session.</p>
+
+<h2>10. Browser Extensions with Premium Features</h2>
+<p>Build a useful Chrome extension, distribute it for free, and charge for premium features. Extensions like VidIQ (YouTube analytics) and Grammarly follow this model. A simple dev tool extension with 10,000 free users converting at 2-3% to a $5/month plan generates $1,000-1,500/month in mostly passive income.</p>
+
+<h2>Which One Should You Start With?</h2>
+<table>
+<tr><th>If You Want</th><th>Start With</th></tr>
+<tr><td>Fastest cash (weeks)</td><td>Freelancing (#1) or Templates (#4)</td></tr>
+<tr><td>Passive income (months)</td><td>Digital Products (#7) or APIs (#5)</td></tr>
+<tr><td>Long-term wealth (years)</td><td>SaaS (#2) or Job Board (#8)</td></tr>
+<tr><td>Build audience + income</td><td>Content Creation (#6)</td></tr>
+</table>
+<p>Pick one. Ship it in two weeks. The only failed side hustle is the one you never start.</p>
+'''
+
+BODIES['affiliate-marketing-developers'] = '''
+<p>Most affiliate marketing advice is written for lifestyle bloggers — pick a niche, write 50 product reviews, pray for Google rankings. Developers can do better. Much better. This guide covers the technical approach to affiliate marketing that leverages your coding skills for an unfair advantage.</p>
+
+<h2>Why Developers Have an Edge in Affiliate Marketing</h2>
+<p>Affiliate marketing at scale is an engineering problem. It involves: crawling product data, generating comparison pages programmatically, A/B testing conversion rates, tracking clicks and commissions, and automating content updates. These are all tasks that developers can automate while non-technical affiliates do them manually.</p>
+
+<h2>Step 1: Pick a Profitable Niche with Affiliate Programs</h2>
+<p>Not all niches pay equally. Here are the affiliate niches where technical skill creates the biggest moat:</p>
+<table>
+<tr><th>Niche</th><th>Avg Commission</th><th>Cookie Duration</th><th>Why Developers Win</th></tr>
+<tr><td>SaaS tools</td><td>20-30% recurring</td><td>30-90 days</td><td>Comparison engines, API integration</td></tr>
+<tr><td>Web hosting</td><td>$50-150/sale</td><td>30-90 days</td><td>Performance benchmarks, uptime monitoring</td></tr>
+<tr><td>Developer tools</td><td>15-30%</td><td>30-60 days</td><td>Deep product knowledge, code examples</td></tr>
+<tr><td>Online courses</td><td>20-50%</td><td>30 days</td><td>Course aggregator automation</td></tr>
+<tr><td>APIs & dev services</td><td>15-25% recurring</td><td>30-90 days</td><td>Integration demos, benchmarks</td></tr>
+</table>
+
+<h2>Step 2: Build Programmatic Content Sites</h2>
+<p>Instead of writing 100 individual product reviews by hand, build a system that generates useful, unique comparison pages programmatically. For example:</p>
+<ul>
+<li><strong>SaaS comparison engine:</strong> Pull pricing, features, and G2/Capterra ratings via APIs or scraping. Generate comparison tables for every pair of tools.</li>
+<li><strong>Hosting benchmarks:</strong> Spin up VPS instances, run speed/uptime tests automatically, and publish results with affiliate links to each host.</li>
+<li><strong>Course aggregator:</strong> Aggregate courses from Udemy, Coursera, and Pluralsight with prices, ratings, and your affiliate links.</li>
+</ul>
+<p>One developer built a hosting comparison site with automated benchmarks that generates $15,000/month in affiliate commissions with near-zero ongoing content costs.</p>
+
+<h2>Step 3: Automate Content Updates</h2>
+<p>The biggest problem with traditional affiliate sites is staleness. Prices change. Products get discontinued. Reviews become outdated. Developers can solve this by building automated content refresh pipelines:</p>
+<ul>
+<li>Cron jobs that check product prices daily and update display</li>
+<li>API integrations that pull the latest product features and screenshots</li>
+<li>Automated "last updated" date stamps that signal freshness to Google</li>
+</ul>
+
+<h2>Step 4: Optimize Conversion with Data</h2>
+<p>Non-technical affiliates guess what converts. Developers measure it:</p>
+<ul>
+<li>A/B test CTA button text, placement, and design</li>
+<li>Track which comparison tables drive the most clicks</li>
+<li>Use heatmaps to understand where users click and scroll</li>
+<li>Analyze conversion funnels per traffic source</li>
+</ul>
+<p>A 1% improvement in conversion rate on a site making $5,000/month is $50/month in additional recurring income — compounded over years.</p>
+
+<h2>Step 5: Diversify Traffic Beyond Google</h2>
+<p>SEO is important but risky (algorithm updates can wipe out your traffic overnight). Developers have additional channels:</p>
+<ul>
+<li><strong>GitHub README badges:</strong> Build a useful open-source tool, add a README with affiliate links to related paid tools</li>
+<li><strong>Stack Overflow answers:</strong> Answer questions thoroughly, link to your in-depth guides with affiliate monetization</li>
+<li><strong>API documentation:</strong> Create unofficial SDK docs that include affiliate links to relevant services</li>
+<li><strong>VS Code extensions:</strong> Build a free extension, recommend paid tools in the marketplace description</li>
+</ul>
+
+<h2>Affiliate Programs to Join First</h2>
+<table>
+<tr><th>Program</th><th>Commission</th><th>Best For</th></tr>
+<tr><td>ShareASale / Impact</td><td>Varies</td><td>General marketplace access</td></tr>
+<tr><td>PartnerStack</td><td>20-30% recurring</td><td>SaaS products specifically</td></tr>
+<tr><td>Amazon Associates</td><td>1-10%</td><td>Physical products, low commission but high trust</td></tr>
+<tr><td>Direct SaaS programs</td><td>20-50%</td><td>Check footer links on SaaS sites for "Affiliates"</td></tr>
+</table>
+
+<h2>Common Mistakes</h2>
+<ul>
+<li><strong>Building content sites with no unique value.</strong> Google's 2024-2026 updates heavily penalize sites that only aggregate without adding original analysis. Your programmatic content must include unique data (benchmarks, comparisons, analysis) that generic AI content can't replicate.</li>
+<li><strong>Over-optimizing before traffic.</strong> Ship a useful site with 20-30 pages first. Optimize after you have 1,000+ monthly visitors.</li>
+<li><strong>Getting attached to one traffic source.</strong> Diversify to GitHub, YouTube, newsletters, and direct traffic from day one.</li>
+</ul>
+'''
+
+BODIES['sell-digital-products'] = '''
+<p>Selling digital products is the highest-margin business model available to developers. No inventory, no shipping, no customer support at 3 AM. You build once, sell infinitely. This guide covers what to build, how to price it, and where to sell it.</p>
+
+<h2>What Digital Products Can Developers Sell?</h2>
+
+<h3>1. Code Templates and Starter Kits</h3>
+<p>Every time you set up a new project, you're doing work someone would pay to skip. Next.js starter with auth + payments + database already configured: $99-199. React Native app template with navigation + push notifications + in-app purchases: $149-249. The best templates solve the "blank canvas" problem — giving developers a working foundation instead of a from-scratch setup.</p>
+
+<h3>2. UI Component Libraries</h3>
+<p>Tailwind UI charges $299 for a component library. TailwindUI Kit, Float UI, and Preline have all built businesses selling pre-styled components. You don't need hundreds of components — a focused library of 30-50 polished, accessible, well-documented components in one framework is worth charging for.</p>
+
+<h3>3. Ebooks and Technical Guides</h3>
+<p>Don't underestimate written content. "Refactoring UI" by Adam Wathan and Steve Schoger reportedly generated millions. "The Pragmatic Programmer" is a textbook example. Ebooks work best when they solve one specific, painful problem: "Deploying Machine Learning Models in Production" or "Passing the AWS Solutions Architect Exam in 30 Days."</p>
+
+<h3>4. Cheatsheets and Quick References</h3>
+<p>A well-designed, printable cheatsheet for Git, Docker, or SQL commands at $5-15 sells surprisingly well. Developers buy them as desk references, onboarding materials for new team members, and study aids. Design quality matters — a beautiful, well-organized cheatsheet sells 10x more than a text-heavy list.</p>
+
+<h3>5. Notion Templates for Developers</h3>
+<p>Notion's marketplace has created a new category of digital product. Software architecture documentation templates, sprint planning dashboards, bug tracking systems, and personal knowledge management setups. These sell for $15-49 and take a few days to build and polish.</p>
+
+<h3>6. Online Courses and Workshops</h3>
+<p>Udemy, Skillshare, and Teachable make distribution easy — but they take a 30-50% cut. For maximum margin, host on your own platform using Gumroad or Podia. Developer courses that perform well: "Learn X Framework by Building Y Project" (where X is React, Flutter, or Go, and Y is a real working app).</p>
+
+<h2>How to Price Digital Products</h2>
+<table>
+<tr><th>Product Type</th><th>Sweet Spot</th><th>Rationale</th></tr>
+<tr><td>Cheatsheets / Shorter PDFs</td><td>$5-19</td><td>Impulse purchase territory</td></tr>
+<tr><td>Ebooks / Guides</td><td>$29-49</td><td>Comparable to a technical book</td></tr>
+<tr><td>Notion / Airtable Templates</td><td>$15-49</td><td>Price to the value of time saved</td></tr>
+<tr><td>Code Templates / Starters</td><td>$49-199</td><td>Days or weeks of dev time saved</td></tr>
+<tr><td>Component Libraries</td><td>$99-299</td><td>Professional tool pricing</td></tr>
+<tr><td>Online Courses</td><td>$49-199</td><td>Compare to Udemy/Pluralsight pricing</td></tr>
+</table>
+
+<h2>Where to Sell</h2>
+<table>
+<tr><th>Platform</th><th>Fees</th><th>Best For</th></tr>
+<tr><td>Gumroad</td><td>10%</td><td>Digital everything — ebooks, templates, code</td></tr>
+<tr><td>Lemon Squeezy</td><td>5% + 50c</td><td>Developer-focused, handles EU VAT, great API</td></tr>
+<tr><td>Notion Marketplace</td><td>0% (for now)</td><td>Notion templates only</td></tr>
+<tr><td>ThemeForest</td><td>45-75%</td><td>Website themes and templates (high fees, high traffic)</td></tr>
+<tr><td>Your own site + Stripe</td><td>2.9% + 30c</td><td>Maximum margin, requires driving your own traffic</td></tr>
+</table>
+
+<h2>The Launch Playbook</h2>
+<ol>
+<li><strong>Build the product in public.</strong> Tweet your progress, share screenshots, get early feedback. By launch day, you should have 50-100 people who already want to buy it.</li>
+<li><strong>Give away a free version or sample.</strong> A free cheatsheet PDF builds an email list. A free chapter of your ebook convinces people the paid version is worth it. A GitHub repo with a basic template brings traffic to your premium version.</li>
+<li><strong>Launch on Product Hunt, Hacker News, and relevant subreddits.</strong> Time your launch for Tuesday-Thursday morning US Eastern time. Prepare your launch assets (screenshots, description, first comment) in advance.</li>
+<li><strong>Build a reviews page.</strong> Offer free copies to 5-10 developers in exchange for honest testimonials. Display these prominently on your sales page.</li>
+<li><strong>Keep marketing.</strong> The launch is day 1, not the finish line. Write guest posts, appear on podcasts, create YouTube tutorials that feature your product. Digital products have a long tail — a product launched today can still sell 3 years later.</li>
+</ol>
+'''
+
+BODIES['saas-bootstrapping-guide'] = '''
+<p>Building a SaaS product as a solo developer is the closest thing to a wealth-generating machine in software. No investors, no co-founders, no office — just you, your code, and customers who pay you every month. Here's the complete roadmap from idea to first paying customer, based on patterns from successful bootstrapped SaaS founders.</p>
+
+<h2>Phase 1: Find the Right Problem (Week 1-2)</h2>
+
+<h3>What Makes a Good Solo SaaS Idea?</h3>
+<table>
+<tr><th>Criterion</th><th>Why It Matters</th></tr>
+<tr><td>Solves a problem you personally have</td><td>You understand the pain deeply and can build the right solution faster</td></tr>
+<tr><td>Target market is a niche, not "everyone"</td><td>Easier to market, less competition, higher willingness to pay</td></tr>
+<tr><td>Can be built in 4-6 weeks solo</td><td>If it needs a team and 12 months, it's not a bootstrapped MVP</td></tr>
+<tr><td>Monthly recurring revenue model</td><td>Predictable income. One-time purchases are harder to sustain</td></tr>
+<tr><td>Customers already pay for similar tools</td><td>If nobody pays for a similar solution, there's probably no market</td></tr>
+</table>
+
+<h3>Where to Find SaaS Ideas</h3>
+<ul>
+<li><strong>Your own workflow.</strong> What repetitive task do you automate with a custom script? That script is probably a product.</li>
+<li><strong>Freelance client requests.</strong> If 3 clients ask for the same thing, that's a product signal.</li>
+<li><strong>Browse "Alternatives to X" queries.</strong> Tools with unhappy users are opportunities.</li>
+<li><strong>Indie Hackers and Hacker News.</strong> See what solo founders are building and look for adjacent problems.</li>
+<li><strong>Reddit pain points.</strong> Search for "I wish there was a tool that..." or "frustrated with [tool]"</li>
+</ul>
+
+<h2>Phase 2: Validate Before You Build (Week 2-3)</h2>
+<p>The #1 mistake: building for 6 months before showing anyone. Instead:</p>
+<ol>
+<li><strong>Create a landing page</strong> describing the problem and your solution. Use Carrd or a simple HTML page. Include a pricing tier and a "Get Early Access" email signup.</li>
+<li><strong>Talk to 10 potential customers.</strong> Not friends or family. Actual people in your target market. Ask: "What do you currently use to solve this problem? What would make you switch?"</li>
+<li><strong>Get 50 email signups.</strong> Post your landing page on relevant Reddit communities, Twitter, LinkedIn, and niche forums. If you can't get 50 people to give you their email, you haven't found a painful enough problem.</li>
+<li><strong>Pre-sell if possible.</strong> Offer a 50% lifetime discount for the first 20 customers who pay before launch. Pre-sales validate that people will actually open their wallets.</li>
+</ol>
+
+<h2>Phase 3: Build the MVP (Week 3-7)</h2>
+
+<h3>Technical Stack Recommendations for Solo SaaS</h3>
+<table>
+<tr><th>Layer</th><th>Recommended</th><th>Why</th></tr>
+<tr><td>Frontend</td><td>Next.js / Remix</td><td>SSR for SEO, rich ecosystem, fast to build</td></tr>
+<tr><td>Backend API</td><td>FastAPI (Python) / Hono (Node)</td><td>Lightweight, fast to iterate on</td></tr>
+<tr><td>Database</td><td>PostgreSQL (Supabase/Neon)</td><td>Free tier, managed, serverless-friendly</td></tr>
+<tr><td>Auth</td><td>Clerk / Supabase Auth / Lucia</td><td>Don't build auth from scratch</td></tr>
+<tr><td>Payments</td><td>Stripe + Lemon Squeezy</td><td>Stripe for flexibility, LS for simplicity + tax handling</td></tr>
+<tr><td>Hosting</td><td>Vercel / Railway / Fly.io</td><td>Free tier for MVP, scales when needed</td></tr>
+<tr><td>Email</td><td>Resend / Loops / Postmark</td><td>Transactional + marketing emails</td></tr>
+</table>
+
+<h3>What to Include in the MVP</h3>
+<p>Ship the smallest thing someone will pay for:</p>
+<ul>
+<li>Core feature that solves the main problem (nothing else)</li>
+<li>User authentication and account management</li>
+<li>Payment integration (Stripe Checkout is fine)</li>
+<li>A simple onboarding flow (2-3 steps max)</li>
+<li>Basic error messages and loading states</li>
+</ul>
+<p>Skip: user analytics dashboards, team features, custom domains, white-label, detailed documentation, and anything "nice to have."</p>
+
+<h2>Phase 4: Launch and Get First Customers (Week 7-8)</h2>
+<ol>
+<li><strong>Launch on Product Hunt.</strong> Even a modest PH launch (50-100 upvotes) brings 500-2,000 visitors and your first paying customers. Prepare thoroughly: a compelling tagline, 5 polished screenshots, a demo video, and an honest first comment from the maker.</li>
+<li><strong>Post on Hacker News as a "Show HN".</strong> The HN community values transparency. Share your tech stack, your revenue goal, and what you learned building it. Authentic posts outperform marketing-speak every time.</li>
+<li><strong>Write a launch blog post.</strong> "Why I Built X" or "How I Built X in 6 Weeks" — these stories resonate with developers and get shared organically.</li>
+<li><strong>Reach out to your pre-launch email list.</strong> These people already expressed interest. Offer them a launch-week discount.</li>
+<li><strong>Engage in relevant communities.</strong> Not by spamming your link, but by genuinely helping people and mentioning your tool only when it directly solves their stated problem.</li>
+</ol>
+
+<h2>Phase 5: Pricing That Works</h2>
+<table>
+<tr><th>Tier</th><th>Price</th><th>Purpose</th></tr>
+<tr><td>Free</td><td>$0</td><td>Get users in the door. Generous enough to be useful, limited enough to upgrade</td></tr>
+<tr><td>Pro</td><td>$15-49/mo</td><td>Your main revenue tier. Where most individual users land</td></tr>
+<tr><td>Team/Business</td><td>$49-199/mo</td><td>For companies. Usually 2-5x the Pro price</td></tr>
+</table>
+<p>Charge monthly by default, offer a 20-30% discount for annual plans. Annual customers have much lower churn — if your monthly churn is 5%, your annual churn on the same product might be only 20-30% (vs. 46% if everyone was monthly).</p>
+
+<h2>Common Bootstrapping Mistakes</h2>
+<ul>
+<li><strong>Building too much before launching.</strong> Your MVP should feel almost embarrassingly simple. If you're not slightly uncomfortable with how minimal it is, you've built too much.</li>
+<li><strong>Pricing too low.</strong> Charge at least $15/month. Anything lower signals "this isn't valuable" and makes customer acquisition costs unsustainable.</li>
+<li><strong>Building for yourself, not customers.</strong> Ship based on customer feedback, not what you think is cool. Talk to at least one customer every week.</li>
+<li><strong>Giving up too early.</strong> Most successful bootstrapped SaaS products took 12-18 months to reach meaningful revenue. The first 6 months are almost always slow. Keep shipping.</li>
+</ul>
+'''
+
 # ═══════════════════════════════════════════════════════════════════════
 # HTML generators
 # ═══════════════════════════════════════════════════════════════════════
@@ -1070,6 +1323,19 @@ def make_homepage(data):
       "url": "https://dingjiu1989-hue.github.io/en/",
       "description": "{site['tagline']}"
     }}
+    </script>
+    <script>
+    // Language auto-redirect — only on English homepage
+    (function(){{
+      if (window.location.pathname !== '/en/') return;
+      var choice = localStorage.getItem('lang');
+      if (!choice) {{
+        var lang = navigator.language || '';
+        if (lang.startsWith('zh')) {{
+          window.location.replace('/');
+        }}
+      }}
+    }})();
     </script>
 </head>
 <body>

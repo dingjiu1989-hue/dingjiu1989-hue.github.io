@@ -12,7 +12,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SITEMAP = ROOT / 'sitemap.xml'
 ARTICLES_JSON = ROOT / 'articles.json'
+EN_ARTICLES_JSON = ROOT / 'en' / 'articles.json'
 FEED_XML = ROOT / 'feed.xml'
+EN_FEED_XML = ROOT / 'en' / 'feed.xml'
 HEALTH_LOG = ROOT / 'health.json'
 TODAY = date.today().isoformat()
 
@@ -26,6 +28,12 @@ ALWAYS_FRESH = [
     f'{BASE_URL}/sidehustle/',
     f'{BASE_URL}/tools/',
     f'{BASE_URL}/ai/',
+    # English pages
+    f'{BASE_URL}/en/',
+    f'{BASE_URL}/en/tech/',
+    f'{BASE_URL}/en/sidehustle/',
+    f'{BASE_URL}/en/tools/',
+    f'{BASE_URL}/en/ai/',
 ]
 
 # ── Helpers ─────────────────────────────────────────────────────────
@@ -60,7 +68,7 @@ def update_sitemap():
 # ══════════════════════════════════════════════════════════════════════
 # 2. HEALTH CHECKS
 # ══════════════════════════════════════════════════════════════════════
-def run_health_checks(data):
+def run_health_checks(data, en_data=None):
     issues = []
 
     # 2a. Check every sitemap URL returns 200
@@ -83,29 +91,49 @@ def run_health_checks(data):
         except Exception as exc:
             issues.append(f'{url} unreachable: {exc}')
 
-    # 2b. Check articles.json posts have .html files on disk
-    log('Checking article files…')
-    expected_html = set()
-    for board in data.get('boards', []):
-        for post in board.get('posts', []):
-            html_path = ROOT / board['id'] / f"{post['slug']}.html"
-            expected_html.add(str(html_path))
-            if not html_path.exists():
-                issues.append(f'Missing file: {html_path}')
+    def check_article_files(boards, prefix=''):
+        """Check .html files exist for articles in a boards list."""
+        missing = []
+        for board in boards:
+            for post in board.get('posts', []):
+                html_path = ROOT / prefix / board['id'] / f"{post['slug']}.html"
+                if not html_path.exists():
+                    missing.append(str(html_path))
+        return missing
 
-    # 2c. Check sitemap covers all articles from JSON
+    # 2b. Check Chinese article files
+    log('Checking Chinese article files…')
+    issues.extend(f'Missing file: {p}' for p in check_article_files(data.get('boards', [])))
+
+    # 2c. Check English article files
+    if en_data:
+        log('Checking English article files…')
+        issues.extend(f'Missing file: {p}' for p in check_article_files(en_data.get('boards', []), prefix='en'))
+
+    # 2d. Check sitemap covers all articles from JSON
     sitemap_locs = set(urls)
     for board in data.get('boards', []):
         for post in board.get('posts', []):
             expected = f'{BASE_URL}/{board["id"]}/{post["slug"]}.html'
             if expected not in sitemap_locs:
                 issues.append(f'Sitemap missing: {expected}')
+    if en_data:
+        for board in en_data.get('boards', []):
+            for post in board.get('posts', []):
+                expected = f'{BASE_URL}/en/{board["id"]}/{post["slug"]}.html'
+                if expected not in sitemap_locs:
+                    issues.append(f'Sitemap missing: {expected}')
 
-    # 2d. Check category index pages exist and have correct data-render
+    # 2e. Check category index pages exist
     for board in data.get('boards', []):
         idx = ROOT / board['id'] / 'index.html'
         if not idx.exists():
             issues.append(f'Missing category index: {idx}')
+    if en_data:
+        for board in en_data.get('boards', []):
+            idx = ROOT / 'en' / board['id'] / 'index.html'
+            if not idx.exists():
+                issues.append(f'Missing English category index: {idx}')
 
     health = {
         'checked_at': TODAY,
@@ -129,15 +157,18 @@ def run_health_checks(data):
 
 
 # ══════════════════════════════════════════════════════════════════════
-# 3. RSS FEED
+# 3. RSS FEEDS
 # ══════════════════════════════════════════════════════════════════════
-def generate_rss(data):
+def generate_rss(data, path, lang, site_url=BASE_URL):
     site = data.get('site', {})
     items = []
 
     for board in data.get('boards', []):
         for post in board.get('posts', []):
-            url = f'{BASE_URL}/{board["id"]}/{post["slug"]}.html'
+            if lang == 'en':
+                url = f'{site_url}/en/{board["id"]}/{post["slug"]}.html'
+            else:
+                url = f'{site_url}/{board["id"]}/{post["slug"]}.html'
             items.append(f'''    <item>
       <title><![CDATA[{post['title']}]]></title>
       <link>{url}</link>
@@ -147,34 +178,30 @@ def generate_rss(data):
       <pubDate>{post['date']}T08:00:00+08:00</pubDate>
     </item>''')
 
+    feed_url = f'{site_url}/{path.relative_to(ROOT)}'
     rss = f'''<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
   <title>{site.get('name', '资料库')}</title>
-  <link>{BASE_URL}</link>
+  <link>{site_url}{'/en' if lang == 'en' else ''}</link>
   <description>{site.get('tagline', '')}</description>
-  <language>zh-CN</language>
+  <language>{'en-US' if lang == 'en' else 'zh-CN'}</language>
   <lastBuildDate>{TODAY}T08:00:00+08:00</lastBuildDate>
-  <atom:link href="{BASE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
+  <atom:link href="{feed_url}" rel="self" type="application/rss+xml"/>
 {''.join(items)}
 </channel>
 </rss>
 '''
-    FEED_XML.write_text(rss, encoding='utf-8')
-    log(f'RSS feed generated: {len(data.get("boards", []))} boards, articles')
+    path.write_text(rss, encoding='utf-8')
+    log(f'RSS feed generated ({lang}): {len(data.get("boards", []))} boards')
 
 
 # ══════════════════════════════════════════════════════════════════════
 # 4. STATS ROTATION
 # ══════════════════════════════════════════════════════════════════════
-def update_stats(data):
+def update_stats(data, json_path):
     import random
 
-    total = sum(len(b.get('posts', [])) for b in data.get('boards', []))
-    stats = data.setdefault('site', {}).setdefault('stats', {})
-
-    # Rotate article dates: pick 2-3 articles and bump their date to today
-    # This simulates genuine forum activity for search engines
     all_posts = []
     for board in data.get('boards', []):
         for post in board.get('posts', []):
@@ -187,17 +214,19 @@ def update_stats(data):
             post['date'] = TODAY
             log(f'  Bumped date: {post["slug"]} ({old_date} → {TODAY})')
 
+    total = sum(len(b.get('posts', [])) for b in data.get('boards', []))
+    stats = data.setdefault('site', {}).setdefault('stats', {})
     prev_today = stats.get('today', 0)
     new_today = len(bumped) + random.randint(0, 2)
     stats['today'] = new_today
     stats['yesterday'] = prev_today if prev_today > 0 else stats.get('yesterday', 0)
     stats['total'] = total
 
-    ARTICLES_JSON.write_text(
+    json_path.write_text(
         json.dumps(data, ensure_ascii=False, indent=2) + '\n',
         encoding='utf-8'
     )
-    log(f'Stats: today={new_today} yesterday={stats["yesterday"]} total={total}')
+    log(f'Stats ({json_path.name}): today={new_today} yesterday={stats["yesterday"]} total={total}')
 
 
 # ══════════════════════════════════════════════════════════════════════
@@ -206,18 +235,35 @@ def update_stats(data):
 def main():
     print(f'=== Maintenance {TODAY} ===')
 
-    print('[1/4] Sitemap freshness')
+    print('[1/6] Sitemap freshness')
     update_sitemap()
 
-    print('[2/4] Health checks')
+    # Load data
     data = json.loads(ARTICLES_JSON.read_text(encoding='utf-8'))
-    health = run_health_checks(data)
+    en_data = None
+    if EN_ARTICLES_JSON.exists():
+        en_data = json.loads(EN_ARTICLES_JSON.read_text(encoding='utf-8'))
 
-    print('[3/4] RSS feed')
-    generate_rss(data)
+    print('[2/6] Health checks')
+    health = run_health_checks(data, en_data)
 
-    print('[4/4] Stats rotation')
-    update_stats(data)
+    print('[3/6] Chinese RSS feed')
+    generate_rss(data, FEED_XML, 'zh')
+
+    print('[4/6] Chinese stats rotation')
+    update_stats(data, ARTICLES_JSON)
+
+    print('[5/6] English RSS feed')
+    if en_data:
+        generate_rss(en_data, EN_FEED_XML, 'en')
+    else:
+        log('No English data, skipping')
+
+    print('[6/6] English stats rotation')
+    if en_data:
+        update_stats(en_data, EN_ARTICLES_JSON)
+    else:
+        log('No English data, skipping')
 
     print('Done.')
     if not health['healthy']:

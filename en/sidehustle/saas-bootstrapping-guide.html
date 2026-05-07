@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="sidehustle" data-exclude="saas-bootstrapping-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <title>Bootstrapping a SaaS: From Idea to First Paying Customer — SourceHub</title>
+    <meta name="description" content="Complete roadmap for solo developers building a SaaS product. Idea validation, MVP tech stack, launch strategy, and pricing — everything you need to ship and charge.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/sidehustle/saas-bootstrapping-guide.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/sidehustle/saas-bootstrapping-guide.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bootstrapping a SaaS: From Idea to First Paying Customer",
+      "description": "Complete roadmap for solo developers building a SaaS product. Idea validation, MVP tech stack, launch strategy, and pricing — everything you need to ship and charge.",
+      "datePublished": "2026-05-07",
+      "dateModified": "2026-05-07",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Side Hustle", "item": "https://dingjiu1989-hue.github.io/en/sidehustle/"},
+        {"@type": "ListItem", "position": 3, "name": "Bootstrapping a SaaS: From Idea to First Paying Customer"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/sidehustle/">Side Hustle</a> › Bootstrapping a SaaS: From Idea to First Paying Customer
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">SaaS</span>
+        <span class="tag-cat">Bootstrapping</span>
+        <span class="tag-cat">Startup</span>
+        <span class="tag-cat">Indie Dev</span>
+        <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
+      <h1 class="article-title">Bootstrapping a SaaS: From Idea to First Paying Customer</h1>
+      <div class="article-meta">Published 2026-05-07 · 4560 views · 38 replies</div>
+      <div class="article-body"><p>Building a SaaS product as a solo developer is the closest thing to a wealth-generating machine in software. No investors, no co-founders, no office — just you, your code, and customers who pay you every month. Here's the complete roadmap from idea to first paying customer, based on patterns from successful bootstrapped SaaS founders.</p>
+
+<h2>Phase 1: Find the Right Problem (Week 1-2)</h2>
+
+<h3>What Makes a Good Solo SaaS Idea?</h3>
+<table>
+<tr><th>Criterion</th><th>Why It Matters</th></tr>
+<tr><td>Solves a problem you personally have</td><td>You understand the pain deeply and can build the right solution faster</td></tr>
+<tr><td>Target market is a niche, not "everyone"</td><td>Easier to market, less competition, higher willingness to pay</td></tr>
+<tr><td>Can be built in 4-6 weeks solo</td><td>If it needs a team and 12 months, it's not a bootstrapped MVP</td></tr>
+<tr><td>Monthly recurring revenue model</td><td>Predictable income. One-time purchases are harder to sustain</td></tr>
+<tr><td>Customers already pay for similar tools</td><td>If nobody pays for a similar solution, there's probably no market</td></tr>
+</table>
+
+<h3>Where to Find SaaS Ideas</h3>
+<ul>
+<li><strong>Your own workflow.</strong> What repetitive task do you automate with a custom script? That script is probably a product.</li>
+<li><strong>Freelance client requests.</strong> If 3 clients ask for the same thing, that's a product signal.</li>
+<li><strong>Browse "Alternatives to X" queries.</strong> Tools with unhappy users are opportunities.</li>
+<li><strong>Indie Hackers and Hacker News.</strong> See what solo founders are building and look for adjacent problems.</li>
+<li><strong>Reddit pain points.</strong> Search for "I wish there was a tool that..." or "frustrated with [tool]"</li>
+</ul>
+
+<h2>Phase 2: Validate Before You Build (Week 2-3)</h2>
+<p>The #1 mistake: building for 6 months before showing anyone. Instead:</p>
+<ol>
+<li><strong>Create a landing page</strong> describing the problem and your solution. Use Carrd or a simple HTML page. Include a pricing tier and a "Get Early Access" email signup.</li>
+<li><strong>Talk to 10 potential customers.</strong> Not friends or family. Actual people in your target market. Ask: "What do you currently use to solve this problem? What would make you switch?"</li>
+<li><strong>Get 50 email signups.</strong> Post your landing page on relevant Reddit communities, Twitter, LinkedIn, and niche forums. If you can't get 50 people to give you their email, you haven't found a painful enough problem.</li>
+<li><strong>Pre-sell if possible.</strong> Offer a 50% lifetime discount for the first 20 customers who pay before launch. Pre-sales validate that people will actually open their wallets.</li>
+</ol>
+
+<h2>Phase 3: Build the MVP (Week 3-7)</h2>
+
+<h3>Technical Stack Recommendations for Solo SaaS</h3>
+<table>
+<tr><th>Layer</th><th>Recommended</th><th>Why</th></tr>
+<tr><td>Frontend</td><td>Next.js / Remix</td><td>SSR for SEO, rich ecosystem, fast to build</td></tr>
+<tr><td>Backend API</td><td>FastAPI (Python) / Hono (Node)</td><td>Lightweight, fast to iterate on</td></tr>
+<tr><td>Database</td><td>PostgreSQL (Supabase/Neon)</td><td>Free tier, managed, serverless-friendly</td></tr>
+<tr><td>Auth</td><td>Clerk / Supabase Auth / Lucia</td><td>Don't build auth from scratch</td></tr>
+<tr><td>Payments</td><td>Stripe + Lemon Squeezy</td><td>Stripe for flexibility, LS for simplicity + tax handling</td></tr>
+<tr><td>Hosting</td><td>Vercel / Railway / Fly.io</td><td>Free tier for MVP, scales when needed</td></tr>
+<tr><td>Email</td><td>Resend / Loops / Postmark</td><td>Transactional + marketing emails</td></tr>
+</table>
+
+<h3>What to Include in the MVP</h3>
+<p>Ship the smallest thing someone will pay for:</p>
+<ul>
+<li>Core feature that solves the main problem (nothing else)</li>
+<li>User authentication and account management</li>
+<li>Payment integration (Stripe Checkout is fine)</li>
+<li>A simple onboarding flow (2-3 steps max)</li>
+<li>Basic error messages and loading states</li>
+</ul>
+<p>Skip: user analytics dashboards, team features, custom domains, white-label, detailed documentation, and anything "nice to have."</p>
+
+<h2>Phase 4: Launch and Get First Customers (Week 7-8)</h2>
+<ol>
+<li><strong>Launch on Product Hunt.</strong> Even a modest PH launch (50-100 upvotes) brings 500-2,000 visitors and your first paying customers. Prepare thoroughly: a compelling tagline, 5 polished screenshots, a demo video, and an honest first comment from the maker.</li>
+<li><strong>Post on Hacker News as a "Show HN".</strong> The HN community values transparency. Share your tech stack, your revenue goal, and what you learned building it. Authentic posts outperform marketing-speak every time.</li>
+<li><strong>Write a launch blog post.</strong> "Why I Built X" or "How I Built X in 6 Weeks" — these stories resonate with developers and get shared organically.</li>
+<li><strong>Reach out to your pre-launch email list.</strong> These people already expressed interest. Offer them a launch-week discount.</li>
+<li><strong>Engage in relevant communities.</strong> Not by spamming your link, but by genuinely helping people and mentioning your tool only when it directly solves their stated problem.</li>
+</ol>
+
+<h2>Phase 5: Pricing That Works</h2>
+<table>
+<tr><th>Tier</th><th>Price</th><th>Purpose</th></tr>
+<tr><td>Free</td><td>$0</td><td>Get users in the door. Generous enough to be useful, limited enough to upgrade</td></tr>
+<tr><td>Pro</td><td>$15-49/mo</td><td>Your main revenue tier. Where most individual users land</td></tr>
+<tr><td>Team/Business</td><td>$49-199/mo</td><td>For companies. Usually 2-5x the Pro price</td></tr>
+</table>
+<p>Charge monthly by default, offer a 20-30% discount for annual plans. Annual customers have much lower churn — if your monthly churn is 5%, your annual churn on the same product might be only 20-30% (vs. 46% if everyone was monthly).</p>
+
+<h2>Common Bootstrapping Mistakes</h2>
+<ul>
+<li><strong>Building too much before launching.</strong> Your MVP should feel almost embarrassingly simple. If you're not slightly uncomfortable with how minimal it is, you've built too much.</li>
+<li><strong>Pricing too low.</strong> Charge at least $15/month. Anything lower signals "this isn't valuable" and makes customer acquisition costs unsustainable.</li>
+<li><strong>Building for yourself, not customers.</strong> Ship based on customer feedback, not what you think is cool. Talk to at least one customer every week.</li>
+<li><strong>Giving up too early.</strong> Most successful bootstrapped SaaS products took 12-18 months to reach meaningful revenue. The first 6 months are almost always slow. Keep shipping.</li>
+</ul></div>
+    </article>
+    <section class="related"><div id="related-posts"></div></section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>
