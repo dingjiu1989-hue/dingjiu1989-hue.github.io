@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="docker-quickstart">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <title>Docker in 30 Minutes: From Install to First Container — SourceHub</title>
+    <meta name="description" content="A hands-on Docker tutorial for absolute beginners. Learn images, containers, and Dockerfiles by building and running your first containerized app.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/docker-quickstart.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/docker-quickstart.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Docker in 30 Minutes: From Install to First Container",
+      "description": "A hands-on Docker tutorial for absolute beginners. Learn images, containers, and Dockerfiles by building and running your first containerized app.",
+      "datePublished": "2026-05-07",
+      "dateModified": "2026-05-07",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Docker in 30 Minutes: From Install to First Container"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Docker in 30 Minutes: From Install to First Container
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Docker</span>
+        <span class="tag-cat">Containers</span>
+        <span class="tag-cat">DevOps</span></div>
+      <h1 class="article-title">Docker in 30 Minutes: From Install to First Container</h1>
+      <div class="article-meta">Published 2026-05-07 · 1800 views · 15 replies</div>
+      <div class="article-body"><p>Docker lets you package your application with everything it needs into a lightweight container that runs anywhere. No more "it works on my machine." Let's get you from zero to a running container in 30 minutes.</p>
+
+<h2>What Problem Does Docker Solve?</h2>
+<p>Before Docker: you install Python 3.11, your teammate uses 3.10, the server runs 3.9. Your app uses PostgreSQL 15, but production is on 14. Dependency hell. Docker wraps your app AND its exact environment into one portable unit — a container.</p>
+
+<h2>Installation</h2>
+<p>Download <strong>Docker Desktop</strong> from <a href="https://docker.com/products/docker-desktop" target="_blank">docker.com</a>. It includes Docker Engine, CLI, Docker Compose, and a GUI dashboard. Verify:</p>
+<pre><code>docker --version
+docker run hello-world   # should print a welcome message</code></pre>
+
+<h2>Core Concepts</h2>
+<table>
+<tr><th>Concept</th><th>What It Is</th><th>Analogy</th></tr>
+<tr><td><strong>Image</strong></td><td>A blueprint — the files, dependencies, and config</td><td>A recipe</td></tr>
+<tr><td><strong>Container</strong></td><td>A running instance of an image</td><td>The dish you cooked</td></tr>
+<tr><td><strong>Dockerfile</strong></td><td>Instructions to build an image</td><td>The recipe card</td></tr>
+<tr><td><strong>Docker Hub</strong></td><td>Public registry of images</td><td>GitHub for container images</td></tr>
+<tr><td><strong>Volume</strong></td><td>Persistent storage outside the container</td><td>An external hard drive</td></tr>
+</table>
+
+<h2>Your First Container</h2>
+<pre><code># Run nginx web server in a container
+docker run -d -p 8080:80 --name my-nginx nginx
+
+# Visit http://localhost:8080 — you'll see the nginx welcome page!
+
+# What's running?
+docker ps
+
+# Stop it
+docker stop my-nginx
+
+# Remove it
+docker rm my-nginx</code></pre>
+
+<h2>Writing a Dockerfile</h2>
+<p>Create a simple Python app:</p>
+<pre><code># app.py
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return 'Hello from Docker!'
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)</code></pre>
+
+<pre><code># Dockerfile
+FROM python:3.12-slim          # start from a Python image
+WORKDIR /app                    # set working directory
+COPY requirements.txt .         # copy dependency list
+RUN pip install -r requirements.txt
+COPY . .                        # copy everything else
+EXPOSE 5000                     # document what port we use
+CMD ["python", "app.py"]        # what to run on start</code></pre>
+
+<pre><code># requirements.txt
+flask==3.1.0</code></pre>
+
+<pre><code># Build and run
+docker build -t my-python-app .
+docker run -d -p 5000:5000 my-python-app</code></pre>
+
+<h2>Essential Commands</h2>
+<pre><code>docker ps                  # list running containers
+docker ps -a               # list ALL containers
+docker images              # list images
+docker logs &lt;container&gt;    # view logs
+docker exec -it &lt;c&gt; bash   # shell into a running container
+docker rm &lt;container&gt;      # remove a container
+docker rmi &lt;image&gt;         # remove an image
+docker system prune -a     # clean up everything unused</code></pre>
+
+<h2>Docker Compose (Multi-Container Apps)</h2>
+<pre><code># docker-compose.yml
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:</code></pre>
+<pre><code>docker compose up -d       # start everything
+docker compose down        # stop everything</code></pre>
+
+<h2>Docker vs VM</h2>
+<p>Containers share the host OS kernel, so they start in milliseconds and use minimal RAM. VMs each need their own OS, taking gigabytes. For most web apps, Docker is the clear winner.</p></div>
+    </article>
+    <section class="related"><div id="related-posts"></div></section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

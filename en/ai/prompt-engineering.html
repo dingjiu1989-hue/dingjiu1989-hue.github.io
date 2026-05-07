@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="prompt-engineering">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <title>Prompt Engineering: From Beginner to Expert — SourceHub</title>
+    <meta name="description" content="Master the art of prompting: role assignment, task description, format constraints, and few-shot examples. Real before/after comparisons that reveal what makes prompts work.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/ai/prompt-engineering.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/prompt-engineering.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Prompt Engineering: From Beginner to Expert",
+      "description": "Master the art of prompting: role assignment, task description, format constraints, and few-shot examples. Real before/after comparisons that reveal what makes prompts work.",
+      "datePublished": "2026-05-07",
+      "dateModified": "2026-05-07",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "Prompt Engineering: From Beginner to Expert"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › Prompt Engineering: From Beginner to Expert
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">ChatGPT</span>
+        <span class="tag-cat">Prompt Engineering</span>
+        <span class="tag-cat">AI</span></div>
+      <h1 class="article-title">Prompt Engineering: From Beginner to Expert</h1>
+      <div class="article-meta">Published 2026-05-07 · 1800 views · 15 replies</div>
+      <div class="article-body"><p>Prompt engineering isn't about memorizing magic phrases — it's about clearly communicating what you want, how you want it, and what context the AI needs. Master these fundamentals and you'll get dramatically better results from any LLM.</p>
+
+<h2>The Five Elements of a Good Prompt</h2>
+<p>Every effective prompt has some combination of these five elements:</p>
+<ol>
+<li><strong>Role</strong> — Who is the AI? "You are a senior software engineer reviewing code for security vulnerabilities."</li>
+<li><strong>Task</strong> — What exactly should it do? "Find SQL injection vulnerabilities in the following code."</li>
+<li><strong>Context</strong> — What background matters? "This code runs in a Node.js/Express backend with PostgreSQL."</li>
+<li><strong>Format</strong> — How should the output look? "List each vulnerability with: location, severity, and fix."</li>
+<li><strong>Constraints</strong> — What are the boundaries? "Only flag HIGH or CRITICAL severity issues. Ignore style concerns."</li>
+</ol>
+
+<h2>Before/After: The Same Request, Different Results</h2>
+
+<h3>Bad Prompt</h3>
+<pre><code>Write a blog post about Docker.</code></pre>
+<p><strong>Result:</strong> Generic 200-word overview that reads like a Wikipedia article. Useless.</p>
+
+<h3>Good Prompt</h3>
+<pre><code>You are a senior DevOps engineer writing for an audience of junior
+developers who have never used containers.
+
+Write a blog post titled "Docker in 30 Minutes: From Zero to First
+Container." Use a friendly, conversational tone. Every concept should
+include a hands-on code example. Structure it as:
+
+1. What problem Docker solves (1 paragraph)
+2. Installation (2 sentences + command)
+3. Core concepts (image, container, Dockerfile — with analogies)
+4. Your first container (step-by-step walkthrough)
+5. Common gotchas (bullet points)
+
+Keep the post under 800 words. Use simple English — if a high school
+student wouldn't understand a sentence, rewrite it.</code></pre>
+<p><strong>Result:</strong> A focused, practical tutorial that the target audience would actually find useful.</p>
+
+<h2>Key Techniques</h2>
+
+<h3>1. Chain of Thought</h3>
+<p>Ask the model to think step by step before answering. This dramatically improves accuracy on reasoning tasks:</p>
+<pre><code>Q: A bat and a ball cost $1.10 total. The bat costs $1.00 more than
+the ball. How much does the ball cost?
+
+Think through this step by step before giving the final answer.</code></pre>
+
+<h3>2. Few-Shot Prompting</h3>
+<p>Show 2-3 examples of what you want:</p>
+<pre><code>Convert these sentences to active voice:
+
+Input: The bug was found by the QA team.
+Output: The QA team found the bug.
+
+Input: The deployment was completed by the DevOps engineer.
+Output: </code></pre>
+
+<h3>3. Iterative Refinement</h3>
+<p>Your first prompt rarely produces a perfect result. Use the conversation like a designer briefing a junior:</p>
+<ol>
+<li>Start broad: "Write a Python script that processes CSV files."</li>
+<li>Add constraints: "The CSV has headers. Skip empty lines. Handle FileNotFoundError."</li>
+<li>Refine output: "Make the error messages user-friendly. Add a progress bar."</li>
+</ol>
+
+<h2>Common Mistakes</h2>
+<ul>
+<li><strong>Being too vague</strong> — "Write something about AI" tells the model nothing. Be specific about topic, audience, format, and tone.</li>
+<li><strong>Asking for too much at once</strong> — A 5,000-word article with 10 sections will be shallow. Ask for one section at a time.</li>
+<li><strong>Not providing examples</strong> — When you care about format or style, show 1-2 examples. It's the most efficient way to communicate what you want.</li>
+<li><strong>Accepting the first answer</strong> — The first response is a draft. Push back: "Make it more concise" or "That analogy doesn't work — try another one."</li>
+</ul></div>
+    </article>
+    <section class="related"><div id="related-posts"></div></section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

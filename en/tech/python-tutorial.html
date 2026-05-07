@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="python-tutorial">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <title>Python Tutorial: From Zero to Your First Program — SourceHub</title>
+    <meta name="description" content="A beginner-friendly Python tutorial. Master variables, conditionals, loops, and functions in 30 minutes and write your first working program.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/python-tutorial.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/python-tutorial.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Python Tutorial: From Zero to Your First Program",
+      "description": "A beginner-friendly Python tutorial. Master variables, conditionals, loops, and functions in 30 minutes and write your first working program.",
+      "datePublished": "2026-05-07",
+      "dateModified": "2026-05-07",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Python Tutorial: From Zero to Your First Program"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Python Tutorial: From Zero to Your First Program
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">Python</span>
+        <span class="tag-cat">Programming</span>
+        <span class="tag-cat">Tutorial</span></div>
+      <h1 class="article-title">Python Tutorial: From Zero to Your First Program</h1>
+      <div class="article-meta">Published 2026-05-07 · 3720 views · 31 replies</div>
+      <div class="article-body"><p>Python is the most approachable programming language in the world — and also one of the most powerful. In this tutorial, you'll go from zero to a working program in 30 minutes.</p>
+
+<h2>Installing Python</h2>
+<p>Download from <a href="https://www.python.org/downloads/" target="_blank">python.org</a>. During installation on Windows, check <strong>"Add Python to PATH"</strong>. On macOS, <code>brew install python</code> works too. Verify with:</p>
+<pre><code>python3 --version  # should print "Python 3.x.x"</code></pre>
+
+<h2>Your First Program</h2>
+<pre><code>print("Hello, world!")</code></pre>
+<p>Save as <code>hello.py</code> and run with <code>python3 hello.py</code>. That's it — you're a programmer now.</p>
+
+<h2>Variables and Types</h2>
+<pre><code>name = "Alice"           # string
+age = 30                 # integer
+height = 1.68            # float
+is_student = False       # boolean
+
+print(f"{name} is {age} years old")  # f-strings!</code></pre>
+
+<h2>Conditionals</h2>
+<pre><code>score = 85
+if score >= 90:
+    print("A")
+elif score >= 80:
+    print("B")
+elif score >= 70:
+    print("C")
+else:
+    print("Need improvement")</code></pre>
+
+<h2>Lists and Loops</h2>
+<pre><code>fruits = ["apple", "banana", "cherry"]
+fruits.append("date")
+print(fruits[0])          # "apple"
+
+for fruit in fruits:
+    print(fruit.upper())
+
+# List comprehension (Python's superpower)
+squares = [x**2 for x in range(10)]
+# → [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</code></pre>
+
+<h2>Dictionaries</h2>
+<pre><code>user = {
+    "name": "Alice",
+    "email": "alice@example.com",
+    "age": 30
+}
+print(user["name"])
+user["city"] = "New York"  # add a key
+
+for key, value in user.items():
+    print(f"{key}: {value}")</code></pre>
+
+<h2>Functions</h2>
+<pre><code>def greet(name, greeting="Hello"):
+    return f"{greeting}, {name}!"
+
+print(greet("Alice"))               # "Hello, Alice!"
+print(greet("Bob", "Howdy"))        # "Howdy, Bob!"</code></pre>
+
+<h2>Working with Files</h2>
+<pre><code># Read a file
+with open("data.txt", "r") as f:
+    content = f.read()
+
+# Write a file
+with open("output.txt", "w") as f:
+    f.write("Hello, file!")</code></pre>
+
+<h2>Error Handling</h2>
+<pre><code>try:
+    result = 10 / 0
+except ZeroDivisionError:
+    print("Can't divide by zero!")
+finally:
+    print("This always runs")</code></pre>
+
+<h2>A Complete Mini-Program</h2>
+<pre><code>import json
+
+def load_todos():
+    try:
+        with open("todos.json") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return []
+
+def save_todos(todos):
+    with open("todos.json", "w") as f:
+        json.dump(todos, f, indent=2)
+
+def main():
+    todos = load_todos()
+    while True:
+        cmd = input("add/show/quit: ").lower()
+        if cmd == "add":
+            todos.append(input("Task: "))
+            save_todos(todos)
+        elif cmd == "show":
+            for i, t in enumerate(todos, 1):
+                print(f"{i}. {t}")
+        elif cmd == "quit":
+            break
+
+main()</code></pre>
+
+<h2>Where to Go Next</h2>
+<ul>
+<li><strong>Automate the Boring Stuff</strong> — free Python book, perfect for practical learners</li>
+<li><strong>Real Python</strong> — excellent tutorials from beginner to advanced</li>
+<li><strong>Build something</strong> — a CLI tool, a simple web scraper, a TODO app. Anything.</li>
+</ul>
+<p>The secret to learning Python: start building things immediately. Don't get stuck in tutorial hell.</p></div>
+    </article>
+    <section class="related"><div id="related-posts"></div></section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

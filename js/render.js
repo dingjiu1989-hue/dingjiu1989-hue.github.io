@@ -160,8 +160,10 @@ function esc(s) {
 (function () {
   var type = document.documentElement.getAttribute('data-render');
   if (!type) return;
+  var base = document.querySelector('meta[name="base-path"]');
+  var prefix = base ? base.content : '';
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', '/articles.json', true);
+  xhr.open('GET', prefix + '/articles.json', true);
   xhr.onload = function () {
     if (xhr.status < 200 || xhr.status >= 300) return;
     var data = JSON.parse(xhr.responseText);
