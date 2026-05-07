@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="tech" data-exclude="unit-testing-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单元测试入门：从零到写出第一个可维护的测试 — 资料库</title>
+    <meta name="description" content="零基础单元测试入门教程，覆盖 Python/pytest 实战，AAA 模式、Mock、Fixture 核心概念一网打尽。">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "单元测试入门：从零到写出第一个可维护的测试",
+      "description": "零基础单元测试入门教程，覆盖 Python/pytest 实战，AAA 模式、Mock、Fixture 核心概念一网打尽。",
+      "datePublished": "2026-05-07",
+      "dateModified": "2026-05-07",
+      "author": {"@type": "Person", "name": "资料库"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://dingjiu1989-hue.github.io/"},
+        {"@type": "ListItem", "position": 2, "name": "技术教程", "item": "https://dingjiu1989-hue.github.io/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "单元测试入门：从零到写出第一个可维护的测试"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/">首页</a> › <a href="/tech/">技术教程</a> › 单元测试入门：从零到写出第一个可维护的测试
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">单元测试</span>
+        <span class="tag-cat">Python</span>
+        <span class="tag-cat">测试</span></div>
+      <h1 class="article-title">单元测试入门：从零到写出第一个可维护的测试</h1>
+      <div class="article-meta">发布于 2026-05-07 · 阅读 2520 · 21 回复</div>
+      <div class="article-body"><p>写单元测试是你从"会写代码"到"专业开发者"的分水岭。这篇文章用最少的理论带你直接上手。</p>
+<h2>为什么必须写测试</h2>
+<ul><li><strong>重构有底气</strong> — 有测试覆盖的代码，改完跑一次就知道有没有破坏现有功能</li><li><strong>文档即测试</strong> — 测试描述了函数在各种输入下应该如何表现，比注释更可靠</li><li><strong>减少回归 Bug</strong> — 修一个 Bug 加一个测试，同样的错不会再犯第二次</li></ul>
+<h2>AAA 模式（Arrange-Act-Assert）</h2>
+<pre><code>def test_add_two_numbers():
+    # Arrange（准备）
+    a, b = 2, 3
+    # Act（执行）
+    result = add(a, b)
+    # Assert（断言）
+    assert result == 5</code></pre>
+<h2>第一个真实测试</h2>
+<pre><code># user_service.py
+def get_full_name(user):
+    return f"{user.first_name} {user.last_name}"
+
+# test_user_service.py
+def test_get_full_name():
+    user = type('User', (), {'first_name': '张', 'last_name': '三'})()
+    assert get_full_name(user) == "张 三"
+
+def test_get_full_name_empty_last():
+    user = type('User', (), {'first_name': '李', 'last_name': ''})()
+    assert get_full_name(user) == "李 "</code></pre>
+<h2>Mock 和 Fixture</h2>
+<pre><code># Fixture: 共享的测试数据
+@pytest.fixture
+def sample_user():
+    return User(id=1, name="张三", email="zhang@test.com")
+
+def test_user_email(sample_user):
+    assert sample_user.email == "zhang@test.com"
+
+# Mock: 隔离外部依赖
+@patch("requests.get")
+def test_fetch_user(mock_get):
+    mock_get.return_value.json.return_value = {"name": "张三"}
+    result = fetch_user(1)
+    assert result["name"] == "张三"</code></pre>
+<h2>什么该测、什么不该测</h2>
+<ul><li><strong>该测</strong> — 业务逻辑、边界条件、错误路径、数据转换</li><li><strong>不该测</strong> — 简单的 getter/setter、框架代码、第三方库的内部行为</li></ul>
+<h2>起步建议</h2><p>不用追求 100% 覆盖率——那会增加大量维护负担。先给核心业务逻辑写测试，看到覆盖率数字攀升的成就感会推着你继续写。</p></div>
+    </article>
+    <section class="related"><div id="related-posts"></div></section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

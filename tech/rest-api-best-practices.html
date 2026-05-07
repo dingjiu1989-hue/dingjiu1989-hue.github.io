@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="tech" data-exclude="rest-api-best-practices">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REST API 设计最佳实践：写出让人愿意用的接口 — 资料库</title>
+    <meta name="description" content="从 URL 设计、HTTP 方法选择到错误处理和分页，系统讲解 REST API 设计规范，附常见反模式避坑。">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "REST API 设计最佳实践：写出让人愿意用的接口",
+      "description": "从 URL 设计、HTTP 方法选择到错误处理和分页，系统讲解 REST API 设计规范，附常见反模式避坑。",
+      "datePublished": "2026-05-07",
+      "dateModified": "2026-05-07",
+      "author": {"@type": "Person", "name": "资料库"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://dingjiu1989-hue.github.io/"},
+        {"@type": "ListItem", "position": 2, "name": "技术教程", "item": "https://dingjiu1989-hue.github.io/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "REST API 设计最佳实践：写出让人愿意用的接口"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/">首页</a> › <a href="/tech/">技术教程</a> › REST API 设计最佳实践：写出让人愿意用的接口
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">REST API</span>
+        <span class="tag-cat">后端</span>
+        <span class="tag-cat">最佳实践</span>
+        <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 热门</span></div>
+      <h1 class="article-title">REST API 设计最佳实践：写出让人愿意用的接口</h1>
+      <div class="article-meta">发布于 2026-05-07 · 阅读 3480 · 29 回复</div>
+      <div class="article-body"><p>好的 API 设计让调用方心情愉悦，坏的 API 让他们想砸键盘。这篇文章总结 10 条实战验证的设计原则。</p>
+<h2>URL 设计原则</h2>
+<ul><li><strong>用名词复数而非动词</strong> — <code>GET /users</code> 不是 <code>GET /getUsers</code>。HTTP 方法已经表达了动作。</li><li><strong>层级关系用嵌套 URL</strong> — <code>GET /users/123/orders</code> 清晰表达了"用户 123 的订单"。</li><li><strong>不要超过 3 层</strong> — <code>/users/123/orders/456/items</code> 太深了，这种情况拆成 <code>/orders/456/items</code>。</li><li><strong>用 kebab-case 不用 camelCase</strong> — <code>/shipping-address</code> 不是 <code>/shippingAddress</code>。SEO 友好，肉眼易读。</li></ul>
+<h2>HTTP 方法正确使用</h2>
+<table><tr><th>方法</th><th>操作</th><th>幂等?</th><th>示例</th></tr>
+<tr><td>GET</td><td>读取</td><td>✅</td><td><code>GET /articles</code></td></tr>
+<tr><td>POST</td><td>创建</td><td>❌</td><td><code>POST /articles</code></td></tr>
+<tr><td>PUT</td><td>全量更新</td><td>✅</td><td><code>PUT /articles/1</code></td></tr>
+<tr><td>PATCH</td><td>部分更新</td><td>❌</td><td><code>PATCH /articles/1</code></td></tr>
+<tr><td>DELETE</td><td>删除</td><td>✅</td><td><code>DELETE /articles/1</code></td></tr></table>
+<h2>响应格式规范</h2>
+<pre><code>{
+  "data": { "id": 1, "title": "..." },
+  "meta": { "page": 1, "per_page": 20, "total": 150 },
+  "errors": null
+}</code></pre>
+<h2>错误处理</h2>
+<ul><li><strong>用正确的 HTTP 状态码</strong> — 400 参数错误、401 未认证、403 无权限、404 不存在、422 参数校验失败、429 频率限制、500 服务器错误。</li><li><strong>错误信息结构化</strong> — 返回 <code>{"errors":[{"code":"VALIDATION_ERROR","field":"email","message":"邮箱格式不正确"}]}</code>，不要只返回一个字符串。</li></ul>
+<h2>五大常见反模式</h2>
+<ol><li><strong>所有操作都用 POST</strong> — 这是 RPC 不是 REST</li><li><strong>返回所有字段</strong> — 支持 <code>?fields=id,title</code> 让客户端选择需要的字段</li><li><strong>不版本化</strong> — URL 加 <code>/v1/</code> 前缀或在 Header 中指定版本</li><li><strong>不限制分页</strong> — <code>per_page</code> 最大 100，防止一次请求拖垮数据库</li><li><strong>不写 API 文档</strong> — OpenAPI/Swagger 规范是标配</li></ol></div>
+    </article>
+    <section class="related"><div id="related-posts"></div></section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>
