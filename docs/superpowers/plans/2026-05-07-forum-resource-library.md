@@ -1,8 +1,8 @@
-# 论坛风格资料库 Implementation Plan
+# 论坛风格AI自习室 Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** 把现有 GitHub Pages 单页改造成三层论坛风格资料库（首页+分类页+详情页），3 个版块各 2 篇填充文章
+**Goal:** 把现有 GitHub Pages 单页改造成三层论坛风格AI自习室（首页+分类页+详情页），3 个版块各 2 篇填充文章
 
 **Architecture:** 纯静态 HTML/CSS，共享 CSS 文件，每个页面自包含导航和页脚（inline 保证 SEO）。面包屑和文章结构化数据用 Schema.org JSON-LD
 
@@ -453,15 +453,15 @@ git commit -m "feat: add robots.txt and sitemap.xml for SEO"
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>资料库 — 聚合优质资源，分享实用知识</title>
-    <meta name="description" content="论坛风格资料库，聚合技术教程、副业资源、工具推荐等优质内容。">
+    <title>AI自习室 — 聚合优质资源，分享实用知识</title>
+    <meta name="description" content="论坛风格AI自习室，聚合技术教程、副业资源、工具推荐等优质内容。">
     <link rel="stylesheet" href="css/style.css">
     <!-- Schema.org WebSite -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "资料库",
+      "name": "AI自习室",
       "url": "https://dingjiu1989-hue.github.io/",
       "description": "聚合优质资源，分享实用知识"
     }
@@ -472,7 +472,7 @@ git commit -m "feat: add robots.txt and sitemap.xml for SEO"
 <!-- Top Nav -->
 <nav class="navbar">
   <div class="container">
-    <a href="/" class="nav-logo">📚 资料库</a>
+    <a href="/" class="nav-logo">📚 AI自习室</a>
     <div class="nav-links">
       <a href="/">首页</a>
       <a href="/tech/">技术教程</a>
@@ -487,7 +487,7 @@ git commit -m "feat: add robots.txt and sitemap.xml for SEO"
   <!-- Hero -->
   <section class="hero">
     <div class="container">
-      <h1>📚 欢迎来到资料库</h1>
+      <h1>📚 欢迎来到AI自习室</h1>
       <p>聚合优质资源，分享实用知识</p>
       <div class="hero-stats">
         <span class="hero-stat">📂 3 个版块</span>
@@ -573,7 +573,7 @@ git commit -m "feat: add robots.txt and sitemap.xml for SEO"
 </main>
 
 <footer class="footer">
-  <p>📚 资料库 &copy; 2026</p>
+  <p>📚 AI自习室 &copy; 2026</p>
   <p>纯静态 · GitHub Pages 托管 · 内容仅供学习交流</p>
   <p style="margin-top:0.5rem;">
     <a href="/sitemap.xml">站点地图</a> ·
@@ -622,7 +622,7 @@ git commit -m "feat: forum-style homepage with board cards and post lists"
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>技术教程 — 资料库</title>
+    <title>技术教程 — AI自习室</title>
     <meta name="description" content="技术教程版块，汇集编程、开发工具、效率提升等实用教程和参考资料。">
     <link rel="stylesheet" href="/css/style.css">
     <script type="application/ld+json">
@@ -639,7 +639,7 @@ git commit -m "feat: forum-style homepage with board cards and post lists"
 
 <nav class="navbar">
   <div class="container">
-    <a href="/" class="nav-logo">📚 资料库</a>
+    <a href="/" class="nav-logo">📚 AI自习室</a>
     <div class="nav-links">
       <a href="/">首页</a>
       <a href="/tech/">技术教程</a>
@@ -701,7 +701,7 @@ git commit -m "feat: forum-style homepage with board cards and post lists"
 </main>
 
 <footer class="footer">
-  <p>📚 资料库 &copy; 2026</p>
+  <p>📚 AI自习室 &copy; 2026</p>
   <p>纯静态 · GitHub Pages 托管</p>
   <p style="margin-top:0.5rem;"><a href="/">返回首页</a></p>
 </footer>
@@ -732,7 +732,7 @@ git commit -m "feat: tech category page with post table"
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>副业资源 — 资料库</title>
+    <title>副业资源 — AI自习室</title>
     <meta name="description" content="副业资源版块，汇集免费商用资源、远程工作平台、副业经验分享等实用信息。">
     <link rel="stylesheet" href="/css/style.css">
     <script type="application/ld+json">
@@ -749,7 +749,7 @@ git commit -m "feat: tech category page with post table"
 
 <nav class="navbar">
   <div class="container">
-    <a href="/" class="nav-logo">📚 资料库</a>
+    <a href="/" class="nav-logo">📚 AI自习室</a>
     <div class="nav-links">
       <a href="/">首页</a>
       <a href="/tech/">技术教程</a>
@@ -806,7 +806,7 @@ git commit -m "feat: tech category page with post table"
 </main>
 
 <footer class="footer">
-  <p>📚 资料库 &copy; 2026</p>
+  <p>📚 AI自习室 &copy; 2026</p>
   <p>纯静态 · GitHub Pages 托管</p>
   <p style="margin-top:0.5rem;"><a href="/">返回首页</a></p>
 </footer>
@@ -837,7 +837,7 @@ git commit -m "feat: sidehustle category page"
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>工具推荐 — 资料库</title>
+    <title>工具推荐 — AI自习室</title>
     <meta name="description" content="工具推荐版块，汇集效率工具、设计资源、开发辅助等实用软件和在线服务推荐。">
     <link rel="stylesheet" href="/css/style.css">
     <script type="application/ld+json">
@@ -854,7 +854,7 @@ git commit -m "feat: sidehustle category page"
 
 <nav class="navbar">
   <div class="container">
-    <a href="/" class="nav-logo">📚 资料库</a>
+    <a href="/" class="nav-logo">📚 AI自习室</a>
     <div class="nav-links">
       <a href="/">首页</a>
       <a href="/tech/">技术教程</a>
@@ -911,7 +911,7 @@ git commit -m "feat: sidehustle category page"
 </main>
 
 <footer class="footer">
-  <p>📚 资料库 &copy; 2026</p>
+  <p>📚 AI自习室 &copy; 2026</p>
   <p>纯静态 · GitHub Pages 托管</p>
   <p style="margin-top:0.5rem;"><a href="/">返回首页</a></p>
 </footer>
@@ -944,7 +944,7 @@ git commit -m "feat: tools category page"
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>文章标题 — 资料库</title>
+    <title>文章标题 — AI自习室</title>
     <meta name="description" content="文章摘要，150字以内，用于搜索引擎结果展示。">
     <link rel="stylesheet" href="/css/style.css">
     <script type="application/ld+json">
@@ -955,7 +955,7 @@ git commit -m "feat: tools category page"
       "description": "文章摘要",
       "datePublished": "2026-05-07",
       "dateModified": "2026-05-07",
-      "author": {"@type": "Person", "name": "资料库"}
+      "author": {"@type": "Person", "name": "AI自习室"}
     }
     </script>
     <script type="application/ld+json">
@@ -974,7 +974,7 @@ git commit -m "feat: tools category page"
 
 <nav class="navbar">
   <div class="container">
-    <a href="/" class="nav-logo">📚 资料库</a>
+    <a href="/" class="nav-logo">📚 AI自习室</a>
     <div class="nav-links">
       <a href="/">首页</a>
       <a href="/tech/">技术教程</a>
@@ -1016,7 +1016,7 @@ git commit -m "feat: tools category page"
 </main>
 
 <footer class="footer">
-  <p>📚 资料库 &copy; 2026</p>
+  <p>📚 AI自习室 &copy; 2026</p>
   <p>纯静态 · GitHub Pages 托管</p>
   <p style="margin-top:0.5rem;"><a href="/">返回首页</a></p>
 </footer>
@@ -1054,7 +1054,7 @@ git commit -m "feat: article template for future use"
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Git 常用命令速查表 — 资料库</title>
+    <title>Git 常用命令速查表 — AI自习室</title>
     <meta name="description" content="Git 常用命令速查，涵盖分支管理、撤销操作、暂存与提交、远程协作等核心场景，快速查找即用。">
     <link rel="stylesheet" href="/css/style.css">
     <script type="application/ld+json">
@@ -1065,7 +1065,7 @@ git commit -m "feat: article template for future use"
       "description": "Git 常用命令速查，涵盖分支管理、撤销操作、暂存与提交、远程协作等核心场景。",
       "datePublished": "2026-05-07",
       "dateModified": "2026-05-07",
-      "author": {"@type": "Person", "name": "资料库"}
+      "author": {"@type": "Person", "name": "AI自习室"}
     }
     </script>
     <script type="application/ld+json">
@@ -1084,7 +1084,7 @@ git commit -m "feat: article template for future use"
 
 <nav class="navbar">
   <div class="container">
-    <a href="/" class="nav-logo">📚 资料库</a>
+    <a href="/" class="nav-logo">📚 AI自习室</a>
     <div class="nav-links">
       <a href="/">首页</a>
       <a href="/tech/">技术教程</a>
@@ -1187,7 +1187,7 @@ git commit -m "feat: article template for future use"
 </main>
 
 <footer class="footer">
-  <p>📚 资料库 &copy; 2026</p>
+  <p>📚 AI自习室 &copy; 2026</p>
   <p>纯静态 · GitHub Pages 托管</p>
   <p style="margin-top:0.5rem;"><a href="/">返回首页</a></p>
 </footer>
@@ -1204,7 +1204,7 @@ git commit -m "feat: article template for future use"
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>macOS 效率工具推荐合集 — 资料库</title>
+    <title>macOS 效率工具推荐合集 — AI自习室</title>
     <meta name="description" content="精选 macOS 效率工具推荐，涵盖启动器、窗口管理、剪贴板、截图、终端等必备软件，提升日常工作效率。">
     <link rel="stylesheet" href="/css/style.css">
     <script type="application/ld+json">
@@ -1215,7 +1215,7 @@ git commit -m "feat: article template for future use"
       "description": "精选 macOS 效率工具推荐，涵盖启动器、窗口管理、剪贴板、截图、终端等必备软件。",
       "datePublished": "2026-05-06",
       "dateModified": "2026-05-06",
-      "author": {"@type": "Person", "name": "资料库"}
+      "author": {"@type": "Person", "name": "AI自习室"}
     }
     </script>
     <script type="application/ld+json">
@@ -1234,7 +1234,7 @@ git commit -m "feat: article template for future use"
 
 <nav class="navbar">
   <div class="container">
-    <a href="/" class="nav-logo">📚 资料库</a>
+    <a href="/" class="nav-logo">📚 AI自习室</a>
     <div class="nav-links">
       <a href="/">首页</a>
       <a href="/tech/">技术教程</a>
@@ -1313,7 +1313,7 @@ git commit -m "feat: article template for future use"
 </main>
 
 <footer class="footer">
-  <p>📚 资料库 &copy; 2026</p>
+  <p>📚 AI自习室 &copy; 2026</p>
   <p>纯静态 · GitHub Pages 托管</p>
   <p style="margin-top:0.5rem;"><a href="/">返回首页</a></p>
 </footer>
@@ -1330,7 +1330,7 @@ git commit -m "feat: article template for future use"
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>免费可商用图片资源汇总 — 资料库</title>
+    <title>免费可商用图片资源汇总 — AI自习室</title>
     <meta name="description" content="盘点 10+ 免费可商用的高质量图片资源网站，包括 Unsplash、Pexels、Pixabay 等，设计师和运营必备。">
     <link rel="stylesheet" href="/css/style.css">
     <script type="application/ld+json">
@@ -1341,7 +1341,7 @@ git commit -m "feat: article template for future use"
       "description": "盘点 10+ 免费可商用的高质量图片资源网站，设计师和运营必备。",
       "datePublished": "2026-05-03",
       "dateModified": "2026-05-03",
-      "author": {"@type": "Person", "name": "资料库"}
+      "author": {"@type": "Person", "name": "AI自习室"}
     }
     </script>
     <script type="application/ld+json">
@@ -1360,7 +1360,7 @@ git commit -m "feat: article template for future use"
 
 <nav class="navbar">
   <div class="container">
-    <a href="/" class="nav-logo">📚 资料库</a>
+    <a href="/" class="nav-logo">📚 AI自习室</a>
     <div class="nav-links">
       <a href="/">首页</a>
       <a href="/tech/">技术教程</a>
@@ -1433,7 +1433,7 @@ git commit -m "feat: article template for future use"
 </main>
 
 <footer class="footer">
-  <p>📚 资料库 &copy; 2026</p>
+  <p>📚 AI自习室 &copy; 2026</p>
   <p>纯静态 · GitHub Pages 托管</p>
   <p style="margin-top:0.5rem;"><a href="/">返回首页</a></p>
 </footer>
@@ -1450,7 +1450,7 @@ git commit -m "feat: article template for future use"
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>远程工作平台大盘点 — 资料库</title>
+    <title>远程工作平台大盘点 — AI自习室</title>
     <meta name="description" content="盘点国内外主流远程工作平台，包括 Upwork、Toptal、电鸭社区等，自由职业者和数字游民必看。">
     <link rel="stylesheet" href="/css/style.css">
     <script type="application/ld+json">
@@ -1461,7 +1461,7 @@ git commit -m "feat: article template for future use"
       "description": "盘点国内外主流远程工作平台，包括 Upwork、Toptal、电鸭社区等，自由职业者和数字游民必看。",
       "datePublished": "2026-04-28",
       "dateModified": "2026-04-28",
-      "author": {"@type": "Person", "name": "资料库"}
+      "author": {"@type": "Person", "name": "AI自习室"}
     }
     </script>
     <script type="application/ld+json">
@@ -1480,7 +1480,7 @@ git commit -m "feat: article template for future use"
 
 <nav class="navbar">
   <div class="container">
-    <a href="/" class="nav-logo">📚 资料库</a>
+    <a href="/" class="nav-logo">📚 AI自习室</a>
     <div class="nav-links">
       <a href="/">首页</a>
       <a href="/tech/">技术教程</a>
@@ -1554,7 +1554,7 @@ git commit -m "feat: article template for future use"
 </main>
 
 <footer class="footer">
-  <p>📚 资料库 &copy; 2026</p>
+  <p>📚 AI自习室 &copy; 2026</p>
   <p>纯静态 · GitHub Pages 托管</p>
   <p style="margin-top:0.5rem;"><a href="/">返回首页</a></p>
 </footer>
@@ -1571,7 +1571,7 @@ git commit -m "feat: article template for future use"
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2025 年度必备 Chrome 插件推荐 — 资料库</title>
+    <title>2025 年度必备 Chrome 插件推荐 — AI自习室</title>
     <meta name="description" content="精选 15 款 2025 年必备的 Chrome 浏览器插件，涵盖效率、安全、开发、设计等场景。">
     <link rel="stylesheet" href="/css/style.css">
     <script type="application/ld+json">
@@ -1582,7 +1582,7 @@ git commit -m "feat: article template for future use"
       "description": "精选 15 款 2025 年必备的 Chrome 浏览器插件，涵盖效率、安全、开发、设计等场景。",
       "datePublished": "2026-04-15",
       "dateModified": "2026-04-15",
-      "author": {"@type": "Person", "name": "资料库"}
+      "author": {"@type": "Person", "name": "AI自习室"}
     }
     </script>
     <script type="application/ld+json">
@@ -1601,7 +1601,7 @@ git commit -m "feat: article template for future use"
 
 <nav class="navbar">
   <div class="container">
-    <a href="/" class="nav-logo">📚 资料库</a>
+    <a href="/" class="nav-logo">📚 AI自习室</a>
     <div class="nav-links">
       <a href="/">首页</a>
       <a href="/tech/">技术教程</a>
@@ -1673,7 +1673,7 @@ git commit -m "feat: article template for future use"
 </main>
 
 <footer class="footer">
-  <p>📚 资料库 &copy; 2026</p>
+  <p>📚 AI自习室 &copy; 2026</p>
   <p>纯静态 · GitHub Pages 托管</p>
   <p style="margin-top:0.5rem;"><a href="/">返回首页</a></p>
 </footer>
@@ -1690,7 +1690,7 @@ git commit -m "feat: article template for future use"
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>白板笔记思维导图工具对比 — 资料库</title>
+    <title>白板笔记思维导图工具对比 — AI自习室</title>
     <meta name="description" content="对比 Notion、Obsidian、Miro、Heptabase 等主流笔记和思维导图工具的优缺点，帮你选适合自己的。">
     <link rel="stylesheet" href="/css/style.css">
     <script type="application/ld+json">
@@ -1701,7 +1701,7 @@ git commit -m "feat: article template for future use"
       "description": "对比 Notion、Obsidian、Miro、Heptabase 等主流笔记和思维导图工具的优缺点。",
       "datePublished": "2026-04-10",
       "dateModified": "2026-04-10",
-      "author": {"@type": "Person", "name": "资料库"}
+      "author": {"@type": "Person", "name": "AI自习室"}
     }
     </script>
     <script type="application/ld+json">
@@ -1720,7 +1720,7 @@ git commit -m "feat: article template for future use"
 
 <nav class="navbar">
   <div class="container">
-    <a href="/" class="nav-logo">📚 资料库</a>
+    <a href="/" class="nav-logo">📚 AI自习室</a>
     <div class="nav-links">
       <a href="/">首页</a>
       <a href="/tech/">技术教程</a>
@@ -1782,7 +1782,7 @@ git commit -m "feat: article template for future use"
 </main>
 
 <footer class="footer">
-  <p>📚 资料库 &copy; 2026</p>
+  <p>📚 AI自习室 &copy; 2026</p>
   <p>纯静态 · GitHub Pages 托管</p>
   <p style="margin-top:0.5rem;"><a href="/">返回首页</a></p>
 </footer>

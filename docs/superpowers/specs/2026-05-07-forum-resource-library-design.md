@@ -1,8 +1,8 @@
-# 论坛风格资料库 — 设计文档
+# 论坛风格AI自习室 — 设计文档
 
 ## 概述
 
-在 GitHub Pages 上搭建一个论坛风格（BBS）的静态资料库，三层页面结构，SEO 友好。
+在 GitHub Pages 上搭建一个论坛风格（BBS）的静态AI自习室，三层页面结构，SEO 友好。
 
 - **地址**: https://dingjiu1989-hue.github.io/
 - **仓库**: dingjiu1989-hue/dingjiu1989-hue.github.io
