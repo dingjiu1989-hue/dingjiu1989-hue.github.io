@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="tech" data-exclude="docker-quickstart">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker 30 分钟入门：从安装到第一个容器 — 资料库</title>
+    <meta name="description" content="零基础 Docker 入门教程，30 分钟掌握镜像、容器、Dockerfile 核心概念，亲手构建并运行你的第一个容器化应用。">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Docker 30 分钟入门：从安装到第一个容器",
+      "description": "零基础 Docker 入门教程，30 分钟掌握镜像、容器、Dockerfile 核心概念，亲手构建并运行你的第一个容器化应用。",
+      "datePublished": "2026-05-07",
+      "dateModified": "2026-05-07",
+      "author": {"@type": "Person", "name": "资料库"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://dingjiu1989-hue.github.io/"},
+        {"@type": "ListItem", "position": 2, "name": "技术教程", "item": "https://dingjiu1989-hue.github.io/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Docker 30 分钟入门：从安装到第一个容器"}
+      ]
+    }
+    </script>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/">首页</a> › <a href="/tech/">技术教程</a> › Docker 30 分钟入门：从安装到第一个容器
+    </div>
+
+    <article>
+      <div class="article-tags">
+                <span class="tag-cat">Docker</span>
+        <span class="tag-cat">容器</span>
+        <span class="tag-cat">DevOps</span>
+      </div>
+
+      <h1 class="article-title">Docker 30 分钟入门：从安装到第一个容器</h1>
+      <div class="article-meta">发布于 2026-05-07 · 阅读 1800 · 15 回复</div>
+
+      <div class="article-body">
+        <p>Docker 是现代开发者的必备技能。这篇文章用最通俗的语言带你 30 分钟上手。</p>
+
+<h2>为什么需要 Docker</h2>
+<ul>
+  <li><strong>环境一致性</strong> — "我电脑上能跑啊" 从此成为历史。开发、测试、生产环境完全一致。</li>
+  <li><strong>快速部署</strong> — 一条命令启动完整环境，不用装数据库、配环境变量。</li>
+  <li><strong>资源隔离</strong> — 每个项目独立运行，不互相干扰。</li>
+</ul>
+
+<h2>核心概念三件套</h2>
+<table>
+  <tr><th>概念</th><th>比喻</th><th>说明</th></tr>
+  <tr><td>镜像 (Image)</td><td>系统安装盘</td><td>只读模板，包含运行应用所需的一切</td></tr>
+  <tr><td>容器 (Container)</td><td>运行中的虚拟机</td><td>镜像的运行实例，相互隔离</td></tr>
+  <tr><td>Dockerfile</td><td>安装说明书</td><td>定义如何构建镜像的文本文件</td></tr>
+</table>
+
+<h2>安装 Docker</h2>
+<p>macOS 用户推荐 <a href="https://orbstack.dev/">OrbStack</a>（轻量替代 Docker Desktop），或直接 <code>brew install docker</code>。Windows/Linux 用户去 docker.com 下载即可。</p>
+
+<h2>第一个容器</h2>
+<pre><code># 拉取并运行 nginx
+docker run -d -p 8080:80 --name my-nginx nginx
+
+# 浏览器打开 http://localhost:8080 就能看到 nginx 欢迎页</code></pre>
+
+<h2>写一个 Dockerfile</h2>
+<pre><code>FROM python:3.12-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+EXPOSE 8000
+CMD ["python", "app.py"]</code></pre>
+
+<h2>常用命令速查</h2>
+<table>
+  <tr><td><code>docker ps</code></td><td>查看运行中的容器</td></tr>
+  <tr><td><code>docker images</code></td><td>查看本地镜像</td></tr>
+  <tr><td><code>docker build -t name .</code></td><td>构建镜像</td></tr>
+  <tr><td><code>docker exec -it name bash</code></td><td>进入容器 shell</td></tr>
+  <tr><td><code>docker-compose up -d</code></td><td>启动多容器应用</td></tr>
+</table>
+
+<h2>下一步</h2>
+<p>掌握这些就可以开始在工作中使用 Docker 了。推荐下一步学习 docker-compose 多容器编排和 Docker Hub 镜像仓库。</p>
+      </div>
+    </article>
+
+    <section class="related"><div id="related-posts"></div></section>
+  </div>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>
