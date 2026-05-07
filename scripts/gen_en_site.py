@@ -1223,6 +1223,32 @@ BODIES['saas-bootstrapping-guide'] = '''
 </ul>
 '''
 
+# FAQ data for FAQPage schema (slug → list of q/a dicts)
+FAQS = {
+    'chatgpt-plus-worth': [
+        {'q': 'Is ChatGPT Plus worth it in 2026?', 'a': 'For daily users who hit the free tier message limit or need file uploads, web browsing, and DALL-E image generation, ChatGPT Plus at $20/month is worth it. Casual users who ask fewer than 10 serious questions per day can stay on the free tier.'},
+        {'q': 'What is the difference between ChatGPT Free, Plus, and Pro?', 'a': 'Free uses GPT-4o mini with limited messages. Plus ($20/mo) gives full GPT-4o, web browsing, file uploads, DALL-E images, and ~80 messages per 3 hours. Pro ($200/mo) adds unlimited access and o1 Pro deep reasoning mode.'},
+        {'q': 'Who should upgrade to ChatGPT Pro?', 'a': 'ChatGPT Pro at $200/month is for researchers needing deep reasoning on complex problems, developers using ChatGPT 6+ hours daily as their primary coding tool, and businesses where AI usage directly generates revenue.'},
+    ],
+    'claude-vs-chatgpt': [
+        {'q': 'Which is better for coding — Claude or ChatGPT?', 'a': 'Both are excellent. Claude has an edge for complex refactoring and code review of large codebases due to its 200K context window. ChatGPT has an advantage for data-heavy coding tasks with its Code Interpreter feature.'},
+        {'q': 'Which AI assistant writes better — Claude or ChatGPT?', 'a': 'Claude produces noticeably more natural, nuanced writing in English and is dramatically better in Chinese. For bloggers, writers, and content creators, Claude is the clear winner for writing quality.'},
+        {'q': 'Can Claude generate images like ChatGPT?', 'a': 'No, Claude cannot generate images. ChatGPT has DALL-E 3 built in for image generation. The recommended setup is to use both: Claude for writing and coding, ChatGPT for image generation and web browsing.'},
+        {'q': 'What is the best AI assistant setup in 2026?', 'a': 'Dual-wield the free tiers: Claude Free + ChatGPT Free gives you both strengths at zero cost. If you pay for one, choose based on your primary use case: Claude Pro for writing and research, ChatGPT Plus for visual content and web-connected tasks.'},
+    ],
+    'developer-side-hustles-2026': [
+        {'q': 'What is the most profitable side hustle for developers?', 'a': 'Building a bootstrapped SaaS product has the highest earning potential for developers, with successful solo founders generating $5K-$50K+ monthly recurring revenue. Freelancing offers the fastest cash (weeks), while SaaS and job boards build long-term wealth.'},
+        {'q': 'How can a developer make passive income?', 'a': 'Developers can earn passive income by selling digital products (ebooks, cheatsheets, code templates), building and monetizing APIs, creating browser extensions with premium features, or building a niche job board. These require upfront work but generate ongoing revenue with minimal maintenance.'},
+        {'q': 'What programming side hustles require no upfront money?', 'a': 'Freelancing, technical content creation (blogging, YouTube), and selling digital products on Gumroad all require $0 upfront — just your time and skills. Building a SaaS or job board may need hosting costs ($5-20/month) but these are minimal.'},
+    ],
+    'saas-bootstrapping-guide': [
+        {'q': 'How much does it cost to bootstrap a SaaS?', 'a': 'A solo developer can bootstrap a SaaS MVP for $0-50/month using free tiers: Vercel/Railway for hosting, Supabase for database/auth, Stripe for payments, and Resend for email. The main investment is time, typically 4-8 weeks of development.'},
+        {'q': 'How long does it take to get first paying customers for a SaaS?', 'a': 'Most bootstrapped SaaS products get their first paying customer within 2-4 weeks of launch if they validated the idea first. Reaching meaningful revenue ($2K+ MRR) typically takes 12-18 months of consistent shipping and iteration.'},
+        {'q': 'What tech stack is best for a solo SaaS founder?', 'a': 'Recommended stack: Next.js or Remix for frontend, FastAPI or Hono for backend API, PostgreSQL via Supabase or Neon, Clerk or Supabase Auth for authentication, Stripe for payments, and Vercel or Railway for hosting. These have generous free tiers and are fast to develop with.'},
+        {'q': 'What is the biggest mistake when bootstrapping a SaaS?', 'a': 'Building too much before launching. Your MVP should feel almost embarrassingly simple — ship after 4-6 weeks with just the core feature, basic auth, and payment integration. Talk to customers weekly and iterate based on feedback rather than building features nobody asked for.'},
+    ],
+}
+
 # ═══════════════════════════════════════════════════════════════════════
 # HTML generators
 # ═══════════════════════════════════════════════════════════════════════
@@ -1236,6 +1262,39 @@ def make_article_html(art, board_id, board_name):
     slug = art['slug']
     cn_url = f'{BASE}/{board_id}/{slug}.html'
     en_url = f'{BASE}/en/{board_id}/{slug}.html'
+    art_url = en_url
+
+    # OG / Twitter Card
+    og_tags = f'''    <meta property="og:title" content="{art['title']}">
+    <meta property="og:description" content="{art['description']}">
+    <meta property="og:url" content="{art_url}">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{art['title']}">
+    <meta name="twitter:description" content="{art['description']}">'''
+
+    # FAQ Schema for articles that have Q&A sections
+    faq_schema = ''
+    faq_data = FAQS.get(slug)
+    if faq_data:
+        faq_items = ',\n'.join(
+            f'''      {{
+        "@type": "Question",
+        "name": "{q['q']}",
+        "acceptedAnswer": {{"@type": "Answer", "text": "{q['a']}"}}
+      }}''' for q in faq_data
+        )
+        faq_schema = f'''
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+    {faq_items}
+      ]
+    }}
+    </script>'''
 
     return f'''<!DOCTYPE html>
 <html lang="en" data-render="related" data-board="{board_id}" data-exclude="{slug}">
@@ -1244,6 +1303,15 @@ def make_article_html(art, board_id, board_name):
     <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){{dataLayer.push(arguments);}}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+{og_tags}
     <title>{art['title']} — SourceHub</title>
     <meta name="description" content="{art['description']}">
     <link rel="stylesheet" href="/css/style.css">
@@ -1270,7 +1338,7 @@ def make_article_html(art, board_id, board_name):
         {{"@type": "ListItem", "position": 3, "name": "{art['title']}"}}
       ]
     }}
-    </script>
+    </script>{faq_schema}
 </head>
 <body>
 <div id="nav-placeholder"></div>
@@ -1309,6 +1377,22 @@ def make_homepage(data):
     <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){{dataLayer.push(arguments);}}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="{site['name']} — {site['tagline']}">
+    <meta property="og:description" content="Forum-style resource library aggregating tech tutorials, side hustle ideas, tool recommendations, and AI guides.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{site['name']} — {site['tagline']}">
+    <meta name="twitter:description" content="Forum-style resource library aggregating tech tutorials, side hustle ideas, tool recommendations, and AI guides.">
     <title>{site['name']} — {site['tagline']}</title>
     <meta name="description" content="Forum-style resource library aggregating tech tutorials, side hustle ideas, tool recommendations, and AI guides.">
     <link rel="stylesheet" href="/css/style.css">
@@ -1399,6 +1483,22 @@ def make_category(data, board_id):
     <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){{dataLayer.push(arguments);}}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="{title} — SourceHub">
+    <meta property="og:description" content="{board_descs[board_id]}">
+    <meta property="og:url" content="{en_url}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{title} — SourceHub">
+    <meta name="twitter:description" content="{board_descs[board_id]}">
     <title>{title} — SourceHub</title>
     <meta name="description" content="{board_descs[board_id]}">
     <link rel="stylesheet" href="/css/style.css">
