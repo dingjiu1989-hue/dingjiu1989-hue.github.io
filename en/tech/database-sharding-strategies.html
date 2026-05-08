@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="database-sharding-strategies">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Database Sharding Strategies: Partitioning, Consistent Hashing, and Real-World Patterns">
+    <meta property="og:description" content="Complete guide to database sharding — choosing a shard key, consistent hashing, resharding strategies, and common pitfalls.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/database-sharding-strategies.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Database Sharding Strategies: Partitioning, Consistent Hashing, and Real-World Patterns">
+    <meta name="twitter:description" content="Complete guide to database sharding — choosing a shard key, consistent hashing, resharding strategies, and common pitfalls.">
+    <title>Database Sharding Strategies: Partitioning, Consistent Hashing, and Real-World Patterns — SourceHub</title>
+    <meta name="description" content="Complete guide to database sharding — choosing a shard key, consistent hashing, resharding strategies, and common pitfalls.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/database-sharding-strategies.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/database-sharding-strategies.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Database Sharding Strategies: Partitioning, Consistent Hashing, and Real-World Patterns",
+      "description": "Complete guide to database sharding — choosing a shard key, consistent hashing, resharding strategies, and common pitfalls.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Database Sharding Strategies: Partitioning, Consistent Hashing, and Real-World Patterns"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Database Sharding Strategies: Partitioning, Consistent Hashing, and Real-World Patterns
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Sharding</span>
+        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">Scalability</span></div>
+      <h1 class="article-title">Database Sharding Strategies: Partitioning, Consistent Hashing, and Real-World Patterns</h1>
+      <div class="article-meta">Published 2026-05-08 · 9720 views · 81 replies</div>
+      <div class="article-body"><p>Database sharding is how you scale a database beyond what a single server can handle — splitting data across multiple independent database instances. While managed databases have made sharding less common for new projects, understanding sharding is critical for system design interviews, working at scale, and architecting systems that will eventually need it. This guide covers the theory and practice of database sharding.</p>
+
+<h2>Sharding Strategies Compared</h2>
+<table>
+<tr><th>Strategy</th><th>How It Works</th><th>Pros</th><th>Cons</th><th>Best For</th></tr>
+<tr><td>Key-Based (Hash) Sharding</td><td>Hash(shard_key) % N → shard number</td><td>Even distribution, simple routing</td><td>Adding shards rehashes ALL data; cross-shard queries are hard</td><td>Even data distribution, simple lookup patterns</td></tr>
+<tr><td>Range-Based Sharding</td><td>Shard 1: A-M, Shard 2: N-Z</td><td>Intuitive, range queries work within a shard</td><td>Hotspots (shard with most popular range gets overloaded)</td><td>Time-series data, alphabetical/sequential data</td></tr>
+<tr><td>Directory-Based Sharding</td><td>Lookup table maps key → shard</td><td>Flexible (move data between shards easily)</td><td>Lookup service is a single point of failure/ bottleneck</td><td>Complex sharding needs, frequent rebalancing</td></tr>
+<tr><td>Geo-Based Sharding</td><td>Shard by geographic region (US, EU, APAC)</td><td>Low latency per region, GDPR compliance</td><td>Uneven distribution; cross-region queries are slow</td><td>Multi-region apps, data locality requirements</td></tr>
+<tr><td>Entity/Functional Sharding</td><td>Shard by entity type (users, orders, products)</td><td>Independent scaling per entity</td><td>Joins across entities are impossible in SQL</td><td>Microservices, domain-driven design</td></tr>
+</table>
+
+<h2>Consistent Hashing: The Key to Dynamic Sharding</h2>
+<pre><code># Consistent hashing minimizes data movement when adding/removing shards
+# Traditional hash: hash(key) % N → changing N remaps ALL keys
+# Consistent hash: hash(key) and hash(shard) both mapped to a ring
+#   Adding a shard: only ~1/N keys need to move
+#   Removing a shard: only that shard's keys need to move
+
+# Simplified consistent hashing implementation
+import hashlib, bisect
+
+class ConsistentHash:
+    def __init__(self, virtual_nodes_per_shard=150):
+        self.ring = {}  # hash → shard_id
+        self.sorted_hashes = []  # sorted list of hash positions
+        self.vnodes = virtual_nodes_per_shard
+
+    def add_shard(self, shard_id):
+        for i in range(self.vnodes):
+            h = self._hash(f"{shard_id}:{i}")
+            self.ring[h] = shard_id
+            bisect.insort(self.sorted_hashes, h)
+
+    def get_shard(self, key):
+        h = self._hash(key)
+        # Find first shard hash >= key hash (clockwise on ring)
+        idx = bisect.bisect_left(self.sorted_hashes, h)
+        if idx == len(self.sorted_hashes):
+            idx = 0  # Wrap around the ring
+        return self.ring[self.sorted_hashes[idx]]
+
+    def _hash(self, s):
+        return int(hashlib.md5(s.encode()).hexdigest(), 16)</code></pre>
+
+<h2>When to Shard (and When Not To)</h2>
+<table>
+<tr><th>Scenario</th><th>Should You Shard?</th><th>Alternative</th></tr>
+<tr><td>Single DB < 100GB, < 1K QPS</td><td>No — single instance is fine</td><td>Add read replicas for read scaling</td></tr>
+<tr><td>100GB-1TB, read-heavy</td><td>No — read replicas first</td><td>Read replicas + caching (Redis)</td></tr>
+<tr><td>100GB-1TB, write-heavy (>5K write QPS)</td><td>Maybe — consider sharding</td><td>Also consider: better hardware, connection pooling, queue writes</td></tr>
+<tr><td>>1TB, any workload</td><td>Yes — single server can't hold it</td><td>Sharding is necessary at this scale</td></tr>
+<tr><td>Multi-tenant SaaS (tenant isolation needed)</td><td>Maybe — tenant-based sharding</td><td>Also consider: row-level security, separate schemas</td></tr>
+<tr><td>Startup with <1K users</td><td>No — premature optimization</td><td>Single DB with good indexing</td></tr>
+</table>
+
+<h2>Common Sharding Pitfalls</h2>
+<table>
+<tr><th>Pitfall</th><th>Problem</th><th>Solution</th></tr>
+<tr><td>Choosing the wrong shard key</td><td>Uneven data distribution, hotspots</td><td>Analyze access patterns, pick high-cardinality key</td></tr>
+<tr><td>Cross-shard queries</td><td>JOINs, aggregations across shards are application-level</td><td>Denormalize data, use materialized views, or avoid cross-shard queries</td></tr>
+<tr><td>Resharding without downtime</td><td>Moving data between shards blocks the application</td><td>Consistent hashing + live migration tools (Vitess, Citus)</td></tr>
+<tr><td>Auto-increment IDs collide</td><td>Each shard's auto-increment starts at 1</td><td>Use UUIDs, Snowflake IDs, or globally unique ID service</td></tr>
+<tr><td>Transactions across shards</td><td>ACID transactions don't span shards</td><td>Use distributed transactions (2PC) or design around it (sagas)</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Sharding is a last-resort scaling strategy — exhaust all other options first (indexing, caching, read replicas, connection pooling, query optimization). When you do need sharding, use key-based sharding with consistent hashing for the most flexibility. For PostgreSQL, consider Citus (distributed PostgreSQL) or Vitess (MySQL) as battle-tested sharding solutions before building your own. See also: <a href="/en/tech/postgresql-query-optimization.html">PostgreSQL Query Optimization</a> and <a href="/en/tech/system-design-interview-guide.html">System Design Interview Guide</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

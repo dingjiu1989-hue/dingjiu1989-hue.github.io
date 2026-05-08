@@ -8828,6 +8828,1082 @@ def verify_webhook(secret: str, signature: str, raw_body: bytes) -> bool:
 <p><strong>Bottom line:</strong> A production-grade webhook system needs four things: HMAC signatures (security), idempotency keys (reliability), exponential backoff retries (deliverability), and a delivery log (debugging). The most common mistake is processing webhooks synchronously in the request handler — always accept, enqueue, and return 200 immediately. See also: <a href="/en/tech/rate-limiting-strategies.html">Rate Limiting Strategies</a> and <a href="/en/tech/ci-cd-pipeline-guide.html">CI/CD Pipeline Guide</a>.</p>
 '''
 
+BODIES['ai-chatbot-build-guide'] = '''
+<p>Building an AI chatbot that actually works — one that stays on topic, doesn't hallucinate, and can take real actions — requires more than wrapping a ChatGPT API call. In 2026, production chatbots combine RAG (for accurate information), function calling (for taking actions), and careful prompt engineering (for personality and guardrails). This guide walks through the complete architecture.</p>
+
+<h2>AI Chatbot Architecture</h2>
+<pre><code>User Message
+    → 1. Intent Classification (what does the user want?)
+         ├─ Question → RAG pipeline
+         ├─ Action → Function calling
+         ├─ Complaint → Escalation
+         └─ Chitchat → Direct LLM response
+    → 2. Context Assembly
+         ├─ System prompt (personality, rules)
+         ├─ Conversation history (last N messages)
+         ├─ Retrieved documents (if RAG)
+         └─ User profile (name, plan, history)
+    → 3. LLM Generation (with guardrails)
+    → 4. Post-Processing
+         ├─ Content filter (toxicity, PII, off-topic)
+         ├─ Citation insertion (link to sources)
+         └─ Formatting (markdown, links)
+    → 5. Response to User</code></pre>
+
+<h2>Chatbot Feature Comparison</h2>
+<table>
+<tr><th>Component</th><th>Simple (v0)</th><th>Standard (v1)</th><th>Advanced (v2)</th></tr>
+<tr><td>Knowledge</td><td>System prompt only</td><td>RAG (single source, e.g., docs)</td><td>Multi-source RAG + live data via function calling</td></tr>
+<tr><td>Actions</td><td>None (text only)</td><td>Basic function calling (lookup, search)</td><td>Transactional function calling (create tickets, process refunds)</td></tr>
+<tr><td>Memory</td><td>Conversation only (lost on refresh)</td><td>Session persistence + user profile</td><td>Long-term memory (vector DB of past conversations)</td></tr>
+<tr><td>Guardrails</td><td>None</td><td>Content safety filter (toxicity, PII)</td><td>LLM-as-guard + content filter + human escalation path</td></tr>
+<tr><td>Analytics</td><td>None</td><td>Basic (conversation count, satisfaction)</td><td>Full analytics (resolution rate, topic clustering, cost tracking)</td></tr>
+</table>
+
+<h2>RAG for Chatbots: Production Tips</h2>
+<ol>
+<li><strong>Citation is non-negotiable:</strong> Every factual claim must link to a source. Users trust chatbots more when they can verify the answer.</li>
+<li><strong>"I don't know" is better than hallucinating:</strong> Set a confidence threshold. If no retrieved document has similarity > 0.75, the chatbot should say "I don't have that information" rather than guessing.</li>
+<li><strong>Hybrid retrieval (keyword + vector):</strong> Users ask precise questions ("What is the refund policy for international orders?") that vector search alone may miss. BM25 keyword matching catches exact terms.</li>
+<li><strong>Conversation context matters:</strong> "What about for Europe?" → must expand to "What is the refund policy for international orders in Europe?" using conversation history.</li>
+</ol>
+
+<h2>Function Calling for Chatbots: What to Enable</h2>
+<table>
+<tr><th>Function</th><th>Example User Query</th><th>Security Consideration</th></tr>
+<tr><td>Search knowledge base</td><td>"What is your return policy?"</td><td>Rate limit, ensure results are public</td></tr>
+<tr><td>Look up user account</td><td>"Where is my order #12345?"</td><td>Verify user identity before looking up</td></tr>
+<tr><td>Check inventory</td><td>"Is the blue XL in stock?"</td><td>Read-only, safe</td></tr>
+<tr><td>Create support ticket</td><td>"I want to return my order"</td><td>Rate limit, verify user, idempotency key</td></tr>
+<tr><td>Process refund (advanced)</td><td>"Refund my last order"</td><td>Human approval required, amount limits</td></tr>
+</table>
+
+<h2>Cost Optimization for Chatbots</h2>
+<table>
+<tr><th>Strategy</th><th>Savings</th><th>Implementation</th></tr>
+<tr><td>Intent routing: simple questions → Haiku, complex → Sonnet</td><td>50-70%</td><td>Classify query complexity before LLM call</td></tr>
+<tr><td>FAQ caching: common questions → cached answer</td><td>30-50%</td><td>Semantic cache (embedding similarity > 0.95)</td></tr>
+<tr><td>Prompt caching: system prompt + few-shot examples cached</td><td>50-90%</td><td>Static prefix at the start of every prompt</td></tr>
+<tr><td>Truncate conversation history</td><td>20-30%</td><td>Summarize old messages instead of keeping all</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Start with a simple RAG chatbot (docs → embeddings → LLM) and add complexity incrementally. The biggest mistakes: (1) not implementing "I don't know" handling — chatbots that hallucinate destroy user trust; (2) not tracking what users actually ask — analytics reveal the gaps in your knowledge base; (3) not having a human escalation path — for customer support, 5% of queries should go to a human. See also: <a href="/en/ai/rag-best-practices.html">RAG Best Practices</a> and <a href="/en/ai/function-calling-guide.html">Function Calling Guide</a>.</p>
+'''
+
+BODIES['api-versioning-strategies'] = '''
+<p>API versioning is one of those decisions that seems trivial — "just add /v2/" — until you have 50 clients on v1, 30 on v2, and a breaking change you need to roll out. The versioning strategy you choose affects every client integration, every SDK, and every internal team that depends on your API. This guide compares every major API versioning approach and helps you pick the least painful one.</p>
+
+<h2>API Versioning Strategies Compared</h2>
+<table>
+<tr><th>Strategy</th><th>Example</th><th>Pros</th><th>Cons</th><th>Best For</th></tr>
+<tr><td>URI Path</td><td>/api/v2/users</td><td>Most visible, easy to test, easy to route, cache-friendly</td><td>URL changes; "v2" in URL forever; URL pollution</td><td>Public APIs, REST APIs, external consumers</td></tr>
+<tr><td>Accept Header (Content Negotiation)</td><td>Accept: application/vnd.api+json;version=2</td><td>Clean URLs, no URL versioning, REST purist-friendly</td><td>Harder to test (curl -H), harder to cache (CDN), invisible</td><td>Internal APIs, REST purists, when URL cleanliness matters</td></tr>
+<tr><td>Query Parameter</td><td>/api/users?version=2</td><td>Easy default (no version = latest), simple to test</td><td>Easy to forget, cache key complexity, pollutes parameters</td><td>Simple APIs, internal tools, when path versioning is blocked</td></tr>
+<tr><td>Custom Header</td><td>X-API-Version: 2026-05-01</td><td>Clean URLs, date-based (intuitive), easy to deprecate</td><td>Invisible, hard to discover, hard to test, CDN issues</td><td>Stripe-style date-based versioning, API gateways</td></tr>
+<tr><td>Hostname / Subdomain</td><td>v2.api.example.com</td><td>Complete isolation, can run separate services</td><td>DNS management, SSL certificates, infrastructure complexity</td><td>Major breaking changes, completely different implementations</td></tr>
+</table>
+
+<h2>Date-Based vs Semantic Versioning</h2>
+<table>
+<tr><th>Approach</th><th>Example</th><th>Best For</th><th>Pioneered By</th></tr>
+<tr><td>Date-Based (Calendar Versioning)</td><td>2026-05-01</td><td>APIs that evolve continuously with many small changes</td><td>Stripe, Twilio, AWS</td></tr>
+<tr><td>Semantic (Major.Minor)</td><td>v1, v2, v3</td><td>APIs with clear, infrequent major breaking changes</td><td>GitHub, most REST APIs</td></tr>
+<tr><td>Rolling (No Version)</td><td>No version identifier</td><td>Internal APIs, GraphQL (deprecation instead of versioning)</td><td>GraphQL, internal services</td></tr>
+</table>
+
+<h2>Stripe's Versioning Model (The Gold Standard)</h2>
+<pre><code># Stripe's approach: date-based versioning via custom header
+# Stripe-Version: 2026-05-01
+
+# Key principles:
+# 1. Every API request is pinned to a specific version date
+# 2. New features are added without breaking existing code
+# 3. Breaking changes: old behavior is maintained for old versions
+# 4. Upgrading is explicit: change the date, test, deploy
+# 5. Old versions are supported for a long time (years)
+
+# Why this works:
+# - No URL changes ever
+# - Clients control when they upgrade
+# - Backward compatibility is the API's responsibility, not the client's
+# - Can ship changes daily without breaking anyone</code></pre>
+
+<h2>How to Deprecate an API Version Without Making Enemies</h2>
+<table>
+<tr><th>Step</th><th>What to Do</th><th>Timeline</th></tr>
+<tr><td>1. Announce</td><td>Email all users of the old version, add deprecation header (Sunset, Deprecation)</td><td>6-12 months before shutdown</td></tr>
+<tr><td>2. Monitor</td><td>Track who is still on old version, reach out personally to high-usage clients</td><td>Ongoing</td></tr>
+<tr><td>3. Warn</td><td>Add deprecation warnings in API responses, documentation banners</td><td>3-6 months before shutdown</td></tr>
+<tr><td>4. Rate Limit</td><td>Slow down old version responses (add 100ms latency, then 500ms)</td><td>1-3 months before shutdown</td></tr>
+<tr><td>5. Shut Down</td><td>Return 410 Gone with clear error message + upgrade link</td><td>After announced date</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> For public REST APIs, URI path versioning (/v2/) is the most practical — it is visible, easy to test, and works with all HTTP tooling. For developer-focused APIs, date-based versioning (Stripe model) is more elegant but requires more infrastructure. The key is not the format — it is maintaining backward compatibility and giving clients 6-12 months to migrate when you do break things. See also: <a href="/en/tech/rest-api-best-practices.html">REST API Best Practices</a> and <a href="/en/tech/api-design-patterns.html">API Design Patterns</a>.</p>
+'''
+
+BODIES['best-email-api-services'] = '''
+<p>Email is still the backbone of internet communication — transactional emails (password resets, confirmations, receipts) and marketing emails (newsletters, onboarding, drip campaigns) power most web apps. Choosing the right email API affects deliverability, developer experience, and cost per thousand emails. This comparison covers the leading email services for developers.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>Resend</th><th>SendGrid (Twilio)</th><th>Postmark</th><th>Amazon SES</th></tr>
+<tr><td>Type</td><td>Modern email API for developers</td><td>Transactional + marketing email</td><td>Transactional email only</td><td>Bare-metal email sending</td></tr>
+<tr><td>Free Tier</td><td>100 emails/day</td><td>100 emails/day</td><td>100 emails (total, not /day)</td><td>62,000 emails/month (from EC2)</td></tr>
+<tr><td>Cost (per 1,000)</td><td>$0.13-$0.33</td><td>$0.12-$0.20</td><td>$0.45 (flat)</td><td>$0.10</td></tr>
+<tr><td>Deliverability</td><td>Excellent (modern infrastructure)</td><td>Good (large shared IP pools)</td><td>Excellent (fastest delivery)</td><td>Good (requires configuration)</td></tr>
+<tr><td>Setup Complexity</td><td>Very Low (minimal DNS setup)</td><td>Medium (SPF, DKIM, DMARC)</td><td>Low (guided DNS setup)</td><td>High (domain verification, SPF, DKIM, custom MAIL FROM, suppression lists)</td></tr>
+<tr><td>SDK / API Quality</td><td>Excellent (modern REST, Node/Python/Go/Ruby SDKs)</td><td>Good (REST API, legacy SMTP)</td><td>Excellent (clean REST API)</td><td>Basic (REST API, raw SMTP)</td></tr>
+<tr><td>React Email Support</td><td>Yes (first-class, built by same team)</td><td>No (HTML templates)</td><td>No (HTML + templates)</td><td>No (raw email)</td></tr>
+<tr><td>Email Builder / Templates</td><td>React Email (code-based)</td><td>Dynamic Templates (WYSIWYG + code)</td><td>Templates (code-based)</td><td>None (send raw HTML)</td></tr>
+<tr><td>Analytics / Tracking</td><td>Opens, clicks, bounces, complaints</td><td>Opens, clicks, bounces, unsubscribe</td><td>Opens, clicks, bounces, spam score</td><td>Opens, clicks (via SNS + custom code)</td></tr>
+<tr><td>Best For</td><td>Modern dev stack, React Email users</td><td>Marketing + transactional combined</td><td>Transactional email, fast delivery</td><td>High volume, lowest cost</td></tr>
+</table>
+
+<h2>When to Choose Each Service</h2>
+<p><strong>Resend — Best for:</strong> Modern JavaScript/TypeScript stacks. Resend is the newest entrant with the best developer experience — built by the React Email team, first-class React Email support, and a clean API. <strong>Weak spot:</strong> Newer (fewer production track records); free tier is limited (100/day).</p>
+
+<p><strong>SendGrid — Best for:</strong> Teams that need both transactional and marketing email in one platform. SendGrid's template builder and marketing automation are the main differentiators. <strong>Weak spot:</strong> Deliverability can be inconsistent on shared IPs; acquired by Twilio, focus has shifted.</p>
+
+<p><strong>Postmark — Best for:</strong> Transactional email where speed and deliverability are critical. Postmark is famously fast (most emails delivered in <5 seconds) and has excellent deliverability. <strong>Weak spot:</strong> No marketing email features; more expensive per email ($0.45/1K).</p>
+
+<p><strong>Amazon SES — Best for:</strong> High-volume sending where cost is the primary concern. SES is 10x cheaper than competitors — $0.10 per 1,000 emails. <strong>Weak spot:</strong> Steep setup (domain verification, SPF, DKIM, DMARC, suppression lists all manual); no templates; raw API.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Service</th><th>Why</th></tr>
+<tr><td>Modern JS/TS project, want best DX</td><td>Resend</td><td>Best API design, React Email integration</td></tr>
+<tr><td>Marketing + transactional combined</td><td>SendGrid</td><td>Templates + marketing automation built in</td></tr>
+<tr><td>Transactional only, need fast reliable delivery</td><td>Postmark</td><td>Fastest delivery, best deliverability</td></tr>
+<tr><td>High volume (>100K/month), cost matters</td><td>Amazon SES</td><td>10x cheaper, reliable at scale</td></tr>
+<tr><td>Newsletter or marketing automation</td><td>SendGrid or dedicated ESP</td><td>SendGrid for simplicity, dedicated ESP for advanced</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Resend is the best default for new projects — modern API, React Email support, and great DX. Postmark wins when deliverability is the #1 priority. SES is the cost leader for high volume. SendGrid bridges transactional and marketing — useful if you need both but don't want two vendors. See also: <a href="/en/tools/best-log-management-tools.html">Best Log Management Tools</a> and <a href="/en/tech/webhook-implementation-guide.html">Webhook Implementation Guide</a>.</p>
+'''
+
+BODIES['best-error-tracking-tools'] = '''
+<p>Every production application has bugs. The difference between good and great teams is how fast they find and fix them. Error tracking tools have evolved from simple log viewers into full observability platforms with session replay, AI-powered grouping, and automated issue triage. This comparison helps you pick the right error monitoring tool for your stack and team size.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>Sentry</th><th>Datadog APM</th><th>LogRocket</th><th>Bugsnag</th></tr>
+<tr><td>Type</td><td>Error tracking + performance</td><td>Full observability (APM + logs + infra)</td><td>Session replay + error tracking</td><td>Application stability monitoring</td></tr>
+<tr><td>Language Support</td><td>30+ platforms (JS, Python, Java, Go, etc.)</td><td>10+ languages</td><td>JavaScript, React, Vue, Angular</td><td>20+ platforms</td></tr>
+<tr><td>Session Replay</td><td>Yes (Sentry Replay)</td><td>Yes (Session Replay)</td><td>Yes (core feature)</td><td>No</td></tr>
+<tr><td>Error Grouping</td><td>Excellent (fingerprint-based + AI)</td><td>Good (pattern-based)</td><td>Good (correlated with replays)</td><td>Good (custom grouping)</td></tr>
+<tr><td>Performance Monitoring</td><td>Yes (traces + spans)</td><td>Yes (best-in-class APM)</td><td>Yes (frontend-focused)</td><td>Limited (basic timing)</td></tr>
+<tr><td>Alerting</td><td>Flexible (per-project, per-issue)</td><td>Very powerful (ML-based anomaly)</td><td>Basic (error rate thresholds)</td><td>Good (per-release, spike detection)</td></tr>
+<tr><td>Self-Hosted</td><td>Yes (open source, self-hosted option)</td><td>No (SaaS only)</td><td>No (SaaS only)</td><td>No (SaaS only)</td></tr>
+<tr><td>Pricing</td><td>Free (5K errors/mo), $26/mo Team</td><td>$31/host/mo (APM)</td><td>Free (1K sessions), $69/mo Team</td><td>Free (7.5K errors/mo), $59/mo Standard</td></tr>
+<tr><td>Best For</td><td>Most teams — best all-around</td><td>Enterprise with full observability needs</td><td>Frontend-heavy apps needing replay</td><td>Mobile app stability monitoring</td></tr>
+</table>
+
+<h2>When to Choose Each Tool</h2>
+<p><strong>Sentry — Best for:</strong> 90% of teams. Sentry is the default error tracking tool — great SDK coverage, fair pricing, open source option, and the best balance of features. <strong>Weak spot:</strong> Can get expensive at scale; session replay is newer and less mature than LogRocket.</p>
+
+<p><strong>Datadog APM — Best for:</strong> Teams already using Datadog for infrastructure monitoring, logs, or APM. The unified platform eliminates context switching. <strong>Weak spot:</strong> Expensive; error tracking is one feature in a much larger (and pricier) platform.</p>
+
+<p><strong>LogRocket — Best for:</strong> Frontend-heavy applications where seeing what the user saw is critical for debugging. Session replay is core to LogRocket's UX. <strong>Weak spot:</strong> JavaScript-only; limited backend error tracking; more expensive.</p>
+
+<p><strong>Bugsnag — Best for:</strong> Mobile applications (iOS/Android) where stability monitoring and release health are the top priorities. <strong>Weak spot:</strong> Less mature web/frontend support; no session replay.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Tool</th><th>Why</th></tr>
+<tr><td>General web app, want open source option</td><td>Sentry</td><td>Best all-around, self-hosted available</td></tr>
+<tr><td>Already use Datadog for infra/APM</td><td>Datadog APM</td><td>Unified platform, single vendor</td></tr>
+<tr><td>Frontend-heavy (React/Vue), need session replay</td><td>LogRocket</td><td>Best session replay, frontend-focused</td></tr>
+<tr><td>Mobile-first app (iOS/Android)</td><td>Bugsnag</td><td>Best mobile stability monitoring</td></tr>
+<tr><td>Cost-sensitive small team</td><td>Sentry (self-hosted)</td><td>Free and open source</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Start with Sentry — it is free for small teams, open source, and covers 90% of use cases. Add LogRocket if you need session replay for frontend debugging. Only consider Datadog if you already use their ecosystem. See also: <a href="/en/tools/best-log-management-tools.html">Best Log Management Tools</a> and <a href="/en/tools/best-monitoring-tools.html">Best Monitoring Tools</a>.</p>
+'''
+
+BODIES['best-feature-flag-tools'] = '''
+<p>Feature flags (or feature toggles) have evolved from simple if-statements into sophisticated experimentation platforms. In 2026, feature flags power gradual rollouts, A/B testing, kill switches, and trunk-based development. This comparison covers the leading feature flag tools and how to choose the right one for your deployment strategy.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>LaunchDarkly</th><th>Split</th><th>Flagsmith</th><th>PostHog</th></tr>
+<tr><td>Type</td><td>Enterprise feature management</td><td>Feature experimentation platform</td><td>Open source feature flags</td><td>Product analytics + feature flags</td></tr>
+<tr><td>Open Source</td><td>No</td><td>No</td><td>Yes (self-hosted free)</td><td>Yes (self-hosted free)</td></tr>
+<tr><td>SDK Languages</td><td>20+ (JS, Python, Java, Go, .NET, etc.)</td><td>15+ languages</td><td>10+ languages</td><td>JS, Python, Go, Ruby, Node</td></tr>
+<tr><td>Targeting Rules</td><td>Most powerful (custom attributes, % rollout, segments)</td><td>Strong (custom attributes, % rollout)</td><td>Good (custom attributes, % rollout)</td><td>Good (person properties, cohorts)</td></tr>
+<tr><td>A/B Testing</td><td>Yes (experimentation add-on)</td><td>Yes (core feature)</td><td>Basic (multivariate)</td><td>Yes (core feature, integrated with analytics)</td></tr>
+<tr><td>Instant Flag Evaluation</td><td>Yes (streaming updates)</td><td>Yes (streaming)</td><td>Yes (streaming)</td><td>Yes (local evaluation)</td></tr>
+<tr><td>Change Log / Audit</td><td>Yes (full audit trail)</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+<tr><td>Pricing</td><td>Starts at $12/user/mo (Team)</td><td>Starts at $33/user/mo</td><td>Free (self-hosted), $45/mo Cloud</td><td>Free (1M events), $0.00031/event</td></tr>
+<tr><td>Best For</td><td>Enterprise, complex flag workflows</td><td>Experimentation-heavy teams</td><td>Cost-conscious teams, open source</td><td>Product analytics + flagging combined</td></tr>
+</table>
+
+<h2>Feature Flag Use Cases</h2>
+<table>
+<tr><th>Use Case</th><th>Pattern</th><th>Example</th></tr>
+<tr><td>Gradual Rollout</td><td>Ramp from 1% to 100% over hours/days</td><td>New payment flow: 1% → 10% → 50% → 100%</td></tr>
+<tr><td>Kill Switch</td><td>Instant off switch for any feature</td><td>Disable AI chatbot if API costs spike</td></tr>
+<tr><td>A/B Testing</td><td>Randomly assign users to variant A or B</td><td>Test new pricing page design vs old</td></tr>
+<tr><td>Beta Access</td><td>Enable feature only for beta users</td><td>Allow beta testers to access new features early</td></tr>
+<tr><td>Ops Toggles</td><td>Control operational behavior</td><td>Switch to read-only mode during database maintenance</td></tr>
+<tr><td>Permission Flags</td><td>Gate features by plan/tier</td><td>Enterprise plan gets SSO, Pro gets 2FA</td></tr>
+</table>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Tool</th><th>Why</th></tr>
+<tr><td>Enterprise, complex flag workflows, compliance</td><td>LaunchDarkly</td><td>Most powerful targeting, full audit trail</td></tr>
+<tr><td>Experimentation and A/B testing focused</td><td>Split</td><td>Best-in-class experimentation and metrics</td></tr>
+<tr><td>Open source, self-hosted, cost matters</td><td>Flagsmith</td><td>Free self-hosted, good feature coverage</td></tr>
+<tr><td>Already use PostHog for product analytics</td><td>PostHog</td><td>Flags + analytics in one platform</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Feature flags are now essential infrastructure — not just for experiments, but for safe deployments and operational control. Flagsmith is the best entry point (free, open source, solid SDKs). LaunchDarkly is worth the cost for enterprises with complex targeting needs. PostHog is ideal if you want flags and analytics in one. See also: <a href="/en/tech/ci-cd-pipeline-guide.html">CI/CD Pipeline Guide</a> and <a href="/en/tools/best-error-tracking-tools.html">Best Error Tracking Tools</a>.</p>
+'''
+
+BODIES['best-headless-cms-platforms'] = '''
+<p>Headless CMS platforms decouple content management from the presentation layer — your editors get a nice UI to write posts, and your developers get clean APIs to fetch that content anywhere. In 2026, the headless CMS market has consolidated around a few clear winners, each with a distinct philosophy. This comparison helps you pick the right content backend for your project.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>Strapi</th><th>Sanity</th><th>Contentful</th><th>Payload CMS</th></tr>
+<tr><td>Type</td><td>Open source, self-hosted</td><td>Real-time, hosted platform</td><td>Enterprise SaaS platform</td><td>Open source, TypeScript-native</td></tr>
+<tr><td>Language</td><td>Node.js</td><td>Node.js (backed by GROQ)</td><td>SaaS (multi-tenant)</td><td>Node.js (TypeScript)</td></tr>
+<tr><td>API Style</td><td>REST + GraphQL</td><td>GROQ (query language) + GraphQL</td><td>REST + GraphQL</td><td>REST + GraphQL + Local API</td></tr>
+<tr><td>Content Modeling</td><td>Admin UI + code-based</td><td>Code-based (schemas in JS/TS)</td><td>Web UI (content model builder)</td><td>Code-based (TypeScript schemas)</td></tr>
+<tr><td>Free Tier</td><td>Fully free (self-hosted)</td><td>Free (up to 100K records, 3 users)</td><td>Free (up to 1M records, 5 users)</td><td>Fully free (self-hosted, MIT license)</td></tr>
+<tr><td>Self-Hosted</td><td>Yes (core feature)</td><td>No (SaaS only)</td><td>No (SaaS only)</td><td>Yes (core feature)</td></tr>
+<tr><td>Database</td><td>PostgreSQL, MySQL, SQLite, MariaDB</td><td>Managed (proprietary)</td><td>Managed (proprietary)</td><td>PostgreSQL + MongoDB (both supported)</td></tr>
+<tr><td>Real-Time Collaboration</td><td>No</td><td>Yes (real-time editing)</td><td>Limited</td><td>No (roadmap)</td></tr>
+<tr><td>Localization</td><td>Built-in (i18n plugin)</td><td>Built-in (excellent i18n)</td><td>Built-in (locales)</td><td>Built-in (localization API)</td></tr>
+<tr><td>Image/Media</td><td>Built-in media library</td><td>Sanity Image (on-the-fly transforms)</td><td>Built-in media + Images API</td><td>Built-in upload + external storage</td></tr>
+</table>
+
+<h2>When to Choose Each Platform</h2>
+<p><strong>Strapi — Best for:</strong> Teams that want full control of their CMS infrastructure. Strapi is the most popular open source headless CMS — self-host on your own server, customize everything, and never pay a platform fee. <strong>Weak spot:</strong> Upgrades between major versions can be painful; admin UI customization is limited without plugin development.</p>
+
+<p><strong>Sanity — Best for:</strong> Teams that value real-time collaboration and a developer-first content modeling experience. Sanity's GROQ query language is more powerful than GraphQL for content queries. <strong>Weak spot:</strong> SaaS-only (no self-hosting); GROQ has a learning curve; gets expensive at scale.</p>
+
+<p><strong>Contentful — Best for:</strong> Enterprise teams that need a polished, reliable CMS with SLAs and dedicated support. Contentful is the most mature SaaS headless CMS. <strong>Weak spot:</strong> Expensive at scale ($489+/mo for Team plan); content modeling via web UI is less developer-friendly.</p>
+
+<p><strong>Payload CMS — Best for:</strong> TypeScript developers who want a code-first CMS with the best developer experience. Payload is the newcomer with the strongest DX — everything in TypeScript, MongoDB + Postgres support, and a clean local API. <strong>Weak spot:</strong> Newer and smaller community than Strapi; fewer plugins.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Platform</th><th>Why</th></tr>
+<tr><td>Self-hosted, open source, full control</td><td>Strapi or Payload</td><td>Strapi for mature ecosystem, Payload for TypeScript DX</td></tr>
+<tr><td>Real-time collaboration for editorial teams</td><td>Sanity</td><td>Only platform with real-time editing</td></tr>
+<tr><td>Enterprise, managed, compliance requirements</td><td>Contentful</td><td>Most mature SaaS, best SLAs</td></tr>
+<tr><td>TypeScript-first, code-first CMS</td><td>Payload CMS</td><td>Best TypeScript DX, local API</td></tr>
+<tr><td>Marketing site + blog, simple needs</td><td>Strapi (self-hosted)</td><td>Free, good enough for most content sites</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Strapi is the safe default for self-hosted projects — it is free, mature, and has the largest community. Sanity is the pick for teams that want the best editing experience and real-time collaboration. Payload CMS is the rising star for TypeScript-native teams. Contentful is the enterprise choice when you need a managed platform. See also: <a href="/en/tools/best-static-site-generators-2026.html">Best Static Site Generators</a> and <a href="/en/compare/astro-vs-gatsby-vs-hugo.html">Astro vs Gatsby vs Hugo</a>.</p>
+'''
+
+BODIES['best-log-management-tools'] = '''
+<p>Logs are your application's black box — they tell you what happened, when, and why. Modern log management tools go beyond grep to offer structured search, real-time tailing, alerting, and long-term retention. This comparison covers the best log aggregation platforms for developers and operations teams at every scale.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>Datadog Logs</th><th>Grafana Loki</th><th>Better Stack</th><th>Axiom</th></tr>
+<tr><td>Type</td><td>Full observability platform</td><td>Open source, Grafana-native</td><td>Dev-first log management</td><td>Cloud-native, event-based logging</td></tr>
+<tr><td>Query Language</td><td>Datadog Query Language (DQL)</td><td>LogQL (PromQL-inspired)</td><td>SQL-like + full-text search</td><td>APL (Axiom Processing Language)</td></tr>
+<tr><td>Live Tail</td><td>Yes</td><td>Yes (via Grafana)</td><td>Yes (excellent live tail)</td><td>Yes (streaming)</td></tr>
+<tr><td>Alerting</td><td>Excellent (ML-based anomaly detection)</td><td>Good (via Grafana Alerting)</td><td>Good (log-based alerts)</td><td>Good (query-based alerts)</td></tr>
+<tr><td>Retention</td><td>Configurable (3-15 days standard, more $$)</td><td>Configurable (object storage backed)</td><td>Configurable (3-30 days)</td><td>Configurable (default 30 days)</td></tr>
+<tr><td>Kubernetes Integration</td><td>Excellent (auto-discovery)</td><td>Excellent (native, label-based)</td><td>Good (K8s agent)</td><td>Good (K8s operator)</td></tr>
+<tr><td>Pricing Model</td><td>Per GB ingested + per host</td><td>Self-hosted: free (your infra) / Cloud: per GB</td><td>Per GB ingested</td><td>Per GB ingested</td></tr>
+<tr><td>Approx. Cost (100GB/mo)</td><td>~$150-300/mo</td><td>$0 (self-hosted) / ~$50-100/mo Cloud</td><td>~$60-120/mo</td><td>~$50-150/mo</td></tr>
+<tr><td>Best For</td><td>Enterprise, unified observability</td><td>K8s-native, Grafana users, self-hosting</td><td>Small-medium teams, simplicity</td><td>High-cardinality data, event-driven</td></tr>
+</table>
+
+<h2>When to Choose Each Tool</h2>
+<p><strong>Datadog Logs — Best for:</strong> Large enterprises that want one platform for metrics, traces, and logs. Datadog's unification means you can jump from a metric spike to relevant logs in one click. <strong>Weak spot:</strong> Expensive at scale; complex pricing; vendor lock-in.</p>
+
+<p><strong>Grafana Loki — Best for:</strong> Kubernetes-native teams that already use Grafana and Prometheus. Loki indexes only labels (not full text), making it much cheaper to run — but search is label-first, then grep. <strong>Weak spot:</strong> Full-text search is slower than competitors; query language has a learning curve.</p>
+
+<p><strong>Better Stack — Best for:</strong> Small to medium teams that want beautiful UI and straightforward setup. Better Stack (formerly Logtail) focuses on developer experience — the live tail and SQL-like querying are genuinely pleasant. <strong>Weak spot:</strong> Smaller than Datadog/Loki; fewer integrations; less suited for massive scale.</p>
+
+<p><strong>Axiom — Best for:</strong> Teams with high-cardinality event data (thousands of distinct event types) who need fast querying across dimensions. Axiom is event-based, not line-based — each log event is a structured object with typed fields. <strong>Weak spot:</strong> Newer entrant; smaller ecosystem; different paradigm than traditional log tools.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Tool</th><th>Why</th></tr>
+<tr><td>Enterprise, need unified metrics + traces + logs</td><td>Datadog Logs</td><td>All-in-one observability</td></tr>
+<tr><td>Kubernetes-native, already use Grafana</td><td>Grafana Loki</td><td>Native K8s integration, Grafana ecosystem</td></tr>
+<tr><td>Small-medium team, want best UX</td><td>Better Stack</td><td>Best developer experience, fair pricing</td></tr>
+<tr><td>High-cardinality event data, analytics-heavy</td><td>Axiom</td><td>Structured event model, fast aggregation</td></tr>
+<tr><td>Budget-constrained, self-hosting capable</td><td>Grafana Loki</td><td>Free and open source, object storage backed</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Grafana Loki is the best value — free if self-hosted, K8s-native, and integrates with the Grafana ecosystem you likely already use. Better Stack is the best experience for smaller teams. Datadog wins for enterprise unification. Start with Loki (free), move to Better Stack if you need better UX, and to Datadog when you need full observability. See also: <a href="/en/tools/best-monitoring-tools.html">Best Monitoring Tools</a> and <a href="/en/tools/best-error-tracking-tools.html">Best Error Tracking Tools</a>.</p>
+'''
+
+BODIES['best-scheduling-cron-tools'] = '''
+<p>Every application eventually needs scheduled tasks — sending weekly reports, cleaning up expired data, processing batch jobs. In 2026, job scheduling has evolved beyond cron into a rich ecosystem of durable execution platforms that handle retries, idempotency, and observability. This comparison covers modern scheduling tools for every complexity level.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>Inngest</th><th>Trigger.dev</th><th>Upstash QStash</th><th>Apache Airflow</th></tr>
+<tr><td>Type</td><td>Durable execution platform</td><td>Background jobs for Next.js/Node</td><td>Serverless message queue + scheduler</td><td>Workflow orchestration (DAGs)</td></tr>
+<tr><td>Best For</td><td>Event-driven workflows, durable functions</td><td>JavaScript/TypeScript background jobs</td><td>Serverless scheduling, HTTP-triggered jobs</td><td>Complex data pipelines, ETL workflows</td></tr>
+<tr><td>Language</td><td>JS/TS, Python, Go (SDK-based)</td><td>JavaScript/TypeScript</td><td>HTTP (language-agnostic)</td><td>Python (DAGs as Python code)</td></tr>
+<tr><td>Retries</td><td>Built-in (automatic, exponential backoff)</td><td>Built-in (customizable retry policies)</td><td>Built-in (at-least-once delivery)</td><td>Built-in (retry on failure)</td></tr>
+<tr><td>Scheduling</td><td>Event-driven + cron + delayed</td><td>Cron + event-driven + delayed</td><td>Cron + delayed messages</td><td>Cron + complex scheduling (timetable)</td></tr>
+<tr><td>Observability</td><td>Excellent (built-in dashboard, tracing)</td><td>Good (dashboard, logs)</td><td>Basic (logs, metrics)</td><td>Excellent (Airflow UI, lineage, DAG visualization)</td></tr>
+<tr><td>Self-Hosted</td><td>Yes (open source, BSL license)</td><td>Yes (open source, MIT)</td><td>No (SaaS only)</td><td>Yes (open source, Apache 2.0)</td></tr>
+<tr><td>Pricing (Free Tier)</td><td>$0 (up to 1M steps/mo)</td><td>$0 (up to 100 jobs/mo)</td><td>$0 (up to 500K messages/mo)</td><td>Free (self-hosted, your infra)</td></tr>
+<tr><td>Complexity</td><td>Low-Medium</td><td>Low</td><td>Very Low</td><td>High</td></tr>
+</table>
+
+<h2>When to Choose Each Tool</h2>
+<p><strong>Inngest — Best for:</strong> Event-driven applications where you need durable execution — functions that survive crashes, automatically retry, and are replayable. Inngest's step functions approach makes complex workflows manageable. <strong>Weak spot:</strong> BSL license (not fully open source); Go/Python SDKs are newer than JS.</p>
+
+<p><strong>Trigger.dev — Best for:</strong> JavaScript/TypeScript projects that need background jobs with minimal infrastructure. Trigger.dev is designed for the modern JS ecosystem — deploy background jobs alongside your Next.js/Remix/Astro app. <strong>Weak spot:</strong> JS/TS only; smaller ecosystem than Inngest.</p>
+
+<p><strong>Upstash QStash — Best for:</strong> Simple HTTP-based scheduling — schedule an HTTP callback at a future time. QStash is the simplest tool in this list: no SDK required, just POST a JSON payload with a schedule. <strong>Weak spot:</strong> No workflow/DAG support; limited observability; thin feature set compared to Inngest/Trigger.dev.</p>
+
+<p><strong>Apache Airflow — Best for:</strong> Complex data engineering pipelines with dependencies. Airflow is the industry standard for ETL — if you have a DAG of tasks that must run in a specific order, Airflow is the right tool. <strong>Weak spot:</strong> Heavy infrastructure (needs scheduler, web server, workers, database); overkill for simple cron jobs.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Tool</th><th>Why</th></tr>
+<tr><td>Event-driven workflows with complex steps</td><td>Inngest</td><td>Best durable execution model</td></tr>
+<tr><td>JS/TS background jobs, minimal setup</td><td>Trigger.dev</td><td>Simplest setup for JS ecosystem</td></tr>
+<tr><td>Simple HTTP callbacks, serverless</td><td>QStash</td><td>Lightweight, no SDK needed</td></tr>
+<tr><td>ETL pipelines, data engineering</td><td>Airflow</td><td>Industry standard for DAGs</td></tr>
+<tr><td>Simple cron jobs, low volume</td><td>QStash or Trigger.dev</td><td>Lowest complexity, cheapest</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> For most web applications, Trigger.dev or Inngest is the modern replacement for cron. Trigger.dev is simpler for JS-only stacks; Inngest is more powerful for complex workflows. QStash is the simplest option — just HTTP and a schedule. Airflow is the pick for data engineering pipelines. See also: <a href="/en/tech/event-driven-architecture-guide.html">Event-Driven Architecture Guide</a> and <a href="/en/tech/ci-cd-pipeline-guide.html">CI/CD Pipeline Guide</a>.</p>
+'''
+
+BODIES['best-uptime-monitoring-tools'] = '''
+<p>Downtime costs money — for e-commerce, every minute of downtime can cost thousands. Uptime monitoring tools proactively check your website and APIs from multiple global locations, alerting you the moment something goes down. This comparison covers the best uptime monitoring services for developers, from simple ping checks to advanced synthetic monitoring.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>Better Uptime</th><th>Pingdom</th><th>UptimeRobot</th><th>Checkly</th></tr>
+<tr><td>Check Types</td><td>HTTP, ping, SSL, TCP, API</td><td>HTTP, ping, SSL, transaction</td><td>HTTP, ping, SSL, port, keyword</td><td>HTTP, browser (Playwright), API</td></tr>
+<tr><td>Check Frequency (Free)</td><td>3 minutes</td><td>1 minute (paid only)</td><td>5 minutes</td><td>10 minutes (browser), 1 min (API)</td></tr>
+<tr><td>Global Locations</td><td>10+ locations</td><td>100+ locations</td><td>30+ locations</td><td>20+ locations</td></tr>
+<tr><td>Status Pages</td><td>Yes (included, custom domain)</td><td>Yes (separate product)</td><td>Yes (basic, paid only)</td><td>No (integrate with external)</td></tr>
+<tr><td>Alerting</td><td>Email, SMS, phone, Slack, Teams, PagerDuty</td><td>Email, SMS, Slack, PagerDuty</td><td>Email, SMS, Slack, Teams, webhook</td><td>Email, Slack, PagerDuty, webhook</td></tr>
+<tr><td>Synthetic Monitoring</td><td>Basic (API endpoint checks)</td><td>Transaction monitoring</td><td>No</td><td>Yes (Playwright scripts, core feature)</td></tr>
+<tr><td>Free Tier</td><td>10 monitors, 3-min checks</td><td>None (14-day trial)</td><td>50 monitors, 5-min checks</td><td>50 API checks, 5K browser runs/mo</td></tr>
+<tr><td>Paid Starting Price</td><td>$24/mo</td><td>$10/mo</td><td>$8/mo</td><td>$16/mo</td></tr>
+<tr><td>Best For</td><td>Modern teams, status pages</td><td>Enterprise, global coverage</td><td>Simple HTTP monitoring, budget</td><td>Browser-based synthetic checks</td></tr>
+</table>
+
+<h2>Uptime Monitoring Features That Matter</h2>
+<table>
+<tr><th>Feature</th><th>Why It Matters</th></tr>
+<tr><td>Multi-Region Checks</td><td>A single location may report false downtime. At least 3 locations should agree before alerting.</td></tr>
+<tr><td>SSL Certificate Monitoring</td><td>Expired SSL certificates cause "site not secure" errors. Monitor expiration with 30-day warnings.</td></tr>
+<tr><td>Keyword Assertions</td><td>Check that the response body contains expected content — a 200 OK with an error page is still downtime.</td></tr>
+<tr><td>Escalation Policies</td><td>If the primary on-call doesn't respond, automatically escalate to the next person after N minutes.</td></tr>
+<tr><td>Maintenance Windows</td><td>Suppress alerts during planned maintenance to avoid false alarms.</td></tr>
+<tr><td>Status Pages</td><td>Publicly communicate uptime and incidents to your users — builds trust.</td></tr>
+</table>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Tool</th><th>Why</th></tr>
+<tr><td>Need status page + monitoring in one</td><td>Better Uptime</td><td>Best integrated status pages, modern UI</td></tr>
+<tr><td>Enterprise, need global coverage (100+ locations)</td><td>Pingdom</td><td>Most check locations, transaction monitoring</td></tr>
+<tr><td>Budget-constrained, many endpoints to monitor</td><td>UptimeRobot</td><td>50 free monitors, cheapest paid plans</td></tr>
+<tr><td>Browser-based testing (login flows, form submits)</td><td>Checkly</td><td>Playwright-based synthetic checks, best for browser</td></tr>
+<tr><td>Simple health checks for side projects</td><td>UptimeRobot (free)</td><td>50 free monitors, good enough for most projects</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Start with UptimeRobot's free tier — 50 monitors at 5-minute intervals is generous. Upgrade to Better Uptime when you need a status page and faster checks (3-min). Add Checkly when you need browser-based synthetic monitoring for critical user flows. Pingdom is the enterprise choice with the most global check locations. See also: <a href="/en/tools/best-monitoring-tools.html">Best Monitoring Tools</a> and <a href="/en/tools/best-log-management-tools.html">Best Log Management Tools</a>.</p>
+'''
+
+BODIES['best-website-analytics-tools'] = '''
+<p>The analytics landscape has split in two: traditional tools (Google Analytics, Mixpanel) that track everything but raise privacy concerns, and privacy-first tools (Plausible, Umami, PostHog) that give you actionable data without compromising user privacy. In 2026, with GDPR enforcement and cookie consent fatigue, more developers are choosing privacy-first analytics. This comparison covers both camps.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>PostHog</th><th>Plausible</th><th>Umami</th><th>Mixpanel</th></tr>
+<tr><td>Type</td><td>Product analytics suite</td><td>Privacy-first web analytics</td><td>Open source web analytics</td><td>Product analytics platform</td></tr>
+<tr><td>Self-Hosted</td><td>Yes (open source, MIT)</td><td>Yes (self-hosted option)</td><td>Yes (open source, MIT)</td><td>No (SaaS only)</td></tr>
+<tr><td>GDPR Compliant</td><td>Yes (with self-hosting or EU cloud)</td><td>Yes (by design, no cookies)</td><td>Yes (no cookies, no PII)</td><td>Requires cookie consent</td></tr>
+<tr><td>Cookie Banner Needed</td><td>Optional (anonymous by default)</td><td>No (cookieless)</td><td>No (cookieless)</td><td>Yes (uses cookies)</td></tr>
+<tr><td>Session Replay</td><td>Yes (built-in)</td><td>No</td><td>No</td><td>Yes (add-on)</td></tr>
+<tr><td>Feature Flags</td><td>Yes (built-in)</td><td>No</td><td>No</td><td>No</td></tr>
+<tr><td>A/B Testing</td><td>Yes (built-in experimentation)</td><td>No</td><td>No</td><td>Yes (add-on)</td></tr>
+<tr><td>Event Tracking</td><td>Auto-capture + custom events</td><td>Custom events</td><td>Custom events</td><td>Custom events</td></tr>
+<tr><td>Pricing (Free)</td><td>1M events/mo free</td><td>None (paid only)</td><td>Free (self-hosted)</td><td>1K MTU free</td></tr>
+<tr><td>Paid Start</td><td>$0.00031/event after free</td><td>$9/mo (10K pageviews)</td><td>Free (self-hosted), $20/mo Cloud</td><td>$20/mo (Growth)</td></tr>
+<tr><td>Best For</td><td>Product teams, all-in-one suite</td><td>Simple, privacy-first websites</td><td>Developers who want free analytics</td><td>Advanced product analytics</td></tr>
+</table>
+
+<h2>Privacy-First vs Traditional Analytics</h2>
+<table>
+<tr><th>Factor</th><th>Privacy-First (Plausible, Umami)</th><th>Traditional (Google Analytics, Mixpanel)</th></tr>
+<tr><td>Data Collection</td><td>Aggregate only, no personal data, no cookies</td><td>Individual user tracking, cookies, device fingerprinting</td></tr>
+<tr><td>Script Size</td><td><1 KB (Plausible), <2 KB (Umami)</td><td>40+ KB (GA4), 250+ KB (Mixpanel)</td></tr>
+<tr><td>Dashboard</td><td>Simple, focused on key metrics</td><td>Complex, hundreds of reports</td></tr>
+<tr><td>User Identification</td><td>Not possible (by design)</td><td>User-level tracking, cohorts, funnels</td></tr>
+<tr><td>Data Ownership</td><td>You own the data (self-hosted option)</td><td>Vendor owns the data</td></tr>
+<tr><td>Cookie Consent</td><td>Not required (no cookies)</td><td>Required (GDPR/CCPA)</td></tr>
+</table>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Tool</th><th>Why</th></tr>
+<tr><td>Product analytics + flags + replay + A/B testing</td><td>PostHog</td><td>All-in-one suite, open source, generous free tier</td></tr>
+<tr><td>Simple website analytics, privacy-first</td><td>Plausible</td><td>Best UX, cookieless, lightweight script</td></tr>
+<tr><td>Self-hosted, completely free analytics</td><td>Umami</td><td>MIT license, easy to self-host on Railway or VPS</td></tr>
+<tr><td>Advanced user segmentation and funnel analysis</td><td>Mixpanel</td><td>Most powerful for user-level behavioral analysis</td></tr>
+<tr><td>Marketing site + blog only</td><td>Umami or Plausible</td><td>Simple, lightweight, no cookie banner needed</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> PostHog is the most impressive — product analytics, session replay, feature flags, and A/B testing in one open source platform. For simple websites, Plausible or Umami give you the key metrics without cookies or complexity. Mixpanel is still king for advanced product analytics, but the privacy-first tools cover 90% of what most teams need. See also: <a href="/en/tools/best-feature-flag-tools.html">Best Feature Flag Tools</a> and <a href="/en/tools/best-open-source-saas-alternatives.html">Best Open Source SaaS Alternatives</a>.</p>
+'''
+
+BODIES['build-vs-buy-saas-decisions'] = '''
+<p>Every side project and SaaS faces the same question a hundred times: should I build this myself or buy an existing solution? In 2026, the ecosystem of developer tools, APIs, and SaaS products is so rich that "buy" is increasingly the right answer — but knowing when to build gives you a competitive advantage. This guide provides a decision framework specifically for developer side projects and bootstrapped SaaS businesses.</p>
+
+<h2>The Build vs Buy Decision Framework</h2>
+<table>
+<tr><th>Factor</th><th>Favors Build</th><th>Favors Buy</th></tr>
+<tr><td>Core to your product?</td><td>Yes — this IS your product</td><td>No — this supports your product</td></tr>
+<tr><td>Differentiation potential?</td><td>You can do it better than anyone</td><td>Commodity function (auth, payments, email)</td></tr>
+<tr><td>Time to build?</td><td>Hours to days</td><td>Weeks to months</td></tr>
+<tr><td>Ongoing maintenance?</td><td>Minimal after initial build</td><td>Constant updates, security patches, scaling</td></tr>
+<tr><td>Available solutions?</td><td>Nothing good exists</td><td>Multiple excellent, affordable options</td></tr>
+<tr><td>Your expertise?</td><td>You're an expert in this area</td><td>You'd be learning from scratch</td></tr>
+<tr><td>Cost of buying?</td><td>Prohibitively expensive at your scale</td><td>Affordable, scales linearly with usage</td></tr>
+</table>
+
+<h2>Common Build vs Buy Decisions for SaaS</h2>
+<table>
+<tr><th>Component</th><th>Verdict</th><th>Recommended Solution</th><th>Why</th></tr>
+<tr><td>Authentication</td><td><strong>BUY</strong></td><td>Clerk, Auth0, Lucia, Supabase Auth</td><td>Security liability, constantly changing (OAuth, passkeys, 2FA, MFA)</td></tr>
+<tr><td>Payments</td><td><strong>BUY</strong></td><td>Stripe, Paddle, Lemon Squeezy</td><td>PCI compliance, tax handling, subscription management are nightmares to build</td></tr>
+<tr><td>Email Delivery</td><td><strong>BUY</strong></td><td>Resend, Postmark, SendGrid</td><td>Deliverability is a full-time job; IP reputation management</td></tr>
+<tr><td>Database</td><td><strong>BUY</strong></td><td>Supabase, Neon, PlanetScale</td><td>Managed databases are cheap; database administration is expensive</td></tr>
+<tr><td>File Storage / CDN</td><td><strong>BUY</strong></td><td>S3 + CloudFront, Cloudflare R2, UploadThing</td><td>Commodity infrastructure, cheap at scale</td></tr>
+<tr><td>CI/CD</td><td><strong>BUY</strong></td><td>GitHub Actions, Vercel, Railway</td><td>Free for most side projects, zero maintenance</td></tr>
+<tr><td>Admin Panel</td><td><strong>BUY</strong></td><td>Retool, refine.dev, react-admin</td><td>Internal tool — not your product, don't build it</td></tr>
+<tr><td>Your Core Feature</td><td><strong>BUILD</strong></td><td>Your code here</td><td>This is what users pay for; this must be unique</td></tr>
+<tr><td>Custom Integrations</td><td><strong>BUILD</strong></td><td>n8n + custom nodes, custom code</td><td>Integrations with customer systems are often your moat</td></tr>
+<tr><td>Analytics Dashboard</td><td><strong>BUY</strong></td><td>PostHog, Plausible, Umami</td><td>Excellent free options; building analytics is a distraction</td></tr>
+</table>
+
+<h2>The Real Cost of "Build"</h2>
+<table>
+<tr><th>Cost Category</th><th>Initial Build</th><th>Year 1 Maintenance</th><th>Year 2+ Maintenance</th></tr>
+<tr><td>Authentication</td><td>40-80 hours</td><td>20-40 hours (OAuth changes, security patches)</td><td>20-40 hours/year</td></tr>
+<tr><td>Payments</td><td>80-160 hours</td><td>40-80 hours (tax law changes, new payment methods)</td><td>40-80 hours/year</td></tr>
+<tr><td>Admin Panel</td><td>80-200 hours</td><td>40-100 hours (new features, permissions changes)</td><td>40-100 hours/year</td></tr>
+<tr><td>Email System</td><td>20-40 hours</td><td>10-20 hours (deliverability, templates)</td><td>20-40 hours/year</td></tr>
+</table>
+<p>At a developer's opportunity cost of $100-150/hour, building auth alone "costs" $4,000-$12,000 in time — while Clerk costs $25/mo at launch scale. The math is clear: buy everything except your core differentiator.</p>
+
+<p><strong>Bottom line:</strong> Rule of thumb for side projects and bootstrapped SaaS: buy everything that is not your core differentiator. Auth, payments, email, hosting, CI/CD, analytics — all buy. Your limited time and energy should go into the ONE thing users pay you for. The companies that win are not the ones that built the best auth system — they are the ones that solved a unique problem better than anyone else. See also: <a href="/en/sidehustle/saas-bootstrapping-guide.html">SaaS Bootstrapping Guide</a> and <a href="/en/sidehustle/micro-saas-ideas-2026.html">Micro SaaS Ideas 2026</a>.</p>
+'''
+
+BODIES['database-sharding-strategies'] = '''
+<p>Database sharding is how you scale a database beyond what a single server can handle — splitting data across multiple independent database instances. While managed databases have made sharding less common for new projects, understanding sharding is critical for system design interviews, working at scale, and architecting systems that will eventually need it. This guide covers the theory and practice of database sharding.</p>
+
+<h2>Sharding Strategies Compared</h2>
+<table>
+<tr><th>Strategy</th><th>How It Works</th><th>Pros</th><th>Cons</th><th>Best For</th></tr>
+<tr><td>Key-Based (Hash) Sharding</td><td>Hash(shard_key) % N → shard number</td><td>Even distribution, simple routing</td><td>Adding shards rehashes ALL data; cross-shard queries are hard</td><td>Even data distribution, simple lookup patterns</td></tr>
+<tr><td>Range-Based Sharding</td><td>Shard 1: A-M, Shard 2: N-Z</td><td>Intuitive, range queries work within a shard</td><td>Hotspots (shard with most popular range gets overloaded)</td><td>Time-series data, alphabetical/sequential data</td></tr>
+<tr><td>Directory-Based Sharding</td><td>Lookup table maps key → shard</td><td>Flexible (move data between shards easily)</td><td>Lookup service is a single point of failure/ bottleneck</td><td>Complex sharding needs, frequent rebalancing</td></tr>
+<tr><td>Geo-Based Sharding</td><td>Shard by geographic region (US, EU, APAC)</td><td>Low latency per region, GDPR compliance</td><td>Uneven distribution; cross-region queries are slow</td><td>Multi-region apps, data locality requirements</td></tr>
+<tr><td>Entity/Functional Sharding</td><td>Shard by entity type (users, orders, products)</td><td>Independent scaling per entity</td><td>Joins across entities are impossible in SQL</td><td>Microservices, domain-driven design</td></tr>
+</table>
+
+<h2>Consistent Hashing: The Key to Dynamic Sharding</h2>
+<pre><code># Consistent hashing minimizes data movement when adding/removing shards
+# Traditional hash: hash(key) % N → changing N remaps ALL keys
+# Consistent hash: hash(key) and hash(shard) both mapped to a ring
+#   Adding a shard: only ~1/N keys need to move
+#   Removing a shard: only that shard's keys need to move
+
+# Simplified consistent hashing implementation
+import hashlib, bisect
+
+class ConsistentHash:
+    def __init__(self, virtual_nodes_per_shard=150):
+        self.ring = {}  # hash → shard_id
+        self.sorted_hashes = []  # sorted list of hash positions
+        self.vnodes = virtual_nodes_per_shard
+
+    def add_shard(self, shard_id):
+        for i in range(self.vnodes):
+            h = self._hash(f"{shard_id}:{i}")
+            self.ring[h] = shard_id
+            bisect.insort(self.sorted_hashes, h)
+
+    def get_shard(self, key):
+        h = self._hash(key)
+        # Find first shard hash >= key hash (clockwise on ring)
+        idx = bisect.bisect_left(self.sorted_hashes, h)
+        if idx == len(self.sorted_hashes):
+            idx = 0  # Wrap around the ring
+        return self.ring[self.sorted_hashes[idx]]
+
+    def _hash(self, s):
+        return int(hashlib.md5(s.encode()).hexdigest(), 16)</code></pre>
+
+<h2>When to Shard (and When Not To)</h2>
+<table>
+<tr><th>Scenario</th><th>Should You Shard?</th><th>Alternative</th></tr>
+<tr><td>Single DB < 100GB, < 1K QPS</td><td>No — single instance is fine</td><td>Add read replicas for read scaling</td></tr>
+<tr><td>100GB-1TB, read-heavy</td><td>No — read replicas first</td><td>Read replicas + caching (Redis)</td></tr>
+<tr><td>100GB-1TB, write-heavy (>5K write QPS)</td><td>Maybe — consider sharding</td><td>Also consider: better hardware, connection pooling, queue writes</td></tr>
+<tr><td>>1TB, any workload</td><td>Yes — single server can't hold it</td><td>Sharding is necessary at this scale</td></tr>
+<tr><td>Multi-tenant SaaS (tenant isolation needed)</td><td>Maybe — tenant-based sharding</td><td>Also consider: row-level security, separate schemas</td></tr>
+<tr><td>Startup with <1K users</td><td>No — premature optimization</td><td>Single DB with good indexing</td></tr>
+</table>
+
+<h2>Common Sharding Pitfalls</h2>
+<table>
+<tr><th>Pitfall</th><th>Problem</th><th>Solution</th></tr>
+<tr><td>Choosing the wrong shard key</td><td>Uneven data distribution, hotspots</td><td>Analyze access patterns, pick high-cardinality key</td></tr>
+<tr><td>Cross-shard queries</td><td>JOINs, aggregations across shards are application-level</td><td>Denormalize data, use materialized views, or avoid cross-shard queries</td></tr>
+<tr><td>Resharding without downtime</td><td>Moving data between shards blocks the application</td><td>Consistent hashing + live migration tools (Vitess, Citus)</td></tr>
+<tr><td>Auto-increment IDs collide</td><td>Each shard's auto-increment starts at 1</td><td>Use UUIDs, Snowflake IDs, or globally unique ID service</td></tr>
+<tr><td>Transactions across shards</td><td>ACID transactions don't span shards</td><td>Use distributed transactions (2PC) or design around it (sagas)</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Sharding is a last-resort scaling strategy — exhaust all other options first (indexing, caching, read replicas, connection pooling, query optimization). When you do need sharding, use key-based sharding with consistent hashing for the most flexibility. For PostgreSQL, consider Citus (distributed PostgreSQL) or Vitess (MySQL) as battle-tested sharding solutions before building your own. See also: <a href="/en/tech/postgresql-query-optimization.html">PostgreSQL Query Optimization</a> and <a href="/en/tech/system-design-interview-guide.html">System Design Interview Guide</a>.</p>
+'''
+
+BODIES['domain-flipping-guide'] = '''
+<p>Domain flipping — buying, developing, and selling domain names for profit — is a side hustle that requires minimal ongoing time investment and can produce significant returns. A domain bought for $10 can sell for $500, $5,000, or more if you know what makes a domain valuable. This guide covers the technical developer's edge in domain investing: using data and automation to identify undervalued domains.</p>
+
+<h2>Domain Flipping Strategies</h2>
+<table>
+<tr><th>Strategy</th><th>Buy Price</th><th>Sell Price</th><th>Effort</th><th>Best For</th></tr>
+<tr><td>Buy & Hold</td><td>$10-$100</td><td>$500-$50,000</td><td>Low (wait for buyers)</td><td>Premium-sounding names, emerging tech keywords</td></tr>
+<tr><td>Develop & Sell</td><td>$10-$100</td><td>$1,000-$100,000</td><td>High (build small site)</td><td>Domains with existing backlinks and SEO value</td></tr>
+<tr><td>Expired Domain Flipping</td><td>$10-$500</td><td>$100-$10,000</td><td>Medium</td><td>Domains with strong backlink profiles</td></tr>
+<tr><td>Trend Surfing</td><td>$10-$50</td><td>$500-$5,000</td><td>Low-Medium</td><td>New technologies, products, or cultural trends</td></tr>
+<tr><td>Geo Domains</td><td>$10-$50</td><td>$500-$20,000</td><td>Medium</td><td>City + service combinations (e.g., AustinPlumber.com)</td></tr>
+</table>
+
+<h2>How Developers Have an Edge</h2>
+<ol>
+<li><strong>Automated domain research:</strong> Write scripts to scan expiring domain auctions, check SEO metrics (DA, backlinks, traffic), and filter for undervalued domains.</li>
+<li><strong>Landing page generation:</strong> Automatically build simple landing pages with contact forms for your domain portfolio — increases sell-through rate vs parked pages.</li>
+<li><strong>SEO analysis:</strong> Use Ahrefs/Semrush APIs to programmatically check backlink profiles and organic traffic of expired domains.</li>
+<li><strong>Marketplace arbitrage:</strong> Script price comparisons across GoDaddy Auctions, Namecheap, Sedo, and Afternic to find pricing gaps.</li>
+</ol>
+
+<h2>What Makes a Domain Valuable</h2>
+<table>
+<tr><th>Factor</th><th>High Value</th><th>Low Value</th></tr>
+<tr><td>Length</td><td>1-2 words, under 15 characters</td><td>3+ words, over 20 characters</td></tr>
+<tr><td>TLD</td><td>.com (90%+ of value)</td><td>.biz, .info, .xyz, unusual TLDs</td></tr>
+<tr><td>Keywords</td><td>High CPC commercial keywords (insurance, SaaS, loans)</td><td>Generic, non-commercial words</td></tr>
+<tr><td>Brandability</td><td>Pronounceable, memorable, unique</td><td>Hyphenated, numbers-for-letters, misspellings</td></tr>
+<tr><td>Backlinks</td><td>Quality backlinks from reputable sites</td><td>Spam backlinks, no backlink history</td></tr>
+<tr><td>Age</td><td>5+ years old, clean history</td><td>Brand new or penalized history</td></tr>
+</table>
+
+<h2>Marketplace Comparison</h2>
+<table>
+<tr><th>Marketplace</th><th>Commission</th><th>Best For</th></tr>
+<tr><td>Afternic</td><td>15-25%</td><td>Largest marketplace, best for .com domains</td></tr>
+<tr><td>Sedo</td><td>15-20%</td><td>International domains, European TLDs</td></tr>
+<tr><td>GoDaddy Auctions</td><td>10-25%</td><td>Expired domain auctions, largest inventory</td></tr>
+<tr><td>Flippa</td><td>10-15%</td><td>Developed sites + domains together</td></tr>
+<tr><td>NamePros</td><td>0% (forum)</td><td>Peer-to-peer sales, no commission</td></tr>
+<tr><td>Dan.com</td><td>9-15%</td><td>Clean UX, lease-to-own options</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Domain flipping is a low-maintenance side hustle that rewards technical skills — automation, data analysis, and SEO knowledge. Start small: buy 5-10 undervalued domains ($10-50 each), build simple landing pages, and list them on Afternic. Reinvest profits into better domains. The developer's edge is automation: you can scan thousands of expired domains programmatically while competitors do it manually. See also: <a href="/en/sidehustle/web-scraping-business.html">Web Scraping Business</a> and <a href="/en/sidehustle/sell-digital-products.html">Selling Digital Products</a>.</p>
+'''
+
+BODIES['embedding-models-comparison'] = '''
+<p>Embedding models are the invisible workhorses of modern AI — they power semantic search, RAG, clustering, and recommendation systems. In 2026, the embedding landscape offers more choices than ever: proprietary (OpenAI, Cohere), open source (BGE, E5), and specialized models tuned for specific domains. This comparison helps you pick the right embedding model for your use case and budget.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Model</th><th>Dimensions</th><th>MTEB Score</th><th>Max Tokens</th><th>Cost (1M tokens)</th><th>Self-Hosted</th></tr>
+<tr><td>OpenAI text-embedding-3-large</td><td>256-3072 (Matryoshka)</td><td>64.6</td><td>8,191</td><td>$0.13</td><td>No</td></tr>
+<tr><td>OpenAI text-embedding-3-small</td><td>512-1536 (Matryoshka)</td><td>62.3</td><td>8,191</td><td>$0.02</td><td>No</td></tr>
+<tr><td>Cohere Embed v4</td><td>1,024</td><td>65.2</td><td>8,192</td><td>$0.10</td><td>No</td></tr>
+<tr><td>BGE-M3 (BAAI)</td><td>1,024</td><td>63.8</td><td>8,192</td><td>Free (OSS)</td><td>Yes</td></tr>
+<tr><td>E5-Mistral-7B-Instruct</td><td>4,096</td><td>66.1</td><td>32,768</td><td>Free (OSS, needs GPU)</td><td>Yes</td></tr>
+<tr><td>Jina embeddings v3</td><td>1,024</td><td>62.4</td><td>8,192</td><td>Free (up to 1M/day)</td><td>Yes (via Jina)</td></tr>
+<tr><td>Nomic Embed v2</td><td>768-1,376</td><td>62.0</td><td>8,192</td><td>Free (OSS)</td><td>Yes</td></tr>
+</table>
+
+<h2>Matryoshka Embeddings: One Model, Many Dimensions</h2>
+<p>Matryoshka representation learning (MRL) lets you use a subset of the embedding dimensions without losing much quality. OpenAI's text-embedding-3-large can produce 3,072-dimension vectors — but if you only use 256 dimensions, you get 90%+ of the quality at 8% of the storage cost. This is a game-changer for vector databases: store vectors at 256 dims for initial retrieval, then re-rank candidates at full 3,072 dims. Supported by: OpenAI v3 models, Nomic Embed v2, and some open source models.</p>
+
+<h2>When to Choose Each Model</h2>
+<p><strong>OpenAI text-embedding-3-large — Best for:</strong> General purpose, best quality, Matryoshka flexibility. The default choice for most projects. <strong>Weak spot:</strong> API-only; $0.13/1M tokens adds up at scale (1M documents × 500 tokens = $65).</p>
+
+<p><strong>OpenAI text-embedding-3-small — Best for:</strong> Cost-sensitive projects that still want managed embeddings. At $0.02/1M tokens, it is 6.5x cheaper than large with only a small quality drop. <strong>Weak spot:</strong> Noticeably worse on nuanced semantic tasks (legal, medical).</p>
+
+<p><strong>Cohere Embed v4 — Best for:</strong> Multilingual applications and long documents. Cohere's models have industry-leading multilingual performance and handle 8K tokens well. <strong>Weak spot:</strong> API-only; not as flexible as OpenAI's Matryoshka.</p>
+
+<p><strong>BGE-M3 — Best for:</strong> Teams that want to self-host and eliminate API costs. BGE-M3 is the best open source embedding model — it supports dense + sparse (hybrid) vectors natively. <strong>Weak spot:</strong> Requires a GPU (or good CPU) for inference; 1,024 dims fixed.</p>
+
+<p><strong>E5-Mistral-7B — Best for:</strong> Maximum quality, especially for long documents (32K tokens). The 7B-parameter model produces 4,096-dim embeddings — best scores on MTEB. <strong>Weak spot:</strong> Needs a beefy GPU (24GB+ VRAM); slow inference; overkill for most projects.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Model</th><th>Why</th></tr>
+<tr><td>General RAG, moderate scale, API OK</td><td>OpenAI text-embedding-3-large (256 dims)</td><td>Best quality, Matryoshka flexibility, managed</td></tr>
+<tr><td>Cost-sensitive, high volume (10M+ docs)</td><td>OpenAI text-embedding-3-small</td><td>6.5x cheaper, good enough for most semantic search</td></tr>
+<tr><td>Self-hosted, want to eliminate API dependency</td><td>BGE-M3</td><td>Best open source, dense + sparse hybrid</td></tr>
+<tr><td>Multilingual (20+ languages)</td><td>Cohere Embed v4 or BGE-M3</td><td>Both have strong multilingual benchmarks</td></tr>
+<tr><td>Maximum quality, budget for GPU</td><td>E5-Mistral-7B-Instruct</td><td>Highest MTEB score among open models</td></tr>
+<tr><td>Long documents (newsletters, legal, research)</td><td>Jina embeddings v3 or E5-Mistral</td><td>Best long-context (8K+) embeddings</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> OpenAI text-embedding-3-large at 256 dimensions is the best default for 90% of projects — good enough quality, managed, and Matryoshka lets you increase dimensions later. Switch to BGE-M3 if you want to self-host and eliminate API costs. Use Cohere Embed v4 for multilingual needs. E5-Mistral is overkill for most projects but worth considering when every percentage point of search accuracy matters. See also: <a href="/en/ai/rag-best-practices.html">RAG Best Practices</a> and <a href="/en/ai/open-source-llm-comparison.html">Open Source LLM Comparison</a>.</p>
+'''
+
+BODIES['event-driven-architecture-guide'] = '''
+<p>Event-driven architecture (EDA) is the pattern behind the most scalable systems — from Netflix's microservices to Stripe's payment processing. Instead of services calling each other directly (request-response), they communicate through events (messages about things that happened). This guide covers the patterns, message brokers, and practical implementation of event-driven systems.</p>
+
+<h2>Core Event-Driven Patterns</h2>
+<table>
+<tr><th>Pattern</th><th>How It Works</th><th>Use Case</th><th>Complexity</th></tr>
+<tr><td>Event Notification</td><td>"Order #123 was placed" — fire and forget, subscribers react</td><td>Send email on signup, update search index on content change</td><td>Low</td></tr>
+<tr><td>Event-Carried State Transfer</td><td>Events contain all data subscribers need (no callback to source)</td><td>Catalog service publishes full product data — search, pricing, and inventory consume it</td><td>Low-Medium</td></tr>
+<tr><td>Event Sourcing</td><td>State is derived from a sequence of events (not a current snapshot)</td><td>Banking transactions, audit logs, undo/redo functionality</td><td>High</td></tr>
+<tr><td>CQRS (Command Query Responsibility Segregation)</td><td>Separate read and write models — writes go through events, reads from materialized views</td><td>High-read, complex-query applications (e-commerce product search)</td><td>High</td></tr>
+<tr><td>Saga (Distributed Transaction)</td><td>A sequence of local transactions, each compensated if a later step fails</td><td>Order fulfillment: reserve inventory → charge payment → schedule shipping</td><td>High</td></tr>
+</table>
+
+<h2>Message Broker Comparison</h2>
+<table>
+<tr><th>Broker</th><th>Type</th><th>Throughput</th><th>Latency</th><th>Best For</th></tr>
+<tr><td>Apache Kafka</td><td>Distributed event log</td><td>1M+ msg/s</td><td>2-20ms</td><td>High-throughput event streaming, event sourcing, data pipelines</td></tr>
+<tr><td>RabbitMQ</td><td>Message queue (AMQP)</td><td>50K msg/s</td><td><1ms</td><td>Task distribution, RPC, complex routing patterns</td></tr>
+<tr><td>Amazon SQS</td><td>Managed message queue</td><td>Unlimited (AWS scaling)</td><td>1-50ms</td><td>AWS-native, zero ops, FIFO when ordering matters</td></tr>
+<tr><td>Google Pub/Sub</td><td>Managed pub/sub</td><td>Unlimited (GCP scaling)</td><td>1-10ms</td><td>GCP-native, push subscriptions, global by default</td></tr>
+<tr><td>Redis Streams</td><td>In-memory event log</td><td>100K msg/s</td><td><1ms</td><td>Lightweight event streaming, already have Redis</td></tr>
+<tr><td>NATS</td><td>Lightweight pub/sub</td><td>1M+ msg/s</td><td><1ms</td><td>Low-latency, edge, IoT, microservices</td></tr>
+</table>
+
+<h2>When to Go Event-Driven</h2>
+<table>
+<tr><th>Situation</th><th>Event-Driven?</th><th>Why</th></tr>
+<tr><td>Monolith → microservices migration</td><td>Yes — use events to decouple</td><td>Events let services evolve independently</td></tr>
+<tr><td>Multiple services need to react to the same event</td><td>Yes — pub/sub is the pattern</td><td>One event, many consumers, no coupling</td></tr>
+<tr><td>Simple CRUD app, single database</td><td>No — request-response is fine</td><td>EDA adds complexity; don't need it yet</td></tr>
+<tr><td>Need audit trail of all state changes</td><td>Yes — event sourcing</td><td>Events ARE the audit trail</td></tr>
+<tr><td>Data analytics / real-time dashboards</td><td>Yes — event streaming</td><td>Kafka → stream processing → real-time views</td></tr>
+<tr><td>Two services need a synchronous response</td><td>No — use REST/gRPC</td><td>Events are async; request-response is simpler for sync needs</td></tr>
+</table>
+
+<h2>Implementing a Saga: Order Fulfillment Example</h2>
+<pre><code># Saga pattern: orchestration-based (orchestrator coordinates the steps)
+# Each step is a local transaction; each has a compensating action
+
+# Step 1: Create order (reserve inventory)
+POST /orders {status: PENDING, items: [...]}
+  → Event: "OrderCreated" {order_id: 123}
+  → Inventory Service reserves stock
+
+# Step 2: Process payment
+  → Event: "InventoryReserved" {order_id: 123}
+  → Payment Service charges customer
+  → Success: "PaymentProcessed" {order_id: 123}
+  → Failure: "PaymentFailed" {order_id: 123}
+    → Compensate: Inventory Service releases stock
+
+# Step 3: Schedule shipping
+  → Event: "PaymentProcessed" {order_id: 123}
+  → Shipping Service creates label
+  → Success: "OrderFulfilled" {order_id: 123}
+  → Failure: "ShippingFailed" {order_id: 123}
+    → Compensate: Payment Service refunds
+    → Compensate: Inventory Service releases stock
+
+# Key: each compensating action must be idempotent
+# (refunding twice = bad; but idempotent refund = safe to retry)</code></pre>
+
+<p><strong>Bottom line:</strong> Start with simple event notification (one service emits, others react) before adopting event sourcing or CQRS. For most projects, RabbitMQ or Redis Streams provide enough throughput with simpler operations. Only reach for Kafka when you need replay, long-term retention, or 1M+ msg/s throughput. The biggest mistake is going fully event-driven when simple request-response would suffice — EDA is a powerful tool, not a default architecture. See also: <a href="/en/tech/microservices-vs-monolith.html">Microservices vs Monolith</a> and <a href="/en/tech/webhook-implementation-guide.html">Webhook Implementation Guide</a>.</p>
+'''
+
+BODIES['linear-vs-jira-vs-notion'] = '''
+<p>Project management tools shape how engineering teams work — the right one reduces friction, the wrong one adds it. Linear has disrupted the space with speed and developer-centric design, Jira remains the enterprise standard with unmatched customizability, and Notion offers a flexible all-in-one workspace. This comparison helps pick the right tool for your team size and workflow.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>Linear</th><th>Jira (Cloud)</th><th>Notion</th></tr>
+<tr><td>Philosophy</td><td>Speed, simplicity, developer-first</td><td>Customizable, process-heavy, enterprise</td><td>Flexible, document + database hybrid</td></tr>
+<tr><td>Speed / Performance</td><td>Excellent (keyboard-first, instant UI)</td><td>Slow (complex UI, noticeable latency)</td><td>Moderate (large pages can be slow)</td></tr>
+<tr><td>Learning Curve</td><td>Very Low (minutes)</td><td>High (hours to days)</td><td>Low-Medium (flexible = need to design workflow)</td></tr>
+<tr><td>Customization</td><td>Limited by design (opinionated)</td><td>Extreme (custom fields, workflows, screens)</td><td>Very High (databases, relations, formulas)</td></tr>
+<tr><td>Agile/Scrum</td><td>Cycles, sprints, estimates, velocity</td><td>Full Scrum + Kanban boards</td><td>Manual (build your own board views)</td></tr>
+<tr><td>Developer Integrations</td><td>GitHub, GitLab, Slack, Sentry, Figma</td><td>Everything imaginable (1,000+ apps)</td><td>GitHub, Slack, Figma, limited compared to Jira</td></tr>
+<tr><td>GitHub/GitLab Auto-Sync</td><td>Yes — PRs auto-link to issues, auto-close on merge</td><td>Yes — via Smart Commits or integration</td><td>Basic — via GitHub integration</td></tr>
+<tr><td>Roadmap / Planning</td><td>Built-in (Roadmap, Projects)</td><td>Advanced (Advanced Roadmaps, Plans)</td><td>Manual (Timeline view, or build your own)</td></tr>
+<tr><td>Pricing (per user/mo)</td><td>$8 (Basic), $14 (Business)</td><td>$8.15 (Standard), $16 (Premium)</td><td>$10 (Plus), $18 (Business)</td></tr>
+<tr><td>Best Team Size</td><td>1-500 engineers</td><td>50-5,000+ (any dept)</td><td>1-100 (works as wiki + PM)</td></tr>
+</table>
+
+<h2>When Each Tool Wins</h2>
+<p><strong>Linear — Best for:</strong> Engineering teams that want speed, simplicity, and a tool that feels like it was built by developers. Linear is the choice when you want project management to get out of your way. <strong>Weak spot:</strong> Limited customization — if your workflow doesn't fit Linear's opinions, you cannot bend it much. Non-engineering teams often find it too minimal.</p>
+
+<p><strong>Jira — Best for:</strong> Large enterprises with complex, cross-team workflows that need deep customization. Jira's flexibility is its strength — any workflow, any field, any permission scheme. <strong>Weak spot:</strong> The complexity is the cost. Jira can become a full-time job to administer. Performance on large instances is notoriously slow.</p>
+
+<p><strong>Notion — Best for:</strong> Small teams that want docs, wikis, and lightweight project management in one tool. Notion's flexibility means you can build exactly the view you want. <strong>Weak spot:</strong> Not a real project management tool — no sprints, no velocity tracking, no estimates. Works for 1-10 person teams; breaks down at scale.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Tool</th><th>Why</th></tr>
+<tr><td>Startup / small eng team (2-20 devs)</td><td>Linear</td><td>Fast, simple, great developer experience</td></tr>
+<tr><td>Enterprise, 500+ employees, complex workflows</td><td>Jira</td><td>Customization, enterprise features, ecosystem</td></tr>
+<tr><td>Docs + lightweight task tracking for small team</td><td>Notion</td><td>All-in-one workspace, flexible</td></tr>
+<tr><td>Engineering team that also manages roadmap publicly</td><td>Linear</td><td>Best roadmap features, public roadmaps</td></tr>
+<tr><td>Non-engineering teams need PM too</td><td>Jira or Notion</td><td>Jira if complex, Notion if simple</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Linear is the best project management tool for engineering teams in 2026 — it is fast, intuitive, and was designed by developers for developers. Jira remains the enterprise standard but only use it if you need the complexity. Notion is great for wikis and lightweight tracking but is not a real project management tool for software teams. See also: <a href="/en/tools/best-project-management-dev.html">Best Project Management Tools</a> and <a href="/en/tools/best-code-review-tools.html">Best Code Review Tools</a>.</p>
+'''
+
+BODIES['llm-evaluation-benchmarks'] = '''
+<p>How do you know if an LLM is good? Benchmark scores (MMLU, HumanEval) give a starting point, but they rarely predict real-world performance on your specific use case. In 2026, the evaluation landscape has matured — custom evals, LLM-as-judge, and automated evaluation pipelines are the standard. This guide covers how to build an evaluation system that actually tells you which model and prompt is better for your application.</p>
+
+<h2>Standard LLM Benchmarks: What They Measure</h2>
+<table>
+<tr><th>Benchmark</th><th>What It Measures</th><th>Limitations</th><th>Relevant For</th></tr>
+<tr><td>MMLU (Massive Multitask Language Understanding)</td><td>57 subjects: math, history, law, medicine</td><td>Multiple choice only; doesn't measure creativity or instruction following</td><td>General knowledge, academic reasoning</td></tr>
+<tr><td>HumanEval</td><td>Python code generation from docstring</td><td>Small (164 problems); Python-only; doesn't test real-world code complexity</td><td>Code generation, coding assistants</td></tr>
+<tr><td>MT-Bench</td><td>Multi-turn conversation quality (LLM-as-judge)</td><td>GPT-4 as judge has biases; only 80 questions</td><td>Chatbots, conversational AI</td></tr>
+<tr><td>SWE-bench</td><td>Real GitHub issue → PR (solving actual bugs)</td><td>Hard, expensive to run; narrow (Python repos on GitHub)</td><td>AI coding agents, automated PR tools</td></tr>
+<tr><td>AlpacaEval</td><td>Win rate vs reference model (GPT-4 as judge)</td><td>Length bias (longer responses win); position bias</td><td>Instruction following, general helpfulness</td></tr>
+<tr><td>Chatbot Arena (LMSYS)</td><td>Blind A/B testing by humans (Elo rating)</td><td>Slow, expensive, depends on user population</td><td>Real-world human preference</td></tr>
+</table>
+
+<h2>Building Custom Evals: The Only Eval That Matters</h2>
+<pre><code># Custom eval framework in Python
+# The gold standard: a representative dataset of YOUR real use cases
+# graded by domain experts (or LLM-as-judge with expert calibration)
+
+class LLMEval:
+    def __init__(self, test_cases, grader_model="gpt-4o"):
+        self.test_cases = test_cases  # [(input, expected_output, rubric)]
+        self.grader = grader_model
+
+    def evaluate(self, model_under_test, prompt_template):
+        results = []
+        for input_text, expected, rubric in self.test_cases:
+            # Generate response from model under test
+            output = model_under_test.generate(prompt_template.format(input=input_text))
+
+            # Grade using LLM-as-judge with the rubric
+            grade = self.grade_with_llm(input_text, output, expected, rubric)
+
+            results.append({
+                "input": input_text,
+                "expected": expected,
+                "actual": output,
+                "score": grade["score"],  # 1-5 scale
+                "explanation": grade["explanation"]
+            })
+        return results
+
+# Key: the rubric must be specific to your use case
+# Bad rubric: "Is this response good?"
+# Good rubric: "Rate 1-5: Does the response correctly identify the SQL
+#              injection vulnerability? Does it suggest parameterized
+#              queries as the fix? Is the explanation under 200 words?"</code></pre>
+
+<h2>Evaluation Methods Compared</h2>
+<table>
+<tr><th>Method</th><th>Cost</th><th>Speed</th><th>Accuracy</th><th>Best For</th></tr>
+<tr><td>Exact Match / Regex</td><td>$0</td><td>Instant</td><td>High for structured output</td><td>Code output, JSON, classification labels</td></tr>
+<tr><td>LLM-as-Judge (GPT-4o)</td><td>$0.01-0.10/eval</td><td>1-5 seconds</td><td>Good (correlates ~80% with human)</td><td>Open-ended text, summaries, explanations</td></tr>
+<tr><td>Human Evaluation</td><td>$1-5/eval</td><td>Hours-days</td><td>Gold standard</td><td>Final validation, calibration</td></tr>
+<tr><td>Embedding Similarity</td><td>$0.0001/eval</td><td><100ms</td><td>Moderate (misses nuance)</td><td>Quick filtering, semantic similarity</td></tr>
+<tr><td>Auto-Eval Frameworks (Ragas, DeepEval)</td><td>$0.001-0.01/eval</td><td>1-3 seconds</td><td>Good for RAG, moderate for general</td><td>RAG evaluation, ROUGE/BLEU metrics</td></tr>
+</table>
+
+<h2>Evaluation Pipeline Architecture</h2>
+<pre><code># Production eval pipeline (runs on every PR that changes prompts/models)
+# 1. Trigger: Prompt change or model upgrade PR opened
+# 2. Run test suite: 100-500 representative test cases
+# 3. Compare: Old prompt/model vs new on identical inputs
+# 4. Report: Win/Loss/Tie summary with per-category breakdown
+# 5. Gate: Block merge if overall score drops >2% or any category drops >5%
+
+# Key metric: not "is this model good?" but "is this model BETTER than
+# what we have in production for OUR use case?"</code></pre>
+
+<p><strong>Bottom line:</strong> Standard benchmarks tell you which model is good at standardized tests — but your application is not a standardized test. Build a custom eval dataset of 100-500 representative real use cases from your application, grade them with LLM-as-judge (calibrated against human judgment on 10% of the dataset), and run evals on every prompt or model change. This is the only way to know if a change is actually an improvement. See also: <a href="/en/ai/open-source-llm-comparison.html">Open Source LLM Comparison</a> and <a href="/en/ai/rag-best-practices.html">RAG Best Practices</a>.</p>
+'''
+
+BODIES['oauth2-oidc-implementation'] = '''
+<p>OAuth 2.0 and OpenID Connect (OIDC) are the foundation of modern authentication — every "Sign in with Google/GitHub/Apple" button uses them. But implementing OAuth 2.0 correctly is notoriously tricky: the spec is 80+ pages, and getting it wrong means security vulnerabilities. This guide walks through a complete implementation, from the authorization code flow to PKCE, token storage, and session management.</p>
+
+<h2>OAuth 2.0 Grant Types: When to Use Each</h2>
+<table>
+<tr><th>Grant Type</th><th>Use Case</th><th>Security Level</th><th>Requires Client Secret?</th></tr>
+<tr><td>Authorization Code + PKCE</td><td>Single-page apps, mobile apps, all modern web apps</td><td>Highest</td><td>No (PKCE replaces the secret)</td></tr>
+<tr><td>Authorization Code (classic)</td><td>Server-rendered web apps (backend can keep a secret)</td><td>High</td><td>Yes</td></tr>
+<tr><td>Client Credentials</td><td>Machine-to-machine, service accounts, API integrations</td><td>Medium</td><td>Yes</td></tr>
+<tr><td>Device Code</td><td>TV apps, CLI tools, IoT devices (input-constrained)</td><td>Medium</td><td>No</td></tr>
+<tr><td>Refresh Token</td><td>Renew access tokens without re-authentication</td><td>N/A</td><td>Yes (usually)</td></tr>
+<tr><td>Implicit (DEPRECATED)</td><td>Do NOT use — insecure, tokens in URL fragment</td><td>None</td><td>Do NOT use</td></tr>
+</table>
+
+<h2>The Authorization Code + PKCE Flow (Step by Step)</h2>
+<pre><code># Complete OAuth 2.0 + PKCE Flow
+# Step 1: Generate PKCE code verifier and challenge
+import hashlib, base64, os, secrets
+
+def generate_pkce_pair():
+    # Code verifier: 43-128 random characters
+    code_verifier = base64.urlsafe_b64encode(os.urandom(32)).rstrip(b'=').decode()
+    # Code challenge: SHA256 hash of verifier, base64url encoded
+    code_challenge = base64.urlsafe_b64encode(
+        hashlib.sha256(code_verifier.encode()).digest()
+    ).rstrip(b'=').decode()
+    return code_verifier, code_challenge
+
+code_verifier, code_challenge = generate_pkce_pair()
+
+# Step 2: Redirect user to authorization endpoint
+state = secrets.token_urlsafe(32)  # CSRF protection
+auth_url = (
+    f"https://provider.com/authorize"
+    f"?response_type=code"
+    f"&client_id={CLIENT_ID}"
+    f"&redirect_uri={REDIRECT_URI}"
+    f"&code_challenge={code_challenge}"
+    f"&code_challenge_method=S256"
+    f"&scope=openid+profile+email"
+    f"&state={state}"
+)
+# Store state + code_verifier in session; redirect user to auth_url
+
+# Step 3: User authenticates → provider redirects to your callback with ?code=xxx&state=yyy
+# Verify state matches (prevents CSRF)
+
+# Step 4: Exchange authorization code for tokens
+token_response = requests.post("https://provider.com/token", data={
+    "grant_type": "authorization_code",
+    "code": received_code,
+    "redirect_uri": REDIRECT_URI,
+    "client_id": CLIENT_ID,
+    "code_verifier": code_verifier,  # PKCE: proves we initiated the flow
+})
+tokens = token_response.json()
+# tokens.access_token, tokens.id_token, tokens.refresh_token</code></pre>
+
+<h2>Token Security Best Practices</h2>
+<table>
+<tr><th>Practice</th><th>Why</th><th>Implementation</th></tr>
+<tr><td>Validate the state parameter</td><td>Prevents CSRF attacks on the callback endpoint</td><td>Compare received state with session-stored state</td></tr>
+<tr><td>Use PKCE for ALL clients</td><td>Prevents authorization code interception</td><td>Even for confidential clients — it is free security</td></tr>
+<tr><td>Validate ID tokens</td><td>Prevents token injection and replay attacks</td><td>Check signature, issuer, audience, expiration, nonce</td></tr>
+<tr><td>Store tokens server-side</td><td>Access tokens in browser local storage are XSS-vulnerable</td><td>HttpOnly, Secure, SameSite cookies for session ID</td></tr>
+<tr><td>Use short-lived access tokens</td><td>Limits damage if a token is leaked</td><td>5-15 minutes; use refresh tokens for renewal</td></tr>
+<tr><td>Implement token rotation</td><td>Each refresh token use returns a new refresh token</td><td>Invalidate the old refresh token after rotation</td></tr>
+</table>
+
+<h2>OAuth Providers: Self-Hosted vs Managed</h2>
+<table>
+<tr><th>Provider</th><th>Type</th><th>Best For</th><th>Pricing</th></tr>
+<tr><td>Auth0</td><td>Managed</td><td>Enterprise, comprehensive identity management</td><td>Free (7,500 MAU), $25/mo (1K MAU)</td></tr>
+<tr><td>Clerk</td><td>Managed</td><td>React/Next.js apps, best developer experience</td><td>Free (10K MAU), $25/mo (1K MAU)</td></tr>
+<tr><td>Lucia Auth</td><td>Library (self-hosted)</td><td>Full control, TypeScript-native</td><td>Free (MIT)</td></tr>
+<tr><td>Supabase Auth</td><td>Managed + Self-hosted</td><td>Apps already using Supabase</td><td>Free (50K MAU), $25/mo (100K MAU)</td></tr>
+<tr><td>NextAuth.js (Auth.js)</td><td>Library (self-hosted)</td><td>Next.js apps, OAuth provider agnostic</td><td>Free (MIT)</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Use a library or managed service for OAuth 2.0 — never implement the protocol from scratch unless you are building an auth provider. The spec is complex and the security consequences of getting it wrong are severe. For most projects, Clerk or Supabase Auth provides the best balance of security, developer experience, and cost. When building your own, always use Authorization Code + PKCE flow — the implicit flow is deprecated and unsafe. See also: <a href="/en/tech/authentication-best-practices-2026.html">Authentication Best Practices</a> and <a href="/en/compare/clerk-vs-auth0-vs-lucia.html">Clerk vs Auth0 vs Lucia</a>.</p>
+'''
+
+BODIES['online-coding-tutoring-guide'] = '''
+<p>Online coding tutoring and mentoring is one of the highest hourly rates in tech side hustles — $30-$150/hour, with senior developers commanding $150-$300/hour for specialized mentoring. Demand is strong: bootcamp graduates need interview prep, career changers need guidance, and companies pay for employee upskilling. This guide covers the platforms, pricing, and positioning strategies for developer tutors.</p>
+
+<h2>Tutoring and Mentoring Platforms Compared</h2>
+<table>
+<tr><th>Platform</th><th>Rate Range</th><th>Commission</th><th>Best For</th></tr>
+<tr><td>Codementor</td><td>$50-$300/hr</td><td>20% (decreases with volume)</td><td>Live coding help, debugging, short sessions</td></tr>
+<tr><td>Wyant</td><td>$30-$100/hr</td><td>25%</td><td>Long-term tutoring, structured curriculum</td></tr>
+<tr><td>MentorCruise</td><td>$100-$600/mo (per mentee)</td><td>8-15%</td><td>Long-term mentoring relationships (3-6 months)</td></tr>
+<tr><td>Pluralsight / Udemy</td><td>$3-$50/course sale</td><td>50-97% (depending on source)</td><td>Pre-recorded courses, one-to-many</td></tr>
+<tr><td>Independent (own website)</td><td>$50-$300/hr</td><td>0%</td><td>Maximum earnings, but you handle marketing</td></tr>
+</table>
+
+<h2>Pricing Guide: What Developers Can Charge</h2>
+<table>
+<tr><th>Experience Level</th><th>Tutoring Rate</th><th>Mentoring Rate (long-term)</th><th>Best Topics</th></tr>
+<tr><td>Junior (1-3 years)</td><td>$30-$50/hr</td><td>$100-$200/mo</td><td>Basic programming, HTML/CSS, intro to frameworks</td></tr>
+<tr><td>Mid-Level (3-7 years)</td><td>$50-$100/hr</td><td>$200-$400/mo</td><td>React, Node.js, Python, system design basics</td></tr>
+<tr><td>Senior (7+ years)</td><td>$100-$200/hr</td><td>$400-$800/mo</td><td>Architecture, career coaching, FAANG interview prep</td></tr>
+<tr><td>Specialist (niche expertise)</td><td>$150-$300/hr</td><td>$600-$1,500/mo</td><td>Rust, ML engineering, blockchain, security, devops</td></tr>
+</table>
+
+<h2>How to Get Your First Students</h2>
+<ol>
+<li><strong>Start on Codementor:</strong> Create a profile with your real experience, set a competitive rate ($30-50/hr initially), and respond quickly to live requests. The first 5 reviews are the hardest to get.</li>
+<li><strong>Answer questions publicly:</strong> Post detailed answers on Stack Overflow, Reddit (r/learnprogramming), and Discord communities. Include your mentoring availability in your profile.</li>
+<li><strong>Niche down:</strong> "I teach React" gets lost. "I help mid-level developers crack FAANG frontend interviews" attracts specific clients willing to pay premium rates.</li>
+<li><strong>Free intro sessions:</strong> Offer a free 15-minute intro call. Converts 30-50% of prospects into paying students.</li>
+<li><strong>Ask for testimonials:</strong> After 5+ sessions, ask for LinkedIn recommendations or video testimonials. Social proof is the #1 conversion factor.</li>
+</ol>
+
+<h2>Independent vs Platform: The Trade-Off</h2>
+<table>
+<tr><th>Factor</th><th>Platform (Codementor, Wyzant)</th><th>Independent (Your Own)</th></tr>
+<tr><td>Client Acquisition</td><td>Platform brings clients to you</td><td>You do all marketing and outreach</td></tr>
+<tr><td>Commission</td><td>8-25%</td><td>0%</td></tr>
+<tr><td>Payment Handling</td><td>Platform handles it</td><td>Stripe + invoicing yourself</td></tr>
+<tr><td>Scheduling</td><td>Built-in calendar</td><td>Calendly or similar</td></tr>
+<tr><td>Best Strategy</td><td>Start here, build reputation</td><td>Transition once you have a waitlist</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Start on Codementor to get your first students and reviews — the platform fee is worth the client acquisition. Once you have a steady stream of referrals and testimonials, transition to independent mentoring (via Calendly + Stripe) and keep 100%. The most profitable niche is FAANG interview prep — developers will pay $100-200/hour to prepare for a $300K+ job. See also: <a href="/en/sidehustle/developer-consulting-guide.html">Developer Consulting Guide</a> and <a href="/en/sidehustle/create-online-course.html">Create an Online Course</a>.</p>
+'''
+
+BODIES['render-vs-fly-vs-railway'] = '''
+<p>Deploying side projects and early-stage startups has never been easier — Render, Fly.io, and Railway have all reimagined the PaaS experience for the modern developer. They abstract away Kubernetes, handle HTTPS automatically, and deploy from Git pushes. But each has a distinct philosophy about how deployment should work. This comparison helps you pick the right platform for your project.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>Render</th><th>Fly.io</th><th>Railway</th></tr>
+<tr><td>Philosophy</td><td>Zero-DevOps PaaS (fully managed)</td><td>Run containers close to users (edge-like)</td><td>Instant deployments, template-driven</td></tr>
+<tr><td>Deployment Model</td><td>Git push → auto-build + deploy</td><td>fly deploy (builds Docker image, deploys)</td><td>Git push or Railway CLI, instant</td></tr>
+<tr><td>Regions</td><td>4 regions (US, EU, APAC)</td><td>30+ regions worldwide</td><td>4 regions (US, EU, SEA)</td></tr>
+<tr><td>Free Tier</td><td>Yes (750 hrs web service + PostgreSQL 90 days)</td><td>Yes (3 VMs, 3GB storage, limited)</td><td>$5 credit/mo (enough for a small app)</td></tr>
+<tr><td>Pricing Model</td><td>Fixed per instance + bandwidth</td><td>Per VM (by resources)</td><td>Per resource (RAM, CPU, storage, network)</td></tr>
+<tr><td>Web Service (1GB RAM, 1 vCPU)</td><td>$25/mo</td><td>~$5.70/mo (shared) / ~$11/mo (dedicated)</td><td>~$15-20/mo (usage-based)</td></tr>
+<tr><td>Managed PostgreSQL</td><td>$20/mo (1GB RAM, 1GB storage)</td><td>No (use Supabase or self-run Postgres)</td><td>$10/mo (1GB RAM, 10GB storage)</td></tr>
+<tr><td>Auto-Scaling</td><td>Yes (horizontal, on-demand)</td><td>Yes (horizontal, manual + auto)</td><td>No (manual scaling)</td></tr>
+<tr><td>Docker Support</td><td>Yes (Native + Dockerfile)</td><td>Yes (Dockerfile required)</td><td>Yes (Dockerfile or Nixpacks auto-detect)</td></tr>
+<tr><td>Private Networking</td><td>Yes (within same account)</td><td>Yes (WireGuard mesh)</td><td>Yes (private network)</td></tr>
+<tr><td>Cron Jobs / Background Workers</td><td>Yes (Cron Jobs, Workers)</td><td>Via Fly Machines (API-driven)</td><td>Services + cron triggers</td></tr>
+</table>
+
+<h2>When Each Platform Wins</h2>
+<p><strong>Render — Best for:</strong> Teams that want the simplest possible deploy experience — Git push, and Render handles the rest. No Docker knowledge required. The managed PostgreSQL is solid and well-priced. <strong>Weak spot:</strong> Only 4 regions; no edge/global deployment story; slower feature development pace.</p>
+
+<p><strong>Fly.io — Best for:</strong> Performance-sensitive applications where global latency matters. Fly.io runs your app in 30+ regions close to your users — think CDN, but for your entire application. <strong>Weak spot:</strong> Requires Docker knowledge; no managed PostgreSQL (must self-manage or use external); steeper learning curve than Render or Railway.</p>
+
+<p><strong>Railway — Best for:</strong> Developers who want instant gratification — Railway's template-driven approach means you go from zero to deployed in under 60 seconds. The usage-based pricing means you only pay for what you use. <strong>Weak spot:</strong> No auto-scaling; fewer regions; newer and less battle-tested than Render or Fly.io.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Platform</th><th>Why</th></tr>
+<tr><td>Simple web app, want zero DevOps</td><td>Render</td><td>Easiest Git-push deploy, managed PostgreSQL</td></tr>
+<tr><td>Global latency matters (game, real-time, API)</td><td>Fly.io</td><td>30+ regions, runs close to users</td></tr>
+<tr><td>Rapid prototyping, side project, hackathon</td><td>Railway</td><td>Fastest to deploy, template-driven, pay-per-use</td></tr>
+<tr><td>Need managed database + web service together</td><td>Render or Railway</td><td>Both offer integrated managed PostgreSQL</td></tr>
+<tr><td>Dockerized app that needs complex networking</td><td>Fly.io</td><td>WireGuard mesh, advanced networking</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> For most side projects and early startups, Render is the best default — Git push deploy, managed PostgreSQL, fair pricing, and the simplest experience. Fly.io wins when global latency matters — the edge deployment model is unique and powerful. Railway is the fastest from idea to deployed, perfect for prototyping and hackathons. See also: <a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html">Vercel vs Netlify vs Cloudflare</a> and <a href="/en/compare/fly-io-vs-railway-vs-render.html">Fly.io vs Railway vs Render</a>.</p>
+'''
+
+BODIES['sell-stock-photos-videos'] = '''
+<p>Selling stock photos, videos, and digital media is a genuinely passive income stream — create once, sell indefinitely. For developers, the opportunity extends beyond photos: you can sell 3D assets, motion graphics, code snippets, and technical illustrations that non-technical creators cannot produce. This guide covers platforms, pricing, and strategies for selling digital media as a developer.</p>
+
+<h2>Types of Digital Media to Sell</h2>
+<table>
+<tr><th>Media Type</th><th>Price Range</th><th>Revenue Potential</th><th>Technical Skill Level</th></tr>
+<tr><td>Stock Photos</td><td>$0.25-$10 per download</td><td>$100-$2,000/mo</td><td>Low-Medium (photography basics)</td></tr>
+<tr><td>Stock Videos</td><td>$15-$100 per clip</td><td>$200-$5,000/mo</td><td>Medium (video shooting + editing)</td></tr>
+<tr><td>3D Models & Assets</td><td>$10-$200 per model</td><td>$500-$10,000/mo</td><td>High (Blender, Cinema 4D)</td></tr>
+<tr><td>Motion Graphics / Lottie</td><td>$5-$50 per animation</td><td>$300-$5,000/mo</td><td>Medium (After Effects, Rive)</td></tr>
+<tr><td>Code Snippets & Templates</td><td>$5-$50 per item</td><td>$200-$8,000/mo</td><td>Low for devs</td></tr>
+<tr><td>Technical Illustrations</td><td>$10-$100 per illustration</td><td>$200-$3,000/mo</td><td>Medium (Illustrator, Figma)</td></tr>
+</table>
+
+<h2>Platform Comparison for Selling Digital Media</h2>
+<table>
+<tr><th>Platform</th><th>Commission</th><th>Best For</th><th>Exclusivity Required?</th></tr>
+<tr><td>Shutterstock</td><td>15-40% (tiered by lifetime sales)</td><td>Photos + videos, largest audience</td><td>No</td></tr>
+<tr><td>Adobe Stock</td><td>33% (photos), 35% (video)</td><td>Photos + vectors, integrates with Creative Cloud</td><td>No</td></tr>
+<tr><td>Envato Market</td><td>37-70% (exclusive vs non-exclusive)</td><td>Code, templates, motion graphics, 3D</td><td>Optional (higher cut if exclusive)</td></tr>
+<tr><td>Gumroad</td><td>10%</td><td>Any digital product, you set the price</td><td>No</td></tr>
+<tr><td>ArtStation</td><td>5-12%</td><td>3D models, game assets, concept art</td><td>No</td></tr>
+<tr><td>Sketchfab</td><td>30%</td><td>3D models (best 3D viewer)</td><td>No</td></tr>
+</table>
+
+<h2>What Sells Best for Developers</h2>
+<ol>
+<li><strong>Coding/tech lifestyle photos:</strong> Authentic developer workspace shots, coding on laptop, pair programming — high demand, low supply.</li>
+<li><strong>API/architecture diagrams:</strong> Well-designed technical diagrams (microservices, database schemas, CI/CD flows) that writers and companies need for blog posts.</li>
+<li><strong>UI element animations:</strong> Lottie animations of buttons, loading spinners, success/error states that designers drop into prototypes.</li>
+<li><strong>3D device mockups:</strong> Realistic 3D renders of iPhones, laptops, and tablets in isometric view — used in every SaaS landing page.</li>
+<li><strong>Code snippet templates:</strong> Production-ready snippets (authentication flow, Stripe integration, file upload) that save developers hours.</li>
+</ol>
+
+<h2>Developer-Optimized Workflow</h2>
+<pre><code># Automate your stock media business
+# 1. Batch create: shoot 50 photos in a session, edit in bulk
+# 2. Metadata automation: script title/description/keyword generation
+# 3. Multi-platform upload: use each platform's API or Zapier to upload once, distribute everywhere
+# 4. Track sales: aggregate sales data from all platforms into a dashboard
+
+# Key metric: earnings per asset per month
+# 100 assets × $0.50/asset/month = $50/mo
+# 500 assets × $1.00/asset/month = $500/mo
+# 2,000 assets × $1.50/asset/month = $3,000/mo
+# Portfolio size is the biggest lever — upload consistently</code></pre>
+
+<p><strong>Bottom line:</strong> Selling stock media is the ultimate passive income — but it requires a portfolio of 500+ assets to generate meaningful monthly income ($500+). Developers have an edge in technical media (code snippets, architecture diagrams, 3D device mockups, API illustrations) where non-technical creators cannot compete. Start with what you already create (diagrams for blog posts, code snippets you've written) and list them today. See also: <a href="/en/sidehustle/sell-ui-kits-design-assets.html">Selling UI Kits and Design Assets</a> and <a href="/en/sidehustle/selling-code-templates.html">Selling Code Templates</a>.</p>
+'''
+
+BODIES['warp-vs-iterm2-vs-kitty'] = '''
+<p>The terminal is a developer's most-used tool — you spend hours every day in it. Yet many developers stick with whatever came pre-installed. In 2026, modern terminal emulators offer GPU-accelerated rendering, AI-powered features, and extensive plugin systems that meaningfully improve productivity. This comparison covers the top terminal emulators and which is right for your workflow.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>Warp</th><th>iTerm2</th><th>Kitty</th></tr>
+<tr><td>Type</td><td>Modern, Rust-based, AI-powered</td><td>macOS classic, feature-rich</td><td>GPU-accelerated, keyboard-driven</td></tr>
+<tr><td>Platform</td><td>macOS, Linux (beta)</td><td>macOS only</td><td>macOS, Linux, BSD</td></tr>
+<tr><td>Rendering</td><td>Metal (GPU-accelerated)</td><td>Metal (GPU-accelerated)</td><td>OpenGL/ Metal (GPU-accelerated)</td></tr>
+<tr><td>AI Integration</td><td>Yes — built-in Warp AI (natural language → command, explain errors)</td><td>No (can add via shell plugins)</td><td>No (DIY via shell scripts)</td></tr>
+<tr><td>Split Panes</td><td>Yes (tabs + splits, modern UI)</td><td>Yes (extensive split/tab options)</td><td>Yes (tabs + splits, keyboard-driven)</td></tr>
+<tr><td>Plugin/Extension System</td><td>Workflows (parameterized commands)</td><td>Python API, Shell Integration, Triggers</td><td>Kittens (Python terminal extensions), Remote control</td></tr>
+<tr><td>Themes / Appearance</td><td>Good (themes, custom fonts, transparency)</td><td>Excellent (most themeable, profiles)</td><td>Good (themes, custom fonts, transparency)</td></tr>
+<tr><td>Memory Usage (idle, 1 window)</td><td>~200-300MB (Rust runtime + AI features)</td><td>~100-150MB</td><td>~50-80MB (most lightweight)</td></tr>
+<tr><td>Terminal Output Performance</td><td>Very Good (GPU-accelerated)</td><td>Very Good (GPU-accelerated)</td><td>Excellent (GPU-first, best raw throughput)</td></tr>
+<tr><td>Open Source</td><td>No (proprietary, free for individual)</td><td>Yes (GPL v2)</td><td>Yes (GPL v3)</td></tr>
+<tr><td>Pricing</td><td>Free (individual), $18/mo Team</td><td>Free</td><td>Free</td></tr>
+</table>
+
+<h2>When Each Terminal Wins</h2>
+<p><strong>Warp — Best for:</strong> Developers who want a modern, IDE-like terminal experience. Warp's standout features: (1) AI-powered natural language → command translation ("convert this video to webp" → ffmpeg command), (2) output is grouped into blocks you can copy/scroll/save independently, (3) shared workflows for your team. <strong>Weak spot:</strong> Proprietary; requires login; higher memory usage; some advanced terminal features (like remote ssh multiplexing) are less mature.</p>
+
+<p><strong>iTerm2 — Best for:</strong> macOS developers who want the most feature-complete, battle-tested terminal. iTerm2 has been the Mac standard for 15+ years — every terminal feature you can think of exists. <strong>Weak spot:</strong> macOS only; can feel cluttered compared to modern terminals; no built-in AI features.</p>
+
+<p><strong>Kitty — Best for:</strong> Developers who want maximum performance, keyboard-driven everything, and cross-platform support. Kitty's GPU-first rendering is the fastest — if you cat a 1GB log file, Kitty renders it smoothly while others stutter. <strong>Weak spot:</strong> No graphical preferences (config is a text file); steeper learning curve; less approachable for beginners.</p>
+
+<h2>Killer Features Showdown</h2>
+<table>
+<tr><th>Feature</th><th>Warp</th><th>iTerm2</th><th>Kitty</th></tr>
+<tr><td>AI Command Generation</td><td>★★★★★ (best in class)</td><td>—</td><td>—</td></tr>
+<tr><td>Output Organization</td><td>★★★★★ (blocks, bookmarks)</td><td>★★★ (marks, annotations)</td><td>★★ (scrollback pager)</td></tr>
+<tr><td>Remote / SSH</td><td>★★★ (basic)</td><td>★★★★★ (profiles, tmux integration)</td><td>★★★★ (kitten ssh, remote control)</td></tr>
+<tr><td>Image Display (in terminal)</td><td>★★★★ (inline)</td><td>★★★★ (imgcat)</td><td>★★★★★ (icat kitten, best)</td></tr>
+<tr><td>Performance (large output)</td><td>★★★★</td><td>★★★★</td><td>★★★★★</td></tr>
+<tr><td>Customization</td><td>★★★</td><td>★★★★★</td><td>★★★★</td></tr>
+</table>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Terminal</th><th>Why</th></tr>
+<tr><td>Want AI in the terminal, modern UX</td><td>Warp</td><td>Best AI integration, modern block-based output</td></tr>
+<tr><td>macOS power user, want max features</td><td>iTerm2</td><td>Most mature, most features, most configurable</td></tr>
+<tr><td>Cross-platform (macOS + Linux), performance</td><td>Kitty</td><td>Fastest, GPU-first, keyboard-driven, works on both</td></tr>
+<tr><td>Minimal, memory-efficient, pure speed</td><td>Kitty</td><td>50MB idle, best raw throughput</td></tr>
+<tr><td>Heavy SSH user, tmux workflows</td><td>iTerm2</td><td>Best tmux integration, profiles system</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Warp is the most exciting terminal innovation in a decade — AI command generation, block-based output, and a modern UI make it the best choice for most developers. iTerm2 remains the safe, feature-complete choice for macOS users. Kitty is the pick for performance purists and cross-platform users. Try all three — the terminal is too personal a tool to choose based on someone else's comparison. See also: <a href="/en/tools/best-terminal-emulators.html">Best Terminal Emulators</a> and <a href="/en/tools/editor-comparison-2026.html">Code Editor Comparison</a>.</p>
+'''
+
 # FAQ data for FAQPage schema (slug → list of q/a dicts)
 FAQS = {
     'chatgpt-plus-worth': [

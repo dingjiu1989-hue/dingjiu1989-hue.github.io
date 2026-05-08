@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="oauth2-oidc-implementation">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="OAuth 2.0 and OIDC Implementation Guide 2026: Complete Developer Walkthrough">
+    <meta property="og:description" content="Implement OAuth 2.0 and OpenID Connect from scratch — understand authorization codes, PKCE, JWT tokens, and security best practices.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/oauth2-oidc-implementation.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="OAuth 2.0 and OIDC Implementation Guide 2026: Complete Developer Walkthrough">
+    <meta name="twitter:description" content="Implement OAuth 2.0 and OpenID Connect from scratch — understand authorization codes, PKCE, JWT tokens, and security best practices.">
+    <title>OAuth 2.0 and OIDC Implementation Guide 2026: Complete Developer Walkthrough — SourceHub</title>
+    <meta name="description" content="Implement OAuth 2.0 and OpenID Connect from scratch — understand authorization codes, PKCE, JWT tokens, and security best practices.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/oauth2-oidc-implementation.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/oauth2-oidc-implementation.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "OAuth 2.0 and OIDC Implementation Guide 2026: Complete Developer Walkthrough",
+      "description": "Implement OAuth 2.0 and OpenID Connect from scratch — understand authorization codes, PKCE, JWT tokens, and security best practices.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "OAuth 2.0 and OIDC Implementation Guide 2026: Complete Developer Walkthrough"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › OAuth 2.0 and OIDC Implementation Guide 2026: Complete Developer Walkthrough
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">OAuth 2.0</span>
+        <span class="tag-cat">OIDC</span>
+        <span class="tag-cat">Authentication</span>
+        <span class="tag-cat">Security</span></div>
+      <h1 class="article-title">OAuth 2.0 and OIDC Implementation Guide 2026: Complete Developer Walkthrough</h1>
+      <div class="article-meta">Published 2026-05-08 · 11160 views · 93 replies</div>
+      <div class="article-body"><p>OAuth 2.0 and OpenID Connect (OIDC) are the foundation of modern authentication — every "Sign in with Google/GitHub/Apple" button uses them. But implementing OAuth 2.0 correctly is notoriously tricky: the spec is 80+ pages, and getting it wrong means security vulnerabilities. This guide walks through a complete implementation, from the authorization code flow to PKCE, token storage, and session management.</p>
+
+<h2>OAuth 2.0 Grant Types: When to Use Each</h2>
+<table>
+<tr><th>Grant Type</th><th>Use Case</th><th>Security Level</th><th>Requires Client Secret?</th></tr>
+<tr><td>Authorization Code + PKCE</td><td>Single-page apps, mobile apps, all modern web apps</td><td>Highest</td><td>No (PKCE replaces the secret)</td></tr>
+<tr><td>Authorization Code (classic)</td><td>Server-rendered web apps (backend can keep a secret)</td><td>High</td><td>Yes</td></tr>
+<tr><td>Client Credentials</td><td>Machine-to-machine, service accounts, API integrations</td><td>Medium</td><td>Yes</td></tr>
+<tr><td>Device Code</td><td>TV apps, CLI tools, IoT devices (input-constrained)</td><td>Medium</td><td>No</td></tr>
+<tr><td>Refresh Token</td><td>Renew access tokens without re-authentication</td><td>N/A</td><td>Yes (usually)</td></tr>
+<tr><td>Implicit (DEPRECATED)</td><td>Do NOT use — insecure, tokens in URL fragment</td><td>None</td><td>Do NOT use</td></tr>
+</table>
+
+<h2>The Authorization Code + PKCE Flow (Step by Step)</h2>
+<pre><code># Complete OAuth 2.0 + PKCE Flow
+# Step 1: Generate PKCE code verifier and challenge
+import hashlib, base64, os, secrets
+
+def generate_pkce_pair():
+    # Code verifier: 43-128 random characters
+    code_verifier = base64.urlsafe_b64encode(os.urandom(32)).rstrip(b'=').decode()
+    # Code challenge: SHA256 hash of verifier, base64url encoded
+    code_challenge = base64.urlsafe_b64encode(
+        hashlib.sha256(code_verifier.encode()).digest()
+    ).rstrip(b'=').decode()
+    return code_verifier, code_challenge
+
+code_verifier, code_challenge = generate_pkce_pair()
+
+# Step 2: Redirect user to authorization endpoint
+state = secrets.token_urlsafe(32)  # CSRF protection
+auth_url = (
+    f"https://provider.com/authorize"
+    f"?response_type=code"
+    f"&client_id={CLIENT_ID}"
+    f"&redirect_uri={REDIRECT_URI}"
+    f"&code_challenge={code_challenge}"
+    f"&code_challenge_method=S256"
+    f"&scope=openid+profile+email"
+    f"&state={state}"
+)
+# Store state + code_verifier in session; redirect user to auth_url
+
+# Step 3: User authenticates → provider redirects to your callback with ?code=xxx&state=yyy
+# Verify state matches (prevents CSRF)
+
+# Step 4: Exchange authorization code for tokens
+token_response = requests.post("https://provider.com/token", data={
+    "grant_type": "authorization_code",
+    "code": received_code,
+    "redirect_uri": REDIRECT_URI,
+    "client_id": CLIENT_ID,
+    "code_verifier": code_verifier,  # PKCE: proves we initiated the flow
+})
+tokens = token_response.json()
+# tokens.access_token, tokens.id_token, tokens.refresh_token</code></pre>
+
+<h2>Token Security Best Practices</h2>
+<table>
+<tr><th>Practice</th><th>Why</th><th>Implementation</th></tr>
+<tr><td>Validate the state parameter</td><td>Prevents CSRF attacks on the callback endpoint</td><td>Compare received state with session-stored state</td></tr>
+<tr><td>Use PKCE for ALL clients</td><td>Prevents authorization code interception</td><td>Even for confidential clients — it is free security</td></tr>
+<tr><td>Validate ID tokens</td><td>Prevents token injection and replay attacks</td><td>Check signature, issuer, audience, expiration, nonce</td></tr>
+<tr><td>Store tokens server-side</td><td>Access tokens in browser local storage are XSS-vulnerable</td><td>HttpOnly, Secure, SameSite cookies for session ID</td></tr>
+<tr><td>Use short-lived access tokens</td><td>Limits damage if a token is leaked</td><td>5-15 minutes; use refresh tokens for renewal</td></tr>
+<tr><td>Implement token rotation</td><td>Each refresh token use returns a new refresh token</td><td>Invalidate the old refresh token after rotation</td></tr>
+</table>
+
+<h2>OAuth Providers: Self-Hosted vs Managed</h2>
+<table>
+<tr><th>Provider</th><th>Type</th><th>Best For</th><th>Pricing</th></tr>
+<tr><td>Auth0</td><td>Managed</td><td>Enterprise, comprehensive identity management</td><td>Free (7,500 MAU), $25/mo (1K MAU)</td></tr>
+<tr><td>Clerk</td><td>Managed</td><td>React/Next.js apps, best developer experience</td><td>Free (10K MAU), $25/mo (1K MAU)</td></tr>
+<tr><td>Lucia Auth</td><td>Library (self-hosted)</td><td>Full control, TypeScript-native</td><td>Free (MIT)</td></tr>
+<tr><td>Supabase Auth</td><td>Managed + Self-hosted</td><td>Apps already using Supabase</td><td>Free (50K MAU), $25/mo (100K MAU)</td></tr>
+<tr><td>NextAuth.js (Auth.js)</td><td>Library (self-hosted)</td><td>Next.js apps, OAuth provider agnostic</td><td>Free (MIT)</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Use a library or managed service for OAuth 2.0 — never implement the protocol from scratch unless you are building an auth provider. The spec is complex and the security consequences of getting it wrong are severe. For most projects, Clerk or Supabase Auth provides the best balance of security, developer experience, and cost. When building your own, always use Authorization Code + PKCE flow — the implicit flow is deprecated and unsafe. See also: <a href="/en/tech/authentication-best-practices-2026.html">Authentication Best Practices</a> and <a href="/en/compare/clerk-vs-auth0-vs-lucia.html">Clerk vs Auth0 vs Lucia</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>
