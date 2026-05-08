@@ -1825,6 +1825,591 @@ BODIES['figma-vs-canva-vs-penpot'] = '''
 <p><strong>Bottom line for developers:</strong> Use Figma for UI design, Canva for marketing graphics. Both have excellent free tiers. See our <a href="/en/tools/design-tools-for-developers.html">full design tools guide</a> for color palettes, icons, and illustration resources.</p>
 '''
 
+BODIES['github-vs-gitlab-vs-bitbucket'] = '''
+<p>Your Git hosting platform shapes everything: CI/CD, code review, project management, and team collaboration. GitHub, GitLab, and Bitbucket each take different approaches. Here's which one fits your workflow.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>GitHub</th><th>GitLab</th><th>Bitbucket</th></tr>
+<tr><td><strong>Best for</strong></td><td>Open source, collaboration</td><td>DevOps, self-hosted</td><td>Atlassian ecosystem teams</td></tr>
+<tr><td><strong>Free tier</strong></td><td>Unlimited repos, Actions 2000 min</td><td>Unlimited repos, CI 400 min</td><td>5 users, 1GB storage</td></tr>
+<tr><td><strong>CI/CD</strong></td><td>GitHub Actions</td><td>GitLab CI (built-in)</td><td>Bitbucket Pipelines</td></tr>
+<tr><td><strong>Self-hosted</strong></td><td>GitHub Enterprise ($$$)</td><td>GitLab CE/EE (free option)</td><td>Bitbucket Data Center</td></tr>
+<tr><td><strong>AI coding</strong></td><td>Copilot (native integration)</td><td>GitLab Duo</td><td>None</td></tr>
+<tr><td><strong>Project mgmt</strong></td><td>GitHub Projects + Issues</td><td>Epics, Roadmaps, Boards</td><td>Jira integration</td></tr>
+<tr><td><strong>Community</strong></td><td>100M+ developers</td><td>30M+ users</td><td>10M+ users</td></tr>
+</table>
+
+<h2>GitHub — The Industry Standard</h2>
+<p>GitHub is where open source lives. With 100M+ developers, it's the default for collaboration, portfolio hosting, and community-driven development. GitHub Actions is the most popular CI/CD platform, and Copilot integration makes it the most AI-native Git host.</p>
+<p><strong>Strengths:</strong> Largest developer community — your profile IS your resume. Actions marketplace has 20K+ workflows. Copilot integration is seamless. Free tier is very generous. Pages for static hosting, Codespaces for cloud dev.</p>
+<p><strong>Weaknesses:</strong> No real self-hosted free option. Less built-in DevOps than GitLab. Project management less mature than Jira. Microsoft-owned raises occasional privacy concerns.</p>
+<p><strong>Best for:</strong> Open source projects, portfolio hosting, teams wanting the largest ecosystem, developers who use Copilot.</p>
+
+<h2>GitLab — The DevOps Powerhouse</h2>
+<p>GitLab is a complete DevOps platform in one application. From planning to monitoring, everything is integrated. Their self-hosted Community Edition is genuinely free and powerful — a rarity in 2026.</p>
+<p><strong>Strengths:</strong> Most complete built-in DevOps (no plugin assembly needed). Self-hosted CE is free and full-featured. Built-in container registry, security scanning, and package registry. Strong project management with epics and roadmaps.</p>
+<p><strong>Weaknesses:</strong> Smaller community than GitHub. CI/CD minutes are limited on free tier. UI is feature-dense (steeper learning curve). Fewer third-party integrations than GitHub Actions.</p>
+<p><strong>Best for:</strong> Teams wanting a single integrated DevOps platform, companies that need self-hosted Git, organizations with compliance requirements.</p>
+
+<h2>Bitbucket — Tightest Jira Integration</h2>
+<p>Bitbucket's main selling point is seamless integration with Jira, Confluence, and the Atlassian ecosystem. If your company already uses Jira, Bitbucket means unified issue tracking and code management.</p>
+<p><strong>Strengths:</strong> Best-in-class Jira integration. Trello-style board view for repos. Bitbucket Pipelines is simple to set up. Good for small teams (free for 5 users).</p>
+<p><strong>Weaknesses:</strong> Smallest community of the three. No AI coding assistant. Free tier limited to 5 users. Less innovative than GitHub or GitLab. Fewer integrations overall.</p>
+<p><strong>Best for:</strong> Teams already using Jira/Confluence, small teams under 5, organizations committed to the Atlassian ecosystem.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Choice</th></tr>
+<tr><td>Open source project</td><td><strong>GitHub</strong> — community reach is unmatched</td></tr>
+<tr><td>Solo developer portfolio</td><td><strong>GitHub</strong> — that's where hiring managers look</td></tr>
+<tr><td>Self-hosted, compliance-first</td><td><strong>GitLab CE</strong> — free and complete</td></tr>
+<tr><td>Jira-based team</td><td><strong>Bitbucket</strong> — integration is the whole point</td></tr>
+<tr><td>Full DevOps in one tool</td><td><strong>GitLab</strong> — no assembly required</td></tr>
+<tr><td>Maximum AI assistance</td><td><strong>GitHub + Copilot</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> GitHub for community and collaboration, GitLab for integrated DevOps, Bitbucket only if you live in Jira. Most developers should start with GitHub and only switch if they need something GitHub doesn't offer. See also: <a href="/en/tech/git-cheatsheet.html">Git Cheatsheet</a> and <a href="/en/tech/git-advanced.html">Advanced Git Guide</a>.</p>
+'''
+
+BODIES['react-vs-vue-vs-angular-vs-svelte'] = '''
+<p>Choosing a frontend framework is one of the highest-stakes technical decisions you'll make. The wrong choice means fighting uphill for months. Here's how React, Vue, Angular, and Svelte compare on what actually matters in 2026.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>React</th><th>Vue</th><th>Angular</th><th>Svelte</th></tr>
+<tr><td><strong>Type</strong></td><td>Library (with ecosystem)</td><td>Progressive framework</td><td>Full framework</td><td>Compiler-first framework</td></tr>
+<tr><td><strong>Learning curve</strong></td><td>Moderate</td><td>Easiest</td><td>Steepest</td><td>Easy</td></tr>
+<tr><td><strong>Performance</strong></td><td>Good (Virtual DOM)</td><td>Good (Virtual DOM)</td><td>Good (Zone.js)</td><td>Excellent (no VDOM)</td></tr>
+<tr><td><strong>Bundle size</strong></td><td>~42KB (react-dom)</td><td>~23KB</td><td>~65KB+</td><td>~2KB (disappears)</td></tr>
+<tr><td><strong>TypeScript</strong></td><td>Good (optional)</td><td>Good (optional)</td><td>Excellent (first-class)</td><td>Good</td></tr>
+<tr><td><strong>Ecosystem</strong></td><td>Largest</td><td>Large</td><td>Large</td><td>Growing fast</td></tr>
+<tr><td><strong>Job market</strong></td><td>#1</td><td>#2</td><td>Enterprise-heavy</td><td>Growing</td></tr>
+<tr><td><strong>Meta-framework</strong></td><td>Next.js</td><td>Nuxt</td><td>Analog</td><td>SvelteKit</td></tr>
+</table>
+
+<h2>React — The Safe, Ubiquitous Choice</h2>
+<p>React remains the most popular frontend framework in 2026. It's not a framework — it's a library surrounded by a massive ecosystem of routers, state managers, and meta-frameworks. The community is so large that any problem you hit, someone has already solved and documented it.</p>
+<p><strong>Strengths:</strong> Largest ecosystem and community. Next.js is the best full-stack meta-framework. Huge job market. React Server Components are a paradigm shift for performance. Can build anything from a widget to a full app.</p>
+<p><strong>Weaknesses:</strong> Too many choices (decision fatigue for beginners). useEffect can be tricky. Virtual DOM adds overhead. Bundle size is larger than Vue or Svelte. You need to assemble your own stack.</p>
+<p><strong>Best for:</strong> Developers who want maximum job opportunities, large teams, projects that need the richest ecosystem, and anyone building full-stack apps with Next.js.</p>
+
+<h2>Vue — The Gentle, Productive Choice</h2>
+<p>Vue hits the sweet spot between simplicity and power. Its single-file components (.vue files with template, script, and style) are intuitive. The Composition API (inspired by React hooks) is well-designed. Nuxt provides a first-class meta-framework.</p>
+<p><strong>Strengths:</strong> Easiest learning curve of the four. Single-file components are beautifully organized. Excellent documentation. Nuxt 3 is a top-tier meta-framework. Smaller bundle than React. Growing ecosystem in Asia and Europe.</p>
+<p><strong>Weaknesses:</strong> Smaller job market than React (especially in US). Smaller ecosystem. Some large companies avoid it. Community split between Options API and Composition API can confuse newcomers.</p>
+<p><strong>Best for:</strong> Solo developers, startups wanting fast iteration, developers who value simplicity and well-designed APIs, projects where bundle size matters.</p>
+
+<h2>Angular — The Enterprise Framework</h2>
+<p>Angular is the only framework here that provides everything out of the box: routing, forms, HTTP client, state management, and testing utilities. It uses RxJS for reactive programming and has the strictest opinions about how code should be structured.</p>
+<p><strong>Strengths:</strong> Batteries included — no decision fatigue. First-class TypeScript (it was designed for it). Dependency injection is powerful for large apps. Consistent architecture across projects. Good for very large teams.</p>
+<p><strong>Weaknesses:</strong> Steepest learning curve. Heaviest bundle. Overkill for small to medium projects. RxJS adds complexity. Smaller community than React. Signals (reactive state) still maturing. Enterprise reputation limits startup appeal.</p>
+<p><strong>Best for:</strong> Large enterprise applications, teams that want strict conventions, developers at companies with Angular standards, projects where consistency across many teams matters.</p>
+
+<h2>Svelte — The Performance Innovator</h2>
+<p>Svelte is fundamentally different: it's a compiler that converts your components into vanilla JavaScript at build time. There's no virtual DOM, no framework runtime shipped to the browser. The result is tiny bundles and excellent performance. Svelte 5 introduced runes, a cleaner reactive state system.</p>
+<p><strong>Strengths:</strong> Smallest bundles. Best runtime performance. Least boilerplate code. SvelteKit is excellent for full-stack. Runes (Svelte 5) simplify reactive state. Feels like writing HTML with superpowers.</p>
+<p><strong>Weaknesses:</strong> Smaller ecosystem and community. Fewer third-party component libraries. Job market is still small. Less tooling maturity. Risk of framework churn (Svelte 5 was a significant change).</p>
+<p><strong>Best for:</strong> Performance-sensitive apps, developers who value minimal boilerplate, side projects where you want to move fast, developers who enjoy being on the cutting edge.</p>
+
+<h2>Which One Should You Learn in 2026?</h2>
+<table>
+<tr><th>Your Goal</th><th>Pick</th></tr>
+<tr><td>Get a job (maximum openings)</td><td><strong>React + Next.js</strong></td></tr>
+<tr><td>Ship a side project fastest</td><td><strong>Vue or Svelte</strong></td></tr>
+<tr><td>Work in enterprise</td><td><strong>Angular</strong></td></tr>
+<tr><td>Best performance + DX combo</td><td><strong>Svelte</strong></td></tr>
+<tr><td>Safest bet for a startup</td><td><strong>React + Next.js</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> React is the safe default — biggest job market, richest ecosystem, and Next.js makes it full-stack. Vue is the productivity pick for solo developers. Angular for enterprise. Svelte if you want the future today. See also: <a href="/en/compare/nextjs-vs-nuxt-vs-sveltekit.html">Next.js vs Nuxt vs SvelteKit comparison</a>.</p>
+'''
+
+BODIES['nextjs-vs-nuxt-vs-sveltekit'] = '''
+<p>Meta-frameworks add routing, server-side rendering, data fetching, and deployment optimizations on top of UI libraries. Next.js (React), Nuxt (Vue), and SvelteKit (Svelte) are the three leaders. Here's how they compare.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Next.js</th><th>Nuxt</th><th>SvelteKit</th></tr>
+<tr><td><strong>Base framework</strong></td><td>React</td><td>Vue</td><td>Svelte</td></tr>
+<tr><td><strong>Rendering modes</strong></td><td>SSR, SSG, ISR, CSR</td><td>SSR, SSG, ISR, CSR</td><td>SSR, SSG, CSR, Prerender</td></tr>
+<tr><td><strong>Server</strong></td><td>Node.js, Edge</td><td>Node.js, Edge (Nitro)</td><td>Node.js, Edge (adapters)</td></tr>
+<tr><td><strong>Routing</strong></td><td>File-based (App Router)</td><td>File-based</td><td>File-based + optional layout</td></tr>
+<tr><td><strong>Data fetching</strong></td><td>Server Components, fetch</td><td>useFetch, useAsyncData</td><td>load functions</td></tr>
+<tr><td><strong>Forms</strong></td><td>Server Actions</td><td>Nuxt Forms</td><td>Form actions</td></tr>
+<tr><td><strong>TypeScript</strong></td><td>Excellent</td><td>Excellent</td><td>Good</td></tr>
+<tr><td><strong>Hosting</strong></td><td>Vercel-optimized</td><td>Any Node/edge</td><td>Any (adapter-based)</td></tr>
+</table>
+
+<h2>Next.js — The Full-Stack Powerhouse</h2>
+<p>Next.js 15 is the most mature and feature-complete meta-framework. React Server Components, Server Actions, and the App Router have redefined how React apps are built. Vercel provides first-class hosting, but Next.js runs anywhere Node.js does.</p>
+<p><strong>Strengths:</strong> React Server Components reduce client JS. Incremental Static Regeneration is best-in-class. Largest plugin and template ecosystem. Excellent image and font optimization. App Router with nested layouts is powerful. Best deployment experience on Vercel.</p>
+<p><strong>Weaknesses:</strong> App Router migration from Pages Router is ongoing. Can feel over-engineered for simple sites. Heavily tied to Vercel (though portable). Server Components have a learning curve. Cold starts can be slow without Vercel's optimization.</p>
+<p><strong>Best for:</strong> React developers, large-scale web apps, e-commerce (ISR is perfect for product pages), teams that want the most mature full-stack React solution.</p>
+
+<h2>Nuxt — The Best DX in Vue</h2>
+<p>Nuxt 3 is everything great about Vue, packaged with sensible defaults for full-stack development. Auto-imports, file-based routing, and the Nitro server engine make development fast and enjoyable. It's opinionated in the right ways.</p>
+<p><strong>Strengths:</strong> Auto-imports — write less boilerplate. Nitro server engine is fast and portable. Excellent module ecosystem (auth, SEO, content, PWA). Built-in i18n. Vue DevTools are best-in-class. Sensible defaults reduce decisions.</p>
+<p><strong>Weaknesses:</strong> Smaller ecosystem than Next.js. Fewer hosting integrations (though Nitro works everywhere). Vue's smaller community limits knowledge sharing. Some modules lag behind framework updates.</p>
+<p><strong>Best for:</strong> Vue developers, projects that value developer experience, content-heavy sites (Nuxt Content is excellent), teams that want sensible defaults without assembly.</p>
+
+<h2>SvelteKit — Minimal Code, Maximum Performance</h2>
+<p>SvelteKit is the official Svelte meta-framework. Its killer feature is that Svelte compiles away the framework at build time, leaving vanilla JS. Form actions, adapters for any platform, and a clean file-based router make it the most minimal full-stack framework.</p>
+<p><strong>Strengths:</strong> Smallest shipped JS — better Core Web Vitals by default. Form actions are intuitive and progressively enhanced. Adapter system runs anywhere. Less boilerplate than Next.js or Nuxt. Fast dev server with HMR.</p>
+<p><strong>Weaknesses:</strong> Smallest ecosystem of the three. Fewer templates and starters. Smaller community for troubleshooting. Adapters for some platforms are community-maintained. Svelte 5 migration still ongoing.</p>
+<p><strong>Best for:</strong> Performance-focused projects, developers who value minimal code, side projects, and teams comfortable with a younger ecosystem.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Pick</th></tr>
+<tr><td>E-commerce with ISR product pages</td><td><strong>Next.js</strong></td></tr>
+<tr><td>Content-heavy blog or marketing site</td><td><strong>Nuxt + Nuxt Content</strong></td></tr>
+<tr><td>Performance dashboard or real-time app</td><td><strong>SvelteKit</strong></td></tr>
+<tr><td>Maximum ecosystem and job market</td><td><strong>Next.js</strong></td></tr>
+<tr><td>Fastest setup, least boilerplate</td><td><strong>Nuxt</strong></td></tr>
+<tr><td>Best Core Web Vitals out of the box</td><td><strong>SvelteKit</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> All three are excellent in 2026. Pick based on your UI layer: React → Next.js, Vue → Nuxt, Svelte → SvelteKit. You can't go wrong. See also: <a href="/en/compare/react-vs-vue-vs-angular-vs-svelte.html">React vs Vue vs Svelte comparison</a> and hosting choices: <a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html">Vercel vs Netlify vs Cloudflare</a>.</p>
+'''
+
+BODIES['tailwind-vs-bootstrap-vs-mui'] = '''
+<p>How you style your app affects development speed, bundle size, and long-term maintainability. Tailwind CSS, Bootstrap, and Material UI represent three fundamentally different approaches. Here's which one fits your stack.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Tailwind CSS</th><th>Bootstrap</th><th>Material UI (MUI)</th></tr>
+<tr><td><strong>Approach</strong></td><td>Utility-first CSS</td><td>Component CSS framework</td><td>Design system (React)</td></tr>
+<tr><td><strong>Customization</strong></td><td>Unlimited (config file)</td><td>Good (Sass variables)</td><td>Theme-based</td></tr>
+<tr><td><strong>Learning curve</strong></td><td>Moderate (new paradigm)</td><td>Easiest</td><td>Moderate</td></tr>
+<tr><td><strong>Bundle size</strong></td><td>~3KB (purged)</td><td>~20KB (purged)</td><td>~50KB+ (tree-shaken)</td></tr>
+<tr><td><strong>JS framework agnostic</strong></td><td>Yes</td><td>Yes</td><td>No (React-only)</td></tr>
+<tr><td><strong>Pre-built components</strong></td><td>None (buy or build)</td><td>Yes (basic set)</td><td>Yes (comprehensive)</td></tr>
+<tr><td><strong>Design consistency</strong></td><td>Your responsibility</td><td>Built-in (looks like Bootstrap)</td><td>Built-in (Material Design)</td></tr>
+<tr><td><strong>Ecosystem</strong></td><td>Headless UI, shadcn/ui, daisyUI</td><td>Bootstrap themes, snippets</td><td>MUI X (advanced components)</td></tr>
+</table>
+
+<h2>Tailwind CSS — Maximum Control, Zero Opinion</h2>
+<p>Tailwind gives you atomic utility classes (flex, pt-4, text-lg) instead of pre-built components. The result is complete design freedom with less CSS. Combined with component libraries like shadcn/ui, you get beautifully designed, copy-paste React components built on Tailwind primitives.</p>
+<p><strong>Strengths:</strong> Complete design freedom — no "looking like Bootstrap." shadcn/ui is the best component ecosystem in 2026. Tiny production bundles after purging. Responsive design is natural (sm:, md:, lg:). Design tokens in tailwind.config.ts ensure consistency.</p>
+<p><strong>Weaknesses:</strong> HTML can look verbose. No pre-built components out of the box. Learning "utility-first thinking" takes a week. Design quality depends entirely on you. Can produce ugly sites if used without design sense.</p>
+<p><strong>Best for:</strong> Developers who want custom design without writing CSS, teams using shadcn/ui for component architecture, projects where performance and bundle size matter.</p>
+
+<h2>Bootstrap — Fastest Path to "Looks Decent"</h2>
+<p>Bootstrap 5 is still the fastest way to get a professional-looking site. Pre-built components (navbars, cards, modals, forms) and a responsive grid system let you build layouts in minutes. It's the most copy-paste-friendly CSS framework.</p>
+<p><strong>Strengths:</strong> Fastest setup — link one CSS file. Components look professional out of the box. Best documentation with examples. Massive theme marketplace. Everyone knows it (easy to hire for). Grid system is still excellent.</p>
+<p><strong>Weaknesses:</strong> Every Bootstrap site looks similar. Utility classes and components overlap (bloat). Less flexible than Tailwind. Design feels 2016 unless heavily customized. Not component-library friendly.</p>
+<p><strong>Best for:</strong> Admin dashboards, internal tools, prototypes, projects where design uniqueness doesn't matter, developers who want components that work with zero configuration.</p>
+
+<h2>Material UI (MUI) — React Design System, Batteries Included</h2>
+<p>MUI is a full implementation of Google's Material Design for React. Every component you need — data grids, date pickers, charts, autocomplete — comes pre-built and accessible. MUI X adds advanced components like Data Grid Pro and Date Range Picker.</p>
+<p><strong>Strengths:</strong> Most comprehensive React component library. Every component follows Material Design (consistent UX). Excellent accessibility (a11y) out of the box. MUI X for advanced use cases. Theme system is powerful and TypeScript-aware. Large community and documentation.</p>
+<p><strong>Weaknesses:</strong> Only works with React. Heavy bundle (tree-shake aggressively). Your app looks like Google (Material Design). Customizing beyond the theme can be complex. Design trends are moving away from Material Design.</p>
+<p><strong>Best for:</strong> React apps that need a comprehensive, accessible design system, B2B dashboards, data-heavy interfaces, teams that want to move fast with pre-built components.</p>
+
+<h2>The Developer's Styling Stack</h2>
+<table>
+<tr><th>Scenario</th><th>Best Choice</th></tr>
+<tr><td>Unique, custom design</td><td><strong>Tailwind + shadcn/ui</strong></td></tr>
+<tr><td>Fastest prototype or admin panel</td><td><strong>Bootstrap</strong></td></tr>
+<tr><td>Data-heavy React dashboard</td><td><strong>MUI</strong></td></tr>
+<tr><td>Framework-agnostic, clean sites</td><td><strong>Bootstrap</strong></td></tr>
+<tr><td>Modern component architecture</td><td><strong>shadcn/ui (on Tailwind)</strong></td></tr>
+<tr><td>Maximum performance</td><td><strong>Tailwind CSS</strong> (smallest bundle)</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> In 2026, Tailwind CSS + shadcn/ui is the dominant stack for new projects — it gives you custom design with copy-paste components. Bootstrap is still king for quick internal tools. MUI for React data-heavy apps. See our <a href="/en/tools/design-tools-for-developers.html">design tools guide</a> for the full visual stack.</p>
+'''
+
+BODIES['prisma-vs-drizzle-vs-typeorm'] = '''
+<p>Your ORM shapes how you interact with your database — every query, migration, and type-safe operation flows through it. Prisma, Drizzle, and TypeORM represent three different philosophies. Here's which one produces the best developer experience in 2026.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Prisma</th><th>Drizzle</th><th>TypeORM</th></tr>
+<tr><td><strong>Approach</strong></td><td>Schema-first (declarative)</td><td>SQL-like (relational query builder)</td><td>Decorator-based + Active Record</td></tr>
+<tr><td><strong>Migration system</strong></td><td>Prisma Migrate (auto-diff)</td><td>Drizzle Kit (auto-diff)</td><td>TypeORM Migrations (manual)</td></tr>
+<tr><td><strong>Type safety</strong></td><td>Excellent (generated types)</td><td>Excellent (inferred from schema)</td><td>Good (decorators)</td></tr>
+<tr><td><strong>Query syntax</strong></td><td>Prisma Client (ORM-style)</td><td>SQL-like (select, from, where)</td><td>QueryBuilder + Repository</td></tr>
+<tr><td><strong>SQL access</strong></td><td>Raw queries only</td><td>Relational queries ~= SQL</td><td>QueryBuilder close to SQL</td></tr>
+<tr><td><strong>Performance</strong></td><td>Good (with joins opt-in)</td><td>Excellent (minimal overhead)</td><td>Moderate</td></tr>
+<tr><td><strong>Edge runtime</strong></td><td>Limited (proxy required)</td><td>Native support</td><td>Limited</td></tr>
+<tr><td><strong>Bundle size</strong></td><td>Large (generated client)</td><td>Small</td><td>Large</td></tr>
+<tr><td><strong>Database support</strong></td><td>Postgres, MySQL, SQLite, MongoDB, SQL Server</td><td>Postgres, MySQL, SQLite, Turso, Planetscale</td><td>10+ databases</td></tr>
+</table>
+
+<h2>Prisma — The Developer Experience King</h2>
+<p>Prisma's declarative schema file is a joy to work with. Define your models in Prisma Schema Language, run `prisma migrate dev`, and get a fully typed client. The generated types flow through your entire application. It's the most polished ORM experience available.</p>
+<p><strong>Strengths:</strong> Schema language is readable and self-documenting. Auto-generated migrations from schema changes. Excellent TypeScript inference on every query. Prisma Studio (GUI database browser). Best documentation and community. Works with multiple databases.</p>
+<p><strong>Weaknesses:</strong> Generated client is heavy (especially for serverless cold starts). Queries can be slower than raw SQL for complex joins. No native edge runtime support (needs Data Proxy). Schema-first means your DB is the source of truth (less flexible for code-first teams).</p>
+<p><strong>Best for:</strong> Teams that value DX over raw performance, projects using relational databases (especially Postgres), developers who want the most polished TypeScript ORM experience.</p>
+
+<h2>Drizzle — SQL for People Who Love TypeScript</h2>
+<p>Drizzle is the rising star of 2026. Its query syntax maps almost 1:1 to SQL — `db.select().from(users).where(eq(users.id, 1))` — but with full TypeScript inference. No code generation, no heavy client, just TypeScript functions that produce SQL. It's lightweight, fast, and runs anywhere.</p>
+<p><strong>Strengths:</strong> Queries feel like SQL (easy to reason about). No code generation — just TypeScript. Excellent performance (minimal overhead). Native edge runtime support. Small bundle. Drizzle Kit for migrations is solid. Great for serverless.</p>
+<p><strong>Weaknesses:</strong> Newer than Prisma (smaller community). Less documentation and fewer examples. No equivalent of Prisma Studio. Schema definitions are less self-documenting. Ecosystem maturity is still catching up.</p>
+<p><strong>Best for:</strong> SQL-savvy developers, serverless/edge deployments, projects where bundle size and cold starts matter, developers who want to think in SQL with TypeScript safety.</p>
+
+<h2>TypeORM — The Mature Enterprise Choice</h2>
+<p>TypeORM has been around the longest and supports the most databases (10+). It offers both Active Record and Data Mapper patterns. Decorator-based entity definitions appeal to developers coming from Java/Spring or .NET backgrounds.</p>
+<p><strong>Strengths:</strong> Widest database support (Postgres, MySQL, Oracle, MSSQL, etc.). Both Active Record and Data Mapper patterns. Mature and battle-tested (used in production for years). Good for enterprise with legacy DB requirements.</p>
+<p><strong>Weaknesses:</strong> Decorator syntax is verbose (experimental in TypeScript). Migration system is manual and clunky. Type safety is weaker than Prisma or Drizzle. Maintenance has slowed. Active development is less active than Prisma/Drizzle. Performance overhead from decorator reflection.</p>
+<p><strong>Best for:</strong> Teams with multiple database types (especially Oracle/MSSQL), NestJS projects (tight integration), enterprise environments that need the broadest DB support.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best ORM</th></tr>
+<tr><td>New project, best overall DX</td><td><strong>Prisma</strong></td></tr>
+<tr><td>Serverless/edge, minimal overhead</td><td><strong>Drizzle</strong></td></tr>
+<tr><td>SQL-first developer, loves raw queries</td><td><strong>Drizzle</strong></td></tr>
+<tr><td>Enterprise with Oracle/MSSQL</td><td><strong>TypeORM</strong></td></tr>
+<tr><td>NestJS application</td><td><strong>TypeORM</strong> (native integration)</td></tr>
+<tr><td>Side project, fastest to ship</td><td><strong>Prisma</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Prisma for the best DX and fastest time-to-ship. Drizzle for performance and SQL purists. TypeORM for enterprise NestJS projects. In 2026, the Prisma vs Drizzle debate is the new "tabs vs spaces" — both are excellent, pick one and build. See also: <a href="/en/compare/postgresql-vs-mysql-vs-sqlite.html">Database comparison guide</a> and <a href="/en/compare/supabase-vs-firebase-vs-neon.html">Supabase vs Firebase vs Neon</a> for backend infrastructure.</p>
+'''
+
+BODIES['trpc-vs-graphql-vs-rest'] = '''
+<p>How your frontend talks to your backend is one of the most consequential architectural decisions you'll make. tRPC, GraphQL, and REST each solve API design differently. Here's when to use each — and when to avoid them.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>tRPC</th><th>GraphQL</th><th>REST</th></tr>
+<tr><td><strong>Type safety</strong></td><td>End-to-end (automatic)</td><td>Generated (codegen)</td><td>Manual (OpenAPI/Swagger)</td></tr>
+<tr><td><strong>Data fetching</strong></td><td>RPC-style (functions)</td><td>Query language (flexible)</td><td>HTTP endpoints (fixed)</td></tr>
+<tr><td><strong>Over-fetching</strong></td><td>None (exact return type)</td><td>Client controls fields</td><td>Common problem</td></tr>
+<tr><td><strong>Under-fetching</strong></td><td>None (single request)</td><td>Solved (nested queries)</td><td>Common (N+1 requests)</td></tr>
+<tr><td><strong>Caching</strong></td><td>TanStack Query (manual)</td><td>Built-in (normalized cache)</td><td>HTTP caching (ETags, CDN)</td></tr>
+<tr><td><strong>File upload</strong></td><td>Manual</td><td>Complex (mutations)</td><td>Simple (multipart)</td></tr>
+<tr><td><strong>Public API</strong></td><td>No (internal only)</td><td>Good</td><td>Best (standardized)</td></tr>
+<tr><td><strong>Learning curve</strong></td><td>Low</td><td>High</td><td>Low</td></tr>
+<tr><td><strong>Ecosystem</strong></td><td>TypeScript-only</td><td>Multi-language</td><td>Universal</td></tr>
+</table>
+
+<h2>tRPC — Typesafe RPC for TypeScript Monorepos</h2>
+<p>tRPC gives you end-to-end type safety without code generation. Define a procedure on the server, call it like a typed function on the client. The types flow automatically. If you change the server, the client gets type errors at compile time — no runtime surprises.</p>
+<p><strong>Strengths:</strong> True end-to-end type safety (no codegen needed). Incredibly fast to develop — just write server functions, call them from client. Tiny bundle footprint. Perfect with Next.js App Router. TanStack Query integration for caching and mutations.</p>
+<p><strong>Weaknesses:</strong> TypeScript-only (both client AND server must be TS). Not suitable for public APIs. Tightly coupled (monorepo or monolith architecture). No built-in caching layer. Not polyglot-friendly (can't call from Python/Go client). More challenging with microservices.</p>
+<p><strong>Best for:</strong> TypeScript full-stack apps (especially T3 stack), internal tools and admin panels, solo developers or small teams building a single product, Next.js projects.</p>
+
+<h2>GraphQL — Flexible Queries for Complex Data</h2>
+<p>GraphQL lets clients request exactly the fields they need. For complex, nested data models where different clients need different shapes of data, this is transformative. The schema serves as a contract and auto-generated documentation.</p>
+<p><strong>Strengths:</strong> Clients control response shape (no over/under-fetching). Strong schema as documentation. GraphQL Federation for microservices. Excellent for mobile (bandwidth-sensitive). Rich ecosystem (Apollo, Relay, GraphQL Codegen). Good for public APIs with complex data.</p>
+<p><strong>Weaknesses:</strong> Steep learning curve. N+1 problem requires dataloader pattern. Caching is complex (normalized cache needed). File upload is clunky. Query complexity attacks (need depth limiting). Overkill for simple CRUD APIs. Bundle size (Apollo Client is heavy).</p>
+<p><strong>Best for:</strong> Apps with complex, nested data models, mobile apps that need bandwidth-efficient queries, multi-client products (web + mobile + third-party), microservice architectures using Federation.</p>
+
+<h2>REST — The Universal Standard</h2>
+<p>REST is the lingua franca of the web. Every language, framework, and tool supports it. HTTP caching (CDNs, browser, proxies) works out of the box. For public APIs consumed by third parties, REST remains the safest choice.</p>
+<p><strong>Strengths:</strong> Universal — any client in any language can consume. HTTP caching is built-in (CDNs, browser, Etags). No special client library needed. File upload is trivial (multipart). Battle-tested with decades of tooling. OpenAPI 3.1 for type generation.</p>
+<p><strong>Weaknesses:</strong> Over-fetching and under-fetching by default. No built-in type safety (OpenAPI is a bolt-on). Endpoint proliferation as features grow. Versioning is manual. No standard for related data (include?expand? nested endpoints?).</p>
+<p><strong>Best for:</strong> Public APIs, multi-language microservices, file upload APIs, teams that need maximum tooling compatibility, any API consumed by third parties.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Choice</th></tr>
+<tr><td>TypeScript full-stack app, one team</td><td><strong>tRPC</strong></td></tr>
+<tr><td>Complex, nested data (social, e-commerce)</td><td><strong>GraphQL</strong></td></tr>
+<tr><td>Public API for third-party devs</td><td><strong>REST + OpenAPI</strong></td></tr>
+<tr><td>Mobile + web with different data needs</td><td><strong>GraphQL</strong></td></tr>
+<tr><td>Simple CRUD, file uploads, or CDN caching</td><td><strong>REST</strong></td></tr>
+<tr><td>Internal tool or admin panel (TS stack)</td><td><strong>tRPC</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> tRPC for TypeScript monoliths where development speed matters. GraphQL for complex data models with multiple clients. REST for public APIs and when you need universal compatibility. See our <a href="/en/tech/rest-api-best-practices.html">REST API Best Practices</a> guide for implementation details.</p>
+'''
+
+BODIES['postgresql-vs-mysql-vs-sqlite'] = '''
+<p>Choosing a database is one of the hardest decisions to reverse. PostgreSQL, MySQL, and SQLite are the three most popular relational databases — but they're optimized for very different use cases. Here's which one matches your project.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>PostgreSQL</th><th>MySQL</th><th>SQLite</th></tr>
+<tr><td><strong>Type</strong></td><td>Object-relational database</td><td>Relational database</td><td>Embedded database</td></tr>
+<tr><td><strong>Best for</strong></td><td>Complex apps, data integrity</td><td>Web apps, read-heavy workloads</td><td>Mobile, edge, single-server</td></tr>
+<tr><td><strong>Concurrency</strong></td><td>MVCC (excellent)</td><td>MVCC (good)</td><td>Single-writer (WAL)</td></tr>
+<tr><td><strong>Data types</strong></td><td>JSONB, arrays, geospatial, custom</td><td>Standard + JSON</td><td>Limited (flexible typing)</td></tr>
+<tr><td><strong>Full-text search</strong></td><td>Built-in (excellent)</td><td>Built-in (basic)</td><td>FTS5 extension</td></tr>
+<tr><td><strong>Extensions</strong></td><td>Rich (PostGIS, pgvector, etc.)</td><td>Limited</td><td>Runtime extensions</td></tr>
+<tr><td><strong>Replication</strong></td><td>Streaming, logical</td><td>Group, semi-sync</td><td>Not built-in (Litestream)</td></tr>
+<tr><td><strong>Scaling</strong></td><td>Vertical + read replicas</td><td>Vertical + read replicas</td><td>Not designed to scale</td></tr>
+<tr><td><strong>Setup</strong></td><td>Separate server</td><td>Separate server</td><td>File-based (zero config)</td></tr>
+<tr><td><strong>License</strong></td><td>PostgreSQL License</td><td>GPL (Oracle)</td><td>Public Domain</td></tr>
+</table>
+
+<h2>PostgreSQL — The Power User's Database</h2>
+<p>PostgreSQL (Postgres) is the most capable open-source relational database. It's the default choice for new projects in 2026 for good reason: unmatched feature set, strict SQL compliance, and an extension ecosystem (PostGIS, pgvector, TimescaleDB) that turns it into a specialized engine for any workload.</p>
+<p><strong>Strengths:</strong> JSONB (indexed JSON) means you can go relational + document in one DB. Array and custom types. Full-text search is built in. Extensions for any use case (vectors, time-series, geospatial). Strictest ACID compliance. Best-in-class MVCC concurrency. Robust replication.</p>
+<p><strong>Weaknesses:</strong> Requires a server process (more ops overhead than SQLite). Vertical scaling ceiling lower than distributed SQL databases. Configuration tuning for performance. Replication setup is more complex than managed solutions.</p>
+<p><strong>Best for:</strong> Web applications, SaaS products, any project that needs data integrity, applications that will grow, teams that want one database that does everything.</p>
+
+<h2>MySQL — The Web Workhorse</h2>
+<p>MySQL powers a huge portion of the web. WordPress, Shopify, and countless PHP applications run on it. MySQL 8.0+ has closed many feature gaps with Postgres (window functions, CTEs, JSON), but its philosophy is different: simpler, faster for read-heavy workloads, and easier to operate.</p>
+<p><strong>Strengths:</strong> Massive adoption (lots of docs and tooling). Excellent read performance. Widest hosting support (every shared host has MySQL). MySQL Workbench for GUI administration. InnoDB is battle-tested. Good for simple schemas and read-heavy apps.</p>
+<p><strong>Weaknesses:</strong> SQL compliance is looser than Postgres. Fewer advanced data types. Extension ecosystem is much smaller. GPL license (Oracle-owned). Replication is less flexible. Some surprising defaults (silent truncation).</p>
+<p><strong>Best for:</strong> WordPress/PHP ecosystem projects, read-heavy web apps, projects where operational simplicity matters more than advanced features, teams already familiar with MySQL.</p>
+
+<h2>SQLite — The Zero-Config Database</h2>
+<p>SQLite is fundamentally different: it's a library that reads and writes directly to a single file. No server, no configuration, no permissions. It's the most deployed database in the world — in every phone, browser, and embedded device. In 2026, SQLite is increasingly used for production web apps (via Litestream for replication).</p>
+<p><strong>Strengths:</strong> Zero setup — just a file. Incredibly reliable (backwards-compatible file format). Perfect for single-server deployments. Litestream adds replication to S3. Excellent for mobile and desktop apps (local-first). Can handle surprising scale (1TB databases, millions of rows).</p>
+<p><strong>Weaknesses:</strong> Single concurrent writer (queued writes). Not designed for multi-server web apps (no connection pooling). Fewer data types (flexible type system can hide bugs). No built-in user management. Not suitable for high-write-concurrency workloads.</p>
+<p><strong>Best for:</strong> Mobile and desktop apps, single-server web apps, edge/embedded devices, prototyping and testing, local-first applications, projects that want to minimize ops.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Database</th></tr>
+<tr><td>Web app, SaaS, API backend</td><td><strong>PostgreSQL</strong></td></tr>
+<tr><td>WordPress, PHP, shared hosting</td><td><strong>MySQL</strong></td></tr>
+<tr><td>Mobile app (iOS/Android)</td><td><strong>SQLite</strong></td></tr>
+<tr><td>AI/vector search</td><td><strong>PostgreSQL + pgvector</strong></td></tr>
+<tr><td>Single-server side project</td><td><strong>SQLite</strong> (zero ops)</td></tr>
+<tr><td>Geospatial (maps, locations)</td><td><strong>PostgreSQL + PostGIS</strong></td></tr>
+<tr><td>Maximum managed service options</td><td><strong>PostgreSQL</strong> (RDS, Supabase, Neon, etc.)</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Default to PostgreSQL for any web application. Use SQLite for mobile apps, side projects, and when you want zero operations overhead. MySQL if you're in the PHP/WordPress ecosystem. See our <a href="/en/compare/supabase-vs-firebase-vs-neon.html">Supabase vs Firebase vs Neon</a> guide for managed database services.</p>
+'''
+
+BODIES['vite-vs-webpack-vs-turbopack'] = '''
+<p>Your build tool directly affects how fast you iterate. Slow builds kill developer flow. Vite, Webpack, and Turbopack take three different approaches to the bundling problem. Here's how they compare on speed, ecosystem, and real-world developer experience.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Vite</th><th>Webpack</th><th>Turbopack</th></tr>
+<tr><td><strong>Engine</strong></td><td>esbuild + Rollup</td><td>Node.js</td><td>Rust (SWC)</td></tr>
+<tr><td><strong>Dev server start</strong></td><td>Instant (ESM)</td><td>Slow (bundles all)</td><td>Fast (incremental)</td></tr>
+<tr><td><strong>HMR speed</strong></td><td>Instant</td><td>Slow on large projects</td><td>Very fast</td></tr>
+<tr><td><strong>Production build</strong></td><td>Rollup (fast)</td><td>Webpack (slow)</td><td>Rust (fast)</td></tr>
+<tr><td><strong>Configuration</strong></td><td>Minimal (sensible defaults)</td><td>Very flexible (complex)</td><td>Zero-config (Next.js only)</td></tr>
+<tr><td><strong>Plugin ecosystem</strong></td><td>Large (growing daily)</td><td>Massive (most mature)</td><td>Small (compatible with Webpack?)</td></tr>
+<tr><td><strong>Framework support</strong></td><td>Vue, React, Svelte, Solid, etc.</td><td>Everything</td><td>Next.js (only, currently)</td></tr>
+<tr><td><strong>CSS</strong></td><td>PostCSS, CSS Modules</td><td>Everything</td><td>CSS Modules, PostCSS</td></tr>
+</table>
+
+<h2>Vite — The Modern Default</h2>
+<p>Vite leverages native ES modules during development: the dev server starts instantly (no bundling), and HMR is near-instant even on large projects. For production, it uses Rollup. Created by Vue's Evan You, Vite has become the default build tool for most new frontend projects.</p>
+<p><strong>Strengths:</strong> Dev server starts in milliseconds. HMR stays fast at any project size. Sensible defaults (zero config to start). Rich plugin ecosystem (Vite + Rollup plugins). First-class support in Vue, React, Svelte, Solid, Astro. Built-in support for TS, JSX, CSS Modules.</p>
+<p><strong>Weaknesses:</strong> Dev/prod build use different engines (esbuild vs Rollup) — rare inconsistencies. Plugin ecosystem is still catching up to Webpack for niche use cases. Some legacy Webpack loaders have no Vite equivalent.</p>
+<p><strong>Best for:</strong> Any new frontend project in 2026. This should be your default unless you have a specific reason to choose something else.</p>
+
+<h2>Webpack — The Battle-Tested Veteran</h2>
+<p>Webpack powered the frontend build revolution. Its configuration is famously flexible — you can bundle anything with the right loader. The plugin ecosystem is so mature that virtually every edge case has a solution. But speed has always been its Achilles heel.</p>
+<p><strong>Strengths:</strong> The most flexible bundler ever built. Mature plugin ecosystem covering every use case. Extremely customizable. Powers Create React App, Next.js (legacy), and Angular CLI. Battle-tested in production at the largest scale.</p>
+<p><strong>Weaknesses:</strong> Slow — dev server startup and HMR degrade as projects grow. Configuration is complex and error-prone. Bundle output is larger than alternatives. Maintaining Webpack config is a job in itself. Losing mindshare to Vite.</p>
+<p><strong>Best for:</strong> Existing large projects already on Webpack (migration is costly), projects with highly custom build requirements, teams with deep Webpack expertise.</p>
+
+<h2>Turbopack — The Next-Gen Contender</h2>
+<p>Turbopack is Vercel's Rust-based bundler, built as the successor to Webpack for Next.js. It claims to be 10x faster than Webpack and 5x faster than Vite (at scale). Currently, it's tightly integrated with Next.js and not available as a standalone bundler.</p>
+<p><strong>Strengths:</strong> Extremely fast (Rust). Incremental compilation means only changed files are rebuilt. Zero config in Next.js. Function-level caching for maximum reuse. Backed by Vercel (strong corporate support). Designed for the largest codebases.</p>
+<p><strong>Weaknesses:</strong> Next.js only (not a standalone tool). Still maturing (not all Webpack plugins work). Smaller community. Lock-in to the Vercel ecosystem. Not an option if you use Vue, Svelte, or other non-React frameworks.</p>
+<p><strong>Best for:</strong> Next.js projects that have outgrown Webpack, large-scale React applications on Vercel, developers who want the fastest possible builds without configuration.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Build Tool</th></tr>
+<tr><td>New project (any framework)</td><td><strong>Vite</strong></td></tr>
+<tr><td>Existing Webpack project (medium/large)</td><td><strong>Stay on Webpack</strong> (or migrate to Vite)</td></tr>
+<tr><td>Next.js project (new)</td><td><strong>Turbopack</strong> (built-in)</td></tr>
+<tr><td>Highly customized build</td><td><strong>Webpack</strong></td></tr>
+<tr><td>Fastest possible dev experience</td><td><strong>Vite</strong></td></tr>
+<tr><td>Maximum framework/framework-agnostic</td><td><strong>Vite</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Vite is the default for any new project in 2026. Webpack for existing projects where migration isn't worth it. Turbopack if you're on Next.js and want the fastest builds. See also: <a href="/en/compare/react-vs-vue-vs-angular-vs-svelte.html">framework comparison</a> and <a href="/en/compare/nextjs-vs-nuxt-vs-sveltekit.html">meta-framework comparison</a>.</p>
+'''
+
+BODIES['bun-vs-node-vs-deno'] = '''
+<p>The JavaScript runtime you pick affects install speed, testing, and production performance. Node.js has ruled for 15 years, but Bun and Deno are challenging with fresh approaches. Here's the honest comparison for 2026.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Bun</th><th>Node.js</th><th>Deno</th></tr>
+<tr><td><strong>Engine</strong></td><td>JavaScriptCore (Safari)</td><td>V8 (Chrome)</td><td>V8 (Chrome)</td></tr>
+<tr><td><strong>Language</strong></td><td>JS + Zig (internals)</td><td>C++</td><td>Rust</td></tr>
+<tr><td><strong>TypeScript</strong></td><td>Native (no config)</td><td>Via ts-node/tsx</td><td>Native (no config)</td></tr>
+<tr><td><strong>Package manager</strong></td><td>bun install (fastest)</td><td>npm, yarn, pnpm</td><td>deno add, npm compat</td></tr>
+<tr><td><strong>Module system</strong></td><td>CJS + ESM</td><td>CJS + ESM</td><td>ESM-first, URL imports</td></tr>
+<tr><td><strong>Testing</strong></td><td>Built-in (Jest-compatible)</td><td>Third-party (Vitest, Jest)</td><td>Built-in</td></tr>
+<tr><td><strong>Web APIs</strong></td><td>Partial</td><td>Partial</td><td>Full (fetch, URL, etc.)</td></tr>
+<tr><td><strong>npm compat</strong></td><td>90%+</td><td>100% (the original)</td><td>90%+</td></tr>
+<tr><td><strong>Single binary</strong></td><td>Yes (bun build)</td><td>Yes (node --compile)</td><td>Yes (deno compile)</td></tr>
+<tr><td><strong>Ecosystem</strong></td><td>Growing (npm compat helps)</td><td>Largest (3M+ packages)</td><td>Growing (npm compat helps)</td></tr>
+</table>
+
+<h2>Bun — The Speed Demon</h2>
+<p>Bun is designed for speed above all else. `bun install` is dramatically faster than npm or yarn. It ships as a single binary with a bundler, test runner, and package manager included. If you value iteration speed, Bun is compelling.</p>
+<p><strong>Strengths:</strong> Fastest package installs (25x npm on cold cache). Native TypeScript execution (no ts-node needed). Built-in test runner (Jest-compatible API). Built-in bundler with tree-shaking. Single binary format for distribution. Great for CLI tools and scripts.</p>
+<p><strong>Weaknesses:</strong> npm compatibility is ~90% (some packages fail). Uses JSC (not V8) — rare edge cases differ. Smaller ecosystem and community. Production track record is shorter. Some Node.js core modules not yet implemented. Less battle-tested at scale.</p>
+<p><strong>Best for:</strong> New projects where you control dependencies, CLI tools, fast prototyping, Side projects where speed matters.</p>
+
+<h2>Node.js — The Uncontested King</h2>
+<p>Node.js is everywhere. Every hosting platform, CI/CD pipeline, and cloud function supports it. The ecosystem of 3M+ npm packages is unmatched. In 2026, Node.js 24 brings native TypeScript support, a built-in test runner, and single-binary compilation — closing gaps with Bun and Deno.</p>
+<p><strong>Strengths:</strong> Universal compatibility — everything supports Node.js. 3M+ npm packages. Largest community and knowledge base. Production-proven at the largest scale. Node 24 adds TypeScript, test runner, and single-binary builds. Every cloud function platform supports it.</p>
+<p><strong>Weaknesses:</strong> Slowest package installs (pnpm helps). Slower startup than Bun. More boilerplate (need ts-node, nodemon, Jest, etc.). Heavier memory footprint. Legacy CJS/ESM dual module system is painful.</p>
+<p><strong>Best for:</strong> Any production application, projects that need maximum npm compatibility, teams that value stability over speed, any project deployed to cloud functions.</p>
+
+<h2>Deno — The Secure, Standards-Based Runtime</h2>
+<p>Deno (by Node.js creator Ryan Dahl) fixes Node's original sins: secure by default (no file/network access without permission), web-standard APIs (fetch, Request, Response), and native TypeScript. Deno 2+ added full npm compatibility, making it a practical Node.js alternative.</p>
+<p><strong>Strengths:</strong> Secure by default (explicit permissions). Web-standard APIs (code runs in browser AND Deno). Native TypeScript. Built-in formatter, linter, and test runner. Excellent developer tooling built-in. npm compatibility (Deno 2+). Deno Deploy for edge hosting.</p>
+<p><strong>Weaknesses:</strong> npm compatibility is ~90% (like Bun, some packages fail). Smaller ecosystem and community than Node.js. Permission model can be annoying for simple scripts. Fewer hosting platform integrations. Less production track record than Node.js.</p>
+<p><strong>Best for:</strong> Developers who value security and web standards, edge/serverless deployments (Deno Deploy), TypeScript-first teams, projects where you want built-in tooling.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Runtime</th></tr>
+<tr><td>Production API / backend</td><td><strong>Node.js</strong> — proven, universal</td></tr>
+<tr><td>CLI tool or script</td><td><strong>Bun</strong> — instant startup</td></tr>
+<tr><td>Edge/serverless functions</td><td><strong>Deno</strong> — Deno Deploy</td></tr>
+<tr><td>New side project, fast iteration</td><td><strong>Bun</strong> — fastest DX</td></tr>
+<tr><td>Enterprise, large team</td><td><strong>Node.js</strong> — stability, ecosystem</td></tr>
+<tr><td>Security-sensitive environment</td><td><strong>Deno</strong> — permissions model</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Node.js for production — it's the safe choice with universal support. Bun for CLI tools and side projects where speed matters. Deno for edge deployments and security-conscious environments. See also: <a href="/en/compare/vite-vs-webpack-vs-turbopack.html">build tools comparison</a> and <a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html">hosting comparison</a>.</p>
+'''
+
+BODIES['docker-vs-podman'] = '''
+<p>Containers are how modern applications ship. Docker has dominated for a decade, but Podman is gaining ground with a daemonless, rootless approach. Here's how they compare for local development and production in 2026.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Docker</th><th>Podman</th></tr>
+<tr><td><strong>Architecture</strong></td><td>Client-daemon (dockerd)</td><td>Daemonless (fork-exec)</td></tr>
+<tr><td><strong>Root required</strong></td><td>Yes (daemon runs as root)</td><td>No (rootless by default)</td></tr>
+<tr><td><strong>Compose</strong></td><td>Docker Compose (native)</td><td>Podman Compose / docker-compose</td></tr>
+<tr><td><strong>Kubernetes</strong></td><td>Built-in (Docker Desktop)</td><td>podman kube (generate/play)</td></tr>
+<tr><td><strong>Image format</strong></td><td>OCI + Docker</td><td>OCI</td></tr>
+<tr><td><strong>CLI compatibility</strong></td><td>The standard</td><td>Drop-in (alias docker=podman)</td></tr>
+<tr><td><strong>Desktop GUI</strong></td><td>Docker Desktop</td><td>Podman Desktop</td></tr>
+<tr><td><strong>macOS support</strong></td><td>Native (via VM)</td><td>Native (podman machine)</td></tr>
+<tr><td><strong>Windows support</strong></td><td>WSL2 + Docker Desktop</td><td>Podman Desktop + WSL2</td></tr>
+<tr><td><strong>Licensing</strong></td><td>Docker Desktop requires paid</td><td>Fully open source (Apache 2.0)</td></tr>
+</table>
+
+<h2>Docker — The Industry Standard</h2>
+<p>Docker made containers accessible. Every CI/CD platform, cloud provider, and hosting service supports Docker images. Docker Compose is the universal language for multi-container applications. The ecosystem is so dominant that "container image" = "Docker image" in most developers' minds.</p>
+<p><strong>Strengths:</strong> Universal support — every platform runs Docker images. Docker Compose is the best multi-container tool. Docker Hub has the largest image registry. Massive documentation and community. Docker Desktop is polished (but requires license for commercial use). BuildKit for fast builds.</p>
+<p><strong>Weaknesses:</strong> Daemon runs as root (security concern). Docker Desktop license required for commercial use at larger companies. Daemon is a single point of failure. Higher resource usage (dockerd always running). Not ideal for CI/CD where daemonless is cleaner.</p>
+<p><strong>Best for:</strong> Most developers — Docker is the safe default. Teams that need Compose for complex multi-container setups. Projects that deploy to Kubernetes. Environments where universal compatibility matters most.</p>
+
+<h2>Podman — Rootless, Daemonless, Open Source</h2>
+<p>Podman was designed by Red Hat to address Docker's fundamental architecture issues. No daemon means no background process consuming resources. Rootless by default means no security vulnerabilities from the container runtime. The CLI is intentionally Docker-compatible.</p>
+<p><strong>Strengths:</strong> No daemon — containers run as child processes. Rootless by default (better security). Pod concept (like Kubernetes pods). Generate Kubernetes YAML from running containers (podman kube). Fully open source (no license fees). Lighter resource usage.</p>
+<p><strong>Weaknesses:</strong> Docker Compose compatibility isn't 100% (some features differ). Smaller ecosystem and community. Docker Desktop is more polished than Podman Desktop. Some Docker-specific features not available. BuildKit is faster than podman build in some cases.</p>
+<p><strong>Best for:</strong> Security-conscious teams, CI/CD pipelines (no daemon to manage), RHEL/Fedora environments, Kubernetes-focused development, developers who prefer fully open-source tools.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Choice</th></tr>
+<tr><td>General development, Compose-heavy</td><td><strong>Docker</strong></td></tr>
+<tr><td>Security/compliance requirement</td><td><strong>Podman</strong> (rootless)</td></tr>
+<tr><td>CI/CD pipelines</td><td><strong>Podman</strong> (daemonless is cleaner)</td></tr>
+<tr><td>Kubernetes-native development</td><td><strong>Podman</strong> (pod concept)</td></tr>
+<tr><td>Community support and docs</td><td><strong>Docker</strong></td></tr>
+<tr><td>Cost-sensitive (avoid Docker Desktop fees)</td><td><strong>Podman</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Docker is still the default for most developers — everything supports it, Compose is excellent, and the ecosystem is unmatched. Podman is the pick for security, Kubernetes-focused workflows, and avoiding Docker Desktop licensing. <code>alias docker=podman</code> works for 90% of commands. See also: <a href="/en/tech/docker-quickstart.html">Docker Quickstart Guide</a> and <a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html">hosting comparison</a>.</p>
+'''
+
+BODIES['aws-vs-azure-vs-gcp'] = '''
+<p>Cloud providers compete on hundreds of services, but most developers use the same 5-10. This comparison focuses on what actually matters for side projects and early-stage startups: free tiers, serverless deployment, and developer experience — not enterprise sales features.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>AWS</th><th>Azure</th><th>GCP</th></tr>
+<tr><td><strong>Market share</strong></td><td>~32% (#1)</td><td>~23% (#2)</td><td>~11% (#3)</td></tr>
+<tr><td><strong>Free tier</strong></td><td>12 months (limited) + Always Free</td><td>12 months + Always Free</td><td>Always Free (most generous)</td></tr>
+<tr><td><strong>Serverless compute</strong></td><td>Lambda</td><td>Functions</td><td>Cloud Functions + Cloud Run</td></tr>
+<tr><td><strong>Kubernetes</strong></td><td>EKS</td><td>AKS</td><td>GKE (best managed K8s)</td></tr>
+<tr><td><strong>Database</strong></td><td>RDS, DynamoDB, Aurora</td><td>SQL Database, Cosmos DB</td><td>Cloud SQL, Firestore, Spanner</td></tr>
+<tr><td><strong>AI/ML services</strong></td><td>SageMaker, Bedrock</td><td>Azure AI, OpenAI Service</td><td>Vertex AI, Gemini API</td></tr>
+<tr><td><strong>Deploy UX</strong></td><td>Complex (many services)</td><td>Moderate (Portal-based)</td><td>Best (Cloud Run is magic)</td></tr>
+<tr><td><strong>CLI experience</strong></td><td>awscli (verbose)</td><td>az (verbose)</td><td>gcloud (best CLI)</td></tr>
+<tr><td><strong>Pricing model</strong></td><td>Pay-per-use (complex)</td><td>Pay-per-use</td><td>Pay-per-use (simplest)</td></tr>
+</table>
+
+<h2>AWS — The Everything Store of Cloud</h2>
+<p>AWS has the most services (200+) and the largest market share. For any use case, AWS has a service for it — probably three. The downside is complexity: the console is overwhelming, IAM is infamously confusing, and cost management requires active monitoring.</p>
+<p><strong>Strengths:</strong> Most services and features. Widest global infrastructure (105+ availability zones). Lambda pioneered serverless. S3 is the universal storage API. Bedrock for managed LLMs. DynamoDB for serverless NoSQL. Largest job market for cloud skills.</p>
+<p><strong>Weaknesses:</strong> Console UX is overwhelming. IAM permissions are complex and error-prone. Cost unpredictability (stories of surprise bills are common). Free tier is limited (many services not included). AWS support is expensive. More verbose than GCP or Azure for simple tasks.</p>
+<p><strong>Best for:</strong> Teams that need maximum service selection, large-scale applications, companies heavily invested in the AWS ecosystem, developers who want the most widely marketable cloud skills.</p>
+
+<h2>Azure — Best for Microsoft Shops and AI</h2>
+<p>Azure is the natural choice for .NET, C#, and enterprise Microsoft environments. Its killer advantage in 2026: exclusive OpenAI Service (GPT-4, DALL-E on Azure infrastructure). For AI-first startups, this alone can justify Azure.</p>
+<p><strong>Strengths:</strong> Deep Microsoft integration (Active Directory, .NET, SQL Server, GitHub). Exclusive OpenAI Service (GPT models on Azure). Good hybrid cloud capabilities. Visual Studio/Azure DevOps integration. Strong enterprise compliance certifications. Good for Windows-based workloads.</p>
+<p><strong>Weaknesses:</strong> Console is slow and inconsistent. Documentation quality varies wildly. Some services feel less polished than AWS/GCP equivalents. Free tier is stingier than GCP. More outages historically than AWS or GCP.</p>
+<p><strong>Best for:</strong> .NET/C# teams, Microsoft enterprise environments, AI startups that want Azure OpenAI Service, companies using Active Directory and Microsoft 365.</p>
+
+<h2>GCP — Best Developer Experience</h2>
+<p>Google Cloud has the best developer experience by a clear margin. Cloud Run (serverless containers) is magical — push a container, get a URL, pay zero when idle. BigQuery is unmatched for analytics. The gcloud CLI is the best of the three. Free tier is genuinely generous.</p>
+<p><strong>Strengths:</strong> Cloud Run is the best serverless deployment experience. GKE is the best managed Kubernetes. BigQuery is unmatched for data analytics. Generous Always Free tier. Best CLI (gcloud). Firebase integration for mobile/web apps. Vertex AI + Gemini API for AI workloads.</p>
+<p><strong>Weaknesses:</strong> Smallest market share (fewer community resources). Fewer availability zones than AWS. Can feel like Google has less commitment to cloud (vs AWS's core business). Enterprise support is less mature. Fewer managed database options than AWS.</p>
+<p><strong>Best for:</strong> Developers who value great UX, Kubernetes workloads (GKE), data-heavy applications (BigQuery), Firebase users, projects that want the simplest serverless deployment (Cloud Run).</p>
+
+<h2>Which Cloud for Side Projects?</h2>
+<table>
+<tr><th>Scenario</th><th>Best Cloud</th></tr>
+<tr><td>Static site / frontend</td><td><strong>Vercel/Netlify/Cloudflare</strong> (skip cloud)</td></tr>
+<tr><td>Serverless API + database</td><td><strong>GCP Cloud Run + Supabase</strong></td></tr>
+<tr><td>AI-first application</td><td><strong>Azure</strong> (OpenAI Service) or <strong>GCP</strong> (Gemini)</td></tr>
+<tr><td>Maximum free tier</td><td><strong>GCP</strong> Always Free</td></tr>
+<tr><td>.NET / C# / Microsoft stack</td><td><strong>Azure</strong></td></tr>
+<tr><td>Maximum services, large scale</td><td><strong>AWS</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> For most side projects, you don't need AWS/Azure/GCP — Vercel + Supabase covers 90% of use cases. If you need cloud: GCP for the best developer experience, AWS for maximum capabilities, Azure for Microsoft shops and OpenAI access. See our <a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html">hosting comparison</a> and <a href="/en/compare/supabase-vs-firebase-vs-neon.html">backend comparison</a> for lighter alternatives.</p>
+'''
+
+BODIES['notion-vs-obsidian-vs-linear'] = '''
+<p>Developers need different tools for different types of "knowledge work": note-taking, documentation, project management, and personal knowledge bases. Notion, Obsidian, and Linear each dominate a niche. Here's which combination works best for a developer workflow.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Notion</th><th>Obsidian</th><th>Linear</th></tr>
+<tr><td><strong>Type</strong></td><td>All-in-one workspace</td><td>Local-first knowledge base</td><td>Issue tracker / project mgmt</td></tr>
+<tr><td><strong>Best for</strong></td><td>Docs, wikis, databases</td><td>Notes, PKM, writing</td><td>Bug tracking, sprints, roadmaps</td></tr>
+<tr><td><strong>Storage</strong></td><td>Cloud (Notion servers)</td><td>Local (Markdown files)</td><td>Cloud (Linear servers)</td></tr>
+<tr><td><strong>Offline</strong></td><td>Limited</td><td>Full (local files)</td><td>Limited</td></tr>
+<tr><td><strong>Free tier</strong></td><td>Generous (personal)</td><td>Free (personal)</td><td>Free (small team)</td></tr>
+<tr><td><strong>Markdown</strong></td><td>WYSIWYG (export to MD)</td><td>Native (everything is .md)</td><td>Markdown in descriptions</td></tr>
+<tr><td><strong>APIs</strong></td><td>Notion API</td><td>Community plugins</td><td>Linear API (excellent)</td></tr>
+<tr><td><strong>AI features</strong></td><td>Notion AI (built-in)</td><td>Via plugins (Copilot, etc.)</td><td>Linear AI (summaries, etc.)</td></tr>
+<tr><td><strong>Keyboard-first</strong></td><td>Good (/)</td><td>Excellent</td><td>Excellent (⌘K)</td></tr>
+</table>
+
+<h2>Notion — The All-in-One Workspace</h2>
+<p>Notion combines docs, databases, wikis, and project management into one tool. Its killer feature is the database: a spreadsheet-meets-database that can be viewed as a table, board, calendar, or gallery. For team documentation and shared knowledge, Notion is hard to beat.</p>
+<p><strong>Strengths:</strong> Databases are incredibly flexible (relate, filter, sort, view). Excellent for team wikis and documentation. Templates for every use case. Generous free tier. Notion AI for summarization and writing. Integrations with Slack, GitHub, etc.</p>
+<p><strong>Weaknesses:</strong> No offline mode (data is on Notion's servers). Slow with large databases. Not ideal for personal note-taking (cloud lock-in). Search is good but not as fast as local. Export is possible but not seamless. Not keyboard-optimized for power users.</p>
+<p><strong>Best for:</strong> Team wikis and documentation, project briefs and specs, content calendars and editorial planning, shared knowledge bases, any collaborative documentation.</p>
+
+<h2>Obsidian — The Developer's Second Brain</h2>
+<p>Obsidian is a local-first, Markdown-based knowledge management tool. Your notes are plain .md files on your filesystem — you own them forever. The graph view visualizes connections between notes. With 1,000+ community plugins, it can become anything from a task manager to a Zettelkasten system.</p>
+<p><strong>Strengths:</strong> Your notes are local Markdown files — future-proof and portable. Graph view reveals hidden connections. 1,000+ community plugins. Keyboard-first workflow. Excellent for building a personal knowledge base (PKM). Git-friendly (notes are .md files). Extensible via plugins and custom CSS.</p>
+<p><strong>Weaknesses:</strong> Not a collaboration tool (notes are local). Sync requires Obsidian Sync ($5/mo) or DIY (git). Plugin quality varies. Learning curve to set up an effective system. No built-in databases like Notion. Overkill for simple note-taking.</p>
+<p><strong>Best for:</strong> Personal knowledge management, technical notes and coding references, writing and research, developers who want plain-text ownership, building a "second brain" that lasts decades.</p>
+
+<h2>Linear — Project Management Developers Actually Like</h2>
+<p>Linear is issue tracking and project management built for software teams. It's fast (keyboard shortcuts for everything), opinionated (sane defaults), and designed to help teams ship. Unlike Jira or Asana, Linear doesn't make developers groan.</p>
+<p><strong>Strengths:</strong> Incredibly fast UI (keyboard-first). Opinionated workflows that match how software teams actually work. Excellent GitHub/GitLab integration. Roadmap and project views that make sense. Linear Asks for lightweight feature requests. Best-in-class API. Actually enjoyable to use.</p>
+<p><strong>Weaknesses:</strong> Not a wiki or documentation tool. Not for personal notes. Free tier limited to small teams. Less flexible than Notion databases for non-dev use cases. Focused on software teams (not general project management). No offline mode.</p>
+<p><strong>Best for:</strong> Software teams tracking bugs and features, sprint planning and roadmaps, developers who want a project management tool that doesn't slow them down, any team tired of Jira.</p>
+
+<h2>The Developer Knowledge & Project Stack</h2>
+<table>
+<tr><th>Need</th><th>Best Tool</th></tr>
+<tr><td>Personal notes, learning, PKM</td><td><strong>Obsidian</strong></td></tr>
+<tr><td>Team wiki, shared docs, databases</td><td><strong>Notion</strong></td></tr>
+<tr><td>Bug tracking, sprints, roadmaps</td><td><strong>Linear</strong></td></tr>
+<tr><td>Project briefs and product specs</td><td><strong>Notion</strong></td></tr>
+<tr><td>Daily journal, Zettelkasten</td><td><strong>Obsidian</strong></td></tr>
+<tr><td>Issue tracker devs won't hate</td><td><strong>Linear</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> These three tools complement each other — they're not competitors. Obsidian for personal knowledge (your second brain). Notion for team documentation and collaborative planning. Linear for tracking what needs to be built. The optimal stack: Obsidian for you, Notion for the team, Linear for the code. See also: <a href="/en/tools/online-tools-2026.html">free online tools guide</a> for more developer productivity tools.</p>
+'''
+
 # FAQ data for FAQPage schema (slug → list of q/a dicts)
 FAQS = {
     'chatgpt-plus-worth': [

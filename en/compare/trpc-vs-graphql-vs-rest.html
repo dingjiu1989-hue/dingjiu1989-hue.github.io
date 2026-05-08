@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="compare" data-exclude="trpc-vs-graphql-vs-rest">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="tRPC vs GraphQL vs REST (2026): Best API Architecture?">
+    <meta property="og:description" content="End-to-end typesafety vs flexible queries vs simplicity — compare API design patterns for modern web apps. Type safety, performance, caching, and tooling breakdown.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/compare/trpc-vs-graphql-vs-rest.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="tRPC vs GraphQL vs REST (2026): Best API Architecture?">
+    <meta name="twitter:description" content="End-to-end typesafety vs flexible queries vs simplicity — compare API design patterns for modern web apps. Type safety, performance, caching, and tooling breakdown.">
+    <title>tRPC vs GraphQL vs REST (2026): Best API Architecture? — SourceHub</title>
+    <meta name="description" content="End-to-end typesafety vs flexible queries vs simplicity — compare API design patterns for modern web apps. Type safety, performance, caching, and tooling breakdown.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/compare/trpc-vs-graphql-vs-rest.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/compare/trpc-vs-graphql-vs-rest.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "tRPC vs GraphQL vs REST (2026): Best API Architecture?",
+      "description": "End-to-end typesafety vs flexible queries vs simplicity — compare API design patterns for modern web apps. Type safety, performance, caching, and tooling breakdown.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Comparisons", "item": "https://dingjiu1989-hue.github.io/en/compare/"},
+        {"@type": "ListItem", "position": 3, "name": "tRPC vs GraphQL vs REST (2026): Best API Architecture?"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/compare/">Comparisons</a> › tRPC vs GraphQL vs REST (2026): Best API Architecture?
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">API</span>
+        <span class="tag-cat">tRPC</span>
+        <span class="tag-cat">GraphQL</span>
+        <span class="tag-cat">REST</span></div>
+      <h1 class="article-title">tRPC vs GraphQL vs REST (2026): Best API Architecture?</h1>
+      <div class="article-meta">Published 2026-05-08 · 5280 views · 44 replies</div>
+      <div class="article-body"><p>How your frontend talks to your backend is one of the most consequential architectural decisions you'll make. tRPC, GraphQL, and REST each solve API design differently. Here's when to use each — and when to avoid them.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>tRPC</th><th>GraphQL</th><th>REST</th></tr>
+<tr><td><strong>Type safety</strong></td><td>End-to-end (automatic)</td><td>Generated (codegen)</td><td>Manual (OpenAPI/Swagger)</td></tr>
+<tr><td><strong>Data fetching</strong></td><td>RPC-style (functions)</td><td>Query language (flexible)</td><td>HTTP endpoints (fixed)</td></tr>
+<tr><td><strong>Over-fetching</strong></td><td>None (exact return type)</td><td>Client controls fields</td><td>Common problem</td></tr>
+<tr><td><strong>Under-fetching</strong></td><td>None (single request)</td><td>Solved (nested queries)</td><td>Common (N+1 requests)</td></tr>
+<tr><td><strong>Caching</strong></td><td>TanStack Query (manual)</td><td>Built-in (normalized cache)</td><td>HTTP caching (ETags, CDN)</td></tr>
+<tr><td><strong>File upload</strong></td><td>Manual</td><td>Complex (mutations)</td><td>Simple (multipart)</td></tr>
+<tr><td><strong>Public API</strong></td><td>No (internal only)</td><td>Good</td><td>Best (standardized)</td></tr>
+<tr><td><strong>Learning curve</strong></td><td>Low</td><td>High</td><td>Low</td></tr>
+<tr><td><strong>Ecosystem</strong></td><td>TypeScript-only</td><td>Multi-language</td><td>Universal</td></tr>
+</table>
+
+<h2>tRPC — Typesafe RPC for TypeScript Monorepos</h2>
+<p>tRPC gives you end-to-end type safety without code generation. Define a procedure on the server, call it like a typed function on the client. The types flow automatically. If you change the server, the client gets type errors at compile time — no runtime surprises.</p>
+<p><strong>Strengths:</strong> True end-to-end type safety (no codegen needed). Incredibly fast to develop — just write server functions, call them from client. Tiny bundle footprint. Perfect with Next.js App Router. TanStack Query integration for caching and mutations.</p>
+<p><strong>Weaknesses:</strong> TypeScript-only (both client AND server must be TS). Not suitable for public APIs. Tightly coupled (monorepo or monolith architecture). No built-in caching layer. Not polyglot-friendly (can't call from Python/Go client). More challenging with microservices.</p>
+<p><strong>Best for:</strong> TypeScript full-stack apps (especially T3 stack), internal tools and admin panels, solo developers or small teams building a single product, Next.js projects.</p>
+
+<h2>GraphQL — Flexible Queries for Complex Data</h2>
+<p>GraphQL lets clients request exactly the fields they need. For complex, nested data models where different clients need different shapes of data, this is transformative. The schema serves as a contract and auto-generated documentation.</p>
+<p><strong>Strengths:</strong> Clients control response shape (no over/under-fetching). Strong schema as documentation. GraphQL Federation for microservices. Excellent for mobile (bandwidth-sensitive). Rich ecosystem (Apollo, Relay, GraphQL Codegen). Good for public APIs with complex data.</p>
+<p><strong>Weaknesses:</strong> Steep learning curve. N+1 problem requires dataloader pattern. Caching is complex (normalized cache needed). File upload is clunky. Query complexity attacks (need depth limiting). Overkill for simple CRUD APIs. Bundle size (Apollo Client is heavy).</p>
+<p><strong>Best for:</strong> Apps with complex, nested data models, mobile apps that need bandwidth-efficient queries, multi-client products (web + mobile + third-party), microservice architectures using Federation.</p>
+
+<h2>REST — The Universal Standard</h2>
+<p>REST is the lingua franca of the web. Every language, framework, and tool supports it. HTTP caching (CDNs, browser, proxies) works out of the box. For public APIs consumed by third parties, REST remains the safest choice.</p>
+<p><strong>Strengths:</strong> Universal — any client in any language can consume. HTTP caching is built-in (CDNs, browser, Etags). No special client library needed. File upload is trivial (multipart). Battle-tested with decades of tooling. OpenAPI 3.1 for type generation.</p>
+<p><strong>Weaknesses:</strong> Over-fetching and under-fetching by default. No built-in type safety (OpenAPI is a bolt-on). Endpoint proliferation as features grow. Versioning is manual. No standard for related data (include?expand? nested endpoints?).</p>
+<p><strong>Best for:</strong> Public APIs, multi-language microservices, file upload APIs, teams that need maximum tooling compatibility, any API consumed by third parties.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Choice</th></tr>
+<tr><td>TypeScript full-stack app, one team</td><td><strong>tRPC</strong></td></tr>
+<tr><td>Complex, nested data (social, e-commerce)</td><td><strong>GraphQL</strong></td></tr>
+<tr><td>Public API for third-party devs</td><td><strong>REST + OpenAPI</strong></td></tr>
+<tr><td>Mobile + web with different data needs</td><td><strong>GraphQL</strong></td></tr>
+<tr><td>Simple CRUD, file uploads, or CDN caching</td><td><strong>REST</strong></td></tr>
+<tr><td>Internal tool or admin panel (TS stack)</td><td><strong>tRPC</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> tRPC for TypeScript monoliths where development speed matters. GraphQL for complex data models with multiple clients. REST for public APIs and when you need universal compatibility. See our <a href="/en/tech/rest-api-best-practices.html">REST API Best Practices</a> guide for implementation details.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/compare/cursor-vs-copilot-vs-claude-code.html" class="related-card">Cursor vs GitHub Copilot vs Claude Code (2026): Which AI Coding Tool Wins?</a><a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html" class="related-card">Vercel vs Netlify vs Cloudflare Pages (2026): Best Hosting for Developers</a><a href="/en/compare/supabase-vs-firebase-vs-neon.html" class="related-card">Supabase vs Firebase vs Neon (2026): Best Backend for Solo Developers</a><a href="/en/compare/figma-vs-canva-vs-penpot.html" class="related-card">Figma vs Canva vs Penpot (2026): Best Design Tool for Developers</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>
