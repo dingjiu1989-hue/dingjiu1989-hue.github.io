@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="compare" data-exclude="duckdb-vs-sqlite">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="DuckDB vs SQLite: Embedded Databases for Analytics and Applications Compared">
+    <meta property="og:description" content="Compare embedded databases — DuckDB for analytical queries (OLAP), SQLite for transactional workloads (OLTP), when to use each, and how they complement.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/compare/duckdb-vs-sqlite.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DuckDB vs SQLite: Embedded Databases for Analytics and Applications Compared">
+    <meta name="twitter:description" content="Compare embedded databases — DuckDB for analytical queries (OLAP), SQLite for transactional workloads (OLTP), when to use each, and how they complement.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>DuckDB vs SQLite: Embedded Databases for Analytics and Applications Compared — SourceHub</title>
+    <meta name="description" content="Compare embedded databases — DuckDB for analytical queries (OLAP), SQLite for transactional workloads (OLTP), when to use each, and how they complement.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/compare/duckdb-vs-sqlite.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/compare/duckdb-vs-sqlite.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/compare/duckdb-vs-sqlite.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "DuckDB vs SQLite: Embedded Databases for Analytics and Applications Compared",
+      "description": "Compare embedded databases — DuckDB for analytical queries (OLAP), SQLite for transactional workloads (OLTP), when to use each, and how they complement.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/compare/duckdb-vs-sqlite.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Comparisons", "item": "https://dingjiu1989-hue.github.io/en/compare/"},
+        {"@type": "ListItem", "position": 3, "name": "DuckDB vs SQLite: Embedded Databases for Analytics and Applications Compared"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/compare/">Comparisons</a> › DuckDB vs SQLite: Embedded Databases for Analytics and Applications Compared
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">DuckDB</span>
+        <span class="tag-cat">SQLite</span>
+        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Comparison</span></div>
+      <h1 class="article-title">DuckDB vs SQLite: Embedded Databases for Analytics and Applications Compared</h1>
+      <div class="article-meta">Published 2026-05-08 · 8160 views · 68 replies</div>
+      <div class="article-body"><p>SQLite and DuckDB are both embedded databases — they run in-process, require zero configuration, and store data in a single file. But they are optimized for radically different workloads. SQLite is an OLTP database (transactional, row-oriented). DuckDB is an OLAP database (analytical, column-oriented). Understanding when to use which can mean the difference between a query taking 2 seconds versus 2 minutes. This comparison breaks down the trade-offs.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>SQLite</th><th>DuckDB</th></tr>
+<tr><td>Type</td><td>OLTP (Online Transaction Processing)</td><td>OLAP (Online Analytical Processing)</td></tr>
+<tr><td>Storage Layout</td><td>Row-oriented (good for writes, point lookups)</td><td>Column-oriented (good for scans, aggregations)</td></tr>
+<tr><td>Concurrency</td><td>Single-writer, multiple-readers (WAL mode)</td><td>Single-writer (optimistic), multi-reader</td></tr>
+<tr><td>Query Language</td><td>Standard SQL (limited extensions)</td><td>Extended SQL (window functions, LIST, structs, lambdas)</td></tr>
+<tr><td>Data Types</td><td>5 storage classes (NULL, INTEGER, REAL, TEXT, BLOB)</td><td>Rich types: STRUCT, LIST, MAP, UNION, ENUM, UUID, JSON native</td></tr>
+<tr><td>File Formats (read directly)</td><td>Only .sqlite/.db files</td><td>CSV, Parquet, JSON, Arrow, Excel, SQLite files</td></tr>
+<tr><td>Extensions / Ecosystem</td><td>Massive (every language, every OS, 30+ years)</td><td>Growing fast (Python, R, Node.js, Java, Rust, Go, Wasm)</td></tr>
+<tr><td>Query Performance (OLTP)</td><td>Excellent (microsecond point lookups with index)</td><td>Decent but not its strength (columnar overhead on lookups)</td></tr>
+<tr><td>Query Performance (OLAP)</td><td>Poor to decent (row scans are slow on wide tables)</td><td>Excellent (columnar + vectorized, 10-100x faster on aggregates)</td></tr>
+<tr><td>Memory / Disk</td><td>Minimal memory, works on tiny devices</td><td>Happier with more memory (in-memory mode for speed)</td></tr>
+<tr><td>Embedded / IoT</td><td>Yes — runs on phones, browsers (Wasm), embedded</td><td>Yes — but heavier; not for constrained devices</td></tr>
+<tr><td>Pricing</td><td>Free (public domain)</td><td>Free (MIT, DuckDB Labs for support)</td></tr>
+</table>
+
+<h2>When Each Database Wins</h2>
+<p><strong>SQLite — Best for:</strong> Application databases — the database behind your mobile app, desktop app, or web app backend. SQLite is the most deployed database in the world: every iPhone, Android phone, browser (Wasm), and operating system uses it. It is perfect for configuration storage, caching, application state, and any workload where you do point lookups and small-range queries on indexed data. <strong>Weak spot:</strong> Analytical queries — SELECT AVG(), GROUP BY on large tables with many columns — are slow because SQLite must read entire rows even when you only need 2 columns.</p>
+
+<p><strong>DuckDB — Best for:</strong> Analytical workloads — data science, BI queries, log analysis, CSV/Parquet processing. DuckDB is the database you reach for when you have a 10GB CSV file and want to run a GROUP BY query on it in under a second. It reads Parquet files directly, can query across multiple files, and integrates deeply with Python (Pandas, Polars, Arrow). <strong>Weak spot:</strong> Transactional workloads — it is not built for thousands of small inserts/updates per second; concurrency is limited; overkill for simple config storage.</p>
+
+<h2>Killer Features</h2>
+<table>
+<tr><th>Feature</th><th>SQLite</th><th>DuckDB</th></tr>
+<tr><td>Point Lookups (SELECT WHERE id=123)</td><td>★★★★★ (microseconds, B-tree index)</td><td>★★★ (columnar overhead, not its strength)</td></tr>
+<tr><td>Aggregations (SELECT AVG() GROUP BY)</td><td>★★ (row scans, slow on many columns)</td><td>★★★★★ (vectorized, column pruning, 10-100x faster)</td></tr>
+<tr><td>Window Functions</td><td>★★★ (supported but limited)</td><td>★★★★★ (rich support, fast execution)</td></tr>
+<tr><td>CSV / Parquet Import</td><td>★ (manual; .import or external tools)</td><td>★★★★★ (read_csv(), read_parquet() — one function)</td></tr>
+<tr><td>Concurrent Writes</td><td>★★★ (single writer, WAL helps)</td><td>★★ (optimistic, not designed for many writers)</td></tr>
+<tr><td>Python Integration</td><td>★★★★ (sqlite3 standard library)</td><td>★★★★★ (deep Pandas/Polars/Arrow integration)</td></tr>
+<tr><td>Embeddability / Size</td><td>★★★★★ (~600KB library)</td><td>★★★ (~30MB library, richer dependencies)</td></tr>
+</table>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Choice</th><th>Why</th></tr>
+<tr><td>Mobile app local storage (iOS, Android)</td><td>SQLite</td><td>Built into every platform, tiny, transactional</td></tr>
+<tr><td>Analyze 5GB CSV dataset in Python</td><td>DuckDB</td><td>read_csv() + GROUP BY in under a second</td></tr>
+<tr><td>Web app backend database (low-medium traffic)</td><td>SQLite</td><td>Litestream for replication, enough for most apps</td></tr>
+<tr><td>Data warehouse queries on Parquet files in S3</td><td>DuckDB</td><td>Query Parquet directly from S3/HTTP, no ingestion</td></tr>
+<tr><td>Embedded IoT device with 64MB RAM</td><td>SQLite</td><td>Minimal footprint, runs on anything</td></tr>
+<tr><td>BI dashboard with complex aggregations</td><td>DuckDB</td><td>Vectorized execution, rich SQL, fast on aggregates</td></tr>
+<tr><td>Both OLTP + OLAP in the same app</td><td>Both</td><td>SQLite for transactions, DuckDB for analytics queries</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> SQLite and DuckDB are not competitors — they are complementary. SQLite is your application's transactional database; DuckDB is your analytical engine. Use SQLite for writes, point lookups, and application state. Use DuckDB for queries that scan, aggregate, or join large datasets. Many modern data stacks use both: SQLite for the operational database, DuckDB for the analytical queries, and they happily coexist. See also: <a href="/en/tools/best-database-tools.html">Best Database Tools for Developers</a> and <a href="/en/tech/columnar-database-guide.html">Columnar Database Guide</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/compare/cursor-vs-copilot-vs-claude-code.html" class="related-card">Cursor vs GitHub Copilot vs Claude Code (2026): Which AI Coding Tool Wins?</a><a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html" class="related-card">Vercel vs Netlify vs Cloudflare Pages (2026): Best Hosting for Developers</a><a href="/en/compare/supabase-vs-firebase-vs-neon.html" class="related-card">Supabase vs Firebase vs Neon (2026): Best Backend for Solo Developers</a><a href="/en/compare/figma-vs-canva-vs-penpot.html" class="related-card">Figma vs Canva vs Penpot (2026): Best Design Tool for Developers</a></div>
+      <noscript><div class="related-grid"><a href="/en/compare/cursor-vs-copilot-vs-claude-code.html" class="related-card">Cursor vs GitHub Copilot vs Claude Code (2026): Which AI Coding Tool Wins?</a><a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html" class="related-card">Vercel vs Netlify vs Cloudflare Pages (2026): Best Hosting for Developers</a><a href="/en/compare/supabase-vs-firebase-vs-neon.html" class="related-card">Supabase vs Firebase vs Neon (2026): Best Backend for Solo Developers</a><a href="/en/compare/figma-vs-canva-vs-penpot.html" class="related-card">Figma vs Canva vs Penpot (2026): Best Design Tool for Developers</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

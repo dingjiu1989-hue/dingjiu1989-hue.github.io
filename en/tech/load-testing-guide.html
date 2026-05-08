@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="load-testing-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Load Testing Guide 2026: k6 vs Artillery vs Locust vs wrk2 for Performance Testing">
+    <meta property="og:description" content="Compare load testing tools and learn to design realistic performance tests — ramp patterns, assertions, CI integration, and interpreting results.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/load-testing-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Load Testing Guide 2026: k6 vs Artillery vs Locust vs wrk2 for Performance Testing">
+    <meta name="twitter:description" content="Compare load testing tools and learn to design realistic performance tests — ramp patterns, assertions, CI integration, and interpreting results.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Load Testing Guide 2026: k6 vs Artillery vs Locust vs wrk2 for Performance Testing — SourceHub</title>
+    <meta name="description" content="Compare load testing tools and learn to design realistic performance tests — ramp patterns, assertions, CI integration, and interpreting results.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/load-testing-guide.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/load-testing-guide.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/load-testing-guide.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Load Testing Guide 2026: k6 vs Artillery vs Locust vs wrk2 for Performance Testing",
+      "description": "Compare load testing tools and learn to design realistic performance tests — ramp patterns, assertions, CI integration, and interpreting results.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/load-testing-guide.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Load Testing Guide 2026: k6 vs Artillery vs Locust vs wrk2 for Performance Testing"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Load Testing Guide 2026: k6 vs Artillery vs Locust vs wrk2 for Performance Testing
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">Load Testing</span>
+        <span class="tag-cat">Performance</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Testing</span></div>
+      <h1 class="article-title">Load Testing Guide 2026: k6 vs Artillery vs Locust vs wrk2 for Performance Testing</h1>
+      <div class="article-meta">Published 2026-05-08 · 6840 views · 57 replies</div>
+      <div class="article-body"><p>Load testing answers the question every developer dreads: "Will my app handle the traffic?" Whether it is a product launch, Black Friday, or a Hacker News front page moment, load testing validates that your system won't fall over under pressure. This guide covers load testing tools, test design, and interpreting results to find bottlenecks before your users do.</p>
+
+<h2>Load Testing Tools Compared</h2>
+<table>
+<tr><th>Tool</th><th>Language</th><th>Scripting</th><th>Best For</th><th>Pricing</th></tr>
+<tr><td>k6 (Grafana)</td><td>Go (JS scripting)</td><td>JavaScript (ES6)</td><td>Developer-friendly, CI-integrated load tests</td><td>Free (OSS), $99/mo Cloud</td></tr>
+<tr><td>Artillery</td><td>Node.js</td><td>YAML + JS hooks</td><td>HTTP + WebSocket + Socket.io testing</td><td>Free (OSS), $150/mo Pro</td></tr>
+<tr><td>Locust</td><td>Python</td><td>Python</td><td>Python-native, distributed by design</td><td>Free (OSS)</td></tr>
+<tr><td>wrk2</td><td>C</td><td>Lua scripting</td><td>Maximum raw throughput, micro-benchmarks</td><td>Free (OSS)</td></tr>
+<tr><td>Vegeta</td><td>Go</td><td>CLI + targets file</td><td>Simple HTTP load generation, pipelining</td><td>Free (OSS)</td></tr>
+<tr><td>Hey</td><td>Go</td><td>CLI only</td><td>Quick one-liner load tests</td><td>Free (OSS)</td></tr>
+</table>
+
+<h2>Designing a Realistic Load Test</h2>
+<table>
+<tr><th>Element</th><th>Bad (Unrealistic)</th><th>Good (Realistic)</th></tr>
+<tr><td>Test Data</td><td>One user ID repeated 10,000 times</td><td>10,000 unique user IDs with realistic distribution</td></tr>
+<tr><td>Request Paths</td><td>100% on /api/health (simple endpoint)</td><td>Traffic distributed across real user paths: 60% browse, 20% search, 15% detail, 5% checkout</td></tr>
+<tr><td>Think Time</td><td>0ms between requests (robot behavior)</td><td>1-5s pauses between actions (human behavior)</td></tr>
+<tr><td>Ramp Pattern</td><td>Instant 10,000 concurrent users</td><td>Ramp from 0 → 1,000 → 5,000 → 10,000 over 10 minutes</td></tr>
+<tr><td>Assertions</td><td>Only check HTTP 200</td><td>Check: status code, response time < 200ms, body contains expected data, no errors in response</td></tr>
+</table>
+
+<h2>Key Load Testing Metrics</h2>
+<table>
+<tr><th>Metric</th><th>What It Means</th><th>Red Flag</th></tr>
+<tr><td>P50 (Median) Latency</td><td>Half of requests are faster than this</td><td>P50 > 200ms for API endpoint</td></tr>
+<tr><td>P95 Latency</td><td>95% of requests are faster than this</td><td>P95 > 500ms for user-facing API</td></tr>
+<tr><td>P99 Latency</td><td>99% tail latency — worst-case users</td><td>P99 > 1s for any endpoint</td></tr>
+<tr><td>Throughput (RPS)</td><td>Requests per second the system can handle</td><td>Throughput plateaus while RPS increases (saturation)</td></tr>
+<tr><td>Error Rate</td><td>% of requests that fail</td><td>>0.1% for production-critical paths</td></tr>
+<tr><td>Concurrent Users</td><td>Simultaneous virtual users</td><td>System crashes before reaching target concurrency</td></tr>
+</table>
+
+<h2>k6 Example: Production-Ready Load Test</h2>
+<pre><code>// load-test.js — realistic e-commerce load test
+import http from 'k6/http';
+import { check, sleep, group } from 'k6';
+import { Rate, Trend } from 'k6/metrics';
+
+const errorRate = new Rate('errors');
+const checkoutTime = new Trend('checkout_time');
+
+export const options = {
+  stages: [
+    { duration: '2m', target: 100 },   // Ramp to 100 users
+    { duration: '5m', target: 500 },   // Hold at 500
+    { duration: '3m', target: 1000 },  // Ramp to 1000
+    { duration: '5m', target: 1000 },  // Hold at peak
+    { duration: '2m', target: 0 },     // Ramp down
+  ],
+  thresholds: {
+    http_req_duration: ['p(95)<500'],  // 95% of requests < 500ms
+    errors: ['rate<0.01'],             // Error rate < 1%
+  },
+};
+
+export default function () {
+  // Browse products
+  const browse = http.get('https://api.example.com/products?page=1');
+  check(browse, { 'browse OK': (r) => r.status === 200 });
+  sleep(2);
+
+  // Search
+  const search = http.get('https://api.example.com/search?q=laptop');
+  check(search, { 'search OK': (r) => r.status === 200 });
+  sleep(1);
+
+  // View product detail (10% of users)
+  if (Math.random() < 0.1) {
+    const detail = http.get('https://api.example.com/products/42');
+    check(detail, { 'detail OK': (r) => r.status === 200 });
+    sleep(1);
+  }
+
+  // Checkout (2% of users)
+  if (Math.random() < 0.02) {
+    const checkout = http.post('https://api.example.com/checkout', JSON.stringify({
+      product_id: 42, quantity: 1
+    }), { headers: { 'Content-Type': 'application/json' } });
+    check(checkout, { 'checkout OK': (r) => r.status === 201 });
+    checkoutTime.add(checkout.timings.duration);
+  }
+}</code></pre>
+
+<p><strong>Bottom line:</strong> k6 is the best load testing tool for developers — JavaScript scripting, great CI integration (GitHub Actions, GitLab CI), and built-in metric analysis. The key to useful load tests: use realistic user behavior (varying paths, think times, data), test at your expected peak traffic + 50% headroom, and integrate into CI so you catch performance regressions before they ship. Run small tests frequently (every PR) and large tests before major events. See also: <a href="/en/tech/rate-limiting-strategies.html">Rate Limiting Strategies</a> and <a href="/en/tech/postgresql-query-optimization.html">PostgreSQL Query Optimization</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

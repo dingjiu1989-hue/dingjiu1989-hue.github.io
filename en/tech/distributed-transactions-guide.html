@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="distributed-transactions-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency">
+    <meta property="og:description" content="Master distributed transaction patterns for microservices — choreographed sagas, orchestrated sagas, 2PC, transactional outbox, and CDC.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/distributed-transactions-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency">
+    <meta name="twitter:description" content="Master distributed transaction patterns for microservices — choreographed sagas, orchestrated sagas, 2PC, transactional outbox, and CDC.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency — SourceHub</title>
+    <meta name="description" content="Master distributed transaction patterns for microservices — choreographed sagas, orchestrated sagas, 2PC, transactional outbox, and CDC.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/distributed-transactions-guide.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/distributed-transactions-guide.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/distributed-transactions-guide.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency",
+      "description": "Master distributed transaction patterns for microservices — choreographed sagas, orchestrated sagas, 2PC, transactional outbox, and CDC.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/distributed-transactions-guide.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">Distributed Systems</span>
+        <span class="tag-cat">Transactions</span>
+        <span class="tag-cat">Microservices</span>
+        <span class="tag-cat">Architecture</span></div>
+      <h1 class="article-title">Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency</h1>
+      <div class="article-meta">Published 2026-05-08 · 9480 views · 79 replies</div>
+      <div class="article-body"><p>Once you split a monolith into microservices, database transactions that used to be a simple BEGIN/COMMIT suddenly span multiple services and databases. Distributed transactions are the hardest problem in microservices — and getting them wrong corrupts data. This guide covers the production patterns: sagas, two-phase commit, the outbox pattern, and idempotency.</p>
+
+<h2>Distributed Transaction Patterns Compared</h2>
+<table>
+<tr><th>Pattern</th><th>How It Works</th><th>Consistency</th><th>Complexity</th><th>Best For</th></tr>
+<tr><td>Saga (Choreographed)</td><td>Each service listens for events and performs its step; emits next event on success</td><td>Eventually consistent</td><td>Medium</td><td>Simple workflows, 2-5 steps, independent services</td></tr>
+<tr><td>Saga (Orchestrated)</td><td>Central orchestrator coordinates each step, handles compensations on failure</td><td>Eventually consistent</td><td>Medium-High</td><td>Complex workflows, 5+ steps, sequential dependencies</td></tr>
+<tr><td>Two-Phase Commit (2PC)</td><td>Coordinator asks all participants "ready?" → all say yes → coordinator says "commit!"</td><td>Strong (ACID across services)</td><td>High</td><td>When strong consistency is required (banking, accounting)</td></tr>
+<tr><td>Transactional Outbox</td><td>Write events to an outbox table in the same DB transaction as the data change</td><td>Eventually consistent</td><td>Medium</td><td>Reliable event publishing (guaranteed delivery)</td></tr>
+<tr><td>Reservation Pattern</td><td>Reserve resources first (hold inventory), confirm or release after payment</td><td>Eventually consistent</td><td>Low-Medium</td><td>Booking systems (flights, hotels, tickets)</td></tr>
+</table>
+
+<h2>The Outbox Pattern: Guaranteed Event Publishing</h2>
+<pre><code>-- The problem: you update a database row AND publish an event.
+-- If the DB write succeeds but the event publish fails → data inconsistency.
+-- If the event publish succeeds but the DB write fails → ghost events.
+
+-- The solution: write BOTH in a single DB transaction using an outbox table.
+
+-- Step 1: Update business data + insert into outbox in ONE transaction
+BEGIN;
+  UPDATE orders SET status = 'confirmed' WHERE id = 123;
+  INSERT INTO outbox (aggregate_id, event_type, payload)
+    VALUES (123, 'OrderConfirmed', '{"order_id": 123, "user_id": 456}');
+COMMIT;
+
+-- Step 2: Outbox poller reads events, publishes to message broker, deletes
+-- Debezium (CDC): reads the outbox changes from WAL, publishes to Kafka
+-- Simpler approach: poll the outbox table every 100ms, publish, mark as sent
+
+-- This guarantees: either BOTH the data change and event happen, or NEITHER.
+-- It eliminates the dual-write problem entirely.</code></pre>
+
+<h2>Idempotency: The Foundation of Reliable Distributed Systems</h2>
+<table>
+<tr><th>Mechanism</th><th>How It Works</th><th>Best For</th></tr>
+<tr><td>Idempotency Key</td><td>Client generates a unique key; server stores (key, result); replay returns cached result</td><td>Payment APIs, order creation — any operation that must not duplicate</td></tr>
+<tr><td>Database Unique Constraint</td><td>INSERT ... ON CONFLICT DO NOTHING — duplicate key = safe skip</td><td>Event deduplication, exactly-once processing</td></tr>
+<tr><td>State Machine</td><td>Check current state: "if order.status == 'pending' → confirm; else skip"</td><td>Workflow steps that should only advance, never replay</td></tr>
+<tr><td>Request Deduplication (at-least-once → exactly-once)</td><td>Store processed message IDs; skip duplicates</td><td>Message queue consumers</td></tr>
+</table>
+
+<h2>Implementing a Simple Orchestrated Saga</h2>
+<pre><code># Order fulfillment saga: orchestrator coordinates 3 services
+# Each step has a compensating action for rollback
+
+async def fulfill_order(order_id, user_id, amount):
+    saga_id = generate_saga_id()
+
+    # Step 1: Reserve inventory
+    try:
+        inventory.reserve(order_id, saga_id)
+    except Exception:
+        return failed("Inventory unavailable")
+
+    # Step 2: Charge payment
+    try:
+        payment_id = payment.charge(user_id, amount, saga_id)
+    except Exception:
+        inventory.release(order_id, saga_id)  # COMPENSATE step 1
+        return failed("Payment failed")
+
+    # Step 3: Schedule shipping
+    try:
+        shipping.schedule(order_id, saga_id)
+    except Exception:
+        payment.refund(payment_id, saga_id)   # COMPENSATE step 2
+        inventory.release(order_id, saga_id)  # COMPENSATE step 1
+        return failed("Shipping failed")
+
+    return success(order_id)
+
+# Key principle: each compensating action must be IDEMPOTENT
+# (calling refund twice on the same payment should not double-refund)</code></pre>
+
+<p><strong>Bottom line:</strong> Sagas + the outbox pattern + idempotency keys solve 95% of distributed transaction problems. Start with choreographed sagas for simple workflows (2-3 steps, independent services). Switch to orchestrated sagas when the workflow becomes complex (5+ steps, sequential dependencies). Use the outbox pattern for every event published from a database transaction. And always, always make compensating actions idempotent. See also: <a href="/en/tech/event-driven-architecture-guide.html">Event-Driven Architecture Guide</a> and <a href="/en/tech/microservices-vs-monolith.html">Microservices vs Monolith</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -25,20 +25,28 @@ def update_sitemap():
 
     en_data = json.loads(EN_ARTICLES_JSON.read_text(encoding='utf-8'))
 
-    # Collect all English URLs from articles.json
+    # Collect all English URLs with hreflang pairs
     new_urls = []
 
     # English homepage
     en_home = f'{BASE}/en/'
     if en_home not in sitemap:
-        new_urls.append((en_home, 'daily', '1.0'))
+        hreflang_xml = (
+            f'    <xhtml:link rel="alternate" hreflang="en" href="{en_home}"/>\n'
+            f'    <xhtml:link rel="alternate" hreflang="zh-CN" href="{BASE}/"/>'
+        )
+        new_urls.append((en_home, 'daily', '1.0', hreflang_xml))
         print(f'  + sitemap: {en_home}')
 
     # English category pages
     for board in en_data['boards']:
         cat_url = f'{BASE}/en/{board["id"]}/'
         if cat_url not in sitemap:
-            new_urls.append((cat_url, 'daily', '0.8'))
+            hreflang_xml = (
+                f'    <xhtml:link rel="alternate" hreflang="en" href="{cat_url}"/>\n'
+                f'    <xhtml:link rel="alternate" hreflang="zh-CN" href="{BASE}/{board["id"]}/"/>'
+            )
+            new_urls.append((cat_url, 'daily', '0.8', hreflang_xml))
             print(f'  + sitemap: {cat_url}')
 
     # English article pages
@@ -46,21 +54,69 @@ def update_sitemap():
         for art in board['posts']:
             art_url = f'{BASE}/en/{board["id"]}/{art["slug"]}.html'
             if art_url not in sitemap:
-                new_urls.append((art_url, 'weekly', '0.7'))
+                hreflang_xml = (
+                    f'    <xhtml:link rel="alternate" hreflang="en" href="{art_url}"/>\n'
+                    f'    <xhtml:link rel="alternate" hreflang="zh-CN" href="{BASE}/{board["id"]}/{art["slug"]}.html"/>'
+                )
+                new_urls.append((art_url, 'weekly', '0.7', hreflang_xml))
                 print(f'  + sitemap: {art_url}')
 
     if new_urls:
         entries = []
-        for url, freq, priority in new_urls:
+        for url, freq, priority, hreflang in new_urls:
             entries.append(
                 f'  <url>\n'
                 f'    <loc>{url}</loc>\n'
                 f'    <changefreq>{freq}</changefreq>\n'
                 f'    <priority>{priority}</priority>\n'
                 f'    <lastmod>{TODAY}</lastmod>\n'
+                f'{hreflang}\n'
                 f'  </url>'
             )
         sitemap = sitemap.replace('</urlset>', '\n'.join(entries) + '\n</urlset>')
+
+    # Retroactively add hreflang to existing English URLs that lack it
+    import re
+    for board in en_data['boards']:
+        for art in board['posts']:
+            art_url = f'{BASE}/en/{board["id"]}/{art["slug"]}.html'
+            cn_url = f'{BASE}/{board["id"]}/{art["slug"]}.html'
+            if art_url in sitemap and f'<xhtml:link rel="alternate" hreflang="en" href="{art_url}"/>' not in sitemap:
+                hreflang_xml = (
+                    f'    <xhtml:link rel="alternate" hreflang="en" href="{art_url}"/>\n'
+                    f'    <xhtml:link rel="alternate" hreflang="zh-CN" href="{cn_url}"/>'
+                )
+                # Insert hreflang before <changefreq> in the URL block
+                sitemap = sitemap.replace(
+                    f'{art_url}</loc>\n    <changefreq>',
+                    f'{art_url}</loc>\n{hreflang_xml}\n    <changefreq>'
+                )
+                print(f'  + hreflang: {art_url}')
+    # Also do category pages and homepage
+    for board in en_data['boards']:
+        cat_en = f'{BASE}/en/{board["id"]}/'
+        cat_cn = f'{BASE}/{board["id"]}/'
+        if cat_en in sitemap and f'hreflang="en" href="{cat_en}"' not in sitemap:
+            hreflang_xml = (
+                f'    <xhtml:link rel="alternate" hreflang="en" href="{cat_en}"/>\n'
+                f'    <xhtml:link rel="alternate" hreflang="zh-CN" href="{cat_cn}"/>'
+            )
+            sitemap = sitemap.replace(
+                f'{cat_en}</loc>\n    <changefreq>',
+                f'{cat_en}</loc>\n{hreflang_xml}\n    <changefreq>'
+            )
+            print(f'  + hreflang: {cat_en}')
+    en_home = f'{BASE}/en/'
+    if en_home in sitemap and f'hreflang="en" href="{en_home}"' not in sitemap:
+        hreflang_xml = (
+            f'    <xhtml:link rel="alternate" hreflang="en" href="{en_home}"/>\n'
+            f'    <xhtml:link rel="alternate" hreflang="zh-CN" href="{BASE}/"/>'
+        )
+        sitemap = sitemap.replace(
+            f'{en_home}</loc>\n    <changefreq>',
+            f'{en_home}</loc>\n{hreflang_xml}\n    <changefreq>'
+        )
+        print(f'  + hreflang: {en_home}')
 
     SITEMAP.write_text(sitemap, encoding='utf-8')
     print(f'  Sitemap updated with {len(new_urls)} new URLs')

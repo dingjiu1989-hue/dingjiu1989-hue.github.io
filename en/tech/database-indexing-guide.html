@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="database-indexing-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained">
+    <meta property="og:description" content="Go beyond CREATE INDEX with a deep dive into index types, when each excels, covering indexes, partial indexes, and how the query planner chooses.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/database-indexing-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained">
+    <meta name="twitter:description" content="Go beyond CREATE INDEX with a deep dive into index types, when each excels, covering indexes, partial indexes, and how the query planner chooses.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained — SourceHub</title>
+    <meta name="description" content="Go beyond CREATE INDEX with a deep dive into index types, when each excels, covering indexes, partial indexes, and how the query planner chooses.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/database-indexing-guide.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/database-indexing-guide.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/database-indexing-guide.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained",
+      "description": "Go beyond CREATE INDEX with a deep dive into index types, when each excels, covering indexes, partial indexes, and how the query planner chooses.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/database-indexing-guide.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Indexing</span>
+        <span class="tag-cat">PostgreSQL</span>
+        <span class="tag-cat">Performance</span></div>
+      <h1 class="article-title">Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained</h1>
+      <div class="article-meta">Published 2026-05-08 · 9840 views · 82 replies</div>
+      <div class="article-body"><p>Adding an index is the highest-ROI database optimization — a well-chosen index can turn a 30-second sequential scan into a sub-millisecond index lookup. But indexing is full of trade-offs: each index slows writes, consumes storage, and requires the query planner to choose it. This guide covers index types, when to use each, and how to verify they are actually working.</p>
+
+<h2>Index Types: Complete Reference</h2>
+<table>
+<tr><th>Index Type</th><th>How It Works</th><th>Best For</th><th>Limitations</th><th>Database Support</th></tr>
+<tr><td>B-Tree</td><td>Balanced tree, sorted order</td><td>=, <, >, BETWEEN, LIKE 'prefix%', ORDER BY, GROUP BY</td><td>Slow on LIKE '%suffix' (no leading wildcard)</td><td>All databases (default index type)</td></tr>
+<tr><td>Hash</td><td>Hash table, O(1) lookup</td><td>= (equality only)</td><td>No range queries, no ORDER BY, no partial key matches</td><td>PostgreSQL, MySQL (Memory engine)</td></tr>
+<tr><td>GIN (Generalized Inverted)</td><td>Inverted index: key → list of row IDs</td><td>Arrays, JSONB, full-text search (tsvector)</td><td>Slower writes; larger than B-Tree; GIN scans return all matches</td><td>PostgreSQL</td></tr>
+<tr><td>GiST (Generalized Search Tree)</td><td>Balanced tree, extensible</td><td>Geometric/spatial data (PostGIS), full-text search</td><td>More complex than GIN; slower reads, faster writes than GIN</td><td>PostgreSQL</td></tr>
+<tr><td>BRIN (Block Range INdex)</td><td>Summary per block range (min/max)</td><td>Very large tables (>100M rows), naturally sorted data (timestamps)</td><td>Loose — returns false positives that must be filtered</td><td>PostgreSQL</td></tr>
+<tr><td>SP-GiST (Space-Partitioned GiST)</td><td>Partitioned search tree</td><td>Non-overlapping data, phone numbers, IP addresses</td><td>Specialized; narrow use case</td><td>PostgreSQL</td></tr>
+<tr><td>Full-Text Index</td><td>Tokenized inverted index</td><td>MATCH ... AGAINST, CONTAINS, @@ tsquery</td><td>Language-specific tokenization; keyword search ≠ semantic search</td><td>PostgreSQL (GIN), MySQL (FULLTEXT), MSSQL (Full-Text)</td></tr>
+<tr><td>Bitmap (Columnar)</td><td>Bitmap per distinct value</td><td>Low-cardinality columns (status, category, boolean)</td><td>High-cardinality columns create massive bitmaps</td><td>PostgreSQL (via extensions), Oracle, Data Warehouses</td></tr>
+</table>
+
+<h2>Advanced Index Patterns</h2>
+<table>
+<tr><th>Pattern</th><th>What It Is</th><th>When to Use</th><th>Example</th></tr>
+<tr><td>Composite (Multi-Column)</td><td>Index on (col1, col2, col3)</td><td>Queries filter on col1, then col2, then col3</td><td>INDEX ON orders (user_id, status, created_at)</td></tr>
+<tr><td>Covering Index (INCLUDE)</td><td>Index contains all columns the query needs</td><td>Enable Index-Only Scans; avoid heap lookups</td><td>INDEX ON users (email) INCLUDE (name, avatar)</td></tr>
+<tr><td>Partial Index</td><td>Index only rows matching WHERE</td><td>Index a subset of data, save space</td><td>INDEX ON orders (created_at) WHERE status = 'active'</td></tr>
+<tr><td>Expression / Functional Index</td><td>Index on expression result</td><td>Queries filter on computed values</td><td>INDEX ON users (LOWER(email)), INDEX ON orders (date_trunc('day', created_at))</td></tr>
+<tr><td>Descending Index</td><td>Index sorted DESC (not default ASC)</td><td>ORDER BY col DESC is the primary access pattern</td><td>INDEX ON events (created_at DESC)</td></tr>
+</table>
+
+<h2>How to Verify Your Index Is Working</h2>
+<pre><code>-- PostgreSQL: Check index usage
+SELECT
+    schemaname || '.' || relname AS table,
+    indexrelname AS index,
+    idx_scan AS index_scans,
+    idx_tup_read AS rows_returned,
+    idx_tup_fetch AS rows_fetched,
+    pg_size_pretty(pg_relation_size(indexrelid)) AS index_size
+FROM pg_stat_user_indexes
+WHERE idx_scan = 0  -- Unused indexes! Safe to drop
+ORDER BY pg_relation_size(indexrelid) DESC;
+
+-- Find missing indexes (seq scans on tables > 1MB)
+SELECT
+    schemaname || '.' || relname AS table,
+    seq_scan, seq_tup_read,
+    pg_size_pretty(pg_relation_size(relid)) AS table_size
+FROM pg_stat_user_tables
+WHERE seq_scan > 0
+  AND pg_relation_size(relid) > 1024 * 1024  -- > 1MB
+ORDER BY seq_tup_read DESC;</code></pre>
+
+<h2>The 5-Minute Indexing Checklist</h2>
+<ol>
+<li><strong>Find the slow query:</strong> pg_stat_statements or slow query log → extract the WHERE/JOIN/ORDER BY</li>
+<li><strong>Check existing indexes:</strong> \d tablename — is there already an index that covers this? Is it being used?</li>
+<li><strong>Match index type to query:</strong> = → B-Tree or Hash; range/LIKE prefix → B-Tree; JSONB/array → GIN; full-text → GIN + tsvector</li>
+<li><strong>Create with purpose:</strong> Partial index for subsets, covering index (INCLUDE) for Index-Only Scans, composite for multi-column filters</li>
+<li><strong>Verify with EXPLAIN:</strong> Did the plan change from Seq Scan → Index Scan / Index Only Scan? Run ANALYZE first.</li>
+</ol>
+
+<p><strong>Bottom line:</strong> B-Tree indexes solve 90% of indexing needs — they handle =, range, sorting, and prefix matching. GIN is essential for JSONB and full-text search workloads. The most common indexing mistakes: (1) indexing columns that are never queried, (2) missing composite indexes for multi-column WHERE clauses, and (3) not using covering indexes (INCLUDE) to enable Index-Only Scans. Run the unused index query above quarterly — dropping unused indexes speeds up every INSERT/UPDATE. See also: <a href="/en/tech/postgresql-query-optimization.html">PostgreSQL Query Optimization</a> and <a href="/en/tech/database-design-fundamentals.html">Database Design Fundamentals</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

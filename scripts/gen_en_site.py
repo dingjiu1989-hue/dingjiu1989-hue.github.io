@@ -11163,10 +11163,15 @@ def make_article_html(art, board_id, board_name, all_posts):
     <meta property="og:description" content="{art['description']}">
     <meta property="og:url" content="{art_url}">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="AI Study Room">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{art['title']}">
-    <meta name="twitter:description" content="{art['description']}">'''
+    <meta name="twitter:description" content="{art['description']}">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">'''
 
     # FAQ Schema for articles that have Q&A sections
     faq_schema = ''
@@ -11230,15 +11235,20 @@ def make_article_html(art, board_id, board_name, all_posts):
     <link rel="stylesheet" href="/css/style.css">
     <link rel="alternate" hreflang="zh-CN" href="{cn_url}">
     <link rel="alternate" hreflang="en" href="{en_url}">
+    <link rel="canonical" href="{art_url}">
+    <meta name="robots" content="index, follow">
     <script type="application/ld+json">
     {{
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": "{art['title']}",
       "description": "{art['description']}",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "{art['date']}",
       "dateModified": "{art['date']}",
-      "author": {{"@type": "Person", "name": "SourceHub"}}
+      "author": {{"@type": "Person", "name": "SourceHub"}},
+      "publisher": {{"@type": "Organization", "name": "SourceHub", "logo": {{"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}}}},
+      "mainEntityOfPage": {{"@type": "WebPage", "@id": "{art_url}"}}
     }}
     </script>
     <script type="application/ld+json">
@@ -11270,6 +11280,7 @@ def make_article_html(art, board_id, board_name, all_posts):
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid">{related_html}</div>
+      <noscript><div class="related-grid">{related_html}</div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
   </div>
@@ -11288,6 +11299,12 @@ def make_homepage(data):
     total_posts = sum(len(b['posts']) for b in boards)
     site = data['site']
 
+    # Noscript fallback for crawlers
+    noscript_hp = ''
+    for b in boards:
+        links = ''.join(f'<li><a href="/en/{b["id"]}/{p["slug"]}.html">{p["title"]}</a></li>' for p in b['posts'][:8])
+        noscript_hp += f'<section><h3>{b["icon"]} {b["name"]}</h3><ul>{links}</ul></section>'
+
     return f'''<!DOCTYPE html>
 <html lang="en" data-render="homepage">
 <head>
@@ -11303,20 +11320,27 @@ def make_homepage(data):
     gtag('js', new Date());
     gtag('config', 'G-XGFYGQE9NS');
     </script>
-    <meta property="og:title" content="{site['name']} — {site['tagline']}">
+    <meta property="og:title" content="SourceHub — {site['tagline']}">
     <meta property="og:description" content="Forum-style resource library aggregating tech tutorials, side hustle ideas, tool recommendations, and AI guides.">
     <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="AI Study Room">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{site['name']} — {site['tagline']}">
+    <meta name="twitter:title" content="SourceHub — {site['tagline']}">
     <meta name="twitter:description" content="Forum-style resource library aggregating tech tutorials, side hustle ideas, tool recommendations, and AI guides.">
-    <title>{site['name']} — {site['tagline']}</title>
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>SourceHub — {site['tagline']}</title>
     <meta name="description" content="Forum-style resource library aggregating tech tutorials, side hustle ideas, tool recommendations, and AI guides.">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="alternate" type="application/rss+xml" title="SourceHub RSS" href="/feed.xml">
+    <link rel="alternate" type="application/rss+xml" title="SourceHub RSS" href="/en/feed.xml">
     <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/">
     <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/">
+    <meta name="robots" content="index, follow">
     <script type="application/ld+json">
     {{
       "@context": "https://schema.org",
@@ -11324,6 +11348,15 @@ def make_homepage(data):
       "name": "SourceHub",
       "url": "https://dingjiu1989-hue.github.io/en/",
       "description": "{site['tagline']}"
+    }}
+    </script>
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "SourceHub",
+      "url": "https://dingjiu1989-hue.github.io/en/",
+      "logo": "https://dingjiu1989-hue.github.io/images/logo.png"
     }}
     </script>
     <script>
@@ -11361,7 +11394,7 @@ def make_homepage(data):
       <span>📊 Total Posts: {total_posts}</span>
     </div>
 
-    <div id="homepage-boards"></div>
+    <div id="homepage-boards"><noscript>{noscript_hp}</noscript></div>
   </div>
 </main>
 
@@ -11396,6 +11429,12 @@ def make_category(data, board_id):
     }
     title = board_titles[board_id]
 
+    # Noscript fallback for crawlers
+    noscript_links = ''.join(
+        f'<li><a href="/en/{board_id}/{p["slug"]}.html">{p["title"]}</a> <small>{p["date"]}</small></li>'
+        for p in board['posts']
+    )
+
     return f'''<!DOCTYPE html>
 <html lang="en" data-render="category" data-board="{board_id}">
 <head>
@@ -11415,15 +11454,22 @@ def make_category(data, board_id):
     <meta property="og:description" content="{board_descs[board_id]}">
     <meta property="og:url" content="{en_url}">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="AI Study Room">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{title} — SourceHub">
     <meta name="twitter:description" content="{board_descs[board_id]}">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
     <title>{title} — SourceHub</title>
     <meta name="description" content="{board_descs[board_id]}">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="alternate" hreflang="zh-CN" href="{cn_url}">
     <link rel="alternate" hreflang="en" href="{en_url}">
+    <link rel="canonical" href="{en_url}">
+    <meta name="robots" content="index, follow">
     <script type="application/ld+json">
     {{
       "@context": "https://schema.org",
@@ -11464,7 +11510,7 @@ def make_category(data, board_id):
       </select>
     </div>
 
-    <div id="category-posts"></div>
+    <div id="category-posts"><noscript><ul>{noscript_links}</ul></noscript></div>
   </div>
 </main>
 

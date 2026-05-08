@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="rust-for-javascript-developers">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Rust for JavaScript Developers: Complete Learning Path (2026)">
+    <meta property="og:description" content="Learn Rust from a JavaScript/TypeScript perspective — ownership, borrowing, async, and building your first Rust project with practical comparisons.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/rust-for-javascript-developers.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rust for JavaScript Developers: Complete Learning Path (2026)">
+    <meta name="twitter:description" content="Learn Rust from a JavaScript/TypeScript perspective — ownership, borrowing, async, and building your first Rust project with practical comparisons.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Rust for JavaScript Developers: Complete Learning Path (2026) — SourceHub</title>
+    <meta name="description" content="Learn Rust from a JavaScript/TypeScript perspective — ownership, borrowing, async, and building your first Rust project with practical comparisons.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/rust-for-javascript-developers.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/rust-for-javascript-developers.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/rust-for-javascript-developers.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Rust for JavaScript Developers: Complete Learning Path (2026)",
+      "description": "Learn Rust from a JavaScript/TypeScript perspective — ownership, borrowing, async, and building your first Rust project with practical comparisons.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/rust-for-javascript-developers.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Rust for JavaScript Developers: Complete Learning Path (2026)"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Rust for JavaScript Developers: Complete Learning Path (2026)
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">Rust</span>
+        <span class="tag-cat">JavaScript</span>
+        <span class="tag-cat">Learning</span>
+        <span class="tag-cat">Systems Programming</span></div>
+      <h1 class="article-title">Rust for JavaScript Developers: Complete Learning Path (2026)</h1>
+      <div class="article-meta">Published 2026-05-08 · 8160 views · 68 replies</div>
+      <div class="article-body"><p>Rust has been the most admired programming language on Stack Overflow for 7+ years running, and for good reason: it offers C++-level performance with memory safety guarantees that eliminate entire classes of bugs. For JavaScript developers, Rust's concepts — ownership, borrowing, lifetimes — feel alien at first. But the mental model translates surprisingly well once you understand the parallels. This guide maps Rust concepts to JavaScript patterns you already know.</p>
+
+<h2>JavaScript vs Rust: Conceptual Mapping</h2>
+<table>
+<tr><th>Concept</th><th>JavaScript</th><th>Rust</th><th>Key Difference</th></tr>
+<tr><td>Memory Management</td><td>Garbage collected (automatic)</td><td>Ownership system (compile-time)</td><td>No GC, no runtime overhead, but you must think about ownership</td></tr>
+<tr><td>Variable Mutability</td><td>let/const — mutable by default, immutable with const</td><td>let/let mut — immutable by default, opt-in to mutability</td><td>Rust is immutable-first; const means compile-time constant</td></tr>
+<tr><td>Null/Undefined</td><td>null, undefined — runtime errors (TypeError)</td><td>Option<T> (Some/None) — compile-time enforced</td><td>No null pointer exceptions; must handle None case</td></tr>
+<tr><td>Error Handling</td><td>try/catch, throw, Promise.catch</td><td>Result<T, E> (Ok/Err), ? operator</td><td>Errors are values, not exceptions; compiler enforces handling</td></tr>
+<tr><td>Async</td><td>async/await, Promises, event loop</td><td>async/await, Futures, tokio runtime</td><td>No implicit runtime; you choose tokio/async-std/smol</td></tr>
+<tr><td>Type System</td><td>Dynamic (with optional TS types)</td><td>Static, algebraic data types (enums with data)</td><td>Rust's enums are more powerful than TS discriminated unions</td></tr>
+<tr><td>Package Manager</td><td>npm, yarn, pnpm</td><td>cargo (build + test + publish + docs)</td><td>cargo is an all-in-one tool; Cargo.toml = package.json</td></tr>
+<tr><td>Modules</td><td>import/export (ESM), require (CJS)</td><td>mod, use, pub (explicit visibility)</td><td>Everything is private by default; must explicitly declare pub</td></tr>
+</table>
+
+<h2>Ownership: The One Concept That Unlocks Rust</h2>
+<pre><code>// JavaScript: no ownership concept — values are shared freely
+let a = "hello";
+let b = a;  // b gets a copy (for primitives) or shared reference (for objects)
+console.log(a);  // "hello" — a is still valid
+
+// Rust: ownership means only one owner at a time
+let a = String::from("hello");
+let b = a;  // a MOVES to b — a is no longer valid
+// println!("{}", a);  // COMPILE ERROR: a was moved
+println!("{}", b);  // "hello"
+
+// To use a without moving: borrow with &
+let a = String::from("hello");
+let b = &a;  // b borrows a — a is still valid
+println!("{}", a);  // "hello" — works fine
+println!("{}", b);  // "hello"
+
+// The mental model: Rust is like passing objects in JS —
+// there's only one true copy, and you must know who owns it.
+// The difference: Rust enforces this at compile time, not runtime.</code></pre>
+
+<h2>Where Rust Excels Over JavaScript</h2>
+<table>
+<tr><th>Use Case</th><th>Why Rust Wins</th><th>Example</th></tr>
+<tr><td>CLI Tools</td><td>Single binary, instant startup, low memory</td><td>ripgrep (rg), fd, bat, delta, zoxide — most modern CLI tools are Rust</td></tr>
+<tr><td>WebAssembly</td><td>Smallest WASM footprint, zero-cost JS interop</td><td>SWC (20x faster than Babel), Turbopack (10x faster than Webpack)</td></tr>
+<tr><td>Networking / Infrastructure</td><td>Memory safety without GC pauses</td><td>Cloudflare Pingora (replaced Nginx), AWS Firecracker (Lambda VMs)</td></tr>
+<tr><td>Embedded / IoT</td><td>No runtime, tiny binary, no GC</td><td>Embedded sensors, microcontroller firmware</td></tr>
+<tr><td>NPM Package Optimization</td><td>Replace slow JS build tools with Rust</td><td>Use napi-rs to write NPM packages in Rust for 10-100x speedups</td></tr>
+</table>
+
+<h2>Rust-to-JS Interop: Use Rust in Your Node.js Project</h2>
+<pre><code>// Using napi-rs: write performance-critical code in Rust, call from Node.js
+// Cargo.toml
+// [dependencies]
+// napi = { version = "2", features = ["full"] }
+// napi-derive = "2"
+
+// src/lib.rs
+use napi_derive::napi;
+
+#[napi]
+pub fn fibonacci(n: u32) -> u32 {
+    match n {
+        0 => 0,
+        1 => 1,
+        _ => fibonacci(n - 1) + fibonacci(n - 2),
+    }
+}
+
+// JavaScript: const { fibonacci } = require('./rust-module');
+// console.log(fibonacci(40)); // Instant — runs native Rust speed</code></pre>
+
+<p><strong>Bottom line:</strong> Rust is the highest-ROI second language for JavaScript developers — it unlocks systems programming, WASM, CLI tools, and NPM native modules. The learning curve is real (expect 2-4 weeks of struggle with ownership and lifetimes), but once the mental model clicks, you realize Rust's compiler is not your adversary — it is the most helpful pair programmer you've ever had. Start with the Rust Book and build a CLI tool as your first project. See also: <a href="/en/tech/typescript-advanced-patterns.html">TypeScript Advanced Patterns</a> and <a href="/en/compare/bun-vs-node-vs-deno.html">Bun vs Node vs Deno</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>
