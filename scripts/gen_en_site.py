@@ -12519,6 +12519,179 @@ function EditForm({ slug }) {
 
 <p><strong>Bottom line:</strong> RSC is not hype — it's a genuine architectural improvement that reduces JavaScript shipped to the browser by 30-70% for content-heavy apps. But it's not free: the mental model takes time to internalize, debugging is different (server errors vs client errors), and the ecosystem is still maturing (not all libraries support RSC yet). For new Next.js projects in 2026, start with RSC — you can always add 'use client' where you need interactivity, but you can't easily convert a all-client app to RSC later. See also: <a href="/en/compare/nextjs-vs-nuxt-vs-sveltekit.html">Next.js vs Nuxt vs SvelteKit</a> and <a href="/en/tech/react-hooks-complete-guide.html">React Hooks Complete Guide</a>.</p>
 '''
+
+BODIES['best-container-registry-tools'] = '''
+<p>Every developer pushes and pulls container images. But where you store those images matters — for build speed, security, CI/CD integration, and cost. Here are the best container registry and artifact management tools in 2026, from free options to enterprise platforms.</p>
+
+<h2>Docker Hub</h2>
+<p><strong>Best for:</strong> Public open-source images and individual developers.</p>
+<p>Docker Hub remains the default registry. It hosts millions of public images and integrates seamlessly with Docker CLI. Free tier: unlimited public repos, 1 private repo, 200 pulls/6 hours. Paid: $9/month for unlimited private repos and 5,000 pulls/day. <strong>Limitations:</strong> Rate limiting on free tier is aggressive (especially for CI/CD); image scanning requires Pro plan; no on-prem option.</p>
+<pre><code>docker pull nginx:latest          # pulls from Docker Hub by default
+docker tag myapp:latest myuser/myapp:v1
+docker push myuser/myapp:v1</code></pre>
+
+<h2>GitHub Container Registry (GHCR)</h2>
+<p><strong>Best for:</strong> Teams already on GitHub Actions and GitHub Packages.</p>
+<p>GHCR is deeply integrated with GitHub: store container images alongside your code, manage access via GitHub teams, and pull images in GitHub Actions without authentication headaches. Free for public repos; private repos get 2GB free storage + data transfer within Actions. <strong>Standout features:</strong> Anonymous pulls for public images (no rate limits like Docker Hub), granular RBAC via teams, and built-in vulnerability scanning powered by GitHub's advisory database. <strong>Limitations:</strong> Less mature ecosystem than Docker Hub; no Helm chart support natively; storage costs add up for image-heavy projects beyond the free tier.</p>
+<pre><code>echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
+docker tag myapp ghcr.io/myorg/myapp:v1
+docker push ghcr.io/myorg/myapp:v1</code></pre>
+
+<h2>AWS Elastic Container Registry (ECR)</h2>
+<p><strong>Best for:</strong> AWS-native deployments (ECS, EKS, Lambda containers).</p>
+<p>ECR is the obvious choice if your infra lives in AWS. Image scanning is built-in (both basic and enhanced via Inspector), lifecycle policies auto-clean old images, and cross-region replication keeps images close to your compute. <strong>Cost:</strong> $0.10/GB/month storage, no pull pricing within AWS (data transfer out to internet applies). <strong>Standout:</strong> IAM-based auth (no static credentials), VPC endpoints keep traffic private, and pull-through cache repos can mirror Docker Hub to avoid rate limits. <strong>Limitations:</strong> AWS-only; the IAM auth model is powerful but complex for multi-cloud; no Helm repo support (use ECR Public or separate solutions).</p>
+
+<h2>Google Artifact Registry (GAR)</h2>
+<p><strong>Best for:</strong> GCP workloads and multi-format artifact management.</p>
+<p>GAR replaced Google Container Registry (GCR) and supports Docker, Maven, npm, Python, Apt, and Yum — all in one service. Regional repositories keep latency low. <strong>Cost:</strong> $0.10/GB/month storage, free within the same region. <strong>Standout:</strong> Vulnerability scanning (Artifact Analysis) is built-in; integrates natively with Cloud Run, GKE, and Cloud Build; supports immutable tags and customer-managed encryption keys. <strong>Limitations:</strong> GCP-centric; prices increase significantly with cross-region replication.</p>
+
+<h2>Harbor</h2>
+<p><strong>Best for:</strong> Self-hosted enterprise environments with security compliance requirements.</p>
+<p>Harbor is the leading open-source registry (CNCF graduated). It extends Docker Distribution with vulnerability scanning (Trivy/Clair), image signing (Notary/Cosign), RBAC, replication, and a clean web UI. Deploy anywhere — Kubernetes, vSphere, or bare metal. <strong>Cost:</strong> Free and open source. <strong>Standout:</strong> Full feature parity with commercial registries at zero license cost; OCI-compliant; supports Helm charts and CNAB; LDAP/OIDC integration; retention policies; and proxy cache to mirror remote registries. <strong>Limitations:</strong> You run it (operational overhead); scaling requires infrastructure expertise; upgrades need planning.</p>
+
+<h2>JFrog Artifactory</h2>
+<p><strong>Best for:</strong> Large enterprises needing a universal artifact repository.</p>
+<p>Artifactory supports 30+ package types (Docker, Maven, npm, PyPI, NuGet, Go, Conan, Helm, etc.) in one platform. It offers high availability, multi-site replication, and advanced metadata indexing for artifact traceability. <strong>Cost:</strong> Starts at $150/month for self-hosted Pro; cloud pricing varies. <strong>Standout:</strong> Universal — one tool for everything; rich metadata and AQL-based querying; deeply integrated with JFrog Xray for vulnerability and compliance scanning. <strong>Limitations:</strong> Expensive compared to alternatives; heavyweight to operate; overkill for small-to-medium teams.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Registry</th><th>Best For</th><th>Free Tier</th><th>Self-Hosted</th><th>Multi-Format</th></tr>
+<tr><td>Docker Hub</td><td>Public images, individuals</td><td>1 private repo</td><td>No</td><td>No</td></tr>
+<tr><td>GHCR</td><td>GitHub-native teams</td><td>Public repos free</td><td>No</td><td>No</td></tr>
+<tr><td>AWS ECR</td><td>AWS deployments</td><td>500MB/month</td><td>No</td><td>No</td></tr>
+<tr><td>Google GAR</td><td>GCP + multi-format</td><td>500MB/month</td><td>No</td><td>Maven, npm, PyPI, Apt</td></tr>
+<tr><td>Harbor</td><td>Security/compliance</td><td>Free (OSS)</td><td>Yes</td><td>Helm, CNAB</td></tr>
+<tr><td>JFrog Artifactory</td><td>Enterprise universal</td><td>None</td><td>Yes</td><td>30+ formats</td></tr>
+</table>
+
+<h2>Which One Should You Choose?</h2>
+<ul>
+<li><strong>Solo developer or small team on GitHub:</strong> GHCR — zero config, no rate limits on public pulls, tight GitHub integration.</li>
+<li><strong>AWS shop:</strong> ECR — IAM auth, ECS/EKS integration, VPC endpoints.</li>
+<li><strong>GCP shop or need multi-format support:</strong> Google Artifact Registry — regional, built-in scanning, supports Maven/npm/PyPI.</li>
+<li><strong>Security-conscious enterprise or air-gapped environment:</strong> Harbor — open source, full control, CIS benchmarks.</li>
+<li><strong>Large org with diverse artifact types:</strong> JFrog Artifactory — universal, but you'll pay for it.</li>
+<li><strong>Just starting out:</strong> Docker Hub free tier + GHCR for private images. You can always migrate later.</li>
+</ul>
+
+<p>Most teams end up using two registries: one cloud-native (ECR/GAR) for production and GHCR or Docker Hub for development and public images.</p>
+'''
+
+BODIES['code-review-best-practices'] = '''
+<p>Code review is the single highest-leverage practice for shipping reliable software. Done well, it catches bugs before production, spreads knowledge across the team, and improves the codebase over time. Done poorly, it's a bottleneck that breeds resentment. Here's how to do it right.</p>
+
+<h2>For Reviewers: How to Give Useful Feedback</h2>
+
+<h3>1. Review the Right Things First</h3>
+<p>Start with <strong>correctness and security</strong> — does the code do what it claims? Are there edge cases? Could an attacker exploit this? Then move to <strong>design and architecture</strong> — does this change fit the system's patterns? Will it scale? Finally, check <strong>style and readability</strong> — naming, comments, tests. Style nitpicks should never block a PR; use automated formatters (Prettier, Biome, Black) and linters to handle that automatically.</p>
+
+<h3>2. Be Specific, Not Judgmental</h3>
+<p>Bad: "This is confusing." Good: "I had to read this three times to understand the intent. Could we extract the filter logic into a named function?" Bad: "Why didn't you use X pattern?" Good: "Have you considered using the repository pattern here? It would make testing this without a database easier. Here's an example from module Y."</p>
+
+<h3>3. Distinguish Blocking from Non-Blocking</h3>
+<p>Not every comment needs to be resolved before merge. Use prefixes to make intent clear: <code>blocking:</code> for correctness/security issues that must be fixed; <code>suggestion:</code> for improvements that are worth considering but not required; <code>nit:</code> for minor style preferences; <code>question:</code> for understanding the author's intent. This small habit reduces friction dramatically.</p>
+
+<h3>4. Review in Timeboxed Batches</h3>
+<p>Aim for reviews within 4 business hours (same-day). Review 2-3 PRs in a focused 30-minute block rather than context-switching all day. Research from Google shows that reviewers who batch reviews catch 40% more defects than those who review ad-hoc between meetings. If a PR is too large (>400 lines), ask the author to split it before reviewing.</p>
+
+<h3>5. Lead with Praise</h3>
+<p>If something is clever, elegant, or well-tested, say so. Positive feedback reinforces good practices and makes critical feedback easier to receive. "This edge case handling is great — I would have missed the timeout scenario. The test coverage here is excellent."</p>
+
+<h2>For Authors: How to Get Better Reviews</h2>
+
+<h3>1. Make Your PR Easy to Review</h3>
+<p>Keep PRs small — ideally under 400 lines. Write a clear description: what problem does this solve, what approach did you choose and why, how did you test it, and are there any risks or follow-ups? Link the issue/ticket. Add screenshots or screen recordings for UI changes.</p>
+<pre><code>## What
+Adds rate limiting middleware for the API Gateway.
+Uses token bucket algorithm per API key.
+
+## Why
+We hit production last week when a misconfigured
+client sent 15K req/min. This prevents that.
+
+## Testing
+- Unit tests for bucket refill and exhaustion
+- Integration test with Redis backend
+- Load test: 10K concurrent keys, p99 &lt; 2ms
+
+## Risks
+- Redis dependency: if Redis is down, fail open
+  (allow requests rather than blocking all traffic)</code></pre>
+
+<h3>2. Review Your Own Code First</h3>
+<p>Before requesting review, go through your own diff line by line. You will catch typos, leftover debugging code, missing tests, and unclear variable names before anyone else sees them. This is the single highest-return habit in code review. Use <code>git diff main...HEAD</code> or your IDE's diff view and actually read every line.</p>
+
+<h3>3. Don't Take Feedback Personally</h3>
+<p>Your code is not you. When a reviewer suggests changes, they're trying to improve the product, not attack your competence. If you feel defensive, wait 30 minutes before responding. Ask clarifying questions: "Can you help me understand why pattern X would be better here?" This turns friction into learning.</p>
+
+<h3>4. Respond to Every Comment</h3>
+<p>Acknowledge every review comment — even if it's a thumbs-up emoji. If you disagree, explain your reasoning with data, not emotion. "I chose the simpler approach here because this endpoint gets ~10 req/day and the complexity of caching isn't worth the 50ms savings." If the discussion needs more than 3 back-and-forth comments, hop on a quick call.</p>
+
+<h2>Common Pitfalls</h2>
+<table>
+<tr><th>Anti-Pattern</th><th>Why It Hurts</th><th>Better Approach</th></tr>
+<tr><td>Mega-PRs (>1K lines)</td><td>Reviewers skim, miss bugs, rubber-stamp</td><td>Stack smaller PRs on top of each other</td></tr>
+<tr><td>"LGTM" culture</td><td>Defects reach production</td><td>Require at least one meaningful comment per review</td></tr>
+<tr><td>Style nitpicks in review</td><td>Wastes human attention on automatable issues</td><td>Auto-formatter + linter in CI; humans focus on logic</td></tr>
+<tr><td>Review bottleneck (one gatekeeper)</td><td>PRs queue up, velocity drops</td><td>Distribute review load; any senior dev can approve</td></tr>
+<tr><td>Reviewing without context</td><td>Misses architectural problems</td><td>Include design doc link or 2-sentence context</td></tr>
+</table>
+
+<h2>Measuring Code Review Health</h2>
+<p>Track these metrics (but never use them for performance reviews — they gamify easily): <strong>Time to first review</strong> (target: < 4 business hours), <strong>Time to merge</strong> (target: < 24 hours), <strong>PR size</strong> (median < 300 lines), <strong>Review depth</strong> (comments per PR, 3+ is healthy). Tools like LinearB, CodeClimate Velocity, and GitHub's built-in insights can track these.</p>
+
+<p>Great code review is a skill that compounds. Every thoughtful review makes the next one easier because the team converges on shared standards. Start with one habit from this guide — small PRs or blocking/non-blocking prefixes — and build from there.</p>
+'''
+
+BODIES['freelance-client-acquisition-guide'] = '''
+<p>Getting your first freelance client as a developer is the hardest part. After that, referrals and reputation take over. This guide covers exactly how to go from zero clients to a steady pipeline — no fluff, just what works in 2026.</p>
+
+<h2>Phase 1: Build Your Foundation (Week 1)</h2>
+
+<h3>Pick Your Niche</h3>
+<p>Generalist freelancers compete with everyone. Specialists compete with almost no one. Pick one: <strong>Technology</strong> (React, Shopify, AWS, WordPress, Python/Django), <strong>Industry</strong> (healthcare SaaS, fintech, e-commerce, edtech), or <strong>Problem</strong> (performance optimization, MVP development, API integrations, legacy migrations). The best niche combines all three: "I help e-commerce brands migrate from Magento to Shopify Plus with custom React storefronts." That sentence lands clients. "I'm a full-stack developer" doesn't.</p>
+
+<h3>Create Your Proof</h3>
+<p>Clients don't hire resumes — they hire proof you can solve their problem. Build 2-3 focused portfolio pieces: a case study of an open-source contribution, a detailed technical blog post solving a specific problem, a GitHub repo with clean README and tests, or a worked example relevant to your niche. A mediocre project with excellent documentation beats an excellent project with no documentation every time.</p>
+
+<h3>Set Your Starting Rate</h3>
+<p>New freelancers chronically undercharge. As a developer with professional skills, your starting floor should be $50-75/hour. Use these anchors: WordPress/simple sites: $50-75/hr, React/Vue/frontend: $75-100/hr, full-stack: $100-150/hr, specialized (AI, DevOps, security): $150-250/hr. Charge by the project once you can scope accurately; charge by the hour while you're learning. Do NOT charge below $50/hr — it signals low quality and attracts the worst clients.</p>
+
+<h2>Phase 2: Find Your First Client (Weeks 2-4)</h2>
+
+<h3>Channel 1: Your Network (Highest Conversion)</h3>
+<p>Tell everyone you know: "I'm taking on freelance development work. I specialize in [niche]. If you know anyone who needs [specific outcome], I'd appreciate an introduction." Send this to: former coworkers, college alumni Slack/Discord, LinkedIn connections, local meetup groups, friends and family. The first client often comes from the weakest tie — someone you haven't talked to in 2 years who happens to need exactly what you do.</p>
+
+<h3>Channel 2: Upwork and Toptal (Fastest Start)</h3>
+<p>Upwork gets criticized but it's the fastest path to your first paid work. Strategy: don't bid on everything — bid on 3 jobs/day that exactly match your niche. Lead with the client's problem, not your credentials. "I see you're migrating from WordPress to a custom React frontend. I recently did this for an e-commerce site with 10K products — happy to share how I handled SEO preservation during the migration." Include a relevant work sample specific to their problem. Start at a lower rate to get reviews, then raise it after 3 completed jobs. Toptal has higher rates but requires passing their screening; worth doing once you have 2+ years of experience.</p>
+
+<h3>Channel 3: Cold Outreach That Works</h3>
+<p>Don't spam. Find companies that recently raised funding (Crunchbase, TechCrunch), use a specific tech stack you know (BuiltWith, Wappalyzer), or posted job listings they couldn't fill (LinkedIn, Indeed, Wellfound). Send a brief, specific email: "Hi [name], I noticed [company] recently raised your Series A — congrats. I specialize in building analytics dashboards with React and D3, and I see you're hiring for a frontend role that's been open for 6 weeks. Would it make sense to discuss a contract engagement while you search for the right full-time hire?" This converts because it solves an immediate, visible problem.</p>
+
+<h3>Channel 4: Content Marketing (Slow Build, High ROI)</h3>
+<p>Write one in-depth technical article per week. Post it on your blog, then distribute: LinkedIn post summarizing the key insight, relevant subreddit or Hacker News, Twitter/X thread with the technical details. Articles that attract clients are specific: "How I Reduced Database Costs by 70% Using Read Replicas and Connection Pooling" outperforms "Database Optimization Guide" by 10x. The goal isn't viral traffic — it's one right person thinking "I need this person to fix my database."</p>
+
+<h2>Phase 3: Close the Deal (The Part Most Developers Skip)</h2>
+
+<h3>The Discovery Call</h3>
+<p>Your goal is to diagnose the problem, not sell yourself. Ask: What's the business problem this project solves? What happens if you don't solve it? What's the timeline and budget range? Who makes the final decision? Who will you work with day to day? The client should do 70% of the talking. Take notes. Repeat their problem back to them: "So if I understand correctly, your checkout flow is dropping 15% of mobile users because..." This builds more trust than any portfolio piece.</p>
+
+<h3>The Proposal</h3>
+<p>Send within 24 hours. Structure: Problem summary (prove you understood), proposed solution (high-level approach, not implementation details), timeline and milestones (2-4 phases, each with a deliverable), pricing (fixed price per phase, or hourly with a cap), what you need from them (access, assets, point of contact), and a clear call to action. Keep it under 2 pages. Pro tip: offer two options — the "full solution" at your target price and a "minimum viable" at 60% of that. Clients prefer choosing between options over a yes/no decision.</p>
+
+<h3>Red Flags to Walk Away From</h3>
+<ul>
+<li>"This should be quick and easy" — means the client undervalues the work.</li>
+<li>"We'll pay you when the product makes money" — equity from a stranger is worth zero.</li>
+<li>"Can you do a free trial/sample first?" — a small paid test project is fine; free work is not.</li>
+<li>Client can't articulate the problem clearly — you'll build the wrong thing.</li>
+<li>Multiple stakeholders with conflicting requirements — design by committee kills projects.</li>
+</ul>
+
+<h2>After the First Client</h2>
+<p>Over-deliver slightly (meet deadlines, communicate proactively, document your work). Ask for a testimonial while the project is still fresh. Ask if they know anyone else who needs similar work. Raise your rate by 20% for the next client. Repeat. After 3-5 clients, you'll have a referral pipeline and won't need to pitch cold anymore. That's when freelancing stops feeling like a hustle and starts feeling like a business.</p>
+'''
+
 # FAQ data for FAQPage schema (slug → list of q/a dicts)
 FAQS = {
     'chatgpt-plus-worth': [
@@ -12665,6 +12838,7 @@ def make_article_html(art, board_id, board_name, all_posts):
       ]
     }}
     </script>{faq_schema}
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
 </head>
 <body>
 <div id="nav-placeholder"></div>
@@ -12775,6 +12949,7 @@ def make_homepage(data):
       }}
     }})();
     </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
 </head>
 <body>
 
@@ -12893,6 +13068,7 @@ def make_category(data, board_id):
       ]
     }}
     </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
 </head>
 <body>
 

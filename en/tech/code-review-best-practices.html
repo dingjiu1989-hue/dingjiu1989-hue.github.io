@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="code-review-best-practices">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Code Review Best Practices: How to Give and Receive Feedback That Actually Improves Code">
+    <meta property="og:description" content="Learn how to give useful code review feedback, write better PRs, and build a healthy review culture. Specific techniques for reviewers and authors.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/code-review-best-practices.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Code Review Best Practices: How to Give and Receive Feedback That Actually Improves Code">
+    <meta name="twitter:description" content="Learn how to give useful code review feedback, write better PRs, and build a healthy review culture. Specific techniques for reviewers and authors.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Code Review Best Practices: How to Give and Receive Feedback That Actually Improves Code — SourceHub</title>
+    <meta name="description" content="Learn how to give useful code review feedback, write better PRs, and build a healthy review culture. Specific techniques for reviewers and authors.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/code-review-best-practices.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/code-review-best-practices.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Code Review Best Practices: How to Give and Receive Feedback That Actually Improves Code",
+      "description": "Learn how to give useful code review feedback, write better PRs, and build a healthy review culture. Specific techniques for reviewers and authors.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-09",
+      "dateModified": "2026-05-09",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/code-review-best-practices.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Code Review Best Practices: How to Give and Receive Feedback That Actually Improves Code"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Code Review Best Practices: How to Give and Receive Feedback That Actually Improves Code
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">c</span>
+        <span class="tag-cat">o</span>
+        <span class="tag-cat">d</span>
+        <span class="tag-cat">e</span>
+        <span class="tag-cat"> </span>
+        <span class="tag-cat">r</span>
+        <span class="tag-cat">e</span>
+        <span class="tag-cat">v</span>
+        <span class="tag-cat">i</span>
+        <span class="tag-cat">e</span>
+        <span class="tag-cat">w</span>
+        <span class="tag-cat">,</span>
+        <span class="tag-cat"> </span>
+        <span class="tag-cat">b</span>
+        <span class="tag-cat">e</span>
+        <span class="tag-cat">s</span>
+        <span class="tag-cat">t</span>
+        <span class="tag-cat"> </span>
+        <span class="tag-cat">p</span>
+        <span class="tag-cat">r</span>
+        <span class="tag-cat">a</span>
+        <span class="tag-cat">c</span>
+        <span class="tag-cat">t</span>
+        <span class="tag-cat">i</span>
+        <span class="tag-cat">c</span>
+        <span class="tag-cat">e</span>
+        <span class="tag-cat">s</span>
+        <span class="tag-cat">,</span>
+        <span class="tag-cat"> </span>
+        <span class="tag-cat">s</span>
+        <span class="tag-cat">o</span>
+        <span class="tag-cat">f</span>
+        <span class="tag-cat">t</span>
+        <span class="tag-cat">w</span>
+        <span class="tag-cat">a</span>
+        <span class="tag-cat">r</span>
+        <span class="tag-cat">e</span>
+        <span class="tag-cat"> </span>
+        <span class="tag-cat">e</span>
+        <span class="tag-cat">n</span>
+        <span class="tag-cat">g</span>
+        <span class="tag-cat">i</span>
+        <span class="tag-cat">n</span>
+        <span class="tag-cat">e</span>
+        <span class="tag-cat">e</span>
+        <span class="tag-cat">r</span>
+        <span class="tag-cat">i</span>
+        <span class="tag-cat">n</span>
+        <span class="tag-cat">g</span>
+        <span class="tag-cat">,</span>
+        <span class="tag-cat"> </span>
+        <span class="tag-cat">t</span>
+        <span class="tag-cat">e</span>
+        <span class="tag-cat">a</span>
+        <span class="tag-cat">m</span>
+        <span class="tag-cat"> </span>
+        <span class="tag-cat">c</span>
+        <span class="tag-cat">o</span>
+        <span class="tag-cat">l</span>
+        <span class="tag-cat">l</span>
+        <span class="tag-cat">a</span>
+        <span class="tag-cat">b</span>
+        <span class="tag-cat">o</span>
+        <span class="tag-cat">r</span>
+        <span class="tag-cat">a</span>
+        <span class="tag-cat">t</span>
+        <span class="tag-cat">i</span>
+        <span class="tag-cat">o</span>
+        <span class="tag-cat">n</span></div>
+      <h1 class="article-title">Code Review Best Practices: How to Give and Receive Feedback That Actually Improves Code</h1>
+      <div class="article-meta">Published 2026-05-09 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Code review is the single highest-leverage practice for shipping reliable software. Done well, it catches bugs before production, spreads knowledge across the team, and improves the codebase over time. Done poorly, it's a bottleneck that breeds resentment. Here's how to do it right.</p>
+
+<h2>For Reviewers: How to Give Useful Feedback</h2>
+
+<h3>1. Review the Right Things First</h3>
+<p>Start with <strong>correctness and security</strong> — does the code do what it claims? Are there edge cases? Could an attacker exploit this? Then move to <strong>design and architecture</strong> — does this change fit the system's patterns? Will it scale? Finally, check <strong>style and readability</strong> — naming, comments, tests. Style nitpicks should never block a PR; use automated formatters (Prettier, Biome, Black) and linters to handle that automatically.</p>
+
+<h3>2. Be Specific, Not Judgmental</h3>
+<p>Bad: "This is confusing." Good: "I had to read this three times to understand the intent. Could we extract the filter logic into a named function?" Bad: "Why didn't you use X pattern?" Good: "Have you considered using the repository pattern here? It would make testing this without a database easier. Here's an example from module Y."</p>
+
+<h3>3. Distinguish Blocking from Non-Blocking</h3>
+<p>Not every comment needs to be resolved before merge. Use prefixes to make intent clear: <code>blocking:</code> for correctness/security issues that must be fixed; <code>suggestion:</code> for improvements that are worth considering but not required; <code>nit:</code> for minor style preferences; <code>question:</code> for understanding the author's intent. This small habit reduces friction dramatically.</p>
+
+<h3>4. Review in Timeboxed Batches</h3>
+<p>Aim for reviews within 4 business hours (same-day). Review 2-3 PRs in a focused 30-minute block rather than context-switching all day. Research from Google shows that reviewers who batch reviews catch 40% more defects than those who review ad-hoc between meetings. If a PR is too large (>400 lines), ask the author to split it before reviewing.</p>
+
+<h3>5. Lead with Praise</h3>
+<p>If something is clever, elegant, or well-tested, say so. Positive feedback reinforces good practices and makes critical feedback easier to receive. "This edge case handling is great — I would have missed the timeout scenario. The test coverage here is excellent."</p>
+
+<h2>For Authors: How to Get Better Reviews</h2>
+
+<h3>1. Make Your PR Easy to Review</h3>
+<p>Keep PRs small — ideally under 400 lines. Write a clear description: what problem does this solve, what approach did you choose and why, how did you test it, and are there any risks or follow-ups? Link the issue/ticket. Add screenshots or screen recordings for UI changes.</p>
+<pre><code>## What
+Adds rate limiting middleware for the API Gateway.
+Uses token bucket algorithm per API key.
+
+## Why
+We hit production last week when a misconfigured
+client sent 15K req/min. This prevents that.
+
+## Testing
+- Unit tests for bucket refill and exhaustion
+- Integration test with Redis backend
+- Load test: 10K concurrent keys, p99 &lt; 2ms
+
+## Risks
+- Redis dependency: if Redis is down, fail open
+  (allow requests rather than blocking all traffic)</code></pre>
+
+<h3>2. Review Your Own Code First</h3>
+<p>Before requesting review, go through your own diff line by line. You will catch typos, leftover debugging code, missing tests, and unclear variable names before anyone else sees them. This is the single highest-return habit in code review. Use <code>git diff main...HEAD</code> or your IDE's diff view and actually read every line.</p>
+
+<h3>3. Don't Take Feedback Personally</h3>
+<p>Your code is not you. When a reviewer suggests changes, they're trying to improve the product, not attack your competence. If you feel defensive, wait 30 minutes before responding. Ask clarifying questions: "Can you help me understand why pattern X would be better here?" This turns friction into learning.</p>
+
+<h3>4. Respond to Every Comment</h3>
+<p>Acknowledge every review comment — even if it's a thumbs-up emoji. If you disagree, explain your reasoning with data, not emotion. "I chose the simpler approach here because this endpoint gets ~10 req/day and the complexity of caching isn't worth the 50ms savings." If the discussion needs more than 3 back-and-forth comments, hop on a quick call.</p>
+
+<h2>Common Pitfalls</h2>
+<table>
+<tr><th>Anti-Pattern</th><th>Why It Hurts</th><th>Better Approach</th></tr>
+<tr><td>Mega-PRs (>1K lines)</td><td>Reviewers skim, miss bugs, rubber-stamp</td><td>Stack smaller PRs on top of each other</td></tr>
+<tr><td>"LGTM" culture</td><td>Defects reach production</td><td>Require at least one meaningful comment per review</td></tr>
+<tr><td>Style nitpicks in review</td><td>Wastes human attention on automatable issues</td><td>Auto-formatter + linter in CI; humans focus on logic</td></tr>
+<tr><td>Review bottleneck (one gatekeeper)</td><td>PRs queue up, velocity drops</td><td>Distribute review load; any senior dev can approve</td></tr>
+<tr><td>Reviewing without context</td><td>Misses architectural problems</td><td>Include design doc link or 2-sentence context</td></tr>
+</table>
+
+<h2>Measuring Code Review Health</h2>
+<p>Track these metrics (but never use them for performance reviews — they gamify easily): <strong>Time to first review</strong> (target: < 4 business hours), <strong>Time to merge</strong> (target: < 24 hours), <strong>PR size</strong> (median < 300 lines), <strong>Review depth</strong> (comments per PR, 3+ is healthy). Tools like LinearB, CodeClimate Velocity, and GitHub's built-in insights can track these.</p>
+
+<p>Great code review is a skill that compounds. Every thoughtful review makes the next one easier because the team converges on shared standards. Start with one habit from this guide — small PRs or blocking/non-blocking prefixes — and build from there.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

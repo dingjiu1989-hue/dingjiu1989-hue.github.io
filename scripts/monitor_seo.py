@@ -39,8 +39,12 @@ REQUIRED_TAGS = {
     "description": r'<meta name="description"',
     "robots": r'<meta name="robots"',
     "hreflang:en": r'hreflang="en"',
-    "hreflang:zh": r'hreflang="zh-CN"',
     "json-ld": r'application/ld\+json',
+}
+
+# Tags that are only required when a Chinese counterpart exists on disk
+CONDITIONAL_TAGS = {
+    "hreflang:zh": r'hreflang="zh-CN"',
 }
 
 try:
@@ -122,6 +126,14 @@ def check_seo_tags():
             if not re.search(pattern, html):
                 results["missing_tags"][tag_name].append(rel)
                 issues.append(tag_name)
+        # Conditional tags: only required when Chinese counterpart exists
+        cn_rel = re.sub(r'^en/', '', rel)
+        cn_path = ROOT / cn_rel
+        if cn_path.exists():
+            for tag_name, pattern in CONDITIONAL_TAGS.items():
+                if not re.search(pattern, html):
+                    results["missing_tags"][tag_name].append(rel)
+                    issues.append(tag_name)
         if issues:
             results["files_with_issues"] += 1
 
