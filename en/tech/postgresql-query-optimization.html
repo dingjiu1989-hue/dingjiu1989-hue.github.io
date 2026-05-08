@@ -14,7 +14,7 @@
     gtag('config', 'G-XGFYGQE9NS');
     </script>
     <meta property="og:title" content="PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds">
-    <meta property="og:description" content="Systematic approach to PostgreSQL performance — read EXPLAIN ANALYZE, choose the right index, and tune configuration for 100-10,000x speedups.">
+    <meta property="og:description" content="Practical PostgreSQL performance guide: EXPLAIN ANALYZE deep dive, index types (B-tree, GIN, GiST, BRIN), query plan analysis, common anti-patterns, partitioning strategies, and connection pooling with PgBouncer.">
     <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/postgresql-query-optimization.html">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
@@ -24,10 +24,10 @@
     <meta property="og:image:height" content="512">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds">
-    <meta name="twitter:description" content="Systematic approach to PostgreSQL performance — read EXPLAIN ANALYZE, choose the right index, and tune configuration for 100-10,000x speedups.">
+    <meta name="twitter:description" content="Practical PostgreSQL performance guide: EXPLAIN ANALYZE deep dive, index types (B-tree, GIN, GiST, BRIN), query plan analysis, common anti-patterns, partitioning strategies, and connection pooling with PgBouncer.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
     <title>PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds — SourceHub</title>
-    <meta name="description" content="Systematic approach to PostgreSQL performance — read EXPLAIN ANALYZE, choose the right index, and tune configuration for 100-10,000x speedups.">
+    <meta name="description" content="Practical PostgreSQL performance guide: EXPLAIN ANALYZE deep dive, index types (B-tree, GIN, GiST, BRIN), query plan analysis, common anti-patterns, partitioning strategies, and connection pooling with PgBouncer.">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/postgresql-query-optimization.html">
     <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/postgresql-query-optimization.html">
@@ -38,7 +38,7 @@
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": "PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds",
-      "description": "Systematic approach to PostgreSQL performance — read EXPLAIN ANALYZE, choose the right index, and tune configuration for 100-10,000x speedups.",
+      "description": "Practical PostgreSQL performance guide: EXPLAIN ANALYZE deep dive, index types (B-tree, GIN, GiST, BRIN), query plan analysis, common anti-patterns, partitioning strategies, and connection pooling with PgBouncer.",
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-08",
       "dateModified": "2026-05-08",
@@ -67,13 +67,12 @@
       <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds
     </div>
     <article>
-      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
-        <span class="tag-cat">PostgreSQL</span>
-        <span class="tag-cat">Database</span>
+      <div class="article-tags">        <span class="tag-cat">PostgreSQL</span>
         <span class="tag-cat">Performance</span>
+        <span class="tag-cat">Database</span>
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds</h1>
-      <div class="article-meta">Published 2026-05-08 · 10680 views · 89 replies</div>
+      <div class="article-meta">Published 2026-05-08 · 6720 views · 56 replies</div>
       <div class="article-body"><p>A slow PostgreSQL query is the most common performance bottleneck in web applications — and the most fixable. This guide covers the systematic approach to identifying slow queries, reading EXPLAIN ANALYZE output, and applying the optimizations that have the highest ROI: indexing, query rewriting, and configuration tuning. From 2 seconds to 2 milliseconds.</p>
 
 <h2>The Optimization Workflow</h2>

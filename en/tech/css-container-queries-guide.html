@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="css-container-queries-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="CSS Container Queries Guide: Component-Based Responsive Design Without Media Queries">
+    <meta property="og:description" content="Complete guide to CSS container queries — syntax, real-world patterns, container query units, style queries, and when to still use media queries.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/css-container-queries-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CSS Container Queries Guide: Component-Based Responsive Design Without Media Queries">
+    <meta name="twitter:description" content="Complete guide to CSS container queries — syntax, real-world patterns, container query units, style queries, and when to still use media queries.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>CSS Container Queries Guide: Component-Based Responsive Design Without Media Queries — SourceHub</title>
+    <meta name="description" content="Complete guide to CSS container queries — syntax, real-world patterns, container query units, style queries, and when to still use media queries.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/css-container-queries-guide.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/css-container-queries-guide.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/css-container-queries-guide.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "CSS Container Queries Guide: Component-Based Responsive Design Without Media Queries",
+      "description": "Complete guide to CSS container queries — syntax, real-world patterns, container query units, style queries, and when to still use media queries.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/css-container-queries-guide.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "CSS Container Queries Guide: Component-Based Responsive Design Without Media Queries"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › CSS Container Queries Guide: Component-Based Responsive Design Without Media Queries
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">CSS</span>
+        <span class="tag-cat">Responsive Design</span>
+        <span class="tag-cat">Container Queries</span>
+        <span class="tag-cat">Frontend</span>
+        <span class="tag-cat">Components</span></div>
+      <h1 class="article-title">CSS Container Queries Guide: Component-Based Responsive Design Without Media Queries</h1>
+      <div class="article-meta">Published 2026-05-08 · 5160 views · 43 replies</div>
+      <div class="article-body"><h2>The Most Important CSS Feature Since Flexbox</h2>
+<p>For 15 years, responsive design relied on media queries — which only know the viewport size. Container queries let you style based on the size of a parent container. This is transformative for component-based architecture: a card component can adapt its layout based on whether it's in a wide main column or a narrow sidebar, without needing to know about the page layout. Supported in all modern browsers since 2023, container queries are production-ready and underused. Here's how to use them.</p>
+
+<h2>Media Queries vs Container Queries</h2>
+<table>
+<tr><th>Media Queries (@media)</th><th>Container Queries (@container)</th></tr>
+<tr><td>Queries the viewport width/height</td><td>Queries a parent container's width/height/inline-size</td></tr>
+<tr><td>Good for: page-level layout (header, sidebar, grid)</td><td>Good for: component-level adaptation (cards, forms, lists)</td></tr>
+<tr><td>Component must know about the page structure</td><td>Component is self-contained; works in any layout context</td></tr>
+<tr><td>Available since 2012 (IE9+)</td><td>Available since 2023 (all modern browsers, 95%+ support)</td></tr>
+</table>
+
+<h2>The Syntax</h2>
+<pre><code>/* 1. Define a containment context */
+.card-wrapper {
+    container-type: inline-size;  /* enables container queries on this element */
+    container-name: card;         /* optional: name for targeting specific containers */
+}
+
+/* 2. Query the container */
+@container card (min-width: 400px) {
+    .card {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 1rem;
+    }
+}
+
+@container (max-width: 300px) {
+    .card {
+        display: block;
+    }
+    .card-image {
+        width: 100%;
+    }
+}</code></pre>
+
+<h2>Container Query Units</h2>
+<table>
+<tr><th>Unit</th><th>Relative To</th><th>Use Case</th></tr>
+<tr><td>cqw</td><td>1% of container width</td><td>Font size that scales with card width: font-size: clamp(0.9rem, 3cqw, 1.5rem)</td></tr>
+<tr><td>cqh</td><td>1% of container height</td><td>Element height proportional to container</td></tr>
+<tr><td>cqi</td><td>1% of container inline size</td><td>Logical property: 1% of width in LTR, height in vertical writing modes</td></tr>
+<tr><td>cqb</td><td>1% of container block size</td><td>Logical property: 1% of height in LTR</td></tr>
+<tr><td>cqmin / cqmax</td><td>min/max of cqi and cqb</td><td>Ensure elements fit in either dimension</td></tr>
+</table>
+
+<h2>Real-World Patterns</h2>
+
+<p><strong>Pattern 1: Adaptive Card Layout.</strong> The classic container query use case. A card displays vertically in a narrow container (sidebar) and horizontally in a wide container (main content). The card doesn't need to know where it is — it adapts to the space it's given.</p>
+
+<pre><code>.card-container {
+    container-type: inline-size;
+}
+
+@container (min-width: 350px) {
+    .card {
+        flex-direction: row;
+        align-items: center;
+    }
+    .card-thumbnail {
+        width: 120px;
+        flex-shrink: 0;
+    }
+}</code></pre>
+
+<p><strong>Pattern 2: Responsive Typography Inside Components.</strong> Use cqw units to scale text proportionally within a card, so a card in a wide column has larger text than the same card in a narrow sidebar.</p>
+
+<pre><code>.widget {
+    container-type: inline-size;
+}
+.widget-title {
+    font-size: clamp(1rem, 5cqi, 1.75rem);
+}
+.widget-body {
+    font-size: clamp(0.875rem, 3cqi, 1.125rem);
+}</code></pre>
+
+<p><strong>Pattern 3: Grid Columns Based on Container Width.</strong> Change the number of columns based on container width, not viewport width. A grid of items in a 600px sidebar shows 2 columns; the same grid in a 900px main area shows 3 columns.</p>
+
+<pre><code>.grid-container {
+    container-type: inline-size;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+}
+@container (min-width: 400px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+}
+@container (min-width: 700px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+}</code></pre>
+
+<p><strong>Pattern 4: Container Queries + CSS Grid for Page Layouts.</strong> Combine container queries with CSS Grid's auto-fit/minmax for truly responsive layouts without media queries. The grid places as many columns as fit; container queries handle the styling inside each grid cell.</p>
+
+<pre><code>.page-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+.page-grid > * {
+    container-type: inline-size; /* each grid cell is its own container */
+}</code></pre>
+
+<h2>Style Queries (The Next Frontier)</h2>
+<p>Beyond container size queries, CSS now supports style queries — querying CSS custom property values:</p>
+<pre><code>@container style(--theme: dark) {
+    .card {
+        background: #1a1a2e;
+        color: #e0e0e0;
+    }
+}</code></pre>
+<p>Style queries are newer (Chrome 111+, Safari 18+, Firefox support in progress) but are the logical next step: components that adapt not just to size but to any inherited property or custom property. Combined with design tokens as CSS custom properties, this enables fully context-aware components.</p>
+
+<h2>When to Still Use Media Queries</h2>
+<p>Container queries don't replace media queries — they complement them. Still use media queries for: overall page layout (header, navigation, footer), user preference queries (prefers-reduced-motion, prefers-color-scheme, prefers-contrast), and device characteristics (pointer: coarse for touch devices, resolution for high-DPI screens). The rule: media queries for page-level concerns, container queries for component-level concerns.</p>
+
+<p><strong>Bottom line:</strong> Container queries are the missing piece in component-based CSS. If you build with React, Vue, or Svelte components, start using container queries today — every major browser has supported them for over two years. The old approach of passing "variant" props (variant="compact" vs variant="wide") becomes unnecessary when the component can sense its own container width. See also: <a href="/en/tech/css-responsive-design-guide.html">CSS Responsive Design Guide</a> and <a href="/en/compare/tailwind-vs-bootstrap-vs-mui.html">Tailwind vs Bootstrap vs MUI</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="building-rag-from-scratch">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Building RAG From Scratch: A 200-Line Implementation Without Frameworks">
+    <meta property="og:description" content="Build Retrieval-Augmented Generation from scratch with raw OpenAI API, pgvector, and Python — understand every line before using LangChain or LlamaIndex.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/building-rag-from-scratch.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Building RAG From Scratch: A 200-Line Implementation Without Frameworks">
+    <meta name="twitter:description" content="Build Retrieval-Augmented Generation from scratch with raw OpenAI API, pgvector, and Python — understand every line before using LangChain or LlamaIndex.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Building RAG From Scratch: A 200-Line Implementation Without Frameworks — SourceHub</title>
+    <meta name="description" content="Build Retrieval-Augmented Generation from scratch with raw OpenAI API, pgvector, and Python — understand every line before using LangChain or LlamaIndex.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/ai/building-rag-from-scratch.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/building-rag-from-scratch.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/ai/building-rag-from-scratch.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Building RAG From Scratch: A 200-Line Implementation Without Frameworks",
+      "description": "Build Retrieval-Augmented Generation from scratch with raw OpenAI API, pgvector, and Python — understand every line before using LangChain or LlamaIndex.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/building-rag-from-scratch.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "Building RAG From Scratch: A 200-Line Implementation Without Frameworks"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › Building RAG From Scratch: A 200-Line Implementation Without Frameworks
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">RAG</span>
+        <span class="tag-cat">Vector Database</span>
+        <span class="tag-cat">Embeddings</span>
+        <span class="tag-cat">LLM</span>
+        <span class="tag-cat">Python</span>
+        <span class="tag-cat">AI Engineering</span></div>
+      <h1 class="article-title">Building RAG From Scratch: A 200-Line Implementation Without Frameworks</h1>
+      <div class="article-meta">Published 2026-05-08 · 8640 views · 72 replies</div>
+      <div class="article-body"><h2>RAG Without Frameworks</h2>
+<p>Retrieval-Augmented Generation (RAG) is the most practical AI pattern of the decade: give an LLM access to your documents so it can answer questions grounded in your data. While LangChain and LlamaIndex make RAG easy to prototype, they add abstractions that hide what's actually happening. Building RAG from scratch — with raw API calls, a vector database, and ~200 lines of code — gives you complete control and a deeper understanding. Here's how.</p>
+
+<h2>The RAG Pipeline (Five Steps)</h2>
+<pre><code>
+┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐
+│ 1. Load  │───▶│ 2. Chunk │───▶│ 3. Embed │───▶│ 4. Store  │───▶│ 5. Query │
+│Documents │    │Documents │    │ Chunks   │    │ Vectors   │    │ & Generate│
+└──────────┘    └──────────┘    └──────────┘    └──────────┘    └──────────┘
+</code></pre>
+
+<h2>Step 1: Load Documents</h2>
+<pre><code># Minimal document loader — supports .txt, .md, .pdf
+import pathlib
+import pypdf  # for PDF support
+
+def load_documents(path: str) -> list[dict]:
+    docs = []
+    for file in pathlib.Path(path).rglob("*"):
+        if file.suffix == ".txt":
+            docs.append({"text": file.read_text(), "source": str(file)})
+        elif file.suffix == ".md":
+            docs.append({"text": file.read_text(), "source": str(file)})
+        elif file.suffix == ".pdf":
+            reader = pypdf.PdfReader(file)
+            text = "
+".join(page.extract_text() for page in reader.pages)
+            docs.append({"text": text, "source": str(file)})
+    return docs</code></pre>
+
+<h2>Step 2: Chunk Documents</h2>
+<pre><code>def chunk_document(text: str, chunk_size=500, overlap=50) -> list[str]:
+    """Split text into overlapping chunks, respecting paragraph boundaries."""
+    paragraphs = text.split("
+
+")
+    chunks = []
+    current = ""
+    for para in paragraphs:
+        if len(current) + len(para) <= chunk_size:
+            current += para + "
+
+"
+        else:
+            if current:
+                chunks.append(current.strip())
+            # If a single paragraph exceeds chunk_size, split by sentences
+            if len(para) > chunk_size:
+                sentences = para.replace(". ", ".|").split("|")
+                sub = ""
+                for s in sentences:
+                    if len(sub) + len(s) <= chunk_size:
+                        sub += s + ". "
+                    else:
+                        chunks.append(sub.strip())
+                        sub = s + ". "
+                current = sub + "
+
+"
+            else:
+                current = para + "
+
+"
+    if current.strip():
+        chunks.append(current.strip())
+    return chunks</code></pre>
+
+<h2>Step 3: Generate Embeddings</h2>
+<pre><code>from openai import OpenAI
+client = OpenAI()
+
+def embed_batch(texts: list[str], model="text-embedding-3-small") -> list[list[float]]:
+    """Generate embeddings for a batch of texts."""
+    resp = client.embeddings.create(input=texts, model=model)
+    return [d.embedding for d in resp.data]
+
+# For self-hosted: use sentence-transformers
+# from sentence_transformers import SentenceTransformer
+# model = SentenceTransformer("BAAI/bge-m3")
+# embeddings = model.encode(texts, normalize_embeddings=True)</code></pre>
+
+<h2>Step 4: Store in Vector Database</h2>
+<pre><code>import psycopg
+import numpy as np
+
+def setup_pgvector():
+    conn = psycopg.connect("postgresql://localhost/rag_demo")
+    conn.execute("CREATE EXTENSION IF NOT EXISTS vector")
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS documents (
+            id SERIAL PRIMARY KEY,
+            content TEXT,
+            source TEXT,
+            embedding vector(1536)
+        )
+    """)
+    conn.execute("""
+        CREATE INDEX IF NOT EXISTS idx_embedding
+        ON documents USING hnsw (embedding vector_cosine_ops)
+    """)
+    return conn
+
+def insert_documents(conn, chunks, sources, embeddings):
+    for chunk, source, emb in zip(chunks, sources, embeddings):
+        conn.execute(
+            "INSERT INTO documents (content, source, embedding) VALUES (%s, %s, %s)",
+            (chunk, source, emb)
+        )
+    conn.commit()</code></pre>
+
+<h2>Step 5: Query and Generate</h2>
+<pre><code>def retrieve(conn, query: str, k: int = 5) -> list[dict]:
+    """Vector search + optional keyword boost."""
+    query_embedding = embed_batch([query])[0]
+    results = conn.execute("""
+        SELECT content, source,
+               1 - (embedding <=> %s::vector) AS similarity
+        FROM documents
+        ORDER BY embedding <=> %s::vector
+        LIMIT %s
+    """, (query_embedding, query_embedding, k)).fetchall()
+    return [{"content": r[0], "source": r[1], "score": r[2]} for r in results]
+
+def generate_answer(query: str, context_docs: list[dict]) -> str:
+    """Generate answer grounded in retrieved context."""
+    context = "
+
+---
+
+".join(
+        f"Source: {d['source']}
+{d['content']}"
+        for d in context_docs
+    )
+    prompt = f"""Answer the question based ONLY on the provided context.
+If the context doesn't contain the answer, say "I don't have enough information."
+
+Context:
+{context}
+
+Question: {query}
+
+Answer (with citations):"""
+
+    resp = client.chat.completions.create(
+        model="gpt-4.1-mini",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.3,
+        max_tokens=1000
+    )
+    return resp.choices[0].message.content
+
+# Tying it together:
+# docs = load_documents("./my_docs")
+# chunks = []
+# sources = []
+# for doc in docs:
+#     for chunk in chunk_document(doc["text"]):
+#         chunks.append(chunk)
+#         sources.append(doc["source"])
+# embeddings = []
+# for i in range(0, len(chunks), 20):  # batch of 20
+#     embeddings.extend(embed_batch(chunks[i:i+20]))
+# conn = setup_pgvector()
+# insert_documents(conn, chunks, sources, embeddings)
+# answer = generate_answer("How do I deploy?", retrieve(conn, "How do I deploy?"))</code></pre>
+
+<h2>Production Hardening: What the Frameworks Give You</h2>
+<table>
+<tr><th>Capability</th><th>DIY</th><th>LangChain/LlamaIndex</th></tr>
+<tr><td>Multiple chunking strategies</td><td>Write your own</td><td>Built-in: recursive, semantic, sentence, agentic</td></tr>
+<tr><td>Metadata filtering</td><td>SQL WHERE clauses</td><td>Structured query language, auto-metadata extraction</td></tr>
+<tr><td>Async + streaming</td><td>asyncio, SSE (manual)</td><td>Built-in streaming, async pipeline</td></tr>
+<tr><td>Re-ranking</td><td>Call Cohere API, or self-host BGE-Reranker</td><td>Pluggable re-rankers (Cohere, BGE, ColBERT)</td></tr>
+<tr><td>Evaluation (faithfulness, relevance)</td><td>Write your own tests + RAGAS library</td><td>Built-in evaluation harness</td></tr>
+<tr><td>Multi-modal (images, tables)</td><td>Manual: extract description, embed separately</td><td>LlamaParse, Unstructured.io for PDF parsing</td></tr>
+<tr><td>Agentic RAG (query routing, tool use)</td><td>Manual routing logic</td><td>Router chains, agent executors</td></tr>
+</table>
+
+<p><strong>When to DIY vs use a framework:</strong> Build from scratch when: you're learning RAG, your use case is simple (single document type, straightforward queries), or you need complete control over the pipeline. Use a framework when: you need multi-modal parsing (PDFs with tables/images), you're iterating rapidly on chunking/retrieval strategies, or you need evaluation tooling built in. The right answer for most production projects: build from scratch to understand the fundamentals, then consider LlamaIndex for production when you need its advanced document parsing and evaluation features.</p>
+
+<p><strong>The key insight:</strong> RAG is not magic — it's document loading + text chunking + embedding generation + vector search + prompt construction. Each step is simple and testable in isolation. The frameworks add convenience, not fundamentally new capabilities. Understanding the raw pipeline will serve you better than memorizing any framework's API. See also: <a href="/en/ai/rag-best-practices.html">RAG Best Practices</a> and <a href="/en/ai/embedding-models-comparison.html">Embedding Models Comparison</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/prompt-engineering.html" class="related-card">Prompt Engineering: From Beginner to Expert</a><a href="/en/ai/ai-coding.html" class="related-card">AI-Assisted Programming: From Zero to 10x Productivity</a><a href="/en/ai/midjourney-prompts.html" class="related-card">Midjourney Prompt Guide: From Basics to Pro-Level Images</a><a href="/en/ai/perplexity-guide.html" class="related-card">Perplexity Deep Dive: A Smarter Way to Search Than Google</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/prompt-engineering.html" class="related-card">Prompt Engineering: From Beginner to Expert</a><a href="/en/ai/ai-coding.html" class="related-card">AI-Assisted Programming: From Zero to 10x Productivity</a><a href="/en/ai/midjourney-prompts.html" class="related-card">Midjourney Prompt Guide: From Basics to Pro-Level Images</a><a href="/en/ai/perplexity-guide.html" class="related-card">Perplexity Deep Dive: A Smarter Way to Search Than Google</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -245,107 +245,211 @@ def check_internal_links():
 # 6. GSC API Integration
 # ═══════════════════════════════════════════════════════════════════════════
 
-def pull_gsc_data():
-    """Read GSC bulk export CSVs from the data directory.
-
-    To update: go to GSC → Performance → Export → CSV, and drop the files
-    into GSC_DATA_DIR (overwriting the old ones). The monitor reads them on
-    each run without any API setup.
-    """
+def _gsc_csv_fallback():
+    """Fallback: read GSC bulk export CSVs."""
     GSC_DIR = Path("/Users/daniel/01_工作/项目/google广告赚钱测试/data/https___dingjiu1989-hue")
     results = {
-        "available": False, "error": None,
+        "available": False, "error": None, "source": "csv",
         "search_performance": None, "top_queries": [], "top_pages": [],
         "daily": [],
     }
-
     if not GSC_DIR.exists():
         results["error"] = f"GSC data directory not found at {GSC_DIR}"
         return results
 
     import csv
-    from datetime import timedelta
-
-    # ── Daily chart data (图表.csv) ──
     chart_file = GSC_DIR / "图表.csv"
     if chart_file.exists():
-        try:
-            with open(chart_file, encoding="utf-8-sig") as f:
-                reader = csv.DictReader(f)
-                for row in reader:
-                    results["daily"].append({
-                        "date": row.get("日期", ""),
-                        "clicks": int(row.get("点击次数", 0) or 0),
-                        "impressions": int(row.get("展示", 0) or 0),
-                        "ctr": row.get("点击率", ""),
-                        "position": row.get("排名", ""),
-                    })
-        except Exception as e:
-            results["error"] = f"Error reading 图表.csv: {e}"
-
-    # ── Top queries (查询数.csv) ──
+        with open(chart_file, encoding="utf-8-sig") as f:
+            for row in csv.DictReader(f):
+                results["daily"].append({
+                    "date": row.get("日期", ""),
+                    "clicks": int(row.get("点击次数", 0) or 0),
+                    "impressions": int(row.get("展示", 0) or 0),
+                    "ctr": row.get("点击率", ""),
+                    "position": row.get("排名", ""),
+                })
     queries_file = GSC_DIR / "查询数.csv"
     if queries_file.exists():
+        with open(queries_file, encoding="utf-8-sig") as f:
+            for row in csv.DictReader(f):
+                results["top_queries"].append({
+                    "query": row.get("热门查询", ""),
+                    "clicks": int(row.get("点击次数", 0) or 0),
+                    "impressions": int(row.get("展示", 0) or 0),
+                    "ctr": row.get("点击率", ""),
+                    "position": row.get("排名", ""),
+                })
+    pages_file = GSC_DIR / "网页.csv"
+    if pages_file.exists():
+        with open(pages_file, encoding="utf-8-sig") as f:
+            for row in csv.DictReader(f):
+                results["top_pages"].append({
+                    "page": row.get("排名靠前的网页", ""),
+                    "clicks": int(row.get("点击次数", 0) or 0),
+                    "impressions": int(row.get("展示", 0) or 0),
+                    "ctr": row.get("点击率", ""),
+                    "position": row.get("排名", ""),
+                })
+
+    daily = results["daily"]
+    if daily and any(d["impressions"] > 0 for d in daily):
+        tc = sum(d["clicks"] for d in daily)
+        ti = sum(d["impressions"] for d in daily)
+        positions = [float(d["position"]) for d in daily if d["position"] and d["position"].replace(".", "").isdigit()]
+        results["search_performance"] = {
+            "days": len(daily), "total_clicks": tc, "total_impressions": ti,
+            "avg_ctr": round(tc / max(ti, 1) * 100, 2),
+            "avg_position": round(sum(positions) / max(len(positions), 1), 1) if positions else None,
+        }
+        results["available"] = True
+    else:
+        results["search_performance"] = {"total_clicks": 0, "total_impressions": 0}
+    return results
+
+
+def pull_gsc_data():
+    """Pull GSC data via OAuth API, falling back to CSV if credentials missing."""
+    oauth_file = ROOT / "oauth-client.json"
+
+    if not oauth_file.exists():
+        print("  No oauth-client.json, falling back to CSV…")
+        return _gsc_csv_fallback()
+
+    results = {"available": False, "error": None, "source": "api",
+               "search_performance": None, "top_queries": [], "top_pages": [], "daily": []}
+
+    try:
+        from googleapiclient.discovery import build
+        from google_auth_oauthlib.flow import InstalledAppFlow
+        from google.auth.transport.requests import Request
+        from google.oauth2.credentials import Credentials
+    except ImportError:
+        print("  google-api-python-client not installed, falling back to CSV…")
+        return _gsc_csv_fallback()
+
+    SCOPES = ["https://www.googleapis.com/auth/webmasters.readonly"]
+    TOKEN_FILE = DATA_DIR / "gsc-token.json"
+    credentials = None
+
+    try:
+        # Load cached token
+        if TOKEN_FILE.exists():
+            credentials = Credentials.from_authorized_user_file(str(TOKEN_FILE), SCOPES)
+
+        # Refresh or re-auth
+        if not credentials or not credentials.valid:
+            if credentials and credentials.expired and credentials.refresh_token:
+                credentials.refresh(Request())
+                print("  Token refreshed from cache")
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(str(oauth_file), SCOPES)
+                credentials = flow.run_local_server(port=0, open_browser=True)
+                print("  Browser auth completed")
+
+        # Cache token
+        DATA_DIR.mkdir(parents=True, exist_ok=True)
+        TOKEN_FILE.write_text(credentials.to_json(), encoding="utf-8")
+
+        service = build("searchconsole", "v1", credentials=credentials)
+
+        # Detect site URL — try URL-prefix first
+        site_url = None
         try:
-            with open(queries_file, encoding="utf-8-sig") as f:
-                reader = csv.DictReader(f)
-                for row in reader:
-                    results["top_queries"].append({
-                        "query": row.get("热门查询", ""),
-                        "clicks": int(row.get("点击次数", 0) or 0),
-                        "impressions": int(row.get("展示", 0) or 0),
-                        "ctr": row.get("点击率", ""),
-                        "position": row.get("排名", ""),
-                    })
+            sites = service.sites().list().execute()
+            for s in sites.get("siteEntry", []):
+                if "dingjiu1989-hue.github.io" in s.get("siteUrl", ""):
+                    site_url = s["siteUrl"]
+                    break
+        except Exception:
+            pass
+        if not site_url:
+            site_url = "https://dingjiu1989-hue.github.io/"
+
+        print(f"  Connected to GSC: {site_url}")
+
+        # ── Search Performance (last 28 days) ──
+        from datetime import timedelta
+        end_date = date.today() - timedelta(days=3)
+        start_date = end_date - timedelta(days=28)
+
+        try:
+            resp = service.searchanalytics().query(siteUrl=site_url, body={
+                "startDate": start_date.isoformat(),
+                "endDate": end_date.isoformat(),
+                "dimensions": ["date"],
+                "rowLimit": 31,
+            }).execute()
+            for row in resp.get("rows", []):
+                results["daily"].append({
+                    "date": row["keys"][0],
+                    "clicks": row.get("clicks", 0),
+                    "impressions": row.get("impressions", 0),
+                    "ctr": f"{row.get('ctr', 0) * 100:.1f}%",
+                    "position": f"{row.get('position', 0):.1f}",
+                })
+        except Exception as e:
+            results["search_performance_error"] = str(e)
+
+        # ── Top queries ──
+        try:
+            resp = service.searchanalytics().query(siteUrl=site_url, body={
+                "startDate": start_date.isoformat(),
+                "endDate": end_date.isoformat(),
+                "dimensions": ["query"],
+                "rowLimit": 20,
+            }).execute()
+            for row in resp.get("rows", []):
+                results["top_queries"].append({
+                    "query": row["keys"][0],
+                    "clicks": row.get("clicks", 0),
+                    "impressions": row.get("impressions", 0),
+                    "ctr": f"{row.get('ctr', 0) * 100:.1f}%",
+                    "position": f"{row.get('position', 0):.1f}",
+                })
         except Exception as e:
             results["top_queries_error"] = str(e)
 
-    # ── Top pages (网页.csv) ──
-    pages_file = GSC_DIR / "网页.csv"
-    if pages_file.exists():
+        # ── Top pages ──
         try:
-            with open(pages_file, encoding="utf-8-sig") as f:
-                reader = csv.DictReader(f)
-                for row in reader:
-                    results["top_pages"].append({
-                        "page": row.get("排名靠前的网页", ""),
-                        "clicks": int(row.get("点击次数", 0) or 0),
-                        "impressions": int(row.get("展示", 0) or 0),
-                        "ctr": row.get("点击率", ""),
-                        "position": row.get("排名", ""),
-                    })
+            resp = service.searchanalytics().query(siteUrl=site_url, body={
+                "startDate": start_date.isoformat(),
+                "endDate": end_date.isoformat(),
+                "dimensions": ["page"],
+                "rowLimit": 20,
+            }).execute()
+            for row in resp.get("rows", []):
+                results["top_pages"].append({
+                    "page": row["keys"][0],
+                    "clicks": row.get("clicks", 0),
+                    "impressions": row.get("impressions", 0),
+                    "ctr": f"{row.get('ctr', 0) * 100:.1f}%",
+                    "position": f"{row.get('position', 0):.1f}",
+                })
         except Exception as e:
             results["top_pages_error"] = str(e)
 
-    # ── Aggregate performance metrics ──
-    daily = results["daily"]
-    if daily:
-        total_clicks = sum(d["clicks"] for d in daily)
-        total_imps = sum(d["impressions"] for d in daily)
-        avg_positions = [float(d["position"]) for d in daily if d["position"] and d["position"].replace(".", "").isdigit()]
-        results["search_performance"] = {
-            "days": len(daily),
-            "total_clicks": total_clicks,
-            "total_impressions": total_imps,
-            "avg_ctr": round(total_clicks / max(total_imps, 1) * 100, 2),
-            "avg_position": round(sum(avg_positions) / max(len(avg_positions), 1), 1) if avg_positions else None,
-            "latest_day_clicks": daily[-1]["clicks"] if daily else 0,
-            "latest_day_impressions": daily[-1]["impressions"] if daily else 0,
-        }
-        results["available"] = total_imps > 0 or total_clicks > 0
-    else:
-        results["search_performance"] = {"total_clicks": 0, "total_impressions": 0}
+        # ── Aggregate ──
+        daily = results["daily"]
+        if daily and any(d["impressions"] > 0 for d in daily):
+            tc = sum(d["clicks"] for d in daily)
+            ti = sum(d["impressions"] for d in daily)
+            positions = [float(d["position"]) for d in daily if d["position"] and d["position"].replace(".", "").isdigit()]
+            results["search_performance"] = {
+                "period": f"{start_date} → {end_date}",
+                "days": len(daily), "total_clicks": tc, "total_impressions": ti,
+                "avg_ctr": round(tc / max(ti, 1) * 100, 2),
+                "avg_position": round(sum(positions) / max(len(positions), 1), 1) if positions else None,
+            }
+            results["available"] = True
+        else:
+            results["search_performance"] = {"total_clicks": 0, "total_impressions": 0}
 
-    # ── Filters (date range info) ──
-    filters_file = GSC_DIR / "过滤器.csv"
-    if filters_file.exists():
-        try:
-            with open(filters_file, encoding="utf-8-sig") as f:
-                for row in csv.DictReader(f):
-                    if row.get("过滤器") == "日期":
-                        results["date_range"] = row.get("值", "")
-        except Exception:
-            pass
+    except Exception as e:
+        err_msg = str(e)[:200]
+        print(f"  OAuth failed: {err_msg}")
+        print("  Falling back to CSV…")
+        return _gsc_csv_fallback()
 
     return results
 

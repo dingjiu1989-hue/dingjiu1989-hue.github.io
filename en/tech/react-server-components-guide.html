@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="react-server-components-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="React Server Components Guide: Architecture, Patterns, and When to Use RSC in 2026">
+    <meta property="og:description" content="Deep dive into React Server Components — server vs client components, streaming patterns, Server Actions, boundary rules, and when RSC is worth the complexity.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/react-server-components-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="React Server Components Guide: Architecture, Patterns, and When to Use RSC in 2026">
+    <meta name="twitter:description" content="Deep dive into React Server Components — server vs client components, streaming patterns, Server Actions, boundary rules, and when RSC is worth the complexity.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>React Server Components Guide: Architecture, Patterns, and When to Use RSC in 2026 — SourceHub</title>
+    <meta name="description" content="Deep dive into React Server Components — server vs client components, streaming patterns, Server Actions, boundary rules, and when RSC is worth the complexity.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/react-server-components-guide.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/react-server-components-guide.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/react-server-components-guide.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "React Server Components Guide: Architecture, Patterns, and When to Use RSC in 2026",
+      "description": "Deep dive into React Server Components — server vs client components, streaming patterns, Server Actions, boundary rules, and when RSC is worth the complexity.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/react-server-components-guide.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "React Server Components Guide: Architecture, Patterns, and When to Use RSC in 2026"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › React Server Components Guide: Architecture, Patterns, and When to Use RSC in 2026
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">React</span>
+        <span class="tag-cat">RSC</span>
+        <span class="tag-cat">Next.js</span>
+        <span class="tag-cat">Server Components</span>
+        <span class="tag-cat">Frontend</span>
+        <span class="tag-cat">Architecture</span></div>
+      <h1 class="article-title">React Server Components Guide: Architecture, Patterns, and When to Use RSC in 2026</h1>
+      <div class="article-meta">Published 2026-05-08 · 8280 views · 69 replies</div>
+      <div class="article-body"><h2>React's Biggest Architectural Shift</h2>
+<p>React Server Components (RSC) represent the most significant change to React's programming model since hooks. They let you render components on the server, stream them to the client, and never send the JavaScript for those components to the browser. The result: smaller bundles, faster page loads, and direct database access from your components. But RSC also introduces a new mental model that confuses even experienced React developers. Here's what you actually need to understand.</p>
+
+<h2>The Core Idea: Two Component Types</h2>
+<table>
+<tr><th></th><th>Server Components (default)</th><th>Client Components ('use client')</th></tr>
+<tr><td>Where they run</td><td>Server only (at build time or request time)</td><td>Server (SSR) + Client (hydration + interaction)</td></tr>
+<tr><td>JavaScript sent to browser</td><td>Zero (only the rendered output)</td><td>Full component code + dependencies</td></tr>
+<tr><td>Can use</td><td>async/await, fs, DB queries, secrets, any Node API</td><td>useState, useEffect, onClick, browser APIs, context</td></tr>
+<tr><td>Cannot use</td><td>useState, useEffect, event handlers, browser APIs</td><td>Direct database access, filesystem, secrets</td></tr>
+<tr><td>Bundles size impact</td><td>Zero (rendered on server, streamed as HTML/RSC payload)</td><td>Adds to client bundle</td></tr>
+</table>
+
+<p><strong>The mental model shift:</strong> In traditional React, every component ships JavaScript to the browser. In RSC, server components are the default — you opt IN to client-side interactivity with 'use client'. This inverts the traditional model where you opt OUT of client-side code with SSR. The result: most of your components (the ones that just render data) send zero JavaScript.</p>
+
+<h2>When a Component Should Be Server vs Client</h2>
+<pre><code>// Server Component (default) — no 'use client' directive
+// ✅ Direct database access
+// ✅ Async data fetching
+// ✅ Keep secrets (API keys, tokens)
+// ✅ Large dependencies (stay on server)
+// ✅ Render non-interactive content
+
+async function ArticleList() {
+    const articles = await db.query('SELECT * FROM articles ORDER BY date DESC');
+    return (
+        &lt;div&gt;
+            {articles.map(a =&gt; &lt;ArticleCard key={a.id} article={a} /&gt;)}
+        &lt;/div&gt;
+    );
+}</code></pre>
+
+<pre><code>// Client Component — must have 'use client' directive
+// ✅ Event listeners (onClick, onChange)
+// ✅ useState, useReducer, useEffect
+// ✅ Browser APIs (localStorage, geolocation, canvas)
+// ✅ Custom hooks that use state/effects
+// ❌ Direct database access
+// ❌ Server-side secrets
+
+'use client';
+function LikeButton({ articleId }) {
+    const [liked, setLiked] = useState(false);
+    return &lt;button onClick={() =&gt; setLiked(!liked)}&gt;{liked ? '♥' : '♡'}&lt;/button&gt;;
+}</code></pre>
+
+<h2>The Composition Pattern: Server Shell, Client Islands</h2>
+<p>The most common RSC pattern: a server component fetches data and wraps client-interactive islands:</p>
+<pre><code>// ArticlePage.server.tsx — Server Component
+async function ArticlePage({ slug }) {
+    const article = await db.article.findUnique({ where: { slug } }); // runs on server
+    return (
+        &lt;article&gt;
+            &lt;h1&gt;{article.title}&lt;/h1&gt;
+            &lt;div&gt;{article.content}&lt;/div&gt;
+            &lt;LikeButton articleId={article.id} /&gt;      {/* Client Component */}
+            &lt;CommentSection articleId={article.id} /&gt;   {/* Client Component */}
+        &lt;/article&gt;
+    );
+}</code></pre>
+<p>Server component (ArticlePage) sends ZERO JavaScript. LikeButton and CommentSection ship their JS. The non-interactive parts (title, content) are rendered on the server and streamed as HTML. This pattern — "server shell, client islands" — is the mental model for RSC architecture.</p>
+
+<h2>Streaming and Suspense</h2>
+<p>RSC works with React Suspense to stream content as it becomes available. The server sends the page shell immediately, then streams in content as data loads:</p>
+<pre><code>function ArticlePage({ slug }) {
+    return (
+        &lt;div&gt;
+            &lt;ArticleHeader slug={slug} /&gt;              {/* Renders immediately */}
+            &lt;Suspense fallback={&lt;Spinner /&gt;}&gt;
+                &lt;ArticleBody slug={slug} /&gt;           {/* Streams when DB query completes */}
+            &lt;/Suspense&gt;
+            &lt;Suspense fallback={&lt;Spinner /&gt;}&gt;
+                &lt;RelatedArticles slug={slug} /&gt;       {/* Streams independently */}
+            &lt;/Suspense&gt;
+        &lt;/div&gt;
+    );
+}</code></pre>
+<p>The user sees the header immediately, then the article body streams in, then related articles — all without waiting for the slowest query.</p>
+
+<h2>Server Actions: Mutations Without an API Route</h2>
+<p>RSC also introduces Server Actions — functions that run on the server but can be called directly from client components without creating an API endpoint:</p>
+<pre><code>// actions.ts — server file
+'use server';
+import { revalidatePath } from 'next/cache';
+
+export async function updateArticle(slug: string, data: FormData) {
+    const title = data.get('title');
+    await db.article.update({ where: { slug }, data: { title } });
+    revalidatePath(`/articles/${slug}`);
+}
+
+// Client component:
+'use client';
+import { updateArticle } from './actions';
+function EditForm({ slug }) {
+    return (
+        &lt;form action={updateArticle.bind(null, slug)}&gt;
+            &lt;input name="title" /&gt;
+            &lt;button type="submit"&gt;Save&lt;/button&gt;
+        &lt;/form&gt;
+    );
+}</code></pre>
+<p>No REST endpoint. No GraphQL mutation. No tRPC procedure. Just a function call across the client-server boundary. React serializes the form data, sends it to the server, runs the function, and returns the result.</p>
+
+<h2>The Boundary Rules (Most Common Mistakes)</h2>
+<table>
+<tr><th>Rule</th><th>Why</th></tr>
+<tr><td>Server components can import Client components ✅</td><td>A server component can render a client component as a child</td></tr>
+<tr><td>Client components CANNOT import Server components ❌</td><td>If a client component could import a server component, the server code would leak to the client</td></tr>
+<tr><td>You CAN pass server components as children to client components ✅</td><td>&lt;ClientWrapper&gt;&lt;ServerComponent /&gt;&lt;/ClientWrapper&gt; — the server component renders first, then is passed as a React node to the client component</td></tr>
+<tr><td>'use client' marks the boundary — everything below is client</td><td>All components imported (directly or transitively) by a client component become client components too</td></tr>
+</table>
+
+<h2>Is RSC Worth the Complexity in 2026?</h2>
+<p><strong>Yes, if:</strong> your app has significant non-interactive content (blog, e-commerce listing, documentation), your bundle size is a performance bottleneck (users on slow connections/devices), you want to eliminate the API layer for data fetching (direct DB queries from components), or you're building a new Next.js App Router project (RSC is the default and best-supported path).</p>
+
+<p><strong>Stick with traditional React (Pages Router, Vite SPA) if:</strong> your app is highly interactive (dashboard, design tool, real-time app — most components will be client components anyway), your team is still learning React (RSC adds complexity), your backend is already a separate service (you're not using Next.js as a full-stack framework), or you need to support older build tooling that doesn't support RSC.</p>
+
+<p><strong>Bottom line:</strong> RSC is not hype — it's a genuine architectural improvement that reduces JavaScript shipped to the browser by 30-70% for content-heavy apps. But it's not free: the mental model takes time to internalize, debugging is different (server errors vs client errors), and the ecosystem is still maturing (not all libraries support RSC yet). For new Next.js projects in 2026, start with RSC — you can always add 'use client' where you need interactivity, but you can't easily convert a all-client app to RSC later. See also: <a href="/en/compare/nextjs-vs-nuxt-vs-sveltekit.html">Next.js vs Nuxt vs SvelteKit</a> and <a href="/en/tech/react-hooks-complete-guide.html">React Hooks Complete Guide</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

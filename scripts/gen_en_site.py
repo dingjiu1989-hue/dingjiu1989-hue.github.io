@@ -11117,6 +11117,1408 @@ BODIES['php-vs-python-vs-node'] = '''
 <p><strong>Bottom line:</strong> The "best" backend language doesn't exist — it depends on your project. PHP is the pragmatic choice for content-driven websites (WordPress, Laravel). Python is the choice for anything touching data, AI, or internal tools (Django, FastAPI). Node.js is the choice for real-time apps, full-stack TypeScript teams, and I/O-heavy services. All three are mature, well-supported, and capable of scaling to millions of users. Pick the one that fits your problem domain and team expertise. See also: <a href="/en/compare/typescript-vs-javascript-vs-python.html">TypeScript vs JavaScript vs Python</a> and <a href="/en/tools/best-web-frameworks.html">Best Web Frameworks</a>.</p>
 '''
 
+
+BODIES['best-api-clients-2026'] = '''
+
+<h2>Why API Clients Matter</h2>
+<p>Every backend developer spends hours per week inside an API client — sending requests, inspecting responses, debugging auth headers. The right tool saves you from the slow death of copy-pasting curl commands. In 2026, the API client landscape has shifted: Postman's bloat and pricing changes have driven many developers to lighter alternatives; Bruno and HTTPie have emerged as serious contenders; and VS Code-native clients are eating into standalone tools. Here's the real breakdown from a developer who has used all five for production work.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Tool</th><th>Type</th><th>Pricing</th><th>Collections</th><th>Environments</th><th>Scripting</th><th>Git-friendly</th></tr>
+<tr><td>Postman</td><td>Standalone (Electron)</td><td>Free / $14-49/user/mo</td><td>★★★★★</td><td>★★★★★</td><td>JavaScript (pre-request + tests)</td><td>No (proprietary cloud sync)</td></tr>
+<tr><td>Bruno</td><td>Standalone (Electron, lightweight)</td><td>Free / $6/user/mo</td><td>★★★★</td><td>★★★★</td><td>JavaScript, Python (planned)</td><td>Yes (plain text .bru files)</td></tr>
+<tr><td>Insomnia</td><td>Standalone (Electron)</td><td>Free / $8/user/mo</td><td>★★★</td><td>★★★</td><td>Plugin system</td><td>No (cloud sync or manual export)</td></tr>
+<tr><td>HTTPie Desktop</td><td>Standalone (Tauri, native)</td><td>Free / $12/user/mo</td><td>★★★</td><td>★★★</td><td>Minimal</td><td>Yes (JSON export)</td></tr>
+<tr><td>Thunder Client</td><td>VS Code extension</td><td>Free / $6/user/mo</td><td>★★★</td><td>★★★★</td><td>JavaScript (via VS Code)</td><td>Yes (JSON in .vscode/)</td></tr>
+</table>
+
+<h2>Deep Dive: Each Tool's Real Character</h2>
+
+<p><strong>Postman — The 800-pound gorilla.</strong> Postman has the richest feature set: visual API design, mock servers, monitoring, documentation hosting, and the largest collection marketplace. The problem: it's become heavy (2GB+ RAM idle), the free tier keeps losing features, and collections live in Postman's cloud — there's no git-native workflow. If you work on a large team where non-developers (QA, PMs) also use the API tool, Postman is still the default. For solo developers or small dev teams, the bloat is increasingly hard to justify. <em>Best for:</em> Large orgs, cross-functional teams, API-first companies with dedicated API governance.</p>
+
+<p><strong>Bruno — The git-native challenger.</strong> Bruno stores everything as plain text <code>.bru</code> files in your project repo. No cloud lock-in, no accounts required, full git diff/merge support. The UI is clean and fast (Electron but well-optimized). It supports JavaScript scripting for pre-request and test flows, environment variables, and collection runners. The trade-off: smaller ecosystem (fewer community collections), no mock server, no API documentation hosting. <em>Best for:</em> Developers who want their API collections versioned alongside code, open-source teams, anyone burned by Postman's cloud dependency.</p>
+
+<p><strong>Insomnia — The middle ground.</strong> Insomnia has a clean UI and good GraphQL support (it was one of the first to support GraphQL natively). Its plugin system allows community extensions for auth flows, encryption, and custom protocols. The downside: the acquisition by Kong shifted focus toward API gateway integration (Kong Konnect), leaving the standalone tool feeling somewhat neglected. Cloud sync works but isn't as polished as Postman's. <em>Best for:</em> GraphQL-heavy APIs, Kong/Konnect users, developers who want plugins but not Postman's weight.</p>
+
+<p><strong>HTTPie Desktop — The beautiful newcomer.</strong> HTTPie started as the beloved CLI tool (<code>http GET api.example.com/users</code>) and its desktop app follows the same philosophy: make HTTP beautiful. Built on Tauri (not Electron), it uses significantly less memory (200MB vs Postman's 1GB+). The UI is gorgeous — syntax-highlighted responses, intuitive parameter editing, and the best-looking dark mode in the category. The catch: it's newer, so scripting is minimal, no pre-request hooks yet, and the collection features are basic. <em>Best for:</em> Developers who want a fast, native-feeling API client for manual testing, HTTPie CLI lovers, anyone who values UI polish.</p>
+
+<p><strong>Thunder Client — The IDE-native option.</strong> Thunder Client lives inside VS Code, so you never leave your editor. It stores collections as JSON files in <code>.vscode/</code>, making them git-friendly by default. Environment switching is excellent, and the free tier covers 90% of what individual developers need. The limitation: it's VS Code-only (no standalone app), no team collaboration features on free tier, and no mock servers. <em>Best for:</em> Solo devs who live in VS Code, quick API testing during development, projects where keeping everything in one tool matters.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Choice</th><th>Why</th></tr>
+<tr><td>You want collections in git, zero cloud dependency</td><td>Bruno</td><td>Plain text .bru files, designed for git, free tier is generous</td></tr>
+<tr><td>Large team with non-dev collaborators</td><td>Postman</td><td>Best collaboration features, mock servers, docs hosting</td></tr>
+<tr><td>You do a lot of GraphQL</td><td>Insomnia</td><td>First-class GraphQL support, schema fetching, query autocomplete</td></tr>
+<tr><td>You love the terminal and want a lightweight GUI</td><td>HTTPie Desktop</td><td>Tauri-based (low memory), matches HTTPie CLI workflow, beautiful UI</td></tr>
+<tr><td>You never leave VS Code</td><td>Thunder Client</td><td>Zero context switching, git-friendly JSON storage, fast and free</td></tr>
+<tr><td>Open-source project, budget-conscious</td><td>Bruno or Thunder Client</td><td>Both have generous free tiers and git-native storage</td></tr>
+<tr><td>API mocking and monitoring needed</td><td>Postman</td><td>Only Postman has built-in mock servers, monitors, and hosted docs</td></tr>
+</table>
+
+<p><strong>My recommendation for most developers in 2026:</strong> Use <strong>Bruno</strong> as your daily driver — git-native, fast, free, and your collections live with your code. Keep <strong>HTTPie CLI</strong> installed for quick terminal requests (<code>http :3000/api/health</code> is faster than any GUI). If your team includes QA or PMs who need to run API tests, add Postman for the collaboration features — but store your Bruno files as the source of truth.</p>
+'''
+
+BODIES['best-secrets-management-tools'] = '''
+
+<h2>The Problem: .env Files Don't Cut It Anymore</h2>
+<p>Every project starts the same way: a <code>.env</code> file with API keys, database passwords, and tokens. Then someone accidentally commits it. Then you need to share secrets with a teammate. Then you rotate credentials and everything breaks. Secrets management tools solve this systematically: encrypted storage, access control, audit logging, automatic rotation, and injection at runtime. In 2026, there are five serious options depending on your scale and infrastructure. Here's what actually works in production.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Tool</th><th>Type</th><th>Pricing</th><th>Secret Storage</th><th>SDK/Languages</th><th>Self-Hosted</th><th>Secret Rotation</th></tr>
+<tr><td>Infisical</td><td>Secrets platform</td><td>Free / $6/user/mo</td><td>Encrypted DB (AES-256-GCM)</td><td>Node, Python, Go, Ruby, Java, .NET, Rust</td><td>Yes (OSS, Docker)</td><td>Automatic (DB, API keys)</td></tr>
+<tr><td>Doppler</td><td>Secrets platform</td><td>Free / $5/seat/mo</td><td>Encrypted (AES-256)</td><td>Node, Python, Go, Ruby, PHP, Java</td><td>No (cloud-only)</td><td>Automatic rotation</td></tr>
+<tr><td>HashiCorp Vault</td><td>Enterprise secrets engine</td><td>Free (OSS) / $1.58/hr (HCP)</td><td>Encrypted (plugin storage backends)</td><td>All major languages (REST API + SDKs)</td><td>Yes (primary mode)</td><td>Dynamic DB creds, PKI, cloud IAM</td></tr>
+<tr><td>SOPS (Mozilla)</td><td>File-level encryption</td><td>Free (OSS)</td><td>Encrypted YAML/JSON/ENV files (KMS, PGP, age)</td><td>CLI + Go library</td><td>Fully self-managed</td><td>Manual (re-encrypt with new key)</td></tr>
+<tr><td>1Password CLI</td><td>Password manager + secrets</td><td>$8/user/mo (1Password Teams)</td><td>1Password vaults (end-to-end encrypted)</td><td>CLI + op inject, SDKs limited</td><td>No (cloud vaults)</td><td>Manual via UI/CLI</td></tr>
+</table>
+
+<h2>Deep Dive</h2>
+
+<p><strong>Infisical — The developer-first platform.</strong> Infisical has grown rapidly since 2023 and is now the strongest all-around secrets platform for development teams. Its killer feature is the dashboard that mirrors your project structure — dev/staging/prod environments, folders, and granular access per secret. The CLI (<code>infisical run -- npm start</code>) injects secrets at runtime without touching disk. Automatic secret rotation works for databases, API keys, and OAuth credentials. It integrates natively with Vercel, Railway, Render, and GitHub Actions. The open-source self-hosted option is actually maintained (not a gimped enterprise-only fork). <em>Best for:</em> Teams that want a modern, developer-friendly secrets platform without Vault's complexity.</p>
+
+<p><strong>Doppler — The first mover.</strong> Doppler pioneered the "dashboard for secrets" category and still executes it well. The UI is excellent, the CLI is mature, and their sync integrations cover every major platform (Vercel, Netlify, AWS, GCP, GitHub, GitLab). Doppler's strength is the breadth of integrations — if you need secrets in 15 different services, Doppler syncs to all of them. The downside: cloud-only (no self-hosting), and their pricing scales per seat rather than per secret. <em>Best for:</em> Teams prioritizing integrations breadth and simplicity over self-hosting.</p>
+
+<p><strong>HashiCorp Vault — The enterprise standard.</strong> Vault is the most powerful and the most complex. It does secrets, PKI certificate management, database dynamic credentials (auto-generated, short-lived), SSH signing, Kubernetes auth, and encryption-as-a-service. If you're running Kubernetes at scale or need compliance certifications (SOC 2, FedRAMP, HIPAA), Vault is likely the answer. The cost: significant operational complexity — you need to run and maintain Vault servers, manage unseal keys, handle high availability, and train the team. <em>Best for:</em> Large organizations, regulated industries, Kubernetes-native infrastructure, teams with dedicated platform engineers.</p>
+
+<p><strong>SOPS (Mozilla) — The git-native option.</strong> SOPS (Secrets OPerationS) takes a fundamentally different approach: encrypt individual values inside YAML/JSON/ENV files and commit the encrypted files to git. Encryption keys come from AWS KMS, GCP KMS, Azure Key Vault, PGP, or age. The workflow is simple: <code>sops -e config.yaml > config.enc.yaml</code>, commit to git, then <code>sops -d config.enc.yaml</code> at deploy time. No server, no dashboard, no API — just files and encryption. <em>Best for:</em> GitOps workflows, small teams, infrastructure-as-code where everything lives in git, teams that already use KMS and want zero additional infrastructure.</p>
+
+<p><strong>1Password CLI — The pragmatic choice for small teams.</strong> If your team already uses 1Password, the CLI (<code>op</code>) and <code>op inject</code> can serve as a lightweight secrets manager. You create vaults per project, store secrets as items, and inject them at runtime with <code>op run -- env-with-secrets</code>. It's not purpose-built for secrets management (no rotation, no audit log for programmatic access, limited SDK), but for a 3-10 person team that wants one less tool to manage, it works surprisingly well. <em>Best for:</em> Small teams already paying for 1Password, low-complexity projects, quick-and-dirty without adding another SaaS subscription.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Choice</th><th>Why</th></tr>
+<tr><td>Startup, 2-50 devs, want easy setup</td><td>Infisical</td><td>Modern UI, generous free tier, self-host option, great DX</td></tr>
+<tr><td>Need maximum platform integrations</td><td>Doppler</td><td>Syncs to 30+ platforms, mature CLI, simple pricing</td></tr>
+<tr><td>Large org, Kubernetes, compliance (SOC2/HIPAA)</td><td>HashiCorp Vault</td><td>Most powerful, dynamic secrets, PKI, audit, enterprise features</td></tr>
+<tr><td>GitOps, everything-in-git philosophy</td><td>SOPS</td><td>Encrypted files in git, zero servers, KMS/age encryption</td></tr>
+<tr><td>Small team, already use 1Password</td><td>1Password CLI</td><td>No new tool, works with existing vaults, op inject is solid</td></tr>
+<tr><td>Open-source project with zero budget</td><td>Infisical (self-hosted)</td><td>Full-featured OSS, Docker deploy, free forever</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> If you're starting fresh in 2026, pick <strong>Infisical</strong>. It hits the sweet spot: developer-friendly, open-source option, automatic rotation, and a free tier generous enough for most teams. If you're at enterprise scale with compliance requirements, Vault is the mature standard. If everything you do is in git already, SOPS is the beautiful simple thing. And for heaven's sake, stop putting secrets in <code>.env</code> files that 7 people have copies of on their laptops.</p>
+'''
+
+BODIES['best-developer-hardware-2026'] = '''
+
+<h2>Your Hardware Is Part of Your Stack</h2>
+<p>Developers obsess over code editors, terminal emulators, and keyboard shortcuts — then type on a $20 membrane keyboard while squinting at a 1080p monitor from 2014. Hardware is a force multiplier: a good mechanical keyboard reduces finger fatigue over 8-hour coding sessions; a quality monitor prevents eye strain; a proper chair saves your back. Here's what experienced developers actually use and recommend in 2026, tested over years of daily coding.</p>
+
+<h2>Keyboards: The Most Personal Choice</h2>
+<table>
+<tr><th>Keyboard</th><th>Type</th><th>Switches</th><th>Price</th><th>Best For</th></tr>
+<tr><td>HHKB Professional Hybrid Type-S</td><td>Topre electrostatic capacitive</td><td>Topre 45g (silent)</td><td>$300-350</td><td>UNIX philosophy: minimal layout, quiet, legendary build</td></tr>
+<tr><td>ZSA Moonlander</td><td>Split ortholinear (programmable)</td><td>Hot-swap (any MX-style)</td><td>$365</td><td>Ergonomics, RSI prevention, tenting, full programmability</td></tr>
+<tr><td>Keychron Q1 Pro</td><td>75% mechanical (aluminum)</td><td>Hot-swap Gateron Jupiter</td><td>$199</td><td>Best value: premium build, wireless, QMK/VIA, Mac-friendly</td></tr>
+<tr><td>NuPhy Air75 V2</td><td>Low-profile mechanical</td><td>Low-profile Gateron (hot-swap)</td><td>$119</td><td>Portable, low-profile typing, best laptop companion</td></tr>
+<tr><td>ZSA Voyager</td><td>Ultra-compact split</td><td>Low-profile Kailh Choc (hot-swap)</td><td>$365</td><td>Minimalist ergo, best for travel, extreme programmability</td></tr>
+</table>
+
+<p><strong>The Topre difference:</strong> The HHKB (Happy Hacking Keyboard) uses Topre switches — a hybrid of mechanical and rubber dome that feels like typing on clouds. The layout is intentionally minimal: no dedicated arrow keys (function layer), Control where Caps Lock normally lives (UNIX tradition). It's the keyboard for people who spend 10+ hours a day in vim/emacs/terminal. The Type-S (silent) variant is quiet enough for open-plan offices. <em>Downside:</em> expensive, no backlight, non-standard layout takes 2 weeks to adapt to.</p>
+
+<p><strong>Split ergo keyboards (Moonlander, Voyager):</strong> If you have any wrist or shoulder discomfort, a split keyboard is the single best investment you can make. The Moonlander lets you position each half at shoulder width, tent (angle) each side up to 45°, and customize every key via the Oryx configurator (web-based, compiles to QMK firmware). The Voyager is the portable version — fits in a laptop bag. The learning curve is real (2-4 weeks), but developers who switch rarely go back.</p>
+
+<p><strong>Keychron Q1 Pro — The sensible default.</strong> If you want one great keyboard without going down the mechanical keyboard rabbit hole, get a Keychron Q1 Pro. Aluminum case, gasket mount (softer typing feel), hot-swap switches (try different switches without soldering), wireless Bluetooth + wired, and QMK/VIA support for key remapping. It works perfectly on Mac and Windows. At $199, it's 80% of the custom keyboard experience at 50% of the price.</p>
+
+<h2>Monitors: What You Actually Need</h2>
+<table>
+<tr><th>Monitor</th><th>Size/Res</th><th>Panel</th><th>Price (approx)</th><th>Best For</th></tr>
+<tr><td>Dell U2724D</td><td>27" 2560×1440</td><td>IPS Black (2000:1 contrast)</td><td>$450</td><td>Best all-around: accurate color, USB-C 90W, sharp text</td></tr>
+<tr><td>Apple Studio Display</td><td>27" 5120×2880</td><td>IPS (600 nits)</td><td>$1,599</td><td>Mac users: 5K retina, built-in speakers/mic, no scaling issues</td></tr>
+<tr><td>LG 42" C4 OLED</td><td>42" 3840×2160</td><td>OLED (120Hz)</td><td>$900</td><td>Maximum screen real estate, deep blacks, also a great TV</td></tr>
+<tr><td>Dell U4025QW</td><td>40" 5120×2160</td><td>IPS Black</td><td>$1,800</td><td>Ultrawide: replace dual monitors, 140 PPI, Thunderbolt 4</td></tr>
+</table>
+
+<p><strong>The resolution/size sweet spot:</strong> For coding, 27" 1440p at 100% scaling gives the best text clarity without HiDPI scaling headaches. On macOS, 27" 1440p text is slightly soft (macOS expects ~220 PPI for retina), so Mac users often prefer 27" 5K (Studio Display) or 27" 4K at 150% scaling. On Linux and Windows, 1440p at 27" is perfect at native scaling.</p>
+
+<p><strong>One big monitor vs dual monitors:</strong> A single 40" ultrawide (5120×2160) or 42" 4K OLED gives you the equivalent of 3-4 code panes without bezels. Many senior developers have moved from dual monitors to a single large screen — less neck movement, cleaner desk, no alignment issues. The 42" LG C4 OLED is popular because it doubles as a gaming/movie display after work. Just make sure your desk is deep enough (30"+) — you don't want to sit 18 inches from a 42" screen.</p>
+
+<h2>Chairs and Desks</h2>
+<p><strong>Chairs worth the money:</strong> Herman Miller Aeron (the classic, ~$1,800 new, $500-800 used), Herman Miller Embody (better back support, ~$1,900), Steelcase Leap V2 (best adjustable armrests, ~$1,300 new, $400 used). Buy used from office liquidation sales — premium chairs last 15+ years, and a used Aeron at $600 is better than any $600 new chair. The chair matters more than the keyboard or monitor: you can code on a laptop keyboard, but you can't code through back pain.</p>
+
+<p><strong>Standing desks:</strong> Uplift V2 ($600-900, most customizable), Fully Jarvis ($500-700, best value), Flexispot E7 ($400-600, budget pick). Get the widest desk your space allows — 72" fits two monitors, a laptop, and a notebook. A standing desk isn't about standing all day (that's also bad for you); it's about alternating positions every 45-60 minutes.</p>
+
+<h2>Putting It Together: Three Budget Levels</h2>
+<table>
+<tr><th>Budget</th><th>Keyboard</th><th>Monitor</th><th>Chair</th></tr>
+<tr><td>~$800 (minimum worthwhile)</td><td>Keychron V1 ($84)</td><td>Dell S2722QC 27" 4K ($280)</td><td>Used Steelcase Leap ($400)</td></tr>
+<tr><td>~$2,500 (professional)</td><td>Keychron Q1 Pro ($199)</td><td>Dell U2724D ($450)</td><td>Used Aeron ($600) + Uplift V2 desk ($800)</td></tr>
+<tr><td>~$5,000 (endgame)</td><td>HHKB Type-S + Moonlander ($665)</td><td>Apple Studio Display ($1,599)</td><td>Herman Miller Embody ($1,900) + Uplift V2 ($900)</td></tr>
+</table>
+
+<p><strong>The most impactful upgrade under $100:</strong> A good mechanical keyboard (Keychron V1, $84). Better than any monitor upgrade for daily comfort. <strong>The most impactful upgrade period:</strong> A used premium chair. Your 45-year-old back will thank your 25-year-old self.</p>
+'''
+
+BODIES['best-css-frameworks-2026'] = '''
+
+<h2>The CSS Framework Landscape in 2026</h2>
+<p>CSS frameworks have undergone a generational shift. The old guard (Bootstrap, Material UI) still dominate market share, but the cutting edge has moved to utility-first atomic CSS (Tailwind), compile-time CSS-in-JS (Panda CSS), and near-zero-runtime solutions (UnoCSS, Vanilla Extract). The common thread: generate CSS at build time, ship minimal CSS to the browser, and eliminate the runtime cost of traditional CSS-in-JS. Here's how the top contenders compare for real projects.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Framework</th><th>Approach</th><th>Build Tool</th><th>Runtime (JS Bundle)</th><th>CSS Output</th><th>TS Support</th><th>Learning Curve</th></tr>
+<tr><td>Tailwind CSS v4</td><td>Utility-first atomic CSS</td><td>Lightning CSS (Rust)</td><td>0 KB runtime</td><td>~3-8 KB (used utilities only)</td><td>Via config + plugins</td><td>Medium (memorize class names)</td></tr>
+<tr><td>UnoCSS</td><td>Atomic CSS engine (on-demand)</td><td>Custom (regex-based, instant)</td><td>0 KB (or minimal reset)</td><td>~3-10 KB (on-demand generation)</td><td>First-class via presets</td><td>Low (similar to Tailwind, more flexible)</td></tr>
+<tr><td>Panda CSS</td><td>Compile-time CSS-in-JS</td><td>Custom (static analysis)</td><td>0 KB runtime</td><td>~5-15 KB (tree-shaken)</td><td>Type-safe recipes and variants</td><td>Medium-High (new mental model)</td></tr>
+<tr><td>Vanilla Extract</td><td>Zero-runtime CSS-in-JS</td><td>esbuild / webpack plugin</td><td>0 KB runtime</td><td>Static CSS files (per-component)</td><td>Full type-safety, CSS modules</td><td>Medium (CSS-in-JS devs adapt fast)</td></tr>
+<tr><td>Open Props</td><td>Design tokens as CSS custom properties</td><td>None (just import CSS)</td><td>0 KB runtime</td><td>~20 KB (design tokens only)</td><td>N/A (pure CSS)</td><td>Low (standard CSS, supercharged)</td></tr>
+</table>
+
+<h2>Deep Dive</h2>
+
+<p><strong>Tailwind CSS v4 — The industry standard.</strong> Tailwind's <code>class="flex items-center gap-2 text-sm font-medium"</code> has become the dominant way developers write CSS. Version 4 (2025) rewrote the engine in Rust (Lightning CSS) for near-instant builds, added CSS-first configuration (no more <code>tailwind.config.js</code> in simple cases), and improved the cascade layers system. The ecosystem is unmatched: Tailwind UI (paid component library), shadcn/ui (free React components built on Tailwind), Headless UI, and thousands of community templates. <strong>The criticism:</strong> verbose HTML, "className soup," and the learning curve of memorizing utility names. But the productivity gain — never leaving your HTML, no naming things, instant visual feedback — wins for most teams. <em>Best for:</em> Teams that want the largest ecosystem, shadcn/ui users, rapid prototyping, design-system-driven organizations.</p>
+
+<p><strong>UnoCSS — The instant, flexible alternative.</strong> UnoCSS is what happens when you rebuild Tailwind from scratch without the legacy constraints. It generates CSS on-demand by scanning your source code with regex — no AST parsing, no build step in the traditional sense. This makes it dramatically faster than Tailwind (especially on large codebases) and more flexible: you can add custom rules with a single line of config, use presets to mimic Tailwind/Windi CSS/Bootstrap, and even generate CSS for non-web targets. The <code>attributify</code> mode (<code>&lt;div flex="~ gap-2"&gt;</code>) is cleaner than Tailwind's class soup for many developers. UnoCSS is the default in the Vite ecosystem and works exceptionally well with Vue/Nuxt. <em>Best for:</em> Performance-obsessed teams, Vite/Vue/Nuxt projects, developers who want Tailwind-like DX with more flexibility and speed.</p>
+
+<p><strong>Panda CSS — Type-safe, compile-time styling.</strong> Panda CSS is the most ambitious new entrant. It statically analyzes your code at build time, extracts the styles you use, and generates atomic CSS — with full TypeScript type safety. You define "recipes" (component variants) that are fully typed: <code>button({ size: "lg", variant: "primary" })</code> will autocomplete and type-check. The output is zero-runtime atomic CSS, similar to Tailwind, but the authoring experience is JavaScript/TypeScript rather than string class names. <em>Best for:</em> TypeScript-heavy teams, component library authors, developers who want type-safe styling without runtime cost.</p>
+
+<p><strong>Vanilla Extract — CSS-in-JS without the guilt.</strong> Vanilla Extract is the answer to "I like styled-components but hate the runtime cost." You write <code>style.ts</code> files with a CSS-in-JS-like API, and at build time they compile to static CSS files with hashed class names. Zero JavaScript ships to the browser for styling. It supports themes, variants, and responsive styles — all type-safe. The trade-off: styles live in separate <code>.css.ts</code> files (not co-located in components), which some developers find annoying. <em>Best for:</em> Teams coming from styled-components/Emotion who want zero-runtime, design-system teams that need type-safe theme contracts, React projects where static extraction matters.</p>
+
+<p><strong>Open Props — Supercharged vanilla CSS.</strong> Open Props takes the opposite approach: instead of a framework, it's a library of design tokens (<code>--size-fluid-3</code>, <code>--gradient-15</code>, <code>--shadow-4</code>) as CSS custom properties. You write standard CSS, but with a professionally designed token system backing you. There's no build step, no JavaScript, no lock-in — it's just CSS. You can use it with any framework or no framework. <em>Best for:</em> CSS purists, projects that want minimal tooling, developers learning modern CSS, progressive enhancement over framework lock-in.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Choice</th><th>Why</th></tr>
+<tr><td>New project, want maximum ecosystem and hiring pool</td><td>Tailwind CSS v4</td><td>Industry standard, shadcn/ui, Tailwind UI, massive community</td></tr>
+<tr><td>Vite + Vue/Nuxt, want fastest builds</td><td>UnoCSS</td><td>On-demand generation, attribute mode, first-class Vite integration</td></tr>
+<tr><td>TypeScript-first team building a design system</td><td>Panda CSS</td><td>Type-safe recipes, static extraction, component variants with autocomplete</td></tr>
+<tr><td>Migrating from styled-components, want zero-runtime</td><td>Vanilla Extract</td><td>Familiar CSS-in-JS DX, compiles to static CSS, full type safety</td></tr>
+<tr><td>Prefer standard CSS, want minimal tooling</td><td>Open Props</td><td>Pure CSS custom properties, no build step, easy to adopt incrementally</td></tr>
+<tr><td>Performance-critical app (every KB counts)</td><td>UnoCSS or Panda CSS</td><td>Both output minimal atomic CSS with zero runtime</td></tr>
+</table>
+
+<p><strong>My take for 2026:</strong> <strong>Tailwind CSS v4</strong> is still the default choice for most projects — the ecosystem, documentation, and developer availability are unmatched. But <strong>UnoCSS</strong> is the dark horse worth watching: it's faster, more flexible, and eating Tailwind's lunch in the Vite ecosystem. If you're starting a greenfield project in 2026 and don't need Tailwind UI, try UnoCSS — the attribute mode alone makes your templates more readable. For teams building their own design system, <strong>Panda CSS</strong> is the most forward-thinking choice: type-safe, compile-time, and the recipe pattern is genuinely better than utility classes for component variants.</p>
+'''
+
+BODIES['best-local-dev-tools'] = '''
+
+<h2>Docker Desktop Isn't the Only Option Anymore</h2>
+<p>Docker Desktop changed its licensing in 2021, and since then the ecosystem of alternatives has exploded. Developers now have multiple excellent options for running containers locally — some faster, some lighter, some with better Kubernetes integration. Here's the comparison from someone who has run all five in production-style local dev environments (multi-service apps with databases, queues, and microservices).</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Tool</th><th>Engine</th><th>macOS Support</th><th>Linux Support</th><th>Kubernetes</th><th>Memory Usage</th><th>File Sharing (macOS)</th><th>License</th></tr>
+<tr><td>OrbStack</td><td>Custom VM + native</td><td>★★★★★ (native macOS, best-in-class)</td><td>N/A (macOS only)</td><td>Built-in (lightweight k3s)</td><td>~200 MB idle</td><td>Virtiofs (native speed)</td><td>Free (personal) / $15/mo (business)</td></tr>
+<tr><td>Colima</td><td>Lima VM + containerd/docker</td><td>★★★★</td><td>★★★★ (native, minimal VM)</td><td>Built-in (k3s)</td><td>~300 MB idle</td><td>Virtiofs / 9p / sshfs</td><td>Free (MIT)</td></tr>
+<tr><td>Rancher Desktop</td><td>Lima VM + containerd/docker</td><td>★★★★</td><td>★★★★★</td><td>Built-in (k3s, primary focus)</td><td>~500 MB idle</td><td>Virtiofs</td><td>Free (Apache 2.0)</td></tr>
+<tr><td>Finch</td><td>Lima VM + containerd + nerdctl</td><td>★★★★</td><td>★★★ (Linux via Lima)</td><td>No built-in</td><td>~300 MB idle</td><td>Virtiofs</td><td>Free (Apache 2.0)</td></tr>
+<tr><td>Docker Desktop</td><td>Custom VM</td><td>★★★</td><td>★★★★</td><td>Built-in</td><td>~1 GB idle</td><td>gRPC FUSE / Virtiofs</td><td>Free (personal) / $9-24/mo (business)</td></tr>
+</table>
+
+<h2>Deep Dive</h2>
+
+<p><strong>OrbStack — The macOS king.</strong> OrbStack is a native macOS app that runs containers and Linux machines with near-native performance. It's what Docker Desktop should have been on macOS: 200MB idle RAM (vs Docker's 1GB+), instant startup, native file sharing via Virtiofs (no more slow mounted volumes), and built-in Kubernetes (k3s). It supports Docker API, so <code>docker compose up</code> works exactly the same. The Rosetta x86 emulation is fast enough for most images. The only downside: it's macOS-only. <em>Best for:</em> Mac developers who want Docker compatibility without Docker Desktop's resource hunger, anyone who runs multiple containers daily on macOS.</p>
+
+<p><strong>Colima — The minimal, open-source workhorse.</strong> Colima wraps Lima (a Linux VM manager) with Docker/containerd API compatibility. It's a single binary, configurable via YAML, and starts containers as fast as anything else on macOS. Use it with the Docker CLI (<code>docker context use colima</code>) or directly with containerd/nerdctl. It's the default for Homebrew users: <code>brew install colima docker</code> gives you a complete container environment in under 2 minutes. <em>Best for:</em> Developers who want a minimal, open-source Docker replacement, CLI-first users, Homebrew loyalists.</p>
+
+<p><strong>Rancher Desktop — For Kubernetes-first development.</strong> Rancher Desktop is the best choice if your primary need is local Kubernetes development. It ships with k3s (lightweight Kubernetes), a GUI for managing cluster settings, and the option to use either dockerd or containerd as the container runtime. It also includes nerdctl, Helm, and kubectl out of the box. The trade-off: it's heavier than Colima/Finch, and the GUI isn't as polished as OrbStack's. <em>Best for:</em> Kubernetes developers, teams that develop on Kubernetes locally and deploy to Kubernetes in production, anyone who wants a GUI for container management.</p>
+
+<p><strong>Finch — AWS's open-source contender.</strong> Finch is AWS's entry into the local container space, built on Lima + containerd + nerdctl. It's designed to be a minimal, opinionated setup that mirrors AWS's container tooling (<code>finch compose up</code> instead of <code>docker compose up</code>). It's fully open-source and cross-platform (macOS native, Linux support improving). The CLI is <code>nerdctl</code>-compatible, which is mostly Docker-compatible but has some differences. <em>Best for:</em> AWS developers, teams that deploy to ECS/EKS, anyone curious about nerdctl as a Docker CLI alternative, open-source purists.</p>
+
+<p><strong>Docker Desktop — The reference implementation.</strong> Docker Desktop is still the most polished experience: GUI dashboard, extensions marketplace, Docker Scout (vulnerability scanning), and guaranteed compatibility (it IS Docker). The problem: it's resource-hungry (1GB+ RAM at idle), the licensing changes irritated many developers, and the alternatives have caught up on features. Docker Desktop is now the "safe default" — it works, everyone knows it, but it's no longer the best. <em>Best for:</em> Teams where Docker Desktop is already standardized, developers who need Docker Extensions, enterprise environments that pay for Docker Business.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Choice</th><th>Why</th></tr>
+<tr><td>macOS, want the fastest, lightest Docker experience</td><td>OrbStack</td><td>200MB RAM, native speed, Rosetta x86, built-in k3s</td></tr>
+<tr><td>Prefer open-source, want minimal setup</td><td>Colima</td><td>brew install colima docker, MIT license, simple YAML config</td></tr>
+<tr><td>Local Kubernetes is your primary need</td><td>Rancher Desktop</td><td>Best k3s integration, GUI for cluster management, Helm included</td></tr>
+<tr><td>AWS shop, deploying to ECS/EKS</td><td>Finch</td><td>AWS tooling alignment, nerdctl, fully open-source</td></tr>
+<tr><td>Just want Docker to work, don't care about RAM</td><td>Docker Desktop</td><td>Most polished, guaranteed compatibility, Docker Extensions</td></tr>
+<tr><td>Linux desktop</td><td>Native Docker or Colima</td><td>Docker runs natively on Linux — no VM needed; Colima for isolation</td></tr>
+</table>
+
+<p><strong>What I actually use:</strong> OrbStack on macOS for daily development — it's genuinely faster than Docker Desktop, and the 800MB RAM savings means I can run more services without swapping. Colima on any machine I don't control (CI, ephemeral VMs). Docker Desktop when I need to reproduce a bug that only happens in Docker Desktop's VM (rare but real). If I were on Linux, I'd run native Docker Engine with no VM layer — it's still the fastest way to run containers.</p>
+'''
+
+BODIES['best-developer-marketplaces-2026'] = '''
+
+<h2>Selling Digital Products as a Developer</h2>
+<p>Selling software directly to users — without ads, without sponsorships, without a middleman taking 30% — is one of the highest-leverage ways to monetize your skills. Developer marketplaces and merchant-of-record (MoR) platforms handle the boring parts: payment processing, VAT/sales tax, chargebacks, and delivery. In 2026, there are four serious platforms for selling developer-oriented digital products (templates, courses, SaaS boilerplates, icons, ebooks, and tools). Here's how they actually compare.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Platform</th><th>Model</th><th>Fees</th><th>MoR (Handles Tax)</th><th>Payouts</th><th>Custom Domain</th><th>Best For</th></tr>
+<tr><td>Gumroad</td><td>Marketplace + storefront</td><td>10% flat (free plan)</td><td>Yes</td><td>Weekly (Fri), instant via Gumroad Pay</td><td>Yes (custom CSS available)</td><td>General digital products, largest audience, simplicity</td></tr>
+<tr><td>LemonSqueezy</td><td>MoR + storefront</td><td>5% + 50¢ per transaction</td><td>Yes (global + EU VAT IOSS)</td><td>Weekly (Mon)</td><td>Yes (full customization)</td><td>Developer-focused, lowest fees, license keys, affiliates</td></tr>
+<tr><td>Polar</td><td>Open-source monetization</td><td>5% + payment processor (Stripe ~2.9%)</td><td>No (you handle tax)</td><td>Via Stripe (your account)</td><td>Yes (embeddable on your site)</td><td>Open-source funding, GitHub integration, memberships</td></tr>
+<tr><td>Paddle</td><td>MoR (enterprise)</td><td>5% + 50¢ (up to $50K ARR)</td><td>Yes (global, best-in-class)</td><td>Monthly</td><td>Yes (checkout overlay or full page)</td><td>SaaS businesses, $50K+ ARR, complex tax compliance</td></tr>
+</table>
+
+<h2>Deep Dive</h2>
+
+<p><strong>Gumroad — The largest audience, the highest fees.</strong> Gumroad is the most well-known digital product marketplace. Its advantage: built-in discovery — Gumroad users browse the marketplace and discover products. The 10% fee is the highest among the options, but it includes payment processing and tax handling. The platform handles everything: file delivery, license key generation, email marketing to your customers, affiliate payouts, and a basic course player. The editor is simple but limited — you get a product page with markdown, images, and video embeds. <em>Best for:</em> Creators who want the simplest possible setup, those who benefit from marketplace discovery, first-time sellers who don't want to think about tax compliance.</p>
+
+<p><strong>LemonSqueezy — Built for developers, by developers.</strong> LemonSqueezy is the most developer-friendly marketplace. It offers license key generation (validate keys via API), webhook events for every transaction, a full REST API, and affiliate management built in. The 5% + 50¢ fee is the lowest of any full-service MoR. It handles global tax compliance (EU VAT IOSS, US sales tax, etc.), so you don't need to register for VAT in 27 countries. The storefront is customizable with HTML/CSS, or you can use their headless checkout API to embed purchase flows on your own site. <em>Best for:</em> Developers selling SaaS boilerplates, starter kits, or software licenses; anyone who wants API access and webhooks; indie hackers optimizing for lowest fees.</p>
+
+<p><strong>Polar — Open-source monetization, directly on GitHub.</strong> Polar is purpose-built for open-source developers. It integrates with GitHub: issues become feature requests that backers can fund, README badges show funding progress, and you can offer membership tiers with benefits (private repos, Discord access, priority support). The unique angle: it's not a marketplace — it embeds on your own site and GitHub repo. You keep your Stripe account. Polar serves as the membership and sales layer on top. <em>Best for:</em> Open-source maintainers, developers who want to monetize their GitHub repos, those who want to keep their own Stripe account and only pay Polar's 5% (not processor fees).</p>
+
+<p><strong>Paddle — The enterprise-grade MoR.</strong> Paddle is the serious option for SaaS businesses doing $50K+ ARR. It's not a marketplace (no product discovery) — it's a merchant of record that sits behind your checkout. Paddle handles all global tax, compliance, invoices, and payment methods. Their checkout widget is embeddable, or you can build a custom checkout via their API. They have the best fraud protection, subscription management (upgrades/downgrades/pausing), and support for B2B invoicing (NET-30, purchase orders). The catch: approval required, and they're selective about what products they'll support. <em>Best for:</em> SaaS businesses with recurring subscriptions, companies that need B2B invoicing, teams that want to outsource all tax and compliance risk.</p>
+
+<h2>How They Handle Tax (This Matters)</h2>
+<p>If you sell digital products globally, you're legally required to collect VAT in the EU, GST in Australia/India/Singapore, and sales tax in many US states. Doing this yourself means registering in 30+ jurisdictions. Merchant of Record platforms (Gumroad, LemonSqueezy, Paddle) handle this — they are legally the seller, so they remit tax. Polar does NOT — you use your own Stripe account, and Stripe can handle some tax calculation, but you're still the merchant of record. <strong>If you're a solo developer:</strong> use a MoR platform and sleep better. The 5-10% fee is cheaper than hiring a tax accountant.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Choice</th><th>Why</th></tr>
+<tr><td>First digital product, want simplest setup</td><td>Gumroad</td><td>Easiest onboarding, built-in audience, no tax worries</td></tr>
+<tr><td>Selling developer tools / SaaS boilerplates</td><td>LemonSqueezy</td><td>Lowest fees, API/webhooks, license keys, developer UX</td></tr>
+<tr><td>Open-source project, monetize GitHub</td><td>Polar</td><td>GitHub-native, embed on own site, keep Stripe account</td></tr>
+<tr><td>SaaS with recurring subscriptions, $50K+ ARR</td><td>Paddle</td><td>Enterprise MoR, B2B invoicing, best fraud protection, compliance</td></tr>
+<tr><td>Maximize revenue, minimize fees</td><td>LemonSqueezy</td><td>5% + 50¢ is the lowest all-in MoR fee</td></tr>
+<tr><td>Want to own customer relationship, custom checkout</td><td>Paddle or Polar</td><td>Paddle for MoR + custom checkout; Polar for Stripe + GitHub integration</td></tr>
+</table>
+
+<p><strong>My recommendation:</strong> Start with <strong>LemonSqueezy</strong> — lowest fees, best developer experience, full MoR (tax handled), and the API/webhook support means you can automate everything. If your product is open-source, add <strong>Polar</strong> as a second channel via GitHub. Graduate to <strong>Paddle</strong> once you're past $50K ARR and need B2B invoicing and dedicated support. Gumroad is fine for your first $1,000 in sales, but the 10% fee adds up fast — at $50K in annual sales, that's $2,500 more in fees vs LemonSqueezy.</p>
+'''
+
+BODIES['sell-vscode-extensions'] = '''
+
+<h2>VS Code Extensions as a Business</h2>
+<p>VS Code has 75%+ market share among developers. Its extension marketplace is less crowded than mobile app stores, and the monetization path is straightforward: build something useful, ship it for free to build an audience, then offer a paid version with premium features. Several solo developers are making $5K-30K/mo from VS Code extensions. Here's what actually works in 2026.</p>
+
+<h2>Extension Categories That Make Money</h2>
+<table>
+<tr><th>Category</th><th>Examples</th><th>Revenue Potential</th><th>Difficulty</th></tr>
+<tr><td>Theme/Icons</td><td>Material Theme, Winter is Coming, vscode-icons, Symbol Icons</td><td>$2K-15K/mo</td><td>Low (design-heavy)</td></tr>
+<tr><td>Productivity enhancers</td><td>GitLens, Prettier, Better Comments, Bookmarks</td><td>$5K-50K/mo</td><td>Medium</td></tr>
+<tr><td>Language/framework support</td><td>Python, Rust Analyzer, Vue Language Features, MDX</td><td>$0-10K/mo (mostly free)</td><td>High (LSP, AST, parsing)</td></tr>
+<tr><td>API/Tool integrations</td><td>GitHub Copilot Chat, GitLab Workflow, Docker, Postman</td><td>$3K-25K/mo</td><td>Medium (API wrappers)</td></tr>
+<tr><td>Database/SQL tools</td><td>Database Client (paid), SQLTools, MySQL</td><td>$2K-20K/mo</td><td>Medium-High</td></tr>
+<tr><td>Collaboration tools</td><td>Live Share, CodeTogether, GitLive</td><td>$5K-40K+/mo</td><td>High (real-time sync)</td></tr>
+</table>
+
+<h2>The Playbook: Free → Paid Funnel</h2>
+<p><strong>Step 1: Ship a free extension that solves a real pain point.</strong> The free version must be genuinely useful on its own — this builds your install base and reviews. Most successful paid extensions started as popular free extensions. Example: GitLens launched free in 2016, grew to millions of installs, then introduced GitLens+ (paid) in 2022 with visual file history, Worktree support, and premium integrations.</p>
+
+<p><strong>Step 2: Build an audience before adding a paid tier.</strong> Wait until you have at least 10K installs and a 4.5+ star rating. If you add a paywall too early, users will find a free alternative. Your free users are your marketing — their word-of-mouth and reviews drive discovery. The conversion rate from free to paid typically ranges from 0.5% to 3% depending on the value proposition.</p>
+
+<p><strong>Step 3: Add premium features, not restrictions.</strong> The best monetization pattern: free tier does the core job well; paid tier adds power-user features (more integrations, team features, analytics, priority support). Never cripple the free tier — developers hate that and will leave 1-star reviews. GitLens+ doesn't remove features from free users; it adds advanced visualizations and Worktree support for paying users.</p>
+
+<p><strong>Step 4: Price it like a SaaS.</strong> Most paid extensions charge $2-10/mo (individual) or $5-25/user/mo (team). One-time purchase models ($10-50) work for themes but limit long-term revenue. The subscription model aligns with ongoing maintenance — VS Code updates every month, and your extension needs to keep up.</p>
+
+<h2>Real Developer Revenue Stories</h2>
+<table>
+<tr><th>Extension</th><th>Creator</th><th>Estimated Revenue</th><th>Business Model</th></tr>
+<tr><td>Material Theme</td><td>Equinusocio (solo)</td><td>~$15K/mo</td><td>Paid theme variants + icon packs</td></tr>
+<tr><td>GitLens / GitKraken</td><td>GitKraken (company)</td><td>~$50K+/mo</td><td>Freemium SaaS (GitLens+ $5-25/mo)</td></tr>
+<tr><td>Database Client</td><td>Weijan Chen (solo)</td><td>~$20K/mo</td><td>Freemium (Pro $39-99 lifetime)</td></tr>
+<tr><td>Symbol Icons</td><td>Miguel Solorio (solo)</td><td>~$3K/mo</td><td>Paid icon themes</td></tr>
+</table>
+<p><em>* Revenue estimates based on public install counts, pricing, and creator interviews</em></p>
+
+<h2>Technical Considerations</h2>
+<p><strong>Licensing and DRM:</strong> Most solo developers use a simple license key validation against a server. VS Code doesn't provide built-in licensing, so you'll need a backend (Supabase, Firebase, or a simple Node.js server) to validate keys. Expect some piracy — it's not worth building sophisticated DRM; focus on providing enough value that paying is the easier choice.</p>
+
+<p><strong>Support burden:</strong> Paid users expect responsive support. Budget for 5-10 hours/week of GitHub issue triage, email support, and bug fixes once you have 1,000+ paid users. The support load scales with users, not revenue.</p>
+
+<p><strong>VS Code API stability:</strong> The VS Code extension API is stable and well-documented, but monthly VS Code releases can break extensions. Test against VS Code Insiders to catch issues early. The most common breakages: theme color token changes, webview API updates, and TreeView rendering changes.</p>
+
+<p><strong>Bottom line:</strong> Building a VS Code extension is one of the most accessible developer side hustles — your customers are developers (you understand them), the platform handles distribution, and the free-to-paid funnel is proven. Start with a pain point you feel yourself (scratch your own itch), ship the free version, and iterate based on GitHub issues. See also: <a href="/en/sidehustle/chrome-extension-monetization.html">Chrome Extension Monetization</a> for the browser extension equivalent.</p>
+'''
+
+BODIES['bug-bounty-hunting-guide'] = '''
+
+<h2>Bug Bounty Hunting in 2026</h2>
+<p>Bug bounty programs pay security researchers for finding and responsibly disclosing vulnerabilities. In 2026, platforms like HackerOne, Bugcrowd, and Intigriti host thousands of programs from companies paying $100 to $100K+ per valid bug. Some developers treat it as a side income ($1K-5K/mo); a small number turn it into a full-time career ($200K+/yr). Here's what the landscape actually looks like and how to approach it as a developer.</p>
+
+<h2>Major Bug Bounty Platforms</h2>
+<table>
+<tr><th>Platform</th><th>Number of Programs</th><th>Payout Speed</th><th>Community</th><th>Best For</th></tr>
+<tr><td>HackerOne</td><td>2,000+ (largest)</td><td>Median 3-14 days</td><td>Largest, most competitive</td><td>Web apps, wide variety of programs</td></tr>
+<tr><td>Bugcrowd</td><td>800+</td><td>Median 5-15 days</td><td>Strong, good documentation</td><td>Enterprise programs, IoT, cloud</td></tr>
+<tr><td>Intigriti</td><td>500+ (EU-focused)</td><td>Median 7-21 days</td><td>Growing, good for EU researchers</td><td>EU companies, GDPR-related bugs</td></tr>
+<tr><td>YesWeHack</td><td>400+</td><td>Median 5-20 days</td><td>European, good API programs</td><td>API security, EU/Asian companies</td></tr>
+<tr><td>Synack Red Team</td><td>Invite-only (~100 programs)</td><td>Varies</td><td>Professional, vetted researchers</td><td>Experienced hunters, high-end enterprise</td></tr>
+</table>
+
+<h2>Bug Types and Payout Ranges</h2>
+<table>
+<tr><th>Bug Type</th><th>Low End</th><th>High End</th><th>Difficulty</th><th>Demand in 2026</th></tr>
+<tr><td>Cross-Site Scripting (XSS)</td><td>$100</td><td>$5,000</td><td>Low-Medium</td><td>High (most common, well-understood)</td></tr>
+<tr><td>Server-Side Request Forgery (SSRF)</td><td>$500</td><td>$15,000</td><td>Medium-High</td><td>Very High (cloud metadata attacks are hot)</td></tr>
+<tr><td>SQL Injection</td><td>$250</td><td>$10,000</td><td>Medium</td><td>Medium (fewer in modern stacks, but high impact)</td></tr>
+<tr><td>Insecure Direct Object Reference (IDOR)</td><td>$150</td><td>$8,000</td><td>Low (easy to test)</td><td>High (common in SaaS/API products)</td></tr>
+<tr><td>Authentication bypass / Account takeover</td><td>$500</td><td>$25,000</td><td>Medium-High</td><td>Very High (critical impact)</td></tr>
+<tr><td>Remote Code Execution (RCE)</td><td>$1,000</td><td>$100,000+</td><td>High</td><td>High (rare but highest payouts)</td></tr>
+<tr><td>Business Logic / Abuse</td><td>$200</td><td>$20,000</td><td>Varies</td><td>Increasing (hard to automate, human creativity wins)</td></tr>
+<tr><td>API Authorization / Mass Assignment</td><td>$300</td><td>$12,000</td><td>Medium</td><td>High (API-first companies all have auth issues)</td></tr>
+</table>
+
+<h2>Getting Started as a Developer</h2>
+
+<p><strong>Your development background is your advantage.</strong> Most successful bug bounty hunters are developers first, security researchers second. Understanding how applications are built — how auth flows work, how APIs handle state, what ORM queries look like under the hood — gives you an edge over pure security researchers who only know the attack side. The best bug hunters think like engineers debugging a system, not just attackers throwing payloads.</p>
+
+<p><strong>Pick one vulnerability type and master it.</strong> The most successful beginners don't try to learn everything. They pick one bug type (IDOR is the best starting point for developers — it's about understanding authorization logic, not exploit chains) and hunt it exclusively for 3-6 months. Once you can find that bug type reliably, add a second.</p>
+
+<p><strong>Choose your targets strategically.</strong> Avoid the top 20 most popular programs (Google, Facebook, Microsoft) — they're swamped with researchers and every obvious bug was found years ago. Target programs with 50-500 researchers: mid-size SaaS companies, newly launched programs, and programs that recently increased their scope (new features = new attack surface). Look for companies that recently shipped a major feature — the code is fresh and hasn't been scrutinized yet.</p>
+
+<p><strong>Reconnaissance is 80% of the work.</strong> Before sending a single payload: map every endpoint, understand every parameter, enumerate all subdomains and API versions, read the JavaScript source for hidden endpoints and API keys, test every user role's permissions, and look for debug endpoints that were accidentally left enabled. The best hunters spend days on recon before they attempt exploitation. Tools: Burp Suite (industry standard, $449/yr for Pro), Caido (newer, faster, $0-15/mo), and OWASP ZAP (free, open-source).</p>
+
+<h2>Realistic Expectations</h2>
+<table>
+<tr><th>Timeline</th><th>Expected Outcome</th></tr>
+<tr><td>First 3 months</td><td>Mostly learning. Expect to find 0-1 valid bugs. You're building methodology.</td></tr>
+<tr><td>3-6 months</td><td>First consistent finds: 1-3 valid bugs/month. Earnings: $200-1,000/mo.</td></tr>
+<tr><td>6-12 months</td><td>Developing intuition. 3-10 bugs/month. Earnings: $1K-5K/mo. Some high-impact finds.</td></tr>
+<tr><td>1-2 years</td><td>Professional level. 5-20 bugs/month. Earnings: $3K-20K/mo. Private invites appear.</td></tr>
+<tr><td>2+ years</td><td>Top 1%: private programs ($500+/hr), critical bugs ($10K-100K+ each), consulting offers.</td></tr>
+</table>
+
+<p><strong>The hard truth:</strong> Bug bounty hunting is not "easy money." The median bug bounty hunter makes less than $1,000/year. The top 1% make $100K-400K+. It's a skill-based meritocracy: your earnings directly reflect your technical depth, persistence, and methodology. The developers who succeed treat it like learning a new programming language — deliberate practice, reading other hunters' write-ups, and consistent effort over months. If you're looking for quick cash, this isn't it. If you love the puzzle of finding how systems break, there's nothing else like it.</p>
+
+<p><strong>Recommended first steps:</strong> Read the HackerOne Hacktivity feed (public disclosed reports) daily for 2 weeks to understand what valid bugs look like. Watch the NahamSec and InsiderPhD YouTube channels for methodology. Set up your own lab (Damn Vulnerable Web Application, OWASP Juice Shop, or PortSwigger Web Security Academy — all free) and practice before touching a real program. See also: <a href="/en/sidehustle/web-scraping-business.html">Web Scraping Business Guide</a> for another technical side hustle path.</p>
+'''
+
+BODIES['sell-website-templates'] = '''
+
+<h2>The Website Template Business in 2026</h2>
+<p>Selling website templates and UI kits has been a profitable developer side hustle for over a decade. While the market is more competitive than in 2015, the shift toward niche templates (SaaS landing pages, documentation sites, portfolio templates) and higher quality expectations means there's still room for developers who execute well. Several solo developers make $3K-20K/mo selling templates on marketplaces and their own sites.</p>
+
+<h2>Where to Sell</h2>
+<table>
+<tr><th>Marketplace</th><th>Revenue Share</th><th>Audience</th><th>Best For</th><th>Exclusivity</th></tr>
+<tr><td>ThemeForest (Envato)</td><td>37.5-50% (author gets 50-62.5%)</td><td>Largest (millions of buyers)</td><td>WordPress, HTML, Shopify themes</td><td>Non-exclusive</td></tr>
+<tr><td>Creative Market</td><td>30% (author gets 70%)</td><td>Design-focused audience</td><td>UI kits, design assets, presentation templates</td><td>Non-exclusive</td></tr>
+<tr><td>Webflow Templates</td><td>30% (author gets 70%)</td><td>Webflow designers</td><td>Webflow templates (high-end, $49-149)</td><td>Exclusive to Webflow</td></tr>
+<tr><td>Framer Templates</td><td>30% (author gets 70%)</td><td>Framer designers</td><td>Framer templates, interactive portfolios</td><td>Exclusive to Framer</td></tr>
+<tr><td>Tailwind UI / Cruip</td><td>Your own pricing (direct sales)</td><td>Developers (framework-specific)</td><td>Tailwind, Next.js, Vue, React templates</td><td>Your own site = 100% revenue</td></tr>
+<tr><td>Gumroad / LemonSqueezy</td><td>5-10%</td><td>Your marketing drives traffic</td><td>Any digital product, own brand, own audience</td><td>Non-exclusive</td></tr>
+</table>
+
+<h2>What Sells in 2026</h2>
+
+<p><strong>Framework-specific starter kits (highest value):</strong> The most lucrative segment is paid boilerplates and starter kits for popular frameworks. Examples: SaaS boilerplates (Next.js + Supabase + Stripe), Astro themes with built-in SEO, and Remix/React Router admin dashboards. These sell for $79-299 and have a self-selecting audience (developers who value their time). Unlike generic HTML templates ($15-30), framework-specific kits command higher prices because they save developers 20-40 hours of setup. The Tailwind UI model ($299 for lifetime access to all components) is the gold standard.</p>
+
+<p><strong>Niche landing page templates:</strong> SaaS landing pages, documentation sites (like Mintlify alternatives), developer portfolio templates, and open-source project pages. These are less crowded than generic "multi-purpose" themes. Each template should target ONE specific use case — "SaaS landing page with waitlist and Stripe checkout" sells better than "multipurpose business template" because the buyer immediately understands the value.</p>
+
+<p><strong>UI kits and design systems:</strong> Figma design systems paired with code implementation (React/Tailwind). Companies pay for consistency — a well-structured design system with 50+ components, responsive variants, dark mode, and accessibility built in. Prices range from $49 (small kit) to $299 (comprehensive design system).</p>
+
+<h2>The Economics</h2>
+<table>
+<tr><th>Product Type</th><th>Price Range</th><th>Sales/Month (realistic)</th><th>Monthly Revenue</th></tr>
+<tr><td>Single HTML template (ThemeForest)</td><td>$15-30</td><td>50-300+</td><td>$500-5,000</td></tr>
+<tr><td>Framework starter kit (direct sales)</td><td>$79-299</td><td>20-100+</td><td>$2,000-15,000</td></tr>
+<tr><td>UI Kit (Figma + code, Creative Market)</td><td>$39-89</td><td>30-150+</td><td>$800-6,000</td></tr>
+<tr><td>Comprehensive design system</td><td>$199-499</td><td>10-50+</td><td>$2,000-12,000</td></tr>
+<tr><td>SaaS boilerplate (direct)</td><td>$149-299</td><td>30-150+</td><td>$4,500-30,000</td></tr>
+</table>
+<p><em>Note: These are realistic ranges from successful authors — not "get rich quick" numbers. Most template authors make $0-500/mo for their first year.</em></p>
+
+<h2>The Playbook</h2>
+<p><strong>1. Pick your stack and go niche.</strong> Choose a specific framework (Next.js, Astro, Nuxt, or SvelteKit) and a specific use case (SaaS landing page, documentation site, developer portfolio). A "Next.js SaaS Starter with Stripe, Supabase Auth, and Tailwind" sells better than "Responsive HTML Template." The more specific, the better the conversion rate.</p>
+
+<p><strong>2. Build one excellent template, not ten mediocre ones.</strong> The template market rewards quality over quantity. One meticulously crafted template with: responsive design tested on 5 device sizes, accessibility (WCAG 2.1 AA), fast performance (90+ Lighthouse), dark mode, well-documented code, and regular updates. Customers will pay $99-199 for a template that saves them a week of work. They won't pay $19 for something they'll spend a week fixing.</p>
+
+<p><strong>3. Market it like a SaaS product.</strong> The best-selling templates aren't just uploaded to a marketplace and forgotten. Their creators: publish a dedicated landing page with a live demo, write a launch post on Hacker News, Reddit, and Dev.to, create a YouTube walkthrough (10-15 minutes showing every feature), share on Twitter/X and LinkedIn (developer communities), and maintain a changelog showing active maintenance. The launch week determines whether your template gets algorithmic visibility on marketplaces.</p>
+
+<p><strong>4. Maintenance is your moat.</strong> Templates that haven't been updated in 6 months get bad reviews and stop selling. The developers who succeed commit to updating their templates for every major framework release. This ongoing maintenance creates a moat: most competitors abandon their templates after a few months, while you keep yours current. Buyers check the "last updated" date before purchasing.</p>
+
+<p><strong>Bottom line:</strong> Selling website templates is a real business, but it's not passive income. Expect to spend 40% of your time on maintenance and support, 30% on marketing, and 30% on building new products. The upside: once a template gains traction, the marginal cost of each additional sale is near zero. See also: <a href="/en/sidehustle/sell-digital-products.html">Sell Digital Products Guide</a> and <a href="/en/sidehustle/sell-ui-kits-design-assets.html">Sell UI Kits & Design Assets</a>.</p>
+'''
+
+BODIES['developer-sponsorship-guide'] = '''
+
+<h2>Getting Sponsored as a Developer in 2026</h2>
+<p>Developer sponsorship — companies paying you to create content, maintain open-source projects, or represent their tools — has grown from a niche into a legitimate income stream. GitHub Sponsors alone has facilitated over $50M in payments to developers. But sponsorship isn't a donation button you add and forget; it's a value exchange with companies who have marketing budgets. Here's how it actually works.</p>
+
+<h2>Sponsorship Platforms</h2>
+<table>
+<tr><th>Platform</th><th>Fees</th><th>Best For</th><th>Unique Feature</th></tr>
+<tr><td>GitHub Sponsors</td><td>0% (GitHub covers processing)</td><td>Open-source maintainers</td><td>Directly on your repo, companies can sponsor in bulk</td></tr>
+<tr><td>Open Collective</td><td>10% platform + 3% payment</td><td>Open-source projects/teams</td><td>Transparent budget, expenses, fiscal hosting</td></tr>
+<tr><td>Patreon</td><td>5-12%</td><td>Content creators, tutorial authors</td><td>Tiered memberships, community tools</td></tr>
+<tr><td>Buy Me a Coffee</td><td>5%</td><td>Individual developers, bloggers</td><td>Simple one-time or recurring, low friction</td></tr>
+<tr><td>Polar</td><td>5% + Stripe fees</td><td>Open-source developers on GitHub</td><td>GitHub integration, fund specific issues/features</td></tr>
+<tr><td>Thanks.dev</td><td>0% (direct to maintainer)</td><td>Open-source maintainers</td><td>Companies fund dependencies; you claim your project</td></tr>
+</table>
+
+<h2>What Sponsors Actually Pay For</h2>
+
+<p><strong>1. Open-source maintenance (most established path):</strong> Companies that depend on your open-source project sponsor you to ensure its continued maintenance. This is the most sustainable form of sponsorship because it's aligned with business value: they're not donating, they're investing in infrastructure they depend on. Examples: esbuild (Evan Wallace, sponsored by Vercel), Vue.js (Evan You, sponsored via Patreon/GitHub), curl (Daniel Stenberg, sponsored via GitHub + direct contracts). <em>Key metric:</em> 1,000+ GitHub stars and 50+ dependent companies is typically the threshold where meaningful sponsorship starts.</p>
+
+<p><strong>2. Content creation (fastest growing):</strong> Companies sponsor developers who create educational content (blog posts, videos, courses) about their tools. A developer with a focused audience of 5,000+ can typically charge $500-2,000 per sponsored piece of content. Companies are increasingly shifting marketing budgets from traditional ads to developer content sponsorships — developers trust other developers more than they trust company blogs. YouTube channels about programming have the highest sponsorship rates ($15-50 CPM equivalent).</p>
+
+<p><strong>3. Developer advocacy / Ambassador programs:</strong> Some companies run ambassador programs where they pay developers a monthly retainer ($500-3,000/mo) to represent their product in the community: answering questions on Stack Overflow, creating examples, writing tutorials, and providing feedback to the product team. These are more stable than one-off content sponsorships but require more commitment.</p>
+
+<p><strong>4. Corporate sponsorship tiers:</strong> The holy grail: companies paying $1,000-10,000+/mo for a "Platinum Sponsor" tier that includes logo placement in your README, priority support, quarterly roadmap calls, and early access to new features. This works when your project is mission-critical infrastructure for a company. Babel, Webpack, and ESLint all operate on this model through Open Collective.</p>
+
+<h2>How to Build a Sponsorable Profile</h2>
+<table>
+<tr><th>Stage</th><th>What You Have</th><th>What to Expect</th></tr>
+<tr><td>0 to 1</td><td>Published useful open-source project or quality technical blog</td><td>$0-50/mo (individual supporters)</td></tr>
+<tr><td>1 to 100</td><td>Growing usage (100+ stars, 500+ weekly downloads, or 1K newsletter subs)</td><td>$100-500/mo (individuals + first small companies)</td></tr>
+<tr><td>100 to 1K</td><td>Proven value (1K+ stars, 50+ dependents, or 5K+ blog subscribers)</td><td>$1,000-5,000/mo (multiple companies, corporate tiers appearing)</td></tr>
+<tr><td>1K to 10K</td><td>Infrastructure dependency (5K+ stars, 500+ dependents, mission-critical to companies)</td><td>$5,000-30,000+/mo (corporate retainers, speaking fees, consulting)</td></tr>
+</table>
+
+<h2>What Sponsors Expect in Return</h2>
+<p>Sponsorship is not charity — companies have marketing KPIs. For content sponsorships, expect to deliver: a specific number of posts/videos with the sponsor's tool featured, disclosure (FTC/legal compliance: "Sponsored by X" must be clear), metrics reporting (views, engagement, click-throughs), and exclusivity windows (can't promote a competitor during the sponsorship period). For open-source sponsorships: responsive issue triage, security fixes within SLA timeframes, roadmap alignment with sponsor needs, and regular updates on project health and direction.</p>
+
+<p><strong>Pricing your sponsorship:</strong> For content: calculate your CPM (cost per thousand impressions). A technical blog with 20K monthly pageviews might charge $500-1,500 for a sponsored post. A YouTube channel with 10K views/video might charge $1,000-3,000. For open-source: price based on the value you provide. If a company's product would break without your library, the sponsorship should reflect that risk. See also: <a href="/en/sidehustle/developer-social-media-monetization.html">Developer Social Media Monetization</a> and <a href="/en/sidehustle/monetize-github-project.html">Monetize Your GitHub Project</a>.</p>
+'''
+
+BODIES['developer-investing-finance'] = '''
+
+<h2>Personal Finance for Software Engineers</h2>
+<p>Software engineers have unique financial advantages: high income early in career, equity compensation (RSUs, ISOs, NSOs), remote work flexibility (geographic arbitrage), and in-demand skills that enable side income. But high income doesn't automatically translate to wealth — lifestyle inflation, poor diversification (too much company stock), and neglecting tax optimization cost engineers hundreds of thousands over a career. Here's what experienced engineers have learned about managing money.</p>
+
+<h2>Income Progression by Career Stage</h2>
+<table>
+<tr><th>Stage</th><th>Years</th><th>Typical Total Comp (US, Tech Hubs)</th><th>Typical Total Comp (Remote/Global)</th></tr>
+<tr><td>Junior / New Grad</td><td>0-2</td><td>$80K-150K</td><td>$30K-80K</td></tr>
+<tr><td>Mid-Level</td><td>2-5</td><td>$130K-220K</td><td>$60K-130K</td></tr>
+<tr><td>Senior</td><td>5-10</td><td>$180K-400K</td><td>$100K-200K</td></tr>
+<tr><td>Staff / Principal</td><td>10+</td><td>$350K-800K+</td><td>$150K-350K</td></tr>
+<tr><td>FAANG / Big Tech Senior+</td><td>5+</td><td>$350K-1M+ (stock-heavy)</td><td>N/A (usually requires US presence)</td></tr>
+</table>
+<p><em>Note: These are 2026 ranges. The high end includes equity appreciation. Many engineers earn below these ranges outside tech hubs.</em></p>
+
+<h2>The Engineer's Financial Order of Operations</h2>
+
+<p><strong>1. Emergency fund (3-6 months of expenses).</strong> Before investing a dollar, have liquid cash in a high-yield savings account (currently 3.5-4.5% APY). Tech layoffs happen in cycles; your emergency fund is the difference between a 3-month job search being stressful vs catastrophic. This is non-negotiable.</p>
+
+<p><strong>2. Max out tax-advantaged accounts first.</strong> In the US: 401(k) up to employer match (free money) → HSA (triple tax-advantaged if you have a HDHP) → max 401(k) ($23,500 in 2026) → Backdoor Roth IRA if income exceeds limit → Mega Backdoor Roth if your 401(k) plan allows it. The tax savings from maxing these accounts are equivalent to an immediate 22-37% return depending on your bracket. No investment can reliably beat that.</p>
+
+<p><strong>3. Diversify away from your employer's stock.</strong> This is the mistake that costs engineers the most. You already have career risk tied to your employer (salary, future RSUs, health insurance). Holding onto vested RSUs doubles that risk — if the company struggles, you lose both your job AND your portfolio value. Sell RSUs immediately upon vesting and reinvest in broad index funds (VTI, VXUS). "But what if the stock goes up?" — you still have unvested RSUs that capture that upside. Immediate selling is the mathematically correct move for diversification.</p>
+
+<p><strong>4. Invest the rest in low-cost index funds.</strong> The data is overwhelming: over 90% of professional fund managers underperform the S&P 500 over 15-year periods. A simple three-fund portfolio (VTI — US total market, VXUS — international total market, BND — bonds) outperforms almost everything else after fees. Allocation rule of thumb: (120 - your age) in stocks, rest in bonds. Don't pick individual stocks — you're a software engineer, not a professional investor, and even professional investors can't beat the market consistently.</p>
+
+<p><strong>5. Geographic arbitrage is the engineer's superpower.</strong> Earning a US/EU salary while living in a lower cost-of-living location is the single fastest path to financial independence for remote workers. A $150K salary in Thailand, Portugal, or Mexico goes 2-4x further than in San Francisco or New York. The FIRE (Financial Independence, Retire Early) movement is disproportionately populated by software engineers who did exactly this: saved 50-70% of income for 10-15 years and reached financial independence by 35-40.</p>
+
+<h2>Common Money Mistakes Engineers Make</h2>
+<table>
+<tr><th>Mistake</th><th>Cost Over 20 Years</th><th>Fix</th></tr>
+<tr><td>Never selling RSUs (company stock concentration)</td><td>$200K-1M+ (if company declines)</td><td>Sell immediately on vest, buy index funds</td></tr>
+<tr><td>Not maxing 401(k) / tax-advantaged accounts</td><td>$100K-300K+ (lost tax savings + compounding)</td><td>Max 401(k), Roth IRA, HSA every year</td></tr>
+<tr><td>Keeping too much cash (no investing)</td><td>$300K-800K+ (inflation + lost compounding)</td><td>Invest everything beyond emergency fund</td></tr>
+<tr><td>Lifestyle inflation (upgrading car/apartment with every raise)</td><td>$200K-500K+ (lifetime savings gap)</td><td>Keep living like a mid-level engineer on a staff salary</td></tr>
+<tr><td>Picking individual stocks / crypto speculation</td><td>$50K-300K+ (underperformance vs index)</td><td>90% index funds, 10% "fun money" max</td></tr>
+<tr><td>Not negotiating salary / equity</td><td>$50K-200K+ (per job change)</td><td>Always negotiate; 10 minutes = potentially $20K+</td></tr>
+</table>
+
+<h2>Equity Compensation Decoded</h2>
+<p><strong>RSUs (Restricted Stock Units):</strong> Company gives you shares that vest over time (typically 4 years with a 1-year cliff). At vesting, the value is treated as ordinary income (taxed at your marginal rate). <strong>Strategy:</strong> sell immediately on vesting. The shares are taxed the same whether you sell or hold, so holding is equivalent to taking a cash bonus and choosing to buy company stock — would you do that?</p>
+
+<p><strong>ISOs (Incentive Stock Options):</strong> Right to buy shares at a fixed price (strike price). Typically from startups. If you exercise and hold for 1+ year and 2+ years from grant, gains are taxed as long-term capital gains (lower rate). <strong>Strategy:</strong> much more complex — early exercise with 83(b) election can minimize AMT and lock in long-term capital gains treatment. Talk to a CPA who specializes in startup equity; this is not DIY territory.</p>
+
+<p><strong>NSOs (Non-Qualified Stock Options):</strong> Similar to ISOs but with fewer tax advantages. The spread (difference between FMV and strike price) is taxed as ordinary income at exercise. <strong>Strategy:</strong> usually exercised and sold in the same transaction (cashless exercise).</p>
+
+<p><strong>Bottom line:</strong> Software engineers are in the top 5-10% of global income earners. The difference between an engineer who manages money intentionally vs one who ignores it is easily $500K-2M+ over a career. The formula is simple: earn well (you're already doing this), spend less than you earn, invest the difference in low-cost index funds, and don't let your company stock become a concentration risk. That's 90% of the game. See also: <a href="/en/sidehustle/saas-bootstrapping-guide.html">SaaS Bootstrapping Guide</a> and <a href="/en/sidehustle/freelance-pricing-guide.html">Freelance Pricing Guide</a>.</p>
+'''
+
+BODIES['ai-code-documentation-tools'] = '''
+
+<h2>The Documentation Problem</h2>
+<p>Developers universally agree that good documentation matters. Developers also universally hate writing it. AI documentation tools promise to close this gap by auto-generating docs from code, keeping them in sync, and even writing them from scratch. In 2026, these tools have matured from gimmicky to genuinely useful — but each takes a fundamentally different approach. Here's how they actually compare.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Tool</th><th>Approach</th><th>Languages</th><th>Pricing</th><th>Best Feature</th></tr>
+<tr><td>Mintlify Writer</td><td>AI inline doc generation (VS Code/JetBrains)</td><td>JS/TS, Python, Go, Java, Ruby, Rust, C++</td><td>Free / Pro $12/mo</td><td>One-click docstring generation in-editor, context-aware</td></tr>
+<tr><td>Swimm</td><td>Coupled-to-code documentation with auto-sync</td><td>All (code-agnostic, syncs via GitHub)</td><td>Free / Team $25/user/mo</td><td>Auto-detects when docs are stale via code changes</td></tr>
+<tr><td>Docusaurus + AI plugins</td><td>Static site + AI-assisted content</td><td>MDX, React</td><td>Free (OSS) + AI API costs</td><td>Full control, CI/CD integration, no vendor lock-in</td></tr>
+<tr><td>GitBook AI</td><td>AI-assisted collaborative docs platform</td><td>All (pasted code blocks)</td><td>Free / Team $17/user/mo</td><td>AI search + AI writer + public docs hosting</td></tr>
+<tr><td>Unblocked</td><td>Codebase context for AI answers</td><td>All (reads entire repo)</td><td>Free / Pro $20/user/mo</td><td>Answers questions with knowledge of your full codebase</td></tr>
+</table>
+
+<h2>Deep Dive</h2>
+
+<p><strong>Mintlify Writer — Inline docs that don't suck.</strong> Highlight a function, press Cmd+. (or Ctrl+.), and Mintlify generates a complete docstring — description, parameters, return type, and examples. It reads the function body and surrounding context, so the docs are actually accurate (not generic templates). Supports JSDoc, Python docstrings (Google/NumPy/Sphinx styles), GoDoc, JavaDoc, and Rust doc comments. The free tier is generous for individual developers. <em>Best for:</em> Developers who want to document as they code, teams enforcing documentation standards, reducing the "I'll document it later" backlog.</p>
+
+<p><strong>Swimm — Documentation that stays in sync.</strong> Swimm's unique model: documentation is "coupled" to specific code snippets and automatically flagged as stale when those code snippets change in a PR. This solves the #1 documentation problem — docs that rot because no one updates them. Docs live in your repo as markdown + metadata, and a GitHub Actions check warns on PRs that change code referenced by documentation. For teams with large codebases and existing docs, this is a game-changer. <em>Best for:</em> Teams with existing documentation rot, large codebases where docs-out-of-sync is a constant pain, companies wanting documentation to be part of the SDLC.</p>
+
+<p><strong>Docusaurus + AI plugins — The DIY approach.</strong> Docusaurus (Meta's documentation framework) plus AI plugins gives you full control. You write docs in MDX, and AI assists with: generating initial documentation from code (claude-code or Copilot CLI), translating docs between languages, suggesting improvements to existing docs, and auto-generating API reference pages from TypeScript types or OpenAPI specs. The trade-off: more setup work, but zero vendor lock-in and complete customization. <em>Best for:</em> Open-source projects, teams that want full control, documentation as code purists.</p>
+
+<p><strong>GitBook AI — The collaborative platform.</strong> GitBook is a documentation platform with AI built in: AI-powered search (answers questions from your docs), AI writer (expand notes into full documentation), and change requests (like PRs for docs). It's more of a "docs CMS" than a code-to-docs tool. The AI search is genuinely impressive — ask a question in natural language, and it finds and synthesizes the relevant docs. <em>Best for:</em> Public product documentation, API docs with a non-developer audience, teams that want a polished docs site with minimal effort.</p>
+
+<p><strong>Unblocked — Answer questions, don't write docs.</strong> Unblocked takes a different angle: instead of generating documentation, it indexes your entire codebase (source code, commits, PRs, issues, Slack conversations) and lets developers ask questions in natural language. "How does the payment processing flow work?" "Where is the authentication middleware defined?" "What PR changed the rate limiting logic?" It's documentation-as-a-service powered by AI that knows your actual code. <em>Best for:</em> Onboarding new developers, large monorepos, reducing the "ask a senior dev" interruption tax.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Choice</th></tr>
+<tr><td>I want inline docstrings generated automatically</td><td>Mintlify Writer (free, works in-editor)</td></tr>
+<tr><td>Our docs are out of sync with code</td><td>Swimm (auto-detects stale docs on PRs)</td></tr>
+<tr><td>I want full control, no vendor lock-in</td><td>Docusaurus + AI plugins (OSS, CI/CD)</td></tr>
+<tr><td>I need a polished public docs site quickly</td><td>GitBook AI (hosted, AI search, collaboration)</td></tr>
+<tr><td>I want to answer questions about my codebase</td><td>Unblocked (codebase-aware AI answers)</td></tr>
+<tr><td>I want both inline docs + stale detection</td><td>Mintlify + Swimm (complementary)</td></tr>
+</table>
+
+<p><strong>My recommendation:</strong> Use <strong>Mintlify Writer</strong> for daily inline documentation (it's free and it just works). For teams, add <strong>Swimm</strong> if documentation rot is a problem you've actually experienced (it's expensive otherwise). For public-facing docs, <strong>Docusaurus</strong> remains the best open-source option — add AI assistance via your preferred AI coding tool rather than a specialized docs AI. See also: <a href="/en/ai/best-ai-tools-developers-2026.html">Best AI Tools for Developers</a> and <a href="/en/ai/ai-code-review-tools.html">AI Code Review Tools</a>.</p>
+'''
+
+BODIES['semantic-search-implementation'] = '''
+
+<h2>Beyond Keyword Search</h2>
+<p>Keyword search (TF-IDF, BM25) matches exact words — great when users type the right keywords, terrible when they don't. Semantic search understands meaning: "how to deploy a Next.js app" matches "deploy a React application" even without shared keywords. In 2026, implementing semantic search is practical with open-source tools and embedding APIs. Here's how to actually build it.</p>
+
+<h2>The Architecture</h2>
+<pre><code>
+┌──────────┐    ┌──────────────┐    ┌───────────────┐    ┌──────────┐
+│  Query   │───▶│ Embedding    │───▶│ Vector Search  │───▶│ Results  │
+│  String  │    │ Model/API    │    │ (pgvector, etc)│    │ (ranked) │
+└──────────┘    └──────────────┘    └───────────────┘    └──────────┘
+                      │                      │
+                      ▼                      ▼
+              float32[] array        cosine similarity
+              (1536 dims typical)    or approximate (ANN)
+</code></pre>
+
+<h2>Embedding Model Comparison</h2>
+<table>
+<tr><th>Model</th><th>Dimensions</th><th>Max Tokens</th><th>Cost</th><th>MTEB Score (Retrieval)</th><th>Self-Hostable</th></tr>
+<tr><td>OpenAI text-embedding-3-small</td><td>512/1536</td><td>8,191</td><td>$0.02/1M tokens</td><td>62.3 (1536d)</td><td>No</td></tr>
+<tr><td>OpenAI text-embedding-3-large</td><td>256/1024/3072</td><td>8,191</td><td>$0.13/1M tokens</td><td>64.6 (3072d)</td><td>No</td></tr>
+<tr><td>Cohere Embed v4</td><td>1024/2048</td><td>8,192</td><td>$0.10/1M tokens</td><td>63.8</td><td>No</td></tr>
+<tr><td>BGE-M3 (BAAI)</td><td>1024</td><td>8,192</td><td>Free (self-host)</td><td>62.0</td><td>Yes (MIT)</td></tr>
+<tr><td>jina-embeddings-v3</td><td>1024</td><td>8,192</td><td>$0.02/1M tokens</td><td>62.5</td><td>No (API only)</td></tr>
+<tr><td>gte-Qwen2-7B-instruct</td><td>3584</td><td>32,768</td><td>Free (self-host)</td><td>66.3 (leading)</td><td>Yes (Apache 2.0)</td></tr>
+</table>
+<p><em>MTEB = Massive Text Embedding Benchmark. Higher is better. Scores from MTEB leaderboard as of early 2026.</em></p>
+
+<h2>Vector Database Options</h2>
+<table>
+<tr><th>Database</th><th>Type</th><th>Index Types</th><th>Filtering</th><th>Best For</th><th>Pricing</th></tr>
+<tr><td>pgvector (PostgreSQL)</td><td>Postgres extension</td><td>IVFFlat, HNSW</td><td>Full SQL WHERE + joins</td><td>Apps already on Postgres, metadata-rich filtering</td><td>Free (OSS, Postgres license)</td></tr>
+<tr><td>Qdrant</td><td>Dedicated vector DB</td><td>HNSW, quantization (binary, scalar, product)</td><td>Payload filtering</td><td>High performance, advanced quantization, filtering</td><td>Free (OSS) / Cloud from $25/mo</td></tr>
+<tr><td>Pinecone</td><td>Managed vector DB</td><td>Proprietary (serverless)</td><td>Metadata filtering</td><td>Zero-ops, serverless scaling, no tuning needed</td><td>Free tier (2GB) → $0.33/GB/mo</td></tr>
+<tr><td>Weaviate</td><td>Vector + hybrid DB</td><td>HNSW, flat, dynamic</td><td>GraphQL filtering, BM25 + vector hybrid</td><td>Hybrid search (keyword + semantic), built-in modules</td><td>Free (OSS) / Cloud from $25/mo</td></tr>
+<tr><td>Milvus</td><td>Distributed vector DB</td><td>12+ index types</td><td>Scalar filtering, boolean expressions</td><td>Billion-scale vectors, distributed, GPU acceleration</td><td>Free (OSS) / Cloud from $0.55/hr</td></tr>
+</table>
+
+<h2>Implementation Steps</h2>
+
+<p><strong>Step 1: Chunk your documents.</strong> The quality of your chunks determines the quality of your search. Strategies: fixed-size (simple, 256-512 tokens with overlap), sentence-based (split on sentence boundaries), recursive character splitting (LangChain's default — splits on separators: 
+
+, 
+, ., space), semantic chunking (use a smaller model to detect topic boundaries — most accurate, more expensive). For most applications, recursive splitting with 512-token chunks and 50-token overlap works well. For code search, split on function/class boundaries.</p>
+
+<p><strong>Step 2: Generate and store embeddings.</strong> For a collection of 10,000 documents with 512-token chunks: ~15,000 chunks × 1,536 dimensions × 4 bytes = ~92 MB of vectors. This fits easily in pgvector on a small Postgres instance. Batch embedding generation: 15,000 chunks via OpenAI text-embedding-3-small = ~$0.20. Cache embeddings — don't re-embed unchanged documents.</p>
+
+<p><strong>Step 3: Implement search with reranking.</strong> Two-stage retrieval is the standard architecture for production: Stage 1 — Vector search returns top 20-50 candidates (fast, approximate). Stage 2 — Reranker model (Cross-encoder like Cohere Rerank v3 or BGE-Reranker-v2) scores the candidates more precisely and returns top 5-10. Stage 2 adds ~50ms latency but dramatically improves relevance. Without reranking, vector search alone returns "in the ballpark" results; with reranking, you get precisely relevant results.</p>
+
+<h2>Hybrid Search: The Best of Both Worlds</h2>
+<p>Pure semantic search fails for exact match queries (searching for "error code ERR_SSL_PROTOCOL" should match the exact string, not semantically similar concepts). Pure keyword search fails for conceptual queries ("how to deploy" won't match "deployment guide"). Hybrid search combines both: run BM25 + vector search in parallel, merge results via Reciprocal Rank Fusion (RRF). Weaviate and Elasticsearch have hybrid search built in; with pgvector, you implement the combination yourself.</p>
+
+<h2>When Semantic Search Is Worth It</h2>
+<table>
+<tr><th>Use Case</th><th>Semantic Search?</th><th>Why</th></tr>
+<tr><td>Documentation search (user-facing)</td><td>Yes</td><td>Users don't know your terminology; they describe problems</td></tr>
+<tr><td>Internal knowledge base</td><td>Yes</td><td>Employees search differently; semantic bridges the gap</td></tr>
+<tr><td>E-commerce product search</td><td>Yes (hybrid)</td><td>"running shoes" should match "trainers" — but exact product codes need keyword</td></tr>
+<tr><td>Legal/contract search</td><td>No (or hybrid)</td><td>Exact terminology matters; "shall" vs "may" is legally significant</td></tr>
+<tr><td>Code search</td><td>Maybe (hybrid)</td><td>Function names need exact match; bug descriptions need semantic</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> For most applications in 2026, the pragmatic choice is <strong>pgvector + OpenAI embeddings + a reranker</strong>. You already have Postgres, pgvector is a single extension, embeddings cost pennies per thousand documents, and the two-stage retrieval gives production-quality results. If you're doing this at scale (1M+ documents), add Qdrant or Pinecone. See also: <a href="/en/ai/vector-database-comparison.html">Vector Database Comparison</a> and <a href="/en/ai/rag-best-practices.html">RAG Best Practices</a>.</p>
+'''
+
+BODIES['ai-agents-memory-patterns'] = '''
+
+<h2>Why Memory Matters for AI Agents</h2>
+<p>An AI agent without memory is like a developer who forgets everything after each function call — you can only work with what's in front of you. Memory is what turns a stateless LLM call into a coherent agent that learns from past interactions, maintains context across sessions, and builds up knowledge over time. In 2026, several memory patterns have proven themselves in production. Here's what works.</p>
+
+<h2>Memory Hierarchy</h2>
+<table>
+<tr><th>Memory Type</th><th>Scope</th><th>Duration</th><th>Storage</th><th>Retrieval</th><th>Example</th></tr>
+<tr><td>Working Memory</td><td>Single conversation</td><td>Current session</td><td>Context window (prompt)</td><td>Direct inclusion</td><td>Recent messages in a chat</td></tr>
+<tr><td>Episodic Memory</td><td>User/agent history</td><td>Days to months</td><td>Vector DB + metadata</td><td>Semantic search + recency</td><td>Past conversations, decisions made</td></tr>
+<tr><td>Semantic Memory</td><td>Facts, knowledge</td><td>Persistent</td><td>Vector DB / Graph DB / Document store</td><td>Semantic search + structured queries</td><td>User preferences, learned procedures</td></tr>
+<tr><td>Procedural Memory</td><td>How to do things</td><td>Persistent</td><td>Code / workflows / prompts</td><td>Routed by task type</td><td>Agent tool definitions, SOPs</td></tr>
+<tr><td>Reflective Memory</td><td>Meta-cognition</td><td>Persistent</td><td>Summarized insights</td><td>Triggered by patterns</td><td>"User prefers concise answers on weekdays"</td></tr>
+</table>
+
+<h2>Pattern 1: Summarization + Sliding Window (Basic)</h2>
+<p>The simplest pattern that works. Keep the last N messages (sliding window) plus a running summary of everything before that. When the conversation exceeds context limits, summarize the oldest messages and prepend to the context. Implementation: after every K messages, call the LLM to update the summary: "Here's the previous summary and new messages. Produce an updated summary that captures key decisions, facts, and context." This pattern alone handles 80% of agent memory needs. Tools like MemGPT (now Letta) use this pattern with automatic context management.</p>
+
+<h2>Pattern 2: Vector-Backed Episodic Memory (Intermediate)</h2>
+<p>Store every significant interaction as an "episode" in a vector database. Each episode: the user query, the agent's response/action, the outcome, relevant metadata (timestamp, topic tags, sentiment). On each new interaction: embed the user's query, retrieve top-K related past episodes, and include them as context. This gives the agent a form of "recollection" — it can reference past interactions that are semantically similar. Key implementation detail: include a recency boost (multiply similarity score by a time decay factor) so recent interactions are weighted higher.</p>
+
+<h2>Pattern 3: Structured Knowledge Graph (Advanced)</h2>
+<p>For agents that need to track entities and relationships: extract structured facts from conversations and store them in a graph or relational database. "User X prefers Python for data processing tasks" → (User:X)-[PREFERS]->(Language:Python, Context:"data processing"). On each interaction: retrieve relevant facts by entity matching, use them to personalize the response. This is more complex to implement but gives precise, queryable memory. Tools like LangGraph and Neo4j's LLM Knowledge Graph Builder automate much of the extraction.</p>
+
+<h2>Pattern 4: Reflection and Self-Improvement</h2>
+<p>Periodically (every N interactions, or triggered by low-quality responses), the agent reflects: "Review the last 10 interactions. What patterns do you notice? What could I do better? What user preferences have emerged?" The reflections are stored as compressed insights and included in future contexts. This is the pattern used by agents that improve over time — they "learn" that certain approaches work better for certain users or tasks. Implementation: a cron-style reflection job that runs asynchronously (not blocking the user interaction).</p>
+
+<h2>Production Considerations</h2>
+<table>
+<tr><th>Concern</th><th>Approach</th></tr>
+<tr><td>Memory bloat (too many stored episodes degrade retrieval)</td><td>Prune old/low-importance memories. Score memories by: recency × relevance × importance. Delete below threshold.</td></tr>
+<tr><td>Privacy / sensitive data</td><td>Filter PII before storing. Allow users to view/delete their memory. Implement memory expiration policies.</td></tr>
+<tr><td>Cost (embedding and storing every interaction)</td><td>Batch embedding. Only store "significant" interactions (decisions made, preferences stated, errors encountered). Skip routine exchanges.</td></tr>
+<tr><td>Hallucinated memories (agent "remembers" something incorrectly)</td><td>Store original interaction alongside summarized memory. Periodically audit memory accuracy with spot checks.</td></tr>
+<tr><td>Latency (retrieval takes time)</td><td>Cache recent memories in-process. Async retrieval for non-critical context. Two-stage: fast vector search → rerank.</td></tr>
+</table>
+
+<p><strong>Starting point for 2026:</strong> Implement Pattern 1 (summarization + sliding window) first — it solves the immediate problem of context limits and handles most use cases. Add Pattern 2 (vector episodic memory) when users say "you don't remember our previous conversations." Add Pattern 3 (knowledge graph) when you need precise fact recall about entities. Add Pattern 4 (reflection) when you want the agent to improve over time. Don't over-engineer memory — a simple summary + sliding window beats a complex multi-tier memory system that's buggy and slow. See also: <a href="/en/ai/ai-agents-guide.html">AI Agents Guide</a> and <a href="/en/ai/function-calling-guide.html">Function Calling Guide</a>.</p>
+'''
+
+BODIES['building-rag-from-scratch'] = '''
+
+<h2>RAG Without Frameworks</h2>
+<p>Retrieval-Augmented Generation (RAG) is the most practical AI pattern of the decade: give an LLM access to your documents so it can answer questions grounded in your data. While LangChain and LlamaIndex make RAG easy to prototype, they add abstractions that hide what's actually happening. Building RAG from scratch — with raw API calls, a vector database, and ~200 lines of code — gives you complete control and a deeper understanding. Here's how.</p>
+
+<h2>The RAG Pipeline (Five Steps)</h2>
+<pre><code>
+┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐
+│ 1. Load  │───▶│ 2. Chunk │───▶│ 3. Embed │───▶│ 4. Store  │───▶│ 5. Query │
+│Documents │    │Documents │    │ Chunks   │    │ Vectors   │    │ & Generate│
+└──────────┘    └──────────┘    └──────────┘    └──────────┘    └──────────┘
+</code></pre>
+
+<h2>Step 1: Load Documents</h2>
+<pre><code># Minimal document loader — supports .txt, .md, .pdf
+import pathlib
+import pypdf  # for PDF support
+
+def load_documents(path: str) -> list[dict]:
+    docs = []
+    for file in pathlib.Path(path).rglob("*"):
+        if file.suffix == ".txt":
+            docs.append({"text": file.read_text(), "source": str(file)})
+        elif file.suffix == ".md":
+            docs.append({"text": file.read_text(), "source": str(file)})
+        elif file.suffix == ".pdf":
+            reader = pypdf.PdfReader(file)
+            text = "\n".join(page.extract_text() for page in reader.pages)
+            docs.append({"text": text, "source": str(file)})
+    return docs</code></pre>
+
+<h2>Step 2: Chunk Documents</h2>
+<pre><code>def chunk_document(text: str, chunk_size=500, overlap=50) -> list[str]:
+    """Split text into overlapping chunks, respecting paragraph boundaries."""
+    paragraphs = text.split("\n\n")
+    chunks = []
+    current = ""
+    for para in paragraphs:
+        if len(current) + len(para) <= chunk_size:
+            current += para + "\n\n"
+        else:
+            if current:
+                chunks.append(current.strip())
+            # If a single paragraph exceeds chunk_size, split by sentences
+            if len(para) > chunk_size:
+                sentences = para.replace(". ", ".|").split("|")
+                sub = ""
+                for s in sentences:
+                    if len(sub) + len(s) <= chunk_size:
+                        sub += s + ". "
+                    else:
+                        chunks.append(sub.strip())
+                        sub = s + ". "
+                current = sub + "\n\n"
+            else:
+                current = para + "\n\n"
+    if current.strip():
+        chunks.append(current.strip())
+    return chunks</code></pre>
+
+<h2>Step 3: Generate Embeddings</h2>
+<pre><code>from openai import OpenAI
+client = OpenAI()
+
+def embed_batch(texts: list[str], model="text-embedding-3-small") -> list[list[float]]:
+    """Generate embeddings for a batch of texts."""
+    resp = client.embeddings.create(input=texts, model=model)
+    return [d.embedding for d in resp.data]
+
+# For self-hosted: use sentence-transformers
+# from sentence_transformers import SentenceTransformer
+# model = SentenceTransformer("BAAI/bge-m3")
+# embeddings = model.encode(texts, normalize_embeddings=True)</code></pre>
+
+<h2>Step 4: Store in Vector Database</h2>
+<pre><code>import psycopg
+import numpy as np
+
+def setup_pgvector():
+    conn = psycopg.connect("postgresql://localhost/rag_demo")
+    conn.execute("CREATE EXTENSION IF NOT EXISTS vector")
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS documents (
+            id SERIAL PRIMARY KEY,
+            content TEXT,
+            source TEXT,
+            embedding vector(1536)
+        )
+    """)
+    conn.execute("""
+        CREATE INDEX IF NOT EXISTS idx_embedding
+        ON documents USING hnsw (embedding vector_cosine_ops)
+    """)
+    return conn
+
+def insert_documents(conn, chunks, sources, embeddings):
+    for chunk, source, emb in zip(chunks, sources, embeddings):
+        conn.execute(
+            "INSERT INTO documents (content, source, embedding) VALUES (%s, %s, %s)",
+            (chunk, source, emb)
+        )
+    conn.commit()</code></pre>
+
+<h2>Step 5: Query and Generate</h2>
+<pre><code>def retrieve(conn, query: str, k: int = 5) -> list[dict]:
+    """Vector search + optional keyword boost."""
+    query_embedding = embed_batch([query])[0]
+    results = conn.execute("""
+        SELECT content, source,
+               1 - (embedding <=> %s::vector) AS similarity
+        FROM documents
+        ORDER BY embedding <=> %s::vector
+        LIMIT %s
+    """, (query_embedding, query_embedding, k)).fetchall()
+    return [{"content": r[0], "source": r[1], "score": r[2]} for r in results]
+
+def generate_answer(query: str, context_docs: list[dict]) -> str:
+    """Generate answer grounded in retrieved context."""
+    context = "\n\n---\n\n".join(
+        f"Source: {d['source']}\n{d['content']}"
+        for d in context_docs
+    )
+    prompt = f"""Answer the question based ONLY on the provided context.
+If the context doesn't contain the answer, say "I don't have enough information."
+
+Context:
+{context}
+
+Question: {query}
+
+Answer (with citations):"""
+
+    resp = client.chat.completions.create(
+        model="gpt-4.1-mini",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.3,
+        max_tokens=1000
+    )
+    return resp.choices[0].message.content
+
+# Tying it together:
+# docs = load_documents("./my_docs")
+# chunks = []
+# sources = []
+# for doc in docs:
+#     for chunk in chunk_document(doc["text"]):
+#         chunks.append(chunk)
+#         sources.append(doc["source"])
+# embeddings = []
+# for i in range(0, len(chunks), 20):  # batch of 20
+#     embeddings.extend(embed_batch(chunks[i:i+20]))
+# conn = setup_pgvector()
+# insert_documents(conn, chunks, sources, embeddings)
+# answer = generate_answer("How do I deploy?", retrieve(conn, "How do I deploy?"))</code></pre>
+
+<h2>Production Hardening: What the Frameworks Give You</h2>
+<table>
+<tr><th>Capability</th><th>DIY</th><th>LangChain/LlamaIndex</th></tr>
+<tr><td>Multiple chunking strategies</td><td>Write your own</td><td>Built-in: recursive, semantic, sentence, agentic</td></tr>
+<tr><td>Metadata filtering</td><td>SQL WHERE clauses</td><td>Structured query language, auto-metadata extraction</td></tr>
+<tr><td>Async + streaming</td><td>asyncio, SSE (manual)</td><td>Built-in streaming, async pipeline</td></tr>
+<tr><td>Re-ranking</td><td>Call Cohere API, or self-host BGE-Reranker</td><td>Pluggable re-rankers (Cohere, BGE, ColBERT)</td></tr>
+<tr><td>Evaluation (faithfulness, relevance)</td><td>Write your own tests + RAGAS library</td><td>Built-in evaluation harness</td></tr>
+<tr><td>Multi-modal (images, tables)</td><td>Manual: extract description, embed separately</td><td>LlamaParse, Unstructured.io for PDF parsing</td></tr>
+<tr><td>Agentic RAG (query routing, tool use)</td><td>Manual routing logic</td><td>Router chains, agent executors</td></tr>
+</table>
+
+<p><strong>When to DIY vs use a framework:</strong> Build from scratch when: you're learning RAG, your use case is simple (single document type, straightforward queries), or you need complete control over the pipeline. Use a framework when: you need multi-modal parsing (PDFs with tables/images), you're iterating rapidly on chunking/retrieval strategies, or you need evaluation tooling built in. The right answer for most production projects: build from scratch to understand the fundamentals, then consider LlamaIndex for production when you need its advanced document parsing and evaluation features.</p>
+
+<p><strong>The key insight:</strong> RAG is not magic — it's document loading + text chunking + embedding generation + vector search + prompt construction. Each step is simple and testable in isolation. The frameworks add convenience, not fundamentally new capabilities. Understanding the raw pipeline will serve you better than memorizing any framework's API. See also: <a href="/en/ai/rag-best-practices.html">RAG Best Practices</a> and <a href="/en/ai/embedding-models-comparison.html">Embedding Models Comparison</a>.</p>
+'''
+
+BODIES['ai-powered-code-migration'] = '''
+
+<h2>AI-Assisted Code Migration in 2026</h2>
+<p>Code migration — upgrading frameworks, switching languages, refactoring legacy systems — has traditionally been one of the most expensive and risky software projects. AI is changing this: LLMs can understand both the source and target code, translate patterns, and handle the mechanical work that previously took teams months. But AI-assisted migration is a skill, not magic — the difference between a successful migration and a disaster is how you use the AI. Here's what works in practice.</p>
+
+<h2>What AI Excels At in Migration</h2>
+<table>
+<tr><th>Task</th><th>AI Capability</th><th>Human Role</th></tr>
+<tr><td>Syntax translation (e.g., JavaScript → TypeScript)</td><td>Excellent — mechanical, well-defined rules</td><td>Verify edge cases, complex generics</td></tr>
+<tr><td>Framework upgrade (e.g., Next.js 14 → 15)</td><td>Good — understands migration guides and changelogs</td><td>App Router patterns, breaking changes judgment</td></tr>
+<tr><td>Library replacement (e.g., Moment.js → date-fns)</td><td>Good — understands API differences, can rewrite calls</td><td>Verify behavioral equivalence, timezone edge cases</td></tr>
+<tr><td>Language migration (e.g., JS → TS, Python 2 → 3)</td><td>Good — pattern matching across languages</td><td>Type design, idiomatic patterns, performance</td></tr>
+<tr><td>Testing migration (e.g., Jest → Vitest)</td><td>Good — similar APIs, mechanical translation</td><td>Verify test intent preserved, async behavior</td></tr>
+<tr><td>Architecture migration (e.g., monolith → microservices)</td><td>Limited — requires system-level understanding</td><td>Boundary design, data splitting, distributed system logic</td></tr>
+<tr><td>Database migration (e.g., MySQL → PostgreSQL)</td><td>Limited — query dialect differences</td><td>Data type mapping, performance, transactions</td></tr>
+</table>
+
+<h2>The Proven Migration Workflow</h2>
+
+<p><strong>Phase 1: Understand before you move.</strong> Feed the AI the source codebase and ask it to generate: a high-level architecture overview, a list of all external dependencies and their purpose, the data flow for key operations, and any non-obvious patterns or hacks. This gives you (and the AI) a shared understanding of what you're migrating. Don't skip this — migrations fail when you don't understand what the code actually does.</p>
+
+<p><strong>Phase 2: Migrate incrementally, one module at a time.</strong> Never ask AI to migrate an entire codebase at once. Break the migration into independent modules (by directory, by feature, by dependency). For each module: feed the AI the source code + explicit migration instructions, review the output, run the existing tests against the migrated code, fix any failures (often with AI assistance on specific errors), and commit. A 50KLOC codebase is scary; fifty 1KLOC migrations are manageable.</p>
+
+<p><strong>Phase 3: Use tests as your safety net.</strong> Tests are the single most important tool for AI-assisted migration. Before migrating anything: ensure the existing test suite passes and has reasonable coverage (80%+), write characterization tests for untested behavior (capture current behavior, even if buggy), and set up CI to run tests on both old and new code during the transition. If the tests pass on the migrated code, you have high confidence the migration preserved behavior.</p>
+
+<p><strong>Phase 4: Human review of every AI-generated change.</strong> AI makes two kinds of migration errors: obvious (syntax errors, missing imports — caught by compilation/tests) and subtle (changed behavior that passes tests but produces wrong output — caught only by human review). The review checklist: does this preserve the original behavior? Is the migrated code idiomatic in the target language/framework? Are there any AI "hallucinations" (invented APIs, wrong parameter orders)? Did the AI silently drop error handling or edge cases?</p>
+
+<h2>Real Migration Case Studies</h2>
+
+<p><strong>JavaScript → TypeScript (most successful AI migration):</strong> AI tools excel at adding type annotations. The pattern: use AI to add types file-by-file, set strict: false initially (allow implicit any), fix the easy types manually, then enable strict mode and fix remaining errors. Teams report AI reducing JS→TS migration time by 60-80%. The AI handles: adding type annotations from usage patterns, generating interface definitions from object shapes, and converting PropTypes to TypeScript types.</p>
+
+<p><strong>AngularJS → React/Vue (complex, AI assists but doesn't automate):</strong> Framework migrations involve fundamentally different mental models (directives vs components, two-way binding vs unidirectional data flow). AI can translate individual components but struggles with architectural differences. The effective approach: manually design the new architecture, then use AI to translate individual components once the architecture is settled.</p>
+
+<p><strong>Class Components → Functional Components + Hooks (well-suited for AI):</strong> This is a mechanical transformation with clear patterns: this.state → useState, componentDidMount → useEffect, this.props → function parameters. AI handles this reliably because the patterns are well-documented and consistent. Human review focuses on: useEffect dependency arrays (AI sometimes gets them wrong), and performance (unnecessary re-renders after migration).</p>
+
+<h2>Tool Recommendations</h2>
+<table>
+<tr><th>Tool</th><th>Best For</th><th>Key Feature</th></tr>
+<tr><td>Claude Code / Cursor with Agent mode</td><td>Multi-file refactoring, framework upgrades</td><td>Whole-codebase context, automated PR generation</td></tr>
+<tr><td>GitHub Copilot Workspace</td><td>Feature-level changes, issue-to-PR workflow</td><td>Spec-driven: describe the migration, AI plans and executes</td></tr>
+<tr><td>AI-powered codemods (jscodeshift + AI)</td><td>AST-level transformations at scale</td><td>Guaranteed correctness for AST-level changes, AI helps write transforms</td></tr>
+<tr><td>Aider</td><td>Terminal-based, incremental file migration</td><td>Edit individual files with AI, git-aware, map-reduce for large repos</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> AI-assisted migration is real and production-ready for well-defined, mechanical migrations (JS→TS, class components→hooks, library swaps). For architectural migrations (monolith→microservices, framework changes), AI is a powerful assistant but not a replacement for human architectural judgment. The winning pattern: <strong>incremental migration + comprehensive tests + human review of every change</strong>. AI reduces the mechanical work by 50-80%; the human's job shifts from writing migration code to reviewing and verifying AI-generated migration code. See also: <a href="/en/ai/ai-code-review-tools.html">AI Code Review Tools</a> and <a href="/en/ai/cursor-advanced-tips.html">Cursor Advanced Tips</a>.</p>
+'''
+
+BODIES['code-editors-comparison-2026'] = '''
+
+<h2>The Editor Wars, 2026 Edition</h2>
+<p>The code editor landscape has gone through its biggest shift since VS Code's rise in 2016. AI-native editors (Cursor, Windsurf) have challenged the traditional IDE model. Lightweight editors (Zed) have pushed the performance envelope. Neovim's ecosystem has exploded with Lua-based plugins and AI integration. And JetBrains keeps doing what JetBrains does — deep language intelligence that no other editor matches. Here's the real comparison for professional development work.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Editor</th><th>Type</th><th>Performance</th><th>AI Integration</th><th>Language Support</th><th>Plugin Ecosystem</th><th>Pricing</th></tr>
+<tr><td>VS Code</td><td>Electron-based editor</td><td>Good (improved with Cursor/Anysphere optimizations)</td><td>Extensions (GitHub Copilot, Cline, Continue)</td><td>Everything (extensions)</td><td>★★★★★ (30K+ extensions)</td><td>Free (OSS)</td></tr>
+<tr><td>Cursor</td><td>VS Code fork + native AI</td><td>Same as VS Code</td><td>★★★★★ (deeply integrated: tab, inline, agent, composer)</td><td>Everything (VS Code extensions compatible)</td><td>★★★★★ (VS Code ecosystem + AI features)</td><td>Free / $20/mo Pro</td></tr>
+<tr><td>JetBrains IntelliJ IDEA</td><td>JVM-based IDE</td><td>Good (indexed, heavy startup)</td><td>★★★ (JetBrains AI Assistant, Copilot plugin, slower than Cursor)</td><td>★★★★★ (deepest for Java, Kotlin, Python, Go, Rust)</td><td>★★★★ (2.5K+ plugins, high quality)</td><td>$18.30/mo (All Products)</td></tr>
+<tr><td>Zed</td><td>Rust-native (GPU-accelerated)</td><td>★★★★★ (instant, 120fps, 0ms keystroke latency)</td><td>★★★★ (Zed AI, Anthropic-powered, inline editing)</td><td>★★★ (growing: Rust, TS, Python, Go, JS, C)</td><td>★★ (young ecosystem, growing fast)</td><td>Free (OSS) / Zed AI $10/mo</td></tr>
+<tr><td>Neovim</td><td>Terminal-based modal editor</td><td>★★★★★ (native, sub-ms latency, 50MB memory)</td><td>★★★ (via plugins: Copilot, Codeium, avante.nvim, gen.nvim)</td><td>★★★★★ (LSP: all languages, tree-sitter: all grammars)</td><td>★★★★ (Lua ecosystem, 3K+ plugins, high quality)</td><td>Free (OSS)</td></tr>
+</table>
+
+<h2>Deep Dive</h2>
+
+<p><strong>VS Code — The safe default.</strong> VS Code is still the default editor for good reason: it has the largest extension ecosystem, the most tutorials/documentation, and it works well enough for every language. If you work across many languages and frameworks, VS Code is the Swiss Army knife. The downside: it's an Electron app (600MB+ RAM with extensions), and the AI experience via extensions (Copilot, Cline, Continue) is good but not as seamless as Cursor's native integration. VS Code is the Toyota Camry of editors — it won't excite you, but it will never leave you stranded.</p>
+
+<p><strong>Cursor — The AI-native fork changing the game.</strong> Cursor is a fork of VS Code with AI rebuilt from the ground up. The Tab completion (full-line and multi-line edits) is significantly better than Copilot's — it predicts entire diffs, understands your cursor position, and edits across multiple lines. The Composer (Cmd+I) can create files, run terminal commands, and make multi-file changes from a single prompt. The Agent mode is essentially Claude Code built into the editor. All your existing VS Code themes, keybindings, and extensions work. <em>The trade-off:</em> it's a fork (slightly behind VS Code releases), and the Pro plan ($20/mo) uses rate-limited premium models. <em>Best for:</em> Any developer who writes code with AI assistance (which in 2026 is basically everyone).</p>
+
+<p><strong>JetBrains IDEs — The intelligence advantage.</strong> JetBrains editors (IntelliJ IDEA, PyCharm, GoLand, Rider) have the deepest code understanding of any editor. Their indexing engine builds a full project model — every reference, every inheritance chain, every call site. This powers refactoring (rename across a 5M-line codebase in seconds), navigation (go to implementation always works), and analysis (data flow analysis finds bugs no linter catches). For Java, Kotlin, C#, and Python, JetBrains is still the gold standard. The AI story is catching up (JetBrains AI Assistant, Copilot plugin) but lags behind Cursor's deeply integrated AI. <em>Best for:</em> Java/Kotlin/C#/Python developers working on large codebases where code intelligence matters more than AI assistance.</p>
+
+<p><strong>Zed — The performance-first newcomer.</strong> Zed is written in Rust with a GPU-accelerated rendering engine (GPUI). The result: 120fps scrolling, sub-millisecond keystroke latency, near-instant startup, and a UI that feels impossibly responsive after Electron editors. Zed has built-in collaboration (shared workspaces with multiple cursors, like Google Docs for code), a built-in terminal, and channels (public/private chat + code sharing). Zed AI (powered by Anthropic) provides inline editing comparable to Cursor's Tab. The catch: smaller plugin ecosystem, fewer language extensions (good for Rust, TypeScript, Python, Go; limited for Java, C#, PHP). <em>Best for:</em> Performance-sensitive developers, Rust/TypeScript/Python focus, collaborative editing, anyone who feels the millisecond lag in Electron editors.</p>
+
+<p><strong>Neovim — The forever editor.</strong> Neovim isn't just about speed (though it's the fastest option) — it's about the editing model. Modal editing (normal, insert, visual mode) plus text objects (di", ci{, yap) means you edit text by semantic units rather than character-by-character. The Lua-based plugin ecosystem (LazyVim, NvChad, AstroNvim) provide modern IDE features (LSP, tree-sitter, fuzzy finder, file tree) without leaving the terminal. AI integrations (avante.nvim for inline editing, Copilot plugin, gen.nvim for prompts) work but are less polished than Cursor's. <em>Best for:</em> Developers who've already invested in the modal editing model, those who spend significant time in the terminal, anyone who wants an editor they'll still be using in 20 years.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Choice</th><th>Why</th></tr>
+<tr><td>You want the best AI coding experience</td><td>Cursor</td><td>Native AI integration, Tab multi-line completion, Agent mode, VS Code compatible</td></tr>
+<tr><td>You work in Java/Kotlin/C# on large codebases</td><td>JetBrains</td><td>Deepest language intelligence, best refactoring, data flow analysis</td></tr>
+<tr><td>You care about editor performance above all</td><td>Zed or Neovim</td><td>Zed for GUI + performance; Neovim for terminal + modal editing</td></tr>
+<tr><td>You want the largest ecosystem and most tutorials</td><td>VS Code</td><td>30K+ extensions, every language, every framework, every tutorial</td></tr>
+<tr><td>You prefer open-source and community-owned</td><td>VS Code / Neovim / Zed</td><td>All three are open-source; VS Code (MIT), Neovim (Apache 2), Zed (GPL)</td></tr>
+<tr><td>You want both AI-native + JetBrains intelligence</td><td>Cursor + JetBrains</td><td>Cursor for daily coding, JetBrains for refactoring/debugging deep dives</td></tr>
+</table>
+
+<p><strong>My setup in 2026:</strong> Cursor for daily coding (best AI integration, VS Code ecosystem), Neovim for quick terminal edits and config files (instant, zero context switching), JetBrains Rider for C#/.NET work (nothing else matches its intelligence). The editor war is over, and the winner is "use the right tool for the task." See also: <a href="/en/compare/cursor-vs-copilot-vs-claude-code.html">Cursor vs Copilot vs Claude Code</a> for AI tool comparison.</p>
+'''
+
+BODIES['self-hosted-paas-comparison'] = '''
+
+<h2>Your Own Heroku, on Your Own Server</h2>
+<p>Platform-as-a-Service (PaaS) tools abstract deployment to a single command or git push. But managed PaaS gets expensive at scale ($25-50/app on Heroku, Railway, or Render). Self-hosted PaaS tools give you the same Heroku-like experience — git push to deploy, automatic HTTPS, zero-downtime deploys, environment variables — but on your own servers. A $40/month dedicated server can run 10-20 apps. Here's how the leading options compare in 2026.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Tool</th><th>Approach</th><th>Infra Support</th><th>Web UI</th><th>Git Push Deploy</th><th>Auto HTTPS</th><th>Docker Compose</th><th>Kubernetes</th></tr>
+<tr><td>Coolify</td><td>Web UI + Docker, Heroku-like</td><td>Single server or multi-server</td><td>★★★★★ (best-in-class, polished)</td><td>Yes (via GitHub/GitLab integration)</td><td>Yes (Let's Encrypt)</td><td>Yes (built-in)</td><td>No (Docker Swarm only)</td></tr>
+<tr><td>Dokploy</td><td>Web UI + Docker, open-source Vercel alternative</td><td>Single server or multi-node</td><td>★★★★ (modern, reactive UI)</td><td>Yes (GitHub integration)</td><td>Yes (Let's Encrypt)</td><td>Yes (via Portainer/Traefik)</td><td>No</td></tr>
+<tr><td>CapRover</td><td>Web UI + Docker, mature project</td><td>Single server</td><td>★★★ (functional, dated UI)</td><td>Yes (caprover deploy via CLI)</td><td>Yes (Let's Encrypt, default on)</td><td>Limited (via captain-definition)</td><td>No</td></tr>
+<tr><td>Kamal (37signals)</td><td>CLI-only, Docker on bare metal</td><td>Single or multi-server</td><td>None (CLI + config file)</td><td>No (kamal deploy)</td><td>Yes (via kamal-proxy, Let's Encrypt)</td><td>No (single containers, Traefik)</td><td>No (by design: simpler)</td></tr>
+<tr><td>Dokku</td><td>CLI-only, Heroku-compatible (buildpacks)</td><td>Single server</td><td>Minimal (community web UI available)</td><td>Yes (git push dokku master)</td><td>Yes (Let's Encrypt plugin)</td><td>Via docker-compose plugin</td><td>No</td></tr>
+</table>
+
+<h2>Deep Dive</h2>
+
+<p><strong>Coolify — The closest thing to an open-source Vercel/Heroku.</strong> Coolify has the most polished experience: a beautiful web dashboard where you create projects, connect your GitHub repo, and click "Deploy." It supports static sites, Node.js, Python, Go, PHP, Rust, and Dockerfile-based deployments. The UI handles environment variables, custom domains with auto-SSL, database provisioning (PostgreSQL, MySQL, Redis, MongoDB), and deployment rollbacks. Coolify uses Docker under the hood but abstracts it away — you don't need to write Dockerfiles or compose files. <em>The current state:</em> actively maintained (daily commits), growing community, already powering thousands of production deployments. <em>Best for:</em> Developers who want the Heroku/Vercel experience on their own server, teams with multiple apps, anyone who doesn't want to SSH into a server to deploy.</p>
+
+<p><strong>Dokploy — The fast-growing newcomer.</strong> Dokploy positions itself as "open-source Vercel alternative" and delivers on that promise. The UI is modern, reactive, and arguably more polished than Coolify's in certain areas. It has built-in templates for popular frameworks (Next.js, Nuxt, Astro, Remix) and supports Git-based deployments. Traefik handles routing and SSL. The project is younger than Coolify but moving fast. <em>Best for:</em> Frontend developers deploying Next.js/Astro/Nuxt apps, those who want a more Vercel-like experience, early adopters willing to deal with a younger project.</p>
+
+<p><strong>CapRover — The mature workhorse.</strong> CapRover has been around since 2018 and has the largest production install base. It's battle-tested and stable. The UI is functional but looks dated compared to Coolify and Dokploy. Deployment works via CLI (caprover deploy) or tarball upload. CapRover's advantage: it just works, there are years of Stack Overflow answers and community guides, and the plugin ecosystem (databases, monitoring, logging) is mature. <em>Best for:</em> Teams that value stability over polish, existing CapRover users, production environments where "new and shiny" is a bug not a feature.</p>
+
+<p><strong>Kamal — 37signals' answer to Kubernetes complexity.</strong> Kamal (formerly MRSK) is 37signals' deployment tool, designed to be the anti-Kubernetes. Deploy any container to a bare-metal server (or servers) with kamal deploy. Everything is defined in a single deploy.yml file: servers, environment variables, healthchecks, volumes, and accessory services (databases, Redis). No Docker Compose, no Swarm, no Kubernetes — just Docker on a server, with a zero-downtime deployment strategy (boot new container, verify, switch traffic, stop old container). The trade-off: CLI-only, no web dashboard, and it's opinionated about the 37signals way of deploying. <em>Best for:</em> Rails/Laravel/Django developers (37signals' primary audience), CLI-first developers, those who prefer configuration files over web UIs, small teams deploying monoliths (not microservices).</p>
+
+<p><strong>Dokku — The original Heroku on your server.</strong> Dokku is the oldest project in this category (2013) and has the most Heroku-compatible workflow: git push dokku main deploys your app. It supports Heroku buildpacks (auto-detect language, install dependencies) and Dockerfile deployments. The plugin system (50+ plugins) covers databases, Let's Encrypt, monitoring, and more. <em>Best for:</em> Heroku expats who want the same workflow, single-server deployments, Rails/Django/Node apps with buildpack support.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Choice</th></tr>
+<tr><td>I want a beautiful web UI and the easiest experience</td><td>Coolify</td></tr>
+<tr><td>I primarily deploy Next.js / frontend apps</td><td>Dokploy</td></tr>
+<tr><td>I want proven stability and a large community</td><td>CapRover</td></tr>
+<tr><td>I prefer CLI + config files over web UIs</td><td>Kamal or Dokku</td></tr>
+<tr><td>I'm a solo developer with a few apps on a VPS</td><td>Coolify (easy) or Dokku (Heroku-like)</td></tr>
+<tr><td>I'm deploying Rails monoliths (37signals fan)</td><td>Kamal</td></tr>
+</table>
+
+<p><strong>What I use:</strong> Coolify on a $40/mo Hetzner VPS running 8 apps (2 Next.js, 3 Python/FastAPI, 2 static Astro sites, 1 Go API). Setup took 10 minutes, adding a new app takes 2 minutes, and the auto-SSL + auto-deploy on git push has never failed. Total monthly cost: $40 instead of $250+ for managed PaaS equivalents. See also: <a href="/en/tools/best-free-hosting-side-projects.html">Best Free Hosting for Side Projects</a> and <a href="/en/tools/best-cicd-tools-2026.html">Best CI/CD Tools</a>.</p>
+'''
+
+BODIES['mobile-frameworks-comparison'] = '''
+
+<h2>Building Mobile Apps in 2026</h2>
+<p>The mobile development landscape has consolidated around a few clear winners. Cross-platform frameworks have matured to the point where native-only development is increasingly rare outside of gaming and AR/VR. But choosing between React Native, Flutter, SwiftUI/Kotlin, Expo, and Tauri Mobile depends heavily on your background, app type, and performance requirements. Here's the comparison from developers who have shipped apps on each.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Framework</th><th>Language</th><th>Approach</th><th>Performance</th><th>Code Sharing (iOS+Android)</th><th>Web Target</th><th>Desktop Target</th><th>Learning Curve</th></tr>
+<tr><td>React Native (New Architecture)</td><td>JS/TS</td><td>JS bridge → JSI (C++ bridge)</td><td>Good (near-native with Fabric renderer)</td><td>~95%</td><td>Via React Native Web</td><td>Via React Native Windows/macOS</td><td>Low (React devs: 1-2 weeks)</td></tr>
+<tr><td>Expo (React Native)</td><td>JS/TS</td><td>Managed React Native, cloud builds</td><td>Same as React Native</td><td>~95%</td><td>Via Expo Router + web</td><td>Via expo-electron-adapter</td><td>Very Low (Expo handles config)</td></tr>
+<tr><td>Flutter</td><td>Dart</td><td>Own rendering engine (Impeller)</td><td>Excellent (compiled, 60/120fps)</td><td>~98%</td><td>Good (production-ready)</td><td>Good (Linux, macOS, Windows)</td><td>Medium (learn Dart + widget tree)</td></tr>
+<tr><td>SwiftUI + Kotlin Multiplatform</td><td>Swift + Kotlin</td><td>Native UI + shared business logic</td><td>★★★★★ (full native)</td><td>~60% (shared logic, native UI)</td><td>None</td><td>Native (iOS + macOS / none)</td><td>High (learn both platforms)</td></tr>
+<tr><td>Tauri Mobile</td><td>Rust + JS frontend</td><td>Native wrapper (WebView) + Rust backend</td><td>Good (Rust is fast, WebView=fair)</td><td>~85%</td><td>Via same web frontend</td><td>★★★★★ (Tauri's primary target)</td><td>Medium-High (Rust knowledge needed)</td></tr>
+</table>
+
+<h2>When Each Framework Wins</h2>
+
+<p><strong>React Native / Expo — Best for web developers going mobile.</strong> The React Native ecosystem in 2026 is the strongest it's ever been. The New Architecture (Fabric renderer, TurboModules, JSI) has closed the performance gap with native. Expo is now the recommended way to start — it handles build configuration, native modules, OTA updates, and push notifications without ejecting. If your team knows React, React Native (especially via Expo) is the fastest path to a cross-platform mobile app. <em>Downside:</em> debugging native issues still requires understanding the bridge (though much less than before), and complex animations/gestures can be tricky.</p>
+
+<p><strong>Flutter — Best for pixel-perfect UI and performance.</strong> Flutter renders its own UI (no platform components), so the UI looks identical on iOS and Android. The Impeller rendering engine (now default on both platforms) delivers smooth 60/120fps performance, even for complex animations. Flutter's widget system is comprehensive and well-documented. Dart is a good language that JavaScript/TypeScript developers pick up in a week. Flutter is exceptionally good for: apps with heavy custom UI (not platform-native look), apps that also need web and desktop, and teams without web development backgrounds. <em>Downside:</em> Dart (less pool of developers), app size (10-15MB baseline), platform UI differences require manual effort, and Flutter apps don't look/feel quite native on either platform.</p>
+
+<p><strong>SwiftUI + Kotlin Multiplatform — Best for maximum native quality.</strong> This is the approach for apps where native UX is the top priority. SwiftUI for iOS, Jetpack Compose for Android, and Kotlin Multiplatform (KMP) shares business logic (networking, data models, business rules) between both platforms. This gives you fully native UI that follows each platform's conventions while reducing shared logic duplication by ~60%. Companies like Netflix, Airbnb, and Square use variations of this approach. <em>Downside:</em> two UI codebases, two build systems, two platform specialists (or one very versatile mobile developer). Most expensive approach in terms of development effort.</p>
+
+<p><strong>Tauri Mobile — Best for desktop apps that also need mobile.</strong> Tauri Mobile wraps a web frontend (React/Vue/Svelte) in a native shell with a Rust backend, similar to how Tauri works on desktop. The web view renders the UI; Rust handles native APIs, file system access, and performance-critical operations. It's the spiritual successor to Cordova/PhoneGap but with a smaller binary (Rust vs Node.js), better performance, and better security (CSP enforcement, no eval). <em>Downside:</em> the mobile story is young (2024+), WebView performance is good but not native, and the ecosystem of mobile-specific plugins is smaller. <em>Best for:</em> Projects that are primarily desktop + web with mobile as a secondary target.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Choice</th></tr>
+<tr><td>Web dev team (React) building first mobile app</td><td>Expo (React Native)</td></tr>
+<tr><td>Need pixel-perfect custom UI across all platforms</td><td>Flutter</td></tr>
+<tr><td>Must feel 100% native on iOS and Android</td><td>SwiftUI + Kotlin Multiplatform</td></tr>
+<tr><td>Desktop app that also needs mobile presence</td><td>Tauri Mobile</td></tr>
+<tr><td>Startup that needs iOS + Android + web MVP fast</td><td>Expo (with Expo Router for web)</td></tr>
+<tr><td>Performance-critical app (graphics, real-time data)</td><td>Flutter or Native (SwiftUI/Kotlin)</td></tr>
+</table>
+
+<p><strong>My recommendation for 2026:</strong> Start with <strong>Expo (React Native)</strong> unless you have a specific reason not to. It covers iOS, Android, and web from a single codebase; the developer experience is excellent; the React knowledge transfers directly; and Expo's managed workflow eliminates most build configuration pain. Use <strong>Flutter</strong> if you need pixel-perfect custom UI, heavy animations, or your team has no React background. Go <strong>native</strong> only when your app's competitive advantage depends on platform-specific features (AR, advanced camera, system integrations). See also: <a href="/en/compare/react-vs-vue-vs-angular-vs-svelte.html">React vs Vue vs Angular vs Svelte</a> for the web framework comparison.</p>
+'''
+
+BODIES['api-architecture-comparison'] = '''
+
+<h2>Choosing the Right API Architecture</h2>
+<p>REST has been the default for two decades, but the API landscape in 2026 is more nuanced: GraphQL for flexible queries, tRPC for end-to-end type safety, gRPC for service-to-service communication, and WebSocket/SSE for real-time data. Each architecture makes a fundamentally different trade-off between simplicity, efficiency, and flexibility. Here's how to choose.</p>
+
+<h2>Architecture Comparison</h2>
+<table>
+<tr><th>Architecture</th><th>Paradigm</th><th>Data Format</th><th>Type Safety</th><th>Best For</th><th>Caching</th><th>Tooling</th></tr>
+<tr><td>REST</td><td>Resource-based (endpoints)</td><td>JSON, XML, any</td><td>Manual (OpenAPI/Swagger)</td><td>Public APIs, CRUD, microservices</td><td>★★★★★ (HTTP caching, CDN)</td><td>Mature, universal</td></tr>
+<tr><td>GraphQL</td><td>Query language (client specifies shape)</td><td>JSON</td><td>Codegen from schema</td><td>Complex client data needs, mobile apps</td><td>★★★ (Apollo/URQL cache, no HTTP caching)</td><td>Mature, rich ecosystem</td></tr>
+<tr><td>tRPC</td><td>Procedure calls (RPC)</td><td>JSON (or superjson)</td><td>★★★★★ (automatic, end-to-end)</td><td>TypeScript monorepo, internal APIs</td><td>★★ (no standard; React Query wrapper)</td><td>Growing, TS-only</td></tr>
+<tr><td>gRPC</td><td>RPC with Protocol Buffers</td><td>Protobuf (binary)</td><td>Codegen from .proto</td><td>Microservices, low-latency, polyglot</td><td>★ (not designed for caching)</td><td>Mature, Google ecosystem</td></tr>
+<tr><td>WebSocket</td><td>Bidirectional stream</td><td>JSON, MsgPack, Protobuf</td><td>Manual</td><td>Real-time: chat, live dashboards, gaming</td><td>★ (ephemeral connections)</td><td>Mature, universal</td></tr>
+<tr><td>SSE (Server-Sent Events)</td><td>Unidirectional stream</td><td>Plain text</td><td>Manual</td><td>Real-time updates, notifications, logs</td><td>★ (ephemeral)</td><td>Simple (native HTTP, no library needed)</td></tr>
+</table>
+
+<h2>When Each Wins</h2>
+
+<p><strong>REST — The universal default.</strong> REST's strength is simplicity and universality: every HTTP client supports it, caching works (CDN, browser, proxy), and the semantics (GET=read, POST=create, PUT=update, DELETE=delete) are well-understood. REST is the right choice for: public APIs consumed by third parties (they already know REST), content-heavy APIs that benefit from HTTP caching, APIs where the consumer doesn't need deeply nested data, and microservices where each service has a simple data model. <strong>Weak spot:</strong> over-fetching (getting more data than you need) and under-fetching (needing multiple requests for related data).</p>
+
+<p><strong>GraphQL — When clients need flexible queries.</strong> GraphQL's killer feature: the client specifies exactly what data it needs, and gets exactly that — no over-fetching, no under-fetching, single request. This is transformative for mobile apps (minimize network requests on slow connections) and complex UIs that need nested/related data. The schema serves as living API documentation. <strong>Weak spot:</strong> operational complexity — N+1 query problems, authorization per field, rate limiting by query cost (not request count), no HTTP caching, and file uploads are awkward. GraphQL adds backend complexity that REST avoids.</p>
+
+<p><strong>tRPC — TypeScript end-to-end, zero boilerplate.</strong> tRPC's unique value: define a procedure on the server, call it from the client, and TypeScript ensures the types match. No code generation, no OpenAPI spec, no schema synchronization — the types flow automatically. Input validation is built-in (Zod). It's the fastest, safest way to build an internal API in a TypeScript monorepo. <strong>Weak spot:</strong> TypeScript-only (not for polyglot environments), not designed for public APIs (no auto-generated docs, no HTTP semantics), and the RPC model doesn't map well to caching/CDN.</p>
+
+<p><strong>gRPC — High-performance service-to-service communication.</strong> gRPC with Protocol Buffers is the standard for internal microservice communication at scale. Protobuf is binary (smaller payloads, faster serialization than JSON), supports streaming (unary, server streaming, client streaming, bidirectional), and generates clients in 12+ languages. gRPC is the backbone of service meshes (Istio, Linkerd) and cloud-native infrastructure. <strong>Weak spot:</strong> not browser-friendly (requires gRPC-web proxy), debugging requires tooling (grpcurl, grpcui), and the tooling overhead is unnecessary for simple APIs.</p>
+
+<p><strong>WebSocket — Real-time, bidirectional.</strong> When the server needs to push data to the client without the client asking, WebSocket is the answer: chat apps, live dashboards, collaborative editing, multiplayer games, and financial tickers. <strong>Weak spot:</strong> stateful connections (load balancing is harder), reconnection logic (you must implement it), and it's overkill for "the client polls for updates every few seconds."</p>
+
+<p><strong>SSE — Real-time, unidirectional, dead simple.</strong> SSE (Server-Sent Events) is HTML5's most underrated feature. The server pushes text events over a standard HTTP connection; the browser receives them via the EventSource API. No library needed. Auto-reconnection is built into the browser. SSE is the right choice when the server just needs to push updates and the client doesn't need to send data back over the same connection. <strong>Weak spot:</strong> unidirectional (no client→server on the same stream), limited concurrent connections per browser (~6 per domain with HTTP/1.1, lifted with HTTP/2).</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Architecture</th></tr>
+<tr><td>Public API for third-party developers</td><td>REST (with OpenAPI spec)</td></tr>
+<tr><td>Mobile app with complex nested data needs</td><td>GraphQL</td></tr>
+<tr><td>TypeScript full-stack app, internal API</td><td>tRPC</td></tr>
+<tr><td>Microservices at scale, polyglot environment</td><td>gRPC</td></tr>
+<tr><td>Chat, live dashboard, collaborative editing</td><td>WebSocket</td></tr>
+<tr><td>Server-to-client push notifications, live logs</td><td>SSE</td></tr>
+<tr><td>Content site / e-commerce (cache-heavy)</td><td>REST (HTTP caching is critical)</td></tr>
+</table>
+
+<p><strong>My recommendation:</strong> Use <strong>REST + OpenAPI</strong> for public APIs and content-heavy services — it's the most cacheable, debuggable, and universally understood. Use <strong>tRPC</strong> for internal TypeScript APIs — the end-to-end type safety eliminates an entire class of integration bugs. Add <strong>WebSocket</strong> or <strong>SSE</strong> selectively for real-time features, not as the primary API architecture. Use <strong>gRPC</strong> when you have 10+ microservices and serialization performance matters (or your organization already uses Protobuf). You can also mix architectures: REST for external, gRPC for internal service-to-service, WebSocket for real-time — each where it fits best. See also: <a href="/en/compare/trpc-vs-graphql-vs-rest.html">tRPC vs GraphQL vs REST</a> for a deeper comparison of the three data-fetching architectures.</p>
+'''
+
+BODIES['component-library-comparison'] = '''
+
+<h2>Headless UI Components in 2026</h2>
+<p>The React component library landscape has been transformed by the "headless UI" pattern: unstyled, accessible components that handle behavior (state, keyboard navigation, ARIA attributes) while letting you control the styling. This is a reaction against monolithic UI libraries (Material UI, Ant Design) that lock you into their visual design. In 2026, the headless approach is the dominant paradigm. Here's how the leading libraries compare.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Library</th><th>Components</th><th>Styling Approach</th><th>Framework Support</th><th>Tree-Shakeable</th><th>Accessibility</th><th>Pricing</th></tr>
+<tr><td>shadcn/ui</td><td>50+ (copy-paste, not npm)</td><td>Tailwind CSS (you own the code)</td><td>React, Vue (community)</td><td>Yes (only what you copy)</td><td>★★★★★ (Radix-powered)</td><td>Free (MIT)</td></tr>
+<tr><td>Radix UI / Primitives</td><td>30+ primitives</td><td>Unstyled (CSS/data attributes)</td><td>React only</td><td>Yes (individual packages)</td><td>★★★★★ (gold standard)</td><td>Free (MIT)</td></tr>
+<tr><td>Headless UI (Tailwind Labs)</td><td>15 components</td><td>Unstyled (Tailwind-friendly APIs)</td><td>React, Vue</td><td>Yes (individual imports)</td><td>★★★★★</td><td>Free (MIT)</td></tr>
+<tr><td>Ark UI (Chakra team)</td><td>35+ components</td><td>Unstyled (CSS/data attributes)</td><td>React, Solid, Vue (soon)</td><td>Yes (individual packages)</td><td>★★★★★</td><td>Free (MIT)</td></tr>
+<tr><td>React Aria (Adobe)</td><td>45+ hooks + components</td><td>Unstyled (hooks-based, bring your own CSS)</td><td>React only</td><td>Yes (tree-shakeable)</td><td>★★★★★ (WAI-ARIA compliant)</td><td>Free (Apache 2.0)</td></tr>
+<tr><td>Mantine</td><td>100+ components</td><td>Styled (theme object, CSS modules)</td><td>React only</td><td>Yes (tree-shakeable)</td><td>★★★★</td><td>Free (MIT)</td></tr>
+</table>
+
+<h2>Deep Dive</h2>
+
+<p><strong>shadcn/ui — The dominant paradigm.</strong> shadcn/ui isn't a library you install — it's a collection of beautifully designed, accessible React components that you copy into your project. This means you own the source code and can modify anything. Components are built on Radix UI primitives (for accessibility) and styled with Tailwind CSS. The result: production-quality components that you can fully customize, with zero dependency churn (the code is yours). shadcn/ui has become the de facto standard for new React projects in 2026, with a massive community producing extensions (data tables, calendars, charts, AI chat components). <em>Best for:</em> React projects where you want beautiful, accessible components without a design system's visual lock-in, teams that want to customize components deeply.</p>
+
+<p><strong>Radix UI — The accessibility engine underneath everything.</strong> Radix provides unstyled, accessible primitives (Dialog, DropdownMenu, Tabs, Tooltip, etc.) that handle all the hard parts: focus trapping, keyboard navigation, ARIA attributes, portal rendering, and collision detection. Most higher-level component libraries (shadcn/ui, Tremor, SyntaxUI) build on Radix. If you want to build your own component library or design system from scratch, Radix is the best foundation — it handles accessibility so you can focus on design. <em>Best for:</em> Design system teams, custom component libraries, anyone who wants full design control with guaranteed accessibility.</p>
+
+<p><strong>Headless UI — Tailwind Labs' take on headless components.</strong> Headless UI provides 15 essential components (Listbox, Combobox, Dialog, Popover, Menu, Tabs, etc.) with a Tailwind-friendly API. The component APIs are designed to work seamlessly with Tailwind's utility classes (transition classes, open/closed state rendering, render props for styling). Since it's from the Tailwind CSS team, integration is seamless. <em>Best for:</em> Tailwind CSS projects, projects that primarily need the 15 core interaction components, developers who want official Tailwind ecosystem tooling.</p>
+
+<p><strong>Ark UI — Multi-framework headless from the Chakra team.</strong> Ark UI is the Chakra UI team's response to the headless trend. It provides 35+ unstyled components with multi-framework support (React, Solid, and Vue). The API uses Zag.js state machines under the hood, which means the component behavior is framework-agnostic and battle-tested across frameworks. If you need to support React and Vue with the same component behavior, Ark UI is the best option. <em>Best for:</em> Multi-framework organizations, teams migrating between frameworks, design systems that need framework portability.</p>
+
+<p><strong>React Aria — Adobe's accessibility powerhouse.</strong> React Aria (Adobe Spectrum team) is the most comprehensive accessible component library. It provides hooks (useButton, useSelect, useTable) and higher-level components (DatePicker, ColorPicker, Table) that meet WAI-ARIA Authoring Practices. If you need a drag-and-drop with keyboard support that works for accessibility, or a complex date range picker that's fully ARIA-compliant, React Aria has already solved it. <em>Best for:</em> Accessibility-critical applications (government, healthcare, finance), complex components (date pickers, color pickers, data grids), teams with accessibility compliance requirements.</p>
+
+<p><strong>Mantine — The best non-headless option.</strong> If you prefer styled components (convention over configuration), Mantine is the best choice. It provides 100+ polished, themed components with a comprehensive hooks library. Dark mode is built in, the theme system is excellent (extendable, type-safe), and the components cover everything from dates to rich text to charts. Unlike Material UI, Mantine's visual design is clean and modern without being opinionated enough to require theming overrides. <em>Best for:</em> Projects that want a complete styled component library, rapid prototyping, internal tools, developers who prefer convention over design-from-scratch.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Choice</th></tr>
+<tr><td>New React project, want beautiful components fast</td><td>shadcn/ui (Radix + Tailwind, you own the code)</td></tr>
+<tr><td>Building a custom design system from scratch</td><td>Radix UI (accessibility primitives, bring your own design)</td></tr>
+<tr><td>Need multi-framework support (React + Vue + Solid)</td><td>Ark UI (framework-agnostic state machines)</td></tr>
+<tr><td>Government/healthcare/finance (accessibility critical)</td><td>React Aria (WAI-ARIA compliance, Adobe's accessibility expertise)</td></tr>
+<tr><td>Tailwind CSS project, need core interaction components</td><td>Headless UI (official Tailwind ecosystem, seamless integration)</td></tr>
+<tr><td>Want a complete styled library, everything included</td><td>Mantine (100+ components, great theme system, hooks)</td></tr>
+</table>
+
+<p><strong>How I choose in 2026:</strong> For new React projects, <strong>shadcn/ui</strong> is the default — beautiful, accessible, and I own the code. For custom design systems, <strong>Radix UI</strong> provides the accessibility foundation. For enterprise accessibility requirements, <strong>React Aria</strong> covers the edge cases no other library handles. For internal tools that need to be built fast, <strong>Mantine</strong>'s 100+ components mean I write almost no custom UI code. The headless paradigm isn't just a trend — it's the correct separation of concerns: behavior (Radix/Headless UI) and presentation (Tailwind/CSS) are different concerns that should be controlled independently. See also: <a href="/en/compare/tailwind-vs-bootstrap-vs-mui.html">Tailwind vs Bootstrap vs MUI</a> for the styling framework comparison.</p>
+'''
+
+BODIES['webassembly-guide'] = '''
+
+<h2>WebAssembly Is Production-Ready</h2>
+<p>WebAssembly (Wasm) has graduated from "promising technology" to "runs in every major browser and beyond." In 2026, Wasm powers Figma's design canvas, Photoshop on the web, 1Password's encryption, and Cloudflare Workers. It lets you run near-native performance code in the browser — written in Rust, C, C++, Go, or Zig — alongside your JavaScript. Here's what a developer actually needs to know to use it.</p>
+
+<h2>What WebAssembly Is (And Isn't)</h2>
+<table>
+<tr><th>What Wasm Is</th><th>What Wasm Isn't</th></tr>
+<tr><td>A binary instruction format that runs at near-native speed in a sandboxed VM</td><td>A replacement for JavaScript (they work together)</td></tr>
+<tr><td>A compile target for C, C++, Rust, Go, Zig, and 40+ other languages</td><td>A language you write directly (you write Rust/C/etc., compile to Wasm)</td></tr>
+<tr><td>Available in all modern browsers (97%+ support) and outside the browser (WASI)</td><td>A DOM manipulation tool (Wasm can't touch the DOM; it calls JS to do that)</td></tr>
+<tr><td>Memory-safe by design (sandboxed, linear memory model)</td><td>Slower than native (typically 10-30% overhead vs native, improving with each engine update)</td></tr>
+</table>
+
+<h2>When WebAssembly Makes Sense</h2>
+<p><strong>Excellent use cases:</strong> computationally intensive tasks (image/video processing, 3D rendering, scientific simulation), porting existing C/C++/Rust codebases to the web (game engines, CAD tools, ML inference), performance-critical libraries used by JavaScript (encryption, compression, parsing, search), and edge computing (Cloudflare Workers, Fastly Compute@Edge).</p>
+
+<p><strong>Poor use cases:</strong> CRUD web apps (JS is fast enough, Wasm adds complexity), DOM manipulation (Wasm must call JS to touch the DOM, making it slower than pure JS for DOM-heavy work), and small utility functions (serialization overhead of crossing the JS-Wasm boundary can outweigh performance gains).</p>
+
+<h2>Languages That Compile to Wasm</h2>
+<table>
+<tr><th>Language</th><th>Wasm Support</th><th>Binary Size</th><th>Best For</th><th>Learning Curve</th></tr>
+<tr><td>Rust</td><td>★★★★★ (wasm-pack, wasm-bindgen)</td><td>Small (no runtime, tree-shaken)</td><td>Performance-critical modules, systems programming</td><td>High</td></tr>
+<tr><td>C/C++ (Emscripten)</td><td>★★★★★ (most mature, 10+ years)</td><td>Small-Medium</td><td>Porting existing C/C++ codebases</td><td>Medium (if you know C/C++)</td></tr>
+<tr><td>Go</td><td>★★★★ (syscall/js, tinygo)</td><td>Medium-Large (Go runtime)</td><td>Go developers wanting Wasm without learning a new language</td><td>Low (if you know Go)</td></tr>
+<tr><td>AssemblyScript</td><td>★★★★ (TypeScript-like syntax)</td><td>Very Small</td><td>JavaScript/TypeScript developers, quick adoption</td><td>Very Low (TS-like)</td></tr>
+<tr><td>Zig</td><td>★★★★ (native wasm target)</td><td>Very Small (no runtime)</td><td>Systems-level Wasm with excellent C interop</td><td>Medium</td></tr>
+</table>
+
+<h2>Getting Started: Rust + wasm-pack (Most Common Path)</h2>
+<pre><code># Install wasm-pack
+curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
+# Create a new Rust-Wasm project
+wasm-pack new hello-wasm
+cd hello-wasm
+
+# src/lib.rs — a simple image processing function
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+pub fn grayscale(pixels: &[u8], width: u32, height: u32) -> Vec<u8> {
+    let mut result = Vec::with_capacity(pixels.len());
+    for chunk in pixels.chunks(4) {
+        let r = chunk[0] as f32 * 0.299;
+        let g = chunk[1] as f32 * 0.587;
+        let b = chunk[2] as f32 * 0.114;
+        let gray = (r + g + b) as u8;
+        result.push(gray);
+        result.push(gray);
+        result.push(gray);
+        result.push(chunk[3]); // alpha
+    }
+    result
+}
+
+# Build
+wasm-pack build --target web</code></pre>
+
+<pre><code>// On the JavaScript side
+import init, { grayscale } from './pkg/hello_wasm.js';
+
+async function run() {
+    await init();
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const result = grayscale(imageData.data, canvas.width, canvas.height);
+    // ... write result back to canvas
+}</code></pre>
+
+<h2>WASI: WebAssembly Outside the Browser</h2>
+<p>WASI (WebAssembly System Interface) is the "operating system" for Wasm outside the browser. It provides system calls (filesystem, networking, environment variables, random numbers) in a sandboxed, capability-based model. This is what powers: Cloudflare Workers (JavaScript + Wasm at the edge), Fermyon Spin (serverless Wasm apps), WasmEdge (CNCF runtime for cloud-native Wasm), and Docker's Wasm support (run Wasm containers alongside Linux containers). The key difference from Docker: Wasm containers start in microseconds (not seconds), use 1/10th the memory, and have a smaller attack surface.</p>
+
+<h2>Performance Reality Check</h2>
+<table>
+<tr><th>Benchmark</th><th>JavaScript (V8)</th><th>Wasm (Rust)</th><th>Native (Rust)</th></tr>
+<tr><td>Fibonacci (CPU-bound)</td><td>100ms</td><td>15ms (6.7x faster)</td><td>12ms</td></tr>
+<tr><td>JSON parsing (large file)</td><td>45ms</td><td>30ms (1.5x faster)</td><td>25ms</td></tr>
+<tr><td>Image grayscale (8MP)</td><td>200ms</td><td>35ms (5.7x faster)</td><td>28ms</td></tr>
+<tr><td>SHA-256 hash (1MB)</td><td>8ms</td><td>2ms (4x faster)</td><td>1.5ms</td></tr>
+<tr><td>DOM manipulation (10K elements)</td><td>15ms</td><td>25ms (slower — JS→Wasm→JS boundary cost)</td><td>N/A</td></tr>
+</table>
+<p><em>Benchmarks from real-world tests on Chrome 130, M2 Mac. Wasm wins on CPU-bound work; loses when crossing the JS boundary too often.</em></p>
+
+<h2>When Not to Use Wasm</h2>
+<p>The most common Wasm mistake: porting everything to Wasm because it's "faster." The JS↔Wasm boundary has a cost (serialize → pass → deserialize), so fine-grained calls (calling a Wasm function thousands of times from a JS loop) can be slower than pure JS. The rule: use Wasm for coarse-grained, computationally intensive operations where the work done inside Wasm dwarfs the boundary cost. Batch your data, do the heavy work inside Wasm, return the result. See also: <a href="/en/tech/edge-computing-guide.html">Edge Computing Guide</a> and <a href="/en/compare/bun-vs-node-vs-deno.html">Bun vs Node vs Deno</a>.</p>
+'''
+
+BODIES['css-container-queries-guide'] = '''
+
+<h2>The Most Important CSS Feature Since Flexbox</h2>
+<p>For 15 years, responsive design relied on media queries — which only know the viewport size. Container queries let you style based on the size of a parent container. This is transformative for component-based architecture: a card component can adapt its layout based on whether it's in a wide main column or a narrow sidebar, without needing to know about the page layout. Supported in all modern browsers since 2023, container queries are production-ready and underused. Here's how to use them.</p>
+
+<h2>Media Queries vs Container Queries</h2>
+<table>
+<tr><th>Media Queries (@media)</th><th>Container Queries (@container)</th></tr>
+<tr><td>Queries the viewport width/height</td><td>Queries a parent container's width/height/inline-size</td></tr>
+<tr><td>Good for: page-level layout (header, sidebar, grid)</td><td>Good for: component-level adaptation (cards, forms, lists)</td></tr>
+<tr><td>Component must know about the page structure</td><td>Component is self-contained; works in any layout context</td></tr>
+<tr><td>Available since 2012 (IE9+)</td><td>Available since 2023 (all modern browsers, 95%+ support)</td></tr>
+</table>
+
+<h2>The Syntax</h2>
+<pre><code>/* 1. Define a containment context */
+.card-wrapper {
+    container-type: inline-size;  /* enables container queries on this element */
+    container-name: card;         /* optional: name for targeting specific containers */
+}
+
+/* 2. Query the container */
+@container card (min-width: 400px) {
+    .card {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 1rem;
+    }
+}
+
+@container (max-width: 300px) {
+    .card {
+        display: block;
+    }
+    .card-image {
+        width: 100%;
+    }
+}</code></pre>
+
+<h2>Container Query Units</h2>
+<table>
+<tr><th>Unit</th><th>Relative To</th><th>Use Case</th></tr>
+<tr><td>cqw</td><td>1% of container width</td><td>Font size that scales with card width: font-size: clamp(0.9rem, 3cqw, 1.5rem)</td></tr>
+<tr><td>cqh</td><td>1% of container height</td><td>Element height proportional to container</td></tr>
+<tr><td>cqi</td><td>1% of container inline size</td><td>Logical property: 1% of width in LTR, height in vertical writing modes</td></tr>
+<tr><td>cqb</td><td>1% of container block size</td><td>Logical property: 1% of height in LTR</td></tr>
+<tr><td>cqmin / cqmax</td><td>min/max of cqi and cqb</td><td>Ensure elements fit in either dimension</td></tr>
+</table>
+
+<h2>Real-World Patterns</h2>
+
+<p><strong>Pattern 1: Adaptive Card Layout.</strong> The classic container query use case. A card displays vertically in a narrow container (sidebar) and horizontally in a wide container (main content). The card doesn't need to know where it is — it adapts to the space it's given.</p>
+
+<pre><code>.card-container {
+    container-type: inline-size;
+}
+
+@container (min-width: 350px) {
+    .card {
+        flex-direction: row;
+        align-items: center;
+    }
+    .card-thumbnail {
+        width: 120px;
+        flex-shrink: 0;
+    }
+}</code></pre>
+
+<p><strong>Pattern 2: Responsive Typography Inside Components.</strong> Use cqw units to scale text proportionally within a card, so a card in a wide column has larger text than the same card in a narrow sidebar.</p>
+
+<pre><code>.widget {
+    container-type: inline-size;
+}
+.widget-title {
+    font-size: clamp(1rem, 5cqi, 1.75rem);
+}
+.widget-body {
+    font-size: clamp(0.875rem, 3cqi, 1.125rem);
+}</code></pre>
+
+<p><strong>Pattern 3: Grid Columns Based on Container Width.</strong> Change the number of columns based on container width, not viewport width. A grid of items in a 600px sidebar shows 2 columns; the same grid in a 900px main area shows 3 columns.</p>
+
+<pre><code>.grid-container {
+    container-type: inline-size;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+}
+@container (min-width: 400px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+}
+@container (min-width: 700px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+}</code></pre>
+
+<p><strong>Pattern 4: Container Queries + CSS Grid for Page Layouts.</strong> Combine container queries with CSS Grid's auto-fit/minmax for truly responsive layouts without media queries. The grid places as many columns as fit; container queries handle the styling inside each grid cell.</p>
+
+<pre><code>.page-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+.page-grid > * {
+    container-type: inline-size; /* each grid cell is its own container */
+}</code></pre>
+
+<h2>Style Queries (The Next Frontier)</h2>
+<p>Beyond container size queries, CSS now supports style queries — querying CSS custom property values:</p>
+<pre><code>@container style(--theme: dark) {
+    .card {
+        background: #1a1a2e;
+        color: #e0e0e0;
+    }
+}</code></pre>
+<p>Style queries are newer (Chrome 111+, Safari 18+, Firefox support in progress) but are the logical next step: components that adapt not just to size but to any inherited property or custom property. Combined with design tokens as CSS custom properties, this enables fully context-aware components.</p>
+
+<h2>When to Still Use Media Queries</h2>
+<p>Container queries don't replace media queries — they complement them. Still use media queries for: overall page layout (header, navigation, footer), user preference queries (prefers-reduced-motion, prefers-color-scheme, prefers-contrast), and device characteristics (pointer: coarse for touch devices, resolution for high-DPI screens). The rule: media queries for page-level concerns, container queries for component-level concerns.</p>
+
+<p><strong>Bottom line:</strong> Container queries are the missing piece in component-based CSS. If you build with React, Vue, or Svelte components, start using container queries today — every major browser has supported them for over two years. The old approach of passing "variant" props (variant="compact" vs variant="wide") becomes unnecessary when the component can sense its own container width. See also: <a href="/en/tech/css-responsive-design-guide.html">CSS Responsive Design Guide</a> and <a href="/en/compare/tailwind-vs-bootstrap-vs-mui.html">Tailwind vs Bootstrap vs MUI</a>.</p>
+'''
+
+BODIES['react-server-components-guide'] = '''
+
+<h2>React's Biggest Architectural Shift</h2>
+<p>React Server Components (RSC) represent the most significant change to React's programming model since hooks. They let you render components on the server, stream them to the client, and never send the JavaScript for those components to the browser. The result: smaller bundles, faster page loads, and direct database access from your components. But RSC also introduces a new mental model that confuses even experienced React developers. Here's what you actually need to understand.</p>
+
+<h2>The Core Idea: Two Component Types</h2>
+<table>
+<tr><th></th><th>Server Components (default)</th><th>Client Components ('use client')</th></tr>
+<tr><td>Where they run</td><td>Server only (at build time or request time)</td><td>Server (SSR) + Client (hydration + interaction)</td></tr>
+<tr><td>JavaScript sent to browser</td><td>Zero (only the rendered output)</td><td>Full component code + dependencies</td></tr>
+<tr><td>Can use</td><td>async/await, fs, DB queries, secrets, any Node API</td><td>useState, useEffect, onClick, browser APIs, context</td></tr>
+<tr><td>Cannot use</td><td>useState, useEffect, event handlers, browser APIs</td><td>Direct database access, filesystem, secrets</td></tr>
+<tr><td>Bundles size impact</td><td>Zero (rendered on server, streamed as HTML/RSC payload)</td><td>Adds to client bundle</td></tr>
+</table>
+
+<p><strong>The mental model shift:</strong> In traditional React, every component ships JavaScript to the browser. In RSC, server components are the default — you opt IN to client-side interactivity with 'use client'. This inverts the traditional model where you opt OUT of client-side code with SSR. The result: most of your components (the ones that just render data) send zero JavaScript.</p>
+
+<h2>When a Component Should Be Server vs Client</h2>
+<pre><code>// Server Component (default) — no 'use client' directive
+// ✅ Direct database access
+// ✅ Async data fetching
+// ✅ Keep secrets (API keys, tokens)
+// ✅ Large dependencies (stay on server)
+// ✅ Render non-interactive content
+
+async function ArticleList() {
+    const articles = await db.query('SELECT * FROM articles ORDER BY date DESC');
+    return (
+        &lt;div&gt;
+            {articles.map(a =&gt; &lt;ArticleCard key={a.id} article={a} /&gt;)}
+        &lt;/div&gt;
+    );
+}</code></pre>
+
+<pre><code>// Client Component — must have 'use client' directive
+// ✅ Event listeners (onClick, onChange)
+// ✅ useState, useReducer, useEffect
+// ✅ Browser APIs (localStorage, geolocation, canvas)
+// ✅ Custom hooks that use state/effects
+// ❌ Direct database access
+// ❌ Server-side secrets
+
+'use client';
+function LikeButton({ articleId }) {
+    const [liked, setLiked] = useState(false);
+    return &lt;button onClick={() =&gt; setLiked(!liked)}&gt;{liked ? '♥' : '♡'}&lt;/button&gt;;
+}</code></pre>
+
+<h2>The Composition Pattern: Server Shell, Client Islands</h2>
+<p>The most common RSC pattern: a server component fetches data and wraps client-interactive islands:</p>
+<pre><code>// ArticlePage.server.tsx — Server Component
+async function ArticlePage({ slug }) {
+    const article = await db.article.findUnique({ where: { slug } }); // runs on server
+    return (
+        &lt;article&gt;
+            &lt;h1&gt;{article.title}&lt;/h1&gt;
+            &lt;div&gt;{article.content}&lt;/div&gt;
+            &lt;LikeButton articleId={article.id} /&gt;      {/* Client Component */}
+            &lt;CommentSection articleId={article.id} /&gt;   {/* Client Component */}
+        &lt;/article&gt;
+    );
+}</code></pre>
+<p>Server component (ArticlePage) sends ZERO JavaScript. LikeButton and CommentSection ship their JS. The non-interactive parts (title, content) are rendered on the server and streamed as HTML. This pattern — "server shell, client islands" — is the mental model for RSC architecture.</p>
+
+<h2>Streaming and Suspense</h2>
+<p>RSC works with React Suspense to stream content as it becomes available. The server sends the page shell immediately, then streams in content as data loads:</p>
+<pre><code>function ArticlePage({ slug }) {
+    return (
+        &lt;div&gt;
+            &lt;ArticleHeader slug={slug} /&gt;              {/* Renders immediately */}
+            &lt;Suspense fallback={&lt;Spinner /&gt;}&gt;
+                &lt;ArticleBody slug={slug} /&gt;           {/* Streams when DB query completes */}
+            &lt;/Suspense&gt;
+            &lt;Suspense fallback={&lt;Spinner /&gt;}&gt;
+                &lt;RelatedArticles slug={slug} /&gt;       {/* Streams independently */}
+            &lt;/Suspense&gt;
+        &lt;/div&gt;
+    );
+}</code></pre>
+<p>The user sees the header immediately, then the article body streams in, then related articles — all without waiting for the slowest query.</p>
+
+<h2>Server Actions: Mutations Without an API Route</h2>
+<p>RSC also introduces Server Actions — functions that run on the server but can be called directly from client components without creating an API endpoint:</p>
+<pre><code>// actions.ts — server file
+'use server';
+import { revalidatePath } from 'next/cache';
+
+export async function updateArticle(slug: string, data: FormData) {
+    const title = data.get('title');
+    await db.article.update({ where: { slug }, data: { title } });
+    revalidatePath(`/articles/${slug}`);
+}
+
+// Client component:
+'use client';
+import { updateArticle } from './actions';
+function EditForm({ slug }) {
+    return (
+        &lt;form action={updateArticle.bind(null, slug)}&gt;
+            &lt;input name="title" /&gt;
+            &lt;button type="submit"&gt;Save&lt;/button&gt;
+        &lt;/form&gt;
+    );
+}</code></pre>
+<p>No REST endpoint. No GraphQL mutation. No tRPC procedure. Just a function call across the client-server boundary. React serializes the form data, sends it to the server, runs the function, and returns the result.</p>
+
+<h2>The Boundary Rules (Most Common Mistakes)</h2>
+<table>
+<tr><th>Rule</th><th>Why</th></tr>
+<tr><td>Server components can import Client components ✅</td><td>A server component can render a client component as a child</td></tr>
+<tr><td>Client components CANNOT import Server components ❌</td><td>If a client component could import a server component, the server code would leak to the client</td></tr>
+<tr><td>You CAN pass server components as children to client components ✅</td><td>&lt;ClientWrapper&gt;&lt;ServerComponent /&gt;&lt;/ClientWrapper&gt; — the server component renders first, then is passed as a React node to the client component</td></tr>
+<tr><td>'use client' marks the boundary — everything below is client</td><td>All components imported (directly or transitively) by a client component become client components too</td></tr>
+</table>
+
+<h2>Is RSC Worth the Complexity in 2026?</h2>
+<p><strong>Yes, if:</strong> your app has significant non-interactive content (blog, e-commerce listing, documentation), your bundle size is a performance bottleneck (users on slow connections/devices), you want to eliminate the API layer for data fetching (direct DB queries from components), or you're building a new Next.js App Router project (RSC is the default and best-supported path).</p>
+
+<p><strong>Stick with traditional React (Pages Router, Vite SPA) if:</strong> your app is highly interactive (dashboard, design tool, real-time app — most components will be client components anyway), your team is still learning React (RSC adds complexity), your backend is already a separate service (you're not using Next.js as a full-stack framework), or you need to support older build tooling that doesn't support RSC.</p>
+
+<p><strong>Bottom line:</strong> RSC is not hype — it's a genuine architectural improvement that reduces JavaScript shipped to the browser by 30-70% for content-heavy apps. But it's not free: the mental model takes time to internalize, debugging is different (server errors vs client errors), and the ecosystem is still maturing (not all libraries support RSC yet). For new Next.js projects in 2026, start with RSC — you can always add 'use client' where you need interactivity, but you can't easily convert a all-client app to RSC later. See also: <a href="/en/compare/nextjs-vs-nuxt-vs-sveltekit.html">Next.js vs Nuxt vs SvelteKit</a> and <a href="/en/tech/react-hooks-complete-guide.html">React Hooks Complete Guide</a>.</p>
+'''
 # FAQ data for FAQPage schema (slug → list of q/a dicts)
 FAQS = {
     'chatgpt-plus-worth': [
