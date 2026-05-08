@@ -340,7 +340,7 @@ def pull_gsc_data():
         print("  google-api-python-client not installed, falling back to CSV…")
         return _gsc_csv_fallback()
 
-    SCOPES = ["https://www.googleapis.com/auth/webmasters.readonly"]
+    SCOPES = ["https://www.googleapis.com/auth/webmasters"]
     TOKEN_FILE = DATA_DIR / "gsc-token.json"
     credentials = None
 
