@@ -8092,7 +8092,7 @@ BODIES['developer-podcast-guide'] = '''
 <tr><td>50,000</td><td>$40</td><td>$2,000</td><td>$8,000</td></tr>
 </table>
 
-<p><strong>Bottom line:</strong> A developer podcast is a long-game side hustle — expect 6-12 months before meaningful revenue. The most reliable monetization is using the podcast as a credibility engine: it opens doors to consulting clients, conference talks, and job opportunities that pay far more than ads. Pick a narrow niche ("PostgreSQL Performance," "Rust in Production"), publish consistently for 6 months before expecting traction, and use each episode as blog post content for SEO. See also: <a href="/en/sidehustle/content-creator-startup.html">Content Creator Startup Guide</a> and <a href="/en/tools/best-podcast-tools.html">Best Podcast Tools</a>.</p>
+<p><strong>Bottom line:</strong> A developer podcast is a long-game side hustle — expect 6-12 months before meaningful revenue. The most reliable monetization is using the podcast as a credibility engine: it opens doors to consulting clients, conference talks, and job opportunities that pay far more than ads. Pick a narrow niche ("PostgreSQL Performance," "Rust in Production"), publish consistently for 6 months before expecting traction, and use each episode as blog post content for SEO. See also: <a href="/en/sidehustle/developer-social-media-monetization.html">Developer Social Media Monetization</a> and <a href="/en/tools/best-dev-podcasts.html">Best Dev Podcasts</a>.</p>
 '''
 
 BODIES['full-text-search-comparison'] = '''
@@ -8312,7 +8312,7 @@ BODIES['low-code-no-code-developer'] = '''
 <tr><td>n8n</td><td>Community Nodes (npm)</td><td>Free + consulting upsell</td><td>Custom API integration node, data transformation node</td></tr>
 </table>
 
-<p><strong>Bottom line:</strong> The no-code revolution is not a threat to developers — it is a force multiplier. Companies that adopt no-code tools inevitably hit limits that require a developer to solve. Position yourself as the "developer who speaks no-code" — you can deliver projects 3-5x faster than traditional development while charging premium rates for the parts that require real code. Start with one platform (Retool for enterprise, Bubble for startups), build 2-3 portfolio projects, and market to no-code communities. See also: <a href="/en/sidehustle/saas-bootstrapping-guide.html">SaaS Bootstrapping Guide</a> and <a href="/en/sidehustle/digital-products-guide.html">Digital Products Guide</a>.</p>
+<p><strong>Bottom line:</strong> The no-code revolution is not a threat to developers — it is a force multiplier. Companies that adopt no-code tools inevitably hit limits that require a developer to solve. Position yourself as the "developer who speaks no-code" — you can deliver projects 3-5x faster than traditional development while charging premium rates for the parts that require real code. Start with one platform (Retool for enterprise, Bubble for startups), build 2-3 portfolio projects, and market to no-code communities. See also: <a href="/en/sidehustle/saas-bootstrapping-guide.html">SaaS Bootstrapping Guide</a> and <a href="/en/sidehustle/sell-digital-products.html">Sell Digital Products</a>.</p>
 '''
 
 BODIES['open-source-llm-comparison'] = '''
@@ -8739,7 +8739,7 @@ BODIES['web-scraping-business'] = '''
 # Key metric: success rate > 95% for target sites
 # If success rate < 90%, your proxy pool or fingerprinting needs work</code></pre>
 
-<p><strong>Bottom line:</strong> A web scraping business is a natural fit for developers — the technical barrier to entry is the moat. Focus on B2B data (businesses pay for data, consumers don't), always honor robots.txt, and build your proxy infrastructure before you need it. The most successful scraping businesses don't sell "raw data" — they sell insights, leads, or APIs that solve a specific business problem. See also: <a href="/en/sidehustle/chrome-extension-monetization.html">Chrome Extension Monetization</a> and <a href="/en/tech/web-scraping-technical-guide.html">Web Scraping Technical Guide</a>.</p>
+<p><strong>Bottom line:</strong> A web scraping business is a natural fit for developers — the technical barrier to entry is the moat. Focus on B2B data (businesses pay for data, consumers don't), always honor robots.txt, and build your proxy infrastructure before you need it. The most successful scraping businesses don't sell "raw data" — they sell insights, leads, or APIs that solve a specific business problem. See also: <a href="/en/sidehustle/chrome-extension-monetization.html">Chrome Extension Monetization</a> and <a href="/en/tech/python-asyncio-guide.html">Python Asyncio Guide</a>.</p>
 '''
 
 BODIES['webhook-implementation-guide'] = '''
