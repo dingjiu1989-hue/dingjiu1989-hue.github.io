@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="typescript-advanced-patterns">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Advanced TypeScript Patterns: Generics, Mapped Types, and Template Literals">
+    <meta property="og:description" content="Go beyond basic TypeScript with advanced patterns: conditional types, mapped types, template literal types, infer, and brand types. Real examples that make your code safer.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/typescript-advanced-patterns.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Advanced TypeScript Patterns: Generics, Mapped Types, and Template Literals">
+    <meta name="twitter:description" content="Go beyond basic TypeScript with advanced patterns: conditional types, mapped types, template literal types, infer, and brand types. Real examples that make your code safer.">
+    <title>Advanced TypeScript Patterns: Generics, Mapped Types, and Template Literals — SourceHub</title>
+    <meta name="description" content="Go beyond basic TypeScript with advanced patterns: conditional types, mapped types, template literal types, infer, and brand types. Real examples that make your code safer.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/typescript-advanced-patterns.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/typescript-advanced-patterns.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Advanced TypeScript Patterns: Generics, Mapped Types, and Template Literals",
+      "description": "Go beyond basic TypeScript with advanced patterns: conditional types, mapped types, template literal types, infer, and brand types. Real examples that make your code safer.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Advanced TypeScript Patterns: Generics, Mapped Types, and Template Literals"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Advanced TypeScript Patterns: Generics, Mapped Types, and Template Literals
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">TypeScript</span>
+        <span class="tag-cat">Advanced</span>
+        <span class="tag-cat">Type System</span>
+        <span class="tag-cat">Patterns</span></div>
+      <h1 class="article-title">Advanced TypeScript Patterns: Generics, Mapped Types, and Template Literals</h1>
+      <div class="article-meta">Published 2026-05-08 · 3360 views · 28 replies</div>
+      <div class="article-body"><p>TypeScript's type system is a programming language in its own right. Once you go beyond basic annotations, you can encode invariants into types that make entire categories of bugs impossible. Here are the advanced patterns that level up your TypeScript in 2026.</p>
+
+<h2>1. Conditional Types</h2>
+<p>Conditional types select types based on a condition — like a ternary operator at the type level.</p>
+<pre><code>type IsString&lt;T&gt; = T extends string ? true : false;
+
+type A = IsString&lt;"hello"&gt;;  // true
+type B = IsString&lt;number&gt;;   // false
+
+// Real example: extract the array element type
+type ArrayElement&lt;T&gt; = T extends (infer U)[] ? U : never;
+type Item = ArrayElement&lt;string[]&gt;;  // string</code></pre>
+
+<h2>2. Mapped Types</h2>
+<p>Mapped types transform existing types by iterating over their keys.</p>
+<pre><code>// Make all properties optional
+type Partial&lt;T&gt; = { [K in keyof T]?: T[K] };
+
+// Make all properties readonly
+type Readonly&lt;T&gt; = { readonly [K in keyof T]: T[K] };
+
+// Real example: pick nullable fields
+type Nullable&lt;T&gt; = { [K in keyof T]: T[K] | null };</code></pre>
+
+<h2>3. Template Literal Types</h2>
+<p>Construct types from string patterns — powerful for typed routing and event systems.</p>
+<pre><code>type EventName = "click" | "focus" | "blur";
+type Handler = `on${Capitalize&lt;EventName&gt;}`;
+// "onClick" | "onFocus" | "onBlur"
+
+// Real example: typed API routes
+type Route = `/api/${string}`;
+type UserRoute = `/api/users/${number}`;
+const route: UserRoute = "/api/users/42"; // OK
+const bad: UserRoute = "/api/users/abc"; // Error</code></pre>
+
+<h2>4. The infer Keyword</h2>
+<p>Extract and capture types from other types during conditional type checks.</p>
+<pre><code>// Extract return type of a function
+type ReturnType&lt;T&gt; = T extends (...args: any[]) => infer R ? R : never;
+
+// Extract the promise resolved type
+type Awaited&lt;T&gt; = T extends Promise&lt;infer U&gt; ? U : T;
+
+// Real example: extract component props
+type Props&lt;C&gt; = C extends React.ComponentType&lt;infer P&gt; ? P : never;</code></pre>
+
+<h2>5. Branded Types (Nominal Typing)</h2>
+<p>TypeScript uses structural typing, but sometimes you want nominal types — two strings that are not interchangeable.</p>
+<pre><code>type UserId = string & { readonly __brand: "UserId" };
+type OrderId = string & { readonly __brand: "OrderId" };
+
+function createUserId(id: string): UserId {
+  return id as UserId;
+}
+
+function getUser(id: UserId) { /* ... */ }
+
+getUser(createUserId("abc")); // OK
+getUser("abc"); // Error — plain string is not a UserId</code></pre>
+
+<h2>6. Discriminated Unions</h2>
+<p>The most useful pattern in TypeScript. Model states exhaustively with a discriminator field.</p>
+<pre><code>type RequestState&lt;T&gt; =
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; data: T }
+  | { status: "error"; error: Error };
+
+function render&lt;T&gt;(state: RequestState&lt;T&gt;) {
+  switch (state.status) {
+    case "idle": return "Ready";
+    case "loading": return "Loading...";
+    case "success": return state.data; // T — narrowed!
+    case "error": return state.error.message; // Error — narrowed!
+  }
+}</code></pre>
+
+<h2>7. Builder Pattern with Type Safety</h2>
+<pre><code>class QueryBuilder&lt;
+  T extends Record&lt;string, unknown&gt;,
+  Selected extends keyof T | "*" = "*",
+  WhereClause extends Partial&lt;T&gt; = {}
+&gt; {
+  select&lt;K extends keyof T&gt;(...cols: K[]): QueryBuilder&lt;T, K, WhereClause&gt; {
+    return this as any;
+  }
+  where(conditions: Partial&lt;T&gt;): QueryBuilder&lt;T, Selected, Partial&lt;T&gt;&gt; {
+    return this as any;
+  }
+}</code></pre>
+
+<h2>Quick Reference: When to Use What</h2>
+<table>
+<tr><th>Pattern</th><th>Use Case</th></tr>
+<tr><td>Conditional Types</td><td>Transform types based on conditions</td></tr>
+<tr><td>Mapped Types</td><td>Bulk-modify object property types</td></tr>
+<tr><td>Template Literal Types</td><td>String-pattern-based types (routes, events)</td></tr>
+<tr><td>infer</td><td>Extract embedded types</td></tr>
+<tr><td>Branded Types</td><td>Distinguish same-shape types semantically</td></tr>
+<tr><td>Discriminated Unions</td><td>Exhaustive state modeling (async, forms)</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Advanced TypeScript patterns let you catch bugs at compile time instead of runtime. Discriminated unions and branded types alone will eliminate entire categories of bugs. See also: <a href="/en/compare/prisma-vs-drizzle-vs-typeorm.html">TypeScript ORM comparison</a> and <a href="/en/compare/trpc-vs-graphql-vs-rest.html">tRPC for end-to-end types</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

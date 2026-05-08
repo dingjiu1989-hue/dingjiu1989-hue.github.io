@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="git-workflows-team-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development">
+    <meta property="og:description" content="Compare the 3 major Git branching strategies with real-world scenarios. Pick the right workflow for your team size, release cadence, and deployment model.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/git-workflows-team-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development">
+    <meta name="twitter:description" content="Compare the 3 major Git branching strategies with real-world scenarios. Pick the right workflow for your team size, release cadence, and deployment model.">
+    <title>Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development — SourceHub</title>
+    <meta name="description" content="Compare the 3 major Git branching strategies with real-world scenarios. Pick the right workflow for your team size, release cadence, and deployment model.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/git-workflows-team-guide.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/git-workflows-team-guide.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development",
+      "description": "Compare the 3 major Git branching strategies with real-world scenarios. Pick the right workflow for your team size, release cadence, and deployment model.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Git</span>
+        <span class="tag-cat">Workflow</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Collaboration</span></div>
+      <h1 class="article-title">Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development</h1>
+      <div class="article-meta">Published 2026-05-08 · 3480 views · 29 replies</div>
+      <div class="article-body"><p>Your branching strategy determines how code moves from development to production. Git Flow, GitHub Flow, and Trunk-Based Development each optimize for different team sizes and release cadences. Here's which one fits your team.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Git Flow</th><th>GitHub Flow</th><th>Trunk-Based Development</th></tr>
+<tr><td><strong>Branch complexity</strong></td><td>High (main, develop, feature, release, hotfix)</td><td>Low (main + feature branches)</td><td>Minimal (main + short-lived branches)</td></tr>
+<tr><td><strong>Best for</strong></td><td>Scheduled releases, versioned products</td><td>Continuous deployment, web apps</td><td>Elite teams, CI/CD, fast feedback</td></tr>
+<tr><td><strong>Release cadence</strong></td><td>Versioned (v1.0, v1.1, v2.0)</td><td>Continuous (every merge is deployable)</td><td>Multiple times per day</td></tr>
+<tr><td><strong>Branch lifespan</strong></td><td>Long (feature branches: days-weeks)</td><td>Short (hours-days)</td><td>Very short (minutes-hours)</td></tr>
+<tr><td><strong>Merge conflicts</strong></td><td>Painful (long-lived branches diverge)</td><td>Moderate</td><td>Minimal (frequent integration)</td></tr>
+<tr><td><strong>Rollback</strong></td><td>Revert release branch</td><td>Revert merge commit</td><td>Revert or fix-forward</td></tr>
+</table>
+
+<h2>Git Flow — The Traditional Model</h2>
+<p>Git Flow uses multiple long-lived branches: main (production), develop (integration), feature branches, release branches, and hotfix branches. It's designed for versioned software with scheduled releases — think mobile apps, desktop software, or on-premise products.</p>
+<p><strong>When to use:</strong> You ship versioned releases (mobile apps, on-premise software, libraries). You need to maintain multiple versions simultaneously. Your release cycle is weeks or months. You have QA/staging gates between dev and production.</p>
+<p><strong>When to avoid:</strong> You deploy continuously. Your team is small (<5). You want fast feedback cycles. Branch management overhead is slowing you down.</p>
+
+<h2>GitHub Flow — The Continuous Delivery Model</h2>
+<p>GitHub Flow is dramatically simpler: one main branch (always deployable) + short-lived feature branches. Every feature branch is opened as a PR, reviewed, tested in CI, and merged to main. Main is deployed immediately (or on a schedule).</p>
+<p><strong>When to use:</strong> You deploy continuously (web apps, SaaS). Your team is 2-50. You want simple, predictable workflow. You use feature flags for incomplete work. This is the default for most web teams in 2026.</p>
+<p><strong>When to avoid:</strong> You need to maintain multiple release versions. You have long QA cycles. You need release gates.</p>
+
+<h2>Trunk-Based Development — Elite DevOps Teams</h2>
+<p>Trunk-Based Development is the most aggressive: everyone commits to main (or very short-lived branches, <24 hours). Feature flags control what's active. This requires excellent testing, CI/CD, and discipline — but enables the fastest delivery cadence. Google, Facebook, and most elite DORA performers use this.</p>
+<p><strong>When to use:</strong> Elite DevOps teams. Multiple deploys per day. Feature flags infrastructure is in place. Comprehensive automated testing. Pair programming or mob programming culture.</p>
+<p><strong>When to avoid:</strong> Solo developers or small teams without feature flags. Weak automated testing. Regulatory environments requiring formal review gates. Teams not ready for the discipline required.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Workflow</th></tr>
+<tr><td>Solo developer, side project</td><td><strong>GitHub Flow</strong> (or direct to main)</td></tr>
+<tr><td>Team 2-50, web app / SaaS</td><td><strong>GitHub Flow</strong></td></tr>
+<tr><td>Mobile app or library with releases</td><td><strong>Git Flow</strong></td></tr>
+<tr><td>High-performance CI/CD team</td><td><strong>Trunk-Based Development</strong></td></tr>
+<tr><td>Open source project</td><td><strong>GitHub Flow</strong> (fork + PR)</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> GitHub Flow is the right choice for 80% of teams in 2026. Start there. Evolve to Trunk-Based if your CI/CD maturity allows. Use Git Flow only if you ship versioned releases (mobile, on-premise). See also: <a href="/en/tech/git-cheatsheet.html">Git Cheatsheet</a> and <a href="/en/tech/git-advanced.html">Advanced Git Guide</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

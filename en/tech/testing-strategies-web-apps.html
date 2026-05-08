@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="testing-strategies-web-apps">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each">
+    <meta property="og:description" content="Stop guessing which tests to write. A practical guide to the testing trophy model — unit, integration, and e2e test strategies with real code examples.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/testing-strategies-web-apps.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each">
+    <meta name="twitter:description" content="Stop guessing which tests to write. A practical guide to the testing trophy model — unit, integration, and e2e test strategies with real code examples.">
+    <title>Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each — SourceHub</title>
+    <meta name="description" content="Stop guessing which tests to write. A practical guide to the testing trophy model — unit, integration, and e2e test strategies with real code examples.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/testing-strategies-web-apps.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/testing-strategies-web-apps.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each",
+      "description": "Stop guessing which tests to write. A practical guide to the testing trophy model — unit, integration, and e2e test strategies with real code examples.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">Testing</span>
+        <span class="tag-cat">Web Dev</span>
+        <span class="tag-cat">Best Practices</span>
+        <span class="tag-cat">Quality</span></div>
+      <h1 class="article-title">Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each</h1>
+      <div class="article-meta">Published 2026-05-08 · 3960 views · 33 replies</div>
+      <div class="article-body"><p>Testing is easy to get wrong. Too many unit tests give false confidence. Too few integration tests miss real bugs. Too many E2E tests make CI slow. Here's a practical guide to the Testing Trophy — the modern testing strategy that actually works.</p>
+
+<h2>The Testing Trophy (Not the Testing Pyramid)</h2>
+<p>The classic testing pyramid said "lots of unit, some integration, few E2E." The Testing Trophy inverts this: integration tests provide the most confidence per dollar, so write more of them.</p>
+<table>
+<tr><th></th><th>Unit Tests</th><th>Integration Tests</th><th>E2E Tests</th></tr>
+<tr><td><strong>Tests</strong></td><td>Single function/component</td><td>Multiple modules together</td><td>Full user flow in browser</td></tr>
+<tr><td><strong>Speed</strong></td><td>Fastest (ms)</td><td>Fast (10-100ms)</td><td>Slow (seconds)</td></tr>
+<tr><td><strong>Confidence</strong></td><td>Low (isolated)</td><td>High (integration is the risk)</td><td>Highest (real UX)</td></tr>
+<tr><td><strong>Flakiness</strong></td><td>None</td><td>Low</td><td>High (network, timing)</td></tr>
+<tr><td><strong>Debugging</strong></td><td>Easiest</td><td>Moderate</td><td>Hardest</td></tr>
+<tr><td><strong>Recommended ratio</strong></td><td>20%</td><td>60%</td><td>20%</td></tr>
+</table>
+
+<h2>Unit Tests — Test Pure Logic Exhaustively</h2>
+<p>Unit tests shine for pure functions: validation logic, data transformation, utility functions, and business rules. Don't unit test React components in isolation — that's what integration tests are for. Don't test implementation details (test behavior, not methods).</p>
+<pre><code>// Good unit test: pure business logic
+describe("calculateDiscount", () => {
+  it("gives 20% off orders over $100", () => {
+    expect(calculateDiscount({ total: 150, coupon: null })).toBe(30);
+  });
+  it("stacks with coupon, max 50%", () => {
+    expect(calculateDiscount({ total: 100, coupon: "SAVE30" })).toBe(40);
+  });
+});</code></pre>
+
+<h2>Integration Tests — The Confidence Backbone</h2>
+<p>Integration tests verify that multiple units work together. For frontend: render a component with real state, click something, assert the DOM. For backend: hit an endpoint, verify the database state. These catch the bugs unit tests miss.</p>
+<pre><code>// Frontend integration test: render + interact + assert
+test("submits form and shows success", async () => {
+  render(&lt;SignupForm /&gt;);
+  await user.type(screen.getByLabel("Email"), "test@example.com");
+  await user.click(screen.getByText("Sign Up"));
+  expect(await screen.findByText("Check your email")).toBeVisible();
+});
+
+// Backend integration test: request → response
+test("POST /api/users creates user in DB", async () => {
+  const res = await request(app)
+    .post("/api/users")
+    .send({ email: "test@example.com", name: "Test" });
+  expect(res.status).toBe(201);
+  const user = await db.query("SELECT * FROM users WHERE email = $1", ["test@example.com"]);
+  expect(user.rows[0].name).toBe("Test");
+});</code></pre>
+
+<h2>E2E Tests — Validate Critical User Flows</h2>
+<p>E2E tests drive a real browser through your most important flows: signup, login, purchase, onboarding. Keep these to critical paths only — they're slow and can be flaky. Playwright is the best E2E tool in 2026.</p>
+<pre><code>// E2E: only critical paths
+test("user can complete purchase", async ({ page }) => {
+  await page.goto("/products/widget");
+  await page.click("text=Add to Cart");
+  await page.click("text=Checkout");
+  await page.fill("[name=card]", "4242424242424242");
+  await page.click("text=Pay $29.00");
+  await expect(page.locator(".confirmation")).toContainText("Thank you");
+});</code></pre>
+
+<h2>Testing Stack Recommendations</h2>
+<table>
+<tr><th>Layer</th><th>Tool</th><th>When</th></tr>
+<tr><td>Unit</td><td>Vitest</td><td>Pure functions, utils, business logic</td></tr>
+<tr><td>Component Integration</td><td>Vitest + Testing Library</td><td>Any component with user interaction</td></tr>
+<tr><td>Backend Integration</td><td>Vitest + Supertest</td><td>API endpoints, DB writes</td></tr>
+<tr><td>E2E</td><td>Playwright</td><td>Signup, login, purchase, onboarding</td></tr>
+<tr><td>Visual Regression</td><td>Chromatic / Percy</td><td>Design system components</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Write mostly integration tests. They provide the best confidence-to-effort ratio. Unit test pure logic. E2E test only critical flows (max 20 scenarios). A slow CI pipeline is a broken one — keep E2E count low. See also: <a href="/en/compare/vite-vs-webpack-vs-turbopack.html">build tools</a> (Vitest is built on Vite) and <a href="/en/tools/best-cicd-tools-2026.html">CI/CD tools comparison</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

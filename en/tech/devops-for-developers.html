@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="devops-for-developers">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="DevOps for Developers: CI/CD, Docker, IaC, and Monitoring — A Practical Guide">
+    <meta property="og:description" content="The DevOps skills every developer needs in 2026. CI/CD pipelines, Docker containers, Infrastructure as Code (Terraform), and monitoring. Hands-on, not theoretical.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/devops-for-developers.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DevOps for Developers: CI/CD, Docker, IaC, and Monitoring — A Practical Guide">
+    <meta name="twitter:description" content="The DevOps skills every developer needs in 2026. CI/CD pipelines, Docker containers, Infrastructure as Code (Terraform), and monitoring. Hands-on, not theoretical.">
+    <title>DevOps for Developers: CI/CD, Docker, IaC, and Monitoring — A Practical Guide — SourceHub</title>
+    <meta name="description" content="The DevOps skills every developer needs in 2026. CI/CD pipelines, Docker containers, Infrastructure as Code (Terraform), and monitoring. Hands-on, not theoretical.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/devops-for-developers.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/devops-for-developers.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "DevOps for Developers: CI/CD, Docker, IaC, and Monitoring — A Practical Guide",
+      "description": "The DevOps skills every developer needs in 2026. CI/CD pipelines, Docker containers, Infrastructure as Code (Terraform), and monitoring. Hands-on, not theoretical.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "DevOps for Developers: CI/CD, Docker, IaC, and Monitoring — A Practical Guide"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › DevOps for Developers: CI/CD, Docker, IaC, and Monitoring — A Practical Guide
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">CI/CD</span>
+        <span class="tag-cat">Docker</span>
+        <span class="tag-cat">Infrastructure</span></div>
+      <h1 class="article-title">DevOps for Developers: CI/CD, Docker, IaC, and Monitoring — A Practical Guide</h1>
+      <div class="article-meta">Published 2026-05-08 · 3720 views · 31 replies</div>
+      <div class="article-body"><p>You don't need to be a DevOps engineer to deploy and operate software in 2026. The tools have gotten so good that every developer can own their full pipeline. Here's the practical DevOps toolkit — CI/CD, containers, IaC, and monitoring — explained for developers.</p>
+
+<h2>The Developer DevOps Stack (2026)</h2>
+<table>
+<tr><th>Layer</th><th>Tool</th><th>Why It's Worth Learning</th></tr>
+<tr><td><strong>CI/CD</strong></td><td>GitHub Actions</td><td>Free 2000 min/mo. 20K+ marketplace actions. The default.</td></tr>
+<tr><td><strong>Containers</strong></td><td>Docker</td><td>Works everywhere. Compose for local dev.</td></tr>
+<tr><td><strong>Orchestration</strong></td><td>Kubernetes (or skip it)</td><td>Overkill for 90% of projects. Use managed containers instead.</td></tr>
+<tr><td><strong>Infrastructure as Code</strong></td><td>Terraform / OpenTofu</td><td>Declare infra in HCL. Version-controlled, repeatable, auditable.</td></tr>
+<tr><td><strong>Monitoring</strong></td><td>Grafana + Prometheus</td><td>Dashboard metrics from any source. Prometheus scrapes and stores.</td></tr>
+<tr><td><strong>Logging</strong></td><td>Pino (structured) → Loki/Grafana</td><td>Structured JSON logs. Centralized querying.</td></tr>
+<tr><td><strong>Secrets</strong></td><td>Infisical / Doppler</td><td>Sync .env across devs, CI, and production. Encrypted, audited.</td></tr>
+<tr><td><strong>Deploy</strong></td><td>Coolify / Railway</td><td>Self-hosted Vercel or managed PaaS. Dockerfile → URL.</td></tr>
+</table>
+
+<h2>1. CI/CD with GitHub Actions</h2>
+<p>A good CI/CD pipeline tests, builds, and deploys on every push. Here's a minimal but complete workflow:</p>
+<pre><code># .github/workflows/ci.yml
+name: CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "22" }
+      - run: npm ci
+      - run: npx vitest --coverage
+        env:
+          DATABASE_URL: postgresql://postgres:test@localhost:5432/test
+      - run: npx playwright test  # E2E
+      - name: Deploy (if main)
+        if: github.ref == 'refs/heads/main'
+        run: curl -X POST $DEPLOY_WEBHOOK</code></pre>
+
+<h2>2. Docker for Containers</h2>
+<pre><code># Multi-stage Dockerfile for a Node.js app
+FROM node:22-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+FROM node:22-alpine AS runner
+WORKDIR /app
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+EXPOSE 3000
+CMD ["node", "dist/server.js"]</code></pre>
+
+<h2>3. Infrastructure as Code (Terraform)</h2>
+<p>Terraform lets you declare infrastructure in code. No more clicking in cloud consoles — your infra is version-controlled and repeatable.</p>
+<pre><code># main.tf — Deploy a Next.js app to Vercel
+resource "vercel_project" "web" {
+  name      = "my-app"
+  framework = "nextjs"
+  git_repository = {
+    type = "github"
+    repo = "my-org/my-app"
+  }
+}
+
+resource "vercel_project_environment_variable" "db_url" {
+  project_id = vercel_project.web.id
+  key        = "DATABASE_URL"
+  value      = var.database_url
+}</code></pre>
+
+<h2>4. Monitoring with Grafana + Prometheus</h2>
+<p>Prometheus scrapes metrics from your app (CPU, memory, request latency, error rate). Grafana visualizes them in dashboards. For Node.js apps, use prom-client to expose custom metrics:</p>
+<pre><code>import client from "prom-client";
+import express from "express";
+
+const app = express();
+const collectDefaultMetrics = client.collectDefaultMetrics;
+collectDefaultMetrics();
+
+const httpRequestDuration = new client.Histogram({
+  name: "http_request_duration_seconds",
+  help: "Duration of HTTP requests in seconds",
+  labelNames: ["method", "route", "status"],
+});
+
+app.use((req, res, next) => {
+  const end = httpRequestDuration.startTimer();
+  res.on("finish", () => {
+    end({ method: req.method, route: req.route?.path, status: res.statusCode });
+  });
+  next();
+});
+
+app.get("/metrics", async (req, res) => {
+  res.set("Content-Type", client.register.contentType);
+  res.end(await client.register.metrics());
+});</code></pre>
+
+<h2>When to Skip Complexity</h2>
+<p>Not every project needs the full DevOps stack:</p>
+<ul>
+<li><strong>Side project / MVP:</strong> GitHub Actions → Coolify on a $20 VPS. Skip K8s, skip Terraform.</li>
+<li><strong>Growing startup:</strong> GitHub Actions → Railway or Render. Add Sentry for errors.</li>
+<li><strong>Scaling product:</strong> GitHub Actions → K8s (or ECS). Terraform for infra. Full monitoring stack.</li>
+</ul>
+
+<p><strong>Bottom line:</strong> Learn CI/CD and Docker first — they're universally useful. Add Terraform when your infra has 5+ resources. Add K8s only when you have 10+ containers and need orchestration. The best operations is the one you don't have to think about. See also: <a href="/en/tools/best-cicd-tools-2026.html">CI/CD tools comparison</a> and <a href="/en/compare/docker-vs-podman.html">Docker vs Podman</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

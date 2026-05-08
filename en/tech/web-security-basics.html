@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="web-security-basics">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know">
+    <meta property="og:description" content="Practical web security guide covering Cross-Site Scripting, CORS headers, Content Security Policy, SQL injection, and CSRF attacks. Includes code examples and prevention strategies.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/web-security-basics.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know">
+    <meta name="twitter:description" content="Practical web security guide covering Cross-Site Scripting, CORS headers, Content Security Policy, SQL injection, and CSRF attacks. Includes code examples and prevention strategies.">
+    <title>Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know — SourceHub</title>
+    <meta name="description" content="Practical web security guide covering Cross-Site Scripting, CORS headers, Content Security Policy, SQL injection, and CSRF attacks. Includes code examples and prevention strategies.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/web-security-basics.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/web-security-basics.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know",
+      "description": "Practical web security guide covering Cross-Site Scripting, CORS headers, Content Security Policy, SQL injection, and CSRF attacks. Includes code examples and prevention strategies.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">OWASP</span>
+        <span class="tag-cat">Best Practices</span>
+        <span class="tag-cat">Web Dev</span></div>
+      <h1 class="article-title">Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know</h1>
+      <div class="article-meta">Published 2026-05-08 · 5040 views · 42 replies</div>
+      <div class="article-body"><p>Security isn't optional — it's part of your job as a developer. Most breaches exploit well-known vulnerabilities that have been understood for years. Here are the five web security threats every developer must understand, with prevention strategies and code examples.</p>
+
+<h2>The Threat Landscape</h2>
+<table>
+<tr><th>Attack</th><th>Severity</th><th>OWASP Rank</th><th>What It Does</th></tr>
+<tr><td>XSS (Cross-Site Scripting)</td><td>Critical</td><td>#2</td><td>Injects malicious scripts into your pages</td></tr>
+<tr><td>SQL Injection</td><td>Critical</td><td>#3</td><td>Executes arbitrary SQL on your database</td></tr>
+<tr><td>CSRF (Cross-Site Request Forgery)</td><td>High</td><td>Dropped</td><td>Tricks users into performing unwanted actions</td></tr>
+<tr><td>CORS Misconfiguration</td><td>High</td><td>#5</td><td>Allows unauthorized cross-origin access</td></tr>
+<tr><td>Insecure Authentication</td><td>Critical</td><td>#1</td><td>Weak auth allows account takeover</td></tr>
+</table>
+
+<h2>1. Cross-Site Scripting (XSS)</h2>
+<p>XSS happens when user input is rendered as HTML without sanitization. An attacker who can inject &lt;script&gt; tags can steal cookies, session tokens, and sensitive data.</p>
+<pre><code>// ❌ Vulnerable:
+div.innerHTML = userComment;  // Attacker: &lt;img src=x onerror="stealCookies()"&gt;
+
+// ✅ Safe:
+div.textContent = userComment;      // Escapes HTML automatically
+// Or sanitize:
+import DOMPurify from 'dompurify';
+div.innerHTML = DOMPurify.sanitize(userComment);</code></pre>
+<p><strong>React note:</strong> JSX auto-escapes by default — you're safe from XSS in standard rendering. The danger is dangerouslySetInnerHTML and direct DOM manipulation.</p>
+
+<h2>2. SQL Injection</h2>
+<p>Concatenating user input into SQL queries gives attackers full database access. Parameterized queries are the fix — use them 100% of the time.</p>
+<pre><code>// ❌ Vulnerable — attacker input: "1; DROP TABLE users;"
+const query = `SELECT * FROM users WHERE id = ${userId}`;
+
+// ✅ Safe — parameterized query
+const query = "SELECT * FROM users WHERE id = $1";
+const result = await db.query(query, [userId]);
+// ORM users: Prisma/Drizzle parameterize automatically</code></pre>
+
+<h2>3. Cross-Site Request Forgery (CSRF)</h2>
+<p>An attacker's site makes a request to your API using the victim's cookies. CSRF tokens ensure the request originated from your own frontend.</p>
+<pre><code>// Mitigation strategies:
+// 1. SameSite cookies (simplest, best):
+Set-Cookie: session=abc123; SameSite=Strict; HttpOnly; Secure
+
+// 2. CSRF token (additional layer):
+// Server sends a unique token; client includes it in requests
+// Modern frameworks (Next.js, Remix) handle this automatically
+
+// 3. Custom header requirement:
+// Browsers don't allow custom headers cross-origin
+// Require X-Requested-With or similar</code></pre>
+
+<h2>4. CORS Misconfiguration</h2>
+<p>CORS (Cross-Origin Resource Sharing) controls which origins can access your API. The most common mistake: using a wildcard or reflecting the Origin header blindly.</p>
+<pre><code>// ❌ Vulnerable — allows any origin:
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true  // Can't use with *
+
+// ❌ Vulnerable — reflects origin blindly:
+// If your server echoes back the request's Origin header, any domain can access
+
+// ✅ Safe — explicit allowlist:
+const allowedOrigins = ["https://myapp.com", "https://admin.myapp.com"];
+const origin = req.headers.origin;
+if (allowedOrigins.includes(origin)) {
+  res.setHeader("Access-Control-Allow-Origin", origin);
+}</code></pre>
+
+<h2>5. Content Security Policy (CSP)</h2>
+<p>CSP is your last line of defense. It tells the browser what sources of scripts, styles, and other resources are allowed. A well-configured CSP makes XSS exploitation nearly impossible.</p>
+<pre><code>// Recommended CSP header:
+Content-Security-Policy:
+  default-src 'self';
+  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com;
+  style-src 'self' 'unsafe-inline';
+  img-src 'self' data: https:;
+  font-src 'self';
+  connect-src 'self' https://api.myapp.com;
+  frame-src https://js.stripe.com;
+  // NO 'unsafe-inline' for scripts in production (use nonce/hash)</code></pre>
+
+<h2>Security Checklist</h2>
+<ul>
+<li><strong>Authentication:</strong> Use OAuth 2.0 / OIDC. Never roll your own crypto.</li>
+<li><strong>Passwords:</strong> bcrypt with cost factor 12+. Never store plaintext.</li>
+<li><strong>HTTPS:</strong> Everywhere. Redirect HTTP. HSTS header.</li>
+<li><strong>Dependencies:</strong> npm audit / snyk weekly. Auto-update minor patches.</li>
+<li><strong>Environment variables:</strong> Never commit .env files. Inject at runtime.</li>
+<li><strong>Rate limiting:</strong> Protect login and API endpoints from brute force.</li>
+<li><strong>Logging:</strong> Log auth events. Never log passwords or tokens.</li>
+</ul>
+
+<p><strong>Bottom line:</strong> Use parameterized queries, auto-escaping frameworks, SameSite cookies, CSP headers, and explicit CORS allowlists. Security is layers — implement them all, and a single failure won't compromise you. See also: <a href="/en/tech/rest-api-best-practices.html">REST API Best Practices</a> and <a href="/en/tech/api-design-patterns.html">API Design Patterns</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

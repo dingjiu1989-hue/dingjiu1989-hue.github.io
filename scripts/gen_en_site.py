@@ -2742,6 +2742,663 @@ BODIES['best-web-performance-tools'] = '''
 <p><strong>Bottom line:</strong> Lighthouse for dev and CI, Sentry for production errors and real-user performance, Checkly for synthetic uptime/flow monitoring, WebPageTest for deep dives. These four tools together cost $0 for small projects and give you complete visibility. See our <a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html">hosting comparison</a> — good hosting makes performance easier.</p>
 '''
 
+BODIES['typescript-advanced-patterns'] = '''
+<p>TypeScript's type system is a programming language in its own right. Once you go beyond basic annotations, you can encode invariants into types that make entire categories of bugs impossible. Here are the advanced patterns that level up your TypeScript in 2026.</p>
+
+<h2>1. Conditional Types</h2>
+<p>Conditional types select types based on a condition — like a ternary operator at the type level.</p>
+<pre><code>type IsString&lt;T&gt; = T extends string ? true : false;
+
+type A = IsString&lt;"hello"&gt;;  // true
+type B = IsString&lt;number&gt;;   // false
+
+// Real example: extract the array element type
+type ArrayElement&lt;T&gt; = T extends (infer U)[] ? U : never;
+type Item = ArrayElement&lt;string[]&gt;;  // string</code></pre>
+
+<h2>2. Mapped Types</h2>
+<p>Mapped types transform existing types by iterating over their keys.</p>
+<pre><code>// Make all properties optional
+type Partial&lt;T&gt; = { [K in keyof T]?: T[K] };
+
+// Make all properties readonly
+type Readonly&lt;T&gt; = { readonly [K in keyof T]: T[K] };
+
+// Real example: pick nullable fields
+type Nullable&lt;T&gt; = { [K in keyof T]: T[K] | null };</code></pre>
+
+<h2>3. Template Literal Types</h2>
+<p>Construct types from string patterns — powerful for typed routing and event systems.</p>
+<pre><code>type EventName = "click" | "focus" | "blur";
+type Handler = `on${Capitalize&lt;EventName&gt;}`;
+// "onClick" | "onFocus" | "onBlur"
+
+// Real example: typed API routes
+type Route = `/api/${string}`;
+type UserRoute = `/api/users/${number}`;
+const route: UserRoute = "/api/users/42"; // OK
+const bad: UserRoute = "/api/users/abc"; // Error</code></pre>
+
+<h2>4. The infer Keyword</h2>
+<p>Extract and capture types from other types during conditional type checks.</p>
+<pre><code>// Extract return type of a function
+type ReturnType&lt;T&gt; = T extends (...args: any[]) => infer R ? R : never;
+
+// Extract the promise resolved type
+type Awaited&lt;T&gt; = T extends Promise&lt;infer U&gt; ? U : T;
+
+// Real example: extract component props
+type Props&lt;C&gt; = C extends React.ComponentType&lt;infer P&gt; ? P : never;</code></pre>
+
+<h2>5. Branded Types (Nominal Typing)</h2>
+<p>TypeScript uses structural typing, but sometimes you want nominal types — two strings that are not interchangeable.</p>
+<pre><code>type UserId = string & { readonly __brand: "UserId" };
+type OrderId = string & { readonly __brand: "OrderId" };
+
+function createUserId(id: string): UserId {
+  return id as UserId;
+}
+
+function getUser(id: UserId) { /* ... */ }
+
+getUser(createUserId("abc")); // OK
+getUser("abc"); // Error — plain string is not a UserId</code></pre>
+
+<h2>6. Discriminated Unions</h2>
+<p>The most useful pattern in TypeScript. Model states exhaustively with a discriminator field.</p>
+<pre><code>type RequestState&lt;T&gt; =
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; data: T }
+  | { status: "error"; error: Error };
+
+function render&lt;T&gt;(state: RequestState&lt;T&gt;) {
+  switch (state.status) {
+    case "idle": return "Ready";
+    case "loading": return "Loading...";
+    case "success": return state.data; // T — narrowed!
+    case "error": return state.error.message; // Error — narrowed!
+  }
+}</code></pre>
+
+<h2>7. Builder Pattern with Type Safety</h2>
+<pre><code>class QueryBuilder&lt;
+  T extends Record&lt;string, unknown&gt;,
+  Selected extends keyof T | "*" = "*",
+  WhereClause extends Partial&lt;T&gt; = {}
+&gt; {
+  select&lt;K extends keyof T&gt;(...cols: K[]): QueryBuilder&lt;T, K, WhereClause&gt; {
+    return this as any;
+  }
+  where(conditions: Partial&lt;T&gt;): QueryBuilder&lt;T, Selected, Partial&lt;T&gt;&gt; {
+    return this as any;
+  }
+}</code></pre>
+
+<h2>Quick Reference: When to Use What</h2>
+<table>
+<tr><th>Pattern</th><th>Use Case</th></tr>
+<tr><td>Conditional Types</td><td>Transform types based on conditions</td></tr>
+<tr><td>Mapped Types</td><td>Bulk-modify object property types</td></tr>
+<tr><td>Template Literal Types</td><td>String-pattern-based types (routes, events)</td></tr>
+<tr><td>infer</td><td>Extract embedded types</td></tr>
+<tr><td>Branded Types</td><td>Distinguish same-shape types semantically</td></tr>
+<tr><td>Discriminated Unions</td><td>Exhaustive state modeling (async, forms)</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Advanced TypeScript patterns let you catch bugs at compile time instead of runtime. Discriminated unions and branded types alone will eliminate entire categories of bugs. See also: <a href="/en/compare/prisma-vs-drizzle-vs-typeorm.html">TypeScript ORM comparison</a> and <a href="/en/compare/trpc-vs-graphql-vs-rest.html">tRPC for end-to-end types</a>.</p>
+'''
+
+BODIES['testing-strategies-web-apps'] = '''
+<p>Testing is easy to get wrong. Too many unit tests give false confidence. Too few integration tests miss real bugs. Too many E2E tests make CI slow. Here's a practical guide to the Testing Trophy — the modern testing strategy that actually works.</p>
+
+<h2>The Testing Trophy (Not the Testing Pyramid)</h2>
+<p>The classic testing pyramid said "lots of unit, some integration, few E2E." The Testing Trophy inverts this: integration tests provide the most confidence per dollar, so write more of them.</p>
+<table>
+<tr><th></th><th>Unit Tests</th><th>Integration Tests</th><th>E2E Tests</th></tr>
+<tr><td><strong>Tests</strong></td><td>Single function/component</td><td>Multiple modules together</td><td>Full user flow in browser</td></tr>
+<tr><td><strong>Speed</strong></td><td>Fastest (ms)</td><td>Fast (10-100ms)</td><td>Slow (seconds)</td></tr>
+<tr><td><strong>Confidence</strong></td><td>Low (isolated)</td><td>High (integration is the risk)</td><td>Highest (real UX)</td></tr>
+<tr><td><strong>Flakiness</strong></td><td>None</td><td>Low</td><td>High (network, timing)</td></tr>
+<tr><td><strong>Debugging</strong></td><td>Easiest</td><td>Moderate</td><td>Hardest</td></tr>
+<tr><td><strong>Recommended ratio</strong></td><td>20%</td><td>60%</td><td>20%</td></tr>
+</table>
+
+<h2>Unit Tests — Test Pure Logic Exhaustively</h2>
+<p>Unit tests shine for pure functions: validation logic, data transformation, utility functions, and business rules. Don't unit test React components in isolation — that's what integration tests are for. Don't test implementation details (test behavior, not methods).</p>
+<pre><code>// Good unit test: pure business logic
+describe("calculateDiscount", () => {
+  it("gives 20% off orders over $100", () => {
+    expect(calculateDiscount({ total: 150, coupon: null })).toBe(30);
+  });
+  it("stacks with coupon, max 50%", () => {
+    expect(calculateDiscount({ total: 100, coupon: "SAVE30" })).toBe(40);
+  });
+});</code></pre>
+
+<h2>Integration Tests — The Confidence Backbone</h2>
+<p>Integration tests verify that multiple units work together. For frontend: render a component with real state, click something, assert the DOM. For backend: hit an endpoint, verify the database state. These catch the bugs unit tests miss.</p>
+<pre><code>// Frontend integration test: render + interact + assert
+test("submits form and shows success", async () => {
+  render(&lt;SignupForm /&gt;);
+  await user.type(screen.getByLabel("Email"), "test@example.com");
+  await user.click(screen.getByText("Sign Up"));
+  expect(await screen.findByText("Check your email")).toBeVisible();
+});
+
+// Backend integration test: request → response
+test("POST /api/users creates user in DB", async () => {
+  const res = await request(app)
+    .post("/api/users")
+    .send({ email: "test@example.com", name: "Test" });
+  expect(res.status).toBe(201);
+  const user = await db.query("SELECT * FROM users WHERE email = $1", ["test@example.com"]);
+  expect(user.rows[0].name).toBe("Test");
+});</code></pre>
+
+<h2>E2E Tests — Validate Critical User Flows</h2>
+<p>E2E tests drive a real browser through your most important flows: signup, login, purchase, onboarding. Keep these to critical paths only — they're slow and can be flaky. Playwright is the best E2E tool in 2026.</p>
+<pre><code>// E2E: only critical paths
+test("user can complete purchase", async ({ page }) => {
+  await page.goto("/products/widget");
+  await page.click("text=Add to Cart");
+  await page.click("text=Checkout");
+  await page.fill("[name=card]", "4242424242424242");
+  await page.click("text=Pay $29.00");
+  await expect(page.locator(".confirmation")).toContainText("Thank you");
+});</code></pre>
+
+<h2>Testing Stack Recommendations</h2>
+<table>
+<tr><th>Layer</th><th>Tool</th><th>When</th></tr>
+<tr><td>Unit</td><td>Vitest</td><td>Pure functions, utils, business logic</td></tr>
+<tr><td>Component Integration</td><td>Vitest + Testing Library</td><td>Any component with user interaction</td></tr>
+<tr><td>Backend Integration</td><td>Vitest + Supertest</td><td>API endpoints, DB writes</td></tr>
+<tr><td>E2E</td><td>Playwright</td><td>Signup, login, purchase, onboarding</td></tr>
+<tr><td>Visual Regression</td><td>Chromatic / Percy</td><td>Design system components</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Write mostly integration tests. They provide the best confidence-to-effort ratio. Unit test pure logic. E2E test only critical flows (max 20 scenarios). A slow CI pipeline is a broken one — keep E2E count low. See also: <a href="/en/compare/vite-vs-webpack-vs-turbopack.html">build tools</a> (Vitest is built on Vite) and <a href="/en/tools/best-cicd-tools-2026.html">CI/CD tools comparison</a>.</p>
+'''
+
+BODIES['web-security-basics'] = '''
+<p>Security isn't optional — it's part of your job as a developer. Most breaches exploit well-known vulnerabilities that have been understood for years. Here are the five web security threats every developer must understand, with prevention strategies and code examples.</p>
+
+<h2>The Threat Landscape</h2>
+<table>
+<tr><th>Attack</th><th>Severity</th><th>OWASP Rank</th><th>What It Does</th></tr>
+<tr><td>XSS (Cross-Site Scripting)</td><td>Critical</td><td>#2</td><td>Injects malicious scripts into your pages</td></tr>
+<tr><td>SQL Injection</td><td>Critical</td><td>#3</td><td>Executes arbitrary SQL on your database</td></tr>
+<tr><td>CSRF (Cross-Site Request Forgery)</td><td>High</td><td>Dropped</td><td>Tricks users into performing unwanted actions</td></tr>
+<tr><td>CORS Misconfiguration</td><td>High</td><td>#5</td><td>Allows unauthorized cross-origin access</td></tr>
+<tr><td>Insecure Authentication</td><td>Critical</td><td>#1</td><td>Weak auth allows account takeover</td></tr>
+</table>
+
+<h2>1. Cross-Site Scripting (XSS)</h2>
+<p>XSS happens when user input is rendered as HTML without sanitization. An attacker who can inject &lt;script&gt; tags can steal cookies, session tokens, and sensitive data.</p>
+<pre><code>// ❌ Vulnerable:
+div.innerHTML = userComment;  // Attacker: &lt;img src=x onerror="stealCookies()"&gt;
+
+// ✅ Safe:
+div.textContent = userComment;      // Escapes HTML automatically
+// Or sanitize:
+import DOMPurify from 'dompurify';
+div.innerHTML = DOMPurify.sanitize(userComment);</code></pre>
+<p><strong>React note:</strong> JSX auto-escapes by default — you're safe from XSS in standard rendering. The danger is dangerouslySetInnerHTML and direct DOM manipulation.</p>
+
+<h2>2. SQL Injection</h2>
+<p>Concatenating user input into SQL queries gives attackers full database access. Parameterized queries are the fix — use them 100% of the time.</p>
+<pre><code>// ❌ Vulnerable — attacker input: "1; DROP TABLE users;"
+const query = `SELECT * FROM users WHERE id = ${userId}`;
+
+// ✅ Safe — parameterized query
+const query = "SELECT * FROM users WHERE id = $1";
+const result = await db.query(query, [userId]);
+// ORM users: Prisma/Drizzle parameterize automatically</code></pre>
+
+<h2>3. Cross-Site Request Forgery (CSRF)</h2>
+<p>An attacker's site makes a request to your API using the victim's cookies. CSRF tokens ensure the request originated from your own frontend.</p>
+<pre><code>// Mitigation strategies:
+// 1. SameSite cookies (simplest, best):
+Set-Cookie: session=abc123; SameSite=Strict; HttpOnly; Secure
+
+// 2. CSRF token (additional layer):
+// Server sends a unique token; client includes it in requests
+// Modern frameworks (Next.js, Remix) handle this automatically
+
+// 3. Custom header requirement:
+// Browsers don't allow custom headers cross-origin
+// Require X-Requested-With or similar</code></pre>
+
+<h2>4. CORS Misconfiguration</h2>
+<p>CORS (Cross-Origin Resource Sharing) controls which origins can access your API. The most common mistake: using a wildcard or reflecting the Origin header blindly.</p>
+<pre><code>// ❌ Vulnerable — allows any origin:
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true  // Can't use with *
+
+// ❌ Vulnerable — reflects origin blindly:
+// If your server echoes back the request's Origin header, any domain can access
+
+// ✅ Safe — explicit allowlist:
+const allowedOrigins = ["https://myapp.com", "https://admin.myapp.com"];
+const origin = req.headers.origin;
+if (allowedOrigins.includes(origin)) {
+  res.setHeader("Access-Control-Allow-Origin", origin);
+}</code></pre>
+
+<h2>5. Content Security Policy (CSP)</h2>
+<p>CSP is your last line of defense. It tells the browser what sources of scripts, styles, and other resources are allowed. A well-configured CSP makes XSS exploitation nearly impossible.</p>
+<pre><code>// Recommended CSP header:
+Content-Security-Policy:
+  default-src 'self';
+  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com;
+  style-src 'self' 'unsafe-inline';
+  img-src 'self' data: https:;
+  font-src 'self';
+  connect-src 'self' https://api.myapp.com;
+  frame-src https://js.stripe.com;
+  // NO 'unsafe-inline' for scripts in production (use nonce/hash)</code></pre>
+
+<h2>Security Checklist</h2>
+<ul>
+<li><strong>Authentication:</strong> Use OAuth 2.0 / OIDC. Never roll your own crypto.</li>
+<li><strong>Passwords:</strong> bcrypt with cost factor 12+. Never store plaintext.</li>
+<li><strong>HTTPS:</strong> Everywhere. Redirect HTTP. HSTS header.</li>
+<li><strong>Dependencies:</strong> npm audit / snyk weekly. Auto-update minor patches.</li>
+<li><strong>Environment variables:</strong> Never commit .env files. Inject at runtime.</li>
+<li><strong>Rate limiting:</strong> Protect login and API endpoints from brute force.</li>
+<li><strong>Logging:</strong> Log auth events. Never log passwords or tokens.</li>
+</ul>
+
+<p><strong>Bottom line:</strong> Use parameterized queries, auto-escaping frameworks, SameSite cookies, CSP headers, and explicit CORS allowlists. Security is layers — implement them all, and a single failure won't compromise you. See also: <a href="/en/tech/rest-api-best-practices.html">REST API Best Practices</a> and <a href="/en/tech/api-design-patterns.html">API Design Patterns</a>.</p>
+'''
+
+BODIES['database-design-fundamentals'] = '''
+<p>A well-designed database makes every query simpler and faster. A poorly-designed one creates bugs, slow queries, and painful migrations forever. Here are the fundamentals every developer should know before creating tables.</p>
+
+<h2>1. Normalization — Reduce Redundancy</h2>
+<p>Normalization eliminates duplicate data and prevents update anomalies. You need at least 3NF (Third Normal Form) for most applications.</p>
+
+<h3>1NF: Atomic Values, No Repeating Groups</h3>
+<pre><code>-- ❌ Denormalized: multiple phone numbers in one field
+| id | name  | phones              |
+| 1  | Alice | "555-0001, 555-0002"|
+
+-- ✅ 1NF: each value is atomic, or use a separate table
+| id | name  |
+| 1  | Alice |
+| id | user_id | phone     |
+| 1  | 1       | 555-0001  |
+| 2  | 1       | 555-0002  |</code></pre>
+
+<h3>2NF: No Partial Dependencies</h3>
+<p>Every non-key column must depend on the WHOLE primary key, not part of it. This only applies to tables with composite keys.</p>
+<pre><code>-- ❌ 2NF violation: course_name depends only on course_id, not the full key
+| student_id | course_id | course_name | grade |
+| 1          | CS101     | Intro CS    | A     |
+
+-- ✅ 2NF: split into two tables
+Students: student_id → course_id → grade
+Courses: course_id → course_name</code></pre>
+
+<h3>3NF: No Transitive Dependencies</h3>
+<p>Non-key columns must not depend on other non-key columns.</p>
+<pre><code>-- ❌ 3NF violation: city_population depends on city, not directly on the key
+| student_id | city    | city_population |
+| 1          | Boston  | 675000          |
+
+-- ✅ 3NF: city_population in a cities table
+Students: student_id → city_id
+Cities: city_id → name, population</code></pre>
+
+<h2>2. Indexing — Speed Up Queries</h2>
+<table>
+<tr><th>Index Type</th><th>Best For</th><th>Example</th></tr>
+<tr><td>B-Tree (default)</td><td>Equality, range, sorting</td><td>WHERE email = ?, ORDER BY created_at</td></tr>
+<tr><td>Composite</td><td>Multi-column queries</td><td>WHERE user_id = ? AND status = ?</td></tr>
+<tr><td>Partial</td><td>Filtering by condition</td><td>WHERE deleted_at IS NULL</td></tr>
+<tr><td>Full-text (GIN/GiST)</td><td>Text search</td><td>WHERE body @@ to_tsquery('typescript')</td></tr>
+<tr><td>Unique</td><td>Enforce uniqueness</td><td>UNIQUE(email)</td></tr>
+</table>
+
+<h3>Index Rules of Thumb</h3>
+<ul>
+<li><strong>Index WHERE and JOIN columns.</strong> Every foreign key gets an index.</li>
+<li><strong>Composite index column order matters.</strong> Put the most selective column first.</li>
+<li><strong>Don't over-index.</strong> Each index slows down INSERT/UPDATE/DELETE.</li>
+<li><strong>Use EXPLAIN ANALYZE.</strong> Verify the index is actually being used.</li>
+</ul>
+
+<h2>3. Relationship Types</h2>
+<pre><code>-- One-to-Many (most common):
+CREATE TABLE posts (
+  id SERIAL PRIMARY KEY,
+  user_id INT REFERENCES users(id),  -- FK to users
+  title TEXT NOT NULL
+);  -- One user → many posts
+
+-- Many-to-Many (use junction table):
+CREATE TABLE post_tags (
+  post_id INT REFERENCES posts(id),
+  tag_id INT REFERENCES tags(id),
+  PRIMARY KEY (post_id, tag_id)
+);  -- One post → many tags, one tag → many posts
+
+-- One-to-One (rare, use for optional extension):
+CREATE TABLE user_profiles (
+  user_id INT PRIMARY KEY REFERENCES users(id),
+  bio TEXT
+);  -- One user → one profile</code></pre>
+
+<h2>4. Common Schema Design Mistakes</h2>
+<table>
+<tr><th>Mistake</th><th>Why It's Bad</th><th>Fix</th></tr>
+<tr><td>Using VARCHAR for everything</td><td>No constraints, wasted space</td><td>Use appropriate types (UUID, INT, TIMESTAMPTZ, TEXT)</td></tr>
+<tr><td>Storing JSON blobs instead of columns</td><td>Can't index, can't query efficiently</td><td>Relational columns first, JSONB only for truly dynamic data</td></tr>
+<tr><td>No TIMESTAMPTZ</td><td>Timezone bugs are a nightmare</td><td>Always use TIMESTAMPTZ, store UTC</td></tr>
+<tr><td>Missing foreign key constraints</td><td>Orphaned data, referential chaos</td><td>Always add FK constraints (ON DELETE CASCADE or SET NULL)</td></tr>
+<tr><td>EAV (Entity-Attribute-Value)</td><td>Unqueriable soup</td><td>Use JSONB for dynamic fields per row, or normal columns</td></tr>
+</table>
+
+<h2>5. Choosing Your Primary Key</h2>
+<table>
+<tr><th>Strategy</th><th>Pros</th><th>Cons</th></tr>
+<tr><td><strong>UUID v4</strong></td><td>No collisions, client-generated, no sequence contention</td><td>Larger (16 bytes), fragmented index, slower joins</td></tr>
+<tr><td><strong>UUID v7</strong></td><td>Time-ordered, all UUID benefits</td><td>Slightly more complex generation</td></tr>
+<tr><td><strong>Auto-increment INT</strong></td><td>Small index, fast joins, ordered</td><td>Predictable, can't merge across servers, exposes count</td></tr>
+<tr><td><strong>Auto-increment BIGINT</strong></td><td>Same as INT, won't overflow</td><td>Same cons. Use this over INT for new projects.</td></tr>
+<tr><td><strong>Nano ID / CUID2</strong></td><td>URL-safe, collision-resistant</td><td>String-based (slower than UUID in Postgres)</td></tr>
+</table>
+<p><strong>Recommendation:</strong> UUID v7 for distributed systems and public-facing IDs. BIGINT for internal tables. Avoid exposing auto-increment IDs in URLs.</p>
+
+<p><strong>Bottom line:</strong> Normalize to 3NF, index every FK and query column, use appropriate data types, and always have foreign key constraints. A well-designed schema is cheaper to fix now than later. See also: <a href="/en/compare/postgresql-vs-mysql-vs-sqlite.html">database comparison</a> and <a href="/en/compare/prisma-vs-drizzle-vs-typeorm.html">ORM comparison</a>.</p>
+'''
+
+BODIES['microservices-vs-monolith'] = '''
+<p>Microservices vs monolith is not a religious debate — it's an engineering tradeoff. The right answer depends on your team size, growth stage, and what you're building. Here's a clear-eyed comparison to help you decide.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Monolith</th><th>Microservices</th></tr>
+<tr><td><strong>Best for</strong></td><td>Startups, small teams, early products</td><td>Large teams, scale, complex domains</td></tr>
+<tr><td><strong>Development speed</strong></td><td>Fast (one codebase, one deploy)</td><td>Slower initially (infra overhead)</td></tr>
+<tr><td><strong>Deployment</strong></td><td>Single deploy</td><td>Independent per service</td></tr>
+<tr><td><strong>Debugging</strong></td><td>Simple (one stack trace)</td><td>Complex (distributed tracing)</td></tr>
+<tr><td><strong>Testing</strong></td><td>Simple (one test suite)</td><td>Complex (integration, contracts)</td></tr>
+<tr><td><strong>Scaling</strong></td><td>Vertical + replicas</td><td>Per-service horizontal</td></tr>
+<tr><td><strong>Team autonomy</strong></td><td>Shared codebase</td><td>Independent ownership</td></tr>
+<tr><td><strong>Data consistency</strong></td><td>ACID transactions</td><td>Eventual (Saga, Outbox)</td></tr>
+<tr><td><strong>Ops complexity</strong></td><td>Low</td><td>High (K8s, service mesh, etc.)</td></tr>
+</table>
+
+<h2>The Case for Monoliths</h2>
+<p>A monolith is a single deployable application. All code lives in one repo, shares memory, and uses ACID transactions. For most early-stage products, this is the right choice.</p>
+<p><strong>Why monoliths win early:</strong> One deploy means one thing to monitor. ACID transactions across all your data. One codebase makes refactoring across modules trivial. Debugging is a single stack trace. New hires can understand the whole system. You can extract services later when the boundaries are clear from usage patterns.</p>
+<p><strong>When monoliths hurt:</strong> 50+ developers in one codebase create merge conflicts and coordination overhead. Teams can't deploy independently. Scaling means replicating the entire app (not just the hot path). Tech stack is locked in. Build and test times grow linearly.</p>
+<p><strong>Famous monolith success stories:</strong> Shopify (modular monolith with 1000+ developers), Basecamp, GitHub (used a monolith for years), Stack Overflow (still mostly monolithic).</p>
+
+<h2>The Case for Microservices</h2>
+<p>Microservices split an application into independently deployable services, each owning its own data. The operational overhead is significant, but the organizational scaling benefits are real at scale.</p>
+<p><strong>Why microservices win at scale:</strong> Teams own services independently (deploy on their own schedule). Scale only the services that need it. Different services can use different tech stacks. Fault isolation — a crash in one service doesn't take down everything. Clear ownership boundaries enforce modularity.</p>
+<p><strong>When microservices hurt:</strong> Distributed transactions are HARD. Debugging across services requires tracing infrastructure. Network latency between services adds up. Integration testing becomes complex. Premature decomposition creates wrong boundaries that are expensive to change. The first 90% of your product's life, you're paying the microservices tax without the benefits.</p>
+
+<h2>The Modular Monolith — Best of Both Worlds</h2>
+<p>A modular monolith has clean internal boundaries (modules with explicit interfaces) but deploys as a single application. Each module owns its own domain, but they communicate through well-defined internal APIs instead of HTTP.</p>
+<p><strong>This is the optimal starting point for most projects.</strong> You get fast development, simple deployment, and ACID transactions. The module boundaries can become service boundaries later — but only when you actually need them.</p>
+
+<h2>Decision Framework</h2>
+<table>
+<tr><th>Scenario</th><th>Recommended Architecture</th></tr>
+<tr><td>Startup / side project / MVP</td><td><strong>Monolith</strong> (modular)</td></tr>
+<tr><td>Team of 1-10, single product</td><td><strong>Monolith</strong> (modular)</td></tr>
+<tr><td>Team of 10-50, growing</td><td><strong>Modular monolith</strong> → extract hot paths</td></tr>
+<tr><td>Team of 50+, multiple squads</td><td><strong>Microservices</strong> (by domain)</td></tr>
+<tr><td>Independent scaling needs</td><td><strong>Extract that service</strong> (not everything)</td></tr>
+<tr><td>Multiple tech stacks required</td><td><strong>Microservices</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Start with a modular monolith. Extract microservices only when you have a clear reason: independent scaling, team autonomy, or polyglot persistence. Premature microservices are the #1 cause of unnecessary complexity in software projects. See also: <a href="/en/compare/trpc-vs-graphql-vs-rest.html">API architecture comparison</a> and <a href="/en/tech/api-design-patterns.html">API design patterns</a>.</p>
+'''
+
+BODIES['git-workflows-team-guide'] = '''
+<p>Your branching strategy determines how code moves from development to production. Git Flow, GitHub Flow, and Trunk-Based Development each optimize for different team sizes and release cadences. Here's which one fits your team.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Git Flow</th><th>GitHub Flow</th><th>Trunk-Based Development</th></tr>
+<tr><td><strong>Branch complexity</strong></td><td>High (main, develop, feature, release, hotfix)</td><td>Low (main + feature branches)</td><td>Minimal (main + short-lived branches)</td></tr>
+<tr><td><strong>Best for</strong></td><td>Scheduled releases, versioned products</td><td>Continuous deployment, web apps</td><td>Elite teams, CI/CD, fast feedback</td></tr>
+<tr><td><strong>Release cadence</strong></td><td>Versioned (v1.0, v1.1, v2.0)</td><td>Continuous (every merge is deployable)</td><td>Multiple times per day</td></tr>
+<tr><td><strong>Branch lifespan</strong></td><td>Long (feature branches: days-weeks)</td><td>Short (hours-days)</td><td>Very short (minutes-hours)</td></tr>
+<tr><td><strong>Merge conflicts</strong></td><td>Painful (long-lived branches diverge)</td><td>Moderate</td><td>Minimal (frequent integration)</td></tr>
+<tr><td><strong>Rollback</strong></td><td>Revert release branch</td><td>Revert merge commit</td><td>Revert or fix-forward</td></tr>
+</table>
+
+<h2>Git Flow — The Traditional Model</h2>
+<p>Git Flow uses multiple long-lived branches: main (production), develop (integration), feature branches, release branches, and hotfix branches. It's designed for versioned software with scheduled releases — think mobile apps, desktop software, or on-premise products.</p>
+<p><strong>When to use:</strong> You ship versioned releases (mobile apps, on-premise software, libraries). You need to maintain multiple versions simultaneously. Your release cycle is weeks or months. You have QA/staging gates between dev and production.</p>
+<p><strong>When to avoid:</strong> You deploy continuously. Your team is small (<5). You want fast feedback cycles. Branch management overhead is slowing you down.</p>
+
+<h2>GitHub Flow — The Continuous Delivery Model</h2>
+<p>GitHub Flow is dramatically simpler: one main branch (always deployable) + short-lived feature branches. Every feature branch is opened as a PR, reviewed, tested in CI, and merged to main. Main is deployed immediately (or on a schedule).</p>
+<p><strong>When to use:</strong> You deploy continuously (web apps, SaaS). Your team is 2-50. You want simple, predictable workflow. You use feature flags for incomplete work. This is the default for most web teams in 2026.</p>
+<p><strong>When to avoid:</strong> You need to maintain multiple release versions. You have long QA cycles. You need release gates.</p>
+
+<h2>Trunk-Based Development — Elite DevOps Teams</h2>
+<p>Trunk-Based Development is the most aggressive: everyone commits to main (or very short-lived branches, <24 hours). Feature flags control what's active. This requires excellent testing, CI/CD, and discipline — but enables the fastest delivery cadence. Google, Facebook, and most elite DORA performers use this.</p>
+<p><strong>When to use:</strong> Elite DevOps teams. Multiple deploys per day. Feature flags infrastructure is in place. Comprehensive automated testing. Pair programming or mob programming culture.</p>
+<p><strong>When to avoid:</strong> Solo developers or small teams without feature flags. Weak automated testing. Regulatory environments requiring formal review gates. Teams not ready for the discipline required.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Workflow</th></tr>
+<tr><td>Solo developer, side project</td><td><strong>GitHub Flow</strong> (or direct to main)</td></tr>
+<tr><td>Team 2-50, web app / SaaS</td><td><strong>GitHub Flow</strong></td></tr>
+<tr><td>Mobile app or library with releases</td><td><strong>Git Flow</strong></td></tr>
+<tr><td>High-performance CI/CD team</td><td><strong>Trunk-Based Development</strong></td></tr>
+<tr><td>Open source project</td><td><strong>GitHub Flow</strong> (fork + PR)</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> GitHub Flow is the right choice for 80% of teams in 2026. Start there. Evolve to Trunk-Based if your CI/CD maturity allows. Use Git Flow only if you ship versioned releases (mobile, on-premise). See also: <a href="/en/tech/git-cheatsheet.html">Git Cheatsheet</a> and <a href="/en/tech/git-advanced.html">Advanced Git Guide</a>.</p>
+'''
+
+BODIES['api-design-patterns'] = '''
+<p>Every production API eventually needs the same set of patterns: rate limiting, pagination, idempotency, batching, and webhooks. Here's how to implement each one correctly — with the edge cases that bite you 6 months later.</p>
+
+<h2>1. Rate Limiting</h2>
+<p>Rate limiting protects your API from abuse and ensures fair usage. The three common algorithms:</p>
+<table>
+<tr><th>Algorithm</th><th>How It Works</th><th>Best For</th></tr>
+<tr><td><strong>Token Bucket</strong></td><td>Tokens refill at a fixed rate. Each request consumes a token. Allows bursts.</td><td>Most APIs (best default)</td></tr>
+<tr><td><strong>Sliding Window</strong></td><td>Count requests in the last N seconds. Smooth, no burst allowance.</td><td>Precise rate enforcement</td></tr>
+<tr><td><strong>Fixed Window</strong></td><td>Reset count every N seconds. Simple but allows 2x bursts at boundaries.</td><td>Simple use cases (avoid)</td></tr>
+</table>
+<p><strong>Response headers:</strong> Always include <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, <code>X-RateLimit-Reset</code>, and <code>Retry-After</code> on 429 responses.</p>
+
+<h2>2. Pagination — Cursor vs Offset</h2>
+<table>
+<tr><th></th><th>Cursor-Based</th><th>Offset-Based</th></tr>
+<tr><td><strong>Implementation</strong></td><td><code>?cursor=abc123&limit=20</code></td><td><code>?offset=40&limit=20</code></td></tr>
+<tr><td><strong>Stability</strong></td><td>Stable (new rows don't shift)</td><td>Unstable (page shifts with inserts)</td></tr>
+<tr><td><strong>Performance</strong></td><td>Fast (uses index directly)</td><td>Slow on large offsets (scans then discards)</td></tr>
+<tr><td><strong>Random access</strong></td><td>No (must traverse sequentially)</td><td>Yes (jump to page 42)</td></tr>
+<tr><td><strong>Use case</strong></td><td>Feeds, timelines, infinite scroll</td><td>Search results, admin UIs</td></tr>
+</table>
+<p><strong>Rule:</strong> Use cursor-based pagination by default. Only use offset when you need random page access.</p>
+
+<h2>3. Idempotency Keys</h2>
+<p>Network is unreliable. Clients retry. Without idempotency, a retried payment request = double charge. The fix: idempotency keys.</p>
+<pre><code>// Client sends a unique key:
+POST /api/charges
+Idempotency-Key: 8f7d3a2c-9e4b-4a1d-8c6f-3b5e7d9a0f2c
+
+// Server logic:
+// 1. Check if key exists in idempotency store (e.g., Redis with 24h TTL)
+// 2. If NOT found: process request, store response with key
+// 3. If found: return stored response (same status code, same body)</code></pre>
+<p><strong>Where to use:</strong> Payment endpoints, order creation, any mutation where duplicates are harmful. Stripe's API is the gold standard for idempotency.</p>
+
+<h2>4. Bulk Operations</h2>
+<p>Single-resource endpoints don't scale when users need to operate on 100 items. Add bulk endpoints for common batch operations.</p>
+<pre><code>// ❌ 100 individual requests:
+DELETE /api/tags/1
+DELETE /api/tags/2
+// ... x98
+
+// ✅ Bulk endpoint:
+POST /api/tags/bulk-delete
+{ "ids": [1, 2, 3, ..., 100] }
+
+// Response is partial-success aware:
+{
+  "results": [
+    { "id": 1, "status": "deleted" },
+    { "id": 2, "status": "not_found" },
+    { "id": 3, "status": "forbidden" }  // not owned by user
+  ]
+}</code></pre>
+
+<h2>5. Webhooks — Reliable Event Delivery</h2>
+<p>Webhooks let your API push events to external systems. The key is reliable delivery.</p>
+<pre><code>// Webhook delivery pattern:
+// 1. Sign payloads (HMAC-SHA256) so receivers verify authenticity
+// 2. Retry with exponential backoff (1min, 5min, 25min, 2h, 24h)
+// 3. Mark as failed after 24h of retries
+// 4. Provide a dashboard for manual retry of failed deliveries
+// 5. Set reasonable timeouts (10s connect, 30s read)
+// 6. Log all delivery attempts for debugging</code></pre>
+<p>Stripe's webhook system is the implementation to study — signatures, retries, and a dashboard for debugging.</p>
+
+<h2>Quick Checklist</h2>
+<ul>
+<li>Rate limit with token bucket. Include headers. Return 429 with Retry-After.</li>
+<li>Cursor paginate by default. Offset only for search/ADMIN UIs.</li>
+<li>Idempotency keys on all mutation endpoints that involve money or creation.</li>
+<li>Bulk operations for batch create/update/delete when users operate on many items.</li>
+<li>Webhooks with signatures + retries + dashboard for any event-driven integration.</li>
+</ul>
+
+<p><strong>Bottom line:</strong> These five patterns separate a prototype API from a production API. Implement them before you need them — retrofitting idempotency is much harder than building it in from day one. See also: <a href="/en/tech/rest-api-best-practices.html">REST API Best Practices</a> and <a href="/en/compare/trpc-vs-graphql-vs-rest.html">API architecture comparison</a>.</p>
+'''
+
+BODIES['devops-for-developers'] = '''
+<p>You don't need to be a DevOps engineer to deploy and operate software in 2026. The tools have gotten so good that every developer can own their full pipeline. Here's the practical DevOps toolkit — CI/CD, containers, IaC, and monitoring — explained for developers.</p>
+
+<h2>The Developer DevOps Stack (2026)</h2>
+<table>
+<tr><th>Layer</th><th>Tool</th><th>Why It's Worth Learning</th></tr>
+<tr><td><strong>CI/CD</strong></td><td>GitHub Actions</td><td>Free 2000 min/mo. 20K+ marketplace actions. The default.</td></tr>
+<tr><td><strong>Containers</strong></td><td>Docker</td><td>Works everywhere. Compose for local dev.</td></tr>
+<tr><td><strong>Orchestration</strong></td><td>Kubernetes (or skip it)</td><td>Overkill for 90% of projects. Use managed containers instead.</td></tr>
+<tr><td><strong>Infrastructure as Code</strong></td><td>Terraform / OpenTofu</td><td>Declare infra in HCL. Version-controlled, repeatable, auditable.</td></tr>
+<tr><td><strong>Monitoring</strong></td><td>Grafana + Prometheus</td><td>Dashboard metrics from any source. Prometheus scrapes and stores.</td></tr>
+<tr><td><strong>Logging</strong></td><td>Pino (structured) → Loki/Grafana</td><td>Structured JSON logs. Centralized querying.</td></tr>
+<tr><td><strong>Secrets</strong></td><td>Infisical / Doppler</td><td>Sync .env across devs, CI, and production. Encrypted, audited.</td></tr>
+<tr><td><strong>Deploy</strong></td><td>Coolify / Railway</td><td>Self-hosted Vercel or managed PaaS. Dockerfile → URL.</td></tr>
+</table>
+
+<h2>1. CI/CD with GitHub Actions</h2>
+<p>A good CI/CD pipeline tests, builds, and deploys on every push. Here's a minimal but complete workflow:</p>
+<pre><code># .github/workflows/ci.yml
+name: CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "22" }
+      - run: npm ci
+      - run: npx vitest --coverage
+        env:
+          DATABASE_URL: postgresql://postgres:test@localhost:5432/test
+      - run: npx playwright test  # E2E
+      - name: Deploy (if main)
+        if: github.ref == 'refs/heads/main'
+        run: curl -X POST $DEPLOY_WEBHOOK</code></pre>
+
+<h2>2. Docker for Containers</h2>
+<pre><code># Multi-stage Dockerfile for a Node.js app
+FROM node:22-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+FROM node:22-alpine AS runner
+WORKDIR /app
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+EXPOSE 3000
+CMD ["node", "dist/server.js"]</code></pre>
+
+<h2>3. Infrastructure as Code (Terraform)</h2>
+<p>Terraform lets you declare infrastructure in code. No more clicking in cloud consoles — your infra is version-controlled and repeatable.</p>
+<pre><code># main.tf — Deploy a Next.js app to Vercel
+resource "vercel_project" "web" {
+  name      = "my-app"
+  framework = "nextjs"
+  git_repository = {
+    type = "github"
+    repo = "my-org/my-app"
+  }
+}
+
+resource "vercel_project_environment_variable" "db_url" {
+  project_id = vercel_project.web.id
+  key        = "DATABASE_URL"
+  value      = var.database_url
+}</code></pre>
+
+<h2>4. Monitoring with Grafana + Prometheus</h2>
+<p>Prometheus scrapes metrics from your app (CPU, memory, request latency, error rate). Grafana visualizes them in dashboards. For Node.js apps, use prom-client to expose custom metrics:</p>
+<pre><code>import client from "prom-client";
+import express from "express";
+
+const app = express();
+const collectDefaultMetrics = client.collectDefaultMetrics;
+collectDefaultMetrics();
+
+const httpRequestDuration = new client.Histogram({
+  name: "http_request_duration_seconds",
+  help: "Duration of HTTP requests in seconds",
+  labelNames: ["method", "route", "status"],
+});
+
+app.use((req, res, next) => {
+  const end = httpRequestDuration.startTimer();
+  res.on("finish", () => {
+    end({ method: req.method, route: req.route?.path, status: res.statusCode });
+  });
+  next();
+});
+
+app.get("/metrics", async (req, res) => {
+  res.set("Content-Type", client.register.contentType);
+  res.end(await client.register.metrics());
+});</code></pre>
+
+<h2>When to Skip Complexity</h2>
+<p>Not every project needs the full DevOps stack:</p>
+<ul>
+<li><strong>Side project / MVP:</strong> GitHub Actions → Coolify on a $20 VPS. Skip K8s, skip Terraform.</li>
+<li><strong>Growing startup:</strong> GitHub Actions → Railway or Render. Add Sentry for errors.</li>
+<li><strong>Scaling product:</strong> GitHub Actions → K8s (or ECS). Terraform for infra. Full monitoring stack.</li>
+</ul>
+
+<p><strong>Bottom line:</strong> Learn CI/CD and Docker first — they're universally useful. Add Terraform when your infra has 5+ resources. Add K8s only when you have 10+ containers and need orchestration. The best operations is the one you don't have to think about. See also: <a href="/en/tools/best-cicd-tools-2026.html">CI/CD tools comparison</a> and <a href="/en/compare/docker-vs-podman.html">Docker vs Podman</a>.</p>
+'''
+
 # FAQ data for FAQPage schema (slug → list of q/a dicts)
 FAQS = {
     'chatgpt-plus-worth': [

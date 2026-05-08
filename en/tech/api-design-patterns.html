@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="api-design-patterns">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="API Design Patterns: Rate Limiting, Pagination, Idempotency, and More">
+    <meta property="og:description" content="Production-proven API patterns every backend developer needs. Rate limiting strategies, cursor vs offset pagination, idempotency keys, bulk operations, and webhook design.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/api-design-patterns.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="API Design Patterns: Rate Limiting, Pagination, Idempotency, and More">
+    <meta name="twitter:description" content="Production-proven API patterns every backend developer needs. Rate limiting strategies, cursor vs offset pagination, idempotency keys, bulk operations, and webhook design.">
+    <title>API Design Patterns: Rate Limiting, Pagination, Idempotency, and More — SourceHub</title>
+    <meta name="description" content="Production-proven API patterns every backend developer needs. Rate limiting strategies, cursor vs offset pagination, idempotency keys, bulk operations, and webhook design.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/api-design-patterns.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/api-design-patterns.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "API Design Patterns: Rate Limiting, Pagination, Idempotency, and More",
+      "description": "Production-proven API patterns every backend developer needs. Rate limiting strategies, cursor vs offset pagination, idempotency keys, bulk operations, and webhook design.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "API Design Patterns: Rate Limiting, Pagination, Idempotency, and More"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › API Design Patterns: Rate Limiting, Pagination, Idempotency, and More
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">API</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Design Patterns</span>
+        <span class="tag-cat">Best Practices</span></div>
+      <h1 class="article-title">API Design Patterns: Rate Limiting, Pagination, Idempotency, and More</h1>
+      <div class="article-meta">Published 2026-05-08 · 4440 views · 37 replies</div>
+      <div class="article-body"><p>Every production API eventually needs the same set of patterns: rate limiting, pagination, idempotency, batching, and webhooks. Here's how to implement each one correctly — with the edge cases that bite you 6 months later.</p>
+
+<h2>1. Rate Limiting</h2>
+<p>Rate limiting protects your API from abuse and ensures fair usage. The three common algorithms:</p>
+<table>
+<tr><th>Algorithm</th><th>How It Works</th><th>Best For</th></tr>
+<tr><td><strong>Token Bucket</strong></td><td>Tokens refill at a fixed rate. Each request consumes a token. Allows bursts.</td><td>Most APIs (best default)</td></tr>
+<tr><td><strong>Sliding Window</strong></td><td>Count requests in the last N seconds. Smooth, no burst allowance.</td><td>Precise rate enforcement</td></tr>
+<tr><td><strong>Fixed Window</strong></td><td>Reset count every N seconds. Simple but allows 2x bursts at boundaries.</td><td>Simple use cases (avoid)</td></tr>
+</table>
+<p><strong>Response headers:</strong> Always include <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, <code>X-RateLimit-Reset</code>, and <code>Retry-After</code> on 429 responses.</p>
+
+<h2>2. Pagination — Cursor vs Offset</h2>
+<table>
+<tr><th></th><th>Cursor-Based</th><th>Offset-Based</th></tr>
+<tr><td><strong>Implementation</strong></td><td><code>?cursor=abc123&limit=20</code></td><td><code>?offset=40&limit=20</code></td></tr>
+<tr><td><strong>Stability</strong></td><td>Stable (new rows don't shift)</td><td>Unstable (page shifts with inserts)</td></tr>
+<tr><td><strong>Performance</strong></td><td>Fast (uses index directly)</td><td>Slow on large offsets (scans then discards)</td></tr>
+<tr><td><strong>Random access</strong></td><td>No (must traverse sequentially)</td><td>Yes (jump to page 42)</td></tr>
+<tr><td><strong>Use case</strong></td><td>Feeds, timelines, infinite scroll</td><td>Search results, admin UIs</td></tr>
+</table>
+<p><strong>Rule:</strong> Use cursor-based pagination by default. Only use offset when you need random page access.</p>
+
+<h2>3. Idempotency Keys</h2>
+<p>Network is unreliable. Clients retry. Without idempotency, a retried payment request = double charge. The fix: idempotency keys.</p>
+<pre><code>// Client sends a unique key:
+POST /api/charges
+Idempotency-Key: 8f7d3a2c-9e4b-4a1d-8c6f-3b5e7d9a0f2c
+
+// Server logic:
+// 1. Check if key exists in idempotency store (e.g., Redis with 24h TTL)
+// 2. If NOT found: process request, store response with key
+// 3. If found: return stored response (same status code, same body)</code></pre>
+<p><strong>Where to use:</strong> Payment endpoints, order creation, any mutation where duplicates are harmful. Stripe's API is the gold standard for idempotency.</p>
+
+<h2>4. Bulk Operations</h2>
+<p>Single-resource endpoints don't scale when users need to operate on 100 items. Add bulk endpoints for common batch operations.</p>
+<pre><code>// ❌ 100 individual requests:
+DELETE /api/tags/1
+DELETE /api/tags/2
+// ... x98
+
+// ✅ Bulk endpoint:
+POST /api/tags/bulk-delete
+{ "ids": [1, 2, 3, ..., 100] }
+
+// Response is partial-success aware:
+{
+  "results": [
+    { "id": 1, "status": "deleted" },
+    { "id": 2, "status": "not_found" },
+    { "id": 3, "status": "forbidden" }  // not owned by user
+  ]
+}</code></pre>
+
+<h2>5. Webhooks — Reliable Event Delivery</h2>
+<p>Webhooks let your API push events to external systems. The key is reliable delivery.</p>
+<pre><code>// Webhook delivery pattern:
+// 1. Sign payloads (HMAC-SHA256) so receivers verify authenticity
+// 2. Retry with exponential backoff (1min, 5min, 25min, 2h, 24h)
+// 3. Mark as failed after 24h of retries
+// 4. Provide a dashboard for manual retry of failed deliveries
+// 5. Set reasonable timeouts (10s connect, 30s read)
+// 6. Log all delivery attempts for debugging</code></pre>
+<p>Stripe's webhook system is the implementation to study — signatures, retries, and a dashboard for debugging.</p>
+
+<h2>Quick Checklist</h2>
+<ul>
+<li>Rate limit with token bucket. Include headers. Return 429 with Retry-After.</li>
+<li>Cursor paginate by default. Offset only for search/ADMIN UIs.</li>
+<li>Idempotency keys on all mutation endpoints that involve money or creation.</li>
+<li>Bulk operations for batch create/update/delete when users operate on many items.</li>
+<li>Webhooks with signatures + retries + dashboard for any event-driven integration.</li>
+</ul>
+
+<p><strong>Bottom line:</strong> These five patterns separate a prototype API from a production API. Implement them before you need them — retrofitting idempotency is much harder than building it in from day one. See also: <a href="/en/tech/rest-api-best-practices.html">REST API Best Practices</a> and <a href="/en/compare/trpc-vs-graphql-vs-rest.html">API architecture comparison</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>
