@@ -1,0 +1,37 @@
+name: Weekly Site Maintenance
+
+on:
+  schedule:
+    - cron: '23 19 * * 5'  # Saturday 3:23 AM UTC+8 (Friday 19:23 UTC)
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  maintain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install google-api-python-client google-auth google-auth-oauthlib requests beautifulsoup4 html2text
+
+      - name: Run maintenance
+        env:
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_TOKEN: ${{ secrets.GSC_TOKEN }}
+        run: |
+          # Restore GSC credentials from secrets
+          mkdir -p data
+          echo "$GSC_CLIENT_SECRET" > oauth-client.json
+          echo "$GSC_TOKEN" > data/gsc-token.json
+          python3 scripts/maintain.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --staged --quiet || (git commit -m "chore: weekly automated maintenance $(date +%Y-%m-%d)" && git push)

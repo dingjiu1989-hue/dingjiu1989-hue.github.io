@@ -1,0 +1,22 @@
+name: dev.to Content Syndication
+
+on:
+  schedule:
+    # Run 4x daily to publish ~12 articles/day (within rate limits)
+    - cron: '7 */6 * * *'  # Every 6 hours at :07
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  syndicate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Publish to dev.to
+        env:
+          DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
+        run: python3 scripts/syndicate_devto.py
