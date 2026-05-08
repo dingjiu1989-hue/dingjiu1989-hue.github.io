@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="api-security-best-practices">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="API Security Best Practices 2026: JWT, Rate Limiting, Input Validation, and OWASP for APIs">
+    <meta property="og:description" content="Complete API security guide covering JWT authentication, RBAC authorization, rate limiting, input validation, CORS, SQL injection prevention, and secrets management with code examples.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/api-security-best-practices.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="API Security Best Practices 2026: JWT, Rate Limiting, Input Validation, and OWASP for APIs">
+    <meta name="twitter:description" content="Complete API security guide covering JWT authentication, RBAC authorization, rate limiting, input validation, CORS, SQL injection prevention, and secrets management with code examples.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>API Security Best Practices 2026: JWT, Rate Limiting, Input Validation, and OWASP for APIs — SourceHub</title>
+    <meta name="description" content="Complete API security guide covering JWT authentication, RBAC authorization, rate limiting, input validation, CORS, SQL injection prevention, and secrets management with code examples.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/api-security-best-practices.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/api-security-best-practices.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "API Security Best Practices 2026: JWT, Rate Limiting, Input Validation, and OWASP for APIs",
+      "description": "Complete API security guide covering JWT authentication, RBAC authorization, rate limiting, input validation, CORS, SQL injection prevention, and secrets management with code examples.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-09",
+      "dateModified": "2026-05-09",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/api-security-best-practices.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "API Security Best Practices 2026: JWT, Rate Limiting, Input Validation, and OWASP for APIs"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › API Security Best Practices 2026: JWT, Rate Limiting, Input Validation, and OWASP for APIs
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">a</span>
+        <span class="tag-cat">p</span>
+        <span class="tag-cat">i</span>
+        <span class="tag-cat"> </span>
+        <span class="tag-cat">s</span>
+        <span class="tag-cat">e</span>
+        <span class="tag-cat">c</span>
+        <span class="tag-cat">u</span>
+        <span class="tag-cat">r</span>
+        <span class="tag-cat">i</span>
+        <span class="tag-cat">t</span>
+        <span class="tag-cat">y</span>
+        <span class="tag-cat">,</span>
+        <span class="tag-cat"> </span>
+        <span class="tag-cat">j</span>
+        <span class="tag-cat">w</span>
+        <span class="tag-cat">t</span>
+        <span class="tag-cat">,</span>
+        <span class="tag-cat"> </span>
+        <span class="tag-cat">r</span>
+        <span class="tag-cat">a</span>
+        <span class="tag-cat">t</span>
+        <span class="tag-cat">e</span>
+        <span class="tag-cat"> </span>
+        <span class="tag-cat">l</span>
+        <span class="tag-cat">i</span>
+        <span class="tag-cat">m</span>
+        <span class="tag-cat">i</span>
+        <span class="tag-cat">t</span>
+        <span class="tag-cat">i</span>
+        <span class="tag-cat">n</span>
+        <span class="tag-cat">g</span>
+        <span class="tag-cat">,</span>
+        <span class="tag-cat"> </span>
+        <span class="tag-cat">i</span>
+        <span class="tag-cat">n</span>
+        <span class="tag-cat">p</span>
+        <span class="tag-cat">u</span>
+        <span class="tag-cat">t</span>
+        <span class="tag-cat"> </span>
+        <span class="tag-cat">v</span>
+        <span class="tag-cat">a</span>
+        <span class="tag-cat">l</span>
+        <span class="tag-cat">i</span>
+        <span class="tag-cat">d</span>
+        <span class="tag-cat">a</span>
+        <span class="tag-cat">t</span>
+        <span class="tag-cat">i</span>
+        <span class="tag-cat">o</span>
+        <span class="tag-cat">n</span>
+        <span class="tag-cat">,</span>
+        <span class="tag-cat"> </span>
+        <span class="tag-cat">c</span>
+        <span class="tag-cat">o</span>
+        <span class="tag-cat">r</span>
+        <span class="tag-cat">s</span>
+        <span class="tag-cat">,</span>
+        <span class="tag-cat"> </span>
+        <span class="tag-cat">o</span>
+        <span class="tag-cat">w</span>
+        <span class="tag-cat">a</span>
+        <span class="tag-cat">s</span>
+        <span class="tag-cat">p</span>
+        <span class="tag-cat">,</span>
+        <span class="tag-cat"> </span>
+        <span class="tag-cat">w</span>
+        <span class="tag-cat">e</span>
+        <span class="tag-cat">b</span>
+        <span class="tag-cat"> </span>
+        <span class="tag-cat">s</span>
+        <span class="tag-cat">e</span>
+        <span class="tag-cat">c</span>
+        <span class="tag-cat">u</span>
+        <span class="tag-cat">r</span>
+        <span class="tag-cat">i</span>
+        <span class="tag-cat">t</span>
+        <span class="tag-cat">y</span></div>
+      <h1 class="article-title">API Security Best Practices 2026: JWT, Rate Limiting, Input Validation, and OWASP for APIs</h1>
+      <div class="article-meta">Published 2026-05-09 · 0 views · 0 replies</div>
+      <div class="article-body"><p>APIs are the front door to your application — and the #1 attack surface in 2026. This guide covers the security practices every API developer must implement, from authentication to rate limiting to input validation, with concrete code examples.</p>
+
+<h2>1. Authentication: JWT Done Right</h2>
+<p>JWTs are ubiquitous, but most implementations are vulnerable. Here are the rules: always set an expiration (<code>exp</code>) claim — never issue eternal tokens; always validate the <code>iss</code> (issuer) and <code>aud</code> (audience) claims — don't accept tokens issued for other services; never accept <code>alg: none</code> — explicitly whitelist your signing algorithm; use RS256 or ES256, not HS256 with a weak secret; store refresh tokens in an httpOnly, Secure, SameSite=Strict cookie, never in localStorage.</p>
+<pre><code>const jwt = require('jsonwebtoken');
+
+function createToken(user) {
+  return jwt.sign(
+    { sub: user.id, role: user.role },
+    process.env.JWT_PRIVATE_KEY,
+    { algorithm: 'RS256', expiresIn: '15m', issuer: 'api.example.com', audience: 'app.example.com' }
+  );
+}
+
+function verifyToken(token) {
+  return jwt.verify(token, process.env.JWT_PUBLIC_KEY, {
+    algorithms: ['RS256'],
+    issuer: 'api.example.com',
+    audience: 'app.example.com'
+  });
+}</code></pre>
+
+<h2>2. Authorization: RBAC and ABAC</h2>
+<p>Never trust the client to enforce authorization. Every API endpoint must verify: is this user authenticated? Does this user have permission for this action on this resource? Implement role-based access control (RBAC) for simple cases: admin, editor, viewer. For complex cases, use attribute-based access control (ABAC): "Can this user edit this document if the document is in draft status and the user is in the same department?"</p>
+<pre><code>function authorize(user, action, resource) {
+  if (user.role === 'admin') return true;
+  if (action === 'read' && resource.public) return true;
+  if (action === 'write' && resource.ownerId === user.id) return true;
+  if (action === 'write' && resource.departmentId === user.departmentId && user.role === 'editor') return true;
+  return false;
+}</code></pre>
+
+<h2>3. Rate Limiting: Stop Abuse Before It Starts</h2>
+<p>Every public API endpoint needs rate limiting. Without it, a single misconfigured client can take down your service. Use the token bucket or sliding window algorithm — fixed window is too bursty. Rate limit by: IP address (basic), API key (better), user ID + endpoint (best). Return standard headers: <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, <code>X-RateLimit-Reset</code>, and <code>Retry-After</code> when throttled. Return HTTP 429 (Too Many Requests), not 200 with an error body.</p>
+<pre><code>const rateLimit = require('express-rate-limit');
+const RedisStore = require('rate-limit-redis');
+
+const limiter = rateLimit({
+  store: new RedisStore({ client: redisClient }),
+  windowMs: 60 * 1000,
+  max: 100,              // 100 requests per minute
+  standardHeaders: true,
+  legacyHeaders: false,
+  keyGenerator: (req) => req.user?.id || req.ip,
+  handler: (req, res) => {
+    res.status(429).json({
+      error: 'Too many requests. Retry after 60 seconds.',
+      retryAfter: 60
+    });
+  }
+});</code></pre>
+
+<h2>4. Input Validation: Never Trust the Client</h2>
+<p>The #1 cause of API vulnerabilities is trusting user input. Validate everything: type (is this a string? number?), format (is this a valid email? UUID?), length (is this under the max?), range (is this number between 1 and 100?), and business rules (is this status transition allowed?). Use a schema validation library — never write validation by hand. Zod (TypeScript), Pydantic (Python), or Joi (Node.js) — pick one and use it on every endpoint.</p>
+<pre><code>import { z } from 'zod';
+
+const CreateUserSchema = z.object({
+  email: z.string().email().max(255),
+  name: z.string().min(1).max(100).regex(/^[a-zA-Z\s-]+$/),
+  age: z.number().int().min(13).max(120),
+  role: z.enum(['user', 'editor', 'admin']),
+  website: z.string().url().optional()
+});
+
+function createUser(req, res) {
+  const result = CreateUserSchema.safeParse(req.body);
+  if (!result.success) {
+    return res.status(400).json({
+      error: 'Validation failed',
+      details: result.error.flatten().fieldErrors
+    });
+  }
+  // result.data is now guaranteed valid
+}</code></pre>
+
+<h2>5. CORS: Be Strict, Not Permissive</h2>
+<p>Never use <code>Access-Control-Allow-Origin: *</code> on an API that uses cookies or tokens. Specify exact origins. Never echo back the <code>Origin</code> header without whitelisting. Don't allow <code>Access-Control-Allow-Credentials: true</code> with a wildcard origin. For public APIs that legitimately need broad access, use API keys (in headers) rather than cookies, so CORS isn't the security boundary.</p>
+
+<h2>6. SQL Injection: Still Relevant in 2026</h2>
+<p>Parameterized queries eliminate SQL injection. Never concatenate user input into SQL strings. ORMs help but aren't foolproof — raw queries with string interpolation are still common in ORM codebases. Always use parameterized queries or the ORM's safe query builder.</p>
+<pre><code>// BAD - SQL injection vulnerable
+const query = `SELECT * FROM users WHERE email = '${req.body.email}'`;
+
+// GOOD - Parameterized query
+const query = 'SELECT * FROM users WHERE email = $1';
+const result = await db.query(query, [req.body.email]);
+
+// GOOD - ORM safe query (Prisma)
+const user = await prisma.user.findUnique({ where: { email: req.body.email } });</code></pre>
+
+<h2>7. HTTPS and TLS: Non-Negotiable</h2>
+<p>Serve everything over HTTPS. Redirect HTTP to HTTPS with HSTS (<code>Strict-Transport-Security: max-age=31536000; includeSubDomains</code>). Use TLS 1.3 minimum. GitHub Pages handles this automatically, but if you self-host, use Let's Encrypt with auto-renewal. Never disable certificate validation in your API client — even in development.</p>
+
+<h2>8. Secrets Management</h2>
+<p>Never hardcode secrets. Use environment variables for local development, a secrets manager (AWS Secrets Manager, Doppler, Infisical) for production. Rotate secrets regularly. Never log secrets — configure your logger to redact known secret patterns. Never commit secrets to version control — use <code>.gitignore</code> and pre-commit hooks (detect-secrets, git-secrets) to catch them before they're pushed.</p>
+
+<h2>9. Logging and Monitoring</h2>
+<p>Log every authentication attempt (success and failure). Log every authorization failure. Log every rate limit hit. Log every input validation failure. These four signals catch 80% of attacks in progress. Ship logs to a centralized system (Datadog, Grafana Loki, Better Stack) and set up alerts for anomaly spikes. A 10x increase in auth failures over 5 minutes is almost certainly a credential-stuffing attack.</p>
+
+<h2>10. API Security Checklist</h2>
+<table>
+<tr><th>Category</th><th>Must Have</th><th>Nice to Have</th></tr>
+<tr><td>Auth</td><td>JWT with expiry + RS256</td><td>OAuth 2.1, Passkeys</td></tr>
+<tr><td>AuthZ</td><td>RBAC per endpoint</td><td>ABAC, OPA/Rego policies</td></tr>
+<tr><td>Rate Limit</td><td>Per-user/IP, 429 response</td><td>Distributed rate limiting</td></tr>
+<tr><td>Validation</td><td>Schema validation on every input</td><td>OpenAPI spec as validation source</td></tr>
+<tr><td>CORS</td><td>Explicit origins, no wildcard</td><td>—</td></tr>
+<tr><td>SQL</td><td>Parameterized queries only</td><td>Read-only DB user for GET</td></tr>
+<tr><td>TLS</td><td>HTTPS only, HSTS</td><td>mTLS for service-to-service</td></tr>
+<tr><td>Secrets</td><td>Never in code, env vars only</td><td>Secrets manager with rotation</td></tr>
+<tr><td>Logging</td><td>Auth/authZ failures logged</td><td>Anomaly detection alerts</td></tr>
+<tr><td>Headers</td><td>CSP, X-Content-Type-Options</td><td>Permissions-Policy</td></tr>
+</table>
+
+<p>Security is not a feature you add — it's a property every endpoint must have. Start with the checklist above. Implement one item per sprint until they're all covered. The time to think about API security is before the breach, not after.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -12692,6 +12692,182 @@ BODIES['freelance-client-acquisition-guide'] = '''
 <p>Over-deliver slightly (meet deadlines, communicate proactively, document your work). Ask for a testimonial while the project is still fresh. Ask if they know anyone else who needs similar work. Raise your rate by 20% for the next client. Repeat. After 3-5 clients, you'll have a referral pipeline and won't need to pitch cold anymore. That's when freelancing stops feeling like a hustle and starts feeling like a business.</p>
 '''
 
+
+BODIES['best-supply-chain-security-tools'] = '''
+<p>Software supply chain attacks increased 200% in 2025. Every dependency, build pipeline, and container image is a potential attack vector. Here are the best tools to secure your software supply chain in 2026 — from SBOM generation to runtime verification.</p>
+
+<h2>Why Supply Chain Security Matters Now</h2>
+<p>The xz utils backdoor (2024), the Polyfill.io attack (2024), and the MavenGate hijack demonstrated that attackers target the weakest link: not your code, but the code you depend on. Modern software pulls in 500-5,000 transitive dependencies. Each one is a trust decision. Supply chain security tools automate the work of verifying those decisions.</p>
+
+<h2>Snyk</h2>
+<p><strong>Best for:</strong> End-to-end developer security platform with supply chain features.</p>
+<p>Snyk started as a vulnerability scanner and grew into a full platform. Its supply chain module includes: dependency vulnerability scanning (with reachability analysis — does the vulnerable function actually get called?), license compliance management, SBOM generation (SPDX and CycloneDX), and container image scanning integrated with the same policy engine. <strong>Pricing:</strong> Free for individual developers and open-source projects. Team plans from $25/dev/month. <strong>Standout:</strong> Snyk's vulnerability database is hand-curated, not just CVE mirrors, which means fewer false positives. The reachability analysis is genuinely useful — it tells you not just that a dependency has a CVE, but whether your code path hits the vulnerable function. <strong>Limitations:</strong> Can be noisy on large monorepos; the UI gets slow with 1,000+ projects; some advanced supply chain features (SBOM attestation, SLSA provenance) are enterprise-only.</p>
+<pre><code>snyk test           # scan your project
+snyk monitor        # continuous monitoring
+snyk sbom           # generate SBOM
+snyk container test nginx:latest  # scan container</code></pre>
+
+<h2>Socket</h2>
+<p><strong>Best for:</strong> Real-time dependency risk detection before you install.</p>
+<p>Socket takes a fundamentally different approach: instead of scanning for known CVEs (reactive), it analyzes package behavior in real time (proactive). It detects: install scripts (could be malicious), network access (data exfiltration), filesystem writes, shell access, obfuscated code, protestware, typo-squatting, and unmaintained packages. Socket integrates as a GitHub app and blocks risky packages at the PR level before they're ever merged. <strong>Pricing:</strong> Free for open source. Team plans from $20/dev/month. <strong>Standout:</strong> The behavioral analysis catches attacks that have no CVE yet — zero-day supply chain attacks. The GitHub integration is excellent: it posts a comment on every PR listing new dependency risks with clear "block/allow" recommendations. <strong>Limitations:</strong> Focused on npm, PyPI, and Go ecosystems. Java/Maven and Rust/Cargo support is still maturing. No SBOM generation.</p>
+
+<h2>Chainguard</h2>
+<p><strong>Best for:</strong> Minimal, signed container images with SLSA provenance.</p>
+<p>Chainguard builds the smallest possible container images — their Python image is 3MB vs 50MB+ for the official image — which dramatically reduces the attack surface. Every image is signed with Sigstore (keyless signing), and every build has SLSA Level 3 provenance (tamper-proof build records). <strong>Pricing:</strong> Free for public images. Private images from $100/month. <strong>Standout:</strong> The "distroless" approach eliminates 90% of CVEs by simply not including packages you don't need. No shell, no package manager, no utilities — just your application and its runtime dependencies. This is the most effective defense against container-based supply chain attacks. <strong>Limitations:</strong> Debugging distroless containers is harder (no shell); requires multi-stage Docker builds; limited to popular language runtimes.</p>
+
+<h2>Anchore (now Syft/Grype)</h2>
+<p><strong>Best for:</strong> Open-source SBOM generation and vulnerability scanning.</p>
+<p>Anchore's open-source tools Syft (SBOM generation) and Grype (vulnerability scanning) are the de facto standards for supply chain security in CI/CD pipelines. Syft generates SBOMs in SPDX or CycloneDX format from container images, filesystems, and archives. Grype consumes those SBOMs and cross-references against multiple vulnerability databases (NVD, GitHub Advisory, Anchore's own DB). <strong>Pricing:</strong> Syft and Grype are free and open source. Anchore Enterprise (with policy engine and UI) starts at $1,000/month. <strong>Standout:</strong> Blazing fast — Syft scans a container image in under 2 seconds. The tools are designed for CI/CD: they produce machine-readable JSON that's easy to pipe into other tools. Grype's false positive rate is notably lower than Trivy's because Anchore's vulnerability database includes fix version information and uses more precise package matching. <strong>Limitations:</strong> The CLI tools have a learning curve; enterprise features (policy-as-code, centralized reporting) require the paid platform; the OSS tools don't include runtime protection.</p>
+<pre><code>syft nginx:latest -o json > sbom.json
+grype sbom:sbom.json
+grype nginx:latest  # scan directly</code></pre>
+
+<h2>Sigstore (Cosign + Rekor)</h2>
+<p><strong>Best for:</strong> Keyless signing and verification of artifacts.</p>
+<p>Sigstore is a Linux Foundation project that makes code signing accessible to everyone. Traditional code signing requires managing private keys — a nightmare at scale. Sigstore uses OpenID Connect (your Google/GitHub/Microsoft account) to generate short-lived signing keys, with the signature recorded in Rekor (a public, immutable transparency log). <strong>Pricing:</strong> Free and open source. <strong>Standout:</strong> The "keyless" model eliminates the #1 reason developers skip signing: key management overhead. Cosign integrates with Kubernetes (verify images at admission control), GitHub Actions, and most CI/CD systems. <strong>Limitations:</strong> The ecosystem is still maturing; some enterprises are uncomfortable with OIDC-based signing; transparency log queries can be slow.</p>
+<pre><code>cosign sign ghcr.io/myorg/myimage:v1
+cosign verify ghcr.io/myorg/myimage:v1   --certificate-oidc-issuer=https://token.actions.githubusercontent.com</code></pre>
+
+<h2>Comparison Table</h2>
+<table>
+<tr><th>Tool</th><th>Best For</th><th>Approach</th><th>Open Source</th><th>Starting Price</th></tr>
+<tr><td>Snyk</td><td>Full platform</td><td>CVE scanning + reachability</td><td>Partial</td><td>Free / $25/dev/mo</td></tr>
+<tr><td>Socket</td><td>Dependency behavior</td><td>Behavioral analysis</td><td>Partial</td><td>Free / $20/dev/mo</td></tr>
+<tr><td>Chainguard</td><td>Minimal containers</td><td>Distroless + SLSA</td><td>No</td><td>Free / $100/mo</td></tr>
+<tr><td>Anchore/Syft/Grype</td><td>SBOM + CVE scanning</td><td>CVE databases</td><td>Yes</td><td>Free / $1,000/mo</td></tr>
+<tr><td>Sigstore/Cosign</td><td>Artifact signing</td><td>Keyless OIDC</td><td>Yes</td><td>Free</td></tr>
+</table>
+
+<h2>How to Build Your Supply Chain Security Stack</h2>
+<p><strong>Start here (free, immediate impact):</strong></p>
+<ol>
+<li>Add Syft + Grype to your CI/CD pipeline. Generate an SBOM for every build. Fail builds on critical CVEs.</li>
+<li>Enable Socket on your GitHub repos. It catches malicious packages before they're installed — no configuration needed.</li>
+<li>Switch to Chainguard base images for your Docker builds. This single change eliminates 80%+ of CVEs from your images.</li>
+<li>Sign your releases with Cosign. It takes 5 minutes to set up in GitHub Actions and proves your artifacts haven't been tampered with.</li>
+</ol>
+<p><strong>When you have budget:</strong> Add Snyk for reachability analysis and license compliance. Add Chainguard Enterprise for policy enforcement and centralized visibility.</p>
+<p><strong>When you're enterprise scale:</strong> Anchor Enterprise for policy-as-code across 100+ teams. Chainguard for SLSA Level 3 provenance across your entire container fleet.</p>
+'''
+
+BODIES['api-security-best-practices'] = '''
+<p>APIs are the front door to your application — and the #1 attack surface in 2026. This guide covers the security practices every API developer must implement, from authentication to rate limiting to input validation, with concrete code examples.</p>
+
+<h2>1. Authentication: JWT Done Right</h2>
+<p>JWTs are ubiquitous, but most implementations are vulnerable. Here are the rules: always set an expiration (<code>exp</code>) claim — never issue eternal tokens; always validate the <code>iss</code> (issuer) and <code>aud</code> (audience) claims — don't accept tokens issued for other services; never accept <code>alg: none</code> — explicitly whitelist your signing algorithm; use RS256 or ES256, not HS256 with a weak secret; store refresh tokens in an httpOnly, Secure, SameSite=Strict cookie, never in localStorage.</p>
+<pre><code>const jwt = require('jsonwebtoken');
+
+function createToken(user) {
+  return jwt.sign(
+    { sub: user.id, role: user.role },
+    process.env.JWT_PRIVATE_KEY,
+    { algorithm: 'RS256', expiresIn: '15m', issuer: 'api.example.com', audience: 'app.example.com' }
+  );
+}
+
+function verifyToken(token) {
+  return jwt.verify(token, process.env.JWT_PUBLIC_KEY, {
+    algorithms: ['RS256'],
+    issuer: 'api.example.com',
+    audience: 'app.example.com'
+  });
+}</code></pre>
+
+<h2>2. Authorization: RBAC and ABAC</h2>
+<p>Never trust the client to enforce authorization. Every API endpoint must verify: is this user authenticated? Does this user have permission for this action on this resource? Implement role-based access control (RBAC) for simple cases: admin, editor, viewer. For complex cases, use attribute-based access control (ABAC): "Can this user edit this document if the document is in draft status and the user is in the same department?"</p>
+<pre><code>function authorize(user, action, resource) {
+  if (user.role === 'admin') return true;
+  if (action === 'read' && resource.public) return true;
+  if (action === 'write' && resource.ownerId === user.id) return true;
+  if (action === 'write' && resource.departmentId === user.departmentId && user.role === 'editor') return true;
+  return false;
+}</code></pre>
+
+<h2>3. Rate Limiting: Stop Abuse Before It Starts</h2>
+<p>Every public API endpoint needs rate limiting. Without it, a single misconfigured client can take down your service. Use the token bucket or sliding window algorithm — fixed window is too bursty. Rate limit by: IP address (basic), API key (better), user ID + endpoint (best). Return standard headers: <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, <code>X-RateLimit-Reset</code>, and <code>Retry-After</code> when throttled. Return HTTP 429 (Too Many Requests), not 200 with an error body.</p>
+<pre><code>const rateLimit = require('express-rate-limit');
+const RedisStore = require('rate-limit-redis');
+
+const limiter = rateLimit({
+  store: new RedisStore({ client: redisClient }),
+  windowMs: 60 * 1000,
+  max: 100,              // 100 requests per minute
+  standardHeaders: true,
+  legacyHeaders: false,
+  keyGenerator: (req) => req.user?.id || req.ip,
+  handler: (req, res) => {
+    res.status(429).json({
+      error: 'Too many requests. Retry after 60 seconds.',
+      retryAfter: 60
+    });
+  }
+});</code></pre>
+
+<h2>4. Input Validation: Never Trust the Client</h2>
+<p>The #1 cause of API vulnerabilities is trusting user input. Validate everything: type (is this a string? number?), format (is this a valid email? UUID?), length (is this under the max?), range (is this number between 1 and 100?), and business rules (is this status transition allowed?). Use a schema validation library — never write validation by hand. Zod (TypeScript), Pydantic (Python), or Joi (Node.js) — pick one and use it on every endpoint.</p>
+<pre><code>import { z } from 'zod';
+
+const CreateUserSchema = z.object({
+  email: z.string().email().max(255),
+  name: z.string().min(1).max(100).regex(/^[a-zA-Z\s-]+$/),
+  age: z.number().int().min(13).max(120),
+  role: z.enum(['user', 'editor', 'admin']),
+  website: z.string().url().optional()
+});
+
+function createUser(req, res) {
+  const result = CreateUserSchema.safeParse(req.body);
+  if (!result.success) {
+    return res.status(400).json({
+      error: 'Validation failed',
+      details: result.error.flatten().fieldErrors
+    });
+  }
+  // result.data is now guaranteed valid
+}</code></pre>
+
+<h2>5. CORS: Be Strict, Not Permissive</h2>
+<p>Never use <code>Access-Control-Allow-Origin: *</code> on an API that uses cookies or tokens. Specify exact origins. Never echo back the <code>Origin</code> header without whitelisting. Don't allow <code>Access-Control-Allow-Credentials: true</code> with a wildcard origin. For public APIs that legitimately need broad access, use API keys (in headers) rather than cookies, so CORS isn't the security boundary.</p>
+
+<h2>6. SQL Injection: Still Relevant in 2026</h2>
+<p>Parameterized queries eliminate SQL injection. Never concatenate user input into SQL strings. ORMs help but aren't foolproof — raw queries with string interpolation are still common in ORM codebases. Always use parameterized queries or the ORM's safe query builder.</p>
+<pre><code>// BAD - SQL injection vulnerable
+const query = `SELECT * FROM users WHERE email = '${req.body.email}'`;
+
+// GOOD - Parameterized query
+const query = 'SELECT * FROM users WHERE email = $1';
+const result = await db.query(query, [req.body.email]);
+
+// GOOD - ORM safe query (Prisma)
+const user = await prisma.user.findUnique({ where: { email: req.body.email } });</code></pre>
+
+<h2>7. HTTPS and TLS: Non-Negotiable</h2>
+<p>Serve everything over HTTPS. Redirect HTTP to HTTPS with HSTS (<code>Strict-Transport-Security: max-age=31536000; includeSubDomains</code>). Use TLS 1.3 minimum. GitHub Pages handles this automatically, but if you self-host, use Let's Encrypt with auto-renewal. Never disable certificate validation in your API client — even in development.</p>
+
+<h2>8. Secrets Management</h2>
+<p>Never hardcode secrets. Use environment variables for local development, a secrets manager (AWS Secrets Manager, Doppler, Infisical) for production. Rotate secrets regularly. Never log secrets — configure your logger to redact known secret patterns. Never commit secrets to version control — use <code>.gitignore</code> and pre-commit hooks (detect-secrets, git-secrets) to catch them before they're pushed.</p>
+
+<h2>9. Logging and Monitoring</h2>
+<p>Log every authentication attempt (success and failure). Log every authorization failure. Log every rate limit hit. Log every input validation failure. These four signals catch 80% of attacks in progress. Ship logs to a centralized system (Datadog, Grafana Loki, Better Stack) and set up alerts for anomaly spikes. A 10x increase in auth failures over 5 minutes is almost certainly a credential-stuffing attack.</p>
+
+<h2>10. API Security Checklist</h2>
+<table>
+<tr><th>Category</th><th>Must Have</th><th>Nice to Have</th></tr>
+<tr><td>Auth</td><td>JWT with expiry + RS256</td><td>OAuth 2.1, Passkeys</td></tr>
+<tr><td>AuthZ</td><td>RBAC per endpoint</td><td>ABAC, OPA/Rego policies</td></tr>
+<tr><td>Rate Limit</td><td>Per-user/IP, 429 response</td><td>Distributed rate limiting</td></tr>
+<tr><td>Validation</td><td>Schema validation on every input</td><td>OpenAPI spec as validation source</td></tr>
+<tr><td>CORS</td><td>Explicit origins, no wildcard</td><td>—</td></tr>
+<tr><td>SQL</td><td>Parameterized queries only</td><td>Read-only DB user for GET</td></tr>
+<tr><td>TLS</td><td>HTTPS only, HSTS</td><td>mTLS for service-to-service</td></tr>
+<tr><td>Secrets</td><td>Never in code, env vars only</td><td>Secrets manager with rotation</td></tr>
+<tr><td>Logging</td><td>Auth/authZ failures logged</td><td>Anomaly detection alerts</td></tr>
+<tr><td>Headers</td><td>CSP, X-Content-Type-Options</td><td>Permissions-Policy</td></tr>
+</table>
+
+<p>Security is not a feature you add — it's a property every endpoint must have. Start with the checklist above. Implement one item per sprint until they're all covered. The time to think about API security is before the breach, not after.</p>
+'''
+
 # FAQ data for FAQPage schema (slug → list of q/a dicts)
 FAQS = {
     'chatgpt-plus-worth': [
