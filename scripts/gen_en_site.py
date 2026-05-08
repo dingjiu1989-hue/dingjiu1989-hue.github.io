@@ -4642,6 +4642,394 @@ BODIES['prettier-vs-biome'] = '''
 <p><strong>Bottom line:</strong> Biome is ready for new JavaScript/TypeScript projects — the speed difference is real, and replacing two tools with one is a win. Prettier remains the safe universal default, especially for mixed-language projects. The 97% compatibility means migration costs are low. See also: <a href="/en/compare/pnpm-vs-npm-vs-yarn.html">Package Manager Comparison</a> and <a href="/en/tools/best-cicd-tools-2026.html">CI/CD Tools</a>.</p>
 '''
 
+BODIES['best-free-hosting-side-projects'] = '''
+<p>Your side project deserves to be live — not stuck on localhost. These 12 platforms let you deploy for $0 with genuinely useful free tiers. No credit card required for most. Here's what you actually get before paying a cent.</p>
+
+<h2>The Complete Free Hosting Landscape</h2>
+<table>
+<tr><th>Platform</th><th>Best For</th><th>Free Tier Limits</th><th>Card Required?</th></tr>
+<tr><td><strong>Vercel</strong></td><td>Next.js, frontend, static</td><td>100GB bandwidth, 6000 build min/mo</td><td>No</td></tr>
+<tr><td><strong>Cloudflare Pages</strong></td><td>Static sites, JAMstack</td><td>Unlimited bandwidth, 500 builds/mo</td><td>No</td></tr>
+<tr><td><strong>Netlify</strong></td><td>Static sites, forms</td><td>100GB bandwidth, 300 build min/mo</td><td>No</td></tr>
+<tr><td><strong>GitHub Pages</strong></td><td>Static sites, docs</td><td>100GB bandwidth, 10 builds/hr</td><td>No</td></tr>
+<tr><td><strong>Render</strong></td><td>Web services, APIs, DBs</td><td>1 web service (512MB), 1 Postgres (1GB)</td><td>No</td></tr>
+<tr><td><strong>Railway</strong></td><td>Full-stack apps, databases</td><td>$5 credit/month (~200 hrs)</td><td>No</td></tr>
+<tr><td><strong>Fly.io</strong></td><td>Docker containers</td><td>3 VMs (256MB each), 3GB storage</td><td>Yes</td></tr>
+<tr><td><strong>Koyeb</strong></td><td>Docker, global edge</td><td>1 web service (512MB), 2GB SSD</td><td>No</td></tr>
+<tr><td><strong>Supabase</strong></td><td>Backend (DB + Auth + Storage)</td><td>500MB database, 50K users, 1GB storage</td><td>No</td></tr>
+<tr><td><strong>Neon</strong></td><td>Serverless Postgres</td><td>0.5GB storage, 100 compute hrs</td><td>No</td></tr>
+<tr><td><strong>Turso</strong></td><td>Edge SQLite database</td><td>9GB storage, 1B row reads</td><td>No</td></tr>
+<tr><td><strong>Cloudflare Workers</strong></td><td>Edge functions, APIs</td><td>100K requests/day, 10ms CPU/req</td><td>No</td></tr>
+</table>
+
+<h2>Recommended Stack Combinations</h2>
+<table>
+<tr><th>Project Type</th><th>Free Stack</th></tr>
+<tr><td>Static blog / portfolio</td><td><strong>Cloudflare Pages</strong> (unlimited bandwidth) + <strong>GitHub</strong> (source)</td></tr>
+<tr><td>Next.js full-stack app</td><td><strong>Vercel</strong> (frontend) + <strong>Supabase</strong> (auth + DB) + <strong>Upstash</strong> (Redis)</td></tr>
+<tr><td>API service</td><td><strong>Cloudflare Workers</strong> (edge) or <strong>Render</strong> (longer timeout)</td></tr>
+<tr><td>Docker-based app</td><td><strong>Fly.io</strong> (3 free VMs) or <strong>Koyeb</strong> (no card needed)</td></tr>
+<tr><td>Full backend + DB</td><td><strong>Render</strong> (web service + Postgres) or <strong>Railway</strong> (app + DB)</td></tr>
+</table>
+
+<h2>What to Watch Out For</h2>
+<ul>
+<li><strong>Cold starts on free tiers:</strong> Render and Koyeb put free services to sleep. First request takes 30-60 seconds. Use a cron job to keep them warm.</li>
+<li><strong>Build minute limits:</strong> Vercel (6K min) and Netlify (300 min) have limits. A complex monorepo can burn through these fast.</li>
+<li><strong>Database backups:</strong> Most free DB tiers don't include automated backups. Set up your own.</li>
+<li><strong>Custom domain SSL:</strong> All these platforms support custom domains, but some require a paid plan for team features or analytics.</li>
+</ul>
+
+<p><strong>Bottom line:</strong> You can ship a production-quality side project for $0/month in 2026. Cloudflare Pages for static, Vercel for Next.js, Render for APIs, Supabase for backend, and Cloudflare Workers for edge functions. No credit card required for any of the above. See also: <a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html">Hosting Comparison</a> and <a href="/en/sidehustle/saas-bootstrapping-guide.html">SaaS Bootstrapping Guide</a>.</p>
+'''
+
+BODIES['best-dev-youtube-channels'] = '''
+<p>YouTube is one of the best free learning resources for developers — if you know which channels actually teach instead of chasing trends. Here are 20 channels across 5 categories that consistently produce high-quality, educational content.</p>
+
+<h2>Web Development & Frontend</h2>
+<table>
+<tr><th>Channel</th><th>Focus</th><th>Why Subscribe</th></tr>
+<tr><td><strong>Theo - t3.gg</strong></td><td>TypeScript, Next.js, startup tech</td><td>Deep dives into real engineering decisions. Opinionated and practical.</td></tr>
+<tr><td><strong>Fireship</strong></td><td>Quick tech explainers (100s)</td><td>The "code report" format packs more info in 100 seconds than most 30-min videos.</td></tr>
+<tr><td><strong>Jack Herrington</strong></td><td>React, TypeScript, patterns</td><td>Implementing real features with clean architecture. Great for intermediate devs.</td></tr>
+<tr><td><strong>Traversy Media</strong></td><td>Crash courses, full-stack</td><td>The best crash courses. Build a full project in 2 hours with clear explanations.</td></tr>
+<tr><td><strong>Web Dev Simplified (Kyle)</strong></td><td>JavaScript, React, CSS deep dives</td><td>Explains the WHY, not just the how. Excellent for understanding fundamentals.</td></tr>
+</table>
+
+<h2>System Design & Architecture</h2>
+<table>
+<tr><th>Channel</th><th>Focus</th><th>Why Subscribe</th></tr>
+<tr><td><strong>ByteByteGo</strong></td><td>System design diagrams</td><td>Clear visual explanations of complex systems. The best system design prep resource.</td></tr>
+<tr><td><strong>Hussein Nasser</strong></td><td>Backend engineering, protocols</td><td>Deep dives into HTTP, databases, networking. From first principles.</td></tr>
+<tr><td><strong>Arpit Bhayani</strong></td><td>Database internals, distributed systems</td><td>Explains how databases ACTUALLY work under the hood. Deeply technical.</td></tr>
+<tr><td><strong>Gaurav Sen</strong></td><td>System design interview prep</td><td>Step-by-step system design walkthroughs. Great for interview preparation.</td></tr>
+</table>
+
+<h2>Computer Science Fundamentals</h2>
+<table>
+<tr><th>Channel</th><th>Focus</th><th>Why Subscribe</th></tr>
+<tr><td><strong>Reducible</strong></td><td>Algorithms, data structures</td><td>Beautiful animations that make complex CS concepts intuitive. Hidden gem.</td></tr>
+<tr><td><strong>Spanning Tree</strong></td><td>Computer science concepts</td><td>Short, elegant explanations of CS fundamentals. Think 3Blue1Brown for CS.</td></tr>
+<tr><td><strong>Ben Eater</strong></td><td>Low-level computing, networking</td><td>Build a computer on a breadboard. The best low-level computing education on YouTube.</td></tr>
+</table>
+
+<h2>DevOps, Cloud & Infrastructure</h2>
+<table>
+<tr><th>Channel</th><th>Focus</th><th>Why Subscribe</th></tr>
+<tr><td><strong>TechWorld with Nana</strong></td><td>DevOps, K8s, CI/CD</td><td>Structured courses on Docker, K8s, Terraform. Beginner-friendly DevOps education.</td></tr>
+<tr><td><strong>NetworkChuck</strong></td><td>Networking, homelab, cloud</td><td>Entertaining and accessible. Makes networking and infrastructure exciting.</td></tr>
+<tr><td><strong>That DevOps Guy</strong></td><td>Kubernetes, cloud-native</td><td>Practical K8s tutorials. Real production patterns, not just theory.</td></tr>
+</table>
+
+<h2>Career, Coding Lifestyle & AI</h2>
+<table>
+<tr><th>Channel</th><th>Focus</th><th>Why Subscribe</th></tr>
+<tr><td><strong>Nicholas T.</strong></td><td>Developer career, freelancing</td><td>Honest career advice. Salary negotiation, freelancing, and the business side of coding.</td></tr>
+<tr><td><strong>ThePrimeagen</strong></td><td>Code reviews, dev culture</td><td>Entertaining code reviews and hot takes on developer culture. Don't agree with everything, but always thought-provoking.</td></tr>
+<tr><td><strong>Matt Wolfe</strong></td><td>AI tools, future tech</td><td>Weekly roundups of what's new in AI. Best "what just happened in AI" channel.</td></tr>
+<tr><td><strong>developedbyed</strong></td><td>Creative web dev, design</td><td>Building beautiful UI with creative coding. Inspires you to make things that look great.</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Subscribe to 5-10, not all 20. Mix one web dev channel (Fireship/Theo), one architecture channel (ByteByteGo), and one career channel for a balanced learning diet. YouTube is free mentorship — use it. See also: <a href="/en/tools/best-dev-podcasts.html">Developer Podcasts</a> and <a href="/en/tools/best-programming-books.html">Programming Books</a>.</p>
+'''
+
+BODIES['best-programming-books'] = '''
+<p>The right book at the right time can accelerate your career by years. Here are 15 books that have stayed relevant — across software design, system architecture, algorithms, engineering culture, and career growth. These are the books developers actually recommend to each other.</p>
+
+<h2>Software Design & Architecture</h2>
+<table>
+<tr><th>Book</th><th>Author</th><th>Why Read It</th></tr>
+<tr><td><strong>A Philosophy of Software Design</strong></td><td>John Ousterhout</td><td>Best book on writing clean, maintainable code. Short (190 pages), dense with wisdom. "Deep modules" will change how you design APIs.</td></tr>
+<tr><td><strong>Designing Data-Intensive Applications</strong></td><td>Martin Kleppmann</td><td>The bible of distributed systems. Databases, replication, partitioning, transactions, consensus. Read it twice — once now, once in 3 years.</td></tr>
+<tr><td><strong>Clean Architecture</strong></td><td>Robert C. Martin</td><td>How to structure software so it's testable, maintainable, and framework-independent. More practical than Clean Code.</td></tr>
+<tr><td><strong>System Design Interview (Vol 1 & 2)</strong></td><td>Alex Xu</td><td>Practical system design walkthroughs. Even if you're not interviewing, it teaches you to think at scale.</td></tr>
+</table>
+
+<h2>Algorithms & Problem Solving</h2>
+<table>
+<tr><th>Book</th><th>Author</th><th>Why Read It</th></tr>
+<tr><td><strong>Grokking Algorithms</strong></td><td>Aditya Bhargava</td><td>The most accessible algorithms book ever written. Illustrated, example-driven. Read this before CLRS.</td></tr>
+<tr><td><strong>The Algorithm Design Manual</strong></td><td>Steven Skiena</td><td>Practical algorithm design with real applications. The "war stories" section alone is worth it.</td></tr>
+</table>
+
+<h2>Engineering Culture & Career</h2>
+<table>
+<tr><th>Book</th><th>Author</th><th>Why Read It</th></tr>
+<tr><td><strong>The Pragmatic Programmer</strong></td><td>David Thomas & Andrew Hunt</td><td>20th anniversary edition updated for 2020. Covers the mindset of effective software development. Every developer should read this in their first 2 years.</td></tr>
+<tr><td><strong>Staff Engineer: Leadership Beyond the Management Track</strong></td><td>Will Larson</td><td>What it means to be a senior+ individual contributor. Practical career guidance for the path beyond senior.</td></tr>
+<tr><td><strong>The Manager's Path</strong></td><td>Camille Fournier</td><td>Engineering management from tech lead to CTO. Even if you stay IC, it helps you understand what your manager is thinking.</td></tr>
+<tr><td><strong>Accelerate: Building and Scaling High Performing Technology Organizations</strong></td><td>Nicole Forsgren et al.</td><td>Research-backed book on what makes software teams fast. Based on the DORA research program. Evidence, not opinion.</td></tr>
+</table>
+
+<h2>Classics Worth Your Time</h2>
+<table>
+<tr><th>Book</th><th>Author</th><th>Why Read It</th></tr>
+<tr><td><strong>Structure and Interpretation of Computer Programs (SICP)</strong></td><td>Abelson & Sussman</td><td>The book that taught a generation to think in abstractions. Free online. Challenging but mind-expanding.</td></tr>
+<tr><td><strong>Code Complete</strong></td><td>Steve McConnell</td><td>A comprehensive reference on software construction. Read it once, refer back forever. The checklists are gold.</td></tr>
+<tr><td><strong>Refactoring</strong></td><td>Martin Fowler</td><td>Catalog of refactoring patterns. Learning to see code through "smells" changes how you write and review code.</td></tr>
+<tr><td><strong>The Mythical Man-Month</strong></td><td>Fred Brooks</td><td>The 1975 classic that coined "no silver bullet" and "adding people makes a late project later." Still true.</td></tr>
+</table>
+
+<h2>How to Read Technical Books (Without Burning Out)</h2>
+<ul>
+<li><strong>Don't read cover to cover.</strong> Skim, find the chapters that solve your current problem, read those deeply.</li>
+<li><strong>Type out the code examples.</strong> Reading code is passive. Typing them makes the concepts stick.</li>
+<li><strong>Read one book at a time.</strong> "I'm reading 5 books" means you're finishing zero. Pick one, finish it, move on.</li>
+<li><strong>Apply immediately.</strong> The best time to read a design book is when you're designing something. The second best time is right before.</li>
+</ul>
+
+<p><strong>Bottom line:</strong> Start with The Pragmatic Programmer and A Philosophy of Software Design — both are short, practical, and change how you code immediately. Read DDIA when you're ready for distributed systems. See also: <a href="/en/tools/best-dev-youtube-channels.html">Developer YouTube Channels</a> and <a href="/en/tools/best-dev-podcasts.html">Developer Podcasts</a>.</p>
+'''
+
+BODIES['best-code-review-tools'] = '''
+<p>Code review is where quality happens — or doesn't. The right review tools make the difference between reviews that catch bugs and reviews that are just rubber stamps. Here's how GitHub, GitLab, Graphite, Reviewable, and others compare for real review workflows.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>GitHub PRs</th><th>GitLab MRs</th><th>Graphite</th><th>Reviewable</th><th>Gerrit</th></tr>
+<tr><td><strong>Best for</strong></td><td>Most teams (default)</td><td>GitLab users</td><td>Stacked PRs, fast-moving teams</td><td>Thorough, async reviews</td><td>Large-scale, strict reviews</td></tr>
+<tr><td><strong>Stacked diffs</strong></td><td>No (sequential PRs)</td><td>No</td><td>Yes (core feature)</td><td>Yes (partial)</td><td>Yes (native)</td></tr>
+<tr><td><strong>AI review</strong></td><td>Copilot PR review</td><td>GitLab Duo</td><td>In preview</td><td>No</td><td>No</td></tr>
+<tr><td><strong>Inline suggestions</strong></td><td>Yes (commit suggestion)</td><td>Yes</td><td>Yes</td><td>Excellent</td><td>No</td></tr>
+<tr><td><strong>Review state tracking</strong></td><td>Basic (requested, reviewed)</td><td>Good (approval rules)</td><td>Good</td><td>Excellent (per-file tracking)</td><td>Excellent (+1/+2 system)</td></tr>
+</table>
+
+<h2>GitHub PR Reviews — The Default for Most Teams</h2>
+<p>GitHub's pull request review system is the most widely used. Copilot PR review (AI) summarizes changes and suggests improvements. The "suggest changes" feature lets reviewers propose exact code edits that the author can accept with one click. Branch protection rules enforce required reviewers, status checks, and signed commits.</p>
+<p><strong>Best for:</strong> Any team on GitHub. The default that works for 90% of teams.</p>
+
+<h2>Graphite — Stacked PRs, Faster Ships</h2>
+<p>Graphite solves the big PR problem: when your feature is 2,000 lines, nobody reviews it properly. Stacked PRs break large changes into small, sequential, independently reviewable chunks. Each PR is 100-300 lines and depends on the previous one. Reviewers can review incrementally instead of being hit with a mega-diff.</p>
+<p><strong>Best for:</strong> Fast-moving teams that ship continuously, projects where PRs regularly exceed 500 lines, teams that want smaller, faster reviews.</p>
+
+<h2>Reviewable — The Most Thorough Review Experience</h2>
+<p>Reviewable tracks review progress per file, per revision, per reviewer. It shows exactly which files have been reviewed, which comments are resolved, and which revisions addressed which feedback. For teams that take review seriously, Reviewable's thoroughness is unmatched.</p>
+<p><strong>Best for:</strong> Teams that treat code review as a critical quality gate, regulated industries, open source projects with many reviewers.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Tool</th></tr>
+<tr><td>Standard team on GitHub</td><td><strong>GitHub PRs</strong></td></tr>
+<tr><td>Large PRs, fast shipping, stacked diffs</td><td><strong>Graphite</strong></td></tr>
+<tr><td>Most thorough, formal review process</td><td><strong>Reviewable</strong></td></tr>
+<tr><td>On GitLab</td><td><strong>GitLab MRs</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> GitHub PRs for most teams. Graphite if your PRs routinely exceed 500 lines (it will change how you ship). Reviewable if your industry requires rigorous review. Good code review is a habit, not a tool — the tool just makes it easier. See also: <a href="/en/compare/github-vs-gitlab-vs-bitbucket.html">GitHub vs GitLab vs Bitbucket</a> and <a href="/en/tech/git-workflows-team-guide.html">Git Workflows Guide</a>.</p>
+'''
+
+BODIES['best-auth-solutions'] = '''
+<p>Authentication is the last thing you should build from scratch. Clerk, Auth0, Supabase Auth, NextAuth, and Lucia take different approaches to the same problem: getting users logged in securely without 100 hours of work. Here's the comparison.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Clerk</th><th>Auth0</th><th>Supabase Auth</th><th>NextAuth (Auth.js)</th><th>Lucia</th></tr>
+<tr><td><strong>Type</strong></td><td>Hosted + embeddable UI</td><td>Hosted (universal login)</td><td>Hosted (Supabase platform)</td><td>Library (bring your own DB)</td><td>Library (bring your own DB)</td></tr>
+<tr><td><strong>Best for</strong></td><td>React/Next.js, best DX</td><td>Enterprise, multi-protocol</td><td>Supabase users, simplicity</td><td>Full control, open source</td><td>Session-based auth, full control</td></tr>
+<tr><td><strong>Free tier</strong></td><td>10K MAU, unlimited projects</td><td>7.5K MAU (B2C), 500 (B2B)</td><td>50K MAU</td><td>Free (open source)</td><td>Free (open source, unmaintained)</td></tr>
+<tr><td><strong>Social login</strong></td><td>Google, GitHub, Apple, 20+ more</td><td>40+ providers</td><td>Google, GitHub, Apple, 10+</td><td>50+ providers (configure yourself)</td><td>Manual (configure yourself)</td></tr>
+<tr><td><strong>Multi-tenancy</strong></td><td>Excellent (organizations API)</td><td>Excellent (organizations)</td><td>No (single project)</td><td>No (you build it)</td><td>No (you build it)</td></tr>
+</table>
+
+<h2>Clerk — The Developer Experience Gold Standard</h2>
+<p>Clerk provides drop-in React components (&lt;SignIn /&gt;, &lt;UserButton /&gt;) that look polished and handle the entire auth flow. The dashboard shows active users, sign-up sources, and suspicious activity. It's the fastest way to add auth to a Next.js app — literally 10 minutes from zero to working login.</p>
+<p><strong>Best for:</strong> React/Next.js developers, teams that want auth to Just Work, projects that need multi-tenancy (organizations), developers who value beautiful pre-built UI.</p>
+<p><strong>Pricing concern:</strong> Free tier is generous (10K MAU), but grows expensive at scale ($0.02/MAU beyond).</p>
+
+<h2>Auth0 — Enterprise-Grade, Maximum Flexibility</h2>
+<p>Auth0 (now part of Okta) is the most feature-complete auth platform. It supports every protocol (OAuth 2.0, OIDC, SAML, LDAP, WSFed), 40+ social providers, and has the most sophisticated security features (anomaly detection, brute force protection, breached password detection).</p>
+<p><strong>Best for:</strong> Enterprise applications, B2B SaaS with complex org structures, applications that need SAML/LDAP, regulated industries.</p>
+<p><strong>Pricing concern:</strong> Expensive at scale. B2B features (SSO, MFA policies) require Enterprise tier. Free tier is only 500 B2B MAU.</p>
+
+<h2>Supabase Auth — Simplest Option for Supabase Users</h2>
+<p>If you already use Supabase for your database, Supabase Auth is the simplest choice — it's already configured. Row-Level Security (RLS) policies tie directly to authenticated users. The free tier (50K MAU) is the most generous of any hosted solution.</p>
+<p><strong>Best for:</strong> Supabase users, side projects, solo developers, projects that want auth + database from one vendor.</p>
+
+<h2>NextAuth.js (Auth.js) — Full Control, No Vendor Lock-In</h2>
+<p>NextAuth (now Auth.js) is an open-source library that gives you complete control over your auth implementation. You own the user data, the session logic, and the database. It supports 50+ providers. The tradeoff: more code to write and maintain.</p>
+<p><strong>Best for:</strong> Developers who want full control, projects that can't use a hosted auth service, teams with specific compliance requirements.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Auth Solution</th></tr>
+<tr><td>Next.js app, fastest to implement</td><td><strong>Clerk</strong></td></tr>
+<tr><td>Enterprise, SAML/LDAP, B2B</td><td><strong>Auth0</strong></td></tr>
+<tr><td>Supabase stack, side project</td><td><strong>Supabase Auth</strong></td></tr>
+<tr><td>Full control, open source, no vendor lock-in</td><td><strong>NextAuth.js</strong></td></tr>
+<tr><td>Best free tier for scale (50K MAU)</td><td><strong>Supabase Auth</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Clerk for Next.js apps — the best DX by far. Auth0 for enterprise. Supabase Auth if you already use Supabase. NextAuth for full control. Don't build auth from scratch — the security risks aren't worth it. See also: <a href="/en/compare/supabase-vs-firebase-vs-neon.html">Backend Comparison</a> and <a href="/en/tech/web-security-basics.html">Web Security Basics</a>.</p>
+'''
+
+BODIES['best-dev-podcasts'] = '''
+<p>Podcasts turn dead time (commuting, exercising, chores) into learning time. Here are 15 developer podcasts worth subscribing to — organized by topic so you can pick what fits your goals.</p>
+
+<h2>Web Development & JavaScript</h2>
+<table>
+<tr><th>Podcast</th><th>Hosts</th><th>Best Episodes</th></tr>
+<tr><td><strong>Syntax.fm</strong></td><td>Wes Bos & Scott Tolinski</td><td>Weekly deep dives on web dev topics. "Hasty Treat" episodes are quick tips. Start with any "potluck" episode.</td></tr>
+<tr><td><strong>JS Party</strong></td><td>Changelog team (rotating)</td><td>Panel discussion on JavaScript ecosystem changes. Lively, fun, and informative.</td></tr>
+<tr><td><strong>PodRocket</strong></td><td>LogRocket team</td><td>Interviews with library authors and framework creators. Go deep on the tools you use.</td></tr>
+</table>
+
+<h2>Software Engineering & Career</h2>
+<table>
+<tr><th>Podcast</th><th>Hosts</th><th>Best Episodes</th></tr>
+<tr><td><strong>Changelog</strong></td><td>Adam Stacoviak & Jerod Santo</td><td>Interviews with open source maintainers and industry leaders. The oral history of software.</td></tr>
+<tr><td><strong>Software Engineering Daily</strong></td><td>Rotating hosts</td><td>Daily deep technical interviews. Covers everything from databases to ML to DevOps.</td></tr>
+<tr><td><strong>Soft Skills Engineering</strong></td><td>Jamison Dance & Dave Smith</td><td>Non-technical career advice for developers. Salary negotiation, promotions, dealing with bad managers.</td></tr>
+</table>
+
+<h2>DevOps, Cloud & Infrastructure</h2>
+<table>
+<tr><th>Podcast</th><th>Hosts</th><th>Best Episodes</th></tr>
+<tr><td><strong>Kubernetes Podcast</strong></td><td>Craig Box & Adam Glick</td><td>Weekly K8s and cloud-native news + interviews. From the Google Kubernetes team.</td></tr>
+<tr><td><strong>Ship It!</strong></td><td>Justin Garrison & Autumn Nash</td><td>How software actually gets deployed and operated. DevOps with personality.</td></tr>
+<tr><td><strong>Screaming in the Cloud</strong></td><td>Corey Quinn</td><td>AWS billing horror stories and cloud cost optimization. Entertaining AND potentially saves you thousands.</td></tr>
+</table>
+
+<h2>AI & Future Tech</h2>
+<table>
+<tr><th>Podcast</th><th>Hosts</th><th>Best Episodes</th></tr>
+<tr><td><strong>Latent Space</strong></td><td>swyx & Alessio Fanelli</td><td>The best AI engineering podcast. Interviews with LLM researchers and AI tooling builders.</td></tr>
+<tr><td><strong>Practical AI</strong></td><td>Daniel Whitenack & Chris Benson</td><td>Making AI accessible to developers. Practical, not hype-driven.</td></tr>
+</table>
+
+<h2>Startup & Indie Hacking</h2>
+<table>
+<tr><th>Podcast</th><th>Hosts</th><th>Best Episodes</th></tr>
+<tr><td><strong>Indie Hackers</strong></td><td>Courtland Allen</td><td>Interviews with profitable solo founders. Revenue numbers, failures, and what actually worked.</td></tr>
+<tr><td><strong>Startups for the Rest of Us</strong></td><td>Rob Walling</td><td>Practical SaaS building advice. How to go from side project to full-time income.</td></tr>
+<tr><td><strong>The Bootstrapped Founder</strong></td><td>Arvid Kahl</td><td>Building a business without VC funding. Honest, transparent, and specific.</td></tr>
+</table>
+
+<p><strong>How to actually listen:</strong> Pick 3 podcasts max. Subscribe to one technical (Syntax/Changelog), one career (Soft Skills), and one niche relevant to your work. Listen at 1.5x speed. Skip episodes that don't grab you in the first 5 minutes. See also: <a href="/en/tools/best-dev-youtube-channels.html">Developer YouTube Channels</a> and <a href="/en/tools/best-programming-books.html">Programming Books</a>.</p>
+'''
+
+BODIES['best-free-tier-platforms'] = '''
+<p>Your entire development stack can be free in 2026. These 50+ platforms have genuinely useful free tiers — not "free trial for 14 days" but ongoing free usage with reasonable limits. Build, deploy, and scale to meaningful traffic before paying a cent.</p>
+
+<h2>Frontend Hosting</h2>
+<table>
+<tr><th>Platform</th><th>Free Tier</th><th>Best For</th></tr>
+<tr><td><strong>Vercel</strong></td><td>100GB bandwidth, 6K build min, unlimited sites</td><td>Next.js, React, static sites</td></tr>
+<tr><td><strong>Cloudflare Pages</strong></td><td>Unlimited bandwidth, 500 builds/month</td><td>Static sites, unlimited traffic</td></tr>
+<tr><td><strong>Netlify</strong></td><td>100GB bandwidth, 300 build min</td><td>JAMstack, form handling</td></tr>
+<tr><td><strong>GitHub Pages</strong></td><td>100GB bandwidth, unlimited repos</td><td>Project docs, personal sites</td></tr>
+</table>
+
+<h2>Backend & Compute</h2>
+<table>
+<tr><th>Platform</th><th>Free Tier</th><th>Best For</th></tr>
+<tr><td><strong>Cloudflare Workers</strong></td><td>100K req/day, edge execution</td><td>Edge APIs, webhooks</td></tr>
+<tr><td><strong>Render</strong></td><td>1 web service (512MB), 1 Postgres</td><td>Full-stack apps</td></tr>
+<tr><td><strong>Fly.io</strong></td><td>3 VMs (256MB each), 3GB storage</td><td>Docker containers</td></tr>
+<tr><td><strong>Railway</strong></td><td>$5 credit/month</td><td>Quick deploys, databases</td></tr>
+<tr><td><strong>Deno Deploy</strong></td><td>100K req/day</td><td>Deno/web-standard APIs</td></tr>
+<tr><td><strong>Val.town</strong></td><td>50 vals, 1 cron per hour</td><td>Micro-scripts, webhooks</td></tr>
+</table>
+
+<h2>Databases</h2>
+<table>
+<tr><th>Platform</th><th>Free Tier</th><th>Engine</th></tr>
+<tr><td><strong>Supabase</strong></td><td>500MB DB, 50K users, 1GB files</td><td>PostgreSQL</td></tr>
+<tr><td><strong>Neon</strong></td><td>0.5GB storage, 100 compute hrs/mo</td><td>PostgreSQL (serverless)</td></tr>
+<tr><td><strong>Turso</strong></td><td>9GB storage, 1B row reads/mo</td><td>SQLite (edge)</td></tr>
+<tr><td><strong>PlanetScale</strong></td><td>5GB storage, 1B row reads/mo</td><td>MySQL (Vitess)</td></tr>
+<tr><td><strong>MongoDB Atlas</strong></td><td>512MB storage, shared cluster</td><td>MongoDB</td></tr>
+<tr><td><strong>Upstash</strong></td><td>10K commands/day, 256MB</td><td>Redis (edge)</td></tr>
+<tr><td><strong>Cloudflare D1</strong></td><td>5GB storage, 5M rows read/day</td><td>SQLite (edge)</td></tr>
+</table>
+
+<h2>Authentication</h2>
+<table>
+<tr><th>Platform</th><th>Free Tier</th><th>Best For</th></tr>
+<tr><td><strong>Clerk</strong></td><td>10K MAU</td><td>React/Next.js apps</td></tr>
+<tr><td><strong>Supabase Auth</strong></td><td>50K MAU (with Supabase)</td><td>Supabase users</td></tr>
+<tr><td><strong>Auth0</strong></td><td>7.5K MAU (B2C)</td><td>Enterprise, multi-protocol</td></tr>
+<tr><td><strong>Logto</strong></td><td>5K MAU (self-host: unlimited)</td><td>Open-source alternative to Auth0</td></tr>
+</table>
+
+<h2>Storage & Media</h2>
+<table>
+<tr><th>Platform</th><th>Free Tier</th><th>Best For</th></tr>
+<tr><td><strong>Cloudflare R2</strong></td><td>10GB storage, 10M ops/month</td><td>Object storage (no egress fees!)</td></tr>
+<tr><td><strong>Supabase Storage</strong></td><td>1GB storage, 2GB bandwidth</td><td>User uploads, images</td></tr>
+<tr><td><strong>Uploadthing</strong></td><td>2GB storage, unlimited uploads</td><td>File uploads (React/Next.js)</td></tr>
+<tr><td><strong>ImageKit</strong></td><td>20GB bandwidth, 20GB storage</td><td>Image optimization + CDN</td></tr>
+</table>
+
+<h2>Monitoring, CI/CD & Email</h2>
+<table>
+<tr><th>Platform</th><th>Free Tier</th><th>Best For</th></tr>
+<tr><td><strong>GitHub Actions</strong></td><td>2K min/mo (private), unlimited (public)</td><td>CI/CD</td></tr>
+<tr><td><strong>Sentry</strong></td><td>5K errors, 100K transactions/mo</td><td>Error tracking</td></tr>
+<tr><td><strong>Checkly</strong></td><td>50K check runs/mo</td><td>Uptime monitoring + E2E</td></tr>
+<tr><td><strong>Resend</strong></td><td>100 emails/day</td><td>Transactional email</td></tr>
+<tr><td><strong>Plausible</strong></td><td>Self-host: unlimited (cloud: paid)</td><td>Privacy-first analytics</td></tr>
+</table>
+
+<h2>The Complete $0/Month Stack</h2>
+<ul>
+<li><strong>Frontend:</strong> Vercel or Cloudflare Pages</li>
+<li><strong>Backend:</strong> Cloudflare Workers or Render</li>
+<li><strong>Database:</strong> Supabase (Postgres) or Neon (serverless Postgres)</li>
+<li><strong>Redis:</strong> Upstash (10K commands free)</li>
+<li><strong>Auth:</strong> Clerk or Supabase Auth</li>
+<li><strong>Storage:</strong> Cloudflare R2 (10GB, no egress fees)</li>
+<li><strong>Email:</strong> Resend (100 emails/day)</li>
+<li><strong>Monitoring:</strong> Sentry + Checkly</li>
+<li><strong>CI/CD:</strong> GitHub Actions (2K min/mo)</li>
+<li><strong>Analytics:</strong> Plausible (self-hosted) or Umami</li>
+</ul>
+
+<p><strong>This stack handles 10K-100K+ users before you pay anything.</strong> When you do start paying, it's $5-50/month per service, not $500. See also: <a href="/en/tools/best-free-hosting-side-projects.html">Free Hosting Guide</a> and <a href="/en/sidehustle/saas-bootstrapping-guide.html">SaaS Bootstrapping</a>.</p>
+'''
+
+BODIES['best-dev-communities'] = '''
+<p>The right developer community answers your questions, reviews your code, and surfaces opportunities you wouldn't find alone. Here are the best forums, Discord servers, and social platforms where developers actually help each other in 2026.</p>
+
+<h2>Forums & Q&A Platforms</h2>
+<table>
+<tr><th>Community</th><th>Best For</th><th>Size</th><th>Vibe</th></tr>
+<tr><td><strong>Stack Overflow</strong></td><td>Specific programming questions</td><td>14M+ questions</td><td>Strict, formal. Search before asking. Your question probably already exists.</td></tr>
+<tr><td><strong>GitHub Discussions</strong></td><td>Library/framework questions, feature requests</td><td>Per-project</td><td>Tied to specific repos. Great for getting answers from maintainers.</td></tr>
+<tr><td><strong>Reddit r/programming</strong></td><td>Industry news, discussions</td><td>6M members</td><td>General programming news. High signal-to-noise. Best for broad discussion.</td></tr>
+<tr><td><strong>Reddit r/webdev</strong></td><td>Web development questions</td><td>2.3M members</td><td>Beginner-friendly, career questions, portfolio reviews.</td></tr>
+</table>
+
+<h2>Discord Communities — Real-Time, Topic-Specific</h2>
+<table>
+<tr><th>Community</th><th>Focus</th><th>Why Join</th></tr>
+<tr><td><strong>Reactiflux</strong></td><td>React, Next.js, React Native</td><td>The largest React community. Core team members answer questions here.</td></tr>
+<tr><td><strong>Vue Land</strong></td><td>Vue.js, Nuxt, Vite</td><td>Active, friendly. Evan You (Vue creator) is present.</td></tr>
+<tr><td><strong>The Programmer's Hangout</strong></td><td>All programming, career</td><td>General dev chat. 120K+ members. Good for career advice and casual discussion.</td></tr>
+<tr><td><strong>Next.js Discord</strong></td><td>Next.js, Vercel, React</td><td>Official community. Vercel employees active. Best for Next.js-specific help.</td></tr>
+<tr><td><strong>tRPC Discord</strong></td><td>tRPC, TypeScript</td><td>Creator Alex is very active. Great for TypeScript-heavy stack discussions.</td></tr>
+</table>
+
+<h2>Social Platforms for Developers</h2>
+<table>
+<tr><th>Platform</th><th>Best For</th><th>How to Use It</th></tr>
+<tr><td><strong>Twitter/X</strong></td><td>Real-time tech news, networking, finding jobs</td><td>Follow library authors, indie hackers, and dev advocates. Engage genuinely. Build in public.</td></tr>
+<tr><td><strong>Dev.to</strong></td><td>Long-form articles, tutorials, discussions</td><td>Write articles, comment on others'. The community is beginner-friendly and encouraging.</td></tr>
+<tr><td><strong>Hacker News</strong></td><td>Tech news, startup discussion</td><td>Read the comments. The discussion is often better than the article. Lurk before posting.</td></tr>
+<tr><td><strong>Lobsters</strong></td><td>Curated tech links, high-quality discussion</td><td>Similar to HN but smaller and more curated. Invitation-based. Higher signal-to-noise.</td></tr>
+<tr><td><strong>Mastodon (fosstodon.org, hachyderm.io)</strong></td><td>Open source, federated discussion</td><td>Growing developer presence. No algorithm. Good for open-source networking.</td></tr>
+</table>
+
+<h2>How to Get Value From Developer Communities</h2>
+<ol>
+<li><strong>Lurk before posting.</strong> Read the rules. Observe the tone. Understand what gets good responses.</li>
+<li><strong>Give before you ask.</strong> Answer 5 questions, then ask 1. Communities run on reciprocity.</li>
+<li><strong>Ask smart questions.</strong> Include what you tried, error messages, and a minimal reproduction. "It doesn't work" gets "what doesn't work?" in response.</li>
+<li><strong>Don't join everything.</strong> Pick 2-3 communities where you actively participate. Passive membership in 20 places = value from zero.</li>
+</ol>
+
+<p><strong>Bottom line:</strong> Stack Overflow for specific problems. Discord (Reactiflux/Vue Land) for real-time help. Twitter/X for networking and opportunities. Dev.to for writing and teaching. Pick 2-3 and be active. See also: <a href="/en/tools/best-dev-podcasts.html">Developer Podcasts</a> and <a href="/en/tools/best-dev-youtube-channels.html">Developer YouTube Channels</a>.</p>
+'''
+
 # FAQ data for FAQPage schema (slug → list of q/a dicts)
 FAQS = {
     'chatgpt-plus-worth': [
