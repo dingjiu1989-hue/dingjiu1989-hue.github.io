@@ -13,6 +13,13 @@ BASE = 'https://dingjiu1989-hue.github.io'
 
 # ── 1. Update sitemap.xml ──────────────────────────────────────────────
 
+def _cn_exists(board_id, slug=''):
+    """Check if a Chinese counterpart page exists on disk."""
+    if slug:
+        return (ROOT / board_id / f'{slug}.html').exists()
+    return (ROOT / board_id / 'index.html').exists()
+
+
 def update_sitemap():
     sitemap = SITEMAP.read_text(encoding='utf-8')
 
@@ -28,7 +35,7 @@ def update_sitemap():
     # Collect all English URLs with hreflang pairs
     new_urls = []
 
-    # English homepage
+    # English homepage — Chinese homepage always exists
     en_home = f'{BASE}/en/'
     if en_home not in sitemap:
         hreflang_xml = (
@@ -38,26 +45,34 @@ def update_sitemap():
         new_urls.append((en_home, 'daily', '1.0', hreflang_xml))
         print(f'  + sitemap: {en_home}')
 
-    # English category pages
+    # English category pages — only add zh-CN hreflang if Chinese category exists
     for board in en_data['boards']:
         cat_url = f'{BASE}/en/{board["id"]}/'
         if cat_url not in sitemap:
-            hreflang_xml = (
-                f'    <xhtml:link rel="alternate" hreflang="en" href="{cat_url}"/>\n'
-                f'    <xhtml:link rel="alternate" hreflang="zh-CN" href="{BASE}/{board["id"]}/"/>'
-            )
+            cn_cat_exists = _cn_exists(board['id'])
+            if cn_cat_exists:
+                hreflang_xml = (
+                    f'    <xhtml:link rel="alternate" hreflang="en" href="{cat_url}"/>\n'
+                    f'    <xhtml:link rel="alternate" hreflang="zh-CN" href="{BASE}/{board["id"]}/"/>'
+                )
+            else:
+                hreflang_xml = f'    <xhtml:link rel="alternate" hreflang="en" href="{cat_url}"/>'
             new_urls.append((cat_url, 'daily', '0.8', hreflang_xml))
             print(f'  + sitemap: {cat_url}')
 
-    # English article pages
+    # English article pages — only add zh-CN hreflang if Chinese article exists
     for board in en_data['boards']:
         for art in board['posts']:
             art_url = f'{BASE}/en/{board["id"]}/{art["slug"]}.html'
             if art_url not in sitemap:
-                hreflang_xml = (
-                    f'    <xhtml:link rel="alternate" hreflang="en" href="{art_url}"/>\n'
-                    f'    <xhtml:link rel="alternate" hreflang="zh-CN" href="{BASE}/{board["id"]}/{art["slug"]}.html"/>'
-                )
+                cn_exists = _cn_exists(board['id'], art['slug'])
+                if cn_exists:
+                    hreflang_xml = (
+                        f'    <xhtml:link rel="alternate" hreflang="en" href="{art_url}"/>\n'
+                        f'    <xhtml:link rel="alternate" hreflang="zh-CN" href="{BASE}/{board["id"]}/{art["slug"]}.html"/>'
+                    )
+                else:
+                    hreflang_xml = f'    <xhtml:link rel="alternate" hreflang="en" href="{art_url}"/>'
                 new_urls.append((art_url, 'weekly', '0.7', hreflang_xml))
                 print(f'  + sitemap: {art_url}')
 
@@ -75,37 +90,44 @@ def update_sitemap():
             )
         sitemap = sitemap.replace('</urlset>', '\n'.join(entries) + '\n</urlset>')
 
-    # Retroactively add hreflang to existing English URLs that lack it
+    # Retroactively add missing en hreflang to existing English URLs
     import re
     for board in en_data['boards']:
         for art in board['posts']:
             art_url = f'{BASE}/en/{board["id"]}/{art["slug"]}.html'
             cn_url = f'{BASE}/{board["id"]}/{art["slug"]}.html'
+            cn_exists = _cn_exists(board['id'], art['slug'])
             if art_url in sitemap and f'<xhtml:link rel="alternate" hreflang="en" href="{art_url}"/>' not in sitemap:
-                hreflang_xml = (
-                    f'    <xhtml:link rel="alternate" hreflang="en" href="{art_url}"/>\n'
-                    f'    <xhtml:link rel="alternate" hreflang="zh-CN" href="{cn_url}"/>'
-                )
-                # Insert hreflang before <changefreq> in the URL block
+                if cn_exists:
+                    hreflang_xml = (
+                        f'    <xhtml:link rel="alternate" hreflang="en" href="{art_url}"/>\n'
+                        f'    <xhtml:link rel="alternate" hreflang="zh-CN" href="{cn_url}"/>'
+                    )
+                else:
+                    hreflang_xml = f'    <xhtml:link rel="alternate" hreflang="en" href="{art_url}"/>'
                 sitemap = sitemap.replace(
                     f'{art_url}</loc>\n    <changefreq>',
                     f'{art_url}</loc>\n{hreflang_xml}\n    <changefreq>'
                 )
                 print(f'  + hreflang: {art_url}')
-    # Also do category pages and homepage
+    # Category pages
     for board in en_data['boards']:
         cat_en = f'{BASE}/en/{board["id"]}/'
         cat_cn = f'{BASE}/{board["id"]}/'
         if cat_en in sitemap and f'hreflang="en" href="{cat_en}"' not in sitemap:
-            hreflang_xml = (
-                f'    <xhtml:link rel="alternate" hreflang="en" href="{cat_en}"/>\n'
-                f'    <xhtml:link rel="alternate" hreflang="zh-CN" href="{cat_cn}"/>'
-            )
+            if _cn_exists(board['id']):
+                hreflang_xml = (
+                    f'    <xhtml:link rel="alternate" hreflang="en" href="{cat_en}"/>\n'
+                    f'    <xhtml:link rel="alternate" hreflang="zh-CN" href="{cat_cn}"/>'
+                )
+            else:
+                hreflang_xml = f'    <xhtml:link rel="alternate" hreflang="en" href="{cat_en}"/>'
             sitemap = sitemap.replace(
                 f'{cat_en}</loc>\n    <changefreq>',
                 f'{cat_en}</loc>\n{hreflang_xml}\n    <changefreq>'
             )
             print(f'  + hreflang: {cat_en}')
+    # English homepage — Chinese homepage always exists
     en_home = f'{BASE}/en/'
     if en_home in sitemap and f'hreflang="en" href="{en_home}"' not in sitemap:
         hreflang_xml = (

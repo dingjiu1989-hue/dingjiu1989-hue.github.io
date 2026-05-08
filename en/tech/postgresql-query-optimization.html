@@ -29,7 +29,6 @@
     <title>PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds — SourceHub</title>
     <meta name="description" content="Practical PostgreSQL performance guide: EXPLAIN ANALYZE deep dive, index types (B-tree, GIN, GiST, BRIN), query plan analysis, common anti-patterns, partitioning strategies, and connection pooling with PgBouncer.">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/postgresql-query-optimization.html">
     <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/postgresql-query-optimization.html">
     <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/postgresql-query-optimization.html">
     <meta name="robots" content="index, follow">
@@ -130,7 +129,7 @@ SHOW random_page_cost;      -- Default: 4.0. Set to 1.1 for SSD (encourages inde
 ALTER SYSTEM SET log_min_duration_statement = 1000;  -- Log queries > 1s
 SELECT pg_reload_conf();</code></pre>
 
-<p><strong>Bottom line:</strong> 90% of PostgreSQL performance problems are solved by adding the right index and adjusting work_mem. Before adding indexes, run EXPLAIN (ANALYZE, BUFFERS) on the slow query. If you see Seq Scan on a large table, add an index. If you see external merge on disk, increase work_mem. These two fixes alone resolve the vast majority of performance issues. See also: <a href="/en/tech/full-text-search-comparison.html">Full-Text Search Comparison</a> and <a href="/en/tech/database-migrations-guide.html">Database Migrations Guide</a>.</p></div>
+<p><strong>Bottom line:</strong> 90% of PostgreSQL performance problems are solved by adding the right index and adjusting work_mem. Before adding indexes, run EXPLAIN (ANALYZE, BUFFERS) on the slow query. If you see Seq Scan on a large table, add an index. If you see external merge on disk, increase work_mem. These two fixes alone resolve the vast majority of performance issues. See also: <a href="/en/tech/full-text-search-comparison.html">Full-Text Search Comparison</a> and <a href="/en/tech/database-migration-strategies.html">Database Migrations Guide</a>.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

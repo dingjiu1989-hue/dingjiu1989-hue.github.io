@@ -8410,7 +8410,7 @@ SHOW random_page_cost;      -- Default: 4.0. Set to 1.1 for SSD (encourages inde
 ALTER SYSTEM SET log_min_duration_statement = 1000;  -- Log queries > 1s
 SELECT pg_reload_conf();</code></pre>
 
-<p><strong>Bottom line:</strong> 90% of PostgreSQL performance problems are solved by adding the right index and adjusting work_mem. Before adding indexes, run EXPLAIN (ANALYZE, BUFFERS) on the slow query. If you see Seq Scan on a large table, add an index. If you see external merge on disk, increase work_mem. These two fixes alone resolve the vast majority of performance issues. See also: <a href="/en/tech/full-text-search-comparison.html">Full-Text Search Comparison</a> and <a href="/en/tech/database-migrations-guide.html">Database Migrations Guide</a>.</p>
+<p><strong>Bottom line:</strong> 90% of PostgreSQL performance problems are solved by adding the right index and adjusting work_mem. Before adding indexes, run EXPLAIN (ANALYZE, BUFFERS) on the slow query. If you see Seq Scan on a large table, add an index. If you see external merge on disk, increase work_mem. These two fixes alone resolve the vast majority of performance issues. See also: <a href="/en/tech/full-text-search-comparison.html">Full-Text Search Comparison</a> and <a href="/en/tech/database-migration-strategies.html">Database Migrations Guide</a>.</p>
 '''
 
 BODIES['prompt-injection-prevention'] = '''
@@ -10967,7 +10967,7 @@ BODIES['tailscale-vs-zerotier-vs-cloudflare'] = '''
 <tr><td>IoT devices across distributed locations</td><td>ZeroTier</td><td>Layer 2, low overhead, runs on tiny devices</td></tr>
 </table>
 
-<p><strong>Bottom line:</strong> Tailscale is the best mesh VPN for most developers — it takes WireGuard and makes it so simple you'll forget it's there. ZeroTier is the pick for self-hosters and homelab enthusiasts who need layer 2 networking. Cloudflare Zero Trust is for teams replacing their corporate VPN, not for mesh networking between personal devices. The good news: all three have generous free tiers, so you can try each without spending a cent. See also: <a href="/en/tools/best-vpn-tools.html">Best VPN Tools for Developers</a> and <a href="/en/tech/cloudflare-workers-guide.html">Cloudflare Workers Guide</a>.</p>
+<p><strong>Bottom line:</strong> Tailscale is the best mesh VPN for most developers — it takes WireGuard and makes it so simple you'll forget it's there. ZeroTier is the pick for self-hosters and homelab enthusiasts who need layer 2 networking. Cloudflare Zero Trust is for teams replacing their corporate VPN, not for mesh networking between personal devices. The good news: all three have generous free tiers, so you can try each without spending a cent. See also: <a href="/en/tools/best-free-dev-tools-2026.html">Best VPN Tools for Developers</a> and <a href="/en/compare/cloudflare-workers-vs-lambda-vs-deno-deploy.html">Cloudflare Workers Guide</a>.</p>
 '''
 
 
@@ -11008,7 +11008,7 @@ BODIES['htmx-vs-alpine-vs-vanilla-js'] = '''
 <tr><td>Web Component library for distribution</td><td>Vanilla JS</td><td>Web Components are the standard; no deps = no conflicts</td></tr>
 </table>
 
-<p><strong>Bottom line:</strong> Most web apps do not need React, Vue, or Svelte. htmx is the best choice for server-rendered apps that want SPA-like interactivity without JavaScript complexity. Alpine.js is the best choice for static pages that need interactive sprinkles — it's what jQuery wanted to be in 2026. Vanilla JS is the choice when you want zero dependencies and are comfortable writing to the platform. The common thread: all three approaches reject the SPA-everything default and pick the right amount of JavaScript for the job. See also: <a href="/en/tech/alpine-js-vs-vanilla-javascript.html">Alpine.js vs Vanilla JavaScript</a> and <a href="/en/tools/best-javascript-frameworks.html">Best JavaScript Frameworks</a>.</p>
+<p><strong>Bottom line:</strong> Most web apps do not need React, Vue, or Svelte. htmx is the best choice for server-rendered apps that want SPA-like interactivity without JavaScript complexity. Alpine.js is the best choice for static pages that need interactive sprinkles — it's what jQuery wanted to be in 2026. Vanilla JS is the choice when you want zero dependencies and are comfortable writing to the platform. The common thread: all three approaches reject the SPA-everything default and pick the right amount of JavaScript for the job. See also: <a href="/en/compare/htmx-vs-alpine-vs-vanilla-js.html">Alpine.js vs Vanilla JavaScript</a> and <a href="/en/compare/react-vs-vue-vs-angular-vs-svelte.html">Best JavaScript Frameworks</a>.</p>
 '''
 
 
@@ -11062,7 +11062,7 @@ BODIES['duckdb-vs-sqlite'] = '''
 <tr><td>Both OLTP + OLAP in the same app</td><td>Both</td><td>SQLite for transactions, DuckDB for analytics queries</td></tr>
 </table>
 
-<p><strong>Bottom line:</strong> SQLite and DuckDB are not competitors — they are complementary. SQLite is your application's transactional database; DuckDB is your analytical engine. Use SQLite for writes, point lookups, and application state. Use DuckDB for queries that scan, aggregate, or join large datasets. Many modern data stacks use both: SQLite for the operational database, DuckDB for the analytical queries, and they happily coexist. See also: <a href="/en/tools/best-database-tools.html">Best Database Tools for Developers</a> and <a href="/en/tech/columnar-database-guide.html">Columnar Database Guide</a>.</p>
+<p><strong>Bottom line:</strong> SQLite and DuckDB are not competitors — they are complementary. SQLite is your application's transactional database; DuckDB is your analytical engine. Use SQLite for writes, point lookups, and application state. Use DuckDB for queries that scan, aggregate, or join large datasets. Many modern data stacks use both: SQLite for the operational database, DuckDB for the analytical queries, and they happily coexist. See also: <a href="/en/tools/best-database-gui-tools.html">Best Database Tools for Developers</a> and <a href="/en/compare/duckdb-vs-sqlite.html">Columnar Database Guide</a>.</p>
 '''
 
 
@@ -11114,7 +11114,7 @@ BODIES['php-vs-python-vs-node'] = '''
 <tr><td>API that serves mobile + web + third-parties</td><td>Node.js or Python</td><td>Fastify or FastAPI — both excellent API frameworks</td></tr>
 </table>
 
-<p><strong>Bottom line:</strong> The "best" backend language doesn't exist — it depends on your project. PHP is the pragmatic choice for content-driven websites (WordPress, Laravel). Python is the choice for anything touching data, AI, or internal tools (Django, FastAPI). Node.js is the choice for real-time apps, full-stack TypeScript teams, and I/O-heavy services. All three are mature, well-supported, and capable of scaling to millions of users. Pick the one that fits your problem domain and team expertise. See also: <a href="/en/compare/typescript-vs-javascript-vs-python.html">TypeScript vs JavaScript vs Python</a> and <a href="/en/tools/best-web-frameworks.html">Best Web Frameworks</a>.</p>
+<p><strong>Bottom line:</strong> The "best" backend language doesn't exist — it depends on your project. PHP is the pragmatic choice for content-driven websites (WordPress, Laravel). Python is the choice for anything touching data, AI, or internal tools (Django, FastAPI). Node.js is the choice for real-time apps, full-stack TypeScript teams, and I/O-heavy services. All three are mature, well-supported, and capable of scaling to millions of users. Pick the one that fits your problem domain and team expertise. See also: <a href="/en/compare/php-vs-python-vs-node.html">TypeScript vs JavaScript vs Python</a> and <a href="/en/compare/nextjs-vs-nuxt-vs-sveltekit.html">Best Web Frameworks</a>.</p>
 '''
 
 
@@ -12556,9 +12556,11 @@ def make_article_html(art, board_id, board_name, all_posts):
         tags_h += '\n        <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span>'
 
     slug = art['slug']
+    cn_path = ROOT / board_id / f'{slug}.html'
     cn_url = f'{BASE}/{board_id}/{slug}.html'
     en_url = f'{BASE}/en/{board_id}/{slug}.html'
     art_url = en_url
+    cn_hreflang = f'    <link rel="alternate" hreflang="zh-CN" href="{cn_url}">\n' if cn_path.exists() else ''
 
     # OG / Twitter Card
     og_tags = f'''    <meta property="og:title" content="{art['title']}">
@@ -12635,8 +12637,7 @@ def make_article_html(art, board_id, board_name, all_posts):
     <title>{art['title']} — SourceHub</title>
     <meta name="description" content="{art['description']}">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="alternate" hreflang="zh-CN" href="{cn_url}">
-    <link rel="alternate" hreflang="en" href="{en_url}">
+{cn_hreflang}    <link rel="alternate" hreflang="en" href="{en_url}">
     <link rel="canonical" href="{art_url}">
     <meta name="robots" content="index, follow">
     <script type="application/ld+json">
@@ -12813,7 +12814,9 @@ def make_category(data, board_id):
     board = next(b for b in data['boards'] if b['id'] == board_id)
     count = len(board['posts'])
     en_url = f'{BASE}/en/{board_id}/'
+    cn_path = ROOT / board_id / 'index.html'
     cn_url = f'{BASE}/{board_id}/'
+    cn_hreflang = f'    <link rel="alternate" hreflang="zh-CN" href="{cn_url}">\n' if cn_path.exists() else ''
 
     board_titles = {
         'tech': 'Tech Tutorials',
@@ -12868,8 +12871,7 @@ def make_category(data, board_id):
     <title>{title} — SourceHub</title>
     <meta name="description" content="{board_descs[board_id]}">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="alternate" hreflang="zh-CN" href="{cn_url}">
-    <link rel="alternate" hreflang="en" href="{en_url}">
+{cn_hreflang}    <link rel="alternate" hreflang="en" href="{en_url}">
     <link rel="canonical" href="{en_url}">
     <meta name="robots" content="index, follow">
     <script type="application/ld+json">
@@ -12905,7 +12907,7 @@ def make_category(data, board_id):
     <div class="page-header">
       <div>
         <h2>{board['icon']} {title}</h2>
-        <span class="post-count">{board['desc']}（共 {count} 篇）</span>
+        <span class="post-count">{board['desc']}({count} articles)</span>
       </div>
       <select class="sort-select" disabled>
         <option>Sort: Newest ↓</option>
