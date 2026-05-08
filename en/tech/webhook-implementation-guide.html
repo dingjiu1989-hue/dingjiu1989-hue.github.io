@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="webhook-implementation-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Webhook Implementation: Design, Security, and Best Practices (2026)">
+    <meta property="og:description" content="Complete guide to building webhook systems: event design, retry strategies (exponential backoff), idempotency, signature verification (HMAC), payload versioning, and monitoring. Code examples in Node.js and Python.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/webhook-implementation-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Webhook Implementation: Design, Security, and Best Practices (2026)">
+    <meta name="twitter:description" content="Complete guide to building webhook systems: event design, retry strategies (exponential backoff), idempotency, signature verification (HMAC), payload versioning, and monitoring. Code examples in Node.js and Python.">
+    <title>Webhook Implementation: Design, Security, and Best Practices (2026) — SourceHub</title>
+    <meta name="description" content="Complete guide to building webhook systems: event design, retry strategies (exponential backoff), idempotency, signature verification (HMAC), payload versioning, and monitoring. Code examples in Node.js and Python.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/webhook-implementation-guide.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/webhook-implementation-guide.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Webhook Implementation: Design, Security, and Best Practices (2026)",
+      "description": "Complete guide to building webhook systems: event design, retry strategies (exponential backoff), idempotency, signature verification (HMAC), payload versioning, and monitoring. Code examples in Node.js and Python.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Webhook Implementation: Design, Security, and Best Practices (2026)"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Webhook Implementation: Design, Security, and Best Practices (2026)
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Webhooks</span>
+        <span class="tag-cat">API</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Integration</span></div>
+      <h1 class="article-title">Webhook Implementation: Design, Security, and Best Practices (2026)</h1>
+      <div class="article-meta">Published 2026-05-08 · 4440 views · 37 replies</div>
+      <div class="article-body"><p>Webhooks are the backbone of event-driven architectures — they power payment notifications, CI/CD triggers, and SaaS integrations. But implementing webhooks reliably is harder than it looks: you need retry logic, idempotency, security, and monitoring. This guide covers the complete production-grade webhook implementation, both as a sender and a receiver.</p>
+
+<h2>Webhook Architecture Overview</h2>
+<pre><code>Sender (You)                          Receiver (Third-Party)
+     |                                      |
+     | 1. Event occurs (payment.created)    |
+     | 2. Look up webhook URL + secret      |
+     | 3. Build payload + signature         |
+     | 4. POST →  ──────────────────────→   | 5. Verify signature
+     |                                      | 6. Process event
+     | 7. ← 200 OK                          | 7. Return 200 OK
+     |                                      |
+     | 8. If not 200: retry with backoff    |
+     |    Attempt 1: immediate              |
+     |    Attempt 2: +5s                    |
+     |    Attempt 3: +25s (30s total)       |
+     |    Attempt 4+: exponential (up to 3 days)</code></pre>
+
+<h2>Webhook Sender: Implementation Checklist</h2>
+<table>
+<tr><th>Feature</th><th>Why It Matters</th><th>Implementation</th></tr>
+<tr><td>Signature (HMAC-SHA256)</td><td>Proves the webhook came from you</td><td>Header: X-Webhook-Signature: t=timestamp,v1=HMAC(secret, timestamp+body)</td></tr>
+<tr><td>Idempotency Key</td><td>Prevents duplicate processing</td><td>Header: X-Webhook-Id: unique_event_id</td></tr>
+<tr><td>Retry with Backoff</td><td>Handles transient failures</td><td>Exponential backoff: 5s, 25s, 125s, 625s... max 3 days</td></tr>
+<tr><td>Delivery Logging</td><td>Debugging failed deliveries</td><td>Store: event_id, URL, status_code, request_body, response_body, duration_ms</td></tr>
+<tr><td>Manual Retry UI</td><td>Let users re-trigger failed deliveries</td><td>Admin panel showing failed deliveries with "Retry" button</td></tr>
+<tr><td>Timeout</td><td>Don't hang your workers</td><td>30 second timeout (most webhook handlers complete in <5s)</td></tr>
+</table>
+
+<h2>Webhook Security: Signature Verification</h2>
+<pre><code># Python: Webhook sender (generate signature)
+import hmac, hashlib, time, json
+
+def sign_webhook(secret: str, body: dict) -> dict:
+    timestamp = str(int(time.time()))
+    payload = json.dumps(body)
+    signed = hmac.new(
+        secret.encode(),
+        f"{timestamp}.{payload}".encode(),
+        hashlib.sha256
+    ).hexdigest()
+    return {
+        "X-Webhook-Id": generate_event_id(),
+        "X-Webhook-Signature": f"t={timestamp},v1={signed}",
+        "body": payload
+    }
+
+# Python: Webhook receiver (verify signature)
+def verify_webhook(secret: str, signature: str, raw_body: bytes) -> bool:
+    # Parse: "t=1234567890,v1=abc123..."
+    parts = dict(p.split("=") for p in signature.split(","))
+    timestamp, expected = parts["t"], parts["v1"]
+    # Reject old timestamps (prevent replay attacks)
+    if abs(time.time() - int(timestamp)) > 300:  # 5 min tolerance
+        return False
+    computed = hmac.new(
+        secret.encode(),
+        f"{timestamp}.{raw_body.decode()}".encode(),
+        hashlib.sha256
+    ).hexdigest()
+    return hmac.compare_digest(computed, expected)  # Constant-time comparison</code></pre>
+
+<h2>Webhook Receiver: Implementation Checklist</h2>
+<table>
+<tr><th>Feature</th><th>Why It Matters</th><th>Implementation</th></tr>
+<tr><td>Signature Verification</td><td>Prevents spoofed webhooks</td><td>Verify HMAC before processing (see above)</td></tr>
+<tr><td>Idempotency</td><td>Handle retries safely</td><td>Store processed event_ids, return 200 for duplicates</td></tr>
+<tr><td>Fast 200 Response</td><td>Sender knows delivery succeeded</td><td>Respond 200 immediately, process asynchronously (job queue)</td></tr>
+<tr><td>Event Ordering</td><td>Handle out-of-order delivery</td><td>Use event version/sequence number; ignore stale events</td></tr>
+<tr><td>IP Allowlisting</td><td>Additional security layer</td><td>Only accept webhooks from known sender IPs</td></tr>
+</table>
+
+<h2>Common Webhook Pitfalls</h2>
+<table>
+<tr><th>Pitfall</th><th>Problem</th><th>Solution</th></tr>
+<tr><td>Processing in the request handler</td><td>Slow processing → timeout → sender retries → duplicates</td><td>Accept webhook, enqueue job, return 200</td></tr>
+<tr><td>No idempotency</td><td>Retries create duplicate orders/transactions</td><td>Store event_id, skip duplicates</td></tr>
+<tr><td>Ignoring signature</td><td>Anyone can POST fake events</td><td>Always verify signature before processing</td></tr>
+<tr><td>No delivery monitoring</td><td>Failed deliveries go unnoticed for days</td><td>Alert when delivery rate < 95%</td></tr>
+<tr><td>Hardcoded URLs</td><td>Cannot update endpoints without deploy</td><td>Store webhook endpoints in database, with UI for management</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> A production-grade webhook system needs four things: HMAC signatures (security), idempotency keys (reliability), exponential backoff retries (deliverability), and a delivery log (debugging). The most common mistake is processing webhooks synchronously in the request handler — always accept, enqueue, and return 200 immediately. See also: <a href="/en/tech/rate-limiting-strategies.html">Rate Limiting Strategies</a> and <a href="/en/tech/ci-cd-pipeline-guide.html">CI/CD Pipeline Guide</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

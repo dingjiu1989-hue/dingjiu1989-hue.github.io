@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="postgresql-query-optimization">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds">
+    <meta property="og:description" content="Practical PostgreSQL performance guide: EXPLAIN ANALYZE deep dive, index types (B-tree, GIN, GiST, BRIN), query plan analysis, common anti-patterns, partitioning strategies, and connection pooling with PgBouncer.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/postgresql-query-optimization.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds">
+    <meta name="twitter:description" content="Practical PostgreSQL performance guide: EXPLAIN ANALYZE deep dive, index types (B-tree, GIN, GiST, BRIN), query plan analysis, common anti-patterns, partitioning strategies, and connection pooling with PgBouncer.">
+    <title>PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds — SourceHub</title>
+    <meta name="description" content="Practical PostgreSQL performance guide: EXPLAIN ANALYZE deep dive, index types (B-tree, GIN, GiST, BRIN), query plan analysis, common anti-patterns, partitioning strategies, and connection pooling with PgBouncer.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/postgresql-query-optimization.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/postgresql-query-optimization.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds",
+      "description": "Practical PostgreSQL performance guide: EXPLAIN ANALYZE deep dive, index types (B-tree, GIN, GiST, BRIN), query plan analysis, common anti-patterns, partitioning strategies, and connection pooling with PgBouncer.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">PostgreSQL</span>
+        <span class="tag-cat">Performance</span>
+        <span class="tag-cat">Database</span>
+        <span class="tag-cat">SQL</span></div>
+      <h1 class="article-title">PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds</h1>
+      <div class="article-meta">Published 2026-05-08 · 6720 views · 56 replies</div>
+      <div class="article-body"><p>A slow PostgreSQL query is the most common performance bottleneck in web applications — and the most fixable. This guide covers the systematic approach to identifying slow queries, reading EXPLAIN ANALYZE output, and applying the optimizations that have the highest ROI: indexing, query rewriting, and configuration tuning. From 2 seconds to 2 milliseconds.</p>
+
+<h2>The Optimization Workflow</h2>
+<ol>
+<li><strong>Identify:</strong> Enable pg_stat_statements, find the top 10 slowest/most frequent queries</li>
+<li><strong>Analyze:</strong> Run EXPLAIN (ANALYZE, BUFFERS) on the slow query</li>
+<li><strong>Diagnose:</strong> Is it a missing index? A bad query plan? Lock contention? Hardware?</li>
+<li><strong>Fix:</strong> Apply the specific optimization, measure the improvement</li>
+<li><strong>Prevent:</strong> Add an index, adjust work_mem, or rewrite the query permanently</li>
+</ol>
+
+<h2>Reading EXPLAIN ANALYZE Output</h2>
+<table>
+<tr><th>Node Type</th><th>What It Means</th><th>Good or Bad?</th><th>Action</th></tr>
+<tr><td>Seq Scan</td><td>Scanning every row in the table</td><td>Bad for large tables (>10K rows)</td><td>Add an index</td></tr>
+<tr><td>Index Scan</td><td>Using index, reads index + heap</td><td>Good for selective queries, bad for large result sets</td><td>Usually fine; Index Only Scan is better</td></tr>
+<tr><td>Index Only Scan</td><td>Index covers all needed columns</td><td>Excellent — no heap access needed</td><td>Keep; consider covering indexes</td></tr>
+<tr><td>Bitmap Index Scan → Bitmap Heap Scan</td><td>Combines multiple indexes, then reads heap</td><td>OK for AND/OR conditions on indexed columns</td><td>Fine unless rows are very large</td></tr>
+<tr><td>Nested Loop</td><td>For each row in A, look up B</td><td>Good if A is small, B is indexed</td><td>Bad for large tables without index</td></tr>
+<tr><td>Hash Join</td><td>Build hash of one table, probe with other</td><td>Good for joining two large tables</td><td>Usually fine; ensure work_mem is sufficient</td></tr>
+<tr><td>Merge Join</td><td>Both inputs sorted, merge like zipper</td><td>Good for pre-sorted inputs (from indexes)</td><td>Excellent if both are index scans</td></tr>
+</table>
+
+<h2>Index Types and When to Use Them</h2>
+<table>
+<tr><th>Index Type</th><th>Best For</th><th>Example</th><th>Size Overhead</th></tr>
+<tr><td>B-Tree (default)</td><td>Equality, range, ORDER BY, <, >, BETWEEN</td><td>WHERE user_id = 123 / WHERE created_at > now() - interval '7 days'</td><td>~40% of table size</td></tr>
+<tr><td>Partial Index</td><td>Queries on a subset of rows</td><td>WHERE status = 'active' AND created_at > '2024-01-01' (index WHERE status = 'active')</td><td>Small</td></tr>
+<tr><td>Covering Index (INCLUDE)</td><td>Index-Only Scans for specific columns</td><td>INDEX ON users (email) INCLUDE (name, avatar_url)</td><td>Medium</td></tr>
+<tr><td>GIN (Generalized Inverted)</td><td>Full-text search, arrays, JSONB</td><td>WHERE document @@ to_tsquery('search & query')</td><td>Large</td></tr>
+<tr><td>GiST</td><td>Geometric data, full-text search</td><td>WHERE location <@ ST_MakeEnvelope(...)</td><td>Medium-Large</td></tr>
+<tr><td>BRIN (Block Range)</td><td>Very large tables, naturally sorted data</td><td>WHERE created_at BETWEEN ... (on 1B+ row tables)</td><td>Very Small (<0.1%)</td></tr>
+</table>
+
+<h2>Common Optimizations by Root Cause</h2>
+<table>
+<tr><th>Symptom</th><th>Root Cause</th><th>Fix</th><th>Speedup</th></tr>
+<tr><td>Seq Scan on large table</td><td>Missing index</td><td>CREATE INDEX ON table (filter_column)</td><td>100-10,000x</td></tr>
+<tr><td>Nested Loop with large inner table</td><td>Missing JOIN index</td><td>CREATE INDEX ON inner_table (join_key)</td><td>50-500x</td></tr>
+<tr><td>Sort using external merge (disk)</td><td>work_mem too low</td><td>SET work_mem = '256MB' for this query</td><td>5-20x</td></tr>
+<tr><td>N+1 queries (ORM)</td><td>Lazy loading in application</td><td>Use eager loading (includes/joins)</td><td>10-100x</td></tr>
+<tr><td>Slow COUNT(*)</td><td>MVCC visibility checks</td><td>Use estimate: SELECT reltuples FROM pg_class WHERE relname = 'table'</td><td>100-1000x</td></tr>
+<tr><td>Table bloat</td><td>Dead tuples from UPDATE/DELETE</td><td>VACUUM ANALYZE; adjust autovacuum settings</td><td>2-10x</td></tr>
+</table>
+
+<h2>Key PostgreSQL Configuration Tuning</h2>
+<pre><code>-- Check current settings
+SHOW shared_buffers;        -- Default: 128MB. Set to 25% of RAM.
+SHOW work_mem;              -- Default: 4MB. Increase to 64-256MB for reporting queries.
+SHOW maintenance_work_mem;  -- Default: 64MB. Set to 10% of RAM for VACUUM/INDEX speed.
+SHOW effective_cache_size;  -- Default: 4GB. Set to 75% of RAM (hint for planner).
+SHOW random_page_cost;      -- Default: 4.0. Set to 1.1 for SSD (encourages index use).
+
+-- Enable slow query logging
+ALTER SYSTEM SET log_min_duration_statement = 1000;  -- Log queries > 1s
+SELECT pg_reload_conf();</code></pre>
+
+<p><strong>Bottom line:</strong> 90% of PostgreSQL performance problems are solved by adding the right index and adjusting work_mem. Before adding indexes, run EXPLAIN (ANALYZE, BUFFERS) on the slow query. If you see Seq Scan on a large table, add an index. If you see external merge on disk, increase work_mem. These two fixes alone resolve the vast majority of performance issues. See also: <a href="/en/tech/full-text-search-comparison.html">Full-Text Search Comparison</a> and <a href="/en/tech/database-migrations-guide.html">Database Migrations Guide</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

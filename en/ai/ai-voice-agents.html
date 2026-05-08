@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="ai-voice-agents">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Building AI Voice Agents: Complete Technical Guide (2026)">
+    <meta property="og:description" content="How to build real-time AI voice agents: STT (Whisper) + LLM (GPT-4o/Claude) + TTS (ElevenLabs). Covers WebRTC streaming, latency optimization, voice activity detection, and interruption handling.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/ai-voice-agents.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Building AI Voice Agents: Complete Technical Guide (2026)">
+    <meta name="twitter:description" content="How to build real-time AI voice agents: STT (Whisper) + LLM (GPT-4o/Claude) + TTS (ElevenLabs). Covers WebRTC streaming, latency optimization, voice activity detection, and interruption handling.">
+    <title>Building AI Voice Agents: Complete Technical Guide (2026) — SourceHub</title>
+    <meta name="description" content="How to build real-time AI voice agents: STT (Whisper) + LLM (GPT-4o/Claude) + TTS (ElevenLabs). Covers WebRTC streaming, latency optimization, voice activity detection, and interruption handling.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/ai/ai-voice-agents.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/ai-voice-agents.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Building AI Voice Agents: Complete Technical Guide (2026)",
+      "description": "How to build real-time AI voice agents: STT (Whisper) + LLM (GPT-4o/Claude) + TTS (ElevenLabs). Covers WebRTC streaming, latency optimization, voice activity detection, and interruption handling.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "Building AI Voice Agents: Complete Technical Guide (2026)"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › Building AI Voice Agents: Complete Technical Guide (2026)
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">AI</span>
+        <span class="tag-cat">Voice</span>
+        <span class="tag-cat">Real-Time</span>
+        <span class="tag-cat">WebRTC</span></div>
+      <h1 class="article-title">Building AI Voice Agents: Complete Technical Guide (2026)</h1>
+      <div class="article-meta">Published 2026-05-08 · 4920 views · 41 replies</div>
+      <div class="article-body"><p>Building a real-time AI voice agent — one that can listen, think, and speak with sub-second latency — was a major engineering challenge two years ago. In 2026, with the GPT-4o real-time API, Claude's voice capabilities, and mature TTS/STT models, it is a weekend project for a competent developer. This guide covers the complete technical stack for building voice agents that feel natural.</p>
+
+<h2>The Voice Agent Pipeline</h2>
+<table>
+<tr><th>Stage</th><th>Technology</th><th>Latency Budget</th><th>What Happens</th></tr>
+<tr><td>1. Audio Input</td><td>WebRTC (browser mic)</td><td>~20ms</td><td>Raw audio captured from user's microphone</td></tr>
+<tr><td>2. Speech-to-Text (STT)</td><td>OpenAI Whisper, Deepgram, AssemblyAI</td><td>100-300ms</td><td>Audio transcribed to text</td></tr>
+<tr><td>3. LLM Reasoning</td><td>GPT-4o, Claude Sonnet, Gemini</td><td>300-1,000ms</td><td>AI understands intent and generates response</td></tr>
+<tr><td>4. Text-to-Speech (TTS)</td><td>ElevenLabs, OpenAI TTS, Play.ht</td><td>100-500ms</td><td>Text converted to natural speech</td></tr>
+<tr><td>5. Audio Output</td><td>WebRTC (browser speaker)</td><td>~20ms</td><td>Audio played to user</td></tr>
+<tr><td>Total (ideal)</td><td>—</td><td>500-1,500ms</td><td>Target: under 1 second for natural conversation</td></tr>
+</table>
+
+<h2>Voice Agent Architecture</h2>
+<pre><code># Simplified voice agent using OpenAI Realtime API
+# The Realtime API combines STT + LLM + TTS into one WebSocket connection
+# Latency: ~500-800ms end-to-end (much faster than chained APIs)
+
+import asyncio
+import websockets
+import json
+
+async def voice_agent():
+    async with websockets.connect(
+        "wss://api.openai.com/v1/realtime?model=gpt-4o-realtime",
+        extra_headers={"Authorization": f"Bearer {API_KEY}"}
+    ) as ws:
+        # Configure the session
+        await ws.send(json.dumps({
+            "type": "session.update",
+            "session": {
+                "modalities": ["text", "audio"],
+                "instructions": "You are a helpful coding mentor. Be concise.",
+                "voice": "alloy",
+                "input_audio_format": "pcm16",
+                "output_audio_format": "pcm16",
+                "turn_detection": {"type": "server_vad"}  # Voice activity detection
+            }
+        }))
+
+        # Stream audio from browser mic -> ws -> receive audio back
+        async for message in ws:
+            event = json.loads(message)
+            if event["type"] == "response.audio.delta":
+                # Send this audio chunk to browser speaker
+                play_audio(event["delta"])</code></pre>
+
+<h2>STT, LLM, and TTS: Breaking Down the Stack</h2>
+<table>
+<tr><th>Component</th><th>Best Options</th><th>Key Considerations</th></tr>
+<tr><td>STT (Speech-to-Text)</td><td>Deepgram (lowest latency, 100ms), Whisper v3 (best accuracy), AssemblyAI (best features)</td><td>Deepgram for real-time; Whisper for batch/offline; AssemblyAI for diarization + sentiment</td></tr>
+<tr><td>LLM</td><td>GPT-4o Realtime (all-in-one, best latency), Claude (best reasoning), Gemini (cheapest)</td><td>Realtime API eliminates STT/TTS chaining latency; separate STT+LLM+TTS gives more control</td></tr>
+<tr><td>TTS (Text-to-Speech)</td><td>ElevenLabs (most natural voices), OpenAI TTS (good + integrated), Play.ht (cloning + emotions)</td><td>ElevenLabs for quality; OpenAI for simplicity; Play.ht for custom voice cloning</td></tr>
+</table>
+
+<h2>Interruption Handling (Barge-In)</h2>
+<p><strong>Critical feature:</strong> Users need to be able to interrupt the AI mid-response (like a human conversation). Implementation: monitor microphone audio level during AI playback. If sustained audio above threshold, immediately stop TTS playback, flush the LLM's partial response, and start listening for the new input. Without interruption handling, the voice agent feels robotic and frustrating.</p>
+
+<p><strong>Bottom line:</strong> The OpenAI Realtime API is the fastest path to a working voice agent — it bundles STT + LLM + TTS into one low-latency WebSocket. For production, consider Deepgram (STT) + your preferred LLM + ElevenLabs (TTS) for more control over each component. Target under 1 second end-to-end latency for a natural conversation feel. See also: <a href="/en/ai/ai-agents-guide.html">AI Agents Guide</a> and <a href="/en/ai/function-calling-guide.html">Function Calling Guide</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/prompt-engineering.html" class="related-card">Prompt Engineering: From Beginner to Expert</a><a href="/en/ai/ai-coding.html" class="related-card">AI-Assisted Programming: From Zero to 10x Productivity</a><a href="/en/ai/midjourney-prompts.html" class="related-card">Midjourney Prompt Guide: From Basics to Pro-Level Images</a><a href="/en/ai/perplexity-guide.html" class="related-card">Perplexity Deep Dive: A Smarter Way to Search Than Google</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

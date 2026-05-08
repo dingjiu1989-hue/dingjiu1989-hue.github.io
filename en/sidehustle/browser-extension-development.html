@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="sidehustle" data-exclude="browser-extension-development">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Browser Extension Development 2026: From Idea to Chrome Web Store">
+    <meta property="og:description" content="Technical guide to building cross-browser extensions: Manifest V3, service workers, content scripts, messaging, storage APIs, and publishing to Chrome Web Store and Firefox Add-ons. Includes React/Vue integration.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/sidehustle/browser-extension-development.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Browser Extension Development 2026: From Idea to Chrome Web Store">
+    <meta name="twitter:description" content="Technical guide to building cross-browser extensions: Manifest V3, service workers, content scripts, messaging, storage APIs, and publishing to Chrome Web Store and Firefox Add-ons. Includes React/Vue integration.">
+    <title>Browser Extension Development 2026: From Idea to Chrome Web Store — SourceHub</title>
+    <meta name="description" content="Technical guide to building cross-browser extensions: Manifest V3, service workers, content scripts, messaging, storage APIs, and publishing to Chrome Web Store and Firefox Add-ons. Includes React/Vue integration.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/sidehustle/browser-extension-development.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/sidehustle/browser-extension-development.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Browser Extension Development 2026: From Idea to Chrome Web Store",
+      "description": "Technical guide to building cross-browser extensions: Manifest V3, service workers, content scripts, messaging, storage APIs, and publishing to Chrome Web Store and Firefox Add-ons. Includes React/Vue integration.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Side Hustle", "item": "https://dingjiu1989-hue.github.io/en/sidehustle/"},
+        {"@type": "ListItem", "position": 3, "name": "Browser Extension Development 2026: From Idea to Chrome Web Store"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/sidehustle/">Side Hustle</a> › Browser Extension Development 2026: From Idea to Chrome Web Store
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Browser Extensions</span>
+        <span class="tag-cat">Web Development</span>
+        <span class="tag-cat">JavaScript</span>
+        <span class="tag-cat">Tutorial</span></div>
+      <h1 class="article-title">Browser Extension Development 2026: From Idea to Chrome Web Store</h1>
+      <div class="article-meta">Published 2026-05-08 · 3720 views · 31 replies</div>
+      <div class="article-body"><p>Browser extension development in 2026 is both a valuable skill and a profitable side hustle. With Manifest V3 now mandatory, the extension landscape has matured — offering better security, stricter permissions, and a cleaner API surface. This guide covers the complete technical stack for building modern browser extensions that work across Chrome, Edge, Brave, and Firefox.</p>
+
+<h2>Manifest V2 vs V3: What Changed</h2>
+<table>
+<tr><th>Feature</th><th>Manifest V2 (Deprecated)</th><th>Manifest V3 (Current)</th></tr>
+<tr><td>Background Scripts</td><td>Persistent background pages (always running)</td><td>Service workers (ephemeral, terminated when idle)</td></tr>
+<tr><td>Network Request Modification</td><td>webRequest blocking (sync)</td><td>declarativeNetRequest (async, rule-based)</td></tr>
+<tr><td>Host Permissions</td><td>All at install time</td><td>Optional, can be granted at runtime</td></tr>
+<tr><td>Remotely Hosted Code</td><td>Allowed</td><td>Not allowed (all code must be in the extension package)</td></tr>
+<tr><td>Content Security Policy</td><td>Optional</td><td>Enforced (no inline scripts, no eval)</td></tr>
+<tr><td>Cross-Browser Compatibility</td><td>Chrome-specific</td><td>Better alignment with Firefox/Safari (but not perfect)</td></tr>
+</table>
+
+<h2>Extension Architecture Patterns</h2>
+<pre><code>// manifest.json — the heart of a Manifest V3 extension
+{
+  "manifest_version": 3,
+  "name": "My Extension",
+  "version": "1.0.0",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": ["https://*.example.com/*"],
+  "background": {
+    "service_worker": "background.js"  // Replaces background.page
+  },
+  "content_scripts": [{
+    "matches": ["https://*.github.com/*"],
+    "js": ["content.js"],
+    "css": ["styles.css"]
+  }],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "options_page": "options.html"
+}
+
+// Cross-browser compatibility tips:
+// - Use chrome.* APIs (Edge/Brave/Opera are Chromium-based)
+// - For Firefox: browser.* APIs are nearly identical (use webextension-polyfill)
+// - For Safari: Xcode project + iOS-style extensions (smaller market, consider later)</code></pre>
+
+<h2>Key APIs Every Extension Developer Should Know</h2>
+<table>
+<tr><th>API</th><th>Use Case</th><th>Permissions Required</th></tr>
+<tr><td>chrome.storage.local / sync</td><td>Store user preferences and data</td><td>storage</td></tr>
+<tr><td>chrome.tabs</td><td>Create, update, query browser tabs</td><td>tabs</td></tr>
+<tr><td>chrome.contextMenus</td><td>Add right-click menu items</td><td>contextMenus</td></tr>
+<tr><td>chrome.runtime.onMessage</td><td>Pass messages between content scripts and service worker</td><td>None (built-in)</td></tr>
+<tr><td>chrome.alarms</td><td>Schedule periodic tasks (replaces setInterval in service workers)</td><td>alarms</td></tr>
+<tr><td>chrome.sidePanel</td><td>Add a persistent side panel (Chrome 114+)</td><td>sidePanel</td></tr>
+<tr><td>chrome.offscreen</td><td>Play audio, access DOM APIs from service worker</td><td>offscreen</td></tr>
+</table>
+
+<h2>Choosing Your Tech Stack</h2>
+<table>
+<tr><th>Stack</th><th>Best For</th><th>Pros</th><th>Cons</th></tr>
+<tr><td>Vanilla JS + HTML + CSS</td><td>Simple extensions, minimal bundle</td><td>Zero build step, fastest review</td><td>No type safety, no modern DX</td></tr>
+<tr><td>React + Vite + CRXJS</td><td>Complex popup UIs, SPAs</td><td>Component model, HMR in development</td><td>Larger bundle (150KB+), CSP considerations</td></tr>
+<tr><td>Svelte + Vite</td><td>Minimal bundle, reactive UIs</td><td>Tiny bundle (~3KB), no virtual DOM</td><td>Smaller ecosystem than React</td></tr>
+<tr><td>Plasmo (Framework)</td><td>Full-featured extensions, rapid development</td><td>Manifest generation, HMR, cross-browser, built-in messaging</td><td>Abstraction overhead, less control</td></tr>
+<tr><td>WXT (Framework)</td><td>Type-safe extensions, modern DX</td><td>TypeScript-first, cross-browser (Chrome + Firefox), auto-reload</td><td>Newer framework, smaller community</td></tr>
+</table>
+
+<h2>Chrome Web Store Submission Checklist</h2>
+<ol>
+<li><strong>Manifest:</strong> V3 only. V2 extensions are rejected.</li>
+<li><strong>Privacy policy:</strong> Required if you collect ANY data (even analytics). Link to a hosted privacy page.</li>
+<li><strong>Permissions justification:</strong> Explain why each permission is needed. "Required for core functionality" is not sufficient — be specific.</li>
+<li><strong>Single purpose:</strong> Each extension must do one thing. Multi-purpose extensions are rejected.</li>
+<li><strong>Screenshots:</strong> At least 1 (1280x800), best practice 5+. Show the UI and the benefit.</li>
+<li><strong>Promotional images:</strong> Small tile (440x280), large tile (920x680), marquee (1400x560).</li>
+<li><strong>Review time:</strong> 1-5 business days for initial review, 1-3 days for updates.</li>
+</ol>
+
+<p><strong>Bottom line:</strong> Browser extensions are a $2B+ market that most developers ignore. Manifest V3 has raised the technical bar (disqualifying amateurs) while improving security for users. Start with Plasmo or WXT for the best developer experience, target Chrome first (80%+ market share), and submit early — the CWS review process often finds issues you will miss. See also: <a href="/en/sidehustle/chrome-extension-monetization.html">Chrome Extension Monetization</a> and <a href="/en/tech/web-security-basics.html">Web Security Basics</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/sidehustle/remote-work.html" class="related-card">Best Remote Work Platforms: Upwork, Toptal, and Beyond</a><a href="/en/sidehustle/free-images.html" class="related-card">Best Free Stock Photo Sites for Commercial Use</a><a href="/en/sidehustle/developer-side-hustles-2026.html" class="related-card">10 Developer Side Hustles That Actually Make Money in 2026</a><a href="/en/sidehustle/affiliate-marketing-developers.html" class="related-card">Affiliate Marketing for Developers: The Technical Guide to Your First $1,000</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

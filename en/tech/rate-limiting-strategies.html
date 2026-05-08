@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="rate-limiting-strategies">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Rate Limiting Strategies for APIs: Token Bucket, Sliding Window, and Beyond">
+    <meta property="og:description" content="Deep dive into rate limiting algorithms: token bucket, fixed window, sliding window log, sliding window counter, and leaky bucket. Implementation in Redis and comparison of approaches for different API types.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/rate-limiting-strategies.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rate Limiting Strategies for APIs: Token Bucket, Sliding Window, and Beyond">
+    <meta name="twitter:description" content="Deep dive into rate limiting algorithms: token bucket, fixed window, sliding window log, sliding window counter, and leaky bucket. Implementation in Redis and comparison of approaches for different API types.">
+    <title>Rate Limiting Strategies for APIs: Token Bucket, Sliding Window, and Beyond — SourceHub</title>
+    <meta name="description" content="Deep dive into rate limiting algorithms: token bucket, fixed window, sliding window log, sliding window counter, and leaky bucket. Implementation in Redis and comparison of approaches for different API types.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/rate-limiting-strategies.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/rate-limiting-strategies.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Rate Limiting Strategies for APIs: Token Bucket, Sliding Window, and Beyond",
+      "description": "Deep dive into rate limiting algorithms: token bucket, fixed window, sliding window log, sliding window counter, and leaky bucket. Implementation in Redis and comparison of approaches for different API types.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Rate Limiting Strategies for APIs: Token Bucket, Sliding Window, and Beyond"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Rate Limiting Strategies for APIs: Token Bucket, Sliding Window, and Beyond
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Rate Limiting</span>
+        <span class="tag-cat">API</span>
+        <span class="tag-cat">Redis</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">Rate Limiting Strategies for APIs: Token Bucket, Sliding Window, and Beyond</h1>
+      <div class="article-meta">Published 2026-05-08 · 5040 views · 42 replies</div>
+      <div class="article-body"><p>Rate limiting is one of the few backend patterns that touches every layer of the stack: it protects your API from abuse, controls costs, ensures fair usage, and prevents cascading failures. But picking the wrong algorithm or implementing it incorrectly leads to inaccurate limits, race conditions, or excessive latency. This guide compares every major rate limiting algorithm and provides production-ready implementations.</p>
+
+<h2>Rate Limiting Algorithms Compared</h2>
+<table>
+<tr><th>Algorithm</th><th>How It Works</th><th>Accuracy</th><th>Memory</th><th>Best For</th></tr>
+<tr><td>Fixed Window</td><td>Count requests in fixed time buckets (e.g., per minute)</td><td>Poor (burst at boundaries)</td><td>Very Low</td><td>Simple limits, not recommended for production</td></tr>
+<tr><td>Sliding Window Log</td><td>Store timestamp of every request, count in window</td><td>Perfect</td><td>High</td><td>When accuracy matters more than memory</td></tr>
+<tr><td>Sliding Window Counter</td><td>Weighted count: current window + previous window</td><td>Good (~1% error)</td><td>Low</td><td>Best balance of accuracy and memory</td></tr>
+<tr><td>Token Bucket</td><td>Tokens refill at fixed rate, each request consumes 1 token</td><td>Good</td><td>Low</td><td>Allowing bursts while maintaining average rate</td></tr>
+<tr><td>Leaky Bucket</td><td>Requests enter queue, processed at fixed rate</td><td>Good</td><td>Medium (queue)</td><td>Smoothing traffic (networking, traffic shaping)</td></tr>
+</table>
+
+<h2>Token Bucket — The Default Choice</h2>
+<pre><code># Redis-based Token Bucket (Lua for atomicity)
+# Allows bursts up to bucket size, refills at steady rate
+
+local key = KEYS[1]        -- rate_limit:user:123
+local capacity = tonumber(ARGV[1])  -- max tokens (burst)
+local rate = tonumber(ARGV[2])      -- tokens per second
+local now = tonumber(ARGV[3])       -- current time in seconds
+
+local bucket = redis.call('HMGET', key, 'tokens', 'last_refill')
+local tokens = tonumber(bucket[1]) or capacity
+local last_refill = tonumber(bucket[2]) or now
+
+-- Refill tokens based on elapsed time
+local elapsed = math.max(0, now - last_refill)
+local refill = elapsed * rate
+tokens = math.min(capacity, tokens + refill)
+
+if tokens >= 1 then
+    redis.call('HMSET', key, 'tokens', tokens - 1, 'last_refill', now)
+    redis.call('EXPIRE', key, math.ceil(capacity / rate) + 1)
+    return {1, tokens - 1}  -- Allowed
+else
+    return {0, tokens}  -- Rate limited
+end</code></pre>
+
+<h2>Sliding Window Counter — Better Accuracy</h2>
+<pre><code># Python: Sliding Window Counter (in-memory)
+# Accuracy: ~1% error, Memory: 2 counters per user
+
+from time import time
+
+class SlidingWindowLimiter:
+    def __init__(self, max_req: int, window_sec: int):
+        self.max_req = max_req
+        self.window = window_sec
+        self.current = {}   # user_id -> count in current window
+        self.previous = {}  # user_id -> count in previous window
+        self.window_start = int(time() / window_sec) * window_sec
+
+    def is_allowed(self, user_id: str) -> bool:
+        now = int(time())
+        window_key = int(now / self.window) * self.window
+
+        # Rotate windows if needed
+        if window_key > self.window_start:
+            self.previous = self.current.copy()
+            self.current.clear()
+            self.window_start = window_key
+
+        # Weighted count
+        elapsed = now - self.window_start
+        weight = 1 - (elapsed / self.window)
+        count = self.current.get(user_id, 0) +                 self.previous.get(user_id, 0) * weight
+
+        if count < self.max_req:
+            self.current[user_id] = self.current.get(user_id, 0) + 1
+            return True
+        return False</code></pre>
+
+<h2>Choosing the Right Algorithm</h2>
+<table>
+<tr><th>Scenario</th><th>Recommended Algorithm</th><th>Why</th></tr>
+<tr><td>General API rate limiting</td><td>Token Bucket</td><td>Allows short bursts, simple to implement, well-understood</td></tr>
+<tr><td>Strict per-second limits (trading, bidding)</td><td>Sliding Window Counter</td><td>More accurate than Token Bucket, low overhead</td></tr>
+<tr><td>Hard rate cap with zero burst tolerance</td><td>Leaky Bucket</td><td>Enforces steady outflow, good for traffic shaping</td></tr>
+<tr><td>Multi-dimensional (per-user + per-endpoint)</td><td>Multiple Token Buckets</td><td>One bucket per dimension, check all before allowing</td></tr>
+<tr><td>Distributed across API gateway nodes</td><td>Redis + Token Bucket</td><td>Centralized counter, Lua for atomicity</td></tr>
+</table>
+
+<h2>Rate Limiting Headers (RFC Standard)</h2>
+<table>
+<tr><th>Header</th><th>Example</th><th>Meaning</th></tr>
+<tr><td>X-RateLimit-Limit</td><td>100</td><td>Maximum requests per window</td></tr>
+<tr><td>X-RateLimit-Remaining</td><td>67</td><td>Requests remaining in current window</td></tr>
+<tr><td>X-RateLimit-Reset</td><td>1715818800</td><td>Unix timestamp when the window resets</td></tr>
+<tr><td>Retry-After</td><td>30</td><td>Seconds until next request will succeed (429 response)</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Use Token Bucket as your default rate limiting algorithm — it handles bursts gracefully, is simple to explain to API consumers, and has a well-known Redis implementation. Add Sliding Window Counter when you need better accuracy at window boundaries. Always include the standard rate limit headers in your API responses so consumers can self-regulate. See also: <a href="/en/tech/webhook-implementation-guide.html">Webhook Implementation Guide</a> and <a href="/en/tech/web-security-basics.html">Web Security Basics</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

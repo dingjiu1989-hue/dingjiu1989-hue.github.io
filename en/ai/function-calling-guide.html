@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="function-calling-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="LLM Function Calling: Complete Developer Guide with Code Examples">
+    <meta property="og:description" content="How to implement function calling / tool use with OpenAI, Anthropic, and Gemini APIs. Schema design, parallel calls, error handling, and chaining multiple function calls. Working examples in Python and TypeScript.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/function-calling-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LLM Function Calling: Complete Developer Guide with Code Examples">
+    <meta name="twitter:description" content="How to implement function calling / tool use with OpenAI, Anthropic, and Gemini APIs. Schema design, parallel calls, error handling, and chaining multiple function calls. Working examples in Python and TypeScript.">
+    <title>LLM Function Calling: Complete Developer Guide with Code Examples — SourceHub</title>
+    <meta name="description" content="How to implement function calling / tool use with OpenAI, Anthropic, and Gemini APIs. Schema design, parallel calls, error handling, and chaining multiple function calls. Working examples in Python and TypeScript.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/ai/function-calling-guide.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/function-calling-guide.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "LLM Function Calling: Complete Developer Guide with Code Examples",
+      "description": "How to implement function calling / tool use with OpenAI, Anthropic, and Gemini APIs. Schema design, parallel calls, error handling, and chaining multiple function calls. Working examples in Python and TypeScript.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "LLM Function Calling: Complete Developer Guide with Code Examples"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › LLM Function Calling: Complete Developer Guide with Code Examples
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">LLM</span>
+        <span class="tag-cat">Function Calling</span>
+        <span class="tag-cat">API</span>
+        <span class="tag-cat">AI Development</span></div>
+      <h1 class="article-title">LLM Function Calling: Complete Developer Guide with Code Examples</h1>
+      <div class="article-meta">Published 2026-05-08 · 4560 views · 38 replies</div>
+      <div class="article-body"><p>Function calling (or "tool use") transforms an LLM from a chatbot into an agent that can take actions: query databases, send emails, create tickets, call APIs. Every major LLM provider now supports it, but the implementation details differ significantly. This guide covers how to design function schemas, handle errors, and implement reliable tool-use workflows across OpenAI, Anthropic, and Gemini.</p>
+
+<h2>How Function Calling Works</h2>
+<pre><code>1. You define functions (name, description, parameters JSON Schema)
+2. User sends a message: "What is the weather in Tokyo?"
+3. LLM returns: { function: "get_weather", arguments: { city: "Tokyo" } }
+4. Your code executes get_weather("Tokyo") -> { temp: 22, condition: "sunny" }
+5. You send the function result back to the LLM
+6. LLM generates the final response: "It is currently 22C and sunny in Tokyo."</code></pre>
+
+<h2>Function Schema Design: Best Practices</h2>
+<table>
+<tr><th>Practice</th><th>Good Example</th><th>Bad Example</th></tr>
+<tr><td>Descriptive names</td><td>search_customer_by_email</td><td>search (too generic, LLM confuses with other search functions)</td></tr>
+<tr><td>Clear descriptions</td><td>"Search for a customer by their email address. Returns customer ID, name, and subscription status."</td><td>"Searches for a customer" (does not tell LLM when to use it or what it returns)</td></tr>
+<tr><td>Typed parameters</td><td>"email": { "type": "string", "format": "email" }</td><td>"email": { "type": "string" } (missing format constraint)</td></tr>
+<tr><td>Enums for choices</td><td>"sort_by": { "enum": ["name", "date", "amount"] }</td><td>"sort_by": { "type": "string" } (LLM may invent values)</td></tr>
+<tr><td>Required vs optional</td><td>required: ["customer_id"], optional: ["include_archived"]</td><td>Everything required (LLM may hallucinate values for optional params)</td></tr>
+</table>
+
+<h2>Parallel vs Sequential Function Calls</h2>
+<p><strong>Parallel calls:</strong> When two functions are independent, the LLM can call them simultaneously. "What is the weather in Tokyo AND the exchange rate for JPY?" -> 2 parallel calls. <strong>Sequential calls:</strong> When one function's output is needed as input to another. "Find customer by email, then get their recent orders" -> 2 sequential calls. Design your schemas so independent functions can be called in parallel — it reduces latency from 2x call time to max(call1, call2).</p>
+
+<h2>Error Handling Patterns</h2>
+<pre><code># Pattern 1: Return errors as structured function results
+def get_customer(email: str):
+    try:
+        customer = db.customers.find_by_email(email)
+        if not customer:
+            return {"error": "NOT_FOUND", "message": f"No customer with email {email}"}
+        return {"customer": customer}
+    except Exception as e:
+        return {"error": "INTERNAL", "message": str(e)}
+
+# The LLM can then respond appropriately:
+# "I could not find a customer with that email address. Would you like to try a different one?"
+
+# Pattern 2: Validate arguments before execution
+# If LLM calls get_weather(city="") or missing required args, return descriptive error
+# This trains the LLM over multiple turns to provide correct arguments</code></pre>
+
+<h2>Provider-Specific Implementation</h2>
+<table>
+<tr><th>Provider</th><th>API Parameter</th><th>Key Difference</th></tr>
+<tr><td>OpenAI</td><td>tools: [{type: "function", function: {...}}]</td><td>tool_choice: "auto" | "required" | "none" | specific function</td></tr>
+<tr><td>Anthropic</td><td>tools: [{name: "...", description: "...", input_schema: {...}}]</td><td>Native tool_use content blocks; can force tool use</td></tr>
+<tr><td>Google Gemini</td><td>tools: [{functionDeclarations: [{name, description, parameters}]}]</td><td>Automatic function calling mode available (Gemini executes)</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Function calling is the bridge between LLMs and real-world actions. Invest time in schema design (clear descriptions, typed parameters, enums) — the quality of your function definitions directly determines reliability. Start with 2-3 functions and test extensively before adding more. See also: <a href="/en/ai/ai-agents-guide.html">AI Agents Guide</a> and <a href="/en/ai/ai-api-integration-guide.html">AI API Integration Guide</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/prompt-engineering.html" class="related-card">Prompt Engineering: From Beginner to Expert</a><a href="/en/ai/ai-coding.html" class="related-card">AI-Assisted Programming: From Zero to 10x Productivity</a><a href="/en/ai/midjourney-prompts.html" class="related-card">Midjourney Prompt Guide: From Basics to Pro-Level Images</a><a href="/en/ai/perplexity-guide.html" class="related-card">Perplexity Deep Dive: A Smarter Way to Search Than Google</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

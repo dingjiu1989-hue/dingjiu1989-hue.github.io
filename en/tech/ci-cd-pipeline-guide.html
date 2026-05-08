@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="ci-cd-pipeline-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="CI/CD Pipeline Complete Guide 2026: From Git Push to Production">
+    <meta property="og:description" content="End-to-end CI/CD guide: linting, testing, building, security scanning, and deploying. GitHub Actions vs GitLab CI vs CircleCI comparison. Includes monorepo strategies, cache optimization, and deployment patterns (blue-green, canary).">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/ci-cd-pipeline-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CI/CD Pipeline Complete Guide 2026: From Git Push to Production">
+    <meta name="twitter:description" content="End-to-end CI/CD guide: linting, testing, building, security scanning, and deploying. GitHub Actions vs GitLab CI vs CircleCI comparison. Includes monorepo strategies, cache optimization, and deployment patterns (blue-green, canary).">
+    <title>CI/CD Pipeline Complete Guide 2026: From Git Push to Production — SourceHub</title>
+    <meta name="description" content="End-to-end CI/CD guide: linting, testing, building, security scanning, and deploying. GitHub Actions vs GitLab CI vs CircleCI comparison. Includes monorepo strategies, cache optimization, and deployment patterns (blue-green, canary).">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/ci-cd-pipeline-guide.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/ci-cd-pipeline-guide.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "CI/CD Pipeline Complete Guide 2026: From Git Push to Production",
+      "description": "End-to-end CI/CD guide: linting, testing, building, security scanning, and deploying. GitHub Actions vs GitLab CI vs CircleCI comparison. Includes monorepo strategies, cache optimization, and deployment patterns (blue-green, canary).",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "CI/CD Pipeline Complete Guide 2026: From Git Push to Production"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › CI/CD Pipeline Complete Guide 2026: From Git Push to Production
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">CI/CD</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">GitHub Actions</span>
+        <span class="tag-cat">Deployment</span></div>
+      <h1 class="article-title">CI/CD Pipeline Complete Guide 2026: From Git Push to Production</h1>
+      <div class="article-meta">Published 2026-05-08 · 5880 views · 49 replies</div>
+      <div class="article-body"><p>A well-designed CI/CD pipeline is the difference between deploying with confidence and deploying with prayer. In 2026, modern CI/CD goes beyond "run tests and deploy" — it includes automated canary analysis, security scanning, and instant rollbacks. This guide covers the complete pipeline architecture, tool comparison, and the practices that ship code faster with fewer incidents.</p>
+
+<h2>The Modern CI/CD Pipeline Stages</h2>
+<pre><code>Git Push
+  → 1. Lint & Format (Biome, ESLint)           [<30s]
+  → 2. Type Check (TypeScript, mypy)           [<60s]
+  → 3. Unit Tests                              [<2 min]
+  → 4. Build (Docker, artifact)                [<3 min]
+  → 5. Security Scan (SAST, dependency audit)  [<2 min]
+  → 6. Integration Tests                       [<5 min]
+  → 7. Deploy to Staging                       [<2 min]
+  → 8. Smoke Tests (staging)                   [<3 min]
+  → 9. Deploy to Canary (1% traffic)           [<2 min]
+  → 10. Canary Analysis (metrics, errors)      [5-60 min]
+  → 11. Full Production Deploy                 [<5 min]
+  → 12. Post-Deploy Monitoring                 [ongoing]</code></pre>
+
+<h2>CI/CD Platform Comparison</h2>
+<table>
+<tr><th>Platform</th><th>Best For</th><th>Pricing</th><th>Key Strengths</th><th>Weaknesses</th></tr>
+<tr><td>GitHub Actions</td><td>Most teams, GitHub-native</td><td>Free (2,000 min/mo), $0.008/min after</td><td>Largest marketplace (20K+ actions), matrix builds, OIDC</td><td>Slow on large monorepos, 6h max job time</td></tr>
+<tr><td>GitLab CI</td><td>GitLab users, self-hosted</td><td>Free (400 min/mo), $19/user/mo</td><td>Integrated container registry, auto-DevOps, best for self-hosted</td><td>Steeper YAML learning curve, smaller marketplace</td></tr>
+<tr><td>CircleCI</td><td>Large monorepos, high concurrency</td><td>$15/mo (6,000 min)</td><td>Fast caching, dynamic config, parallelism</td><td>More expensive at scale, less integrated than GitHub Actions</td></tr>
+<tr><td>Buildkite</td><td>Enterprise, hybrid cloud/on-prem</td><td>$20/user/mo</td><td>Hybrid runners (your infra), unlimited concurrency</td><td>Requires managing your own build infrastructure</td></tr>
+<tr><td>ArgoCD + Tekton</td><td>Kubernetes-native teams</td><td>Free (OSS)</td><td>GitOps native, declarative, Kubernetes-native</td><td>Complex setup, K8s expertise required</td></tr>
+</table>
+
+<h2>Pipeline Optimization: The 10-Minute Rule</h2>
+<table>
+<tr><th>Strategy</th><th>Time Saved</th><th>Implementation</th></tr>
+<tr><td>Parallel jobs</td><td>50-70%</td><td>Split tests into shards, run in parallel across multiple runners</td></tr>
+<tr><td>Dependency caching</td><td>30-60%</td><td>Cache node_modules, pip packages, Docker layers</td></tr>
+<tr><td>Incremental builds</td><td>40-70%</td><td>Only build/test what changed (Nx, Turborepo, Bazel)</td></tr>
+<tr><td>Skip unnecessary runs</td><td>20-50%</td><td>Skip CI on docs-only changes, skip deploy on non-main branches</td></tr>
+<tr><td>Optimized Docker builds</td><td>30-50%</td><td>Multi-stage builds, layer caching, minimal base images (distroless)</td></tr>
+</table>
+
+<h2>Deployment Strategies Compared</h2>
+<table>
+<tr><th>Strategy</th><th>Risk</th><th>Rollback Time</th><th>Infra Cost</th><th>Best For</th></tr>
+<tr><td>Rolling Update</td><td>Medium</td><td>1-5 min</td><td>No extra</td><td>Stateless services, most web apps</td></tr>
+<tr><td>Blue-Green</td><td>Low</td><td><1 min (instant switch)</td><td>2x (two full environments)</td><td>Critical services, zero-downtime required</td></tr>
+<tr><td>Canary</td><td>Very Low</td><td><1 min</td><td>1.1-1.5x</td><td>High-traffic services with good observability</td></tr>
+<tr><td>Feature Flags</td><td>Very Low</td><td>Instant</td><td>Flag management system</td><td>Decoupling deploy from release</td></tr>
+</table>
+
+<h2>GitHub Actions Pipeline Example</h2>
+<pre><code># .github/workflows/ci.yml
+name: CI/CD Pipeline
+on:
+  push:
+    branches: [main, staging]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22', cache: 'npm' }
+      - run: npm ci
+      - run: npx biome ci .               # Lint + format
+      - run: npx tsc --noEmit             # Type check
+      - run: npm test -- --coverage       # Tests
+      - run: npx vitest --shard=${{ matrix.shard }}/4  # Parallel
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - run: npm audit --audit-level=high  # Dependency scan
+      - uses: aquasecurity/trivy-action@master  # Container scan
+        with: { scan-type: 'fs', scanners: 'vuln,secret' }
+
+  deploy-staging:
+    needs: [lint-and-test, security]
+    if: github.ref == 'refs/heads/staging'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm run build
+      - uses: cloudflare/wrangler-action@v3
+        with: { environment: 'staging' }
+
+  deploy-production:
+    needs: [lint-and-test, security]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production  # Requires approval
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm run build
+      - run: npm run deploy:canary  # Deploy to 5% first
+      - run: npm run smoke-test
+      - run: npm run deploy:full    # Full production after canary passes</code></pre>
+
+<p><strong>Bottom line:</strong> A good CI/CD pipeline should give you confidence to deploy on Friday at 5pm. Key principles: the pipeline should complete in under 10 minutes (optimize ruthlessly), every failure should have a clear error message (not "Exit code 1"), and deploys should be one-click reversible. Start with GitHub Actions (free for most teams), implement parallel test sharding first (biggest speed win), and adopt canary deploys as your traffic and risk grow. See also: <a href="/en/tech/webhook-implementation-guide.html">Webhook Implementation Guide</a> and <a href="/en/compare/kubernetes-vs-docker-swarm-vs-nomad.html">Kubernetes vs Docker Swarm vs Nomad</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>
