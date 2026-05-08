@@ -5030,6 +5030,678 @@ BODIES['best-dev-communities'] = '''
 <p><strong>Bottom line:</strong> Stack Overflow for specific problems. Discord (Reactiflux/Vue Land) for real-time help. Twitter/X for networking and opportunities. Dev.to for writing and teaching. Pick 2-3 and be active. See also: <a href="/en/tools/best-dev-podcasts.html">Developer Podcasts</a> and <a href="/en/tools/best-dev-youtube-channels.html">Developer YouTube Channels</a>.</p>
 '''
 
+BODIES['deploy-nextjs-free'] = '''
+<p>You built a Next.js app. Now get it on the internet — for free, with a real URL, in 10 minutes. Here's the step-by-step guide covering Vercel (easiest for Next.js), plus Cloudflare Pages as an alternative with unlimited bandwidth.</p>
+
+<h2>Option 1: Vercel (Easiest, Built for Next.js)</h2>
+<p>Vercel is the company behind Next.js. Deployment is zero-configuration — push to GitHub, and Vercel automatically detects Next.js, builds it, and gives you a URL. The free tier (100GB bandwidth, 6K build minutes/month) is generous enough for most side projects.</p>
+
+<h3>Step-by-Step</h3>
+<pre><code># 1. Make sure your Next.js app is on GitHub
+git init && git add . && git commit -m "initial"
+git remote add origin https://github.com/your-username/your-repo.git
+git push -u origin main
+
+# 2. Go to vercel.com → Sign Up with GitHub
+# 3. Click "New Project" → Import your repo
+# 4. Vercel auto-detects Next.js. No configuration needed.
+# 5. Click "Deploy"
+
+# 3 minutes later: your app is live at your-app.vercel.app
+# Add a custom domain: Settings → Domains → add your domain</code></pre>
+
+<h3>Environment Variables</h3>
+<p>If your app uses .env.local, add those variables in Vercel:</p>
+<pre><code># Vercel Dashboard → Your Project → Settings → Environment Variables
+DATABASE_URL=postgresql://...
+NEXT_PUBLIC_API_URL=https://api.example.com
+AUTH_SECRET=your-secret-here
+
+# Redeploy after adding variables (Vercel will prompt you)</code></pre>
+
+<h2>Option 2: Cloudflare Pages (Unlimited Bandwidth)</h2>
+<p>If you expect a lot of traffic or want the largest global edge network (330+ locations), Cloudflare Pages is the better choice. It supports Next.js via the @cloudflare/next-on-pages adapter.</p>
+<pre><code># 1. Install adapter
+npm install -D @cloudflare/next-on-pages
+
+# 2. Update next.config.js (if App Router)
+const nextConfig = {
+  // Your existing config
+};
+module.exports = nextConfig;
+
+# 3. Update wrangler.toml
+name = "your-app"
+compatibility_date = "2025-01-01"
+pages_build_output_dir = ".vercel/output/static"
+
+# 4. Push to GitHub
+# 5. Go to Cloudflare Dashboard → Pages → Create → Connect Git
+# 6. Set build command: npx @cloudflare/next-on-pages
+# 7. Set output directory: .vercel/output/static
+# 8. Deploy</code></pre>
+<p><strong>Limitation:</strong> Not all Next.js features work on Cloudflare Pages. Server Components, middleware, and ISR require the Vercel runtime. Check compatibility before choosing Cloudflare.</p>
+
+<h2>Option 3: Static Export (Simplest, Most Portable)</h2>
+<p>If your Next.js app doesn't use server-side features (SSR, middleware, API routes), export it as a static site:</p>
+<pre><code># next.config.js
+const nextConfig = {
+  output: 'export',  // Static HTML export
+};
+
+# Build: npx next build → output in /out folder
+# Deploy /out to: GitHub Pages, Cloudflare Pages, Netlify, or any static host</code></pre>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Vercel</th><th>Cloudflare Pages</th><th>Static Export + GitHub Pages</th></tr>
+<tr><td><strong>SSR/ISR/Middleware</strong></td><td>Full support</td><td>Limited (adapter)</td><td>No (static only)</td></tr>
+<tr><td><strong>Bandwidth</strong></td><td>100GB</td><td>Unlimited</td><td>100GB</td></tr>
+<tr><td><strong>Setup time</strong></td><td>2 minutes</td><td>10 minutes</td><td>5 minutes</td></tr>
+<tr><td><strong>Edge locations</strong></td><td>100+</td><td>330+</td><td>1 (GitHub CDN)</td></tr>
+<tr><td><strong>Best for</strong></td><td>Full Next.js features</td><td>Traffic-heavy static</td><td>Simple static sites</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Vercel is the default for Next.js — simplest deploy, full feature support. Cloudflare Pages for unlimited bandwidth. Static export for maximum portability. After deploying, set up a custom domain (free on both platforms) and you're production-ready. See also: <a href="/en/tools/best-free-hosting-side-projects.html">Free Hosting Guide</a> and <a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html">Hosting Comparison</a>.</p>
+'''
+
+BODIES['monorepo-setup-guide'] = '''
+<p>A monorepo lets you share code between apps (web, mobile, docs) and packages (shared utils, configs, UI components) in a single repository. Turborepo + pnpm + TypeScript is the modern stack. Here's how to set it up in 30 minutes.</p>
+
+<h2>Why a Monorepo?</h2>
+<table>
+<tr><th>Problem</th><th>Monorepo Solution</th></tr>
+<tr><td>Duplicate tsconfig, ESLint config, etc. in 5 repos</td><td>One shared config package. Update once, all apps get it.</td></tr>
+<tr><td>Copy-pasting UI components between apps</td><td>Shared UI package. One component, used everywhere.</td></tr>
+<tr><td>Can't refactor across apps safely</td><td>TypeScript validates ALL consumers when you change a shared package.</td></tr>
+<tr><td>CI runs unrelated changes on every commit</td><td>Turborepo caches tasks. Only changed packages rebuild.</td></tr>
+</table>
+
+<h2>Step-by-Step Setup</h2>
+<pre><code># 1. Create the monorepo structure
+mkdir my-monorepo && cd my-monorepo
+pnpm init
+
+# 2. Create pnpm-workspace.yaml
+cat > pnpm-workspace.yaml << 'EOF'
+packages:
+  - "apps/*"
+  - "packages/*"
+EOF
+
+# 3. Create directory structure
+mkdir -p apps/web apps/docs packages/ui packages/config
+
+# 4. Create root package.json with Turborepo
+cat > package.json << 'EOF'
+{
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "test": "turbo test"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "typescript": "^5.5.0"
+  }
+}
+EOF
+
+# 5. Install Turborepo
+pnpm install
+
+# 6. Create turbo.json
+cat > turbo.json << 'EOF'
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "dist/**"]
+    },
+    "dev": { "cache": false, "persistent": true },
+    "lint": { "dependsOn": ["^build"] },
+    "test": { "dependsOn": ["^build"] }
+  }
+}
+EOF</code></pre>
+
+<h2>Shared Config Package</h2>
+<pre><code># packages/config/package.json
+{
+  "name": "@repo/config",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./typescript": "./tsconfig.base.json",
+    "./eslint": "./eslint.base.js"
+  }
+}
+
+# packages/config/tsconfig.base.json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}</code></pre>
+
+<h2>App Configuration</h2>
+<pre><code># apps/web/tsconfig.json — each app extends the shared base
+{
+  "extends": "@repo/config/typescript",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@repo/ui/*": ["../../packages/ui/src/*"]
+    }
+  },
+  "include": ["src", "next-env.d.ts"]
+}</code></pre>
+
+<h2>Best Practices</h2>
+<ul>
+<li><strong>One package = one purpose.</strong> @repo/ui for components, @repo/config for shared configs, @repo/utils for shared utilities. Don't create a "misc" package.</li>
+<li><strong>Use workspace protocol:</strong> In package.json dependencies, use <code>"@repo/ui": "workspace:*"</code> instead of version numbers.</li>
+<li><strong>Parallel builds:</strong> Turborepo runs independent tasks in parallel. A build across 5 packages finishes in the time of the slowest one, not the sum.</li>
+<li><strong>Remote caching:</strong> Turborepo can cache builds remotely (Vercel). CI builds reuse cache from previous CI runs.</li>
+<li><strong>Don't go monorepo for <3 packages.</strong> The overhead isn't worth it for tiny projects. Start with a single repo, extract when you have sharing pain.</li>
+</ul>
+
+<p><strong>Bottom line:</strong> Monorepos shine when you have 3+ apps/packages that share code. pnpm workspaces + Turborepo is the best stack in 2026. The shared config package alone saves hours of boilerplate setup per new project. See also: <a href="/en/compare/pnpm-vs-npm-vs-yarn.html">Package Manager Comparison</a> and <a href="/en/compare/vite-vs-webpack-vs-turbopack.html">Build Tools Comparison</a>.</p>
+'''
+
+BODIES['environment-variables-guide'] = '''
+<p>Environment variables connect your code to the outside world — database URLs, API keys, feature flags. Misconfiguring them is one of the most common causes of production incidents and security breaches. Here's the complete guide to managing them correctly.</p>
+
+<h2>The Hierarchy of Config</h2>
+<table>
+<tr><th>Layer</th><th>Where</th><th>Example</th><th>Never Commit?</th></tr>
+<tr><td><strong>Default values</strong></td><td>Code (as fallback)</td><td><code>PORT ?? 3000</code></td><td>Commit (with safe defaults)</td></tr>
+<tr><td><strong>Local dev overrides</strong></td><td>.env.local</td><td><code>DATABASE_URL=localhost</code></td><td>Yes (.gitignore)</td></tr>
+<tr><td><strong>CI/CD</strong></td><td>Platform secrets</td><td><code>DATABASE_URL=staging-db</code></td><td>Yes (platform-managed)</td></tr>
+<tr><td><strong>Production</strong></td><td>Platform secrets / vault</td><td><code>DATABASE_URL=prod-db</code></td><td>Yes (platform-managed)</td></tr>
+<tr><td><strong>Public config</strong></td><td>NEXT_PUBLIC_* vars</td><td><code>NEXT_PUBLIC_API_URL</code></td><td>OK (intentionally public)</td></tr>
+</table>
+
+<h2>Rules for Environment Variables</h2>
+<ol>
+<li><strong>Never commit secrets to Git.</strong> Use .gitignore for .env.local, .env.*.local. If a secret ever hits Git history, rotate it immediately.</li>
+<li><strong>Prefix public variables.</strong> Next.js uses NEXT_PUBLIC_*. Vite uses VITE_*. This makes it clear what's exposed to the browser.</li>
+<li><strong>Validate at startup, not at runtime.</strong> Use Zod to validate all env vars when the app starts. If a required var is missing, crash immediately — don't fail mysteriously 3 hours later.</li>
+<li><strong>Use different values per environment.</strong> Development, staging, and production should have separate database URLs, API keys, and feature flags.</li>
+</ol>
+
+<h2>Validation Pattern (Prevent Runtime Surprises)</h2>
+<pre><code>// env.ts — validate all env vars at startup
+import { z } from "zod";
+
+const envSchema = z.object({
+  DATABASE_URL: z.string().url(),
+  AUTH_SECRET: z.string().min(32),
+  STRIPE_SECRET_KEY: z.string().startsWith("sk_"),
+  NEXT_PUBLIC_APP_URL: z.string().url().default("http://localhost:3000"),
+  FEATURE_NEW_CHECKOUT: z.enum(["true", "false"]).default("false"),
+});
+
+export const env = envSchema.parse(process.env);
+// If any var is missing or invalid, the app crashes immediately</code></pre>
+
+<h2>Managing Secrets Across a Team</h2>
+<table>
+<tr><th>Tool</th><th>Best For</th><th>How It Works</th></tr>
+<tr><td><strong>Doppler</strong></td><td>Teams, automatic sync</td><td>Central dashboard → CLI syncs to local .env. Secrets never on disk.</td></tr>
+<tr><td><strong>Infisical</strong></td><td>Open source, self-hosted</td><td>Self-hosted Doppler alternative. Inject secrets at build/run time.</td></tr>
+<tr><td><strong>1Password CLI</strong></td><td>Small teams with 1Password</td><td>op run --env-file=.env -- npm run dev. Secret references, not values.</td></tr>
+<tr><td><strong>Platform-native</strong></td><td>Simplest, free</td><td>Vercel/Render/Railway all have secret management built in.</td></tr>
+</table>
+
+<h2>Common Mistakes & Fixes</h2>
+<table>
+<tr><th>Mistake</th><th>Fix</th></tr>
+<tr><td>Hardcoding API keys in source</td><td>Move to .env.local immediately. Check git history. Rotate if exposed.</td></tr>
+<tr><td>NEXT_PUBLIC_* for secrets</td><td>NEXT_PUBLIC_ vars are bundled into client JS. Anyone can see them. Never put secrets here.</td></tr>
+<tr><td>Same API key for dev + prod</td><td>Use separate keys. Stripe has test mode keys. Dev databases are separate.</td></tr>
+<tr><td>.env.example not updated</td><td>Add new vars to .env.example with dummy values. Treat it as documentation.</td></tr>
+<tr><td>Secrets in Docker images</td><td>Inject at runtime, not at build time. Use docker run -e or Docker secrets.</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Validate env vars at startup with Zod. Never put secrets in NEXT_PUBLIC_* or Git. Use Doppler/Infisical for teams, platform-native for side projects. Document every variable in .env.example. See also: <a href="/en/tech/web-security-basics.html">Web Security Basics</a> and <a href="/en/tech/error-handling-best-practices.html">Error Handling Best Practices</a>.</p>
+'''
+
+BODIES['error-handling-best-practices'] = '''
+<p>Random try/catch blocks aren't error handling — they're error hiding. A proper error handling system makes your app debuggable, observable, and resilient. Here's how to move from ad-hoc catches to a structured error system.</p>
+
+<h2>Error Types — One Size Doesn't Fit All</h2>
+<table>
+<tr><th>Error Type</th><th>HTTP Status</th><th>Retry?</th><th>Show User?</th><th>Notify Dev?</th></tr>
+<tr><td><strong>Validation error</strong></td><td>400</td><td>No (fix input)</td><td>Yes (what to fix)</td><td>No</td></tr>
+<tr><td><strong>Not found</strong></td><td>404</td><td>No</td><td>Yes (friendly message)</td><td>No</td></tr>
+<tr><td><strong>Authentication error</strong></td><td>401</td><td>No (log in first)</td><td>Yes ("please log in")</td><td>No</td></tr>
+<tr><td><strong>Authorization error</strong></td><td>403</td><td>No</td><td>Yes ("you don't have access")</td><td>Maybe (possible attack)</td></tr>
+<tr><td><strong>Rate limit</strong></td><td>429</td><td>Yes (with backoff)</td><td>Yes ("too many requests")</td><td>No</td></tr>
+<tr><td><strong>External service failure</strong></td><td>502</td><td>Yes (with backoff)</td><td>No (mask it)</td><td>Yes (oncall)</td></tr>
+<tr><td><strong>Internal error (unexpected)</strong></td><td>500</td><td>Maybe</td><td>No (mask it)</td><td>Yes (immediately)</td></tr>
+</table>
+
+<h2>Structured Error Handling Pattern</h2>
+<pre><code>// 1. Define error hierarchy
+class AppError extends Error {
+  constructor(
+    message: string,
+    public statusCode: number,
+    public code: string,
+    public retryable: boolean = false,
+    public userMessage?: string
+  ) {
+    super(message);
+    this.name = "AppError";
+  }
+}
+
+class ValidationError extends AppError {
+  constructor(message: string, public fields: Record&lt;string, string&gt;) {
+    super(message, 400, "VALIDATION_ERROR", false, message);
+  }
+}
+
+class ExternalServiceError extends AppError {
+  constructor(service: string, cause: Error) {
+    super(
+      `${service} request failed`,
+      502,
+      "EXTERNAL_SERVICE_ERROR",
+      true,
+      "Something went wrong. Please try again."
+    );
+    this.cause = cause;
+  }
+}
+
+// 2. Use in your code
+async function chargeCustomer(amount: number, token: string) {
+  try {
+    return await stripe.charges.create({ amount, source: token });
+  } catch (error) {
+    throw new ExternalServiceError("Stripe", error as Error);
+  }
+}</code></pre>
+
+<h2>Global Error Handler (Express/Fastify)</h2>
+<pre><code>// 3. Global error handler — consistent responses
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  if (err instanceof AppError) {
+    return res.status(err.statusCode).json({
+      error: {
+        code: err.code,
+        message: err.userMessage || err.message,
+        fields: err instanceof ValidationError ? err.fields : undefined,
+      },
+    });
+  }
+
+  // Unexpected error — log and mask
+  logger.error({ err, path: req.path, method: req.method });
+  Sentry.captureException(err);
+
+  return res.status(500).json({
+    error: {
+      code: "INTERNAL_ERROR",
+      message: "An unexpected error occurred. We've been notified.",
+    },
+  });
+});</code></pre>
+
+<h2>Async Error Handling in Express</h2>
+<pre><code>// Express 4 doesn't catch async errors — use a wrapper
+const asyncHandler = (fn: Function) =>
+  (req: Request, res: Response, next: NextFunction) =>
+    Promise.resolve(fn(req, res, next)).catch(next);
+
+app.get("/users/:id", asyncHandler(async (req, res) => {
+  const user = await db.users.findById(req.params.id);
+  if (!user) throw new AppError("User not found", 404, "NOT_FOUND");
+  res.json(user);
+}));
+// Express 5 (beta) handles async errors natively</code></pre>
+
+<h2>Client-Side Error Handling</h2>
+<pre><code>// React Error Boundary + toast
+function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
+  return (
+    &lt;div role="alert"&gt;
+      &lt;h2&gt;Something went wrong&lt;/h2&gt;
+      &lt;pre&gt;{error.message}&lt;/pre&gt;
+      &lt;button onClick={resetErrorBoundary}&gt;Try again&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+// Wrap sections, not the whole app
+&lt;ErrorBoundary FallbackComponent={ErrorFallback}&gt;
+  &lt;CheckoutForm /&gt;
+&lt;/ErrorBoundary&gt;</code></pre>
+
+<h2>Error Handling Checklist</h2>
+<ul>
+<li>Define error classes (not just <code>new Error("something went wrong")</code>).</li>
+<li>Validate inputs at the boundary. Return 400, not 500.</li>
+<li>Mask internal errors from users. Log the real error, show a generic message.</li>
+<li>Add a request ID to every error log. Makes debugging across services possible.</li>
+<li>Alert on 5xx spike, not every 5xx. A single 500 might be a blip. 50 in a minute is an incident.</li>
+</ul>
+
+<p><strong>Bottom line:</strong> Structured errors + global handler + external service retries + proper logging = an error system that helps you fix bugs instead of hiding them. See also: <a href="/en/tech/testing-strategies-web-apps.html">Testing Strategies</a> and <a href="/en/tools/best-cicd-tools-2026.html">CI/CD Tools</a>.</p>
+'''
+
+BODIES['caching-strategies-web-apps'] = '''
+<p>Caching is the difference between a 50ms response and a 5-second timeout. But cache invalidation is famously one of the hardest problems in computer science. Here's a practical guide to caching at every layer — and when NOT to cache.</p>
+
+<h2>The Caching Layers</h2>
+<table>
+<tr><th>Layer</th><th>What to Cache</th><th>TTL</th><th>Invalidation</th></tr>
+<tr><td><strong>Browser (HTTP Cache)</strong></td><td>Static assets (JS, CSS, images, fonts)</td><td>1 year (with hash in filename)</td><td>Change filename → new URL → cache miss</td></tr>
+<tr><td><strong>CDN</strong></td><td>HTML, API responses, images</td><td>1 min to 1 hour</td><td>Purge by URL or tag. Stale-while-revalidate.</td></tr>
+<tr><td><strong>Application (Redis/Memcached)</strong></td><td>DB query results, computed values, sessions</td><td>1 second to 1 hour</td><td>Delete on write. TTL-based. Cache-aside pattern.</td></tr>
+<tr><td><strong>Database query cache</strong></td><td>Query results (PostgreSQL/MySQL built-in)</td><td>Automatic</td><td>Invalidated on table writes.</td></tr>
+<tr><td><strong>Next.js data cache</strong></td><td>fetch() results in Server Components</td><td>Configurable</td><td>revalidateTag(), revalidatePath()</td></tr>
+</table>
+
+<h2>1. Browser & CDN: Cache-Control Headers</h2>
+<pre><code># Static assets with content hash (1 year)
+# /_next/static/chunks/main-abc123.js
+Cache-Control: public, max-age=31536000, immutable
+
+# HTML pages (revalidate at CDN, serve stale if origin is down)
+# /blog/my-post
+Cache-Control: public, s-maxage=60, stale-while-revalidate=300
+
+# API responses that don't change often
+# /api/posts/trending
+Cache-Control: public, max-age=300, s-maxage=300
+
+# Never cache (user-specific data)
+# /api/user/profile
+Cache-Control: private, no-cache, no-store, must-revalidate</code></pre>
+
+<h2>2. Application Cache: Redis</h2>
+<pre><code>// Cache-aside pattern — the most common approach
+async function getUserPosts(userId: string): Promise&lt;Post[]&gt; {
+  const cacheKey = `user:${userId}:posts`;
+
+  // 1. Try cache
+  const cached = await redis.get(cacheKey);
+  if (cached) return JSON.parse(cached);
+
+  // 2. Cache miss — fetch from DB
+  const posts = await db.posts.findMany({ where: { userId } });
+
+  // 3. Store in cache (5 minutes)
+  await redis.set(cacheKey, JSON.stringify(posts), "EX", 300);
+
+  return posts;
+}
+
+// Delete cache on write — prevent stale data
+async function createPost(userId: string, data: CreatePostInput) {
+  const post = await db.posts.create({ data: { userId, ...data } });
+  await redis.del(`user:${userId}:posts`); // Invalidate
+  return post;
+}</code></pre>
+
+<h2>3. Next.js Caching (App Router)</h2>
+<pre><code>// Static data — cached permanently
+async function getNavigation() {
+  const res = await fetch("https://cms.example.com/navigation");
+  return res.json(); // Cached forever (build-time)
+}
+
+// Revalidated data — cached, then refreshed
+async function getBlogPosts() {
+  const res = await fetch("https://cms.example.com/posts", {
+    next: { revalidate: 3600 }, // Revalidate every hour
+  });
+  return res.json();
+}
+
+// On-demand revalidation (webhook from CMS)
+import { revalidateTag } from "next/cache";
+
+export async function POST(request: Request) {
+  const { tag } = await request.json();
+  revalidateTag(tag); // Revalidate everything with this tag
+  return Response.json({ revalidated: true });
+}</code></pre>
+
+<h2>When NOT to Cache</h2>
+<ul>
+<li><strong>User-specific data that changes frequently:</strong> Shopping cart, notifications, real-time dashboards.</li>
+<li><strong>Write-heavy data:</strong> If the data changes every second, caching just adds complexity.</li>
+<li><strong>Data that must be accurate:</strong> Bank balances, inventory counts during flash sales. Use the database directly or use a cache with write-through.</li>
+<li><strong>Before you have a performance problem:</strong> Caching prematurely adds complexity. Wait until you measure a bottleneck.</li>
+</ul>
+
+<h2>Cache Invalidation Strategies</h2>
+<table>
+<tr><th>Strategy</th><th>How</th><th>When</th></tr>
+<tr><td><strong>TTL (Time to Live)</strong></td><td>Set expiry. Data is stale for up to TTL.</td><td>When staleness is acceptable (analytics, trending, recommendations)</td></tr>
+<tr><td><strong>Write-through</strong></td><td>Write to cache AND DB simultaneously.</td><td>When you need consistency and read latency matters</td></tr>
+<tr><td><strong>Cache-aside (lazy)</strong></td><td>Read from cache, fall back to DB. Delete on write.</td><td>Most common. Good balance of simplicity and freshness.</td></tr>
+<tr><td><strong>Stale-while-revalidate</strong></td><td>Serve stale, refresh in background.</td><td>CDN. Tolerates staleness for a few seconds for massive latency wins.</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Cache at the CDN first (biggest win, simplest). Add Redis when you have specific slow queries. Use Next.js built-in caching for data fetching. Invalidate on write, not on a timer, for user-facing data. See also: <a href="/en/tools/best-web-performance-tools.html">Web Performance Tools</a> and <a href="/en/compare/postgresql-vs-mysql-vs-sqlite.html">Database Comparison</a>.</p>
+'''
+
+BODIES['websocket-vs-sse-vs-polling'] = '''
+<p>Real-time features — live chat, notifications, dashboards, collaborative editing — each need a different data delivery pattern. WebSocket, Server-Sent Events (SSE), and polling solve different problems. Here's when to use each, with code examples.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>WebSocket</th><th>SSE (Server-Sent Events)</th><th>Short Polling</th><th>Long Polling</th></tr>
+<tr><td><strong>Direction</strong></td><td>Bidirectional</td><td>Server → Client only</td><td>Client → Server (request/response)</td><td>Client → Server (request/response)</td></tr>
+<tr><td><strong>Latency</strong></td><td>Near real-time</td><td>Near real-time</td><td>Depends on interval</td><td>Low (held connection)</td></tr>
+<tr><td><strong>Browser support</strong></td><td>All modern</td><td>All (except IE)</td><td>Universal</td><td>Universal</td></tr>
+<tr><td><strong>HTTP/2 friendly</strong></td><td>N/A (upgrades from HTTP)</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+<tr><td><strong>Reconnection</strong></td><td>Manual (build it)</td><td>Built-in (automatic)</td><td>Manual</td><td>Manual</td></tr>
+<tr><td><strong>Complexity</strong></td><td>High</td><td>Low</td><td>Lowest</td><td>Moderate</td></tr>
+</table>
+
+<h2>WebSocket — Bidirectional Real-Time</h2>
+<p>WebSocket is the only option when both client and server need to push messages. Use it for: chat applications, collaborative editing, multiplayer games, live auctions, trading platforms.</p>
+<pre><code>// Server (using ws)
+import { WebSocketServer } from "ws";
+
+const wss = new WebSocketServer({ port: 8080 });
+
+wss.on("connection", (ws, req) => {
+  const userId = authenticate(req);
+
+  ws.on("message", (data) => {
+    const message = JSON.parse(data.toString());
+    // Broadcast to all clients in a room
+    wss.clients.forEach((client) => {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(JSON.stringify({ user: userId, text: message.text }));
+      }
+    });
+  });
+
+  ws.on("close", () => {
+    // Handle disconnect
+  });
+});</code></pre>
+
+<h2>Server-Sent Events (SSE) — Simple Server Push</h2>
+<p>SSE is simpler than WebSocket when you only need server → client updates. Built-in reconnection, works over HTTP/2, and doesn't need a special protocol. Use for: live dashboards, notification feeds, progress bars, log streaming, sports scores.</p>
+<pre><code>// Server (Hono)
+app.get("/events", (c) => {
+  return c.streamText(async (stream) => {
+    // Send events as they happen
+    stream.write(`data: ${JSON.stringify({ type: "connected" })}\n\n`);
+
+    const interval = setInterval(async () => {
+      const updates = await getUpdates();
+      stream.write(`data: ${JSON.stringify(updates)}\n\n`);
+    }, 1000);
+
+    // Auto-cleanup on client disconnect
+    stream.onAbort(() => clearInterval(interval));
+  });
+});
+
+// Client (native EventSource — zero dependencies)
+const es = new EventSource("/events");
+es.onmessage = (event) => {
+  const data = JSON.parse(event.data);
+  updateUI(data);
+};</code></pre>
+
+<h2>Short Polling — Simplest, Least Efficient</h2>
+<p>Client sends a request every N seconds. Simple but wasteful — most requests return empty. Only use when you can't use SSE or WebSocket (e.g., legacy infrastructure) or when data changes very infrequently.</p>
+<pre><code>// Client — poll every 30 seconds
+setInterval(async () => {
+  const res = await fetch("/api/updates?since=" + lastUpdate);
+  if (res.ok) {
+    const updates = await res.json();
+    if (updates.length) updateUI(updates);
+  }
+}, 30000);</code></pre>
+
+<h2>Long Polling — Polling Without the Waste</h2>
+<p>Client sends a request, server holds it open until there's new data (or a timeout). The client immediately reconnects after receiving a response. This is how most "real-time" APIs worked before WebSocket existed.</p>
+<p><strong>Best for:</strong> Legacy systems that can't upgrade to WebSocket, firewalls that block WebSocket connections, APIs where the client can't maintain persistent connections.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Feature</th><th>Best Pattern</th><th>Why</th></tr>
+<tr><td>Chat / messaging</td><td><strong>WebSocket</strong></td><td>Bidirectional, low latency</td></tr>
+<tr><td>Live dashboard / feed</td><td><strong>SSE</strong></td><td>Simpler than WebSocket. Built-in reconnect. HTTP/2 friendly.</td></tr>
+<tr><td>Notifications</td><td><strong>SSE</strong> or <strong>Web Push</strong></td><td>SSE if browser is open. Web Push for background notifications.</td></tr>
+<tr><td>Progress bar / file upload</td><td><strong>SSE</strong></td><td>Push progress from server. Simple to implement.</td></tr>
+<tr><td>Collaborative editing</td><td><strong>WebSocket</strong> (or CRDT)</td><td>Low latency bidirectional required.</td></tr>
+<tr><td>Simple status check</td><td><strong>Short Polling</strong></td><td>If data changes every 5+ minutes, polling is fine.</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Use SSE for server→client streaming — it's simpler than WebSocket, HTTP/2 friendly, and has built-in reconnection. Use WebSocket only when you need bidirectional communication. Use polling only as a last resort. Server-Sent Events is the most underrated real-time pattern. See also: <a href="/en/compare/hono-vs-express-vs-fastify.html">Backend Framework Comparison</a> and <a href="/en/compare/cloudflare-workers-vs-lambda-vs-deno-deploy.html">Edge Functions Comparison</a>.</p>
+'''
+
+BODIES['css-responsive-design-guide'] = '''
+<p>Responsive design in 2026 is dramatically better than the media-query-heavy past. Container queries, CSS Grid, subgrid, and modern units like clamp() and dvh have changed the game. Here's how to build responsive layouts with modern CSS.</p>
+
+<h2>The Modern Responsive Toolkit</h2>
+<table>
+<tr><th>Feature</th><th>What It Does</th><th>Replaces</th></tr>
+<tr><td><strong>Container Queries</strong></td><td>Style based on PARENT container size, not viewport</td><td>Media queries for component-level responsive</td></tr>
+<tr><td><strong>CSS Grid + subgrid</strong></td><td>2D layout with content-sized tracks</td><td>Flexbox hacks for complex layouts</td></tr>
+<tr><td><strong>clamp()</strong></td><td>Fluid values: min, preferred, max in one line</td><td>Multiple media queries for font sizes</td></tr>
+<tr><td><strong>dvh / svh / lvh</strong></td><td>Dynamic viewport height (accounts for mobile browser bars)</td><td>100vh (broken on mobile Safari)</td></tr>
+<tr><td><strong>has() selector</strong></td><td>Style parent based on children</td><td>JavaScript to toggle parent classes</td></tr>
+<tr><td><strong>color-mix()</strong></td><td>Mix colors in CSS (no preprocessor needed)</td><td>Sass/SCSS color functions</td></tr>
+<tr><td><strong>@layer</strong></td><td>Control CSS specificity order</td><td>Specificity wars and !important</td></tr>
+</table>
+
+<h2>Container Queries — The Game Changer</h2>
+<p>Media queries respond to the viewport. Container queries respond to the parent element. This means a component adapts to the space it's given — not the browser window. Write once, drop into any layout.</p>
+<pre><code>/* Define a container */
+.card-container {
+  container-type: inline-size;
+  container-name: card;
+}
+
+/* Style based on container width, NOT viewport */
+@container card (min-width: 400px) {
+  .card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@container card (max-width: 399px) {
+  .card {
+    display: flex;
+    flex-direction: column;
+  }
+}</code></pre>
+
+<h2>Fluid Typography with clamp()</h2>
+<pre><code>/* Instead of 5 media query breakpoints: */
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  /* min: 2rem, preferred: 5vw, max: 4rem */
+  /* Smoothly scales between viewport widths — no breakpoints */
+}
+
+p {
+  font-size: clamp(1rem, 0.5vw + 0.875rem, 1.25rem);
+}
+
+/* Fluid spacing too */
+section {
+  padding: clamp(1rem, 5vw, 4rem) clamp(1rem, 5vw, 6rem);
+}</code></pre>
+
+<h2>Modern Grid Layout</h2>
+<pre><code>/* Auto-responsive grid — no media queries needed */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 1rem;
+}
+/* min(300px, 100%) — prevents overflow on mobile.
+   auto-fit — adds/removes columns as space allows.
+   This one line replaces 3 media queries. */</code></pre>
+
+<h2>Dynamic Viewport Height (Fix Mobile Safari)</h2>
+<pre><code>/* Old way — broken on mobile (Safari toolbar overlaps) */
+.hero {
+  height: 100vh; /* ❌ Content hidden behind Safari toolbar */
+}
+
+/* New way — accounts for dynamic toolbar */
+.hero {
+  height: 100dvh; /* ✅ Works on all mobile browsers */
+  /* dvh = dynamic viewport height.
+     svh = smallest (toolbar visible).
+     lvh = largest (toolbar hidden). */
+}</code></pre>
+
+<h2>The :has() Selector — Parent Styling</h2>
+<pre><code>/* Style a card differently when it contains an image */
+.card:has(img) {
+  grid-column: span 2;
+}
+
+/* Style form group when input is invalid */
+.form-group:has(input:invalid) {
+  border-left: 3px solid red;
+}
+
+/* Style a section when it's empty */
+section:has(:not(*)) {
+  display: none;
+}</code></pre>
+
+<h2>Responsive Layout Patterns</h2>
+<table>
+<tr><th>Pattern</th><th>CSS</th><th>Use Case</th></tr>
+<tr><td>Sidebar + Content</td><td><code>grid-template-columns: minmax(250px, 25%) 1fr</code></td><td>Admin panels, documentation</td></tr>
+<tr><td>Card Grid</td><td><code>repeat(auto-fit, minmax(min(300px, 100%), 1fr))</code></td><td>Blog lists, product grids</td></tr>
+<tr><td>Holy Grail Layout</td><td>Grid with header, 2 sidebars, content, footer</td><td>Full-page layouts</td></tr>
+<tr><td>Stack</td><td><code>flex-direction: column; gap: clamp(1rem, 3vw, 2rem)</code></td><td>Articles, landing pages</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Container queries + clamp() + auto-fit grid eliminate 80% of media queries. Modern CSS has absorbed what Bootstrap and Tailwind solved — you can build fully responsive layouts with zero framework CSS. See also: <a href="/en/compare/tailwind-vs-bootstrap-vs-mui.html">CSS Framework Comparison</a> and <a href="/en/tools/design-tools-for-developers.html">Design Tools Guide</a>.</p>
+'''
+
 # FAQ data for FAQPage schema (slug → list of q/a dicts)
 FAQS = {
     'chatgpt-plus-worth': [

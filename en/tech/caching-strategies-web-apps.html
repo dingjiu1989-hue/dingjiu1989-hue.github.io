@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="caching-strategies-web-apps">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching">
+    <meta property="og:description" content="Where, when, and how to cache in a modern web app. CDN caching, Redis, HTTP cache headers, stale-while-revalidate, and cache invalidation strategies.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/caching-strategies-web-apps.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching">
+    <meta name="twitter:description" content="Where, when, and how to cache in a modern web app. CDN caching, Redis, HTTP cache headers, stale-while-revalidate, and cache invalidation strategies.">
+    <title>Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching — SourceHub</title>
+    <meta name="description" content="Where, when, and how to cache in a modern web app. CDN caching, Redis, HTTP cache headers, stale-while-revalidate, and cache invalidation strategies.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/caching-strategies-web-apps.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/caching-strategies-web-apps.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching",
+      "description": "Where, when, and how to cache in a modern web app. CDN caching, Redis, HTTP cache headers, stale-while-revalidate, and cache invalidation strategies.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Caching</span>
+        <span class="tag-cat">Performance</span>
+        <span class="tag-cat">Web Dev</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching</h1>
+      <div class="article-meta">Published 2026-05-08 · 3720 views · 31 replies</div>
+      <div class="article-body"><p>Caching is the difference between a 50ms response and a 5-second timeout. But cache invalidation is famously one of the hardest problems in computer science. Here's a practical guide to caching at every layer — and when NOT to cache.</p>
+
+<h2>The Caching Layers</h2>
+<table>
+<tr><th>Layer</th><th>What to Cache</th><th>TTL</th><th>Invalidation</th></tr>
+<tr><td><strong>Browser (HTTP Cache)</strong></td><td>Static assets (JS, CSS, images, fonts)</td><td>1 year (with hash in filename)</td><td>Change filename → new URL → cache miss</td></tr>
+<tr><td><strong>CDN</strong></td><td>HTML, API responses, images</td><td>1 min to 1 hour</td><td>Purge by URL or tag. Stale-while-revalidate.</td></tr>
+<tr><td><strong>Application (Redis/Memcached)</strong></td><td>DB query results, computed values, sessions</td><td>1 second to 1 hour</td><td>Delete on write. TTL-based. Cache-aside pattern.</td></tr>
+<tr><td><strong>Database query cache</strong></td><td>Query results (PostgreSQL/MySQL built-in)</td><td>Automatic</td><td>Invalidated on table writes.</td></tr>
+<tr><td><strong>Next.js data cache</strong></td><td>fetch() results in Server Components</td><td>Configurable</td><td>revalidateTag(), revalidatePath()</td></tr>
+</table>
+
+<h2>1. Browser & CDN: Cache-Control Headers</h2>
+<pre><code># Static assets with content hash (1 year)
+# /_next/static/chunks/main-abc123.js
+Cache-Control: public, max-age=31536000, immutable
+
+# HTML pages (revalidate at CDN, serve stale if origin is down)
+# /blog/my-post
+Cache-Control: public, s-maxage=60, stale-while-revalidate=300
+
+# API responses that don't change often
+# /api/posts/trending
+Cache-Control: public, max-age=300, s-maxage=300
+
+# Never cache (user-specific data)
+# /api/user/profile
+Cache-Control: private, no-cache, no-store, must-revalidate</code></pre>
+
+<h2>2. Application Cache: Redis</h2>
+<pre><code>// Cache-aside pattern — the most common approach
+async function getUserPosts(userId: string): Promise&lt;Post[]&gt; {
+  const cacheKey = `user:${userId}:posts`;
+
+  // 1. Try cache
+  const cached = await redis.get(cacheKey);
+  if (cached) return JSON.parse(cached);
+
+  // 2. Cache miss — fetch from DB
+  const posts = await db.posts.findMany({ where: { userId } });
+
+  // 3. Store in cache (5 minutes)
+  await redis.set(cacheKey, JSON.stringify(posts), "EX", 300);
+
+  return posts;
+}
+
+// Delete cache on write — prevent stale data
+async function createPost(userId: string, data: CreatePostInput) {
+  const post = await db.posts.create({ data: { userId, ...data } });
+  await redis.del(`user:${userId}:posts`); // Invalidate
+  return post;
+}</code></pre>
+
+<h2>3. Next.js Caching (App Router)</h2>
+<pre><code>// Static data — cached permanently
+async function getNavigation() {
+  const res = await fetch("https://cms.example.com/navigation");
+  return res.json(); // Cached forever (build-time)
+}
+
+// Revalidated data — cached, then refreshed
+async function getBlogPosts() {
+  const res = await fetch("https://cms.example.com/posts", {
+    next: { revalidate: 3600 }, // Revalidate every hour
+  });
+  return res.json();
+}
+
+// On-demand revalidation (webhook from CMS)
+import { revalidateTag } from "next/cache";
+
+export async function POST(request: Request) {
+  const { tag } = await request.json();
+  revalidateTag(tag); // Revalidate everything with this tag
+  return Response.json({ revalidated: true });
+}</code></pre>
+
+<h2>When NOT to Cache</h2>
+<ul>
+<li><strong>User-specific data that changes frequently:</strong> Shopping cart, notifications, real-time dashboards.</li>
+<li><strong>Write-heavy data:</strong> If the data changes every second, caching just adds complexity.</li>
+<li><strong>Data that must be accurate:</strong> Bank balances, inventory counts during flash sales. Use the database directly or use a cache with write-through.</li>
+<li><strong>Before you have a performance problem:</strong> Caching prematurely adds complexity. Wait until you measure a bottleneck.</li>
+</ul>
+
+<h2>Cache Invalidation Strategies</h2>
+<table>
+<tr><th>Strategy</th><th>How</th><th>When</th></tr>
+<tr><td><strong>TTL (Time to Live)</strong></td><td>Set expiry. Data is stale for up to TTL.</td><td>When staleness is acceptable (analytics, trending, recommendations)</td></tr>
+<tr><td><strong>Write-through</strong></td><td>Write to cache AND DB simultaneously.</td><td>When you need consistency and read latency matters</td></tr>
+<tr><td><strong>Cache-aside (lazy)</strong></td><td>Read from cache, fall back to DB. Delete on write.</td><td>Most common. Good balance of simplicity and freshness.</td></tr>
+<tr><td><strong>Stale-while-revalidate</strong></td><td>Serve stale, refresh in background.</td><td>CDN. Tolerates staleness for a few seconds for massive latency wins.</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Cache at the CDN first (biggest win, simplest). Add Redis when you have specific slow queries. Use Next.js built-in caching for data fetching. Invalidate on write, not on a timer, for user-facing data. See also: <a href="/en/tools/best-web-performance-tools.html">Web Performance Tools</a> and <a href="/en/compare/postgresql-vs-mysql-vs-sqlite.html">Database Comparison</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

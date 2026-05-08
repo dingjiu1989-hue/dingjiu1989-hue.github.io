@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="monorepo-setup-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Monorepo Setup Guide: Turborepo + pnpm + TypeScript in 30 Minutes">
+    <meta property="og:description" content="Set up a production-ready monorepo with shared packages, TypeScript configs, and parallel builds. Step-by-step from scratch with Turborepo best practices.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/monorepo-setup-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Monorepo Setup Guide: Turborepo + pnpm + TypeScript in 30 Minutes">
+    <meta name="twitter:description" content="Set up a production-ready monorepo with shared packages, TypeScript configs, and parallel builds. Step-by-step from scratch with Turborepo best practices.">
+    <title>Monorepo Setup Guide: Turborepo + pnpm + TypeScript in 30 Minutes — SourceHub</title>
+    <meta name="description" content="Set up a production-ready monorepo with shared packages, TypeScript configs, and parallel builds. Step-by-step from scratch with Turborepo best practices.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/monorepo-setup-guide.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/monorepo-setup-guide.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Monorepo Setup Guide: Turborepo + pnpm + TypeScript in 30 Minutes",
+      "description": "Set up a production-ready monorepo with shared packages, TypeScript configs, and parallel builds. Step-by-step from scratch with Turborepo best practices.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Monorepo Setup Guide: Turborepo + pnpm + TypeScript in 30 Minutes"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Monorepo Setup Guide: Turborepo + pnpm + TypeScript in 30 Minutes
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">Monorepo</span>
+        <span class="tag-cat">Turborepo</span>
+        <span class="tag-cat">TypeScript</span>
+        <span class="tag-cat">Architecture</span></div>
+      <h1 class="article-title">Monorepo Setup Guide: Turborepo + pnpm + TypeScript in 30 Minutes</h1>
+      <div class="article-meta">Published 2026-05-08 · 4320 views · 36 replies</div>
+      <div class="article-body"><p>A monorepo lets you share code between apps (web, mobile, docs) and packages (shared utils, configs, UI components) in a single repository. Turborepo + pnpm + TypeScript is the modern stack. Here's how to set it up in 30 minutes.</p>
+
+<h2>Why a Monorepo?</h2>
+<table>
+<tr><th>Problem</th><th>Monorepo Solution</th></tr>
+<tr><td>Duplicate tsconfig, ESLint config, etc. in 5 repos</td><td>One shared config package. Update once, all apps get it.</td></tr>
+<tr><td>Copy-pasting UI components between apps</td><td>Shared UI package. One component, used everywhere.</td></tr>
+<tr><td>Can't refactor across apps safely</td><td>TypeScript validates ALL consumers when you change a shared package.</td></tr>
+<tr><td>CI runs unrelated changes on every commit</td><td>Turborepo caches tasks. Only changed packages rebuild.</td></tr>
+</table>
+
+<h2>Step-by-Step Setup</h2>
+<pre><code># 1. Create the monorepo structure
+mkdir my-monorepo && cd my-monorepo
+pnpm init
+
+# 2. Create pnpm-workspace.yaml
+cat > pnpm-workspace.yaml << 'EOF'
+packages:
+  - "apps/*"
+  - "packages/*"
+EOF
+
+# 3. Create directory structure
+mkdir -p apps/web apps/docs packages/ui packages/config
+
+# 4. Create root package.json with Turborepo
+cat > package.json << 'EOF'
+{
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "test": "turbo test"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "typescript": "^5.5.0"
+  }
+}
+EOF
+
+# 5. Install Turborepo
+pnpm install
+
+# 6. Create turbo.json
+cat > turbo.json << 'EOF'
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "dist/**"]
+    },
+    "dev": { "cache": false, "persistent": true },
+    "lint": { "dependsOn": ["^build"] },
+    "test": { "dependsOn": ["^build"] }
+  }
+}
+EOF</code></pre>
+
+<h2>Shared Config Package</h2>
+<pre><code># packages/config/package.json
+{
+  "name": "@repo/config",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./typescript": "./tsconfig.base.json",
+    "./eslint": "./eslint.base.js"
+  }
+}
+
+# packages/config/tsconfig.base.json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}</code></pre>
+
+<h2>App Configuration</h2>
+<pre><code># apps/web/tsconfig.json — each app extends the shared base
+{
+  "extends": "@repo/config/typescript",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@repo/ui/*": ["../../packages/ui/src/*"]
+    }
+  },
+  "include": ["src", "next-env.d.ts"]
+}</code></pre>
+
+<h2>Best Practices</h2>
+<ul>
+<li><strong>One package = one purpose.</strong> @repo/ui for components, @repo/config for shared configs, @repo/utils for shared utilities. Don't create a "misc" package.</li>
+<li><strong>Use workspace protocol:</strong> In package.json dependencies, use <code>"@repo/ui": "workspace:*"</code> instead of version numbers.</li>
+<li><strong>Parallel builds:</strong> Turborepo runs independent tasks in parallel. A build across 5 packages finishes in the time of the slowest one, not the sum.</li>
+<li><strong>Remote caching:</strong> Turborepo can cache builds remotely (Vercel). CI builds reuse cache from previous CI runs.</li>
+<li><strong>Don't go monorepo for <3 packages.</strong> The overhead isn't worth it for tiny projects. Start with a single repo, extract when you have sharing pain.</li>
+</ul>
+
+<p><strong>Bottom line:</strong> Monorepos shine when you have 3+ apps/packages that share code. pnpm workspaces + Turborepo is the best stack in 2026. The shared config package alone saves hours of boilerplate setup per new project. See also: <a href="/en/compare/pnpm-vs-npm-vs-yarn.html">Package Manager Comparison</a> and <a href="/en/compare/vite-vs-webpack-vs-turbopack.html">Build Tools Comparison</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

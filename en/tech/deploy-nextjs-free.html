@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="deploy-nextjs-free">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="How to Deploy a Next.js App for Free: Step-by-Step Guide (2026)">
+    <meta property="og:description" content="Get your Next.js app live on the internet in 10 minutes without spending a cent. Covers Vercel, Cloudflare Pages, and environment variable setup.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/deploy-nextjs-free.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How to Deploy a Next.js App for Free: Step-by-Step Guide (2026)">
+    <meta name="twitter:description" content="Get your Next.js app live on the internet in 10 minutes without spending a cent. Covers Vercel, Cloudflare Pages, and environment variable setup.">
+    <title>How to Deploy a Next.js App for Free: Step-by-Step Guide (2026) — SourceHub</title>
+    <meta name="description" content="Get your Next.js app live on the internet in 10 minutes without spending a cent. Covers Vercel, Cloudflare Pages, and environment variable setup.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/deploy-nextjs-free.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/deploy-nextjs-free.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "How to Deploy a Next.js App for Free: Step-by-Step Guide (2026)",
+      "description": "Get your Next.js app live on the internet in 10 minutes without spending a cent. Covers Vercel, Cloudflare Pages, and environment variable setup.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "How to Deploy a Next.js App for Free: Step-by-Step Guide (2026)"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › How to Deploy a Next.js App for Free: Step-by-Step Guide (2026)
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">Next.js</span>
+        <span class="tag-cat">Deployment</span>
+        <span class="tag-cat">Free</span>
+        <span class="tag-cat">Tutorial</span></div>
+      <h1 class="article-title">How to Deploy a Next.js App for Free: Step-by-Step Guide (2026)</h1>
+      <div class="article-meta">Published 2026-05-08 · 5040 views · 42 replies</div>
+      <div class="article-body"><p>You built a Next.js app. Now get it on the internet — for free, with a real URL, in 10 minutes. Here's the step-by-step guide covering Vercel (easiest for Next.js), plus Cloudflare Pages as an alternative with unlimited bandwidth.</p>
+
+<h2>Option 1: Vercel (Easiest, Built for Next.js)</h2>
+<p>Vercel is the company behind Next.js. Deployment is zero-configuration — push to GitHub, and Vercel automatically detects Next.js, builds it, and gives you a URL. The free tier (100GB bandwidth, 6K build minutes/month) is generous enough for most side projects.</p>
+
+<h3>Step-by-Step</h3>
+<pre><code># 1. Make sure your Next.js app is on GitHub
+git init && git add . && git commit -m "initial"
+git remote add origin https://github.com/your-username/your-repo.git
+git push -u origin main
+
+# 2. Go to vercel.com → Sign Up with GitHub
+# 3. Click "New Project" → Import your repo
+# 4. Vercel auto-detects Next.js. No configuration needed.
+# 5. Click "Deploy"
+
+# 3 minutes later: your app is live at your-app.vercel.app
+# Add a custom domain: Settings → Domains → add your domain</code></pre>
+
+<h3>Environment Variables</h3>
+<p>If your app uses .env.local, add those variables in Vercel:</p>
+<pre><code># Vercel Dashboard → Your Project → Settings → Environment Variables
+DATABASE_URL=postgresql://...
+NEXT_PUBLIC_API_URL=https://api.example.com
+AUTH_SECRET=your-secret-here
+
+# Redeploy after adding variables (Vercel will prompt you)</code></pre>
+
+<h2>Option 2: Cloudflare Pages (Unlimited Bandwidth)</h2>
+<p>If you expect a lot of traffic or want the largest global edge network (330+ locations), Cloudflare Pages is the better choice. It supports Next.js via the @cloudflare/next-on-pages adapter.</p>
+<pre><code># 1. Install adapter
+npm install -D @cloudflare/next-on-pages
+
+# 2. Update next.config.js (if App Router)
+const nextConfig = {
+  // Your existing config
+};
+module.exports = nextConfig;
+
+# 3. Update wrangler.toml
+name = "your-app"
+compatibility_date = "2025-01-01"
+pages_build_output_dir = ".vercel/output/static"
+
+# 4. Push to GitHub
+# 5. Go to Cloudflare Dashboard → Pages → Create → Connect Git
+# 6. Set build command: npx @cloudflare/next-on-pages
+# 7. Set output directory: .vercel/output/static
+# 8. Deploy</code></pre>
+<p><strong>Limitation:</strong> Not all Next.js features work on Cloudflare Pages. Server Components, middleware, and ISR require the Vercel runtime. Check compatibility before choosing Cloudflare.</p>
+
+<h2>Option 3: Static Export (Simplest, Most Portable)</h2>
+<p>If your Next.js app doesn't use server-side features (SSR, middleware, API routes), export it as a static site:</p>
+<pre><code># next.config.js
+const nextConfig = {
+  output: 'export',  // Static HTML export
+};
+
+# Build: npx next build → output in /out folder
+# Deploy /out to: GitHub Pages, Cloudflare Pages, Netlify, or any static host</code></pre>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Vercel</th><th>Cloudflare Pages</th><th>Static Export + GitHub Pages</th></tr>
+<tr><td><strong>SSR/ISR/Middleware</strong></td><td>Full support</td><td>Limited (adapter)</td><td>No (static only)</td></tr>
+<tr><td><strong>Bandwidth</strong></td><td>100GB</td><td>Unlimited</td><td>100GB</td></tr>
+<tr><td><strong>Setup time</strong></td><td>2 minutes</td><td>10 minutes</td><td>5 minutes</td></tr>
+<tr><td><strong>Edge locations</strong></td><td>100+</td><td>330+</td><td>1 (GitHub CDN)</td></tr>
+<tr><td><strong>Best for</strong></td><td>Full Next.js features</td><td>Traffic-heavy static</td><td>Simple static sites</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Vercel is the default for Next.js — simplest deploy, full feature support. Cloudflare Pages for unlimited bandwidth. Static export for maximum portability. After deploying, set up a custom domain (free on both platforms) and you're production-ready. See also: <a href="/en/tools/best-free-hosting-side-projects.html">Free Hosting Guide</a> and <a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html">Hosting Comparison</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

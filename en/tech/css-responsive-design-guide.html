@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="css-responsive-design-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Responsive CSS in 2026: Container Queries, Grid, and Modern Layout Patterns">
+    <meta property="og:description" content="Modern CSS responsive design beyond media queries. Container queries, CSS Grid, subgrid, clamp() for fluid typography, and the layout patterns that replace frameworks.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/css-responsive-design-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Responsive CSS in 2026: Container Queries, Grid, and Modern Layout Patterns">
+    <meta name="twitter:description" content="Modern CSS responsive design beyond media queries. Container queries, CSS Grid, subgrid, clamp() for fluid typography, and the layout patterns that replace frameworks.">
+    <title>Responsive CSS in 2026: Container Queries, Grid, and Modern Layout Patterns — SourceHub</title>
+    <meta name="description" content="Modern CSS responsive design beyond media queries. Container queries, CSS Grid, subgrid, clamp() for fluid typography, and the layout patterns that replace frameworks.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/css-responsive-design-guide.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/css-responsive-design-guide.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Responsive CSS in 2026: Container Queries, Grid, and Modern Layout Patterns",
+      "description": "Modern CSS responsive design beyond media queries. Container queries, CSS Grid, subgrid, clamp() for fluid typography, and the layout patterns that replace frameworks.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Responsive CSS in 2026: Container Queries, Grid, and Modern Layout Patterns"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Responsive CSS in 2026: Container Queries, Grid, and Modern Layout Patterns
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">CSS</span>
+        <span class="tag-cat">Responsive Design</span>
+        <span class="tag-cat">Frontend</span>
+        <span class="tag-cat">Tutorial</span></div>
+      <h1 class="article-title">Responsive CSS in 2026: Container Queries, Grid, and Modern Layout Patterns</h1>
+      <div class="article-meta">Published 2026-05-08 · 4560 views · 38 replies</div>
+      <div class="article-body"><p>Responsive design in 2026 is dramatically better than the media-query-heavy past. Container queries, CSS Grid, subgrid, and modern units like clamp() and dvh have changed the game. Here's how to build responsive layouts with modern CSS.</p>
+
+<h2>The Modern Responsive Toolkit</h2>
+<table>
+<tr><th>Feature</th><th>What It Does</th><th>Replaces</th></tr>
+<tr><td><strong>Container Queries</strong></td><td>Style based on PARENT container size, not viewport</td><td>Media queries for component-level responsive</td></tr>
+<tr><td><strong>CSS Grid + subgrid</strong></td><td>2D layout with content-sized tracks</td><td>Flexbox hacks for complex layouts</td></tr>
+<tr><td><strong>clamp()</strong></td><td>Fluid values: min, preferred, max in one line</td><td>Multiple media queries for font sizes</td></tr>
+<tr><td><strong>dvh / svh / lvh</strong></td><td>Dynamic viewport height (accounts for mobile browser bars)</td><td>100vh (broken on mobile Safari)</td></tr>
+<tr><td><strong>has() selector</strong></td><td>Style parent based on children</td><td>JavaScript to toggle parent classes</td></tr>
+<tr><td><strong>color-mix()</strong></td><td>Mix colors in CSS (no preprocessor needed)</td><td>Sass/SCSS color functions</td></tr>
+<tr><td><strong>@layer</strong></td><td>Control CSS specificity order</td><td>Specificity wars and !important</td></tr>
+</table>
+
+<h2>Container Queries — The Game Changer</h2>
+<p>Media queries respond to the viewport. Container queries respond to the parent element. This means a component adapts to the space it's given — not the browser window. Write once, drop into any layout.</p>
+<pre><code>/* Define a container */
+.card-container {
+  container-type: inline-size;
+  container-name: card;
+}
+
+/* Style based on container width, NOT viewport */
+@container card (min-width: 400px) {
+  .card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@container card (max-width: 399px) {
+  .card {
+    display: flex;
+    flex-direction: column;
+  }
+}</code></pre>
+
+<h2>Fluid Typography with clamp()</h2>
+<pre><code>/* Instead of 5 media query breakpoints: */
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  /* min: 2rem, preferred: 5vw, max: 4rem */
+  /* Smoothly scales between viewport widths — no breakpoints */
+}
+
+p {
+  font-size: clamp(1rem, 0.5vw + 0.875rem, 1.25rem);
+}
+
+/* Fluid spacing too */
+section {
+  padding: clamp(1rem, 5vw, 4rem) clamp(1rem, 5vw, 6rem);
+}</code></pre>
+
+<h2>Modern Grid Layout</h2>
+<pre><code>/* Auto-responsive grid — no media queries needed */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 1rem;
+}
+/* min(300px, 100%) — prevents overflow on mobile.
+   auto-fit — adds/removes columns as space allows.
+   This one line replaces 3 media queries. */</code></pre>
+
+<h2>Dynamic Viewport Height (Fix Mobile Safari)</h2>
+<pre><code>/* Old way — broken on mobile (Safari toolbar overlaps) */
+.hero {
+  height: 100vh; /* ❌ Content hidden behind Safari toolbar */
+}
+
+/* New way — accounts for dynamic toolbar */
+.hero {
+  height: 100dvh; /* ✅ Works on all mobile browsers */
+  /* dvh = dynamic viewport height.
+     svh = smallest (toolbar visible).
+     lvh = largest (toolbar hidden). */
+}</code></pre>
+
+<h2>The :has() Selector — Parent Styling</h2>
+<pre><code>/* Style a card differently when it contains an image */
+.card:has(img) {
+  grid-column: span 2;
+}
+
+/* Style form group when input is invalid */
+.form-group:has(input:invalid) {
+  border-left: 3px solid red;
+}
+
+/* Style a section when it's empty */
+section:has(:not(*)) {
+  display: none;
+}</code></pre>
+
+<h2>Responsive Layout Patterns</h2>
+<table>
+<tr><th>Pattern</th><th>CSS</th><th>Use Case</th></tr>
+<tr><td>Sidebar + Content</td><td><code>grid-template-columns: minmax(250px, 25%) 1fr</code></td><td>Admin panels, documentation</td></tr>
+<tr><td>Card Grid</td><td><code>repeat(auto-fit, minmax(min(300px, 100%), 1fr))</code></td><td>Blog lists, product grids</td></tr>
+<tr><td>Holy Grail Layout</td><td>Grid with header, 2 sidebars, content, footer</td><td>Full-page layouts</td></tr>
+<tr><td>Stack</td><td><code>flex-direction: column; gap: clamp(1rem, 3vw, 2rem)</code></td><td>Articles, landing pages</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Container queries + clamp() + auto-fit grid eliminate 80% of media queries. Modern CSS has absorbed what Bootstrap and Tailwind solved — you can build fully responsive layouts with zero framework CSS. See also: <a href="/en/compare/tailwind-vs-bootstrap-vs-mui.html">CSS Framework Comparison</a> and <a href="/en/tools/design-tools-for-developers.html">Design Tools Guide</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

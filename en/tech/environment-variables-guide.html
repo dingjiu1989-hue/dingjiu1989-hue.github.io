@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="environment-variables-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Environment Variables: The Complete Guide for Developers">
+    <meta property="og:description" content="How to manage .env files, secrets, and configs across local dev, CI/CD, and production. Covers .env.local, Doppler, Infisical, and production security.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/environment-variables-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Environment Variables: The Complete Guide for Developers">
+    <meta name="twitter:description" content="How to manage .env files, secrets, and configs across local dev, CI/CD, and production. Covers .env.local, Doppler, Infisical, and production security.">
+    <title>Environment Variables: The Complete Guide for Developers — SourceHub</title>
+    <meta name="description" content="How to manage .env files, secrets, and configs across local dev, CI/CD, and production. Covers .env.local, Doppler, Infisical, and production security.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/environment-variables-guide.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/environment-variables-guide.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Environment Variables: The Complete Guide for Developers",
+      "description": "How to manage .env files, secrets, and configs across local dev, CI/CD, and production. Covers .env.local, Doppler, Infisical, and production security.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Environment Variables: The Complete Guide for Developers"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Environment Variables: The Complete Guide for Developers
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">Environment Variables</span>
+        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Best Practices</span></div>
+      <h1 class="article-title">Environment Variables: The Complete Guide for Developers</h1>
+      <div class="article-meta">Published 2026-05-08 · 3480 views · 29 replies</div>
+      <div class="article-body"><p>Environment variables connect your code to the outside world — database URLs, API keys, feature flags. Misconfiguring them is one of the most common causes of production incidents and security breaches. Here's the complete guide to managing them correctly.</p>
+
+<h2>The Hierarchy of Config</h2>
+<table>
+<tr><th>Layer</th><th>Where</th><th>Example</th><th>Never Commit?</th></tr>
+<tr><td><strong>Default values</strong></td><td>Code (as fallback)</td><td><code>PORT ?? 3000</code></td><td>Commit (with safe defaults)</td></tr>
+<tr><td><strong>Local dev overrides</strong></td><td>.env.local</td><td><code>DATABASE_URL=localhost</code></td><td>Yes (.gitignore)</td></tr>
+<tr><td><strong>CI/CD</strong></td><td>Platform secrets</td><td><code>DATABASE_URL=staging-db</code></td><td>Yes (platform-managed)</td></tr>
+<tr><td><strong>Production</strong></td><td>Platform secrets / vault</td><td><code>DATABASE_URL=prod-db</code></td><td>Yes (platform-managed)</td></tr>
+<tr><td><strong>Public config</strong></td><td>NEXT_PUBLIC_* vars</td><td><code>NEXT_PUBLIC_API_URL</code></td><td>OK (intentionally public)</td></tr>
+</table>
+
+<h2>Rules for Environment Variables</h2>
+<ol>
+<li><strong>Never commit secrets to Git.</strong> Use .gitignore for .env.local, .env.*.local. If a secret ever hits Git history, rotate it immediately.</li>
+<li><strong>Prefix public variables.</strong> Next.js uses NEXT_PUBLIC_*. Vite uses VITE_*. This makes it clear what's exposed to the browser.</li>
+<li><strong>Validate at startup, not at runtime.</strong> Use Zod to validate all env vars when the app starts. If a required var is missing, crash immediately — don't fail mysteriously 3 hours later.</li>
+<li><strong>Use different values per environment.</strong> Development, staging, and production should have separate database URLs, API keys, and feature flags.</li>
+</ol>
+
+<h2>Validation Pattern (Prevent Runtime Surprises)</h2>
+<pre><code>// env.ts — validate all env vars at startup
+import { z } from "zod";
+
+const envSchema = z.object({
+  DATABASE_URL: z.string().url(),
+  AUTH_SECRET: z.string().min(32),
+  STRIPE_SECRET_KEY: z.string().startsWith("sk_"),
+  NEXT_PUBLIC_APP_URL: z.string().url().default("http://localhost:3000"),
+  FEATURE_NEW_CHECKOUT: z.enum(["true", "false"]).default("false"),
+});
+
+export const env = envSchema.parse(process.env);
+// If any var is missing or invalid, the app crashes immediately</code></pre>
+
+<h2>Managing Secrets Across a Team</h2>
+<table>
+<tr><th>Tool</th><th>Best For</th><th>How It Works</th></tr>
+<tr><td><strong>Doppler</strong></td><td>Teams, automatic sync</td><td>Central dashboard → CLI syncs to local .env. Secrets never on disk.</td></tr>
+<tr><td><strong>Infisical</strong></td><td>Open source, self-hosted</td><td>Self-hosted Doppler alternative. Inject secrets at build/run time.</td></tr>
+<tr><td><strong>1Password CLI</strong></td><td>Small teams with 1Password</td><td>op run --env-file=.env -- npm run dev. Secret references, not values.</td></tr>
+<tr><td><strong>Platform-native</strong></td><td>Simplest, free</td><td>Vercel/Render/Railway all have secret management built in.</td></tr>
+</table>
+
+<h2>Common Mistakes & Fixes</h2>
+<table>
+<tr><th>Mistake</th><th>Fix</th></tr>
+<tr><td>Hardcoding API keys in source</td><td>Move to .env.local immediately. Check git history. Rotate if exposed.</td></tr>
+<tr><td>NEXT_PUBLIC_* for secrets</td><td>NEXT_PUBLIC_ vars are bundled into client JS. Anyone can see them. Never put secrets here.</td></tr>
+<tr><td>Same API key for dev + prod</td><td>Use separate keys. Stripe has test mode keys. Dev databases are separate.</td></tr>
+<tr><td>.env.example not updated</td><td>Add new vars to .env.example with dummy values. Treat it as documentation.</td></tr>
+<tr><td>Secrets in Docker images</td><td>Inject at runtime, not at build time. Use docker run -e or Docker secrets.</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Validate env vars at startup with Zod. Never put secrets in NEXT_PUBLIC_* or Git. Use Doppler/Infisical for teams, platform-native for side projects. Document every variable in .env.example. See also: <a href="/en/tech/web-security-basics.html">Web Security Basics</a> and <a href="/en/tech/error-handling-best-practices.html">Error Handling Best Practices</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>
