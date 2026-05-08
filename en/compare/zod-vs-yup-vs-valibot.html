@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="compare" data-exclude="zod-vs-yup-vs-valibot">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Zod vs Yup vs Valibot (2026): Best TypeScript Schema Validation Library?">
+    <meta property="og:description" content="Compare schema validation libraries on TypeScript inference, bundle size, performance, and DX. Zod's dominance, Valibot's lean approach, and where Yup still fits.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/compare/zod-vs-yup-vs-valibot.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Zod vs Yup vs Valibot (2026): Best TypeScript Schema Validation Library?">
+    <meta name="twitter:description" content="Compare schema validation libraries on TypeScript inference, bundle size, performance, and DX. Zod's dominance, Valibot's lean approach, and where Yup still fits.">
+    <title>Zod vs Yup vs Valibot (2026): Best TypeScript Schema Validation Library? — SourceHub</title>
+    <meta name="description" content="Compare schema validation libraries on TypeScript inference, bundle size, performance, and DX. Zod's dominance, Valibot's lean approach, and where Yup still fits.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/compare/zod-vs-yup-vs-valibot.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/compare/zod-vs-yup-vs-valibot.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Zod vs Yup vs Valibot (2026): Best TypeScript Schema Validation Library?",
+      "description": "Compare schema validation libraries on TypeScript inference, bundle size, performance, and DX. Zod's dominance, Valibot's lean approach, and where Yup still fits.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Comparisons", "item": "https://dingjiu1989-hue.github.io/en/compare/"},
+        {"@type": "ListItem", "position": 3, "name": "Zod vs Yup vs Valibot (2026): Best TypeScript Schema Validation Library?"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/compare/">Comparisons</a> › Zod vs Yup vs Valibot (2026): Best TypeScript Schema Validation Library?
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">TypeScript</span>
+        <span class="tag-cat">Validation</span>
+        <span class="tag-cat">Schema</span>
+        <span class="tag-cat">Frontend</span></div>
+      <h1 class="article-title">Zod vs Yup vs Valibot (2026): Best TypeScript Schema Validation Library?</h1>
+      <div class="article-meta">Published 2026-05-08 · 3720 views · 31 replies</div>
+      <div class="article-body"><p>Schema validation libraries ensure your runtime data matches your TypeScript types. Zod is the current king, Yup is the legacy standard, and Valibot is the new lightweight challenger. Here's which one validates best in 2026.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Zod</th><th>Yup</th><th>Valibot</th></tr>
+<tr><td><strong>Bundle size</strong></td><td>~12KB</td><td>~8KB</td><td>~2KB (modular)</td></tr>
+<tr><td><strong>TypeScript inference</strong></td><td>Excellent (z.infer)</td><td>Good (InferType)</td><td>Excellent (v.InferOutput)</td></tr>
+<tr><td><strong>API style</strong></td><td>Chained methods (z.string().email())</td><td>Chained methods (string().email())</td><td>Functional (v.pipe(v.string(), v.email()))</td></tr>
+<tr><td><strong>Tree-shakable</strong></td><td>Limited</td><td>No</td><td>Yes (every function is a named export)</td></tr>
+<tr><td><strong>Ecosystem size</strong></td><td>Largest (tRPC, react-hook-form, etc.)</td><td>Large (Formik, RHF)</td><td>Growing</td></tr>
+<tr><td><strong>Async validation</strong></td><td>Yes (z.string().refine(async))</td><td>Yes</td><td>Yes</td></tr>
+</table>
+
+<h2>Zod — The Ecosystem Standard</h2>
+<p>Zod is the most popular schema validation library by a wide margin. tRPC, react-hook-form, Conform, and countless other tools have first-class Zod integration. Its API is intuitive, TypeScript inference is excellent, and the community is massive.</p>
+<pre><code>import { z } from "zod";
+
+const UserSchema = z.object({
+  name: z.string().min(2).max(50),
+  email: z.string().email(),
+  role: z.enum(["admin", "user", "viewer"]),
+  tags: z.array(z.string()).optional(),
+});
+type User = z.infer&lt;typeof UserSchema&gt;; // Automatic type</code></pre>
+<p><strong>Best for:</strong> Projects that use tRPC, react-hook-form, or any ecosystem tool with Zod integration. Most new projects — Zod is the safe default.</p>
+
+<h2>Yup — Still in Production Everywhere</h2>
+<p>Yup was the standard before Zod and still validates millions of forms in production (especially Formik projects). It's smaller than Zod and works well, but its TypeScript support lags behind and its development pace has slowed.</p>
+<p><strong>Best for:</strong> Existing Formik projects, codebases that already use Yup widely, teams that prefer stability over new features.</p>
+
+<h2>Valibot — Modular, Tiny, Fast</h2>
+<p>Valibot offers Zod-like features at a fraction of the bundle size. Every validation function is a named export — unused functions are tree-shaken away. For edge deployments or performance-sensitive apps, Valibot's 2KB footprint is compelling.</p>
+<pre><code>import * as v from "valibot";
+
+const UserSchema = v.object({
+  name: v.pipe(v.string(), v.minLength(2), v.maxLength(50)),
+  email: v.pipe(v.string(), v.email()),
+  role: v.picklist(["admin", "user", "viewer"]),
+  tags: v.optional(v.array(v.string())),
+});
+type User = v.InferOutput&lt;typeof UserSchema&gt;;</code></pre>
+<p><strong>Best for:</strong> Edge/serverless apps where bundle size matters, performance-sensitive projects, developers who prefer functional composition over method chaining.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Library</th></tr>
+<tr><td>New project, best ecosystem</td><td><strong>Zod</strong></td></tr>
+<tr><td>Edge/serverless, bundle-conscious</td><td><strong>Valibot</strong></td></tr>
+<tr><td>Existing Formik/Yup project</td><td><strong>Stay on Yup</strong></td></tr>
+<tr><td>tRPC stack (automatic integration)</td><td><strong>Zod</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Zod is the default — the ecosystem support alone is worth the bundle size for most projects. Valibot for edge/serverless where every KB counts. Yup only if it's already in your codebase. See also: <a href="/en/tech/typescript-advanced-patterns.html">TypeScript Patterns</a> and <a href="/en/compare/trpc-vs-graphql-vs-rest.html">API Architecture Comparison</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/compare/cursor-vs-copilot-vs-claude-code.html" class="related-card">Cursor vs GitHub Copilot vs Claude Code (2026): Which AI Coding Tool Wins?</a><a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html" class="related-card">Vercel vs Netlify vs Cloudflare Pages (2026): Best Hosting for Developers</a><a href="/en/compare/supabase-vs-firebase-vs-neon.html" class="related-card">Supabase vs Firebase vs Neon (2026): Best Backend for Solo Developers</a><a href="/en/compare/figma-vs-canva-vs-penpot.html" class="related-card">Figma vs Canva vs Penpot (2026): Best Design Tool for Developers</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

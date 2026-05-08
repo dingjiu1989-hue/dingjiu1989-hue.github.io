@@ -4180,6 +4180,468 @@ BODIES['selling-code-templates'] = '''
 <p><strong>Bottom line:</strong> Templates are the best digital product for developers — you build them with skills you already have. The key is solving real boilerplate pain. Charge more than you think ($99-299 not $19-49). Update regularly to justify the price. See also: <a href="/en/sidehustle/sell-digital-products.html">Selling Digital Products</a> and <a href="/en/sidehustle/micro-saas-ideas-2026.html">Micro-SaaS Ideas</a>.</p>
 '''
 
+BODIES['typescript-vs-javascript'] = '''
+<p>The TypeScript vs JavaScript debate has a clear winner in 2026: TypeScript is the default for any serious project. But JavaScript still has its place. Here's an honest comparison of when to use each — and when sticking with JS is the smarter call.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>TypeScript</th><th>JavaScript</th></tr>
+<tr><td><strong>Type safety</strong></td><td>Static typing catches bugs at compile time</td><td>Dynamic typing — runtime errors possible</td></tr>
+<tr><td><strong>Learning curve</strong></td><td>Higher (types, generics, config)</td><td>Lower (just code and run)</td></tr>
+<tr><td><strong>IDE support</strong></td><td>Excellent (autocomplete, refactoring, navigation)</td><td>Good (weaker autocomplete, no type info)</td></tr>
+<tr><td><strong>Refactoring</strong></td><td>Safe and fast (compiler validates changes)</td><td>Risky (manual verification needed)</td></tr>
+<tr><td><strong>Documentation</strong></td><td>Self-documenting (types ARE docs)</td><td>Requires JSDoc or external docs</td></tr>
+<tr><td><strong>Build step</strong></td><td>Required (tsc, esbuild, swc)</td><td>Optional (Node.js runs JS natively)</td></tr>
+<tr><td><strong>npm packages</strong></td><td>Most have types (DefinitelyTyped or built-in)</td><td>100% compatibility (it IS JS)</td></tr>
+<tr><td><strong>Adoption</strong></td><td>~85% of new projects</td><td>~15% (scripts, legacy, quick prototypes)</td></tr>
+</table>
+
+<h2>TypeScript — The Modern Standard</h2>
+<p>TypeScript has won. In 2026, ~85% of new Node.js and frontend projects start with TypeScript. The type system catches entire categories of bugs before they reach production. Refactoring that used to take hours (rename a function across 50 files) takes seconds. Editor autocomplete knows exactly what properties exist on every object.</p>
+<p><strong>When TypeScript is the clear winner:</strong> Any project with 2+ developers. Any codebase you expect to maintain for 6+ months. Any library or package consumed by others. When refactoring safety matters. When you want your editor to actually understand your code.</p>
+<p><strong>When TypeScript adds friction:</strong> Quick throwaway scripts (<50 lines). One-off data processing. When your team has zero TypeScript experience and a tight deadline. Config complexity (tsconfig.json can be a beast).</p>
+
+<h2>JavaScript — Still Relevant for Specific Cases</h2>
+<p>JavaScript isn't dead — it's just specialized. For quick scripts, serverless functions under 100 lines, and projects where you need zero build step, plain JS still makes sense. Node.js 24 added native TypeScript support, blurring the line further.</p>
+<p><strong>When JavaScript is the right choice:</strong> Single-file scripts and automation, learning to code (simpler mental model), projects where the build step is a dealbreaker, quick prototypes where you'll rewrite anyway, legacy codebases where migration isn't worth it.</p>
+<p><strong>When JavaScript hurts:</strong> Any codebase that grows beyond 500 lines. Team collaboration. Refactoring. Catching bugs before users do.</p>
+
+<h2>Should You Migrate from JS to TS?</h2>
+<table>
+<tr><th>Project Type</th><th>Recommendation</th></tr>
+<tr><td>Active production app (10K+ lines)</td><td><strong>Gradually migrate</strong> — rename .js to .ts, fix errors incrementally. Allow implicit any at first.</td></tr>
+<tr><td>Small app / side project</td><td><strong>Rewrite</strong> in TS. The overhead is minimal and the benefits compound.</td></tr>
+<tr><td>Stable legacy app (minimal changes)</td><td><strong>Don't bother.</strong> Add .d.ts files for new modules, leave old code as JS.</td></tr>
+<tr><td>Open source library</td><td><strong>Migrate now.</strong> Types are the #1 feature request for any JS library.</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Start new projects in TypeScript. Period. JavaScript for quick scripts and learning. The question isn't "should I use TS?" — it's "is there a good reason NOT to?" See also: <a href="/en/tech/typescript-advanced-patterns.html">Advanced TypeScript Patterns</a> and <a href="/en/compare/react-vs-vue-vs-angular-vs-svelte.html">Frontend Framework Comparison</a>.</p>
+'''
+
+BODIES['zustand-vs-redux-vs-jotai'] = '''
+<p>React state management has evolved dramatically. Redux ruled for years, but Zustand and Jotai represent the modern approach: less boilerplate, smaller bundles, and better TypeScript support. Here's which one fits your app.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Zustand</th><th>Redux Toolkit</th><th>Jotai</th></tr>
+<tr><td><strong>Approach</strong></td><td>Minimal global store (hooks)</td><td>Centralized store (actions/reducers)</td><td>Atomic state (bottom-up)</td></tr>
+<tr><td><strong>Bundle size</strong></td><td>~1KB</td><td>~12KB (RTK + React-Redux)</td><td>~2KB</td></tr>
+<tr><td><strong>Boilerplate</strong></td><td>Minimal (just a hook)</td><td>Moderate (slices, store config)</td><td>Minimal (atoms)</td></tr>
+<tr><td><strong>Learning curve</strong></td><td>Easiest</td><td>Moderate (RTK simplifies Redux)</td><td>Moderate (atomic model)</td></tr>
+<tr><td><strong>TypeScript</strong></td><td>Excellent (inferred)</td><td>Excellent (RTK generates)</td><td>Excellent (inferred)</td></tr>
+<tr><td><strong>DevTools</strong></td><td>Redux DevTools (compatible)</td><td>Redux DevTools (native)</td><td>Jotai DevTools</td></tr>
+<tr><td><strong>Middleware</strong></td><td>Built-in (persist, immer, devtools)</td><td>Extensive (thunks, sagas, listeners)</td><td>Via utilities (atomWithStorage, etc.)</td></tr>
+</table>
+
+<h2>Zustand — Minimal, Pragmatic, Fast</h2>
+<p>Zustand feels like using useState but shared across components. No providers, no actions, no reducers — just a store created with a hook. It's the most lightweight option and has been winning the React state management conversation.</p>
+<pre><code>import { create } from "zustand";
+
+const useStore = create((set) => ({
+  count: 0,
+  increment: () => set((state) => ({ count: state.count + 1 })),
+}));
+
+// Use in any component:
+const count = useStore((state) => state.count);</code></pre>
+<p><strong>Best for:</strong> Most React apps, solo developers, teams that want minimal boilerplate, apps of any size.</p>
+<p><strong>Weak spot:</strong> Less structured than Redux (can become messy in very large teams without conventions). Fewer built-in async patterns than RTK Query.</p>
+
+<h2>Redux Toolkit — The Enterprise Standard</h2>
+<p>Redux Toolkit (RTK) reinvented Redux — slices replace switch statements, createAsyncThunk for async, and RTK Query for data fetching. It's the most structured option, which is either a pro (large teams) or a con (more code to write).</p>
+<p><strong>Best for:</strong> Large teams needing structure, projects using RTK Query for data fetching, codebases that already use Redux, developers who want explicit data flow.</p>
+<p><strong>Weak spot:</strong> More boilerplate than Zustand or Jotai (even with RTK). Bundle is larger. Overkill for simple apps.</p>
+
+<h2>Jotai — Atomic, Composable, Bottom-Up</h2>
+<p>Jotai takes an atomic approach: state is split into atoms, and components subscribe to specific atoms. Derived atoms (computed values) are first-class. It's ideal for apps with complex, interdependent state that doesn't fit a single store model.</p>
+<p><strong>Best for:</strong> Apps with complex derived state, performance-sensitive UIs (only re-renders components that use the changed atom), bottom-up state design.</p>
+<p><strong>Weak spot:</strong> Atomic model takes getting used to. Can lead to too many atoms without conventions. Smaller ecosystem than Redux.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Choice</th></tr>
+<tr><td>New project, best DX, least boilerplate</td><td><strong>Zustand</strong></td></tr>
+<tr><td>Large team, need explicit structure</td><td><strong>Redux Toolkit</strong></td></tr>
+<tr><td>Complex derived state, many interdependencies</td><td><strong>Jotai</strong></td></tr>
+<tr><td>Data fetching + state together</td><td><strong>RTK Query</strong> or <strong>TanStack Query</strong></td></tr>
+<tr><td>Small to medium app, fast setup</td><td><strong>Zustand</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Zustand is the default choice for most React apps in 2026 — minimal, fast, and TypeScript-first. Redux Toolkit for large teams that want explicit architecture. Jotai for apps where atomic state composition clicks. See also: <a href="/en/compare/react-vs-vue-vs-angular-vs-svelte.html">Frontend Framework Comparison</a> and <a href="/en/tech/testing-strategies-web-apps.html">Testing Strategies</a>.</p>
+'''
+
+BODIES['playwright-vs-cypress-vs-selenium'] = '''
+<p>Browser automation frameworks have evolved rapidly. Playwright is the new king, Cypress still has loyalists, and Selenium powers legacy suites everywhere. Here's how they compare on what matters for real test suites.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Playwright</th><th>Cypress</th><th>Selenium</th></tr>
+<tr><td><strong>Language support</strong></td><td>JS/TS, Python, Java, .NET</td><td>JavaScript/TypeScript only</td><td>Every language (Java, Python, C#, Ruby, JS, etc.)</td></tr>
+<tr><td><strong>Browser support</strong></td><td>Chromium, Firefox, WebKit (Safari)</td><td>Chromium, Firefox, WebKit (experimental)</td><td>Chrome, Firefox, Edge, Safari (via drivers)</td></tr>
+<tr><td><strong>Speed</strong></td><td>Fastest</td><td>Fast</td><td>Slowest</td></tr>
+<tr><td><strong>Auto-waiting</strong></td><td>Yes (built-in)</td><td>Yes (built-in)</td><td>No (manual waits)</td></tr>
+<tr><td><strong>Parallel execution</strong></td><td>Built-in (sharding)</td><td>Paid (Cypress Cloud)</td><td>Grid (complex setup)</td></tr>
+<tr><td><strong>Network interception</strong></td><td>Excellent (route API)</td><td>Excellent (cy.intercept)</td><td>Moderate (proxy-based)</td></tr>
+<tr><td><strong>Multi-tab / multi-origin</strong></td><td>Excellent</td><td>Limited (cy.origin workaround)</td><td>Moderate</td></tr>
+<tr><td><strong>Debugging</strong></td><td>Trace Viewer, VS Code extension</td><td>Time travel, screenshots, videos</td><td>Screenshots, logs</td></tr>
+</table>
+
+<h2>Playwright — The New Standard</h2>
+<p>Playwright (by Microsoft) is the best E2E testing framework in 2026. It auto-waits for elements to be actionable, runs tests in parallel with zero configuration, and its Trace Viewer makes debugging a pleasure. Multi-browser support (Chromium, Firefox, WebKit) is built-in.</p>
+<p><strong>Best for:</strong> Any new E2E testing project. Teams that need multi-browser testing. CI/CD pipelines (parallel execution is free). Anyone migrating from Cypress or Selenium.</p>
+<p><strong>Weak spot:</strong> Newer ecosystem (fewer Stack Overflow answers than Selenium). Not the default in non-JS ecosystems (though Python/Java support exists).</p>
+
+<h2>Cypress — Great DX, Limited Scope</h2>
+<p>Cypress pioneered the modern E2E testing experience: time-travel debugging, real-time reloads, and excellent network interception. It's still excellent for single-origin, single-tab web apps. But Playwright has surpassed it on multi-tab, multi-browser, and performance.</p>
+<p><strong>Best for:</strong> Existing Cypress suites (migration isn't urgent). Single-origin web apps. Teams that value Cypress Cloud's test recording and analytics.</p>
+<p><strong>Weak spot:</strong> Multi-tab/multi-origin is clunky. JavaScript-only. Parallel execution requires paid plan. Slower than Playwright on large suites.</p>
+
+<h2>Selenium — The Legacy Powerhouse</h2>
+<p>Selenium introduced browser automation. It supports every programming language and every browser via WebDriver. But Selenium's age shows: manual waits, complex Grid setup for parallel runs, and more verbose test code than Playwright or Cypress.</p>
+<p><strong>Best for:</strong> Legacy test suites, non-JavaScript ecosystems (Java, Python, C#), enterprises with strict language requirements, mobile testing (Appium).</p>
+<p><strong>Weak spot:</strong> Slower, more verbose, manual waits, complex parallel execution setup. Feels dated compared to Playwright or Cypress.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Framework</th></tr>
+<tr><td>New project, best overall</td><td><strong>Playwright</strong></td></tr>
+<tr><td>Existing Cypress suite (50+ tests)</td><td><strong>Stay on Cypress</strong> (migration cost > benefit)</td></tr>
+<tr><td>Java/Python shop, existing Selenium</td><td><strong>Stay on Selenium</strong> or evaluate Playwright</td></tr>
+<tr><td>Multi-browser testing required</td><td><strong>Playwright</strong></td></tr>
+<tr><td>Best free CI parallelism</td><td><strong>Playwright</strong> (sharding is free)</td></tr>
+<tr><td>Fastest authoring experience</td><td><strong>Playwright</strong> (codegen + VS Code + Trace Viewer)</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Playwright is the default for any new E2E testing project in 2026. Cypress for existing suites. Selenium only if your organization requires a specific language Playwright doesn't support well. See also: <a href="/en/tech/testing-strategies-web-apps.html">Testing Strategies Guide</a> and <a href="/en/tools/best-cicd-tools-2026.html">CI/CD Tools Comparison</a>.</p>
+'''
+
+BODIES['hono-vs-express-vs-fastify'] = '''
+<p>Node.js backend frameworks have come a long way since Express. Hono is the new edge-native contender, Fastify is the performance upgrade, and Express is the legacy standard that still powers millions of apps. Here's the comparison.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Hono</th><th>Express</th><th>Fastify</th></tr>
+<tr><td><strong>Best for</strong></td><td>Edge, serverless, lightweight APIs</td><td>Rapid prototyping, ecosystem</td><td>Performance, schema validation</td></tr>
+<tr><td><strong>Performance</strong></td><td>Excellent (edge-native)</td><td>Moderate (slowest of the three)</td><td>Excellent (near-Hono speed)</td></tr>
+<tr><td><strong>Bundle size</strong></td><td>~5KB (tiny)</td><td>~1.5MB (heavy)</td><td>~50KB (moderate)</td></tr>
+<tr><td><strong>TypeScript</strong></td><td>Excellent (first-class)</td><td>Moderate (@types/express)</td><td>Excellent (built-in)</td></tr>
+<tr><td><strong>Middleware</strong></td><td>Growing, Express-compatible</td><td>Largest ecosystem (50K+ packages)</td><td>Large (plugin system)</td></tr>
+<tr><td><strong>Validation</strong></td><td>Built-in (Zod integration)</td><td>Third-party (express-validator)</td><td>Built-in (schema-based)</td></tr>
+<tr><td><strong>Edge runtime</strong></td><td>Yes (Cloudflare Workers, Deno, Bun)</td><td>No</td><td>Limited</td></tr>
+</table>
+
+<h2>Hono — Edge-Native, Ultralight</h2>
+<p>Hono ("flame" in Japanese) is built for the edge: Cloudflare Workers, Deno, Bun, and Node.js all from the same codebase. At ~5KB, it's the smallest option. Its Zod integration for request validation is built-in and elegant. If you deploy to the edge, Hono is the clear choice.</p>
+<pre><code>import { Hono } from "hono";
+import { zValidator } from "@hono/zod-validator";
+import { z } from "zod";
+
+const app = new Hono();
+
+app.post("/users", zValidator("json", z.object({
+  name: z.string(),
+  email: z.string().email(),
+})), async (c) => {
+  const data = c.req.valid("json");
+  return c.json({ created: true, user: data });
+});</code></pre>
+<p><strong>Best for:</strong> Edge/serverless APIs, microservices, Cloudflare Workers, projects that prioritize small bundle size and fast cold starts.</p>
+
+<h2>Express — The Legacy King</h2>
+<p>Express powered the Node.js revolution. It's simple, unopinionated, and has the largest middleware ecosystem by far (50K+ packages). For quick prototypes and projects that need a familiar stack with maximum community support, Express still works.</p>
+<p><strong>Best for:</strong> Prototypes, projects with extensive Express middleware dependencies, teams where everyone already knows Express, simple APIs that don't need performance optimization.</p>
+<p><strong>Weak spot:</strong> Slowest performance. No built-in validation. No TypeScript-first design. Callback-based middleware shows its age.</p>
+
+<h2>Fastify — Performance with Schema Validation</h2>
+<p>Fastify is the best Express upgrade path. It's 2-3x faster than Express, has built-in schema-based request/response validation, and a rich plugin system. Its API is deliberately similar to Express, making migration easier.</p>
+<p><strong>Best for:</strong> Performance-sensitive APIs, projects that want built-in validation, Express teams wanting better performance, production Node.js servers.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Framework</th></tr>
+<tr><td>Edge/serverless deployment</td><td><strong>Hono</strong></td></tr>
+<tr><td>Rapid prototyping, maximum middleware</td><td><strong>Express</strong></td></tr>
+<tr><td>Production API, best balance</td><td><strong>Fastify</strong> or <strong>Hono</strong></td></tr>
+<tr><td>Express migration (performance)</td><td><strong>Fastify</strong></td></tr>
+<tr><td>Smallest bundle, edge-first</td><td><strong>Hono</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Hono for edge/serverless. Fastify for production Node.js servers. Express for quick prototypes and when you need the largest middleware ecosystem. New projects should default to Hono or Fastify. See also: <a href="/en/compare/cloudflare-workers-vs-lambda-vs-deno-deploy.html">Edge Functions Comparison</a> and <a href="/en/tech/rest-api-best-practices.html">REST API Best Practices</a>.</p>
+'''
+
+BODIES['pnpm-vs-npm-vs-yarn'] = '''
+<p>The Node.js package manager you choose affects install speed, disk usage, and monorepo capabilities. pnpm has emerged as the technical winner, npm is the safe default, and Yarn still has loyalists. Here's the detailed comparison with real benchmarks.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>pnpm</th><th>npm</th><th>Yarn (4.x)</th></tr>
+<tr><td><strong>Disk usage</strong></td><td>Excellent (content-addressable store, hard links)</td><td>High (duplicate copies per project)</td><td>Good (global cache, but per-project copies)</td></tr>
+<tr><td><strong>Install speed</strong></td><td>Fastest</td><td>Slower (improving)</td><td>Fast</td></tr>
+<tr><td><strong>Monorepo support</strong></td><td>Excellent (pnpm workspaces)</td><td>Good (npm workspaces)</td><td>Excellent (Yarn workspaces, pioneered)</td></tr>
+<tr><td><strong>Security</strong></td><td>Strict (no hoisting by default)</td><td>Moderate (hoists everything)</td><td>Good (Plug'n'Play for strictness)</td></tr>
+<tr><td><strong>Lockfile</strong></td><td>pnpm-lock.yaml</td><td>package-lock.json</td><td>yarn.lock</td></tr>
+<tr><td><strong>Plug'n'Play (PnP)</strong></td><td>No (by design — uses symlinks)</td><td>No</td><td>Yes (optional, eliminates node_modules)</td></tr>
+<tr><td><strong>.npmrc support</strong></td><td>Yes</td><td>Yes</td><td>Via .yarnrc.yml</td></tr>
+</table>
+
+<h2>Why pnpm Is Winning</h2>
+<p>pnpm's content-addressable store means if you have 20 projects using the same version of React, it's stored ONCE on disk and hard-linked. This saves gigabytes. Its strict dependency resolution (packages can only access their declared dependencies) catches phantom dependency bugs before production.</p>
+<p><strong>Best for:</strong> Power users, monorepos, developers managing many projects on one machine, teams that want strict dependency checking.</p>
+<p><strong>Weak spot:</strong> Some legacy scripts that rely on hoisting behavior break without shamefully-hoist=true. Smaller community than npm.</p>
+
+<h2>npm — The Default That Keeps Improving</h2>
+<p>npm ships with Node.js — it's always available. npm 10+ has closed many gaps: workspaces, faster installs (parallel, no symlinks option), and better audit output. The biggest advantage is universal compatibility: every CI, every hosting platform, every tutorial assumes npm.</p>
+<p><strong>Best for:</strong> Beginners, teams that want the simplest stack, environments where npm is the only option, projects that don't need advanced features.</p>
+<p><strong>Weak spot:</strong> Slowest installs. Highest disk usage. Workspaces are less mature than pnpm or Yarn.</p>
+
+<h2>Yarn — Pioneer, Still Good, Losing Mindshare</h2>
+<p>Yarn introduced lockfiles and workspaces to the Node.js ecosystem. Yarn 4 (Berry) introduced Plug'n'Play, which eliminates node_modules entirely for faster, stricter installs. But pnpm's approach is simpler, and Yarn's mindshare has declined.</p>
+<p><strong>Best for:</strong> Existing Yarn projects, teams that want PnP's strictness, projects tied to Yarn-specific features.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Package Manager</th></tr>
+<tr><td>New project, best all-around</td><td><strong>pnpm</strong></td></tr>
+<tr><td>Monorepo (multiple apps/packages)</td><td><strong>pnpm</strong></td></tr>
+<tr><td>Maximum compatibility, zero risk</td><td><strong>npm</strong></td></tr>
+<tr><td>Existing Yarn project</td><td><strong>Stay on Yarn</strong></td></tr>
+<tr><td>CI/CD, hosting platforms</td><td><strong>npm</strong> (always available)</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Use pnpm for any new project — faster installs, less disk, stricter dependencies. npm for maximum compatibility. Yarn if you're already using it (the migration cost isn't compelling). Switching from npm to pnpm takes 5 minutes: <code>pnpm import</code> converts your lockfile. See also: <a href="/en/compare/bun-vs-node-vs-deno.html">JS Runtime Comparison</a> and <a href="/en/compare/vite-vs-webpack-vs-turbopack.html">Build Tools Comparison</a>.</p>
+'''
+
+BODIES['zod-vs-yup-vs-valibot'] = '''
+<p>Schema validation libraries ensure your runtime data matches your TypeScript types. Zod is the current king, Yup is the legacy standard, and Valibot is the new lightweight challenger. Here's which one validates best in 2026.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Zod</th><th>Yup</th><th>Valibot</th></tr>
+<tr><td><strong>Bundle size</strong></td><td>~12KB</td><td>~8KB</td><td>~2KB (modular)</td></tr>
+<tr><td><strong>TypeScript inference</strong></td><td>Excellent (z.infer)</td><td>Good (InferType)</td><td>Excellent (v.InferOutput)</td></tr>
+<tr><td><strong>API style</strong></td><td>Chained methods (z.string().email())</td><td>Chained methods (string().email())</td><td>Functional (v.pipe(v.string(), v.email()))</td></tr>
+<tr><td><strong>Tree-shakable</strong></td><td>Limited</td><td>No</td><td>Yes (every function is a named export)</td></tr>
+<tr><td><strong>Ecosystem size</strong></td><td>Largest (tRPC, react-hook-form, etc.)</td><td>Large (Formik, RHF)</td><td>Growing</td></tr>
+<tr><td><strong>Async validation</strong></td><td>Yes (z.string().refine(async))</td><td>Yes</td><td>Yes</td></tr>
+</table>
+
+<h2>Zod — The Ecosystem Standard</h2>
+<p>Zod is the most popular schema validation library by a wide margin. tRPC, react-hook-form, Conform, and countless other tools have first-class Zod integration. Its API is intuitive, TypeScript inference is excellent, and the community is massive.</p>
+<pre><code>import { z } from "zod";
+
+const UserSchema = z.object({
+  name: z.string().min(2).max(50),
+  email: z.string().email(),
+  role: z.enum(["admin", "user", "viewer"]),
+  tags: z.array(z.string()).optional(),
+});
+type User = z.infer&lt;typeof UserSchema&gt;; // Automatic type</code></pre>
+<p><strong>Best for:</strong> Projects that use tRPC, react-hook-form, or any ecosystem tool with Zod integration. Most new projects — Zod is the safe default.</p>
+
+<h2>Yup — Still in Production Everywhere</h2>
+<p>Yup was the standard before Zod and still validates millions of forms in production (especially Formik projects). It's smaller than Zod and works well, but its TypeScript support lags behind and its development pace has slowed.</p>
+<p><strong>Best for:</strong> Existing Formik projects, codebases that already use Yup widely, teams that prefer stability over new features.</p>
+
+<h2>Valibot — Modular, Tiny, Fast</h2>
+<p>Valibot offers Zod-like features at a fraction of the bundle size. Every validation function is a named export — unused functions are tree-shaken away. For edge deployments or performance-sensitive apps, Valibot's 2KB footprint is compelling.</p>
+<pre><code>import * as v from "valibot";
+
+const UserSchema = v.object({
+  name: v.pipe(v.string(), v.minLength(2), v.maxLength(50)),
+  email: v.pipe(v.string(), v.email()),
+  role: v.picklist(["admin", "user", "viewer"]),
+  tags: v.optional(v.array(v.string())),
+});
+type User = v.InferOutput&lt;typeof UserSchema&gt;;</code></pre>
+<p><strong>Best for:</strong> Edge/serverless apps where bundle size matters, performance-sensitive projects, developers who prefer functional composition over method chaining.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Library</th></tr>
+<tr><td>New project, best ecosystem</td><td><strong>Zod</strong></td></tr>
+<tr><td>Edge/serverless, bundle-conscious</td><td><strong>Valibot</strong></td></tr>
+<tr><td>Existing Formik/Yup project</td><td><strong>Stay on Yup</strong></td></tr>
+<tr><td>tRPC stack (automatic integration)</td><td><strong>Zod</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Zod is the default — the ecosystem support alone is worth the bundle size for most projects. Valibot for edge/serverless where every KB counts. Yup only if it's already in your codebase. See also: <a href="/en/tech/typescript-advanced-patterns.html">TypeScript Patterns</a> and <a href="/en/compare/trpc-vs-graphql-vs-rest.html">API Architecture Comparison</a>.</p>
+'''
+
+BODIES['planetscale-vs-turso-vs-neon'] = '''
+<p>Serverless databases promise zero-downtime scaling, branching workflows, and pay-per-use pricing. PlanetScale, Turso, and Neon each take a different approach — MySQL, SQLite, and PostgreSQL respectively. Here's which serverless database fits your stack.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>PlanetScale</th><th>Turso</th><th>Neon</th></tr>
+<tr><td><strong>Engine</strong></td><td>MySQL (Vitess)</td><td>SQLite (libSQL)</td><td>PostgreSQL</td></tr>
+<tr><td><strong>Free tier</strong></td><td>5GB storage, 1B row reads</td><td>9GB storage, 1B row reads</td><td>0.5GB storage, 100 compute hrs</td></tr>
+<tr><td><strong>Branching</strong></td><td>Excellent (database branches = git branches)</td><td>No branching (replicas instead)</td><td>Excellent (copy-on-write branches)</td></tr>
+<tr><td><strong>Edge</strong></td><td>Limited</td><td>Excellent (25+ locations, embedded replicas)</td><td>Good (growing edge network)</td></tr>
+<tr><td><strong>Scale to zero</strong></td><td>Yes (sleeps after inactivity)</td><td>N/A (SQLite is always ready)</td><td>Yes (auto-suspend)</td></tr>
+<tr><td><strong>Pricing model</strong></td><td>Rows read + storage</td><td>Rows read + storage</td><td>Compute hours + storage</td></tr>
+</table>
+
+<h2>PlanetScale — Git Workflows for Databases</h2>
+<p>PlanetScale is built on Vitess (YouTube's MySQL scaling layer). Its killer feature: database branching. Create a branch off your production schema, make changes, open a deploy request. Schema changes are automatically checked for compatibility before merging. This eliminates "works on my machine" database issues.</p>
+<p><strong>Best for:</strong> Teams that want database branching (schema as code), MySQL-compatible workloads, serverless apps with variable traffic.</p>
+<p><strong>Weak spot:</strong> MySQL engine (not Postgres — though many prefer Postgres). No edge deployment. Foreign key constraints are disabled by default (Vitess limitation).</p>
+
+<h2>Turso — SQLite at the Edge</h2>
+<p>Turso extends SQLite (via libSQL fork) to the edge. Your database is replicated across 25+ locations, and reads are served from the nearest replica. It's the best option for read-heavy, globally-distributed apps. SQLite compatibility means you can run the same DB locally during development.</p>
+<p><strong>Best for:</strong> Read-heavy apps, globally-distributed users, projects that want SQLite simplicity, edge computing (Cloudflare Workers, Vercel Edge).</p>
+<p><strong>Weak spot:</strong> SQLite engine (not full Postgres — limited extensions, no stored procedures). Single-primary writes (eventually consistent reads). No branching.</p>
+
+<h2>Neon — PostgreSQL, Serverless-Native</h2>
+<p>Neon makes PostgreSQL serverless: auto-suspend (scale to zero), instant copy-on-write branching, and a generous free tier. It's the closest to "Heroku Postgres but serverless." The branching model is excellent for preview environments — every PR gets its own database branch.</p>
+<p><strong>Best for:</strong> PostgreSQL workloads, preview/development database branching, serverless apps, teams that want the full Postgres feature set.</p>
+<p><strong>Weak spot:</strong> Smaller free compute (100 hours). Edge network is smaller than Turso's. Suspend/resume latency impacts cold starts.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Serverless DB</th></tr>
+<tr><td>PostgreSQL app, full feature set</td><td><strong>Neon</strong></td></tr>
+<tr><td>Edge-heavy, globally distributed</td><td><strong>Turso</strong></td></tr>
+<tr><td>Database branching workflow</td><td><strong>PlanetScale</strong> (MySQL) or <strong>Neon</strong> (Postgres)</td></tr>
+<tr><td>SQLite at the edge</td><td><strong>Turso</strong></td></tr>
+<tr><td>Most generous free tier</td><td><strong>PlanetScale</strong> or <strong>Turso</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Neon for Postgres-first projects. Turso for edge/global SQLite. PlanetScale for MySQL workflows with database branching. All three have excellent free tiers — start there and scale when you need to. See also: <a href="/en/compare/postgresql-vs-mysql-vs-sqlite.html">Database Engine Comparison</a> and <a href="/en/compare/supabase-vs-firebase-vs-neon.html">Supabase vs Firebase vs Neon</a>.</p>
+'''
+
+BODIES['cloudflare-workers-vs-lambda-vs-deno-deploy'] = '''
+<p>Edge functions run your code close to users worldwide. Cloudflare Workers, AWS Lambda, and Deno Deploy take three different approaches to serverless at the edge. Here's how they compare on cold starts, pricing, and the developer experience that actually matters.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Cloudflare Workers</th><th>AWS Lambda</th><th>Deno Deploy</th></tr>
+<tr><td><strong>Runtime</strong></td><td>V8 isolates (custom)</td><td>Node.js, Python, Java, Go, etc.</td><td>Deno (V8)</td></tr>
+<tr><td><strong>Cold start</strong></td><td>Near-zero (isolates)</td><td>50-500ms (container-based)</td><td>Near-zero (isolates)</td></tr>
+<tr><td><strong>Global locations</strong></td><td>330+ (largest edge network)</td><td>30+ regions (not edge by default)</td><td>30+ (edge)</td></tr>
+<tr><td><strong>Free tier</strong></td><td>100K req/day</td><td>1M req/month (1 year)</td><td>100K req/day</td></tr>
+<tr><td><strong>Max execution time</strong></td><td>30s (paid: 15 min with tail workers)</td><td>15 min</td><td>10s (request), 30s (queue)</td></tr>
+<tr><td><strong>Node.js compat</strong></td><td>Limited (not Node — V8 isolates)</td><td>Full Node.js</td><td>Web-standard APIs</td></tr>
+<tr><td><strong>npm support</strong></td><td>Limited (subset works)</td><td>Full (entire ecosystem)</td><td>Good (npm: specifier in Deno 2+)</td></tr>
+</table>
+
+<h2>Cloudflare Workers — Largest Edge, Lowest Latency</h2>
+<p>Cloudflare Workers run on 330+ locations worldwide. The V8 isolate model means near-zero cold starts — your code starts in microseconds, not milliseconds. The free tier (100K req/day) is extremely generous. For globally-distributed APIs, nothing beats the latency profile.</p>
+<p><strong>Best for:</strong> Globally-distributed APIs, simple request handlers, projects that benefit from 330+ PoPs, generous free tier users.</p>
+<p><strong>Weak spot:</strong> Not real Node.js (V8 isolates). Many npm packages don't work. 30s timeout (shorter than Lambda). Debugging is harder than Lambda.</p>
+
+<h2>AWS Lambda — Full Node.js, Powerful Ecosystem</h2>
+<p>AWS Lambda is the original serverless platform. It runs actual Node.js (full npm ecosystem), supports 10+ languages, and integrates with the entire AWS ecosystem (API Gateway, DynamoDB, SQS, S3, etc.). For complex serverless applications, Lambda's maturity is unmatched.</p>
+<p><strong>Best for:</strong> Complex applications with full npm dependencies, projects needing 15-minute execution time, teams already in the AWS ecosystem, multi-language serverless.</p>
+<p><strong>Weak spot:</strong> Cold starts (50-500ms vs near-zero for Workers/Deno). Not truly edge (30+ regions). More complex configuration (IAM, API Gateway).</p>
+
+<h2>Deno Deploy — Web Standards at the Edge</h2>
+<p>Deno Deploy runs Deno (with web-standard APIs) at the edge. It's the simplest deployment model: push code, get a URL. Zero configuration. Web-standard APIs (fetch, Request, Response, URL) make your code portable — the same code runs in browsers, Deno CLI, and Deno Deploy.</p>
+<p><strong>Best for:</strong> Deno developers, web-standard API enthusiasts, quick global deployments, projects that value simplicity and portability.</p>
+<p><strong>Weak spot:</strong> Smaller ecosystem than Workers or Lambda. 10s request timeout (short). Deno-specific (not Node.js). Smaller community.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Platform</th></tr>
+<tr><td>Global API, lowest latency</td><td><strong>Cloudflare Workers</strong></td></tr>
+<tr><td>Complex app, full Node.js ecosystem</td><td><strong>AWS Lambda</strong></td></tr>
+<tr><td>Simple web-standard service, fastest deploy</td><td><strong>Deno Deploy</strong></td></tr>
+<tr><td>Most generous free tier</td><td><strong>Cloudflare Workers</strong></td></tr>
+<tr><td>Multi-language (Python, Go, Java)</td><td><strong>AWS Lambda</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Cloudflare Workers for global APIs and generous free tier. AWS Lambda for complex, full-ecosystem serverless. Deno Deploy for web-standard simplicity. Each has a generous free tier — try all three for your next side project. See also: <a href="/en/compare/hono-vs-express-vs-fastify.html">Backend Frameworks</a> and <a href="/en/compare/fly-io-vs-railway-vs-render.html">Modern PaaS Comparison</a>.</p>
+'''
+
+BODIES['fly-io-vs-railway-vs-render'] = '''
+<p>Modern PaaS platforms make deploying apps dramatically simpler than AWS. Fly.io, Railway, and Render each take a different approach: Docker-native, template-driven, and managed services. Here's which one gets your app online fastest — and cheapest.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Fly.io</th><th>Railway</th><th>Render</th></tr>
+<tr><td><strong>Deploy model</strong></td><td>Dockerfile or buildpack</td><td>Source code (auto-detect) or Docker</td><td>Source code or Docker</td></tr>
+<tr><td><strong>Free tier</strong></td><td>3 VMs (256MB each)</td><td>$5 credit/month</td><td>1 web service (512MB), 1 DB</td></tr>
+<tr><td><strong>Databases</strong></td><td>Postgres, Redis, Supabase</td><td>Postgres, Redis, MySQL, MongoDB</td><td>Postgres, Redis</td></tr>
+<tr><td><strong>Global regions</strong></td><td>35+ regions</td><td>4 regions</td><td>4 regions</td></tr>
+<tr><td><strong>GPU support</strong></td><td>Yes (L40S, A100)</td><td>No</td><td>No</td></tr>
+<tr><td><strong>CLI</strong></td><td>Excellent (flyctl)</td><td>Good (railway CLI)</td><td>Minimal (render CLI)</td></tr>
+</table>
+
+<h2>Fly.io — Docker-Native, Globally Distributed</h2>
+<p>Fly.io converts Docker containers into micro-VMs and deploys them to 35+ regions worldwide. If you can dockerize it, Fly.io can run it. The CLI is excellent (flyctl launch auto-detects your framework). GPU support (L40S, A100) makes it unique for AI workloads.</p>
+<p><strong>Best for:</strong> Docker-based apps, globally-distributed services, AI/ML inference (GPU), developers who want maximum control.</p>
+<p><strong>Weak spot:</strong> Requires Docker knowledge. Free tier VMs are small (256MB). More complex than Railway for simple apps.</p>
+
+<h2>Railway — Best Developer Experience</h2>
+<p>Railway auto-detects your framework (Next.js, Django, Rails, etc.) and deploys with zero configuration. The template marketplace has 100+ one-click deploy templates. Its database provisioning (Postgres, Redis, MySQL, MongoDB) is the simplest of the three.</p>
+<p><strong>Best for:</strong> Developers who want the simplest deploy experience, template-driven projects, quick prototyping, teams that want one platform for app + database.</p>
+<p><strong>Weak spot:</strong> Only 4 regions. Free tier is $5 credit (runs out). No GPU support. Less control than Fly.io.</p>
+
+<h2>Render — Best for Static Sites + APIs</h2>
+<p>Render focuses on simplicity: connect your Git repo, and Render builds and deploys automatically. It supports static sites, web services, cron jobs, and managed databases. The free tier includes one web service (512MB) and one managed Postgres database.</p>
+<p><strong>Best for:</strong> Static sites with API backends, teams that want managed everything, cron jobs and background workers, simple deployment with auto-HTTPS.</p>
+<p><strong>Weak spot:</strong> Only 4 regions. Free web service sleeps after 15 min inactivity (cold starts). No GPU. Fewer integrations than Fly.io or Railway.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Platform</th></tr>
+<tr><td>Docker-based, need global distribution</td><td><strong>Fly.io</strong></td></tr>
+<tr><td>Fastest deploy, simplest experience</td><td><strong>Railway</strong></td></tr>
+<tr><td>Static site + API + managed DB</td><td><strong>Render</strong></td></tr>
+<tr><td>AI/ML inference, GPU required</td><td><strong>Fly.io</strong></td></tr>
+<tr><td>Zero config, template-driven</td><td><strong>Railway</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Railway for the best developer experience (auto-detect, one-click templates). Fly.io for global distribution and Docker control. Render for simple static + API setups. All three beat AWS for developer experience. See also: <a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html">Frontend Hosting Comparison</a> and <a href="/en/compare/cloudflare-workers-vs-lambda-vs-deno-deploy.html">Edge Functions Comparison</a>.</p>
+'''
+
+BODIES['prettier-vs-biome'] = '''
+<p>Code formatting shouldn't be a debate. But in 2026, there's a real choice: Prettier (the industry standard) or Biome (the faster, all-in-one challenger). Here's how they compare — and whether Biome is ready to replace Prettier.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Prettier</th><th>Biome</th></tr>
+<tr><td><strong>Language</strong></td><td>JavaScript</td><td>Rust</td></tr>
+<tr><td><strong>Speed</strong></td><td>Fast (but slower on large repos)</td><td>10-25x faster</td></tr>
+<tr><td><strong>Formatting</strong></td><td>Opinionated, minimal options</td><td>~97% compatible with Prettier</td></tr>
+<tr><td><strong>Linting</strong></td><td>No (use ESLint separately)</td><td>Yes (built-in, replaces ESLint for most rules)</td></tr>
+<tr><td><strong>Languages supported</strong></td><td>JS, TS, JSX, JSON, CSS, HTML, MD, YAML, GraphQL, etc.</td><td>JS, TS, JSX, JSON, CSS (growing)</td></tr>
+<tr><td><strong>Editor integration</strong></td><td>Every editor</td><td>VS Code, IntelliJ, Zed (fewer)</td></tr>
+<tr><td><strong>Configuration</strong></td><td>.prettierrc</td><td>biome.json</td></tr>
+</table>
+
+<h2>Prettier — The Safe, Universal Default</h2>
+<p>Prettier ended the "tabs vs spaces" debate by being aggressively opinionated. It works with every editor, every CI pipeline, and every language you throw at it. The ecosystem is so dominant that "prettier" is synonymous with "auto-formatting."</p>
+<p><strong>Best for:</strong> Any project where compatibility matters more than speed. Teams that format many different file types (HTML, YAML, Markdown). Projects that need Prettier plugins.</p>
+<p><strong>Weak spot:</strong> Slower on large monorepos. Only formats (doesn't lint). Node.js-based (slower than Rust).</p>
+
+<h2>Biome — The Rust-Powered All-in-One</h2>
+<p>Biome (formerly Rome) is built in Rust and is 10-25x faster than Prettier. The bigger value proposition: it handles both formatting AND linting in one binary, replacing Prettier + ESLint for standard rules. For new projects, this means one dependency instead of two, one config file, and dramatically faster CI.</p>
+<p><strong>Best for:</strong> New projects (fewer dependencies), large monorepos where Prettier is slow, teams that want formatting + linting in one tool, Rust-curious developers.</p>
+<p><strong>Weak spot:</strong> Not 100% Prettier-compatible (~97%). Fewer editor integrations. Supports fewer languages (no HTML, YAML, or Markdown yet). Smaller ecosystem — if your CI/tooling assumes Prettier, you'll need to adapt.</p>
+
+<h2>Migration: Prettier → Biome</h2>
+<table>
+<tr><th>Step</th><th>What to Do</th></tr>
+<tr><td>1. Check compatibility</td><td>Run <code>biome migrate prettier</code> to convert your .prettierrc</td></tr>
+<tr><td>2. Compare output</td><td>Run Biome and Prettier side by side. Check for diffs.</td></tr>
+<tr><td>3. Add linting</td><td>Enable Biome lint rules. Disable matching ESLint rules.</td></tr>
+<tr><td>4. Update CI</td><td>Replace <code>prettier --check</code> with <code>biome check</code></td></tr>
+<tr><td>5. Update editor</td><td>Install Biome extension, disable Prettier for the project</td></tr>
+</table>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Formatter</th></tr>
+<tr><td>New project, all JavaScript/TypeScript</td><td><strong>Biome</strong></td></tr>
+<tr><td>Large monorepo (slow Prettier)</td><td><strong>Biome</strong></td></tr>
+<tr><td>Need HTML, YAML, MD formatting</td><td><strong>Prettier</strong></td></tr>
+<tr><td>Maximum editor/CI compatibility</td><td><strong>Prettier</strong></td></tr>
+<tr><td>Want formatting + linting in one tool</td><td><strong>Biome</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Biome is ready for new JavaScript/TypeScript projects — the speed difference is real, and replacing two tools with one is a win. Prettier remains the safe universal default, especially for mixed-language projects. The 97% compatibility means migration costs are low. See also: <a href="/en/compare/pnpm-vs-npm-vs-yarn.html">Package Manager Comparison</a> and <a href="/en/tools/best-cicd-tools-2026.html">CI/CD Tools</a>.</p>
+'''
+
 # FAQ data for FAQPage schema (slug → list of q/a dicts)
 FAQS = {
     'chatgpt-plus-worth': [

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="compare" data-exclude="planetscale-vs-turso-vs-neon">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="PlanetScale vs Turso vs Neon (2026): Best Serverless Database?">
+    <meta property="og:description" content="MySQL vs SQLite vs PostgreSQL — the serverless database showdown. Compare branching, edge support, free tiers, and developer workflows for modern applications.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/compare/planetscale-vs-turso-vs-neon.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PlanetScale vs Turso vs Neon (2026): Best Serverless Database?">
+    <meta name="twitter:description" content="MySQL vs SQLite vs PostgreSQL — the serverless database showdown. Compare branching, edge support, free tiers, and developer workflows for modern applications.">
+    <title>PlanetScale vs Turso vs Neon (2026): Best Serverless Database? — SourceHub</title>
+    <meta name="description" content="MySQL vs SQLite vs PostgreSQL — the serverless database showdown. Compare branching, edge support, free tiers, and developer workflows for modern applications.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/compare/planetscale-vs-turso-vs-neon.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/compare/planetscale-vs-turso-vs-neon.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "PlanetScale vs Turso vs Neon (2026): Best Serverless Database?",
+      "description": "MySQL vs SQLite vs PostgreSQL — the serverless database showdown. Compare branching, edge support, free tiers, and developer workflows for modern applications.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Comparisons", "item": "https://dingjiu1989-hue.github.io/en/compare/"},
+        {"@type": "ListItem", "position": 3, "name": "PlanetScale vs Turso vs Neon (2026): Best Serverless Database?"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/compare/">Comparisons</a> › PlanetScale vs Turso vs Neon (2026): Best Serverless Database?
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Serverless</span>
+        <span class="tag-cat">PlanetScale</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">PlanetScale vs Turso vs Neon (2026): Best Serverless Database?</h1>
+      <div class="article-meta">Published 2026-05-08 · 3960 views · 33 replies</div>
+      <div class="article-body"><p>Serverless databases promise zero-downtime scaling, branching workflows, and pay-per-use pricing. PlanetScale, Turso, and Neon each take a different approach — MySQL, SQLite, and PostgreSQL respectively. Here's which serverless database fits your stack.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>PlanetScale</th><th>Turso</th><th>Neon</th></tr>
+<tr><td><strong>Engine</strong></td><td>MySQL (Vitess)</td><td>SQLite (libSQL)</td><td>PostgreSQL</td></tr>
+<tr><td><strong>Free tier</strong></td><td>5GB storage, 1B row reads</td><td>9GB storage, 1B row reads</td><td>0.5GB storage, 100 compute hrs</td></tr>
+<tr><td><strong>Branching</strong></td><td>Excellent (database branches = git branches)</td><td>No branching (replicas instead)</td><td>Excellent (copy-on-write branches)</td></tr>
+<tr><td><strong>Edge</strong></td><td>Limited</td><td>Excellent (25+ locations, embedded replicas)</td><td>Good (growing edge network)</td></tr>
+<tr><td><strong>Scale to zero</strong></td><td>Yes (sleeps after inactivity)</td><td>N/A (SQLite is always ready)</td><td>Yes (auto-suspend)</td></tr>
+<tr><td><strong>Pricing model</strong></td><td>Rows read + storage</td><td>Rows read + storage</td><td>Compute hours + storage</td></tr>
+</table>
+
+<h2>PlanetScale — Git Workflows for Databases</h2>
+<p>PlanetScale is built on Vitess (YouTube's MySQL scaling layer). Its killer feature: database branching. Create a branch off your production schema, make changes, open a deploy request. Schema changes are automatically checked for compatibility before merging. This eliminates "works on my machine" database issues.</p>
+<p><strong>Best for:</strong> Teams that want database branching (schema as code), MySQL-compatible workloads, serverless apps with variable traffic.</p>
+<p><strong>Weak spot:</strong> MySQL engine (not Postgres — though many prefer Postgres). No edge deployment. Foreign key constraints are disabled by default (Vitess limitation).</p>
+
+<h2>Turso — SQLite at the Edge</h2>
+<p>Turso extends SQLite (via libSQL fork) to the edge. Your database is replicated across 25+ locations, and reads are served from the nearest replica. It's the best option for read-heavy, globally-distributed apps. SQLite compatibility means you can run the same DB locally during development.</p>
+<p><strong>Best for:</strong> Read-heavy apps, globally-distributed users, projects that want SQLite simplicity, edge computing (Cloudflare Workers, Vercel Edge).</p>
+<p><strong>Weak spot:</strong> SQLite engine (not full Postgres — limited extensions, no stored procedures). Single-primary writes (eventually consistent reads). No branching.</p>
+
+<h2>Neon — PostgreSQL, Serverless-Native</h2>
+<p>Neon makes PostgreSQL serverless: auto-suspend (scale to zero), instant copy-on-write branching, and a generous free tier. It's the closest to "Heroku Postgres but serverless." The branching model is excellent for preview environments — every PR gets its own database branch.</p>
+<p><strong>Best for:</strong> PostgreSQL workloads, preview/development database branching, serverless apps, teams that want the full Postgres feature set.</p>
+<p><strong>Weak spot:</strong> Smaller free compute (100 hours). Edge network is smaller than Turso's. Suspend/resume latency impacts cold starts.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best Serverless DB</th></tr>
+<tr><td>PostgreSQL app, full feature set</td><td><strong>Neon</strong></td></tr>
+<tr><td>Edge-heavy, globally distributed</td><td><strong>Turso</strong></td></tr>
+<tr><td>Database branching workflow</td><td><strong>PlanetScale</strong> (MySQL) or <strong>Neon</strong> (Postgres)</td></tr>
+<tr><td>SQLite at the edge</td><td><strong>Turso</strong></td></tr>
+<tr><td>Most generous free tier</td><td><strong>PlanetScale</strong> or <strong>Turso</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Neon for Postgres-first projects. Turso for edge/global SQLite. PlanetScale for MySQL workflows with database branching. All three have excellent free tiers — start there and scale when you need to. See also: <a href="/en/compare/postgresql-vs-mysql-vs-sqlite.html">Database Engine Comparison</a> and <a href="/en/compare/supabase-vs-firebase-vs-neon.html">Supabase vs Firebase vs Neon</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/compare/cursor-vs-copilot-vs-claude-code.html" class="related-card">Cursor vs GitHub Copilot vs Claude Code (2026): Which AI Coding Tool Wins?</a><a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html" class="related-card">Vercel vs Netlify vs Cloudflare Pages (2026): Best Hosting for Developers</a><a href="/en/compare/supabase-vs-firebase-vs-neon.html" class="related-card">Supabase vs Firebase vs Neon (2026): Best Backend for Solo Developers</a><a href="/en/compare/figma-vs-canva-vs-penpot.html" class="related-card">Figma vs Canva vs Penpot (2026): Best Design Tool for Developers</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>
