@@ -3819,6 +3819,367 @@ BODIES['cursor-advanced-tips'] = '''
 <p><strong>Bottom line:</strong> The difference between casual and power Cursor users is context. Power users give rich, specific context with @Files, @Docs, and detailed instructions. Casual users type one-liners and wonder why the output is generic. See also: <a href="/en/compare/cursor-vs-copilot-vs-claude-code.html">Cursor vs Copilot vs Claude Code</a> and <a href="/en/ai/ai-coding.html">AI-Assisted Programming Guide</a>.</p>
 '''
 
+BODIES['freelance-pricing-guide'] = '''
+<p>Most developers undercharge by 30-50%. They price by the hour without understanding value pricing, project scoping, or negotiation. Here's how to charge what your skills are worth — with real numbers and scripts for client conversations.</p>
+
+<h2>Freelance Rate Benchmarks (2026)</h2>
+<table>
+<tr><th>Skill Level</th><th>Hourly Rate (US)</th><th>Hourly Rate (Global Remote)</th><th>Annual Equivalent</th></tr>
+<tr><td><strong>Junior (1-3 yrs)</strong></td><td>$50-80/hr</td><td>$25-50/hr</td><td>$50K-100K</td></tr>
+<tr><td><strong>Mid-level (3-7 yrs)</strong></td><td>$80-150/hr</td><td>$50-100/hr</td><td>$100K-200K</td></tr>
+<tr><td><strong>Senior (7+ yrs)</strong></td><td>$150-250/hr</td><td>$100-200/hr</td><td>$200K-400K</td></tr>
+<tr><td><strong>Specialized (AI, security)</strong></td><td>$200-400+/hr</td><td>$150-300/hr</td><td>$300K-600K+</td></tr>
+</table>
+
+<h2>Pricing Models — Stop Charging by the Hour</h2>
+<table>
+<tr><th>Model</th><th>How It Works</th><th>Best For</th><th>Income Potential</th></tr>
+<tr><td><strong>Hourly</strong></td><td>Fixed rate × hours worked</td><td>Ongoing maintenance, unclear scope</td><td>Capped by time</td></tr>
+<tr><td><strong>Project-based</strong></td><td>Fixed price for defined scope</td><td>Websites, MVPs, well-defined work</td><td>Higher (value, not time)</td></tr>
+<tr><td><strong>Value-based</strong></td><td>% of value delivered to client</td><td>Revenue-generating projects</td><td>Highest (uncapped)</td></tr>
+<tr><td><strong>Retainer</strong></td><td>Monthly fee for availability</td><td>Ongoing client relationships</td><td>Stable, predictable</td></tr>
+<tr><td><strong>Productized</strong></td><td>Fixed scope, fixed price, fixed timeline</td><td>Repeatable services (e.g., "4-week MVP for $15K")</td><td>Scalable</td></tr>
+</table>
+
+<h2>How to Calculate Your Rate</h2>
+<pre><code># The formula:
+Target annual income: $150,000
++ Expenses (tools, insurance, taxes): $30,000
++ Buffer (sick days, bench time): $20,000
+= Target revenue: $200,000
+
+÷ Billable hours per year: 1,200 (realistic: 25 hrs/week × 48 weeks)
+= Minimum hourly rate: $167/hr → Round up to $175/hr</code></pre>
+
+<h2>Project Scoping — The #1 Profit Killer</h2>
+<p>Scope creep destroys margins. Fix it upfront:</p>
+<ol>
+<li><strong>Detailed SOW (Statement of Work):</strong> What's included, what's NOT included, timeline, payment schedule.</li>
+<li><strong>Change requests are priced separately:</strong> "That's out of scope — I'll send you a change order with the estimate."</li>
+<li><strong>Buffer the estimate:</strong> Multiply your honest estimate by 1.5x. Everything takes longer than expected.</li>
+<li><strong>Charge for discovery:</strong> The scoping phase should be paid. A paid discovery ($500-2,000) filters tire-kickers.</li>
+</ol>
+
+<h2>Client Conversation Scripts</h2>
+<p><strong>When they ask for your rate:</strong> "My rate depends on the project scope and value. Tell me more about what you need, and I can give you an accurate estimate." (Never lead with your rate — scope first, price second.)</p>
+<p><strong>When they say it's too expensive:</strong> "I understand budget is a concern. We can reduce the scope to hit your budget target — which features are lower priority?" (Never lower your rate — reduce scope instead.)</p>
+<p><strong>When they ask for a discount:</strong> "My rates are based on the value delivered, not on hours. Here's what other clients have achieved with this work: [specific results]. The ROI typically exceeds the investment within [timeframe]."</p>
+
+<h2>Red Flags — Walk Away From These Clients</h2>
+<ul>
+<li>"This will be great for your portfolio" (pay in exposure = paid in nothing)</li>
+<li>"If this goes well, we'll have lots more work for you" (discount bait for future work that never comes)</li>
+<li>"We need it by next week" (poor planning on their part is not your emergency — charge rush rates: 2x)</li>
+<li>Haggling over every line item (micromanaging clients burn more hours than the project is worth)</li>
+</ul>
+
+<p><strong>Bottom line:</strong> Charge for value, not hours. A 4-week project that generates $100K in revenue for the client is worth $20-30K — even if it took you 100 hours. Productize your services. Always scope before pricing. See also: <a href="/en/sidehustle/developer-side-hustles-2026.html">Side Hustles Guide</a> and <a href="/en/sidehustle/saas-bootstrapping-guide.html">SaaS Bootstrapping</a>.</p>
+'''
+
+BODIES['build-and-sell-api'] = '''
+<p>APIs are the ultimate developer business: build it once, charge for access, and scale to thousands of customers without per-unit costs. Here's how to build, document, price, and sell an API — from idea to first paying customer.</p>
+
+<h2>Why APIs Are a Great Developer Business</h2>
+<table>
+<tr><th>Advantage</th><th>Detail</th></tr>
+<tr><td><strong>Recurring revenue</strong></td><td>Usage-based or tiered pricing = monthly MRR</td></tr>
+<tr><td><strong>Low maintenance</strong></td><td>Core logic doesn't change often. Updates are additive.</td></tr>
+<tr><td><strong>Developer audience</strong></td><td>Developers are willing to pay for tools that save them time.</td></tr>
+<tr><td><strong>Scalable</strong></td><td>One server serves thousands of customers (up to a point).</td></tr>
+<tr><td><strong>No UI needed</strong></td><td>Just build the API. Docs and a landing page are enough.</td></tr>
+</table>
+
+<h2>API Ideas That Actually Make Money</h2>
+<table>
+<tr><th>Category</th><th>Example APIs</th><th>Revenue Potential</th></tr>
+<tr><td><strong>Data enrichment</strong></td><td>Company data, IP geolocation, email verification</td><td>$5K-50K/mo</td></tr>
+<tr><td><strong>AI/ML processing</strong></td><td>OCR, sentiment analysis, content moderation, image tagging</td><td>$10K-100K/mo</td></tr>
+<tr><td><strong>Developer tools</strong></td><td>Code formatting, screenshot generation, PDF generation</td><td>$2K-30K/mo</td></tr>
+<tr><td><strong>Automation connectors</strong></td><td>Unified APIs (chat, payments, shipping), webhook relays</td><td>$5K-50K/mo</td></tr>
+<tr><td><strong>Niche data</strong></td><td>Financial data, sports stats, weather, regulatory data</td><td>$10K-100K+/mo</td></tr>
+</table>
+
+<h2>Building Your API — The Stack</h2>
+<pre><code># Recommended API stack:
+Backend: Hono (fast, edge-native) or FastAPI (Python)
+Database: PostgreSQL (Supabase or Neon for managed)
+Auth: API keys (simple) or OAuth 2.0 for third-party
+Rate limiting: Upstash Redis or Cloudflare Rate Limiting
+Docs: Mintlify or custom with OpenAPI 3.1
+Payments: Stripe (usage-based billing)
+Hosting: Cloudflare Workers + GCP Cloud Run
+Monitoring: Grafana + Prometheus</code></pre>
+
+<h2>Pricing Your API</h2>
+<table>
+<tr><th>Tier</th><th>Price</th><th>Requests/Month</th><th>Who It's For</th></tr>
+<tr><td><strong>Free</strong></td><td>$0</td><td>1,000</td><td>Developers testing and prototyping</td></tr>
+<tr><td><strong>Hobby</strong></td><td>$19-29/mo</td><td>10,000</td><td>Solo devs, small projects</td></tr>
+<tr><td><strong>Pro</strong></td><td>$79-99/mo</td><td>100,000</td><td>Startups, growing products</td></tr>
+<tr><td><strong>Business</strong></td><td>$299-499/mo</td><td>1,000,000</td><td>Companies with production traffic</td></tr>
+<tr><td><strong>Enterprise</strong></td><td>Custom</td><td>Custom</td><td>High volume, SLA, dedicated support</td></tr>
+</table>
+<p><strong>Pricing tip:</strong> Always have a free tier. Developers won't pay for an API they can't test first. The free tier is your marketing.</p>
+
+<h2>Launch Strategy</h2>
+<ol>
+<li><strong>Build a killer landing page</strong> with live API demo (try it in the browser).</li>
+<li><strong>Write excellent docs</strong> — this IS your product. Quickstart in <5 minutes.</li>
+<li><strong>Launch on Dev.to, Hacker News, Reddit, Product Hunt</strong> — developer audiences.</li>
+<li><strong>Create SDKs</strong> for popular languages (at minimum: Node.js, Python).</li>
+<li><strong>List on API marketplaces:</strong> RapidAPI, API Layer, GitHub Marketplace.</li>
+</ol>
+
+<p><strong>Real examples:</strong> ScreenshotAPI ($30K+/mo, screenshot generation), Bannerbear ($25K+/mo, image generation API), Geocodio ($15K+/mo, geocoding). All built by solo developers or tiny teams.</p>
+
+<p><strong>Bottom line:</strong> Find a repetitive developer task, wrap it in an API, charge per request. Start with a free tier. Build great docs. The market for developer-focused APIs keeps growing because every company needs more automation. See also: <a href="/en/sidehustle/saas-bootstrapping-guide.html">SaaS Bootstrapping</a> and <a href="/en/sidehustle/micro-saas-ideas-2026.html">Micro-SaaS Ideas</a>.</p>
+'''
+
+BODIES['technical-writing-income'] = '''
+<p>Technical writing is one of the most underrated income streams for developers. You already have the expertise — you just need to learn how to package and sell it. Here's how much technical writers actually earn, where the gigs are, and how to build a portfolio that attracts high-paying clients.</p>
+
+<h2>How Much Technical Writers Earn</h2>
+<table>
+<tr><th>Channel</th><th>Rate Range</th><th>How It Works</th></tr>
+<tr><td><strong>Company tech blogs (ghostwriting)</strong></td><td>$500-2,000/article</td><td>Write under a company's brand. High demand for dev-tool companies.</td></tr>
+<tr><td><strong>Freelance platforms (Upwork, Toptal)</strong></td><td>$100-500/article (entry)</td><td>Competitive but good for building portfolio.</td></tr>
+<tr><td><strong>Dev.to / Medium Partner Program</strong></td><td>$50-500/mo</td><td>Write publicly. Build audience. Low direct pay, high lead generation.</td></tr>
+<tr><td><strong>Your own blog + sponsorships</strong></td><td>$500-5,000+/mo</td><td>Build audience, sell sponsorships. Takes 6-18 months.</td></tr>
+<tr><td><strong>API documentation (contract)</strong></td><td>$75-150/hr</td><td>Write docs for developer tools. High barrier, high pay.</td></tr>
+<tr><td><strong>Technical books / ebooks</strong></td><td>$2K-50K+ (lifetime)</td><td>Long tail income. Self-publish on Gumroad or Leanpub.</td></tr>
+</table>
+
+<h2>Where to Find Paid Writing Gigs</h2>
+<ol>
+<li><strong>Who pays for dev content?</strong> Dev tool companies (Vercel, Supabase, Stripe, Prisma, etc.) — they ALL need blog posts, docs, and tutorials.</li>
+<li><strong>Look for "Write for Us" pages:</strong> Many dev tools pay $500-2,000 for guest posts. Twilio, DigitalOcean, Auth0 pay for tutorials.</li>
+<li><strong>Twitter/X:</strong> Follow dev tool founders and developer advocates. They post writing opportunities.</li>
+<li><strong>Dev.to:</strong> Build a following. Companies will reach out to you.</li>
+<li><strong>Agency approach:</strong> Offer "blog content as a service" to 3-5 dev tool companies. $2K-5K/mo retainer.</li>
+</ol>
+
+<h2>How to Build a Portfolio That Gets Hired</h2>
+<ul>
+<li><strong>Write 5 high-quality articles on your own blog first.</strong> These are your samples.</li>
+<li><strong>Pick a niche:</strong> "TypeScript" and "frontend" is too broad. "Next.js performance optimization" or "Postgres query optimization" is specific and valuable.</li>
+<li><strong>Show results:</strong> "This article got 50K views and was featured in Next.js weekly" proves value better than "I write about TypeScript."</li>
+<li><strong>Format matters:</strong> Code blocks, tables, clear headings, practical examples. A well-formatted article IS your portfolio.</li>
+</ul>
+
+<h2>Writing That Attracts Clients</h2>
+<table>
+<tr><th>Do This</th><th>Avoid This</th></tr>
+<tr><td>Hands-on tutorials with working code</td><td>Theoretical overviews without code</td></tr>
+<tr><td>Specific, practical titles: "How to Reduce Next.js Build Time by 60%"</td><td>"An Introduction to Next.js Performance"</td></tr>
+<tr><td>Tables, code examples, decision matrices</td><td>Wall of text</td></tr>
+<tr><td>Opinionated takes based on experience</td><td>Generic summaries anyone could write with ChatGPT</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Technical writing is a $50K-150K/year side hustle for developers who do it well. Start with your own blog to build samples. Then reach out to dev tool companies directly — they're always looking for good writers who actually understand the code. See also: <a href="/en/sidehustle/newsletter-monetization-guide.html">Newsletter Monetization</a> and <a href="/en/sidehustle/sell-digital-products.html">Selling Digital Products</a>.</p>
+'''
+
+BODIES['newsletter-monetization-guide'] = '''
+<p>Developer newsletters have become one of the most reliable ways to build internet income. One dedicated writer, a niche topic, and 5K+ engaged subscribers can generate $5K-20K/month. Here's how the best dev newsletters do it — and how you can too.</p>
+
+<h2>The Developer Newsletter Landscape</h2>
+<table>
+<tr><th>Newsletter</th><th>Subscribers</th><th>Revenue Model</th><th>Est. Revenue</th></tr>
+<tr><td>TLDR (Dan Ni)</td><td>1.25M+</td><td>Sponsorships</td><td>$5M+/yr</td></tr>
+<tr><td>Bytes.dev (Ty Magnin)</td><td>100K+</td><td>Sponsorships</td><td>$500K+/yr</td></tr>
+<tr><td>Frontend Focus (Cooper Press)</td><td>180K+</td><td>Sponsorships</td><td>$1M+/yr</td></tr>
+<tr><td>Pragmatic Engineer (Gergely Orosz)</td><td>150K+</td><td>Paid + sponsors</td><td>$1M+/yr</td></tr>
+<tr><td>Solo dev newsletter (niche, 5K subs)</td><td>5K</td><td>Sponsorships</td><td>$20-60K/yr</td></tr>
+</table>
+
+<h2>Step 1: Pick a Platform</h2>
+<table>
+<tr><th>Platform</th><th>Cost</th><th>Best For</th></tr>
+<tr><td><strong>ConvertKit</strong></td><td>Free < 1,000 subs</td><td>Creators, paid newsletters, automations</td></tr>
+<tr><td><strong>beehiiv</strong></td><td>Free < 2,500 subs</td><td>Growth focused, built-in ad network</td></tr>
+<tr><td><strong>Buttondown</strong></td><td>$9/mo</td><td>Minimalist, developer-friendly, API</td></tr>
+<tr><td><strong>Substack</strong></td><td>Free (10% cut of paid)</td><td>Paid newsletters, least technical setup</td></tr>
+<tr><td><strong>Self-hosted (Ghost)</strong></td><td>$9-31/mo</td><td>Maximum control, blog + newsletter</td></tr>
+</table>
+<p><strong>Recommendation for developers:</strong> Buttondown (minimalist, Markdown, API) or Ghost (full control, blog + newsletter).</p>
+
+<h2>Step 2: Grow to Your First 1,000 Subscribers</h2>
+<ol>
+<li><strong>Write one genuinely excellent post per week</strong> and post it on Dev.to, Hacker News, Reddit, and Twitter/X.</li>
+<li><strong>Cross-promote with other newsletters</strong> in your niche. "I'll recommend you if you recommend me."</li>
+<li><strong>Create a lead magnet:</strong> "Free cheatsheet: 50 Git commands you'll use daily" → email gate.</li>
+<li><strong>Add a CTA to every article you write:</strong> "Enjoyed this? I write a weekly newsletter about [topic]. Join 2,500 developers here."</li>
+<li><strong>Engage in communities:</strong> Answer questions on Reddit, Discord, Stack Overflow. Signature links add up.</li>
+</ol>
+
+<h2>Step 3: Monetize</h2>
+<table>
+<tr><th>Method</th><th>When</th><th>Revenue per 1,000 subs</th></tr>
+<tr><td><strong>Sponsorships</strong></td><td>1,000+ subs</td><td>$50-200/issue per sponsor</td></tr>
+<tr><td><strong>Paid tier (extra content)</strong></td><td>2,000+ subs (5-10% convert)</td><td>$500-5,000/mo</td></tr>
+<tr><td><strong>Job board</strong></td><td>5,000+ subs</td><td>$200-500/posting</td></tr>
+<tr><td><strong>Digital products (to your list)</strong></td><td>Any size</td><td>$500-5,000/product launch</td></tr>
+<tr><td><strong>Affiliate links</strong></td><td>Any size</td><td>$50-500/mo</td></tr>
+</table>
+
+<h2>Sponsorship Pricing Formula</h2>
+<pre><code># Standard formula:
+Sponsorship Price = (Subscribers × CPM × Placement Factor) / 1000
+
+Example:
+5,000 subs × $30 CPM × 1.0 (primary spot) = $150/issue
+3 sponsors per issue = $450/issue
+Weekly = $1,800/month
+
+# As you grow:
+10,000 subs × $40 CPM × 1.0 = $400/issue
+3 sponsors × $400 = $1,200/issue
+Weekly = $4,800/month</code></pre>
+
+<h2>Topics That Work</h2>
+<p>General "web development" newsletters compete with everyone. Narrower wins:</p>
+<ul>
+<li>"TypeScript Tips" — too narrow? "Modern TypeScript" — just right.</li>
+<li>"React Weekly" — too broad. "Next.js & React Server Components" — differentiated.</li>
+<li>"DevOps" — saturated. "Platform Engineering for Startups" — niche and valuable.</li>
+</ul>
+
+<p><strong>Bottom line:</strong> Pick a focused developer niche. Write consistently for 6 months before worrying about revenue. Cross-promote with other newsletters. Sponsorships kick in at ~1,000 engaged subscribers. Four sponsors per issue at 10K subs = comfortable full-time income. See also: <a href="/en/sidehustle/technical-writing-income.html">Technical Writing Income</a> and <a href="/en/sidehustle/sell-digital-products.html">Selling Digital Products</a>.</p>
+'''
+
+BODIES['micro-saas-ideas-2026'] = '''
+<p>The best micro-SaaS ideas solve a specific, painful problem for a narrow audience. Not another AI wrapper — real software that businesses pay for. Here are 50 ideas across 10 categories, each validated by existing competitors or market demand.</p>
+
+<h2>Developer Tools</h2>
+<ol>
+<li><strong>API monitoring dashboard:</strong> Monitor uptime, latency, and error rates for any API. Alert on degradation.</li>
+<li><strong>SQL query analyzer:</strong> Connect to your database, get slow query reports with optimization suggestions.</li>
+<li><strong>Changelog as a Service:</strong> Auto-generate changelogs from git commits. Hosted changelog page for any product.</li>
+<li><strong>Code review checklist:</strong> Customizable pre-review checklists that integrate with GitHub/GitLab PRs.</li>
+<li><strong>Internal tool builder:</strong> Build admin panels from database schema. Lightweight Retool alternative.</li>
+<li><strong>Config validator:</strong> Validate YAML/JSON/TOML configs against schemas. CI-integrated. Prevent bad deploys.</li>
+</ol>
+
+<h2>Marketing & SEO</h2>
+<ol start="7">
+<li><strong>Backlink monitor:</strong> Track who links to you and when links go dead. Cheaper than Ahrefs for small sites.</li>
+<li><strong>SEO content brief generator:</strong> Input keyword → get content brief with headers, FAQs, and competitor analysis.</li>
+<li><strong>Social proof notifications:</strong> "X people are viewing this page" / "Y signed up today" widget.</li>
+<li><strong>Programmatic OG image generator:</strong> Auto-generate social cards from templates. API for blog platforms.</li>
+<li><strong>Email signature manager:</strong> Centralized email signatures for teams with tracking and A/B testing.</li>
+</ol>
+
+<h2>Finance & Business</h2>
+<ol start="12">
+<li><strong>SaaS P&L tracker:</strong> Connect Stripe, bank accounts. Auto-categorize. Weekly P&L report.</li>
+<li><strong>Client portal (white-label):</strong> Give freelancers a client portal for invoices, files, messages, and approvals.</li>
+<li><strong>Invoice factoring marketplace:</strong> Connect freelancers who need cash now with investors buying invoices.</li>
+<li><strong>Expense policy enforcer:</strong> Employees submit expenses → AI checks policy → auto-approve or flag.</li>
+<li><strong>Multi-currency invoicing:</strong> Invoice in any currency, auto-convert, handle exchange rate fluctuations.</li>
+</ol>
+
+<h2>Productivity & Collaboration</h2>
+<ol start="17">
+<li><strong>Meeting cost calculator:</strong> Jira/Linear integration. "This meeting cost $1,200 in engineering time."</li>
+<li><strong>Async standup tool:</strong> Slack bot collects standups → summarizes blockers → posts to channel.</li>
+<li><strong>Decision log:</strong> Document team decisions with context. Searchable. "Why did we choose Postgres over MySQL?"</li>
+<li><strong>Documentation freshness checker:</strong> Scan docs, flag pages not updated in 90+ days, suggest owners.</li>
+<li><strong>Knowledge base from Slack:</strong> AI extracts answers from Slack history → structured knowledge base.</li>
+</ol>
+
+<h2>Education & Learning</h2>
+<ol start="22">
+<li><strong>Interactive code tutorial builder:</strong> Build coding exercises with in-browser execution. Sell courses.</li>
+<li><strong>Flashcard SaaS for developers:</strong> Spaced repetition for coding interview prep, system design, language syntax.</li>
+<li><strong>Certification tracker:</strong> Track AWS/Azure/GCP certifications, renewal dates, CE credits.</li>
+<li><strong>Mentorship matching platform:</strong> Match junior devs with seniors. Paid mentorship sessions.</li>
+<li><strong>Code review practice:</strong> Get real PRs to review. Get scored on catching bugs, style issues, security flaws.</li>
+</ol>
+
+<h2>Niche Verticals (High Value)</h2>
+<ol start="27">
+<li><strong>Restaurant inventory manager:</strong> Small restaurants. Track ingredients, auto-order when low, reduce waste.</li>
+<li><strong>Real estate investor CRM:</strong> Track properties, offers, deals. Auto-calculate ROI, cap rate, cash flow.</li>
+<li><strong>Church management:</strong> Member directory, event planning, donation tracking. $50-200/mo.</li>
+<li><strong>Tattoo artist scheduling:</strong> Calendar + deposit management + design approval workflow.</li>
+<li><strong>Property maintenance tracker:</strong> Landlords and property managers. Track repairs, schedule contractors.</li>
+<li><strong>Dental lab case management:</strong> Dentists send cases to labs. Track status, shipping, invoices.</li>
+<li><strong>Veterinary clinic CRM:</strong> Patient records, appointment reminders, prescription refill requests.</li>
+<li><strong>Wedding venue booking system:</strong> Calendar, payments, menu selection, vendor coordination.</li>
+<li><strong>Martial arts school manager:</strong> Belt tracking, attendance, payment plans, belt test scheduling.</li>
+<li><strong>Brewery taproom POS:</strong> Lightweight POS for small breweries. Flight tracking, growler fills.</li>
+</ol>
+
+<h2>How to Validate an Idea</h2>
+<ol>
+<li><strong>Talk to 10 potential customers</strong> before writing code. "Would you pay for this? How much?"</li>
+<li><strong>Find existing competitors.</strong> Competition validates the market. "X exists but is slow/expensive/ugly" = opportunity.</li>
+<li><strong>Build a landing page first.</strong> Collect 50 email signups before building anything.</li>
+<li><strong>Price it from day one.</strong> Free users don't validate willingness to pay. Charge from launch.</li>
+<li><strong>Ship in 2-4 weeks, not 6 months.</strong> A micro-SaaS that ships beats a perfect one that doesn't.</li>
+</ol>
+
+<p><strong>Bottom line:</strong> The best micro-SaaS ideas are boring to most people but essential to a specific group. Find a niche where the existing software is old, expensive, or missing. Build something better. Charge money. Repeat. See also: <a href="/en/sidehustle/saas-bootstrapping-guide.html">SaaS Bootstrapping Guide</a> and <a href="/en/sidehustle/build-and-sell-api.html">Build and Sell APIs</a>.</p>
+'''
+
+BODIES['selling-code-templates'] = '''
+<p>Templates and UI kits are the digital products with the best effort-to-reward ratio for developers. Build once, sell to thousands. A single successful template can generate $50K-200K+ in lifetime revenue. Here's how to create and sell templates that developers actually buy.</p>
+
+<h2>What Types of Templates Sell</h2>
+<table>
+<tr><th>Category</th><th>Examples</th><th>Price Range</th><th>Revenue Potential</th></tr>
+<tr><td><strong>Next.js starters</strong></td><td>SaaS boilerplate, blog starter, auth + payments</td><td>$79-299</td><td>$50K-300K+</td></tr>
+<tr><td><strong>Tailwind UI kits</strong></td><td>Component libraries, page templates, dashboard UIs</td><td>$49-199</td><td>$30K-200K+</td></tr>
+<tr><td><strong>React component libraries</strong></td><td>Data grids, forms, date pickers, charts</td><td>$99-299</td><td>$20K-150K+</td></tr>
+<tr><td><strong>Landing page templates</strong></td><td>SaaS landing, agency landing, product page</td><td>$29-79</td><td>$10K-50K+</td></tr>
+<tr><td><strong>Full-stack kits</strong></td><td>T3 stack starter, Rails SaaS kit, Django boilerplate</td><td>$149-499</td><td>$100K-500K+</td></tr>
+<tr><td><strong>Notion templates</strong></td><td>Project management, startup OS, content calendar</td><td>$19-79</td><td>$5K-50K+</td></tr>
+</table>
+
+<h2>Real Examples (Revenue Numbers)</h2>
+<table>
+<tr><th>Product</th><th>Creator</th><th>Type</th><th>Est. Revenue</th></tr>
+<tr><td>ShipFast (Marc Lou)</td><td>Solo</td><td>Next.js SaaS boilerplate</td><td>$200K+/mo</td></tr>
+<tr><td>Tailwind UI</td><td>Tailwind Labs</td><td>Component library</td><td>$3M+/yr</td></tr>
+<tr><td>SyntaxUI</td><td>Solo dev</td><td>React + Tailwind components</td><td>$30K+/mo</td></tr>
+<tr><td>Gravity (Kyle Gawley)</td><td>Solo</td><td>SaaS boilerplate</td><td>$500K+ lifetime</td></tr>
+<tr><td>MakerKit</td><td>Solo</td><td>Next.js SaaS starter</td><td>$15K+/mo</td></tr>
+</table>
+
+<h2>How to Build a Template That Sells</h2>
+<h3>1. Solve a Real Time-Saver</h3>
+<p>The value proposition is simple: "I built all the boring parts so you can focus on your unique features." Every template must include: auth, payments (Stripe), database setup, email, admin dashboard, landing page, SEO, and deployment config. The more boilerplate you eliminate, the more it's worth.</p>
+
+<h3>2. Quality Requirements</h3>
+<ul>
+<li><strong>Clean, commented code</strong> — buyers need to understand and modify it</li>
+<li><strong>TypeScript all the way</strong> — in 2026, a JS-only template feels unprofessional</li>
+<li><strong>Tests included</strong> — shows quality and saves buyers from writing their own</li>
+<li><strong>Documentation that's actually good</strong> — setup in <5 minutes, video walkthrough, architecture decisions explained</li>
+<li><strong>Regular updates</strong> — dependencies updated monthly, new features added quarterly</li>
+</ul>
+
+<h3>3. Where to Sell</h3>
+<table>
+<tr><th>Platform</th><th>Fee</th><th>Best For</th></tr>
+<tr><td><strong>Gumroad</strong></td><td>10%</td><td>Easiest to start. Handles payments, delivery, affiliates.</td></tr>
+<tr><td><strong>Lemon Squeezy</strong></td><td>5% + 50¢</td><td>Better fee structure. Email marketing built in.</td></tr>
+<tr><td><strong>Your own site</strong></td><td>0% + Stripe 2.9%</td><td>Maximum profit. More work (marketing, delivery).</td></tr>
+<tr><td><strong>Product Hunt</strong></td><td>0%</td><td>Launch platform, not a store. Huge visibility if you hit #1.</td></tr>
+</table>
+
+<h2>Marketing Playbook</h2>
+<ol>
+<li><strong>Build in public on Twitter/X:</strong> Share progress, revenue, lessons. Your audience is your launch audience.</li>
+<li><strong>Launch on Product Hunt.</strong> A top-5 launch can generate 500+ sales in the first week.</li>
+<li><strong>Write tutorials using your template:</strong> "Build a SaaS in a weekend with [Your Template]." The tutorial markets the template.</li>
+<li><strong>Reddit & Dev.to:</strong> Share the tutorial (not the product). Value first, sales second.</li>
+<li><strong>Affiliate program:</strong> 30% commission. Let others sell for you. Gumroad/Lemon Squeezy handle this.</li>
+<li><strong>Email list:</strong> Collect emails with a free mini-template. Sell the full version to your list.</li>
+</ol>
+
+<p><strong>Bottom line:</strong> Templates are the best digital product for developers — you build them with skills you already have. The key is solving real boilerplate pain. Charge more than you think ($99-299 not $19-49). Update regularly to justify the price. See also: <a href="/en/sidehustle/sell-digital-products.html">Selling Digital Products</a> and <a href="/en/sidehustle/micro-saas-ideas-2026.html">Micro-SaaS Ideas</a>.</p>
+'''
+
 # FAQ data for FAQPage schema (slug → list of q/a dicts)
 FAQS = {
     'chatgpt-plus-worth': [
