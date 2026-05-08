@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="ai-api-integration-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="AI API Integration Guide: OpenAI, Anthropic, and Google AI for Developers">
+    <meta property="og:description" content="Practical guide to integrating AI APIs into your apps. Streaming responses, function calling, embeddings, rate limits, and cost optimization across the big 3 providers.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/ai-api-integration-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI API Integration Guide: OpenAI, Anthropic, and Google AI for Developers">
+    <meta name="twitter:description" content="Practical guide to integrating AI APIs into your apps. Streaming responses, function calling, embeddings, rate limits, and cost optimization across the big 3 providers.">
+    <title>AI API Integration Guide: OpenAI, Anthropic, and Google AI for Developers — SourceHub</title>
+    <meta name="description" content="Practical guide to integrating AI APIs into your apps. Streaming responses, function calling, embeddings, rate limits, and cost optimization across the big 3 providers.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/ai/ai-api-integration-guide.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/ai-api-integration-guide.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "AI API Integration Guide: OpenAI, Anthropic, and Google AI for Developers",
+      "description": "Practical guide to integrating AI APIs into your apps. Streaming responses, function calling, embeddings, rate limits, and cost optimization across the big 3 providers.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "AI API Integration Guide: OpenAI, Anthropic, and Google AI for Developers"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › AI API Integration Guide: OpenAI, Anthropic, and Google AI for Developers
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">AI API</span>
+        <span class="tag-cat">OpenAI</span>
+        <span class="tag-cat">Anthropic</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">AI API Integration Guide: OpenAI, Anthropic, and Google AI for Developers</h1>
+      <div class="article-meta">Published 2026-05-08 · 3720 views · 31 replies</div>
+      <div class="article-body"><p>Adding AI to your app means calling an API. OpenAI, Anthropic, and Google AI each have different SDKs, pricing models, and capabilities. Here's the practical integration guide covering the patterns you'll actually use: streaming, function calling, embeddings, and cost optimization.</p>
+
+<h2>The Big Three AI APIs</h2>
+<table>
+<tr><th></th><th>OpenAI</th><th>Anthropic</th><th>Google AI</th></tr>
+<tr><td><strong>Models</strong></td><td>GPT-4o, GPT-4.1, o4-mini</td><td>Claude Opus 4, Sonnet 4, Haiku 4</td><td>Gemini 2.5 Pro, Flash</td></tr>
+<tr><td><strong>Max context</strong></td><td>128K tokens</td><td>200K tokens</td><td>1M tokens</td></tr>
+<tr><td><strong>SDK</strong></td><td>openai (Node/Python)</td><td>@anthropic-ai/sdk</td><td>@google/generative-ai</td></tr>
+<tr><td><strong>Pricing model</strong></td><td>Per 1K tokens (in+out)</td><td>Per 1M tokens (in+out)</td><td>Per 1M chars (in+out)</td></tr>
+<tr><td><strong>Image input</strong></td><td>Yes (GPT-4o)</td><td>Yes</td><td>Yes</td></tr>
+<tr><td><strong>Image output</strong></td><td>Yes (DALL-E)</td><td>No</td><td>Yes (Imagen)</td></tr>
+<tr><td><strong>Streaming</strong></td><td>Yes (SSE)</td><td>Yes (SSE + streaming text)</td><td>Yes</td></tr>
+</table>
+
+<h2>1. Streaming Responses</h2>
+<p>Streaming shows tokens as they're generated — critical for good UX. All three APIs support it:</p>
+<pre><code>// Anthropic streaming example
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
+const stream = client.messages.stream({
+  model: "claude-sonnet-4-20250514",
+  max_tokens: 4096,
+  messages: [{ role: "user", content: "Write a function to..." }],
+});
+
+stream.on("text", (text) => {
+  process.stdout.write(text);  // Show tokens as they arrive
+});
+
+const finalMessage = await stream.finalMessage();</code></pre>
+
+<h2>2. Function Calling (Tool Use)</h2>
+<p>Function calling lets the AI call your APIs. Define the tools, and the AI decides when to use them:</p>
+<pre><code>// Define a tool
+const tools = [{
+  name: "search_database",
+  description: "Search the product database",
+  input_schema: {
+    type: "object",
+    properties: {
+      query: { type: "string", description: "Search query" },
+      category: { type: "string", enum: ["electronics", "books", "clothing"] }
+    },
+    required: ["query"]
+  }
+}];
+
+// The AI can now call search_database() when needed
+// Your code executes the function and sends the result back</code></pre>
+
+<h2>3. Embeddings for Semantic Search</h2>
+<p>Embeddings convert text into vectors for semantic search. OpenAI and Google both offer embedding APIs:</p>
+<pre><code>// OpenAI embeddings
+const embedding = await openai.embeddings.create({
+  model: "text-embedding-3-small",  // $0.02/1M tokens — cheapest
+  input: "How to deploy Next.js to Vercel",
+});
+
+// Store in vector DB (pgvector, Pinecone, Chroma)
+// Query: find similar docs by cosine similarity</code></pre>
+
+<h2>4. Cost Optimization Strategies</h2>
+<table>
+<tr><th>Strategy</th><th>Savings</th><th>How</th></tr>
+<tr><td><strong>Model routing</strong></td><td>50-80%</td><td>Route simple tasks to Haiku/Flash, complex to Sonnet/Pro</td></tr>
+<tr><td><strong>Caching</strong></td><td>50-90%</td><td>Cache common responses. Anthropic has built-in prompt caching.</td></tr>
+<tr><td><strong>Shorter prompts</strong></td><td>20-40%</td><td>System prompts are charged per request. Keep them tight.</td></tr>
+<tr><td><strong>Batch processing</strong></td><td>50%</td><td>OpenAI batch API is 50% cheaper (24h turnaround).</td></tr>
+<tr><td><strong>Token limits</strong></td><td>Variable</td><td>Set max_tokens to prevent runaway costs.</td></tr>
+<tr><td><strong>Self-host small models</strong></td><td>90%+</td><td>Use local models for classification/summarization tasks.</td></tr>
+</table>
+
+<h2>5. Error Handling Pattern</h2>
+<pre><code>async function callAI(prompt: string): Promise&lt;string&gt; {
+  const maxRetries = 3;
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      const response = await client.messages.create({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 4096,
+        messages: [{ role: "user", content: prompt }],
+      });
+      return response.content[0].text;
+    } catch (error) {
+      if (error.status === 429) {  // Rate limited
+        await sleep(Math.pow(2, i) * 1000);  // Exponential backoff
+        continue;
+      }
+      if (error.status === 400) throw error;  // Bad request — don't retry
+      throw error;
+    }
+  }
+}</code></pre>
+
+<p><strong>Bottom line:</strong> Use streaming for any user-facing feature. Use function calling to extend the AI with your own data. Cache aggressively. Route simple queries to cheaper models. See also: <a href="/en/ai/prompt-engineering.html">Prompt Engineering</a> and <a href="/en/ai/best-llms-for-coding-2026.html">Best LLMs for Coding</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/prompt-engineering.html" class="related-card">Prompt Engineering: From Beginner to Expert</a><a href="/en/ai/ai-coding.html" class="related-card">AI-Assisted Programming: From Zero to 10x Productivity</a><a href="/en/ai/midjourney-prompts.html" class="related-card">Midjourney Prompt Guide: From Basics to Pro-Level Images</a><a href="/en/ai/perplexity-guide.html" class="related-card">Perplexity Deep Dive: A Smarter Way to Search Than Google</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

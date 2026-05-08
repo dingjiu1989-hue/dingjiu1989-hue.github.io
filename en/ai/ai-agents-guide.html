@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="ai-agents-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="AI Agents for Developers: A Practical Guide to Building and Using Agents">
+    <meta property="og:description" content="What AI agents actually are, how they work (tools, memory, planning loops), and frameworks to build them — LangChain, CrewAI, and AutoGPT compared.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/ai-agents-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Agents for Developers: A Practical Guide to Building and Using Agents">
+    <meta name="twitter:description" content="What AI agents actually are, how they work (tools, memory, planning loops), and frameworks to build them — LangChain, CrewAI, and AutoGPT compared.">
+    <title>AI Agents for Developers: A Practical Guide to Building and Using Agents — SourceHub</title>
+    <meta name="description" content="What AI agents actually are, how they work (tools, memory, planning loops), and frameworks to build them — LangChain, CrewAI, and AutoGPT compared.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/ai/ai-agents-guide.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/ai-agents-guide.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "AI Agents for Developers: A Practical Guide to Building and Using Agents",
+      "description": "What AI agents actually are, how they work (tools, memory, planning loops), and frameworks to build them — LangChain, CrewAI, and AutoGPT compared.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "AI Agents for Developers: A Practical Guide to Building and Using Agents"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › AI Agents for Developers: A Practical Guide to Building and Using Agents
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">AI Agents</span>
+        <span class="tag-cat">LangChain</span>
+        <span class="tag-cat">Automation</span>
+        <span class="tag-cat">Tutorial</span></div>
+      <h1 class="article-title">AI Agents for Developers: A Practical Guide to Building and Using Agents</h1>
+      <div class="article-meta">Published 2026-05-08 · 5040 views · 42 replies</div>
+      <div class="article-body"><p>AI agents are the next evolution beyond simple chat — they can plan, use tools, remember context, and execute multi-step tasks autonomously. Here's what they actually are, how they work, and which frameworks to use.</p>
+
+<h2>What Is an AI Agent?</h2>
+<p>An AI agent is an LLM with a control loop: think → act → observe → repeat. Unlike a chatbot that responds once, an agent can use tools (APIs, file system, web search), maintain memory, plan multi-step tasks, and self-correct when things go wrong.</p>
+<pre><code>// Simple agent loop pseudocode:
+while (task_not_done) {
+  thought = llm.think(context, tools, memory);
+  action = choose_action(thought);  // call a tool or respond
+  observation = execute(action);    // API call, file read, web search
+  memory.add(thought, action, observation);  // learn from results
+}</code></pre>
+
+<h2>Agent Frameworks Compared</h2>
+<table>
+<tr><th></th><th>LangChain</th><th>CrewAI</th><th>AutoGPT</th><th>Custom (SDK-native)</th></tr>
+<tr><td><strong>Type</strong></td><td>Comprehensive framework</td><td>Multi-agent orchestration</td><td>Autonomous agent platform</td><td>Build your own</td></tr>
+<tr><td><strong>Best for</strong></td><td>Complex RAG + tool-calling pipelines</td><td>Multi-agent teams (specialist agents collaborating)</td><td>Long-running autonomous tasks</td><td>Simple, controllable agents</td></tr>
+<tr><td><strong>Complexity</strong></td><td>High</td><td>Moderate</td><td>Moderate</td><td>Low (but you write more)</td></tr>
+<tr><td><strong>Flexibility</strong></td><td>Very high</td><td>Moderate (opinionated)</td><td>Low (opinionated)</td><td>Maximum</td></tr>
+<tr><td><strong>Lock-in risk</strong></td><td>High</td><td>Moderate</td><td>High</td><td>None</td></tr>
+</table>
+
+<h2>LangChain — The Swiss Army Knife</h2>
+<p>LangChain is the most comprehensive agent framework. It has pre-built components for everything: RAG, memory, tools, streaming, evaluation. The downside is complexity — simple things can require understanding many abstractions.</p>
+<p><strong>Best for:</strong> Production RAG systems, complex multi-step agent pipelines, teams that need every feature. <strong>Avoid for:</strong> Simple chatbots or single-tool agents (SDK is simpler).</p>
+
+<h2>CrewAI — Multi-Agent Orchestration</h2>
+<p>CrewAI lets you define multiple agents with different roles, tools, and goals, then have them collaborate on a task. One agent researches, another writes code, a third reviews — all autonomously. Think of it as a team of AI specialists working for you.</p>
+<p><strong>Best for:</strong> Complex projects that benefit from specialization (research → draft → code → review), developer teams that want to orchestrate AI workers.</p>
+
+<h2>Custom Agent (SDK-native) — For Most Use Cases</h2>
+<p>For most developer needs, a simple agent loop using the OpenAI or Anthropic SDK directly is clearer and more maintainable than a framework:</p>
+<pre><code>import anthropic
+
+def agent(task, tools):
+    messages = [{"role": "user", "content": task}]
+    while True:
+        response = anthropic.messages.create(
+            model="claude-sonnet-4-20250514",
+            max_tokens=4096,
+            tools=tools,
+            messages=messages
+        )
+        if response.stop_reason == "end_turn":
+            return response.content[0].text
+        # Execute tool call and continue loop
+        tool_result = execute_tool(response.content[-1])
+        messages.append({"role": "user", "content": [
+            {"type": "tool_result", "tool_use_id": response.content[-1].id, "content": tool_result}
+        ]})</code></pre>
+
+<h2>Agent Use Cases for Developers</h2>
+<table>
+<tr><th>Use Case</th><th>Best Approach</th></tr>
+<tr><td>Code review bot (PR → review comments)</td><td>Custom agent + GitHub API</td></tr>
+<tr><td>Documentation generator (codebase → docs)</td><td>Custom agent + file system tools</td></tr>
+<tr><td>Research assistant (question → web search → summary)</td><td>LangChain with Tavily + web tools</td></tr>
+<tr><td>Multi-agent development team</td><td>CrewAI</td></tr>
+<tr><td>Customer support bot (knowledge base + tickets)</td><td>LangChain RAG + tools</td></tr>
+<tr><td>Bug triage (error logs → root cause → fix)</td><td>Custom agent + Sentry/GitHub APIs</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Start with a custom agent loop using the SDK directly — it's 50 lines of code and you understand everything. Add LangChain only when you need RAG, complex memory, or 5+ tool types. CrewAI for multi-agent orchestration. The agent hype is real, but the simplest approach usually works best. See also: <a href="/en/ai/ai-api-integration-guide.html">AI API Integration Guide</a> and <a href="/en/ai/prompt-engineering.html">Prompt Engineering Guide</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/prompt-engineering.html" class="related-card">Prompt Engineering: From Beginner to Expert</a><a href="/en/ai/ai-coding.html" class="related-card">AI-Assisted Programming: From Zero to 10x Productivity</a><a href="/en/ai/midjourney-prompts.html" class="related-card">Midjourney Prompt Guide: From Basics to Pro-Level Images</a><a href="/en/ai/perplexity-guide.html" class="related-card">Perplexity Deep Dive: A Smarter Way to Search Than Google</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

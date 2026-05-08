@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="cursor-advanced-tips">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Cursor Advanced Tips: 15 Power User Techniques to 10x Your AI Coding">
+    <meta property="og:description" content="Beyond basic autocomplete — Composer strategies, custom instructions, context management, keyboard shortcuts, and workflow patterns that make Cursor a superpower.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/cursor-advanced-tips.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cursor Advanced Tips: 15 Power User Techniques to 10x Your AI Coding">
+    <meta name="twitter:description" content="Beyond basic autocomplete — Composer strategies, custom instructions, context management, keyboard shortcuts, and workflow patterns that make Cursor a superpower.">
+    <title>Cursor Advanced Tips: 15 Power User Techniques to 10x Your AI Coding — SourceHub</title>
+    <meta name="description" content="Beyond basic autocomplete — Composer strategies, custom instructions, context management, keyboard shortcuts, and workflow patterns that make Cursor a superpower.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/ai/cursor-advanced-tips.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/cursor-advanced-tips.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Cursor Advanced Tips: 15 Power User Techniques to 10x Your AI Coding",
+      "description": "Beyond basic autocomplete — Composer strategies, custom instructions, context management, keyboard shortcuts, and workflow patterns that make Cursor a superpower.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "Cursor Advanced Tips: 15 Power User Techniques to 10x Your AI Coding"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › Cursor Advanced Tips: 15 Power User Techniques to 10x Your AI Coding
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Cursor</span>
+        <span class="tag-cat">AI Coding</span>
+        <span class="tag-cat">Editor</span>
+        <span class="tag-cat">Productivity</span></div>
+      <h1 class="article-title">Cursor Advanced Tips: 15 Power User Techniques to 10x Your AI Coding</h1>
+      <div class="article-meta">Published 2026-05-08 · 5400 views · 45 replies</div>
+      <div class="article-body"><p>Most Cursor users barely scratch the surface — they use Tab autocomplete and occasionally Cmd+K. But Cursor's power features can genuinely 10x your output if you know how to use them. Here are 15 advanced techniques that separate casual users from power users.</p>
+
+<h2>1. Composer Mastery</h2>
+<p>Composer (Cmd+I) is Cursor's killer feature — but most developers underutilize it.</p>
+<pre><code>// Instead of "add a login form", give Composer full context:
+"Add a login form with:
+- Email + password fields with validation
+- 'Remember me' checkbox
+- Loading state while submitting
+- Error display for invalid credentials
+- Successful login → redirect to /dashboard
+- Use the existing useAuth hook and shadcn/ui Form component
+- Add a test file with happy path + error case"</code></pre>
+<p><strong>Pro tip:</strong> Use <code>@Files</code> to drag in specific files for context. Use <code>@Folders</code> to include entire directories. The more specific context you provide, the better the output.</p>
+
+<h2>2. Custom Instructions That Actually Work</h2>
+<p>Cursor Settings → Rules for AI → add custom instructions. But the default template is weak. Use this instead:</p>
+<pre><code>You are an expert TypeScript developer working in a Next.js + Tailwind codebase.
+- Write concise, idiomatic code. No unnecessary comments.
+- Prefer server components. Only use 'use client' when necessary.
+- Use shadcn/ui components. Don't reinvent UI primitives.
+- Handle loading, empty, and error states for every async operation.
+- Write tests alongside components (co-located __tests__ folder).
+- Format: single quotes, trailing commas, 2-space indent.
+- Never use any() — always type properly.
+- When refactoring, check for existing usages first.</code></pre>
+
+<h2>3. Agent Mode for Multi-File Tasks</h2>
+<p>Cursor Agent (Cmd+Shift+I) can read your codebase, run terminal commands, and edit multiple files. Unlike regular Composer, it can iterate — run the build, see errors, fix them, run again. Use it for:</p>
+<ul>
+<li>Migrating from Pages Router to App Router</li>
+<li>Adding a new feature that touches 5+ files</li>
+<li>Upgrading dependencies and fixing breaking changes</li>
+<li>Setting up CI/CD or configuration files</li>
+</ul>
+
+<h2>4. Keyboard Shortcuts That Save Hours</h2>
+<table>
+<tr><th>Shortcut</th><th>Action</th><th>When to Use</th></tr>
+<tr><td>Cmd+I</td><td>Inline Composer</td><td>Edit selected code or generate new code</td></tr>
+<tr><td>Cmd+Shift+I</td><td>Agent Mode</td><td>Multi-file tasks, terminal access</td></tr>
+<tr><td>Cmd+K</td><td>Quick Edit</td><td>Single-line changes, "rename this", "add error handling"</td></tr>
+<tr><td>Cmd+L</td><td>Chat</td><td>Questions about codebase, "how does X work?"</td></tr>
+<tr><td>Cmd+Shift+Enter</td><td>Apply chat changes</td><td>After chat generates code, apply to file</td></tr>
+<tr><td>Ctrl+Enter (in Composer)</td><td>Accept all changes</td><td>Approve multi-file edits</td></tr>
+</table>
+
+<h2>5. Context Management — The Real Superpower</h2>
+<table>
+<tr><th>Technique</th><th>How</th><th>Why</th></tr>
+<tr><td>@Files</td><td>Drag files into Composer</td><td>Pin specific files as context</td></tr>
+<tr><td>@Folders</td><td>Include whole directories</td><td>Give access to related code</td></tr>
+<tr><td>@Codebase</td><td>Semantic search entire repo</td><td>Find relevant code automatically</td></tr>
+<tr><td>@Web</td><td>Search web for docs/examples</td><td>Pull in latest API docs</td></tr>
+<tr><td>@Docs</td><td>Index documentation sites</td><td>Add Next.js, Tailwind, or any lib's docs</td></tr>
+<tr><td>.cursorrules</td><td>Project-level instructions</td><td>Enforce conventions across team</td></tr>
+</table>
+
+<h2>6. Pair Programming Patterns</h2>
+<ul>
+<li><strong>Draft → Review → Refine:</strong> Let Cursor draft a feature, review every line, ask for refinements. Always review.</li>
+<li><strong>"What would break?":</strong> After a change, ask Cursor to check for edge cases and regressions.</li>
+<li><strong>Explain first, code second:</strong> "Explain the approach before writing code" prevents hasty, wrong implementation.</li>
+<li><strong>Write the test first:</strong> "Write a failing test for X, then implement it." The best guardrail.</li>
+<li><strong>Tab autocomplete is for flow, Composer is for features.</strong> Don't use Composer for single lines; don't use Tab for architecture.</li>
+</ul>
+
+<h2>Quick Wins Checklist</h2>
+<ol>
+<li>Set up <code>.cursorrules</code> with your tech stack and conventions.</li>
+<li>Learn Cmd+I (Composer) and Cmd+K (Quick Edit) by heart.</li>
+<li>Use @Files and @Folders — never prompt without context.</li>
+<li>After every AI-generated change, ask: "Check this for edge cases."</li>
+<li>Write custom instructions specific to your codebase.</li>
+<li>Use Agent mode for tasks touching 5+ files.</li>
+</ol>
+
+<p><strong>Bottom line:</strong> The difference between casual and power Cursor users is context. Power users give rich, specific context with @Files, @Docs, and detailed instructions. Casual users type one-liners and wonder why the output is generic. See also: <a href="/en/compare/cursor-vs-copilot-vs-claude-code.html">Cursor vs Copilot vs Claude Code</a> and <a href="/en/ai/ai-coding.html">AI-Assisted Programming Guide</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/prompt-engineering.html" class="related-card">Prompt Engineering: From Beginner to Expert</a><a href="/en/ai/ai-coding.html" class="related-card">AI-Assisted Programming: From Zero to 10x Productivity</a><a href="/en/ai/midjourney-prompts.html" class="related-card">Midjourney Prompt Guide: From Basics to Pro-Level Images</a><a href="/en/ai/perplexity-guide.html" class="related-card">Perplexity Deep Dive: A Smarter Way to Search Than Google</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

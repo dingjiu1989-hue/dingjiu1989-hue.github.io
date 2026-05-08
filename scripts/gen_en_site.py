@@ -3399,6 +3399,426 @@ app.get("/metrics", async (req, res) => {
 <p><strong>Bottom line:</strong> Learn CI/CD and Docker first — they're universally useful. Add Terraform when your infra has 5+ resources. Add K8s only when you have 10+ containers and need orchestration. The best operations is the one you don't have to think about. See also: <a href="/en/tools/best-cicd-tools-2026.html">CI/CD tools comparison</a> and <a href="/en/compare/docker-vs-podman.html">Docker vs Podman</a>.</p>
 '''
 
+BODIES['best-llms-for-coding-2026'] = '''
+<p>Not all LLMs are equally good at coding. Claude, GPT-4o, Gemini, DeepSeek, and CodeLlama each have different strengths for code generation, debugging, and code review. Here's the developer-focused comparison for 2026.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Claude 4.5 Sonnet</th><th>GPT-4o</th><th>Gemini 2.5 Pro</th><th>DeepSeek V3</th><th>CodeLlama 70B</th></tr>
+<tr><td><strong>Best for</strong></td><td>Complex refactoring, code review</td><td>Data-heavy coding, rapid prototyping</td><td>Multi-file projects, long context</td><td>Budget coding, self-hosting</td><td>Self-hosted, privacy-sensitive</td></tr>
+<tr><td><strong>Context window</strong></td><td>200K tokens</td><td>128K tokens</td><td>1M tokens</td><td>128K tokens</td><td>100K tokens</td></tr>
+<tr><td><strong>Code quality</strong></td><td>Excellent (clean, idiomatic)</td><td>Excellent (pragmatic)</td><td>Very good</td><td>Very good (surprisingly)</td><td>Good (mixed per language)</td></tr>
+<tr><td><strong>Debugging</strong></td><td>Best-in-class</td><td>Excellent</td><td>Good</td><td>Good</td><td>Moderate</td></tr>
+<tr><td><strong>Refactoring</strong></td><td>Best (200K context = full codebase)</td><td>Good (limited by context)</td><td>Excellent (1M context)</td><td>Good</td><td>Moderate</td></tr>
+<tr><td><strong>Cost</strong></td><td>$20/mo (Pro)</td><td>$20/mo (Plus)</td><td>$20/mo (Advanced)</td><td>Free / $0.50/M tokens</td><td>Free (self-hosted)</td></tr>
+<tr><td><strong>Speed</strong></td><td>Fast</td><td>Very fast</td><td>Very fast</td><td>Fast</td><td>Depends on hardware</td></tr>
+<tr><td><strong>Open source</strong></td><td>No</td><td>No</td><td>No</td><td>Yes (weights)</td><td>Yes</td></tr>
+</table>
+
+<h2>Claude 4.5 Sonnet — Complex Codebase Master</h2>
+<p>Claude excels at large-scale codebase understanding. Its 200K context window means it can read your entire project and make changes across dozens of files. For refactoring, code review, and architecture work, it has a clear edge. The code it generates is clean, idiomatic, and well-explained.</p>
+<p><strong>Best for:</strong> Complex refactoring, code review, understanding large codebases, writing tests, debugging hard bugs, working with existing code.</p>
+<p><strong>Weak spot:</strong> No image generation or web search. Slower on simple one-liners than Copilot completions.</p>
+
+<h2>GPT-4o — Fastest, Most Versatile</h2>
+<p>GPT-4o is the fastest major LLM and integrates with the widest range of tools: Code Interpreter for data, web browsing, image generation, and GPTs. For data science coding, rapid prototyping, and developers who want one tool for everything, GPT-4o is the default.</p>
+<p><strong>Best for:</strong> Data-heavy coding (Code Interpreter), rapid prototyping, image generation alongside code, web-connected tasks.</p>
+<p><strong>Weak spot:</strong> 128K context is less than Claude (200K) and Gemini (1M). Can be verbose in code generation.</p>
+
+<h2>Gemini 2.5 Pro — The Context King</h2>
+<p>Gemini 2.5 Pro's 1M token context window can fit entire codebases with room to spare. It's excellent for multi-file projects and big-picture architecture questions. Google's AI Studio provides a generous free tier for experimentation.</p>
+<p><strong>Best for:</strong> Massive codebases (1M context), Google Cloud integration, free experimentation in AI Studio.</p>
+<p><strong>Weak spot:</strong> Code quality slightly behind Claude and GPT-4o. Smaller developer community and fewer examples online.</p>
+
+<h2>DeepSeek V3 — Open Model, Closed Quality</h2>
+<p>DeepSeek V3 shocked the industry: an open-weight model that competes with GPT-4o in coding benchmarks at a fraction of the cost. The API is dramatically cheaper than OpenAI or Anthropic. For budget-conscious projects that still need quality, it's compelling.</p>
+<p><strong>Best for:</strong> Budget coding, self-hosting, projects that need open weights, cost-sensitive applications.</p>
+<p><strong>Weak spot:</strong> Chinese company (data privacy considerations), smaller ecosystem, fewer integrations.</p>
+
+<h2>CodeLlama 70B — Privacy-First, Self-Hosted</h2>
+<p>CodeLlama is Meta's open-source code-specialized model. It runs on your own hardware (consumer GPU with quantization). For privacy-sensitive work — proprietary code, financial systems, healthcare — where code must never leave your machine, it's the only option.</p>
+<p><strong>Best for:</strong> Privacy-sensitive coding, air-gapped environments, fine-tuning on proprietary codebases.</p>
+<p><strong>Weak spot:</strong> Lower quality than API models, requires GPU hardware, no chat-based debugging loop.</p>
+
+<h2>Decision Matrix for Developers</h2>
+<table>
+<tr><th>Scenario</th><th>Best LLM</th></tr>
+<tr><td>Daily coding, maximum capability</td><td><strong>Claude 4.5 Sonnet</strong></td></tr>
+<tr><td>Data science, rapid prototyping</td><td><strong>GPT-4o + Code Interpreter</strong></td></tr>
+<tr><td>Massive codebase (100K+ lines)</td><td><strong>Gemini 2.5 Pro</strong> (1M ctx) or <strong>Claude</strong> (200K ctx)</td></tr>
+<tr><td>Budget-sensitive, self-hosted</td><td><strong>DeepSeek V3</strong></td></tr>
+<tr><td>Privacy/air-gapped environment</td><td><strong>CodeLlama 70B</strong></td></tr>
+<tr><td>Best value ($0)</td><td><strong>Claude Free + Copilot Free</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Claude 4.5 Sonnet is the best all-around coding LLM in 2026. GPT-4o for data-heavy work. Gemini for massive context. The free tier combo (Claude Free + Copilot Free) handles 90% of developer needs. See also: <a href="/en/ai/ai-coding.html">AI-Assisted Programming Guide</a> and <a href="/en/compare/cursor-vs-copilot-vs-claude-code.html">AI coding tools comparison</a>.</p>
+'''
+
+BODIES['run-local-ai-models'] = '''
+<p>Running AI models on your own machine means privacy, zero cost after setup, and offline access. With tools like Ollama, LM Studio, and llama.cpp, it's surprisingly easy. Here's how to get started and which models to run.</p>
+
+<h2>Why Run AI Locally?</h2>
+<table>
+<tr><th>Reason</th><th>Detail</th></tr>
+<tr><td><strong>Privacy</strong></td><td>Code/data never leaves your machine. Essential for proprietary work.</td></tr>
+<tr><td><strong>Cost</strong></td><td>Free after hardware. No API bills. No $20/mo subscription.</td></tr>
+<tr><td><strong>Offline</strong></td><td>Work on a plane, in a coffee shop, or during API outages.</td></tr>
+<tr><td><strong>No limits</strong></td><td>No rate limiting, no message caps, no content filters.</td></tr>
+<tr><td><strong>Experimentation</strong></td><td>Try different models, fine-tune, experiment without paying per token.</td></tr>
+</table>
+
+<h2>The Three Tools Compared</h2>
+<table>
+<tr><th></th><th>Ollama</th><th>LM Studio</th><th>llama.cpp</th></tr>
+<tr><td><strong>Type</strong></td><td>CLI + REST API</td><td>Desktop GUI</td><td>C++ library + CLI</td></tr>
+<tr><td><strong>Best for</strong></td><td>Developers, automation</td><td>Non-technical users, chat</td><td>Maximum performance, servers</td></tr>
+<tr><td><strong>Setup</strong></td><td>One command: brew install ollama</td><td>Download DMG, install</td><td>Compile or brew install</td></tr>
+<tr><td><strong>Model library</strong></td><td>Built-in (ollama pull)</td><td>HuggingFace integration</td><td>GGUF files from HuggingFace</td></tr>
+<tr><td><strong>API</strong></td><td>OpenAI-compatible REST</td><td>Local OpenAI-compatible</td><td>Server mode available</td></tr>
+<tr><td><strong>GPU support</strong></td><td>Automatic (Metal/CUDA)</td><td>Automatic (Metal/CUDA)</td><td>Manual config</td></tr>
+</table>
+
+<h2>Getting Started with Ollama (Recommended for Developers)</h2>
+<pre><code># 1. Install
+brew install ollama          # macOS
+# Linux: curl -fsSL https://ollama.com/install.sh | sh
+
+# 2. Pull and run a model
+ollama pull llama3.3:70b     # Meta's latest (70B parameters)
+ollama pull deepseek-coder-v2  # Best coding model
+ollama pull phi-4            # Microsoft's small but mighty model
+
+# 3. Chat in terminal
+ollama run deepseek-coder-v2
+
+# 4. Use as API (OpenAI-compatible)
+# POST http://localhost:11434/v1/chat/completions</code></pre>
+
+<h2>Recommended Models for Coding</h2>
+<table>
+<tr><th>Model</th><th>Size</th><th>RAM Needed</th><th>Best For</th></tr>
+<tr><td><strong>DeepSeek Coder V2</strong></td><td>16B</td><td>16GB</td><td>Best coding quality for size. Runs on most laptops.</td></tr>
+<tr><td><strong>Llama 3.3 70B</strong></td><td>70B</td><td>48GB (q4: 40GB)</td><td>Best overall quality. Needs a powerful machine.</td></tr>
+<tr><td><strong>CodeLlama 70B</strong></td><td>70B</td><td>48GB (q4: 40GB)</td><td>Code-specialized. Good for autocomplete.</td></tr>
+<tr><td><strong>Phi-4</strong></td><td>14B</td><td>16GB</td><td>Best small model. Runs on any M-series Mac.</td></tr>
+<tr><td><strong>CodeQwen 2.5</strong></td><td>7B</td><td>8GB</td><td>Fastest. Runs on older hardware. Good for simple tasks.</td></tr>
+</table>
+
+<h2>Hardware Requirements</h2>
+<table>
+<tr><th>Machine</th><th>What You Can Run</th></tr>
+<tr><td>M1/M2/M3 Mac (16GB)</td><td>7B-16B models comfortably. 34B with some swap.</td></tr>
+<tr><td>M3 Max Mac (48GB+)</td><td>70B models with q4 quantization. All coding models.</td></tr>
+<tr><td>PC with RTX 4090 (24GB)</td><td>7B-34B models in VRAM. 70B split across GPU+RAM.</td></tr>
+<tr><td>PC with RTX 3060 (12GB)</td><td>7B-13B models in VRAM.</td></tr>
+</table>
+
+<h2>When NOT to Use Local Models</h2>
+<ul>
+<li>You need the absolute best code quality (API models are still ahead).</li>
+<li>You need image generation (local diffusion models are a different setup).</li>
+<li>You need web search or real-time data.</li>
+<li>You're on a low-RAM machine and can afford API costs.</li>
+</ul>
+
+<p><strong>Bottom line:</strong> Ollama + DeepSeek Coder V2 gives you excellent local coding on any M-series Mac. For maximum quality, use API models (Claude/GPT-4o). For privacy, off-grid, or cost reasons, local models are now genuinely useful for daily development. See also: <a href="/en/ai/best-llms-for-coding-2026.html">Best LLMs for Coding comparison</a> and <a href="/en/ai/ai-coding.html">AI-Assisted Programming Guide</a>.</p>
+'''
+
+BODIES['ai-agents-guide'] = '''
+<p>AI agents are the next evolution beyond simple chat — they can plan, use tools, remember context, and execute multi-step tasks autonomously. Here's what they actually are, how they work, and which frameworks to use.</p>
+
+<h2>What Is an AI Agent?</h2>
+<p>An AI agent is an LLM with a control loop: think → act → observe → repeat. Unlike a chatbot that responds once, an agent can use tools (APIs, file system, web search), maintain memory, plan multi-step tasks, and self-correct when things go wrong.</p>
+<pre><code>// Simple agent loop pseudocode:
+while (task_not_done) {
+  thought = llm.think(context, tools, memory);
+  action = choose_action(thought);  // call a tool or respond
+  observation = execute(action);    // API call, file read, web search
+  memory.add(thought, action, observation);  // learn from results
+}</code></pre>
+
+<h2>Agent Frameworks Compared</h2>
+<table>
+<tr><th></th><th>LangChain</th><th>CrewAI</th><th>AutoGPT</th><th>Custom (SDK-native)</th></tr>
+<tr><td><strong>Type</strong></td><td>Comprehensive framework</td><td>Multi-agent orchestration</td><td>Autonomous agent platform</td><td>Build your own</td></tr>
+<tr><td><strong>Best for</strong></td><td>Complex RAG + tool-calling pipelines</td><td>Multi-agent teams (specialist agents collaborating)</td><td>Long-running autonomous tasks</td><td>Simple, controllable agents</td></tr>
+<tr><td><strong>Complexity</strong></td><td>High</td><td>Moderate</td><td>Moderate</td><td>Low (but you write more)</td></tr>
+<tr><td><strong>Flexibility</strong></td><td>Very high</td><td>Moderate (opinionated)</td><td>Low (opinionated)</td><td>Maximum</td></tr>
+<tr><td><strong>Lock-in risk</strong></td><td>High</td><td>Moderate</td><td>High</td><td>None</td></tr>
+</table>
+
+<h2>LangChain — The Swiss Army Knife</h2>
+<p>LangChain is the most comprehensive agent framework. It has pre-built components for everything: RAG, memory, tools, streaming, evaluation. The downside is complexity — simple things can require understanding many abstractions.</p>
+<p><strong>Best for:</strong> Production RAG systems, complex multi-step agent pipelines, teams that need every feature. <strong>Avoid for:</strong> Simple chatbots or single-tool agents (SDK is simpler).</p>
+
+<h2>CrewAI — Multi-Agent Orchestration</h2>
+<p>CrewAI lets you define multiple agents with different roles, tools, and goals, then have them collaborate on a task. One agent researches, another writes code, a third reviews — all autonomously. Think of it as a team of AI specialists working for you.</p>
+<p><strong>Best for:</strong> Complex projects that benefit from specialization (research → draft → code → review), developer teams that want to orchestrate AI workers.</p>
+
+<h2>Custom Agent (SDK-native) — For Most Use Cases</h2>
+<p>For most developer needs, a simple agent loop using the OpenAI or Anthropic SDK directly is clearer and more maintainable than a framework:</p>
+<pre><code>import anthropic
+
+def agent(task, tools):
+    messages = [{"role": "user", "content": task}]
+    while True:
+        response = anthropic.messages.create(
+            model="claude-sonnet-4-20250514",
+            max_tokens=4096,
+            tools=tools,
+            messages=messages
+        )
+        if response.stop_reason == "end_turn":
+            return response.content[0].text
+        # Execute tool call and continue loop
+        tool_result = execute_tool(response.content[-1])
+        messages.append({"role": "user", "content": [
+            {"type": "tool_result", "tool_use_id": response.content[-1].id, "content": tool_result}
+        ]})</code></pre>
+
+<h2>Agent Use Cases for Developers</h2>
+<table>
+<tr><th>Use Case</th><th>Best Approach</th></tr>
+<tr><td>Code review bot (PR → review comments)</td><td>Custom agent + GitHub API</td></tr>
+<tr><td>Documentation generator (codebase → docs)</td><td>Custom agent + file system tools</td></tr>
+<tr><td>Research assistant (question → web search → summary)</td><td>LangChain with Tavily + web tools</td></tr>
+<tr><td>Multi-agent development team</td><td>CrewAI</td></tr>
+<tr><td>Customer support bot (knowledge base + tickets)</td><td>LangChain RAG + tools</td></tr>
+<tr><td>Bug triage (error logs → root cause → fix)</td><td>Custom agent + Sentry/GitHub APIs</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Start with a custom agent loop using the SDK directly — it's 50 lines of code and you understand everything. Add LangChain only when you need RAG, complex memory, or 5+ tool types. CrewAI for multi-agent orchestration. The agent hype is real, but the simplest approach usually works best. See also: <a href="/en/ai/ai-api-integration-guide.html">AI API Integration Guide</a> and <a href="/en/ai/prompt-engineering.html">Prompt Engineering Guide</a>.</p>
+'''
+
+BODIES['ai-api-integration-guide'] = '''
+<p>Adding AI to your app means calling an API. OpenAI, Anthropic, and Google AI each have different SDKs, pricing models, and capabilities. Here's the practical integration guide covering the patterns you'll actually use: streaming, function calling, embeddings, and cost optimization.</p>
+
+<h2>The Big Three AI APIs</h2>
+<table>
+<tr><th></th><th>OpenAI</th><th>Anthropic</th><th>Google AI</th></tr>
+<tr><td><strong>Models</strong></td><td>GPT-4o, GPT-4.1, o4-mini</td><td>Claude Opus 4, Sonnet 4, Haiku 4</td><td>Gemini 2.5 Pro, Flash</td></tr>
+<tr><td><strong>Max context</strong></td><td>128K tokens</td><td>200K tokens</td><td>1M tokens</td></tr>
+<tr><td><strong>SDK</strong></td><td>openai (Node/Python)</td><td>@anthropic-ai/sdk</td><td>@google/generative-ai</td></tr>
+<tr><td><strong>Pricing model</strong></td><td>Per 1K tokens (in+out)</td><td>Per 1M tokens (in+out)</td><td>Per 1M chars (in+out)</td></tr>
+<tr><td><strong>Image input</strong></td><td>Yes (GPT-4o)</td><td>Yes</td><td>Yes</td></tr>
+<tr><td><strong>Image output</strong></td><td>Yes (DALL-E)</td><td>No</td><td>Yes (Imagen)</td></tr>
+<tr><td><strong>Streaming</strong></td><td>Yes (SSE)</td><td>Yes (SSE + streaming text)</td><td>Yes</td></tr>
+</table>
+
+<h2>1. Streaming Responses</h2>
+<p>Streaming shows tokens as they're generated — critical for good UX. All three APIs support it:</p>
+<pre><code>// Anthropic streaming example
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
+const stream = client.messages.stream({
+  model: "claude-sonnet-4-20250514",
+  max_tokens: 4096,
+  messages: [{ role: "user", content: "Write a function to..." }],
+});
+
+stream.on("text", (text) => {
+  process.stdout.write(text);  // Show tokens as they arrive
+});
+
+const finalMessage = await stream.finalMessage();</code></pre>
+
+<h2>2. Function Calling (Tool Use)</h2>
+<p>Function calling lets the AI call your APIs. Define the tools, and the AI decides when to use them:</p>
+<pre><code>// Define a tool
+const tools = [{
+  name: "search_database",
+  description: "Search the product database",
+  input_schema: {
+    type: "object",
+    properties: {
+      query: { type: "string", description: "Search query" },
+      category: { type: "string", enum: ["electronics", "books", "clothing"] }
+    },
+    required: ["query"]
+  }
+}];
+
+// The AI can now call search_database() when needed
+// Your code executes the function and sends the result back</code></pre>
+
+<h2>3. Embeddings for Semantic Search</h2>
+<p>Embeddings convert text into vectors for semantic search. OpenAI and Google both offer embedding APIs:</p>
+<pre><code>// OpenAI embeddings
+const embedding = await openai.embeddings.create({
+  model: "text-embedding-3-small",  // $0.02/1M tokens — cheapest
+  input: "How to deploy Next.js to Vercel",
+});
+
+// Store in vector DB (pgvector, Pinecone, Chroma)
+// Query: find similar docs by cosine similarity</code></pre>
+
+<h2>4. Cost Optimization Strategies</h2>
+<table>
+<tr><th>Strategy</th><th>Savings</th><th>How</th></tr>
+<tr><td><strong>Model routing</strong></td><td>50-80%</td><td>Route simple tasks to Haiku/Flash, complex to Sonnet/Pro</td></tr>
+<tr><td><strong>Caching</strong></td><td>50-90%</td><td>Cache common responses. Anthropic has built-in prompt caching.</td></tr>
+<tr><td><strong>Shorter prompts</strong></td><td>20-40%</td><td>System prompts are charged per request. Keep them tight.</td></tr>
+<tr><td><strong>Batch processing</strong></td><td>50%</td><td>OpenAI batch API is 50% cheaper (24h turnaround).</td></tr>
+<tr><td><strong>Token limits</strong></td><td>Variable</td><td>Set max_tokens to prevent runaway costs.</td></tr>
+<tr><td><strong>Self-host small models</strong></td><td>90%+</td><td>Use local models for classification/summarization tasks.</td></tr>
+</table>
+
+<h2>5. Error Handling Pattern</h2>
+<pre><code>async function callAI(prompt: string): Promise&lt;string&gt; {
+  const maxRetries = 3;
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      const response = await client.messages.create({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 4096,
+        messages: [{ role: "user", content: prompt }],
+      });
+      return response.content[0].text;
+    } catch (error) {
+      if (error.status === 429) {  // Rate limited
+        await sleep(Math.pow(2, i) * 1000);  // Exponential backoff
+        continue;
+      }
+      if (error.status === 400) throw error;  // Bad request — don't retry
+      throw error;
+    }
+  }
+}</code></pre>
+
+<p><strong>Bottom line:</strong> Use streaming for any user-facing feature. Use function calling to extend the AI with your own data. Cache aggressively. Route simple queries to cheaper models. See also: <a href="/en/ai/prompt-engineering.html">Prompt Engineering</a> and <a href="/en/ai/best-llms-for-coding-2026.html">Best LLMs for Coding</a>.</p>
+'''
+
+BODIES['ai-image-generation-guide'] = '''
+<p>AI image generation has matured into distinct tools for different needs. DALL-E 3, Midjourney, Stable Diffusion, and Adobe Firefly each dominate a niche. Here's the developer-focused comparison — which tool for which visual task, and how to use them via API.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>DALL-E 3</th><th>Midjourney 6</th><th>Stable Diffusion 3</th><th>Adobe Firefly</th></tr>
+<tr><td><strong>Best for</strong></td><td>Prompt understanding, ease of use</td><td>Aesthetic quality, artistic work</td><td>Customization, self-hosting</td><td>Commercial-safe, Adobe integration</td></tr>
+<tr><td><strong>API available</strong></td><td>Yes (OpenAI)</td><td>No (Discord only)</td><td>Yes (Stability AI + Replicate)</td><td>Yes (Adobe API)</td></tr>
+<tr><td><strong>Cost</strong></td><td>$0.04-0.12/image</td><td>$10-60/mo</td><td>Free (self-host) / $0.002/image (API)</td><td>$5/mo (100 credits)</td></tr>
+<tr><td><strong>Quality</strong></td><td>Excellent (follows prompts)</td><td>Best-in-class (aesthetics)</td><td>Very good (configurable)</td><td>Good (safe, professional)</td></tr>
+<tr><td><strong>Open source</strong></td><td>No</td><td>No</td><td>Yes</td><td>No</td></tr>
+<tr><td><strong>Commercial use</strong></td><td>Yes (via API)</td><td>Yes (paid plans)</td><td>Yes (varies by model)</td><td>Yes (copyright-safe training)</td></tr>
+</table>
+
+<h2>DALL-E 3 — Best Prompt Understanding</h2>
+<p>DALL-E 3 understands natural language better than any other image model. Describe what you want in plain English and it just works. Via OpenAI's API, it's the easiest to integrate programmatically. It also auto-generates improved prompts from your description.</p>
+<p><strong>Best for:</strong> Developers needing programmatic image generation, quick blog/social media graphics, concept visualization.</p>
+<p><strong>Weak spot:</strong> Midjourney produces more aesthetically pleasing results. Less style control than Stable Diffusion.</p>
+
+<h2>Midjourney — Best Aesthetic Quality</h2>
+<p>Midjourney produces the most visually stunning images. It's the go-to for designers, artists, and anyone who cares about aesthetics. The downside: no API — it's Discord-only (with a web app in alpha). You can't integrate it programmatically.</p>
+<p><strong>Best for:</strong> High-quality marketing visuals, artistic projects, concept art, images where aesthetics matter more than prompt accuracy.</p>
+<p><strong>Weak spot:</strong> No API (Discord-only). Can't be automated. Prompt engineering curve is steep (parameters, style codes, aspect ratios).</p>
+
+<h2>Stable Diffusion — Maximum Control</h2>
+<p>Stable Diffusion gives you complete control: custom models (fine-tuned on your dataset), ControlNet (pose, depth, edge guidance), inpainting, and img2img. You can run it locally or via API (Replicate, Stability AI). It's the only truly programmable option.</p>
+<p><strong>Best for:</strong> Developers who need programmatic control, custom fine-tuned models, generating images in bulk, privacy-sensitive use cases (self-hosted).</p>
+<p><strong>Weak spot:</strong> More complex setup than DALL-E or Midjourney. Out-of-box quality is lower (needs model selection and prompt tuning).</p>
+
+<h2>Adobe Firefly — Safe for Commercial Use</h2>
+<p>Firefly's unique selling point: it was trained only on licensed and public domain images. This means no copyright concerns for commercial use. Deep Adobe Creative Cloud integration (Photoshop, Illustrator) makes it compelling for design workflows.</p>
+<p><strong>Best for:</strong> Commercial projects where copyright safety matters, Adobe ecosystem users, professional design workflows.</p>
+<p><strong>Weak spot:</strong> Smaller feature set than Midjourney or Stable Diffusion. Quality is good but not best-in-class. API is newer.</p>
+
+<h2>Which Tool for Which Task?</h2>
+<table>
+<tr><th>Task</th><th>Best Tool</th></tr>
+<tr><td>Generate blog post header image programmatically</td><td><strong>DALL-E 3 API</strong></td></tr>
+<tr><td>Create stunning marketing/hero images</td><td><strong>Midjourney</strong></td></tr>
+<tr><td>Build an AI image generation feature into your app</td><td><strong>Stable Diffusion API</strong> or <strong>DALL-E 3 API</strong></td></tr>
+<tr><td>Self-host, custom fine-tuned model</td><td><strong>Stable Diffusion</strong></td></tr>
+<tr><td>Commercial work, copyright safety</td><td><strong>Adobe Firefly</strong></td></tr>
+<tr><td>Best value for occasional use</td><td><strong>DALL-E 3</strong> ($0.04/image, no subscription)</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> DALL-E 3 for API-driven image generation — it's the easiest to integrate and charges per image. Midjourney for the best-looking results (but can't automate). Stable Diffusion for maximum control and self-hosting. Firefly for copyright-safe commercial work. See also: <a href="/en/ai/midjourney-prompts.html">Midjourney Prompt Guide</a> and <a href="/en/tools/design-tools-for-developers.html">design tools guide</a>.</p>
+'''
+
+BODIES['cursor-advanced-tips'] = '''
+<p>Most Cursor users barely scratch the surface — they use Tab autocomplete and occasionally Cmd+K. But Cursor's power features can genuinely 10x your output if you know how to use them. Here are 15 advanced techniques that separate casual users from power users.</p>
+
+<h2>1. Composer Mastery</h2>
+<p>Composer (Cmd+I) is Cursor's killer feature — but most developers underutilize it.</p>
+<pre><code>// Instead of "add a login form", give Composer full context:
+"Add a login form with:
+- Email + password fields with validation
+- 'Remember me' checkbox
+- Loading state while submitting
+- Error display for invalid credentials
+- Successful login → redirect to /dashboard
+- Use the existing useAuth hook and shadcn/ui Form component
+- Add a test file with happy path + error case"</code></pre>
+<p><strong>Pro tip:</strong> Use <code>@Files</code> to drag in specific files for context. Use <code>@Folders</code> to include entire directories. The more specific context you provide, the better the output.</p>
+
+<h2>2. Custom Instructions That Actually Work</h2>
+<p>Cursor Settings → Rules for AI → add custom instructions. But the default template is weak. Use this instead:</p>
+<pre><code>You are an expert TypeScript developer working in a Next.js + Tailwind codebase.
+- Write concise, idiomatic code. No unnecessary comments.
+- Prefer server components. Only use 'use client' when necessary.
+- Use shadcn/ui components. Don't reinvent UI primitives.
+- Handle loading, empty, and error states for every async operation.
+- Write tests alongside components (co-located __tests__ folder).
+- Format: single quotes, trailing commas, 2-space indent.
+- Never use any() — always type properly.
+- When refactoring, check for existing usages first.</code></pre>
+
+<h2>3. Agent Mode for Multi-File Tasks</h2>
+<p>Cursor Agent (Cmd+Shift+I) can read your codebase, run terminal commands, and edit multiple files. Unlike regular Composer, it can iterate — run the build, see errors, fix them, run again. Use it for:</p>
+<ul>
+<li>Migrating from Pages Router to App Router</li>
+<li>Adding a new feature that touches 5+ files</li>
+<li>Upgrading dependencies and fixing breaking changes</li>
+<li>Setting up CI/CD or configuration files</li>
+</ul>
+
+<h2>4. Keyboard Shortcuts That Save Hours</h2>
+<table>
+<tr><th>Shortcut</th><th>Action</th><th>When to Use</th></tr>
+<tr><td>Cmd+I</td><td>Inline Composer</td><td>Edit selected code or generate new code</td></tr>
+<tr><td>Cmd+Shift+I</td><td>Agent Mode</td><td>Multi-file tasks, terminal access</td></tr>
+<tr><td>Cmd+K</td><td>Quick Edit</td><td>Single-line changes, "rename this", "add error handling"</td></tr>
+<tr><td>Cmd+L</td><td>Chat</td><td>Questions about codebase, "how does X work?"</td></tr>
+<tr><td>Cmd+Shift+Enter</td><td>Apply chat changes</td><td>After chat generates code, apply to file</td></tr>
+<tr><td>Ctrl+Enter (in Composer)</td><td>Accept all changes</td><td>Approve multi-file edits</td></tr>
+</table>
+
+<h2>5. Context Management — The Real Superpower</h2>
+<table>
+<tr><th>Technique</th><th>How</th><th>Why</th></tr>
+<tr><td>@Files</td><td>Drag files into Composer</td><td>Pin specific files as context</td></tr>
+<tr><td>@Folders</td><td>Include whole directories</td><td>Give access to related code</td></tr>
+<tr><td>@Codebase</td><td>Semantic search entire repo</td><td>Find relevant code automatically</td></tr>
+<tr><td>@Web</td><td>Search web for docs/examples</td><td>Pull in latest API docs</td></tr>
+<tr><td>@Docs</td><td>Index documentation sites</td><td>Add Next.js, Tailwind, or any lib's docs</td></tr>
+<tr><td>.cursorrules</td><td>Project-level instructions</td><td>Enforce conventions across team</td></tr>
+</table>
+
+<h2>6. Pair Programming Patterns</h2>
+<ul>
+<li><strong>Draft → Review → Refine:</strong> Let Cursor draft a feature, review every line, ask for refinements. Always review.</li>
+<li><strong>"What would break?":</strong> After a change, ask Cursor to check for edge cases and regressions.</li>
+<li><strong>Explain first, code second:</strong> "Explain the approach before writing code" prevents hasty, wrong implementation.</li>
+<li><strong>Write the test first:</strong> "Write a failing test for X, then implement it." The best guardrail.</li>
+<li><strong>Tab autocomplete is for flow, Composer is for features.</strong> Don't use Composer for single lines; don't use Tab for architecture.</li>
+</ul>
+
+<h2>Quick Wins Checklist</h2>
+<ol>
+<li>Set up <code>.cursorrules</code> with your tech stack and conventions.</li>
+<li>Learn Cmd+I (Composer) and Cmd+K (Quick Edit) by heart.</li>
+<li>Use @Files and @Folders — never prompt without context.</li>
+<li>After every AI-generated change, ask: "Check this for edge cases."</li>
+<li>Write custom instructions specific to your codebase.</li>
+<li>Use Agent mode for tasks touching 5+ files.</li>
+</ol>
+
+<p><strong>Bottom line:</strong> The difference between casual and power Cursor users is context. Power users give rich, specific context with @Files, @Docs, and detailed instructions. Casual users type one-liners and wonder why the output is generic. See also: <a href="/en/compare/cursor-vs-copilot-vs-claude-code.html">Cursor vs Copilot vs Claude Code</a> and <a href="/en/ai/ai-coding.html">AI-Assisted Programming Guide</a>.</p>
+'''
+
 # FAQ data for FAQPage schema (slug → list of q/a dicts)
 FAQS = {
     'chatgpt-plus-worth': [

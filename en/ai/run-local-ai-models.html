@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="run-local-ai-models">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide">
+    <meta property="og:description" content="Run powerful AI models on your own machine — private, free, and offline. Complete setup guide for Ollama, LM Studio, and llama.cpp with model recommendations.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/run-local-ai-models.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide">
+    <meta name="twitter:description" content="Run powerful AI models on your own machine — private, free, and offline. Complete setup guide for Ollama, LM Studio, and llama.cpp with model recommendations.">
+    <title>How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide — SourceHub</title>
+    <meta name="description" content="Run powerful AI models on your own machine — private, free, and offline. Complete setup guide for Ollama, LM Studio, and llama.cpp with model recommendations.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/ai/run-local-ai-models.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/run-local-ai-models.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide",
+      "description": "Run powerful AI models on your own machine — private, free, and offline. Complete setup guide for Ollama, LM Studio, and llama.cpp with model recommendations.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">AI</span>
+        <span class="tag-cat">Local LLM</span>
+        <span class="tag-cat">Ollama</span>
+        <span class="tag-cat">Privacy</span></div>
+      <h1 class="article-title">How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide</h1>
+      <div class="article-meta">Published 2026-05-08 · 4560 views · 38 replies</div>
+      <div class="article-body"><p>Running AI models on your own machine means privacy, zero cost after setup, and offline access. With tools like Ollama, LM Studio, and llama.cpp, it's surprisingly easy. Here's how to get started and which models to run.</p>
+
+<h2>Why Run AI Locally?</h2>
+<table>
+<tr><th>Reason</th><th>Detail</th></tr>
+<tr><td><strong>Privacy</strong></td><td>Code/data never leaves your machine. Essential for proprietary work.</td></tr>
+<tr><td><strong>Cost</strong></td><td>Free after hardware. No API bills. No $20/mo subscription.</td></tr>
+<tr><td><strong>Offline</strong></td><td>Work on a plane, in a coffee shop, or during API outages.</td></tr>
+<tr><td><strong>No limits</strong></td><td>No rate limiting, no message caps, no content filters.</td></tr>
+<tr><td><strong>Experimentation</strong></td><td>Try different models, fine-tune, experiment without paying per token.</td></tr>
+</table>
+
+<h2>The Three Tools Compared</h2>
+<table>
+<tr><th></th><th>Ollama</th><th>LM Studio</th><th>llama.cpp</th></tr>
+<tr><td><strong>Type</strong></td><td>CLI + REST API</td><td>Desktop GUI</td><td>C++ library + CLI</td></tr>
+<tr><td><strong>Best for</strong></td><td>Developers, automation</td><td>Non-technical users, chat</td><td>Maximum performance, servers</td></tr>
+<tr><td><strong>Setup</strong></td><td>One command: brew install ollama</td><td>Download DMG, install</td><td>Compile or brew install</td></tr>
+<tr><td><strong>Model library</strong></td><td>Built-in (ollama pull)</td><td>HuggingFace integration</td><td>GGUF files from HuggingFace</td></tr>
+<tr><td><strong>API</strong></td><td>OpenAI-compatible REST</td><td>Local OpenAI-compatible</td><td>Server mode available</td></tr>
+<tr><td><strong>GPU support</strong></td><td>Automatic (Metal/CUDA)</td><td>Automatic (Metal/CUDA)</td><td>Manual config</td></tr>
+</table>
+
+<h2>Getting Started with Ollama (Recommended for Developers)</h2>
+<pre><code># 1. Install
+brew install ollama          # macOS
+# Linux: curl -fsSL https://ollama.com/install.sh | sh
+
+# 2. Pull and run a model
+ollama pull llama3.3:70b     # Meta's latest (70B parameters)
+ollama pull deepseek-coder-v2  # Best coding model
+ollama pull phi-4            # Microsoft's small but mighty model
+
+# 3. Chat in terminal
+ollama run deepseek-coder-v2
+
+# 4. Use as API (OpenAI-compatible)
+# POST http://localhost:11434/v1/chat/completions</code></pre>
+
+<h2>Recommended Models for Coding</h2>
+<table>
+<tr><th>Model</th><th>Size</th><th>RAM Needed</th><th>Best For</th></tr>
+<tr><td><strong>DeepSeek Coder V2</strong></td><td>16B</td><td>16GB</td><td>Best coding quality for size. Runs on most laptops.</td></tr>
+<tr><td><strong>Llama 3.3 70B</strong></td><td>70B</td><td>48GB (q4: 40GB)</td><td>Best overall quality. Needs a powerful machine.</td></tr>
+<tr><td><strong>CodeLlama 70B</strong></td><td>70B</td><td>48GB (q4: 40GB)</td><td>Code-specialized. Good for autocomplete.</td></tr>
+<tr><td><strong>Phi-4</strong></td><td>14B</td><td>16GB</td><td>Best small model. Runs on any M-series Mac.</td></tr>
+<tr><td><strong>CodeQwen 2.5</strong></td><td>7B</td><td>8GB</td><td>Fastest. Runs on older hardware. Good for simple tasks.</td></tr>
+</table>
+
+<h2>Hardware Requirements</h2>
+<table>
+<tr><th>Machine</th><th>What You Can Run</th></tr>
+<tr><td>M1/M2/M3 Mac (16GB)</td><td>7B-16B models comfortably. 34B with some swap.</td></tr>
+<tr><td>M3 Max Mac (48GB+)</td><td>70B models with q4 quantization. All coding models.</td></tr>
+<tr><td>PC with RTX 4090 (24GB)</td><td>7B-34B models in VRAM. 70B split across GPU+RAM.</td></tr>
+<tr><td>PC with RTX 3060 (12GB)</td><td>7B-13B models in VRAM.</td></tr>
+</table>
+
+<h2>When NOT to Use Local Models</h2>
+<ul>
+<li>You need the absolute best code quality (API models are still ahead).</li>
+<li>You need image generation (local diffusion models are a different setup).</li>
+<li>You need web search or real-time data.</li>
+<li>You're on a low-RAM machine and can afford API costs.</li>
+</ul>
+
+<p><strong>Bottom line:</strong> Ollama + DeepSeek Coder V2 gives you excellent local coding on any M-series Mac. For maximum quality, use API models (Claude/GPT-4o). For privacy, off-grid, or cost reasons, local models are now genuinely useful for daily development. See also: <a href="/en/ai/best-llms-for-coding-2026.html">Best LLMs for Coding comparison</a> and <a href="/en/ai/ai-coding.html">AI-Assisted Programming Guide</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/prompt-engineering.html" class="related-card">Prompt Engineering: From Beginner to Expert</a><a href="/en/ai/ai-coding.html" class="related-card">AI-Assisted Programming: From Zero to 10x Productivity</a><a href="/en/ai/midjourney-prompts.html" class="related-card">Midjourney Prompt Guide: From Basics to Pro-Level Images</a><a href="/en/ai/perplexity-guide.html" class="related-card">Perplexity Deep Dive: A Smarter Way to Search Than Google</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>
