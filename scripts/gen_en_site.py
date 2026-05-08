@@ -15,6 +15,7 @@ BOARD_NAMES = {
     'sidehustle': 'Side Hustle',
     'tools': 'Tool Recommendations',
     'ai': 'AI Tutorials',
+    'compare': 'Comparisons',
 }
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -1634,6 +1635,196 @@ BODIES['design-tools-for-developers'] = '''
 <p>You can build a SaaS landing page, portfolio site, or product UI with just these five tools. No design background needed.</p>
 '''
 
+BODIES['cursor-vs-copilot-vs-claude-code'] = '''
+<p>AI coding tools have gone from "nice to have" to "mandatory for developer productivity" in 2026. Here's an honest comparison of the three leading options: Cursor, GitHub Copilot, and Claude Code. No hype — just which tool fits which workflow.</p>
+
+<h2>Quick Summary</h2>
+<table>
+<tr><th></th><th>Cursor</th><th>GitHub Copilot</th><th>Claude Code</th></tr>
+<tr><td><strong>Best for</strong></td><td>Full-stack web/app dev</td><td>IDE-native autocomplete</td><td>Complex codebase work</td></tr>
+<tr><td><strong>Interface</strong></td><td>AI-native IDE (VS Code fork)</td><td>VS Code / JetBrains extension</td><td>Terminal CLI</td></tr>
+<tr><td><strong>Context window</strong></td><td>~10K tokens</td><td>~10K tokens</td><td>200K tokens</td></tr>
+<tr><td><strong>Pricing</strong></td><td>Free / $20/mo</td><td>Free / $10/mo / $39/mo</td><td>Free / $20/mo (Claude Pro)</td></tr>
+<tr><td><strong>Multi-file edits</strong></td><td>Excellent (Composer)</td><td>Good (agent mode)</td><td>Best-in-class</td></tr>
+<tr><td><strong>Terminal access</strong></td><td>Built-in terminal</td><td>Via IDE terminal</td><td>Native terminal agent</td></tr>
+<tr><td><strong>Code review</strong></td><td>Inline suggestions</td><td>PR review (Business)</td><td>Full codebase audit</td></tr>
+</table>
+
+<h2>Cursor — The AI-Native IDE</h2>
+<p>Cursor is a fork of VS Code rebuilt from the ground up for AI-assisted development. Its killer feature is <strong>Composer</strong> — describe a feature in natural language and Cursor writes, edits, and refactors across multiple files in one go.</p>
+<p><strong>Strengths:</strong> Best-in-class codebase awareness within a project. Tab autocomplete is fast and contextually smart. Composer for multi-file features feels like pair programming.</p>
+<p><strong>Weaknesses:</strong> Only works within its IDE. Context window limits mean it can lose track in very large files. Requires you to switch from your current editor.</p>
+<p><strong>Ideal user:</strong> Full-stack developers building web/mobile apps who want the tightest AI-IDE integration.</p>
+
+<h2>GitHub Copilot — The Ubiquitous Autocompleter</h2>
+<p>Copilot is the most widely adopted AI coding tool. It lives inside VS Code and JetBrains, meaning zero workflow changes. In 2026, Copilot has evolved from simple autocomplete to include chat, agent mode, and PR review (Business tier).</p>
+<p><strong>Strengths:</strong> Stays in your existing editor. Best inline autocomplete in the business. Deep GitHub integration for PRs and issues. Largest user base = most polished completions.</p>
+<p><strong>Weaknesses:</strong> Agent mode is newer and less capable than Cursor's Composer. Context window is limited. Business tier at $39/month is pricier than alternatives.</p>
+<p><strong>Ideal user:</strong> Developers who want AI help without leaving their editor, especially teams already on GitHub.</p>
+
+<h2>Claude Code — The Power User's Terminal Agent</h2>
+<p>Claude Code is Anthropic's terminal-native coding agent. Unlike IDE plugins, it operates directly in your shell — reading your entire codebase (200K context), running commands, editing files, and managing git. It's the most capable tool for complex architectural work.</p>
+<p><strong>Strengths:</strong> Massive 200K context window understands entire codebases. Reads and writes files, runs tests, makes commits. Excels at refactoring, debugging complex bugs, and code review across many files.</p>
+<p><strong>Weaknesses:</strong> Terminal-only. No inline autocomplete. Slower for simple one-line completions. Requires comfort with CLI.</p>
+<p><strong>Ideal user:</strong> Senior developers working on large or complex codebases, doing heavy refactoring, or who prefer terminal workflows.</p>
+
+<h2>Which One Should You Use?</h2>
+<table>
+<tr><th>If you need…</th><th>Pick</th></tr>
+<tr><td>Best inline autocomplete in your current editor</td><td><strong>GitHub Copilot</strong></td></tr>
+<tr><td>Full AI-native IDE experience</td><td><strong>Cursor</strong></td></tr>
+<tr><td>Deep codebase analysis and complex refactoring</td><td><strong>Claude Code</strong></td></tr>
+<tr><td>Free option with good results</td><td><strong>Cursor Free + Claude Code Free</strong></td></tr>
+<tr><td>Maximum productivity (cost no object)</td><td><strong>Copilot in IDE + Claude Code for hard problems</strong></td></tr>
+</table>
+
+<p>The optimal setup in 2026: <strong>Cursor or Copilot for daily coding, Claude Code for code review and complex refactoring.</strong> Many senior developers use both — IDE tool for flow, Claude Code for the hard stuff. The combined cost is $20-40/month and pays for itself in a single afternoon of saved debugging.</p>
+
+<p>See also: <a href="/en/ai/ai-coding.html">AI-Assisted Programming Guide</a> and <a href="/en/ai/claude-vs-chatgpt.html">Claude vs ChatGPT comparison</a>.</p>
+'''
+
+BODIES['vercel-vs-netlify-vs-cloudflare'] = '''
+<p>Picking the wrong hosting platform costs you hours of debugging, slow deploys, and unpredictable bills. Here's how Vercel, Netlify, and Cloudflare Pages compare for frontend hosting in 2026 — with real numbers and clear recommendations.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Vercel</th><th>Netlify</th><th>Cloudflare Pages</th></tr>
+<tr><td><strong>Free tier</strong></td><td>100GB bandwidth, 6000 build min</td><td>100GB bandwidth, 300 build min</td><td>Unlimited bandwidth</td></tr>
+<tr><td><strong>Pro starts at</strong></td><td>$20/mo</td><td>$19/mo</td><td>$5/mo (Workers Paid)</td></tr>
+<tr><td><strong>Serverless functions</strong></td><td>Vercel Functions (AWS)</td><td>Netlify Functions (AWS)</td><td>Cloudflare Workers (edge)</td></tr>
+<tr><td><strong>Edge network</strong></td><td>100+ locations</td><td>Global CDN</td><td>330+ locations</td></tr>
+<tr><td><strong>Build speed</strong></td><td>Fast (cached deps)</td><td>Moderate</td><td>Very fast</td></tr>
+<tr><td><strong>Next.js support</strong></td><td>First-class (co-creator)</td><td>Good (plugin)</td><td>Good (adaptor)</td></tr>
+<tr><td><strong>Analytics</strong></td><td>Built-in (Pro)</td><td>Built-in (Pro)</td><td>Via Workers Analytics</td></tr>
+<tr><td><strong>Preview deploys</strong></td><td>Yes</td><td>Yes (Deploy Previews)</td><td>Yes (branch deploys)</td></tr>
+</table>
+
+<h2>Vercel — Best for Next.js and Developer Experience</h2>
+<p>Vercel is the company behind Next.js, so Next.js apps get first-class treatment: automatic ISR, image optimization, and middleware run natively. The developer experience is polished — git push, preview deploy, and instant rollbacks just work.</p>
+<p><strong>Strengths:</strong> Next.js integration is unmatched. Preview URLs for every branch. Excellent analytics on Pro plan. Hobby tier is genuinely free for personal projects.</p>
+<p><strong>Weaknesses:</strong> Bandwidth overages can surprise you ($100+/mo for viral traffic). Serverless functions have 10s timeout (60s on Pro). More expensive at scale than Cloudflare.</p>
+<p><strong>Best for:</strong> Next.js apps, teams that want zero-config deploys, projects where developer experience matters more than minimizing cost.</p>
+
+<h2>Netlify — Best for Jamstack and Simplicity</h2>
+<p>Netlify pioneered the git-push-to-deploy workflow. It's excellent for static sites, JAMstack apps, and projects that need simple serverless functions with zero configuration.</p>
+<p><strong>Strengths:</strong> Simplest deploy experience. Great form handling (Netlify Forms). Split testing and deploy previews. Strong add-on ecosystem (Identity, CMS, Forms).</p>
+<p><strong>Weaknesses:</strong> Build minutes are limited (300 on free). Functions are AWS Lambda under the hood (cold starts). Less competitive pricing vs Cloudflare.</p>
+<p><strong>Best for:</strong> Static sites, JAMstack projects, developers who want the simplest possible workflow with built-in form handling.</p>
+
+<h2>Cloudflare Pages — Best for Performance and Value</h2>
+<p>Cloudflare Pages runs on Cloudflare's massive edge network (330+ locations). The killer feature is unlimited bandwidth on the free tier and tight integration with Cloudflare Workers for serverless at the edge with zero cold starts.</p>
+<p><strong>Strengths:</strong> Unlimited free bandwidth. Largest edge network. Workers have zero cold starts. $5/month Workers Paid plan is the best value in serverless. DDoS protection included.</p>
+<p><strong>Weaknesses:</strong> Worker API is different from Node.js (Web API standard). Fewer framework-specific optimizations. Smaller plugin ecosystem.</p>
+<p><strong>Best for:</strong> Performance-sensitive apps, projects expecting traffic spikes, developers comfortable with the Cloudflare ecosystem, anyone who wants the best free tier.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Your Situation</th><th>Pick</th></tr>
+<tr><td>Building a Next.js app</td><td><strong>Vercel</strong></td></tr>
+<tr><td>Static site or simple JAMstack</td><td><strong>Netlify</strong></td></tr>
+<tr><td>Maximum free tier / viral traffic</td><td><strong>Cloudflare Pages</strong></td></tr>
+<tr><td>Need global edge performance</td><td><strong>Cloudflare Pages</strong></td></tr>
+<tr><td>Want integrated forms + identity</td><td><strong>Netlify</strong></td></tr>
+<tr><td>Best DX for a team</td><td><strong>Vercel</strong></td></tr>
+</table>
+
+<p>All three have generous free tiers. <strong>Start on any of them, ship your project, and only worry about switching when you have real traffic.</strong> The cost of overthinking hosting is higher than the cost of picking the "wrong" one for a month.</p>
+'''
+
+BODIES['supabase-vs-firebase-vs-neon'] = '''
+<p>Backend-as-a-Service changed the game for solo developers and small teams. You no longer need to manage servers, write auth code, or configure databases. But picking between Supabase, Firebase, and Neon matters — each has a fundamentally different philosophy. Here's the breakdown.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Supabase</th><th>Firebase</th><th>Neon</th></tr>
+<tr><td><strong>Database type</strong></td><td>PostgreSQL</td><td>NoSQL (Firestore)</td><td>Serverless PostgreSQL</td></tr>
+<tr><td><strong>Open source</strong></td><td>Yes (fully)</td><td>No</td><td>Yes (core)</td></tr>
+<tr><td><strong>Auth</strong></td><td>Built-in (Row Level Security)</td><td>Built-in (Firebase Auth)</td><td>None (bring your own)</td></tr>
+<tr><td><strong>Real-time</strong></td><td>Yes (Postgres subscriptions)</td><td>Yes (native)</td><td>No</td></tr>
+<tr><td><strong>Edge functions</strong></td><td>Yes (Deno)</td><td>Yes (Cloud Functions)</td><td>No (pair with Vercel/Cloudflare)</td></tr>
+<tr><td><strong>Free tier</strong></td><td>2 projects, 500MB DB</td><td>1GB storage, 50K reads/day</td><td>0.5GB storage, 100h compute</td></tr>
+<tr><td><strong>Pricing model</strong></td><td>Per project + usage</td><td>Per operation</td><td>Per compute hour</td></tr>
+<tr><td><strong>Vendor lock-in risk</strong></td><td>Low (standard Postgres)</td><td>High (proprietary)</td><td>Low (standard Postgres)</td></tr>
+</table>
+
+<h2>Supabase — The Open-Source Firebase Alternative</h2>
+<p>Supabase brands itself as "the open-source Firebase alternative." It wraps PostgreSQL with a Firebase-like developer experience: instant APIs, real-time subscriptions, and built-in auth. Because it's standard Postgres underneath, you can always migrate away.</p>
+<p><strong>Strengths:</strong> Full Postgres power (extensions, joins, views). Row-Level Security for granular auth. Real-time subscriptions. Open source — self-host if needed. Generous free tier.</p>
+<p><strong>Weaknesses:</strong> Real-time is newer and less battle-tested than Firebase's. Cold starts on free tier. Still missing some Firebase features (offline persistence, analytics).</p>
+<p><strong>Best for:</strong> Developers who want SQL, need relational data, or worry about vendor lock-in. Ideal for SaaS apps, dashboards, and anything with structured data.</p>
+
+<h2>Firebase — Google's Mature BaaS Platform</h2>
+<p>Firebase is the most mature BaaS platform. Firestore (NoSQL document DB) is fast, scales easily, and has excellent client SDKs. Firebase Auth handles social login, phone auth, and email/password out of the box.</p>
+<p><strong>Strengths:</strong> Most mature ecosystem. Excellent real-time and offline support. Integrated analytics and crash reporting. Zero-config auth with every provider.</p>
+<p><strong>Weaknesses:</strong> Proprietary — migrating away is painful. NoSQL limits complex queries (no joins, limited filtering). Pricing per operation can become expensive at scale. No PostgreSQL.</p>
+<p><strong>Best for:</strong> Mobile apps, real-time collaborative apps, projects that benefit from Google ecosystem integration, developers who prefer NoSQL document model.</p>
+
+<h2>Neon — Serverless PostgreSQL, Nothing Else</h2>
+<p>Neon takes a different approach. It's not a full BaaS — it's a serverless PostgreSQL database with branching (like Git for databases), instant provisioning, and per-compute-hour pricing. Pair it with your own auth and API layer.</p>
+<p><strong>Strengths:</strong> Database branching — create a copy of your production DB for every PR. True serverless Postgres (scales to zero). Standard Postgres — no lock-in. Excellent for CI/CD workflows.</p>
+<p><strong>Weaknesses:</strong> No built-in auth, real-time, or API layer — you need to bring those yourself. Not a drop-in backend replacement. Younger ecosystem.</p>
+<p><strong>Best for:</strong> Developers who just need a serverless Postgres database, teams practicing database DevOps (branching for PR previews), or building on Vercel/Cloudflare and need a compatible database.</p>
+
+<h2>Which One Should You Pick?</h2>
+<table>
+<tr><th>Your Situation</th><th>Pick</th></tr>
+<tr><td>Building a SaaS with relational data</td><td><strong>Supabase</strong></td></tr>
+<tr><td>Building a mobile app with real-time needs</td><td><strong>Firebase</strong></td></tr>
+<tr><td>Already have auth and API, just need Postgres</td><td><strong>Neon</strong></td></tr>
+<tr><td>Want open source and no lock-in</td><td><strong>Supabase or Neon</strong></td></tr>
+<tr><td>Quickest from zero to working MVP</td><td><strong>Supabase</strong> (most built-in features)</td></tr>
+</table>
+
+<p>For most web apps in 2026, <strong>Supabase is the best starting point.</strong> It gives you the most features out of the box while keeping the escape hatch open. See our <a href="/en/sidehustle/saas-bootstrapping-guide.html">SaaS Bootstrapping Guide</a> for the full tech stack.</p>
+'''
+
+BODIES['figma-vs-canva-vs-penpot'] = '''
+<p>You don't need a design degree to create polished UI. But you do need the right design tool. Figma, Canva, and Penpot each serve different needs — here's which one matches your workflow and budget.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Figma</th><th>Canva</th><th>Penpot</th></tr>
+<tr><td><strong>Best for</strong></td><td>UI/UX design, wireframes, prototypes</td><td>Marketing graphics, social media, presentations</td><td>UI design, open-source teams</td></tr>
+<tr><td><strong>Cost</strong></td><td>Free / $12-45/mo</td><td>Free / $15/mo Pro</td><td>Free / self-hosted</td></tr>
+<tr><td><strong>Open source</strong></td><td>No</td><td>No</td><td>Yes</td></tr>
+<tr><td><strong>Platform</strong></td><td>Web + desktop app</td><td>Web + mobile app</td><td>Web (self-host option)</td></tr>
+<tr><td><strong>Collaboration</strong></td><td>Real-time multiplayer</td><td>Team sharing</td><td>Real-time multiplayer</td></tr>
+<tr><td><strong>Developer handoff</strong></td><td>CSS, Swift, Android code export</td><td>None (export as image/PDF)</td><td>CSS, SVG code, design tokens</td></tr>
+<tr><td><strong>Prototyping</strong></td><td>Full interactive prototyping</td><td>Basic click-through</td><td>Interactive prototyping</td></tr>
+<tr><td><strong>Asset library</strong></td><td>Community + plugins</td><td>Massive built-in library (stock photos, icons, templates)</td><td>Growing community library</td></tr>
+</table>
+
+<h2>Figma — The Professional Standard</h2>
+<p>Figma dominates UI/UX design for good reason. Its real-time collaboration, component system (think React components for design), and Auto Layout (flexbox equivalent) make it the go-to for product teams. The free tier covers most solo developer needs.</p>
+<p><strong>Strengths:</strong> Industry standard — every developer should know basics. Component variants, Auto Layout, and design tokens mirror frontend concepts. Massive plugin and template ecosystem. Developer handoff with code export.</p>
+<p><strong>Weaknesses:</strong> Learning curve for non-designers. Free tier limited to 3 collaborative files. Not ideal for marketing graphics or quick social media images. Adobe acquisition raised long-term pricing concerns.</p>
+<p><strong>Best for:</strong> UI/UX design, wireframing, prototyping, developer-designer collaboration. The default choice for anyone building products.</p>
+
+<h2>Canva — The Marketing & Content Powerhouse</h2>
+<p>Canva is not a UI design tool — and that's exactly its strength. It's optimized for creating beautiful graphics in minutes: social media posts, presentations, blog headers, thumbnails, and marketing materials. The template library is unmatched.</p>
+<p><strong>Strengths:</strong> Instant productivity — pick a template and customize. Massive library of stock photos, icons, fonts, and templates included. Excellent for non-designers. Brand kit for consistency.</p>
+<p><strong>Weaknesses:</strong> Not for UI/UX design. No developer handoff. Pro is $15/month for full access. Less precise control than Figma.</p>
+<p><strong>Best for:</strong> Blog graphics, social media images, YouTube thumbnails, presentations, quick marketing materials. Every developer who creates content should have Canva.</p>
+
+<h2>Penpot — The Open-Source Challenger</h2>
+<p>Penpot is the first serious open-source alternative to Figma. It's web-based (or self-hosted), supports real-time collaboration, and uses SVG natively — meaning your designs are already web-ready. Design tokens and code output are first-class features.</p>
+<p><strong>Strengths:</strong> Fully open source (AGPL). Self-host for unlimited projects and privacy. SVG-native — designs map directly to web standards. Design tokens for developer handoff. Generous free tier on penpot.app.</p>
+<p><strong>Weaknesses:</strong> Smaller community and plugin ecosystem. Fewer templates than Figma or Canva. Some advanced features still catching up to Figma. Self-hosting requires Docker knowledge.</p>
+<p><strong>Best for:</strong> Open-source teams, privacy-conscious organizations, projects where design tokens matter, teams that want to customize their design tool.</p>
+
+<h2>The Developer's Design Stack</h2>
+<table>
+<tr><th>Task</th><th>Best Tool</th></tr>
+<tr><td>Designing a web/mobile app UI</td><td><strong>Figma</strong> (free tier)</td></tr>
+<tr><td>Quick blog header or social media graphic</td><td><strong>Canva</strong> (free tier)</td></tr>
+<tr><td>Open-source project, privacy-first</td><td><strong>Penpot</strong> (free)</td></tr>
+<tr><td>Template-heavy work (slides, resumes, flyers)</td><td><strong>Canva</strong></td></tr>
+<tr><td>Professional UI with developer handoff</td><td><strong>Figma</strong></td></tr>
+</table>
+
+<p><strong>Bottom line for developers:</strong> Use Figma for UI design, Canva for marketing graphics. Both have excellent free tiers. See our <a href="/en/tools/design-tools-for-developers.html">full design tools guide</a> for color palettes, icons, and illustration resources.</p>
+'''
+
 # FAQ data for FAQPage schema (slug → list of q/a dicts)
 FAQS = {
     'chatgpt-plus-worth': [
@@ -1902,12 +2093,14 @@ def make_category(data, board_id):
         'sidehustle': 'Side Hustle',
         'tools': 'Tool Recommendations',
         'ai': 'AI Tutorials',
+        'compare': 'Comparisons',
     }
     board_descs = {
         'tech': 'Programming tutorials, developer tools, and productivity guides.',
         'sidehustle': 'Freelancing, remote work, and side income strategies for developers.',
         'tools': 'Curated tool recommendations for productivity, design, and development.',
         'ai': 'AI tools, prompt engineering, and practical guides for working with LLMs.',
+        'compare': 'Honest tool comparisons with pricing, feature tables, and clear recommendations.',
     }
     title = board_titles[board_id]
 
