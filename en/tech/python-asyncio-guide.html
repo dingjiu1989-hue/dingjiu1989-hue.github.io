@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="python-asyncio-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Python asyncio Complete Guide: Coroutines, Tasks, and Event Loops">
+    <meta property="og:description" content="Master Python async programming: coroutines with async/await, Task groups in Python 3.11+, asyncio.gather vs as_completed, error handling in async code, and integrating async with sync libraries.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/python-asyncio-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Python asyncio Complete Guide: Coroutines, Tasks, and Event Loops">
+    <meta name="twitter:description" content="Master Python async programming: coroutines with async/await, Task groups in Python 3.11+, asyncio.gather vs as_completed, error handling in async code, and integrating async with sync libraries.">
+    <title>Python asyncio Complete Guide: Coroutines, Tasks, and Event Loops — SourceHub</title>
+    <meta name="description" content="Master Python async programming: coroutines with async/await, Task groups in Python 3.11+, asyncio.gather vs as_completed, error handling in async code, and integrating async with sync libraries.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/python-asyncio-guide.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/python-asyncio-guide.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Python asyncio Complete Guide: Coroutines, Tasks, and Event Loops",
+      "description": "Master Python async programming: coroutines with async/await, Task groups in Python 3.11+, asyncio.gather vs as_completed, error handling in async code, and integrating async with sync libraries.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Python asyncio Complete Guide: Coroutines, Tasks, and Event Loops"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Python asyncio Complete Guide: Coroutines, Tasks, and Event Loops
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Python</span>
+        <span class="tag-cat">asyncio</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Performance</span></div>
+      <h1 class="article-title">Python asyncio Complete Guide: Coroutines, Tasks, and Event Loops</h1>
+      <div class="article-meta">Published 2026-05-08 · 4440 views · 37 replies</div>
+      <div class="article-body"><p>Python's asyncio has matured into the standard way to write concurrent I/O-bound code, but the learning curve remains steep. The introduction of Task Groups in Python 3.11 and improved exception handling make async Python more ergonomic than ever. This guide covers the patterns that work — and the ones that bite you — with production-ready examples.</p>
+
+<h2>Core Concepts</h2>
+<table>
+<tr><th>Concept</th><th>What It Is</th><th>When to Use</th></tr>
+<tr><td>Coroutine</td><td>A function defined with async def — can be suspended and resumed</td><td>Any I/O-bound operation: HTTP requests, DB queries, file I/O</td></tr>
+<tr><td>Task</td><td>A coroutine wrapped and scheduled to run on the event loop</td><td>Run multiple coroutines concurrently</td></tr>
+<tr><td>Event Loop</td><td>The scheduler that runs async code (one thread, cooperative multitasking)</td><td>You rarely touch this directly — asyncio.run() handles it</td></tr>
+<tr><td>Awaitable</td><td>Anything you can await: coroutine, Task, Future</td><td>Use await to pause until the result is ready</td></tr>
+</table>
+
+<h2>Task Groups (Python 3.11+): The Modern Way</h2>
+<p><strong>Best for:</strong> Running multiple async tasks concurrently with proper error handling. Replaces asyncio.gather() with structured concurrency — if one task fails, all sibling tasks are cancelled.</p>
+<pre><code>import asyncio
+import aiohttp
+
+async def fetch_url(url: str) -> dict:
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as resp:
+            return await resp.json()
+
+async def main():
+    urls = ['https://api1.example.com', 'https://api2.example.com']
+    async with asyncio.TaskGroup() as tg:
+        tasks = [tg.create_task(fetch_url(url)) for url in urls]
+    # All tasks completed (or exception propagated) after exiting TaskGroup
+    return [t.result() for t in tasks]
+
+results = asyncio.run(main())</code></pre>
+
+<h2>asyncio.gather vs as_completed</h2>
+<table>
+<tr><th>Function</th><th>Behavior</th><th>Use Case</th></tr>
+<tr><td>asyncio.gather()</td><td>Run all tasks, return results in order. If one raises, it propagates. Prefer TaskGroup in 3.11+.</td><td>When you need all results and order matters</td></tr>
+<tr><td>asyncio.as_completed()</td><td>Yield results as each task finishes (fastest first)</td><td>When you want to process results as they arrive</td></tr>
+<tr><td>asyncio.wait()</td><td>Low-level: wait for FIRST_COMPLETED or ALL_COMPLETED</td><td>Timeouts, race conditions, advanced patterns</td></tr>
+</table>
+
+<h2>Common Pitfalls and Solutions</h2>
+<h3>1. Running Blocking Code in Async Functions</h3>
+<p><strong>Problem:</strong> Calling a sync function (e.g., time.sleep, requests.get, heavy CPU work) inside an async function blocks the entire event loop. <strong>Solution:</strong> Use asyncio.to_thread() for I/O-bound blocking code, or run_in_executor() for CPU-bound work.</p>
+<pre><code># Bad: blocks the event loop
+result = requests.get('https://api.example.com')
+
+# Good: offload to a thread
+result = await asyncio.to_thread(requests.get, 'https://api.example.com')</code></pre>
+
+<h3>2. Unhandled Exceptions in Background Tasks</h3>
+<p><strong>Problem:</strong> If a Task raises an exception and you never await it, the exception is silently lost until garbage collection. <strong>Solution:</strong> Always use TaskGroup — it ensures exceptions are propagated. For fire-and-forget tasks, add a done callback that logs exceptions.</p>
+
+<h3>3. Creating Too Many Concurrent Connections</h3>
+<p><strong>Solution:</strong> Use asyncio.Semaphore to limit concurrency:</p>
+<pre><code>sem = asyncio.Semaphore(20)  # Max 20 concurrent requests
+async def rate_limited_fetch(url):
+    async with sem:
+        return await fetch_url(url)</code></pre>
+
+<p><strong>Bottom line:</strong> Use TaskGroup for structured concurrency — it replaces the error-prone gather() pattern. Keep async code purely async (offload blocking code to threads). Always limit concurrency with Semaphore when making external requests. See also: <a href="/en/tech/nodejs-streams-guide.html">Node.js Streams Guide</a> and <a href="/en/tech/error-handling-best-practices.html">Error Handling Best Practices</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

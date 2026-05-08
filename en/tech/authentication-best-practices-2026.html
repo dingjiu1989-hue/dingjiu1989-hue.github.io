@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="authentication-best-practices-2026">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys">
+    <meta property="og:description" content="Production-ready auth guide: JWT vs session tokens, OAuth 2.1 flows, WebAuthn/Passkeys implementation, refresh token rotation, CSRF protection, and RBAC patterns. Code examples in Node.js and Python.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/authentication-best-practices-2026.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys">
+    <meta name="twitter:description" content="Production-ready auth guide: JWT vs session tokens, OAuth 2.1 flows, WebAuthn/Passkeys implementation, refresh token rotation, CSRF protection, and RBAC patterns. Code examples in Node.js and Python.">
+    <title>Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys — SourceHub</title>
+    <meta name="description" content="Production-ready auth guide: JWT vs session tokens, OAuth 2.1 flows, WebAuthn/Passkeys implementation, refresh token rotation, CSRF protection, and RBAC patterns. Code examples in Node.js and Python.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/authentication-best-practices-2026.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/authentication-best-practices-2026.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys",
+      "description": "Production-ready auth guide: JWT vs session tokens, OAuth 2.1 flows, WebAuthn/Passkeys implementation, refresh token rotation, CSRF protection, and RBAC patterns. Code examples in Node.js and Python.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">Authentication</span>
+        <span class="tag-cat">Security</span>
+        <span class="tag-cat">JWT</span>
+        <span class="tag-cat">OAuth</span>
+        <span class="tag-cat">Web Dev</span></div>
+      <h1 class="article-title">Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys</h1>
+      <div class="article-meta">Published 2026-05-08 · 8760 views · 73 replies</div>
+      <div class="article-body"><p>Getting authentication wrong is the fastest way to compromise your entire application. In 2026, the auth landscape has matured significantly — passkeys (WebAuthn) are gaining traction, OAuth 2.1 is clarifying long-standing ambiguities, and JWT best practices have crystallized. This guide covers the patterns that protect production applications, with code examples in Node.js and Python.</p>
+
+<h2>Authentication Methods Compared</h2>
+<table>
+<tr><th>Method</th><th>Security Level</th><th>UX</th><th>Complexity</th><th>Best For</th></tr>
+<tr><td>Session Tokens (cookie-based)</td><td>High (with proper config)</td><td>Excellent</td><td>Low</td><td>Traditional web apps, server-rendered pages</td></tr>
+<tr><td>JWT (stateless)</td><td>Medium-High</td><td>Good</td><td>Medium</td><td>APIs, microservices, mobile apps</td></tr>
+<tr><td>OAuth 2.1 + OIDC</td><td>High</td><td>Good (redirect flow)</td><td>Medium-High</td><td>Third-party login, enterprise SSO</td></tr>
+<tr><td>Passkeys (WebAuthn)</td><td>Highest (phishing-resistant)</td><td>Excellent (biometric)</td><td>Medium</td><td>Consumer apps, replacing passwords</td></tr>
+<tr><td>Magic Links</td><td>Medium</td><td>Good (email-based)</td><td>Low</td><td>Low-security apps, quick onboarding</td></tr>
+<tr><td>API Keys</td><td>Medium (if stored properly)</td><td>N/A (machine-to-machine)</td><td>Low</td><td>Server-to-server APIs, CI/CD, SDKs</td></tr>
+</table>
+
+<h2>Session Tokens: The Gold Standard for Web Apps</h2>
+<p><strong>Best for:</strong> Server-rendered web applications where the same origin serves both frontend and API. <strong>Key rules:</strong></p>
+<ul>
+<li>Use httpOnly, Secure, SameSite=Lax cookies</li>
+<li>Store session data in Redis (not in-memory, not in JWT) for fast lookup and revocation</li>
+<li>Rotate the session ID on login (prevent session fixation)</li>
+<li>Implement CSRF protection for cookie-based sessions (double-submit cookie pattern or Synchronizer Token)</li>
+<li>Set reasonable session duration: 15 minutes idle timeout, 8 hours absolute max</li>
+</ul>
+
+<h2>JWT: When and How to Use Safely</h2>
+<p><strong>Best for:</strong> APIs consumed by multiple client types (web, mobile, third-party). <strong>Critical rules:</strong> Never store sensitive data in JWT payload (it is base64-encoded, not encrypted). Always set short expiration (15-60 min) and use refresh tokens for renewal. Maintain a server-side token denylist for revoked tokens.</p>
+<pre><code>// Node.js: Signing a JWT securely
+const jwt = require('jsonwebtoken');
+const token = jwt.sign(
+  { sub: user.id, role: user.role },
+  process.env.JWT_SECRET, // >= 256-bit random string, stored in env
+  { expiresIn: '15m', algorithm: 'HS256' } // Never use 'none' algorithm
+);
+
+// Refresh token rotation: issue a new refresh token each time
+// and invalidate the old one (maintain a family of refresh tokens)</code></pre>
+
+<h2>Passkeys (WebAuthn): The Future of Authentication</h2>
+<p><strong>Best for:</strong> Consumer applications that want to eliminate passwords. Passkeys use public-key cryptography — the private key stays on the user's device, and the server only stores the public key. This makes phishing and credential stuffing impossible. <strong>Implementation:</strong> Use the WebAuthn API on the client (navigator.credentials.create/get) and a library like @simplewebauthn/server on the backend.</p>
+
+<h2>OAuth 2.1: What Changed from 2.0</h2>
+<ul>
+<li>PKCE is now required for all authorization code grants (no more implicit flow)</li>
+<li>Refresh token rotation is mandatory (one-time-use refresh tokens)</li>
+<li>The Resource Owner Password Credentials grant is removed (never send username/password to an authorization server)</li>
+<li>Bearer tokens must not be passed in URL query strings</li>
+</ul>
+
+<h2>Password Storage: Non-Negotiable Rules</h2>
+<table>
+<tr><th>Rule</th><th>Correct</th><th>Wrong</th></tr>
+<tr><td>Hash algorithm</td><td>bcrypt (cost 12+), argon2id</td><td>SHA-256, MD5, bcrypt with cost < 10</td></tr>
+<tr><td>Pepper</td><td>32-byte random pepper stored in HSM or env var, separate from DB</td><td>No pepper, or pepper stored in same DB column</td></tr>
+<tr><td>Password requirements</td><td>Minimum 8 chars, check against haveibeenpwned API</td><td>Requiring special chars that users forget; max length limits</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Use session tokens for web apps and JWTs for APIs — do not use JWTs for web app sessions. Implement passkeys as your primary auth method if possible (highest security + best UX). Never roll your own crypto — use well-tested libraries (bcrypt, @simplewebauthn, jose, node-crypto). See also: <a href="/en/compare/clerk-vs-auth0-vs-lucia.html">Clerk vs Auth0 vs Lucia</a> and <a href="/en/tech/web-security-basics.html">Web Security Basics</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

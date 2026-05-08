@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="compare" data-exclude="eslint-vs-prettier-vs-biome">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="ESLint vs Prettier vs Biome (2026): Which Code Formatter Wins?">
+    <meta property="og:description" content="In-depth comparison of JavaScript/TypeScript formatting and linting tools: speed, features, plugin ecosystems, and migration paths. Biome is 25x faster than Prettier — but should you switch?">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/compare/eslint-vs-prettier-vs-biome.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ESLint vs Prettier vs Biome (2026): Which Code Formatter Wins?">
+    <meta name="twitter:description" content="In-depth comparison of JavaScript/TypeScript formatting and linting tools: speed, features, plugin ecosystems, and migration paths. Biome is 25x faster than Prettier — but should you switch?">
+    <title>ESLint vs Prettier vs Biome (2026): Which Code Formatter Wins? — SourceHub</title>
+    <meta name="description" content="In-depth comparison of JavaScript/TypeScript formatting and linting tools: speed, features, plugin ecosystems, and migration paths. Biome is 25x faster than Prettier — but should you switch?">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/compare/eslint-vs-prettier-vs-biome.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/compare/eslint-vs-prettier-vs-biome.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "ESLint vs Prettier vs Biome (2026): Which Code Formatter Wins?",
+      "description": "In-depth comparison of JavaScript/TypeScript formatting and linting tools: speed, features, plugin ecosystems, and migration paths. Biome is 25x faster than Prettier — but should you switch?",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Comparisons", "item": "https://dingjiu1989-hue.github.io/en/compare/"},
+        {"@type": "ListItem", "position": 3, "name": "ESLint vs Prettier vs Biome (2026): Which Code Formatter Wins?"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/compare/">Comparisons</a> › ESLint vs Prettier vs Biome (2026): Which Code Formatter Wins?
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">ESLint</span>
+        <span class="tag-cat">Prettier</span>
+        <span class="tag-cat">Biome</span>
+        <span class="tag-cat">Linting</span>
+        <span class="tag-cat">Code Quality</span></div>
+      <h1 class="article-title">ESLint vs Prettier vs Biome (2026): Which Code Formatter Wins?</h1>
+      <div class="article-meta">Published 2026-05-08 · 6240 views · 52 replies</div>
+      <div class="article-body"><p>Every JavaScript project needs linting and formatting — but the tooling landscape has shifted dramatically in 2026. Biome, the Rust-powered linter + formatter, has matured into a serious contender against the incumbents ESLint and Prettier. This comparison covers the key differences, migration paths, and whether it is time to switch.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>ESLint</th><th>Prettier</th><th>Biome</th></tr>
+<tr><td>Type</td><td>Linter (rules-based)</td><td>Formatter (opinionated)</td><td>Linter + Formatter (unified)</td></tr>
+<tr><td>Language</td><td>JavaScript</td><td>JavaScript</td><td>Rust</td></tr>
+<tr><td>Speed (format 1,000 files)</td><td>N/A (lint only)</td><td>~12 seconds</td><td>~0.5 seconds (25x faster)</td></tr>
+<tr><td>Speed (lint 1,000 files)</td><td>~30 seconds</td><td>N/A</td><td>~1.2 seconds (25x faster)</td></tr>
+<tr><td>Supported Languages</td><td>JS, TS, JSX, TSX</td><td>JS, TS, JSX, TSX, JSON, CSS, HTML, YAML, Markdown</td><td>JS, TS, JSX, TSX, JSON, CSS (growing)</td></tr>
+<tr><td>Plugin Ecosystem</td><td>3,000+ plugins, 300+ configs</td><td>Minimal (opinionated by design)</td><td>Built-in rules (growing, no external plugins yet)</td></tr>
+<tr><td>Config Format</td><td>JS, JSON, YAML, eslint.config.js</td><td>.prettierrc (JSON/YAML/JS)</td><td>biome.json (JSON/JSONC)</td></tr>
+<tr><td>VSCode Integration</td><td>Excellent</td><td>Excellent</td><td>Excellent (one extension for both)</td></tr>
+<tr><td>CI/CD</td><td>eslint CLI, reviewdog</td><td>prettier --check</td><td>biome ci (combined lint + format check)</td></tr>
+<tr><td>Auto-Fix</td><td>Yes (--fix)</td><td>Yes (--write)</td><td>Yes (biome check --write, both lint + format)</td></tr>
+</table>
+
+<h2>ESLint — The Incumbent</h2>
+<p><strong>Best for:</strong> Projects that need highly customized linting rules, TypeScript-specific checks, or framework-specific rules (React, Vue, Svelte). The plugin ecosystem is the moat — eslint-plugin-import, eslint-plugin-unicorn, and @typescript-eslint cover edge cases Biome cannot yet touch. <strong>Weak spot:</strong> Slow on large codebases; configuration sprawl; requires separate Prettier setup for formatting.</p>
+
+<h2>Prettier — The Standard</h2>
+<p><strong>Best for:</strong> Teams that value consistency over customizability. Prettier's opinionated approach eliminates formatting debates. <strong>Weak spot:</strong> Speed on very large repos; limited configurability; formatting-only means you still need ESLint for code quality rules.</p>
+
+<h2>Biome — The Challenger</h2>
+<p><strong>Best for:</strong> New projects that want fast, unified linting + formatting without juggling two tools. Biome's speed (25x faster than both) is genuinely noticeable in CI. <strong>Weak spot:</strong> No plugin system yet — you cannot write custom rules or use community plugins. For projects heavily invested in ESLint plugins, Biome is not a drop-in replacement.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Situation</th><th>Best Choice</th><th>Why</th></tr>
+<tr><td>New project, fresh start</td><td>Biome</td><td>Fast, unified, modern, no legacy config</td></tr>
+<tr><td>Large monorepo, slow CI</td><td>Biome</td><td>25x speed improvement in lint/format CI step</td></tr>
+<tr><td>Heavy ESLint plugin usage</td><td>ESLint + Prettier</td><td>Biome cannot replace custom ESLint plugins yet</td></tr>
+<tr><td>Maximum consistency</td><td>Prettier + Biome (linter)</td><td>Prettier for formatting, Biome for linting (faster than ESLint)</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Biome is ready for production in 2026 — for most projects, the speed win alone justifies the switch. The main blocker is plugin dependencies. If your ESLint setup is "eslint:recommended + @typescript-eslint + prettier," Biome can replace all of it today. See also: <a href="/en/compare/prettier-vs-biome.html">Prettier vs Biome</a> and <a href="/en/tech/typescript-advanced-patterns.html">TypeScript Advanced Patterns</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/compare/cursor-vs-copilot-vs-claude-code.html" class="related-card">Cursor vs GitHub Copilot vs Claude Code (2026): Which AI Coding Tool Wins?</a><a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html" class="related-card">Vercel vs Netlify vs Cloudflare Pages (2026): Best Hosting for Developers</a><a href="/en/compare/supabase-vs-firebase-vs-neon.html" class="related-card">Supabase vs Firebase vs Neon (2026): Best Backend for Solo Developers</a><a href="/en/compare/figma-vs-canva-vs-penpot.html" class="related-card">Figma vs Canva vs Penpot (2026): Best Design Tool for Developers</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

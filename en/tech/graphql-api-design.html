@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="graphql-api-design">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="GraphQL API Design: Schema Best Practices, Federation, and Performance">
+    <meta property="og:description" content="Design production GraphQL APIs: schema-first design, N+1 query solutions (DataLoader), federation for microservices, error handling patterns, and caching strategies. Real examples from GitHub and Shopify APIs.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/graphql-api-design.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="GraphQL API Design: Schema Best Practices, Federation, and Performance">
+    <meta name="twitter:description" content="Design production GraphQL APIs: schema-first design, N+1 query solutions (DataLoader), federation for microservices, error handling patterns, and caching strategies. Real examples from GitHub and Shopify APIs.">
+    <title>GraphQL API Design: Schema Best Practices, Federation, and Performance — SourceHub</title>
+    <meta name="description" content="Design production GraphQL APIs: schema-first design, N+1 query solutions (DataLoader), federation for microservices, error handling patterns, and caching strategies. Real examples from GitHub and Shopify APIs.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/graphql-api-design.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/graphql-api-design.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "GraphQL API Design: Schema Best Practices, Federation, and Performance",
+      "description": "Design production GraphQL APIs: schema-first design, N+1 query solutions (DataLoader), federation for microservices, error handling patterns, and caching strategies. Real examples from GitHub and Shopify APIs.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "GraphQL API Design: Schema Best Practices, Federation, and Performance"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › GraphQL API Design: Schema Best Practices, Federation, and Performance
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">GraphQL</span>
+        <span class="tag-cat">API</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Architecture</span></div>
+      <h1 class="article-title">GraphQL API Design: Schema Best Practices, Federation, and Performance</h1>
+      <div class="article-meta">Published 2026-05-08 · 4320 views · 36 replies</div>
+      <div class="article-body"><p>GraphQL API design involves tradeoffs that REST does not — N+1 queries, over-fetching is replaced with potential under-fetching, and the flexibility of client-driven queries creates new security and performance challenges. This guide covers schema design, federation, performance optimization, and patterns learned from production GraphQL APIs at GitHub, Shopify, and Stripe.</p>
+
+<h2>Schema Design Principles</h2>
+<table>
+<tr><th>Principle</th><th>Good Practice</th><th>Anti-Pattern</th></tr>
+<tr><td>Naming</td><td>Use descriptive names: <code>article(id: ID!): Article</code></td><td>Generic names: <code>node(id: ID!): Node</code> for everything</td></tr>
+<tr><td>Nullability</td><td>Mark fields as nullable unless always present: <code>email: String</code></td><td>Making everything Non-Null: <code>email: String!</code> — breaks clients on partial data</td></tr>
+<tr><td>Pagination</td><td>Cursor-based (Relay spec): <code>articles(first: Int, after: String): ArticleConnection!</code></td><td>Offset-based: <code>articles(page: Int): [Article]</code> — breaks under concurrent writes</td></tr>
+<tr><td>Mutations</td><td>Specific input types per mutation: <code>createArticle(input: CreateArticleInput!): Article!</code></td><td>Reusing types between queries and mutations (they diverge)</td></tr>
+<tr><td>Errors</td><td>Union type for success/error: <code>CreateArticlePayload = Article | ValidationError | PermissionError</code></td><td>Using HTTP status codes or top-level errors for business logic errors</td></tr>
+<tr><td>Versioning</td><td>Add fields, deprecate with @deprecated, never remove</td><td>Breaking changes without deprecation period</td></tr>
+</table>
+
+<h2>Solving the N+1 Problem with DataLoader</h2>
+<p><strong>Best for:</strong> Batching and caching database queries during a single GraphQL request. Without DataLoader, each user in a list would trigger a separate database query for their posts.</p>
+<pre><code>// Without DataLoader: N+1 queries
+// Query: { users { name posts { title } } }
+// Result: 1 query for users + N queries for each user's posts
+
+// With DataLoader: 2 queries total
+const userLoader = new DataLoader(async (userIds) => {
+  const posts = await db.posts.findMany({
+    where: { authorId: { in: userIds } }
+  });
+  // Group posts by userId and return in same order as userIds
+  return userIds.map(id => posts.filter(p => p.authorId === id));
+});</code></pre>
+
+<h2>Federation for Microservices</h2>
+<p><strong>Best for:</strong> Large organizations where different teams own different parts of the graph. Each team owns their subgraph, and a gateway (Apollo Router or GraphOS) composes them into one unified graph.</p>
+<table>
+<tr><th>Component</th><th>Responsibility</th><th>Example</th></tr>
+<tr><td>Subgraph</td><td>One team's slice of the schema</td><td>Users subgraph, Products subgraph, Orders subgraph</td></tr>
+<tr><td>Entity</td><td>Type shared across subgraphs via @key directive</td><td>User type: @key(fields: "id") in both subgraphs</td></tr>
+<tr><td>Gateway</td><td>Routes queries to the right subgraph(s), stitches responses</td><td>Apollo Router (Rust, fast), GraphOS</td></tr>
+</table>
+
+<h2>Performance Checklist</h2>
+<ul>
+<li><strong>Persisted queries:</strong> Register queries at build time, clients send a hash instead of the full query — reduces bandwidth and blocks arbitrary queries</li>
+<li><strong>Query depth limiting:</strong> Reject queries deeper than 7-10 levels to prevent recursive denial-of-service attacks</li>
+<li><strong>Query cost analysis:</strong> Assign costs to fields (scalar=1, connection=10) and reject queries exceeding a total cost threshold</li>
+<li><strong>Response caching:</strong> Cache resolver results with cache-control headers or Redis; use schema-level caching hints (@cacheControl)</li>
+<li><strong>Batched HTTP requests:</strong> Use @apollo/client's batchHttpLink to combine multiple queries into a single HTTP request</li>
+</ul>
+
+<p><strong>Bottom line:</strong> GraphQL's flexibility is also its biggest risk — without guardrails (depth limiting, cost analysis, persisted queries), a single malicious query can take down your server. Invest in the DataLoader pattern from day one. If you are a single team, start with a monolith schema before reaching for federation. See also: <a href="/en/compare/trpc-vs-graphql-vs-rest.html">tRPC vs GraphQL vs REST</a> and <a href="/en/tech/api-design-patterns.html">API Design Patterns</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

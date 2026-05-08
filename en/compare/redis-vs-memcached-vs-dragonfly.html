@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="compare" data-exclude="redis-vs-memcached-vs-dragonfly">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Redis vs Memcached vs Dragonfly (2026): In-Memory Data Store Comparison">
+    <meta property="og:description" content="Compare Redis, Memcached, and the newer Dragonfly on throughput, persistence, data structures, clustering, and cost. Find the right caching layer for your stack.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/compare/redis-vs-memcached-vs-dragonfly.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Redis vs Memcached vs Dragonfly (2026): In-Memory Data Store Comparison">
+    <meta name="twitter:description" content="Compare Redis, Memcached, and the newer Dragonfly on throughput, persistence, data structures, clustering, and cost. Find the right caching layer for your stack.">
+    <title>Redis vs Memcached vs Dragonfly (2026): In-Memory Data Store Comparison — SourceHub</title>
+    <meta name="description" content="Compare Redis, Memcached, and the newer Dragonfly on throughput, persistence, data structures, clustering, and cost. Find the right caching layer for your stack.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/compare/redis-vs-memcached-vs-dragonfly.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/compare/redis-vs-memcached-vs-dragonfly.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Redis vs Memcached vs Dragonfly (2026): In-Memory Data Store Comparison",
+      "description": "Compare Redis, Memcached, and the newer Dragonfly on throughput, persistence, data structures, clustering, and cost. Find the right caching layer for your stack.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Comparisons", "item": "https://dingjiu1989-hue.github.io/en/compare/"},
+        {"@type": "ListItem", "position": 3, "name": "Redis vs Memcached vs Dragonfly (2026): In-Memory Data Store Comparison"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/compare/">Comparisons</a> › Redis vs Memcached vs Dragonfly (2026): In-Memory Data Store Comparison
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Redis</span>
+        <span class="tag-cat">Memcached</span>
+        <span class="tag-cat">Caching</span>
+        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Comparison</span></div>
+      <h1 class="article-title">Redis vs Memcached vs Dragonfly (2026): In-Memory Data Store Comparison</h1>
+      <div class="article-meta">Published 2026-05-08 · 4560 views · 38 replies</div>
+      <div class="article-body"><p>When your database becomes a bottleneck, an in-memory data store is the standard solution. Redis has dominated this space for a decade, but Dragonfly (a modern Redis-compatible drop-in replacement) claims 25x throughput, and Memcached still excels at pure caching. This comparison focuses on real throughput numbers and when each tool fits your architecture.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>Redis 7</th><th>Memcached</th><th>Dragonfly</th></tr>
+<tr><td>Type</td><td>Data structure server</td><td>Pure key-value cache</td><td>Redis-compatible, multi-threaded</td></tr>
+<tr><td>Language</td><td>C</td><td>C</td><td>C++</td></tr>
+<tr><td>Data Structures</td><td>Strings, Lists, Sets, Hashes, Sorted Sets, Streams, JSON, Time Series, Probabilistic</td><td>Strings only</td><td>All Redis data structures (Redis API compatible)</td></tr>
+<tr><td>Persistence</td><td>RDB snapshots, AOF, both combined</td><td>None (cache only)</td><td>Snapshotting</td></tr>
+<tr><td>Replication</td><td>Primary-replica, Redis Cluster (sharding)</td><td>None</td><td>Primary-replica</td></tr>
+<tr><td>Transactions</td><td>MULTI/EXEC, Lua scripting</td><td>CAS (check-and-set)</td><td>MULTI/EXEC, Lua scripting</td></tr>
+<tr><td>Pub/Sub</td><td>Yes (PUBLISH/SUBSCRIBE, Streams)</td><td>No</td><td>Yes</td></tr>
+<tr><td>Multi-Threading</td><td>Single-threaded (I/O threading in 6+)</td><td>Multi-threaded by default</td><td>Multi-threaded (shared-nothing architecture)</td></tr>
+<tr><td>Max Memory Efficiency</td><td>Good (jemalloc)</td><td>Slab-based (fragmentation issues)</td><td>Excellent (30% less memory than Redis)</td></tr>
+<tr><td>Throughput (Ops/sec, 1M keys)</td><td>~120K ops/sec</td><td>~400K ops/sec (pure cache)</td><td>~4M ops/sec (25x Redis)</td></tr>
+</table>
+
+<h2>When Each Tool Wins</h2>
+<p><strong>Redis — Best for:</strong> Applications that need more than simple key-value caching: rate limiting (Sorted Sets), message queues (Streams), leaderboards (Sorted Sets), session stores (Hashes with TTL), and distributed locking (Redlock). <strong>Weak spot:</strong> Single-threaded bottleneck — one slow command blocks everything; vertical scaling only.</p>
+
+<p><strong>Memcached — Best for:</strong> Pure, simple caching where you just need to store and retrieve key-value data fast. Memcached's multi-threaded architecture means it scales horizontally on multi-core machines more efficiently than Redis. <strong>Weak spot:</strong> No data structures, no persistence, no replication — it is a cache, not a database.</p>
+
+<p><strong>Dragonfly — Best for:</strong> Teams that want Redis compatibility but need higher throughput on fewer servers. Dragonfly is a drop-in Redis replacement (same protocol, same commands) with 25x better throughput on multi-core machines. <strong>Weak spot:</strong> Newer project (fewer production war stories); Redis Cluster not yet fully compatible.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Your Use Case</th><th>Best Tool</th><th>Why</th></tr>
+<tr><td>Application caching (key-value)</td><td>Memcached</td><td>Simplest, fastest for pure cache workloads</td></tr>
+<tr><td>Session store, rate limiting, leaderboards, queues</td><td>Redis</td><td>Data structures solve these elegantly</td></tr>
+<tr><td>Redis-compatible but need higher throughput</td><td>Dragonfly</td><td>Drop-in replacement, 25x faster on multi-core</td></tr>
+<tr><td>Message queuing / event streaming</td><td>Redis Streams</td><td>Lightweight alternative to Kafka for moderate volumes</td></tr>
+<tr><td>Distributed locking</td><td>Redis (with Redlock library)</td><td>Mature, well-understood patterns</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Redis is the default choice — the data structures, persistence, and ecosystem are unmatched. Use Memcached if you need pure caching at maximum speed. Dragonfly is the most exciting alternative: Redis-compatible, 25x faster, and 30% less memory — perfect for teams hitting Redis scaling limits. See also: <a href="/en/compare/postgresql-vs-mysql-vs-sqlite.html">PostgreSQL vs MySQL vs SQLite</a> and <a href="/en/tech/caching-strategies-web-apps.html">Caching Strategies for Web Apps</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/compare/cursor-vs-copilot-vs-claude-code.html" class="related-card">Cursor vs GitHub Copilot vs Claude Code (2026): Which AI Coding Tool Wins?</a><a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html" class="related-card">Vercel vs Netlify vs Cloudflare Pages (2026): Best Hosting for Developers</a><a href="/en/compare/supabase-vs-firebase-vs-neon.html" class="related-card">Supabase vs Firebase vs Neon (2026): Best Backend for Solo Developers</a><a href="/en/compare/figma-vs-canva-vs-penpot.html" class="related-card">Figma vs Canva vs Penpot (2026): Best Design Tool for Developers</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

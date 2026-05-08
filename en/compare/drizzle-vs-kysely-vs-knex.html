@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="compare" data-exclude="drizzle-vs-kysely-vs-knex">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Drizzle ORM vs Kysely vs Knex.js (2026): SQL Query Builder Showdown">
+    <meta property="og:description" content="Comparison of TypeScript SQL tools: Drizzle (lightweight ORM), Kysely (type-safe query builder), and Knex.js (veteran). When to use a query builder instead of a full ORM.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/compare/drizzle-vs-kysely-vs-knex.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Drizzle ORM vs Kysely vs Knex.js (2026): SQL Query Builder Showdown">
+    <meta name="twitter:description" content="Comparison of TypeScript SQL tools: Drizzle (lightweight ORM), Kysely (type-safe query builder), and Knex.js (veteran). When to use a query builder instead of a full ORM.">
+    <title>Drizzle ORM vs Kysely vs Knex.js (2026): SQL Query Builder Showdown — SourceHub</title>
+    <meta name="description" content="Comparison of TypeScript SQL tools: Drizzle (lightweight ORM), Kysely (type-safe query builder), and Knex.js (veteran). When to use a query builder instead of a full ORM.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/compare/drizzle-vs-kysely-vs-knex.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/compare/drizzle-vs-kysely-vs-knex.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Drizzle ORM vs Kysely vs Knex.js (2026): SQL Query Builder Showdown",
+      "description": "Comparison of TypeScript SQL tools: Drizzle (lightweight ORM), Kysely (type-safe query builder), and Knex.js (veteran). When to use a query builder instead of a full ORM.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Comparisons", "item": "https://dingjiu1989-hue.github.io/en/compare/"},
+        {"@type": "ListItem", "position": 3, "name": "Drizzle ORM vs Kysely vs Knex.js (2026): SQL Query Builder Showdown"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/compare/">Comparisons</a> › Drizzle ORM vs Kysely vs Knex.js (2026): SQL Query Builder Showdown
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">ORM</span>
+        <span class="tag-cat">SQL</span>
+        <span class="tag-cat">TypeScript</span>
+        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Comparison</span></div>
+      <h1 class="article-title">Drizzle ORM vs Kysely vs Knex.js (2026): SQL Query Builder Showdown</h1>
+      <div class="article-meta">Published 2026-05-08 · 4200 views · 35 replies</div>
+      <div class="article-body"><p>TypeScript developers increasingly reach for query builders instead of full ORMs — they want type safety without the magic. Drizzle ORM, Kysely, and Knex.js represent three approaches to this problem: Drizzle is a lightweight ORM with a query-builder feel, Kysely is a pure type-safe query builder, and Knex.js is the veteran that predates TypeScript. This comparison helps you pick the right level of abstraction.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>Drizzle ORM</th><th>Kysely</th><th>Knex.js</th></tr>
+<tr><td>Type</td><td>Lightweight ORM + query builder</td><td>Type-safe SQL query builder</td><td>SQL query builder (JS first)</td></tr>
+<tr><td>Language</td><td>TypeScript</td><td>TypeScript</td><td>JavaScript (+ @types/knex for TS)</td></tr>
+<tr><td>Type Safety</td><td>Excellent — inferred from schema</td><td>Excellent — inferred from Database interface</td><td>Moderate — TS types are add-on, not core</td></tr>
+<tr><td>Schema Definition</td><td>Code-first (TypeScript schemas + drizzle-kit)</td><td>Manual (define Database type interface)</td><td>Migrations (knex migrate:make)</td></tr>
+<tr><td>Migration Tool</td><td>drizzle-kit (SQL + TypeScript migrations)</td><td>None built-in (use kysely-codegen + manual)</td><td>Built-in (knex migrate:make/latest/rollback)</td></tr>
+<tr><td>Supported Databases</td><td>PostgreSQL, MySQL, SQLite, Turso, Neon, Planetscale, Xata, SingleStore</td><td>PostgreSQL, MySQL, SQLite, MSSQL (via dialects)</td><td>PostgreSQL, MySQL, SQLite, MSSQL, Oracle, Redshift, CockroachDB</td></tr>
+<tr><td>Relationship Queries</td><td>relations() API, findMany with joins</td><td>Manual JOINs (no relation abstraction)</td><td>Manual JOINs</td></tr>
+<tr><td>Raw SQL Escape Hatch</td><td>sql tagged template</td><td>sql tagged template</td><td>knex.raw()</td></tr>
+<tr><td>Connection Pooling</td><td>Via drivers (pg, mysql2, better-sqlite3)</td><td>Via drivers (pg, mysql2, better-sqlite3)</td><td>Built-in (tarn.js)</td></tr>
+<tr><td>Bundle Size</td><td>~10 KB (core)</td><td>~15 KB</td><td>~40 KB</td></tr>
+</table>
+
+<h2>When Each Tool Wins</h2>
+<p><strong>Drizzle ORM — Best for:</strong> Teams that want a happy medium between a full ORM (Prisma) and raw SQL. Drizzle's schema-in-TypeScript approach gives you end-to-end type safety without code generation. The relations API handles basic joins while giving you raw SQL escape hatches when needed. <strong>Weak spot:</strong> Newer than Knex.js; smaller community; less documentation for complex patterns.</p>
+
+<p><strong>Kysely — Best for:</strong> Developers who want maximum control with full type safety. Kysely is strictly a query builder — no schema management, no migrations, no relation abstractions. You define a TypeScript interface for your database schema, and Kysely infers types from that. <strong>Weak spot:</strong> More boilerplate — you manually define the Database type interface; no built-in migrations (use kysely-codegen or manage separately); steeper learning curve.</p>
+
+<p><strong>Knex.js — Best for:</strong> Teams with existing Knex.js codebases, teams that need broad database support (Oracle, Redshift), and teams that are not using TypeScript or are early in their TS migration. <strong>Weak spot:</strong> TypeScript support is bolted on, not built in; the query builder API is less ergonomic than Drizzle or Kysely for complex queries.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Situation</th><th>Best Tool</th><th>Why</th></tr>
+<tr><td>New TypeScript project, want ORM-lite</td><td>Drizzle ORM</td><td>Best DX: schema in TS, great types, good migration tool</td></tr>
+<tr><td>Want maximum SQL control with types</td><td>Kysely</td><td>Pure query builder, no abstraction over SQL</td></tr>
+<tr><td>Existing Knex.js codebase</td><td>Knex.js</td><td>Migration cost not worth it for established projects</td></tr>
+<tr><td>Need Oracle or Redshift support</td><td>Knex.js</td><td>Only option with broad legacy DB support</td></tr>
+<tr><td>Serverless / edge (minimal bundle)</td><td>Drizzle ORM</td><td>Smallest bundle size, works great at edge</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Drizzle ORM hits the sweet spot for most new TypeScript projects — you get the type safety of Prisma with the SQL-level control of a query builder. Kysely is the choice for SQL purists who want zero abstraction. Knex.js remains solid but its TypeScript story is weaker than the newcomers. See also: <a href="/en/compare/prisma-vs-drizzle-vs-typeorm.html">Prisma vs Drizzle vs TypeORM</a> and <a href="/en/tech/database-design-fundamentals.html">Database Design Fundamentals</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/compare/cursor-vs-copilot-vs-claude-code.html" class="related-card">Cursor vs GitHub Copilot vs Claude Code (2026): Which AI Coding Tool Wins?</a><a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html" class="related-card">Vercel vs Netlify vs Cloudflare Pages (2026): Best Hosting for Developers</a><a href="/en/compare/supabase-vs-firebase-vs-neon.html" class="related-card">Supabase vs Firebase vs Neon (2026): Best Backend for Solo Developers</a><a href="/en/compare/figma-vs-canva-vs-penpot.html" class="related-card">Figma vs Canva vs Penpot (2026): Best Design Tool for Developers</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

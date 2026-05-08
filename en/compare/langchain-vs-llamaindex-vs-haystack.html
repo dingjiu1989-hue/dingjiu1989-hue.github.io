@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="compare" data-exclude="langchain-vs-llamaindex-vs-haystack">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="LangChain vs LlamaIndex vs Haystack (2026): AI Framework Comparison">
+    <meta property="og:description" content="Three approaches to building LLM applications: LangChain (chains + agents), LlamaIndex (data indexing + RAG), and Haystack (NLP pipelines). Which framework for your AI project?">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/compare/langchain-vs-llamaindex-vs-haystack.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LangChain vs LlamaIndex vs Haystack (2026): AI Framework Comparison">
+    <meta name="twitter:description" content="Three approaches to building LLM applications: LangChain (chains + agents), LlamaIndex (data indexing + RAG), and Haystack (NLP pipelines). Which framework for your AI project?">
+    <title>LangChain vs LlamaIndex vs Haystack (2026): AI Framework Comparison — SourceHub</title>
+    <meta name="description" content="Three approaches to building LLM applications: LangChain (chains + agents), LlamaIndex (data indexing + RAG), and Haystack (NLP pipelines). Which framework for your AI project?">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/compare/langchain-vs-llamaindex-vs-haystack.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/compare/langchain-vs-llamaindex-vs-haystack.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "LangChain vs LlamaIndex vs Haystack (2026): AI Framework Comparison",
+      "description": "Three approaches to building LLM applications: LangChain (chains + agents), LlamaIndex (data indexing + RAG), and Haystack (NLP pipelines). Which framework for your AI project?",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Comparisons", "item": "https://dingjiu1989-hue.github.io/en/compare/"},
+        {"@type": "ListItem", "position": 3, "name": "LangChain vs LlamaIndex vs Haystack (2026): AI Framework Comparison"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/compare/">Comparisons</a> › LangChain vs LlamaIndex vs Haystack (2026): AI Framework Comparison
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">AI</span>
+        <span class="tag-cat">LangChain</span>
+        <span class="tag-cat">RAG</span>
+        <span class="tag-cat">LLM</span>
+        <span class="tag-cat">Comparison</span></div>
+      <h1 class="article-title">LangChain vs LlamaIndex vs Haystack (2026): AI Framework Comparison</h1>
+      <div class="article-meta">Published 2026-05-08 · 7080 views · 59 replies</div>
+      <div class="article-body"><p>Building LLM applications requires a framework to manage prompts, chains, retrieval, and agent orchestration. In 2026, three frameworks dominate: LangChain (the most popular, general-purpose), LlamaIndex (specialized in data indexing and RAG), and Haystack (NLP pipelines, from deepset). Choosing the right one depends on whether you are building agents, search systems, or document processing pipelines.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>LangChain</th><th>LlamaIndex</th><th>Haystack</th></tr>
+<tr><td>Focus</td><td>General-purpose LLM app framework</td><td>Data indexing + retrieval (RAG)</td><td>NLP pipelines (search, QA, extraction)</td></tr>
+<tr><td>Language</td><td>Python, TypeScript</td><td>Python, TypeScript</td><td>Python</td></tr>
+<tr><td>Core Concept</td><td>Chains + Agents + Tools</td><td>Indexes + Query Engines + Agents</td><td>Pipelines + Components + Document Stores</td></tr>
+<tr><td>RAG Quality</td><td>Good (LCEL + retrievers)</td><td>Excellent (purpose-built for RAG)</td><td>Excellent (mature document processing)</td></tr>
+<tr><td>Agent Support</td><td>Excellent — ReAct, OpenAI functions, custom tools</td><td>Good — QueryEngine tools, Agent workers</td><td>Good — Agent components, tool use</td></tr>
+<tr><td>Document Parsing</td><td>Basic (document loaders for 50+ formats)</td><td>Excellent — SimpleDirectoryReader, LlamaParse (PDFs)</td><td>Excellent — File converters, PreProcessor pipeline</td></tr>
+<tr><td>Vector Store Integrations</td><td>50+ (Pinecone, Chroma, Weaviate, Qdrant, etc.)</td><td>20+ (focused on best-in-class)</td><td>10+ (Pinecone, Weaviate, Qdrant, Elasticsearch, OpenSearch)</td></tr>
+<tr><td>LLM Providers</td><td>60+ (OpenAI, Anthropic, Cohere, HuggingFace, etc.)</td><td>20+ (OpenAI, Anthropic, local models via Ollama)</td><td>15+ (OpenAI, Cohere, HuggingFace, local models)</td></tr>
+<tr><td>Evaluation</td><td>LangSmith (commercial), basic eval callbacks</td><td>Built-in evaluators (faithfulness, relevancy, correctness)</td><td>Built-in eval (metrics, annotation tools)</td></tr>
+<tr><td>Production Readiness</td><td>LangServe (API deployment), LangSmith (monitoring)</td><td>LlamaDeploy (beta), integrations with FastAPI</td><td>Hayhooks (API deployment), REST API baked in</td></tr>
+</table>
+
+<h2>When Each Framework Wins</h2>
+<p><strong>LangChain — Best for:</strong> General-purpose LLM applications, especially agents that need to call multiple tools and APIs. LangChain's ecosystem (LangSmith for observability, LangServe for deployment, LangGraph for stateful agents) is the most mature. <strong>Weak spot:</strong> Heavy abstraction — LangChain's chain-of-abstractions makes simple things feel complex; debugging can be painful; rapid API changes.</p>
+
+<p><strong>LlamaIndex — Best for:</strong> Applications where the core challenge is loading, indexing, and retrieving from large document collections. LlamaIndex's document parsing (LlamaParse for complex PDFs) and advanced retrieval strategies (tree indexing, recursive retrieval, sentence window retrieval) are best in class. <strong>Weak spot:</strong> Narrower scope than LangChain — if your app needs complex agent orchestration beyond RAG, LangChain is more flexible.</p>
+
+<p><strong>Haystack — Best for:</strong> Production NLP pipelines that need enterprise-grade reliability and maturity. Haystack has been around since 2019 (pre-LLM era) and its pipeline architecture is battle-tested for search, QA, and document processing at scale. <strong>Weak spot:</strong> Smaller community than LangChain; less "buzz" means fewer tutorials and examples; more opinionated about how pipelines should work.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Your Project</th><th>Best Framework</th><th>Why</th></tr>
+<tr><td>AI agent that calls APIs and tools</td><td>LangChain</td><td>Best agent support, largest tool ecosystem</td></tr>
+<tr><td>RAG over large document collections</td><td>LlamaIndex</td><td>Purpose-built for data indexing and retrieval</td></tr>
+<tr><td>Enterprise search/QA system</td><td>Haystack</td><td>Most mature, production-proven, reliable</td></tr>
+<tr><td>Complex PDFs with tables and charts</td><td>LlamaIndex</td><td>LlamaParse handles complex documents beautifully</td></tr>
+<tr><td>Rapid prototyping of LLM features</td><td>LangChain</td><td>Fastest to get started, most examples online</td></tr>
+<tr><td>Multi-step reasoning + RAG</td><td>LangChain + LlamaIndex</td><td>LangChain for agent logic, LlamaIndex for retrieval</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> LangChain is the default for general LLM applications and agents — it has the largest ecosystem and community. LlamaIndex is superior for RAG-heavy applications where document loading and retrieval quality matter most. Haystack is the dark horse for enterprise deployments that need reliability over hype. Many teams combine LangChain (orchestration) with LlamaIndex (retrieval). See also: <a href="/en/ai/ai-agents-guide.html">AI Agents Guide</a> and <a href="/en/ai/ai-api-integration-guide.html">AI API Integration Guide</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/compare/cursor-vs-copilot-vs-claude-code.html" class="related-card">Cursor vs GitHub Copilot vs Claude Code (2026): Which AI Coding Tool Wins?</a><a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html" class="related-card">Vercel vs Netlify vs Cloudflare Pages (2026): Best Hosting for Developers</a><a href="/en/compare/supabase-vs-firebase-vs-neon.html" class="related-card">Supabase vs Firebase vs Neon (2026): Best Backend for Solo Developers</a><a href="/en/compare/figma-vs-canva-vs-penpot.html" class="related-card">Figma vs Canva vs Penpot (2026): Best Design Tool for Developers</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

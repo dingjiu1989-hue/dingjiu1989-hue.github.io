@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="web-accessibility-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Web Accessibility (a11y) Guide for Developers: WCAG 2.2 in Practice">
+    <meta property="og:description" content="Practical accessibility guide for developers: semantic HTML, ARIA labels (when and when not to use), keyboard navigation, screen reader testing, color contrast, and automated a11y testing in CI/CD.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/web-accessibility-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Web Accessibility (a11y) Guide for Developers: WCAG 2.2 in Practice">
+    <meta name="twitter:description" content="Practical accessibility guide for developers: semantic HTML, ARIA labels (when and when not to use), keyboard navigation, screen reader testing, color contrast, and automated a11y testing in CI/CD.">
+    <title>Web Accessibility (a11y) Guide for Developers: WCAG 2.2 in Practice — SourceHub</title>
+    <meta name="description" content="Practical accessibility guide for developers: semantic HTML, ARIA labels (when and when not to use), keyboard navigation, screen reader testing, color contrast, and automated a11y testing in CI/CD.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/web-accessibility-guide.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/web-accessibility-guide.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Web Accessibility (a11y) Guide for Developers: WCAG 2.2 in Practice",
+      "description": "Practical accessibility guide for developers: semantic HTML, ARIA labels (when and when not to use), keyboard navigation, screen reader testing, color contrast, and automated a11y testing in CI/CD.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Web Accessibility (a11y) Guide for Developers: WCAG 2.2 in Practice"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Web Accessibility (a11y) Guide for Developers: WCAG 2.2 in Practice
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Accessibility</span>
+        <span class="tag-cat">HTML</span>
+        <span class="tag-cat">CSS</span>
+        <span class="tag-cat">Web Standards</span>
+        <span class="tag-cat">Testing</span></div>
+      <h1 class="article-title">Web Accessibility (a11y) Guide for Developers: WCAG 2.2 in Practice</h1>
+      <div class="article-meta">Published 2026-05-08 · 3480 views · 29 replies</div>
+      <div class="article-body"><p>Web accessibility (a11y) is not just about compliance — accessible websites work better for everyone, including keyboard users, screen reader users, and people with temporary disabilities. The business case is strong: the EU Accessibility Act (2025) mandates accessibility for many digital products, and inaccessible websites lose an estimated 15-20% of potential users. This guide covers practical accessibility patterns that developers actually need.</p>
+
+<h2>Accessibility Basics: The 4 Principles (POUR)</h2>
+<table>
+<tr><th>Principle</th><th>What It Means</th><th>Developer Checklist</th></tr>
+<tr><td>Perceivable</td><td>Users can perceive the content</td><td>Alt text for images, captions for video, sufficient color contrast</td></tr>
+<tr><td>Operable</td><td>Users can operate the interface</td><td>Keyboard navigation, no keyboard traps, enough time to read</td></tr>
+<tr><td>Understandable</td><td>Users can understand the content</td><td>Readable text, predictable navigation, input assistance (error messages)</td></tr>
+<tr><td>Robust</td><td>Content works with assistive technologies</td><td>Semantic HTML, valid ARIA (when needed), works across browsers</td></tr>
+</table>
+
+<h2>Semantic HTML: Your Best Accessibility Tool</h2>
+<p><strong>The most important rule:</strong> Use semantic HTML elements. They are accessible by default — no ARIA needed.</p>
+<table>
+<tr><th>Instead of</th><th>Use</th><th>Why</th></tr>
+<tr><td><code>&lt;div onclick="..."&gt;</code></td><td><code>&lt;button&gt;</code></td><td>Buttons are focusable, keyboard-activatable, and announced as "button" by screen readers</td></tr>
+<tr><td><code>&lt;div class="nav"&gt;</code></td><td><code>&lt;nav&gt;</code></td><td>Screen readers have a "skip to navigation" shortcut</td></tr>
+<tr><td><code>&lt;div class="main"&gt;</code></td><td><code>&lt;main&gt;</code></td><td>Screen readers have a "skip to main content" shortcut</td></tr>
+<tr><td><code>&lt;span class="heading"&gt;</code></td><td><code>&lt;h1&gt;-&lt;h6&gt;</code></td><td>Screen readers navigate by heading hierarchy</td></tr>
+<tr><td><code>&lt;div&gt; + CSS grid</code></td><td><code>&lt;table&gt;</code> for tabular data</td><td>Screen readers have table navigation (row/column headers)</td></tr>
+</table>
+
+<h2>ARIA: When HTML Is Not Enough</h2>
+<p><strong>Critical rule:</strong> No ARIA is better than bad ARIA. Only use ARIA when native HTML cannot express the semantics you need.</p>
+<table>
+<tr><th>ARIA Attribute</th><th>When to Use</th><th>Example</th></tr>
+<tr><td>aria-label</td><td>Provide an accessible name when no visible label exists</td><td><code>&lt;button aria-label="Close dialog"&gt;X&lt;/button&gt;</code></td></tr>
+<tr><td>aria-describedby</td><td>Link an element to its description</td><td><code>&lt;input aria-describedby="password-hint"&gt; &lt;span id="password-hint"&gt;Min 8 characters&lt;/span&gt;</code></td></tr>
+<tr><td>aria-expanded</td><td>Indicate if a collapsible element is open</td><td><code>&lt;button aria-expanded="true"&gt;Section 1&lt;/button&gt;</code></td></tr>
+<tr><td>aria-live</td><td>Announce dynamic content changes</td><td><code>&lt;div aria-live="polite"&gt;5 results found&lt;/div&gt;</code></td></tr>
+<tr><td>role="alert"</td><td>Important, time-sensitive notification</td><td><code>&lt;div role="alert"&gt;Your session will expire in 2 minutes&lt;/div&gt;</code></td></tr>
+</table>
+
+<h2>Automated Testing in CI/CD</h2>
+<pre><code>// axe-core: The accessibility testing standard
+// Integrate into Jest, Playwright, or Cypress tests
+import { axe, toHaveNoViolations } from 'jest-axe';
+expect.extend(toHaveNoViolations);
+
+it('homepage should have no accessibility violations', async () => {
+  const { container } = render(<HomePage />);
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
+// Playwright test
+import { injectAxe, checkA11y } from 'axe-playwright';
+await injectAxe(page);
+await checkA11y(page); // Runs axe-core against the rendered page</code></pre>
+
+<p><strong>Bottom line:</strong> Start with semantic HTML — it solves 80% of accessibility issues for free. Add automated a11y testing to CI/CD (axe-core) to catch regressions. Test manually with a keyboard (Tab through your entire app) at least once per feature. Accessibility is not a feature to add later — it is a property of good HTML. See also: <a href="/en/compare/tailwind-vs-bootstrap-vs-mui.html">CSS Framework Comparison</a> and <a href="/en/tech/css-responsive-design-guide.html">Responsive CSS in 2026</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

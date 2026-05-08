@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="react-hooks-complete-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="React Hooks Complete Guide 2026: From useState to useOptimistic">
+    <meta property="og:description" content="Every React hook explained with real examples: useState, useEffect, useContext, useReducer, useMemo, useCallback, useRef, useTransition, useDeferredValue, and the new useOptimistic hook.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/react-hooks-complete-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="React Hooks Complete Guide 2026: From useState to useOptimistic">
+    <meta name="twitter:description" content="Every React hook explained with real examples: useState, useEffect, useContext, useReducer, useMemo, useCallback, useRef, useTransition, useDeferredValue, and the new useOptimistic hook.">
+    <title>React Hooks Complete Guide 2026: From useState to useOptimistic — SourceHub</title>
+    <meta name="description" content="Every React hook explained with real examples: useState, useEffect, useContext, useReducer, useMemo, useCallback, useRef, useTransition, useDeferredValue, and the new useOptimistic hook.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/react-hooks-complete-guide.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/react-hooks-complete-guide.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "React Hooks Complete Guide 2026: From useState to useOptimistic",
+      "description": "Every React hook explained with real examples: useState, useEffect, useContext, useReducer, useMemo, useCallback, useRef, useTransition, useDeferredValue, and the new useOptimistic hook.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "React Hooks Complete Guide 2026: From useState to useOptimistic"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › React Hooks Complete Guide 2026: From useState to useOptimistic
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">React</span>
+        <span class="tag-cat">Hooks</span>
+        <span class="tag-cat">JavaScript</span>
+        <span class="tag-cat">Frontend</span></div>
+      <h1 class="article-title">React Hooks Complete Guide 2026: From useState to useOptimistic</h1>
+      <div class="article-meta">Published 2026-05-08 · 8040 views · 67 replies</div>
+      <div class="article-body"><p>React Hooks have been the primary way to add state and logic to React components since 2019, but their surface area keeps growing. React 19 and React 20 (2026) introduced hooks like useOptimistic and useFormStatus that change how we handle optimistic updates and form state. This guide covers every built-in React hook, when to use each, and the most common pitfalls.</p>
+
+<h2>All React Hooks at a Glance</h2>
+<table>
+<tr><th>Hook</th><th>Purpose</th><th>When to Use</th><th>Introduced</th></tr>
+<tr><td>useState</td><td>Component-level state</td><td>Any mutable value in a component</td><td>React 16.8</td></tr>
+<tr><td>useEffect</td><td>Synchronize with external systems</td><td>API calls, subscriptions, DOM mutations</td><td>React 16.8</td></tr>
+<tr><td>useContext</td><td>Read a context value</td><td>Theme, auth, locale — any global-ish state</td><td>React 16.8</td></tr>
+<tr><td>useReducer</td><td>Complex state logic</td><td>State with multiple sub-values, state machines</td><td>React 16.8</td></tr>
+<tr><td>useCallback</td><td>Memoize a function reference</td><td>Stable callbacks passed to memoized children</td><td>React 16.8</td></tr>
+<tr><td>useMemo</td><td>Memoize a computed value</td><td>Expensive calculations, stable object references</td><td>React 16.8</td></tr>
+<tr><td>useRef</td><td>Mutable reference that persists</td><td>DOM access, storing previous values, interval IDs</td><td>React 16.8</td></tr>
+<tr><td>useId</td><td>Unique ID for accessibility</td><td>Linking label's htmlFor to input's id</td><td>React 18</td></tr>
+<tr><td>useTransition</td><td>Mark a state update as non-urgent</td><td>UI that updates slower than user input (tabs, filters)</td><td>React 18</td></tr>
+<tr><td>useDeferredValue</td><td>Defer re-rendering a value</td><td>Showing stale content while new content loads</td><td>React 18</td></tr>
+<tr><td>useSyncExternalStore</td><td>Subscribe to an external store</td><td>Integrating non-React state libraries (Redux, Zustand)</td><td>React 18</td></tr>
+<tr><td>useInsertionEffect</td><td>CSS-in-JS library hook</td><td>Inject styles before layout effects fire (rarely used directly)</td><td>React 18</td></tr>
+<tr><td>useOptimistic</td><td>Optimistic UI updates</td><td>Show a value before the server confirms it</td><td>React 19/20</td></tr>
+<tr><td>useFormStatus</td><td>Form submission status</td><td>Disable submit button while form is submitting</td><td>React 19/20</td></tr>
+<tr><td>useActionState</td><td>Form action with state</td><td>Server Action form handling with error states</td><td>React 19/20</td></tr>
+</table>
+
+<h2>useState: The Foundation</h2>
+<p><strong>Best for:</strong> Simple values that change over time — form inputs, toggle states, counters. <strong>Key rule:</strong> Never call setState during render (except for derived state with useMemo or useReducer).</p>
+<pre><code>// Basic usage
+const [count, setCount] = useState(0);
+
+// Functional update (when new state depends on old)
+setCount(prev => prev + 1);
+
+// Lazy initializer (expensive computation, runs once)
+const [data, setData] = useState(() => expensiveComputation());</code></pre>
+
+<h2>useEffect: The Most Misused Hook</h2>
+<p><strong>Best for:</strong> Synchronizing with external systems (browser APIs, third-party libraries, network). <strong>Common mistake:</strong> Using useEffect for derived state or event handling, which should be done in event handlers or during render.</p>
+<pre><code>// Good: connect to external system
+useEffect(() => {
+  const connection = createConnection(serverUrl);
+  connection.connect();
+  return () => connection.disconnect();
+}, [serverUrl]);
+
+// Bad: setting state from props (do this during render instead)
+useEffect(() => {
+  setFullName(firstName + ' ' + lastName); // Unnecessary!
+}, [firstName, lastName]);</code></pre>
+
+<h2>useMemo and useCallback: Performance Hooks</h2>
+<p><strong>Best for:</strong> Preventing unnecessary re-renders of memoized child components. <strong>Key rule:</strong> Do not wrap everything in useMemo/useCallback — only use them when you have measured a performance problem.</p>
+<pre><code>// useMemo: cache an expensive computed value
+const sortedList = useMemo(() => {
+  return items.sort((a, b) => a.name.localeCompare(b.name));
+}, [items]);
+
+// useCallback: stabilize a function reference
+const handleClick = useCallback((id: string) => {
+  setSelectedId(id);
+}, []); // Stable reference across re-renders</code></pre>
+
+<h2>useOptimistic: Optimistic UI in 2026</h2>
+<p><strong>Best for:</strong> Instant UI feedback while a server action is in flight — like liking a post, toggling a todo, or sending a message.</p>
+<pre><code>const [optimisticMessages, addOptimisticMessage] = useOptimistic(
+  messages,
+  (state, newMessage) => [...state, { ...newMessage, sending: true }]
+);
+
+async function sendMessage(formData: FormData) {
+  const message = formData.get('message');
+  addOptimisticMessage({ text: message, id: crypto.randomUUID() });
+  await sendMessageToServer(message); // Revalidates messages on success
+}</code></pre>
+
+<p><strong>Bottom line:</strong> React Hooks are not just for state — they are the primitive for composing behavior in React. The newer hooks (useOptimistic, useFormStatus, useTransition) show React's direction: tighter integration with server actions and optimistic UI. See also: <a href="/en/compare/react-vs-vue-vs-angular-vs-svelte.html">React vs Vue vs Angular vs Svelte</a> and <a href="/en/compare/nextjs-vs-nuxt-vs-sveltekit.html">Next.js vs Nuxt vs SvelteKit</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

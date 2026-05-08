@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="compare" data-exclude="vitest-vs-jest-vs-bun-test">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Vitest vs Jest vs Bun Test (2026): JavaScript Test Runner Comparison">
+    <meta property="og:description" content="Speed benchmarks, feature comparison, and migration guides for the three leading JS test runners. Vitest wins on Vite integration; Bun Test wins on raw speed; Jest has the largest ecosystem.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/compare/vitest-vs-jest-vs-bun-test.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Vitest vs Jest vs Bun Test (2026): JavaScript Test Runner Comparison">
+    <meta name="twitter:description" content="Speed benchmarks, feature comparison, and migration guides for the three leading JS test runners. Vitest wins on Vite integration; Bun Test wins on raw speed; Jest has the largest ecosystem.">
+    <title>Vitest vs Jest vs Bun Test (2026): JavaScript Test Runner Comparison — SourceHub</title>
+    <meta name="description" content="Speed benchmarks, feature comparison, and migration guides for the three leading JS test runners. Vitest wins on Vite integration; Bun Test wins on raw speed; Jest has the largest ecosystem.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/compare/vitest-vs-jest-vs-bun-test.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/compare/vitest-vs-jest-vs-bun-test.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Vitest vs Jest vs Bun Test (2026): JavaScript Test Runner Comparison",
+      "description": "Speed benchmarks, feature comparison, and migration guides for the three leading JS test runners. Vitest wins on Vite integration; Bun Test wins on raw speed; Jest has the largest ecosystem.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Comparisons", "item": "https://dingjiu1989-hue.github.io/en/compare/"},
+        {"@type": "ListItem", "position": 3, "name": "Vitest vs Jest vs Bun Test (2026): JavaScript Test Runner Comparison"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/compare/">Comparisons</a> › Vitest vs Jest vs Bun Test (2026): JavaScript Test Runner Comparison
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Testing</span>
+        <span class="tag-cat">Vitest</span>
+        <span class="tag-cat">Jest</span>
+        <span class="tag-cat">JavaScript</span>
+        <span class="tag-cat">Comparison</span></div>
+      <h1 class="article-title">Vitest vs Jest vs Bun Test (2026): JavaScript Test Runner Comparison</h1>
+      <div class="article-meta">Published 2026-05-08 · 5280 views · 44 replies</div>
+      <div class="article-body"><p>The JavaScript test runner landscape has transformed since 2024. Vitest (Vite-native, Jest-compatible) has overtaken Jest in new projects, and Bun Test offers blazing-fast execution by leveraging Bun's JavaScript engine. Each has a distinct philosophy: Jest prioritizes stability and ecosystem, Vitest prioritizes speed and Vite integration, and Bun Test prioritizes raw performance.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>Jest</th><th>Vitest</th><th>Bun Test</th></tr>
+<tr><td>Runtime</td><td>Node.js (vm or worker_threads)</td><td>Vite dev server (Node.js)</td><td>Bun runtime (JavaScriptCore)</td></tr>
+<tr><td>Speed (1,000 simple tests)</td><td>~8 seconds</td><td>~2 seconds (with --pool=forks)</td><td>~0.8 seconds</td></tr>
+<tr><td>Jest API Compatibility</td><td>Native</td><td>Near-complete (expect, describe, it, mock)</td><td>Partial (describe, it, expect with jest-matcher-like API)</td></tr>
+<tr><td>Watch Mode</td><td>Yes (--watch)</td><td>Yes (--watch, faster via Vite HMR)</td><td>Yes (--watch)</td></tr>
+<tr><td>Coverage</td><td>Built-in (Istanbul)</td><td>Built-in (c8 or Istanbul)</td><td>None built-in (external tools)</td></tr>
+<tr><td>Mocking</td><td>Comprehensive (jest.mock, jest.fn, module mocking)</td><td>Comprehensive (vi.mock, vi.fn, module mocking)</td><td>Basic (mock.module, mockFn)</td></tr>
+<tr><td>Snapshot Testing</td><td>Yes (toMatchSnapshot)</td><td>Yes (toMatchSnapshot, compatible)</td><td>Yes (toMatchSnapshot)</td></tr>
+<tr><td>Parallel Execution</td><td>Per-file (worker_threads)</td><td>Per-file (threads or forks)</td><td>Per-file (Bun's native workers)</td></tr>
+<tr><td>TypeScript</td><td>Via ts-jest or @swc/jest</td><td>Native (via esbuild)</td><td>Native (Bun's TS transpiler)</td></tr>
+<tr><td>Vite Project Integration</td><td>Manual (jest.config to match Vite aliases)</td><td>Zero-config (reads vite.config.ts)</td><td>Manual</td></tr>
+<tr><td>Ecosystem Size</td><td>Largest (jest-dom, testing-library, jest-axe)</td><td>Large (most Jest plugins work via compat)</td><td>Small (growing, but many Jest plugins don't work)</td></tr>
+</table>
+
+<h2>When Each Runner Wins</h2>
+<p><strong>Jest — Best for:</strong> Large enterprise codebases with established Jest configurations, custom transformers, and complex module mocking. Jest's ecosystem (jest-dom, jest-axe, jest-image-snapshot, jest-cucumber) is the deepest. <strong>Weak spot:</strong> Slow startup (especially with ts-jest on large projects); Vite-based projects need manual config to resolve aliases correctly.</p>
+
+<p><strong>Vitest — Best for:</strong> Vite-based projects (React, Vue, Svelte) and new projects where you want Jest compatibility without Jest's slowness. Vitest reads your vite.config.ts automatically — no duplicate config for tests. <strong>Weak spot:</strong> Some edge-case Jest plugin compatibility issues; pooling model can cause issues with shared mutable state in monorepos.</p>
+
+<p><strong>Bun Test — Best for:</strong> New projects that want the absolute fastest test execution and are willing to accept a smaller ecosystem. Bun Test runs tests in Bun's JavaScript runtime (not Node.js), which means some Node.js-specific APIs may not work. <strong>Weak spot:</strong> Youngest ecosystem; coverage requires external tools; some Node.js APIs are not available.</p>
+
+<h2>Migration: Jest to Vitest</h2>
+<table>
+<tr><th>Step</th><th>What Changes</th></tr>
+<tr><td>1. Install Vitest</td><td><code>npm install -D vitest</code></td></tr>
+<tr><td>2. Update config</td><td>Rename jest.config.ts to vitest.config.ts, change import to defineConfig from vitest/config</td></tr>
+<tr><td>3. Globals</td><td>Add globals: true to vitest config (or import { describe, it, expect } from 'vitest')</td></tr>
+<tr><td>4. Replace jest.* calls</td><td>jest.fn() → vi.fn(), jest.mock() → vi.mock(), jest.spyOn() → vi.spyOn()</td></tr>
+<tr><td>5. Update package.json</td><td>Change "test" script from jest to vitest</td></tr>
+<tr><td>6. Remove Jest deps</td><td>npm uninstall jest ts-jest @types/jest jest-environment-jsdom</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Vitest is the best choice for 90% of new projects — it is faster than Jest, compatible with the Jest ecosystem, and integrates seamlessly with Vite. Jest is still the safe choice for large enterprise codebases with established test infrastructure. Bun Test is worth watching but its ecosystem is not ready for most production use cases yet. See also: <a href="/en/compare/playwright-vs-cypress-vs-selenium.html">Playwright vs Cypress vs Selenium</a> and <a href="/en/tech/testing-strategies-web-apps.html">Testing Strategies for Web Apps</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/compare/cursor-vs-copilot-vs-claude-code.html" class="related-card">Cursor vs GitHub Copilot vs Claude Code (2026): Which AI Coding Tool Wins?</a><a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html" class="related-card">Vercel vs Netlify vs Cloudflare Pages (2026): Best Hosting for Developers</a><a href="/en/compare/supabase-vs-firebase-vs-neon.html" class="related-card">Supabase vs Firebase vs Neon (2026): Best Backend for Solo Developers</a><a href="/en/compare/figma-vs-canva-vs-penpot.html" class="related-card">Figma vs Canva vs Penpot (2026): Best Design Tool for Developers</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

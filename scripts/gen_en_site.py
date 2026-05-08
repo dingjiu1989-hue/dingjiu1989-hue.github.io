@@ -6658,6 +6658,999 @@ BODIES['best-project-management-dev'] = '''
 '''
 
 
+BODIES['astro-vs-gatsby-vs-hugo'] = '''
+<p>Static site generators are having a renaissance in 2026, driven by the return to content-focused websites and the realization that not every page needs a full React app. Astro, Gatsby, and Hugo represent three generations of SSGs: Astro (modern, partial hydration), Gatsby (React-based, GraphQL data layer), and Hugo (Go-powered, blazing fast builds). This comparison focuses on build performance and developer experience.</p>
+
+<h2>Build Performance Comparison</h2>
+<table>
+<tr><th>Metric</th><th>Astro</th><th>Gatsby</th><th>Hugo</th></tr>
+<tr><td>Language</td><td>JavaScript/TypeScript (Vite under the hood)</td><td>JavaScript (React + Webpack/Gatsby-cli)</td><td>Go (single binary)</td></tr>
+<tr><td>Build: 1,000 pages</td><td>~15 seconds</td><td>~90 seconds (cold), ~45 seconds (cached)</td><td>~2 seconds</td></tr>
+<tr><td>Build: 10,000 pages</td><td>~2 minutes</td><td>~15 minutes</td><td>~10 seconds</td></tr>
+<tr><td>Dev Server Startup</td><td>~3 seconds (Vite HMR)</td><td>~20 seconds (cold), ~10 seconds (cached)</td><td>~1 second</td></tr>
+<tr><td>JavaScript Output</td><td>Zero JS by default (opt-in per component)</td><td>Full React hydration bundle (~40-50 KB)</td><td>Zero JS by default</td></tr>
+<tr><td>Content Sources</td><td>Markdown, MDX, CMS (Content Collections API)</td><td>Markdown, MDX, CMS, WordPress, Drupal, any GraphQL source</td><td>Markdown, JSON, YAML, TOML</td></tr>
+<tr><td>UI Frameworks</td><td>React, Vue, Svelte, Solid, Preact, Lit — choose per page/component</td><td>React (primary), any framework via plugins</td><td>None (templates in Go's html/template)</td></tr>
+<tr><td>Image Optimization</td><td>Built-in (sharp, Astro Image)</td><td>Built-in (gatsby-plugin-image)</td><td>Built-in (Hugo Image Processing)</td></tr>
+<tr><td>Data Layer</td><td>Content Collections (type-safe, Zod schemas)</td><td>GraphQL data layer (gatsby-source-*)</td><td>Front matter + taxonomies (built-in)</td></tr>
+</table>
+
+<h2>When Each SSG Wins</h2>
+<p><strong>Astro — Best for:</strong> Content sites where most pages are static but you want the option to sprinkle in interactive React/Vue/Svelte components. Astro's "zero JS by default, add interactivity only where needed" philosophy produces the smallest page bundles. <strong>Weak spot:</strong> Not designed for highly interactive SPAs — if every page needs a React app, use Next.js instead.</p>
+
+<p><strong>Gatsby — Best for:</strong> Large content sites that need a flexible data layer pulling from multiple sources (CMS, APIs, databases, markdown). Gatsby's GraphQL data layer lets you query and combine data from any source. <strong>Weak spot:</strong> Slow builds at scale; the GraphQL layer adds complexity; Gatsby's star has faded since Netlify acquisition — the community is shrinking.</p>
+
+<p><strong>Hugo — Best for:</strong> The maximum possible build speed and the simplest possible output. Hugo builds 10,000 pages in ~10 seconds. If you have a large documentation site or blog and do not need interactive UI components, Hugo is genuinely unbeatable. <strong>Weak spot:</strong> Go templating is less flexible than JSX; no interactive UI components without JavaScript; smaller plugin ecosystem.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Your Project</th><th>Best SSG</th><th>Why</th></tr>
+<tr><td>Blog, docs, or marketing site with some interactive widgets</td><td>Astro</td><td>Zero JS default, but add React/Vue/Svelte components where needed</td></tr>
+<tr><td>Large docs site (1,000+ pages)</td><td>Hugo</td><td>Build speed is unmatched; docs sites rarely need JS interactivity</td></tr>
+<tr><td>Content site with complex data relationships</td><td>Gatsby</td><td>GraphQL data layer excels at combining data from multiple sources</td></tr>
+<tr><td>Portfolio or personal site</td><td>Astro</td><td>Easy to start, beautiful templates, great DX</td></tr>
+<tr><td>eCommerce content pages (non-interactive)</td><td>Astro or Hugo</td><td>Fast builds, zero JS default, excellent Core Web Vitals</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Astro is the best SSG for most projects in 2026 — the zero-JS default, multi-framework support, and Content Collections API make it the most productive choice. Hugo remains king for build speed on very large sites. Gatsby is declining — its GraphQL data layer, once innovative, now adds complexity that newer tools avoid. See also: <a href="/en/tools/best-static-site-generators-2026.html">Best Static Site Generators</a> and <a href="/en/compare/nextjs-vs-nuxt-vs-sveltekit.html">Next.js vs Nuxt vs SvelteKit</a>.</p>
+'''
+
+BODIES['authentication-best-practices-2026'] = '''
+<p>Getting authentication wrong is the fastest way to compromise your entire application. In 2026, the auth landscape has matured significantly — passkeys (WebAuthn) are gaining traction, OAuth 2.1 is clarifying long-standing ambiguities, and JWT best practices have crystallized. This guide covers the patterns that protect production applications, with code examples in Node.js and Python.</p>
+
+<h2>Authentication Methods Compared</h2>
+<table>
+<tr><th>Method</th><th>Security Level</th><th>UX</th><th>Complexity</th><th>Best For</th></tr>
+<tr><td>Session Tokens (cookie-based)</td><td>High (with proper config)</td><td>Excellent</td><td>Low</td><td>Traditional web apps, server-rendered pages</td></tr>
+<tr><td>JWT (stateless)</td><td>Medium-High</td><td>Good</td><td>Medium</td><td>APIs, microservices, mobile apps</td></tr>
+<tr><td>OAuth 2.1 + OIDC</td><td>High</td><td>Good (redirect flow)</td><td>Medium-High</td><td>Third-party login, enterprise SSO</td></tr>
+<tr><td>Passkeys (WebAuthn)</td><td>Highest (phishing-resistant)</td><td>Excellent (biometric)</td><td>Medium</td><td>Consumer apps, replacing passwords</td></tr>
+<tr><td>Magic Links</td><td>Medium</td><td>Good (email-based)</td><td>Low</td><td>Low-security apps, quick onboarding</td></tr>
+<tr><td>API Keys</td><td>Medium (if stored properly)</td><td>N/A (machine-to-machine)</td><td>Low</td><td>Server-to-server APIs, CI/CD, SDKs</td></tr>
+</table>
+
+<h2>Session Tokens: The Gold Standard for Web Apps</h2>
+<p><strong>Best for:</strong> Server-rendered web applications where the same origin serves both frontend and API. <strong>Key rules:</strong></p>
+<ul>
+<li>Use httpOnly, Secure, SameSite=Lax cookies</li>
+<li>Store session data in Redis (not in-memory, not in JWT) for fast lookup and revocation</li>
+<li>Rotate the session ID on login (prevent session fixation)</li>
+<li>Implement CSRF protection for cookie-based sessions (double-submit cookie pattern or Synchronizer Token)</li>
+<li>Set reasonable session duration: 15 minutes idle timeout, 8 hours absolute max</li>
+</ul>
+
+<h2>JWT: When and How to Use Safely</h2>
+<p><strong>Best for:</strong> APIs consumed by multiple client types (web, mobile, third-party). <strong>Critical rules:</strong> Never store sensitive data in JWT payload (it is base64-encoded, not encrypted). Always set short expiration (15-60 min) and use refresh tokens for renewal. Maintain a server-side token denylist for revoked tokens.</p>
+<pre><code>// Node.js: Signing a JWT securely
+const jwt = require('jsonwebtoken');
+const token = jwt.sign(
+  { sub: user.id, role: user.role },
+  process.env.JWT_SECRET, // >= 256-bit random string, stored in env
+  { expiresIn: '15m', algorithm: 'HS256' } // Never use 'none' algorithm
+);
+
+// Refresh token rotation: issue a new refresh token each time
+// and invalidate the old one (maintain a family of refresh tokens)</code></pre>
+
+<h2>Passkeys (WebAuthn): The Future of Authentication</h2>
+<p><strong>Best for:</strong> Consumer applications that want to eliminate passwords. Passkeys use public-key cryptography — the private key stays on the user's device, and the server only stores the public key. This makes phishing and credential stuffing impossible. <strong>Implementation:</strong> Use the WebAuthn API on the client (navigator.credentials.create/get) and a library like @simplewebauthn/server on the backend.</p>
+
+<h2>OAuth 2.1: What Changed from 2.0</h2>
+<ul>
+<li>PKCE is now required for all authorization code grants (no more implicit flow)</li>
+<li>Refresh token rotation is mandatory (one-time-use refresh tokens)</li>
+<li>The Resource Owner Password Credentials grant is removed (never send username/password to an authorization server)</li>
+<li>Bearer tokens must not be passed in URL query strings</li>
+</ul>
+
+<h2>Password Storage: Non-Negotiable Rules</h2>
+<table>
+<tr><th>Rule</th><th>Correct</th><th>Wrong</th></tr>
+<tr><td>Hash algorithm</td><td>bcrypt (cost 12+), argon2id</td><td>SHA-256, MD5, bcrypt with cost < 10</td></tr>
+<tr><td>Pepper</td><td>32-byte random pepper stored in HSM or env var, separate from DB</td><td>No pepper, or pepper stored in same DB column</td></tr>
+<tr><td>Password requirements</td><td>Minimum 8 chars, check against haveibeenpwned API</td><td>Requiring special chars that users forget; max length limits</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Use session tokens for web apps and JWTs for APIs — do not use JWTs for web app sessions. Implement passkeys as your primary auth method if possible (highest security + best UX). Never roll your own crypto — use well-tested libraries (bcrypt, @simplewebauthn, jose, node-crypto). See also: <a href="/en/compare/clerk-vs-auth0-vs-lucia.html">Clerk vs Auth0 vs Lucia</a> and <a href="/en/tech/web-security-basics.html">Web Security Basics</a>.</p>
+'''
+
+BODIES['clerk-vs-auth0-vs-lucia'] = '''
+<p>Authentication is the most security-critical part of your application — and the most tedious to build from scratch. In 2026, you have three excellent but philosophically different options: Clerk (React-first, best DX), Auth0 (enterprise-scale, most features), and Lucia (open source, lightweight, bring-your-own-database). This comparison focuses on developer experience and getting auth right without over-engineering.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>Clerk</th><th>Auth0</th><th>Lucia Auth</th></tr>
+<tr><td>Type</td><td>Auth platform (SaaS)</td><td>Auth platform (SaaS)</td><td>Auth library (open source)</td></tr>
+<tr><td>Pricing</td><td>Free (10K MAU), Pro $25/mo per 1K MAU</td><td>Free (7,500 MAU), Pro from $35/mo</td><td>Free (MIT license)</td></tr>
+<tr><td>Database</td><td>Managed (Clerk handles user storage)</td><td>Managed or custom DB</td><td>Your database (you control user tables)</td></tr>
+<tr><td>Login Methods</td><td>Email/password, SSO, social (Google, GitHub, etc.), passkeys, magic links, SMS</td><td>Email/password, SSO, 30+ social, passkeys, magic links, SMS, passwordless</td><td>Email/password (via adapters), OAuth (via Arctic), passkeys</td></tr>
+<tr><td>UI Components</td><td>Pre-built React components, fully customizable</td><td>Universal Login (hosted), Lock widget, custom UI</td><td>No UI — you build everything</td></tr>
+<tr><td>React Integration</td><td>Excellent — useAuth(), useUser(), middleware</td><td>Good — @auth0/auth0-react SDK</td><td>Good — lucia-react</td></tr>
+<tr><td>Multi-Tenant / Organizations</td><td>Built-in organizations API</td><td>Organizations, RBAC, fine-grained permissions</td><td>Manual (build your own)</td></tr>
+<tr><td>MFA / 2FA</td><td>Built-in (TOTP, SMS, passkeys)</td><td>Built-in (TOTP, SMS, push, email, recovery codes)</td><td>Manual (integrate with TOTP library)</td></tr>
+<tr><td>WebAuthn / Passkeys</td><td>Yes (first-class support)</td><td>Yes (FIDO2/WebAuthn)</td><td>Yes (via @simplewebauthn)</td></tr>
+<tr><td>Session Management</td><td>Managed (JWT or database sessions)</td><td>Managed (JWT with refresh tokens)</td><td>Database sessions (you control)</td></tr>
+</table>
+
+<h2>When Each Solution Wins</h2>
+<p><strong>Clerk — Best for:</strong> React/Next.js applications where you want auth to "just work" with the least code. Clerk's pre-built components are genuinely production-ready — you can go from zero to working auth in 15 minutes. <strong>Weak spot:</strong> Vendor lock-in for user data; pricing scales per MAU (monthly active users), which can get expensive at scale; React-only (not ideal for other frameworks).</p>
+
+<p><strong>Auth0 — Best for:</strong> Enterprise applications that need every auth feature imaginable: 30+ social providers, fine-grained RBAC, anomaly detection, brute-force protection, HSM-backed signing keys. <strong>Weak spot:</strong> Complex configuration (the Auth0 dashboard has hundreds of settings); pricing can be opaque at enterprise scale; developer experience is worse than Clerk.</p>
+
+<p><strong>Lucia Auth — Best for:</strong> Developers who want full control over their auth stack and user data. Lucia is not a service — it is a library you integrate with your database. You own your user tables, session tables, and all auth logic. <strong>Weak spot:</strong> You build the UI and manage everything yourself; more code to write and maintain; you are responsible for security.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Situation</th><th>Best Solution</th><th>Why</th></tr>
+<tr><td>React/Next.js app, want auth fast</td><td>Clerk</td><td>Best DX, pre-built components, 15-minute setup</td></tr>
+<tr><td>Enterprise app, complex requirements</td><td>Auth0</td><td>Most features, most identity providers, best compliance</td></tr>
+<tr><td>Full data control, don't want vendor lock-in</td><td>Lucia</td><td>Open source, you own your user data and auth logic</td></tr>
+<tr><td>Passkeys-first authentication</td><td>Clerk</td><td>Best passkey UX out of the box</td></tr>
+<tr><td>Multi-tenant / B2B SaaS</td><td>Clerk or Auth0</td><td>Both have organizations/RBAC; Clerk for DX, Auth0 for complexity</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Clerk wins for React/Next.js projects where you want to move fast — the developer experience is the best in auth right now. Auth0 is the enterprise choice when you need every feature and have time to configure them. Lucia is for developers who want full control and are willing to invest the time to own their auth stack. See also: <a href="/en/tech/authentication-best-practices-2026.html">Authentication Best Practices 2026</a> and <a href="/en/tech/web-security-basics.html">Web Security Basics</a>.</p>
+'''
+
+BODIES['database-migration-strategies'] = '''
+<p>Database migrations in production are terrifying — one mistake can corrupt data, cause downtime, or lock a critical table for hours. Yet every application needs them. This guide covers battle-tested strategies for running database migrations with zero downtime, including the expand-contract pattern, handling large tables, and reversible migrations.</p>
+
+<h2>Migration Strategies Compared</h2>
+<table>
+<tr><th>Strategy</th><th>Downtime</th><th>Complexity</th><th>Best For</th></tr>
+<tr><td>Expand-Contract</td><td>Zero</td><td>High</td><td>Schema changes on high-traffic tables</td></tr>
+<tr><td>Online Schema Change (gh-ost, pt-online-schema-change)</td><td>Zero</td><td>Medium</td><td>ALTER TABLE on large MySQL tables</td></tr>
+<tr><td>Blue-Green Database</td><td>Near-zero</td><td>Very High</td><td>Major version upgrades, risky operations</td></tr>
+<tr><td>Deploy + Migrate (simultaneous)</td><td>Brief (seconds)</td><td>Low</td><td>Small apps with maintenance windows</td></tr>
+<tr><td>Shadow Table Migration</td><td>Zero</td><td>Medium</td><td>Reshaping or cleaning data with dual writes</td></tr>
+</table>
+
+<h2>The Expand-Contract Pattern (Zero-Downtime)</h2>
+<p><strong>Best for:</strong> Adding, renaming, or removing columns without downtime. The key insight: deploy in multiple phases, and each phase must be compatible with the previous version.</p>
+
+<h3>Example: Renaming a Column (users.name → users.full_name)</h3>
+<table>
+<tr><th>Phase</th><th>What to Do</th><th>App Behavior</th></tr>
+<tr><td>1. Expand</td><td>Add new column full_name (nullable), write to BOTH columns</td><td>App writes to both old and new column</td></tr>
+<tr><td>2. Backfill</td><td>COPY name into full_name for existing rows</td><td>App reads from new column, falls back to old; writes to both</td></tr>
+<tr><td>3. Migrate reads</td><td>Deploy code that reads only from new column</td><td>App reads from full_name only, writes to both</td></tr>
+<tr><td>4. Contract</td><td>Stop writing to old column, eventually DROP it</td><td>App reads and writes full_name only</td></tr>
+</table>
+
+<h2>Handling Large Tables (100M+ Rows)</h2>
+<p><strong>Critical rule:</strong> Never run a blocking ALTER TABLE on a large production table — it acquires an ACCESS EXCLUSIVE lock for the duration, blocking all reads and writes.</p>
+<table>
+<tr><th>Database</th><th>Safe Solution</th><th>Tool</th></tr>
+<tr><td>PostgreSQL</td><td>Add CHECK constraints as NOT VALID, validate later</td><td>Built-in: ADD CONSTRAINT ... NOT VALID; ALTER CONSTRAINT ... VALIDATE</td></tr>
+<tr><td>PostgreSQL</td><td>Create index with CONCURRENTLY</td><td>CREATE INDEX CONCURRENTLY (no table lock)</td></tr>
+<tr><td>PostgreSQL</td><td>Add column with a default (PG 11+)</td><td>ALTER TABLE ... ADD COLUMN ... DEFAULT (no rewrite in PG 11+)</td></tr>
+<tr><td>MySQL</td><td>Online schema change</td><td>gh-ost (GitHub), pt-online-schema-change (Percona)</td></tr>
+<tr><td>SQLite</td><td>Batched writes in a transaction</td><td>Wrap in BEGIN/COMMIT, limit batch size to ~10,000 rows</td></tr>
+</table>
+
+<h2>Reversible Migrations</h2>
+<p>Every migration should have a planned rollback. Before running a migration, write (and test) the down migration:</p>
+<table>
+<tr><th>Change</th><th>Up Migration</th><th>Down Migration</th></tr>
+<tr><td>Add column</td><td>ALTER TABLE users ADD COLUMN bio TEXT;</td><td>ALTER TABLE users DROP COLUMN bio;</td></tr>
+<tr><td>Add NOT NULL column</td><td>Add nullable → backfill → set NOT NULL (3-phase)</td><td>ALTER TABLE users ALTER COLUMN bio DROP NOT NULL;</td></tr>
+<tr><td>Rename column</td><td>Expand-contract (4 phases, see above)</td><td>Reverse the expand-contract phases</td></tr>
+<tr><td>Add index</td><td>CREATE INDEX CONCURRENTLY ...;</td><td>DROP INDEX CONCURRENTLY ...;</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> The expand-contract pattern is the gold standard for zero-downtime migrations — deploy changes in small, compatible steps. For any ALTER TABLE on a large production table, use your database's non-blocking equivalent (CONCURRENTLY for PostgreSQL, gh-ost for MySQL). Never run a migration you cannot roll back. See also: <a href="/en/tech/database-design-fundamentals.html">Database Design Fundamentals</a> and <a href="/en/compare/postgresql-vs-mysql-vs-sqlite.html">PostgreSQL vs MySQL vs SQLite</a>.</p>
+'''
+
+BODIES['docker-compose-production'] = '''
+<p>Docker Compose is widely used for local development, but it is also a viable — and often simpler — production deployment tool for small-to-medium applications. With careful configuration (health checks, resource limits, secrets management, and logging), Compose can run production workloads reliably. It is not Kubernetes, but not every app needs Kubernetes.</p>
+
+<h2>Docker Compose vs Swarm vs Kubernetes for Production</h2>
+<table>
+<tr><th>Scale</th><th>Best Tool</th><th>Why</th></tr>
+<tr><td>1-3 services, single host</td><td>Docker Compose</td><td>Simplest setup, single docker-compose.yml, no orchestration overhead</td></tr>
+<tr><td>3-10 services, 2-5 hosts</td><td>Docker Swarm</td><td>Compose-compatible syntax, built-in load balancing, secrets</td></tr>
+<tr><td>10+ services, multi-region, auto-scaling</td><td>Kubernetes</td><td>Full orchestration, service mesh, auto-scaling, ecosystem</td></tr>
+</table>
+
+<h2>Production-Ready Compose File</h2>
+<pre><code># docker-compose.prod.yml
+services:
+  app:
+    image: myapp:latest
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: '512M'
+        reservations:
+          cpus: '0.5'
+          memory: '256M'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    secrets:
+      - db_password
+      - jwt_secret
+    volumes:
+      - app_uploads:/app/uploads
+
+  postgres:
+    image: postgres:16-alpine
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    secrets:
+      - db_password
+
+secrets:
+  db_password:
+    file: ./secrets/db_password.txt
+  jwt_secret:
+    file: ./secrets/jwt_secret.txt
+
+volumes:
+  pgdata:
+  app_uploads:</code></pre>
+
+<h2>Key Production Settings Explained</h2>
+<table>
+<tr><th>Setting</th><th>What It Does</th><th>Recommended Value</th></tr>
+<tr><td>healthcheck</td><td>Docker checks if container is healthy; Compose can wait for healthy before starting dependents</td><td>HTTP endpoint at /health, max 3 retries, 30s interval</td></tr>
+<tr><td>deploy.resources.limits</td><td>Hard cap on CPU and memory — prevents one container from starving others</td><td>Set based on your app's profile; always set a memory limit</td></tr>
+<tr><td>deploy.resources.reservations</td><td>Soft minimum — Docker scheduler guarantees this much</td><td>50-75% of limits for production critical services</td></tr>
+<tr><td>restart</td><td>Policy for when a container exits</td><td>unless-stopped (production), no for one-off jobs</td></tr>
+<tr><td>logging</td><td>Log driver + rotation — prevents disk from filling with logs</td><td>json-file with 10MB max per file, 3 files max (~30MB per service)</td></tr>
+<tr><td>secrets</td><td>In Swarm mode: encrypted at rest, tmpfs-mounted. In Compose: file-based</td><td>Use Docker secrets in Swarm; use env_file + vault in Compose</td></tr>
+</table>
+
+<h2>Zero-Downtime Rolling Updates (Swarm Mode)</h2>
+<p>With Swarm mode, Compose files gain rolling update support — update your containers without dropping requests:</p>
+<pre><code>services:
+  app:
+    image: myapp:latest
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 1       # Update 1 replica at a time
+        delay: 10s           # Wait 10s between updates
+        order: start-first   # Start new before stopping old
+        failure_action: rollback
+      rollback_config:
+        parallelism: 1
+        delay: 5s
+</code></pre>
+
+<p><strong>Bottom line:</strong> Docker Compose in production is underrated. If you have fewer than 10 services and do not need auto-scaling or multi-region, Compose (or Compose + Swarm for multi-host) is simpler and more maintainable than Kubernetes. The production checklist: health checks, resource limits, log rotation, secrets management, and a restart policy. See also: <a href="/en/compare/kubernetes-vs-docker-swarm-vs-nomad.html">Kubernetes vs Docker Swarm vs Nomad</a> and <a href="/en/tech/deploy-nextjs-free.html">Deploy Next.js for Free</a>.</p>
+'''
+
+BODIES['drizzle-vs-kysely-vs-knex'] = '''
+<p>TypeScript developers increasingly reach for query builders instead of full ORMs — they want type safety without the magic. Drizzle ORM, Kysely, and Knex.js represent three approaches to this problem: Drizzle is a lightweight ORM with a query-builder feel, Kysely is a pure type-safe query builder, and Knex.js is the veteran that predates TypeScript. This comparison helps you pick the right level of abstraction.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>Drizzle ORM</th><th>Kysely</th><th>Knex.js</th></tr>
+<tr><td>Type</td><td>Lightweight ORM + query builder</td><td>Type-safe SQL query builder</td><td>SQL query builder (JS first)</td></tr>
+<tr><td>Language</td><td>TypeScript</td><td>TypeScript</td><td>JavaScript (+ @types/knex for TS)</td></tr>
+<tr><td>Type Safety</td><td>Excellent — inferred from schema</td><td>Excellent — inferred from Database interface</td><td>Moderate — TS types are add-on, not core</td></tr>
+<tr><td>Schema Definition</td><td>Code-first (TypeScript schemas + drizzle-kit)</td><td>Manual (define Database type interface)</td><td>Migrations (knex migrate:make)</td></tr>
+<tr><td>Migration Tool</td><td>drizzle-kit (SQL + TypeScript migrations)</td><td>None built-in (use kysely-codegen + manual)</td><td>Built-in (knex migrate:make/latest/rollback)</td></tr>
+<tr><td>Supported Databases</td><td>PostgreSQL, MySQL, SQLite, Turso, Neon, Planetscale, Xata, SingleStore</td><td>PostgreSQL, MySQL, SQLite, MSSQL (via dialects)</td><td>PostgreSQL, MySQL, SQLite, MSSQL, Oracle, Redshift, CockroachDB</td></tr>
+<tr><td>Relationship Queries</td><td>relations() API, findMany with joins</td><td>Manual JOINs (no relation abstraction)</td><td>Manual JOINs</td></tr>
+<tr><td>Raw SQL Escape Hatch</td><td>sql tagged template</td><td>sql tagged template</td><td>knex.raw()</td></tr>
+<tr><td>Connection Pooling</td><td>Via drivers (pg, mysql2, better-sqlite3)</td><td>Via drivers (pg, mysql2, better-sqlite3)</td><td>Built-in (tarn.js)</td></tr>
+<tr><td>Bundle Size</td><td>~10 KB (core)</td><td>~15 KB</td><td>~40 KB</td></tr>
+</table>
+
+<h2>When Each Tool Wins</h2>
+<p><strong>Drizzle ORM — Best for:</strong> Teams that want a happy medium between a full ORM (Prisma) and raw SQL. Drizzle's schema-in-TypeScript approach gives you end-to-end type safety without code generation. The relations API handles basic joins while giving you raw SQL escape hatches when needed. <strong>Weak spot:</strong> Newer than Knex.js; smaller community; less documentation for complex patterns.</p>
+
+<p><strong>Kysely — Best for:</strong> Developers who want maximum control with full type safety. Kysely is strictly a query builder — no schema management, no migrations, no relation abstractions. You define a TypeScript interface for your database schema, and Kysely infers types from that. <strong>Weak spot:</strong> More boilerplate — you manually define the Database type interface; no built-in migrations (use kysely-codegen or manage separately); steeper learning curve.</p>
+
+<p><strong>Knex.js — Best for:</strong> Teams with existing Knex.js codebases, teams that need broad database support (Oracle, Redshift), and teams that are not using TypeScript or are early in their TS migration. <strong>Weak spot:</strong> TypeScript support is bolted on, not built in; the query builder API is less ergonomic than Drizzle or Kysely for complex queries.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Situation</th><th>Best Tool</th><th>Why</th></tr>
+<tr><td>New TypeScript project, want ORM-lite</td><td>Drizzle ORM</td><td>Best DX: schema in TS, great types, good migration tool</td></tr>
+<tr><td>Want maximum SQL control with types</td><td>Kysely</td><td>Pure query builder, no abstraction over SQL</td></tr>
+<tr><td>Existing Knex.js codebase</td><td>Knex.js</td><td>Migration cost not worth it for established projects</td></tr>
+<tr><td>Need Oracle or Redshift support</td><td>Knex.js</td><td>Only option with broad legacy DB support</td></tr>
+<tr><td>Serverless / edge (minimal bundle)</td><td>Drizzle ORM</td><td>Smallest bundle size, works great at edge</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Drizzle ORM hits the sweet spot for most new TypeScript projects — you get the type safety of Prisma with the SQL-level control of a query builder. Kysely is the choice for SQL purists who want zero abstraction. Knex.js remains solid but its TypeScript story is weaker than the newcomers. See also: <a href="/en/compare/prisma-vs-drizzle-vs-typeorm.html">Prisma vs Drizzle vs TypeORM</a> and <a href="/en/tech/database-design-fundamentals.html">Database Design Fundamentals</a>.</p>
+'''
+
+BODIES['eslint-vs-prettier-vs-biome'] = '''
+<p>Every JavaScript project needs linting and formatting — but the tooling landscape has shifted dramatically in 2026. Biome, the Rust-powered linter + formatter, has matured into a serious contender against the incumbents ESLint and Prettier. This comparison covers the key differences, migration paths, and whether it is time to switch.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>ESLint</th><th>Prettier</th><th>Biome</th></tr>
+<tr><td>Type</td><td>Linter (rules-based)</td><td>Formatter (opinionated)</td><td>Linter + Formatter (unified)</td></tr>
+<tr><td>Language</td><td>JavaScript</td><td>JavaScript</td><td>Rust</td></tr>
+<tr><td>Speed (format 1,000 files)</td><td>N/A (lint only)</td><td>~12 seconds</td><td>~0.5 seconds (25x faster)</td></tr>
+<tr><td>Speed (lint 1,000 files)</td><td>~30 seconds</td><td>N/A</td><td>~1.2 seconds (25x faster)</td></tr>
+<tr><td>Supported Languages</td><td>JS, TS, JSX, TSX</td><td>JS, TS, JSX, TSX, JSON, CSS, HTML, YAML, Markdown</td><td>JS, TS, JSX, TSX, JSON, CSS (growing)</td></tr>
+<tr><td>Plugin Ecosystem</td><td>3,000+ plugins, 300+ configs</td><td>Minimal (opinionated by design)</td><td>Built-in rules (growing, no external plugins yet)</td></tr>
+<tr><td>Config Format</td><td>JS, JSON, YAML, eslint.config.js</td><td>.prettierrc (JSON/YAML/JS)</td><td>biome.json (JSON/JSONC)</td></tr>
+<tr><td>VSCode Integration</td><td>Excellent</td><td>Excellent</td><td>Excellent (one extension for both)</td></tr>
+<tr><td>CI/CD</td><td>eslint CLI, reviewdog</td><td>prettier --check</td><td>biome ci (combined lint + format check)</td></tr>
+<tr><td>Auto-Fix</td><td>Yes (--fix)</td><td>Yes (--write)</td><td>Yes (biome check --write, both lint + format)</td></tr>
+</table>
+
+<h2>ESLint — The Incumbent</h2>
+<p><strong>Best for:</strong> Projects that need highly customized linting rules, TypeScript-specific checks, or framework-specific rules (React, Vue, Svelte). The plugin ecosystem is the moat — eslint-plugin-import, eslint-plugin-unicorn, and @typescript-eslint cover edge cases Biome cannot yet touch. <strong>Weak spot:</strong> Slow on large codebases; configuration sprawl; requires separate Prettier setup for formatting.</p>
+
+<h2>Prettier — The Standard</h2>
+<p><strong>Best for:</strong> Teams that value consistency over customizability. Prettier's opinionated approach eliminates formatting debates. <strong>Weak spot:</strong> Speed on very large repos; limited configurability; formatting-only means you still need ESLint for code quality rules.</p>
+
+<h2>Biome — The Challenger</h2>
+<p><strong>Best for:</strong> New projects that want fast, unified linting + formatting without juggling two tools. Biome's speed (25x faster than both) is genuinely noticeable in CI. <strong>Weak spot:</strong> No plugin system yet — you cannot write custom rules or use community plugins. For projects heavily invested in ESLint plugins, Biome is not a drop-in replacement.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Situation</th><th>Best Choice</th><th>Why</th></tr>
+<tr><td>New project, fresh start</td><td>Biome</td><td>Fast, unified, modern, no legacy config</td></tr>
+<tr><td>Large monorepo, slow CI</td><td>Biome</td><td>25x speed improvement in lint/format CI step</td></tr>
+<tr><td>Heavy ESLint plugin usage</td><td>ESLint + Prettier</td><td>Biome cannot replace custom ESLint plugins yet</td></tr>
+<tr><td>Maximum consistency</td><td>Prettier + Biome (linter)</td><td>Prettier for formatting, Biome for linting (faster than ESLint)</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Biome is ready for production in 2026 — for most projects, the speed win alone justifies the switch. The main blocker is plugin dependencies. If your ESLint setup is "eslint:recommended + @typescript-eslint + prettier," Biome can replace all of it today. See also: <a href="/en/compare/prettier-vs-biome.html">Prettier vs Biome</a> and <a href="/en/tech/typescript-advanced-patterns.html">TypeScript Advanced Patterns</a>.</p>
+'''
+
+BODIES['graphql-api-design'] = '''
+<p>GraphQL API design involves tradeoffs that REST does not — N+1 queries, over-fetching is replaced with potential under-fetching, and the flexibility of client-driven queries creates new security and performance challenges. This guide covers schema design, federation, performance optimization, and patterns learned from production GraphQL APIs at GitHub, Shopify, and Stripe.</p>
+
+<h2>Schema Design Principles</h2>
+<table>
+<tr><th>Principle</th><th>Good Practice</th><th>Anti-Pattern</th></tr>
+<tr><td>Naming</td><td>Use descriptive names: <code>article(id: ID!): Article</code></td><td>Generic names: <code>node(id: ID!): Node</code> for everything</td></tr>
+<tr><td>Nullability</td><td>Mark fields as nullable unless always present: <code>email: String</code></td><td>Making everything Non-Null: <code>email: String!</code> — breaks clients on partial data</td></tr>
+<tr><td>Pagination</td><td>Cursor-based (Relay spec): <code>articles(first: Int, after: String): ArticleConnection!</code></td><td>Offset-based: <code>articles(page: Int): [Article]</code> — breaks under concurrent writes</td></tr>
+<tr><td>Mutations</td><td>Specific input types per mutation: <code>createArticle(input: CreateArticleInput!): Article!</code></td><td>Reusing types between queries and mutations (they diverge)</td></tr>
+<tr><td>Errors</td><td>Union type for success/error: <code>CreateArticlePayload = Article | ValidationError | PermissionError</code></td><td>Using HTTP status codes or top-level errors for business logic errors</td></tr>
+<tr><td>Versioning</td><td>Add fields, deprecate with @deprecated, never remove</td><td>Breaking changes without deprecation period</td></tr>
+</table>
+
+<h2>Solving the N+1 Problem with DataLoader</h2>
+<p><strong>Best for:</strong> Batching and caching database queries during a single GraphQL request. Without DataLoader, each user in a list would trigger a separate database query for their posts.</p>
+<pre><code>// Without DataLoader: N+1 queries
+// Query: { users { name posts { title } } }
+// Result: 1 query for users + N queries for each user's posts
+
+// With DataLoader: 2 queries total
+const userLoader = new DataLoader(async (userIds) => {
+  const posts = await db.posts.findMany({
+    where: { authorId: { in: userIds } }
+  });
+  // Group posts by userId and return in same order as userIds
+  return userIds.map(id => posts.filter(p => p.authorId === id));
+});</code></pre>
+
+<h2>Federation for Microservices</h2>
+<p><strong>Best for:</strong> Large organizations where different teams own different parts of the graph. Each team owns their subgraph, and a gateway (Apollo Router or GraphOS) composes them into one unified graph.</p>
+<table>
+<tr><th>Component</th><th>Responsibility</th><th>Example</th></tr>
+<tr><td>Subgraph</td><td>One team's slice of the schema</td><td>Users subgraph, Products subgraph, Orders subgraph</td></tr>
+<tr><td>Entity</td><td>Type shared across subgraphs via @key directive</td><td>User type: @key(fields: "id") in both subgraphs</td></tr>
+<tr><td>Gateway</td><td>Routes queries to the right subgraph(s), stitches responses</td><td>Apollo Router (Rust, fast), GraphOS</td></tr>
+</table>
+
+<h2>Performance Checklist</h2>
+<ul>
+<li><strong>Persisted queries:</strong> Register queries at build time, clients send a hash instead of the full query — reduces bandwidth and blocks arbitrary queries</li>
+<li><strong>Query depth limiting:</strong> Reject queries deeper than 7-10 levels to prevent recursive denial-of-service attacks</li>
+<li><strong>Query cost analysis:</strong> Assign costs to fields (scalar=1, connection=10) and reject queries exceeding a total cost threshold</li>
+<li><strong>Response caching:</strong> Cache resolver results with cache-control headers or Redis; use schema-level caching hints (@cacheControl)</li>
+<li><strong>Batched HTTP requests:</strong> Use @apollo/client's batchHttpLink to combine multiple queries into a single HTTP request</li>
+</ul>
+
+<p><strong>Bottom line:</strong> GraphQL's flexibility is also its biggest risk — without guardrails (depth limiting, cost analysis, persisted queries), a single malicious query can take down your server. Invest in the DataLoader pattern from day one. If you are a single team, start with a monolith schema before reaching for federation. See also: <a href="/en/compare/trpc-vs-graphql-vs-rest.html">tRPC vs GraphQL vs REST</a> and <a href="/en/tech/api-design-patterns.html">API Design Patterns</a>.</p>
+'''
+
+BODIES['kubernetes-vs-docker-swarm-vs-nomad'] = '''
+<p>Kubernetes has won the orchestration wars — but that does not mean it is the right choice for every team. Docker Swarm still offers the simplest path to container orchestration, and HashiCorp Nomad fills a unique niche for teams that need to orchestrate both containers and non-containerized workloads. This comparison helps you choose based on your team size, complexity tolerance, and what you are actually running.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>Kubernetes (K8s)</th><th>Docker Swarm</th><th>HashiCorp Nomad</th></tr>
+<tr><td>Philosophy</td><td>Full-featured, extensible, cloud-native</td><td>Simplicity, Docker-native</td><td>Minimal, workload-agnostic</td></tr>
+<tr><td>Complexity</td><td>Very High — 50+ components</td><td>Low — simple CLI, familiar Docker</td><td>Medium — single binary, clean architecture</td></tr>
+<tr><td>Setup Time</td><td>Hours to days (managed: minutes)</td><td>Minutes (docker swarm init)</td><td>Hours (single binary, config file)</td></tr>
+<tr><td>Scaling</td><td>5,000+ nodes, 300,000+ pods</td><td>100+ nodes (practical)</td><td>10,000+ nodes, 1M+ containers</td></tr>
+<tr><td>Service Discovery</td><td>Built-in (CoreDNS)</td><td>Built-in (DNS round-robin)</td><td>Built-in (Consul integration)</td></tr>
+<tr><td>Load Balancing</td><td>Built-in (Ingress, Gateway API)</td><td>Built-in (routing mesh)</td><td>Via Consul / Traefik / Fabio</td></tr>
+<tr><td>Auto-Scaling</td><td>HPA, VPA, Cluster Autoscaler</td><td>None (manual scaling)</td><td>Horizontal app + cluster autoscaling</td></tr>
+<tr><td>Rolling Updates</td><td>Built-in (Deployments)</td><td>Built-in (service update)</td><td>Built-in (update stanza)</td></tr>
+<tr><td>Secrets Management</td><td>Built-in (base64 encoded)</td><td>Built-in (encrypted at rest)</td><td>Vault integration (native)</td></tr>
+<tr><td>Non-Container Workloads</td><td>No (containers only)</td><td>No (containers only)</td><td>Yes — Java, executables, QEMU, containers</td></tr>
+<tr><td>Managed Offerings</td><td>GKE, EKS, AKS, DO K8s</td><td>Docker Universal Control Plane</td><td>HashiCorp Cloud Platform</td></tr>
+</table>
+
+<h2>When Each Tool Wins</h2>
+<p><strong>Kubernetes — Best for:</strong> Teams running 20+ microservices, multi-cloud strategies, and organizations that can dedicate at least one person to K8s operations. <strong>Weak spot:</strong> The operational burden is real — even with managed K8s, you need K8s expertise on the team.</p>
+
+<p><strong>Docker Swarm — Best for:</strong> Small teams (2-10 devs) who just need containers to run reliably with minimal overhead. If you already use Docker Compose locally, Swarm mode is a natural production upgrade. <strong>Weak spot:</strong> Limited ecosystem; Swarm is in maintenance mode.</p>
+
+<p><strong>Nomad — Best for:</strong> Teams running mixed workloads (containers + legacy Java apps + batch jobs) who want one orchestrator for everything. <strong>Weak spot:</strong> Smaller community than K8s; finding Nomad-experienced engineers is harder.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Your Situation</th><th>Use</th><th>Why</th></tr>
+<tr><td>Startup with 2-10 containers</td><td>Docker Swarm or managed K8s</td><td>Swarm for simplicity; managed K8s if you need ecosystem</td></tr>
+<tr><td>Enterprise, 50+ services</td><td>Kubernetes</td><td>Ecosystem, talent pool, multi-cloud portability</td></tr>
+<tr><td>Mixed workloads</td><td>Nomad</td><td>Only orchestrator that handles non-container workloads natively</td></tr>
+<tr><td>Multi-cloud or hybrid cloud</td><td>Kubernetes</td><td>Portability across AWS, GCP, Azure, on-prem</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> For 80% of teams, a managed Kubernetes service is the pragmatic choice. Docker Swarm is still the simplest path for "it just works." Nomad is the dark horse for heterogeneous infrastructure. See also: <a href="/en/compare/docker-vs-podman.html">Docker vs Podman</a> and <a href="/en/tech/devops-for-developers.html">DevOps for Developers</a>.</p>
+'''
+
+BODIES['langchain-vs-llamaindex-vs-haystack'] = '''
+<p>Building LLM applications requires a framework to manage prompts, chains, retrieval, and agent orchestration. In 2026, three frameworks dominate: LangChain (the most popular, general-purpose), LlamaIndex (specialized in data indexing and RAG), and Haystack (NLP pipelines, from deepset). Choosing the right one depends on whether you are building agents, search systems, or document processing pipelines.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>LangChain</th><th>LlamaIndex</th><th>Haystack</th></tr>
+<tr><td>Focus</td><td>General-purpose LLM app framework</td><td>Data indexing + retrieval (RAG)</td><td>NLP pipelines (search, QA, extraction)</td></tr>
+<tr><td>Language</td><td>Python, TypeScript</td><td>Python, TypeScript</td><td>Python</td></tr>
+<tr><td>Core Concept</td><td>Chains + Agents + Tools</td><td>Indexes + Query Engines + Agents</td><td>Pipelines + Components + Document Stores</td></tr>
+<tr><td>RAG Quality</td><td>Good (LCEL + retrievers)</td><td>Excellent (purpose-built for RAG)</td><td>Excellent (mature document processing)</td></tr>
+<tr><td>Agent Support</td><td>Excellent — ReAct, OpenAI functions, custom tools</td><td>Good — QueryEngine tools, Agent workers</td><td>Good — Agent components, tool use</td></tr>
+<tr><td>Document Parsing</td><td>Basic (document loaders for 50+ formats)</td><td>Excellent — SimpleDirectoryReader, LlamaParse (PDFs)</td><td>Excellent — File converters, PreProcessor pipeline</td></tr>
+<tr><td>Vector Store Integrations</td><td>50+ (Pinecone, Chroma, Weaviate, Qdrant, etc.)</td><td>20+ (focused on best-in-class)</td><td>10+ (Pinecone, Weaviate, Qdrant, Elasticsearch, OpenSearch)</td></tr>
+<tr><td>LLM Providers</td><td>60+ (OpenAI, Anthropic, Cohere, HuggingFace, etc.)</td><td>20+ (OpenAI, Anthropic, local models via Ollama)</td><td>15+ (OpenAI, Cohere, HuggingFace, local models)</td></tr>
+<tr><td>Evaluation</td><td>LangSmith (commercial), basic eval callbacks</td><td>Built-in evaluators (faithfulness, relevancy, correctness)</td><td>Built-in eval (metrics, annotation tools)</td></tr>
+<tr><td>Production Readiness</td><td>LangServe (API deployment), LangSmith (monitoring)</td><td>LlamaDeploy (beta), integrations with FastAPI</td><td>Hayhooks (API deployment), REST API baked in</td></tr>
+</table>
+
+<h2>When Each Framework Wins</h2>
+<p><strong>LangChain — Best for:</strong> General-purpose LLM applications, especially agents that need to call multiple tools and APIs. LangChain's ecosystem (LangSmith for observability, LangServe for deployment, LangGraph for stateful agents) is the most mature. <strong>Weak spot:</strong> Heavy abstraction — LangChain's chain-of-abstractions makes simple things feel complex; debugging can be painful; rapid API changes.</p>
+
+<p><strong>LlamaIndex — Best for:</strong> Applications where the core challenge is loading, indexing, and retrieving from large document collections. LlamaIndex's document parsing (LlamaParse for complex PDFs) and advanced retrieval strategies (tree indexing, recursive retrieval, sentence window retrieval) are best in class. <strong>Weak spot:</strong> Narrower scope than LangChain — if your app needs complex agent orchestration beyond RAG, LangChain is more flexible.</p>
+
+<p><strong>Haystack — Best for:</strong> Production NLP pipelines that need enterprise-grade reliability and maturity. Haystack has been around since 2019 (pre-LLM era) and its pipeline architecture is battle-tested for search, QA, and document processing at scale. <strong>Weak spot:</strong> Smaller community than LangChain; less "buzz" means fewer tutorials and examples; more opinionated about how pipelines should work.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Your Project</th><th>Best Framework</th><th>Why</th></tr>
+<tr><td>AI agent that calls APIs and tools</td><td>LangChain</td><td>Best agent support, largest tool ecosystem</td></tr>
+<tr><td>RAG over large document collections</td><td>LlamaIndex</td><td>Purpose-built for data indexing and retrieval</td></tr>
+<tr><td>Enterprise search/QA system</td><td>Haystack</td><td>Most mature, production-proven, reliable</td></tr>
+<tr><td>Complex PDFs with tables and charts</td><td>LlamaIndex</td><td>LlamaParse handles complex documents beautifully</td></tr>
+<tr><td>Rapid prototyping of LLM features</td><td>LangChain</td><td>Fastest to get started, most examples online</td></tr>
+<tr><td>Multi-step reasoning + RAG</td><td>LangChain + LlamaIndex</td><td>LangChain for agent logic, LlamaIndex for retrieval</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> LangChain is the default for general LLM applications and agents — it has the largest ecosystem and community. LlamaIndex is superior for RAG-heavy applications where document loading and retrieval quality matter most. Haystack is the dark horse for enterprise deployments that need reliability over hype. Many teams combine LangChain (orchestration) with LlamaIndex (retrieval). See also: <a href="/en/ai/ai-agents-guide.html">AI Agents Guide</a> and <a href="/en/ai/ai-api-integration-guide.html">AI API Integration Guide</a>.</p>
+'''
+
+BODIES['nginx-vs-caddy-vs-traefik'] = '''
+<p>Choosing a web server and reverse proxy is one of those decisions that affects every request your application handles. Nginx has been the industry standard for 20 years, but Caddy and Traefik have reimagined what a web server should be in the cloud-native era. Caddy's automatic HTTPS and Traefik's native Docker/K8s service discovery are game-changers for modern deployments.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>Nginx</th><th>Caddy</th><th>Traefik</th></tr>
+<tr><td>Language</td><td>C</td><td>Go</td><td>Go</td></tr>
+<tr><td>Automatic HTTPS</td><td>No (manual certbot or cert-manager)</td><td>Yes — automatic Let's Encrypt, zero config</td><td>Yes — automatic Let's Encrypt, per-router</td></tr>
+<tr><td>Configuration</td><td>nginx.conf (declarative text)</td><td>Caddyfile (simple) or JSON (advanced)</td><td>Labels/annotations (Docker/K8s), YAML, TOML</td></tr>
+<tr><td>Docker Integration</td><td>Manual (nginx.conf + upstreams)</td><td>Basic (via reverse_proxy)</td><td>Excellent — auto-discovers containers via labels</td></tr>
+<tr><td>K8s Integration</td><td>Ingress Controller (separate project)</td><td>Ingress Controller (caddy-ingress)</td><td>Excellent — native Ingress, Gateway API, CRDs</td></tr>
+<tr><td>Performance</td><td>Excellent — battle-tested at massive scale</td><td>Very Good — Go GC overhead on extreme benchmarks</td><td>Very Good — comparable to Caddy</td></tr>
+<tr><td>Memory Usage</td><td>Low (C, event-driven)</td><td>Medium-Low (Go)</td><td>Medium (Go + dynamic config overhead)</td></tr>
+<tr><td>Load Balancing</td><td>Round-robin, least_conn, ip_hash, random, consistent_hash</td><td>Round-robin, least_conn, first, header-based, cookie-based</td><td>Round-robin, weighted, sticky sessions, circuit breaker</td></tr>
+<tr><td>WebSocket</td><td>Yes (since 1.3)</td><td>Yes (automatic)</td><td>Yes (automatic)</td></tr>
+<tr><td>Observability</td><td>stub_status, access/error logs</td><td>Metrics endpoint, structured logs</td><td>Metrics, traces, access logs, dashboard UI</td></tr>
+<tr><td>Plugin/Module System</td><td>Compile-time modules (no dynamic loading on most distros)</td><td>Compile-time modules (Go plugins or xcaddy)</td><td>Middleware plugins, providers (dynamic at runtime)</td></tr>
+</table>
+
+<h2>Nginx — The Battle-Tested Standard</h2>
+<p><strong>Best for:</strong> High-traffic sites (Netflix, Cloudflare scale), static file serving at extreme throughput, and teams that already have Nginx expertise and config management in place. <strong>Weak spot:</strong> Config syntax is arcane (if statements in Nginx are notoriously tricky); no automatic HTTPS; Docker/K8s integration requires extra tooling.</p>
+
+<h2>Caddy — The Developer-Friendly Modern Server</h2>
+<p><strong>Best for:</strong> Teams that want HTTPS to "just work" and prefer simple configuration. Caddy's automatic Let's Encrypt integration provisions and renews TLS certificates with zero manual steps. <strong>Weak spot:</strong> Smaller ecosystem than Nginx; less battle-tested at extreme scale; Go's GC can introduce latency spikes under extreme memory pressure.</p>
+
+<h2>Traefik — The Cloud-Native Reverse Proxy</h2>
+<p><strong>Best for:</strong> Docker and Kubernetes environments where services come and go dynamically. Traefik auto-discovers containers and K8s services via labels/annotations — no manual upstream configuration needed. <strong>Weak spot:</strong> Overkill for simple static setups; higher resource usage; complex configuration for non-container environments.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Your Setup</th><th>Best Proxy</th><th>Why</th></tr>
+<tr><td>Simple VPS, static + Node.js app</td><td>Caddy</td><td>Easiest config, automatic HTTPS, great for solo devs</td></tr>
+<tr><td>Docker Compose multi-service app</td><td>Traefik</td><td>Auto-discovery via Docker labels, per-service HTTPS</td></tr>
+<tr><td>Kubernetes cluster</td><td>Traefik or Nginx Ingress</td><td>Both excellent; Traefik for simplicity, Nginx for maximum control</td></tr>
+<tr><td>High-traffic static file serving (CDN origin)</td><td>Nginx</td><td>Proven at massive scale, lowest resource usage</td></tr>
+<tr><td>Simple reverse proxy + automatic HTTPS</td><td>Caddy</td><td>The Caddyfile is the most readable config of all three</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Caddy is the best default for 80% of projects — automatic HTTPS alone saves hours of certificate management. Traefik wins in container-heavy environments where services are dynamic. Nginx is still king at extreme scale and when you need maximum performance with minimal resources. See also: <a href="/en/compare/fly-io-vs-railway-vs-render.html">Fly.io vs Railway vs Render</a> and <a href="/en/tech/devops-for-developers.html">DevOps for Developers</a>.</p>
+'''
+
+BODIES['nodejs-streams-guide'] = '''
+<p>Node.js Streams are one of the most powerful and underused features of the platform. They enable processing large amounts of data without loading everything into memory — critical for file uploads, data pipelines, and HTTP responses. Yet most Node.js developers avoid streams because the API (even the modern pipeline-based one) has non-obvious patterns. This guide covers streams from the ground up with practical examples you can use today.</p>
+
+<h2>The Four Stream Types</h2>
+<table>
+<tr><th>Type</th><th>What It Does</th><th>Examples</th><th>Key Events/Methods</th></tr>
+<tr><td>Readable</td><td>Produces data that can be consumed</td><td>fs.createReadStream, HTTP request (req), process.stdin</td><td>data, end, error, pipe(), readable.read()</td></tr>
+<tr><td>Writable</td><td>Consumes data that is written to it</td><td>fs.createWriteStream, HTTP response (res), process.stdout</td><td>write(), end(), drain, finish</td></tr>
+<tr><td>Transform</td><td>Both reads and writes — modifies data in transit</td><td>zlib.createGzip, crypto.createCipher, CSV parser</td><td>Same as Readable + Writable, _transform() method</td></tr>
+<tr><td>Duplex</td><td>Independent read and write sides (like a telephone)</td><td>net.Socket, TLS socket, WebSocket</td><td>read() + write(), data flowing in both directions</td></tr>
+</table>
+
+<h2>Pipeline API (Modern, Recommended)</h2>
+<p><strong>Best for:</strong> Any time you connect streams together. pipeline() handles cleanup and error propagation automatically — raw .pipe() does not.</p>
+<pre><code>const { pipeline } = require('node:stream/promises');
+const { createReadStream, createWriteStream } = require('node:fs');
+const { createGzip } = require('node:zlib');
+
+await pipeline(
+  createReadStream('input.json'),
+  createGzip(),
+  createWriteStream('input.json.gz'),
+);
+console.log('Pipeline succeeded — file compressed');</code></pre>
+
+<h2>Real-World Use Cases</h2>
+
+<h3>1. Streaming CSV Processing (Avoid OOM on Large Files)</h3>
+<pre><code>const { createReadStream } = require('node:fs');
+const { parse } = require('csv-parse');
+const { Transform } = require('node:stream');
+
+// Process a 5GB CSV file with constant memory (~50MB)
+const results = [];
+createReadStream('massive-file.csv')
+  .pipe(parse({ columns: true }))
+  .pipe(new Transform({
+    objectMode: true,
+    transform(row, encoding, callback) {
+      // Process and optionally filter each row
+      if (row.status === 'active') {
+        this.push({ id: row.id, name: row.name });
+      }
+      callback();
+    }
+  }))
+  .on('data', (row) => results.push(row))
+  .on('end', () => console.log(`Processed ${results.length} rows`));</code></pre>
+
+<h3>2. HTTP Streaming Large Responses</h3>
+<pre><code>// Instead of: res.json(allData) — loads all data into memory
+// Use: stream data to client as you produce it
+app.get('/api/export', async (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.write('[');
+  let first = true;
+  const cursor = db.collection('events').find().stream();
+  for await (const doc of cursor) {
+    if (!first) res.write(',');
+    res.write(JSON.stringify(doc));
+    first = false;
+  }
+  res.write(']');
+  res.end();
+});</code></pre>
+
+<h3>3. Handling Backpressure</h3>
+<p><strong>Best practice:</strong> Respect the return value of write(). When write() returns false, the writable stream's internal buffer is full — pause reading until the drain event fires.</p>
+<pre><code>const readStream = createReadStream('huge-file.bin');
+const writeStream = createWriteStream('copy.bin');
+
+readStream.on('data', (chunk) => {
+  const canContinue = writeStream.write(chunk);
+  if (!canContinue) {
+    readStream.pause(); // Stop reading — buffer is full
+    writeStream.once('drain', () => readStream.resume()); // Resume when drained
+  }
+});
+// Note: pipeline() handles this automatically — prefer it over manual piping</code></pre>
+
+<p><strong>Bottom line:</strong> Streams are essential for processing data that exceeds memory limits. The pipeline() API should be your default — it handles backpressure, error propagation, and cleanup correctly. Avoid raw .pipe() and .on('data') patterns unless you have a specific reason. See also: <a href="/en/tech/caching-strategies-web-apps.html">Caching Strategies</a> and <a href="/en/tech/rest-api-best-practices.html">REST API Best Practices</a>.</p>
+'''
+
+BODIES['python-asyncio-guide'] = '''
+<p>Python's asyncio has matured into the standard way to write concurrent I/O-bound code, but the learning curve remains steep. The introduction of Task Groups in Python 3.11 and improved exception handling make async Python more ergonomic than ever. This guide covers the patterns that work — and the ones that bite you — with production-ready examples.</p>
+
+<h2>Core Concepts</h2>
+<table>
+<tr><th>Concept</th><th>What It Is</th><th>When to Use</th></tr>
+<tr><td>Coroutine</td><td>A function defined with async def — can be suspended and resumed</td><td>Any I/O-bound operation: HTTP requests, DB queries, file I/O</td></tr>
+<tr><td>Task</td><td>A coroutine wrapped and scheduled to run on the event loop</td><td>Run multiple coroutines concurrently</td></tr>
+<tr><td>Event Loop</td><td>The scheduler that runs async code (one thread, cooperative multitasking)</td><td>You rarely touch this directly — asyncio.run() handles it</td></tr>
+<tr><td>Awaitable</td><td>Anything you can await: coroutine, Task, Future</td><td>Use await to pause until the result is ready</td></tr>
+</table>
+
+<h2>Task Groups (Python 3.11+): The Modern Way</h2>
+<p><strong>Best for:</strong> Running multiple async tasks concurrently with proper error handling. Replaces asyncio.gather() with structured concurrency — if one task fails, all sibling tasks are cancelled.</p>
+<pre><code>import asyncio
+import aiohttp
+
+async def fetch_url(url: str) -> dict:
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as resp:
+            return await resp.json()
+
+async def main():
+    urls = ['https://api1.example.com', 'https://api2.example.com']
+    async with asyncio.TaskGroup() as tg:
+        tasks = [tg.create_task(fetch_url(url)) for url in urls]
+    # All tasks completed (or exception propagated) after exiting TaskGroup
+    return [t.result() for t in tasks]
+
+results = asyncio.run(main())</code></pre>
+
+<h2>asyncio.gather vs as_completed</h2>
+<table>
+<tr><th>Function</th><th>Behavior</th><th>Use Case</th></tr>
+<tr><td>asyncio.gather()</td><td>Run all tasks, return results in order. If one raises, it propagates. Prefer TaskGroup in 3.11+.</td><td>When you need all results and order matters</td></tr>
+<tr><td>asyncio.as_completed()</td><td>Yield results as each task finishes (fastest first)</td><td>When you want to process results as they arrive</td></tr>
+<tr><td>asyncio.wait()</td><td>Low-level: wait for FIRST_COMPLETED or ALL_COMPLETED</td><td>Timeouts, race conditions, advanced patterns</td></tr>
+</table>
+
+<h2>Common Pitfalls and Solutions</h2>
+<h3>1. Running Blocking Code in Async Functions</h3>
+<p><strong>Problem:</strong> Calling a sync function (e.g., time.sleep, requests.get, heavy CPU work) inside an async function blocks the entire event loop. <strong>Solution:</strong> Use asyncio.to_thread() for I/O-bound blocking code, or run_in_executor() for CPU-bound work.</p>
+<pre><code># Bad: blocks the event loop
+result = requests.get('https://api.example.com')
+
+# Good: offload to a thread
+result = await asyncio.to_thread(requests.get, 'https://api.example.com')</code></pre>
+
+<h3>2. Unhandled Exceptions in Background Tasks</h3>
+<p><strong>Problem:</strong> If a Task raises an exception and you never await it, the exception is silently lost until garbage collection. <strong>Solution:</strong> Always use TaskGroup — it ensures exceptions are propagated. For fire-and-forget tasks, add a done callback that logs exceptions.</p>
+
+<h3>3. Creating Too Many Concurrent Connections</h3>
+<p><strong>Solution:</strong> Use asyncio.Semaphore to limit concurrency:</p>
+<pre><code>sem = asyncio.Semaphore(20)  # Max 20 concurrent requests
+async def rate_limited_fetch(url):
+    async with sem:
+        return await fetch_url(url)</code></pre>
+
+<p><strong>Bottom line:</strong> Use TaskGroup for structured concurrency — it replaces the error-prone gather() pattern. Keep async code purely async (offload blocking code to threads). Always limit concurrency with Semaphore when making external requests. See also: <a href="/en/tech/nodejs-streams-guide.html">Node.js Streams Guide</a> and <a href="/en/tech/error-handling-best-practices.html">Error Handling Best Practices</a>.</p>
+'''
+
+BODIES['react-hooks-complete-guide'] = '''
+<p>React Hooks have been the primary way to add state and logic to React components since 2019, but their surface area keeps growing. React 19 and React 20 (2026) introduced hooks like useOptimistic and useFormStatus that change how we handle optimistic updates and form state. This guide covers every built-in React hook, when to use each, and the most common pitfalls.</p>
+
+<h2>All React Hooks at a Glance</h2>
+<table>
+<tr><th>Hook</th><th>Purpose</th><th>When to Use</th><th>Introduced</th></tr>
+<tr><td>useState</td><td>Component-level state</td><td>Any mutable value in a component</td><td>React 16.8</td></tr>
+<tr><td>useEffect</td><td>Synchronize with external systems</td><td>API calls, subscriptions, DOM mutations</td><td>React 16.8</td></tr>
+<tr><td>useContext</td><td>Read a context value</td><td>Theme, auth, locale — any global-ish state</td><td>React 16.8</td></tr>
+<tr><td>useReducer</td><td>Complex state logic</td><td>State with multiple sub-values, state machines</td><td>React 16.8</td></tr>
+<tr><td>useCallback</td><td>Memoize a function reference</td><td>Stable callbacks passed to memoized children</td><td>React 16.8</td></tr>
+<tr><td>useMemo</td><td>Memoize a computed value</td><td>Expensive calculations, stable object references</td><td>React 16.8</td></tr>
+<tr><td>useRef</td><td>Mutable reference that persists</td><td>DOM access, storing previous values, interval IDs</td><td>React 16.8</td></tr>
+<tr><td>useId</td><td>Unique ID for accessibility</td><td>Linking label's htmlFor to input's id</td><td>React 18</td></tr>
+<tr><td>useTransition</td><td>Mark a state update as non-urgent</td><td>UI that updates slower than user input (tabs, filters)</td><td>React 18</td></tr>
+<tr><td>useDeferredValue</td><td>Defer re-rendering a value</td><td>Showing stale content while new content loads</td><td>React 18</td></tr>
+<tr><td>useSyncExternalStore</td><td>Subscribe to an external store</td><td>Integrating non-React state libraries (Redux, Zustand)</td><td>React 18</td></tr>
+<tr><td>useInsertionEffect</td><td>CSS-in-JS library hook</td><td>Inject styles before layout effects fire (rarely used directly)</td><td>React 18</td></tr>
+<tr><td>useOptimistic</td><td>Optimistic UI updates</td><td>Show a value before the server confirms it</td><td>React 19/20</td></tr>
+<tr><td>useFormStatus</td><td>Form submission status</td><td>Disable submit button while form is submitting</td><td>React 19/20</td></tr>
+<tr><td>useActionState</td><td>Form action with state</td><td>Server Action form handling with error states</td><td>React 19/20</td></tr>
+</table>
+
+<h2>useState: The Foundation</h2>
+<p><strong>Best for:</strong> Simple values that change over time — form inputs, toggle states, counters. <strong>Key rule:</strong> Never call setState during render (except for derived state with useMemo or useReducer).</p>
+<pre><code>// Basic usage
+const [count, setCount] = useState(0);
+
+// Functional update (when new state depends on old)
+setCount(prev => prev + 1);
+
+// Lazy initializer (expensive computation, runs once)
+const [data, setData] = useState(() => expensiveComputation());</code></pre>
+
+<h2>useEffect: The Most Misused Hook</h2>
+<p><strong>Best for:</strong> Synchronizing with external systems (browser APIs, third-party libraries, network). <strong>Common mistake:</strong> Using useEffect for derived state or event handling, which should be done in event handlers or during render.</p>
+<pre><code>// Good: connect to external system
+useEffect(() => {
+  const connection = createConnection(serverUrl);
+  connection.connect();
+  return () => connection.disconnect();
+}, [serverUrl]);
+
+// Bad: setting state from props (do this during render instead)
+useEffect(() => {
+  setFullName(firstName + ' ' + lastName); // Unnecessary!
+}, [firstName, lastName]);</code></pre>
+
+<h2>useMemo and useCallback: Performance Hooks</h2>
+<p><strong>Best for:</strong> Preventing unnecessary re-renders of memoized child components. <strong>Key rule:</strong> Do not wrap everything in useMemo/useCallback — only use them when you have measured a performance problem.</p>
+<pre><code>// useMemo: cache an expensive computed value
+const sortedList = useMemo(() => {
+  return items.sort((a, b) => a.name.localeCompare(b.name));
+}, [items]);
+
+// useCallback: stabilize a function reference
+const handleClick = useCallback((id: string) => {
+  setSelectedId(id);
+}, []); // Stable reference across re-renders</code></pre>
+
+<h2>useOptimistic: Optimistic UI in 2026</h2>
+<p><strong>Best for:</strong> Instant UI feedback while a server action is in flight — like liking a post, toggling a todo, or sending a message.</p>
+<pre><code>const [optimisticMessages, addOptimisticMessage] = useOptimistic(
+  messages,
+  (state, newMessage) => [...state, { ...newMessage, sending: true }]
+);
+
+async function sendMessage(formData: FormData) {
+  const message = formData.get('message');
+  addOptimisticMessage({ text: message, id: crypto.randomUUID() });
+  await sendMessageToServer(message); // Revalidates messages on success
+}</code></pre>
+
+<p><strong>Bottom line:</strong> React Hooks are not just for state — they are the primitive for composing behavior in React. The newer hooks (useOptimistic, useFormStatus, useTransition) show React's direction: tighter integration with server actions and optimistic UI. See also: <a href="/en/compare/react-vs-vue-vs-angular-vs-svelte.html">React vs Vue vs Angular vs Svelte</a> and <a href="/en/compare/nextjs-vs-nuxt-vs-sveltekit.html">Next.js vs Nuxt vs SvelteKit</a>.</p>
+'''
+
+BODIES['redis-vs-memcached-vs-dragonfly'] = '''
+<p>When your database becomes a bottleneck, an in-memory data store is the standard solution. Redis has dominated this space for a decade, but Dragonfly (a modern Redis-compatible drop-in replacement) claims 25x throughput, and Memcached still excels at pure caching. This comparison focuses on real throughput numbers and when each tool fits your architecture.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>Redis 7</th><th>Memcached</th><th>Dragonfly</th></tr>
+<tr><td>Type</td><td>Data structure server</td><td>Pure key-value cache</td><td>Redis-compatible, multi-threaded</td></tr>
+<tr><td>Language</td><td>C</td><td>C</td><td>C++</td></tr>
+<tr><td>Data Structures</td><td>Strings, Lists, Sets, Hashes, Sorted Sets, Streams, JSON, Time Series, Probabilistic</td><td>Strings only</td><td>All Redis data structures (Redis API compatible)</td></tr>
+<tr><td>Persistence</td><td>RDB snapshots, AOF, both combined</td><td>None (cache only)</td><td>Snapshotting</td></tr>
+<tr><td>Replication</td><td>Primary-replica, Redis Cluster (sharding)</td><td>None</td><td>Primary-replica</td></tr>
+<tr><td>Transactions</td><td>MULTI/EXEC, Lua scripting</td><td>CAS (check-and-set)</td><td>MULTI/EXEC, Lua scripting</td></tr>
+<tr><td>Pub/Sub</td><td>Yes (PUBLISH/SUBSCRIBE, Streams)</td><td>No</td><td>Yes</td></tr>
+<tr><td>Multi-Threading</td><td>Single-threaded (I/O threading in 6+)</td><td>Multi-threaded by default</td><td>Multi-threaded (shared-nothing architecture)</td></tr>
+<tr><td>Max Memory Efficiency</td><td>Good (jemalloc)</td><td>Slab-based (fragmentation issues)</td><td>Excellent (30% less memory than Redis)</td></tr>
+<tr><td>Throughput (Ops/sec, 1M keys)</td><td>~120K ops/sec</td><td>~400K ops/sec (pure cache)</td><td>~4M ops/sec (25x Redis)</td></tr>
+</table>
+
+<h2>When Each Tool Wins</h2>
+<p><strong>Redis — Best for:</strong> Applications that need more than simple key-value caching: rate limiting (Sorted Sets), message queues (Streams), leaderboards (Sorted Sets), session stores (Hashes with TTL), and distributed locking (Redlock). <strong>Weak spot:</strong> Single-threaded bottleneck — one slow command blocks everything; vertical scaling only.</p>
+
+<p><strong>Memcached — Best for:</strong> Pure, simple caching where you just need to store and retrieve key-value data fast. Memcached's multi-threaded architecture means it scales horizontally on multi-core machines more efficiently than Redis. <strong>Weak spot:</strong> No data structures, no persistence, no replication — it is a cache, not a database.</p>
+
+<p><strong>Dragonfly — Best for:</strong> Teams that want Redis compatibility but need higher throughput on fewer servers. Dragonfly is a drop-in Redis replacement (same protocol, same commands) with 25x better throughput on multi-core machines. <strong>Weak spot:</strong> Newer project (fewer production war stories); Redis Cluster not yet fully compatible.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Your Use Case</th><th>Best Tool</th><th>Why</th></tr>
+<tr><td>Application caching (key-value)</td><td>Memcached</td><td>Simplest, fastest for pure cache workloads</td></tr>
+<tr><td>Session store, rate limiting, leaderboards, queues</td><td>Redis</td><td>Data structures solve these elegantly</td></tr>
+<tr><td>Redis-compatible but need higher throughput</td><td>Dragonfly</td><td>Drop-in replacement, 25x faster on multi-core</td></tr>
+<tr><td>Message queuing / event streaming</td><td>Redis Streams</td><td>Lightweight alternative to Kafka for moderate volumes</td></tr>
+<tr><td>Distributed locking</td><td>Redis (with Redlock library)</td><td>Mature, well-understood patterns</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Redis is the default choice — the data structures, persistence, and ecosystem are unmatched. Use Memcached if you need pure caching at maximum speed. Dragonfly is the most exciting alternative: Redis-compatible, 25x faster, and 30% less memory — perfect for teams hitting Redis scaling limits. See also: <a href="/en/compare/postgresql-vs-mysql-vs-sqlite.html">PostgreSQL vs MySQL vs SQLite</a> and <a href="/en/tech/caching-strategies-web-apps.html">Caching Strategies for Web Apps</a>.</p>
+'''
+
+BODIES['remix-vs-nextjs-vs-tanstack'] = '''
+<p>The React framework landscape in 2026 has three serious contenders, each with a fundamentally different philosophy: Next.js (Vercel's hybrid rendering workhorse), Remix (web standards-first, acquired by Shopify), and TanStack Start (router-first, from the creator of React Query). Choosing between them is not about features — it is about which philosophy matches how you think about building web apps.</p>
+
+<h2>Framework Philosophy Comparison</h2>
+<table>
+<tr><th>Philosophy</th><th>Next.js 15</th><th>Remix 3</th><th>TanStack Start</th></tr>
+<tr><td>Core Idea</td><td>Hybrid: mix static, server, and client rendering per page</td><td>Web standards: leverage Request/Response, HTML forms</td><td>Router-first: type-safe routing, minimal server abstraction</td></tr>
+<tr><td>Rendering</td><td>SSG, SSR, ISR, PPR, streaming</td><td>SSR + streaming, no SSG</td><td>SSR + streaming + static</td></tr>
+<tr><td>Data Loading</td><td>async server components, generateMetadata</td><td>loader + action functions (per-route)</td><td>loader functions, TanStack Query integration</td></tr>
+<tr><td>Mutations</td><td>Server Actions (async functions in components)</td><td>actions + useActionData, useNavigation</td><td>server functions (RPC-style)</td></tr>
+<tr><td>Routing</td><td>File-based (app/ directory)</td><td>File-based (flat route convention)</td><td>File-based OR code-based (TanStack Router)</td></tr>
+<tr><td>Type Safety</td><td>Good (improving)</td><td>Good (loader/action types)</td><td>Excellent (end-to-end type-safe routing)</td></tr>
+<tr><td>Caching</td><td>Extensive (4 caching layers)</td><td>Minimal (CDN caching headers)</td><td>Minimal (TanStack Query client cache)</td></tr>
+<tr><td>Streaming</td><td>Yes (Suspense + streaming SSR)</td><td>Yes (defer + Await)</td><td>Yes (Suspense + streaming)</td></tr>
+<tr><td>Deployment</td><td>Vercel (best), Node.js, Docker</td><td>Any Node.js/Fetch runtime</td><td>Node.js, Bun, Deno, Cloudflare</td></tr>
+</table>
+
+<h2>When Each Framework Wins</h2>
+<p><strong>Next.js 15 — Best for:</strong> Teams that want one framework for everything: marketing pages (SSG), dashboards (SSR), and e-commerce (ISR). The Vercel ecosystem (Analytics, Speed Insights, KV) is a force multiplier. <strong>Weak spot:</strong> Caching complexity — Next.js has 4 caching layers that interact in surprising ways. The mental model is heavy.</p>
+
+<p><strong>Remix 3 — Best for:</strong> Teams that value web fundamentals and want their framework to get out of the way. Remix is built on the Web Fetch API — loaders and actions are just Request/Response handlers. <strong>Weak spot:</strong> No static generation — Remix always runs your loader on every request (mitigated by CDN caching).</p>
+
+<p><strong>TanStack Start — Best for:</strong> Teams that already love TanStack Query and want a framework that treats the server as "just another query client." Type safety is best in class. <strong>Weak spot:</strong> Newest of the three; smaller ecosystem; still evolving.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Your Needs</th><th>Best Framework</th><th>Why</th></tr>
+<tr><td>E-commerce or content site with many static pages</td><td>Next.js</td><td>ISR + static generation for product/content pages</td></tr>
+<tr><td>Dashboard or SaaS app (mostly dynamic)</td><td>Remix or TanStack Start</td><td>Better data mutation patterns, fewer caching surprises</td></tr>
+<tr><td>Type-safety obsessed team</td><td>TanStack Start</td><td>End-to-end type-safe routing is unmatched</td></tr>
+<tr><td>Deploy to non-Vercel (Cloudflare, Deno)</td><td>Remix or TanStack Start</td><td>Run anywhere with Fetch API</td></tr>
+<tr><td>Already use TanStack ecosystem</td><td>TanStack Start</td><td>TanStack Query, Router, Table — all first-class</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Next.js is the safe default with the largest ecosystem. Remix is better for mostly-dynamic apps where you value web standards. TanStack Start is the rising star for type-safety enthusiasts. Pick the philosophy that matches your team. See also: <a href="/en/compare/nextjs-vs-nuxt-vs-sveltekit.html">Next.js vs Nuxt vs SvelteKit</a> and <a href="/en/compare/react-vs-vue-vs-angular-vs-svelte.html">React vs Vue vs Angular vs Svelte</a>.</p>
+'''
+
+BODIES['stripe-vs-paddle-vs-lemonsqueezy'] = '''
+<p>Choosing a payment processor is one of the most consequential decisions for a SaaS business — switching later is painful. In 2026, Stripe remains the developer darling, Paddle solves the tax compliance headache as a Merchant of Record, and Lemon Squeezy targets indie makers with a simpler experience. This comparison focuses on what matters for developer-founded SaaS businesses.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>Stripe</th><th>Paddle</th><th>Lemon Squeezy</th></tr>
+<tr><td>Type</td><td>Payment processor</td><td>Merchant of Record (MoR)</td><td>Merchant of Record (MoR)</td></tr>
+<tr><td>Pricing</td><td>2.9% + $0.30 per transaction</td><td>5% + $0.50 per transaction</td><td>5% + $0.50 per transaction</td></tr>
+<tr><td>Tax Handling</td><td>Stripe Tax ($0.50/transaction add-on)</td><td>Fully handled (global sales tax, VAT, GST)</td><td>Fully handled (global sales tax, VAT, GST)</td></tr>
+<tr><td>Legal Responsibility for Tax</td><td>You (Stripe provides data, you file)</td><td>Paddle (they file and remit globally)</td><td>Lemon Squeezy (they file and remit globally)</td></tr>
+<tr><td>Checkout</td><td>Stripe Checkout, Elements, Payment Links</td><td>Paddle Checkout (hosted)</td><td>Lemon Squeezy Checkout (hosted)</td></tr>
+<tr><td>Subscription Management</td><td>Excellent — Stripe Billing, metered billing, usage-based</td><td>Good — subscriptions, invoicing, trials</td><td>Good — subscriptions, trials, discounts</td></tr>
+<tr><td>API Quality</td><td>Best in class — REST API, SDKs in 20+ languages</td><td>Good — REST API, Node.js/Python SDKs</td><td>Good — REST API, simpler than Stripe</td></tr>
+<tr><td>Affiliate / Referral System</td><td>Via third-party (PartnerStack, Rewardful)</td><td>Built-in affiliate system</td><td>Built-in affiliate system</td></tr>
+<tr><td>Email Marketing</td><td>Via integrations</td><td>Basic built-in</td><td>Built-in email marketing for customers</td></tr>
+<tr><td>Digital Products (licenses, keys)</td><td>Via third-party integrations</td><td>Built-in license key generation</td><td>Built-in license key generation + delivery</td></tr>
+</table>
+
+<h2>Merchant of Record (MoR) Explained</h2>
+<p>With Stripe, you are the merchant — you handle tax collection, remittance, and compliance. Stripe Tax helps calculate tax but you still file returns. With Paddle and Lemon Squeezy (MoRs), they are the merchant — they handle all tax liability, file returns in every country, and deal with compliance. You receive a single payout. The tradeoff: ~2% higher fees for zero tax headaches.</p>
+
+<h2>When Each Processor Wins</h2>
+<p><strong>Stripe — Best for:</strong> US/EU-based businesses with simple tax situations, or businesses that can afford an accountant for global compliance. Stripe's API quality, documentation, and ecosystem are unmatched. <strong>Weak spot:</strong> Global tax compliance is on you — at $20K+/month in global revenue, tax filing complexity becomes a real operational burden.</p>
+
+<p><strong>Paddle — Best for:</strong> Global SaaS businesses that want to sell worldwide without worrying about VAT, GST, or sales tax registration in dozens of countries. Paddle's MoR model means you never deal with tax authorities — they handle everything. <strong>Weak spot:</strong> Higher fees (5% + $0.50 vs Stripe's 2.9% + $0.30); approval process (requires business verification); less flexible API than Stripe.</p>
+
+<p><strong>Lemon Squeezy — Best for:</strong> Indie developers and small SaaS products that want a simple, fast setup with built-in features like affiliate tracking, email marketing, and license key delivery. <strong>Weak spot:</strong> Newer platform (less battle-tested); fewer integrations; API is simpler but less powerful.</p>
+
+<h2>Fee Comparison at Different Revenue Levels</h2>
+<table>
+<tr><th>Monthly Revenue</th><th>Stripe (2.9% + $0.30)</th><th>Paddle/Lemon Squeezy (5% + $0.50)</th><th>Difference</th></tr>
+<tr><td>$1,000 (50 transactions)</td><td>$44</td><td>$75</td><td>$31 more for MoR</td></tr>
+<tr><td>$10,000 (200 transactions)</td><td>$350</td><td>$600</td><td>$250 more for MoR</td></tr>
+<tr><td>$50,000 (500 transactions)</td><td>$1,600</td><td>$2,750</td><td>$1,150 more for MoR</td></tr>
+<tr><td>$100,000 (1,000 transactions)</td><td>$3,200</td><td>$5,500</td><td>$2,300 more for MoR</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Start with Stripe if you are in one country with simple tax. Switch to Paddle (or add it alongside Stripe) when global tax compliance becomes painful — typically around $5K-10K/month in international revenue. The ~2% MoR premium is cheaper than hiring an international tax accountant. Lemon Squeezy is the best all-in-one for indie makers who want simplicity over flexibility. See also: <a href="/en/sidehustle/saas-bootstrapping-guide.html">SaaS Bootstrapping Guide</a> and <a href="/en/sidehustle/micro-saas-ideas-2026.html">Micro-SaaS Ideas</a>.</p>
+'''
+
+BODIES['terraform-vs-pulumi-vs-crossplane'] = '''
+<p>Infrastructure as Code (IaC) has evolved beyond "write YAML and pray." In 2026, three approaches dominate: Terraform (declarative HCL, the industry standard), Pulumi (IaC in general-purpose languages), and Crossplane (Kubernetes-native control plane). Each represents a fundamentally different philosophy about how infrastructure should be defined, provisioned, and managed.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>Terraform</th><th>Pulumi</th><th>Crossplane</th></tr>
+<tr><td>Language</td><td>HCL (HashiCorp Config Language)</td><td>TypeScript, Python, Go, C#, Java, YAML</td><td>YAML (K8s CRDs) + Go (for providers)</td></tr>
+<tr><td>Approach</td><td>Declarative state management</td><td>Imperative + declarative (general-purpose languages)</td><td>Reconciliation loop (K8s controller pattern)</td></tr>
+<tr><td>State Storage</td><td>Local file, remote backend (S3, GCS, Terraform Cloud)</td><td>Pulumi Cloud (SaaS) or self-managed (S3, GCS, Azure)</td><td>Kubernetes etcd (cluster's database)</td></tr>
+<tr><td>State Locking</td><td>Yes (via DynamoDB, Consul, etc.)</td><td>Yes (via cloud backend locking)</td><td>Via K8s optimistic concurrency</td></tr>
+<tr><td>Diff / Plan</td><td>terraform plan (excellent plan output)</td><td>pulumi preview (good diff output)</td><td>kubectl diff (or GitOps PR preview)</td></tr>
+<tr><td>Drift Detection</td><td>terraform plan (check against state)</td><td>pulumi refresh + preview</td><td>Continuous reconciliation (auto-corrects drift)</td></tr>
+<tr><td>Provider Ecosystem</td><td>3,000+ providers (largest ecosystem)</td><td>~200 providers (native + Terraform bridge)</td><td>~100 providers (crossplane-contrib, Upbound)</td></tr>
+<tr><td>Module/Component Reuse</td><td>Terraform Registry (public + private modules)</td><td>Pulumi packages (npm, PyPI, etc.)</td><td>Composition Resources (K8s CRDs)</td></tr>
+<tr><td>Secrets Handling</td><td>sensitive = true, Vault integration</td><td>Pulumi secrets (encrypted in state)</td><td>K8s Secrets + External Secrets Operator</td></tr>
+<tr><td>CI/CD Integration</td><td>Terraform Cloud, Atlantis, Spacelift, Env0</td><td>Pulumi Deployments, GitHub Actions</td><td>ArgoCD, Flux (GitOps native)</td></tr>
+</table>
+
+<h2>When Each Tool Wins</h2>
+<p><strong>Terraform — Best for:</strong> Teams that want the largest provider ecosystem, the most mature tooling, and HCL's declarative simplicity. Terraform is the safe corporate choice — every cloud provider supports it, and the talent pool is largest. <strong>Weak spot:</strong> HCL is not a real programming language — abstraction and code reuse (modules, count, for_each) are limited compared to general-purpose languages.</p>
+
+<p><strong>Pulumi — Best for:</strong> Teams that want to use real programming languages (loops, conditionals, classes, functions) to manage infrastructure. Pulumi's killer feature: you can share types and constants between your application code and infrastructure code. <strong>Weak spot:</strong> Smaller provider ecosystem; the "infrastructure as general-purpose code" approach can lead to overly complex IaC if not disciplined.</p>
+
+<p><strong>Crossplane — Best for:</strong> Teams running Kubernetes that want to manage cloud infrastructure the same way they manage K8s resources (via CRDs). Crossplane's reconciliation loop continuously corrects drift — no manual terraform apply needed. <strong>Weak spot:</strong> Kubernetes-only (you need a K8s cluster to run it); steeper learning curve for teams not already K8s-native; smaller provider ecosystem.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Your Team</th><th>Best Tool</th><th>Why</th></tr>
+<tr><td>Traditional ops, need broadest provider support</td><td>Terraform</td><td>3,000+ providers, largest community, most examples</td></tr>
+<tr><td>Dev teams managing infra with app code</td><td>Pulumi</td><td>Use the same language as your app; real abstractions</td></tr>
+<tr><td>K8s-native team, GitOps workflow</td><td>Crossplane</td><td>Continuous reconciliation, Kubernetes-native API</td></tr>
+<tr><td>Multi-cloud, complex orchestration</td><td>Terraform or Pulumi</td><td>Both handle multi-cloud well; Pulumi better for complex logic</td></tr>
+<tr><td>Internal developer platform</td><td>Crossplane</td><td>Composition Resources let you build self-service APIs for devs</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Terraform is the safe default — largest ecosystem, most mature, most examples. Pulumi wins when your infrastructure logic is sufficiently complex that you need real programming constructs. Crossplane is the future for K8s-native teams who want continuous reconciliation and self-service infrastructure. See also: <a href="/en/compare/aws-vs-azure-vs-gcp.html">AWS vs Azure vs GCP</a> and <a href="/en/tech/devops-for-developers.html">DevOps for Developers</a>.</p>
+'''
+
+BODIES['vitest-vs-jest-vs-bun-test'] = '''
+<p>The JavaScript test runner landscape has transformed since 2024. Vitest (Vite-native, Jest-compatible) has overtaken Jest in new projects, and Bun Test offers blazing-fast execution by leveraging Bun's JavaScript engine. Each has a distinct philosophy: Jest prioritizes stability and ecosystem, Vitest prioritizes speed and Vite integration, and Bun Test prioritizes raw performance.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th>Feature</th><th>Jest</th><th>Vitest</th><th>Bun Test</th></tr>
+<tr><td>Runtime</td><td>Node.js (vm or worker_threads)</td><td>Vite dev server (Node.js)</td><td>Bun runtime (JavaScriptCore)</td></tr>
+<tr><td>Speed (1,000 simple tests)</td><td>~8 seconds</td><td>~2 seconds (with --pool=forks)</td><td>~0.8 seconds</td></tr>
+<tr><td>Jest API Compatibility</td><td>Native</td><td>Near-complete (expect, describe, it, mock)</td><td>Partial (describe, it, expect with jest-matcher-like API)</td></tr>
+<tr><td>Watch Mode</td><td>Yes (--watch)</td><td>Yes (--watch, faster via Vite HMR)</td><td>Yes (--watch)</td></tr>
+<tr><td>Coverage</td><td>Built-in (Istanbul)</td><td>Built-in (c8 or Istanbul)</td><td>None built-in (external tools)</td></tr>
+<tr><td>Mocking</td><td>Comprehensive (jest.mock, jest.fn, module mocking)</td><td>Comprehensive (vi.mock, vi.fn, module mocking)</td><td>Basic (mock.module, mockFn)</td></tr>
+<tr><td>Snapshot Testing</td><td>Yes (toMatchSnapshot)</td><td>Yes (toMatchSnapshot, compatible)</td><td>Yes (toMatchSnapshot)</td></tr>
+<tr><td>Parallel Execution</td><td>Per-file (worker_threads)</td><td>Per-file (threads or forks)</td><td>Per-file (Bun's native workers)</td></tr>
+<tr><td>TypeScript</td><td>Via ts-jest or @swc/jest</td><td>Native (via esbuild)</td><td>Native (Bun's TS transpiler)</td></tr>
+<tr><td>Vite Project Integration</td><td>Manual (jest.config to match Vite aliases)</td><td>Zero-config (reads vite.config.ts)</td><td>Manual</td></tr>
+<tr><td>Ecosystem Size</td><td>Largest (jest-dom, testing-library, jest-axe)</td><td>Large (most Jest plugins work via compat)</td><td>Small (growing, but many Jest plugins don't work)</td></tr>
+</table>
+
+<h2>When Each Runner Wins</h2>
+<p><strong>Jest — Best for:</strong> Large enterprise codebases with established Jest configurations, custom transformers, and complex module mocking. Jest's ecosystem (jest-dom, jest-axe, jest-image-snapshot, jest-cucumber) is the deepest. <strong>Weak spot:</strong> Slow startup (especially with ts-jest on large projects); Vite-based projects need manual config to resolve aliases correctly.</p>
+
+<p><strong>Vitest — Best for:</strong> Vite-based projects (React, Vue, Svelte) and new projects where you want Jest compatibility without Jest's slowness. Vitest reads your vite.config.ts automatically — no duplicate config for tests. <strong>Weak spot:</strong> Some edge-case Jest plugin compatibility issues; pooling model can cause issues with shared mutable state in monorepos.</p>
+
+<p><strong>Bun Test — Best for:</strong> New projects that want the absolute fastest test execution and are willing to accept a smaller ecosystem. Bun Test runs tests in Bun's JavaScript runtime (not Node.js), which means some Node.js-specific APIs may not work. <strong>Weak spot:</strong> Youngest ecosystem; coverage requires external tools; some Node.js APIs are not available.</p>
+
+<h2>Migration: Jest to Vitest</h2>
+<table>
+<tr><th>Step</th><th>What Changes</th></tr>
+<tr><td>1. Install Vitest</td><td><code>npm install -D vitest</code></td></tr>
+<tr><td>2. Update config</td><td>Rename jest.config.ts to vitest.config.ts, change import to defineConfig from vitest/config</td></tr>
+<tr><td>3. Globals</td><td>Add globals: true to vitest config (or import { describe, it, expect } from 'vitest')</td></tr>
+<tr><td>4. Replace jest.* calls</td><td>jest.fn() → vi.fn(), jest.mock() → vi.mock(), jest.spyOn() → vi.spyOn()</td></tr>
+<tr><td>5. Update package.json</td><td>Change "test" script from jest to vitest</td></tr>
+<tr><td>6. Remove Jest deps</td><td>npm uninstall jest ts-jest @types/jest jest-environment-jsdom</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Vitest is the best choice for 90% of new projects — it is faster than Jest, compatible with the Jest ecosystem, and integrates seamlessly with Vite. Jest is still the safe choice for large enterprise codebases with established test infrastructure. Bun Test is worth watching but its ecosystem is not ready for most production use cases yet. See also: <a href="/en/compare/playwright-vs-cypress-vs-selenium.html">Playwright vs Cypress vs Selenium</a> and <a href="/en/tech/testing-strategies-web-apps.html">Testing Strategies for Web Apps</a>.</p>
+'''
+
+BODIES['web-accessibility-guide'] = '''
+<p>Web accessibility (a11y) is not just about compliance — accessible websites work better for everyone, including keyboard users, screen reader users, and people with temporary disabilities. The business case is strong: the EU Accessibility Act (2025) mandates accessibility for many digital products, and inaccessible websites lose an estimated 15-20% of potential users. This guide covers practical accessibility patterns that developers actually need.</p>
+
+<h2>Accessibility Basics: The 4 Principles (POUR)</h2>
+<table>
+<tr><th>Principle</th><th>What It Means</th><th>Developer Checklist</th></tr>
+<tr><td>Perceivable</td><td>Users can perceive the content</td><td>Alt text for images, captions for video, sufficient color contrast</td></tr>
+<tr><td>Operable</td><td>Users can operate the interface</td><td>Keyboard navigation, no keyboard traps, enough time to read</td></tr>
+<tr><td>Understandable</td><td>Users can understand the content</td><td>Readable text, predictable navigation, input assistance (error messages)</td></tr>
+<tr><td>Robust</td><td>Content works with assistive technologies</td><td>Semantic HTML, valid ARIA (when needed), works across browsers</td></tr>
+</table>
+
+<h2>Semantic HTML: Your Best Accessibility Tool</h2>
+<p><strong>The most important rule:</strong> Use semantic HTML elements. They are accessible by default — no ARIA needed.</p>
+<table>
+<tr><th>Instead of</th><th>Use</th><th>Why</th></tr>
+<tr><td><code>&lt;div onclick="..."&gt;</code></td><td><code>&lt;button&gt;</code></td><td>Buttons are focusable, keyboard-activatable, and announced as "button" by screen readers</td></tr>
+<tr><td><code>&lt;div class="nav"&gt;</code></td><td><code>&lt;nav&gt;</code></td><td>Screen readers have a "skip to navigation" shortcut</td></tr>
+<tr><td><code>&lt;div class="main"&gt;</code></td><td><code>&lt;main&gt;</code></td><td>Screen readers have a "skip to main content" shortcut</td></tr>
+<tr><td><code>&lt;span class="heading"&gt;</code></td><td><code>&lt;h1&gt;-&lt;h6&gt;</code></td><td>Screen readers navigate by heading hierarchy</td></tr>
+<tr><td><code>&lt;div&gt; + CSS grid</code></td><td><code>&lt;table&gt;</code> for tabular data</td><td>Screen readers have table navigation (row/column headers)</td></tr>
+</table>
+
+<h2>ARIA: When HTML Is Not Enough</h2>
+<p><strong>Critical rule:</strong> No ARIA is better than bad ARIA. Only use ARIA when native HTML cannot express the semantics you need.</p>
+<table>
+<tr><th>ARIA Attribute</th><th>When to Use</th><th>Example</th></tr>
+<tr><td>aria-label</td><td>Provide an accessible name when no visible label exists</td><td><code>&lt;button aria-label="Close dialog"&gt;X&lt;/button&gt;</code></td></tr>
+<tr><td>aria-describedby</td><td>Link an element to its description</td><td><code>&lt;input aria-describedby="password-hint"&gt; &lt;span id="password-hint"&gt;Min 8 characters&lt;/span&gt;</code></td></tr>
+<tr><td>aria-expanded</td><td>Indicate if a collapsible element is open</td><td><code>&lt;button aria-expanded="true"&gt;Section 1&lt;/button&gt;</code></td></tr>
+<tr><td>aria-live</td><td>Announce dynamic content changes</td><td><code>&lt;div aria-live="polite"&gt;5 results found&lt;/div&gt;</code></td></tr>
+<tr><td>role="alert"</td><td>Important, time-sensitive notification</td><td><code>&lt;div role="alert"&gt;Your session will expire in 2 minutes&lt;/div&gt;</code></td></tr>
+</table>
+
+<h2>Automated Testing in CI/CD</h2>
+<pre><code>// axe-core: The accessibility testing standard
+// Integrate into Jest, Playwright, or Cypress tests
+import { axe, toHaveNoViolations } from 'jest-axe';
+expect.extend(toHaveNoViolations);
+
+it('homepage should have no accessibility violations', async () => {
+  const { container } = render(<HomePage />);
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
+// Playwright test
+import { injectAxe, checkA11y } from 'axe-playwright';
+await injectAxe(page);
+await checkA11y(page); // Runs axe-core against the rendered page</code></pre>
+
+<p><strong>Bottom line:</strong> Start with semantic HTML — it solves 80% of accessibility issues for free. Add automated a11y testing to CI/CD (axe-core) to catch regressions. Test manually with a keyboard (Tab through your entire app) at least once per feature. Accessibility is not a feature to add later — it is a property of good HTML. See also: <a href="/en/compare/tailwind-vs-bootstrap-vs-mui.html">CSS Framework Comparison</a> and <a href="/en/tech/css-responsive-design-guide.html">Responsive CSS in 2026</a>.</p>
+'''
+
+
 # FAQ data for FAQPage schema (slug → list of q/a dicts)
 FAQS = {
     'chatgpt-plus-worth': [

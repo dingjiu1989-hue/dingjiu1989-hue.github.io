@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="docker-compose-production">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Docker Compose for Production: Multi-Service Deployments Done Right">
+    <meta property="og:description" content="Beyond docker-compose up: production-ready Compose files with health checks, resource limits, secrets management, logging drivers, and zero-downtime rolling updates. Compare with Swarm and Kubernetes.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/docker-compose-production.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Docker Compose for Production: Multi-Service Deployments Done Right">
+    <meta name="twitter:description" content="Beyond docker-compose up: production-ready Compose files with health checks, resource limits, secrets management, logging drivers, and zero-downtime rolling updates. Compare with Swarm and Kubernetes.">
+    <title>Docker Compose for Production: Multi-Service Deployments Done Right — SourceHub</title>
+    <meta name="description" content="Beyond docker-compose up: production-ready Compose files with health checks, resource limits, secrets management, logging drivers, and zero-downtime rolling updates. Compare with Swarm and Kubernetes.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/tech/docker-compose-production.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/docker-compose-production.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Docker Compose for Production: Multi-Service Deployments Done Right",
+      "description": "Beyond docker-compose up: production-ready Compose files with health checks, resource limits, secrets management, logging drivers, and zero-downtime rolling updates. Compare with Swarm and Kubernetes.",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {"@type": "Person", "name": "SourceHub"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Docker Compose for Production: Multi-Service Deployments Done Right"}
+      ]
+    }
+    </script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Docker Compose for Production: Multi-Service Deployments Done Right
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Docker</span>
+        <span class="tag-cat">Docker Compose</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Deployment</span></div>
+      <h1 class="article-title">Docker Compose for Production: Multi-Service Deployments Done Right</h1>
+      <div class="article-meta">Published 2026-05-08 · 4080 views · 34 replies</div>
+      <div class="article-body"><p>Docker Compose is widely used for local development, but it is also a viable — and often simpler — production deployment tool for small-to-medium applications. With careful configuration (health checks, resource limits, secrets management, and logging), Compose can run production workloads reliably. It is not Kubernetes, but not every app needs Kubernetes.</p>
+
+<h2>Docker Compose vs Swarm vs Kubernetes for Production</h2>
+<table>
+<tr><th>Scale</th><th>Best Tool</th><th>Why</th></tr>
+<tr><td>1-3 services, single host</td><td>Docker Compose</td><td>Simplest setup, single docker-compose.yml, no orchestration overhead</td></tr>
+<tr><td>3-10 services, 2-5 hosts</td><td>Docker Swarm</td><td>Compose-compatible syntax, built-in load balancing, secrets</td></tr>
+<tr><td>10+ services, multi-region, auto-scaling</td><td>Kubernetes</td><td>Full orchestration, service mesh, auto-scaling, ecosystem</td></tr>
+</table>
+
+<h2>Production-Ready Compose File</h2>
+<pre><code># docker-compose.prod.yml
+services:
+  app:
+    image: myapp:latest
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: '512M'
+        reservations:
+          cpus: '0.5'
+          memory: '256M'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    secrets:
+      - db_password
+      - jwt_secret
+    volumes:
+      - app_uploads:/app/uploads
+
+  postgres:
+    image: postgres:16-alpine
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    secrets:
+      - db_password
+
+secrets:
+  db_password:
+    file: ./secrets/db_password.txt
+  jwt_secret:
+    file: ./secrets/jwt_secret.txt
+
+volumes:
+  pgdata:
+  app_uploads:</code></pre>
+
+<h2>Key Production Settings Explained</h2>
+<table>
+<tr><th>Setting</th><th>What It Does</th><th>Recommended Value</th></tr>
+<tr><td>healthcheck</td><td>Docker checks if container is healthy; Compose can wait for healthy before starting dependents</td><td>HTTP endpoint at /health, max 3 retries, 30s interval</td></tr>
+<tr><td>deploy.resources.limits</td><td>Hard cap on CPU and memory — prevents one container from starving others</td><td>Set based on your app's profile; always set a memory limit</td></tr>
+<tr><td>deploy.resources.reservations</td><td>Soft minimum — Docker scheduler guarantees this much</td><td>50-75% of limits for production critical services</td></tr>
+<tr><td>restart</td><td>Policy for when a container exits</td><td>unless-stopped (production), no for one-off jobs</td></tr>
+<tr><td>logging</td><td>Log driver + rotation — prevents disk from filling with logs</td><td>json-file with 10MB max per file, 3 files max (~30MB per service)</td></tr>
+<tr><td>secrets</td><td>In Swarm mode: encrypted at rest, tmpfs-mounted. In Compose: file-based</td><td>Use Docker secrets in Swarm; use env_file + vault in Compose</td></tr>
+</table>
+
+<h2>Zero-Downtime Rolling Updates (Swarm Mode)</h2>
+<p>With Swarm mode, Compose files gain rolling update support — update your containers without dropping requests:</p>
+<pre><code>services:
+  app:
+    image: myapp:latest
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 1       # Update 1 replica at a time
+        delay: 10s           # Wait 10s between updates
+        order: start-first   # Start new before stopping old
+        failure_action: rollback
+      rollback_config:
+        parallelism: 1
+        delay: 5s
+</code></pre>
+
+<p><strong>Bottom line:</strong> Docker Compose in production is underrated. If you have fewer than 10 services and do not need auto-scaling or multi-region, Compose (or Compose + Swarm for multi-host) is simpler and more maintainable than Kubernetes. The production checklist: health checks, resource limits, log rotation, secrets management, and a restart policy. See also: <a href="/en/compare/kubernetes-vs-docker-swarm-vs-nomad.html">Kubernetes vs Docker Swarm vs Nomad</a> and <a href="/en/tech/deploy-nextjs-free.html">Deploy Next.js for Free</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/git-cheatsheet.html" class="related-card">Git Commands Cheat Sheet: The Only Reference You Need</a><a href="/en/tech/python-tutorial.html" class="related-card">Python Tutorial: From Zero to Your First Program</a><a href="/en/tech/docker-quickstart.html" class="related-card">Docker in 30 Minutes: From Install to First Container</a><a href="/en/tech/vscode-extensions.html" class="related-card">10 Must-Have VS Code Extensions to Double Your Productivity</a></div>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>
