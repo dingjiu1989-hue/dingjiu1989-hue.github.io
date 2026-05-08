@@ -2410,6 +2410,338 @@ BODIES['notion-vs-obsidian-vs-linear'] = '''
 <p><strong>Bottom line:</strong> These three tools complement each other — they're not competitors. Obsidian for personal knowledge (your second brain). Notion for team documentation and collaborative planning. Linear for tracking what needs to be built. The optimal stack: Obsidian for you, Notion for the team, Linear for the code. See also: <a href="/en/tools/online-tools-2026.html">free online tools guide</a> for more developer productivity tools.</p>
 '''
 
+BODIES['best-static-site-generators-2026'] = '''
+<p>Static site generators (SSGs) are the backbone of modern documentation, blogs, and marketing sites. Astro, Hugo, 11ty, and Jekyll take different approaches. Here's which one matches your content workflow and stack.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Astro</th><th>Hugo</th><th>11ty (Eleventy)</th><th>Jekyll</th></tr>
+<tr><td><strong>Language</strong></td><td>JS/TS (Go core)</td><td>Go</td><td>JavaScript</td><td>Ruby</td></tr>
+<tr><td><strong>Build speed</strong></td><td>Fast (~5s for 1000 pages)</td><td>Fastest (<1s for 1000 pages)</td><td>Very fast (~3s for 1000 pages)</td><td>Slow (~60s for 1000 pages)</td></tr>
+<tr><td><strong>Templating</strong></td><td>Astro (.astro), JSX, Vue, Svelte</td><td>Go templates</td><td>Nunjucks, Liquid, Handlebars, etc.</td><td>Liquid</td></tr>
+<tr><td><strong>CMS integration</strong></td><td>Content Collections (built-in)</td><td>Front Matter only</td><td>Data cascade (flexible)</td><td>Front Matter + Collections</td></tr>
+<tr><td><strong>JavaScript in output</strong></td><td>Optional (Islands)</td><td>Minimal</td><td>Whatever you add</td><td>Minimal</td></tr>
+<tr><td><strong>Markdown</strong></td><td>MDX support</td><td>Goldmark (excellent)</td><td>markdown-it (configurable)</td><td>Kramdown</td></tr>
+<tr><td><strong>Plugins</strong></td><td>Growing (Astro integrations)</td><td>Built-in (most features included)</td><td>400+ plugins</td><td>300+ plugins</td></tr>
+<tr><td><strong>GitHub Pages</strong></td><td>Yes (GitHub Action)</td><td>Yes (native)</td><td>Yes (GitHub Action)</td><td>Native</td></tr>
+</table>
+
+<h2>Astro — The Modern Standard</h2>
+<p>Astro's killer feature is the Islands Architecture: ship zero JavaScript by default, hydrate only the interactive components that need it. You can use React, Vue, Svelte, or Solid components in the same project. Content Collections provide type-safe Markdown with Zod schema validation.</p>
+<p><strong>Strengths:</strong> Zero JS by default (perfect for content sites). Use any UI framework for interactive islands. Content Collections are best-in-class for Markdown sites. View Transitions API for SPA-like navigation. Excellent for blogs, docs, and marketing sites.</p>
+<p><strong>Weaknesses:</strong> Not for highly interactive SPAs (use Next.js instead). Younger ecosystem than Hugo or Jekyll. Some integrations are community-maintained. Build is fast but not Hugo-fast.</p>
+<p><strong>Best for:</strong> Content-heavy sites (blogs, docs, marketing), developers who want to mix frameworks, projects where Core Web Vitals are critical.</p>
+
+<h2>Hugo — The Speed King</h2>
+<p>Hugo is built in Go and compiles thousands of pages in under a second. It's a single binary with no dependencies. Hugo's template system is powerful but has a learning curve. For large documentation sites or blogs with many pages, Hugo's speed is transformative.</p>
+<p><strong>Strengths:</strong> Blazing fast builds (sub-second for 1000+ pages). Single binary (no npm install). Built-in image processing and shortcodes. Excellent multilingual support. Huge theme library. Great for very large sites.</p>
+<p><strong>Weaknesses:</strong> Go template syntax is idiosyncratic. No built-in CMS/content layer beyond front matter. Limited JavaScript framework integration. Theme customization can be complex. Smaller plugin ecosystem than JS-based SSGs.</p>
+<p><strong>Best for:</strong> Large documentation sites, blogs with 500+ posts, projects where build speed matters, developers comfortable with Go templates.</p>
+
+<h2>11ty (Eleventy) — The Flexible Power Tool</h2>
+<p>11ty is JavaScript-based but framework-agnostic. It supports 11 template languages and gives you complete control over your output. The data cascade (global → directory → file → front matter) is uniquely powerful. It compiles to a directory of static HTML with zero client-side JS.</p>
+<p><strong>Strengths:</strong> Most flexible template system (11 languages). Data cascade is powerful for complex sites. Zero boilerplate output. Excellent for sites that mix content types. Progressive enhancement by default. WebC components for reusable templates.</p>
+<p><strong>Weaknesses:</strong> Flexibility means more decisions to make. Fewer pre-built themes than Hugo or Jekyll. Smaller community. Documentation assumes you know what you want to build.</p>
+<p><strong>Best for:</strong> Developers who want maximum control, sites with complex data relationships, projects that mix multiple content sources, developers who enjoy customizing their build.</p>
+
+<h2>Jekyll — The GitHub Pages Native</h2>
+<p>Jekyll is the original static site generator and runs natively on GitHub Pages — push Markdown, get a blog. It's Ruby-based, which can be a pro (if you use Ruby) or a con (if you don't). The theme and plugin ecosystem is mature but showing its age.</p>
+<p><strong>Strengths:</strong> Native GitHub Pages support (no build step needed). Mature ecosystem with 15+ years of themes and plugins. Simple mental model (collections, pages, posts). Good for simple blogs and documentation.</p>
+<p><strong>Weaknesses:</strong> Slowest build times (painful at 500+ pages). Ruby dependency (can be painful outside macOS). Limited compared to modern SSGs. Template syntax (Liquid) is less powerful than JSX or Go templates. Feels dated compared to Astro or Hugo.</p>
+<p><strong>Best for:</strong> Simple GitHub Pages blogs, developers who want zero-config with GitHub, Ruby developers, projects that don't need modern JS features.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best SSG</th></tr>
+<tr><td>Modern blog or marketing site</td><td><strong>Astro</strong></td></tr>
+<tr><td>Large documentation (1000+ pages)</td><td><strong>Hugo</strong></td></tr>
+<tr><td>Complex data-driven static site</td><td><strong>11ty</strong></td></tr>
+<tr><td>Simple GitHub Pages blog</td><td><strong>Jekyll</strong></td></tr>
+<tr><td>Mixed framework components</td><td><strong>Astro</strong></td></tr>
+<tr><td>Fastest build, no npm</td><td><strong>Hugo</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Astro is the best default for new projects in 2026 — modern, fast, and framework-flexible. Hugo for speed and large sites. 11ty for maximum control. Jekyll for simple GitHub Pages blogs. This site (AI Study Room) is built with a custom Python generator, but if we were starting today, Astro would be the pick. See our <a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html">hosting comparison</a> for where to deploy your SSG.</p>
+'''
+
+BODIES['best-cicd-tools-2026'] = '''
+<p>CI/CD automates testing, building, and deploying your code. GitHub Actions, GitLab CI, CircleCI, and ArgoCD each dominate different ecosystems. Here's which pipeline tool fits your stack and budget.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>GitHub Actions</th><th>GitLab CI</th><th>CircleCI</th><th>ArgoCD</th></tr>
+<tr><td><strong>Best for</strong></td><td>GitHub-hosted projects</td><td>GitLab ecosystem</td><td>Complex pipelines, speed</td><td>Kubernetes GitOps</td></tr>
+<tr><td><strong>Free tier</strong></td><td>2000 min/mo</td><td>400 min/mo</td><td>6000 min/mo</td><td>Open source (free)</td></tr>
+<tr><td><strong>Hosting</strong></td><td>Cloud + self-hosted runners</td><td>Cloud + self-hosted runners</td><td>Cloud + self-hosted runners</td><td>Self-hosted (K8s)</td></tr>
+<tr><td><strong>Configuration</strong></td><td>YAML (.github/workflows)</td><td>YAML (.gitlab-ci.yml)</td><td>YAML (.circleci/config.yml)</td><td>YAML + K8s manifests</td></tr>
+<tr><td><strong>Marketplace</strong></td><td>20,000+ Actions</td><td>GitLab CI Catalog</td><td>Orbs</td><td>K8s ecosystem</td></tr>
+<tr><td><strong>Parallelism</strong></td><td>Matrix builds</td><td>Parallel jobs</td><td>Excellent (native parallel)</td><td>N/A (GitOps model)</td></tr>
+<tr><td><strong>Docker support</strong></td><td>Native</td><td>Native (container registry)</td><td>Excellent</td><td>K8s-native</td></tr>
+<tr><td><strong>Secrets mgmt</strong></td><td>Encrypted secrets + OIDC</td><td>CI/CD Variables + Vault</td><td>Contexts + OIDC</td><td>K8s Secrets + Sealed Secrets</td></tr>
+</table>
+
+<h2>GitHub Actions — The Most Popular (By Far)</h2>
+<p>GitHub Actions is the default CI/CD for the world's largest code host. The marketplace of 20,000+ pre-built actions means you rarely write automation from scratch. OIDC support lets you deploy to AWS/GCP/Azure without storing cloud credentials.</p>
+<p><strong>Strengths:</strong> Largest marketplace (20K+ actions). Tight GitHub integration (PR checks, branch protection). OIDC for secure cloud deployment. Matrix builds for multi-OS/multi-version testing. Self-hosted runners for unlimited minutes. Free tier is generous (2000 min/mo).</p>
+<p><strong>Weaknesses:</strong> Debugging failed workflows is painful (no SSH by default). Workflow syntax can get verbose. Reusable workflows are still maturing. Dependency on GitHub (vendor lock-in). Queue times on free tier can be slow.</p>
+<p><strong>Best for:</strong> Any project hosted on GitHub. This is the default CI/CD for most developers.</p>
+
+<h2>GitLab CI — The Integrated DevOps Engine</h2>
+<p>GitLab CI is deeply integrated with GitLab's ecosystem: container registry, package registry, security scanning, and deployment environments are all built in. The auto-DevOps feature can configure your entire pipeline automatically.</p>
+<p><strong>Strengths:</strong> Tightest integration (container registry, security, packages are built-in). Auto DevOps for zero-config pipelines. Excellent Docker/K8s support. Good for self-hosted environments. Built-in security scanning (SAST, DAST, dependency).</p>
+<p><strong>Weaknesses:</strong> Free tier has limited CI minutes (400 min/mo). Smaller marketplace than GitHub Actions. Configuration can be complex for advanced scenarios. Less popular = fewer community examples.</p>
+<p><strong>Best for:</strong> Projects hosted on GitLab, teams that want a fully integrated DevOps platform, self-hosted GitLab instances, organizations with compliance requirements.</p>
+
+<h2>CircleCI — The Speed & Flexibility Specialist</h2>
+<p>CircleCI offers the most generous free tier (6000 min/mo) and excels at complex, parallel pipelines. Its caching system is best-in-class, and Docker layer caching dramatically speeds up container builds.</p>
+<p><strong>Strengths:</strong> Most generous free tier (6000 min/mo). Excellent caching (job, Docker layer, package). Best parallelism model. Good for monorepos with complex pipelines. SSH into failed builds for debugging. Fast queue times even on free tier.</p>
+<p><strong>Weaknesses:</strong> Smaller community and marketplace than GitHub Actions. Less integrated (third-party vs native). Configuration is more verbose for simple cases. Company has had stability concerns.</p>
+<p><strong>Best for:</strong> Complex pipelines that need parallel execution, teams that want the most generous free tier, monorepo projects, developers who need SSH debugging for failed builds.</p>
+
+<h2>ArgoCD — GitOps for Kubernetes</h2>
+<p>ArgoCD is fundamentally different: it's a GitOps tool that syncs your Kubernetes cluster state with your Git repo. Instead of pushing deployments, ArgoCD pulls the desired state from Git and reconciles. If someone manually changes a deployment, ArgoCD reverts it.</p>
+<p><strong>Strengths:</strong> True GitOps (Git is the single source of truth). Automatic drift detection and self-healing. Excellent for multi-cluster management. Web UI shows deployment status visually. Open source and CNCF graduated. Declarative everything.</p>
+<p><strong>Weaknesses:</strong> Only for Kubernetes (not general CI/CD). Learning curve for GitOps concepts. Needs a Kubernetes cluster to run. Does not replace CI (builds happen elsewhere). Overkill for non-K8s projects.</p>
+<p><strong>Best for:</strong> Kubernetes deployments, teams that want GitOps workflows, multi-cluster management, organizations with strict audit requirements.</p>
+
+<h2>Which CI/CD for Your Stack?</h2>
+<table>
+<tr><th>Scenario</th><th>Best CI/CD</th></tr>
+<tr><td>GitHub project, standard pipeline</td><td><strong>GitHub Actions</strong></td></tr>
+<tr><td>GitLab project, DevOps integration</td><td><strong>GitLab CI</strong></td></tr>
+<tr><td>Complex parallel pipelines, max free min</td><td><strong>CircleCI</strong></td></tr>
+<tr><td>Kubernetes, GitOps</td><td><strong>ArgoCD + GitHub Actions</strong></td></tr>
+<tr><td>Solo developer, side project</td><td><strong>GitHub Actions</strong> (free 2000 min)</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> GitHub Actions for any GitHub project — it's free, integrated, and the marketplace has everything. GitLab CI if you're on GitLab. CircleCI for complex parallel pipelines. ArgoCD for Kubernetes GitOps (use alongside a CI tool, not instead of). See also: <a href="/en/compare/github-vs-gitlab-vs-bitbucket.html">GitHub vs GitLab comparison</a> for where to host your code.</p>
+'''
+
+BODIES['best-api-testing-tools'] = '''
+<p>API testing tools range from GUI-heavy collaboration platforms to CLI-native text-based testers. Postman, Insomnia, Bruno, and Hurl each serve different workflows. Here's which one matches how you develop and test APIs.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Postman</th><th>Insomnia</th><th>Bruno</th><th>Hurl</th></tr>
+<tr><td><strong>Type</strong></td><td>GUI + cloud sync</td><td>GUI + local/cloud</td><td>GUI + Git-native (files)</td><td>CLI (text files)</td></tr>
+<tr><td><strong>Storage</strong></td><td>Postman Cloud</td><td>Local or Insomnia Cloud</td><td>Local files (plain text)</td><td>.hurl files (plain text)</td></tr>
+<tr><td><strong>Version control</strong></td><td>Postman workspaces</td><td>Git sync (collections)</td><td>Git-native (folder of files)</td><td>Git-native (.hurl files)</td></tr>
+<tr><td><strong>Collaboration</strong></td><td>Excellent (workspaces, comments)</td><td>Good (Insomnia Cloud)</td><td>Via Git (PR reviews)</td><td>Via Git (PR reviews)</td></tr>
+<tr><td><strong>Free tier</strong></td><td>Limited (3 collaborators)</td><td>Generous (local + git)</td><td>Open source (MIT)</td><td>Open source (Apache 2.0)</td></tr>
+<tr><td><strong>GraphQL</strong></td><td>Yes</td><td>Excellent (native)</td><td>Yes</td><td>Yes</td></tr>
+<tr><td><strong>gRPC</strong></td><td>Yes (beta)</td><td>Yes</td><td>No</td><td>No</td></tr>
+<tr><td><strong>Scripting</strong></td><td>JavaScript (pre/post scripts)</td><td>Plugins (JS)</td><td>Scripting (JS)</td><td>Assertions in .hurl</td></tr>
+<tr><td><strong>CI/CD integration</strong></td><td>Newman (CLI runner)</td><td>Inso (CLI)</td><td>Bruno CLI</td><td>Native CLI (single binary)</td></tr>
+</table>
+
+<h2>Postman — The Industry Standard (With Strings Attached)</h2>
+<p>Postman is the most popular API testing tool with 30M+ users. Its GUI is polished, collaboration features are excellent, and it supports every API protocol. The downside: collections live in Postman's cloud, and the free tier has been steadily shrinking.</p>
+<p><strong>Strengths:</strong> Polished GUI with excellent UX. Best-in-class collaboration (workspaces, comments, forking). Supports REST, GraphQL, gRPC, WebSocket, MQTT. Newman for CI/CD. Massive community and documentation. Mock servers for testing.</p>
+<p><strong>Weaknesses:</strong> Free tier limited to 3 collaborators. Collections are cloud-locked (vendor lock-in). Account required for core features. GUI is heavy (slow startup). Pricing has steadily increased. Not Git-friendly by default.</p>
+<p><strong>Best for:</strong> Teams that need collaboration, organizations already using Postman, developers who prefer GUI over CLI, API-first companies with dedicated API teams.</p>
+
+<h2>Insomnia — The Open-Source Alternative</h2>
+<p>Insomnia started as an open-source Postman alternative. It supports REST, GraphQL (with excellent schema introspection), and gRPC. Collections can be stored locally or in Insomnia Cloud. The GraphQL support is better than Postman's.</p>
+<p><strong>Strengths:</strong> Excellent GraphQL support (schema introspection, autocomplete). Local-first (collections are files). Good UI/UX (simpler than Postman). Inso CLI for CI/CD. Better free tier than Postman. Works offline.</p>
+<p><strong>Weaknesses:</strong> Smaller community than Postman. Collaboration requires Insomnia Cloud (paid). Some features have moved to paid tier. Less third-party integration support. gRPC support is newer.</p>
+<p><strong>Best for:</strong> GraphQL APIs, developers who prefer local-first tools, solo developers and small teams, offline API development.</p>
+
+<h2>Bruno — The Git-Native Challenger</h2>
+<p>Bruno is the newest entrant and takes a radical approach: collections are folders of plain-text files, designed to be stored in Git. No cloud account required. No vendor lock-in. Every request is a .bru file that can be reviewed in a PR.</p>
+<p><strong>Strengths:</strong> True Git-native workflow (collections are text files). Open source (MIT). No account required. Collections work offline forever. PRs for API changes make sense to developers. Lightweight and fast. No vendor lock-in.</p>
+<p><strong>Weaknesses:</strong> Newest tool (smaller community). No built-in collaboration (Git is the collaboration). Fewer protocol support (no gRPC yet). Less polished than Postman. Fewer integrations.</p>
+<p><strong>Best for:</strong> Git-centric teams, open source projects, developers who want plain-text ownership, teams that want API tests reviewed in PRs.</p>
+
+<h2>Hurl — The CLI-Native Power Tool</h2>
+<p>Hurl is a command-line tool that runs API tests defined in .hurl files — a simple text format combining HTTP requests with assertions. It's incredibly fast, works anywhere, and is perfect for CI/CD pipelines. Think of it as "curl with assertions in a file."</p>
+<p><strong>Strengths:</strong> Extremely fast (compiled binary). Simple, readable .hurl format. Perfect for CI/CD (single binary, no dependencies). Excellent for smoke tests and health checks. Captures and reuses values across requests. HTML/JSON/XML assertion support. Open source.</p>
+<p><strong>Weaknesses:</strong> No GUI (CLI only). Not for exploratory testing (design requests in a GUI first, then write .hurl). Smaller community. Less intuitive for non-CLI developers. No GraphQL schema introspection.</p>
+<p><strong>Best for:</strong> CI/CD pipeline testing, API smoke tests, developers who prefer CLI, automated testing of deployed environments, complementing a GUI tool (design in Postman/Bruno, automate in Hurl).</p>
+
+<h2>The API Testing Stack</h2>
+<table>
+<tr><th>Need</th><th>Best Tool</th></tr>
+<tr><td>Team collaboration on API design</td><td><strong>Postman</strong></td></tr>
+<tr><td>GraphQL development</td><td><strong>Insomnia</strong></td></tr>
+<tr><td>Git-native, no vendor lock-in</td><td><strong>Bruno</strong></td></tr>
+<tr><td>CI/CD automation and smoke tests</td><td><strong>Hurl</strong></td></tr>
+<tr><td>Solo developer, quick testing</td><td><strong>Bruno or Insomnia</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Bruno + Hurl is the modern, Git-friendly stack — design requests in Bruno, automate in Hurl. Postman is still the default for team collaboration but comes with lock-in. Insomnia for GraphQL. See also: <a href="/en/tech/rest-api-best-practices.html">REST API Best Practices</a> and <a href="/en/compare/trpc-vs-graphql-vs-rest.html">tRPC vs GraphQL vs REST</a>.</p>
+'''
+
+BODIES['best-database-gui-tools'] = '''
+<p>Writing SQL in a terminal is great until you need to browse data, visualize schemas, or debug a query. A good database GUI saves hours. TablePlus, DBeaver, Beekeeper Studio, and DataGrip each serve different needs. Here's the comparison.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>TablePlus</th><th>DBeaver</th><th>Beekeeper Studio</th><th>DataGrip</th></tr>
+<tr><td><strong>Price</strong></td><td>$89 (perpetual)</td><td>Free (Community) / $200/yr</td><td>$99/yr / Free (Community)</td><td>$99/yr (JetBrains)</td></tr>
+<tr><td><strong>Databases</strong></td><td>Postgres, MySQL, SQLite, Redis, etc. (10+)</td><td>80+ (everything)</td><td>Postgres, MySQL, SQLite, SQL Server, Redshift</td><td>30+ (all major)</td></tr>
+<tr><td><strong>Platform</strong></td><td>macOS, Windows, Linux</td><td>macOS, Windows, Linux</td><td>macOS, Windows, Linux</td><td>macOS, Windows, Linux</td></tr>
+<tr><td><strong>Native feel</strong></td><td>Excellent (native app)</td><td>Good (Eclipse-based)</td><td>Excellent (native + Electron)</td><td>Good (Java/IntelliJ)</td></tr>
+<tr><td><strong>Query editor</strong></td><td>Good (auto-complete)</td><td>Excellent (advanced complete)</td><td>Good (syntax highlight)</td><td>Best-in-class</td></tr>
+<tr><td><strong>Schema designer</strong></td><td>Basic</td><td>Excellent (ER diagrams)</td><td>Basic</td><td>Excellent (ER diagrams)</td></tr>
+<tr><td><strong>SSH/SSL</strong></td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+<tr><td><strong>NoSQL support</strong></td><td>Redis, Cassandra</td><td>MongoDB, Redis, Cassandra, etc.</td><td>No</td><td>MongoDB, Redis, etc.</td></tr>
+</table>
+
+<h2>TablePlus — The Beautiful, Native Choice</h2>
+<p>TablePlus is a native macOS (and now Windows/Linux) app with a focus on polish and speed. It feels like a first-class citizen on every platform. The query editor is fast, the data browser is smooth, and the design is minimal without sacrificing power.</p>
+<p><strong>Strengths:</strong> Gorgeous native UI. Fast (native code, not Electron or Java). Excellent keyboard shortcuts. Multi-tab and multi-window. Built-in SSH tunnel support. Perpetual license ($89, no subscription required). Great for daily-use databases.</p>
+<p><strong>Weaknesses:</strong> Limited to 10 database types. No ER diagramming. Query editor has fewer features than DataGrip. Fewer advanced DBA tools. No free tier (2-tab trial, then paid).</p>
+<p><strong>Best for:</strong> Developers who value a beautiful, fast native app, daily Postgres/MySQL/SQLite work, macOS-first developers.</p>
+
+<h2>DBeaver — The Universal Database Tool</h2>
+<p>DBeaver connects to practically anything: 80+ database types including legacy systems (Oracle, DB2, Sybase) and NoSQL (MongoDB, Cassandra). The Community Edition is fully open source and genuinely useful. If you touch multiple database systems, DBeaver is indispensable.</p>
+<p><strong>Strengths:</strong> Supports 80+ databases (widest coverage). Community Edition is free and open source. Excellent ER diagrams. Advanced DBA tools (data export/import, schema compare). Spatial data viewer (GIS). Great for database-agnostic work.</p>
+<p><strong>Weaknesses:</strong> Eclipse-based (feels heavier than native apps). UI is functional but not beautiful. Slower startup than TablePlus or Beekeeper. Some advanced features require Pro ($200/yr). Can feel overwhelming for simple use cases.</p>
+<p><strong>Best for:</strong> Teams that work with multiple database types, DBA tasks, developers who need the widest database support, anyone who wants a powerful free database GUI.</p>
+
+<h2>Beekeeper Studio — The Friendly, Modern SQL Editor</h2>
+<p>Beekeeper Studio focuses on being the most approachable SQL GUI. The UI is clean and modern (built on Electron). It's particularly good for beginners and developers who primarily work with Postgres, MySQL, or SQLite and want something simple and good-looking.</p>
+<p><strong>Strengths:</strong> Cleanest, most approachable UI. Fast to get started. Good for teaching/learning SQL. Modern design (feels like a 2026 app). Community Edition is free. Tabbed query editor with save/load.</p>
+<p><strong>Weaknesses:</strong> Limited database support (5 databases). Fewer power features than DataGrip or DBeaver. Electron-based (heavier than native apps). No ER diagrams. Smaller community.</p>
+<p><strong>Best for:</strong> Beginners learning SQL, developers who only use Postgres/MySQL/SQLite, anyone who wants the simplest, cleanest SQL GUI, teaching/mentoring environments.</p>
+
+<h2>DataGrip — The JetBrains Power Tool</h2>
+<p>DataGrip is JetBrains' database IDE. If you use IntelliJ, PyCharm, or WebStorm, the database tools are already included (DataGrip is the standalone). The query editor is best-in-class: intelligent completion across joins, refactoring (rename column everywhere), and versioned SQL files.</p>
+<p><strong>Strengths:</strong> Best query editor (intelligent completion, refactoring). Deep JetBrains IDE integration. Schema diff and generation. Excellent for writing complex SQL. Git integration for SQL files. Multi-cursor editing in queries.</p>
+<p><strong>Weaknesses:</strong> Most expensive ($99/yr subscription). Java-based (heavier than native). Overkill for simple data browsing. No NoSQL support (MongoDB via plugin). Steep learning curve for non-JetBrains users.</p>
+<p><strong>Best for:</strong> JetBrains IDE users (already included), developers who write a lot of complex SQL, teams that want SQL under version control, power users who want the most capable SQL editor.</p>
+
+<h2>Decision Matrix</h2>
+<table>
+<tr><th>Scenario</th><th>Best DB GUI</th></tr>
+<tr><td>macOS, Postgres/MySQL daily driver</td><td><strong>TablePlus</strong></td></tr>
+<tr><td>Multiple database types, free</td><td><strong>DBeaver CE</strong></td></tr>
+<tr><td>Simple, beautiful, beginner-friendly</td><td><strong>Beekeeper Studio</strong></td></tr>
+<tr><td>JetBrains user, complex SQL</td><td><strong>DataGrip</strong></td></tr>
+<tr><td>DBA tasks, ER diagrams, broad support</td><td><strong>DBeaver Pro</strong></td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> TablePlus for macOS developers (beautiful, fast, one-time purchase). DBeaver CE for everyone who wants a powerful free tool. Beekeeper for simplicity. DataGrip for JetBrains users and SQL power users. See also: <a href="/en/compare/postgresql-vs-mysql-vs-sqlite.html">database comparison</a> and <a href="/en/compare/prisma-vs-drizzle-vs-typeorm.html">ORM comparison</a>.</p>
+'''
+
+BODIES['best-open-source-saas-alternatives'] = '''
+<p>Your SaaS bills add up fast. Analytics, communication, design, hosting, CRM — the average startup runs 10+ paid SaaS tools. Here are 25 battle-tested open-source alternatives that can save you thousands per month. Each one is free, self-hostable, and used by real companies in production.</p>
+
+<h2>Analytics & Monitoring</h2>
+<table>
+<tr><th>SaaS You Pay For</th><th>Open Source Alternative</th><th>One-Line Pitch</th></tr>
+<tr><td>Google Analytics</td><td><strong>Plausible</strong> / <strong>Umami</strong></td><td>Privacy-first, simple analytics. 1KB script vs GA's 45KB.</td></tr>
+<tr><td>Mixpanel / Amplitude</td><td><strong>PostHog</strong></td><td>Product analytics + session replays + feature flags. All in one.</td></tr>
+<tr><td>Sentry</td><td><strong>Sentry</strong> (self-hosted)</td><td>Sentry IS open source. Self-host for unlimited events.</td></tr>
+<tr><td>Datadog</td><td><strong>Grafana</strong> + <strong>Prometheus</strong></td><td>Industry-standard monitoring stack. Dashboards + alerts + metrics.</td></tr>
+<tr><td>Statuspage</td><td><strong>Upptime</strong></td><td>GitHub Actions-powered status page. Free monitoring every 5 min.</td></tr>
+</table>
+
+<h2>Communication & Collaboration</h2>
+<table>
+<tr><th>SaaS You Pay For</th><th>Open Source Alternative</th><th>One-Line Pitch</th></tr>
+<tr><td>Slack / Teams</td><td><strong>Mattermost</strong> / <strong>Rocket.Chat</strong></td><td>Self-hosted Slack clone. Same UX, your data.</td></tr>
+<tr><td>Notion / Confluence</td><td><strong>Outline</strong></td><td>Beautiful, fast wiki. Markdown-native, real-time collaboration.</td></tr>
+<tr><td>Zoom</td><td><strong>Jitsi Meet</strong></td><td>One-click video calls. No accounts, no limits.</td></tr>
+<tr><td>Linear / Jira</td><td><strong>Plane</strong> / <strong>Taiga</strong></td><td>Linear-style issue tracking. Open source, self-hostable.</td></tr>
+<tr><td>Intercom / Crisp</td><td><strong>Chatwoot</strong></td><td>Omnichannel customer support. Live chat + email + social.</td></tr>
+</table>
+
+<h2>Development & Infrastructure</h2>
+<table>
+<tr><th>SaaS You Pay For</th><th>Open Source Alternative</th><th>One-Line Pitch</th></tr>
+<tr><td>Vercel / Netlify</td><td><strong>Coolify</strong></td><td>Self-hosted Vercel/Netlify/Heroku alternative. Deploy any app.</td></tr>
+<tr><td>Firebase / Supabase Cloud</td><td><strong>Supabase</strong> (self-hosted) / <strong>Appwrite</strong></td><td>Self-hosted Firebase. Auth, DB, storage, functions.</td></tr>
+<tr><td>GitHub</td><td><strong>Gitea</strong> / <strong>Forgejo</strong></td><td>Lightweight, self-hosted Git service. 100MB binary, runs on a Pi.</td></tr>
+<tr><td>AWS S3</td><td><strong>MinIO</strong></td><td>S3-compatible object storage. High performance, K8s-native.</td></tr>
+<tr><td>Cloudflare Tunnels</td><td><strong>Pangolin</strong></td><td>Self-hosted Cloudflare Tunnel alternative. Expose services securely.</td></tr>
+</table>
+
+<h2>Marketing & Design</h2>
+<table>
+<tr><th>SaaS You Pay For</th><th>Open Source Alternative</th><th>One-Line Pitch</th></tr>
+<tr><td>Mailchimp / ConvertKit</td><td><strong>Listmonk</strong></td><td>Fast, self-hosted newsletter and mailing list manager.</td></tr>
+<tr><td>Figma</td><td><strong>Penpot</strong></td><td>Open-source design & prototyping. Native SVG, developer handoff.</td></tr>
+<tr><td>Canva</td><td><strong>Inkscape</strong> (vector) / <strong>Krita</strong> (raster)</td><td>Professional open-source design tools.</td></tr>
+<tr><td>Ghost / Medium</td><td><strong>Ghost</strong> (self-hosted)</td><td>Ghost IS open source. Self-host on a $5 VPS.</td></tr>
+<tr><td>Typeform</td><td><strong>Formbricks</strong></td><td>Open-source survey + form builder. Looks beautiful.</td></tr>
+</table>
+
+<h2>Back Office</h2>
+<table>
+<tr><th>SaaS You Pay For</th><th>Open Source Alternative</th><th>One-Line Pitch</th></tr>
+<tr><td>Salesforce / HubSpot</td><td><strong>Twenty</strong> / <strong>ERPNext</strong></td><td>Modern open-source CRM. Twenty looks like Notion for sales.</td></tr>
+<tr><td>Calendly</td><td><strong>Cal.com</strong></td><td>Open-source scheduling. Same UX, self-hostable.</td></tr>
+<tr><td>Auth0 / Clerk</td><td><strong>Keycloak</strong> / <strong>Logto</strong></td><td>Enterprise SSO. OIDC/SAML. Used by Fortune 500.</td></tr>
+<tr><td>n8n / Zapier</td><td><strong>n8n</strong> (self-hosted)</td><td>n8n IS open source. Self-hosted workflow automation.</td></tr>
+<tr><td>DocuSign</td><td><strong>Docuseal</strong></td><td>Open-source document signing. PDF e-signatures.</td></tr>
+</table>
+
+<h2>The $0/Month Stack</h2>
+<p>Replace your entire SaaS stack with open-source alternatives on a single $20/month VPS:</p>
+<ul>
+<li><strong>Analytics:</strong> Plausible + PostHog (self-hosted)</li>
+<li><strong>Communication:</strong> Mattermost + Outline wiki</li>
+<li><strong>Infrastructure:</strong> Coolify (deploys) + Gitea (code) + MinIO (storage)</li>
+<li><strong>Marketing:</strong> Listmonk + Ghost</li>
+<li><strong>Productivity:</strong> Cal.com + Docuseal</li>
+</ul>
+<p>Estimated savings vs SaaS equivalents: <strong>$500-2,000/month</strong> for a small team. You trade ops time for cash — the tradeoff gets better the more tools you self-host.</p>
+
+<p><strong>Bottom line:</strong> Not every tool needs to be replaced. But self-hosting even 5-10 of these saves $200-500/month with minimal maintenance. Start with the expensive ones. See also: <a href="/en/tools/best-free-dev-tools-2026.html">best free developer tools</a> and <a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html">hosting comparison</a>.</p>
+'''
+
+BODIES['best-web-performance-tools'] = '''
+<p>Slow sites lose users. But "performance" isn't one thing — it's lab testing, field monitoring, error tracking, and synthetic checks. Lighthouse, WebPageTest, Sentry, and Checkly each cover different parts of the performance puzzle. Here's how to build a complete monitoring stack.</p>
+
+<h2>Quick Comparison</h2>
+<table>
+<tr><th></th><th>Lighthouse</th><th>WebPageTest</th><th>Sentry</th><th>Checkly</th></tr>
+<tr><td><strong>Type</strong></td><td>Lab testing (simulated)</td><td>Lab testing (real devices)</td><td>Error tracking + RUM</td><td>Synthetic monitoring + E2E</td></tr>
+<tr><td><strong>Best for</strong></td><td>Quick audits, CI integration</td><td>Deep performance analysis</td><td>Catching production errors</td><td>Uptime + performance SLAs</td></tr>
+<tr><td><strong>Data source</strong></td><td>Simulated throttling</td><td>Real devices, real networks</td><td>Real user sessions</td><td>Synthetic (global locations)</td></tr>
+<tr><td><strong>Core Web Vitals</strong></td><td>Yes (lab only)</td><td>Yes (lab + field)</td><td>Yes (RUM — real users)</td><td>Yes (synthetic)</td></tr>
+<tr><td><strong>Free tier</strong></td><td>Free (open source)</td><td>Free (public tests)</td><td>Free (5K errors/mo)</td><td>Free (50K checks/mo)</td></tr>
+<tr><td><strong>CI/CD</strong></td><td>Lighthouse CI</td><td>WebPageTest API</td><td>Release tracking</td><td>Playwright-based checks</td></tr>
+</table>
+
+<h2>Lighthouse — The First Line of Defense</h2>
+<p>Lighthouse is built into Chrome DevTools and runs simulated audits for performance, accessibility, SEO, and best practices. Lighthouse CI lets you set performance budgets and fail builds that regress. It's the starting point for any performance effort.</p>
+<p><strong>Strengths:</strong> Free and built into Chrome. One-click audits. Lighthouse CI for build-time checks. Performance budgets in CI. Clear, actionable recommendations. Covers perf, a11y, SEO, and best practices in one report.</p>
+<p><strong>Weaknesses:</strong> Lab data only (simulated, not real users). Scores vary between runs. Simulated throttling doesn't match real-world conditions. Doesn't catch real-user issues that only appear in production. Single-device simulation.</p>
+<p><strong>Best for:</strong> Quick audits during development, CI performance budgets, catching regressions before deploy, the starting point for any performance optimization.</p>
+
+<h2>WebPageTest — The Deep Performance Debugger</h2>
+<p>WebPageTest runs your site on real devices with real network conditions in locations worldwide. The waterfall chart, filmstrip view, and connection-level details reveal exactly what's slowing your site down. If Lighthouse tells you "what" is slow, WebPageTest tells you "why."</p>
+<p><strong>Strengths:</strong> Real devices (Moto G4, iPhone, etc.) on real networks (3G, 4G). Waterfall chart shows every request. Filmstrip view shows visual progress. Multi-location testing. Advanced features (scripting, custom metrics). Free for public tests.</p>
+<p><strong>Weaknesses:</strong> Not for continuous monitoring (spot tests). More complex than Lighthouse. Free tier is public (your test results are visible). No real user monitoring.</p>
+<p><strong>Best for:</strong> Deep performance debugging, optimizing critical rendering path, comparing before/after optimizations, understanding real-device performance.</p>
+
+<h2>Sentry — Real User Error & Performance Monitoring</h2>
+<p>Sentry captures real errors and performance data from actual users. When your app crashes in production or a page takes 10 seconds for users in a specific region, Sentry tells you — with the stack trace, user session, and breadcrumbs to reproduce it.</p>
+<p><strong>Strengths:</strong> Real user errors with full context (stack trace, user, session replay). Performance monitoring (slowest routes, DB queries, API calls). Release tracking (did the deploy cause a spike?). Session replay for debugging. Open source (can self-host). Excellent SDKs (30+ languages).</p>
+<p><strong>Weaknesses:</strong> Can be expensive at scale (many errors/transactions). Noise requires tuning (alert fatigue). Not for synthetic monitoring. Session replay costs extra. Self-hosting requires maintenance.</p>
+<p><strong>Best for:</strong> Production error tracking, identifying slow transactions for real users, catching regressions after deploys, debugging user-reported issues.</p>
+
+<h2>Checkly — Synthetic Monitoring for Production</h2>
+<p>Checkly runs Playwright-based browser checks from 20+ global locations on a schedule. It verifies that your key flows work — login, checkout, search — and alerts you when they don't. It combines API checks, browser E2E checks, and performance monitoring in one platform.</p>
+<p><strong>Strengths:</strong> Playwright-based (real browser checks). Global monitoring (20+ locations). API + browser checks combined. Performance trending over time. Alerting (Slack, PagerDuty, email). Terraform/CI/CD integration. Generous free tier. Status pages built-in.</p>
+<p><strong>Weaknesses:</strong> Synthetic only (not real users). Setup requires writing Playwright scripts. Free tier limited to 50K check runs/month. Less useful for SPA-heavy apps without careful scripting.</p>
+<p><strong>Best for:</strong> Uptime and performance monitoring, SLA compliance, testing critical user flows in production, catching issues before users report them.</p>
+
+<h2>Building a Complete Monitoring Stack</h2>
+<table>
+<tr><th>Layer</th><th>Tool</th><th>Frequency</th></tr>
+<tr><td>Dev-time audit</td><td>Lighthouse (Chrome DevTools)</td><td>Every PR</td></tr>
+<tr><td>CI performance budget</td><td>Lighthouse CI</td><td>Every build</td></tr>
+<tr><td>Deep performance debug</td><td>WebPageTest</td><td>Before/after optimizations</td></tr>
+<tr><td>Real user errors + perf</td><td>Sentry</td><td>Continuous (production)</td></tr>
+<tr><td>Synthetic monitoring</td><td>Checkly</td><td>Every 5-15 min (production)</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> Lighthouse for dev and CI, Sentry for production errors and real-user performance, Checkly for synthetic uptime/flow monitoring, WebPageTest for deep dives. These four tools together cost $0 for small projects and give you complete visibility. See our <a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html">hosting comparison</a> — good hosting makes performance easier.</p>
+'''
+
 # FAQ data for FAQPage schema (slug → list of q/a dicts)
 FAQS = {
     'chatgpt-plus-worth': [
