@@ -47,6 +47,8 @@ def devto_request(method, path, data=None):
         return json.loads(resp.read().decode("utf-8"))
     except urllib.error.HTTPError as e:
         err = e.read().decode("utf-8")
+        if e.code == 429:
+            return {"error": "rate_limit", "retry_after": 300}
         print(f"  API error ({e.code}): {err[:200]}")
         return None
 
@@ -150,7 +152,8 @@ def main():
         print("All articles already syndicated!")
         return
 
-    print(f"Publishing {len(to_publish)} articles to dev.to...")
+    print(f"Publishing up to {len(to_publish)} articles to dev.to...")
+    published_count = 0
     for i, (board_id, art) in enumerate(to_publish):
         body = make_article_body(art, board_id, en_data)
         if not body:
@@ -169,17 +172,22 @@ def main():
         }
 
         result = devto_request("POST", "/articles", article_data)
-        if result:
+        if isinstance(result, dict) and result.get("url"):
             devto_url = result.get("url", "unknown")
             print(f"  [{i+1}/{len(to_publish)}] {art['title'][:60]}...")
             print(f"         URL: {devto_url}")
+            published_count += 1
+        elif isinstance(result, dict) and result.get("error") == "rate_limit":
+            print(f"  ⏳ Rate limited. Stopping batch. Published {published_count} this run.")
+            break
         else:
             print(f"  [{i+1}/{len(to_publish)}] FAILED: {art['title'][:60]}...")
 
+        # Respect rate limit — dev.to allows ~3 articles per 15 min
         if i < len(to_publish) - 1:
-            time.sleep(20)  # Respect rate limit
+            time.sleep(90)
 
-    print(f"\nDone. {len(to_publish)} articles syndicated to dev.to.")
+    print(f"\nDone. {published_count} articles syndicated to dev.to this run.")
 
 if __name__ == "__main__":
     main()
