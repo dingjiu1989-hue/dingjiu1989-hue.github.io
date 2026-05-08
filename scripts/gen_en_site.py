@@ -1519,6 +1519,121 @@ fi</code></pre>
 </table>
 '''
 
+BODIES['best-free-dev-tools-2026'] = '''
+<p>Every developer accumulates a toolkit over time. But if you're starting fresh or wondering what you're missing, here are the best free developer tools across every category — terminal, Git, databases, APIs, and more.</p>
+
+<h2>Terminal & Shell</h2>
+<table>
+<tr><th>Tool</th><th>What It Is</th><th>Why Use It</th></tr>
+<tr><td><a href="https://www.warp.dev" target="_blank" rel="noopener">Warp</a></td><td>Modern terminal with AI and IDE features</td><td>AI command autocomplete, split panes, team sharing. The first terminal that feels like an IDE.</td></tr>
+<tr><td><a href="https://ohmyz.sh" target="_blank" rel="noopener">Oh My Zsh</a></td><td>Zsh configuration framework</td><td>300+ plugins, 150+ themes, auto-completion, and git aliases out of the box.</td></tr>
+<tr><td><a href="https://starship.rs" target="_blank" rel="noopener">Starship</a></td><td>Cross-shell prompt customizer</td><td>Fast, customizable prompt that shows git status, language versions, and error codes. Works with bash, zsh, fish, and PowerShell.</td></tr>
+</table>
+
+<h2>Git GUIs & Diff Tools</h2>
+<table>
+<tr><th>Tool</th><th>What It Is</th><th>Why Use It</th></tr>
+<tr><td><a href="https://github.com/jesseduffield/lazygit" target="_blank" rel="noopener">lazygit</a></td><td>Terminal Git GUI</td><td>Blazing fast. Interactive rebase, cherry-pick, and stash from a single terminal panel. The most efficient Git workflow once you learn the keys.</td></tr>
+<tr><td><a href="https://git-fork.com" target="_blank" rel="noopener">Fork</a></td><td>GUI Git client (Mac/Windows)</td><td>Clean interactive rebase UI, conflict resolution, and commit graph. Free for personal use.</td></tr>
+<tr><td><a href="https://meld.app" target="_blank" rel="noopener">Meld</a></td><td>Visual diff and merge tool</td><td>Open source. Three-way comparison. Works with git mergetool integration.</td></tr>
+</table>
+
+<h2>API Clients & Testing</h2>
+<table>
+<tr><th>Tool</th><th>What It Is</th><th>Why Use It</th></tr>
+<tr><td><a href="https://www.usebruno.com" target="_blank" rel="noopener">Bruno</a></td><td>Open-source API client</td><td>Stores collections as files (git-friendly), no account required. The best Postman alternative in 2026.</td></tr>
+<tr><td><a href="https://hoppscotch.io" target="_blank" rel="noopener">Hoppscotch</a></td><td>Web-based API testing</td><td>REST, GraphQL, WebSocket, SSE, and MQTT. Fully in-browser, zero setup, team workspaces.</td></tr>
+<tr><td><a href="https://httpie.io/cli" target="_blank" rel="noopener">HTTPie</a></td><td>Terminal HTTP client</td><td>Syntax-colored JSON, sensible defaults, and plugins. The friendlier alternative to curl for API debugging.</td></tr>
+</table>
+
+<h2>Database Clients</h2>
+<table>
+<tr><th>Tool</th><th>What It Is</th><th>Why Use It</th></tr>
+<tr><td><a href="https://dbeaver.io" target="_blank" rel="noopener">DBeaver</a></td><td>Universal database tool</td><td>Supports PostgreSQL, MySQL, SQLite, MongoDB, and 80+ others. Free community edition is fully featured.</td></tr>
+<tr><td><a href="https://tableplus.com" target="_blank" rel="noopener">TablePlus</a></td><td>Native DB client (Mac/Windows/Linux)</td><td>Beautiful UI, native performance, multiple connection support. Free tier covers daily use.</td></tr>
+</table>
+
+<h2>Code Screenshots & Sharing</h2>
+<table>
+<tr><th>Tool</th><th>What It Is</th><th>Why Use It</th></tr>
+<tr><td><a href="https://carbon.now.sh" target="_blank" rel="noopener">Carbon</a></td><td>Beautiful code screenshots</td><td>Dozens of themes, window styling, export as PNG/SVG. The standard for sharing code on social media.</td></tr>
+<tr><td><a href="https://ray.so" target="_blank" rel="noopener">Ray.so</a></td><td>Raycast's code image tool</td><td>Fast, beautiful presets, dark/light mode, background customization. Also generates snippet links.</td></tr>
+</table>
+
+<h2>Essential Checklist for a New Machine</h2>
+<ol>
+<li>Terminal: <strong>Warp</strong> or <strong>iTerm2 + Oh My Zsh + Starship</strong></li>
+<li>Package manager: <strong>Homebrew</strong> (Mac), <strong>Chocolatey</strong> (Windows), or your system default</li>
+<li>Version control: <strong>Git + lazygit</strong></li>
+<li>API testing: <strong>Bruno</strong> or <strong>Hoppscotch</strong></li>
+<li>Database: <strong>DBeaver</strong> or <strong>TablePlus</strong></li>
+<li>Editor: already covered — see <a href="/en/tech/editor-comparison-2026/">Code Editor Showdown</a></li>
+</ol>
+
+<p>All tools above are free for individual developers. Bookmark this page and come back next time you set up a new machine.</p>
+'''
+
+BODIES['design-tools-for-developers'] = '''
+<p>You don't need a design degree to build polished, professional-looking products. Modern design tools have gotten so good — and so free — that a developer can produce designer-quality UI without hiring anyone. Here's every tool you need, organized by what you're actually trying to do.</p>
+
+<h2>UI Design: Figma (Free Tier Is Enough)</h2>
+<p><a href="https://figma.com" target="_blank" rel="noopener">Figma</a> is the industry standard for a reason. The free tier includes unlimited personal files, 3 collaborative files, and access to the community template library. You can go from wireframe to pixel-perfect mockup in a few hours.</p>
+<ul>
+<li>Learn the basics in 2 hours: <strong>Shift + R</strong> (ruler/guides), <strong>Auto Layout</strong> (flexbox equivalent), <strong>Components</strong> (reusable like React components)</li>
+<li>Grab free UI kits from the Figma Community: search "iOS UI kit" or "dashboard template"</li>
+<li>Export assets at 1x/2x/3x for web and mobile</li>
+</ul>
+
+<h2>Color: Never Guess Hex Codes Again</h2>
+<table>
+<tr><th>Tool</th><th>Use For</th></tr>
+<tr><td><a href="https://coolors.co" target="_blank" rel="noopener">Coolors</a></td><td>Generate color palettes. Press spacebar to cycle through endless combinations. Lock colors you like and keep generating.</td></tr>
+<tr><td><a href="https://realtimecolors.com" target="_blank" rel="noopener">Realtime Colors</a></td><td>See your palette applied to a real UI preview (buttons, cards, text, nav). The fastest way to validate a color scheme.</td></tr>
+<tr><td><a href="https://uicolors.app" target="_blank" rel="noopener">UI Colors</a></td><td>Generate a full Tailwind-compatible color scale from a single hex code. Gives you 50-950 shades instantly.</td></tr>
+<tr><td><a href="https://color.adobe.com" target="_blank" rel="noopener">Adobe Color</a></td><td>Extract palette from an image. Useful when you have a hero image and want a matching theme.</td></tr>
+</table>
+
+<h2>Icons: Never Draw One from Scratch</h2>
+<table>
+<tr><th>Library</th><th>Style</th><th>Count</th></tr>
+<tr><td><a href="https://lucide.dev" target="_blank" rel="noopener">Lucide</a></td><td>Clean, consistent stroke-based</td><td>1,500+</td></tr>
+<tr><td><a href="https://phosphoricons.com" target="_blank" rel="noopener">Phosphor</a></td><td>Playful, 6 weights per icon</td><td>1,300+</td></tr>
+<tr><td><a href="https://tabler.io/icons" target="_blank" rel="noopener">Tabler Icons</a></td><td>Pixel-perfect strokes, great for dashboards</td><td>5,200+</td></tr>
+<tr><td><a href="https://heroicons.com" target="_blank" rel="noopener">Heroicons</a></td><td>Tailwind team's official set, outline + solid</td><td>300+</td></tr>
+<tr><td><a href="https://svgrepo.com" target="_blank" rel="noopener">SVG Repo</a></td><td>Massive searchable collection of SVG logos and icons</td><td>500,000+</td></tr>
+</table>
+
+<h2>Illustrations & Visual Polish</h2>
+<table>
+<tr><th>Resource</th><th>Description</th></tr>
+<tr><td><a href="https://undraw.co" target="_blank" rel="noopener">unDraw</a></td><td>Open-source illustrations. Change the accent color to match your brand. SVG download, no attribution.</td></tr>
+<tr><td><a href="https://blush.design" target="_blank" rel="noopener">Blush</a></td><td>Mix-and-match illustrations by professional artists. Each illustration is customizable with different characters and scenes.</td></tr>
+<tr><td><a href="https://storyset.com" target="_blank" rel="noopener">Storyset</a></td><td>Animated illustrations by Freepik. Great for onboarding flows and empty states. Free with attribution.</td></tr>
+</table>
+
+<h2>Typography: Fonts That Look Professional</h2>
+<ul>
+<li><strong>Google Fonts</strong> — Inter, JetBrains Mono, and Space Grotesk are the developer favorites in 2026</li>
+<li><strong>Fontsource</strong> — self-host Google Fonts as npm packages for better performance and GDPR compliance</li>
+<li><a href="https://fontpair.co" target="_blank" rel="noopener">Fontpair</a> — curated font pairings. When you can't decide what goes with what.</li>
+<li><a href="https://typescale.com" target="_blank" rel="noopener">Type Scale</a> — visual type scale calculator. Set body size → get the perfect h1-h6 scale.</li>
+</ul>
+
+<h2>Stock Photos That Don't Look Like Stock Photos</h2>
+<p>See our <a href="/en/sidehustle/free-images/">Best Free Stock Photo Sites</a> guide for the full list. Quick picks: Unsplash for natural photos, Pexels for videos too, and Kaboompics for styled flat lays.</p>
+
+<h2>The Developer Design Stack (Save This)</h2>
+<ol>
+<li><strong>Figma</strong> — wireframe and mockup</li>
+<li><strong>Coolors + Realtime Colors</strong> — palette</li>
+<li><strong>Lucide or Phosphor</strong> — icons</li>
+<li><strong>unDraw or Storyset</strong> — illustrations</li>
+<li><strong>Google Fonts (Inter + JetBrains Mono)</strong> — typography</li>
+</ol>
+
+<p>You can build a SaaS landing page, portfolio site, or product UI with just these five tools. No design background needed.</p>
+'''
+
 # FAQ data for FAQPage schema (slug → list of q/a dicts)
 FAQS = {
     'chatgpt-plus-worth': [
