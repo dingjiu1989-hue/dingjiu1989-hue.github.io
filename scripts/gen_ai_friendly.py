@@ -131,7 +131,7 @@ def gen_llms_txt():
 
     lines = [
         "# AI Study Room / AI自习室",
-        f"> Bilingual developer resource: 223 English + 54 Chinese articles.",
+        f"> Bilingual developer resource: {sum(len(b['posts']) for b in en_data['boards'])} English + {sum(len(b.get('posts', [])) for b in json.loads(CN_ARTICLES.read_text(encoding='utf-8')).get('boards', [])) if CN_ARTICLES.exists() else 0} Chinese articles.",
         f"> Tech tutorials, tool comparisons, side-hustle guides, and AI development.",
         f"> Updated: {TODAY}",
         "",
