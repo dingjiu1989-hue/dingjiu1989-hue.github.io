@@ -14,6 +14,8 @@ import json, time, os, sys
 from pathlib import Path
 from datetime import date
 
+import _ssl_compat  # noqa: F401 — fix macOS LibreSSL TLS 1.3 issue
+
 ROOT = Path(__file__).resolve().parent.parent
 BASE = "https://dingjiu1989-hue.github.io"
 
