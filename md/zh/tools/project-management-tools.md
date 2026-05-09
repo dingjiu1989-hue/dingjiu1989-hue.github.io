@@ -8,8 +8,8 @@ url: https://dingjiu1989-hue.github.io/tools/project-management-tools.html
 
 # 2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp
 
-选错项目管理工具，团队每天浪费 30 分钟在跟工具搏斗上。2026 年的 PM 工具已经全面 AI 化——自动分配任务、智能排期、自然语言生成报表。这篇横评帮你一次选对。
-
+选错项目管理工具，团队每天浪费 30 分钟在跟工具搏斗上。2026 年的 PM 工具已经全面 AI 化——自动分配任务、智能排期、自然语言生成报表。这篇横评帮你一次选对。  
+  
 ## 四大工具核心对比
 
 维度| Jira| Linear| Notion| ClickUp  
