@@ -12938,6 +12938,145 @@ BODIES['refactor-vs-rewrite'] = '''
 <p><strong>Bottom line:</strong> Refactoring is the default right answer in 80% of cases. Rewrites win when the technology is truly obsolete or the system is small enough to replace quickly. The worst outcome isn't messy code — it's a rewrite that takes 18 months, misses critical features, and kills the product. Ship incrementally, measure everything, and let data drive the decision.</p>
 '''
 
+BODIES['ai-coding-tools-90-days'] = '''
+<h2>Introduction</h2>
+<p>Three months ago, I decided to run an experiment. Instead of picking one AI coding assistant and sticking with it (as most developers do), I would use all of them—switching between <strong>Claude Opus, GPT-4o, Gemini 2.5 Pro, DeepSeek V4, Cursor's agent mode, and GitHub Copilot</strong>—on real daily coding tasks and track which one actually performed best for each type of work.</p>
+
+<p>I logged 30 distinct tasks across code generation, debugging, refactoring, code review, documentation, and architecture design. The results surprised me. The "best" AI tool depends heavily on the task, and the differences are large enough that having access to 2-3 models is genuinely worth the overhead.</p>
+
+<p>Here's what I found.</p>
+
+<h2>Methodology</h2>
+<p>Each task was scored on three axes:</p>
+<ul>
+<li><strong>Correctness</strong> (1-5): Does the output work on first try?</li>
+<li><strong>Efficiency</strong> (1-5): How much time did it save vs doing it manually?</li>
+<li><strong>Context handling</strong> (1-5): How well did it understand the broader codebase?</li>
+</ul>
+<p>Tasks were drawn from real work: production bug fixes, feature development, test writing, and code review across a TypeScript/React/Node.js stack and Python data pipeline.</p>
+
+<h2>The Models</h2>
+
+<h3>Claude Opus 4.7 — Best for Complex Reasoning (Avg: 4.7/5)</h3>
+<p>Claude won on refactoring, code review, and any task requiring deep understanding of cross-file dependencies. Its 200K context window meant I could paste entire files without losing coherence.</p>
+
+<p><strong>What it excels at:</strong></p>
+<ul>
+<li>Large refactors across 5+ files</li>
+<li>Code review with specific, actionable feedback</li>
+<li>Understanding subtle bugs in complex logic</li>
+<li>Writing comprehensive test suites</li>
+</ul>
+
+<p><strong>Example — refactoring a monolithic React component:</strong></p>
+<p>I asked Claude to split a 900-line React component into smaller pieces. It analyzed the entire file, identified cohesive sub-components (DataTable, FilterBar, Pagination), generated their interfaces, and migrated the state logic in one shot. The result compiled on the first <code>tsc</code> run. No other model achieved this in a single pass.</p>
+
+<p><strong>Weakness:</strong> Slower than GPT-4o for quick, iterative coding tasks. Over-engineers simple solutions.</p>
+
+<h3>GPT-4o — Best for Speed and Iteration (Avg: 4.4/5)</h3>
+<p>GPT-4o is the tool I reach for when I need to write boilerplate, generate 5 function variants and pick the best one, or rapidly prototype. Its output quality is good enough for most tasks, and it's noticeably faster than Claude at generating code quickly.</p>
+
+<p><strong>What it excels at:</strong></p>
+<ul>
+<li>Rapid prototyping and quick iterations</li>
+<li>Data processing scripts (Python, SQL)</li>
+<li>API integrations and boilerplate</li>
+<li>Generating multiple approaches to compare</li>
+</ul>
+
+<p><strong>Example — ETL pipeline in Python:</strong></p>
+<p>I needed to extract data from a PostgreSQL database, transform it with business logic, and load it into a reporting system. GPT-4o wrote a working pipeline with error handling, retry logic, and progress logging in about 8 minutes. Claude would have taken longer but produced a more architecturally clean version.</p>
+
+<p><strong>Weakness:</strong> Falls into "hallucination traps" more often than Claude—invented API methods that don't exist, especially with newer libraries.</p>
+
+<h3>Gemini 2.5 Pro — Best for Codebase-Wide Analysis (Avg: 4.3/5)</h3>
+<p>Gemini's 1M token context window is a genuine advantage for large codebase understanding. I fed it entire project directories and asked it to identify architectural issues, dead code, and improvement opportunities. The breadth of analysis was unmatched.</p>
+
+<p><strong>What it excels at:</strong></p>
+<ul>
+<li>Large-scale codebase audit and analysis</li>
+<li>Dependency graph understanding</li>
+<li>Identifying dead code and architectural debt</li>
+<li>Cross-module refactoring planning</li>
+</ul>
+
+<p><strong>Weakness:</strong> Code generation quality lags behind Claude and GPT-4o. Often produces correct-but-verbose solutions. The latency is higher.</p>
+
+<h3>DeepSeek V4 — Best Free Option (Avg: 3.8/5)</h3>
+<p>DeepSeek V4 is shockingly good for a free model. It matches GPT-4o on many routine coding tasks, and it's completely free. The main limitations are occasional Chinese-influenced variable names and weaker performance on complex multi-file refactoring.</p>
+
+<p><strong>What it excels at:</strong></p>
+<ul>
+<li>Everyday coding tasks at zero cost</li>
+<li>Code explanation and debugging</li>
+<li>Writing unit tests</li>
+<li>Generating code in niche languages</li>
+</ul>
+
+<p><strong>Weakness:</strong> Struggles with very large contexts (&gt;50K tokens). Variable naming can be inconsistent. Multi-step reasoning is less reliable.</p>
+
+<h3>Cursor Agent Mode — Best IDE Integration (Avg: 4.5/5)</h3>
+<p>Cursor's agent mode is a fundamentally different experience from chat-based AI. It can read your project structure, search for relevant code, apply edits across multiple files, and run terminal commands—all from a single prompt.</p>
+
+<p><strong>What it excels at:</strong></p>
+<ul>
+<li>End-to-end feature implementation</li>
+<li>Bug reproduction and fix in unfamiliar codebases</li>
+<li>Applying code review suggestions</li>
+<li>Refactoring with confidence (it sees the full project)</li>
+</ul>
+
+<p><strong>Weakness:</strong> The agent can make unexpected changes if you're not careful. Always review the diff before accepting. Costs $20/month on top of any model API costs.</p>
+
+<h3>GitHub Copilot — Best Inline Completions (Avg: 4.0/5)</h3>
+<p>Copilot is not trying to be Claude or Cursor. It's optimized for one thing: predicting your next keystroke. And for that narrow job, it's excellent. I keep it running alongside Cursor.</p>
+
+<p><strong>What it excels at:</strong></p>
+<ul>
+<li>Next-line and next-block completions while typing</li>
+<li>Writing repetitive code (getters, constructors, boilerplate tests)</li>
+<li>Learning your coding style from context</li>
+<li>Low-friction: zero context switching</li>
+</ul>
+
+<p><strong>Weakness:</strong> Cannot handle multi-file changes. Inline completions are narrow. For anything beyond simple code generation, you'll reach for a chat-based model.</p>
+
+<h2>Cost Analysis</h2>
+<table>
+<tr><th>Tool</th><th>Monthly Cost</th><th>Best For</th><th>Effective Daily Usage</th></tr>
+<tr><td>Claude Opus</td><td>$20 (Pro)</td><td>Complex reasoning, refactoring</td><td>~40% of heavy tasks</td></tr>
+<tr><td>GPT-4o</td><td>$20 (Plus)</td><td>Quick iteration, prototyping</td><td>~30% of quick tasks</td></tr>
+<tr><td>Gemini 2.5 Pro</td><td>$20 (One)</td><td>Codebase analysis</td><td>~10% of audit work</td></tr>
+<tr><td>DeepSeek V4</td><td>Free</td><td>Daily routine tasks</td><td>~60% of simple tasks</td></tr>
+<tr><td>Cursor</td><td>$20 (Pro)</td><td>Full-feature implementation</td><td>Primary IDE</td></tr>
+<tr><td>Copilot</td><td>$10 (Free tier available)</td><td>Inline completions</td><td>Always-on</td></tr>
+</table>
+<p>My current setup: <strong>Copilot Free</strong> for inline completions, <strong>Claude Pro</strong> for complex work, <strong>DeepSeek V4</strong> for routine tasks, and <strong>Cursor Pro</strong> as my main IDE with its agent mode for feature work. Total: $50/month.</p>
+
+<h2>Recommendations</h2>
+
+<p><strong>If you can only pay for one:</strong> Get Claude Pro ($20/mo). It has the broadest capability across all task types. Supplement with DeepSeek V4 free tier for simple daily coding.</p>
+
+<p><strong>If you want maximum productivity:</strong> Use Cursor Pro ($20/mo) as your IDE with Claude integrated, plus DeepSeek V4 for quick queries. Skip Copilot if you're on a budget—Cursor's completions are good enough.</p>
+
+<p><strong>If you're a student or budget-conscious:</strong> DeepSeek V4 (free) + Claude Free tier (free weekly quota) + VS Code with free AI extensions. Zero cost, decent capability.</p>
+
+<p><strong>For teams:</strong> Standardize on a primary model (Claude for reasoning, GPT-4o for speed) and let individual developers choose their secondary tools. The cost of a second Pro subscription is less than the productivity gained.</p>
+
+<h2>What I Wish I Knew 3 Months Ago</h2>
+<ol>
+<li><strong>No single model is best for everything.</strong> The differences are real and task-dependent. Use the right model for each job.</li>
+<li><strong>Context is everything.</strong> A model with full project context (Cursor agent, Gemini 1M) catches issues that chat-only models miss.</li>
+<li><strong>Free models are good enough for 60% of daily tasks.</strong> Save the paid models for the 40% that need real reasoning.</li>
+<li><strong>Your coding workflow matters more than model choice.</strong> The IDE integration (Cursor agent) was a bigger productivity boost than switching between Claude and GPT-4o.</li>
+</ol>
+
+<h2>Further Reading</h2>
+<p>For a more detailed feature-by-feature comparison of Cursor vs Copilot vs Claude Code, see my <a href="https://dingjiu1989-hue.github.io/en/compare/cursor-vs-copilot-vs-claude-code.html">full comparison article</a>. For benchmark data on LLM coding performance across more models, check the <a href="https://dingjiu1989-hue.github.io/en/ai/best-llms-for-coding-2026.html">LLM for coding guide</a>.</p>
+
+<p><em>This article was originally published on <a href="https://dingjiu1989-hue.github.io/en/ai/ai-coding-tools-90-days.html">SourceHub</a>.</em></p>
+'''
+
 # FAQ data for FAQPage schema (slug → list of q/a dicts)
 FAQS = {
     'chatgpt-plus-worth': [
@@ -13045,6 +13184,12 @@ FAQS = {
         {'q': 'Can AI really make you a 10x developer?', 'a': 'AI coding tools boost productivity 2-5x for routine tasks like writing boilerplate, tests, documentation, and data transformations. The "10x" comes from combining AI assistance with experience — AI handles the mechanical work while you focus on architecture, debugging, and code review. Junior developers see the biggest productivity gain, seniors see the biggest quality gain.'},
         {'q': 'Which AI coding tool should a beginner use?', 'a': 'Start with GitHub Copilot Free (2000 completions/month) integrated into VS Code. It is the simplest setup and works inline as you type. Once comfortable, explore Cursor for deeper AI integration or Claude Code for complex refactoring tasks. Avoid paying for multiple AI tools until you have used the free tiers extensively.'},
         {'q': 'Will AI replace programmers?', 'a': 'No. AI coding tools automate the mechanical parts of coding (writing boilerplate, tests, CRUD endpoints) but cannot replace engineering judgment — system design, trade-off analysis, security considerations, and understanding business requirements. The role is shifting from "writing code" to "designing solutions and reviewing AI-generated code." Developers who learn to use AI tools effectively will be more productive, not replaced.'},
+    ],
+    'ai-coding-tools-90-days': [
+        {'q': 'Which AI coding tool is best overall in 2026?', 'a': 'Based on my 90-day test across 30 tasks, Claude Opus 4.7 scored highest (4.7/5) for complex reasoning, refactoring, and code review. However, no single model is best — GPT-4o wins on speed, Gemini excels at codebase-wide analysis, and DeepSeek V4 is the best free option for routine tasks.'},
+        {'q': 'Is it worth paying for multiple AI coding tools?', 'a': 'Yes. Having access to 2-3 models is genuinely worth the overhead because each excels at different tasks. My setup costs $50/month: Copilot Free for completions, Claude Pro for complex work, DeepSeek Free for routine tasks, and Cursor Pro as my IDE.'},
+        {'q': 'Which AI coding tool is best for beginners or students?', 'a': 'For budget-conscious users: DeepSeek V4 (free) + Claude Free tier + VS Code with free AI extensions provides decent capability at zero cost. For those who can pay for one tool, Claude Pro at $20/month has the broadest capability.'},
+        {'q': 'How does Cursor compare to Copilot in 2026?', 'a': 'Cursor\'s agent mode is fundamentally different — it reads your project structure, applies multi-file edits, and runs terminal commands from one prompt. Copilot optimizes for inline next-line completions. They serve different purposes and work well together.'},
     ],
     'prompt-engineering': [
         {'q': 'What is prompt engineering and why does it matter?', 'a': 'Prompt engineering is the practice of designing effective inputs for AI models to get accurate, useful outputs. It matters because the difference between a vague prompt and a well-engineered one can be the difference between useless output and production-ready work. Good prompts include: role assignment, clear task description, output format specification, examples, and constraints.'},
