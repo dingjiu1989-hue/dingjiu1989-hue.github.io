@@ -1,7 +1,7 @@
 ---
 title: "macOS 效率工具推荐合集"
 description: "精选 macOS 效率工具推荐，涵盖启动器、窗口管理、剪贴板、截图、终端等必备软件。"
-date: 2026-05-07
+date: 2026-05-09
 board: tech
 url: https://dingjiu1989-hue.github.io/tech/macos-tools.html
 ---

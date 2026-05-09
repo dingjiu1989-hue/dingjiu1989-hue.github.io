@@ -1,7 +1,7 @@
 ---
 title: "Midjourney 提示词大全：从入门到进阶"
 description: "系统整理 Midjourney 提示词结构、参数体系与风格参考，附赠 10 套实战验证的提示词模板，涵盖写实人像、Logo 设计、产品摄影等高频场景。"
-date: 2026-05-08
+date: 2026-05-09
 board: ai
 url: https://dingjiu1989-hue.github.io/ai/midjourney-prompts.html
 ---

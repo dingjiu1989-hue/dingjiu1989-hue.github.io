@@ -1,7 +1,7 @@
 ---
 title: "30 Free and Useful APIs Every Developer Should Know"
 description: "A curated collection of 30 APIs with generous free tiers, covering weather, translation, AI, data, and images. Each entry includes usage examples and rate limits."
-date: 2026-05-07
+date: 2026-05-09
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/free-api-collection.html
 ---

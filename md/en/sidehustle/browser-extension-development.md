@@ -1,7 +1,7 @@
 ---
 title: "Browser Extension Development 2026: From Idea to Chrome Web Store"
 description: "Technical guide to building cross-browser extensions: Manifest V3, service workers, content scripts, messaging, storage APIs, and publishing to Chrome Web Store and Firefox Add-ons. Includes React/Vue integration."
-date: 2026-05-08
+date: 2026-05-09
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/browser-extension-development.html
 ---
