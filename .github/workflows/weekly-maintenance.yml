@@ -44,6 +44,16 @@ jobs:
       - name: Generate JSON Feeds
         run: python3 scripts/generate_json_feed.py
 
+      - name: Generate AI-friendly artifacts
+        run: python3 scripts/gen_ai_friendly.py
+
+      - name: Build cross-platform identity (sameAs)
+        env:
+          DEVTO_KEY: ${{ secrets.DEVTO_KEY }}
+        run: |
+          echo "$DEVTO_KEY" > .devto-key
+          python3 scripts/build_sameas.py
+
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"

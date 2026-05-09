@@ -102,19 +102,34 @@ def get_publication_id():
 
 
 def get_existing_slugs():
-    """Get list of already-published article slugs."""
+    """Get set of already-published article slugs."""
     if TRACK_FILE.exists():
         try:
-            return set(json.loads(TRACK_FILE.read_text(encoding="utf-8")))
+            data = json.loads(TRACK_FILE.read_text(encoding="utf-8"))
+            if isinstance(data, list):
+                return set(data)  # Legacy format: list of slugs
+            return set(data.keys())  # New format: {slug: url}
         except Exception:
             pass
     return set()
 
 
-def save_tracking(slugs):
-    """Save the list of published slugs."""
+def get_existing_urls():
+    """Get {slug: url} mapping of published articles."""
+    if TRACK_FILE.exists():
+        try:
+            data = json.loads(TRACK_FILE.read_text(encoding="utf-8"))
+            if isinstance(data, dict):
+                return data
+        except Exception:
+            pass
+    return {}
+
+
+def save_tracking(urls_dict):
+    """Save {slug: url} mapping of published articles."""
     TRACK_FILE.parent.mkdir(parents=True, exist_ok=True)
-    TRACK_FILE.write_text(json.dumps(sorted(slugs), indent=2, ensure_ascii=False), encoding="utf-8")
+    TRACK_FILE.write_text(json.dumps(urls_dict, indent=2, ensure_ascii=False, sort_keys=True), encoding="utf-8")
 
 
 def extract_body_markdown(html_path):
@@ -209,6 +224,7 @@ def main():
             all_articles.append((art, board["id"]))
 
     existing = get_existing_slugs()
+    existing_urls = get_existing_urls()
     already_published = len(existing)
     print(f"Already published on Hashnode: {already_published}")
 
@@ -240,10 +256,11 @@ def main():
             print(f"    ERROR: {error[:200]}")
             break
         elif post:
-            print(f"    URL: {post.get('url', 'N/A')}")
-            existing.add(art["slug"])
+            post_url = post.get('url', '')
+            print(f"    URL: {post_url}")
+            existing_urls[art["slug"]] = post_url
             published_this_run += 1
-            save_tracking(existing)
+            save_tracking(existing_urls)
 
         time.sleep(3)  # Be respectful with API calls
 

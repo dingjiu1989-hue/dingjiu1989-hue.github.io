@@ -40,8 +40,8 @@
       "headline": "30 Free and Useful APIs Every Developer Should Know",
       "description": "A curated collection of 30 APIs with generous free tiers, covering weather, translation, AI, data, and images. Each entry includes usage examples and rate limits.",
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
-      "datePublished": "2026-05-07",
-      "dateModified": "2026-05-07",
+      "datePublished": "2026-05-09",
+      "dateModified": "2026-05-09",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/free-api-collection.html"}
@@ -55,6 +55,29 @@
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
         {"@type": "ListItem", "position": 2, "name": "Tool Recommendations", "item": "https://dingjiu1989-hue.github.io/en/tools/"},
         {"@type": "ListItem", "position": 3, "name": "30 Free and Useful APIs Every Developer Should Know"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+          {
+        "@type": "Question",
+        "name": "Where can I find free APIs for my project?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Free public APIs are available for weather (OpenWeatherMap), news (NewsAPI, GNews), finance (Alpha Vantage, Yahoo Finance), dictionaries (Free Dictionary API), space (NASA API), and many more. GitHub's "public-apis" repository maintains a categorized list of 300+ free APIs. Always check rate limits and terms of service before building on a free API."}
+      },
+      {
+        "@type": "Question",
+        "name": "What are the best free APIs for developers?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Top free APIs: GitHub API (unlimited public repos), OpenWeatherMap (1000 calls/day), REST Countries (unlimited, no key), JSONPlaceholder (fake data for prototyping), Unsplash API (5000 photos/month), Cloudflare Trace (get client IP, no key), and Exchange Rate API (1000 calls/month). These cover most common use cases for side projects and prototypes."}
+      },
+      {
+        "@type": "Question",
+        "name": "How do I handle API rate limits?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Implement exponential backoff for retries, cache responses locally (Redis, SQLite, or even a JSON file for static data), batch requests where the API allows, and monitor your usage. For free APIs with strict limits (100-1000/day), build a local cache that refreshes periodically rather than calling the API on every user request."}
+      }
       ]
     }
     </script>
@@ -73,7 +96,7 @@
         <span class="tag-cat">Developer Resources</span>
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
       <h1 class="article-title">30 Free and Useful APIs Every Developer Should Know</h1>
-      <div class="article-meta">Published 2026-05-07 · 5760 views · 48 replies</div>
+      <div class="article-meta">Published 2026-05-09 · 5760 views · 48 replies</div>
       <div class="article-body"><p>A good API can save you weeks of development. These 30 APIs are either completely free or have generous free tiers that cover personal projects and MVPs. Every entry includes a sample request and rate limit info.</p>
 
 <h2>Weather</h2>
@@ -143,9 +166,7 @@ curl "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&curr
 <li><strong>Use exponential backoff</strong> — When you get a 429 (rate limited), wait and retry with increasing delays.</li>
 <li><strong>Keep keys out of your repo</strong> — Use environment variables. Even for free API keys.</li>
 <li><strong>Fallback gracefully</strong> — Free APIs can go down. Your app should still work if the dog picture API is having a bad day.</li>
-</ul>
-<p><strong>See also:</strong> <a href="/en/tech/linux-commands.html">Linux Commands Cheat Sheet: 50 Commands Every Developer Should Know</a>, <a href="/en/tools/best-free-dev-tools-2026.html">Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More</a>, <a href="/en/tech/web-security-basics.html">Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know</a>.</p>
-</div>
+</ul></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

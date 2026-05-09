@@ -90,6 +90,29 @@ def update_sitemap():
             )
         sitemap = sitemap.replace('</urlset>', '\n'.join(entries) + '\n</urlset>')
 
+    # Add AI crawler discovery files if not already in sitemap
+    ai_files = [
+        (f'{BASE}/llms.txt', 'weekly', '0.8'),
+        (f'{BASE}/en/llms.txt', 'weekly', '0.8'),
+        (f'{BASE}/llms-full.txt', 'weekly', '0.6'),
+        (f'{BASE}/llms-full-cn.txt', 'weekly', '0.6'),
+        (f'{BASE}/en/llms-full.txt', 'weekly', '0.6'),
+        (f'{BASE}/en/feed.json', 'weekly', '0.6'),
+        (f'{BASE}/feed.json', 'weekly', '0.6'),
+    ]
+    for ai_url, freq, priority in ai_files:
+        if ai_url not in sitemap:
+            entry = (
+                f'  <url>\n'
+                f'    <loc>{ai_url}</loc>\n'
+                f'    <changefreq>{freq}</changefreq>\n'
+                f'    <priority>{priority}</priority>\n'
+                f'    <lastmod>{TODAY}</lastmod>\n'
+                f'  </url>'
+            )
+            sitemap = sitemap.replace('</urlset>', entry + '\n</urlset>')
+            print(f'  + sitemap: {ai_url}')
+
     # Retroactively add missing en hreflang to existing English URLs
     import re
     for board in en_data['boards']:

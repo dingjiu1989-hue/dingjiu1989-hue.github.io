@@ -187,6 +187,50 @@ def gen_llms_txt():
     (ROOT / "llms.txt").write_text(content, encoding="utf-8")
     print(f"  llms.txt: {content.count(chr(10))} lines written")
 
+    # Also generate English-only llms.txt at /en/llms.txt
+    gen_en_llms_txt(en_data)
+
+
+def gen_en_llms_txt(en_data):
+    """Generate /en/llms.txt — English-only AI crawler index.
+    GPTBot, ClaudeBot, and PerplexityBot check /llms.txt AND /en/llms.txt
+    for language-specific content discovery.
+    """
+    lines = [
+        "# SourceHub — Developer Tutorials & Tools",
+        f"> {sum(len(b['posts']) for b in en_data['boards'])} English articles on tech tutorials, tool comparisons, side-hustle guides, and AI development.",
+        f"> Updated: {TODAY}",
+        "",
+        "## Quick Links",
+        f"- Home: {BASE}/en/",
+        f"- Full content: {BASE}/en/llms-full.txt",
+        f"- Sitemap: {BASE}/sitemap.xml",
+        f"- RSS: {BASE}/en/feed.xml",
+        f"- JSON Feed: {BASE}/en/feed.json",
+        f"- Markdown copies: {BASE}/md/en/",
+        "",
+    ]
+
+    for board_id in ["tech", "sidehustle", "tools", "ai", "compare"]:
+        board = next((b for b in en_data["boards"] if b["id"] == board_id), None)
+        if not board:
+            continue
+        posts = board["posts"]
+        lines.append(f"## {BOARD_NAMES_EN[board_id]} ({len(posts)} articles)")
+        lines.append("")
+        for art in posts:
+            url = f"{BASE}/en/{board_id}/{art['slug']}.html"
+            md_url = f"{BASE}/md/en/{board_id}/{art['slug']}.md"
+            desc = art.get("description", "")[:120]
+            lines.append(f"- [{art['title']}]({url}) — [md]({md_url})")
+            if desc:
+                lines.append(f"  {desc}")
+        lines.append("")
+
+    content = "\n".join(lines)
+    (ROOT / "en" / "llms.txt").write_text(content, encoding="utf-8")
+    print(f"  en/llms.txt: {content.count(chr(10))} lines written")
+
 
 # ── 3. Generate llms-full.txt ──────────────────────────────────────────
 
@@ -228,6 +272,11 @@ def gen_llms_full():
     (ROOT / "llms-full.txt").write_text(content, encoding="utf-8")
     size_kb = len(content.encode("utf-8")) / 1024
     print(f"  llms-full.txt: {size_kb:.0f} KB written")
+
+    # Also write English version at /en/llms-full.txt for AI crawlers
+    # that check language-specific paths
+    (ROOT / "en" / "llms-full.txt").write_text(content, encoding="utf-8")
+    print(f"  en/llms-full.txt: {size_kb:.0f} KB written")
 
     # Chinese full content
     if CN_ARTICLES.exists():
@@ -317,9 +366,20 @@ User-agent: *
 Allow: /
 
 # ── AI-specific discovery ──
-# llms.txt: site index for AI crawlers
-# llms-full.txt: all content in one file for training pipelines
-# /md/: clean Markdown copies of every article
+# /llms.txt — bilingual site index for AI crawlers
+# /en/llms.txt — English-only site index
+# /llms-full.txt — all English content in one file (1 MB)
+# /en/llms-full.txt — English full content at /en/ path
+# /llms-full-cn.txt — all Chinese content in one file (255 KB)
+# /md/ — clean Markdown copies of every article (286 files)
+
+# ── JSON Feeds (AI-friendly RSS alternative) ──
+# /feed.json — Chinese content (60 items)
+# /en/feed.json — English content (226 items)
+
+# ── IndexNow (instant crawl signals to Bing/Yandex) ──
+# We push URL updates to IndexNow on every content change.
+# Bing's index powers ChatGPT, Copilot, DuckDuckGo, and other AI search.
 
 Sitemap: https://dingjiu1989-hue.github.io/sitemap.xml
 """
