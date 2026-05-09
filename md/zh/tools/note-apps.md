@@ -1,7 +1,7 @@
 ---
 title: "白板/笔记/思维导图工具对比"
 description: "对比 Notion、Obsidian、Miro、Heptabase 等主流笔记和思维导图工具的优缺点，帮你选适合自己的。"
-date: 2026-04-10
+date: 2026-05-09
 board: tools
 url: https://dingjiu1989-hue.github.io/tools/note-apps.html
 ---

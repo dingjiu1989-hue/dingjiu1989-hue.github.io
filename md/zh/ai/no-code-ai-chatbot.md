@@ -1,7 +1,7 @@
 ---
 title: "零代码搭建 AI 聊天机器人：客服、知识库、个人助手"
 description: "手把手用 Dify/Coze/Botpress 搭建 RAG 驱动的智能对话机器人，无需一行代码，上传文档即可拥有专属 AI 助手。"
-date: 2026-05-07
+date: 2026-05-09
 board: ai
 url: https://dingjiu1989-hue.github.io/ai/no-code-ai-chatbot.html
 ---

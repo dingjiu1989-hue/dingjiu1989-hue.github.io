@@ -1,7 +1,7 @@
 ---
 title: "单元测试入门：从零到写出第一个可维护的测试"
 description: "零基础单元测试入门教程，覆盖 Python/pytest 实战，AAA 模式、Mock、Fixture 核心概念一网打尽。"
-date: 2026-05-07
+date: 2026-05-09
 board: tech
 url: https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html
 ---
