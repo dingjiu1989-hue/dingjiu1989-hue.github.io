@@ -79,7 +79,14 @@ def parse_tags(tags_val):
         raw = [t.strip() for t in tags_val.split(',') if t.strip()]
     else:
         return []
-    return [t.lower().replace(' ', '').replace('-', '') for t in raw if t]
+    import re
+    clean = []
+    for t in raw:
+        t = t.lower().replace(' ', '').replace('-', '')
+        t = re.sub(r'[^a-z0-9]', '', t)  # dev.to allows only alphanumeric
+        if t:
+            clean.append(t)
+    return clean
 
 
 def make_article_body(art, board_id, en_data):
