@@ -13061,6 +13061,57 @@ FAQS = {
         {'q': 'What are the best free APIs for developers?', 'a': 'Top free APIs: GitHub API (unlimited public repos), OpenWeatherMap (1000 calls/day), REST Countries (unlimited, no key), JSONPlaceholder (fake data for prototyping), Unsplash API (5000 photos/month), Cloudflare Trace (get client IP, no key), and Exchange Rate API (1000 calls/month). These cover most common use cases for side projects and prototypes.'},
         {'q': 'How do I handle API rate limits?', 'a': 'Implement exponential backoff for retries, cache responses locally (Redis, SQLite, or even a JSON file for static data), batch requests where the API allows, and monitor your usage. For free APIs with strict limits (100-1000/day), build a local cache that refreshes periodically rather than calling the API on every user request.'},
     ],
+    'figma-vs-canva-vs-penpot': [
+        {'q': 'Which design tool should developers use in 2026?', 'a': 'Figma is best for professional UI/UX design with real-time collaboration and developer handoff. Canva is best for quick social media graphics, presentations, and non-designers. Penpot is best for open-source enthusiasts and teams that want a Figma alternative without vendor lock-in. For developers building product interfaces: use Figma. For marketing content: use Canva.'},
+        {'q': 'Is Penpot a real Figma alternative?', 'a': 'Yes, Penpot is the leading open-source Figma alternative. It supports vector editing, prototyping, design systems, and team collaboration. Key gaps: a smaller plugin ecosystem, fewer learning resources, and occasional performance issues on large files. For a solo developer or small team that values open source, Penpot is production-ready.'},
+        {'q': 'Do developers really need design tools?', 'a': 'Developers benefit from basic design tool proficiency for creating mockups, communicating with designers, and building side projects. Figma\'s "developer mode" makes it easy to inspect designs without being a designer. Even 2 hours learning Figma basics saves days of back-and-forth with designers.'},
+    ],
+    'github-vs-gitlab-vs-bitbucket': [
+        {'q': 'Which Git platform is best in 2026?', 'a': 'GitHub has the largest community, best discovery (GitHub Explore, Stars), and Actions for CI/CD. GitLab has the best built-in DevOps lifecycle (single app for planning to monitoring). Bitbucket is best for teams already in the Atlassian ecosystem (Jira, Confluence). For open source: GitHub. For enterprise DevOps: GitLab. For Atlassian shops: Bitbucket.'},
+        {'q': 'Is GitHub Actions better than GitLab CI?', 'a': 'GitHub Actions has a larger marketplace of pre-built actions and tighter GitHub integration. GitLab CI is more mature, with better built-in security scanning, container registry integration, and review apps. Both are excellent. Choose based on where your code lives — Actions for GitHub repos, GitLab CI for GitLab repos.'},
+        {'q': 'Does Bitbucket still make sense in 2026?', 'a': 'Bitbucket is only recommended if your team already uses Jira and Confluence extensively. Its Pipelines CI/CD lags behind GitHub Actions and GitLab CI. The Bitbucket interface feels dated. For new teams starting fresh, GitHub or GitLab are better choices regardless of project type.'},
+    ],
+    'aws-vs-azure-vs-gcp': [
+        {'q': 'Which cloud platform is best for developers?', 'a': 'AWS has the widest service catalog and largest community. Azure has the best Microsoft ecosystem integration. GCP has the best developer experience, Kubernetes support, and competitive pricing. For solo developers: GCP free tier is most generous. For job skills: AWS is highest demand. For .NET shops: Azure is a no-brainer.'},
+        {'q': 'Which cloud has the best free tier?', 'a': 'GCP offers the longest free tier (many services free up to 90 days, plus always-free quotas). AWS free tier is 12 months with generous but limited resources. Azure free tier includes 12 months plus a $200 credit for 30 days. GCP wins for long-running side projects; AWS wins for learning breadth of services.'},
+        {'q': 'Can I learn cloud skills without paying?', 'a': 'Yes. All three clouds offer free tiers sufficient for learning: GCP has an always-free tier with Cloud Run (2M requests/month), Cloud Storage, and BigQuery. AWS free tier includes Lambda (1M requests), DynamoDB (25GB), and EC2 (750 hours). Azure free tier includes Functions, App Service, and Cosmos DB. You can learn all three for $0.'},
+    ],
+    'zustand-vs-redux-vs-jotai': [
+        {'q': 'Which React state management library should I use?', 'a': 'Zustand is the best default — simple API, minimal boilerplate, works with both React Server Components and vanilla JS. Redux is best for large teams needing strict patterns and DevTools. Jotai is best when you want Recoil-like atomic state without Meta\'s baggage. For most projects, Zustand is the pragmatic choice.'},
+        {'q': 'Is Redux still relevant in 2026?', 'a': 'Redux Toolkit has modernized Redux significantly, reducing boilerplate and adding TypeScript support. However, Zustand and Jotai have proven that simpler APIs handle the same use cases with less code. Redux is still relevant for massive enterprise apps where its DevTools middleware pattern and ecosystem add value. For new projects under 100K lines, skip Redux.'},
+    ],
+    'nginx-vs-caddy-vs-traefik': [
+        {'q': 'Which web server / reverse proxy should I use?', 'a': 'Caddy is the best choice for most developers — automatic HTTPS, simple Caddyfile config, and excellent developer experience. Nginx is the battle-tested standard with the widest deployment and community knowledge. Traefik is best for containerized/microservice environments with auto-service discovery. For side projects: Caddy. For production scale: Nginx. For Kubernetes: Traefik.'},
+        {'q': 'Is Caddy\'s automatic HTTPS really automatic?', 'a': 'Yes. Caddy automatically provisions and renews Let\'s Encrypt certificates for all your domains with zero configuration. Nginx requires manual Certbot or a separate ACME client. Caddy also handles OCSP stapling, certificate revocation, and HTTP-to-HTTPS redirects automatically. This alone saves hours of maintenance.'},
+    ],
+    'stripe-vs-paddle-vs-lemonsqueezy': [
+        {'q': 'Which payment processor is best for SaaS?', 'a': 'Stripe offers the most flexibility and best developer experience with comprehensive API and documentation. Paddle handles global tax compliance (VAT, GST, sales tax) as a Merchant of Record — you get one payout after taxes. Lemon Squeezy (now owned by Stripe) offers Paddle-like tax handling with a simpler interface. For global SaaS: Paddle or Lemon Squeezy. For US-only or total control: Stripe.'},
+        {'q': 'Do I need a Merchant of Record like Paddle?', 'a': 'If you sell globally and want to avoid filing VAT/GST in every country, yes. Paddle and Lemon Squeezy act as the Merchant of Record, handling all tax compliance, billing, and worldwide payment methods. Stripe requires you to handle international tax compliance yourself or use Stripe Tax as an add-on. For solo founders selling globally, Paddle/Lemon Squeezy are worth the ~5% fee premium.'},
+    ],
+    'terraform-vs-pulumi-vs-crossplane': [
+        {'q': 'Which IaC tool should I learn?', 'a': 'Pulumi offers the best developer experience if you already know TypeScript/Python/Go — real programming languages with loops, conditionals, and sharing code. Terraform has the widest provider ecosystem and is the industry standard for multi-cloud infrastructure. Crossplane extends Kubernetes-style declarative management to infrastructure. For learning: start with Terraform (most jobs). For productivity: use Pulumi.'},
+        {'q': 'Is Pulumi better than Terraform for solo developers?', 'a': 'Yes. Pulumi lets you use familiar programming languages instead of learning HCL. You get real IDEs, type checking, loops, and functions. Terraform\'s HCL requires learning a new language and its state management can be finicky. For solo developers managing a handful of cloud resources, Pulumi\'s productivity advantage is significant.'},
+    ],
+    'redis-vs-memcached-vs-dragonfly': [
+        {'q': 'Should I use Redis or Dragonfly in 2026?', 'a': 'Redis is the most mature and has the richest ecosystem of data structures, modules, and client libraries. Dragonfly is 10-25x faster on multi-core machines, uses less memory (jemalloc optimization), and is Redis/Memcached wire-protocol compatible. For most applications, Redis is the safe choice. For high-throughput applications (>100K QPS), Dragonfly significantly reduces hardware costs.'},
+        {'q': 'Is Memcached still worth using?', 'a': 'Memcached still has niche advantages: simpler (no persistence overhead), lower per-request latency for simple key-value lookups, and better memory efficiency for large blobs. Redis has largely subsumed Memcached use cases with its flexible data structures and optional persistence. New projects should default to Redis and only consider Memcached for specific high-throughput caching-only workloads.'},
+    ],
+    'vitest-vs-jest-vs-bun-test': [
+        {'q': 'Which JavaScript test runner is fastest?', 'a': 'Bun test is fastest for cold starts and simple test suites — it uses Bun\'s JavaScript runtime which starts 4x faster than Node.js. Vitest is fastest for Vite-based projects (reuses Vite transform pipeline) and provides the best DX. Jest is the most mature with the richest ecosystem but slowest. For Vite projects: Vitest. For speed-obsessed: Bun test. For ecosystem compatibility: Jest.'},
+        {'q': 'Should I migrate from Jest to Vitest?', 'a': 'If your project uses Vite (or any modern build tool), yes. Vitest is Jest-compatible (same expect/describe/it API) but 2-10x faster, has better TypeScript support, and native ESM handling. Migration is straightforward — change imports, update config, run. Jest is still better if you rely on custom Jest runners or specific snapshot testing workflows not yet supported by Vitest.'},
+    ],
+    'astro-vs-gatsby-vs-hugo': [
+        {'q': 'Which static site generator is fastest?', 'a': 'Hugo builds the fastest — written in Go, it can build 10K+ pages in under 30 seconds. Astro is fast (uses esbuild) and generates zero-JS by default with its partial hydration. Gatsby is the slowest due to its GraphQL data layer and Webpack build. For content sites with 1000+ pages: Hugo. For interactive docs and marketing sites: Astro. For legacy projects only: Gatsby.'},
+        {'q': 'Is Astro the best choice for a new site in 2026?', 'a': 'For most new content sites, yes. Astro combines the speed of an SSG with the flexibility to use React, Vue, Svelte, or any UI framework. Its islands architecture means you ship zero JavaScript by default. Astro 5+ has content collections, view transitions, and server islands. The only reason to choose Hugo is extreme build speed (100K+ pages) or if you prefer Go templates.'},
+    ],
+    'duckdb-vs-sqlite': [
+        {'q': 'When should I use DuckDB vs SQLite?', 'a': 'Use DuckDB for analytical queries (OLAP) — large aggregations, data science, and CSV/Parquet/JSON file queries. Use SQLite for transactional workloads (OLTP) — application databases, mobile apps, and embedded storage. DuckDB excels at columnar processing; SQLite excels at row-level operations. If you\'re analyzing data: use DuckDB. If you\'re storing app data: use SQLite.'},
+        {'q': 'Can DuckDB replace SQLite for app development?', 'a': 'No. DuckDB is optimized for read-heavy analytical queries on large datasets, not for concurrent write-heavy application workloads. SQLite handles ACID transactions, concurrent readers, and row-level operations efficiently. They are complementary: SQLite for the application database, DuckDB for analytical queries on exported data or log files.'},
+    ],
+    'htmx-vs-alpine-vs-vanilla-js': [
+        {'q': 'Should I use HTMX, Alpine.js, or vanilla JavaScript?', 'a': 'HTMX is best for adding interactive behavior to server-rendered HTML with minimal JavaScript — perfect for traditional web frameworks (Rails, Django, Laravel). Alpine.js is best for adding client-side reactivity to HTML templates with a Vue-like syntax. Vanilla JS is best when you need full control and the behavior is simple enough. For server-rendered apps: HTMX. For template-based UIs: Alpine.js. For anything complex: use a proper framework (React/Vue/Svelte).'},
+        {'q': 'Is HTMX a good alternative to React?', 'a': 'HTMX is not a React replacement — it\'s a different paradigm. HTMX works with server-rendered HTML and uses hypermedia exchanges instead of JSON APIs. It\'s great for apps with moderate interactivity where most UI is server-generated. React is better for highly interactive client-heavy apps. Many teams now use HTMX for the content parts and a JS framework for the interactive features of the same app.'},
+    ],
 }
 
 # Cross-platform identity (sameAs) for schema.org Article
@@ -13126,7 +13177,10 @@ def make_article_html(art, board_id, board_name, all_posts):
     }}
     </script>'''
 
-    # Compute related posts at build time — same board first, up to 4
+    # Article schema with AI-optimized properties
+    tags_str = ', '.join(art.get('tags', []))
+    body_len = len(BODIES.get(slug, ''))
+    word_est = max(300, body_len // 5)  # rough estimate from body chars
     same_board = [p for p in all_posts if p['board_id'] == board_id and p['slug'] != slug]
     other_board = [p for p in all_posts if p['board_id'] != board_id and p['slug'] != slug]
     related = (same_board + other_board)[:4]
@@ -13176,6 +13230,8 @@ def make_article_html(art, board_id, board_name, all_posts):
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "{art['date']}",
       "dateModified": "{art['date']}",
+      "wordCount": "{word_est}",
+      "keywords": "{tags_str}",
       "author": {{"@type": "Person", "name": "SourceHub"}},
       "publisher": {{"@type": "Organization", "name": "SourceHub", "logo": {{"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}}}},
       "mainEntityOfPage": {{"@type": "WebPage", "@id": "{art_url}"}}{sameas_json}
