@@ -70,3 +70,9 @@ AI 生成的代码表面看起来可能很完美，但以下四个问题几乎�
 坦诚地说，AI 在以下场景中表现很差：老旧代码库的维护（训练数据中缺乏类似代码）、需要深度业务领域知识的逻辑、跨多个服务的调试排错、以及涉及合规审计的系统。这些场景下，AI 更适合做一个"高级 StackOverflow"，而不是主力开发者。
 
 总结：AI 编程工具的最佳定位是一个能力极强但判断力为零的初级工程师。它写代码的速度是你的 10 倍，但你需要像 tech lead 一样审查它每一行产出。把 AI 当成队友，而不是替代品，这才是正确的 AI 编程之道。
+
+### 📖 相关推荐
+
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
+  * [GitHub Copilot 完全使用指南：从安装到高效协作](<https://dingjiu1989-hue.github.io/tech/github-copilot-guide.html>)
+  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)

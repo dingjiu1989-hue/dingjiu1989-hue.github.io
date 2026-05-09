@@ -47,3 +47,9 @@ AdSense 广告：$150-300/月
 ## 核心建议
 
 前 6 个月不要想赚钱，专注写出对读者有用的内容。博客是慢生意，但从第 7 个月开始，之前的积累会开始产生复利效应。
+
+### 📖 相关推荐
+
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
+  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
+  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)

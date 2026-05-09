@@ -98,3 +98,9 @@ Ollama 还内置了 REST API。启动服务后，你可以用 curl 或者其他 
 我的日常使用场景是 Ollama + Continue（VS Code 插件）。Continue 是一款开源的 AI 编码插件，支持接入本地 Ollama 模型。配置完成后，在 VS Code 中选中代码按 Cmd+I 就能让本地模型帮你解释、重构或生成代码。数据全程不离开电脑，公司敏感项目也能放心使用。
 
 本地大模型的时代已经到来。Ollama 极大地降低了门槛，让每个人都能在自己的电脑上拥有一个私有 AI。试试看吧——从 `ollama run llama3.1` 开始。
+
+### 📖 相关推荐
+
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
+  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
+  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/ai/ai-art-monetization.html>)

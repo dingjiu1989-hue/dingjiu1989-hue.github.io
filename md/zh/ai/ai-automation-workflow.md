@@ -65,3 +65,11 @@ n8n| 开源自部署| 无限（自托管）| 开发者，需要定制
   1. 从最简单的自动化开始（2 步）
   2. AI 步骤的提示词要反复调试，结果要验证
   3. 所有 AI 自动化留人工检查点，100% 自动化有风险
+
+
+
+### 📖 相关推荐
+
+  * [用 AI 做 PPT：从 3 小时到 10 分钟](<https://dingjiu1989-hue.github.io/ai/ai-ppt-presentation.html>)
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
+  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)

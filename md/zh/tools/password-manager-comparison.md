@@ -33,3 +33,9 @@ KeePassXC| ✅ 完全免费| —| ✅| 极客首选，完全本地离线
 ## 安全提示
 
 不要用浏览器内置的密码保存功能——安全性远不如专业密码管理器。记住一个强主密码，开启两步验证。
+
+### 📖 相关推荐
+
+  * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/tools/project-management-tools.html>)
+  * [VS Code vs JetBrains vs Cursor：2026 年代码编辑器终极对比](<https://dingjiu1989-hue.github.io/tools/editor-comparison-2026.html>)
+  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)

@@ -69,4 +69,10 @@ url: https://dingjiu1989-hue.github.io/tech/git-cheatsheet.html
 `git stash`| 暂存当前修改到储藏栈  
 `git stash pop`| 恢复最近一次储藏并删除  
 `git stash list`| 查看储藏列表  
-`git stash drop`| 删除最近一次储藏
+`git stash drop`| 删除最近一次储藏  
+  
+### 📖 相关推荐
+
+  * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/tech/git-advanced.html>)
+  * [Linux 命令行入门：30 个最常用的命令](<https://dingjiu1989-hue.github.io/tech/linux-commands.html>)
+  * [单元测试入门：从零到写出第一个可维护的测试](<https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html>)

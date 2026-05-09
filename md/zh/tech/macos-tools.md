@@ -8,8 +8,8 @@ url: https://dingjiu1989-hue.github.io/tech/macos-tools.html
 
 # macOS 效率工具推荐合集
 
-一套好用的工具能让 Mac 工作效率翻倍。这里整理了我长期使用后筛选出的精品工具，涵盖各个高频场景。  
-  
+一套好用的工具能让 Mac 工作效率翻倍。这里整理了我长期使用后筛选出的精品工具，涵盖各个高频场景。
+
 ## 启动器与搜索
 
   * **Raycast** — 免费且功能强大的启动器，替代 Spotlight。支持剪贴板历史、窗口管理、快捷搜索、插件扩展。比 Alfred 更现代，社区生态活跃。
@@ -51,3 +51,11 @@ url: https://dingjiu1989-hue.github.io/tech/macos-tools.html
   * **IINA** — 开源视频播放器，界面优雅，支持所有格式。
   * **Keka** — 免费解压工具，支持 7z、RAR、ZIP 等格式。
   * **AppCleaner** — 彻底卸载应用并清理残留文件。
+
+
+
+### 📖 相关推荐
+
+  * [VS Code 十大必备插件：让编码效率翻倍](<https://dingjiu1989-hue.github.io/tech/vscode-extensions.html>)
+  * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/tech/git-advanced.html>)
+  * [单元测试入门：从零到写出第一个可维护的测试](<https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html>)

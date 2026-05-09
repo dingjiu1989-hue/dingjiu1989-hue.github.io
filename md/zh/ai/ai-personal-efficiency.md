@@ -71,3 +71,9 @@ ChatGPT 的 Zapier 插件连起来可以做很多自动化流程。例如：收�
 我的笔记系统中积累了上千条笔记。以前找东西靠标签和目录，现在用 Obsidian 的 Copilot 插件，可以直接问："半年前我看过一篇关于 HTTP/3 性能测试的文章，核心结论是什么？"AI 在向量化后的笔记库中检索并给出答案。Notion AI 也提供了类似功能。这不是简单的全文搜索——AI 会综合多篇笔记给出总结性回答。
 
 这 10 个场景覆盖了写作、沟通、学习、开发、设计、研究、自动化等不同维度的效率提升。关键是不要试图一次性全部用上——选 2-3 个对你当前痛点最明显的场景先开始，养成习惯后再扩展。AI 效率提升不是一朝一夕的事，而是持续迭代的过程。
+
+### 📖 相关推荐
+
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
+  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
+  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/ai/ai-art-monetization.html>)

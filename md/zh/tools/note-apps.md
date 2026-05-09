@@ -29,3 +29,11 @@ XMind| 专业思维导图| 基础免费| 桌面版支持
   * **视觉思考和研究** → Heptabase。白板+卡片，适合深度研究和复杂问题的可视化梳理。
   * **头脑风暴和流程图** → Miro 或 Excalidraw。前者适合团队，后者适合个人快速画草稿。
   * **考试复习/读书笔记** → XMind。传统思维导图工具中最成熟的，模板丰富。
+
+
+
+### 📖 相关推荐
+
+  * [Notion 完全使用指南：从入门到精通](<https://dingjiu1989-hue.github.io/tools/notion-complete-guide.html>)
+  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
+  * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/tools/project-management-tools.html>)

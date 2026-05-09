@@ -85,3 +85,9 @@ Upwork| 海外| 客单价更高，但需要 Pro 级别的作品集。
 ## 我的建议
 
 最稳健的起步路径：**小红书发 AI 作品 → 积累作品集和粉丝 → 同时在 Fiverr 开店 → 接单赚到第一笔钱 → 把最好的作品上传素材平台做被动收入。** 先用路径一和三赚到正反馈，再逐步扩展到路径二和四。关键是开始行动——先做出 10 张你觉得能卖的作品。
+
+### 📖 相关推荐
+
+  * [Midjourney 提示词大全：从入门到进阶](<https://dingjiu1989-hue.github.io/ai/midjourney-prompts.html>)
+  * [Stable Diffusion 出图入门指南](<https://dingjiu1989-hue.github.io/ai/stable-diffusion.html>)
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)

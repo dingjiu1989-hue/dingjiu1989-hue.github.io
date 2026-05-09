@@ -43,3 +43,9 @@ VS Code 是目前最流行的代码编辑器没有之一。装对这 10 个插�
 ## 经验之谈
 
 插件不是越多越好——装太多会拖慢启动速度。这 10 个是我用过上百个插件后留下的"真必需品"。Copilot 或 Codeium 二选一即可，两个同时开会冲突。
+
+### 📖 相关推荐
+
+  * [macOS 效率工具推荐合集](<https://dingjiu1989-hue.github.io/tech/macos-tools.html>)
+  * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/tech/git-advanced.html>)
+  * [单元测试入门：从零到写出第一个可维护的测试](<https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html>)

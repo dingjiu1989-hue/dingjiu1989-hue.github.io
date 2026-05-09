@@ -43,3 +43,11 @@ Freelancer| 项目竞标模式，价格竞争激烈| 10%
   2. **从小单做起** — 积累好评后再接大单，不要急着报高价
   3. **选择垂直领域** — 全栈不如一个细分方向深入
   4. **注意时区和税务** — 跨国远程涉及外汇结算和个人报税
+
+
+
+### 📖 相关推荐
+
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
+  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
+  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)

@@ -66,3 +66,11 @@ Timeline（时间线）| 甘特图，适合项目排期
   * **关联数据库（Relation）** — 比如"项目"关联"任务"，一个项目下能看到所有关联任务
   * **汇总（Rollup）** — 聚合关联数据，如显示项目的总任务数和完成率
   * **同步区块（Synced Block）** — 同一内容在多个页面同步更新
+
+
+
+### 📖 相关推荐
+
+  * [白板/笔记/思维导图工具对比](<https://dingjiu1989-hue.github.io/tools/note-apps.html>)
+  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
+  * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/tools/project-management-tools.html>)

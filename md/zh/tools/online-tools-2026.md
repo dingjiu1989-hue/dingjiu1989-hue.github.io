@@ -43,3 +43,9 @@ url: https://dingjiu1989-hue.github.io/tools/online-tools-2026.html
 ## 使用原则
 
 在线工具虽然方便，但敏感文件（身份证、合同、私人照片）不要上传。涉及隐私的数据还是用本地软件处理。
+
+### 📖 相关推荐
+
+  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
+  * [2026 年最佳屏幕录制和视频剪辑工具推荐](<https://dingjiu1989-hue.github.io/tools/screen-recording-tools.html>)
+  * [10 款开发者必备的命令行工具（2026 版）](<https://dingjiu1989-hue.github.io/tools/cli-tools-collection.html>)

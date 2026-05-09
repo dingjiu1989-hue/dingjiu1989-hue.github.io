@@ -40,3 +40,9 @@ url: https://dingjiu1989-hue.github.io/ai/claude-vs-chatgpt.html
 ## 不必纠结
 
 模型能力在快速收敛，差距越来越小。选择一个深入使用比反复切换更有价值。你花在比较工具上的时间已经够写一篇好文章了。
+
+### 📖 相关推荐
+
+  * [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](<https://dingjiu1989-hue.github.io/ai/chatgpt-plus-worth.html>)
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
+  * [ChatGPT 提示词工程入门：从新手到高手](<https://dingjiu1989-hue.github.io/ai/prompt-engineering.html>)

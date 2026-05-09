@@ -74,3 +74,9 @@ AI 做 PPT 并非万能的。以下场景建议用人力和设计师：
 
 
 AI 做 PPT 最大的价值不是"取代你做 PPT"，而是把你在排版和格式上浪费的时间省下来，让你把精力花在真正重要的事情上——想清楚你要说什么。工具永远只是工具，内容才是王道。
+
+### 📖 相关推荐
+
+  * [AI 自动化工作流实战：让 AI 替你干重复活](<https://dingjiu1989-hue.github.io/ai/ai-automation-workflow.html>)
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
+  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)

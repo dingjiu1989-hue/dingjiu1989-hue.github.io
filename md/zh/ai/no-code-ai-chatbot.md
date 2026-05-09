@@ -65,3 +65,9 @@ Dify 的 Workflow 功能还可以增加增强步骤——比如用户问"我对 
 **4\. 缺乏持续优化。** 机器人上线后不是终点。定期查看用户对话日志，识别高频但回答不好的问题，补充知识库文档，优化系统提示词。一个好的 AI 机器人是不断迭代出来的。
 
 零代码平台大大降低了 AI 聊天机器人的门槛。无论你是想给公司做一个客服机器人、给社群做一个信息助手、还是给自己搭一个知识管理的"第二大脑"，现在都有合适的工具。选对平台，用对方法，你离拥有一个专属 AI 助手的距离其实只有一顿饭的功夫。
+
+### 📖 相关推荐
+
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
+  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
+  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/ai/ai-art-monetization.html>)

@@ -56,3 +56,11 @@ Cohere| 每月 1000 次免费| 文本生成和嵌入
   * 所有 API Key 用环境变量管理，不要硬编码在代码里。
   * 免费额度有限，生产环境做好请求频率控制（rate limiting）。
   * **github.com/public-apis/public-apis** 这个仓库收录了 200+ 免费 API，可以持续关注。
+
+
+
+### 📖 相关推荐
+
+  * [10 个你每天都会用到的免费在线工具网站](<https://dingjiu1989-hue.github.io/tools/online-tools-2026.html>)
+  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
+  * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/tools/project-management-tools.html>)

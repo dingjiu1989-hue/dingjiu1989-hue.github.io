@@ -123,3 +123,9 @@ AI 评测自媒体| 1-2 周| $1,000-$5,000| 低| 喜欢写作/做视频
 AI 时代的副业逻辑变了：**以前你需要成为专家才能赚钱，现在你只需要比普通人早用 AI 工具 6 个月** 。这 5 个方向共同的特点是——不需要融资、不需要团队、一个人就能启动。选一个你感兴趣的，这个周末就开始。
 
 如果只能推荐一个：**AI 工作流自动化** 。启动最快（一天内能接到第一个客户），需求最刚性（每个公司都有重复劳动），竞争最少（做的人还不多）。
+
+### 📖 相关推荐
+
+  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
+  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)
+  * [数字产品创作指南：Notion 模板、Ebook、设计素材怎么做](<https://dingjiu1989-hue.github.io/sidehustle/digital-products-guide.html>)

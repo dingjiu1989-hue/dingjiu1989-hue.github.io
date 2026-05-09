@@ -37,3 +37,9 @@ AI 能力| Copilot 扩展| AI Assistant（内置）| 内置深度集成
 ## 不要陷入编辑器宗教战争
 
 工具是为效率服务的。真正的高手能用任何一种编辑器写出好代码。选一个深入掌握，比反复横跳更有价值。
+
+### 📖 相关推荐
+
+  * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/tools/project-management-tools.html>)
+  * [2026 年最佳密码管理器对比：LastPass vs 1Password vs Bitwarden](<https://dingjiu1989-hue.github.io/tools/password-manager-comparison.html>)
+  * [VS Code 十大必备插件：让编码效率翻倍](<https://dingjiu1989-hue.github.io/tech/vscode-extensions.html>)

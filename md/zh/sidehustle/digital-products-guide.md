@@ -47,3 +47,9 @@ Notion 模板| $5-$50| 低| 项目管理、日记、知识库模板
 ## 持续收入的核心
 
 数字产品的难点不是制作，而是被看到。把 50% 的时间花在营销上——在社交媒体分享你的创作过程和使用技巧，这些内容本身就是最好的广告。
+
+### 📖 相关推荐
+
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
+  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
+  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)

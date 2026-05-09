@@ -33,3 +33,9 @@ Lex Fridman Podcast| 科技+AI+哲学| 较难
 ## 收听建议
 
 1.5-2x 倍速是甜蜜点——不会漏内容又省时间。Spotify / 小宇宙 / Apple Podcasts 都有。重要的是**听完后写三条收获** ，否则和没听一样。
+
+### 📖 相关推荐
+
+  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
+  * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/tools/project-management-tools.html>)
+  * [2026 年最佳屏幕录制和视频剪辑工具推荐](<https://dingjiu1989-hue.github.io/tools/screen-recording-tools.html>)

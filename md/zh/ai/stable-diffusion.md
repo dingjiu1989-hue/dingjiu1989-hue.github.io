@@ -84,3 +84,9 @@ Checkpoint: DreamShaper, CFG 7, Steps 25, DPM++ 2M Karras, 768x768
 ## 进阶建议
 
 当你掌握了基础出图后，可以按这个顺序进阶：先学 LoRA 模型（给特定角色或风格做微调），再学 ControlNet （用姿态图、深度图控制构图），最后学 Inpainting （局部重绘修复细节）。每一步都能显著提升你的出图质量，但前提是基础参数已经掌握扎实。
+
+### 📖 相关推荐
+
+  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/ai/ai-art-monetization.html>)
+  * [Midjourney 提示词大全：从入门到进阶](<https://dingjiu1989-hue.github.io/ai/midjourney-prompts.html>)
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)

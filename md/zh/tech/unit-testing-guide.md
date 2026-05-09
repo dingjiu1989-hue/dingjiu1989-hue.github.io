@@ -73,3 +73,9 @@ url: https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html
 ## 起步建议
 
 不用追求 100% 覆盖率——那会增加大量维护负担。先给核心业务逻辑写测试，看到覆盖率数字攀升的成就感会推着你继续写。
+
+### 📖 相关推荐
+
+  * [Python 入门教程：从零到写出第一个程序](<https://dingjiu1989-hue.github.io/tech/python-tutorial.html>)
+  * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/tech/git-advanced.html>)
+  * [REST API 设计最佳实践：写出让人愿意用的接口](<https://dingjiu1989-hue.github.io/tech/rest-api-best-practices.html>)

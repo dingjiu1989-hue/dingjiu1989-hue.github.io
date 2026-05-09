@@ -186,3 +186,9 @@ MCP 已经在这几个场景中证明了价值：
 MCP 正在成为 AI 工具生态的"USB-C 接口"。它的价值不在于技术有多复杂，而在于**标准化带来的生态效应** ——一个人写的 MCP Server，所有人都能用。如果你在做 AI 应用开发，MCP 是 2026 年必须了解的基础设施。
 
 下一步建议：安装 Claude Desktop 或支持 MCP 的客户端，从官方 Filesystem Server 开始体验，然后再尝试接入 GitHub 或数据库 Server。
+
+### 📖 相关推荐
+
+  * [LangChain 入门：构建你的第一个 AI 应用](<https://dingjiu1989-hue.github.io/ai/langchain-intro.html>)
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
+  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/ai/ai-art-monetization.html>)

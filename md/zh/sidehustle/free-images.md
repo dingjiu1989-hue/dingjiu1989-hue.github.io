@@ -41,3 +41,11 @@ Freepik| 大量矢量图和 PSD，部分免费| 需要（免费版）
   * **Flaticon** — 海量矢量图标，部分免费需署名。
   * **Feather Icons** — 开源极简图标集，React/Vue 都有封装。
   * **Heroicons** — Tailwind CSS 团队出品，MIT 协议。
+
+
+
+### 📖 相关推荐
+
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
+  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
+  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)

@@ -71,3 +71,9 @@ AI 默认输出是一种"礼貌、中立、面面俱到"的语调，这恰恰是
 **可检测性问题。** 纯 AI 生成的内容很容易被检测工具识别。如果你用 AI 生成内容发布到对原创性敏感的平台上，务必经过大幅度的人工改写。改写不是替换同义词，而是重组逻辑、加入个人经历、改变表达角度。
 
 说到底，AI 写作的正确姿势是把 AI 当作一个"效率放大器"——它擅长的是从 0 到 60 分，从 60 到 90 分甚至更高，需要的是你作为人类的判断力和创造力。
+
+### 📖 相关推荐
+
+  * [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](<https://dingjiu1989-hue.github.io/ai/claude-vs-chatgpt.html>)
+  * [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](<https://dingjiu1989-hue.github.io/ai/chatgpt-plus-worth.html>)
+  * [ChatGPT 提示词工程入门：从新手到高手](<https://dingjiu1989-hue.github.io/ai/prompt-engineering.html>)

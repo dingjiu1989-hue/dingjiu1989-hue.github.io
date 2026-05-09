@@ -85,3 +85,9 @@ Midjourney V6（2024 年初发布）和 V7（2026 年初发布）之间的差异
 ## 写在最后
 
 Midjourney 的进化速度非常快，每两到三个月就有重大更新。保持学习的最好方式不是背诵参数，而是理解每个参数背后的原理——它控制的是 AI 的"自由度"还是"约束力"。掌握了这个底层逻辑，任何版本更新你都能快速上手。
+
+### 📖 相关推荐
+
+  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/ai/ai-art-monetization.html>)
+  * [Stable Diffusion 出图入门指南](<https://dingjiu1989-hue.github.io/ai/stable-diffusion.html>)
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)

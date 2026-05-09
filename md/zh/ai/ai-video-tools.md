@@ -54,3 +54,9 @@ Pika 从 1.0 到 2.0 的进化非常扎实。2.0 版本加入了"局部修改"�
 经过多次尝试，我目前最顺手的流程是：先用 ChatGPT 或 Claude 生成分镜头脚本，再用 Midjourney 或 DALL-E 为每个镜头生成参考图，接着把图片+提示词喂给 Runway 或 Sora 生成视频片段，最后剪映或 Premiere 剪辑配音。整个过程从 3 小时缩短到了 40 分钟。
 
 AI 视频生成还远未成熟——角色一致性问题、长视频连贯性、精细控制能力都有明显短板。但作为创意加速器，这些工具已经能带来 10 倍效率提升。关键是理解每个工具的边界，在不同环节选择最合适的那个，而不是指望一个工具解决所有问题。
+
+### 📖 相关推荐
+
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
+  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
+  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/ai/ai-art-monetization.html>)

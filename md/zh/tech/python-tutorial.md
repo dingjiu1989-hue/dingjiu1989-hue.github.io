@@ -81,3 +81,11 @@ macOS 自带 Python 3，终端输入 `python3 --version` 检查。Windows 去 py
   2. **文件读写** — 处理文本和 CSV
   3. **requests 库** — 爬取网页和调用 API
   4. **Flask** — 写一个简单的 Web 应用
+
+
+
+### 📖 相关推荐
+
+  * [单元测试入门：从零到写出第一个可维护的测试](<https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html>)
+  * [正则表达式 30 分钟入门指南](<https://dingjiu1989-hue.github.io/tech/regex-guide.html>)
+  * [Linux 命令行入门：30 个最常用的命令](<https://dingjiu1989-hue.github.io/tech/linux-commands.html>)

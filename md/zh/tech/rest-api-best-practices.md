@@ -52,3 +52,11 @@ DELETE| 删除| ✅| `DELETE /articles/1`
   3. **不版本化** — URL 加 `/v1/` 前缀或在 Header 中指定版本
   4. **不限制分页** — `per_page` 最大 100，防止一次请求拖垮数据库
   5. **不写 API 文档** — OpenAPI/Swagger 规范是标配
+
+
+
+### 📖 相关推荐
+
+  * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/tech/git-advanced.html>)
+  * [单元测试入门：从零到写出第一个可维护的测试](<https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html>)
+  * [正则表达式 30 分钟入门指南](<https://dingjiu1989-hue.github.io/tech/regex-guide.html>)

@@ -34,3 +34,11 @@ Screen Studio| $89 一次性| 自动跟随鼠标、平滑缩放，生成的视�
   * 快速录 Bug 报告 → Loom
   * 做产品演示 → Screen Studio
   * 短视频/社媒内容 → CapCut
+
+
+
+### 📖 相关推荐
+
+  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
+  * [10 款开发者必备的命令行工具（2026 版）](<https://dingjiu1989-hue.github.io/tools/cli-tools-collection.html>)
+  * [10 个你每天都会用到的免费在线工具网站](<https://dingjiu1989-hue.github.io/tools/online-tools-2026.html>)

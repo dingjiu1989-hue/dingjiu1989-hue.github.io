@@ -52,3 +52,11 @@ Tokopedia| 印尼（人口 2.7 亿）| 佣金 2-4%| 印尼最大电商平台
   * 先了解目标国的禁售品清单（印尼对化妆品、食品限制多）
   * 注意回款周期（通常 15-45 天），现金流要能周转
   * 别一上来就砸钱投广告，先拿自然流量验证产品
+
+
+
+### 📖 相关推荐
+
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
+  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
+  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)

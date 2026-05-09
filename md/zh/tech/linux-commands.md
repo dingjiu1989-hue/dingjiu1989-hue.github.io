@@ -73,3 +73,9 @@ netstat| 网络连接状态
 ## 推荐学习路径
 
 先掌握文件操作 → 文本处理 → 管道重定向（这是 Linux 的精髓）→ 权限管理 → Shell 脚本编写。
+
+### 📖 相关推荐
+
+  * [正则表达式 30 分钟入门指南](<https://dingjiu1989-hue.github.io/tech/regex-guide.html>)
+  * [Python 入门教程：从零到写出第一个程序](<https://dingjiu1989-hue.github.io/tech/python-tutorial.html>)
+  * [Git 常用命令速查表](<https://dingjiu1989-hue.github.io/tech/git-cheatsheet.html>)

@@ -144,3 +144,9 @@ Cursor 的 Composer 也能做到，但不如 Claude Code 的 Agent 循环自动�
 ## 总结
 
 2026 年的 AI 编程工具已经分化出清晰的定位：**Copilot 做补全，Cursor 做搭档，Claude Code 做 Agent** 。你不必只选一个——它们不是竞品，而是**互补工具** 。真正高效的开发者已经在组合使用它们，就像有人同时用 VS Code 和终端一样自然。
+
+### 📖 相关推荐
+
+  * [用 AI 辅助编程：从零到生产力](<https://dingjiu1989-hue.github.io/ai/ai-coding.html>)
+  * [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](<https://dingjiu1989-hue.github.io/ai/claude-vs-chatgpt.html>)
+  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)

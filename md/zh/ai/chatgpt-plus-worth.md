@@ -51,3 +51,9 @@ Operator (AI Agent)| ❌| 有限| ✅ 完整
 ## 我的建议
 
 如果你每天用 AI 超过 30 分钟，Plus 的 $20 是物有所值的——GPT-4o 比 GPT-4o mini 在复杂任务上强一个档次，文件上传和联网搜索也很实用。但如果只是偶尔问几个问题，免费版足够。
+
+### 📖 相关推荐
+
+  * [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](<https://dingjiu1989-hue.github.io/ai/claude-vs-chatgpt.html>)
+  * [ChatGPT 提示词工程入门：从新手到高手](<https://dingjiu1989-hue.github.io/ai/prompt-engineering.html>)
+  * [如何用 AI 写高质量原创文章](<https://dingjiu1989-hue.github.io/ai/ai-writing.html>)

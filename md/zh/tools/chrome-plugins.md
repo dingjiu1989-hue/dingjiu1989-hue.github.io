@@ -40,3 +40,11 @@ GoFullPage| 全页截图| 滚动截取整个网页为 PNG，支持长图
   * **DeepL Translate** — 整句翻译质量碾压 Google 翻译。
   * **Grammarly** — AI 英语写作助手，检查语法和语气。
   * **Simplify** — 格式化网页内容，去除广告和杂乱元素。
+
+
+
+### 📖 相关推荐
+
+  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
+  * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/tools/project-management-tools.html>)
+  * [10 个程序员必听的播客：学技术、追趋势、听故事](<https://dingjiu1989-hue.github.io/tools/dev-podcasts.html>)

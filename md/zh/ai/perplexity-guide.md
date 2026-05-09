@@ -75,3 +75,9 @@ Perplexity 的 Pages 功能非常实用：当你完成一系列搜索后，可�
 **下载桌面端。** Perplexity 有 Mac 和 Windows 桌面客户端，用 Cmd+K (Mac) 或 Ctrl+K (Windows) 可以全局唤醒，比打开浏览器搜索快很多。
 
 Perplexity 并不是要取代 Google——Google 仍然是世界上最好的"网页目录"。但当你的需求是"获得一个问题的综合答案"时，Perplexity 的效率优势是非常明显的。不妨从今天开始，把每天的前 5 次搜索从 Google 换成 Perplexity，体验一下"答案引擎"的魅力。
+
+### 📖 相关推荐
+
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
+  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
+  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/ai/ai-art-monetization.html>)

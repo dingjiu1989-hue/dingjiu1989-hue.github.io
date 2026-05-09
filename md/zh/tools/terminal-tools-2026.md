@@ -198,4 +198,10 @@ fd| 快速文件搜索| find| ★★★★
 ripgrep| 代码内容搜索| grep| ★★★★  
 tldr| 命令速查卡| man| ★★★★  
 jq| JSON 处理| 手写 Python 脚本| ★★★★  
-lazygit| 终端 Git GUI| git CLI| ★★★★
+lazygit| 终端 Git GUI| git CLI| ★★★★  
+  
+### 📖 相关推荐
+
+  * [10 款开发者必备的命令行工具（2026 版）](<https://dingjiu1989-hue.github.io/tools/cli-tools-collection.html>)
+  * [2026 年最佳屏幕录制和视频剪辑工具推荐](<https://dingjiu1989-hue.github.io/tools/screen-recording-tools.html>)
+  * [10 个你每天都会用到的免费在线工具网站](<https://dingjiu1989-hue.github.io/tools/online-tools-2026.html>)

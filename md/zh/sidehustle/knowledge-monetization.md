@@ -40,3 +40,9 @@ url: https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html
 ## 从哪个开始
 
 先做付费专栏——门槛最低，一篇好文章就是一个付费产品。验证市场后再考虑投入更大的课程和社群。关键是**开始输出** ，大部分人都困在"准备"阶段永远没开始。
+
+### 📖 相关推荐
+
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
+  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
+  * [如何通过写技术博客赚钱：从 0 到月入 1000 美元](<https://dingjiu1989-hue.github.io/sidehustle/tech-blog-monetization.html>)

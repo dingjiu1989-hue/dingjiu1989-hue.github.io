@@ -129,3 +129,9 @@ Bisect 用二分查找自动定位——你只需要告诉 Git 哪个提交是�
 `git bisect`| 二分查找 Bug| 从 200 个提交中快速定位是谁引入的 Bug  
   
 这三个命令是高级 Git 用户的标志。不需要每天用，但需要的时候知道怎么用——你的同事会以为你是 Git 魔法师。
+
+### 📖 相关推荐
+
+  * [Git 常用命令速查表](<https://dingjiu1989-hue.github.io/tech/git-cheatsheet.html>)
+  * [单元测试入门：从零到写出第一个可维护的测试](<https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html>)
+  * [REST API 设计最佳实践：写出让人愿意用的接口](<https://dingjiu1989-hue.github.io/tech/rest-api-best-practices.html>)

@@ -87,3 +87,9 @@ ChatGPT 通常会输出一段泛泛的、只有一两个端点的 Markdown 文�
 ## 写在最后
 
 提示词工程不是玄学，而是一套可复用的沟通方法论。它的本质是降低模型的猜测空间，让你的意图以最精确的方式传递过去。掌握这五大要素和思维链技巧，你的 ChatGPT 使用效率至少提升 3 倍。后续的文章中，我们还会深入讨论角色扮演、少样本学习、提示词模板管理等进阶话题。
+
+### 📖 相关推荐
+
+  * [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](<https://dingjiu1989-hue.github.io/ai/claude-vs-chatgpt.html>)
+  * [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](<https://dingjiu1989-hue.github.io/ai/chatgpt-plus-worth.html>)
+  * [如何用 AI 写高质量原创文章](<https://dingjiu1989-hue.github.io/ai/ai-writing.html>)

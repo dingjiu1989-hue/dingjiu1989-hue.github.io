@@ -40,3 +40,9 @@ Fiverr| 技能服务化| 20%| 小单、快速交付
 ## 税务问题
 
 国内：单次收入 800 以下免税；劳务报酬按 20%-40% 累进税率（可次年汇算清缴退税）。建议年收入超过 5 万就注册个体户，税负更低。
+
+### 📖 相关推荐
+
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
+  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
+  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)

@@ -69,3 +69,9 @@ url: https://dingjiu1989-hue.github.io/tech/regex-guide.html
 ## 练习是关键
 
 推荐在 **regex101.com** 上实操练习，它有交互式解释器、多语言支持和测试用例功能。每天练 2 个正则，一周后你就能随手写出匹配规则了。
+
+### 📖 相关推荐
+
+  * [Linux 命令行入门：30 个最常用的命令](<https://dingjiu1989-hue.github.io/tech/linux-commands.html>)
+  * [Python 入门教程：从零到写出第一个程序](<https://dingjiu1989-hue.github.io/tech/python-tutorial.html>)
+  * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/tech/git-advanced.html>)

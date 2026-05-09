@@ -111,3 +111,9 @@ url: https://dingjiu1989-hue.github.io/ai/openai-api-intro.html
 ## 下一步
 
 读完这篇文章你应该能跑起第一个 API 调用了。接下来可以：用 `stream=True` 实现打字机效果、用 Function Calling 让 GPT 调用你的函数、用 Assistants API 构建带知识库的 AI 助手。OpenAI 的官方文档写得很好——把它当参考书，需要时查。
+
+### 📖 相关推荐
+
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
+  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
+  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/ai/ai-art-monetization.html>)

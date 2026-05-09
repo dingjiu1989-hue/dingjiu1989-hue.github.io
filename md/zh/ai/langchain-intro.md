@@ -106,3 +106,9 @@ LangChain 的五个核心组件你需要了解：
 
 
 一句话总结：LangChain 最适合快速原型验证和中等复杂度的 LLM 应用。它降低了组合 LLM + 外部数据的门槛，但当你需要精细控制或追求极致性能时，不妨考虑更轻量的替代方案。
+
+### 📖 相关推荐
+
+  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
+  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/ai/ai-art-monetization.html>)

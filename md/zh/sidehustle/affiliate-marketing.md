@@ -72,3 +72,9 @@ url: https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html
 前 3 个月可能只有 $50-200/月——内容在积累，还没排上名。6-12 个月后，如果你持续输出高质量内容，$500-3000/月是可达的。顶尖的 affiliate 博主月入 $10K-50K+，但这需要 2-3 年的积累和优质内容矩阵。
 
 **关键心态：这不是快速致富，是建立内容资产。每一篇好文章都是 24 小时替你赚钱的数字员工。**
+
+### 📖 相关推荐
+
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
+  * [数字产品创作指南：Notion 模板、Ebook、设计素材怎么做](<https://dingjiu1989-hue.github.io/sidehustle/digital-products-guide.html>)
+  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)

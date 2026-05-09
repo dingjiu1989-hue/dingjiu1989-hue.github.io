@@ -55,3 +55,11 @@ Copilot 不是读心术。它从你当前文件和相关打开的文件中获取
   * **盲目信任** — Copilot 会写出看起来正确但有安全漏洞的代码，永远 review。
   * **死循环接受** — 不要一直按 Tab，每接受一个建议后看一眼逻辑是否正确。
   * **忽略旧 API** — Copilot 训练数据可能包含过时的库版本，遇到不认识的 API 先查文档。
+
+
+
+### 📖 相关推荐
+
+  * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/tech/git-advanced.html>)
+  * [单元测试入门：从零到写出第一个可维护的测试](<https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html>)
+  * [REST API 设计最佳实践：写出让人愿意用的接口](<https://dingjiu1989-hue.github.io/tech/rest-api-best-practices.html>)

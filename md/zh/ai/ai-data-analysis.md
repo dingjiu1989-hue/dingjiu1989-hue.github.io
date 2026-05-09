@@ -64,3 +64,9 @@ url: https://dingjiu1989-hue.github.io/ai/ai-data-analysis.html
 ## 什么时候你仍然需要一个真实分析师
 
 AI 最适合探索性数据分析和常规报表生成。但以下场景还需要人类分析师的判断：数据清洗（AI 可能做出错误的数据清洗决策）、实验设计与 A/B 测试分析、需要业务领域知识深度解读的洞察、以及向管理层汇报的正式报告。AI 是最好的分析助手，但决策仍然需要人来做。
+
+### 📖 相关推荐
+
+  * [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](<https://dingjiu1989-hue.github.io/ai/claude-vs-chatgpt.html>)
+  * [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](<https://dingjiu1989-hue.github.io/ai/chatgpt-plus-worth.html>)
+  * [ChatGPT 提示词工程入门：从新手到高手](<https://dingjiu1989-hue.github.io/ai/prompt-engineering.html>)

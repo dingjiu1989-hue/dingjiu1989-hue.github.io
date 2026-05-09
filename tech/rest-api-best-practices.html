@@ -80,6 +80,11 @@
 <ul><li><strong>用正确的 HTTP 状态码</strong> — 400 参数错误、401 未认证、403 无权限、404 不存在、422 参数校验失败、429 频率限制、500 服务器错误。</li><li><strong>错误信息结构化</strong> — 返回 <code>{"errors":[{"code":"VALIDATION_ERROR","field":"email","message":"邮箱格式不正确"}]}</code>，不要只返回一个字符串。</li></ul>
 <h2>五大常见反模式</h2>
 <ol><li><strong>所有操作都用 POST</strong> — 这是 RPC 不是 REST</li><li><strong>返回所有字段</strong> — 支持 <code>?fields=id,title</code> 让客户端选择需要的字段</li><li><strong>不版本化</strong> — URL 加 <code>/v1/</code> 前缀或在 Header 中指定版本</li><li><strong>不限制分页</strong> — <code>per_page</code> 最大 100，防止一次请求拖垮数据库</li><li><strong>不写 API 文档</strong> — OpenAPI/Swagger 规范是标配</li></ol></div>
+    
+      <div class="related-articles" style="margin-top:2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="margin-top:0;">📖 相关推荐</h3>
+        <ul style="margin-bottom:0;"><li><a href="https://dingjiu1989-hue.github.io/tech/git-advanced.html">Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战</a></li><li><a href="https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html">单元测试入门：从零到写出第一个可维护的测试</a></li><li><a href="https://dingjiu1989-hue.github.io/tech/regex-guide.html">正则表达式 30 分钟入门指南</a></li></ul>
+      </div>
     </article>
     <section class="related"><div id="related-posts"></div></section>
   </div>

@@ -44,3 +44,9 @@ url: https://dingjiu1989-hue.github.io/sidehustle/content-creator-startup.html
 ## 核心原则
 
 **真诚大于技巧。** 读者能分辨你是真心分享还是在凑字数。如果你在某个领域有真实经验，这个优势是 AI 无法替代的。
+
+### 📖 相关推荐
+
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
+  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
+  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)

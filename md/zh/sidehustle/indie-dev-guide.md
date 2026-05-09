@@ -59,3 +59,9 @@ url: https://dingjiu1989-hue.github.io/sidehustle/indie-dev-guide.html
 ## 关键心态
 
 90% 的独立产品不赚钱，但不代表你不该试。**失败的产品也是经验** 。用最小成本验证 Idea，不行就快速换方向。
+
+### 📖 相关推荐
+
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
+  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)
+  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
