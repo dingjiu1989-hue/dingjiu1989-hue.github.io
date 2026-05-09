@@ -60,3 +60,5 @@ Tool| What It Is| Why Use It
 
 
 All tools above are free for individual developers. Bookmark this page and come back next time you set up a new machine.
+
+**See also:** [30 Free and Useful APIs Every Developer Should Know](</en/tools/free-api-collection.html>), [How to Build and Sell APIs: A Developer's Guide to API-as-a-Service](</en/sidehustle/build-and-sell-api.html>), [Best API Clients 2026: Postman vs Bruno vs Insomnia vs HTTPie vs Thunder Client](</en/tools/best-api-clients-2026.html>).

@@ -150,3 +150,7 @@ Cursor 的 Composer 也能做到，但不如 Claude Code 的 Agent 循环自动�
   * [用 AI 辅助编程：从零到生产力](<https://dingjiu1989-hue.github.io/ai/ai-coding.html>)
   * [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](<https://dingjiu1989-hue.github.io/ai/claude-vs-chatgpt.html>)
   * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
+
+
+
+**See also:** [用 AI 辅助编程：从零到生产力](</ai/ai-coding.html>), [GitHub Copilot 完全使用指南：从安装到高效协作](</tech/github-copilot-guide.html>), [VS Code vs JetBrains vs Cursor：2026 年代码编辑器终极对比](</tools/editor-comparison-2026.html>).

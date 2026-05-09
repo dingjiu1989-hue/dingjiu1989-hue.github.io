@@ -79,3 +79,7 @@ netstat| 网络连接状态
   * [正则表达式 30 分钟入门指南](<https://dingjiu1989-hue.github.io/tech/regex-guide.html>)
   * [Python 入门教程：从零到写出第一个程序](<https://dingjiu1989-hue.github.io/tech/python-tutorial.html>)
   * [Git 常用命令速查表](<https://dingjiu1989-hue.github.io/tech/git-cheatsheet.html>)
+
+
+
+**See also:** [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](</tech/git-advanced.html>), [单元测试入门：从零到写出第一个可维护的测试](</tech/unit-testing-guide.html>), [REST API 设计最佳实践：写出让人愿意用的接口](</tech/rest-api-best-practices.html>).

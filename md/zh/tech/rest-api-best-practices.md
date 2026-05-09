@@ -60,3 +60,7 @@ DELETE| 删除| ✅| `DELETE /articles/1`
   * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/tech/git-advanced.html>)
   * [单元测试入门：从零到写出第一个可维护的测试](<https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html>)
   * [正则表达式 30 分钟入门指南](<https://dingjiu1989-hue.github.io/tech/regex-guide.html>)
+
+
+
+**See also:** [30 个免费又好用的 API 合集：开发者必备](</tools/free-api-collection.html>), [OpenAI API 入门：用 10 行代码调用 GPT](</ai/openai-api-intro.html>), [AI 自动化工作流实战：让 AI 替你干重复活](</ai/ai-automation-workflow.html>).

@@ -57,3 +57,7 @@ ClickUp 的策略是"Jira 有的我都有，还更便宜"。确实——甘特�
   * [2026 年最佳密码管理器对比：LastPass vs 1Password vs Bitwarden](<https://dingjiu1989-hue.github.io/tools/password-manager-comparison.html>)
   * [VS Code vs JetBrains vs Cursor：2026 年代码编辑器终极对比](<https://dingjiu1989-hue.github.io/tools/editor-comparison-2026.html>)
   * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
+
+
+
+**See also:** [Notion 完全使用指南：从入门到精通](</tools/notion-complete-guide.html>), [数字产品创作指南：Notion 模板、Ebook、设计素材怎么做](</sidehustle/digital-products-guide.html>), [白板/笔记/思维导图工具对比](</tools/note-apps.html>).

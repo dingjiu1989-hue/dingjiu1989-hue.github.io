@@ -1,0 +1,39 @@
+name: Platform Syndication
+
+on:
+  schedule:
+    - cron: '17 */3 * * *'  # Every 3 hours at :17 (avoids :00/:30 bursts)
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  syndicate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Syndicate to Dev.to
+        env:
+          DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
+        run: python3 scripts/syndicate_devto.py
+
+      - name: Syndicate to Hashnode
+        env:
+          HASHNODE_API_KEY: ${{ secrets.HASHNODE_API_KEY }}
+          HASHNODE_PUBLICATION_ID: ${{ secrets.HASHNODE_PUBLICATION_ID }}
+        run: python3 scripts/syndicate_hashnode.py
+
+      - name: Syndicate to Medium
+        env:
+          MEDIUM_TOKEN: ${{ secrets.MEDIUM_TOKEN }}
+        run: python3 scripts/syndicate_medium.py
+
+      - name: Commit tracking files if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/devto-published.json data/hashnode-published.json data/medium-published.json
+          git diff --staged --quiet || (git commit -m "chore: update syndication tracking" && git push)

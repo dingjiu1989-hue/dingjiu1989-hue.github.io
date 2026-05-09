@@ -208,3 +208,7 @@ GitHub Dependabot 会自动扫描你的仓库并提 PR 修复漏洞。打开它�
   * [REST API 设计最佳实践：写出让人愿意用的接口](<https://dingjiu1989-hue.github.io/tech/rest-api-best-practices.html>)
   * [Docker 30 分钟入门：从安装到第一个容器](<https://dingjiu1989-hue.github.io/tech/docker-quickstart.html>)
   * [单元测试入门：从零到写出第一个可维护的测试](<https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html>)
+
+
+
+**See also:** [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](</tech/git-advanced.html>), [单元测试入门：从零到写出第一个可维护的测试](</tech/unit-testing-guide.html>), [REST API 设计最佳实践：写出让人愿意用的接口](</tech/rest-api-best-practices.html>).

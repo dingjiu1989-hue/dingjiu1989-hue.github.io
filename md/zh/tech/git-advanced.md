@@ -135,3 +135,7 @@ Bisect 用二分查找自动定位——你只需要告诉 Git 哪个提交是�
   * [Git 常用命令速查表](<https://dingjiu1989-hue.github.io/tech/git-cheatsheet.html>)
   * [单元测试入门：从零到写出第一个可维护的测试](<https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html>)
   * [REST API 设计最佳实践：写出让人愿意用的接口](<https://dingjiu1989-hue.github.io/tech/rest-api-best-practices.html>)
+
+
+
+**See also:** [Git 常用命令速查表](</tech/git-cheatsheet.html>), [VS Code 十大必备插件：让编码效率翻倍](</tech/vscode-extensions.html>), [10 款开发者必备的命令行工具（2026 版）](</tools/cli-tools-collection.html>).

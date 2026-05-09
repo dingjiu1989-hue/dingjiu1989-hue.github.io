@@ -73,4 +73,4 @@ Work in enterprise| **Angular**
 Best performance + DX combo| **Svelte**  
 Safest bet for a startup| **React + Next.js**  
   
-**Bottom line:** React is the safe default — biggest job market, richest ecosystem, and Next.js makes it full-stack. Vue is the productivity pick for solo developers. Angular for enterprise. Svelte if you want the future today. See also: [Next.js vs Nuxt vs SvelteKit comparison](</en/compare/nextjs-vs-nuxt-vs-sveltekit.html>).
+**Bottom line:** React is the safe default — biggest job market, richest ecosystem, and Next.js makes it full-stack. Vue is the productivity pick for solo developers. Angular for enterprise. Svelte if you want the future today. See also: [Next.js vs Nuxt vs SvelteKit comparison](</en/compare/nextjs-vs-nuxt-vs-sveltekit.html>). Still unsure? Try our [Framework Decision Wizard](</tools/framework-decision-wizard.html>) for a personalized recommendation.

@@ -48,3 +48,7 @@ GoFullPage| 全页截图| 滚动截取整个网页为 PNG，支持长图
   * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
   * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/tools/project-management-tools.html>)
   * [10 个程序员必听的播客：学技术、追趋势、听故事](<https://dingjiu1989-hue.github.io/tools/dev-podcasts.html>)
+
+
+
+**See also:** [2026 年 10 款必装终端工具：让你的命令行效率翻倍](</tools/terminal-tools-2026.html>), [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](</tools/project-management-tools.html>), [10 个程序员必听的播客：学技术、追趋势、听故事](</tools/dev-podcasts.html>).

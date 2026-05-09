@@ -64,3 +64,7 @@ Cohere| 每月 1000 次免费| 文本生成和嵌入
   * [10 个你每天都会用到的免费在线工具网站](<https://dingjiu1989-hue.github.io/tools/online-tools-2026.html>)
   * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
   * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/tools/project-management-tools.html>)
+
+
+
+**See also:** [REST API 设计最佳实践：写出让人愿意用的接口](</tech/rest-api-best-practices.html>), [AI 自动化工作流实战：让 AI 替你干重复活](</ai/ai-automation-workflow.html>), [OpenAI API 入门：用 10 行代码调用 GPT](</ai/openai-api-intro.html>).

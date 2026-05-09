@@ -76,3 +76,7 @@ url: https://dingjiu1989-hue.github.io/tech/git-cheatsheet.html
   * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/tech/git-advanced.html>)
   * [Linux 命令行入门：30 个最常用的命令](<https://dingjiu1989-hue.github.io/tech/linux-commands.html>)
   * [单元测试入门：从零到写出第一个可维护的测试](<https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html>)
+
+
+
+**See also:** [VS Code 十大必备插件：让编码效率翻倍](</tech/vscode-extensions.html>), [10 款开发者必备的命令行工具（2026 版）](</tools/cli-tools-collection.html>), [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](</tech/git-advanced.html>).

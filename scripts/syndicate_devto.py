@@ -29,6 +29,9 @@ if not API_KEY:
     print("Get your key at: https://dev.to/settings/extensions")
     sys.exit(1)
 
+# SSL compat fix for macOS LibreSSL (must be before urllib)
+import _ssl_compat  # noqa
+
 # dev.to API
 import urllib.request
 import urllib.error

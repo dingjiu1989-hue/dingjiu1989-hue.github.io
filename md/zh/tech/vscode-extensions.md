@@ -49,3 +49,7 @@ VS Code 是目前最流行的代码编辑器没有之一。装对这 10 个插�
   * [macOS 效率工具推荐合集](<https://dingjiu1989-hue.github.io/tech/macos-tools.html>)
   * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/tech/git-advanced.html>)
   * [单元测试入门：从零到写出第一个可维护的测试](<https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html>)
+
+
+
+**See also:** [Git 常用命令速查表](</tech/git-cheatsheet.html>), [10 款开发者必备的命令行工具（2026 版）](</tools/cli-tools-collection.html>), [VS Code vs JetBrains vs Cursor：2026 年代码编辑器终极对比](</tools/editor-comparison-2026.html>).

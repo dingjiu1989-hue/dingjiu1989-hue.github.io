@@ -46,3 +46,5 @@ Small team, already use 1Password| 1Password CLI| No new tool, works with existi
 Open-source project with zero budget| Infisical (self-hosted)| Full-featured OSS, Docker deploy, free forever  
   
 **Bottom line:** If you're starting fresh in 2026, pick **Infisical**. It hits the sweet spot: developer-friendly, open-source option, automatic rotation, and a free tier generous enough for most teams. If you're at enterprise scale with compliance requirements, Vault is the mature standard. If everything you do is in git already, SOPS is the beautiful simple thing. And for heaven's sake, stop putting secrets in `.env` files that 7 people have copies of on their laptops.
+
+**See also:** [Best Log Management Tools 2026: Datadog vs Grafana Loki vs Better Stack vs Axiom](</en/tools/best-log-management-tools.html>), [Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More](</en/tools/best-free-dev-tools-2026.html>), [Best Headless CMS Platforms 2026: Strapi vs Sanity vs Contentful vs Payload](</en/tools/best-headless-cms-platforms.html>).

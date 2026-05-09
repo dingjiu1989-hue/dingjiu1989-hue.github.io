@@ -8,8 +8,8 @@ url: https://dingjiu1989-hue.github.io/en/tech/typescript-advanced-patterns.html
 
 # Advanced TypeScript Patterns: Generics, Mapped Types, and Template Literals
 
-TypeScript's type system is a programming language in its own right. Once you go beyond basic annotations, you can encode invariants into types that make entire categories of bugs impossible. Here are the advanced patterns that level up your TypeScript in 2026.  
-  
+TypeScript's type system is a programming language in its own right. Once you go beyond basic annotations, you can encode invariants into types that make entire categories of bugs impossible. Here are the advanced patterns that level up your TypeScript in 2026.
+
 ## 1\. Conditional Types
 
 Conditional types select types based on a condition — like a ternary operator at the type level.
@@ -131,4 +131,4 @@ infer| Extract embedded types
 Branded Types| Distinguish same-shape types semantically  
 Discriminated Unions| Exhaustive state modeling (async, forms)  
   
-**Bottom line:** Advanced TypeScript patterns let you catch bugs at compile time instead of runtime. Discriminated unions and branded types alone will eliminate entire categories of bugs. See also: [TypeScript ORM comparison](</en/compare/prisma-vs-drizzle-vs-typeorm.html>) and [tRPC for end-to-end types](</en/compare/trpc-vs-graphql-vs-rest.html>).
+**Bottom line:** Advanced TypeScript patterns let you catch bugs at compile time instead of runtime. Discriminated unions and branded types alone will eliminate entire categories of bugs. See also: [TypeScript ORM comparison](</en/compare/prisma-vs-drizzle-vs-typeorm.html>) and [tRPC for end-to-end types](</en/compare/trpc-vs-graphql-vs-rest.html>). Try our free [JSON to TypeScript converter](</tools/json-to-typescript.html>).

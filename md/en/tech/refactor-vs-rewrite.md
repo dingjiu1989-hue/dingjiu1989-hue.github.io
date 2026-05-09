@@ -86,3 +86,5 @@ Most situations call for neither pure refactor nor pure rewrite, but a combinati
 
 
 **Bottom line:** Refactoring is the default right answer in 80% of cases. Rewrites win when the technology is truly obsolete or the system is small enough to replace quickly. The worst outcome isn't messy code — it's a rewrite that takes 18 months, misses critical features, and kills the product. Ship incrementally, measure everything, and let data drive the decision.
+
+**See also:** [Database Sharding Strategies: Partitioning, Consistent Hashing, and Real-World Patterns](</en/tech/database-sharding-strategies.html>), [Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each](</en/tech/testing-strategies-web-apps.html>), [AI-Powered Code Migration Guide: Framework Upgrades, Language Transitions, and Refactoring](</en/ai/ai-powered-code-migration.html>).

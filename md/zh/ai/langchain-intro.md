@@ -112,3 +112,7 @@ LangChain 的五个核心组件你需要了解：
   * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
   * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
   * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/ai/ai-art-monetization.html>)
+
+
+
+**See also:** [AI Agent 开发入门 2026：从原理到第一个智能体](</ai/ai-agent-development-2026.html>), [零代码搭建 AI 聊天机器人：客服、知识库、个人助手](</ai/no-code-ai-chatbot.html>), [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</ai/ai-coding-tools-comparison-2026.html>).

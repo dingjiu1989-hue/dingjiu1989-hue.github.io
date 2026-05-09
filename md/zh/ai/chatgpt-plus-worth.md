@@ -57,3 +57,7 @@ Operator (AI Agent)| ❌| 有限| ✅ 完整
   * [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](<https://dingjiu1989-hue.github.io/ai/claude-vs-chatgpt.html>)
   * [ChatGPT 提示词工程入门：从新手到高手](<https://dingjiu1989-hue.github.io/ai/prompt-engineering.html>)
   * [如何用 AI 写高质量原创文章](<https://dingjiu1989-hue.github.io/ai/ai-writing.html>)
+
+
+
+**See also:** [ChatGPT 提示词工程入门：从新手到高手](</ai/prompt-engineering.html>), [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](</ai/claude-vs-chatgpt.html>), [AI 自动化工作流实战：让 AI 替你干重复活](</ai/ai-automation-workflow.html>).

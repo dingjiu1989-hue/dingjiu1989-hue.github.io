@@ -43,3 +43,7 @@ AI 能力| Copilot 扩展| AI Assistant（内置）| 内置深度集成
   * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/tools/project-management-tools.html>)
   * [2026 年最佳密码管理器对比：LastPass vs 1Password vs Bitwarden](<https://dingjiu1989-hue.github.io/tools/password-manager-comparison.html>)
   * [VS Code 十大必备插件：让编码效率翻倍](<https://dingjiu1989-hue.github.io/tech/vscode-extensions.html>)
+
+
+
+**See also:** [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</ai/ai-coding-tools-comparison-2026.html>), [用 AI 辅助编程：从零到生产力](</ai/ai-coding.html>), [VS Code 十大必备插件：让编码效率翻倍](</tech/vscode-extensions.html>).

@@ -129,3 +129,7 @@ AI 时代的副业逻辑变了：**以前你需要成为专家才能赚钱，现
   * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
   * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)
   * [数字产品创作指南：Notion 模板、Ebook、设计素材怎么做](<https://dingjiu1989-hue.github.io/sidehustle/digital-products-guide.html>)
+
+
+
+**See also:** [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</sidehustle/affiliate-marketing.html>), [跨境电商入门指南：从 0 到第一单的全流程](</sidehustle/cross-border-ecommerce.html>), [独立开发者出海指南：从产品 Idea 到稳定变现](</sidehustle/indie-dev-guide.html>).

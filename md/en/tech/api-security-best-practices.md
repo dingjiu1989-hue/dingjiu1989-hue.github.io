@@ -142,3 +142,5 @@ Logging| Auth/authZ failures logged| Anomaly detection alerts
 Headers| CSP, X-Content-Type-Options| Permissions-Policy  
   
 Security is not a feature you add — it's a property every endpoint must have. Start with the checklist above. Implement one item per sprint until they're all covered. The time to think about API security is before the breach, not after.
+
+**See also:** [REST API Best Practices: The Complete Guide for 2026](</en/tech/rest-api-best-practices.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys](</en/tech/authentication-best-practices-2026.html>).

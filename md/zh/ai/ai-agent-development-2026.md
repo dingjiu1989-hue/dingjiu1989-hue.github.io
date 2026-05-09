@@ -176,3 +176,7 @@ AI Agent 不是一个新技术，而是一种新范式——从"人指挥 AI"变
   * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
   * [AI 自动化工作流实战：让 AI 替你干重复活](<https://dingjiu1989-hue.github.io/ai/ai-automation-workflow.html>)
   * [LangChain 入门：构建你的第一个 AI 应用](<https://dingjiu1989-hue.github.io/ai/langchain-intro.html>)
+
+
+
+**See also:** [LangChain 入门：构建你的第一个 AI 应用](</ai/langchain-intro.html>), [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</ai/ai-coding-tools-comparison-2026.html>), [MCP 协议入门：让 AI 模型安全访问你的工具和数据](</ai/mcp-protocol-guide.html>).

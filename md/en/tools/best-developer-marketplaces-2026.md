@@ -47,3 +47,5 @@ Maximize revenue, minimize fees| LemonSqueezy| 5% + 50¢ is the lowest all-in Mo
 Want to own customer relationship, custom checkout| Paddle or Polar| Paddle for MoR + custom checkout; Polar for Stripe + GitHub integration  
   
 **My recommendation:** Start with **LemonSqueezy** — lowest fees, best developer experience, full MoR (tax handled), and the API/webhook support means you can automate everything. If your product is open-source, add **Polar** as a second channel via GitHub. Graduate to **Paddle** once you're past $50K ARR and need B2B invoicing and dedicated support. Gumroad is fine for your first $1,000 in sales, but the 10% fee adds up fast — at $50K in annual sales, that's $2,500 more in fees vs LemonSqueezy.
+
+**See also:** [How to Create and Sell Digital Products: A Developer's Complete Guide](</en/sidehustle/sell-digital-products.html>), [Selling Code Templates and UI Kits: A Developer's Guide to Template Income](</en/sidehustle/selling-code-templates.html>), [25 Best Open Source Alternatives to Popular SaaS Tools (2026)](</en/tools/best-open-source-saas-alternatives.html>).

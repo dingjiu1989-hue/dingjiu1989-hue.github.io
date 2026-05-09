@@ -46,3 +46,7 @@ url: https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html
   * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
   * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
   * [如何通过写技术博客赚钱：从 0 到月入 1000 美元](<https://dingjiu1989-hue.github.io/sidehustle/tech-blog-monetization.html>)
+
+
+
+**See also:** [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</sidehustle/affiliate-marketing.html>), [跨境电商入门指南：从 0 到第一单的全流程](</sidehustle/cross-border-ecommerce.html>), [独立开发者出海指南：从产品 Idea 到稳定变现](</sidehustle/indie-dev-guide.html>).

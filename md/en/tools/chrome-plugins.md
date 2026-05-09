@@ -47,3 +47,5 @@ Extension| What It Does
 ## The One Extension to Rule Them All
 
 If you only install one: **uBlock Origin**. It makes the web faster, cleaner, and safer. Everything else is optimization on top of that foundation.
+
+**See also:** [10 Must-Have VS Code Extensions to Double Your Productivity](</en/tech/vscode-extensions.html>), [Browser Extension Development 2026: From Idea to Chrome Web Store](</en/sidehustle/browser-extension-development.html>), [Docker in 30 Minutes: From Install to First Container](</en/tech/docker-quickstart.html>).

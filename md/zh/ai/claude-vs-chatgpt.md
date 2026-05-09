@@ -46,3 +46,7 @@ url: https://dingjiu1989-hue.github.io/ai/claude-vs-chatgpt.html
   * [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](<https://dingjiu1989-hue.github.io/ai/chatgpt-plus-worth.html>)
   * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
   * [ChatGPT 提示词工程入门：从新手到高手](<https://dingjiu1989-hue.github.io/ai/prompt-engineering.html>)
+
+
+
+**See also:** [ChatGPT 提示词工程入门：从新手到高手](</ai/prompt-engineering.html>), [AI 自动化工作流实战：让 AI 替你干重复活](</ai/ai-automation-workflow.html>), [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](</ai/chatgpt-plus-worth.html>).

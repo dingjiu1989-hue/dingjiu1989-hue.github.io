@@ -104,3 +104,7 @@ Landing Page 转化| > 5% 留邮箱| < 1%
   * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
   * [独立开发者出海指南：从产品 Idea 到稳定变现](<https://dingjiu1989-hue.github.io/sidehustle/indie-dev-guide.html>)
   * [数字产品创作指南：Notion 模板、Ebook、设计素材怎么做](<https://dingjiu1989-hue.github.io/sidehustle/digital-products-guide.html>)
+
+
+
+**See also:** [独立开发者出海指南：从产品 Idea 到稳定变现](</sidehustle/indie-dev-guide.html>), [AI 时代程序员的 5 个新副业机会（2026）](</sidehustle/ai-era-side-hustles.html>), [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</sidehustle/affiliate-marketing.html>).

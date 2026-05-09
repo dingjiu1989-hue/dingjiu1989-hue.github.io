@@ -70,3 +70,7 @@ AI 最适合探索性数据分析和常规报表生成。但以下场景还需�
   * [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](<https://dingjiu1989-hue.github.io/ai/claude-vs-chatgpt.html>)
   * [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](<https://dingjiu1989-hue.github.io/ai/chatgpt-plus-worth.html>)
   * [ChatGPT 提示词工程入门：从新手到高手](<https://dingjiu1989-hue.github.io/ai/prompt-engineering.html>)
+
+
+
+**See also:** [ChatGPT 提示词工程入门：从新手到高手](</ai/prompt-engineering.html>), [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](</ai/claude-vs-chatgpt.html>), [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](</ai/chatgpt-plus-worth.html>).

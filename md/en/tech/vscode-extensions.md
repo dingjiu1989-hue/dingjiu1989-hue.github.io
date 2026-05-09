@@ -53,3 +53,5 @@ Fast switching between projects. Save your favorite repos, assign tags, and jump
 ## Bonus: Color Theme
 
 Pick one good theme and stick with it. **Catppuccin** , **Dracula** , and **One Dark Pro** are community favorites with excellent language coverage. A theme you enjoy looking at for 8 hours a day is worth the 30 seconds to install.
+
+**See also:** [15 Essential Chrome Extensions for Developers (2026)](</en/tools/chrome-plugins.html>), [Docker in 30 Minutes: From Install to First Container](</en/tech/docker-quickstart.html>), [Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development](</en/tech/git-workflows-team-guide.html>).

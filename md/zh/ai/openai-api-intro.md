@@ -117,3 +117,7 @@ url: https://dingjiu1989-hue.github.io/ai/openai-api-intro.html
   * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
   * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
   * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/ai/ai-art-monetization.html>)
+
+
+
+**See also:** [Python 入门教程：从零到写出第一个程序](</tech/python-tutorial.html>), [30 个免费又好用的 API 合集：开发者必备](</tools/free-api-collection.html>), [REST API 设计最佳实践：写出让人愿意用的接口](</tech/rest-api-best-practices.html>).

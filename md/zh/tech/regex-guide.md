@@ -75,3 +75,7 @@ url: https://dingjiu1989-hue.github.io/tech/regex-guide.html
   * [Linux 命令行入门：30 个最常用的命令](<https://dingjiu1989-hue.github.io/tech/linux-commands.html>)
   * [Python 入门教程：从零到写出第一个程序](<https://dingjiu1989-hue.github.io/tech/python-tutorial.html>)
   * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/tech/git-advanced.html>)
+
+
+
+**See also:** [Python 入门教程：从零到写出第一个程序](</tech/python-tutorial.html>), [单元测试入门：从零到写出第一个可维护的测试](</tech/unit-testing-guide.html>), [OpenAI API 入门：用 10 行代码调用 GPT](</ai/openai-api-intro.html>).

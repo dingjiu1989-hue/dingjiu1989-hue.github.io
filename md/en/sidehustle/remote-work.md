@@ -50,3 +50,7 @@ Site| Focus| Frequency
   2. **Build a portfolio piece, not a portfolio.** One impressive project with a live demo and a case study beats ten todo apps.
   3. **Start with smaller projects.** Get 3-4 five-star reviews on Upwork before going after larger contracts. Social proof compounds.
   4. **Don't compete on price.** Clients who pay the least are the most demanding. Set your rate at a level that filters out bad clients.
+
+
+
+**See also:** [Best Free Tier Platforms for Developer Projects 2026: The Ultimate List](</en/tools/best-free-tier-platforms.html>), [Best Headless CMS Platforms 2026: Strapi vs Sanity vs Contentful vs Payload](</en/tools/best-headless-cms-platforms.html>), [How to Create and Sell Digital Products: A Developer's Complete Guide](</en/sidehustle/sell-digital-products.html>).

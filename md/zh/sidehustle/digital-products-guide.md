@@ -53,3 +53,7 @@ Notion 模板| $5-$50| 低| 项目管理、日记、知识库模板
   * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
   * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
   * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)
+
+
+
+**See also:** [Notion 完全使用指南：从入门到精通](</tools/notion-complete-guide.html>), [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](</tools/project-management-tools.html>), [白板/笔记/思维导图工具对比](</tools/note-apps.html>).

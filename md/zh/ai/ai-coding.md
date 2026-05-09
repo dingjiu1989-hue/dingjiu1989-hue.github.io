@@ -76,3 +76,7 @@ AI 生成的代码表面看起来可能很完美，但以下四个问题几乎�
   * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
   * [GitHub Copilot 完全使用指南：从安装到高效协作](<https://dingjiu1989-hue.github.io/tech/github-copilot-guide.html>)
   * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
+
+
+
+**See also:** [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</ai/ai-coding-tools-comparison-2026.html>), [GitHub Copilot 完全使用指南：从安装到高效协作](</tech/github-copilot-guide.html>), [VS Code vs JetBrains vs Cursor：2026 年代码编辑器终极对比](</tools/editor-comparison-2026.html>).

@@ -58,3 +58,7 @@ url: https://dingjiu1989-hue.github.io/tools/cli-tools-collection.html
   * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
   * [2026 年最佳屏幕录制和视频剪辑工具推荐](<https://dingjiu1989-hue.github.io/tools/screen-recording-tools.html>)
   * [10 个你每天都会用到的免费在线工具网站](<https://dingjiu1989-hue.github.io/tools/online-tools-2026.html>)
+
+
+
+**See also:** [Git 常用命令速查表](</tech/git-cheatsheet.html>), [VS Code 十大必备插件：让编码效率翻倍](</tech/vscode-extensions.html>), [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](</tech/git-advanced.html>).

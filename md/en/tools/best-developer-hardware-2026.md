@@ -56,3 +56,5 @@ Budget| Keyboard| Monitor| Chair
 ~$5,000 (endgame)| HHKB Type-S + Moonlander ($665)| Apple Studio Display ($1,599)| Herman Miller Embody ($1,900) + Uplift V2 ($900)  
   
 **The most impactful upgrade under $100:** A good mechanical keyboard (Keychron V1, $84). Better than any monitor upgrade for daily comfort. **The most impactful upgrade period:** A used premium chair. Your 45-year-old back will thank your 25-year-old self.
+
+**See also:** [Best Developer YouTube Channels 2026: 20 Channels That Actually Teach You Something](</en/tools/best-dev-youtube-channels.html>), [10 Developer Side Hustles That Actually Make Money in 2026](</en/sidehustle/developer-side-hustles-2026.html>), [OAuth 2.0 and OIDC Implementation Guide 2026: Complete Developer Walkthrough](</en/tech/oauth2-oidc-implementation.html>).

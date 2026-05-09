@@ -73,3 +73,7 @@ n8n| 开源自部署| 无限（自托管）| 开发者，需要定制
   * [用 AI 做 PPT：从 3 小时到 10 分钟](<https://dingjiu1989-hue.github.io/ai/ai-ppt-presentation.html>)
   * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
   * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
+
+
+
+**See also:** [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](</ai/claude-vs-chatgpt.html>), [ChatGPT 提示词工程入门：从新手到高手](</ai/prompt-engineering.html>), [30 个免费又好用的 API 合集：开发者必备](</tools/free-api-collection.html>).
