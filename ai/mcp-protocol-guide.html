@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="ai" data-exclude="mcp-protocol-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <title>MCP 协议入门：让 AI 模型安全访问你的工具和数据 — AI自习室</title>
+    <meta name="description" content="Model Context Protocol (MCP) 是 Anthropic 推出的开放协议，让 AI 助手通过标准化接口连接外部工具和数据源。本文从零讲解 MCP 的核心概念、服务端开发、客户端集成，以及在实际项目中的应用。">
+    <meta property="og:title" content="MCP 协议入门：让 AI 模型安全访问你的工具和数据">
+    <meta property="og:description" content="Model Context Protocol 开放协议详解，从核心概念到实战开发，让你的 AI 助手真正接入外部世界。">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MCP 协议入门：让 AI 模型安全访问你的工具和数据">
+    <meta name="twitter:description" content="Model Context Protocol 开放协议详解，从核心概念到实战开发。">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "MCP 协议入门：让 AI 模型安全访问你的工具和数据",
+      "description": "Model Context Protocol (MCP) 是 Anthropic 推出的开放协议，让 AI 助手通过标准化接口连接外部工具和数据源。本文从零讲解 MCP 的核心概念、服务端开发、客户端集成。",
+      "datePublished": "2026-05-09",
+      "dateModified": "2026-05-09",
+      "author": {"@type": "Person", "name": "AI自习室"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://dingjiu1989-hue.github.io/"},
+        {"@type": "ListItem", "position": 2, "name": "AI 教程", "item": "https://dingjiu1989-hue.github.io/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "MCP 协议入门：让 AI 模型安全访问你的工具和数据"}
+      ]
+    }
+    </script>
+  <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/">首页</a> › <a href="/ai/">AI 教程</a> › MCP 协议入门：让 AI 模型安全访问你的工具和数据
+    </div>
+
+    <article>
+      <div class="article-tags">
+        <span class="tag-cat">AI 教程</span>
+      </div>
+
+      <h1 class="article-title">MCP 协议入门：让 AI 模型安全访问你的工具和数据</h1>
+      <div class="article-meta">发布于 2026-05-09 · 阅读 356 · 0 回复</div>
+
+      <div class="article-body">
+        <p>如果你用过 Claude Code 或者 Cursor，你可能注意到这些工具能<strong>直接读取你的文件系统、执行终端命令、查询数据库</strong>。这背后是一套标准化的协议在起作用——这就是 <strong>MCP（Model Context Protocol，模型上下文协议）</strong>。</p>
+
+        <p>MCP 由 Anthropic 在 2024 年底推出，2025-2026 年迅速成为 AI 工具生态的主流标准。它的核心思想很简单：<strong>让 AI 模型通过统一的接口，安全地访问外部工具和数据源</strong>，就像 USB-C 接口统一了硬件连接一样。</p>
+
+        <h2>为什么需要 MCP？</h2>
+
+        <p>在 MCP 出现之前，每个 AI 应用都要自己实现工具调用（Function Calling）。如果你想接 GitHub API，写一套；接数据库，又写一套；接文件系统，再写一套。这带来三个问题：</p>
+
+        <ul>
+          <li><strong>重复造轮子</strong>：每个应用都要实现自己的工具集成层</li>
+          <li><strong>安全风险</strong>：各做各的权限控制，容易出漏洞</li>
+          <li><strong>生态割裂</strong>：为 Claude 写的工具不能在 Cursor 里用</li>
+        </ul>
+
+        <p>MCP 解决了这三个问题。它定义了一套<strong>客户端-服务器</strong>架构：</p>
+
+        <ul>
+          <li><strong>MCP Server</strong>：暴露工具和数据的服务端。比如一个 GitHub Server 提供"列出仓库""创建 Issue"等工具</li>
+          <li><strong>MCP Client</strong>：AI 应用（Claude Desktop、Cursor、VS Code 插件等）作为客户端，发现并调用 Server 提供的工具</li>
+          <li><strong>MCP 协议</strong>：客户端和服务器之间通过 JSON-RPC 2.0 通信</li>
+        </ul>
+
+        <h2>MCP 的核心概念</h2>
+
+        <p>MCP 定义了三种核心原语（Primitives）：</p>
+
+        <h3>1. Tools（工具）</h3>
+        <p>让 AI 模型执行具体操作。比如：搜索网页、发送邮件、创建文件、查询数据库。每个 Tool 有名称、描述和参数 Schema（JSON Schema 格式）。AI 模型通过 Function Calling 选择调用哪个 Tool。</p>
+
+        <h3>2. Resources（资源）</h3>
+        <p>暴露数据给 AI 模型读取。比如：文件内容、数据库记录、API 响应。Resources 是只读的，模型可以读取但不能修改——这比直接给文件系统权限安全得多。</p>
+
+        <h3>3. Prompts（提示模板）</h3>
+        <p>预定义的提示词模板。Server 可以提供特定领域的 Prompt 模板，Client 可以直接使用。比如一个 SQL Server 可以提供"分析这张表的结构"的 Prompt 模板。</p>
+
+        <h2>动手：构建一个 MCP Server</h2>
+
+        <p>以 Python 为例，用官方 SDK 创建一个天气查询 Server：</p>
+
+        <pre><code># weather_server.py
+from mcp.server import Server, NotificationOptions
+from mcp.server.models import InitializationCapabilities
+import mcp.server.stdio
+import mcp.types as types
+import httpx
+
+server = Server("weather-server")
+
+@server.list_tools()
+async def handle_list_tools() -> list[types.Tool]:
+    return [
+        types.Tool(
+            name="get_weather",
+            description="查询指定城市的当前天气",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "city": {
+                        "type": "string",
+                        "description": "城市名称，如 Beijing"
+                    }
+                },
+                "required": ["city"]
+            }
+        )
+    ]
+
+@server.call_tool()
+async def handle_call_tool(
+    name: str,
+    arguments: dict
+) -> list[types.TextContent]:
+    if name == "get_weather":
+        city = arguments["city"]
+        # 调用真实天气 API
+        async with httpx.AsyncClient() as client:
+            resp = await client.get(
+                f"https://api.weather.com/v1/{city}"
+            )
+            data = resp.json()
+        return [types.TextContent(
+            type="text",
+            text=f"{city} 当前温度 {data['temp']}°C，{data['desc']}"
+        )]
+    raise ValueError(f"Unknown tool: {name}")
+
+async def main():
+    async with mcp.server.stdio.stdio_server() as streams:
+        await server.run(
+            streams[0], streams[1],
+            InitializationCapabilities(
+                sampling={},
+            ),
+        )
+
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(main())</code></pre>
+
+        <h2>在 Claude Desktop 中配置 MCP Server</h2>
+
+        <p>创建好 Server 后，在 Claude Desktop 的配置文件中注册即可：</p>
+
+        <pre><code>// ~/Library/Application Support/Claude/claude_desktop_config.json
+{
+  "mcpServers": {
+    "weather": {
+      "command": "python3",
+      "args": ["/path/to/weather_server.py"]
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@anthropic/mcp-server-filesystem",
+        "/Users/me/Documents"
+      ]
+    }
+  }
+}</code></pre>
+
+        <p>配置完成后，重启 Claude Desktop，在对话中直接说"帮我查一下北京的天气"，Claude 就会自动调用你的 MCP Server。</p>
+
+        <h2>主流的 MCP Server 推荐</h2>
+
+        <p>社区已经有大量现成的 MCP Server，你不需要从零写：</p>
+
+        <table>
+          <tr><th>Server</th><th>功能</th><th>安装命令</th></tr>
+          <tr><td>Filesystem</td><td>安全的文件系统访问</td><td><code>npx @anthropic/mcp-server-filesystem</code></td></tr>
+          <tr><td>GitHub</td><td>仓库管理、Issue、PR</td><td><code>npx @anthropic/mcp-server-github</code></td></tr>
+          <tr><td>Postgres</td><td>数据库查询与 Schema 探索</td><td><code>npx @anthropic/mcp-server-postgres</code></td></tr>
+          <tr><td>Brave Search</td><td>网页搜索能力</td><td><code>npx @anthropic/mcp-server-brave-search</code></td></tr>
+          <tr><td>Puppeteer</td><td>浏览器自动化（截图、爬取）</td><td><code>npx @anthropic/mcp-server-puppeteer</code></td></tr>
+          <tr><td>Slack</td><td>消息发送与频道管理</td><td><code>npx @anthropic/mcp-server-slack</code></td></tr>
+        </table>
+
+        <h2>MCP 的安全模型</h2>
+
+        <p>MCP 的设计非常重视安全性：</p>
+
+        <ul>
+          <li><strong>用户同意原则</strong>：AI 调用工具前需要用户确认（可以在设置中调整）</li>
+          <li><strong>最小权限</strong>：每个 MCP Server 只暴露必要的工具，不是全部系统权限</li>
+          <li><strong>沙箱隔离</strong>：Server 运行在独立的进程中，单个 Server 崩溃不影响其他</li>
+          <li><strong>传输安全</strong>：支持 stdio（本地进程通信）和 HTTP+SSE（远程通信），远程通信建议走 HTTPS</li>
+        </ul>
+
+        <h2>MCP vs 传统 Function Calling</h2>
+
+        <table>
+          <tr><th>特性</th><th>MCP</th><th>传统 Function Calling</th></tr>
+          <tr><td>标准化</td><td>开放协议，跨模型、跨应用</td><td>各家 API 格式不同</td></tr>
+          <tr><td>复用性</td><td>写一次，到处用</td><td>每个应用单独集成</td></tr>
+          <tr><td>发现机制</td><td>Client 自动发现 Server 的工具列表</td><td>开发者硬编码函数定义</td></tr>
+          <tr><td>安全模型</td><td>内置用户确认 + 沙箱</td><td>依赖应用自行实现</td></tr>
+          <tr><td>生态</td><td>社区贡献 500+ Server，覆盖主流服务</td><td>各自为战</td></tr>
+        </table>
+
+        <h2>适用场景</h2>
+
+        <p>MCP 已经在这几个场景中证明了价值：</p>
+
+        <ul>
+          <li><strong>AI 编程助手</strong>：Claude Code 通过 MCP Server 访问文件系统、Git、包管理器，实现完整开发流程</li>
+          <li><strong>数据分析</strong>：AI 通过 MCP 连接数据库，直接写 SQL 查询并返回分析结果</li>
+          <li><strong>企业内部工具</strong>：将 Jira、Confluence、Slack 封装为 MCP Server，AI 助手统一接入</li>
+          <li><strong>个人自动化</strong>：通过 MCP 让 AI 管理日历、邮件、待办事项</li>
+        </ul>
+
+        <h2>总结</h2>
+
+        <p>MCP 正在成为 AI 工具生态的"USB-C 接口"。它的价值不在于技术有多复杂，而在于<strong>标准化带来的生态效应</strong>——一个人写的 MCP Server，所有人都能用。如果你在做 AI 应用开发，MCP 是 2026 年必须了解的基础设施。</p>
+
+        <p>下一步建议：安装 Claude Desktop 或支持 MCP 的客户端，从官方 Filesystem Server 开始体验，然后再尝试接入 GitHub 或数据库 Server。</p>
+      </div>
+    </article>
+
+    <section class="related"><div id="related-posts"></div></section>
+  </div>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>
