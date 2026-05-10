@@ -31,17 +31,43 @@ if not API_KEY:
     print("Get your key at: https://dev.to/settings/extensions")
     sys.exit(1)
 
-# SSL compat fix for macOS LibreSSL (must be before urllib)
-import _ssl_compat  # noqa
-
-# dev.to API
+import subprocess
 import urllib.request
 import urllib.error
 
 DEVTO_API = "https://dev.to/api"
 
+def _use_curl():
+    """Check if we should use curl (macOS LibreSSL workaround)."""
+    import ssl
+    return 'LibreSSL' in ssl.OPENSSL_VERSION
+
 def devto_request(method, path, data=None):
     url = f"{DEVTO_API}{path}"
+
+    if _use_curl():
+        # macOS LibreSSL can't talk to Fastly CDN — use curl instead
+        try:
+            args = ['curl', '-s', '--max-time', '30', '-X', method,
+                    '-H', f'api-key: {API_KEY}',
+                    '-H', 'Content-Type: application/json',
+                    '-H', 'User-Agent: AI-Study-Room-Syndicator/1.0']
+            if data:
+                args += ['-d', json.dumps(data)]
+            args.append(url)
+            result = subprocess.run(args, capture_output=True, text=True, timeout=35)
+            if result.returncode == 0 and result.stdout.strip():
+                parsed = json.loads(result.stdout)
+                if isinstance(parsed, dict) and 'error' in parsed:
+                    return parsed
+                return parsed
+            return None
+        except Exception as e:
+            print(f"  curl error: {e}")
+            return None
+
+    import urllib.request
+    import urllib.error
     body = json.dumps(data).encode("utf-8") if data else None
     req = urllib.request.Request(url, data=body, method=method)
     req.add_header("api-key", API_KEY)
