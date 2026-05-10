@@ -38,8 +38,11 @@ jobs:
           echo "$GSC_TOKEN" > data/gsc-token.json
           python3 scripts/track_crawlers.py
 
-      - name: Submit URLs to IndexNow (Bing/Yandex)
+      - name: Submit URLs to IndexNow (Bing/Yandex/Naver)
         run: python3 scripts/indexnow_submit.py diff
+
+      - name: Submit to additional search engines (Google, Internet Archive, Mojeek)
+        run: python3 scripts/submit_search_engines.py diff
 
       - name: Generate JSON Feeds
         run: python3 scripts/generate_json_feed.py
