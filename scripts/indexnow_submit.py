@@ -63,7 +63,11 @@ def submit_urls(urls, endpoint):
         resp = urlopen(req, timeout=30)
         return resp.status, resp.read().decode('utf-8')
     except URLError as e:
-        return getattr(e, 'code', 0), str(e.reason)
+        code = getattr(e, 'code', 0)
+        # IndexNow returns 202 Accepted — treat as success
+        if code == 202:
+            return 200, 'Accepted'
+        return code, str(e.reason)
 
 
 def main():
