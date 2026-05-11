@@ -1,0 +1,202 @@
+---
+title: "Next.js vs Remix vs Astro"
+description: "Compare Next.js, Remix, and Astro for modern web development — architecture, rendering strategies, data loading, and use cases."
+date: 2026-05-11
+board: compare
+url: https://dingjiu1989-hue.github.io/en/compare/nextjs-vs-remix.html
+---
+
+## Introduction
+
+The modern web framework landscape offers three compelling options built on React (and increasingly other UI libraries): Next.js, Remix, and Astro. Each takes a fundamentally different approach to rendering, data loading, and the server-client boundary. This comparison helps you choose the right foundation for your next project.
+
+## Next.js
+
+Next.js, developed by Vercel, is the most popular React framework and has evolved significantly with the introduction of the App Router and React Server Components.
+
+**Architecture:**
+- App Router uses a file-system based routing convention
+- Server Components run exclusively on the server, reducing client-side JavaScript
+- Client Components are explicitly marked with `"use client"`
+- Server Actions handle form submissions and mutations
+- Multiple rendering modes: Static (SSG), Server-side (SSR), Incremental Static Regeneration (ISR), and Streaming
+
+**Data loading in Next.js:**
+
+```typescript
+// App Router: data fetching in Server Components
+async function ProductPage({ params }: { params: { id: string } }) {
+  const product = await db.product.findUnique({
+    where: { id: params.id },
+    include: { reviews: true }
+  });
+
+  return (
+    <div>
+      <h1 className="text-2xl font-bold">{product.name}</h1>
+      <p>{product.description}</p>
+      <ClientReviewForm productId={product.id} />
+      <ReviewList reviews={product.reviews} />
+    </div>
+  );
+}
+```
+
+**Strengths:**
+- Strongest image optimization pipeline
+- Excellent performance optimizations out of the box
+- Vercel's deployment platform integration
+- Largest community and most learning resources
+
+**Weaknesses:**
+- Framework is coupled to Vercel for some features (ISR, image optimization)
+- App Router learning curve is substantial
+- Routing flexibility constraints compared to Remix
+- Global `layout.tsx` caching can be confusing
+
+## Remix
+
+Remix (now maintained by Shopify) focuses on web fundamentals — using the platform's request/response model rather than abstracting it away.
+
+**Architecture:**
+- Nested routes with parallel data loading
+- Loader and Action pattern mirrors web standards (GET/POST)
+- Progressive enhancement is a core principle
+- Form handling with native HTML forms
+- Streaming via deferred data
+
+**Data loading in Remix:**
+
+```typescript
+// Remix loader — runs on the server, parallel for all matched routes
+export async function loader({ params }: LoaderFunctionArgs) {
+  const product = await db.product.findUnique({
+    where: { id: params.id },
+    include: { reviews: true }
+  });
+
+  if (!product) {
+    throw new Response("Not Found", { status: 404 });
+  }
+
+  return defer({
+    product,
+    reviews: product.reviews,
+    analytics: fetchAnalytics(product.id) // Will stream in
+  });
+}
+
+export default function Product() {
+  const { product, reviews, analytics } = useLoaderData<typeof loader>();
+
+  return (
+    <div>
+      <h1>{product.name}</h1>
+      <p>{product.description}</p>
+      <ReviewForm />
+      <ReviewList reviews={reviews} />
+      <Suspense fallback={<div>Loading analytics...</div>}>
+        <Await resolve={analytics}>
+          {(data) => <AnalyticsChart data={data} />}
+        </Await>
+      </Suspense>
+    </div>
+  );
+}
+```
+
+**Strengths:**
+- Most web-standard approach of the three
+- Excellent progressive enhancement and forms
+- Mutations are intuitive (HTML form submissions)
+- Error boundaries at every route level
+
+**Weaknesses:**
+- Smaller ecosystem than Next.js
+- Shopify's stewardship raises questions about long-term direction
+- Less tooling and community content
+- Image optimization requires manual configuration
+
+## Astro
+
+Astro takes a content-first approach — it's a "multi-page application" framework that minimizes JavaScript by default.
+
+**Architecture:**
+- Zero JS by default — only ship what's needed
+- Island architecture for interactive components
+- Multi-framework support (React, Vue, Svelte, Solid components in one project)
+- Content collections for Markdown/MDX
+- Static-first with server endpoints for dynamic data
+
+**Data loading in Astro:**
+
+```astro
+---
+// Astro component — all code runs at build time (or on request for SSR)
+import Layout from "../layouts/Layout.astro";
+import ProductCard from "../components/ProductCard";
+
+const products = await db.product.findMany({
+  where: { published: true },
+  orderBy: { createdAt: "desc" }
+});
+
+const pageTitle = "Our Products";
+---
+<Layout title={pageTitle}>
+  <h1>{pageTitle}</h1>
+  <div class="grid grid-cols-3 gap-4">
+    {products.map(product => (
+      <ProductCard product={product} />
+    ))}
+  </div>
+</Layout>
+```
+
+**Strengths:**
+- Smallest client-side JavaScript by default
+- Content collections provide excellent MDX/Markdown authoring
+- Island architecture is performant and flexible
+- Best choice for content-heavy sites
+
+**Weaknesses:**
+- Not ideal for highly dynamic, app-like experiences
+- Smaller ecosystem and community
+- View transitions and SPA-like navigation are less mature
+- Interactive islands add complexity compared to SSR-only approaches
+
+## Comparison Table
+
+| Aspect | Next.js | Remix | Astro |
+|--------|---------|-------|-------|
+| Rendering | SSG/SSR/ISR/Streaming | SSR + Streaming | SSG (SSR optional) |
+| Data loading | Server Components | Loaders + Actions | Top-level await |
+| Client JS | Minimal with RSC | Minimal by design | Zero by default |
+| Form handling | Server Actions | Native HTML forms | Via islands |
+| Image optimization | Built-in (via Vercel) | Manual | Built-in (Sharp) |
+| Learning curve | Steep | Moderate | Gentle |
+| Best for | Full-stack apps | Web apps, e-commerce | Content sites, blogs |
+
+## When to Choose What
+
+**Choose Next.js when:**
+- You need maximum flexibility in rendering strategies
+- You want the largest ecosystem and community
+- You're deploying on Vercel
+- You need advanced image optimization and ISR
+
+**Choose Remix when:**
+- You want a web-standards-first approach
+- Your app has complex form and mutation workflows
+- You value progressive enhancement and accessibility
+- You need nested layouts with parallel data loading
+
+**Choose Astro when:**
+- You're building a content-focused site (blog, docs, marketing)
+- You want minimal JavaScript for maximum performance
+- You're using multiple UI frameworks in one project
+- You need excellent Markdown/MDX authoring experience
+
+## Conclusion
+
+All three frameworks are excellent choices that prioritize performance and developer experience. Next.js offers the most features and the largest ecosystem. Remix provides the most web-standards-aligned approach with excellent form handling. Astro delivers the best performance for content-driven sites. The right choice depends on whether you're building an application, a content site, or something in between.

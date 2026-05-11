@@ -1,0 +1,121 @@
+---
+title: "LLM Evaluation Metrics"
+description: "A comprehensive overview of LLM evaluation metrics including accuracy, perplexity, BLEU, ROUGE, and human evaluation frameworks."
+date: 2026-05-11
+board: ai
+url: https://dingjiu1989-hue.github.io/en/ai/llm-evaluation-metrics.html
+---
+
+## Introduction
+
+Evaluating large language models is fundamentally different from evaluating traditional machine learning models. LLMs produce open-ended outputs, have no single ground truth measure, and can fail in ways that accuracy cannot capture. This guide covers the evaluation metrics and frameworks used to measure LLM performance across different tasks.
+
+## Classification Metrics
+
+For classification tasks — sentiment analysis, intent detection, topic classification — standard ML metrics apply:
+
+- **Accuracy**: Overall correct predictions, but misleading for imbalanced datasets
+- **Precision**: Of items flagged as positive, how many are correct?
+- **Recall**: Of actual positive items, how many were caught?
+- **F1 Score**: Harmonic mean of precision and recall
+- **Confusion Matrix**: Shows which classes are commonly confused
+
+Example calculation for an intent classification task:
+
+```
+True Positives: 850 | False Positives: 50
+False Negatives: 100 | True Negatives: 4000
+Precision = 850/(850+50) = 0.944
+Recall = 850/(850+100) = 0.895
+F1 = 2 * (0.944*0.895)/(0.944+0.895) = 0.919
+```
+
+## Generation Metrics
+
+### ROUGE (Recall-Oriented Understudy for Gisting Evaluation)
+
+ROUGE measures the overlap between generated text and reference text, primarily used for summarization:
+
+- **ROUGE-N**: Overlap of n-grams (ROUGE-1 for unigrams, ROUGE-2 for bigrams)
+- **ROUGE-L**: Longest common subsequence
+- **ROUGE-Skip-Bigram**: Bigrams that can have gaps
+
+ROUGE correlates reasonably with human judgment for extractive summarization but performs poorly for abstractive summaries where wording differs.
+
+### BLEU (Bilingual Evaluation Understudy)
+
+BLEU measures precision of n-gram overlap, primarily for translation:
+
+- Scores range from 0 to 1 (or 0-100)
+- Higher-gram matches are weighted more heavily
+- Includes a brevity penalty to prevent short outputs
+
+BLEU has known limitations: it favors literal translations over fluent ones and correlates poorly with human judgment for creative text.
+
+### Perplexity
+
+Perplexity measures how well the model predicts a sequence — lower is better. It is calculated as the exponential of the average negative log-likelihood:
+
+```
+Perplexity = exp(-1/N * Σ log P(token_i | context))
+```
+
+Perplexity is useful for comparing models on the same dataset but cannot compare across datasets. A general model will have higher perplexity than a domain-specific one on the same domain text.
+
+## Task-Specific Benchmarks
+
+Standardized benchmarks enable model-to-model comparison:
+
+- **MMLU** (Massive Multitask Language Understanding): 57 subjects from high school to professional level
+- **HumanEval**: Code generation correctness measured by functional tests
+- **GSM8K**: Grade school math word problems
+- **HellaSwag**: Commonsense reasoning
+- **TruthfulQA**: Measuring truthfulness and hallucination
+- **BIG-Bench**: 204 diverse tasks
+
+When reporting benchmark scores, always include the exact evaluation setup (few-shot count, prompt template, decoding parameters) since these significantly affect results.
+
+## LLM-as-Judge Evaluation
+
+Using an LLM to evaluate another LLM's outputs has become the standard approach for open-ended tasks:
+
+```python
+judge_prompt = """
+You are evaluating a response for quality. Rate the response on:
+1. Helpfulness (1-5): Does it address the user's question?
+2. Accuracy (1-5): Is the information factually correct?
+3. Harmlessness (1-5): Does it avoid harmful content?
+4. Completeness (1-5): Does it cover all aspects of the question?
+
+User query: {query}
+Response to evaluate: {response}
+
+Output a JSON object with scores and brief reasoning.
+"""
+```
+
+**GPT-4 and Claude-3.5 Opus** are the most commonly used judge models. Agreement between LLM judges and human raters ranges from 70-85% for most tasks, making this approach cost-effective and scalable.
+
+## Human Evaluation
+
+Despite automation advances, human evaluation remains the gold standard:
+
+- **Side-by-side comparison**: Raters choose the better output from two models (A/B testing)
+- **Likert scale**: Raters score individual outputs on defined criteria
+- **Chat evaluation**: Raters interact with models in free-form conversation
+- **Error annotation**: Raters categorize specific failure modes
+
+A good annotation rubric defines each score level with concrete examples. For a 5-point helpfulness scale, each point should have anchor examples.
+
+## Evaluation in Production
+
+Production evaluation goes beyond benchmarks:
+
+- **A/B testing**: Compare model versions on live traffic with statistical significance
+- **User feedback signals**: Thumbs up/down, retention, engagement metrics
+- **Outcome metrics**: Task completion rate, time-to-resolution, user satisfaction surveys
+- **Monitoring dashboards**: Track response length, latency, refusal rates, and toxicity scores over time
+
+## Conclusion
+
+No single metric captures LLM quality. Effective evaluation combines automated metrics for regression testing, LLM-as-judge for scalable quality assessment, task-specific benchmarks for capability tracking, and human evaluation for final quality assurance. Build an evaluation pipeline that includes all these levels and update it as your use case evolves.
