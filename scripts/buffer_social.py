@@ -58,7 +58,7 @@ def create_post(text, url, mode='addToQueue'):
     post_text = f'{text}\n{url}'
 
     mutation = '''
-    mutation CreatePost($text: String!, $channelId: String!, $mode: PostMode!) {
+    mutation CreatePost($text: String!, $channelId: String!, $mode: ShareMode!) {
       createPost(input: {
         text: $text,
         channelId: $channelId,
