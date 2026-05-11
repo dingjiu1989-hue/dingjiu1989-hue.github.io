@@ -53,6 +53,9 @@ jobs:
       - name: Generate AI-friendly artifacts
         run: python3 scripts/gen_ai_friendly.py
 
+      - name: Generate README
+        run: python3 scripts/gen_readme.py
+
       - name: Build cross-platform identity (sameAs)
         env:
           DEVTO_KEY: ${{ secrets.DEVTO_KEY }}
