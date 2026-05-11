@@ -68,6 +68,11 @@ jobs:
           BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
         run: python3 scripts/buffer_social.py new || true
 
+      - name: Syndicate to WordPress.com
+        env:
+          WP_ACCESS_TOKEN: ${{ secrets.WP_ACCESS_TOKEN }}
+        run: python3 scripts/syndicate_wordpress.py || true
+
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"

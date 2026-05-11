@@ -45,10 +45,15 @@ jobs:
           BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
         run: python3 scripts/buffer_social.py new || true
 
+      - name: Syndicate to WordPress.com
+        env:
+          WP_ACCESS_TOKEN: ${{ secrets.WP_ACCESS_TOKEN }}
+        run: python3 scripts/syndicate_wordpress.py || true
+
       - name: Commit tracking files if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          git add data/hashnode-published.json data/sameas-urls.json data/buffer-shared.json
+          git add data/hashnode-published.json data/sameas-urls.json data/buffer-shared.json data/wp-published.json
           git diff --staged --quiet || (git commit -m "chore: update syndication tracking" && git push)
