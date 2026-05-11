@@ -1,21 +1,22 @@
 #!/usr/bin/env python3
 """Share new articles to Twitter/X and LinkedIn.
 
-Requires API credentials set as environment variables:
-  X (Twitter):
-    - X_API_KEY
-    - X_API_SECRET
-    - X_ACCESS_TOKEN
-    - X_ACCESS_SECRET
+Two ways to authenticate with X (tried in order):
+  1. OAuth 2.0 PKCE with refresh token (preferred)
+     Env vars: X_CLIENT_ID, X_CLIENT_SECRET, X_REFRESH_TOKEN
+  2. OAuth 1.0a (legacy, may be credits-depleted on free tier)
+     Env vars: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET
+
   LinkedIn:
-    - LINKEDIN_CLIENT_ID
-    - LINKEDIN_CLIENT_SECRET
     - LINKEDIN_ACCESS_TOKEN
+
+To get OAuth 2.0 refresh token:
+  python3 scripts/x_oauth2_setup.py
 
 Tracks published posts in data/social-shared.json.
 """
 
-import json, os, sys, re
+import base64, json, os, sys, re, urllib.parse
 from pathlib import Path
 from datetime import datetime, timezone
 from urllib.request import Request, urlopen
@@ -67,13 +68,58 @@ def shorten_text(text, max_len=280):
     return text[:cut].rstrip() + '...'
 
 
+def x_basic_auth(client_id, client_secret):
+    raw = f'{client_id}:{client_secret}'
+    return 'Basic ' + base64.b64encode(raw.encode()).decode()
+
+
+def x_refresh_access_token(client_id, client_secret, refresh_token):
+    """Use a refresh token to get a fresh OAuth 2.0 access token."""
+    data = urllib.parse.urlencode({
+        'refresh_token': refresh_token,
+        'grant_type': 'refresh_token',
+    }).encode()
+    req = Request('https://api.twitter.com/2/oauth2/token', data=data,
+                  headers={
+                      'Content-Type': 'application/x-www-form-urlencoded',
+                      'Authorization': x_basic_auth(client_id, client_secret),
+                  })
+    try:
+        resp = urlopen(req, timeout=15)
+        tokens = json.loads(resp.read().decode())
+        return tokens.get('access_token', '')
+    except URLError as e:
+        body = e.read().decode() if hasattr(e, 'read') else ''
+        raise RuntimeError(f'OAuth2 refresh failed: {e.code} {body[:200]}')
+
+
+def post_to_x_oauth2(client_id, client_secret, refresh_token, text, url):
+    """Post to X using OAuth 2.0 with refresh token (no credit depletion on some accounts)."""
+    from urllib.request import Request, urlopen
+
+    # Get a fresh access token
+    access_token = x_refresh_access_token(client_id, client_secret, refresh_token)
+
+    # Post the tweet
+    tweet = f'{text}\n\n{url}'
+    body = json.dumps({'text': tweet}).encode()
+    req = Request('https://api.twitter.com/2/tweets', data=body,
+                  headers={
+                      'Authorization': f'Bearer {access_token}',
+                      'Content-Type': 'application/json',
+                  })
+    try:
+        resp = urlopen(req, timeout=15)
+        result = json.loads(resp.read().decode())
+        return {'ok': True, 'id': result.get('data', {}).get('id', '')}
+    except URLError as e:
+        code = getattr(e, 'code', 0)
+        body = e.read().decode() if hasattr(e, 'read') else ''
+        return {'ok': False, 'error': f'{code}: {body[:200]}'}
+
+
 def post_to_x(api_key, api_secret, access_token, access_secret, text, url):
-    """Post to Twitter/X using v2 API with OAuth 1.0a.
-
-    Falls back to a curl call when the oauthlib is unavailable.
-    """
-    import urllib.parse
-
+    """Post to Twitter/X using v2 API with OAuth 1.0a."""
     # Build the tweet text
     tweet = f'{text}\n\n{url}'
 
@@ -97,10 +143,6 @@ def post_to_x(api_key, api_secret, access_token, access_secret, text, url):
     except ImportError:
         pass
 
-    # Fallback: use curl via subprocess
-    import subprocess
-    # OAuth 1.0a signing is complex without a library, so we use a simplified
-    # Bearer token approach if available, or report the need for requests_oauthlib
     return {'ok': False, 'error': 'Requires requests_oauthlib. Install: pip install requests_oauthlib'}
 
 
@@ -158,12 +200,19 @@ def main():
     now = datetime.now(timezone.utc).isoformat()
     posts_count = 0
 
-    # X (Twitter)
+    # X (Twitter) - prefer OAuth 2.0, fallback to OAuth 1.0a
+    x_client_id = os.environ.get('X_CLIENT_ID')
+    x_client_secret = os.environ.get('X_CLIENT_SECRET')
+    x_refresh_token = os.environ.get('X_REFRESH_TOKEN')
+    x_oauth2_available = all([x_client_id, x_client_secret, x_refresh_token])
+
     x_key = os.environ.get('X_API_KEY')
     x_secret = os.environ.get('X_API_SECRET')
     x_token = os.environ.get('X_ACCESS_TOKEN')
     x_token_secret = os.environ.get('X_ACCESS_SECRET')
-    x_available = all([x_key, x_secret, x_token, x_token_secret])
+    x_oauth1_available = all([x_key, x_secret, x_token, x_token_secret])
+
+    x_available = x_oauth2_available or x_oauth1_available
 
     # LinkedIn
     li_token = os.environ.get('LINKEDIN_ACCESS_TOKEN')
@@ -171,8 +220,9 @@ def main():
 
     if not x_available and not li_available:
         print('No API credentials configured.')
-        print('  Set X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET for Twitter')
-        print('  Set LINKEDIN_ACCESS_TOKEN for LinkedIn')
+        print('  For OAuth 2.0: Set X_CLIENT_ID, X_CLIENT_SECRET, X_REFRESH_TOKEN')
+        print('  For OAuth 1.0a: Set X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET')
+        print('  For LinkedIn: Set LINKEDIN_ACCESS_TOKEN')
         return 0
 
     for article in to_share[:5]:  # Limit to 5 per run to avoid rate limits
@@ -188,7 +238,10 @@ def main():
         results = []
         if x_available:
             print(f'\n  [X] {title[:60]}...')
-            r = post_to_x(x_key, x_secret, x_token, x_token_secret, share_text, url)
+            if x_oauth2_available:
+                r = post_to_x_oauth2(x_client_id, x_client_secret, x_refresh_token, share_text, url)
+            else:
+                r = post_to_x(x_key, x_secret, x_token, x_token_secret, share_text, url)
             results.append(('x', r))
             if r.get('ok'):
                 print(f'       ✓ Posted (id: {r.get("id", "?")})')

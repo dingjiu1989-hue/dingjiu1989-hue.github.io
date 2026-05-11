@@ -40,21 +40,15 @@ jobs:
           echo "$DEVTO_KEY" > .devto-key
           python3 scripts/build_sameas.py
 
-      - name: Share new articles to social platforms (X, LinkedIn)
+      - name: Share new articles to X via Buffer
         env:
-          X_API_KEY: ${{ secrets.X_API_KEY }}
-          X_API_SECRET: ${{ secrets.X_API_SECRET }}
-          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
-          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
-          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
-        run: |
-          pip install requests_oauthlib 2>/dev/null || true
-          python3 scripts/social_shares.py new || true
+          BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
+        run: python3 scripts/buffer_social.py new || true
 
       - name: Commit tracking files if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          git add data/hashnode-published.json data/sameas-urls.json
+          git add data/hashnode-published.json data/sameas-urls.json data/buffer-shared.json
           git diff --staged --quiet || (git commit -m "chore: update syndication tracking" && git push)
