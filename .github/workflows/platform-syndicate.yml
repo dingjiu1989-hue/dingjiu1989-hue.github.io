@@ -26,7 +26,9 @@ jobs:
         env:
           HASHNODE_API_KEY: ${{ secrets.HASHNODE_API_KEY }}
           HASHNODE_PUBLICATION_ID: ${{ secrets.HASHNODE_PUBLICATION_ID }}
-        run: python3 scripts/syndicate_hashnode.py
+        run: |
+          echo "$HASHNODE_API_KEY" > .hashnode-key
+          python3 scripts/syndicate_hashnode.py
 
       - name: Build cross-platform identity (sameAs)
         env:
