@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO & Crawler Monitor — SourceHub</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; margin: 0; padding: 20px; color: #333; }
+  .container { max-width: 900px; margin: 0 auto; }
+  h1 { font-size: 1.5rem; margin-bottom: 4px; }
+  .subtitle { color: #666; font-size: 0.85rem; margin-bottom: 20px; }
+  .last-updated { color: #999; font-size: 0.8rem; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .card { background: #fff; border-radius: 8px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  .card .value { font-size: 1.8rem; font-weight: 700; line-height: 1.2; }
+  .card .label { font-size: 0.8rem; color: #666; margin-top: 4px; }
+  .card.positive .value { color: #22c55e; }
+  .card.warning .value { color: #f59e0b; }
+  .card.neutral .value { color: #3b82f6; }
+  .card.danger .value { color: #ef4444; }
+
+  .section { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  .section h2 { font-size: 1rem; margin: 0 0 12px 0; padding-bottom: 8px; border-bottom: 1px solid #eee; }
+
+  .summary-item { padding: 6px 0; font-size: 0.9rem; }
+  .summary-item.ok { color: #22c55e; }
+  .summary-item.warn { color: #f59e0b; }
+
+  .bar-chart { display: flex; align-items: flex-end; gap: 2px; height: 120px; margin: 10px 0; }
+  .bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; }
+  .bar-imp { width: 100%; background: #3b82f6; border-radius: 2px 2px 0 0; min-height: 2px; transition: height 0.3s; position: relative; }
+  .bar-clicks { width: 100%; background: #22c55e; border-radius: 2px 2px 0 0; min-height: 2px; }
+  .bar-date { font-size: 0.65rem; color: #999; margin-top: 4px; }
+  .legend { display: flex; gap: 16px; font-size: 0.8rem; margin: 8px 0; }
+  .legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #eee; }
+  th { font-weight: 600; color: #555; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🔍 SEO & Crawler Monitor</h1>
+  <p class="subtitle">Last updated: 2m ago &middot; <span class="last-updated">2026-05-12T01:32:52</span></p>
+
+  <div class="cards">
+    <div class="card neutral">
+      <div class="value">1</div>
+      <div class="label">Total Search Impressions</div>
+    </div>
+    <div class="card neutral">
+      <div class="value">0</div>
+      <div class="label">Total Clicks</div>
+    </div>
+    <div class="card positive">
+      <div class="value">1</div>
+      <div class="label">Active Days (GSC)</div>
+    </div>
+    <div class="card neutral">
+      <div class="value">475</div>
+      <div class="label">Total Articles</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="section">
+    <h2>Last 7 Days</h2>
+    <table>
+      <tr><th>Metric</th><th>Value</th></tr>
+      <tr><td>Impressions (7d)</td><td><strong>1</strong></td></tr>
+      <tr><td>Clicks (7d)</td><td><strong>0</strong></td></tr>
+      <tr><td>Articles added (14d)</td><td><strong>59</strong></td></tr>
+      <tr><td>AI file health</td><td><strong>100.0%</strong></td></tr>
+      <tr><td>Sitemap URLs</td><td><strong>316</strong></td></tr>
+    </table>
+    </div>
+
+    <div class="section">
+    <h2>Health Checks</h2>
+    <div>
+      <div class="summary-item ok">✓ All AI-friendly files accessible</div><div class="summary-item warn">Googlebot: 1 impressions / 1 active days → ~1.0 impressions/day</div><div class="summary-item warn">Key pages indexed: 0/5</div><div class="summary-item warn">↑ Impressions +1 since last check</div>
+    </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Daily Impressions (last 5 days)</h2>
+    <div class="legend">
+      <span><span class="legend-dot" style="background:#3b82f6"></span> Impressions</span>
+      <span><span class="legend-dot" style="background:#22c55e"></span> Clicks</span>
+    </div>
+    <div class="bar-chart">
+    <div class="bar-group"><div class="bar-imp" style="height:4px" title="0 impressions"></div><div class="bar-clicks" style="height:2px" title="0 clicks"></div><div class="bar-date">05-05</div></div><div class="bar-group"><div class="bar-imp" style="height:4px" title="0 impressions"></div><div class="bar-clicks" style="height:2px" title="0 clicks"></div><div class="bar-date">05-06</div></div><div class="bar-group"><div class="bar-imp" style="height:4px" title="0 impressions"></div><div class="bar-clicks" style="height:2px" title="0 clicks"></div><div class="bar-date">05-07</div></div><div class="bar-group"><div class="bar-imp" style="height:4px" title="0 impressions"></div><div class="bar-clicks" style="height:2px" title="0 clicks"></div><div class="bar-date">05-08</div></div><div class="bar-group"><div class="bar-imp" style="height:100.0px" title="1 impressions"></div><div class="bar-clicks" style="height:2px" title="0 clicks"></div><div class="bar-date">05-09</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Site Overview</h2>
+    <table>
+      <tr><th>Metric</th><th>Value</th></tr>
+      <tr><td>English articles</td><td>415</td></tr>
+      <tr><td>Chinese articles</td><td>60</td></tr>
+      <tr><td>Sitemap URLs</td><td>316</td></tr>
+      <tr><td>Structured data errors</td><td>0</td></tr>
+      <tr><td>Broken internal links</td><td>0</td></tr>
+      <tr><td>SEO tag issues</td><td>0</td></tr>
+    </table>
+  </div>
+
+  <p class="last-updated">Generated by <code>scripts/gen_monitor_dashboard.py</code></p>
+</div>
+</body>
+</html>
