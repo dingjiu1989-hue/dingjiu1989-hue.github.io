@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="mcp-complete-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools">
+    <meta property="og:description" content="How MCP works, architecture deep-dive, building MCP servers and clients, and why it is the USB-C moment for AI integrations — with full code examples.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/mcp-complete-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools">
+    <meta name="twitter:description" content="How MCP works, architecture deep-dive, building MCP servers and clients, and why it is the USB-C moment for AI integrations — with full code examples.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools — SourceHub</title>
+    <meta name="description" content="How MCP works, architecture deep-dive, building MCP servers and clients, and why it is the USB-C moment for AI integrations — with full code examples.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/mcp-complete-guide.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/ai/mcp-complete-guide.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools",
+      "description": "How MCP works, architecture deep-dive, building MCP servers and clients, and why it is the USB-C moment for AI integrations — with full code examples.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "3769",
+      "keywords": "MCP, Model Context Protocol, AI, LLM, Tool Use, Function Calling, Anthropic, AI Integration",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/mcp-complete-guide.html"},
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/mcp-model-context-protocol-complete-guide-the-standard-connecting-ai-to-your-tools-33ep"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools
+    </div>
+    <article>
+      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+        <span class="tag-cat">MCP</span>
+        <span class="tag-cat">Model Context Protocol</span>
+        <span class="tag-cat">AI</span>
+        <span class="tag-cat">LLM</span>
+        <span class="tag-cat">Tool Use</span>
+        <span class="tag-cat">Function Calling</span>
+        <span class="tag-cat">Anthropic</span>
+        <span class="tag-cat">AI Integration</span></div>
+      <h1 class="article-title">MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h1>
+<br>
+<p>Every AI application needs to talk to external systems — databases, APIs, file systems, search engines. Before 2025, every integration was custom: write a LangChain tool, build a custom function call, hack together a plugin. It was like the pre-USB era where every device had its own cable.</p>
+<br>
+<p>MCP (Model Context Protocol) changes that. It's an open protocol that standardizes how AI models connect to external tools and data sources — one protocol, any LLM, any tool.</p>
+<br>
+<h2> What Is MCP?</h2>
+<br>
+<p>MCP is an open standard (originally developed by Anthropic) that defines how AI applications discover and call external tools. Think of it as **USB-C for AI integrations** — a universal connector that any MCP-compatible client can use to talk to any MCP-compatible server.</p>
+<br>
+<pre><code>
+┌─────────────────┐     ┌────────────────┐     ┌─────────────────┐
+
+│  MCP Client     │◄───►│  MCP Protocol  │◄───►│  MCP Server     │
+
+│  (Claude, VS    │     │  (JSON-RPC     │     │  (DB connector, │
+
+│   Code, Cursor) │     │   over stdio   │     │   file system,  │
+
+│                 │     │   or SSE)      │     │   search, API)  │
+
+└─────────────────┘     └────────────────┘     └─────────────────┘
+
+</code></pre>
+<br>
+<p>**The key insight**: MCP decouples tool implementation from the AI client. A single MCP server written once works with Claude Desktop, VS Code extensions, Cursor, and any other MCP-compatible client. No more "write this tool for LangChain, rewrite it for OpenAI, rewrite it for Claude."</p>
+<br>
+<h2> Architecture</h2>
+<br>
+<p>MCP has four core concepts:</p>
+<br>
+<h3>1. Host (Client Application)</h3>
+<p>The AI-powered application the user interacts with: Claude Desktop, VS Code, Cursor, a custom chat app.</p>
+<br>
+<h3>2. Client (MCP Client)</h3>
+<p>A lightweight transport layer inside the host that manages connections to MCP servers. It speaks the MCP protocol over the wire.</p>
+<br>
+<h3>3. Server (MCP Server)</h3>
+<p>A lightweight service that exposes resources and tools through MCP. Each server is focused on one domain: filesystem access, database queries, API integrations.</p>
+<br>
+<h3>4. Protocol</h3>
+<p>The standard JSON-RPC message format that clients and servers use to communicate. Two transport modes:</p>
+<li>**stdio**: Server runs as a subprocess, communication over stdin/stdout (simple, secure)</li>
+<li>**SSE** (Server-Sent Events): Network-based, for remote servers</li>
+<br>
+<h3>Communication Flow</h3>
+<br>
+<pre><code>
+User: &quot;Find all bugs assigned to me&quot;
+
+    │
+
+    ▼
+
+Host (Claude Desktop)
+
+    │  MCP Client asks servers for available tools
+
+    ▼
+
+MCP Server (GitHub) ───► Returns: list_issues, get_repo, search_code
+
+    │
+
+    ▼
+
+LLM decides: call list_issues with assignee:me
+
+    │
+
+    ▼
+
+MCP Server executes GitHub API call
+
+    │
+
+    ▼
+
+Returns issue data to LLM
+
+    │
+
+    ▼
+
+Host shows: &quot;Found 3 bugs assigned to you:...&quot;
+
+</code></pre>
+<br>
+<h2> MCP vs Alternatives</h2>
+<br>
+<p>| Feature | MCP | OpenAI Function Calling | LangChain Tools | Custom API |</p>
+<p>|---------|-----|------------------------|-----------------|------------|</p>
+<p>| **Standardized** | ✅ Open standard | ❌ OpenAI-only | ❌ LangChain-only | ❌ Custom |</p>
+<p>| **Cross-client** | ✅ Any MCP client | ❌ OpenAI API only | ❌ LangChain only | ❌ One app only |</p>
+<p>| **Tool discovery** | ✅ Auto-discover tools | ✅ Schema-based | ✅ Defined in code | ❌ Hard-coded |</p>
+<p>| **Dynamic resources** | ✅ Yes (file system, DB) | ❌ No | ❌ No | ❌ No |</p>
+<p>| **Security model** | ✅ Host controls permissions | ⚠️ Per-call | ⚠️ Per-call | ⚠️ Per-call |</p>
+<p>| **Async/long-running** | ✅ Notifications, progress | ❌ Request-response only | ❌ Request-response only | ⚠️ Depends |</p>
+<p>| **Ecosystem** | Growing fast | Mature but narrow | Good | None |</p>
+<p>| **Setup complexity** | Low | Low | Medium | High |</p>
+<br>
+<h3>Why MCP Wins</h3>
+<br>
+<p>**Before MCP**: Every AI tool integration was bespoke</p>
+<li>VS Code extension for GitHub ← custom code</li>
+<li>Claude Desktop for database queries ← one-off Python script</li>
+<li>Cursor for file operations ← built-in, not extensible</li>
+<li>Custom chatbot for search ← another custom tool</li>
+<br>
+<p>**With MCP**: Write once, use everywhere</p>
+<li>One GitHub MCP server works in Claude Desktop, VS Code, Cursor</li>
+<li>One PostgreSQL MCP server works in any host</li>
+<li>One filesystem MCP server works everywhere</li>
+<br>
+<h2> How to Build an MCP Server</h2>
+<br>
+<p>The MCP SDK (available for Python, TypeScript, Java, and Go) makes building a server trivial. Here's a complete example in Python:</p>
+<br>
+<h3>Python MCP Server</h3>
+<br>
+<pre><code>
+# server.py
+
+from mcp.server import Server
+
+from mcp.types import Tool, TextContent
+
+import httpx
+
+import json
+
+
+
+app = Server(&quot;weather-server&quot;)
+
+
+
+@app.list_tools()
+
+async def list_tools() -&gt; list[Tool]:
+
+    return [
+
+        Tool(
+
+            name=&quot;get_weather&quot;,
+
+            description=&quot;Get current weather for a city&quot;,
+
+            input_schema={
+
+                &quot;type&quot;: &quot;object&quot;,
+
+                &quot;properties&quot;: {
+
+                    &quot;city&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;City name&quot;}
+
+                },
+
+                &quot;required&quot;: [&quot;city&quot;],
+
+            },
+
+        )
+
+    ]
+
+
+
+@app.call_tool()
+
+async def call_tool(name: str, arguments: dict) -&gt; list[TextContent]:
+
+    if name == &quot;get_weather&quot;:
+
+        async with httpx.AsyncClient() as client:
+
+            resp = await client.get(
+
+                f&quot;https://api.openweathermap.org/data/2.5/weather&quot;,
+
+                params={&quot;q&quot;: arguments[&quot;city&quot;], &quot;appid&quot;: &quot;YOUR_KEY&quot;}
+
+            )
+
+            data = resp.json()
+
+            return [TextContent(
+
+                type=&quot;text&quot;,
+
+                text=json.dumps(data[&quot;main&quot;], indent=2)
+
+            )]
+
+    raise ValueError(f&quot;Unknown tool: {name}&quot;)
+
+
+
+if __name__ == &quot;__main__&quot;:
+
+    app.run(transport=&quot;stdio&quot;)
+
+</code></pre>
+<br>
+<h3>Running the Server</h3>
+<br>
+<pre><code>
+// claude_desktop_config.json
+
+{
+
+  &quot;mcpServers&quot;: {
+
+    &quot;weather&quot;: {
+
+      &quot;command&quot;: &quot;python&quot;,
+
+      &quot;args&quot;: [&quot;/path/to/server.py&quot;]
+
+    }
+
+  }
+
+}
+
+</code></pre>
+<br>
+<p>Now your weather tool works in Claude Desktop, VS Code (with Cline or Continue extension), Cursor, and any other MCP host — with zero changes.</p>
+<br>
+<h3>TypeScript MCP Server</h3>
+<br>
+<pre><code>
+import { Server } from &quot;@modelcontextprotocol/sdk/server/index.js&quot;;
+
+import { StdioServerTransport } from &quot;@modelcontextprotocol/sdk/server/stdio.js&quot;;
+
+
+
+const server = new Server(
+
+  { name: &quot;github-server&quot;, version: &quot;1.0.0&quot; },
+
+  { capabilities: { tools: {} } }
+
+);
+
+
+
+server.setRequestHandler(ListToolsRequestSchema, async () =&gt; ({
+
+  tools: [{
+
+    name: &quot;search_repos&quot;,
+
+    description: &quot;Search GitHub repositories&quot;,
+
+    inputSchema: {
+
+      type: &quot;object&quot;,
+
+      properties: {
+
+        query: { type: &quot;string&quot; }
+
+      },
+
+      required: [&quot;query&quot;]
+
+    }
+
+  }]
+
+}));
+
+
+
+server.setRequestHandler(CallToolRequestSchema, async (request) =&gt; {
+
+  const { name, arguments: args } = request.params;
+
+  const response = await fetch(
+
+    `https://api.github.com/search/repositories?q=${args.query}`
+
+  );
+
+  const data = await response.json();
+
+  return {
+
+    content: [{ type: &quot;text&quot;, text: JSON.stringify(data.items.slice(0, 5)) }]
+
+  };
+
+});
+
+
+
+const transport = new StdioServerTransport();
+
+await server.connect(transport);
+
+</code></pre>
+<br>
+<h2> MCP Resources: Beyond Tools</h2>
+<br>
+<p>MCP isn't just about calling tools — it also defines **resources** (data sources the server exposes). This is where MCP surpasses simple function calling.</p>
+<br>
+<pre><code>
+@app.list_resources()
+
+async def list_resources() -&gt; list[Resource]:
+
+    return [
+
+        Resource(
+
+            uri=&quot;file:///logs/app.log&quot;,
+
+            name=&quot;Application Logs&quot;,
+
+            description=&quot;Live application log file&quot;,
+
+            mime_type=&quot;text/plain&quot;,
+
+        ),
+
+        Resource(
+
+            uri=&quot;postgres://users&quot;,
+
+            name=&quot;Users Table&quot;,
+
+            description=&quot;User database table schema and sample rows&quot;,
+
+            mime_type=&quot;application/json&quot;,
+
+        ),
+
+    ]
+
+
+
+@app.read_resource()
+
+async def read_resource(uri: str) -&gt; str:
+
+    if uri == &quot;file:///logs/app.log&quot;:
+
+        return open(&quot;/var/log/app.log&quot;).read()[-10000:]
+
+    if uri.startswith(&quot;postgres://&quot;):
+
+        # Query schema dynamically
+
+        return json.dumps(query_table_schema(uri))
+
+    raise ValueError(f&quot;Unknown resource: {uri}&quot;)
+
+</code></pre>
+<br>
+<p>Resources give the AI client dynamic access to your data — it can read log files, query database schemas, browse file systems — all through the same protocol.</p>
+<br>
+<h2> MCP Prompts (Templates)</h2>
+<br>
+<p>MCP servers can also expose **prompt templates** — reusable instructions that guide how the LLM should behave when using your tools:</p>
+<br>
+<pre><code>
+@app.list_prompts()
+
+async def list_prompts() -&gt; list[Prompt]:
+
+    return [
+
+        Prompt(
+
+            name=&quot;analyze_logs&quot;,
+
+            description=&quot;Analyze application logs for errors&quot;,
+
+            arguments=[{
+
+                &quot;name&quot;: &quot;severity&quot;,
+
+                &quot;description&quot;: &quot;Minimum log severity level&quot;,
+
+                &quot;required&quot;: False,
+
+            }],
+
+        )
+
+    ]
+
+
+
+@app.get_prompt()
+
+async def get_prompt(name: str, arguments: dict) -&gt; PromptMessage:
+
+    severity = arguments.get(&quot;severity&quot;, &quot;ERROR&quot;)
+
+    return PromptMessage(
+
+        role=&quot;user&quot;,
+
+        content={
+
+            &quot;type&quot;: &quot;text&quot;,
+
+            &quot;text&quot;: f&quot;&quot;&quot;Read the application logs and:
+
+1. Find all {severity} level entries
+
+2. Group them by component
+
+3. Identify patterns
+
+4. Suggest fixes
+
+
+
+Use the log resource and tools to investigate.&quot;&quot;&quot;
+
+        }
+
+    )
+
+</code></pre>
+<br>
+<h2> Production MCP Server Patterns</h2>
+<br>
+<h3>1. Authentication and Credentials</h3>
+<br>
+<p>MCP servers should never hard-code credentials. Use environment variables or a config file:</p>
+<br>
+<pre><code>
+import os
+
+
+
+DB_URL = os.environ.get(&quot;MCP_DB_URL&quot;, &quot;postgresql://localhost:5432&quot;)
+
+API_KEY = os.environ.get(&quot;MCP_API_KEY&quot;)
+
+
+
+app = Server(&quot;production-server&quot;)
+
+</code></pre>
+<br>
+<h3>2. Rate Limiting</h3>
+<br>
+<p>Protect external APIs from aggressive tool calls:</p>
+<br>
+<pre><code>
+import time
+
+from collections import defaultdict
+
+
+
+class RateLimiter:
+
+    def __init__(self, max_calls: int, window: float):
+
+        self.max_calls = max_calls
+
+        self.window = window
+
+        self.calls = defaultdict(list)
+
+
+
+    def check(self, key: str = &quot;default&quot;) -&gt; bool:
+
+        now = time.time()
+
+        self.calls[key] = [t for t in self.calls[key] if now - t &lt; self.window]
+
+        if len(self.calls[key]) &gt;= self.max_calls:
+
+            return False
+
+        self.calls[key].append(now)
+
+        return True
+
+</code></pre>
+<br>
+<h3>3. Tool Result Caching</h3>
+<br>
+<p>Avoid repeating expensive operations:</p>
+<br>
+<pre><code>
+from functools import lru_cache
+
+from datetime import datetime, timedelta
+
+
+
+cache = {}
+
+
+
+def cached(ttl_seconds: int = 300):
+
+    def decorator(func):
+
+        def wrapper(*args, **kwargs):
+
+            key = str(args) + str(kwargs)
+
+            if key in cache:
+
+                result, timestamp = cache[key]
+
+                if datetime.now() - timestamp &lt; timedelta(seconds=ttl_seconds):
+
+                    return result
+
+            result = func(*args, **kwargs)
+
+            cache[key] = (result, datetime.now())
+
+            return result
+
+        return wrapper
+
+    return decorator
+
+</code></pre>
+<br>
+<h3>4. Structured Logging</h3>
+<br>
+<p>Every tool call should be traceable:</p>
+<br>
+<pre><code>
+import structlog
+
+
+
+logger = structlog.get_logger()
+
+
+
+# In the call_tool handler
+
+logger.info(&quot;tool_call&quot;, tool=name, arguments=arguments,
+
+            duration_ms=elapsed_ms, success=True)
+
+</code></pre>
+<br>
+<h2> MCP Ecosystem (2026)</h2>
+<br>
+<h3>Popular MCP Servers</h3>
+<br>
+<p>| Server | Purpose | Official? |</p>
+<p>|--------|---------|-----------|</p>
+<p>| **Filesystem** | Read/write files, directory listing | ✅ Anthropic |</p>
+<p>| **GitHub** | Issues, PRs, repos, search | ✅ Anthropic |</p>
+<p>| **PostgreSQL** | Query databases, schema inspection | ✅ Anthropic |</p>
+<p>| **Slack** | Messages, channels, search | ✅ Anthropic |</p>
+<p>| **SQLite** | Local database operations | ✅ Community |</p>
+<p>| **Docker** | Container management | ✅ Community |</p>
+<p>| **Kubernetes** | Pod management, logs | ✅ Community |</p>
+<p>| **Puppeteer** | Browser automation | ✅ Community |</p>
+<p>| **Jira** | Issue tracking | ✅ Community |</p>
+<p>| **Sentry** | Error monitoring | ✅ Community |</p>
+<p>| **PagerDuty** | Incident management | ✅ Community |</p>
+<p>| **Elasticsearch** | Search operations | ✅ Community |</p>
+<br>
+<h3>MCP Client Hosts</h3>
+<br>
+<p>| Host | Type | MCP Support |</p>
+<p>|------|------|-------------|</p>
+<p>| **Claude Desktop** | Desktop app | ✅ Full support |</p>
+<p>| **VS Code** (Cline) | IDE extension | ✅ Full |</p>
+<p>| **VS Code** (Continue) | IDE extension | ✅ Full |</p>
+<p>| **Cursor** | IDE | ✅ Full |</p>
+<p>| **Windsurf** | IDE | ✅ Full |</p>
+<p>| **Zed** | Editor | ✅ Native |</p>
+<p>| **Sourcegraph Cody** | IDE extension | ✅ Full |</p>
+<p>| **JetBrains** | IDE | ✅ Via plugins |</p>
+<p>| **OpenAI** | API | ❌ (proprietary tools only) |</p>
+<p>| **Google Gemini** | API | ❌ (proprietary tools only) |</p>
+<br>
+<h2> When to Build vs Use Existing</h2>
+<br>
+<h3>Build an MCP Server When:</h3>
+<li>You have a proprietary/internal tool or API</li>
+<li>You need fine-grained access control</li>
+<li>Your data requires special transformation</li>
+<li>You want to combine multiple services into one server</li>
+<br>
+<h3>Use an Existing Server When:</h3>
+<li>Standard integrations (GitHub, PostgreSQL, Slack)</li>
+<li>Well-known APIs with existing community servers</li>
+<li>File system or database access patterns</li>
+<br>
+<h2> Security Considerations</h2>
+<br>
+<p>MCP's stdio transport is surprisingly secure — the server runs as a local subprocess with your permissions. But there are risks:</p>
+<br>
+<li>**Tool abuse**: A malicious prompt could make dangerous tool calls (DELETE FROM users). Mitigate by:</li>
+<p>   - Read-only servers for exploration, separate write servers</p>
+<p>   - Parameter whitelists in tool handlers</p>
+<p>   - Confirmation prompts for destructive operations</p>
+<br>
+<p>2. **Resource leaks**: LLMs can read large files. Set size limits on resource responses:</p>
+<p>   ```python</p>
+<p>   MAX_RESOURCE_SIZE = 100_000  # bytes</p>
+<p>   ```</p>
+<br>
+<p>3. **Credentials in config**: The `claude_desktop_config.json` stores server launch commands. Never embed API keys — use environment variables.</p>
+<br>
+<p>4. **Tool sandboxing**: Consider Docker containers for untrusted MCP servers:</p>
+<p>   ```json</p>
+<p>   {</p>
+<p>     "mcpServers": {</p>
+<p>       "community-server": {</p>
+<p>         "command": "docker",</p>
+<p>         "args": [</p>
+<p>           "run", "--rm", "-i",</p>
+<p>           "--network", "none",</p>
+<p>           "community/mcp-server:latest"</p>
+<p>         ]</p>
+<p>       }</p>
+<p>     }</p>
+<p>   }</p>
+<p>   ```</p>
+<br>
+<h2> Real-World Architecture: AI-Powered Dev Environment</h2>
+<br>
+<p>Here's how a real production setup looks:</p>
+<br>
+<pre><code>
+┌─────────────────────────────────────────────────┐
+
+│                 VS Code (Host)                   │
+
+│  ┌──────────┐  ┌──────────┐  ┌───────────────┐  │
+
+│  │ Claude   │  │ Cline    │  │ Continue       │  │
+
+│  │ Desktop  │  │ (VS Code)│  │ (VS Code)      │  │
+
+│  └────┬─────┘  └────┬─────┘  └──────┬────────┘  │
+
+│       │              │               │           │
+
+└───────┼──────────────┼───────────────┼───────────┘
+
+        │              │               │
+
+        ▼              ▼               ▼
+
+┌─────────────────────────────────────────────────┐
+
+│              MCP Protocol (JSON-RPC)             │
+
+├─────────────────────────────────────────────────┤
+
+│  ┌──────────┐  ┌──────────┐  ┌───────────────┐  │
+
+│  │ GitHub   │  │ Postgres │  │ Filesystem     │  │
+
+│  │ Server   │  │ Server   │  │ Server         │  │
+
+│  └──────────┘  └──────────┘  └───────────────┘  │
+
+│  ┌──────────┐  ┌──────────┐  ┌───────────────┐  │
+
+│  │ Docker   │  │ Slack    │  │ Jira           │  │
+
+│  │ Server   │  │ Server   │  │ Server         │  │
+
+│  └──────────┘  └──────────┘  └───────────────┘  │
+
+└─────────────────────────────────────────────────┘
+
+</code></pre>
+<br>
+<p>Each server is independently runnable, testable, and replaceable. Add or remove capabilities by adding or removing MCP servers — no code changes needed.</p>
+<br>
+<h2> Getting Started</h2>
+<br>
+<li>**Install Claude Desktop** → Add your first MCP server via config</li>
+<p>2. **Try existing servers** → GitHub, Filesystem, SQLite (Anthropic's official servers)</p>
+<p>3. **Build your first server** → Use the Python SDK, ~50 lines of code</p>
+<p>4. **Add to VS Code** → Install Cline or Continue extension</p>
+<p>5. **Go multi-host** → Same MCP server works across all clients</p>
+<br>
+<p>The MCP ecosystem doubles roughly every quarter. What takes 50 lines today will be a one-line npm install by next quarter. The best time to build on top of it was last year — the second best time is now.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>| Concept | What It Means |</p>
+<p>|---------|---------------|</p>
+<p>| **MCP** | Open protocol for AI-to-tool communication |</p>
+<p>| **Transport** | stdio (local) or SSE (remote) |</p>
+<p>| **Tools** | Functions the LLM can call |</p>
+<p>| **Resources** | Data sources the LLM can read |</p>
+<p>| **Prompts** | Templates for how to use tools |</p>
+<p>| **Host** | The app running the LLM |</p>
+<p>| **Server** | Exposes tools/resources via MCP |</p>
+<br>
+<p>MCP is to AI integrations what HTTP is to web APIs — a universal standard that makes everything compose. Every new MCP-compatible tool and client increases the value of every other MCP component. The network effect is what makes it inevitable.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

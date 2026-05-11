@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="graph-databases">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Graph Databases (Neo4j, Dgraph, ArangoDB)">
+    <meta property="og:description" content="Compare Neo4j, Dgraph, and ArangoDB graph databases for connected data, recommendation engines, social networks, and knowledge graphs.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/graph-databases.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Graph Databases (Neo4j, Dgraph, ArangoDB)">
+    <meta name="twitter:description" content="Compare Neo4j, Dgraph, and ArangoDB graph databases for connected data, recommendation engines, social networks, and knowledge graphs.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Graph Databases (Neo4j, Dgraph, ArangoDB) — SourceHub</title>
+    <meta name="description" content="Compare Neo4j, Dgraph, and ArangoDB graph databases for connected data, recommendation engines, social networks, and knowledge graphs.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/graph-databases.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/graph-databases.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Graph Databases (Neo4j, Dgraph, ArangoDB)",
+      "description": "Compare Neo4j, Dgraph, and ArangoDB graph databases for connected data, recommendation engines, social networks, and knowledge graphs.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1682",
+      "keywords": "Database, SQL",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/graph-databases.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Graph Databases (Neo4j, Dgraph, ArangoDB)"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Graph Databases (Neo4j, Dgraph, ArangoDB)
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">SQL</span></div>
+      <h1 class="article-title">Graph Databases (Neo4j, Dgraph, ArangoDB)</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> What Are Graph Databases?</h2>
+<br>
+<p>Graph databases store data as nodes (entities) and edges (relationships), where both nodes and edges can have properties. This model excels at representing and querying highly connected data, where the relationships between entities are as important as the entities themselves.</p>
+<br>
+<h2> The Graph Model</h2>
+<br>
+<pre><code>
+        ┌──────────┐
+
+        │  Alice   │
+
+        │  age: 30 │
+
+        └────┬─────┘
+
+             │
+
+       FOLLOWS│
+
+             │
+
+             ▼
+
+        ┌──────────┐        PURCHASED        ┌──────────┐
+
+        │   Bob    │ ───────────────────────&gt; │ Product  │
+
+        │  age: 25 │                          │ price: 99│
+
+        └──────────┘                          └──────────┘
+
+             │
+
+    REVIEWED  │
+
+             ▼
+
+        ┌──────────┐
+
+        │ Review   │
+
+        │ rating: 5│
+
+        └──────────┘
+
+</code></pre>
+<br>
+<h2> Graph DB Comparison</h2>
+<br>
+<p>| Feature | Neo4j | Dgraph | ArangoDB |</p>
+<p>|---------|-------|--------|----------|</p>
+<p>| Query language | Cypher | GraphQL+- | AQL |</p>
+<p>| Architecture | Native graph | Distributed | Multi-model |</p>
+<p>| ACID compliance | Full ACID | Snapshot isolation | Full ACID |</p>
+<p>| Sharding | Manual (enterprise) | Automatic | Automatic |</p>
+<p>| Performance | Excellent (single node) | Excellent (distributed) | Good |</p>
+<p>| Learning curve | Low (Cypher is intuitive) | Medium | Medium |</p>
+<br>
+<h2> Neo4j</h2>
+<br>
+<p>Neo4j is the most popular graph database with the Cypher query language.</p>
+<br>
+<h3>Data Model</h3>
+<br>
+<pre><code>
+// Create nodes and relationships
+
+CREATE (alice:Person {name: &#x27;Alice&#x27;, age: 30, city: &#x27;San Francisco&#x27;})
+
+CREATE (bob:Person {name: &#x27;Bob&#x27;, age: 25, city: &#x27;New York&#x27;})
+
+CREATE (laptop:Product {name: &#x27;Laptop&#x27;, price: 1200})
+
+CREATE (mouse:Product {name: &#x27;Mouse&#x27;, price: 25})
+
+
+
+CREATE (alice)-[:FOLLOWS]-&gt;(bob)
+
+CREATE (bob)-[:PURCHASED {date: &#x27;2026-05-01&#x27;}]-&gt;(laptop)
+
+CREATE (bob)-[:PURCHASED {date: &#x27;2026-05-02&#x27;}]-&gt;(mouse)
+
+CREATE (bob)-[:REVIEWED {rating: 5, text: &#x27;Great!&#x27;}]-&gt;(laptop)
+
+</code></pre>
+<br>
+<h3>Querying</h3>
+<br>
+<pre><code>
+// Find products purchased by people Alice follows
+
+MATCH (alice:Person {name: &#x27;Alice&#x27;})-[:FOLLOWS]-&gt;(friend)-[:PURCHASED]-&gt;(product)
+
+RETURN friend.name AS friend, product.name AS product
+
+
+
+// Shortest path between two people
+
+MATCH p = shortestPath(
+
+    (alice:Person {name: &#x27;Alice&#x27;})-[:FOLLOWS*]-(bob:Person {name: &#x27;Bob&#x27;})
+
+)
+
+RETURN length(p) AS degrees_of_separation
+
+
+
+// Product recommendations: what did friends of friends buy?
+
+MATCH (me:Person {name: &#x27;Alice&#x27;})-[:FOLLOWS*2]-(friend_of_friend)-[:PURCHASED]-&gt;(product)
+
+WHERE NOT (me)-[:PURCHASED]-&gt;(product)
+
+RETURN product.name, COUNT(*) AS frequency
+
+ORDER BY frequency DESC
+
+LIMIT 10
+
+
+
+// Average rating per product category
+
+MATCH (product:Product)&lt;-[review:REVIEWED]-(customer:Person)
+
+RETURN product.name, AVG(review.rating) AS avg_rating, COUNT(review) AS review_count
+
+ORDER BY avg_rating DESC
+
+</code></pre>
+<br>
+<h3>Neo4j with Python</h3>
+<br>
+<pre><code>
+from neo4j import GraphDatabase
+
+
+
+class MovieGraph:
+
+    def __init__(self, uri, user, password):
+
+        self.driver = GraphDatabase.driver(uri, auth=(user, password))
+
+
+
+    def find_recommendations(self, user_name, limit=10):
+
+        with self.driver.session() as session:
+
+            result = session.run(&quot;&quot;&quot;
+
+                MATCH (user:Person {name: $name})
+
+                MATCH (user)-[:RATED]-&gt;(movie)
+
+                MATCH (movie)&lt;-[:RATED]-(other)-[:RATED]-&gt;(rec)
+
+                WHERE rec.rating &gt;= 4 AND NOT (user)-[:RATED]-&gt;(rec)
+
+                RETURN rec.title, AVG(rec.rating) AS score
+
+                ORDER BY score DESC
+
+                LIMIT $limit
+
+            &quot;&quot;&quot;, name=user_name, limit=limit)
+
+            return [record.data() for record in result]
+
+
+
+recommender = MovieGraph(&quot;bolt://localhost:7687&quot;, &quot;neo4j&quot;, &quot;password&quot;)
+
+recommendations = recommender.find_recommendations(&quot;Alice&quot;)
+
+</code></pre>
+<br>
+<h2> Dgraph</h2>
+<br>
+<p>Dgraph is a distributed graph database that uses GraphQL+- (a GraphQL variant) and has strong horizontal scaling.</p>
+<br>
+<h3>Schema</h3>
+<br>
+<pre><code>
+type Person {
+
+    name: String! @index(exact, term)
+
+    age: Int
+
+    city: String @index(hash)
+
+    follows: [Person] @reverse
+
+    purchased: [Purchase]
+
+}
+
+
+
+type Product {
+
+    name: String! @index(term)
+
+    price: Float
+
+}
+
+
+
+type Purchase {
+
+    product: Product
+
+    date: DateTime
+
+    review: Review
+
+}
+
+
+
+type Review {
+
+    rating: Int
+
+    text: String
+
+}
+
+</code></pre>
+<br>
+<h3>Data and Queries</h3>
+<br>
+<pre><code>
+# Add data
+
+mutation {
+
+  addPerson(input: [
+
+    { name: &quot;Alice&quot;, age: 30, city: &quot;San Francisco&quot;,
+
+      follows: [{ name: &quot;Bob&quot; }],
+
+      purchased: [{ product: { name: &quot;Laptop&quot; }, date: &quot;2026-05-01&quot; }]
+
+    }
+
+  ]) { person { name } }
+
+}
+
+
+
+# Query
+
+{
+
+  queryPerson(filter: { name: { eq: &quot;Alice&quot; } }) {
+
+    follows {
+
+      name
+
+      purchased {
+
+        product { name }
+
+        review { rating }
+
+      }
+
+    }
+
+  }
+
+}
+
+</code></pre>
+<br>
+<h3>Distributed Query Example</h3>
+<br>
+<pre><code>
+# Social graph traversal across distributed nodes
+
+{
+
+  recommendProducts(user: &quot;Alice&quot;) {
+
+    productName
+
+    recommendationScore
+
+    purchasedBy
+
+  }
+
+}
+
+</code></pre>
+<br>
+<h2> ArangoDB</h2>
+<br>
+<p>ArangoDB is a multi-model database that supports document, key-value, and graph models with a single query language (AQL).</p>
+<br>
+<pre><code>
+// Create graph
+
+const graph = db.graph(&#x27;social&#x27;);
+
+graph.addVertexCollection(&#x27;users&#x27;);
+
+graph.addEdgeCollection(&#x27;follows&#x27;, &#x27;users&#x27;, &#x27;users&#x27;);
+
+graph.addEdgeCollection(&#x27;purchased&#x27;, &#x27;users&#x27;, &#x27;products&#x27;);
+
+
+
+// Add data
+
+db.users.save({ _key: &#x27;alice&#x27;, name: &#x27;Alice&#x27;, age: 30 });
+
+db.users.save({ _key: &#x27;bob&#x27;, name: &#x27;Bob&#x27;, age: 25 });
+
+db.products.save({ _key: &#x27;laptop&#x27;, name: &#x27;Laptop&#x27;, price: 1200 });
+
+db.follows.save({ _from: &#x27;users/alice&#x27;, _to: &#x27;users/bob&#x27; });
+
+db.purchased.save({ _from: &#x27;users/bob&#x27;, _to: &#x27;products/laptop&#x27; });
+
+</code></pre>
+<br>
+<pre><code>
+// AQL graph traversal
+
+db.query(`
+
+    FOR v, e, p IN 2..3 OUTBOUND &#x27;users/alice&#x27;
+
+    GRAPH &#x27;social&#x27;
+
+        FILTER e.review.rating &gt;= 4
+
+        RETURN DISTINCT {
+
+            person: v.name,
+
+            product: p.edges[1]._to
+
+        }
+
+`);
+
+</code></pre>
+<br>
+<h2> Use Cases</h2>
+<br>
+<p>| Use Case | Why Graph DB | Example Query |</p>
+<p>|----------|--------------|---------------|</p>
+<p>| Social network | Friends of friends | "People Alice might know" |</p>
+<p>| Recommendation engine | Purchase patterns | "Customers who bought this also bought" |</p>
+<p>| Fraud detection | Transaction patterns | "Identify suspicious transaction rings" |</p>
+<p>| Knowledge graph | Entity relationships | "What is the relationship between X and Y?" |</p>
+<p>| Identity resolution | Entity matching | "Find all accounts belonging to one person" |</p>
+<p>| Supply chain | Dependency tracking | "Which suppliers affect product X?" |</p>
+<br>
+<h2> When Not to Use a Graph Database</h2>
+<br>
+<li>Simple CRUD applications with no complex relationships</li>
+<li>Aggregation-heavy analytics (use columnar DB instead)</li>
+<li>Large-scale time-series data</li>
+<li>Applications where relationships are simple and well-understood (relational DB is fine)</li>
+<li>When your team lacks graph database expertise</li>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Graph databases are the best choice for highly connected data where relationship traversal is the primary access pattern. Neo4j offers the most mature ecosystem with the intuitive Cypher query language. Dgraph provides excellent horizontal scaling for distributed deployments. ArangoDB's multi-model approach lets you mix graph, document, and key-value patterns in a single database. Choose based on your scalability needs, team expertise, and whether you need multi-model capabilities or a pure graph approach.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

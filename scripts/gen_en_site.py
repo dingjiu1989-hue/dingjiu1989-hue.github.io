@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Generate all English site HTML files from /en/articles.json in one pass."""
-import json
+import json, re, html as html_mod
 from pathlib import Path
 from datetime import date
 
@@ -10,12 +10,70 @@ ARTICLES_JSON = EN_DIR / 'articles.json'
 TODAY = date.today().isoformat()
 BASE = 'https://dingjiu1989-hue.github.io'
 
+def md_to_html(md_text):
+    """Convert markdown to HTML. Uses markdown lib if available, else simple fallback."""
+    try:
+        import markdown as md_lib
+        return md_lib.markdown(md_text, extensions=['fenced_code', 'codehilite', 'tables'])
+    except ImportError:
+        lines = md_text.split('\n')
+        html_parts = []
+        in_code = False
+        for line in lines:
+            if line.startswith('```'):
+                if in_code:
+                    html_parts.append('</code></pre>')
+                    in_code = False
+                else:
+                    html_parts.append('<pre><code>')
+                    in_code = True
+            elif in_code:
+                html_parts.append(html_mod.escape(line) + '\n')
+            elif line.startswith('### '):
+                html_parts.append(f'<h3>{line[4:]}</h3>')
+            elif line.startswith('## '):
+                html_parts.append(f'<h2>{line[2:]}</h2>')
+            elif line.startswith('# '):
+                html_parts.append(f'<h1>{line[2:]}</h1>')
+            elif line.startswith('- '):
+                html_parts.append(f'<li>{line[2:]}</li>')
+            elif line.startswith('1. '):
+                html_parts.append(f'<li>{line[3:]}</li>')
+            elif line.strip() == '':
+                html_parts.append('<br>')
+            elif line.startswith('|'):
+                html_parts.append(f'<p>{line}</p>')
+            else:
+                html_parts.append(f'<p>{line}</p>')
+        return '\n'.join(html_parts)
+
+
+def get_body(slug, board_id):
+    """Get article body. Prefers hardcoded BODIES dict, falls back to md file."""
+    if slug in BODIES:
+        return BODIES[slug].strip()
+    md_path = ROOT / 'md' / 'en' / board_id / f'{slug}.md'
+    if md_path.exists():
+        content = md_path.read_text(encoding='utf-8')
+        # Strip frontmatter
+        if content.startswith('---'):
+            end = content.find('---', 3)
+            if end > 0:
+                content = content[end + 3:].strip()
+        html = md_to_html(content)
+        if html.strip():
+            return html
+    return f'<p>Content coming soon.</p>'
+
 BOARD_NAMES = {
     'tech': 'Tech Tutorials',
     'sidehustle': 'Side Hustle',
     'tools': 'Tool Recommendations',
     'ai': 'AI Tutorials',
     'compare': 'Comparisons',
+    'security': 'Security',
+    'database': 'Database',
+    'architecture': 'Architecture',
 }
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -13324,7 +13382,7 @@ def make_article_html(art, board_id, board_name, all_posts):
 
     # Article schema with AI-optimized properties
     tags_str = ', '.join(art.get('tags', []))
-    body_len = len(BODIES.get(slug, ''))
+    body_len = len(get_body(slug, board_id))
     word_est = max(300, body_len // 5)  # rough estimate from body chars
     same_board = [p for p in all_posts if p['board_id'] == board_id and p['slug'] != slug]
     other_board = [p for p in all_posts if p['board_id'] != board_id and p['slug'] != slug]
@@ -13406,7 +13464,7 @@ def make_article_html(art, board_id, board_name, all_posts):
       <div class="article-tags">{pin_h}{tags_h}</div>
       <h1 class="article-title">{art['title']}</h1>
       <div class="article-meta">Published {art['date']} · {art['replies'] * 120} views · {art['replies']} replies</div>
-      <div class="article-body">{BODIES[art['slug']].strip()}</div>
+      <div class="article-body">{get_body(art['slug'], board_id)}</div>
     </article>
     {ad_mid}
     <section class="related">
@@ -13554,6 +13612,9 @@ def make_category(data, board_id):
         'tools': 'Tool Recommendations',
         'ai': 'AI Tutorials',
         'compare': 'Comparisons',
+        'security': 'Security',
+        'database': 'Database',
+        'architecture': 'Architecture',
     }
     board_descs = {
         'tech': 'Programming tutorials, developer tools, and productivity guides.',
@@ -13561,6 +13622,9 @@ def make_category(data, board_id):
         'tools': 'Curated tool recommendations for productivity, design, and development.',
         'ai': 'AI tools, prompt engineering, and practical guides for working with LLMs.',
         'compare': 'Honest tool comparisons with pricing, feature tables, and clear recommendations.',
+        'security': 'Cybersecurity guides, secure coding, and infrastructure protection.',
+        'database': 'Database design, SQL optimization, and data storage best practices.',
+        'architecture': 'System design patterns, distributed systems, and software architecture.',
     }
     title = board_titles[board_id]
 
@@ -13692,8 +13756,12 @@ def main():
         for art in board['posts']:
             slug = art['slug']
             if slug not in BODIES:
-                print(f'  WARNING: No body for {slug}, skipping')
-                continue
+                # Check if there's a markdown fallback
+                md_path = ROOT / 'md' / 'en' / board['id'] / f'{slug}.md'
+                if not md_path.exists():
+                    print(f'  WARNING: No body for {slug}, skipping')
+                    continue
+                print(f'  MD fallback: {slug}')
             art_dir = EN_DIR / board['id']
             art_dir.mkdir(exist_ok=True)
             p = art_dir / f'{slug}.html'

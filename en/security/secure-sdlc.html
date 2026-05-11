@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="secure-sdlc">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Secure Software Development Lifecycle">
+    <meta property="og:description" content="Integrating security into every phase of the SDLC: threat modeling, secure coding, SAST, DAST, dependency scanning, and security reviews.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/secure-sdlc.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Secure Software Development Lifecycle">
+    <meta name="twitter:description" content="Integrating security into every phase of the SDLC: threat modeling, secure coding, SAST, DAST, dependency scanning, and security reviews.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Secure Software Development Lifecycle — SourceHub</title>
+    <meta name="description" content="Integrating security into every phase of the SDLC: threat modeling, secure coding, SAST, DAST, dependency scanning, and security reviews.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/secure-sdlc.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/secure-sdlc.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Secure Software Development Lifecycle",
+      "description": "Integrating security into every phase of the SDLC: threat modeling, secure coding, SAST, DAST, dependency scanning, and security reviews.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1527",
+      "keywords": "Security, Cybersecurity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/secure-sdlc.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Secure Software Development Lifecycle"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Secure Software Development Lifecycle
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">Cybersecurity</span></div>
+      <h1 class="article-title">Secure Software Development Lifecycle</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> What Is Secure SDLC?</h2>
+<br>
+<p>Secure Software Development Lifecycle (Secure SDLC) is the practice of integrating security activities into every phase of the software development process, rather than treating security as a separate phase or an afterthought. The goal is to identify and fix vulnerabilities as early as possible when they are cheapest to remediate.</p>
+<br>
+<h2> The Cost of Late Fixes</h2>
+<br>
+<p>| Phase Found | Relative Fix Cost |</p>
+<p>|-------------|-------------------|</p>
+<p>| Requirements | 1x |</p>
+<p>| Design | 6x |</p>
+<p>| Implementation | 15x |</p>
+<p>| Testing | 40x |</p>
+<p>| Production | 100x+ |</p>
+<br>
+<p>Finding a vulnerability during requirements costs virtually nothing to fix. Finding the same vulnerability after deployment can cost millions in incident response, legal fees, and reputational damage.</p>
+<br>
+<h2> Phase 1: Requirements and Planning</h2>
+<br>
+<h3>Security Requirements Gathering</h3>
+<br>
+<pre><code>
+### Security Requirements Template
+
+
+
+**Feature:** User Authentication
+
+**Security Requirements:**
+
+- [SR-001] Passwords must be hashed with Argon2id
+
+- [SR-002] Rate limit login attempts to 5 per 15 minutes
+
+- [SR-003] MFA must be available for all accounts
+
+- [SR-004] Session tokens must expire after 15 minutes
+
+- [SR-005] Failed login attempts must be logged to SIEM
+
+</code></pre>
+<br>
+<h3>Abuse Case Development</h3>
+<br>
+<p>Document how attackers might abuse a feature:</p>
+<br>
+<p>| Use Case | Abuse Case |</p>
+<p>|----------|------------|</p>
+<p>| User resets password | Attacker triggers unlimited reset emails |</p>
+<p>| File upload avatar | Attacker uploads executable masquerading as image |</p>
+<p>| Search functionality | Attacker injects SQL via search query |</p>
+<br>
+<h2> Phase 2: Design</h2>
+<br>
+<h3>Threat Modeling with STRIDE</h3>
+<br>
+<p>| Category | Threat | Example |</p>
+<p>|----------|--------|---------|</p>
+<p>| Spoofing | Impersonating a user | Forged JWT token |</p>
+<p>| Tampering | Modifying data | SQL injection |</p>
+<p>| Repudiation | Denying actions | Missing audit logs |</p>
+<p>| Information Disclosure | Leaking data | Exposed API keys |</p>
+<p>| Denial of Service | Overloading service | Rate limit bypass |</p>
+<p>| Elevation of Privilege | Gaining unauthorized access | IDOR vulnerability |</p>
+<br>
+<h3>Creating a Threat Model</h3>
+<br>
+<pre><code>
+# Structured threat model entry
+
+threat_model = {
+
+    &quot;id&quot;: &quot;TM-001&quot;,
+
+    &quot;feature&quot;: &quot;Payment Processing&quot;,
+
+    &quot;diagram&quot;: &quot;https://miro.com/board/payment-flow&quot;,
+
+    &quot;entries&quot;: [
+
+        {
+
+            &quot;threat&quot;: &quot;Credit card data intercepted in transit&quot;,
+
+            &quot;category&quot;: &quot;Information Disclosure&quot;,
+
+            &quot;risk&quot;: &quot;Critical&quot;,
+
+            &quot;mitigation&quot;: &quot;TLS 1.3 with HSTS&quot;,
+
+            &quot;status&quot;: &quot;Implemented&quot;
+
+        },
+
+        {
+
+            &quot;threat&quot;: &quot;Payment amount modified during API call&quot;,
+
+            &quot;category&quot;: &quot;Tampering&quot;,
+
+            &quot;risk&quot;: &quot;High&quot;,
+
+            &quot;mitigation&quot;: &quot;Request signing with HMAC&quot;,
+
+            &quot;status&quot;: &quot;Planned&quot;
+
+        }
+
+    ]
+
+}
+
+</code></pre>
+<br>
+<h2> Phase 3: Implementation</h2>
+<br>
+<h3>Secure Coding Standards</h3>
+<br>
+<pre><code>
+// Secure coding checklist enforced via ESLint
+
+
+
+// GOOD: Parameterized query
+
+db.execute(&#x27;SELECT * FROM users WHERE id = $1&#x27;, [userId]);
+
+
+
+// BAD: String concatenation
+
+db.execute(`SELECT * FROM users WHERE id = ${userId}`);
+
+
+
+// GOOD: Input validation
+
+const id = parseInt(userInput, 10);
+
+if (isNaN(id)) throw new Error(&#x27;Invalid ID&#x27;);
+
+
+
+// GOOD: Output encoding
+
+res.send(encodeURIComponent(userProvidedUrl));
+
+
+
+// GOOD: Secure defaults
+
+const cookie = sessionCookie.serialize(&#x27;sid&#x27;, sessionId, {
+
+    httpOnly: true,
+
+    secure: true,
+
+    sameSite: &#x27;strict&#x27;,
+
+    maxAge: 900000
+
+});
+
+</code></pre>
+<br>
+<h3>Pre-Commit Hooks</h3>
+<br>
+<pre><code>
+# .pre-commit-config.yaml
+
+repos:
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+
+    rev: v4.5.0
+
+    hooks:
+
+      - id: detect-private-key
+
+      - id: check-added-large-files
+
+      - id: check-merge-conflict
+
+
+
+  - repo: https://github.com/gitleaks/gitleaks
+
+    rev: v8.18.0
+
+    hooks:
+
+      - id: gitleaks
+
+
+
+  - repo: https://github.com/returntocorp/semgrep
+
+    rev: v1.54.0
+
+    hooks:
+
+      - id: semgrep
+
+        args: [&#x27;--config=auto&#x27;, &#x27;--error&#x27;]
+
+</code></pre>
+<br>
+<h2> Phase 4: Testing</h2>
+<br>
+<h3>SAST (Static Application Security Testing)</h3>
+<br>
+<pre><code>
+# GitHub CodeQL configuration
+
+name: &quot;CodeQL&quot;
+
+on:
+
+  push:
+
+    branches: [main]
+
+  pull_request:
+
+    branches: [main]
+
+
+
+jobs:
+
+  analyze:
+
+    name: Analyze
+
+    runs-on: ubuntu-latest
+
+    strategy:
+
+      matrix:
+
+        language: [&#x27;javascript&#x27;, &#x27;python&#x27;]
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - uses: github/codeql-action/init@v3
+
+        with:
+
+          languages: ${{ matrix.language }}
+
+      - uses: github/codeql-action/analyze@v3
+
+</code></pre>
+<br>
+<h3>Dependency Scanning</h3>
+<br>
+<pre><code>
+name: Dependency Security Scan
+
+on:
+
+  schedule:
+
+    - cron: &#x27;0 6 * * 1&#x27;  # Every Monday
+
+
+
+jobs:
+
+  scan:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+
+      - run: npm audit --audit-level=high
+
+      - name: Check for known vulnerabilities
+
+        run: |
+
+          npx snyk test --severity-threshold=high
+
+          npx snyk monitor
+
+</code></pre>
+<br>
+<h3>DAST (Dynamic Application Security Testing)</h3>
+<br>
+<pre><code>
+# Run OWASP ZAP against staging environment
+
+docker run -v $(pwd):/zap/wrk:rw \
+
+    -t ghcr.io/zaproxy/zaproxy:stable \
+
+    zap-full-scan.py \
+
+    -t https://staging.example.com \
+
+    -r zap-report.html \
+
+    -I  # Include passive scan warnings
+
+</code></pre>
+<br>
+<h2> Phase 5: Deployment</h2>
+<br>
+<h3>Security Gates</h3>
+<br>
+<pre><code>
+# Deployment approval gates
+
+environment:
+
+  name: production
+
+  required_approvals: 2
+
+  security_gates:
+
+    - name: SAST Scan
+
+      status: passed
+
+    - name: Dependency Scan
+
+      status: passed
+
+    - name: Container Scan
+
+      status: passed
+
+    - name: DAST Scan (Staging)
+
+      status: passed
+
+    - name: Manual Security Review
+
+      status: approved
+
+</code></pre>
+<br>
+<h2> Phase 6: Operations</h2>
+<br>
+<h3>Vulnerability Management</h3>
+<br>
+<p>| Severity | Fix Timeline | Response |</p>
+<p>|----------|-------------|----------|</p>
+<p>| Critical | 24 hours | Hotfix deployment |</p>
+<p>| High | 7 days | Next minor release |</p>
+<p>| Medium | 30 days | Next regular release |</p>
+<p>| Low | 90 days | Backlog |</p>
+<br>
+<h3>Incident Response Plan</h3>
+<br>
+<pre><code>
+1. Detect: Monitor alerts, user reports
+
+2. Triage: Determine severity and impact
+
+3. Contain: Isolate affected systems
+
+4. Eradicate: Remove root cause
+
+5. Recover: Restore normal operations
+
+6. Learn: Post-mortem and process improvement
+
+</code></pre>
+<br>
+<h2> Summary</h2>
+<br>
+<p>A mature Secure SDLC integrates security activities into every phase of development. Start with threat modeling during design, enforce secure coding standards during implementation, automate SAST and dependency scanning in CI/CD, perform DAST before deployment, and maintain a vulnerability management program for production. The earlier a vulnerability is found, the cheaper and easier it is to fix.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

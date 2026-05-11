@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="ai-testing-strategies">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Testing Strategies for AI Applications">
+    <meta property="og:description" content="Implement robust AI testing with evaluation datasets, regression testing, A/B evaluation, hallucination detection, prompt testing, and performance benchmarking.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/ai-testing-strategies.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Testing Strategies for AI Applications">
+    <meta name="twitter:description" content="Implement robust AI testing with evaluation datasets, regression testing, A/B evaluation, hallucination detection, prompt testing, and performance benchmarking.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Testing Strategies for AI Applications — SourceHub</title>
+    <meta name="description" content="Implement robust AI testing with evaluation datasets, regression testing, A/B evaluation, hallucination detection, prompt testing, and performance benchmarking.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/ai-testing-strategies.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/ai/ai-testing-strategies.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Testing Strategies for AI Applications",
+      "description": "Implement robust AI testing with evaluation datasets, regression testing, A/B evaluation, hallucination detection, prompt testing, and performance benchmarking.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "2648",
+      "keywords": "Artificial Intelligence, Machine Learning",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-testing-strategies.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "Testing Strategies for AI Applications"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › Testing Strategies for AI Applications
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
+        <span class="tag-cat">Machine Learning</span></div>
+      <h1 class="article-title">Testing Strategies for AI Applications</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>Testing AI applications differs fundamentally from testing deterministic software. Model outputs are probabilistic, edge cases are infinite, and a passing unit test does not guarantee correct behavior in production. A comprehensive AI testing strategy combines traditional software testing with AI-specific evaluation methodologies to catch regressions, hallucinations, and performance degradations before they reach users.</p>
+<br>
+<h2> Evaluation Datasets</h2>
+<br>
+<p>Curate high-quality evaluation datasets that reflect real-world usage:</p>
+<br>
+<pre><code>
+from dataclasses import dataclass
+
+from typing import List, Callable
+
+import json
+
+
+
+@dataclass
+
+class TestCase:
+
+    id: str
+
+    input: str
+
+    expected_output: str
+
+    domain: str
+
+    difficulty: str  # &quot;easy&quot;, &quot;medium&quot;, &quot;hard&quot;
+
+    tags: List[str]
+
+    # For non-deterministic evaluation
+
+    criteria: List[Callable[[str], bool]]
+
+
+
+class EvalDataset:
+
+    def __init__(self, name: str):
+
+        self.name = name
+
+        self.test_cases: List[TestCase] = []
+
+
+
+    def add_golden_set(self, path: str):
+
+        &quot;&quot;&quot;Load curated golden test cases.&quot;&quot;&quot;
+
+        with open(path) as f:
+
+            data = json.load(f)
+
+        for item in data:
+
+            self.test_cases.append(TestCase(
+
+                id=item[&quot;id&quot;],
+
+                input=item[&quot;input&quot;],
+
+                expected_output=item[&quot;expected_output&quot;],
+
+                domain=item.get(&quot;domain&quot;, &quot;general&quot;),
+
+                difficulty=item.get(&quot;difficulty&quot;, &quot;medium&quot;),
+
+                tags=item.get(&quot;tags&quot;, []),
+
+                criteria=[
+
+                    lambda output, expected=item[&quot;expected_output&quot;]:
+
+                        expected.lower() in output.lower(),
+
+                ],
+
+            ))
+
+
+
+    def add_adversarial(self, path: str):
+
+        &quot;&quot;&quot;Load adversarial test cases (edge cases, jailbreaks).&quot;&quot;&quot;
+
+        with open(path) as f:
+
+            data = json.load(f)
+
+        for item in data:
+
+            self.test_cases.append(TestCase(
+
+                id=f&quot;adv_{item[&#x27;id&#x27;]}&quot;,
+
+                input=item[&quot;input&quot;],
+
+                expected_output=&quot;&quot;,
+
+                domain=&quot;adversarial&quot;,
+
+                difficulty=&quot;hard&quot;,
+
+                tags=[&quot;adversarial&quot;],
+
+                criteria=[
+
+                    lambda output:
+
+                        &quot;I cannot&quot; in output or &quot;I&#x27;m unable&quot; in output,
+
+                ],
+
+            ))
+
+</code></pre>
+<br>
+<h2> Regression Testing</h2>
+<br>
+<p>Automated regression testing catches model behavior changes:</p>
+<br>
+<pre><code>
+class ModelRegressionTest:
+
+    def __init__(self, eval_dataset: EvalDataset):
+
+        self.dataset = eval_dataset
+
+        self.results_history: List[dict] = []
+
+
+
+    async def run_regression_suite(
+
+        self,
+
+        model_name: str,
+
+        previous_results: dict = None,
+
+    ) -&gt; dict:
+
+        results = {
+
+            &quot;model&quot;: model_name,
+
+            &quot;timestamp&quot;: datetime.utcnow().isoformat(),
+
+            &quot;total&quot;: len(self.dataset.test_cases),
+
+            &quot;passed&quot;: 0,
+
+            &quot;failed&quot;: 0,
+
+            &quot;failures&quot;: [],
+
+            &quot;score&quot;: 0.0,
+
+        }
+
+
+
+        for test_case in self.dataset.test_cases:
+
+            try:
+
+                output = await self._invoke_model(model_name, test_case.input)
+
+
+
+                # Evaluate against all criteria
+
+                passed = all(
+
+                    criterion(output) for criterion in test_case.criteria
+
+                )
+
+
+
+                if passed:
+
+                    results[&quot;passed&quot;] += 1
+
+                else:
+
+                    results[&quot;failed&quot;] += 1
+
+                    results[&quot;failures&quot;].append({
+
+                        &quot;id&quot;: test_case.id,
+
+                        &quot;input&quot;: test_case.input,
+
+                        &quot;expected&quot;: test_case.expected_output,
+
+                        &quot;actual&quot;: output,
+
+                        &quot;domain&quot;: test_case.domain,
+
+                    })
+
+            except Exception as e:
+
+                results[&quot;failed&quot;] += 1
+
+                results[&quot;failures&quot;].append({
+
+                    &quot;id&quot;: test_case.id,
+
+                    &quot;error&quot;: str(e),
+
+                })
+
+
+
+        results[&quot;score&quot;] = results[&quot;passed&quot;] / results[&quot;total&quot;]
+
+
+
+        # Compare with previous run
+
+        if previous_results:
+
+            score_delta = results[&quot;score&quot;] - previous_results[&quot;score&quot;]
+
+            results[&quot;regression&quot;] = score_delta &lt; -0.02
+
+            results[&quot;score_delta&quot;] = score_delta
+
+
+
+        return results
+
+
+
+    def fail_pipeline_if_regression(self, results: dict):
+
+        &quot;&quot;&quot;Fail CI if model regressed beyond threshold.&quot;&quot;&quot;
+
+        if results.get(&quot;regression&quot;, False):
+
+            raise Exception(
+
+                f&quot;Model regression detected! &quot;
+
+                f&quot;Score dropped from &quot;
+
+                f&quot;{results.get(&#x27;previous_score&#x27;, 1.0):.2%} to &quot;
+
+                f&quot;{results[&#x27;score&#x27;]:.2%}&quot;
+
+            )
+
+</code></pre>
+<br>
+<h2> A/B Evaluation</h2>
+<br>
+<p>Compare model versions side by side with structured evaluation:</p>
+<br>
+<pre><code>
+class ABEvaluation:
+
+    def __init__(self, judge_model: str = &quot;claude-opus-4-20260512&quot;):
+
+        self.judge = judge_model
+
+
+
+    async def evaluate_pair(
+
+        self,
+
+        prompt: str,
+
+        output_a: str,
+
+        output_b: str,
+
+        criteria: List[str],
+
+    ) -&gt; dict:
+
+        &quot;&quot;&quot;Use an independent judge model to compare outputs.&quot;&quot;&quot;
+
+        evaluation_prompt = f&quot;&quot;&quot;
+
+Compare these two AI responses to the same prompt.
+
+
+
+Prompt: &quot;{prompt}&quot;
+
+
+
+Response A: &quot;{output_a}&quot;
+
+Response B: &quot;{output_b}&quot;
+
+
+
+Evaluate on these criteria: {&#x27;, &#x27;.join(criteria)}
+
+
+
+For each criterion, state which response is better (A, B, or tie)
+
+and provide a brief justification.
+
+&quot;&quot;&quot;
+
+
+
+        response = client.messages.create(
+
+            model=self.judge,
+
+            max_tokens=1024,
+
+            messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: evaluation_prompt}],
+
+        )
+
+
+
+        return self._parse_evaluation(response.content[0].text)
+
+
+
+    async def batch_evaluate(
+
+        self,
+
+        prompts: List[str],
+
+        model_a: str,
+
+        model_b: str,
+
+        criteria: List[str],
+
+    ) -&gt; dict:
+
+        results = {&quot;model_a_wins&quot;: 0, &quot;model_b_wins&quot;: 0, &quot;ties&quot;: 0}
+
+
+
+        for prompt in prompts:
+
+            output_a = await self._invoke(model_a, prompt)
+
+            output_b = await self._invoke(model_b, prompt)
+
+
+
+            evaluation = await self.evaluate_pair(
+
+                prompt, output_a, output_b, criteria
+
+            )
+
+
+
+            # Aggregate across criteria
+
+            winner = evaluation[&quot;winner&quot;]
+
+            results[f&quot;{winner}_wins&quot;] += 1
+
+
+
+        results[&quot;total&quot;] = len(prompts)
+
+        results[&quot;a_win_rate&quot;] = results[&quot;model_a_wins&quot;] / results[&quot;total&quot;]
+
+        results[&quot;b_win_rate&quot;] = results[&quot;model_b_wins&quot;] / results[&quot;total&quot;]
+
+
+
+        return results
+
+</code></pre>
+<br>
+<h2> Hallucination Detection</h2>
+<br>
+<p>Automated hallucination checks verify factual accuracy:</p>
+<br>
+<pre><code>
+class HallucinationDetector:
+
+    def __init__(self, knowledge_base: Callable):
+
+        self.kb = knowledge_base
+
+
+
+    async def check_factual_claims(self, output: str) -&gt; List[dict]:
+
+        &quot;&quot;&quot;Extract factual claims and verify them against a knowledge base.&quot;&quot;&quot;
+
+        # 1. Extract atomic claims
+
+        claims = await self._extract_claims(output)
+
+
+
+        verified_claims = []
+
+        for claim in claims:
+
+            # 2. Search knowledge base
+
+            evidence = await self.kb.search(claim[&quot;text&quot;])
+
+
+
+            # 3. Verify claim against evidence
+
+            verification = await self._verify_claim(
+
+                claim[&quot;text&quot;],
+
+                evidence,
+
+                claim[&quot;context&quot;],
+
+            )
+
+
+
+            verified_claims.append({
+
+                &quot;claim&quot;: claim[&quot;text&quot;],
+
+                &quot;confidence&quot;: verification[&quot;confidence&quot;],
+
+                &quot;supported&quot;: verification[&quot;supported&quot;],
+
+                &quot;evidence&quot;: evidence[:3],
+
+                &quot;context&quot;: claim[&quot;context&quot;],
+
+            })
+
+
+
+        return verified_claims
+
+
+
+    async def _verify_claim(
+
+        self,
+
+        claim: str,
+
+        evidence: List[str],
+
+        context: str,
+
+    ) -&gt; dict:
+
+        prompt = f&quot;&quot;&quot;
+
+Claim: &quot;{claim}&quot;
+
+Context: &quot;{context}&quot;
+
+Evidence: {&#x27; &#x27;.join(evidence[:3])}
+
+
+
+Is this claim supported by the evidence?
+
+Respond with JSON:
+
+{{&quot;supported&quot;: bool, &quot;confidence&quot;: 0.0-1.0, &quot;reasoning&quot;: &quot;...&quot;}}
+
+&quot;&quot;&quot;
+
+        response = await self._llm_call(prompt)
+
+        return json.loads(response)
+
+
+
+    def compute_hallucination_rate(
+
+        self, verified_claims: List[dict]
+
+    ) -&gt; float:
+
+        unsupported = sum(
+
+            1 for c in verified_claims if not c[&quot;supported&quot;]
+
+        )
+
+        total = len(verified_claims)
+
+        return unsupported / total if total &gt; 0 else 0.0
+
+</code></pre>
+<br>
+<h2> Prompt Testing</h2>
+<br>
+<p>Version-control prompts with structured testing:</p>
+<br>
+<pre><code>
+class PromptRegistry:
+
+    def __init__(self):
+
+        self.prompts = {}
+
+
+
+    def register(
+
+        self,
+
+        name: str,
+
+        template: str,
+
+        version: str,
+
+        tests: List[Callable] = None,
+
+    ):
+
+        self.prompts[name] = {
+
+            &quot;template&quot;: template,
+
+            &quot;version&quot;: version,
+
+            &quot;tests&quot;: tests or [],
+
+            &quot;performance&quot;: [],
+
+        }
+
+
+
+    async def test_prompt(
+
+        self, name: str, test_cases: List[dict]
+
+    ) -&gt; dict:
+
+        prompt = self.prompts[name]
+
+        results = []
+
+
+
+        for case in test_cases:
+
+            # Render template with test inputs
+
+            rendered = prompt[&quot;template&quot;].format(**case[&quot;inputs&quot;])
+
+            output = await self._invoke(rendered)
+
+
+
+            # Run tests
+
+            test_results = [
+
+                test(output) for test in prompt[&quot;tests&quot;]
+
+            ]
+
+
+
+            results.append({
+
+                &quot;case&quot;: case[&quot;name&quot;],
+
+                &quot;output&quot;: output,
+
+                &quot;tests_passed&quot;: all(test_results),
+
+                &quot;test_details&quot;: test_results,
+
+            })
+
+
+
+        return {
+
+            &quot;prompt&quot;: name,
+
+            &quot;version&quot;: prompt[&quot;version&quot;],
+
+            &quot;pass_rate&quot;: sum(r[&quot;tests_passed&quot;] for r in results) / len(results),
+
+            &quot;results&quot;: results,
+
+        }
+
+</code></pre>
+<br>
+<h2> Performance Testing</h2>
+<br>
+<p>Benchmark latency, throughput, and cost across model versions:</p>
+<br>
+<pre><code>
+class AIPerformanceTest:
+
+    async def benchmark(
+
+        self,
+
+        model: str,
+
+        concurrency: int = 10,
+
+        requests: int = 100,
+
+    ) -&gt; dict:
+
+        import time
+
+        import asyncio
+
+
+
+        semaphore = asyncio.Semaphore(concurrency)
+
+        latencies = []
+
+
+
+        async def single_request():
+
+            async with semaphore:
+
+                start = time.monotonic()
+
+                await self._invoke_model(model, &quot;Test prompt&quot;)
+
+                latencies.append(time.monotonic() - start)
+
+
+
+        tasks = [single_request() for _ in range(requests)]
+
+        await asyncio.gather(*tasks)
+
+
+
+        latencies.sort()
+
+        return {
+
+            &quot;model&quot;: model,
+
+            &quot;p50&quot;: latencies[len(latencies) // 2],
+
+            &quot;p95&quot;: latencies[int(len(latencies) * 0.95)],
+
+            &quot;p99&quot;: latencies[int(len(latencies) * 0.99)],
+
+            &quot;avg&quot;: sum(latencies) / len(latencies),
+
+            &quot;throughput&quot;: requests / sum(latencies),
+
+            &quot;total_cost&quot;: self._calculate_cost(model, requests),
+
+        }
+
+</code></pre>
+<br>
+<p>A mature AI testing pipeline runs golden set regression on every PR, A/B evaluations before model upgrades, hallucination detection on every production response, and performance benchmarks weekly. No single metric captures model quality; combine automated tests with human evaluation for production releases.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a><a href="/en/ai/ai-security-complete-guide.html" class="related-card">AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a><a href="/en/ai/ai-security-complete-guide.html" class="related-card">AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

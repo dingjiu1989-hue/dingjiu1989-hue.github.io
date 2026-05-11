@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tools" data-exclude="performance-testing-tools">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Performance Testing Tools: k6 vs Locust vs JMeter">
+    <meta property="og:description" content="Compare k6, Locust, and JMeter for performance testing including script types, distributed testing, CI integration, reporting, and protocol support.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tools/performance-testing-tools.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Performance Testing Tools: k6 vs Locust vs JMeter">
+    <meta name="twitter:description" content="Compare k6, Locust, and JMeter for performance testing including script types, distributed testing, CI integration, reporting, and protocol support.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Performance Testing Tools: k6 vs Locust vs JMeter — SourceHub</title>
+    <meta name="description" content="Compare k6, Locust, and JMeter for performance testing including script types, distributed testing, CI integration, reporting, and protocol support.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tools/performance-testing-tools.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tools/performance-testing-tools.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Performance Testing Tools: k6 vs Locust vs JMeter",
+      "description": "Compare k6, Locust, and JMeter for performance testing including script types, distributed testing, CI integration, reporting, and protocol support.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "2124",
+      "keywords": "Developer Tools, Productivity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/performance-testing-tools.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tool Recommendations", "item": "https://dingjiu1989-hue.github.io/en/tools/"},
+        {"@type": "ListItem", "position": 3, "name": "Performance Testing Tools: k6 vs Locust vs JMeter"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a> › Performance Testing Tools: k6 vs Locust vs JMeter
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Developer Tools</span>
+        <span class="tag-cat">Productivity</span></div>
+      <h1 class="article-title">Performance Testing Tools: k6 vs Locust vs JMeter</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>Performance testing is not optional for production services. Without it, you discover scaling bottlenecks during traffic spikes or product launches. The three leading open-source tools--k6, Locust, and JMeter--each approach load testing from different angles. This article compares their scripting models, distributed testing capabilities, CI integration, and reporting to help you choose the right tool for your use case.</p>
+<br>
+<h2> k6</h2>
+<br>
+<p>k6 is a modern load testing tool built with JavaScript/Go, designed for developer workflows and CI integration:</p>
+<br>
+<pre><code>
+// k6 test script
+
+import http from &#x27;k6/http&#x27;;
+
+import { check, sleep, group } from &#x27;k6&#x27;;
+
+import { Rate, Trend, Counter } from &#x27;k6/metrics&#x27;;
+
+
+
+// Custom metrics
+
+const errorRate = new Rate(&#x27;errors&#x27;);
+
+const paymentLatency = new Trend(&#x27;payment_latency&#x27;);
+
+const successCount = new Counter(&#x27;successful_payments&#x27;);
+
+
+
+// Test configuration
+
+export const options = {
+
+  stages: [
+
+    { duration: &#x27;2m&#x27;, target: 50 },   // Ramp up to 50 users
+
+    { duration: &#x27;5m&#x27;, target: 100 },  // Stay at 100 users
+
+    { duration: &#x27;2m&#x27;, target: 200 },  // Spike to 200
+
+    { duration: &#x27;2m&#x27;, target: 0 },    // Ramp down
+
+  ],
+
+  thresholds: {
+
+    http_req_duration: [&#x27;p(95)&lt;500&#x27;, &#x27;p(99)&lt;1000&#x27;],
+
+    errors: [&#x27;rate&lt;0.05&#x27;],
+
+    &#x27;payment_latency&#x27;: [&#x27;p(99)&lt;2000&#x27;],
+
+  },
+
+};
+
+
+
+export default function () {
+
+  group(&#x27;Payment Flow&#x27;, () =&gt; {
+
+    const payload = JSON.stringify({
+
+      amount: 49.99,
+
+      currency: &#x27;USD&#x27;,
+
+      token: &#x27;tok_test_123&#x27;,
+
+    });
+
+
+
+    const params = {
+
+      headers: { &#x27;Content-Type&#x27;: &#x27;application/json&#x27; },
+
+      tags: { endpoint: &#x27;charge&#x27; },
+
+    };
+
+
+
+    const response = http.post(
+
+      &#x27;https://api.example.com/v1/charges&#x27;,
+
+      payload,
+
+      params
+
+    );
+
+
+
+    check(response, {
+
+      &#x27;status is 200&#x27;: (r) =&gt; r.status === 200,
+
+      &#x27;response time &lt; 300ms&#x27;: (r) =&gt; r.timings.duration &lt; 300,
+
+      &#x27;has transaction id&#x27;: (r) =&gt; r.json(&#x27;id&#x27;) !== undefined,
+
+    });
+
+
+
+    paymentLatency.add(response.timings.duration);
+
+    errorRate.add(response.status !== 200);
+
+    if (response.status === 200) successCount.add(1);
+
+
+
+    sleep(1);
+
+  });
+
+}
+
+</code></pre>
+<br>
+<h3>CI Integration</h3>
+<br>
+<pre><code>
+# .github/workflows/performance-test.yml
+
+name: Performance Test
+
+on:
+
+  push:
+
+    branches: [main]
+
+  schedule:
+
+    - cron: &#x27;0 6 * * 1-5&#x27;  # Weekdays at 6 AM
+
+
+
+jobs:
+
+  load-test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Run k6 test
+
+        uses: grafana/k6-action@v0.3.0
+
+        with:
+
+          filename: tests/performance/payment-flow.js
+
+          flags: --out json=results.json
+
+      - name: Upload results
+
+        uses: actions/upload-artifact@v4
+
+        with:
+
+          name: k6-results
+
+          path: results.json
+
+      - name: Compare thresholds
+
+        run: |
+
+          if grep -q &#x27;&quot;thresholds&quot;: {&quot;failed&quot;:&#x27; results.json; then
+
+            echo &quot;Performance thresholds exceeded!&quot;
+
+            exit 1
+
+          fi
+
+</code></pre>
+<br>
+<h2> Locust</h2>
+<br>
+<p>Locust uses Python for test scenarios, making it ideal for teams already in the Python ecosystem:</p>
+<br>
+<pre><code>
+# locustfile.py
+
+from locust import HttpUser, task, between, events
+
+from locust.runners import MasterRunner
+
+import json
+
+import logging
+
+
+
+class PaymentUser(HttpUser):
+
+    wait_time = between(0.5, 2.5)
+
+
+
+    def on_start(self):
+
+        &quot;&quot;&quot;Login before starting tasks&quot;&quot;&quot;
+
+        response = self.client.post(&quot;/auth/login&quot;, json={
+
+            &quot;username&quot;: f&quot;test_user_{self.id}&quot;,
+
+            &quot;password&quot;: &quot;test_password&quot;,
+
+        })
+
+        self.token = response.json().get(&quot;token&quot;)
+
+        self.client.headers.update({
+
+            &quot;Authorization&quot;: f&quot;Bearer {self.token}&quot;
+
+        })
+
+
+
+    @task(3)
+
+    def create_payment(self):
+
+        &quot;&quot;&quot;Create a payment - weight 3&quot;&quot;&quot;
+
+        payload = {
+
+            &quot;amount&quot;: 99.99,
+
+            &quot;currency&quot;: &quot;USD&quot;,
+
+            &quot;description&quot;: &quot;Load test payment&quot;,
+
+        }
+
+        with self.client.post(
+
+            &quot;/api/v1/charges&quot;,
+
+            json=payload,
+
+            catch_response=True,
+
+            name=&quot;/api/v1/charges [POST]&quot;,
+
+        ) as response:
+
+            if response.status_code != 201:
+
+                response.failure(f&quot;Unexpected status: {response.status_code}&quot;)
+
+            elif response.elapsed.total_seconds() &gt; 2.0:
+
+                response.failure(&quot;Request took too long&quot;)
+
+
+
+    @task(1)
+
+    def get_balance(self):
+
+        &quot;&quot;&quot;Check balance - weight 1&quot;&quot;&quot;
+
+        self.client.get(&quot;/api/v1/balance&quot;, name=&quot;/api/v1/balance [GET]&quot;)
+
+
+
+    @task(1)
+
+    def list_transactions(self):
+
+        &quot;&quot;&quot;List recent transactions&quot;&quot;&quot;
+
+        self.client.get(
+
+            &quot;/api/v1/transactions?limit=10&quot;,
+
+            name=&quot;/api/v1/transactions [GET]&quot;,
+
+        )
+
+
+
+# Distributed testing hook
+
+@events.init.add_listener
+
+def on_locust_init(environment, **kwargs):
+
+    if isinstance(environment.runner, MasterRunner):
+
+        print(&quot;Starting distributed load test with master node&quot;)
+
+</code></pre>
+<br>
+<h2> JMeter</h2>
+<br>
+<p>JMeter provides a GUI for test plan creation, useful for non-developer team members:</p>
+<br>
+<pre><code>
+&lt;!-- JMeter test plan (exported XML) --&gt;
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+
+&lt;jmeterTestPlan version=&quot;1.2&quot;&gt;
+
+  &lt;hashTree&gt;
+
+    &lt;TestPlan guiclass=&quot;TestPlanGui&quot; testclass=&quot;TestPlan&quot;&gt;
+
+      &lt;elementProp name=&quot;TestPlan.user_defined_variables&quot;&gt;
+
+        &lt;collectionProp&gt;
+
+          &lt;elementProp name=&quot;base_url&quot;&gt;
+
+            &lt;stringProp name=&quot;value&quot;&gt;https://api.example.com&lt;/stringProp&gt;
+
+          &lt;/elementProp&gt;
+
+        &lt;/collectionProp&gt;
+
+      &lt;/elementProp&gt;
+
+    &lt;/TestPlan&gt;
+
+
+
+    &lt;hashTree&gt;
+
+      &lt;ThreadGroup guiclass=&quot;ThreadGroupGui&quot; testclass=&quot;ThreadGroup&quot;&gt;
+
+        &lt;intProp name=&quot;ThreadGroup.num_threads&quot;&gt;100&lt;/intProp&gt;
+
+        &lt;intProp name=&quot;ThreadGroup.ramp_time&quot;&gt;60&lt;/intProp&gt;
+
+        &lt;boolProp name=&quot;ThreadGroup.scheduler&quot;&gt;true&lt;/boolProp&gt;
+
+        &lt;stringProp name=&quot;ThreadGroup.duration&quot;&gt;600&lt;/stringProp&gt;
+
+      &lt;/ThreadGroup&gt;
+
+
+
+      &lt;hashTree&gt;
+
+        &lt;HTTPSamplerProxy guiclass=&quot;HttpTestSampleGui&quot;
+
+                          testclass=&quot;HTTPSamplerProxy&quot;&gt;
+
+          &lt;stringProp name=&quot;HTTPSampler.domain&quot;&gt;${base_url}&lt;/stringProp&gt;
+
+          &lt;stringProp name=&quot;HTTPSampler.path&quot;&gt;/api/v1/charges&lt;/stringProp&gt;
+
+          &lt;stringProp name=&quot;HTTPSampler.method&quot;&gt;POST&lt;/stringProp&gt;
+
+          &lt;boolProp name=&quot;HTTPSampler.postBodyRaw&quot;&gt;true&lt;/boolProp&gt;
+
+          &lt;stringProp name=&quot;HTTPSampler.protocol&quot;&gt;https&lt;/stringProp&gt;
+
+        &lt;/HTTPSamplerProxy&gt;
+
+
+
+        &lt;hashTree&gt;
+
+          &lt;ResponseAssertion guiclass=&quot;AssertionGui&quot;
+
+                             testclass=&quot;ResponseAssertion&quot;&gt;
+
+            &lt;intProp name=&quot;Assertion.test_field&quot;&gt;806856195&lt;/intProp&gt;
+
+            &lt;stringProp name=&quot;Assertion.assume_success&quot;&gt;false&lt;/stringProp&gt;
+
+            &lt;collectionProp name=&quot;Asserion.test_strings&quot;&gt;
+
+              &lt;stringProp name=&quot;1242958654&quot;&gt;&quot;status&quot;: &quot;success&quot;&lt;/stringProp&gt;
+
+            &lt;/collectionProp&gt;
+
+          &lt;/ResponseAssertion&gt;
+
+        &lt;/hashTree&gt;
+
+      &lt;/hashTree&gt;
+
+    &lt;/hashTree&gt;
+
+  &lt;/hashTree&gt;
+
+&lt;/jmeterTestPlan&gt;
+
+</code></pre>
+<br>
+<h2> Distributed Testing</h2>
+<br>
+<p>| Feature | k6 | Locust | JMeter |</p>
+<p>|---|---|---|---|</p>
+<p>| Distributed mode | k6-operator (K8s) | Master/worker (built-in) | Master/slave (built-in) |</p>
+<p>| Cloud execution | Grafana Cloud k6 | Locust Cloud | BlazeMeter |</p>
+<p>| Scaling | Horizontal via K8s | Built-in RPC | CLI parameters |</p>
+<br>
+<p>k6 distributed testing with Kubernetes:</p>
+<br>
+<pre><code>
+# k6-operator CRD for distributed tests
+
+apiVersion: k6.io/v1alpha1
+
+kind: TestRun
+
+metadata:
+
+  name: payment-load-test
+
+spec:
+
+  parallelism: 6
+
+  script:
+
+    configMap:
+
+      name: k6-test-scripts
+
+      file: payment-flow.js
+
+  runner:
+
+    image: grafana/k6:latest
+
+    env:
+
+      - name: TARGET_URL
+
+        value: &quot;https://api.example.com&quot;
+
+    resources:
+
+      limits:
+
+        cpu: &quot;1&quot;
+
+        memory: 512Mi
+
+      requests:
+
+        cpu: 500m
+
+        memory: 256Mi
+
+</code></pre>
+<br>
+<h2> Protocol Support</h2>
+<br>
+<p>| Protocol | k6 | Locust | JMeter |</p>
+<p>|---|---|---|---|</p>
+<p>| HTTP/1.1 | Native | Native | Native |</p>
+<p>| HTTP/2 | Native | Extension | Native |</p>
+<p>| gRPC | Extension | Extension | Native |</p>
+<p>| WebSocket | Extension | Extension | Native |</p>
+<p>| JDBC | No | No | Native |</p>
+<p>| JMS | No | No | Native |</p>
+<p>| MQTT | Extension | Extension | Plugin |</p>
+<br>
+<h2> When to Use Which</h2>
+<br>
+<li>**k6**: Best for developer-led teams wanting CI-native load testing with JavaScript. Excellent for REST API and microservice testing.</li>
+<li>**Locust**: Best for Python-centric teams who need complex test scenarios and real-time monitoring. Ideal for behavioral load testing.</li>
+<li>**JMeter**: Best for organizations requiring broad protocol support, GUI-based test creation, or integration with legacy performance testing workflows.</li>
+<br>
+<p>For most modern web applications, k6 provides the best developer experience and CI integration. Choose Locust when your test scenarios require complex Python logic. Reserve JMeter for situations requiring its broad protocol support or when non-developers need to create and modify test plans.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div>
+      <noscript><div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="hexagonal-architecture">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Hexagonal Architecture (Ports and Adapters)">
+    <meta property="og:description" content="Learn hexagonal architecture for building maintainable, testable applications.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/hexagonal-architecture.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hexagonal Architecture (Ports and Adapters)">
+    <meta name="twitter:description" content="Learn hexagonal architecture for building maintainable, testable applications.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Hexagonal Architecture (Ports and Adapters) — SourceHub</title>
+    <meta name="description" content="Learn hexagonal architecture for building maintainable, testable applications.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/hexagonal-architecture.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/hexagonal-architecture.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Hexagonal Architecture (Ports and Adapters)",
+      "description": "Learn hexagonal architecture for building maintainable, testable applications.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1054",
+      "keywords": "Architecture, System Design",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/hexagonal-architecture.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Hexagonal Architecture (Ports and Adapters)"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Hexagonal Architecture (Ports and Adapters)
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span></div>
+      <h1 class="article-title">Hexagonal Architecture (Ports and Adapters)</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Hexagonal architecture, also known as ports and adapters, is a software design pattern introduced by Alistair Cockburn in 2005. It creates a separation between the core business logic and the external systems it interacts with, making applications more maintainable, testable, and adaptable to change.</p>
+<br>
+<h2> The Core Idea</h2>
+<br>
+<p>The pattern gets its name from the hexagonal shape used in diagrams, though the number of sides has no particular significance. The key insight is that the application core should not depend on the details of external systems -- databases, web frameworks, message queues, or user interfaces.</p>
+<br>
+<p>The architecture has three layers:</p>
+<br>
+<li>**Core (Domain)**: The pure business logic with no external dependencies.</li>
+<p>2. **Ports**: Interfaces that define how the core interacts with the outside world.</p>
+<p>3. **Adapters**: Implementations of those interfaces that connect to specific technologies.</p>
+<br>
+<h2> Ports: The Contracts</h2>
+<br>
+<p>Ports are interfaces defined within the domain layer. There are two types:</p>
+<br>
+<p>**Inbound ports** (driving ports) define how the outside world can interact with the application. These are typically use-case interfaces:</p>
+<br>
+<pre><code>
+public interface OrderService {
+
+    Order createOrder(CreateOrderRequest request);
+
+    Order getOrder(String orderId);
+
+    void cancelOrder(String orderId);
+
+}
+
+</code></pre>
+<br>
+<p>**Outbound ports** (driven ports) define how the application accesses external systems:</p>
+<br>
+<pre><code>
+public interface OrderRepository {
+
+    void save(Order order);
+
+    Order findById(String orderId);
+
+    List&lt;Order&gt; findByCustomerId(String customerId);
+
+}
+
+</code></pre>
+<br>
+<h2> Adapters: The Implementations</h2>
+<br>
+<p>Adapters implement the port interfaces and handle the details of communicating with specific technologies.</p>
+<br>
+<p>**Inbound adapters** handle incoming requests. A REST controller is an inbound adapter:</p>
+<br>
+<pre><code>
+@RestController
+
+public class OrderController {
+
+    private final OrderService orderService;
+
+
+
+    @PostMapping(&quot;/orders&quot;)
+
+    public ResponseEntity&lt;OrderResponse&gt; createOrder(@RequestBody CreateOrderRequest request) {
+
+        Order order = orderService.createOrder(request);
+
+        return ResponseEntity.status(201).map(OrderResponse::from);
+
+    }
+
+}
+
+</code></pre>
+<br>
+<p>**Outbound adapters** handle outgoing calls. A JPA repository implementation is an outbound adapter:</p>
+<br>
+<pre><code>
+public class JpaOrderRepository implements OrderRepository {
+
+    private final SpringDataJpaOrderRepository repo;
+
+
+
+    @Override
+
+    public void save(Order order) {
+
+        repo.save(OrderEntity.from(order));
+
+    }
+
+}
+
+</code></pre>
+<br>
+<h2> Dependency Rule</h2>
+<br>
+<p>The critical rule: **dependencies point inward**. The domain core knows nothing about HTTP, databases, or message queues. The adapters depend on the ports (interfaces), not the other way around. This is achieved through dependency injection at the application's entry point.</p>
+<br>
+<pre><code>
+[External] -&gt; [Inbound Adapter] -&gt; [Port Interface] -&gt; [Domain Core] -&gt; [Port Interface] -&gt; [Outbound Adapter] -&gt; [External]
+
+</code></pre>
+<br>
+<h2> Benefits</h2>
+<br>
+<p>**Testability.** You can test the domain core by mocking adapters at the port boundaries. No database, no HTTP server, no message broker needed. This results in fast, reliable unit tests.</p>
+<br>
+<p>**Technology Independence.** You can swap a SQL database for MongoDB by writing a new adapter. You can change from REST to GraphQL by swapping the inbound adapter. The core business logic remains untouched.</p>
+<br>
+<p>**Isolation of Changes.** When your ORM or web framework releases a breaking change, only the adapter code needs updating. The core business logic is completely isolated.</p>
+<br>
+<p>**Clear Boundaries.** The explicit separation between ports and adapters makes the architecture visible in the code structure. New team members can quickly understand where different concerns live.</p>
+<br>
+<h2> Common Mistakes</h2>
+<br>
+<p>**Leaking adapter concerns into the domain.** Your domain objects should not have JPA annotations, JSON serialization attributes, or framework-specific base classes. Use separate data transfer objects and mapping logic in the adapters.</p>
+<br>
+<p>**Over-abstracting.** Not every external dependency needs a port-adapter pair. If you are writing an interface with a single implementation and no foreseeable alternative, you might be over-engineering. The testability argument still holds, but be pragmatic.</p>
+<br>
+<p>**Fat ports.** Keep port interfaces focused. A repository interface with 30 methods suggests the abstraction is too broad or the domain model is not well-defined.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Hexagonal architecture is a practical pattern for building maintainable applications. By defining clear boundaries between business logic and infrastructure, you gain testability, technology independence, and protection against external changes. Start by identifying the ports in your domain and implementing adapters for each external system. The investment pays off quickly as the application grows and evolves.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

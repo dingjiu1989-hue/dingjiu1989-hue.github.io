@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="vector-search-optimization">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Vector Search Optimization Techniques">
+    <meta property="og:description" content="Optimize vector search with HNSW tuning, quantization (PQ, scalar), IVF parameters, filtered search performance, and multi-vector indexing.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/vector-search-optimization.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Vector Search Optimization Techniques">
+    <meta name="twitter:description" content="Optimize vector search with HNSW tuning, quantization (PQ, scalar), IVF parameters, filtered search performance, and multi-vector indexing.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Vector Search Optimization Techniques — SourceHub</title>
+    <meta name="description" content="Optimize vector search with HNSW tuning, quantization (PQ, scalar), IVF parameters, filtered search performance, and multi-vector indexing.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/vector-search-optimization.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/vector-search-optimization.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Vector Search Optimization Techniques",
+      "description": "Optimize vector search with HNSW tuning, quantization (PQ, scalar), IVF parameters, filtered search performance, and multi-vector indexing.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "2789",
+      "keywords": "Database, SQL",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/vector-search-optimization.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Vector Search Optimization Techniques"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Vector Search Optimization Techniques
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">SQL</span></div>
+      <h1 class="article-title">Vector Search Optimization Techniques</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Vector search is the foundation of modern retrieval-augmented generation (RAG), semantic search, and recommendation systems. As vector databases become production workloads, optimizing search performance, recall, and memory usage becomes critical. This article covers practical optimization techniques for HNSW, quantization, IVF, filtered search, and multi-vector indexing.</p>
+<br>
+<h2> HNSW Tuning</h2>
+<br>
+<p>HNSW (Hierarchical Navigable Small World) is the most popular approximate nearest neighbor (ANN) algorithm. It builds a multi-layer graph where higher layers have fewer nodes (long-range connections) and lower layers have more nodes (short-range connections).</p>
+<br>
+<h3>Key Parameters</h3>
+<br>
+<p>**M (Maximum number of connections per node)**:</p>
+<p>Controls how many neighbors each node connects to. Higher M improves recall and search quality at the cost of more memory and slower indexing.</p>
+<br>
+<li>M = 8: Lower memory, lower recall. Good for filtering-heavy workloads.</li>
+<li>M = 16: Balanced. Recommended default for most cases.</li>
+<li>M = 32: Higher recall, higher memory. Good for high-accuracy requirements.</li>
+<br>
+<pre><code>
+# HNSW with different M values
+
+from pymilvus import CollectionSchema, FieldSchema, DataType
+
+
+
+schema = CollectionSchema([
+
+    FieldSchema(&quot;id&quot;, DataType.INT64, is_primary=True),
+
+    FieldSchema(&quot;embedding&quot;, DataType.FLOAT_VECTOR, dim=768),
+
+])
+
+
+
+# Milvus: Create collection with HNSW index
+
+collection.create_index(&quot;embedding&quot;, {
+
+    &quot;metric_type&quot;: &quot;IP&quot;,          # Inner product
+
+    &quot;index_type&quot;: &quot;HNSW&quot;,
+
+    &quot;params&quot;: {
+
+        &quot;M&quot;: 16,                  # Connections per node
+
+        &quot;efConstruction&quot;: 200     # Build-time search width
+
+    }
+
+})
+
+</code></pre>
+<br>
+<p>**efConstruction (Build-time search width)**:</p>
+<p>Controls how many candidate neighbors are evaluated during index construction. Higher values improve index quality but increase build time.</p>
+<br>
+<li>efConstruction = 100: Fast building. Good for frequent rebuilds.</li>
+<li>efConstruction = 200: Balanced quality and speed.</li>
+<li>efConstruction = 400: Highest quality. For static datasets built once.</li>
+<br>
+<p>**ef (Search-time search width)**:</p>
+<p>Controls the trade-off between search speed and recall. Unlike M and efConstruction, ef is set at query time, not build time.</p>
+<br>
+<pre><code>
+# Search with different ef values
+
+def search_with_ef(collection, query_vector, ef, top_k=10):
+
+    search_params = {
+
+        &quot;metric_type&quot;: &quot;IP&quot;,
+
+        &quot;params&quot;: {
+
+            &quot;ef&quot;: ef  # Higher = better recall, slower
+
+        }
+
+    }
+
+    results = collection.search(
+
+        data=[query_vector],
+
+        anns_field=&quot;embedding&quot;,
+
+        param=search_params,
+
+        limit=top_k
+
+    )
+
+    return results
+
+
+
+# Tuning strategy: Start with ef=top_k*2, increase until recall is acceptable
+
+</code></pre>
+<br>
+<h3>HNSW Tuning Process</h3>
+<br>
+<li>Set M = 16, efConstruction = 200 as baseline.</li>
+<p>2. Build the index and measure recall at ef = 100.</p>
+<p>3. If recall is below target, increase M to 24 or 32.</p>
+<p>4. If still below, increase efConstruction to 300-400.</p>
+<p>5. For production queries, set ef based on latency budget: higher ef for offline, lower for real-time.</p>
+<br>
+<h2> Quantization</h2>
+<br>
+<p>Quantization reduces the memory footprint of vectors by reducing the precision of each dimension. It enables larger datasets to fit in memory or reduces search latency by shrinking the data that must be scanned.</p>
+<br>
+<h3>Scalar Quantization (SQ)</h3>
+<br>
+<p>Scalar quantization converts 32-bit float vectors to 8-bit (or 4-bit) integers. Each dimension is compressed by 4x (or 8x for 4-bit).</p>
+<br>
+<pre><code>
+# Scalar quantization: float32 to int8
+
+import numpy as np
+
+
+
+def quantize_scalar_8bit(vectors):
+
+    &quot;&quot;&quot;Convert float32 vectors to int8.&quot;&quot;&quot;
+
+    # Calculate min/max per dimension
+
+    mins = vectors.min(axis=0)
+
+    maxs = vectors.max(axis=0)
+
+    ranges = maxs - mins
+
+    
+
+    # Quantize to int8
+
+    quantized = ((vectors - mins) / (ranges + 1e-10) * 255 - 128).astype(np.int8)
+
+    return quantized, mins, ranges
+
+
+
+def dequantize_scalar_8bit(quantized, mins, ranges):
+
+    &quot;&quot;&quot;Restore approximate float32 from int8.&quot;&quot;&quot;
+
+    return ((quantized.astype(np.float32) + 128) / 255 * ranges + mins)
+
+</code></pre>
+<br>
+<p>**When to use SQ**:</p>
+<li>Memory is constrained (you cannot fit float32 vectors in RAM).</li>
+<li>Dataset has 100M+ vectors and you are using disk-based indexes.</li>
+<li>Recall loss of 1-2 percentage points is acceptable.</li>
+<br>
+<h3>Product Quantization (PQ)</h3>
+<br>
+<p>Product quantization splits vectors into sub-vectors and quantizes each sub-vector independently using a codebook. It is more aggressive than scalar quantization.</p>
+<br>
+<pre><code>
+# Product quantization with 8 sub-quantizers
+
+def train_pq(vectors, m=8, k=256):
+
+    &quot;&quot;&quot;Train product quantization codebooks.
+
+    
+
+    Args:
+
+        vectors: (n, d) float32 array
+
+        m: Number of sub-vector partitions
+
+        k: Number of centroids per partition
+
+    &quot;&quot;&quot;
+
+    d = vectors.shape[1]
+
+    assert d % m == 0, &quot;Dimension must be divisible by m&quot;
+
+    
+
+    sub_dim = d // m
+
+    codebooks = []
+
+    codes = np.zeros((vectors.shape[0], m), dtype=np.uint8)
+
+    
+
+    for i in range(m):
+
+        sub_vectors = vectors[:, i*sub_dim:(i+1)*sub_dim]
+
+        # Train k-means with k centroids
+
+        centroids = train_kmeans(sub_vectors, k)
+
+        codebooks.append(centroids)
+
+        # Assign each sub-vector to nearest centroid
+
+        codes[:, i] = assign_to_centroids(sub_vectors, centroids)
+
+    
+
+    return codebooks, codes
+
+</code></pre>
+<br>
+<p>**PQ compression ratios**:</p>
+<li>PQ 4x8: 4 bytes per sub-vector, 8 sub-vectors = 32 bytes per vector (96% reduction from 768-dim float32).</li>
+<li>PQ 8x8: 8 bytes per sub-vector, 8 sub-vectors = 64 bytes per vector (92% reduction).</li>
+<li>PQ 16x8: 16 bytes per sub-vector, 8 sub-vectors = 128 bytes per vector (83% reduction).</li>
+<br>
+<p>**When to use PQ**:</p>
+<li>Extremely large datasets (billions of vectors).</li>
+<li>Memory is the primary constraint.</li>
+<li>Some recall loss (5-10%) is acceptable.</li>
+<br>
+<h3>Quantization Trade-offs</h3>
+<br>
+<pre><code>
+quantization_methods:
+
+  none:
+
+    memory: 3072 bytes (768-dim float32)
+
+    recall: ~100%
+
+    use_case: &quot;Highest accuracy, small datasets&quot;
+
+  
+
+  scalar_8bit:
+
+    memory: 768 bytes
+
+    recall: ~98-99%
+
+    use_case: &quot;General optimization&quot;
+
+  
+
+  pq_8x8:
+
+    memory: 64 bytes
+
+    recall: ~90-95%
+
+    use_case: &quot;Large-scale, memory-constrained&quot;
+
+  
+
+  pq_4x8:
+
+    memory: 32 bytes
+
+    recall: ~85-90%
+
+    use_case: &quot;Billions of vectors&quot;
+
+</code></pre>
+<br>
+<h2> IVF (Inverted File Index) Parameters</h2>
+<br>
+<p>IVF clusters vectors and only searches the nearest clusters during query. It is fast and memory-efficient but requires careful parameter tuning.</p>
+<br>
+<h3>Key Parameters</h3>
+<br>
+<p>**nlist (Number of clusters)**:</p>
+<p>Controls the granularity of the inverted file index.</p>
+<br>
+<li>nlist = sqrt(N): Recommended baseline (N = dataset size).</li>
+<li>Higher nlist: Smaller clusters, faster search (fewer vectors to scan) but increased indexing time.</li>
+<li>Lower nlist: Larger clusters, slower search but better recall.</li>
+<br>
+<pre><code>
+import faiss
+
+
+
+# Create IVF index with HNSW for cluster assignment
+
+d = 768
+
+nlist = 4096  # For 10M vectors: sqrt(10M) ~ 3162
+
+
+
+quantizer = faiss.IndexHNSWFlat(d, 32)  # HNSW for cluster assignment
+
+index = faiss.IndexIVFFlat(quantizer, d, nlist, faiss.METRIC_INNER_PRODUCT)
+
+index.train(vectors)
+
+index.add(vectors)
+
+
+
+# Set nprobe at query time
+
+index.nprobe = 100  # Number of clusters to probe
+
+</code></pre>
+<br>
+<p>**nprobe (Number of clusters to probe)**:</p>
+<p>Set at query time. Higher values improve recall but increase latency.</p>
+<br>
+<li>Start with nprobe = nlist / 10.</li>
+<li>Increase until recall target is met.</li>
+<li>Each doubling of nprobe roughly doubles search time but improves recall by diminishing amounts.</li>
+<br>
+<h2> Filtered Search Performance</h2>
+<br>
+<p>Searching with metadata filters (e.g., "find similar to X where category = books") is one of the hardest problems in vector search.</p>
+<br>
+<h3>Pre-Filtering vs Post-Filtering</h3>
+<br>
+<p>**Post-filtering**: Run the vector search, then apply metadata filters to results. Simple but can miss results if the top-k vectors are all filtered out.</p>
+<br>
+<pre><code>
+# Post-filtering (may return fewer than k results)
+
+unfiltered = collection.search(query, limit=5000)
+
+filtered = [r for r in unfiltered if r.metadata[&quot;category&quot;] == &quot;books&quot;]
+
+final = filtered[:10]
+
+# Problem: What if none of the top 5000 are in &quot;books&quot;?
+
+</code></pre>
+<br>
+<p>**Pre-filtering**: Apply metadata filters first, then search on the filtered subset. More accurate but slower because the filtered subset may be fragmented.</p>
+<br>
+<pre><code>
+# Pre-filtering with Milvus
+
+results = collection.search(
+
+    data=[query_vector],
+
+    anns_field=&quot;embedding&quot;,
+
+    param={&quot;metric_type&quot;: &quot;IP&quot;, &quot;params&quot;: {&quot;nprobe&quot;: 100}},
+
+    limit=10,
+
+    expr=&#x27;category == &quot;books&quot; and year &gt; 2020&#x27;
+
+)
+
+</code></pre>
+<br>
+<p>Pre-filtering is generally preferred for accuracy. Optimization focuses on making it fast.</p>
+<br>
+<h3>Optimization Strategies for Filtered Search</h3>
+<br>
+<li>**Filter-aware HNSW**: Some databases (Milvus 2.4+, Qdrant) use HNSW variants that store filter metadata in graph nodes, enabling efficient filter-skip during traversal.</li>
+<br>
+<p>2. **Bitmask filtering**: Convert filter conditions to bitmasks that can be evaluated in bulk using SIMD instructions.</p>
+<br>
+<pre><code>
+# Bitmask-based fast filtering
+
+import numpy as np
+
+
+
+def create_bitmask(metadata_df, category):
+
+    &quot;&quot;&quot;Create a bitmask for fast filtering.&quot;&quot;&quot;
+
+    mask = np.zeros(len(metadata_df), dtype=bool)
+
+    mask[metadata_df[&quot;category&quot;] == category] = True
+
+    return mask
+
+
+
+def filtered_search(query, index, mask):
+
+    &quot;&quot;&quot;Search with bitmask-based filtering.&quot;&quot;&quot;
+
+    # Step 1: Run approximate search on all vectors
+
+    distances, indices = index.search(query.reshape(1, -1), 1000)
+
+    
+
+    # Step 2: Fast mask-based filter using numpy boolean indexing
+
+    valid = mask[indices[0]]
+
+    filtered_distances = distances[0][valid]
+
+    filtered_indices = indices[0][valid]
+
+    
+
+    return filtered_indices[:10], filtered_distances[:10]
+
+</code></pre>
+<br>
+<p>3. **Run separate indexes**: For each filter value, maintain a separate HNSW index.</p>
+<br>
+<pre><code>
+# Per-category indexes
+
+indexes = {}
+
+for category in [&quot;books&quot;, &quot;movies&quot;, &quot;music&quot;]:
+
+    category_vectors = all_vectors[labels == category]
+
+    idx = faiss.IndexHNSWFlat(d, 16)
+
+    idx.add(category_vectors)
+
+    indexes[category] = idx
+
+
+
+# Query using the correct index
+
+idx = indexes[&quot;books&quot;]
+
+results = idx.search(query_vector, 10)
+
+</code></pre>
+<br>
+<p>4. **Sparse-dense hybrid search**: Combine keyword-based BM25 search with vector search. Filters that match many documents (e.g., "year > 2020") are handled by the vector index. Filters that match few documents (e.g., "author = rare_name") are handled by sparse retrieval.</p>
+<br>
+<h2> Multi-Vector Indexing</h2>
+<br>
+<p>Some use cases require indexing multiple vectors per document (e.g., several paragraphs from one article, or multi-modal embeddings).</p>
+<br>
+<h3>Multi-Vector Challenges</h3>
+<br>
+<li>Each document has N vectors, requiring N queries for standard search.</li>
+<li>Scoring must aggregate across all vectors per document.</li>
+<br>
+<h3>Optimization Techniques</h3>
+<br>
+<li>**ColBERT-style late interaction**: Store all vectors but compute similarity between query and each document vector. Aggregate using MaxSim.</li>
+<br>
+<p>2. **Mean pooling**: Average all vectors per document into a single vector. Simple and fast but loses detail.</p>
+<br>
+<pre><code>
+def mean_pool_vectors(document_vectors):
+
+    &quot;&quot;&quot;Average all vectors in a document into one.&quot;&quot;&quot;
+
+    return np.mean(document_vectors, axis=0)
+
+</code></pre>
+<br>
+<p>3. **Centroid aggregation**: Cluster each document's vectors into K centroids. Search against centroids, then refine with full vectors.</p>
+<br>
+<h2> Production Tuning Checklist</h2>
+<br>
+<li>[ ] Set HNSW M=16 and efConstruction=200 as baseline.</li>
+<li>[ ] Tune ef at query time based on latency/recall requirements.</li>
+<li>[ ] Use scalar quantization (8-bit) if memory is constrained.</li>
+<li>[ ] Use product quantization only for billion-scale datasets.</li>
+<li>[ ] Set IVF nlist to sqrt(N) and tune nprobe empirically.</li>
+<li>[ ] Prefer pre-filtering over post-filtering for filtered search.</li>
+<li>[ ] Consider separate indexes per filter category for high-cardinality filters.</li>
+<li>[ ] Benchmark recall at various ef/nprobe values before production deployment.</li>
+<li>[ ] Monitor index memory usage and set memory limits.</li>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>Vector search optimization requires balancing recall, latency, memory, and indexing speed. Start with HNSW tuned to medium parameters (M=16, efConstruction=200). Add scalar quantization if memory is tight. Use IVF for very large datasets. Handle filtered search with pre-filtering or separate indexes. For multi-vector documents, consider averaging or centroid-based approaches. Always benchmark your specific dataset and query patterns before deploying optimization techniques.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

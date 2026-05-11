@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="ddd-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Domain-Driven Design Fundamentals">
+    <meta property="og:description" content="A practical guide to Domain-Driven Design concepts and implementation strategies.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/ddd-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Domain-Driven Design Fundamentals">
+    <meta name="twitter:description" content="A practical guide to Domain-Driven Design concepts and implementation strategies.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Domain-Driven Design Fundamentals — SourceHub</title>
+    <meta name="description" content="A practical guide to Domain-Driven Design concepts and implementation strategies.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/ddd-guide.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/ddd-guide.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Domain-Driven Design Fundamentals",
+      "description": "A practical guide to Domain-Driven Design concepts and implementation strategies.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1371",
+      "keywords": "Architecture, System Design",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/ddd-guide.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Domain-Driven Design Fundamentals"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Domain-Driven Design Fundamentals
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span></div>
+      <h1 class="article-title">Domain-Driven Design Fundamentals</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Domain-Driven Design (DDD) is a software development approach introduced by Eric Evans in his seminal 2003 book. It emphasizes building software that reflects a deep understanding of the business domain, using a shared language between developers and domain experts. This article covers the fundamental concepts of DDD and how to apply them in practice.</p>
+<br>
+<h2> Ubiquitous Language</h2>
+<br>
+<p>The cornerstone of DDD is the ubiquitous language -- a common vocabulary shared by developers, domain experts, product managers, and other stakeholders. This language is used in code, documentation, conversations, and specifications.</p>
+<br>
+<p>If the business calls it "Order Cancellation," then your code should have a `OrderCancellation` class, not `DeleteOrderRequest`. The ubiquitous language eliminates translation layers between business concepts and technical implementation.</p>
+<br>
+<p>To build a ubiquitous language:</p>
+<li>Listen to how domain experts describe their work.</li>
+<li>Use those same terms in your code.</li>
+<li>When a term causes confusion, refine it together with the domain experts.</li>
+<li>Keep a glossary of terms and their definitions.</li>
+<br>
+<h2> Bounded Contexts</h2>
+<br>
+<p>A bounded context is a boundary within which a particular domain model applies. Different contexts may use the same term to mean different things.</p>
+<br>
+<p>In an e-commerce system:</p>
+<li>The **Sales** context has a `Product` with pricing and availability.</li>
+<li>The **Shipping** context has a `Product` with weight and dimensions.</li>
+<li>The **Inventory** context has a `Product` with stock levels and warehouse locations.</li>
+<br>
+<p>Each bounded context has its own domain model, its own database, and potentially its own team. The boundaries are explicit, and communication between contexts happens through well-defined integration points.</p>
+<br>
+<p>Identifying bounded contexts is one of the hardest parts of DDD. Look for:</p>
+<li>Different teams responsible for different parts of the system.</li>
+<li>Different lifecycle or persistence requirements.</li>
+<li>Different ubiquitous language terms.</li>
+<br>
+<h2> Entities and Value Objects</h2>
+<br>
+<p>**Entities** are objects with a distinct identity that persists over time. Two entities with the same attributes are still different if they have different identities. A `User` is an entity because user 123 is different from user 456.</p>
+<br>
+<pre><code>
+public class User {
+
+    private UserId id;  // Identity matters
+
+    private String name;
+
+    private Email email;
+
+}
+
+</code></pre>
+<br>
+<p>**Value Objects** are objects defined by their attributes. Two value objects with the same attributes are interchangeable. An `Address` is a value object because two identical addresses are the same address.</p>
+<br>
+<pre><code>
+public class Address {
+
+    private String street;
+
+    private String city;
+
+    private String zipCode;
+
+    // No identity field -- equality is based on all attributes
+
+}
+
+</code></pre>
+<br>
+<p>Value objects should be immutable. Prefer value objects over primitives. A `Email` value object is better than a `String` because it encapsulates validation, formatting, and behavior.</p>
+<br>
+<h2> Aggregates</h2>
+<br>
+<p>An aggregate is a cluster of domain objects treated as a single unit. Each aggregate has a root entity (the aggregate root) that is the only entry point for external access.</p>
+<br>
+<p>Consider an `Order` aggregate:</p>
+<li>Aggregate root: `Order`</li>
+<li>Contained entities: `OrderLineItem`, `ShippingAddress`</li>
+<li>Contained value objects: `Money`, `OrderStatus`</li>
+<br>
+<p>External objects can only reference the aggregate root. All operations on the aggregate go through the root, which enforces invariants:</p>
+<br>
+<pre><code>
+public class Order {
+
+    private List&lt;OrderLineItem&gt; items;
+
+
+
+    public void addItem(Product product, int quantity) {
+
+        if (items.size() &gt;= MAX_ITEMS) {
+
+            throw new DomainException(&quot;Order cannot have more than &quot; + MAX_ITEMS + &quot; items&quot;);
+
+        }
+
+        items.add(new OrderLineItem(product, quantity));
+
+    }
+
+}
+
+</code></pre>
+<br>
+<h2> Domain Events</h2>
+<br>
+<p>Domain events capture something important that happened in the domain. They are named in the past tense and represent facts:</p>
+<br>
+<pre><code>
+public class OrderPlacedEvent {
+
+    private OrderId orderId;
+
+    private CustomerId customerId;
+
+    private Money total;
+
+    private Instant occurredAt;
+
+}
+
+</code></pre>
+<br>
+<p>Domain events are published from aggregates when something significant occurs. Other parts of the system react to these events, potentially in different bounded contexts.</p>
+<br>
+<h2> Repositories and Services</h2>
+<br>
+<p>**Repositories** provide a collection-like interface for retrieving and storing aggregates. Each aggregate root typically has a repository:</p>
+<br>
+<pre><code>
+public interface OrderRepository {
+
+    Order findById(OrderId id);
+
+    void save(Order order);
+
+    void delete(OrderId id);
+
+}
+
+</code></pre>
+<br>
+<p>**Domain services** hold domain logic that does not naturally fit within an entity or value object. They operate on multiple aggregates or coordinate complex business rules. Domain services are named after business activities: `PricingService`, `FraudDetectionService`.</p>
+<br>
+<h2> Strategic Design</h2>
+<br>
+<p>Beyond tactical patterns, DDD includes strategic design tools:</p>
+<br>
+<li>**Context Mapping**: Documenting relationships between bounded contexts (partnership, customer-supplier, conformist, etc.).</li>
+<li>**Core Domain**: Identifying which part of the system provides competitive advantage and investing most effort there.</li>
+<li>**Generic Subdomains**: Using off-the-shelf solutions for non-core functionality (authentication, payments).</li>
+<li>**Supporting Subdomains**: Building custom but straightforward solutions for areas that support the core domain.</li>
+<br>
+<h2> Getting Started with DDD</h2>
+<br>
+<p>Start small. Pick one bounded context and implement it using DDD tactical patterns (entities, value objects, aggregates, repositories). Work closely with domain experts to develop the ubiquitous language. Use event storming workshops to discover domain events and aggregates.</p>
+<br>
+<p>Avoid over-engineering. Not every class needs to be a domain entity, not every concept needs an aggregate. DDD is a tool for managing complexity, not for adding it.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>DDD provides a powerful toolkit for building software that deeply models the business domain. Use bounded contexts to manage complexity, entities and value objects to model domain concepts, and aggregates to enforce invariants. The ubiquitous language bridges the gap between business and technology, creating software that is easier to understand, maintain, and evolve.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

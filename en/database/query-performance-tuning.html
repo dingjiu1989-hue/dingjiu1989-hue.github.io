@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="query-performance-tuning">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Query Performance Tuning Tools">
+    <meta property="og:description" content="Master query performance tuning with EXPLAIN ANALYZE, pg_stat_statements, slow query logs, and database profiling tools.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/query-performance-tuning.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Query Performance Tuning Tools">
+    <meta name="twitter:description" content="Master query performance tuning with EXPLAIN ANALYZE, pg_stat_statements, slow query logs, and database profiling tools.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Query Performance Tuning Tools — SourceHub</title>
+    <meta name="description" content="Master query performance tuning with EXPLAIN ANALYZE, pg_stat_statements, slow query logs, and database profiling tools.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/query-performance-tuning.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/query-performance-tuning.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Query Performance Tuning Tools",
+      "description": "Master query performance tuning with EXPLAIN ANALYZE, pg_stat_statements, slow query logs, and database profiling tools.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1800",
+      "keywords": "Database, SQL",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/query-performance-tuning.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Query Performance Tuning Tools"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Query Performance Tuning Tools
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">SQL</span></div>
+      <h1 class="article-title">Query Performance Tuning Tools</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> The Performance Tuning Process</h2>
+<br>
+<p>Database performance tuning is a systematic process of identifying slow queries, understanding why they are slow, and making targeted improvements. It is not about guessing — every change should be informed by data from monitoring and profiling tools.</p>
+<br>
+<h2> Step 1: Identify Slow Queries</h2>
+<br>
+<h3>PostgreSQL Slow Query Log</h3>
+<br>
+<pre><code>
+# postgresql.conf
+
+log_min_duration_statement = 1000  # Log queries slower than 1 second
+
+log_Queries = on
+
+log_line_prefix = &#x27;%t [%p]: [%l-1] user=%u,db=%d,app=%a,client=%h &#x27;
+
+log_checkpoints = on
+
+log_lock_waits = on
+
+</code></pre>
+<br>
+<pre><code>
+-- Query log directly from the database
+
+SELECT
+
+    query,
+
+    calls,
+
+    total_exec_time / calls AS avg_time_ms,
+
+    rows / calls AS avg_rows,
+
+    mean_exec_time,
+
+    max_exec_time,
+
+    stddev_exec_time
+
+FROM pg_stat_statements
+
+ORDER BY total_exec_time DESC
+
+LIMIT 20;
+
+</code></pre>
+<br>
+<h3>MySQL Slow Query Log</h3>
+<br>
+<pre><code>
+# my.cnf
+
+slow_query_log = 1
+
+slow_query_log_file = /var/log/mysql/slow.log
+
+long_query_time = 1
+
+log_queries_not_using_indexes = 1
+
+</code></pre>
+<br>
+<pre><code>
+# Analyze slow query log
+
+pt-query-digest /var/log/mysql/slow.log
+
+
+
+# Output includes:
+
+# - Worst queries by execution time
+
+# - Worst queries by frequency
+
+# - Query patterns and response time distribution
+
+</code></pre>
+<br>
+<h2> Step 2: Analyze Query Plans</h2>
+<br>
+<h3>EXPLAIN ANALYZE</h3>
+<br>
+<pre><code>
+EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON)
+
+SELECT
+
+    u.name,
+
+    COUNT(o.id) AS order_count,
+
+    SUM(o.total) AS total_spent
+
+FROM users u
+
+LEFT JOIN orders o ON u.id = o.user_id
+
+WHERE u.created_at &gt; &#x27;2026-01-01&#x27;
+
+GROUP BY u.id, u.name
+
+HAVING COUNT(o.id) &gt; 3
+
+ORDER BY total_spent DESC
+
+LIMIT 50;
+
+</code></pre>
+<br>
+<h3>Key Metrics to Analyze</h3>
+<br>
+<p>| Metric | What It Tells You |</p>
+<p>|--------|-------------------|</p>
+<p>| `actual time` | Real execution time (first row, all rows) |</p>
+<p>| `rows` vs `rows est` | Accuracy of planner estimates (off by 10x+ needs ANALYZE) |</p>
+<p>| `buffers` | How much data was read (shared hit=from cache, read=from disk) |</p>
+<p>| `Seq Scan` | Full table scan (may need index) |</p>
+<p>| `Sort Method` | `quicksort` (memory) vs `external merge` (disk) |</p>
+<p>| `loops` | How many times a node executed (high loops on Nested Loop = problem) |</p>
+<br>
+<h3>Example Analysis</h3>
+<br>
+<pre><code>
+-- Problematic query
+
+EXPLAIN ANALYZE
+
+SELECT *
+
+FROM orders
+
+WHERE status = &#x27;pending&#x27;
+
+ORDER BY created_at DESC;
+
+</code></pre>
+<br>
+<p>Output:</p>
+<pre><code>
+Sort  (cost=8921.4..9123.5 rows=80842 width=72)
+
+  Sort Key: created_at DESC
+
+  Sort Method: external merge  Disk: 6128kB
+
+  -&gt;  Seq Scan on orders  (cost=0.0..1234.5 rows=80842 width=72)
+
+        Filter: (status = &#x27;pending&#x27;)
+
+</code></pre>
+<br>
+<p>**Diagnosis**: Sequential scan on 80K rows, sort spilling to disk.</p>
+<br>
+<p>**Fix**: Add a composite index:</p>
+<pre><code>
+CREATE INDEX idx_orders_status_created
+
+ON orders(status, created_at DESC);
+
+</code></pre>
+<br>
+<p>After fix:</p>
+<pre><code>
+Index Only Scan using idx_orders_status_created  (cost=0.29..341.2 rows=80842 width=72)
+
+  Index Cond: (status = &#x27;pending&#x27;)
+
+</code></pre>
+<br>
+<h2> Step 3: Database Profiling Tools</h2>
+<br>
+<h3>pg_stat_statements (PostgreSQL)</h3>
+<br>
+<pre><code>
+-- Install extension
+
+CREATE EXTENSION pg_stat_statements;
+
+
+
+-- Reset statistics
+
+SELECT pg_stat_statements_reset();
+
+
+
+-- Find queries with highest total time
+
+SELECT
+
+    queryid,
+
+    left(query, 80) AS query_preview,
+
+    calls,
+
+    round(total_exec_time::numeric, 1) AS total_ms,
+
+    round(mean_exec_time::numeric, 1) AS avg_ms,
+
+    round(shared_blks_hit::numeric / (shared_blks_hit + shared_blks_read + 1) * 100, 1) AS cache_hit_pct
+
+FROM pg_stat_statements
+
+WHERE query NOT LIKE &#x27;%pg_%&#x27;
+
+ORDER BY total_exec_time DESC
+
+LIMIT 10;
+
+
+
+-- Find queries reading the most data
+
+SELECT
+
+    queryid,
+
+    left(query, 80) AS query_preview,
+
+    calls,
+
+    shared_blks_read + local_blks_read AS blocks_read,
+
+    temp_blks_written AS temp_blocks  -- spilled to disk
+
+FROM pg_stat_statements
+
+ORDER BY blocks_read DESC
+
+LIMIT 10;
+
+</code></pre>
+<br>
+<h3>Performance Schema (MySQL)</h3>
+<br>
+<pre><code>
+-- Enable performance schema
+
+-- my.cnf: performance_schema=ON
+
+
+
+-- Find queries with full table scans
+
+SELECT
+
+    digest_text,
+
+    count_star,
+
+    sum_rows_examined,
+
+    sum_rows_sent,
+
+    (sum_rows_examined / NULLIF(sum_rows_sent, 0)) AS exam_sent_ratio
+
+FROM performance_schema.events_statements_summary_by_digest
+
+ORDER BY exam_sent_ratio DESC
+
+LIMIT 20;
+
+
+
+-- Find queries with temporary tables
+
+SELECT
+
+    digest_text,
+
+    sum_created_tmp_tables,
+
+    sum_created_tmp_disk_tables
+
+FROM performance_schema.events_statements_summary_by_digest
+
+WHERE sum_created_tmp_disk_tables &gt; 0
+
+ORDER BY sum_created_tmp_disk_tables DESC
+
+LIMIT 10;
+
+</code></pre>
+<br>
+<h2> Step 4: Lock Monitoring</h2>
+<br>
+<pre><code>
+-- PostgreSQL: Blocked queries
+
+SELECT
+
+    blocked_locks.pid AS blocked_pid,
+
+    blocked_activity.query AS blocked_query,
+
+    blocking_locks.pid AS blocking_pid,
+
+    blocking_activity.query AS blocking_query,
+
+    blocked_activity.wait_event_type,
+
+    blocked_activity.state,
+
+    now() - blocked_activity.query_start AS blocked_duration
+
+FROM pg_catalog.pg_locks blocked_locks
+
+JOIN pg_catalog.pg_stat_activity blocked_activity ON blocked_locks.pid = blocked_activity.pid
+
+JOIN pg_catalog.pg_locks blocking_locks
+
+    ON blocking_locks.locktype = blocked_locks.locktype
+
+    AND blocking_locks.database = blocked_locks.database
+
+    AND blocking_locks.relation = blocked_locks.relation
+
+    AND blocking_locks.pid != blocked_locks.pid
+
+JOIN pg_catalog.pg_stat_activity blocking_activity ON blocking_locks.pid = blocking_activity.pid
+
+WHERE NOT blocked_locks.granted;
+
+
+
+-- Check for long-running transactions
+
+SELECT
+
+    pid,
+
+    state,
+
+    query,
+
+    now() - query_start AS query_duration,
+
+    now() - xact_start AS transaction_duration
+
+FROM pg_stat_activity
+
+WHERE state IN (&#x27;active&#x27;, &#x27;idle in transaction&#x27;)
+
+  AND now() - query_start &gt; interval &#x27;5 minutes&#x27;
+
+  AND query NOT LIKE &#x27;%pg_stat%&#x27;
+
+ORDER BY query_duration DESC;
+
+</code></pre>
+<br>
+<h2> Step 5: Index Usage Analysis</h2>
+<br>
+<pre><code>
+-- PostgreSQL: Index usage statistics
+
+SELECT
+
+    schemaname || &#x27;.&#x27; || relname AS table_name,
+
+    seq_scan,
+
+    seq_tup_read,
+
+    idx_scan,
+
+    idx_tup_fetch,
+
+    seq_tup_read / NULLIF(seq_scan, 0) AS avg_rows_per_seq_scan
+
+FROM pg_stat_user_tables
+
+WHERE seq_scan &gt; 0
+
+ORDER BY seq_scan DESC
+
+LIMIT 20;
+
+
+
+-- Find unused indexes
+
+SELECT
+
+    schemaname || &#x27;.&#x27; || relname AS table,
+
+    indexrelname AS index_name,
+
+    idx_scan,
+
+    pg_size_pretty(pg_relation_size(indexrelid)) AS index_size
+
+FROM pg_stat_user_indexes
+
+WHERE idx_scan = 0
+
+  AND indexrelname NOT LIKE &#x27;%_pkey%&#x27;
+
+ORDER BY pg_relation_size(indexrelid) DESC;
+
+</code></pre>
+<br>
+<h2> Automated Tuning Tools</h2>
+<br>
+<p>| Tool | Database | Features |</p>
+<p>|------|----------|----------|</p>
+<p>| pgBadger | PostgreSQL | Log analysis with visual reports |</p>
+<p>| pgbadger | PostgreSQL | Query distribution, temp files, locks |</p>
+<p>| pg_stat_monitor | PostgreSQL | Enhanced pg_stat_statements with query groups |</p>
+<p>| MySQLTuner | MySQL | Configuration recommendations |</p>
+<p>| pt-query-digest | MySQL | Query analysis and pattern matching |</p>
+<p>| mongostat | MongoDB | Real-time MongoDB metrics |</p>
+<br>
+<pre><code>
+# Generate a visual report with pgBadger
+
+pgbadger /var/log/postgresql/postgresql.log -o report.html
+
+
+
+# Analyze the report for:
+
+# - Most time-consuming queries
+
+# - Temporary file usage
+
+# - Lock wait events
+
+# - Checkpoint frequency
+
+</code></pre>
+<br>
+<h2> Performance Tuning Workflow</h2>
+<br>
+<li>**Establish baseline**: Measure current performance with representative queries.</li>
+<p>2. **Identify bottlenecks**: Use pg_stat_statements, slow query log, or APM tools.</p>
+<p>3. **Analyze specific queries**: Run EXPLAIN ANALYZE with buffers enabled.</p>
+<p>4. **Create targeted index**: Add or modify indexes based on the plan.</p>
+<p>5. **Test the fix**: Re-run the query and compare execution time.</p>
+<p>6. **Verify no regressions**: Check that other queries did not get slower.</p>
+<p>7. **Repeat**: Continue with the next slowest query.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Performance tuning is a data-driven process. Start with the slow query log or pg_stat_statements to identify problematic queries, use EXPLAIN ANALYZE to understand execution plans, monitor locks and contention, and track index usage. Focus on queries with the highest total execution time, not just the slowest individual queries. Always measure before and after making changes, and automate monitoring with tools like pgBadger for continuous visibility into query performance.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

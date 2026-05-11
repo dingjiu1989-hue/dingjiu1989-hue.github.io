@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="database-backup-strategies">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Database Backup and Recovery Strategies">
+    <meta property="og:description" content="Learn database backup strategies including full, incremental, and differential backups, point-in-time recovery, and disaster recovery planning.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/database-backup-strategies.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Database Backup and Recovery Strategies">
+    <meta name="twitter:description" content="Learn database backup strategies including full, incremental, and differential backups, point-in-time recovery, and disaster recovery planning.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Database Backup and Recovery Strategies — SourceHub</title>
+    <meta name="description" content="Learn database backup strategies including full, incremental, and differential backups, point-in-time recovery, and disaster recovery planning.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/database-backup-strategies.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/database-backup-strategies.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Database Backup and Recovery Strategies",
+      "description": "Learn database backup strategies including full, incremental, and differential backups, point-in-time recovery, and disaster recovery planning.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1539",
+      "keywords": "Database, SQL",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-backup-strategies.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Database Backup and Recovery Strategies"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Database Backup and Recovery Strategies
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">SQL</span></div>
+      <h1 class="article-title">Database Backup and Recovery Strategies</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Why Backup Strategies Matter</h2>
+<br>
+<p>Data loss happens. Hardware fails, software bugs corrupt data, human errors delete tables, and ransomware encrypts databases. A robust backup strategy is your last line of defense. Recovery ability, not backup creation, is what matters.</p>
+<br>
+<h2> The RPO and RPO Framework</h2>
+<br>
+<p>| Metric | Definition | Example |</p>
+<p>|--------|------------|---------|</p>
+<p>| RPO (Recovery Point Objective) | Maximum acceptable data loss | 1 hour = lose at most 1 hour of data |</p>
+<p>| RTO (Recovery Time Objective) | Maximum acceptable downtime | 4 hours = must recover within 4 hours |</p>
+<p>| WRT (Workload Recovery Time) | Time to make application functional | RTO includes WRT |</p>
+<br>
+<h3>Setting Targets</h3>
+<br>
+<p>| Application Type | RPO | RTO |</p>
+<p>|-----------------|-----|-----|</p>
+<p>| Banking transaction system | < 1 minute | < 5 minutes |</p>
+<p>| E-commerce platform | < 5 minutes | < 1 hour |</p>
+<p>| Content management system | < 1 hour | < 4 hours |</p>
+<p>| Analytics/reporting | < 24 hours | < 24 hours |</p>
+<p>| Development/staging | Best effort | < 48 hours |</p>
+<br>
+<h2> Backup Types</h2>
+<br>
+<h3>Full Backup</h3>
+<br>
+<p>A complete copy of the entire database. Slowest to create, fastest to restore.</p>
+<br>
+<pre><code>
+# PostgreSQL full backup
+
+pg_dump -h localhost -U app_user -F c -f /backups/daily/full_$(date +%Y%m%d).dump mydb
+
+
+
+# MySQL full backup
+
+mysqldump -h localhost -u app_user -p mydb &gt; /backups/daily/full_$(date +%Y%m%d).sql
+
+
+
+# MongoDB full backup
+
+mongodump --host localhost --db mydb --out /backups/daily/$(date +%Y%m%d)
+
+</code></pre>
+<br>
+<h3>Incremental Backup</h3>
+<br>
+<p>Backs up only data changed since the last backup of any type. Fastest to create, slowest to restore.</p>
+<br>
+<h3>Differential Backup</h3>
+<br>
+<p>Backs up data changed since the last full backup. Faster to restore than incremental.</p>
+<br>
+<p>| Metric | Full | Incremental | Differential |</p>
+<p>|--------|------|-------------|--------------|</p>
+<p>| Backup size | Largest | Smallest | Medium |</p>
+<p>| Backup time | Slowest | Fastest | Medium |</p>
+<p>| Restore time | Fastest | Slowest | Medium |</p>
+<p>| Frequency | Weekly | Daily/hourly | Daily |</p>
+<br>
+<h2> Point-in-Time Recovery (PITR)</h2>
+<br>
+<p>PITR allows restoring a database to any point in time by replaying WAL (Write-Ahead Log) segments.</p>
+<br>
+<h3>PostgreSQL WAL Archiving</h3>
+<br>
+<pre><code>
+# postgresql.conf
+
+wal_level = replica
+
+archive_mode = on
+
+archive_command = &#x27;test ! -f /backups/wal/%f &amp;&amp; cp %p /backups/wal/%f&#x27;
+
+archive_timeout = 60  # Force WAL switch every 60 seconds
+
+
+
+# Full base backup
+
+pg_basebackup -h localhost -D /backups/base/$(date +%Y%m%d) -X stream -P
+
+</code></pre>
+<br>
+<h3>Restoring to a Point in Time</h3>
+<br>
+<pre><code>
+# 1. Restore base backup
+
+cp -R /backups/base/20260511 /var/lib/postgresql/16/main
+
+
+
+# 2. Configure recovery (recovery.conf)
+
+restore_command = &#x27;cp /backups/wal/%f %p&#x27;
+
+recovery_target_time = &#x27;2026-05-11 14:23:45&#x27;
+
+recovery_target_action = promote
+
+
+
+# 3. Start PostgreSQL; it replays WAL to the target time
+
+pg_ctl start
+
+</code></pre>
+<br>
+<h3>Automated PITR with pgBackRest</h3>
+<br>
+<pre><code>
+# pgbackrest.conf
+
+[global]
+
+repo1-path=/backups/pgbackrest
+
+repo1-retention-full=4
+
+repo1-cipher-type=aes-256-cbc
+
+repo1-cipher-pass=secure_backup_password
+
+
+
+[main]
+
+pg1-path=/var/lib/postgresql/16/main
+
+
+
+# Create full backup
+
+pgbackrest --stanza=main --type=full backup
+
+
+
+# Create incremental backup
+
+pgbackrest --stanza=main --type=incr backup
+
+
+
+# List backups
+
+pgbackrest --stanza=main info
+
+
+
+# Restore to specific timestamp
+
+pgbackrest --stanza=main --type=time --target=&quot;2026-05-11 14:23:45&quot; restore
+
+</code></pre>
+<br>
+<h2> Cloud Backup Strategies</h2>
+<br>
+<h3>AWS RDS Automated Backups</h3>
+<br>
+<pre><code>
+# Automated backups are enabled by default (7 day retention)
+
+aws rds modify-db-instance \
+
+    --db-instance-identifier mydb \
+
+    --backup-retention-period 35  # Extend to 35 days max
+
+
+
+# Manual snapshot
+
+aws rds create-db-snapshot \
+
+    --db-instance-identifier mydb \
+
+    --db-snapshot-identifier mydb-pre-migration-snapshot
+
+
+
+# Restore from snapshot
+
+aws rds restore-db-instance-from-db-snapshot \
+
+    --db-instance-identifier mydb-restored \
+
+    --db-snapshot-identifier mydb-pre-migration-snapshot
+
+
+
+# Point-in-time restore
+
+aws rds restore-db-instance-to-point-in-time \
+
+    --source-db-instance-identifier mydb \
+
+    --target-db-instance-identifier mydb-restored \
+
+    --restore-time &quot;2026-05-11T14:23:45Z&quot;
+
+</code></pre>
+<br>
+<h3>GCP Cloud SQL</h3>
+<br>
+<pre><code>
+# Enable PITR (binary logging)
+
+gcloud sql instances patch mydb \
+
+    --enable-bin-log \
+
+    --backup-start-time=23:00
+
+
+
+# Create backup
+
+gcloud sql backups create --instance=mydb
+
+
+
+# List backups
+
+gcloud sql backups list --instance=mydb
+
+
+
+# Restore
+
+gcloud sql backups restore --restore-instance=mydb-restored \
+
+    --backup-id=123456
+
+</code></pre>
+<br>
+<h2> Backup Verification</h2>
+<br>
+<p>A backup that cannot be restored is worthless. Test your backups regularly:</p>
+<br>
+<pre><code>
+#!/bin/bash
+
+# Weekly restore test script
+
+
+
+# Restore backup to test environment
+
+pg_restore -d test_db /backups/daily/full_latest.dump
+
+
+
+# Run integrity checks
+
+psql -d test_db -c &quot;SELECT count(*) FROM information_schema.tables;&quot;
+
+psql -d test_db -c &quot;SELECT count(*) FROM users;&quot;
+
+
+
+# Compare record counts with production
+
+prod_count=$(psql -d production_db -c &quot;SELECT count(*) FROM users&quot; -t)
+
+test_count=$(psql -d test_db -c &quot;SELECT count(*) FROM users&quot; -t)
+
+
+
+if [ &quot;$prod_count&quot; -eq &quot;$test_count&quot; ]; then
+
+    echo &quot;Backup verification PASSED&quot;
+
+else
+
+    echo &quot;Backup verification FAILED: count mismatch&quot;
+
+fi
+
+
+
+# Clean up
+
+dropdb test_db
+
+</code></pre>
+<br>
+<h2> Backup Automation</h2>
+<br>
+<pre><code>
+# Backup cron schedule
+
+# Daily full backup at 2 AM
+
+0 2 * * * /usr/local/bin/backup_full.sh
+
+# WAL archiving every 5 minutes (handled by PostgreSQL)
+
+
+
+# Weekly verification
+
+0 6 * * 1 /usr/local/bin/test_restore.sh
+
+
+
+# Monthly copy to cold storage
+
+0 4 1 * * /usr/local/bin/archive_to_s3.sh
+
+</code></pre>
+<br>
+<h2> 3-2-1 Backup Rule</h2>
+<br>
+<p>| Rule | Explanation | Implementation |</p>
+<p>|------|-------------|----------------|</p>
+<p>| 3 copies of data | Production + 2 backups | Live DB + local backup + remote backup |</p>
+<p>| 2 different media types | Different failure modes | SSD + tape/cloud storage |</p>
+<p>| 1 off-site copy | Disaster recovery | S3, GCS, or another region |</p>
+<br>
+<h2> Disaster Recovery Scenarios</h2>
+<br>
+<p>| Scenario | Recovery Method | RTO |</p>
+<p>|----------|----------------|-----|</p>
+<p>| Accidental DELETE | PITR to just before the statement | 30 min |</p>
+<p>| Table corruption | Restore full + PITR to last consistent state | 2 hours |</p>
+<p>| Entire instance failure | Restore from latest full backup on new instance | 4 hours |</p>
+<p>| Region outage | Cross-region replica promotion or backup restore | 1-8 hours |</p>
+<p>| Ransomware | Restore from backup before encryption timestamp | 2 hours |</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Define your RPO and RPO targets before designing backup strategies. Use full backups for weekly snapshots, continuous WAL archiving for point-in-time recovery, and verify backups regularly by testing restores. Follow the 3-2-1 rule for data protection, automate the entire process, and document recovery procedures so anyone on the team can execute a restore. A backup that has never been tested is not a backup; it is a hope.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

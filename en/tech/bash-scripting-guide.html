@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="bash-scripting-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Bash Scripting Best Practices">
+    <meta property="og:description" content="Essential patterns for writing reliable, maintainable shell scripts in production environments.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/bash-scripting-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bash Scripting Best Practices">
+    <meta name="twitter:description" content="Essential patterns for writing reliable, maintainable shell scripts in production environments.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Bash Scripting Best Practices — SourceHub</title>
+    <meta name="description" content="Essential patterns for writing reliable, maintainable shell scripts in production environments.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/bash-scripting-guide.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/bash-scripting-guide.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bash Scripting Best Practices",
+      "description": "Essential patterns for writing reliable, maintainable shell scripts in production environments.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1298",
+      "keywords": "Technology, Programming, DevOps",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/bash-scripting-guide.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Bash Scripting Best Practices"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Bash Scripting Best Practices
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">Programming</span>
+        <span class="tag-cat">DevOps</span></div>
+      <h1 class="article-title">Bash Scripting Best Practices</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Bash scripting remains one of the most critical skills for developers, DevOps engineers, and system administrators. Despite its age, Bash is everywhere -- from CI/CD pipelines to deployment scripts and system automation. Writing robust, maintainable shell scripts requires discipline and adherence to proven practices.</p>
+<br>
+<h2> Start with Strict Mode</h2>
+<br>
+<p>Every production Bash script should begin with strict mode settings that catch errors early:</p>
+<br>
+<pre><code>
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+IFS=$&#x27;\n\t&#x27;
+
+</code></pre>
+<br>
+<li>`set -e` causes the script to exit immediately when a command fails.</li>
+<li>`set -u` treats unset variables as an error.</li>
+<li>`set -o pipefail` makes pipeline failures propagate.</li>
+<li>Setting `IFS` to newline and tab prevents word-splitting issues with filenames containing spaces.</li>
+<br>
+<p>A more advanced option is `set -o errexit` combined with custom error handling:</p>
+<br>
+<pre><code>
+error_handler() {
+
+    local line=$1
+
+    echo &quot;Error on line $line&quot; &gt;&amp;2
+
+    exit 1
+
+}
+
+trap &#x27;error_handler $LINENO&#x27; ERR
+
+</code></pre>
+<br>
+<h2> Use Functions for Modularity</h2>
+<br>
+<p>Avoid writing long linear scripts. Break logic into functions with clear names:</p>
+<br>
+<pre><code>
+validate_input() { ... }
+
+process_file() { ... }
+
+send_notification() { ... }
+
+</code></pre>
+<br>
+<p>Declare all functions at the top of the script, followed by argument parsing, followed by the main execution flow. This makes the script readable and testable.</p>
+<br>
+<h2> Prefer `[[ ]]` Over `[ ]`</h2>
+<br>
+<p>The double-bracket `[[ ]]` construct is a Bash keyword with fewer surprises:</p>
+<br>
+<pre><code>
+if [[ -f &quot;$file&quot; &amp;&amp; &quot;$name&quot; == &quot;prod&quot; ]]; then
+
+    echo &quot;Matched&quot;
+
+fi
+
+</code></pre>
+<br>
+<p>Unlike single brackets, double brackets handle empty variables safely, support pattern matching, and avoid word-splitting.</p>
+<br>
+<h2> Quote Everything</h2>
+<br>
+<p>Unquoted variables are one of the most common sources of bugs:</p>
+<br>
+<pre><code>
+# Wrong
+
+if [ -f $file ]; then  # breaks if file has spaces
+
+
+
+# Right
+
+if [[ -f &quot;$file&quot; ]]; then
+
+</code></pre>
+<br>
+<p>Quote all variable expansions: `"$var"`, `"${array[@]}"`, and command substitutions `"$(command)"`.</p>
+<br>
+<h2> Use `trap` for Cleanup</h2>
+<br>
+<p>Always clean up temporary files and resources:</p>
+<br>
+<pre><code>
+cleanup() {
+
+    rm -rf &quot;$TEMP_DIR&quot;
+
+    kill &quot;$PID&quot; 2&gt;/dev/null || true
+
+}
+
+trap cleanup EXIT
+
+</code></pre>
+<br>
+<p>The `EXIT` trap fires regardless of why the script exits -- success, failure, or signal. For signal-specific handling, add separate traps for `INT` and `TERM`.</p>
+<br>
+<h2> Argument Parsing with `getopts`</h2>
+<br>
+<p>Use `getopts` for reliable argument parsing instead of manual position checks:</p>
+<br>
+<pre><code>
+usage() { echo &quot;Usage: $0 -f file -o output [-v]&quot; &gt;&amp;2; exit 1; }
+
+
+
+while getopts &quot;:f:o:v&quot; opt; do
+
+    case $opt in
+
+        f) INPUT_FILE=&quot;$OPTARG&quot; ;;
+
+        o) OUTPUT_DIR=&quot;$OPTARG&quot; ;;
+
+        v) VERBOSE=true ;;
+
+        *) usage ;;
+
+    esac
+
+done
+
+</code></pre>
+<br>
+<p>This handles short flags robustly, including missing argument errors.</p>
+<br>
+<h2> Use `readonly` and `declare -r`</h2>
+<br>
+<p>Mark constants and configuration values as readonly:</p>
+<br>
+<pre><code>
+readonly MAX_RETRIES=3
+
+readonly CONFIG_PATH=&quot;/etc/myapp/config.yml&quot;
+
+</code></pre>
+<br>
+<p>This prevents accidental overwrites and documents intent.</p>
+<br>
+<h2> Prefer `printf` Over `echo`</h2>
+<br>
+<p>The `echo` command behaves differently across shells and platforms. Use `printf` for portable, predictable output:</p>
+<br>
+<pre><code>
+printf &quot;Processing file: %s\n&quot; &quot;$filename&quot;
+
+</code></pre>
+<br>
+<h2> Logging with Timestamps</h2>
+<br>
+<p>Implement a simple logging function for better observability:</p>
+<br>
+<pre><code>
+log() {
+
+    local level=&quot;$1&quot;
+
+    shift
+
+    printf &quot;[%s] [%s] %s\n&quot; &quot;$(date &#x27;+%Y-%m-%d %H:%M:%S&#x27;)&quot; &quot;$level&quot; &quot;$*&quot; &gt;&amp;2
+
+}
+
+
+
+info() { log &quot;INFO&quot; &quot;$@&quot;; }
+
+error() { log &quot;ERROR&quot; &quot;$@&quot;; }
+
+</code></pre>
+<br>
+<p>Send logs to stderr so they don't interfere with stdout data output.</p>
+<br>
+<h2> Validating Dependencies</h2>
+<br>
+<p>Check required commands before proceeding:</p>
+<br>
+<pre><code>
+require() {
+
+    for cmd in &quot;$@&quot;; do
+
+        if ! command -v &quot;$cmd&quot; &amp;&gt;/dev/null; then
+
+            error &quot;Required command not found: $cmd&quot;
+
+            exit 1
+
+        fi
+
+    done
+
+}
+
+
+
+require jq curl openssl
+
+</code></pre>
+<br>
+<h2> Avoid `eval` and Backtick Substitution</h2>
+<br>
+<p>Never use `eval` unless absolutely necessary -- it is a security risk. Use `$()` instead of backticks for command substitution; `$()` nests cleanly and is visually distinct.</p>
+<br>
+<h2> Use Arrays for Lists</h2>
+<br>
+<p>Modern Bash supports arrays, which handle spaces correctly:</p>
+<br>
+<pre><code>
+files=()
+
+while IFS= read -r -d &#x27;&#x27; file; do
+
+    files+=(&quot;$file&quot;)
+
+done &lt; &lt;(find /var/log -name &quot;*.log&quot; -print0)
+
+
+
+for file in &quot;${files[@]}&quot;; do
+
+    process_file &quot;$file&quot;
+
+done
+
+</code></pre>
+<br>
+<p>The `-print0` / `read -d ''` pattern handles filenames with any special characters.</p>
+<br>
+<h2> ShellCheck Integration</h2>
+<br>
+<p>Run [ShellCheck](https://www.shellcheck.net/) as part of your CI pipeline. It catches hundreds of common pitfalls and enforces consistency. Integrate it with VS Code via the shellcheck extension for real-time feedback during editing.</p>
+<br>
+<h2> Testing Bash Scripts</h2>
+<br>
+<p>Use `bats` (Bash Automated Testing System) for unit testing:</p>
+<br>
+<pre><code>
+@test &quot;validate_input rejects empty string&quot; {
+
+    run validate_input &quot;&quot;
+
+    [[ &quot;$status&quot; -ne 0 ]]
+
+}
+
+</code></pre>
+<br>
+<p>Test your error handlers, edge cases with spaces, and exit codes.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Bash scripting is not dead -- it is the glue that holds modern infrastructure together. By following these practices, you will write scripts that are robust, maintainable, and production-ready. Strict mode, proper quoting, function decomposition, traps, and ShellCheck validation will prevent the majority of common issues before they reach production.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

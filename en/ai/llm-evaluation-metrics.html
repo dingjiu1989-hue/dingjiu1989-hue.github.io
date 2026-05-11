@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="llm-evaluation-metrics">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="LLM Evaluation Metrics">
+    <meta property="og:description" content="A comprehensive overview of LLM evaluation metrics including accuracy, perplexity, BLEU, ROUGE, and human evaluation frameworks.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/llm-evaluation-metrics.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LLM Evaluation Metrics">
+    <meta name="twitter:description" content="A comprehensive overview of LLM evaluation metrics including accuracy, perplexity, BLEU, ROUGE, and human evaluation frameworks.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>LLM Evaluation Metrics — SourceHub</title>
+    <meta name="description" content="A comprehensive overview of LLM evaluation metrics including accuracy, perplexity, BLEU, ROUGE, and human evaluation frameworks.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/llm-evaluation-metrics.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/ai/llm-evaluation-metrics.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "LLM Evaluation Metrics",
+      "description": "A comprehensive overview of LLM evaluation metrics including accuracy, perplexity, BLEU, ROUGE, and human evaluation frameworks.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1161",
+      "keywords": "Artificial Intelligence, Machine Learning",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/llm-evaluation-metrics.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "LLM Evaluation Metrics"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › LLM Evaluation Metrics
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
+        <span class="tag-cat">Machine Learning</span></div>
+      <h1 class="article-title">LLM Evaluation Metrics</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>Evaluating large language models is fundamentally different from evaluating traditional machine learning models. LLMs produce open-ended outputs, have no single ground truth measure, and can fail in ways that accuracy cannot capture. This guide covers the evaluation metrics and frameworks used to measure LLM performance across different tasks.</p>
+<br>
+<h2> Classification Metrics</h2>
+<br>
+<p>For classification tasks — sentiment analysis, intent detection, topic classification — standard ML metrics apply:</p>
+<br>
+<li>**Accuracy**: Overall correct predictions, but misleading for imbalanced datasets</li>
+<li>**Precision**: Of items flagged as positive, how many are correct?</li>
+<li>**Recall**: Of actual positive items, how many were caught?</li>
+<li>**F1 Score**: Harmonic mean of precision and recall</li>
+<li>**Confusion Matrix**: Shows which classes are commonly confused</li>
+<br>
+<p>Example calculation for an intent classification task:</p>
+<br>
+<pre><code>
+True Positives: 850 | False Positives: 50
+
+False Negatives: 100 | True Negatives: 4000
+
+Precision = 850/(850+50) = 0.944
+
+Recall = 850/(850+100) = 0.895
+
+F1 = 2 * (0.944*0.895)/(0.944+0.895) = 0.919
+
+</code></pre>
+<br>
+<h2> Generation Metrics</h2>
+<br>
+<h3>ROUGE (Recall-Oriented Understudy for Gisting Evaluation)</h3>
+<br>
+<p>ROUGE measures the overlap between generated text and reference text, primarily used for summarization:</p>
+<br>
+<li>**ROUGE-N**: Overlap of n-grams (ROUGE-1 for unigrams, ROUGE-2 for bigrams)</li>
+<li>**ROUGE-L**: Longest common subsequence</li>
+<li>**ROUGE-Skip-Bigram**: Bigrams that can have gaps</li>
+<br>
+<p>ROUGE correlates reasonably with human judgment for extractive summarization but performs poorly for abstractive summaries where wording differs.</p>
+<br>
+<h3>BLEU (Bilingual Evaluation Understudy)</h3>
+<br>
+<p>BLEU measures precision of n-gram overlap, primarily for translation:</p>
+<br>
+<li>Scores range from 0 to 1 (or 0-100)</li>
+<li>Higher-gram matches are weighted more heavily</li>
+<li>Includes a brevity penalty to prevent short outputs</li>
+<br>
+<p>BLEU has known limitations: it favors literal translations over fluent ones and correlates poorly with human judgment for creative text.</p>
+<br>
+<h3>Perplexity</h3>
+<br>
+<p>Perplexity measures how well the model predicts a sequence — lower is better. It is calculated as the exponential of the average negative log-likelihood:</p>
+<br>
+<pre><code>
+Perplexity = exp(-1/N * Σ log P(token_i | context))
+
+</code></pre>
+<br>
+<p>Perplexity is useful for comparing models on the same dataset but cannot compare across datasets. A general model will have higher perplexity than a domain-specific one on the same domain text.</p>
+<br>
+<h2> Task-Specific Benchmarks</h2>
+<br>
+<p>Standardized benchmarks enable model-to-model comparison:</p>
+<br>
+<li>**MMLU** (Massive Multitask Language Understanding): 57 subjects from high school to professional level</li>
+<li>**HumanEval**: Code generation correctness measured by functional tests</li>
+<li>**GSM8K**: Grade school math word problems</li>
+<li>**HellaSwag**: Commonsense reasoning</li>
+<li>**TruthfulQA**: Measuring truthfulness and hallucination</li>
+<li>**BIG-Bench**: 204 diverse tasks</li>
+<br>
+<p>When reporting benchmark scores, always include the exact evaluation setup (few-shot count, prompt template, decoding parameters) since these significantly affect results.</p>
+<br>
+<h2> LLM-as-Judge Evaluation</h2>
+<br>
+<p>Using an LLM to evaluate another LLM's outputs has become the standard approach for open-ended tasks:</p>
+<br>
+<pre><code>
+judge_prompt = &quot;&quot;&quot;
+
+You are evaluating a response for quality. Rate the response on:
+
+1. Helpfulness (1-5): Does it address the user&#x27;s question?
+
+2. Accuracy (1-5): Is the information factually correct?
+
+3. Harmlessness (1-5): Does it avoid harmful content?
+
+4. Completeness (1-5): Does it cover all aspects of the question?
+
+
+
+User query: {query}
+
+Response to evaluate: {response}
+
+
+
+Output a JSON object with scores and brief reasoning.
+
+&quot;&quot;&quot;
+
+</code></pre>
+<br>
+<p>**GPT-4 and Claude-3.5 Opus** are the most commonly used judge models. Agreement between LLM judges and human raters ranges from 70-85% for most tasks, making this approach cost-effective and scalable.</p>
+<br>
+<h2> Human Evaluation</h2>
+<br>
+<p>Despite automation advances, human evaluation remains the gold standard:</p>
+<br>
+<li>**Side-by-side comparison**: Raters choose the better output from two models (A/B testing)</li>
+<li>**Likert scale**: Raters score individual outputs on defined criteria</li>
+<li>**Chat evaluation**: Raters interact with models in free-form conversation</li>
+<li>**Error annotation**: Raters categorize specific failure modes</li>
+<br>
+<p>A good annotation rubric defines each score level with concrete examples. For a 5-point helpfulness scale, each point should have anchor examples.</p>
+<br>
+<h2> Evaluation in Production</h2>
+<br>
+<p>Production evaluation goes beyond benchmarks:</p>
+<br>
+<li>**A/B testing**: Compare model versions on live traffic with statistical significance</li>
+<li>**User feedback signals**: Thumbs up/down, retention, engagement metrics</li>
+<li>**Outcome metrics**: Task completion rate, time-to-resolution, user satisfaction surveys</li>
+<li>**Monitoring dashboards**: Track response length, latency, refusal rates, and toxicity scores over time</li>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>No single metric captures LLM quality. Effective evaluation combines automated metrics for regression testing, LLM-as-judge for scalable quality assessment, task-specific benchmarks for capability tracking, and human evaluation for final quality assurance. Build an evaluation pipeline that includes all these levels and update it as your use case evolves.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

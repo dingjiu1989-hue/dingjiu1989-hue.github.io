@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="data-modeling">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Data Modeling Best Practices">
+    <meta property="og:description" content="Learn data modeling best practices including entity-relationship diagrams, normalization, patterns for SQL and NoSQL, and schema design.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/data-modeling.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Data Modeling Best Practices">
+    <meta name="twitter:description" content="Learn data modeling best practices including entity-relationship diagrams, normalization, patterns for SQL and NoSQL, and schema design.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Data Modeling Best Practices — SourceHub</title>
+    <meta name="description" content="Learn data modeling best practices including entity-relationship diagrams, normalization, patterns for SQL and NoSQL, and schema design.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/data-modeling.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/data-modeling.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Data Modeling Best Practices",
+      "description": "Learn data modeling best practices including entity-relationship diagrams, normalization, patterns for SQL and NoSQL, and schema design.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1673",
+      "keywords": "Database, SQL",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/data-modeling.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Data Modeling Best Practices"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Data Modeling Best Practices
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">SQL</span></div>
+      <h1 class="article-title">Data Modeling Best Practices</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> What Is Data Modeling?</h2>
+<br>
+<p>Data modeling is the process of defining and organizing data structures to represent real-world entities and their relationships. A good data model ensures data integrity, enables efficient queries, and adapts to changing requirements without breaking existing functionality.</p>
+<br>
+<h2> The Three Levels of Data Modeling</h2>
+<br>
+<p>| Level | Description | Audience |</p>
+<p>|-------|-------------|----------|</p>
+<p>| Conceptual | Business entities and relationships | Stakeholders, product managers |</p>
+<p>| Logical | Entities, attributes, and relationships in detail | Architects, analysts |</p>
+<p>| Physical | Actual database implementation | Developers, DBAs |</p>
+<br>
+<h2> Conceptual Modeling</h2>
+<br>
+<p>Identify the core entities and their high-level relationships:</p>
+<br>
+<pre><code>
+Customer ───&lt; Order ───&lt; OrderItem &gt;─── Product
+
+   │
+
+   └─── Address
+
+</code></pre>
+<br>
+<p>Entities typically represent nouns in your domain: Customer, Order, Product, Payment, Shipment.</p>
+<br>
+<h2> Logical Modeling</h2>
+<br>
+<p>Define attributes, data types, and relationships precisely.</p>
+<br>
+<h3>Entity-Relationship Attributes</h3>
+<br>
+<pre><code>
+Customer:
+
+  attributes:
+
+    - id (UUID, PK)
+
+    - email (string, unique, not null)
+
+    - name (string, not null)
+
+    - created_at (timestamp)
+
+  relationships:
+
+    - has_many: Order
+
+    - has_many: Address
+
+
+
+Order:
+
+  attributes:
+
+    - id (UUID, PK)
+
+    - customer_id (UUID, FK -&gt; Customer)
+
+    - status (enum: pending, paid, shipped, cancelled)
+
+    - total (decimal, not null)
+
+    - created_at (timestamp)
+
+  relationships:
+
+    - belongs_to: Customer
+
+    - has_many: OrderItem
+
+
+
+OrderItem:
+
+  attributes:
+
+    - order_id (UUID, FK -&gt; Order)
+
+    - product_id (UUID, FK -&gt; Product)
+
+    - quantity (integer, &gt; 0)
+
+    - unit_price (decimal, not null)
+
+</code></pre>
+<br>
+<h3>Relationship Cardinality</h3>
+<br>
+<p>| Cardinality | Symbol | Example |</p>
+<p>|-------------|--------|---------|</p>
+<p>| One-to-one (1:1) | | | User <-> Profile |</p>
+<p>| One-to-many (1:N) | |< | Customer <-> Order |</p>
+<p>| Many-to-many (M:N) | >< | Student <-> Course |</p>
+<br>
+<h2> Physical Modeling</h2>
+<br>
+<h3>SQL Schema Design</h3>
+<br>
+<pre><code>
+-- Complete physical model for an e-commerce system
+
+
+
+CREATE TABLE customers (
+
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+    email VARCHAR(255) UNIQUE NOT NULL,
+
+    name VARCHAR(255) NOT NULL,
+
+    status VARCHAR(20) DEFAULT &#x27;active&#x27;,
+
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+
+);
+
+
+
+CREATE TABLE addresses (
+
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+    customer_id UUID NOT NULL REFERENCES customers(id) ON DELETE CASCADE,
+
+    label VARCHAR(50),  -- &#x27;home&#x27;, &#x27;work&#x27;, &#x27;shipping&#x27;
+
+    street VARCHAR(255) NOT NULL,
+
+    city VARCHAR(100) NOT NULL,
+
+    state VARCHAR(50),
+
+    zip VARCHAR(20),
+
+    country VARCHAR(2) NOT NULL,
+
+    is_default BOOLEAN DEFAULT false,
+
+    created_at TIMESTAMPTZ DEFAULT NOW()
+
+);
+
+
+
+CREATE TABLE products (
+
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+    name VARCHAR(255) NOT NULL,
+
+    description TEXT,
+
+    price DECIMAL(10,2) NOT NULL,
+
+    stock INTEGER NOT NULL DEFAULT 0,
+
+    category_id UUID REFERENCES categories(id),
+
+    sku VARCHAR(50) UNIQUE,
+
+    is_active BOOLEAN DEFAULT true,
+
+    created_at TIMESTAMPTZ DEFAULT NOW()
+
+);
+
+
+
+CREATE TABLE orders (
+
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+    customer_id UUID NOT NULL REFERENCES customers(id),
+
+    address_id UUID REFERENCES addresses(id),
+
+    status VARCHAR(20) DEFAULT &#x27;pending&#x27;,
+
+    subtotal DECIMAL(10,2) NOT NULL,
+
+    tax DECIMAL(10,2),
+
+    total DECIMAL(10,2) NOT NULL,
+
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+
+    paid_at TIMESTAMPTZ
+
+);
+
+
+
+CREATE TABLE order_items (
+
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+    order_id UUID NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+
+    product_id UUID NOT NULL REFERENCES products(id),
+
+    quantity INTEGER NOT NULL CHECK (quantity &gt; 0),
+
+    unit_price DECIMAL(10,2) NOT NULL,
+
+    total_price DECIMAL(10,2) GENERATED ALWAYS AS (quantity * unit_price) STORED
+
+);
+
+
+
+-- Indexes for query performance
+
+CREATE INDEX idx_orders_customer ON orders(customer_id);
+
+CREATE INDEX idx_orders_status ON orders(status);
+
+CREATE INDEX idx_orders_created ON orders(created_at DESC);
+
+CREATE INDEX idx_order_items_order ON order_items(order_id);
+
+CREATE INDEX idx_products_category ON products(category_id);
+
+CREATE INDEX idx_products_active ON products(is_active) WHERE is_active = true;
+
+</code></pre>
+<br>
+<h2> NoSQL Data Modeling Patterns</h2>
+<br>
+<h3>Embedding vs Referencing</h3>
+<br>
+<pre><code>
+// EMBED: Use when data is always accessed together (one-to-few)
+
+// Good for: addresses on an order, items in a cart
+
+{
+
+    _id: ObjectId(&quot;...&quot;),
+
+    customer: {
+
+        id: &quot;c123&quot;,
+
+        name: &quot;Alice&quot;
+
+    },
+
+    items: [
+
+        { product_id: &quot;p1&quot;, name: &quot;Laptop&quot;, price: 1200, qty: 1 },
+
+        { product_id: &quot;p2&quot;, name: &quot;Mouse&quot;, price: 25, qty: 2 }
+
+    ],
+
+    total: 1250
+
+}
+
+
+
+// REFERENCE: Use when data is accessed independently (one-to-many/many)
+
+// Good for: products in a catalog, user profiles
+
+// orders collection
+
+{
+
+    _id: ObjectId(&quot;...&quot;),
+
+    customer_id: &quot;c123&quot;,
+
+    product_ids: [&quot;p1&quot;, &quot;p2&quot;]
+
+}
+
+// products collection (accessed independently)
+
+{
+
+    _id: &quot;p1&quot;,
+
+    name: &quot;Laptop&quot;,
+
+    price: 1200,
+
+    stock: 50
+
+}
+
+</code></pre>
+<br>
+<h3>Single Table Design (DynamoDB)</h3>
+<br>
+<pre><code>
+Table: MyApp
+
+
+
+PK               SK                         Data
+
+USER#alice       PROFILE                   name, email, created_at
+
+USER#alice       ORDER#2026-05-01#O1       amount, status
+
+USER#alice       ORDER#2026-05-15#O2       amount, status
+
+PROD#P1          META                      name, price, category
+
+PROD#P2          META                      name, price, category
+
+CAT#electronics  PRODUCT#P1                reference to product
+
+CAT#electronics  PRODUCT#P2                reference to product
+
+</code></pre>
+<br>
+<h2> Common Modeling Patterns</h2>
+<br>
+<h3>Inheritance Mapping (SQL)</h3>
+<br>
+<pre><code>
+-- Table Per Type (TPT)
+
+CREATE TABLE content (
+
+    id SERIAL PRIMARY KEY,
+
+    type VARCHAR(20) NOT NULL,  -- &#x27;article&#x27;, &#x27;video&#x27;, &#x27;podcast&#x27;
+
+    title VARCHAR(255) NOT NULL,
+
+    published_at TIMESTAMPTZ
+
+);
+
+
+
+CREATE TABLE articles (
+
+    id INTEGER PRIMARY KEY REFERENCES content(id),
+
+    body TEXT,
+
+    word_count INTEGER
+
+);
+
+
+
+CREATE TABLE videos (
+
+    id INTEGER PRIMARY KEY REFERENCES content(id),
+
+    url VARCHAR(500),
+
+    duration_seconds INTEGER
+
+);
+
+</code></pre>
+<br>
+<h3>Soft Delete Pattern</h3>
+<br>
+<pre><code>
+ALTER TABLE users ADD COLUMN deleted_at TIMESTAMPTZ;
+
+CREATE INDEX idx_users_active ON users(id) WHERE deleted_at IS NULL;
+
+
+
+-- Queries automatically exclude deleted records
+
+SELECT * FROM users WHERE deleted_at IS NULL;
+
+</code></pre>
+<br>
+<h2> Data Modeling Process</h2>
+<br>
+<li>**Understand the domain**: Talk to stakeholders, identify entities and workflows.</li>
+<p>2. **Start conceptual**: Map major entities and their relationships.</p>
+<p>3. **Identify access patterns**: List every query your application will make.</p>
+<p>4. **Design for queries**: Optimize the model for your most frequent and critical queries.</p>
+<p>5. **Normalize for integrity**: Apply normalization rules up to 3NF.</p>
+<p>6. **Denormalize for performance**: Selectively denormalize where queries demand it.</p>
+<p>7. **Document the model**: Maintain an up-to-date schema diagram and data dictionary.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Good data modeling starts with understanding the domain and access patterns. Design entities and relationships at the conceptual level, refine them logically, then implement with the appropriate physical model for your database. For SQL databases, normalize to 3NF and create strategic indexes. For NoSQL databases, model for your access patterns first, using embedding for co-accessed data and references for independently accessed entities. Document your model and keep it synchronized with your code.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

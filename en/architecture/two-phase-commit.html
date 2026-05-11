@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="two-phase-commit">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Two-Phase Commit (2PC) for Distributed Transactions">
+    <meta property="og:description" content="Two-phase commit protocol: coordinator, prepare/commit phases, failure scenarios, XA protocol, and when to use sagas instead.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/two-phase-commit.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Two-Phase Commit (2PC) for Distributed Transactions">
+    <meta name="twitter:description" content="Two-phase commit protocol: coordinator, prepare/commit phases, failure scenarios, XA protocol, and when to use sagas instead.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Two-Phase Commit (2PC) for Distributed Transactions — SourceHub</title>
+    <meta name="description" content="Two-phase commit protocol: coordinator, prepare/commit phases, failure scenarios, XA protocol, and when to use sagas instead.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/two-phase-commit.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/two-phase-commit.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Two-Phase Commit (2PC) for Distributed Transactions",
+      "description": "Two-phase commit protocol: coordinator, prepare/commit phases, failure scenarios, XA protocol, and when to use sagas instead.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "2951",
+      "keywords": "Architecture, System Design",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/two-phase-commit.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Two-Phase Commit (2PC) for Distributed Transactions"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Two-Phase Commit (2PC) for Distributed Transactions
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span></div>
+      <h1 class="article-title">Two-Phase Commit (2PC) for Distributed Transactions</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Two-Phase Commit (2PC) is a distributed consensus protocol that ensures all participants in a transaction either commit or abort together. It provides atomicity across multiple databases, message queues, or other resources. This article explains the 2PC protocol, failure scenarios, the XA standard, and when to use sagas instead.</p>
+<br>
+<h2> How 2PC Works</h2>
+<br>
+<p>Two-Phase Commit has two phases: Prepare and Commit (or Abort).</p>
+<br>
+<h3>Phase 1: Prepare</h3>
+<br>
+<p>The coordinator sends a "prepare" request to all participants. Each participant:</p>
+<br>
+<li>Checks if it can commit the transaction.</li>
+<p>2. If yes: writes the transaction to a stable log, acquires necessary locks, and responds "ready" (or "yes").</p>
+<p>3. If no: responds "abort" (or "no").</p>
+<br>
+<pre><code>
+class TransactionCoordinator:
+
+    def __init__(self, participants):
+
+        self.participants = participants
+
+        self.state = &quot;INIT&quot;
+
+        self.transaction_id = generate_tx_id()
+
+    
+
+    def execute_transaction(self, operations):
+
+        &quot;&quot;&quot;Execute a distributed transaction using 2PC.&quot;&quot;&quot;
+
+        
+
+        # Phase 1: Prepare
+
+        self.state = &quot;PREPARING&quot;
+
+        votes = []
+
+        
+
+        for participant in self.participants:
+
+            try:
+
+                response = participant.prepare(self.transaction_id, operations)
+
+                votes.append(response)
+
+            except Exception as e:
+
+                votes.append({&quot;status&quot;: &quot;abort&quot;, &quot;reason&quot;: str(e)})
+
+        
+
+        # Phase 2: Commit or Abort
+
+        if all(v[&quot;status&quot;] == &quot;ready&quot; for v in votes):
+
+            self._commit()
+
+            return &quot;COMMITTED&quot;
+
+        else:
+
+            self._abort()
+
+            return &quot;ABORTED&quot;
+
+    
+
+    def _commit(self):
+
+        self.state = &quot;COMMITTING&quot;
+
+        for participant in self.participants:
+
+            participant.commit(self.transaction_id)
+
+        self.state = &quot;COMMITTED&quot;
+
+    
+
+    def _abort(self):
+
+        self.state = &quot;ABORTING&quot;
+
+        for participant in self.participants:
+
+            participant.rollback(self.transaction_id)
+
+        self.state = &quot;ABORTED&quot;
+
+</code></pre>
+<br>
+<h3>Phase 2: Commit</h3>
+<br>
+<p>If all participants responded "ready," the coordinator sends a "commit" message. Each participant applies the transaction and releases locks.</p>
+<br>
+<pre><code>
+class DatabaseParticipant:
+
+    def __init__(self, db_connection):
+
+        self.db = db_connection
+
+        self.prepared_transactions = {}
+
+    
+
+    def prepare(self, transaction_id, operations):
+
+        &quot;&quot;&quot;Prepare phase: validate and lock, but don&#x27;t apply.&quot;&quot;&quot;
+
+        try:
+
+            # Begin a local transaction
+
+            self.db.begin()
+
+            
+
+            # Validate all operations
+
+            for op in operations:
+
+                if not self._validate(op):
+
+                    self.db.rollback()
+
+                    return {&quot;status&quot;: &quot;abort&quot;, &quot;reason&quot;: f&quot;Validation failed: {op}&quot;}
+
+            
+
+            # Execute operations within local transaction
+
+            for op in operations:
+
+                self.db.execute(op[&quot;sql&quot;], op[&quot;params&quot;])
+
+            
+
+            # Don&#x27;t commit yet — just prepare
+
+            self.prepared_transactions[transaction_id] = self.db.savepoint()
+
+            return {&quot;status&quot;: &quot;ready&quot;}
+
+            
+
+        except Exception as e:
+
+            self.db.rollback()
+
+            return {&quot;status&quot;: &quot;abort&quot;, &quot;reason&quot;: str(e)}
+
+    
+
+    def commit(self, transaction_id):
+
+        &quot;&quot;&quot;Commit phase: apply the prepared transaction.&quot;&quot;&quot;
+
+        if transaction_id in self.prepared_transactions:
+
+            self.db.commit()
+
+            del self.prepared_transactions[transaction_id]
+
+    
+
+    def rollback(self, transaction_id):
+
+        &quot;&quot;&quot;Rollback the prepared transaction.&quot;&quot;&quot;
+
+        if transaction_id in self.prepared_transactions:
+
+            self.db.rollback()
+
+            del self.prepared_transactions[transaction_id]
+
+</code></pre>
+<br>
+<h3>Flow Diagram</h3>
+<br>
+<pre><code>
+Coordinator          Participant A        Participant B
+
+     |                     |                    |
+
+     |--- Prepare --------&gt;|                    |
+
+     |--- Prepare -----------------------------&gt;|
+
+     |                     |                    |
+
+     |&lt;--- Ready ----------|                    |
+
+     |&lt;--- Ready ------------------------------|
+
+     |                     |                    |
+
+     |--- Commit ---------&gt;|                    |
+
+     |--- Commit -----------------------------&gt;|
+
+     |                     |                    |
+
+     |&lt;--- Acked ----------|                    |
+
+     |&lt;--- Acked ------------------------------|
+
+     |                     |                    |
+
+</code></pre>
+<br>
+<h2> Failure Scenarios</h2>
+<br>
+<p>2PC handles various failure scenarios, but some situations require human intervention or complex recovery.</p>
+<br>
+<h3>Participant Failure During Prepare</h3>
+<br>
+<p>If a participant crashes during the prepare phase, the coordinator can either retry or abort. Once the participant recovers, it must check whether it had prepared a transaction.</p>
+<br>
+<pre><code>
+Coordinator: Sends prepare
+
+Participant: Crashes (unreachable)
+
+Coordinator: Timeout -&gt; Sends abort to all participants
+
+Participant: Restarts, finds no prepared transaction -&gt; OK
+
+</code></pre>
+<br>
+<h3>Coordinator Failure During Commit</h3>
+<br>
+<p>The most dangerous scenario. The coordinator sends "commit" to some participants but crashes before reaching others. Participants are left in a "prepared but uncertain" state.</p>
+<br>
+<pre><code>
+Coordinator: Sends commit to A, crashes before sending to B
+
+A: Committed
+
+B: Prepared (waiting for coordinator decision)
+
+</code></pre>
+<br>
+<p>**Resolution**: The prepared transaction on B remains "in doubt" until the coordinator recovers. B holds locks indefinitely. Recovery requires either:</p>
+<li>The coordinator restarts and resends the commit/abort decision.</li>
+<li>An administrator manually inspects and resolves the transaction.</li>
+<br>
+<h3>Network Partition</h3>
+<br>
+<p>If the network splits during phase 2, participants that cannot reach the coordinator remain in the prepared state. They hold locks and may block other transactions.</p>
+<br>
+<h2> XA Protocol</h2>
+<br>
+<p>XA is the standard specification for distributed transaction processing. It defines the interface between a transaction manager (coordinator) and resource managers (databases, message brokers).</p>
+<br>
+<h3>XA in Practice</h3>
+<br>
+<pre><code>
+// Java: XA transaction with JTA
+
+import javax.transaction.xa.XAResource;
+
+import javax.sql.XAConnection;
+
+import javax.sql.XADataSource;
+
+
+
+public class XATransactionExample {
+
+    public void transferMoney(int fromAccount, int toAccount, double amount) {
+
+        // Get XA connections
+
+        XAConnection db1Conn = db1DataSource.getXAConnection();
+
+        XAConnection db2Conn = db2DataSource.getXAConnection();
+
+        
+
+        XAResource db1Res = db1Conn.getXAResource();
+
+        XAResource db2Res = db2Conn.getXAResource();
+
+        
+
+        // Start global transaction
+
+        Xid xid = createXid();
+
+        db1Res.start(xid, XAResource.TMNOFLAGS);
+
+        db2Res.start(xid, XAResource.TMNOFLAGS);
+
+        
+
+        try {
+
+            // Execute operations
+
+            executeUpdate(db1Conn, &quot;UPDATE accounts SET balance = balance - ? WHERE id = ?&quot;,
+
+                         amount, fromAccount);
+
+            executeUpdate(db2Conn, &quot;UPDATE accounts SET balance = balance + ? WHERE id = ?&quot;,
+
+                         amount, toAccount);
+
+            
+
+            // End the transaction branches
+
+            db1Res.end(xid, XAResource.TMSUCCESS);
+
+            db2Res.end(xid, XAResource.TMSUCCESS);
+
+            
+
+            // Phase 1: Prepare
+
+            int db1Prepare = db1Res.prepare(xid);
+
+            int db2Prepare = db2Res.prepare(xid);
+
+            
+
+            // Phase 2: Commit
+
+            if (db1Prepare == XAResource.XA_OK &amp;&amp; db2Prepare == XAResource.XA_OK) {
+
+                db1Res.commit(xid, false);
+
+                db2Res.commit(xid, false);
+
+            } else {
+
+                db1Res.rollback(xid);
+
+                db2Res.rollback(xid);
+
+            }
+
+        } catch (Exception e) {
+
+            // Rollback
+
+            db1Res.rollback(xid);
+
+            db2Res.rollback(xid);
+
+        }
+
+    }
+
+}
+
+</code></pre>
+<br>
+<h3>XA Support in Databases</h3>
+<br>
+<p>| Database | XA Support | Notes |</p>
+<p>|----------|------------|-------|</p>
+<p>| PostgreSQL | Yes (pg_xact) | Requires max_prepared_transactions > 0 |</p>
+<p>| MySQL | Yes (XA syntax) | `XA START`, `XA END`, `XA PREPARE`, `XA COMMIT` |</p>
+<p>| Oracle | Yes | Native XA support via Oracle XA |</p>
+<p>| SQL Server | Yes | Via .NET System.Transactions |</p>
+<p>| MongoDB | No | Multi-document transactions, not XA |</p>
+<p>| Cassandra | No | No distributed transaction support |</p>
+<br>
+<h3>MySQL XA Example</h3>
+<br>
+<pre><code>
+-- MySQL XA transaction across two databases
+
+-- On node 1:
+
+XA START &#x27;xid-123&#x27;;
+
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+
+XA END &#x27;xid-123&#x27;;
+
+XA PREPARE &#x27;xid-123&#x27;;
+
+
+
+-- On node 2:
+
+XA START &#x27;xid-123&#x27;;
+
+UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+
+XA END &#x27;xid-123&#x27;;
+
+XA PREPARE &#x27;xid-123&#x27;;
+
+
+
+-- Coordinator instructs both to commit:
+
+-- On node 1:
+
+XA COMMIT &#x27;xid-123&#x27;;
+
+-- On node 2:
+
+XA COMMIT &#x27;xid-123&#x27;;
+
+
+
+-- If anything failed:
+
+-- XA ROLLBACK &#x27;xid-123&#x27;;
+
+</code></pre>
+<br>
+<h2> When 2PC Works</h2>
+<br>
+<p>2PC is appropriate when:</p>
+<br>
+<li>**Strong consistency is required**: All participants must see the same result.</li>
+<p>2. **Transaction duration is short**: Locks are held during the prepare phase. Long transactions block other operations.</p>
+<p>3. **Participants are reliable**: Frequent failures lead to in-doubt transactions requiring manual recovery.</p>
+<p>4. **The transaction involves few participants**: 2PC with 2-3 participants is manageable. 2PC with 10+ participants is fragile.</p>
+<p>5. **Fallback to manual recovery is acceptable**: In-doubt transactions can be resolved manually.</p>
+<br>
+<h3>Use Cases</h3>
+<br>
+<li>**Financial transfers**: Money moves from one account (DB1) to another (DB2).</li>
+<li>**Inventory and order**: Reserve inventory in one system and create an order in another.</li>
+<li>**Account provisioning**: Create a user in the IDP and a billing account simultaneously.</li>
+<br>
+<h2> When to Use Sagas Instead</h2>
+<br>
+<p>The saga pattern is an alternative to 2PC for long-running transactions. Instead of locking resources, sagas define compensating actions for each step.</p>
+<br>
+<h3>Saga Pattern</h3>
+<br>
+<pre><code>
+Saga: Order Processing
+
+
+
+1. Create Order (Service A)
+
+   Compensation: Cancel Order
+
+   
+
+2. Reserve Inventory (Service B)
+
+   Compensation: Release Inventory
+
+   
+
+3. Process Payment (Service C)
+
+   Compensation: Refund Payment
+
+   
+
+4. Ship Order (Service D)
+
+   Compensation: No compensation (can&#x27;t un-ship)
+
+</code></pre>
+<br>
+<pre><code>
+class OrderSaga:
+
+    def __init__(self):
+
+        self.executed_steps = []
+
+        self.compensations = []
+
+    
+
+    def execute(self):
+
+        try:
+
+            # Step 1: Create order
+
+            order = payment_service.create_order(data)
+
+            self.executed_steps.append((&quot;create_order&quot;, order.id))
+
+            self.compensations.append(lambda: payment_service.cancel_order(order.id))
+
+            
+
+            # Step 2: Reserve inventory
+
+            inventory = inventory_service.reserve(order.items)
+
+            self.executed_steps.append((&quot;reserve&quot;, order.id))
+
+            self.compensations.append(lambda: inventory_service.release(order.items))
+
+            
+
+            # Step 3: Process payment
+
+            payment = payment_service.charge(order.total)
+
+            self.executed_steps.append((&quot;payment&quot;, payment.id))
+
+            self.compensations.append(lambda: payment_service.refund(payment.id))
+
+            
+
+            # Step 4: Ship (no compensation)
+
+            shipment = shipping_service.ship(order.id)
+
+            self.executed_steps.append((&quot;ship&quot;, shipment.id))
+
+            
+
+        except Exception as e:
+
+            self._compensate()
+
+            raise SagaFailedError(str(e), self.executed_steps)
+
+    
+
+    def _compensate(self):
+
+        # Execute compensations in reverse order
+
+        for compensation in reversed(self.compensations):
+
+            try:
+
+                compensation()
+
+            except Exception as e:
+
+                log.error(f&quot;Compensation failed: {e}&quot;)
+
+                # Manual intervention required for this step
+
+</code></pre>
+<br>
+<h3>2PC vs Saga</h3>
+<br>
+<p>| Aspect | 2PC | Saga |</p>
+<p>|--------|-----|------|</p>
+<p>| Consistency | Strong (ACID) | Eventual |</p>
+<p>| Locking | Holds locks during prepare | No locks |</p>
+<p>| Transaction duration | Short | Long-running possible |</p>
+<p>| Resilience | Fragile (in-doubt state) | Resilient (compensations) |</p>
+<p>| Complexity | Medium | Higher |</p>
+<p>| Performance | Lower (sync overhead) | Higher (async) |</p>
+<p>| Recovery | Manual for in-doubt | Automatic compensations |</p>
+<br>
+<h3>Decision Guide</h3>
+<br>
+<p>Use **2PC** when:</p>
+<li>The transaction completes in milliseconds.</li>
+<li>Strong consistency is non-negotiable.</li>
+<li>All participants are reliable and available.</li>
+<br>
+<p>Use **Saga** when:</p>
+<li>The transaction spans minutes or hours.</li>
+<li>Eventual consistency is acceptable.</li>
+<li>You need high availability and resilience.</li>
+<li>Participants are loosely coupled services.</li>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>Two-Phase Commit provides strong consistency across distributed systems through a prepare/commit protocol. It is appropriate for short transactions requiring atomicity across few participants. However, 2PC has significant drawbacks: it blocks resources during prepare, is fragile to coordinator failure, and requires potentially messy manual recovery for in-doubt transactions. Consider the saga pattern for long-running, loosely coupled, and highly available distributed transactions. In modern microservice architectures, sagas are generally preferred over 2PC.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

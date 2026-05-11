@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="oauth2-pkce">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="OAuth 2.0 and PKCE Explained">
+    <meta property="og:description" content="A deep dive into OAuth 2.0 authorization framework and PKCE flow for securing single-page and mobile applications.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/oauth2-pkce.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="OAuth 2.0 and PKCE Explained">
+    <meta name="twitter:description" content="A deep dive into OAuth 2.0 authorization framework and PKCE flow for securing single-page and mobile applications.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>OAuth 2.0 and PKCE Explained — SourceHub</title>
+    <meta name="description" content="A deep dive into OAuth 2.0 authorization framework and PKCE flow for securing single-page and mobile applications.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/oauth2-pkce.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/oauth2-pkce.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "OAuth 2.0 and PKCE Explained",
+      "description": "A deep dive into OAuth 2.0 authorization framework and PKCE flow for securing single-page and mobile applications.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1321",
+      "keywords": "Security, Cybersecurity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/oauth2-pkce.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "OAuth 2.0 and PKCE Explained"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › OAuth 2.0 and PKCE Explained
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">Cybersecurity</span></div>
+      <h1 class="article-title">OAuth 2.0 and PKCE Explained</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> OAuth 2.0 Overview</h2>
+<br>
+<p>OAuth 2.0 is an authorization framework that enables third-party applications to obtain limited access to a user's resources without exposing credentials. It has become the industry standard for API authorization, used by Google, GitHub, Facebook, and virtually every major platform.</p>
+<br>
+<h3>Core Roles</h3>
+<br>
+<p>| Role | Description | Example |</p>
+<p>|------|-------------|---------|</p>
+<p>| Resource Owner | The user who grants access | You, the end user |</p>
+<p>| Client | The application requesting access | Your mobile app or SPA |</p>
+<p>| Authorization Server | Issues tokens after authentication | Google's OAuth 2.0 endpoint |</p>
+<p>| Resource Server | Hosts the protected resources | Google Calendar API |</p>
+<br>
+<h3>Grant Types</h3>
+<br>
+<p>OAuth 2.0 defines several grant types for different scenarios:</p>
+<br>
+<li>**Authorization Code**: The most secure flow, designed for server-side applications.</li>
+<li>**Authorization Code with PKCE**: An enhanced version for mobile and single-page applications.</li>
+<li>**Client Credentials**: For server-to-server communication without user involvement.</li>
+<li>**Device Code**: For devices without a browser, like smart TVs or CLI tools.</li>
+<br>
+<h2> The Problem PKCE Solves</h2>
+<br>
+<p>Before PKCE (Proof Key for Code Exchange), public clients like SPAs and mobile apps used the Implicit Grant, which returned the access token directly in the URL fragment. This approach had serious security issues:</p>
+<br>
+<li>Access tokens leaked via browser history</li>
+<p>2. Tokens were accessible to JavaScript in the same origin</p>
+<p>3. No way to verify the authorization code exchange came from the legitimate client</p>
+<br>
+<p>PKCE eliminates these issues by introducing a cryptographic challenge-verifier pair.</p>
+<br>
+<h2> PKCE Flow Step by Step</h2>
+<br>
+<h3>Step 1: Generate Code Verifier and Challenge</h3>
+<br>
+<p>The client generates a cryptographically random string called the code verifier, then creates a SHA-256 hash (the code challenge).</p>
+<br>
+<pre><code>
+function generateCodeVerifier() {
+
+    const array = new Uint8Array(32);
+
+    crypto.getRandomValues(array);
+
+    return base64URLEncode(array);
+
+}
+
+
+
+async function generateCodeChallenge(verifier) {
+
+    const encoder = new TextEncoder();
+
+    const data = encoder.encode(verifier);
+
+    const digest = await crypto.subtle.digest(&#x27;SHA-256&#x27;, data);
+
+    return base64URLEncode(new Uint8Array(digest));
+
+}
+
+
+
+function base64URLEncode(buffer) {
+
+    return btoa(String.fromCharCode(...new Uint8Array(buffer)))
+
+        .replace(/\+/g, &#x27;-&#x27;)
+
+        .replace(/\//g, &#x27;_&#x27;)
+
+        .replace(/=+$/, &#x27;&#x27;);
+
+}
+
+</code></pre>
+<br>
+<h3>Step 2: Redirect to Authorization Server</h3>
+<br>
+<p>The client redirects the user to the authorization server, including the code challenge and the method used (`S256`).</p>
+<br>
+<pre><code>
+https://auth.example.com/authorize?
+
+  response_type=code&amp;
+
+  client_id=YOUR_CLIENT_ID&amp;
+
+  redirect_uri=https://yourapp.com/callback&amp;
+
+  code_challenge=YOUR_SHA256_CHALLENGE&amp;
+
+  code_challenge_method=S256&amp;
+
+  state=CSRF_TOKEN
+
+</code></pre>
+<br>
+<p>The `state` parameter is a CSRF token that must be verified when the user returns.</p>
+<br>
+<h3>Step 3: User Authenticates and Consents</h3>
+<br>
+<p>The authorization server authenticates the user, presents a consent screen, and redirects back to the client with a temporary authorization code.</p>
+<br>
+<pre><code>
+https://yourapp.com/callback?code=AUTH_CODE&amp;state=CSRF_TOKEN
+
+</code></pre>
+<br>
+<p>The client must verify that the `state` parameter matches what it sent.</p>
+<br>
+<h3>Step 4: Exchange Code for Token</h3>
+<br>
+<p>The client sends the authorization code along with the original plain-text code verifier to the token endpoint.</p>
+<br>
+<pre><code>
+curl -X POST https://auth.example.com/token \
+
+  -H &quot;Content-Type: application/x-www-form-urlencoded&quot; \
+
+  -d &quot;grant_type=authorization_code&quot; \
+
+  -d &quot;code=AUTH_CODE&quot; \
+
+  -d &quot;redirect_uri=https://yourapp.com/callback&quot; \
+
+  -d &quot;client_id=YOUR_CLIENT_ID&quot; \
+
+  -d &quot;code_verifier=ORIGINAL_VERIFIER&quot;
+
+</code></pre>
+<br>
+<p>The authorization server computes the SHA-256 hash of the verifier and compares it to the challenge received in step 2. If they match, it issues tokens.</p>
+<br>
+<pre><code>
+{
+
+    &quot;access_token&quot;: &quot;eyJhbGciOiJSUzI1NiIs...&quot;,
+
+    &quot;token_type&quot;: &quot;Bearer&quot;,
+
+    &quot;expires_in&quot;: 3600,
+
+    &quot;refresh_token&quot;: &quot;dGhpcyBpcyBhIHJlZnJl...&quot;,
+
+    &quot;scope&quot;: &quot;openid profile email&quot;
+
+}
+
+</code></pre>
+<br>
+<h2> Why PKCE Is Secure</h2>
+<br>
+<p>Without PKCE, an intercepted authorization code could be exchanged by an attacker. With PKCE, the attacker would also need the original code verifier, which was never transmitted during the authorization step. Since only the legitimate client possesses the verifier, the exchange is secure even over an insecure channel.</p>
+<br>
+<h2> Refresh Tokens with PKCE</h2>
+<br>
+<p>Refresh tokens extend access without requiring the user to re-authenticate. When the access token expires, the client uses the refresh token to obtain a new one:</p>
+<br>
+<pre><code>
+curl -X POST https://auth.example.com/token \
+
+  -H &quot;Content-Type: application/x-www-form-urlencoded&quot; \
+
+  -d &quot;grant_type=refresh_token&quot; \
+
+  -d &quot;refresh_token=REFRESH_TOKEN&quot; \
+
+  -d &quot;client_id=YOUR_CLIENT_ID&quot;
+
+</code></pre>
+<br>
+<h2> Best Practices</h2>
+<br>
+<li>Always use PKCE for SPAs and mobile apps. Never use the Implicit Grant.</li>
+<li>Store tokens in memory for SPAs, never in localStorage or sessionStorage.</li>
+<li>Use short-lived access tokens (15-60 minutes) with longer-lived refresh tokens.</li>
+<li>Implement token rotation for refresh tokens to detect theft.</li>
+<li>Validate the `state` parameter to prevent CSRF attacks on the callback.</li>
+<li>Use the `S256` challenge method instead of `plain`.</li>
+<li>Never log tokens or authorization codes in server logs.</li>
+<br>
+<h2> Summary</h2>
+<br>
+<p>PKCE transforms the authorization code flow into a secure protocol for public clients by adding a cryptographic binding between the authorization request and the token exchange. Its proof-of-possession model ensures that even if the authorization code is intercepted, it cannot be exchanged without the original verifier. For any new application, the PKCE-authorized code flow is the recommended OAuth 2.0 grant type.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

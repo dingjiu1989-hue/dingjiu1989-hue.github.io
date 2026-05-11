@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tools" data-exclude="test-automation-frameworks">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Test Automation Frameworks 2026">
+    <meta property="og:description" content="Compare modern test automation frameworks across languages including Vitest, Playwright, pytest, and Rust testing tools.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tools/test-automation-frameworks.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Test Automation Frameworks 2026">
+    <meta name="twitter:description" content="Compare modern test automation frameworks across languages including Vitest, Playwright, pytest, and Rust testing tools.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Test Automation Frameworks 2026 — SourceHub</title>
+    <meta name="description" content="Compare modern test automation frameworks across languages including Vitest, Playwright, pytest, and Rust testing tools.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tools/test-automation-frameworks.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tools/test-automation-frameworks.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Test Automation Frameworks 2026",
+      "description": "Compare modern test automation frameworks across languages including Vitest, Playwright, pytest, and Rust testing tools.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1936",
+      "keywords": "Developer Tools, Productivity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/test-automation-frameworks.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tool Recommendations", "item": "https://dingjiu1989-hue.github.io/en/tools/"},
+        {"@type": "ListItem", "position": 3, "name": "Test Automation Frameworks 2026"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a> › Test Automation Frameworks 2026
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Developer Tools</span>
+        <span class="tag-cat">Productivity</span></div>
+      <h1 class="article-title">Test Automation Frameworks 2026</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Test automation frameworks have evolved significantly, with faster runners, better browser testing, and tighter developer experience. This guide covers the best testing frameworks in 2026 across multiple languages and testing domains.</p>
+<br>
+<h2> Unit Testing Frameworks</h2>
+<br>
+<p>Unit tests verify individual functions and modules in isolation. Speed is critical since these run on every save.</p>
+<br>
+<h3>Vitest (JavaScript/TypeScript)</h3>
+<br>
+<p>Vitest is the modern unit test runner for the Vite ecosystem. It is the fastest JavaScript test runner available.</p>
+<br>
+<pre><code>
+// vitest.config.ts
+
+import { defineConfig } from &#x27;vitest/config&#x27;
+
+
+
+export default defineConfig({
+
+  test: {
+
+    globals: true,
+
+    environment: &#x27;node&#x27;,
+
+    coverage: {
+
+      provider: &#x27;v8&#x27;,
+
+      reporter: [&#x27;text&#x27;, &#x27;lcov&#x27;],
+
+      thresholds: {
+
+        branches: 80,
+
+        functions: 80,
+
+        lines: 80,
+
+        statements: 80
+
+      }
+
+    }
+
+  }
+
+})
+
+</code></pre>
+<br>
+<pre><code>
+// Example test
+
+import { describe, it, expect } from &#x27;vitest&#x27;
+
+import { calculateDiscount } from &#x27;./pricing&#x27;
+
+
+
+describe(&#x27;calculateDiscount&#x27;, () =&gt; {
+
+  it(&#x27;applies 10% discount for orders over $100&#x27;, () =&gt; {
+
+    expect(calculateDiscount(150)).toBe(135)
+
+  })
+
+
+
+  it(&#x27;applies no discount for small orders&#x27;, () =&gt; {
+
+    expect(calculateDiscount(50)).toBe(50)
+
+  })
+
+
+
+  it(&#x27;throws for negative amounts&#x27;, () =&gt; {
+
+    expect(() =&gt; calculateDiscount(-10)).toThrow(&#x27;Invalid amount&#x27;)
+
+  })
+
+})
+
+</code></pre>
+<br>
+<p>**Features**: Inline snapshots, built-in coverage, Watch mode with HMR, compatible with Jest API.</p>
+<br>
+<h3>pytest (Python)</h3>
+<br>
+<p>pytest is the dominant Python testing framework with a rich plugin ecosystem.</p>
+<br>
+<pre><code>
+# test_pricing.py
+
+import pytest
+
+from pricing import calculate_discount
+
+
+
+def test_discount_applied():
+
+    assert calculate_discount(150) == 135
+
+
+
+def test_no_discount():
+
+    assert calculate_discount(50) == 50
+
+
+
+def test_negative_amount():
+
+    with pytest.raises(ValueError, match=&quot;Invalid amount&quot;):
+
+        calculate_discount(-10)
+
+
+
+@pytest.mark.parametrize(&quot;amount,expected&quot;, [
+
+    (50, 50), (100, 90), (200, 180)
+
+])
+
+def test_multiple_amounts(amount, expected):
+
+    assert calculate_discount(amount) == expected
+
+</code></pre>
+<br>
+<pre><code>
+# Run with coverage
+
+pytest --cov=src --cov-report=term-missing --cov-fail-under=80
+
+</code></pre>
+<br>
+<p>**Features**: Fixtures, parameterization, powerful assertion introspection, extensive plugins.</p>
+<br>
+<h3>Rust Testing</h3>
+<br>
+<p>Rust has built-in testing with `cargo test`. Additional frameworks enhance the experience.</p>
+<br>
+<pre><code>
+// Unit test (built-in)
+
+#[cfg(test)]
+
+mod tests {
+
+    use super::*;
+
+
+
+    #[test]
+
+    fn test_discount() {
+
+        assert_eq!(calculate_discount(150), 135);
+
+    }
+
+
+
+    #[test]
+
+    #[should_panic(expected = &quot;Invalid amount&quot;)]
+
+    fn test_negative() {
+
+        calculate_discount(-10);
+
+    }
+
+}
+
+</code></pre>
+<br>
+<pre><code>
+// Integration test (tests/integration_test.rs)
+
+use myapp::calculate_discount;
+
+
+
+#[test]
+
+fn integration_discount() {
+
+    assert_eq!(calculate_discount(200), 180);
+
+}
+
+</code></pre>
+<br>
+<p>**Additional crates**: `rstest` for parameterized tests, `proptest` for property-based testing, `quickcheck` for randomized testing.</p>
+<br>
+<h2> Browser/End-to-End Testing</h2>
+<br>
+<p>E2E tests verify that the entire application works correctly from the user's perspective.</p>
+<br>
+<h3>Playwright</h3>
+<br>
+<p>Playwright has become the dominant browser testing framework, replacing Cypress for many teams.</p>
+<br>
+<pre><code>
+// playwright.config.ts
+
+import { defineConfig } from &#x27;@playwright/test&#x27;
+
+
+
+export default defineConfig({
+
+  testDir: &#x27;./e2e&#x27;,
+
+  fullyParallel: true,
+
+  forbidOnly: !!process.env.CI,
+
+  retries: process.env.CI ? 2 : 0,
+
+  workers: process.env.CI ? 1 : undefined,
+
+  reporter: &#x27;html&#x27;,
+
+  use: {
+
+    baseURL: &#x27;http://localhost:3000&#x27;,
+
+    trace: &#x27;on-first-retry&#x27;,
+
+  },
+
+  projects: [
+
+    { name: &#x27;chromium&#x27;, use: { browserName: &#x27;chromium&#x27; } },
+
+    { name: &#x27;firefox&#x27;, use: { browserName: &#x27;firefox&#x27; } },
+
+    { name: &#x27;webkit&#x27;, use: { browserName: &#x27;webkit&#x27; } },
+
+  ],
+
+})
+
+</code></pre>
+<br>
+<pre><code>
+// e2e/login.spec.js
+
+import { test, expect } from &#x27;@playwright/test&#x27;
+
+
+
+test(&#x27;user can log in&#x27;, async ({ page }) =&gt; {
+
+  await page.goto(&#x27;/login&#x27;)
+
+  await page.fill(&#x27;[data-testid=&quot;email&quot;]&#x27;, &#x27;user@example.com&#x27;)
+
+  await page.fill(&#x27;[data-testid=&quot;password&quot;]&#x27;, &#x27;password123&#x27;)
+
+  await page.click(&#x27;[data-testid=&quot;submit&quot;]&#x27;)
+
+
+
+  await expect(page).toHaveURL(&#x27;/dashboard&#x27;)
+
+  await expect(page.locator(&#x27;[data-testid=&quot;welcome&quot;]&#x27;)).toContainText(&#x27;Welcome&#x27;)
+
+})
+
+</code></pre>
+<br>
+<p>**Features**: Multi-browser, mobile emulation, network interception, trace viewer, automatic waiting.</p>
+<br>
+<h3>Playwright vs Cypress</h3>
+<br>
+<p>| Feature | Playwright | Cypress |</p>
+<p>|---------|------------|---------|</p>
+<p>| Browser support | Chromium, Firefox, WebKit | Chromium only (limited Firefox) |</p>
+<p>| Language | JS, TS, Python, Java, C# | JS, TS |</p>
+<p>| Auto-wait | Yes | Yes |</p>
+<p>| Network mocking | Built-in | Built-in |</p>
+<p>| Component testing | Built-in | Built-in |</p>
+<p>| Parallel execution | Native | Dashboard required |</p>
+<p>| Performance | Faster | Slower for large suites |</p>
+<p>| Multi-tab/window | Yes | Limited |</p>
+<br>
+<h2> API Testing</h2>
+<br>
+<h3>Supertest (Node.js)</h3>
+<br>
+<pre><code>
+const request = require(&#x27;supertest&#x27;)
+
+const app = require(&#x27;../app&#x27;)
+
+
+
+describe(&#x27;GET /api/users&#x27;, () =&gt; {
+
+  it(&#x27;returns user list&#x27;, async () =&gt; {
+
+    const res = await request(app)
+
+      .get(&#x27;/api/users&#x27;)
+
+      .set(&#x27;Authorization&#x27;, &#x27;Bearer token&#x27;)
+
+
+
+    expect(res.status).toBe(200)
+
+    expect(Array.isArray(res.body)).toBe(true)
+
+  })
+
+})
+
+</code></pre>
+<br>
+<h3>HTTPX (Python)</h3>
+<br>
+<pre><code>
+import httpx
+
+import pytest
+
+
+
+@pytest.mark.asyncio
+
+async def test_get_users():
+
+    async with httpx.AsyncClient() as client:
+
+        response = await client.get(
+
+            &quot;http://api.example.com/users&quot;,
+
+            headers={&quot;Authorization&quot;: &quot;Bearer token&quot;}
+
+        )
+
+    assert response.status_code == 200
+
+    assert isinstance(response.json(), list)
+
+</code></pre>
+<br>
+<h2> Property-Based Testing</h2>
+<br>
+<p>Property-based testing generates random inputs to find edge cases.</p>
+<br>
+<h3>fast-check (JavaScript)</h3>
+<br>
+<pre><code>
+import * as fc from &#x27;fast-check&#x27;
+
+import { sort } from &#x27;./sorting&#x27;
+
+
+
+describe(&#x27;sort&#x27;, () =&gt; {
+
+  it(&#x27;always returns sorted arrays&#x27;, () =&gt; {
+
+    fc.assert(
+
+      fc.property(fc.array(fc.integer()), (arr) =&gt; {
+
+        const sorted = sort(arr)
+
+        for (let i = 1; i &lt; sorted.length; i++) {
+
+          expect(sorted[i - 1]).toBeLessThanOrEqual(sorted[i])
+
+        }
+
+      })
+
+    )
+
+  })
+
+})
+
+</code></pre>
+<br>
+<h3>Hypothesis (Python)</h3>
+<br>
+<pre><code>
+from hypothesis import given, strategies as st
+
+from sorting import sort
+
+
+
+@given(st.lists(st.integers()))
+
+def test_sort_returns_sorted(arr):
+
+    result = sort(arr)
+
+    for a, b in zip(result, result[1:]):
+
+        assert a &lt;= b
+
+</code></pre>
+<br>
+<h2> Coverage and Quality Metrics</h2>
+<br>
+<p>Integrate coverage into your CI pipeline:</p>
+<br>
+<pre><code>
+# GitHub Actions with coverage
+
+- name: Run tests with coverage
+
+  run: |
+
+    npx vitest --coverage
+
+    npx c8 report --reporter=text-lcov &gt; coverage.lcov
+
+
+
+- name: Upload coverage
+
+  uses: codecov/codecov-action@v4
+
+</code></pre>
+<br>
+<p>Set meaningful thresholds:</p>
+<br>
+<p>| Metric | Minimum Target | Stretch Goal |</p>
+<p>|--------|---------------|--------------|</p>
+<p>| Line coverage | 70% | 85% |</p>
+<p>| Branch coverage | 60% | 80% |</p>
+<p>| Mutation score | 50% | 70% |</p>
+<br>
+<h2> Recommendations</h2>
+<br>
+<p>| Domain | Framework | Language | Why |</p>
+<p>|--------|-----------|----------|-----|</p>
+<p>| Unit tests | Vitest | JS/TS | Fastest JS runner |</p>
+<p>| Unit tests | pytest | Python | Best Python ecosystem |</p>
+<p>| Unit tests | cargo test | Rust | Built-in, excellent |</p>
+<p>| E2E tests | Playwright | Any | Best cross-browser support |</p>
+<p>| E2E tests | Playwright | JS/TS | Component testing + E2E |</p>
+<p>| API tests | Supertest | Node.js | Simple, expressive |</p>
+<p>| API tests | HTTPX | Python | Async support |</p>
+<p>| Property tests | fast-check | JS/TS | Great integration |</p>
+<p>| Property tests | Hypothesis | Python | Mature ecosystem |</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>The testing landscape in 2026 is converging on fast, developer-friendly tools. Vitest leads for JavaScript unit testing with near-instant feedback. Playwright has become the standard for browser testing with multi-browser support and excellent debugging tools. pytest remains unmatched in the Python ecosystem. The key principles are the same regardless of framework: test behavior, not implementation; keep unit tests fast; invest in a few critical E2E tests; and use property-based testing for functions with complex logic. Integrate testing into your development workflow so tests run on every save and every commit.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div>
+      <noscript><div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

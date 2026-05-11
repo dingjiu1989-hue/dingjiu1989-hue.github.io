@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="ssh-security-hardening">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="SSH Security Hardening">
+    <meta property="og:description" content="Practical steps to secure SSH access including key management, configuration hardening, and fail2ban setup.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/ssh-security-hardening.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SSH Security Hardening">
+    <meta name="twitter:description" content="Practical steps to secure SSH access including key management, configuration hardening, and fail2ban setup.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>SSH Security Hardening — SourceHub</title>
+    <meta name="description" content="Practical steps to secure SSH access including key management, configuration hardening, and fail2ban setup.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/ssh-security-hardening.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/ssh-security-hardening.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "SSH Security Hardening",
+      "description": "Practical steps to secure SSH access including key management, configuration hardening, and fail2ban setup.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1277",
+      "keywords": "Technology, Programming, DevOps",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/ssh-security-hardening.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "SSH Security Hardening"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › SSH Security Hardening
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">Programming</span>
+        <span class="tag-cat">DevOps</span></div>
+      <h1 class="article-title">SSH Security Hardening</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>SSH is the gateway to your infrastructure. A compromised SSH key or misconfigured daemon can lead to complete server takeover. Hardening SSH is one of the highest-impact security improvements you can make.</p>
+<br>
+<h2> Disable Password Authentication</h2>
+<br>
+<p>Password authentication is susceptible to brute-force attacks. Disable it and use key-based authentication only:</p>
+<br>
+<pre><code>
+# /etc/ssh/sshd_config
+
+PasswordAuthentication no
+
+ChallengeResponseAuthentication no
+
+UsePAM no
+
+PubkeyAuthentication yes
+
+</code></pre>
+<br>
+<p>After making changes, restart the SSH daemon:</p>
+<br>
+<pre><code>
+sudo systemctl restart sshd
+
+</code></pre>
+<br>
+<p>Always keep an active SSH session open while testing changes. If something breaks, you can debug before the session closes.</p>
+<br>
+<h2> Use Ed25519 Keys</h2>
+<br>
+<p>Ed25519 keys offer better security and performance than RSA:</p>
+<br>
+<pre><code>
+ssh-keygen -t ed25519 -a 100 -f ~/.ssh/id_ed25519
+
+</code></pre>
+<br>
+<p>The `-a 100` option increases the KDF rounds for the private key file, making it harder to crack if the file is stolen. For legacy systems that require RSA, use at least 4096-bit keys:</p>
+<br>
+<pre><code>
+ssh-keygen -t rsa -b 4096 -a 100 -f ~/.ssh/id_rsa
+
+</code></pre>
+<br>
+<h2> Restrict Key Usage</h2>
+<br>
+<p>Limit what individual keys can do using the `authorized_keys` file:</p>
+<br>
+<pre><code>
+# ~/.ssh/authorized_keys
+
+restrict,command=&quot;/usr/bin/git-shell&quot;,from=&quot;192.168.1.0/24&quot; ssh-ed25519 AAA...
+
+</code></pre>
+<br>
+<p>The `restrict` keyword denies all forwarding and agent access. `command=` limits the key to a specific command. `from=` restricts which IP addresses can use this key.</p>
+<br>
+<h2> Disable Root Login</h2>
+<br>
+<p>Never allow direct root SSH access:</p>
+<br>
+<pre><code>
+PermitRootLogin no
+
+</code></pre>
+<br>
+<p>Use a regular user account with `sudo` access instead. This creates an audit trail -- every privileged command is logged with the user who ran it.</p>
+<br>
+<h2> Change the Default Port</h2>
+<br>
+<p>Changing the default port (22) reduces automated attack noise:</p>
+<br>
+<pre><code>
+Port 2222
+
+</code></pre>
+<br>
+<p>This is not real security (a determined attacker will find your SSH port), but it dramatically reduces log noise from automated scanners.</p>
+<br>
+<h2> Use a Strong Cipher Configuration</h2>
+<br>
+<p>Modern SSH supports strong ciphers. Enforce them:</p>
+<br>
+<pre><code>
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com
+
+MACs hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com
+
+KexAlgorithms curve25519-sha256,diffie-hellman-group16-sha512
+
+HostKeyAlgorithms ssh-ed25519,rsa-sha2-512
+
+</code></pre>
+<br>
+<p>This configuration only allows algorithms with proven security. Remove legacy algorithms like `diffie-hellman-group14-sha1` and `hmac-sha1`.</p>
+<br>
+<h2> SSH Timeout and Session Limits</h2>
+<br>
+<p>Prevent idle sessions from accumulating:</p>
+<br>
+<pre><code>
+ClientAliveInterval 300
+
+ClientAliveCountMax 2
+
+TCPKeepAlive no
+
+MaxSessions 10
+
+MaxStartups 10:30:60
+
+</code></pre>
+<br>
+<p>`ClientAliveInterval=300` with `ClientAliveCountMax=2` means the server checks every 5 minutes and disconnects after 10 minutes of inactivity. `MaxStartups` limits concurrent unauthenticated connections to prevent DoS attacks.</p>
+<br>
+<h2> Fail2Ban Integration</h2>
+<br>
+<p>Install and configure Fail2Ban to block brute-force attempts:</p>
+<br>
+<pre><code>
+sudo apt install fail2ban
+
+</code></pre>
+<br>
+<pre><code>
+# /etc/fail2ban/jail.local
+
+[sshd]
+
+enabled = true
+
+port = ssh
+
+filter = sshd
+
+logpath = /var/log/auth.log
+
+maxretry = 3
+
+bantime = 3600
+
+findtime = 600
+
+</code></pre>
+<br>
+<p>This bans IPs for one hour after three failed attempts within ten minutes. For internet-facing SSH, consider longer ban times (24 hours) to be more aggressive.</p>
+<br>
+<h2> Two-Factor Authentication</h2>
+<br>
+<p>Add a second factor with `libpam-google-authenticator`:</p>
+<br>
+<pre><code>
+sudo apt install libpam-google-authenticator
+
+google-authenticator
+
+</code></pre>
+<br>
+<pre><code>
+# /etc/pam.d/sshd
+
+auth required pam_google_authenticator.so
+
+
+
+# /etc/ssh/sshd_config
+
+ChallengeResponseAuthentication yes
+
+AuthenticationMethods publickey,keyboard-interactive
+
+</code></pre>
+<br>
+<p>This requires both an SSH key and a TOTP code to authenticate. Use this for high-value jump boxes and production servers.</p>
+<br>
+<h2> SSH Agent Forwarding</h2>
+<br>
+<p>Be careful with agent forwarding. Use `-J` (jump host) instead when possible:</p>
+<br>
+<pre><code>
+# Instead of forwarding your agent through a chain:
+
+ssh -J bastion.example.com target.internal
+
+
+
+# Or use ProxyJump in ~/.ssh/config:
+
+Host internal-*
+
+  ProxyJump bastion.example.com
+
+</code></pre>
+<br>
+<p>If you must use agent forwarding, use `ssh -A` with the `-t` flag for a single session rather than enabling forwarding globally in your config.</p>
+<br>
+<h2> Key Rotation</h2>
+<br>
+<p>Regularly rotate SSH keys and audit authorized keys:</p>
+<br>
+<pre><code>
+#!/bin/bash
+
+# audit-ssh-keys.sh
+
+for user in $(getent passwd | cut -d: -f1); do
+
+    home=$(getent passwd &quot;$user&quot; | cut -d: -f6)
+
+    if [[ -f &quot;$home/.ssh/authorized_keys&quot; ]]; then
+
+        echo &quot;User: $user&quot;
+
+        cat &quot;$home/.ssh/authorized_keys&quot;
+
+    fi
+
+done
+
+</code></pre>
+<br>
+<p>Remove keys belonging to departed team members and replace keys that are over a year old. Integrate key management with your identity provider (Okta, Azure AD) using tools like `ssh-ca` for certificate-based auth.</p>
+<br>
+<h2> Monitor SSH Access</h2>
+<br>
+<p>Monitor SSH access in real-time:</p>
+<br>
+<pre><code>
+# Watch auth log for SSH activity
+
+tail -f /var/log/auth.log | grep sshd
+
+
+
+# Audit currently logged-in users
+
+w
+
+
+
+# Last login times for all users
+
+lastlog
+
+</code></pre>
+<br>
+<p>Set up alerts for SSH logins from unexpected IP ranges or at unusual hours using log ingestion tools.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>SSH hardening follows defense in depth: disable passwords, use Ed25519 keys, lock down the daemon configuration, and add Fail2Ban. For production systems, add two-factor authentication and eliminate agent forwarding in favor of jump hosts. Regularly audit authorized keys and rotate them. Most SSH compromises come from weak configurations, not zero-days -- hardening your SSH setup prevents the majority of attack vectors.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

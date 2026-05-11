@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="cloud-security-basics">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Cloud Security Basics: Shared Responsibility Model Explained">
+    <meta property="og:description" content="Understand the AWS/GCP/Azure shared responsibility model, IAM policies, network security groups, and key cloud security services.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/cloud-security-basics.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cloud Security Basics: Shared Responsibility Model Explained">
+    <meta name="twitter:description" content="Understand the AWS/GCP/Azure shared responsibility model, IAM policies, network security groups, and key cloud security services.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Cloud Security Basics: Shared Responsibility Model Explained — SourceHub</title>
+    <meta name="description" content="Understand the AWS/GCP/Azure shared responsibility model, IAM policies, network security groups, and key cloud security services.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/cloud-security-basics.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/cloud-security-basics.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Cloud Security Basics: Shared Responsibility Model Explained",
+      "description": "Understand the AWS/GCP/Azure shared responsibility model, IAM policies, network security groups, and key cloud security services.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1274",
+      "keywords": "Security, Cybersecurity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/cloud-security-basics.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Cloud Security Basics: Shared Responsibility Model Explained"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Cloud Security Basics: Shared Responsibility Model Explained
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">Cybersecurity</span></div>
+      <h1 class="article-title">Cloud Security Basics: Shared Responsibility Model Explained</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><p>The shared responsibility model is the foundational concept in cloud security. It defines what the cloud provider secures versus what the customer must secure. Misunderstanding this boundary is the root cause of most cloud data breaches.</p>
+<br>
+<h2> The Shared Responsibility Model</h2>
+<br>
+<p>Every major cloud provider — AWS, Google Cloud, and Azure — operates under a shared responsibility model. The provider secures the infrastructure that runs the services. The customer secures everything they deploy on top of that infrastructure.</p>
+<br>
+<p>**AWS shared responsibility**: AWS secures the hardware, software, networking, and facilities that run AWS services. The customer secures their data, platform applications, identity and access management, operating system patches, network firewall configurations, and client-side encryption.</p>
+<br>
+<p>**GCP shared responsibility**: Google secures the physical infrastructure, storage, networking, and encryption-at-rest infrastructure. The customer secures their data classifications, access policies, application configurations, and identity management.</p>
+<br>
+<p>**Azure shared responsibility**: Microsoft secures physical hosts, networks, and datacenters. The customer secures their data, identities, applications, and account management. For platform-as-a-service (PaaS) services, Microsoft takes on more responsibility for the runtime.</p>
+<br>
+<h2> Identity and Access Management (IAM)</h2>
+<br>
+<p>IAM is the gatekeeper of your cloud environment. Every API call to a cloud provider passes through IAM authorization.</p>
+<br>
+<h3>AWS IAM</h3>
+<br>
+<p>AWS IAM uses policies written in JSON to grant or deny permissions. Policies attach to users, groups, or roles.</p>
+<br>
+<pre><code>
+{
+
+  &quot;Version&quot;: &quot;2012-10-17&quot;,
+
+  &quot;Statement&quot;: [
+
+    {
+
+      &quot;Effect&quot;: &quot;Allow&quot;,
+
+      &quot;Action&quot;: [&quot;s3:GetObject&quot;, &quot;s3:ListBucket&quot;],
+
+      &quot;Resource&quot;: [
+
+        &quot;arn:aws:s3:::example-bucket&quot;,
+
+        &quot;arn:aws:s3:::example-bucket/*&quot;
+
+      ]
+
+    }
+
+  ]
+
+}
+
+</code></pre>
+<br>
+<p>Best practices for IAM:</p>
+<br>
+<li>Apply the principle of least privilege. Grant only the permissions a role or user needs.</li>
+<li>Use IAM roles rather than long-lived access keys. EC2 instances and Lambda functions should assume roles.</li>
+<li>Enable AWS IAM Access Analyzer to identify unused permissions.</li>
+<li>Require multi-factor authentication for the root account and all privileged users.</li>
+<br>
+<h3>GCP IAM</h3>
+<br>
+<p>GCP IAM uses roles that are collections of permissions. Primitive roles (Owner, Editor, Viewer) are broad. Predefined roles are service-specific and more granular.</p>
+<br>
+<pre><code>
+# Assign a predefined role to a service account
+
+gcloud projects add-iam-policy-binding my-project \
+
+  --member=&quot;serviceAccount:sa@my-project.iam.gserviceaccount.com&quot; \
+
+  --role=&quot;roles/storage.objectViewer&quot;
+
+</code></pre>
+<br>
+<h3>Azure RBAC</h3>
+<br>
+<p>Azure uses Role-Based Access Control with built-in or custom roles. Roles are assigned at management group, subscription, resource group, or resource scope.</p>
+<br>
+<pre><code>
+az role assignment create \
+
+  --assignee user@example.com \
+
+  --role &quot;Reader&quot; \
+
+  --scope &quot;/subscriptions/SUB_ID/resourceGroups/RG&quot;
+
+</code></pre>
+<br>
+<h2> Network Security Groups</h2>
+<br>
+<p>Cloud virtual networks need traffic filtering at multiple layers.</p>
+<br>
+<p>**AWS Security Groups**: Stateful firewalls at the instance level. You define inbound and outbound rules. Allow rules only — there is no explicit deny in security groups. Network ACLs provide stateless filtering at the subnet level with both allow and deny rules.</p>
+<br>
+<p>**GCP Firewall Rules**: Applied at the VPC network level. They can be ingress or egress rules with allow or deny actions. Rules include source and destination IP ranges, protocols, and ports.</p>
+<br>
+<p>**Azure Network Security Groups (NSGs)**: Filter traffic at the subnet or NIC level. NSGs contain security rules with priority, source, destination, protocol, direction, and action (allow or deny).</p>
+<br>
+<h2> Cloud Security Services</h2>
+<br>
+<h3>AWS CloudTrail</h3>
+<br>
+<p>CloudTrail records every API call made in your AWS account. It logs the caller identity, time, source IP, request parameters, and response elements. Enable CloudTrail in all regions and use a single trail for all accounts in AWS Organizations.</p>
+<br>
+<h3>AWS GuardDuty</h3>
+<br>
+<p>GuardDuty is a threat detection service that analyzes CloudTrail events, VPC flow logs, and DNS logs. It uses machine learning to detect unusual behavior such as crypto mining activity, anomalous API calls, or compromised credentials.</p>
+<br>
+<h3>GCP Security Command Center</h3>
+<br>
+<p>Security Command Center provides threat detection, vulnerability scanning, and asset inventory for GCP. It surfaces misconfigurations like public buckets, open firewall ports, and IAM policy violations.</p>
+<br>
+<h3>Azure Defender</h3>
+<br>
+<p>Azure Defender (formerly Azure Security Center) provides unified security management and advanced threat protection across hybrid cloud workloads. It includes just-in-time VM access, file integrity monitoring, and vulnerability assessments.</p>
+<br>
+<h2> Key Management</h2>
+<br>
+<p>Encryption key management differs across providers:</p>
+<br>
+<li>**AWS KMS**: Managed service for creating and controlling encryption keys. Supports automatic key rotation, key policies, and integration with most AWS services.</li>
+<li>**GCP Cloud KMS**: Similar capabilities with Cloud HSM option for FIPS 140-2 Level 3 validation.</li>
+<li>**Azure Key Vault**: Stores keys, secrets, and certificates. Integrates with Azure Disk Encryption, SQL Server TDE, and App Service.</li>
+<br>
+<p>Never store secrets in code, configuration files, or environment variables exposed through debugging endpoints. Use a proper secrets manager with automatic rotation.</p>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>Cloud security starts with understanding the shared responsibility model. From there, it requires disciplined IAM management, proper network segmentation, and full utilization of your provider's security tooling. The shift to cloud does not eliminate security responsibilities — it transforms them.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a><a href="/en/security/identity-management.html" class="related-card">Identity and Access Management (IAM) Guide</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a><a href="/en/security/identity-management.html" class="related-card">Identity and Access Management (IAM) Guide</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

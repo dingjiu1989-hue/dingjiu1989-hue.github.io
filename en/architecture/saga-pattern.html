@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="saga-pattern">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Saga Pattern for Distributed Transactions">
+    <meta property="og:description" content="Learn the saga pattern for managing distributed transactions across microservices.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/saga-pattern.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Saga Pattern for Distributed Transactions">
+    <meta name="twitter:description" content="Learn the saga pattern for managing distributed transactions across microservices.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Saga Pattern for Distributed Transactions — SourceHub</title>
+    <meta name="description" content="Learn the saga pattern for managing distributed transactions across microservices.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/saga-pattern.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/saga-pattern.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Saga Pattern for Distributed Transactions",
+      "description": "Learn the saga pattern for managing distributed transactions across microservices.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1133",
+      "keywords": "Architecture, System Design",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/saga-pattern.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Saga Pattern for Distributed Transactions"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Saga Pattern for Distributed Transactions
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span></div>
+      <h1 class="article-title">Saga Pattern for Distributed Transactions</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>In a monolithic application, a database transaction guarantees atomicity across multiple operations. In a microservices architecture, where each service has its own database, traditional ACID transactions are no longer possible. The saga pattern provides a way to maintain data consistency across services without distributed transactions.</p>
+<br>
+<h2> What Is a Saga?</h2>
+<br>
+<p>A saga is a sequence of local transactions, each within a single service. Each local transaction updates the database and publishes a message or event that triggers the next local transaction. If a local transaction fails, the saga executes compensating transactions to undo the changes made by previous transactions.</p>
+<br>
+<p>There are two common implementations: choreography-based and orchestration-based sagas.</p>
+<br>
+<h2> Choreography-Based Saga</h2>
+<br>
+<p>In a choreography-based saga, each service knows what to do next and publishes events after completing its local transaction. There is no central coordinator.</p>
+<br>
+<p>Consider an order placement flow:</p>
+<br>
+<li>**Order Service** creates an order in `PENDING` status and publishes `OrderCreated`.</li>
+<p>2. **Inventory Service** receives the event, reserves inventory, publishes `InventoryReserved`.</p>
+<p>3. **Payment Service** receives the event, processes payment, publishes `PaymentProcessed`.</p>
+<p>4. **Order Service** receives the event, updates order status to `CONFIRMED`.</p>
+<br>
+<p>If payment fails, the Payment Service publishes `PaymentFailed`. The Inventory Service listens for this event and releases the reserved inventory. The Order Service updates the order to `FAILED`.</p>
+<br>
+<p>**Pros:** Simple, no single point of failure, services are loosely coupled.</p>
+<p>**Cons:** The flow is spread across services, making it harder to trace and debug. Services can become tightly coupled to each other's events. Complex workflows are difficult to manage.</p>
+<br>
+<h2> Orchestration-Based Saga</h2>
+<br>
+<p>In an orchestration-based saga, a central orchestrator (the saga coordinator) tells each service what to do. The orchestrator sends commands to services and handles their responses.</p>
+<br>
+<p>Using the same order flow:</p>
+<br>
+<li>**Order Saga Orchestrator** tells Order Service to create an order.</li>
+<p>2. Order Service creates the order and responds with `success`.</p>
+<p>3. Orchestrator tells Inventory Service to reserve inventory.</p>
+<p>4. Inventory Service responds with `success`.</p>
+<p>5. Orchestrator tells Payment Service to process payment.</p>
+<p>6. Payment Service responds with `success`.</p>
+<p>7. Orchestrator tells Order Service to confirm the order.</p>
+<br>
+<p>If any step fails, the orchestrator executes compensating actions in reverse order. For example, if payment fails, it tells Inventory Service to release inventory and Order Service to reject the order.</p>
+<br>
+<p>**Pros:** Clear workflow definition in one place, easier to monitor and debug, good for complex workflows with conditional logic.</p>
+<p>**Cons:** The orchestrator is a single point of failure and can become a bottleneck.</p>
+<br>
+<h2> Compensating Transactions</h2>
+<br>
+<p>Sagas rely on compensating transactions for rollback. Unlike ACID rollbacks, compensations are application-level operations that semantically undo a previous action. For example:</p>
+<br>
+<li>`InventoryReserved` is compensated by `InventoryReleased`.</li>
+<li>`PaymentProcessed` is compensated by `PaymentRefunded`.</li>
+<li>`EmailSent` might not require compensation at all.</li>
+<br>
+<p>Design compensations to be idempotent. A compensation might be executed multiple times if the orchestrator crashes and retries. A good test: if the compensation runs twice, the system should still end up in the correct state.</p>
+<br>
+<h2> Handling Failures and Retries</h2>
+<br>
+<p>Failures in sagas fall into two categories:</p>
+<br>
+<p>**Business failures** (insufficient inventory, invalid payment) trigger compensation flows immediately. These are expected and part of normal operation.</p>
+<br>
+<p>**Technical failures** (timeout, network error) are harder to handle. Best practices include:</p>
+<br>
+<li>Implementing retry with exponential backoff for transient failures.</li>
+<li>Storing saga state in a database so the saga can resume after a crash.</li>
+<li>Using a saga log to track which steps have completed.</li>
+<br>
+<h2> When to Use Sagas</h2>
+<br>
+<p>Use sagas when:</p>
+<li>You need to maintain data consistency across multiple services.</li>
+<li>Each service has its own database (database per service pattern).</li>
+<li>You accept eventual consistency -- sagas are not ACID. There is a window of inconsistency between steps.</li>
+<br>
+<p>Do not use sagas when you need strong ACID guarantees across services. In those cases, reconsider your service boundaries or accept that some operations might need to be in the same service.</p>
+<br>
+<h2> Practical Implementation</h2>
+<br>
+<p>Start with choreography for simple flows with 2-3 services. Switch to orchestration when the flow becomes complex or you need visibility into saga state. Use a dedicated saga orchestration framework like Axon, Temporal, or Camunda for production systems. Always implement idempotency and retry logic. Log every saga step for debugging and monitoring.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>The saga pattern is the de facto standard for distributed transactions in microservices. Choose choreography for simple flows and orchestration for complex ones. Design compensating transactions carefully, handle both business and technical failures, and accept that sagas provide eventual consistency, not ACID guarantees.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

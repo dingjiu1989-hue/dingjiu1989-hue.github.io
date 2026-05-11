@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="compare" data-exclude="solid-vs-qwik">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Solid.js vs Qwik">
+    <meta property="og:description" content="Compare Solid.js and Qwik for modern web development — fine-grained reactivity, resumability, performance, and use case suitability.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/compare/solid-vs-qwik.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Solid.js vs Qwik">
+    <meta name="twitter:description" content="Compare Solid.js and Qwik for modern web development — fine-grained reactivity, resumability, performance, and use case suitability.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Solid.js vs Qwik — SourceHub</title>
+    <meta name="description" content="Compare Solid.js and Qwik for modern web development — fine-grained reactivity, resumability, performance, and use case suitability.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/compare/solid-vs-qwik.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/compare/solid-vs-qwik.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Solid.js vs Qwik",
+      "description": "Compare Solid.js and Qwik for modern web development — fine-grained reactivity, resumability, performance, and use case suitability.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1646",
+      "keywords": "Comparison, Technology",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/compare/solid-vs-qwik.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Comparisons", "item": "https://dingjiu1989-hue.github.io/en/compare/"},
+        {"@type": "ListItem", "position": 3, "name": "Solid.js vs Qwik"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/compare/">Comparisons</a> › Solid.js vs Qwik
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Comparison</span>
+        <span class="tag-cat">Technology</span></div>
+      <h1 class="article-title">Solid.js vs Qwik</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>Solid.js and Qwik represent the cutting edge of web framework design. Both challenge the virtual DOM paradigm that has dominated frontend development for a decade, but they take radically different approaches. Solid.js offers fine-grained reactivity without a virtual DOM — updates are precise and surgical. Qwik introduces resumability, where applications can start on the server and resume on the client with almost no JavaScript. This comparison explores how these frameworks work and when to use each.</p>
+<br>
+<h2> Solid.js</h2>
+<br>
+<p>Solid.js was created by Ryan Carniato and pioneered the concept of fine-grained reactivity inspired by Knockout.js and MobX.</p>
+<br>
+<p>**How it works:**</p>
+<p>Solid compiles your JSX into real DOM nodes wrapped in reactive computations. When state changes, only the specific DOM nodes depending on that state are updated — no virtual DOM diffing needed.</p>
+<br>
+<pre><code>
+import { createSignal } from &quot;solid-js&quot;;
+
+
+
+function Counter() {
+
+  const [count, setCount] = createSignal(0);
+
+  const doubleCount = () =&gt; count() * 2;
+
+
+
+  return (
+
+    &lt;div&gt;
+
+      &lt;p&gt;Count: {count()}&lt;/p&gt;
+
+      &lt;p&gt;Double: {doubleCount()}&lt;/p&gt;
+
+      &lt;button onClick={() =&gt; setCount(c =&gt; c + 1)}&gt;+1&lt;/button&gt;
+
+    &lt;/div&gt;
+
+  );
+
+}
+
+</code></pre>
+<br>
+<p>**Core concepts:**</p>
+<li>**Signals**: Reactive primitives (`createSignal`) that track state</li>
+<li>**Effects**: Automatically re-run when dependent signals change (`createEffect`)</li>
+<li>**Memos**: Cached derived values that only recompute when dependencies change (`createMemo`)</li>
+<li>**No virtual DOM**: Direct DOM manipulation via compilation</li>
+<br>
+<pre><code>
+// Solid.js: automatic dependency tracking
+
+import { createSignal, createEffect, createMemo } from &quot;solid-js&quot;;
+
+
+
+const [todos, setTodos] = createSignal([]);
+
+const [filter, setFilter] = createSignal(&quot;all&quot;);
+
+
+
+const filteredTodos = createMemo(() =&gt; {
+
+  switch (filter()) {
+
+    case &quot;active&quot;: return todos().filter(t =&gt; !t.done);
+
+    case &quot;completed&quot;: return todos().filter(t =&gt; t.done);
+
+    default: return todos();
+
+  }
+
+});
+
+
+
+// Automatically re-runs when filteredTodos changes
+
+createEffect(() =&gt; {
+
+  console.log(`Showing ${filteredTodos().length} todos`);
+
+});
+
+</code></pre>
+<br>
+<p>**Strengths:**</p>
+<li>Best-in-class runtime performance (no virtual DOM overhead)</li>
+<li>Predictable rendering — components render once, then reactively update</li>
+<li>Small bundle size (~7KB gzipped)</li>
+<li>Excellent TypeScript support</li>
+<li>React-compatible JSX (similar mental model to React)</li>
+<li>SolidStart meta-framework for full-stack applications</li>
+<br>
+<p>**Weaknesses:**</p>
+<li>Smaller ecosystem than React</li>
+<li>Fewer job opportunities</li>
+<li>JSX without re-rendering requires mental model shift from React</li>
+<li>Less community content and learning resources</li>
+<br>
+<h2> Qwik</h2>
+<br>
+<p>Qwik was created by Misko Hevery (creator of Angular) and introduces the concept of resumability.</p>
+<br>
+<p>**How it works:**</p>
+<p>Qwik serializes application state on the server and sends minimal JavaScript to the client. Instead of downloading and executing the application to "rehydrate" it, Qwik "resumes" execution on the client — picking up exactly where the server left off.</p>
+<br>
+<pre><code>
+import { component$, useSignal, $ } from &quot;@builder.io/qwik&quot;;
+
+
+
+export const Counter = component$(() =&gt; {
+
+  const count = useSignal(0);
+
+
+
+  return (
+
+    &lt;div&gt;
+
+      &lt;p&gt;Count: {count.value}&lt;/p&gt;
+
+      &lt;button onClick$={$(() =&gt; count.value++)}&gt;+1&lt;/button&gt;
+
+    &lt;/div&gt;
+
+  );
+
+});
+
+</code></pre>
+<br>
+<p>**Core concepts:**</p>
+<li>**Resumability**: Serialize listener registrations and state, resume without re-executing</li>
+<li>**Fine-grained lazy loading**: Each event handler is a separate chunk, loaded on interaction</li>
+<li>**`component$`**: Lazy-loadable component boundary</li>
+<li>**`$` suffix**: Identifies lazy-loadable boundaries (events, stores, effects)</li>
+<li>**Prefetching**: Predicts user interactions and preloads handlers</li>
+<br>
+<pre><code>
+// Qwik: code is split per-event by default
+
+import { component$, useStore } from &quot;@builder.io/qwik&quot;;
+
+
+
+export const TodoApp = component$(() =&gt; {
+
+  const state = useStore({ todos: [], filter: &quot;all&quot; });
+
+
+
+  return (
+
+    &lt;div&gt;
+
+      &lt;button onClick$={async () =&gt; {
+
+        // This handler is a separate JS chunk
+
+        // Only loaded when the user clicks this button
+
+        const data = await fetch(&quot;/api/todos&quot;);
+
+        state.todos = await data.json();
+
+      }}&gt;
+
+        Load Todos
+
+      &lt;/button&gt;
+
+      &lt;TodoList todos={state.todos} /&gt;
+
+      {/* TodoList component is also lazy-loaded */}
+
+    &lt;/div&gt;
+
+  );
+
+});
+
+</code></pre>
+<br>
+<p>**Strengths:**</p>
+<li>Near-instant page loads (as low as 1KB of JavaScript)</li>
+<li>Automatic code splitting per event handler</li>
+<li>Best Core Web Vitals scores of any framework</li>
+<li>Scales to complex applications with no performance cliff</li>
+<li>Qwik City meta-framework with routing and data loading</li>
+<br>
+<p>**Weaknesses:**</p>
+<li>Most complex mental model of any framework</li>
+<li>`$` suffix syntax can be confusing and easy to forget</li>
+<li>Smallest ecosystem and community</li>
+<li>Tooling and developer experience still maturing</li>
+<li>Resumability debugging is harder than traditional approaches</li>
+<br>
+<h2> Performance Comparison</h2>
+<br>
+<p>| Metric | Solid.js | Qwik |</p>
+<p>|--------|----------|------|</p>
+<p>| First Load JS | ~7KB + app code | ~1KB + critical app code |</p>
+<p>| Runtime speed | Fastest (no VDOM) | Fast (resumable) |</p>
+<p>| Memory usage | Low | Lowest |</p>
+<p>| Lazy loading | Manual | Automatic at function level |</p>
+<p>| Time to Interactive | Excellent | Best in class |</p>
+<p>| Lighthouse score | 95-100 | 98-100 |</p>
+<br>
+<p>Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load performance (JavaScript size).</p>
+<br>
+<h2> Ecosystem and Meta-Frameworks</h2>
+<br>
+<p>| Aspect | Solid | Qwik |</p>
+<p>|--------|-------|------|</p>
+<p>| Meta-framework | SolidStart | Qwik City |</p>
+<p>| Routing | File-based (SolidStart) | File-based (Qwik City) |</p>
+<p>| Data loading | Server load functions | Route loaders |</p>
+<p>| Forms | SolidStart forms | Qwik City forms |</p>
+<p>| Deployment | Node, serverless, static | Node, serverless, static |</p>
+<p>| UI libraries | Solid UI components growing | Limited |</p>
+<p>| State management | Solid stores, signals | useStore, useContext |</p>
+<br>
+<h2> When to Choose What</h2>
+<br>
+<p>**Choose Solid.js when:**</p>
+<li>You want React-like syntax with better performance</li>
+<li>You're building a highly interactive application with frequent updates</li>
+<li>You value predictable rendering and runtime performance</li>
+<li>You want to minimize bundle size in a traditional SPA</li>
+<li>Your team knows React and wants a familiar but faster alternative</li>
+<br>
+<p>**Choose Qwik when:**</p>
+<li>Initial page load performance is critical</li>
+<li>You're building a content-heavy site that needs excellent Core Web Vitals</li>
+<li>You need to support slow connections or low-end devices</li>
+<li>You want the most advanced code-splitting available</li>
+<li>You're willing to learn a new mental model for maximum performance</li>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>Solid.js and Qwik represent two different paths beyond the virtual DOM. Solid.js optimizes runtime performance through fine-grained reactivity with a familiar React-like syntax. Qwik optimizes initial load performance through resumability, sending the absolute minimum JavaScript to the client. In 2026, Solid.js is the more practical choice for most developers — it offers dramatic performance improvements over React with a much gentler learning curve. Qwik is the choice when first-impression performance is critical and your team has the expertise to handle its unique mental model. Both represent the future of web development beyond virtual DOM frameworks.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/compare/grpc-vs-websocket.html" class="related-card">gRPC vs WebSocket: Real-Time Communication</a><a href="/en/compare/kafka-vs-rabbitmq.html" class="related-card">Kafka vs RabbitMQ vs Apache Pulsar</a><a href="/en/compare/mysql-vs-mariadb.html" class="related-card">MySQL vs MariaDB: The Complete Comparison</a><a href="/en/compare/redis-vs-memcached.html" class="related-card">Redis vs Memcached: Caching Solution Comparison</a></div>
+      <noscript><div class="related-grid"><a href="/en/compare/grpc-vs-websocket.html" class="related-card">gRPC vs WebSocket: Real-Time Communication</a><a href="/en/compare/kafka-vs-rabbitmq.html" class="related-card">Kafka vs RabbitMQ vs Apache Pulsar</a><a href="/en/compare/mysql-vs-mariadb.html" class="related-card">MySQL vs MariaDB: The Complete Comparison</a><a href="/en/compare/redis-vs-memcached.html" class="related-card">Redis vs Memcached: Caching Solution Comparison</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

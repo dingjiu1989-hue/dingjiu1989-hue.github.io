@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="http-security-headers">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="HTTP Security Headers Checklist">
+    <meta property="og:description" content="A complete checklist of HTTP security headers to protect your web application from XSS, clickjacking, MIME sniffing, and other attacks.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/http-security-headers.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HTTP Security Headers Checklist">
+    <meta name="twitter:description" content="A complete checklist of HTTP security headers to protect your web application from XSS, clickjacking, MIME sniffing, and other attacks.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>HTTP Security Headers Checklist — SourceHub</title>
+    <meta name="description" content="A complete checklist of HTTP security headers to protect your web application from XSS, clickjacking, MIME sniffing, and other attacks.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/http-security-headers.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/http-security-headers.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "HTTP Security Headers Checklist",
+      "description": "A complete checklist of HTTP security headers to protect your web application from XSS, clickjacking, MIME sniffing, and other attacks.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1161",
+      "keywords": "Security, Cybersecurity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/http-security-headers.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "HTTP Security Headers Checklist"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › HTTP Security Headers Checklist
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">Cybersecurity</span></div>
+      <h1 class="article-title">HTTP Security Headers Checklist</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Why Security Headers Matter</h2>
+<br>
+<p>HTTP security headers are the first line of defense for any web application. They tell the browser how to behave when rendering your content, preventing a wide range of attacks including cross-site scripting (XSS), clickjacking, MIME-type sniffing, and protocol downgrade attacks. Many of these headers are easy to implement yet remain missing on the majority of production websites.</p>
+<br>
+<h2> Essential Headers</h2>
+<br>
+<h3>Strict-Transport-Security</h3>
+<br>
+<p>Forces all communication to use HTTPS, preventing man-in-the-middle attacks and protocol downgrades.</p>
+<br>
+<pre><code>
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
+</code></pre>
+<br>
+<p>Set `max-age` to at least 1 year (31536000 seconds) once you are confident HTTPS is stable. `includeSubDomains` extends protection to all subdomains. `preload` allows your domain to be included in browser preload lists.</p>
+<br>
+<h3>Content-Security-Policy</h3>
+<br>
+<p>The most powerful defense against XSS attacks. CSP restricts which resources the browser can load and execute.</p>
+<br>
+<pre><code>
+Content-Security-Policy: default-src &#x27;self&#x27;;
+
+    script-src &#x27;self&#x27; https://analytics.example.com;
+
+    style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;;
+
+    img-src &#x27;self&#x27; data: https:;
+
+    font-src &#x27;self&#x27; https://fonts.gstatic.com;
+
+    connect-src &#x27;self&#x27; https://api.example.com;
+
+    frame-ancestors &#x27;none&#x27;;
+
+    form-action &#x27;self&#x27;
+
+</code></pre>
+<br>
+<p>Start with a report-only policy to identify violations before enforcing:</p>
+<br>
+<pre><code>
+Content-Security-Policy-Report-Only: default-src &#x27;self&#x27;;
+
+    report-uri /csp-violations
+
+</code></pre>
+<br>
+<h3>X-Content-Type-Options</h3>
+<br>
+<p>Prevents browsers from MIME-type sniffing, which can be used to bypass content type checks.</p>
+<br>
+<pre><code>
+X-Content-Type-Options: nosniff
+
+</code></pre>
+<br>
+<h3>X-Frame-Options</h3>
+<br>
+<p>Prevents clickjacking by controlling whether your page can be embedded in a frame.</p>
+<br>
+<pre><code>
+X-Frame-Options: DENY
+
+</code></pre>
+<br>
+<p>Use `DENY` to block all framing, or `SAMEORIGIN` to allow framing on pages sharing the same origin.</p>
+<br>
+<h3>Referrer-Policy</h3>
+<br>
+<p>Controls how much referrer information is included with requests.</p>
+<br>
+<pre><code>
+Referrer-Policy: strict-origin-when-cross-origin
+
+</code></pre>
+<br>
+<p>This sends the full URL as referrer for same-origin requests, only the origin for cross-origin requests, and nothing when navigating from HTTPS to HTTP.</p>
+<br>
+<h2> Recommended Headers</h2>
+<br>
+<h3>Permissions-Policy (formerly Feature-Policy)</h3>
+<br>
+<p>Controls which browser features your page can use.</p>
+<br>
+<pre><code>
+Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+
+</code></pre>
+<br>
+<p>Disable all features you do not need. This prevents malicious scripts from accessing device capabilities even if they bypass other controls.</p>
+<br>
+<h3>Cross-Origin-Opener-Policy</h3>
+<br>
+<p>Isolates your page from cross-origin windows, preventing Spectre-type side-channel attacks.</p>
+<br>
+<pre><code>
+Cross-Origin-Opener-Policy: same-origin-allow-popups
+
+</code></pre>
+<br>
+<h3>Cross-Origin-Resource-Policy</h3>
+<br>
+<p>Controls which origins can load your resources.</p>
+<br>
+<pre><code>
+Cross-Origin-Resource-Policy: same-origin
+
+</code></pre>
+<br>
+<h3>Cross-Origin-Embedder-Policy</h3>
+<br>
+<p>Requires cross-origin resources to explicitly grant permission to load.</p>
+<br>
+<pre><code>
+Cross-Origin-Embedder-Policy: require-corp
+
+</code></pre>
+<br>
+<h2> Implementation Checklist</h2>
+<br>
+<p>| Header | Value | Risk if Missing |</p>
+<p>|--------|-------|-----------------|</p>
+<p>| Strict-Transport-Security | `max-age=63072000; includeSubDomains` | SSL stripping |</p>
+<p>| Content-Security-Policy | Custom policy | XSS, data injection |</p>
+<p>| X-Content-Type-Options | `nosniff` | MIME confusion |</p>
+<p>| X-Frame-Options | `DENY` | Clickjacking |</p>
+<p>| Referrer-Policy | `strict-origin-when-cross-origin` | Privacy leakage |</p>
+<p>| Permissions-Policy | Restrictive policy | API abuse |</p>
+<p>| Cross-Origin-Opener-Policy | `same-origin-allow-popups` | Side-channel attacks |</p>
+<br>
+<h2> Testing Your Headers</h2>
+<br>
+<p>Several tools can validate your security headers:</p>
+<br>
+<li>**securityheaders.com**: Scans and grades your headers.</li>
+<li>**Observatory by Mozilla**: Provides an overall security score.</li>
+<li>**Chrome DevTools**: Inspect headers in the Network tab.</li>
+<li>**curl**: Quick manual check:</li>
+<br>
+<pre><code>
+curl -sI https://example.com | grep -i &#x27;^strict-transport\|^content-security\|^x-content-type\|^x-frame\|^referrer&#x27;
+
+</code></pre>
+<br>
+<h2> Common Mistakes</h2>
+<br>
+<li>**Setting CSP too broadly**: `script-src 'unsafe-inline' https:` effectively disables CSP protection. Use strict CSP with nonces or hashes instead.</li>
+<li>**Missing report-uri on CSP**: Without a reporting endpoint, you will not know when violations occur.</li>
+<li>**Forgetting includeSubDomains on HSTS**: Users accessing subdomains over HTTP remain vulnerable.</li>
+<li>**Not preloading HSTS**: The first request is still vulnerable without preloading.</li>
+<li>**Overly permissive CORS headers**: `Access-Control-Allow-Origin: *` combined with credentials exposes your API to any site.</li>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Implementing HTTP security headers is one of the highest-ROI security improvements you can make. Start with HSTS, CSP, X-Content-Type-Options, and X-Frame-Options, then progressively add the remaining headers. Test regularly with automated scanners, and monitor CSP reports to catch new vulnerabilities as your application evolves.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

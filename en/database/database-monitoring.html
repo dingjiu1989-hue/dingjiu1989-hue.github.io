@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="database-monitoring">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Database Monitoring and Performance Alerting">
+    <meta property="og:description" content="Monitor QPS, latency, connections, and cache hit ratio with Prometheus exporters, Grafana dashboards, and intelligent alert thresholds.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/database-monitoring.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Database Monitoring and Performance Alerting">
+    <meta name="twitter:description" content="Monitor QPS, latency, connections, and cache hit ratio with Prometheus exporters, Grafana dashboards, and intelligent alert thresholds.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Database Monitoring and Performance Alerting — SourceHub</title>
+    <meta name="description" content="Monitor QPS, latency, connections, and cache hit ratio with Prometheus exporters, Grafana dashboards, and intelligent alert thresholds.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/database-monitoring.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/database-monitoring.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Database Monitoring and Performance Alerting",
+      "description": "Monitor QPS, latency, connections, and cache hit ratio with Prometheus exporters, Grafana dashboards, and intelligent alert thresholds.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "2188",
+      "keywords": "Database, SQL",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-monitoring.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Database Monitoring and Performance Alerting"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Database Monitoring and Performance Alerting
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">SQL</span></div>
+      <h1 class="article-title">Database Monitoring and Performance Alerting</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Database monitoring tracks the health, performance, and availability of database systems. Effective monitoring catches problems before they become incidents. This article covers the key metrics to track, tools for collection and visualization, and strategies for setting meaningful alert thresholds.</p>
+<br>
+<h2> Key Database Metrics</h2>
+<br>
+<h3>Queries Per Second (QPS)</h3>
+<br>
+<p>QPS measures the throughput of your database. Monitoring QPS helps you understand traffic patterns and capacity requirements.</p>
+<br>
+<li>**Spike detection**: Sudden QPS increases may indicate a traffic surge or a runaway query.</li>
+<li>**Capacity planning**: If QPS consistently approaches your database's limit, it is time to scale.</li>
+<li>**Baseline shifts**: A permanent QPS increase suggests organic growth that may require infrastructure changes.</li>
+<br>
+<pre><code>
+-- MySQL: Current QPS
+
+SHOW GLOBAL STATUS LIKE &#x27;Questions&#x27;;
+
+
+
+-- PostgreSQL: Queries per second
+
+SELECT queries_per_second()
+
+FROM pg_stat_database
+
+WHERE datname = &#x27;your_database&#x27;;
+
+</code></pre>
+<br>
+<h3>Query Latency</h3>
+<br>
+<p>Latency measures how long queries take to execute. Latency spikes degrade user experience and indicate problems.</p>
+<br>
+<p>**Percentile metrics matter more than averages**: p50 (median) shows typical performance. p99 shows the worst-performing queries. A 10ms p50 with a 30-second p99 means 1% of users have a terrible experience.</p>
+<br>
+<pre><code>
+-- PostgreSQL: Query latency by query
+
+SELECT
+
+    queryid,
+
+    query,
+
+    mean_exec_time as avg_ms,
+
+    p99_exec_time as p99_ms,
+
+    calls
+
+FROM pg_stat_statements
+
+ORDER BY p99_exec_time DESC
+
+LIMIT 10;
+
+</code></pre>
+<br>
+<h3>Active Connections</h3>
+<br>
+<p>Connection count indicates how many clients are simultaneously connected. Running out of connections causes application failures.</p>
+<br>
+<li>**Connection pool saturation**: When connection count reaches the max_pool limit, new connections wait or fail.</li>
+<li>**Active vs idle**: High idle connections with low active connections indicates inefficient connection pool configuration.</li>
+<li>**Connection churn**: Rapid connect/disconnect cycles add overhead.</li>
+<br>
+<pre><code>
+-- PostgreSQL: Active connection count
+
+SELECT
+
+    state,
+
+    count(*) as connections
+
+FROM pg_stat_activity
+
+WHERE backend_type = &#x27;client backend&#x27;
+
+GROUP BY state;
+
+
+
+-- Check for idle in transaction (potential blocking)
+
+SELECT count(*) FROM pg_stat_activity
+
+WHERE state = &#x27;idle in transaction&#x27;
+
+AND xact_start &lt; now() - interval &#x27;5 minutes&#x27;;
+
+</code></pre>
+<br>
+<h3>Cache Hit Ratio</h3>
+<br>
+<p>Cache hit ratio measures how often the database finds data in memory versus reading from disk. Higher is better.</p>
+<br>
+<li>**Buffer cache hit ratio**: 99%+ is healthy for most workloads. Below 95% indicates the working set does not fit in memory.</li>
+<li>**Index cache hit ratio**: Especially important for databases with large indexes.</li>
+<br>
+<pre><code>
+-- PostgreSQL: Buffer cache hit ratio
+
+SELECT
+
+    sum(blks_hit) / nullif(sum(blks_hit + blks_read), 0) * 100 as hit_ratio
+
+FROM pg_stat_database
+
+WHERE datname = &#x27;your_database&#x27;;
+
+
+
+-- MySQL: InnoDB buffer pool hit ratio
+
+SHOW STATUS LIKE &#x27;InnoDB_buffer_pool_read_%&#x27;;
+
+</code></pre>
+<br>
+<h3>Disk I/O</h3>
+<br>
+<p>Disk I/O metrics reveal storage performance issues.</p>
+<br>
+<li>**IOPS**: Input/output operations per second. Cloud databases have IOPS limits based on volume size.</li>
+<li>**Throughput**: Data read/written per second.</li>
+<li>**Latency**: Time per I/O operation. Under 10ms is healthy. Over 50ms indicates problems.</li>
+<li>**Queue depth**: Number of I/O operations waiting. High queue depth suggests the disk subsystem is overwhelmed.</li>
+<br>
+<h3>Replication Lag</h3>
+<br>
+<p>For databases with read replicas, replication lag measures how far behind replicas are from the primary.</p>
+<br>
+<pre><code>
+-- PostgreSQL: Replication lag
+
+SELECT
+
+    application_name,
+
+    pg_size_pretty(pg_wal_lsn_diff(
+
+        pg_current_wal_lsn(),
+
+        flush_lsn
+
+    )) as lag_bytes,
+
+    now() - pg_last_xact_replay_timestamp() as lag_time
+
+FROM pg_stat_replication;
+
+
+
+-- MySQL: Replication lag
+
+SHOW SLAVE STATUS\G
+
+-- Look at Seconds_Behind_Master
+
+</code></pre>
+<br>
+<h2> Prometheus Exporters</h2>
+<br>
+<p>Prometheus is the dominant metrics collection system for infrastructure monitoring. Database exporters translate database metrics into Prometheus format.</p>
+<br>
+<h3>PostgreSQL Exporter</h3>
+<br>
+<pre><code>
+# docker-compose.yml for PostgreSQL monitoring
+
+version: &#x27;3&#x27;
+
+services:
+
+  postgres:
+
+    image: postgres:16
+
+    environment:
+
+      POSTGRES_DB: myapp
+
+    ports:
+
+      - &quot;5432:5432&quot;
+
+
+
+  postgres_exporter:
+
+    image: prometheuscommunity/postgres-exporter:v0.15.0
+
+    environment:
+
+      DATA_SOURCE_NAME: &quot;postgresql://user:password@postgres:5432/myapp?sslmode=disable&quot;
+
+    ports:
+
+      - &quot;9187:9187&quot;
+
+
+
+  prometheus:
+
+    image: prom/prometheus:v2.53.0
+
+    volumes:
+
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+    ports:
+
+      - &quot;9090:9090&quot;
+
+</code></pre>
+<br>
+<pre><code>
+# prometheus.yml scrape configuration
+
+scrape_configs:
+
+  - job_name: &#x27;postgres&#x27;
+
+    static_configs:
+
+      - targets: [&#x27;postgres_exporter:9187&#x27;]
+
+    metrics_path: /metrics
+
+</code></pre>
+<br>
+<h3>MySQL Exporter</h3>
+<br>
+<pre><code>
+  mysql_exporter:
+
+    image: prom/mysqld-exporter:v0.15.1
+
+    environment:
+
+      DATA_SOURCE_NAME: &quot;exporter:password@(mysql:3306)/&quot;
+
+    ports:
+
+      - &quot;9104:9104&quot;
+
+</code></pre>
+<br>
+<h2> Grafana Dashboards</h2>
+<br>
+<p>Grafana visualizes Prometheus metrics in configurable dashboards. The community provides pre-built dashboards for most databases.</p>
+<br>
+<h3>Dashboard Sections</h3>
+<br>
+<p>A good database dashboard includes these panels:</p>
+<br>
+<li>**Overview**: QPS, active connections, cache hit ratio, replication lag.</li>
+<p>2. **Query Performance**: Top N queries by duration, calls, and rows read.</p>
+<p>3. **Resource Usage**: CPU, memory, disk I/O, network throughput.</p>
+<p>4. **Slow Queries**: Count of queries exceeding a latency threshold over time.</p>
+<p>5. **Error Rate**: Database errors (deadlocks, constraint violations, connection timeouts).</p>
+<br>
+<pre><code>
+// Grafana panel JSON (simplified)
+
+{
+
+  &quot;title&quot;: &quot;Query Latency (p99)&quot;,
+
+  &quot;type&quot;: &quot;graph&quot;,
+
+  &quot;targets&quot;: [
+
+    {
+
+      &quot;expr&quot;: &quot;pg_stat_statements_p99_ms{datname=&#x27;myapp&#x27;}&quot;,
+
+      &quot;legendFormat&quot;: &quot;{{queryid}}&quot;
+
+    }
+
+  ],
+
+  &quot;yaxes&quot;: [
+
+    { &quot;label&quot;: &quot;milliseconds&quot;, &quot;format&quot;: &quot;ms&quot; }
+
+  ],
+
+  &quot;thresholds&quot;: [
+
+    { &quot;value&quot;: 100, &quot;op&quot;: &quot;gt&quot;, &quot;color&quot;: &quot;orange&quot; },
+
+    { &quot;value&quot;: 1000, &quot;op&quot;: &quot;gt&quot;, &quot;color&quot;: &quot;red&quot; }
+
+  ]
+
+}
+
+</code></pre>
+<br>
+<h2> Alert Thresholds</h2>
+<br>
+<p>Setting the right alert thresholds is harder than it sounds. Too many alerts cause alert fatigue. Too few alerts miss critical issues.</p>
+<br>
+<h3>Threshold Strategy</h3>
+<br>
+<p>**Static thresholds**: Fixed values based on capacity. Simple but do not adapt to usage patterns.</p>
+<br>
+<pre><code>
+Alert if:
+
+  - Active connections &gt; 80% of max_connections
+
+  - Replication lag &gt; 60 seconds
+
+  - Disk usage &gt; 85%
+
+  - Cache hit ratio &lt; 97%
+
+</code></pre>
+<br>
+<p>**Dynamic thresholds**: Alert when metrics deviate from their historical baseline. Better for bursty workloads.</p>
+<br>
+<pre><code>
+# Dynamic threshold calculation
+
+def calculate_dynamic_threshold(hourly_metric, deviation_factor=2.0):
+
+    &quot;&quot;&quot;Alert when metric deviates by more than N standard deviations.&quot;&quot;&quot;
+
+    mean = hourly_metric.mean()
+
+    std = hourly_metric.std()
+
+    upper_threshold = mean + (std * deviation_factor)
+
+    lower_threshold = max(0, mean - (std * deviation_factor))
+
+    return upper_threshold, lower_threshold
+
+</code></pre>
+<br>
+<p>**Rate-of-change thresholds**: Alert on rapid changes, not absolute values. Useful for detecting anomalies.</p>
+<br>
+<pre><code>
+Alert if:
+
+  - QPS change &gt; 300% compared to same time last week
+
+  - Replication lag increased by 10 seconds in 1 minute
+
+</code></pre>
+<br>
+<h3>Alert Severity Levels</h3>
+<br>
+<p>| Severity | Response Time | Example |</p>
+<p>|----------|---------------|---------|</p>
+<p>| Critical | Immediate (24x7) | Database down, replication broken |</p>
+<p>| High | 1 hour | P99 latency > 1 second, disk > 90% |</p>
+<p>| Medium | 1 day | Cache hit ratio trending down |</p>
+<p>| Low | 1 week | Database version EOL approaching |</p>
+<br>
+<h3>Reducing Alert Fatigue</h3>
+<br>
+<li>**Use multi-condition alerts**: Alert only when A and B are both true. Example: latency > 1s AND QPS > baseline.</li>
+<p>2. **Implement hysteresis**: Require the condition to persist for N minutes before alerting.</p>
+<p>3. **Suppress during maintenance**: Automatically suppress alerts during scheduled windows.</p>
+<p>4. **Group related alerts**: A single "database slow" alert is better than 50 individual slow-query alerts.</p>
+<p>5. **Auto-resolve**: Clear alerts when the metric returns to normal.</p>
+<br>
+<h2> Database-Specific Monitoring Tools</h2>
+<br>
+<h3>pg_stat_statements (PostgreSQL)</h3>
+<br>
+<p>The pg_stat_statements extension tracks query execution statistics. It identifies which queries consume the most resources.</p>
+<br>
+<pre><code>
+-- Enable the extension
+
+CREATE EXTENSION pg_stat_statements;
+
+
+
+-- Find the most expensive queries
+
+SELECT
+
+    query,
+
+    total_exec_time / calls as avg_ms,
+
+    calls,
+
+    rows,
+
+    shared_blks_hit / (shared_blks_hit + shared_blks_read) * 100 as cache_hit_pct
+
+FROM pg_stat_statements
+
+WHERE query NOT LIKE &#x27;%pg_%&#x27;
+
+ORDER BY total_exec_time DESC
+
+LIMIT 10;
+
+</code></pre>
+<br>
+<h3>Performance Schema (MySQL)</h3>
+<br>
+<p>MySQL Performance Schema provides detailed instrumentation of query execution.</p>
+<br>
+<pre><code>
+-- Top queries by total latency
+
+SELECT
+
+    digest_text as query,
+
+    count_star as execution_count,
+
+    round(sum_timer_wait / 1000000000, 2) as total_latency_ms
+
+FROM performance_schema.events_statements_summary_by_digest
+
+ORDER BY sum_timer_wait DESC
+
+LIMIT 10;
+
+</code></pre>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>Database monitoring is a continuous practice, not a one-time setup. Track QPS, latency, connections, cache hit ratio, and replication lag. Collect these metrics with Prometheus exporters, visualize them in Grafana dashboards, and set intelligent alert thresholds. Start with static thresholds for critical metrics and move to dynamic thresholds as you collect more data. The goal is to detect problems before users do.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

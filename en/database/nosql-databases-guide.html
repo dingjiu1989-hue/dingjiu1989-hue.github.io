@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="nosql-databases-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)">
+    <meta property="og:description" content="A practical guide to NoSQL databases comparing MongoDB, DynamoDB, and Firestore for document storage, scalability, and query patterns.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/nosql-databases-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)">
+    <meta name="twitter:description" content="A practical guide to NoSQL databases comparing MongoDB, DynamoDB, and Firestore for document storage, scalability, and query patterns.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore) — SourceHub</title>
+    <meta name="description" content="A practical guide to NoSQL databases comparing MongoDB, DynamoDB, and Firestore for document storage, scalability, and query patterns.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/nosql-databases-guide.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/nosql-databases-guide.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)",
+      "description": "A practical guide to NoSQL databases comparing MongoDB, DynamoDB, and Firestore for document storage, scalability, and query patterns.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1376",
+      "keywords": "Database, SQL",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/nosql-databases-guide.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">SQL</span></div>
+      <h1 class="article-title">NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> What Are NoSQL Databases?</h2>
+<br>
+<p>NoSQL databases are non-relational data stores designed for specific data models and access patterns that do not fit well in the relational paradigm. They trade strict ACID guarantees for scalability, flexibility, and performance at scale.</p>
+<br>
+<h2> NoSQL Database Types</h2>
+<br>
+<p>| Type | Examples | Best For | Avoid For |</p>
+<p>|------|----------|----------|-----------|</p>
+<p>| Document | MongoDB, Firestore | JSON-like data, flexible schemas | Complex joins |</p>
+<p>| Key-Value | Redis, DynamoDB | Simple lookups, caching | Multi-key queries |</p>
+<p>| Wide-Column | Cassandra, Bigtable | Time-series, write-heavy | Ad-hoc queries |</p>
+<p>| Graph | Neo4j, Dgraph | Relationships, recommendations | Simple CRUD |</p>
+<br>
+<h2> MongoDB</h2>
+<br>
+<p>MongoDB stores data as flexible JSON-like documents in collections. It is schema-less by design.</p>
+<br>
+<h3>Data Modeling</h3>
+<br>
+<pre><code>
+// MongoDB document (embedded)
+
+{
+
+    &quot;_id&quot;: ObjectId(&quot;5f8c...&quot;),
+
+    &quot;username&quot;: &quot;alice&quot;,
+
+    &quot;email&quot;: &quot;alice@example.com&quot;,
+
+    &quot;profile&quot;: {
+
+        &quot;display_name&quot;: &quot;Alice&quot;,
+
+        &quot;avatar_url&quot;: &quot;https://...&quot;,
+
+        &quot;bio&quot;: &quot;Software engineer&quot;
+
+    },
+
+    &quot;addresses&quot;: [
+
+        {
+
+            &quot;type&quot;: &quot;home&quot;,
+
+            &quot;street&quot;: &quot;123 Main St&quot;,
+
+            &quot;city&quot;: &quot;San Francisco&quot;
+
+        }
+
+    ],
+
+    &quot;created_at&quot;: ISODate(&quot;2026-01-15T10:30:00Z&quot;)
+
+}
+
+</code></pre>
+<br>
+<h3>Query Examples</h3>
+<br>
+<pre><code>
+// Basic queries
+
+db.users.find({ email: &quot;alice@example.com&quot; })
+
+db.users.find({ &quot;addresses.city&quot;: &quot;San Francisco&quot; })
+
+db.users.find({ created_at: { $gte: ISODate(&quot;2026-01-01&quot;) } })
+
+
+
+// Aggregation pipeline
+
+db.orders.aggregate([
+
+    { $match: { status: &quot;completed&quot; } },
+
+    { $group: { _id: &quot;$customer_id&quot;, total: { $sum: &quot;$amount&quot; } } },
+
+    { $sort: { total: -1 } },
+
+    { $limit: 10 }
+
+])
+
+
+
+// Index creation
+
+db.users.createIndex({ email: 1 }, { unique: true })
+
+db.orders.createIndex({ customer_id: 1, created_at: -1 })
+
+</code></pre>
+<br>
+<h3>When to Use MongoDB</h3>
+<br>
+<li>Flexible or evolving schemas</li>
+<li>Embedded data relationships (one-to-few)</li>
+<li>Rapid prototyping</li>
+<li>Document-oriented data (catalogs, content management)</li>
+<br>
+<h2> DynamoDB</h2>
+<br>
+<p>DynamoDB is AWS's managed key-value and document database. It requires careful up-front schema design.</p>
+<br>
+<h3>Table Design</h3>
+<br>
+<pre><code>
+// DynamoDB table with single-table design
+
+// Partition Key: PK (string)
+
+// Sort Key: SK (string)
+
+
+
+// User entity
+
+{ PK: &quot;USER#alice&quot;, SK: &quot;PROFILE&quot;, email: &quot;alice@example.com&quot;, name: &quot;Alice&quot; }
+
+
+
+// Order entity (access pattern: all orders for a user)
+
+{ PK: &quot;USER#alice&quot;, SK: &quot;ORDER#2026-05-01#ORD001&quot;, amount: 100, status: &quot;completed&quot; }
+
+{ PK: &quot;USER#alice&quot;, SK: &quot;ORDER#2026-05-15#ORD002&quot;, amount: 250, status: &quot;pending&quot; }
+
+
+
+// Product entity (access pattern: get product by ID)
+
+{ PK: &quot;PROD#001&quot;, SK: &quot;META&quot;, name: &quot;Laptop&quot;, price: 1200 }
+
+</code></pre>
+<br>
+<h3>Query Patterns</h3>
+<br>
+<pre><code>
+// AWS SDK v3
+
+import { DynamoDBClient } from &quot;@aws-sdk/client-dynamodb&quot;;
+
+import { QueryCommand } from &quot;@aws-sdk/lib-dynamodb&quot;;
+
+
+
+const client = new DynamoDBClient({ region: &quot;us-east-1&quot; });
+
+
+
+// Get user with all related data (single query)
+
+const result = await client.send(new QueryCommand({
+
+    TableName: &quot;AppTable&quot;,
+
+    KeyConditionExpression: &quot;PK = :pk&quot;,
+
+    ExpressionAttributeValues: {
+
+        &quot;:pk&quot;: &quot;USER#alice&quot;
+
+    }
+
+}));
+
+
+
+// Query specific entity type
+
+const orders = await client.send(new QueryCommand({
+
+    TableName: &quot;AppTable&quot;,
+
+    KeyConditionExpression: &quot;PK = :pk AND begins_with(SK, :sk)&quot;,
+
+    ExpressionAttributeValues: {
+
+        &quot;:pk&quot;: &quot;USER#alice&quot;,
+
+        &quot;:sk&quot;: &quot;ORDER#&quot;
+
+    }
+
+}));
+
+</code></pre>
+<br>
+<h3>When to Use DynamoDB</h3>
+<br>
+<li>Serverless applications</li>
+<li>Predictable access patterns</li>
+<li>High-scale workloads (millions of requests/second)</li>
+<li>AWS-native architectures</li>
+<br>
+<h2> Firestore</h2>
+<br>
+<p>Firestore is Google Cloud's NoSQL document database with real-time synchronization.</p>
+<br>
+<h3>Data Model</h3>
+<br>
+<pre><code>
+import firebase_admin
+
+from firebase_admin import firestore
+
+
+
+db = firestore.client()
+
+
+
+# Document reference
+
+user_ref = db.collection(&#x27;users&#x27;).document(&#x27;alice&#x27;)
+
+user_ref.set({
+
+    &#x27;email&#x27;: &#x27;alice@example.com&#x27;,
+
+    &#x27;name&#x27;: &#x27;Alice&#x27;,
+
+    &#x27;roles&#x27;: [&#x27;admin&#x27;, &#x27;editor&#x27;],
+
+    &#x27;created_at&#x27;: firestore.SERVER_TIMESTAMP
+
+})
+
+
+
+# Subcollection for hierarchical data
+
+orders_ref = user_ref.collection(&#x27;orders&#x27;)
+
+orders_ref.add({
+
+    &#x27;product&#x27;: &#x27;Laptop&#x27;,
+
+    &#x27;amount&#x27;: 1200,
+
+    &#x27;status&#x27;: &#x27;completed&#x27;
+
+})
+
+
+
+# Real-time listener
+
+def on_snapshot(doc_snapshot, changes, read_time):
+
+    for change in changes:
+
+        print(f&quot;Order changed: {change.document.id}&quot;)
+
+
+
+user_ref.collection(&#x27;orders&#x27;).on_snapshot(on_snapshot)
+
+</code></pre>
+<br>
+<h3>When to Use Firestore</h3>
+<br>
+<li>Real-time applications (chat, live updates)</li>
+<li>Mobile backends (offline support)</li>
+<li>Google Cloud ecosystem</li>
+<br>
+<h2> Decision Matrix</h2>
+<br>
+<p>| Factor | MongoDB | DynamoDB | Firestore |</p>
+<p>|--------|---------|----------|-----------|</p>
+<p>| Query flexibility | Excellent | Limited to key/GSI | Moderate |</p>
+<p>| Scalability | Manual sharding | Automatic | Automatic |</p>
+<p>| Consistency | Configurable | Eventual (default) | Strong |</p>
+<p>| Hosting | Self-managed or Atlas | AWS-managed | GCP-managed |</p>
+<p>| Real-time | Change streams | DynamoDB Streams | Native real-time |</p>
+<p>| Offline support | Limited | Limited | Excellent |</p>
+<p>| Pricing | Instance-based | Pay per request | Pay per read/write |</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>NoSQL databases excel at scale and flexibility but require different design thinking than relational databases. MongoDB offers the most flexible querying with embedded documents, DynamoDB provides unparalleled scalability with single-table design, and Firestore offers the best real-time and offline support. Choose based on your access patterns, scalability needs, and cloud ecosystem rather than treating NoSQL as a one-size-fits-all solution.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

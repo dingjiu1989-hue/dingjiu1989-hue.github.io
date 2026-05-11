@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="two-factor-authentication">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Two-Factor Authentication Guide">
+    <meta property="og:description" content="A comprehensive guide to implementing two-factor authentication with TOTP, SMS, backup codes, and WebAuthn passkeys.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/two-factor-authentication.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Two-Factor Authentication Guide">
+    <meta name="twitter:description" content="A comprehensive guide to implementing two-factor authentication with TOTP, SMS, backup codes, and WebAuthn passkeys.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Two-Factor Authentication Guide — SourceHub</title>
+    <meta name="description" content="A comprehensive guide to implementing two-factor authentication with TOTP, SMS, backup codes, and WebAuthn passkeys.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/two-factor-authentication.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/two-factor-authentication.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Two-Factor Authentication Guide",
+      "description": "A comprehensive guide to implementing two-factor authentication with TOTP, SMS, backup codes, and WebAuthn passkeys.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1353",
+      "keywords": "Security, Cybersecurity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/two-factor-authentication.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Two-Factor Authentication Guide"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Two-Factor Authentication Guide
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">Cybersecurity</span></div>
+      <h1 class="article-title">Two-Factor Authentication Guide</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Why 2FA Matters</h2>
+<br>
+<p>Passwords alone are insufficient. Data breaches expose billions of credentials annually, phishing campaigns trick users into revealing their passwords, and credential stuffing attacks automate login attempts across services. Two-factor authentication (2FA) adds a second layer of verification that renders stolen passwords useless.</p>
+<br>
+<h2> 2FA Factor Types</h2>
+<br>
+<p>| Factor | Examples | Security Level |</p>
+<p>|--------|----------|----------------|</p>
+<p>| Knowledge | Password, PIN | Weak |</p>
+<p>| Possession | Phone, hardware key, authenticator app | Strong |</p>
+<p>| Inherence | Fingerprint, face scan | Strong |</p>
+<p>| Location | GPS, IP range | Moderate |</p>
+<p>| Time | One-time codes | Moderate |</p>
+<br>
+<p>Strong 2FA combines something you know (password) with something you have (phone or key).</p>
+<br>
+<h2> TOTP (Time-Based One-Time Password)</h2>
+<br>
+<p>TOTP is the most widely implemented 2FA method. The client and server share a secret key, and both derive the same 6-8 digit code from the current time.</p>
+<br>
+<h3>Server-Side Implementation</h3>
+<br>
+<pre><code>
+import pyotp
+
+import base64
+
+import os
+
+
+
+class TOTPManager:
+
+    def __init__(self):
+
+        self.issuer = &quot;MyApp&quot;
+
+
+
+    def generate_secret(self):
+
+        &quot;&quot;&quot;Generate a new TOTP secret.&quot;&quot;&quot;
+
+        return pyotp.random_base32()
+
+
+
+    def get_provisioning_uri(self, username, secret):
+
+        &quot;&quot;&quot;Generate URI for QR code.&quot;&quot;&quot;
+
+        return pyotp.totp.TOTP(secret).provisioning_uri(
+
+            name=username,
+
+            issuer_name=self.issuer
+
+        )
+
+
+
+    def verify_code(self, secret, code):
+
+        &quot;&quot;&quot;Verify a TOTP code with a 1-step window for clock drift.&quot;&quot;&quot;
+
+        totp = pyotp.TOTP(secret)
+
+        return totp.verify(code, valid_window=1)
+
+</code></pre>
+<br>
+<h3>Displaying the QR Code</h3>
+<br>
+<pre><code>
+import qrcode
+
+import qrcode.image.svg
+
+
+
+def render_qr(uri):
+
+    img = qrcode.make(uri, image_factory=qrcode.image.svg.SvgImage)
+
+    return img.to_string().decode()
+
+</code></pre>
+<br>
+<h3>Client-Side Setup</h3>
+<br>
+<pre><code>
+// Generate QR in the browser
+
+const secret = await generateTOTPSecret();
+
+const uri = `otpauth://totp/MyApp:${username}?secret=${secret}&amp;issuer=MyApp`;
+
+
+
+// Show QR code
+
+new QRCode(document.getElementById(&#x27;qrcode&#x27;), { text: uri });
+
+
+
+// Verify setup
+
+const result = await fetch(&#x27;/api/2fa/verify&#x27;, {
+
+    method: &#x27;POST&#x27;,
+
+    body: JSON.stringify({ secret, code: userInputCode })
+
+});
+
+</code></pre>
+<br>
+<h2> SMS-Based 2FA</h2>
+<br>
+<p>While less secure than TOTP (vulnerable to SIM swapping), SMS remains widely used due to its simplicity.</p>
+<br>
+<pre><code>
+import twilio
+
+from twilio.rest import Client
+
+
+
+def send_sms_code(phone_number):
+
+    code = &#x27;&#x27;.join(random.choices(&#x27;0123456789&#x27;, k=6))
+
+    # Store code with expiry in Redis
+
+    redis.setex(f&quot;2fa:{phone_number}&quot;, 300, code)
+
+
+
+    client = Client(TWILIO_SID, TWILIO_TOKEN)
+
+    client.messages.create(
+
+        body=f&quot;Your verification code is: {code}&quot;,
+
+        from_=TWILIO_PHONE,
+
+        to=phone_number
+
+    )
+
+    return code
+
+</code></pre>
+<br>
+<h2> Backup Codes</h2>
+<br>
+<p>When users lose access to their 2FA device, backup codes provide a recovery path. Generate 8-10 single-use codes:</p>
+<br>
+<pre><code>
+import hashlib
+
+import secrets
+
+
+
+def generate_backup_codes(count=10):
+
+    codes = []
+
+    hashes = []
+
+    for _ in range(count):
+
+        code = f&quot;{secrets.randbelow(10**8):08d}&quot;
+
+        codes.append(code)
+
+        hashes.append(hashlib.sha256(code.encode()).hexdigest())
+
+    return codes, hashes
+
+</code></pre>
+<br>
+<p>Store only the SHA-256 hashes of backup codes in the database. When a user enters a backup code, hash it and compare against stored hashes, then remove the used hash.</p>
+<br>
+<h2> WebAuthn and Passkeys</h2>
+<br>
+<p>WebAuthn is the gold standard for 2FA. It uses public-key cryptography: the private key never leaves the user's device, and the server stores only the public key.</p>
+<br>
+<h3>Registration</h3>
+<br>
+<pre><code>
+// Server sends challenge
+
+const challenge = await getWebAuthnChallenge();
+
+
+
+// Browser creates credential
+
+const credential = await navigator.credentials.create({
+
+    publicKey: {
+
+        challenge: Uint8Array.from(challenge, c =&gt; c.charCodeAt(0)),
+
+        rp: { name: &quot;MyApp&quot;, id: &quot;example.com&quot; },
+
+        user: {
+
+            id: Uint8Array.from(userId, c =&gt; c.charCodeAt(0)),
+
+            name: username,
+
+            displayName: displayName
+
+        },
+
+        pubKeyCredParams: [{ type: &quot;public-key&quot;, alg: -7 }], // ES256
+
+        authenticatorSelection: { userVerification: &quot;required&quot; }
+
+    }
+
+});
+
+
+
+// Send credential to server for storage
+
+await registerCredential(credential);
+
+</code></pre>
+<br>
+<h3>Authentication</h3>
+<br>
+<pre><code>
+const assertion = await navigator.credentials.get({
+
+    publicKey: {
+
+        challenge: Uint8Array.from(challenge, c =&gt; c.charCodeAt(0)),
+
+        allowCredentials: credentials.map(c =&gt; ({
+
+            id: Uint8Array.from(c.credentialId, c =&gt; c.charCodeAt(0)),
+
+            type: &#x27;public-key&#x27;
+
+        })),
+
+        userVerification: &#x27;required&#x27;
+
+    }
+
+});
+
+
+
+await verifyAssertion(assertion);
+
+</code></pre>
+<br>
+<h2> Rate Limiting 2FA Attempts</h2>
+<br>
+<p>2FA endpoints are targets for brute-force attacks. Always rate limit:</p>
+<br>
+<p>| Endpoint | Limit | Window |</p>
+<p>|----------|-------|--------|</p>
+<p>| TOTP verification | 5 attempts | 15 minutes |</p>
+<p>| SMS send | 3 requests | 30 minutes |</p>
+<p>| Backup code use | 10 attempts | 1 hour |</p>
+<p>| Recovery request | 3 attempts | 24 hours |</p>
+<br>
+<h2> User Experience Best Practices</h2>
+<br>
+<li>Allow users to register multiple 2FA methods (TOTP + backup codes + passkey).</li>
+<li>Provide a recovery workflow with backup codes during initial setup.</li>
+<li>Remember trusted devices with a cookie so 2FA is not required on every login.</li>
+<li>Send notification emails when 2FA is enabled, disabled, or recovery codes are used.</li>
+<li>Show which 2FA methods are registered in the security settings page.</li>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Implement TOTP as the primary 2FA method, supplement with backup codes for recovery, and offer WebAuthn/passkeys as an upgrade path for security-conscious users. Always rate limit 2FA endpoints, hash backup codes before storage, and provide clear recovery workflows. SMS-based 2FA is better than no 2FA but should be deprecated in favor of app-based or hardware-based authenticators.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

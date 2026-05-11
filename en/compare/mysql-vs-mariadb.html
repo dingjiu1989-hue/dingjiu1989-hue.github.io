@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="compare" data-exclude="mysql-vs-mariadb">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="MySQL vs MariaDB: The Complete Comparison">
+    <meta property="og:description" content="Compare MySQL and MariaDB covering their divergence history, feature differences, performance benchmarks, compatibility, and migration guide.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/compare/mysql-vs-mariadb.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MySQL vs MariaDB: The Complete Comparison">
+    <meta name="twitter:description" content="Compare MySQL and MariaDB covering their divergence history, feature differences, performance benchmarks, compatibility, and migration guide.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>MySQL vs MariaDB: The Complete Comparison — SourceHub</title>
+    <meta name="description" content="Compare MySQL and MariaDB covering their divergence history, feature differences, performance benchmarks, compatibility, and migration guide.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/compare/mysql-vs-mariadb.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/compare/mysql-vs-mariadb.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "MySQL vs MariaDB: The Complete Comparison",
+      "description": "Compare MySQL and MariaDB covering their divergence history, feature differences, performance benchmarks, compatibility, and migration guide.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1789",
+      "keywords": "Comparison, Technology",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/compare/mysql-vs-mariadb.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Comparisons", "item": "https://dingjiu1989-hue.github.io/en/compare/"},
+        {"@type": "ListItem", "position": 3, "name": "MySQL vs MariaDB: The Complete Comparison"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/compare/">Comparisons</a> › MySQL vs MariaDB: The Complete Comparison
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Comparison</span>
+        <span class="tag-cat">Technology</span></div>
+      <h1 class="article-title">MySQL vs MariaDB: The Complete Comparison</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>MySQL and MariaDB share a common origin but have diverged significantly since MariaDB was forked from MySQL in 2009. While both systems remain largely compatible at the SQL level, their storage engines, optimization strategies, and feature sets have evolved in different directions. Understanding these differences is critical for migration decisions and new project planning.</p>
+<br>
+<h2> Divergence History</h2>
+<br>
+<pre><code>
+# Timeline of divergence
+
+timeline:
+
+  - year: 1995
+
+    event: &quot;MySQL 1.0 released by TCX DataKonsult AB&quot;
+
+  - year: 2008
+
+    event: &quot;Sun Microsystems acquires MySQL AB for $1B&quot;
+
+  - year: 2009
+
+    event: &quot;Oracle acquires Sun; MariaDB forked by MySQL founder Monty Widenius&quot;
+
+  - year: 2013
+
+    event: &quot;MySQL 5.6 (Oracle) diverges further from MariaDB 10.0&quot;
+
+  - year: 2018
+
+    event: &quot;MySQL 8.0 released with data dictionary rewrite, roles, CTE&quot;
+
+  - year: 2024
+
+    event: &quot;MariaDB 11.x and MySQL 8.4 LTS diverge on optimizer and engine features&quot;
+
+</code></pre>
+<br>
+<p>Key fork motivations:</p>
+<li>**License concerns**: MySQL moved toward Oracle-controlled development; MariaDB remains fully GPL with a community-driven governance model</li>
+<li>**Feature inclusion**: Oracle rejected some community patches that MariaDB adopted</li>
+<li>**Storage engine philosophy**: MariaDB encourages engine diversity; MySQL centralizes around InnoDB</li>
+<br>
+<h2> Storage Engine Differences</h2>
+<br>
+<h3>InnoDB (Both) vs Aria (MariaDB)</h3>
+<br>
+<pre><code>
+-- MySQL/MariaDB: InnoDB configuration
+
+-- Both support this, but default settings differ
+
+
+
+-- MySQL default:
+
+innodb_buffer_pool_size = 70% of RAM
+
+innodb_log_file_size = 2GB
+
+innodb_flush_log_at_trx_commit = 1  -- ACID compliant
+
+innodb_io_capacity = 2000
+
+innodb_autoinc_lock_mode = 2  -- Interleaved (MySQL 8+)
+
+
+
+-- MariaDB default:
+
+innodb_buffer_pool_size = 50% of RAM
+
+innodb_log_file_size = 512MB
+
+innodb_flush_log_at_trx_commit = 1
+
+innodb_io_capacity = 200
+
+-- MariaDB also defaults to InnoDB for transactional tables
+
+</code></pre>
+<br>
+<p>MariaDB's Aria engine (fork of MyISAM):</p>
+<br>
+<pre><code>
+-- Create Aria table (MariaDB only)
+
+CREATE TABLE analytics_events (
+
+    event_id BIGINT AUTO_INCREMENT,
+
+    user_id INT NOT NULL,
+
+    event_type VARCHAR(50),
+
+    event_data JSON,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (event_id),
+
+    INDEX idx_user (user_id),
+
+    INDEX idx_type (event_type)
+
+) ENGINE=Aria TRANSACTIONAL=1 PAGE_CHECKSUM=1;
+
+
+
+-- Aria advantages:
+
+-- 1. Crash-safe (unlike MyISAM) without full InnoDB overhead
+
+-- 2. Better performance for read-heavy analytics workloads
+
+-- 3. Lower memory footprint for large tables
+
+-- 4. Supports FULLTEXT indexes
+
+
+
+-- MariaDB: ColumnStore for analytical queries
+
+-- Install ColumnStore for columnar storage
+
+-- CREATE TABLE sales_analytics (...) ENGINE=ColumnStore;
+
+-- Optimized for large-scale aggregations
+
+</code></pre>
+<br>
+<h2> Feature Comparison</h2>
+<br>
+<h3>Common Features (Both)</h3>
+<br>
+<pre><code>
+-- Both MySQL 8.x and MariaDB 11.x support:
+
+-- Common Table Expressions (CTE)
+
+WITH RECURSIVE org_tree AS (
+
+    SELECT id, name, manager_id, 1 AS level
+
+    FROM employees WHERE manager_id IS NULL
+
+    UNION ALL
+
+    SELECT e.id, e.name, e.manager_id, ot.level + 1
+
+    FROM employees e
+
+    JOIN org_tree ot ON e.manager_id = ot.id
+
+)
+
+SELECT * FROM org_tree ORDER BY level, name;
+
+
+
+-- Window functions
+
+SELECT
+
+    department,
+
+    employee_name,
+
+    salary,
+
+    RANK() OVER (PARTITION BY department ORDER BY salary DESC) as rank,
+
+    AVG(salary) OVER (PARTITION BY department) as dept_avg
+
+FROM employees;
+
+
+
+-- JSON functions
+
+SELECT JSON_EXTRACT(data, &#x27;$.address.city&#x27;) as city
+
+FROM users WHERE JSON_CONTAINS(data, &#x27;{&quot;active&quot;: true}&#x27;);
+
+</code></pre>
+<br>
+<h3>MariaDB-Only Features</h3>
+<br>
+<pre><code>
+-- Temporal tables (system-versioned)
+
+CREATE TABLE customer_audit (
+
+    id INT PRIMARY KEY,
+
+    name VARCHAR(100),
+
+    email VARCHAR(200),
+
+    credit_limit DECIMAL(10,2),
+
+    -- Automatic versioning
+
+    ROW_START TIMESTAMP(6) GENERATED ALWAYS AS ROW START,
+
+    ROW_END TIMESTAMP(6) GENERATED ALWAYS AS ROW END,
+
+    PERIOD FOR SYSTEM_TIME (ROW_START, ROW_END)
+
+) WITH SYSTEM VERSIONING;
+
+
+
+-- Query historical state
+
+SELECT * FROM customer_audit
+
+FOR SYSTEM_TIME AS OF &#x27;2026-01-15 10:00:00&#x27;
+
+WHERE id = 42;
+
+
+
+-- Dynamic columns (schema-less within column)
+
+CREATE TABLE product_metadata (
+
+    product_id INT PRIMARY KEY,
+
+    attributes BLOB  -- Dynamic columns
+
+);
+
+INSERT INTO product_metadata VALUES (
+
+    1,
+
+    COLUMN_CREATE(&#x27;color&#x27;, &#x27;red&#x27;, &#x27;weight&#x27;, 150, &#x27;material&#x27;, &#x27;steel&#x27;)
+
+);
+
+SELECT COLUMN_GET(attributes, &#x27;weight&#x27; AS INT) as weight
+
+FROM product_metadata WHERE product_id = 1;
+
+</code></pre>
+<br>
+<h3>MySQL-Only Features</h3>
+<br>
+<pre><code>
+-- MySQL 8.4: Histogram-based optimizer stats
+
+ANALYZE TABLE orders UPDATE HISTOGRAM ON status, customer_id;
+
+
+
+-- MySQL: Invisible indexes
+
+ALTER TABLE orders ALTER INDEX idx_order_date INVISIBLE;
+
+-- Test query performance without removing the index
+
+
+
+-- MySQL: VECTOR type (MySQL 9.0+)
+
+CREATE TABLE embeddings (
+
+    id INT PRIMARY KEY,
+
+    embedding VECTOR(1536)
+
+);
+
+CREATE VECTOR INDEX idx_embed ON embeddings ((VECTOR_DISTANCE(embedding, &#x27;[...]&#x27;)));
+
+
+
+-- MySQL: Resource groups
+
+CREATE RESOURCE GROUP reporting_group
+
+    TYPE = USER
+
+    VCPU = 2-3
+
+    THREAD_PRIORITY = 5;
+
+SET RESOURCE GROUP reporting_group;
+
+-- Limit analytics queries to specific CPU cores
+
+</code></pre>
+<br>
+<h2> Performance and Optimization</h2>
+<br>
+<pre><code>
+-- Benchmark: Concurrent OLTP workload
+
+-- Similar performance for basic queries
+
+
+
+-- MariaDB thread pool (default in 11.x)
+
+-- Better scalability for high-connection workloads
+
+thread_pool_size = 16
+
+thread_pool_max_threads = 500
+
+thread_pool_idle_timeout = 60
+
+
+
+-- MySQL: Connection handling
+
+-- Dedicated thread per connection (default)
+
+-- Or Thread Pool plugin (Enterprise only)
+
+thread_handling = one-thread-per-connection
+
+-- MariaDB includes thread pool free (MySQL charges for it)
+
+
+
+-- Query optimizer differences:
+
+-- MySQL 8.4: Cost-based, uses histograms
+
+-- MariaDB 11.x: Cost-based with table statistics feedback loop
+
+
+
+-- EXPLAIN output differences
+
+EXPLAIN FORMAT=JSON SELECT * FROM orders WHERE status = &#x27;pending&#x27;;
+
+-- MySQL: JSON plan with cost breakdown
+
+-- MariaDB: JSON plan with optimization trace
+
+</code></pre>
+<br>
+<h2> Compatibility and Migration</h2>
+<br>
+<h3>Application Compatibility</h3>
+<br>
+<p>| Feature | MySQL 8.4 | MariaDB 11.x |</p>
+<p>|---|---|---|</p>
+<p>| SQL syntax | 99% compatible | 99% compatible |</p>
+<p>| Data types | 100% compatible (basic) | +Dynamic columns, +INET6 |</p>
+<p>| Stored procedures | Compatible | Compatible |</p>
+<p>| Triggers | Compatible | Compatible |</p>
+<p>| Sequences | Yes (auto_increment) | Yes (SEQUENCE engine) |</p>
+<p>| JSON | Native type | LONGTEXT + JSON functions |</p>
+<br>
+<h3>Data Replication Between MySQL and MariaDB</h3>
+<br>
+<pre><code>
+# MariaDB as replica of MySQL
+
+[mysqld]
+
+server-id = 2
+
+replicate-do-db = production
+
+binlog_format = ROW
+
+slave_parallel_threads = 4
+
+
+
+# Known limitations:
+
+# - GTID formats differ (MariaDB uses own format)
+
+# - Use binlog_checksum = NONE for cross-compatibility
+
+# - Some DDL may not replicate correctly
+
+</code></pre>
+<br>
+<h3>Migration Steps</h3>
+<br>
+<pre><code>
+# Option 1: Logical dump (most compatible)
+
+mysqldump --compatible=ansi --skip-definer \
+
+  --routines --triggers --events \
+
+  production_db &gt; backup.sql
+
+
+
+# Option 2: Percona XtraBackup (physical)
+
+xtrabackup --backup --target-dir=/backup/mysql
+
+
+
+# Option 3: Replication-based (zero-downtime)
+
+# 1. Set up MySQL as master
+
+# 2. Configure MariaDB as replica
+
+# 3. Verify data consistency
+
+# 4. Promote MariaDB to master
+
+</code></pre>
+<br>
+<h2> Decision Guide</h2>
+<br>
+<li>**Choose MySQL** if you rely on Oracle ecosystem compatibility, need MySQL HeatWave for analytics, require MySQL Enterprise support, or need the VECTOR data type for AI/ML embeddings.</li>
+<li>**Choose MariaDB** if you want fully open-source (no Oracle licensing), need thread pool performance (free), require temporal tables or dynamic columns, prefer a community-governed project, or want storage engine diversity (Aria, ColumnStore, Spider).</li>
+<li>**Stay on current** if you already run either in production without migration pain; the differences are rarely worth a migration for existing deployments.</li>
+<br>
+<p>For new projects starting in 2026, MariaDB offers the better value proposition for most use cases due to its open governance and free enterprise features, while MySQL remains the safer choice for organizations that already have Oracle relationships or need its specific enterprise integrations.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/compare/grpc-vs-websocket.html" class="related-card">gRPC vs WebSocket: Real-Time Communication</a><a href="/en/compare/kafka-vs-rabbitmq.html" class="related-card">Kafka vs RabbitMQ vs Apache Pulsar</a><a href="/en/compare/redis-vs-memcached.html" class="related-card">Redis vs Memcached: Caching Solution Comparison</a><a href="/en/compare/rust-go-zig-comparison.html" class="related-card">Rust vs Go vs Zig in 2026: A Complete Comparison for Systems Programming</a></div>
+      <noscript><div class="related-grid"><a href="/en/compare/grpc-vs-websocket.html" class="related-card">gRPC vs WebSocket: Real-Time Communication</a><a href="/en/compare/kafka-vs-rabbitmq.html" class="related-card">Kafka vs RabbitMQ vs Apache Pulsar</a><a href="/en/compare/redis-vs-memcached.html" class="related-card">Redis vs Memcached: Caching Solution Comparison</a><a href="/en/compare/rust-go-zig-comparison.html" class="related-card">Rust vs Go vs Zig in 2026: A Complete Comparison for Systems Programming</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

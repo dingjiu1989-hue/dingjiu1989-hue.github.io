@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="compare" data-exclude="kafka-vs-rabbitmq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Kafka vs RabbitMQ vs Apache Pulsar">
+    <meta property="og:description" content="Compare Kafka, RabbitMQ, and Apache Pulsar across throughput, latency, message model, persistence, routing, ecosystem, and migration scenarios.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/compare/kafka-vs-rabbitmq.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kafka vs RabbitMQ vs Apache Pulsar">
+    <meta name="twitter:description" content="Compare Kafka, RabbitMQ, and Apache Pulsar across throughput, latency, message model, persistence, routing, ecosystem, and migration scenarios.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Kafka vs RabbitMQ vs Apache Pulsar — SourceHub</title>
+    <meta name="description" content="Compare Kafka, RabbitMQ, and Apache Pulsar across throughput, latency, message model, persistence, routing, ecosystem, and migration scenarios.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/compare/kafka-vs-rabbitmq.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/compare/kafka-vs-rabbitmq.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Kafka vs RabbitMQ vs Apache Pulsar",
+      "description": "Compare Kafka, RabbitMQ, and Apache Pulsar across throughput, latency, message model, persistence, routing, ecosystem, and migration scenarios.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "2066",
+      "keywords": "Comparison, Technology",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/compare/kafka-vs-rabbitmq.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Comparisons", "item": "https://dingjiu1989-hue.github.io/en/compare/"},
+        {"@type": "ListItem", "position": 3, "name": "Kafka vs RabbitMQ vs Apache Pulsar"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/compare/">Comparisons</a> › Kafka vs RabbitMQ vs Apache Pulsar
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Comparison</span>
+        <span class="tag-cat">Technology</span></div>
+      <h1 class="article-title">Kafka vs RabbitMQ vs Apache Pulsar</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>Message brokers are the nervous system of distributed architectures, enabling asynchronous communication between services at scale. Apache Kafka, RabbitMQ, and Apache Pulsar represent three distinct approaches to message processing. Choosing the wrong broker leads to architecture that fights against the tool's strengths. This article provides a technical comparison to guide your decision.</p>
+<br>
+<h2> Architecture and Message Model</h2>
+<br>
+<h3>Apache Kafka</h3>
+<br>
+<p>Kafka uses a distributed commit log model with partitioned topics:</p>
+<br>
+<pre><code>
+# Kafka topic configuration
+
+topic_config:
+
+  name: orders
+
+  partitions: 12
+
+  replication_factor: 3
+
+  configs:
+
+    cleanup.policy: delete
+
+    retention.ms: 604800000  # 7 days
+
+    retention.bytes: 1073741824  # 1 GB
+
+    compression.type: snappy
+
+    min.insync.replicas: 2
+
+    max.message.bytes: 1048576  # 1 MB
+
+
+
+# Producer configuration (Go)
+
+producer_config:
+
+  acks: all           # Wait for all replicas
+
+  retries: 3
+
+  batch.size: 16384   # 16KB
+
+  linger.ms: 5        # Wait up to 5ms to batch
+
+  compression: snappy
+
+  enable.idempotence: true  # Exactly-once semantics
+
+</code></pre>
+<br>
+<p>Kafka consumers track their position via offsets, enabling replay:</p>
+<br>
+<pre><code>
+from kafka import KafkaConsumer
+
+
+
+consumer = KafkaConsumer(
+
+    &#x27;orders&#x27;,
+
+    bootstrap_servers=[&#x27;kafka-1:9092&#x27;, &#x27;kafka-2:9092&#x27;],
+
+    group_id=&#x27;order-processor&#x27;,
+
+    enable_auto_commit=False,  # Manual offset management
+
+    auto_offset_reset=&#x27;earliest&#x27;,  # Start from beginning if no offset
+
+    max_poll_records=500,
+
+    session_timeout_ms=30000,
+
+)
+
+
+
+for message in consumer:
+
+    process_order(message.value)
+
+    # Commit offset after successful processing
+
+    consumer.commit()
+
+</code></pre>
+<br>
+<h3>RabbitMQ</h3>
+<br>
+<p>RabbitMQ uses a message broker model with exchanges and queues:</p>
+<br>
+<pre><code>
+import pika
+
+
+
+# Connection
+
+connection = pika.BlockingConnection(
+
+    pika.ConnectionParameters(
+
+        host=&#x27;rabbitmq-1&#x27;,
+
+        port=5672,
+
+        credentials=pika.PlainCredentials(&#x27;user&#x27;, &#x27;pass&#x27;),
+
+        heartbeat=600,
+
+        blocked_connection_timeout=300,
+
+    )
+
+)
+
+channel = connection.channel()
+
+
+
+# Declare exchange and queue
+
+channel.exchange_declare(
+
+    exchange=&#x27;orders&#x27;,
+
+    exchange_type=&#x27;topic&#x27;,
+
+    durable=True,
+
+)
+
+
+
+channel.queue_declare(
+
+    queue=&#x27;order-processing&#x27;,
+
+    durable=True,
+
+    arguments={
+
+        &#x27;x-queue-type&#x27;: &#x27;quorum&#x27;,  # Highly available queue
+
+        &#x27;x-message-ttl&#x27;: 86400000,  # 24 hours
+
+        &#x27;x-dead-letter-exchange&#x27;: &#x27;orders-dlx&#x27;,
+
+    }
+
+)
+
+
+
+# Bind queue to exchange with routing key
+
+channel.queue_bind(
+
+    exchange=&#x27;orders&#x27;,
+
+    queue=&#x27;order-processing&#x27;,
+
+    routing_key=&#x27;order.created.*&#x27;,
+
+)
+
+
+
+# Publish message with delivery mode 2 for persistence
+
+channel.basic_publish(
+
+    exchange=&#x27;orders&#x27;,
+
+    routing_key=&#x27;order.created.europe&#x27;,
+
+    body=json.dumps(order_data),
+
+    properties=pika.BasicProperties(
+
+        delivery_mode=2,  # Persistent
+
+        content_type=&#x27;application/json&#x27;,
+
+        priority=5,
+
+    ),
+
+)
+
+</code></pre>
+<br>
+<h3>Apache Pulsar</h3>
+<br>
+<p>Pulsar separates compute and storage with a two-layer architecture:</p>
+<br>
+<pre><code>
+import pulsar
+
+
+
+# Pulsar client
+
+client = pulsar.Client(
+
+    &#x27;pulsar://pulsar-broker:6650&#x27;,
+
+    authentication=pulsar.AuthenticationToken(&#x27;token&#x27;),
+
+)
+
+
+
+# Producer with schema
+
+producer = client.create_producer(
+
+    &#x27;persistent://public/default/orders&#x27;,
+
+    schema=pulsar.schema.JsonSchema(Order),
+
+    send_timeout_millis=30000,
+
+    batching_enabled=True,
+
+    batching_max_publish_delay_ms=10,
+
+    compression_type=pulsar.CompressionType.LZ4,
+
+)
+
+
+
+# Consumer with subscription type
+
+consumer = client.subscribe(
+
+    &#x27;persistent://public/default/orders&#x27;,
+
+    subscription_name=&#x27;order-processor&#x27;,
+
+    subscription_type=pulsar.SubscriptionType.Shared,  # Load balanced
+
+    initial_position=pulsar.InitialPosition.Earliest,
+
+)
+
+
+
+# Negative acknowledgement for retry
+
+while True:
+
+    msg = consumer.receive()
+
+    try:
+
+        order = msg.value()
+
+        process_order(order)
+
+        consumer.acknowledge(msg)
+
+    except Exception:
+
+        consumer.negative_acknowledge(msg)  # Requeue for retry
+
+</code></pre>
+<br>
+<h2> Performance Comparison</h2>
+<br>
+<p>| Metric | Kafka | RabbitMQ | Pulsar |</p>
+<p>|---|---|---|---|</p>
+<p>| Max throughput (single partition) | ~100 MB/s | ~10 MB/s | ~100 MB/s |</p>
+<p>| End-to-end latency (p99) | 5-50ms | <1ms | 5-20ms |</p>
+<p>| Max message size | 1MB (default, configurable) | 128MB | 5MB |</p>
+<p>| Partition scaling | Add partitions (no rebalancing in v3+) | Cluster of nodes | Segmented (no rebalancing) |</p>
+<p>| Storage efficiency | High (zero-copy) | Medium | Very high (tiered storage) |</p>
+<br>
+<h2> Message Persistence and Durability</h2>
+<br>
+<p>| Feature | Kafka | RabbitMQ | Pulsar |</p>
+<p>|---|---|---|---|</p>
+<p>| Default persistence | Disk (all messages) | Memory (configurable) | Disk (all messages) |</p>
+<p>| Replication | Partition-based | Queue mirroring / Quorum | BookKeeper (segments) |</p>
+<p>| Data retention | Time/Size based | Queue TTL + DLQ | Time/Size + tiered storage |</p>
+<p>| Exactly-once | Yes (idempotent producer) | No (at-least-once by default) | Yes (deduplication) |</p>
+<p>| Message replay | Yes (offset reset) | No (consumed messages deleted) | Yes (cursor reset) |</p>
+<br>
+<h2> Routing and Message Patterns</h2>
+<br>
+<h3>Kafka: Topic-based routing</h3>
+<br>
+<pre><code>
+# Kafka routing via topic naming convention
+
+TOPIC_ORDER_CREATED = &quot;orders.events.created&quot;
+
+TOPIC_ORDER_CANCELLED = &quot;orders.events.cancelled&quot;
+
+TOPIC_ORDER_SHIPPED = &quot;orders.events.shipped&quot;
+
+</code></pre>
+<br>
+<h3>RabbitMQ: Flexible exchange types</h3>
+<br>
+<pre><code>
+# Direct exchange: route by exact routing key
+
+channel.exchange_declare(&#x27;direct-orders&#x27;, &#x27;direct&#x27;)
+
+channel.queue_bind(&#x27;europe-queue&#x27;, &#x27;direct-orders&#x27;, &#x27;order.europe&#x27;)
+
+channel.queue_bind(&#x27;asia-queue&#x27;, &#x27;direct-orders&#x27;, &#x27;order.asia&#x27;)
+
+
+
+# Topic exchange: pattern matching
+
+channel.exchange_declare(&#x27;topic-orders&#x27;, &#x27;topic&#x27;)
+
+channel.queue_bind(&#x27;all-orders&#x27;, &#x27;topic-orders&#x27;, &#x27;order.#&#x27;)
+
+channel.queue_bind(&#x27;europe-only&#x27;, &#x27;topic-orders&#x27;, &#x27;order.europe.*&#x27;)
+
+
+
+# Fanout exchange: broadcast
+
+channel.exchange_declare(&#x27;broadcast&#x27;, &#x27;fanout&#x27;)
+
+channel.queue_bind(&#x27;audit-log&#x27;, &#x27;broadcast&#x27;, &#x27;&#x27;)
+
+channel.queue_bind(&#x27;metrics&#x27;, &#x27;broadcast&#x27;, &#x27;&#x27;)
+
+</code></pre>
+<br>
+<h3>Pulsar: Flexible subscriptions</h3>
+<br>
+<pre><code>
+# Exclusive: only one consumer
+
+consumer = client.subscribe(&#x27;orders&#x27;, &#x27;exclusive-sub&#x27;,
+
+    subscription_type=pulsar.SubscriptionType.Exclusive)
+
+
+
+# Shared: round-robin across consumers
+
+consumer = client.subscribe(&#x27;orders&#x27;, &#x27;shared-sub&#x27;,
+
+    subscription_type=pulsar.SubscriptionType.Shared)
+
+
+
+# Failover: primary + standby consumers
+
+consumer = client.subscribe(&#x27;orders&#x27;, &#x27;failover-sub&#x27;,
+
+    subscription_type=pulsar.SubscriptionType.Failover)
+
+
+
+# Key_Shared: ordered delivery per key
+
+consumer = client.subscribe(&#x27;orders&#x27;, &#x27;key-shared-sub&#x27;,
+
+    subscription_type=pulsar.SubscriptionType.Key_Shared)
+
+</code></pre>
+<br>
+<h2> Ecosystem and Operations</h2>
+<br>
+<p>| Factor | Kafka | RabbitMQ | Pulsar |</p>
+<p>|---|---|---|---|</p>
+<p>| Client libraries | Java, Python, Go, .NET, C/C++ | 30+ languages | 10+ languages |</p>
+<p>| Monitoring | JMX, Prometheus exporter | Management plugin, Prometheus | Prometheus, Grafana |</p>
+<p>| Schema registry | Confluent Schema Registry | Custom | Built-in Schema Registry |</p>
+<p>| Tiered storage | Confluent Tiered Storage | No | Built-in (S3, GCS) |</p>
+<p>| Multi-tenancy | Topic naming convention | Virtual hosts | Built-in (namespaces, tenants) |</p>
+<br>
+<h2> Migration Scenarios</h2>
+<br>
+<pre><code>
+# Dual-write migration pattern
+
+class DualWriteBroker:
+
+    def __init__(self, source_broker, target_broker):
+
+        self.source = source_broker
+
+        self.target = target_broker
+
+
+
+    async def publish(self, topic: str, message: dict):
+
+        # Write to both brokers during migration
+
+        results = await asyncio.gather(
+
+            self.source.publish(topic, message),
+
+            self.target.publish(topic, message),
+
+            return_exceptions=True,
+
+        )
+
+        # Check source first, then target
+
+        if results[0]:
+
+            raise results[0]
+
+        if results[1]:
+
+            print(f&quot;Warning: target broker failed: {results[1]}&quot;)
+
+
+
+    async def switch_to_target(self):
+
+        &quot;&quot;&quot;Once all consumers migrated, stop source writes.&quot;&quot;&quot;
+
+        self.source = NullBroker()  # No-op
+
+
+
+    async def backfill(self, source_topic: str, target_topic: str):
+
+        &quot;&quot;&quot;Backfill historical data to new broker.&quot;&quot;&quot;
+
+        for message in self.source.consume_from_beginning(source_topic):
+
+            await self.target.publish(target_topic, message)
+
+</code></pre>
+<br>
+<h2> Decision Guide</h2>
+<br>
+<li>**Choose Kafka** for high-throughput event streaming, log aggregation, data pipelines, and systems that need message replay and exactly-once semantics.</li>
+<li>**Choose RabbitMQ** for low-latency message delivery, complex routing patterns, RPC-style messaging, and systems where sub-millisecond latency matters.</li>
+<li>**Choose Pulsar** for multi-tenant environments, geo-replication across regions, systems needing both queuing and streaming, and deployments that benefit from tiered storage.</li>
+<br>
+<p>Kafka remains the default choice for most event-driven architectures, but RabbitMQ excels where complex routing and low latency are paramount, and Pulsar is the strongest contender for large-scale multi-tenant deployments.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/compare/grpc-vs-websocket.html" class="related-card">gRPC vs WebSocket: Real-Time Communication</a><a href="/en/compare/mysql-vs-mariadb.html" class="related-card">MySQL vs MariaDB: The Complete Comparison</a><a href="/en/compare/redis-vs-memcached.html" class="related-card">Redis vs Memcached: Caching Solution Comparison</a><a href="/en/compare/rust-go-zig-comparison.html" class="related-card">Rust vs Go vs Zig in 2026: A Complete Comparison for Systems Programming</a></div>
+      <noscript><div class="related-grid"><a href="/en/compare/grpc-vs-websocket.html" class="related-card">gRPC vs WebSocket: Real-Time Communication</a><a href="/en/compare/mysql-vs-mariadb.html" class="related-card">MySQL vs MariaDB: The Complete Comparison</a><a href="/en/compare/redis-vs-memcached.html" class="related-card">Redis vs Memcached: Caching Solution Comparison</a><a href="/en/compare/rust-go-zig-comparison.html" class="related-card">Rust vs Go vs Zig in 2026: A Complete Comparison for Systems Programming</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

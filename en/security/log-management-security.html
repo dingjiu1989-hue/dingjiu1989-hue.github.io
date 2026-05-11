@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="log-management-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Security Log Management">
+    <meta property="og:description" content="Best practices for security log management including centralized logging, SIEM integration, log retention, and audit trail implementation.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/log-management-security.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Security Log Management">
+    <meta name="twitter:description" content="Best practices for security log management including centralized logging, SIEM integration, log retention, and audit trail implementation.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Security Log Management — SourceHub</title>
+    <meta name="description" content="Best practices for security log management including centralized logging, SIEM integration, log retention, and audit trail implementation.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/log-management-security.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/log-management-security.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Security Log Management",
+      "description": "Best practices for security log management including centralized logging, SIEM integration, log retention, and audit trail implementation.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1806",
+      "keywords": "Security, Cybersecurity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/log-management-security.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Security Log Management"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Security Log Management
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">Cybersecurity</span></div>
+      <h1 class="article-title">Security Log Management</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Why Log Management Matters for Security</h2>
+<br>
+<p>Logs are the definitive record of what happened in your system. When a security incident occurs, logs provide the evidence needed to determine the attack vector, scope of compromise, and affected data. Without proper log management, incident response becomes guesswork, and forensic analysis is impossible.</p>
+<br>
+<h2> What to Log</h2>
+<br>
+<h3>Authentication Events</h3>
+<br>
+<p>| Event | Severity | Details to Log |</p>
+<p>|-------|----------|----------------|</p>
+<p>| Successful login | Info | User, IP, timestamp, user agent |</p>
+<p>| Failed login | Warning | Username, IP, timestamp, reason |</p>
+<p>| Password reset | Info | User, IP, timestamp, method |</p>
+<p>| Account lockout | High | User, IP, duration |</p>
+<p>| MFA success/failure | Medium | User, method, IP |</p>
+<p>| Privilege escalation | Critical | User, from_role, to_role |</p>
+<br>
+<h3>Data Access Events</h3>
+<br>
+<p>| Event | Severity | Details to Log |</p>
+<p>|-------|----------|----------------|</p>
+<p>| Data export | High | User, records count, destination |</p>
+<p>| Sensitive data read | Medium | User, resource, action |</p>
+<p>| Bulk query | High | User, query pattern, result count |</p>
+<p>| Schema change | Critical | User, object, DDL statement |</p>
+<br>
+<h3>System Events</h3>
+<br>
+<li>Service start/stop</li>
+<li>Configuration changes</li>
+<li>Permission modifications</li>
+<li>Failed access attempts to restricted resources</li>
+<li>Certificate expiry warnings</li>
+<li>Rate limit triggers</li>
+<br>
+<h2> Log Structure</h2>
+<br>
+<p>Use a consistent, structured format for all logs. JSON is the standard for security logs:</p>
+<br>
+<pre><code>
+{
+
+    &quot;timestamp&quot;: &quot;2026-05-11T14:23:45.123Z&quot;,
+
+    &quot;event_id&quot;: &quot;evt_2k3j4h5g6f&quot;,
+
+    &quot;category&quot;: &quot;authentication&quot;,
+
+    &quot;action&quot;: &quot;login_failed&quot;,
+
+    &quot;severity&quot;: &quot;warning&quot;,
+
+    &quot;message&quot;: &quot;Failed login attempt&quot;,
+
+    &quot;source&quot;: {
+
+        &quot;ip&quot;: &quot;203.0.113.42&quot;,
+
+        &quot;user_agent&quot;: &quot;Mozilla/5.0 ...&quot;,
+
+        &quot;country&quot;: &quot;US&quot;
+
+    },
+
+    &quot;actor&quot;: {
+
+        &quot;user_id&quot;: &quot;user_abc123&quot;,
+
+        &quot;username&quot;: &quot;john.doe&quot;,
+
+        &quot;session_id&quot;: &quot;sess_xyz789&quot;
+
+    },
+
+    &quot;outcome&quot;: {
+
+        &quot;status&quot;: &quot;failure&quot;,
+
+        &quot;reason&quot;: &quot;invalid_password&quot;,
+
+        &quot;attempt_number&quot;: 3
+
+    },
+
+    &quot;context&quot;: {
+
+        &quot;application&quot;: &quot;web-app&quot;,
+
+        &quot;environment&quot;: &quot;production&quot;,
+
+        &quot;version&quot;: &quot;2.4.1&quot;
+
+    }
+
+}
+
+</code></pre>
+<br>
+<h2> Centralized Log Aggregation</h2>
+<br>
+<p>Distribute log collection agents and centralize storage:</p>
+<br>
+<pre><code>
+# Filebeat configuration
+
+filebeat.inputs:
+
+  - type: filestream
+
+    id: app-logs
+
+    paths:
+
+      - /var/log/app/*.log
+
+    json.keys_under_root: true
+
+    json.overwrite_keys: true
+
+
+
+filebeat.config.modules:
+
+  path: ${path.config}/modules.d/*.yml
+
+  reload.enabled: true
+
+
+
+output.elasticsearch:
+
+  hosts: [&quot;https://elasticsearch.internal:9200&quot;]
+
+  username: ${ES_USERNAME}
+
+  password: ${ES_PASSWORD}
+
+  ssl.verification_mode: certificate
+
+</code></pre>
+<br>
+<h2> SIEM Integration</h2>
+<br>
+<p>A Security Information and Event Management (SIEM) system correlates logs from multiple sources to detect attacks:</p>
+<br>
+<pre><code>
+# Example: Custom SIEM rule for brute force detection
+
+from datetime import datetime, timedelta
+
+
+
+class BruteForceDetector:
+
+    def __init__(self, redis_client):
+
+        self.redis = redis_client
+
+        self.threshold = 5  # failed attempts
+
+        self.window = 300   # 5 minutes
+
+
+
+    def process_login_event(self, event):
+
+        key = f&quot;brute:{event[&#x27;source&#x27;][&#x27;ip&#x27;]}:{event[&#x27;actor&#x27;][&#x27;username&#x27;]}&quot;
+
+
+
+        if event[&#x27;outcome&#x27;][&#x27;status&#x27;] == &#x27;failure&#x27;:
+
+            count = self.redis.incr(key)
+
+            if count == 1:
+
+                self.redis.expire(key, self.window)
+
+
+
+            if count &gt;= self.threshold:
+
+                self.trigger_alert({
+
+                    &quot;type&quot;: &quot;brute_force_detected&quot;,
+
+                    &quot;ip&quot;: event[&#x27;source&#x27;][&#x27;ip&#x27;],
+
+                    &quot;username&quot;: event[&#x27;actor&#x27;][&#x27;username&#x27;],
+
+                    &quot;attempts&quot;: count,
+
+                    &quot;window_seconds&quot;: self.window
+
+                })
+
+                return True
+
+        return False
+
+</code></pre>
+<br>
+<h2> Log Retention Policies</h2>
+<br>
+<p>| Log Type | Retention (Hot) | Retention (Cold) | Compliance |</p>
+<p>|----------|-----------------|------------------|------------|</p>
+<p>| Application logs | 30 days | 1 year | SOC 2 |</p>
+<p>| Authentication logs | 90 days | 2 years | SOC 2, GDPR |</p>
+<p>| Audit trail | 1 year | 7 years | SOX, HIPAA |</p>
+<p>| Network logs | 30 days | 1 year | PCI DSS |</p>
+<p>| System logs | 30 days | 1 year | General |</p>
+<br>
+<h2> Protecting Log Integrity</h2>
+<br>
+<p>Logs must be tamper-proof to serve as evidence:</p>
+<br>
+<pre><code>
+import hashlib
+
+import hmac
+
+
+
+class SecureLogger:
+
+    def __init__(self, secret_key):
+
+        self.secret_key = secret_key
+
+        self.previous_hash = self.load_last_hash()
+
+
+
+    def secure_log(self, event):
+
+        # Add chained hash for tamper detection
+
+        event[&#x27;_prev_hash&#x27;] = self.previous_hash
+
+        event[&#x27;_timestamp&#x27;] = datetime.utcnow().isoformat()
+
+
+
+        # Create HMAC signature
+
+        payload = json.dumps(event, sort_keys=True)
+
+        signature = hmac.new(
+
+            self.secret_key.encode(),
+
+            payload.encode(),
+
+            hashlib.sha256
+
+        ).hexdigest()
+
+
+
+        event[&#x27;_signature&#x27;] = signature
+
+        self.previous_hash = signature
+
+
+
+        # Write to append-only log
+
+        with open(&#x27;/var/log/secure/audit.log&#x27;, &#x27;a&#x27;) as f:
+
+            f.write(json.dumps(event) + &#x27;\n&#x27;)
+
+
+
+    def verify_chain(self):
+
+        &quot;&quot;&quot;Verify the integrity of the entire log chain.&quot;&quot;&quot;
+
+        previous_hash = &quot;&quot;
+
+        with open(&#x27;/var/log/secure/audit.log&#x27;, &#x27;r&#x27;) as f:
+
+            for line in f:
+
+                event = json.loads(line)
+
+                expected_sig = hmac.new(
+
+                    self.secret_key.encode(),
+
+                    json.dumps({
+
+                        **_prev_clean(event),
+
+                        &#x27;_prev_hash&#x27;: previous_hash
+
+                    }, sort_keys=True).encode(),
+
+                    hashlib.sha256
+
+                ).hexdigest()
+
+
+
+                if event[&#x27;_signature&#x27;] != expected_sig:
+
+                    return False, f&quot;Tampered log entry: {event[&#x27;_timestamp&#x27;]}&quot;
+
+                previous_hash = event[&#x27;_signature&#x27;]
+
+
+
+        return True, &quot;Log chain intact&quot;
+
+</code></pre>
+<br>
+<h2> PII and Sensitive Data Redaction</h2>
+<br>
+<p>Never log sensitive data:</p>
+<br>
+<pre><code>
+import re
+
+
+
+SENSITIVE_PATTERNS = {
+
+    &#x27;password&#x27;: r&#x27;&quot;password&quot;\s*:\s*&quot;[^&quot;]*&quot;&#x27;,
+
+    &#x27;credit_card&#x27;: r&#x27;\b(?:\d[ -]*?){13,16}\b&#x27;,
+
+    &#x27;ssn&#x27;: r&#x27;\b\d{3}-\d{2}-\d{4}\b&#x27;,
+
+    &#x27;access_token&#x27;: r&#x27;&quot;access_token&quot;\s*:\s*&quot;[^&quot;]*&quot;&#x27;,
+
+    &#x27;api_key&#x27;: r&#x27;[A-Za-z0-9]{32,}&#x27;,
+
+}
+
+
+
+def redact_sensitive_data(log_entry):
+
+    entry = json.dumps(log_entry)
+
+    for name, pattern in SENSITIVE_PATTERNS.items():
+
+        entry = re.sub(pattern, f&#x27;&quot;[{name}_REDACTED]&quot;&#x27;, entry)
+
+    return json.loads(entry)
+
+</code></pre>
+<br>
+<h2> Alerting Strategy</h2>
+<br>
+<p>Define severity levels and corresponding response actions:</p>
+<br>
+<p>| Severity | Examples | Response Time | Notification |</p>
+<p>|----------|----------|---------------|--------------|</p>
+<p>| Critical | Data breach, service compromise | 5 minutes | PagerDuty + SMS |</p>
+<p>| High | Brute force, privilege escalation | 15 minutes | Slack + Email |</p>
+<p>| Medium | Failed logins, policy violations | 1 hour | Email |</p>
+<p>| Low | Rate limit triggers, config changes | 24 hours | Dashboard |</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Implement structured JSON logging for all security-relevant events, centralize logs with tools like the ELK stack, integrate with a SIEM for correlation and alerting, enforce retention policies based on compliance requirements, protect log integrity with chained HMAC signatures, and redact sensitive data before storage. Regular log review and monitoring should be a scheduled operational activity, not an afterthought during incident response.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="compare" data-exclude="playwright-vs-cypress">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Playwright vs Cypress">
+    <meta property="og:description" content="Compare Playwright and Cypress for end-to-end testing — architecture, browser support, API, parallel execution, and which testing tool fits your team.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/compare/playwright-vs-cypress.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Playwright vs Cypress">
+    <meta name="twitter:description" content="Compare Playwright and Cypress for end-to-end testing — architecture, browser support, API, parallel execution, and which testing tool fits your team.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Playwright vs Cypress — SourceHub</title>
+    <meta name="description" content="Compare Playwright and Cypress for end-to-end testing — architecture, browser support, API, parallel execution, and which testing tool fits your team.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/compare/playwright-vs-cypress.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/compare/playwright-vs-cypress.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Playwright vs Cypress",
+      "description": "Compare Playwright and Cypress for end-to-end testing — architecture, browser support, API, parallel execution, and which testing tool fits your team.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1594",
+      "keywords": "Comparison, Technology",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/compare/playwright-vs-cypress.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Comparisons", "item": "https://dingjiu1989-hue.github.io/en/compare/"},
+        {"@type": "ListItem", "position": 3, "name": "Playwright vs Cypress"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/compare/">Comparisons</a> › Playwright vs Cypress
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Comparison</span>
+        <span class="tag-cat">Technology</span></div>
+      <h1 class="article-title">Playwright vs Cypress</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>Playwright and Cypress are the two dominant end-to-end testing frameworks in 2026. Both provide reliable browser automation, but they differ significantly in architecture, browser support, and testing philosophy. Playwright, developed by Microsoft, takes a library-first approach with broad browser support. Cypress focuses on developer experience with its unique in-browser architecture. This comparison helps you choose the right tool for your testing needs.</p>
+<br>
+<h2> Architecture</h2>
+<br>
+<h3>Cypress: In-Browser Execution</h3>
+<br>
+<p>Cypress runs inside the browser alongside your application:</p>
+<br>
+<li>**Same execution context**: Test code runs in the same JavaScript environment as the app</li>
+<li>**Automatic waiting**: Cypress automatically waits for elements and assertions</li>
+<li>**Real-time reloads**: Changes to test files trigger instant re-runs</li>
+<li>**DOM snapshot**: Hovering over each command shows the DOM state at that moment</li>
+<br>
+<pre><code>
+// Cypress test
+
+describe(&quot;Login Flow&quot;, () =&gt; {
+
+  beforeEach(() =&gt; {
+
+    cy.visit(&quot;/login&quot;);
+
+  });
+
+
+
+  it(&quot;should log in successfully&quot;, () =&gt; {
+
+    cy.get(&quot;[data-testid=email]&quot;).type(&quot;user@example.com&quot;);
+
+    cy.get(&quot;[data-testid=password]&quot;).type(&quot;password123&quot;);
+
+    cy.get(&quot;[data-testid=submit]&quot;).click();
+
+    cy.url().should(&quot;include&quot;, &quot;/dashboard&quot;);
+
+    cy.contains(&quot;Welcome back&quot;).should(&quot;be.visible&quot;);
+
+  });
+
+});
+
+</code></pre>
+<br>
+<p>**Strengths:**</p>
+<li>Excellent debugging experience (time-travel, snapshots)</li>
+<li>Automatic waiting eliminates explicit wait/retry logic</li>
+<li>Interactive Test Runner for development</li>
+<li>Network stubbing is built-in and powerful</li>
+<br>
+<p>**Weaknesses:**</p>
+<li>Limited to Chromium-family browsers (Chrome, Edge, Firefox) — no Safari or mobile Safari</li>
+<li>Cannot visit multiple domains in a single test</li>
+<li>No native web component support for shadow DOM</li>
+<li>Limited to JavaScript/TypeScript</li>
+<br>
+<h3>Playwright: Out-of-Process Automation</h3>
+<br>
+<p>Playwright controls browsers via the Chrome DevTools Protocol (CDP):</p>
+<br>
+<li>**Separate process**: Test code runs in Node.js, controlling the browser remotely</li>
+<li>**Multi-browser**: Chrome, Firefox, Safari (WebKit) — all supported</li>
+<li>**Multi-tab**: Full control over multiple pages, frames, and contexts</li>
+<li>**Browser contexts**: Isolated sessions for parallel testing</li>
+<br>
+<pre><code>
+// Playwright test (with @playwright/test)
+
+import { test, expect } from &quot;@playwright/test&quot;;
+
+
+
+test.describe(&quot;Login Flow&quot;, () =&gt; {
+
+  test.beforeEach(async ({ page }) =&gt; {
+
+    await page.goto(&quot;/login&quot;);
+
+  });
+
+
+
+  test(&quot;should log in successfully&quot;, async ({ page }) =&gt; {
+
+    await page.getByTestId(&quot;email&quot;).fill(&quot;user@example.com&quot;);
+
+    await page.getByTestId(&quot;password&quot;).fill(&quot;password123&quot;);
+
+    await page.getByTestId(&quot;submit&quot;).click();
+
+    await expect(page).toHaveURL(/.*dashboard/);
+
+    await expect(page.getByText(&quot;Welcome back&quot;)).toBeVisible();
+
+  });
+
+});
+
+</code></pre>
+<br>
+<p>**Strengths:**</p>
+<li>Full browser coverage (Chromium, Firefox, WebKit/Safari)</li>
+<li>Native mobile browser testing with device emulation</li>
+<li>Multi-page and multi-tab support</li>
+<li>Multiple languages (JavaScript, TypeScript, Python, Java, .NET)</li>
+<li>Superior parallel execution</li>
+<br>
+<p>**Weaknesses:**</p>
+<li>Less intuitive debugging experience than Cypress</li>
+<li>Manual assertion waits required (no automatic wait on every command)</li>
+<li>Steeper setup for CI/CD</li>
+<li>Heavier dependency footprint</li>
+<br>
+<h2> Selector Options</h2>
+<br>
+<p>| Capability | Playwright | Cypress |</p>
+<p>|------------|-----------|---------|</p>
+<p>| CSS selectors | Yes | Yes |</p>
+<p>| Text selectors | `getByText()`, `getByRole()` | `cy.contains()` |</p>
+<p>| ARIA selectors | `getByRole()`, `getByLabel()` | Via plugins |</p>
+<p>| Test ID selectors | `getByTestId()` | `cy.get([data-testid=...])` |</p>
+<p>| XPath | Yes | Limited |</p>
+<p>| Shadow DOM | Deep support | Limited |</p>
+<p>| nth/time utilities | Built-in | Built-in |</p>
+<br>
+<p>Playwright's `getByRole()` and `getByLabel()` encourage accessible selectors by default, which is a significant advantage for accessibility-conscious teams.</p>
+<br>
+<h2> Parallel Execution</h2>
+<br>
+<p>**Playwright** excels at parallel testing:</p>
+<br>
+<li>Test sharding across multiple machines</li>
+<li>Multiple workers within a single machine</li>
+<li>Browser contexts provide complete isolation</li>
+<li>Built-in retry logic for flaky tests</li>
+<br>
+<pre><code>
+// playwright.config.js
+
+export default defineConfig({
+
+  workers: process.env.CI ? 4 : 1,
+
+  retries: process.env.CI ? 2 : 0,
+
+  fullyParallel: true,
+
+});
+
+</code></pre>
+<br>
+<p>**Cypress** has improved parallel execution with the Cypress Cloud (paid):</p>
+<br>
+<li>Parallelization requires Cypress Cloud (subscription)</li>
+<li>Load balancing across CI machines</li>
+<li>Test analytics and flakiness detection</li>
+<li>Free tier is limited to 3 parallel runs</li>
+<br>
+<h2> API and Request Testing</h2>
+<br>
+<p>**Playwright** has excellent API testing built in:</p>
+<br>
+<pre><code>
+// Playwright API testing
+
+const apiContext = await request.newContext();
+
+const response = await apiContext.post(&quot;/api/login&quot;, {
+
+  data: { email: &quot;user@example.com&quot;, password: &quot;password123&quot; }
+
+});
+
+expect(response.ok()).toBeTruthy();
+
+const body = await response.json();
+
+expect(body.token).toBeDefined();
+
+</code></pre>
+<br>
+<p>**Cypress** has `cy.request()` and `cy.intercept()` for API testing:</p>
+<br>
+<pre><code>
+// Cypress API testing
+
+cy.request(&quot;POST&quot;, &quot;/api/login&quot;, {
+
+  email: &quot;user@example.com&quot;,
+
+  password: &quot;password123&quot;
+
+}).then((response) =&gt; {
+
+  expect(response.status).to.eq(200);
+
+  expect(response.body.token).to.exist;
+
+});
+
+</code></pre>
+<br>
+<h2> CI/CD Integration</h2>
+<br>
+<p>| Feature | Playwright | Cypress |</p>
+<p>|---------|------------|---------|</p>
+<p>| Docker support | Official image | Official image |</p>
+<p>| GitHub Actions | Direct integration | Via Cypress Cloud |</p>
+<p>| Parallel execution | Built-in (free) | Cypress Cloud (paid) |</p>
+<p>| Retry mechanism | Built-in | Built-in + Cloud |</p>
+<p>| Report formats | HTML, JSON, JUnit, Allure | MOCHA, JUnit + Cloud |</p>
+<br>
+<h2> When to Choose What</h2>
+<br>
+<p>**Choose Playwright when:**</p>
+<li>You need cross-browser testing (including Safari/mobile Safari)</li>
+<li>You want maximum parallel execution without paid services</li>
+<li>You need multi-tab or multi-domain testing</li>
+<li>Your team prefers Python/Java/.NET over JavaScript</li>
+<li>You need API testing alongside browser tests</li>
+<li>You want native mobile device emulation</li>
+<br>
+<p>**Choose Cypress when:**</p>
+<li>Developer experience and debugging are your top priority</li>
+<li>Your team prefers visual debugging with time-travel</li>
+<li>You primarily need Chrome-based testing</li>
+<li>You're OK with the Cypress Cloud subscription for parallelism</li>
+<li>You want the most intuitive API for writing tests</li>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>Playwright and Cypress are both excellent testing frameworks, but they serve different priorities. Playwright wins on breadth — more browsers, more languages, better parallelization, and more features. Cypress wins on depth — better debugging, more intuitive API, and a smoother development experience. In 2026, Playwright has gained significant market share and is the recommended choice for teams that need comprehensive browser coverage. Cypress remains the better choice for teams that prioritize developer experience and debugging over browser diversity.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/compare/grpc-vs-websocket.html" class="related-card">gRPC vs WebSocket: Real-Time Communication</a><a href="/en/compare/kafka-vs-rabbitmq.html" class="related-card">Kafka vs RabbitMQ vs Apache Pulsar</a><a href="/en/compare/mysql-vs-mariadb.html" class="related-card">MySQL vs MariaDB: The Complete Comparison</a><a href="/en/compare/redis-vs-memcached.html" class="related-card">Redis vs Memcached: Caching Solution Comparison</a></div>
+      <noscript><div class="related-grid"><a href="/en/compare/grpc-vs-websocket.html" class="related-card">gRPC vs WebSocket: Real-Time Communication</a><a href="/en/compare/kafka-vs-rabbitmq.html" class="related-card">Kafka vs RabbitMQ vs Apache Pulsar</a><a href="/en/compare/mysql-vs-mariadb.html" class="related-card">MySQL vs MariaDB: The Complete Comparison</a><a href="/en/compare/redis-vs-memcached.html" class="related-card">Redis vs Memcached: Caching Solution Comparison</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

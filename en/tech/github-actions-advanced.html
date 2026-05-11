@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="github-actions-advanced">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Advanced GitHub Actions Workflows">
+    <meta property="og:description" content="Master reusable workflows, matrix builds, composite actions, OIDC, self-hosted runners, and caching strategies for production-grade CI/CD pipelines.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/github-actions-advanced.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Advanced GitHub Actions Workflows">
+    <meta name="twitter:description" content="Master reusable workflows, matrix builds, composite actions, OIDC, self-hosted runners, and caching strategies for production-grade CI/CD pipelines.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Advanced GitHub Actions Workflows — SourceHub</title>
+    <meta name="description" content="Master reusable workflows, matrix builds, composite actions, OIDC, self-hosted runners, and caching strategies for production-grade CI/CD pipelines.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/github-actions-advanced.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/github-actions-advanced.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Advanced GitHub Actions Workflows",
+      "description": "Master reusable workflows, matrix builds, composite actions, OIDC, self-hosted runners, and caching strategies for production-grade CI/CD pipelines.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1593",
+      "keywords": "Technology, Programming, DevOps",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/github-actions-advanced.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Advanced GitHub Actions Workflows"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Advanced GitHub Actions Workflows
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">Programming</span>
+        <span class="tag-cat">DevOps</span></div>
+      <h1 class="article-title">Advanced GitHub Actions Workflows</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>GitHub Actions has evolved beyond simple CI/CD into a full-featured automation platform. Teams managing monorepos, multi-service architectures, or compliance-sensitive deployments need advanced workflows that are maintainable, fast, and secure. This article explores production-ready patterns for GitHub Actions at scale.</p>
+<br>
+<h2> Reusable Workflows</h2>
+<br>
+<p>Reusable workflows eliminate duplication across repositories. Define a workflow in `.github/workflows/deploy-shared.yml` with `workflow_call`:</p>
+<br>
+<pre><code>
+# .github/workflows/deploy-shared.yml
+
+name: Shared Deployment Workflow
+
+on:
+
+  workflow_call:
+
+    inputs:
+
+      environment:
+
+        required: true
+
+        type: string
+
+      image-tag:
+
+        required: true
+
+        type: string
+
+    secrets:
+
+      CLOUD_PROVIDER_KEY:
+
+        required: true
+
+
+
+jobs:
+
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    environment: ${{ inputs.environment }}
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Deploy to ${{ inputs.environment }}
+
+        run: |
+
+          echo &quot;Deploying ${{ inputs.image-tag }} to ${{ inputs.environment }}&quot;
+
+          # Actual deployment logic here
+
+</code></pre>
+<br>
+<p>Consume it from any repository:</p>
+<br>
+<pre><code>
+# .github/workflows/release.yml
+
+name: Release
+
+on:
+
+  push:
+
+    branches: [main]
+
+jobs:
+
+  call-deploy:
+
+    uses: org/shared-workflows/.github/workflows/deploy-shared.yml@v1
+
+    with:
+
+      environment: staging
+
+      image-tag: ${{ github.sha }}
+
+    secrets:
+
+      CLOUD_PROVIDER_KEY: ${{ secrets.CLOUD_PROVIDER_KEY }}
+
+</code></pre>
+<br>
+<h2> Matrix Builds</h2>
+<br>
+<p>Matrix strategies test across multiple dimensions without duplicating workflow YAML:</p>
+<br>
+<pre><code>
+jobs:
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+
+      matrix:
+
+        node: [18, 20, 22]
+
+        os: [ubuntu-latest, windows-latest]
+
+        include:
+
+          - node: 22
+
+            os: ubuntu-latest
+
+            coverage: true
+
+        exclude:
+
+          - node: 18
+
+            os: windows-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+
+        with:
+
+          node-version: ${{ matrix.node }}
+
+      - run: npm ci
+
+      - run: npm test
+
+      - if: matrix.coverage
+
+        uses: codecov/codecov-action@v3
+
+</code></pre>
+<br>
+<p>The `include` key adds jobs to the matrix, while `exclude` removes specific combinations. For large matrices, use `max-parallel: 3` to avoid saturating runner capacity.</p>
+<br>
+<h2> Composite Actions</h2>
+<br>
+<p>Composite actions bundle multiple steps into a reusable unit, ideal for organization-wide standards:</p>
+<br>
+<pre><code>
+# .github/actions/setup-node-env/action.yml
+
+name: &quot;Setup Node.js Environment&quot;
+
+description: &quot;Configures Node with pnpm, cache, and dependency audit&quot;
+
+inputs:
+
+  node-version:
+
+    description: &quot;Node.js version&quot;
+
+    required: false
+
+    default: &quot;20&quot;
+
+  working-directory:
+
+    description: &quot;Directory containing package.json&quot;
+
+    required: false
+
+    default: &quot;.&quot;
+
+runs:
+
+  using: &quot;composite&quot;
+
+  steps:
+
+    - uses: actions/setup-node@v4
+
+      with:
+
+        node-version: ${{ inputs.node-version }}
+
+    - uses: pnpm/action-setup@v2
+
+      with:
+
+        version: 8
+
+    - name: Get pnpm store directory
+
+      id: pnpm-cache
+
+      shell: bash
+
+      run: |
+
+        echo &quot;STORE_PATH=$(pnpm store path)&quot; &gt;&gt; $GITHUB_OUTPUT
+
+    - uses: actions/cache@v3
+
+      with:
+
+        path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+
+        key: ${{ runner.os }}-pnpm-${{ hashFiles(&#x27;pnpm-lock.yaml&#x27;) }}
+
+        restore-keys: |
+
+          ${{ runner.os }}-pnpm-
+
+    - name: Install dependencies
+
+      shell: bash
+
+      working-directory: ${{ inputs.working-directory }}
+
+      run: pnpm install --frozen-lockfile
+
+    - name: Security audit
+
+      shell: bash
+
+      run: pnpm audit --audit-level=high
+
+</code></pre>
+<br>
+<p>Usage in any workflow:</p>
+<br>
+<pre><code>
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup-node-env
+
+        with:
+
+          node-version: &quot;22&quot;
+
+      - run: pnpm build
+
+</code></pre>
+<br>
+<h2> OIDC and Cloud Authentication</h2>
+<br>
+<p>OpenID Connect eliminates static credentials by exchanging GitHub's JWT tokens for cloud provider credentials:</p>
+<br>
+<pre><code>
+jobs:
+
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    permissions:
+
+      id-token: write  # Required for OIDC
+
+      contents: read
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - uses: aws-actions/configure-aws-credentials@v4
+
+        with:
+
+          role-to-assume: arn:aws:iam::123456789012:role/github-actions-role
+
+          aws-region: us-east-1
+
+      - run: aws s3 sync ./dist s3://my-bucket
+
+</code></pre>
+<br>
+<p>Configure the AWS IAM role with a trust policy scoped to specific repositories and branches:</p>
+<br>
+<pre><code>
+{
+
+  &quot;Version&quot;: &quot;2012-10-17&quot;,
+
+  &quot;Statement&quot;: [{
+
+    &quot;Effect&quot;: &quot;Allow&quot;,
+
+    &quot;Principal&quot;: { &quot;Federated&quot;: &quot;arn:aws:iam::ACCOUNT:oidc-provider/token.actions.githubusercontent.com&quot; },
+
+    &quot;Action&quot;: &quot;sts:AssumeRoleWithWebIdentity&quot;,
+
+    &quot;Condition&quot;: {
+
+      &quot;StringLike&quot;: {
+
+        &quot;token.actions.githubusercontent.com:sub&quot;: &quot;repo:org/my-repo:ref:refs/heads/main&quot;
+
+      }
+
+    }
+
+  }]
+
+}
+
+</code></pre>
+<br>
+<h2> Environment Protection Rules</h2>
+<br>
+<p>Protect production deployments with required reviewers, wait gates, and custom deployment branch policies:</p>
+<br>
+<pre><code>
+name: Deploy
+
+on:
+
+  workflow_dispatch:
+
+    inputs:
+
+      environment:
+
+        description: &quot;Target environment&quot;
+
+        required: true
+
+        default: &quot;production&quot;
+
+        type: choice
+
+        options:
+
+          - staging
+
+          - production
+
+
+
+jobs:
+
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    environment:
+
+      name: ${{ github.event.inputs.environment || &#x27;staging&#x27; }}
+
+      url: https://${{ github.event.inputs.environment }}.myapp.com
+
+    concurrency:
+
+      group: ${{ github.event.inputs.environment }}
+
+      cancel-in-progress: false
+
+    steps:
+
+      - run: echo &quot;Deploying to ${{ github.event.inputs.environment }}&quot;
+
+</code></pre>
+<br>
+<p>Configure required reviewers in the repository's environment settings to enforce manual approval gates.</p>
+<br>
+<h2> Self-Hosted Runners</h2>
+<br>
+<p>Self-hosted runners provide custom hardware, internal network access, and reduced costs:</p>
+<br>
+<pre><code>
+jobs:
+
+  build:
+
+    runs-on: [self-hosted, linux, x64, gpu]
+
+    steps:
+
+      - run: nvidia-smi  # Verify GPU availability
+
+      - uses: actions/checkout@v4
+
+      - run: docker build -t my-model:latest .
+
+</code></pre>
+<br>
+<p>Scale self-hosted runners with the `actions-runner-controller` on Kubernetes, which auto-provisions and auto-scales runner pods based on workflow demand.</p>
+<br>
+<h2> Caching Strategies</h2>
+<br>
+<p>Effective caching reduces workflow runtime significantly:</p>
+<br>
+<pre><code>
+- uses: actions/cache@v3
+
+  with:
+
+    path: |
+
+      ~/.cache/go-build
+
+      ~/go/pkg/mod
+
+    key: ${{ runner.os }}-go-${{ hashFiles(&#x27;**/go.sum&#x27;) }}
+
+    restore-keys: |
+
+      ${{ runner.os }}-go-
+
+</code></pre>
+<br>
+<p>For monorepos, cache per workspace directory:</p>
+<br>
+<pre><code>
+- uses: actions/cache@v3
+
+  with:
+
+    path: packages/*/node_modules/.cache
+
+    key: ${{ runner.os }}-${{ github.workflow }}-${{ hashFiles(&#x27;packages/*/package-lock.json&#x27;) }}
+
+</code></pre>
+<br>
+<p>These patterns form the foundation of scalable, secure GitHub Actions usage in enterprise environments. Start with reusable workflows and matrix builds, then layer on OIDC and self-hosted runners as your infrastructure grows.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/helm-kubernetes-package-management.html" class="related-card">Helm Charts: Kubernetes Package Management</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/helm-kubernetes-package-management.html" class="related-card">Helm Charts: Kubernetes Package Management</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

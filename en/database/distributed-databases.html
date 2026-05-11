@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="distributed-databases">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Distributed Databases: Concepts and Implementation">
+    <meta property="og:description" content="Explore Raft/Paxos consensus, gossip protocols, CRDTs, and the architectures behind Amazon Dynamo and Google Spanner.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/distributed-databases.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Distributed Databases: Concepts and Implementation">
+    <meta name="twitter:description" content="Explore Raft/Paxos consensus, gossip protocols, CRDTs, and the architectures behind Amazon Dynamo and Google Spanner.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Distributed Databases: Concepts and Implementation — SourceHub</title>
+    <meta name="description" content="Explore Raft/Paxos consensus, gossip protocols, CRDTs, and the architectures behind Amazon Dynamo and Google Spanner.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/distributed-databases.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/distributed-databases.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Distributed Databases: Concepts and Implementation",
+      "description": "Explore Raft/Paxos consensus, gossip protocols, CRDTs, and the architectures behind Amazon Dynamo and Google Spanner.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "2426",
+      "keywords": "Database, SQL",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/distributed-databases.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Distributed Databases: Concepts and Implementation"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Distributed Databases: Concepts and Implementation
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">SQL</span></div>
+      <h1 class="article-title">Distributed Databases: Concepts and Implementation</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Distributed databases store data across multiple nodes while presenting a unified interface to applications. This article covers the fundamental concepts: consensus algorithms (Raft and Paxos), gossip protocols, conflict-free replicated data types (CRDTs), and the architectures behind two landmark distributed databases: Amazon Dynamo and Google Spanner.</p>
+<br>
+<h2> Consensus Algorithms: Paxos and Raft</h2>
+<br>
+<p>Consensus algorithms enable a group of nodes to agree on a value despite failures. They are the foundation of replicated state machines in distributed databases.</p>
+<br>
+<h3>Paxos</h3>
+<br>
+<p>Paxos was the first practical consensus algorithm, published by Leslie Lamport in 1998. It defines three roles:</p>
+<br>
+<li>**Proposer**: Proposes a value.</li>
+<li>**Acceptor**: Votes on proposals.</li>
+<li>**Learner**: Learns the agreed value.</li>
+<br>
+<p>Paxos operates in two phases:</p>
+<br>
+<li>**Prepare phase**: The proposer sends a prepare request with a proposal number N to a majority of acceptors. Acceptors promise not to accept proposals numbered less than N and respond with the highest-numbered proposal they have accepted.</li>
+<br>
+<p>2. **Accept phase**: If the proposer receives responses from a majority, it sends an accept request with value V (the value from the highest-numbered previous proposal, or its own if none) to the acceptors. Acceptors accept the proposal unless they have promised to a higher number.</p>
+<br>
+<pre><code>
+# Simplified Paxos implementation
+
+class PaxosNode:
+
+    def __init__(self, node_id):
+
+        self.node_id = node_id
+
+        self.promised_n = 0
+
+        self.accepted_n = 0
+
+        self.accepted_value = None
+
+    
+
+    def handle_prepare(self, proposal_n, sender_id):
+
+        if proposal_n &gt; self.promised_n:
+
+            self.promised_n = proposal_n
+
+            return (&quot;PROMISE&quot;, self.accepted_n, self.accepted_value)
+
+        return (&quot;REJECT&quot;,)
+
+    
+
+    def handle_accept(self, proposal_n, value):
+
+        if proposal_n &gt;= self.promised_n:
+
+            self.promised_n = proposal_n
+
+            self.accepted_n = proposal_n
+
+            self.accepted_value = value
+
+            return (&quot;ACCEPTED&quot;,)
+
+        return (&quot;REJECT&quot;,)
+
+</code></pre>
+<br>
+<p>Paxos is correct but notoriously difficult to understand and implement correctly. Most practical systems use variants or alternatives.</p>
+<br>
+<h3>Raft</h3>
+<br>
+<p>Raft is a consensus algorithm designed for understandability. It was published by Diego Ongaro in 2014. Raft divides consensus into three subproblems:</p>
+<br>
+<li>**Leader election**: One node is elected leader. The leader handles all client requests.</li>
+<p>2. **Log replication**: The leader replicates log entries to followers.</p>
+<p>3. **Safety**: If a leader has applied a log entry at a given index, no other leader can apply a different entry at that index.</p>
+<br>
+<p>Raft uses random timeouts to elect leaders. Each node has a timer. When the timer expires on a follower, it becomes a candidate and starts an election.</p>
+<br>
+<pre><code>
+# Simplified Raft leader election
+
+class RaftNode:
+
+    def __init__(self, node_id):
+
+        self.node_id = node_id
+
+        self.state = &quot;FOLLOWER&quot;
+
+        self.current_term = 0
+
+        self.voted_for = None
+
+        self.election_timeout = random.uniform(150, 300)  # milliseconds
+
+    
+
+    def start_election(self):
+
+        self.state = &quot;CANDIDATE&quot;
+
+        self.current_term += 1
+
+        self.voted_for = self.node_id
+
+        votes = 1  # Vote for self
+
+        for peer in self.peers:
+
+            response = peer.request_vote(self.current_term, self.node_id)
+
+            if response[&quot;vote_granted&quot;]:
+
+                votes += 1
+
+        if votes &gt; len(self.peers) // 2:
+
+            self.state = &quot;LEADER&quot;
+
+            self.start_heartbeat()
+
+</code></pre>
+<br>
+<p>Raft implementations power etcd, Consul, TiKV, and MongoDB's replication.</p>
+<br>
+<h3>Paxos vs Raft</h3>
+<br>
+<p>| Aspect | Paxos | Raft |</p>
+<p>|--------|-------|------|</p>
+<p>| Understandability | Hard | Accessible |</p>
+<p>| Leader-based | Implicit leader | Explicit leader election |</p>
+<p>| Performance | Similar | Similar |</p>
+<p>| Practical implementations | Google Chubby, Spanner | etcd, Consul, TiKV |</p>
+<br>
+<h2> Gossip Protocol</h2>
+<br>
+<p>Gossip (epidemic) protocols spread information through a cluster by having each node periodically exchange state with a small set of random peers. Information spreads exponentially.</p>
+<br>
+<h3>How Gossip Works</h3>
+<br>
+<pre><code>
+Round 1: Node A infects nodes B and C
+
+Round 2: B infects D and E, C infects F and G
+
+Round 3: All 7 nodes have the information
+
+</code></pre>
+<br>
+<pre><code>
+# Gossip protocol implementation
+
+import random
+
+import time
+
+
+
+class GossipNode:
+
+    def __init__(self, node_id, peers):
+
+        self.node_id = node_id
+
+        self.peers = peers
+
+        self.state = {}
+
+        self.version = {}
+
+    
+
+    def gossip_round(self):
+
+        # Select N random peers to gossip with
+
+        targets = random.sample(
+
+            self.peers, 
+
+            min(3, len(self.peers))
+
+        )
+
+        for target in targets:
+
+            self.exchange_state(target)
+
+    
+
+    def exchange_state(self, target):
+
+        # Send our state, receive theirs
+
+        my_state = self.get_state_to_share()
+
+        their_state = target.receive_state(my_state)
+
+        # Merge: keep the higher version for each key
+
+        for key, (value, version) in their_state.items():
+
+            if key not in self.version or version &gt; self.version[key]:
+
+                self.state[key] = value
+
+                self.version[key] = version
+
+</code></pre>
+<br>
+<h3>Properties of Gossip</h3>
+<br>
+<li>**Scalability**: Information reaches all N nodes in O(log N) rounds.</li>
+<li>**Fault tolerance**: Nodes can join, leave, or fail without disrupting propagation.</li>
+<li>**Decentralization**: No central coordinator needed.</li>
+<li>**Eventual consistency**: All nodes eventually converge on the same state.</li>
+<br>
+<h3>Uses in Distributed Databases</h3>
+<br>
+<li>**Membership detection**: Cassandra and Consul use gossip to track which nodes are alive.</li>
+<li>**Metadata dissemination**: Distribute schema changes and configuration updates.</li>
+<li>**Failure detection**: Nodes that miss gossip rounds are suspected as failed.</li>
+<br>
+<h2> Conflict-Free Replicated Data Types (CRDTs)</h2>
+<br>
+<p>CRDTs are data structures that can be updated concurrently on different replicas and automatically merge without conflicts. They provide strong eventual consistency.</p>
+<br>
+<h3>Types of CRDTs</h3>
+<br>
+<p>**G-Counter (Grow-only Counter)**: A counter that only increases. Each replica owns one element in a vector. Increments only affect the replica's own element. Merge takes the element-wise maximum.</p>
+<br>
+<pre><code>
+class GCounter:
+
+    def __init__(self, node_id, num_nodes):
+
+        self.node_id = node_id
+
+        self.counts = [0] * num_nodes
+
+    
+
+    def increment(self):
+
+        self.counts[self.node_id] += 1
+
+    
+
+    def value(self):
+
+        return sum(self.counts)
+
+    
+
+    def merge(self, other):
+
+        for i in range(len(self.counts)):
+
+            self.counts[i] = max(self.counts[i], other.counts[i])
+
+</code></pre>
+<br>
+<p>**PN-Counter (Positive-Negative Counter)**: Supports both increments and decrements using two G-Counters.</p>
+<br>
+<p>**G-Set (Grow-only Set)**: Elements can only be added, never removed. Merge is set union.</p>
+<br>
+<p>**LWW-Register (Last-Writer-Wins Register)**: Each write is tagged with a timestamp. On conflict, the write with the highest timestamp wins.</p>
+<br>
+<pre><code>
+class LWWRegister:
+
+    def __init__(self):
+
+        self.value = None
+
+        self.timestamp = 0
+
+    
+
+    def set(self, value, timestamp):
+
+        if timestamp &gt; self.timestamp:
+
+            self.value = value
+
+            self.timestamp = timestamp
+
+    
+
+    def merge(self, other):
+
+        if other.timestamp &gt; self.timestamp:
+
+            self.value = other.value
+
+            self.timestamp = other.timestamp
+
+</code></pre>
+<br>
+<h3>CRDTs in Production</h3>
+<br>
+<li>**Redis CRDTs**: Redis Enterprise uses CRDTs for active-active geo-distribution.</li>
+<li>**Riak**: Distributed database built on CRDTs for conflict-free replication.</li>
+<li>**Automerge**: JavaScript CRDT library for collaborative applications.</li>
+<br>
+<h2> Amazon Dynamo-Style Architectures</h2>
+<br>
+<p>Dynamo-style databases (DynamoDB, Cassandra, Riak) prioritize availability and partition tolerance over strong consistency.</p>
+<br>
+<h3>Key Design Decisions</h3>
+<br>
+<li>**Consistent hashing**: Data is distributed across nodes using consistent hashing, which minimizes movement when nodes join or leave.</li>
+<p>2. **N = 3 replication**: Each data item is replicated to N nodes. The coordinator forwards writes to all replicas.</p>
+<p>3. **Tunable consistency**: Each read or write operation specifies its consistency level.</p>
+<br>
+<pre><code>
+# Dynamo-style write with tunable consistency
+
+def dynamo_write(key, value, consistency_level=&quot;QUORUM&quot;):
+
+    # 1. Determine coordinator using consistent hashing
+
+    coordinator = consistent_hash_ring.get_node(key)
+
+    
+
+    # 2. Forward write to all N replicas
+
+    replicas = coordinator.get_preference_list(key, N=3)
+
+    
+
+    responses = []
+
+    for replica in replicas:
+
+        response = replica.write(key, value, version)
+
+        responses.append(response)
+
+    
+
+    # 3. Wait for consistency level
+
+    write_consistency = {
+
+        &quot;ONE&quot;: 1,
+
+        &quot;QUORUM&quot;: len(replicas) // 2 + 1,
+
+        &quot;ALL&quot;: len(replicas)
+
+    }
+
+    
+
+    required = write_consistency[consistency_level]
+
+    if sum(1 for r in responses if r[&quot;success&quot;]) &gt;= required:
+
+        return SUCCESS
+
+    return ERROR
+
+</code></pre>
+<br>
+<h3>Cassandra Example</h3>
+<br>
+<pre><code>
+-- Cassandra: Tunable consistency on queries
+
+-- Write with strong consistency
+
+INSERT INTO users (user_id, name, email)
+
+VALUES (&#x27;u1&#x27;, &#x27;Alice&#x27;, &#x27;alice@example.com&#x27;)
+
+USING CONSISTENCY QUORUM;
+
+
+
+-- Read with eventual consistency (fastest)
+
+SELECT * FROM users WHERE user_id = &#x27;u1&#x27;
+
+USING CONSISTENCY ONE;
+
+
+
+-- Read with strong consistency
+
+SELECT * FROM users WHERE user_id = &#x27;u1&#x27;
+
+USING CONSISTENCY ALL;
+
+</code></pre>
+<br>
+<h2> Google Spanner-Style Architectures</h2>
+<br>
+<p>Spanner is Google's globally distributed database that provides external consistency (linearizability) across data centers.</p>
+<br>
+<h3>Key Innovations</h3>
+<br>
+<li>**TrueTime**: GPS and atomic clocks synchronize time across data centers with bounded clock uncertainty. TrueTime exposes a time interval `[earliest, latest]` for the current time.</li>
+<br>
+<p>2. **2PC + Paxos**: Spanner uses two-phase commit for transactions spanning multiple Paxos groups, with TrueTime timestamps for external consistency.</p>
+<br>
+<p>3. **Commit wait**: Spanner waits until the TrueTime uncertainty interval has passed before acknowledging a write. This ensures linearizability without locks.</p>
+<br>
+<pre><code>
+-- Spanner: Globally consistent reads at a timestamp
+
+SELECT * FROM orders
+
+WHERE customer_id = 42
+
+AND order_date &gt;= &#x27;2026-01-01&#x27;;
+
+-- Automatically reads at a globally consistent timestamp
+
+</code></pre>
+<br>
+<p>Spanner-based solutions include Cloud Spanner (Google Cloud) and CockroachDB (open-source, Spanner-inspired).</p>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>Distributed databases rely on consensus algorithms (Raft/Paxos) for consistent replication, gossip protocols for decentralized communication, CRDTs for conflict-free merging, and careful architecture design that balances consistency, availability, and latency. Dynamo-style systems optimize for availability with tunable consistency. Spanner-style systems optimize for strong consistency with global distribution. Choosing the right approach depends on your workload's consistency requirements and latency tolerance.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

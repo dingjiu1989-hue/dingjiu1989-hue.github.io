@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="compare" data-exclude="supabase-vs-firebase">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Supabase vs Firebase">
+    <meta property="og:description" content="Compare Supabase and Firebase for backend-as-a-service — database, authentication, real-time features, pricing, and vendor lock-in.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/compare/supabase-vs-firebase.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Supabase vs Firebase">
+    <meta name="twitter:description" content="Compare Supabase and Firebase for backend-as-a-service — database, authentication, real-time features, pricing, and vendor lock-in.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Supabase vs Firebase — SourceHub</title>
+    <meta name="description" content="Compare Supabase and Firebase for backend-as-a-service — database, authentication, real-time features, pricing, and vendor lock-in.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/compare/supabase-vs-firebase.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/compare/supabase-vs-firebase.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Supabase vs Firebase",
+      "description": "Compare Supabase and Firebase for backend-as-a-service — database, authentication, real-time features, pricing, and vendor lock-in.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1335",
+      "keywords": "Comparison, Technology",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/compare/supabase-vs-firebase.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Comparisons", "item": "https://dingjiu1989-hue.github.io/en/compare/"},
+        {"@type": "ListItem", "position": 3, "name": "Supabase vs Firebase"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/compare/">Comparisons</a> › Supabase vs Firebase
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Comparison</span>
+        <span class="tag-cat">Technology</span></div>
+      <h1 class="article-title">Supabase vs Firebase</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>Supabase and Firebase are the leading Backend-as-a-Service (BaaS) platforms, providing database, authentication, storage, and serverless functions out of the box. Both eliminate the need to build and manage backend infrastructure, but they take fundamentally different approaches. Firebase is built on NoSQL (Firestore) and is fully managed by Google. Supabase is built on PostgreSQL and is open source. This comparison helps you choose the right platform for your project.</p>
+<br>
+<h2> Database: SQL vs NoSQL</h2>
+<br>
+<p>The database choice is the most important factor in deciding between these platforms.</p>
+<br>
+<h3>Firebase Firestore (NoSQL)</h3>
+<br>
+<p>Firestore is a document-oriented NoSQL database:</p>
+<br>
+<pre><code>
+Collection: users
+
+  Document: user123
+
+    name: &quot;Alice&quot;
+
+    email: &quot;alice@example.com&quot;
+
+    posts: [ref:post456, ref:post789]
+
+
+
+Collection: posts
+
+  Document: post456
+
+    title: &quot;Hello World&quot;
+
+    content: &quot;...&quot;
+
+</code></pre>
+<br>
+<p>**Strengths:**</p>
+<li>Automatic real-time synchronization</li>
+<li>Scales infinitely without configuration</li>
+<li>Works offline with on-device persistence</li>
+<li>Flexible schema — no migrations needed</li>
+<br>
+<p>**Weaknesses:**</p>
+<li>Complex queries (no JOIN, limited filtering, no aggregation)</li>
+<li>Performance depends on index creation for complex queries</li>
+<li>Data denormalization required for relational data</li>
+<li>No migration tools — schema changes are manual</li>
+<br>
+<pre><code>
+// Firestore query
+
+const snapshot = await db
+
+  .collection(&quot;posts&quot;)
+
+  .where(&quot;published&quot;, &quot;==&quot;, true)
+
+  .orderBy(&quot;createdAt&quot;, &quot;desc&quot;)
+
+  .limit(10)
+
+  .get();
+
+</code></pre>
+<br>
+<h3>Supabase (PostgreSQL)</h3>
+<br>
+<p>Supabase uses full PostgreSQL with all its capabilities:</p>
+<br>
+<p>**Strengths:**</p>
+<li>Full SQL — JOINs, aggregations, window functions, CTEs</li>
+<li>Relational data modeling with foreign keys and constraints</li>
+<li>Postgres extensions (PostGIS for geospatial, pgvector for embeddings)</li>
+<li>Row Level Security for granular access control</li>
+<li>ACID compliance and transactional integrity</li>
+<br>
+<p>**Weaknesses:**</p>
+<li>Manual schema migrations required</li>
+<li>Real-time requires explicit configuration (Realtime Server)</li>
+<li>Scaling requires planning (connection pooling, read replicas)</li>
+<li>Limited offline support compared to Firestore</li>
+<br>
+<pre><code>
+-- Supabase SQL query
+
+SELECT posts.*, profiles.username, COUNT(comments.id) as comment_count
+
+FROM posts
+
+JOIN profiles ON posts.author_id = profiles.id
+
+LEFT JOIN comments ON comments.post_id = posts.id
+
+WHERE posts.published = true
+
+GROUP BY posts.id, profiles.username
+
+ORDER BY posts.created_at DESC
+
+LIMIT 10;
+
+</code></pre>
+<br>
+<h2> Authentication</h2>
+<br>
+<p>Both platforms offer comprehensive auth:</p>
+<br>
+<p>| Feature | Firebase Auth | Supabase Auth |</p>
+<p>|---------|--------------|---------------|</p>
+<p>| Email/password | Yes | Yes |</p>
+<p>| OAuth providers | Google, Apple, Facebook, etc. | Google, GitHub, Discord, etc. |</p>
+<p>| Phone auth | Yes | Via Twilio |</p>
+<p>| Anonymous auth | Yes | Yes |</p>
+<p>| Multi-factor auth | Yes | Via third-party |</p>
+<p>| Custom claims | Yes | Via PostgreSQL |</p>
+<p>| Row Level Security integration | No | Yes (native) |</p>
+<br>
+<p>Supabase's auth integrates directly with PostgreSQL Row Level Security, allowing database-level permissions without additional logic:</p>
+<br>
+<pre><code>
+-- Supabase RLS: users can only see their own data
+
+CREATE POLICY &quot;Users can view own profile&quot;
+
+ON profiles FOR SELECT
+
+USING (auth.uid() = user_id);
+
+</code></pre>
+<br>
+<h2> Real-time Features</h2>
+<br>
+<li>**Firebase**: Real-time is built into Firestore at the database level. Every listener receives updates automatically. This is seamless but can be expensive at scale.</li>
+<li>**Supabase**: Real-time uses a separate Realtime Server that listens to PostgreSQL replication. You subscribe to specific channels and tables. It's more configurable but requires explicit setup.</li>
+<br>
+<h2> Pricing Comparison</h2>
+<br>
+<p>| Aspect | Firebase | Supabase |</p>
+<p>|--------|----------|----------|</p>
+<p>| Free tier | Spark plan: 1GB storage, 10GB/month transfer | 500MB database, 2GB storage |</p>
+<p>| Scaling cost | Pay per usage (reads, writes, bandwidth) | Pay for compute + storage |</p>
+<p>| Predictable pricing | Less predictable (usage-based) | More predictable (compute-based) |</p>
+<p>| Vendor lock-in risk | High (proprietary NoSQL) | Low (standard PostgreSQL) |</p>
+<br>
+<p>Firebase's Spark plan is generous for prototyping, but costs can scale unpredictably with usage. Supabase's compute-based model is more predictable.</p>
+<br>
+<h2> Ecosystem and Tooling</h2>
+<br>
+<p>**Firebase** offers a richer ecosystem of integrations: Crashlytics, Performance Monitoring, Analytics, Cloud Messaging, Remote Config, and A/B Testing. This makes Firebase the better choice for mobile app development where you need these services.</p>
+<br>
+<p>**Supabase** integrates with the broader PostgreSQL ecosystem: you can use any Postgres tool (pgAdmin, DBeaver, Prisma, Drizzle) and access the database directly with standard SQL clients.</p>
+<br>
+<h2> When to Choose What</h2>
+<br>
+<p>**Choose Firebase when:**</p>
+<li>You're building a mobile app (iOS/Android) with Google Play Services integration</li>
+<li>You need automatic real-time synchronization with minimal configuration</li>
+<li>Your data model is document-oriented and doesn't require complex JOINs</li>
+<li>You need Firebase Analytics, Crashlytics, and other Google services</li>
+<li>You want the fastest path to a working prototype</li>
+<br>
+<p>**Choose Supabase when:**</p>
+<li>Your data has complex relationships requiring SQL</li>
+<li>You want to avoid proprietary lock-in</li>
+<li>You need full-text search or geospatial queries</li>
+<li>You want to self-host or use a specific cloud region</li>
+<li>You need vector embeddings for AI features (pgvector)</li>
+<li>You prefer database-level security with Row Level Security</li>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>The choice between Supabase and Firebase is largely a choice between SQL and NoSQL. Firebase offers a tightly integrated ecosystem perfect for mobile apps and rapid prototyping. Supabase offers the power and flexibility of PostgreSQL with open-source transparency and lower vendor lock-in. In 2026, Supabase has matured significantly and is the preferred choice for web applications with relational data, while Firebase remains strong for mobile-first applications.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/compare/grpc-vs-websocket.html" class="related-card">gRPC vs WebSocket: Real-Time Communication</a><a href="/en/compare/kafka-vs-rabbitmq.html" class="related-card">Kafka vs RabbitMQ vs Apache Pulsar</a><a href="/en/compare/mysql-vs-mariadb.html" class="related-card">MySQL vs MariaDB: The Complete Comparison</a><a href="/en/compare/redis-vs-memcached.html" class="related-card">Redis vs Memcached: Caching Solution Comparison</a></div>
+      <noscript><div class="related-grid"><a href="/en/compare/grpc-vs-websocket.html" class="related-card">gRPC vs WebSocket: Real-Time Communication</a><a href="/en/compare/kafka-vs-rabbitmq.html" class="related-card">Kafka vs RabbitMQ vs Apache Pulsar</a><a href="/en/compare/mysql-vs-mariadb.html" class="related-card">MySQL vs MariaDB: The Complete Comparison</a><a href="/en/compare/redis-vs-memcached.html" class="related-card">Redis vs Memcached: Caching Solution Comparison</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

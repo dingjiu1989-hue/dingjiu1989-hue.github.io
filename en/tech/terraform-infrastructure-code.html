@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="terraform-infrastructure-code">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Terraform Infrastructure as Code">
+    <meta property="og:description" content="Master Terraform for managing cloud infrastructure with state management, modules, and production best practices.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/terraform-infrastructure-code.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Terraform Infrastructure as Code">
+    <meta name="twitter:description" content="Master Terraform for managing cloud infrastructure with state management, modules, and production best practices.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Terraform Infrastructure as Code — SourceHub</title>
+    <meta name="description" content="Master Terraform for managing cloud infrastructure with state management, modules, and production best practices.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/terraform-infrastructure-code.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/terraform-infrastructure-code.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Terraform Infrastructure as Code",
+      "description": "Master Terraform for managing cloud infrastructure with state management, modules, and production best practices.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1572",
+      "keywords": "Technology, Programming, DevOps",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/terraform-infrastructure-code.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Terraform Infrastructure as Code"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Terraform Infrastructure as Code
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">Programming</span>
+        <span class="tag-cat">DevOps</span></div>
+      <h1 class="article-title">Terraform Infrastructure as Code</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Terraform has become the standard tool for Infrastructure as Code (IaC). It allows you to define, provision, and manage cloud resources across providers using declarative configuration. This guide covers practical Terraform patterns for production use.</p>
+<br>
+<h2> Core Concepts</h2>
+<br>
+<p>Terraform uses a declarative approach -- you describe the desired state, and Terraform figures out how to reach it:</p>
+<br>
+<pre><code>
+# main.tf
+
+terraform {
+
+  required_version = &quot;&gt;= 1.8&quot;
+
+  required_providers {
+
+    aws = {
+
+      source  = &quot;hashicorp/aws&quot;
+
+      version = &quot;~&gt; 5.0&quot;
+
+    }
+
+  }
+
+  backend &quot;s3&quot; {
+
+    bucket = &quot;myapp-terraform-state&quot;
+
+    key    = &quot;production/terraform.tfstate&quot;
+
+    region = &quot;us-east-1&quot;
+
+  }
+
+}
+
+
+
+provider &quot;aws&quot; {
+
+  region = var.aws_region
+
+}
+
+
+
+resource &quot;aws_s3_bucket&quot; &quot;app_data&quot; {
+
+  bucket = &quot;myapp-production-data&quot;
+
+  tags = {
+
+    Name        = &quot;Application Data&quot;
+
+    Environment = &quot;production&quot;
+
+  }
+
+}
+
+</code></pre>
+<br>
+<p>Key components: providers connect to cloud APIs, resources define infrastructure components, and the backend stores state.</p>
+<br>
+<h2> State Management</h2>
+<br>
+<p>State is the most critical part of Terraform. It maps configuration to real-world resources.</p>
+<br>
+<h3>Remote State Backend</h3>
+<br>
+<p>Always use remote state storage with locking:</p>
+<br>
+<pre><code>
+# backend configuration during init: terraform init -backend-config=backend.hcl
+
+bucket         = &quot;company-terraform-state&quot;
+
+key            = &quot;env:/${environment}/networking/terraform.tfstate&quot;
+
+region         = &quot;us-east-1&quot;
+
+dynamodb_table = &quot;terraform-state-lock&quot;
+
+encrypt        = true
+
+</code></pre>
+<br>
+<p>DynamoDB provides state locking to prevent concurrent modifications. S3 versioning provides state history for rollback.</p>
+<br>
+<h3>State Access for Other Configurations</h3>
+<br>
+<p>Share outputs across configurations:</p>
+<br>
+<pre><code>
+data &quot;terraform_remote_state&quot; &quot;vpc&quot; {
+
+  backend = &quot;s3&quot;
+
+  config = {
+
+    bucket = &quot;company-terraform-state&quot;
+
+    key    = &quot;env:/production/vpc/terraform.tfstate&quot;
+
+    region = &quot;us-east-1&quot;
+
+  }
+
+}
+
+
+
+resource &quot;aws_instance&quot; &quot;app&quot; {
+
+  subnet_id = data.terraform_remote_state.vpc.outputs.private_subnet_ids[0]
+
+}
+
+</code></pre>
+<br>
+<h2> Module Design</h2>
+<br>
+<p>Modules are reusable Terraform configurations. Design them for composability:</p>
+<br>
+<pre><code>
+# modules/vpc/main.tf
+
+variable &quot;vpc_cidr&quot; {
+
+  description = &quot;CIDR block for the VPC&quot;
+
+  type        = string
+
+  validation {
+
+    condition     = can(cidrhost(var.vpc_cidr, 0))
+
+    error_message = &quot;Must be a valid CIDR notation.&quot;
+
+  }
+
+}
+
+
+
+variable &quot;environment&quot; {
+
+  description = &quot;Environment name for tagging&quot;
+
+  type        = string
+
+}
+
+
+
+resource &quot;aws_vpc&quot; &quot;this&quot; {
+
+  cidr_block           = var.vpc_cidr
+
+  enable_dns_hostnames = true
+
+  enable_dns_support   = true
+
+
+
+  tags = {
+
+    Name        = &quot;vpc-${var.environment}&quot;
+
+    Environment = var.environment
+
+  }
+
+}
+
+
+
+output &quot;vpc_id&quot; {
+
+  value = aws_vpc.this.id
+
+}
+
+
+
+output &quot;vpc_cidr&quot; {
+
+  value = aws_vpc.this.cidr_block
+
+}
+
+</code></pre>
+<br>
+<p>Use input validation to catch errors early. Document all variables and outputs with descriptions.</p>
+<br>
+<h2> Workspace and Environment Management</h2>
+<br>
+<p>Use workspaces or directory structure for environment isolation:</p>
+<br>
+<pre><code>
+# Directory structure:
+
+terraform/
+
+  env/
+
+    production/
+
+      main.tf
+
+      terraform.tfvars
+
+    staging/
+
+      main.tf
+
+      terraform.tfvars
+
+</code></pre>
+<br>
+<p>Or use Terraform workspaces:</p>
+<br>
+<pre><code>
+terraform workspace new staging
+
+terraform workspace new production
+
+terraform workspace select staging
+
+
+
+terraform plan -var-file=staging.tfvars
+
+</code></pre>
+<br>
+<p>Workspaces are simpler but can become confusing with many environments. Directory-based separation is clearer for complex setups.</p>
+<br>
+<h2> Terraform Plan and Apply Workflow</h2>
+<br>
+<p>The standard workflow in CI/CD:</p>
+<br>
+<pre><code>
+# Initialize with backend
+
+terraform init -backend-config=backend-$ENV.hcl
+
+
+
+# Format and validate
+
+terraform fmt -check
+
+terraform validate
+
+
+
+# Plan
+
+terraform plan -out=tfplan -var-file=$ENV.tfvars
+
+
+
+# Apply (typically in CI with approval gate)
+
+terraform apply tfplan
+
+</code></pre>
+<br>
+<p>Never run `terraform apply` without a plan file in CI. Always review the plan output before applying.</p>
+<br>
+<h2> Managing Secrets</h2>
+<br>
+<p>Never hardcode secrets. Use variables with sensitive flag:</p>
+<br>
+<pre><code>
+variable &quot;db_password&quot; {
+
+  description = &quot;Database administrator password&quot;
+
+  type        = string
+
+  sensitive   = true
+
+}
+
+</code></pre>
+<br>
+<p>For secrets that must be in state, encrypt with a key management service:</p>
+<br>
+<pre><code>
+resource &quot;aws_db_instance&quot; &quot;main&quot; {
+
+  password = var.db_password  # Still goes to state, but you can encrypt state
+
+}
+
+</code></pre>
+<br>
+<p>Better approach: use AWS Secrets Manager or Vault and reference secrets via data sources:</p>
+<br>
+<pre><code>
+data &quot;aws_secretsmanager_secret_version&quot; &quot;db_password&quot; {
+
+  secret_id = &quot;production/db/password&quot;
+
+}
+
+</code></pre>
+<br>
+<h2> Testing Terraform Code</h2>
+<br>
+<h3>`terraform plan` as a Test</h3>
+<br>
+<p>Run `terraform plan` in CI to detect drift and validate changes without applying:</p>
+<br>
+<pre><code>
+terraform plan -detailed-exitcode
+
+# Exit code 0: no changes
+
+# Exit code 1: error
+
+# Exit code 2: changes needed
+
+</code></pre>
+<br>
+<h3>Terratest for Integration Tests</h3>
+<br>
+<pre><code>
+// test/vpc_test.go
+
+func TestVPC(t *testing.T) {
+
+  terraformOptions := &amp;terraform.Options{
+
+    TerraformDir: &quot;../modules/vpc&quot;,
+
+    Vars: map[string]interface{}{
+
+      &quot;vpc_cidr&quot;: &quot;10.0.0.0/16&quot;,
+
+      &quot;environment&quot;: &quot;test&quot;,
+
+    },
+
+  }
+
+  defer terraform.Destroy(t, terraformOptions)
+
+  terraform.InitAndApply(t, terraformOptions)
+
+  output := terraform.Output(t, terraformOptions, &quot;vpc_id&quot;)
+
+  assert.NotEmpty(t, output)
+
+}
+
+</code></pre>
+<br>
+<h2> Common Pitfalls</h2>
+<br>
+<li>**State file leaks**: Never commit state files to Git. Use `.gitignore` and remote backends.</li>
+<li>**Hardcoded values**: Use variables and locals for everything that varies.</li>
+<li>**Missing `prevent_destroy`**: Protect critical resources:</li>
+<p>  ```hcl</p>
+<p>  resource "aws_db_instance" "production" {</p>
+<p>    lifecycle {</p>
+<p>      prevent_destroy = true</p>
+<p>    }</p>
+<p>  }</p>
+<p>  ```</p>
+<li>**Large state files**: Split infrastructure into manageable chunks by service layer (networking, compute, data).</li>
+<br>
+<h2> Sentinel and Policy as Code</h2>
+<br>
+<p>For teams, enforce policies with Sentinel (HashiCorp Enterprise) or Open Policy Agent:</p>
+<br>
+<pre><code>
+# Deny public S3 buckets
+
+deny[msg] {
+
+  resource := input.resource_changes[_]
+
+  resource.type == &quot;aws_s3_bucket&quot;
+
+  resource.change.after.acl == &quot;public-read&quot;
+
+  msg := &quot;S3 buckets must not be publicly readable&quot;
+
+}
+
+</code></pre>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Terraform brings software engineering practices to infrastructure. Use remote state with locking, compose resources into modules, separate environments, and integrate planning into CI/CD. Never hardcode secrets, always validate configurations, and protect critical resources from accidental destruction. With these practices, Terraform enables infrastructure that is versioned, reviewable, reproducible, and auditable.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

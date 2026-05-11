@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="database-per-service">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Database per Service Pattern">
+    <meta property="og:description" content="Learn the database per service pattern for microservices data management.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/database-per-service.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Database per Service Pattern">
+    <meta name="twitter:description" content="Learn the database per service pattern for microservices data management.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Database per Service Pattern — SourceHub</title>
+    <meta name="description" content="Learn the database per service pattern for microservices data management.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/database-per-service.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/database-per-service.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Database per Service Pattern",
+      "description": "Learn the database per service pattern for microservices data management.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1489",
+      "keywords": "Architecture, System Design",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/database-per-service.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Database per Service Pattern"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Database per Service Pattern
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span></div>
+      <h1 class="article-title">Database per Service Pattern</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>The database per service pattern is a fundamental principle of microservices architecture. Each service owns its data and exposes it only through its API. No other service can access a service's database directly. This article explores the pattern, its benefits, challenges, and practical implementation strategies.</p>
+<br>
+<h2> The Core Principle</h2>
+<br>
+<p>In a monolithic application, a single database serves all modules. This creates tight coupling between modules -- changing one module's schema can break another module's queries. The database becomes a bottleneck and a single point of failure.</p>
+<br>
+<p>With database per service:</p>
+<br>
+<pre><code>
+[Order Service]    -&gt; [Order DB]     (private)
+
+[Payment Service]  -&gt; [Payment DB]   (private)
+
+[Inventory Service]-&gt; [Inventory DB] (private)
+
+</code></pre>
+<br>
+<p>Each service has complete ownership of its database. Other services can only interact with the data through the service's API. This ensures:</p>
+<li>**Encapsulation**: Service internals are hidden.</li>
+<li>**Independent evolution**: Services can change their database schema without coordinating with other teams.</li>
+<li>**Independent scaling**: Each service can choose the database technology that best fits its needs.</li>
+<br>
+<h2> Benefits</h2>
+<br>
+<p>**Decentralized data management.** Each team chooses the best database for their service's needs. The order service might use PostgreSQL for ACID compliance. The analytics service might use a columnar store or data warehouse. The product catalog might use Elasticsearch for full-text search.</p>
+<br>
+<p>**Independent scalability.** Services with high data volume can scale independently. The order database can be scaled up without affecting the payment database.</p>
+<br>
+<p>**Fault isolation.** A failure in one service's database does not affect other services. If the inventory database goes down, the order service can still handle requests using cached or default inventory data.</p>
+<br>
+<p>**Team autonomy.** Service teams can change their schema, migrate databases, or switch technologies without coordinating with other teams. This speed is a primary goal of microservices.</p>
+<br>
+<p>**Polyglot persistence.** Different data storage technologies excel at different tasks. SQL, NoSQL, key-value stores, graph databases, and time-series databases each have strengths. The database per service pattern lets you choose the right tool for each job.</p>
+<br>
+<h2> Challenges</h2>
+<br>
+<h3>Data Consistency Across Services</h3>
+<br>
+<p>In a monolith, a single ACID transaction can update multiple tables atomically. In a microservices architecture with separate databases, cross-service transactions are not possible.</p>
+<br>
+<p>**Solution:** Use the saga pattern. A saga is a sequence of local transactions, each within a single service. If a step fails, compensating transactions undo prior steps. Sagas provide eventual consistency without distributed transactions.</p>
+<br>
+<h3>Queries Across Services</h3>
+<br>
+<p>A query like "find all orders containing a product that is currently on sale" spans the order service and the product service. With separate databases, a simple JOIN is impossible.</p>
+<br>
+<p>**Solutions:**</p>
+<li>**API composition**: The calling service queries each service individually and combines results in memory. Simple but can be slow for complex queries.</li>
+<li>**CQRS**: Maintain a read-optimized view that aggregates data from multiple services. Updates are asynchronous. This is the recommended approach for complex queries.</li>
+<li>**Event-driven data synchronization**: Services publish events when their data changes. Other services consume these events and update their own copies of the data.</li>
+<br>
+<h3>Data Duplication</h3>
+<br>
+<p>Multiple services might need the same data. The order service needs customer names. The shipping service needs customer addresses. Different pieces of customer data are owned by different services.</p>
+<br>
+<p>**Solution:** Each piece of data has a single source of truth (the service that owns it). Other services store cached or derived copies. Event-driven updates keep copies synchronized. Accept that some data duplication is normal and intentional in distributed systems.</p>
+<br>
+<h2> Polyglot Persistence in Practice</h2>
+<br>
+<p>Choosing the right database for each service:</p>
+<br>
+<li>**Order Service**: PostgreSQL or MySQL for ACID transactions and relational data.</li>
+<li>**Product Catalog**: Elasticsearch for full-text search and faceted filtering.</li>
+<li>**Shopping Cart**: Redis for fast, temporary key-value storage.</li>
+<li>**User Session**: DynamoDB or Cassandra for high-velocity, low-latency access.</li>
+<li>**Analytics**: ClickHouse or BigQuery for columnar storage and aggregation queries.</li>
+<li>**Graph**: Neo4j for relationship-heavy data like recommendations.</li>
+<br>
+<p>The cost of polyglot persistence is operational complexity. Each database type has different management, monitoring, and backup requirements. Evaluate whether the benefits justify the additional operational burden.</p>
+<br>
+<h2> Eventual Consistency and Compensations</h2>
+<br>
+<p>Embrace eventual consistency between services. When a user places an order:</p>
+<br>
+<li>Order service creates the order (immediate).</li>
+<p>2. Order service publishes `OrderCreated` event.</p>
+<p>3. Inventory service consumes the event and reserves inventory (may take milliseconds).</p>
+<p>4. Payment service consumes the event and processes payment (may take seconds).</p>
+<br>
+<p>Between steps 1 and 4, the order is in a "pending" state. This window of inconsistency is normal. The user sees "Order placed, processing payment" rather than an immediate confirmation.</p>
+<br>
+<p>Design your compensation logic carefully. If payment fails:</p>
+<li>Cancel the reservation (inventory compensation).</li>
+<li>Notify the user.</li>
+<li>Mark the order as failed.</li>
+<br>
+<h2> Transactional Boundaries</h2>
+<br>
+<p>Define clear transactional boundaries for each service. A service should encapsulate data that changes together. If two pieces of data are always read and written together, they might belong in the same service.</p>
+<br>
+<p>A common mistake is splitting data too finely. If every order operation needs to query customer data, the order and customer services are tightly coupled by data dependencies. In such cases, reconsider the service boundaries.</p>
+<br>
+<h2> Migration Strategy</h2>
+<br>
+<p>Migrating from a shared database to database per service:</p>
+<br>
+<li>**Identify bounded contexts** based on domain-driven design.</li>
+<p>2. **Extract one service at a time**. Do not attempt a big bang migration.</p>
+<p>3. **Use database views or triggers** as temporary bridges during migration.</p>
+<p>4. **Implement event-driven synchronization** to keep data in sync during the transition.</p>
+<p>5. **Cut over traffic** service by service.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>The database per service pattern is essential for microservices that need independent scalability, team autonomy, and polyglot persistence. Embrace eventual consistency across services and use the saga pattern for multi-service operations. Accept data duplication as a normal part of distributed systems. Choose database technologies based on each service's specific requirements, but be mindful of the operational complexity that comes with multiple database systems.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

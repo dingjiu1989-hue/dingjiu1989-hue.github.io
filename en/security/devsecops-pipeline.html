@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="devsecops-pipeline">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="DevSecOps: Integrating Security into CI/CD">
+    <meta property="og:description" content="Integrate SAST, DAST, dependency scanning, container scanning, and policy-as-code into your CI/CD pipeline for shift-left security.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/devsecops-pipeline.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DevSecOps: Integrating Security into CI/CD">
+    <meta name="twitter:description" content="Integrate SAST, DAST, dependency scanning, container scanning, and policy-as-code into your CI/CD pipeline for shift-left security.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>DevSecOps: Integrating Security into CI/CD — SourceHub</title>
+    <meta name="description" content="Integrate SAST, DAST, dependency scanning, container scanning, and policy-as-code into your CI/CD pipeline for shift-left security.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/devsecops-pipeline.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/devsecops-pipeline.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "DevSecOps: Integrating Security into CI/CD",
+      "description": "Integrate SAST, DAST, dependency scanning, container scanning, and policy-as-code into your CI/CD pipeline for shift-left security.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "2024",
+      "keywords": "Security, Cybersecurity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/devsecops-pipeline.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "DevSecOps: Integrating Security into CI/CD"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › DevSecOps: Integrating Security into CI/CD
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">Cybersecurity</span></div>
+      <h1 class="article-title">DevSecOps: Integrating Security into CI/CD</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><p>DevSecOps embeds security into every stage of the software development lifecycle. Rather than running security assessments at the end of a release cycle, DevSecOps shifts security left into development and CI/CD pipelines. This article covers how to integrate SAST, DAST, dependency scanning, container scanning, and policy-as-code into your pipelines.</p>
+<br>
+<h2> Shift-Left Security</h2>
+<br>
+<p>The shift-left principle moves security testing earlier in the development process. Finding and fixing a vulnerability during development costs 10 times less than fixing it in production, and 100 times less than fixing it after a breach.</p>
+<br>
+<h3>Security Gates in the Pipeline</h3>
+<br>
+<p>A mature DevSecOps pipeline has security gates at every stage:</p>
+<br>
+<pre><code>
+Code Commit -&gt; SAST -&gt; Dependency Scan -&gt; Build -&gt; Container Scan -&gt; 
+
+Integration Test -&gt; DAST -&gt; Staging -&gt; Policy Check -&gt; Production
+
+</code></pre>
+<br>
+<p>Each gate can pass, fail with a warning, or fail and block the pipeline. The severity determines the action: critical and high findings block the pipeline, while medium and low findings create tickets for the development team.</p>
+<br>
+<h2> Static Application Security Testing (SAST)</h2>
+<br>
+<p>SAST analyzes source code without executing it. It identifies vulnerabilities like SQL injection, cross-site scripting (XSS), buffer overflows, and insecure cryptographic usage.</p>
+<br>
+<h3>Popular SAST Tools</h3>
+<br>
+<li>**Semgrep**: Open-source, fast, and supports custom rules. Works with most programming languages.</li>
+<li>**SonarQube**: Static analysis with quality gates and technical debt tracking.</li>
+<li>**CodeQL**: GitHub's semantic code analysis engine. Query-based vulnerability detection.</li>
+<li>**Checkmarx / Fortify**: Commercial SAST tools with extensive rule sets.</li>
+<br>
+<h3>Pipeline Integration</h3>
+<br>
+<pre><code>
+# GitHub Actions: SAST with Semgrep
+
+name: SAST Scan
+
+on:
+
+  pull_request:
+
+    branches: [main]
+
+
+
+jobs:
+
+  semgrep:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - uses: semgrep/semgrep-action@v1
+
+        with:
+
+          config: p/default
+
+          audit_on: push
+
+      - name: Check for blocking findings
+
+        run: |
+
+          if [ &quot;${{ steps.semgrep.outputs.results }}&quot; != &quot;&quot; ]; then
+
+            echo &quot;SAST found vulnerabilities. Fix before merging.&quot;
+
+            exit 1
+
+          fi
+
+</code></pre>
+<br>
+<h3>SAST Best Practices</h3>
+<br>
+<li>Run SAST on every pull request, not just on push to main.</li>
+<li>Use incremental scanning for faster feedback on large codebases.</li>
+<li>Tune rules to reduce false positives. Block only high-confidence findings.</li>
+<li>Create custom rules for your application's specific security patterns.</li>
+<br>
+<h2> Dependency Scanning</h2>
+<br>
+<p>Modern applications use dozens of open-source libraries. Each library introduces transitive dependencies with potential vulnerabilities.</p>
+<br>
+<h3>Software Bill of Materials (SBOM)</h3>
+<br>
+<p>An SBOM is a formal inventory of all software components in an application. Generate SBOMs in CycloneDX or SPDX format.</p>
+<br>
+<pre><code>
+# Generate SBOM with Syft
+
+syft packages . -o cyclonedx-json &gt; sbom.json
+
+
+
+# Scan SBOM for vulnerabilities with Grype
+
+grype sbom:./sbom.json
+
+</code></pre>
+<br>
+<h3>Dependency Scanning Tools</h3>
+<br>
+<li>**Dependabot**: GitHub's built-in dependency scanning and automated pull requests for patches.</li>
+<li>**Renovate**: Open-source dependency update tool with extensive customization.</li>
+<li>**Snyk**: Commercial vulnerability scanner with fix advice and license compliance.</li>
+<li>**OWASP Dependency-Check**: Open-source scanner that identifies CVEs in dependencies.</li>
+<br>
+<pre><code>
+# Dependabot configuration
+
+version: 2
+
+updates:
+
+  - package-ecosystem: &quot;npm&quot;
+
+    directory: &quot;/&quot;
+
+    schedule:
+
+      interval: &quot;weekly&quot;
+
+    open-pull-requests-limit: 10
+
+    labels:
+
+      - &quot;dependencies&quot;
+
+      - &quot;security&quot;
+
+</code></pre>
+<br>
+<h3>Dependency Scanning Policy</h3>
+<br>
+<li>Block the pipeline on critical or high severity vulnerabilities in direct dependencies.</li>
+<li>Flag transitive dependency vulnerabilities but only block if they are exploitable.</li>
+<li>Require automated dependency updates within 7 days for critical, 30 days for high.</li>
+<li>Monitor for license compliance alongside vulnerability scanning.</li>
+<br>
+<h2> Dynamic Application Security Testing (DAST)</h2>
+<br>
+<p>DAST tests the running application from the outside, simulating real-world attack patterns. It discovers vulnerabilities that SAST misses, such as authentication bypass, session management flaws, and business logic errors.</p>
+<br>
+<h3>DAST Tools</h3>
+<br>
+<li>**OWASP ZAP**: Open-source web application scanner with automated and manual modes.</li>
+<li>**Burp Suite**: Commercial web security testing platform with advanced scanning.</li>
+<li>**Arachni**: Open-source web application security scanner framework.</li>
+<br>
+<h3>Pipeline Integration</h3>
+<br>
+<pre><code>
+# DAST with OWASP ZAP in CI/CD
+
+services:
+
+  zap:
+
+    image: ghcr.io/zaproxy/zaproxy:stable
+
+    options: --user root
+
+
+
+steps:
+
+  - name: Run ZAP Scan
+
+    run: |
+
+      docker run -v $(pwd):/zap/wrk:rw \
+
+        ghcr.io/zaproxy/zaproxy:stable \
+
+        zap-full-scan.py \
+
+        -t https://staging.example.com \
+
+        -r zap_report.html \
+
+        -z &quot;-config spider.maxDuration=10&quot;
+
+  - name: Check ZAP Results
+
+    run: |
+
+      if grep -q &quot;High&quot; zap_report.html; then
+
+        echo &quot;DAST found High severity issues&quot;
+
+        exit 1
+
+      fi
+
+</code></pre>
+<br>
+<h3>DAST Best Practices</h3>
+<br>
+<li>Run DAST against staging or review environments, not production.</li>
+<li>Authenticate DAST scanners to test authenticated functionality.</li>
+<li>Use baseline scans for smoke testing and full scans for release candidates.</li>
+<li>Integrate with Jira or ticketing for automatic issue creation.</li>
+<br>
+<h2> Container Scanning</h2>
+<br>
+<p>Container images bundle applications with their runtime dependencies. Vulnerabilities in base images or installed packages become part of the container.</p>
+<br>
+<h3>Scanning Pipeline Integration</h3>
+<br>
+<pre><code>
+# Dockerfile with security best practices
+
+FROM alpine:3.19 AS builder
+
+RUN apk add --no-cache build-base
+
+
+
+FROM alpine:3.19
+
+RUN apk add --no-cache ca-certificates &amp;&amp; \
+
+    addgroup -S app &amp;&amp; adduser -S app -G app
+
+COPY --from=builder /app/bin/server /app/server
+
+USER app
+
+EXPOSE 8080
+
+</code></pre>
+<br>
+<pre><code>
+# Container scanning with Trivy in CI/CD
+
+jobs:
+
+  scan:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Build image
+
+        run: docker build -t myapp:${{ github.sha }} .
+
+      - name: Scan with Trivy
+
+        uses: aquasecurity/trivy-action@master
+
+        with:
+
+          image-ref: myapp:${{ github.sha }}
+
+          format: sarif
+
+          output: trivy-results.sarif
+
+          severity: CRITICAL,HIGH
+
+      - name: Upload results
+
+        uses: github/codeql-action/upload-sarif@v3
+
+        with:
+
+          sarif_file: trivy-results.sarif
+
+</code></pre>
+<br>
+<h3>Container Security Practices</h3>
+<br>
+<li>Use minimal base images (Alpine, distroless) to reduce attack surface.</li>
+<li>Scan images before pushing to the registry.</li>
+<li>Enforce signed images with Cosign.</li>
+<li>Enable granular runtime security with seccomp, AppArmor, or SELinux policies.</li>
+<br>
+<h2> Policy-as-Code</h2>
+<br>
+<p>Policy-as-code defines security and compliance rules as executable code. Policies are versioned, reviewed, and enforced automatically in the pipeline.</p>
+<br>
+<h3>Open Policy Agent (OPA) and Rego</h3>
+<br>
+<p>OPA enforces policies across the software lifecycle. Rego is OPA's policy language.</p>
+<br>
+<pre><code>
+# Rego policy: Require encryption at rest
+
+package kubernetes.storage
+
+
+
+deny[msg] {
+
+  volume := input.volumes[_]
+
+  volume.persistentVolumeClaim
+
+  not volume.encrypted
+
+  msg := sprintf(&quot;Volume %v must have encryption enabled&quot;, [volume.name])
+
+}
+
+</code></pre>
+<br>
+<h3>Policy Gates in the Pipeline</h3>
+<br>
+<pre><code>
+# Conftest: Policy enforcement for Kubernetes manifests
+
+steps:
+
+  - name: Check Kubernetes policies
+
+    run: |
+
+      conftest test deployment.yaml \
+
+        --policy policies/ \
+
+        --namespace kubernetes
+
+  - name: Check Terraform policies
+
+    run: |
+
+      conftest test main.tf \
+
+        --policy policies/terraform/
+
+</code></pre>
+<br>
+<h3>Common Policy Rules</h3>
+<br>
+<li>Containers must not run as root.</li>
+<li>All ingress must have TLS enabled.</li>
+<li>S3 buckets must block public access.</li>
+<li>Database instances must have encryption at rest.</li>
+<li>IAM roles must have resource-level constraints.</li>
+<br>
+<h2> Building a DevSecOps Culture</h2>
+<br>
+<p>Tools alone do not make DevSecOps successful. The human elements matter more.</p>
+<br>
+<li>**Developer empowerment**: Give developers access to security scan results and fix guidance. Do not use security as a gate without providing remediation support.</li>
+<li>**Security champions**: Train security champions in each development team. They bridge the gap between security and engineering.</li>
+<li>**Friction reduction**: Optimize scan times. A 30-minute SAST scan encourages skipping. A 2-minute scan integrates naturally into the workflow.</li>
+<li>**Blameless culture**: When security scans find issues, the process worked correctly. Celebrate catching issues early rather than blaming developers.</li>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>DevSecOps shifts security from a final gate to an integrated part of the development process. SAST catches code-level vulnerabilities, dependency scanning manages supply chain risk, DAST validates runtime behavior, container scanning secures artifacts, and policy-as-code enforces standards. Together, these practices make security a natural part of delivering software, not an obstacle to it.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/identity-management.html" class="related-card">Identity and Access Management (IAM) Guide</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/identity-management.html" class="related-card">Identity and Access Management (IAM) Guide</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

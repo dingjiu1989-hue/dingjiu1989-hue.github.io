@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tools" data-exclude="logging-tools">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Logging Tools: ELK Stack vs Loki vs Splunk">
+    <meta property="og:description" content="Compare ELK Stack, Grafana Loki, and Splunk for log aggregation, structured logging, indexing strategies, retention policies, query capabilities, and cost.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tools/logging-tools.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Logging Tools: ELK Stack vs Loki vs Splunk">
+    <meta name="twitter:description" content="Compare ELK Stack, Grafana Loki, and Splunk for log aggregation, structured logging, indexing strategies, retention policies, query capabilities, and cost.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Logging Tools: ELK Stack vs Loki vs Splunk — SourceHub</title>
+    <meta name="description" content="Compare ELK Stack, Grafana Loki, and Splunk for log aggregation, structured logging, indexing strategies, retention policies, query capabilities, and cost.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tools/logging-tools.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tools/logging-tools.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Logging Tools: ELK Stack vs Loki vs Splunk",
+      "description": "Compare ELK Stack, Grafana Loki, and Splunk for log aggregation, structured logging, indexing strategies, retention policies, query capabilities, and cost.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1647",
+      "keywords": "Developer Tools, Productivity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/logging-tools.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tool Recommendations", "item": "https://dingjiu1989-hue.github.io/en/tools/"},
+        {"@type": "ListItem", "position": 3, "name": "Logging Tools: ELK Stack vs Loki vs Splunk"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a> › Logging Tools: ELK Stack vs Loki vs Splunk
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Developer Tools</span>
+        <span class="tag-cat">Productivity</span></div>
+      <h1 class="article-title">Logging Tools: ELK Stack vs Loki vs Splunk</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>Centralized logging transforms noisy application output into a searchable, actionable resource. The three leading approaches--ELK Stack (Elasticsearch, Logstash, Kibana), Grafana Loki, and Splunk--take fundamentally different approaches to log ingestion, indexing, and querying. Choosing the right one affects both your daily operations and your monthly infrastructure bill.</p>
+<br>
+<h2> Architecture Comparison</h2>
+<br>
+<h3>ELK Stack</h3>
+<br>
+<p>Elasticsearch indexes every field in every log line, enabling rich full-text search at the cost of higher storage consumption:</p>
+<br>
+<pre><code>
+# Filebeat configuration for shipping logs
+
+filebeat.inputs:
+
+  - type: container
+
+    paths:
+
+      - /var/lib/docker/containers/*/*.log
+
+    json.message_key: log
+
+    json.overwrite_keys: true
+
+    json.add_error_key: true
+
+
+
+processors:
+
+  - add_docker_metadata:
+
+      host: &quot;unix:///var/run/docker.sock&quot;
+
+  - dissect:
+
+      tokenizer: &quot;%{timestamp} %{level} %{logger} %{message}&quot;
+
+      target_prefix: &quot;parsed&quot;
+
+
+
+output.elasticsearch:
+
+  hosts: [&quot;elasticsearch:9200&quot;]
+
+  index: &quot;filebeat-%{[agent.version]}-%{+yyyy.MM.dd}&quot;
+
+  pipeline: &quot;parse-logs&quot;
+
+
+
+# Elasticsearch index lifecycle policy
+
+PUT _ilm/policy/logs-30day
+
+{
+
+  &quot;policy&quot;: {
+
+    &quot;phases&quot;: {
+
+      &quot;hot&quot;: {
+
+        &quot;min_age&quot;: &quot;0ms&quot;,
+
+        &quot;actions&quot;: {
+
+          &quot;rollover&quot;: { &quot;max_size&quot;: &quot;50GB&quot;, &quot;max_age&quot;: &quot;1d&quot; },
+
+          &quot;set_priority&quot;: { &quot;priority&quot;: 100 }
+
+        }
+
+      },
+
+      &quot;warm&quot;: {
+
+        &quot;min_age&quot;: &quot;3d&quot;,
+
+        &quot;actions&quot;: {
+
+          &quot;shrink&quot;: { &quot;number_of_shards&quot;: 1 },
+
+          &quot;forcemerge&quot;: { &quot;max_num_segments&quot;: 1 }
+
+        }
+
+      },
+
+      &quot;delete&quot;: {
+
+        &quot;min_age&quot;: &quot;30d&quot;,
+
+        &quot;actions&quot;: { &quot;delete&quot;: {} }
+
+      }
+
+    }
+
+  }
+
+}
+
+</code></pre>
+<br>
+<h3>Grafana Loki</h3>
+<br>
+<p>Loki indexes only metadata labels, leaving log content unindexed for dramatically lower storage costs:</p>
+<br>
+<pre><code>
+# Loki configuration
+
+auth_enabled: false
+
+
+
+server:
+
+  http_listen_port: 3100
+
+
+
+common:
+
+  replication_factor: 1
+
+  ring:
+
+    kvstore:
+
+      store: inmemory
+
+
+
+schema_config:
+
+  configs:
+
+    - from: 2024-01-01
+
+      store: tsdb
+
+      object_store: s3
+
+      schema: v13
+
+      index:
+
+        prefix: index_
+
+        period: 24h
+
+
+
+storage_config:
+
+  tsdb_shipper:
+
+    active_index_directory: /loki/tsdb-shipper-active
+
+    cache_location: /loki/tsdb-shipper-cache
+
+    shared_store: s3
+
+  aws:
+
+    s3: s3://us-east-1/logs-bucket
+
+    s3forcepathstyle: false
+
+
+
+limits_config:
+
+  retention_period: 30d
+
+  max_query_series: 10000
+
+  ingestion_rate_mb: 10
+
+  ingestion_burst_size_mb: 20
+
+
+
+compactor:
+
+  working_directory: /loki/compactor
+
+  shared_store: s3
+
+  retention_enabled: true
+
+</code></pre>
+<br>
+<h3>Splunk</h3>
+<br>
+<p>Splunk uses a proprietary indexer architecture with heavy indexing at ingest:</p>
+<br>
+<pre><code>
+# inputs.conf - Splunk forwarder configuration
+
+[monitor:///var/log/app/*.log]
+
+disabled = false
+
+index = production
+
+sourcetype = applog
+
+crcSalt = &lt;SOURCE&gt;
+
+
+
+# props.conf - Field extraction
+
+[applog]
+
+SHOULD_LINEMERGE = true
+
+LINE_BREAKER = ([\r\n]+)
+
+TRUNCATE = 20000
+
+KV_MODE = json
+
+REPORT-appfields = app-timestamp-extract, app-level-extract
+
+
+
+# transforms.conf
+
+[app-timestamp-extract]
+
+REGEX = (\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})
+
+FORMAT = date::$1
+
+
+
+[app-level-extract]
+
+REGEX = &quot;level&quot;:&quot;(\w+)&quot;
+
+FORMAT = level::$1
+
+</code></pre>
+<br>
+<h2> Structured Logging</h2>
+<br>
+<p>No matter which platform you choose, structured logging at the application level is essential:</p>
+<br>
+<pre><code>
+package main
+
+
+
+import (
+
+    &quot;go.uber.org/zap&quot;
+
+)
+
+
+
+func main() {
+
+    logger, _ := zap.NewProduction(
+
+        zap.WithCaller(true),
+
+        zap.AddStacktrace(zap.ErrorLevel),
+
+    )
+
+    defer logger.Sync()
+
+
+
+    orderID := &quot;ord-12345&quot;
+
+    amount := 99.50
+
+
+
+    // Structured log with context
+
+    logger.Info(&quot;processing payment&quot;,
+
+        zap.String(&quot;order_id&quot;, orderID),
+
+        zap.Float64(&quot;amount&quot;, amount),
+
+        zap.String(&quot;currency&quot;, &quot;USD&quot;),
+
+        zap.String(&quot;payment_method&quot;, &quot;credit_card&quot;),
+
+        zap.Duration(&quot;processing_time&quot;, 250*time.Millisecond),
+
+    )
+
+}
+
+</code></pre>
+<br>
+<p>The same structured log renders differently across platforms:</p>
+<br>
+<pre><code>
+{
+
+  &quot;level&quot;: &quot;info&quot;,
+
+  &quot;ts&quot;: &quot;2026-05-12T10:30:00Z&quot;,
+
+  &quot;caller&quot;: &quot;payment.go:42&quot;,
+
+  &quot;msg&quot;: &quot;processing payment&quot;,
+
+  &quot;order_id&quot;: &quot;ord-12345&quot;,
+
+  &quot;amount&quot;: 99.50,
+
+  &quot;currency&quot;: &quot;USD&quot;,
+
+  &quot;payment_method&quot;: &quot;credit_card&quot;,
+
+  &quot;processing_time&quot;: &quot;250ms&quot;
+
+}
+
+</code></pre>
+<br>
+<h2> Query Capabilities</h2>
+<br>
+<h3>ELK (Kibana Query Language)</h3>
+<br>
+<pre><code>
+service:payment AND level:ERROR
+
+AND NOT message:&quot;timeout retry&quot;
+
+AND @timestamp &gt;= &quot;now-1h&quot;
+
+</code></pre>
+<br>
+<h3>Loki (LogQL)</h3>
+<br>
+<pre><code>
+{service=&quot;payment&quot;, level=&quot;error&quot;}
+
+|= &quot;charge_failed&quot;
+
+| json
+
+| duration &gt; 5s
+
+| unwrap latency_ms [5m]
+
+| rate per second
+
+</code></pre>
+<br>
+<h3>Splunk (SPL)</h3>
+<br>
+<pre><code>
+index=production sourcetype=applog
+
+service=payment level=ERROR
+
+| rex field=message &quot;order_id=(?&lt;order_id&gt;\S+)&quot;
+
+| stats count by order_id
+
+| sort - count
+
+| head 10
+
+</code></pre>
+<br>
+<h2> Indexing Strategies</h2>
+<br>
+<p>| Strategy | ELK | Loki | Splunk |</p>
+<p>|---|---|---|---|</p>
+<p>| Index approach | Inverted index on all fields | Label-only index | Proprietary inverted index |</p>
+<p>| Storage ratio | 1:1.5 (raw to indexed) | 1:0.3 (minimal overhead) | 1:2+ (heavily optimized) |</p>
+<p>| Cardinality limits | 20k fields/document | Label value cardinality | 10k source types |</p>
+<p>| Full-text search | Excellent | Limited (filter + grep) | Excellent |</p>
+<br>
+<h2> Retention Policies</h2>
+<br>
+<pre><code>
+# Loki: retention via compactor
+
+compactor:
+
+  retention_enabled: true
+
+  retention_rules:
+
+    - type: series
+
+      selector:
+
+        match: &#x27;{service=&quot;payment&quot;}&#x27;
+
+      priority: 10
+
+      period: 90d  # Payment logs retained longer
+
+    - selector:
+
+        match: &#x27;{env=&quot;staging&quot;}&#x27;
+
+      priority: 1
+
+      period: 7d   # Staging logs retained shorter
+
+</code></pre>
+<br>
+<h2> Cost Comparison</h2>
+<br>
+<p>| Factor | ELK (self-hosted) | ELK (Elastic Cloud) | Loki + S3 | Splunk |</p>
+<p>|---|---|---|---|---|</p>
+<p>| Storage cost | $0.10/GB/month (SSD) | $0.30/GB/month | $0.023/GB/month (S3) | $2/GB/month (ingested) |</p>
+<p>| Compute | 3-5 nodes minimum | $500+/month base | 2 nodes minimum | $2,000+/GB/day |</p>
+<p>| Free tier | No | 500MB/month | Community (unlimited) | 500MB/day |</p>
+<br>
+<p>Loki offers the lowest storage cost by far due to its S3-based object storage and label-only indexing. ELK provides the best query flexibility at moderate cost. Splunk delivers enterprise-grade reliability but at a premium that only makes sense for compliance-heavy industries.</p>
+<br>
+<h2> Decision Matrix</h2>
+<br>
+<li>**ELK Stack**: Best for teams needing full-text search across all fields, complex aggregations, and existing Elasticsearch expertise.</li>
+<li>**Grafana Loki**: Best for cost-conscious teams already using Grafana, who can tolerate grep-style log searching.</li>
+<li>**Splunk**: Best for enterprises requiring compliance auditing, RBAC, and have budget for premium support.</li>
+<br>
+<p>For most engineering teams, Loki paired with Grafana offers the best balance of cost and capability. Move to ELK when you need indexed structured search on arbitrary fields. Reserve Splunk for regulated environments where audit trails and access controls justify the expense.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div>
+      <noscript><div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

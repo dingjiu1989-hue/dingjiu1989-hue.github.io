@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="data-consistency-models">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Data Consistency Models Explained">
+    <meta property="og:description" content="Learn about strong, eventual, causal, read-your-writes, and monotonic read consistency models plus CAP theorem trade-offs in practice.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/data-consistency-models.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Data Consistency Models Explained">
+    <meta name="twitter:description" content="Learn about strong, eventual, causal, read-your-writes, and monotonic read consistency models plus CAP theorem trade-offs in practice.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Data Consistency Models Explained — SourceHub</title>
+    <meta name="description" content="Learn about strong, eventual, causal, read-your-writes, and monotonic read consistency models plus CAP theorem trade-offs in practice.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/data-consistency-models.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/data-consistency-models.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Data Consistency Models Explained",
+      "description": "Learn about strong, eventual, causal, read-your-writes, and monotonic read consistency models plus CAP theorem trade-offs in practice.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "2213",
+      "keywords": "Database, SQL",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/data-consistency-models.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Data Consistency Models Explained"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Data Consistency Models Explained
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">SQL</span></div>
+      <h1 class="article-title">Data Consistency Models Explained</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Data consistency models define the guarantees a distributed data system makes about when and in what order updates become visible to readers. Choosing the right consistency model is one of the most important decisions in distributed system design. This article explains the major consistency models and their practical implications.</p>
+<br>
+<h2> Strong Consistency (Linearizability)</h2>
+<br>
+<p>Strong consistency guarantees that once a write completes, all subsequent reads (from any node) return that write's value. The system behaves as if there is a single copy of the data.</p>
+<br>
+<h3>How It Works</h3>
+<br>
+<p>Strong consistency requires coordination between replicas before acknowledging a write. All replicas must agree on the order of operations.</p>
+<br>
+<pre><code>
+# Strong consistency write path
+
+def write(key, value):
+
+    # 1. Acquire a distributed lock or lease
+
+    lock = acquire_distributed_lock(key)
+
+    
+
+    # 2. Write to all replicas
+
+    replicas = write_to_all_replicas(key, value)
+
+    
+
+    # 3. Wait for acknowledgment from majority
+
+    if len(replicas) &gt;= len(all_replicas) // 2 + 1:
+
+        release_lock(lock)
+
+        return SUCCESS
+
+    else:
+
+        # Failed to reach quorum
+
+        release_lock(lock)
+
+        return ERROR
+
+
+
+def read(key):
+
+    # 1. Read from any replica (all return same value)
+
+    return read_from_any_replica(key)
+
+</code></pre>
+<br>
+<h3>When to Use Strong Consistency</h3>
+<br>
+<li>Financial transactions (account balances, payments).</li>
+<li>Inventory management (preventing overselling).</li>
+<li>Distributed locking and leader election.</li>
+<li>Any system where stale reads cause real harm.</li>
+<br>
+<h3>Trade-offs</h3>
+<br>
+<p>Strong consistency requires coordination, which adds latency. Writes can only be acknowledged after reaching consensus (typically a majority quorum). During network partitions, the system must choose between availability and consistency — the C and A in CAP theorem.</p>
+<br>
+<h2> Eventual Consistency</h2>
+<br>
+<p>Eventual consistency guarantees that if no new writes are made to an object, eventually all reads will return the last updated value. There is no bound on how long "eventually" takes.</p>
+<br>
+<h3>How It Works</h3>
+<br>
+<p>Replicas accept writes independently and propagate changes asynchronously. Reads may return stale data.</p>
+<br>
+<pre><code>
+# Eventual consistency
+
+def write(key, value):
+
+    # Accept the write immediately
+
+    local_store[key] = value
+
+    # Propagate to other replicas asynchronously
+
+    background_replicate(key, value)
+
+    return SUCCESS
+
+
+
+def read(key):
+
+    # May return stale data
+
+    return local_store.get(key)
+
+</code></pre>
+<br>
+<h3>When to Use Eventual Consistency</h3>
+<br>
+<li>Social media feeds (slightly stale posts are acceptable).</li>
+<li>DNS records (propagation can take minutes).</li>
+<li>Product catalogs (price updates can propagate slowly).</li>
+<li>Analytics and logging (exact order does not matter).</li>
+<br>
+<h3>Convergence Mechanisms</h3>
+<br>
+<p>Eventually consistent systems use conflict resolution to converge on a consistent state:</p>
+<br>
+<li>**Last-writer-wins (LWW)**: Use timestamps to pick the latest write.</li>
+<li>**Conflict-free replicated data types (CRDTs)**: Data structures that merge automatically without conflicts.</li>
+<li>**Vector clocks**: Track causality to resolve conflicting updates deterministically.</li>
+<br>
+<pre><code>
+# Last-writer-wins conflict resolution
+
+def resolve(key, value_1, timestamp_1, value_2, timestamp_2):
+
+    if timestamp_1 &gt; timestamp_2:
+
+        return value_1
+
+    return value_2
+
+</code></pre>
+<br>
+<h3>Trade-offs</h3>
+<br>
+<p>Eventual consistency provides high availability and low latency. Writes succeed even if some replicas are unavailable. However, applications must tolerate stale reads and handle conflicts.</p>
+<br>
+<h2> Causal Consistency</h2>
+<br>
+<p>Causal consistency preserves the cause-and-effect relationships between operations. If operation A influences operation B (A causes B), then all observers see A before B. Operations that are causally unrelated can be seen in any order.</p>
+<br>
+<h3>How It Works</h3>
+<br>
+<p>The system tracks causal dependencies using vector clocks or similar mechanisms.</p>
+<br>
+<pre><code>
+# Causal consistency with vector clocks
+
+class VectorClock:
+
+    def __init__(self):
+
+        self.clock = defaultdict(int)
+
+    
+
+    def increment(self, node_id):
+
+        self.clock[node_id] += 1
+
+    
+
+    def merge(self, other):
+
+        for node, ts in other.clock.items():
+
+            self.clock[node] = max(self.clock[node], ts)
+
+
+
+def write_with_causality(key, value, vector_clock):
+
+    # Track causal dependencies
+
+    local_clock = vector_clock.copy()
+
+    local_clock.increment(my_node_id)
+
+    # Store with vector clock
+
+    store(key, value, local_clock)
+
+    return local_clock
+
+</code></pre>
+<br>
+<h3>When to Use Causal Consistency</h3>
+<br>
+<p>Causal consistency is useful when users interact with a system and expect their own actions to be reflected in order. For example, a user posts a comment (causally related to reading the post). Another user should see the post first, then the comment.</p>
+<br>
+<p>Amazon DynamoDB supports causal consistency through its "consistent reads" option. Apache Cassandra offers causal consistency through lightweight transactions.</p>
+<br>
+<h2> Read-Your-Writes Consistency</h2>
+<br>
+<p>Read-your-writes guarantees that after a client writes a value, subsequent reads by the same client return that value. Other clients may still see the old value.</p>
+<br>
+<h3>How It Works</h3>
+<br>
+<p>The system tracks the client's most recent writes. Read requests include a hint about the client's write timestamp.</p>
+<br>
+<pre><code>
+# Read-your-writes implementation
+
+import threading
+
+
+
+class SessionStore:
+
+    def __init__(self):
+
+        self.data = {}
+
+        self.session_writes = threading.local()
+
+    
+
+    def write(self, key, value, user_session):
+
+        self.data[key] = value
+
+        user_session.last_write_ts[key] = time.time()
+
+    
+
+    def read(self, key, user_session):
+
+        value = self.data.get(key)
+
+        # Always route reads to a replica that has seen the latest write
+
+        if key in user_session.last_write_ts:
+
+            # Ensure we read from a replica with data &gt;= write timestamp
+
+            return read_from_replica_with_timestamp(
+
+                key, user_session.last_write_ts[key]
+
+            )
+
+        return value
+
+</code></pre>
+<br>
+<h3>When to Use Read-Your-Writes</h3>
+<br>
+<li>User profile updates (user edits profile and immediately sees the change).</li>
+<li>Shopping cart additions (user adds an item and sees it in the cart).</li>
+<li>Session management (user logs in and is immediately recognized).</li>
+<br>
+<h2> Monotonic Reads</h2>
+<br>
+<p>Monotonic reads guarantee that once a client reads a value at time T, subsequent reads by the same client never return an older value.</p>
+<br>
+<h3>Why It Matters</h3>
+<br>
+<p>Without monotonic reads, a user might refresh a page and see data from an earlier state. For example, a user sees a confirmed order, refreshes, and sees the order as pending. This is confusing and erodes trust.</p>
+<br>
+<h3>Implementation</h3>
+<br>
+<p>Monotonic reads require the system to remember the timestamp of the most recent read by each client. Subsequent reads must go to a replica that has at least that timestamp.</p>
+<br>
+<h2> CAP Theorem in Practice</h2>
+<br>
+<p>The CAP theorem states that a distributed system can provide at most two of three properties: Consistency, Availability, and Partition Tolerance.</p>
+<br>
+<h3>CAP in the Real World</h3>
+<br>
+<p>Networks partition. Therefore, every distributed system must choose between consistency and availability when a partition occurs.</p>
+<br>
+<pre><code>
+         Consistency
+
+             |
+
+        CP  |  CA
+
+             |
+
+   AP ------+------ Availability
+
+           
+
+Partition Tolerance (always required)
+
+</code></pre>
+<br>
+<h3>CAP Configurations</h3>
+<br>
+<p>**CP (Consistency + Partition Tolerance)**:</p>
+<li>Sacrifices availability during partitions.</li>
+<li>Systems: etcd, Zookeeper, HBase, MongoDB (default configuration).</li>
+<li>Use when consistency is non-negotiable: distributed locks, configuration management.</li>
+<br>
+<p>**AP (Availability + Partition Tolerance)**:</p>
+<li>Sacrifices consistency during partitions. Returns eventually consistent data.</li>
+<li>Systems: Cassandra, DynamoDB (default), CouchDB.</li>
+<li>Use when availability is paramount: user-facing applications, content delivery.</li>
+<br>
+<h3>PACELC Extension</h3>
+<br>
+<p>PACELC extends CAP: during a Partition, choose Availability or Consistency. Else (E), choose Latency or Consistency.</p>
+<br>
+<p>This captures the trade-off even when there is no partition. Many systems trade consistency for lower latency under normal operation, then trade differently during partitions.</p>
+<br>
+<h2> Choosing the Right Model</h2>
+<br>
+<p>| Model | Guarantee | Latency | Use Case |</p>
+<p>|-------|-----------|---------|----------|</p>
+<p>| Strong | All reads see all writes | High | Banking, inventory |</p>
+<p>| Eventual | Converges over time | Low | Feeds, analytics |</p>
+<p>| Causal | Causally related ops in order | Medium | Social apps, collaboration |</p>
+<p>| Read-your-writes | Own writes visible | Low | User profiles |</p>
+<p>| Monotonic reads | Never go back in time | Low | Any user-facing app |</p>
+<br>
+<h3>Practical Guidelines</h3>
+<br>
+<li>**Use strong consistency only where necessary**. Most applications do not need linearizability for every operation. Strong consistency multiplies latency and reduces availability.</li>
+<br>
+<p>2. **Default to strong for critical paths, eventual for everything else**. Financial systems use strong consistency for transactions but may use eventual for historical reporting.</p>
+<br>
+<p>3. **Session-level guarantees cover most cases**. Read-your-writes and monotonic reads prevent the most confusing user-facing inconsistencies without the performance cost of global strong consistency.</p>
+<br>
+<p>4. **Understand your database's defaults**. Cassandra defaults to eventual. DynamoDB defaults to eventual with consistent-reads opt-in. Spanner provides strong consistency globally.</p>
+<br>
+<p>5. **Test with real partition scenarios**. Simulate network partitions in staging environments. Most consistency bugs surface first when replicas cannot communicate.</p>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>Consistency models define the contract between the database and the application. Strong consistency provides familiar semantics at a performance cost. Eventual consistency enables scalability but requires careful application design. Causal and session-level consistency models offer intermediate guarantees that cover many real-world use cases. Understand the CAP theorem and its PACELC extension. Most importantly, choose the weakest consistency model your application can tolerate, and only use strong consistency where correctness demands it.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a><a href="/en/database/database-monitoring.html" class="related-card">Database Monitoring and Performance Alerting</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a><a href="/en/database/database-monitoring.html" class="related-card">Database Monitoring and Performance Alerting</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

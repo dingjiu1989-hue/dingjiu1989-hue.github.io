@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="backend-for-frontend">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Backend for Frontend (BFF) Pattern">
+    <meta property="og:description" content="Learn the Backend for Frontend pattern for building client-specific APIs.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/backend-for-frontend.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Backend for Frontend (BFF) Pattern">
+    <meta name="twitter:description" content="Learn the Backend for Frontend pattern for building client-specific APIs.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Backend for Frontend (BFF) Pattern — SourceHub</title>
+    <meta name="description" content="Learn the Backend for Frontend pattern for building client-specific APIs.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/backend-for-frontend.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/backend-for-frontend.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Backend for Frontend (BFF) Pattern",
+      "description": "Learn the Backend for Frontend pattern for building client-specific APIs.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1333",
+      "keywords": "Architecture, System Design",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/backend-for-frontend.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Backend for Frontend (BFF) Pattern"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Backend for Frontend (BFF) Pattern
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span></div>
+      <h1 class="article-title">Backend for Frontend (BFF) Pattern</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>The Backend for Frontend (BFF) pattern, introduced by Phil Calçado at SoundCloud, is an architectural approach where each client application (web, mobile, desktop) has its own dedicated backend. This pattern addresses the fundamental challenge of serving multiple client types from a single general-purpose API.</p>
+<br>
+<h2> The Problem</h2>
+<br>
+<p>A single general-purpose API tries to serve all clients equally. This leads to several problems:</p>
+<br>
+<li>**Over-fetching**: A web client needs user profile data plus recent orders, but the API returns only profile data. The web client must make additional requests.</li>
+<li>**Under-fetching**: A mobile client needs only a summary, but the API returns the full detailed object, wasting bandwidth and battery.</li>
+<li>**Different interaction patterns**: Web clients expect rich, chatty APIs. Mobile clients prefer fewer, larger responses to minimize network round trips.</li>
+<li>**Different data formats**: Desktop browsers can handle complex JSON. IoT devices may need compressed binary formats.</li>
+<br>
+<p>Developers end up building workarounds: adding query parameters for field selection, creating composite endpoints, or making multiple round trips. The BFF pattern solves this by providing a dedicated backend for each client.</p>
+<br>
+<h2> How BFF Works</h2>
+<br>
+<p>Each client type has its own backend service:</p>
+<br>
+<pre><code>
+[Mobile App] &lt;-&gt; [Mobile BFF] &lt;-&gt; [Shared Services]
+
+                                            |
+
+[Web App]    &lt;-&gt; [Web BFF]    &lt;-&gt; [Shared Services]
+
+                                            |
+
+[IoT Device] &lt;-&gt; [IoT BFF]   &lt;-&gt; [Shared Services]
+
+</code></pre>
+<br>
+<p>Each BFF:</p>
+<li>Is owned by the same team that owns the client application.</li>
+<li>Understands the specific needs of its client.</li>
+<li>Aggregates data from multiple downstream services.</li>
+<li>Transforms data into the format most convenient for the client.</li>
+<li>Handles client-specific concerns like authentication, session management, and caching.</li>
+<br>
+<h2> Benefits</h2>
+<br>
+<p>**Optimized client experience.** Each BFF returns exactly the data the client needs, in the format it prefers. Mobile APIs minimize data transfer. Web APIs support rich interactions. No more over-fetching or under-fetching.</p>
+<br>
+<p>**Simplified client code.** Complex logic moves from the client to the BFF. Data aggregation, transformation, and filtering happen on the server. The client becomes simpler and more focused on presentation.</p>
+<br>
+<p>**Independent evolution.** The web BFF can evolve independently from the mobile BFF. The web team can add endpoints for new browser features without affecting mobile users.</p>
+<br>
+<p>**Security isolation.** Each BFF can implement client-specific security policies. Mobile authentication might use device tokens. Web authentication might use cookie-based sessions.</p>
+<br>
+<p>**Team autonomy.** The web team owns the web BFF. The mobile team owns the mobile BFF. Teams can deploy independently without coordinating API changes.</p>
+<br>
+<h2> Real-World Example</h2>
+<br>
+<p>Consider an e-commerce platform. A general-purpose API might return:</p>
+<br>
+<pre><code>
+{
+
+  &quot;product&quot;: {
+
+    &quot;id&quot;: &quot;123&quot;,
+
+    &quot;name&quot;: &quot;Wireless Mouse&quot;,
+
+    &quot;description&quot;: &quot;...&quot;,
+
+    &quot;specifications&quot;: { ... },
+
+    &quot;reviews&quot;: [ ... ],
+
+    &quot;related_products&quot;: [ ... ],
+
+    &quot;inventory&quot;: { ... },
+
+    &quot;shipping_options&quot;: [ ... ],
+
+    &quot;price_history&quot;: [ ... ]
+
+  }
+
+}
+
+</code></pre>
+<br>
+<p>The **Mobile BFF** tailors this for a phone:</p>
+<br>
+<pre><code>
+{
+
+  &quot;id&quot;: &quot;123&quot;,
+
+  &quot;name&quot;: &quot;Wireless Mouse&quot;,
+
+  &quot;price&quot;: &quot;$29.99&quot;,
+
+  &quot;image_url&quot;: &quot;thumb.jpg&quot;,
+
+  &quot;in_stock&quot;: true
+
+}
+
+</code></pre>
+<br>
+<p>The **Web BFF** provides richer data for a desktop browser:</p>
+<br>
+<pre><code>
+{
+
+  &quot;product&quot;: {
+
+    &quot;id&quot;: &quot;123&quot;,
+
+    &quot;name&quot;: &quot;Wireless Mouse&quot;,
+
+    &quot;price&quot;: &quot;$29.99&quot;,
+
+    &quot;description&quot;: &quot;...&quot;,
+
+    &quot;images&quot;: [&quot;img1.jpg&quot;, &quot;img2.jpg&quot;],
+
+    &quot;reviews&quot;: {
+
+      &quot;summary&quot;: { &quot;average&quot;: 4.5, &quot;count&quot;: 128 },
+
+      &quot;top_reviews&quot;: [ ... ]
+
+    }
+
+  }
+
+}
+
+</code></pre>
+<br>
+<p>Each BFF is between 30-40 lines of server-side code, orchestrating calls to downstream services and shaping the response for its specific client.</p>
+<br>
+<h2> BFF vs. API Gateway</h2>
+<br>
+<p>BFF and API Gateway are complementary patterns, not alternatives:</p>
+<br>
+<li>**API Gateway** is a single entry point for all services, handling cross-cutting concerns like authentication, rate limiting, and routing.</li>
+<li>**BFF** is a specialized backend per client type, handling client-specific logic and data shaping.</li>
+<br>
+<p>In practice, a BFF often sits behind an API Gateway. The gateway handles shared infrastructure, and the BFF handles client-specific logic.</p>
+<br>
+<h2> When to Use BFF</h2>
+<br>
+<p>Use BFF when:</p>
+<li>You have multiple client applications with significantly different needs.</li>
+<li>You want to minimize data transfer to mobile or low-bandwidth clients.</li>
+<li>Different teams own different client applications.</li>
+<li>Each client needs different authentication or session management.</li>
+<br>
+<p>Do not overuse BFF when:</p>
+<li>You have a single client application (e.g., web only). A general-purpose API is sufficient.</li>
+<li>Your API is already well-optimized for all clients through field selection and filtering.</li>
+<li>The overhead of running multiple backends outweighs the benefits.</li>
+<br>
+<h2> Potential Drawbacks</h2>
+<br>
+<p>**Increased operational complexity.** More services to deploy, monitor, and maintain. Each BFF adds infrastructure overhead.</p>
+<br>
+<p>**Code duplication.** Common logic may be duplicated across BFFs. Be disciplined about extracting shared services.</p>
+<br>
+<p>**Larger team responsibility.** The team must maintain both the client application and its BFF.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>The BFF pattern provides dedicated backends for each client application, optimizing data delivery and simplifying client code. Use BFFs when you have multiple distinct clients with different needs. Combine with an API Gateway for cross-cutting concerns. Avoid premature adoption -- for single-client applications, a well-designed general-purpose API is sufficient.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

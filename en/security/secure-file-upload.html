@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="secure-file-upload">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Secure File Upload Implementation">
+    <meta property="og:description" content="Best practices for implementing secure file upload functionality including validation, storage, scanning, and access control.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/secure-file-upload.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Secure File Upload Implementation">
+    <meta name="twitter:description" content="Best practices for implementing secure file upload functionality including validation, storage, scanning, and access control.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Secure File Upload Implementation — SourceHub</title>
+    <meta name="description" content="Best practices for implementing secure file upload functionality including validation, storage, scanning, and access control.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/secure-file-upload.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/secure-file-upload.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Secure File Upload Implementation",
+      "description": "Best practices for implementing secure file upload functionality including validation, storage, scanning, and access control.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1343",
+      "keywords": "Security, Cybersecurity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/secure-file-upload.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Secure File Upload Implementation"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Secure File Upload Implementation
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">Cybersecurity</span></div>
+      <h1 class="article-title">Secure File Upload Implementation</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> The Risk of File Uploads</h2>
+<br>
+<p>File upload functionality is one of the most dangerous features an application can expose. An unrestricted file upload can lead to remote code execution, malware distribution, data breaches, and server compromise. Every file upload endpoint must be treated as a critical attack surface.</p>
+<br>
+<h2> Threat Model</h2>
+<br>
+<p>| Attack | Description |</p>
+<p>|--------|-------------|</p>
+<p>| Malicious file upload | Attacker uploads a PHP shell or executable |</p>
+<p>| File size DoS | Huge files exhaust disk space or memory |</p>
+<p>| Path traversal | Filename manipulates directory traversal |</p>
+<p>| MIME type spoofing | File extension does not match content |</p>
+<p>| Malware distribution | Legitimate-looking files containing malware |</p>
+<p>| Zip bombs | Compressed archive that expands to enormous size |</p>
+<p>| SSRF via file processing | Server-side parsing of attacker-controlled files |</p>
+<br>
+<h2> Validation Strategy</h2>
+<br>
+<h3>1. Validate File Extension</h3>
+<br>
+<p>Allowlist-based validation is essential. Blocklisting (e.g., rejecting `.exe` files) will always miss edge cases.</p>
+<br>
+<pre><code>
+ALLOWED_EXTENSIONS = {
+
+    # Images
+
+    &#x27;.jpg&#x27;, &#x27;.jpeg&#x27;, &#x27;.png&#x27;, &#x27;.gif&#x27;, &#x27;.webp&#x27;, &#x27;.svg&#x27;,
+
+    # Documents
+
+    &#x27;.pdf&#x27;, &#x27;.doc&#x27;, &#x27;.docx&#x27;, &#x27;.xls&#x27;, &#x27;.xlsx&#x27;,
+
+    # Other
+
+    &#x27;.txt&#x27;, &#x27;.csv&#x27;
+
+}
+
+
+
+def validate_extension(filename):
+
+    ext = os.path.splitext(filename)[1].lower()
+
+    if ext not in ALLOWED_EXTENSIONS:
+
+        raise ValueError(f&quot;Extension {ext} not allowed&quot;)
+
+</code></pre>
+<br>
+<h3>2. Validate MIME Type</h3>
+<br>
+<p>Never trust the `Content-Type` header from the client. Inspect the actual file content:</p>
+<br>
+<pre><code>
+import magic
+
+
+
+def validate_mime(file_stream):
+
+    mime = magic.from_buffer(file_stream.read(2048), mime=True)
+
+    file_stream.seek(0)
+
+    ALLOWED_MIMES = {
+
+        &#x27;image/jpeg&#x27;, &#x27;image/png&#x27;, &#x27;image/gif&#x27;,
+
+        &#x27;image/webp&#x27;, &#x27;application/pdf&#x27;,
+
+        &#x27;text/plain&#x27;, &#x27;text/csv&#x27;
+
+    }
+
+    if mime not in ALLOWED_MIMES:
+
+        raise ValueError(f&quot;MIME type {mime} not allowed&quot;)
+
+</code></pre>
+<br>
+<h3>3. Validate File Size</h3>
+<br>
+<p>Enforce strict limits at multiple layers:</p>
+<br>
+<pre><code>
+// Express middleware
+
+const multer = require(&#x27;multer&#x27;);
+
+const upload = multer({
+
+    limits: {
+
+        fileSize: 10 * 1024 * 1024, // 10 MB
+
+        files: 1
+
+    },
+
+    fileFilter: (req, file, cb) =&gt; {
+
+        const allowed = [&#x27;image/jpeg&#x27;, &#x27;image/png&#x27;, &#x27;application/pdf&#x27;];
+
+        if (!allowed.includes(file.mimetype)) {
+
+            return cb(new Error(&#x27;Invalid file type&#x27;), false);
+
+        }
+
+        cb(null, true);
+
+    }
+
+});
+
+</code></pre>
+<br>
+<h3>4. Validate File Content</h3>
+<br>
+<p>For images, attempt to re-process them. This strips embedded metadata and breaks hidden payloads:</p>
+<br>
+<pre><code>
+from PIL import Image
+
+import io
+
+
+
+def sanitize_image(file_bytes):
+
+    &quot;&quot;&quot;Re-encode image to strip metadata and break embedded payloads.&quot;&quot;&quot;
+
+    img = Image.open(io.BytesIO(file_bytes))
+
+    # Convert to ensure clean output
+
+    img = img.convert(&#x27;RGB&#x27;)
+
+    output = io.BytesIO()
+
+    img.save(output, format=&#x27;PNG&#x27;)
+
+    return output.getvalue()
+
+</code></pre>
+<br>
+<h2> Secure Storage</h2>
+<br>
+<h3>Never Store in Webroot</h3>
+<br>
+<p>Storing uploaded files inside the web server's document root is dangerous. If the filename or path is guessable, files can be accessed directly.</p>
+<br>
+<pre><code>
+# UNSAFE: Stored in webroot
+
+upload_dir = &#x27;/var/www/html/uploads/&#x27;
+
+
+
+# SAFE: Outside webroot
+
+upload_dir = &#x27;/data/uploads/&#x27;  # Served through app logic
+
+</code></pre>
+<br>
+<h3>Generate Safe Filenames</h3>
+<br>
+<p>Never use user-provided filenames. Generate random filenames:</p>
+<br>
+<pre><code>
+import uuid
+
+import os
+
+
+
+def safe_filename(original_name):
+
+    ext = os.path.splitext(original_name)[1].lower()
+
+    return f&quot;{uuid.uuid4().hex}{ext}&quot;
+
+</code></pre>
+<br>
+<h3>Object Storage</h3>
+<br>
+<p>For production systems, use object storage with pre-signed URLs:</p>
+<br>
+<pre><code>
+import boto3
+
+
+
+s3 = boto3.client(&#x27;s3&#x27;)
+
+
+
+def upload_file(file_bytes, content_type):
+
+    key = f&quot;uploads/{uuid.uuid4().hex}.pdf&quot;
+
+    s3.put_object(
+
+        Bucket=&#x27;my-app-uploads&#x27;,
+
+        Key=key,
+
+        Body=file_bytes,
+
+        ContentType=content_type
+
+    )
+
+    return key
+
+
+
+def get_download_url(key, expires=3600):
+
+    return s3.generate_presigned_url(
+
+        &#x27;get_object&#x27;,
+
+        Params={&#x27;Bucket&#x27;: &#x27;my-app-uploads&#x27;, &#x27;Key&#x27;: key},
+
+        ExpiresIn=expires
+
+    )
+
+</code></pre>
+<br>
+<h2> Antivirus Scanning</h2>
+<br>
+<p>Integrate virus scanning into the upload pipeline:</p>
+<br>
+<pre><code>
+import subprocess
+
+
+
+def scan_file(file_path):
+
+    result = subprocess.run(
+
+        [&#x27;clamscan&#x27;, &#x27;--stdout&#x27;, file_path],
+
+        capture_output=True,
+
+        text=True
+
+    )
+
+    if &#x27;FOUND&#x27; in result.stdout:
+
+        os.remove(file_path)
+
+        raise SecurityError(&quot;Malware detected in uploaded file&quot;)
+
+</code></pre>
+<br>
+<h2> Storage Limits and Quotas</h2>
+<br>
+<p>| Level | Limit | Mitigation |</p>
+<p>|-------|-------|------------|</p>
+<p>| Per file | 10 MB | Reject on client and server |</p>
+<p>| Per user | 500 MB | Track in database, reject when exceeded |</p>
+<p>| Per day (total) | 5 GB | Aggregate monitoring, rate limit |</p>
+<p>| Disk usage | 80% capacity | Alert, stop accepting uploads |</p>
+<br>
+<h2> Server Configuration</h2>
+<br>
+<p>Prevent uploaded files from being executed by the web server:</p>
+<br>
+<pre><code>
+# Nginx configuration
+
+location /uploads/ {
+
+    # Only serve specific file types
+
+    location ~* \.(jpg|jpeg|png|gif|pdf)$ {
+
+        add_header Content-Disposition &#x27;attachment&#x27;;
+
+        expires 30d;
+
+    }
+
+    # Deny everything else
+
+    location ~* \. {
+
+        deny all;
+
+        return 404;
+
+    }
+
+}
+
+</code></pre>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Secure file upload requires defense in depth. Validate extensions and MIME types server-side, sanitize images by re-encoding them, generate random filenames, store files outside the webroot or in object storage, enforce strict size limits at multiple layers, and scan for malware. Never trust client-provided metadata, and process uploaded files with minimal privileges in isolated environments.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

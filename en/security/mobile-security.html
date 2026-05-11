@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="mobile-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Mobile Application Security Guide">
+    <meta property="og:description" content="Mobile app security covering OWASP Mobile Top 10, code obfuscation, certificate pinning, secure storage, and runtime protection.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/mobile-security.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mobile Application Security Guide">
+    <meta name="twitter:description" content="Mobile app security covering OWASP Mobile Top 10, code obfuscation, certificate pinning, secure storage, and runtime protection.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Mobile Application Security Guide — SourceHub</title>
+    <meta name="description" content="Mobile app security covering OWASP Mobile Top 10, code obfuscation, certificate pinning, secure storage, and runtime protection.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/mobile-security.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/mobile-security.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Mobile Application Security Guide",
+      "description": "Mobile app security covering OWASP Mobile Top 10, code obfuscation, certificate pinning, secure storage, and runtime protection.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "2095",
+      "keywords": "Security, Cybersecurity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/mobile-security.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Mobile Application Security Guide"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Mobile Application Security Guide
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">Cybersecurity</span></div>
+      <h1 class="article-title">Mobile Application Security Guide</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Mobile applications handle sensitive data and run in untrusted environments. Users download apps from various sources, connect to public Wi-Fi, and often jailbreak or root their devices. This guide covers the key security practices for mobile application development, based on the OWASP Mobile Top 10 and industry best practices.</p>
+<br>
+<h2> OWASP Mobile Top 10</h2>
+<br>
+<p>The OWASP Mobile Top 10 is the authoritative list of mobile security risks. Understanding these risks is the first step toward mitigating them.</p>
+<br>
+<li>**Improper Platform Usage**: Misuse of mobile platform features, such as intents, custom URL schemes, or fingerprint APIs.</li>
+<p>2. **Insecure Data Storage**: Storing sensitive data in shared preferences, SQLite databases without encryption, or external storage.</p>
+<p>3. **Insecure Communication**: Transmitting data over unencrypted channels or accepting invalid TLS certificates.</p>
+<p>4. **Insecure Authentication**: Weak authentication mechanisms, missing session management, or hardcoded credentials.</p>
+<p>5. **Insufficient Cryptography**: Using weak algorithms, hardcoded encryption keys, or improper random number generation.</p>
+<p>6. **Insecure Authorization**: Insecure direct object references and privilege escalation through client-side manipulation.</p>
+<p>7. **Client Code Quality**: Buffer overflows, memory leaks, and other code quality issues leading to security vulnerabilities.</p>
+<p>8. **Code Tampering**: Binary patching, resource modification, and method swizzling.</p>
+<p>9. **Reverse Engineering**: Decompilation and analysis of application code.</p>
+<p>10. **Extraneous Functionality**: Hidden backdoors, debug endpoints, or test code left in production builds.</p>
+<br>
+<h2> Code Obfuscation</h2>
+<br>
+<p>Mobile apps are distributed as binaries that run on user devices. Without protection, attackers can decompile the app and analyze its logic.</p>
+<br>
+<h3>Android Obfuscation with ProGuard / R8</h3>
+<br>
+<p>ProGuard and R8 shrink, optimize, and obfuscate Android bytecode. They rename classes, methods, and fields to meaningless names and remove unused code.</p>
+<br>
+<pre><code>
+// build.gradle (app level)
+
+android {
+
+    buildTypes {
+
+        release {
+
+            minifyEnabled true
+
+            shrinkResources true
+
+            proguardFiles getDefaultProguardFile(&#x27;proguard-android-optimize.txt&#x27;),
+
+                &#x27;proguard-rules.pro&#x27;
+
+        }
+
+    }
+
+}
+
+</code></pre>
+<br>
+<pre><code>
+# proguard-rules.pro
+
+# Keep model classes used by Gson serialization
+
+-keep class com.example.app.model.** { *; }
+
+
+
+# Keep logging in debug but strip in release
+
+-assumenosideeffects class android.util.Log {
+
+    public static boolean isLoggable(java.lang.String, int);
+
+    public static int v(...);
+
+    public static int d(...);
+
+}
+
+</code></pre>
+<br>
+<h3>iOS Obfuscation</h3>
+<br>
+<p>iOS apps are harder to reverse engineer than Android APKs due to the compiled ARM binary, but they are not immune. Use these techniques:</p>
+<br>
+<li>Strip debug symbols with the `strip` command during build.</li>
+<li>Enable compiler optimizations (`-O2` or `-Os`).</li>
+<li>Use LLVM obfuscator passes or commercial tools like iXGuard.</li>
+<li>Encrypt string literals at compile time.</li>
+<br>
+<pre><code>
+// String encryption helper
+
+struct ObfuscatedString {
+
+    private let encrypted: [UInt8]
+
+    private let key: UInt8
+
+    
+
+    func decrypt() -&gt; String {
+
+        return String(bytes: encrypted.map { $0 ^ key }, encoding: .utf8) ?? &quot;&quot;
+
+    }
+
+}
+
+
+
+// Usage
+
+let apiKey = ObfuscatedString(
+
+    encrypted: [0x34, 0x56, 0x78],  // XOR-encoded
+
+    key: 0xAB
+
+).decrypt()
+
+</code></pre>
+<br>
+<h2> Certificate Pinning</h2>
+<br>
+<p>Mobile apps must protect against man-in-the-middle (MITM) attacks, even when the device trusts a rogue CA due to malware or user action.</p>
+<br>
+<h3>What Certificate Pinning Does</h3>
+<br>
+<p>Certificate pinning hardcodes the expected server certificate or public key in the app. The app rejects any connection where the server presents a different certificate, even if it chains to a trusted root CA.</p>
+<br>
+<h3>Implementation</h3>
+<br>
+<p>**Android (OkHttp)**:</p>
+<br>
+<pre><code>
+// Certificate pinning with OkHttp
+
+val certificatePinner = CertificatePinner.Builder()
+
+    .add(&quot;api.example.com&quot;,
+
+         &quot;sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=&quot;)
+
+    .build()
+
+
+
+val client = OkHttpClient.Builder()
+
+    .certificatePinner(certificatePinner)
+
+    .build()
+
+</code></pre>
+<br>
+<p>**iOS (URLSession)**:</p>
+<br>
+<pre><code>
+// Certificate pinning in URLSession delegate
+
+func urlSession(_ session: URLSession,
+
+                didReceive challenge: URLAuthenticationChallenge,
+
+                completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -&gt; Void) {
+
+    guard challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust,
+
+          let serverTrust = challenge.protectionSpace.serverTrust else {
+
+        completionHandler(.performDefaultHandling, nil)
+
+        return
+
+    }
+
+
+
+    // Compare server certificate with pinned certificate
+
+    let pinnedCertData = pinnedCertificateData()
+
+    if let serverCert = SecTrustGetCertificateAtIndex(serverTrust, 0) {
+
+        let serverCertData = SecCertificateCopyData(serverCert) as Data
+
+        if serverCertData == pinnedCertData {
+
+            completionHandler(.useCredential, URLCredential(trust: serverTrust))
+
+        } else {
+
+            completionHandler(.cancelAuthenticationChallenge, nil)
+
+        }
+
+    }
+
+}
+
+</code></pre>
+<br>
+<h3>Pinning Update Strategy</h3>
+<br>
+<p>Certificate pinning breaks when you rotate certificates. Plan for updates:</p>
+<br>
+<li>Pin against the public key, not the full certificate. This allows CA re-issuance with the same key.</li>
+<li>Include a backup pin for a second CA in case the primary certificate expires.</li>
+<li>Push new pins through app updates well before certificate expiry.</li>
+<li>Consider using certificate transparency instead of pinning for some environments.</li>
+<br>
+<h2> Secure Storage</h2>
+<br>
+<p>Mobile OS platforms provide secure storage mechanisms that encrypt data at rest.</p>
+<br>
+<h3>Android Encrypted SharedPreferences</h3>
+<br>
+<pre><code>
+// Using EncryptedSharedPreferences
+
+val masterKey = MasterKey.Builder(context)
+
+    .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+
+    .build()
+
+
+
+val sharedPreferences = EncryptedSharedPreferences.create(
+
+    context,
+
+    &quot;secure_prefs&quot;,
+
+    masterKey,
+
+    EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+
+    EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+
+)
+
+
+
+sharedPreferences.edit()
+
+    .putString(&quot;auth_token&quot;, token)
+
+    .apply()
+
+</code></pre>
+<br>
+<h3>Android Keystore</h3>
+<br>
+<p>The Android Keystore stores cryptographic keys in a hardware-backed environment (TEE or StrongBox). Extracting the key requires physical device access and specialized tools.</p>
+<br>
+<pre><code>
+// Generate a key in Android Keystore
+
+val keyGenerator = KeyGenerator.getInstance(
+
+    KeyProperties.KEY_ALGORITHM_AES,
+
+    &quot;AndroidKeyStore&quot;
+
+)
+
+val spec = KeyGenParameterSpec.Builder(
+
+    &quot;app_key&quot;,
+
+    KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
+
+)
+
+    .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
+
+    .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
+
+    .setKeySize(256)
+
+    .build()
+
+
+
+keyGenerator.init(spec)
+
+val secretKey = keyGenerator.generateKey()
+
+</code></pre>
+<br>
+<h3>iOS Keychain</h3>
+<br>
+<p>iOS Keychain is the secure storage mechanism on Apple devices. It encrypts data using device-specific keys that never leave the Secure Enclave.</p>
+<br>
+<pre><code>
+// Store data in Keychain
+
+let query: [String: Any] = [
+
+    kSecClass as String: kSecClassGenericPassword,
+
+    kSecAttrAccount as String: &quot;auth_token&quot;,
+
+    kSecAttrService as String: &quot;com.example.app&quot;,
+
+    kSecValueData as String: tokenData,
+
+    kSecAttrAccessControl as String: SecAccessControlCreateWithFlags(
+
+        nil,
+
+        kSecAttrApplicationTag,
+
+        .biometryCurrentSet,
+
+        nil
+
+    )
+
+]
+
+SecItemAdd(query as CFDictionary, nil)
+
+</code></pre>
+<br>
+<h2> Runtime Protection</h2>
+<br>
+<p>Runtime protection defends against tampering while the app is running.</p>
+<br>
+<h3>Root/Jailbreak Detection</h3>
+<br>
+<pre><code>
+// Android root detection
+
+fun isDeviceRooted(): Boolean {
+
+    val rootPaths = listOf(
+
+        &quot;/system/app/Superuser.apk&quot;,
+
+        &quot;/sbin/su&quot;,
+
+        &quot;/system/bin/su&quot;,
+
+        &quot;/system/xbin/su&quot;,
+
+        &quot;/data/local/xbin/su&quot;,
+
+        &quot;/data/local/bin/su&quot;,
+
+        &quot;/system/sd/xbin/su&quot;,
+
+        &quot;/system/bin/failsafe/su&quot;,
+
+        &quot;/data/local/su&quot;
+
+    )
+
+    return rootPaths.any { File(it).exists() }
+
+}
+
+</code></pre>
+<br>
+<pre><code>
+// iOS jailbreak detection
+
+func isDeviceJailbroken() -&gt; Bool {
+
+    let jbPaths = [
+
+        &quot;/Applications/Cydia.app&quot;,
+
+        &quot;/Library/MobileSubstrate/MobileSubstrate.dylib&quot;,
+
+        &quot;/bin/bash&quot;,
+
+        &quot;/usr/sbin/sshd&quot;,
+
+        &quot;/etc/apt&quot;,
+
+        &quot;/private/var/lib/apt/&quot;
+
+    ]
+
+    return jbPaths.contains { FileManager.default.fileExists(atPath: $0) }
+
+}
+
+</code></pre>
+<br>
+<p>Never terminate the app immediately on detecting a compromised device. This gives attackers a signal to bypass your detection. Instead, degrade functionality silently or report the event to your backend.</p>
+<br>
+<h3>Debugger Detection</h3>
+<br>
+<pre><code>
+// iOS debugger detection
+
+func isDebuggerAttached() -&gt; Bool {
+
+    var name: [Int32] = [CTL_KERN, KERN_PROC, KERN_PROC_PID, getpid()]
+
+    var info = kinfo_proc()
+
+    var infoSize = MemoryLayout&lt;kinfo_proc&gt;.size
+
+
+
+    sysctl(&amp;name, 4, &amp;info, &amp;infoSize, nil, 0)
+
+    return (info.kp_proc.p_flag &amp; P_TRACED) != 0
+
+}
+
+</code></pre>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>Mobile security requires defense in depth. Obfuscate your code to slow down reverse engineering. Pin certificates to prevent MITM attacks. Use platform-provided secure storage for sensitive data. Add runtime protection against root/jailbreak and debugging. Most importantly, follow the OWASP Mobile Top 10 as your baseline and validate controls with regular penetration testing.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

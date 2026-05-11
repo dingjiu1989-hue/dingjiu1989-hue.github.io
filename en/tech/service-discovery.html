@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="service-discovery">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Service Discovery in Microservices">
+    <meta property="og:description" content="Explore client-side and server-side discovery patterns with Consul, etcd, and Kubernetes DNS, including health checking and blue-green deployment strategies.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/service-discovery.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Service Discovery in Microservices">
+    <meta name="twitter:description" content="Explore client-side and server-side discovery patterns with Consul, etcd, and Kubernetes DNS, including health checking and blue-green deployment strategies.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Service Discovery in Microservices — SourceHub</title>
+    <meta name="description" content="Explore client-side and server-side discovery patterns with Consul, etcd, and Kubernetes DNS, including health checking and blue-green deployment strategies.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/service-discovery.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/service-discovery.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Service Discovery in Microservices",
+      "description": "Explore client-side and server-side discovery patterns with Consul, etcd, and Kubernetes DNS, including health checking and blue-green deployment strategies.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1703",
+      "keywords": "Technology, Programming, DevOps",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/service-discovery.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Service Discovery in Microservices"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Service Discovery in Microservices
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">Programming</span>
+        <span class="tag-cat">DevOps</span></div>
+      <h1 class="article-title">Service Discovery in Microservices</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>Service discovery is the mechanism by which microservices locate each other on a network. In dynamic environments where containers come and go, IP addresses and ports cannot be hard-coded. A robust discovery layer is essential for resilient, scalable microservice communication. This article covers the core patterns, tools, and best practices for implementing service discovery in production.</p>
+<br>
+<h2> Client-Side vs Server-Side Discovery</h2>
+<br>
+<h3>Client-Side Discovery</h3>
+<br>
+<p>The client queries a service registry directly and handles load balancing. This pattern is lightweight but requires service-specific client logic:</p>
+<br>
+<pre><code>
+import requests
+
+from consul import Consul
+
+
+
+class ServiceClient:
+
+    def __init__(self):
+
+        self.consul = Consul(host=&quot;consul.service.consul&quot;)
+
+
+
+    def get_service_url(self, service_name: str) -&gt; str:
+
+        _, services = self.consul.catalog.service(service_name)
+
+        if not services:
+
+            raise Exception(f&quot;Service {service_name} not found&quot;)
+
+        # Pick a healthy instance
+
+        instance = services[0]
+
+        return f&quot;http://{instance[&#x27;ServiceAddress&#x27;]}:{instance[&#x27;ServicePort&#x27;]}&quot;
+
+
+
+    def call_user_service(self, user_id: str):
+
+        base_url = self.get_service_url(&quot;user-service&quot;)
+
+        resp = requests.get(f&quot;{base_url}/users/{user_id}&quot;)
+
+        return resp.json()
+
+</code></pre>
+<br>
+<h3>Server-Side Discovery</h3>
+<br>
+<p>A load balancer or gateway handles discovery transparently. Clients only know the gateway address:</p>
+<br>
+<pre><code>
+# Kubernetes: Service handles DNS-based discovery
+
+apiVersion: v1
+
+kind: Service
+
+metadata:
+
+  name: user-service
+
+spec:
+
+  selector:
+
+    app: user-service
+
+  ports:
+
+    - protocol: TCP
+
+      port: 80
+
+      targetPort: 8080
+
+---
+
+apiVersion: v1
+
+kind: EndpointSlice
+
+metadata:
+
+  labels:
+
+    kubernetes.io/service-name: user-service
+
+addressType: IPv4
+
+endpoints:
+
+  - addresses: [&quot;10.0.1.5&quot;]
+
+    conditions:
+
+      ready: true
+
+  - addresses: [&quot;10.0.1.6&quot;]
+
+    conditions:
+
+      ready: true
+
+ports:
+
+  - name: http
+
+    protocol: TCP
+
+    port: 8080
+
+</code></pre>
+<br>
+<h2> Consul</h2>
+<br>
+<p>HashiCorp Consul provides service registration, health checking, and a distributed key-value store:</p>
+<br>
+<pre><code>
+# service registration configuration
+
+service {
+
+  name = &quot;payment-service&quot;
+
+  id = &quot;payment-service-v1&quot;
+
+  port = 9090
+
+  tags = [&quot;v1&quot;, &quot;production&quot;, &quot;critical&quot;]
+
+
+
+  check {
+
+    id       = &quot;payment-health&quot;
+
+    name     = &quot;Payment Service Health&quot;
+
+    http     = &quot;http://localhost:9090/health&quot;
+
+    method   = &quot;GET&quot;
+
+    interval = &quot;10s&quot;
+
+    timeout  = &quot;2s&quot;
+
+    deregister_critical_service_after = &quot;5m&quot;
+
+  }
+
+
+
+  connect {
+
+    sidecar_service {
+
+      proxy {
+
+        upstreams {
+
+          destination_name = &quot;order-service&quot;
+
+          local_bind_port  = 8080
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+</code></pre>
+<br>
+<p>Programmatic registration via the API:</p>
+<br>
+<pre><code>
+package main
+
+
+
+import (
+
+    &quot;github.com/hashicorp/consul/api&quot;
+
+)
+
+
+
+func registerService() {
+
+    client, _ := api.NewClient(api.DefaultConfig())
+
+    registration := &amp;api.AgentServiceRegistration{
+
+        ID:   &quot;order-svc-1&quot;,
+
+        Name: &quot;order-service&quot;,
+
+        Port: 8080,
+
+        Check: &amp;api.AgentServiceCheck{
+
+            HTTP:     &quot;http://localhost:8080/healthz&quot;,
+
+            Interval: &quot;10s&quot;,
+
+            DeregisterCriticalServiceAfter: &quot;3m&quot;,
+
+        },
+
+    }
+
+    client.Agent().ServiceRegister(registration)
+
+}
+
+</code></pre>
+<br>
+<h2> etcd</h2>
+<br>
+<p>etcd offers a strongly consistent key-value store often used for service discovery in Kubernetes (it powers Kubernetes itself):</p>
+<br>
+<pre><code>
+package main
+
+
+
+import (
+
+    &quot;context&quot;
+
+    &quot;clientv3&quot; &quot;go.etcd.io/etcd/client/v3&quot;
+
+    &quot;time&quot;
+
+)
+
+
+
+func registerWithLease() {
+
+    cli, _ := clientv3.New(clientv3.Config{
+
+        Endpoints:   []string{&quot;localhost:2379&quot;},
+
+        DialTimeout: 5 * time.Second,
+
+    })
+
+
+
+    lease, _ := cli.Grant(context.Background(), 10) // 10-second TTL
+
+    key := &quot;/services/payment-service/instance-1&quot;
+
+    value := `{&quot;address&quot;: &quot;10.0.1.10&quot;, &quot;port&quot;: 9090}`
+
+
+
+    cli.Put(context.Background(), key, value,
+
+        clientv3.WithLease(lease.ID))
+
+
+
+    // Keep alive
+
+    ch, _ := cli.KeepAlive(context.Background(), lease.ID)
+
+    go func() {
+
+        for range ch {
+
+            // Lease refreshed
+
+        }
+
+    }()
+
+}
+
+
+
+func discoverService(name string) []string {
+
+    cli, _ := clientv3.New(clientv3.Config{
+
+        Endpoints: []string{&quot;localhost:2379&quot;},
+
+    })
+
+    resp, _ := cli.Get(context.Background(),
+
+        &quot;/services/&quot;+name, clientv3.WithPrefix())
+
+
+
+    var instances []string
+
+    for _, kv := range resp.Kvs {
+
+        instances = append(instances, string(kv.Value))
+
+    }
+
+    return instances
+
+}
+
+</code></pre>
+<br>
+<h2> Health Checking Strategies</h2>
+<br>
+<p>Effective health checks prevent routing traffic to unhealthy instances:</p>
+<br>
+<pre><code>
+# Kubernetes: multi-probe health checking
+
+apiVersion: v1
+
+kind: Pod
+
+metadata:
+
+  name: web-app
+
+spec:
+
+  containers:
+
+    - name: app
+
+      image: web-app:latest
+
+      livenessProbe:         # Restart if fails
+
+        httpGet:
+
+          path: /healthz
+
+          port: 8080
+
+        initialDelaySeconds: 10
+
+        periodSeconds: 5
+
+        failureThreshold: 3
+
+      readinessProbe:        # Remove from service if fails
+
+        httpGet:
+
+          path: /ready
+
+          port: 8080
+
+        periodSeconds: 2
+
+        failureThreshold: 1
+
+      startupProbe:          # Delay other probes
+
+        httpGet:
+
+          path: /startup
+
+          port: 8080
+
+        initialDelaySeconds: 15
+
+        periodSeconds: 5
+
+        failureThreshold: 30
+
+</code></pre>
+<br>
+<p>Consul gRPC checks for streaming services:</p>
+<br>
+<pre><code>
+check {
+
+  id       = &quot;grpc-health&quot;
+
+  name     = &quot;gRPC Health Check&quot;
+
+  grpc     = &quot;localhost:50051&quot;
+
+  grpc_use_tls = true
+
+  interval = &quot;15s&quot;
+
+  timeout  = &quot;3s&quot;
+
+  notes    = &quot;Uses gRPC health checking protocol&quot;
+
+}
+
+</code></pre>
+<br>
+<h2> Blue-Green Deployments with Discovery</h2>
+<br>
+<p>Service discovery enables seamless traffic switching during blue-green deployments:</p>
+<br>
+<pre><code>
+# Consul: traffic splitting via service resolver
+
+kind = &quot;service-resolver&quot;
+
+name = &quot;web-service&quot;
+
+
+
+subsets = {
+
+  blue = {
+
+    filter = &quot;Service.Meta.version == blue&quot;
+
+  }
+
+  green = {
+
+    filter = &quot;Service.Meta.version == green&quot;
+
+  }
+
+}
+
+
+
+default_subset = &quot;blue&quot;
+
+</code></pre>
+<br>
+<p>Switch traffic atomically:</p>
+<br>
+<pre><code>
+# Switch from blue to green
+
+consul config write - &lt;&lt;EOF
+
+kind = &quot;service-resolver&quot;
+
+name = &quot;web-service&quot;
+
+default_subset = &quot;green&quot;
+
+EOF
+
+</code></pre>
+<br>
+<h2> Registry Patterns</h2>
+<br>
+<p>Choose your registration approach based on operational maturity:</p>
+<br>
+<p>**Self-Registration**: Services register themselves on startup and deregister on shutdown. Simplest but requires service frameworks to implement registration logic.</p>
+<br>
+<p>**Third-Party Registration**: An external process (like Kubernetes watchers or Kubernetes itself) monitors instances and updates the registry. More resilient but adds operational complexity.</p>
+<br>
+<pre><code>
+# Kubernetes: third-party via Endpoint Controller
+
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+
+  name: app-v2
+
+spec:
+
+  replicas: 3
+
+  selector:
+
+    matchLabels:
+
+      app: my-app
+
+      version: v2
+
+  template:
+
+    metadata:
+
+      labels:
+
+        app: my-app
+
+        version: v2
+
+    spec:
+
+      containers:
+
+        - name: app
+
+          image: my-app:v2
+
+          readinessProbe:
+
+            httpGet:
+
+              path: /ready
+
+              port: 8080
+
+</code></pre>
+<br>
+<p>Kubernetes DNS-based discovery (`my-svc.namespace.svc.cluster.local`) remains the simplest approach for cloud-native workloads, while Consul offers richer health checking and multi-datacenter support for hybrid or VM-based infrastructure.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

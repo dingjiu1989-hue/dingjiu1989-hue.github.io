@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="dev-environment-setup">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Developer Environment Setup Guide">
+    <meta property="og:description" content="Comprehensive guide to setting up a productive developer environment with tools, configuration, and automation.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/dev-environment-setup.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Developer Environment Setup Guide">
+    <meta name="twitter:description" content="Comprehensive guide to setting up a productive developer environment with tools, configuration, and automation.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Developer Environment Setup Guide — SourceHub</title>
+    <meta name="description" content="Comprehensive guide to setting up a productive developer environment with tools, configuration, and automation.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/dev-environment-setup.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/dev-environment-setup.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Developer Environment Setup Guide",
+      "description": "Comprehensive guide to setting up a productive developer environment with tools, configuration, and automation.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1467",
+      "keywords": "Technology, Programming, DevOps",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/dev-environment-setup.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Developer Environment Setup Guide"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Developer Environment Setup Guide
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">Programming</span>
+        <span class="tag-cat">DevOps</span></div>
+      <h1 class="article-title">Developer Environment Setup Guide</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>A well-configured developer environment is the foundation of productivity. Investing time in setting up your shell, editor, and tooling pays dividends every single day. This guide covers a complete development environment setup that works across platforms.</p>
+<br>
+<h2> Operating System Choice</h2>
+<br>
+<p>Choose an operating system that supports the tools you need:</p>
+<br>
+<li>**macOS**: Excellent developer experience, Unix-based terminal, Homebrew package manager. Preferred for iOS/macOS development.</li>
+<li>**Linux (Ubuntu/Debian/Fedora)**: Native Docker performance, full control over the system. Preferred for server-side and Linux-targeted development.</li>
+<li>**Windows with WSL2**: Windows Subsystem for Linux 2 provides a Linux kernel inside Windows. Run Linux tools natively while using Windows applications.</li>
+<br>
+<p>For most developers, macOS or WSL2 on Windows provides the best balance of tooling and usability.</p>
+<br>
+<h2> Shell Configuration</h2>
+<br>
+<p>Modern shells improve daily productivity. Zsh with Oh My Zsh is the standard:</p>
+<br>
+<pre><code>
+# Install Zsh and Oh My Zsh
+
+sudo apt install zsh -y
+
+sh -c &quot;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;
+
+</code></pre>
+<br>
+<p>Essential Zsh plugins:</p>
+<br>
+<pre><code>
+# ~/.zshrc
+
+plugins=(
+
+  git
+
+  docker
+
+  docker-compose
+
+  npm
+
+  node
+
+  history
+
+  colored-man-pages
+
+  zsh-autosuggestions
+
+  zsh-syntax-highlighting
+
+  command-not-found
+
+)
+
+</code></pre>
+<br>
+<p>For power users, consider Fish shell for autosuggestions out of the box, or Nushell for structured data pipelines.</p>
+<br>
+<h2> Git Configuration</h2>
+<br>
+<p>Set up a robust Git configuration:</p>
+<br>
+<pre><code>
+git config --global user.name &quot;Your Name&quot;
+
+git config --global user.email &quot;your@email.com&quot;
+
+git config --global init.defaultBranch main
+
+git config --global pull.rebase true
+
+git config --global fetch.prune true
+
+git config --global diff.colorMoved zebra
+
+git config --global alias.co checkout
+
+git config --global alias.br branch
+
+git config --global alias.ci commit
+
+git config --global alias.st status
+
+git config --global alias.lg &quot;log --oneline --graph --decorate --all&quot;
+
+git config --global core.excludesfile ~/.gitignore_global
+
+</code></pre>
+<br>
+<p>A global `.gitignore` prevents committing common OS and editor files:</p>
+<br>
+<pre><code>
+# ~/.gitignore_global
+
+.DS_Store
+
+Thumbs.db
+
+*.swp
+
+*.swo
+
+*~
+
+.vscode/
+
+.idea/
+
+*.log
+
+.env.local
+
+</code></pre>
+<br>
+<h2> Package Managers</h2>
+<br>
+<p>Install language-specific package managers:</p>
+<br>
+<pre><code>
+# Node.js (via nvm for version management)
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+
+nvm install --lts
+
+nvm use --lts
+
+
+
+# Python
+
+sudo apt install python3 python3-pip python3-venv
+
+
+
+# Rust
+
+curl --proto &#x27;=https&#x27; --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+
+
+# Go
+
+wget https://go.dev/dl/go1.22.linux-amd64.tar.gz
+
+sudo tar -C /usr/local -xzf go1.22.linux-amd64.tar.gz
+
+</code></pre>
+<br>
+<p>Use version managers (`nvm`, `pyenv`, `rbenv`, `sdkman`) to manage multiple language versions.</p>
+<br>
+<h2> Editor Setup</h2>
+<br>
+<p>VS Code is the most popular editor for good reason. Essential extensions:</p>
+<br>
+<pre><code>
+# Install via CLI
+
+code --install-extension ms-python.python
+
+code --install-extension dbaeumer.vscode-eslint
+
+code --install-extension esbenp.prettier-vscode
+
+code --install-extension github.copilot
+
+code --install-extension bierner.markdown-mermaid
+
+code --install-extension eamodio.gitlens
+
+code --install-extension ms-azuretools.vscode-docker
+
+code --install-extension streetsidesoftware.code-spell-checker
+
+</code></pre>
+<br>
+<p>Settings to consider:</p>
+<br>
+<pre><code>
+{
+
+  &quot;editor.formatOnSave&quot;: true,
+
+  &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;,
+
+  &quot;editor.minimap.enabled&quot;: false,
+
+  &quot;editor.fontSize&quot;: 14,
+
+  &quot;editor.fontFamily&quot;: &quot;&#x27;JetBrains Mono&#x27;, &#x27;Fira Code&#x27;, monospace&quot;,
+
+  &quot;editor.fontLigatures&quot;: true,
+
+  &quot;editor.cursorBlinking&quot;: &quot;smooth&quot;,
+
+  &quot;files.autoSave&quot;: &quot;onFocusChange&quot;,
+
+  &quot;workbench.colorTheme&quot;: &quot;One Dark Pro&quot;,
+
+  &quot;terminal.integrated.fontFamily&quot;: &quot;JetBrains Mono&quot;,
+
+  &quot;git.autofetch&quot;: true
+
+}
+
+</code></pre>
+<br>
+<h2> Docker Setup</h2>
+<br>
+<p>Docker is essential for local development consistency:</p>
+<br>
+<pre><code>
+# Ubuntu
+
+sudo apt install docker.io docker-compose-v2
+
+sudo usermod -aG docker $USER  # Log out and back in
+
+
+
+# macOS
+
+brew install --cask docker
+
+</code></pre>
+<br>
+<p>Create a development Docker Compose file for your project's dependencies:</p>
+<br>
+<pre><code>
+# dev-dependencies.yml
+
+services:
+
+  postgres:
+
+    image: postgres:16-alpine
+
+    ports: [&quot;5432:5432&quot;]
+
+    environment:
+
+      POSTGRES_DB: myapp_dev
+
+      POSTGRES_PASSWORD: devpassword
+
+    volumes:
+
+      - pgdata:/var/lib/postgresql/data
+
+
+
+  redis:
+
+    image: redis:7-alpine
+
+    ports: [&quot;6379:6379&quot;]
+
+
+
+volumes:
+
+  pgdata:
+
+</code></pre>
+<br>
+<h2> Local HTTPS with mkcert</h2>
+<br>
+<p>Test HTTPS locally:</p>
+<br>
+<pre><code>
+brew install mkcert  # or sudo apt install mkcert
+
+mkcert -install
+
+mkcert localhost 127.0.0.1 ::1
+
+</code></pre>
+<br>
+<p>This creates locally trusted TLS certificates for development.</p>
+<br>
+<h2> Dotfiles Management</h2>
+<br>
+<p>Store your configuration in a Git repository:</p>
+<br>
+<pre><code>
+git init --bare $HOME/.dotfiles
+
+alias config=&#x27;/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME&#x27;
+
+config remote add origin https://github.com/you/dotfiles.git
+
+config add ~/.zshrc ~/.gitconfig ~/.vimrc
+
+config commit -m &quot;Initial dotfiles&quot;
+
+config push
+
+</code></pre>
+<br>
+<p>Restore on a new machine:</p>
+<br>
+<pre><code>
+git clone --bare https://github.com/you/dotfiles.git $HOME/.dotfiles
+
+alias config=&#x27;/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME&#x27;
+
+config checkout
+
+</code></pre>
+<br>
+<h2> Containerized Development with Dev Containers</h2>
+<br>
+<p>VS Code Dev Containers package the entire development environment:</p>
+<br>
+<pre><code>
+// .devcontainer/devcontainer.json
+
+{
+
+  &quot;name&quot;: &quot;My Project&quot;,
+
+  &quot;image&quot;: &quot;mcr.microsoft.com/devcontainers/typescript-node:22&quot;,
+
+  &quot;features&quot;: {
+
+    &quot;ghcr.io/devcontainers/features/docker-in-docker:2&quot;: {}
+
+  },
+
+  &quot;postCreateCommand&quot;: &quot;npm install&quot;,
+
+  &quot;forwardPorts&quot;: [3000],
+
+  &quot;customizations&quot;: {
+
+    &quot;vscode&quot;: {
+
+      &quot;extensions&quot;: [&quot;dbaeumer.vscode-eslint&quot;]
+
+    }
+
+  }
+
+}
+
+</code></pre>
+<br>
+<p>Every developer gets identical tools regardless of their host OS.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>A productive developer environment is personal, but some investments benefit everyone: a modern shell with autosuggestions, a well-configured editor with formatting on save, Docker for reproducible dependencies, and dotfiles versioned in Git. The initial setup takes an afternoon, but the time saved over a career is immense. Start with the basics -- shell, Git, editor, and Docker -- then add specialized tools as your workflow requires them.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

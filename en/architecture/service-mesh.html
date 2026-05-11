@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="service-mesh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Service Mesh Patterns: Istio and Linkerd">
+    <meta property="og:description" content="Service mesh with sidecar proxy, traffic management, mTLS, observability, canary deployments, and when to use a mesh.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/service-mesh.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Service Mesh Patterns: Istio and Linkerd">
+    <meta name="twitter:description" content="Service mesh with sidecar proxy, traffic management, mTLS, observability, canary deployments, and when to use a mesh.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Service Mesh Patterns: Istio and Linkerd — SourceHub</title>
+    <meta name="description" content="Service mesh with sidecar proxy, traffic management, mTLS, observability, canary deployments, and when to use a mesh.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/service-mesh.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/service-mesh.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Service Mesh Patterns: Istio and Linkerd",
+      "description": "Service mesh with sidecar proxy, traffic management, mTLS, observability, canary deployments, and when to use a mesh.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "2457",
+      "keywords": "Architecture, System Design",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/service-mesh.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Service Mesh Patterns: Istio and Linkerd"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Service Mesh Patterns: Istio and Linkerd
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span></div>
+      <h1 class="article-title">Service Mesh Patterns: Istio and Linkerd</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><p>A service mesh is a dedicated infrastructure layer for handling service-to-service communication. It manages traffic routing, security, observability, and resilience without requiring changes to application code. This article covers the core patterns of service meshes, how Istio and Linkerd implement them, and guidance on when a service mesh adds value.</p>
+<br>
+<h2> What is a Service Mesh?</h2>
+<br>
+<p>In a traditional architecture, each service handles network communication directly. This leads to duplicated logic for retries, timeouts, load balancing, TLS, and tracing across every service.</p>
+<br>
+<p>A service mesh extracts these concerns into a separate infrastructure layer. Each service gets a sidecar proxy that intercepts all network traffic. The proxies form a mesh that manages all service-to-service communication.</p>
+<br>
+<pre><code>
+[Service A] -&gt; [Sidecar Proxy] ----&gt; [Sidecar Proxy] -&gt; [Service B]
+
+                    |                         |
+
+               Control Plane              Control Plane
+
+                    |                         |
+
+                    +------[Control Plane]----+
+
+</code></pre>
+<br>
+<p>The mesh has two components:</p>
+<br>
+<li>**Data plane**: The sidecar proxies that handle the actual traffic. Envoy is the most common proxy.</li>
+<li>**Control plane**: The management component that configures proxies, distributes certificates, and collects telemetry.</li>
+<br>
+<h2> Sidecar Proxy Pattern</h2>
+<br>
+<p>The sidecar proxy is the foundation of service mesh. It runs as a separate container in the same pod as the application.</p>
+<br>
+<pre><code>
+# Kubernetes pod with Istio sidecar
+
+apiVersion: v1
+
+kind: Pod
+
+metadata:
+
+  annotations:
+
+    sidecar.istio.io/inject: &quot;true&quot;
+
+spec:
+
+  containers:
+
+    - name: my-app          # Application container
+
+      image: my-app:latest
+
+      ports:
+
+        - containerPort: 8080
+
+    - name: istio-proxy     # Sidecar proxy (injected automatically)
+
+      image: istio/proxyv2:1.20
+
+      args:
+
+        - proxy
+
+        - sidecar
+
+        - --domain
+
+        - $(POD_NAMESPACE).svc.cluster.local
+
+</code></pre>
+<br>
+<h3>What the Sidecar Does</h3>
+<br>
+<li>**Intercepts all inbound and outbound traffic** using iptables rules.</li>
+<p>2. **Applies traffic policies**: routing rules, load balancing, retries, timeouts.</p>
+<p>3. **Enforces security**: mutual TLS, authentication policies, authorization policies.</p>
+<p>4. **Collects telemetry**: metrics, logs, distributed traces.</p>
+<p>5. **Reports health**: connection status, circuit breaker state.</p>
+<br>
+<h2> Traffic Management</h2>
+<br>
+<p>Service meshes provide fine-grained traffic control beyond simple round-robin load balancing.</p>
+<br>
+<h3>Virtual Services and Destination Rules (Istio)</h3>
+<br>
+<pre><code>
+# Istio VirtualService: Route traffic based on headers
+
+apiVersion: networking.istio.io/v1beta1
+
+kind: VirtualService
+
+metadata:
+
+  name: reviews
+
+spec:
+
+  hosts:
+
+    - reviews
+
+  http:
+
+    - match:
+
+        - headers:
+
+            end-user:
+
+              exact: &quot;test-user&quot;
+
+      route:
+
+        - destination:
+
+            host: reviews
+
+            subset: v2  # Route test-user to v2
+
+    - route:
+
+        - destination:
+
+            host: reviews
+
+            subset: v1  # Everyone else goes to v1
+
+---
+
+# Istio DestinationRule: Load balancing and connection pool
+
+apiVersion: networking.istio.io/v1beta1
+
+kind: DestinationRule
+
+metadata:
+
+  name: reviews-destination
+
+spec:
+
+  host: reviews
+
+  subsets:
+
+    - name: v1
+
+      labels:
+
+        version: v1
+
+    - name: v2
+
+      labels:
+
+        version: v2
+
+  trafficPolicy:
+
+    loadBalancer:
+
+      simple: ROUND_ROBIN
+
+    connectionPool:
+
+      tcp:
+
+        maxConnections: 100
+
+      http:
+
+        http1MaxPendingRequests: 10
+
+        maxRequestsPerConnection: 10
+
+</code></pre>
+<br>
+<h3>Traffic Splitting (Canary Deployments)</h3>
+<br>
+<pre><code>
+# Canary deployment: 10% traffic to new version
+
+apiVersion: networking.istio.io/v1beta1
+
+kind: VirtualService
+
+metadata:
+
+  name: productpage
+
+spec:
+
+  hosts:
+
+    - productpage
+
+  http:
+
+    - route:
+
+        - destination:
+
+            host: productpage
+
+            subset: v2
+
+          weight: 10
+
+        - destination:
+
+            host: productpage
+
+            subset: v1
+
+          weight: 90
+
+</code></pre>
+<br>
+<p>Linkerd uses a similar approach with TrafficSplit:</p>
+<br>
+<pre><code>
+# Linkerd TrafficSplit for canary
+
+apiVersion: split.smi-spec.io/v1alpha2
+
+kind: TrafficSplit
+
+metadata:
+
+  name: productpage-split
+
+spec:
+
+  service: productpage
+
+  backends:
+
+    - service: productpage-v1
+
+      weight: 900m
+
+    - service: productpage-v2
+
+      weight: 100m
+
+</code></pre>
+<br>
+<h3>Timeouts and Retries</h3>
+<br>
+<pre><code>
+# Istio: Request timeouts and retries
+
+apiVersion: networking.istio.io/v1beta1
+
+kind: VirtualService
+
+metadata:
+
+  name: ratings
+
+spec:
+
+  hosts:
+
+    - ratings
+
+  http:
+
+    - timeout: 5s
+
+      retries:
+
+        attempts: 3
+
+        perTryTimeout: 2s
+
+        retryOn: gateway-error,connect-failure,refused-stream
+
+      route:
+
+        - destination:
+
+            host: ratings
+
+</code></pre>
+<br>
+<h2> Mutual TLS (mTLS)</h2>
+<br>
+<p>Service meshes provide automatic mutual TLS between services without application changes. Each sidecar proxy has a certificate issued by the mesh's certificate authority.</p>
+<br>
+<h3>Istio mTLS modes</h3>
+<br>
+<pre><code>
+# STRICT mTLS: All traffic must use mTLS
+
+apiVersion: security.istio.io/v1beta1
+
+kind: PeerAuthentication
+
+metadata:
+
+  name: default
+
+  namespace: istio-system
+
+spec:
+
+  mtls:
+
+    mode: STRICT
+
+
+
+# PERMISSIVE: Accept both mTLS and plaintext (migration mode)
+
+apiVersion: security.istio.io/v1beta1
+
+kind: PeerAuthentication
+
+metadata:
+
+  name: default
+
+  namespace: istio-system
+
+spec:
+
+  mtls:
+
+    mode: PERMISSIVE
+
+
+
+# DISABLE: Disable mTLS for specific workloads
+
+apiVersion: security.istio.io/v1beta1
+
+kind: PeerAuthentication
+
+metadata:
+
+  name: legacy-service
+
+  namespace: legacy
+
+spec:
+
+  selector:
+
+    matchLabels:
+
+      app: legacy-app
+
+  mtls:
+
+    mode: DISABLE
+
+</code></pre>
+<br>
+<h3>Linkerd mTLS</h3>
+<br>
+<p>Linkerd automatically enables mTLS between meshed pods. It uses a 24-hour certificate rotation with automatic renewal.</p>
+<br>
+<pre><code>
+# Check mTLS status in Linkerd
+
+linkerd viz stat deploy --from deploy
+
+# Look for TLS columns showing encrypted traffic
+
+</code></pre>
+<br>
+<p>mTLS benefits:</p>
+<li>All service-to-service traffic is encrypted.</li>
+<li>Automatic certificate rotation.</li>
+<li>Identity-based authorization (which service, not which IP).</li>
+<br>
+<h2> Observability</h2>
+<br>
+<p>Service meshes provide rich observability without code instrumentation.</p>
+<br>
+<h3>Metrics</h3>
+<br>
+<pre><code>
+# Istio: Enable Prometheus metrics
+
+apiVersion: telemetry.istio.io/v1alpha1
+
+kind: Telemetry
+
+metadata:
+
+  name: mesh-default
+
+  namespace: istio-system
+
+spec:
+
+  metrics:
+
+    - overrides:
+
+        - match:
+
+            metric: ALL_METRICS
+
+          mode: REPORT
+
+</code></pre>
+<br>
+<p>Istio exports standard metrics:</p>
+<li>`istio_requests_total`: Total requests (by source, dest, response code).</li>
+<li>`istio_request_duration_milliseconds`: Request latencies.</li>
+<li>`istio_request_bytes`: Request sizes.</li>
+<li>`istio_response_bytes`: Response sizes.</li>
+<li>`istio_tcp_sent_bytes_total`: TCP throughput.</li>
+<br>
+<h3>Distributed Tracing</h3>
+<br>
+<pre><code>
+# Istio: Enable tracing with Zipkin, Jaeger, or OpenTelemetry
+
+apiVersion: telemetry.istio.io/v1alpha1
+
+kind: Telemetry
+
+metadata:
+
+  name: mesh-default
+
+spec:
+
+  tracing:
+
+    - providers:
+
+        - name: otel-tracing
+
+      randomSamplingPercentage: 10
+
+</code></pre>
+<br>
+<p>Tracing headers (b3, x-request-id) are propagated automatically by the sidecar. Services that forward the tracing headers receive full distributed trace visibility without adding any tracing SDK.</p>
+<br>
+<h2> Authorization Policies</h2>
+<br>
+<p>Service meshes enforce authorization at the network level. Policies specify which services can communicate.</p>
+<br>
+<pre><code>
+# Istio: Authorization policy
+
+apiVersion: security.istio.io/v1beta1
+
+kind: AuthorizationPolicy
+
+metadata:
+
+  name: payment-service-policy
+
+  namespace: prod
+
+spec:
+
+  selector:
+
+    matchLabels:
+
+      app: payment-service
+
+  action: ALLOW
+
+  rules:
+
+    - from:
+
+        - source:
+
+            principals: [&quot;cluster.local/ns/prod/sa/order-service&quot;]
+
+      to:
+
+        - operation:
+
+            methods: [&quot;POST&quot;, &quot;GET&quot;, &quot;PUT&quot;]
+
+            paths: [&quot;/api/v1/*&quot;]
+
+    - from:
+
+        - source:
+
+            principals: [&quot;cluster.local/ns/prod/sa/admin-service&quot;]
+
+      to:
+
+        - operation:
+
+            methods: [&quot;*&quot;]
+
+            paths: [&quot;*&quot;]
+
+
+
+---
+
+apiVersion: security.istio.io/v1beta1
+
+kind: AuthorizationPolicy
+
+metadata:
+
+  name: payment-service-deny
+
+  namespace: prod
+
+spec:
+
+  selector:
+
+    matchLabels:
+
+      app: payment-service
+
+  action: DENY
+
+  rules:
+
+    - from:
+
+        - source:
+
+            notPrincipals: [
+
+              &quot;cluster.local/ns/prod/sa/order-service&quot;,
+
+              &quot;cluster.local/ns/prod/sa/admin-service&quot;
+
+            ]
+
+</code></pre>
+<br>
+<h2> When to Use a Service Mesh</h2>
+<br>
+<h3>Service Mesh Adds Value When</h3>
+<br>
+<li>**Many services** (20+) with complex communication patterns.</li>
+<li>**Multiple protocols** (HTTP, gRPC, TCP) managed consistently.</li>
+<li>**Strict security requirements** for service-to-service mTLS.</li>
+<li>**Advanced traffic management** needed (canary, blue-green, A/B testing).</li>
+<li>**Observability requirements** across all services without code changes.</li>
+<li>**Large platform team** available to operate the mesh.</li>
+<br>
+<h3>Service Mesh is Overkill When</h3>
+<br>
+<li>**Few services** (under 10). The operational overhead outweighs the benefits.</li>
+<li>**Small team**. Operating a service mesh requires significant expertise.</li>
+<li>**Simple deployment**. If round-robin DNS is sufficient, a mesh is unnecessary.</li>
+<li>**No mTLS requirement**. If all services are in the same network boundary.</li>
+<li>**Homogeneous stack**. If all services use the same language framework with built-in resilience.</li>
+<br>
+<h2> Istio vs Linkerd</h2>
+<br>
+<p>| Aspect | Istio | Linkerd |</p>
+<p>|--------|-------|---------|</p>
+<p>| Proxy | Envoy | Linkerd2-proxy (Rust) |</p>
+<p>| Resource usage | Higher (Envoy is heavier) | Lower (Rust proxy is lightweight) |</p>
+<p>| Features | Extensive, many CRDs | Focused, simpler |</p>
+<p>| Configuration | Complex, many CRDs | Simple, fewer CRDs |</p>
+<p>| mTLS | STRICT, PERMISSIVE, DISABLE | Automatic |</p>
+<p>| Traffic splitting | VirtualService + weight | TrafficSplit |</p>
+<p>| Community | Large, CNCF | Large, CNCF |</p>
+<p>| Learning curve | Steep | Moderate |</p>
+<br>
+<p>Choose Istio if you need extensive configuration and are willing to invest in learning. Choose Linkerd if you want a simpler, lighter-weight mesh with less operational overhead.</p>
+<br>
+<h2> Migration Strategy</h2>
+<br>
+<li>**Install the control plane** in a namespace separate from applications.</li>
+<p>2. **Start with PERMISSIVE mTLS** to avoid breaking existing plaintext connections.</p>
+<p>3. **Inject sidecars gradually**: Use namespace-level injection opt-in, not global.</p>
+<p>4. **Add observability first**: Use the mesh to gain visibility into traffic patterns.</p>
+<p>5. **Enable traffic management**: Start with canary deployments, then add retries and timeouts.</p>
+<p>6. **Enable STRICT mTLS**: After verifying all traffic can use mTLS.</p>
+<p>7. **Implement authorization**: Add mesh-level authorization policies last.</p>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>Service meshes extract networking, security, and observability from application code into a dedicated infrastructure layer. They provide powerful traffic management (canary, blue-green), automatic mTLS, and rich observability without code changes. Istio is feature-rich and complex. Linkerd is lightweight and simple. Add a service mesh to your architecture only when the complexity of managing service-to-service communication outweighs the operational cost of the mesh itself.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

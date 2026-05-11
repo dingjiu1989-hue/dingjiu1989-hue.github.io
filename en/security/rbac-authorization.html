@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="rbac-authorization">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="RBAC Authorization Implementation">
+    <meta property="og:description" content="A practical guide to implementing Role-Based Access Control with roles, permissions, policies, and middleware in Node.js and Python.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/rbac-authorization.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="RBAC Authorization Implementation">
+    <meta name="twitter:description" content="A practical guide to implementing Role-Based Access Control with roles, permissions, policies, and middleware in Node.js and Python.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>RBAC Authorization Implementation — SourceHub</title>
+    <meta name="description" content="A practical guide to implementing Role-Based Access Control with roles, permissions, policies, and middleware in Node.js and Python.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/rbac-authorization.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/rbac-authorization.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "RBAC Authorization Implementation",
+      "description": "A practical guide to implementing Role-Based Access Control with roles, permissions, policies, and middleware in Node.js and Python.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1796",
+      "keywords": "Security, Cybersecurity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/rbac-authorization.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "RBAC Authorization Implementation"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › RBAC Authorization Implementation
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">Cybersecurity</span></div>
+      <h1 class="article-title">RBAC Authorization Implementation</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> What Is RBAC?</h2>
+<br>
+<p>Role-Based Access Control (RBAC) is an authorization model where permissions are assigned to roles, and users are assigned to those roles. Instead of managing permissions for each user individually, you manage roles and their associated permissions, then assign users to appropriate roles.</p>
+<br>
+<h2> Core RBAC Concepts</h2>
+<br>
+<p>| Concept | Definition | Example |</p>
+<p>|---------|------------|---------|</p>
+<p>| User | An individual account | alice@example.com |</p>
+<p>| Role | A collection of permissions | Editor, Admin, Viewer |</p>
+<p>| Permission | An action on a resource | article:create, article:delete |</p>
+<p>| Resource | The object being accessed | Article, User, Comment |</p>
+<p>| Session | A user's active role mapping | Alice as Editor |</p>
+<br>
+<h2> The RBAC Model</h2>
+<br>
+<h3>Level 1: Flat RBAC</h3>
+<br>
+<p>Users are assigned roles, and roles have permissions. This simple structure works for most applications.</p>
+<br>
+<pre><code>
+Users ──&lt; Role Assignment &gt;── Roles ──&lt; Permission Assignment &gt;── Permissions
+
+</code></pre>
+<br>
+<h3>Level 2: Hierarchical RBAC</h3>
+<br>
+<p>Roles can inherit permissions from other roles. For example, an Admin role inherits all Editor permissions plus additional administrative permissions.</p>
+<br>
+<pre><code>
+Admin ──inherits──&gt; Editor ──inherits──&gt; Viewer
+
+</code></pre>
+<br>
+<h2> Database Schema</h2>
+<br>
+<pre><code>
+-- Core RBAC tables
+
+CREATE TABLE roles (
+
+    id SERIAL PRIMARY KEY,
+
+    name VARCHAR(50) UNIQUE NOT NULL,
+
+    description TEXT
+
+);
+
+
+
+CREATE TABLE permissions (
+
+    id SERIAL PRIMARY KEY,
+
+    resource VARCHAR(50) NOT NULL,
+
+    action VARCHAR(20) NOT NULL,
+
+    UNIQUE(resource, action)
+
+);
+
+
+
+CREATE TABLE role_permissions (
+
+    role_id INTEGER REFERENCES roles(id),
+
+    permission_id INTEGER REFERENCES permissions(id),
+
+    PRIMARY KEY (role_id, permission_id)
+
+);
+
+
+
+CREATE TABLE user_roles (
+
+    user_id INTEGER REFERENCES users(id),
+
+    role_id INTEGER REFERENCES roles(id),
+
+    granted_by INTEGER REFERENCES users(id),
+
+    granted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (user_id, role_id)
+
+);
+
+
+
+-- For hierarchical RBAC
+
+CREATE TABLE role_hierarchy (
+
+    parent_role_id INTEGER REFERENCES roles(id),
+
+    child_role_id INTEGER REFERENCES roles(id),
+
+    PRIMARY KEY (parent_role_id, child_role_id)
+
+);
+
+</code></pre>
+<br>
+<h2> Implementation Patterns</h2>
+<br>
+<h3>Node.js / Express Middleware</h3>
+<br>
+<pre><code>
+// Permission definition
+
+const PERMISSIONS = {
+
+    ARTICLE: {
+
+        CREATE: &#x27;article:create&#x27;,
+
+        READ: &#x27;article:read&#x27;,
+
+        UPDATE: &#x27;article:update&#x27;,
+
+        DELETE: &#x27;article:delete&#x27;,
+
+        PUBLISH: &#x27;article:publish&#x27;
+
+    },
+
+    USER: {
+
+        LIST: &#x27;user:list&#x27;,
+
+        MANAGE: &#x27;user:manage&#x27;
+
+    }
+
+};
+
+
+
+// Role definitions with permission inheritance
+
+const ROLES = {
+
+    viewer: {
+
+        permissions: [&#x27;article:read&#x27;],
+
+        inherits: []
+
+    },
+
+    editor: {
+
+        permissions: [&#x27;article:create&#x27;, &#x27;article:update&#x27;],
+
+        inherits: [&#x27;viewer&#x27;]
+
+    },
+
+    admin: {
+
+        permissions: [
+
+            &#x27;article:delete&#x27;, &#x27;article:publish&#x27;,
+
+            &#x27;user:list&#x27;, &#x27;user:manage&#x27;
+
+        ],
+
+        inherits: [&#x27;editor&#x27;]
+
+    }
+
+};
+
+
+
+// Authorization middleware
+
+function authorize(...requiredPermissions) {
+
+    return (req, res, next) =&gt; {
+
+        const userRoles = req.user.roles;
+
+        const userPermissions = getUserPermissions(userRoles);
+
+
+
+        const hasPermission = requiredPermissions.every(
+
+            p =&gt; userPermissions.includes(p)
+
+        );
+
+
+
+        if (!hasPermission) {
+
+            return res.status(403).json({
+
+                error: &#x27;Insufficient permissions&#x27;
+
+            });
+
+        }
+
+        next();
+
+    };
+
+}
+
+
+
+// Usage in routes
+
+app.post(&#x27;/api/articles&#x27;,
+
+    authenticate,
+
+    authorize(PERMISSIONS.ARTICLE.CREATE),
+
+    createArticle
+
+);
+
+
+
+app.delete(&#x27;/api/articles/:id&#x27;,
+
+    authenticate,
+
+    authorize(PERMISSIONS.ARTICLE.DELETE),
+
+    deleteArticle
+
+);
+
+</code></pre>
+<br>
+<h3>Python / FastAPI</h3>
+<br>
+<pre><code>
+from enum import Enum
+
+from functools import wraps
+
+from fastapi import HTTPException, Depends
+
+
+
+class Permission(Enum):
+
+    ARTICLE_CREATE = &quot;article:create&quot;
+
+    ARTICLE_READ = &quot;article:read&quot;
+
+    ARTICLE_UPDATE = &quot;article:update&quot;
+
+    ARTICLE_DELETE = &quot;article:delete&quot;
+
+    USER_MANAGE = &quot;user:manage&quot;
+
+
+
+ROLE_PERMISSIONS = {
+
+    &quot;viewer&quot;: {Permission.ARTICLE_READ},
+
+    &quot;editor&quot;: {
+
+        Permission.ARTICLE_READ,
+
+        Permission.ARTICLE_CREATE,
+
+        Permission.ARTICLE_UPDATE,
+
+    },
+
+    &quot;admin&quot;: {
+
+        Permission.ARTICLE_READ,
+
+        Permission.ARTICLE_CREATE,
+
+        Permission.ARTICLE_UPDATE,
+
+        Permission.ARTICLE_DELETE,
+
+        Permission.USER_MANAGE,
+
+    },
+
+}
+
+
+
+def require_permission(permission: Permission):
+
+    def decorator(func):
+
+        @wraps(func)
+
+        async def wrapper(*args, **kwargs):
+
+            user = kwargs.get(&#x27;current_user&#x27;)
+
+            if not user:
+
+                raise HTTPException(status_code=401)
+
+
+
+            user_perms = ROLE_PERMISSIONS.get(user.role, set())
+
+            if permission not in user_perms:
+
+                raise HTTPException(
+
+                    status_code=403,
+
+                    detail=&quot;Insufficient permissions&quot;
+
+                )
+
+            return await func(*args, **kwargs)
+
+        return wrapper
+
+    return decorator
+
+
+
+# Usage
+
+@app.delete(&quot;/articles/{article_id}&quot;)
+
+@require_permission(Permission.ARTICLE_DELETE)
+
+async def delete_article(article_id: int, current_user = Depends(get_current_user)):
+
+    # Delete logic
+
+    pass
+
+</code></pre>
+<br>
+<h2> Attribute-Based Access Control (ABAC)</h2>
+<br>
+<p>For more granular control, extend RBAC with ABAC policies that consider resource attributes and context:</p>
+<br>
+<pre><code>
+def can_access_resource(user, resource, action):
+
+    &quot;&quot;&quot;Check RBAC first, then ABAC policies.&quot;&quot;&quot;
+
+    # RBAC check
+
+    if not has_role_permission(user.role, action):
+
+        return False
+
+
+
+    # ABAC policies
+
+    policies = {
+
+        # Users can edit their own articles
+
+        (&#x27;article:update&#x27;, &#x27;article&#x27;): lambda u, r: r.author_id == u.id,
+
+        # Admins can edit any article
+
+        (&#x27;article:update&#x27;, &#x27;article&#x27;): lambda u, r: &#x27;admin&#x27; in u.roles,
+
+        # Only article authors can delete
+
+        (&#x27;article:delete&#x27;, &#x27;article&#x27;): lambda u, r: r.author_id == u.id,
+
+    }
+
+
+
+    policy = policies.get((action, resource.type))
+
+    if policy:
+
+        return policy(user, resource)
+
+    return False
+
+</code></pre>
+<br>
+<h2> Performance Optimization</h2>
+<br>
+<p>Cache resolved permissions to avoid repeated database queries:</p>
+<br>
+<pre><code>
+import redis
+
+import json
+
+
+
+r = redis.Redis()
+
+
+
+def get_cached_permissions(user_id):
+
+    cache_key = f&quot;perms:{user_id}&quot;
+
+    cached = r.get(cache_key)
+
+    if cached:
+
+        return json.loads(cached)
+
+
+
+    permissions = resolve_user_permissions(user_id)
+
+    r.setex(cache_key, 300, json.dumps(permissions))  # 5 min TTL
+
+    return permissions
+
+</code></pre>
+<br>
+<h2> Audit Logging</h2>
+<br>
+<p>Every authorization decision should be logged:</p>
+<br>
+<pre><code>
+def log_authorization(user_id, action, resource, granted, reason=&quot;&quot;):
+
+    log_entry = {
+
+        &quot;timestamp&quot;: datetime.utcnow().isoformat(),
+
+        &quot;user_id&quot;: user_id,
+
+        &quot;action&quot;: action,
+
+        &quot;resource&quot;: resource,
+
+        &quot;granted&quot;: granted,
+
+        &quot;reason&quot;: reason,
+
+        &quot;source_ip&quot;: request.remote_addr
+
+    }
+
+    audit_logger.info(json.dumps(log_entry))
+
+</code></pre>
+<br>
+<h2> Common Pitfalls</h2>
+<br>
+<li>**Role explosion**: Too many fine-grained roles become unmanageable. Aim for 5-10 roles maximum.</li>
+<li>**Hardcoded role checks**: `if user.role === 'admin'` spreads business logic everywhere. Always check permissions, not role names.</li>
+<li>**Missing negative permissions**: RBAC naturally handles allow rules. For deny rules, evaluate deny before allow.</li>
+<li>**User in multiple roles**: Decide whether permissions are additive (union) or restrictive (intersection).</li>
+<br>
+<h2> Summary</h2>
+<br>
+<p>RBAC simplifies authorization by grouping permissions into roles and assigning roles to users. Start with flat RBAC and add hierarchy as needed. Always check permissions rather than role names, cache resolved permissions for performance, and layer on ABAC policies for fine-grained access control. Log all authorization decisions for auditability.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

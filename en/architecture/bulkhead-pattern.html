@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="bulkhead-pattern">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Bulkhead Pattern for Resilience">
+    <meta property="og:description" content="Learn the bulkhead pattern for isolating failures in distributed systems.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/bulkhead-pattern.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bulkhead Pattern for Resilience">
+    <meta name="twitter:description" content="Learn the bulkhead pattern for isolating failures in distributed systems.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Bulkhead Pattern for Resilience — SourceHub</title>
+    <meta name="description" content="Learn the bulkhead pattern for isolating failures in distributed systems.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/bulkhead-pattern.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/bulkhead-pattern.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bulkhead Pattern for Resilience",
+      "description": "Learn the bulkhead pattern for isolating failures in distributed systems.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1215",
+      "keywords": "Architecture, System Design",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/bulkhead-pattern.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Bulkhead Pattern for Resilience"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Bulkhead Pattern for Resilience
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span></div>
+      <h1 class="article-title">Bulkhead Pattern for Resilience</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>The bulkhead pattern is a resilience strategy inspired by ship design. Just as a ship is divided into watertight compartments so that a hull breach only floods one section, the bulkhead pattern isolates resources in a software system so that a failure in one component does not cascade to others.</p>
+<br>
+<h2> The Problem</h2>
+<br>
+<p>In a typical monolithic or microservices architecture, components share resources like connection pools, thread pools, and memory. When one component fails or becomes slow, it can consume shared resources, starving other components.</p>
+<br>
+<p>Consider a web application with a single thread pool. If one endpoint makes a slow database query that ties up all threads, every other endpoint becomes unresponsive. Users trying to view their profile are blocked by users searching for products. One slow operation takes down the entire application.</p>
+<br>
+<h2> Fixed Thread Pool Bulkhead</h2>
+<br>
+<p>The simplest bulkhead implementation: separate thread pools for different components or services.</p>
+<br>
+<pre><code>
+// Separate thread pools for different concerns
+
+ExecutorService orderPool = Executors.newFixedThreadPool(10);
+
+ExecutorService paymentPool = Executors.newFixedThreadPool(5);
+
+ExecutorService notificationPool = Executors.newFixedThreadPool(3);
+
+
+
+// Each service uses its own pool
+
+orderPool.submit(() -&gt; orderService.createOrder(request));
+
+paymentPool.submit(() -&gt; paymentService.processPayment(request));
+
+</code></pre>
+<br>
+<p>If the payment gateway becomes slow, all 5 payment threads are blocked, but order creation and notification threads remain available. The rest of the application continues to function normally.</p>
+<br>
+<p>**Pros:** Simple to implement. Clear resource isolation.</p>
+<p>**Cons:** Fixed thread counts can be hard to tune. Too few threads underutilize resources. Too many defeat the purpose.</p>
+<br>
+<h2> Semaphore Bulkhead</h2>
+<br>
+<p>Instead of thread pools, use semaphores to limit concurrent access to a resource. This avoids the overhead of thread switching:</p>
+<br>
+<pre><code>
+Semaphore paymentSemaphore = new Semaphore(5);
+
+
+
+public void processPayment(PaymentRequest request) {
+
+    if (!paymentSemaphore.tryAcquire()) {
+
+        throw new BulkheadException(&quot;Payment service busy, try again later&quot;);
+
+    }
+
+    try {
+
+        // Process payment
+
+    } finally {
+
+        paymentSemaphore.release();
+
+    }
+
+}
+
+</code></pre>
+<br>
+<p>Semaphore bulkheads are lightweight and suitable for non-blocking or asynchronous code. They protect resources without creating additional threads.</p>
+<br>
+<h2> Bulkheading Connections</h2>
+<br>
+<p>Database and HTTP connection pools are natural bulkheads. Configure separate pools for different services:</p>
+<br>
+<pre><code>
+# Database connection pools
+
+order-db:
+
+  max-connections: 20
+
+  timeout: 5s
+
+
+
+analytics-db:
+
+  max-connections: 5
+
+  timeout: 30s
+
+</code></pre>
+<br>
+<p>The analytics pool has fewer connections and a longer timeout. If analytics queries become slow, they occupy only 5 connections, leaving the 20 order-db connections available for customer-facing operations.</p>
+<br>
+<h2> Bulkheading at the Service Level</h2>
+<br>
+<p>In microservices architectures, bulkheading can be applied at the service boundary. Each downstream service gets its own HTTP connection pool and circuit breaker:</p>
+<br>
+<pre><code>
+CircuitBreaker paymentBreaker = CircuitBreaker.ofDefaults(&quot;paymentService&quot;);
+
+Bulkhead paymentBulkhead = Bulkhead.ofDefaults(&quot;paymentService&quot;);
+
+
+
+// Combined with retry and timeout
+
+DecoratedSupplier&lt;PaymentResponse&gt; supplier = Decorators
+
+    .ofSupplier(() -&gt; paymentClient.charge(request))
+
+    .withCircuitBreaker(paymentBreaker)
+
+    .withBulkhead(paymentBulkhead)
+
+    .withTimeLimiter(Duration.ofSeconds(5))
+
+    .decorate();
+
+</code></pre>
+<br>
+<p>This approach from Resilience4j combines bulkhead with circuit breaker, retry, and timeout patterns for comprehensive resilience.</p>
+<br>
+<h2> Resource-Based Bulkhead</h2>
+<br>
+<p>Beyond thread pools, consider bulkheading other shared resources:</p>
+<br>
+<li>**Memory**: Limit the size of caches, queues, and buffers per tenant or per operation type.</li>
+<li>**Disk I/O**: Rate-limit write-heavy operations to prevent disk contention.</li>
+<li>**Network bandwidth**: Implement connection limits per downstream service.</li>
+<li>**CPU**: Use thread pool isolation to prevent CPU-intensive operations from starving I/O-bound operations.</li>
+<br>
+<h2> Monitoring and Tuning</h2>
+<br>
+<p>Bulkhead configuration requires monitoring. Track these metrics:</p>
+<br>
+<li>Active thread count per bulkhead</li>
+<li>Queue depth for tasks waiting for a thread</li>
+<li>Rejection rate (requests that were denied because all threads were busy)</li>
+<li>Average wait time before acquiring a thread</li>
+<br>
+<p>Use these metrics to tune bulkhead sizes. A bulkhead that never rejects is probably too large. A bulkhead that frequently rejects may be too small or may indicate a downstream performance problem.</p>
+<br>
+<h2> Common Mistakes</h2>
+<br>
+<p>**Single bulkhead for everything.** This defeats the purpose. You need separate bulkheads for different classes of operations with different failure profiles.</p>
+<br>
+<p>**Ignoring queue limits.** Thread pools have work queues. An unbounded queue allows slow operations to pile up, eventually consuming memory. Always bound your queues.</p>
+<br>
+<p>**Not integrating with circuit breakers.** Bulkhead prevents resource exhaustion, but it does not prevent repeated failures. Combine bulkhead with circuit breaker to fail fast when a downstream service is down.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>The bulkhead pattern is a fundamental resilience technique. Separate your thread pools, connection pools, and other shared resources by component or service. Use semaphore-based bulkheads for lightweight scenarios. Combine with circuit breakers and timeouts for comprehensive protection. Monitor bulkhead metrics to tune configuration and detect downstream problems early.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

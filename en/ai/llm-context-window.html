@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="llm-context-window">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="LLM Context Window Management">
+    <meta property="og:description" content="Best practices for managing LLM context windows effectively including sliding windows, summarization, and retrieval strategies.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/llm-context-window.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LLM Context Window Management">
+    <meta name="twitter:description" content="Best practices for managing LLM context windows effectively including sliding windows, summarization, and retrieval strategies.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>LLM Context Window Management — SourceHub</title>
+    <meta name="description" content="Best practices for managing LLM context windows effectively including sliding windows, summarization, and retrieval strategies.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/llm-context-window.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/ai/llm-context-window.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "LLM Context Window Management",
+      "description": "Best practices for managing LLM context windows effectively including sliding windows, summarization, and retrieval strategies.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1375",
+      "keywords": "Artificial Intelligence, Machine Learning",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/llm-context-window.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "LLM Context Window Management"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › LLM Context Window Management
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
+        <span class="tag-cat">Machine Learning</span></div>
+      <h1 class="article-title">LLM Context Window Management</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>Context window size has grown from 2K tokens in early GPT models to 200K tokens in GPT-4, 200K in Claude 3, and even 1 million tokens in Gemini 1.5 Pro. Despite this growth, effective context management remains critical — models attend less effectively to information in the middle of long contexts, token costs scale with context length, and response latency increases. This guide covers strategies for managing context windows in production.</p>
+<br>
+<h2> The "Lost in the Middle" Problem</h2>
+<br>
+<p>Research consistently shows that LLMs perform best when relevant information appears at the beginning or end of the context window. Information in the middle is more likely to be ignored or incorrectly processed.</p>
+<br>
+<p>**Performance by position (approximate):**</p>
+<li>Beginning (first 20%): Best recall, 90%+ accuracy</li>
+<li>Middle (20-80%): Worst recall, 60-70% accuracy  </li>
+<li>End (last 20%): Good recall, 85%+ accuracy</li>
+<br>
+<p>This has direct implications for RAG systems: placing the most relevant documents at the beginning and end of the context improves answer quality even if less relevant documents are included in the middle.</p>
+<br>
+<h2> Context Budgeting</h2>
+<br>
+<p>Treat context like a budget. Allocate tokens deliberately:</p>
+<br>
+<pre><code>
+Total context: 100K tokens (example)
+
+- System prompt: 2K tokens (2%)
+
+- Conversation history: 10K tokens (10%)
+
+- Retrieved documents: 80K tokens (80%)
+
+- Current query + formatting: 8K tokens (8%)
+
+</code></pre>
+<br>
+<p>For each allocation, ask:</p>
+<br>
+<li>Does every token in the system prompt need to be there?</li>
+<li>Can conversation history be summarized instead of included verbatim?</li>
+<li>Are all retrieved documents equally relevant?</li>
+<li>Can the query be compressed?</li>
+<br>
+<h2> Strategies for Long Conversations</h2>
+<br>
+<h3>Sliding Window</h3>
+<br>
+<p>Keep only the most recent N turns of conversation:</p>
+<br>
+<pre><code>
+def get_conversation_context(conversation, max_turns=10):
+
+    &quot;&quot;&quot;Keep only the most recent max_turns of conversation.&quot;&quot;&quot;
+
+    trimmed = conversation[-max_turns:]
+
+    # Include a summary of earlier turns if needed
+
+    if len(conversation) &gt; max_turns:
+
+        summary = summarize_conversation(conversation[:-max_turns])
+
+        trimmed = [{&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: f&quot;Earlier summary: {summary}&quot;}] + trimmed
+
+    return trimmed
+
+</code></pre>
+<br>
+<h3>Conversation Summarization</h3>
+<br>
+<p>Periodically summarize the conversation and replace older messages:</p>
+<br>
+<pre><code>
+def summarize_and_trim(messages, summary_threshold=20):
+
+    if len(messages) &lt;= summary_threshold:
+
+        return messages
+
+
+
+    to_summarize = messages[:len(messages) - summary_threshold]
+
+    summary_prompt = &quot;Summarize the key points from this conversation, preserving any critical information the user has provided:&quot;
+
+    summary = call_llm(summary_prompt, to_summarize)
+
+
+
+    remaining = messages[-summary_threshold:]
+
+    return [{&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: f&quot;Conversation summary: {summary}&quot;}] + remaining
+
+</code></pre>
+<br>
+<h3>Hierarchical Summarization</h3>
+<br>
+<p>For very long conversations, maintain a hierarchy of summaries:</p>
+<br>
+<pre><code>
+Level 0: Full conversation (raw messages)
+
+Level 1: Hourly summaries
+
+Level 2: Daily summaries
+
+Level 3: Conversation summary (per session)
+
+</code></pre>
+<br>
+<p>When context is full, replace Level 0 messages with Level 1 summaries, then Level 2, etc.</p>
+<br>
+<h2> RAG Context Management</h2>
+<br>
+<h3>Document Ranking for Context</h3>
+<br>
+<p>When multiple documents are retrieved but context is limited:</p>
+<br>
+<li>Retrieve many documents (high recall)</li>
+<p>2. Rank by relevance using a cross-encoder</p>
+<p>3. Fill context window starting with the most relevant documents</p>
+<p>4. Place the top document at the END of the context (proven best position)</p>
+<p>5. Place the second-best document at the BEGINNING</p>
+<p>6. Fill the middle with remaining documents</p>
+<br>
+<h3>Chunk-Level Re-Ranking</h3>
+<br>
+<p>Instead of ranking entire documents, rank individual chunks. A single relevant paragraph from a marginal document may be more useful than the entire top document:</p>
+<br>
+<pre><code>
+def fill_context(chunks, max_tokens):
+
+    &quot;&quot;&quot;Select chunks to fill the context window.&quot;&quot;&quot;
+
+    ranked = cross_encoder_rank(chunks, query)
+
+    selected = []
+
+    token_count = 0
+
+
+
+    # Always include the top chunk
+
+    top = ranked[0]
+
+    if token_count + len(top) &lt;= max_tokens:
+
+        selected.append(top)
+
+        token_count += len(top)
+
+
+
+    # Fill from both ends inward
+
+    for chunk in ranked[1:]:
+
+        if token_count + len(chunk) &lt;= max_tokens:
+
+            selected.append(chunk)
+
+            token_count += len(chunk)
+
+        else:
+
+            break
+
+
+
+    # Reorder: best chunk last, second best first, rest in middle
+
+    return reorder_for_positioning(selected)
+
+</code></pre>
+<br>
+<h2> Long Document Processing</h2>
+<br>
+<h3>Map-Reduce for Very Long Documents</h3>
+<br>
+<p>Split the document, process each section independently, then combine:</p>
+<br>
+<pre><code>
+def process_long_document(document, chunk_size=4000):
+
+    chunks = split_into_chunks(document, chunk_size)
+
+    summaries = []
+
+
+
+    for chunk in chunks:
+
+        summary = call_llm(&quot;Summarize this section:&quot;, chunk)
+
+        summaries.append(summary)
+
+
+
+    final_summary = call_llm(
+
+        &quot;Combine these section summaries into a coherent overview:&quot;,
+
+        &quot;\n\n&quot;.join(summaries)
+
+    )
+
+    return final_summary
+
+</code></pre>
+<br>
+<h3>Iterative Refinement</h3>
+<br>
+<p>For analysis of long documents, iterate with targeted queries:</p>
+<br>
+<li>Generate an initial summary</li>
+<p>2. Query model for what's missing or unclear</p>
+<p>3. Retrieve specific sections to fill gaps</p>
+<p>4. Generate refined analysis</p>
+<br>
+<h2> Monitoring Context Usage</h2>
+<br>
+<p>Track these metrics per request:</p>
+<br>
+<li>**Total tokens used** vs. model maximum</li>
+<li>**Effective context ratio**: useful tokens / total tokens</li>
+<li>**Position of relevant information**: where in the context the key data appeared</li>
+<li>**Truncation events**: how often context is being cut off</li>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>Effective context management is essential for building reliable LLM applications, regardless of context window size. Prioritize important information, use hierarchical summarization for long conversations, rank documents carefully in RAG systems, and monitor context usage in production. The models with million-token windows are impressive, but they work best when you treat their attention with respect rather than as unlimited storage.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

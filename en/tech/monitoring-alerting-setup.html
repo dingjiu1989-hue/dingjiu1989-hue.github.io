@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="monitoring-alerting-setup">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Monitoring and Alerting Setup">
+    <meta property="og:description" content="Build a production monitoring stack with metrics collection, log aggregation, and intelligent alerting.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/monitoring-alerting-setup.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Monitoring and Alerting Setup">
+    <meta name="twitter:description" content="Build a production monitoring stack with metrics collection, log aggregation, and intelligent alerting.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Monitoring and Alerting Setup — SourceHub</title>
+    <meta name="description" content="Build a production monitoring stack with metrics collection, log aggregation, and intelligent alerting.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/monitoring-alerting-setup.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/monitoring-alerting-setup.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Monitoring and Alerting Setup",
+      "description": "Build a production monitoring stack with metrics collection, log aggregation, and intelligent alerting.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1386",
+      "keywords": "Technology, Programming, DevOps",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/monitoring-alerting-setup.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Monitoring and Alerting Setup"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Monitoring and Alerting Setup
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">Programming</span>
+        <span class="tag-cat">DevOps</span></div>
+      <h1 class="article-title">Monitoring and Alerting Setup</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>A robust monitoring and alerting system is the backbone of reliable production infrastructure. Without it, you are flying blind -- discovering outages only when users complain. This guide covers setting up a complete monitoring stack and designing effective alert rules.</p>
+<br>
+<h2> The Four Golden Signals</h2>
+<br>
+<p>Google's SRE book defines four key metrics for user-facing systems:</p>
+<br>
+<li>**Latency** -- Time to service a request. Measure both average and high percentiles (p95, p99).</li>
+<p>2. **Traffic** -- Request rate (RPS, QPS) or throughput.</p>
+<p>3. **Errors** -- Rate of failed requests (5xx, timeouts, explicit error responses).</p>
+<p>4. **Saturation** -- How full the service is (CPU, memory, queue depth).</p>
+<br>
+<p>Every monitoring system should capture these four signals for each service.</p>
+<br>
+<h2> Metrics Collection Stack</h2>
+<br>
+<p>The Prometheus ecosystem has become the standard for metrics collection:</p>
+<br>
+<pre><code>
+Application → Metrics Export → Prometheus → Grafana
+
+                   ↑                ↓
+
+             Node Exporter      Alertmanager
+
+                   ↑                ↓
+
+               System           Notification
+
+               Metrics          Channels
+
+</code></pre>
+<br>
+<p>Install Prometheus and configure it to scrape targets:</p>
+<br>
+<pre><code>
+# prometheus.yml
+
+global:
+
+  scrape_interval: 15s
+
+  evaluation_interval: 15s
+
+
+
+scrape_configs:
+
+  - job_name: &#x27;node&#x27;
+
+    static_configs:
+
+      - targets: [&#x27;localhost:9100&#x27;]
+
+
+
+  - job_name: &#x27;app&#x27;
+
+    static_configs:
+
+      - targets: [&#x27;localhost:3000&#x27;]
+
+</code></pre>
+<br>
+<p>Use `scrape_interval` of 15 seconds for most metrics. For high-cardinality metrics (e.g., per-request tracing), use a longer interval or sample.</p>
+<br>
+<h2> Application Instrumentation</h2>
+<br>
+<p>Export application metrics in Prometheus format:</p>
+<br>
+<pre><code>
+// Node.js with prom-client
+
+const client = require(&#x27;prom-client&#x27;);
+
+
+
+const httpRequestDuration = new client.Histogram({
+
+  name: &#x27;http_request_duration_seconds&#x27;,
+
+  help: &#x27;HTTP request duration in seconds&#x27;,
+
+  labelNames: [&#x27;method&#x27;, &#x27;route&#x27;, &#x27;status&#x27;],
+
+  buckets: [0.01, 0.05, 0.1, 0.5, 1, 5]
+
+});
+
+
+
+// Record metrics in middleware
+
+app.use((req, res, next) =&gt; {
+
+  const end = httpRequestDuration.startTimer();
+
+  res.on(&#x27;finish&#x27;, () =&gt; {
+
+    end({ method: req.method, route: req.route?.path || &#x27;unknown&#x27;, status: res.statusCode });
+
+  });
+
+  next();
+
+});
+
+</code></pre>
+<br>
+<p>Use Histogram metrics for latency, Counter for request counts, and Gauge for current resource usage. Avoid unbounded label cardinality.</p>
+<br>
+<h2> Centralized Logging</h2>
+<br>
+<p>The ELK stack (Elasticsearch, Logstash, Kibana) remains popular, but the Grafana Loki stack is simpler and cheaper for log aggregation:</p>
+<br>
+<pre><code>
+# docker-compose for Loki + Promtail
+
+services:
+
+  loki:
+
+    image: grafana/loki:3.0
+
+    ports: [&quot;3100:3100&quot;]
+
+
+
+  promtail:
+
+    image: grafana/promtail:3.0
+
+    volumes:
+
+      - /var/log:/var/log
+
+      - ./promtail.yml:/etc/promtail/promtail.yml
+
+
+
+  grafana:
+
+    image: grafana/grafana:latest
+
+    ports: [&quot;3000:3000&quot;]
+
+</code></pre>
+<br>
+<p>Promtail tails log files, adds labels, and ships them to Loki. Grafana queries both Prometheus (metrics) and Loki (logs) in a unified dashboard.</p>
+<br>
+<h2> Effective Alerting Rules</h2>
+<br>
+<p>Design alerts that are actionable and meaningful:</p>
+<br>
+<pre><code>
+# prometheus-alerts.yml
+
+groups:
+
+  - name: application
+
+    rules:
+
+      - alert: HighErrorRate
+
+        expr: |
+
+          sum(rate(http_requests_total{status=~&quot;5..&quot;}[5m]))
+
+          /
+
+          sum(rate(http_requests_total[5m])) &gt; 0.05
+
+        for: 5m
+
+        labels:
+
+          severity: critical
+
+        annotations:
+
+          summary: &quot;High error rate ({{ $value | humanizePercentage }})&quot;
+
+
+
+      - alert: HighLatency
+
+        expr: |
+
+          histogram_quantile(0.99,
+
+            rate(http_request_duration_seconds_bucket[5m])
+
+          ) &gt; 2
+
+        for: 5m
+
+        labels:
+
+          severity: warning
+
+        annotations:
+
+          summary: &quot;p99 latency is {{ $value }}s&quot;
+
+
+
+      - alert: InstanceDown
+
+        expr: up == 0
+
+        for: 1m
+
+        labels:
+
+          severity: critical
+
+</code></pre>
+<br>
+<h3>Alert Design Principles</h3>
+<br>
+<li>**Alert on symptoms, not causes.** Alert on error rate, not on "CPU is high." CPU spikes may be normal; error rate spikes always require investigation.</li>
+<li>**Use the `for` clause.** Require the condition to persist for several minutes before firing to avoid flapping.</li>
+<li>**Set appropriate severity.** Critical alerts page someone immediately. Warning alerts create a ticket for next-day investigation.</li>
+<li>**Include runbooks.** Every alert annotation should reference a runbook URL.</li>
+<br>
+<h2> Notification Channels</h2>
+<br>
+<p>Route alerts through Alertmanager:</p>
+<br>
+<pre><code>
+# alertmanager.yml
+
+route:
+
+  receiver: &#x27;team-page&#x27;
+
+  routes:
+
+    - match:
+
+        severity: warning
+
+      receiver: &#x27;team-slack&#x27;
+
+
+
+receivers:
+
+  - name: &#x27;team-page&#x27;
+
+    pagerduty_configs:
+
+      - routing_key: &#x27;...&#x27;
+
+
+
+  - name: &#x27;team-slack&#x27;
+
+    slack_configs:
+
+      - api_url: &#x27;https://hooks.slack.com/services/...&#x27;
+
+        channel: &#x27;#alerts&#x27;
+
+</code></pre>
+<br>
+<p>Critical alerts go to PagerDuty or Opsgenie for immediate attention. Warnings go to Slack for team awareness.</p>
+<br>
+<h2> Dashboard Best Practices</h2>
+<br>
+<p>Effective Grafana dashboards follow these principles:</p>
+<br>
+<li>**One dashboard per service**, not one dashboard per engineer.</li>
+<li>**Show what matters**, not everything. Start with RED metrics (Rate, Errors, Duration).</li>
+<li>**Use templates** for environment and service selection.</li>
+<li>**Link to logs** -- a metric spike should have a one-click path to relevant logs.</li>
+<br>
+<h2> Synthetic Monitoring</h2>
+<br>
+<p>Complement real-user monitoring with synthetic checks:</p>
+<br>
+<pre><code>
+# blackbox-exporter targets
+
+modules:
+
+  http_2xx:
+
+    prober: http
+
+    http:
+
+      preferred_ip_protocol: &quot;ip4&quot;
+
+      valid_status_codes: [200, 201, 204]
+
+</code></pre>
+<br>
+<p>Run synthetic checks from multiple geographic locations to detect regional outages.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>A complete monitoring stack requires metrics (Prometheus), logs (Loki), dashboards (Grafana), and alerting (Alertmanager). Instrument your applications with the four golden signals, design alerts that fire on symptoms not causes, and ensure every alert has a clear path to resolution. Start simple with Prometheus and Grafana, then add log aggregation and synthetic monitoring as your infrastructure grows.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

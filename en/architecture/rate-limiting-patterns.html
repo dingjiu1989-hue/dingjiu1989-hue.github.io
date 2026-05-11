@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="rate-limiting-patterns">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Rate Limiting Patterns">
+    <meta property="og:description" content="Explore rate limiting patterns for protecting APIs and services from abuse.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/rate-limiting-patterns.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rate Limiting Patterns">
+    <meta name="twitter:description" content="Explore rate limiting patterns for protecting APIs and services from abuse.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Rate Limiting Patterns — SourceHub</title>
+    <meta name="description" content="Explore rate limiting patterns for protecting APIs and services from abuse.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/rate-limiting-patterns.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/rate-limiting-patterns.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Rate Limiting Patterns",
+      "description": "Explore rate limiting patterns for protecting APIs and services from abuse.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1304",
+      "keywords": "Architecture, System Design",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/rate-limiting-patterns.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Rate Limiting Patterns"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Rate Limiting Patterns
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span></div>
+      <h1 class="article-title">Rate Limiting Patterns</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Rate limiting is a critical component of any production API or service. It protects your system from abuse, ensures fair usage among consumers, and maintains service quality under load. This article explores the most common rate limiting algorithms and how to choose the right one for your use case.</p>
+<br>
+<h2> Why Rate Limiting Matters</h2>
+<br>
+<p>Rate limiting prevents a single client from consuming an unfair share of resources. Without it, a misbehaving client or an accidental infinite loop can degrade service for all users. Rate limiting also helps:</p>
+<br>
+<li>Protect against DDoS attacks.</li>
+<li>Control costs in metered infrastructure.</li>
+<li>Enforce service level agreements (SLAs).</li>
+<li>Prevent cascading failures in distributed systems.</li>
+<br>
+<h2> Token Bucket Algorithm</h2>
+<br>
+<p>The token bucket is one of the most popular rate limiting algorithms. A bucket holds a fixed number of tokens. Tokens are added at a steady rate. Each request consumes one token. If the bucket is empty, the request is denied.</p>
+<br>
+<pre><code>
+Capacity: 100 tokens
+
+Refill rate: 10 tokens/second
+
+
+
+Request at t=0: 100 tokens available -&gt; success, 99 remaining
+
+Request at t=1: 99 + 10 = 100 -&gt; success, 99 remaining
+
+Request at t=0.5: 99 + 5 = 100 -&gt; success, 99 remaining
+
+</code></pre>
+<br>
+<p>**Pros:** Allows bursts up to the bucket capacity. Memory efficient -- you only need to store the token count and last refill timestamp.</p>
+<br>
+<p>**Cons:** The burst behavior may not suit all use cases. With a large bucket, a client can send an entire day's worth of requests in a few seconds.</p>
+<br>
+<p>The token bucket is used by Amazon (AWS API Gateway), Stripe, and GitHub.</p>
+<br>
+<h2> Leaky Bucket Algorithm</h2>
+<br>
+<p>The leaky bucket is similar to the token bucket but processes requests at a fixed rate. Think of a bucket with a hole in the bottom. Requests are poured into the top. They leak out of the bottom at a constant rate. If the bucket overflows, excess requests are rejected.</p>
+<br>
+<p>**Pros:** Smooths out traffic perfectly. No bursts at all. Predictable processing rate.</p>
+<br>
+<p>**Cons:** Cannot handle any bursts, even legitimate ones. A client that occasionally needs to send 10 requests at once will be penalized.</p>
+<br>
+<p>Leaky bucket is ideal for scenarios where a steady processing rate is critical, such as database connection pooling or queue workers.</p>
+<br>
+<h2> Fixed Window Counter</h2>
+<br>
+<p>Divide time into fixed windows (e.g., 1 minute). Count requests in each window. If the count exceeds the limit, reject further requests until the next window.</p>
+<br>
+<pre><code>
+Limit: 100 requests per minute
+
+Window: 00:00:00 to 00:01:00
+
+
+
+95 requests at 00:00:45 -&gt; allowed
+
+6 requests at 00:00:55 -&gt; 5 allowed, 1 rejected (exceeds 100)
+
+Window resets at 00:01:00
+
+</code></pre>
+<br>
+<p>**Pros:** Extremely simple to implement. Only requires a counter per window per client.</p>
+<br>
+<p>**Cons:** The "boundary problem." At the edge of a window, a client can send 100 requests at 00:00:59 and another 100 at 00:01:01, effectively 200 requests in 2 seconds. This can overwhelm your system.</p>
+<br>
+<h2> Sliding Window Log</h2>
+<br>
+<p>Instead of fixed windows, track a timestamp for each request. Count requests within the last N seconds.</p>
+<br>
+<p>**Pros:** Eliminates the boundary problem. Perfectly accurate rate limiting.</p>
+<br>
+<p>**Cons:** Memory intensive. You need to store a timestamp for every request. For high-traffic APIs, this can require significant storage.</p>
+<br>
+<h2> Sliding Window Counter</h2>
+<br>
+<p>A hybrid approach combining fixed windows with sliding precision. Track counters for the current and previous windows. Approximate the count for the sliding window using weighted averages.</p>
+<br>
+<pre><code>
+Limit: 100 requests per minute
+
+Current 1-minute window: 80 requests
+
+Previous 1-minute window: 40 requests
+
+
+
+At 30 seconds into the current window:
+
+Estimated count = 40 * (30/60) + 80 = 100
+
+</code></pre>
+<br>
+<p>**Pros:** Smooths out the boundary problem with minimal memory (just two counters per client). Good enough for most use cases.</p>
+<br>
+<p>**Cons:** Not perfectly accurate. The approximation error varies but is typically acceptable for rate limiting purposes.</p>
+<br>
+<p>This is the algorithm used by Cloudflare and many CDN-based rate limiters.</p>
+<br>
+<h2> Distributed Rate Limiting</h2>
+<br>
+<p>In a distributed system with multiple application instances, rate limiting becomes more complex. Each instance cannot track limits independently, or the combined traffic might exceed the limit.</p>
+<br>
+<p>**Centralized approach:** Use a shared data store like Redis to maintain counters. The `INCR` and `EXPIRE` commands make Redis ideal for rate limiting. This gives global accuracy but adds latency for every request.</p>
+<br>
+<p>**Local approach:** Each instance independently tracks its share of the limit (e.g., if there are 3 instances and the limit is 300, each instance limits to 100). This is fast but can exceed the limit if traffic distribution is uneven.</p>
+<br>
+<p>**Hybrid approach:** Use local rate limiting for fast checks and periodic synchronization to a central store. This balances performance and accuracy.</p>
+<br>
+<h2> Response Headers</h2>
+<br>
+<p>Tell clients about their rate limit status through response headers:</p>
+<br>
+<pre><code>
+X-RateLimit-Limit: 100
+
+X-RateLimit-Remaining: 42
+
+X-RateLimit-Reset: 1640995200
+
+</code></pre>
+<br>
+<p>When a client exceeds the limit, return `429 Too Many Requests` with a `Retry-After` header:</p>
+<br>
+<pre><code>
+HTTP/1.1 429 Too Many Requests
+
+Retry-After: 30
+
+</code></pre>
+<br>
+<h2> Choosing the Right Algorithm</h2>
+<br>
+<li>**Token bucket** is a good default choice. It handles bursts and is memory efficient.</li>
+<li>**Fixed window** works for simple scenarios where occasional bursts are acceptable.</li>
+<li>**Sliding window log** is best for strict, precise rate limiting.</li>
+<li>**Sliding window counter** is a good compromise between accuracy and efficiency.</li>
+<li>**Leaky bucket** works when you need a constant processing rate.</li>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Rate limiting is essential for production APIs. Start with the token bucket algorithm for general-purpose rate limiting. Use Redis for distributed scenarios. Always return descriptive headers so clients can adjust their behavior. Monitor your rate limiting effectiveness and adjust thresholds based on real traffic patterns.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

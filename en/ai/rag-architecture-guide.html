@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="rag-architecture-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="RAG Architecture Guide">
+    <meta property="og:description" content="A comprehensive guide to Retrieval-Augmented Generation architecture, covering indexing, retrieval, generation, and production deployment.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/rag-architecture-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="RAG Architecture Guide">
+    <meta name="twitter:description" content="A comprehensive guide to Retrieval-Augmented Generation architecture, covering indexing, retrieval, generation, and production deployment.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>RAG Architecture Guide — SourceHub</title>
+    <meta name="description" content="A comprehensive guide to Retrieval-Augmented Generation architecture, covering indexing, retrieval, generation, and production deployment.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/rag-architecture-guide.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/ai/rag-architecture-guide.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "RAG Architecture Guide",
+      "description": "A comprehensive guide to Retrieval-Augmented Generation architecture, covering indexing, retrieval, generation, and production deployment.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1131",
+      "keywords": "Artificial Intelligence, Machine Learning",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/rag-architecture-guide.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "RAG Architecture Guide"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › RAG Architecture Guide
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
+        <span class="tag-cat">Machine Learning</span></div>
+      <h1 class="article-title">RAG Architecture Guide</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>Retrieval-Augmented Generation (RAG) has become the dominant architecture for production LLM applications. By combining a retrieval system with a generative model, RAG overcomes the limitations of static model knowledge — providing access to up-to-date information, reducing hallucinations, and grounding responses in verifiable sources. This guide explores RAG architecture from the ground up.</p>
+<br>
+<h2> Core Components</h2>
+<br>
+<p>A RAG system consists of three primary stages: indexing, retrieval, and generation.</p>
+<br>
+<h3>Indexing Pipeline</h3>
+<br>
+<p>The indexing pipeline transforms raw documents into a searchable format:</p>
+<br>
+<li>**Document ingestion**: Load documents from PDFs, web pages, databases, or APIs</li>
+<p>2. **Text splitting**: Chunk documents into manageable pieces using semantic or fixed-size splitting</p>
+<p>3. **Embedding generation**: Convert each chunk into a dense vector using an embedding model</p>
+<p>4. **Vector storage**: Store embeddings in a vector database with metadata</p>
+<br>
+<p>Chunking strategy significantly impacts retrieval quality. Fixed-size chunks of 512 tokens with 128-token overlap work well for general-purpose RAG. For code documentation, smaller chunks of 256 tokens are preferable. Semantic chunking, which splits at natural boundaries like paragraphs or sections, often produces the best results.</p>
+<br>
+<h3>Retrieval Stage</h3>
+<br>
+<p>The retrieval stage finds relevant documents for a given query:</p>
+<br>
+<p>**Query transformation** is often the first step. Raw user queries are rarely optimal for retrieval. Common transformations include:</p>
+<br>
+<li>Query rewriting: Rephrase the user's question to match document language</li>
+<li>Query expansion: Generate multiple related queries and retrieve for each</li>
+<li>HyDE (Hypothetical Document Embedding): Generate a hypothetical answer, then use its embedding for retrieval</li>
+<br>
+<p>**Retrieval methods** range from simple to sophisticated:</p>
+<br>
+<li>**Dense retrieval**: Cosine similarity search against embedding vectors using ANN indexes (HNSW, IVF)</li>
+<li>**Sparse retrieval**: Traditional keyword matching using BM25 or TF-IDF</li>
+<li>**Hybrid retrieval**: Combine dense and sparse results with reciprocal rank fusion</li>
+<br>
+<p>Hybrid retrieval consistently outperforms either method alone. A typical fusion formula is:</p>
+<br>
+<pre><code>
+RRF(d) = Σ 1/(k + rank_i(d))
+
+</code></pre>
+<br>
+<p>Where k is a constant (typically 60) and rank_i(d) is the rank of document d in method i.</p>
+<br>
+<h3>Generation Stage</h3>
+<br>
+<p>The generation stage constructs prompts combining retrieved context with the user's query:</p>
+<br>
+<p>**Context windowing** strategies include:</p>
+<br>
+<li>**Stuff**: Insert all retrieved documents into the prompt (simple but token-heavy)</li>
+<li>**Map-reduce**: Process each document separately, then combine results</li>
+<li>**Refine**: Iteratively update an answer as each document is processed</li>
+<br>
+<p>**Re-ranking** is a critical step between retrieval and generation. A cross-encoder model scores each retrieved document for relevance to the query, filtering out low-quality matches before they reach the LLM.</p>
+<br>
+<h2> Advanced RAG Patterns</h2>
+<br>
+<h3>Agentic RAG</h3>
+<br>
+<p>Agentic RAG systems give the LLM control over retrieval decisions. Instead of retrieving once and generating, the model can:</p>
+<br>
+<li>Request additional documents when information is insufficient</li>
+<li>Choose between different data sources (vector DB, web search, SQL database)</li>
+<li>Iteratively refine search queries based on partial results</li>
+<br>
+<p>This pattern dramatically improves answer quality for complex, multi-step questions.</p>
+<br>
+<h3>Multi-Hop RAG</h3>
+<br>
+<p>Some questions require information from multiple documents. Multi-hop RAG breaks the question into sub-questions, retrieves for each, and synthesizes the results. For example, "Which company founded by Person A acquired Company B?" requires finding Person A's company, then checking acquisition records.</p>
+<br>
+<h3>Self-RAG</h3>
+<br>
+<p>Self-RAG introduces reflection steps where the model evaluates its own retrieval and generation:</p>
+<br>
+<li>Retrieve relevant passages</li>
+<p>2. Generate an answer based on retrieved passages</p>
+<p>3. Evaluate whether the answer is supported by the passages</p>
+<p>4. If not, either retrieve more information or revise the answer</p>
+<br>
+<h2> Production Considerations</h2>
+<br>
+<p>**Latency optimization**: Embedding generation and vector search both add latency. Strategies include caching frequent queries, using smaller embedding models for initial retrieval, and parallelizing retrieval across multiple data sources.</p>
+<br>
+<p>**Evaluation**: RAG systems need evaluation at both the retrieval and generation stages. Retrieval metrics include recall@k and MRR. Generation metrics include answer relevance, faithfulness (whether the answer is supported by retrieved documents), and answer completeness.</p>
+<br>
+<p>**Monitoring**: Track embedding drift (when the distribution of queries changes), retrieval success rate, and end-user feedback to continuously improve the system.</p>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>RAG architecture provides a powerful framework for building LLM applications grounded in real data. The key to success is understanding the interaction between indexing quality, retrieval strategy, and generation prompts. Start with a simple pipeline, measure performance, and add sophistication — hybrid retrieval, re-ranking, agentic patterns — only where data shows they improve outcomes.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="sql-query-optimization">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="SQL Query Optimization">
+    <meta property="og:description" content="Master SQL query optimization with EXPLAIN plans, indexing strategies, JOIN optimization, and common performance anti-patterns.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/sql-query-optimization.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SQL Query Optimization">
+    <meta name="twitter:description" content="Master SQL query optimization with EXPLAIN plans, indexing strategies, JOIN optimization, and common performance anti-patterns.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>SQL Query Optimization — SourceHub</title>
+    <meta name="description" content="Master SQL query optimization with EXPLAIN plans, indexing strategies, JOIN optimization, and common performance anti-patterns.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/sql-query-optimization.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/sql-query-optimization.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "SQL Query Optimization",
+      "description": "Master SQL query optimization with EXPLAIN plans, indexing strategies, JOIN optimization, and common performance anti-patterns.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1267",
+      "keywords": "Database, SQL",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/sql-query-optimization.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "SQL Query Optimization"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › SQL Query Optimization
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">SQL</span></div>
+      <h1 class="article-title">SQL Query Optimization</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Why Query Optimization Matters</h2>
+<br>
+<p>A poorly written query can take seconds or minutes instead of milliseconds, consuming database resources and degrading the experience for all users. Optimizing queries is often the highest-ROI performance improvement you can make because it requires no infrastructure changes.</p>
+<br>
+<h2> Understanding EXPLAIN</h2>
+<br>
+<p>Every database has a query planner that decides how to execute your SQL. EXPLAIN shows you the plan.</p>
+<br>
+<pre><code>
+EXPLAIN ANALYZE
+
+SELECT u.name, COUNT(o.id) AS order_count
+
+FROM users u
+
+LEFT JOIN orders o ON u.id = o.user_id
+
+WHERE u.created_at &gt; &#x27;2026-01-01&#x27;
+
+GROUP BY u.id, u.name
+
+HAVING COUNT(o.id) &gt; 5;
+
+</code></pre>
+<br>
+<p>Output analysis:</p>
+<br>
+<pre><code>
+Hash Join  (cost=125.4..892.1 rows=342 width=72)
+
+  Hash Cond: (u.id = o.user_id)
+
+  -&gt;  Seq Scan on users u  (cost=0.0..423.1 rows=1250 width=36)
+
+        Filter: (created_at &gt; &#x27;2026-01-01&#x27;)
+
+  -&gt;  Hash  (cost=89.2..89.2 rows=2892 width=8)
+
+        -&gt;  Seq Scan on orders o  (cost=0.0..89.2 rows=2892 width=8)
+
+</code></pre>
+<br>
+<p>Key metrics to watch:</p>
+<br>
+<p>| Metric | What It Means | Good | Bad |</p>
+<p>|--------|---------------|------|-----|</p>
+<p>| `cost` | Estimated cost (arbitrary units) | Low | High |</p>
+<p>| `rows` | Estimated rows returned | Accurate | Off by 10x+ |</p>
+<p>| `actual time` | Actual execution time | ms | seconds |</p>
+<p>| `Seq Scan` | Full table scan | Small tables | Large tables |</p>
+<p>| `Sort` | Explicit sort operation | Sorted data | Large sorts to disk |</p>
+<br>
+<h2> Indexing for Query Performance</h2>
+<br>
+<h3>Covering Indexes</h3>
+<br>
+<p>An index that contains all columns needed by a query, enabling index-only scans:</p>
+<br>
+<pre><code>
+-- Query needs: id, email, status, created_at
+
+-- Instead of:
+
+CREATE INDEX idx_users_status ON users(status);
+
+
+
+-- Create a covering index:
+
+CREATE INDEX idx_users_status_covering
+
+ON users(status) INCLUDE (email, created_at);
+
+
+
+-- Now this query uses an index-only scan:
+
+SELECT email, created_at
+
+FROM users
+
+WHERE status = &#x27;active&#x27;
+
+ORDER BY created_at DESC;
+
+</code></pre>
+<br>
+<h2> JOIN Optimization</h2>
+<br>
+<h3>Nested Loop vs Hash Join vs Merge Join</h3>
+<br>
+<p>| Join Type | When It Is Used | Best For |</p>
+<p>|-----------|-----------------|----------|</p>
+<p>| Nested Loop | One table is small, other is indexed | Small result sets |</p>
+<p>| Hash Join | No useful index, medium tables | Unindexed joins |</p>
+<p>| Merge Join | Both tables sorted on join key | Large sorted datasets |</p>
+<br>
+<h3>Optimizing JOINs</h3>
+<br>
+<pre><code>
+-- INEFFICIENT: Joining without indexes
+
+SELECT *
+
+FROM orders o
+
+JOIN customers c ON o.customer_id = c.id
+
+WHERE c.country = &#x27;US&#x27;;
+
+
+
+-- Add index on the join column
+
+CREATE INDEX idx_orders_customer ON orders(customer_id);
+
+CREATE INDEX idx_customers_country ON customers(country);
+
+
+
+-- Now the planner can use indexes effectively
+
+</code></pre>
+<br>
+<h2> Subquery vs CTE vs JOIN</h2>
+<br>
+<pre><code>
+-- Option 1: Subquery
+
+SELECT name, (SELECT COUNT(*) FROM orders WHERE user_id = users.id) AS order_count
+
+FROM users;
+
+
+
+-- Option 2: Lateral join (often fastest)
+
+SELECT u.name, sq.order_count
+
+FROM users u
+
+LEFT JOIN LATERAL (
+
+    SELECT COUNT(*) AS order_count
+
+    FROM orders
+
+    WHERE user_id = u.id
+
+) sq ON true;
+
+
+
+-- Option 3: Regular JOIN + GROUP BY
+
+SELECT u.name, COUNT(o.id) AS order_count
+
+FROM users u
+
+LEFT JOIN orders o ON u.id = o.user_id
+
+GROUP BY u.id, u.name;
+
+</code></pre>
+<br>
+<p>For correlated subqueries, LATERAL joins are often the best choice because they can use indexes efficiently.</p>
+<br>
+<h2> Avoiding Common Anti-Patterns</h2>
+<br>
+<h3>SELECT * (Especially with JOINs)</h3>
+<br>
+<pre><code>
+-- BAD: Selects all columns, may force heap lookups
+
+SELECT * FROM users
+
+JOIN orders ON users.id = orders.user_id;
+
+
+
+-- GOOD: Select only needed columns
+
+SELECT users.name, orders.total
+
+FROM users
+
+JOIN orders ON users.id = orders.user_id;
+
+</code></pre>
+<br>
+<h3>Functions on Indexed Columns</h3>
+<br>
+<pre><code>
+-- BAD: Function prevents index use
+
+SELECT * FROM users
+
+WHERE LOWER(email) = &#x27;alice@example.com&#x27;;
+
+
+
+-- GOOD: Use a proper case-insensitive index or column
+
+CREATE INDEX idx_users_email_lower ON users(LOWER(email));
+
+SELECT * FROM users WHERE LOWER(email) = &#x27;alice@example.com&#x27;;
+
+</code></pre>
+<br>
+<h3>Implicit Type Conversion</h3>
+<br>
+<pre><code>
+-- BAD: Type conversion prevents index use
+
+SELECT * FROM orders
+
+WHERE order_date = &#x27;2026-05-11&#x27;;  -- text vs date
+
+
+
+-- GOOD: Explicit cast
+
+SELECT * FROM orders
+
+WHERE order_date = DATE &#x27;2026-05-11&#x27;;
+
+</code></pre>
+<br>
+<h3>Pagination with OFFSET</h3>
+<br>
+<pre><code>
+-- BAD: OFFSET re-scans skipped rows
+
+SELECT * FROM orders ORDER BY id LIMIT 20 OFFSET 10000;
+
+
+
+-- GOOD: Keyset pagination (seek method)
+
+SELECT * FROM orders
+
+WHERE id &gt; 10000
+
+ORDER BY id
+
+LIMIT 20;
+
+</code></pre>
+<br>
+<h2> Query Rewriting Examples</h2>
+<br>
+<pre><code>
+-- BEFORE (Slow - 12s)
+
+SELECT p.*,
+
+    (SELECT COUNT(*) FROM reviews r WHERE r.product_id = p.id AND r.rating &gt;= 4) AS good_reviews
+
+FROM products p
+
+WHERE p.category_id = 5;
+
+
+
+-- AFTER (Fast - 0.3s)
+
+SELECT p.*, COALESCE(gr.count, 0) AS good_reviews
+
+FROM products p
+
+LEFT JOIN (
+
+    SELECT product_id, COUNT(*) AS count
+
+    FROM reviews
+
+    WHERE rating &gt;= 4
+
+    GROUP BY product_id
+
+) gr ON p.id = gr.product_id
+
+WHERE p.category_id = 5;
+
+</code></pre>
+<br>
+<h2> Performance Budgets</h2>
+<br>
+<p>| Query Type | Target Latency | Max Rows Returned |</p>
+<p>|------------|---------------|-------------------|</p>
+<p>| Simple lookup (by PK) | < 5ms | 1 |</p>
+<p>| List with filter | < 50ms | 100 |</p>
+<p>| Report/aggregation | < 500ms | 10000 |</p>
+<p>| Dashboard | < 2s | 1000 |</p>
+<p>| Batch/ETL | < 30min | Unlimited |</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>SQL query optimization starts with understanding the query plan through EXPLAIN ANALYZE. Ensure appropriate indexes exist for your query patterns, prefer covering indexes for index-only scans, avoid functions on indexed columns, replace OFFSET pagination with keyset pagination, and rewrite correlated subqueries as joins or lateral joins. Measure before and after each optimization to confirm the improvement.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

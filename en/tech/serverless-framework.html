@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="serverless-framework">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Serverless Framework: From Zero to Production">
+    <meta property="og:description" content="Deploy AWS Lambda functions with infrastructure as code, local development workflows, monitoring, cold start optimization, and cost analysis strategies.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/serverless-framework.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Serverless Framework: From Zero to Production">
+    <meta name="twitter:description" content="Deploy AWS Lambda functions with infrastructure as code, local development workflows, monitoring, cold start optimization, and cost analysis strategies.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Serverless Framework: From Zero to Production — SourceHub</title>
+    <meta name="description" content="Deploy AWS Lambda functions with infrastructure as code, local development workflows, monitoring, cold start optimization, and cost analysis strategies.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/serverless-framework.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/serverless-framework.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Serverless Framework: From Zero to Production",
+      "description": "Deploy AWS Lambda functions with infrastructure as code, local development workflows, monitoring, cold start optimization, and cost analysis strategies.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1724",
+      "keywords": "Technology, Programming, DevOps",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/serverless-framework.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Serverless Framework: From Zero to Production"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Serverless Framework: From Zero to Production
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">Programming</span>
+        <span class="tag-cat">DevOps</span></div>
+      <h1 class="article-title">Serverless Framework: From Zero to Production</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>The Serverless Framework provides a unified experience for deploying functions, APIs, and event-driven architectures across major cloud providers. While serverless eliminates infrastructure management, it introduces challenges around cold starts, observability, and cost control. This guide walks through taking a serverless application from development to production using the Serverless Framework on AWS Lambda.</p>
+<br>
+<h2> Project Setup and Structure</h2>
+<br>
+<p>A well-structured serverless project separates concerns across functions, layers, and configuration:</p>
+<br>
+<pre><code>
+# serverless.yml
+
+service: order-processor
+
+frameworkVersion: &quot;4&quot;
+
+
+
+provider:
+
+  name: aws
+
+  runtime: nodejs20.x
+
+  region: us-east-1
+
+  stage: ${opt:stage, &#x27;dev&#x27;}
+
+  environment:
+
+    ORDER_TABLE: ${self:custom.tableName}
+
+    QUEUE_URL: !Ref OrderQueue
+
+
+
+plugins:
+
+  - serverless-webpack
+
+  - serverless-offline
+
+  - serverless-prune-plugin
+
+
+
+custom:
+
+  tableName: orders-${self:provider.stage}
+
+  webpack:
+
+    packager: pnpm
+
+    excludeFiles: src/**/*.test.ts
+
+  prune:
+
+    automatic: true
+
+    number: 3
+
+
+
+functions:
+
+  createOrder:
+
+    handler: src/handlers/createOrder.handler
+
+    events:
+
+      - httpApi:
+
+          method: POST
+
+          path: /orders
+
+    timeout: 10
+
+    memorySize: 256
+
+    iamRoleStatements:
+
+      - Effect: Allow
+
+        Action: dynamodb:PutItem
+
+        Resource: !GetAtt OrdersTable.Arn
+
+</code></pre>
+<br>
+<h2> Infrastructure as Code</h2>
+<br>
+<p>Define resources alongside functions for self-documenting infrastructure:</p>
+<br>
+<pre><code>
+resources:
+
+  Resources:
+
+    OrdersTable:
+
+      Type: AWS::DynamoDB::Table
+
+      Properties:
+
+        TableName: orders-${self:provider.stage}
+
+        BillingMode: PAY_PER_REQUEST
+
+        AttributeDefinitions:
+
+          - AttributeName: orderId
+
+            AttributeType: S
+
+          - AttributeName: status
+
+            AttributeType: S
+
+        KeySchema:
+
+          - AttributeName: orderId
+
+            KeyType: HASH
+
+        GlobalSecondaryIndexes:
+
+          - IndexName: StatusIndex
+
+            KeySchema:
+
+              - AttributeName: status
+
+                KeyType: HASH
+
+            Projection:
+
+              ProjectionType: ALL
+
+    OrderQueue:
+
+      Type: AWS::SQS::Queue
+
+      Properties:
+
+        QueueName: orders-${self:provider.stage}
+
+        VisibilityTimeout: 60
+
+        RedrivePolicy:
+
+          deadLetterTargetArn: !GetAtt DeadLetterQueue.Arn
+
+          maxReceiveCount: 3
+
+    DeadLetterQueue:
+
+      Type: AWS::SQS::Queue
+
+      Properties:
+
+        QueueName: orders-dlq-${self:provider.stage}
+
+</code></pre>
+<br>
+<h2> Lambda Handler Implementation</h2>
+<br>
+<p>Write handlers with proper error handling and observability:</p>
+<br>
+<pre><code>
+// src/handlers/createOrder.ts
+
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from &quot;aws-lambda&quot;;
+
+import { DynamoDBClient } from &quot;@aws-sdk/client-dynamodb&quot;;
+
+import { DynamoDBDocumentClient, PutCommand } from &quot;@aws-sdk/lib-dynamodb&quot;;
+
+import { randomUUID } from &quot;crypto&quot;;
+
+import { Logger } from &quot;@aws-lambda-powertools/logger&quot;;
+
+import { Metrics } from &quot;@aws-lambda-powertools/metrics&quot;;
+
+import { Tracer } from &quot;@aws-lambda-powertools/tracer&quot;;
+
+
+
+const logger = new Logger({ serviceName: &quot;order-processor&quot; });
+
+const metrics = new Metrics({ namespace: &quot;OrderProcessor&quot; });
+
+const tracer = new Tracer({ serviceName: &quot;order-processor&quot; });
+
+
+
+const ddb = DynamoDBDocumentClient.from(new DynamoDBClient({}));
+
+
+
+export const handler = async (
+
+  event: APIGatewayProxyEvent
+
+): Promise&lt;APIGatewayProxyResult&gt; =&gt; {
+
+  try {
+
+    const body = JSON.parse(event.body || &quot;{}&quot;);
+
+    const orderId = randomUUID();
+
+    const order = {
+
+      orderId,
+
+      ...body,
+
+      status: &quot;PENDING&quot;,
+
+      createdAt: new Date().toISOString(),
+
+    };
+
+
+
+    await ddb.send(new PutCommand({
+
+      TableName: process.env.ORDER_TABLE,
+
+      Item: order,
+
+    }));
+
+
+
+    metrics.addMetric(&quot;OrderCreated&quot;, 1, &quot;Count&quot;);
+
+    logger.info(&quot;Order created&quot;, { orderId });
+
+
+
+    return {
+
+      statusCode: 201,
+
+      headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
+
+      body: JSON.stringify({ orderId, status: &quot;PENDING&quot; }),
+
+    };
+
+  } catch (error) {
+
+    logger.error(&quot;Failed to create order&quot;, { error });
+
+    metrics.addMetric(&quot;OrderCreationError&quot;, 1, &quot;Count&quot;);
+
+    return {
+
+      statusCode: 500,
+
+      body: JSON.stringify({ message: &quot;Internal server error&quot; }),
+
+    };
+
+  }
+
+};
+
+</code></pre>
+<br>
+<h2> Local Development</h2>
+<br>
+<p>The `serverless-offline` plugin provides a local Lambda emulator:</p>
+<br>
+<pre><code>
+# Start local API Gateway emulator
+
+serverless offline --stage dev --httpPort 4000
+
+
+
+# Invoke a function directly
+
+serverless invoke local --function createOrder \
+
+  --path test/fixtures/create-order.json
+
+
+
+# Run with warm container simulation
+
+serverless offline --stage dev \
+
+  --noPrependStageInUrl \
+
+  --reloadHandler
+
+</code></pre>
+<br>
+<h2> Cold Start Optimization</h2>
+<br>
+<p>Cold starts add latency when Lambda scales up a new execution environment:</p>
+<br>
+<pre><code>
+# Optimize for cold starts
+
+provider:
+
+  # Use AWS Graviton for better price/performance
+
+  architecture: arm64
+
+  # Increase memory speeds up CPU allocation
+
+  # (and proportionally reduces cold start time)
+
+  memorySize: 1024
+
+
+
+functions:
+
+  latencyCritical:
+
+    handler: src/handlers/critical.handler
+
+    # Provisioned concurrency for critical paths
+
+    provisionedConcurrency: 5
+
+    # Reserve concurrency to prevent throttling
+
+    reservedConcurrency: 20
+
+</code></pre>
+<br>
+<p>Code-level optimizations:</p>
+<br>
+<pre><code>
+// Cold start optimization techniques
+
+
+
+// 1. Lazy initialization outside handler (reused across invocations)
+
+let client: DynamoDBDocumentClient;
+
+function getClient(): DynamoDBDocumentClient {
+
+  if (!client) {
+
+    client = DynamoDBDocumentClient.from(new DynamoDBClient({}));
+
+  }
+
+  return client;
+
+}
+
+
+
+// 2. Bundle and tree-shake dependencies
+
+// Use esbuild or webpack to exclude unused SDK clients
+
+
+
+// 3. Minimize deployment package size
+
+// Exclude in webpack:
+
+// externals: [&quot;@aws-sdk/client-dynamodb&quot;]
+
+
+
+// 4. Use AWS SDK v3 for modular imports
+
+import { DynamoDBClient } from &quot;@aws-sdk/client-dynamodb&quot;;
+
+// Instead of: import { DynamoDB } from &quot;aws-sdk&quot;;
+
+</code></pre>
+<br>
+<h2> Monitoring and Observability</h2>
+<br>
+<p>CloudWatch is the default, but Powertools enhances observability significantly:</p>
+<br>
+<pre><code>
+functions:
+
+  processOrder:
+
+    handler: src/handlers/processOrder.handler
+
+    environment:
+
+      POWERTOOLS_SERVICE_NAME: order-processor
+
+      POWERTOOLS_METRICS_NAMESPACE: OrderProcessor
+
+      LOG_LEVEL: INFO
+
+    events:
+
+      - sqs:
+
+          arn: !GetAtt OrderQueue.Arn
+
+          batchSize: 10
+
+          maximumBatchingWindowInSeconds: 5
+
+</code></pre>
+<br>
+<p>Create CloudWatch dashboards and alarms:</p>
+<br>
+<pre><code>
+resources:
+
+  Resources:
+
+    OrderErrorAlarm:
+
+      Type: AWS::CloudWatch::Alarm
+
+      Properties:
+
+        AlarmName: order-processor-errors-${self:provider.stage}
+
+        MetricName: Errors
+
+        Namespace: AWS/Lambda
+
+        Dimensions:
+
+          - Name: FunctionName
+
+            Value: !Ref ProcessOrderLambdaFunction
+
+        Statistic: Sum
+
+        Period: 300
+
+        EvaluationPeriods: 1
+
+        Threshold: 5
+
+        ComparisonOperator: GreaterThanThreshold
+
+</code></pre>
+<br>
+<h2> Cost Analysis</h2>
+<br>
+<p>Serverless costs are driven by invocation count, duration, and memory allocation:</p>
+<br>
+<pre><code>
+# Calculate monthly cost estimate
+
+# Invocations: 10M/month
+
+# Avg duration: 200ms
+
+# Memory: 1024MB
+
+# Cost = 10M * (0.2s / 1000ms) * 1GB * $0.00001667/GB-second
+
+#      = 10M * 0.2 * 0.00001667
+
+#      = ~$33.34/month
+
+</code></pre>
+<br>
+<p>Optimize cost with `serverless-prune-plugin` to remove old versions:</p>
+<br>
+<pre><code>
+custom:
+
+  prune:
+
+    automatic: true
+
+    number: 3  # Keep only 3 latest versions
+
+</code></pre>
+<br>
+<p>For high-throughput workloads, compare Lambda cost against ECS Fargate at sustained traffic levels. Lambda often wins for variable, low-volume traffic but becomes expensive at steady-state high throughput. Use these patterns to build production-grade serverless applications that are cost-effective, observable, and performant from day one.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

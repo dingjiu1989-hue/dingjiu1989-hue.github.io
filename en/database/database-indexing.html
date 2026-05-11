@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="database-indexing">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Database Indexing Strategies">
+    <meta property="og:description" content="A comprehensive guide to database indexing covering B-tree, hash, GiST, GIN indexes, composite indexes, and query optimization.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/database-indexing.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Database Indexing Strategies">
+    <meta name="twitter:description" content="A comprehensive guide to database indexing covering B-tree, hash, GiST, GIN indexes, composite indexes, and query optimization.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Database Indexing Strategies — SourceHub</title>
+    <meta name="description" content="A comprehensive guide to database indexing covering B-tree, hash, GiST, GIN indexes, composite indexes, and query optimization.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/database-indexing.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/database-indexing.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Database Indexing Strategies",
+      "description": "A comprehensive guide to database indexing covering B-tree, hash, GiST, GIN indexes, composite indexes, and query optimization.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1248",
+      "keywords": "Database, SQL",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-indexing.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Database Indexing Strategies"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Database Indexing Strategies
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">SQL</span></div>
+      <h1 class="article-title">Database Indexing Strategies</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> What Is Database Indexing?</h2>
+<br>
+<p>A database index is a data structure that improves the speed of data retrieval operations on a table at the cost of additional writes and storage space. Think of it like a book's index: instead of flipping through every page to find a topic, you look up the topic in the index and go directly to the right page.</p>
+<br>
+<h2> How Indexes Work</h2>
+<br>
+<p>Without an index, the database performs a sequential scan, reading every row until it finds matches. With an index, the database navigates a balanced tree structure to locate data in O(log n) time instead of O(n).</p>
+<br>
+<pre><code>
+Sequential Scan:  [Row1] [Row2] [Row3] ... [Row1M]  = 1,000,000 reads
+
+B-Tree Index:     [Root] -&gt; [Branch] -&gt; [Leaf] -&gt; [Row] = 3-4 reads
+
+</code></pre>
+<br>
+<h2> Index Types</h2>
+<br>
+<h3>B-Tree Index</h3>
+<br>
+<p>The default and most common index type. Works well for equality and range queries.</p>
+<br>
+<pre><code>
+CREATE INDEX idx_users_email ON users(email);
+
+CREATE INDEX idx_users_created ON users(created_at);
+
+
+
+-- Used for:
+
+SELECT * FROM users WHERE email = &#x27;alice@example.com&#x27;;
+
+SELECT * FROM users WHERE created_at &gt; &#x27;2026-01-01&#x27;;
+
+SELECT * FROM users WHERE email LIKE &#x27;alice%&#x27;;
+
+</code></pre>
+<br>
+<h3>Hash Index</h3>
+<br>
+<p>Optimized for equality comparisons. Not suitable for range queries or sorting.</p>
+<br>
+<pre><code>
+CREATE INDEX idx_sessions_token ON sessions USING HASH(session_token);
+
+
+
+-- Good for:
+
+SELECT * FROM sessions WHERE session_token = &#x27;abc123&#x27;;
+
+</code></pre>
+<br>
+<h3>GiST Index</h3>
+<br>
+<p>Generalized Search Tree, useful for full-text search and geometric data.</p>
+<br>
+<pre><code>
+CREATE INDEX idx_posts_content ON posts USING GIST(to_tsvector(&#x27;english&#x27;, content));
+
+
+
+-- Used for:
+
+SELECT * FROM posts
+
+WHERE to_tsvector(&#x27;english&#x27;, content) @@ to_tsquery(&#x27;database &amp; indexing&#x27;);
+
+</code></pre>
+<br>
+<h3>GIN Index</h3>
+<br>
+<p>Generalized Inverted Index, optimized for composite types and arrays.</p>
+<br>
+<pre><code>
+CREATE INDEX idx_article_tags ON articles USING GIN(tags);
+
+
+
+-- Used for:
+
+SELECT * FROM articles WHERE tags @&gt; ARRAY[&#x27;postgresql&#x27;];
+
+SELECT * FROM articles WHERE tags &amp;&amp; ARRAY[&#x27;database&#x27;, &#x27;sql&#x27;];
+
+</code></pre>
+<br>
+<h3>BRIN Index</h3>
+<br>
+<p>Block Range INdex, efficient for very large tables with naturally ordered data.</p>
+<br>
+<pre><code>
+CREATE INDEX idx_logs_created ON logs USING BRIN(created_at)
+
+WITH (pages_per_range = 32);
+
+
+
+-- Best for:
+
+-- Time-series data where rows are inserted in order
+
+</code></pre>
+<br>
+<h2> Composite Indexes</h2>
+<br>
+<p>Indexes on multiple columns. Column order matters significantly.</p>
+<br>
+<pre><code>
+-- Composite index
+
+CREATE INDEX idx_users_status_created
+
+ON users(status, created_at);
+
+
+
+-- This index can serve:
+
+-- 1. WHERE status = &#x27;active&#x27;
+
+-- 2. WHERE status = &#x27;active&#x27; AND created_at &gt; &#x27;2026-01-01&#x27;
+
+-- 3. WHERE status IN (&#x27;active&#x27;, &#x27;pending&#x27;) ORDER BY created_at
+
+
+
+-- But NOT:
+
+-- WHERE created_at &gt; &#x27;2026-01-01&#x27;  (status is leading column)
+
+</code></pre>
+<br>
+<h3>Column Order Rules</h3>
+<br>
+<p>| Rule | Example |</p>
+<p>|------|---------|</p>
+<p>| Equality conditions first | `WHERE status = 'active' AND created_at > '2026-01-01'` -> index on `(status, created_at)` |</p>
+<p>| High cardinality columns first for range | `WHERE type = 'user' AND email LIKE 'a%'` -> index on `(type, email)` |</p>
+<p>| Most selective column first | `WHERE country = 'US' AND status = 'active'` — US is 10% of data, active is 90% -> index on `(country, status)` |</p>
+<br>
+<h2> Index Scan Types</h2>
+<br>
+<p>| Scan Type | When Used | Performance |</p>
+<p>|-----------|-----------|-------------|</p>
+<p>| Sequential Scan | No index, or query returns large percentage of table | Full table read |</p>
+<p>| Index Scan | Index lookup + heap access | Fast for selective queries |</p>
+<p>| Index Only Scan | All needed columns are in the index | Fastest, no heap access |</p>
+<p>| Bitmap Scan | Combines multiple indexes, returns moderate row count | Good for multi-condition queries |</p>
+<br>
+<h2> Monitoring Index Usage</h2>
+<br>
+<pre><code>
+-- PostgreSQL: Find unused indexes
+
+SELECT
+
+    schemaname || &#x27;.&#x27; || relname AS table,
+
+    indexrelname AS index,
+
+    idx_scan AS index_scans
+
+FROM pg_stat_user_indexes
+
+WHERE idx_scan &lt; 100
+
+  AND indexrelname NOT LIKE &#x27;%_pkey&#x27;
+
+ORDER BY idx_scan ASC;
+
+
+
+-- Find missing indexes
+
+SELECT
+
+    relname AS table,
+
+    seq_scan - idx_scan AS too_much_seq,
+
+    seq_scan,
+
+    idx_scan
+
+FROM pg_stat_user_tables
+
+WHERE seq_scan &gt; idx_scan
+
+  AND seq_scan &gt; 1000
+
+ORDER BY seq_scan DESC;
+
+</code></pre>
+<br>
+<h2> Index Maintenance</h2>
+<br>
+<pre><code>
+-- Rebuild indexes to reclaim space (PostgreSQL)
+
+REINDEX INDEX idx_users_email;
+
+REINDEX TABLE users;
+
+
+
+-- Update statistics for query planner
+
+ANALYZE users;
+
+
+
+-- Check index size
+
+SELECT
+
+    pg_size_pretty(pg_indexes_size(&#x27;users&#x27;)) AS total_index_size,
+
+    pg_size_pretty(pg_total_relation_size(&#x27;users&#x27;)) AS total_size;
+
+</code></pre>
+<br>
+<h2> Common Anti-Patterns</h2>
+<br>
+<p>| Anti-Pattern | Why It Hurts |</p>
+<p>|--------------|--------------|</p>
+<p>| Indexing every column | Writes become slow, storage bloats |</p>
+<p>| Forgetting composite indexes | Query uses multiple single-column indexes inefficiently |</p>
+<p>| Indexing boolean columns | Very low cardinality, rarely useful |</p>
+<p>| Not indexing foreign keys | JOIN queries perform sequential scans |</p>
+<p>| Over-indexing small tables | Tables under 1000 rows are faster to scan sequentially |</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Indexes are the most impactful performance optimization for database queries. Use B-tree indexes as the default for most workloads, composite indexes with carefully ordered columns for multi-condition queries, and specialized types (GIN, GiST, BRIN) for specific use cases. Monitor index usage and remove unused indexes to keep write performance optimal. Always run queries through EXPLAIN ANALYZE to verify the planner is using your indexes effectively.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

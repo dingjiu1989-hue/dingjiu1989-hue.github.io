@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tools" data-exclude="monitoring-tools">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Monitoring Tools: Grafana vs Datadog vs New Relic">
+    <meta property="og:description" content="Compare Grafana, Datadog, and New Relic for dashboarding, alerting, APM, log integration, pricing, and self-hosted versus SaaS deployment options.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tools/monitoring-tools.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Monitoring Tools: Grafana vs Datadog vs New Relic">
+    <meta name="twitter:description" content="Compare Grafana, Datadog, and New Relic for dashboarding, alerting, APM, log integration, pricing, and self-hosted versus SaaS deployment options.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Monitoring Tools: Grafana vs Datadog vs New Relic — SourceHub</title>
+    <meta name="description" content="Compare Grafana, Datadog, and New Relic for dashboarding, alerting, APM, log integration, pricing, and self-hosted versus SaaS deployment options.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tools/monitoring-tools.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tools/monitoring-tools.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Monitoring Tools: Grafana vs Datadog vs New Relic",
+      "description": "Compare Grafana, Datadog, and New Relic for dashboarding, alerting, APM, log integration, pricing, and self-hosted versus SaaS deployment options.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1580",
+      "keywords": "Developer Tools, Productivity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/monitoring-tools.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tool Recommendations", "item": "https://dingjiu1989-hue.github.io/en/tools/"},
+        {"@type": "ListItem", "position": 3, "name": "Monitoring Tools: Grafana vs Datadog vs New Relic"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a> › Monitoring Tools: Grafana vs Datadog vs New Relic
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Developer Tools</span>
+        <span class="tag-cat">Productivity</span></div>
+      <h1 class="article-title">Monitoring Tools: Grafana vs Datadog vs New Relic</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>Effective monitoring is the difference between discovering incidents through user complaints and catching them proactively through dashboards and alerts. The three dominant platforms in the observability space--Grafana, Datadog, and New Relic--each take distinct approaches to metrics, logging, tracing, and alerting. This article provides a technical comparison to guide your selection.</p>
+<br>
+<h2> Dashboarding Capabilities</h2>
+<br>
+<h3>Grafana</h3>
+<br>
+<p>Grafana excels at visualization with support for dozens of data sources:</p>
+<br>
+<pre><code>
+{
+
+  &quot;dashboard&quot;: {
+
+    &quot;title&quot;: &quot;Production Overview&quot;,
+
+    &quot;panels&quot;: [
+
+      {
+
+        &quot;title&quot;: &quot;HTTP Request Rate&quot;,
+
+        &quot;type&quot;: &quot;timeseries&quot;,
+
+        &quot;datasource&quot;: &quot;Prometheus&quot;,
+
+        &quot;targets&quot;: [{
+
+          &quot;expr&quot;: &quot;sum(rate(http_requests_total[5m])) by (service)&quot;,
+
+          &quot;legendFormat&quot;: &quot;{{ service }}&quot;
+
+        }]
+
+      },
+
+      {
+
+        &quot;title&quot;: &quot;Service Latency (p99)&quot;,
+
+        &quot;type&quot;: &quot;stat&quot;,
+
+        &quot;datasource&quot;: &quot;Tempo&quot;,
+
+        &quot;targets&quot;: [{
+
+          &quot;query&quot;: &quot;{.name = \&quot;HTTP GET\&quot;} | stats p99(duration_ms) as p99 by service&quot;
+
+        }]
+
+      },
+
+      {
+
+        &quot;title&quot;: &quot;Error Budget&quot;,
+
+        &quot;type&quot;: &quot;gauge&quot;,
+
+        &quot;datasource&quot;: &quot;Prometheus&quot;,
+
+        &quot;targets&quot;: [{
+
+          &quot;expr&quot;: &quot;(1 - (sum(rate(http_requests_total{status=~\&quot;5..\&quot;}[30d])) / sum(rate(http_requests_total[30d])))) * 100&quot;
+
+        }],
+
+        &quot;thresholds&quot;: {
+
+          &quot;steps&quot;: [
+
+            {&quot;value&quot;: null, &quot;color&quot;: &quot;green&quot;},
+
+            {&quot;value&quot;: 99.9, &quot;color&quot;: &quot;yellow&quot;},
+
+            {&quot;value&quot;: 99.99, &quot;color&quot;: &quot;red&quot;}
+
+          ]
+
+        }
+
+      }
+
+    ]
+
+  }
+
+}
+
+</code></pre>
+<br>
+<h3>Datadog</h3>
+<br>
+<p>Datadog provides a more opinionated dashboarding experience with integrated template variables:</p>
+<br>
+<pre><code>
+{
+
+  &quot;title&quot;: &quot;Service Overview&quot;,
+
+  &quot;widgets&quot;: [{
+
+    &quot;definition&quot;: {
+
+      &quot;type&quot;: &quot;timeseries&quot;,
+
+      &quot;requests&quot;: [{
+
+        &quot;q&quot;: &quot;avg:http.requests{service:payment} by {endpoint}.as_rate()&quot;,
+
+        &quot;display_type&quot;: &quot;line&quot;,
+
+        &quot;style&quot;: {&quot;palette&quot;: &quot;warm&quot;}
+
+      }],
+
+      &quot;yaxis&quot;: {&quot;scale&quot;: &quot;linear&quot;, &quot;min&quot;: &quot;auto&quot;}
+
+    }
+
+  }]
+
+}
+
+</code></pre>
+<br>
+<h3>New Relic</h3>
+<br>
+<p>New Relic uses NRQL, a SQL-like query language for dashboards:</p>
+<br>
+<pre><code>
+-- NRQL query
+
+SELECT percentile(duration, 99) AS &#x27;p99&#x27;
+
+FROM Transaction
+
+WHERE appName = &#x27;Payment Service&#x27;
+
+TIMESERIES auto
+
+SINCE 1 hour ago
+
+
+
+-- Error rate query
+
+SELECT count(*) AS &#x27;errors&#x27;
+
+FROM TransactionError
+
+WHERE appName = &#x27;Payment Service&#x27;
+
+FACET error.message
+
+LIMIT 10
+
+</code></pre>
+<br>
+<h2> Alerting Configuration</h2>
+<br>
+<h3>Grafana Alerting</h3>
+<br>
+<pre><code>
+# Grafana managed alert rule
+
+apiVersion: grafana/v1
+
+kind: AlertRule
+
+metadata:
+
+  name: HighErrorRate
+
+spec:
+
+  for: 5m
+
+  annotations:
+
+    summary: &quot;Error rate above threshold for Payment Service&quot;
+
+    runbook_url: &quot;https://runbooks.internal/payment-high-errors&quot;
+
+  labels:
+
+    severity: critical
+
+    team: platform
+
+  data:
+
+    - ref: A
+
+      datasourceUid: prometheus
+
+      model:
+
+        expr: |
+
+          sum(rate(http_requests_total{
+
+            service=&quot;payment&quot;, status=~&quot;5..&quot;
+
+          }[5m])) / sum(rate(http_requests_total{
+
+            service=&quot;payment&quot;
+
+          }[5m])) &gt; 0.05
+
+    - ref: B
+
+      datasourceUid: prometheus
+
+      model:
+
+        expr: &quot;1&quot;
+
+    - ref: C
+
+      datasourceUid: __expr__
+
+      model:
+
+        expression: &quot;$A &amp;&amp; $B&quot;
+
+        type: math
+
+</code></pre>
+<br>
+<h3>Datadog Monitors</h3>
+<br>
+<pre><code>
+# Datadog monitor via API
+
+monitor:
+
+  name: &quot;[Payment] High Latency Alert&quot;
+
+  type: metric alert
+
+  query: &quot;avg(last_5m):p99:trace.servlet.request.duration{service:payment} &gt; 1&quot;
+
+  message: |
+
+    {{#is_alert}}
+
+    Payment service p99 latency is {{value}}s (threshold: 1s)
+
+    @slack-alerts
+
+    {{/is_alert}}
+
+  options:
+
+    thresholds:
+
+      critical: 1.0
+
+      warning: 0.5
+
+    notify_no_data: true
+
+    evaluation_delay: 60
+
+    new_group_delay: 300
+
+</code></pre>
+<br>
+<h2> APM and Distributed Tracing</h2>
+<br>
+<h3>Datadog APM</h3>
+<br>
+<pre><code>
+from ddtrace import tracer, patch_all
+
+
+
+# Auto-instrument supported libraries
+
+patch_all()
+
+
+
+# Custom instrumentation
+
+@tracer.writer(service_name=&quot;payment-service&quot;)
+
+def process_payment(order_id, amount):
+
+    with tracer.trace(&quot;payment.charge&quot;) as span:
+
+        span.set_tag(&quot;order_id&quot;, order_id)
+
+        span.set_metric(&quot;amount&quot;, amount)
+
+        result = gateway.charge(amount)
+
+        span.set_tag(&quot;transaction_id&quot;, result.id)
+
+        return result
+
+</code></pre>
+<br>
+<h3>New Relic APM</h3>
+<br>
+<pre><code>
+import newrelic.agent
+
+
+
+# Custom transaction
+
+@newrelic.agent.background_task()
+
+def process_refund(transaction_id):
+
+    with newrelic.agent.FunctionTrace(name=&quot;refund.process&quot;):
+
+        refund_result = refund_gateway.process(transaction_id)
+
+        newrelic.agent.record_custom_metric(
+
+            &quot;Custom/RefundAmount&quot;, refund_result.amount
+
+        )
+
+        return refund_result
+
+</code></pre>
+<br>
+<h2> Log Integration</h2>
+<br>
+<p>| Feature | Grafana + Loki | Datadog Logs | New Relic Logs |</p>
+<p>|---|---|---|---|</p>
+<p>| Structured parsing | LogQL | Grok parser | NRQL parsing |</p>
+<p>| Ingestion cost | Low (S3-based) | Medium | Medium |</p>
+<p>| Retention | Configurable | 15 days default | 30 days default |</p>
+<p>| Live tail | Yes | Yes | Yes |</p>
+<br>
+<p>Example Loki query for log correlation:</p>
+<br>
+<pre><code>
+{service=&quot;payment&quot;} |= &quot;ERROR&quot;
+
+| logfmt
+
+| duration &gt; 1s
+
+| line_format &quot;{{.timestamp}} {{.message}} (duration: {{.duration}})&quot;
+
+</code></pre>
+<br>
+<h2> Pricing Comparison</h2>
+<br>
+<p>| Tier | Grafana (self-hosted) | Grafana Cloud | Datadog | New Relic |</p>
+<p>|---|---|---|---|---|</p>
+<p>| Free | Unlimited | 3 users, 10k series | 5 hosts, 15d retention | 100GB/month, 1 user |</p>
+<p>| Entry | Server cost only | $49/month | ~$15/host/month | ~$0.55/GB |</p>
+<p>| Enterprise | Support cost | Custom | Custom | Custom |</p>
+<br>
+<p>Grafana self-hosted is the most cost-effective at scale because you only pay for infrastructure. Datadog and New Relic pricing scales with data volume and can become expensive for high-cardinality metrics or verbose logging.</p>
+<br>
+<h2> Self-Hosted vs SaaS</h2>
+<br>
+<li>**Grafana**: Excellent self-hosted option with Prometheus, Loki, and Tempo forming a complete open-source stack. Grafana Cloud offers a managed alternative.</li>
+<li>**Datadog**: SaaS-only with strong integrations but vendor lock-in. No self-hosted option exists.</li>
+<li>**New Relic**: Cloud-first but offers a data-ingestion API that allows hybrid collection patterns.</li>
+<br>
+<p>For startups and small teams, Grafana self-hosted provides the best balance of capability and cost. As teams grow to 20+ engineers, Datadog's out-of-the-box integrations reduce operational overhead. New Relic is compelling for organizations already in the Oracle/AWS ecosystem that value NRQL's analytical power.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div>
+      <noscript><div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

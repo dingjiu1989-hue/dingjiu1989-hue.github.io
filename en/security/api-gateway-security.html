@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="api-gateway-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="API Gateway Security Patterns">
+    <meta property="og:description" content="Security patterns for API gateways including authentication, rate limiting, IP blocking, request validation, and threat detection.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/api-gateway-security.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="API Gateway Security Patterns">
+    <meta name="twitter:description" content="Security patterns for API gateways including authentication, rate limiting, IP blocking, request validation, and threat detection.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>API Gateway Security Patterns — SourceHub</title>
+    <meta name="description" content="Security patterns for API gateways including authentication, rate limiting, IP blocking, request validation, and threat detection.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/api-gateway-security.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/api-gateway-security.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "API Gateway Security Patterns",
+      "description": "Security patterns for API gateways including authentication, rate limiting, IP blocking, request validation, and threat detection.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1587",
+      "keywords": "Security, Cybersecurity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/api-gateway-security.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "API Gateway Security Patterns"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › API Gateway Security Patterns
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">Cybersecurity</span></div>
+      <h1 class="article-title">API Gateway Security Patterns</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> The API Gateway as Security Perimeter</h2>
+<br>
+<p>An API gateway acts as the single entry point for all client-to-service communication in a microservices architecture. It is uniquely positioned to enforce security policies centrally, reducing complexity in individual services and providing a consistent security layer.</p>
+<br>
+<h2> Core Security Functions</h2>
+<br>
+<h3>Authentication and Authorization</h3>
+<br>
+<p>The gateway validates tokens before requests reach backend services, offloading this responsibility from individual services.</p>
+<br>
+<pre><code>
+# Kong Gateway authentication configuration
+
+services:
+
+  - name: user-service
+
+    url: http://user-svc.internal:8080
+
+    routes:
+
+      - name: user-routes
+
+        paths:
+
+          - /api/users
+
+    plugins:
+
+      - name: jwt
+
+        config:
+
+          key_claim_name: iss
+
+          secret_is_base64: false
+
+          claims_to_verify:
+
+            - exp
+
+            - nbf
+
+          run_on_preflight: true
+
+</code></pre>
+<br>
+<pre><code>
+// Custom auth middleware in Express Gateway
+
+const jwt = require(&#x27;jsonwebtoken&#x27;);
+
+
+
+async function gatewayAuth(req, res, next) {
+
+    const token = req.headers.authorization?.replace(&#x27;Bearer &#x27;, &#x27;&#x27;);
+
+
+
+    try {
+
+        const decoded = jwt.verify(token, PUBLIC_KEY, {
+
+            algorithms: [&#x27;RS256&#x27;],
+
+            issuer: &#x27;https://auth.example.com&#x27;
+
+        });
+
+
+
+        // Inject validated claims into downstream request
+
+        req.headers[&#x27;x-user-id&#x27;] = decoded.sub;
+
+        req.headers[&#x27;x-user-roles&#x27;] = decoded.roles.join(&#x27;,&#x27;);
+
+        req.headers[&#x27;x-authenticated&#x27;] = &#x27;true&#x27;;
+
+
+
+        // Strip the original token from downstream
+
+        delete req.headers.authorization;
+
+        next();
+
+    } catch (err) {
+
+        return res.status(401).json({ error: &#x27;Invalid token&#x27; });
+
+    }
+
+}
+
+</code></pre>
+<br>
+<h3>Rate Limiting and Throttling</h3>
+<br>
+<p>The gateway enforces global and per-service rate limits:</p>
+<br>
+<pre><code>
+plugins:
+
+  - name: rate-limiting
+
+    config:
+
+      second: null
+
+      minute: 1000
+
+      hour: 50000
+
+      policy: local
+
+      fault_tolerant: true
+
+      hide_client_headers: false
+
+      redis:
+
+        host: redis.internal
+
+        port: 6379
+
+</code></pre>
+<br>
+<h3>IP Allowlisting and Blocklisting</h3>
+<br>
+<pre><code>
+plugins:
+
+  - name: ip-restriction
+
+    config:
+
+      allow:
+
+        - 10.0.0.0/8
+
+        - 172.16.0.0/12
+
+      deny:
+
+        - 10.0.0.42  # Specific blocked IP
+
+</code></pre>
+<br>
+<h2> Request Validation</h2>
+<br>
+<h3>Schema Validation</h3>
+<br>
+<p>Validate request bodies against OpenAPI schemas at the gateway:</p>
+<br>
+<pre><code>
+plugins:
+
+  - name: request-validator
+
+    config:
+
+      body_schema:
+
+        type: object
+
+        required:
+
+          - email
+
+          - password
+
+        properties:
+
+          email:
+
+            type: string
+
+            format: email
+
+            maxLength: 255
+
+          password:
+
+            type: string
+
+            minLength: 8
+
+            maxLength: 128
+
+      parameter_schema:
+
+        - in: query
+
+          name: page
+
+          schema:
+
+            type: integer
+
+            minimum: 1
+
+</code></pre>
+<br>
+<h3>Request Size Limiting</h3>
+<br>
+<pre><code>
+# Nginx as API gateway
+
+http {
+
+    client_body_buffer_size 128k;
+
+    client_max_body_size 10M;
+
+    client_body_timeout 30s;
+
+
+
+    server {
+
+        listen 443 ssl;
+
+        server_name api.example.com;
+
+
+
+        location /api/ {
+
+            # Limit request size per endpoint
+
+            location /api/upload {
+
+                client_max_body_size 100M;
+
+            }
+
+
+
+            location /api/query {
+
+                client_max_body_size 1K;
+
+            }
+
+        }
+
+    }
+
+}
+
+</code></pre>
+<br>
+<h2> TLS Termination</h2>
+<br>
+<p>Terminate TLS at the gateway to encrypt traffic between clients and the gateway, and optionally re-encrypt between gateway and services:</p>
+<br>
+<pre><code>
+server {
+
+    listen 443 ssl http2;
+
+    server_name api.example.com;
+
+
+
+    ssl_certificate /etc/ssl/certs/api.example.com.pem;
+
+    ssl_certificate_key /etc/ssl/private/api.example.com.key;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+
+    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256;
+
+    ssl_prefer_server_ciphers on;
+
+    ssl_session_cache shared:SSL:10m;
+
+    ssl_session_timeout 10m;
+
+
+
+    # Backend communication (re-encrypt)
+
+    location /api/internal/ {
+
+        proxy_pass https://internal-services;
+
+        proxy_ssl_verify on;
+
+        proxy_ssl_trusted_certificate /etc/ssl/certs/ca.crt;
+
+    }
+
+}
+
+</code></pre>
+<br>
+<h2> CORS Management</h2>
+<br>
+<p>Centrally manage CORS policies:</p>
+<br>
+<pre><code>
+plugins:
+
+  - name: cors
+
+    config:
+
+      origins:
+
+        - https://app.example.com
+
+        - https://admin.example.com
+
+      methods:
+
+        - GET
+
+        - POST
+
+        - PUT
+
+        - DELETE
+
+        - PATCH
+
+      headers:
+
+        - Authorization
+
+        - Content-Type
+
+      exposed_headers:
+
+        - X-RateLimit-Remaining
+
+      credentials: true
+
+      max_age: 3600
+
+</code></pre>
+<br>
+<h2> Threat Detection and WAF</h2>
+<br>
+<h3>ModSecurity with OWASP CRS</h3>
+<br>
+<pre><code>
+# Enable WAF on the gateway
+
+location /api/ {
+
+    modsecurity on;
+
+    modsecurity_rules_file /etc/nginx/modsecurity/owasp-crs/crs-setup.conf;
+
+
+
+    # Custom rules
+
+    modsecurity_rules &#x27;
+
+        # Block SQL injection patterns
+
+        SecRule REQUEST_URI &quot;@rx (?i:(?:union[\s]+select|select[\s]+from))&quot; \
+
+            &quot;id:1000,deny,status:403,msg:\&#x27;SQL Injection blocked\&#x27;&quot;
+
+
+
+        # Block common XSS attempts
+
+        SecRule ARGS &quot;@rx &lt;script[^&gt;]*&gt;&quot; \
+
+            &quot;id:1001,deny,status:403,msg:\&#x27;XSS blocked\&#x27;&quot;
+
+
+
+        # Rate limit login attempts
+
+        SecRule IP:LOGIN_ATTEMPT &quot;@gt 5&quot; \
+
+            &quot;id:1002,deny,status:429,msg:\&#x27;Brute force blocked\&#x27;&quot;
+
+    &#x27;;
+
+}
+
+</code></pre>
+<br>
+<h2> GraphQL Security at the Gateway</h2>
+<br>
+<p>GraphQL APIs need specialized protections:</p>
+<br>
+<pre><code>
+plugins:
+
+  - name: graphql-proxy-cache
+
+  - name: graphql-rate-limiting
+
+    config:
+
+      max_queries_per_minute: 100
+
+      max_depth: 5
+
+      max_complexity: 1000
+
+</code></pre>
+<br>
+<h2> Security Headers at the Gateway</h2>
+<br>
+<p>Apply consistent security headers across all responses:</p>
+<br>
+<pre><code>
+plugins:
+
+  - name: response-transformer
+
+    config:
+
+      add:
+
+        headers:
+
+          - &quot;Strict-Transport-Security: max-age=63072000; includeSubDomains; preload&quot;
+
+          - &quot;X-Content-Type-Options: nosniff&quot;
+
+          - &quot;X-Frame-Options: DENY&quot;
+
+          - &quot;Content-Security-Policy: default-src &#x27;self&#x27;&quot;
+
+          - &quot;Referrer-Policy: strict-origin-when-cross-origin&quot;
+
+</code></pre>
+<br>
+<h2> Audit Logging</h2>
+<br>
+<p>Log all API requests centrally for security analysis:</p>
+<br>
+<pre><code>
+plugins:
+
+  - name: file-log
+
+    config:
+
+      path: /var/log/api-gateway/access.log
+
+      custom_fields_by_lua:
+
+        client_ip: &quot;ngx.var.remote_addr&quot;
+
+        method: &quot;ngx.var.request_method&quot;
+
+        path: &quot;ngx.var.request_uri&quot;
+
+        status: &quot;ngx.var.status&quot;
+
+        latency: &quot;ngx.var.upstream_response_time&quot;
+
+        user_id: &quot;ngx.var.http_x_user_id&quot;
+
+</code></pre>
+<br>
+<h2> Summary</h2>
+<br>
+<p>The API gateway is the ideal location to centralize security controls: authentication, rate limiting, request validation, IP restrictions, TLS termination, CORS management, and WAF rules. By enforcing these policies at the gateway, individual services remain simpler and can focus on business logic while maintaining a consistent security posture across your entire API surface.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

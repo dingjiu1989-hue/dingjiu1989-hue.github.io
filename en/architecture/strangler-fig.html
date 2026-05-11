@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="strangler-fig">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Strangler Fig Pattern for Legacy Migration">
+    <meta property="og:description" content="Learn the strangler fig pattern for incrementally migrating legacy systems.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/strangler-fig.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Strangler Fig Pattern for Legacy Migration">
+    <meta name="twitter:description" content="Learn the strangler fig pattern for incrementally migrating legacy systems.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Strangler Fig Pattern for Legacy Migration — SourceHub</title>
+    <meta name="description" content="Learn the strangler fig pattern for incrementally migrating legacy systems.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/strangler-fig.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/strangler-fig.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Strangler Fig Pattern for Legacy Migration",
+      "description": "Learn the strangler fig pattern for incrementally migrating legacy systems.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1220",
+      "keywords": "Architecture, System Design",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/strangler-fig.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Strangler Fig Pattern for Legacy Migration"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Strangler Fig Pattern for Legacy Migration
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span></div>
+      <h1 class="article-title">Strangler Fig Pattern for Legacy Migration</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>The strangler fig pattern is a strategy for incrementally replacing a legacy system with a new one. Named after the strangler fig plant that grows around a host tree and eventually replaces it, this pattern allows you to migrate functionality piece by piece with minimal risk and zero downtime.</p>
+<br>
+<h2> Why Not a Big Bang Rewrite?</h2>
+<br>
+<p>The traditional approach to legacy system replacement is the "big bang" rewrite: build the new system from scratch, then switch over in a single deployment. This approach has a terrible track record. Projects take longer than expected, fail to capture all the legacy system's behavior, and the switchover introduces immense risk.</p>
+<br>
+<p>The strangler fig pattern avoids these problems by replacing the system incrementally, one piece at a time.</p>
+<br>
+<h2> How It Works</h2>
+<br>
+<p>The strangler fig pattern typically involves three components:</p>
+<br>
+<li>**An intercepting proxy or router** that sits in front of the legacy system.</li>
+<p>2. **The legacy system** that continues to run.</p>
+<p>3. **The new system** that gradually takes over functionality.</p>
+<br>
+<p>![Diagram: User -> Proxy -> either Legacy or New depending on migrated routes]</p>
+<br>
+<p>When a request arrives:</p>
+<li>If the requested functionality has been migrated, the proxy routes to the new system.</li>
+<li>If not, the proxy forwards to the legacy system.</li>
+<li>Over time, more routes are migrated until the legacy system is no longer needed.</li>
+<br>
+<h2> Implementation Approaches</h2>
+<br>
+<h3>URL Routing</h3>
+<br>
+<p>Use a reverse proxy (NGINX, HAProxy, API Gateway) to route traffic based on URL patterns:</p>
+<br>
+<pre><code>
+# Initially: all traffic goes to legacy
+
+location / {
+
+    proxy_pass http://legacy-system;
+
+}
+
+
+
+# After migrating orders:
+
+location /api/orders {
+
+    proxy_pass http://new-system;
+
+}
+
+location / {
+
+    proxy_pass http://legacy-system;
+
+}
+
+</code></pre>
+<br>
+<p>This is the simplest approach. New feature development happens on the new system. Legacy routes are progressively migrated.</p>
+<br>
+<h3>Feature Flags</h3>
+<br>
+<p>Use feature flags to control migration at a more granular level:</p>
+<br>
+<pre><code>
+if (featureFlags.isEnabled(&#x27;new-checkout&#x27;)) {
+
+    return renderNewCheckout(data);
+
+} else {
+
+    return proxyToLegacy(data);
+
+}
+
+</code></pre>
+<br>
+<p>Feature flags allow you to:</p>
+<li>Migrate at the feature level, not just the URL level.</li>
+<li>A/B test the new implementation against the old one.</li>
+<li>Roll back instantly if the new implementation has issues.</li>
+<li>Enable the new feature for a subset of users first.</li>
+<br>
+<h3>Parallel Run</h3>
+<br>
+<p>For high-risk migrations, run both systems simultaneously and compare results:</p>
+<br>
+<li>Route the request to both systems.</li>
+<p>2. Return the legacy system's response to the user.</p>
+<p>3. Compare the new system's response to detect discrepancies.</p>
+<p>4. Fix issues until responses match consistently.</p>
+<p>5. Switch to the new system.</p>
+<br>
+<p>This is the safest approach and is commonly used for financial systems, inventory management, and other correctness-critical domains.</p>
+<br>
+<h2> Data Migration</h2>
+<br>
+<p>Data migration is often the hardest part. Strategies include:</p>
+<br>
+<p>**Lazy migration:** When the new system needs data that exists only in the legacy system, it copies it on demand. The first time a user accesses a migrated feature, their data is migrated.</p>
+<br>
+<p>**Bulk migration:** Copy all data to the new system before cutting over. This requires data transformation and reconciliation.</p>
+<br>
+<p>**Dual writes:** Write to both systems for a period. The new system's data may need to be backfilled from the legacy system.</p>
+<br>
+<p>**Database strangler:** Use database views, triggers, or a change data capture (CDC) pipeline to keep the new system's database in sync with the legacy system.</p>
+<br>
+<p>Choose the approach based on data volume, the cost of inconsistency, and the complexity of data transformation.</p>
+<br>
+<h2> Benefits</h2>
+<br>
+<p>**Reduced risk.** Each migration step is small and reversible. If something goes wrong, you roll back one feature, not the entire system.</p>
+<br>
+<p>**Continuous delivery.** The new system can be deployed incrementally. Teams get early feedback and can adjust course.</p>
+<br>
+<p>**Business continuity.** The legacy system remains operational throughout the migration. No downtime is required.</p>
+<br>
+<p>**Knowledge preservation.** Team members learn the legacy system gradually while building the new one. Domain knowledge is transferred naturally.</p>
+<br>
+<h2> Challenges</h2>
+<br>
+<p>**Increased complexity.** The system is now running two architectures simultaneously. Developers need to understand both.</p>
+<br>
+<p>**Performance overhead.** Routing through a proxy adds latency. Running both systems in parallel doubles infrastructure costs.</p>
+<br>
+<p>**Coordination.** Multiple teams may be migrating different features. Coordination is needed to avoid conflicts.</p>
+<br>
+<p>**Legacy data dependencies.** Some data is deeply intertwined. Features that share data are harder to migrate independently.</p>
+<br>
+<h2> When to Use</h2>
+<br>
+<p>Use the strangler fig pattern when:</p>
+<li>The legacy system is too large or complex to rewrite at once.</li>
+<li>You need to keep the system running during migration.</li>
+<li>The business cannot tolerate a long migration period without new features.</li>
+<br>
+<p>Do not use it when:</p>
+<li>The legacy system is small enough to rewrite quickly.</li>
+<li>The legacy system is being decommissioned entirely (no new features).</li>
+<br>
+<h2> Summary</h2>
+<br>
+<p>The strangler fig pattern is the safest and most practical approach to legacy system migration. Use an intercepting proxy or feature flags to gradually route traffic from the legacy system to the new one. Migrate data lazily or in bulk depending on your requirements. Run both systems in parallel for high-risk migrations. The goal is not to replace the system quickly, but to replace it safely.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

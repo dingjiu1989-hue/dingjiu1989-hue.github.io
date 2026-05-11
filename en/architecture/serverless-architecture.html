@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="serverless-architecture">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Serverless Architecture Patterns">
+    <meta property="og:description" content="Explore serverless architecture patterns for building scalable, cost-effective applications.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/serverless-architecture.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Serverless Architecture Patterns">
+    <meta name="twitter:description" content="Explore serverless architecture patterns for building scalable, cost-effective applications.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Serverless Architecture Patterns — SourceHub</title>
+    <meta name="description" content="Explore serverless architecture patterns for building scalable, cost-effective applications.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/serverless-architecture.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/serverless-architecture.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Serverless Architecture Patterns",
+      "description": "Explore serverless architecture patterns for building scalable, cost-effective applications.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1481",
+      "keywords": "Architecture, System Design",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/serverless-architecture.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Serverless Architecture Patterns"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Serverless Architecture Patterns
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span></div>
+      <h1 class="article-title">Serverless Architecture Patterns</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Serverless architecture allows you to build and run applications without managing servers. Cloud providers handle infrastructure provisioning, scaling, and maintenance automatically. This article covers the core patterns, best practices, and trade-offs of serverless architecture.</p>
+<br>
+<h2> What Serverless Really Means</h2>
+<br>
+<p>Serverless does not mean there are no servers. It means you do not think about servers. The cloud provider manages capacity, patching, and availability. You focus on writing code.</p>
+<br>
+<p>The key characteristics:</p>
+<br>
+<li>**No server management**: You do not provision, scale, or maintain servers.</li>
+<li>**Autoscaling**: Resources scale automatically with demand, from zero to thousands of concurrent executions.</li>
+<li>**Pay-per-execution**: You pay only for the compute time you use, often measured in milliseconds.</li>
+<li>**Stateless**: Functions are ephemeral and stateless. Persistent state must be stored externally.</li>
+<br>
+<h2> The Function as a Service Pattern</h2>
+<br>
+<p>FaaS is the core building block. Each function handles a single concern:</p>
+<br>
+<pre><code>
+// AWS Lambda handler for image resizing
+
+exports.handler = async (event) =&gt; {
+
+    const { key, bucket } = JSON.parse(event.body);
+
+    const image = await s3.getObject({ Bucket: bucket, Key: key });
+
+    const resized = await sharp(image.Body).resize(200, 200).toBuffer();
+
+    await s3.putObject({
+
+        Bucket: bucket,
+
+        Key: `thumbnails/${key}`,
+
+        Body: resized
+
+    });
+
+    return { statusCode: 200, body: JSON.stringify({ success: true }) };
+
+};
+
+</code></pre>
+<br>
+<p>Functions should be small, focused, and stateless. Each function does one thing and does it well.</p>
+<br>
+<h2> Event-Driven Pattern</h2>
+<br>
+<p>Serverless functions are typically triggered by events from other services:</p>
+<br>
+<pre><code>
+[S3 Upload] -&gt; [Lambda: Process File] -&gt; [DynamoDB: Update Metadata] -&gt; [SNS: Notify User]
+
+            -&gt; [Lambda: Generate Thumbnail]
+
+</code></pre>
+<br>
+<p>Common event sources:</p>
+<li>**S3 events**: File uploads trigger processing pipelines.</li>
+<li>**DynamoDB Streams**: Database changes trigger downstream updates.</li>
+<li>**SQS/SNS**: Messages trigger background processing.</li>
+<li>**API Gateway**: HTTP requests trigger request handlers.</li>
+<li>**CloudWatch Events**: Scheduled tasks trigger periodic jobs.</li>
+<br>
+<p>This pattern creates loosely coupled, resilient pipelines. If one step fails, the event can be retried or sent to a dead-letter queue.</p>
+<br>
+<h2> API Gateway + Lambda Pattern</h2>
+<br>
+<p>The most common serverless web application pattern. API Gateway handles HTTP requests and triggers Lambda functions:</p>
+<br>
+<pre><code>
+[Client] -&gt; [API Gateway] -&gt; [Lambda] -&gt; [DynamoDB]
+
+</code></pre>
+<br>
+<p>API Gateway provides:</p>
+<li>HTTP endpoint management</li>
+<li>Request validation</li>
+<li>Authentication and authorization</li>
+<li>Rate limiting</li>
+<li>CORS handling</li>
+<li>Response caching</li>
+<br>
+<p>Lambda handles business logic. DynamoDB, RDS Proxy, or Aurora Serverless provides data persistence.</p>
+<br>
+<p>This pattern works well for REST APIs, GraphQL endpoints, and webhook handlers. The combination scales automatically from zero to thousands of requests per second.</p>
+<br>
+<h2> Fan-Out Pattern</h2>
+<br>
+<p>A single event triggers multiple parallel operations:</p>
+<br>
+<pre><code>
+[Event] -&gt; [SNS Topic]
+
+                  |
+
+        +---------+---------+
+
+        |         |         |
+
+    [Lambda A] [Lambda B] [Lambda C]
+
+</code></pre>
+<br>
+<p>Use SNS, SQS, or EventBridge to broadcast events to multiple subscribers. Each subscriber processes independently. Failures in one subscriber do not affect others.</p>
+<br>
+<p>This pattern is ideal for scenarios like:</p>
+<li>New user registration triggers email verification, welcome email, analytics tracking, and CRM updates.</li>
+<li>New order triggers inventory update, payment processing, shipping label generation, and notification.</li>
+<br>
+<h2> Step Functions for Orchestration</h2>
+<br>
+<p>For complex workflows, use AWS Step Functions to coordinate multiple Lambda functions:</p>
+<br>
+<pre><code>
+[Start Order] -&gt; [Validate] -&gt; [Process Payment] -&gt; [Reserve Inventory]
+
+                                                       |
+
+                                                    [Failed]
+
+                                                       |
+
+                                               [Refund Payment] -&gt; [Notify User]
+
+</code></pre>
+<br>
+<p>Step Functions provide:</p>
+<li>State machine definition in JSON or YAML.</li>
+<li>Built-in retry, error handling, and timeout.</li>
+<li>Visual monitoring of workflow execution.</li>
+<li>Long-running workflow support (up to one year).</li>
+<br>
+<p>Use Step Functions whenever your workflow has conditional logic, parallel branches, or human-in-the-loop steps. It is far easier to manage than orchestrating Lambda functions from code.</p>
+<br>
+<h2> Warm Starts vs. Cold Starts</h2>
+<br>
+<p>Lambda functions experience cold starts when a new container is spun up. Cold starts add latency (100ms to several seconds depending on runtime).</p>
+<br>
+<p>**Strategies to reduce cold starts:**</p>
+<li>Use provisioned concurrency to keep a specified number of instances warm.</li>
+<li>Use a lighter runtime (Node.js vs. Java or .NET).</li>
+<li>Minimize deployment package size.</li>
+<li>Keep dependencies to a minimum.</li>
+<br>
+<p>**When cold starts matter:**</p>
+<li>User-facing APIs that need sub-100ms response times.</li>
+<li>Real-time applications.</li>
+<br>
+<p>**When cold starts do not matter:**</p>
+<li>Background job processing.</li>
+<li>Scheduled tasks.</li>
+<li>Queue consumers.</li>
+<br>
+<h2> Best Practices</h2>
+<br>
+<p>**Statelessness.** Do not store state in the function container. Use DynamoDB, S3, or ElastiCache for state.</p>
+<br>
+<p>**Small functions.** Each function should do one thing. A function doing multiple things is harder to test, deploy, and scale independently.</p>
+<br>
+<p>**Proper error handling.** Use dead-letter queues for failed events. Implement idempotent processing to handle duplicate invocations.</p>
+<br>
+<p>**Security.** Follow the principle of least privilege for IAM roles. Encrypt environment variables. Validate all inputs.</p>
+<br>
+<p>**Monitoring.** Use structured logging with correlation IDs. Set up CloudWatch alarms for error rates and duration. Use distributed tracing with X-Ray.</p>
+<br>
+<h2> When Not to Use Serverless</h2>
+<br>
+<p>Serverless is not ideal for:</p>
+<li>Long-running processes (Lambda max execution is 15 minutes).</li>
+<li>High-throughput, latency-sensitive workloads.</li>
+<li>Stateful applications with persistent connections.</li>
+<li>Monolithic applications that are hard to split into functions.</li>
+<li>Workloads with predictable, steady-state traffic (provisioned instances may be cheaper).</li>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Serverless architecture enables building scalable applications with minimal operational overhead. Use event-driven patterns for loosely coupled pipelines. Use Step Functions for complex orchestration. Be aware of cold starts and design your application accordingly. Serverless is a powerful tool, but it is not the right choice for every workload. Evaluate your requirements against the trade-offs before committing.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

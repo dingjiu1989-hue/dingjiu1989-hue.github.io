@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="api-versioning">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="API Versioning Strategies">
+    <meta property="og:description" content="Explore API versioning strategies for maintaining backward compatibility as your API evolves.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/api-versioning.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="API Versioning Strategies">
+    <meta name="twitter:description" content="Explore API versioning strategies for maintaining backward compatibility as your API evolves.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>API Versioning Strategies — SourceHub</title>
+    <meta name="description" content="Explore API versioning strategies for maintaining backward compatibility as your API evolves.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/api-versioning.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/api-versioning.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "API Versioning Strategies",
+      "description": "Explore API versioning strategies for maintaining backward compatibility as your API evolves.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1458",
+      "keywords": "Architecture, System Design",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/api-versioning.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "API Versioning Strategies"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › API Versioning Strategies
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span></div>
+      <h1 class="article-title">API Versioning Strategies</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>APIs evolve. New features are added, existing endpoints change, and eventually, breaking changes are unavoidable. API versioning is the practice of managing these changes without breaking existing clients. This article covers the major versioning strategies and when to use each.</p>
+<br>
+<h2> The Core Challenge</h2>
+<br>
+<p>Once an API is public, changing it is risky. A client might depend on the current response format, and changing it could break the client's application. Versioning gives clients a choice: stay on the old version or upgrade to the new one.</p>
+<br>
+<p>Ideally, changes are backward compatible -- adding fields, relaxing validation, or extending functionality. But sometimes breaking changes are necessary: removing a field, changing a data type, or restructuring an endpoint.</p>
+<br>
+<h2> URL Path Versioning</h2>
+<br>
+<p>The most common and straightforward approach:</p>
+<br>
+<pre><code>
+/api/v1/users
+
+/api/v2/users
+
+</code></pre>
+<br>
+<p>**Pros:**</p>
+<li>Extremely simple to implement and understand.</li>
+<li>Easy to route at the proxy or load balancer level.</li>
+<li>Visible and explicit -- clients can see the version they are using.</li>
+<li>Easy to test different versions.</li>
+<br>
+<p>**Cons:**</p>
+<li>URL pollution -- the version is part of the resource identifier, which some argue violates REST principles.</li>
+<li>Difficult to manage granular versioning (versioning one endpoint without versioning others).</li>
+<li>Clients tend to hardcode the version in URLs, making upgrades less frequent.</li>
+<br>
+<p>**Best for:** Public APIs where simplicity and discoverability are priorities. Used by Twitter, Stripe, and GitHub.</p>
+<br>
+<h2> Query Parameter Versioning</h2>
+<br>
+<p>Include the version as a query parameter:</p>
+<br>
+<pre><code>
+/api/users?version=1
+
+/api/users?version=2
+
+</code></pre>
+<br>
+<p>**Pros:**</p>
+<li>Keeps the URL structure clean.</li>
+<li>The default (no version) can be the latest version.</li>
+<li>Easy to implement on the server side.</li>
+<br>
+<p>**Cons:**</p>
+<li>Pollutes query parameters.</li>
+<li>Easily overlooked by developers.</li>
+<li>Caching becomes more complex since the same URL with different query parameters may produce different responses.</li>
+<li>Not suitable for proxy-level routing.</li>
+<br>
+<p>**Best for:** Internal APIs or APIs where URL cleanliness is a priority over visibility.</p>
+<br>
+<h2> Header Versioning</h2>
+<br>
+<p>Include the version in an HTTP header:</p>
+<br>
+<pre><code>
+GET /api/users
+
+Accept: application/vnd.myapi.v1+json
+
+</code></pre>
+<br>
+<p>Or a custom header:</p>
+<br>
+<pre><code>
+GET /api/users
+
+X-API-Version: 1
+
+</code></pre>
+<br>
+<p>**Pros:**</p>
+<li>Keeps URLs clean and RESTful.</li>
+<li>The resource is identified by URL, and the representation is negotiated via headers.</li>
+<li>Content negotiation is a standard HTTP mechanism.</li>
+<br>
+<p>**Cons:**</p>
+<li>Hidden -- developers cannot see the version just by looking at the URL.</li>
+<li>Harder to test and debug (need to set headers in tools like cURL).</li>
+<li>More complex routing at the proxy level.</li>
+<li>Web browsers and simple HTTP clients may not support custom headers well.</li>
+<br>
+<p>**Best for:** REST purists who want to follow HTTP semantics strictly. Used by GitHub (in the past) and Twilio.</p>
+<br>
+<h2> Choosing a Strategy</h2>
+<br>
+<p>| Strategy | Visibility | Complexity | RESTful | Caching | Routing |</p>
+<p>|----------|------------|------------|---------|---------|---------|</p>
+<p>| URL Path | High | Low | Moderate | Simple | Simple |</p>
+<p>| Query Param | Medium | Low | Moderate | Complex | Complex |</p>
+<p>| Header | Low | Medium | High | Simple | Complex |</p>
+<br>
+<p>There is no universally correct choice. Consider your audience:</p>
+<br>
+<li>For public APIs with a broad developer audience, URL path versioning is the safest bet. It is simple, visible, and well-understood.</li>
+<li>For internal APIs, any approach works. Query parameter versioning is the simplest to implement.</li>
+<li>For RESTful APIs where HTTP semantics matter, header-based versioning aligns with the principles of content negotiation.</li>
+<br>
+<h2> Semantic Versioning for APIs</h2>
+<br>
+<p>Apply semantic versioning principles to your API:</p>
+<br>
+<li>**Major version** (v1, v2): Breaking changes that require client updates.</li>
+<li>**Minor version** (v1.1): Backward-compatible additions (new endpoints, new optional fields).</li>
+<li>**Patch version** (v1.1.1): Bug fixes that do not change the API contract.</li>
+<br>
+<p>In practice, most APIs only expose the major version and use minor/patch versions internally for documentation purposes.</p>
+<br>
+<h2> Supporting Multiple Versions</h2>
+<br>
+<p>When you support multiple API versions, you need a strategy for maintaining old versions:</p>
+<br>
+<p>**Deprecation policy.** Announce deprecation well in advance. Give clients at least 6-12 months to migrate. Include deprecation warnings in response headers:</p>
+<br>
+<pre><code>
+Sunset: Sat, 31 Dec 2026 23:59:59 GMT
+
+Deprecation: true
+
+</code></pre>
+<br>
+<p>**Minimum version support.** Support a minimum number of active versions (typically 2-3). Drop the oldest when a new one is introduced.</p>
+<br>
+<p>**Version sunset.** Actually retire old versions. Maintaining versions indefinitely is expensive. Be clear about your timeline and enforce it.</p>
+<br>
+<h2> Implementation Patterns</h2>
+<br>
+<p>**Code branching.** Maintain separate code for each version. Simple but leads to code duplication. Use only for small, stable APIs.</p>
+<br>
+<p>**Conditional logic.** Single codebase with version checks. More maintainable but can become complex:</p>
+<br>
+<pre><code>
+if version == 1:
+
+    return serialize_v1(data)
+
+elif version == 2:
+
+    return serialize_v2(data)
+
+</code></pre>
+<br>
+<p>**Interceptor/middleware.** Transform responses between versions at the middleware layer. Keeps core logic version-agnostic:</p>
+<br>
+<pre><code>
+if request_version == 1:
+
+    response = transform_to_v1(handler.handle(request))
+
+elif request_version == 2:
+
+    response = transform_to_v2(handler.handle(request))
+
+</code></pre>
+<br>
+<p>**Adapter layer.** Use the adapter pattern to translate between internal models and versioned API responses. The cleanest approach for complex APIs.</p>
+<br>
+<h2> Avoiding Versioning Altogether</h2>
+<br>
+<p>The best versioning strategy is not needing one. Design your API to be extensible from the start:</p>
+<br>
+<li>Include optional fields rather than creating new endpoints.</li>
+<li>Use field selection (GraphQL or query parameter filters).</li>
+<li>Add new endpoints without modifying existing ones.</li>
+<li>Return more data than clients need (clients can ignore extra fields).</li>
+<li>Use wire-format tolerant data structures (maps instead of fixed objects).</li>
+<br>
+<p>GraphQL eliminates many versioning concerns by letting clients specify exactly what they need.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>API versioning is a practical necessity for evolving APIs. URL path versioning is the most common and practical approach. Support a limited number of versions and communicate deprecation timelines clearly. Design your API to minimize breaking changes through extensibility. When possible, prefer backward-compatible additions over new versions.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

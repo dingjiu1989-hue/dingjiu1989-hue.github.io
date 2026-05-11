@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="helm-kubernetes-package-management">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Helm Charts: Kubernetes Package Management">
+    <meta property="og:description" content="A comprehensive guide to Helm chart structure, templates, values management, dependency handling, and CI/CD integration for Kubernetes deployments.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/helm-kubernetes-package-management.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Helm Charts: Kubernetes Package Management">
+    <meta name="twitter:description" content="A comprehensive guide to Helm chart structure, templates, values management, dependency handling, and CI/CD integration for Kubernetes deployments.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Helm Charts: Kubernetes Package Management — SourceHub</title>
+    <meta name="description" content="A comprehensive guide to Helm chart structure, templates, values management, dependency handling, and CI/CD integration for Kubernetes deployments.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/helm-kubernetes-package-management.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/helm-kubernetes-package-management.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Helm Charts: Kubernetes Package Management",
+      "description": "A comprehensive guide to Helm chart structure, templates, values management, dependency handling, and CI/CD integration for Kubernetes deployments.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1660",
+      "keywords": "Technology, Programming, DevOps",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/helm-kubernetes-package-management.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Helm Charts: Kubernetes Package Management"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Helm Charts: Kubernetes Package Management
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">Programming</span>
+        <span class="tag-cat">DevOps</span></div>
+      <h1 class="article-title">Helm Charts: Kubernetes Package Management</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>Helm is the de facto package manager for Kubernetes, enabling developers to define, install, and upgrade complex applications through reusable chart packages. A single Helm chart can encapsulate dozens of Kubernetes resources into a versioned, configurable unit that can be deployed across multiple environments with minimal repetition.</p>
+<br>
+<p>This guide covers advanced Helm concepts including chart structure, templating, dependency management, CI/CD integration, and enterprise best practices.</p>
+<br>
+<h2> Chart Structure</h2>
+<br>
+<p>A well-organized Helm chart follows a standard directory layout:</p>
+<br>
+<pre><code>
+my-app/
+
+  Chart.yaml          # Metadata: name, version, dependencies
+
+  values.yaml         # Default configuration values
+
+  values.schema.json  # JSON Schema for values validation
+
+  charts/             # Sub-charts (managed by helm dependency)
+
+  templates/          # Go template YAML files
+
+    _helpers.tpl      # Named template definitions
+
+    deployment.yaml
+
+    service.yaml
+
+    ingress.yaml
+
+    hpa.yaml
+
+    tests/            # Test pods for chart validation
+
+      test-connection.yaml
+
+  crds/               # Custom Resource Definitions
+
+  README.md
+
+</code></pre>
+<br>
+<p>The `Chart.yaml` file defines metadata and dependencies:</p>
+<br>
+<pre><code>
+apiVersion: v2
+
+name: my-app
+
+description: A production-grade web application
+
+version: 1.2.3
+
+appVersion: 2.0.0
+
+kubeVersion: &quot;&gt;=1.25.0-0&quot;
+
+type: application
+
+dependencies:
+
+  - name: postgresql
+
+    version: &quot;12.x&quot;
+
+    repository: https://charts.bitnami.com/bitnami
+
+    condition: postgresql.enabled
+
+  - name: redis
+
+    version: &quot;18.x&quot;
+
+    repository: https://charts.bitnami.com/bitnami
+
+    condition: redis.enabled
+
+</code></pre>
+<br>
+<h2> Advanced Templating</h2>
+<br>
+<p>Helm uses Go templates with the Sprig function library for dynamic resource generation. Beyond simple variable substitution, you can implement complex logic:</p>
+<br>
+<pre><code>
+{{- /* Conditional resource creation */}}
+
+{{- if .Values.ingress.enabled }}
+
+apiVersion: networking.k8s.io/v1
+
+kind: Ingress
+
+metadata:
+
+  name: {{ include &quot;my-app.fullname&quot; . }}
+
+  annotations:
+
+    {{- toYaml .Values.ingress.annotations | nindent 4 }}
+
+spec:
+
+  ingressClassName: {{ .Values.ingress.className }}
+
+  rules:
+
+    {{- range .Values.ingress.hosts }}
+
+    - host: {{ .host | quote }}
+
+      http:
+
+        paths:
+
+          {{- range .paths }}
+
+          - path: {{ .path }}
+
+            pathType: {{ .pathType }}
+
+            backend:
+
+              service:
+
+                name: {{ include &quot;my-app.fullname&quot; $ }}
+
+                port:
+
+                  number: {{ $.Values.service.port }}
+
+          {{- end }}
+
+    {{- end }}
+
+{{- end }}
+
+</code></pre>
+<br>
+<p>Named templates in `_helpers.tpl` promote reuse:</p>
+<br>
+<pre><code>
+{{- define &quot;my-app.labels&quot; -}}
+
+app.kubernetes.io/name: {{ include &quot;my-app.name&quot; . }}
+
+app.kubernetes.io/instance: {{ .Release.Name }}
+
+app.kubernetes.io/version: {{ .Chart.AppVersion }}
+
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+
+helm.sh/chart: {{ include &quot;my-app.chart&quot; . }}
+
+{{- end -}}
+
+
+
+{{- define &quot;my-app.probe&quot; -}}
+
+initialDelaySeconds: {{ .initialDelay | default 5 }}
+
+periodSeconds: {{ .period | default 10 }}
+
+timeoutSeconds: {{ .timeout | default 3 }}
+
+successThreshold: {{ .successThreshold | default 1 }}
+
+failureThreshold: {{ .failureThreshold | default 3 }}
+
+{{- end -}}
+
+</code></pre>
+<br>
+<h2> Values Management and Validation</h2>
+<br>
+<p>JSON Schema validation catches configuration errors early:</p>
+<br>
+<pre><code>
+{
+
+  &quot;$schema&quot;: &quot;https://json-schema.org/draft-07/schema#&quot;,
+
+  &quot;type&quot;: &quot;object&quot;,
+
+  &quot;properties&quot;: {
+
+    &quot;replicaCount&quot;: {
+
+      &quot;type&quot;: &quot;integer&quot;,
+
+      &quot;minimum&quot;: 1,
+
+      &quot;maximum&quot;: 100
+
+    },
+
+    &quot;image&quot;: {
+
+      &quot;type&quot;: &quot;object&quot;,
+
+      &quot;properties&quot;: {
+
+        &quot;repository&quot;: { &quot;type&quot;: &quot;string&quot; },
+
+        &quot;tag&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;pattern&quot;: &quot;^v?[0-9]&quot; },
+
+        &quot;pullPolicy&quot;: {
+
+          &quot;type&quot;: &quot;string&quot;,
+
+          &quot;enum&quot;: [&quot;Always&quot;, &quot;IfNotPresent&quot;, &quot;Never&quot;]
+
+        }
+
+      },
+
+      &quot;required&quot;: [&quot;repository&quot;]
+
+    },
+
+    &quot;resources&quot;: {
+
+      &quot;type&quot;: &quot;object&quot;,
+
+      &quot;properties&quot;: {
+
+        &quot;limits&quot;: { &quot;$ref&quot;: &quot;#/$defs/ResourceSpec&quot; },
+
+        &quot;requests&quot;: { &quot;$ref&quot;: &quot;#/$defs/ResourceSpec&quot; }
+
+      }
+
+    }
+
+  },
+
+  &quot;required&quot;: [&quot;image&quot;, &quot;replicaCount&quot;]
+
+}
+
+</code></pre>
+<br>
+<p>Environment-specific overrides keep values DRY:</p>
+<br>
+<pre><code>
+# values.yaml (defaults)
+
+replicaCount: 1
+
+image:
+
+  tag: latest
+
+
+
+# values-staging.yaml
+
+replicaCount: 2
+
+image:
+
+  tag: staging-abc123
+
+ingress:
+
+  enabled: true
+
+  hosts:
+
+    - host: staging.my-app.com
+
+
+
+# values-production.yaml
+
+replicaCount: 6
+
+image:
+
+  tag: v2.0.0
+
+resources:
+
+  limits:
+
+    cpu: 2
+
+    memory: 4Gi
+
+  requests:
+
+    cpu: 1
+
+    memory: 2Gi
+
+ingress:
+
+  enabled: true
+
+  hosts:
+
+    - host: my-app.com
+
+    - host: www.my-app.com
+
+</code></pre>
+<br>
+<h2> Dependency Management</h2>
+<br>
+<p>Lock dependency versions with `Chart.lock`:</p>
+<br>
+<pre><code>
+helm dependency update ./charts/my-app
+
+</code></pre>
+<br>
+<p>Use alias and condition fields for environment-optimized dependencies:</p>
+<br>
+<pre><code>
+dependencies:
+
+  - name: postgresql
+
+    alias: primary-db
+
+    version: &quot;12.x&quot;
+
+    repository: https://charts.bitnami.com/bitnami
+
+    condition: primary-db.enabled
+
+  - name: postgresql
+
+    alias: replica-db
+
+    version: &quot;12.x&quot;
+
+    repository: https://charts.bitnami.com/bitnami
+
+    condition: replica-db.enabled
+
+</code></pre>
+<br>
+<h2> CI/CD Integration</h2>
+<br>
+<p>Integrate Helm linting and testing into pipelines:</p>
+<br>
+<pre><code>
+# .github/workflows/helm-release.yml
+
+name: Helm Release
+
+on:
+
+  push:
+
+    branches: [main]
+
+jobs:
+
+  lint:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - uses: azure/setup-helm@v3
+
+        with:
+
+          version: &quot;v3.14.0&quot;
+
+      - run: helm lint ./charts/my-app
+
+      - run: helm template --validate ./charts/my-app
+
+
+
+  release:
+
+    needs: lint
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - uses: azure/setup-helm@v3
+
+      - name: Package and push to OCI registry
+
+        run: |
+
+          helm package ./charts/my-app
+
+          helm push my-app-*.tgz oci://ghcr.io/${{ github.repository }}/charts
+
+</code></pre>
+<br>
+<h2> Chart Versioning and Publishing</h2>
+<br>
+<p>Use OCI registries for chart distribution:</p>
+<br>
+<pre><code>
+# Login and push
+
+helm registry login ghcr.io -u $USER
+
+helm push my-app-1.2.3.tgz oci://ghcr.io/my-org/charts
+
+
+
+# Install from OCI
+
+helm install my-app oci://ghcr.io/my-org/charts/my-app --version 1.2.3
+
+</code></pre>
+<br>
+<p>Follow semantic versioning strictly. Breaking template changes require a major version bump, as `helm upgrade` must never silently break deployed resources.</p>
+<br>
+<h2> Best Practices</h2>
+<br>
+<li>**Use `helm create` scaffolds** as a starting point but customize helpers aggressively.</li>
+<li>**Validate in CI**: run `helm lint`, `helm template --validate`, and `kubeconform` on every PR.</li>
+<li>**Unit test templates**: use the `helm-unittest` plugin to test template output without a cluster.</li>
+<li>**Library charts**: extract common helpers into a library chart (`type: library`) shared across microservices.</li>
+<li>**Avoid sprints in templates**: complex logic belongs in application code, not chart templates.</li>
+<li>**Resource policy annotations**: use `helm.sh/resource-policy: keep` sparingly and document its use.</li>
+<br>
+<p>Helm remains the most widely adopted packaging tool in the Kubernetes ecosystem, and mastering its advanced features is essential for operating production-grade workloads at scale.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

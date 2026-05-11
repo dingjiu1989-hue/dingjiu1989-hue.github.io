@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="git-workflows-2026">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Git Workflows for Teams">
+    <meta property="og:description" content="A practical guide to modern Git workflows for collaborative team development in 2026.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/git-workflows-2026.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Git Workflows for Teams">
+    <meta name="twitter:description" content="A practical guide to modern Git workflows for collaborative team development in 2026.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Git Workflows for Teams — SourceHub</title>
+    <meta name="description" content="A practical guide to modern Git workflows for collaborative team development in 2026.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/git-workflows-2026.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/git-workflows-2026.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Git Workflows for Teams",
+      "description": "A practical guide to modern Git workflows for collaborative team development in 2026.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1158",
+      "keywords": "Technology, Programming, DevOps",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/git-workflows-2026.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Git Workflows for Teams"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Git Workflows for Teams
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">Programming</span>
+        <span class="tag-cat">DevOps</span></div>
+      <h1 class="article-title">Git Workflows for Teams</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Git workflows define how teams collaborate on code. Choosing the right workflow impacts productivity, release cadence, and code quality. In 2026, several mature patterns dominate, each suited to different team structures and deployment strategies.</p>
+<br>
+<h2> Trunk-Based Development</h2>
+<br>
+<p>Trunk-based development has become the default for teams practicing continuous deployment. Developers work on short-lived feature branches (hours to a couple of days) and merge directly into `main` multiple times per day.</p>
+<br>
+<p>Key practices:</p>
+<br>
+<li>Branch from `main`, commit frequently, merge back quickly.</li>
+<li>Use feature flags to hide incomplete work in production.</li>
+<li>Run CI on every push to catch integration issues early.</li>
+<li>Keep branches small -- ideally a single logical change.</li>
+<br>
+<p>Trunk-based development minimizes merge conflicts and keeps integration pain low. It pairs well with feature flagging systems like LaunchDarkly or Flagsmith.</p>
+<br>
+<h2> GitHub Flow</h2>
+<br>
+<p>GitHub Flow is a simplified trunk-based variant popular with open source and small teams:</p>
+<br>
+<li>Create a branch from `main`.</li>
+<p>2. Make changes and open a pull request.</p>
+<p>3. Discuss, review, and iterate.</p>
+<p>4. Merge to `main` and deploy immediately.</p>
+<br>
+<p>The simplicity is its strength -- there is no `develop` branch, no release branches, and no hotfix branches. Every branch is treated equally, and `main` is always deployable.</p>
+<br>
+<h2> GitFlow</h2>
+<br>
+<p>GitFlow remains relevant for projects with scheduled releases and strict versioning:</p>
+<br>
+<li>`main` stores the release history.</li>
+<li>`develop` serves as the integration branch.</li>
+<li>`feature/*` branches branch from `develop`.</li>
+<li>`release/*` branches prepare releases.</li>
+<li>`hotfix/*` branches fix production issues directly from `main`.</li>
+<br>
+<p>GitFlow provides clear separation between work-in-progress and released code. However, it adds complexity -- teams should only adopt it when they genuinely need release branches and maintenance branches simultaneously.</p>
+<br>
+<h2> Pull Request Best Practices</h2>
+<br>
+<p>Regardless of workflow, effective pull requests are critical:</p>
+<br>
+<p>**Keep PRs small.** A PR should represent a single logical change. Research shows that reviews are most effective under 250 lines changed. Large PRs get less thorough reviews and take longer to merge.</p>
+<br>
+<p>**Write descriptive titles and descriptions.** A good PR description explains what changed, why it changed, and how to test it. Include screenshots for UI changes.</p>
+<br>
+<p>**Use draft PRs for early feedback.** Open a draft PR before the code is complete to get architectural feedback early.</p>
+<br>
+<h2> Rebase vs Merge</h2>
+<br>
+<p>The debate between rebasing and merging continues. Most teams adopt a pragmatic hybrid:</p>
+<br>
+<pre><code>
+# Rebase feature branch onto main
+
+git checkout feature/xyz
+
+git rebase main
+
+
+
+# Merge with --no-ff for pull requests
+
+git checkout main
+
+git merge --no-ff feature/xyz
+
+</code></pre>
+<br>
+<p>Use rebase to keep feature branches up to date and maintain a clean history. Use merge commits to record when a feature was integrated. Squash-merge is popular for trunk-based workflows since it creates a single commit per PR.</p>
+<br>
+<h2> Commit Message Conventions</h2>
+<br>
+<p>Conventional Commits has become the standard:</p>
+<br>
+<pre><code>
+feat(api): add user authentication endpoint
+
+fix(parser): handle null input gracefully
+
+docs(readme): update installation instructions
+
+</code></pre>
+<br>
+<p>This format enables automated changelog generation, semantic versioning, and changelog-driven releases. Tools like `commitlint` enforce these conventions in CI.</p>
+<br>
+<h2> Branch Naming Conventions</h2>
+<br>
+<p>Adopt a consistent branch naming scheme:</p>
+<br>
+<li>`feat/description` for features</li>
+<li>`fix/description` for bug fixes</li>
+<li>`chore/description` for maintenance tasks</li>
+<li>`docs/description` for documentation</li>
+<br>
+<p>Use hyphens to separate words and keep names under 50 characters.</p>
+<br>
+<h2> Code Review Automation</h2>
+<br>
+<p>Modern Git platforms support automated checks that must pass before merging:</p>
+<br>
+<li>Static analysis (linters, type checkers).</li>
+<li>Unit and integration tests.</li>
+<li>Security scanning (SAST, dependency scanning).</li>
+<li>Coverage thresholds.</li>
+<br>
+<p>Configure branch protection rules to require passing CI checks and approved reviews. This prevents unreviewed or broken code from reaching main.</p>
+<br>
+<h2> Handling Merge Conflicts</h2>
+<br>
+<p>Conflicts are inevitable. Best practices for resolution:</p>
+<br>
+<pre><code>
+# Update your branch first
+
+git fetch origin
+
+git rebase origin/main
+
+
+
+# Resolve conflicts in your editor
+
+git add resolved-file.py
+
+git rebase --continue
+
+</code></pre>
+<br>
+<p>For complex conflicts, use a visual merge tool like `kdiff3`, `meld`, or VS Code's built-in merge editor. Always test after resolving conflicts.</p>
+<br>
+<h2> Git Hooks and Automation</h2>
+<br>
+<p>Client-side hooks enforce local standards:</p>
+<br>
+<pre><code>
+#!/bin/sh
+
+# .git/hooks/pre-commit
+
+npm run lint &amp;&amp; npm run typecheck
+
+</code></pre>
+<br>
+<p>Team-wide hooks can be managed with `husky` (JavaScript) or `lefthook` (multi-language). Server-side hooks in CI prevent non-compliant commits from being merged.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>The best Git workflow is the one your team consistently follows. Start simple -- GitHub Flow or trunk-based development -- and adopt more structure only when the team's scale demands it. Combine clear branching policies, small PRs, automated checks, and Conventional Commits to build a workflow that keeps your team shipping quality code.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

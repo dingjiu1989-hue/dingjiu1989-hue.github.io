@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="local-llm-setup">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Running LLMs Locally">
+    <meta property="og:description" content="Step-by-step guide to running LLMs locally using Ollama and LM Studio with setup instructions, model selection, and performance tips.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/local-llm-setup.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Running LLMs Locally">
+    <meta name="twitter:description" content="Step-by-step guide to running LLMs locally using Ollama and LM Studio with setup instructions, model selection, and performance tips.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Running LLMs Locally — SourceHub</title>
+    <meta name="description" content="Step-by-step guide to running LLMs locally using Ollama and LM Studio with setup instructions, model selection, and performance tips.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/local-llm-setup.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/ai/local-llm-setup.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Running LLMs Locally",
+      "description": "Step-by-step guide to running LLMs locally using Ollama and LM Studio with setup instructions, model selection, and performance tips.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1285",
+      "keywords": "Artificial Intelligence, Machine Learning",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/local-llm-setup.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "Running LLMs Locally"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › Running LLMs Locally
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
+        <span class="tag-cat">Machine Learning</span></div>
+      <h1 class="article-title">Running LLMs Locally</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>Running large language models locally has become practical thanks to quantization techniques, efficient inference engines, and a thriving open-source ecosystem. Whether for privacy, cost savings, or offline availability, local LLMs offer a compelling alternative to cloud APIs for many workloads. This guide covers the two most popular local LLM platforms — Ollama and LM Studio.</p>
+<br>
+<h2> Ollama</h2>
+<br>
+<p>[Ollama](https://ollama.ai) is the most popular tool for running LLMs locally, known for its simplicity and command-line focus.</p>
+<br>
+<h3>Installation</h3>
+<br>
+<pre><code>
+# macOS
+
+brew install ollama
+
+
+
+# Linux
+
+curl -fsSL https://ollama.ai/install.sh | sh
+
+
+
+# Windows
+
+# Download from https://ollama.ai/download
+
+</code></pre>
+<br>
+<h3>Getting Started</h3>
+<br>
+<p>Ollama makes running a model a single command:</p>
+<br>
+<pre><code>
+# Pull and run a model
+
+ollama run llama3.2:3b
+
+
+
+# List available models
+
+ollama list
+
+
+
+# Pull a specific model without running
+
+ollama pull mistral:7b
+
+</code></pre>
+<br>
+<h3>Popular Models for Ollama</h3>
+<br>
+<p>| Model | Size | RAM Required | Best For |</p>
+<p>|-------|------|-------------|----------|</p>
+<p>| Llama 3.2 3B | 2.0 GB | 4 GB | Fast responses, simple tasks |</p>
+<p>| Llama 3.1 8B | 4.7 GB | 8 GB | General purpose Q&A |</p>
+<p>| Mistral 7B | 4.1 GB | 8 GB | Code, reasoning, instruction following |</p>
+<p>| Qwen2.5 7B | 4.8 GB | 8 GB | Strong multilingual, coding |</p>
+<p>| Mixtral 8x7B | 26 GB | 48 GB | High quality, close to GPT-3.5 |</p>
+<p>| DeepSeek-R1 7B | 4.5 GB | 8 GB | Strong reasoning, step-by-step |</p>
+<br>
+<h3>Using Ollama Programmatically</h3>
+<br>
+<p>Ollama provides a REST API at `http://localhost:11434`:</p>
+<br>
+<pre><code>
+import requests
+
+
+
+response = requests.post(&quot;http://localhost:11434/api/generate&quot;, json={
+
+    &quot;model&quot;: &quot;llama3.2:3b&quot;,
+
+    &quot;prompt&quot;: &quot;Explain quantum computing in three sentences.&quot;,
+
+    &quot;stream&quot;: False
+
+})
+
+
+
+print(response.json()[&quot;response&quot;])
+
+</code></pre>
+<br>
+<p>Or use the official Python library:</p>
+<br>
+<pre><code>
+import ollama
+
+
+
+response = ollama.chat(model=&quot;llama3.2:3b&quot;, messages=[
+
+    {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;What is the capital of France?&quot;}
+
+])
+
+print(response[&quot;message&quot;][&quot;content&quot;])
+
+</code></pre>
+<br>
+<h3>Custom Modelfiles</h3>
+<br>
+<p>Create custom models with system prompts and parameters:</p>
+<br>
+<pre><code>
+FROM llama3.1:8b
+
+
+
+# Set system prompt
+
+SYSTEM &quot;You are a helpful coding assistant. Provide concise code examples.&quot;
+
+
+
+# Configure parameters
+
+PARAMETER temperature 0.3
+
+PARAMETER top_p 0.9
+
+</code></pre>
+<br>
+<p>Build and run:</p>
+<br>
+<pre><code>
+ollama create my-coding-assistant -f Modelfile
+
+ollama run my-coding-assistant
+
+</code></pre>
+<br>
+<h2> LM Studio</h2>
+<br>
+<p>[LM Studio](https://lmstudio.ai) is a GUI-focused alternative that excels for users who prefer visual interfaces and easy model browsing.</p>
+<br>
+<h3>Key Features</h3>
+<br>
+<li>**Built-in model browser**: Search and download models from Hugging Face</li>
+<li>**GUI chat interface**: Familiar ChatGPT-like experience</li>
+<li>**Local API server**: OpenAI-compatible API endpoint</li>
+<li>**Model configuration**: Easy sliders for context length, GPU offloading, and temperature</li>
+<li>**Multi-model support**: Load multiple models and switch between them</li>
+<br>
+<h3>Setup</h3>
+<br>
+<li>Download from [lmstudio.ai](https://lmstudio.ai)</li>
+<p>2. Open the app and browse the model catalog</p>
+<p>3. Download a model (start with Llama 3.2 3B or Mistral 7B)</p>
+<p>4. Load the model and start chatting</p>
+<br>
+<h3>API Server</h3>
+<br>
+<p>LM Studio can serve models via an OpenAI-compatible API:</p>
+<br>
+<pre><code>
+http://localhost:1234/v1/chat/completions
+
+</code></pre>
+<br>
+<p>This means any tool that works with OpenAI's API can use your local model by changing the base URL:</p>
+<br>
+<pre><code>
+from openai import OpenAI
+
+
+
+client = OpenAI(
+
+    base_url=&quot;http://localhost:1234/v1&quot;,
+
+    api_key=&quot;not-needed&quot;
+
+)
+
+
+
+response = client.chat.completions.create(
+
+    model=&quot;local-model&quot;,
+
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello!&quot;}]
+
+)
+
+</code></pre>
+<br>
+<h2> Performance Optimization</h2>
+<br>
+<h3>Quantization Levels</h3>
+<br>
+<p>Quantization reduces model size at the cost of some accuracy:</p>
+<br>
+<li>**Q4_K_M**: Best balance of quality and size (4-bit, recommended)</li>
+<li>**Q5_K_M**: Higher quality, larger (5-bit, use if you have RAM headroom)</li>
+<li>**Q8_0**: Near-full quality, 2x RAM requirement</li>
+<li>**Q2_K**: Minimal RAM, noticeable quality loss</li>
+<br>
+<p>Rule of thumb: each quantization step roughly doubles model size but improves quality marginally. Q4_K_M is the sweet spot.</p>
+<br>
+<h3>GPU Acceleration</h3>
+<br>
+<p>Both Ollama and LM Studio support GPU acceleration via CUDA (NVIDIA), Metal (Apple Silicon), or Vulkan (AMD):</p>
+<br>
+<pre><code>
+# Ollama uses Metal automatically on Apple Silicon
+
+# For NVIDIA, install CUDA and Ollama detects it
+
+
+
+# Check which device is being used
+
+ollama run llama3.2:3b --verbose
+
+</code></pre>
+<br>
+<h3>Context Window</h3>
+<br>
+<p>Larger context windows consume more memory. A 128K context with Q4_K_M requires approximately:</p>
+<br>
+<li>7B model: ~8 GB total</li>
+<li>13B model: ~14 GB total</li>
+<li>70B model: ~48 GB total</li>
+<br>
+<h2> Use Cases for Local LLMs</h2>
+<br>
+<li>**Privacy-sensitive data**: Medical records, legal documents, personal information</li>
+<li>**Offline environments**: Air-gapped systems, travel, remote locations</li>
+<li>**Cost-sensitive workloads**: High-volume batch processing</li>
+<li>**Experimentation**: Rapid testing of different models without API costs</li>
+<li>**Latency-critical applications**: No network calls for inference</li>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>Running LLMs locally is easier than ever with Ollama and LM Studio. Ollama offers command-line simplicity and a rich set of pre-built models. LM Studio provides a polished GUI and OpenAI-compatible API. Start with a 7B model at Q4_K_M quantization on a machine with 8-16 GB of RAM, and scale up as your needs grow. Local LLMs won't replace cloud APIs for every use case, but they are an essential tool in the AI practitioner's toolkit.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

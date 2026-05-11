@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="messaging-patterns">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Messaging Patterns: Pub/Sub and Request/Reply">
+    <meta property="og:description" content="Explore messaging patterns including publish-subscribe and request-reply for distributed systems.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/messaging-patterns.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Messaging Patterns: Pub/Sub and Request/Reply">
+    <meta name="twitter:description" content="Explore messaging patterns including publish-subscribe and request-reply for distributed systems.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Messaging Patterns: Pub/Sub and Request/Reply — SourceHub</title>
+    <meta name="description" content="Explore messaging patterns including publish-subscribe and request-reply for distributed systems.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/messaging-patterns.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/messaging-patterns.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Messaging Patterns: Pub/Sub and Request/Reply",
+      "description": "Explore messaging patterns including publish-subscribe and request-reply for distributed systems.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1474",
+      "keywords": "Architecture, System Design",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/messaging-patterns.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Messaging Patterns: Pub/Sub and Request/Reply"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Messaging Patterns: Pub/Sub and Request/Reply
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span></div>
+      <h1 class="article-title">Messaging Patterns: Pub/Sub and Request/Reply</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Messaging is the backbone of distributed systems. It enables services to communicate asynchronously, decouple dependencies, and build resilient architectures. This article covers the two most fundamental messaging patterns: publish-subscribe and request-reply.</p>
+<br>
+<h2> The Case for Messaging</h2>
+<br>
+<p>Direct HTTP calls between services create tight coupling. When Service A calls Service B directly:</p>
+<br>
+<li>Service A must know Service B's location and API contract.</li>
+<li>Service A is blocked while Service B processes the request.</li>
+<li>If Service B is down, Service A fails.</li>
+<li>Scaling Service B does not help Service A's performance.</li>
+<br>
+<p>Messaging intermediaries (message brokers like Kafka, RabbitMQ, SQS, or Pub/Sub) solve these problems by decoupling senders from receivers.</p>
+<br>
+<h2> Publish-Subscribe (Pub/Sub)</h2>
+<br>
+<p>In the pub/sub pattern, publishers send messages to a topic without knowing who the subscribers are. Subscribers receive messages from topics they have subscribed to.</p>
+<br>
+<pre><code>
+[Publisher] -&gt; [Topic] -&gt; [Subscriber A]
+
+                       -&gt; [Subscriber B]
+
+                       -&gt; [Subscriber C]
+
+</code></pre>
+<br>
+<h3>How Pub/Sub Works</h3>
+<br>
+<li>**Topics** are named channels that hold messages.</li>
+<p>2. **Publishers** send messages to a topic.</p>
+<p>3. **Subscribers** register interest in a topic and receive all messages published to it.</p>
+<p>4. Each subscriber receives a copy of every message (fan-out delivery).</p>
+<br>
+<h3>Use Cases</h3>
+<br>
+<p>**Event notification.** When a user signs up, publish a `UserRegistered` event. Multiple subscribers react: the email service sends a welcome email, the analytics service records the event, the CRM service creates a contact.</p>
+<br>
+<p>**Broadcasting.** A live sports app publishes score updates. Thousands of clients receive updates in real-time.</p>
+<br>
+<p>**Log aggregation.** Multiple services publish log entries to a central topic. A log processing service stores and indexes them.</p>
+<br>
+<h3>Example with Kafka</h3>
+<br>
+<pre><code>
+# Publisher
+
+producer.send(&#x27;order-events&#x27;, {
+
+    &#x27;type&#x27;: &#x27;OrderPlaced&#x27;,
+
+    &#x27;order_id&#x27;: &#x27;123&#x27;,
+
+    &#x27;customer_id&#x27;: &#x27;456&#x27;,
+
+    &#x27;total&#x27;: 99.99
+
+})
+
+
+
+# Subscriber
+
+@kafka_listener(&#x27;order-events&#x27;)
+
+def handle_order_placed(event):
+
+    if event[&#x27;type&#x27;] == &#x27;OrderPlaced&#x27;:
+
+        inventory_service.reserve_inventory(event[&#x27;order_id&#x27;])
+
+        notification_service.send_confirmation(event[&#x27;customer_id&#x27;])
+
+</code></pre>
+<br>
+<p>Pub/Sub is ideal for one-to-many communication where the publisher does not need a response.</p>
+<br>
+<h2> Request-Reply</h2>
+<br>
+<p>The request-reply pattern is fundamentally different from pub/sub. A sender sends a request and expects a response. The two are correlated so the sender knows which response goes with which request.</p>
+<br>
+<p>In messaging systems, request-reply requires correlation:</p>
+<br>
+<pre><code>
+[Requestor] -&gt; [Request Queue] -&gt; [Replier]
+
+                                           
+
+[Requestor] &lt;- [Reply Queue]   &lt;- [Replier]
+
+</code></pre>
+<br>
+<h3>Correlation ID</h3>
+<br>
+<p>The key mechanism is the correlation ID. The requestor includes a unique ID in the request message. The replier includes the same ID in the reply message. The requestor uses this ID to match replies to pending requests.</p>
+<br>
+<pre><code>
+# Requestor
+
+correlation_id = str(uuid.uuid4())
+
+reply_queue = f&quot;reply-{correlation_id}&quot;
+
+
+
+message = {
+
+    &#x27;correlation_id&#x27;: correlation_id,
+
+    &#x27;payload&#x27;: {&#x27;user_id&#x27;: &#x27;123&#x27;, &#x27;amount&#x27;: 100}
+
+}
+
+
+
+request_queue.send(message)
+
+
+
+# Wait for reply on the reply queue
+
+reply = reply_queue.receive(timeout=30)
+
+</code></pre>
+<br>
+<pre><code>
+# Replier
+
+def handle_request(message):
+
+    result = process(message[&#x27;payload&#x27;])
+
+    reply = {
+
+        &#x27;correlation_id&#x27;: message[&#x27;correlation_id&#x27;],
+
+        &#x27;payload&#x27;: result
+
+    }
+
+    reply_queue.send(reply)
+
+</code></pre>
+<br>
+<h3>Use Cases</h3>
+<br>
+<p>**Remote procedure calls.** Service A asks Service B to compute something and return the result. Unlike HTTP RPC, the messaging-based approach allows the requestor to be decoupled in time -- it can send the request and check for the reply later.</p>
+<br>
+<p>**Long-running operations.** Submit a job, get back a job ID, check progress, and eventually receive the result. The reply might arrive minutes or hours later.</p>
+<br>
+<h2> Pub/Sub vs. Request-Reply</h2>
+<br>
+<p>| Aspect | Pub/Sub | Request-Reply |</p>
+<p>|--------|---------|---------------|</p>
+<p>| Communication | One-to-many | One-to-one |</p>
+<p>| Response expected? | No | Yes |</p>
+<p>| Coupling | Very loose | Moderate |</p>
+<p>| Use case | Event notification, broadcasting | Remote procedure, query |</p>
+<p>| Message ordering | Per partition/topic | Per conversation |</p>
+<p>| Error handling | Dead letter queue | Timeout + retry |</p>
+<br>
+<h2> Choosing a Message Broker</h2>
+<br>
+<p>**Apache Kafka:** Best for high-throughput event streaming, log aggregation, and event sourcing. Messages are persisted and replayable. Excellent for building event-driven architectures.</p>
+<br>
+<p>**RabbitMQ:** Best for traditional messaging with complex routing (direct, topic, headers, fanout exchanges). Good for request-reply patterns. Lower throughput than Kafka but richer routing features.</p>
+<br>
+<p>**Amazon SQS/SNS:** Fully managed. SQS for request-reply, SNS for pub/sub. No infrastructure to manage. Good for AWS-native applications.</p>
+<br>
+<p>**Google Cloud Pub/Sub:** Fully managed, global. Good for Google Cloud-native applications.</p>
+<br>
+<h2> Advanced Patterns</h2>
+<br>
+<p>**Dead letter queues.** When a message cannot be processed (after retries), move it to a dead letter queue for manual inspection. Prevents poison messages from blocking the main queue.</p>
+<br>
+<p>**Message bridging.** Forward messages between different messaging systems. For example, consume from SQS and publish to Kafka for long-term storage.</p>
+<br>
+<p>**Publisher confirms.** In Pub/Sub, some brokers support acknowledgments from publishers to confirm the message was received. Use this for at-least-once delivery guarantees.</p>
+<br>
+<h2> Common Pitfalls</h2>
+<br>
+<p>**Message ordering.** Distributed messaging systems rarely guarantee total order. Kafka guarantees order within a partition, not across partitions. Design your system to handle out-of-order messages.</p>
+<br>
+<p>**Idempotency.** Messages may be delivered more than once. Ensure your message handlers are idempotent. Use idempotency keys or deduplication.</p>
+<br>
+<p>**Monitoring.** Monitor queue depth, consumer lag, and processing time. Set up alerts for growing backlog.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Pub/Sub and Request-Reply serve different purposes. Use Pub/Sub when you need to notify multiple consumers of an event. Use Request-Reply when a service needs a response. Many systems use both patterns together. Choose your message broker based on throughput requirements, routing complexity, and operational preferences. Always design for idempotency and handle duplicate messages gracefully.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

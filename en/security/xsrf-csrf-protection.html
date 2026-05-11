@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="xsrf-csrf-protection">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="XSRF/CSRF Protection Guide">
+    <meta property="og:description" content="A practical guide to preventing Cross-Site Request Forgery attacks using CSRF tokens, SameSite cookies, and custom headers.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/xsrf-csrf-protection.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="XSRF/CSRF Protection Guide">
+    <meta name="twitter:description" content="A practical guide to preventing Cross-Site Request Forgery attacks using CSRF tokens, SameSite cookies, and custom headers.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>XSRF/CSRF Protection Guide — SourceHub</title>
+    <meta name="description" content="A practical guide to preventing Cross-Site Request Forgery attacks using CSRF tokens, SameSite cookies, and custom headers.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/xsrf-csrf-protection.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/xsrf-csrf-protection.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "XSRF/CSRF Protection Guide",
+      "description": "A practical guide to preventing Cross-Site Request Forgery attacks using CSRF tokens, SameSite cookies, and custom headers.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1389",
+      "keywords": "Security, Cybersecurity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/xsrf-csrf-protection.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "XSRF/CSRF Protection Guide"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › XSRF/CSRF Protection Guide
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">Cybersecurity</span></div>
+      <h1 class="article-title">XSRF/CSRF Protection Guide</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> What Is CSRF?</h2>
+<br>
+<p>Cross-Site Request Forgery (CSRF or XSRF) is an attack that forces an authenticated user to execute unwanted actions on a web application. The attacker crafts a malicious page that, when visited by the victim, automatically submits a request to the target application using the victim's existing session cookies.</p>
+<br>
+<h3>Attack Scenario</h3>
+<br>
+<li>Alice logs into `bank.example.com` and has a valid session cookie.</li>
+<p>2. Alice visits `evil.com`, which contains an auto-submitting form targeting `bank.example.com/transfer`.</p>
+<p>3. The browser automatically includes Alice's session cookie with the request.</p>
+<p>4. The bank processes the transfer, believing Alice authorized it.</p>
+<br>
+<pre><code>
+&lt;!-- evil.com&#x27;s attack page --&gt;
+
+&lt;form action=&quot;https://bank.example.com/transfer&quot; method=&quot;POST&quot;&gt;
+
+    &lt;input type=&quot;hidden&quot; name=&quot;toAccount&quot; value=&quot;attacker_123&quot;&gt;
+
+    &lt;input type=&quot;hidden&quot; name=&quot;amount&quot; value=&quot;10000&quot;&gt;
+
+&lt;/form&gt;
+
+&lt;script&gt;document.forms[0].submit();&lt;/script&gt;
+
+</code></pre>
+<br>
+<h2> Defense 1: CSRF Tokens (Synchronizer Token Pattern)</h2>
+<br>
+<p>The server embeds a unique, unpredictable token in each form or request. The server validates the token on state-changing requests.</p>
+<br>
+<h3>Server-Side Implementation (Express)</h3>
+<br>
+<pre><code>
+const crypto = require(&#x27;crypto&#x27;);
+
+
+
+function generateCSRFToken(req) {
+
+    const token = crypto.randomBytes(32).toString(&#x27;hex&#x27;);
+
+    req.session.csrfToken = token;
+
+    return token;
+
+}
+
+
+
+function csrfMiddleware(req, res, next) {
+
+    if ([&#x27;POST&#x27;, &#x27;PUT&#x27;, &#x27;DELETE&#x27;, &#x27;PATCH&#x27;].includes(req.method)) {
+
+        const token = req.headers[&#x27;x-csrf-token&#x27;]
+
+            || req.body._csrfToken;
+
+        if (!token || token !== req.session.csrfToken) {
+
+            return res.status(403).json({
+
+                error: &#x27;CSRF validation failed&#x27;
+
+            });
+
+        }
+
+    }
+
+    next();
+
+}
+
+</code></pre>
+<br>
+<h3>HTML Form Usage</h3>
+<br>
+<pre><code>
+&lt;form method=&quot;POST&quot; action=&quot;/transfer&quot;&gt;
+
+    &lt;input type=&quot;hidden&quot; name=&quot;_csrfToken&quot; value=&quot;&lt;%= csrfToken %&gt;&quot;&gt;
+
+    &lt;input type=&quot;text&quot; name=&quot;toAccount&quot;&gt;
+
+    &lt;input type=&quot;number&quot; name=&quot;amount&quot;&gt;
+
+    &lt;button type=&quot;submit&quot;&gt;Transfer&lt;/button&gt;
+
+&lt;/form&gt;
+
+</code></pre>
+<br>
+<h3>Framework Built-In Support</h3>
+<br>
+<p>Most modern frameworks include CSRF protection:</p>
+<br>
+<pre><code>
+# Django
+
+{% csrf_token %}  &lt;!-- Template tag --&gt;
+
+</code></pre>
+<br>
+<pre><code>
+# Rails
+
+&lt;%= csrf_meta_tags %&gt;
+
+&lt;%= hidden_field_tag :authenticity_token, form_authenticity_token %&gt;
+
+</code></pre>
+<br>
+<pre><code>
+// Spring Security
+
+@EnableWebSecurity
+
+public class SecurityConfig {
+
+    @Bean
+
+    public SecurityFilterChain filterChain(HttpSecurity http) {
+
+        http.csrf(Customizer.withDefaults());
+
+        return http.build();
+
+    }
+
+}
+
+</code></pre>
+<br>
+<h2> Defense 2: SameSite Cookies</h2>
+<br>
+<p>The `SameSite` cookie attribute tells the browser when to send cookies with cross-origin requests.</p>
+<br>
+<p>| Attribute | Behavior | Security |</p>
+<p>|-----------|----------|----------|</p>
+<p>| `Strict` | Cookie sent only for same-site requests | Most secure, breaks some legitimate cross-site flows |</p>
+<p>| `Lax` | Cookie sent for top-level GET navigations | Good balance for most apps |</p>
+<p>| `None` | Cookie sent for all requests (requires Secure) | Insecure, use only when necessary |</p>
+<br>
+<pre><code>
+# Django settings
+
+SESSION_COOKIE_SAMESITE = &#x27;Lax&#x27;
+
+CSRF_COOKIE_SAMESITE = &#x27;Lax&#x27;
+
+</code></pre>
+<br>
+<pre><code>
+// Express with cookie-session
+
+app.use(session({
+
+    cookie: {
+
+        sameSite: &#x27;lax&#x27;,  // or &#x27;strict&#x27;
+
+        secure: true,
+
+        httpOnly: true
+
+    }
+
+}));
+
+</code></pre>
+<br>
+<p>For most applications, `SameSite=Lax` provides strong CSRF protection without breaking user experience. Use `SameSite=Strict` for sensitive operations like password changes or money transfers.</p>
+<br>
+<h2> Defense 3: Custom Request Headers</h2>
+<br>
+<p>Single-page applications that use JavaScript for API calls can leverage custom headers as a CSRF defense. Browsers enforce the same-origin policy, preventing custom headers from being set by cross-origin requests without CORS preflight.</p>
+<br>
+<pre><code>
+// Client-side
+
+fetch(&#x27;/api/transfer&#x27;, {
+
+    method: &#x27;POST&#x27;,
+
+    headers: {
+
+        &#x27;X-Requested-By&#x27;: &#x27;XMLHttpRequest&#x27;,
+
+        &#x27;Content-Type&#x27;: &#x27;application/json&#x27;
+
+    },
+
+    body: JSON.stringify({ toAccount, amount }),
+
+    credentials: &#x27;include&#x27;
+
+});
+
+</code></pre>
+<br>
+<pre><code>
+// Server-side validation
+
+app.post(&#x27;/api/transfer&#x27;, (req, res) =&gt; {
+
+    if (req.get(&#x27;X-Requested-By&#x27;) !== &#x27;XMLHttpRequest&#x27;) {
+
+        return res.status(403).json({ error: &#x27;Invalid request origin&#x27; });
+
+    }
+
+    // Process transfer...
+
+});
+
+</code></pre>
+<br>
+<h2> Defense 4: Origin and Referer Validation</h2>
+<br>
+<p>Check the `Origin` or `Referer` header on incoming requests:</p>
+<br>
+<pre><code>
+function validateOrigin(req) {
+
+    const origin = req.get(&#x27;Origin&#x27;);
+
+    const referer = req.get(&#x27;Referer&#x27;);
+
+    const allowed = [&#x27;https://example.com&#x27;, &#x27;https://app.example.com&#x27;];
+
+
+
+    if (origin &amp;&amp; !allowed.includes(origin)) {
+
+        return false;
+
+    }
+
+    if (!origin &amp;&amp; referer) {
+
+        const url = new URL(referer);
+
+        if (!allowed.includes(url.origin)) {
+
+            return false;
+
+        }
+
+    }
+
+    return true;
+
+}
+
+</code></pre>
+<br>
+<h2> Defense Comparison</h2>
+<br>
+<p>| Method | Complexity | Browser Support | Protection Level |</p>
+<p>|--------|-----------|-----------------|------------------|</p>
+<p>| CSRF Token | Medium | Universal | Strong |</p>
+<p>| SameSite Cookie (Lax) | Low | 95%+ | Strong |</p>
+<p>| Custom Header | Low | Universal | Strong (CORS protected) |</p>
+<p>| Origin/Referer Check | Low | Universal | Moderate |</p>
+<br>
+<p>For maximum protection, use CSRF tokens plus SameSite cookies. This covers both legacy browsers (no SameSite support) and modern browsers with the additional layer of SameSite protection.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>CSRF attacks exploit the browser's automatic inclusion of credentials in cross-origin requests. Defend using synchronizer token patterns for traditional server-rendered apps, SameSite cookies for modern browsers, and custom headers for API-driven SPAs. The most robust approach combines CSRF tokens with SameSite cookies to protect users across all browser versions.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

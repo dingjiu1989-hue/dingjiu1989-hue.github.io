@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="reverse-proxy-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Reverse Proxy Guide">
+    <meta property="og:description" content="Complete guide to reverse proxy configuration with Nginx and Caddy, covering SSL, caching, and load balancing.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/reverse-proxy-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Reverse Proxy Guide">
+    <meta name="twitter:description" content="Complete guide to reverse proxy configuration with Nginx and Caddy, covering SSL, caching, and load balancing.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Reverse Proxy Guide — SourceHub</title>
+    <meta name="description" content="Complete guide to reverse proxy configuration with Nginx and Caddy, covering SSL, caching, and load balancing.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/reverse-proxy-guide.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/reverse-proxy-guide.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Reverse Proxy Guide",
+      "description": "Complete guide to reverse proxy configuration with Nginx and Caddy, covering SSL, caching, and load balancing.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1454",
+      "keywords": "Technology, Programming, DevOps",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/reverse-proxy-guide.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Reverse Proxy Guide"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Reverse Proxy Guide
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">Programming</span>
+        <span class="tag-cat">DevOps</span></div>
+      <h1 class="article-title">Reverse Proxy Guide</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>A reverse proxy sits in front of your application servers, handling incoming requests and distributing them to backend services. It is essential for TLS termination, load balancing, caching, and security. This guide covers two of the most popular options: Nginx and Caddy.</p>
+<br>
+<h2> Why Use a Reverse Proxy</h2>
+<br>
+<li>**TLS termination**: Handle HTTPS once at the proxy layer.</li>
+<li>**Load balancing**: Distribute traffic across multiple backend instances.</li>
+<li>**Caching**: Cache responses to reduce backend load.</li>
+<li>**Security**: Filter malicious requests, rate limiting, IP blocking.</li>
+<li>**Multiple services**: Route different paths to different backends from one domain.</li>
+<br>
+<h2> Nginx Reverse Proxy</h2>
+<br>
+<p>Nginx is the industry standard for reverse proxying. It is mature, highly performant, and extremely configurable.</p>
+<br>
+<h3>Basic Reverse Proxy Configuration</h3>
+<br>
+<pre><code>
+server {
+
+    listen 80;
+
+    server_name app.example.com;
+
+
+
+    location / {
+
+        proxy_pass http://127.0.0.1:3000;
+
+        proxy_set_header Host $host;
+
+        proxy_set_header X-Real-IP $remote_addr;
+
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+    }
+
+}
+
+</code></pre>
+<br>
+<p>The `proxy_pass` directive sends requests to the backend. Always forward the original host and client IP headers so your application has accurate client information.</p>
+<br>
+<h3>WebSocket Support</h3>
+<br>
+<pre><code>
+location /ws/ {
+
+    proxy_pass http://127.0.0.1:3001;
+
+    proxy_http_version 1.1;
+
+    proxy_set_header Upgrade $http_upgrade;
+
+    proxy_set_header Connection &quot;upgrade&quot;;
+
+    proxy_set_header Host $host;
+
+    proxy_read_timeout 86400s;
+
+}
+
+</code></pre>
+<br>
+<p>The `Upgrade` and `Connection` headers are required for WebSocket connections. Set `proxy_read_timeout` to a long duration since WebSocket connections remain open.</p>
+<br>
+<h3>Load Balancing</h3>
+<br>
+<p>Distribute traffic across multiple backends:</p>
+<br>
+<pre><code>
+upstream app_cluster {
+
+    least_conn;
+
+    server 10.0.0.1:3000 weight=3;
+
+    server 10.0.0.2:3000;
+
+    server 10.0.0.3:3000 backup;
+
+}
+
+
+
+server {
+
+    location / {
+
+        proxy_pass http://app_cluster;
+
+    }
+
+}
+
+</code></pre>
+<br>
+<p>Load balancing methods: `round-robin` (default), `least_conn` (fewest active connections), `ip_hash` (session persistence). Assign higher `weight` to more powerful servers.</p>
+<br>
+<h3>Caching</h3>
+<br>
+<p>Cache responses from the backend:</p>
+<br>
+<pre><code>
+proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=appcache:10m max_size=1g;
+
+
+
+server {
+
+    location / {
+
+        proxy_cache appcache;
+
+        proxy_cache_valid 200 30m;
+
+        proxy_cache_valid 404 1m;
+
+        proxy_cache_use_stale error timeout updating;
+
+        add_header X-Cache-Status $upstream_cache_status;
+
+    }
+
+}
+
+</code></pre>
+<br>
+<p>The `$upstream_cache_status` header helps debug caching (HIT, MISS, STALE, etc.). `proxy_cache_use_stale` serves stale content when the backend is down.</p>
+<br>
+<h2> Caddy Reverse Proxy</h2>
+<br>
+<p>Caddy is a modern web server with automatic HTTPS, simpler configuration, and Go-based performance. It is ideal for teams that want a zero-fuss reverse proxy.</p>
+<br>
+<h3>Basic Reverse Proxy</h3>
+<br>
+<pre><code>
+# Caddyfile
+
+app.example.com {
+
+    reverse_proxy localhost:3000
+
+}
+
+</code></pre>
+<br>
+<p>That is the entire configuration. Caddy automatically obtains and renews Let's Encrypt TLS certificates.</p>
+<br>
+<h3>Multiple Backends with Load Balancing</h3>
+<br>
+<pre><code>
+app.example.com {
+
+    reverse_proxy 10.0.0.1:3000 10.0.0.2:3000 10.0.0.3:3000 {
+
+        lb_policy least_conn
+
+        health_uri /health
+
+        health_interval 30s
+
+    }
+
+}
+
+</code></pre>
+<br>
+<p>Caddy supports multiple load balancing policies: `random`, `least_conn`, `round_robin`, `first`, `ip_hash`.</p>
+<br>
+<h3>Path-Based Routing</h3>
+<br>
+<p>Route different paths to different services:</p>
+<br>
+<pre><code>
+api.example.com {
+
+    reverse_proxy /api/* localhost:3000
+
+    reverse_proxy /auth/* localhost:3001
+
+    reverse_proxy localhost:3002  # default
+
+}
+
+</code></pre>
+<br>
+<h3>Request Manipulation</h3>
+<br>
+<pre><code>
+app.example.com {
+
+    reverse_proxy localhost:3000 {
+
+        header_up Host {host}
+
+        header_up X-Real-IP {remote_host}
+
+    }
+
+
+
+    # Add security headers
+
+    header {
+
+        X-Frame-Options &quot;SAMEORIGIN&quot;
+
+        X-Content-Type-Options &quot;nosniff&quot;
+
+    }
+
+}
+
+</code></pre>
+<br>
+<p>Caddy's `header` directive works for both request and response headers.</p>
+<br>
+<h2> Nginx vs Caddy: Comparison</h2>
+<br>
+<p>| Feature | Nginx | Caddy |</p>
+<p>|---------|-------|-------|</p>
+<p>| Configuration | Complex, powerful | Simple, opinionated |</p>
+<p>| TLS | Manual cert management | Automatic Let's Encrypt |</p>
+<p>| Performance | Excellent | Very good |</p>
+<p>| Ecosystem | Vast (modules, guides) | Growing but smaller |</p>
+<p>| Docker support | Official image | Official image |</p>
+<p>| Learning curve | Steep | Gentle |</p>
+<p>| Dynamic configuration | Limited | REST API available |</p>
+<p>| HTTP/3 | Supported | Supported |</p>
+<br>
+<h2> Security Headers</h2>
+<br>
+<p>Regardless of which reverse proxy you choose, add these security headers:</p>
+<br>
+<p>For Nginx:</p>
+<br>
+<pre><code>
+add_header X-Frame-Options &quot;SAMEORIGIN&quot; always;
+
+add_header X-Content-Type-Options &quot;nosniff&quot; always;
+
+add_header Strict-Transport-Security &quot;max-age=31536000; includeSubDomains&quot; always;
+
+add_header Content-Security-Policy &quot;default-src &#x27;self&#x27;;&quot; always;
+
+</code></pre>
+<br>
+<p>For Caddy:</p>
+<br>
+<pre><code>
+header {
+
+    X-Frame-Options &quot;SAMEORIGIN&quot;
+
+    X-Content-Type-Options &quot;nosniff&quot;
+
+    Strict-Transport-Security &quot;max-age=31536000; includeSubDomains&quot;
+
+}
+
+</code></pre>
+<br>
+<h2> Rate Limiting</h2>
+<br>
+<p>Nginx:</p>
+<br>
+<pre><code>
+limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;
+
+location /api/ {
+
+    limit_req zone=api burst=20 nodelay;
+
+    proxy_pass http://backend;
+
+}
+
+</code></pre>
+<br>
+<p>Caddy:</p>
+<br>
+<pre><code>
+app.example.com {
+
+    rate_limit {
+
+        zone api {
+
+            key {remote_host}
+
+            events 10
+
+            window 1s
+
+        }
+
+    }
+
+    reverse_proxy localhost:3000
+
+}
+
+</code></pre>
+<br>
+<h2> Health Checks</h2>
+<br>
+<p>Nginx health checks require the Plus version or are handled externally (e.g., via Docker health checks). Caddy includes built-in active health checks that mark unhealthy backends as down and stop routing traffic to them.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Nginx and Caddy are both excellent reverse proxies. Nginx offers unmatched flexibility and performance for complex deployments. Caddy provides automatic TLS and simpler configuration, making it ideal for smaller teams or simpler setups. For TLS-heavy deployments, Caddy's automatic certificates save significant operational overhead. For high-traffic scenarios requiring fine-grained control, Nginx remains the standard. Both can route traffic, terminate TLS, add security headers, and cache responses -- choose based on your team's expertise and operational complexity tolerance.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

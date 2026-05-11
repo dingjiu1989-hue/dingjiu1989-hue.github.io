@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="api-gateway-implementation">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="API Gateway Implementation Guide">
+    <meta property="og:description" content="Compare Kong, Tyk, and APISIX gateways covering routing, rate limiting, authentication, transformations, analytics, and deployment patterns.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/api-gateway-implementation.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="API Gateway Implementation Guide">
+    <meta name="twitter:description" content="Compare Kong, Tyk, and APISIX gateways covering routing, rate limiting, authentication, transformations, analytics, and deployment patterns.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>API Gateway Implementation Guide — SourceHub</title>
+    <meta name="description" content="Compare Kong, Tyk, and APISIX gateways covering routing, rate limiting, authentication, transformations, analytics, and deployment patterns.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/api-gateway-implementation.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/api-gateway-implementation.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "API Gateway Implementation Guide",
+      "description": "Compare Kong, Tyk, and APISIX gateways covering routing, rate limiting, authentication, transformations, analytics, and deployment patterns.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1562",
+      "keywords": "Technology, Programming, DevOps",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/api-gateway-implementation.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "API Gateway Implementation Guide"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › API Gateway Implementation Guide
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">Programming</span>
+        <span class="tag-cat">DevOps</span></div>
+      <h1 class="article-title">API Gateway Implementation Guide</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>An API gateway sits at the boundary between clients and backend services, handling cross-cutting concerns like authentication, rate limiting, routing, and observability. Choosing the right gateway and deployment pattern is critical for microservice architectures. This guide compares Kong, Tyk, and Apache APISIX across the dimensions that matter in production.</p>
+<br>
+<h2> Gateway Comparison</h2>
+<br>
+<h3>Kong Gateway</h3>
+<br>
+<p>Kong is built on OpenResty (NGINX + Lua) and offers enterprise features through a plugin ecosystem:</p>
+<br>
+<pre><code>
+# Kong declarative config (kong.yml)
+
+_format_version: &quot;3.0&quot;
+
+services:
+
+  - name: user-service
+
+    url: http://user-svc:8080
+
+    routes:
+
+      - name: user-routes
+
+        paths:
+
+          - /api/v1/users
+
+        methods: [GET, POST, PUT, DELETE]
+
+        strip_path: false
+
+    plugins:
+
+      - name: rate-limiting
+
+        config:
+
+          minute: 100
+
+          hour: 1000
+
+          policy: local
+
+      - name: key-auth
+
+        config:
+
+          key_names: [&quot;X-API-Key&quot;]
+
+      - name: cors
+
+        config:
+
+          origins: [&quot;*&quot;]
+
+          methods: [&quot;GET&quot;, &quot;POST&quot;, &quot;PUT&quot;, &quot;DELETE&quot;, &quot;OPTIONS&quot;]
+
+</code></pre>
+<br>
+<h3>Apache APISIX</h3>
+<br>
+<p>APISIX provides sub-millisecond route matching via a radix tree and supports hot-reload of plugins:</p>
+<br>
+<pre><code>
+# APISIX Admin API
+
+curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d &#x27;
+
+{
+
+  &quot;uri&quot;: &quot;/api/v1/orders/*&quot;,
+
+  &quot;methods&quot;: [&quot;GET&quot;, &quot;POST&quot;],
+
+  &quot;upstream&quot;: {
+
+    &quot;type&quot;: &quot;roundrobin&quot;,
+
+    &quot;nodes&quot;: {
+
+      &quot;order-svc:8080&quot;: 1
+
+    }
+
+  },
+
+  &quot;plugins&quot;: {
+
+    &quot;limit-req&quot;: {
+
+      &quot;rate&quot;: 10,
+
+      &quot;burst&quot;: 20,
+
+      &quot;rejected_code&quot;: 429
+
+    },
+
+    &quot;jwt-auth&quot;: {
+
+      &quot;header&quot;: &quot;Authorization&quot;
+
+    },
+
+    &quot;prometheus&quot;: {}
+
+  }
+
+}&#x27;
+
+</code></pre>
+<br>
+<h3>Tyk</h3>
+<br>
+<p>Tyk offers a dashboard-centric approach with API definitions stored in Redis:</p>
+<br>
+<pre><code>
+{
+
+  &quot;name&quot;: &quot;Payment API&quot;,
+
+  &quot;api_id&quot;: &quot;payment-api-v1&quot;,
+
+  &quot;org_id&quot;: &quot;default-org&quot;,
+
+  &quot;proxy&quot;: {
+
+    &quot;target_url&quot;: &quot;http://payment-svc:8080&quot;,
+
+    &quot;listen_path&quot;: &quot;/api/v1/payments/&quot;,
+
+    &quot;strip_listen_path&quot;: true
+
+  },
+
+  &quot;version_data&quot;: {
+
+    &quot;not_versioned&quot;: true
+
+  },
+
+  &quot;auth&quot;: {
+
+    &quot;auth_header_name&quot;: &quot;Authorization&quot;
+
+  },
+
+  &quot;rate_limit&quot;: {
+
+    &quot;rate&quot;: 100,
+
+    &quot;per&quot;: 60
+
+  },
+
+  &quot;enable_coprocess_auth&quot;: false
+
+}
+
+</code></pre>
+<br>
+<h2> Routing Strategies</h2>
+<br>
+<p>Gateways support multiple routing strategies critical for microservice decomposition:</p>
+<br>
+<pre><code>
+-- Kong: complex route matching with regex
+
+{
+
+  name = &quot;complex-route&quot;,
+
+  paths = { &quot;/api/v2/(users|orders|products)/?.*&quot; },
+
+  hosts = { &quot;api.example.com&quot; },
+
+  methods = { &quot;GET&quot;, &quot;POST&quot; },
+
+  protocols = { &quot;https&quot; },
+
+  priority = 100  -- Higher priority routes checked first
+
+}
+
+</code></pre>
+<br>
+<p>APISIX supports weight-based routing for canary deployments:</p>
+<br>
+<pre><code>
+upstream:
+
+  type: weighted_upstream
+
+  nodes:
+
+    user-svc-v1:8080: 90
+
+    user-svc-v2:8080: 10
+
+</code></pre>
+<br>
+<h2> Rate Limiting and Throttling</h2>
+<br>
+<p>Implement multi-layered rate limiting to protect backend services:</p>
+<br>
+<pre><code>
+-- Kong: combined rate limiting strategy
+
+{
+
+  name = &quot;rate-limiting-advanced&quot;,
+
+  config = {
+
+    limit_by = &quot;consumer&quot;,  -- consumer, credential, ip, service
+
+    policy = &quot;redis&quot;,        -- local, redis, cluster
+
+    minute = 60,
+
+    hour = 1000,
+
+    fault_tolerant = true,
+
+    hide_client_headers = false,
+
+    redis_host = &quot;redis-cluster&quot;,
+
+    redis_port = 6379,
+
+    redis_timeout = 2000
+
+  }
+
+}
+
+</code></pre>
+<br>
+<h2> Authentication Plugin Integration</h2>
+<br>
+<p>Layer multiple auth methods with priority-based execution:</p>
+<br>
+<pre><code>
+plugins:
+
+  - name: key-auth
+
+    config:
+
+      key_names: [&quot;X-API-Key&quot;]
+
+      key_in_header: true
+
+      key_in_query: false
+
+      hide_credentials: true
+
+      run_on_preflight: true
+
+  - name: oauth2
+
+    config:
+
+      scopes: [&quot;read&quot;, &quot;write&quot;, &quot;admin&quot;]
+
+      mandatory_scope: true
+
+      provision_key: &quot;${OAUTH_PROVISION_KEY}&quot;
+
+      token_expiration: 3600
+
+      enable_authorization_code: true
+
+      enable_client_credentials: true
+
+</code></pre>
+<br>
+<h2> Request/Response Transformation</h2>
+<br>
+<p>Transform payloads between client and service boundaries:</p>
+<br>
+<pre><code>
+-- Kong: response transformer plugin
+
+{
+
+  name = &quot;response-transformer&quot;,
+
+  config = {
+
+    remove = {
+
+      json = { &quot;password&quot;, &quot;credit_card&quot;, &quot;ssn&quot; }
+
+    },
+
+    add = {
+
+      headers = {
+
+        &quot;X-Response-Time:$(context.now)&quot;
+
+      }
+
+    }
+
+  }
+
+}
+
+</code></pre>
+<br>
+<p>APISIX supports serverless functions for custom transformations:</p>
+<br>
+<pre><code>
+-- APISIX: serverless plugin for custom logic
+
+{
+
+  &quot;serverless-pre-function&quot;: {
+
+    &quot;phase&quot;: &quot;rewrite&quot;,
+
+    &quot;functions&quot;: [&quot;return function(conf, ctx)
+
+      local core = require(\&quot;apisix.core\&quot;)
+
+      local token = core.request.header(ctx, \&quot;Authorization\&quot;)
+
+      if token then
+
+        core.request.set_header(ctx, \&quot;X-Internal-Token\&quot;, token:sub(8))
+
+      end
+
+    end&quot;]
+
+  }
+
+}
+
+</code></pre>
+<br>
+<h2> Analytics and Observability</h2>
+<br>
+<p>All three gateways export metrics for monitoring and billing:</p>
+<br>
+<pre><code>
+# APISIX: Prometheus and logging
+
+plugins:
+
+  - name: prometheus
+
+    config:
+
+      prefer_name: true
+
+  - name: http-logger
+
+    config:
+
+      uri: http://log-collector:5000/logs
+
+      batch_max_size: 100
+
+      inactive_timeout: 5
+
+  - name: skywalking
+
+    config:
+
+      sample_ratio: 0.1
+
+</code></pre>
+<br>
+<h2> Deployment Patterns</h2>
+<br>
+<h3>Sidecar Pattern</h3>
+<br>
+<p>Deploy the gateway as a sidecar alongside each service, suitable for service mesh architectures:</p>
+<br>
+<pre><code>
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+
+  name: user-service
+
+spec:
+
+  template:
+
+    spec:
+
+      containers:
+
+        - name: user-app
+
+          image: user-service:latest
+
+        - name: kong-sidecar
+
+          image: kong:3.6
+
+          env:
+
+            - name: KONG_ROLE
+
+              value: data_plane
+
+            - name: KONG_CLUSTER_CONTROL_PLANE
+
+              value: cp:8005
+
+</code></pre>
+<br>
+<h3>Centralized Pattern</h3>
+<br>
+<p>A shared gateway cluster handles all ingress traffic:</p>
+<br>
+<pre><code>
+apiVersion: networking.k8s.io/v1
+
+kind: IngressClass
+
+metadata:
+
+  name: apisix
+
+spec:
+
+  controller: apache.org/apisix-ingress-controller
+
+---
+
+apiVersion: apisix.apache.org/v2
+
+kind: ApisixRoute
+
+metadata:
+
+  name: main-route
+
+spec:
+
+  http:
+
+    - name: root
+
+      match:
+
+        hosts: [&quot;api.example.com&quot;]
+
+        paths: [&quot;/*&quot;]
+
+      backends:
+
+        - serviceName: aggregator-svc
+
+          servicePort: 80
+
+</code></pre>
+<br>
+<p>Select the centralized pattern for simpler operations and the sidecar pattern for strict traffic isolation in multi-tenant environments. Whichever gateway you choose, invest in declarative configuration management and CI/CD integration from day one to avoid configuration drift at scale.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a><a href="/en/tech/helm-kubernetes-package-management.html" class="related-card">Helm Charts: Kubernetes Package Management</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a><a href="/en/tech/helm-kubernetes-package-management.html" class="related-card">Helm Charts: Kubernetes Package Management</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

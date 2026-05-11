@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="threat-intelligence">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Threat Intelligence: Gathering and Applying Intel">
+    <meta property="og:description" content="Practical guide to threat intelligence including OSINT, threat feeds, MITRE ATT&CK, IoC sharing, and STIX/TAXII standards.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/threat-intelligence.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Threat Intelligence: Gathering and Applying Intel">
+    <meta name="twitter:description" content="Practical guide to threat intelligence including OSINT, threat feeds, MITRE ATT&CK, IoC sharing, and STIX/TAXII standards.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Threat Intelligence: Gathering and Applying Intel — SourceHub</title>
+    <meta name="description" content="Practical guide to threat intelligence including OSINT, threat feeds, MITRE ATT&CK, IoC sharing, and STIX/TAXII standards.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/threat-intelligence.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/threat-intelligence.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Threat Intelligence: Gathering and Applying Intel",
+      "description": "Practical guide to threat intelligence including OSINT, threat feeds, MITRE ATT&CK, IoC sharing, and STIX/TAXII standards.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "2146",
+      "keywords": "Security, Cybersecurity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/threat-intelligence.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Threat Intelligence: Gathering and Applying Intel"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Threat Intelligence: Gathering and Applying Intel
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">Cybersecurity</span></div>
+      <h1 class="article-title">Threat Intelligence: Gathering and Applying Intel</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Threat intelligence is evidence-based knowledge about existing or emerging threats to an organization. It transforms raw data into actionable insights that help security teams prevent attacks, detect intrusions faster, and respond more effectively. This article covers the sources, frameworks, and tools for operational threat intelligence.</p>
+<br>
+<h2> The Intelligence Lifecycle</h2>
+<br>
+<p>Threat intelligence follows a structured lifecycle:</p>
+<br>
+<li>**Requirements**: What do you need to know? For example, which threat actors target your industry, what TTPs they use, and what indicators to watch for.</li>
+<p>2. **Collection**: Gather data from open sources, commercial feeds, internal telemetry, and human intelligence.</p>
+<p>3. **Processing**: Convert raw data into a usable format. Normalize timestamps, de-duplicate indicators, enrich with context.</p>
+<p>4. **Analysis**: Interpret processed data to answer the intelligence requirements.</p>
+<p>5. **Dissemination**: Deliver actionable intelligence to the right consumers (SOC analysts, incident responders, executives).</p>
+<p>6. **Feedback**: Refine requirements and collection based on what was useful.</p>
+<br>
+<h2> Open Source Intelligence (OSINT)</h2>
+<br>
+<p>OSINT is intelligence derived from publicly available sources. It is free, accessible, and provides valuable context about threats.</p>
+<br>
+<h3>OSINT Sources</h3>
+<br>
+<li>**Shodan**: Search engine for internet-connected devices. Find exposed databases, industrial control systems, and vulnerable services.</li>
+<li>**Censys**: Continuous internet scan data. Search for specific certificates, open ports, and protocols.</li>
+<li>**VirusTotal**: File and URL analysis with multi-antivirus scanning. Identify malware samples and related indicators.</li>
+<li>**Have I Been Pwned**: Check if email addresses or passwords appear in known breaches.</li>
+<li>**GitHub**: Search for leaked credentials, API keys, or configuration files in public repositories.</li>
+<li>**Telegram channels / Discord servers**: Some threat actor groups communicate openly about tactics and targets.</li>
+<br>
+<pre><code>
+# OSINT example: Find exposed S3 buckets
+
+curl -s &quot;https://censys.io/api/v1/search/ipv4&quot; \
+
+  -H &quot;Content-Type: application/json&quot; \
+
+  -u &quot;$API_ID:$API_SECRET&quot; \
+
+  -d &#x27;{&quot;query&quot;: &quot;services.service_name: S3&quot;}&#x27;
+
+
+
+# Check if a domain appears in breach data
+
+curl -s &quot;https://haveibeenpwned.com/api/v3/breacheddomain/example.com&quot; \
+
+  -H &quot;hibp-api-key: $API_KEY&quot;
+
+</code></pre>
+<br>
+<h2> Threat Feeds</h2>
+<br>
+<p>Threat feeds provide structured data about known malicious indicators. Feeds range from free community lists to premium commercial services.</p>
+<br>
+<h3>Types of Feeds</h3>
+<br>
+<li>**IP reputation feeds**: Lists of known malicious IP addresses (spam sources, C2 servers, scanners).</li>
+<li>**Domain feeds**: Malicious domains used for phishing, malware delivery, or command and control.</li>
+<li>**URL feeds**: Specific URLs hosting malware or phishing pages.</li>
+<li>**Hash feeds**: File hashes (MD5, SHA256) of known malware.</li>
+<li>**Behavioral feeds**: Descriptions of attacker behaviors and TTPs rather than static indicators.</li>
+<br>
+<h3>Popular Feeds</h3>
+<br>
+<li>**AlienVault OTX**: Community-driven threat feed with thousands of pulses. Free API access.</li>
+<li>**MISP (Malware Information Sharing Platform)**: Open-source platform for sharing, storing, and correlating indicators.</li>
+<li>**CrowdStrike Falcon Intelligence**: Commercial feed with actor profiles and contextual enrichment.</li>
+<li>**Abuse.ch**: Free feeds for malware URLs (URLhaus), C2 servers (Feodo Tracker), and ransomware domains.</li>
+<br>
+<pre><code>
+# Python: Consuming AlienVault OTX feed
+
+import requests
+
+
+
+OTX_API_KEY = &quot;your-api-key&quot;
+
+headers = {&quot;X-OTX-API-KEY&quot;: OTX_API_KEY}
+
+
+
+# Get latest pulses
+
+response = requests.get(
+
+    &quot;https://otx.alienvault.com/api/v1/pulses/subscribed&quot;,
+
+    headers=headers
+
+)
+
+
+
+for pulse in response.json()[&quot;results&quot;][:5]:
+
+    print(f&quot;Pulse: {pulse[&#x27;name&#x27;]}&quot;)
+
+    for indicator in pulse[&quot;indicators&quot;][:3]:
+
+        print(f&quot;  {indicator[&#x27;type&#x27;]}: {indicator[&#x27;indicator&#x27;]}&quot;)
+
+</code></pre>
+<br>
+<h2> MITRE ATT&CK Framework</h2>
+<br>
+<p>MITRE ATT&CK is a globally accessible knowledge base of adversary tactics and techniques based on real-world observations. It provides a common language for describing attacker behavior.</p>
+<br>
+<h3>ATT&CK Matrix</h3>
+<br>
+<p>The framework organizes attacks into tactics (the "why") and techniques (the "how"):</p>
+<br>
+<li>**Initial Access**: T1078 Valid Accounts, T1190 Exploit Public-Facing Application, T1566 Phishing</li>
+<li>**Execution**: T1059 Command and Scripting Interpreter, T1204 User Execution</li>
+<li>**Persistence**: T1098 Account Manipulation, T1133 External Remote Services</li>
+<li>**Privilege Escalation**: T1078 Valid Accounts, T1055 Process Injection</li>
+<li>**Defense Evasion**: T1562 Impair Defenses, T1027 Obfuscated Files or Information</li>
+<li>**Credential Access**: T1110 Brute Force, T1555 Credentials from Password Stores</li>
+<li>**Discovery**: T1087 Account Discovery, T1046 Network Service Scanning</li>
+<li>**Lateral Movement**: T1021 Remote Services, T1550 Use Alternate Authentication Material</li>
+<li>**Collection**: T1005 Data from Local System, T1074 Data Staged</li>
+<li>**Command and Control**: T1071 Application Layer Protocol, T1573 Encrypted Channel</li>
+<li>**Exfiltration**: T1041 Exfiltration Over C2 Channel, T1567 Exfiltration Over Web Service</li>
+<br>
+<h3>Using ATT&CK for Threat Intelligence</h3>
+<br>
+<p>Map observed indicators and behaviors to ATT&CK techniques to understand attacker objectives and capabilities.</p>
+<br>
+<pre><code>
+# Threat actor profile using ATT&amp;CK
+
+threat_actor: &quot;APT-Example&quot;
+
+motivation: &quot;Financial gain&quot;
+
+targeted_sectors: [&quot;Finance&quot;, &quot;Technology&quot;]
+
+techniques_observed:
+
+  - T1566.001: &quot;Spearphishing Attachment&quot;
+
+  - T1204.002: &quot;Malicious File Execution&quot;
+
+  - T1059.001: &quot;PowerShell&quot;
+
+  - T1041: &quot;Exfiltration Over C2 Channel&quot;
+
+  - T1573.001: &quot;Symmetric Encryption for C2&quot;
+
+</code></pre>
+<br>
+<p>Mapping to ATT&CK helps security teams prioritize defenses and detection rules against the techniques most likely to be used against them.</p>
+<br>
+<h2> Indicators of Compromise (IoC) Sharing</h2>
+<br>
+<p>IoC sharing enables organizations to benefit from each other's detection experiences. Effective sharing requires standardized formats and secure distribution.</p>
+<br>
+<h3>IoC Types</h3>
+<br>
+<li>**Atomic indicators**: Cannot be broken down (IP address, email address, domain name).</li>
+<li>**Computed indicators**: Derived from analysis (file hash, YARA rule).</li>
+<li>**Behavioral indicators**: Describe patterns (network traffic patterns, registry changes).</li>
+<br>
+<h3>Sharing Platforms</h3>
+<br>
+<li>**MISP**: Self-hosted platform for IoC management and sharing. Supports automatic correlation and feed generation.</li>
+<li>**STIX/TAXII**: Standardized exchange protocols.</li>
+<br>
+<h2> STIX and TAXII</h2>
+<br>
+<p>Structured Threat Information Expression (STIX) is a language for describing threat information. Trusted Automated Exchange of Intelligence Information (TAXII) is a protocol for exchanging STIX data.</p>
+<br>
+<h3>STIX Objects</h3>
+<br>
+<p>STIX 2.1 defines domain objects including:</p>
+<li>**Indicator**: A pattern identifying potentially malicious activity.</li>
+<li>**Attack Pattern**: A type of TTP describing how an attacker achieves a tactic.</li>
+<li>**Campaign**: A series of attacks by a specific threat actor.</li>
+<li>**Threat Actor**: Individuals or groups causing malicious events.</li>
+<li>**Report**: Collections of threat intelligence.</li>
+<li>**Malware**: Malicious software.</li>
+<br>
+<pre><code>
+// STIX 2.1 Indicator object
+
+{
+
+  &quot;type&quot;: &quot;indicator&quot;,
+
+  &quot;spec_version&quot;: &quot;2.1&quot;,
+
+  &quot;id&quot;: &quot;indicator--12345678-9abc-def0-1234-56789abcdef0&quot;,
+
+  &quot;created&quot;: &quot;2026-05-12T10:00:00Z&quot;,
+
+  &quot;modified&quot;: &quot;2026-05-12T10:00:00Z&quot;,
+
+  &quot;name&quot;: &quot;Malicious IP&quot;,
+
+  &quot;pattern&quot;: &quot;[ipv4-addr:value = &#x27;203.0.113.50&#x27;]&quot;,
+
+  &quot;pattern_type&quot;: &quot;stix&quot;,
+
+  &quot;valid_from&quot;: &quot;2026-05-12T10:00:00Z&quot;,
+
+  &quot;indicator_types&quot;: [&quot;malicious-activity&quot;]
+
+}
+
+</code></pre>
+<br>
+<h3>TAXII Endpoints</h3>
+<br>
+<p>TAXII defines two service types:</p>
+<li>**Collection**: A managed feed of STIX objects that consumers can pull.</li>
+<li>**Channel**: A publish-subscribe mechanism for real-time intelligence sharing.</li>
+<br>
+<pre><code>
+# Fetch indicators from a TAXII collection
+
+curl -s -H &quot;Accept: application/taxii+json&quot; \
+
+  -H &quot;Authorization: Bearer $TOKEN&quot; \
+
+  https://taxii.example.com/api/v2/collections/collection-id/objects/
+
+</code></pre>
+<br>
+<h2> Applying Threat Intelligence</h2>
+<br>
+<p>Operationalizing threat intelligence is the hardest part. Raw intelligence without action is just noise.</p>
+<br>
+<h3>Detection Engineering</h3>
+<br>
+<p>Create detection rules based on intel. If a threat feed shows a new C2 IP range, add a firewall block rule. If a campaign uses a specific file hash, create a YARA rule.</p>
+<br>
+<pre><code>
+rule Example_Malware_2026 {
+
+  meta:
+
+    description = &quot;Detects Example Malware sample&quot;
+
+    author = &quot;SOC Team&quot;
+
+    date = &quot;2026-05-12&quot;
+
+    hash = &quot;sha256:abcdef...&quot;
+
+  strings:
+
+    $s1 = &quot;c2.example.com&quot; wide ascii
+
+    $s2 = { 6A 40 68 00 30 00 00 6A 14 }
+
+  condition:
+
+    2 of them
+
+}
+
+</code></pre>
+<br>
+<h3>Risk Prioritization</h3>
+<br>
+<p>Not all intelligence is equally relevant. Prioritize based on:</p>
+<li>**Relevance**: Does the threat target your industry or technology stack?</li>
+<li>**Veracity**: Is the intelligence from a trusted source with low false-positive rates?</li>
+<li>**Actionability**: Can you do something about it? Can you block, detect, or mitigate?</li>
+<li>**Timeliness**: Is the intelligence current, or is it historical noise?</li>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>Threat intelligence turns raw data into defensive action. Invest in OSINT collection, subscribe to relevant threat feeds, map observations to the MITRE ATT&CK framework, and share intelligence using STIX/TAXII standards. Most importantly, operationalize the intelligence — a feed that nobody acts on has zero security value.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

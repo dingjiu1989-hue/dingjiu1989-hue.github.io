@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="ai-document-processing">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="AI Document Processing">
+    <meta property="og:description" content="Build AI-powered document processing pipelines for extraction, classification, summarization, and data entry from PDFs, images, and scanned documents.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/ai-document-processing.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Document Processing">
+    <meta name="twitter:description" content="Build AI-powered document processing pipelines for extraction, classification, summarization, and data entry from PDFs, images, and scanned documents.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>AI Document Processing — SourceHub</title>
+    <meta name="description" content="Build AI-powered document processing pipelines for extraction, classification, summarization, and data entry from PDFs, images, and scanned documents.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/ai-document-processing.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/ai/ai-document-processing.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "AI Document Processing",
+      "description": "Build AI-powered document processing pipelines for extraction, classification, summarization, and data entry from PDFs, images, and scanned documents.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1717",
+      "keywords": "Artificial Intelligence, Machine Learning",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-document-processing.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "AI Document Processing"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › AI Document Processing
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
+        <span class="tag-cat">Machine Learning</span></div>
+      <h1 class="article-title">AI Document Processing</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>Document processing is one of the highest-ROI applications of AI in business. Organizations spend countless hours manually extracting data from invoices, contracts, forms, and reports. AI-powered document processing can handle these tasks in seconds, with higher accuracy and lower cost than human operators.</p>
+<br>
+<h2> The Document Processing Pipeline</h2>
+<br>
+<p>A complete document processing system has five stages:</p>
+<br>
+<h3>1. Document Ingestion</h3>
+<br>
+<p>Documents arrive in various formats:</p>
+<br>
+<li>**PDFs**: Scanned images, digital PDFs, fillable forms</li>
+<li>**Images**: JPEG, PNG, TIFF from phone cameras or scanners</li>
+<li>**Office formats**: DOCX, XLSX with embedded data</li>
+<li>**HTML/emails**: Web content and email attachments</li>
+<br>
+<p>Each format requires different preprocessing:</p>
+<br>
+<pre><code>
+def preprocess_document(file_path):
+
+    ext = Path(file_path).suffix.lower()
+
+
+
+    if ext == &quot;.pdf&quot;:
+
+        images = pdf_to_images(file_path, dpi=300)
+
+        text = pdf_to_text(file_path)  # For digital PDFs
+
+        return {&quot;images&quot;: images, &quot;text&quot;: text, &quot;type&quot;: &quot;pdf&quot;}
+
+
+
+    elif ext in (&quot;.jpg&quot;, &quot;.jpeg&quot;, &quot;.png&quot;, &quot;.tiff&quot;):
+
+        image = enhance_image(file_path)  # Denoise, deskew, enhance contrast
+
+        return {&quot;images&quot;: [image], &quot;type&quot;: &quot;image&quot;}
+
+
+
+    elif ext == &quot;.docx&quot;:
+
+        text = docx_to_text(file_path)
+
+        return {&quot;text&quot;: text, &quot;type&quot;: &quot;docx&quot;}
+
+
+
+    else:
+
+        raise ValueError(f&quot;Unsupported format: {ext}&quot;)
+
+</code></pre>
+<br>
+<h3>2. Optical Character Recognition (OCR)</h3>
+<br>
+<p>For scanned documents and images, OCR converts visual text to machine-readable text:</p>
+<br>
+<pre><code>
+import pytesseract
+
+from PIL import Image
+
+
+
+def ocr_document(image_path):
+
+    image = Image.open(image_path)
+
+    # Configure OCR for better accuracy
+
+    custom_config = r&#x27;--oem 3 --psm 6 -l eng&#x27;
+
+    data = pytesseract.image_to_data(
+
+        image,
+
+        config=custom_config,
+
+        output_type=pytesseract.Output.DICT
+
+    )
+
+    return {
+
+        &quot;full_text&quot;: pytesseract.image_to_string(image, config=custom_config),
+
+        &quot;words&quot;: data[&quot;text&quot;],
+
+        &quot;positions&quot;: list(zip(data[&quot;left&quot;], data[&quot;top&quot;], data[&quot;width&quot;], data[&quot;height&quot;]))
+
+    }
+
+</code></pre>
+<br>
+<p>**Modern OCR alternatives**:</p>
+<li>**Azure Document Intelligence**: Best-in-class for structured documents (invoices, receipts)</li>
+<li>**Google Document AI**: Strong general-purpose OCR with entity extraction</li>
+<li>**Tesseract + Post-processing**: Free, but requires cleanup for quality results</li>
+<br>
+<h3>3. Document Classification</h3>
+<br>
+<p>Classify documents before extraction to route them to the correct pipeline:</p>
+<br>
+<pre><code>
+def classify_document(text):
+
+    categories = [
+
+        &quot;invoice&quot;, &quot;contract&quot;, &quot;resume&quot;, &quot;receipt&quot;,
+
+        &quot;medical_record&quot;, &quot;legal_filing&quot;, &quot;report&quot;, &quot;other&quot;
+
+    ]
+
+
+
+    classification = call_llm(f&quot;&quot;&quot;
+
+    Classify this document into exactly one category: {&#x27;, &#x27;.join(categories)}
+
+    Respond with only the category name.
+
+
+
+    Document text:
+
+    {text[:2000]}
+
+    &quot;&quot;&quot;)
+
+
+
+    confidence = extract_confidence(classification)
+
+    return classification, confidence
+
+</code></pre>
+<br>
+<h3>4. Data Extraction</h3>
+<br>
+<p>Extract structured data from documents using schema-driven prompts:</p>
+<br>
+<pre><code>
+def extract_invoice_data(text):
+
+    schema = {
+
+        &quot;invoice_number&quot;: &quot;string&quot;,
+
+        &quot;date&quot;: &quot;date (YYYY-MM-DD)&quot;,
+
+        &quot;vendor_name&quot;: &quot;string&quot;,
+
+        &quot;vendor_address&quot;: &quot;string&quot;,
+
+        &quot;customer_name&quot;: &quot;string&quot;,
+
+        &quot;line_items&quot;: [&quot;description&quot;, &quot;quantity&quot;, &quot;unit_price&quot;, &quot;total&quot;],
+
+        &quot;subtotal&quot;: &quot;number&quot;,
+
+        &quot;tax&quot;: &quot;number&quot;,
+
+        &quot;total&quot;: &quot;number&quot;,
+
+        &quot;currency&quot;: &quot;string&quot;
+
+    }
+
+
+
+    extraction = call_llm(f&quot;&quot;&quot;
+
+    Extract the following fields from this invoice text.
+
+    Return ONLY valid JSON matching this schema:
+
+    {json.dumps(schema, indent=2)}
+
+
+
+    Invoice text:
+
+    {text}
+
+
+
+    If a field is not found, use null. Do not guess values.
+
+    &quot;&quot;&quot;)
+
+
+
+    return json.loads(extraction)
+
+</code></pre>
+<br>
+<p>**Multimodal extraction** with vision-capable LLMs (GPT-4o, Claude 3.5) can process document images directly, bypassing OCR:</p>
+<br>
+<pre><code>
+def extract_from_image(image_path, schema):
+
+    import base64
+
+
+
+    with open(image_path, &quot;rb&quot;) as f:
+
+        image_b64 = base64.b64encode(f.read()).decode()
+
+
+
+    response = client.chat.completions.create(
+
+        model=&quot;gpt-4o&quot;,
+
+        messages=[{
+
+            &quot;role&quot;: &quot;user&quot;,
+
+            &quot;content&quot;: [
+
+                {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: f&quot;Extract data from this document image. Return JSON matching: {json.dumps(schema)}&quot;},
+
+                {&quot;type&quot;: &quot;image_url&quot;, &quot;image_url&quot;: {&quot;url&quot;: f&quot;data:image/jpeg;base64,{image_b64}&quot;}}
+
+            ]
+
+        }]
+
+    )
+
+    return json.loads(response.choices[0].message.content)
+
+</code></pre>
+<br>
+<h3>5. Validation and Export</h3>
+<br>
+<p>Validate extracted data against business rules before export:</p>
+<br>
+<pre><code>
+def validate_extraction(data, schema):
+
+    errors = []
+
+    for field, rules in schema.items():
+
+        if rules.get(&quot;required&quot;) and data.get(field) is None:
+
+            errors.append(f&quot;Missing required field: {field}&quot;)
+
+        if &quot;pattern&quot; in rules and data.get(field):
+
+            if not re.match(rules[&quot;pattern&quot;], str(data[field])):
+
+                errors.append(f&quot;Field {field} fails pattern validation&quot;)
+
+    return errors
+
+</code></pre>
+<br>
+<h2> Production Architecture</h2>
+<br>
+<pre><code>
+Documents → Queue → Worker Pool → Storage
+
+                         ↓
+
+                  Classification Router
+
+                    ↙    ↓    ↘
+
+              Invoice  Contract  Report
+
+              Pipeline  Pipeline  Pipeline
+
+                    ↙    ↓    ↘
+
+              Extraction → Validation → Export → Database
+
+                                        ↓
+
+                                  Exception Queue
+
+                                        ↓
+
+                                  Human Review
+
+</code></pre>
+<br>
+<p>Key components:</p>
+<li>**Document queue**: SQS, RabbitMQ, or Redis for managing processing load</li>
+<li>**Worker pool**: Auto-scaling workers for parallel processing</li>
+<li>**Exception queue**: Documents with low confidence or validation errors</li>
+<li>**Human review interface**: Dashboard for manual review of exceptions</li>
+<br>
+<h2> Handling Edge Cases</h2>
+<br>
+<li>**Poor quality scans**: Apply image enhancement (deskew, denoise, contrast adjustment)</li>
+<li>**Multi-language documents**: Use language detection and route to appropriate model</li>
+<li>**Handwritten text**: Requires specialized handwriting recognition (Azure, Google)</li>
+<li>**Tables and forms**: Structure-aware extraction using layout understanding</li>
+<li>**Very long documents**: Chunk and process section by section, then merge results</li>
+<br>
+<h2> Measuring Accuracy</h2>
+<br>
+<p>Track these metrics per document type:</p>
+<br>
+<li>**Field-level accuracy**: Correct extractions / total fields</li>
+<li>**Document-level accuracy**: Perfect extractions / total documents</li>
+<li>**Rejection rate**: Documents sent to human review</li>
+<li>**Time savings**: Manual processing time vs AI processing time</li>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>AI document processing transforms document-heavy workflows from hours of manual work to seconds of automated processing. The key to success is building a pipeline that handles format diversity, uses the right OCR/extraction approach for each document type, and includes robust validation with human review for edge cases. Start with a single document type (like invoices), perfect the pipeline, then expand to additional types.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

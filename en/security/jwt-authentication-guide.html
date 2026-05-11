@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="jwt-authentication-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="JWT Authentication Best Practices">
+    <meta property="og:description" content="Learn JWT authentication best practices including secure token storage, signature algorithms, expiration, and refresh token rotation.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/jwt-authentication-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="JWT Authentication Best Practices">
+    <meta name="twitter:description" content="Learn JWT authentication best practices including secure token storage, signature algorithms, expiration, and refresh token rotation.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>JWT Authentication Best Practices — SourceHub</title>
+    <meta name="description" content="Learn JWT authentication best practices including secure token storage, signature algorithms, expiration, and refresh token rotation.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/jwt-authentication-guide.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/jwt-authentication-guide.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "JWT Authentication Best Practices",
+      "description": "Learn JWT authentication best practices including secure token storage, signature algorithms, expiration, and refresh token rotation.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1071",
+      "keywords": "Security, Cybersecurity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/jwt-authentication-guide.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "JWT Authentication Best Practices"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › JWT Authentication Best Practices
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">Cybersecurity</span></div>
+      <h1 class="article-title">JWT Authentication Best Practices</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> What Are JSON Web Tokens?</h2>
+<br>
+<p>JSON Web Tokens (JWT) are a compact, URL-safe means of representing claims between two parties. A JWT consists of three Base64URL-encoded segments separated by dots: header, payload, and signature.</p>
+<br>
+<pre><code>
+eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.
+
+eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFsZXgiLCJpYXQiOjE1MTYyMzkwMjJ9.
+
+SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+</code></pre>
+<br>
+<h3>Structure Breakdown</h3>
+<br>
+<p>| Segment | Contents | Example |</p>
+<p>|---------|----------|---------|</p>
+<p>| Header | Algorithm and token type | `{"alg":"RS256","typ":"JWT"}` |</p>
+<p>| Payload | Claims (data) | `{"sub":"user_123","iat":1516239022}` |</p>
+<p>| Signature | Cryptographic verification | HMACSHA256 or RSASHA256 output |</p>
+<br>
+<h2> Choosing the Right Algorithm</h2>
+<br>
+<h3>Symmetric: HS256 (HMAC with SHA-256)</h3>
+<br>
+<p>Uses a single shared secret for both signing and verification. Fast and simple, but the secret must be kept confidential on both the issuer and verifier.</p>
+<br>
+<pre><code>
+const jwt = require(&#x27;jsonwebtoken&#x27;);
+
+const token = jwt.sign({ userId: &#x27;123&#x27; }, SECRET, {
+
+    algorithm: &#x27;HS256&#x27;,
+
+    expiresIn: &#x27;15m&#x27;
+
+});
+
+</code></pre>
+<br>
+<p>Use HS256 only when issuer and verifier are the same service.</p>
+<br>
+<h3>Asymmetric: RS256 (RSA with SHA-256)</h3>
+<br>
+<p>Uses a private key for signing and a public key for verification. This enables third-party verification without exposing the signing key.</p>
+<br>
+<pre><code>
+const token = jwt.sign({ userId: &#x27;123&#x27; }, PRIVATE_KEY, {
+
+    algorithm: &#x27;RS256&#x27;,
+
+    expiresIn: &#x27;15m&#x27;
+
+});
+
+// Verifier uses PUBLIC_KEY
+
+const decoded = jwt.verify(token, PUBLIC_KEY, { algorithms: [&#x27;RS256&#x27;] });
+
+</code></pre>
+<br>
+<p>Use RS256 (or ES256 for better performance) when multiple services need to verify tokens issued by a central auth service.</p>
+<br>
+<h2> Critical Security Practices</h2>
+<br>
+<h3>1. Validate Every Claim</h3>
+<br>
+<p>Never trust the token blindly. Always validate:</p>
+<br>
+<pre><code>
+const options = {
+
+    algorithms: [&#x27;RS256&#x27;],
+
+    issuer: &#x27;https://auth.example.com&#x27;,
+
+    audience: &#x27;https://api.example.com&#x27;,
+
+    clockTolerance: 30 // seconds
+
+};
+
+const payload = jwt.verify(token, PUBLIC_KEY, options);
+
+</code></pre>
+<br>
+<h3>2. Prevent Algorithm Confusion</h3>
+<br>
+<p>An attacker could change the header from `RS256` to `HS256` and sign with the public key (which may be known). Always specify the allowed algorithms explicitly and never derive the secret from the token header.</p>
+<br>
+<h3>3. Use Short Expiration</h3>
+<br>
+<p>Access tokens should expire in 15-60 minutes. This limits the damage window if a token is stolen.</p>
+<br>
+<pre><code>
+const accessToken = jwt.sign(payload, PRIVATE_KEY, {
+
+    algorithm: &#x27;RS256&#x27;,
+
+    expiresIn: &#x27;15m&#x27;
+
+});
+
+</code></pre>
+<br>
+<h3>4. Implement Token Rotation</h3>
+<br>
+<p>Refresh tokens should be rotated with each use. When a client exchanges a refresh token, issue a new one and invalidate the old:</p>
+<br>
+<pre><code>
+Old refresh token  --&gt;  New access token + New refresh token (old invalidated)
+
+</code></pre>
+<br>
+<p>If a refresh token is used after being rotated, it signals potential theft — revoke all tokens for that user.</p>
+<br>
+<h2> Token Storage</h2>
+<br>
+<p>| Environment | Storage Method | Security |</p>
+<p>|-------------|---------------|----------|</p>
+<p>| Server/API | In-memory or database | Most secure |</p>
+<p>| SPA (Browser) | In-memory variable | Secure against XSS |</p>
+<p>| Mobile App | Secure Enclave / Keychain | Platform-protected |</p>
+<p>| Browser | httpOnly Cookie | Protected from JS access |</p>
+<br>
+<p>Never store JWTs in localStorage or sessionStorage in a browser — they are accessible to any JavaScript running on the same origin and are vulnerable to XSS attacks.</p>
+<br>
+<h2> Blacklisting and Revocation</h2>
+<br>
+<p>JWTs are stateless, which means they cannot be revoked without additional infrastructure. Options include:</p>
+<br>
+<li>**Token blacklist**: Maintain a Redis cache of revoked token IDs (jti claims) until their natural expiry.</li>
+<p>2. **Short-lived tokens with refresh rotation**: Keep access tokens very short (5-15 min) so revocation happens at refresh time.</p>
+<p>3. **Token introspection endpoint**: An API endpoint that checks token validity in real-time. Used by OAuth 2.0 resource servers.</p>
+<br>
+<h2> Common Vulnerabilities</h2>
+<br>
+<p>| Vulnerability | Mitigation |</p>
+<p>|--------------|------------|</p>
+<p>| alg: none | Reject tokens with alg: none |</p>
+<p>| Weak secret (HS256) | Use at least 256-bit random secret |</p>
+<p>| Missing expiry validation | Always verify exp claim |</p>
+<p>| JWT in URL | Use Authorization header, never URLs |</p>
+<p>| Large payload | Keep payload under 2KB; use references for large claims |</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>JWTs are a powerful authentication mechanism when implemented correctly. Use asymmetric algorithms (RS256/ES256) for multi-service architectures, validate all claims rigorously, keep access tokens short-lived, and implement refresh token rotation. Never store tokens in browser localStorage, and always explicitly specify allowed algorithms to prevent confusion attacks.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

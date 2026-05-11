@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="api-rate-limiting">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="API Rate Limiting Implementation">
+    <meta property="og:description" content="A comprehensive guide to implementing API rate limiting with token bucket, leaky bucket, and sliding window algorithms.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/api-rate-limiting.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="API Rate Limiting Implementation">
+    <meta name="twitter:description" content="A comprehensive guide to implementing API rate limiting with token bucket, leaky bucket, and sliding window algorithms.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>API Rate Limiting Implementation — SourceHub</title>
+    <meta name="description" content="A comprehensive guide to implementing API rate limiting with token bucket, leaky bucket, and sliding window algorithms.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/api-rate-limiting.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/api-rate-limiting.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "API Rate Limiting Implementation",
+      "description": "A comprehensive guide to implementing API rate limiting with token bucket, leaky bucket, and sliding window algorithms.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1199",
+      "keywords": "Security, Cybersecurity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/api-rate-limiting.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "API Rate Limiting Implementation"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › API Rate Limiting Implementation
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">Cybersecurity</span></div>
+      <h1 class="article-title">API Rate Limiting Implementation</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Why Rate Limiting Matters</h2>
+<br>
+<p>API rate limiting protects backend services from abuse, ensures fair resource distribution, and prevents cascading failures. Without rate limiting, a single aggressive client can degrade the experience for all other users or even crash the service entirely. For public APIs, rate limiting is a fundamental security control that mitigates DDoS attacks, credential stuffing, and web scraping.</p>
+<br>
+<h2> Rate Limiting Algorithms</h2>
+<br>
+<h3>Token Bucket</h3>
+<br>
+<p>The token bucket algorithm is the most widely used approach. A bucket holds a fixed number of tokens, and each request consumes one token. Tokens are replenished at a steady rate. If the bucket is empty, the request is denied.</p>
+<br>
+<pre><code>
+class TokenBucket:
+
+    def __init__(self, capacity, refill_rate, refill_interval=1.0):
+
+        self.capacity = capacity
+
+        self.tokens = capacity
+
+        self.refill_rate = refill_rate
+
+        self.refill_interval = refill_interval
+
+        self.last_refill = time.time()
+
+
+
+    def allow_request(self):
+
+        now = time.time()
+
+        elapsed = now - self.last_refill
+
+        self.tokens = min(self.capacity,
+
+            self.tokens + elapsed * self.refill_rate)
+
+        self.last_refill = now
+
+        if self.tokens &gt;= 1:
+
+            self.tokens -= 1
+
+            return True
+
+        return False
+
+</code></pre>
+<br>
+<p>The token bucket allows short bursts up to `capacity` while enforcing a long-term average rate. This makes it ideal for APIs where occasional spikes are acceptable.</p>
+<br>
+<h3>Leaky Bucket</h3>
+<br>
+<p>The leaky bucket algorithm enforces a strict processing rate. Incoming requests fill a queue, and a worker processes them at a fixed rate. If the queue is full, new requests are dropped.</p>
+<br>
+<p>This approach smooths out traffic perfectly but does not handle bursts well. It is best suited for downstream systems that cannot tolerate spikes, such as legacy databases or third-party APIs with strict rate contracts.</p>
+<br>
+<h3>Sliding Window Log</h3>
+<br>
+<p>The sliding window algorithm maintains a timestamped log of recent requests within a time window. When a new request arrives, entries older than the window are pruned. If the count of remaining entries exceeds the limit, the request is denied.</p>
+<br>
+<pre><code>
+class SlidingWindowLog:
+
+    def __init__(self, limit, window_ms=1000):
+
+        self.limit = limit
+
+        self.window_ms = window_ms
+
+        self.log = deque()
+
+
+
+    def allow_request(self):
+
+        now = time.time() * 1000
+
+        cutoff = now - self.window_ms
+
+        while self.log and self.log[0] &lt; cutoff:
+
+            self.log.popleft()
+
+        if len(self.log) &lt; self.limit:
+
+            self.log.append(now)
+
+            return True
+
+        return False
+
+</code></pre>
+<br>
+<p>Sliding window gives precise per-user limits and avoids the boundary spikes of fixed-window counters, at the cost of storing request timestamps in memory.</p>
+<br>
+<h2> Implementation Patterns</h2>
+<br>
+<h3>Middleware Pattern (Node.js / Express)</h3>
+<br>
+<pre><code>
+const rateLimit = require(&#x27;express-rate-limit&#x27;);
+
+const limiter = rateLimit({
+
+    windowMs: 60 * 1000,
+
+    max: 100,
+
+    standardHeaders: true,
+
+    legacyHeaders: false,
+
+    keyGenerator: (req) =&gt; req.ip,
+
+    handler: (req, res) =&gt; {
+
+        res.status(429).json({
+
+            error: &#x27;Too many requests&#x27;,
+
+            retryAfter: Math.ceil(req.rateLimit.resetTime / 1000)
+
+        });
+
+    }
+
+});
+
+app.use(&#x27;/api/&#x27;, limiter);
+
+</code></pre>
+<br>
+<h3>Distributed Rate Limiting with Redis</h3>
+<br>
+<p>For applications running across multiple instances, in-memory rate limiting is insufficient. Use Redis with atomic operations:</p>
+<br>
+<pre><code>
+-- Redis Lua script for sliding window counter
+
+local key = KEYS[1]
+
+local now = tonumber(ARGV[1])
+
+local window = tonumber(ARGV[2])
+
+local limit = tonumber(ARGV[3])
+
+
+
+redis.call(&#x27;ZREMRANGEBYSCORE&#x27;, key, 0, now - window)
+
+local count = redis.call(&#x27;ZCARD&#x27;, key)
+
+if count &lt; limit then
+
+    redis.call(&#x27;ZADD&#x27;, key, now, now .. &#x27;:&#x27; .. math.random())
+
+    redis.call(&#x27;EXPIRE&#x27;, key, window / 1000)
+
+    return 1
+
+end
+
+return 0
+
+</code></pre>
+<br>
+<h2> HTTP Response Headers</h2>
+<br>
+<p>Always communicate rate limits to clients via standard headers:</p>
+<br>
+<p>| Header | Purpose |</p>
+<p>|--------|---------|</p>
+<p>| `X-RateLimit-Limit` | Maximum requests per window |</p>
+<p>| `X-RateLimit-Remaining` | Requests left in current window |</p>
+<p>| `X-RateLimit-Reset` | Unix timestamp when the window resets |</p>
+<p>| `Retry-After` | Seconds to wait before retrying (on 429) |</p>
+<br>
+<h2> Tiered Rate Limiting</h2>
+<br>
+<p>Apply different limits based on client tiers:</p>
+<br>
+<p>| Tier | Limit | Window |</p>
+<p>|------|-------|--------|</p>
+<p>| Free | 10 req/s | 1 second |</p>
+<p>| Pro | 100 req/s | 1 second |</p>
+<p>| Enterprise | 1000 req/s | 1 second |</p>
+<br>
+<h2> Common Pitfalls</h2>
+<br>
+<li>**Using IP alone**: Behind NAT, many legitimate users share an IP. Use API keys or authentication tokens as the primary key, with IP as a fallback.</li>
+<li>**Not rate limiting authentication endpoints**: Login, registration, and password reset endpoints need stricter limits than the rest of the API.</li>
+<li>**Ignoring distributed denial of service**: Application-level rate limiting alone cannot stop layer 3/4 attacks. Combine with a CDN or WAF with DDoS protection.</li>
+<li>**Missing retry-after headers**: Clients cannot implement exponential backoff without knowing when to retry.</li>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Choose token bucket for general-purpose APIs, sliding window for precise per-user limits, and leaky bucket for downstream protection. Always distribute limit state via Redis when running multiple service instances, and communicate limits through standard HTTP headers so clients can adapt their behavior.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

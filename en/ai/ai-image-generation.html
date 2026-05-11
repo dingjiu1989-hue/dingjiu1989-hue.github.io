@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="ai-image-generation">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="AI Image Generation Guide">
+    <meta property="og:description" content="A comprehensive guide to AI image generation covering DALL-E, Midjourney, Stable Diffusion, prompt engineering, and workflows.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/ai-image-generation.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Image Generation Guide">
+    <meta name="twitter:description" content="A comprehensive guide to AI image generation covering DALL-E, Midjourney, Stable Diffusion, prompt engineering, and workflows.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>AI Image Generation Guide — SourceHub</title>
+    <meta name="description" content="A comprehensive guide to AI image generation covering DALL-E, Midjourney, Stable Diffusion, prompt engineering, and workflows.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/ai-image-generation.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/ai/ai-image-generation.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "AI Image Generation Guide",
+      "description": "A comprehensive guide to AI image generation covering DALL-E, Midjourney, Stable Diffusion, prompt engineering, and workflows.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1285",
+      "keywords": "Artificial Intelligence, Machine Learning",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-image-generation.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "AI Image Generation Guide"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › AI Image Generation Guide
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
+        <span class="tag-cat">Machine Learning</span></div>
+      <h1 class="article-title">AI Image Generation Guide</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>AI image generation has evolved from producing surreal, flawed images to creating photorealistic, commercially viable artwork in seconds. Tools like DALL-E 3, Midjourney, and Stable Diffusion enable anyone to generate high-quality images from text descriptions. This guide covers the major platforms, prompt engineering techniques, and production workflows.</p>
+<br>
+<h2> Platform Comparison</h2>
+<br>
+<h3>DALL-E 3</h3>
+<br>
+<p>OpenAI's DALL-E 3 excels at understanding complex prompts and rendering text within images — a task that stumps most other models.</p>
+<br>
+<p>**Strengths:**</p>
+<li>Best-in-class prompt adherence</li>
+<li>Reliable text rendering in images</li>
+<li>Integrated with ChatGPT for iterative refinement</li>
+<li>Strong safety filters prevent problematic outputs</li>
+<br>
+<p>**Limitations:**</p>
+<li>Less stylistic variety than Midjourney</li>
+<li>Cannot generate images of public figures or copyrighted styles</li>
+<li>Lower maximum resolution (1024x1792 or 1792x1024)</li>
+<br>
+<p>**Best for:** General use, marketing materials, images with text</p>
+<br>
+<pre><code>
+from openai import OpenAI
+
+
+
+client = OpenAI()
+
+response = client.images.generate(
+
+    model=&quot;dall-e-3&quot;,
+
+    prompt=&quot;A photorealistic coffee cup on a wooden table, morning sunlight from a window, steam rising in curls, shallow depth of field&quot;,
+
+    size=&quot;1792x1024&quot;,
+
+    quality=&quot;hd&quot;,
+
+    n=1
+
+)
+
+</code></pre>
+<br>
+<h3>Midjourney</h3>
+<br>
+<p>Midjourney produces the most artistically striking images, with a distinctive aesthetic that many prefer for creative work.</p>
+<br>
+<p>**Strengths:**</p>
+<li>Superior artistic quality and composition</li>
+<li>Wide range of stylistic controls</li>
+<li>Strong community with shared prompt libraries</li>
+<li>Consistent character generation with "cref" parameter</li>
+<br>
+<p>**Limitations:**</p>
+<li>Requires Discord to use (no dedicated API)</li>
+<li>Less precise prompt following than DALL-E</li>
+<li>Weaker at rendering text and complex scenes</li>
+<li>Steeper learning curve for parameters</li>
+<br>
+<p>**Best for:** Artistic work, concept art, character design</p>
+<br>
+<h3>Stable Diffusion</h3>
+<br>
+<p>Stable Diffusion is the open-source option, offering maximum control and customization.</p>
+<br>
+<p>**Strengths:**</p>
+<li>Completely free and open-source</li>
+<li>Run locally with full privacy</li>
+<li>Fine-tune custom models (LoRA, DreamBooth)</li>
+<li>Vast ecosystem of community models and extensions</li>
+<li>ControlNet for precise spatial control</li>
+<br>
+<p>**Limitations:**</p>
+<li>Requires technical setup for best results</li>
+<li>Vanilla model quality lags behind Midjourney</li>
+<li>Requires GPU for reasonable speed</li>
+<br>
+<p>**Best for:** Custom workflows, fine-tuned models, offline generation</p>
+<br>
+<h2> Prompt Engineering for Images</h2>
+<br>
+<h3>The Anatomy of an Effective Prompt</h3>
+<br>
+<p>A well-structured image prompt has these components:</p>
+<br>
+<pre><code>
+[Subject] + [Action] + [Environment] + [Lighting] + [Style] + [Composition] + [Technical Details]
+
+</code></pre>
+<br>
+<p>**Example:**</p>
+<pre><code>
+&quot;An elderly Japanese woman [subject] practicing calligraphy [action] in a sunlit tatami room with cherry blossoms visible through an open window [environment], soft natural lighting with warm tones [lighting], ukiyo-e inspired digital art [style], close-up on hands and brush with shallow depth of field [composition], highly detailed 8K [technical]&quot;
+
+</code></pre>
+<br>
+<h3>Negative Prompts</h3>
+<br>
+<p>In Stable Diffusion and Midjourney, negative prompts specify what to avoid:</p>
+<br>
+<pre><code>
+Negative prompt: ugly, deformed, blurry, low quality, extra limbs, bad anatomy, watermark, text, signature
+
+</code></pre>
+<br>
+<p>Midjourney uses the `--no` parameter: `--no text, watermark, blurry`</p>
+<br>
+<h3>Style Modifiers</h3>
+<br>
+<p>Different styles dramatically change output:</p>
+<br>
+<li>**Photographic**: "photorealistic, f/2.8 aperture, 85mm lens, natural lighting, RAW format"</li>
+<li>**Illustrative**: "vector art, clean lines, flat design, vibrant colors, white background"</li>
+<li>**Oil painting**: "oil on canvas, impasto texture, dramatic chiaroscuro, classical composition"</li>
+<li>**Anime**: "anime style, cel-shaded, Studio Ghibli inspired, soft pastel colors"</li>
+<br>
+<h2> Advanced Techniques</h2>
+<br>
+<h3>ControlNet (Stable Diffusion)</h3>
+<br>
+<p>ControlNet provides spatial control over image generation:</p>
+<br>
+<li>**Canny edge detection**: Use an edge map to control composition</li>
+<li>**OpenPose**: Specify exact human poses</li>
+<li>**Depth maps**: Control 3D layout</li>
+<li>**Normal maps**: Control surface details</li>
+<br>
+<h3>Inpainting and Outpainting</h3>
+<br>
+<li>**Inpainting**: Replace specific regions of an image while preserving the rest</li>
+<li>**Outpainting**: Extend an image beyond its original boundaries</li>
+<br>
+<h3>LoRA Fine-Tuning</h3>
+<br>
+<p>Create a small adapter that generates specific characters, objects, or styles:</p>
+<br>
+<pre><code>
+# Using Diffusers
+
+from diffusers import StableDiffusionXLPipeline
+
+import torch
+
+
+
+pipe = StableDiffusionXLPipeline.from_pretrained(
+
+    &quot;stabilityai/stable-diffusion-xl-base-1.0&quot;,
+
+    torch_dtype=torch.float16
+
+)
+
+pipe.load_lora_weights(&quot;path/to/lora-weights&quot;)
+
+pipe.to(&quot;cuda&quot;)
+
+
+
+image = pipe(&quot;a character in a garden, anime style&quot;).images[0]
+
+</code></pre>
+<br>
+<h2> Production Workflow</h2>
+<br>
+<p>A production image generation pipeline:</p>
+<br>
+<li>**Brief analysis**: Extract subject, style, and composition requirements</li>
+<p>2. **Prompt construction**: Build structured prompt with all components</p>
+<p>3. **Multi-seed generation**: Generate 4-8 variations with different seeds</p>
+<p>4. **Selection and refinement**: Upscale the best result, make targeted edits</p>
+<p>5. **Post-processing**: Adjust colors, add overlays, resize for destination</p>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>Each AI image generation platform has distinct strengths. DALL-E 3 wins for reliability and text handling, Midjourney for artistic quality, and Stable Diffusion for customization and control. The best results come from understanding each tool's strengths and combining them in a workflow — generate concepts in Midjourney, refine specifics with DALL-E, and post-process with Stable Diffusion's tooling.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

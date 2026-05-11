@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="clean-architecture">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Clean Architecture Explained">
+    <meta property="og:description" content="Understand Clean Architecture principles for building maintainable, testable software systems.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/clean-architecture.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Clean Architecture Explained">
+    <meta name="twitter:description" content="Understand Clean Architecture principles for building maintainable, testable software systems.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Clean Architecture Explained — SourceHub</title>
+    <meta name="description" content="Understand Clean Architecture principles for building maintainable, testable software systems.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/clean-architecture.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/clean-architecture.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Clean Architecture Explained",
+      "description": "Understand Clean Architecture principles for building maintainable, testable software systems.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1266",
+      "keywords": "Architecture, System Design",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/clean-architecture.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Clean Architecture Explained"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Clean Architecture Explained
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span></div>
+      <h1 class="article-title">Clean Architecture Explained</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Clean Architecture, popularized by Robert C. Martin (Uncle Bob), is a software design philosophy that emphasizes separation of concerns through concentric layers. Building on concepts from hexagonal architecture, onion architecture, and DCI, it provides a set of rules for organizing code that stands the test of time.</p>
+<br>
+<h2> The Layers</h2>
+<br>
+<p>Clean Architecture is typically drawn as a set of concentric circles:</p>
+<br>
+<li>**Enterprise Business Rules** (innermost)</li>
+<p>2. **Application Business Rules**</p>
+<p>3. **Interface Adapters**</p>
+<p>4. **Frameworks and Drivers** (outermost)</p>
+<br>
+<h2> The Dependency Rule</h2>
+<br>
+<p>The single most important rule: **source code dependencies can only point inward**. Nothing in an inner circle can know about anything in an outer circle. This means:</p>
+<br>
+<li>The domain layer has no dependencies on frameworks, databases, or UI.</li>
+<li>The application layer depends only on the domain layer.</li>
+<li>The infrastructure layer depends on both inner layers but implements their interfaces.</li>
+<br>
+<p>This is enforced programmatically through dependency injection. The outer layers provide implementations that are injected into inner layers through interfaces.</p>
+<br>
+<h2> Entities (Enterprise Business Rules)</h2>
+<br>
+<p>Entities are the innermost layer. They represent enterprise-wide business concepts:</p>
+<br>
+<pre><code>
+public class Order {
+
+    private String id;
+
+    private List&lt;OrderLineItem&gt; items;
+
+    private OrderStatus status;
+
+
+
+    public void addItem(Product product, int quantity) {
+
+        // Business rule: validate quantity limits
+
+        items.add(new OrderLineItem(product, quantity));
+
+    }
+
+
+
+    public Money calculateTotal() {
+
+        return items.stream()
+
+            .map(OrderLineItem::getSubtotal)
+
+            .reduce(Money::add)
+
+            .orElse(Money.zero());
+
+    }
+
+}
+
+</code></pre>
+<br>
+<p>Entities should be pure business objects with no reference to databases, frameworks, or external systems. They encapsulate the most general and high-level business rules.</p>
+<br>
+<h2> Use Cases (Application Business Rules)</h2>
+<br>
+<p>The use case layer contains application-specific business rules. It orchestrates the flow of data to and from the entities:</p>
+<br>
+<pre><code>
+public class CreateOrderUseCase {
+
+    private final OrderRepository repository;
+
+    private final PaymentGateway paymentGateway;
+
+    private final NotificationService notificationService;
+
+
+
+    public Order execute(CreateOrderRequest request) {
+
+        Order order = new Order(request.getCustomerId());
+
+        request.getItems().forEach(item -&gt;
+
+            order.addItem(item.getProduct(), item.getQuantity())
+
+        );
+
+        repository.save(order);
+
+        paymentGateway.charge(order.getTotal());
+
+        notificationService.sendOrderConfirmation(order);
+
+        return order;
+
+    }
+
+}
+
+</code></pre>
+<br>
+<p>Use cases are specific to the application. A web shop and a mobile app might share the same entities but have different use cases.</p>
+<br>
+<h2> Interface Adapters</h2>
+<br>
+<p>This layer converts data between the format most convenient for the use cases and entities, and the format most convenient for external agencies like databases and web servers:</p>
+<br>
+<li>**Controllers** convert HTTP requests into use case inputs.</li>
+<li>**Presenters** convert use case outputs into HTTP responses or view models.</li>
+<li>**Repository implementations** convert between entity objects and database records.</li>
+<br>
+<p>This is where you find DTOs, request/response objects, ORM mappings, and serialization logic. This layer depends on both inner circles and outer frameworks.</p>
+<br>
+<h2> Frameworks and Drivers</h2>
+<br>
+<p>The outermost layer consists of frameworks and tools: the database, web framework, UI toolkit, message queue, etc. This layer is kept at the perimeter. You should treat frameworks as tools to be used, not architectures to be conformed to.</p>
+<br>
+<p>A corollary: delay framework decisions. Write your use cases and entities first, then plug in the web framework and database later. This is possible because these outer layers implement interfaces defined by inner layers.</p>
+<br>
+<h2> Crossing Layer Boundaries</h2>
+<br>
+<p>When data crosses a layer boundary, it typically takes the form of a simple data structure. Use case request and response objects are passed across boundaries. Inner layers should not leak implementation details like database cursors or HTTP session objects.</p>
+<br>
+<h2> Benefits</h2>
+<br>
+<p>**Framework Independence.** The architecture does not depend on any particular framework. You can swap Spring for Quarkus, or Express for Fastify, without touching business logic.</p>
+<br>
+<p>**Testability.** Business rules can be tested without a database, web server, or any external dependency. Tests run fast and are highly reliable.</p>
+<br>
+<p>**UI Independence.** The UI can change without affecting the rest of the system. You can replace a web UI with a CLI or REST API without modifying use cases or entities.</p>
+<br>
+<p>**Database Independence.** You can swap out databases by implementing repository interfaces differently. The business rules do not know which database is in use.</p>
+<br>
+<h2> Common Pitfalls</h2>
+<br>
+<p>**Pragmatic shortcuts are okay.** Strict adherence to Clean Architecture can feel verbose for small applications. Start with a simplified version and add layers as complexity grows.</p>
+<br>
+<p>**Don't create unnecessary abstractions.** If an interface has exactly one implementation and you don't foresee a second one, wait before extracting it. Clean Architecture does not require interfaces for everything, just the boundaries that matter.</p>
+<br>
+<p>**Packages vs. layers.** Physical separation (separate modules or packages) is more important than naming conventions. Enforce the dependency rule at the build level to prevent accidental violations.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Clean Architecture is about protecting your business logic from the frameworks and infrastructure around it. The dependency rule ensures that inner layers remain pure and testable. While the pattern requires discipline and forethought, it pays significant dividends as the application grows and evolves over time.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

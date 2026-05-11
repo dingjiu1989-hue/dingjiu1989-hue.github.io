@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="encryption-at-rest">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Encryption at Rest Guide">
+    <meta property="og:description" content="A comprehensive guide to encryption at rest covering disk encryption, database encryption, key management, and AWS/GCP implementation.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/encryption-at-rest.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Encryption at Rest Guide">
+    <meta name="twitter:description" content="A comprehensive guide to encryption at rest covering disk encryption, database encryption, key management, and AWS/GCP implementation.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Encryption at Rest Guide — SourceHub</title>
+    <meta name="description" content="A comprehensive guide to encryption at rest covering disk encryption, database encryption, key management, and AWS/GCP implementation.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/encryption-at-rest.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/encryption-at-rest.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Encryption at Rest Guide",
+      "description": "A comprehensive guide to encryption at rest covering disk encryption, database encryption, key management, and AWS/GCP implementation.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1549",
+      "keywords": "Security, Cybersecurity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/encryption-at-rest.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Encryption at Rest Guide"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Encryption at Rest Guide
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">Cybersecurity</span></div>
+      <h1 class="article-title">Encryption at Rest Guide</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> What Is Encryption at Rest?</h2>
+<br>
+<p>Encryption at rest protects data stored on disk or in databases by making it unreadable without the correct decryption key. If an attacker gains physical access to storage media or bypasses access controls, encrypted data remains confidential. This is a fundamental security control required by compliance frameworks including PCI DSS, HIPAA, SOC 2, and GDPR.</p>
+<br>
+<h2> Encryption Layers</h2>
+<br>
+<p>| Layer | What It Protects | When to Use |</p>
+<p>|-------|------------------|-------------|</p>
+<p>| Disk encryption | Entire storage volume | Always |</p>
+<p>| Database encryption | Specific tables or columns | Sensitive PII data |</p>
+<p>| File-level encryption | Individual files | Shared storage, backups |</p>
+<p>| Application-level encryption | Specific data fields | End-to-end data protection |</p>
+<p>| Backup encryption | Backup archives | All offsite storage |</p>
+<br>
+<h2> Disk-Level Encryption</h2>
+<br>
+<h3>LUKS (Linux Unified Key Setup)</h3>
+<br>
+<pre><code>
+# Encrypt a disk with LUKS
+
+sudo cryptsetup luksFormat /dev/sdb1
+
+sudo cryptsetup luksOpen /dev/sdb1 encrypted_volume
+
+sudo mkfs.ext4 /dev/mapper/encrypted_volume
+
+sudo mount /dev/mapper/encrypted_volume /mnt/secure
+
+</code></pre>
+<br>
+<h3>AWS EBS Encryption</h3>
+<br>
+<pre><code>
+# Enable default EBS encryption
+
+aws ec2 enable-ebs-encryption-by-default --region us-east-1
+
+
+
+# Create an encrypted volume with a custom KMS key
+
+aws ec2 create-volume \
+
+    --size 100 \
+
+    --region us-east-1 \
+
+    --availability-zone us-east-1a \
+
+    --encrypted \
+
+    --kms-key-id alias/my-app-key
+
+</code></pre>
+<br>
+<h3>GCE Persistent Disk Encryption</h3>
+<br>
+<pre><code>
+# Google Cloud uses AES-256 by default (CSEK for customer-managed)
+
+# Create and apply a CSEK
+
+gcloud compute disks create secure-disk \
+
+    --size 100GB \
+
+    --zone us-central1-a \
+
+    --csek-key-file ./key.json
+
+
+
+gcloud compute instances attach-disk my-instance \
+
+    --disk secure-disk \
+
+    --zone us-central1-a \
+
+    --csek-key-file ./key.json
+
+</code></pre>
+<br>
+<h2> Database Encryption</h2>
+<br>
+<h3>Transparent Data Encryption (TDE)</h3>
+<br>
+<pre><code>
+-- PostgreSQL with pg_tde extension
+
+CREATE EXTENSION pg_tde;
+
+
+
+-- Initialize encryption key
+
+SELECT pg_tde_add_key_provider_file(&#x27;file-vault&#x27;, &#x27;/etc/postgresql/key.file&#x27;);
+
+SELECT pg_tde_set_key(&#x27;my-db-key&#x27;, &#x27;file-vault&#x27;);
+
+
+
+-- Encrypt a table
+
+CREATE TABLE users (
+
+    id SERIAL PRIMARY KEY,
+
+    email TEXT,
+
+    ssn TEXT
+
+) USING TDE;
+
+
+
+-- Or encrypt existing table
+
+ALTER TABLE users SET ACCESS METHOD TDE;
+
+</code></pre>
+<br>
+<h3>Column-Level Encryption</h3>
+<br>
+<pre><code>
+-- PostgreSQL with pgcrypto
+
+CREATE EXTENSION pgcrypto;
+
+
+
+-- Encrypt specific columns
+
+CREATE TABLE patients (
+
+    id SERIAL PRIMARY KEY,
+
+    name TEXT NOT NULL,
+
+    ssn BYTEA,  -- Encrypted
+
+    diagnosis BYTEA,  -- Encrypted
+
+    created_at TIMESTAMP DEFAULT NOW()
+
+);
+
+
+
+-- Insert with encryption
+
+INSERT INTO patients (name, ssn, diagnosis)
+
+VALUES (
+
+    &#x27;John Doe&#x27;,
+
+    pgp_sym_encrypt(&#x27;123-45-6789&#x27;, &#x27;encryption-key&#x27;),
+
+    pgp_sym_encrypt(&#x27;Diabetes Type 2&#x27;, &#x27;encryption-key&#x27;)
+
+);
+
+
+
+-- Decrypt when needed (with proper access control)
+
+SELECT
+
+    name,
+
+    pgp_sym_decrypt(ssn, &#x27;encryption-key&#x27;) AS ssn
+
+FROM patients
+
+WHERE id = 1;
+
+</code></pre>
+<br>
+<h3>MongoDB Field-Level Encryption</h3>
+<br>
+<pre><code>
+const client = new MongoClient(uri, {
+
+    autoEncryption: {
+
+        keyVaultNamespace: &#x27;encryption.__keyVault&#x27;,
+
+        kmsProviders: {
+
+            aws: {
+
+                accessKeyId: process.env.AWS_ACCESS_KEY,
+
+                secretAccessKey: process.env.AWS_SECRET_KEY
+
+            }
+
+        },
+
+        schemaMap: {
+
+            &#x27;test.users&#x27;: {
+
+                bsonType: &#x27;object&#x27;,
+
+                encryptMetadata: {
+
+                    keyId: [UUID(&#x27;...&#x27;)],
+
+                    algorithm: &#x27;AEAD_AES_256_CBC_HMAC_SHA_512-Deterministic&#x27;
+
+                },
+
+                properties: {
+
+                    ssn: { encrypt: { bsonType: &#x27;string&#x27; } },
+
+                    creditCard: { encrypt: { bsonType: &#x27;string&#x27; } }
+
+                }
+
+            }
+
+        }
+
+    }
+
+});
+
+</code></pre>
+<br>
+<h2> Application-Level Encryption</h2>
+<br>
+<p>For end-to-end protection where even the database administrator should not see plaintext:</p>
+<br>
+<pre><code>
+from cryptography.fernet import Fernet
+
+
+
+class FieldEncryptor:
+
+    def __init__(self, key):
+
+        self.cipher = Fernet(key)
+
+
+
+    def encrypt_field(self, plaintext):
+
+        &quot;&quot;&quot;Encrypt a single field.&quot;&quot;&quot;
+
+        return self.cipher.encrypt(plaintext.encode())
+
+
+
+    def decrypt_field(self, ciphertext):
+
+        &quot;&quot;&quot;Decrypt a single field.&quot;&quot;&quot;
+
+        return self.cipher.decrypt(ciphertext).decode()
+
+
+
+# Usage
+
+key = Fernet.generate_key()  # Store this securely in a vault
+
+encryptor = FieldEncryptor(key)
+
+
+
+user_data = {
+
+    &#x27;email&#x27;: &#x27;user@example.com&#x27;,
+
+    &#x27;ssn&#x27;: encryptor.encrypt_field(&#x27;123-45-6789&#x27;),
+
+    &#x27;medical_record&#x27;: encryptor.encrypt_field(&#x27;Sensitive diagnosis data&#x27;)
+
+}
+
+
+
+# Store user_data in database
+
+db.users.insert_one(user_data)
+
+</code></pre>
+<br>
+<h2> Key Management</h2>
+<br>
+<h3>Key Hierarchy</h3>
+<br>
+<pre><code>
+Master Key (HSM or KMS)
+
+    |
+
+    ├── Key Encryption Key (KEK)
+
+    │       └── Data Encryption Keys (DEK)
+
+    └── Key Encryption Key (KEK)
+
+            └── Data Encryption Keys (DEK)
+
+</code></pre>
+<br>
+<h3>AWS KMS</h3>
+<br>
+<pre><code>
+import boto3
+
+
+
+kms = boto3.client(&#x27;kms&#x27;)
+
+
+
+def create_encryption_key():
+
+    response = kms.create_key(
+
+        Description=&#x27;Application data encryption key&#x27;,
+
+        KeyUsage=&#x27;ENCRYPT_DECRYPT&#x27;,
+
+        CustomerMasterKeySpec=&#x27;SYMMETRIC_DEFAULT&#x27;
+
+    )
+
+    return response[&#x27;KeyMetadata&#x27;][&#x27;KeyId&#x27;]
+
+
+
+def encrypt_data(plaintext, key_id):
+
+    response = kms.encrypt(
+
+        KeyId=key_id,
+
+        Plaintext=plaintext.encode()
+
+    )
+
+    return response[&#x27;CiphertextBlob&#x27;]
+
+
+
+def decrypt_data(ciphertext):
+
+    response = kms.decrypt(CiphertextBlob=ciphertext)
+
+    return response[&#x27;Plaintext&#x27;].decode()
+
+</code></pre>
+<br>
+<h2> Key Rotation</h2>
+<br>
+<p>| Key Type | Rotation Frequency | Method |</p>
+<p>|----------|-------------------|--------|</p>
+<p>| Master key | Annually (manual) | Create new, re-wrap DEKs |</p>
+<p>| Data encryption key | Per-encryption | Generate new per operation |</p>
+<p>| Database password | 90 days | Automated via secrets manager |</p>
+<p>| TLS certificate | 90 days | cert-manager / ACM |</p>
+<br>
+<h2> Compliance Requirements</h2>
+<br>
+<p>| Standard | Encryption Requirement |</p>
+<p>|----------|----------------------|</p>
+<p>| PCI DSS 4.0 | All cardholder data encrypted at rest |</p>
+<p>| HIPAA | ePHI encrypted at rest |</p>
+<p>| SOC 2 | Encryption controls for sensitive data |</p>
+<p>| GDPR | Appropriate technical measures (encryption) |</p>
+<p>| FedRAMP | FIPS 140-2 validated encryption |</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Encryption at rest is a non-negotiable security control for any application handling sensitive data. Implement defense in depth: disk encryption for the entire volume, transparent database encryption for tables, column-level encryption for the most sensitive fields, and application-level encryption for end-to-end protection. Use AWS KMS or similar managed services for key management with automatic rotation, and always encrypt backups before storing them offsite.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

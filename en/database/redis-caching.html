@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="redis-caching">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Redis Caching Patterns">
+    <meta property="og:description" content="Explore Redis caching patterns including cache-aside, write-through, lazy loading, distributed locking, session storage, and rate limiting.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/redis-caching.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Redis Caching Patterns">
+    <meta name="twitter:description" content="Explore Redis caching patterns including cache-aside, write-through, lazy loading, distributed locking, session storage, and rate limiting.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Redis Caching Patterns — SourceHub</title>
+    <meta name="description" content="Explore Redis caching patterns including cache-aside, write-through, lazy loading, distributed locking, session storage, and rate limiting.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/redis-caching.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/redis-caching.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Redis Caching Patterns",
+      "description": "Explore Redis caching patterns including cache-aside, write-through, lazy loading, distributed locking, session storage, and rate limiting.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1497",
+      "keywords": "Database, SQL",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/redis-caching.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Redis Caching Patterns"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Redis Caching Patterns
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">SQL</span></div>
+      <h1 class="article-title">Redis Caching Patterns</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Redis as a Cache</h2>
+<br>
+<p>Redis is an in-memory data structure store that excels as a cache due to its sub-millisecond latency, rich data types, and built-in expiration. When used correctly, Redis can reduce database load by 90% or more while dramatically improving application response times.</p>
+<br>
+<h2> Data Structures Overview</h2>
+<br>
+<p>| Structure | Use Case | Example |</p>
+<p>|-----------|----------|---------|</p>
+<p>| String | Simple values, counters | User session, page views |</p>
+<p>| Hash | Object fields | User profile fields |</p>
+<p>| List | Ordered collection | Message queue, timeline |</p>
+<p>| Set | Unique values | Tags, followers |</p>
+<p>| Sorted Set | Ranked data | Leaderboard, rate limiting |</p>
+<p>| HyperLogLog | Cardinality estimation | Unique visitors |</p>
+<p>| Bitmap | Boolean flags | Daily active users |</p>
+<br>
+<h2> Caching Patterns</h2>
+<br>
+<h3>Cache-Aside (Lazy Loading)</h3>
+<br>
+<p>The most common caching pattern. The application checks the cache first; on a miss, it loads data from the database and populates the cache.</p>
+<br>
+<pre><code>
+import redis
+
+import json
+
+
+
+r = redis.Redis(host=&#x27;localhost&#x27;, port=6379, decode_responses=True)
+
+
+
+def get_user(user_id):
+
+    cache_key = f&quot;user:{user_id}&quot;
+
+
+
+    # Try cache first
+
+    cached = r.get(cache_key)
+
+    if cached:
+
+        return json.loads(cached)
+
+
+
+    # Cache miss: load from database
+
+    user = db.query(&quot;SELECT * FROM users WHERE id = %s&quot;, [user_id])
+
+
+
+    if user:
+
+        # Populate cache with TTL
+
+        r.setex(cache_key, 3600, json.dumps(user))
+
+
+
+    return user
+
+</code></pre>
+<br>
+<p>**Pros**: Only caches data that is requested, resilient to cache failures.</p>
+<p>**Cons**: Cache miss penalty (three round trips), stale data until TTL expires.</p>
+<br>
+<h3>Write-Through</h3>
+<br>
+<p>Data is written to the cache first, then to the database. Reads always hit the cache.</p>
+<br>
+<pre><code>
+def update_user(user_id, data):
+
+    cache_key = f&quot;user:{user_id}&quot;
+
+
+
+    # Write to cache first
+
+    r.setex(cache_key, 3600, json.dumps(data))
+
+
+
+    # Then write to database
+
+    db.execute(
+
+        &quot;UPDATE users SET name = %s, email = %s WHERE id = %s&quot;,
+
+        [data[&#x27;name&#x27;], data[&#x27;email&#x27;], user_id]
+
+    )
+
+</code></pre>
+<br>
+<p>**Pros**: Cache is always consistent with database writes.</p>
+<p>**Cons**: Write latency increases, cache stores data that may never be read.</p>
+<br>
+<h3>Write-Behind (Write-Back)</h3>
+<br>
+<p>Data is written to cache and asynchronously written to the database later.</p>
+<br>
+<pre><code>
+def write_behind(user_id, data):
+
+    cache_key = f&quot;user:{user_id}&quot;
+
+
+
+    # Write to cache immediately
+
+    r.setex(cache_key, 3600, json.dumps(data))
+
+
+
+    # Queue database write for batch processing
+
+    r.lpush(&quot;db:write:queue&quot;, json.dumps({
+
+        &quot;table&quot;: &quot;users&quot;,
+
+        &quot;id&quot;: user_id,
+
+        &quot;data&quot;: data
+
+    }))
+
+</code></pre>
+<br>
+<p>**Pros**: Very fast writes, can batch database operations.</p>
+<p>**Cons**: Risk of data loss if cache fails before database write.</p>
+<br>
+<h2> Cache Invalidation Strategies</h2>
+<br>
+<p>| Strategy | How It Works | Best For |</p>
+<p>|----------|-------------|----------|</p>
+<p>| TTL expiration | Automatic expiry after set time | Most applications |</p>
+<p>| Key deletion | Delete cache key on data update | Write-through |</p>
+<p>| Versioned keys | Include version in key name | Schema changes |</p>
+<p>| Pub/sub invalidation | Notify all instances to invalidate | Distributed caches |</p>
+<br>
+<h2> Advanced Patterns</h2>
+<br>
+<h3>Distributed Locking</h3>
+<br>
+<pre><code>
+def acquire_lock(lock_name, acquire_timeout=10):
+
+    identifier = str(uuid.uuid4())
+
+    end = time.time() + acquire_timeout
+
+
+
+    while time.time() &lt; end:
+
+        if r.setnx(f&quot;lock:{lock_name}&quot;, identifier):
+
+            r.expire(f&quot;lock:{lock_name}&quot;, 10)
+
+            return identifier
+
+        time.sleep(0.001)
+
+
+
+    return None
+
+
+
+def release_lock(lock_name, identifier):
+
+    # Use Lua script for atomic release
+
+    script = &quot;&quot;&quot;
+
+    if redis.call(&quot;get&quot;, KEYS[1]) == ARGV[1] then
+
+        return redis.call(&quot;del&quot;, KEYS[1])
+
+    else
+
+        return 0
+
+    end
+
+    &quot;&quot;&quot;
+
+    r.eval(script, 1, f&quot;lock:{lock_name}&quot;, identifier)
+
+</code></pre>
+<br>
+<h3>Rate Limiting with Sorted Sets</h3>
+<br>
+<pre><code>
+def is_rate_limited(user_id, max_requests=100, window_seconds=60):
+
+    key = f&quot;ratelimit:{user_id}&quot;
+
+    now = time.time()
+
+
+
+    # Remove old entries
+
+    r.zremrangebyscore(key, 0, now - window_seconds)
+
+
+
+    # Count current requests
+
+    if r.zcard(key) &gt;= max_requests:
+
+        return True
+
+
+
+    # Add current request
+
+    r.zadd(key, {now: now})
+
+    r.expire(key, window_seconds)
+
+    return False
+
+</code></pre>
+<br>
+<h3>Session Storage</h3>
+<br>
+<pre><code>
+# Store session with hash
+
+def create_session(session_id, user_data, ttl=86400):
+
+    key = f&quot;session:{session_id}&quot;
+
+    r.hset(key, mapping={
+
+        &#x27;user_id&#x27;: user_data[&#x27;id&#x27;],
+
+        &#x27;username&#x27;: user_data[&#x27;username&#x27;],
+
+        &#x27;roles&#x27;: json.dumps(user_data[&#x27;roles&#x27;]),
+
+        &#x27;ip&#x27;: user_data[&#x27;ip&#x27;],
+
+        &#x27;created_at&#x27;: time.time()
+
+    })
+
+    r.expire(key, ttl)
+
+
+
+def get_session(session_id):
+
+    key = f&quot;session:{session_id}&quot;
+
+    data = r.hgetall(key)
+
+    if data:
+
+        data[&#x27;roles&#x27;] = json.loads(data[&#x27;roles&#x27;])
+
+    return data
+
+</code></pre>
+<br>
+<h2> Performance Optimization</h2>
+<br>
+<h3>Connection Pooling</h3>
+<br>
+<pre><code>
+from redis.connection import ConnectionPool
+
+
+
+# Reuse connections across requests
+
+pool = ConnectionPool(
+
+    host=&#x27;localhost&#x27;,
+
+    port=6379,
+
+    max_connections=50,
+
+    socket_timeout=5
+
+)
+
+r = redis.Redis(connection_pool=pool)
+
+</code></pre>
+<br>
+<h3>Pipeline / Batching</h3>
+<br>
+<pre><code>
+# Batch operations to reduce round trips
+
+pipe = r.pipeline()
+
+for user_id in user_ids:
+
+    pipe.get(f&quot;user:{user_id}&quot;)
+
+results = pipe.execute()
+
+</code></pre>
+<br>
+<h2> Monitoring</h2>
+<br>
+<pre><code>
+# Redis CLI monitoring
+
+redis-cli info stats
+
+
+
+# Key metrics to watch
+
+# - hit_rate: keyspace_hits / (keyspace_hits + keyspace_misses)
+
+# - evicted_keys: keys evicted due to maxmemory
+
+# - maxmemory: configured memory limit
+
+# - connected_clients: active connections
+
+</code></pre>
+<br>
+<h2> Common Pitfalls</h2>
+<br>
+<p>| Pitfall | Consequence | Fix |</p>
+<p>|---------|-------------|-----|</p>
+<p>| No TTL | Memory exhaustion | Always set TTL |</p>
+<p>| Cache stampede | Overload database on miss | Use mutex locking |</p>
+<p>| Too-large values | Memory waste, slow serialization | Compress or split |</p>
+<p>| Hot keys | Single key becomes bottleneck | Shard or replicate |</p>
+<p>| Cache-aside without TTL | Stale data lives forever | Always set TTL |</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Redis caching can dramatically improve application performance when the right pattern is applied. Use cache-aside as the default pattern with appropriate TTLs, implement write-through for consistency-critical data, use distributed locking for race conditions, and sorted sets for rate limiting. Monitor hit rates and eviction counts, and always set TTLs to prevent memory exhaustion.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

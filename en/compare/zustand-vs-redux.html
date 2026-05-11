@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="compare" data-exclude="zustand-vs-redux">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Zustand vs Redux vs Jotai">
+    <meta property="og:description" content="Compare Zustand, Redux, and Jotai for React state management — API design, boilerplate, performance, and which state manager fits your project.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/compare/zustand-vs-redux.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Zustand vs Redux vs Jotai">
+    <meta name="twitter:description" content="Compare Zustand, Redux, and Jotai for React state management — API design, boilerplate, performance, and which state manager fits your project.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Zustand vs Redux vs Jotai — SourceHub</title>
+    <meta name="description" content="Compare Zustand, Redux, and Jotai for React state management — API design, boilerplate, performance, and which state manager fits your project.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/compare/zustand-vs-redux.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/compare/zustand-vs-redux.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Zustand vs Redux vs Jotai",
+      "description": "Compare Zustand, Redux, and Jotai for React state management — API design, boilerplate, performance, and which state manager fits your project.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1517",
+      "keywords": "Comparison, Technology",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/compare/zustand-vs-redux.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Comparisons", "item": "https://dingjiu1989-hue.github.io/en/compare/"},
+        {"@type": "ListItem", "position": 3, "name": "Zustand vs Redux vs Jotai"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/compare/">Comparisons</a> › Zustand vs Redux vs Jotai
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Comparison</span>
+        <span class="tag-cat">Technology</span></div>
+      <h1 class="article-title">Zustand vs Redux vs Jotai</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>React state management has evolved significantly. Redux, once the default choice for complex applications, now competes with simpler alternatives like Zustand and Jotai. Each takes a different approach: Redux centralizes state with strict patterns, Zustand provides a minimal store with hooks, and Jotai offers atomic, Recoil-inspired state management. This comparison helps you choose the right state management approach.</p>
+<br>
+<h2> Redux Toolkit</h2>
+<br>
+<p>Redux Toolkit (RTK) is Redux's modern incarnation, eliminating much of the boilerplate that plagued classic Redux.</p>
+<br>
+<p>**Philosophy:** Single centralized store with predictable updates through reducers and actions.</p>
+<br>
+<pre><code>
+import { createSlice, configureStore } from &quot;@reduxjs/toolkit&quot;;
+
+
+
+const counterSlice = createSlice({
+
+  name: &quot;counter&quot;,
+
+  initialState: { value: 0 },
+
+  reducers: {
+
+    increment: (state) =&gt; { state.value += 1; },
+
+    incrementBy: (state, action) =&gt; { state.value += action.payload; },
+
+  },
+
+});
+
+
+
+const store = configureStore({
+
+  reducer: { counter: counterSlice.reducer },
+
+});
+
+
+
+export const { increment, incrementBy } = counterSlice.actions;
+
+export type RootState = ReturnType&lt;typeof store.getState&gt;;
+
+
+
+// In component:
+
+function Counter() {
+
+  const count = useSelector((state: RootState) =&gt; state.counter.value);
+
+  const dispatch = useDispatch();
+
+
+
+  return (
+
+    &lt;div&gt;
+
+      &lt;p&gt;{count}&lt;/p&gt;
+
+      &lt;button onClick={() =&gt; dispatch(increment())}&gt;+1&lt;/button&gt;
+
+    &lt;/div&gt;
+
+  );
+
+}
+
+</code></pre>
+<br>
+<p>**Strengths:**</p>
+<li>Mature ecosystem with middleware (Redux Thunk, Redux Saga)</li>
+<li>DevTools with time-travel debugging</li>
+<li>TypeScript integration is excellent with RTK</li>
+<li>Clear patterns for large teams</li>
+<li>Well-documented for complex async flows</li>
+<br>
+<p>**Weaknesses:**</p>
+<li>Conceptual overhead (actions, reducers, dispatch, selectors)</li>
+<li>More boilerplate than alternatives (even with RTK)</li>
+<li>Selectors need memoization for performance</li>
+<li>Centralized store can become a bottleneck in very large apps</li>
+<br>
+<h2> Zustand</h2>
+<br>
+<p>Zustand provides a minimal store with React hooks, no providers needed.</p>
+<br>
+<p>**Philosophy:** A small, fast, and scalable state management solution with no boilerplate.</p>
+<br>
+<pre><code>
+import { create } from &quot;zustand&quot;;
+
+
+
+interface CounterState {
+
+  count: number;
+
+  increment: () =&gt; void;
+
+  incrementBy: (amount: number) =&gt; void;
+
+}
+
+
+
+const useCounterStore = create&lt;CounterState&gt;((set) =&gt; ({
+
+  count: 0,
+
+  increment: () =&gt; set((state) =&gt; ({ count: state.count + 1 })),
+
+  incrementBy: (amount) =&gt; set((state) =&gt; ({ count: state.count + amount })),
+
+}));
+
+
+
+// In component — no Provider needed
+
+function Counter() {
+
+  const count = useCounterStore((state) =&gt; state.count);
+
+  const increment = useCounterStore((state) =&gt; state.increment);
+
+
+
+  return (
+
+    &lt;div&gt;
+
+      &lt;p&gt;{count}&lt;/p&gt;
+
+      &lt;button onClick={increment}&gt;+1&lt;/button&gt;
+
+    &lt;/div&gt;
+
+  );
+
+}
+
+</code></pre>
+<br>
+<p>**Strengths:**</p>
+<li>Minimal boilerplate — create a store, use it</li>
+<li>No Provider wrapping needed</li>
+<li>Subscription-based rendering (only re-renders on accessed state)</li>
+<li>Simple async actions (no middleware needed)</li>
+<li>Tiny bundle size (~1KB)</li>
+<li>Works outside React (vanilla JS stores)</li>
+<br>
+<p>**Weaknesses:**</p>
+<li>Fewer middleware options than Redux</li>
+<li>Less structure for large teams (can lead to inconsistent patterns)</li>
+<li>DevTools require additional setup</li>
+<li>No built-in data fetching or caching (unlike RTK Query or TanStack Query)</li>
+<br>
+<h2> Jotai</h2>
+<br>
+<p>Jotai takes an atomic approach — each piece of state is an independent atom.</p>
+<br>
+<p>**Philosophy:** Build state by composing primitive atoms, much like React's useState but shared.</p>
+<br>
+<pre><code>
+import { atom, useAtom } from &quot;jotai&quot;;
+
+
+
+// Primitive atom
+
+const countAtom = atom(0);
+
+
+
+// Derived atom (computed state)
+
+const doubleCountAtom = atom((get) =&gt; get(countAtom) * 2);
+
+
+
+// Async atom
+
+const userAtom = atom(async () =&gt; {
+
+  const response = await fetch(&quot;/api/user&quot;);
+
+  return response.json();
+
+});
+
+
+
+// In component
+
+function Counter() {
+
+  const [count, setCount] = useAtom(countAtom);
+
+  const [doubleCount] = useAtom(doubleCountAtom);
+
+
+
+  return (
+
+    &lt;div&gt;
+
+      &lt;p&gt;Count: {count}&lt;/p&gt;
+
+      &lt;p&gt;Double: {doubleCount}&lt;/p&gt;
+
+      &lt;button onClick={() =&gt; setCount((c) =&gt; c + 1)}&gt;+1&lt;/button&gt;
+
+    &lt;/div&gt;
+
+  );
+
+}
+
+</code></pre>
+<br>
+<p>**Strengths:**</p>
+<li>Granular re-renders (only components using a specific atom re-render)</li>
+<li>Built-in async atoms (no middleware for async)</li>
+<li>Composable atoms for derived state</li>
+<li>Tiny bundle size (~3KB)</li>
+<li>No global store or Provider needed</li>
+<br>
+<p>**Weaknesses:**</p>
+<li>Less mature ecosystem than Redux</li>
+<li>Atomic approach can be unfamiliar to new team members</li>
+<li>Debugging can be harder with many small atoms</li>
+<li>SSR requires additional configuration</li>
+<br>
+<h2> Comparison Table</h2>
+<br>
+<p>| Aspect | Redux Toolkit | Zustand | Jotai |</p>
+<p>|--------|--------------|---------|-------|</p>
+<p>| Architecture | Centralized store | Multiple stores | Atomic atoms |</p>
+<p>| Boilerplate | Moderate | Minimal | Minimal |</p>
+<p>| Bundle size | ~12KB | ~1KB | ~3KB |</p>
+<p>| Learning curve | Steep | Gentle | Moderate |</p>
+<p>| DevTools | Built-in | Add-on | Add-on |</p>
+<p>| Middleware | Rich ecosystem | Immer, persist | None needed |</p>
+<p>| Async support | Thunks/Sagas | Native in store | Native atoms |</p>
+<p>| TypeScript | Excellent | Excellent | Good |</p>
+<p>| Provider needed | Yes | No | No (optional) |</p>
+<p>| External use | Yes (store) | Yes (store) | Limited |</p>
+<br>
+<h2> When to Choose What</h2>
+<br>
+<p>**Choose Redux Toolkit when:**</p>
+<li>You're building a large application with a big team</li>
+<li>You need established patterns and clear structure</li>
+<li>You want RTK Query for data fetching and caching</li>
+<li>Your team already knows Redux patterns</li>
+<li>You need time-travel debugging and rich middleware</li>
+<br>
+<p>**Choose Zustand when:**</p>
+<li>You want minimal boilerplate and fast setup</li>
+<li>You need a simple, performant store</li>
+<li>You're building a medium-sized application</li>
+<li>You want state management without Provider nesting</li>
+<li>You need to access state outside React components</li>
+<br>
+<p>**Choose Jotai when:**</p>
+<li>You want React-idiomatic state (atoms = useState + useContext)</li>
+<li>You need fine-grained re-renders</li>
+<li>You want built-in async support</li>
+<li>You're building an app with many small, independent state pieces</li>
+<li>You want composeable state without a global store</li>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>The state management landscape in 2026 has moved beyond "one size fits all." Redux Toolkit remains the right choice for large applications that need structure and a rich ecosystem. Zustand has become the default recommendation for most new React projects due to its simplicity and performance. Jotai offers the most React-idiomatic experience for applications with highly granular state needs. Consider your team size, application complexity, and whether you need data fetching (RTK Query) or async workflows (Jotai's async atoms) when making your choice.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/compare/grpc-vs-websocket.html" class="related-card">gRPC vs WebSocket: Real-Time Communication</a><a href="/en/compare/kafka-vs-rabbitmq.html" class="related-card">Kafka vs RabbitMQ vs Apache Pulsar</a><a href="/en/compare/mysql-vs-mariadb.html" class="related-card">MySQL vs MariaDB: The Complete Comparison</a><a href="/en/compare/redis-vs-memcached.html" class="related-card">Redis vs Memcached: Caching Solution Comparison</a></div>
+      <noscript><div class="related-grid"><a href="/en/compare/grpc-vs-websocket.html" class="related-card">gRPC vs WebSocket: Real-Time Communication</a><a href="/en/compare/kafka-vs-rabbitmq.html" class="related-card">Kafka vs RabbitMQ vs Apache Pulsar</a><a href="/en/compare/mysql-vs-mariadb.html" class="related-card">MySQL vs MariaDB: The Complete Comparison</a><a href="/en/compare/redis-vs-memcached.html" class="related-card">Redis vs Memcached: Caching Solution Comparison</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="compare" data-exclude="planetscale-vs-neon">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="PlanetScale vs Neon">
+    <meta property="og:description" content="Compare PlanetScale and Neon for serverless PostgreSQL — branching, scalability, pricing, developer workflow, and how they differ from traditional databases.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/compare/planetscale-vs-neon.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PlanetScale vs Neon">
+    <meta name="twitter:description" content="Compare PlanetScale and Neon for serverless PostgreSQL — branching, scalability, pricing, developer workflow, and how they differ from traditional databases.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>PlanetScale vs Neon — SourceHub</title>
+    <meta name="description" content="Compare PlanetScale and Neon for serverless PostgreSQL — branching, scalability, pricing, developer workflow, and how they differ from traditional databases.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/compare/planetscale-vs-neon.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/compare/planetscale-vs-neon.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "PlanetScale vs Neon",
+      "description": "Compare PlanetScale and Neon for serverless PostgreSQL — branching, scalability, pricing, developer workflow, and how they differ from traditional databases.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1352",
+      "keywords": "Comparison, Technology",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/compare/planetscale-vs-neon.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Comparisons", "item": "https://dingjiu1989-hue.github.io/en/compare/"},
+        {"@type": "ListItem", "position": 3, "name": "PlanetScale vs Neon"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/compare/">Comparisons</a> › PlanetScale vs Neon
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Comparison</span>
+        <span class="tag-cat">Technology</span></div>
+      <h1 class="article-title">PlanetScale vs Neon</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Introduction</h2>
+<br>
+<p>PlanetScale and Neon represent a new generation of database platforms built for modern development workflows. Both offer serverless MySQL (PlanetScale) and PostgreSQL (Neon) with features like branching, instant cloning, and scale-to-zero. They eliminate traditional database management while providing developer-friendly features that integrate with modern CI/CD and version control practices.</p>
+<br>
+<h2> Database Technology</h2>
+<br>
+<h3>PlanetScale: Serverless MySQL</h3>
+<br>
+<p>PlanetScale is built on MySQL-compatible Vitess, the same technology that powers YouTube's database infrastructure.</p>
+<br>
+<p>**Key characteristics:**</p>
+<li>MySQL-compatible (most MySQL tools and ORMs work)</li>
+<li>Vitess-based for horizontal scaling</li>
+<li>Strong consistency with distributed transactions</li>
+<li>VNode-based sharding for large datasets</li>
+<br>
+<pre><code>
+-- PlanetScale: standard MySQL syntax
+
+CREATE TABLE users (
+
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+  email VARCHAR(255) NOT NULL,
+
+  name VARCHAR(100),
+
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+  UNIQUE KEY idx_email (email)
+
+);
+
+
+
+-- PlanetScale-specific: no foreign key constraints
+
+-- (Vitess does not enforce FKs across shards)
+
+</code></pre>
+<br>
+<p>**Limitation:** No foreign key constraints (Vitess limitation). Joins work within the same shard but are limited across shards.</p>
+<br>
+<h3>Neon: Serverless PostgreSQL</h3>
+<br>
+<p>Neon is built on PostgreSQL with a custom storage engine that separates compute from storage.</p>
+<br>
+<p>**Key characteristics:**</p>
+<li>Full PostgreSQL compatibility (all PG features work)</li>
+<li>Bottomless storage with page-level tiering</li>
+<li>Instant branching using copy-on-write</li>
+<li>Autoscaling from 0.25 to 16 vCPU</li>
+<br>
+<pre><code>
+-- Neon: full PostgreSQL with all features
+
+CREATE TABLE users (
+
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+  email TEXT NOT NULL UNIQUE,
+
+  name TEXT,
+
+  created_at TIMESTAMPTZ DEFAULT NOW()
+
+);
+
+
+
+CREATE TABLE posts (
+
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+  author_id UUID REFERENCES users(id),
+
+  title TEXT NOT NULL,
+
+  body TEXT,
+
+  created_at TIMESTAMPTZ DEFAULT NOW()
+
+);
+
+
+
+-- Full PostgreSQL features work: JSONB, full-text search, GIS
+
+CREATE INDEX idx_posts_search ON posts USING GIN(to_tsvector(&#x27;english&#x27;, title || &#x27; &#x27; || COALESCE(body, &#x27;&#x27;)));
+
+</code></pre>
+<br>
+<p>**Strengths:** Full PostgreSQL compatibility including foreign keys, JSONB, full-text search, PostGIS, and all PostgreSQL extensions.</p>
+<br>
+<h2> Database Branching</h2>
+<br>
+<p>Branching is the killer feature of both platforms, modeled after Git.</p>
+<br>
+<h3>How It Works</h3>
+<br>
+<pre><code>
+# PlanetScale CLI
+
+pscale branch create myapp add-billing-feature
+
+pscale branch promote myapp add-billing-feature
+
+
+
+# Neon CLI (neonctl)
+
+neonctl branches create --parent myapp --name add-billing-feature
+
+</code></pre>
+<br>
+<p>**PlanetScale branches:**</p>
+<li>Branches are full read-write copies of the data</li>
+<li>Schema changes are made on branches, then deployed via deploy requests</li>
+<li>Deploy requests show schema diff, handle migrations, and auto-resolve conflicts</li>
+<br>
+<p>**Neon branches:**</p>
+<li>Branches use copy-on-write at the page level — nearly instant and storage-efficient</li>
+<li>Logical replication between branches is supported</li>
+<li>Time-travel: connect to any point in time within the retention window (like `git checkout` for databases)</li>
+<br>
+<h2> Serverless Capabilities</h2>
+<br>
+<p>| Feature | PlanetScale | Neon |</p>
+<p>|---------|-------------|------|</p>
+<p>| Scale-to-zero | Yes (after inactivity) | Yes (after 5-60 min) |</p>
+<p>| Cold start | ~1-2 seconds | ~1-3 seconds |</p>
+<p>| Max storage | 500GB (scalable) | 200GB (scalable) |</p>
+<p>| Max connections | 25-250 (plan dependent) | 100-500 (plan dependent) |</p>
+<p>| Compute scaling | Vertical (plan based) | Auto (0.25-16 vCPU) |</p>
+<p>| Regions | 50+ regions | 10+ regions |</p>
+<br>
+<h2> Pricing</h2>
+<br>
+<p>| Plan | PlanetScale | Neon |</p>
+<p>|------|-------------|------|</p>
+<p>| Free tier | 1GB storage, 100M row reads/month | 0.5GB storage, 100 compute hours |</p>
+<p>| Paid starter | ~$39/month | ~$19/month |</p>
+<p>| Pro | ~$129/month | ~$69/month |</p>
+<p>| Enterprise | Custom | Custom |</p>
+<br>
+<p>Neon is generally more affordable at lower tiers. PlanetScale's pricing scales with row reads, which can be unpredictable for high-traffic applications.</p>
+<br>
+<h2> Developer Experience</h2>
+<br>
+<p>**PlanetScale** offers:</p>
+<li>Web console with schema visualization</li>
+<li>`pscale` CLI with shell integration</li>
+<li>Deploy request workflow (like GitHub PRs)</li>
+<li>VSCode extension</li>
+<li>Connection pooling via PlanetScale Boost</li>
+<br>
+<p>**Neon** offers:</p>
+<li>Web console with SQL editor</li>
+<li>`neonctl` CLI</li>
+<li>Connection pooling via PgBouncer (built-in)</li>
+<li>Vercel, Netlify, and Cloudflare integration</li>
+<li>Drizzle Studio integration</li>
+<br>
+<h2> Ecosystem Compatibility</h2>
+<br>
+<p>**PlanetScale** works with MySQL-compatible ORMs:</p>
+<br>
+<li>Prisma (MySQL adapter)</li>
+<li>Drizzle (MySQL adapter)</li>
+<li>TypeORM</li>
+<li>Knex</li>
+<li>Raw `mysql2` driver</li>
+<br>
+<p>**Neon** works with PostgreSQL-compatible ORMs:</p>
+<br>
+<li>Prisma (PostgreSQL adapter)</li>
+<li>Drizzle (PostgreSQL adapter)</li>
+<li>TypeORM</li>
+<li>Kysely</li>
+<li>Raw `pg` driver</li>
+<li>Supabase SDK</li>
+<br>
+<h2> When to Choose What</h2>
+<br>
+<p>**Choose PlanetScale when:**</p>
+<li>Your team is more familiar with MySQL</li>
+<li>You want the deploy-request workflow for database schema changes</li>
+<li>You need horizontal read scaling with Vitess</li>
+<li>Your application uses MySQL-compatible tools</li>
+<br>
+<p>**Choose Neon when:**</p>
+<li>You want full PostgreSQL compatibility (foreign keys, extensions)</li>
+<li>You need PostgreSQL-specific features (JSONB, full-text search, PostGIS)</li>
+<li>You want more predictable pricing</li>
+<li>You value time-travel queries and instant branching</li>
+<li>You're deploying on Vercel or Edge Functions</li>
+<br>
+<h2> Conclusion</h2>
+<br>
+<p>PlanetScale and Neon both solve the same fundamental problem — making databases as developer-friendly as the rest of the modern toolchain — but they serve different database ecosystems. If MySQL is your database of choice, PlanetScale's Vitess-based architecture provides scalability with a familiar workflow. If PostgreSQL is your preference, Neon offers full PG compatibility with innovative branching and autoscaling features. In 2026, Neon's PostgreSQL-based approach has broader ecosystem support and more affordable pricing, making it the default choice for new projects.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/compare/grpc-vs-websocket.html" class="related-card">gRPC vs WebSocket: Real-Time Communication</a><a href="/en/compare/kafka-vs-rabbitmq.html" class="related-card">Kafka vs RabbitMQ vs Apache Pulsar</a><a href="/en/compare/mysql-vs-mariadb.html" class="related-card">MySQL vs MariaDB: The Complete Comparison</a><a href="/en/compare/redis-vs-memcached.html" class="related-card">Redis vs Memcached: Caching Solution Comparison</a></div>
+      <noscript><div class="related-grid"><a href="/en/compare/grpc-vs-websocket.html" class="related-card">gRPC vs WebSocket: Real-Time Communication</a><a href="/en/compare/kafka-vs-rabbitmq.html" class="related-card">Kafka vs RabbitMQ vs Apache Pulsar</a><a href="/en/compare/mysql-vs-mariadb.html" class="related-card">MySQL vs MariaDB: The Complete Comparison</a><a href="/en/compare/redis-vs-memcached.html" class="related-card">Redis vs Memcached: Caching Solution Comparison</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

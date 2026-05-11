@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="rest-api-design">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="REST API Design Best Practices">
+    <meta property="og:description" content="Learn REST API design best practices for building scalable, maintainable web APIs.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/rest-api-design.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="REST API Design Best Practices">
+    <meta name="twitter:description" content="Learn REST API design best practices for building scalable, maintainable web APIs.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>REST API Design Best Practices — SourceHub</title>
+    <meta name="description" content="Learn REST API design best practices for building scalable, maintainable web APIs.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/rest-api-design.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/rest-api-design.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "REST API Design Best Practices",
+      "description": "Learn REST API design best practices for building scalable, maintainable web APIs.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1256",
+      "keywords": "Architecture, System Design",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/rest-api-design.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "REST API Design Best Practices"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › REST API Design Best Practices
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span></div>
+      <h1 class="article-title">REST API Design Best Practices</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>REST (Representational State Transfer) remains the dominant architectural style for web APIs. A well-designed REST API is intuitive, consistent, and easy to maintain. This article covers the core principles and practical guidelines for designing REST APIs that developers love to use.</p>
+<br>
+<h2> Use Consistent Resource Naming</h2>
+<br>
+<p>Your API endpoints represent resources. Use nouns, not verbs, and stick to a consistent naming convention.</p>
+<br>
+<pre><code>
+GET /users          # Good
+
+GET /getUsers       # Bad
+
+POST /createUser    # Bad
+
+</code></pre>
+<br>
+<p>Use plural nouns for collections (`/users`, `/orders`) and nest resources to express relationships (`/users/123/orders`). Avoid deep nesting beyond two or three levels. If you find yourself nesting four levels deep, consider flattening the structure or using query parameters.</p>
+<br>
+<h2> Leverage HTTP Methods Correctly</h2>
+<br>
+<p>Each HTTP method has a specific semantic meaning. Use them correctly:</p>
+<br>
+<li>`GET` — Retrieve a resource or collection. Idempotent and safe.</li>
+<li>`POST` — Create a new resource. Not idempotent.</li>
+<li>`PUT` — Replace an entire resource. Idempotent.</li>
+<li>`PATCH` — Partially update a resource. Idempotent when used with merge-style patches.</li>
+<li>`DELETE` — Remove a resource. Idempotent.</li>
+<br>
+<p>A common mistake is using POST for everything. Proper method usage makes your API self-documenting and allows HTTP clients to make intelligent caching and retry decisions.</p>
+<br>
+<h2> Use Proper HTTP Status Codes</h2>
+<br>
+<p>Your API should return meaningful status codes. Group them logically:</p>
+<br>
+<li>**2xx Success**: `200 OK` for successful GET/PUT/PATCH, `201 Created` for POST, `204 No Content` for DELETE.</li>
+<li>**3xx Redirection**: `301 Moved Permanently`, `303 See Other` for redirecting after a POST.</li>
+<li>**4xx Client Error**: `400 Bad Request` for malformed input, `401 Unauthorized` when authentication is missing, `403 Forbidden` when the user lacks permission, `404 Not Found`, `409 Conflict` for duplicate resources, `422 Unprocessable Entity` for validation errors.</li>
+<li>**5xx Server Error**: `500 Internal Server Error`, `502 Bad Gateway`, `503 Service Unavailable`.</li>
+<br>
+<p>Returning `200 OK` for everything forces API consumers to inspect the response body to determine success or failure. This defeats the purpose of HTTP status codes.</p>
+<br>
+<h2> Pagination, Filtering, and Sorting</h2>
+<br>
+<p>Collections should always support pagination, filtering, and sorting.</p>
+<br>
+<pre><code>
+GET /users?page=2&amp;per_page=20
+
+GET /users?sort=created_at&amp;order=desc
+
+GET /users?filter[status]=active
+
+</code></pre>
+<br>
+<p>Return pagination metadata in the response:</p>
+<br>
+<pre><code>
+{
+
+  &quot;data&quot;: [...],
+
+  &quot;pagination&quot;: {
+
+    &quot;page&quot;: 2,
+
+    &quot;per_page&quot;: 20,
+
+    &quot;total&quot;: 153,
+
+    &quot;total_pages&quot;: 8
+
+  }
+
+}
+
+</code></pre>
+<br>
+<p>Using cursor-based pagination is recommended for large, frequently updated datasets, as it is more performant than offset-based pagination.</p>
+<br>
+<h2> Consistent Error Responses</h2>
+<br>
+<p>Design a standard error response format and use it everywhere:</p>
+<br>
+<pre><code>
+{
+
+  &quot;error&quot;: {
+
+    &quot;code&quot;: &quot;VALIDATION_ERROR&quot;,
+
+    &quot;message&quot;: &quot;Validation failed&quot;,
+
+    &quot;details&quot;: [
+
+      { &quot;field&quot;: &quot;email&quot;, &quot;message&quot;: &quot;Must be a valid email address&quot; }
+
+    ]
+
+  }
+
+}
+
+</code></pre>
+<br>
+<p>Include a machine-readable error code, a human-readable message, and detailed validation errors when appropriate. This allows clients to handle errors programmatically.</p>
+<br>
+<h2> Versioning</h2>
+<br>
+<p>APIs evolve. Plan for it from day one. The simplest approach is URL-based versioning:</p>
+<br>
+<pre><code>
+/api/v1/users
+
+/api/v2/users
+
+</code></pre>
+<br>
+<p>Header-based versioning (e.g., `Accept: application/vnd.myapi.v1+json`) is more RESTful but harder for clients to discover. Choose whichever approach your consumers will find more intuitive.</p>
+<br>
+<h2> Use HATEOAS for Discoverability</h2>
+<br>
+<p>HATEOAS (Hypermedia as the Engine of Application State) includes links in responses to guide clients:</p>
+<br>
+<pre><code>
+{
+
+  &quot;id&quot;: 123,
+
+  &quot;name&quot;: &quot;John Doe&quot;,
+
+  &quot;_links&quot;: {
+
+    &quot;self&quot;: { &quot;href&quot;: &quot;/users/123&quot; },
+
+    &quot;orders&quot;: { &quot;href&quot;: &quot;/users/123/orders&quot; }
+
+  }
+
+}
+
+</code></pre>
+<br>
+<p>While many APIs skip HATEOAS, it significantly improves discoverability and reduces the need for external documentation for navigating resource relationships.</p>
+<br>
+<h2> Authentication and Authorization</h2>
+<br>
+<p>Use industry-standard authentication mechanisms. Token-based auth (JWT) is the most common choice for REST APIs. Include tokens in the `Authorization` header:</p>
+<br>
+<pre><code>
+Authorization: Bearer &lt;token&gt;
+
+</code></pre>
+<br>
+<p>Use scopes or claims within the token to implement fine-grained authorization. Always use HTTPS in production to protect tokens and data in transit.</p>
+<br>
+<h2> Rate Limiting</h2>
+<br>
+<p>Protect your API from abuse by implementing rate limiting. Return rate limit information in response headers:</p>
+<br>
+<pre><code>
+X-RateLimit-Limit: 100
+
+X-RateLimit-Remaining: 42
+
+X-RateLimit-Reset: 1640995200
+
+</code></pre>
+<br>
+<p>When a client exceeds the limit, return `429 Too Many Requests` with a `Retry-After` header.</p>
+<br>
+<h2> Documentation</h2>
+<br>
+<p>An API is only as good as its documentation. Use OpenAPI/Swagger to document your API. Generate interactive documentation that allows developers to test endpoints directly from the browser. Keep your documentation in sync with your implementation by using a code-first approach where the OpenAPI spec is generated from annotations in your code.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Great REST API design comes down to consistency and following conventions. Use proper HTTP methods and status codes, name resources with plural nouns, version your API, and document it thoroughly. When in doubt, follow the principle of least surprise -- your API should work the way developers expect it to.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="kubernetes-services-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Kubernetes Security Best Practices">
+    <meta property="og:description" content="Essential Kubernetes security practices for pod security, network policies, RBAC, and secrets management.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/kubernetes-services-security.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kubernetes Security Best Practices">
+    <meta name="twitter:description" content="Essential Kubernetes security practices for pod security, network policies, RBAC, and secrets management.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Kubernetes Security Best Practices — SourceHub</title>
+    <meta name="description" content="Essential Kubernetes security practices for pod security, network policies, RBAC, and secrets management.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/kubernetes-services-security.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/kubernetes-services-security.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Kubernetes Security Best Practices",
+      "description": "Essential Kubernetes security practices for pod security, network policies, RBAC, and secrets management.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1448",
+      "keywords": "Technology, Programming, DevOps",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/kubernetes-services-security.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Kubernetes Security Best Practices"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Kubernetes Security Best Practices
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">Programming</span>
+        <span class="tag-cat">DevOps</span></div>
+      <h1 class="article-title">Kubernetes Security Best Practices</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Kubernetes security is complex because the attack surface spans multiple layers: containers, clusters, networks, and cloud infrastructure. This guide covers the most impactful security practices for production Kubernetes deployments.</p>
+<br>
+<h2> Pod Security Standards</h2>
+<br>
+<p>Kubernetes deprecated PodSecurityPolicies in favor of Pod Security Admission (PSA), which enforces three security levels:</p>
+<br>
+<li>**Privileged**: No restrictions (for system-level pods).</li>
+<li>**Baseline**: Prevents known privilege escalations.</li>
+<li>**Restricted**: Strong pod hardening.</li>
+<br>
+<p>Apply PSA via namespace labels:</p>
+<br>
+<pre><code>
+apiVersion: v1
+
+kind: Namespace
+
+metadata:
+
+  name: production
+
+  labels:
+
+    pod-security.kubernetes.io/enforce: restricted
+
+    pod-security.kubernetes.io/enforce-version: latest
+
+    pod-security.kubernetes.io/audit: restricted
+
+</code></pre>
+<br>
+<p>The `restricted` level enforces that containers cannot run as root, cannot use host networking, and cannot mount arbitrary host paths.</p>
+<br>
+<h2> Running Containers as Non-Root</h2>
+<br>
+<p>Never run containers as root in production:</p>
+<br>
+<pre><code>
+apiVersion: v1
+
+kind: Pod
+
+metadata:
+
+  name: secure-app
+
+spec:
+
+  securityContext:
+
+    runAsNonRoot: true
+
+    runAsUser: 1000
+
+    runAsGroup: 3000
+
+    fsGroup: 2000
+
+    seccompProfile:
+
+      type: RuntimeDefault
+
+  containers:
+
+  - name: app
+
+    image: myapp:1.0.0
+
+    securityContext:
+
+      allowPrivilegeEscalation: false
+
+      capabilities:
+
+        drop: [&quot;ALL&quot;]
+
+      readOnlyRootFilesystem: true
+
+</code></pre>
+<br>
+<p>Use `seccompProfile: RuntimeDefault` to apply the container runtime's default seccomp profile. Drop all capabilities and only add back what is absolutely necessary.</p>
+<br>
+<h2> Network Policies</h2>
+<br>
+<p>By default, all pods can communicate with each other. Network policies restrict this:</p>
+<br>
+<pre><code>
+apiVersion: networking.k8s.io/v1
+
+kind: NetworkPolicy
+
+metadata:
+
+  name: api-network-policy
+
+  namespace: production
+
+spec:
+
+  podSelector:
+
+    matchLabels:
+
+      app: api
+
+  policyTypes:
+
+  - Ingress
+
+  - Egress
+
+  ingress:
+
+  - from:
+
+    - podSelector:
+
+        matchLabels:
+
+          app: frontend
+
+    ports:
+
+    - port: 3000
+
+  egress:
+
+  - to:
+
+    - podSelector:
+
+        matchLabels:
+
+          app: database
+
+    ports:
+
+    - port: 5432
+
+</code></pre>
+<br>
+<p>Start with a deny-all policy and add allow rules incrementally. Use namespace isolation for multi-tenant clusters.</p>
+<br>
+<h2> Role-Based Access Control (RBAC)</h2>
+<br>
+<p>Apply the principle of least privilege to all service accounts:</p>
+<br>
+<pre><code>
+apiVersion: v1
+
+kind: ServiceAccount
+
+metadata:
+
+  name: app-sa
+
+  namespace: production
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+
+kind: Role
+
+metadata:
+
+  namespace: production
+
+  name: app-role
+
+rules:
+
+- apiGroups: [&quot;&quot;]
+
+  resources: [&quot;pods&quot;]
+
+  verbs: [&quot;get&quot;, &quot;list&quot;, &quot;watch&quot;]
+
+- apiGroups: [&quot;&quot;]
+
+  resources: [&quot;configmaps&quot;]
+
+  verbs: [&quot;get&quot;]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+
+kind: RoleBinding
+
+metadata:
+
+  namespace: production
+
+  name: app-role-binding
+
+subjects:
+
+- kind: ServiceAccount
+
+  name: app-sa
+
+  namespace: production
+
+roleRef:
+
+  kind: Role
+
+  name: app-role
+
+  apiGroup: rbac.authorization.k8s.io
+
+</code></pre>
+<br>
+<p>Service accounts should only have permissions required for their specific function. Use `Role` for namespace-scoped access and `ClusterRole` only for cluster-wide resources.</p>
+<br>
+<h2> Secrets Management</h2>
+<br>
+<p>Kubernetes Secrets are base64-encoded, not encrypted by default. Enable encryption at rest:</p>
+<br>
+<pre><code>
+# Create encryption config
+
+cat &gt; encryption-config.yaml &lt;&lt;EOF
+
+apiVersion: apiserver.config.k8s.io/v1
+
+kind: EncryptionConfiguration
+
+resources:
+
+  - resources:
+
+      - secrets
+
+    providers:
+
+      - kms:
+
+          name: myKMS
+
+          endpoint: unix:///var/run/kmsplugin/socket.sock
+
+      - aescbc:
+
+          keys:
+
+            - name: key1
+
+              secret: $(openssl rand -base64 32)
+
+EOF
+
+</code></pre>
+<br>
+<p>For production, use external secrets management:</p>
+<br>
+<pre><code>
+apiVersion: external-secrets.io/v1beta1
+
+kind: ExternalSecret
+
+metadata:
+
+  name: db-credentials
+
+spec:
+
+  secretStoreRef:
+
+    name: aws-secret-store
+
+    kind: SecretStore
+
+  target:
+
+    name: db-credentials
+
+  data:
+
+  - secretKey: password
+
+    remoteRef:
+
+      key: production/db/password
+
+</code></pre>
+<br>
+<p>External Secrets Operator syncs secrets from AWS Secrets Manager, GCP Secret Manager, or HashiCorp Vault into Kubernetes Secrets.</p>
+<br>
+<h2> Image Security</h2>
+<br>
+<p>Only run images from trusted registries:</p>
+<br>
+<pre><code>
+apiVersion: v1
+
+kind: Pod
+
+spec:
+
+  containers:
+
+  - name: app
+
+    image: registry.example.com/myapp:1.0.0
+
+    imagePullPolicy: Always
+
+</code></pre>
+<br>
+<p>Use image scanning in CI/CD:</p>
+<br>
+<pre><code>
+# Scan container images before deployment
+
+trivy image registry.example.com/myapp:1.0.0
+
+</code></pre>
+<br>
+<p>Configure admission controllers to reject images with critical vulnerabilities.</p>
+<br>
+<h2> Resource Limits</h2>
+<br>
+<p>Set resource limits on every container to prevent resource starvation:</p>
+<br>
+<pre><code>
+resources:
+
+  requests:
+
+    memory: &quot;256Mi&quot;
+
+    cpu: &quot;250m&quot;
+
+  limits:
+
+    memory: &quot;512Mi&quot;
+
+    cpu: &quot;500m&quot;
+
+</code></pre>
+<br>
+<p>CPU limits throttle excessive usage, while memory limits terminate containers that exceed their allocation.</p>
+<br>
+<h2> Runtime Security</h2>
+<br>
+<p>Use Falco for runtime threat detection:</p>
+<br>
+<pre><code>
+helm install falco falcosecurity/falco \
+
+  --set falco.driver.kind=modern_bpf
+
+</code></pre>
+<br>
+<p>Falco detects anomalous behavior: shell in a container, unexpected file system access, suspicious network connections. It can trigger alerts or kill offending pods.</p>
+<br>
+<h2> Audit Logging</h2>
+<br>
+<p>Enable Kubernetes audit logging:</p>
+<br>
+<pre><code>
+# kube-apiserver configuration
+
+apiServer:
+
+  audit:
+
+    enabled: true
+
+    logPath: /var/log/kubernetes/audit.log
+
+    policy:
+
+      rules:
+
+        - level: RequestResponse
+
+          resources:
+
+            - group: &quot;&quot;
+
+              resources: [&quot;secrets&quot;]
+
+        - level: Metadata
+
+          resources:
+
+            - group: &quot;&quot;
+
+              resources: [&quot;pods&quot;, &quot;deployments&quot;]
+
+</code></pre>
+<br>
+<p>Ship audit logs to a SIEM for analysis. Monitor for unauthorized API access attempts.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Kubernetes security requires defense in depth: Pod Security Admission for pod hardening, network policies for segmentation, RBAC for access control, external secrets for sensitive data, and runtime security for threat detection. Start with pod security -- run containers as non-root, drop capabilities, and enable seccomp. Add network policies for isolation. Finally, implement RBAC and secrets management. Most Kubernetes compromises exploit misconfigurations rather than software vulnerabilities -- hardening these configurations is the highest-impact security investment.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

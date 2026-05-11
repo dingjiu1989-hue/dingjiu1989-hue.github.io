@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="event-sourcing">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Event Sourcing Pattern">
+    <meta property="og:description" content="Learn the event sourcing pattern for capturing state changes as immutable events.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/event-sourcing.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Event Sourcing Pattern">
+    <meta name="twitter:description" content="Learn the event sourcing pattern for capturing state changes as immutable events.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Event Sourcing Pattern — SourceHub</title>
+    <meta name="description" content="Learn the event sourcing pattern for capturing state changes as immutable events.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/event-sourcing.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/event-sourcing.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Event Sourcing Pattern",
+      "description": "Learn the event sourcing pattern for capturing state changes as immutable events.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1102",
+      "keywords": "Architecture, System Design",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/event-sourcing.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Event Sourcing Pattern"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Event Sourcing Pattern
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span></div>
+      <h1 class="article-title">Event Sourcing Pattern</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Event sourcing is an architectural pattern where state changes are stored as a sequence of immutable events, rather than overwriting the current state. Instead of storing "what the current balance is," you store every "account credited" and "account debited" event. This article explores the pattern, its benefits, trade-offs, and when to use it.</p>
+<br>
+<h2> How Event Sourcing Works</h2>
+<br>
+<p>In a traditional CRUD approach, you store the current state of an entity. When a user updates their profile, you issue an UPDATE statement that overwrites the previous values. The history of changes is lost.</p>
+<br>
+<p>With event sourcing, every change to the application state is captured as an event object:</p>
+<br>
+<pre><code>
+AccountCreated { id: 123, owner: &quot;Alice&quot;, initial_balance: 0 }
+
+MoneyDeposited { account_id: 123, amount: 500, timestamp: 2026-01-15T10:00:00Z }
+
+MoneyWithdrawn { account_id: 123, amount: 100, timestamp: 2026-01-16T14:30:00Z }
+
+</code></pre>
+<br>
+<p>The current state is derived by replaying all events in order. To get Alice's balance, you replay the events: start at 0, add 500, subtract 100, resulting in 400. The event store is the single source of truth.</p>
+<br>
+<h2> The Event Store</h2>
+<br>
+<p>The event store is the central component. It is an append-only database that stores events sequentially. Each event has:</p>
+<br>
+<li>An aggregate ID (which entity does this belong to?)</li>
+<li>A sequence number or timestamp (what order did things happen?)</li>
+<li>Event type (what happened?)</li>
+<li>Event payload (the data associated with the change)</li>
+<br>
+<p>Most implementations use a dedicated event store database (like EventStoreDB) or a regular database used in a special way. PostgreSQL, for example, works well as an event store when combined with proper indexing.</p>
+<br>
+<h2> Benefits of Event Sourcing</h2>
+<br>
+<p>**Complete Audit Trail.** Every state change is recorded permanently. This is invaluable for regulated industries like finance, healthcare, and insurance. You can always answer the question "who changed what and when?"</p>
+<br>
+<p>**Temporal Queries.** You can reconstruct the state of the system at any point in time. Need to know what the user's profile looked like on January 1st? Just replay events up to that date.</p>
+<br>
+<p>**Debugging and Analysis.** Events capture intent, not just the resulting state. This makes debugging production issues significantly easier. You can replay events in a development environment to reproduce bugs.</p>
+<br>
+<p>**Flexibility.** Multiple read models can be derived from the same event stream. Your reporting system can consume the same events as your customer-facing UI, each projecting the data differently.</p>
+<br>
+<h2> Challenges and Trade-offs</h2>
+<br>
+<p>Event sourcing is not free. The biggest challenges include:</p>
+<br>
+<p>**Complexity.** Event sourcing introduces concepts (events, aggregates, projections, snapshots) that are unfamiliar to many developers. The learning curve is steep.</p>
+<br>
+<p>**Event Schema Evolution.** Events are immutable, but their schemas will change over time. You need strategies for handling events that were created with old schemas. Common approaches include upcasting (transforming old events to new formats on read) or versioned event types.</p>
+<br>
+<p>**Storage Requirements.** Since you never delete data, storage grows continuously. Regular snapshotting helps -- you store the current state at a point in time, then only replay events after the snapshot.</p>
+<br>
+<p>**Eventual Consistency.** Read models (projections) are typically updated asynchronously. Your system must tolerate temporary inconsistencies between the event store and the read views.</p>
+<br>
+<h2> When to Use Event Sourcing</h2>
+<br>
+<p>Event sourcing excels in specific scenarios:</p>
+<br>
+<li>**Auditing and compliance** are critical requirements.</li>
+<li>**Temporal queries** are needed ("show me the state as of last Tuesday").</li>
+<li>**Complex business logic** that benefits from understanding the sequence of events.</li>
+<li>**Multiple read models** consuming the same data in different ways.</li>
+<br>
+<p>Avoid event sourcing for simple CRUD applications where a traditional database works perfectly well. The added complexity is rarely justified without a concrete need for the benefits above.</p>
+<br>
+<h2> CQRS and Event Sourcing</h2>
+<br>
+<p>Event sourcing is frequently paired with CQRS (Command Query Responsibility Segregation). Commands write events to the event store, while separate read models (projections) consume those events to build optimized query structures. This combination gives you the best of both worlds: reliable writes through events and fast reads through purpose-built projections.</p>
+<br>
+<h2> Practical Implementation Tips</h2>
+<br>
+<p>Start small. Implement event sourcing for one bounded context or aggregate root in your system, not the entire application. Use an existing event store library rather than building your own. Take snapshots regularly (every N events) to keep replay times manageable. And invest in monitoring -- event stores behave differently from traditional databases under load.</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Event sourcing is powerful but complex. Use it when you need a complete audit trail, temporal queries, or flexible read models. Pair it with CQRS for production systems. Be prepared for the operational complexity, and start with a limited scope to build experience before expanding.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

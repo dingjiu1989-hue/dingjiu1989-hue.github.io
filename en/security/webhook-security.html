@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="webhook-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Webhook Security Best Practices">
+    <meta property="og:description" content="Secure your webhook endpoints with signature verification, replay protection, IP allowlisting, idempotency, and payload validation.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/webhook-security.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Webhook Security Best Practices">
+    <meta name="twitter:description" content="Secure your webhook endpoints with signature verification, replay protection, IP allowlisting, idempotency, and payload validation.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Webhook Security Best Practices — SourceHub</title>
+    <meta name="description" content="Secure your webhook endpoints with signature verification, replay protection, IP allowlisting, idempotency, and payload validation.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/webhook-security.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/webhook-security.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Webhook Security Best Practices",
+      "description": "Secure your webhook endpoints with signature verification, replay protection, IP allowlisting, idempotency, and payload validation.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "1796",
+      "keywords": "Security, Cybersecurity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/webhook-security.html"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Webhook Security Best Practices"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Webhook Security Best Practices
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">Cybersecurity</span></div>
+      <h1 class="article-title">Webhook Security Best Practices</h1>
+      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-body"><h2> Why Webhook Security Matters</h2>
+<br>
+<p>Webhooks are HTTP callbacks that allow services to push real-time events to your application. Unlike APIs where you initiate the request, webhooks are delivered to a public endpoint that anyone with the URL can call. Without proper security, an attacker can replay webhook events, send fake event data, or probe your internal infrastructure.</p>
+<br>
+<h2> Threat Model</h2>
+<br>
+<p>| Threat | Impact | Likelihood |</p>
+<p>|--------|--------|------------|</p>
+<p>| Fake webhook events | Application processes false data | High |</p>
+<p>| Replay attacks | Duplicate processing of legitimate events | Medium |</p>
+<p>| Payload tampering | Corrupted data processed as valid | Medium |</p>
+<p>| Reconnaissance | Attacker probes internal network | Low |</p>
+<p>| DDoS via webhooks | Service overload from fake events | Medium |</p>
+<br>
+<h2> Defense 1: Signature Verification</h2>
+<br>
+<p>Every webhook provider signs their payloads. Your endpoint must verify this signature before processing.</p>
+<br>
+<h3>Stripe-Style Signatures</h3>
+<br>
+<pre><code>
+import hmac
+
+import hashlib
+
+
+
+def verify_stripe_signature(payload, sig_header, secret):
+
+    &quot;&quot;&quot;Verify Stripe webhook signature.&quot;&quot;&quot;
+
+    # Signature format: t=timestamp,v1=signature
+
+    parts = dict(item.split(&#x27;=&#x27;, 1) for item in sig_header.split(&#x27;,&#x27;))
+
+
+
+    if &#x27;v1&#x27; not in parts or &#x27;t&#x27; not in parts:
+
+        return False
+
+
+
+    timestamp = parts[&#x27;t&#x27;]
+
+    expected_sig = parts[&#x27;v1&#x27;]
+
+
+
+    # Prevent replay: signature must be within 5 minutes
+
+    if abs(int(timestamp) - time.time()) &gt; 300:
+
+        return False
+
+
+
+    # Compute expected signature
+
+    signed_payload = f&quot;{timestamp}.{payload}&quot;.encode()
+
+    computed_sig = hmac.new(
+
+        secret.encode(),
+
+        signed_payload,
+
+        hashlib.sha256
+
+    ).hexdigest()
+
+
+
+    # Constant-time comparison
+
+    return hmac.compare_digest(computed_sig, expected_sig)
+
+</code></pre>
+<br>
+<h3>GitHub-Style Signatures</h3>
+<br>
+<pre><code>
+const crypto = require(&#x27;crypto&#x27;);
+
+
+
+function verifyGitHubSignature(req, secret) {
+
+    const signature = req.headers[&#x27;x-hub-signature-256&#x27;];
+
+    if (!signature) return false;
+
+
+
+    const payload = JSON.stringify(req.body);
+
+    const computed = &#x27;sha256=&#x27; +
+
+        crypto.createHmac(&#x27;sha256&#x27;, secret)
+
+            .update(payload)
+
+            .digest(&#x27;hex&#x27;);
+
+
+
+    // Constant-time comparison
+
+    return crypto.timingSafeEqual(
+
+        Buffer.from(signature),
+
+        Buffer.from(computed)
+
+    );
+
+}
+
+
+
+// Express middleware
+
+app.post(&#x27;/webhooks/github&#x27;, express.raw({type: &#x27;application/json&#x27;}), (req, res) =&gt; {
+
+    if (!verifyGitHubSignature(req, process.env.GITHUB_WEBHOOK_SECRET)) {
+
+        return res.status(401).send(&#x27;Invalid signature&#x27;);
+
+    }
+
+    // Process webhook
+
+    res.status(200).send(&#x27;OK&#x27;);
+
+});
+
+</code></pre>
+<br>
+<h3>Generic Verification Middleware</h3>
+<br>
+<pre><code>
+from functools import wraps
+
+from flask import request, abort
+
+import hmac
+
+import hashlib
+
+
+
+def verify_webhook(secret):
+
+    &quot;&quot;&quot;Decorator to verify webhook signatures.&quot;&quot;&quot;
+
+    def decorator(f):
+
+        @wraps(f)
+
+        def decorated_function(*args, **kwargs):
+
+            payload = request.get_data()
+
+            received_sig = request.headers.get(&#x27;X-Webhook-Signature&#x27;)
+
+
+
+            if not received_sig:
+
+                abort(401, &#x27;Missing signature&#x27;)
+
+
+
+            computed_sig = hmac.new(
+
+                secret.encode(),
+
+                payload,
+
+                hashlib.sha256
+
+            ).hexdigest()
+
+
+
+            if not hmac.compare_digest(computed_sig, received_sig):
+
+                abort(401, &#x27;Invalid signature&#x27;)
+
+
+
+            return f(*args, **kwargs)
+
+        return decorated_function
+
+    return decorator
+
+
+
+@app.route(&#x27;/webhooks/custom&#x27;, methods=[&#x27;POST&#x27;])
+
+@verify_webhook(WEBHOOK_SECRET)
+
+def handle_webhook():
+
+    event = request.json
+
+    # Process the verified event
+
+    return &#x27;OK&#x27;, 200
+
+</code></pre>
+<br>
+<h2> Defense 2: Replay Protection</h2>
+<br>
+<h3>Timestamp-Based Prevention</h3>
+<br>
+<p>Include a timestamp in the signed payload and reject webhooks outside a time window:</p>
+<br>
+<pre><code>
+function verifyWithReplayPrevention(payload, signature, secret, toleranceMs = 300000) {
+
+    // Expected format: ts=1234567890,v1=sig_here
+
+    const parts = signature.split(&#x27;,&#x27;);
+
+    const tsPart = parts.find(p =&gt; p.startsWith(&#x27;ts=&#x27;));
+
+    const sigPart = parts.find(p =&gt; p.startsWith(&#x27;v1=&#x27;));
+
+
+
+    const timestamp = parseInt(tsPart.split(&#x27;=&#x27;)[1]);
+
+    const now = Date.now();
+
+
+
+    // Reject if outside tolerance window
+
+    if (Math.abs(now - timestamp) &gt; toleranceMs) {
+
+        throw new Error(&#x27;Webhook replay detected&#x27;);
+
+    }
+
+
+
+    // Verify signature includes timestamp
+
+    const signedContent = `${timestamp}.${JSON.stringify(payload)}`;
+
+    const expectedSig = crypto.createHmac(&#x27;sha256&#x27;, secret)
+
+        .update(signedContent)
+
+        .digest(&#x27;hex&#x27;);
+
+
+
+    return crypto.timingSafeEqual(
+
+        Buffer.from(expectedSig),
+
+        Buffer.from(sigPart.split(&#x27;=&#x27;)[1])
+
+    );
+
+}
+
+</code></pre>
+<br>
+<h3>Idempotency Keys</h3>
+<br>
+<p>Track processed webhook IDs to prevent duplicate processing:</p>
+<br>
+<pre><code>
+const processedEvents = new Set();
+
+
+
+app.post(&#x27;/webhooks/stripe&#x27;, async (req, res) =&gt; {
+
+    const eventId = req.headers[&#x27;stripe-signature&#x27;]
+
+        .split(&#x27;,&#x27;)
+
+        .find(p =&gt; p.startsWith(&#x27;t=&#x27;))
+
+        ?.split(&#x27;=&#x27;)[1];
+
+
+
+    if (processedEvents.has(eventId)) {
+
+        // Already processed, return success to avoid retries
+
+        return res.status(200).json({ status: &#x27;already_processed&#x27; });
+
+    }
+
+
+
+    // Verify and process
+
+    processedEvents.add(eventId);
+
+
+
+    // Clean old entries periodically
+
+    setTimeout(() =&gt; processedEvents.delete(eventId), 86400000);
+
+});
+
+</code></pre>
+<br>
+<h2> Defense 3: IP Allowlisting</h2>
+<br>
+<p>When possible, restrict webhook endpoints to known provider IPs:</p>
+<br>
+<pre><code>
+ALLOWED_IPS = {
+
+    &#x27;stripe&#x27;: [&#x27;3.18.12.63/32&#x27;, &#x27;3.130.192.231/32&#x27;],
+
+    &#x27;github&#x27;: [&#x27;192.30.252.0/22&#x27;, &#x27;185.199.108.0/22&#x27;],
+
+    &#x27;slack&#x27;: [&#x27;52.89.214.238/32&#x27;, &#x27;54.70.199.8/32&#x27;],
+
+}
+
+
+
+def ip_allowed(provider, request_ip):
+
+    import ipaddress
+
+    for cidr in ALLOWED_IPS.get(provider, []):
+
+        if ipaddress.ip_address(request_ip) in ipaddress.ip_network(cidr):
+
+            return True
+
+    return False
+
+
+
+@app.before_request
+
+def restrict_webhook_ips():
+
+    if request.path.startswith(&#x27;/webhooks/&#x27;):
+
+        provider = request.path.split(&#x27;/&#x27;)[2]
+
+        if not ip_allowed(provider, request.remote_addr):
+
+            abort(403, &#x27;IP not allowed&#x27;)
+
+</code></pre>
+<br>
+<h2> Defense 4: Payload Validation</h2>
+<br>
+<p>Validate the webhook payload schema before processing:</p>
+<br>
+<pre><code>
+from pydantic import BaseModel, ValidationError
+
+
+
+class GitHubPushEvent(BaseModel):
+
+    ref: str
+
+    repository: dict
+
+    commits: list
+
+    sender: dict
+
+    forced: bool = False
+
+
+
+def validate_webhook_payload(provider, payload):
+
+    validators = {
+
+        &#x27;github&#x27;: GitHubPushEvent,
+
+        &#x27;stripe&#x27;: StripeEvent,
+
+        &#x27;slack&#x27;: SlackEvent
+
+    }
+
+    validator = validators.get(provider)
+
+    if not validator:
+
+        return False
+
+    try:
+
+        validator(**payload)
+
+        return True
+
+    except ValidationError:
+
+        return False
+
+</code></pre>
+<br>
+<h2> Implementation Checklist</h2>
+<br>
+<p>| Security Control | Implementation | Priority |</p>
+<p>|-----------------|----------------|----------|</p>
+<p>| HMAC signature verification | Verify every webhook | Critical |</p>
+<p>| Replay protection | Timestamp + tolerance | Critical |</p>
+<p>| Idempotency | Track event IDs | High |</p>
+<p>| IP allowlisting | Restrict by provider CIDR | High |</p>
+<p>| Payload validation | Schema validation | High |</p>
+<p>| Rate limiting | Per-IP and per-provider | Medium |</p>
+<p>| HTTPS only | Reject HTTP | Critical |</p>
+<p>| Error handling | Generic error messages | Medium |</p>
+<br>
+<h2> Summary</h2>
+<br>
+<p>Webhook endpoints are publicly accessible by design, making them an attractive target. Always verify payload signatures using HMAC-SHA256, implement replay protection with timestamps, track idempotency keys to prevent duplicate processing, validate payload structure, and restrict by IP when possible. These controls turn a publicly accessible endpoint into a secure integration point that only processes legitimate webhook events.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>
