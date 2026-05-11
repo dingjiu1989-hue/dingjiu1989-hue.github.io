@@ -18,18 +18,15 @@ jobs:
       - name: Syndicate to Dev.to
         env:
           DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
-        run: python3 scripts/syndicate_devto.py
+        run: |
+          echo "$DEVTO_API_KEY" > .devto-key
+          python3 scripts/syndicate_devto.py
 
       - name: Syndicate to Hashnode
         env:
           HASHNODE_API_KEY: ${{ secrets.HASHNODE_API_KEY }}
           HASHNODE_PUBLICATION_ID: ${{ secrets.HASHNODE_PUBLICATION_ID }}
         run: python3 scripts/syndicate_hashnode.py
-
-      - name: Syndicate to Medium
-        env:
-          MEDIUM_TOKEN: ${{ secrets.MEDIUM_TOKEN }}
-        run: python3 scripts/syndicate_medium.py || true  # Medium API is deprecated, graceful failure
 
       - name: Build cross-platform identity (sameAs)
         env:
