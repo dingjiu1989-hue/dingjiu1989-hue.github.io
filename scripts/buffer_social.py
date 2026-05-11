@@ -40,6 +40,10 @@ def buffer_graphql(query, variables=None):
     req = Request(BUFFER_URL, data=body, headers={
         'Content-Type': 'application/json',
         'Authorization': f'Bearer {BUFFER_KEY}',
+        'User-Agent': 'Mozilla/5.0 (compatible; GitHubActions/1.0)',
+        'Accept': 'application/json',
+        'Origin': 'https://account.buffer.com',
+        'Referer': 'https://account.buffer.com/',
     })
     try:
         resp = urlopen(req, timeout=15)
