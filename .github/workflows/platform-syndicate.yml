@@ -5,6 +5,9 @@ on:
     - cron: '17 */3 * * *'  # Every 3 hours at :17 (avoids :00/:30 bursts)
   workflow_dispatch:  # Manual trigger
 
+permissions:
+  contents: write
+
 jobs:
   syndicate:
     runs-on: ubuntu-latest
@@ -52,5 +55,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git add data/hashnode-published.json data/sameas-urls.json
           git diff --staged --quiet || (git commit -m "chore: update syndication tracking" && git push)
