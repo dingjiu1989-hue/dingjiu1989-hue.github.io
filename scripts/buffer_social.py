@@ -129,7 +129,7 @@ def main():
     if mode == 'all':
         to_share = articles
     else:
-        to_share = [a for a in articles if a['slug'] not in shared_before]
+        to_share = [a for a in articles if not shared_before.get(a['slug'], {}).get('ok', False)]
 
     if not to_share:
         print('No new articles to share via Buffer.')
