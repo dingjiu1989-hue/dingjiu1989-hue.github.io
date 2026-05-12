@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="dns-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="DNS Security">
+    <meta property="og:description" content="Comprehensive guide to DNS security including DNSSEC, DNS over HTTPS/TLS, split-horizon DNS, filtering strategies, and common attack vectors.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/dns-security.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DNS Security">
+    <meta name="twitter:description" content="Comprehensive guide to DNS security including DNSSEC, DNS over HTTPS/TLS, split-horizon DNS, filtering strategies, and common attack vectors.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>DNS Security — SourceHub</title>
+    <meta name="description" content="Comprehensive guide to DNS security including DNSSEC, DNS over HTTPS/TLS, split-horizon DNS, filtering strategies, and common attack vectors.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/dns-security.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/dns-security.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "DNS Security",
+      "description": "Comprehensive guide to DNS security including DNSSEC, DNS over HTTPS/TLS, split-horizon DNS, filtering strategies, and common attack vectors.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1194",
+      "keywords": "Security, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/dns-security.html"},
+      "articleBody": "DNS Security Introduction The Domain Name System (DNS) is a foundational internet protocol that translates human-readable domain names to IP addresses. Despite its critical role, DNS was designed without security considerations, making it a prime target for attacks including cache poisoning, tunneling, and DDoS amplification. DNSSEC DNS Security Extensions (DNSSEC) adds cryptographic signatures to DNS records, ensuring authenticity and integrity. It protects against cache poisoning attacks where an attacker injects forged DNS responses. DNSSEC uses a chain of trust starting from the DNS root zone. Each zone signs its records with a private key, and resolvers verify signatures using corresponding public keys stored as DNSKEY records. # Checking DNSSEC validation with dig dig +dnssec example.com # Verify DNSSEC chain delv example.com # Check if a domain is DNSSEC-signed dig example.com DNSKEY Key DNSSEC record types: * **RRSIG**: Resource Record Signature \u2014 cryptographic signature for a record set * **DNSKEY**: Public key used for signature verification * **DS**: Delegation Signer \u2014 hash of the child zone's DNSKEY, stored in the parent zone * **NSEC/NSEC3**: Next Secure \u2014 provides authenticated denial of existence # BIND DNSSEC configuration example zone \"example.com\" { type master; file \"/etc/bind/db.example.com\"; auto-dnssec maintain; inline-signing yes; key-directory \"/etc/bind/keys\"; }; DNS over HTTPS and DNS over TLS Traditional DNS queries are sent in cleartext over UDP, making them visible to network observers and susceptible to manipulation. DNS over HTTPS (DoH) and DNS over TLS (DoT) encrypt queries. * **DoT** (RFC 7858): DNS over a dedicated TLS connection on port 853 * **DoH** (RFC 8484): DNS over HTTP/2 or HTTP/3 on port 443, blending with HTTPS traffic # Nginx DoH proxy configuration location /dns-query { proxy_pass http://127.0.0.1:8053; proxy_set_header Host $host; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; } # unbound configuration with DoT forwarder forward-zone: name: \".\" forward-tls-upstream: yes forward-addr: 1.1.1.1@853#cloudflare-dns.com forward-addr: 8.8.8.8@853#dns.google Split-Horizon DNS Split-horizon DNS returns different responses based on the requester's network origin. Internal users receive private IP addresses while external users receive public addresses. # BIND split-horizon configuration view \"internal\" { match-clients { 10.0.0.0/8; 172.16.0.0/12; 192.168.0.0/16; }; zone \"example.com\" { type master; file \"/etc/bind/db.example.com.internal\"; }; }; view \"external\" { match-clients { any; }; zone \"example.com\" { type master; file \"/etc/bind/db.example.com.external\"; }; }; DNS Filtering and Threat Blocking DNS filtering blocks resolution of known malicious domains. Modern solutions integrate threat intelligence feeds to dynamically block malware, phishing, and command-and-control (C2) domains. # Simple DNS filter using dnspython import dns.resolver THREAT_FEED = set() def load_threat_feed(feed_url): # Download and parse threat intelligence feed response = requests.get(feed_url) for domain in response.text.splitlines(): THREAT_FEED.add(domain.strip().lower()) def safe_resolve(domain, resolver): if domain.lower() in THREAT_FEED: return None # Block resolution return resolver.resolve(domain, 'A') Common DNS Attacks * **Cache Poisoning**: Attacker injects forged records into a resolver's cache. Mitigated by DNSSEC and source port randomization. 2\\. **DNS Tunneling**: Encodes data in DNS queries to exfiltrate data or bypass network controls. Detected via traffic analysis of unusual query patterns. 3\\. **DNS Amplification DDoS**: Attacker sends small queries with spoofed source IPs; responses can be 50x larger. Mitigated by response rate limiting (RRL) and BCP38 filtering. 4\\. **NXDOMAIN Attacks**: High volume of queries for non-existent domains exhausts resolver resources. # Response Rate Limiting in BIND options { rate-limit { responses-per-second 5; window 5; log-only yes; }; }; Conclusion Securing DNS requires a layered approach: DNSSEC for integrity, encrypted transports for confidentiality, split-horizon for network segmentation, and threat intelligence for proactive blocking. Regular monitoring and logging of DNS traffic is essential for detecting anomalous behavior indicative of compromise."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "DNS Security"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › DNS Security
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">DNS Security</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>DNS Security</h1>
+<br>
+<p>Introduction   </p>
+<p>The Domain Name System (DNS) is a foundational internet protocol that translates human-readable domain names to IP addresses. Despite its critical role, DNS was designed without security considerations, making it a prime target for attacks including cache poisoning, tunneling, and DDoS amplification.   </p>
+<p>DNSSEC   </p>
+<p>DNS Security Extensions (DNSSEC) adds cryptographic signatures to DNS records, ensuring authenticity and integrity. It protects against cache poisoning attacks where an attacker injects forged DNS responses.   </p>
+<p>DNSSEC uses a chain of trust starting from the DNS root zone. Each zone signs its records with a private key, and resolvers verify signatures using corresponding public keys stored as DNSKEY records.   </p>
+<br>
+<br>
+<br>
+<p>    # Checking DNSSEC validation with dig</p>
+<br>
+<p>    dig +dnssec example.com</p>
+<br>
+<br>
+<br>
+<p>    # Verify DNSSEC chain</p>
+<br>
+<p>    delv example.com</p>
+<br>
+<br>
+<br>
+<p>    # Check if a domain is DNSSEC-signed</p>
+<br>
+<p>    dig example.com DNSKEY</p>
+<br>
+<br>
+<br>
+<br>
+<p>Key DNSSEC record types:</p>
+<p>* **RRSIG**: Resource Record Signature — cryptographic signature for a record set</p>
+<p>* **DNSKEY**: Public key used for signature verification</p>
+<p>* **DS**: Delegation Signer — hash of the child zone's DNSKEY, stored in the parent zone</p>
+<p>* **NSEC/NSEC3**: Next Secure — provides authenticated denial of existence</p>
+<br>
+<br>
+<br>
+<br>
+<p>    # BIND DNSSEC configuration example</p>
+<br>
+<p>    zone "example.com" {</p>
+<br>
+<p>        type master;</p>
+<br>
+<p>        file "/etc/bind/db.example.com";</p>
+<br>
+<p>        auto-dnssec maintain;</p>
+<br>
+<p>        inline-signing yes;</p>
+<br>
+<p>        key-directory "/etc/bind/keys";</p>
+<br>
+<p>    };</p>
+<br>
+<br>
+<br>
+<br>
+<p>DNS over HTTPS and DNS over TLS   </p>
+<p>Traditional DNS queries are sent in cleartext over UDP, making them visible to network observers and susceptible to manipulation. DNS over HTTPS (DoH) and DNS over TLS (DoT) encrypt queries.   </p>
+<br>
+<p>* **DoT** (RFC 7858): DNS over a dedicated TLS connection on port 853</p>
+<p>* **DoH** (RFC 8484): DNS over HTTP/2 or HTTP/3 on port 443, blending with HTTPS traffic</p>
+<br>
+<br>
+<br>
+<br>
+<p>    # Nginx DoH proxy configuration</p>
+<br>
+<p>    location /dns-query {</p>
+<br>
+<p>        proxy_pass http://127.0.0.1:8053;</p>
+<br>
+<p>        proxy_set_header Host $host;</p>
+<br>
+<p>        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # unbound configuration with DoT forwarder</p>
+<br>
+<p>    forward-zone:</p>
+<br>
+<p>        name: "."</p>
+<br>
+<p>        forward-tls-upstream: yes</p>
+<br>
+<p>        forward-addr: 1.1.1.1@853#cloudflare-dns.com</p>
+<br>
+<p>        forward-addr: 8.8.8.8@853#dns.google</p>
+<br>
+<br>
+<br>
+<br>
+<p>Split-Horizon DNS   </p>
+<p>Split-horizon DNS returns different responses based on the requester's network origin. Internal users receive private IP addresses while external users receive public addresses.   </p>
+<br>
+<br>
+<br>
+<p>    # BIND split-horizon configuration</p>
+<br>
+<p>    view "internal" {</p>
+<br>
+<p>        match-clients { 10.0.0.0/8; 172.16.0.0/12; 192.168.0.0/16; };</p>
+<br>
+<p>        zone "example.com" {</p>
+<br>
+<p>            type master;</p>
+<br>
+<p>            file "/etc/bind/db.example.com.internal";</p>
+<br>
+<p>        };</p>
+<br>
+<p>    };</p>
+<br>
+<br>
+<br>
+<p>    view "external" {</p>
+<br>
+<p>        match-clients { any; };</p>
+<br>
+<p>        zone "example.com" {</p>
+<br>
+<p>            type master;</p>
+<br>
+<p>            file "/etc/bind/db.example.com.external";</p>
+<br>
+<p>        };</p>
+<br>
+<p>    };</p>
+<br>
+<br>
+<br>
+<br>
+<p>DNS Filtering and Threat Blocking   </p>
+<p>DNS filtering blocks resolution of known malicious domains. Modern solutions integrate threat intelligence feeds to dynamically block malware, phishing, and command-and-control (C2) domains.   </p>
+<br>
+<br>
+<br>
+<p>    # Simple DNS filter using dnspython</p>
+<br>
+<p>    import dns.resolver</p>
+<br>
+<br>
+<br>
+<p>    THREAT_FEED = set()</p>
+<br>
+<br>
+<br>
+<p>    def load_threat_feed(feed_url):</p>
+<br>
+<p>        # Download and parse threat intelligence feed</p>
+<br>
+<p>        response = requests.get(feed_url)</p>
+<br>
+<p>        for domain in response.text.splitlines():</p>
+<br>
+<p>            THREAT_FEED.add(domain.strip().lower())</p>
+<br>
+<br>
+<br>
+<p>    def safe_resolve(domain, resolver):</p>
+<br>
+<p>        if domain.lower() in THREAT_FEED:</p>
+<br>
+<p>            return None  # Block resolution</p>
+<br>
+<p>        return resolver.resolve(domain, 'A')</p>
+<br>
+<br>
+<br>
+<br>
+<p>Common DNS Attacks   </p>
+<br>
+<p>* **Cache Poisoning**: Attacker injects forged records into a resolver's cache. Mitigated by DNSSEC and source port randomization.</p>
+<p>2\. **DNS Tunneling**: Encodes data in DNS queries to exfiltrate data or bypass network controls. Detected via traffic analysis of unusual query patterns. 3\. **DNS Amplification DDoS**: Attacker sends small queries with spoofed source IPs; responses can be 50x larger. Mitigated by response rate limiting (RRL) and BCP38 filtering. 4\. **NXDOMAIN Attacks**: High volume of queries for non-existent domains exhausts resolver resources.   </p>
+<br>
+<br>
+<br>
+<p>    # Response Rate Limiting in BIND</p>
+<br>
+<p>    options {</p>
+<br>
+<p>        rate-limit {</p>
+<br>
+<p>            responses-per-second 5;</p>
+<br>
+<p>            window 5;</p>
+<br>
+<p>            log-only yes;</p>
+<br>
+<p>        };</p>
+<br>
+<p>    };</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
+<p>Securing DNS requires a layered approach: DNSSEC for integrity, encrypted transports for confidentiality, split-horizon for network segmentation, and threat intelligence for proactive blocking. Regular monitoring and logging of DNS traffic is essential for detecting anomalous behavior indicative of compromise.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

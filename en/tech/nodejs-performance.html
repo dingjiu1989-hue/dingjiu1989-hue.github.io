@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="nodejs-performance">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Node.js Performance Optimization Guide">
+    <meta property="og:description" content="Optimize Node.js applications: profiling, memory management, event loop optimization, and production tuning.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/nodejs-performance.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Node.js Performance Optimization Guide">
+    <meta name="twitter:description" content="Optimize Node.js applications: profiling, memory management, event loop optimization, and production tuning.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Node.js Performance Optimization Guide — SourceHub</title>
+    <meta name="description" content="Optimize Node.js applications: profiling, memory management, event loop optimization, and production tuning.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/nodejs-performance.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/nodejs-performance.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Node.js Performance Optimization Guide",
+      "description": "Optimize Node.js applications: profiling, memory management, event loop optimization, and production tuning.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "517",
+      "keywords": "Technology, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/nodejs-performance.html"},
+      "articleBody": "Node.js Performance Optimization Guide Node.js powers high-throughput web applications, but performance requires understanding its single-threaded event loop and non-blocking I/O model. Event Loop Fundamentals The event loop processes callbacks in phases: timers, I/O callbacks, idle/prepare, poll, check (setImmediate), and close callbacks. Each phase has a FIFO queue of callbacks. Blocking any phase delays all subsequent callbacks. Avoid blocking the event loop. CPU-intensive operations (JSON parsing, cryptography, template rendering) block all other requests. Offload CPU work to Worker Threads, child processes, or dedicated microservices. Profiling Use the built-in --prof flag for V8 CPU profiling. Generate flame graphs with --prof-process. Node.js --inspect enables Chrome DevTools profiling with heap snapshots and CPU profiles. Clinic.js provides visualization for event loop lag, garbage collection, and heap growth. Use autocannon or wrk for load testing. Profile in production-like environments\u2014performance characteristics differ between development and production. Memory Management Monitor memory with process.memoryUsage(). Watch for heap growth between garbage collection cycles. Use heap snapshots (node --inspect, then Memory tab) to identify memory leaks. Common leak sources: global variables, event listeners not removed, closures retaining references, and cache without size limits. Use the --max-old-space-size flag to limit heap size and detect leaks earlier via OOM crashes. Async Performance Use native Promises instead of callback patterns. Native Promises are optimized in V8 and outperform bluebird in modern Node.js versions. Use async/await for readability without performance cost. Avoid mixing promise styles. Use util.promisify for callback-based APIs. Limit concurrent async operations with p-limit or similar. Unhandled promise rejections crash Node.js in recent versions\u2014handle all promise rejections. Production Tuning Set NODE_ENV=production for framework optimizations. Configure max-old-space-size to 75% of available memory. Use clustering (cluster module) or PM2 for multi-core utilization. Implement graceful shutdown with SIGTERM handling. Monitor event loop lag (>40ms indicates overload). Use the proses monitoring module for Node.js-specific metrics. Set up GC metrics monitoring\u2014frequent GC cycles indicate memory pressure."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Node.js Performance Optimization Guide"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Node.js Performance Optimization Guide
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Node.js Performance Optimization Guide</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Node.js Performance Optimization Guide</h1>
+<p>Node.js powers high-throughput web applications, but performance requires understanding its single-threaded event loop and non-blocking I/O model.</p>
+<br>
+<h2> Event Loop Fundamentals</h2>
+<br>
+<p>The event loop processes callbacks in phases: timers, I/O callbacks, idle/prepare, poll, check (setImmediate), and close callbacks. Each phase has a FIFO queue of callbacks. Blocking any phase delays all subsequent callbacks.</p>
+<br>
+<p>Avoid blocking the event loop. CPU-intensive operations (JSON parsing, cryptography, template rendering) block all other requests. Offload CPU work to Worker Threads, child processes, or dedicated microservices.</p>
+<br>
+<h2> Profiling</h2>
+<br>
+<p>Use the built-in --prof flag for V8 CPU profiling. Generate flame graphs with --prof-process. Node.js --inspect enables Chrome DevTools profiling with heap snapshots and CPU profiles.</p>
+<br>
+<p>Clinic.js provides visualization for event loop lag, garbage collection, and heap growth. Use autocannon or wrk for load testing. Profile in production-like environments—performance characteristics differ between development and production.</p>
+<br>
+<h2> Memory Management</h2>
+<br>
+<p>Monitor memory with process.memoryUsage(). Watch for heap growth between garbage collection cycles. Use heap snapshots (node --inspect, then Memory tab) to identify memory leaks.</p>
+<br>
+<p>Common leak sources: global variables, event listeners not removed, closures retaining references, and cache without size limits. Use the --max-old-space-size flag to limit heap size and detect leaks earlier via OOM crashes.</p>
+<br>
+<h2> Async Performance</h2>
+<br>
+<p>Use native Promises instead of callback patterns. Native Promises are optimized in V8 and outperform bluebird in modern Node.js versions. Use async/await for readability without performance cost.</p>
+<br>
+<p>Avoid mixing promise styles. Use util.promisify for callback-based APIs. Limit concurrent async operations with p-limit or similar. Unhandled promise rejections crash Node.js in recent versions—handle all promise rejections.</p>
+<br>
+<h2> Production Tuning</h2>
+<br>
+<p>Set NODE_ENV=production for framework optimizations. Configure max-old-space-size to 75% of available memory. Use clustering (cluster module) or PM2 for multi-core utilization. Implement graceful shutdown with SIGTERM handling.</p>
+<br>
+<p>Monitor event loop lag (>40ms indicates overload). Use the proses monitoring module for Node.js-specific metrics. Set up GC metrics monitoring—frequent GC cycles indicate memory pressure.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="ai-agents-overview">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="AI Agents: Architecture and Implementation">
+    <meta property="og:description" content="Design and build AI agents: tool use, planning, memory, and multi-agent coordination for autonomous task completion.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/ai-agents-overview.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Agents: Architecture and Implementation">
+    <meta name="twitter:description" content="Design and build AI agents: tool use, planning, memory, and multi-agent coordination for autonomous task completion.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>AI Agents: Architecture and Implementation — SourceHub</title>
+    <meta name="description" content="Design and build AI agents: tool use, planning, memory, and multi-agent coordination for autonomous task completion.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/ai-agents-overview.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/ai/ai-agents-overview.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "AI Agents: Architecture and Implementation",
+      "description": "Design and build AI agents: tool use, planning, memory, and multi-agent coordination for autonomous task completion.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "554",
+      "keywords": "AI, Machine Learning, LLM",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-agents-overview.html"},
+      "articleBody": "AI Agents: Architecture and Implementation AI agents are autonomous systems that use large language models to perceive environments, reason about goals, and take actions. They represent the next frontier of LLM applications beyond simple chat and generation. Agent Architecture A basic agent consists of an LLM core, a set of tools, and a reasoning loop. The LLM processes input and decides which tool to call. The tool executes and returns results. The LLM incorporates results into its reasoning and decides the next action. This loop continues until the task is complete. Tool definitions include name, description, parameters (JSON schema), and implementation. The LLM selects tools based on their descriptions. Well-written tool descriptions are critical for correct tool selection. Planning Agents plan by breaking complex tasks into subtasks. ReAct (Reasoning + Acting) alternates reasoning and action steps at each iteration. Plan-and-Solve generates a complete plan before execution. Tree-of-Thought explores multiple plan branches. Effective planning requires the agent to self-evaluate progress. Ask the agent \"Have I completed the original goal?\" at each step. Implement maximum iteration limits to prevent infinite loops. Add human-in-the-loop checkpoints for critical actions. Memory Agent memory has three levels: short-term (conversation context), long-term (external storage like vector databases), and episodic (past task experiences). Context window limits constrain short-term memory. Implement summarization to compress long conversations. External memory stores embeddings of past interactions. Retrieve relevant memories at each step using semantic search. Episodic memory improves over time as the agent learns from past successes and failures. Clear episodic memory when task patterns change. Multi-Agent Systems Complex tasks benefit from multiple specialized agents. A research agent gathers information. A writer agent produces output. A reviewer agent validates quality. Agent orchestration frameworks (LangGraph, CrewAI, AutoGen) manage agent communication. Define clear handoff protocols between agents. Each agent should have a specific role, tools, and success criteria. Shared memory allows agents to access each other's outputs. Human supervision monitors agent-to-agent interactions. Safety Implement guardrails for agent actions. Validate tool arguments before execution. Require human approval for destructive operations (file deletion, database writes). Set budget limits for cost control. Monitor agent behavior for anomalous patterns."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "AI Agents: Architecture and Implementation"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › AI Agents: Architecture and Implementation
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">AI</span>
+        <span class="tag-cat">Machine Learning</span>
+        <span class="tag-cat">LLM</span></div>
+      <h1 class="article-title">AI Agents: Architecture and Implementation</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>AI Agents: Architecture and Implementation</h1>
+<p>AI agents are autonomous systems that use large language models to perceive environments, reason about goals, and take actions. They represent the next frontier of LLM applications beyond simple chat and generation.</p>
+<br>
+<h2> Agent Architecture</h2>
+<br>
+<p>A basic agent consists of an LLM core, a set of tools, and a reasoning loop. The LLM processes input and decides which tool to call. The tool executes and returns results. The LLM incorporates results into its reasoning and decides the next action. This loop continues until the task is complete.</p>
+<br>
+<p>Tool definitions include name, description, parameters (JSON schema), and implementation. The LLM selects tools based on their descriptions. Well-written tool descriptions are critical for correct tool selection.</p>
+<br>
+<h2> Planning</h2>
+<br>
+<p>Agents plan by breaking complex tasks into subtasks. ReAct (Reasoning + Acting) alternates reasoning and action steps at each iteration. Plan-and-Solve generates a complete plan before execution. Tree-of-Thought explores multiple plan branches.</p>
+<br>
+<p>Effective planning requires the agent to self-evaluate progress. Ask the agent "Have I completed the original goal?" at each step. Implement maximum iteration limits to prevent infinite loops. Add human-in-the-loop checkpoints for critical actions.</p>
+<br>
+<h2> Memory</h2>
+<br>
+<p>Agent memory has three levels: short-term (conversation context), long-term (external storage like vector databases), and episodic (past task experiences). Context window limits constrain short-term memory. Implement summarization to compress long conversations.</p>
+<br>
+<p>External memory stores embeddings of past interactions. Retrieve relevant memories at each step using semantic search. Episodic memory improves over time as the agent learns from past successes and failures. Clear episodic memory when task patterns change.</p>
+<br>
+<h2> Multi-Agent Systems</h2>
+<br>
+<p>Complex tasks benefit from multiple specialized agents. A research agent gathers information. A writer agent produces output. A reviewer agent validates quality. Agent orchestration frameworks (LangGraph, CrewAI, AutoGen) manage agent communication.</p>
+<br>
+<p>Define clear handoff protocols between agents. Each agent should have a specific role, tools, and success criteria. Shared memory allows agents to access each other's outputs. Human supervision monitors agent-to-agent interactions.</p>
+<br>
+<h2> Safety</h2>
+<br>
+<p>Implement guardrails for agent actions. Validate tool arguments before execution. Require human approval for destructive operations (file deletion, database writes). Set budget limits for cost control. Monitor agent behavior for anomalous patterns.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

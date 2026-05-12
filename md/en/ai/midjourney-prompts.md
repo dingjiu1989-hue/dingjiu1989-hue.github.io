@@ -110,7 +110,3 @@ Parameter| What It Does| Recommendation
   * **Describe what you want, not what you don't want.** Use `--no` for 1-2 things max. Focus on positive description.
   * **Vary one thing at a time.** When experimenting, change one parameter at a time so you know what caused the difference.
   * **Save your best prompts.** Good prompts are assets. Build a personal library organized by category.
-
-
-
-**See also:** [AI Image Generation Guide: DALL-E 3 vs Midjourney vs Stable Diffusion vs Firefly](</en/ai/ai-image-generation-guide.html>), [Selling Code Templates and UI Kits: A Developer's Guide to Template Income](</en/sidehustle/selling-code-templates.html>), [LLM Cost Optimization: Cut Your AI API Bills by 50-80% (2026 Guide)](</en/ai/llm-cost-optimization.html>).

@@ -42,7 +42,3 @@ Site| What You Get
   * **"No attribution required"** means you don't need to credit the photographer. But if it's convenient, still do — it helps the ecosystem.
   * **Avoid images with recognizable people or brands** — those may need a model or property release even if the photo is free.
   * **Don't resell the images as-is** — that's the one thing the license doesn't allow. Modifying and using in your work is fine.
-
-
-
-**See also:** [10 Free Online Tools You'll Use Every Single Day](</en/tools/online-tools-2026.html>), [Selling Stock Photos, Videos, and Digital Media as a Developer](</en/sidehustle/sell-stock-photos-videos.html>), [React Server Components Guide: Architecture, Patterns, and When to Use RSC in 2026](</en/tech/react-server-components-guide.html>).

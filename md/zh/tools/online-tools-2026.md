@@ -8,48 +8,32 @@ url: https://dingjiu1989-hue.github.io/tools/online-tools-2026.html
 
 # 10 个你每天都会用到的免费在线工具网站
 
-有些工具你下载一个软件太重，但偶尔又一定会用到。以下 10 个在线工具全部免费、免注册、用完即走。
-
-## 图片处理
+有些工具你下载一个软件太重，但偶尔又一定会用到。以下 10 个在线工具全部免费、免注册、用完即走。 图片处理
 
   * **remove.bg** — AI 一键抠图，5 秒去背景。免费版分辨率有限但够用。
   * **Squoosh** — Google 出品的图片压缩工具，支持 WebP/AVIF 等现代格式，压缩比惊人。
   * **Carbon** — 代码截图美化工具，把你的代码变成漂亮的分享图片，支持几十种主题。
 
-
-
-## 文件转换
+文件转换
 
   * **CloudConvert** — 支持 200+ 格式互相转换，PDF → Word、视频转 GIF、HTML → PDF 都可以。每天免费 25 次。
   * **Convertio** — 另一个全能转换工具，优势是支持直接从 Google Drive/Dropbox 导入文件。
 
-
-
-## 文本和写作
+文本和写作
 
   * **DeepL Write** — AI 润色中文/英文文本，不是翻译而是帮你把句子写得更流畅。
   * **Diffchecker** — 文本对比工具，粘贴两段文本高亮显示差异，对比代码和合同版本的神器。
 
-
-
-## 其他利器
+其他利器
 
   * **Excalidraw** — 手绘风格的在线白板，画架构图、流程图非常快。开源免费、支持协作。
   * **Cron-job.org** — 免费定时任务服务，可以定时访问你的 URL。轻量替代 GitHub Actions。
   * **PageSpeed Insights** — Google 官方网页速度测试工具，输入网址给出性能评分和优化建议。SEO 必备。
 
-
-
-## 使用原则
-
-在线工具虽然方便，但敏感文件（身份证、合同、私人照片）不要上传。涉及隐私的数据还是用本地软件处理。
-
-### 📖 相关推荐
+使用原则 在线工具虽然方便，但敏感文件（身份证、合同、私人照片）不要上传。涉及隐私的数据还是用本地软件处理。 📖 相关推荐
 
   * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
   * [2026 年最佳屏幕录制和视频剪辑工具推荐](<https://dingjiu1989-hue.github.io/tools/screen-recording-tools.html>)
   * [10 款开发者必备的命令行工具（2026 版）](<https://dingjiu1989-hue.github.io/tools/cli-tools-collection.html>)
-
-
 
 **See also:** [2026 年 10 款必装终端工具：让你的命令行效率翻倍](</tools/terminal-tools-2026.html>), [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](</tools/project-management-tools.html>), [2026 年最佳密码管理器对比：LastPass vs 1Password vs Bitwarden](</tools/password-manager-comparison.html>).

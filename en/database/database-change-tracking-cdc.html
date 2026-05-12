@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="database-change-tracking-cdc">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Change Data Capture: Tracking Database Changes in Real-Time">
+    <meta property="og:description" content="Implement change data capture (CDC) for real-time data synchronization, event streaming, and audit logging.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/database-change-tracking-cdc.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Change Data Capture: Tracking Database Changes in Real-Time">
+    <meta name="twitter:description" content="Implement change data capture (CDC) for real-time data synchronization, event streaming, and audit logging.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Change Data Capture: Tracking Database Changes in Real-Time — SourceHub</title>
+    <meta name="description" content="Implement change data capture (CDC) for real-time data synchronization, event streaming, and audit logging.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/database-change-tracking-cdc.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/database-change-tracking-cdc.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Change Data Capture: Tracking Database Changes in Real-Time",
+      "description": "Implement change data capture (CDC) for real-time data synchronization, event streaming, and audit logging.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "311",
+      "keywords": "Database, Backend, Data",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-change-tracking-cdc.html"},
+      "articleBody": "Change Data Capture: Tracking Database Changes in Real-Time Change Data Capture (CDC) tracks row-level changes in a database and streams them to other systems. CDC captures inserts, updates, and deletes without application-level instrumentation. It is the foundation for event-driven architectures and real-time data pipelines. CDC Methods Log-based CDC reads the database transaction log (WAL in PostgreSQL, binlog in MySQL). It captures all changes with minimal database impact. Log-based CDC is the preferred method because it does not require schema changes and has low overhead. Trigger-based CDC uses database triggers to capture changes. It provides more control over what is captured but adds overhead to every write. Trigger-based CDC is suitable when log-based capture is not available. Polling-based CDC periodically queries tables for changes using timestamp or version columns. It is the simplest to implement but has higher latency and database impact. Polling is suitable for low-frequency synchronization. Tools Debezium is the most popular CDC platform. It connects to database transaction logs and streams changes to Apache Kafka. Debezium supports PostgreSQL, MySQL, MongoDB, SQL Server, and Oracle. Use Cases CDC supports data warehouse synchronization, cache invalidation, search index updates, event streams for microservices, and real-time analytics. It reduces coupling between operational and analytical systems."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Change Data Capture: Tracking Database Changes in Real-Time"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Change Data Capture: Tracking Database Changes in Real-Time
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Data</span></div>
+      <h1 class="article-title">Change Data Capture: Tracking Database Changes in Real-Time</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Change Data Capture: Tracking Database Changes in Real-Time</h1>
+<p>Change Data Capture (CDC) tracks row-level changes in a database and streams them to other systems. CDC captures inserts, updates, and deletes without application-level instrumentation. It is the foundation for event-driven architectures and real-time data pipelines.</p>
+<br>
+<h2> CDC Methods</h2>
+<br>
+<p>Log-based CDC reads the database transaction log (WAL in PostgreSQL, binlog in MySQL). It captures all changes with minimal database impact. Log-based CDC is the preferred method because it does not require schema changes and has low overhead.</p>
+<br>
+<p>Trigger-based CDC uses database triggers to capture changes. It provides more control over what is captured but adds overhead to every write. Trigger-based CDC is suitable when log-based capture is not available.</p>
+<br>
+<p>Polling-based CDC periodically queries tables for changes using timestamp or version columns. It is the simplest to implement but has higher latency and database impact. Polling is suitable for low-frequency synchronization.</p>
+<br>
+<h2> Tools</h2>
+<br>
+<p>Debezium is the most popular CDC platform. It connects to database transaction logs and streams changes to Apache Kafka. Debezium supports PostgreSQL, MySQL, MongoDB, SQL Server, and Oracle.</p>
+<br>
+<h2> Use Cases</h2>
+<br>
+<p>CDC supports data warehouse synchronization, cache invalidation, search index updates, event streams for microservices, and real-time analytics. It reduces coupling between operational and analytical systems.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

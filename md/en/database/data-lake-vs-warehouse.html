@@ -1,0 +1,152 @@
+---
+title: "Data Lake vs Warehouse vs Lakehouse"
+description: "Comparing data lake, warehouse, and lakehouse architectures with query engines and use cases."
+date: 2026-05-12
+board: database
+url: https://dingjiu1989-hue.github.io/en/database/data-lake-vs-warehouse.html
+---
+
+## Architecture Comparison
+
+Three major paradigms for analytical data storage: data lakes for raw data, warehouses for structured analytics, and lakehouses combining both.
+
+## Data Lake Architecture
+
+Store raw data in its native format:
+
+```python
+# Data lake ingestion
+import boto3
+import json
+
+class DataLakeIngestor:
+    def __init__(self):
+        self.s3 = boto3.client("s3")
+        self.bucket = "data-lake-raw"
+
+    def ingest(self, source, data, partition_by):
+        # Partition by date for efficient queries
+        partition_path = f"{source}/year={partition_by['year']}/month={partition_by['month']}/day={partition_by['day']}"
+
+        # Store in open format (Parquet)
+        key = f"{partition_path}/{uuid.uuid4()}.parquet"
+
+        self.s3.put_object(
+            Bucket=self.bucket,
+            Key=key,
+            Body=parquet_bytes
+        )
+
+        # Register in catalog
+        self.update_catalog(source, key, partition_by)
+```
+
+## Data Warehouse
+
+Optimized for structured analytics:
+
+```sql
+-- Warehouse: structured, consistent, fast
+CREATE TABLE analytics.daily_revenue (
+    date DATE NOT NULL,
+    product_category VARCHAR(100),
+    revenue DECIMAL(12,2),
+    units_sold INT,
+    PRIMARY KEY (date, product_category)
+);
+
+-- Fast aggregation queries
+SELECT
+    DATE_TRUNC('month', date) as month,
+    product_category,
+    SUM(revenue) as total_revenue
+FROM analytics.daily_revenue
+WHERE date >= '2026-01-01'
+GROUP BY 1, 2
+ORDER BY 1, 2;
+```
+
+## Lakehouse Architecture
+
+Combines data lake flexibility with warehouse performance:
+
+```sql
+-- Apache Iceberg: ACID transactions on data lake
+CREATE TABLE analytics.orders (
+    order_id BIGINT,
+    customer_id BIGINT,
+    order_date DATE,
+    status STRING,
+    total DECIMAL(10,2)
+)
+USING iceberg
+PARTITIONED BY (bucket(customer_id, 16));
+
+-- ACID operations on object storage
+INSERT INTO analytics.orders VALUES
+    (1001, 501, '2026-05-01', 'shipped', 150.00);
+
+-- Time travel queries
+SELECT * FROM analytics.orders
+FOR SYSTEM_TIME AS OF '2026-05-01 10:00:00';
+```
+
+## Query Engine Comparison
+
+```yaml
+query_engines:
+  presto_trino:
+    type: distributed_sql
+    best_for: ad_hoc_queries_on_data_lake
+    performance: medium
+    freshness: real_time
+
+  spark:
+    type: batch_processing
+    best_for: etl_and_data_transformation
+    performance: high_for_batch
+    freshness: batch
+
+  duckdb:
+    type: embedded_olap
+    best_for: local_analysis
+    performance: very_high_single_node
+    freshness: file_based
+
+  snowflake:
+    type: cloud_dwh
+    best_for: enterprise_analytics
+    performance: high
+    freshness: near_real_time
+```
+
+## Decision Framework
+
+```python
+def choose_architecture(requirements):
+    score = {"lake": 0, "warehouse": 0, "lakehouse": 0}
+
+    if requirements.get("schema_on_read"):
+        score["lake"] += 2
+        score["lakehouse"] += 1
+    if requirements.get("data_science_ml"):
+        score["lake"] += 1
+        score["lakehouse"] += 2
+    if requirements.get("sql_analytics"):
+        score["warehouse"] += 2
+        score["lakehouse"] += 2
+    if requirements.get("real_time"):
+        score["warehouse"] += 1
+    if requirements.get("data_discovery"):
+        score["lake"] += 1
+        score["lakehouse"] += 1
+    if requirements.get("ACID_transactions"):
+        score["warehouse"] += 1
+        score["lakehouse"] += 2
+
+    return max(score, key=score.get)
+```
+
+## Conclusion
+
+Choose a data lake for raw data archival and data science workloads. Choose a warehouse for BI and reporting. Choose a lakehouse when you need both. The lakehouse is the fastest-growing paradigm because it eliminates data silos. Stick with open formats (Parquet, Iceberg) for portability.

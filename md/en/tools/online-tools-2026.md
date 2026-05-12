@@ -49,5 +49,3 @@ Not every task needs a full app. Sometimes you just need to convert a file, resi
 ## 10\. Shields.io
 
 **Badges for your README.** [shields.io](<https://shields.io>) generates those little status badges you see on GitHub repos — build passing, coverage 95%, license MIT, etc. Dynamic badges that update automatically from your CI/CD pipeline. The URL-based API is dead simple once you learn the pattern.
-
-**See also:** [Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More](</en/tools/best-free-dev-tools-2026.html>), [30 Free and Useful APIs Every Developer Should Know](</en/tools/free-api-collection.html>), [Linux Commands Cheat Sheet: 50 Commands Every Developer Should Know](</en/tech/linux-commands.html>).

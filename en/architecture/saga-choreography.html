@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="saga-choreography">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Saga Choreography Pattern">
+    <meta property="og:description" content="Event-driven saga execution, distributed responsibility, monitoring challenges, and when to choose choreography">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/saga-choreography.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Saga Choreography Pattern">
+    <meta name="twitter:description" content="Event-driven saga execution, distributed responsibility, monitoring challenges, and when to choose choreography">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Saga Choreography Pattern — SourceHub</title>
+    <meta name="description" content="Event-driven saga execution, distributed responsibility, monitoring challenges, and when to choose choreography">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/saga-choreography.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/saga-choreography.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Saga Choreography Pattern",
+      "description": "Event-driven saga execution, distributed responsibility, monitoring challenges, and when to choose choreography",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "860",
+      "keywords": "Architecture, System Design, Backend",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/saga-choreography.html"},
+      "articleBody": "Saga Choreography Pattern Saga choreography distributes saga execution across participating services through event-driven coordination. There is no central coordinator \u2014 each service performs its local transaction, publishes an event, and subscribes to events that trigger its next action. This decentralized approach maximizes autonomy and minimizes coupling, making it attractive for systems where team independence and service evolution are paramount. In a choreographed saga, each service owns its part of the workflow. When the Order Service creates an order, it publishes OrderCreated. The Payment Service subscribes to OrderCreated, processes payment, and publishes PaymentProcessed. The Inventory Service subscribes to PaymentProcessed, reserves stock, and publishes InventoryReserved. The Shipping Service subscribes to InventoryReserved and schedules shipment. The workflow emerges from these chains of reactions. The strength of choreography is that each service only knows about its own domain events. New services can be added by subscribing to existing events and publishing new ones \u2014 no existing service needs to change. This makes choreography highly extensible and aligned with bounded context boundaries. Each team can evolve its service independently as long as event contracts remain compatible. Error handling in choreography is decentralized but nontrivial. If the Payment Service fails, it publishes PaymentFailed. The Inventory Service must subscribe to PaymentFailed and compensate by releasing the reserved stock. This means each service must know about and handle failure events for the services it depends on. The compensation logic is distributed across services rather than centralized, making it harder to verify correctness. Consider the order cancellation scenario. The Order Service publishes OrderCancelled. The Payment Service initiates a refund. The Inventory Service releases stock. The Shipping Service cancels the shipment if not yet dispatched. Each service independently handles cancellation. If any compensation fails, that service must retry or escalate. There is no central authority that can enforce the complete compensation sequence. Monitoring is the most significant challenge. In a choreographed saga, there is no single place to observe the saga's progress. The overall workflow must be reconstructed by correlating events from all participating services. This requires a centralized event store or tracing infrastructure that captures all events with correlation IDs. Tools like event store databases or log aggregators can reconstruct saga state, but this is reactive \u2014 the actual workflow execution is still opaque at runtime. Debugging failures requires correlating events across service boundaries. When a saga stalls \u2014 a step does not produce the expected event \u2014 the cause may be in any participating service. The monitoring team must trace through event logs to find the missing event. This is significantly harder than checking the orchestrator's state in an orchestrated saga. When should choreography be preferred over orchestration? Choreography suits sagas with few participants (two or three services), simple compensation logic, and mature event infrastructure. It is ideal when services are owned by independent teams that want to minimize cross-team coordination. It also works well for long-running sagas where the orchestrator would become a bottleneck or single point of failure. Domain characteristics matter. Sagas where each step is independently useful and compensatable lend themselves to choreography. Sagas that require conditional branching or complex coordination logic are better served by orchestration. A good rule of thumb: if you can describe the saga as a simple linear chain of events, choreography may suffice. If the saga requires any \"or,\" \"if,\" or \"while\" logic, orchestration is safer. Production experience suggests starting with orchestration for critical workflows and moving to choreography only when the team demonstrates mature event handling patterns and monitoring infrastructure. The implicit nature of choreographed workflows demands operational maturity that many teams underestimate."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Saga Choreography Pattern"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Saga Choreography Pattern
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">Saga Choreography Pattern</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Saga Choreography Pattern</h1>
+<br>
+<p>Saga choreography distributes saga execution across participating services through event-driven coordination. There is no central coordinator — each service performs its local transaction, publishes an event, and subscribes to events that trigger its next action. This decentralized approach maximizes autonomy and minimizes coupling, making it attractive for systems where team independence and service evolution are paramount.   </p>
+<p>In a choreographed saga, each service owns its part of the workflow. When the Order Service creates an order, it publishes OrderCreated. The Payment Service subscribes to OrderCreated, processes payment, and publishes PaymentProcessed. The Inventory Service subscribes to PaymentProcessed, reserves stock, and publishes InventoryReserved. The Shipping Service subscribes to InventoryReserved and schedules shipment. The workflow emerges from these chains of reactions.   </p>
+<p>The strength of choreography is that each service only knows about its own domain events. New services can be added by subscribing to existing events and publishing new ones — no existing service needs to change. This makes choreography highly extensible and aligned with bounded context boundaries. Each team can evolve its service independently as long as event contracts remain compatible.   </p>
+<p>Error handling in choreography is decentralized but nontrivial. If the Payment Service fails, it publishes PaymentFailed. The Inventory Service must subscribe to PaymentFailed and compensate by releasing the reserved stock. This means each service must know about and handle failure events for the services it depends on. The compensation logic is distributed across services rather than centralized, making it harder to verify correctness.   </p>
+<p>Consider the order cancellation scenario. The Order Service publishes OrderCancelled. The Payment Service initiates a refund. The Inventory Service releases stock. The Shipping Service cancels the shipment if not yet dispatched. Each service independently handles cancellation. If any compensation fails, that service must retry or escalate. There is no central authority that can enforce the complete compensation sequence.   </p>
+<p>Monitoring is the most significant challenge. In a choreographed saga, there is no single place to observe the saga's progress. The overall workflow must be reconstructed by correlating events from all participating services. This requires a centralized event store or tracing infrastructure that captures all events with correlation IDs. Tools like event store databases or log aggregators can reconstruct saga state, but this is reactive — the actual workflow execution is still opaque at runtime.   </p>
+<p>Debugging failures requires correlating events across service boundaries. When a saga stalls — a step does not produce the expected event — the cause may be in any participating service. The monitoring team must trace through event logs to find the missing event. This is significantly harder than checking the orchestrator's state in an orchestrated saga.   </p>
+<p>When should choreography be preferred over orchestration? Choreography suits sagas with few participants (two or three services), simple compensation logic, and mature event infrastructure. It is ideal when services are owned by independent teams that want to minimize cross-team coordination. It also works well for long-running sagas where the orchestrator would become a bottleneck or single point of failure.   </p>
+<p>Domain characteristics matter. Sagas where each step is independently useful and compensatable lend themselves to choreography. Sagas that require conditional branching or complex coordination logic are better served by orchestration. A good rule of thumb: if you can describe the saga as a simple linear chain of events, choreography may suffice. If the saga requires any "or," "if," or "while" logic, orchestration is safer.   </p>
+<p>Production experience suggests starting with orchestration for critical workflows and moving to choreography only when the team demonstrates mature event handling patterns and monitoring infrastructure. The implicit nature of choreographed workflows demands operational maturity that many teams underestimate.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

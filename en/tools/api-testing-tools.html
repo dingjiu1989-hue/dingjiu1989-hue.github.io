@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1562",
+      "wordCount": "1796",
       "keywords": "Developer Tools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/api-testing-tools.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/api-testing-tools.html"},
+      "articleBody": "API Testing Tools Comparison API testing tools are essential for developing, debugging, and documenting RESTful, GraphQL, and gRPC APIs. This comparison covers the leading options in 2026, from GUI-based clients to terminal tools and automated testing frameworks. Postman Postman remains the most widely used API testing platform. It provides a comprehensive environment for designing, testing, and documenting APIs. **Pros:** * Intuitive interface with collection organization. * Environment variables for managing different configurations. * Built-in scripting with Postman JavaScript (pre-request and test scripts). * Collection Runner for batch testing and CI integration (Newman). * API documentation generation from collections. * Team workspaces for collaboration. * GraphQL and gRPC support. **Cons:** * Desktop app can be resource-heavy. * Advanced features require paid plans (Pro: $12/month). * Cloud dependency for team features. * Complex for simple ad-hoc requests. **Best for**: Teams needing a comprehensive API lifecycle tool with collaboration. // Postman test script example pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); }); pm.test(\"Response has user data\", function () { const json = pm.response.json(); pm.expect(json).to.have.property(\"id\"); pm.expect(json.email).to.match(/^[\\w\\.-]+@[\\w\\.-]+\\.\\w+$/); }); Insomnia Insomnia is a lightweight, focused API client with a clean interface. It was acquired by Kong and has seen renewed development. **Pros:** * Clean, modern UI with excellent theming. * Built-in GraphQL client with schema autocomplete. * Environment variables and tag-based templating. * Plug-in ecosystem for extensibility. * Offline-first -- no account required. * Performance testing via Inso CLI (pro feature). **Cons:** * Fewer integrations than Postman. * Collaboration features limited (paid). * Smaller community and fewer resources. **Best for**: Developers who want a fast, focused API client without the bloat. Bruno Bruno is a newer, open-source API client that stores collections as plain text files on your filesystem. It has gained significant adoption for its Git-friendly approach. **Pros:** * Fully open source (MIT license). * Collections stored as plain text files -- version control friendly. * No cloud dependency or account required. * Git collaboration (review API changes in pull requests). * Built-in scripting with JavaScript. * Very fast and lightweight. **Cons:** * Newer with fewer community resources. * No team workspace cloud (Git-based collaboration only). * Fewer integrations than Postman. * GraphQL support less mature. **Best for**: Teams that want open-source, Git-native API development. // Example Bruno collection structure: collections/ my-api/ request.bru /users/ GET.bru POST.bru /auth/ login.bru HTTPie HTTPie is a command-line HTTP client designed for humans. It provides a more intuitive and colorful alternative to curl. **Pros:** * Beautiful, syntax-highlighted output. * Intuitive command syntax. * Built-in JSON support. * Sessions for persistent state. * Plugins for JWT auth, OAuth, and more. * Python-based with pip install. **Cons:** * No GUI (terminal only). * No collection management. * Not suitable for complex test suites. **Best for**: Quick ad-hoc API testing from the terminal. # HTTPie examples http POST api.example.com/users name=\"John\" email=\"john@example.com\" http GET api.example.com/users Authorization:\"Bearer token123\" http PATCH api.example.com/users/1 name=\"Updated Name\" REST Client (VS Code Extension) VS Code's REST Client extension lets you send HTTP requests directly from your editor. **Pros:** * No separate tool needed -- works in VS Code. * Requests stored as `.http` files -- Git-friendly. * Environment variables and request variables. * Response preview in the editor. * Code snippets generation. **Cons:** * No visual collection management. * No built-in test assertions. * Limited scripting capabilities. **Best for**: Developers who want to keep API testing inside their editor. ### Login request POST https://api.example.com/auth/login Content-Type: application/json { \"email\": \"user@example.com\", \"password\": \"password123\" } ### Get user profile (uses variable) GET https://api.example.com/users/{{user_id}} Authorization: Bearer {{token}} Automated API Testing with Code For CI/CD integration, programmatic testing frameworks offer the most control: # Python with requests + pytest import requests def test_get_user(): response = requests.get( \"https://api.example.com/users/1\", headers={\"Authorization\": \"Bearer test-token\"} ) assert response.status_code == 200 data = response.json() assert data[\"email\"] == \"user@example.com\" // JavaScript with supertest + jest const request = require('supertest'); const app = require('../app'); describe('User API', () => { it('should return user data', async () => { const res = await request(app) .get('/api/users/1') .set('Authorization', 'Bearer test-token'); expect(res.status).toBe(200); expect(res.body.email).toBe('user@example.com'); }); }); Comparison Table | Tool | Interface | Collaboration | Git-Friendly | Price | Best For | |------|-----------|--------------|--------------|-------|----------| | Postman | GUI | Cloud workspaces | Limited | Free/Paid | Team API lifecycle | | Insomnia | GUI | Cloud (paid) | Limited | Free/Paid | Individual developers | | Bruno | GUI | Git-based | Yes | Free (OSS) | Git-native teams | | HTTPie | CLI | No | No | Free | Quick terminal testing | | REST Client | VS Code | Git-based | Yes | Free | Editor-integrated testing | | Code frameworks | Code | Git-based | Yes | Free | CI/CD automation | Recommendations * **For individual development**: Insomnia or REST Client (VS Code). * **For team collaboration**: Postman (full lifecycle) or Bruno (Git-native). * **For CI/CD automation**: Code frameworks (pytest, supertest, Newman). * **For quick debugging**: HTTPie or curl. * **For GraphQL-heavy projects**: Insomnia has the best GraphQL experience. Summary The API testing tool landscape has diversified significantly. Postman remains the most feature-rich option for teams, while Bruno represents the future with its Git-native, open-source approach. For CI/CD pipelines, programmatic frameworks provide the most control. Start with a GUI client for exploration and debugging, then codify critical flows as automated tests for your pipeline."
     }
     </script>
     <script type="application/ld+json">
@@ -73,265 +74,389 @@
         <span class="tag-cat">Productivity</span></div>
       <h1 class="article-title">API Testing Tools Comparison</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><p>API testing tools are essential for developing, debugging, and documenting RESTful, GraphQL, and gRPC APIs. This comparison covers the leading options in 2026, from GUI-based clients to terminal tools and automated testing frameworks.</p>
+      <div class="article-body"><h1>API Testing Tools Comparison</h1>
 <br>
-<h2> Postman</h2>
+<p>API testing tools are essential for developing, debugging, and documenting RESTful, GraphQL, and gRPC APIs. This comparison covers the leading options in 2026, from GUI-based clients to terminal tools and automated testing frameworks.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Postman</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Postman remains the most widely used API testing platform. It provides a comprehensive environment for designing, testing, and documenting APIs.</p>
 <br>
+<br>
+<br>
+<br>
 <p>**Pros:**</p>
-<li>Intuitive interface with collection organization.</li>
-<li>Environment variables for managing different configurations.</li>
-<li>Built-in scripting with Postman JavaScript (pre-request and test scripts).</li>
-<li>Collection Runner for batch testing and CI integration (Newman).</li>
-<li>API documentation generation from collections.</li>
-<li>Team workspaces for collaboration.</li>
-<li>GraphQL and gRPC support.</li>
+<br>
+<p>* Intuitive interface with collection organization.</p>
+<p>* Environment variables for managing different configurations.</p>
+<p>* Built-in scripting with Postman JavaScript (pre-request and test scripts).</p>
+<p>* Collection Runner for batch testing and CI integration (Newman).</p>
+<p>* API documentation generation from collections.</p>
+<p>* Team workspaces for collaboration.</p>
+<p>* GraphQL and gRPC support.</p>
+<br>
+<br>
 <br>
 <p>**Cons:**</p>
-<li>Desktop app can be resource-heavy.</li>
-<li>Advanced features require paid plans (Pro: $12/month).</li>
-<li>Cloud dependency for team features.</li>
-<li>Complex for simple ad-hoc requests.</li>
+<br>
+<p>* Desktop app can be resource-heavy.</p>
+<p>* Advanced features require paid plans (Pro: $12/month).</p>
+<p>* Cloud dependency for team features.</p>
+<p>* Complex for simple ad-hoc requests.</p>
+<br>
+<br>
 <br>
 <p>**Best for**: Teams needing a comprehensive API lifecycle tool with collaboration.</p>
 <br>
-<pre><code>
-// Postman test script example
-
-pm.test(&quot;Status code is 200&quot;, function () {
-
-    pm.response.to.have.status(200);
-
-});
-
-
-
-pm.test(&quot;Response has user data&quot;, function () {
-
-    const json = pm.response.json();
-
-    pm.expect(json).to.have.property(&quot;id&quot;);
-
-    pm.expect(json.email).to.match(/^[\w\.-]+@[\w\.-]+\.\w+$/);
-
-});
-
-</code></pre>
 <br>
-<h2> Insomnia</h2>
+<br>
+<br>
+<br>
+<p>    // Postman test script example</p>
+<br>
+<p>    pm.test("Status code is 200", function () {</p>
+<br>
+<p>        pm.response.to.have.status(200);</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<p>    pm.test("Response has user data", function () {</p>
+<br>
+<p>        const json = pm.response.json();</p>
+<br>
+<p>        pm.expect(json).to.have.property("id");</p>
+<br>
+<p>        pm.expect(json.email).to.match(/^[\w\.-]+@[\w\.-]+\.\w+$/);</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Insomnia</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Insomnia is a lightweight, focused API client with a clean interface. It was acquired by Kong and has seen renewed development.</p>
 <br>
+<br>
+<br>
+<br>
 <p>**Pros:**</p>
-<li>Clean, modern UI with excellent theming.</li>
-<li>Built-in GraphQL client with schema autocomplete.</li>
-<li>Environment variables and tag-based templating.</li>
-<li>Plug-in ecosystem for extensibility.</li>
-<li>Offline-first -- no account required.</li>
-<li>Performance testing via Inso CLI (pro feature).</li>
+<br>
+<p>* Clean, modern UI with excellent theming.</p>
+<p>* Built-in GraphQL client with schema autocomplete.</p>
+<p>* Environment variables and tag-based templating.</p>
+<p>* Plug-in ecosystem for extensibility.</p>
+<p>* Offline-first -- no account required.</p>
+<p>* Performance testing via Inso CLI (pro feature).</p>
+<br>
+<br>
 <br>
 <p>**Cons:**</p>
-<li>Fewer integrations than Postman.</li>
-<li>Collaboration features limited (paid).</li>
-<li>Smaller community and fewer resources.</li>
+<br>
+<p>* Fewer integrations than Postman.</p>
+<p>* Collaboration features limited (paid).</p>
+<p>* Smaller community and fewer resources.</p>
+<br>
+<br>
 <br>
 <p>**Best for**: Developers who want a fast, focused API client without the bloat.</p>
 <br>
-<h2> Bruno</h2>
+<br>
+<br>
+<br>
+<h2>  Bruno</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Bruno is a newer, open-source API client that stores collections as plain text files on your filesystem. It has gained significant adoption for its Git-friendly approach.</p>
 <br>
+<br>
+<br>
+<br>
 <p>**Pros:**</p>
-<li>Fully open source (MIT license).</li>
-<li>Collections stored as plain text files -- version control friendly.</li>
-<li>No cloud dependency or account required.</li>
-<li>Git collaboration (review API changes in pull requests).</li>
-<li>Built-in scripting with JavaScript.</li>
-<li>Very fast and lightweight.</li>
+<br>
+<p>* Fully open source (MIT license).</p>
+<p>* Collections stored as plain text files -- version control friendly.</p>
+<p>* No cloud dependency or account required.</p>
+<p>* Git collaboration (review API changes in pull requests).</p>
+<p>* Built-in scripting with JavaScript.</p>
+<p>* Very fast and lightweight.</p>
+<br>
+<br>
 <br>
 <p>**Cons:**</p>
-<li>Newer with fewer community resources.</li>
-<li>No team workspace cloud (Git-based collaboration only).</li>
-<li>Fewer integrations than Postman.</li>
-<li>GraphQL support less mature.</li>
+<br>
+<p>* Newer with fewer community resources.</p>
+<p>* No team workspace cloud (Git-based collaboration only).</p>
+<p>* Fewer integrations than Postman.</p>
+<p>* GraphQL support less mature.</p>
+<br>
+<br>
 <br>
 <p>**Best for**: Teams that want open-source, Git-native API development.</p>
 <br>
-<pre><code>
-// Example Bruno collection structure:
-
-collections/
-
-  my-api/
-
-    request.bru
-
-    /users/
-
-      GET.bru
-
-      POST.bru
-
-    /auth/
-
-      login.bru
-
-</code></pre>
 <br>
-<h2> HTTPie</h2>
+<br>
+<br>
+<br>
+<p>    // Example Bruno collection structure:</p>
+<br>
+<p>    collections/</p>
+<br>
+<p>      my-api/</p>
+<br>
+<p>        request.bru</p>
+<br>
+<p>        /users/</p>
+<br>
+<p>          GET.bru</p>
+<br>
+<p>          POST.bru</p>
+<br>
+<p>        /auth/</p>
+<br>
+<p>          login.bru</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  HTTPie</h2>
+<br>
+<br>
+<br>
 <br>
 <p>HTTPie is a command-line HTTP client designed for humans. It provides a more intuitive and colorful alternative to curl.</p>
 <br>
+<br>
+<br>
+<br>
 <p>**Pros:**</p>
-<li>Beautiful, syntax-highlighted output.</li>
-<li>Intuitive command syntax.</li>
-<li>Built-in JSON support.</li>
-<li>Sessions for persistent state.</li>
-<li>Plugins for JWT auth, OAuth, and more.</li>
-<li>Python-based with pip install.</li>
+<br>
+<p>* Beautiful, syntax-highlighted output.</p>
+<p>* Intuitive command syntax.</p>
+<p>* Built-in JSON support.</p>
+<p>* Sessions for persistent state.</p>
+<p>* Plugins for JWT auth, OAuth, and more.</p>
+<p>* Python-based with pip install.</p>
+<br>
+<br>
 <br>
 <p>**Cons:**</p>
-<li>No GUI (terminal only).</li>
-<li>No collection management.</li>
-<li>Not suitable for complex test suites.</li>
+<br>
+<p>* No GUI (terminal only).</p>
+<p>* No collection management.</p>
+<p>* Not suitable for complex test suites.</p>
+<br>
+<br>
 <br>
 <p>**Best for**: Quick ad-hoc API testing from the terminal.</p>
 <br>
-<pre><code>
-# HTTPie examples
-
-http POST api.example.com/users name=&quot;John&quot; email=&quot;john@example.com&quot;
-
-http GET api.example.com/users Authorization:&quot;Bearer token123&quot;
-
-http PATCH api.example.com/users/1 name=&quot;Updated Name&quot;
-
-</code></pre>
 <br>
-<h2> REST Client (VS Code Extension)</h2>
+<br>
+<br>
+<br>
+<p>    # HTTPie examples</p>
+<br>
+<p>    http POST api.example.com/users name="John" email="john@example.com"</p>
+<br>
+<p>    http GET api.example.com/users Authorization:"Bearer token123"</p>
+<br>
+<p>    http PATCH api.example.com/users/1 name="Updated Name"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  REST Client (VS Code Extension)</h2>
+<br>
+<br>
+<br>
 <br>
 <p>VS Code's REST Client extension lets you send HTTP requests directly from your editor.</p>
 <br>
+<br>
+<br>
+<br>
 <p>**Pros:**</p>
-<li>No separate tool needed -- works in VS Code.</li>
-<li>Requests stored as `.http` files -- Git-friendly.</li>
-<li>Environment variables and request variables.</li>
-<li>Response preview in the editor.</li>
-<li>Code snippets generation.</li>
+<br>
+<p>* No separate tool needed -- works in VS Code.</p>
+<p>* Requests stored as `.http` files -- Git-friendly.</p>
+<p>* Environment variables and request variables.</p>
+<p>* Response preview in the editor.</p>
+<p>* Code snippets generation.</p>
+<br>
+<br>
 <br>
 <p>**Cons:**</p>
-<li>No visual collection management.</li>
-<li>No built-in test assertions.</li>
-<li>Limited scripting capabilities.</li>
+<br>
+<p>* No visual collection management.</p>
+<p>* No built-in test assertions.</p>
+<p>* Limited scripting capabilities.</p>
+<br>
+<br>
 <br>
 <p>**Best for**: Developers who want to keep API testing inside their editor.</p>
 <br>
-<pre><code>
-### Login request
-
-POST https://api.example.com/auth/login
-
-Content-Type: application/json
-
-
-
-{
-
-    &quot;email&quot;: &quot;user@example.com&quot;,
-
-    &quot;password&quot;: &quot;password123&quot;
-
-}
-
-
-
-### Get user profile (uses variable)
-
-GET https://api.example.com/users/{{user_id}}
-
-Authorization: Bearer {{token}}
-
-</code></pre>
 <br>
-<h2> Automated API Testing with Code</h2>
+<br>
+<br>
+<br>
+<p>    ### Login request</p>
+<br>
+<p>    POST https://api.example.com/auth/login</p>
+<br>
+<p>    Content-Type: application/json</p>
+<br>
+<br>
+<br>
+<p>    {</p>
+<br>
+<p>        "email": "user@example.com",</p>
+<br>
+<p>        "password": "password123"</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<p>    ### Get user profile (uses variable)</p>
+<br>
+<p>    GET https://api.example.com/users/{{user_id}}</p>
+<br>
+<p>    Authorization: Bearer {{token}}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Automated API Testing with Code</h2>
+<br>
+<br>
+<br>
 <br>
 <p>For CI/CD integration, programmatic testing frameworks offer the most control:</p>
 <br>
-<pre><code>
-# Python with requests + pytest
-
-import requests
-
-
-
-def test_get_user():
-
-    response = requests.get(
-
-        &quot;https://api.example.com/users/1&quot;,
-
-        headers={&quot;Authorization&quot;: &quot;Bearer test-token&quot;}
-
-    )
-
-    assert response.status_code == 200
-
-    data = response.json()
-
-    assert data[&quot;email&quot;] == &quot;user@example.com&quot;
-
-</code></pre>
 <br>
-<pre><code>
-// JavaScript with supertest + jest
-
-const request = require(&#x27;supertest&#x27;);
-
-const app = require(&#x27;../app&#x27;);
-
-
-
-describe(&#x27;User API&#x27;, () =&gt; {
-
-  it(&#x27;should return user data&#x27;, async () =&gt; {
-
-    const res = await request(app)
-
-      .get(&#x27;/api/users/1&#x27;)
-
-      .set(&#x27;Authorization&#x27;, &#x27;Bearer test-token&#x27;);
-
-    expect(res.status).toBe(200);
-
-    expect(res.body.email).toBe(&#x27;user@example.com&#x27;);
-
-  });
-
-});
-
-</code></pre>
 <br>
-<h2> Comparison Table</h2>
+<br>
+<br>
+<p>    # Python with requests + pytest</p>
+<br>
+<p>    import requests</p>
+<br>
+<br>
+<br>
+<p>    def test_get_user():</p>
+<br>
+<p>        response = requests.get(</p>
+<br>
+<p>            "https://api.example.com/users/1",</p>
+<br>
+<p>            headers={"Authorization": "Bearer test-token"}</p>
+<br>
+<p>        )</p>
+<br>
+<p>        assert response.status_code == 200</p>
+<br>
+<p>        data = response.json()</p>
+<br>
+<p>        assert data["email"] == "user@example.com"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    // JavaScript with supertest + jest</p>
+<br>
+<p>    const request = require('supertest');</p>
+<br>
+<p>    const app = require('../app');</p>
+<br>
+<br>
+<br>
+<p>    describe('User API', () => {</p>
+<br>
+<p>      it('should return user data', async () => {</p>
+<br>
+<p>        const res = await request(app)</p>
+<br>
+<p>          .get('/api/users/1')</p>
+<br>
+<p>          .set('Authorization', 'Bearer test-token');</p>
+<br>
+<p>        expect(res.status).toBe(200);</p>
+<br>
+<p>        expect(res.body.email).toBe('user@example.com');</p>
+<br>
+<p>      });</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Comparison Table</h2>
+<br>
+<br>
+<br>
 <br>
 <p>| Tool | Interface | Collaboration | Git-Friendly | Price | Best For |</p>
+<br>
 <p>|------|-----------|--------------|--------------|-------|----------|</p>
+<br>
 <p>| Postman | GUI | Cloud workspaces | Limited | Free/Paid | Team API lifecycle |</p>
+<br>
 <p>| Insomnia | GUI | Cloud (paid) | Limited | Free/Paid | Individual developers |</p>
+<br>
 <p>| Bruno | GUI | Git-based | Yes | Free (OSS) | Git-native teams |</p>
+<br>
 <p>| HTTPie | CLI | No | No | Free | Quick terminal testing |</p>
+<br>
 <p>| REST Client | VS Code | Git-based | Yes | Free | Editor-integrated testing |</p>
+<br>
 <p>| Code frameworks | Code | Git-based | Yes | Free | CI/CD automation |</p>
 <br>
-<h2> Recommendations</h2>
 <br>
-<li>**For individual development**: Insomnia or REST Client (VS Code).</li>
-<li>**For team collaboration**: Postman (full lifecycle) or Bruno (Git-native).</li>
-<li>**For CI/CD automation**: Code frameworks (pytest, supertest, Newman).</li>
-<li>**For quick debugging**: HTTPie or curl.</li>
-<li>**For GraphQL-heavy projects**: Insomnia has the best GraphQL experience.</li>
 <br>
-<h2> Summary</h2>
+<br>
+<h2>  Recommendations</h2>
+<br>
+<br>
+<br>
+<p>* **For individual development**: Insomnia or REST Client (VS Code).</p>
+<p>* **For team collaboration**: Postman (full lifecycle) or Bruno (Git-native).</p>
+<p>* **For CI/CD automation**: Code frameworks (pytest, supertest, Newman).</p>
+<p>* **For quick debugging**: HTTPie or curl.</p>
+<p>* **For GraphQL-heavy projects**: Insomnia has the best GraphQL experience.</p>
+<br>
+<br>
+<br>
+<h2>  Summary</h2>
+<br>
+<br>
+<br>
 <br>
 <p>The API testing tool landscape has diversified significantly. Postman remains the most feature-rich option for teams, while Bruno represents the future with its Git-native, open-source approach. For CI/CD pipelines, programmatic frameworks provide the most control. Start with a GUI client for exploration and debugging, then codify critical flows as automated tests for your pipeline.</p></div>
     </article>

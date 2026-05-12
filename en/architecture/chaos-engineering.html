@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="chaos-engineering">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Chaos Engineering: Building Resilient Systems">
+    <meta property="og:description" content="Introduction to chaos engineering: principles, practices, and tools for testing system resilience in production.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/chaos-engineering.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Chaos Engineering: Building Resilient Systems">
+    <meta name="twitter:description" content="Introduction to chaos engineering: principles, practices, and tools for testing system resilience in production.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Chaos Engineering: Building Resilient Systems — SourceHub</title>
+    <meta name="description" content="Introduction to chaos engineering: principles, practices, and tools for testing system resilience in production.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/chaos-engineering.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/chaos-engineering.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Chaos Engineering: Building Resilient Systems",
+      "description": "Introduction to chaos engineering: principles, practices, and tools for testing system resilience in production.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "491",
+      "keywords": "Architecture, System Design, Backend",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/chaos-engineering.html"},
+      "articleBody": "Chaos Engineering: Building Resilient Systems Chaos engineering is the discipline of experimenting on a system to build confidence in its capacity to withstand turbulent conditions. By intentionally injecting failures, teams discover weaknesses before they cause user-facing incidents. Core Principles Chaos engineering follows four principles: define a steady state (what normal operation looks like), hypothesize that the steady state will persist, introduce realistic variables (server failures, network delays, resource exhaustion), and measure the difference between the hypothesized state and the actual state. The goal is not to break things randomly. Each experiment has a clear hypothesis and measurable outcomes. This scientific approach distinguishes chaos engineering from simple testing. Types of Experiments Common chaos experiments include killing random pods in a Kubernetes cluster, introducing network latency between services, exhausting CPU or memory on a node, terminating database connections, and failing an entire availability zone. Advanced experiments simulate dependent service degradation, certificate expiration, DNS failures, and traffic spikes. Each experiment should target a specific failure mode and have a defined blast radius. Tools Chaos Monkey (by Netflix) pioneered the field by randomly terminating production instances. Chaos Mesh runs on Kubernetes and supports pod, network, and stress experiments. Gremlin provides a commercial platform with a GUI and scheduling. LitmusChaos is an open-source CNCF project with a wide range of experiments. Getting Started Begin with small, low-risk experiments in staging environments. Run experiments during business hours when engineers are available to respond. Start with infrastructure failures (kill a pod) before moving to complex scenarios (simulate a region outage). Document every experiment and its results. Gradually move to production experiments with careful blast radius controls. Blast Radius Always define the blast radius before an experiment. Tools like Chaos Mesh allow you to target specific namespaces, deployments, or pods. Use an automated rollback mechanism that stops the experiment if error rates exceed thresholds. Production experiments should start at 1% traffic or less."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Chaos Engineering: Building Resilient Systems"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Chaos Engineering: Building Resilient Systems
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">Chaos Engineering: Building Resilient Systems</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Chaos Engineering: Building Resilient Systems</h1>
+<p>Chaos engineering is the discipline of experimenting on a system to build confidence in its capacity to withstand turbulent conditions. By intentionally injecting failures, teams discover weaknesses before they cause user-facing incidents.</p>
+<br>
+<h2> Core Principles</h2>
+<br>
+<p>Chaos engineering follows four principles: define a steady state (what normal operation looks like), hypothesize that the steady state will persist, introduce realistic variables (server failures, network delays, resource exhaustion), and measure the difference between the hypothesized state and the actual state.</p>
+<br>
+<p>The goal is not to break things randomly. Each experiment has a clear hypothesis and measurable outcomes. This scientific approach distinguishes chaos engineering from simple testing.</p>
+<br>
+<h2> Types of Experiments</h2>
+<br>
+<p>Common chaos experiments include killing random pods in a Kubernetes cluster, introducing network latency between services, exhausting CPU or memory on a node, terminating database connections, and failing an entire availability zone.</p>
+<br>
+<p>Advanced experiments simulate dependent service degradation, certificate expiration, DNS failures, and traffic spikes. Each experiment should target a specific failure mode and have a defined blast radius.</p>
+<br>
+<h2> Tools</h2>
+<br>
+<p>Chaos Monkey (by Netflix) pioneered the field by randomly terminating production instances. Chaos Mesh runs on Kubernetes and supports pod, network, and stress experiments. Gremlin provides a commercial platform with a GUI and scheduling. LitmusChaos is an open-source CNCF project with a wide range of experiments.</p>
+<br>
+<h2> Getting Started</h2>
+<br>
+<p>Begin with small, low-risk experiments in staging environments. Run experiments during business hours when engineers are available to respond. Start with infrastructure failures (kill a pod) before moving to complex scenarios (simulate a region outage). Document every experiment and its results. Gradually move to production experiments with careful blast radius controls.</p>
+<br>
+<h2> Blast Radius</h2>
+<br>
+<p>Always define the blast radius before an experiment. Tools like Chaos Mesh allow you to target specific namespaces, deployments, or pods. Use an automated rollback mechanism that stops the experiment if error rates exceed thresholds. Production experiments should start at 1% traffic or less.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

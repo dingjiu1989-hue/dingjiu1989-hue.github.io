@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1865",
+      "wordCount": "359",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/columnar-databases.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/columnar-databases.html"},
+      "articleBody": "Columnar Databases: When and How to Use Them Columnar Storage Columnar databases store data by column rather than by row. This enables aggressive compression and fast analytical queries. Row vs Columnar Row-oriented storage writes each row contiguously. Columnar stores all values of a column together, enabling efficient scans of a few columns across millions of rows. -- ClickHouse: columnar query SELECT region, SUM(revenue) FROM sales WHERE year = 2026 GROUP BY region; -- Only reads 3 columns instead of all columns Compression Techniques Columnar databases use specialized compression: run-length encoding for low-cardinality columns, dictionary encoding, and delta encoding for sorted columns. Compression ratios of 5-10x are common. When to Use Columnar | Database | Best For | Notable Feature | |----------|----------|-----------------| | ClickHouse | Real-time analytics | MergeTree engine | | DuckDB | Embedded analytics | In-process OLAP | | Redshift | Cloud data warehousing | MPP architecture | -- ClickHouse table CREATE TABLE events ( timestamp DateTime, event_type String, user_id UInt32 ) ENGINE = MergeTree() ORDER BY (event_type, timestamp); Conclusion Use columnar databases for analytical workloads scanning many rows but few columns. ClickHouse for real-time, DuckDB for embedded, Redshift for cloud. Avoid for transactional workloads with frequent single-row operations."
     }
     </script>
     <script type="application/ld+json">
@@ -73,339 +74,58 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Columnar Databases: When and How to Use Them</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
-      <div class="article-body"><p>Columnar databases store data by column rather than by row. This seemingly simple difference has profound implications for analytical query performance, compression, and storage efficiency. This article explains how columnar databases work, when to use them, and how they compare to traditional row-oriented databases.</p>
-<br>
-<h2> Row-Oriented vs Columnar Storage</h2>
-<br>
-<h3>Row-Oriented Storage</h3>
-<br>
-<p>Row-oriented databases (PostgreSQL, MySQL, SQL Server) store all columns of a row together on disk.</p>
-<br>
-<pre><code>
-Row 1: [id=1, name=Alice, age=30, city=NYC]
-
-Row 2: [id=2, name=Bob, age=25, city=SFO]
-
-Row 3: [id=3, name=Charlie, age=35, city=NYC]
-
-</code></pre>
+      <div class="article-body"><h1>Columnar Databases: When and How to Use Them</h1>
 <br>
-<p>**Best for**: Transactions (OLTP). When you need to read or write entire rows (SELECT * WHERE id = N), row-oriented is optimal.</p>
+<p>Columnar Storage   </p>
+<p>Columnar databases store data by column rather than by row. This enables aggressive compression and fast analytical queries.   </p>
+<p>Row vs Columnar   </p>
+<p>Row-oriented storage writes each row contiguously. Columnar stores all values of a column together, enabling efficient scans of a few columns across millions of rows.   </p>
 <br>
-<h3>Columnar Storage</h3>
 <br>
-<p>Columnar databases store each column's values together on disk.</p>
 <br>
-<pre><code>
-Column id:     [1, 2, 3]
-
-Column name:   [Alice, Bob, Charlie]
-
-Column age:    [30, 25, 35]
-
-Column city:   [NYC, SFO, NYC]
-
-</code></pre>
-<br>
-<p>**Best for**: Analytics (OLAP). When you need to scan many rows but only a few columns (SELECT SUM(amount) WHERE date > ...), columnar is dramatically faster.</p>
-<br>
-<h2> Compression Techniques</h2>
-<br>
-<p>Columnar storage enables compression techniques that are not effective on row-oriented data, because values in a single column tend to be similar.</p>
-<br>
-<h3>Run-Length Encoding (RLE)</h3>
-<br>
-<p>RLE replaces consecutive identical values with a count. It is highly effective on sorted columns with low cardinality.</p>
-<br>
-<pre><code>
-City column before RLE: [NYC, NYC, NYC, SFO, SFO, NYC, NYC, NYC, NYC]
-
-City column after RLE:  [NYC:3, SFO:2, NYC:4]
-
-</code></pre>
-<br>
-<p>If the city column is sorted, compression improves further:</p>
-<br>
-<pre><code>
-Sorted city column:     [NYC, NYC, NYC, NYC, NYC, NYC, NYC, SFO, SFO]
-
-RLE after sorting:      [NYC:7, SFO:2]
-
-</code></pre>
-<br>
-<h3>Dictionary Encoding</h3>
-<br>
-<p>Dictionary encoding replaces repeated values with smaller integer codes.</p>
-<br>
-<pre><code>
-Dictionary:
-
-  0: NYC
-
-  1: SFO
-
-  2: CHI
-
-
-
-Column stored as integers: [0, 0, 1, 0, 2, 2, 1]
-
-Integer array can be further compressed with RLE or bit-packing.
-
-</code></pre>
-<br>
-<h3>Delta Encoding</h3>
-<br>
-<p>Delta encoding stores the difference between consecutive values rather than the values themselves. It is effective for monotonically increasing values like timestamps or sequential IDs.</p>
-<br>
-<pre><code>
-Original: [1000, 1005, 1010, 1020, 1030]
-
-Deltas:   [1000, 5, 5, 10, 10]
-
-</code></pre>
-<br>
-<h3>Bitmap Indexing</h3>
-<br>
-<p>For low-cardinality columns, columnar databases create bitmap indexes. Each distinct value has a bitmap where each bit represents whether a row has that value.</p>
-<br>
-<pre><code>
-City:    [NYC, SFO, NYC, CHI, SFO, NYC]
-
-NYC:     [1, 0, 1, 0, 0, 1]
-
-SFO:     [0, 1, 0, 0, 1, 0]
-
-CHI:     [0, 0, 0, 1, 0, 0]
-
-</code></pre>
-<br>
-<p>Bitmap operations (AND, OR, NOT) are extremely fast using CPU bitwise instructions.</p>
-<br>
-<h3>Compression Ratios</h3>
-<br>
-<p>Columnar databases typically achieve 5-10x compression compared to row-oriented storage on analytical workloads. This means more data fits in memory, further improving performance.</p>
-<br>
-<h2> Query Performance</h2>
-<br>
-<p>Columnar databases excel at queries that scan many rows but access few columns.</p>
-<br>
-<h3>The Advantage</h3>
-<br>
-<pre><code>
--- Analytical query: Poor performance on row-oriented DB
-
--- Needs to scan all rows but only reads one column
-
-SELECT region, SUM(revenue)
-
-FROM sales
-
-WHERE year = 2026
-
-GROUP BY region;
-
-</code></pre>
-<br>
-<p>In a row-oriented database, this query reads all columns for every matching row, wasting I/O and memory on unused data.</p>
-<br>
-<p>In a columnar database:</p>
-<li>Only the `year` column is scanned to find matching rows.</li>
-<p>2. Only the `region` and `revenue` columns are read for matching rows.</p>
-<p>3. Columnar compression reduces the data volume.</p>
-<p>4. The database can use vectorized processing (SIMD instructions) on compressed column data.</p>
-<br>
-<h3>Vectorized Query Execution</h3>
-<br>
-<p>Columnar databases use vectorized execution: instead of processing one row at a time, they process batches of rows (typically 1024 or 4096) using CPU SIMD instructions.</p>
-<br>
-<pre><code>
-# Pseudocode: Vectorized processing vs row-by-row
-
-# Row-by-row (slow)
-
-total = 0
-
-for row in rows:
-
-    if row[&#x27;region&#x27;] == target_region:
-
-        total += row[&#x27;revenue&#x27;]
-
-
-
-# Vectorized (fast)
-
-region_column = load_column(&#x27;region&#x27;)
-
-revenue_column = load_column(&#x27;revenue&#x27;)
-
-mask = region_column == target_region  # SIMD comparison
-
-filtered_revenue = revenue_column[mask]  # SIMD gather
-
-total = sum(filtered_revenue)  # SIMD reduction
-
-</code></pre>
-<br>
-<h2> Columnar Database Platforms</h2>
-<br>
-<h3>ClickHouse</h3>
-<br>
-<p>ClickHouse is an open-source columnar database designed for real-time analytics. It is known for exceptional query speed on large datasets.</p>
-<br>
-<pre><code>
--- ClickHouse: Create a MergeTree table
-
-CREATE TABLE sales (
-
-    order_id UInt64,
-
-    order_date Date,
-
-    customer_id UInt32,
-
-    amount Float64,
-
-    region String
-
-) ENGINE = MergeTree()
-
-ORDER BY (order_date, region)
-
-PARTITION BY toYYYYMM(order_date);
-
-
-
--- ClickHouse: Aggregation query
-
-SELECT
-
-    region,
-
-    toMonth(order_date) as month,
-
-    count() as order_count,
-
-    sum(amount) as total_revenue
-
-FROM sales
-
-WHERE order_date &gt;= &#x27;2026-01-01&#x27;
-
-GROUP BY region, month
-
-ORDER BY total_revenue DESC;
-
-</code></pre>
-<br>
-<p>**Best for**: Real-time analytics, time-series data, event logging, monitoring dashboards.</p>
-<br>
-<h3>Amazon Redshift</h3>
-<br>
-<p>Redshift uses columnar storage with automatic compression encoding selection.</p>
-<br>
-<pre><code>
--- Redshift: Create a columnar table with sort key
-
-CREATE TABLE sales (
-
-    order_id BIGINT ENCODE ZSTD,
-
-    order_date DATE ENCODE DELTA,
-
-    region VARCHAR(50) ENCODE BYTEDICT,
-
-    amount DECIMAL(10,2) ENCODE ZSTD
-
-)
-
-DISTKEY(region)
-
-SORTKEY(order_date, region);
-
-</code></pre>
-<br>
-<p>Redshift automatically selects the best compression encoding based on sample data.</p>
-<br>
-<h3>Google BigQuery</h3>
-<br>
-<p>BigQuery uses the Capacitor columnar storage format, which is proprietary and automatically optimized.</p>
-<br>
-<pre><code>
--- BigQuery: Partitioned and clustered table
-
-CREATE TABLE mydataset.sales
-
-PARTITION BY DATE(order_date)
-
-CLUSTER BY region, customer_id
-
-AS SELECT * FROM source_table;
-
-</code></pre>
-<br>
-<p>BigQuery charges by bytes processed, not storage. Columnar storage and clustering minimize bytes scanned.</p>
-<br>
-<h2> Columnar vs Row-Oriented Comparison</h2>
-<br>
-<p>| Aspect | Row-Oriented | Columnar |</p>
-<p>|--------|--------------|----------|</p>
-<p>| Read pattern | Full rows | Few columns, many rows |</p>
-<p>| Write pattern | Single rows | Batches preferred |</p>
-<p>| Compression | 1-2x | 5-10x |</p>
-<p>| Range scan | Efficient | Very efficient |</p>
-<p>| Point query | Very efficient | Less efficient |</p>
-<p>| Inserts/updates | Efficient | Expensive |</p>
-<p>| Concurrency | High | Lower |</p>
-<p>| Use case | OLTP | OLAP / Analytics |</p>
-<br>
-<h3>When to Use Columnar</h3>
-<br>
-<li>Reporting and dashboards.</li>
-<li>Time-series analysis.</li>
-<li>Log analytics.</li>
-<li>Business intelligence workloads.</li>
-<li>Data warehousing.</li>
-<li>Any query that aggregates large datasets.</li>
-<br>
-<h3>When NOT to Use Columnar</h3>
-<br>
-<li>Transactional workloads with frequent single-row inserts and updates.</li>
-<li>Applications requiring high concurrency with many small queries.</li>
-<li>Systems needing real-time point lookups by primary key.</li>
-<li>Write-heavy workloads (columnar compresses data in batches, individual inserts are expensive).</li>
-<br>
-<h2> Hybrid Approaches</h2>
-<br>
-<p>Some databases use hybrid storage to handle both OLTP and OLAP workloads.</p>
-<br>
-<h3>PostgreSQL + Columnar Extensions</h3>
-<br>
-<pre><code>
--- PostgreSQL with pg_analytics extension for columnar execution
-
-CREATE EXTENSION pg_analytics;
-
-
-
--- Set a table to use columnar storage
-
-ALTER TABLE large_analytics_table SET ACCESS METHOD columnar;
-
-</code></pre>
-<br>
-<h3>HTAP (Hybrid Transactional/Analytical Processing)</h3>
-<br>
-<p>HTAP databases handle both workloads in a single system:</p>
-<br>
-<li>**SingleStore**: Row-oriented for transactions, columnar for analytics, automatically routed.</li>
-<li>**Amazon Aurora**: Row-oriented MySQL/PostgreSQL compatible with parallel query for analytical workloads.</li>
-<li>**MySQL HeatWave**: In-memory columnar engine for MySQL with automatic query offloading.</li>
-<br>
-<h2> Conclusion</h2>
-<br>
-<p>Columnar databases are essential for modern analytical workloads. Their storage format enables aggressive compression (5-10x), vectorized query execution, and dramatically faster queries when scanning many rows but few columns. Choose ClickHouse for real-time analytics, Redshift for cloud data warehousing, BigQuery for serverless analytics, and columnar extensions or HTAP databases when you need hybrid capabilities. Use row-oriented databases for transactional workloads and switch to columnar for analytics.</p></div>
+<p>    -- ClickHouse: columnar query</p>
+<br>
+<p>    SELECT region, SUM(revenue)</p>
+<br>
+<p>    FROM sales</p>
+<br>
+<p>    WHERE year = 2026</p>
+<br>
+<p>    GROUP BY region;</p>
+<br>
+<br>
+<br>
+<p>    -- Only reads 3 columns instead of all columns</p>
+<br>
+<br>
+<br>
+<br>
+<p>Compression Techniques   </p>
+<p>Columnar databases use specialized compression: run-length encoding for low-cardinality columns, dictionary encoding, and delta encoding for sorted columns. Compression ratios of 5-10x are common.   </p>
+<p>When to Use Columnar   </p>
+<p>| Database | Best For | Notable Feature | |----------|----------|-----------------| | ClickHouse | Real-time analytics | MergeTree engine | | DuckDB | Embedded analytics | In-process OLAP | | Redshift | Cloud data warehousing | MPP architecture |   </p>
+<br>
+<br>
+<br>
+<p>    -- ClickHouse table</p>
+<br>
+<p>    CREATE TABLE events (</p>
+<br>
+<p>        timestamp DateTime,</p>
+<br>
+<p>        event_type String,</p>
+<br>
+<p>        user_id UInt32</p>
+<br>
+<p>    ) ENGINE = MergeTree()</p>
+<br>
+<p>    ORDER BY (event_type, timestamp);</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
+<p>Use columnar databases for analytical workloads scanning many rows but few columns. ClickHouse for real-time, DuckDB for embedded, Redshift for cloud. Avoid for transactional workloads with frequent single-row operations.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

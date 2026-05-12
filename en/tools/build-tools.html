@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tools" data-exclude="build-tools">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Build Tools: esbuild, swc, turbopack, vite — Speed Comparison">
+    <meta property="og:description" content="Compare modern JavaScript build tools: esbuild, swc, turbopack, and vite. Benchmark bundling speed, plugin ecosystems, configuration, and production output qual">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tools/build-tools.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Build Tools: esbuild, swc, turbopack, vite — Speed Comparison">
+    <meta name="twitter:description" content="Compare modern JavaScript build tools: esbuild, swc, turbopack, and vite. Benchmark bundling speed, plugin ecosystems, configuration, and production output qual">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison — SourceHub</title>
+    <meta name="description" content="Compare modern JavaScript build tools: esbuild, swc, turbopack, and vite. Benchmark bundling speed, plugin ecosystems, configuration, and production output qual">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tools/build-tools.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tools/build-tools.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Build Tools: esbuild, swc, turbopack, vite — Speed Comparison",
+      "description": "Compare modern JavaScript build tools: esbuild, swc, turbopack, and vite. Benchmark bundling speed, plugin ecosystems, configuration, and production output qual",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1634",
+      "keywords": "Technology, DevTools, Productivity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/build-tools.html"},
+      "articleBody": "Build Tools: esbuild, swc, turbopack, vite \u2014 Speed Comparison Introduction JavaScript build tooling has undergone a revolution. Webpack-era builds that took minutes are now replaced by tools that bundle in milliseconds. The new generation \u2014 esbuild, swc, turbopack, and vite \u2014 leverage native code (Go, Rust) and modern architectures to deliver dramatically faster builds. esbuild esbuild is an extremely fast bundler written in Go: // build.js const esbuild = require(\"esbuild\"); esbuild.build({ entryPoints: [\"src/index.tsx\"], bundle: true, outfile: \"dist/bundle.js\", minify: true, sourcemap: true, target: [\"es2020\"], loader: { \".tsx\": \"tsx\", \".png\": \"dataurl\", \".svg\": \"text\", }, define: { \"process.env.NODE_ENV\": '\"production\"', }, plugins: [], }).catch(() => process.exit(1)); // Watch mode esbuild.context({ entryPoints: [\"src/index.tsx\"], bundle: true, outfile: \"dist/bundle.js\", }).then(ctx => ctx.watch()); // v0.24+ supports CSS bundling and bundling # Command line esbuild src/index.tsx --bundle --outfile=dist/bundle.js --minify **Speed**: 10-100x faster than Webpack on equivalent bundles. A 1000-module TypeScript project bundles in ~100ms. Builds are CPU-bound on Go's efficient parallelism. **Limitations**: No native TypeScript type checking (delegates to tsc separately). Plugin ecosystem is smaller. Code splitting is less sophisticated than Webpack's. swc swc is a Rust-based compiler and bundler: // .swcrc { \"jsc\": { \"parser\": { \"syntax\": \"typescript\", \"tsx\": true, \"decorators\": true }, \"target\": \"es2020\", \"transform\": { \"react\": { \"runtime\": \"automatic\" } }, \"minify\": { \"compress\": true, \"mangle\": true } }, \"module\": { \"type\": \"es6\" }, \"minify\": true } # Transpile a file swc src/index.ts -o dist/index.js # Bundle entry points swc src/index.ts --out-dir dist --config-file .swcrc swc is commonly used as a compiler replacement within Webpack (via swc-loader) or as a standalone for TypeScript transpilation. Its bundler is newer than esbuild's but benefits from Rust's memory safety and parallelism. **Speed**: Comparable to esbuild for transpilation. Slightly slower for bundling due to more conservative AST handling. The `minify` pass is very fast. Turbopack Vercel's Rust-based incremental bundler, designed as a Webpack successor: // next.config.js \u2014 Turbopack in Next.js const nextConfig = { experimental: { turbo: { rules: { \"*.svg\": [\"@svgr/webpack\"], }, resolveAlias: { underscore: \"lodash\", }, treeShaking: true, minify: \"esbuild\", // Use esbuild for minification }, }, }; module.exports = nextConfig; # Start Next.js with Turbopack next dev --turbo # Build with Turbopack (Next.js 15+) next build --turbo Turbopack is deeply integrated with Next.js. As a standalone bundler, it is less mature. Its key innovation is function-level caching: it tracks changes at the function granularity and only rebuilds affected functions. **Speed**: Up to 10x faster than Webpack in development. Cold builds are comparable to esbuild. Hot module replacement is near-instant with function-level granularity. Vite Vite uses esbuild for dependencies and Rollup for production builds: // vite.config.ts import { defineConfig } from \"vite\"; import react from \"@vitejs/plugin-react\"; import path from \"path\"; export default defineConfig({ plugins: [react()], resolve: { alias: { \"@\": path.resolve(__dirname, \"./src\"), }, }, build: { rollupOptions: { output: { manualChunks: { vendor: [\"react\", \"react-dom\"], utils: [\"lodash\", \"date-fns\"], }, }, }, target: \"es2020\", minify: \"esbuild\", cssCodeSplit: true, }, server: { hmr: true, watch: { usePolling: false, }, }, }); # Development vite dev # Near-instant start, uses esbuild for pre-bundling # Production build vite build # Uses Rollup for optimal production output **Speed**: Development server starts in Benchmarks | Task | esbuild | swc | Turbopack | Vite | |------|---------|-----|-----------|------| | Bundle 500KB TS project | 45ms | 60ms | 50ms | 80ms (pre-bundle) | | Bundle 10MB TS project | 520ms | 680ms | N/A | 1200ms | | Production build (large) | 2.1s | 2.8s | 1.5s (Next.js) | 4.5s | | Hot module reload | 5-10ms | 5-10ms | | Cold start (dev) | N/A | N/A | 300ms | Recommendations * **Fastest bundling**: esbuild for raw speed in CI or custom build pipelines. * **TypeScript transpilation**: swc as a drop-in replacement for tsc (10-20x faster). * **Next.js projects**: Use Turbopack built-in with Next.js 15+ for zero-config speed. * **Framework-agnostic dev**: Vite for the best development HMR experience with any framework. * **Production builds**: Vite + Rollup for optimal tree-shaking and code-splitting. Combine with esbuild for minification. Many teams use a combination: esbuild for dependencies, Vite for development, and esbuild or swc for CI compilation without type checking, with a separate `tsc --noEmit` step for type safety."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tool Recommendations", "item": "https://dingjiu1989-hue.github.io/en/tools/"},
+        {"@type": "ListItem", "position": 3, "name": "Build Tools: esbuild, swc, turbopack, vite — Speed Comparison"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a> › Build Tools: esbuild, swc, turbopack, vite — Speed Comparison
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">DevTools</span>
+        <span class="tag-cat">Productivity</span></div>
+      <h1 class="article-title">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<p>JavaScript build tooling has undergone a revolution. Webpack-era builds that took minutes are now replaced by tools that bundle in milliseconds. The new generation — esbuild, swc, turbopack, and vite — leverage native code (Go, Rust) and modern architectures to deliver dramatically faster builds.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  esbuild</h2>
+<br>
+<br>
+<br>
+<br>
+<p>esbuild is an extremely fast bundler written in Go:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    // build.js</p>
+<br>
+<p>    const esbuild = require("esbuild");</p>
+<br>
+<br>
+<br>
+<p>    esbuild.build({</p>
+<br>
+<p>      entryPoints: ["src/index.tsx"],</p>
+<br>
+<p>      bundle: true,</p>
+<br>
+<p>      outfile: "dist/bundle.js",</p>
+<br>
+<p>      minify: true,</p>
+<br>
+<p>      sourcemap: true,</p>
+<br>
+<p>      target: ["es2020"],</p>
+<br>
+<p>      loader: {</p>
+<br>
+<p>        ".tsx": "tsx",</p>
+<br>
+<p>        ".png": "dataurl",</p>
+<br>
+<p>        ".svg": "text",</p>
+<br>
+<p>      },</p>
+<br>
+<p>      define: {</p>
+<br>
+<p>        "process.env.NODE_ENV": '"production"',</p>
+<br>
+<p>      },</p>
+<br>
+<p>      plugins: [],</p>
+<br>
+<p>    }).catch(() => process.exit(1));</p>
+<br>
+<br>
+<br>
+<p>    // Watch mode</p>
+<br>
+<p>    esbuild.context({</p>
+<br>
+<p>      entryPoints: ["src/index.tsx"],</p>
+<br>
+<p>      bundle: true,</p>
+<br>
+<p>      outfile: "dist/bundle.js",</p>
+<br>
+<p>    }).then(ctx => ctx.watch());</p>
+<br>
+<br>
+<br>
+<p>    // v0.24+ supports CSS bundling and bundling</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Command line</p>
+<br>
+<p>    esbuild src/index.tsx --bundle --outfile=dist/bundle.js --minify</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Speed**: 10-100x faster than Webpack on equivalent bundles. A 1000-module TypeScript project bundles in ~100ms. Builds are CPU-bound on Go's efficient parallelism.</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Limitations**: No native TypeScript type checking (delegates to tsc separately). Plugin ecosystem is smaller. Code splitting is less sophisticated than Webpack's.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  swc</h2>
+<br>
+<br>
+<br>
+<br>
+<p>swc is a Rust-based compiler and bundler:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    // .swcrc</p>
+<br>
+<p>    {</p>
+<br>
+<p>      "jsc": {</p>
+<br>
+<p>        "parser": {</p>
+<br>
+<p>          "syntax": "typescript",</p>
+<br>
+<p>          "tsx": true,</p>
+<br>
+<p>          "decorators": true</p>
+<br>
+<p>        },</p>
+<br>
+<p>        "target": "es2020",</p>
+<br>
+<p>        "transform": {</p>
+<br>
+<p>          "react": {</p>
+<br>
+<p>            "runtime": "automatic"</p>
+<br>
+<p>          }</p>
+<br>
+<p>        },</p>
+<br>
+<p>        "minify": {</p>
+<br>
+<p>          "compress": true,</p>
+<br>
+<p>          "mangle": true</p>
+<br>
+<p>        }</p>
+<br>
+<p>      },</p>
+<br>
+<p>      "module": {</p>
+<br>
+<p>        "type": "es6"</p>
+<br>
+<p>      },</p>
+<br>
+<p>      "minify": true</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Transpile a file</p>
+<br>
+<p>    swc src/index.ts -o dist/index.js</p>
+<br>
+<br>
+<br>
+<p>    # Bundle entry points</p>
+<br>
+<p>    swc src/index.ts --out-dir dist --config-file .swcrc</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>swc is commonly used as a compiler replacement within Webpack (via swc-loader) or as a standalone for TypeScript transpilation. Its bundler is newer than esbuild's but benefits from Rust's memory safety and parallelism.</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Speed**: Comparable to esbuild for transpilation. Slightly slower for bundling due to more conservative AST handling. The `minify` pass is very fast.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Turbopack</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Vercel's Rust-based incremental bundler, designed as a Webpack successor:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    // next.config.js — Turbopack in Next.js</p>
+<br>
+<p>    const nextConfig = {</p>
+<br>
+<p>      experimental: {</p>
+<br>
+<p>        turbo: {</p>
+<br>
+<p>          rules: {</p>
+<br>
+<p>            "*.svg": ["@svgr/webpack"],</p>
+<br>
+<p>          },</p>
+<br>
+<p>          resolveAlias: {</p>
+<br>
+<p>            underscore: "lodash",</p>
+<br>
+<p>          },</p>
+<br>
+<p>          treeShaking: true,</p>
+<br>
+<p>          minify: "esbuild", // Use esbuild for minification</p>
+<br>
+<p>        },</p>
+<br>
+<p>      },</p>
+<br>
+<p>    };</p>
+<br>
+<br>
+<br>
+<p>    module.exports = nextConfig;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Start Next.js with Turbopack</p>
+<br>
+<p>    next dev --turbo</p>
+<br>
+<br>
+<br>
+<p>    # Build with Turbopack (Next.js 15+)</p>
+<br>
+<p>    next build --turbo</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Turbopack is deeply integrated with Next.js. As a standalone bundler, it is less mature. Its key innovation is function-level caching: it tracks changes at the function granularity and only rebuilds affected functions.</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Speed**: Up to 10x faster than Webpack in development. Cold builds are comparable to esbuild. Hot module replacement is near-instant with function-level granularity.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Vite</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Vite uses esbuild for dependencies and Rollup for production builds:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    // vite.config.ts</p>
+<br>
+<p>    import { defineConfig } from "vite";</p>
+<br>
+<p>    import react from "@vitejs/plugin-react";</p>
+<br>
+<p>    import path from "path";</p>
+<br>
+<br>
+<br>
+<p>    export default defineConfig({</p>
+<br>
+<p>      plugins: [react()],</p>
+<br>
+<p>      resolve: {</p>
+<br>
+<p>        alias: {</p>
+<br>
+<p>          "@": path.resolve(__dirname, "./src"),</p>
+<br>
+<p>        },</p>
+<br>
+<p>      },</p>
+<br>
+<p>      build: {</p>
+<br>
+<p>        rollupOptions: {</p>
+<br>
+<p>          output: {</p>
+<br>
+<p>            manualChunks: {</p>
+<br>
+<p>              vendor: ["react", "react-dom"],</p>
+<br>
+<p>              utils: ["lodash", "date-fns"],</p>
+<br>
+<p>            },</p>
+<br>
+<p>          },</p>
+<br>
+<p>        },</p>
+<br>
+<p>        target: "es2020",</p>
+<br>
+<p>        minify: "esbuild",</p>
+<br>
+<p>        cssCodeSplit: true,</p>
+<br>
+<p>      },</p>
+<br>
+<p>      server: {</p>
+<br>
+<p>        hmr: true,</p>
+<br>
+<p>        watch: {</p>
+<br>
+<p>          usePolling: false,</p>
+<br>
+<p>        },</p>
+<br>
+<p>      },</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Development</p>
+<br>
+<p>    vite dev    # Near-instant start, uses esbuild for pre-bundling</p>
+<br>
+<br>
+<br>
+<p>    # Production build</p>
+<br>
+<p>    vite build  # Uses Rollup for optimal production output</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Speed**: Development server starts in <50ms regardless of project size. Native ESM in dev means no bundling needed. Pre-bundling dependencies with esbuild only happens once. Production builds are slower (Rollup) but produce optimized output.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Benchmarks</h2>
+<br>
+<br>
+<br>
+<br>
+<p>| Task | esbuild | swc | Turbopack | Vite |</p>
+<br>
+<p>|------|---------|-----|-----------|------|</p>
+<br>
+<p>| Bundle 500KB TS project | 45ms | 60ms | 50ms | 80ms (pre-bundle) |</p>
+<br>
+<p>| Bundle 10MB TS project | 520ms | 680ms | N/A | 1200ms |</p>
+<br>
+<p>| Production build (large) | 2.1s | 2.8s | 1.5s (Next.js) | 4.5s |</p>
+<br>
+<p>| Hot module reload | 5-10ms | 5-10ms | <5ms | <10ms |</p>
+<br>
+<p>| Cold start (dev) | N/A | N/A | 300ms | <50ms |</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Recommendations</h2>
+<br>
+<br>
+<br>
+<p>* **Fastest bundling**: esbuild for raw speed in CI or custom build pipelines.</p>
+<p>* **TypeScript transpilation**: swc as a drop-in replacement for tsc (10-20x faster).</p>
+<p>* **Next.js projects**: Use Turbopack built-in with Next.js 15+ for zero-config speed.</p>
+<p>* **Framework-agnostic dev**: Vite for the best development HMR experience with any framework.</p>
+<p>* **Production builds**: Vite + Rollup for optimal tree-shaking and code-splitting. Combine with esbuild for minification.</p>
+<br>
+<br>
+<br>
+<p>Many teams use a combination: esbuild for dependencies, Vite for development, and esbuild or swc for CI compilation without type checking, with a separate `tsc --noEmit` step for type safety.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div>
+      <noscript><div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

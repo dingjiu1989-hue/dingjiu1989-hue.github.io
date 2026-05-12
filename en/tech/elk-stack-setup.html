@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="elk-stack-setup">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization">
+    <meta property="og:description" content="Comprehensive guide to ELK Stack covering Elasticsearch cluster setup, Logstash pipeline configuration, Kibana visualization, performance tuning, and index lifecycle management.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/elk-stack-setup.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization">
+    <meta name="twitter:description" content="Comprehensive guide to ELK Stack covering Elasticsearch cluster setup, Logstash pipeline configuration, Kibana visualization, performance tuning, and index lifecycle management.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization — SourceHub</title>
+    <meta name="description" content="Comprehensive guide to ELK Stack covering Elasticsearch cluster setup, Logstash pipeline configuration, Kibana visualization, performance tuning, and index lifecycle management.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/elk-stack-setup.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/elk-stack-setup.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization",
+      "description": "Comprehensive guide to ELK Stack covering Elasticsearch cluster setup, Logstash pipeline configuration, Kibana visualization, performance tuning, and index lifecycle management.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1333",
+      "keywords": "Technology, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/elk-stack-setup.html"},
+      "articleBody": "ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization Introduction The ELK Stack \u2014 Elasticsearch, Logstash, and Kibana \u2014 is the most widely deployed open-source log management platform. Elasticsearch provides distributed full-text search and analytics, Logstash offers server-side data processing, and Kibana delivers visualization and exploration capabilities. The stack was later joined by Beats, lightweight data shippers that extend the Elastic ecosystem. This article covers ELK stack setup, Logstash pipeline configuration, performance tuning, and index lifecycle management (ILM). Elasticsearch: The Storage and Search Engine Elasticsearch is a distributed, RESTful search and analytics engine built on Apache Lucene. Data is organized into indices, which are collections of documents. Each index is divided into shards, which are distributed across nodes in a cluster. A production Elasticsearch cluster should have a minimum of three master-eligible nodes for high availability. Data nodes store data and perform CRUD operations. Dedicated coordinating-only nodes handle incoming requests and distribute them to data nodes, improving query performance for clusters with complex search patterns. Key configuration parameters include `indices.memory.index_buffer_size`, `thread_pool.search.queue_size`, and `discovery.seed_hosts` for cluster formation. The `elasticsearch.yml` configuration file controls all node-level settings. Mapping defines how documents and their fields are stored and indexed. Dynamic mapping auto-detects field types at index time, but explicit mapping is strongly recommended for production use to avoid type conflicts. Logstash: Data Processing Pipeline Logstash is a server-side data processing pipeline that ingests data from multiple sources, transforms it, and sends it to a destination. The pipeline has three stages: input, filter, and output. input { beats { port => 5044 } } filter { grok { match => { \"message\" => \"%{COMBINEDAPACHELOG}\" } } geoip { source => \"clientip\" } date { match => [\"timestamp\", \"dd/MMM/yyyy:HH:mm:ss Z\"] } } output { elasticsearch { hosts => [\"https://elasticsearch:9200\"] index => \"apache-logs-%{+YYYY.MM.dd}\" ssl => true cacert => \"/etc/logstash/certs/http_ca.crt\" } } The grok filter is the most powerful Logstash plugin, parsing unstructured log data into structured fields using predefined patterns. Performance considerations: reduce the number of filter plugins, use conditional logic to skip unnecessary processing, and configure pipeline workers to match CPU cores. Kibana: Visualization and Exploration Kibana provides the user interface for the ELK stack. The Discover tab allows ad-hoc log exploration with Lucene or KQL (Kibana Query Language). Visualizations are organized into dashboards providing operational views. Lens is Kibana's drag-and-drop visualization builder, enabling rapid dashboard creation without learning aggregation syntax. Canvas provides pixel-perfect infographic-style presentations. Maps visualizes geospatial data with multiple layers. Kibana Alerting provides rule types for threshold conditions, anomaly detection, and tracking containment. Rules can trigger actions via email, Slack, PagerDuty, or webhooks. Performance Tuning Elasticsearch performance tuning begins with shard sizing: 20-40 GB per shard is the recommended range. Too many small shards waste resources; too few large shards slow recovery. Refresh interval should be increased to 30-60 seconds for bulk indexing workloads. Heap size should be set to no more than 50% of available RAM, with a hard cap of 31 GB (above which compressed object pointers are disabled in the JVM). The `_forcemerge` API merges segments after indexing completes, improving query performance. Logstash performance depends on pipeline workers, batch size, and batch delay. Setting `pipeline.workers` to match CPU core count and `pipeline.batch.size` to 125-500 generally provides good throughput. Index Lifecycle Management ILM automates index management through policy-driven phases: hot, warm, cold, frozen, and delete. { \"policy\": { \"phases\": { \"hot\": { \"min_age\": \"0ms\", \"actions\": { \"rollover\": { \"max_size\": \"50GB\", \"max_age\": \"30d\" } } }, \"warm\": { \"min_age\": \"30d\", \"actions\": { \"allocate\": { \"require\": { \"data_type\": \"warm\" } } } }, \"cold\": { \"min_age\": \"90d\", \"actions\": { \"freeze\": {} } }, \"delete\": { \"min_age\": \"365d\", \"actions\": { \"delete\": {} } } } } } ILM reduces manual index management overhead, optimizes storage costs, and ensures data retention policies are consistently enforced. Conclusion The ELK stack provides a complete log management solution. Elasticsearch delivers scalable search and analytics, Logstash provides flexible data processing, and Kibana enables powerful visualization. With careful performance tuning and ILM policies, the ELK stack can handle terabytes of daily log data while maintaining query performance and controlling storage costs."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<p>The ELK Stack — Elasticsearch, Logstash, and Kibana — is the most widely deployed open-source log management platform. Elasticsearch provides distributed full-text search and analytics, Logstash offers server-side data processing, and Kibana delivers visualization and exploration capabilities. The stack was later joined by Beats, lightweight data shippers that extend the Elastic ecosystem.</p>
+<br>
+<br>
+<br>
+<br>
+<p>This article covers ELK stack setup, Logstash pipeline configuration, performance tuning, and index lifecycle management (ILM).</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Elasticsearch: The Storage and Search Engine</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Elasticsearch is a distributed, RESTful search and analytics engine built on Apache Lucene. Data is organized into indices, which are collections of documents. Each index is divided into shards, which are distributed across nodes in a cluster.</p>
+<br>
+<br>
+<br>
+<br>
+<p>A production Elasticsearch cluster should have a minimum of three master-eligible nodes for high availability. Data nodes store data and perform CRUD operations. Dedicated coordinating-only nodes handle incoming requests and distribute them to data nodes, improving query performance for clusters with complex search patterns.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Key configuration parameters include `indices.memory.index_buffer_size`, `thread_pool.search.queue_size`, and `discovery.seed_hosts` for cluster formation. The `elasticsearch.yml` configuration file controls all node-level settings.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Mapping defines how documents and their fields are stored and indexed. Dynamic mapping auto-detects field types at index time, but explicit mapping is strongly recommended for production use to avoid type conflicts.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Logstash: Data Processing Pipeline</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Logstash is a server-side data processing pipeline that ingests data from multiple sources, transforms it, and sends it to a destination. The pipeline has three stages: input, filter, and output.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    input {</p>
+<br>
+<p>      beats {</p>
+<br>
+<p>        port => 5044</p>
+<br>
+<p>      }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<p>    filter {</p>
+<br>
+<p>      grok {</p>
+<br>
+<p>        match => { "message" => "%{COMBINEDAPACHELOG}" }</p>
+<br>
+<p>      }</p>
+<br>
+<p>      geoip {</p>
+<br>
+<p>        source => "clientip"</p>
+<br>
+<p>      }</p>
+<br>
+<p>      date {</p>
+<br>
+<p>        match => ["timestamp", "dd/MMM/yyyy:HH:mm:ss Z"]</p>
+<br>
+<p>      }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<p>    output {</p>
+<br>
+<p>      elasticsearch {</p>
+<br>
+<p>        hosts => ["https://elasticsearch:9200"]</p>
+<br>
+<p>        index => "apache-logs-%{+YYYY.MM.dd}"</p>
+<br>
+<p>        ssl => true</p>
+<br>
+<p>        cacert => "/etc/logstash/certs/http_ca.crt"</p>
+<br>
+<p>      }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The grok filter is the most powerful Logstash plugin, parsing unstructured log data into structured fields using predefined patterns. Performance considerations: reduce the number of filter plugins, use conditional logic to skip unnecessary processing, and configure pipeline workers to match CPU cores.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Kibana: Visualization and Exploration</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Kibana provides the user interface for the ELK stack. The Discover tab allows ad-hoc log exploration with Lucene or KQL (Kibana Query Language). Visualizations are organized into dashboards providing operational views.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Lens is Kibana's drag-and-drop visualization builder, enabling rapid dashboard creation without learning aggregation syntax. Canvas provides pixel-perfect infographic-style presentations. Maps visualizes geospatial data with multiple layers.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Kibana Alerting provides rule types for threshold conditions, anomaly detection, and tracking containment. Rules can trigger actions via email, Slack, PagerDuty, or webhooks.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Performance Tuning</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Elasticsearch performance tuning begins with shard sizing: 20-40 GB per shard is the recommended range. Too many small shards waste resources; too few large shards slow recovery. Refresh interval should be increased to 30-60 seconds for bulk indexing workloads.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Heap size should be set to no more than 50% of available RAM, with a hard cap of 31 GB (above which compressed object pointers are disabled in the JVM). The `_forcemerge` API merges segments after indexing completes, improving query performance.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Logstash performance depends on pipeline workers, batch size, and batch delay. Setting `pipeline.workers` to match CPU core count and `pipeline.batch.size` to 125-500 generally provides good throughput.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Index Lifecycle Management</h2>
+<br>
+<br>
+<br>
+<br>
+<p>ILM automates index management through policy-driven phases: hot, warm, cold, frozen, and delete.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    {</p>
+<br>
+<p>      "policy": {</p>
+<br>
+<p>        "phases": {</p>
+<br>
+<p>          "hot": {</p>
+<br>
+<p>            "min_age": "0ms",</p>
+<br>
+<p>            "actions": {</p>
+<br>
+<p>              "rollover": { "max_size": "50GB", "max_age": "30d" }</p>
+<br>
+<p>            }</p>
+<br>
+<p>          },</p>
+<br>
+<p>          "warm": {</p>
+<br>
+<p>            "min_age": "30d",</p>
+<br>
+<p>            "actions": { "allocate": { "require": { "data_type": "warm" } } }</p>
+<br>
+<p>          },</p>
+<br>
+<p>          "cold": {</p>
+<br>
+<p>            "min_age": "90d",</p>
+<br>
+<p>            "actions": { "freeze": {} }</p>
+<br>
+<p>          },</p>
+<br>
+<p>          "delete": {</p>
+<br>
+<p>            "min_age": "365d",</p>
+<br>
+<p>            "actions": { "delete": {} }</p>
+<br>
+<p>          }</p>
+<br>
+<p>        }</p>
+<br>
+<p>      }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ILM reduces manual index management overhead, optimizes storage costs, and ensures data retention policies are consistently enforced.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Conclusion</h2>
+<br>
+<br>
+<br>
+<br>
+<p>The ELK stack provides a complete log management solution. Elasticsearch delivers scalable search and analytics, Logstash provides flexible data processing, and Kibana enables powerful visualization. With careful performance tuning and ILM policies, the ELK stack can handle terabytes of daily log data while maintaining query performance and controlling storage costs.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

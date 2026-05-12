@@ -67,7 +67,3 @@ Turn any Perplexity thread into a shareable, well-formatted web page with one cl
   * **Ask for comparisons.** "Compare X and Y in terms of A, B, and C. Use a table." Perplexity excels at structured comparisons with inline citations.
   * **Set up a daily briefing Collection.** Pin searches like "Latest developments in [your industry] today" and refresh daily. Saves scanning 10 news sites.
   * **Challenge the answer.** "Are there any studies that contradict this?" or "What's the counterargument?" Perplexity will find opposing views.
-
-
-
-**See also:** [WebSocket vs SSE vs Polling: Real-Time Data Patterns for Web Apps](</en/tech/websocket-vs-sse-vs-polling.html>), [Prompt Engineering: From Beginner to Expert](</en/ai/prompt-engineering.html>), [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>).

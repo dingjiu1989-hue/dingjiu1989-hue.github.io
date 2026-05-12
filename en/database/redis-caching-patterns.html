@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="redis-caching-patterns">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Redis Caching Patterns">
+    <meta property="og:description" content="Redis caching patterns including cache-aside, read-through, write-through, and cache invalidation strategies.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/redis-caching-patterns.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Redis Caching Patterns">
+    <meta name="twitter:description" content="Redis caching patterns including cache-aside, read-through, write-through, and cache invalidation strategies.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Redis Caching Patterns — SourceHub</title>
+    <meta name="description" content="Redis caching patterns including cache-aside, read-through, write-through, and cache invalidation strategies.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/redis-caching-patterns.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/redis-caching-patterns.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Redis Caching Patterns",
+      "description": "Redis caching patterns including cache-aside, read-through, write-through, and cache invalidation strategies.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "494",
+      "keywords": "Database, Backend, Data",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/redis-caching-patterns.html"},
+      "articleBody": "Redis Caching Patterns Redis as Cache Redis is an in-memory data store that excels as a cache due to sub-millisecond latency and rich data types. Cache-Aside Pattern Application checks cache first, falls back to database: def get_user(user_id): cache_key = f\"user:{user_id}\" cached = redis.get(cache_key) if cached: return json.loads(cached) user = db.query(\"SELECT * FROM users WHERE id = %s\", [user_id]) if user: redis.setex(cache_key, 3600, json.dumps(user)) return user Read-Through Cache sits between app and database, auto-loading on miss. Logic is in the cache layer, not the application. Write-Through Data written to cache first, then database: def update_user(user_id, data): cache_key = f\"user:{user_id}\" redis.setex(cache_key, 3600, json.dumps(data)) db.execute(\"UPDATE users SET name = %s WHERE id = %s\", [data['name'], user_id]) Write-Behind Write to cache immediately, batch database writes asynchronously. Fastest writes but risk of data loss if cache fails. Invalidation Strategies | Strategy | Approach | Best For | |----------|----------|----------| | TTL | Auto-expire | Most cases | | Key deletion | Delete on update | Write-through | | Versioned | Include version in key | Schema changes | | Pub/sub | Notify all instances | Distributed caches | Rate Limiting with Sorted Sets def is_rate_limited(user_id, max_requests=100, window=60): key = f\"ratelimit:{user_id}\" now = time.time() redis.zremrangebyscore(key, 0, now - window) if redis.zcard(key) >= max_requests: return True redis.zadd(key, {now: now}) redis.expire(key, window) return False Conclusion Use cache-aside as the default pattern. Always set TTLs to prevent memory exhaustion. Monitor cache hit rates. Implement mutex locking for stampede prevention. Pipeline batch operations for performance."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Redis Caching Patterns"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Redis Caching Patterns
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Data</span></div>
+      <h1 class="article-title">Redis Caching Patterns</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Redis Caching Patterns</h1>
+<br>
+<p>Redis as Cache   </p>
+<p>Redis is an in-memory data store that excels as a cache due to sub-millisecond latency and rich data types.   </p>
+<p>Cache-Aside Pattern   </p>
+<p>Application checks cache first, falls back to database:   </p>
+<br>
+<br>
+<br>
+<p>    def get_user(user_id):</p>
+<br>
+<p>        cache_key = f"user:{user_id}"</p>
+<br>
+<p>        cached = redis.get(cache_key)</p>
+<br>
+<p>        if cached:</p>
+<br>
+<p>            return json.loads(cached)</p>
+<br>
+<p>        user = db.query("SELECT * FROM users WHERE id = %s", [user_id])</p>
+<br>
+<p>        if user:</p>
+<br>
+<p>            redis.setex(cache_key, 3600, json.dumps(user))</p>
+<br>
+<p>        return user</p>
+<br>
+<br>
+<br>
+<br>
+<p>Read-Through   </p>
+<p>Cache sits between app and database, auto-loading on miss. Logic is in the cache layer, not the application.   </p>
+<p>Write-Through   </p>
+<p>Data written to cache first, then database:   </p>
+<br>
+<br>
+<br>
+<p>    def update_user(user_id, data):</p>
+<br>
+<p>        cache_key = f"user:{user_id}"</p>
+<br>
+<p>        redis.setex(cache_key, 3600, json.dumps(data))</p>
+<br>
+<p>        db.execute("UPDATE users SET name = %s WHERE id = %s", [data['name'], user_id])</p>
+<br>
+<br>
+<br>
+<br>
+<p>Write-Behind   </p>
+<p>Write to cache immediately, batch database writes asynchronously. Fastest writes but risk of data loss if cache fails.   </p>
+<p>Invalidation Strategies   </p>
+<p>| Strategy | Approach | Best For | |----------|----------|----------| | TTL | Auto-expire | Most cases | | Key deletion | Delete on update | Write-through | | Versioned | Include version in key | Schema changes | | Pub/sub | Notify all instances | Distributed caches |   </p>
+<p>Rate Limiting with Sorted Sets   </p>
+<br>
+<br>
+<br>
+<p>    def is_rate_limited(user_id, max_requests=100, window=60):</p>
+<br>
+<p>        key = f"ratelimit:{user_id}"</p>
+<br>
+<p>        now = time.time()</p>
+<br>
+<p>        redis.zremrangebyscore(key, 0, now - window)</p>
+<br>
+<p>        if redis.zcard(key) >= max_requests:</p>
+<br>
+<p>            return True</p>
+<br>
+<p>        redis.zadd(key, {now: now})</p>
+<br>
+<p>        redis.expire(key, window)</p>
+<br>
+<p>        return False</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
+<p>Use cache-aside as the default pattern. Always set TTLs to prevent memory exhaustion. Monitor cache hit rates. Implement mutex locking for stampede prevention. Pipeline batch operations for performance.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1739",
+      "wordCount": "2139",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-database-query.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-database-query.html"},
+      "articleBody": "Natural Language to SQL with LLMs Introduction Natural language to SQL (NL2SQL) is one of the most impactful applications of LLMs in data analytics. It enables non-technical users to query databases using plain English, democratizing data access across organizations. While early NL2SQL systems were fragile, modern LLMs can generate accurate SQL for complex analytical queries \u2014 when properly configured with schema context, safety guards, and validation. How NL2SQL Works The core architecture is straightforward: User Question \u2192 Context Assembly \u2192 LLM SQL Generation \u2192 Query Validation \u2192 Execution \u2192 Result Formatting The critical step is **context assembly** \u2014 providing the LLM with enough database metadata to generate correct SQL. Schema Context The LLM needs to understand your database schema. A well-structured schema prompt includes: CREATE TABLE customers ( customer_id INTEGER PRIMARY KEY, first_name VARCHAR(100), last_name VARCHAR(100), email VARCHAR(255), signup_date DATE, country VARCHAR(50), lifetime_value DECIMAL(10,2) ); CREATE TABLE orders ( order_id INTEGER PRIMARY KEY, customer_id INTEGER REFERENCES customers(customer_id), order_date TIMESTAMP, total_amount DECIMAL(10,2), status VARCHAR(20) -- pending, shipped, delivered, cancelled ); CREATE TABLE order_items ( item_id INTEGER PRIMARY KEY, order_id INTEGER REFERENCES orders(order_id), product_name VARCHAR(200), quantity INTEGER, unit_price DECIMAL(10,2) ); **Key additions for better accuracy:** * Column descriptions: `-- customer's two-letter ISO country code` * Value examples: `-- status options: pending, shipped, delivered, cancelled` * Relationship hints: `-- join via customer_id to get customer details` * Index hints: `-- indexed on order_date for range queries` def build_schema_context(tables): context_parts = [] for table in tables: ddl = f\"CREATE TABLE {table.name} (\\n\" for col in table.columns: ddl += f\" {col.name} {col.type} -- {col.description}\\n\" ddl += \");\" context_parts.append(ddl) # Add sample rows for context on data patterns if table.sample_rows: context_parts.append(f\"-- Sample row: {table.sample_rows[0]}\") return \"\\n\\n\".join(context_parts) Few-Shot Examples For complex schemas, provide question-SQL pairs relevant to the query: few_shot_examples = [ { \"question\": \"Show me the top 5 customers by total spending\", \"query\": \"\"\" SELECT c.first_name || ' ' || c.last_name AS customer_name, SUM(o.total_amount) AS total_spent FROM customers c JOIN orders o ON c.customer_id = o.customer_id WHERE o.status != 'cancelled' GROUP BY c.customer_id, c.first_name, c.last_name ORDER BY total_spent DESC LIMIT 5 \"\"\" }, { \"question\": \"What was the monthly revenue for 2025?\", \"query\": \"\"\" SELECT DATE_TRUNC('month', o.order_date) AS month, SUM(o.total_amount) AS revenue FROM orders o WHERE o.status = 'delivered' AND o.order_date >= '2025-01-01' AND o.order_date GROUP BY month ORDER BY month \"\"\" } ] **Dynamic example retrieval** using embedding similarity improves accuracy significantly. Store question-query pairs in a vector database and retrieve the most relevant ones for each new question. SQL Generation Prompt The complete prompt combines schema, examples, and safety instructions: def build_nl2sql_prompt(question, schema, examples, dialect=\"postgresql\"): prompt = f\"\"\"You are a {dialect} SQL expert. Convert natural language questions into SQL queries. Database Schema: {schema} Rules: 1. Return ONLY the SQL query, no explanations 2. Use proper JOINs based on foreign key relationships 3. Handle NULLs appropriately with COALESCE or IS NULL checks 4. Use appropriate aggregate functions (COUNT, SUM, AVG) when needed 5. Always include filters to exclude irrelevant data 6. Use LIMIT for result size control 7. Order results when ordering is implied 8. Never use DELETE, UPDATE, INSERT, DROP, or ALTER statements Examples: \"\"\" for ex in examples: prompt += f\"\\nQ: {ex['question']}\\nSQL: {ex['query']}\\n\" prompt += f\"\\nQ: {question}\\nSQL:\" return prompt Query Validation Before executing generated SQL, validate it: def validate_sql(query, allowed_tables): errors = [] # Safety check: no mutations forbidden_keywords = [\"DELETE\", \"UPDATE\", \"INSERT\", \"DROP\", \"ALTER\", \"TRUNCATE\", \"CREATE\"] for keyword in forbidden_keywords: if keyword in query.upper(): errors.append(f\"Forbidden operation: {keyword}\") # Check table references parsed = sqlparse.parse(query)[0] used_tables = extract_tables(parsed) for table in used_tables: if table not in allowed_tables: errors.append(f\"Unauthorized table: {table}\") # Syntax validation try: conn = get_dummy_connection(dialect) conn.execute(f\"EXPLAIN {query}\") except Exception as e: errors.append(f\"SQL syntax error: {str(e)}\") return errors Advanced Techniques Self-Correction Loop When the generated SQL fails or returns empty results, the system can self-correct: def nl2sql_with_correction(question, schema, max_attempts=3): for attempt in range(max_attempts): query = generate_sql(question, schema) errors = validate_sql(query) if not errors: try: results = execute_sql(query) if results: return format_results(question, query, results) else: feedback = \"The query returned no results. Try a broader search.\" except Exception as e: feedback = f\"Execution error: {str(e)}\" else: feedback = f\"Validation errors: {', '.join(errors)}\" question = f\"Original question: {question}\\nPrevious attempt failed: {feedback}\\nPlease fix the SQL query.\" Schema Linking For large schemas with many tables, first identify relevant tables before generating SQL: def identify_relevant_tables(question, all_tables, table_descriptions): prompt = f\"\"\" Question: {question} Available tables with descriptions: {table_descriptions} List only the tables needed to answer this question, comma-separated: \"\"\" response = call_llm(prompt) return [t.strip() for t in response.split(\",\")] This dramatically reduces context size and improves accuracy on large databases. Production Deployment **Security**: Always use a read-only database user, set statement timeouts, and implement rate limiting per user. **Caching**: Cache common NL2SQL conversions to reduce LLM costs, but invalidate when schema changes. **Monitoring**: Log all generated queries and user feedback. Track query success rate, execution time, and correction frequency. **User experience**: Show the generated SQL to users (with a \"view query\" option), and allow them to provide feedback on results. Conclusion Natural language to SQL with LLMs is production-ready for analytical queries. The key success factors are high-quality schema context, relevant few-shot examples, robust query validation, and a self-correction loop. Start with a limited set of tables, measure query accuracy, and expand as you gain confidence. This technology is transforming data access, making self-serve analytics a reality for non-technical team members."
     }
     </script>
     <script type="application/ld+json">
@@ -73,374 +74,482 @@
         <span class="tag-cat">Machine Learning</span></div>
       <h1 class="article-title">Natural Language to SQL with LLMs</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Introduction</h2>
+      <div class="article-body"><h1>Natural Language to SQL with LLMs</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Natural language to SQL (NL2SQL) is one of the most impactful applications of LLMs in data analytics. It enables non-technical users to query databases using plain English, democratizing data access across organizations. While early NL2SQL systems were fragile, modern LLMs can generate accurate SQL for complex analytical queries — when properly configured with schema context, safety guards, and validation.</p>
 <br>
-<h2> How NL2SQL Works</h2>
+<br>
+<br>
+<br>
+<h2>  How NL2SQL Works</h2>
+<br>
+<br>
+<br>
 <br>
 <p>The core architecture is straightforward:</p>
 <br>
-<pre><code>
-User Question → Context Assembly → LLM SQL Generation → Query Validation → Execution → Result Formatting
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    User Question → Context Assembly → LLM SQL Generation → Query Validation → Execution → Result Formatting</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>The critical step is **context assembly** — providing the LLM with enough database metadata to generate correct SQL.</p>
 <br>
-<h2> Schema Context</h2>
+<br>
+<br>
+<br>
+<h2>  Schema Context</h2>
+<br>
+<br>
+<br>
 <br>
 <p>The LLM needs to understand your database schema. A well-structured schema prompt includes:</p>
 <br>
-<pre><code>
-CREATE TABLE customers (
-
-    customer_id INTEGER PRIMARY KEY,
-
-    first_name VARCHAR(100),
-
-    last_name VARCHAR(100),
-
-    email VARCHAR(255),
-
-    signup_date DATE,
-
-    country VARCHAR(50),
-
-    lifetime_value DECIMAL(10,2)
-
-);
-
-
-
-CREATE TABLE orders (
-
-    order_id INTEGER PRIMARY KEY,
-
-    customer_id INTEGER REFERENCES customers(customer_id),
-
-    order_date TIMESTAMP,
-
-    total_amount DECIMAL(10,2),
-
-    status VARCHAR(20) -- pending, shipped, delivered, cancelled
-
-);
-
-
-
-CREATE TABLE order_items (
-
-    item_id INTEGER PRIMARY KEY,
-
-    order_id INTEGER REFERENCES orders(order_id),
-
-    product_name VARCHAR(200),
-
-    quantity INTEGER,
-
-    unit_price DECIMAL(10,2)
-
-);
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    CREATE TABLE customers (</p>
+<br>
+<p>        customer_id INTEGER PRIMARY KEY,</p>
+<br>
+<p>        first_name VARCHAR(100),</p>
+<br>
+<p>        last_name VARCHAR(100),</p>
+<br>
+<p>        email VARCHAR(255),</p>
+<br>
+<p>        signup_date DATE,</p>
+<br>
+<p>        country VARCHAR(50),</p>
+<br>
+<p>        lifetime_value DECIMAL(10,2)</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<p>    CREATE TABLE orders (</p>
+<br>
+<p>        order_id INTEGER PRIMARY KEY,</p>
+<br>
+<p>        customer_id INTEGER REFERENCES customers(customer_id),</p>
+<br>
+<p>        order_date TIMESTAMP,</p>
+<br>
+<p>        total_amount DECIMAL(10,2),</p>
+<br>
+<p>        status VARCHAR(20) -- pending, shipped, delivered, cancelled</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<p>    CREATE TABLE order_items (</p>
+<br>
+<p>        item_id INTEGER PRIMARY KEY,</p>
+<br>
+<p>        order_id INTEGER REFERENCES orders(order_id),</p>
+<br>
+<p>        product_name VARCHAR(200),</p>
+<br>
+<p>        quantity INTEGER,</p>
+<br>
+<p>        unit_price DECIMAL(10,2)</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Key additions for better accuracy:**</p>
 <br>
-<li>Column descriptions: `-- customer's two-letter ISO country code`</li>
-<li>Value examples: `-- status options: pending, shipped, delivered, cancelled`</li>
-<li>Relationship hints: `-- join via customer_id to get customer details`</li>
-<li>Index hints: `-- indexed on order_date for range queries`</li>
 <br>
-<pre><code>
-def build_schema_context(tables):
-
-    context_parts = []
-
-    for table in tables:
-
-        ddl = f&quot;CREATE TABLE {table.name} (\n&quot;
-
-        for col in table.columns:
-
-            ddl += f&quot;    {col.name} {col.type} -- {col.description}\n&quot;
-
-        ddl += &quot;);&quot;
-
-        context_parts.append(ddl)
-
-        # Add sample rows for context on data patterns
-
-        if table.sample_rows:
-
-            context_parts.append(f&quot;-- Sample row: {table.sample_rows[0]}&quot;)
-
-    return &quot;\n\n&quot;.join(context_parts)
-
-</code></pre>
 <br>
-<h2> Few-Shot Examples</h2>
+<p>* Column descriptions: `-- customer's two-letter ISO country code`</p>
+<p>* Value examples: `-- status options: pending, shipped, delivered, cancelled`</p>
+<p>* Relationship hints: `-- join via customer_id to get customer details`</p>
+<p>* Index hints: `-- indexed on order_date for range queries`</p>
+<br>
+<br>
+<br>
+<br>
+<p>    def build_schema_context(tables):</p>
+<br>
+<p>        context_parts = []</p>
+<br>
+<p>        for table in tables:</p>
+<br>
+<p>            ddl = f"CREATE TABLE {table.name} (\n"</p>
+<br>
+<p>            for col in table.columns:</p>
+<br>
+<p>                ddl += f"    {col.name} {col.type} -- {col.description}\n"</p>
+<br>
+<p>            ddl += ");"</p>
+<br>
+<p>            context_parts.append(ddl)</p>
+<br>
+<p>            # Add sample rows for context on data patterns</p>
+<br>
+<p>            if table.sample_rows:</p>
+<br>
+<p>                context_parts.append(f"-- Sample row: {table.sample_rows[0]}")</p>
+<br>
+<p>        return "\n\n".join(context_parts)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Few-Shot Examples</h2>
+<br>
+<br>
+<br>
 <br>
 <p>For complex schemas, provide question-SQL pairs relevant to the query:</p>
 <br>
-<pre><code>
-few_shot_examples = [
-
-    {
-
-        &quot;question&quot;: &quot;Show me the top 5 customers by total spending&quot;,
-
-        &quot;query&quot;: &quot;&quot;&quot;
-
-SELECT
-
-    c.first_name || &#x27; &#x27; || c.last_name AS customer_name,
-
-    SUM(o.total_amount) AS total_spent
-
-FROM customers c
-
-JOIN orders o ON c.customer_id = o.customer_id
-
-WHERE o.status != &#x27;cancelled&#x27;
-
-GROUP BY c.customer_id, c.first_name, c.last_name
-
-ORDER BY total_spent DESC
-
-LIMIT 5
-
-&quot;&quot;&quot;
-
-    },
-
-    {
-
-        &quot;question&quot;: &quot;What was the monthly revenue for 2025?&quot;,
-
-        &quot;query&quot;: &quot;&quot;&quot;
-
-SELECT
-
-    DATE_TRUNC(&#x27;month&#x27;, o.order_date) AS month,
-
-    SUM(o.total_amount) AS revenue
-
-FROM orders o
-
-WHERE o.status = &#x27;delivered&#x27;
-
-  AND o.order_date &gt;= &#x27;2025-01-01&#x27;
-
-  AND o.order_date &lt; &#x27;2026-01-01&#x27;
-
-GROUP BY month
-
-ORDER BY month
-
-&quot;&quot;&quot;
-
-    }
-
-]
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    few_shot_examples = [</p>
+<br>
+<p>        {</p>
+<br>
+<p>            "question": "Show me the top 5 customers by total spending",</p>
+<br>
+<p>            "query": """</p>
+<br>
+<p>    SELECT</p>
+<br>
+<p>        c.first_name || ' ' || c.last_name AS customer_name,</p>
+<br>
+<p>        SUM(o.total_amount) AS total_spent</p>
+<br>
+<p>    FROM customers c</p>
+<br>
+<p>    JOIN orders o ON c.customer_id = o.customer_id</p>
+<br>
+<p>    WHERE o.status != 'cancelled'</p>
+<br>
+<p>    GROUP BY c.customer_id, c.first_name, c.last_name</p>
+<br>
+<p>    ORDER BY total_spent DESC</p>
+<br>
+<p>    LIMIT 5</p>
+<br>
+<p>    """</p>
+<br>
+<p>        },</p>
+<br>
+<p>        {</p>
+<br>
+<p>            "question": "What was the monthly revenue for 2025?",</p>
+<br>
+<p>            "query": """</p>
+<br>
+<p>    SELECT</p>
+<br>
+<p>        DATE_TRUNC('month', o.order_date) AS month,</p>
+<br>
+<p>        SUM(o.total_amount) AS revenue</p>
+<br>
+<p>    FROM orders o</p>
+<br>
+<p>    WHERE o.status = 'delivered'</p>
+<br>
+<p>      AND o.order_date >= '2025-01-01'</p>
+<br>
+<p>      AND o.order_date < '2026-01-01'</p>
+<br>
+<p>    GROUP BY month</p>
+<br>
+<p>    ORDER BY month</p>
+<br>
+<p>    """</p>
+<br>
+<p>        }</p>
+<br>
+<p>    ]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Dynamic example retrieval** using embedding similarity improves accuracy significantly. Store question-query pairs in a vector database and retrieve the most relevant ones for each new question.</p>
 <br>
-<h2> SQL Generation Prompt</h2>
+<br>
+<br>
+<br>
+<h2>  SQL Generation Prompt</h2>
+<br>
+<br>
+<br>
 <br>
 <p>The complete prompt combines schema, examples, and safety instructions:</p>
 <br>
-<pre><code>
-def build_nl2sql_prompt(question, schema, examples, dialect=&quot;postgresql&quot;):
-
-    prompt = f&quot;&quot;&quot;You are a {dialect} SQL expert. Convert natural language questions into SQL queries.
-
-
-
-Database Schema:
-
-{schema}
-
-
-
-Rules:
-
-1. Return ONLY the SQL query, no explanations
-
-2. Use proper JOINs based on foreign key relationships
-
-3. Handle NULLs appropriately with COALESCE or IS NULL checks
-
-4. Use appropriate aggregate functions (COUNT, SUM, AVG) when needed
-
-5. Always include filters to exclude irrelevant data
-
-6. Use LIMIT for result size control
-
-7. Order results when ordering is implied
-
-8. Never use DELETE, UPDATE, INSERT, DROP, or ALTER statements
-
-
-
-Examples:
-
-&quot;&quot;&quot;
-
-    for ex in examples:
-
-        prompt += f&quot;\nQ: {ex[&#x27;question&#x27;]}\nSQL: {ex[&#x27;query&#x27;]}\n&quot;
-
-
-
-    prompt += f&quot;\nQ: {question}\nSQL:&quot;
-
-    return prompt
-
-</code></pre>
 <br>
-<h2> Query Validation</h2>
+<br>
+<br>
+<br>
+<p>    def build_nl2sql_prompt(question, schema, examples, dialect="postgresql"):</p>
+<br>
+<p>        prompt = f"""You are a {dialect} SQL expert. Convert natural language questions into SQL queries.</p>
+<br>
+<br>
+<br>
+<p>    Database Schema:</p>
+<br>
+<p>    {schema}</p>
+<br>
+<br>
+<br>
+<p>    Rules:</p>
+<br>
+<p>    1. Return ONLY the SQL query, no explanations</p>
+<br>
+<p>    2. Use proper JOINs based on foreign key relationships</p>
+<br>
+<p>    3. Handle NULLs appropriately with COALESCE or IS NULL checks</p>
+<br>
+<p>    4. Use appropriate aggregate functions (COUNT, SUM, AVG) when needed</p>
+<br>
+<p>    5. Always include filters to exclude irrelevant data</p>
+<br>
+<p>    6. Use LIMIT for result size control</p>
+<br>
+<p>    7. Order results when ordering is implied</p>
+<br>
+<p>    8. Never use DELETE, UPDATE, INSERT, DROP, or ALTER statements</p>
+<br>
+<br>
+<br>
+<p>    Examples:</p>
+<br>
+<p>    """</p>
+<br>
+<p>        for ex in examples:</p>
+<br>
+<p>            prompt += f"\nQ: {ex['question']}\nSQL: {ex['query']}\n"</p>
+<br>
+<br>
+<br>
+<p>        prompt += f"\nQ: {question}\nSQL:"</p>
+<br>
+<p>        return prompt</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Query Validation</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Before executing generated SQL, validate it:</p>
 <br>
-<pre><code>
-def validate_sql(query, allowed_tables):
-
-    errors = []
-
-
-
-    # Safety check: no mutations
-
-    forbidden_keywords = [&quot;DELETE&quot;, &quot;UPDATE&quot;, &quot;INSERT&quot;, &quot;DROP&quot;, &quot;ALTER&quot;, &quot;TRUNCATE&quot;, &quot;CREATE&quot;]
-
-    for keyword in forbidden_keywords:
-
-        if keyword in query.upper():
-
-            errors.append(f&quot;Forbidden operation: {keyword}&quot;)
-
-
-
-    # Check table references
-
-    parsed = sqlparse.parse(query)[0]
-
-    used_tables = extract_tables(parsed)
-
-    for table in used_tables:
-
-        if table not in allowed_tables:
-
-            errors.append(f&quot;Unauthorized table: {table}&quot;)
-
-
-
-    # Syntax validation
-
-    try:
-
-        conn = get_dummy_connection(dialect)
-
-        conn.execute(f&quot;EXPLAIN {query}&quot;)
-
-    except Exception as e:
-
-        errors.append(f&quot;SQL syntax error: {str(e)}&quot;)
-
-
-
-    return errors
-
-</code></pre>
 <br>
-<h2> Advanced Techniques</h2>
+<br>
+<br>
+<br>
+<p>    def validate_sql(query, allowed_tables):</p>
+<br>
+<p>        errors = []</p>
+<br>
+<br>
+<br>
+<p>        # Safety check: no mutations</p>
+<br>
+<p>        forbidden_keywords = ["DELETE", "UPDATE", "INSERT", "DROP", "ALTER", "TRUNCATE", "CREATE"]</p>
+<br>
+<p>        for keyword in forbidden_keywords:</p>
+<br>
+<p>            if keyword in query.upper():</p>
+<br>
+<p>                errors.append(f"Forbidden operation: {keyword}")</p>
+<br>
+<br>
+<br>
+<p>        # Check table references</p>
+<br>
+<p>        parsed = sqlparse.parse(query)[0]</p>
+<br>
+<p>        used_tables = extract_tables(parsed)</p>
+<br>
+<p>        for table in used_tables:</p>
+<br>
+<p>            if table not in allowed_tables:</p>
+<br>
+<p>                errors.append(f"Unauthorized table: {table}")</p>
+<br>
+<br>
+<br>
+<p>        # Syntax validation</p>
+<br>
+<p>        try:</p>
+<br>
+<p>            conn = get_dummy_connection(dialect)</p>
+<br>
+<p>            conn.execute(f"EXPLAIN {query}")</p>
+<br>
+<p>        except Exception as e:</p>
+<br>
+<p>            errors.append(f"SQL syntax error: {str(e)}")</p>
+<br>
+<br>
+<br>
+<p>        return errors</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Advanced Techniques</h2>
+<br>
+<br>
+<br>
 <br>
 <h3>Self-Correction Loop</h3>
 <br>
+<br>
+<br>
+<br>
 <p>When the generated SQL fails or returns empty results, the system can self-correct:</p>
 <br>
-<pre><code>
-def nl2sql_with_correction(question, schema, max_attempts=3):
-
-    for attempt in range(max_attempts):
-
-        query = generate_sql(question, schema)
-
-        errors = validate_sql(query)
-
-
-
-        if not errors:
-
-            try:
-
-                results = execute_sql(query)
-
-                if results:
-
-                    return format_results(question, query, results)
-
-                else:
-
-                    feedback = &quot;The query returned no results. Try a broader search.&quot;
-
-            except Exception as e:
-
-                feedback = f&quot;Execution error: {str(e)}&quot;
-
-        else:
-
-            feedback = f&quot;Validation errors: {&#x27;, &#x27;.join(errors)}&quot;
-
-
-
-        question = f&quot;Original question: {question}\nPrevious attempt failed: {feedback}\nPlease fix the SQL query.&quot;
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    def nl2sql_with_correction(question, schema, max_attempts=3):</p>
+<br>
+<p>        for attempt in range(max_attempts):</p>
+<br>
+<p>            query = generate_sql(question, schema)</p>
+<br>
+<p>            errors = validate_sql(query)</p>
+<br>
+<br>
+<br>
+<p>            if not errors:</p>
+<br>
+<p>                try:</p>
+<br>
+<p>                    results = execute_sql(query)</p>
+<br>
+<p>                    if results:</p>
+<br>
+<p>                        return format_results(question, query, results)</p>
+<br>
+<p>                    else:</p>
+<br>
+<p>                        feedback = "The query returned no results. Try a broader search."</p>
+<br>
+<p>                except Exception as e:</p>
+<br>
+<p>                    feedback = f"Execution error: {str(e)}"</p>
+<br>
+<p>            else:</p>
+<br>
+<p>                feedback = f"Validation errors: {', '.join(errors)}"</p>
+<br>
+<br>
+<br>
+<p>            question = f"Original question: {question}\nPrevious attempt failed: {feedback}\nPlease fix the SQL query."</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Schema Linking</h3>
 <br>
+<br>
+<br>
+<br>
 <p>For large schemas with many tables, first identify relevant tables before generating SQL:</p>
 <br>
-<pre><code>
-def identify_relevant_tables(question, all_tables, table_descriptions):
-
-    prompt = f&quot;&quot;&quot;
-
-    Question: {question}
-
-    Available tables with descriptions:
-
-    {table_descriptions}
-
-
-
-    List only the tables needed to answer this question, comma-separated:
-
-    &quot;&quot;&quot;
-
-    response = call_llm(prompt)
-
-    return [t.strip() for t in response.split(&quot;,&quot;)]
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    def identify_relevant_tables(question, all_tables, table_descriptions):</p>
+<br>
+<p>        prompt = f"""</p>
+<br>
+<p>        Question: {question}</p>
+<br>
+<p>        Available tables with descriptions:</p>
+<br>
+<p>        {table_descriptions}</p>
+<br>
+<br>
+<br>
+<p>        List only the tables needed to answer this question, comma-separated:</p>
+<br>
+<p>        """</p>
+<br>
+<p>        response = call_llm(prompt)</p>
+<br>
+<p>        return [t.strip() for t in response.split(",")]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>This dramatically reduces context size and improves accuracy on large databases.</p>
 <br>
-<h2> Production Deployment</h2>
+<br>
+<br>
+<br>
+<h2>  Production Deployment</h2>
+<br>
+<br>
+<br>
 <br>
 <p>**Security**: Always use a read-only database user, set statement timeouts, and implement rate limiting per user.</p>
 <br>
+<br>
+<br>
+<br>
 <p>**Caching**: Cache common NL2SQL conversions to reduce LLM costs, but invalidate when schema changes.</p>
+<br>
+<br>
+<br>
 <br>
 <p>**Monitoring**: Log all generated queries and user feedback. Track query success rate, execution time, and correction frequency.</p>
 <br>
+<br>
+<br>
+<br>
 <p>**User experience**: Show the generated SQL to users (with a "view query" option), and allow them to provide feedback on results.</p>
 <br>
-<h2> Conclusion</h2>
+<br>
+<br>
+<br>
+<h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Natural language to SQL with LLMs is production-ready for analytical queries. The key success factors are high-quality schema context, relevant few-shot examples, robust query validation, and a self-correction loop. Start with a limited set of tables, measure query accuracy, and expand as you gain confidence. This technology is transforming data access, making self-serve analytics a reality for non-technical team members.</p></div>
     </article>

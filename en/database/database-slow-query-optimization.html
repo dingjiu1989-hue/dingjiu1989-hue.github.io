@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="database-slow-query-optimization">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Slow Query Optimization: Analysis, Indexing, and Rewriting">
+    <meta property="og:description" content="Systematic approach to finding and fixing slow database queries: EXPLAIN plans, index strategies, and SQL rewriting.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/database-slow-query-optimization.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Slow Query Optimization: Analysis, Indexing, and Rewriting">
+    <meta name="twitter:description" content="Systematic approach to finding and fixing slow database queries: EXPLAIN plans, index strategies, and SQL rewriting.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Slow Query Optimization: Analysis, Indexing, and Rewriting — SourceHub</title>
+    <meta name="description" content="Systematic approach to finding and fixing slow database queries: EXPLAIN plans, index strategies, and SQL rewriting.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/database-slow-query-optimization.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/database-slow-query-optimization.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Slow Query Optimization: Analysis, Indexing, and Rewriting",
+      "description": "Systematic approach to finding and fixing slow database queries: EXPLAIN plans, index strategies, and SQL rewriting.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "580",
+      "keywords": "Database, Backend, Data",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-slow-query-optimization.html"},
+      "articleBody": "Slow Query Optimization: Analysis, Indexing, and Rewriting Slow queries are the most common cause of database performance problems. A single slow query can consume database resources and degrade performance for all users. Systematic optimization requires measuring, analyzing, and fixing queries methodically. Finding Slow Queries pg_stat_statements in PostgreSQL and performance_schema in MySQL track query execution statistics. Query these views for total execution time, calls, and mean time per query. Sort by total time to find the queries consuming the most database resources. Set a slow query log threshold. Log queries exceeding 100ms in development, 200ms in production. Review logs regularly. Tools like pgBadger and pt-query-digest analyze log files and produce execution summaries. Reading EXPLAIN Plans EXPLAIN ANALYZE executes the query and shows actual execution times. Key indicators: sequential scans on large tables suggest missing indexes. Nested loop joins on large datasets may need different join strategies. Sort operations on unindexed columns indicate missing sort keys. Poor plan indicators: actual rows diverging significantly from estimated rows suggests stale statistics. High buffer usage (shared hit vs shared read) indicates inefficient cache usage. Execution time dominated by a single node suggests a bottleneck. Index Optimization Examine query WHERE clauses, JOIN conditions, and ORDER BY columns. Create indexes that match the query access pattern. A B-tree index works best for equality and range conditions. Composite indexes should match query filter order\u2014put equality conditions first, range conditions last. Covering indexes include all columns needed by a query, eliminating table access entirely. PostgreSQL supports INCLUDE columns. Use them for SELECT columns that are not filter conditions. Remove unused indexes. Indexes slow writes and consume storage. Use pg_stat_user_indexes to find indexes never used for index scans. Drop them carefully\u2014one at a time\u2014monitoring for query regression. SQL Rewriting Sometimes the query itself needs restructuring. Common optimizations: replace multiple OR conditions with IN or UNION. Replace correlated subqueries with JOINs or window functions. Use EXISTS instead of IN for large subquery result sets. Avoid functions on indexed columns in WHERE clauses\u2014WHERE DATE(created_at) = '2026-01-01' cannot use an index on created_at. Rewrite as WHERE created_at >= '2026-01-01' AND created_at Maintenance Regular VACUUM and ANALYZE keep statistics current. Outdated statistics produce bad query plans. Schedule ANALYZE after significant data changes. Consider autovacuum tuning for busy tables."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Slow Query Optimization: Analysis, Indexing, and Rewriting"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Slow Query Optimization: Analysis, Indexing, and Rewriting
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Data</span></div>
+      <h1 class="article-title">Slow Query Optimization: Analysis, Indexing, and Rewriting</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Slow Query Optimization: Analysis, Indexing, and Rewriting</h1>
+<p>Slow queries are the most common cause of database performance problems. A single slow query can consume database resources and degrade performance for all users. Systematic optimization requires measuring, analyzing, and fixing queries methodically.</p>
+<br>
+<h2> Finding Slow Queries</h2>
+<br>
+<p>pg_stat_statements in PostgreSQL and performance_schema in MySQL track query execution statistics. Query these views for total execution time, calls, and mean time per query. Sort by total time to find the queries consuming the most database resources.</p>
+<br>
+<p>Set a slow query log threshold. Log queries exceeding 100ms in development, 200ms in production. Review logs regularly. Tools like pgBadger and pt-query-digest analyze log files and produce execution summaries.</p>
+<br>
+<h2> Reading EXPLAIN Plans</h2>
+<br>
+<p>EXPLAIN ANALYZE executes the query and shows actual execution times. Key indicators: sequential scans on large tables suggest missing indexes. Nested loop joins on large datasets may need different join strategies. Sort operations on unindexed columns indicate missing sort keys.</p>
+<br>
+<p>Poor plan indicators: actual rows diverging significantly from estimated rows suggests stale statistics. High buffer usage (shared hit vs shared read) indicates inefficient cache usage. Execution time dominated by a single node suggests a bottleneck.</p>
+<br>
+<h2> Index Optimization</h2>
+<br>
+<p>Examine query WHERE clauses, JOIN conditions, and ORDER BY columns. Create indexes that match the query access pattern. A B-tree index works best for equality and range conditions. Composite indexes should match query filter order—put equality conditions first, range conditions last.</p>
+<br>
+<p>Covering indexes include all columns needed by a query, eliminating table access entirely. PostgreSQL supports INCLUDE columns. Use them for SELECT columns that are not filter conditions.</p>
+<br>
+<p>Remove unused indexes. Indexes slow writes and consume storage. Use pg_stat_user_indexes to find indexes never used for index scans. Drop them carefully—one at a time—monitoring for query regression.</p>
+<br>
+<h2> SQL Rewriting</h2>
+<br>
+<p>Sometimes the query itself needs restructuring. Common optimizations: replace multiple OR conditions with IN or UNION. Replace correlated subqueries with JOINs or window functions. Use EXISTS instead of IN for large subquery result sets.</p>
+<br>
+<p>Avoid functions on indexed columns in WHERE clauses—WHERE DATE(created_at) = '2026-01-01' cannot use an index on created_at. Rewrite as WHERE created_at >= '2026-01-01' AND created_at < '2026-01-02'.</p>
+<br>
+<h2> Maintenance</h2>
+<br>
+<p>Regular VACUUM and ANALYZE keep statistics current. Outdated statistics produce bad query plans. Schedule ANALYZE after significant data changes. Consider autovacuum tuning for busy tables.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

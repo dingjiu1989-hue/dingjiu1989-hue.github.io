@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1376",
+      "wordCount": "1531",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/sql-vs-nosql.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/sql-vs-nosql.html"},
+      "articleBody": "SQL vs NoSQL Decision Guide The Great Database Debate The choice between SQL and NoSQL is one of the most consequential architectural decisions you will make. Neither is universally better; each excels in different scenarios. The key is understanding the trade-offs and matching them to your requirements. Core Differences | Dimension | SQL | NoSQL | |-----------|-----|-------| | Data model | Relational (tables, rows, columns) | Document, key-value, graph, column-family | | Schema | Fixed, enforced | Flexible, dynamic | | Query language | SQL (standardized) | Vendor-specific APIs | | ACID support | Strong ACID | Varies (BASE or configurable ACID) | | Scalability | Vertical (primary) | Horizontal (native) | | Consistency | Strong consistency | Eventual to strong (configurable) | | Relationships | JOINs, foreign keys | Embedding, references, or denormalization | SQL Strengths Complex Queries and Joins -- SQL excels at complex reporting queries SELECT c.name AS customer_name, COUNT(o.id) AS order_count, SUM(o.total) AS total_spent, AVG(o.total) AS avg_order_value FROM customers c LEFT JOIN orders o ON c.id = o.customer_id WHERE o.created_at >= '2026-01-01' GROUP BY c.id, c.name HAVING COUNT(o.id) > 5 ORDER BY total_spent DESC LIMIT 10; Data Integrity Referential integrity enforced at the database level: ALTER TABLE orders ADD CONSTRAINT fk_orders_customer FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE; -- The database prevents: DELETE FROM customers WHERE id = 1; -- If customer 1 has orders, this fails (or cascades) Transactions -- Multi-statement ACID transaction BEGIN; UPDATE inventory SET quantity = quantity - 1 WHERE product_id = 100 AND quantity > 0; INSERT INTO order_items (order_id, product_id, quantity) VALUES (500, 100, 1); COMMIT; When to Choose SQL * **Data integrity is critical**: Financial systems, inventory, booking engines. * **Complex relationships**: Many-to-many, hierarchical data with multiple join paths. * **Ad-hoc queries**: Reporting and analytics with unpredictable query patterns. * **ACID transactions**: Multi-operation atomicity is required. * **Standardized access**: Multiple applications need to query the same data. NoSQL Strengths Flexible Schema // MongoDB: each document can have different fields db.users.insertOne({ name: \"Alice\", email: \"alice@email.com\" }); db.users.insertOne({ name: \"Bob\", email: \"bob@email.com\", phone: \"+1234567890\", // Extra field preferences: { // Nested object theme: \"dark\", notifications: true } }); Horizontal Scaling # MongoDB sharding sh.shardCollection(\"mydb.users\", { \"region\": \"hashed\" }) # Cassandra auto-sharding (no manual setup) # Just add nodes to the cluster High Write Throughput // DynamoDB: 10,000 writes/second per partition const params = { TableName: 'events', Item: { eventId: uuid(), type: 'page_view', timestamp: Date.now(), userId: userId } }; await docClient.put(params); Embedded Data (Avoiding Joins) // MongoDB: embed related data in a single document { _id: \"order_123\", customer: { id: \"cust_456\", name: \"Alice\", email: \"alice@email.com\" }, items: [ { product: \"Laptop\", price: 1200, quantity: 1 }, { product: \"Mouse\", price: 25, quantity: 2 } ], total: 1250, shipping_address: { street: \"123 Main St\", city: \"San Francisco\" } } When to Choose NoSQL * **Rapid prototyping**: Schema changes are frequent and unpredictable. * **High-volume write workloads**: IoT data, event logging, clickstreams. * **Hierarchical data**: One document often contains all related data. * **Global scale**: Need multi-region replication and automatic sharding. * **Real-time feeds**: Social media, activity streams. Decision Matrix | Requirement | SQL (PostgreSQL) | NoSQL (MongoDB) | NoSQL (DynamoDB) | |-------------|------------------|-----------------|-------------------| | Complex queries | Excellent | Moderate (aggregation) | Limited | | Data integrity | Strong | Moderate | Moderate | | Write throughput | Moderate | High | Very high | | Read performance | Good (with indexes) | Good | Excellent (PK queries) | | Schema flexibility | Low | High | High | | Operational overhead | Medium | Medium | Low (serverless) | | Cost (large scale) | Higher | Moderate | Pay-per-request | Hybrid: Using Both Many successful architectures use both SQL and NoSQL for different purposes: # Example: SQL for transactions, NoSQL for reads # Write to PostgreSQL (ACID guarantee) db.execute(\"\"\" INSERT INTO orders (id, customer_id, total) VALUES (%s, %s, %s) \"\"\", [order_id, customer_id, total]) # Update Redis cache for fast reads redis.setex(f\"order:{order_id}\", 3600, json.dumps(order_data)) # Update Elasticsearch for search es.index(index='orders', id=order_id, body=order_data) Migration Paths | Starting Point | Problem | Target | Strategy | |----------------|---------|--------|----------| | SQL | Scaling writes | NoSQL | Dual-write, then cut over | | NoSQL | Complex queries | SQL | Define schema, migrate data | | NoSQL | Data integrity issues | SQL | Add constraints, enforce at app level first | | SQL | Flexible schema needed | NoSQL | Start with embedded docs for polymorphic data | Summary Choose SQL when you need complex queries, strong data integrity, and ACID transactions. Choose NoSQL when you need flexible schemas, horizontal scaling, and high write throughput. For complex applications, a polyglot persistence approach that uses the right database for each workload often provides the best results. Start with SQL (PostgreSQL) as the default and add NoSQL databases specifically for workloads where SQL is limiting."
     }
     </script>
     <script type="application/ld+json">
@@ -73,277 +74,261 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">SQL vs NoSQL Decision Guide</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> The Great Database Debate</h2>
+      <div class="article-body"><h1>SQL vs NoSQL Decision Guide</h1>
 <br>
-<p>The choice between SQL and NoSQL is one of the most consequential architectural decisions you will make. Neither is universally better; each excels in different scenarios. The key is understanding the trade-offs and matching them to your requirements.</p>
+<p>The Great Database Debate   </p>
+<p>The choice between SQL and NoSQL is one of the most consequential architectural decisions you will make. Neither is universally better; each excels in different scenarios. The key is understanding the trade-offs and matching them to your requirements.   </p>
+<p>Core Differences   </p>
+<p>| Dimension | SQL | NoSQL | |-----------|-----|-------| | Data model | Relational (tables, rows, columns) | Document, key-value, graph, column-family | | Schema | Fixed, enforced | Flexible, dynamic | | Query language | SQL (standardized) | Vendor-specific APIs | | ACID support | Strong ACID | Varies (BASE or configurable ACID) | | Scalability | Vertical (primary) | Horizontal (native) | | Consistency | Strong consistency | Eventual to strong (configurable) | | Relationships | JOINs, foreign keys | Embedding, references, or denormalization |   </p>
+<p>SQL Strengths   </p>
+<p>Complex Queries and Joins   </p>
 <br>
-<h2> Core Differences</h2>
 <br>
-<p>| Dimension | SQL | NoSQL |</p>
-<p>|-----------|-----|-------|</p>
-<p>| Data model | Relational (tables, rows, columns) | Document, key-value, graph, column-family |</p>
-<p>| Schema | Fixed, enforced | Flexible, dynamic |</p>
-<p>| Query language | SQL (standardized) | Vendor-specific APIs |</p>
-<p>| ACID support | Strong ACID | Varies (BASE or configurable ACID) |</p>
-<p>| Scalability | Vertical (primary) | Horizontal (native) |</p>
-<p>| Consistency | Strong consistency | Eventual to strong (configurable) |</p>
-<p>| Relationships | JOINs, foreign keys | Embedding, references, or denormalization |</p>
 <br>
-<h2> SQL Strengths</h2>
+<p>    -- SQL excels at complex reporting queries</p>
 <br>
-<h3>Complex Queries and Joins</h3>
+<p>    SELECT</p>
 <br>
-<pre><code>
--- SQL excels at complex reporting queries
-
-SELECT
-
-    c.name AS customer_name,
-
-    COUNT(o.id) AS order_count,
-
-    SUM(o.total) AS total_spent,
-
-    AVG(o.total) AS avg_order_value
-
-FROM customers c
-
-LEFT JOIN orders o ON c.id = o.customer_id
-
-WHERE o.created_at &gt;= &#x27;2026-01-01&#x27;
-
-GROUP BY c.id, c.name
-
-HAVING COUNT(o.id) &gt; 5
-
-ORDER BY total_spent DESC
-
-LIMIT 10;
-
-</code></pre>
+<p>        c.name AS customer_name,</p>
 <br>
-<h3>Data Integrity</h3>
+<p>        COUNT(o.id) AS order_count,</p>
 <br>
-<p>Referential integrity enforced at the database level:</p>
+<p>        SUM(o.total) AS total_spent,</p>
 <br>
-<pre><code>
-ALTER TABLE orders
-
-ADD CONSTRAINT fk_orders_customer
-
-FOREIGN KEY (customer_id) REFERENCES customers(id)
-
-ON DELETE CASCADE;
-
-
-
--- The database prevents:
-
-DELETE FROM customers WHERE id = 1;
-
--- If customer 1 has orders, this fails (or cascades)
-
-</code></pre>
+<p>        AVG(o.total) AS avg_order_value</p>
 <br>
-<h3>Transactions</h3>
+<p>    FROM customers c</p>
 <br>
-<pre><code>
--- Multi-statement ACID transaction
-
-BEGIN;
-
-UPDATE inventory SET quantity = quantity - 1 WHERE product_id = 100 AND quantity &gt; 0;
-
-INSERT INTO order_items (order_id, product_id, quantity) VALUES (500, 100, 1);
-
-COMMIT;
-
-</code></pre>
+<p>    LEFT JOIN orders o ON c.id = o.customer_id</p>
 <br>
-<h2> When to Choose SQL</h2>
+<p>    WHERE o.created_at >= '2026-01-01'</p>
 <br>
-<li>**Data integrity is critical**: Financial systems, inventory, booking engines.</li>
-<li>**Complex relationships**: Many-to-many, hierarchical data with multiple join paths.</li>
-<li>**Ad-hoc queries**: Reporting and analytics with unpredictable query patterns.</li>
-<li>**ACID transactions**: Multi-operation atomicity is required.</li>
-<li>**Standardized access**: Multiple applications need to query the same data.</li>
+<p>    GROUP BY c.id, c.name</p>
 <br>
-<h2> NoSQL Strengths</h2>
+<p>    HAVING COUNT(o.id) > 5</p>
 <br>
-<h3>Flexible Schema</h3>
+<p>    ORDER BY total_spent DESC</p>
 <br>
-<pre><code>
-// MongoDB: each document can have different fields
-
-db.users.insertOne({ name: &quot;Alice&quot;, email: &quot;alice@email.com&quot; });
-
-db.users.insertOne({
-
-    name: &quot;Bob&quot;,
-
-    email: &quot;bob@email.com&quot;,
-
-    phone: &quot;+1234567890&quot;,     // Extra field
-
-    preferences: {             // Nested object
-
-        theme: &quot;dark&quot;,
-
-        notifications: true
-
-    }
-
-});
-
-</code></pre>
+<p>    LIMIT 10;</p>
 <br>
-<h3>Horizontal Scaling</h3>
 <br>
-<pre><code>
-# MongoDB sharding
-
-sh.shardCollection(&quot;mydb.users&quot;, { &quot;region&quot;: &quot;hashed&quot; })
-
-
-
-# Cassandra auto-sharding (no manual setup)
-
-# Just add nodes to the cluster
-
-</code></pre>
 <br>
-<h3>High Write Throughput</h3>
 <br>
-<pre><code>
-// DynamoDB: 10,000 writes/second per partition
-
-const params = {
-
-    TableName: &#x27;events&#x27;,
-
-    Item: {
-
-        eventId: uuid(),
-
-        type: &#x27;page_view&#x27;,
-
-        timestamp: Date.now(),
-
-        userId: userId
-
-    }
-
-};
-
-await docClient.put(params);
-
-</code></pre>
+<p>Data Integrity   </p>
+<p>Referential integrity enforced at the database level:   </p>
 <br>
-<h3>Embedded Data (Avoiding Joins)</h3>
 <br>
-<pre><code>
-// MongoDB: embed related data in a single document
-
-{
-
-    _id: &quot;order_123&quot;,
-
-    customer: {
-
-        id: &quot;cust_456&quot;,
-
-        name: &quot;Alice&quot;,
-
-        email: &quot;alice@email.com&quot;
-
-    },
-
-    items: [
-
-        { product: &quot;Laptop&quot;, price: 1200, quantity: 1 },
-
-        { product: &quot;Mouse&quot;, price: 25, quantity: 2 }
-
-    ],
-
-    total: 1250,
-
-    shipping_address: {
-
-        street: &quot;123 Main St&quot;,
-
-        city: &quot;San Francisco&quot;
-
-    }
-
-}
-
-</code></pre>
 <br>
-<h2> When to Choose NoSQL</h2>
+<p>    ALTER TABLE orders</p>
 <br>
-<li>**Rapid prototyping**: Schema changes are frequent and unpredictable.</li>
-<li>**High-volume write workloads**: IoT data, event logging, clickstreams.</li>
-<li>**Hierarchical data**: One document often contains all related data.</li>
-<li>**Global scale**: Need multi-region replication and automatic sharding.</li>
-<li>**Real-time feeds**: Social media, activity streams.</li>
+<p>    ADD CONSTRAINT fk_orders_customer</p>
 <br>
-<h2> Decision Matrix</h2>
+<p>    FOREIGN KEY (customer_id) REFERENCES customers(id)</p>
 <br>
-<p>| Requirement | SQL (PostgreSQL) | NoSQL (MongoDB) | NoSQL (DynamoDB) |</p>
-<p>|-------------|------------------|-----------------|-------------------|</p>
-<p>| Complex queries | Excellent | Moderate (aggregation) | Limited |</p>
-<p>| Data integrity | Strong | Moderate | Moderate |</p>
-<p>| Write throughput | Moderate | High | Very high |</p>
-<p>| Read performance | Good (with indexes) | Good | Excellent (PK queries) |</p>
-<p>| Schema flexibility | Low | High | High |</p>
-<p>| Operational overhead | Medium | Medium | Low (serverless) |</p>
-<p>| Cost (large scale) | Higher | Moderate | Pay-per-request |</p>
+<p>    ON DELETE CASCADE;</p>
 <br>
-<h2> Hybrid: Using Both</h2>
 <br>
-<p>Many successful architectures use both SQL and NoSQL for different purposes:</p>
 <br>
-<pre><code>
-# Example: SQL for transactions, NoSQL for reads
-
-
-
-# Write to PostgreSQL (ACID guarantee)
-
-db.execute(&quot;&quot;&quot;
-
-    INSERT INTO orders (id, customer_id, total)
-
-    VALUES (%s, %s, %s)
-
-&quot;&quot;&quot;, [order_id, customer_id, total])
-
-
-
-# Update Redis cache for fast reads
-
-redis.setex(f&quot;order:{order_id}&quot;, 3600, json.dumps(order_data))
-
-
-
-# Update Elasticsearch for search
-
-es.index(index=&#x27;orders&#x27;, id=order_id, body=order_data)
-
-</code></pre>
+<p>    -- The database prevents:</p>
 <br>
-<h2> Migration Paths</h2>
+<p>    DELETE FROM customers WHERE id = 1;</p>
 <br>
-<p>| Starting Point | Problem | Target | Strategy |</p>
-<p>|----------------|---------|--------|----------|</p>
-<p>| SQL | Scaling writes | NoSQL | Dual-write, then cut over |</p>
-<p>| NoSQL | Complex queries | SQL | Define schema, migrate data |</p>
-<p>| NoSQL | Data integrity issues | SQL | Add constraints, enforce at app level first |</p>
-<p>| SQL | Flexible schema needed | NoSQL | Start with embedded docs for polymorphic data |</p>
+<p>    -- If customer 1 has orders, this fails (or cascades)</p>
 <br>
-<h2> Summary</h2>
 <br>
+<br>
+<br>
+<p>Transactions   </p>
+<br>
+<br>
+<br>
+<p>    -- Multi-statement ACID transaction</p>
+<br>
+<p>    BEGIN;</p>
+<br>
+<p>    UPDATE inventory SET quantity = quantity - 1 WHERE product_id = 100 AND quantity > 0;</p>
+<br>
+<p>    INSERT INTO order_items (order_id, product_id, quantity) VALUES (500, 100, 1);</p>
+<br>
+<p>    COMMIT;</p>
+<br>
+<br>
+<br>
+<br>
+<p>When to Choose SQL   </p>
+<br>
+<p>* **Data integrity is critical**: Financial systems, inventory, booking engines.</p>
+<p>* **Complex relationships**: Many-to-many, hierarchical data with multiple join paths.</p>
+<p>* **Ad-hoc queries**: Reporting and analytics with unpredictable query patterns.</p>
+<p>* **ACID transactions**: Multi-operation atomicity is required.</p>
+<p>* **Standardized access**: Multiple applications need to query the same data.</p>
+<br>
+<p>NoSQL Strengths   </p>
+<p>Flexible Schema   </p>
+<br>
+<br>
+<br>
+<p>    // MongoDB: each document can have different fields</p>
+<br>
+<p>    db.users.insertOne({ name: "Alice", email: "alice@email.com" });</p>
+<br>
+<p>    db.users.insertOne({</p>
+<br>
+<p>        name: "Bob",</p>
+<br>
+<p>        email: "bob@email.com",</p>
+<br>
+<p>        phone: "+1234567890",     // Extra field</p>
+<br>
+<p>        preferences: {             // Nested object</p>
+<br>
+<p>            theme: "dark",</p>
+<br>
+<p>            notifications: true</p>
+<br>
+<p>        }</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<br>
+<p>Horizontal Scaling   </p>
+<br>
+<br>
+<br>
+<p>    # MongoDB sharding</p>
+<br>
+<p>    sh.shardCollection("mydb.users", { "region": "hashed" })</p>
+<br>
+<br>
+<br>
+<p>    # Cassandra auto-sharding (no manual setup)</p>
+<br>
+<p>    # Just add nodes to the cluster</p>
+<br>
+<br>
+<br>
+<br>
+<p>High Write Throughput   </p>
+<br>
+<br>
+<br>
+<p>    // DynamoDB: 10,000 writes/second per partition</p>
+<br>
+<p>    const params = {</p>
+<br>
+<p>        TableName: 'events',</p>
+<br>
+<p>        Item: {</p>
+<br>
+<p>            eventId: uuid(),</p>
+<br>
+<p>            type: 'page_view',</p>
+<br>
+<p>            timestamp: Date.now(),</p>
+<br>
+<p>            userId: userId</p>
+<br>
+<p>        }</p>
+<br>
+<p>    };</p>
+<br>
+<p>    await docClient.put(params);</p>
+<br>
+<br>
+<br>
+<br>
+<p>Embedded Data (Avoiding Joins)   </p>
+<br>
+<br>
+<br>
+<p>    // MongoDB: embed related data in a single document</p>
+<br>
+<p>    {</p>
+<br>
+<p>        _id: "order_123",</p>
+<br>
+<p>        customer: {</p>
+<br>
+<p>            id: "cust_456",</p>
+<br>
+<p>            name: "Alice",</p>
+<br>
+<p>            email: "alice@email.com"</p>
+<br>
+<p>        },</p>
+<br>
+<p>        items: [</p>
+<br>
+<p>            { product: "Laptop", price: 1200, quantity: 1 },</p>
+<br>
+<p>            { product: "Mouse", price: 25, quantity: 2 }</p>
+<br>
+<p>        ],</p>
+<br>
+<p>        total: 1250,</p>
+<br>
+<p>        shipping_address: {</p>
+<br>
+<p>            street: "123 Main St",</p>
+<br>
+<p>            city: "San Francisco"</p>
+<br>
+<p>        }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<p>When to Choose NoSQL   </p>
+<br>
+<p>* **Rapid prototyping**: Schema changes are frequent and unpredictable.</p>
+<p>* **High-volume write workloads**: IoT data, event logging, clickstreams.</p>
+<p>* **Hierarchical data**: One document often contains all related data.</p>
+<p>* **Global scale**: Need multi-region replication and automatic sharding.</p>
+<p>* **Real-time feeds**: Social media, activity streams.</p>
+<br>
+<p>Decision Matrix   </p>
+<p>| Requirement | SQL (PostgreSQL) | NoSQL (MongoDB) | NoSQL (DynamoDB) | |-------------|------------------|-----------------|-------------------| | Complex queries | Excellent | Moderate (aggregation) | Limited | | Data integrity | Strong | Moderate | Moderate | | Write throughput | Moderate | High | Very high | | Read performance | Good (with indexes) | Good | Excellent (PK queries) | | Schema flexibility | Low | High | High | | Operational overhead | Medium | Medium | Low (serverless) | | Cost (large scale) | Higher | Moderate | Pay-per-request |   </p>
+<p>Hybrid: Using Both   </p>
+<p>Many successful architectures use both SQL and NoSQL for different purposes:   </p>
+<br>
+<br>
+<br>
+<p>    # Example: SQL for transactions, NoSQL for reads</p>
+<br>
+<br>
+<br>
+<p>    # Write to PostgreSQL (ACID guarantee)</p>
+<br>
+<p>    db.execute("""</p>
+<br>
+<p>        INSERT INTO orders (id, customer_id, total)</p>
+<br>
+<p>        VALUES (%s, %s, %s)</p>
+<br>
+<p>    """, [order_id, customer_id, total])</p>
+<br>
+<br>
+<br>
+<p>    # Update Redis cache for fast reads</p>
+<br>
+<p>    redis.setex(f"order:{order_id}", 3600, json.dumps(order_data))</p>
+<br>
+<br>
+<br>
+<p>    # Update Elasticsearch for search</p>
+<br>
+<p>    es.index(index='orders', id=order_id, body=order_data)</p>
+<br>
+<br>
+<br>
+<br>
+<p>Migration Paths   </p>
+<p>| Starting Point | Problem | Target | Strategy | |----------------|---------|--------|----------| | SQL | Scaling writes | NoSQL | Dual-write, then cut over | | NoSQL | Complex queries | SQL | Define schema, migrate data | | NoSQL | Data integrity issues | SQL | Add constraints, enforce at app level first | | SQL | Flexible schema needed | NoSQL | Start with embedded docs for polymorphic data |   </p>
+<p>Summary   </p>
 <p>Choose SQL when you need complex queries, strong data integrity, and ACID transactions. Choose NoSQL when you need flexible schemas, horizontal scaling, and high write throughput. For complex applications, a polyglot persistence approach that uses the right database for each workload often provides the best results. Start with SQL (PostgreSQL) as the default and add NoSQL databases specifically for workloads where SQL is limiting.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

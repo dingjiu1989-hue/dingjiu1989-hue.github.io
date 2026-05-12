@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tools" data-exclude="reverse-engineering">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja">
+    <meta property="og:description" content="Compare reverse engineering tools: Ghidra for free comprehensive analysis, IDA Free for industry standard disassembly, radare2 for command-line reverse engineer">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tools/reverse-engineering.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja">
+    <meta name="twitter:description" content="Compare reverse engineering tools: Ghidra for free comprehensive analysis, IDA Free for industry standard disassembly, radare2 for command-line reverse engineer">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja — SourceHub</title>
+    <meta name="description" content="Compare reverse engineering tools: Ghidra for free comprehensive analysis, IDA Free for industry standard disassembly, radare2 for command-line reverse engineer">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tools/reverse-engineering.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tools/reverse-engineering.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja",
+      "description": "Compare reverse engineering tools: Ghidra for free comprehensive analysis, IDA Free for industry standard disassembly, radare2 for command-line reverse engineer",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "2084",
+      "keywords": "Technology, DevTools, Productivity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/reverse-engineering.html"},
+      "articleBody": "Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja Introduction Reverse engineering is the art of understanding how software works without access to its source code. Modern reverse engineering tools provide disassembly, decompilation, debugging, and scripting capabilities. This article compares four major platforms: Ghidra, IDA Free, radare2, and Binary Ninja. Ghidra NSA's open-source reverse engineering framework: // Ghidra scripting API import ghidra.app.script.GhidraScript; import ghidra.program.model.listing.*; import ghidra.program.model.symbol.*; public class AnalyzeFunction extends GhidraScript { @Override public void run() throws Exception { // Get the current program Program program = getCurrentProgram(); Listing listing = program.getListing(); // Iterate over all functions FunctionIterator functions = listing.getFunctions(true); for (Function function : functions) { println(\"Function: \" + function.getName()); println(\" Address: \" + function.getEntryPoint()); println(\" Body size: \" + function.getBody().getNumAddresses()); // Check for imported functions SymbolTable symTable = program.getSymbolTable(); ReferenceIterator refs = program.getReferenceManager() .getReferencesTo(function.getEntryPoint()); while (refs.hasNext()) { Reference ref = refs.next(); println(\" Referenced by: \" + ref.getFromAddress()); } } } } **Key features**: * Decompiler (produces C-like pseudocode from assembly) * Program tree and listing views * Cross-reference analysis (XREFs) * Version tracking (collaborative analysis) * Scripting in Java and Python (Jython) * Processor support: x86, x64, ARM, AARCH64, MIPS, PowerPC, RISC-V, 6502, 8051, and 50+ more # Ghidra Python script from ghidra.program.model.symbol import SourceType def find_string_refs(target_string): for address in currentProgram.getListing().getDefinedData(True): data = getDataAt(address) if data and data.isString(): string_value = str(data.getDefaultValueRepresentation()) if target_string in string_value: print(f\"Found '{string_value}' at {address}\") refs = getReferencesTo(address) for ref in refs: print(f\" Referenced from: {ref.getFromAddress()}\") **Key strengths**: Free and open-source, excellent decompiler, collaborative features, extensive processor support, active development. IDA Free Hex-Rays' industry-standard disassembler (free edition): # IDAPython scripting import idautils import ida_funcs import ida_xref def analyze_critical_functions(): for func_addr in idautils.Functions(): func = ida_funcs.get_func(func_addr) name = ida_funcs.get_func_name(func_addr) # Identify functions with many cross-references xref_count = len(list(idautils.CodeRefsTo(func_addr, 0))) if xref_count > 20: print(f\"Hot function: {name} at {hex(func_addr)} ({xref_count} refs)\") # Check if function references suspicious strings for ref in idautils.XrefsFrom(func_addr): if is_string(ref.to): string_val = get_strlit_contents(ref.to) if string_val and b\"password\" in string_val.lower(): print(f\"Password reference in {name} at {hex(func_addr)}\") # Rename subroutines based on string references for addr, name in idautils.Names(): if name.startswith(\"sub_\"): refs = list(idautils.DataRefsTo(addr)) for ref in refs[:3]: string_ref = get_strlit_contents(ref) if string_ref: idaapi.set_name(addr, f\"sub_{string_ref[:16].decode('utf-8', errors='replace')}\") break **Key features**: Industry-standard disassembly, cross-references (the best XREF system), IDAPython scripting, mature plugin ecosystem, compact database format. **Limitations of Free edition**: No decompiler (Hex-Rays decompiler is paid), x86/x64 only, no collaborative features. radare2 The most powerful command-line reverse engineering framework: # Open a binary r2 ./binary r2 -d ./binary # Debug mode r2 -A ./binary # Analyze automatically # Common commands aaaa # Full analysis afl # List functions afl ~main # Find main function s main # Seek to main pdf # Print disassembly of function V # Visual mode (arrow keys to navigate) VV # Graph view (control flow graph) # Searching / \\x00\\x00\\x00 # Search for bytes /v 42 # Search for value /! popen # Search for string wx 9090 # Write bytes (patch) # Analysis afvn new_name var_4 # Rename local variable afn new_name 0x401000 # Rename function axt 0x401000 # Find XREFs to address axf 0x401000 # Find XREFs from address # Output formats pdf > output.asm # Save disassembly pdr # Decompiled pseudocode (experimental) # Scripting (r2pipe) r2 -q -c 'aaa; afl~main' ./binary Binary Ninja Modern reverse engineering platform with Python scripting: import binaryninja as bn # Open binary bv = bn.BinaryViewType.get_view_of_file(\"./binary\") bv.update_analysis() # Analyze functions for func in bv.functions: print(f\"Function: {func.name} @ {hex(func.start)}\") print(f\" Basic blocks: {len(func.basic_blocks)}\") print(f\" Callers: {len(func.callers)}\") # High-level IL for block in func.high_level_il: for instr in block: print(f\" HLIL: {instr}\") # Medium-level IL (more detailed) for block in func.medium_level_il: for instr in block: if \"call\" in str(instr).lower(): print(f\" Call: {instr}\") # Find all calls to a specific function target = bv.get_function_at(bv.symbols[\"strcpy\"][0].address) for ref in target.callers: caller = ref.function print(f\"strcpy called from: {caller.name} @ {hex(ref.address)}\") # Data flow analysis var = func.mlil.ssa_form[42].dest uses = func.mlil.ssa_form.get_ssa_uses(var) for use in uses: print(f\" Used at: {use.address}\") Comparison | Feature | Ghidra | IDA Free | radare2 | Binary Ninja | |---------|--------|----------|---------|--------------| | Price | Free | Free | Free | $299-$999 | | Decompiler | Excellent | None (paid) | Basic | Good | | UI | GUI + Headless | GUI | CLI + Web GUI | GUI + CLI | | Scripting | Java, Python | Python | Python, JS, Lua | Python, C++ | | Processor support | 50+ | x86/x64 | 50+ | 20+ | | Learning curve | High | High | Very high | Medium | Recommendations * **Starting reverse engineering**: Ghidra provides the best free experience with its decompiler and user-friendly interface. * **Quick analysis**: IDA Free for rapid disassembly if you are already familiar with the IDA workflow. * **Automation/scripting**: Binary Ninja's clean Python API makes it ideal for automated analysis pipelines. * **Power users**: radare2 for the deepest control and command-line workflows. * **Malware analysis**: Ghidra with its decompiler and extensive processor support. All four tools are capable of serious reverse engineering work. Ghidra offers the best free decompiler and the broadest platform support. Binary Ninja has the cleanest API for scripting. radare2 is unbeatable for command-line automation."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tool Recommendations", "item": "https://dingjiu1989-hue.github.io/en/tools/"},
+        {"@type": "ListItem", "position": 3, "name": "Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a> › Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">DevTools</span>
+        <span class="tag-cat">Productivity</span></div>
+      <h1 class="article-title">Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Reverse engineering is the art of understanding how software works without access to its source code. Modern reverse engineering tools provide disassembly, decompilation, debugging, and scripting capabilities. This article compares four major platforms: Ghidra, IDA Free, radare2, and Binary Ninja.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Ghidra</h2>
+<br>
+<br>
+<br>
+<br>
+<p>NSA's open-source reverse engineering framework:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    // Ghidra scripting API</p>
+<br>
+<p>    import ghidra.app.script.GhidraScript;</p>
+<br>
+<p>    import ghidra.program.model.listing.*;</p>
+<br>
+<p>    import ghidra.program.model.symbol.*;</p>
+<br>
+<br>
+<br>
+<p>    public class AnalyzeFunction extends GhidraScript {</p>
+<br>
+<p>        @Override</p>
+<br>
+<p>        public void run() throws Exception {</p>
+<br>
+<p>            // Get the current program</p>
+<br>
+<p>            Program program = getCurrentProgram();</p>
+<br>
+<p>            Listing listing = program.getListing();</p>
+<br>
+<br>
+<br>
+<p>            // Iterate over all functions</p>
+<br>
+<p>            FunctionIterator functions = listing.getFunctions(true);</p>
+<br>
+<p>            for (Function function : functions) {</p>
+<br>
+<p>                println("Function: " + function.getName());</p>
+<br>
+<p>                println("  Address: " + function.getEntryPoint());</p>
+<br>
+<p>                println("  Body size: " + function.getBody().getNumAddresses());</p>
+<br>
+<br>
+<br>
+<p>                // Check for imported functions</p>
+<br>
+<p>                SymbolTable symTable = program.getSymbolTable();</p>
+<br>
+<p>                ReferenceIterator refs = program.getReferenceManager()</p>
+<br>
+<p>                    .getReferencesTo(function.getEntryPoint());</p>
+<br>
+<p>                while (refs.hasNext()) {</p>
+<br>
+<p>                    Reference ref = refs.next();</p>
+<br>
+<p>                    println("  Referenced by: " + ref.getFromAddress());</p>
+<br>
+<p>                }</p>
+<br>
+<p>            }</p>
+<br>
+<p>        }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Key features**:</p>
+<br>
+<p>* Decompiler (produces C-like pseudocode from assembly)</p>
+<p>* Program tree and listing views</p>
+<p>* Cross-reference analysis (XREFs)</p>
+<p>* Version tracking (collaborative analysis)</p>
+<p>* Scripting in Java and Python (Jython)</p>
+<p>* Processor support: x86, x64, ARM, AARCH64, MIPS, PowerPC, RISC-V, 6502, 8051, and 50+ more</p>
+<br>
+<br>
+<br>
+<br>
+<p>    # Ghidra Python script</p>
+<br>
+<p>    from ghidra.program.model.symbol import SourceType</p>
+<br>
+<br>
+<br>
+<p>    def find_string_refs(target_string):</p>
+<br>
+<p>        for address in currentProgram.getListing().getDefinedData(True):</p>
+<br>
+<p>            data = getDataAt(address)</p>
+<br>
+<p>            if data and data.isString():</p>
+<br>
+<p>                string_value = str(data.getDefaultValueRepresentation())</p>
+<br>
+<p>                if target_string in string_value:</p>
+<br>
+<p>                    print(f"Found '{string_value}' at {address}")</p>
+<br>
+<p>                    refs = getReferencesTo(address)</p>
+<br>
+<p>                    for ref in refs:</p>
+<br>
+<p>                        print(f"  Referenced from: {ref.getFromAddress()}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Key strengths**: Free and open-source, excellent decompiler, collaborative features, extensive processor support, active development.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  IDA Free</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Hex-Rays' industry-standard disassembler (free edition):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # IDAPython scripting</p>
+<br>
+<p>    import idautils</p>
+<br>
+<p>    import ida_funcs</p>
+<br>
+<p>    import ida_xref</p>
+<br>
+<br>
+<br>
+<p>    def analyze_critical_functions():</p>
+<br>
+<p>        for func_addr in idautils.Functions():</p>
+<br>
+<p>            func = ida_funcs.get_func(func_addr)</p>
+<br>
+<p>            name = ida_funcs.get_func_name(func_addr)</p>
+<br>
+<br>
+<br>
+<p>            # Identify functions with many cross-references</p>
+<br>
+<p>            xref_count = len(list(idautils.CodeRefsTo(func_addr, 0)))</p>
+<br>
+<p>            if xref_count > 20:</p>
+<br>
+<p>                print(f"Hot function: {name} at {hex(func_addr)} ({xref_count} refs)")</p>
+<br>
+<br>
+<br>
+<p>            # Check if function references suspicious strings</p>
+<br>
+<p>            for ref in idautils.XrefsFrom(func_addr):</p>
+<br>
+<p>                if is_string(ref.to):</p>
+<br>
+<p>                    string_val = get_strlit_contents(ref.to)</p>
+<br>
+<p>                    if string_val and b"password" in string_val.lower():</p>
+<br>
+<p>                        print(f"Password reference in {name} at {hex(func_addr)}")</p>
+<br>
+<br>
+<br>
+<p>    # Rename subroutines based on string references</p>
+<br>
+<p>    for addr, name in idautils.Names():</p>
+<br>
+<p>        if name.startswith("sub_"):</p>
+<br>
+<p>            refs = list(idautils.DataRefsTo(addr))</p>
+<br>
+<p>            for ref in refs[:3]:</p>
+<br>
+<p>                string_ref = get_strlit_contents(ref)</p>
+<br>
+<p>                if string_ref:</p>
+<br>
+<p>                    idaapi.set_name(addr, f"sub_{string_ref[:16].decode('utf-8', errors='replace')}")</p>
+<br>
+<p>                    break</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Key features**: Industry-standard disassembly, cross-references (the best XREF system), IDAPython scripting, mature plugin ecosystem, compact database format.</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Limitations of Free edition**: No decompiler (Hex-Rays decompiler is paid), x86/x64 only, no collaborative features.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  radare2</h2>
+<br>
+<br>
+<br>
+<br>
+<p>The most powerful command-line reverse engineering framework:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Open a binary</p>
+<br>
+<p>    r2 ./binary</p>
+<br>
+<p>    r2 -d ./binary  # Debug mode</p>
+<br>
+<p>    r2 -A ./binary  # Analyze automatically</p>
+<br>
+<br>
+<br>
+<p>    # Common commands</p>
+<br>
+<p>    aaaa            # Full analysis</p>
+<br>
+<p>    afl             # List functions</p>
+<br>
+<p>    afl ~main       # Find main function</p>
+<br>
+<p>    s main          # Seek to main</p>
+<br>
+<p>    pdf             # Print disassembly of function</p>
+<br>
+<p>    V               # Visual mode (arrow keys to navigate)</p>
+<br>
+<p>    VV              # Graph view (control flow graph)</p>
+<br>
+<br>
+<br>
+<p>    # Searching</p>
+<br>
+<p>    / \x00\x00\x00  # Search for bytes</p>
+<br>
+<p>    /v 42           # Search for value</p>
+<br>
+<p>    /! popen        # Search for string</p>
+<br>
+<p>    wx 9090         # Write bytes (patch)</p>
+<br>
+<br>
+<br>
+<p>    # Analysis</p>
+<br>
+<p>    afvn new_name var_4      # Rename local variable</p>
+<br>
+<p>    afn new_name 0x401000    # Rename function</p>
+<br>
+<p>    axt 0x401000             # Find XREFs to address</p>
+<br>
+<p>    axf 0x401000             # Find XREFs from address</p>
+<br>
+<br>
+<br>
+<p>    # Output formats</p>
+<br>
+<p>    pdf > output.asm         # Save disassembly</p>
+<br>
+<p>    pdr                     # Decompiled pseudocode (experimental)</p>
+<br>
+<br>
+<br>
+<p>    # Scripting (r2pipe)</p>
+<br>
+<p>    r2 -q -c 'aaa; afl~main' ./binary</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Binary Ninja</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Modern reverse engineering platform with Python scripting:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    import binaryninja as bn</p>
+<br>
+<br>
+<br>
+<p>    # Open binary</p>
+<br>
+<p>    bv = bn.BinaryViewType.get_view_of_file("./binary")</p>
+<br>
+<p>    bv.update_analysis()</p>
+<br>
+<br>
+<br>
+<p>    # Analyze functions</p>
+<br>
+<p>    for func in bv.functions:</p>
+<br>
+<p>        print(f"Function: {func.name} @ {hex(func.start)}")</p>
+<br>
+<p>        print(f"  Basic blocks: {len(func.basic_blocks)}")</p>
+<br>
+<p>        print(f"  Callers: {len(func.callers)}")</p>
+<br>
+<br>
+<br>
+<p>        # High-level IL</p>
+<br>
+<p>        for block in func.high_level_il:</p>
+<br>
+<p>            for instr in block:</p>
+<br>
+<p>                print(f"  HLIL: {instr}")</p>
+<br>
+<br>
+<br>
+<p>        # Medium-level IL (more detailed)</p>
+<br>
+<p>        for block in func.medium_level_il:</p>
+<br>
+<p>            for instr in block:</p>
+<br>
+<p>                if "call" in str(instr).lower():</p>
+<br>
+<p>                    print(f"  Call: {instr}")</p>
+<br>
+<br>
+<br>
+<p>    # Find all calls to a specific function</p>
+<br>
+<p>    target = bv.get_function_at(bv.symbols["strcpy"][0].address)</p>
+<br>
+<p>    for ref in target.callers:</p>
+<br>
+<p>        caller = ref.function</p>
+<br>
+<p>        print(f"strcpy called from: {caller.name} @ {hex(ref.address)}")</p>
+<br>
+<br>
+<br>
+<p>    # Data flow analysis</p>
+<br>
+<p>    var = func.mlil.ssa_form[42].dest</p>
+<br>
+<p>    uses = func.mlil.ssa_form.get_ssa_uses(var)</p>
+<br>
+<p>    for use in uses:</p>
+<br>
+<p>        print(f"  Used at: {use.address}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Comparison</h2>
+<br>
+<br>
+<br>
+<br>
+<p>| Feature | Ghidra | IDA Free | radare2 | Binary Ninja |</p>
+<br>
+<p>|---------|--------|----------|---------|--------------|</p>
+<br>
+<p>| Price | Free | Free | Free | $299-$999 |</p>
+<br>
+<p>| Decompiler | Excellent | None (paid) | Basic | Good |</p>
+<br>
+<p>| UI | GUI + Headless | GUI | CLI + Web GUI | GUI + CLI |</p>
+<br>
+<p>| Scripting | Java, Python | Python | Python, JS, Lua | Python, C++ |</p>
+<br>
+<p>| Processor support | 50+ | x86/x64 | 50+ | 20+ |</p>
+<br>
+<p>| Learning curve | High | High | Very high | Medium |</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Recommendations</h2>
+<br>
+<br>
+<br>
+<p>* **Starting reverse engineering**: Ghidra provides the best free experience with its decompiler and user-friendly interface.</p>
+<p>* **Quick analysis**: IDA Free for rapid disassembly if you are already familiar with the IDA workflow.</p>
+<p>* **Automation/scripting**: Binary Ninja's clean Python API makes it ideal for automated analysis pipelines.</p>
+<p>* **Power users**: radare2 for the deepest control and command-line workflows.</p>
+<p>* **Malware analysis**: Ghidra with its decompiler and extensive processor support.</p>
+<br>
+<br>
+<br>
+<p>All four tools are capable of serious reverse engineering work. Ghidra offers the best free decompiler and the broadest platform support. Binary Ninja has the cleanest API for scripting. radare2 is unbeatable for command-line automation.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div>
+      <noscript><div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

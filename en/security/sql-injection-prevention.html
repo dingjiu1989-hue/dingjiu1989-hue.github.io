@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1214",
+      "wordCount": "1307",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/sql-injection-prevention.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/sql-injection-prevention.html"},
+      "articleBody": "SQL Injection Prevention Guide Understanding SQL Injection SQL injection is a code injection technique where an attacker inserts malicious SQL statements into application queries. It has been the top vulnerability in the OWASP Top 10 for years and remains one of the most damaging attack vectors despite being well-understood. How It Works Consider a vulnerable login query built by string concatenation: String query = \"SELECT * FROM users WHERE email = '\" + email + \"' AND password = '\" + password + \"'\"; An attacker providing `email = admin@example.com' --` comments out the password check, logging in as admin without knowing the password. Worse, providing `email = '; DROP TABLE users; --` could destroy the database entirely. Defense Layer 1: Parameterized Queries Parameterized queries (also called prepared statements) separate SQL logic from data. User input is always treated as data, never as executable code. Node.js (mysql2) const mysql = require('mysql2/promise'); const connection = await mysql.createConnection({ /* config */ }); const [rows] = await connection.execute( 'SELECT * FROM users WHERE email = ? AND password_hash = ?', [email, passwordHash] ); Python (psycopg2) import psycopg2 conn = psycopg2.connect(\"dbname=test user=postgres\") cur = conn.cursor() cur.execute( \"SELECT * FROM users WHERE email = %s AND status = %s\", (user_email, 'active') ) Java (JDBC) String sql = \"SELECT * FROM products WHERE category = ? AND price PreparedStatement stmt = connection.prepareStatement(sql); stmt.setString(1, category); stmt.setBigDecimal(2, maxPrice); ResultSet rs = stmt.executeQuery(); Go (database/sql) rows, err := db.Query( \"SELECT * FROM users WHERE email = $1 AND active = $2\", email, true, ) Defense Layer 2: ORM Protections Modern ORMs provide built-in protection against SQL injection when used correctly. Django ORM # Safe: ORM parameterizes automatically users = User.objects.filter(email=user_input, is_active=True) # Safe: Raw queries with parameters users = User.objects.raw( 'SELECT * FROM auth_user WHERE email = %s', [user_input] ) # UNSAFE: String interpolation bypasses protections users = User.objects.raw(f'SELECT * FROM auth_user WHERE email = \"{user_input}\"') SQLAlchemy # Safe result = session.execute( text(\"SELECT * FROM users WHERE email = :email\"), {\"email\": user_input} ) # UNSAFE result = session.execute( text(f\"SELECT * FROM users WHERE email = '{user_input}'\") ) Defense Layer 3: Input Validation Parameterized queries prevent SQL injection in most cases, but input validation provides defense in depth. import re def validate_username(username): \"\"\"Allow only alphanumeric and underscore.\"\"\" if not re.match(r'^[a-zA-Z0-9_]{3,30}$', username): raise ValueError(\"Invalid username format\") return username Defense Layer 4: Stored Procedures Stored procedures can add an abstraction layer between queries and user input. CREATE PROCEDURE GetUserByEmail(IN user_email VARCHAR(255)) BEGIN SELECT id, username, email FROM users WHERE email = user_email AND deleted_at IS NULL; END cursor.callproc('GetUserByEmail', [email]) Note that stored procedures must still use parameterized calls internally. A stored procedure that concatenates strings is still vulnerable. Defense Layer 5: Least Privilege Limit database account permissions so that a successful injection causes minimal damage: | Account | Permissions | Purpose | |---------|-------------|---------| | app_read | SELECT only | Read-only queries | | app_write | SELECT, INSERT, UPDATE | Write operations | | app_admin | SELECT, INSERT, UPDATE, DELETE | Admin functions | | migration | DDL (CREATE, ALTER, DROP) | Schema migrations only | Never use the database root or admin account for application connections. Advanced Threats Second-Order SQL Injection Data stored in the database can later be used unsafely in a different query. Parameterized queries on all queries mitigate this. Blind SQL Injection Attackers infer information through boolean or time-based responses. Use uniform error messages and prevent timing-based inference by adding random delays. Detection Tools | Tool | Type | Coverage | |------|------|----------| | SQLMap | Automated exploitation testing | Dynamic analysis | | OWASP ZAP | DAST scanner | Runtime detection | | SonarQube | SAST | Static code analysis | | Semgrep | SAST | Custom rule patterns | # Scan Go code for string concatenation in SQL queries semgrep --config \"p/sql-injection\" . Summary SQL injection is entirely preventable. Parameterized queries are the single most effective defense and should be the default pattern for every database interaction. Layer in ORM protections, input validation, least-privilege database accounts, and static analysis tools to create defense-in-depth. Never concatenate user input directly into SQL strings, and train every developer on these principles from day one."
     }
     </script>
     <script type="application/ld+json">
@@ -73,235 +74,228 @@
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">SQL Injection Prevention Guide</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Understanding SQL Injection</h2>
+      <div class="article-body"><h1>SQL Injection Prevention Guide</h1>
 <br>
-<p>SQL injection is a code injection technique where an attacker inserts malicious SQL statements into application queries. It has been the top vulnerability in the OWASP Top 10 for years and remains one of the most damaging attack vectors despite being well-understood.</p>
+<p>Understanding SQL Injection   </p>
+<p>SQL injection is a code injection technique where an attacker inserts malicious SQL statements into application queries. It has been the top vulnerability in the OWASP Top 10 for years and remains one of the most damaging attack vectors despite being well-understood.   </p>
+<p>How It Works   </p>
+<p>Consider a vulnerable login query built by string concatenation:   </p>
 <br>
-<h3>How It Works</h3>
 <br>
-<p>Consider a vulnerable login query built by string concatenation:</p>
 <br>
-<pre><code>
-String query = &quot;SELECT * FROM users WHERE email = &#x27;&quot; + email + &quot;&#x27; AND password = &#x27;&quot; + password + &quot;&#x27;&quot;;
-
-</code></pre>
+<p>    String query = "SELECT * FROM users WHERE email = '" + email + "' AND password = '" + password + "'";</p>
 <br>
-<p>An attacker providing `email = admin@example.com' --` comments out the password check, logging in as admin without knowing the password. Worse, providing `email = '; DROP TABLE users; --` could destroy the database entirely.</p>
 <br>
-<h2> Defense Layer 1: Parameterized Queries</h2>
 <br>
-<p>Parameterized queries (also called prepared statements) separate SQL logic from data. User input is always treated as data, never as executable code.</p>
 <br>
-<h3>Node.js (mysql2)</h3>
+<p>An attacker providing `email = admin@example.com' --` comments out the password check, logging in as admin without knowing the password. Worse, providing `email = '; DROP TABLE users; --` could destroy the database entirely.   </p>
+<p>Defense Layer 1: Parameterized Queries   </p>
+<p>Parameterized queries (also called prepared statements) separate SQL logic from data. User input is always treated as data, never as executable code.   </p>
+<p>Node.js (mysql2)   </p>
 <br>
-<pre><code>
-const mysql = require(&#x27;mysql2/promise&#x27;);
-
-const connection = await mysql.createConnection({ /* config */ });
-
-
-
-const [rows] = await connection.execute(
-
-    &#x27;SELECT * FROM users WHERE email = ? AND password_hash = ?&#x27;,
-
-    [email, passwordHash]
-
-);
-
-</code></pre>
 <br>
-<h3>Python (psycopg2)</h3>
 <br>
-<pre><code>
-import psycopg2
-
-
-
-conn = psycopg2.connect(&quot;dbname=test user=postgres&quot;)
-
-cur = conn.cursor()
-
-cur.execute(
-
-    &quot;SELECT * FROM users WHERE email = %s AND status = %s&quot;,
-
-    (user_email, &#x27;active&#x27;)
-
-)
-
-</code></pre>
+<p>    const mysql = require('mysql2/promise');</p>
 <br>
-<h3>Java (JDBC)</h3>
+<p>    const connection = await mysql.createConnection({ /* config */ });</p>
 <br>
-<pre><code>
-String sql = &quot;SELECT * FROM products WHERE category = ? AND price &lt; ?&quot;;
-
-PreparedStatement stmt = connection.prepareStatement(sql);
-
-stmt.setString(1, category);
-
-stmt.setBigDecimal(2, maxPrice);
-
-ResultSet rs = stmt.executeQuery();
-
-</code></pre>
 <br>
-<h3>Go (database/sql)</h3>
 <br>
-<pre><code>
-rows, err := db.Query(
-
-    &quot;SELECT * FROM users WHERE email = $1 AND active = $2&quot;,
-
-    email, true,
-
-)
-
-</code></pre>
+<p>    const [rows] = await connection.execute(</p>
 <br>
-<h2> Defense Layer 2: ORM Protections</h2>
+<p>        'SELECT * FROM users WHERE email = ? AND password_hash = ?',</p>
 <br>
-<p>Modern ORMs provide built-in protection against SQL injection when used correctly.</p>
+<p>        [email, passwordHash]</p>
 <br>
-<h3>Django ORM</h3>
+<p>    );</p>
 <br>
-<pre><code>
-# Safe: ORM parameterizes automatically
-
-users = User.objects.filter(email=user_input, is_active=True)
-
-
-
-# Safe: Raw queries with parameters
-
-users = User.objects.raw(
-
-    &#x27;SELECT * FROM auth_user WHERE email = %s&#x27;, [user_input]
-
-)
-
-
-
-# UNSAFE: String interpolation bypasses protections
-
-users = User.objects.raw(f&#x27;SELECT * FROM auth_user WHERE email = &quot;{user_input}&quot;&#x27;)
-
-</code></pre>
 <br>
-<h3>SQLAlchemy</h3>
 <br>
-<pre><code>
-# Safe
-
-result = session.execute(
-
-    text(&quot;SELECT * FROM users WHERE email = :email&quot;),
-
-    {&quot;email&quot;: user_input}
-
-)
-
-
-
-# UNSAFE
-
-result = session.execute(
-
-    text(f&quot;SELECT * FROM users WHERE email = &#x27;{user_input}&#x27;&quot;)
-
-)
-
-</code></pre>
 <br>
-<h2> Defense Layer 3: Input Validation</h2>
+<p>Python (psycopg2)   </p>
 <br>
-<p>Parameterized queries prevent SQL injection in most cases, but input validation provides defense in depth.</p>
 <br>
-<pre><code>
-import re
-
-
-
-def validate_username(username):
-
-    &quot;&quot;&quot;Allow only alphanumeric and underscore.&quot;&quot;&quot;
-
-    if not re.match(r&#x27;^[a-zA-Z0-9_]{3,30}$&#x27;, username):
-
-        raise ValueError(&quot;Invalid username format&quot;)
-
-    return username
-
-</code></pre>
 <br>
-<h2> Defense Layer 4: Stored Procedures</h2>
+<p>    import psycopg2</p>
 <br>
-<p>Stored procedures can add an abstraction layer between queries and user input.</p>
 <br>
-<pre><code>
-CREATE PROCEDURE GetUserByEmail(IN user_email VARCHAR(255))
-
-BEGIN
-
-    SELECT id, username, email
-
-    FROM users
-
-    WHERE email = user_email AND deleted_at IS NULL;
-
-END
-
-</code></pre>
 <br>
-<pre><code>
-cursor.callproc(&#x27;GetUserByEmail&#x27;, [email])
-
-</code></pre>
+<p>    conn = psycopg2.connect("dbname=test user=postgres")</p>
 <br>
-<p>Note that stored procedures must still use parameterized calls internally. A stored procedure that concatenates strings is still vulnerable.</p>
+<p>    cur = conn.cursor()</p>
 <br>
-<h2> Defense Layer 5: Least Privilege</h2>
+<p>    cur.execute(</p>
 <br>
-<p>Limit database account permissions so that a successful injection causes minimal damage:</p>
+<p>        "SELECT * FROM users WHERE email = %s AND status = %s",</p>
 <br>
-<p>| Account | Permissions | Purpose |</p>
-<p>|---------|-------------|---------|</p>
-<p>| app_read | SELECT only | Read-only queries |</p>
-<p>| app_write | SELECT, INSERT, UPDATE | Write operations |</p>
-<p>| app_admin | SELECT, INSERT, UPDATE, DELETE | Admin functions |</p>
-<p>| migration | DDL (CREATE, ALTER, DROP) | Schema migrations only |</p>
+<p>        (user_email, 'active')</p>
 <br>
-<p>Never use the database root or admin account for application connections.</p>
+<p>    )</p>
 <br>
-<h2> Advanced Threats</h2>
 <br>
-<h3>Second-Order SQL Injection</h3>
 <br>
-<p>Data stored in the database can later be used unsafely in a different query. Parameterized queries on all queries mitigate this.</p>
 <br>
-<h3>Blind SQL Injection</h3>
+<p>Java (JDBC)   </p>
 <br>
-<p>Attackers infer information through boolean or time-based responses. Use uniform error messages and prevent timing-based inference by adding random delays.</p>
 <br>
-<h2> Detection Tools</h2>
 <br>
-<p>| Tool | Type | Coverage |</p>
-<p>|------|------|----------|</p>
-<p>| SQLMap | Automated exploitation testing | Dynamic analysis |</p>
-<p>| OWASP ZAP | DAST scanner | Runtime detection |</p>
-<p>| SonarQube | SAST | Static code analysis |</p>
-<p>| Semgrep | SAST | Custom rule patterns |</p>
+<p>    String sql = "SELECT * FROM products WHERE category = ? AND price < ?";</p>
 <br>
-<pre><code>
-# Scan Go code for string concatenation in SQL queries
-
-semgrep --config &quot;p/sql-injection&quot; .
-
-</code></pre>
+<p>    PreparedStatement stmt = connection.prepareStatement(sql);</p>
 <br>
-<h2> Summary</h2>
+<p>    stmt.setString(1, category);</p>
 <br>
+<p>    stmt.setBigDecimal(2, maxPrice);</p>
+<br>
+<p>    ResultSet rs = stmt.executeQuery();</p>
+<br>
+<br>
+<br>
+<br>
+<p>Go (database/sql)   </p>
+<br>
+<br>
+<br>
+<p>    rows, err := db.Query(</p>
+<br>
+<p>        "SELECT * FROM users WHERE email = $1 AND active = $2",</p>
+<br>
+<p>        email, true,</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<br>
+<p>Defense Layer 2: ORM Protections   </p>
+<p>Modern ORMs provide built-in protection against SQL injection when used correctly.   </p>
+<p>Django ORM   </p>
+<br>
+<br>
+<br>
+<p>    # Safe: ORM parameterizes automatically</p>
+<br>
+<p>    users = User.objects.filter(email=user_input, is_active=True)</p>
+<br>
+<br>
+<br>
+<p>    # Safe: Raw queries with parameters</p>
+<br>
+<p>    users = User.objects.raw(</p>
+<br>
+<p>        'SELECT * FROM auth_user WHERE email = %s', [user_input]</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<p>    # UNSAFE: String interpolation bypasses protections</p>
+<br>
+<p>    users = User.objects.raw(f'SELECT * FROM auth_user WHERE email = "{user_input}"')</p>
+<br>
+<br>
+<br>
+<br>
+<p>SQLAlchemy   </p>
+<br>
+<br>
+<br>
+<p>    # Safe</p>
+<br>
+<p>    result = session.execute(</p>
+<br>
+<p>        text("SELECT * FROM users WHERE email = :email"),</p>
+<br>
+<p>        {"email": user_input}</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<p>    # UNSAFE</p>
+<br>
+<p>    result = session.execute(</p>
+<br>
+<p>        text(f"SELECT * FROM users WHERE email = '{user_input}'")</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<br>
+<p>Defense Layer 3: Input Validation   </p>
+<p>Parameterized queries prevent SQL injection in most cases, but input validation provides defense in depth.   </p>
+<br>
+<br>
+<br>
+<p>    import re</p>
+<br>
+<br>
+<br>
+<p>    def validate_username(username):</p>
+<br>
+<p>        """Allow only alphanumeric and underscore."""</p>
+<br>
+<p>        if not re.match(r'^[a-zA-Z0-9_]{3,30}$', username):</p>
+<br>
+<p>            raise ValueError("Invalid username format")</p>
+<br>
+<p>        return username</p>
+<br>
+<br>
+<br>
+<br>
+<p>Defense Layer 4: Stored Procedures   </p>
+<p>Stored procedures can add an abstraction layer between queries and user input.   </p>
+<br>
+<br>
+<br>
+<p>    CREATE PROCEDURE GetUserByEmail(IN user_email VARCHAR(255))</p>
+<br>
+<p>    BEGIN</p>
+<br>
+<p>        SELECT id, username, email</p>
+<br>
+<p>        FROM users</p>
+<br>
+<p>        WHERE email = user_email AND deleted_at IS NULL;</p>
+<br>
+<p>    END</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    cursor.callproc('GetUserByEmail', [email])</p>
+<br>
+<br>
+<br>
+<br>
+<p>Note that stored procedures must still use parameterized calls internally. A stored procedure that concatenates strings is still vulnerable.   </p>
+<p>Defense Layer 5: Least Privilege   </p>
+<p>Limit database account permissions so that a successful injection causes minimal damage:   </p>
+<p>| Account | Permissions | Purpose | |---------|-------------|---------| | app_read | SELECT only | Read-only queries | | app_write | SELECT, INSERT, UPDATE | Write operations | | app_admin | SELECT, INSERT, UPDATE, DELETE | Admin functions | | migration | DDL (CREATE, ALTER, DROP) | Schema migrations only |   </p>
+<p>Never use the database root or admin account for application connections.   </p>
+<p>Advanced Threats   </p>
+<p>Second-Order SQL Injection   </p>
+<p>Data stored in the database can later be used unsafely in a different query. Parameterized queries on all queries mitigate this.   </p>
+<p>Blind SQL Injection   </p>
+<p>Attackers infer information through boolean or time-based responses. Use uniform error messages and prevent timing-based inference by adding random delays.   </p>
+<p>Detection Tools   </p>
+<p>| Tool | Type | Coverage | |------|------|----------| | SQLMap | Automated exploitation testing | Dynamic analysis | | OWASP ZAP | DAST scanner | Runtime detection | | SonarQube | SAST | Static code analysis | | Semgrep | SAST | Custom rule patterns |   </p>
+<br>
+<br>
+<br>
+<p>    # Scan Go code for string concatenation in SQL queries</p>
+<br>
+<p>    semgrep --config "p/sql-injection" .</p>
+<br>
+<br>
+<br>
+<br>
+<p>Summary   </p>
 <p>SQL injection is entirely preventable. Parameterized queries are the single most effective defense and should be the default pattern for every database interaction. Layer in ORM protections, input validation, least-privilege database accounts, and static analysis tools to create defense-in-depth. Never concatenate user input directly into SQL strings, and train every developer on these principles from day one.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

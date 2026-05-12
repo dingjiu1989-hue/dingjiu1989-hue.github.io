@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="ddos-mitigation">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="DDoS Mitigation">
+    <meta property="og:description" content="Implementing DDoS mitigation with detection, traffic scrubbing, rate limiting, and CDN-based protection.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/ddos-mitigation.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DDoS Mitigation">
+    <meta name="twitter:description" content="Implementing DDoS mitigation with detection, traffic scrubbing, rate limiting, and CDN-based protection.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>DDoS Mitigation — SourceHub</title>
+    <meta name="description" content="Implementing DDoS mitigation with detection, traffic scrubbing, rate limiting, and CDN-based protection.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/ddos-mitigation.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/ddos-mitigation.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "DDoS Mitigation",
+      "description": "Implementing DDoS mitigation with detection, traffic scrubbing, rate limiting, and CDN-based protection.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1446",
+      "keywords": "Security, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/ddos-mitigation.html"},
+      "articleBody": "DDoS Mitigation Understanding DDoS Attacks Distributed Denial of Service (DDoS) attacks overwhelm resources by flooding them with traffic. Attack vectors include volumetric, protocol, and application-layer attacks. Detection Strategies Detect attacks by monitoring traffic anomalies: import statistics from collections import defaultdict class DDoSDetector: def __init__(self): self.traffic_history = defaultdict(list) def analyze_traffic(self, metrics): alerts = [] for endpoint, values in metrics.items(): history = self.traffic_history[endpoint] history.append(values[\"rps\"]) # Keep last hour of data if len(history) > 3600: history.pop(0) if len(history) > 60: mean = statistics.mean(history) stdev = statistics.stdev(history) current = values[\"rps\"] # Alert if traffic exceeds 3 standard deviations if current > mean + (3 * stdev): alerts.append({ \"endpoint\": endpoint, \"current_rps\": current, \"baseline_rps\": mean, \"severity\": \"high\" if current > mean + (5 * stdev) else \"medium\" }) return alerts Traffic Scrubbing Route traffic through scrubbing centers to filter malicious packets: # Scrubbing center configuration scrubbing: providers: - name: \"cloudflare\" tier: \"enterprise\" always_scrub: false threshold_activate: \"100000 rps\" flow_spec: - protocol: tcp dst_port: 443 action: divert_to_scrubber - protocol: tcp dst_port: 80 action: divert_to_scrubber mitigation_actions: - drop_invalid_tcp_packets - rate_limit_syn_floods - filter_dns_amplification - block_known_bot_networks Rate Limiting at Edge # Nginx rate limiting for DDoS limit_req_zone $binary_remote_addr zone=ddos:10m rate=100r/s; server { location / { limit_req zone=ddos burst=200 nodelay; limit_req_status 429; limit_req_log_level warn; # Additional protection limit_conn conn_per_ip 10; limit_conn_status 429; proxy_pass http://backend; } # Specific endpoint protection location /api/login { limit_req zone=login:10m rate=5r/s; limit_req_status 429; proxy_pass http://backend; } } CDN-Based Protection Leverage CDN capabilities for volumetric attack absorption: # CDN DDoS configuration CDN_CONFIG = { \"cloudflare\": { \"under_attack_mode\": True, \"security_level\": \"high\", \"challenge_ttl\": 300, \"browser_check\": True, \"rate_limiting\": { \"enabled\": True, \"rules\": [ { \"path\": \"/api/*\", \"max_requests\": 100, \"period\": 60 } ] }, \"waf\": { \"enabled\": True, \"ruleset\": \"owasp_crs\", \"paranoia_level\": 2 } } } def enable_ddos_protection(domain): # Activate Under Attack mode requests.put( f\"https://api.cloudflare.com/client/v4/zones/{zone_id}/settings/security_level\", json={\"value\": \"under_attack\"} ) # Enable browser integrity check requests.put( f\"https://api.cloudflare.com/client/v4/zones/{zone_id}/settings/browser_check\", json={\"value\": \"on\"} ) Application-Layer Protection // Challenge-response for suspicious requests app.get(\"/challenge\", (req, res) => { if (req.session.challengeSolved) { return res.redirect(\"/dashboard\"); } // Generate proof-of-work challenge const challenge = crypto.randomBytes(16).toString(\"hex\"); const difficulty = 4; // Number of leading zeros needed req.session.challenge = challenge; req.session.difficulty = difficulty; res.send(` // Client-side proof of work function solve(challenge, difficulty) { let nonce = 0; while (true) { const hash = SHA256(challenge + nonce); if (hash.startsWith(\"0\".repeat(difficulty))) break; nonce++; } return nonce; } const nonce = solve(\"${challenge}\", ${difficulty}); window.location.href = \"/verify?nonce=\" + nonce; `); }); Conclusion Effective DDoS mitigation requires multiple layers: detection, scrubbing, rate limiting, and CDN protection. Deploy rate limiting at the edge for application-layer attacks. Use CDN-based protection for volumetric attacks. Implement automated detection and response. Test your DDoS response plan regularly with tabletop exercises."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "DDoS Mitigation"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › DDoS Mitigation
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">DDoS Mitigation</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>DDoS Mitigation</h1>
+<br>
+<p>Understanding DDoS Attacks   </p>
+<p>Distributed Denial of Service (DDoS) attacks overwhelm resources by flooding them with traffic. Attack vectors include volumetric, protocol, and application-layer attacks.   </p>
+<p>Detection Strategies   </p>
+<p>Detect attacks by monitoring traffic anomalies:   </p>
+<br>
+<br>
+<br>
+<p>    import statistics</p>
+<br>
+<p>    from collections import defaultdict</p>
+<br>
+<br>
+<br>
+<p>    class DDoSDetector:</p>
+<br>
+<p>        def __init__(self):</p>
+<br>
+<p>            self.traffic_history = defaultdict(list)</p>
+<br>
+<br>
+<br>
+<p>        def analyze_traffic(self, metrics):</p>
+<br>
+<p>            alerts = []</p>
+<br>
+<br>
+<br>
+<p>            for endpoint, values in metrics.items():</p>
+<br>
+<p>                history = self.traffic_history[endpoint]</p>
+<br>
+<p>                history.append(values["rps"])</p>
+<br>
+<br>
+<br>
+<p>                # Keep last hour of data</p>
+<br>
+<p>                if len(history) > 3600:</p>
+<br>
+<p>                    history.pop(0)</p>
+<br>
+<br>
+<br>
+<p>                if len(history) > 60:</p>
+<br>
+<p>                    mean = statistics.mean(history)</p>
+<br>
+<p>                    stdev = statistics.stdev(history)</p>
+<br>
+<p>                    current = values["rps"]</p>
+<br>
+<br>
+<br>
+<p>                    # Alert if traffic exceeds 3 standard deviations</p>
+<br>
+<p>                    if current > mean + (3 * stdev):</p>
+<br>
+<p>                        alerts.append({</p>
+<br>
+<p>                            "endpoint": endpoint,</p>
+<br>
+<p>                            "current_rps": current,</p>
+<br>
+<p>                            "baseline_rps": mean,</p>
+<br>
+<p>                            "severity": "high" if current > mean + (5 * stdev) else "medium"</p>
+<br>
+<p>                        })</p>
+<br>
+<br>
+<br>
+<p>            return alerts</p>
+<br>
+<br>
+<br>
+<br>
+<p>Traffic Scrubbing   </p>
+<p>Route traffic through scrubbing centers to filter malicious packets:   </p>
+<br>
+<br>
+<br>
+<p>    # Scrubbing center configuration</p>
+<br>
+<p>    scrubbing:</p>
+<br>
+<p>      providers:</p>
+<br>
+<p>        - name: "cloudflare"</p>
+<br>
+<p>          tier: "enterprise"</p>
+<br>
+<p>          always_scrub: false</p>
+<br>
+<p>          threshold_activate: "100000 rps"</p>
+<br>
+<br>
+<br>
+<p>      flow_spec:</p>
+<br>
+<p>        - protocol: tcp</p>
+<br>
+<p>          dst_port: 443</p>
+<br>
+<p>          action: divert_to_scrubber</p>
+<br>
+<p>        - protocol: tcp</p>
+<br>
+<p>          dst_port: 80</p>
+<br>
+<p>          action: divert_to_scrubber</p>
+<br>
+<br>
+<br>
+<p>      mitigation_actions:</p>
+<br>
+<p>        - drop_invalid_tcp_packets</p>
+<br>
+<p>        - rate_limit_syn_floods</p>
+<br>
+<p>        - filter_dns_amplification</p>
+<br>
+<p>        - block_known_bot_networks</p>
+<br>
+<br>
+<br>
+<br>
+<p>Rate Limiting at Edge   </p>
+<br>
+<br>
+<br>
+<p>    # Nginx rate limiting for DDoS</p>
+<br>
+<p>    limit_req_zone $binary_remote_addr zone=ddos:10m rate=100r/s;</p>
+<br>
+<br>
+<br>
+<p>    server {</p>
+<br>
+<p>        location / {</p>
+<br>
+<p>            limit_req zone=ddos burst=200 nodelay;</p>
+<br>
+<p>            limit_req_status 429;</p>
+<br>
+<p>            limit_req_log_level warn;</p>
+<br>
+<br>
+<br>
+<p>            # Additional protection</p>
+<br>
+<p>            limit_conn conn_per_ip 10;</p>
+<br>
+<p>            limit_conn_status 429;</p>
+<br>
+<br>
+<br>
+<p>            proxy_pass http://backend;</p>
+<br>
+<p>        }</p>
+<br>
+<br>
+<br>
+<p>        # Specific endpoint protection</p>
+<br>
+<p>        location /api/login {</p>
+<br>
+<p>            limit_req zone=login:10m rate=5r/s;</p>
+<br>
+<p>            limit_req_status 429;</p>
+<br>
+<p>            proxy_pass http://backend;</p>
+<br>
+<p>        }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<p>CDN-Based Protection   </p>
+<p>Leverage CDN capabilities for volumetric attack absorption:   </p>
+<br>
+<br>
+<br>
+<p>    # CDN DDoS configuration</p>
+<br>
+<p>    CDN_CONFIG = {</p>
+<br>
+<p>        "cloudflare": {</p>
+<br>
+<p>            "under_attack_mode": True,</p>
+<br>
+<p>            "security_level": "high",</p>
+<br>
+<p>            "challenge_ttl": 300,</p>
+<br>
+<p>            "browser_check": True,</p>
+<br>
+<p>            "rate_limiting": {</p>
+<br>
+<p>                "enabled": True,</p>
+<br>
+<p>                "rules": [</p>
+<br>
+<p>                    {</p>
+<br>
+<p>                        "path": "/api/*",</p>
+<br>
+<p>                        "max_requests": 100,</p>
+<br>
+<p>                        "period": 60</p>
+<br>
+<p>                    }</p>
+<br>
+<p>                ]</p>
+<br>
+<p>            },</p>
+<br>
+<p>            "waf": {</p>
+<br>
+<p>                "enabled": True,</p>
+<br>
+<p>                "ruleset": "owasp_crs",</p>
+<br>
+<p>                "paranoia_level": 2</p>
+<br>
+<p>            }</p>
+<br>
+<p>        }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<p>    def enable_ddos_protection(domain):</p>
+<br>
+<p>        # Activate Under Attack mode</p>
+<br>
+<p>        requests.put(</p>
+<br>
+<p>            f"https://api.cloudflare.com/client/v4/zones/{zone_id}/settings/security_level",</p>
+<br>
+<p>            json={"value": "under_attack"}</p>
+<br>
+<p>        )</p>
+<br>
+<br>
+<br>
+<p>        # Enable browser integrity check</p>
+<br>
+<p>        requests.put(</p>
+<br>
+<p>            f"https://api.cloudflare.com/client/v4/zones/{zone_id}/settings/browser_check",</p>
+<br>
+<p>            json={"value": "on"}</p>
+<br>
+<p>        )</p>
+<br>
+<br>
+<br>
+<br>
+<p>Application-Layer Protection   </p>
+<br>
+<br>
+<br>
+<p>    // Challenge-response for suspicious requests</p>
+<br>
+<p>    app.get("/challenge", (req, res) => {</p>
+<br>
+<p>      if (req.session.challengeSolved) {</p>
+<br>
+<p>        return res.redirect("/dashboard");</p>
+<br>
+<p>      }</p>
+<br>
+<br>
+<br>
+<p>      // Generate proof-of-work challenge</p>
+<br>
+<p>      const challenge = crypto.randomBytes(16).toString("hex");</p>
+<br>
+<p>      const difficulty = 4; // Number of leading zeros needed</p>
+<br>
+<br>
+<br>
+<p>      req.session.challenge = challenge;</p>
+<br>
+<p>      req.session.difficulty = difficulty;</p>
+<br>
+<br>
+<br>
+<p>      res.send(`</p>
+<br>
+<p>        <script></p>
+<br>
+<p>          // Client-side proof of work</p>
+<br>
+<p>          function solve(challenge, difficulty) {</p>
+<br>
+<p>            let nonce = 0;</p>
+<br>
+<p>            while (true) {</p>
+<br>
+<p>              const hash = SHA256(challenge + nonce);</p>
+<br>
+<p>              if (hash.startsWith("0".repeat(difficulty))) break;</p>
+<br>
+<p>              nonce++;</p>
+<br>
+<p>            }</p>
+<br>
+<p>            return nonce;</p>
+<br>
+<p>          }</p>
+<br>
+<br>
+<br>
+<p>          const nonce = solve("${challenge}", ${difficulty});</p>
+<br>
+<p>          window.location.href = "/verify?nonce=" + nonce;</p>
+<br>
+<p>        </script></p>
+<br>
+<p>      `);</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
+<p>Effective DDoS mitigation requires multiple layers: detection, scrubbing, rate limiting, and CDN protection. Deploy rate limiting at the edge for application-layer attacks. Use CDN-based protection for volumetric attacks. Implement automated detection and response. Test your DDoS response plan regularly with tabletop exercises.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1703",
+      "wordCount": "1133",
       "keywords": "Technology, Programming, DevOps",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/service-discovery.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/service-discovery.html"},
+      "articleBody": "Service Discovery in Microservices Service discovery enables services to find and communicate with each other in a distributed system. In static environments, service locations could be hardcoded. In dynamic environments like Kubernetes, service instances are ephemeral\u2014they come and go, scale up and down, and move between hosts. Service discovery provides a mechanism for locating available service instances. The Service Discovery Problem Service discovery solves two problems. Registration: when a service instance starts, it must register its location and capabilities so other services can find it. Lookup: when a service needs to call another service, it must discover the location of available instances. Effective service discovery handles dynamic environments. It reacts to instance registration immediately\u2014new instances become available as soon as they register. It handles instance failures\u2014when an instance crashes or becomes unhealthy, it is removed from the available pool. It distributes load across available instances. DNS-Based Discovery DNS-based service discovery uses DNS records to resolve service names to IP addresses. A service named `orders-service` resolves to one or more IP addresses of healthy instances. The DNS server is updated as instances come and go. The simplest approach uses round-robin DNS. Multiple A records return IP addresses in rotating order, distributing requests across instances. More sophisticated approaches use DNS with health checking\u2014only healthy instances are included in DNS responses. DNS-based discovery is simple and ubiquitous. Every system has a DNS resolver. However, DNS caching can cause delays in propagating changes. TTL settings must balance responsiveness against DNS query load. DNS also has limited support for advanced load balancing and port-based routing. Consul HashiCorp Consul provides service discovery with health checking, key-value storage, and multi-datacenter support. Services register with Consul agents running on each node. Consul performs health checks and removes unhealthy instances. Consul uses DNS for backward compatibility: `orders.service.consul` resolves to available instance IPs. It also provides an HTTP API for richer discovery: querying by service name, tags, and health status. Consul's gossip protocol provides distributed health checking without a central server. Consul supports service mesh integration through Consul Connect, providing mTLS and intentions alongside service discovery. This makes Consul a comprehensive service networking platform for organizations not using Kubernetes. Kubernetes Service Discovery Kubernetes provides built-in service discovery through Services and DNS. Each Service gets a DNS name (e.g., `my-service.namespace.svc.cluster.local`) that resolves to the Pod IPs backing that Service. The kube-proxy component implements load balancing across Pods. Kubernetes Services support several types: ClusterIP (internal only), NodePort (accessible on each node's IP), LoadBalancer (cloud load balancer), and ExternalName (DNS alias). ClusterIP Services are the default for internal service-to-service communication. Kubernetes endpoints track Pod health and readiness. Only ready Pods are included in the Service's endpoint list. Liveness probes determine if a Pod is healthy. Readiness probes determine if a Pod should receive traffic. Client-Side vs Server-Side Discovery In client-side discovery, the client directly queries the service registry and selects an instance. The client implements load balancing logic\u2014typically using a library like Netflix Eureka with Ribbon, or Kubernetes client-go's round-robin. In server-side discovery, the client sends requests to a load balancer or API gateway, which queries the service registry and forwards the request to an available instance. The client does not know about individual instances\u2014it only knows the load balancer address. Health Checking Health checking is integral to service discovery. Services must differentiate between \"running\" and \"ready.\" A service may be running but not ready to receive traffic. Readiness checks determine traffic eligibility. Health checks should test meaningful service functionality. A health endpoint that returns 200 immediately upon startup is less useful than one that verifies database connectivity and internal state. Externally accessible health check endpoints enable monitoring systems and load balancers to validate service health. When to Use Each Approach Kubernetes environments should use Kubernetes-native discovery through Services. Non-Kubernetes environments can use Consul for comprehensive discovery with health checking. Simple environments with few services can use DNS-based discovery with health-checked records. Service discovery is foundational to distributed system reliability. Combined with health checking and load balancing, it enables resilient, self-healing systems that adapt to changing conditions automatically."
     }
     </script>
     <script type="application/ld+json">
@@ -74,525 +75,129 @@
         <span class="tag-cat">DevOps</span></div>
       <h1 class="article-title">Service Discovery in Microservices</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Introduction</h2>
+      <div class="article-body"><h1>Service Discovery in Microservices</h1>
 <br>
-<p>Service discovery is the mechanism by which microservices locate each other on a network. In dynamic environments where containers come and go, IP addresses and ports cannot be hard-coded. A robust discovery layer is essential for resilient, scalable microservice communication. This article covers the core patterns, tools, and best practices for implementing service discovery in production.</p>
+<p>Service discovery enables services to find and communicate with each other in a distributed system. In static environments, service locations could be hardcoded. In dynamic environments like Kubernetes, service instances are ephemeral—they come and go, scale up and down, and move between hosts. Service discovery provides a mechanism for locating available service instances.</p>
 <br>
-<h2> Client-Side vs Server-Side Discovery</h2>
 <br>
-<h3>Client-Side Discovery</h3>
 <br>
-<p>The client queries a service registry directly and handles load balancing. This pattern is lightweight but requires service-specific client logic:</p>
 <br>
-<pre><code>
-import requests
-
-from consul import Consul
-
-
-
-class ServiceClient:
-
-    def __init__(self):
-
-        self.consul = Consul(host=&quot;consul.service.consul&quot;)
-
-
-
-    def get_service_url(self, service_name: str) -&gt; str:
-
-        _, services = self.consul.catalog.service(service_name)
-
-        if not services:
-
-            raise Exception(f&quot;Service {service_name} not found&quot;)
-
-        # Pick a healthy instance
-
-        instance = services[0]
-
-        return f&quot;http://{instance[&#x27;ServiceAddress&#x27;]}:{instance[&#x27;ServicePort&#x27;]}&quot;
-
-
-
-    def call_user_service(self, user_id: str):
-
-        base_url = self.get_service_url(&quot;user-service&quot;)
-
-        resp = requests.get(f&quot;{base_url}/users/{user_id}&quot;)
-
-        return resp.json()
-
-</code></pre>
+<h2>  The Service Discovery Problem</h2>
 <br>
-<h3>Server-Side Discovery</h3>
 <br>
-<p>A load balancer or gateway handles discovery transparently. Clients only know the gateway address:</p>
 <br>
-<pre><code>
-# Kubernetes: Service handles DNS-based discovery
-
-apiVersion: v1
-
-kind: Service
-
-metadata:
-
-  name: user-service
-
-spec:
-
-  selector:
-
-    app: user-service
-
-  ports:
-
-    - protocol: TCP
-
-      port: 80
-
-      targetPort: 8080
-
----
-
-apiVersion: v1
-
-kind: EndpointSlice
-
-metadata:
-
-  labels:
-
-    kubernetes.io/service-name: user-service
-
-addressType: IPv4
-
-endpoints:
-
-  - addresses: [&quot;10.0.1.5&quot;]
-
-    conditions:
-
-      ready: true
-
-  - addresses: [&quot;10.0.1.6&quot;]
-
-    conditions:
-
-      ready: true
-
-ports:
-
-  - name: http
-
-    protocol: TCP
-
-    port: 8080
-
-</code></pre>
 <br>
-<h2> Consul</h2>
+<p>Service discovery solves two problems. Registration: when a service instance starts, it must register its location and capabilities so other services can find it. Lookup: when a service needs to call another service, it must discover the location of available instances.</p>
 <br>
-<p>HashiCorp Consul provides service registration, health checking, and a distributed key-value store:</p>
 <br>
-<pre><code>
-# service registration configuration
-
-service {
-
-  name = &quot;payment-service&quot;
-
-  id = &quot;payment-service-v1&quot;
-
-  port = 9090
-
-  tags = [&quot;v1&quot;, &quot;production&quot;, &quot;critical&quot;]
-
-
-
-  check {
-
-    id       = &quot;payment-health&quot;
-
-    name     = &quot;Payment Service Health&quot;
-
-    http     = &quot;http://localhost:9090/health&quot;
-
-    method   = &quot;GET&quot;
-
-    interval = &quot;10s&quot;
-
-    timeout  = &quot;2s&quot;
-
-    deregister_critical_service_after = &quot;5m&quot;
-
-  }
-
-
-
-  connect {
-
-    sidecar_service {
-
-      proxy {
-
-        upstreams {
-
-          destination_name = &quot;order-service&quot;
-
-          local_bind_port  = 8080
-
-        }
-
-      }
-
-    }
-
-  }
-
-}
-
-</code></pre>
 <br>
-<p>Programmatic registration via the API:</p>
 <br>
-<pre><code>
-package main
-
-
-
-import (
-
-    &quot;github.com/hashicorp/consul/api&quot;
-
-)
-
-
-
-func registerService() {
-
-    client, _ := api.NewClient(api.DefaultConfig())
-
-    registration := &amp;api.AgentServiceRegistration{
-
-        ID:   &quot;order-svc-1&quot;,
-
-        Name: &quot;order-service&quot;,
-
-        Port: 8080,
-
-        Check: &amp;api.AgentServiceCheck{
-
-            HTTP:     &quot;http://localhost:8080/healthz&quot;,
-
-            Interval: &quot;10s&quot;,
-
-            DeregisterCriticalServiceAfter: &quot;3m&quot;,
-
-        },
-
-    }
-
-    client.Agent().ServiceRegister(registration)
-
-}
-
-</code></pre>
+<p>Effective service discovery handles dynamic environments. It reacts to instance registration immediately—new instances become available as soon as they register. It handles instance failures—when an instance crashes or becomes unhealthy, it is removed from the available pool. It distributes load across available instances.</p>
 <br>
-<h2> etcd</h2>
 <br>
-<p>etcd offers a strongly consistent key-value store often used for service discovery in Kubernetes (it powers Kubernetes itself):</p>
 <br>
-<pre><code>
-package main
-
-
-
-import (
-
-    &quot;context&quot;
-
-    &quot;clientv3&quot; &quot;go.etcd.io/etcd/client/v3&quot;
-
-    &quot;time&quot;
-
-)
-
-
-
-func registerWithLease() {
-
-    cli, _ := clientv3.New(clientv3.Config{
-
-        Endpoints:   []string{&quot;localhost:2379&quot;},
-
-        DialTimeout: 5 * time.Second,
-
-    })
-
-
-
-    lease, _ := cli.Grant(context.Background(), 10) // 10-second TTL
-
-    key := &quot;/services/payment-service/instance-1&quot;
-
-    value := `{&quot;address&quot;: &quot;10.0.1.10&quot;, &quot;port&quot;: 9090}`
-
-
-
-    cli.Put(context.Background(), key, value,
-
-        clientv3.WithLease(lease.ID))
-
-
-
-    // Keep alive
-
-    ch, _ := cli.KeepAlive(context.Background(), lease.ID)
-
-    go func() {
-
-        for range ch {
-
-            // Lease refreshed
-
-        }
-
-    }()
-
-}
-
-
-
-func discoverService(name string) []string {
-
-    cli, _ := clientv3.New(clientv3.Config{
-
-        Endpoints: []string{&quot;localhost:2379&quot;},
-
-    })
-
-    resp, _ := cli.Get(context.Background(),
-
-        &quot;/services/&quot;+name, clientv3.WithPrefix())
-
-
-
-    var instances []string
-
-    for _, kv := range resp.Kvs {
-
-        instances = append(instances, string(kv.Value))
-
-    }
-
-    return instances
-
-}
-
-</code></pre>
 <br>
-<h2> Health Checking Strategies</h2>
+<h2>  DNS-Based Discovery</h2>
 <br>
-<p>Effective health checks prevent routing traffic to unhealthy instances:</p>
 <br>
-<pre><code>
-# Kubernetes: multi-probe health checking
-
-apiVersion: v1
-
-kind: Pod
-
-metadata:
-
-  name: web-app
-
-spec:
-
-  containers:
-
-    - name: app
-
-      image: web-app:latest
-
-      livenessProbe:         # Restart if fails
-
-        httpGet:
-
-          path: /healthz
-
-          port: 8080
-
-        initialDelaySeconds: 10
-
-        periodSeconds: 5
-
-        failureThreshold: 3
-
-      readinessProbe:        # Remove from service if fails
-
-        httpGet:
-
-          path: /ready
-
-          port: 8080
-
-        periodSeconds: 2
-
-        failureThreshold: 1
-
-      startupProbe:          # Delay other probes
-
-        httpGet:
-
-          path: /startup
-
-          port: 8080
-
-        initialDelaySeconds: 15
-
-        periodSeconds: 5
-
-        failureThreshold: 30
-
-</code></pre>
 <br>
-<p>Consul gRPC checks for streaming services:</p>
 <br>
-<pre><code>
-check {
-
-  id       = &quot;grpc-health&quot;
-
-  name     = &quot;gRPC Health Check&quot;
-
-  grpc     = &quot;localhost:50051&quot;
-
-  grpc_use_tls = true
-
-  interval = &quot;15s&quot;
-
-  timeout  = &quot;3s&quot;
-
-  notes    = &quot;Uses gRPC health checking protocol&quot;
-
-}
-
-</code></pre>
+<p>DNS-based service discovery uses DNS records to resolve service names to IP addresses. A service named `orders-service` resolves to one or more IP addresses of healthy instances. The DNS server is updated as instances come and go.</p>
 <br>
-<h2> Blue-Green Deployments with Discovery</h2>
 <br>
-<p>Service discovery enables seamless traffic switching during blue-green deployments:</p>
 <br>
-<pre><code>
-# Consul: traffic splitting via service resolver
-
-kind = &quot;service-resolver&quot;
-
-name = &quot;web-service&quot;
-
-
-
-subsets = {
-
-  blue = {
-
-    filter = &quot;Service.Meta.version == blue&quot;
-
-  }
-
-  green = {
-
-    filter = &quot;Service.Meta.version == green&quot;
-
-  }
-
-}
-
-
-
-default_subset = &quot;blue&quot;
-
-</code></pre>
 <br>
-<p>Switch traffic atomically:</p>
+<p>The simplest approach uses round-robin DNS. Multiple A records return IP addresses in rotating order, distributing requests across instances. More sophisticated approaches use DNS with health checking—only healthy instances are included in DNS responses.</p>
 <br>
-<pre><code>
-# Switch from blue to green
-
-consul config write - &lt;&lt;EOF
-
-kind = &quot;service-resolver&quot;
-
-name = &quot;web-service&quot;
-
-default_subset = &quot;green&quot;
-
-EOF
-
-</code></pre>
 <br>
-<h2> Registry Patterns</h2>
 <br>
-<p>Choose your registration approach based on operational maturity:</p>
 <br>
-<p>**Self-Registration**: Services register themselves on startup and deregister on shutdown. Simplest but requires service frameworks to implement registration logic.</p>
+<p>DNS-based discovery is simple and ubiquitous. Every system has a DNS resolver. However, DNS caching can cause delays in propagating changes. TTL settings must balance responsiveness against DNS query load. DNS also has limited support for advanced load balancing and port-based routing.</p>
 <br>
-<p>**Third-Party Registration**: An external process (like Kubernetes watchers or Kubernetes itself) monitors instances and updates the registry. More resilient but adds operational complexity.</p>
 <br>
-<pre><code>
-# Kubernetes: third-party via Endpoint Controller
-
-apiVersion: apps/v1
-
-kind: Deployment
-
-metadata:
-
-  name: app-v2
-
-spec:
-
-  replicas: 3
-
-  selector:
-
-    matchLabels:
-
-      app: my-app
-
-      version: v2
-
-  template:
-
-    metadata:
-
-      labels:
-
-        app: my-app
-
-        version: v2
-
-    spec:
-
-      containers:
-
-        - name: app
-
-          image: my-app:v2
-
-          readinessProbe:
-
-            httpGet:
-
-              path: /ready
-
-              port: 8080
-
-</code></pre>
 <br>
-<p>Kubernetes DNS-based discovery (`my-svc.namespace.svc.cluster.local`) remains the simplest approach for cloud-native workloads, while Consul offers richer health checking and multi-datacenter support for hybrid or VM-based infrastructure.</p></div>
+<br>
+<h2>  Consul</h2>
+<br>
+<br>
+<br>
+<br>
+<p>HashiCorp Consul provides service discovery with health checking, key-value storage, and multi-datacenter support. Services register with Consul agents running on each node. Consul performs health checks and removes unhealthy instances.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Consul uses DNS for backward compatibility: `orders.service.consul` resolves to available instance IPs. It also provides an HTTP API for richer discovery: querying by service name, tags, and health status. Consul's gossip protocol provides distributed health checking without a central server.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Consul supports service mesh integration through Consul Connect, providing mTLS and intentions alongside service discovery. This makes Consul a comprehensive service networking platform for organizations not using Kubernetes.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Kubernetes Service Discovery</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Kubernetes provides built-in service discovery through Services and DNS. Each Service gets a DNS name (e.g., `my-service.namespace.svc.cluster.local`) that resolves to the Pod IPs backing that Service. The kube-proxy component implements load balancing across Pods.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Kubernetes Services support several types: ClusterIP (internal only), NodePort (accessible on each node's IP), LoadBalancer (cloud load balancer), and ExternalName (DNS alias). ClusterIP Services are the default for internal service-to-service communication.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Kubernetes endpoints track Pod health and readiness. Only ready Pods are included in the Service's endpoint list. Liveness probes determine if a Pod is healthy. Readiness probes determine if a Pod should receive traffic.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Client-Side vs Server-Side Discovery</h2>
+<br>
+<br>
+<br>
+<br>
+<p>In client-side discovery, the client directly queries the service registry and selects an instance. The client implements load balancing logic—typically using a library like Netflix Eureka with Ribbon, or Kubernetes client-go's round-robin.</p>
+<br>
+<br>
+<br>
+<br>
+<p>In server-side discovery, the client sends requests to a load balancer or API gateway, which queries the service registry and forwards the request to an available instance. The client does not know about individual instances—it only knows the load balancer address.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Health Checking</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Health checking is integral to service discovery. Services must differentiate between "running" and "ready." A service may be running but not ready to receive traffic. Readiness checks determine traffic eligibility.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Health checks should test meaningful service functionality. A health endpoint that returns 200 immediately upon startup is less useful than one that verifies database connectivity and internal state. Externally accessible health check endpoints enable monitoring systems and load balancers to validate service health.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  When to Use Each Approach</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Kubernetes environments should use Kubernetes-native discovery through Services. Non-Kubernetes environments can use Consul for comprehensive discovery with health checking. Simple environments with few services can use DNS-based discovery with health-checked records.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Service discovery is foundational to distributed system reliability. Combined with health checking and load balancing, it enables resilient, self-healing systems that adapt to changing conditions automatically.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

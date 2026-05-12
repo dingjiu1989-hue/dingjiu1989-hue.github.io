@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="output-encoding">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Output Encoding">
+    <meta property="og:description" content="Guide to output encoding covering context-sensitive encoding, XSS prevention, template engine auto-escaping, and common encoding pitfalls.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/output-encoding.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Output Encoding">
+    <meta name="twitter:description" content="Guide to output encoding covering context-sensitive encoding, XSS prevention, template engine auto-escaping, and common encoding pitfalls.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Output Encoding — SourceHub</title>
+    <meta name="description" content="Guide to output encoding covering context-sensitive encoding, XSS prevention, template engine auto-escaping, and common encoding pitfalls.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/output-encoding.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/output-encoding.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Output Encoding",
+      "description": "Guide to output encoding covering context-sensitive encoding, XSS prevention, template engine auto-escaping, and common encoding pitfalls.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1598",
+      "keywords": "Security, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/output-encoding.html"},
+      "articleBody": "Output Encoding Introduction Output encoding transforms data before rendering it in a specific context to prevent injection attacks. While input validation filters dangerous content, output encoding ensures that even if dangerous characters slip through, they are rendered as data rather than code. Context-sensitive encoding is critical \u2014 the same string must be encoded differently depending on whether it appears in HTML, JavaScript, CSS, or a URL. Context-Sensitive Encoding Different output contexts require different encoding strategies. Applying the wrong encoding is equivalent to no encoding at all. | Context | Example | Encoding Method | Risk if Wrong | |---------|---------|----------------|---------------| | HTML Body | `USER` | HTML entity encode | HTML injection | | HTML Attribute | `` | Attribute encode | Attribute break-out | | JavaScript | `` | JavaScript string encode | XSS | | URL | `[` | URL encode | Open redirect, XSS | | CSS | `` | CSS hex encode | CSS injection | HTML Body Context import html def encode_html_body(user_input): \"\"\"Encode for HTML element content context.\"\"\" encoded = html.escape(user_input, quote=True) # alert(1) becomes # &lt;script&gt;alert(1)&lt;/script&gt; return encoded HTML Attribute Context def encode_html_attribute(user_input): \"\"\"Encode for HTML attribute values.\"\"\" # More aggressive than body encoding replacements = { '&': '&amp;', '\"': '&quot;', \"'\": '&#x27;', ' '>': '&gt;', '/': '&#x2F;', # Prevents attribute closing '`': '&#x60;', # Backtick can close attributes in some browsers } for char, replacement in replacements.items(): user_input = user_input.replace(char, replacement) return user_input JavaScript Context import json import re def encode_javascript_string(user_input): \"\"\"Encode for JavaScript string context.\"\"\" # JSON encoding is safe for JS string literals encoded = json.dumps(user_input, ensure_ascii=False) # Additional hardening for in script blocks encoded = encoded.replace(' return encoded def encode_javascript_variable(user_input): \"\"\"Hex encode each character for JS variable context.\"\"\" encoded = '' for char in user_input: encoded += f'\\\\x{ord(char):02x}' return encoded URL Context from urllib.parse import quote, urlencode def encode_url_param(user_input): \"\"\"Encode for URL parameter values.\"\"\" return quote(user_input, safe='') def encode_url_path(component): \"\"\"Encode for URL path segments.\"\"\" return quote(component, safe='') # Defense against javascript: protocol def sanitize_url_for_href(user_input): \"\"\"Block dangerous URL schemes.\"\"\" allowed_schemes = {'http', 'https', 'mailto', 'tel'} user_input = user_input.strip() # Lowercase for scheme check for scheme in allowed_schemes: if user_input.lower().startswith(f'{scheme}:'): return quote(user_input, safe=':/?#[]@!$&\\'()*+,;=-._~') # Dangerous schemes dangerous = ['javascript:', 'data:', 'vbscript:', 'file:'] for scheme in dangerous: if scheme in user_input.lower(): return '' # Remove dangerous URLs return quote(user_input, safe=':/?#[]@!$&\\'()*+,;=-._~') Template Engine Auto-Escaping Modern template engines provide auto-escaping, which encodes output based on context. Jinja2 (Python) {# Jinja2 auto-escape enabled by default #} {{ user.bio }} {# Hello &lt;script&gt;alert(1)&lt;/script&gt; #} {# Safe filter marks as trusted HTML #} {{ user.bio|safe }} {# WARNING: only use safe for trusted content #} {# Escaping for specific attributes #} {# Manual escaping functions #} {% set encoded = user.name|e %} React JSX // React automatically escapes by default function UserProfile({ user }) { return ( {/* Automatic escaping \u2014 XSS safe */} {user.bio} {/* DangerouslySetInnerHTML bypasses escaping */} {/* Manual URL encoding for href */} Website ); } Common Pitfalls Double Encoding Input: After double URL decode: %253Cscript%253E \u2192 %3Cscript%3E \u2192 Solution: Decode input only once at boundary, then encode for output context. Encoding for Wrong Context # WRONG: URL encoding for HTML body user_input = \"https://evil.com?q=\" encoded = quote(user_input) # https%3A//evil.com%3Fq%3D%3Cscript%3E # HTML entity encoding is needed here, not URL encoding # RIGHT: Use HTML encoding for HTML body encoded = html.escape(user_input) Defense in Depth Strategy class OutputEncoder: def encode(self, data, context): encoders = { 'html_body': self._encode_html_body, 'html_attr': self._encode_html_attribute, 'js_string': self._encode_js_string, 'js_block': self._encode_js_block, 'url_param': self._encode_url_param, 'css': self._encode_css, } encoder = encoders.get(context) if not encoder: raise ValueError(f\"Unknown context: {context}\") return encoder(data) Conclusion Output encoding is the definitive defense against XSS. Always encode data for the specific context in which it appears \u2014 HTML body, attribute, JavaScript, URL, or CSS. Rely on template engine auto-escaping for the common case, understand when and how to use explicit encoding functions, and never trust user-supplied content marked as safe."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Output Encoding"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Output Encoding
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Output Encoding</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Output Encoding</h1>
+<br>
+<p>Introduction   </p>
+<p>Output encoding transforms data before rendering it in a specific context to prevent injection attacks. While input validation filters dangerous content, output encoding ensures that even if dangerous characters slip through, they are rendered as data rather than code. Context-sensitive encoding is critical — the same string must be encoded differently depending on whether it appears in HTML, JavaScript, CSS, or a URL.   </p>
+<p>Context-Sensitive Encoding   </p>
+<p>Different output contexts require different encoding strategies. Applying the wrong encoding is equivalent to no encoding at all.   </p>
+<p>| Context | Example | Encoding Method | Risk if Wrong | |---------|---------|----------------|---------------| | HTML Body | `USER` | HTML entity encode | HTML injection | | HTML Attribute | `` | Attribute encode | Attribute break-out | | JavaScript | `` | JavaScript string encode | XSS | | URL | `[` | URL encode | Open redirect, XSS | | CSS | `` | CSS hex encode | CSS injection |   </p>
+<p>HTML Body Context   </p>
+<br>
+<br>
+<br>
+<p>    import html</p>
+<br>
+<br>
+<br>
+<p>    def encode_html_body(user_input):</p>
+<br>
+<p>        """Encode for HTML element content context."""</p>
+<br>
+<p>        encoded = html.escape(user_input, quote=True)</p>
+<br>
+<p>        # <script>alert(1)</script> becomes</p>
+<br>
+<p>        # &lt;script&gt;alert(1)&lt;/script&gt;</p>
+<br>
+<p>        return encoded</p>
+<br>
+<br>
+<br>
+<br>
+<p>HTML Attribute Context   </p>
+<br>
+<br>
+<br>
+<p>    def encode_html_attribute(user_input):</p>
+<br>
+<p>        """Encode for HTML attribute values."""</p>
+<br>
+<p>        # More aggressive than body encoding</p>
+<br>
+<p>        replacements = {</p>
+<br>
+<p>            '&': '&amp;',</p>
+<br>
+<p>            '"': '&quot;',</p>
+<br>
+<p>            "'": '&#x27;',</p>
+<br>
+<p>            '<': '&lt;',</p>
+<br>
+<p>            '>': '&gt;',</p>
+<br>
+<p>            '/': '&#x2F;',  # Prevents attribute closing</p>
+<br>
+<p>            '`': '&#x60;',  # Backtick can close attributes in some browsers</p>
+<br>
+<p>        }</p>
+<br>
+<p>        for char, replacement in replacements.items():</p>
+<br>
+<p>            user_input = user_input.replace(char, replacement)</p>
+<br>
+<p>        return user_input</p>
+<br>
+<br>
+<br>
+<br>
+<p>JavaScript Context   </p>
+<br>
+<br>
+<br>
+<p>    import json</p>
+<br>
+<p>    import re</p>
+<br>
+<br>
+<br>
+<p>    def encode_javascript_string(user_input):</p>
+<br>
+<p>        """Encode for JavaScript string context."""</p>
+<br>
+<p>        # JSON encoding is safe for JS string literals</p>
+<br>
+<p>        encoded = json.dumps(user_input, ensure_ascii=False)</p>
+<br>
+<br>
+<br>
+<p>        # Additional hardening for </script> in script blocks</p>
+<br>
+<p>        encoded = encoded.replace('</', '<\\/')</p>
+<br>
+<br>
+<br>
+<p>        return encoded</p>
+<br>
+<br>
+<br>
+<p>    def encode_javascript_variable(user_input):</p>
+<br>
+<p>        """Hex encode each character for JS variable context."""</p>
+<br>
+<p>        encoded = ''</p>
+<br>
+<p>        for char in user_input:</p>
+<br>
+<p>            encoded += f'\\x{ord(char):02x}'</p>
+<br>
+<p>        return encoded</p>
+<br>
+<br>
+<br>
+<br>
+<p>URL Context   </p>
+<br>
+<br>
+<br>
+<p>    from urllib.parse import quote, urlencode</p>
+<br>
+<br>
+<br>
+<p>    def encode_url_param(user_input):</p>
+<br>
+<p>        """Encode for URL parameter values."""</p>
+<br>
+<p>        return quote(user_input, safe='')</p>
+<br>
+<br>
+<br>
+<p>    def encode_url_path(component):</p>
+<br>
+<p>        """Encode for URL path segments."""</p>
+<br>
+<p>        return quote(component, safe='')</p>
+<br>
+<br>
+<br>
+<p>    # Defense against javascript: protocol</p>
+<br>
+<p>    def sanitize_url_for_href(user_input):</p>
+<br>
+<p>        """Block dangerous URL schemes."""</p>
+<br>
+<p>        allowed_schemes = {'http', 'https', 'mailto', 'tel'}</p>
+<br>
+<p>        user_input = user_input.strip()</p>
+<br>
+<br>
+<br>
+<p>        # Lowercase for scheme check</p>
+<br>
+<p>        for scheme in allowed_schemes:</p>
+<br>
+<p>            if user_input.lower().startswith(f'{scheme}:'):</p>
+<br>
+<p>                return quote(user_input, safe=':/?#[]@!$&\'()*+,;=-._~')</p>
+<br>
+<br>
+<br>
+<p>        # Dangerous schemes</p>
+<br>
+<p>        dangerous = ['javascript:', 'data:', 'vbscript:', 'file:']</p>
+<br>
+<p>        for scheme in dangerous:</p>
+<br>
+<p>            if scheme in user_input.lower():</p>
+<br>
+<p>                return ''  # Remove dangerous URLs</p>
+<br>
+<br>
+<br>
+<p>        return quote(user_input, safe=':/?#[]@!$&\'()*+,;=-._~')</p>
+<br>
+<br>
+<br>
+<br>
+<p>Template Engine Auto-Escaping   </p>
+<p>Modern template engines provide auto-escaping, which encodes output based on context.   </p>
+<p>Jinja2 (Python)   </p>
+<br>
+<br>
+<br>
+<p>    {# Jinja2 auto-escape enabled by default #}</p>
+<br>
+<p>    <p>{{ user.bio }}</p>  </p>
+<br>
+<p>    {# <p>Hello &lt;script&gt;alert(1)&lt;/script&gt;</p> #}</p>
+<br>
+<br>
+<br>
+<p>    {# Safe filter marks as trusted HTML #}</p>
+<br>
+<p>    <p>{{ user.bio|safe }}</p></p>
+<br>
+<p>    {# WARNING: only use safe for trusted content #}</p>
+<br>
+<br>
+<br>
+<p>    {# Escaping for specific attributes #}</p>
+<br>
+<p>    <input value="{{ user.name|e }}" /></p>
+<br>
+<br>
+<br>
+<p>    {# Manual escaping functions #}</p>
+<br>
+<p>    {% set encoded = user.name|e %}</p>
+<br>
+<br>
+<br>
+<br>
+<p>React JSX   </p>
+<br>
+<br>
+<br>
+<p>    // React automatically escapes by default</p>
+<br>
+<p>    function UserProfile({ user }) {</p>
+<br>
+<p>      return (</p>
+<br>
+<p>        <div></p>
+<br>
+<p>          {/* Automatic escaping — XSS safe */}</p>
+<br>
+<p>          <p>{user.bio}</p></p>
+<br>
+<br>
+<br>
+<p>          {/* DangerouslySetInnerHTML bypasses escaping */}</p>
+<br>
+<p>          <div dangerouslySetInnerHTML={{ __html: user.htmlContent }} /></p>
+<br>
+<br>
+<br>
+<p>          {/* Manual URL encoding for href */}</p>
+<br>
+<p>          <a href={encodeURI(user.website)}>Website</a></p>
+<br>
+<p>        </div></p>
+<br>
+<p>      );</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<p>Common Pitfalls   </p>
+<p>Double Encoding   </p>
+<br>
+<br>
+<br>
+<p>    Input: <script></p>
+<br>
+<p>    After double URL decode: %253Cscript%253E → %3Cscript%3E → <script></p>
+<br>
+<p>    Solution: Decode input only once at boundary, then encode for output context.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Encoding for Wrong Context   </p>
+<br>
+<br>
+<br>
+<p>    # WRONG: URL encoding for HTML body</p>
+<br>
+<p>    user_input = "https://evil.com?q=<script>"</p>
+<br>
+<p>    encoded = quote(user_input)</p>
+<br>
+<p>    # <p>https%3A//evil.com%3Fq%3D%3Cscript%3E</p></p>
+<br>
+<p>    # HTML entity encoding is needed here, not URL encoding</p>
+<br>
+<br>
+<br>
+<p>    # RIGHT: Use HTML encoding for HTML body</p>
+<br>
+<p>    encoded = html.escape(user_input)</p>
+<br>
+<br>
+<br>
+<br>
+<p>Defense in Depth Strategy   </p>
+<br>
+<br>
+<br>
+<p>    class OutputEncoder:</p>
+<br>
+<p>        def encode(self, data, context):</p>
+<br>
+<p>            encoders = {</p>
+<br>
+<p>                'html_body': self._encode_html_body,</p>
+<br>
+<p>                'html_attr': self._encode_html_attribute,</p>
+<br>
+<p>                'js_string': self._encode_js_string,</p>
+<br>
+<p>                'js_block': self._encode_js_block,</p>
+<br>
+<p>                'url_param': self._encode_url_param,</p>
+<br>
+<p>                'css': self._encode_css,</p>
+<br>
+<p>            }</p>
+<br>
+<p>            encoder = encoders.get(context)</p>
+<br>
+<p>            if not encoder:</p>
+<br>
+<p>                raise ValueError(f"Unknown context: {context}")</p>
+<br>
+<p>            return encoder(data)</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
+<p>Output encoding is the definitive defense against XSS. Always encode data for the specific context in which it appears — HTML body, attribute, JavaScript, URL, or CSS. Rely on template engine auto-escaping for the common case, understand when and how to use explicit encoding functions, and never trust user-supplied content marked as safe.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

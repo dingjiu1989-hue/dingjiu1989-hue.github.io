@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="couchbase-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Couchbase Guide: N1QL, Document Model, Clustering, and Caching">
+    <meta property="og:description" content="Comprehensive guide to Couchbase: N1QL query language, document data model, clustering architecture, integrated caching, and real-world use cases.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/couchbase-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Couchbase Guide: N1QL, Document Model, Clustering, and Caching">
+    <meta name="twitter:description" content="Comprehensive guide to Couchbase: N1QL query language, document data model, clustering architecture, integrated caching, and real-world use cases.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Couchbase Guide: N1QL, Document Model, Clustering, and Caching — SourceHub</title>
+    <meta name="description" content="Comprehensive guide to Couchbase: N1QL query language, document data model, clustering architecture, integrated caching, and real-world use cases.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/couchbase-guide.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/couchbase-guide.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Couchbase Guide: N1QL, Document Model, Clustering, and Caching",
+      "description": "Comprehensive guide to Couchbase: N1QL query language, document data model, clustering architecture, integrated caching, and real-world use cases.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1891",
+      "keywords": "Database, Backend, Data",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/couchbase-guide.html"},
+      "articleBody": "Couchbase Guide: N1QL, Document Model, Clustering, and Caching Couchbase Guide: N1QL, Document Model, Clustering, and Caching Couchbase is a distributed NoSQL document database that combines the flexibility of JSON documents with the query power of SQL. Its key differentiator is the integrated caching layer that automatically keeps frequently accessed data in memory. Document Data Model Couchbase stores data as JSON documents, organized into buckets (analogous to databases). Each document has a unique key and can contain arbitrarily nested JSON: { \"type\": \"user\", \"user_id\": \"alice_42\", \"email\": \"alice@example.com\", \"name\": \"Alice Smith\", \"addresses\": [ {\"type\": \"home\", \"city\": \"New York\", \"zip\": \"10001\"}, {\"type\": \"work\", \"city\": \"San Francisco\", \"zip\": \"94105\"} ], \"preferences\": { \"theme\": \"dark\", \"notifications\": true }, \"created_at\": \"2026-05-12T10:00:00Z\" } Key Operations from couchbase.cluster import Cluster from couchbase.options import ClusterOptions from couchbase.auth import PasswordAuthenticator cluster = Cluster('couchbase://localhost', ClusterOptions( PasswordAuthenticator('admin', 'password') )) bucket = cluster.bucket('myapp') collection = bucket.default_collection() # Create/Update collection.upsert('user_alice_42', { 'type': 'user', 'email': 'alice@example.com', 'name': 'Alice Smith' }) # Read result = collection.get('user_alice_42') user = result.content_as[dict] # CAS (Compare-And-Swap) for optimistic locking result = collection.get('user_alice_42') cas = result.cas user = result.content_as[dict] user['name'] = 'Alice Jones' collection.replace('user_alice_42', user, cas=cas) N1QL (SQL for JSON) N1QL (pronounced \"nickel\") brings SQL semantics to JSON documents. It is Couchbase's most powerful feature: you get the flexibility of a document database with the query power of SQL. Basic Queries -- SELECT with WHERE SELECT name, email FROM `myapp` WHERE type = 'user' AND email LIKE '%@example.com' ORDER BY name LIMIT 10; -- JOIN across document types SELECT u.name, o.total, o.created_at FROM `myapp` u JOIN `myapp` o ON KEYS ARRAY s.order_id FOR s IN u.orders END WHERE u.type = 'user' AND u.user_id = 'alice_42'; -- UNNEST (flatten arrays) SELECT u.name, addr.city, addr.zip FROM `myapp` u UNNEST u.addresses addr WHERE u.type = 'user' AND addr.type = 'home'; -- Aggregation SELECT addr.city, COUNT(*) AS user_count FROM `myapp` u UNNEST u.addresses addr WHERE u.type = 'user' GROUP BY addr.city ORDER BY user_count DESC; Secondary Indexes -- Create primary index (required for N1QL queries on a bucket) CREATE PRIMARY INDEX idx_primary ON `myapp`; -- Create secondary index on specific fields CREATE INDEX idx_users_email ON `myapp`(email) WHERE type = 'user'; -- Composite index CREATE INDEX idx_users_city_created ON `myapp`(addresses[*].city, created_at) WHERE type = 'user'; -- Covering index (all needed fields) CREATE INDEX idx_users_cover ON `myapp`(email, name, created_at) WHERE type = 'user'; Architecture and Clustering Couchbase uses a distributed architecture with several key components: Data Service Stores and retrieves documents. Data is partitioned into 1024 vBuckets (virtual buckets) that are distributed across nodes. Query Service Processes N1QL queries. It can run on dedicated query nodes or co-located with data nodes. Index Service Maintains Global Secondary Indexes (GSI). Indexes can be replicated for high availability. Search Service Provides full-text search capabilities using FTS (based on Bleve). Cluster Management # Initialize cluster couchbase-cli cluster-init -c 127.0.0.1 \\ --cluster-username admin \\ --cluster-password password \\ --cluster-ramsize 2048 \\ --cluster-index-ramsize 512 \\ --services data,index,query # Add node couchbase-cli server-add -c 192.168.1.1 \\ --server-add 192.168.1.2 \\ --server-add-username admin \\ --server-add-password password \\ --services data,index,query # Rebalance couchbase-cli rebalance -c 192.168.1.1 Integrated Caching Layer Couchbase's most distinctive feature is its integrated cache. Every data node includes an in-memory cache (managed by the \"couchbase\" engine) that stores frequently accessed documents. Cache Behavior * **Writes** are written to memory and queued for disk persistence. * **Reads** check the cache first (sub-millisecond for cache hits). * **Eviction** uses a variant of LRU when memory is full. * **Persistence** is asynchronous by default but configurable. Memory Quotas # Set bucket memory quota (important tuning parameter) couchbase-cli bucket-create -c 127.0.0.1 \\ --bucket myapp \\ --bucket-type couchbase \\ --bucket-ramsize 1024 \\ --bucket-priority high \\ --bucket-eviction-policy fullEviction Eviction policies: * `valueOnly`: Evict document value, keep metadata (faster re-fetch on access). * `fullEviction`: Evict entire document (more memory savings but slower on cache miss). Durability Settings # Wait for replication to N nodes before acknowledging collection.upsert('doc_id', doc, durability= Durability.MAJORITY_AND_PERSIST_TO_ACTIVE) # Or use observe-based durability collection.upsert('doc_id', doc, durability_level= DurabilityLevel.PERSIST_TO_MAJORITY) Use Cases Session Store Couchbase's sub-millisecond get/set operations and built-in TTL make it an excellent session store: # Set session with TTL (24 hours) collection.upsert('session_token_xyz', { 'user_id': 'alice_42', 'created_at': '2026-05-12T10:00:00Z' }, ttl=timedelta(hours=24)) User Profile Service JSON flexibility and N1QL queries support user profiles with varying fields: SELECT name, email, preferences FROM `myapp` WHERE type = 'user_profile' AND META().id IN $user_ids; Catalog / Product Database Couchbase is widely used for e-commerce catalogs where products have varying attributes: SELECT name, price, attributes FROM `myapp` WHERE type = 'product' AND category = 'electronics' AND price BETWEEN 100 AND 500 ORDER BY price LIMIT 20; Couchbase vs Alternatives | Feature | Couchbase | MongoDB | Redis | |---------|-----------|---------|-------| | Query language | N1QL (SQL-like) | MQL (JSON-based) | Command-based | | Caching | Built-in (cache-first) | WiredTiger cache | Pure in-memory | | Durability | Tunable (async to sync) | Journal + replication | AOF/RDB persistence | | Cross-datacenter | XDCR (bidirectional) | Replica sets | Active-Active | | Full-text search | Built-in (Bleve) | Built-in (Atlas Search) | RediSearch module | Couchbase fills a unique niche: a document database with SQL querying and built-in caching. It is a strong choice when you need low-latency document access combined with ad-hoc query capabilities, and when you want to simplify your architecture by avoiding a separate cache layer."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Couchbase Guide: N1QL, Document Model, Clustering, and Caching"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Couchbase Guide: N1QL, Document Model, Clustering, and Caching
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Data</span></div>
+      <h1 class="article-title">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h1>
+<br>
+<p>Couchbase Guide: N1QL, Document Model, Clustering, and Caching   </p>
+<p>Couchbase is a distributed NoSQL document database that combines the flexibility of JSON documents with the query power of SQL. Its key differentiator is the integrated caching layer that automatically keeps frequently accessed data in memory.   </p>
+<p>Document Data Model   </p>
+<p>Couchbase stores data as JSON documents, organized into buckets (analogous to databases). Each document has a unique key and can contain arbitrarily nested JSON:   </p>
+<br>
+<br>
+<br>
+<p>    {</p>
+<br>
+<p>      "type": "user",</p>
+<br>
+<p>      "user_id": "alice_42",</p>
+<br>
+<p>      "email": "alice@example.com",</p>
+<br>
+<p>      "name": "Alice Smith",</p>
+<br>
+<p>      "addresses": [</p>
+<br>
+<p>        {"type": "home", "city": "New York", "zip": "10001"},</p>
+<br>
+<p>        {"type": "work", "city": "San Francisco", "zip": "94105"}</p>
+<br>
+<p>      ],</p>
+<br>
+<p>      "preferences": {</p>
+<br>
+<p>        "theme": "dark",</p>
+<br>
+<p>        "notifications": true</p>
+<br>
+<p>      },</p>
+<br>
+<p>      "created_at": "2026-05-12T10:00:00Z"</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<p>Key Operations   </p>
+<br>
+<br>
+<br>
+<p>    from couchbase.cluster import Cluster</p>
+<br>
+<p>    from couchbase.options import ClusterOptions</p>
+<br>
+<p>    from couchbase.auth import PasswordAuthenticator</p>
+<br>
+<br>
+<br>
+<p>    cluster = Cluster('couchbase://localhost', ClusterOptions(</p>
+<br>
+<p>        PasswordAuthenticator('admin', 'password')</p>
+<br>
+<p>    ))</p>
+<br>
+<p>    bucket = cluster.bucket('myapp')</p>
+<br>
+<p>    collection = bucket.default_collection()</p>
+<br>
+<br>
+<br>
+<p>    # Create/Update</p>
+<br>
+<p>    collection.upsert('user_alice_42', {</p>
+<br>
+<p>        'type': 'user',</p>
+<br>
+<p>        'email': 'alice@example.com',</p>
+<br>
+<p>        'name': 'Alice Smith'</p>
+<br>
+<p>    })</p>
+<br>
+<br>
+<br>
+<p>    # Read</p>
+<br>
+<p>    result = collection.get('user_alice_42')</p>
+<br>
+<p>    user = result.content_as[dict]</p>
+<br>
+<br>
+<br>
+<p>    # CAS (Compare-And-Swap) for optimistic locking</p>
+<br>
+<p>    result = collection.get('user_alice_42')</p>
+<br>
+<p>    cas = result.cas</p>
+<br>
+<p>    user = result.content_as[dict]</p>
+<br>
+<p>    user['name'] = 'Alice Jones'</p>
+<br>
+<p>    collection.replace('user_alice_42', user, cas=cas)</p>
+<br>
+<br>
+<br>
+<br>
+<p>N1QL (SQL for JSON)   </p>
+<p>N1QL (pronounced "nickel") brings SQL semantics to JSON documents. It is Couchbase's most powerful feature: you get the flexibility of a document database with the query power of SQL.   </p>
+<p>Basic Queries   </p>
+<br>
+<br>
+<br>
+<p>    -- SELECT with WHERE</p>
+<br>
+<p>    SELECT name, email</p>
+<br>
+<p>    FROM `myapp`</p>
+<br>
+<p>    WHERE type = 'user' AND email LIKE '%@example.com'</p>
+<br>
+<p>    ORDER BY name</p>
+<br>
+<p>    LIMIT 10;</p>
+<br>
+<br>
+<br>
+<p>    -- JOIN across document types</p>
+<br>
+<p>    SELECT u.name, o.total, o.created_at</p>
+<br>
+<p>    FROM `myapp` u</p>
+<br>
+<p>    JOIN `myapp` o ON KEYS ARRAY s.order_id FOR s IN u.orders END</p>
+<br>
+<p>    WHERE u.type = 'user' AND u.user_id = 'alice_42';</p>
+<br>
+<br>
+<br>
+<p>    -- UNNEST (flatten arrays)</p>
+<br>
+<p>    SELECT u.name, addr.city, addr.zip</p>
+<br>
+<p>    FROM `myapp` u</p>
+<br>
+<p>    UNNEST u.addresses addr</p>
+<br>
+<p>    WHERE u.type = 'user' AND addr.type = 'home';</p>
+<br>
+<br>
+<br>
+<p>    -- Aggregation</p>
+<br>
+<p>    SELECT addr.city, COUNT(*) AS user_count</p>
+<br>
+<p>    FROM `myapp` u</p>
+<br>
+<p>    UNNEST u.addresses addr</p>
+<br>
+<p>    WHERE u.type = 'user'</p>
+<br>
+<p>    GROUP BY addr.city</p>
+<br>
+<p>    ORDER BY user_count DESC;</p>
+<br>
+<br>
+<br>
+<br>
+<p>Secondary Indexes   </p>
+<br>
+<br>
+<br>
+<p>    -- Create primary index (required for N1QL queries on a bucket)</p>
+<br>
+<p>    CREATE PRIMARY INDEX idx_primary ON `myapp`;</p>
+<br>
+<br>
+<br>
+<p>    -- Create secondary index on specific fields</p>
+<br>
+<p>    CREATE INDEX idx_users_email ON `myapp`(email)</p>
+<br>
+<p>    WHERE type = 'user';</p>
+<br>
+<br>
+<br>
+<p>    -- Composite index</p>
+<br>
+<p>    CREATE INDEX idx_users_city_created ON `myapp`(addresses[*].city, created_at)</p>
+<br>
+<p>    WHERE type = 'user';</p>
+<br>
+<br>
+<br>
+<p>    -- Covering index (all needed fields)</p>
+<br>
+<p>    CREATE INDEX idx_users_cover ON `myapp`(email, name, created_at)</p>
+<br>
+<p>    WHERE type = 'user';</p>
+<br>
+<br>
+<br>
+<br>
+<p>Architecture and Clustering   </p>
+<p>Couchbase uses a distributed architecture with several key components:   </p>
+<p>Data Service   </p>
+<p>Stores and retrieves documents. Data is partitioned into 1024 vBuckets (virtual buckets) that are distributed across nodes.   </p>
+<p>Query Service   </p>
+<p>Processes N1QL queries. It can run on dedicated query nodes or co-located with data nodes.   </p>
+<p>Index Service   </p>
+<p>Maintains Global Secondary Indexes (GSI). Indexes can be replicated for high availability.   </p>
+<p>Search Service   </p>
+<p>Provides full-text search capabilities using FTS (based on Bleve).   </p>
+<p>Cluster Management   </p>
+<br>
+<br>
+<br>
+<p>    # Initialize cluster</p>
+<br>
+<p>    couchbase-cli cluster-init -c 127.0.0.1 \</p>
+<br>
+<p>      --cluster-username admin \</p>
+<br>
+<p>      --cluster-password password \</p>
+<br>
+<p>      --cluster-ramsize 2048 \</p>
+<br>
+<p>      --cluster-index-ramsize 512 \</p>
+<br>
+<p>      --services data,index,query</p>
+<br>
+<br>
+<br>
+<p>    # Add node</p>
+<br>
+<p>    couchbase-cli server-add -c 192.168.1.1 \</p>
+<br>
+<p>      --server-add 192.168.1.2 \</p>
+<br>
+<p>      --server-add-username admin \</p>
+<br>
+<p>      --server-add-password password \</p>
+<br>
+<p>      --services data,index,query</p>
+<br>
+<br>
+<br>
+<p>    # Rebalance</p>
+<br>
+<p>    couchbase-cli rebalance -c 192.168.1.1</p>
+<br>
+<br>
+<br>
+<br>
+<p>Integrated Caching Layer   </p>
+<p>Couchbase's most distinctive feature is its integrated cache. Every data node includes an in-memory cache (managed by the "couchbase" engine) that stores frequently accessed documents.   </p>
+<p>Cache Behavior   </p>
+<br>
+<p>* **Writes** are written to memory and queued for disk persistence.</p>
+<p>* **Reads** check the cache first (sub-millisecond for cache hits).</p>
+<p>* **Eviction** uses a variant of LRU when memory is full.</p>
+<p>* **Persistence** is asynchronous by default but configurable.</p>
+<br>
+<p>Memory Quotas   </p>
+<br>
+<br>
+<br>
+<p>    # Set bucket memory quota (important tuning parameter)</p>
+<br>
+<p>    couchbase-cli bucket-create -c 127.0.0.1 \</p>
+<br>
+<p>      --bucket myapp \</p>
+<br>
+<p>      --bucket-type couchbase \</p>
+<br>
+<p>      --bucket-ramsize 1024 \</p>
+<br>
+<p>      --bucket-priority high \</p>
+<br>
+<p>      --bucket-eviction-policy fullEviction</p>
+<br>
+<br>
+<br>
+<br>
+<p>Eviction policies:   </p>
+<br>
+<p>* `valueOnly`: Evict document value, keep metadata (faster re-fetch on access).</p>
+<p>* `fullEviction`: Evict entire document (more memory savings but slower on cache miss).</p>
+<br>
+<p>Durability Settings   </p>
+<br>
+<br>
+<br>
+<p>    # Wait for replication to N nodes before acknowledging</p>
+<br>
+<p>    collection.upsert('doc_id', doc,</p>
+<br>
+<p>        durability= Durability.MAJORITY_AND_PERSIST_TO_ACTIVE)</p>
+<br>
+<br>
+<br>
+<p>    # Or use observe-based durability</p>
+<br>
+<p>    collection.upsert('doc_id', doc,</p>
+<br>
+<p>        durability_level= DurabilityLevel.PERSIST_TO_MAJORITY)</p>
+<br>
+<br>
+<br>
+<br>
+<p>Use Cases   </p>
+<p>Session Store   </p>
+<p>Couchbase's sub-millisecond get/set operations and built-in TTL make it an excellent session store:   </p>
+<br>
+<br>
+<br>
+<p>    # Set session with TTL (24 hours)</p>
+<br>
+<p>    collection.upsert('session_token_xyz', {</p>
+<br>
+<p>        'user_id': 'alice_42',</p>
+<br>
+<p>        'created_at': '2026-05-12T10:00:00Z'</p>
+<br>
+<p>    }, ttl=timedelta(hours=24))</p>
+<br>
+<br>
+<br>
+<br>
+<p>User Profile Service   </p>
+<p>JSON flexibility and N1QL queries support user profiles with varying fields:   </p>
+<br>
+<br>
+<br>
+<p>    SELECT name, email, preferences</p>
+<br>
+<p>    FROM `myapp`</p>
+<br>
+<p>    WHERE type = 'user_profile' AND META().id IN $user_ids;</p>
+<br>
+<br>
+<br>
+<br>
+<p>Catalog / Product Database   </p>
+<p>Couchbase is widely used for e-commerce catalogs where products have varying attributes:   </p>
+<br>
+<br>
+<br>
+<p>    SELECT name, price, attributes</p>
+<br>
+<p>    FROM `myapp`</p>
+<br>
+<p>    WHERE type = 'product'</p>
+<br>
+<p>      AND category = 'electronics'</p>
+<br>
+<p>      AND price BETWEEN 100 AND 500</p>
+<br>
+<p>    ORDER BY price</p>
+<br>
+<p>    LIMIT 20;</p>
+<br>
+<br>
+<br>
+<br>
+<p>Couchbase vs Alternatives   </p>
+<p>| Feature | Couchbase | MongoDB | Redis | |---------|-----------|---------|-------| | Query language | N1QL (SQL-like) | MQL (JSON-based) | Command-based | | Caching | Built-in (cache-first) | WiredTiger cache | Pure in-memory | | Durability | Tunable (async to sync) | Journal + replication | AOF/RDB persistence | | Cross-datacenter | XDCR (bidirectional) | Replica sets | Active-Active | | Full-text search | Built-in (Bleve) | Built-in (Atlas Search) | RediSearch module |   </p>
+<p>Couchbase fills a unique niche: a document database with SQL querying and built-in caching. It is a strong choice when you need low-latency document access combined with ad-hoc query capabilities, and when you want to simplify your architecture by avoiding a separate cache layer.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

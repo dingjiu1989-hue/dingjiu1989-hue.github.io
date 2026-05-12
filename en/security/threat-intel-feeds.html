@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="threat-intel-feeds">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Threat Intelligence Feeds">
+    <meta property="og:description" content="Integrating threat intelligence feeds with STIX/TAXII, SIEM correlation, and scoring for actionable insights.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/threat-intel-feeds.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Threat Intelligence Feeds">
+    <meta name="twitter:description" content="Integrating threat intelligence feeds with STIX/TAXII, SIEM correlation, and scoring for actionable insights.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Threat Intelligence Feeds — SourceHub</title>
+    <meta name="description" content="Integrating threat intelligence feeds with STIX/TAXII, SIEM correlation, and scoring for actionable insights.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/threat-intel-feeds.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/threat-intel-feeds.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Threat Intelligence Feeds",
+      "description": "Integrating threat intelligence feeds with STIX/TAXII, SIEM correlation, and scoring for actionable insights.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "996",
+      "keywords": "Security, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/threat-intel-feeds.html"},
+      "articleBody": "Threat Intelligence Feeds Threat Intelligence Fundamentals Threat intelligence transforms raw data into actionable security insights. Feeds provide indicators of compromise (IOCs), tactics techniques and procedures (TTPs), and adversary profiles. STIX and TAXII Standards STIX (Structured Threat Information Expression) and TAXII (Trusted Automated Exchange of Intelligence Indicators) are the industry standards for threat intelligence exchange. from stix2 import Indicator, Bundle, TAXIICollectionSource from taxii2client import Collection # Create a STIX indicator indicator = Indicator( name=\"Malicious IP\", indicator_types=[\"malicious-activity\"], pattern=\"[ipv4-addr:value = '203.0.113.5']\", pattern_type=\"stix\", valid_from=\"2026-01-01T00:00:00Z\" ) # Bundle indicators bundle = Bundle(indicator) print(bundle.serialize(pretty=True)) # Consume from TAXII feed collection = Collection(\"https://taxii.example.com/collections/123\") source = TAXIICollectionSource(collection) for indicator in source.query(): print(indicator[\"name\"], indicator[\"pattern\"]) Feed Integration with SIEM Ingest feeds into your SIEM for correlation: import requests from elasticsearch import Elasticsearch class ThreatIntelIngestor: def __init__(self, es_host=\"localhost:9200\"): self.es = Elasticsearch([es_host]) def fetch_and_index(self, feed_url, feed_name): resp = requests.get(feed_url, headers={\"Accept\": \"application/stix+json\"}) indicators = resp.json().get(\"objects\", []) for ioc in indicators: doc = { \"feed\": feed_name, \"type\": ioc.get(\"type\"), \"pattern\": ioc.get(\"pattern\"), \"severity\": ioc.get(\"confidence\", 50), \"valid_until\": ioc.get(\"valid_until\"), \"ingested_at\": \"now\" } self.es.index(index=\"threat-intel\", body=doc) print(f\"Ingested {len(indicators)} indicators from {feed_name}\") IOC Scoring Not all indicators are equally reliable. Implement scoring: def score_indicator(ioc, context): score = 50 # Base score # Age decay: newer indicators are more valuable age_days = (datetime.utcnow() - ioc.valid_from).days score -= min(age_days * 2, 30) # Multiple feeds increase confidence feed_count = len(ioc.get(\"sources\", [])) score += feed_count * 10 # Context matching increases relevance if context.get(\"industry\") in ioc.get(\"target_industries\", []): score += 20 return min(max(score, 0), 100) Feed Quality Metrics Evaluate feeds on these criteria: | Metric | Description | Target | |--------|-------------|--------| | False positive rate | Incorrect alerts | 80% | | Freshness | Update frequency | Continuous | Automated Blocking High-confidence indicators can trigger automated blocking: # threat-intel-automation.yaml automation_rules: - name: block_malicious_ips trigger: new_indicator conditions: - indicator_type: ipv4-addr - score: \">= 80\" actions: - update_firewall: action: deny source: indicator.value - alert: severity: high channel: security-operations Conclusion Threat intelligence feeds provide critical context for security operations. Standardize on STIX/TAXII, integrate with your SIEM, score indicators for relevance, and automate high-confidence blocking. Quality over quantity: five well-curated feeds beat fifty noisy ones."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Threat Intelligence Feeds"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Threat Intelligence Feeds
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Threat Intelligence Feeds</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Threat Intelligence Feeds</h1>
+<br>
+<p>Threat Intelligence Fundamentals   </p>
+<p>Threat intelligence transforms raw data into actionable security insights. Feeds provide indicators of compromise (IOCs), tactics techniques and procedures (TTPs), and adversary profiles.   </p>
+<p>STIX and TAXII Standards   </p>
+<p>STIX (Structured Threat Information Expression) and TAXII (Trusted Automated Exchange of Intelligence Indicators) are the industry standards for threat intelligence exchange.   </p>
+<br>
+<br>
+<br>
+<p>    from stix2 import Indicator, Bundle, TAXIICollectionSource</p>
+<br>
+<p>    from taxii2client import Collection</p>
+<br>
+<br>
+<br>
+<p>    # Create a STIX indicator</p>
+<br>
+<p>    indicator = Indicator(</p>
+<br>
+<p>        name="Malicious IP",</p>
+<br>
+<p>        indicator_types=["malicious-activity"],</p>
+<br>
+<p>        pattern="[ipv4-addr:value = '203.0.113.5']",</p>
+<br>
+<p>        pattern_type="stix",</p>
+<br>
+<p>        valid_from="2026-01-01T00:00:00Z"</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<p>    # Bundle indicators</p>
+<br>
+<p>    bundle = Bundle(indicator)</p>
+<br>
+<p>    print(bundle.serialize(pretty=True))</p>
+<br>
+<br>
+<br>
+<p>    # Consume from TAXII feed</p>
+<br>
+<p>    collection = Collection("https://taxii.example.com/collections/123")</p>
+<br>
+<p>    source = TAXIICollectionSource(collection)</p>
+<br>
+<p>    for indicator in source.query():</p>
+<br>
+<p>        print(indicator["name"], indicator["pattern"])</p>
+<br>
+<br>
+<br>
+<br>
+<p>Feed Integration with SIEM   </p>
+<p>Ingest feeds into your SIEM for correlation:   </p>
+<br>
+<br>
+<br>
+<p>    import requests</p>
+<br>
+<p>    from elasticsearch import Elasticsearch</p>
+<br>
+<br>
+<br>
+<p>    class ThreatIntelIngestor:</p>
+<br>
+<p>        def __init__(self, es_host="localhost:9200"):</p>
+<br>
+<p>            self.es = Elasticsearch([es_host])</p>
+<br>
+<br>
+<br>
+<p>        def fetch_and_index(self, feed_url, feed_name):</p>
+<br>
+<p>            resp = requests.get(feed_url, headers={"Accept": "application/stix+json"})</p>
+<br>
+<p>            indicators = resp.json().get("objects", [])</p>
+<br>
+<br>
+<br>
+<p>            for ioc in indicators:</p>
+<br>
+<p>                doc = {</p>
+<br>
+<p>                    "feed": feed_name,</p>
+<br>
+<p>                    "type": ioc.get("type"),</p>
+<br>
+<p>                    "pattern": ioc.get("pattern"),</p>
+<br>
+<p>                    "severity": ioc.get("confidence", 50),</p>
+<br>
+<p>                    "valid_until": ioc.get("valid_until"),</p>
+<br>
+<p>                    "ingested_at": "now"</p>
+<br>
+<p>                }</p>
+<br>
+<p>                self.es.index(index="threat-intel", body=doc)</p>
+<br>
+<br>
+<br>
+<p>            print(f"Ingested {len(indicators)} indicators from {feed_name}")</p>
+<br>
+<br>
+<br>
+<br>
+<p>IOC Scoring   </p>
+<p>Not all indicators are equally reliable. Implement scoring:   </p>
+<br>
+<br>
+<br>
+<p>    def score_indicator(ioc, context):</p>
+<br>
+<p>        score = 50  # Base score</p>
+<br>
+<br>
+<br>
+<p>        # Age decay: newer indicators are more valuable</p>
+<br>
+<p>        age_days = (datetime.utcnow() - ioc.valid_from).days</p>
+<br>
+<p>        score -= min(age_days * 2, 30)</p>
+<br>
+<br>
+<br>
+<p>        # Multiple feeds increase confidence</p>
+<br>
+<p>        feed_count = len(ioc.get("sources", []))</p>
+<br>
+<p>        score += feed_count * 10</p>
+<br>
+<br>
+<br>
+<p>        # Context matching increases relevance</p>
+<br>
+<p>        if context.get("industry") in ioc.get("target_industries", []):</p>
+<br>
+<p>            score += 20</p>
+<br>
+<br>
+<br>
+<p>        return min(max(score, 0), 100)</p>
+<br>
+<br>
+<br>
+<br>
+<p>Feed Quality Metrics   </p>
+<p>Evaluate feeds on these criteria:   </p>
+<p>| Metric | Description | Target | |--------|-------------|--------| | False positive rate | Incorrect alerts | < 5% | | Time to detection | Speed of indicator publication | < 1 hour | | Coverage | Breadth of TTPs covered | > 80% | | Freshness | Update frequency | Continuous |   </p>
+<p>Automated Blocking   </p>
+<p>High-confidence indicators can trigger automated blocking:   </p>
+<br>
+<br>
+<br>
+<p>    # threat-intel-automation.yaml</p>
+<br>
+<p>    automation_rules:</p>
+<br>
+<p>      - name: block_malicious_ips</p>
+<br>
+<p>        trigger: new_indicator</p>
+<br>
+<p>        conditions:</p>
+<br>
+<p>          - indicator_type: ipv4-addr</p>
+<br>
+<p>          - score: ">= 80"</p>
+<br>
+<p>        actions:</p>
+<br>
+<p>          - update_firewall:</p>
+<br>
+<p>              action: deny</p>
+<br>
+<p>              source: indicator.value</p>
+<br>
+<p>          - alert:</p>
+<br>
+<p>              severity: high</p>
+<br>
+<p>              channel: security-operations</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
+<p>Threat intelligence feeds provide critical context for security operations. Standardize on STIX/TAXII, integrate with your SIEM, score indicators for relevance, and automate high-confidence blocking. Quality over quantity: five well-curated feeds beat fifty noisy ones.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

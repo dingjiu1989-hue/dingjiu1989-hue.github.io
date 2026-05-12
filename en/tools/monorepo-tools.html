@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tools" data-exclude="monorepo-tools">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison">
+    <meta property="og:description" content="Compare monorepo build tools: Turborepo for caching, Nx for extensibility, Bazel for correctness at scale, and Lage for simplicity with Microsoft-ecosystem inte">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tools/monorepo-tools.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison">
+    <meta name="twitter:description" content="Compare monorepo build tools: Turborepo for caching, Nx for extensibility, Bazel for correctness at scale, and Lage for simplicity with Microsoft-ecosystem inte">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison — SourceHub</title>
+    <meta name="description" content="Compare monorepo build tools: Turborepo for caching, Nx for extensibility, Bazel for correctness at scale, and Lage for simplicity with Microsoft-ecosystem inte">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tools/monorepo-tools.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tools/monorepo-tools.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison",
+      "description": "Compare monorepo build tools: Turborepo for caching, Nx for extensibility, Bazel for correctness at scale, and Lage for simplicity with Microsoft-ecosystem inte",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1708",
+      "keywords": "Technology, DevTools, Productivity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/monorepo-tools.html"},
+      "articleBody": "Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison Introduction Monorepos \u2014 storing multiple projects in a single repository \u2014 offer simplified dependency management, atomic commits, and shared tooling. But without the right build tool, monorepos become slow as they grow. This article compares four leading monorepo orchestration tools: Turborepo, Nx, Bazel, and Lage. Turborepo Vercel's build orchestrator focuses on caching and task scheduling: // turbo.json { \"$schema\": \"https://turbo.build/schema.json\", \"pipeline\": { \"build\": { \"dependsOn\": [\"^build\"], \"outputs\": [\"dist/**\", \".next/**\"], \"cache\": { \"inputs\": [\"src/**\", \"tsconfig.json\"], \"outputMode\": \"new-only\" } }, \"test\": { \"dependsOn\": [\"build\"], \"outputs\": [], \"inputs\": [\"src/**\", \"*.test.ts\"] }, \"lint\": { \"outputs\": [] }, \"dev\": { \"cache\": false, \"persistent\": true } } } # Run builds across all workspaces in dependency order turbo run build # Run with parallel execution (default: CPU count) turbo run build --parallel # Dry run to see execution plan turbo run build --dry # Filter specific packages turbo run build --filter=packages/core... # Remote caching (Vercel) turbo run build --remote-only **Strengths**: Fastest setup, excellent documentation, incremental adoption, parallel execution, remote caching with Vercel integration. The caching granularity (file-level inputs) is well-designed. **Weaknesses**: Limited to JavaScript/TypeScript ecosystem, less sophisticated dependency graph analysis than Nx, remote caching requires Vercel. Nx Nx provides build orchestration with powerful code generation and dependency analysis: # Create an Nx workspace npx create-nx-workspace@latest myorg # Add capabilities nx g @nx/next:app my-app nx g @nx/react:lib shared-ui nx g @nx/node:lib api-interfaces # Run tasks nx run-many -t build test lint # Visualize dependencies nx graph # Affected commands (only run what changed) nx affected:test --base=main // nx.json { \"tasksRunnerOptions\": { \"default\": { \"runner\": \"nx-cloud\", // or \"nx/tasks-runners/default\" \"options\": { \"cacheableOperations\": [\"build\", \"test\", \"lint\", \"e2e\"], \"parallel\": 5, \"accessToken\": \"your-token\" } } }, \"targetDefaults\": { \"build\": { \"dependsOn\": [\"^build\"], \"inputs\": [\"!{projectRoot}/test/**/*\"] } } } **Strengths**: Language-agnostic, powerful dependency graph analysis, code generation reduces boilerplate, affected commands save CI time, plugin ecosystem extends to any tool. **Weaknesses**: Steeper learning curve, configuration overhead for simple projects, opinionated directory structure, Nx Cloud costs for advanced features. Bazel Google's build system prioritizes correctness and hermetic builds: # BUILD.bazel load(\"@npm//:defs.bzl\", \"npm_link_all_packages\") npm_link_all_packages(name = \"node_modules\") load(\"@aspect_rules_ts//ts:defs.bzl\", \"ts_project\") ts_project( name = \"core\", srcs = glob([\"src/**/*.ts\"]), deps = [ \"//packages/utils\", \"@npm//lodash\", \"@npm//zod\", ], tsconfig = \"//:tsconfig\", out_dir = \"dist\", ) # python_binary for a data science component load(\"@rules_python//python:defs.bzl\", \"py_binary\") py_binary( name = \"data_pipeline\", srcs = [\"pipeline.py\"], deps = [\"@pypi//pandas\"], ) # Build with caching and parallelism bazel build //packages/core:all # Run tests bazel test //packages/... # Query dependency graph bazel query \"deps(//packages/core)\" # Remote execution bazel build --config=remote //... **Strengths**: Correct by design (hermetic builds), polyglot (JS, Python, Go, Java in one repo), remote build execution, fine-grained caching, handles largest monorepos. **Weaknesses**: Very steep learning curve, verbose configuration, not JavaScript-native, slower cold builds, requires significant infrastructure. Lage Microsoft's task runner focused on simplicity: // lage.config.js module.exports = { pipeline: { build: [\"^build\"], test: [\"build\"], lint: [], typecheck: [], }, npmClient: \"pnpm\", cache: true, concurrency: 8, }; # Run the build pipeline lage build # Run tests lage test # Show execution plan lage build --dry # Filter by scope lage build --scope packages/core **Strengths**: Simple configuration, fast, good Microsoft-ecosystem integration, incremental builds, lightweight. **Weaknesses**: Smaller community, fewer features than Turborepo/Nx, limited plugin ecosystem, primarily JS/TS. Comparison | Feature | Turborepo | Nx | Bazel | Lage | |---------|-----------|-----|-------|------| | Setup time | Minutes | Minutes | Hours | Minutes | | Caching | File-level | File-level | Content-addressed | File-level | | Remote caching | Vercel only | Nx Cloud | Built-in | No | | Polyglot | No | Yes | Yes | No | | Code generation | No | Yes | No | No | | Learning curve | Low | Medium | High | Low | | Ideal repo size | Small-large | Small-large | Large | Small-medium | Recommendations * **Start simple**: Use Turborepo for most JavaScript/TypeScript monorepos \u2014 best setup experience. * **Need code generation**: Nx reduces boilerplate significantly for large teams. * **Polyglot monorepo**: Nx or Bazel if you need multiple languages in one repo. * **Maximum scale and correctness**: Bazel for massive monorepos with strict build requirements. * **Simple needs within Microsoft ecosystem**: Lage for lightweight orchestration."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tool Recommendations", "item": "https://dingjiu1989-hue.github.io/en/tools/"},
+        {"@type": "ListItem", "position": 3, "name": "Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a> › Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">DevTools</span>
+        <span class="tag-cat">Productivity</span></div>
+      <h1 class="article-title">Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Monorepos — storing multiple projects in a single repository — offer simplified dependency management, atomic commits, and shared tooling. But without the right build tool, monorepos become slow as they grow. This article compares four leading monorepo orchestration tools: Turborepo, Nx, Bazel, and Lage.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Turborepo</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Vercel's build orchestrator focuses on caching and task scheduling:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    // turbo.json</p>
+<br>
+<p>    {</p>
+<br>
+<p>      "$schema": "https://turbo.build/schema.json",</p>
+<br>
+<p>      "pipeline": {</p>
+<br>
+<p>        "build": {</p>
+<br>
+<p>          "dependsOn": ["^build"],</p>
+<br>
+<p>          "outputs": ["dist/**", ".next/**"],</p>
+<br>
+<p>          "cache": {</p>
+<br>
+<p>            "inputs": ["src/**", "tsconfig.json"],</p>
+<br>
+<p>            "outputMode": "new-only"</p>
+<br>
+<p>          }</p>
+<br>
+<p>        },</p>
+<br>
+<p>        "test": {</p>
+<br>
+<p>          "dependsOn": ["build"],</p>
+<br>
+<p>          "outputs": [],</p>
+<br>
+<p>          "inputs": ["src/**", "*.test.ts"]</p>
+<br>
+<p>        },</p>
+<br>
+<p>        "lint": {</p>
+<br>
+<p>          "outputs": []</p>
+<br>
+<p>        },</p>
+<br>
+<p>        "dev": {</p>
+<br>
+<p>          "cache": false,</p>
+<br>
+<p>          "persistent": true</p>
+<br>
+<p>        }</p>
+<br>
+<p>      }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Run builds across all workspaces in dependency order</p>
+<br>
+<p>    turbo run build</p>
+<br>
+<br>
+<br>
+<p>    # Run with parallel execution (default: CPU count)</p>
+<br>
+<p>    turbo run build --parallel</p>
+<br>
+<br>
+<br>
+<p>    # Dry run to see execution plan</p>
+<br>
+<p>    turbo run build --dry</p>
+<br>
+<br>
+<br>
+<p>    # Filter specific packages</p>
+<br>
+<p>    turbo run build --filter=packages/core...</p>
+<br>
+<br>
+<br>
+<p>    # Remote caching (Vercel)</p>
+<br>
+<p>    turbo run build --remote-only</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Strengths**: Fastest setup, excellent documentation, incremental adoption, parallel execution, remote caching with Vercel integration. The caching granularity (file-level inputs) is well-designed.</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Weaknesses**: Limited to JavaScript/TypeScript ecosystem, less sophisticated dependency graph analysis than Nx, remote caching requires Vercel.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Nx</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Nx provides build orchestration with powerful code generation and dependency analysis:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Create an Nx workspace</p>
+<br>
+<p>    npx create-nx-workspace@latest myorg</p>
+<br>
+<br>
+<br>
+<p>    # Add capabilities</p>
+<br>
+<p>    nx g @nx/next:app my-app</p>
+<br>
+<p>    nx g @nx/react:lib shared-ui</p>
+<br>
+<p>    nx g @nx/node:lib api-interfaces</p>
+<br>
+<br>
+<br>
+<p>    # Run tasks</p>
+<br>
+<p>    nx run-many -t build test lint</p>
+<br>
+<br>
+<br>
+<p>    # Visualize dependencies</p>
+<br>
+<p>    nx graph</p>
+<br>
+<br>
+<br>
+<p>    # Affected commands (only run what changed)</p>
+<br>
+<p>    nx affected:test --base=main</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    // nx.json</p>
+<br>
+<p>    {</p>
+<br>
+<p>      "tasksRunnerOptions": {</p>
+<br>
+<p>        "default": {</p>
+<br>
+<p>          "runner": "nx-cloud",  // or "nx/tasks-runners/default"</p>
+<br>
+<p>          "options": {</p>
+<br>
+<p>            "cacheableOperations": ["build", "test", "lint", "e2e"],</p>
+<br>
+<p>            "parallel": 5,</p>
+<br>
+<p>            "accessToken": "your-token"</p>
+<br>
+<p>          }</p>
+<br>
+<p>        }</p>
+<br>
+<p>      },</p>
+<br>
+<p>      "targetDefaults": {</p>
+<br>
+<p>        "build": {</p>
+<br>
+<p>          "dependsOn": ["^build"],</p>
+<br>
+<p>          "inputs": ["!{projectRoot}/test/**/*"]</p>
+<br>
+<p>        }</p>
+<br>
+<p>      }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Strengths**: Language-agnostic, powerful dependency graph analysis, code generation reduces boilerplate, affected commands save CI time, plugin ecosystem extends to any tool.</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Weaknesses**: Steeper learning curve, configuration overhead for simple projects, opinionated directory structure, Nx Cloud costs for advanced features.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Bazel</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Google's build system prioritizes correctness and hermetic builds:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # BUILD.bazel</p>
+<br>
+<p>    load("@npm//:defs.bzl", "npm_link_all_packages")</p>
+<br>
+<br>
+<br>
+<p>    npm_link_all_packages(name = "node_modules")</p>
+<br>
+<br>
+<br>
+<p>    load("@aspect_rules_ts//ts:defs.bzl", "ts_project")</p>
+<br>
+<br>
+<br>
+<p>    ts_project(</p>
+<br>
+<p>        name = "core",</p>
+<br>
+<p>        srcs = glob(["src/**/*.ts"]),</p>
+<br>
+<p>        deps = [</p>
+<br>
+<p>            "//packages/utils",</p>
+<br>
+<p>            "@npm//lodash",</p>
+<br>
+<p>            "@npm//zod",</p>
+<br>
+<p>        ],</p>
+<br>
+<p>        tsconfig = "//:tsconfig",</p>
+<br>
+<p>        out_dir = "dist",</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<p>    # python_binary for a data science component</p>
+<br>
+<p>    load("@rules_python//python:defs.bzl", "py_binary")</p>
+<br>
+<br>
+<br>
+<p>    py_binary(</p>
+<br>
+<p>        name = "data_pipeline",</p>
+<br>
+<p>        srcs = ["pipeline.py"],</p>
+<br>
+<p>        deps = ["@pypi//pandas"],</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Build with caching and parallelism</p>
+<br>
+<p>    bazel build //packages/core:all</p>
+<br>
+<br>
+<br>
+<p>    # Run tests</p>
+<br>
+<p>    bazel test //packages/...</p>
+<br>
+<br>
+<br>
+<p>    # Query dependency graph</p>
+<br>
+<p>    bazel query "deps(//packages/core)"</p>
+<br>
+<br>
+<br>
+<p>    # Remote execution</p>
+<br>
+<p>    bazel build --config=remote //...</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Strengths**: Correct by design (hermetic builds), polyglot (JS, Python, Go, Java in one repo), remote build execution, fine-grained caching, handles largest monorepos.</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Weaknesses**: Very steep learning curve, verbose configuration, not JavaScript-native, slower cold builds, requires significant infrastructure.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Lage</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Microsoft's task runner focused on simplicity:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    // lage.config.js</p>
+<br>
+<p>    module.exports = {</p>
+<br>
+<p>      pipeline: {</p>
+<br>
+<p>        build: ["^build"],</p>
+<br>
+<p>        test: ["build"],</p>
+<br>
+<p>        lint: [],</p>
+<br>
+<p>        typecheck: [],</p>
+<br>
+<p>      },</p>
+<br>
+<p>      npmClient: "pnpm",</p>
+<br>
+<p>      cache: true,</p>
+<br>
+<p>      concurrency: 8,</p>
+<br>
+<p>    };</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Run the build pipeline</p>
+<br>
+<p>    lage build</p>
+<br>
+<br>
+<br>
+<p>    # Run tests</p>
+<br>
+<p>    lage test</p>
+<br>
+<br>
+<br>
+<p>    # Show execution plan</p>
+<br>
+<p>    lage build --dry</p>
+<br>
+<br>
+<br>
+<p>    # Filter by scope</p>
+<br>
+<p>    lage build --scope packages/core</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Strengths**: Simple configuration, fast, good Microsoft-ecosystem integration, incremental builds, lightweight.</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Weaknesses**: Smaller community, fewer features than Turborepo/Nx, limited plugin ecosystem, primarily JS/TS.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Comparison</h2>
+<br>
+<br>
+<br>
+<br>
+<p>| Feature | Turborepo | Nx | Bazel | Lage |</p>
+<br>
+<p>|---------|-----------|-----|-------|------|</p>
+<br>
+<p>| Setup time | Minutes | Minutes | Hours | Minutes |</p>
+<br>
+<p>| Caching | File-level | File-level | Content-addressed | File-level |</p>
+<br>
+<p>| Remote caching | Vercel only | Nx Cloud | Built-in | No |</p>
+<br>
+<p>| Polyglot | No | Yes | Yes | No |</p>
+<br>
+<p>| Code generation | No | Yes | No | No |</p>
+<br>
+<p>| Learning curve | Low | Medium | High | Low |</p>
+<br>
+<p>| Ideal repo size | Small-large | Small-large | Large | Small-medium |</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Recommendations</h2>
+<br>
+<br>
+<br>
+<p>* **Start simple**: Use Turborepo for most JavaScript/TypeScript monorepos — best setup experience.</p>
+<p>* **Need code generation**: Nx reduces boilerplate significantly for large teams.</p>
+<p>* **Polyglot monorepo**: Nx or Bazel if you need multiple languages in one repo.</p>
+<p>* **Maximum scale and correctness**: Bazel for massive monorepos with strict build requirements.</p>
+<p>* **Simple needs within Microsoft ecosystem**: Lage for lightweight orchestration.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div>
+      <noscript><div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

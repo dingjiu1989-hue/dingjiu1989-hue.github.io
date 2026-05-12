@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="consumer-driven-contracts">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Consumer-Driven Contracts in Microservices">
+    <meta property="og:description" content="Learn consumer-driven contract testing to ensure microservice compatibility without brittle integration tests.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/consumer-driven-contracts.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Consumer-Driven Contracts in Microservices">
+    <meta name="twitter:description" content="Learn consumer-driven contract testing to ensure microservice compatibility without brittle integration tests.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Consumer-Driven Contracts in Microservices — SourceHub</title>
+    <meta name="description" content="Learn consumer-driven contract testing to ensure microservice compatibility without brittle integration tests.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/consumer-driven-contracts.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/consumer-driven-contracts.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Consumer-Driven Contracts in Microservices",
+      "description": "Learn consumer-driven contract testing to ensure microservice compatibility without brittle integration tests.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "496",
+      "keywords": "Architecture, System Design, Backend",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/consumer-driven-contracts.html"},
+      "articleBody": "Consumer-Driven Contracts in Microservices Consumer-driven contracts (CDC) is a pattern where service consumers define the expectations for the API they consume. The provider tests against these contracts to ensure changes do not break consumers. This approach enables independent service evolution while maintaining compatibility. How CDC Works Each consumer creates a contract file specifying exactly how it uses the provider's API\u2014which endpoints, request parameters, and response fields. These contracts are shared with the provider. The provider runs a contract verification suite that tests its API against all consumer contracts before deployment. If a provider change would break any consumer, the contract test fails. The provider must either revert the change or coordinate with the consumer to update the contract. This feedback loop catches breaking changes before they reach production. Pact Framework Pact is the most widely used CDC framework. It supports multiple languages including Java, Python, JavaScript, and Go. Consumers use Pact to write tests that generate contract files. Providers use Pact to verify these contracts. Pact supports message-based interactions for asynchronous communication. Consumer tests specify expected messages; provider tests verify actual message format and content. Benefits Over Integration Tests Integration tests require both provider and consumer to be running simultaneously. They are slow, brittle, and require complex test infrastructure. CDC tests run independently on each side. Consumer tests mock the provider; provider tests run against the real API. This separation enables faster feedback and simpler test setup. Adoption Strategy Start with one provider-consumer pair. Choose a critical service with multiple consumers. Write consumer contracts for the most-used endpoints. Add provider verification to the CI pipeline. Expand to additional services as the team gains experience. Maintain a contract repository that all teams can access. Common Pitfalls Contracts can become large and brittle if consumers test too many scenarios. Focus on testing realistic consumer usage, not exhaustive provider behavior. Version contracts and coordinate changes. Treat contract changes as API changes\u2014they require communication and agreement between teams."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Consumer-Driven Contracts in Microservices"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Consumer-Driven Contracts in Microservices
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">Consumer-Driven Contracts in Microservices</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Consumer-Driven Contracts in Microservices</h1>
+<p>Consumer-driven contracts (CDC) is a pattern where service consumers define the expectations for the API they consume. The provider tests against these contracts to ensure changes do not break consumers. This approach enables independent service evolution while maintaining compatibility.</p>
+<br>
+<h2> How CDC Works</h2>
+<br>
+<p>Each consumer creates a contract file specifying exactly how it uses the provider's API—which endpoints, request parameters, and response fields. These contracts are shared with the provider. The provider runs a contract verification suite that tests its API against all consumer contracts before deployment.</p>
+<br>
+<p>If a provider change would break any consumer, the contract test fails. The provider must either revert the change or coordinate with the consumer to update the contract. This feedback loop catches breaking changes before they reach production.</p>
+<br>
+<h2> Pact Framework</h2>
+<br>
+<p>Pact is the most widely used CDC framework. It supports multiple languages including Java, Python, JavaScript, and Go. Consumers use Pact to write tests that generate contract files. Providers use Pact to verify these contracts.</p>
+<br>
+<p>Pact supports message-based interactions for asynchronous communication. Consumer tests specify expected messages; provider tests verify actual message format and content.</p>
+<br>
+<h2> Benefits Over Integration Tests</h2>
+<br>
+<p>Integration tests require both provider and consumer to be running simultaneously. They are slow, brittle, and require complex test infrastructure. CDC tests run independently on each side. Consumer tests mock the provider; provider tests run against the real API. This separation enables faster feedback and simpler test setup.</p>
+<br>
+<h2> Adoption Strategy</h2>
+<br>
+<p>Start with one provider-consumer pair. Choose a critical service with multiple consumers. Write consumer contracts for the most-used endpoints. Add provider verification to the CI pipeline. Expand to additional services as the team gains experience. Maintain a contract repository that all teams can access.</p>
+<br>
+<h2> Common Pitfalls</h2>
+<br>
+<p>Contracts can become large and brittle if consumers test too many scenarios. Focus on testing realistic consumer usage, not exhaustive provider behavior. Version contracts and coordinate changes. Treat contract changes as API changes—they require communication and agreement between teams.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

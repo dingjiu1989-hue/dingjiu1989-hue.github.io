@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="soa-vs-microservices">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="SOA vs Microservices">
+    <meta property="og:description" content="Enterprise service bus, service granularity, governance differences between SOA and microservices architectures">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/soa-vs-microservices.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SOA vs Microservices">
+    <meta name="twitter:description" content="Enterprise service bus, service granularity, governance differences between SOA and microservices architectures">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>SOA vs Microservices — SourceHub</title>
+    <meta name="description" content="Enterprise service bus, service granularity, governance differences between SOA and microservices architectures">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/soa-vs-microservices.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/soa-vs-microservices.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "SOA vs Microservices",
+      "description": "Enterprise service bus, service granularity, governance differences between SOA and microservices architectures",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "783",
+      "keywords": "Architecture, System Design, Backend",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/soa-vs-microservices.html"},
+      "articleBody": "SOA vs Microservices Service-Oriented Architecture (SOA) and microservices share the fundamental principle of decomposing systems into independently deployable services, but they differ substantially in scope, granularity, governance, and infrastructure philosophy. Understanding these differences is critical for architects choosing between or integrating both approaches. Granularity is the most visible distinction. SOA services tend to be coarse-grained, often representing entire business capabilities like \"Customer Management\" or \"Order Processing.\" These services typically expose multiple operations and manage comprehensive data domains. Microservices aim for fine-grained decomposition, where a single service might handle only \"Address Validation\" or \"Payment Authorization.\" The microservice philosophy favors services small enough to be rewritten in a sprint or two, owned by a single team. Enterprise Service Bus (ESB) is the architectural centerpiece of traditional SOA. The ESB provides message routing, protocol translation, message enhancement, and orchestration. It acts as a smart intermediary that mediates all service interactions. Microservices reject the centralized ESB in favor of a \"smart endpoints, dumb pipes\" approach. Communication uses lightweight protocols directly between services or through a message broker that handles only transport. The reasoning is that the ESB becomes a single point of failure, a scalability bottleneck, and a monolithic piece of middleware that itself needs to be maintained and scaled. Governance models differ fundamentally. SOA typically employs centralized governance with an enterprise service registry, standardized service contracts (often WSDL or SOAP), and architectural review boards that approve service designs. Microservices favor decentralized governance, where each team makes independent technology and protocol decisions. Standardization emerges from shared platform tooling and conventions rather than mandates. Common infrastructure like service meshes, API gateways, and container orchestration provides interoperability without dictating service implementation. Data management approaches diverge sharply. SOA often promotes enterprise-wide canonical data models and shared databases. Services interact through complex XML schemas representing standardized business documents. Microservices advocate database-per-service and bounded contexts, where each service owns its data exclusively and communicates through simple, service-specific APIs. No canonical data model exists across service boundaries. Protocol choices reflect different eras. SOA was built on SOAP, WSDL, and WS-* standards, providing extensive interoperability guarantees but substantial complexity. Microservices favor REST, gRPC, and GraphQL \u2014 simpler protocols that are easier to implement and evolve. Event-driven communication uses lightweight message formats like JSON or Protocol Buffers rather than verbose XML. Deployment infrastructure also differs. SOA services often ran on enterprise application servers with complex deployment procedures. Microservices assume containerized deployment with orchestration platforms like Kubernetes, enabling automated CI/CD, horizontal scaling, and self-healing. Neither approach is universally superior. SOA's mature governance and integration patterns suit large enterprises with heterogeneous systems and strict compliance requirements. Microservices agility benefits product-focused organizations with autonomous teams. Many modern architectures combine elements of both \u2014 using lightweight service mesh for inter-service communication (microservices) while maintaining centralized API management and monitoring (SOA governance), recognizing that absolute purity to either philosophy is less important than pragmatic outcomes."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "SOA vs Microservices"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › SOA vs Microservices
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">SOA vs Microservices</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>SOA vs Microservices</h1>
+<br>
+<p>Service-Oriented Architecture (SOA) and microservices share the fundamental principle of decomposing systems into independently deployable services, but they differ substantially in scope, granularity, governance, and infrastructure philosophy. Understanding these differences is critical for architects choosing between or integrating both approaches.   </p>
+<p>Granularity is the most visible distinction. SOA services tend to be coarse-grained, often representing entire business capabilities like "Customer Management" or "Order Processing." These services typically expose multiple operations and manage comprehensive data domains. Microservices aim for fine-grained decomposition, where a single service might handle only "Address Validation" or "Payment Authorization." The microservice philosophy favors services small enough to be rewritten in a sprint or two, owned by a single team.   </p>
+<p>Enterprise Service Bus (ESB) is the architectural centerpiece of traditional SOA. The ESB provides message routing, protocol translation, message enhancement, and orchestration. It acts as a smart intermediary that mediates all service interactions. Microservices reject the centralized ESB in favor of a "smart endpoints, dumb pipes" approach. Communication uses lightweight protocols directly between services or through a message broker that handles only transport. The reasoning is that the ESB becomes a single point of failure, a scalability bottleneck, and a monolithic piece of middleware that itself needs to be maintained and scaled.   </p>
+<p>Governance models differ fundamentally. SOA typically employs centralized governance with an enterprise service registry, standardized service contracts (often WSDL or SOAP), and architectural review boards that approve service designs. Microservices favor decentralized governance, where each team makes independent technology and protocol decisions. Standardization emerges from shared platform tooling and conventions rather than mandates. Common infrastructure like service meshes, API gateways, and container orchestration provides interoperability without dictating service implementation.   </p>
+<p>Data management approaches diverge sharply. SOA often promotes enterprise-wide canonical data models and shared databases. Services interact through complex XML schemas representing standardized business documents. Microservices advocate database-per-service and bounded contexts, where each service owns its data exclusively and communicates through simple, service-specific APIs. No canonical data model exists across service boundaries.   </p>
+<p>Protocol choices reflect different eras. SOA was built on SOAP, WSDL, and WS-* standards, providing extensive interoperability guarantees but substantial complexity. Microservices favor REST, gRPC, and GraphQL — simpler protocols that are easier to implement and evolve. Event-driven communication uses lightweight message formats like JSON or Protocol Buffers rather than verbose XML.   </p>
+<p>Deployment infrastructure also differs. SOA services often ran on enterprise application servers with complex deployment procedures. Microservices assume containerized deployment with orchestration platforms like Kubernetes, enabling automated CI/CD, horizontal scaling, and self-healing.   </p>
+<p>Neither approach is universally superior. SOA's mature governance and integration patterns suit large enterprises with heterogeneous systems and strict compliance requirements. Microservices agility benefits product-focused organizations with autonomous teams. Many modern architectures combine elements of both — using lightweight service mesh for inter-service communication (microservices) while maintaining centralized API management and monitoring (SOA governance), recognizing that absolute purity to either philosophy is less important than pragmatic outcomes.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

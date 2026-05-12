@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1725",
+      "wordCount": "386",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/connection-pooling.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/connection-pooling.html"},
+      "articleBody": "Connection Pooling Guide Why Connection Pooling Matters Creating database connections is expensive: TCP handshake, SSL negotiation, and authentication add 7-35ms per connection. Connection pooling reuses established connections. How Pools Work A pool maintains a set of open connections. When a thread requests one, an idle connection is returned immediately. If all are busy, the thread waits. Pool Configuration | Parameter | Recommended | |-----------|-------------| | maxSize | 10-20 per CPU core | | connectionTimeout | 30000ms | | maxLifetime | 1800000ms (30min) | HikariCP (Java) spring.datasource.hikari: maximum-pool-size: 20 minimum-idle: 5 connection-timeout: 30000 max-lifetime: 1800000 PgBouncer (PostgreSQL) [pgbouncer] pool_mode = transaction default_pool_size = 25 max_client_conn = 100 Pgbouncer sits between application and database. Transaction mode returns connections to pool after each transaction. Sizing Formula pool_size = (core_count * 2) + effective_spindle_count For 8 CPU cores with SSD: 17 connections. More connections causes context switching overhead. Monitoring SELECT state, count(*) FROM pg_stat_activity WHERE backend_type = 'client backend' GROUP BY state; Monitor for idle-in-transaction connections and pool exhaustion. Conclusion Size pools based on CPU cores, not concurrent users. Use PgBouncer for high-scale PostgreSQL deployments. Set timeouts and max lifetimes. Monitor pool usage and connection leaks."
     }
     </script>
     <script type="application/ld+json">
@@ -73,374 +74,71 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Connection Pooling Guide</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Why Connection Pooling Matters</h2>
+      <div class="article-body"><h1>Connection Pooling Guide</h1>
 <br>
-<p>Opening a database connection is expensive. Each new connection requires TCP handshake, SSL negotiation, authentication, and memory allocation on both the client and server. Connection pooling reuses a set of established connections, eliminating this overhead and preventing resource exhaustion.</p>
+<p>Why Connection Pooling Matters   </p>
+<p>Creating database connections is expensive: TCP handshake, SSL negotiation, and authentication add 7-35ms per connection. Connection pooling reuses established connections.   </p>
+<p>How Pools Work   </p>
+<p>A pool maintains a set of open connections. When a thread requests one, an idle connection is returned immediately. If all are busy, the thread waits.   </p>
+<p>Pool Configuration   </p>
+<p>| Parameter | Recommended | |-----------|-------------| | maxSize | 10-20 per CPU core | | connectionTimeout | 30000ms | | maxLifetime | 1800000ms (30min) |   </p>
+<p>HikariCP (Java)   </p>
 <br>
-<h2> The Cost of Connection Creation</h2>
 <br>
-<p>| Operation | Typical Latency |</p>
-<p>|-----------|-----------------|</p>
-<p>| TCP handshake | 1-5ms |</p>
-<p>| SSL/TLS negotiation | 5-20ms |</p>
-<p>| Authentication | 1-10ms |</p>
-<p>| Total per new connection | 7-35ms |</p>
-<p>| Pooled connection reuse | < 1ms |</p>
 <br>
-<p>With a pool of 10 connections handling 100 requests per second, connection reuse saves approximately 700-3500ms of latency per second.</p>
+<p>    spring.datasource.hikari:</p>
 <br>
-<h2> How Connection Pooling Works</h2>
+<p>      maximum-pool-size: 20</p>
 <br>
-<pre><code>
-Application Threads                  Connection Pool                    Database
-
-┌─────────────────────┐         ┌─────────────────────┐          ┌──────────────┐
-
-│ Thread 1 ───────────┼────────&gt;│   ┌─ Connection 1   │          │              │
-
-│ Thread 2 ───────────┼────────&gt;│   ├─ Connection 2   │&lt;────────&gt;│  PostgreSQL  │
-
-│ Thread 3 ───────────┼────────&gt;│   ├─ Connection 3   │          │  Server      │
-
-│ Thread 4 ───────────┼────────&gt;│   └─ Connection 4   │          │              │
-
-│ Thread 5 (waiting) ─┼────────&gt;│                     │          │              │
-
-└─────────────────────┘         └─────────────────────┘          └──────────────┘
-
-</code></pre>
+<p>      minimum-idle: 5</p>
 <br>
-<p>When a thread requests a connection: if an idle connection exists, it is returned immediately. If all connections are busy, the thread waits until one becomes available or the timeout expires.</p>
+<p>      connection-timeout: 30000</p>
 <br>
-<h2> Pool Configuration Parameters</h2>
+<p>      max-lifetime: 1800000</p>
 <br>
-<p>| Parameter | Description | Recommended Value |</p>
-<p>|-----------|-------------|-------------------|</p>
-<p>| `maxSize` | Maximum connections in pool | 10-20 per CPU core |</p>
-<p>| `minIdle` | Minimum idle connections | 2-5 |</p>
-<p>| `connectionTimeout` | Wait timeout for connection | 30000ms (30s) |</p>
-<p>| `idleTimeout` | Max idle time before closing | 600000ms (10min) |</p>
-<p>| `maxLifetime` | Max connection lifetime | 1800000ms (30min) |</p>
-<p>| `validationQuery` | Connection health check | `SELECT 1` |</p>
 <br>
-<h2> Implementation Examples</h2>
 <br>
-<h3>HikariCP (Java / Spring Boot)</h3>
 <br>
-<pre><code>
-# application.yml
-
-spring:
-
-  datasource:
-
-    url: jdbc:postgresql://database:5432/mydb
-
-    username: app_user
-
-    password: ${DB_PASSWORD}
-
-    hikari:
-
-      maximum-pool-size: 20
-
-      minimum-idle: 5
-
-      connection-timeout: 30000
-
-      idle-timeout: 600000
-
-      max-lifetime: 1800000
-
-      pool-name: AppPool
-
-      connection-test-query: SELECT 1
-
-</code></pre>
+<p>PgBouncer (PostgreSQL)   </p>
 <br>
-<pre><code>
-@Configuration
-
-public class DatabaseConfig {
-
-    @Bean
-
-    public DataSource dataSource() {
-
-        HikariConfig config = new HikariConfig();
-
-        config.setJdbcUrl(&quot;jdbc:postgresql://database:5432/mydb&quot;);
-
-        config.setUsername(&quot;app_user&quot;);
-
-        config.setPassword(System.getenv(&quot;DB_PASSWORD&quot;));
-
-        config.setMaximumPoolSize(20);
-
-        config.setMinimumIdle(5);
-
-        config.setConnectionTimeout(30000);
-
-        config.setIdleTimeout(600000);
-
-        config.setMaxLifetime(1800000);
-
-        config.setPoolName(&quot;AppPool&quot;);
-
-        return new HikariDataSource(config);
-
-    }
-
-}
-
-</code></pre>
 <br>
-<h3>SQLAlchemy (Python)</h3>
 <br>
-<pre><code>
-from sqlalchemy import create_engine
-
-
-
-engine = create_engine(
-
-    &quot;postgresql://app_user:password@database:5432/mydb&quot;,
-
-    pool_size=10,           # Number of connections to maintain
-
-    max_overflow=10,         # Additional connections allowed beyond pool_size
-
-    pool_timeout=30,         # Seconds to wait for a connection
-
-    pool_recycle=1800,       # Recycle connections after 30 minutes
-
-    pool_pre_ping=True,      # Test connections before using
-
-    echo=False
-
-)
-
-
-
-# Usage
-
-with engine.connect() as conn:
-
-    result = conn.execute(&quot;SELECT * FROM users&quot;)
-
-</code></pre>
+<p>    [pgbouncer]</p>
 <br>
-<h3>Node.js (pg-pool)</h3>
+<p>    pool_mode = transaction</p>
 <br>
-<pre><code>
-const { Pool } = require(&#x27;pg&#x27;);
-
-
-
-const pool = new Pool({
-
-    host: &#x27;database&#x27;,
-
-    port: 5432,
-
-    database: &#x27;mydb&#x27;,
-
-    user: &#x27;app_user&#x27;,
-
-    password: process.env.DB_PASSWORD,
-
-    max: 20,
-
-    idleTimeoutMillis: 30000,
-
-    connectionTimeoutMillis: 5000,
-
-    maxUses: 7500,  // Recycle connection after 7500 queries
-
-});
-
-
-
-// Query using pool
-
-async function getUsers() {
-
-    const result = await pool.query(&#x27;SELECT * FROM users&#x27;);
-
-    return result.rows;
-
-}
-
-</code></pre>
+<p>    default_pool_size = 25</p>
 <br>
-<h2> Connection Poolers</h2>
+<p>    max_client_conn = 100</p>
 <br>
-<h3>PgBouncer (PostgreSQL)</h3>
 <br>
-<p>A dedicated lightweight connection pooler that sits between your application and PostgreSQL:</p>
 <br>
-<pre><code>
-# pgbouncer.ini
-
-[databases]
-
-mydb = host=127.0.0.1 port=5432 dbname=mydb
-
-
-
-[pgbouncer]
-
-listen_addr = 0.0.0.0
-
-listen_port = 6432
-
-auth_type = scram-sha-256
-
-auth_file = /etc/pgbouncer/userlist.txt
-
-
-
-# Pool modes
-
-pool_mode = transaction  # Most common: return connection to pool after transaction
-
-
-
-# Pool sizing
-
-default_pool_size = 25
-
-max_client_conn = 100
-
-reserve_pool_size = 5
-
-reserve_pool_timeout = 5
-
-</code></pre>
 <br>
-<p>**Pool Modes**:</p>
+<p>Pgbouncer sits between application and database. Transaction mode returns connections to pool after each transaction.   </p>
+<p>Sizing Formula   </p>
 <br>
-<p>| Mode | Connection Returned | Best For |</p>
-<p>|------|-------------------|----------|</p>
-<p>| Session | After client disconnects | Long-lived connections |</p>
-<p>| Transaction | After each transaction | Web applications |</p>
-<p>| Statement | After each statement | Batch processing |</p>
 <br>
-<h3>ProxySQL (MySQL)</h3>
 <br>
-<pre><code>
-# proxysql.cnf
-
-datadir=/var/lib/proxysql
-
-
-
-mysql_servers =
-
-(
-
-    { address=&quot;mysql-master&quot;, port=3306, hostgroup=10 },
-
-    { address=&quot;mysql-replica1&quot;, port=3306, hostgroup=20 },
-
-    { address=&quot;mysql-replica2&quot;, port=3306, hostgroup=20 }
-
-)
-
-
-
-mysql_users =
-
-(
-
-    { username=&quot;app_user&quot;, password=&quot;secret&quot;, default_hostgroup=10 }
-
-)
-
-
-
-mysql_query_rules =
-
-(
-
-    { rule_id=1, active=1, match_pattern=&quot;^SELECT&quot;, destination_hostgroup=20 },
-
-    { rule_id=2, active=1, match_pattern=&quot;.*&quot;, destination_hostgroup=10 }
-
-)
-
-</code></pre>
+<p>    pool_size = (core_count * 2) + effective_spindle_count</p>
 <br>
-<h2> Connection Pool Sizing</h2>
 <br>
-<p>The common misconception is "more connections = better performance." In reality, too many connections degrades performance due to context switching and database contention.</p>
 <br>
-<h3>Formula for Optimal Pool Size</h3>
 <br>
-<pre><code>
-pool_size = (core_count * 2) + effective_spindle_count
-
-</code></pre>
+<p>For 8 CPU cores with SSD: 17 connections. More connections causes context switching overhead.   </p>
+<p>Monitoring   </p>
 <br>
-<p>For a database server with 8 CPU cores and SSD storage:</p>
-<pre><code>
-pool_size = (8 * 2) + 1  # = 17 connections
-
-</code></pre>
 <br>
-<p>This is far fewer than the default of 100+ that many applications use.</p>
 <br>
-<h2> Monitoring Connection Pools</h2>
+<p>    SELECT state, count(*) FROM pg_stat_activity</p>
 <br>
-<pre><code>
--- PostgreSQL: Check active connections
-
-SELECT
-
-    state,
-
-    count(*) as count,
-
-    wait_event_type,
-
-    wait_event
-
-FROM pg_stat_activity
-
-WHERE backend_type = &#x27;client backend&#x27;
-
-GROUP BY state, wait_event_type, wait_event;
-
-
-
--- Identify idle connections
-
-SELECT count(*) FROM pg_stat_activity WHERE state = &#x27;idle&#x27;;
-
-
-
--- Connection pool hit rate (PgBouncer)
-
-SHOW STATS;
-
--- avg_recv, avg_sent, total_query_time, avg_query_time
-
-</code></pre>
+<p>    WHERE backend_type = 'client backend' GROUP BY state;</p>
 <br>
-<h2> Common Mistakes</h2>
 <br>
-<p>| Mistake | Consequence | Fix |</p>
-<p>|---------|-------------|-----|</p>
-<p>| Too many connections | Database overload, slow queries | Use 2x CPU cores + disk spindles |</p>
-<p>| No connection timeout | Threads hang forever | Set connectionTimeout |</p>
-<p>| No max lifetime | Stale connections, memory leak | Set maxLifetime (30 min) |</p>
-<p>| No health check | Broken connections in pool | Enable pool_pre_ping |</p>
-<p>| Pool per microservice | Connection exhaustion | Use PgBouncer for unified pooling |</p>
-<p>| Leaking connections | Pool exhaustion | Always close connections in finally blocks |</p>
 <br>
-<h2> Summary</h2>
 <br>
-<p>Connection pooling is essential for production database applications. Use application-level pools (HikariCP, SQLAlchemy) for basic needs and dedicated poolers (PgBouncer) for high-scale deployments. Size pools based on CPU cores rather than connection demand, set appropriate timeouts and max lifetimes, and always return connections to the pool. Monitor pool usage and database connection counts to detect leaks and sizing issues before they cause outages.</p></div>
+<p>Monitor for idle-in-transaction connections and pool exhaustion.   </p>
+<p>Conclusion   </p>
+<p>Size pools based on CPU cores, not concurrent users. Use PgBouncer for high-scale PostgreSQL deployments. Set timeouts and max lifetimes. Monitor pool usage and connection leaks.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

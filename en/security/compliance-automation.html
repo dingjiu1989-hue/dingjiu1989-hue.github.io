@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="compliance-automation">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Compliance Automation">
+    <meta property="og:description" content="Automating compliance with CIS benchmarks, automated scanning, reporting, and continuous monitoring.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/compliance-automation.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Compliance Automation">
+    <meta name="twitter:description" content="Automating compliance with CIS benchmarks, automated scanning, reporting, and continuous monitoring.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Compliance Automation — SourceHub</title>
+    <meta name="description" content="Automating compliance with CIS benchmarks, automated scanning, reporting, and continuous monitoring.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/compliance-automation.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/compliance-automation.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Compliance Automation",
+      "description": "Automating compliance with CIS benchmarks, automated scanning, reporting, and continuous monitoring.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1550",
+      "keywords": "Security, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/compliance-automation.html"},
+      "articleBody": "Compliance Automation Why Automate Compliance? Manual compliance is slow, error-prone, and unsustainable. Automation provides continuous verification, instant reporting, and faster audit cycles. CIS Benchmark Scanning Automate CIS benchmark checks across infrastructure: # cis-benchmark-config.yaml benchmarks: - name: \"CIS AWS Foundations Benchmark v3.0\" scope: \"account\" checks: - id: \"1.1\" title: \"Avoid using root account\" command: \"aws iam get-account-summary | jq '.SummaryMap.AccountAccessKeysPresent'\" expected: \"0\" severity: \"critical\" - id: \"1.3\" title: \"Ensure MFA for root account\" command: \"aws iam get-account-summary | jq '.SummaryMap.AccountMFAEnabled'\" expected: \"1\" severity: \"critical\" - id: \"2.1\" title: \"Enable CloudTrail in all regions\" command: \"aws cloudtrail describe-trails --query 'trailList[*].IsMultiRegionTrail'\" expected: \"[true]\" severity: \"high\" # CIS compliance checker import subprocess import json class CISChecker: def __init__(self, config): self.checks = config[\"checks\"] self.results = [] def run_checks(self): for check in self.checks: result = self.run_single_check(check) self.results.append(result) return self.generate_report() def run_single_check(self, check): try: output = subprocess.check_output( check[\"command\"], shell=True, text=True ).strip() passed = output == check[\"expected\"] return { \"id\": check[\"id\"], \"title\": check[\"title\"], \"passed\": passed, \"severity\": check[\"severity\"], \"actual\": output, \"expected\": check[\"expected\"] } except subprocess.CalledProcessError: return { \"id\": check[\"id\"], \"title\": check[\"title\"], \"passed\": False, \"severity\": check[\"severity\"], \"error\": \"Command failed\" } Automated Remediation def auto_remediate(findings): remediations = { \"s3_public_access\": lambda: boto3.client(\"s3control\") .put_public_access_block( AccountId=ACCOUNT_ID, PublicAccessBlockConfiguration={ \"BlockPublicAcls\": True, \"IgnorePublicAcls\": True, \"BlockPublicPolicy\": True, \"RestrictPublicBuckets\": True } ), \"unencrypted_ebs\": lambda volume_id: boto3.client(\"ec2\").modify_volume( VolumeId=volume_id, Encrypted=True ), \"cloudtrail_disabled\": lambda region: boto3.client(\"cloudtrail\").create_trail( Name=\"automated-compliance-trail\", S3BucketName=\"compliance-logs-bucket\", IsMultiRegionTrail=True, EnableLogFileValidation=True ) } for finding in findings: if finding[\"auto_remediable\"] and finding[\"severity\"] == \"critical\": action = remediations.get(finding[\"type\"]) if action: action() finding[\"remediated\"] = True Compliance Reporting Generate auditor-ready reports: from jinja2 import Template import markdown def generate_compliance_report(results, framework=\"CIS AWS v3.0\"): summary = { \"framework\": framework, \"timestamp\": datetime.utcnow().isoformat(), \"total_checks\": len(results), \"passed\": sum(1 for r in results if r[\"passed\"]), \"failed\": sum(1 for r in results if not r[\"passed\"]), \"compliance_score\": sum(1 for r in results if r[\"passed\"]) / len(results) * 100 } report_md = f\"\"\" # Compliance Report: {framework} **Date:** {summary['timestamp']} **Score:** {summary['compliance_score']:.1f}% ## Summary - Total Checks: {summary['total_checks']} - Passed: {summary['passed']} - Failed: {summary['failed']} ## Failed Controls \"\"\" for result in results: if not result[\"passed\"]: report_md += f\"\"\" ### {result['id']}: {result['title']} - **Severity:** {result['severity']} - **Expected:** {result['expected']} - **Actual:** {result.get('actual', 'N/A')} \"\"\" return markdown.markdown(report_md) Continuous Monitoring -- Compliance monitoring dashboard CREATE VIEW compliance_dashboard AS SELECT framework, account_id, COUNT(*) as total_controls, SUM(CASE WHEN status = 'passed' THEN 1 ELSE 0 END) as passed, SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) as failed, ROUND(AVG(CASE WHEN status = 'passed' THEN 100.0 ELSE 0.0 END), 1) as score, MAX(checked_at) as last_checked FROM compliance_checks WHERE checked_at > NOW() - INTERVAL '24 hours' GROUP BY framework, account_id; Conclusion Automate compliance with CIS benchmark scanning, remediation, reporting, and monitoring. Start with critical controls and expand coverage gradually. Use infrastructure-as-code to enforce compliance at deploy time. Continuously monitor compliance posture and alert on drift. Automation turns compliance from a periodic burden into a continuous assurance program."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Compliance Automation"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Compliance Automation
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Compliance Automation</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Compliance Automation</h1>
+<br>
+<p>Why Automate Compliance?   </p>
+<p>Manual compliance is slow, error-prone, and unsustainable. Automation provides continuous verification, instant reporting, and faster audit cycles.   </p>
+<p>CIS Benchmark Scanning   </p>
+<p>Automate CIS benchmark checks across infrastructure:   </p>
+<br>
+<br>
+<br>
+<p>    # cis-benchmark-config.yaml</p>
+<br>
+<p>    benchmarks:</p>
+<br>
+<p>      - name: "CIS AWS Foundations Benchmark v3.0"</p>
+<br>
+<p>        scope: "account"</p>
+<br>
+<p>        checks:</p>
+<br>
+<p>          - id: "1.1"</p>
+<br>
+<p>            title: "Avoid using root account"</p>
+<br>
+<p>            command: "aws iam get-account-summary | jq '.SummaryMap.AccountAccessKeysPresent'"</p>
+<br>
+<p>            expected: "0"</p>
+<br>
+<p>            severity: "critical"</p>
+<br>
+<br>
+<br>
+<p>          - id: "1.3"</p>
+<br>
+<p>            title: "Ensure MFA for root account"</p>
+<br>
+<p>            command: "aws iam get-account-summary | jq '.SummaryMap.AccountMFAEnabled'"</p>
+<br>
+<p>            expected: "1"</p>
+<br>
+<p>            severity: "critical"</p>
+<br>
+<br>
+<br>
+<p>          - id: "2.1"</p>
+<br>
+<p>            title: "Enable CloudTrail in all regions"</p>
+<br>
+<p>            command: "aws cloudtrail describe-trails --query 'trailList[*].IsMultiRegionTrail'"</p>
+<br>
+<p>            expected: "[true]"</p>
+<br>
+<p>            severity: "high"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # CIS compliance checker</p>
+<br>
+<p>    import subprocess</p>
+<br>
+<p>    import json</p>
+<br>
+<br>
+<br>
+<p>    class CISChecker:</p>
+<br>
+<p>        def __init__(self, config):</p>
+<br>
+<p>            self.checks = config["checks"]</p>
+<br>
+<p>            self.results = []</p>
+<br>
+<br>
+<br>
+<p>        def run_checks(self):</p>
+<br>
+<p>            for check in self.checks:</p>
+<br>
+<p>                result = self.run_single_check(check)</p>
+<br>
+<p>                self.results.append(result)</p>
+<br>
+<p>            return self.generate_report()</p>
+<br>
+<br>
+<br>
+<p>        def run_single_check(self, check):</p>
+<br>
+<p>            try:</p>
+<br>
+<p>                output = subprocess.check_output(</p>
+<br>
+<p>                    check["command"], shell=True, text=True</p>
+<br>
+<p>                ).strip()</p>
+<br>
+<br>
+<br>
+<p>                passed = output == check["expected"]</p>
+<br>
+<br>
+<br>
+<p>                return {</p>
+<br>
+<p>                    "id": check["id"],</p>
+<br>
+<p>                    "title": check["title"],</p>
+<br>
+<p>                    "passed": passed,</p>
+<br>
+<p>                    "severity": check["severity"],</p>
+<br>
+<p>                    "actual": output,</p>
+<br>
+<p>                    "expected": check["expected"]</p>
+<br>
+<p>                }</p>
+<br>
+<p>            except subprocess.CalledProcessError:</p>
+<br>
+<p>                return {</p>
+<br>
+<p>                    "id": check["id"],</p>
+<br>
+<p>                    "title": check["title"],</p>
+<br>
+<p>                    "passed": False,</p>
+<br>
+<p>                    "severity": check["severity"],</p>
+<br>
+<p>                    "error": "Command failed"</p>
+<br>
+<p>                }</p>
+<br>
+<br>
+<br>
+<br>
+<p>Automated Remediation   </p>
+<br>
+<br>
+<br>
+<p>    def auto_remediate(findings):</p>
+<br>
+<p>        remediations = {</p>
+<br>
+<p>            "s3_public_access": lambda: boto3.client("s3control")</p>
+<br>
+<p>                .put_public_access_block(</p>
+<br>
+<p>                    AccountId=ACCOUNT_ID,</p>
+<br>
+<p>                    PublicAccessBlockConfiguration={</p>
+<br>
+<p>                        "BlockPublicAcls": True,</p>
+<br>
+<p>                        "IgnorePublicAcls": True,</p>
+<br>
+<p>                        "BlockPublicPolicy": True,</p>
+<br>
+<p>                        "RestrictPublicBuckets": True</p>
+<br>
+<p>                    }</p>
+<br>
+<p>                ),</p>
+<br>
+<p>            "unencrypted_ebs": lambda volume_id:</p>
+<br>
+<p>                boto3.client("ec2").modify_volume(</p>
+<br>
+<p>                    VolumeId=volume_id,</p>
+<br>
+<p>                    Encrypted=True</p>
+<br>
+<p>                ),</p>
+<br>
+<p>            "cloudtrail_disabled": lambda region:</p>
+<br>
+<p>                boto3.client("cloudtrail").create_trail(</p>
+<br>
+<p>                    Name="automated-compliance-trail",</p>
+<br>
+<p>                    S3BucketName="compliance-logs-bucket",</p>
+<br>
+<p>                    IsMultiRegionTrail=True,</p>
+<br>
+<p>                    EnableLogFileValidation=True</p>
+<br>
+<p>                )</p>
+<br>
+<p>        }</p>
+<br>
+<br>
+<br>
+<p>        for finding in findings:</p>
+<br>
+<p>            if finding["auto_remediable"] and finding["severity"] == "critical":</p>
+<br>
+<p>                action = remediations.get(finding["type"])</p>
+<br>
+<p>                if action:</p>
+<br>
+<p>                    action()</p>
+<br>
+<p>                    finding["remediated"] = True</p>
+<br>
+<br>
+<br>
+<br>
+<p>Compliance Reporting   </p>
+<p>Generate auditor-ready reports:   </p>
+<br>
+<br>
+<br>
+<p>    from jinja2 import Template</p>
+<br>
+<p>    import markdown</p>
+<br>
+<br>
+<br>
+<p>    def generate_compliance_report(results, framework="CIS AWS v3.0"):</p>
+<br>
+<p>        summary = {</p>
+<br>
+<p>            "framework": framework,</p>
+<br>
+<p>            "timestamp": datetime.utcnow().isoformat(),</p>
+<br>
+<p>            "total_checks": len(results),</p>
+<br>
+<p>            "passed": sum(1 for r in results if r["passed"]),</p>
+<br>
+<p>            "failed": sum(1 for r in results if not r["passed"]),</p>
+<br>
+<p>            "compliance_score": sum(1 for r in results if r["passed"]) / len(results) * 100</p>
+<br>
+<p>        }</p>
+<br>
+<br>
+<br>
+<p>        report_md = f"""</p>
+<br>
+<p>    # Compliance Report: {framework}</p>
+<br>
+<p>    **Date:** {summary['timestamp']}</p>
+<br>
+<p>    **Score:** {summary['compliance_score']:.1f}%</p>
+<br>
+<br>
+<br>
+<p>    ## Summary</p>
+<br>
+<p>    - Total Checks: {summary['total_checks']}</p>
+<br>
+<p>    - Passed: {summary['passed']}</p>
+<br>
+<p>    - Failed: {summary['failed']}</p>
+<br>
+<br>
+<br>
+<p>    ## Failed Controls</p>
+<br>
+<p>    """</p>
+<br>
+<br>
+<br>
+<p>        for result in results:</p>
+<br>
+<p>            if not result["passed"]:</p>
+<br>
+<p>                report_md += f"""</p>
+<br>
+<p>    ### {result['id']}: {result['title']}</p>
+<br>
+<p>    - **Severity:** {result['severity']}</p>
+<br>
+<p>    - **Expected:** {result['expected']}</p>
+<br>
+<p>    - **Actual:** {result.get('actual', 'N/A')}</p>
+<br>
+<p>    """</p>
+<br>
+<br>
+<br>
+<p>        return markdown.markdown(report_md)</p>
+<br>
+<br>
+<br>
+<br>
+<p>Continuous Monitoring   </p>
+<br>
+<br>
+<br>
+<p>    -- Compliance monitoring dashboard</p>
+<br>
+<p>    CREATE VIEW compliance_dashboard AS</p>
+<br>
+<p>    SELECT </p>
+<br>
+<p>      framework,</p>
+<br>
+<p>      account_id,</p>
+<br>
+<p>      COUNT(*) as total_controls,</p>
+<br>
+<p>      SUM(CASE WHEN status = 'passed' THEN 1 ELSE 0 END) as passed,</p>
+<br>
+<p>      SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) as failed,</p>
+<br>
+<p>      ROUND(AVG(CASE WHEN status = 'passed' THEN 100.0 ELSE 0.0 END), 1) as score,</p>
+<br>
+<p>      MAX(checked_at) as last_checked</p>
+<br>
+<p>    FROM compliance_checks</p>
+<br>
+<p>    WHERE checked_at > NOW() - INTERVAL '24 hours'</p>
+<br>
+<p>    GROUP BY framework, account_id;</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
+<p>Automate compliance with CIS benchmark scanning, remediation, reporting, and monitoring. Start with critical controls and expand coverage gradually. Use infrastructure-as-code to enforce compliance at deploy time. Continuously monitor compliance posture and alert on drift. Automation turns compliance from a periodic burden into a continuous assurance program.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

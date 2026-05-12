@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1497",
+      "wordCount": "1716",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/redis-caching.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/redis-caching.html"},
+      "articleBody": "Redis Caching Patterns Redis as a Cache Redis is an in-memory data structure store that excels as a cache due to its sub-millisecond latency, rich data types, and built-in expiration. When used correctly, Redis can reduce database load by 90% or more while dramatically improving application response times. Data Structures Overview | Structure | Use Case | Example | |-----------|----------|---------| | String | Simple values, counters | User session, page views | | Hash | Object fields | User profile fields | | List | Ordered collection | Message queue, timeline | | Set | Unique values | Tags, followers | | Sorted Set | Ranked data | Leaderboard, rate limiting | | HyperLogLog | Cardinality estimation | Unique visitors | | Bitmap | Boolean flags | Daily active users | Caching Patterns Cache-Aside (Lazy Loading) The most common caching pattern. The application checks the cache first; on a miss, it loads data from the database and populates the cache. import redis import json r = redis.Redis(host='localhost', port=6379, decode_responses=True) def get_user(user_id): cache_key = f\"user:{user_id}\" # Try cache first cached = r.get(cache_key) if cached: return json.loads(cached) # Cache miss: load from database user = db.query(\"SELECT * FROM users WHERE id = %s\", [user_id]) if user: # Populate cache with TTL r.setex(cache_key, 3600, json.dumps(user)) return user **Pros**: Only caches data that is requested, resilient to cache failures. **Cons**: Cache miss penalty (three round trips), stale data until TTL expires. Write-Through Data is written to the cache first, then to the database. Reads always hit the cache. def update_user(user_id, data): cache_key = f\"user:{user_id}\" # Write to cache first r.setex(cache_key, 3600, json.dumps(data)) # Then write to database db.execute( \"UPDATE users SET name = %s, email = %s WHERE id = %s\", [data['name'], data['email'], user_id] ) **Pros**: Cache is always consistent with database writes. **Cons**: Write latency increases, cache stores data that may never be read. Write-Behind (Write-Back) Data is written to cache and asynchronously written to the database later. def write_behind(user_id, data): cache_key = f\"user:{user_id}\" # Write to cache immediately r.setex(cache_key, 3600, json.dumps(data)) # Queue database write for batch processing r.lpush(\"db:write:queue\", json.dumps({ \"table\": \"users\", \"id\": user_id, \"data\": data })) **Pros**: Very fast writes, can batch database operations. **Cons**: Risk of data loss if cache fails before database write. Cache Invalidation Strategies | Strategy | How It Works | Best For | |----------|-------------|----------| | TTL expiration | Automatic expiry after set time | Most applications | | Key deletion | Delete cache key on data update | Write-through | | Versioned keys | Include version in key name | Schema changes | | Pub/sub invalidation | Notify all instances to invalidate | Distributed caches | Advanced Patterns Distributed Locking def acquire_lock(lock_name, acquire_timeout=10): identifier = str(uuid.uuid4()) end = time.time() + acquire_timeout while time.time() if r.setnx(f\"lock:{lock_name}\", identifier): r.expire(f\"lock:{lock_name}\", 10) return identifier time.sleep(0.001) return None def release_lock(lock_name, identifier): # Use Lua script for atomic release script = \"\"\" if redis.call(\"get\", KEYS[1]) == ARGV[1] then return redis.call(\"del\", KEYS[1]) else return 0 end \"\"\" r.eval(script, 1, f\"lock:{lock_name}\", identifier) Rate Limiting with Sorted Sets def is_rate_limited(user_id, max_requests=100, window_seconds=60): key = f\"ratelimit:{user_id}\" now = time.time() # Remove old entries r.zremrangebyscore(key, 0, now - window_seconds) # Count current requests if r.zcard(key) >= max_requests: return True # Add current request r.zadd(key, {now: now}) r.expire(key, window_seconds) return False Session Storage # Store session with hash def create_session(session_id, user_data, ttl=86400): key = f\"session:{session_id}\" r.hset(key, mapping={ 'user_id': user_data['id'], 'username': user_data['username'], 'roles': json.dumps(user_data['roles']), 'ip': user_data['ip'], 'created_at': time.time() }) r.expire(key, ttl) def get_session(session_id): key = f\"session:{session_id}\" data = r.hgetall(key) if data: data['roles'] = json.loads(data['roles']) return data Performance Optimization Connection Pooling from redis.connection import ConnectionPool # Reuse connections across requests pool = ConnectionPool( host='localhost', port=6379, max_connections=50, socket_timeout=5 ) r = redis.Redis(connection_pool=pool) Pipeline / Batching # Batch operations to reduce round trips pipe = r.pipeline() for user_id in user_ids: pipe.get(f\"user:{user_id}\") results = pipe.execute() Monitoring # Redis CLI monitoring redis-cli info stats # Key metrics to watch # - hit_rate: keyspace_hits / (keyspace_hits + keyspace_misses) # - evicted_keys: keys evicted due to maxmemory # - maxmemory: configured memory limit # - connected_clients: active connections Common Pitfalls | Pitfall | Consequence | Fix | |---------|-------------|-----| | No TTL | Memory exhaustion | Always set TTL | | Cache stampede | Overload database on miss | Use mutex locking | | Too-large values | Memory waste, slow serialization | Compress or split | | Hot keys | Single key becomes bottleneck | Shard or replicate | | Cache-aside without TTL | Stale data lives forever | Always set TTL | Summary Redis caching can dramatically improve application performance when the right pattern is applied. Use cache-aside as the default pattern with appropriate TTLs, implement write-through for consistency-critical data, use distributed locking for race conditions, and sorted sets for rate limiting. Monitor hit rates and eviction counts, and always set TTLs to prevent memory exhaustion."
     }
     </script>
     <script type="application/ld+json">
@@ -73,353 +74,333 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Redis Caching Patterns</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Redis as a Cache</h2>
+      <div class="article-body"><h1>Redis Caching Patterns</h1>
 <br>
-<p>Redis is an in-memory data structure store that excels as a cache due to its sub-millisecond latency, rich data types, and built-in expiration. When used correctly, Redis can reduce database load by 90% or more while dramatically improving application response times.</p>
+<p>Redis as a Cache   </p>
+<p>Redis is an in-memory data structure store that excels as a cache due to its sub-millisecond latency, rich data types, and built-in expiration. When used correctly, Redis can reduce database load by 90% or more while dramatically improving application response times.   </p>
+<p>Data Structures Overview   </p>
+<p>| Structure | Use Case | Example | |-----------|----------|---------| | String | Simple values, counters | User session, page views | | Hash | Object fields | User profile fields | | List | Ordered collection | Message queue, timeline | | Set | Unique values | Tags, followers | | Sorted Set | Ranked data | Leaderboard, rate limiting | | HyperLogLog | Cardinality estimation | Unique visitors | | Bitmap | Boolean flags | Daily active users |   </p>
+<p>Caching Patterns   </p>
+<p>Cache-Aside (Lazy Loading)   </p>
+<p>The most common caching pattern. The application checks the cache first; on a miss, it loads data from the database and populates the cache.   </p>
 <br>
-<h2> Data Structures Overview</h2>
 <br>
-<p>| Structure | Use Case | Example |</p>
-<p>|-----------|----------|---------|</p>
-<p>| String | Simple values, counters | User session, page views |</p>
-<p>| Hash | Object fields | User profile fields |</p>
-<p>| List | Ordered collection | Message queue, timeline |</p>
-<p>| Set | Unique values | Tags, followers |</p>
-<p>| Sorted Set | Ranked data | Leaderboard, rate limiting |</p>
-<p>| HyperLogLog | Cardinality estimation | Unique visitors |</p>
-<p>| Bitmap | Boolean flags | Daily active users |</p>
 <br>
-<h2> Caching Patterns</h2>
+<p>    import redis</p>
 <br>
-<h3>Cache-Aside (Lazy Loading)</h3>
+<p>    import json</p>
 <br>
-<p>The most common caching pattern. The application checks the cache first; on a miss, it loads data from the database and populates the cache.</p>
 <br>
-<pre><code>
-import redis
-
-import json
-
-
-
-r = redis.Redis(host=&#x27;localhost&#x27;, port=6379, decode_responses=True)
-
-
-
-def get_user(user_id):
-
-    cache_key = f&quot;user:{user_id}&quot;
-
-
-
-    # Try cache first
-
-    cached = r.get(cache_key)
-
-    if cached:
-
-        return json.loads(cached)
-
-
-
-    # Cache miss: load from database
-
-    user = db.query(&quot;SELECT * FROM users WHERE id = %s&quot;, [user_id])
-
-
-
-    if user:
-
-        # Populate cache with TTL
-
-        r.setex(cache_key, 3600, json.dumps(user))
-
-
-
-    return user
-
-</code></pre>
 <br>
-<p>**Pros**: Only caches data that is requested, resilient to cache failures.</p>
-<p>**Cons**: Cache miss penalty (three round trips), stale data until TTL expires.</p>
+<p>    r = redis.Redis(host='localhost', port=6379, decode_responses=True)</p>
 <br>
-<h3>Write-Through</h3>
 <br>
-<p>Data is written to the cache first, then to the database. Reads always hit the cache.</p>
 <br>
-<pre><code>
-def update_user(user_id, data):
-
-    cache_key = f&quot;user:{user_id}&quot;
-
-
-
-    # Write to cache first
-
-    r.setex(cache_key, 3600, json.dumps(data))
-
-
-
-    # Then write to database
-
-    db.execute(
-
-        &quot;UPDATE users SET name = %s, email = %s WHERE id = %s&quot;,
-
-        [data[&#x27;name&#x27;], data[&#x27;email&#x27;], user_id]
-
-    )
-
-</code></pre>
+<p>    def get_user(user_id):</p>
 <br>
-<p>**Pros**: Cache is always consistent with database writes.</p>
-<p>**Cons**: Write latency increases, cache stores data that may never be read.</p>
+<p>        cache_key = f"user:{user_id}"</p>
 <br>
-<h3>Write-Behind (Write-Back)</h3>
 <br>
-<p>Data is written to cache and asynchronously written to the database later.</p>
 <br>
-<pre><code>
-def write_behind(user_id, data):
-
-    cache_key = f&quot;user:{user_id}&quot;
-
-
-
-    # Write to cache immediately
-
-    r.setex(cache_key, 3600, json.dumps(data))
-
-
-
-    # Queue database write for batch processing
-
-    r.lpush(&quot;db:write:queue&quot;, json.dumps({
-
-        &quot;table&quot;: &quot;users&quot;,
-
-        &quot;id&quot;: user_id,
-
-        &quot;data&quot;: data
-
-    }))
-
-</code></pre>
+<p>        # Try cache first</p>
 <br>
-<p>**Pros**: Very fast writes, can batch database operations.</p>
-<p>**Cons**: Risk of data loss if cache fails before database write.</p>
+<p>        cached = r.get(cache_key)</p>
 <br>
-<h2> Cache Invalidation Strategies</h2>
+<p>        if cached:</p>
 <br>
-<p>| Strategy | How It Works | Best For |</p>
-<p>|----------|-------------|----------|</p>
-<p>| TTL expiration | Automatic expiry after set time | Most applications |</p>
-<p>| Key deletion | Delete cache key on data update | Write-through |</p>
-<p>| Versioned keys | Include version in key name | Schema changes |</p>
-<p>| Pub/sub invalidation | Notify all instances to invalidate | Distributed caches |</p>
+<p>            return json.loads(cached)</p>
 <br>
-<h2> Advanced Patterns</h2>
 <br>
-<h3>Distributed Locking</h3>
 <br>
-<pre><code>
-def acquire_lock(lock_name, acquire_timeout=10):
-
-    identifier = str(uuid.uuid4())
-
-    end = time.time() + acquire_timeout
-
-
-
-    while time.time() &lt; end:
-
-        if r.setnx(f&quot;lock:{lock_name}&quot;, identifier):
-
-            r.expire(f&quot;lock:{lock_name}&quot;, 10)
-
-            return identifier
-
-        time.sleep(0.001)
-
-
-
-    return None
-
-
-
-def release_lock(lock_name, identifier):
-
-    # Use Lua script for atomic release
-
-    script = &quot;&quot;&quot;
-
-    if redis.call(&quot;get&quot;, KEYS[1]) == ARGV[1] then
-
-        return redis.call(&quot;del&quot;, KEYS[1])
-
-    else
-
-        return 0
-
-    end
-
-    &quot;&quot;&quot;
-
-    r.eval(script, 1, f&quot;lock:{lock_name}&quot;, identifier)
-
-</code></pre>
+<p>        # Cache miss: load from database</p>
 <br>
-<h3>Rate Limiting with Sorted Sets</h3>
+<p>        user = db.query("SELECT * FROM users WHERE id = %s", [user_id])</p>
 <br>
-<pre><code>
-def is_rate_limited(user_id, max_requests=100, window_seconds=60):
-
-    key = f&quot;ratelimit:{user_id}&quot;
-
-    now = time.time()
-
-
-
-    # Remove old entries
-
-    r.zremrangebyscore(key, 0, now - window_seconds)
-
-
-
-    # Count current requests
-
-    if r.zcard(key) &gt;= max_requests:
-
-        return True
-
-
-
-    # Add current request
-
-    r.zadd(key, {now: now})
-
-    r.expire(key, window_seconds)
-
-    return False
-
-</code></pre>
 <br>
-<h3>Session Storage</h3>
 <br>
-<pre><code>
-# Store session with hash
-
-def create_session(session_id, user_data, ttl=86400):
-
-    key = f&quot;session:{session_id}&quot;
-
-    r.hset(key, mapping={
-
-        &#x27;user_id&#x27;: user_data[&#x27;id&#x27;],
-
-        &#x27;username&#x27;: user_data[&#x27;username&#x27;],
-
-        &#x27;roles&#x27;: json.dumps(user_data[&#x27;roles&#x27;]),
-
-        &#x27;ip&#x27;: user_data[&#x27;ip&#x27;],
-
-        &#x27;created_at&#x27;: time.time()
-
-    })
-
-    r.expire(key, ttl)
-
-
-
-def get_session(session_id):
-
-    key = f&quot;session:{session_id}&quot;
-
-    data = r.hgetall(key)
-
-    if data:
-
-        data[&#x27;roles&#x27;] = json.loads(data[&#x27;roles&#x27;])
-
-    return data
-
-</code></pre>
+<p>        if user:</p>
 <br>
-<h2> Performance Optimization</h2>
+<p>            # Populate cache with TTL</p>
 <br>
-<h3>Connection Pooling</h3>
+<p>            r.setex(cache_key, 3600, json.dumps(user))</p>
 <br>
-<pre><code>
-from redis.connection import ConnectionPool
-
-
-
-# Reuse connections across requests
-
-pool = ConnectionPool(
-
-    host=&#x27;localhost&#x27;,
-
-    port=6379,
-
-    max_connections=50,
-
-    socket_timeout=5
-
-)
-
-r = redis.Redis(connection_pool=pool)
-
-</code></pre>
 <br>
-<h3>Pipeline / Batching</h3>
 <br>
-<pre><code>
-# Batch operations to reduce round trips
-
-pipe = r.pipeline()
-
-for user_id in user_ids:
-
-    pipe.get(f&quot;user:{user_id}&quot;)
-
-results = pipe.execute()
-
-</code></pre>
+<p>        return user</p>
 <br>
-<h2> Monitoring</h2>
 <br>
-<pre><code>
-# Redis CLI monitoring
-
-redis-cli info stats
-
-
-
-# Key metrics to watch
-
-# - hit_rate: keyspace_hits / (keyspace_hits + keyspace_misses)
-
-# - evicted_keys: keys evicted due to maxmemory
-
-# - maxmemory: configured memory limit
-
-# - connected_clients: active connections
-
-</code></pre>
 <br>
-<h2> Common Pitfalls</h2>
 <br>
-<p>| Pitfall | Consequence | Fix |</p>
-<p>|---------|-------------|-----|</p>
-<p>| No TTL | Memory exhaustion | Always set TTL |</p>
-<p>| Cache stampede | Overload database on miss | Use mutex locking |</p>
-<p>| Too-large values | Memory waste, slow serialization | Compress or split |</p>
-<p>| Hot keys | Single key becomes bottleneck | Shard or replicate |</p>
-<p>| Cache-aside without TTL | Stale data lives forever | Always set TTL |</p>
+<p>**Pros**: Only caches data that is requested, resilient to cache failures. **Cons**: Cache miss penalty (three round trips), stale data until TTL expires.   </p>
+<p>Write-Through   </p>
+<p>Data is written to the cache first, then to the database. Reads always hit the cache.   </p>
 <br>
-<h2> Summary</h2>
 <br>
+<br>
+<p>    def update_user(user_id, data):</p>
+<br>
+<p>        cache_key = f"user:{user_id}"</p>
+<br>
+<br>
+<br>
+<p>        # Write to cache first</p>
+<br>
+<p>        r.setex(cache_key, 3600, json.dumps(data))</p>
+<br>
+<br>
+<br>
+<p>        # Then write to database</p>
+<br>
+<p>        db.execute(</p>
+<br>
+<p>            "UPDATE users SET name = %s, email = %s WHERE id = %s",</p>
+<br>
+<p>            [data['name'], data['email'], user_id]</p>
+<br>
+<p>        )</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Pros**: Cache is always consistent with database writes. **Cons**: Write latency increases, cache stores data that may never be read.   </p>
+<p>Write-Behind (Write-Back)   </p>
+<p>Data is written to cache and asynchronously written to the database later.   </p>
+<br>
+<br>
+<br>
+<p>    def write_behind(user_id, data):</p>
+<br>
+<p>        cache_key = f"user:{user_id}"</p>
+<br>
+<br>
+<br>
+<p>        # Write to cache immediately</p>
+<br>
+<p>        r.setex(cache_key, 3600, json.dumps(data))</p>
+<br>
+<br>
+<br>
+<p>        # Queue database write for batch processing</p>
+<br>
+<p>        r.lpush("db:write:queue", json.dumps({</p>
+<br>
+<p>            "table": "users",</p>
+<br>
+<p>            "id": user_id,</p>
+<br>
+<p>            "data": data</p>
+<br>
+<p>        }))</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Pros**: Very fast writes, can batch database operations. **Cons**: Risk of data loss if cache fails before database write.   </p>
+<p>Cache Invalidation Strategies   </p>
+<p>| Strategy | How It Works | Best For | |----------|-------------|----------| | TTL expiration | Automatic expiry after set time | Most applications | | Key deletion | Delete cache key on data update | Write-through | | Versioned keys | Include version in key name | Schema changes | | Pub/sub invalidation | Notify all instances to invalidate | Distributed caches |   </p>
+<p>Advanced Patterns   </p>
+<p>Distributed Locking   </p>
+<br>
+<br>
+<br>
+<p>    def acquire_lock(lock_name, acquire_timeout=10):</p>
+<br>
+<p>        identifier = str(uuid.uuid4())</p>
+<br>
+<p>        end = time.time() + acquire_timeout</p>
+<br>
+<br>
+<br>
+<p>        while time.time() < end:</p>
+<br>
+<p>            if r.setnx(f"lock:{lock_name}", identifier):</p>
+<br>
+<p>                r.expire(f"lock:{lock_name}", 10)</p>
+<br>
+<p>                return identifier</p>
+<br>
+<p>            time.sleep(0.001)</p>
+<br>
+<br>
+<br>
+<p>        return None</p>
+<br>
+<br>
+<br>
+<p>    def release_lock(lock_name, identifier):</p>
+<br>
+<p>        # Use Lua script for atomic release</p>
+<br>
+<p>        script = """</p>
+<br>
+<p>        if redis.call("get", KEYS[1]) == ARGV[1] then</p>
+<br>
+<p>            return redis.call("del", KEYS[1])</p>
+<br>
+<p>        else</p>
+<br>
+<p>            return 0</p>
+<br>
+<p>        end</p>
+<br>
+<p>        """</p>
+<br>
+<p>        r.eval(script, 1, f"lock:{lock_name}", identifier)</p>
+<br>
+<br>
+<br>
+<br>
+<p>Rate Limiting with Sorted Sets   </p>
+<br>
+<br>
+<br>
+<p>    def is_rate_limited(user_id, max_requests=100, window_seconds=60):</p>
+<br>
+<p>        key = f"ratelimit:{user_id}"</p>
+<br>
+<p>        now = time.time()</p>
+<br>
+<br>
+<br>
+<p>        # Remove old entries</p>
+<br>
+<p>        r.zremrangebyscore(key, 0, now - window_seconds)</p>
+<br>
+<br>
+<br>
+<p>        # Count current requests</p>
+<br>
+<p>        if r.zcard(key) >= max_requests:</p>
+<br>
+<p>            return True</p>
+<br>
+<br>
+<br>
+<p>        # Add current request</p>
+<br>
+<p>        r.zadd(key, {now: now})</p>
+<br>
+<p>        r.expire(key, window_seconds)</p>
+<br>
+<p>        return False</p>
+<br>
+<br>
+<br>
+<br>
+<p>Session Storage   </p>
+<br>
+<br>
+<br>
+<p>    # Store session with hash</p>
+<br>
+<p>    def create_session(session_id, user_data, ttl=86400):</p>
+<br>
+<p>        key = f"session:{session_id}"</p>
+<br>
+<p>        r.hset(key, mapping={</p>
+<br>
+<p>            'user_id': user_data['id'],</p>
+<br>
+<p>            'username': user_data['username'],</p>
+<br>
+<p>            'roles': json.dumps(user_data['roles']),</p>
+<br>
+<p>            'ip': user_data['ip'],</p>
+<br>
+<p>            'created_at': time.time()</p>
+<br>
+<p>        })</p>
+<br>
+<p>        r.expire(key, ttl)</p>
+<br>
+<br>
+<br>
+<p>    def get_session(session_id):</p>
+<br>
+<p>        key = f"session:{session_id}"</p>
+<br>
+<p>        data = r.hgetall(key)</p>
+<br>
+<p>        if data:</p>
+<br>
+<p>            data['roles'] = json.loads(data['roles'])</p>
+<br>
+<p>        return data</p>
+<br>
+<br>
+<br>
+<br>
+<p>Performance Optimization   </p>
+<p>Connection Pooling   </p>
+<br>
+<br>
+<br>
+<p>    from redis.connection import ConnectionPool</p>
+<br>
+<br>
+<br>
+<p>    # Reuse connections across requests</p>
+<br>
+<p>    pool = ConnectionPool(</p>
+<br>
+<p>        host='localhost',</p>
+<br>
+<p>        port=6379,</p>
+<br>
+<p>        max_connections=50,</p>
+<br>
+<p>        socket_timeout=5</p>
+<br>
+<p>    )</p>
+<br>
+<p>    r = redis.Redis(connection_pool=pool)</p>
+<br>
+<br>
+<br>
+<br>
+<p>Pipeline / Batching   </p>
+<br>
+<br>
+<br>
+<p>    # Batch operations to reduce round trips</p>
+<br>
+<p>    pipe = r.pipeline()</p>
+<br>
+<p>    for user_id in user_ids:</p>
+<br>
+<p>        pipe.get(f"user:{user_id}")</p>
+<br>
+<p>    results = pipe.execute()</p>
+<br>
+<br>
+<br>
+<br>
+<p>Monitoring   </p>
+<br>
+<br>
+<br>
+<p>    # Redis CLI monitoring</p>
+<br>
+<p>    redis-cli info stats</p>
+<br>
+<br>
+<br>
+<p>    # Key metrics to watch</p>
+<br>
+<p>    # - hit_rate: keyspace_hits / (keyspace_hits + keyspace_misses)</p>
+<br>
+<p>    # - evicted_keys: keys evicted due to maxmemory</p>
+<br>
+<p>    # - maxmemory: configured memory limit</p>
+<br>
+<p>    # - connected_clients: active connections</p>
+<br>
+<br>
+<br>
+<br>
+<p>Common Pitfalls   </p>
+<p>| Pitfall | Consequence | Fix | |---------|-------------|-----| | No TTL | Memory exhaustion | Always set TTL | | Cache stampede | Overload database on miss | Use mutex locking | | Too-large values | Memory waste, slow serialization | Compress or split | | Hot keys | Single key becomes bottleneck | Shard or replicate | | Cache-aside without TTL | Stale data lives forever | Always set TTL |   </p>
+<p>Summary   </p>
 <p>Redis caching can dramatically improve application performance when the right pattern is applied. Use cache-aside as the default pattern with appropriate TTLs, implement write-through for consistency-critical data, use distributed locking for race conditions, and sorted sets for rate limiting. Monitor hit rates and eviction counts, and always set TTLs to prevent memory exhaustion.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

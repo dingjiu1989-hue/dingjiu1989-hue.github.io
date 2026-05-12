@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="typescript-advanced-types">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Advanced TypeScript Types for Better Code">
+    <meta property="og:description" content="Master advanced TypeScript types: generics, conditional types, mapped types, template literals, and utility types.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/typescript-advanced-types.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Advanced TypeScript Types for Better Code">
+    <meta name="twitter:description" content="Master advanced TypeScript types: generics, conditional types, mapped types, template literals, and utility types.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Advanced TypeScript Types for Better Code — SourceHub</title>
+    <meta name="description" content="Master advanced TypeScript types: generics, conditional types, mapped types, template literals, and utility types.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/typescript-advanced-types.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/typescript-advanced-types.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Advanced TypeScript Types for Better Code",
+      "description": "Master advanced TypeScript types: generics, conditional types, mapped types, template literals, and utility types.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "482",
+      "keywords": "Technology, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/typescript-advanced-types.html"},
+      "articleBody": "Advanced TypeScript Types for Better Code TypeScript's type system goes far beyond basic interfaces and enums. Advanced types catch more bugs, reduce boilerplate, and document code more precisely. Generics Generics parameterize types. A generic function works with any type while maintaining type safety. Type parameters infer from usage\u2014explicit annotation is often unnecessary. Constrain type parameters with extends to limit acceptable types. Generic constraints with keyof access the keys of an object type. T[K] (indexed access) retrieves the type of property K in type T. This enables type-safe property access and transformation functions. Conditional Types Conditional types select types based on conditions: T extends U ? X : Y. They are TypeScript's equivalent of ternary expressions at the type level. Nested conditionals handle multiple branches. The infer keyword extracts types from within other types. ReturnType uses infer to extract the return type of a function type. Template literal types with infer parse string patterns at the type level. Mapped Types Mapped types transform object types by mapping over keys: { [K in keyof T]: NewType }. Readonly, Partial, and Pick are built-in mapped types. Custom mapped types implement selective transformations. Key remapping with as creates mapped types that rename keys. Filter keys with as and a conditional type. These patterns implement advanced utilities like Omit, Extract, and Exclude. Template Literal Types Template literal types construct string types at the type level: `${prefix}${suffix}`. They combine with union types to generate all possible string patterns. Use with infer to parse URL patterns, routes, and string-based protocols. Practical Usage Use branded types for type-safe IDs (type UserId = string & {__brand: 'UserId'}). Use discriminated unions with switch-case exhaustiveness checking. Use satisfies keyword for type validation without widening. Utility Types Learn built-in utility types: Partial, Required, Readonly, Record, Pick, Omit, Exclude, Extract, NonNullable, ReturnType, InstanceType, Parameters, Awaited. Combine them for complex type transformations without custom type definitions."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Advanced TypeScript Types for Better Code"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Advanced TypeScript Types for Better Code
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Advanced TypeScript Types for Better Code</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Advanced TypeScript Types for Better Code</h1>
+<p>TypeScript's type system goes far beyond basic interfaces and enums. Advanced types catch more bugs, reduce boilerplate, and document code more precisely.</p>
+<br>
+<h2> Generics</h2>
+<br>
+<p>Generics parameterize types. A generic function works with any type while maintaining type safety. Type parameters infer from usage—explicit annotation is often unnecessary. Constrain type parameters with extends to limit acceptable types.</p>
+<br>
+<p>Generic constraints with keyof access the keys of an object type. T[K] (indexed access) retrieves the type of property K in type T. This enables type-safe property access and transformation functions.</p>
+<br>
+<h2> Conditional Types</h2>
+<br>
+<p>Conditional types select types based on conditions: T extends U ? X : Y. They are TypeScript's equivalent of ternary expressions at the type level. Nested conditionals handle multiple branches.</p>
+<br>
+<p>The infer keyword extracts types from within other types. ReturnType<T> uses infer to extract the return type of a function type. Template literal types with infer parse string patterns at the type level.</p>
+<br>
+<h2> Mapped Types</h2>
+<br>
+<p>Mapped types transform object types by mapping over keys: { [K in keyof T]: NewType }. Readonly<T>, Partial<T>, and Pick<T, K> are built-in mapped types. Custom mapped types implement selective transformations.</p>
+<br>
+<p>Key remapping with as creates mapped types that rename keys. Filter keys with as and a conditional type. These patterns implement advanced utilities like Omit, Extract, and Exclude.</p>
+<br>
+<h2> Template Literal Types</h2>
+<br>
+<p>Template literal types construct string types at the type level: `${prefix}${suffix}`. They combine with union types to generate all possible string patterns. Use with infer to parse URL patterns, routes, and string-based protocols.</p>
+<br>
+<h2> Practical Usage</h2>
+<br>
+<p>Use branded types for type-safe IDs (type UserId = string & {__brand: 'UserId'}). Use discriminated unions with switch-case exhaustiveness checking. Use satisfies keyword for type validation without widening.</p>
+<br>
+<h2> Utility Types</h2>
+<br>
+<p>Learn built-in utility types: Partial, Required, Readonly, Record, Pick, Omit, Exclude, Extract, NonNullable, ReturnType, InstanceType, Parameters, Awaited. Combine them for complex type transformations without custom type definitions.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

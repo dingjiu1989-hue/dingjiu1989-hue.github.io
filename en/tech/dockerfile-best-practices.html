@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="dockerfile-best-practices">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Dockerfile Best Practices for Production">
+    <meta property="og:description" content="Optimize Dockerfiles for production: multi-stage builds, layer caching, security scanning, and minimal images.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/dockerfile-best-practices.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dockerfile Best Practices for Production">
+    <meta name="twitter:description" content="Optimize Dockerfiles for production: multi-stage builds, layer caching, security scanning, and minimal images.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Dockerfile Best Practices for Production — SourceHub</title>
+    <meta name="description" content="Optimize Dockerfiles for production: multi-stage builds, layer caching, security scanning, and minimal images.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/dockerfile-best-practices.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/dockerfile-best-practices.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Dockerfile Best Practices for Production",
+      "description": "Optimize Dockerfiles for production: multi-stage builds, layer caching, security scanning, and minimal images.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "467",
+      "keywords": "Technology, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/dockerfile-best-practices.html"},
+      "articleBody": "Dockerfile Best Practices for Production Writing efficient Dockerfiles reduces image size, improves build speed, and enhances security. These best practices apply to production container builds. Multi-Stage Builds Multi-stage builds separate build and runtime environments. Use one stage with all build tools (compilers, package managers) and a second minimal stage for the runtime. The resulting image contains only the application binary and its runtime dependencies. Multi-stage builds dramatically reduce image size. A Go application might go from 1GB (with golang:1.21) to 20MB (with scratch). Python applications benefit from using slim base images in final stages. Layer Caching Each Dockerfile instruction creates a cacheable layer. Order instructions from least to most frequently changing. Install system packages first, copy dependency manifests (package.json, requirements.txt), run package install, then copy application code. This ordering means rebuilding after code changes only invalidates layers from the COPY instruction onward. Dependency installation (the slowest step) uses the cache. Security Best Practices Run containers as non-root users. Create a user in the Dockerfile and switch with USER directive. Never run containers as root\u2014container escape vulnerabilities grant root access to the host. Use specific base image tags, not latest. Pin versions like python:3.12-slim instead of python:latest. Scan images for vulnerabilities with Docker Scout, Trivy, or Snyk. Remove package manager cache files in the same RUN instruction. Minimal Images Use distroless or Alpine base images. Distroless images contain only the application and runtime libraries\u2014no shell, package manager, or utilities. This reduces attack surface and image size. Alpine-based images are small (5MB base) but use musl libc instead of glibc. Test thoroughly\u2014some Python packages have musl compatibility issues. Dockerignore Use .dockerignore to exclude unnecessary files from the build context. Exclude .git, node_modules, tests, documentation, and CI configuration. Smaller build contexts mean faster builds, especially in CI environments."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Dockerfile Best Practices for Production"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Dockerfile Best Practices for Production
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Dockerfile Best Practices for Production</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Dockerfile Best Practices for Production</h1>
+<p>Writing efficient Dockerfiles reduces image size, improves build speed, and enhances security. These best practices apply to production container builds.</p>
+<br>
+<h2> Multi-Stage Builds</h2>
+<br>
+<p>Multi-stage builds separate build and runtime environments. Use one stage with all build tools (compilers, package managers) and a second minimal stage for the runtime. The resulting image contains only the application binary and its runtime dependencies.</p>
+<br>
+<p>Multi-stage builds dramatically reduce image size. A Go application might go from 1GB (with golang:1.21) to 20MB (with scratch). Python applications benefit from using slim base images in final stages.</p>
+<br>
+<h2> Layer Caching</h2>
+<br>
+<p>Each Dockerfile instruction creates a cacheable layer. Order instructions from least to most frequently changing. Install system packages first, copy dependency manifests (package.json, requirements.txt), run package install, then copy application code.</p>
+<br>
+<p>This ordering means rebuilding after code changes only invalidates layers from the COPY instruction onward. Dependency installation (the slowest step) uses the cache.</p>
+<br>
+<h2> Security Best Practices</h2>
+<br>
+<p>Run containers as non-root users. Create a user in the Dockerfile and switch with USER directive. Never run containers as root—container escape vulnerabilities grant root access to the host.</p>
+<br>
+<p>Use specific base image tags, not latest. Pin versions like python:3.12-slim instead of python:latest. Scan images for vulnerabilities with Docker Scout, Trivy, or Snyk. Remove package manager cache files in the same RUN instruction.</p>
+<br>
+<h2> Minimal Images</h2>
+<br>
+<p>Use distroless or Alpine base images. Distroless images contain only the application and runtime libraries—no shell, package manager, or utilities. This reduces attack surface and image size.</p>
+<br>
+<p>Alpine-based images are small (5MB base) but use musl libc instead of glibc. Test thoroughly—some Python packages have musl compatibility issues.</p>
+<br>
+<h2> Dockerignore</h2>
+<br>
+<p>Use .dockerignore to exclude unnecessary files from the build context. Exclude .git, node_modules, tests, documentation, and CI configuration. Smaller build contexts mean faster builds, especially in CI environments.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

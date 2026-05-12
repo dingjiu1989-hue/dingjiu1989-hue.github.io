@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1942",
+      "wordCount": "2246",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/identity-management.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/identity-management.html"},
+      "articleBody": "Identity and Access Management (IAM) Guide Identity and Access Management (IAM) is the discipline of ensuring the right people have access to the right resources at the right time for the right reasons. Poor IAM is the leading cause of data breaches. This guide covers modern IAM concepts including SSO, SAML, OIDC, SCIM, just-in-time access, and access reviews. Single Sign-On (SSO) SSO allows users to authenticate once and gain access to multiple applications without re-entering credentials. It improves both security and user experience. How SSO Works An SSO system has three components: * **Identity Provider (IdP)**: The authoritative source for user identities. Examples: Okta, Azure AD, Keycloak, Google Workspace. 2\\. **Service Provider (SP)**: The application the user wants to access. 3\\. **User Agent**: Typically a web browser. When a user accesses an SP, the SP redirects them to the IdP for authentication. The IdP authenticates the user and issues a token. The SP validates the token and grants access. Benefits of SSO * Users manage one password instead of dozens. * Password policies (complexity, rotation) are enforced centrally. * Account lockout and deactivation propagate instantly across all applications. * Failed login attempts are tracked in one place. SAML 2.0 Security Assertion Markup Language (SAML) 2.0 is an XML-based protocol for exchanging authentication and authorization data between IdPs and SPs. SAML Flow * User attempts to access an SP resource. 2\\. SP generates a SAML authentication request and redirects the user to the IdP. 3\\. IdP authenticates the user (via password, MFA, or other method). 4\\. IdP generates a SAML assertion containing user attributes (username, email, groups) and signs it with its private key. 5\\. User is redirected back to the SP with the SAML assertion. 6\\. SP validates the signature, extracts attributes, and creates a session. ID=\"_12345\" IssueInstant=\"2026-05-12T10:00:00Z\"> https://idp.example.com/metadata ... user@example.com user@example.com engineering SAML is widely used in enterprise environments for web application SSO. Its XML-based nature makes it verbose, but it remains the standard for many SaaS applications and federated identity scenarios. OpenID Connect (OIDC) OIDC is a modern authentication protocol built on top of OAuth 2.0. It is the preferred protocol for newer applications, particularly in cloud-native environments. OIDC vs SAML * OIDC uses JSON (JWT tokens) rather than XML. Tokens are smaller and easier to parse. * OIDC is designed for modern web and mobile applications, including SPAs and native apps. * OIDC provides the `id_token` (authentication) alongside the OAuth `access_token` (authorization). * OIDC is the default for cloud provider IAM roles, Kubernetes authentication, and serverless applications. OIDC Flow # Python example: OIDC authentication request import requests # Step 1: Redirect user to IdP authorization endpoint auth_url = \"https://idp.example.com/authorize\" params = { \"response_type\": \"code\", \"client_id\": \"my-app\", \"redirect_uri\": \"https://my-app.example.com/callback\", \"scope\": \"openid profile email\", \"state\": \"random-state-value\" } # User is redirected to: auth_url?response_type=code&client_id=... # Step 2: Exchange authorization code for tokens token_url = \"https://idp.example.com/token\" response = requests.post(token_url, data={ \"grant_type\": \"authorization_code\", \"code\": \"authorization-code-from-callback\", \"redirect_uri\": \"https://my-app.example.com/callback\", \"client_id\": \"my-app\", \"client_secret\": \"my-secret\" }) tokens = response.json() # tokens contains: access_token, id_token, refresh_token OIDC in Cloud Infrastructure Cloud providers use OIDC for workload identity. A service running in AWS can get an OIDC token from the AWS metadata endpoint and use it to authenticate to external services. # GitHub Actions OIDC with AWS name: Deploy permissions: id-token: write contents: read jobs: deploy: runs-on: ubuntu-latest steps: - uses: actions/checkout@v4 - uses: aws-actions/configure-aws-credentials@v4 with: role-to-assume: arn:aws:iam::123456789:role/github-actions-role aws-region: us-east-1 - run: aws s3 sync ./dist s3://my-bucket SCIM Provisioning System for Cross-domain Identity Management (SCIM) is a standard for automating user provisioning and deprovisioning between identity domains. How SCIM Works SCIM exposes RESTful endpoints for creating, reading, updating, and deleting user accounts and groups. An IdP like Okta or Azure AD connects to an SCIM endpoint to synchronize users automatically. // SCIM Create User Request POST /scim/v2/Users Content-Type: application/scim+json { \"schemas\": [\"urn:ietf:params:scim:schemas:core:2.0:User\"], \"userName\": \"jdoe@example.com\", \"name\": { \"givenName\": \"John\", \"familyName\": \"Doe\" }, \"emails\": [ { \"value\": \"jdoe@example.com\", \"type\": \"work\", \"primary\": true } ], \"active\": true } SCIM ensures that when an employee leaves the company, their access is automatically revoked across all SCIM-integrated applications within minutes. Just-in-Time (JIT) Access JIT access grants elevated permissions only when needed, for a limited duration. It replaces standing privileges that attackers can exploit. Implementation JIT access typically requires: * A request with a business justification. 2\\. Approval from a manager or ticket system. 3\\. Automatic expiration after the approved window. 4\\. Full audit logging of the elevation. # Example: PagerDuty JIT access request def request_jit_access(resource, duration_minutes=60, reason=\"\"): approval = submit_approval_request( requester=get_current_user(), resource=resource, reason=reason, approver=resource_manager ) if approval.status == \"approved\": grant_temporary_role( user=get_current_user(), role=f\"admin-{resource}\", ttl=duration_minutes ) return f\"Access to {resource} granted until T+{duration_minutes}m\" raise PermissionError(\"Access request denied\") JIT access is critical for protecting sensitive systems like production databases, cloud admin consoles, and CI/CD deployment pipelines. Access Reviews Access reviews are periodic audits of who has access to what. They are required by compliance frameworks (SOC 2, SOX) and are essential for preventing privilege creep. Best Practices * Conduct access reviews every quarter for critical systems, annually for low-risk systems. * Automate the review process using your IdP or dedicated tools. * Focus on active users; disable accounts for users who have not logged in for 90 days. * Review group memberships, not just individual permissions. * Require managers to certify their direct reports' access. * Document all review outcomes for audit purposes. # Automated access review report def generate_access_review(): users = list_all_users() report = [] for user in users: if user.last_login report.append({ \"user\": user.email, \"status\": \"suggest_disable\", \"reason\": \"No login in 90 days\", \"groups\": user.groups }) return report Conclusion Modern IAM requires SSO for user convenience, SAML or OIDC for protocol support, SCIM for automated provisioning, JIT access for privilege management, and regular access reviews to prevent creep. The goal is simple: every access decision should be intentional, verifiable, and timely."
     }
     </script>
     <script type="application/ld+json">
@@ -73,330 +74,460 @@
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">Identity and Access Management (IAM) Guide</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
-      <div class="article-body"><p>Identity and Access Management (IAM) is the discipline of ensuring the right people have access to the right resources at the right time for the right reasons. Poor IAM is the leading cause of data breaches. This guide covers modern IAM concepts including SSO, SAML, OIDC, SCIM, just-in-time access, and access reviews.</p>
+      <div class="article-body"><h1>Identity and Access Management (IAM) Guide</h1>
 <br>
-<h2> Single Sign-On (SSO)</h2>
+<p>Identity and Access Management (IAM) is the discipline of ensuring the right people have access to the right resources at the right time for the right reasons. Poor IAM is the leading cause of data breaches. This guide covers modern IAM concepts including SSO, SAML, OIDC, SCIM, just-in-time access, and access reviews.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Single Sign-On (SSO)</h2>
+<br>
+<br>
+<br>
 <br>
 <p>SSO allows users to authenticate once and gain access to multiple applications without re-entering credentials. It improves both security and user experience.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>How SSO Works</h3>
 <br>
+<br>
+<br>
+<br>
 <p>An SSO system has three components:</p>
-<li>**Identity Provider (IdP)**: The authoritative source for user identities. Examples: Okta, Azure AD, Keycloak, Google Workspace.</li>
-<p>2. **Service Provider (SP)**: The application the user wants to access.</p>
-<p>3. **User Agent**: Typically a web browser.</p>
+<br>
+<p>* **Identity Provider (IdP)**: The authoritative source for user identities. Examples: Okta, Azure AD, Keycloak, Google Workspace.</p>
+<br>
+<p>2\. **Service Provider (SP)**: The application the user wants to access.</p>
+<br>
+<p>3\. **User Agent**: Typically a web browser.</p>
+<br>
+<br>
+<br>
 <br>
 <p>When a user accesses an SP, the SP redirects them to the IdP for authentication. The IdP authenticates the user and issues a token. The SP validates the token and grants access.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Benefits of SSO</h3>
 <br>
-<li>Users manage one password instead of dozens.</li>
-<li>Password policies (complexity, rotation) are enforced centrally.</li>
-<li>Account lockout and deactivation propagate instantly across all applications.</li>
-<li>Failed login attempts are tracked in one place.</li>
 <br>
-<h2> SAML 2.0</h2>
+<br>
+<p>* Users manage one password instead of dozens.</p>
+<p>* Password policies (complexity, rotation) are enforced centrally.</p>
+<p>* Account lockout and deactivation propagate instantly across all applications.</p>
+<p>* Failed login attempts are tracked in one place.</p>
+<br>
+<br>
+<br>
+<h2>  SAML 2.0</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Security Assertion Markup Language (SAML) 2.0 is an XML-based protocol for exchanging authentication and authorization data between IdPs and SPs.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>SAML Flow</h3>
 <br>
-<li>User attempts to access an SP resource.</li>
-<p>2. SP generates a SAML authentication request and redirects the user to the IdP.</p>
-<p>3. IdP authenticates the user (via password, MFA, or other method).</p>
-<p>4. IdP generates a SAML assertion containing user attributes (username, email, groups) and signs it with its private key.</p>
-<p>5. User is redirected back to the SP with the SAML assertion.</p>
-<p>6. SP validates the signature, extracts attributes, and creates a session.</p>
 <br>
-<pre><code>
-&lt;!-- SAML Assertion (simplified) --&gt;
-
-&lt;saml:Assertion xmlns:saml=&quot;urn:oasis:names:tc:SAML:2.0:assertion&quot;
-
-                ID=&quot;_12345&quot; IssueInstant=&quot;2026-05-12T10:00:00Z&quot;&gt;
-
-  &lt;saml:Issuer&gt;https://idp.example.com/metadata&lt;/saml:Issuer&gt;
-
-  &lt;ds:Signature&gt;...&lt;/ds:Signature&gt;
-
-  &lt;saml:Subject&gt;
-
-    &lt;saml:NameID&gt;user@example.com&lt;/saml:NameID&gt;
-
-  &lt;/saml:Subject&gt;
-
-  &lt;saml:AttributeStatement&gt;
-
-    &lt;saml:Attribute Name=&quot;email&quot;&gt;
-
-      &lt;saml:AttributeValue&gt;user@example.com&lt;/saml:AttributeValue&gt;
-
-    &lt;/saml:Attribute&gt;
-
-    &lt;saml:Attribute Name=&quot;groups&quot;&gt;
-
-      &lt;saml:AttributeValue&gt;engineering&lt;/saml:AttributeValue&gt;
-
-    &lt;/saml:Attribute&gt;
-
-  &lt;/saml:AttributeStatement&gt;
-
-&lt;/saml:Assertion&gt;
-
-</code></pre>
+<br>
+<p>* User attempts to access an SP resource.</p>
+<br>
+<p>2\. SP generates a SAML authentication request and redirects the user to the IdP.</p>
+<br>
+<p>3\. IdP authenticates the user (via password, MFA, or other method).</p>
+<br>
+<p>4\. IdP generates a SAML assertion containing user attributes (username, email, groups) and signs it with its private key.</p>
+<br>
+<p>5\. User is redirected back to the SP with the SAML assertion.</p>
+<br>
+<p>6\. SP validates the signature, extracts attributes, and creates a session.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    <!-- SAML Assertion (simplified) --></p>
+<br>
+<p>    <saml:Assertion xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"</p>
+<br>
+<p>                    ID="_12345" IssueInstant="2026-05-12T10:00:00Z"></p>
+<br>
+<p>      <saml:Issuer>https://idp.example.com/metadata</saml:Issuer></p>
+<br>
+<p>      <ds:Signature>...</ds:Signature></p>
+<br>
+<p>      <saml:Subject></p>
+<br>
+<p>        <saml:NameID>user@example.com</saml:NameID></p>
+<br>
+<p>      </saml:Subject></p>
+<br>
+<p>      <saml:AttributeStatement></p>
+<br>
+<p>        <saml:Attribute Name="email"></p>
+<br>
+<p>          <saml:AttributeValue>user@example.com</saml:AttributeValue></p>
+<br>
+<p>        </saml:Attribute></p>
+<br>
+<p>        <saml:Attribute Name="groups"></p>
+<br>
+<p>          <saml:AttributeValue>engineering</saml:AttributeValue></p>
+<br>
+<p>        </saml:Attribute></p>
+<br>
+<p>      </saml:AttributeStatement></p>
+<br>
+<p>    </saml:Assertion></p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>SAML is widely used in enterprise environments for web application SSO. Its XML-based nature makes it verbose, but it remains the standard for many SaaS applications and federated identity scenarios.</p>
 <br>
-<h2> OpenID Connect (OIDC)</h2>
+<br>
+<br>
+<br>
+<h2>  OpenID Connect (OIDC)</h2>
+<br>
+<br>
+<br>
 <br>
 <p>OIDC is a modern authentication protocol built on top of OAuth 2.0. It is the preferred protocol for newer applications, particularly in cloud-native environments.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>OIDC vs SAML</h3>
 <br>
-<li>OIDC uses JSON (JWT tokens) rather than XML. Tokens are smaller and easier to parse.</li>
-<li>OIDC is designed for modern web and mobile applications, including SPAs and native apps.</li>
-<li>OIDC provides the `id_token` (authentication) alongside the OAuth `access_token` (authorization).</li>
-<li>OIDC is the default for cloud provider IAM roles, Kubernetes authentication, and serverless applications.</li>
+<br>
+<br>
+<p>* OIDC uses JSON (JWT tokens) rather than XML. Tokens are smaller and easier to parse.</p>
+<p>* OIDC is designed for modern web and mobile applications, including SPAs and native apps.</p>
+<p>* OIDC provides the `id_token` (authentication) alongside the OAuth `access_token` (authorization).</p>
+<p>* OIDC is the default for cloud provider IAM roles, Kubernetes authentication, and serverless applications.</p>
+<br>
+<br>
 <br>
 <h3>OIDC Flow</h3>
 <br>
-<pre><code>
-# Python example: OIDC authentication request
-
-import requests
-
-
-
-# Step 1: Redirect user to IdP authorization endpoint
-
-auth_url = &quot;https://idp.example.com/authorize&quot;
-
-params = {
-
-    &quot;response_type&quot;: &quot;code&quot;,
-
-    &quot;client_id&quot;: &quot;my-app&quot;,
-
-    &quot;redirect_uri&quot;: &quot;https://my-app.example.com/callback&quot;,
-
-    &quot;scope&quot;: &quot;openid profile email&quot;,
-
-    &quot;state&quot;: &quot;random-state-value&quot;
-
-}
-
-# User is redirected to: auth_url?response_type=code&amp;client_id=...
-
-
-
-# Step 2: Exchange authorization code for tokens
-
-token_url = &quot;https://idp.example.com/token&quot;
-
-response = requests.post(token_url, data={
-
-    &quot;grant_type&quot;: &quot;authorization_code&quot;,
-
-    &quot;code&quot;: &quot;authorization-code-from-callback&quot;,
-
-    &quot;redirect_uri&quot;: &quot;https://my-app.example.com/callback&quot;,
-
-    &quot;client_id&quot;: &quot;my-app&quot;,
-
-    &quot;client_secret&quot;: &quot;my-secret&quot;
-
-})
-
-tokens = response.json()
-
-# tokens contains: access_token, id_token, refresh_token
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # Python example: OIDC authentication request</p>
+<br>
+<p>    import requests</p>
+<br>
+<br>
+<br>
+<p>    # Step 1: Redirect user to IdP authorization endpoint</p>
+<br>
+<p>    auth_url = "https://idp.example.com/authorize"</p>
+<br>
+<p>    params = {</p>
+<br>
+<p>        "response_type": "code",</p>
+<br>
+<p>        "client_id": "my-app",</p>
+<br>
+<p>        "redirect_uri": "https://my-app.example.com/callback",</p>
+<br>
+<p>        "scope": "openid profile email",</p>
+<br>
+<p>        "state": "random-state-value"</p>
+<br>
+<p>    }</p>
+<br>
+<p>    # User is redirected to: auth_url?response_type=code&client_id=...</p>
+<br>
+<br>
+<br>
+<p>    # Step 2: Exchange authorization code for tokens</p>
+<br>
+<p>    token_url = "https://idp.example.com/token"</p>
+<br>
+<p>    response = requests.post(token_url, data={</p>
+<br>
+<p>        "grant_type": "authorization_code",</p>
+<br>
+<p>        "code": "authorization-code-from-callback",</p>
+<br>
+<p>        "redirect_uri": "https://my-app.example.com/callback",</p>
+<br>
+<p>        "client_id": "my-app",</p>
+<br>
+<p>        "client_secret": "my-secret"</p>
+<br>
+<p>    })</p>
+<br>
+<p>    tokens = response.json()</p>
+<br>
+<p>    # tokens contains: access_token, id_token, refresh_token</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>OIDC in Cloud Infrastructure</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Cloud providers use OIDC for workload identity. A service running in AWS can get an OIDC token from the AWS metadata endpoint and use it to authenticate to external services.</p>
 <br>
-<pre><code>
-# GitHub Actions OIDC with AWS
-
-name: Deploy
-
-permissions:
-
-  id-token: write
-
-  contents: read
-
-
-
-jobs:
-
-  deploy:
-
-    runs-on: ubuntu-latest
-
-    steps:
-
-      - uses: actions/checkout@v4
-
-      - uses: aws-actions/configure-aws-credentials@v4
-
-        with:
-
-          role-to-assume: arn:aws:iam::123456789:role/github-actions-role
-
-          aws-region: us-east-1
-
-      - run: aws s3 sync ./dist s3://my-bucket
-
-</code></pre>
 <br>
-<h2> SCIM Provisioning</h2>
+<br>
+<br>
+<br>
+<p>    # GitHub Actions OIDC with AWS</p>
+<br>
+<p>    name: Deploy</p>
+<br>
+<p>    permissions:</p>
+<br>
+<p>      id-token: write</p>
+<br>
+<p>      contents: read</p>
+<br>
+<br>
+<br>
+<p>    jobs:</p>
+<br>
+<p>      deploy:</p>
+<br>
+<p>        runs-on: ubuntu-latest</p>
+<br>
+<p>        steps:</p>
+<br>
+<p>          - uses: actions/checkout@v4</p>
+<br>
+<p>          - uses: aws-actions/configure-aws-credentials@v4</p>
+<br>
+<p>            with:</p>
+<br>
+<p>              role-to-assume: arn:aws:iam::123456789:role/github-actions-role</p>
+<br>
+<p>              aws-region: us-east-1</p>
+<br>
+<p>          - run: aws s3 sync ./dist s3://my-bucket</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  SCIM Provisioning</h2>
+<br>
+<br>
+<br>
 <br>
 <p>System for Cross-domain Identity Management (SCIM) is a standard for automating user provisioning and deprovisioning between identity domains.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>How SCIM Works</h3>
+<br>
+<br>
+<br>
 <br>
 <p>SCIM exposes RESTful endpoints for creating, reading, updating, and deleting user accounts and groups. An IdP like Okta or Azure AD connects to an SCIM endpoint to synchronize users automatically.</p>
 <br>
-<pre><code>
-// SCIM Create User Request
-
-POST /scim/v2/Users
-
-Content-Type: application/scim+json
-
-
-
-{
-
-  &quot;schemas&quot;: [&quot;urn:ietf:params:scim:schemas:core:2.0:User&quot;],
-
-  &quot;userName&quot;: &quot;jdoe@example.com&quot;,
-
-  &quot;name&quot;: {
-
-    &quot;givenName&quot;: &quot;John&quot;,
-
-    &quot;familyName&quot;: &quot;Doe&quot;
-
-  },
-
-  &quot;emails&quot;: [
-
-    {
-
-      &quot;value&quot;: &quot;jdoe@example.com&quot;,
-
-      &quot;type&quot;: &quot;work&quot;,
-
-      &quot;primary&quot;: true
-
-    }
-
-  ],
-
-  &quot;active&quot;: true
-
-}
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    // SCIM Create User Request</p>
+<br>
+<p>    POST /scim/v2/Users</p>
+<br>
+<p>    Content-Type: application/scim+json</p>
+<br>
+<br>
+<br>
+<p>    {</p>
+<br>
+<p>      "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],</p>
+<br>
+<p>      "userName": "jdoe@example.com",</p>
+<br>
+<p>      "name": {</p>
+<br>
+<p>        "givenName": "John",</p>
+<br>
+<p>        "familyName": "Doe"</p>
+<br>
+<p>      },</p>
+<br>
+<p>      "emails": [</p>
+<br>
+<p>        {</p>
+<br>
+<p>          "value": "jdoe@example.com",</p>
+<br>
+<p>          "type": "work",</p>
+<br>
+<p>          "primary": true</p>
+<br>
+<p>        }</p>
+<br>
+<p>      ],</p>
+<br>
+<p>      "active": true</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>SCIM ensures that when an employee leaves the company, their access is automatically revoked across all SCIM-integrated applications within minutes.</p>
 <br>
-<h2> Just-in-Time (JIT) Access</h2>
+<br>
+<br>
+<br>
+<h2>  Just-in-Time (JIT) Access</h2>
+<br>
+<br>
+<br>
 <br>
 <p>JIT access grants elevated permissions only when needed, for a limited duration. It replaces standing privileges that attackers can exploit.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Implementation</h3>
 <br>
-<p>JIT access typically requires:</p>
-<li>A request with a business justification.</li>
-<p>2. Approval from a manager or ticket system.</p>
-<p>3. Automatic expiration after the approved window.</p>
-<p>4. Full audit logging of the elevation.</p>
 <br>
-<pre><code>
-# Example: PagerDuty JIT access request
-
-def request_jit_access(resource, duration_minutes=60, reason=&quot;&quot;):
-
-    approval = submit_approval_request(
-
-        requester=get_current_user(),
-
-        resource=resource,
-
-        reason=reason,
-
-        approver=resource_manager
-
-    )
-
-    if approval.status == &quot;approved&quot;:
-
-        grant_temporary_role(
-
-            user=get_current_user(),
-
-            role=f&quot;admin-{resource}&quot;,
-
-            ttl=duration_minutes
-
-        )
-
-        return f&quot;Access to {resource} granted until T+{duration_minutes}m&quot;
-
-    raise PermissionError(&quot;Access request denied&quot;)
-
-</code></pre>
+<br>
+<br>
+<p>JIT access typically requires:</p>
+<br>
+<p>* A request with a business justification.</p>
+<br>
+<p>2\. Approval from a manager or ticket system.</p>
+<br>
+<p>3\. Automatic expiration after the approved window.</p>
+<br>
+<p>4\. Full audit logging of the elevation.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Example: PagerDuty JIT access request</p>
+<br>
+<p>    def request_jit_access(resource, duration_minutes=60, reason=""):</p>
+<br>
+<p>        approval = submit_approval_request(</p>
+<br>
+<p>            requester=get_current_user(),</p>
+<br>
+<p>            resource=resource,</p>
+<br>
+<p>            reason=reason,</p>
+<br>
+<p>            approver=resource_manager</p>
+<br>
+<p>        )</p>
+<br>
+<p>        if approval.status == "approved":</p>
+<br>
+<p>            grant_temporary_role(</p>
+<br>
+<p>                user=get_current_user(),</p>
+<br>
+<p>                role=f"admin-{resource}",</p>
+<br>
+<p>                ttl=duration_minutes</p>
+<br>
+<p>            )</p>
+<br>
+<p>            return f"Access to {resource} granted until T+{duration_minutes}m"</p>
+<br>
+<p>        raise PermissionError("Access request denied")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>JIT access is critical for protecting sensitive systems like production databases, cloud admin consoles, and CI/CD deployment pipelines.</p>
 <br>
-<h2> Access Reviews</h2>
+<br>
+<br>
+<br>
+<h2>  Access Reviews</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Access reviews are periodic audits of who has access to what. They are required by compliance frameworks (SOC 2, SOX) and are essential for preventing privilege creep.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Best Practices</h3>
 <br>
-<li>Conduct access reviews every quarter for critical systems, annually for low-risk systems.</li>
-<li>Automate the review process using your IdP or dedicated tools.</li>
-<li>Focus on active users; disable accounts for users who have not logged in for 90 days.</li>
-<li>Review group memberships, not just individual permissions.</li>
-<li>Require managers to certify their direct reports' access.</li>
-<li>Document all review outcomes for audit purposes.</li>
 <br>
-<pre><code>
-# Automated access review report
-
-def generate_access_review():
-
-    users = list_all_users()
-
-    report = []
-
-    for user in users:
-
-        if user.last_login &lt; (now() - timedelta(days=90)):
-
-            report.append({
-
-                &quot;user&quot;: user.email,
-
-                &quot;status&quot;: &quot;suggest_disable&quot;,
-
-                &quot;reason&quot;: &quot;No login in 90 days&quot;,
-
-                &quot;groups&quot;: user.groups
-
-            })
-
-    return report
-
-</code></pre>
 <br>
-<h2> Conclusion</h2>
+<p>* Conduct access reviews every quarter for critical systems, annually for low-risk systems.</p>
+<p>* Automate the review process using your IdP or dedicated tools.</p>
+<p>* Focus on active users; disable accounts for users who have not logged in for 90 days.</p>
+<p>* Review group memberships, not just individual permissions.</p>
+<p>* Require managers to certify their direct reports' access.</p>
+<p>* Document all review outcomes for audit purposes.</p>
+<br>
+<br>
+<br>
+<br>
+<p>    # Automated access review report</p>
+<br>
+<p>    def generate_access_review():</p>
+<br>
+<p>        users = list_all_users()</p>
+<br>
+<p>        report = []</p>
+<br>
+<p>        for user in users:</p>
+<br>
+<p>            if user.last_login < (now() - timedelta(days=90)):</p>
+<br>
+<p>                report.append({</p>
+<br>
+<p>                    "user": user.email,</p>
+<br>
+<p>                    "status": "suggest_disable",</p>
+<br>
+<p>                    "reason": "No login in 90 days",</p>
+<br>
+<p>                    "groups": user.groups</p>
+<br>
+<p>                })</p>
+<br>
+<p>        return report</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Modern IAM requires SSO for user convenience, SAML or OIDC for protocol support, SCIM for automated provisioning, JIT access for privilege management, and regular access reviews to prevent creep. The goal is simple: every access decision should be intentional, verifiable, and timely.</p></div>
     </article>

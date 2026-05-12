@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "4914",
+      "wordCount": "5588",
       "keywords": "Web Security, OWASP, CSP, Authentication, XSS, SQL Injection, HTTPS, API Security",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/web-security-fundamentals-2026.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/web-security-fundamentals-2026.html"},
+      "articleBody": "Web Security Fundamentals 2026: A Developer Complete Guide Introduction Web security is not a feature \u2014 it is a discipline. Every developer shipping code to the internet in 2026 must understand the threat landscape, the tools to defend against it, and the patterns that turn fragile applications into hardened systems. This guide covers the topics that matter most: from OWASP Top 10 vulnerabilities to production-grade security headers, from JWT best practices to dependency scanning with SBOMs. Whether you are building a Next.js dashboard, a FastAPI backend, or a static Jamstack site, the principles here apply directly to your stack. \\--- 1\\. OWASP Top 10 (2025 Edition) Overview The OWASP Top 10 is the industry-standard awareness document for web application security. Here is the 2025 list with practical examples and mitigations. | Rank | Category | Example | |------|----------|---------| | 1 | Broken Access Control | User A reads User B's private data by changing an ID in the URL | | 2 | Cryptographic Failures | Storing passwords in plaintext or using MD5 | | 3 | Injection | SQL injection via unsanitized search input | | 4 | Insecure Design | No rate limiting on password reset endpoints | | 5 | Security Misconfiguration | Default credentials left in production | | 6 | Vulnerable Components | Using a library with a known CVE | | 7 | Auth & Session Failures | JWT secrets leaked in client-side code | | 8 | Data Integrity Failures | Accepting unsigned serialized objects (e.g., Pickle) | | 9 | Logging & Monitoring Failures | No alerting on repeated 403s | | 10 | SSRF | Server fetches attacker-controlled URL internally | **Example: Broken Access Control (the #1 risk)** # BAD \u2014 no ownership check @app.get(\"/api/orders/{order_id}\") def get_order(order_id: int): order = db.query(Order).get(order_id) return order # GOOD \u2014 enforce ownership @app.get(\"/api/orders/{order_id}\") def get_order(order_id: int, user=Depends(get_current_user)): order = db.query(Order).filter( Order.id == order_id, Order.user_id == user.id ).first() if not order: raise HTTPException(status_code=404) return order **Key takeaway:** Never trust user-supplied identifiers. Always verify ownership server-side. \\--- 2\\. Authentication Security Authentication is the most attacked surface area on any web application. Here are the patterns that hold up in production. JWT Best Practices JSON Web Tokens are everywhere, but they are easy to misuse. // GOOD: JWT configuration for production const jwt = require('jsonwebtoken'); const token = jwt.sign( { sub: user.id, role: user.role, session_id: session.uuid // allow server-side revocation }, process.env.JWT_SECRET, // never hardcode { algorithm: 'RS256', // asymmetric \u2014 never 'none' or 'HS256' in distributed systems expiresIn: '15m', // short-lived access tokens issuer: 'myapp.example.com', audience: 'myapp-api' } ); **JWT checklist:** * Use `RS256` or `ES256` (asymmetric) for multi-service architectures * Never store secrets in client-side JavaScript bundles * Set short expiration (15 minutes for access tokens) * Implement refresh token rotation * Blacklist compromised tokens server-side using a session store Session Management Comparison | Approach | Best For | Weakness | |----------|----------|----------| | HTTP-only cookies + session ID | Server-rendered apps | Requires server-side store | | JWT access + refresh tokens | SPAs, mobile apps | Revocation is harder | | OAuth2 + PKCE | Third-party auth | Complexity | | WebAuthn / Passkeys | High-security apps | Browser support gaps | OAuth2 with PKCE (Recommended Flow) // Authorization code flow with PKCE (Proof Key for Code Exchange) const crypto = require('crypto'); function generatePKCE() { const verifier = crypto.randomBytes(32).toString('base64url'); const challenge = crypto .createHash('sha256') .update(verifier) .digest('base64url'); return { verifier, challenge }; } // Step 1: Redirect user with code_challenge // GET https://provider.com/auth?response_type=code&code_challenge=&code_challenge_method=S256 // Step 2: Exchange code for token (verifier must match) // POST https://provider.com/token // Body: { code, code_verifier: verifier, client_id, redirect_uri } **Never use the implicit grant (deprecated).** Always use the authorization code flow with PKCE, even for first-party apps. \\--- 3\\. Content Security Policy (CSP) CSP is your last line of defense against XSS. It tells the browser what sources are allowed to load scripts, styles, fonts, and other resources. Baseline CSP Header Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.example.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://images.example.com; connect-src 'self' https://api.example.com; font-src 'self' https://fonts.gstatic.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none' How to Set CSP in Popular Frameworks // Express.js app.use((req, res, next) => { res.setHeader( 'Content-Security-Policy', \"default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'\" ); next(); }); # FastAPI middleware from starlette.middleware.base import BaseHTTPMiddleware class CSPSecurityMiddleware(BaseHTTPMiddleware): async def dispatch(self, request, call_next): response = await call_next(request) response.headers[\"Content-Security-Policy\"] = ( \"default-src 'self'; \" \"script-src 'self'; \" \"style-src 'self'; \" \"object-src 'none'; \" \"frame-ancestors 'none'\" ) return response CSP Pitfalls to Avoid | Anti-Pattern | Why It Hurts | |---|---| | `script-src 'unsafe-inline'` | Defeats CSP \u2014 any inline script runs | | `script-src 'unsafe-eval'` | Allows `eval()` and similar | | Using `https:` as a whitelist | Too broad \u2014 allows any HTTPS-hosted script | | Missing `object-src 'none'` | Flash/Silverlight plugins bypass CSP | | Not using `report-uri` / `report-to` | You never know when CSP blocks something legitimate | **Pro tip:** Deploy CSP in report-only mode first (`Content-Security-Policy-Report-Only`), monitor violations, then enforce. This prevents breaking your production site. \\--- 4\\. CORS Configuration Best Practices CORS is not a security boundary \u2014 it is a browser-enforced access control mechanism. It does not protect your API from direct requests (curl, Postman), only from cross-origin browser requests. Correct CORS Configuration // Express.js \u2014 production CORS setup const cors = require('cors'); const corsOptions = { origin: process.env.ALLOWED_ORIGINS.split(','), // explicit, not '*' methods: ['GET', 'POST', 'PUT', 'DELETE'], allowedHeaders: ['Authorization', 'Content-Type'], exposedHeaders: ['X-Request-ID'], credentials: true, // only if you need cookies maxAge: 86400 // preflight cache \u2014 24 hours }; app.use(cors(corsOptions)); # FastAPI from fastapi.middleware.cors import CORSMiddleware app.add_middleware( CORSMiddleware, allow_origins=[\"https://app.example.com\"], allow_methods=[\"GET\", \"POST\"], allow_headers=[\"Authorization\", \"Content-Type\"], allow_credentials=False, max_age=86400, ) CORS Rules of Thumb * Never use `Access-Control-Allow-Origin: *` with credentials * Never reflect the `Origin` header back blindly (this enables attacks on intranet apps) * Whitelist specific origins, not wildcard patterns like `*.example.com` (DNS rebinding attacks) * If your API does not use cookies, keep `credentials: false` * Use `Vary: Origin` so CDNs cache per-origin responses correctly \\--- 5\\. SQL Injection Prevention SQL injection is the oldest trick in the book, and it still works because developers concatenate user input into SQL strings. Never Do This # VULNERABLE \u2014 never concatenate user input username = request.form[\"username\"] query = f\"SELECT * FROM users WHERE username = '{username}'\" cursor.execute(query) An attacker sends `' OR '1'='1` and the WHERE clause becomes `WHERE username = '' OR '1'='1'` \u2014 every row in the table is returned. Always Do This # SAFE \u2014 parameterized queries cursor.execute( \"SELECT * FROM users WHERE username = %s\", (username,) ) // SAFE \u2014 parameterized queries with node-postgres const result = await db.query( 'SELECT * FROM users WHERE username = $1', [username] ); ORMs Are Not Magic Bullets ORMs protect against basic SQLi but can still leak data through: * **Raw queries** \u2014 `Model.raw('SELECT ...')` must use bind parameters * **Dynamic column/table names** \u2014 cannot be parameterized; whitelist them * **`$where` in MongoDB** \u2014 injection via `$gt`, `$ne`, `$where` operators // VULNERABLE \u2014 NoSQL injection app.get('/api/users', async (req, res) => { const { username } = req.query; // If username is { \"$ne\": \"\" }, this returns ALL users const users = await User.find({ username }); res.json(users); }); **Fix:** Validate that the input is a string, not an object or operator expression. \\--- 6\\. XSS Types and Prevention Cross-Site Scripting (XSS) remains pervasive. There are three distinct types. Reflected XSS The payload is part of the request (e.g., URL query parameter) and reflected in the response immediately. Example: https://example.com/search?q=alert('xss') Stored XSS The payload is persisted on the server (e.g., in a comment, user bio) and served to every visitor. Example: A comment containing fetch('/api/steal').then(...) DOM-Based XSS The vulnerability lives entirely in client-side JavaScript. The server response is clean, but the browser executes attacker-controlled input via `innerHTML`, `document.write`, or `eval`. // VULNERABLE \u2014 DOM XSS const name = new URLSearchParams(window.location.search).get('name'); document.getElementById('greeting').innerHTML = `Hello, ${name}`; // SAFE \u2014 use textContent, not innerHTML document.getElementById('greeting').textContent = `Hello, ${name}`; XSS Prevention Table | Context | Safe Approach | Dangerous Approach | |---------|--------------|-------------------| | HTML body | `textContent`, template escaping | `innerHTML`, `outerHTML` | | HTML attribute | `setAttribute()` with safe values | String concatenation into `onclick` or `href` | | JavaScript string | JSON.stringify + proper encoding | Direct concatenation into `eval` or `setTimeout` string | | CSS | Use CSS custom properties | Dynamic `url()` or `expression()` | | URL | Validate against allowlist | `javascript:` URLs in `` | **Defense in depth:** CSP + output encoding + input validation. No single layer is enough. \\--- 7\\. HTTPS/TLS Fundamentals HTTPS is non-negotiable in 2026. Every site should be HTTPS-only with HSTS. What Every Developer Needs to Know | Concept | What It Means | |---------|---------------| | TLS 1.3 | Current standard. Faster handshake, removed insecure ciphers. | | Certificate validation | The client verifies the cert chain against trusted CAs | | SNI | Server Name Indication \u2014 lets one server host multiple TLS certs | | HSTS | HTTP Strict Transport Security \u2014 tells browsers to always use HTTPS | | OCSP Stapling | Server sends proof of cert validity during handshake | Setting Up HSTS Strict-Transport-Security: max-age=63072000; includeSubDomains; preload * `max-age` in seconds (2 years = 63072000) * `includeSubDomains` \u2014 covers all subdomains * `preload` \u2014 submit your domain to browser preload lists Redirect HTTP to HTTPS // Express.js app.use((req, res, next) => { if (!req.secure && req.headers['x-forwarded-proto'] !== 'https') { return res.redirect(301, `https://${req.headers.host}${req.url}`); } next(); }); TLS Configuration Check (2026 Minimum) # nginx TLS config \u2014 modern profile ssl_protocols TLSv1.2 TLSv1.3; ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256; ssl_prefer_server_ciphers off; ssl_session_cache shared:SSL:10m; ssl_session_timeout 1d; ssl_session_tickets off; ssl_stapling on; ssl_stapling_verify on; Test your TLS setup with: `openssl s_client -connect example.com:443 -tls1_3` \\--- 8\\. Dependency Scanning and SBOM Supply chain attacks are the fastest-growing threat vector. In 2026, the US Executive Order on cybersecurity and global regulations require Software Bills of Materials (SBOM) for production software. Dependency Scanning Tools | Tool | Scope | Integration | |------|-------|-------------| | `npm audit` / `yarn audit` | Node.js packages | CI/CD pipeline gate | | `pip-audit` | Python packages | pre-commit hooks | | `trivy` | Containers, OS packages, IaC | GitHub Actions, GitLab CI | | `snyk` | Multi-language, container | PR checks | | `dependabot` | GitHub-hosted repos | Auto-PRs for vulnerable deps | | `grype` | Containers, filesystem | Fast, free, OSS | Running a Scan in CI # .github/workflows/security-scan.yml name: Security Scan on: [push, pull_request] jobs: scan: runs-on: ubuntu-latest steps: - uses: actions/checkout@v4 - name: Run Trivy vulnerability scanner uses: aquasecurity/trivy-action@master with: scan-type: 'fs' scan-ref: '.' format: 'sarif' output: 'trivy-results.sarif' - name: Generate SBOM uses: anchore/sbom-action@v0 with: format: 'spdx-json' output-file: 'sbom.spdx.json' What Goes Into an SBOM { \"bomFormat\": \"CycloneDX\", \"specVersion\": \"1.5\", \"metadata\": { \"component\": { \"name\": \"my-app\", \"version\": \"1.2.3\", \"type\": \"application\" } }, \"components\": [ { \"name\": \"express\", \"version\": \"4.18.2\", \"type\": \"library\", \"purl\": \"pkg:npm/express@4.18.2\" } ] } **Action item:** Run `pip freeze > requirements.txt` or `npm list --json > deps.json` and pipe it through an SBOM generator in your CI pipeline. Store the SBOM alongside your release artifact. \\--- 9\\. Security Headers Checklist Apply these HTTP response headers to every page and every API response. | Header | Value | Purpose | |--------|-------|---------| | `Strict-Transport-Security` | `max-age=63072000; includeSubDomains` | Enforce HTTPS | | `Content-Security-Policy` | See Section 3 | Prevent XSS and data injection | | `X-Content-Type-Options` | `nosniff` | Prevent MIME type sniffing | | `X-Frame-Options` | `DENY` | Prevent clickjacking | | `X-XSS-Protection` | `0` | Disable legacy XSS filter (does more harm than good) | | `Referrer-Policy` | `strict-origin-when-cross-origin` | Control referrer data leakage | | `Permissions-Policy` | `camera=(), microphone=(), geolocation=()` | Restrict browser API access | | `Cache-Control` | `no-store, no-cache, must-revalidate` | Prevent sensitive data caching | Apply Them in One Shot // Express.js helmet \u2014 sets most security headers automatically const helmet = require('helmet'); app.use(helmet()); // Or set manually for fine control app.use((req, res, next) => { res.setHeader('X-Content-Type-Options', 'nosniff'); res.setHeader('X-Frame-Options', 'DENY'); res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin'); res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()'); next(); }); # FastAPI with SecureHeaders middleware from secure import SecureHeaders secure_headers = SecureHeaders() @app.middleware(\"http\") async def add_security_headers(request, call_next): response = await call_next(request) secure_headers.framework.fastapi(response) return response \\--- 10\\. API Security Basics APIs are the backbone of modern web applications and a prime attack target. Rate Limiting // Express.js with express-rate-limit const rateLimit = require('express-rate-limit'); const globalLimiter = rateLimit({ windowMs: 15 * 60 * 1000, // 15 minutes max: 100, // limit each IP standardHeaders: true, legacyHeaders: false, message: { error: 'Too many requests' } }); const authLimiter = rateLimit({ windowMs: 60 * 1000, // 1 minute max: 5, // 5 attempts per minute message: { error: 'Too many auth attempts' } }); app.use('/api/', globalLimiter); app.use('/api/auth/login', authLimiter); Input Validation Use a schema validation library. Never trust incoming data. // Zod validation \u2014 reject unexpected fields and bad types const { z } = require('zod'); const CreateUserSchema = z.object({ email: z.string().email(), password: z.string().min(12).max(128), role: z.enum(['user', 'admin']).default('user'), }).strict(); // strips or rejects extra fields app.post('/api/users', (req, res) => { const parsed = CreateUserSchema.parse(req.body); // parsed is now type-safe and validated }); Proper Error Handling Never leak stack traces, database schemas, or internal paths to API consumers. # BAD \u2014 leaks internals @app.exception_handler(Exception) async def debug_error(request, exc): return JSONResponse( status_code=500, content={\"error\": str(exc), \"traceback\": traceback.format_exc()} ) # GOOD \u2014 sanitized errors with logging import logging logger = logging.getLogger(__name__) @app.exception_handler(HTTPException) async def http_error(request, exc): return JSONResponse( status_code=exc.status_code, content={\"error\": exc.detail} ) @app.exception_handler(Exception) async def generic_error(request, exc): logger.error(\"Internal error\", exc_info=True) return JSONResponse( status_code=500, content={\"error\": \"An internal error occurred\"} ) API Security Checklist * [ ] Rate limiting on all endpoints (stricter on auth) * [ ] Input validation with schema library (Zod, Pydantic, Marshmallow) * [ ] Structured error responses \u2014 no stack traces * [ ] Authentication on every endpoint (no unprotected internal routes) * [ ] Audit logging for sensitive operations * [ ] Request size limits (`body-parser` `limit` option, nginx `client_max_body_size`) * [ ] API keys stored server-side only, rotated regularly * [ ] UUIDs instead of auto-increment IDs in URLs \\--- 11\\. Production Security Checklist A practical runbook to harden any web application before launch. Infrastructure * [ ] All traffic is HTTPS (HSTS preloaded) * [ ] TLS 1.2 minimum, TLS 1.3 preferred * [ ] No default credentials on any service (database, Redis, admin panels) * [ ] Database is not publicly accessible (private subnet / VPC) * [ ] Secrets stored in a vault / secrets manager (not in `.env` files in repos) * [ ] Container images scanned for CVEs before deployment Application * [ ] All user input is validated and sanitized * [ ] Parameterized queries everywhere \u2014 no SQL string concatenation * [ ] Authentication uses short-lived tokens with rotation * [ ] Session tokens stored in HTTP-only, Secure, SameSite cookies * [ ] CSP header is enforced (not just report-only) * [ ] CORS origins are explicitly whitelisted * [ ] File uploads are restricted to allowed types and scanned * [ ] File uploads stored outside the web root with random filenames * [ ] IDs are UUIDs not sequential integers * [ ] Logs contain no PII, tokens, or passwords * [ ] Rate limiting is active on all endpoints Process * [ ] Dependency scanning runs on every PR * [ ] SBOM is generated with each release * [ ] Secrets scanning (e.g., `git secrets`, `truffleHog`) in CI * [ ] Regular penetration tests (at least annually) * [ ] Incident response plan documented * [ ] Dependabot or Renovate configured for auto-updates \\--- Conclusion Web security in 2026 is about layers. No single header, library, or practice will protect your application. The combination of CSP + parameterized queries + short-lived tokens + dependency scanning + proper CORS configuration + HSTS creates a defense-in-depth posture that raises the bar for attackers. Start with the production checklist above and work through each item. Automate everything you can \u2014 security scanning in CI, dependency updates, SBOM generation. The goal is not perfect security (it does not exist), but rather making your application resilient enough that attackers move on to an easier target. **Remember:** security is not a one-time audit. It is a continuous practice embedded into your development workflow. Ship safely. \\--- *Last updated: May 2026*"
     }
     </script>
     <script type="application/ld+json">
@@ -80,923 +81,1121 @@
         <span class="tag-cat">API Security</span></div>
       <h1 class="article-title">Web Security Fundamentals 2026: A Developer Complete Guide</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Introduction</h2>
+      <div class="article-body"><h1>Web Security Fundamentals 2026: A Developer Complete Guide</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Web security is not a feature — it is a discipline. Every developer shipping code to the internet in 2026 must understand the threat landscape, the tools to defend against it, and the patterns that turn fragile applications into hardened systems. This guide covers the topics that matter most: from OWASP Top 10 vulnerabilities to production-grade security headers, from JWT best practices to dependency scanning with SBOMs.</p>
 <br>
+<br>
+<br>
+<br>
 <p>Whether you are building a Next.js dashboard, a FastAPI backend, or a static Jamstack site, the principles here apply directly to your stack.</p>
 <br>
-<p>---</p>
 <br>
-<h2> 1. OWASP Top 10 (2025 Edition) Overview</h2>
+<br>
+<br>
+<p>\---</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  1\. OWASP Top 10 (2025 Edition) Overview</h2>
+<br>
+<br>
+<br>
 <br>
 <p>The OWASP Top 10 is the industry-standard awareness document for web application security. Here is the 2025 list with practical examples and mitigations.</p>
 <br>
+<br>
+<br>
+<br>
 <p>| Rank | Category | Example |</p>
+<br>
 <p>|------|----------|---------|</p>
+<br>
 <p>| 1 | Broken Access Control | User A reads User B's private data by changing an ID in the URL |</p>
+<br>
 <p>| 2 | Cryptographic Failures | Storing passwords in plaintext or using MD5 |</p>
+<br>
 <p>| 3 | Injection | SQL injection via unsanitized search input |</p>
+<br>
 <p>| 4 | Insecure Design | No rate limiting on password reset endpoints |</p>
+<br>
 <p>| 5 | Security Misconfiguration | Default credentials left in production |</p>
+<br>
 <p>| 6 | Vulnerable Components | Using a library with a known CVE |</p>
+<br>
 <p>| 7 | Auth & Session Failures | JWT secrets leaked in client-side code |</p>
+<br>
 <p>| 8 | Data Integrity Failures | Accepting unsigned serialized objects (e.g., Pickle) |</p>
+<br>
 <p>| 9 | Logging & Monitoring Failures | No alerting on repeated 403s |</p>
+<br>
 <p>| 10 | SSRF | Server fetches attacker-controlled URL internally |</p>
+<br>
+<br>
+<br>
 <br>
 <p>**Example: Broken Access Control (the #1 risk)**</p>
 <br>
-<pre><code>
-# BAD — no ownership check
-
-@app.get(&quot;/api/orders/{order_id}&quot;)
-
-def get_order(order_id: int):
-
-    order = db.query(Order).get(order_id)
-
-    return order
-
-
-
-# GOOD — enforce ownership
-
-@app.get(&quot;/api/orders/{order_id}&quot;)
-
-def get_order(order_id: int, user=Depends(get_current_user)):
-
-    order = db.query(Order).filter(
-
-        Order.id == order_id,
-
-        Order.user_id == user.id
-
-    ).first()
-
-    if not order:
-
-        raise HTTPException(status_code=404)
-
-    return order
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # BAD — no ownership check</p>
+<br>
+<p>    @app.get("/api/orders/{order_id}")</p>
+<br>
+<p>    def get_order(order_id: int):</p>
+<br>
+<p>        order = db.query(Order).get(order_id)</p>
+<br>
+<p>        return order</p>
+<br>
+<br>
+<br>
+<p>    # GOOD — enforce ownership</p>
+<br>
+<p>    @app.get("/api/orders/{order_id}")</p>
+<br>
+<p>    def get_order(order_id: int, user=Depends(get_current_user)):</p>
+<br>
+<p>        order = db.query(Order).filter(</p>
+<br>
+<p>            Order.id == order_id,</p>
+<br>
+<p>            Order.user_id == user.id</p>
+<br>
+<p>        ).first()</p>
+<br>
+<p>        if not order:</p>
+<br>
+<p>            raise HTTPException(status_code=404)</p>
+<br>
+<p>        return order</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Key takeaway:** Never trust user-supplied identifiers. Always verify ownership server-side.</p>
 <br>
-<p>---</p>
 <br>
-<h2> 2. Authentication Security</h2>
+<br>
+<br>
+<p>\---</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  2\. Authentication Security</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Authentication is the most attacked surface area on any web application. Here are the patterns that hold up in production.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>JWT Best Practices</h3>
+<br>
+<br>
+<br>
 <br>
 <p>JSON Web Tokens are everywhere, but they are easy to misuse.</p>
 <br>
-<pre><code>
-// GOOD: JWT configuration for production
-
-const jwt = require(&#x27;jsonwebtoken&#x27;);
-
-
-
-const token = jwt.sign(
-
-  { 
-
-    sub: user.id,
-
-    role: user.role,
-
-    session_id: session.uuid   // allow server-side revocation
-
-  },
-
-  process.env.JWT_SECRET,      // never hardcode
-
-  { 
-
-    algorithm: &#x27;RS256&#x27;,        // asymmetric — never &#x27;none&#x27; or &#x27;HS256&#x27; in distributed systems
-
-    expiresIn: &#x27;15m&#x27;,          // short-lived access tokens
-
-    issuer: &#x27;myapp.example.com&#x27;,
-
-    audience: &#x27;myapp-api&#x27;
-
-  }
-
-);
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    // GOOD: JWT configuration for production</p>
+<br>
+<p>    const jwt = require('jsonwebtoken');</p>
+<br>
+<br>
+<br>
+<p>    const token = jwt.sign(</p>
+<br>
+<p>      { </p>
+<br>
+<p>        sub: user.id,</p>
+<br>
+<p>        role: user.role,</p>
+<br>
+<p>        session_id: session.uuid   // allow server-side revocation</p>
+<br>
+<p>      },</p>
+<br>
+<p>      process.env.JWT_SECRET,      // never hardcode</p>
+<br>
+<p>      { </p>
+<br>
+<p>        algorithm: 'RS256',        // asymmetric — never 'none' or 'HS256' in distributed systems</p>
+<br>
+<p>        expiresIn: '15m',          // short-lived access tokens</p>
+<br>
+<p>        issuer: 'myapp.example.com',</p>
+<br>
+<p>        audience: 'myapp-api'</p>
+<br>
+<p>      }</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**JWT checklist:**</p>
-<li>Use `RS256` or `ES256` (asymmetric) for multi-service architectures</li>
-<li>Never store secrets in client-side JavaScript bundles</li>
-<li>Set short expiration (15 minutes for access tokens)</li>
-<li>Implement refresh token rotation</li>
-<li>Blacklist compromised tokens server-side using a session store</li>
+<br>
+<p>* Use `RS256` or `ES256` (asymmetric) for multi-service architectures</p>
+<p>* Never store secrets in client-side JavaScript bundles</p>
+<p>* Set short expiration (15 minutes for access tokens)</p>
+<p>* Implement refresh token rotation</p>
+<p>* Blacklist compromised tokens server-side using a session store</p>
+<br>
+<br>
 <br>
 <h3>Session Management Comparison</h3>
 <br>
+<br>
+<br>
+<br>
 <p>| Approach | Best For | Weakness |</p>
+<br>
 <p>|----------|----------|----------|</p>
+<br>
 <p>| HTTP-only cookies + session ID | Server-rendered apps | Requires server-side store |</p>
+<br>
 <p>| JWT access + refresh tokens | SPAs, mobile apps | Revocation is harder |</p>
+<br>
 <p>| OAuth2 + PKCE | Third-party auth | Complexity |</p>
+<br>
 <p>| WebAuthn / Passkeys | High-security apps | Browser support gaps |</p>
+<br>
+<br>
+<br>
 <br>
 <h3>OAuth2 with PKCE (Recommended Flow)</h3>
 <br>
-<pre><code>
-// Authorization code flow with PKCE (Proof Key for Code Exchange)
-
-const crypto = require(&#x27;crypto&#x27;);
-
-
-
-function generatePKCE() {
-
-  const verifier = crypto.randomBytes(32).toString(&#x27;base64url&#x27;);
-
-  const challenge = crypto
-
-    .createHash(&#x27;sha256&#x27;)
-
-    .update(verifier)
-
-    .digest(&#x27;base64url&#x27;);
-
-  return { verifier, challenge };
-
-}
-
-
-
-// Step 1: Redirect user with code_challenge
-
-// GET https://provider.com/auth?response_type=code&amp;code_challenge=&lt;challenge&gt;&amp;code_challenge_method=S256
-
-
-
-// Step 2: Exchange code for token (verifier must match)
-
-// POST https://provider.com/token
-
-// Body: { code, code_verifier: verifier, client_id, redirect_uri }
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    // Authorization code flow with PKCE (Proof Key for Code Exchange)</p>
+<br>
+<p>    const crypto = require('crypto');</p>
+<br>
+<br>
+<br>
+<p>    function generatePKCE() {</p>
+<br>
+<p>      const verifier = crypto.randomBytes(32).toString('base64url');</p>
+<br>
+<p>      const challenge = crypto</p>
+<br>
+<p>        .createHash('sha256')</p>
+<br>
+<p>        .update(verifier)</p>
+<br>
+<p>        .digest('base64url');</p>
+<br>
+<p>      return { verifier, challenge };</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<p>    // Step 1: Redirect user with code_challenge</p>
+<br>
+<p>    // GET https://provider.com/auth?response_type=code&code_challenge=<challenge>&code_challenge_method=S256</p>
+<br>
+<br>
+<br>
+<p>    // Step 2: Exchange code for token (verifier must match)</p>
+<br>
+<p>    // POST https://provider.com/token</p>
+<br>
+<p>    // Body: { code, code_verifier: verifier, client_id, redirect_uri }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Never use the implicit grant (deprecated).** Always use the authorization code flow with PKCE, even for first-party apps.</p>
 <br>
-<p>---</p>
 <br>
-<h2> 3. Content Security Policy (CSP)</h2>
+<br>
+<br>
+<p>\---</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  3\. Content Security Policy (CSP)</h2>
+<br>
+<br>
+<br>
 <br>
 <p>CSP is your last line of defense against XSS. It tells the browser what sources are allowed to load scripts, styles, fonts, and other resources.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Baseline CSP Header</h3>
 <br>
-<pre><code>
-Content-Security-Policy: 
-
-  default-src &#x27;self&#x27;;
-
-  script-src &#x27;self&#x27; https://cdn.example.com;
-
-  style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;;
-
-  img-src &#x27;self&#x27; data: https://images.example.com;
-
-  connect-src &#x27;self&#x27; https://api.example.com;
-
-  font-src &#x27;self&#x27; https://fonts.gstatic.com;
-
-  frame-ancestors &#x27;none&#x27;;
-
-  base-uri &#x27;self&#x27;;
-
-  form-action &#x27;self&#x27;;
-
-  object-src &#x27;none&#x27;
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    Content-Security-Policy: </p>
+<br>
+<p>      default-src 'self';</p>
+<br>
+<p>      script-src 'self' https://cdn.example.com;</p>
+<br>
+<p>      style-src 'self' 'unsafe-inline';</p>
+<br>
+<p>      img-src 'self' data: https://images.example.com;</p>
+<br>
+<p>      connect-src 'self' https://api.example.com;</p>
+<br>
+<p>      font-src 'self' https://fonts.gstatic.com;</p>
+<br>
+<p>      frame-ancestors 'none';</p>
+<br>
+<p>      base-uri 'self';</p>
+<br>
+<p>      form-action 'self';</p>
+<br>
+<p>      object-src 'none'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>How to Set CSP in Popular Frameworks</h3>
 <br>
-<pre><code>
-// Express.js
-
-app.use((req, res, next) =&gt; {
-
-  res.setHeader(
-
-    &#x27;Content-Security-Policy&#x27;,
-
-    &quot;default-src &#x27;self&#x27;; script-src &#x27;self&#x27;; style-src &#x27;self&#x27;; object-src &#x27;none&#x27;&quot;
-
-  );
-
-  next();
-
-});
-
-</code></pre>
 <br>
-<pre><code>
-# FastAPI middleware
-
-from starlette.middleware.base import BaseHTTPMiddleware
-
-
-
-class CSPSecurityMiddleware(BaseHTTPMiddleware):
-
-    async def dispatch(self, request, call_next):
-
-        response = await call_next(request)
-
-        response.headers[&quot;Content-Security-Policy&quot;] = (
-
-            &quot;default-src &#x27;self&#x27;; &quot;
-
-            &quot;script-src &#x27;self&#x27;; &quot;
-
-            &quot;style-src &#x27;self&#x27;; &quot;
-
-            &quot;object-src &#x27;none&#x27;; &quot;
-
-            &quot;frame-ancestors &#x27;none&#x27;&quot;
-
-        )
-
-        return response
-
-</code></pre>
+<br>
+<br>
+<br>
+<p>    // Express.js</p>
+<br>
+<p>    app.use((req, res, next) => {</p>
+<br>
+<p>      res.setHeader(</p>
+<br>
+<p>        'Content-Security-Policy',</p>
+<br>
+<p>        "default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'"</p>
+<br>
+<p>      );</p>
+<br>
+<p>      next();</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # FastAPI middleware</p>
+<br>
+<p>    from starlette.middleware.base import BaseHTTPMiddleware</p>
+<br>
+<br>
+<br>
+<p>    class CSPSecurityMiddleware(BaseHTTPMiddleware):</p>
+<br>
+<p>        async def dispatch(self, request, call_next):</p>
+<br>
+<p>            response = await call_next(request)</p>
+<br>
+<p>            response.headers["Content-Security-Policy"] = (</p>
+<br>
+<p>                "default-src 'self'; "</p>
+<br>
+<p>                "script-src 'self'; "</p>
+<br>
+<p>                "style-src 'self'; "</p>
+<br>
+<p>                "object-src 'none'; "</p>
+<br>
+<p>                "frame-ancestors 'none'"</p>
+<br>
+<p>            )</p>
+<br>
+<p>            return response</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>CSP Pitfalls to Avoid</h3>
 <br>
+<br>
+<br>
+<br>
 <p>| Anti-Pattern | Why It Hurts |</p>
+<br>
 <p>|---|---|</p>
+<br>
 <p>| `script-src 'unsafe-inline'` | Defeats CSP — any inline script runs |</p>
+<br>
 <p>| `script-src 'unsafe-eval'` | Allows `eval()` and similar |</p>
+<br>
 <p>| Using `https:` as a whitelist | Too broad — allows any HTTPS-hosted script |</p>
+<br>
 <p>| Missing `object-src 'none'` | Flash/Silverlight plugins bypass CSP |</p>
+<br>
 <p>| Not using `report-uri` / `report-to` | You never know when CSP blocks something legitimate |</p>
+<br>
+<br>
+<br>
 <br>
 <p>**Pro tip:** Deploy CSP in report-only mode first (`Content-Security-Policy-Report-Only`), monitor violations, then enforce. This prevents breaking your production site.</p>
 <br>
-<p>---</p>
 <br>
-<h2> 4. CORS Configuration Best Practices</h2>
+<br>
+<br>
+<p>\---</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  4\. CORS Configuration Best Practices</h2>
+<br>
+<br>
+<br>
 <br>
 <p>CORS is not a security boundary — it is a browser-enforced access control mechanism. It does not protect your API from direct requests (curl, Postman), only from cross-origin browser requests.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Correct CORS Configuration</h3>
 <br>
-<pre><code>
-// Express.js — production CORS setup
-
-const cors = require(&#x27;cors&#x27;);
-
-
-
-const corsOptions = {
-
-  origin: process.env.ALLOWED_ORIGINS.split(&#x27;,&#x27;),  // explicit, not &#x27;*&#x27;
-
-  methods: [&#x27;GET&#x27;, &#x27;POST&#x27;, &#x27;PUT&#x27;, &#x27;DELETE&#x27;],
-
-  allowedHeaders: [&#x27;Authorization&#x27;, &#x27;Content-Type&#x27;],
-
-  exposedHeaders: [&#x27;X-Request-ID&#x27;],
-
-  credentials: true,           // only if you need cookies
-
-  maxAge: 86400                // preflight cache — 24 hours
-
-};
-
-
-
-app.use(cors(corsOptions));
-
-</code></pre>
 <br>
-<pre><code>
-# FastAPI
-
-from fastapi.middleware.cors import CORSMiddleware
-
-
-
-app.add_middleware(
-
-    CORSMiddleware,
-
-    allow_origins=[&quot;https://app.example.com&quot;],
-
-    allow_methods=[&quot;GET&quot;, &quot;POST&quot;],
-
-    allow_headers=[&quot;Authorization&quot;, &quot;Content-Type&quot;],
-
-    allow_credentials=False,
-
-    max_age=86400,
-
-)
-
-</code></pre>
+<br>
+<br>
+<br>
+<p>    // Express.js — production CORS setup</p>
+<br>
+<p>    const cors = require('cors');</p>
+<br>
+<br>
+<br>
+<p>    const corsOptions = {</p>
+<br>
+<p>      origin: process.env.ALLOWED_ORIGINS.split(','),  // explicit, not '*'</p>
+<br>
+<p>      methods: ['GET', 'POST', 'PUT', 'DELETE'],</p>
+<br>
+<p>      allowedHeaders: ['Authorization', 'Content-Type'],</p>
+<br>
+<p>      exposedHeaders: ['X-Request-ID'],</p>
+<br>
+<p>      credentials: true,           // only if you need cookies</p>
+<br>
+<p>      maxAge: 86400                // preflight cache — 24 hours</p>
+<br>
+<p>    };</p>
+<br>
+<br>
+<br>
+<p>    app.use(cors(corsOptions));</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # FastAPI</p>
+<br>
+<p>    from fastapi.middleware.cors import CORSMiddleware</p>
+<br>
+<br>
+<br>
+<p>    app.add_middleware(</p>
+<br>
+<p>        CORSMiddleware,</p>
+<br>
+<p>        allow_origins=["https://app.example.com"],</p>
+<br>
+<p>        allow_methods=["GET", "POST"],</p>
+<br>
+<p>        allow_headers=["Authorization", "Content-Type"],</p>
+<br>
+<p>        allow_credentials=False,</p>
+<br>
+<p>        max_age=86400,</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>CORS Rules of Thumb</h3>
 <br>
-<li>Never use `Access-Control-Allow-Origin: *` with credentials</li>
-<li>Never reflect the `Origin` header back blindly (this enables attacks on intranet apps)</li>
-<li>Whitelist specific origins, not wildcard patterns like `*.example.com` (DNS rebinding attacks)</li>
-<li>If your API does not use cookies, keep `credentials: false`</li>
-<li>Use `Vary: Origin` so CDNs cache per-origin responses correctly</li>
 <br>
-<p>---</p>
 <br>
-<h2> 5. SQL Injection Prevention</h2>
+<p>* Never use `Access-Control-Allow-Origin: *` with credentials</p>
+<p>* Never reflect the `Origin` header back blindly (this enables attacks on intranet apps)</p>
+<p>* Whitelist specific origins, not wildcard patterns like `*.example.com` (DNS rebinding attacks)</p>
+<p>* If your API does not use cookies, keep `credentials: false`</p>
+<p>* Use `Vary: Origin` so CDNs cache per-origin responses correctly</p>
+<br>
+<br>
+<br>
+<p>\---</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  5\. SQL Injection Prevention</h2>
+<br>
+<br>
+<br>
 <br>
 <p>SQL injection is the oldest trick in the book, and it still works because developers concatenate user input into SQL strings.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Never Do This</h3>
 <br>
-<pre><code>
-# VULNERABLE — never concatenate user input
-
-username = request.form[&quot;username&quot;]
-
-query = f&quot;SELECT * FROM users WHERE username = &#x27;{username}&#x27;&quot;
-
-cursor.execute(query)
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # VULNERABLE — never concatenate user input</p>
+<br>
+<p>    username = request.form["username"]</p>
+<br>
+<p>    query = f"SELECT * FROM users WHERE username = '{username}'"</p>
+<br>
+<p>    cursor.execute(query)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>An attacker sends `' OR '1'='1` and the WHERE clause becomes `WHERE username = '' OR '1'='1'` — every row in the table is returned.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Always Do This</h3>
 <br>
-<pre><code>
-# SAFE — parameterized queries
-
-cursor.execute(
-
-    &quot;SELECT * FROM users WHERE username = %s&quot;,
-
-    (username,)
-
-)
-
-</code></pre>
 <br>
-<pre><code>
-// SAFE — parameterized queries with node-postgres
-
-const result = await db.query(
-
-  &#x27;SELECT * FROM users WHERE username = $1&#x27;,
-
-  [username]
-
-);
-
-</code></pre>
+<br>
+<br>
+<br>
+<p>    # SAFE — parameterized queries</p>
+<br>
+<p>    cursor.execute(</p>
+<br>
+<p>        "SELECT * FROM users WHERE username = %s",</p>
+<br>
+<p>        (username,)</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    // SAFE — parameterized queries with node-postgres</p>
+<br>
+<p>    const result = await db.query(</p>
+<br>
+<p>      'SELECT * FROM users WHERE username = $1',</p>
+<br>
+<p>      [username]</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>ORMs Are Not Magic Bullets</h3>
 <br>
+<br>
+<br>
+<br>
 <p>ORMs protect against basic SQLi but can still leak data through:</p>
 <br>
-<li>**Raw queries** — `Model.raw('SELECT ...')` must use bind parameters</li>
-<li>**Dynamic column/table names** — cannot be parameterized; whitelist them</li>
-<li>**`$where` in MongoDB** — injection via `$gt`, `$ne`, `$where` operators</li>
 <br>
-<pre><code>
-// VULNERABLE — NoSQL injection
-
-app.get(&#x27;/api/users&#x27;, async (req, res) =&gt; {
-
-  const { username } = req.query;
-
-  // If username is { &quot;$ne&quot;: &quot;&quot; }, this returns ALL users
-
-  const users = await User.find({ username });
-
-  res.json(users);
-
-});
-
-</code></pre>
+<br>
+<p>* **Raw queries** — `Model.raw('SELECT ...')` must use bind parameters</p>
+<p>* **Dynamic column/table names** — cannot be parameterized; whitelist them</p>
+<p>* **`$where` in MongoDB** — injection via `$gt`, `$ne`, `$where` operators</p>
+<br>
+<br>
+<br>
+<br>
+<p>    // VULNERABLE — NoSQL injection</p>
+<br>
+<p>    app.get('/api/users', async (req, res) => {</p>
+<br>
+<p>      const { username } = req.query;</p>
+<br>
+<p>      // If username is { "$ne": "" }, this returns ALL users</p>
+<br>
+<p>      const users = await User.find({ username });</p>
+<br>
+<p>      res.json(users);</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Fix:** Validate that the input is a string, not an object or operator expression.</p>
 <br>
-<p>---</p>
 <br>
-<h2> 6. XSS Types and Prevention</h2>
+<br>
+<br>
+<p>\---</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  6\. XSS Types and Prevention</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Cross-Site Scripting (XSS) remains pervasive. There are three distinct types.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Reflected XSS</h3>
+<br>
+<br>
+<br>
 <br>
 <p>The payload is part of the request (e.g., URL query parameter) and reflected in the response immediately.</p>
 <br>
-<pre><code>
-Example: https://example.com/search?q=&lt;script&gt;alert(&#x27;xss&#x27;)&lt;/script&gt;
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    Example: https://example.com/search?q=<script>alert('xss')</script></p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Stored XSS</h3>
 <br>
+<br>
+<br>
+<br>
 <p>The payload is persisted on the server (e.g., in a comment, user bio) and served to every visitor.</p>
 <br>
-<pre><code>
-Example: A comment containing &lt;script&gt;fetch(&#x27;/api/steal&#x27;).then(...)&lt;/script&gt;
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    Example: A comment containing <script>fetch('/api/steal').then(...)</script></p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>DOM-Based XSS</h3>
 <br>
+<br>
+<br>
+<br>
 <p>The vulnerability lives entirely in client-side JavaScript. The server response is clean, but the browser executes attacker-controlled input via `innerHTML`, `document.write`, or `eval`.</p>
 <br>
-<pre><code>
-// VULNERABLE — DOM XSS
-
-const name = new URLSearchParams(window.location.search).get(&#x27;name&#x27;);
-
-document.getElementById(&#x27;greeting&#x27;).innerHTML = `Hello, ${name}`;
-
-
-
-// SAFE — use textContent, not innerHTML
-
-document.getElementById(&#x27;greeting&#x27;).textContent = `Hello, ${name}`;
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    // VULNERABLE — DOM XSS</p>
+<br>
+<p>    const name = new URLSearchParams(window.location.search).get('name');</p>
+<br>
+<p>    document.getElementById('greeting').innerHTML = `Hello, ${name}`;</p>
+<br>
+<br>
+<br>
+<p>    // SAFE — use textContent, not innerHTML</p>
+<br>
+<p>    document.getElementById('greeting').textContent = `Hello, ${name}`;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>XSS Prevention Table</h3>
 <br>
+<br>
+<br>
+<br>
 <p>| Context | Safe Approach | Dangerous Approach |</p>
+<br>
 <p>|---------|--------------|-------------------|</p>
+<br>
 <p>| HTML body | `textContent`, template escaping | `innerHTML`, `outerHTML` |</p>
+<br>
 <p>| HTML attribute | `setAttribute()` with safe values | String concatenation into `onclick` or `href` |</p>
+<br>
 <p>| JavaScript string | JSON.stringify + proper encoding | Direct concatenation into `eval` or `setTimeout` string |</p>
+<br>
 <p>| CSS | Use CSS custom properties | Dynamic `url()` or `expression()` |</p>
-<p>| URL | Validate against allowlist | `javascript:` URLs in `<a href>` |</p>
 <br>
-<p>**Defense in depth:** CSP + output encoding + input validation. No single layer is enough.</p>
+<p>| URL | Validate against allowlist | `javascript:` URLs in `` |   </p>
+<p>**Defense in depth:** CSP + output encoding + input validation. No single layer is enough.   </p>
+<p>\---   </p>
+<p>7\. HTTPS/TLS Fundamentals   </p>
+<p>HTTPS is non-negotiable in 2026. Every site should be HTTPS-only with HSTS.   </p>
+<p>What Every Developer Needs to Know   </p>
+<p>| Concept | What It Means | |---------|---------------| | TLS 1.3 | Current standard. Faster handshake, removed insecure ciphers. | | Certificate validation | The client verifies the cert chain against trusted CAs | | SNI | Server Name Indication — lets one server host multiple TLS certs | | HSTS | HTTP Strict Transport Security — tells browsers to always use HTTPS | | OCSP Stapling | Server sends proof of cert validity during handshake |   </p>
+<p>Setting Up HSTS   </p>
 <br>
-<p>---</p>
 <br>
-<h2> 7. HTTPS/TLS Fundamentals</h2>
 <br>
-<p>HTTPS is non-negotiable in 2026. Every site should be HTTPS-only with HSTS.</p>
+<p>    Strict-Transport-Security: max-age=63072000; includeSubDomains; preload</p>
 <br>
-<h3>What Every Developer Needs to Know</h3>
 <br>
-<p>| Concept | What It Means |</p>
-<p>|---------|---------------|</p>
-<p>| TLS 1.3 | Current standard. Faster handshake, removed insecure ciphers. |</p>
-<p>| Certificate validation | The client verifies the cert chain against trusted CAs |</p>
-<p>| SNI | Server Name Indication — lets one server host multiple TLS certs |</p>
-<p>| HSTS | HTTP Strict Transport Security — tells browsers to always use HTTPS |</p>
-<p>| OCSP Stapling | Server sends proof of cert validity during handshake |</p>
 <br>
-<h3>Setting Up HSTS</h3>
 <br>
-<pre><code>
-Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
-
-</code></pre>
 <br>
-<li>`max-age` in seconds (2 years = 63072000)</li>
-<li>`includeSubDomains` — covers all subdomains</li>
-<li>`preload` — submit your domain to browser preload lists</li>
+<p>* `max-age` in seconds (2 years = 63072000)</p>
+<p>* `includeSubDomains` — covers all subdomains</p>
+<p>* `preload` — submit your domain to browser preload lists</p>
 <br>
-<h3>Redirect HTTP to HTTPS</h3>
+<p>Redirect HTTP to HTTPS   </p>
 <br>
-<pre><code>
-// Express.js
-
-app.use((req, res, next) =&gt; {
-
-  if (!req.secure &amp;&amp; req.headers[&#x27;x-forwarded-proto&#x27;] !== &#x27;https&#x27;) {
-
-    return res.redirect(301, `https://${req.headers.host}${req.url}`);
-
-  }
-
-  next();
-
-});
-
-</code></pre>
 <br>
-<h3>TLS Configuration Check (2026 Minimum)</h3>
 <br>
-<pre><code>
-# nginx TLS config — modern profile
-
-ssl_protocols TLSv1.2 TLSv1.3;
-
-ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256;
-
-ssl_prefer_server_ciphers off;
-
-ssl_session_cache shared:SSL:10m;
-
-ssl_session_timeout 1d;
-
-ssl_session_tickets off;
-
-ssl_stapling on;
-
-ssl_stapling_verify on;
-
-</code></pre>
+<p>    // Express.js</p>
 <br>
-<p>Test your TLS setup with: `openssl s_client -connect example.com:443 -tls1_3`</p>
+<p>    app.use((req, res, next) => {</p>
 <br>
-<p>---</p>
+<p>      if (!req.secure && req.headers['x-forwarded-proto'] !== 'https') {</p>
 <br>
-<h2> 8. Dependency Scanning and SBOM</h2>
+<p>        return res.redirect(301, `https://${req.headers.host}${req.url}`);</p>
 <br>
-<p>Supply chain attacks are the fastest-growing threat vector. In 2026, the US Executive Order on cybersecurity and global regulations require Software Bills of Materials (SBOM) for production software.</p>
+<p>      }</p>
 <br>
-<h3>Dependency Scanning Tools</h3>
+<p>      next();</p>
 <br>
-<p>| Tool | Scope | Integration |</p>
-<p>|------|-------|-------------|</p>
-<p>| `npm audit` / `yarn audit` | Node.js packages | CI/CD pipeline gate |</p>
-<p>| `pip-audit` | Python packages | pre-commit hooks |</p>
-<p>| `trivy` | Containers, OS packages, IaC | GitHub Actions, GitLab CI |</p>
-<p>| `snyk` | Multi-language, container | PR checks |</p>
-<p>| `dependabot` | GitHub-hosted repos | Auto-PRs for vulnerable deps |</p>
-<p>| `grype` | Containers, filesystem | Fast, free, OSS |</p>
+<p>    });</p>
 <br>
-<h3>Running a Scan in CI</h3>
 <br>
-<pre><code>
-# .github/workflows/security-scan.yml
-
-name: Security Scan
-
-on: [push, pull_request]
-
-jobs:
-
-  scan:
-
-    runs-on: ubuntu-latest
-
-    steps:
-
-      - uses: actions/checkout@v4
-
-      - name: Run Trivy vulnerability scanner
-
-        uses: aquasecurity/trivy-action@master
-
-        with:
-
-          scan-type: &#x27;fs&#x27;
-
-          scan-ref: &#x27;.&#x27;
-
-          format: &#x27;sarif&#x27;
-
-          output: &#x27;trivy-results.sarif&#x27;
-
-      - name: Generate SBOM
-
-        uses: anchore/sbom-action@v0
-
-        with:
-
-          format: &#x27;spdx-json&#x27;
-
-          output-file: &#x27;sbom.spdx.json&#x27;
-
-</code></pre>
 <br>
-<h3>What Goes Into an SBOM</h3>
 <br>
-<pre><code>
-{
-
-  &quot;bomFormat&quot;: &quot;CycloneDX&quot;,
-
-  &quot;specVersion&quot;: &quot;1.5&quot;,
-
-  &quot;metadata&quot;: {
-
-    &quot;component&quot;: {
-
-      &quot;name&quot;: &quot;my-app&quot;,
-
-      &quot;version&quot;: &quot;1.2.3&quot;,
-
-      &quot;type&quot;: &quot;application&quot;
-
-    }
-
-  },
-
-  &quot;components&quot;: [
-
-    {
-
-      &quot;name&quot;: &quot;express&quot;,
-
-      &quot;version&quot;: &quot;4.18.2&quot;,
-
-      &quot;type&quot;: &quot;library&quot;,
-
-      &quot;purl&quot;: &quot;pkg:npm/express@4.18.2&quot;
-
-    }
-
-  ]
-
-}
-
-</code></pre>
+<p>TLS Configuration Check (2026 Minimum)   </p>
 <br>
-<p>**Action item:** Run `pip freeze > requirements.txt` or `npm list --json > deps.json` and pipe it through an SBOM generator in your CI pipeline. Store the SBOM alongside your release artifact.</p>
 <br>
-<p>---</p>
 <br>
-<h2> 9. Security Headers Checklist</h2>
+<p>    # nginx TLS config — modern profile</p>
 <br>
-<p>Apply these HTTP response headers to every page and every API response.</p>
+<p>    ssl_protocols TLSv1.2 TLSv1.3;</p>
 <br>
-<p>| Header | Value | Purpose |</p>
-<p>|--------|-------|---------|</p>
-<p>| `Strict-Transport-Security` | `max-age=63072000; includeSubDomains` | Enforce HTTPS |</p>
-<p>| `Content-Security-Policy` | See Section 3 | Prevent XSS and data injection |</p>
-<p>| `X-Content-Type-Options` | `nosniff` | Prevent MIME type sniffing |</p>
-<p>| `X-Frame-Options` | `DENY` | Prevent clickjacking |</p>
-<p>| `X-XSS-Protection` | `0` | Disable legacy XSS filter (does more harm than good) |</p>
-<p>| `Referrer-Policy` | `strict-origin-when-cross-origin` | Control referrer data leakage |</p>
-<p>| `Permissions-Policy` | `camera=(), microphone=(), geolocation=()` | Restrict browser API access |</p>
-<p>| `Cache-Control` | `no-store, no-cache, must-revalidate` | Prevent sensitive data caching |</p>
+<p>    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256;</p>
 <br>
-<h3>Apply Them in One Shot</h3>
+<p>    ssl_prefer_server_ciphers off;</p>
 <br>
-<pre><code>
-// Express.js helmet — sets most security headers automatically
-
-const helmet = require(&#x27;helmet&#x27;);
-
-app.use(helmet());
-
-
-
-// Or set manually for fine control
-
-app.use((req, res, next) =&gt; {
-
-  res.setHeader(&#x27;X-Content-Type-Options&#x27;, &#x27;nosniff&#x27;);
-
-  res.setHeader(&#x27;X-Frame-Options&#x27;, &#x27;DENY&#x27;);
-
-  res.setHeader(&#x27;Referrer-Policy&#x27;, &#x27;strict-origin-when-cross-origin&#x27;);
-
-  res.setHeader(&#x27;Permissions-Policy&#x27;, &#x27;camera=(), microphone=(), geolocation=()&#x27;);
-
-  next();
-
-});
-
-</code></pre>
+<p>    ssl_session_cache shared:SSL:10m;</p>
 <br>
-<pre><code>
-# FastAPI with SecureHeaders middleware
-
-from secure import SecureHeaders
-
-
-
-secure_headers = SecureHeaders()
-
-
-
-@app.middleware(&quot;http&quot;)
-
-async def add_security_headers(request, call_next):
-
-    response = await call_next(request)
-
-    secure_headers.framework.fastapi(response)
-
-    return response
-
-</code></pre>
+<p>    ssl_session_timeout 1d;</p>
 <br>
-<p>---</p>
+<p>    ssl_session_tickets off;</p>
 <br>
-<h2> 10. API Security Basics</h2>
+<p>    ssl_stapling on;</p>
 <br>
-<p>APIs are the backbone of modern web applications and a prime attack target.</p>
+<p>    ssl_stapling_verify on;</p>
 <br>
-<h3>Rate Limiting</h3>
 <br>
-<pre><code>
-// Express.js with express-rate-limit
-
-const rateLimit = require(&#x27;express-rate-limit&#x27;);
-
-
-
-const globalLimiter = rateLimit({
-
-  windowMs: 15 * 60 * 1000,      // 15 minutes
-
-  max: 100,                       // limit each IP
-
-  standardHeaders: true,
-
-  legacyHeaders: false,
-
-  message: { error: &#x27;Too many requests&#x27; }
-
-});
-
-
-
-const authLimiter = rateLimit({
-
-  windowMs: 60 * 1000,            // 1 minute
-
-  max: 5,                         // 5 attempts per minute
-
-  message: { error: &#x27;Too many auth attempts&#x27; }
-
-});
-
-
-
-app.use(&#x27;/api/&#x27;, globalLimiter);
-
-app.use(&#x27;/api/auth/login&#x27;, authLimiter);
-
-</code></pre>
 <br>
-<h3>Input Validation</h3>
 <br>
-<p>Use a schema validation library. Never trust incoming data.</p>
+<p>Test your TLS setup with: `openssl s_client -connect example.com:443 -tls1_3`   </p>
+<p>\---   </p>
+<p>8\. Dependency Scanning and SBOM   </p>
+<p>Supply chain attacks are the fastest-growing threat vector. In 2026, the US Executive Order on cybersecurity and global regulations require Software Bills of Materials (SBOM) for production software.   </p>
+<p>Dependency Scanning Tools   </p>
+<p>| Tool | Scope | Integration | |------|-------|-------------| | `npm audit` / `yarn audit` | Node.js packages | CI/CD pipeline gate | | `pip-audit` | Python packages | pre-commit hooks | | `trivy` | Containers, OS packages, IaC | GitHub Actions, GitLab CI | | `snyk` | Multi-language, container | PR checks | | `dependabot` | GitHub-hosted repos | Auto-PRs for vulnerable deps | | `grype` | Containers, filesystem | Fast, free, OSS |   </p>
+<p>Running a Scan in CI   </p>
 <br>
-<pre><code>
-// Zod validation — reject unexpected fields and bad types
-
-const { z } = require(&#x27;zod&#x27;);
-
-
-
-const CreateUserSchema = z.object({
-
-  email: z.string().email(),
-
-  password: z.string().min(12).max(128),
-
-  role: z.enum([&#x27;user&#x27;, &#x27;admin&#x27;]).default(&#x27;user&#x27;),
-
-}).strict();  // strips or rejects extra fields
-
-
-
-app.post(&#x27;/api/users&#x27;, (req, res) =&gt; {
-
-  const parsed = CreateUserSchema.parse(req.body);
-
-  // parsed is now type-safe and validated
-
-});
-
-</code></pre>
 <br>
-<h3>Proper Error Handling</h3>
 <br>
-<p>Never leak stack traces, database schemas, or internal paths to API consumers.</p>
+<p>    # .github/workflows/security-scan.yml</p>
 <br>
-<pre><code>
-# BAD — leaks internals
-
-@app.exception_handler(Exception)
-
-async def debug_error(request, exc):
-
-    return JSONResponse(
-
-        status_code=500,
-
-        content={&quot;error&quot;: str(exc), &quot;traceback&quot;: traceback.format_exc()}
-
-    )
-
-
-
-# GOOD — sanitized errors with logging
-
-import logging
-
-logger = logging.getLogger(__name__)
-
-
-
-@app.exception_handler(HTTPException)
-
-async def http_error(request, exc):
-
-    return JSONResponse(
-
-        status_code=exc.status_code,
-
-        content={&quot;error&quot;: exc.detail}
-
-    )
-
-
-
-@app.exception_handler(Exception)
-
-async def generic_error(request, exc):
-
-    logger.error(&quot;Internal error&quot;, exc_info=True)
-
-    return JSONResponse(
-
-        status_code=500,
-
-        content={&quot;error&quot;: &quot;An internal error occurred&quot;}
-
-    )
-
-</code></pre>
+<p>    name: Security Scan</p>
 <br>
-<h3>API Security Checklist</h3>
+<p>    on: [push, pull_request]</p>
 <br>
-<li>[ ] Rate limiting on all endpoints (stricter on auth)</li>
-<li>[ ] Input validation with schema library (Zod, Pydantic, Marshmallow)</li>
-<li>[ ] Structured error responses — no stack traces</li>
-<li>[ ] Authentication on every endpoint (no unprotected internal routes)</li>
-<li>[ ] Audit logging for sensitive operations</li>
-<li>[ ] Request size limits (`body-parser` `limit` option, nginx `client_max_body_size`)</li>
-<li>[ ] API keys stored server-side only, rotated regularly</li>
-<li>[ ] UUIDs instead of auto-increment IDs in URLs</li>
+<p>    jobs:</p>
 <br>
-<p>---</p>
+<p>      scan:</p>
 <br>
-<h2> 11. Production Security Checklist</h2>
+<p>        runs-on: ubuntu-latest</p>
 <br>
-<p>A practical runbook to harden any web application before launch.</p>
+<p>        steps:</p>
 <br>
-<h3>Infrastructure</h3>
+<p>          - uses: actions/checkout@v4</p>
 <br>
-<li>[ ] All traffic is HTTPS (HSTS preloaded)</li>
-<li>[ ] TLS 1.2 minimum, TLS 1.3 preferred</li>
-<li>[ ] No default credentials on any service (database, Redis, admin panels)</li>
-<li>[ ] Database is not publicly accessible (private subnet / VPC)</li>
-<li>[ ] Secrets stored in a vault / secrets manager (not in `.env` files in repos)</li>
-<li>[ ] Container images scanned for CVEs before deployment</li>
+<p>          - name: Run Trivy vulnerability scanner</p>
 <br>
-<h3>Application</h3>
+<p>            uses: aquasecurity/trivy-action@master</p>
 <br>
-<li>[ ] All user input is validated and sanitized</li>
-<li>[ ] Parameterized queries everywhere — no SQL string concatenation</li>
-<li>[ ] Authentication uses short-lived tokens with rotation</li>
-<li>[ ] Session tokens stored in HTTP-only, Secure, SameSite cookies</li>
-<li>[ ] CSP header is enforced (not just report-only)</li>
-<li>[ ] CORS origins are explicitly whitelisted</li>
-<li>[ ] File uploads are restricted to allowed types and scanned</li>
-<li>[ ] File uploads stored outside the web root with random filenames</li>
-<li>[ ] IDs are UUIDs not sequential integers</li>
-<li>[ ] Logs contain no PII, tokens, or passwords</li>
-<li>[ ] Rate limiting is active on all endpoints</li>
+<p>            with:</p>
 <br>
-<h3>Process</h3>
+<p>              scan-type: 'fs'</p>
 <br>
-<li>[ ] Dependency scanning runs on every PR</li>
-<li>[ ] SBOM is generated with each release</li>
-<li>[ ] Secrets scanning (e.g., `git secrets`, `truffleHog`) in CI</li>
-<li>[ ] Regular penetration tests (at least annually)</li>
-<li>[ ] Incident response plan documented</li>
-<li>[ ] Dependabot or Renovate configured for auto-updates</li>
+<p>              scan-ref: '.'</p>
 <br>
-<p>---</p>
+<p>              format: 'sarif'</p>
 <br>
-<h2> Conclusion</h2>
+<p>              output: 'trivy-results.sarif'</p>
 <br>
-<p>Web security in 2026 is about layers. No single header, library, or practice will protect your application. The combination of CSP + parameterized queries + short-lived tokens + dependency scanning + proper CORS configuration + HSTS creates a defense-in-depth posture that raises the bar for attackers.</p>
+<p>          - name: Generate SBOM</p>
 <br>
-<p>Start with the production checklist above and work through each item. Automate everything you can — security scanning in CI, dependency updates, SBOM generation. The goal is not perfect security (it does not exist), but rather making your application resilient enough that attackers move on to an easier target.</p>
+<p>            uses: anchore/sbom-action@v0</p>
 <br>
-<p>**Remember:** security is not a one-time audit. It is a continuous practice embedded into your development workflow. Ship safely.</p>
+<p>            with:</p>
 <br>
-<p>---</p>
+<p>              format: 'spdx-json'</p>
 <br>
+<p>              output-file: 'sbom.spdx.json'</p>
+<br>
+<br>
+<br>
+<br>
+<p>What Goes Into an SBOM   </p>
+<br>
+<br>
+<br>
+<p>    {</p>
+<br>
+<p>      "bomFormat": "CycloneDX",</p>
+<br>
+<p>      "specVersion": "1.5",</p>
+<br>
+<p>      "metadata": {</p>
+<br>
+<p>        "component": {</p>
+<br>
+<p>          "name": "my-app",</p>
+<br>
+<p>          "version": "1.2.3",</p>
+<br>
+<p>          "type": "application"</p>
+<br>
+<p>        }</p>
+<br>
+<p>      },</p>
+<br>
+<p>      "components": [</p>
+<br>
+<p>        {</p>
+<br>
+<p>          "name": "express",</p>
+<br>
+<p>          "version": "4.18.2",</p>
+<br>
+<p>          "type": "library",</p>
+<br>
+<p>          "purl": "pkg:npm/express@4.18.2"</p>
+<br>
+<p>        }</p>
+<br>
+<p>      ]</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Action item:** Run `pip freeze > requirements.txt` or `npm list --json > deps.json` and pipe it through an SBOM generator in your CI pipeline. Store the SBOM alongside your release artifact.   </p>
+<p>\---   </p>
+<p>9\. Security Headers Checklist   </p>
+<p>Apply these HTTP response headers to every page and every API response.   </p>
+<p>| Header | Value | Purpose | |--------|-------|---------| | `Strict-Transport-Security` | `max-age=63072000; includeSubDomains` | Enforce HTTPS | | `Content-Security-Policy` | See Section 3 | Prevent XSS and data injection | | `X-Content-Type-Options` | `nosniff` | Prevent MIME type sniffing | | `X-Frame-Options` | `DENY` | Prevent clickjacking | | `X-XSS-Protection` | `0` | Disable legacy XSS filter (does more harm than good) | | `Referrer-Policy` | `strict-origin-when-cross-origin` | Control referrer data leakage | | `Permissions-Policy` | `camera=(), microphone=(), geolocation=()` | Restrict browser API access | | `Cache-Control` | `no-store, no-cache, must-revalidate` | Prevent sensitive data caching |   </p>
+<p>Apply Them in One Shot   </p>
+<br>
+<br>
+<br>
+<p>    // Express.js helmet — sets most security headers automatically</p>
+<br>
+<p>    const helmet = require('helmet');</p>
+<br>
+<p>    app.use(helmet());</p>
+<br>
+<br>
+<br>
+<p>    // Or set manually for fine control</p>
+<br>
+<p>    app.use((req, res, next) => {</p>
+<br>
+<p>      res.setHeader('X-Content-Type-Options', 'nosniff');</p>
+<br>
+<p>      res.setHeader('X-Frame-Options', 'DENY');</p>
+<br>
+<p>      res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');</p>
+<br>
+<p>      res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');</p>
+<br>
+<p>      next();</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # FastAPI with SecureHeaders middleware</p>
+<br>
+<p>    from secure import SecureHeaders</p>
+<br>
+<br>
+<br>
+<p>    secure_headers = SecureHeaders()</p>
+<br>
+<br>
+<br>
+<p>    @app.middleware("http")</p>
+<br>
+<p>    async def add_security_headers(request, call_next):</p>
+<br>
+<p>        response = await call_next(request)</p>
+<br>
+<p>        secure_headers.framework.fastapi(response)</p>
+<br>
+<p>        return response</p>
+<br>
+<br>
+<br>
+<br>
+<p>\---   </p>
+<p>10\. API Security Basics   </p>
+<p>APIs are the backbone of modern web applications and a prime attack target.   </p>
+<p>Rate Limiting   </p>
+<br>
+<br>
+<br>
+<p>    // Express.js with express-rate-limit</p>
+<br>
+<p>    const rateLimit = require('express-rate-limit');</p>
+<br>
+<br>
+<br>
+<p>    const globalLimiter = rateLimit({</p>
+<br>
+<p>      windowMs: 15 * 60 * 1000,      // 15 minutes</p>
+<br>
+<p>      max: 100,                       // limit each IP</p>
+<br>
+<p>      standardHeaders: true,</p>
+<br>
+<p>      legacyHeaders: false,</p>
+<br>
+<p>      message: { error: 'Too many requests' }</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<p>    const authLimiter = rateLimit({</p>
+<br>
+<p>      windowMs: 60 * 1000,            // 1 minute</p>
+<br>
+<p>      max: 5,                         // 5 attempts per minute</p>
+<br>
+<p>      message: { error: 'Too many auth attempts' }</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<p>    app.use('/api/', globalLimiter);</p>
+<br>
+<p>    app.use('/api/auth/login', authLimiter);</p>
+<br>
+<br>
+<br>
+<br>
+<p>Input Validation   </p>
+<p>Use a schema validation library. Never trust incoming data.   </p>
+<br>
+<br>
+<br>
+<p>    // Zod validation — reject unexpected fields and bad types</p>
+<br>
+<p>    const { z } = require('zod');</p>
+<br>
+<br>
+<br>
+<p>    const CreateUserSchema = z.object({</p>
+<br>
+<p>      email: z.string().email(),</p>
+<br>
+<p>      password: z.string().min(12).max(128),</p>
+<br>
+<p>      role: z.enum(['user', 'admin']).default('user'),</p>
+<br>
+<p>    }).strict();  // strips or rejects extra fields</p>
+<br>
+<br>
+<br>
+<p>    app.post('/api/users', (req, res) => {</p>
+<br>
+<p>      const parsed = CreateUserSchema.parse(req.body);</p>
+<br>
+<p>      // parsed is now type-safe and validated</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<br>
+<p>Proper Error Handling   </p>
+<p>Never leak stack traces, database schemas, or internal paths to API consumers.   </p>
+<br>
+<br>
+<br>
+<p>    # BAD — leaks internals</p>
+<br>
+<p>    @app.exception_handler(Exception)</p>
+<br>
+<p>    async def debug_error(request, exc):</p>
+<br>
+<p>        return JSONResponse(</p>
+<br>
+<p>            status_code=500,</p>
+<br>
+<p>            content={"error": str(exc), "traceback": traceback.format_exc()}</p>
+<br>
+<p>        )</p>
+<br>
+<br>
+<br>
+<p>    # GOOD — sanitized errors with logging</p>
+<br>
+<p>    import logging</p>
+<br>
+<p>    logger = logging.getLogger(__name__)</p>
+<br>
+<br>
+<br>
+<p>    @app.exception_handler(HTTPException)</p>
+<br>
+<p>    async def http_error(request, exc):</p>
+<br>
+<p>        return JSONResponse(</p>
+<br>
+<p>            status_code=exc.status_code,</p>
+<br>
+<p>            content={"error": exc.detail}</p>
+<br>
+<p>        )</p>
+<br>
+<br>
+<br>
+<p>    @app.exception_handler(Exception)</p>
+<br>
+<p>    async def generic_error(request, exc):</p>
+<br>
+<p>        logger.error("Internal error", exc_info=True)</p>
+<br>
+<p>        return JSONResponse(</p>
+<br>
+<p>            status_code=500,</p>
+<br>
+<p>            content={"error": "An internal error occurred"}</p>
+<br>
+<p>        )</p>
+<br>
+<br>
+<br>
+<br>
+<p>API Security Checklist   </p>
+<br>
+<p>* [ ] Rate limiting on all endpoints (stricter on auth)</p>
+<p>* [ ] Input validation with schema library (Zod, Pydantic, Marshmallow)</p>
+<p>* [ ] Structured error responses — no stack traces</p>
+<p>* [ ] Authentication on every endpoint (no unprotected internal routes)</p>
+<p>* [ ] Audit logging for sensitive operations</p>
+<p>* [ ] Request size limits (`body-parser` `limit` option, nginx `client_max_body_size`)</p>
+<p>* [ ] API keys stored server-side only, rotated regularly</p>
+<p>* [ ] UUIDs instead of auto-increment IDs in URLs</p>
+<br>
+<p>\---   </p>
+<p>11\. Production Security Checklist   </p>
+<p>A practical runbook to harden any web application before launch.   </p>
+<p>Infrastructure   </p>
+<br>
+<p>* [ ] All traffic is HTTPS (HSTS preloaded)</p>
+<p>* [ ] TLS 1.2 minimum, TLS 1.3 preferred</p>
+<p>* [ ] No default credentials on any service (database, Redis, admin panels)</p>
+<p>* [ ] Database is not publicly accessible (private subnet / VPC)</p>
+<p>* [ ] Secrets stored in a vault / secrets manager (not in `.env` files in repos)</p>
+<p>* [ ] Container images scanned for CVEs before deployment</p>
+<br>
+<p>Application   </p>
+<br>
+<p>* [ ] All user input is validated and sanitized</p>
+<p>* [ ] Parameterized queries everywhere — no SQL string concatenation</p>
+<p>* [ ] Authentication uses short-lived tokens with rotation</p>
+<p>* [ ] Session tokens stored in HTTP-only, Secure, SameSite cookies</p>
+<p>* [ ] CSP header is enforced (not just report-only)</p>
+<p>* [ ] CORS origins are explicitly whitelisted</p>
+<p>* [ ] File uploads are restricted to allowed types and scanned</p>
+<p>* [ ] File uploads stored outside the web root with random filenames</p>
+<p>* [ ] IDs are UUIDs not sequential integers</p>
+<p>* [ ] Logs contain no PII, tokens, or passwords</p>
+<p>* [ ] Rate limiting is active on all endpoints</p>
+<br>
+<p>Process   </p>
+<br>
+<p>* [ ] Dependency scanning runs on every PR</p>
+<p>* [ ] SBOM is generated with each release</p>
+<p>* [ ] Secrets scanning (e.g., `git secrets`, `truffleHog`) in CI</p>
+<p>* [ ] Regular penetration tests (at least annually)</p>
+<p>* [ ] Incident response plan documented</p>
+<p>* [ ] Dependabot or Renovate configured for auto-updates</p>
+<br>
+<p>\---   </p>
+<p>Conclusion   </p>
+<p>Web security in 2026 is about layers. No single header, library, or practice will protect your application. The combination of CSP + parameterized queries + short-lived tokens + dependency scanning + proper CORS configuration + HSTS creates a defense-in-depth posture that raises the bar for attackers.   </p>
+<p>Start with the production checklist above and work through each item. Automate everything you can — security scanning in CI, dependency updates, SBOM generation. The goal is not perfect security (it does not exist), but rather making your application resilient enough that attackers move on to an easier target.   </p>
+<p>**Remember:** security is not a one-time audit. It is a continuous practice embedded into your development workflow. Ship safely.   </p>
+<p>\---   </p>
 <p>*Last updated: May 2026*</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

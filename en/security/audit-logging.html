@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="audit-logging">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Audit Logging Best Practices">
+    <meta property="og:description" content="Guide to audit logging covering immutable logs, log integrity verification, centralized logging architecture, retention policies, and compliance requirements.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/audit-logging.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Audit Logging Best Practices">
+    <meta name="twitter:description" content="Guide to audit logging covering immutable logs, log integrity verification, centralized logging architecture, retention policies, and compliance requirements.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Audit Logging Best Practices — SourceHub</title>
+    <meta name="description" content="Guide to audit logging covering immutable logs, log integrity verification, centralized logging architecture, retention policies, and compliance requirements.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/audit-logging.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/audit-logging.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Audit Logging Best Practices",
+      "description": "Guide to audit logging covering immutable logs, log integrity verification, centralized logging architecture, retention policies, and compliance requirements.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "2247",
+      "keywords": "Security, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/audit-logging.html"},
+      "articleBody": "Audit Logging Best Practices Introduction Audit logs are the authoritative record of who did what, when, and where in a system. They are essential for incident investigation, compliance reporting, and operational troubleshooting. A robust audit logging architecture ensures logs are complete, tamper-evident, and readily accessible when needed \u2014 often months or years after the event. Immutable Logs Log immutability prevents attackers or insiders from covering their tracks by modifying or deleting log entries. Write-Once, Read-Many (WORM) Storage import hashlib import hmac import json from datetime import datetime class ImmutableAuditLogger: def __init__(self, storage_backend, hmac_key): self.storage = storage_backend self.hmac_key = hmac_key.encode() def write_log(self, event): \"\"\"Write a tamper-evident log entry.\"\"\" # Create log entry with metadata entry = { 'timestamp': datetime.utcnow().isoformat(), 'event': event, 'sequence': self._next_sequence(), } # Add hash of previous entry (blockchain-style chain) prev_entry = self.storage.get_last() if prev_entry: entry['prev_hash'] = prev_entry['hash'] else: entry['prev_hash'] = '0' * 64 # Calculate hash of this entry entry_json = json.dumps(entry, sort_keys=True) entry_hash = hashlib.sha256(entry_json.encode()).hexdigest() entry['hash'] = entry_hash # HMAC sign the hash entry['signature'] = hmac.new( self.hmac_key, entry_hash.encode(), hashlib.sha256 ).hexdigest() # Write to WORM storage log_id = f\"{entry['timestamp']}_{entry['sequence']}\" self.storage.write(log_id, entry) return entry def verify_chain(self): \"\"\"Verify integrity of the entire log chain.\"\"\" entries = self.storage.get_all() prev_hash = '0' * 64 for entry in entries: # Verify hash entry_copy = {k: v for k, v in entry.items() if k not in ('hash', 'signature')} computed_hash = hashlib.sha256( json.dumps(entry_copy, sort_keys=True).encode() ).hexdigest() if computed_hash != entry['hash']: return False, f\"Hash mismatch at sequence {entry['sequence']}\" # Verify chain link if entry['prev_hash'] != prev_hash: return False, f\"Chain break at sequence {entry['sequence']}\" # Verify HMAC expected_sig = hmac.new( self.hmac_key, entry['hash'].encode(), hashlib.sha256 ).hexdigest() if not hmac.compare_digest(expected_sig, entry['signature']): return False, f\"Signature mismatch at sequence {entry['sequence']}\" prev_hash = entry['hash'] return True, \"Log chain verified\" Append-Only Logging # Linux auditd configuration for immutable logs # /etc/audit/rules.d/audit.rules # Make audit log immutable -e 2 # Log all administrative commands -w /usr/bin/su -p x -k privilege_escalation -w /usr/bin/sudo -p x -k privilege_escalation # Log critical file access -w /etc/passwd -p wa -k passwd_changes -w /etc/shadow -p wa -k shadow_changes -w /etc/ssh/sshd_config -p wa -k ssh_config # Log system calls for process creation -a always,exit -S execve -k process_creation # Log network configuration changes -w /sbin/iptables -p x -k firewall_changes -w /sbin/ip6tables -p x -k firewall_changes # Set log file permissions -a exclude,never -F auid>=1000 Log Integrity Monitoring # Forward logs to remote syslog server (prevents local tampering) # /etc/rsyslog.d/remote-logging.conf *.* @@logs.example.com:514 # TCP with TLS $ActionSendStreamDriver gtls $ActionSendStreamDriverMode 1 $ActionSendStreamDriverAuthMode x509/name $ActionSendStreamDriverPermittedPeer *.example.com # Use Logstash/Filebeat for shipping filebeat.inputs: - type: log paths: - /var/log/audit/*.log - /var/log/syslog - /var/log/auth.log fields: environment: production log_type: security_audit output.elasticsearch: hosts: [\"https://elasticsearch.example.com:9200\"] protocol: \"https\" ssl.verification_mode: certificate Centralized Logging Architecture # Loki/Promtail centralized logging configuration scrape_configs: - job_name: audit-logs static_configs: - targets: - localhost labels: job: audit-logs environment: production __path__: /var/log/audit/*.log pipeline_stages: - json: expressions: timestamp: timestamp event_type: event.type user: event.user action: event.action resource: event.resource result: event.result - labels: event_type: \"\" result: \"\" - timestamp: source: timestamp format: RFC3339 Log Retention Policies retention_policies: security_audit_logs: retention: 365_days storage: warm_glacier compliance: soc2_pci_hipaa application_logs: retention: 30_days storage: hot compliance: operational debug_logs: retention: 7_days storage: hot compliance: none access_logs: retention: 90_days storage: warm compliance: soc2 backup_logs: retention: 3_years storage: glacier compliance: legal_hold # Automated log rotation and archival class LogRotationManager: def __init__(self, log_directory, archive_bucket): self.log_dir = Path(log_directory) self.archive_bucket = archive_bucket def rotate_and_archive(self, retention_days=365): now = datetime.utcnow() for log_file in self.log_dir.glob(\"audit-*.log\"): file_age = now - datetime.fromtimestamp(log_file.stat().st_mtime) if file_age.days > retention_days: # Compress gzip_path = log_file.with_suffix('.log.gz') with open(log_file, 'rb') as f_in: with gzip.open(gzip_path, 'wb') as f_out: shutil.copyfileobj(f_in, f_out) # Upload to cold storage self.archive_bucket.upload( str(gzip_path), f\"audit_logs/{gzip_path.name}\" ) # Delete local copy log_file.unlink() gzip_path.unlink() Compliance Requirements audit_log_compliance_mapping: pci_dss_10: - requirement: \"10.2\" # Audit trails for all access - requirement: \"10.3\" # Record audit trail entries - requirement: \"10.4\" # Protect audit trail files - requirement: \"10.5\" # Secure audit trails - requirement: \"10.7\" # Retain audit history for 12 months soc2_cc6: - criteria: \"CC6.1\" # Logical and physical access controls - criteria: \"CC6.4\" # Restricted access to audit trails gdpr_article_30: - requirement: \"Records of processing activities\" - requirement: \"Document data retention periods\" Conclusion Audit logging is a critical security control that requires careful architectural planning. Implement chain-of-hash verification for tamper evidence, write to immutable WORM storage, centralize logs for unified access, enforce retention policies aligned with compliance requirements, and protect log integrity throughout the lifecycle. The most sophisticated detection capabilities are useless if logs can be silently altered or deleted."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Audit Logging Best Practices"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Audit Logging Best Practices
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Audit Logging Best Practices</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Audit Logging Best Practices</h1>
+<br>
+<p>Introduction   </p>
+<p>Audit logs are the authoritative record of who did what, when, and where in a system. They are essential for incident investigation, compliance reporting, and operational troubleshooting. A robust audit logging architecture ensures logs are complete, tamper-evident, and readily accessible when needed — often months or years after the event.   </p>
+<p>Immutable Logs   </p>
+<p>Log immutability prevents attackers or insiders from covering their tracks by modifying or deleting log entries.   </p>
+<p>Write-Once, Read-Many (WORM) Storage   </p>
+<br>
+<br>
+<br>
+<p>    import hashlib</p>
+<br>
+<p>    import hmac</p>
+<br>
+<p>    import json</p>
+<br>
+<p>    from datetime import datetime</p>
+<br>
+<br>
+<br>
+<p>    class ImmutableAuditLogger:</p>
+<br>
+<p>        def __init__(self, storage_backend, hmac_key):</p>
+<br>
+<p>            self.storage = storage_backend</p>
+<br>
+<p>            self.hmac_key = hmac_key.encode()</p>
+<br>
+<br>
+<br>
+<p>        def write_log(self, event):</p>
+<br>
+<p>            """Write a tamper-evident log entry."""</p>
+<br>
+<p>            # Create log entry with metadata</p>
+<br>
+<p>            entry = {</p>
+<br>
+<p>                'timestamp': datetime.utcnow().isoformat(),</p>
+<br>
+<p>                'event': event,</p>
+<br>
+<p>                'sequence': self._next_sequence(),</p>
+<br>
+<p>            }</p>
+<br>
+<br>
+<br>
+<p>            # Add hash of previous entry (blockchain-style chain)</p>
+<br>
+<p>            prev_entry = self.storage.get_last()</p>
+<br>
+<p>            if prev_entry:</p>
+<br>
+<p>                entry['prev_hash'] = prev_entry['hash']</p>
+<br>
+<p>            else:</p>
+<br>
+<p>                entry['prev_hash'] = '0' * 64</p>
+<br>
+<br>
+<br>
+<p>            # Calculate hash of this entry</p>
+<br>
+<p>            entry_json = json.dumps(entry, sort_keys=True)</p>
+<br>
+<p>            entry_hash = hashlib.sha256(entry_json.encode()).hexdigest()</p>
+<br>
+<p>            entry['hash'] = entry_hash</p>
+<br>
+<br>
+<br>
+<p>            # HMAC sign the hash</p>
+<br>
+<p>            entry['signature'] = hmac.new(</p>
+<br>
+<p>                self.hmac_key,</p>
+<br>
+<p>                entry_hash.encode(),</p>
+<br>
+<p>                hashlib.sha256</p>
+<br>
+<p>            ).hexdigest()</p>
+<br>
+<br>
+<br>
+<p>            # Write to WORM storage</p>
+<br>
+<p>            log_id = f"{entry['timestamp']}_{entry['sequence']}"</p>
+<br>
+<p>            self.storage.write(log_id, entry)</p>
+<br>
+<br>
+<br>
+<p>            return entry</p>
+<br>
+<br>
+<br>
+<p>        def verify_chain(self):</p>
+<br>
+<p>            """Verify integrity of the entire log chain."""</p>
+<br>
+<p>            entries = self.storage.get_all()</p>
+<br>
+<p>            prev_hash = '0' * 64</p>
+<br>
+<br>
+<br>
+<p>            for entry in entries:</p>
+<br>
+<p>                # Verify hash</p>
+<br>
+<p>                entry_copy = {k: v for k, v in entry.items() </p>
+<br>
+<p>                             if k not in ('hash', 'signature')}</p>
+<br>
+<p>                computed_hash = hashlib.sha256(</p>
+<br>
+<p>                    json.dumps(entry_copy, sort_keys=True).encode()</p>
+<br>
+<p>                ).hexdigest()</p>
+<br>
+<br>
+<br>
+<p>                if computed_hash != entry['hash']:</p>
+<br>
+<p>                    return False, f"Hash mismatch at sequence {entry['sequence']}"</p>
+<br>
+<br>
+<br>
+<p>                # Verify chain link</p>
+<br>
+<p>                if entry['prev_hash'] != prev_hash:</p>
+<br>
+<p>                    return False, f"Chain break at sequence {entry['sequence']}"</p>
+<br>
+<br>
+<br>
+<p>                # Verify HMAC</p>
+<br>
+<p>                expected_sig = hmac.new(</p>
+<br>
+<p>                    self.hmac_key,</p>
+<br>
+<p>                    entry['hash'].encode(),</p>
+<br>
+<p>                    hashlib.sha256</p>
+<br>
+<p>                ).hexdigest()</p>
+<br>
+<br>
+<br>
+<p>                if not hmac.compare_digest(expected_sig, entry['signature']):</p>
+<br>
+<p>                    return False, f"Signature mismatch at sequence {entry['sequence']}"</p>
+<br>
+<br>
+<br>
+<p>                prev_hash = entry['hash']</p>
+<br>
+<br>
+<br>
+<p>            return True, "Log chain verified"</p>
+<br>
+<br>
+<br>
+<br>
+<p>Append-Only Logging   </p>
+<br>
+<br>
+<br>
+<p>    # Linux auditd configuration for immutable logs</p>
+<br>
+<p>    # /etc/audit/rules.d/audit.rules</p>
+<br>
+<p>    # Make audit log immutable</p>
+<br>
+<p>    -e 2</p>
+<br>
+<br>
+<br>
+<p>    # Log all administrative commands</p>
+<br>
+<p>    -w /usr/bin/su -p x -k privilege_escalation</p>
+<br>
+<p>    -w /usr/bin/sudo -p x -k privilege_escalation</p>
+<br>
+<br>
+<br>
+<p>    # Log critical file access</p>
+<br>
+<p>    -w /etc/passwd -p wa -k passwd_changes</p>
+<br>
+<p>    -w /etc/shadow -p wa -k shadow_changes</p>
+<br>
+<p>    -w /etc/ssh/sshd_config -p wa -k ssh_config</p>
+<br>
+<br>
+<br>
+<p>    # Log system calls for process creation</p>
+<br>
+<p>    -a always,exit -S execve -k process_creation</p>
+<br>
+<br>
+<br>
+<p>    # Log network configuration changes</p>
+<br>
+<p>    -w /sbin/iptables -p x -k firewall_changes</p>
+<br>
+<p>    -w /sbin/ip6tables -p x -k firewall_changes</p>
+<br>
+<br>
+<br>
+<p>    # Set log file permissions</p>
+<br>
+<p>    -a exclude,never -F auid>=1000</p>
+<br>
+<br>
+<br>
+<br>
+<p>Log Integrity Monitoring   </p>
+<br>
+<br>
+<br>
+<p>    # Forward logs to remote syslog server (prevents local tampering)</p>
+<br>
+<p>    # /etc/rsyslog.d/remote-logging.conf</p>
+<br>
+<p>    *.* @@logs.example.com:514  # TCP with TLS</p>
+<br>
+<p>    $ActionSendStreamDriver gtls</p>
+<br>
+<p>    $ActionSendStreamDriverMode 1</p>
+<br>
+<p>    $ActionSendStreamDriverAuthMode x509/name</p>
+<br>
+<p>    $ActionSendStreamDriverPermittedPeer *.example.com</p>
+<br>
+<br>
+<br>
+<p>    # Use Logstash/Filebeat for shipping</p>
+<br>
+<p>    filebeat.inputs:</p>
+<br>
+<p>      - type: log</p>
+<br>
+<p>        paths:</p>
+<br>
+<p>          - /var/log/audit/*.log</p>
+<br>
+<p>          - /var/log/syslog</p>
+<br>
+<p>          - /var/log/auth.log</p>
+<br>
+<p>        fields:</p>
+<br>
+<p>          environment: production</p>
+<br>
+<p>          log_type: security_audit</p>
+<br>
+<br>
+<br>
+<p>    output.elasticsearch:</p>
+<br>
+<p>      hosts: ["https://elasticsearch.example.com:9200"]</p>
+<br>
+<p>      protocol: "https"</p>
+<br>
+<p>      ssl.verification_mode: certificate</p>
+<br>
+<br>
+<br>
+<br>
+<p>Centralized Logging Architecture   </p>
+<br>
+<br>
+<br>
+<p>    # Loki/Promtail centralized logging configuration</p>
+<br>
+<p>    scrape_configs:</p>
+<br>
+<p>      - job_name: audit-logs</p>
+<br>
+<p>        static_configs:</p>
+<br>
+<p>          - targets:</p>
+<br>
+<p>              - localhost</p>
+<br>
+<p>            labels:</p>
+<br>
+<p>              job: audit-logs</p>
+<br>
+<p>              environment: production</p>
+<br>
+<p>              __path__: /var/log/audit/*.log</p>
+<br>
+<br>
+<br>
+<p>        pipeline_stages:</p>
+<br>
+<p>          - json:</p>
+<br>
+<p>              expressions:</p>
+<br>
+<p>                timestamp: timestamp</p>
+<br>
+<p>                event_type: event.type</p>
+<br>
+<p>                user: event.user</p>
+<br>
+<p>                action: event.action</p>
+<br>
+<p>                resource: event.resource</p>
+<br>
+<p>                result: event.result</p>
+<br>
+<br>
+<br>
+<p>          - labels:</p>
+<br>
+<p>              event_type: ""</p>
+<br>
+<p>              result: ""</p>
+<br>
+<br>
+<br>
+<p>          - timestamp:</p>
+<br>
+<p>              source: timestamp</p>
+<br>
+<p>              format: RFC3339</p>
+<br>
+<br>
+<br>
+<br>
+<p>Log Retention Policies   </p>
+<br>
+<br>
+<br>
+<p>    retention_policies:</p>
+<br>
+<p>      security_audit_logs:</p>
+<br>
+<p>        retention: 365_days</p>
+<br>
+<p>        storage: warm_glacier</p>
+<br>
+<p>        compliance: soc2_pci_hipaa</p>
+<br>
+<br>
+<br>
+<p>      application_logs:</p>
+<br>
+<p>        retention: 30_days</p>
+<br>
+<p>        storage: hot</p>
+<br>
+<p>        compliance: operational</p>
+<br>
+<br>
+<br>
+<p>      debug_logs:</p>
+<br>
+<p>        retention: 7_days</p>
+<br>
+<p>        storage: hot</p>
+<br>
+<p>        compliance: none</p>
+<br>
+<br>
+<br>
+<p>      access_logs:</p>
+<br>
+<p>        retention: 90_days</p>
+<br>
+<p>        storage: warm</p>
+<br>
+<p>        compliance: soc2</p>
+<br>
+<br>
+<br>
+<p>      backup_logs:</p>
+<br>
+<p>        retention: 3_years</p>
+<br>
+<p>        storage: glacier</p>
+<br>
+<p>        compliance: legal_hold</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Automated log rotation and archival</p>
+<br>
+<p>    class LogRotationManager:</p>
+<br>
+<p>        def __init__(self, log_directory, archive_bucket):</p>
+<br>
+<p>            self.log_dir = Path(log_directory)</p>
+<br>
+<p>            self.archive_bucket = archive_bucket</p>
+<br>
+<br>
+<br>
+<p>        def rotate_and_archive(self, retention_days=365):</p>
+<br>
+<p>            now = datetime.utcnow()</p>
+<br>
+<br>
+<br>
+<p>            for log_file in self.log_dir.glob("audit-*.log"):</p>
+<br>
+<p>                file_age = now - datetime.fromtimestamp(log_file.stat().st_mtime)</p>
+<br>
+<br>
+<br>
+<p>                if file_age.days > retention_days:</p>
+<br>
+<p>                    # Compress</p>
+<br>
+<p>                    gzip_path = log_file.with_suffix('.log.gz')</p>
+<br>
+<p>                    with open(log_file, 'rb') as f_in:</p>
+<br>
+<p>                        with gzip.open(gzip_path, 'wb') as f_out:</p>
+<br>
+<p>                            shutil.copyfileobj(f_in, f_out)</p>
+<br>
+<br>
+<br>
+<p>                    # Upload to cold storage</p>
+<br>
+<p>                    self.archive_bucket.upload(</p>
+<br>
+<p>                        str(gzip_path),</p>
+<br>
+<p>                        f"audit_logs/{gzip_path.name}"</p>
+<br>
+<p>                    )</p>
+<br>
+<br>
+<br>
+<p>                    # Delete local copy</p>
+<br>
+<p>                    log_file.unlink()</p>
+<br>
+<p>                    gzip_path.unlink()</p>
+<br>
+<br>
+<br>
+<br>
+<p>Compliance Requirements   </p>
+<br>
+<br>
+<br>
+<p>    audit_log_compliance_mapping:</p>
+<br>
+<p>      pci_dss_10:</p>
+<br>
+<p>        - requirement: "10.2"  # Audit trails for all access</p>
+<br>
+<p>        - requirement: "10.3"  # Record audit trail entries</p>
+<br>
+<p>        - requirement: "10.4"  # Protect audit trail files</p>
+<br>
+<p>        - requirement: "10.5"  # Secure audit trails</p>
+<br>
+<p>        - requirement: "10.7"  # Retain audit history for 12 months</p>
+<br>
+<br>
+<br>
+<p>      soc2_cc6:</p>
+<br>
+<p>        - criteria: "CC6.1"  # Logical and physical access controls</p>
+<br>
+<p>        - criteria: "CC6.4"  # Restricted access to audit trails</p>
+<br>
+<br>
+<br>
+<p>      gdpr_article_30:</p>
+<br>
+<p>        - requirement: "Records of processing activities"</p>
+<br>
+<p>        - requirement: "Document data retention periods"</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
+<p>Audit logging is a critical security control that requires careful architectural planning. Implement chain-of-hash verification for tamper evidence, write to immutable WORM storage, centralize logs for unified access, enforce retention policies aligned with compliance requirements, and protect log integrity throughout the lifecycle. The most sophisticated detection capabilities are useless if logs can be silently altered or deleted.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

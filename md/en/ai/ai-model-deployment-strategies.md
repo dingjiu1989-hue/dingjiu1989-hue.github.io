@@ -1,0 +1,32 @@
+---
+title: "AI Model Deployment: Strategies for Production LLM Serving"
+description: "Deploy LLMs to production: serving infrastructure, batching, caching, load balancing, and cost optimization."
+date: 2026-05-12
+board: ai
+url: https://dingjiu1989-hue.github.io/en/ai/ai-model-deployment-strategies.html
+---
+
+# AI Model Deployment: Strategies for Production LLM Serving
+Deploying AI models to production requires infrastructure for serving, scaling, and monitoring. LLM deployment differs from traditional ML deployment due to high compute requirements, variable latency, and unique cost models.
+
+## Serving Options
+
+Managed APIs (OpenAI, Anthropic, Google) provide the simplest deployment. No infrastructure management. Pay per token. Best for most applications. Limited customization and data control.
+
+Self-hosted (vLLM, TGI, Triton) provide full control. Lower per-token cost at scale. Data stays within your infrastructure. Requires GPU infrastructure and operational expertise.
+
+Hybrid: use managed APIs for production and self-hosted for high-volume or sensitive workloads. This balances cost, latency, and control.
+
+## Infrastructure
+
+LLM serving requires GPU instances (A100, H100). Use autoscaling to handle traffic variability. Load balance across instances. Implement request queuing and retry logic. Monitor GPU utilization and memory.
+
+## Optimization Techniques
+
+Continuous batching: combine multiple requests into a single batch for efficient GPU utilization. Speculative decoding: use a small model to generate tokens that a large model validates. KV-cache optimization: reuse cached attention computations across requests.
+
+Prompt caching: store processed prompt outputs for identical or similar requests. Semantic caching: cache responses for semantically similar inputs. These techniques reduce both latency and cost.
+
+## Monitoring
+
+Track latency (TTFT and TPOT), throughput (tokens/second), error rates, and cost per request. Monitor GPU memory, utilization, and temperature. Set up alerts for latency spikes and error rate increases.

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="debugging-techniques">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Debugging Techniques">
+    <meta property="og:description" content="Learn debugging techniques: logging, distributed tracing, profiling, interactive debuggers, and systematic problem-solving">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/debugging-techniques.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Debugging Techniques">
+    <meta name="twitter:description" content="Learn debugging techniques: logging, distributed tracing, profiling, interactive debuggers, and systematic problem-solving">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Debugging Techniques — SourceHub</title>
+    <meta name="description" content="Learn debugging techniques: logging, distributed tracing, profiling, interactive debuggers, and systematic problem-solving">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/debugging-techniques.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/debugging-techniques.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Debugging Techniques",
+      "description": "Learn debugging techniques: logging, distributed tracing, profiling, interactive debuggers, and systematic problem-solving",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1145",
+      "keywords": "Technology, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/debugging-techniques.html"},
+      "articleBody": "Debugging Techniques Debugging is an essential skill that separates effective engineers from frustrated ones. Modern distributed systems introduce complexities that make debugging harder: multiple services, asynchronous communication, and ephemeral infrastructure. This article covers systematic debugging techniques from logging and tracing through profiling and interactive debugging. Structured Logging The foundation of debugging is effective logging. Structured logging outputs logs as structured data (JSON) rather than free text, making them machine-parseable and searchable. Each log entry includes a timestamp, severity level, service name, request ID, and structured context. Good logging follows principles. Log at appropriate levels: DEBUG for detailed diagnostic information, INFO for normal operations, WARN for unexpected but handled situations, ERROR for failures requiring attention. Include enough context to understand what happened without requiring log correlation. Use correlation IDs to trace requests across services. Log aggregation tools (Elasticsearch, Loki, CloudWatch Logs) centralize logs from all services. The ability to search across all logs, filter by time range and severity, and correlate related entries is essential for debugging distributed systems. Distributed Tracing Distributed tracing tracks a single request as it flows through multiple services. Each service adds a span to the trace, recording the operation, timing, and metadata. The complete trace shows the full path of a request and identifies which service caused slowdowns or failures. OpenTelemetry has become the standard for distributed tracing. Services instrument their code to create spans and propagate trace context through headers. Jaeger, Zipkin, and Grafana Tempo provide visualization and analysis of traces. Tracing is invaluable for debugging latency issues. A trace shows exactly which service call consumed the most time, whether calls were sequential when they could have been parallel, and whether retries contributed to overall latency. Without tracing, latency debugging in distributed systems is guesswork. Profiling Profiling measures where a program spends its time and memory. CPU profiling identifies the functions that consume the most CPU time. Memory profiling identifies allocation hotspots and objects that consume the most memory. IO profiling identifies blocking operations. Available profiling tools differ by platform. Go's pprof provides CPU, memory, goroutine, and blocking profiles. Python's cProfile and py-spy provide function-level profiling. Java's Async Profiler provides CPU and allocation profiling with low overhead. Node.js includes built-in profiling through the inspector. Profiling should be done on production-like workloads. Hot paths in development may differ from production. Continuous profiling in production (using tools like Pyroscope or Google Cloud Profiler) provides ongoing insight into performance characteristics. Interactive Debuggers Interactive debuggers allow stepping through code, inspecting variables, and evaluating expressions at runtime. They are most useful during development for understanding unexpected behavior. Tools like VS Code's debugger, GDB (for compiled languages), and pdb (for Python) provide interactive debugging capabilities. Debuggers have limitations in distributed systems. A debugger breakpoint in one service stops only that service while other services continue, potentially causing timeouts. Debuggers are also difficult to use in ephemeral containers and serverless environments. A pragmatic approach uses interactive debugging during development and logging, tracing, and profiling for production issues. The time spent setting up a debugger in production is usually better spent adding logging and deploying a fix. Systematic Debugging Effective debugging follows a systematic process. Reproduce the issue reliably. Collect all available information (logs, traces, metrics). Form a hypothesis about the root cause. Test the hypothesis through experiments or additional analysis. Confirm the root cause with a targeted fix. Verify the fix resolves the issue. This scientific method prevents common debugging mistakes: jumping to conclusions without evidence, changing multiple things at once, optimizing before understanding the bottleneck, and fixing symptoms rather than root causes. Using the Right Tool Different debugging scenarios require different tools. A slow response needs tracing to find the bottleneck. An error needs log analysis to understand the failure. A crash needs a core dump and stack trace analysis. A memory leak needs heap profiling and diff analysis. A performance regression needs before/after profiling comparison. Build a debugging toolkit over time. Maintain scripts for common debugging tasks. Document debugging procedures for your system. The time invested in tooling and documentation pays off when production incidents require rapid diagnosis. Effective debugging is not about natural talent\u2014it is about systematic methodology and appropriate tooling."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Debugging Techniques"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Debugging Techniques
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Debugging Techniques</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Debugging Techniques</h1>
+<br>
+<p>Debugging is an essential skill that separates effective engineers from frustrated ones. Modern distributed systems introduce complexities that make debugging harder: multiple services, asynchronous communication, and ephemeral infrastructure. This article covers systematic debugging techniques from logging and tracing through profiling and interactive debugging.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Structured Logging</h2>
+<br>
+<br>
+<br>
+<br>
+<p>The foundation of debugging is effective logging. Structured logging outputs logs as structured data (JSON) rather than free text, making them machine-parseable and searchable. Each log entry includes a timestamp, severity level, service name, request ID, and structured context.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Good logging follows principles. Log at appropriate levels: DEBUG for detailed diagnostic information, INFO for normal operations, WARN for unexpected but handled situations, ERROR for failures requiring attention. Include enough context to understand what happened without requiring log correlation. Use correlation IDs to trace requests across services.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Log aggregation tools (Elasticsearch, Loki, CloudWatch Logs) centralize logs from all services. The ability to search across all logs, filter by time range and severity, and correlate related entries is essential for debugging distributed systems.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Distributed Tracing</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Distributed tracing tracks a single request as it flows through multiple services. Each service adds a span to the trace, recording the operation, timing, and metadata. The complete trace shows the full path of a request and identifies which service caused slowdowns or failures.</p>
+<br>
+<br>
+<br>
+<br>
+<p>OpenTelemetry has become the standard for distributed tracing. Services instrument their code to create spans and propagate trace context through headers. Jaeger, Zipkin, and Grafana Tempo provide visualization and analysis of traces.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Tracing is invaluable for debugging latency issues. A trace shows exactly which service call consumed the most time, whether calls were sequential when they could have been parallel, and whether retries contributed to overall latency. Without tracing, latency debugging in distributed systems is guesswork.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Profiling</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Profiling measures where a program spends its time and memory. CPU profiling identifies the functions that consume the most CPU time. Memory profiling identifies allocation hotspots and objects that consume the most memory. IO profiling identifies blocking operations.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Available profiling tools differ by platform. Go's pprof provides CPU, memory, goroutine, and blocking profiles. Python's cProfile and py-spy provide function-level profiling. Java's Async Profiler provides CPU and allocation profiling with low overhead. Node.js includes built-in profiling through the inspector.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Profiling should be done on production-like workloads. Hot paths in development may differ from production. Continuous profiling in production (using tools like Pyroscope or Google Cloud Profiler) provides ongoing insight into performance characteristics.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Interactive Debuggers</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Interactive debuggers allow stepping through code, inspecting variables, and evaluating expressions at runtime. They are most useful during development for understanding unexpected behavior. Tools like VS Code's debugger, GDB (for compiled languages), and pdb (for Python) provide interactive debugging capabilities.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Debuggers have limitations in distributed systems. A debugger breakpoint in one service stops only that service while other services continue, potentially causing timeouts. Debuggers are also difficult to use in ephemeral containers and serverless environments.</p>
+<br>
+<br>
+<br>
+<br>
+<p>A pragmatic approach uses interactive debugging during development and logging, tracing, and profiling for production issues. The time spent setting up a debugger in production is usually better spent adding logging and deploying a fix.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Systematic Debugging</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Effective debugging follows a systematic process. Reproduce the issue reliably. Collect all available information (logs, traces, metrics). Form a hypothesis about the root cause. Test the hypothesis through experiments or additional analysis. Confirm the root cause with a targeted fix. Verify the fix resolves the issue.</p>
+<br>
+<br>
+<br>
+<br>
+<p>This scientific method prevents common debugging mistakes: jumping to conclusions without evidence, changing multiple things at once, optimizing before understanding the bottleneck, and fixing symptoms rather than root causes.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Using the Right Tool</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Different debugging scenarios require different tools. A slow response needs tracing to find the bottleneck. An error needs log analysis to understand the failure. A crash needs a core dump and stack trace analysis. A memory leak needs heap profiling and diff analysis. A performance regression needs before/after profiling comparison.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Build a debugging toolkit over time. Maintain scripts for common debugging tasks. Document debugging procedures for your system. The time invested in tooling and documentation pays off when production incidents require rapid diagnosis. Effective debugging is not about natural talent—it is about systematic methodology and appropriate tooling.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+---
+title: "Nginx vs Apache: Web Server Comparison 2026"
+description: "Compare Nginx and Apache web servers: architecture, performance, configuration, and ecosystem."
+date: 2026-05-12
+board: compare
+url: https://dingjiu1989-hue.github.io/en/compare/nginx-vs-apache.html
+---
+
+# Nginx vs Apache: Web Server Comparison 2026
+Nginx and Apache are the two dominant web servers. Nginx uses an event-driven, asynchronous architecture. Apache uses a process-driven architecture with MPM (Multi-Processing Modules).
+
+## Architecture
+
+Nginx handles thousands of concurrent connections with a single thread. Each connection is handled as an event in an event loop. This makes Nginx memory-efficient under high concurrency. Nginx cannot embed interpreters—it proxies requests to application servers.
+
+Apache uses one thread or process per connection. Prefork MPM creates separate processes. Worker MPM uses threads. Event MPM keeps connections alive without consuming threads. Apache supports embedded interpreters via mod_php, mod_perl, and mod_python.
+
+## Performance
+
+Nginx excels at static file serving and high-concurrency connections. It handles 10,000+ concurrent connections with minimal memory. Apache performs well for dynamic content when using embedded interpreters.
+
+## Configuration
+
+Nginx configuration is clean and hierarchical. Apache configuration uses per-directory .htaccess files, which add flexibility but require directory traversal on every request. Nginx does not support .htaccess.
+
+## Ecosystem
+
+Apache has more modules and longer history. Nginx has a growing module ecosystem and better integration with modern architectures. Nginx is the default in most container images.
+
+## Choosing
+
+Use Nginx for high-concurrency static serving, reverse proxy, and microservices. Use Apache for shared hosting environments requiring .htaccess compatibility and embedded interpreters.

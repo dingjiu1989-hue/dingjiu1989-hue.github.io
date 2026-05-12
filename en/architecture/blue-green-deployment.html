@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="blue-green-deployment">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Blue-Green Deployment Strategy">
+    <meta property="og:description" content="Master blue-green deployments for zero-downtime releases, rollback safety, and production traffic switching.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/blue-green-deployment.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blue-Green Deployment Strategy">
+    <meta name="twitter:description" content="Master blue-green deployments for zero-downtime releases, rollback safety, and production traffic switching.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Blue-Green Deployment Strategy — SourceHub</title>
+    <meta name="description" content="Master blue-green deployments for zero-downtime releases, rollback safety, and production traffic switching.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/blue-green-deployment.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/blue-green-deployment.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Blue-Green Deployment Strategy",
+      "description": "Master blue-green deployments for zero-downtime releases, rollback safety, and production traffic switching.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "456",
+      "keywords": "Architecture, System Design, Backend",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/blue-green-deployment.html"},
+      "articleBody": "Blue-Green Deployment Strategy Blue-green deployment is a release strategy that maintains two identical production environments\u2014blue (current) and green (new)\u2014and switches traffic between them. This approach eliminates downtime during deployments and provides instant rollback capability. How Blue-Green Works The blue environment runs the current production version. The green environment is provisioned with the new version and is fully tested. Once green passes all validation, a router or load balancer switches traffic from blue to green. If issues are detected, traffic can be instantly switched back to blue. This design requires the infrastructure to run both environments simultaneously. For cloud deployments, this means double the infrastructure cost during the transition period. Container orchestration platforms like Kubernetes can reduce this overhead by running both versions within the same cluster and switching service selectors. Advantages Zero-downtime deployments are the primary benefit. Users never experience service interruption because the switch is instantaneous at the load balancer level. Rollback is trivial\u2014switch traffic back to the previous environment. The strategy also supports pre-deployment validation in a production-like environment. Challenges Database schema changes require careful handling. If the green deployment includes database migrations, both environments must be compatible with the schema during the transition. Techniques like backward-compatible migrations and phased rollouts address this issue. The doubled infrastructure cost can be significant for large deployments. Cloud auto-scaling and shorter overlap periods help manage costs. Some organizations use a single environment with blue-green deployment slots (like Azure Deployment Slots) to reduce infrastructure requirements. Best Practices Automate the entire process from environment provisioning to traffic switching. Use canary analysis during the switch\u2014gradually shift traffic percentage and monitor error rates. Keep the overlap period short to minimize costs. Document the rollback procedure and test it regularly."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Blue-Green Deployment Strategy"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Blue-Green Deployment Strategy
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">Blue-Green Deployment Strategy</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Blue-Green Deployment Strategy</h1>
+<p>Blue-green deployment is a release strategy that maintains two identical production environments—blue (current) and green (new)—and switches traffic between them. This approach eliminates downtime during deployments and provides instant rollback capability.</p>
+<br>
+<h2> How Blue-Green Works</h2>
+<br>
+<p>The blue environment runs the current production version. The green environment is provisioned with the new version and is fully tested. Once green passes all validation, a router or load balancer switches traffic from blue to green. If issues are detected, traffic can be instantly switched back to blue.</p>
+<br>
+<p>This design requires the infrastructure to run both environments simultaneously. For cloud deployments, this means double the infrastructure cost during the transition period. Container orchestration platforms like Kubernetes can reduce this overhead by running both versions within the same cluster and switching service selectors.</p>
+<br>
+<h2> Advantages</h2>
+<br>
+<p>Zero-downtime deployments are the primary benefit. Users never experience service interruption because the switch is instantaneous at the load balancer level. Rollback is trivial—switch traffic back to the previous environment. The strategy also supports pre-deployment validation in a production-like environment.</p>
+<br>
+<h2> Challenges</h2>
+<br>
+<p>Database schema changes require careful handling. If the green deployment includes database migrations, both environments must be compatible with the schema during the transition. Techniques like backward-compatible migrations and phased rollouts address this issue.</p>
+<br>
+<p>The doubled infrastructure cost can be significant for large deployments. Cloud auto-scaling and shorter overlap periods help manage costs. Some organizations use a single environment with blue-green deployment slots (like Azure Deployment Slots) to reduce infrastructure requirements.</p>
+<br>
+<h2> Best Practices</h2>
+<br>
+<p>Automate the entire process from environment provisioning to traffic switching. Use canary analysis during the switch—gradually shift traffic percentage and monitor error rates. Keep the overlap period short to minimize costs. Document the rollback procedure and test it regularly.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

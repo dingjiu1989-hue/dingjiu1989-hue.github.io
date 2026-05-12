@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="gdpr-technical">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="GDPR Technical Controls">
+    <meta property="og:description" content="Implementing GDPR technical controls for data mapping, consent management, right to deletion, and PIA.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/gdpr-technical.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="GDPR Technical Controls">
+    <meta name="twitter:description" content="Implementing GDPR technical controls for data mapping, consent management, right to deletion, and PIA.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>GDPR Technical Controls — SourceHub</title>
+    <meta name="description" content="Implementing GDPR technical controls for data mapping, consent management, right to deletion, and PIA.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/gdpr-technical.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/gdpr-technical.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "GDPR Technical Controls",
+      "description": "Implementing GDPR technical controls for data mapping, consent management, right to deletion, and PIA.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1768",
+      "keywords": "Security, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/gdpr-technical.html"},
+      "articleBody": "GDPR Technical Controls GDPR Technical Requirements GDPR requires technical controls for data protection by design and by default. Key areas include data mapping, consent, deletion, and privacy impact assessments. Data Mapping Maintain a comprehensive data inventory: class DataMappingService: def __init__(self): self.data_flows = [] def register_data_flow(self, flow): self.data_flows.append({ \"id\": str(uuid.uuid4()), \"data_controller\": flow[\"controller\"], \"data_processor\": flow.get(\"processor\"), \"data_categories\": flow[\"categories\"], \"data_subjects\": flow[\"subjects\"], \"purpose\": flow[\"purpose\"], \"legal_basis\": flow[\"legal_basis\"], \"storage_location\": flow[\"location\"], \"retention_period\": flow[\"retention\"], \"transfers\": flow.get(\"transfers\", []), \"created_at\": datetime.utcnow().isoformat() }) def search_data_subject(self, subject_id): \"\"\"Find all data related to a specific subject\"\"\" results = [] for flow in self.data_flows: if subject_id in flow[\"data_subjects\"]: results.append(flow) return results def generate_roppa_report(self): \"\"\"Generate Record of Processing Activities\"\"\" return { \"organization\": \"Example Corp\", \"dpo\": \"privacy@example.com\", \"processing_activities\": self.data_flows, \"generated_at\": datetime.utcnow().isoformat() } Consent Management Implement granular consent tracking: // Consent management API class ConsentManager { constructor() { this.consentRecords = new Map(); } recordConsent(userId, purposes) { const record = { userId, purposes: purposes.map(p => ({ id: p.id, granted: p.granted, timestamp: new Date().toISOString(), ip: p.ip, userAgent: p.userAgent })), version: CONSENT_VERSION, createdAt: new Date().toISOString() }; this.consentRecords.set(userId, record); this.auditLog('consent_recorded', { userId, purposes: p.id }); return record; } checkConsent(userId, purposeId) { const record = this.consentRecords.get(userId); if (!record) return false; const purpose = record.purposes.find(p => p.id === purposeId); return purpose?.granted === true && !this.isWithdrawn(userId, purposeId); } withdrawConsent(userId, purposeId) { // Record withdrawal this.consentRecords.get(userId)?.purposes.forEach(p => { if (p.id === purposeId) { p.granted = false; p.withdrawnAt = new Date().toISOString(); } }); // Trigger data deletion if necessary this.deleteDataForPurpose(userId, purposeId); } auditLog(action, details) { // Immutable audit log console.log(JSON.stringify({ action, details, timestamp: new Date().toISOString() })); } } Right to Deletion Implement the right to be forgotten: class DeletionOrchestrator: def __init__(self): self.data_sources = [] def register_data_source(self, name, delete_func, retention_days=30): self.data_sources.append({ \"name\": name, \"delete\": delete_func, \"retention_days\": retention_days }) def delete_user_data(self, user_id): results = [] errors = [] for source in self.data_sources: try: # Soft delete first source[\"delete\"](user_id, soft=True) results.append({ \"source\": source[\"name\"], \"status\": \"soft_deleted\", \"retention_until\": datetime.utcnow() + timedelta( days=source[\"retention_days\"] ) }) except Exception as e: errors.append({ \"source\": source[\"name\"], \"error\": str(e) }) # Hard delete after retention period schedule_hard_delete(user_id, self.data_sources) return { \"user_id\": user_id, \"soft_deletions\": results, \"errors\": errors, \"deletion_request_id\": str(uuid.uuid4()) } Privacy Impact Assessment # Automated PIA template PIA_TEMPLATE = { \"project_name\": \"\", \"data_flows\": [], \"risk_assessment\": { \"high_risk_indicators\": [ \"systematic_profiling\", \"large_scale_processing\", \"sensitive_data_processing\", \"public_area_monitoring\", \"cross_border_transfers\" ], \"identified_risks\": [], \"mitigations\": [] }, \"privacy_controls\": { \"data_minimization\": False, \"pseudonymization\": False, \"encryption_at_rest\": False, \"encryption_in_transit\": False, \"access_controls\": False, \"audit_logging\": False }, \"recommendations\": [] } def conduct_pia(project_name, data_flows): pia = copy.deepcopy(PIA_TEMPLATE) pia[\"project_name\"] = project_name pia[\"data_flows\"] = data_flows # Auto-detect high risk indicators for flow in data_flows: if flow.get(\"sensitive_data\"): pia[\"risk_assessment\"][\"identified_risks\"].append({ \"flow\": flow[\"name\"], \"risk\": \"Sensitive data processing\", \"likelihood\": \"medium\", \"impact\": \"high\" }) return pia Conclusion GDPR technical controls require systematic implementation. Maintain detailed data mapping, implement robust consent management, build capabilities for right to deletion, and conduct privacy impact assessments. Automate where possible and maintain comprehensive audit trails. Remember: privacy by design means building controls into your architecture from the start."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "GDPR Technical Controls"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › GDPR Technical Controls
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">GDPR Technical Controls</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>GDPR Technical Controls</h1>
+<br>
+<p>GDPR Technical Requirements   </p>
+<p>GDPR requires technical controls for data protection by design and by default. Key areas include data mapping, consent, deletion, and privacy impact assessments.   </p>
+<p>Data Mapping   </p>
+<p>Maintain a comprehensive data inventory:   </p>
+<br>
+<br>
+<br>
+<p>    class DataMappingService:</p>
+<br>
+<p>        def __init__(self):</p>
+<br>
+<p>            self.data_flows = []</p>
+<br>
+<br>
+<br>
+<p>        def register_data_flow(self, flow):</p>
+<br>
+<p>            self.data_flows.append({</p>
+<br>
+<p>                "id": str(uuid.uuid4()),</p>
+<br>
+<p>                "data_controller": flow["controller"],</p>
+<br>
+<p>                "data_processor": flow.get("processor"),</p>
+<br>
+<p>                "data_categories": flow["categories"],</p>
+<br>
+<p>                "data_subjects": flow["subjects"],</p>
+<br>
+<p>                "purpose": flow["purpose"],</p>
+<br>
+<p>                "legal_basis": flow["legal_basis"],</p>
+<br>
+<p>                "storage_location": flow["location"],</p>
+<br>
+<p>                "retention_period": flow["retention"],</p>
+<br>
+<p>                "transfers": flow.get("transfers", []),</p>
+<br>
+<p>                "created_at": datetime.utcnow().isoformat()</p>
+<br>
+<p>            })</p>
+<br>
+<br>
+<br>
+<p>        def search_data_subject(self, subject_id):</p>
+<br>
+<p>            """Find all data related to a specific subject"""</p>
+<br>
+<p>            results = []</p>
+<br>
+<p>            for flow in self.data_flows:</p>
+<br>
+<p>                if subject_id in flow["data_subjects"]:</p>
+<br>
+<p>                    results.append(flow)</p>
+<br>
+<p>            return results</p>
+<br>
+<br>
+<br>
+<p>        def generate_roppa_report(self):</p>
+<br>
+<p>            """Generate Record of Processing Activities"""</p>
+<br>
+<p>            return {</p>
+<br>
+<p>                "organization": "Example Corp",</p>
+<br>
+<p>                "dpo": "privacy@example.com",</p>
+<br>
+<p>                "processing_activities": self.data_flows,</p>
+<br>
+<p>                "generated_at": datetime.utcnow().isoformat()</p>
+<br>
+<p>            }</p>
+<br>
+<br>
+<br>
+<br>
+<p>Consent Management   </p>
+<p>Implement granular consent tracking:   </p>
+<br>
+<br>
+<br>
+<p>    // Consent management API</p>
+<br>
+<p>    class ConsentManager {</p>
+<br>
+<p>      constructor() {</p>
+<br>
+<p>        this.consentRecords = new Map();</p>
+<br>
+<p>      }</p>
+<br>
+<br>
+<br>
+<p>      recordConsent(userId, purposes) {</p>
+<br>
+<p>        const record = {</p>
+<br>
+<p>          userId,</p>
+<br>
+<p>          purposes: purposes.map(p => ({</p>
+<br>
+<p>            id: p.id,</p>
+<br>
+<p>            granted: p.granted,</p>
+<br>
+<p>            timestamp: new Date().toISOString(),</p>
+<br>
+<p>            ip: p.ip,</p>
+<br>
+<p>            userAgent: p.userAgent</p>
+<br>
+<p>          })),</p>
+<br>
+<p>          version: CONSENT_VERSION,</p>
+<br>
+<p>          createdAt: new Date().toISOString()</p>
+<br>
+<p>        };</p>
+<br>
+<br>
+<br>
+<p>        this.consentRecords.set(userId, record);</p>
+<br>
+<p>        this.auditLog('consent_recorded', { userId, purposes: p.id });</p>
+<br>
+<br>
+<br>
+<p>        return record;</p>
+<br>
+<p>      }</p>
+<br>
+<br>
+<br>
+<p>      checkConsent(userId, purposeId) {</p>
+<br>
+<p>        const record = this.consentRecords.get(userId);</p>
+<br>
+<p>        if (!record) return false;</p>
+<br>
+<br>
+<br>
+<p>        const purpose = record.purposes.find(p => p.id === purposeId);</p>
+<br>
+<p>        return purpose?.granted === true && !this.isWithdrawn(userId, purposeId);</p>
+<br>
+<p>      }</p>
+<br>
+<br>
+<br>
+<p>      withdrawConsent(userId, purposeId) {</p>
+<br>
+<p>        // Record withdrawal</p>
+<br>
+<p>        this.consentRecords.get(userId)?.purposes.forEach(p => {</p>
+<br>
+<p>          if (p.id === purposeId) {</p>
+<br>
+<p>            p.granted = false;</p>
+<br>
+<p>            p.withdrawnAt = new Date().toISOString();</p>
+<br>
+<p>          }</p>
+<br>
+<p>        });</p>
+<br>
+<br>
+<br>
+<p>        // Trigger data deletion if necessary</p>
+<br>
+<p>        this.deleteDataForPurpose(userId, purposeId);</p>
+<br>
+<p>      }</p>
+<br>
+<br>
+<br>
+<p>      auditLog(action, details) {</p>
+<br>
+<p>        // Immutable audit log</p>
+<br>
+<p>        console.log(JSON.stringify({</p>
+<br>
+<p>          action,</p>
+<br>
+<p>          details,</p>
+<br>
+<p>          timestamp: new Date().toISOString()</p>
+<br>
+<p>        }));</p>
+<br>
+<p>      }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<p>Right to Deletion   </p>
+<p>Implement the right to be forgotten:   </p>
+<br>
+<br>
+<br>
+<p>    class DeletionOrchestrator:</p>
+<br>
+<p>        def __init__(self):</p>
+<br>
+<p>            self.data_sources = []</p>
+<br>
+<br>
+<br>
+<p>        def register_data_source(self, name, delete_func, retention_days=30):</p>
+<br>
+<p>            self.data_sources.append({</p>
+<br>
+<p>                "name": name,</p>
+<br>
+<p>                "delete": delete_func,</p>
+<br>
+<p>                "retention_days": retention_days</p>
+<br>
+<p>            })</p>
+<br>
+<br>
+<br>
+<p>        def delete_user_data(self, user_id):</p>
+<br>
+<p>            results = []</p>
+<br>
+<p>            errors = []</p>
+<br>
+<br>
+<br>
+<p>            for source in self.data_sources:</p>
+<br>
+<p>                try:</p>
+<br>
+<p>                    # Soft delete first</p>
+<br>
+<p>                    source["delete"](user_id, soft=True)</p>
+<br>
+<p>                    results.append({</p>
+<br>
+<p>                        "source": source["name"],</p>
+<br>
+<p>                        "status": "soft_deleted",</p>
+<br>
+<p>                        "retention_until": datetime.utcnow() + timedelta(</p>
+<br>
+<p>                            days=source["retention_days"]</p>
+<br>
+<p>                        )</p>
+<br>
+<p>                    })</p>
+<br>
+<p>                except Exception as e:</p>
+<br>
+<p>                    errors.append({</p>
+<br>
+<p>                        "source": source["name"],</p>
+<br>
+<p>                        "error": str(e)</p>
+<br>
+<p>                    })</p>
+<br>
+<br>
+<br>
+<p>            # Hard delete after retention period</p>
+<br>
+<p>            schedule_hard_delete(user_id, self.data_sources)</p>
+<br>
+<br>
+<br>
+<p>            return {</p>
+<br>
+<p>                "user_id": user_id,</p>
+<br>
+<p>                "soft_deletions": results,</p>
+<br>
+<p>                "errors": errors,</p>
+<br>
+<p>                "deletion_request_id": str(uuid.uuid4())</p>
+<br>
+<p>            }</p>
+<br>
+<br>
+<br>
+<br>
+<p>Privacy Impact Assessment   </p>
+<br>
+<br>
+<br>
+<p>    # Automated PIA template</p>
+<br>
+<p>    PIA_TEMPLATE = {</p>
+<br>
+<p>        "project_name": "",</p>
+<br>
+<p>        "data_flows": [],</p>
+<br>
+<p>        "risk_assessment": {</p>
+<br>
+<p>            "high_risk_indicators": [</p>
+<br>
+<p>                "systematic_profiling",</p>
+<br>
+<p>                "large_scale_processing",</p>
+<br>
+<p>                "sensitive_data_processing",</p>
+<br>
+<p>                "public_area_monitoring",</p>
+<br>
+<p>                "cross_border_transfers"</p>
+<br>
+<p>            ],</p>
+<br>
+<p>            "identified_risks": [],</p>
+<br>
+<p>            "mitigations": []</p>
+<br>
+<p>        },</p>
+<br>
+<p>        "privacy_controls": {</p>
+<br>
+<p>            "data_minimization": False,</p>
+<br>
+<p>            "pseudonymization": False,</p>
+<br>
+<p>            "encryption_at_rest": False,</p>
+<br>
+<p>            "encryption_in_transit": False,</p>
+<br>
+<p>            "access_controls": False,</p>
+<br>
+<p>            "audit_logging": False</p>
+<br>
+<p>        },</p>
+<br>
+<p>        "recommendations": []</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<p>    def conduct_pia(project_name, data_flows):</p>
+<br>
+<p>        pia = copy.deepcopy(PIA_TEMPLATE)</p>
+<br>
+<p>        pia["project_name"] = project_name</p>
+<br>
+<p>        pia["data_flows"] = data_flows</p>
+<br>
+<br>
+<br>
+<p>        # Auto-detect high risk indicators</p>
+<br>
+<p>        for flow in data_flows:</p>
+<br>
+<p>            if flow.get("sensitive_data"):</p>
+<br>
+<p>                pia["risk_assessment"]["identified_risks"].append({</p>
+<br>
+<p>                    "flow": flow["name"],</p>
+<br>
+<p>                    "risk": "Sensitive data processing",</p>
+<br>
+<p>                    "likelihood": "medium",</p>
+<br>
+<p>                    "impact": "high"</p>
+<br>
+<p>                })</p>
+<br>
+<br>
+<br>
+<p>        return pia</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
+<p>GDPR technical controls require systematic implementation. Maintain detailed data mapping, implement robust consent management, build capabilities for right to deletion, and conduct privacy impact assessments. Automate where possible and maintain comprehensive audit trails. Remember: privacy by design means building controls into your architecture from the start.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

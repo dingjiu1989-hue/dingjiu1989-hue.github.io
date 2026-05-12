@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="ai-prompt-chaining">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Prompt Chaining: Building Multi-Step LLM Workflows">
+    <meta property="og:description" content="Design prompt chains for complex LLM tasks: chain types, state management, error handling, and performance optimization.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/ai-prompt-chaining.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Prompt Chaining: Building Multi-Step LLM Workflows">
+    <meta name="twitter:description" content="Design prompt chains for complex LLM tasks: chain types, state management, error handling, and performance optimization.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Prompt Chaining: Building Multi-Step LLM Workflows — SourceHub</title>
+    <meta name="description" content="Design prompt chains for complex LLM tasks: chain types, state management, error handling, and performance optimization.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/ai-prompt-chaining.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/ai/ai-prompt-chaining.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Prompt Chaining: Building Multi-Step LLM Workflows",
+      "description": "Design prompt chains for complex LLM tasks: chain types, state management, error handling, and performance optimization.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "319",
+      "keywords": "AI, Machine Learning, LLM",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-prompt-chaining.html"},
+      "articleBody": "Prompt Chaining: Building Multi-Step LLM Workflows Prompt chaining connects multiple LLM calls to accomplish complex tasks. Instead of solving everything in one prompt, chains break the task into manageable steps. Each step builds on the previous output. Chain Types Sequential chains pass output from one step to the next. Example: extract text \u2192 summarize \u2192 translate. Each step depends on the previous one. Sequential chains are simple but accumulate latency. Parallel chains execute independent steps concurrently. Example: research a topic from multiple sources simultaneously. Parallel chains reduce total execution time for independent sub-tasks. Conditional chains use the output of one step to decide what to do next. Example: classify the user intent, then route to the appropriate handler. Conditional chains enable flexible, adaptive workflows. State Management Chain state accumulates across steps. Store intermediate results in a structured format (JSON). Pass relevant context to each step. Clean up unnecessary state to reduce token consumption. Error Handling Each chain step can fail. Implement retry logic for transient failures. Use fallback prompts for repeated failures. Validate outputs between steps. Log chain execution for debugging. Performance Minimize chain length. Each step adds latency and cost. Combine related tasks into fewer, larger prompts. Cache identical prompt results. Monitor token usage per chain execution."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "Prompt Chaining: Building Multi-Step LLM Workflows"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › Prompt Chaining: Building Multi-Step LLM Workflows
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">AI</span>
+        <span class="tag-cat">Machine Learning</span>
+        <span class="tag-cat">LLM</span></div>
+      <h1 class="article-title">Prompt Chaining: Building Multi-Step LLM Workflows</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Prompt Chaining: Building Multi-Step LLM Workflows</h1>
+<p>Prompt chaining connects multiple LLM calls to accomplish complex tasks. Instead of solving everything in one prompt, chains break the task into manageable steps. Each step builds on the previous output.</p>
+<br>
+<h2> Chain Types</h2>
+<br>
+<p>Sequential chains pass output from one step to the next. Example: extract text → summarize → translate. Each step depends on the previous one. Sequential chains are simple but accumulate latency.</p>
+<br>
+<p>Parallel chains execute independent steps concurrently. Example: research a topic from multiple sources simultaneously. Parallel chains reduce total execution time for independent sub-tasks.</p>
+<br>
+<p>Conditional chains use the output of one step to decide what to do next. Example: classify the user intent, then route to the appropriate handler. Conditional chains enable flexible, adaptive workflows.</p>
+<br>
+<h2> State Management</h2>
+<br>
+<p>Chain state accumulates across steps. Store intermediate results in a structured format (JSON). Pass relevant context to each step. Clean up unnecessary state to reduce token consumption.</p>
+<br>
+<h2> Error Handling</h2>
+<br>
+<p>Each chain step can fail. Implement retry logic for transient failures. Use fallback prompts for repeated failures. Validate outputs between steps. Log chain execution for debugging.</p>
+<br>
+<h2> Performance</h2>
+<br>
+<p>Minimize chain length. Each step adds latency and cost. Combine related tasks into fewer, larger prompts. Cache identical prompt results. Monitor token usage per chain execution.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

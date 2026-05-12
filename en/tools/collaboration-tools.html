@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1695",
+      "wordCount": "2246",
       "keywords": "Developer Tools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/collaboration-tools.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/collaboration-tools.html"},
+      "articleBody": "Developer Collaboration Tools: Slack vs Discord vs Linear Introduction Developer collaboration extends far beyond chat messages. Modern engineering teams need tools that support asynchronous communication, incident response, knowledge management, and workflow automation. The choice between Slack, Discord, and Linear (which serves a different but complementary role) depends on team size, culture, and operational requirements. Collaboration Platform Capabilities Slack Slack remains the dominant platform for professional communication with deep enterprise integrations: // Slack Bolt app for automated workflows const { App } = require('@slack/bolt'); const app = new App({ token: process.env.SLACK_BOT_TOKEN, signingSecret: process.env.SLACK_SIGNING_SECRET, }); // Automated deployment notifications app.message('deploy', async ({ message, say }) => { const { text } = message; const match = text.match(/deploy (\\S+) to (\\S+)/); if (!match) return; const [, service, env] = match; // Trigger deployment via webhook const response = await fetch('https://api.github.com/repos/my-org/my-repo/dispatches', { method: 'POST', headers: { Authorization: `Bearer ${process.env.GH_TOKEN}`, 'Content-Type': 'application/json', }, body: JSON.stringify({ event_type: 'deploy', client_payload: { service, env }, }), }); await say({ blocks: [ { type: 'section', text: { type: 'mrkdwn', text: `:rocket: Deploying *${service}* to *${env}*`, }, }, { type: 'context', elements: [ { type: 'mrkdwn', text: `Triggered by `, }, ], }, ], }); }); Incident Response Slack offers dedicated incident management features: // PagerDuty integration for Slack async function triggerIncident(service, severity, summary) { const response = await fetch('https://api.pagerduty.com/incidents', { method: 'POST', headers: { Authorization: `Token token=${process.env.PAGERDUTY_TOKEN}`, 'Content-Type': 'application/json', }, body: JSON.stringify({ incident: { type: 'incident', title: `[${severity}] ${service}: ${summary}`, service: { id: serviceId, type: 'service_reference' }, urgency: severity === 'critical' ? 'high' : 'low', body: { type: 'incident_body', details: summary }, }, }), }); // Create dedicated Slack channel const channel = await app.client.conversations.create({ name: `inc-${Date.now()}-${service}`, }); // Post incident details await app.client.chat.postMessage({ channel: channel.id, blocks: [ { type: 'section', text: { type: 'mrkdwn', text: `:rotating_light: *Incident: ${service}* (${severity})`, }, }, ], }); return channel.id; } Discord Discord's voice channels and low-latency features make it popular for gaming-adjacent developer communities: import discord from discord.ext import commands bot = commands.Bot(command_prefix='!') @bot.event async def on_ready(): print(f'{bot.user} connected') # Set up voice channel for daily standup channel = bot.get_channel(STANDUP_VOICE_ID) if channel: await channel.send( \"Good morning! Today's standup thread: \" ) @bot.command(name='deploy') async def deploy_command(ctx, service: str, env: str): \"\"\"!deploy payment-service staging\"\"\" embed = discord.Embed( title=f'Deploying {service} to {env}', color=discord.Color.blue(), timestamp=discord.utils.utcnow(), ) embed.add_field(name='Service', value=service) embed.add_field(name='Environment', value=env) # Send deployment request via webhook await ctx.send(embed=embed) bot.run(os.getenv('DISCORD_TOKEN')) Linear Linear occupies a different niche: project management and issue tracking optimized for speed: // Linear GraphQL API for workflow automation mutation CreateIssue { issueCreate( input: { title: \"Investigate payment latency spike\" description: \"\"\" ## Summary P99 latency for /api/charge increased from 200ms to 2s ## Investigation Steps - [ ] Check database query performance - [ ] Review recent deployments - [ ] Analyze trace data in Jaeger - [ ] Check downstream dependencies ## Related Sentry error: PAY-1234 Deploy: v2.1.3 to production \"\"\" teamId: \"team-engineering\" priority: urgent labels: [\"incident\", \"performance\"] assigneeId: \"user-oncall\" parentId: \"issue-incident-tracking\" } ) { success issue { id url } } } Linear's keyboard-first interface and automation rules reduce issue management overhead: # Linear automations workflows: - name: Auto-triage bugs rules: - condition: field: label operator: contains value: bug actions: - type: set_priority value: high - type: add_label value: needs-triage - type: notify_slack channel: \"#bug-triage\" - name: Close stale issues rules: - condition: field: updated_at operator: older_than value: 30d actions: - type: add_comment template: \"This issue has been inactive for 30 days. Closing.\" - type: set_status value: canceled API Access and Automation | Feature | Slack | Discord | Linear | |---|---|---|---| | API style | Web + Socket | WebSocket + REST | GraphQL | | Rate limits | ~1/sec per workspace | 50/sec per bot | 250/min | | Webhook support | Incoming + outgoing | Incoming only | Incoming | | Slash commands | Yes | Yes | No | | Events API | Event subscriptions | Gateway intents | Webhooks | Knowledge Management * **Slack**: Canvas and huddles for lightweight documentation, but history is lost in free tier. * **Discord**: Forum channels and threads for Q&A;, searchable but designed for ephemeral conversation. * **Linear**: Documents linked to projects with rich formatting and issue references. Integration Ecosystem Slack's 2,400+ app directory is unmatched for enterprise toolchain integration. Discord's bot ecosystem is developer-centric but less business-oriented. Linear's integrations focus on developer tools (GitHub, GitLab, Sentry, Figma) and are purpose-built rather than generic. Team Communication Flow Technical Design Doc (Linear) | v Review Thread (Slack Canvas) | v Implementation (GitHub Issues linked to Linear) | v Code Review (GitHub PR) | v Deploy Notification (Slack bot) | v Post-Deploy Monitoring (Datadog alert in Slack) Decision Guide * **Slack**: Best for professional teams of 10+ with complex workflows and enterprise compliance needs. * **Discord**: Best for community-driven open-source projects or small teams who prioritize voice communication. * **Linear**: Best for any team that wants fast, focused issue tracking regardless of chat tool choice. The most effective setups combine all three: Slack for day-to-day chat and alerts, Linear for work management, and Discord for community engagement or voice communication."
     }
     </script>
     <script type="application/ld+json">
@@ -73,465 +74,550 @@
         <span class="tag-cat">Productivity</span></div>
       <h1 class="article-title">Developer Collaboration Tools: Slack vs Discord vs Linear</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Introduction</h2>
+      <div class="article-body"><h1>Developer Collaboration Tools: Slack vs Discord vs Linear</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Developer collaboration extends far beyond chat messages. Modern engineering teams need tools that support asynchronous communication, incident response, knowledge management, and workflow automation. The choice between Slack, Discord, and Linear (which serves a different but complementary role) depends on team size, culture, and operational requirements.</p>
 <br>
-<h2> Collaboration Platform Capabilities</h2>
+<br>
+<br>
+<br>
+<h2>  Collaboration Platform Capabilities</h2>
+<br>
+<br>
+<br>
 <br>
 <h3>Slack</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Slack remains the dominant platform for professional communication with deep enterprise integrations:</p>
 <br>
-<pre><code>
-// Slack Bolt app for automated workflows
-
-const { App } = require(&#x27;@slack/bolt&#x27;);
-
-
-
-const app = new App({
-
-  token: process.env.SLACK_BOT_TOKEN,
-
-  signingSecret: process.env.SLACK_SIGNING_SECRET,
-
-});
-
-
-
-// Automated deployment notifications
-
-app.message(&#x27;deploy&#x27;, async ({ message, say }) =&gt; {
-
-  const { text } = message;
-
-  const match = text.match(/deploy (\S+) to (\S+)/);
-
-  if (!match) return;
-
-
-
-  const [, service, env] = match;
-
-
-
-  // Trigger deployment via webhook
-
-  const response = await fetch(&#x27;https://api.github.com/repos/my-org/my-repo/dispatches&#x27;, {
-
-    method: &#x27;POST&#x27;,
-
-    headers: {
-
-      Authorization: `Bearer ${process.env.GH_TOKEN}`,
-
-      &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
-
-    },
-
-    body: JSON.stringify({
-
-      event_type: &#x27;deploy&#x27;,
-
-      client_payload: { service, env },
-
-    }),
-
-  });
-
-
-
-  await say({
-
-    blocks: [
-
-      {
-
-        type: &#x27;section&#x27;,
-
-        text: {
-
-          type: &#x27;mrkdwn&#x27;,
-
-          text: `:rocket: Deploying *${service}* to *${env}*`,
-
-        },
-
-      },
-
-      {
-
-        type: &#x27;context&#x27;,
-
-        elements: [
-
-          {
-
-            type: &#x27;mrkdwn&#x27;,
-
-            text: `Triggered by &lt;@${message.user}&gt;`,
-
-          },
-
-        ],
-
-      },
-
-    ],
-
-  });
-
-});
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    // Slack Bolt app for automated workflows</p>
+<br>
+<p>    const { App } = require('@slack/bolt');</p>
+<br>
+<br>
+<br>
+<p>    const app = new App({</p>
+<br>
+<p>      token: process.env.SLACK_BOT_TOKEN,</p>
+<br>
+<p>      signingSecret: process.env.SLACK_SIGNING_SECRET,</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<p>    // Automated deployment notifications</p>
+<br>
+<p>    app.message('deploy', async ({ message, say }) => {</p>
+<br>
+<p>      const { text } = message;</p>
+<br>
+<p>      const match = text.match(/deploy (\S+) to (\S+)/);</p>
+<br>
+<p>      if (!match) return;</p>
+<br>
+<br>
+<br>
+<p>      const [, service, env] = match;</p>
+<br>
+<br>
+<br>
+<p>      // Trigger deployment via webhook</p>
+<br>
+<p>      const response = await fetch('https://api.github.com/repos/my-org/my-repo/dispatches', {</p>
+<br>
+<p>        method: 'POST',</p>
+<br>
+<p>        headers: {</p>
+<br>
+<p>          Authorization: `Bearer ${process.env.GH_TOKEN}`,</p>
+<br>
+<p>          'Content-Type': 'application/json',</p>
+<br>
+<p>        },</p>
+<br>
+<p>        body: JSON.stringify({</p>
+<br>
+<p>          event_type: 'deploy',</p>
+<br>
+<p>          client_payload: { service, env },</p>
+<br>
+<p>        }),</p>
+<br>
+<p>      });</p>
+<br>
+<br>
+<br>
+<p>      await say({</p>
+<br>
+<p>        blocks: [</p>
+<br>
+<p>          {</p>
+<br>
+<p>            type: 'section',</p>
+<br>
+<p>            text: {</p>
+<br>
+<p>              type: 'mrkdwn',</p>
+<br>
+<p>              text: `:rocket: Deploying *${service}* to *${env}*`,</p>
+<br>
+<p>            },</p>
+<br>
+<p>          },</p>
+<br>
+<p>          {</p>
+<br>
+<p>            type: 'context',</p>
+<br>
+<p>            elements: [</p>
+<br>
+<p>              {</p>
+<br>
+<p>                type: 'mrkdwn',</p>
+<br>
+<p>                text: `Triggered by <@${message.user}>`,</p>
+<br>
+<p>              },</p>
+<br>
+<p>            ],</p>
+<br>
+<p>          },</p>
+<br>
+<p>        ],</p>
+<br>
+<p>      });</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Incident Response</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Slack offers dedicated incident management features:</p>
 <br>
-<pre><code>
-// PagerDuty integration for Slack
-
-async function triggerIncident(service, severity, summary) {
-
-  const response = await fetch(&#x27;https://api.pagerduty.com/incidents&#x27;, {
-
-    method: &#x27;POST&#x27;,
-
-    headers: {
-
-      Authorization: `Token token=${process.env.PAGERDUTY_TOKEN}`,
-
-      &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
-
-    },
-
-    body: JSON.stringify({
-
-      incident: {
-
-        type: &#x27;incident&#x27;,
-
-        title: `[${severity}] ${service}: ${summary}`,
-
-        service: { id: serviceId, type: &#x27;service_reference&#x27; },
-
-        urgency: severity === &#x27;critical&#x27; ? &#x27;high&#x27; : &#x27;low&#x27;,
-
-        body: { type: &#x27;incident_body&#x27;, details: summary },
-
-      },
-
-    }),
-
-  });
-
-
-
-  // Create dedicated Slack channel
-
-  const channel = await app.client.conversations.create({
-
-    name: `inc-${Date.now()}-${service}`,
-
-  });
-
-
-
-  // Post incident details
-
-  await app.client.chat.postMessage({
-
-    channel: channel.id,
-
-    blocks: [
-
-      {
-
-        type: &#x27;section&#x27;,
-
-        text: {
-
-          type: &#x27;mrkdwn&#x27;,
-
-          text: `:rotating_light: *Incident: ${service}* (${severity})`,
-
-        },
-
-      },
-
-    ],
-
-  });
-
-
-
-  return channel.id;
-
-}
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    // PagerDuty integration for Slack</p>
+<br>
+<p>    async function triggerIncident(service, severity, summary) {</p>
+<br>
+<p>      const response = await fetch('https://api.pagerduty.com/incidents', {</p>
+<br>
+<p>        method: 'POST',</p>
+<br>
+<p>        headers: {</p>
+<br>
+<p>          Authorization: `Token token=${process.env.PAGERDUTY_TOKEN}`,</p>
+<br>
+<p>          'Content-Type': 'application/json',</p>
+<br>
+<p>        },</p>
+<br>
+<p>        body: JSON.stringify({</p>
+<br>
+<p>          incident: {</p>
+<br>
+<p>            type: 'incident',</p>
+<br>
+<p>            title: `[${severity}] ${service}: ${summary}`,</p>
+<br>
+<p>            service: { id: serviceId, type: 'service_reference' },</p>
+<br>
+<p>            urgency: severity === 'critical' ? 'high' : 'low',</p>
+<br>
+<p>            body: { type: 'incident_body', details: summary },</p>
+<br>
+<p>          },</p>
+<br>
+<p>        }),</p>
+<br>
+<p>      });</p>
+<br>
+<br>
+<br>
+<p>      // Create dedicated Slack channel</p>
+<br>
+<p>      const channel = await app.client.conversations.create({</p>
+<br>
+<p>        name: `inc-${Date.now()}-${service}`,</p>
+<br>
+<p>      });</p>
+<br>
+<br>
+<br>
+<p>      // Post incident details</p>
+<br>
+<p>      await app.client.chat.postMessage({</p>
+<br>
+<p>        channel: channel.id,</p>
+<br>
+<p>        blocks: [</p>
+<br>
+<p>          {</p>
+<br>
+<p>            type: 'section',</p>
+<br>
+<p>            text: {</p>
+<br>
+<p>              type: 'mrkdwn',</p>
+<br>
+<p>              text: `:rotating_light: *Incident: ${service}* (${severity})`,</p>
+<br>
+<p>            },</p>
+<br>
+<p>          },</p>
+<br>
+<p>        ],</p>
+<br>
+<p>      });</p>
+<br>
+<br>
+<br>
+<p>      return channel.id;</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Discord</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Discord's voice channels and low-latency features make it popular for gaming-adjacent developer communities:</p>
 <br>
-<pre><code>
-import discord
-
-from discord.ext import commands
-
-
-
-bot = commands.Bot(command_prefix=&#x27;!&#x27;)
-
-
-
-@bot.event
-
-async def on_ready():
-
-    print(f&#x27;{bot.user} connected&#x27;)
-
-    # Set up voice channel for daily standup
-
-    channel = bot.get_channel(STANDUP_VOICE_ID)
-
-    if channel:
-
-        await channel.send(
-
-            &quot;Good morning! Today&#x27;s standup thread: &quot;
-
-        )
-
-
-
-@bot.command(name=&#x27;deploy&#x27;)
-
-async def deploy_command(ctx, service: str, env: str):
-
-    &quot;&quot;&quot;!deploy payment-service staging&quot;&quot;&quot;
-
-    embed = discord.Embed(
-
-        title=f&#x27;Deploying {service} to {env}&#x27;,
-
-        color=discord.Color.blue(),
-
-        timestamp=discord.utils.utcnow(),
-
-    )
-
-    embed.add_field(name=&#x27;Service&#x27;, value=service)
-
-    embed.add_field(name=&#x27;Environment&#x27;, value=env)
-
-
-
-    # Send deployment request via webhook
-
-    await ctx.send(embed=embed)
-
-
-
-bot.run(os.getenv(&#x27;DISCORD_TOKEN&#x27;))
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    import discord</p>
+<br>
+<p>    from discord.ext import commands</p>
+<br>
+<br>
+<br>
+<p>    bot = commands.Bot(command_prefix='!')</p>
+<br>
+<br>
+<br>
+<p>    @bot.event</p>
+<br>
+<p>    async def on_ready():</p>
+<br>
+<p>        print(f'{bot.user} connected')</p>
+<br>
+<p>        # Set up voice channel for daily standup</p>
+<br>
+<p>        channel = bot.get_channel(STANDUP_VOICE_ID)</p>
+<br>
+<p>        if channel:</p>
+<br>
+<p>            await channel.send(</p>
+<br>
+<p>                "Good morning! Today's standup thread: "</p>
+<br>
+<p>            )</p>
+<br>
+<br>
+<br>
+<p>    @bot.command(name='deploy')</p>
+<br>
+<p>    async def deploy_command(ctx, service: str, env: str):</p>
+<br>
+<p>        """!deploy payment-service staging"""</p>
+<br>
+<p>        embed = discord.Embed(</p>
+<br>
+<p>            title=f'Deploying {service} to {env}',</p>
+<br>
+<p>            color=discord.Color.blue(),</p>
+<br>
+<p>            timestamp=discord.utils.utcnow(),</p>
+<br>
+<p>        )</p>
+<br>
+<p>        embed.add_field(name='Service', value=service)</p>
+<br>
+<p>        embed.add_field(name='Environment', value=env)</p>
+<br>
+<br>
+<br>
+<p>        # Send deployment request via webhook</p>
+<br>
+<p>        await ctx.send(embed=embed)</p>
+<br>
+<br>
+<br>
+<p>    bot.run(os.getenv('DISCORD_TOKEN'))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Linear</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Linear occupies a different niche: project management and issue tracking optimized for speed:</p>
 <br>
-<pre><code>
-// Linear GraphQL API for workflow automation
-
-mutation CreateIssue {
-
-  issueCreate(
-
-    input: {
-
-      title: &quot;Investigate payment latency spike&quot;
-
-      description: &quot;&quot;&quot;
-
-      ## Summary
-
-      P99 latency for /api/charge increased from 200ms to 2s
-
-
-
-      ## Investigation Steps
-
-      - [ ] Check database query performance
-
-      - [ ] Review recent deployments
-
-      - [ ] Analyze trace data in Jaeger
-
-      - [ ] Check downstream dependencies
-
-
-
-      ## Related
-
-      Sentry error: PAY-1234
-
-      Deploy: v2.1.3 to production
-
-      &quot;&quot;&quot;
-
-      teamId: &quot;team-engineering&quot;
-
-      priority: urgent
-
-      labels: [&quot;incident&quot;, &quot;performance&quot;]
-
-      assigneeId: &quot;user-oncall&quot;
-
-      parentId: &quot;issue-incident-tracking&quot;
-
-    }
-
-  ) {
-
-    success
-
-    issue {
-
-      id
-
-      url
-
-    }
-
-  }
-
-}
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    // Linear GraphQL API for workflow automation</p>
+<br>
+<p>    mutation CreateIssue {</p>
+<br>
+<p>      issueCreate(</p>
+<br>
+<p>        input: {</p>
+<br>
+<p>          title: "Investigate payment latency spike"</p>
+<br>
+<p>          description: """</p>
+<br>
+<p>          ## Summary</p>
+<br>
+<p>          P99 latency for /api/charge increased from 200ms to 2s</p>
+<br>
+<br>
+<br>
+<p>          ## Investigation Steps</p>
+<br>
+<p>          - [ ] Check database query performance</p>
+<br>
+<p>          - [ ] Review recent deployments</p>
+<br>
+<p>          - [ ] Analyze trace data in Jaeger</p>
+<br>
+<p>          - [ ] Check downstream dependencies</p>
+<br>
+<br>
+<br>
+<p>          ## Related</p>
+<br>
+<p>          Sentry error: PAY-1234</p>
+<br>
+<p>          Deploy: v2.1.3 to production</p>
+<br>
+<p>          """</p>
+<br>
+<p>          teamId: "team-engineering"</p>
+<br>
+<p>          priority: urgent</p>
+<br>
+<p>          labels: ["incident", "performance"]</p>
+<br>
+<p>          assigneeId: "user-oncall"</p>
+<br>
+<p>          parentId: "issue-incident-tracking"</p>
+<br>
+<p>        }</p>
+<br>
+<p>      ) {</p>
+<br>
+<p>        success</p>
+<br>
+<p>        issue {</p>
+<br>
+<p>          id</p>
+<br>
+<p>          url</p>
+<br>
+<p>        }</p>
+<br>
+<p>      }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Linear's keyboard-first interface and automation rules reduce issue management overhead:</p>
 <br>
-<pre><code>
-# Linear automations
-
-workflows:
-
-  - name: Auto-triage bugs
-
-    rules:
-
-      - condition:
-
-          field: label
-
-          operator: contains
-
-          value: bug
-
-        actions:
-
-          - type: set_priority
-
-            value: high
-
-          - type: add_label
-
-            value: needs-triage
-
-          - type: notify_slack
-
-            channel: &quot;#bug-triage&quot;
-
-  - name: Close stale issues
-
-    rules:
-
-      - condition:
-
-          field: updated_at
-
-          operator: older_than
-
-          value: 30d
-
-        actions:
-
-          - type: add_comment
-
-            template: &quot;This issue has been inactive for 30 days. Closing.&quot;
-
-          - type: set_status
-
-            value: canceled
-
-</code></pre>
 <br>
-<h2> API Access and Automation</h2>
+<br>
+<br>
+<br>
+<p>    # Linear automations</p>
+<br>
+<p>    workflows:</p>
+<br>
+<p>      - name: Auto-triage bugs</p>
+<br>
+<p>        rules:</p>
+<br>
+<p>          - condition:</p>
+<br>
+<p>              field: label</p>
+<br>
+<p>              operator: contains</p>
+<br>
+<p>              value: bug</p>
+<br>
+<p>            actions:</p>
+<br>
+<p>              - type: set_priority</p>
+<br>
+<p>                value: high</p>
+<br>
+<p>              - type: add_label</p>
+<br>
+<p>                value: needs-triage</p>
+<br>
+<p>              - type: notify_slack</p>
+<br>
+<p>                channel: "#bug-triage"</p>
+<br>
+<p>      - name: Close stale issues</p>
+<br>
+<p>        rules:</p>
+<br>
+<p>          - condition:</p>
+<br>
+<p>              field: updated_at</p>
+<br>
+<p>              operator: older_than</p>
+<br>
+<p>              value: 30d</p>
+<br>
+<p>            actions:</p>
+<br>
+<p>              - type: add_comment</p>
+<br>
+<p>                template: "This issue has been inactive for 30 days. Closing."</p>
+<br>
+<p>              - type: set_status</p>
+<br>
+<p>                value: canceled</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  API Access and Automation</h2>
+<br>
+<br>
+<br>
 <br>
 <p>| Feature | Slack | Discord | Linear |</p>
+<br>
 <p>|---|---|---|---|</p>
+<br>
 <p>| API style | Web + Socket | WebSocket + REST | GraphQL |</p>
+<br>
 <p>| Rate limits | ~1/sec per workspace | 50/sec per bot | 250/min |</p>
+<br>
 <p>| Webhook support | Incoming + outgoing | Incoming only | Incoming |</p>
+<br>
 <p>| Slash commands | Yes | Yes | No |</p>
+<br>
 <p>| Events API | Event subscriptions | Gateway intents | Webhooks |</p>
 <br>
-<h2> Knowledge Management</h2>
 <br>
-<li>**Slack**: Canvas and huddles for lightweight documentation, but history is lost in free tier.</li>
-<li>**Discord**: Forum channels and threads for Q&A, searchable but designed for ephemeral conversation.</li>
-<li>**Linear**: Documents linked to projects with rich formatting and issue references.</li>
 <br>
-<h2> Integration Ecosystem</h2>
+<br>
+<h2>  Knowledge Management</h2>
+<br>
+<br>
+<br>
+<p>* **Slack**: Canvas and huddles for lightweight documentation, but history is lost in free tier.</p>
+<p>* **Discord**: Forum channels and threads for Q&A;, searchable but designed for ephemeral conversation.</p>
+<p>* **Linear**: Documents linked to projects with rich formatting and issue references.</p>
+<br>
+<br>
+<br>
+<h2>  Integration Ecosystem</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Slack's 2,400+ app directory is unmatched for enterprise toolchain integration. Discord's bot ecosystem is developer-centric but less business-oriented. Linear's integrations focus on developer tools (GitHub, GitLab, Sentry, Figma) and are purpose-built rather than generic.</p>
 <br>
-<h2> Team Communication Flow</h2>
 <br>
-<pre><code>
-Technical Design Doc (Linear)
-
-    |
-
-    v
-
-Review Thread (Slack Canvas)
-
-    |
-
-    v
-
-Implementation (GitHub Issues linked to Linear)
-
-    |
-
-    v
-
-Code Review (GitHub PR)
-
-    |
-
-    v
-
-Deploy Notification (Slack bot)
-
-    |
-
-    v
-
-Post-Deploy Monitoring (Datadog alert in Slack)
-
-</code></pre>
 <br>
-<h2> Decision Guide</h2>
 <br>
-<li>**Slack**: Best for professional teams of 10+ with complex workflows and enterprise compliance needs.</li>
-<li>**Discord**: Best for community-driven open-source projects or small teams who prioritize voice communication.</li>
-<li>**Linear**: Best for any team that wants fast, focused issue tracking regardless of chat tool choice.</li>
+<h2>  Team Communication Flow</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    Technical Design Doc (Linear)</p>
+<br>
+<p>        |</p>
+<br>
+<p>        v</p>
+<br>
+<p>    Review Thread (Slack Canvas)</p>
+<br>
+<p>        |</p>
+<br>
+<p>        v</p>
+<br>
+<p>    Implementation (GitHub Issues linked to Linear)</p>
+<br>
+<p>        |</p>
+<br>
+<p>        v</p>
+<br>
+<p>    Code Review (GitHub PR)</p>
+<br>
+<p>        |</p>
+<br>
+<p>        v</p>
+<br>
+<p>    Deploy Notification (Slack bot)</p>
+<br>
+<p>        |</p>
+<br>
+<p>        v</p>
+<br>
+<p>    Post-Deploy Monitoring (Datadog alert in Slack)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Decision Guide</h2>
+<br>
+<br>
+<br>
+<p>* **Slack**: Best for professional teams of 10+ with complex workflows and enterprise compliance needs.</p>
+<p>* **Discord**: Best for community-driven open-source projects or small teams who prioritize voice communication.</p>
+<p>* **Linear**: Best for any team that wants fast, focused issue tracking regardless of chat tool choice.</p>
+<br>
+<br>
 <br>
 <p>The most effective setups combine all three: Slack for day-to-day chat and alerts, Linear for work management, and Discord for community engagement or voice communication.</p></div>
     </article>

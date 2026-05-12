@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="a-b-testing-infrastructure">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="A/B Testing Infrastructure">
+    <meta property="og:description" content="Experiment frameworks, traffic assignment, statistical analysis, and infrastructure for A/B testing at scale">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/a-b-testing-infrastructure.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A/B Testing Infrastructure">
+    <meta name="twitter:description" content="Experiment frameworks, traffic assignment, statistical analysis, and infrastructure for A/B testing at scale">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>A/B Testing Infrastructure — SourceHub</title>
+    <meta name="description" content="Experiment frameworks, traffic assignment, statistical analysis, and infrastructure for A/B testing at scale">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/a-b-testing-infrastructure.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/a-b-testing-infrastructure.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "A/B Testing Infrastructure",
+      "description": "Experiment frameworks, traffic assignment, statistical analysis, and infrastructure for A/B testing at scale",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "972",
+      "keywords": "Architecture, System Design, Backend",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/a-b-testing-infrastructure.html"},
+      "articleBody": "A/B Testing Infrastructure A/B testing infrastructure enables organizations to make data-driven decisions by comparing user experiences against a control group. At its core, an A/B testing system must: consistently assign users to experiment groups, reliably track metrics for each group, perform statistical analysis to determine significance, and manage the lifecycle of experiments from creation to analysis. The infrastructure requirements scale with experiment volume, traffic, and statistical rigor. Experiment assignment uses deterministic bucketing. A consistent hash of the user identifier and experiment key determines which variant the user sees. This ensures the user remains in the same variant across sessions. The hash function must distribute users uniformly across variants. Common approaches include MD5 or SHA-256 hashed to a modulus, or using the MurmurHash for better distribution characteristics. The assignment function should produce the same result regardless of the order experiments are evaluated. The assignment infrastructure must handle overlapping experiments. Users may participate in multiple experiments simultaneously. Each experiment uses a unique salt or namespace in the hash computation, ensuring that participation in one experiment does not correlate with participation in another. This prevents interaction effects where users in variant A of experiment 1 are disproportionately likely to be in variant B of experiment 2. Metrics collection is a two-phase process. The first phase captures exposure events \u2014 recording which users were assigned to which variant at the moment of assignment. The second phase captures outcome events \u2014 purchases, clicks, signups \u2014 with their associated experiment context. Both events must carry the experiment ID, variant, and a consistent user identifier. The event pipeline must handle late-arriving events, out-of-order events, and event deduplication. Statistical analysis determines whether observed differences are significant. Frequentist approaches use hypothesis testing (t-test, chi-square) with p-values and confidence intervals. Bayesian approaches model the posterior distribution of the metric difference and report the probability that one variant outperforms another. Sequential testing methods allow continuous monitoring without inflating false positive rates \u2014 essential for stopping experiments early when results are clear. Sample ratio mismatch (SRM) is a critical quality check. The actual assignment ratio should match the expected ratio (e.g., 50/50). SRM indicates that user assignment is biased \u2014 perhaps due to caching, client-side logic failures, or network issues. Automated SRM detection using a chi-square test should run on every experiment before any conclusions are drawn. An experiment with SRM should be invalidated until the root cause is identified. Novelty effects and carryover effects require attention. Novelty effects cause users to behave differently simply because something is new \u2014 the effect diminishes over time. Carryover effects occur when a user's experience in one experiment affects their behavior in a subsequent experiment. Mitigations include: running experiments long enough for novelty to wear off, implementing washout periods between experiments for the same user, and cross-experiment randomization that accounts for history. Infrastructure must handle experiment lifecycle. Create: an experiment is defined with its variants, targeting rules, and metrics. Start: traffic begins flowing to the experiment. Analyze: data accumulates and statistical analysis runs. Conclude: the experiment is analyzed and a decision is made. Cleanup: variant-specific code and flag configurations are removed. The platform should automate cleanup reminders for experiments that have been running beyond their intended duration. Client-side experimentation introduces additional challenges. The experiment data must be available on the client for assignment, which exposes targeting rules and variant definitions. The assignment must happen before the user sees any content, making synchronous loading critical. Client-side events may be lost due to ad blockers, network failures, or page abandonment. Server-side supplementation provides a fallback for critical metrics. The experiment platform should provide self-service capabilities for product managers and data scientists without requiring engineering involvement for every experiment. The self-service interface should support: experiment definition through a UI, automated statistical analysis with guardrail metrics, and rollback of underperforming experiments with a single click. This democratizes experimentation and increases the velocity of data-driven decision-making."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "A/B Testing Infrastructure"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › A/B Testing Infrastructure
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">A/B Testing Infrastructure</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>A/B Testing Infrastructure</h1>
+<br>
+<p>A/B testing infrastructure enables organizations to make data-driven decisions by comparing user experiences against a control group. At its core, an A/B testing system must: consistently assign users to experiment groups, reliably track metrics for each group, perform statistical analysis to determine significance, and manage the lifecycle of experiments from creation to analysis. The infrastructure requirements scale with experiment volume, traffic, and statistical rigor.   </p>
+<p>Experiment assignment uses deterministic bucketing. A consistent hash of the user identifier and experiment key determines which variant the user sees. This ensures the user remains in the same variant across sessions. The hash function must distribute users uniformly across variants. Common approaches include MD5 or SHA-256 hashed to a modulus, or using the MurmurHash for better distribution characteristics. The assignment function should produce the same result regardless of the order experiments are evaluated.   </p>
+<p>The assignment infrastructure must handle overlapping experiments. Users may participate in multiple experiments simultaneously. Each experiment uses a unique salt or namespace in the hash computation, ensuring that participation in one experiment does not correlate with participation in another. This prevents interaction effects where users in variant A of experiment 1 are disproportionately likely to be in variant B of experiment 2.   </p>
+<p>Metrics collection is a two-phase process. The first phase captures exposure events — recording which users were assigned to which variant at the moment of assignment. The second phase captures outcome events — purchases, clicks, signups — with their associated experiment context. Both events must carry the experiment ID, variant, and a consistent user identifier. The event pipeline must handle late-arriving events, out-of-order events, and event deduplication.   </p>
+<p>Statistical analysis determines whether observed differences are significant. Frequentist approaches use hypothesis testing (t-test, chi-square) with p-values and confidence intervals. Bayesian approaches model the posterior distribution of the metric difference and report the probability that one variant outperforms another. Sequential testing methods allow continuous monitoring without inflating false positive rates — essential for stopping experiments early when results are clear.   </p>
+<p>Sample ratio mismatch (SRM) is a critical quality check. The actual assignment ratio should match the expected ratio (e.g., 50/50). SRM indicates that user assignment is biased — perhaps due to caching, client-side logic failures, or network issues. Automated SRM detection using a chi-square test should run on every experiment before any conclusions are drawn. An experiment with SRM should be invalidated until the root cause is identified.   </p>
+<p>Novelty effects and carryover effects require attention. Novelty effects cause users to behave differently simply because something is new — the effect diminishes over time. Carryover effects occur when a user's experience in one experiment affects their behavior in a subsequent experiment. Mitigations include: running experiments long enough for novelty to wear off, implementing washout periods between experiments for the same user, and cross-experiment randomization that accounts for history.   </p>
+<p>Infrastructure must handle experiment lifecycle. Create: an experiment is defined with its variants, targeting rules, and metrics. Start: traffic begins flowing to the experiment. Analyze: data accumulates and statistical analysis runs. Conclude: the experiment is analyzed and a decision is made. Cleanup: variant-specific code and flag configurations are removed. The platform should automate cleanup reminders for experiments that have been running beyond their intended duration.   </p>
+<p>Client-side experimentation introduces additional challenges. The experiment data must be available on the client for assignment, which exposes targeting rules and variant definitions. The assignment must happen before the user sees any content, making synchronous loading critical. Client-side events may be lost due to ad blockers, network failures, or page abandonment. Server-side supplementation provides a fallback for critical metrics.   </p>
+<p>The experiment platform should provide self-service capabilities for product managers and data scientists without requiring engineering involvement for every experiment. The self-service interface should support: experiment definition through a UI, automated statistical analysis with guardrail metrics, and rollback of underperforming experiments with a single click. This democratizes experimentation and increases the velocity of data-driven decision-making.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

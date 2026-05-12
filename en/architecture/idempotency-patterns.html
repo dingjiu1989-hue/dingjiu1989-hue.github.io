@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="idempotency-patterns">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Idempotency Patterns in Distributed Systems">
+    <meta property="og:description" content="Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation patterns">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/idempotency-patterns.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Idempotency Patterns in Distributed Systems">
+    <meta name="twitter:description" content="Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation patterns">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Idempotency Patterns in Distributed Systems — SourceHub</title>
+    <meta name="description" content="Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation patterns">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/idempotency-patterns.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/idempotency-patterns.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Idempotency Patterns in Distributed Systems",
+      "description": "Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation patterns",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "898",
+      "keywords": "Architecture, System Design, Backend",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/idempotency-patterns.html"},
+      "articleBody": "Idempotency Patterns in Distributed Systems Idempotency is the property that applying an operation multiple times produces the same result as applying it once. In distributed systems, networks are unreliable, services fail and restart, and clients naturally retry. Idempotency turns unreliable infrastructure into reliable semantics \u2014 it allows safe retries without data corruption or duplicate side effects. The idempotency key pattern is the foundation. The client generates a unique key for each operation and includes it with the request. The server stores the key and its result. If the server receives a duplicate request with the same key, it returns the stored result without re-executing the operation. The idempotency key should be scoped to the client and operation type. UUIDs or ULIDs are typical key formats. Implementation requires an idempotency store. This is typically a database table or Redis cache with the key as the primary key. When a request arrives, the server checks the idempotency store. If the key exists and the operation completed, return the cached response. If the key exists and the operation is in progress, wait or return a conflict. If the key does not exist, execute the operation and store the result. The key must be created atomically \u2014 a unique constraint prevents two requests with the same key from executing simultaneously. The idempotency key lifecycle requires careful management. The key is created at the start of the request and, depending on the implementation, may have a TTL. After the TTL expires, the key is eligible for cleanup. The client should use a new key for each distinct operation. For example, each payment attempt should have a unique idempotency key, even if retrying the same order's payment. This prevents the case where the first attempt times out, the key expires, and a retry with the same key accidentally creates a duplicate payment. At-least-once delivery guarantees that a message is delivered one or more times. The consumer handles duplicates through idempotent processing. This is the pragmatic baseline for most messaging systems \u2014 achieving exactly-once end-to-end is extremely difficult, so systems layer idempotency on top of at-least-once delivery to provide the same guarantees. Exactly-once semantics combine at-least-once delivery with idempotent processing. The system must guarantee: the operation executes at least once, and duplicate executions produce the same result as a single execution. True exactly-once requires end-to-end idempotency spanning the producer, broker, consumer, and downstream systems. This is rarely achieved in practice \u2014 systems aim for effectively-once by ensuring idempotent consumers. Deduplication is a closely related pattern for event processing. When a consumer receives an event, it checks a deduplication table (event_id processed, timestamp). If the event ID already exists, it skips processing. The deduplication table should have a unique constraint on event_id, and the check-and-insert should be atomic. Deduplication windows must be longer than the maximum expected redelivery interval. A 24-hour deduplication window is common. State-based idempotency offers an alternative to key-based deduplication. Instead of tracking operation IDs, the system checks the current state before performing state-changing operations. For example, before processing a payment, check that the invoice is in \"unpaid\" state. If the invoice is already \"paid,\" skip the payment. This works well when operations map to clear state transitions but requires careful handling of race conditions. Uniqueness constraints are the most reliable idempotency mechanism. A database unique constraint on business keys (order ID, payment reference) guarantees that duplicate operations fail atomically at the database level. This is the foundation of idempotent inserts. The constraint handles concurrent requests correctly \u2014 only the first insert succeeds, and subsequent attempts fail with a unique constraint violation that the application can handle gracefully. Idempotency should be designed into every external-facing API and every event handler from the start. Retrofitting idempotency after data corruption incidents is painful. The upfront cost of adding idempotency keys and deduplication logic is minimal compared to the cost of debugging duplicate processing in production."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Idempotency Patterns in Distributed Systems"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Idempotency Patterns in Distributed Systems
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">Idempotency Patterns in Distributed Systems</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Idempotency Patterns in Distributed Systems</h1>
+<br>
+<p>Idempotency is the property that applying an operation multiple times produces the same result as applying it once. In distributed systems, networks are unreliable, services fail and restart, and clients naturally retry. Idempotency turns unreliable infrastructure into reliable semantics — it allows safe retries without data corruption or duplicate side effects.   </p>
+<p>The idempotency key pattern is the foundation. The client generates a unique key for each operation and includes it with the request. The server stores the key and its result. If the server receives a duplicate request with the same key, it returns the stored result without re-executing the operation. The idempotency key should be scoped to the client and operation type. UUIDs or ULIDs are typical key formats.   </p>
+<p>Implementation requires an idempotency store. This is typically a database table or Redis cache with the key as the primary key. When a request arrives, the server checks the idempotency store. If the key exists and the operation completed, return the cached response. If the key exists and the operation is in progress, wait or return a conflict. If the key does not exist, execute the operation and store the result. The key must be created atomically — a unique constraint prevents two requests with the same key from executing simultaneously.   </p>
+<p>The idempotency key lifecycle requires careful management. The key is created at the start of the request and, depending on the implementation, may have a TTL. After the TTL expires, the key is eligible for cleanup. The client should use a new key for each distinct operation. For example, each payment attempt should have a unique idempotency key, even if retrying the same order's payment. This prevents the case where the first attempt times out, the key expires, and a retry with the same key accidentally creates a duplicate payment.   </p>
+<p>At-least-once delivery guarantees that a message is delivered one or more times. The consumer handles duplicates through idempotent processing. This is the pragmatic baseline for most messaging systems — achieving exactly-once end-to-end is extremely difficult, so systems layer idempotency on top of at-least-once delivery to provide the same guarantees.   </p>
+<p>Exactly-once semantics combine at-least-once delivery with idempotent processing. The system must guarantee: the operation executes at least once, and duplicate executions produce the same result as a single execution. True exactly-once requires end-to-end idempotency spanning the producer, broker, consumer, and downstream systems. This is rarely achieved in practice — systems aim for effectively-once by ensuring idempotent consumers.   </p>
+<p>Deduplication is a closely related pattern for event processing. When a consumer receives an event, it checks a deduplication table (event_id processed, timestamp). If the event ID already exists, it skips processing. The deduplication table should have a unique constraint on event_id, and the check-and-insert should be atomic. Deduplication windows must be longer than the maximum expected redelivery interval. A 24-hour deduplication window is common.   </p>
+<p>State-based idempotency offers an alternative to key-based deduplication. Instead of tracking operation IDs, the system checks the current state before performing state-changing operations. For example, before processing a payment, check that the invoice is in "unpaid" state. If the invoice is already "paid," skip the payment. This works well when operations map to clear state transitions but requires careful handling of race conditions.   </p>
+<p>Uniqueness constraints are the most reliable idempotency mechanism. A database unique constraint on business keys (order ID, payment reference) guarantees that duplicate operations fail atomically at the database level. This is the foundation of idempotent inserts. The constraint handles concurrent requests correctly — only the first insert succeeds, and subsequent attempts fail with a unique constraint violation that the application can handle gracefully.   </p>
+<p>Idempotency should be designed into every external-facing API and every event handler from the start. Retrofitting idempotency after data corruption incidents is painful. The upfront cost of adding idempotency keys and deduplication logic is minimal compared to the cost of debugging duplicate processing in production.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

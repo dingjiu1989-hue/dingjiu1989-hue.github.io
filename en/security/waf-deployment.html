@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="waf-deployment">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="WAF Deployment Patterns">
+    <meta property="og:description" content="WAF deployment patterns including inline, reverse proxy, cloud WAF, and API protection strategies.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/waf-deployment.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WAF Deployment Patterns">
+    <meta name="twitter:description" content="WAF deployment patterns including inline, reverse proxy, cloud WAF, and API protection strategies.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>WAF Deployment Patterns — SourceHub</title>
+    <meta name="description" content="WAF deployment patterns including inline, reverse proxy, cloud WAF, and API protection strategies.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/waf-deployment.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/waf-deployment.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "WAF Deployment Patterns",
+      "description": "WAF deployment patterns including inline, reverse proxy, cloud WAF, and API protection strategies.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1262",
+      "keywords": "Security, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/waf-deployment.html"},
+      "articleBody": "WAF Deployment Patterns WAF Overview A Web Application Firewall (WAF) filters and monitors HTTP traffic between web applications and the internet. It protects against common attacks like SQL injection, XSS, and CSRF. Inline WAF Deployment The WAF sits directly in the request path: # ModSecurity configuration SecRuleEngine On SecRequestBodyAccess On SecResponseBodyAccess On # SQL Injection prevention SecRule REQUEST_COOKIES|REQUEST_COOKIES_NAMES|ARGS_NAMES|ARGS|XML:/* \\ \"/((\\%27)|(\\'))\\s*((\\%6F)|o|(\\%4F))((\\%72)|r|(\\%52))/ix\" \\ \"id:'981173',\\ phase:2,\\ deny,\\ status:403,\\ msg:'SQL Injection Attack'\" # XSS prevention SecRule ARGS \"@detectXSS\" \\ \"id:'958056',\\ phase:2,\\ deny,\\ status:403,\\ msg:'XSS Attack Detected'\" Reverse Proxy WAF Deploy WAF as a reverse proxy for centralized protection: # Nginx with ModSecurity server { listen 443 ssl; server_name app.example.com; # ModSecurity enabled modsecurity on; modsecurity_rules_file /etc/nginx/modsec/main.conf; location / { proxy_pass http://backend:8080; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; } } Cloud WAF (AWS WAF) # AWS WAF with rate limiting and SQL injection protection resource \"aws_wafv2_web_acl\" \"main\" { name = \"main-waf\" description = \"Main WAF ACL\" scope = \"REGIONAL\" default_action { allow {} } rule { name = \"RateLimit\" priority = 1 action { block {} } statement { rate_based_statement { limit = 2000 aggregate_key_type = \"IP\" } } visibility_config { cloudwatch_metrics_enabled = true metric_name = \"RateLimit\" sampled_requests_enabled = true } } rule { name = \"SQLInjection\" priority = 2 action { block {} } statement { sql_injection_match_statement { field_to_match { body {} } text_transformation { priority = 0 type = \"URL_DECODE\" } } } visibility_config { cloudwatch_metrics_enabled = true metric_name = \"SQLInjection\" sampled_requests_enabled = true } } } API Protection APIs require different WAF rules than web applications: # Custom WAF rule for API protection API_WAF_RULES = { \"missing_auth_header\": { \"priority\": 1, \"match\": lambda req: \"Authorization\" not in req.headers, \"action\": \"block\", \"response\": 401 }, \"invalid_content_type\": { \"priority\": 2, \"match\": lambda req: ( req.method in [\"POST\", \"PUT\", \"PATCH\"] and req.headers.get(\"Content-Type\") != \"application/json\" ), \"action\": \"block\", \"response\": 415 }, \"path_traversal\": { \"priority\": 3, \"match\": lambda req: \"../\" in req.path or \"..\\\\\" in req.path, \"action\": \"block\", \"response\": 403 } } WAF Logging and Monitoring -- Analyze blocked requests SELECT country, COUNT(*) as blocked_count, ARRAY_AGG(DISTINCT rule_id) as triggered_rules FROM waf_logs WHERE action = 'BLOCK' AND timestamp > NOW() - INTERVAL '24 hours' GROUP BY country ORDER BY blocked_count DESC; -- False positive analysis SELECT rule_id, COUNT(*) as false_positives FROM waf_logs WHERE action = 'BLOCK' AND downstream_status = 200 AND timestamp > NOW() - INTERVAL '7 days' GROUP BY rule_id ORDER BY false_positives DESC; Conclusion Choose the WAF deployment pattern that fits your architecture. Inline WAF offers the strongest protection but adds latency. Cloud WAF provides scalability with minimal maintenance. Reverse proxy WAF is ideal for centralized management. Tune your WAF rules carefully to minimize false positives and monitor blocked requests regularly."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "WAF Deployment Patterns"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › WAF Deployment Patterns
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">WAF Deployment Patterns</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>WAF Deployment Patterns</h1>
+<br>
+<p>WAF Overview   </p>
+<p>A Web Application Firewall (WAF) filters and monitors HTTP traffic between web applications and the internet. It protects against common attacks like SQL injection, XSS, and CSRF.   </p>
+<p>Inline WAF Deployment   </p>
+<p>The WAF sits directly in the request path:   </p>
+<br>
+<br>
+<br>
+<p>    # ModSecurity configuration</p>
+<br>
+<p>    SecRuleEngine On</p>
+<br>
+<p>    SecRequestBodyAccess On</p>
+<br>
+<p>    SecResponseBodyAccess On</p>
+<br>
+<br>
+<br>
+<p>    # SQL Injection prevention</p>
+<br>
+<p>    SecRule REQUEST_COOKIES|REQUEST_COOKIES_NAMES|ARGS_NAMES|ARGS|XML:/* \</p>
+<br>
+<p>      "/((\%27)|(\'))\s*((\%6F)|o|(\%4F))((\%72)|r|(\%52))/ix" \</p>
+<br>
+<p>      "id:'981173',\</p>
+<br>
+<p>      phase:2,\</p>
+<br>
+<p>      deny,\</p>
+<br>
+<p>      status:403,\</p>
+<br>
+<p>      msg:'SQL Injection Attack'"</p>
+<br>
+<br>
+<br>
+<p>    # XSS prevention</p>
+<br>
+<p>    SecRule ARGS "@detectXSS" \</p>
+<br>
+<p>      "id:'958056',\</p>
+<br>
+<p>      phase:2,\</p>
+<br>
+<p>      deny,\</p>
+<br>
+<p>      status:403,\</p>
+<br>
+<p>      msg:'XSS Attack Detected'"</p>
+<br>
+<br>
+<br>
+<br>
+<p>Reverse Proxy WAF   </p>
+<p>Deploy WAF as a reverse proxy for centralized protection:   </p>
+<br>
+<br>
+<br>
+<p>    # Nginx with ModSecurity</p>
+<br>
+<p>    server {</p>
+<br>
+<p>        listen 443 ssl;</p>
+<br>
+<p>        server_name app.example.com;</p>
+<br>
+<br>
+<br>
+<p>        # ModSecurity enabled</p>
+<br>
+<p>        modsecurity on;</p>
+<br>
+<p>        modsecurity_rules_file /etc/nginx/modsec/main.conf;</p>
+<br>
+<br>
+<br>
+<p>        location / {</p>
+<br>
+<p>            proxy_pass http://backend:8080;</p>
+<br>
+<p>            proxy_set_header Host $host;</p>
+<br>
+<p>            proxy_set_header X-Real-IP $remote_addr;</p>
+<br>
+<p>            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</p>
+<br>
+<p>        }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<p>Cloud WAF (AWS WAF)   </p>
+<br>
+<br>
+<br>
+<p>    # AWS WAF with rate limiting and SQL injection protection</p>
+<br>
+<p>    resource "aws_wafv2_web_acl" "main" {</p>
+<br>
+<p>      name        = "main-waf"</p>
+<br>
+<p>      description = "Main WAF ACL"</p>
+<br>
+<p>      scope       = "REGIONAL"</p>
+<br>
+<br>
+<br>
+<p>      default_action {</p>
+<br>
+<p>        allow {}</p>
+<br>
+<p>      }</p>
+<br>
+<br>
+<br>
+<p>      rule {</p>
+<br>
+<p>        name     = "RateLimit"</p>
+<br>
+<p>        priority = 1</p>
+<br>
+<br>
+<br>
+<p>        action {</p>
+<br>
+<p>          block {}</p>
+<br>
+<p>        }</p>
+<br>
+<br>
+<br>
+<p>        statement {</p>
+<br>
+<p>          rate_based_statement {</p>
+<br>
+<p>            limit              = 2000</p>
+<br>
+<p>            aggregate_key_type = "IP"</p>
+<br>
+<p>          }</p>
+<br>
+<p>        }</p>
+<br>
+<br>
+<br>
+<p>        visibility_config {</p>
+<br>
+<p>          cloudwatch_metrics_enabled = true</p>
+<br>
+<p>          metric_name                = "RateLimit"</p>
+<br>
+<p>          sampled_requests_enabled   = true</p>
+<br>
+<p>        }</p>
+<br>
+<p>      }</p>
+<br>
+<br>
+<br>
+<p>      rule {</p>
+<br>
+<p>        name     = "SQLInjection"</p>
+<br>
+<p>        priority = 2</p>
+<br>
+<br>
+<br>
+<p>        action {</p>
+<br>
+<p>          block {}</p>
+<br>
+<p>        }</p>
+<br>
+<br>
+<br>
+<p>        statement {</p>
+<br>
+<p>          sql_injection_match_statement {</p>
+<br>
+<p>            field_to_match {</p>
+<br>
+<p>              body {}</p>
+<br>
+<p>            }</p>
+<br>
+<p>            text_transformation {</p>
+<br>
+<p>              priority = 0</p>
+<br>
+<p>              type     = "URL_DECODE"</p>
+<br>
+<p>            }</p>
+<br>
+<p>          }</p>
+<br>
+<p>        }</p>
+<br>
+<br>
+<br>
+<p>        visibility_config {</p>
+<br>
+<p>          cloudwatch_metrics_enabled = true</p>
+<br>
+<p>          metric_name                = "SQLInjection"</p>
+<br>
+<p>          sampled_requests_enabled   = true</p>
+<br>
+<p>        }</p>
+<br>
+<p>      }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<p>API Protection   </p>
+<p>APIs require different WAF rules than web applications:   </p>
+<br>
+<br>
+<br>
+<p>    # Custom WAF rule for API protection</p>
+<br>
+<p>    API_WAF_RULES = {</p>
+<br>
+<p>        "missing_auth_header": {</p>
+<br>
+<p>            "priority": 1,</p>
+<br>
+<p>            "match": lambda req: "Authorization" not in req.headers,</p>
+<br>
+<p>            "action": "block",</p>
+<br>
+<p>            "response": 401</p>
+<br>
+<p>        },</p>
+<br>
+<p>        "invalid_content_type": {</p>
+<br>
+<p>            "priority": 2,</p>
+<br>
+<p>            "match": lambda req: (</p>
+<br>
+<p>                req.method in ["POST", "PUT", "PATCH"]</p>
+<br>
+<p>                and req.headers.get("Content-Type") != "application/json"</p>
+<br>
+<p>            ),</p>
+<br>
+<p>            "action": "block",</p>
+<br>
+<p>            "response": 415</p>
+<br>
+<p>        },</p>
+<br>
+<p>        "path_traversal": {</p>
+<br>
+<p>            "priority": 3,</p>
+<br>
+<p>            "match": lambda req: "../" in req.path or "..\\" in req.path,</p>
+<br>
+<p>            "action": "block",</p>
+<br>
+<p>            "response": 403</p>
+<br>
+<p>        }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<p>WAF Logging and Monitoring   </p>
+<br>
+<br>
+<br>
+<p>    -- Analyze blocked requests</p>
+<br>
+<p>    SELECT country, COUNT(*) as blocked_count,</p>
+<br>
+<p>           ARRAY_AGG(DISTINCT rule_id) as triggered_rules</p>
+<br>
+<p>    FROM waf_logs</p>
+<br>
+<p>    WHERE action = 'BLOCK'</p>
+<br>
+<p>      AND timestamp > NOW() - INTERVAL '24 hours'</p>
+<br>
+<p>    GROUP BY country</p>
+<br>
+<p>    ORDER BY blocked_count DESC;</p>
+<br>
+<br>
+<br>
+<p>    -- False positive analysis</p>
+<br>
+<p>    SELECT rule_id, COUNT(*) as false_positives</p>
+<br>
+<p>    FROM waf_logs</p>
+<br>
+<p>    WHERE action = 'BLOCK'</p>
+<br>
+<p>      AND downstream_status = 200</p>
+<br>
+<p>      AND timestamp > NOW() - INTERVAL '7 days'</p>
+<br>
+<p>    GROUP BY rule_id</p>
+<br>
+<p>    ORDER BY false_positives DESC;</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
+<p>Choose the WAF deployment pattern that fits your architecture. Inline WAF offers the strongest protection but adds latency. Cloud WAF provides scalability with minimal maintenance. Reverse proxy WAF is ideal for centralized management. Tune your WAF rules carefully to minimize false positives and monitor blocked requests regularly.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

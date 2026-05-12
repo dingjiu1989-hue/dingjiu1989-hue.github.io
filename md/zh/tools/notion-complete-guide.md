@@ -8,26 +8,14 @@ url: https://dingjiu1989-hue.github.io/tools/notion-complete-guide.html
 
 # Notion 完全使用指南：从入门到精通
 
-Notion 是现在最流行的全能型笔记和协作工具。但它功能太深，很多人用了半年还在当备忘录用。这篇文章带你挖掘它真正的威力。
-
-## Notion 到底能做什么
+Notion 是现在最流行的全能型笔记和协作工具。但它功能太深，很多人用了半年还在当备忘录用。这篇文章带你挖掘它真正的威力。 Notion 到底能做什么
 
   * 个人知识库 — 读书笔记、学习计划、日记
   * 项目管理 — 任务看板、甘特图、Sprint 计划
   * 团队 Wiki — 流程文档、新人入职手册
   * 数据库应用 — CRM、内容日历、预算跟踪
 
-
-
-## 核心概念：Block 和 Database
-
-**Block（块）** 是 Notion 的最小单位——每个段落、标题、图片、列表都是 Block。输入 `/` 就能插入任何类型的 Block。
-
-**Database（数据库）** 是 Notion 的灵魂——不只是表格，而是可以关联、筛选、多视图展示的关系型数据。
-
-## 数据库六大视图
-
-视图| 适合场景  
+核心概念：Block 和 Database **Block（块）** 是 Notion 的最小单位——每个段落、标题、图片、列表都是 Block。输入 `/` 就能插入任何类型的 Block。 **Database（数据库）** 是 Notion 的灵魂——不只是表格，而是可以关联、筛选、多视图展示的关系型数据。 数据库六大视图 视图| 适合场景  
 ---|---  
 Table（表格）| 数据密集，需要看到所有字段  
 Board（看板）| 按状态分列的看板，项目管理  
@@ -35,8 +23,7 @@ Calendar（日历）| 按日期展示，适合内容日历
 Gallery（画廊）| 图文卡片，适合设计灵感墙  
 List（列表）| 极简视图，适合快速浏览  
 Timeline（时间线）| 甘特图，适合项目排期  
-  
-## Formula 公式入门
+Formula 公式入门
     
     
     # 计算两个日期之间的天数
@@ -46,7 +33,7 @@ Timeline（时间线）| 甘特图，适合项目排期
     if(prop("进度") == 100, "✅ 完成",
       prop("进度") >= 50, "🟡 进行中", "🔴 未开始")
 
-## 10 个必备模板
+10 个必备模板
 
   1. 读书清单（Gallery 视图 + 评分 + 笔记）
   2. 项目看板（Board 视图 + 任务关联）
@@ -59,22 +46,16 @@ Timeline（时间线）| 甘特图，适合项目排期
   9. 旅行规划（Gallery + Checklist）
   10. 学习路线图（Timeline 视图）
 
-
-
-## 进阶技巧
+进阶技巧
 
   * **关联数据库（Relation）** — 比如"项目"关联"任务"，一个项目下能看到所有关联任务
   * **汇总（Rollup）** — 聚合关联数据，如显示项目的总任务数和完成率
   * **同步区块（Synced Block）** — 同一内容在多个页面同步更新
 
-
-
-### 📖 相关推荐
+📖 相关推荐
 
   * [白板/笔记/思维导图工具对比](<https://dingjiu1989-hue.github.io/tools/note-apps.html>)
   * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
   * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/tools/project-management-tools.html>)
-
-
 
 **See also:** [数字产品创作指南：Notion 模板、Ebook、设计素材怎么做](</sidehustle/digital-products-guide.html>), [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](</tools/project-management-tools.html>), [白板/笔记/思维导图工具对比](</tools/note-apps.html>).

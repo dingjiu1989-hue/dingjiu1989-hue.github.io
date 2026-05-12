@@ -8,17 +8,13 @@ url: https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html
 
 # 单元测试入门：从零到写出第一个可维护的测试
 
-写单元测试是你从"会写代码"到"专业开发者"的分水岭。这篇文章用最少的理论带你直接上手。
-
-## 为什么必须写测试
+写单元测试是你从"会写代码"到"专业开发者"的分水岭。这篇文章用最少的理论带你直接上手。 为什么必须写测试
 
   * **重构有底气** — 有测试覆盖的代码，改完跑一次就知道有没有破坏现有功能
   * **文档即测试** — 测试描述了函数在各种输入下应该如何表现，比注释更可靠
   * **减少回归 Bug** — 修一个 Bug 加一个测试，同样的错不会再犯第二次
 
-
-
-## AAA 模式（Arrange-Act-Assert）
+AAA 模式（Arrange-Act-Assert）
     
     
     def test_add_two_numbers():
@@ -29,7 +25,7 @@ url: https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html
         # Assert（断言）
         assert result == 5
 
-## 第一个真实测试
+第一个真实测试
     
     
     # user_service.py
@@ -45,7 +41,7 @@ url: https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html
         user = type('User', (), {'first_name': '李', 'last_name': ''})()
         assert get_full_name(user) == "李 "
 
-## Mock 和 Fixture
+Mock 和 Fixture
     
     
     # Fixture: 共享的测试数据
@@ -63,23 +59,15 @@ url: https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html
         result = fetch_user(1)
         assert result["name"] == "张三"
 
-## 什么该测、什么不该测
+什么该测、什么不该测
 
   * **该测** — 业务逻辑、边界条件、错误路径、数据转换
   * **不该测** — 简单的 getter/setter、框架代码、第三方库的内部行为
 
-
-
-## 起步建议
-
-不用追求 100% 覆盖率——那会增加大量维护负担。先给核心业务逻辑写测试，看到覆盖率数字攀升的成就感会推着你继续写。
-
-### 📖 相关推荐
+起步建议不用追求 100% 覆盖率——那会增加大量维护负担。先给核心业务逻辑写测试，看到覆盖率数字攀升的成就感会推着你继续写。 📖 相关推荐
 
   * [Python 入门教程：从零到写出第一个程序](<https://dingjiu1989-hue.github.io/tech/python-tutorial.html>)
   * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/tech/git-advanced.html>)
   * [REST API 设计最佳实践：写出让人愿意用的接口](<https://dingjiu1989-hue.github.io/tech/rest-api-best-practices.html>)
-
-
 
 **See also:** [Python 入门教程：从零到写出第一个程序](</tech/python-tutorial.html>), [正则表达式 30 分钟入门指南](</tech/regex-guide.html>), [OpenAI API 入门：用 10 行代码调用 GPT](</ai/openai-api-intro.html>).

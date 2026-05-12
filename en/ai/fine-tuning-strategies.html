@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="fine-tuning-strategies">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="LLM Fine-Tuning Strategies and Techniques">
+    <meta property="og:description" content="Compare LLM fine-tuning approaches: full fine-tuning, LoRA, QLoRA, and RLHF for domain adaptation.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/fine-tuning-strategies.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LLM Fine-Tuning Strategies and Techniques">
+    <meta name="twitter:description" content="Compare LLM fine-tuning approaches: full fine-tuning, LoRA, QLoRA, and RLHF for domain adaptation.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>LLM Fine-Tuning Strategies and Techniques — SourceHub</title>
+    <meta name="description" content="Compare LLM fine-tuning approaches: full fine-tuning, LoRA, QLoRA, and RLHF for domain adaptation.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/fine-tuning-strategies.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/ai/fine-tuning-strategies.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "LLM Fine-Tuning Strategies and Techniques",
+      "description": "Compare LLM fine-tuning approaches: full fine-tuning, LoRA, QLoRA, and RLHF for domain adaptation.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "556",
+      "keywords": "AI, Machine Learning, LLM",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/fine-tuning-strategies.html"},
+      "articleBody": "LLM Fine-Tuning Strategies and Techniques Fine-tuning adapts a pre-trained language model to specific tasks or domains. Different fine-tuning approaches offer trade-offs between customization, cost, and performance. Full Fine-Tuning Full fine-tuning updates all model parameters on domain-specific data. This achieves the highest task performance but requires significant computational resources. Full fine-tuning of a 7B parameter model requires 4-8 GPUs with 80GB memory each. Full fine-tuning is appropriate for domain adaptation (legal, medical, code) where broad knowledge transfer is needed. Training data should be 10,000-100,000 high-quality examples. The resulting model weights are 2x the original size (for AdamW optimizer states during training). LoRA Low-Rank Adaptation (LoRA) freezes the original model weights and inserts trainable rank decomposition matrices. This reduces trainable parameters by 10,000x and memory requirements by 4x. LoRA adapters are small (10-100MB) and swappable at runtime. Key hyperparameters: rank (r=8-64 for most tasks, higher for complex adaptation), alpha (scaling factor, typically 2x the rank), target modules (attention projections for most tasks, MLP layers for deeper adaptation). Train multiple LoRA adapters for different tasks from the same base model. QLoRA QLoRA combines 4-bit quantization with LoRA. It quantizes the base model to 4 bits (NF4 format) and trains LoRA adapters at full precision. This enables fine-tuning 65B models on a single 48GB GPU. QLoRA achieves performance within 1% of full fine-tuning on most benchmarks. Double quantization reduces memory further by quantizing the quantization constants. Paged optimizers use CPU memory for optimizer states during memory spikes. QLoRA makes fine-tuning accessible without expensive GPU clusters. RLHF Reinforcement Learning from Human Feedback aligns models with human preferences. The three-stage process: supervised fine-tuning on demonstrations, reward model training on human comparisons, and PPO training using the reward model. RLHF improves helpfulness, reduces harmful outputs, and follows instructions more accurately. The quality of preference data matters more than quantity. DPO (Direct Preference Optimization) simplifies RLHF by treating alignment as a classification problem. Data Preparation High-quality training data is the most important factor. Use 1000+ examples for noticeable improvement. Deduplicate, filter low-quality examples, and balance label distribution. Include adversarial examples for robustness. Test on held-out validation sets."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "LLM Fine-Tuning Strategies and Techniques"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › LLM Fine-Tuning Strategies and Techniques
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">AI</span>
+        <span class="tag-cat">Machine Learning</span>
+        <span class="tag-cat">LLM</span></div>
+      <h1 class="article-title">LLM Fine-Tuning Strategies and Techniques</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>LLM Fine-Tuning Strategies and Techniques</h1>
+<p>Fine-tuning adapts a pre-trained language model to specific tasks or domains. Different fine-tuning approaches offer trade-offs between customization, cost, and performance.</p>
+<br>
+<h2> Full Fine-Tuning</h2>
+<br>
+<p>Full fine-tuning updates all model parameters on domain-specific data. This achieves the highest task performance but requires significant computational resources. Full fine-tuning of a 7B parameter model requires 4-8 GPUs with 80GB memory each.</p>
+<br>
+<p>Full fine-tuning is appropriate for domain adaptation (legal, medical, code) where broad knowledge transfer is needed. Training data should be 10,000-100,000 high-quality examples. The resulting model weights are 2x the original size (for AdamW optimizer states during training).</p>
+<br>
+<h2> LoRA</h2>
+<br>
+<p>Low-Rank Adaptation (LoRA) freezes the original model weights and inserts trainable rank decomposition matrices. This reduces trainable parameters by 10,000x and memory requirements by 4x. LoRA adapters are small (10-100MB) and swappable at runtime.</p>
+<br>
+<p>Key hyperparameters: rank (r=8-64 for most tasks, higher for complex adaptation), alpha (scaling factor, typically 2x the rank), target modules (attention projections for most tasks, MLP layers for deeper adaptation). Train multiple LoRA adapters for different tasks from the same base model.</p>
+<br>
+<h2> QLoRA</h2>
+<br>
+<p>QLoRA combines 4-bit quantization with LoRA. It quantizes the base model to 4 bits (NF4 format) and trains LoRA adapters at full precision. This enables fine-tuning 65B models on a single 48GB GPU. QLoRA achieves performance within 1% of full fine-tuning on most benchmarks.</p>
+<br>
+<p>Double quantization reduces memory further by quantizing the quantization constants. Paged optimizers use CPU memory for optimizer states during memory spikes. QLoRA makes fine-tuning accessible without expensive GPU clusters.</p>
+<br>
+<h2> RLHF</h2>
+<br>
+<p>Reinforcement Learning from Human Feedback aligns models with human preferences. The three-stage process: supervised fine-tuning on demonstrations, reward model training on human comparisons, and PPO training using the reward model.</p>
+<br>
+<p>RLHF improves helpfulness, reduces harmful outputs, and follows instructions more accurately. The quality of preference data matters more than quantity. DPO (Direct Preference Optimization) simplifies RLHF by treating alignment as a classification problem.</p>
+<br>
+<h2> Data Preparation</h2>
+<br>
+<p>High-quality training data is the most important factor. Use 1000+ examples for noticeable improvement. Deduplicate, filter low-quality examples, and balance label distribution. Include adversarial examples for robustness. Test on held-out validation sets.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

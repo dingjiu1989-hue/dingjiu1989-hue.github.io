@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="dead-letter-queue">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Dead Letter Queues: Handling Message Failures">
+    <meta property="og:description" content="Understanding dead letter queues: how to handle failed messages in event-driven architectures and message brokers.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/dead-letter-queue.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dead Letter Queues: Handling Message Failures">
+    <meta name="twitter:description" content="Understanding dead letter queues: how to handle failed messages in event-driven architectures and message brokers.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Dead Letter Queues: Handling Message Failures — SourceHub</title>
+    <meta name="description" content="Understanding dead letter queues: how to handle failed messages in event-driven architectures and message brokers.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/dead-letter-queue.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/dead-letter-queue.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Dead Letter Queues: Handling Message Failures",
+      "description": "Understanding dead letter queues: how to handle failed messages in event-driven architectures and message brokers.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "448",
+      "keywords": "Architecture, System Design, Backend",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/dead-letter-queue.html"},
+      "articleBody": "Dead Letter Queues: Handling Message Failures A dead letter queue (DLQ) is a message queue that stores messages that a system cannot successfully process. When a consumer repeatedly fails to process a message, the message broker moves it to the DLQ instead of discarding it. This prevents message loss while isolating problematic messages from the main processing pipeline. How DLQ Works Most message brokers support a configurable retry policy. A message is delivered to a consumer. If processing fails, the consumer rejects or nacks the message. The broker redelivers the message up to the maximum retry count. After exhausting retries, the broker moves the message to the DLQ. The DLQ stores the original message along with metadata such as the failure reason, retry count, and timestamps. Operators can inspect DLQ messages, fix the underlying issue, and replay messages back to the main queue. Message Brokers and DLQ AWS SQS has built-in DLQ support with redrive functionality. You can configure a source queue to send failed messages to a DLQ after a specified number of receive attempts. AWS provides a \"redrive\" mechanism to move messages back to the source queue after the issue is resolved. RabbitMQ implements DLQ through dead letter exchanges. When a message is rejected or expires, the broker routes it to the configured dead letter exchange, which forwards it to the DLQ. This flexible approach supports complex routing scenarios. Apache Kafka uses a different model\u2014consumers write failed messages to a separate \"dead letter topic.\" Kafka's log-based architecture makes this approach natural and efficient. Processing Failed Messages Set up monitoring alerts on DLQ depth. A growing DLQ indicates persistent processing failures. Build a DLQ processing dashboard showing failure reasons, age, and source queue. Implement automated replay for retryable failures after a cooldown period. Manual inspection and replay tools should be available for operational teams. Some DLQ messages require code fixes before replay. Archive messages that represent invalid data or permanent failures."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Dead Letter Queues: Handling Message Failures"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Dead Letter Queues: Handling Message Failures
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">Dead Letter Queues: Handling Message Failures</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Dead Letter Queues: Handling Message Failures</h1>
+<p>A dead letter queue (DLQ) is a message queue that stores messages that a system cannot successfully process. When a consumer repeatedly fails to process a message, the message broker moves it to the DLQ instead of discarding it. This prevents message loss while isolating problematic messages from the main processing pipeline.</p>
+<br>
+<h2> How DLQ Works</h2>
+<br>
+<p>Most message brokers support a configurable retry policy. A message is delivered to a consumer. If processing fails, the consumer rejects or nacks the message. The broker redelivers the message up to the maximum retry count. After exhausting retries, the broker moves the message to the DLQ.</p>
+<br>
+<p>The DLQ stores the original message along with metadata such as the failure reason, retry count, and timestamps. Operators can inspect DLQ messages, fix the underlying issue, and replay messages back to the main queue.</p>
+<br>
+<h2> Message Brokers and DLQ</h2>
+<br>
+<p>AWS SQS has built-in DLQ support with redrive functionality. You can configure a source queue to send failed messages to a DLQ after a specified number of receive attempts. AWS provides a "redrive" mechanism to move messages back to the source queue after the issue is resolved.</p>
+<br>
+<p>RabbitMQ implements DLQ through dead letter exchanges. When a message is rejected or expires, the broker routes it to the configured dead letter exchange, which forwards it to the DLQ. This flexible approach supports complex routing scenarios.</p>
+<br>
+<p>Apache Kafka uses a different model—consumers write failed messages to a separate "dead letter topic." Kafka's log-based architecture makes this approach natural and efficient.</p>
+<br>
+<h2> Processing Failed Messages</h2>
+<br>
+<p>Set up monitoring alerts on DLQ depth. A growing DLQ indicates persistent processing failures. Build a DLQ processing dashboard showing failure reasons, age, and source queue. Implement automated replay for retryable failures after a cooldown period.</p>
+<br>
+<p>Manual inspection and replay tools should be available for operational teams. Some DLQ messages require code fixes before replay. Archive messages that represent invalid data or permanent failures.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

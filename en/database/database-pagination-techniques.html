@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="database-pagination-techniques">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Database Pagination: Offset, Cursor, Keyset, and Seek Methods">
+    <meta property="og:description" content="Database pagination strategies compared: OFFSET/LIMIT vs cursor-based pagination for performance and consistency.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/database-pagination-techniques.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Database Pagination: Offset, Cursor, Keyset, and Seek Methods">
+    <meta name="twitter:description" content="Database pagination strategies compared: OFFSET/LIMIT vs cursor-based pagination for performance and consistency.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Database Pagination: Offset, Cursor, Keyset, and Seek Methods — SourceHub</title>
+    <meta name="description" content="Database pagination strategies compared: OFFSET/LIMIT vs cursor-based pagination for performance and consistency.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/database-pagination-techniques.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/database-pagination-techniques.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Database Pagination: Offset, Cursor, Keyset, and Seek Methods",
+      "description": "Database pagination strategies compared: OFFSET/LIMIT vs cursor-based pagination for performance and consistency.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "633",
+      "keywords": "Database, Backend, Data",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-pagination-techniques.html"},
+      "articleBody": "Database Pagination: Offset, Cursor, Keyset, and Seek Methods Pagination divides large result sets into manageable pages. The choice of pagination method affects query performance, data consistency, and user experience. Different approaches suit different use cases. Offset Pagination OFFSET/LIMIT pagination is the simplest approach. SELECT * FROM orders ORDER BY id LIMIT 20 OFFSET 40 returns page 3 with 20 items per page. It is intuitive and easy to implement. Problems: OFFSET scans and discards skipped rows\u2014OFFSET 100000 on a query scanning 100k rows still reads all of them. Performance degrades as page number increases. New rows inserted before the current page cause row shifts, and users may see duplicate or missing items. Offset pagination is acceptable for small datasets (under 10,000 rows) and admin interfaces where exact consistency does not matter. It is not suitable for infinite scroll or real-time feeds. Keyset Pagination Keyset pagination (also called seek method) uses WHERE clauses on the last item's values. SELECT * FROM orders WHERE (created_at, id) > ('2026-01-15T10:30:00', 5000) ORDER BY created_at, id LIMIT 20. It uses a regular index seek. Advantages: consistent performance regardless of page number. Index scan reads exactly the requested rows. New insertions do not affect previous pages. Fast and stable. Requirements: the WHERE clause must use a unique combination of columns for unambiguous ordering. Composite index must exist on the pagination columns. Clients must track the last item's sort values. Keyset pagination is ideal for infinite scroll, real-time feeds, and APIs with stable ordering. Facebook, Twitter, and most modern APIs use cursor-based (keyset) pagination. Cursor-Based Pagination Cursor-based pagination encodes the sort position as an opaque token. The API returns a cursor with each response. Clients pass the cursor for the next request. The server decodes the cursor into WHERE clause values. Implementation: encode the last row's sort values (base64 JSON or binary). ORM libraries often support cursor pagination natively. GraphQL connections use cursor-based pagination as standard. Cursor pagination hides pagination details from clients. The cursor can contain not just sort values but also filters, ordering, and version information. Cursor values are opaque\u2014clients cannot manipulate them to access arbitrary pages. Comparison Offset is easiest but breaks at scale. Keyset is fast but requires exposing sort columns to client logic. Cursor offers the best API experience but requires more server-side encoding. Offset suits admin UIs and page-number navigation. Keyset and cursor suit API endpoints and infinite scroll. Hybrid Approach Some applications combine methods: cursor for forward pagination (infinite scroll), offset for backward pagination (page number jumps). The API returns both next_cursor and page_number in responses, letting the client choose."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Database Pagination: Offset, Cursor, Keyset, and Seek Methods"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Database Pagination: Offset, Cursor, Keyset, and Seek Methods
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Data</span></div>
+      <h1 class="article-title">Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h1>
+<p>Pagination divides large result sets into manageable pages. The choice of pagination method affects query performance, data consistency, and user experience. Different approaches suit different use cases.</p>
+<br>
+<h2> Offset Pagination</h2>
+<br>
+<p>OFFSET/LIMIT pagination is the simplest approach. SELECT * FROM orders ORDER BY id LIMIT 20 OFFSET 40 returns page 3 with 20 items per page. It is intuitive and easy to implement.</p>
+<br>
+<p>Problems: OFFSET scans and discards skipped rows—OFFSET 100000 on a query scanning 100k rows still reads all of them. Performance degrades as page number increases. New rows inserted before the current page cause row shifts, and users may see duplicate or missing items.</p>
+<br>
+<p>Offset pagination is acceptable for small datasets (under 10,000 rows) and admin interfaces where exact consistency does not matter. It is not suitable for infinite scroll or real-time feeds.</p>
+<br>
+<h2> Keyset Pagination</h2>
+<br>
+<p>Keyset pagination (also called seek method) uses WHERE clauses on the last item's values. SELECT * FROM orders WHERE (created_at, id) > ('2026-01-15T10:30:00', 5000) ORDER BY created_at, id LIMIT 20. It uses a regular index seek.</p>
+<br>
+<p>Advantages: consistent performance regardless of page number. Index scan reads exactly the requested rows. New insertions do not affect previous pages. Fast and stable.</p>
+<br>
+<p>Requirements: the WHERE clause must use a unique combination of columns for unambiguous ordering. Composite index must exist on the pagination columns. Clients must track the last item's sort values.</p>
+<br>
+<p>Keyset pagination is ideal for infinite scroll, real-time feeds, and APIs with stable ordering. Facebook, Twitter, and most modern APIs use cursor-based (keyset) pagination.</p>
+<br>
+<h2> Cursor-Based Pagination</h2>
+<br>
+<p>Cursor-based pagination encodes the sort position as an opaque token. The API returns a cursor with each response. Clients pass the cursor for the next request. The server decodes the cursor into WHERE clause values.</p>
+<br>
+<p>Implementation: encode the last row's sort values (base64 JSON or binary). ORM libraries often support cursor pagination natively. GraphQL connections use cursor-based pagination as standard.</p>
+<br>
+<p>Cursor pagination hides pagination details from clients. The cursor can contain not just sort values but also filters, ordering, and version information. Cursor values are opaque—clients cannot manipulate them to access arbitrary pages.</p>
+<br>
+<h2> Comparison</h2>
+<br>
+<p>Offset is easiest but breaks at scale. Keyset is fast but requires exposing sort columns to client logic. Cursor offers the best API experience but requires more server-side encoding. Offset suits admin UIs and page-number navigation. Keyset and cursor suit API endpoints and infinite scroll.</p>
+<br>
+<h2> Hybrid Approach</h2>
+<br>
+<p>Some applications combine methods: cursor for forward pagination (infinite scroll), offset for backward pagination (page number jumps). The API returns both next_cursor and page_number in responses, letting the client choose.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

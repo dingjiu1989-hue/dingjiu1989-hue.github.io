@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2237",
+      "wordCount": "2760",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/multimodal-ai.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/multimodal-ai.html"},
+      "articleBody": "Multimodal AI Applications in 2026 Introduction Multimodal AI models that understand and generate across text, images, audio, and video have moved from research papers to production APIs. By 2026, models like GPT-4o, Claude 3.5 Sonnet, Gemini 2.0, and open-source alternatives support native multimodal inputs, enabling applications that were impractical with separate unimodal pipelines. This article covers current capabilities, architectures, and production patterns for multimodal AI applications. Vision-Language Models Modern vision-language models (VLMs) accept images and text together in a single context window: from anthropic import Anthropic client = Anthropic(api_key=\"sk-...\") # Analyze an image with text instructions response = client.messages.create( model=\"claude-sonnet-4-20260512\", max_tokens=1024, messages=[{ \"role\": \"user\", \"content\": [ { \"type\": \"image\", \"source\": { \"type\": \"base64\", \"media_type\": \"image/png\", \"data\": screenshot_b64, }, }, { \"type\": \"text\", \"text\": ( \"Analyze this UI screenshot. Identify: \" \"1. All interactive elements \" \"2. Accessibility issues \" \"3. Loading states \" \"4. Error handling patterns \" ), }, ], }], ) # The model \"sees\" the image and processes it jointly with text analysis = response.content[0].text Document AI and OCR Extract structured data from complex documents: async def process_invoice(invoice_path: str) -> dict: \"\"\"Extract structured data from invoice images/PDFs.\"\"\" import base64 with open(invoice_path, \"rb\") as f: image_data = base64.b64encode(f.read()).decode(\"utf-8\") response = client.messages.create( model=\"claude-sonnet-4-20260512\", max_tokens=2048, messages=[{ \"role\": \"user\", \"content\": [ {\"type\": \"image\", \"source\": { \"type\": \"base64\", \"media_type\": \"application/pdf\", \"data\": image_data, }}, {\"type\": \"text\", \"text\": \"\"\" Extract the following fields from this invoice as JSON: - invoice_number - vendor_name - vendor_address - invoice_date - due_date - line_items (array of {description, quantity, unit_price, total}) - subtotal - tax_amount - total_amount - currency \"\"\"}, ], }], response_format={\"type\": \"json_object\"}, ) return json.loads(response.content[0].text) Speech-to-Text and Audio Understanding Multimodal models now handle audio directly without separate ASR pipelines: import asyncio async def analyze_call_recording(audio_path: str) -> dict: \"\"\"Analyze a customer support call recording.\"\"\" import base64 with open(audio_path, \"rb\") as f: audio_data = base64.b64encode(f.read()).decode(\"utf-8\") response = client.messages.create( model=\"claude-sonnet-4-20260512\", max_tokens=2048, messages=[{ \"role\": \"user\", \"content\": [ { \"type\": \"audio\", \"source\": { \"type\": \"base64\", \"media_type\": \"audio/mp3\", \"data\": audio_data, }, }, { \"type\": \"text\", \"text\": \"\"\" Analyze this customer support call: 1. Transcribe the conversation 2. Identify the customer's issue 3. Was the issue resolved? (yes/no/partial) 4. Sentiment analysis (customer + agent) 5. Compliance issues (did agent disclose required info?) 6. Suggested improvements \"\"\", }, ], }], ) return parse_analysis(response.content[0].text) Multimodal RAG Traditional RAG is text-only. Multimodal RAG retrieves and reasons across images, diagrams, and tables: import chromadb from sentence_transformers import SentenceTransformer import numpy as np class MultimodalRAG: def __init__(self): self.text_encoder = SentenceTransformer(\"all-MiniLM-L6-v2\") self.image_encoder = SentenceTransformer( \"clip-ViT-B-32-multilingual-v1\" ) self.collection = chromadb.Client().create_collection( \"multimodal_knowledge_base\" ) def index_document( self, doc_id: str, text: str, images: List[np.ndarray], tables: List[dict], ): embeddings = [] # Index text chunks text_chunks = self._chunk_text(text) text_embeddings = self.text_encoder.encode(text_chunks) embeddings.extend(text_embeddings) # Index images for img in images: img_embedding = self.image_encoder.encode(img) embeddings.append(img_embedding) # Index with metadata about modality self.collection.add( embeddings=embeddings, ids=[f\"{doc_id}_{i}\" for i in range(len(embeddings))], metadatas=[ {\"modality\": \"text\", \"doc_id\": doc_id}, *[{\"modality\": \"image\", \"doc_id\": doc_id} for _ in images], ], ) def query(self, question: str, top_k: int = 5) -> List[dict]: # Encode query query_embedding = self.text_encoder.encode(question) # Retrieve across all modalities results = self.collection.query( query_embeddings=[query_embedding], n_results=top_k, ) return results Audio Transcription and Analysis Pipeline For production audio processing, combine streaming with multimodal analysis: class AudioProcessingPipeline: def __init__(self): self.buffer_duration = 300 # 5-minute chunks self.overlap = 30 # 30-second overlap for continuity async def process_stream(self, audio_stream: AsyncGenerator[bytes]): buffer = [] buffer_duration = 0 async for chunk in audio_stream: buffer.append(chunk) buffer_duration += self._chunk_duration(chunk) if buffer_duration >= self.buffer_duration: # Process buffer segment = b\"\".join(buffer) # Real-time transcription + analysis result = await self._analyze_segment(segment) # Extract action items, sentiment, entities actions = self._extract_actions(result) if actions: await self._route_actions(actions) # Keep overlap for continuity overlap_bytes = int( len(segment) * (self.overlap / buffer_duration) ) buffer = [segment[-overlap_bytes:]] buffer_duration = self.overlap async def _analyze_segment(self, audio_bytes: bytes) -> dict: response = client.messages.create( model=\"claude-sonnet-4-20260512\", messages=[{ \"role\": \"user\", \"content\": [ {\"type\": \"audio\", \"source\": { \"type\": \"base64\", \"media_type\": \"audio/wav\", \"data\": base64.b64encode(audio_bytes).decode(), }}, {\"type\": \"text\", \"text\": \"\"\" Transcribe and analyze this audio segment: - Full transcript with speaker diarization - Key action items - Decisions made - Sentiment trend - Urgent issues requiring immediate attention \"\"\"}, ], }], ) return response Use Cases and Limitations | Use Case | Capability | Current Limitations | |---|---|---| | Document processing | Extract data from receipts, invoices, forms | Handwriting recognition accuracy | | UI testing | Visual regression + semantic understanding | Dynamic content handling | | Content moderation | Analyze text + images together | Cultural context subtlety | | Accessibility | Generate alt text, describe scenes | Real-time video processing latency | | Medical imaging | Analyze X-rays, MRIs with clinical notes | Regulatory approval, hallucination risk | | Video understanding | Summarize meetings, detect events | Long video context limits | Production Considerations # Multimodal model selection criteria selection: latency: text_only: \" text+image: \" audio_input: \" video_analysis: \" cost: text: \"Baseline\" text+image: \"3-5x text cost\" audio: \"5-10x text cost (per minute)\" video: \"10-20x text cost (per minute)\" context_window: text: \"200K tokens\" text+image: \"~100 images or 1 hour audio\" video: \"Limited by token count (~10-15 min)\" accuracy: OCR: \">99% on printed, >90% on handwriting\" scene_description: \"Good on common scenes, poor on niche domains\" audio_transcription: \">95% WER on clean speech, >80% on accented\" Multimodal AI is rapidly maturing but still requires careful evaluation for each use case. Start with well-scoped document processing or image analysis tasks before expanding to real-time audio or video pipelines."
     }
     </script>
     <script type="application/ld+json">
@@ -73,550 +74,622 @@
         <span class="tag-cat">Machine Learning</span></div>
       <h1 class="article-title">Multimodal AI Applications in 2026</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Introduction</h2>
+      <div class="article-body"><h1>Multimodal AI Applications in 2026</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Multimodal AI models that understand and generate across text, images, audio, and video have moved from research papers to production APIs. By 2026, models like GPT-4o, Claude 3.5 Sonnet, Gemini 2.0, and open-source alternatives support native multimodal inputs, enabling applications that were impractical with separate unimodal pipelines. This article covers current capabilities, architectures, and production patterns for multimodal AI applications.</p>
 <br>
-<h2> Vision-Language Models</h2>
+<br>
+<br>
+<br>
+<h2>  Vision-Language Models</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Modern vision-language models (VLMs) accept images and text together in a single context window:</p>
 <br>
-<pre><code>
-from anthropic import Anthropic
-
-
-
-client = Anthropic(api_key=&quot;sk-...&quot;)
-
-
-
-# Analyze an image with text instructions
-
-response = client.messages.create(
-
-    model=&quot;claude-sonnet-4-20260512&quot;,
-
-    max_tokens=1024,
-
-    messages=[{
-
-        &quot;role&quot;: &quot;user&quot;,
-
-        &quot;content&quot;: [
-
-            {
-
-                &quot;type&quot;: &quot;image&quot;,
-
-                &quot;source&quot;: {
-
-                    &quot;type&quot;: &quot;base64&quot;,
-
-                    &quot;media_type&quot;: &quot;image/png&quot;,
-
-                    &quot;data&quot;: screenshot_b64,
-
-                },
-
-            },
-
-            {
-
-                &quot;type&quot;: &quot;text&quot;,
-
-                &quot;text&quot;: (
-
-                    &quot;Analyze this UI screenshot. Identify: &quot;
-
-                    &quot;1. All interactive elements &quot;
-
-                    &quot;2. Accessibility issues &quot;
-
-                    &quot;3. Loading states &quot;
-
-                    &quot;4. Error handling patterns &quot;
-
-                ),
-
-            },
-
-        ],
-
-    }],
-
-)
-
-
-
-# The model &quot;sees&quot; the image and processes it jointly with text
-
-analysis = response.content[0].text
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    from anthropic import Anthropic</p>
+<br>
+<br>
+<br>
+<p>    client = Anthropic(api_key="sk-...")</p>
+<br>
+<br>
+<br>
+<p>    # Analyze an image with text instructions</p>
+<br>
+<p>    response = client.messages.create(</p>
+<br>
+<p>        model="claude-sonnet-4-20260512",</p>
+<br>
+<p>        max_tokens=1024,</p>
+<br>
+<p>        messages=[{</p>
+<br>
+<p>            "role": "user",</p>
+<br>
+<p>            "content": [</p>
+<br>
+<p>                {</p>
+<br>
+<p>                    "type": "image",</p>
+<br>
+<p>                    "source": {</p>
+<br>
+<p>                        "type": "base64",</p>
+<br>
+<p>                        "media_type": "image/png",</p>
+<br>
+<p>                        "data": screenshot_b64,</p>
+<br>
+<p>                    },</p>
+<br>
+<p>                },</p>
+<br>
+<p>                {</p>
+<br>
+<p>                    "type": "text",</p>
+<br>
+<p>                    "text": (</p>
+<br>
+<p>                        "Analyze this UI screenshot. Identify: "</p>
+<br>
+<p>                        "1. All interactive elements "</p>
+<br>
+<p>                        "2. Accessibility issues "</p>
+<br>
+<p>                        "3. Loading states "</p>
+<br>
+<p>                        "4. Error handling patterns "</p>
+<br>
+<p>                    ),</p>
+<br>
+<p>                },</p>
+<br>
+<p>            ],</p>
+<br>
+<p>        }],</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<p>    # The model "sees" the image and processes it jointly with text</p>
+<br>
+<p>    analysis = response.content[0].text</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Document AI and OCR</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Extract structured data from complex documents:</p>
 <br>
-<pre><code>
-async def process_invoice(invoice_path: str) -&gt; dict:
-
-    &quot;&quot;&quot;Extract structured data from invoice images/PDFs.&quot;&quot;&quot;
-
-    import base64
-
-
-
-    with open(invoice_path, &quot;rb&quot;) as f:
-
-        image_data = base64.b64encode(f.read()).decode(&quot;utf-8&quot;)
-
-
-
-    response = client.messages.create(
-
-        model=&quot;claude-sonnet-4-20260512&quot;,
-
-        max_tokens=2048,
-
-        messages=[{
-
-            &quot;role&quot;: &quot;user&quot;,
-
-            &quot;content&quot;: [
-
-                {&quot;type&quot;: &quot;image&quot;, &quot;source&quot;: {
-
-                    &quot;type&quot;: &quot;base64&quot;,
-
-                    &quot;media_type&quot;: &quot;application/pdf&quot;,
-
-                    &quot;data&quot;: image_data,
-
-                }},
-
-                {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;&quot;&quot;
-
-Extract the following fields from this invoice as JSON:
-
-- invoice_number
-
-- vendor_name
-
-- vendor_address
-
-- invoice_date
-
-- due_date
-
-- line_items (array of {description, quantity, unit_price, total})
-
-- subtotal
-
-- tax_amount
-
-- total_amount
-
-- currency
-
-&quot;&quot;&quot;},
-
-            ],
-
-        }],
-
-        response_format={&quot;type&quot;: &quot;json_object&quot;},
-
-    )
-
-
-
-    return json.loads(response.content[0].text)
-
-</code></pre>
 <br>
-<h2> Speech-to-Text and Audio Understanding</h2>
+<br>
+<br>
+<br>
+<p>    async def process_invoice(invoice_path: str) -> dict:</p>
+<br>
+<p>        """Extract structured data from invoice images/PDFs."""</p>
+<br>
+<p>        import base64</p>
+<br>
+<br>
+<br>
+<p>        with open(invoice_path, "rb") as f:</p>
+<br>
+<p>            image_data = base64.b64encode(f.read()).decode("utf-8")</p>
+<br>
+<br>
+<br>
+<p>        response = client.messages.create(</p>
+<br>
+<p>            model="claude-sonnet-4-20260512",</p>
+<br>
+<p>            max_tokens=2048,</p>
+<br>
+<p>            messages=[{</p>
+<br>
+<p>                "role": "user",</p>
+<br>
+<p>                "content": [</p>
+<br>
+<p>                    {"type": "image", "source": {</p>
+<br>
+<p>                        "type": "base64",</p>
+<br>
+<p>                        "media_type": "application/pdf",</p>
+<br>
+<p>                        "data": image_data,</p>
+<br>
+<p>                    }},</p>
+<br>
+<p>                    {"type": "text", "text": """</p>
+<br>
+<p>    Extract the following fields from this invoice as JSON:</p>
+<br>
+<p>    - invoice_number</p>
+<br>
+<p>    - vendor_name</p>
+<br>
+<p>    - vendor_address</p>
+<br>
+<p>    - invoice_date</p>
+<br>
+<p>    - due_date</p>
+<br>
+<p>    - line_items (array of {description, quantity, unit_price, total})</p>
+<br>
+<p>    - subtotal</p>
+<br>
+<p>    - tax_amount</p>
+<br>
+<p>    - total_amount</p>
+<br>
+<p>    - currency</p>
+<br>
+<p>    """},</p>
+<br>
+<p>                ],</p>
+<br>
+<p>            }],</p>
+<br>
+<p>            response_format={"type": "json_object"},</p>
+<br>
+<p>        )</p>
+<br>
+<br>
+<br>
+<p>        return json.loads(response.content[0].text)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Speech-to-Text and Audio Understanding</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Multimodal models now handle audio directly without separate ASR pipelines:</p>
 <br>
-<pre><code>
-import asyncio
-
-
-
-async def analyze_call_recording(audio_path: str) -&gt; dict:
-
-    &quot;&quot;&quot;Analyze a customer support call recording.&quot;&quot;&quot;
-
-    import base64
-
-
-
-    with open(audio_path, &quot;rb&quot;) as f:
-
-        audio_data = base64.b64encode(f.read()).decode(&quot;utf-8&quot;)
-
-
-
-    response = client.messages.create(
-
-        model=&quot;claude-sonnet-4-20260512&quot;,
-
-        max_tokens=2048,
-
-        messages=[{
-
-            &quot;role&quot;: &quot;user&quot;,
-
-            &quot;content&quot;: [
-
-                {
-
-                    &quot;type&quot;: &quot;audio&quot;,
-
-                    &quot;source&quot;: {
-
-                        &quot;type&quot;: &quot;base64&quot;,
-
-                        &quot;media_type&quot;: &quot;audio/mp3&quot;,
-
-                        &quot;data&quot;: audio_data,
-
-                    },
-
-                },
-
-                {
-
-                    &quot;type&quot;: &quot;text&quot;,
-
-                    &quot;text&quot;: &quot;&quot;&quot;
-
-Analyze this customer support call:
-
-1. Transcribe the conversation
-
-2. Identify the customer&#x27;s issue
-
-3. Was the issue resolved? (yes/no/partial)
-
-4. Sentiment analysis (customer + agent)
-
-5. Compliance issues (did agent disclose required info?)
-
-6. Suggested improvements
-
-&quot;&quot;&quot;,
-
-                },
-
-            ],
-
-        }],
-
-    )
-
-
-
-    return parse_analysis(response.content[0].text)
-
-</code></pre>
 <br>
-<h2> Multimodal RAG</h2>
+<br>
+<br>
+<br>
+<p>    import asyncio</p>
+<br>
+<br>
+<br>
+<p>    async def analyze_call_recording(audio_path: str) -> dict:</p>
+<br>
+<p>        """Analyze a customer support call recording."""</p>
+<br>
+<p>        import base64</p>
+<br>
+<br>
+<br>
+<p>        with open(audio_path, "rb") as f:</p>
+<br>
+<p>            audio_data = base64.b64encode(f.read()).decode("utf-8")</p>
+<br>
+<br>
+<br>
+<p>        response = client.messages.create(</p>
+<br>
+<p>            model="claude-sonnet-4-20260512",</p>
+<br>
+<p>            max_tokens=2048,</p>
+<br>
+<p>            messages=[{</p>
+<br>
+<p>                "role": "user",</p>
+<br>
+<p>                "content": [</p>
+<br>
+<p>                    {</p>
+<br>
+<p>                        "type": "audio",</p>
+<br>
+<p>                        "source": {</p>
+<br>
+<p>                            "type": "base64",</p>
+<br>
+<p>                            "media_type": "audio/mp3",</p>
+<br>
+<p>                            "data": audio_data,</p>
+<br>
+<p>                        },</p>
+<br>
+<p>                    },</p>
+<br>
+<p>                    {</p>
+<br>
+<p>                        "type": "text",</p>
+<br>
+<p>                        "text": """</p>
+<br>
+<p>    Analyze this customer support call:</p>
+<br>
+<p>    1. Transcribe the conversation</p>
+<br>
+<p>    2. Identify the customer's issue</p>
+<br>
+<p>    3. Was the issue resolved? (yes/no/partial)</p>
+<br>
+<p>    4. Sentiment analysis (customer + agent)</p>
+<br>
+<p>    5. Compliance issues (did agent disclose required info?)</p>
+<br>
+<p>    6. Suggested improvements</p>
+<br>
+<p>    """,</p>
+<br>
+<p>                    },</p>
+<br>
+<p>                ],</p>
+<br>
+<p>            }],</p>
+<br>
+<p>        )</p>
+<br>
+<br>
+<br>
+<p>        return parse_analysis(response.content[0].text)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Multimodal RAG</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Traditional RAG is text-only. Multimodal RAG retrieves and reasons across images, diagrams, and tables:</p>
 <br>
-<pre><code>
-import chromadb
-
-from sentence_transformers import SentenceTransformer
-
-import numpy as np
-
-
-
-class MultimodalRAG:
-
-    def __init__(self):
-
-        self.text_encoder = SentenceTransformer(&quot;all-MiniLM-L6-v2&quot;)
-
-        self.image_encoder = SentenceTransformer(
-
-            &quot;clip-ViT-B-32-multilingual-v1&quot;
-
-        )
-
-        self.collection = chromadb.Client().create_collection(
-
-            &quot;multimodal_knowledge_base&quot;
-
-        )
-
-
-
-    def index_document(
-
-        self,
-
-        doc_id: str,
-
-        text: str,
-
-        images: List[np.ndarray],
-
-        tables: List[dict],
-
-    ):
-
-        embeddings = []
-
-
-
-        # Index text chunks
-
-        text_chunks = self._chunk_text(text)
-
-        text_embeddings = self.text_encoder.encode(text_chunks)
-
-        embeddings.extend(text_embeddings)
-
-
-
-        # Index images
-
-        for img in images:
-
-            img_embedding = self.image_encoder.encode(img)
-
-            embeddings.append(img_embedding)
-
-
-
-        # Index with metadata about modality
-
-        self.collection.add(
-
-            embeddings=embeddings,
-
-            ids=[f&quot;{doc_id}_{i}&quot; for i in range(len(embeddings))],
-
-            metadatas=[
-
-                {&quot;modality&quot;: &quot;text&quot;, &quot;doc_id&quot;: doc_id},
-
-                *[{&quot;modality&quot;: &quot;image&quot;, &quot;doc_id&quot;: doc_id}
-
-                  for _ in images],
-
-            ],
-
-        )
-
-
-
-    def query(self, question: str, top_k: int = 5) -&gt; List[dict]:
-
-        # Encode query
-
-        query_embedding = self.text_encoder.encode(question)
-
-
-
-        # Retrieve across all modalities
-
-        results = self.collection.query(
-
-            query_embeddings=[query_embedding],
-
-            n_results=top_k,
-
-        )
-
-
-
-        return results
-
-</code></pre>
 <br>
-<h2> Audio Transcription and Analysis Pipeline</h2>
+<br>
+<br>
+<br>
+<p>    import chromadb</p>
+<br>
+<p>    from sentence_transformers import SentenceTransformer</p>
+<br>
+<p>    import numpy as np</p>
+<br>
+<br>
+<br>
+<p>    class MultimodalRAG:</p>
+<br>
+<p>        def __init__(self):</p>
+<br>
+<p>            self.text_encoder = SentenceTransformer("all-MiniLM-L6-v2")</p>
+<br>
+<p>            self.image_encoder = SentenceTransformer(</p>
+<br>
+<p>                "clip-ViT-B-32-multilingual-v1"</p>
+<br>
+<p>            )</p>
+<br>
+<p>            self.collection = chromadb.Client().create_collection(</p>
+<br>
+<p>                "multimodal_knowledge_base"</p>
+<br>
+<p>            )</p>
+<br>
+<br>
+<br>
+<p>        def index_document(</p>
+<br>
+<p>            self,</p>
+<br>
+<p>            doc_id: str,</p>
+<br>
+<p>            text: str,</p>
+<br>
+<p>            images: List[np.ndarray],</p>
+<br>
+<p>            tables: List[dict],</p>
+<br>
+<p>        ):</p>
+<br>
+<p>            embeddings = []</p>
+<br>
+<br>
+<br>
+<p>            # Index text chunks</p>
+<br>
+<p>            text_chunks = self._chunk_text(text)</p>
+<br>
+<p>            text_embeddings = self.text_encoder.encode(text_chunks)</p>
+<br>
+<p>            embeddings.extend(text_embeddings)</p>
+<br>
+<br>
+<br>
+<p>            # Index images</p>
+<br>
+<p>            for img in images:</p>
+<br>
+<p>                img_embedding = self.image_encoder.encode(img)</p>
+<br>
+<p>                embeddings.append(img_embedding)</p>
+<br>
+<br>
+<br>
+<p>            # Index with metadata about modality</p>
+<br>
+<p>            self.collection.add(</p>
+<br>
+<p>                embeddings=embeddings,</p>
+<br>
+<p>                ids=[f"{doc_id}_{i}" for i in range(len(embeddings))],</p>
+<br>
+<p>                metadatas=[</p>
+<br>
+<p>                    {"modality": "text", "doc_id": doc_id},</p>
+<br>
+<p>                    *[{"modality": "image", "doc_id": doc_id}</p>
+<br>
+<p>                      for _ in images],</p>
+<br>
+<p>                ],</p>
+<br>
+<p>            )</p>
+<br>
+<br>
+<br>
+<p>        def query(self, question: str, top_k: int = 5) -> List[dict]:</p>
+<br>
+<p>            # Encode query</p>
+<br>
+<p>            query_embedding = self.text_encoder.encode(question)</p>
+<br>
+<br>
+<br>
+<p>            # Retrieve across all modalities</p>
+<br>
+<p>            results = self.collection.query(</p>
+<br>
+<p>                query_embeddings=[query_embedding],</p>
+<br>
+<p>                n_results=top_k,</p>
+<br>
+<p>            )</p>
+<br>
+<br>
+<br>
+<p>            return results</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Audio Transcription and Analysis Pipeline</h2>
+<br>
+<br>
+<br>
 <br>
 <p>For production audio processing, combine streaming with multimodal analysis:</p>
 <br>
-<pre><code>
-class AudioProcessingPipeline:
-
-    def __init__(self):
-
-        self.buffer_duration = 300  # 5-minute chunks
-
-        self.overlap = 30  # 30-second overlap for continuity
-
-
-
-    async def process_stream(self, audio_stream: AsyncGenerator[bytes]):
-
-        buffer = []
-
-        buffer_duration = 0
-
-
-
-        async for chunk in audio_stream:
-
-            buffer.append(chunk)
-
-            buffer_duration += self._chunk_duration(chunk)
-
-
-
-            if buffer_duration &gt;= self.buffer_duration:
-
-                # Process buffer
-
-                segment = b&quot;&quot;.join(buffer)
-
-
-
-                # Real-time transcription + analysis
-
-                result = await self._analyze_segment(segment)
-
-
-
-                # Extract action items, sentiment, entities
-
-                actions = self._extract_actions(result)
-
-                if actions:
-
-                    await self._route_actions(actions)
-
-
-
-                # Keep overlap for continuity
-
-                overlap_bytes = int(
-
-                    len(segment) * (self.overlap / buffer_duration)
-
-                )
-
-                buffer = [segment[-overlap_bytes:]]
-
-                buffer_duration = self.overlap
-
-
-
-    async def _analyze_segment(self, audio_bytes: bytes) -&gt; dict:
-
-        response = client.messages.create(
-
-            model=&quot;claude-sonnet-4-20260512&quot;,
-
-            messages=[{
-
-                &quot;role&quot;: &quot;user&quot;,
-
-                &quot;content&quot;: [
-
-                    {&quot;type&quot;: &quot;audio&quot;, &quot;source&quot;: {
-
-                        &quot;type&quot;: &quot;base64&quot;,
-
-                        &quot;media_type&quot;: &quot;audio/wav&quot;,
-
-                        &quot;data&quot;: base64.b64encode(audio_bytes).decode(),
-
-                    }},
-
-                    {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;&quot;&quot;
-
-Transcribe and analyze this audio segment:
-
-- Full transcript with speaker diarization
-
-- Key action items
-
-- Decisions made
-
-- Sentiment trend
-
-- Urgent issues requiring immediate attention
-
-&quot;&quot;&quot;},
-
-                ],
-
-            }],
-
-        )
-
-        return response
-
-</code></pre>
 <br>
-<h2> Use Cases and Limitations</h2>
+<br>
+<br>
+<br>
+<p>    class AudioProcessingPipeline:</p>
+<br>
+<p>        def __init__(self):</p>
+<br>
+<p>            self.buffer_duration = 300  # 5-minute chunks</p>
+<br>
+<p>            self.overlap = 30  # 30-second overlap for continuity</p>
+<br>
+<br>
+<br>
+<p>        async def process_stream(self, audio_stream: AsyncGenerator[bytes]):</p>
+<br>
+<p>            buffer = []</p>
+<br>
+<p>            buffer_duration = 0</p>
+<br>
+<br>
+<br>
+<p>            async for chunk in audio_stream:</p>
+<br>
+<p>                buffer.append(chunk)</p>
+<br>
+<p>                buffer_duration += self._chunk_duration(chunk)</p>
+<br>
+<br>
+<br>
+<p>                if buffer_duration >= self.buffer_duration:</p>
+<br>
+<p>                    # Process buffer</p>
+<br>
+<p>                    segment = b"".join(buffer)</p>
+<br>
+<br>
+<br>
+<p>                    # Real-time transcription + analysis</p>
+<br>
+<p>                    result = await self._analyze_segment(segment)</p>
+<br>
+<br>
+<br>
+<p>                    # Extract action items, sentiment, entities</p>
+<br>
+<p>                    actions = self._extract_actions(result)</p>
+<br>
+<p>                    if actions:</p>
+<br>
+<p>                        await self._route_actions(actions)</p>
+<br>
+<br>
+<br>
+<p>                    # Keep overlap for continuity</p>
+<br>
+<p>                    overlap_bytes = int(</p>
+<br>
+<p>                        len(segment) * (self.overlap / buffer_duration)</p>
+<br>
+<p>                    )</p>
+<br>
+<p>                    buffer = [segment[-overlap_bytes:]]</p>
+<br>
+<p>                    buffer_duration = self.overlap</p>
+<br>
+<br>
+<br>
+<p>        async def _analyze_segment(self, audio_bytes: bytes) -> dict:</p>
+<br>
+<p>            response = client.messages.create(</p>
+<br>
+<p>                model="claude-sonnet-4-20260512",</p>
+<br>
+<p>                messages=[{</p>
+<br>
+<p>                    "role": "user",</p>
+<br>
+<p>                    "content": [</p>
+<br>
+<p>                        {"type": "audio", "source": {</p>
+<br>
+<p>                            "type": "base64",</p>
+<br>
+<p>                            "media_type": "audio/wav",</p>
+<br>
+<p>                            "data": base64.b64encode(audio_bytes).decode(),</p>
+<br>
+<p>                        }},</p>
+<br>
+<p>                        {"type": "text", "text": """</p>
+<br>
+<p>    Transcribe and analyze this audio segment:</p>
+<br>
+<p>    - Full transcript with speaker diarization</p>
+<br>
+<p>    - Key action items</p>
+<br>
+<p>    - Decisions made</p>
+<br>
+<p>    - Sentiment trend</p>
+<br>
+<p>    - Urgent issues requiring immediate attention</p>
+<br>
+<p>    """},</p>
+<br>
+<p>                    ],</p>
+<br>
+<p>                }],</p>
+<br>
+<p>            )</p>
+<br>
+<p>            return response</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Use Cases and Limitations</h2>
+<br>
+<br>
+<br>
 <br>
 <p>| Use Case | Capability | Current Limitations |</p>
+<br>
 <p>|---|---|---|</p>
+<br>
 <p>| Document processing | Extract data from receipts, invoices, forms | Handwriting recognition accuracy |</p>
+<br>
 <p>| UI testing | Visual regression + semantic understanding | Dynamic content handling |</p>
+<br>
 <p>| Content moderation | Analyze text + images together | Cultural context subtlety |</p>
+<br>
 <p>| Accessibility | Generate alt text, describe scenes | Real-time video processing latency |</p>
+<br>
 <p>| Medical imaging | Analyze X-rays, MRIs with clinical notes | Regulatory approval, hallucination risk |</p>
+<br>
 <p>| Video understanding | Summarize meetings, detect events | Long video context limits |</p>
 <br>
-<h2> Production Considerations</h2>
 <br>
-<pre><code>
-# Multimodal model selection criteria
-
-selection:
-
-  latency:
-
-    text_only: &quot;&lt; 500ms&quot;
-
-    text+image: &quot;&lt; 2s&quot;
-
-    audio_input: &quot;&lt; 5s&quot;
-
-    video_analysis: &quot;&lt; 30s (batch)&quot;
-
-
-
-  cost:
-
-    text: &quot;Baseline&quot;
-
-    text+image: &quot;3-5x text cost&quot;
-
-    audio: &quot;5-10x text cost (per minute)&quot;
-
-    video: &quot;10-20x text cost (per minute)&quot;
-
-
-
-  context_window:
-
-    text: &quot;200K tokens&quot;
-
-    text+image: &quot;~100 images or 1 hour audio&quot;
-
-    video: &quot;Limited by token count (~10-15 min)&quot;
-
-
-
-  accuracy:
-
-    OCR: &quot;&gt;99% on printed, &gt;90% on handwriting&quot;
-
-    scene_description: &quot;Good on common scenes, poor on niche domains&quot;
-
-    audio_transcription: &quot;&gt;95% WER on clean speech, &gt;80% on accented&quot;
-
-</code></pre>
+<br>
+<br>
+<h2>  Production Considerations</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Multimodal model selection criteria</p>
+<br>
+<p>    selection:</p>
+<br>
+<p>      latency:</p>
+<br>
+<p>        text_only: "< 500ms"</p>
+<br>
+<p>        text+image: "< 2s"</p>
+<br>
+<p>        audio_input: "< 5s"</p>
+<br>
+<p>        video_analysis: "< 30s (batch)"</p>
+<br>
+<br>
+<br>
+<p>      cost:</p>
+<br>
+<p>        text: "Baseline"</p>
+<br>
+<p>        text+image: "3-5x text cost"</p>
+<br>
+<p>        audio: "5-10x text cost (per minute)"</p>
+<br>
+<p>        video: "10-20x text cost (per minute)"</p>
+<br>
+<br>
+<br>
+<p>      context_window:</p>
+<br>
+<p>        text: "200K tokens"</p>
+<br>
+<p>        text+image: "~100 images or 1 hour audio"</p>
+<br>
+<p>        video: "Limited by token count (~10-15 min)"</p>
+<br>
+<br>
+<br>
+<p>      accuracy:</p>
+<br>
+<p>        OCR: ">99% on printed, >90% on handwriting"</p>
+<br>
+<p>        scene_description: "Good on common scenes, poor on niche domains"</p>
+<br>
+<p>        audio_transcription: ">95% WER on clean speech, >80% on accented"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Multimodal AI is rapidly maturing but still requires careful evaluation for each use case. Start with well-scoped document processing or image analysis tasks before expanding to real-time audio or video pipelines.</p></div>
     </article>

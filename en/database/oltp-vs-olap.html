@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2168",
+      "wordCount": "2404",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/oltp-vs-olap.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/oltp-vs-olap.html"},
+      "articleBody": "OLTP vs OLAP: Workload Optimization OLTP (Online Transaction Processing) and OLAP (Online Analytical Processing) represent two fundamentally different approaches to database usage. They differ in data structure, query patterns, performance requirements, and optimal storage formats. Understanding these differences is essential for choosing the right database architecture. Workload Characteristics OLTP Characteristics OLTP systems handle high volumes of small, short-lived transactions. Each transaction typically reads or writes a small number of rows. User adds item to cart: INSERT INTO cart_items (user_id, product_id, qty) VALUES (42, 100, 1); User places order: UPDATE orders SET status='placed' WHERE order_id = 5000; User checks balance: SELECT balance FROM accounts WHERE account_id = 1234; * **Concurrency**: Hundreds or thousands of concurrent users. * **Latency**: Millisecond response time expected. * **Data access**: Point queries (by primary key) and small range scans. * **Write patterns**: Frequent inserts and updates. * **Data volume**: Gigabytes to low terabytes per table. * **ACID**: Transactions must be atomic and isolated. OLAP Characteristics OLAP systems process complex queries over large datasets to support decision-making. -- OLAP query SELECT product_category, region, EXTRACT(quarter FROM order_date) as qtr, SUM(quantity * unit_price) as revenue, COUNT(DISTINCT customer_id) as unique_customers, AVG(discount_applied) as avg_discount FROM orders o JOIN products p ON o.product_id = p.product_id JOIN customers c ON o.customer_id = c.customer_id WHERE order_date BETWEEN '2026-01-01' AND '2026-12-31' GROUP BY product_category, region, qtr HAVING SUM(quantity * unit_price) > 10000 ORDER BY revenue DESC; * **Concurrency**: Few concurrent users (analysts). * **Latency**: Seconds to minutes acceptable. * **Data access**: Many rows scanned, few columns returned. * **Write patterns**: Periodic bulk loads. * **Data volume**: Terabytes to petabytes. * **ACID**: Relaxed requirements. Snapshot isolation is often sufficient. Row vs Column Store Row Store (OLTP) Row-oriented databases store all columns of a row contiguously. Table: orders Row 1: [101, 42, 2345, 29.99, 1, '2026-01-15'] Row 2: [102, 73, 1234, 49.99, 2, '2026-01-15'] * Fast for: `SELECT * FROM orders WHERE order_id = 101` (one row, all columns). * Fast for: `INSERT INTO orders VALUES (...)` (one row write). * Slow for: `SELECT SUM(amount) FROM orders` (reads all rows but needs only one column). Column Store (OLAP) Column-oriented databases store each column contiguously. order_id: [101, 102, 103, 104, ...] customer_id:[42, 73, 15, 88, ...] amount: [29.99, 49.99, 99.99, 5.99, ...] * Fast for: `SELECT SUM(amount) FROM orders` (reads only the amount column). * Fast for: `SELECT region, AVG(amount) FROM orders GROUP BY region` (reads only two columns). * Slow for: `SELECT * FROM orders WHERE order_id = 101` (reads all column files to reconstruct the row). * Slow for: Single-row inserts (must write to multiple column files). Indexing Strategies OLTP Indexes OLTP systems use indexes to make point lookups fast. -- Primary key index: B-tree for fast lookups by ID CREATE TABLE users ( user_id BIGINT PRIMARY KEY, -- B-tree index created automatically email VARCHAR(255) UNIQUE, -- Another B-tree for uniqueness checks name VARCHAR(255) ); -- Composite index for common query pattern CREATE INDEX idx_users_status_created ON users (status, created_at); B-tree indexes are the dominant index type for OLTP. They provide O(log N) lookups and support range scans. Covering indexes (containing all columns needed by a query) eliminate table lookups entirely. OLAP Indexes OLAP systems use different indexing strategies: **Bitmap indexes**: For low-cardinality columns. Each value gets a bitmap where each bit indicates whether a row has that value. -- In a columnar database, bitmap indexes are automatic for low-cardinality columns -- Example: region column with 10 distinct values **Zone maps**: Store min/max values for data blocks. Skip blocks that cannot contain matching data. -- In Oracle or Redshift, block-level min/max elimination is automatic -- The planner skips blocks where no row can match the WHERE clause **Projections**: Pre-join and pre-aggregate data for common query patterns. Vertica uses projections as the primary storage mechanism. -- Vertica projection CREATE PROJECTION daily_sales_projection AS SELECT order_date, region, SUM(amount) FROM sales GROUP BY order_date, region; Query Pattern Examples OLTP Query Pattern Transaction: Place an order BEGIN; -- 1. Check inventory SELECT stock FROM inventory WHERE product_id = 100 FOR UPDATE; -- 2. Create order INSERT INTO orders (customer_id, total) VALUES (42, 99.99); -- 3. Update inventory UPDATE inventory SET stock = stock - 1 WHERE product_id = 100; -- 4. Create payment record INSERT INTO payments (order_id, amount) VALUES (LASTVAL(), 99.99); COMMIT; * 4 queries, 1 transaction. * Each query touches 1-2 rows. * Total time: under 50ms. OLAP Query Pattern SELECT c.segment, COUNT(DISTINCT o.customer_id) as customers, SUM(o.total) as revenue, SUM(o.total) / COUNT(DISTINCT o.customer_id) as arpu FROM orders o JOIN customers c ON o.customer_id = c.customer_id WHERE o.order_date BETWEEN '2026-01-01' AND '2026-06-30' AND c.country = 'US' GROUP BY c.segment ORDER BY revenue DESC; * 1 query but scans millions of rows. * Joins two tables on non-key column. * Aggregates and groups data. * Total time: seconds to minutes. Hybrid Approaches Many systems must handle both OLTP and OLAP workloads. Several strategies address this. Operational Data Store (ODS) An ODS sits between OLTP and OLAP. It stores near-real-time data from operational systems and supports lightweight reporting. OLTP -> ODS (real-time sync) -> ETL -> OLAP (Data Warehouse) The ODS supports simple queries on recent data. Complex analytics happen in the warehouse. Dual Databases Run OLTP on a row-oriented database and replicate to a columnar database for analytics. # Architecture: OLTP + OLAP independently oltp: database: PostgreSQL storage: Row-oriented purpose: Transaction processing olap: database: ClickHouse storage: Column-oriented purpose: Analytics and reporting sync: tool: Debezium + Kafka mode: Change Data Capture latency: This is the most common pattern for mature systems. It provides optimal performance for both workloads at the cost of maintaining two systems. HTAP Databases HTAP (Hybrid Transactional/Analytical Processing) databases handle both workloads in a single system. How HTAP Works HTAP databases maintain both a row-oriented copy and a columnar copy of data internally. Writes go to the row store. The column store is updated asynchronously or synchronously. -- SingleStore: Automatically routes queries CREATE TABLE orders ( id BIGINT AUTO_INCREMENT, customer_id INT, amount DECIMAL(10,2), created_at DATETIME ); -- Writes use row store; analytics use columnar store -- Query optimizer chooses the best engine automatically HTAP Platforms * **SingleStore**: Row store for transactions, columnar for analytics. Query optimizer routes queries to the appropriate engine. * **ClickHouse with Keeper**: Supports lightweight UPDATE/DELETE alongside blazing-fast analytical queries. * **Amazon Redshift**: Row-based for ingestion, columnar for storage. Auto-optimizes based on query patterns. * **SAP HANA**: In-memory row and columnar stores. Used in enterprise environments for mixed workloads. When HTAP Works HTAP works when: * Analytics queries are simple and touch recent data. * Transaction volume is moderate. * The cost of maintaining two systems is prohibitive. HTAP struggles when: * Analytics queries are complex and scan terabytes of historical data. * Transaction volume is very high (the row store becomes a bottleneck for the columnar sync). * Write-optimized and read-optimized storage are fundamentally at odds. Choosing Your Approach OLTP-Only * Use a row-oriented database (PostgreSQL, MySQL, SQL Server). * Optimize indexes for your query patterns. * Add read replicas for read scaling. OLAP-Only * Use a columnar database (ClickHouse, Redshift, BigQuery). * Design star schema for data modeling. * Partition tables by date for efficient pruning. Mixed Workloads with Modest Analytics * Use an OLTP database with columnar extensions. * PostgreSQL with pg_analytics or TimescaleDB. * Materialized views for common aggregations. Mixed Workloads with Heavy Analytics * Use the dual database approach (OLTP + OLAP). * Replicate via CDC (Debezium, Striim, Fivetran). * Accept the operational complexity of maintaining two systems. Conclusion OLTP and OLAP have fundamentally different requirements. OLTP needs fast point queries, high concurrency, and ACID transactions. OLAP needs fast scans of many rows, efficient aggregation, and columnar storage. The best approach for mixed workloads is typically a dual database architecture with CDC replication. HTAP databases are improving but remain a compromise for demanding workloads. Choose your database architecture based on your dominant workload pattern and accept that running both patterns optimally in one system is inherently challenging."
     }
     </script>
     <script type="application/ld+json">
@@ -73,372 +74,381 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">OLTP vs OLAP: Workload Optimization</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
-      <div class="article-body"><p>OLTP (Online Transaction Processing) and OLAP (Online Analytical Processing) represent two fundamentally different approaches to database usage. They differ in data structure, query patterns, performance requirements, and optimal storage formats. Understanding these differences is essential for choosing the right database architecture.</p>
+      <div class="article-body"><h1>OLTP vs OLAP: Workload Optimization</h1>
 <br>
-<h2> Workload Characteristics</h2>
+<p>OLTP (Online Transaction Processing) and OLAP (Online Analytical Processing) represent two fundamentally different approaches to database usage. They differ in data structure, query patterns, performance requirements, and optimal storage formats. Understanding these differences is essential for choosing the right database architecture.   </p>
+<p>Workload Characteristics   </p>
+<p>OLTP Characteristics   </p>
+<p>OLTP systems handle high volumes of small, short-lived transactions. Each transaction typically reads or writes a small number of rows.   </p>
 <br>
-<h3>OLTP Characteristics</h3>
 <br>
-<p>OLTP systems handle high volumes of small, short-lived transactions. Each transaction typically reads or writes a small number of rows.</p>
 <br>
-<pre><code>
-User adds item to cart: INSERT INTO cart_items (user_id, product_id, qty) VALUES (42, 100, 1);
-
-User places order:      UPDATE orders SET status=&#x27;placed&#x27; WHERE order_id = 5000;
-
-User checks balance:    SELECT balance FROM accounts WHERE account_id = 1234;
-
-</code></pre>
+<p>    User adds item to cart: INSERT INTO cart_items (user_id, product_id, qty) VALUES (42, 100, 1);</p>
 <br>
-<li>**Concurrency**: Hundreds or thousands of concurrent users.</li>
-<li>**Latency**: Millisecond response time expected.</li>
-<li>**Data access**: Point queries (by primary key) and small range scans.</li>
-<li>**Write patterns**: Frequent inserts and updates.</li>
-<li>**Data volume**: Gigabytes to low terabytes per table.</li>
-<li>**ACID**: Transactions must be atomic and isolated.</li>
+<p>    User places order:      UPDATE orders SET status='placed' WHERE order_id = 5000;</p>
 <br>
-<h3>OLAP Characteristics</h3>
+<p>    User checks balance:    SELECT balance FROM accounts WHERE account_id = 1234;</p>
 <br>
-<p>OLAP systems process complex queries over large datasets to support decision-making.</p>
 <br>
-<pre><code>
--- OLAP query
-
-SELECT
-
-    product_category,
-
-    region,
-
-    EXTRACT(quarter FROM order_date) as qtr,
-
-    SUM(quantity * unit_price) as revenue,
-
-    COUNT(DISTINCT customer_id) as unique_customers,
-
-    AVG(discount_applied) as avg_discount
-
-FROM orders o
-
-JOIN products p ON o.product_id = p.product_id
-
-JOIN customers c ON o.customer_id = c.customer_id
-
-WHERE order_date BETWEEN &#x27;2026-01-01&#x27; AND &#x27;2026-12-31&#x27;
-
-GROUP BY product_category, region, qtr
-
-HAVING SUM(quantity * unit_price) &gt; 10000
-
-ORDER BY revenue DESC;
-
-</code></pre>
 <br>
-<li>**Concurrency**: Few concurrent users (analysts).</li>
-<li>**Latency**: Seconds to minutes acceptable.</li>
-<li>**Data access**: Many rows scanned, few columns returned.</li>
-<li>**Write patterns**: Periodic bulk loads.</li>
-<li>**Data volume**: Terabytes to petabytes.</li>
-<li>**ACID**: Relaxed requirements. Snapshot isolation is often sufficient.</li>
 <br>
-<h2> Row vs Column Store</h2>
 <br>
-<h3>Row Store (OLTP)</h3>
+<p>* **Concurrency**: Hundreds or thousands of concurrent users.</p>
+<p>* **Latency**: Millisecond response time expected.</p>
+<p>* **Data access**: Point queries (by primary key) and small range scans.</p>
+<p>* **Write patterns**: Frequent inserts and updates.</p>
+<p>* **Data volume**: Gigabytes to low terabytes per table.</p>
+<p>* **ACID**: Transactions must be atomic and isolated.</p>
 <br>
-<p>Row-oriented databases store all columns of a row contiguously.</p>
+<p>OLAP Characteristics   </p>
+<p>OLAP systems process complex queries over large datasets to support decision-making.   </p>
 <br>
-<pre><code>
-Table: orders
-
-Row 1: [101, 42, 2345, 29.99, 1, &#x27;2026-01-15&#x27;]
-
-Row 2: [102, 73, 1234, 49.99, 2, &#x27;2026-01-15&#x27;]
-
-</code></pre>
 <br>
-<li>Fast for: `SELECT * FROM orders WHERE order_id = 101` (one row, all columns).</li>
-<li>Fast for: `INSERT INTO orders VALUES (...)` (one row write).</li>
-<li>Slow for: `SELECT SUM(amount) FROM orders` (reads all rows but needs only one column).</li>
 <br>
-<h3>Column Store (OLAP)</h3>
+<p>    -- OLAP query</p>
 <br>
-<p>Column-oriented databases store each column contiguously.</p>
+<p>    SELECT</p>
 <br>
-<pre><code>
-order_id:   [101, 102, 103, 104, ...]
-
-customer_id:[42, 73, 15, 88, ...]
-
-amount:     [29.99, 49.99, 99.99, 5.99, ...]
-
-</code></pre>
+<p>        product_category,</p>
 <br>
-<li>Fast for: `SELECT SUM(amount) FROM orders` (reads only the amount column).</li>
-<li>Fast for: `SELECT region, AVG(amount) FROM orders GROUP BY region` (reads only two columns).</li>
-<li>Slow for: `SELECT * FROM orders WHERE order_id = 101` (reads all column files to reconstruct the row).</li>
-<li>Slow for: Single-row inserts (must write to multiple column files).</li>
+<p>        region,</p>
 <br>
-<h2> Indexing Strategies</h2>
+<p>        EXTRACT(quarter FROM order_date) as qtr,</p>
 <br>
-<h3>OLTP Indexes</h3>
+<p>        SUM(quantity * unit_price) as revenue,</p>
 <br>
-<p>OLTP systems use indexes to make point lookups fast.</p>
+<p>        COUNT(DISTINCT customer_id) as unique_customers,</p>
 <br>
-<pre><code>
--- Primary key index: B-tree for fast lookups by ID
-
-CREATE TABLE users (
-
-    user_id BIGINT PRIMARY KEY,  -- B-tree index created automatically
-
-    email VARCHAR(255) UNIQUE,   -- Another B-tree for uniqueness checks
-
-    name VARCHAR(255)
-
-);
-
-
-
--- Composite index for common query pattern
-
-CREATE INDEX idx_users_status_created
-
-ON users (status, created_at);
-
-</code></pre>
+<p>        AVG(discount_applied) as avg_discount</p>
 <br>
-<p>B-tree indexes are the dominant index type for OLTP. They provide O(log N) lookups and support range scans. Covering indexes (containing all columns needed by a query) eliminate table lookups entirely.</p>
+<p>    FROM orders o</p>
 <br>
-<h3>OLAP Indexes</h3>
+<p>    JOIN products p ON o.product_id = p.product_id</p>
 <br>
-<p>OLAP systems use different indexing strategies:</p>
+<p>    JOIN customers c ON o.customer_id = c.customer_id</p>
 <br>
-<p>**Bitmap indexes**: For low-cardinality columns. Each value gets a bitmap where each bit indicates whether a row has that value.</p>
+<p>    WHERE order_date BETWEEN '2026-01-01' AND '2026-12-31'</p>
 <br>
-<pre><code>
--- In a columnar database, bitmap indexes are automatic for low-cardinality columns
-
--- Example: region column with 10 distinct values
-
-</code></pre>
+<p>    GROUP BY product_category, region, qtr</p>
 <br>
-<p>**Zone maps**: Store min/max values for data blocks. Skip blocks that cannot contain matching data.</p>
+<p>    HAVING SUM(quantity * unit_price) > 10000</p>
 <br>
-<pre><code>
--- In Oracle or Redshift, block-level min/max elimination is automatic
-
--- The planner skips blocks where no row can match the WHERE clause
-
-</code></pre>
+<p>    ORDER BY revenue DESC;</p>
 <br>
-<p>**Projections**: Pre-join and pre-aggregate data for common query patterns. Vertica uses projections as the primary storage mechanism.</p>
 <br>
-<pre><code>
--- Vertica projection
-
-CREATE PROJECTION daily_sales_projection AS
-
-SELECT order_date, region, SUM(amount)
-
-FROM sales
-
-GROUP BY order_date, region;
-
-</code></pre>
 <br>
-<h2> Query Pattern Examples</h2>
 <br>
-<h3>OLTP Query Pattern</h3>
 <br>
-<pre><code>
-Transaction: Place an order
-
-
-
-BEGIN;
-
--- 1. Check inventory
-
-SELECT stock FROM inventory WHERE product_id = 100 FOR UPDATE;
-
--- 2. Create order
-
-INSERT INTO orders (customer_id, total) VALUES (42, 99.99);
-
--- 3. Update inventory
-
-UPDATE inventory SET stock = stock - 1 WHERE product_id = 100;
-
--- 4. Create payment record
-
-INSERT INTO payments (order_id, amount) VALUES (LASTVAL(), 99.99);
-
-COMMIT;
-
-</code></pre>
+<p>* **Concurrency**: Few concurrent users (analysts).</p>
+<p>* **Latency**: Seconds to minutes acceptable.</p>
+<p>* **Data access**: Many rows scanned, few columns returned.</p>
+<p>* **Write patterns**: Periodic bulk loads.</p>
+<p>* **Data volume**: Terabytes to petabytes.</p>
+<p>* **ACID**: Relaxed requirements. Snapshot isolation is often sufficient.</p>
 <br>
-<li>4 queries, 1 transaction.</li>
-<li>Each query touches 1-2 rows.</li>
-<li>Total time: under 50ms.</li>
+<p>Row vs Column Store   </p>
+<p>Row Store (OLTP)   </p>
+<p>Row-oriented databases store all columns of a row contiguously.   </p>
 <br>
-<h3>OLAP Query Pattern</h3>
 <br>
-<pre><code>
-SELECT
-
-    c.segment,
-
-    COUNT(DISTINCT o.customer_id) as customers,
-
-    SUM(o.total) as revenue,
-
-    SUM(o.total) / COUNT(DISTINCT o.customer_id) as arpu
-
-FROM orders o
-
-JOIN customers c ON o.customer_id = c.customer_id
-
-WHERE o.order_date BETWEEN &#x27;2026-01-01&#x27; AND &#x27;2026-06-30&#x27;
-
-    AND c.country = &#x27;US&#x27;
-
-GROUP BY c.segment
-
-ORDER BY revenue DESC;
-
-</code></pre>
 <br>
-<li>1 query but scans millions of rows.</li>
-<li>Joins two tables on non-key column.</li>
-<li>Aggregates and groups data.</li>
-<li>Total time: seconds to minutes.</li>
+<p>    Table: orders</p>
 <br>
-<h2> Hybrid Approaches</h2>
+<p>    Row 1: [101, 42, 2345, 29.99, 1, '2026-01-15']</p>
 <br>
-<p>Many systems must handle both OLTP and OLAP workloads. Several strategies address this.</p>
+<p>    Row 2: [102, 73, 1234, 49.99, 2, '2026-01-15']</p>
 <br>
-<h3>Operational Data Store (ODS)</h3>
 <br>
-<p>An ODS sits between OLTP and OLAP. It stores near-real-time data from operational systems and supports lightweight reporting.</p>
 <br>
-<pre><code>
-OLTP -&gt; ODS (real-time sync) -&gt; ETL -&gt; OLAP (Data Warehouse)
-
-</code></pre>
 <br>
-<p>The ODS supports simple queries on recent data. Complex analytics happen in the warehouse.</p>
 <br>
-<h3>Dual Databases</h3>
+<p>* Fast for: `SELECT * FROM orders WHERE order_id = 101` (one row, all columns).</p>
+<p>* Fast for: `INSERT INTO orders VALUES (...)` (one row write).</p>
+<p>* Slow for: `SELECT SUM(amount) FROM orders` (reads all rows but needs only one column).</p>
 <br>
-<p>Run OLTP on a row-oriented database and replicate to a columnar database for analytics.</p>
+<p>Column Store (OLAP)   </p>
+<p>Column-oriented databases store each column contiguously.   </p>
 <br>
-<pre><code>
-# Architecture: OLTP + OLAP independently
-
-oltp:
-
-  database: PostgreSQL
-
-  storage: Row-oriented
-
-  purpose: Transaction processing
-
-
-
-olap:
-
-  database: ClickHouse
-
-  storage: Column-oriented
-
-  purpose: Analytics and reporting
-
-
-
-sync:
-
-  tool: Debezium + Kafka
-
-  mode: Change Data Capture
-
-  latency: &lt; 1 minute
-
-</code></pre>
 <br>
-<p>This is the most common pattern for mature systems. It provides optimal performance for both workloads at the cost of maintaining two systems.</p>
 <br>
-<h2> HTAP Databases</h2>
+<p>    order_id:   [101, 102, 103, 104, ...]</p>
 <br>
-<p>HTAP (Hybrid Transactional/Analytical Processing) databases handle both workloads in a single system.</p>
+<p>    customer_id:[42, 73, 15, 88, ...]</p>
 <br>
-<h3>How HTAP Works</h3>
+<p>    amount:     [29.99, 49.99, 99.99, 5.99, ...]</p>
 <br>
-<p>HTAP databases maintain both a row-oriented copy and a columnar copy of data internally. Writes go to the row store. The column store is updated asynchronously or synchronously.</p>
 <br>
-<pre><code>
--- SingleStore: Automatically routes queries
-
-CREATE TABLE orders (
-
-    id BIGINT AUTO_INCREMENT,
-
-    customer_id INT,
-
-    amount DECIMAL(10,2),
-
-    created_at DATETIME
-
-);
-
--- Writes use row store; analytics use columnar store
-
--- Query optimizer chooses the best engine automatically
-
-</code></pre>
 <br>
-<h3>HTAP Platforms</h3>
 <br>
-<li>**SingleStore**: Row store for transactions, columnar for analytics. Query optimizer routes queries to the appropriate engine.</li>
-<li>**ClickHouse with Keeper**: Supports lightweight UPDATE/DELETE alongside blazing-fast analytical queries.</li>
-<li>**Amazon Redshift**: Row-based for ingestion, columnar for storage. Auto-optimizes based on query patterns.</li>
-<li>**SAP HANA**: In-memory row and columnar stores. Used in enterprise environments for mixed workloads.</li>
 <br>
-<h3>When HTAP Works</h3>
+<p>* Fast for: `SELECT SUM(amount) FROM orders` (reads only the amount column).</p>
+<p>* Fast for: `SELECT region, AVG(amount) FROM orders GROUP BY region` (reads only two columns).</p>
+<p>* Slow for: `SELECT * FROM orders WHERE order_id = 101` (reads all column files to reconstruct the row).</p>
+<p>* Slow for: Single-row inserts (must write to multiple column files).</p>
 <br>
+<p>Indexing Strategies   </p>
+<p>OLTP Indexes   </p>
+<p>OLTP systems use indexes to make point lookups fast.   </p>
+<br>
+<br>
+<br>
+<p>    -- Primary key index: B-tree for fast lookups by ID</p>
+<br>
+<p>    CREATE TABLE users (</p>
+<br>
+<p>        user_id BIGINT PRIMARY KEY,  -- B-tree index created automatically</p>
+<br>
+<p>        email VARCHAR(255) UNIQUE,   -- Another B-tree for uniqueness checks</p>
+<br>
+<p>        name VARCHAR(255)</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<p>    -- Composite index for common query pattern</p>
+<br>
+<p>    CREATE INDEX idx_users_status_created</p>
+<br>
+<p>    ON users (status, created_at);</p>
+<br>
+<br>
+<br>
+<br>
+<p>B-tree indexes are the dominant index type for OLTP. They provide O(log N) lookups and support range scans. Covering indexes (containing all columns needed by a query) eliminate table lookups entirely.   </p>
+<p>OLAP Indexes   </p>
+<p>OLAP systems use different indexing strategies:   </p>
+<p>**Bitmap indexes**: For low-cardinality columns. Each value gets a bitmap where each bit indicates whether a row has that value.   </p>
+<br>
+<br>
+<br>
+<p>    -- In a columnar database, bitmap indexes are automatic for low-cardinality columns</p>
+<br>
+<p>    -- Example: region column with 10 distinct values</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Zone maps**: Store min/max values for data blocks. Skip blocks that cannot contain matching data.   </p>
+<br>
+<br>
+<br>
+<p>    -- In Oracle or Redshift, block-level min/max elimination is automatic</p>
+<br>
+<p>    -- The planner skips blocks where no row can match the WHERE clause</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Projections**: Pre-join and pre-aggregate data for common query patterns. Vertica uses projections as the primary storage mechanism.   </p>
+<br>
+<br>
+<br>
+<p>    -- Vertica projection</p>
+<br>
+<p>    CREATE PROJECTION daily_sales_projection AS</p>
+<br>
+<p>    SELECT order_date, region, SUM(amount)</p>
+<br>
+<p>    FROM sales</p>
+<br>
+<p>    GROUP BY order_date, region;</p>
+<br>
+<br>
+<br>
+<br>
+<p>Query Pattern Examples   </p>
+<p>OLTP Query Pattern   </p>
+<br>
+<br>
+<br>
+<p>    Transaction: Place an order</p>
+<br>
+<br>
+<br>
+<p>    BEGIN;</p>
+<br>
+<p>    -- 1. Check inventory</p>
+<br>
+<p>    SELECT stock FROM inventory WHERE product_id = 100 FOR UPDATE;</p>
+<br>
+<p>    -- 2. Create order</p>
+<br>
+<p>    INSERT INTO orders (customer_id, total) VALUES (42, 99.99);</p>
+<br>
+<p>    -- 3. Update inventory</p>
+<br>
+<p>    UPDATE inventory SET stock = stock - 1 WHERE product_id = 100;</p>
+<br>
+<p>    -- 4. Create payment record</p>
+<br>
+<p>    INSERT INTO payments (order_id, amount) VALUES (LASTVAL(), 99.99);</p>
+<br>
+<p>    COMMIT;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>* 4 queries, 1 transaction.</p>
+<p>* Each query touches 1-2 rows.</p>
+<p>* Total time: under 50ms.</p>
+<br>
+<p>OLAP Query Pattern   </p>
+<br>
+<br>
+<br>
+<p>    SELECT</p>
+<br>
+<p>        c.segment,</p>
+<br>
+<p>        COUNT(DISTINCT o.customer_id) as customers,</p>
+<br>
+<p>        SUM(o.total) as revenue,</p>
+<br>
+<p>        SUM(o.total) / COUNT(DISTINCT o.customer_id) as arpu</p>
+<br>
+<p>    FROM orders o</p>
+<br>
+<p>    JOIN customers c ON o.customer_id = c.customer_id</p>
+<br>
+<p>    WHERE o.order_date BETWEEN '2026-01-01' AND '2026-06-30'</p>
+<br>
+<p>        AND c.country = 'US'</p>
+<br>
+<p>    GROUP BY c.segment</p>
+<br>
+<p>    ORDER BY revenue DESC;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>* 1 query but scans millions of rows.</p>
+<p>* Joins two tables on non-key column.</p>
+<p>* Aggregates and groups data.</p>
+<p>* Total time: seconds to minutes.</p>
+<br>
+<p>Hybrid Approaches   </p>
+<p>Many systems must handle both OLTP and OLAP workloads. Several strategies address this.   </p>
+<p>Operational Data Store (ODS)   </p>
+<p>An ODS sits between OLTP and OLAP. It stores near-real-time data from operational systems and supports lightweight reporting.   </p>
+<br>
+<br>
+<br>
+<p>    OLTP -> ODS (real-time sync) -> ETL -> OLAP (Data Warehouse)</p>
+<br>
+<br>
+<br>
+<br>
+<p>The ODS supports simple queries on recent data. Complex analytics happen in the warehouse.   </p>
+<p>Dual Databases   </p>
+<p>Run OLTP on a row-oriented database and replicate to a columnar database for analytics.   </p>
+<br>
+<br>
+<br>
+<p>    # Architecture: OLTP + OLAP independently</p>
+<br>
+<p>    oltp:</p>
+<br>
+<p>      database: PostgreSQL</p>
+<br>
+<p>      storage: Row-oriented</p>
+<br>
+<p>      purpose: Transaction processing</p>
+<br>
+<br>
+<br>
+<p>    olap:</p>
+<br>
+<p>      database: ClickHouse</p>
+<br>
+<p>      storage: Column-oriented</p>
+<br>
+<p>      purpose: Analytics and reporting</p>
+<br>
+<br>
+<br>
+<p>    sync:</p>
+<br>
+<p>      tool: Debezium + Kafka</p>
+<br>
+<p>      mode: Change Data Capture</p>
+<br>
+<p>      latency: < 1 minute</p>
+<br>
+<br>
+<br>
+<br>
+<p>This is the most common pattern for mature systems. It provides optimal performance for both workloads at the cost of maintaining two systems.   </p>
+<p>HTAP Databases   </p>
+<p>HTAP (Hybrid Transactional/Analytical Processing) databases handle both workloads in a single system.   </p>
+<p>How HTAP Works   </p>
+<p>HTAP databases maintain both a row-oriented copy and a columnar copy of data internally. Writes go to the row store. The column store is updated asynchronously or synchronously.   </p>
+<br>
+<br>
+<br>
+<p>    -- SingleStore: Automatically routes queries</p>
+<br>
+<p>    CREATE TABLE orders (</p>
+<br>
+<p>        id BIGINT AUTO_INCREMENT,</p>
+<br>
+<p>        customer_id INT,</p>
+<br>
+<p>        amount DECIMAL(10,2),</p>
+<br>
+<p>        created_at DATETIME</p>
+<br>
+<p>    );</p>
+<br>
+<p>    -- Writes use row store; analytics use columnar store</p>
+<br>
+<p>    -- Query optimizer chooses the best engine automatically</p>
+<br>
+<br>
+<br>
+<br>
+<p>HTAP Platforms   </p>
+<br>
+<p>* **SingleStore**: Row store for transactions, columnar for analytics. Query optimizer routes queries to the appropriate engine.</p>
+<p>* **ClickHouse with Keeper**: Supports lightweight UPDATE/DELETE alongside blazing-fast analytical queries.</p>
+<p>* **Amazon Redshift**: Row-based for ingestion, columnar for storage. Auto-optimizes based on query patterns.</p>
+<p>* **SAP HANA**: In-memory row and columnar stores. Used in enterprise environments for mixed workloads.</p>
+<br>
+<p>When HTAP Works   </p>
 <p>HTAP works when:</p>
-<li>Analytics queries are simple and touch recent data.</li>
-<li>Transaction volume is moderate.</li>
-<li>The cost of maintaining two systems is prohibitive.</li>
+<p>* Analytics queries are simple and touch recent data.</p>
+<p>* Transaction volume is moderate.</p>
+<p>* The cost of maintaining two systems is prohibitive.</p>
 <br>
 <p>HTAP struggles when:</p>
-<li>Analytics queries are complex and scan terabytes of historical data.</li>
-<li>Transaction volume is very high (the row store becomes a bottleneck for the columnar sync).</li>
-<li>Write-optimized and read-optimized storage are fundamentally at odds.</li>
+<p>* Analytics queries are complex and scan terabytes of historical data.</p>
+<p>* Transaction volume is very high (the row store becomes a bottleneck for the columnar sync).</p>
+<p>* Write-optimized and read-optimized storage are fundamentally at odds.</p>
 <br>
-<h2> Choosing Your Approach</h2>
+<p>Choosing Your Approach   </p>
+<p>OLTP-Only</p>
+<p>* Use a row-oriented database (PostgreSQL, MySQL, SQL Server).</p>
+<p>* Optimize indexes for your query patterns.</p>
+<p>* Add read replicas for read scaling.</p>
 <br>
-<h3>OLTP-Only</h3>
-<li>Use a row-oriented database (PostgreSQL, MySQL, SQL Server).</li>
-<li>Optimize indexes for your query patterns.</li>
-<li>Add read replicas for read scaling.</li>
+<p>OLAP-Only</p>
+<p>* Use a columnar database (ClickHouse, Redshift, BigQuery).</p>
+<p>* Design star schema for data modeling.</p>
+<p>* Partition tables by date for efficient pruning.</p>
 <br>
-<h3>OLAP-Only</h3>
-<li>Use a columnar database (ClickHouse, Redshift, BigQuery).</li>
-<li>Design star schema for data modeling.</li>
-<li>Partition tables by date for efficient pruning.</li>
+<p>Mixed Workloads with Modest Analytics</p>
+<p>* Use an OLTP database with columnar extensions.</p>
+<p>* PostgreSQL with pg_analytics or TimescaleDB.</p>
+<p>* Materialized views for common aggregations.</p>
 <br>
-<h3>Mixed Workloads with Modest Analytics</h3>
-<li>Use an OLTP database with columnar extensions.</li>
-<li>PostgreSQL with pg_analytics or TimescaleDB.</li>
-<li>Materialized views for common aggregations.</li>
+<p>Mixed Workloads with Heavy Analytics</p>
+<p>* Use the dual database approach (OLTP + OLAP).</p>
+<p>* Replicate via CDC (Debezium, Striim, Fivetran).</p>
+<p>* Accept the operational complexity of maintaining two systems.</p>
 <br>
-<h3>Mixed Workloads with Heavy Analytics</h3>
-<li>Use the dual database approach (OLTP + OLAP).</li>
-<li>Replicate via CDC (Debezium, Striim, Fivetran).</li>
-<li>Accept the operational complexity of maintaining two systems.</li>
-<br>
-<h2> Conclusion</h2>
-<br>
+<p>Conclusion   </p>
 <p>OLTP and OLAP have fundamentally different requirements. OLTP needs fast point queries, high concurrency, and ACID transactions. OLAP needs fast scans of many rows, efficient aggregation, and columnar storage. The best approach for mixed workloads is typically a dual database architecture with CDC replication. HTAP databases are improving but remain a compromise for demanding workloads. Choose your database architecture based on your dominant workload pattern and accept that running both patterns optimally in one system is inherently challenging.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1741",
+      "wordCount": "484",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/data-warehousing.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/data-warehousing.html"},
+      "articleBody": "Data Warehousing Concepts and Modern Tools Data Warehousing Concepts A data warehouse centralizes data from multiple sources for analysis and reporting. It is optimized for read-heavy analytical queries. Star Schema A central fact table connected to dimension tables: CREATE TABLE fact_sales ( sale_id BIGSERIAL PRIMARY KEY, date_key INT REFERENCES dim_date(date_key), product_key INT REFERENCES dim_product(product_key), customer_key INT REFERENCES dim_customer(customer_key), quantity INT NOT NULL, unit_price DECIMAL(10,2) NOT NULL, total_amount DECIMAL(12,2) GENERATED ALWAYS AS (quantity * unit_price) STORED ); CREATE TABLE dim_date ( date_key INT PRIMARY KEY, date DATE NOT NULL, year SMALLINT, quarter SMALLINT, month SMALLINT, day SMALLINT, is_holiday BOOLEAN ); Snowflake Schema Normalized dimensions for storage efficiency. Dimensions are split into sub-dimensions, saving storage at the cost of more joins. ETL Pipeline class ETLPipeline: def extract(self, query): return pd.read_sql(query, self.source_engine, chunksize=10000) def transform(self, df): df = df.drop_duplicates(subset=[\"order_id\"]) df[\"order_date\"] = pd.to_datetime(df[\"order_date\"]) df[\"date_key\"] = df[\"order_date\"].dt.strftime(\"%Y%m%d\").astype(int) return df def load(self, df, table_name): df.to_sql(table_name, self.warehouse_engine, if_exists=\"append\", index=False) Modern Data Warehousing Cloud data warehouses like Snowflake and BigQuery separate storage and compute, enabling elastic scaling. Materialized views pre-compute aggregations for dashboard queries. Conclusion Design with star schema for performance. Build resilient ETL pipelines. Leverage cloud warehouses for elastic scaling. Start simple and evolve."
     }
     </script>
     <script type="application/ld+json">
@@ -73,309 +74,87 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Data Warehousing Concepts and Modern Tools</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
-      <div class="article-body"><p>A data warehouse is a central repository for integrated data from multiple sources, optimized for analytical queries and reporting. Unlike operational databases that handle transactions, data warehouses are designed for read-heavy, complex queries across large datasets.</p>
+      <div class="article-body"><h1>Data Warehousing Concepts and Modern Tools</h1>
 <br>
-<h2> Schema Design: Star vs Snowflake</h2>
+<p>Data Warehousing Concepts   </p>
+<p>A data warehouse centralizes data from multiple sources for analysis and reporting. It is optimized for read-heavy analytical queries.   </p>
+<p>Star Schema   </p>
+<p>A central fact table connected to dimension tables:   </p>
 <br>
-<h3>Star Schema</h3>
 <br>
-<p>The star schema is the simplest and most common data warehouse schema. It has one or more fact tables referencing multiple dimension tables.</p>
 <br>
-<li>**Fact tables**: Contain quantitative data (sales amounts, quantities, counts). They grow rapidly and are typically the largest tables in the warehouse.</li>
-<li>**Dimension tables**: Contain descriptive attributes (customer names, product categories, dates). They are smaller and change slowly.</li>
+<p>    CREATE TABLE fact_sales (</p>
 <br>
-<pre><code>
-Fact_Sales
-
-  |-- sale_id (PK)
-
-  |-- date_id (FK -&gt; Dim_Date)
-
-  |-- product_id (FK -&gt; Dim_Product)
-
-  |-- customer_id (FK -&gt; Dim_Customer)
-
-  |-- store_id (FK -&gt; Dim_Store)
-
-  |-- quantity
-
-  |-- amount
-
-
-
-Dim_Date
-
-  |-- date_id (PK)
-
-  |-- date
-
-  |-- year
-
-  |-- quarter
-
-  |-- month
-
-  |-- day
-
-
-
-Dim_Product
-
-  |-- product_id (PK)
-
-  |-- product_name
-
-  |-- category
-
-  |-- price
-
-</code></pre>
+<p>        sale_id BIGSERIAL PRIMARY KEY,</p>
 <br>
-<p>Star schemas are easy to understand, perform well with simple joins, and are the preferred schema for most OLAP tools.</p>
+<p>        date_key INT REFERENCES dim_date(date_key),</p>
 <br>
-<h3>Snowflake Schema</h3>
+<p>        product_key INT REFERENCES dim_product(product_key),</p>
 <br>
-<p>The snowflake schema normalizes dimension tables into multiple related tables. A product dimension might split into product, category, and department tables.</p>
+<p>        customer_key INT REFERENCES dim_customer(customer_key),</p>
 <br>
-<pre><code>
-Fact_Sales
-
-  |-- product_id (FK -&gt; Dim_Product)
-
-
-
-Dim_Product
-
-  |-- product_id (PK)
-
-  |-- product_name
-
-  |-- category_id (FK -&gt; Dim_Category)
-
-
-
-Dim_Category
-
-  |-- category_id (PK)
-
-  |-- category_name
-
-  |-- department_id (FK -&gt; Dim_Department)
-
-</code></pre>
+<p>        quantity INT NOT NULL,</p>
 <br>
-<p>Snowflake schemas save storage by eliminating redundancy in dimensions. However, they require more joins for queries, which can impact performance. In practice, most modern data warehouses use star schemas or heavily denormalized designs.</p>
+<p>        unit_price DECIMAL(10,2) NOT NULL,</p>
 <br>
-<h3>Star vs Snowflake: When to Use</h3>
+<p>        total_amount DECIMAL(12,2) GENERATED ALWAYS AS </p>
 <br>
-<p>| Aspect | Star | Snowflake |</p>
-<p>|--------|------|-----------|</p>
-<p>| Query simplicity | Simple joins | Complex joins |</p>
-<p>| Query performance | Faster | Slightly slower |</p>
-<p>| Storage | More (denormalized) | Less (normalized) |</p>
-<p>| ETL complexity | Simple | Moderate |</p>
-<p>| Dimensional updates | Requires updates in place | Easier partial updates |</p>
+<p>            (quantity * unit_price) STORED</p>
 <br>
-<p>Most modern data warehouses use star schemas with some denormalization for performance-critical dimensions.</p>
+<p>    );</p>
 <br>
-<h2> ETL vs ELT</h2>
 <br>
-<h3>ETL (Extract, Transform, Load)</h3>
 <br>
-<p>ETL transforms data before loading it into the warehouse. Transformations happen on a dedicated staging server.</p>
+<p>    CREATE TABLE dim_date (</p>
 <br>
-<pre><code>
-Extract -&gt; Transform -&gt; Load
-
-</code></pre>
+<p>        date_key INT PRIMARY KEY,</p>
 <br>
-<p>**When ETL makes sense**:</p>
-<li>Legacy systems with limited compute power.</li>
-<li>Data requires significant cleaning before loading.</li>
-<li>Compliance requirements mandate data masking before storage.</li>
+<p>        date DATE NOT NULL, year SMALLINT, quarter SMALLINT,</p>
 <br>
-<h3>ELT (Extract, Load, Transform)</h3>
+<p>        month SMALLINT, day SMALLINT, is_holiday BOOLEAN</p>
 <br>
-<p>ELT loads raw data into the warehouse first, then transforms it using the warehouse's compute power.</p>
+<p>    );</p>
 <br>
-<pre><code>
-Extract -&gt; Load -&gt; Transform
-
-</code></pre>
 <br>
-<p>**When ELT makes sense**:</p>
-<li>Modern cloud data warehouses with elastic compute (Snowflake, BigQuery).</li>
-<li>Raw data is needed for future analysis (data lakehouse pattern).</li>
-<li>Transformations are exploratory and iterative.</li>
-<li>You want to decouple data ingestion from transformation.</li>
 <br>
-<p>ELT is the dominant pattern for modern data warehouses because cloud warehouses compute separately from storage, making transformation compute essentially unlimited.</p>
 <br>
-<h2> Modern Data Warehouse Platforms</h2>
+<p>Snowflake Schema   </p>
+<p>Normalized dimensions for storage efficiency. Dimensions are split into sub-dimensions, saving storage at the cost of more joins.   </p>
+<p>ETL Pipeline   </p>
 <br>
-<h3>Snowflake</h3>
 <br>
-<p>Snowflake is a cloud-native data warehouse with unique architecture separating storage and compute.</p>
 <br>
-<p>Key features:</p>
-<li>**Storage**: Compressed columnar format in cloud object storage (S3, Azure Blob).</li>
-<li>**Compute**: Virtual warehouses (clusters) that can scale independently and can be paused.</li>
-<li>**Concurrency**: Multiple virtual warehouses can access the same data without contention.</li>
-<li>**Time travel**: Query data as it existed at any point in the past 90 days.</li>
-<li>**Zero-copy cloning**: Instantly clone databases or schemas without copying data.</li>
+<p>    class ETLPipeline:</p>
 <br>
-<pre><code>
--- Snowflake: Create a virtual warehouse
-
-CREATE WAREHOUSE analytics_wh
-
-  WITH WAREHOUSE_SIZE = &#x27;XSMALL&#x27;
-
-  AUTO_SUSPEND = 300
-
-  AUTO_RESUME = TRUE;
-
-
-
--- Snowflake: Clone a table with time travel
-
-CREATE TABLE sales_restore CLONE sales
-
-  AT (TIMESTAMP =&gt; &#x27;2026-05-01 12:00:00&#x27;::TIMESTAMP);
-
-</code></pre>
+<p>        def extract(self, query):</p>
 <br>
-<h3>Google BigQuery</h3>
+<p>            return pd.read_sql(query, self.source_engine, chunksize=10000)</p>
 <br>
-<p>BigQuery is Google's serverless data warehouse. There is no infrastructure to manage — storage and compute are fully managed.</p>
 <br>
-<p>Key features:</p>
-<li>**Automatic scaling**: No clusters or nodes to configure.</li>
-<li>**Columnar storage**: Capacitor columnar storage format with automatic compression.</li>
-<li>**BigQuery Omni**: Query data across AWS, Azure, and GCP.</li>
-<li>**BI Engine**: In-memory analysis for sub-second query responses.</li>
-<li>**Machine learning**: Run ML models directly in SQL with BigQuery ML.</li>
 <br>
-<pre><code>
--- BigQuery: Partitioned table for efficient queries
-
-CREATE TABLE mydataset.sales_partitioned
-
-  (order_id INT64, amount FLOAT64, order_date DATE)
-
-  PARTITION BY order_date
-
-  OPTIONS(require_partition_filter = TRUE);
-
-
-
--- BigQuery ML: Create a linear regression model
-
-CREATE MODEL mydataset.sales_forecast
-
-  OPTIONS(model_type=&#x27;linear_reg&#x27;) AS
-
-  SELECT amount, order_date
-
-  FROM mydataset.sales;
-
-</code></pre>
+<p>        def transform(self, df):</p>
 <br>
-<h3>Amazon Redshift</h3>
+<p>            df = df.drop_duplicates(subset=["order_id"])</p>
 <br>
-<p>Redshift is AWS's petabyte-scale data warehouse. It is based on a modified PostgreSQL and uses a leader-node/follower-node architecture.</p>
+<p>            df["order_date"] = pd.to_datetime(df["order_date"])</p>
 <br>
-<p>Key features:</p>
-<li>**Massively Parallel Processing (MPP)**: Data is distributed across compute nodes.</li>
-<li>**Distribution styles**: KEY, EVEN, and ALL distribution control how data is distributed across slices.</li>
-<li>**Sort keys**: Compound and interleaved sort keys improve query performance for filtered queries.</li>
-<li>**Redshift Spectrum**: Query data directly in S3 without loading it into Redshift.</li>
-<li>**Concurrency Scaling**: Automatically adds capacity for spikes in concurrent queries.</li>
+<p>            df["date_key"] = df["order_date"].dt.strftime("%Y%m%d").astype(int)</p>
 <br>
-<pre><code>
--- Redshift: Create table with distribution and sort key
-
-CREATE TABLE sales (
-
-    sale_id BIGINT DISTKEY,
-
-    customer_id INT,
-
-    sale_date DATE SORTKEY,
-
-    amount DECIMAL(10,2)
-
-);
-
-
-
--- Redshift Spectrum: Query external data in S3
-
-CREATE EXTERNAL TABLE spectrum.sales (
-
-    sale_id BIGINT,
-
-    amount DECIMAL(10,2)
-
-)
-
-ROW FORMAT SERDE &#x27;org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe&#x27;
-
-LOCATION &#x27;s3://my-bucket/sales-parquet/&#x27;;
-
-</code></pre>
+<p>            return df</p>
 <br>
-<h2> Materialized Views</h2>
 <br>
-<p>Materialized views pre-compute and store query results. They trade storage for query performance and are essential for dashboards and recurring reports.</p>
 <br>
-<pre><code>
--- Create a materialized view for daily sales aggregations
-
-CREATE MATERIALIZED VIEW daily_sales_summary AS
-
-SELECT
-
-    d.date,
-
-    p.category,
-
-    COUNT(*) as sale_count,
-
-    SUM(s.amount) as total_sales
-
-FROM fact_sales s
-
-JOIN dim_date d ON s.date_id = d.date_id
-
-JOIN dim_product p ON s.product_id = p.product_id
-
-GROUP BY d.date, p.category;
-
-
-
--- Refresh the materialized view
-
-REFRESH MATERIALIZED VIEW daily_sales_summary;
-
-
-
--- Query the materialized view (much faster than the base query)
-
-SELECT * FROM daily_sales_summary
-
-WHERE date &gt;= &#x27;2026-01-01&#x27;;
-
-</code></pre>
+<p>        def load(self, df, table_name):</p>
 <br>
-<p>Materialized views are most useful for:</p>
-<li>Aggregations over large fact tables (monthly totals, category summaries).</li>
-<li>Pre-joined tables that are expensive to join each time.</li>
-<li>Data that does not need real-time freshness.</li>
+<p>            df.to_sql(table_name, self.warehouse_engine, if_exists="append", index=False)</p>
 <br>
-<h2> Conclusion</h2>
 <br>
-<p>Modern data warehousing has evolved from on-premise appliances to cloud-native platforms with elastic scaling, columnar storage, and separated compute and storage. Star schemas remain the standard for analytical modeling. ELT has largely replaced ETL for cloud warehouses. Snowflake, BigQuery, and Redshift each offer different trade-offs in terms of management overhead, scaling, and query performance. Choose based on your team's expertise and specific workload requirements.</p></div>
+<br>
+<br>
+<p>Modern Data Warehousing   </p>
+<p>Cloud data warehouses like Snowflake and BigQuery separate storage and compute, enabling elastic scaling. Materialized views pre-compute aggregations for dashboard queries.   </p>
+<p>Conclusion   </p>
+<p>Design with star schema for performance. Build resilient ETL pipelines. Leverage cloud warehouses for elastic scaling. Start simple and evolve.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="cache-strategies">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Caching Strategies">
+    <meta property="og:description" content="Compare write-through, write-around, write-back caching and invalidation strategies for distributed systems">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/cache-strategies.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Caching Strategies">
+    <meta name="twitter:description" content="Compare write-through, write-around, write-back caching and invalidation strategies for distributed systems">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Caching Strategies — SourceHub</title>
+    <meta name="description" content="Compare write-through, write-around, write-back caching and invalidation strategies for distributed systems">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/cache-strategies.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/cache-strategies.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Caching Strategies",
+      "description": "Compare write-through, write-around, write-back caching and invalidation strategies for distributed systems",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "916",
+      "keywords": "Architecture, System Design, Backend",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/cache-strategies.html"},
+      "articleBody": "Caching Strategies Caching is one of the most effective techniques for improving application performance, but choosing the right caching strategy is critical. Incorrect cache usage can lead to stale data, increased latency under certain conditions, or even system instability. This article examines the three fundamental caching strategies\u2014write-through, write-around, and write-back\u2014along with cache invalidation approaches essential for maintaining data consistency. Write-Through Cache In a write-through cache, every write operation writes data to both the cache and the underlying data store simultaneously. The write is not considered complete until both destinations have acknowledged it. This ensures strong consistency between the cache and the data store\u2014the cache always contains up-to-date data. The primary advantage is read reliability. Subsequent reads of the same data will always find it in the cache, guaranteeing fast access. Write-through caching is ideal for read-heavy workloads where data consistency is paramount, such as user profile data or configuration settings. The downside is increased write latency. Every write must complete two operations, which adds overhead. Write-through caches also suffer from cache churn\u2014if written data is never read, the write to cache was wasted. This strategy works best when most written data is subsequently read. Write-Around Cache Write-around caching bypasses the cache on write operations. Data is written directly to the underlying data store. The cache is populated only on a subsequent read miss\u2014when a read request cannot find the data in cache, it is fetched from the data store and stored in the cache for future reads. This strategy avoids polluting the cache with data that may never be read. It is ideal for write-heavy workloads or scenarios where written data is infrequently accessed, such as logging systems or bulk data imports. The trade-off is that the first read after a write will incur a cache miss, resulting in higher latency for that initial read. Write-around caching is commonly used in conjunction with CDNs and file caches, where the overhead of populating the cache on write is not justified by subsequent read patterns. Write-Back Cache Write-back caching writes data to the cache immediately and asynchronously writes it to the underlying data store at a later time. This provides the lowest write latency because the write operation completes as soon as the cache acknowledges it. The data store is updated in batches or after a configurable delay. This strategy excels in high-write-volume scenarios where write latency must be minimized. It is common in logging systems, metrics collection, and any application where some data loss is acceptable. The critical risk is data loss if the cache fails before the data is persisted. Techniques such as replication, persistent caches (Redis with AOF), and write-back queues mitigate this risk. Cache Invalidation Strategies Regardless of the write strategy, cache invalidation is one of the hardest problems in computer science. When the underlying data changes, cached copies must be invalidated or updated. Common approaches include time-to-live (TTL) expiration, event-driven invalidation, and explicit purging. TTL-based invalidation is the simplest: cached entries expire after a fixed duration. It is appropriate for data where slight staleness is acceptable. Event-driven invalidation uses a message queue or event bus to notify caches when data changes, enabling near-instantaneous invalidation. Explicit purging allows the application to remove specific cache entries when it knows the underlying data has changed. Choosing a Strategy The optimal strategy depends on your access patterns. Read-heavy workloads with strong consistency needs favor write-through. Write-heavy workloads benefit from write-around or write-back. Applications tolerant of eventual consistency can use write-back for maximum write performance. Many production systems combine strategies: write-through for critical data, write-around for reference data, and write-back for high-volume transient data. Modern caching systems like Redis, Memcached, and CDN platforms provide configurable support for these strategies. The key is measuring your actual access patterns and choosing the strategy that aligns with your consistency, latency, and throughput requirements."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Caching Strategies"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Caching Strategies
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">Caching Strategies</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Caching Strategies</h1>
+<br>
+<p>Caching is one of the most effective techniques for improving application performance, but choosing the right caching strategy is critical. Incorrect cache usage can lead to stale data, increased latency under certain conditions, or even system instability. This article examines the three fundamental caching strategies—write-through, write-around, and write-back—along with cache invalidation approaches essential for maintaining data consistency.   </p>
+<p>Write-Through Cache   </p>
+<p>In a write-through cache, every write operation writes data to both the cache and the underlying data store simultaneously. The write is not considered complete until both destinations have acknowledged it. This ensures strong consistency between the cache and the data store—the cache always contains up-to-date data.   </p>
+<p>The primary advantage is read reliability. Subsequent reads of the same data will always find it in the cache, guaranteeing fast access. Write-through caching is ideal for read-heavy workloads where data consistency is paramount, such as user profile data or configuration settings.   </p>
+<p>The downside is increased write latency. Every write must complete two operations, which adds overhead. Write-through caches also suffer from cache churn—if written data is never read, the write to cache was wasted. This strategy works best when most written data is subsequently read.   </p>
+<p>Write-Around Cache   </p>
+<p>Write-around caching bypasses the cache on write operations. Data is written directly to the underlying data store. The cache is populated only on a subsequent read miss—when a read request cannot find the data in cache, it is fetched from the data store and stored in the cache for future reads.   </p>
+<p>This strategy avoids polluting the cache with data that may never be read. It is ideal for write-heavy workloads or scenarios where written data is infrequently accessed, such as logging systems or bulk data imports. The trade-off is that the first read after a write will incur a cache miss, resulting in higher latency for that initial read.   </p>
+<p>Write-around caching is commonly used in conjunction with CDNs and file caches, where the overhead of populating the cache on write is not justified by subsequent read patterns.   </p>
+<p>Write-Back Cache   </p>
+<p>Write-back caching writes data to the cache immediately and asynchronously writes it to the underlying data store at a later time. This provides the lowest write latency because the write operation completes as soon as the cache acknowledges it. The data store is updated in batches or after a configurable delay.   </p>
+<p>This strategy excels in high-write-volume scenarios where write latency must be minimized. It is common in logging systems, metrics collection, and any application where some data loss is acceptable. The critical risk is data loss if the cache fails before the data is persisted. Techniques such as replication, persistent caches (Redis with AOF), and write-back queues mitigate this risk.   </p>
+<p>Cache Invalidation Strategies   </p>
+<p>Regardless of the write strategy, cache invalidation is one of the hardest problems in computer science. When the underlying data changes, cached copies must be invalidated or updated. Common approaches include time-to-live (TTL) expiration, event-driven invalidation, and explicit purging.   </p>
+<p>TTL-based invalidation is the simplest: cached entries expire after a fixed duration. It is appropriate for data where slight staleness is acceptable. Event-driven invalidation uses a message queue or event bus to notify caches when data changes, enabling near-instantaneous invalidation. Explicit purging allows the application to remove specific cache entries when it knows the underlying data has changed.   </p>
+<p>Choosing a Strategy   </p>
+<p>The optimal strategy depends on your access patterns. Read-heavy workloads with strong consistency needs favor write-through. Write-heavy workloads benefit from write-around or write-back. Applications tolerant of eventual consistency can use write-back for maximum write performance. Many production systems combine strategies: write-through for critical data, write-around for reference data, and write-back for high-volume transient data.   </p>
+<p>Modern caching systems like Redis, Memcached, and CDN platforms provide configurable support for these strategies. The key is measuring your actual access patterns and choosing the strategy that aligns with your consistency, latency, and throughput requirements.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="penetration-testing">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Penetration Testing Methodology">
+    <meta property="og:description" content="Complete penetration testing methodology covering reconnaissance, scanning, exploitation, reporting, and the PTES standard framework.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/penetration-testing.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Penetration Testing Methodology">
+    <meta name="twitter:description" content="Complete penetration testing methodology covering reconnaissance, scanning, exploitation, reporting, and the PTES standard framework.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Penetration Testing Methodology — SourceHub</title>
+    <meta name="description" content="Complete penetration testing methodology covering reconnaissance, scanning, exploitation, reporting, and the PTES standard framework.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/penetration-testing.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/penetration-testing.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Penetration Testing Methodology",
+      "description": "Complete penetration testing methodology covering reconnaissance, scanning, exploitation, reporting, and the PTES standard framework.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1368",
+      "keywords": "Security, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/penetration-testing.html"},
+      "articleBody": "Penetration Testing Methodology Introduction Penetration testing simulates real-world attacks to identify security vulnerabilities before adversaries exploit them. A structured methodology ensures consistent, repeatable, and comprehensive assessments. The Penetration Testing Execution Standard (PTES) provides a widely adopted framework. The PTES Standard PTES defines seven phases for penetration testing, each with specific activities and deliverables. Phase 1: Pre-Engagement Interactions Define scope, rules of engagement, and legal boundaries before any testing begins. rules_of_engagement: client: \"ACME Corp\" scope: in_scope: - \"*.acme.com\" - \"203.0.113.0/24\" out_of_scope: - \"payment.acme.com\" # Production payment system - \"10.0.0.0/8\" # Internal only restrictions: - no_social_engineering: true - no_dos_attacks: true - testing_window: \"2026-05-15T00:00Z - 2026-05-19T23:59Z\" - notification_list: [\"security@acme.com\", \"incident-response@acme.com\"] legal: - authorized_signatory: \"Jane Doe, CISO\" - insurance_coverage: true - data_handling_nda_signed: true Phase 2: Intelligence Gathering (Reconnaissance) Reconnaissance builds a target profile through passive and active information gathering. # Passive recon \u2014 DNS enumeration dig axfr @ns1.acme.com acme.com dnsrecon -d acme.com -t axfr dnsrecon -d acme.com -t std --db acme_recon.db # Subdomain discovery sublist3r -d acme.com -o subdomains.txt # Technology fingerprinting whatweb -a 3 https://www.acme.com --log-verbose=tech_report.txt # Certificate transparency logs curl -s \"https://crt.sh/?q=%.acme.com&output=json\" | jq -r '.[].name_value' | sort -u Phase 3: Vulnerability Analysis Analyze gathered information to identify potential vulnerabilities. # Port scanning with Nmap nmap -sV -sC -O -p- --min-rate=1000 -oA acme_scan 203.0.113.0/24 # Service enumeration nmap -sV --script=http-enum,http-headers,http-methods,ssl-enum-ciphers \\ -p 80,443 203.0.113.0/24 -oA acme_web_scan # Vulnerability scanning nmap --script=vuln -p 80,443,22,3389 203.0.113.0/24 -oA acme_vuln Phase 4: Exploitation Exploitation attempts to breach the target using identified vulnerabilities. # Custom exploit example \u2014 SQL injection test import requests def test_sqli(url, params): payloads = [ \"' OR '1'='1\", \"' UNION SELECT NULL,NULL--\", \"1; DROP TABLE users--\", \"' WAITFOR DELAY '00:00:05'--\", ] for param, value in params.items(): for payload in payloads: test_params = params.copy() test_params[param] = payload start = time.time() resp = requests.get(url, params=test_params, timeout=10) elapsed = time.time() - start # Time-based detection if elapsed > 5: print(f\"[!] Time-based SQLi in {param}: {payload}\") # Error-based detection if any(err in resp.text for err in [\"SQL syntax\", \"mysql_fetch\", \"ORA-\"]): print(f\"[!] Error-based SQLi in {param}: {payload}\") Phase 5: Post-Exploitation After gaining access, assess the value of compromised systems and establish persistence. # Post-exploitation enumeration whoami /all systeminfo | findstr /B \"OS Name OS Version System Type\" net localgroup administrators netstat -ano wmic product get name,version # Lateral movement check powershell -Command \"Get-WmiObject -Class Win32_ComputerSystem -ComputerName TARGET\" Phase 6: Reporting The report is the primary deliverable. It must be clear, actionable, and properly scoped for different audiences. report_structure: executive_summary: - risk_rating: \"High\" - total_findings: 12 - critical: 2 - high: 4 - medium: 4 - low: 2 - business_impact: \"SQL injection in main application could lead to complete data breach\" technical_findings: - finding_id: \"F-001\" title: \"SQL Injection in /api/search endpoint\" severity: \"Critical\" cvss: 9.1 description: \"User input is directly concatenated into SQL queries\" affected_endpoint: \"POST /api/search\" poc: \"curl -X POST https://app.acme.com/api/search -d 'query=1%27+OR+%271%27%3D%271'\" remediation: \"Use parameterized queries; implement input validation\" remediation_timeline: - immediate: \"Patch critical SQL injection and RCE vulnerabilities\" - short_term: \"Implement WAF and input validation\" - long_term: \"Security training for developers, SAST integration in CI/CD\" Phase 7: Post-Engagement Cleanup, evidence destruction, and lessons learned. Conclusion Effective penetration testing follows a disciplined methodology. PTES provides comprehensive coverage from legal agreements through reporting. The true value of a pentest lies not in how many vulnerabilities are found, but in the actionable remediation guidance provided in the final report."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Penetration Testing Methodology"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Penetration Testing Methodology
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Penetration Testing Methodology</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Penetration Testing Methodology</h1>
+<br>
+<p>Introduction   </p>
+<p>Penetration testing simulates real-world attacks to identify security vulnerabilities before adversaries exploit them. A structured methodology ensures consistent, repeatable, and comprehensive assessments. The Penetration Testing Execution Standard (PTES) provides a widely adopted framework.   </p>
+<p>The PTES Standard   </p>
+<p>PTES defines seven phases for penetration testing, each with specific activities and deliverables.   </p>
+<p>Phase 1: Pre-Engagement Interactions   </p>
+<p>Define scope, rules of engagement, and legal boundaries before any testing begins.   </p>
+<br>
+<br>
+<br>
+<p>    rules_of_engagement:</p>
+<br>
+<p>      client: "ACME Corp"</p>
+<br>
+<p>      scope:</p>
+<br>
+<p>        in_scope:</p>
+<br>
+<p>          - "*.acme.com"</p>
+<br>
+<p>          - "203.0.113.0/24"</p>
+<br>
+<p>        out_of_scope:</p>
+<br>
+<p>          - "payment.acme.com"     # Production payment system</p>
+<br>
+<p>          - "10.0.0.0/8"           # Internal only</p>
+<br>
+<br>
+<br>
+<p>      restrictions:</p>
+<br>
+<p>        - no_social_engineering: true</p>
+<br>
+<p>        - no_dos_attacks: true</p>
+<br>
+<p>        - testing_window: "2026-05-15T00:00Z - 2026-05-19T23:59Z"</p>
+<br>
+<p>        - notification_list: ["security@acme.com", "incident-response@acme.com"]</p>
+<br>
+<br>
+<br>
+<p>      legal:</p>
+<br>
+<p>        - authorized_signatory: "Jane Doe, CISO"</p>
+<br>
+<p>        - insurance_coverage: true</p>
+<br>
+<p>        - data_handling_nda_signed: true</p>
+<br>
+<br>
+<br>
+<br>
+<p>Phase 2: Intelligence Gathering (Reconnaissance)   </p>
+<p>Reconnaissance builds a target profile through passive and active information gathering.   </p>
+<br>
+<br>
+<br>
+<p>    # Passive recon — DNS enumeration</p>
+<br>
+<p>    dig axfr @ns1.acme.com acme.com</p>
+<br>
+<p>    dnsrecon -d acme.com -t axfr</p>
+<br>
+<p>    dnsrecon -d acme.com -t std --db acme_recon.db</p>
+<br>
+<br>
+<br>
+<p>    # Subdomain discovery</p>
+<br>
+<p>    sublist3r -d acme.com -o subdomains.txt</p>
+<br>
+<br>
+<br>
+<p>    # Technology fingerprinting</p>
+<br>
+<p>    whatweb -a 3 https://www.acme.com --log-verbose=tech_report.txt</p>
+<br>
+<br>
+<br>
+<p>    # Certificate transparency logs</p>
+<br>
+<p>    curl -s "https://crt.sh/?q=%.acme.com&output=json" | jq -r '.[].name_value' | sort -u</p>
+<br>
+<br>
+<br>
+<br>
+<p>Phase 3: Vulnerability Analysis   </p>
+<p>Analyze gathered information to identify potential vulnerabilities.   </p>
+<br>
+<br>
+<br>
+<p>    # Port scanning with Nmap</p>
+<br>
+<p>    nmap -sV -sC -O -p- --min-rate=1000 -oA acme_scan 203.0.113.0/24</p>
+<br>
+<br>
+<br>
+<p>    # Service enumeration</p>
+<br>
+<p>    nmap -sV --script=http-enum,http-headers,http-methods,ssl-enum-ciphers \</p>
+<br>
+<p>         -p 80,443 203.0.113.0/24 -oA acme_web_scan</p>
+<br>
+<br>
+<br>
+<p>    # Vulnerability scanning</p>
+<br>
+<p>    nmap --script=vuln -p 80,443,22,3389 203.0.113.0/24 -oA acme_vuln</p>
+<br>
+<br>
+<br>
+<br>
+<p>Phase 4: Exploitation   </p>
+<p>Exploitation attempts to breach the target using identified vulnerabilities.   </p>
+<br>
+<br>
+<br>
+<p>    # Custom exploit example — SQL injection test</p>
+<br>
+<p>    import requests</p>
+<br>
+<br>
+<br>
+<p>    def test_sqli(url, params):</p>
+<br>
+<p>        payloads = [</p>
+<br>
+<p>            "' OR '1'='1",</p>
+<br>
+<p>            "' UNION SELECT NULL,NULL--",</p>
+<br>
+<p>            "1; DROP TABLE users--",</p>
+<br>
+<p>            "' WAITFOR DELAY '00:00:05'--",</p>
+<br>
+<p>        ]</p>
+<br>
+<br>
+<br>
+<p>        for param, value in params.items():</p>
+<br>
+<p>            for payload in payloads:</p>
+<br>
+<p>                test_params = params.copy()</p>
+<br>
+<p>                test_params[param] = payload</p>
+<br>
+<br>
+<br>
+<p>                start = time.time()</p>
+<br>
+<p>                resp = requests.get(url, params=test_params, timeout=10)</p>
+<br>
+<p>                elapsed = time.time() - start</p>
+<br>
+<br>
+<br>
+<p>                # Time-based detection</p>
+<br>
+<p>                if elapsed > 5:</p>
+<br>
+<p>                    print(f"[!] Time-based SQLi in {param}: {payload}")</p>
+<br>
+<br>
+<br>
+<p>                # Error-based detection</p>
+<br>
+<p>                if any(err in resp.text for err in ["SQL syntax", "mysql_fetch", "ORA-"]):</p>
+<br>
+<p>                    print(f"[!] Error-based SQLi in {param}: {payload}")</p>
+<br>
+<br>
+<br>
+<br>
+<p>Phase 5: Post-Exploitation   </p>
+<p>After gaining access, assess the value of compromised systems and establish persistence.   </p>
+<br>
+<br>
+<br>
+<p>    # Post-exploitation enumeration</p>
+<br>
+<p>    whoami /all</p>
+<br>
+<p>    systeminfo | findstr /B "OS Name OS Version System Type"</p>
+<br>
+<p>    net localgroup administrators</p>
+<br>
+<p>    netstat -ano</p>
+<br>
+<p>    wmic product get name,version</p>
+<br>
+<br>
+<br>
+<p>    # Lateral movement check</p>
+<br>
+<p>    powershell -Command "Get-WmiObject -Class Win32_ComputerSystem -ComputerName TARGET"</p>
+<br>
+<br>
+<br>
+<br>
+<p>Phase 6: Reporting   </p>
+<p>The report is the primary deliverable. It must be clear, actionable, and properly scoped for different audiences.   </p>
+<br>
+<br>
+<br>
+<p>    report_structure:</p>
+<br>
+<p>      executive_summary:</p>
+<br>
+<p>        - risk_rating: "High"</p>
+<br>
+<p>        - total_findings: 12</p>
+<br>
+<p>        - critical: 2</p>
+<br>
+<p>        - high: 4</p>
+<br>
+<p>        - medium: 4</p>
+<br>
+<p>        - low: 2</p>
+<br>
+<p>        - business_impact: "SQL injection in main application could lead to complete data breach"</p>
+<br>
+<br>
+<br>
+<p>      technical_findings:</p>
+<br>
+<p>        - finding_id: "F-001"</p>
+<br>
+<p>          title: "SQL Injection in /api/search endpoint"</p>
+<br>
+<p>          severity: "Critical"</p>
+<br>
+<p>          cvss: 9.1</p>
+<br>
+<p>          description: "User input is directly concatenated into SQL queries"</p>
+<br>
+<p>          affected_endpoint: "POST /api/search"</p>
+<br>
+<p>          poc: "curl -X POST https://app.acme.com/api/search -d 'query=1%27+OR+%271%27%3D%271'"</p>
+<br>
+<p>          remediation: "Use parameterized queries; implement input validation"</p>
+<br>
+<br>
+<br>
+<p>      remediation_timeline:</p>
+<br>
+<p>        - immediate: "Patch critical SQL injection and RCE vulnerabilities"</p>
+<br>
+<p>        - short_term: "Implement WAF and input validation"</p>
+<br>
+<p>        - long_term: "Security training for developers, SAST integration in CI/CD"</p>
+<br>
+<br>
+<br>
+<br>
+<p>Phase 7: Post-Engagement   </p>
+<p>Cleanup, evidence destruction, and lessons learned.   </p>
+<p>Conclusion   </p>
+<p>Effective penetration testing follows a disciplined methodology. PTES provides comprehensive coverage from legal agreements through reporting. The true value of a pentest lies not in how many vulnerabilities are found, but in the actionable remediation guidance provided in the final report.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

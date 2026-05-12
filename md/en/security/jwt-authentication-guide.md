@@ -6,125 +6,254 @@ board: security
 url: https://dingjiu1989-hue.github.io/en/security/jwt-authentication-guide.html
 ---
 
-## What Are JSON Web Tokens?
+# JWT Authentication Best Practices
 
-JSON Web Tokens (JWT) are a compact, URL-safe means of representing claims between two parties. A JWT consists of three Base64URL-encoded segments separated by dots: header, payload, and signature.
+# JWT Authentication Best Practices
 
-```
+  
+
+
+What Are JSON Web Tokens? 
+
+JSON Web Tokens (JWT) are a compact, URL-safe means of representing claims between two parties. A JWT consists of three Base64URL-encoded segments separated by dots: header, payload, and signature. 
+
+  
+  
+  
+
+
 eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.
+
+  
+
+
 eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFsZXgiLCJpYXQiOjE1MTYyMzkwMjJ9.
+
+  
+
+
 SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-```
 
-### Structure Breakdown
+  
+  
+  
+  
 
-| Segment | Contents | Example |
-|---------|----------|---------|
-| Header | Algorithm and token type | `{"alg":"RS256","typ":"JWT"}` |
-| Payload | Claims (data) | `{"sub":"user_123","iat":1516239022}` |
-| Signature | Cryptographic verification | HMACSHA256 or RSASHA256 output |
 
-## Choosing the Right Algorithm
+Structure Breakdown 
 
-### Symmetric: HS256 (HMAC with SHA-256)
+| Segment | Contents | Example | |---------|----------|---------| | Header | Algorithm and token type | `{"alg":"RS256","typ":"JWT"}` | | Payload | Claims (data) | `{"sub":"user_123","iat":1516239022}` | | Signature | Cryptographic verification | HMACSHA256 or RSASHA256 output | 
 
-Uses a single shared secret for both signing and verification. Fast and simple, but the secret must be kept confidential on both the issuer and verifier.
+Choosing the Right Algorithm 
 
-```javascript
+Symmetric: HS256 (HMAC with SHA-256) 
+
+Uses a single shared secret for both signing and verification. Fast and simple, but the secret must be kept confidential on both the issuer and verifier. 
+
+  
+  
+  
+
+
 const jwt = require('jsonwebtoken');
+
+  
+
+
 const token = jwt.sign({ userId: '123' }, SECRET, {
-    algorithm: 'HS256',
-    expiresIn: '15m'
+
+  
+
+
+algorithm: 'HS256',
+
+  
+
+
+expiresIn: '15m'
+
+  
+
+
 });
-```
 
-Use HS256 only when issuer and verifier are the same service.
+  
+  
+  
+  
 
-### Asymmetric: RS256 (RSA with SHA-256)
 
-Uses a private key for signing and a public key for verification. This enables third-party verification without exposing the signing key.
+Use HS256 only when issuer and verifier are the same service. 
 
-```javascript
+Asymmetric: RS256 (RSA with SHA-256) 
+
+Uses a private key for signing and a public key for verification. This enables third-party verification without exposing the signing key. 
+
+  
+  
+  
+
+
 const token = jwt.sign({ userId: '123' }, PRIVATE_KEY, {
-    algorithm: 'RS256',
-    expiresIn: '15m'
+
+  
+
+
+algorithm: 'RS256',
+
+  
+
+
+expiresIn: '15m'
+
+  
+
+
 });
+
+  
+
+
 // Verifier uses PUBLIC_KEY
+
+  
+
+
 const decoded = jwt.verify(token, PUBLIC_KEY, { algorithms: ['RS256'] });
-```
 
-Use RS256 (or ES256 for better performance) when multiple services need to verify tokens issued by a central auth service.
+  
+  
+  
+  
 
-## Critical Security Practices
 
-### 1. Validate Every Claim
+Use RS256 (or ES256 for better performance) when multiple services need to verify tokens issued by a central auth service. 
 
-Never trust the token blindly. Always validate:
+Critical Security Practices 
 
-```javascript
+1\\. Validate Every Claim 
+
+Never trust the token blindly. Always validate: 
+
+  
+  
+  
+
+
 const options = {
-    algorithms: ['RS256'],
-    issuer: 'https://auth.example.com',
-    audience: 'https://api.example.com',
-    clockTolerance: 30 // seconds
+
+  
+
+
+algorithms: ['RS256'],
+
+  
+
+
+issuer: 'https://auth.example.com',
+
+  
+
+
+audience: 'https://api.example.com',
+
+  
+
+
+clockTolerance: 30 // seconds
+
+  
+
+
 };
+
+  
+
+
 const payload = jwt.verify(token, PUBLIC_KEY, options);
-```
 
-### 2. Prevent Algorithm Confusion
+  
+  
+  
+  
 
-An attacker could change the header from `RS256` to `HS256` and sign with the public key (which may be known). Always specify the allowed algorithms explicitly and never derive the secret from the token header.
 
-### 3. Use Short Expiration
+2\\. Prevent Algorithm Confusion 
 
-Access tokens should expire in 15-60 minutes. This limits the damage window if a token is stolen.
+An attacker could change the header from `RS256` to `HS256` and sign with the public key (which may be known). Always specify the allowed algorithms explicitly and never derive the secret from the token header. 
 
-```javascript
+3\\. Use Short Expiration 
+
+Access tokens should expire in 15-60 minutes. This limits the damage window if a token is stolen. 
+
+  
+  
+  
+
+
 const accessToken = jwt.sign(payload, PRIVATE_KEY, {
-    algorithm: 'RS256',
-    expiresIn: '15m'
+
+  
+
+
+algorithm: 'RS256',
+
+  
+
+
+expiresIn: '15m'
+
+  
+
+
 });
-```
 
-### 4. Implement Token Rotation
+  
+  
+  
+  
 
-Refresh tokens should be rotated with each use. When a client exchanges a refresh token, issue a new one and invalidate the old:
 
-```
-Old refresh token  -->  New access token + New refresh token (old invalidated)
-```
+4\\. Implement Token Rotation 
 
-If a refresh token is used after being rotated, it signals potential theft — revoke all tokens for that user.
+Refresh tokens should be rotated with each use. When a client exchanges a refresh token, issue a new one and invalidate the old: 
 
-## Token Storage
+  
+  
+  
 
-| Environment | Storage Method | Security |
-|-------------|---------------|----------|
-| Server/API | In-memory or database | Most secure |
-| SPA (Browser) | In-memory variable | Secure against XSS |
-| Mobile App | Secure Enclave / Keychain | Platform-protected |
-| Browser | httpOnly Cookie | Protected from JS access |
 
-Never store JWTs in localStorage or sessionStorage in a browser — they are accessible to any JavaScript running on the same origin and are vulnerable to XSS attacks.
+Old refresh token --> New access token + New refresh token (old invalidated)
 
-## Blacklisting and Revocation
+  
+  
+  
+  
 
-JWTs are stateless, which means they cannot be revoked without additional infrastructure. Options include:
 
-1. **Token blacklist**: Maintain a Redis cache of revoked token IDs (jti claims) until their natural expiry.
-2. **Short-lived tokens with refresh rotation**: Keep access tokens very short (5-15 min) so revocation happens at refresh time.
-3. **Token introspection endpoint**: An API endpoint that checks token validity in real-time. Used by OAuth 2.0 resource servers.
+If a refresh token is used after being rotated, it signals potential theft — revoke all tokens for that user. 
 
-## Common Vulnerabilities
+Token Storage 
 
-| Vulnerability | Mitigation |
-|--------------|------------|
-| alg: none | Reject tokens with alg: none |
-| Weak secret (HS256) | Use at least 256-bit random secret |
-| Missing expiry validation | Always verify exp claim |
-| JWT in URL | Use Authorization header, never URLs |
-| Large payload | Keep payload under 2KB; use references for large claims |
+| Environment | Storage Method | Security | |-------------|---------------|----------| | Server/API | In-memory or database | Most secure | | SPA (Browser) | In-memory variable | Secure against XSS | | Mobile App | Secure Enclave / Keychain | Platform-protected | | Browser | httpOnly Cookie | Protected from JS access | 
 
-## Summary
+Never store JWTs in localStorage or sessionStorage in a browser — they are accessible to any JavaScript running on the same origin and are vulnerable to XSS attacks. 
+
+Blacklisting and Revocation 
+
+JWTs are stateless, which means they cannot be revoked without additional infrastructure. Options include: 
+
+  
+
+
+* **Token blacklist**: Maintain a Redis cache of revoked token IDs (jti claims) until their natural expiry.
+
+2\\. **Short-lived tokens with refresh rotation**: Keep access tokens very short (5-15 min) so revocation happens at refresh time. 3\\. **Token introspection endpoint**: An API endpoint that checks token validity in real-time. Used by OAuth 2.0 resource servers. 
+
+Common Vulnerabilities 
+
+| Vulnerability | Mitigation | |--------------|------------| | alg: none | Reject tokens with alg: none | | Weak secret (HS256) | Use at least 256-bit random secret | | Missing expiry validation | Always verify exp claim | | JWT in URL | Use Authorization header, never URLs | | Large payload | Keep payload under 2KB; use references for large claims | 
+
+Summary 
 
 JWTs are a powerful authentication mechanism when implemented correctly. Use asymmetric algorithms (RS256/ES256) for multi-service architectures, validate all claims rigorously, keep access tokens short-lived, and implement refresh token rotation. Never store tokens in browser localStorage, and always explicitly specify allowed algorithms to prevent confusion attacks.

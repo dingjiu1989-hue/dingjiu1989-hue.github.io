@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="database-migration-strategies">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Database Migration Strategies">
+    <meta property="og:description" content="Zero-downtime database migration strategies with rollback planning, testing, and CI/CD integration.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/database-migration-strategies.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Database Migration Strategies">
+    <meta name="twitter:description" content="Zero-downtime database migration strategies with rollback planning, testing, and CI/CD integration.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Database Migration Strategies — SourceHub</title>
+    <meta name="description" content="Zero-downtime database migration strategies with rollback planning, testing, and CI/CD integration.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/database-migration-strategies.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/database-migration-strategies.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Database Migration Strategies",
+      "description": "Zero-downtime database migration strategies with rollback planning, testing, and CI/CD integration.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "865",
+      "keywords": "Database, Backend, Data",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-migration-strategies.html"},
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/zero-downtime-database-migration-strategies-for-production-533h"
+      ],
+      "articleBody": "Database migrations in production are terrifying \u2014 one mistake can corrupt data, cause downtime, or lock a critical table for hours. Yet every application needs them. This guide covers battle-tested strategies for running database migrations with zero downtime, including the expand-contract pattern, handling large tables, and reversible migrations. Migration Strategies Compared StrategyDowntimeComplexityBest For Expand-ContractZeroHighSchema changes on high-traffic tables Online Schema Change (gh-ost, pt-online-schema-change)ZeroMediumALTER TABLE on large MySQL tables Blue-Green DatabaseNear-zeroVery HighMajor version upgrades, risky operations Deploy + Migrate (simultaneous)Brief (seconds)LowSmall apps with maintenance windows Shadow Table MigrationZeroMediumReshaping or cleaning data with dual writes The Expand-Contract Pattern (Zero-Downtime) Best for: Adding, renaming, or removing columns without downtime. The key insight: deploy in multiple phases, and each phase must be compatible with the previous version. Example: Renaming a Column (users.name \u2192 users.full_name) PhaseWhat to DoApp Behavior 1. ExpandAdd new column full_name (nullable), write to BOTH columnsApp writes to both old and new column 2. BackfillCOPY name into full_name for existing rowsApp reads from new column, falls back to old; writes to both 3. Migrate readsDeploy code that reads only from new columnApp reads from full_name only, writes to both 4. ContractStop writing to old column, eventually DROP itApp reads and writes full_name only Handling Large Tables (100M+ Rows) Critical rule: Never run a blocking ALTER TABLE on a large production table \u2014 it acquires an ACCESS EXCLUSIVE lock for the duration, blocking all reads and writes. DatabaseSafe SolutionTool PostgreSQLAdd CHECK constraints as NOT VALID, validate laterBuilt-in: ADD CONSTRAINT ... NOT VALID; ALTER CONSTRAINT ... VALIDATE PostgreSQLCreate index with CONCURRENTLYCREATE INDEX CONCURRENTLY (no table lock) PostgreSQLAdd column with a default (PG 11+)ALTER TABLE ... ADD COLUMN ... DEFAULT (no rewrite in PG 11+) MySQLOnline schema changegh-ost (GitHub), pt-online-schema-change (Percona) SQLiteBatched writes in a transactionWrap in BEGIN/COMMIT, limit batch size to ~10,000 rows Reversible Migrations Every migration should have a planned rollback. Before running a migration, write (and test) the down migration: ChangeUp MigrationDown Migration Add columnALTER TABLE users ADD COLUMN bio TEXT;ALTER TABLE users DROP COLUMN bio; Add NOT NULL columnAdd nullable \u2192 backfill \u2192 set NOT NULL (3-phase)ALTER TABLE users ALTER COLUMN bio DROP NOT NULL; Rename columnExpand-contract (4 phases, see above)Reverse the expand-contract phases Add indexCREATE INDEX CONCURRENTLY ...;DROP INDEX CONCURRENTLY ...; Bottom line: The expand-contract pattern is the gold standard for zero-downtime migrations \u2014 deploy changes in small, compatible steps. For any ALTER TABLE on a large production table, use your database's non-blocking equivalent (CONCURRENTLY for PostgreSQL, gh-ost for MySQL). Never run a migration you cannot roll back. See also: Database Design Fundamentals and PostgreSQL vs MySQL vs SQLite."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Database Migration Strategies"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Database Migration Strategies
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Data</span></div>
+      <h1 class="article-title">Database Migration Strategies</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><p>Database migrations in production are terrifying — one mistake can corrupt data, cause downtime, or lock a critical table for hours. Yet every application needs them. This guide covers battle-tested strategies for running database migrations with zero downtime, including the expand-contract pattern, handling large tables, and reversible migrations.</p>
+
+<h2>Migration Strategies Compared</h2>
+<table>
+<tr><th>Strategy</th><th>Downtime</th><th>Complexity</th><th>Best For</th></tr>
+<tr><td>Expand-Contract</td><td>Zero</td><td>High</td><td>Schema changes on high-traffic tables</td></tr>
+<tr><td>Online Schema Change (gh-ost, pt-online-schema-change)</td><td>Zero</td><td>Medium</td><td>ALTER TABLE on large MySQL tables</td></tr>
+<tr><td>Blue-Green Database</td><td>Near-zero</td><td>Very High</td><td>Major version upgrades, risky operations</td></tr>
+<tr><td>Deploy + Migrate (simultaneous)</td><td>Brief (seconds)</td><td>Low</td><td>Small apps with maintenance windows</td></tr>
+<tr><td>Shadow Table Migration</td><td>Zero</td><td>Medium</td><td>Reshaping or cleaning data with dual writes</td></tr>
+</table>
+
+<h2>The Expand-Contract Pattern (Zero-Downtime)</h2>
+<p><strong>Best for:</strong> Adding, renaming, or removing columns without downtime. The key insight: deploy in multiple phases, and each phase must be compatible with the previous version.</p>
+
+<h3>Example: Renaming a Column (users.name → users.full_name)</h3>
+<table>
+<tr><th>Phase</th><th>What to Do</th><th>App Behavior</th></tr>
+<tr><td>1. Expand</td><td>Add new column full_name (nullable), write to BOTH columns</td><td>App writes to both old and new column</td></tr>
+<tr><td>2. Backfill</td><td>COPY name into full_name for existing rows</td><td>App reads from new column, falls back to old; writes to both</td></tr>
+<tr><td>3. Migrate reads</td><td>Deploy code that reads only from new column</td><td>App reads from full_name only, writes to both</td></tr>
+<tr><td>4. Contract</td><td>Stop writing to old column, eventually DROP it</td><td>App reads and writes full_name only</td></tr>
+</table>
+
+<h2>Handling Large Tables (100M+ Rows)</h2>
+<p><strong>Critical rule:</strong> Never run a blocking ALTER TABLE on a large production table — it acquires an ACCESS EXCLUSIVE lock for the duration, blocking all reads and writes.</p>
+<table>
+<tr><th>Database</th><th>Safe Solution</th><th>Tool</th></tr>
+<tr><td>PostgreSQL</td><td>Add CHECK constraints as NOT VALID, validate later</td><td>Built-in: ADD CONSTRAINT ... NOT VALID; ALTER CONSTRAINT ... VALIDATE</td></tr>
+<tr><td>PostgreSQL</td><td>Create index with CONCURRENTLY</td><td>CREATE INDEX CONCURRENTLY (no table lock)</td></tr>
+<tr><td>PostgreSQL</td><td>Add column with a default (PG 11+)</td><td>ALTER TABLE ... ADD COLUMN ... DEFAULT (no rewrite in PG 11+)</td></tr>
+<tr><td>MySQL</td><td>Online schema change</td><td>gh-ost (GitHub), pt-online-schema-change (Percona)</td></tr>
+<tr><td>SQLite</td><td>Batched writes in a transaction</td><td>Wrap in BEGIN/COMMIT, limit batch size to ~10,000 rows</td></tr>
+</table>
+
+<h2>Reversible Migrations</h2>
+<p>Every migration should have a planned rollback. Before running a migration, write (and test) the down migration:</p>
+<table>
+<tr><th>Change</th><th>Up Migration</th><th>Down Migration</th></tr>
+<tr><td>Add column</td><td>ALTER TABLE users ADD COLUMN bio TEXT;</td><td>ALTER TABLE users DROP COLUMN bio;</td></tr>
+<tr><td>Add NOT NULL column</td><td>Add nullable → backfill → set NOT NULL (3-phase)</td><td>ALTER TABLE users ALTER COLUMN bio DROP NOT NULL;</td></tr>
+<tr><td>Rename column</td><td>Expand-contract (4 phases, see above)</td><td>Reverse the expand-contract phases</td></tr>
+<tr><td>Add index</td><td>CREATE INDEX CONCURRENTLY ...;</td><td>DROP INDEX CONCURRENTLY ...;</td></tr>
+</table>
+
+<p><strong>Bottom line:</strong> The expand-contract pattern is the gold standard for zero-downtime migrations — deploy changes in small, compatible steps. For any ALTER TABLE on a large production table, use your database's non-blocking equivalent (CONCURRENTLY for PostgreSQL, gh-ost for MySQL). Never run a migration you cannot roll back. See also: <a href="/en/tech/database-design-fundamentals.html">Database Design Fundamentals</a> and <a href="/en/compare/postgresql-vs-mysql-vs-sqlite.html">PostgreSQL vs MySQL vs SQLite</a>.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

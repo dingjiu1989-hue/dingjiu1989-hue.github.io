@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="ddd-strategic">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="DDD Strategic Design">
+    <meta property="og:description" content="Explore DDD strategic design: bounded context, context map, ubiquitous language, and domain integration patterns">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/ddd-strategic.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DDD Strategic Design">
+    <meta name="twitter:description" content="Explore DDD strategic design: bounded context, context map, ubiquitous language, and domain integration patterns">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>DDD Strategic Design — SourceHub</title>
+    <meta name="description" content="Explore DDD strategic design: bounded context, context map, ubiquitous language, and domain integration patterns">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/ddd-strategic.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/ddd-strategic.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "DDD Strategic Design",
+      "description": "Explore DDD strategic design: bounded context, context map, ubiquitous language, and domain integration patterns",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "797",
+      "keywords": "Architecture, System Design, Backend",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/ddd-strategic.html"},
+      "articleBody": "DDD Strategic Design Strategic Domain-Driven Design addresses the high-level organization of a software system around domain boundaries. While tactical patterns guide implementation within a single domain, strategic patterns define how domains relate to each other and how teams collaborate. This article covers bounded contexts, context maps, ubiquitous language, and integration patterns. Bounded Context A bounded context is a explicit boundary within which a particular domain model applies. Within the boundary, all terms have specific meanings, and the model is internally consistent. Outside the boundary, different terms or different meanings may apply. For example, in an e-commerce system, the concept of \"Customer\" may be different in the Sales context (someone who buys) than in the Support context (someone who needs help). Each bounded context has its own version of Customer with attributes relevant to that context. Identifying bounded contexts is the most critical strategic design activity. Contexts should be aligned with business capabilities and team structures. The general principle is that one team should own one bounded context, and the context boundary should align with the team's scope of responsibility. Context Map A context map documents the relationships between bounded contexts. It shows how different contexts integrate and where translations occur. Common relationship patterns include partnership (two teams collaborate on integration), shared kernel (shared subset of the model), customer-supplier (one context serves another), and conformist (one context conforms to another's model). The context map is both a design artifact and a communication tool. It helps teams understand their dependencies and negotiate integration contracts. A well-maintained context map reveals the system's architectural landscape at a glance. Ubiquitous Language Ubiquitous language is a shared language structured around the domain model. It is used by developers, domain experts, product managers, and all team members in conversations, documentation, code, and tests. The language is precise and unambiguous within each bounded context. Developing ubiquitous language requires continuous refinement. When a team discovers that a term has different meanings for different members, they investigate and resolve the ambiguity. The domain model evolves with the language, and the language evolves with the model. Code names should match spoken language terms. Integration Patterns Strategic DDD defines several patterns for integrating bounded contexts. Anti-corruption layers protect a context from being polluted by another context's model. Separate ways allow contexts to operate completely independently. Open-host service publishes a formal API for other contexts to consume. Published language defines a shared vocabulary used for integration, often taking the form of a data interchange format or API specification. Event-driven communication between contexts uses domain events to notify other contexts of state changes without tight coupling. When to Use Strategic DDD Strategic DDD is most valuable in complex domains with multiple teams and evolving requirements. It provides the tools to decompose a large system into manageable pieces, define clear ownership, and manage integrations. For simple systems with a single team, strategic DDD may add unnecessary overhead. The key insight of strategic DDD is that a single, unified model for an entire enterprise is neither achievable nor desirable. Different contexts need different models, and the boundaries between them should be consciously designed rather than accidental. Strategic thinking about boundaries, language, and relationships is what elevates DDD from a collection of patterns to a coherent design methodology."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "DDD Strategic Design"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › DDD Strategic Design
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">DDD Strategic Design</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>DDD Strategic Design</h1>
+<br>
+<p>Strategic Domain-Driven Design addresses the high-level organization of a software system around domain boundaries. While tactical patterns guide implementation within a single domain, strategic patterns define how domains relate to each other and how teams collaborate. This article covers bounded contexts, context maps, ubiquitous language, and integration patterns.   </p>
+<p>Bounded Context   </p>
+<p>A bounded context is a explicit boundary within which a particular domain model applies. Within the boundary, all terms have specific meanings, and the model is internally consistent. Outside the boundary, different terms or different meanings may apply.   </p>
+<p>For example, in an e-commerce system, the concept of "Customer" may be different in the Sales context (someone who buys) than in the Support context (someone who needs help). Each bounded context has its own version of Customer with attributes relevant to that context.   </p>
+<p>Identifying bounded contexts is the most critical strategic design activity. Contexts should be aligned with business capabilities and team structures. The general principle is that one team should own one bounded context, and the context boundary should align with the team's scope of responsibility.   </p>
+<p>Context Map   </p>
+<p>A context map documents the relationships between bounded contexts. It shows how different contexts integrate and where translations occur. Common relationship patterns include partnership (two teams collaborate on integration), shared kernel (shared subset of the model), customer-supplier (one context serves another), and conformist (one context conforms to another's model).   </p>
+<p>The context map is both a design artifact and a communication tool. It helps teams understand their dependencies and negotiate integration contracts. A well-maintained context map reveals the system's architectural landscape at a glance.   </p>
+<p>Ubiquitous Language   </p>
+<p>Ubiquitous language is a shared language structured around the domain model. It is used by developers, domain experts, product managers, and all team members in conversations, documentation, code, and tests. The language is precise and unambiguous within each bounded context.   </p>
+<p>Developing ubiquitous language requires continuous refinement. When a team discovers that a term has different meanings for different members, they investigate and resolve the ambiguity. The domain model evolves with the language, and the language evolves with the model. Code names should match spoken language terms.   </p>
+<p>Integration Patterns   </p>
+<p>Strategic DDD defines several patterns for integrating bounded contexts. Anti-corruption layers protect a context from being polluted by another context's model. Separate ways allow contexts to operate completely independently. Open-host service publishes a formal API for other contexts to consume.   </p>
+<p>Published language defines a shared vocabulary used for integration, often taking the form of a data interchange format or API specification. Event-driven communication between contexts uses domain events to notify other contexts of state changes without tight coupling.   </p>
+<p>When to Use Strategic DDD   </p>
+<p>Strategic DDD is most valuable in complex domains with multiple teams and evolving requirements. It provides the tools to decompose a large system into manageable pieces, define clear ownership, and manage integrations. For simple systems with a single team, strategic DDD may add unnecessary overhead.   </p>
+<p>The key insight of strategic DDD is that a single, unified model for an entire enterprise is neither achievable nor desirable. Different contexts need different models, and the boundaries between them should be consciously designed rather than accidental. Strategic thinking about boundaries, language, and relationships is what elevates DDD from a collection of patterns to a coherent design methodology.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

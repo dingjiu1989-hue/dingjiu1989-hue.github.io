@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1475",
+      "wordCount": "359",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/acid-vs-base.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/acid-vs-base.html"},
+      "articleBody": "ACID vs BASE Transactions Consistency Models ACID and BASE represent opposing philosophies for database consistency. ACID guarantees strict consistency while BASE prioritizes availability. ACID Properties Atomicity, Consistency, Isolation, Durability: -- ACID transaction example BEGIN TRANSACTION; UPDATE accounts SET balance = balance - 100 WHERE account_id = 1; UPDATE accounts SET balance = balance + 100 WHERE account_id = 2; COMMIT; BASE Properties Basically Available, Soft state, Eventual consistency: class EventualConsistentLedger: def __init__(self): self.pending = [] def transfer(self, sender, recipient, amount): self.pending.append({ \"sender\": sender, \"recipient\": recipient, \"amount\": amount, \"timestamp\": time.time() }) return {\"status\": \"accepted\"} def reconcile(self): for tx in self.pending: self.apply_transaction(tx) When to Relax ACID | Requirement | ACID | BASE | |-------------|------|------| | Consistency | Strong | Eventual | | Availability | Lower | Higher | | Latency | Higher | Lower | | Use case | Financial | Analytics | Conclusion Choose ACID where correctness is critical and BASE where scale matters. Modern databases increasingly blur the line. Understand your consistency requirements and choose accordingly."
     }
     </script>
     <script type="application/ld+json">
@@ -73,295 +74,68 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">ACID vs BASE Transactions</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> The CAP Theorem</h2>
+      <div class="article-body"><h1>ACID vs BASE Transactions</h1>
 <br>
-<p>Before understanding ACID and BASE, you must understand the CAP theorem. A distributed system can guarantee at most two of three properties:</p>
+<p>Consistency Models   </p>
+<p>ACID and BASE represent opposing philosophies for database consistency. ACID guarantees strict consistency while BASE prioritizes availability.   </p>
+<p>ACID Properties   </p>
+<p>Atomicity, Consistency, Isolation, Durability:   </p>
 <br>
-<p>| Property | Meaning |</p>
-<p>|----------|---------|</p>
-<p>| Consistency (C) | Every read receives the most recent write |</p>
-<p>| Availability (A) | Every request receives a non-error response |</p>
-<p>| Partition Tolerance (P) | System continues operating despite network failures |</p>
 <br>
-<p>Since network partitions are inevitable, distributed systems must choose between CP (consistency) and AP (availability).</p>
 <br>
-<h2> ACID Transactions</h2>
+<p>    -- ACID transaction example</p>
 <br>
-<p>ACID is the traditional database transaction model used by relational databases.</p>
+<p>    BEGIN TRANSACTION;</p>
 <br>
-<h3>Atomicity</h3>
+<p>    UPDATE accounts SET balance = balance - 100 WHERE account_id = 1;</p>
 <br>
-<p>A transaction is all-or-nothing. If any part fails, the entire transaction is rolled back.</p>
+<p>    UPDATE accounts SET balance = balance + 100 WHERE account_id = 2;</p>
 <br>
-<pre><code>
-BEGIN;
-
-
-
-UPDATE accounts SET balance = balance - 100 WHERE id = 1;
-
-UPDATE accounts SET balance = balance + 100 WHERE id = 2;
-
-
-
--- If the server crashes after the first UPDATE but before the second,
-
--- the database rolls back automatically.
-
--- Both updates succeed or neither does.
-
-
-
-COMMIT;
-
-</code></pre>
+<p>    COMMIT;</p>
 <br>
-<h3>Consistency</h3>
 <br>
-<p>A transaction brings the database from one valid state to another. Constraints, triggers, and cascades ensure data integrity.</p>
 <br>
-<pre><code>
-ALTER TABLE orders ADD CONSTRAINT chk_positive_amount
-
-    CHECK (amount &gt; 0);
-
-
-
--- This will fail:
-
-INSERT INTO orders (amount) VALUES (-50);  -- Constraint violation
-
-</code></pre>
 <br>
-<h3>Isolation</h3>
+<p>BASE Properties   </p>
+<p>Basically Available, Soft state, Eventual consistency:   </p>
 <br>
-<p>Concurrent transactions do not interfere with each other. SQL defines four isolation levels:</p>
 <br>
-<p>| Isolation Level | Dirty Read | Non-Repeatable Read | Phantom Read |</p>
-<p>|-----------------|------------|--------------------|--------------|</p>
-<p>| Read Uncommitted | Possible | Possible | Possible |</p>
-<p>| Read Committed | Prevented | Possible | Possible |</p>
-<p>| Repeatable Read | Prevented | Prevented | Possible |</p>
-<p>| Serializable | Prevented | Prevented | Prevented |</p>
 <br>
-<pre><code>
--- Serializable isolation prevents all anomalies
-
-SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
-
-BEGIN;
-
-SELECT * FROM products WHERE stock &gt; 0;
-
--- Other transactions cannot modify products until this one commits
-
-COMMIT;
-
-</code></pre>
+<p>    class EventualConsistentLedger:</p>
 <br>
-<h3>Durability</h3>
+<p>        def __init__(self):</p>
 <br>
-<p>Once a transaction is committed, it survives system failures. WAL (Write-Ahead Logging) ensures durability:</p>
+<p>            self.pending = []</p>
 <br>
-<pre><code>
--- PostgreSQL&#x27;s WAL ensures durability
-
--- Even if power fails, committed transactions are recovered
-
-SHOW wal_level;  -- replica or logical
-
-</code></pre>
 <br>
-<h2> BASE Transactions</h2>
 <br>
-<p>BASE is the transaction model used by many NoSQL databases. It stands for:</p>
+<p>        def transfer(self, sender, recipient, amount):</p>
 <br>
-<li>**Basically Available**: The system guarantees availability (per CAP).</li>
-<li>**Soft State**: The system state may change over time without input.</li>
-<li>**Eventual Consistency**: Given enough time, all replicas will converge.</li>
+<p>            self.pending.append({</p>
 <br>
-<h3>Eventual Consistency in Practice</h3>
+<p>                "sender": sender, "recipient": recipient,</p>
 <br>
-<pre><code>
-// DynamoDB: eventually consistent reads (default)
-
-const { Item } = await docClient.get({
-
-    TableName: &#x27;users&#x27;,
-
-    Key: { id: &#x27;123&#x27; },
-
-    ConsistentRead: false  // Eventual consistency
-
-});
-
-
-
-// Strongly consistent read (higher latency, lower availability)
-
-const { Item } = await docClient.get({
-
-    TableName: &#x27;users&#x27;,
-
-    Key: { id: &#x27;123&#x27; },
-
-    ConsistentRead: true  // Strong consistency
-
-});
-
-</code></pre>
+<p>                "amount": amount, "timestamp": time.time()</p>
 <br>
-<h3>Handling Eventual Consistency</h3>
+<p>            })</p>
 <br>
-<pre><code>
-def create_order(user_id, product_id):
-
-    &quot;&quot;&quot;Handle eventual consistency in application code.&quot;&quot;&quot;
-
-
-
-    # Write the order (eventually consistent)
-
-    orders.insert_one({
-
-        &quot;user_id&quot;: user_id,
-
-        &quot;product_id&quot;: product_id,
-
-        &quot;status&quot;: &quot;pending&quot;,
-
-        &quot;created_at&quot;: datetime.utcnow()
-
-    })
-
-
-
-    # For immediate read-after-write, query by timestamp
-
-    def get_recent_order():
-
-        return orders.find_one({
-
-            &quot;user_id&quot;: user_id,
-
-            &quot;product_id&quot;: product_id,
-
-            &quot;created_at&quot;: {&quot;$gte&quot;: datetime.utcnow() - timedelta(seconds=1)}
-
-        })
-
-</code></pre>
+<p>            return {"status": "accepted"}</p>
 <br>
-<h2> ACID vs BASE Comparison</h2>
 <br>
-<p>| Property | ACID | BASE |</p>
-<p>|----------|------|------|</p>
-<p>| Consistency model | Strong | Eventual |</p>
-<p>| Transaction scope | Single node | Distributed |</p>
-<p>| Write availability | Lower | Higher |</p>
-<p>| Read performance | Consistent reads | Faster eventual reads |</p>
-<p>| Schema flexibility | Rigid | Flexible |</p>
-<p>| Use case | Financial, inventory | Social, analytics, IoT |</p>
 <br>
-<h2> When to Use Each</h2>
+<p>        def reconcile(self):</p>
 <br>
-<h3>Choose ACID When</h3>
+<p>            for tx in self.pending:</p>
 <br>
-<pre><code>
--- Financial transactions: every cent must be accounted for
-
-BEGIN;
-
-UPDATE accounts SET balance = balance - 500 WHERE account_id = &#x27;A&#x27;;
-
-UPDATE accounts SET balance = balance + 500 WHERE account_id = &#x27;B&#x27;;
-
--- If this fails, no money is lost
-
-COMMIT;
-
-</code></pre>
+<p>                self.apply_transaction(tx)</p>
 <br>
-<li>Banking and payments</li>
-<li>Inventory management (avoid overselling)</li>
-<li>Booking systems (double-booking prevention)</li>
-<li>Any system where data integrity is critical</li>
 <br>
-<h3>Choose BASE When</h3>
 <br>
-<pre><code>
-// Social media: eventual consistency is acceptable
-
-// A like that takes 1 second to propagate is fine
-
-async function likePost(postId, userId) {
-
-    await redis.incr(`post:${postId}:likes`);  // Fast, eventual
-
-    await kafka.produce(&#x27;like-events&#x27;, { postId, userId });  // Async processing
-
-}
-
-</code></pre>
 <br>
-<li>Social media feeds</li>
-<li>Analytics and logging</li>
-<li>IoT sensor data</li>
-<li>Content delivery networks</li>
-<li>Shopping carts (session data)</li>
-<br>
-<h2> Hybrid Approaches</h2>
-<br>
-<p>Modern databases increasingly support both models:</p>
-<br>
-<p>| Database | Default | ACID Available |</p>
-<p>|----------|---------|----------------|</p>
-<p>| MongoDB | BASE | ACID (multi-document transactions since 4.0) |</p>
-<p>| PostgreSQL | ACID | ACID |</p>
-<p>| Cassandra | BASE | Lightweight transactions (linearizable) |</p>
-<p>| CockroachDB | ACID (serializable) | ACID |</p>
-<p>| DynamoDB | BASE | ACID (transactions since 2018) |</p>
-<br>
-<pre><code>
-// MongoDB multi-document ACID transaction
-
-const session = mongoose.startSession();
-
-session.startTransaction();
-
-
-
-try {
-
-    await Order.create([orderData], { session });
-
-    await Product.updateOne(
-
-        { _id: productId },
-
-        { $inc: { stock: -1 } },
-
-        { session }
-
-    );
-
-    await session.commitTransaction();
-
-} catch (error) {
-
-    await session.abortTransaction();
-
-} finally {
-
-    session.endSession();
-
-}
-
-</code></pre>
-<br>
-<h2> Summary</h2>
-<br>
-<p>ACID provides strong consistency guarantees at the cost of availability under partition, making it essential for financial transactions and inventory systems. BASE prioritizes availability and performance with eventual consistency, suitable for social media, analytics, and IoT. Modern databases are blurring the lines: use ACID for critical data paths and BASE for high-throughput, non-critical operations, or choose a database that supports both modes for different use cases.</p></div>
+<p>When to Relax ACID   </p>
+<p>| Requirement | ACID | BASE | |-------------|------|------| | Consistency | Strong | Eventual | | Availability | Lower | Higher | | Latency | Higher | Lower | | Use case | Financial | Analytics |   </p>
+<p>Conclusion   </p>
+<p>Choose ACID where correctness is critical and BASE where scale matters. Modern databases increasingly blur the line. Understand your consistency requirements and choose accordingly.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

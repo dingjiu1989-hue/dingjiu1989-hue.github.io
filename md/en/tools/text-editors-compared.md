@@ -6,182 +6,345 @@ board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/text-editors-compared.html
 ---
 
+# Text Editors Compared
+
 The text editor is a developer's most personal tool. VS Code dominates the market, but NeoVim, Zed, and JetBrains IDEs each have passionate followings. This comparison helps you choose based on your workflow and priorities.
 
-## VS Code
+  
+
+
+##  VS Code
+
+  
+
 
 Microsoft's VS Code is the most widely used editor in 2026, with over 70% market share among developers.
 
+  
+
+
 **Strengths:**
-- Vast extension ecosystem (40,000+ extensions).
-- Excellent TypeScript/JavaScript support out of the box.
-- Built-in terminal, debugger, and Git integration.
-- Remote Development extensions (SSH, Containers, WSL).
-- GitHub Copilot integration.
-- Settings Sync across devices.
+
+* Vast extension ecosystem (40,000+ extensions).
+* Excellent TypeScript/JavaScript support out of the box.
+* Built-in terminal, debugger, and Git integration.
+* Remote Development extensions (SSH, Containers, WSL).
+* GitHub Copilot integration.
+* Settings Sync across devices.
+  
+
 
 **Weaknesses:**
-- Can be resource-heavy (memory usage often exceeds 500MB).
-- Startup time is slow compared to native editors.
-- Telemetry concerns (though most can be disabled).
-- Extension quality varies significantly.
 
-```json
-{
-  "editor.fontFamily": "'JetBrains Mono', 'Fira Code', monospace",
-  "editor.fontLigatures": true,
-  "editor.fontSize": 14,
-  "editor.formatOnSave": true,
-  "editor.minimap.enabled": false,
-  "workbench.startupEditor": "none",
-  "files.autoSave": "onFocusChange"
-}
-```
+* Can be resource-heavy (memory usage often exceeds 500MB).
+* Startup time is slow compared to native editors.
+* Telemetry concerns (though most can be disabled).
+* Extension quality varies significantly.
+  
+
+    
+    
+    {
+    
+      "editor.fontFamily": "'JetBrains Mono', 'Fira Code', monospace",
+    
+      "editor.fontLigatures": true,
+    
+      "editor.fontSize": 14,
+    
+      "editor.formatOnSave": true,
+    
+      "editor.minimap.enabled": false,
+    
+      "workbench.startupEditor": "none",
+    
+      "files.autoSave": "onFocusChange"
+    
+    }
+    
+    
+
+  
+
 
 **Best for**: General-purpose development, TypeScript/React, remote development, most teams.
 
-## NeoVim
+  
+
+
+##  NeoVim
+
+  
+
 
 NeoVim is a modern fork of Vim with a vibrant plugin ecosystem and Lua-based configuration.
 
+  
+
+
 **Strengths:**
-- Extremely fast and lightweight.
-- Modal editing (efficient for text manipulation).
-- Lua configuration (more accessible than VimScript).
-- LSP support via `nvim-lspconfig`.
-- Treesitter for better syntax highlighting.
-- Active plugin community.
+
+* Extremely fast and lightweight.
+* Modal editing (efficient for text manipulation).
+* Lua configuration (more accessible than VimScript).
+* LSP support via `nvim-lspconfig`.
+* Treesitter for better syntax highlighting.
+* Active plugin community.
+  
+
 
 **Weaknesses:**
-- Steep learning curve (modal editing is initially slower).
-- Configuration requires effort (no GUI settings).
-- Plugins can conflict or break on updates.
-- No built-in debugger UI.
 
-```lua
--- init.lua (modern NeoVim configuration)
-local lspconfig = require('lspconfig')
+* Steep learning curve (modal editing is initially slower).
+* Configuration requires effort (no GUI settings).
+* Plugins can conflict or break on updates.
+* No built-in debugger UI.
+  
 
--- LSP setup
-lspconfig.ts_ls.setup({
-  on_attach = function(client, bufnr)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover)
-  end
-})
+    
+    
+    -- init.lua (modern NeoVim configuration)
+    
+    local lspconfig = require('lspconfig')
+    
+    
+    
+    -- LSP setup
+    
+    lspconfig.ts_ls.setup({
+    
+      on_attach = function(client, bufnr)
+    
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
+    
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+    
+      end
+    
+    })
+    
+    
+    
+    -- Plugin manager (lazy.nvim)
+    
+    require('lazy').setup({
+    
+      'folke/tokyonight.nvim',
+    
+      'nvim-treesitter/nvim-treesitter',
+    
+      'williamboman/mason.nvim',
+    
+      {
+    
+        'nvim-telescope/telescope.nvim',
+    
+        dependencies = { 'nvim-lua/plenary.nvim' }
+    
+      }
+    
+    })
+    
+    
 
--- Plugin manager (lazy.nvim)
-require('lazy').setup({
-  'folke/tokyonight.nvim',
-  'nvim-treesitter/nvim-treesitter',
-  'williamboman/mason.nvim',
-  {
-    'nvim-telescope/telescope.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' }
-  }
-})
-```
+  
+
 
 **Plugins Needed:**
 
+  
+
+
 | Feature | Plugin |
+
 |---------|--------|
+
 | LSP | nvim-lspconfig + mason.nvim |
+
 | Autocomplete | nvim-cmp |
+
 | File explorer | nvim-tree or oil.nvim |
+
 | Fuzzy finder | telescope.nvim |
+
 | Git integration | gitsigns.nvim + fugitive |
+
 | Status line | lualine.nvim |
+
+  
+
 
 **Best for**: Terminal-focused developers, keyboard efficiency enthusiasts, users who want maximum customization.
 
-## Zed
+  
+
+
+##  Zed
+
+  
+
 
 Zed is a new editor built in Rust with GPU-accelerated rendering. It was created by the original Atom team.
 
+  
+
+
 **Strengths:**
-- Extremely fast startup and rendering.
-- GPU-accelerated UI (60fps scrolling).
-- Excellent collaboration features built-in.
-- LSP integration out of the box.
-- Vim mode built-in.
-- Low memory footprint.
+
+* Extremely fast startup and rendering.
+* GPU-accelerated UI (60fps scrolling).
+* Excellent collaboration features built-in.
+* LSP integration out of the box.
+* Vim mode built-in.
+* Low memory footprint.
+  
+
 
 **Weaknesses:**
-- Newer, smaller ecosystem and community.
-- Limited extension availability.
-- Only available on macOS and Linux (alpha).
-- Fewer themes and customization options.
 
-```json
-// Zed settings.json
-{
-  "theme": "One Dark",
-  "font_family": "JetBrains Mono",
-  "font_size": 14,
-  "soft_wrap": "editor_width",
-  "vim_mode": true,
-  "tab_size": 2,
-  "telemetry": {
-    "diagnostics": false,
-    "metrics": false
-  },
-  "lsp": {
-    "typescript-language-server": {},
-    "rust-analyzer": {}
-  }
-}
-```
+* Newer, smaller ecosystem and community.
+* Limited extension availability.
+* Only available on macOS and Linux (alpha).
+* Fewer themes and customization options.
+  
+
+    
+    
+    // Zed settings.json
+    
+    {
+    
+      "theme": "One Dark",
+    
+      "font_family": "JetBrains Mono",
+    
+      "font_size": 14,
+    
+      "soft_wrap": "editor_width",
+    
+      "vim_mode": true,
+    
+      "tab_size": 2,
+    
+      "telemetry": {
+    
+        "diagnostics": false,
+    
+        "metrics": false
+    
+      },
+    
+      "lsp": {
+    
+        "typescript-language-server": {},
+    
+        "rust-analyzer": {}
+    
+      }
+    
+    }
+    
+    
+
+  
+
 
 **Best for**: Developers who want a fast, modern editor with built-in collaboration. Early adopters.
 
-## JetBrains IDEs
+  
+
+
+##  JetBrains IDEs
+
+  
+
 
 JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLand) with deep language understanding.
 
+  
+
+
 **Strengths:**
-- Best-in-class refactoring tools.
-- Deep framework support (Spring, React, Django).
-- Excellent debugger with visual features.
-- Database tools built-in.
-- VCS integration with visual diff.
-- Static analysis catches errors before runtime.
+
+* Best-in-class refactoring tools.
+* Deep framework support (Spring, React, Django).
+* Excellent debugger with visual features.
+* Database tools built-in.
+* VCS integration with visual diff.
+* Static analysis catches errors before runtime.
+  
+
 
 **Weaknesses:**
-- Heavy resource usage (often uses 2GB+ RAM).
-- Slower startup than editors.
-- Paid licenses ($249/year for all tools).
-- Different IDE per language.
+
+* Heavy resource usage (often uses 2GB+ RAM).
+* Slower startup than editors.
+* Paid licenses ($249/year for all tools).
+* Different IDE per language.
+  
+
 
 **Best for**: Enterprise Java/Kotlin development, teams that want the best refactoring and debugging tools.
 
-## Performance Comparison
+  
+
+
+##  Performance Comparison
+
+  
+
 
 | Editor | Startup Time | Memory (idle) | Memory (10 files) | Binary Size |
+
 |--------|-------------|---------------|-------------------|-------------|
+
 | VS Code | 3-5s | 250MB | 400MB | ~300MB |
+
 | NeoVim | <0.5s | 30MB | 60MB | ~15MB |
+
 | Zed | <0.5s | 80MB | 150MB | ~50MB |
+
 | JetBrains | 10-20s | 600MB | 1.5GB | ~800MB |
 
-## Configuration Comparison
+  
+
+
+##  Configuration Comparison
+
+  
+
 
 | Aspect | VS Code | NeoVim | Zed | JetBrains |
+
 |--------|---------|--------|-----|-------------|
+
 | Config format | JSON (settings.json) | Lua (init.lua) | JSON (settings.json) | GUI + XML |
+
 | Learning curve | Low | High (Vim) | Low-Medium | Low |
+
 | Customization | High | Maximum | Medium | High |
+
 | Reproducible config | Via settings sync | Yes (Git repo) | Limited | Via IDE settings |
 
-## Recommendations
+  
 
-- **New developers**: Start with VS Code (lowest barrier, largest community).
-- **Keyboard efficiency enthusiasts**: Invest time in NeoVim (highest long-term productivity for terminal work).
-- **Performance-focused**: Try Zed (native Rust, GPU-accelerated).
-- **Enterprise Java/C#/Kotlin**: JetBrains (best language-specific tooling).
-- **Full-stack web**: VS Code or JetBrains WebStorm.
-- **Rust developers**: Zed has excellent Rust support; NeoVim + rust-analyzer also works well.
 
-## Summary
+##  Recommendations
+
+  
+
+* **New developers**: Start with VS Code (lowest barrier, largest community).
+* **Keyboard efficiency enthusiasts**: Invest time in NeoVim (highest long-term productivity for terminal work).
+* **Performance-focused**: Try Zed (native Rust, GPU-accelerated).
+* **Enterprise Java/C#/Kotlin**: JetBrains (best language-specific tooling).
+* **Full-stack web**: VS Code or JetBrains WebStorm.
+* **Rust developers**: Zed has excellent Rust support; NeoVim + rust-analyzer also works well.
+  
+
+
+##  Summary
+
+  
+
 
 There is no single best editor. VS Code offers the best ecosystem and accessibility. NeoVim provides unmatched efficiency for terminal-based workflows. Zed delivers exceptional performance with modern architecture. JetBrains IDEs offer the deepest language-specific features. Many developers use multiple editors: VS Code for most work, NeoVim for quick terminal edits, and a JetBrains IDE for specific language requirements. Choose based on your primary language, performance needs, and willingness to invest in configuration.

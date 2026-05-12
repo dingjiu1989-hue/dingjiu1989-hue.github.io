@@ -133,6 +133,4 @@ Count files in directory| `ls -1 | wc -l`
 See disk usage of all mounts| `df -h`  
 Check if a port is open| `nc -zv host 443`  
 Watch command output every 2s| `watch -n 2 command`  
-Create alias permanently| `echo 'alias ll="ls -la"' >> ~/.bashrc`  
-  
-**See also:** [Git Commands Cheat Sheet: The Only Reference You Need](</en/tech/git-cheatsheet.html>), [30 Free and Useful APIs Every Developer Should Know](</en/tools/free-api-collection.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>).
+Create alias permanently| `echo 'alias ll="ls -la"' >> ~/.bashrc`

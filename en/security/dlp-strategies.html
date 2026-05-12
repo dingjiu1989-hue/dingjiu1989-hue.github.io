@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="dlp-strategies">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Data Loss Prevention Strategies">
+    <meta property="og:description" content="Implementing DLP across network, endpoint, and cloud with effective policy design and incident response.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/dlp-strategies.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Data Loss Prevention Strategies">
+    <meta name="twitter:description" content="Implementing DLP across network, endpoint, and cloud with effective policy design and incident response.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Data Loss Prevention Strategies — SourceHub</title>
+    <meta name="description" content="Implementing DLP across network, endpoint, and cloud with effective policy design and incident response.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/dlp-strategies.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/dlp-strategies.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Data Loss Prevention Strategies",
+      "description": "Implementing DLP across network, endpoint, and cloud with effective policy design and incident response.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1112",
+      "keywords": "Security, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/dlp-strategies.html"},
+      "articleBody": "Data Loss Prevention Strategies DLP Overview Data Loss Prevention (DLP) monitors and controls data in use, in motion, and at rest. A comprehensive DLP strategy covers three domains. Network DLP Inspect traffic for sensitive data leaving the network: from scapy.all import * import re def packet_inspector(packet): if packet.haslayer(Raw): payload = str(packet[Raw].load) # Check for credit card patterns if re.search(r\"\\b(?:\\d[ -]*?){13,16}\\b\", payload): print(f\"[ALERT] Potential CC leak from {packet[IP].src}\") # Trigger block or alert return False # Check for API keys (length > 20, high entropy) if len(payload) > 20 and has_high_entropy(payload): print(f\"[ALERT] High-entropy data from {packet[IP].src}\") return False return True def has_high_entropy(data, threshold=4.5): from collections import Counter freq = Counter(data) entropy = -sum((c/len(data)) * math.log2(c/len(data)) for c in freq.values()) return entropy > threshold Endpoint DLP Control data movement on endpoints: # endpoint-dlp-rules.yaml rules: - name: Block USB transfer trigger: usb_device_connect action: block conditions: - device_type: mass_storage - device_not_in_allowlist: true user_notification: \"USB mass storage is disabled\" - name: Monitor print of classified docs trigger: print_job action: alert conditions: - document_classification: [\"confidential\", \"restricted\"] notify: - security_team - manager Cloud DLP Protect data in SaaS and IaaS environments: # Google Cloud DLP inspection job resource \"google_data_loss_prevention_job_trigger\" \"bigquery_scan\" { parent = \"projects/my-project/locations/us\" triggers { schedule { recurrence_period_duration = \"86400s\" } } inspect_job { inspect_template_name = \"dlp-sensitive-data-scanner\" storage_config { big_query_options { table_reference { project_id = \"my-project\" dataset_id = \"customer_data\" table_id = \"users\" } } } actions { save_findings { output_config { table { project_id = \"my-project\" dataset_id = \"dlp_findings\" } } } } } } Policy Design Principles Effective DLP policies follow these guidelines: * **Start in monitor mode**: Log without blocking to understand data flows 2\\. **Use exceptions**: Provide secure channels for legitimate transfers 3\\. **Tiered responses**: Alert, warn, then block progressively 4\\. **User education**: Show policy rationale when blocking def dlp_decision(data, context): if context[\"env\"] == \"monitor\": log_finding(data, context) return \"allow\" if data.sensitivity == \"restricted\": if context[\"destination\"] == \"approved_bucket\": return \"allow\" elif context[\"user_justification\"]: log_with_justification(data, context) return \"allow_with_audit\" else: return \"block\" Incident Response Integration DLP alerts should feed into your incident response pipeline: -- Find users triggering most DLP alerts SELECT user_email, COUNT(*) as alert_count, ARRAY_AGG(DISTINCT rule_name) as triggered_rules FROM dlp_alerts WHERE created_at > NOW() - INTERVAL '30 days' GROUP BY user_email ORDER BY alert_count DESC LIMIT 10; Conclusion Effective DLP requires coverage across network, endpoint, and cloud domains. Design policies iteratively, start with monitoring, layer in blocking controls, and feed findings into your incident response workflow. The goal is to prevent data loss without blocking productivity."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Data Loss Prevention Strategies"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Data Loss Prevention Strategies
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Data Loss Prevention Strategies</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Data Loss Prevention Strategies</h1>
+<br>
+<p>DLP Overview   </p>
+<p>Data Loss Prevention (DLP) monitors and controls data in use, in motion, and at rest. A comprehensive DLP strategy covers three domains.   </p>
+<p>Network DLP   </p>
+<p>Inspect traffic for sensitive data leaving the network:   </p>
+<br>
+<br>
+<br>
+<p>    from scapy.all import *</p>
+<br>
+<p>    import re</p>
+<br>
+<br>
+<br>
+<p>    def packet_inspector(packet):</p>
+<br>
+<p>        if packet.haslayer(Raw):</p>
+<br>
+<p>            payload = str(packet[Raw].load)</p>
+<br>
+<br>
+<br>
+<p>            # Check for credit card patterns</p>
+<br>
+<p>            if re.search(r"\b(?:\d[ -]*?){13,16}\b", payload):</p>
+<br>
+<p>                print(f"[ALERT] Potential CC leak from {packet[IP].src}")</p>
+<br>
+<p>                # Trigger block or alert</p>
+<br>
+<p>                return False</p>
+<br>
+<br>
+<br>
+<p>            # Check for API keys (length > 20, high entropy)</p>
+<br>
+<p>            if len(payload) > 20 and has_high_entropy(payload):</p>
+<br>
+<p>                print(f"[ALERT] High-entropy data from {packet[IP].src}")</p>
+<br>
+<p>                return False</p>
+<br>
+<br>
+<br>
+<p>        return True</p>
+<br>
+<br>
+<br>
+<p>    def has_high_entropy(data, threshold=4.5):</p>
+<br>
+<p>        from collections import Counter</p>
+<br>
+<p>        freq = Counter(data)</p>
+<br>
+<p>        entropy = -sum((c/len(data)) * math.log2(c/len(data)) for c in freq.values())</p>
+<br>
+<p>        return entropy > threshold</p>
+<br>
+<br>
+<br>
+<br>
+<p>Endpoint DLP   </p>
+<p>Control data movement on endpoints:   </p>
+<br>
+<br>
+<br>
+<p>    # endpoint-dlp-rules.yaml</p>
+<br>
+<p>    rules:</p>
+<br>
+<p>      - name: Block USB transfer</p>
+<br>
+<p>        trigger: usb_device_connect</p>
+<br>
+<p>        action: block</p>
+<br>
+<p>        conditions:</p>
+<br>
+<p>          - device_type: mass_storage</p>
+<br>
+<p>          - device_not_in_allowlist: true</p>
+<br>
+<p>        user_notification: "USB mass storage is disabled"</p>
+<br>
+<br>
+<br>
+<p>      - name: Monitor print of classified docs</p>
+<br>
+<p>        trigger: print_job</p>
+<br>
+<p>        action: alert</p>
+<br>
+<p>        conditions:</p>
+<br>
+<p>          - document_classification: ["confidential", "restricted"]</p>
+<br>
+<p>        notify:</p>
+<br>
+<p>          - security_team</p>
+<br>
+<p>          - manager</p>
+<br>
+<br>
+<br>
+<br>
+<p>Cloud DLP   </p>
+<p>Protect data in SaaS and IaaS environments:   </p>
+<br>
+<br>
+<br>
+<p>    # Google Cloud DLP inspection job</p>
+<br>
+<p>    resource "google_data_loss_prevention_job_trigger" "bigquery_scan" {</p>
+<br>
+<p>      parent = "projects/my-project/locations/us"</p>
+<br>
+<br>
+<br>
+<p>      triggers {</p>
+<br>
+<p>        schedule {</p>
+<br>
+<p>          recurrence_period_duration = "86400s"</p>
+<br>
+<p>        }</p>
+<br>
+<p>      }</p>
+<br>
+<br>
+<br>
+<p>      inspect_job {</p>
+<br>
+<p>        inspect_template_name = "dlp-sensitive-data-scanner"</p>
+<br>
+<p>        storage_config {</p>
+<br>
+<p>          big_query_options {</p>
+<br>
+<p>            table_reference {</p>
+<br>
+<p>              project_id = "my-project"</p>
+<br>
+<p>              dataset_id = "customer_data"</p>
+<br>
+<p>              table_id   = "users"</p>
+<br>
+<p>            }</p>
+<br>
+<p>          }</p>
+<br>
+<p>        }</p>
+<br>
+<p>        actions {</p>
+<br>
+<p>          save_findings {</p>
+<br>
+<p>            output_config {</p>
+<br>
+<p>              table {</p>
+<br>
+<p>                project_id = "my-project"</p>
+<br>
+<p>                dataset_id = "dlp_findings"</p>
+<br>
+<p>              }</p>
+<br>
+<p>            }</p>
+<br>
+<p>          }</p>
+<br>
+<p>        }</p>
+<br>
+<p>      }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<p>Policy Design Principles   </p>
+<p>Effective DLP policies follow these guidelines:   </p>
+<br>
+<p>* **Start in monitor mode**: Log without blocking to understand data flows</p>
+<p>2\. **Use exceptions**: Provide secure channels for legitimate transfers 3\. **Tiered responses**: Alert, warn, then block progressively 4\. **User education**: Show policy rationale when blocking   </p>
+<br>
+<br>
+<br>
+<p>    def dlp_decision(data, context):</p>
+<br>
+<p>        if context["env"] == "monitor":</p>
+<br>
+<p>            log_finding(data, context)</p>
+<br>
+<p>            return "allow"</p>
+<br>
+<br>
+<br>
+<p>        if data.sensitivity == "restricted":</p>
+<br>
+<p>            if context["destination"] == "approved_bucket":</p>
+<br>
+<p>                return "allow"</p>
+<br>
+<p>            elif context["user_justification"]:</p>
+<br>
+<p>                log_with_justification(data, context)</p>
+<br>
+<p>                return "allow_with_audit"</p>
+<br>
+<p>            else:</p>
+<br>
+<p>                return "block"</p>
+<br>
+<br>
+<br>
+<br>
+<p>Incident Response Integration   </p>
+<p>DLP alerts should feed into your incident response pipeline:   </p>
+<br>
+<br>
+<br>
+<p>    -- Find users triggering most DLP alerts</p>
+<br>
+<p>    SELECT user_email, COUNT(*) as alert_count,</p>
+<br>
+<p>           ARRAY_AGG(DISTINCT rule_name) as triggered_rules</p>
+<br>
+<p>    FROM dlp_alerts</p>
+<br>
+<p>    WHERE created_at > NOW() - INTERVAL '30 days'</p>
+<br>
+<p>    GROUP BY user_email</p>
+<br>
+<p>    ORDER BY alert_count DESC</p>
+<br>
+<p>    LIMIT 10;</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
+<p>Effective DLP requires coverage across network, endpoint, and cloud domains. Design policies iteratively, start with monitoring, layer in blocking controls, and feed findings into your incident response workflow. The goal is to prevent data loss without blocking productivity.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -13358,6 +13358,12 @@ def make_article_html(art, board_id, board_name, all_posts):
         sameas_entries = ',\n    '.join(f'"{u}"' for u in sameas_urls)
         sameas_json = f',\n      "sameAs": [\n    {sameas_entries}\n      ]'
 
+    # articleBody: plain text for AI crawlers
+    body_html_all = get_body(slug, board_id)
+    body_text = re.sub(r'<[^>]+>', '', body_html_all)
+    body_text = re.sub(r'\s+', ' ', body_text).strip()
+    body_json = json.dumps(body_text[:50000])
+
     # FAQ Schema for articles that have Q&A sections
     faq_schema = ''
     faq_data = FAQS.get(slug)
@@ -13437,7 +13443,8 @@ def make_article_html(art, board_id, board_name, all_posts):
       "keywords": "{tags_str}",
       "author": {{"@type": "Person", "name": "SourceHub"}},
       "publisher": {{"@type": "Organization", "name": "SourceHub", "logo": {{"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}}}},
-      "mainEntityOfPage": {{"@type": "WebPage", "@id": "{art_url}"}}{sameas_json}
+      "mainEntityOfPage": {{"@type": "WebPage", "@id": "{art_url}"}}{sameas_json},
+      "articleBody": {body_json}
     }}
     </script>
     <script type="application/ld+json">

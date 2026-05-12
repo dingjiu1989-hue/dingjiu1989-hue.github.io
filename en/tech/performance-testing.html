@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="performance-testing">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Performance Testing">
+    <meta property="og:description" content="Learn performance testing with k6, Locust, and Gatling: test design, results interpretation, and practical strategies">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/performance-testing.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Performance Testing">
+    <meta name="twitter:description" content="Learn performance testing with k6, Locust, and Gatling: test design, results interpretation, and practical strategies">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Performance Testing — SourceHub</title>
+    <meta name="description" content="Learn performance testing with k6, Locust, and Gatling: test design, results interpretation, and practical strategies">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/performance-testing.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/performance-testing.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Performance Testing",
+      "description": "Learn performance testing with k6, Locust, and Gatling: test design, results interpretation, and practical strategies",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1184",
+      "keywords": "Technology, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/performance-testing.html"},
+      "articleBody": "Performance Testing Performance testing ensures that applications meet speed, scalability, and stability requirements under expected and peak loads. This article explores the leading performance testing tools\u2014k6, Locust, and Gatling\u2014along with test design principles and results interpretation. k6 k6, developed by Grafana Labs, is a modern load testing tool built on JavaScript. Tests are written as JavaScript scripts that define HTTP requests, checks, and thresholds. k6 compiles the JavaScript to Go for efficient execution. k6's key features include a built-in metrics system, thresholds that automatically fail tests when performance degrades, and integration with Grafana dashboards. Tests can be written in a familiar language (JavaScript), and the tool can generate significant load from a single instance. A typical k6 test defines virtual users (VUs), test duration, and HTTP scenarios. k6 reports metrics including request rate, response time percentiles, error rate, and the number of virtual users over time. Thresholds like `http_req_duration{p(95)} Locust Locust is a Python-based load testing tool. Unlike k6 and Gatling, Locust tests are defined by writing Python code that describes user behavior. This makes Locust particularly accessible for teams already using Python. Locust's architecture uses a master-worker model. The master coordinates test execution, and workers generate load. Locust supports distributed load generation across multiple machines, scaling to very high concurrency. Locust's web UI provides real-time test monitoring, including request rates, response times, and the number of running users. Tests can be started, stopped, and modified through the UI. This makes Locust suitable for exploratory load testing where test parameters may be adjusted during execution. Gatling Gatling is a JVM-based load testing tool with a Scala DSL. It uses an asynchronous, non-blocking architecture that generates high load efficiently. Gatling provides a comprehensive HTML report with detailed metrics, charts, and response time distributions. Gatling's scenario definition is based on a \"simulation\" describing virtual user journeys. Each simulation defines user populations, injection profiles (how users ramp up), and assertions that define pass/fail criteria. Gatling's reports include response time percentiles, request rate over time, active users, and error distributions. Gatling's Recorder allows recording browser interactions as test scenarios, though recorded scripts typically require cleanup and parameterization. Gatling also supports detailed assertions for automated CI/CD integration. Test Design Good performance tests follow a structured approach. Start by defining performance requirements\u2014expected throughput, acceptable response times, and peak load conditions. Design test scenarios that reflect realistic user behavior, not just synthetic endpoints. Consider different types of tests. Load tests verify performance under expected load. Stress tests find the system's breaking point. Soak tests verify stability under sustained load. Spike tests verify behavior under sudden load increases. Each test type reveals different aspects of system performance. Parameterization is essential. Tests should use realistic data distributions: different users accessing different resources, realistic mix of read and write operations, and realistic think times between actions. Using the same data for all requests creates cache optimization that does not reflect production behavior. Results Interpretation Response time percentiles (p50, p95, p99) are more informative than averages. Averages hide the experience of slow requests. If 5% of requests take 5 seconds, the average may still look acceptable, but users experiencing those requests are unhappy. The relationship between load and response time is revealing. Response times that increase linearly with load indicate adequate capacity. Response times that suddenly increase at a certain load level indicate a bottleneck being reached\u2014this is the knee point in the performance curve. Error rate trends matter. Errors during load tests indicate capacity issues, configuration problems, or application bugs. The error rate should remain near zero during load tests. Increasing errors as load increases often indicates resource exhaustion. CI/CD Integration Performance tests should be integrated into CI/CD pipelines. Not every commit needs a full performance test, but critical changes and pre-release builds should be tested. Tools like k6 and Gatling have built-in support for automated thresholds and CI integration. A common approach is to run baseline performance tests on every commit to a performance branch and full tests on release candidates. Thresholds provide automated pass/fail criteria. Historical test results help detect performance regressions before they reach production. Performance testing is an ongoing activity, not a one-time effort. As the system evolves, performance characteristics change. Regular testing with consistent methodology provides the data needed to maintain performance and identify degradation early."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Performance Testing"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Performance Testing
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Performance Testing</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Performance Testing</h1>
+<br>
+<p>Performance testing ensures that applications meet speed, scalability, and stability requirements under expected and peak loads. This article explores the leading performance testing tools—k6, Locust, and Gatling—along with test design principles and results interpretation.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  k6</h2>
+<br>
+<br>
+<br>
+<br>
+<p>k6, developed by Grafana Labs, is a modern load testing tool built on JavaScript. Tests are written as JavaScript scripts that define HTTP requests, checks, and thresholds. k6 compiles the JavaScript to Go for efficient execution.</p>
+<br>
+<br>
+<br>
+<br>
+<p>k6's key features include a built-in metrics system, thresholds that automatically fail tests when performance degrades, and integration with Grafana dashboards. Tests can be written in a familiar language (JavaScript), and the tool can generate significant load from a single instance.</p>
+<br>
+<br>
+<br>
+<br>
+<p>A typical k6 test defines virtual users (VUs), test duration, and HTTP scenarios. k6 reports metrics including request rate, response time percentiles, error rate, and the number of virtual users over time. Thresholds like `http_req_duration{p(95)} < 500ms` automatically fail the test if the 95th percentile response time exceeds 500ms.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Locust</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Locust is a Python-based load testing tool. Unlike k6 and Gatling, Locust tests are defined by writing Python code that describes user behavior. This makes Locust particularly accessible for teams already using Python.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Locust's architecture uses a master-worker model. The master coordinates test execution, and workers generate load. Locust supports distributed load generation across multiple machines, scaling to very high concurrency.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Locust's web UI provides real-time test monitoring, including request rates, response times, and the number of running users. Tests can be started, stopped, and modified through the UI. This makes Locust suitable for exploratory load testing where test parameters may be adjusted during execution.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Gatling</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Gatling is a JVM-based load testing tool with a Scala DSL. It uses an asynchronous, non-blocking architecture that generates high load efficiently. Gatling provides a comprehensive HTML report with detailed metrics, charts, and response time distributions.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Gatling's scenario definition is based on a "simulation" describing virtual user journeys. Each simulation defines user populations, injection profiles (how users ramp up), and assertions that define pass/fail criteria. Gatling's reports include response time percentiles, request rate over time, active users, and error distributions.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Gatling's Recorder allows recording browser interactions as test scenarios, though recorded scripts typically require cleanup and parameterization. Gatling also supports detailed assertions for automated CI/CD integration.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Test Design</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Good performance tests follow a structured approach. Start by defining performance requirements—expected throughput, acceptable response times, and peak load conditions. Design test scenarios that reflect realistic user behavior, not just synthetic endpoints.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Consider different types of tests. Load tests verify performance under expected load. Stress tests find the system's breaking point. Soak tests verify stability under sustained load. Spike tests verify behavior under sudden load increases. Each test type reveals different aspects of system performance.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Parameterization is essential. Tests should use realistic data distributions: different users accessing different resources, realistic mix of read and write operations, and realistic think times between actions. Using the same data for all requests creates cache optimization that does not reflect production behavior.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Results Interpretation</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Response time percentiles (p50, p95, p99) are more informative than averages. Averages hide the experience of slow requests. If 5% of requests take 5 seconds, the average may still look acceptable, but users experiencing those requests are unhappy.</p>
+<br>
+<br>
+<br>
+<br>
+<p>The relationship between load and response time is revealing. Response times that increase linearly with load indicate adequate capacity. Response times that suddenly increase at a certain load level indicate a bottleneck being reached—this is the knee point in the performance curve.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Error rate trends matter. Errors during load tests indicate capacity issues, configuration problems, or application bugs. The error rate should remain near zero during load tests. Increasing errors as load increases often indicates resource exhaustion.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  CI/CD Integration</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Performance tests should be integrated into CI/CD pipelines. Not every commit needs a full performance test, but critical changes and pre-release builds should be tested. Tools like k6 and Gatling have built-in support for automated thresholds and CI integration.</p>
+<br>
+<br>
+<br>
+<br>
+<p>A common approach is to run baseline performance tests on every commit to a performance branch and full tests on release candidates. Thresholds provide automated pass/fail criteria. Historical test results help detect performance regressions before they reach production.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Performance testing is an ongoing activity, not a one-time effort. As the system evolves, performance characteristics change. Regular testing with consistent methodology provides the data needed to maintain performance and identify degradation early.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

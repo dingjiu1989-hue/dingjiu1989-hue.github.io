@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="domain-events">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Domain Events: Design and Implementation">
+    <meta property="og:description" content="Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable delivery">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/domain-events.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Domain Events: Design and Implementation">
+    <meta name="twitter:description" content="Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable delivery">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Domain Events: Design and Implementation — SourceHub</title>
+    <meta name="description" content="Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable delivery">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/domain-events.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/domain-events.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Domain Events: Design and Implementation",
+      "description": "Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable delivery",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "816",
+      "keywords": "Architecture, System Design, Backend",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/domain-events.html"},
+      "articleBody": "Domain Events: Design and Implementation Domain events capture significant state changes within a bounded context. They are a tactical pattern from Domain-Driven Design that enables loose coupling between domain aggregates while maintaining consistency boundaries. A domain event represents something that happened in the past and is meaningful to domain experts: OrderSubmitted, PaymentReceived, InventoryDepleted. Designing domain events requires careful consideration of what information to include. Each event should contain the aggregate identifier, a timestamp of when the event occurred, the event type, and the data relevant to the change. Crucially, domain events should not contain internal implementation details of the aggregate. The specific fields should represent what happened from the domain perspective, not what data structures changed internally. Event naming follows past-tense convention: OrderShipped rather than ShipOrder, which would be a command. The publishing lifecycle has distinct phases. First, the domain event is raised within the aggregate during a command execution. The aggregate appends the event to a collection of unpublished events. When the repository saves the aggregate, it persists both the aggregate state and publishes the events. This atomicity is critical \u2014 publishing events must be transactional with the state change to prevent inconsistencies between what the system recorded and what other services learned. In-process domain event handling occurs within the same transaction. Event handlers registered in the application layer execute immediately after the aggregate is saved. These handlers are appropriate for side effects that must be consistent with the transaction, such as sending notifications or invalidating caches. They execute synchronously, so they must be fast and reliable. Out-of-process handlers receive domain events through a message broker or event bus. These handlers are appropriate for cross-service coordination, long-running workflows, or side effects where eventual consistency is acceptable. The distribution boundary is key \u2014 events that cross bounded contexts should be published to a message broker, while events consumed within the same context can be handled in-process. Idempotency is non-negotiable for domain event handlers. The same event may be delivered multiple times due to network retries, broker redelivery, or consumer failures. Handlers must detect and ignore duplicate processing. Common strategies include storing processed event IDs in a database with a unique constraint, using idempotent operations (SET x = y rather than x = x + 1), or making handlers check the current state before acting. The transactional outbox pattern solves the dual-write problem: updating the database and publishing an event must be atomic. Writing both the aggregate change and the event to the database in a single transaction ensures consistency. A separate process reads unpublished events from the outbox table and publishes them to the message broker. After successful publication, it marks the events as published or deletes them. This guarantees at-least-once delivery without distributed transactions. Event versioning addresses schema evolution. Domain events are persistent contracts that may be consumed by services running different versions. Strategies include keeping past event classes in the codebase, using a schema registry with compatibility checks, and designing events with optional fields and sensible defaults. Forward compatibility \u2014 where new consumers can read old events and vice versa \u2014 requires disciplined schema evolution. Testing domain events requires verifying that the correct events are raised for each command, that event data contains the expected information, and that handlers produce the correct side effects. Unit tests validate event raising within aggregates, while integration tests verify the full publish-and-handle pipeline including the outbox pattern."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Domain Events: Design and Implementation"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Domain Events: Design and Implementation
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">Domain Events: Design and Implementation</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Domain Events: Design and Implementation</h1>
+<br>
+<p>Domain events capture significant state changes within a bounded context. They are a tactical pattern from Domain-Driven Design that enables loose coupling between domain aggregates while maintaining consistency boundaries. A domain event represents something that happened in the past and is meaningful to domain experts: OrderSubmitted, PaymentReceived, InventoryDepleted.   </p>
+<p>Designing domain events requires careful consideration of what information to include. Each event should contain the aggregate identifier, a timestamp of when the event occurred, the event type, and the data relevant to the change. Crucially, domain events should not contain internal implementation details of the aggregate. The specific fields should represent what happened from the domain perspective, not what data structures changed internally. Event naming follows past-tense convention: OrderShipped rather than ShipOrder, which would be a command.   </p>
+<p>The publishing lifecycle has distinct phases. First, the domain event is raised within the aggregate during a command execution. The aggregate appends the event to a collection of unpublished events. When the repository saves the aggregate, it persists both the aggregate state and publishes the events. This atomicity is critical — publishing events must be transactional with the state change to prevent inconsistencies between what the system recorded and what other services learned.   </p>
+<p>In-process domain event handling occurs within the same transaction. Event handlers registered in the application layer execute immediately after the aggregate is saved. These handlers are appropriate for side effects that must be consistent with the transaction, such as sending notifications or invalidating caches. They execute synchronously, so they must be fast and reliable.   </p>
+<p>Out-of-process handlers receive domain events through a message broker or event bus. These handlers are appropriate for cross-service coordination, long-running workflows, or side effects where eventual consistency is acceptable. The distribution boundary is key — events that cross bounded contexts should be published to a message broker, while events consumed within the same context can be handled in-process.   </p>
+<p>Idempotency is non-negotiable for domain event handlers. The same event may be delivered multiple times due to network retries, broker redelivery, or consumer failures. Handlers must detect and ignore duplicate processing. Common strategies include storing processed event IDs in a database with a unique constraint, using idempotent operations (SET x = y rather than x = x + 1), or making handlers check the current state before acting.   </p>
+<p>The transactional outbox pattern solves the dual-write problem: updating the database and publishing an event must be atomic. Writing both the aggregate change and the event to the database in a single transaction ensures consistency. A separate process reads unpublished events from the outbox table and publishes them to the message broker. After successful publication, it marks the events as published or deletes them. This guarantees at-least-once delivery without distributed transactions.   </p>
+<p>Event versioning addresses schema evolution. Domain events are persistent contracts that may be consumed by services running different versions. Strategies include keeping past event classes in the codebase, using a schema registry with compatibility checks, and designing events with optional fields and sensible defaults. Forward compatibility — where new consumers can read old events and vice versa — requires disciplined schema evolution.   </p>
+<p>Testing domain events requires verifying that the correct events are raised for each command, that event data contains the expected information, and that handlers produce the correct side effects. Unit tests validate event raising within aggregates, while integration tests verify the full publish-and-handle pipeline including the outbox pattern.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

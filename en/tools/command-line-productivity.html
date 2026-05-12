@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tools" data-exclude="command-line-productivity">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit">
+    <meta property="og:description" content="Guide to essential command-line productivity tools covering fzf for fuzzy finding, ripgrep for code search, jq for JSON processing, bat, tmux, zoxide, and lazygit.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tools/command-line-productivity.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit">
+    <meta name="twitter:description" content="Guide to essential command-line productivity tools covering fzf for fuzzy finding, ripgrep for code search, jq for JSON processing, bat, tmux, zoxide, and lazygit.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit — SourceHub</title>
+    <meta name="description" content="Guide to essential command-line productivity tools covering fzf for fuzzy finding, ripgrep for code search, jq for JSON processing, bat, tmux, zoxide, and lazygit.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tools/command-line-productivity.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tools/command-line-productivity.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit",
+      "description": "Guide to essential command-line productivity tools covering fzf for fuzzy finding, ripgrep for code search, jq for JSON processing, bat, tmux, zoxide, and lazygit.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1380",
+      "keywords": "Technology, DevTools, Productivity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/command-line-productivity.html"},
+      "articleBody": "Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit Introduction The command line remains the most powerful interface for development, operations, and data processing. Modern command-line tools have transformed the terminal experience, providing capabilities that rival graphical interfaces for many tasks. Mastering these tools significantly reduces friction in daily workflows. This article covers seven essential CLI productivity tools: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit. fzf: Fuzzy Finder fzf is a general-purpose fuzzy finder that pipes any list of items into an interactive search interface. It can search files, command history, processes, git branches, and virtually any text stream. # Search files recursively with preview vim $(fzf --preview 'bat --color=always {}') # Search and kill processes kill -9 $(ps aux | fzf --header-lines=1 | awk '{print $2}') # Interactive git branch checkout git checkout $(git branch -a | fzf --height=40%) fzf's key bindings enhance shell navigation: `Ctrl+T` pastes selected file paths, `Ctrl+R` searches command history, and `Alt+C` changes to selected directories. Custom preview windows using bat, head, or tree provide context before selection. ripgrep (rg): Blazingly Fast Code Search ripgrep recursively searches through files with regex patterns, respecting .gitignore and hidden files by default. It is significantly faster than grep, ack, or ag due to its use of SIMD instructions and optimized search algorithms. # Search for pattern in current directory rg \"function getUsers\" --type ts # Search with context lines rg \"TODO\" --context 3 # Search but exclude specific files rg \"password\" --glob '!*.lock' ripgrep output integrates with editors through the `--json` flag and supports PCRE2 regex features including lookaheads and backreferences. Combined with fzf, it provides instant code search across large repositories. jq: JSON Processor jq is a lightweight and flexible command-line JSON processor. It filters, transforms, and formats JSON data with a powerful expression language. # Pretty-print JSON cat data.json | jq '.' # Extract specific fields curl -s https://api.github.com/repos/jqlang/jq | jq '{name, description, stars: .stargazers_count}' # Filter array items cat logs.json | jq '.[] | select(.severity == \"ERROR\") | {timestamp, message}' jq expressions range from simple field access to complex transformations with map, reduce, group_by, and custom functions. The `-c` flag produces compact output for streaming. Combined with `--stream`, jq processes JSON files larger than available memory. bat: cat with Syntax Highlighting bat is a clone of cat with syntax highlighting, Git integration, and automatic paging. It supports hundreds of languages with theme customization. bat --paging=never file.json bat --style=plain file.py bat --language=yaml config.yaml bat integrates with other tools as a pager. Setting `BAT_THEME` in shell configuration provides consistent color schemes. The `bat cache --build` command regenerates the syntax cache after installing new language definitions. tmux: Terminal Multiplexer tmux enables multiple terminal sessions within a single window, session persistence across disconnections, and split-pane layouts. tmux new -s project tmux attach -t project Essential tmux key bindings: * `Ctrl+B %` \u2014 Split pane vertically. * `Ctrl+B \"` \u2014 Split pane horizontally. * `Ctrl+B c` \u2014 Create new window. * `Ctrl+B ,` \u2014 Rename current window. * `Ctrl+B [` \u2014 Enter scroll/copy mode. tmux configuration in `~/.tmux.conf` customizes key bindings, status bar, colors, and mouse support. Plugins via tpm (tmux plugin manager) add features like persistent sessions, save/restore, and CPU monitoring. zoxide: Smarter Directory Navigation zoxide learns your directory usage patterns and allows jumping to frequently accessed directories with partial names. z proj # Jump to ~/projects/my-project z proj/src # Jump to subdirectory zi # Interactive selection with fzf zoxide replaces cd with a learning database: `z foo` navigates to the most relevant directory containing \"foo\" based on frequency and recency. The `zi` command opens an interactive fzf selector for ambiguous matches. lazygit: Terminal Git Interface lazygit provides a terminal-based Git interface with vim-like keybindings. It visualizes the staging area, commit graph, branch tree, and file changes in split-pane views. lazygit Essential operations: * Arrow keys navigate files and commits. * Space to stage/unstage files. * `c` to commit, `p` to push. * `m` to merge, `r` to rebase. * `d` to view diff of selected file. * `:` for custom commands. lazygit significantly reduces Git command memorization while providing visual feedback for complex operations like interactive rebase, conflict resolution, and cherry-picking. Conclusion Modern CLI tools dramatically improve terminal productivity. fzf provides instant interactive filtering. ripgrep replaces slow grep with millisecond code search. jq transforms JSON manipulation on the command line. bat enhances file viewing. tmux enables persistent, multi-window terminal sessions. zoxide eliminates directory navigation friction. lazygit provides visual Git operations without leaving the terminal. Investing time to learn these tools pays dividends in daily efficiency."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tool Recommendations", "item": "https://dingjiu1989-hue.github.io/en/tools/"},
+        {"@type": "ListItem", "position": 3, "name": "Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a> › Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">DevTools</span>
+        <span class="tag-cat">Productivity</span></div>
+      <h1 class="article-title">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<p>The command line remains the most powerful interface for development, operations, and data processing. Modern command-line tools have transformed the terminal experience, providing capabilities that rival graphical interfaces for many tasks. Mastering these tools significantly reduces friction in daily workflows.</p>
+<br>
+<br>
+<br>
+<br>
+<p>This article covers seven essential CLI productivity tools: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  fzf: Fuzzy Finder</h2>
+<br>
+<br>
+<br>
+<br>
+<p>fzf is a general-purpose fuzzy finder that pipes any list of items into an interactive search interface. It can search files, command history, processes, git branches, and virtually any text stream.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Search files recursively with preview</p>
+<br>
+<p>    vim $(fzf --preview 'bat --color=always {}')</p>
+<br>
+<br>
+<br>
+<p>    # Search and kill processes</p>
+<br>
+<p>    kill -9 $(ps aux | fzf --header-lines=1 | awk '{print $2}')</p>
+<br>
+<br>
+<br>
+<p>    # Interactive git branch checkout</p>
+<br>
+<p>    git checkout $(git branch -a | fzf --height=40%)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>fzf's key bindings enhance shell navigation: `Ctrl+T` pastes selected file paths, `Ctrl+R` searches command history, and `Alt+C` changes to selected directories. Custom preview windows using bat, head, or tree provide context before selection.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  ripgrep (rg): Blazingly Fast Code Search</h2>
+<br>
+<br>
+<br>
+<br>
+<p>ripgrep recursively searches through files with regex patterns, respecting .gitignore and hidden files by default. It is significantly faster than grep, ack, or ag due to its use of SIMD instructions and optimized search algorithms.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Search for pattern in current directory</p>
+<br>
+<p>    rg "function getUsers" --type ts</p>
+<br>
+<br>
+<br>
+<p>    # Search with context lines</p>
+<br>
+<p>    rg "TODO" --context 3</p>
+<br>
+<br>
+<br>
+<p>    # Search but exclude specific files</p>
+<br>
+<p>    rg "password" --glob '!*.lock'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ripgrep output integrates with editors through the `--json` flag and supports PCRE2 regex features including lookaheads and backreferences. Combined with fzf, it provides instant code search across large repositories.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  jq: JSON Processor</h2>
+<br>
+<br>
+<br>
+<br>
+<p>jq is a lightweight and flexible command-line JSON processor. It filters, transforms, and formats JSON data with a powerful expression language.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Pretty-print JSON</p>
+<br>
+<p>    cat data.json | jq '.'</p>
+<br>
+<br>
+<br>
+<p>    # Extract specific fields</p>
+<br>
+<p>    curl -s https://api.github.com/repos/jqlang/jq | jq '{name, description, stars: .stargazers_count}'</p>
+<br>
+<br>
+<br>
+<p>    # Filter array items</p>
+<br>
+<p>    cat logs.json | jq '.[] | select(.severity == "ERROR") | {timestamp, message}'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>jq expressions range from simple field access to complex transformations with map, reduce, group_by, and custom functions. The `-c` flag produces compact output for streaming. Combined with `--stream`, jq processes JSON files larger than available memory.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  bat: cat with Syntax Highlighting</h2>
+<br>
+<br>
+<br>
+<br>
+<p>bat is a clone of cat with syntax highlighting, Git integration, and automatic paging. It supports hundreds of languages with theme customization.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    bat --paging=never file.json</p>
+<br>
+<p>    bat --style=plain file.py</p>
+<br>
+<p>    bat --language=yaml config.yaml</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>bat integrates with other tools as a pager. Setting `BAT_THEME` in shell configuration provides consistent color schemes. The `bat cache --build` command regenerates the syntax cache after installing new language definitions.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  tmux: Terminal Multiplexer</h2>
+<br>
+<br>
+<br>
+<br>
+<p>tmux enables multiple terminal sessions within a single window, session persistence across disconnections, and split-pane layouts.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    tmux new -s project</p>
+<br>
+<p>    tmux attach -t project</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Essential tmux key bindings:</p>
+<br>
+<p>* `Ctrl+B %` — Split pane vertically.</p>
+<p>* `Ctrl+B "` — Split pane horizontally.</p>
+<p>* `Ctrl+B c` — Create new window.</p>
+<p>* `Ctrl+B ,` — Rename current window.</p>
+<p>* `Ctrl+B [` — Enter scroll/copy mode.</p>
+<br>
+<br>
+<br>
+<p>tmux configuration in `~/.tmux.conf` customizes key bindings, status bar, colors, and mouse support. Plugins via tpm (tmux plugin manager) add features like persistent sessions, save/restore, and CPU monitoring.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  zoxide: Smarter Directory Navigation</h2>
+<br>
+<br>
+<br>
+<br>
+<p>zoxide learns your directory usage patterns and allows jumping to frequently accessed directories with partial names.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    z proj        # Jump to ~/projects/my-project</p>
+<br>
+<p>    z proj/src    # Jump to subdirectory</p>
+<br>
+<p>    zi            # Interactive selection with fzf</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>zoxide replaces cd with a learning database: `z foo` navigates to the most relevant directory containing "foo" based on frequency and recency. The `zi` command opens an interactive fzf selector for ambiguous matches.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  lazygit: Terminal Git Interface</h2>
+<br>
+<br>
+<br>
+<br>
+<p>lazygit provides a terminal-based Git interface with vim-like keybindings. It visualizes the staging area, commit graph, branch tree, and file changes in split-pane views.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    lazygit</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Essential operations:</p>
+<br>
+<p>* Arrow keys navigate files and commits.</p>
+<p>* Space to stage/unstage files.</p>
+<p>* `c` to commit, `p` to push.</p>
+<p>* `m` to merge, `r` to rebase.</p>
+<p>* `d` to view diff of selected file.</p>
+<p>* `:` for custom commands.</p>
+<br>
+<br>
+<br>
+<p>lazygit significantly reduces Git command memorization while providing visual feedback for complex operations like interactive rebase, conflict resolution, and cherry-picking.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Conclusion</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Modern CLI tools dramatically improve terminal productivity. fzf provides instant interactive filtering. ripgrep replaces slow grep with millisecond code search. jq transforms JSON manipulation on the command line. bat enhances file viewing. tmux enables persistent, multi-window terminal sessions. zoxide eliminates directory navigation friction. lazygit provides visual Git operations without leaving the terminal. Investing time to learn these tools pays dividends in daily efficiency.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div>
+      <noscript><div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

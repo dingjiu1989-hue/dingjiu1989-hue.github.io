@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="database-vacuuming-maintenance">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="PostgreSQL Vacuuming: Maintenance, Tuning, and Automation">
+    <meta property="og:description" content="Master PostgreSQL VACUUM: autovacuum tuning, bloat prevention, and maintenance best practices.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/database-vacuuming-maintenance.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PostgreSQL Vacuuming: Maintenance, Tuning, and Automation">
+    <meta name="twitter:description" content="Master PostgreSQL VACUUM: autovacuum tuning, bloat prevention, and maintenance best practices.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation — SourceHub</title>
+    <meta name="description" content="Master PostgreSQL VACUUM: autovacuum tuning, bloat prevention, and maintenance best practices.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/database-vacuuming-maintenance.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/database-vacuuming-maintenance.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "PostgreSQL Vacuuming: Maintenance, Tuning, and Automation",
+      "description": "Master PostgreSQL VACUUM: autovacuum tuning, bloat prevention, and maintenance best practices.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "504",
+      "keywords": "Database, Backend, Data",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-vacuuming-maintenance.html"},
+      "articleBody": "PostgreSQL Vacuuming: Maintenance, Tuning, and Automation PostgreSQL uses Multi-Version Concurrency Control (MVCC) to handle concurrent transactions. Every UPDATE and DELETE creates a new row version while keeping the old one. Dead rows accumulate over time, consuming storage and degrading query performance. VACUUM reclaims this space and updates statistics. Understanding Bloat Table bloat occurs when dead row versions accumulate faster than VACUUM reclaims them. Causes include long-running transactions that prevent dead row removal, high update frequency tables, and insufficient VACUUM frequency. Measure bloat using the pg_stat_user_tables view. High n_dead_tup relative to n_live_tup indicates bloat. A ratio over 20% needs investigation. The pgstattuple extension provides accurate bloat measurement per table. Autovacuum Tuning Autovacuum runs automatically based on thresholds. The default settings work for small databases but need tuning for large ones. Key parameters: autovacuum_vacuum_threshold (50) plus autovacuum_vacuum_scale_factor (0.2) means VACUUM triggers when 20% of rows plus 50 are dead. For large tables, reduce scale_factor or use per-table settings. autovacuum_vacuum_cost_limit and autovacuum_vacuum_cost_delay control autovacuum's I/O impact. Default settings are conservative (cost_limit=200, cost_delay=20ms). Increase cost_limit for faster VACUUM on systems with I/O headroom. Decrease cost_delay for aggressive cleanup. Set per-table autovacuum settings for busy tables: ALTER TABLE orders SET (autovacuum_vacuum_scale_factor = 0.05, autovacuum_vacuum_threshold = 1000); Manual Vacuum Operations Standard VACUUM reclaims space but does not return it to the operating system. It makes space available for reuse within the table. Run standard VACUUM during low-traffic periods for tables with heavy updates. VACUUM FULL reclaims space to the OS but requires an ACCESS EXCLUSIVE lock. It rewrites the entire table, blocking all operations. Use during maintenance windows only. Consider pg_repack instead\u2014it rebuilds tables without blocking reads or writes. Monitoring Track vacuum activity through pg_stat_progress_vacuum. Monitor last_autovacuum and last_analyze timestamps. Tables not vacuumed in 24 hours need attention. Set up alerts for tables approaching the autovacuum threshold without being vacuumed."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "PostgreSQL Vacuuming: Maintenance, Tuning, and Automation"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › PostgreSQL Vacuuming: Maintenance, Tuning, and Automation
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Data</span></div>
+      <h1 class="article-title">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h1>
+<p>PostgreSQL uses Multi-Version Concurrency Control (MVCC) to handle concurrent transactions. Every UPDATE and DELETE creates a new row version while keeping the old one. Dead rows accumulate over time, consuming storage and degrading query performance. VACUUM reclaims this space and updates statistics.</p>
+<br>
+<h2> Understanding Bloat</h2>
+<br>
+<p>Table bloat occurs when dead row versions accumulate faster than VACUUM reclaims them. Causes include long-running transactions that prevent dead row removal, high update frequency tables, and insufficient VACUUM frequency.</p>
+<br>
+<p>Measure bloat using the pg_stat_user_tables view. High n_dead_tup relative to n_live_tup indicates bloat. A ratio over 20% needs investigation. The pgstattuple extension provides accurate bloat measurement per table.</p>
+<br>
+<h2> Autovacuum Tuning</h2>
+<br>
+<p>Autovacuum runs automatically based on thresholds. The default settings work for small databases but need tuning for large ones. Key parameters: autovacuum_vacuum_threshold (50) plus autovacuum_vacuum_scale_factor (0.2) means VACUUM triggers when 20% of rows plus 50 are dead. For large tables, reduce scale_factor or use per-table settings.</p>
+<br>
+<p>autovacuum_vacuum_cost_limit and autovacuum_vacuum_cost_delay control autovacuum's I/O impact. Default settings are conservative (cost_limit=200, cost_delay=20ms). Increase cost_limit for faster VACUUM on systems with I/O headroom. Decrease cost_delay for aggressive cleanup.</p>
+<br>
+<p>Set per-table autovacuum settings for busy tables:</p>
+<p>ALTER TABLE orders SET (autovacuum_vacuum_scale_factor = 0.05, autovacuum_vacuum_threshold = 1000);</p>
+<br>
+<h2> Manual Vacuum Operations</h2>
+<br>
+<p>Standard VACUUM reclaims space but does not return it to the operating system. It makes space available for reuse within the table. Run standard VACUUM during low-traffic periods for tables with heavy updates.</p>
+<br>
+<p>VACUUM FULL reclaims space to the OS but requires an ACCESS EXCLUSIVE lock. It rewrites the entire table, blocking all operations. Use during maintenance windows only. Consider pg_repack instead—it rebuilds tables without blocking reads or writes.</p>
+<br>
+<h2> Monitoring</h2>
+<br>
+<p>Track vacuum activity through pg_stat_progress_vacuum. Monitor last_autovacuum and last_analyze timestamps. Tables not vacuumed in 24 hours need attention. Set up alerts for tables approaching the autovacuum threshold without being vacuumed.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

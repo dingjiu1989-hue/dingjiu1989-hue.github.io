@@ -8,20 +8,12 @@ url: https://dingjiu1989-hue.github.io/tech/python-tutorial.html
 
 # Python 入门教程：从零到写出第一个程序
 
-Python 是最适合初学者的编程语言——语法接近自然语言，生态强大到几乎无所不能。这篇教程带你 30 分钟入门。
-
-## 安装 Python
-
-macOS 自带 Python 3，终端输入 `python3 --version` 检查。Windows 去 python.org 下载安装包，安装时勾选 "Add Python to PATH"。
-
-## 第一个程序
+Python 是最适合初学者的编程语言——语法接近自然语言，生态强大到几乎无所不能。这篇教程带你 30 分钟入门。 安装 Python macOS 自带 Python 3，终端输入 `python3 --version` 检查。Windows 去 python.org 下载安装包，安装时勾选 "Add Python to PATH"。 第一个程序
     
     
     print("Hello, World!")
 
-保存为 `hello.py`，终端运行 `python3 hello.py`，看到输出就成功了。
-
-## 变量和数据类型
+保存为 `hello.py`，终端运行 `python3 hello.py`，看到输出就成功了。 变量和数据类型
     
     
     name = "小明"        # 字符串
@@ -31,7 +23,7 @@ macOS 自带 Python 3，终端输入 `python3 --version` 检查。Windows 去 py
     
     print(f"{name}今年{age}岁")
 
-## 条件判断
+条件判断
     
     
     score = 85
@@ -42,7 +34,7 @@ macOS 自带 Python 3，终端输入 `python3 --version` 检查。Windows 去 py
     else:
         print("不及格")
 
-## 循环
+循环
     
     
     # for 循环
@@ -55,7 +47,7 @@ macOS 自带 Python 3，终端输入 `python3 --version` 检查。Windows 去 py
         print(f"count = {count}")
         count += 1
 
-## 列表和字典
+列表和字典
     
     
     # 列表 — 有序集合
@@ -67,7 +59,7 @@ macOS 自带 Python 3，终端输入 `python3 --version` 检查。Windows 去 py
     user = {"name": "小明", "age": 25, "city": "北京"}
     print(user["name"])  # 小明
 
-## 函数
+函数
     
     
     def greet(name):
@@ -75,21 +67,17 @@ macOS 自带 Python 3，终端输入 `python3 --version` 检查。Windows 去 py
     
     print(greet("小明"))  # 你好，小明！
 
-## 下一步学什么
+下一步学什么
 
   1. **pip 包管理** — 安装第三方库
   2. **文件读写** — 处理文本和 CSV
   3. **requests 库** — 爬取网页和调用 API
   4. **Flask** — 写一个简单的 Web 应用
 
-
-
-### 📖 相关推荐
+📖 相关推荐
 
   * [单元测试入门：从零到写出第一个可维护的测试](<https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html>)
   * [正则表达式 30 分钟入门指南](<https://dingjiu1989-hue.github.io/tech/regex-guide.html>)
   * [Linux 命令行入门：30 个最常用的命令](<https://dingjiu1989-hue.github.io/tech/linux-commands.html>)
-
-
 
 **See also:** [正则表达式 30 分钟入门指南](</tech/regex-guide.html>), [单元测试入门：从零到写出第一个可维护的测试](</tech/unit-testing-guide.html>), [OpenAI API 入门：用 10 行代码调用 GPT](</ai/openai-api-intro.html>).

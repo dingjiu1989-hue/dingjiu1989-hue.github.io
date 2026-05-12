@@ -8,11 +8,7 @@ url: https://dingjiu1989-hue.github.io/tech/git-advanced.html
 
 # Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战
 
-如果你已经会 add/commit/push/pull，是时候学这三个进阶命令了。它们不会让你每天多用 Git，但在关键时刻能省下几个小时。
-
-## 交互式 Rebase：整理你的提交历史
-
-场景：你吭哧吭哧写了一下午，做了 12 个小提交，但提交信息都是 "wip"、"fix"、"fix again"。现在要提交 PR 了——这些乱七八糟的提交历史会让同事鄙视你。
+如果你已经会 add/commit/push/pull，是时候学这三个进阶命令了。它们不会让你每天多用 Git，但在关键时刻能省下几个小时。 交互式 Rebase：整理你的提交历史 场景：你吭哧吭哧写了一下午，做了 12 个小提交，但提交信息都是 "wip"、"fix"、"fix again"。现在要提交 PR 了——这些乱七八糟的提交历史会让同事鄙视你。
     
     
     git rebase -i HEAD~12
@@ -34,8 +30,6 @@ url: https://dingjiu1989-hue.github.io/tech/git-advanced.html
   * **drop (d)** — 删除这个提交
   * **edit (e)** — 停下来让你修改这个提交的内容
 
-
-
 把 12 个乱七八糟的提交整理成 3 个逻辑清晰的提交：
     
     
@@ -47,11 +41,7 @@ url: https://dingjiu1989-hue.github.io/tech/git-advanced.html
     pick r5s6t7u docs: 更新 API 文档
     fixup v8w9x0y wip doc
 
-保存退出，Git 自动完成。提交历史从一团乱麻变成清晰的叙事。**注意：只在还没 push 的分支上做 rebase。已经 push 的提交，rebase 会改写历史，需要 force push——在共享分支上这是灾难。**
-
-## Cherry-Pick：精准移植代码
-
-场景：你在 feature-A 分支上写了一个特别好用的工具函数，feature-B 也需要它。但你不想合并整个 feature-A 分支。
+保存退出，Git 自动完成。提交历史从一团乱麻变成清晰的叙事。**注意：只在还没 push 的分支上做 rebase。已经 push 的提交，rebase 会改写历史，需要 force push——在共享分支上这是灾难。** Cherry-Pick：精准移植代码 场景：你在 feature-A 分支上写了一个特别好用的工具函数，feature-B 也需要它。但你不想合并整个 feature-A 分支。
     
     
     # 找到那个提交的 hash
@@ -61,9 +51,7 @@ url: https://dingjiu1989-hue.github.io/tech/git-advanced.html
     git checkout feature-B
     git cherry-pick a1b2c3d
 
-Git 会把这个提交的变更单独应用到 feature-B 上，生成一个新的提交（hash 不同，内容相同）。
-
-常见用法：
+Git 会把这个提交的变更单独应用到 feature-B 上，生成一个新的提交（hash 不同，内容相同）。 常见用法：
 
   * **移植 Bug 修复** — 在 hotfix 分支修了一个 Bug，cherry-pick 到 main 和 dev 分支
   * **复用工具代码** — 在一个分支写的基础组件，移植到另一个分支
@@ -84,11 +72,7 @@ Git 会把这个提交的变更单独应用到 feature-B 上，生成一个新�
     # 放弃这次 cherry-pick
     git cherry-pick --abort
 
-## Git Bisect：二分法定位 Bug
-
-场景：两周前一切正常，今天发现一个 Bug，但中间有 200 个提交。是谁引入的？
-
-Bisect 用二分查找自动定位——你只需要告诉 Git 哪个提交是好的、哪个是坏的，然后 Git 切到中间点让你测试。
+Git Bisect：二分法定位 Bug 场景：两周前一切正常，今天发现一个 Bug，但中间有 200 个提交。是谁引入的？ Bisect 用二分查找自动定位——你只需要告诉 Git 哪个提交是好的、哪个是坏的，然后 Git 切到中间点让你测试。
     
     
     git bisect start
@@ -120,22 +104,15 @@ Bisect 用二分查找自动定位——你只需要告诉 Git 哪个提交是�
     git bisect run python test_specific_feature.py
     # Git 自动二分查找，输出引入 Bug 的提交
 
-## 总结
-
-命令| 用途| 一句话  
+总结 命令| 用途| 一句话  
 ---|---|---  
 `git rebase -i`| 整理提交历史| 把 12 个 wip 整理成 3 个清晰的 commit  
 `git cherry-pick`| 移植单个提交| 把 A 分支的好代码复制到 B 分支  
 `git bisect`| 二分查找 Bug| 从 200 个提交中快速定位是谁引入的 Bug  
-  
-这三个命令是高级 Git 用户的标志。不需要每天用，但需要的时候知道怎么用——你的同事会以为你是 Git 魔法师。
-
-### 📖 相关推荐
+这三个命令是高级 Git 用户的标志。不需要每天用，但需要的时候知道怎么用——你的同事会以为你是 Git 魔法师。 📖 相关推荐
 
   * [Git 常用命令速查表](<https://dingjiu1989-hue.github.io/tech/git-cheatsheet.html>)
   * [单元测试入门：从零到写出第一个可维护的测试](<https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html>)
   * [REST API 设计最佳实践：写出让人愿意用的接口](<https://dingjiu1989-hue.github.io/tech/rest-api-best-practices.html>)
-
-
 
 **See also:** [Git 常用命令速查表](</tech/git-cheatsheet.html>), [VS Code 十大必备插件：让编码效率翻倍](</tech/vscode-extensions.html>), [10 款开发者必备的命令行工具（2026 版）](</tools/cli-tools-collection.html>).

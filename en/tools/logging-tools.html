@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1647",
+      "wordCount": "2094",
       "keywords": "Developer Tools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/logging-tools.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/logging-tools.html"},
+      "articleBody": "Logging Tools: ELK Stack vs Loki vs Splunk Introduction Centralized logging transforms noisy application output into a searchable, actionable resource. The three leading approaches--ELK Stack (Elasticsearch, Logstash, Kibana), Grafana Loki, and Splunk--take fundamentally different approaches to log ingestion, indexing, and querying. Choosing the right one affects both your daily operations and your monthly infrastructure bill. Architecture Comparison ELK Stack Elasticsearch indexes every field in every log line, enabling rich full-text search at the cost of higher storage consumption: # Filebeat configuration for shipping logs filebeat.inputs: - type: container paths: - /var/lib/docker/containers/*/*.log json.message_key: log json.overwrite_keys: true json.add_error_key: true processors: - add_docker_metadata: host: \"unix:///var/run/docker.sock\" - dissect: tokenizer: \"%{timestamp} %{level} %{logger} %{message}\" target_prefix: \"parsed\" output.elasticsearch: hosts: [\"elasticsearch:9200\"] index: \"filebeat-%{[agent.version]}-%{+yyyy.MM.dd}\" pipeline: \"parse-logs\" # Elasticsearch index lifecycle policy PUT _ilm/policy/logs-30day { \"policy\": { \"phases\": { \"hot\": { \"min_age\": \"0ms\", \"actions\": { \"rollover\": { \"max_size\": \"50GB\", \"max_age\": \"1d\" }, \"set_priority\": { \"priority\": 100 } } }, \"warm\": { \"min_age\": \"3d\", \"actions\": { \"shrink\": { \"number_of_shards\": 1 }, \"forcemerge\": { \"max_num_segments\": 1 } } }, \"delete\": { \"min_age\": \"30d\", \"actions\": { \"delete\": {} } } } } } Grafana Loki Loki indexes only metadata labels, leaving log content unindexed for dramatically lower storage costs: # Loki configuration auth_enabled: false server: http_listen_port: 3100 common: replication_factor: 1 ring: kvstore: store: inmemory schema_config: configs: - from: 2024-01-01 store: tsdb object_store: s3 schema: v13 index: prefix: index_ period: 24h storage_config: tsdb_shipper: active_index_directory: /loki/tsdb-shipper-active cache_location: /loki/tsdb-shipper-cache shared_store: s3 aws: s3: s3://us-east-1/logs-bucket s3forcepathstyle: false limits_config: retention_period: 30d max_query_series: 10000 ingestion_rate_mb: 10 ingestion_burst_size_mb: 20 compactor: working_directory: /loki/compactor shared_store: s3 retention_enabled: true Splunk Splunk uses a proprietary indexer architecture with heavy indexing at ingest: # inputs.conf - Splunk forwarder configuration [monitor:///var/log/app/*.log] disabled = false index = production sourcetype = applog crcSalt = # props.conf - Field extraction [applog] SHOULD_LINEMERGE = true LINE_BREAKER = ([\\r\\n]+) TRUNCATE = 20000 KV_MODE = json REPORT-appfields = app-timestamp-extract, app-level-extract # transforms.conf [app-timestamp-extract] REGEX = (\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}) FORMAT = date::$1 [app-level-extract] REGEX = \"level\":\"(\\w+)\" FORMAT = level::$1 Structured Logging No matter which platform you choose, structured logging at the application level is essential: package main import ( \"go.uber.org/zap\" ) func main() { logger, _ := zap.NewProduction( zap.WithCaller(true), zap.AddStacktrace(zap.ErrorLevel), ) defer logger.Sync() orderID := \"ord-12345\" amount := 99.50 // Structured log with context logger.Info(\"processing payment\", zap.String(\"order_id\", orderID), zap.Float64(\"amount\", amount), zap.String(\"currency\", \"USD\"), zap.String(\"payment_method\", \"credit_card\"), zap.Duration(\"processing_time\", 250*time.Millisecond), ) } The same structured log renders differently across platforms: { \"level\": \"info\", \"ts\": \"2026-05-12T10:30:00Z\", \"caller\": \"payment.go:42\", \"msg\": \"processing payment\", \"order_id\": \"ord-12345\", \"amount\": 99.50, \"currency\": \"USD\", \"payment_method\": \"credit_card\", \"processing_time\": \"250ms\" } Query Capabilities ELK (Kibana Query Language) service:payment AND level:ERROR AND NOT message:\"timeout retry\" AND @timestamp >= \"now-1h\" Loki (LogQL) {service=\"payment\", level=\"error\"} |= \"charge_failed\" | json | duration > 5s | unwrap latency_ms [5m] | rate per second Splunk (SPL) index=production sourcetype=applog service=payment level=ERROR | rex field=message \"order_id=(?\\S+)\" | stats count by order_id | sort - count | head 10 Indexing Strategies | Strategy | ELK | Loki | Splunk | |---|---|---|---| | Index approach | Inverted index on all fields | Label-only index | Proprietary inverted index | | Storage ratio | 1:1.5 (raw to indexed) | 1:0.3 (minimal overhead) | 1:2+ (heavily optimized) | | Cardinality limits | 20k fields/document | Label value cardinality | 10k source types | | Full-text search | Excellent | Limited (filter + grep) | Excellent | Retention Policies # Loki: retention via compactor compactor: retention_enabled: true retention_rules: - type: series selector: match: '{service=\"payment\"}' priority: 10 period: 90d # Payment logs retained longer - selector: match: '{env=\"staging\"}' priority: 1 period: 7d # Staging logs retained shorter Cost Comparison | Factor | ELK (self-hosted) | ELK (Elastic Cloud) | Loki + S3 | Splunk | |---|---|---|---|---| | Storage cost | $0.10/GB/month (SSD) | $0.30/GB/month | $0.023/GB/month (S3) | $2/GB/month (ingested) | | Compute | 3-5 nodes minimum | $500+/month base | 2 nodes minimum | $2,000+/GB/day | | Free tier | No | 500MB/month | Community (unlimited) | 500MB/day | Loki offers the lowest storage cost by far due to its S3-based object storage and label-only indexing. ELK provides the best query flexibility at moderate cost. Splunk delivers enterprise-grade reliability but at a premium that only makes sense for compliance-heavy industries. Decision Matrix * **ELK Stack**: Best for teams needing full-text search across all fields, complex aggregations, and existing Elasticsearch expertise. * **Grafana Loki**: Best for cost-conscious teams already using Grafana, who can tolerate grep-style log searching. * **Splunk**: Best for enterprises requiring compliance auditing, RBAC, and have budget for premium support. For most engineering teams, Loki paired with Grafana offers the best balance of cost and capability. Move to ELK when you need indexed structured search on arbitrary fields. Reserve Splunk for regulated environments where audit trails and access controls justify the expense."
     }
     </script>
     <script type="application/ld+json">
@@ -73,441 +74,549 @@
         <span class="tag-cat">Productivity</span></div>
       <h1 class="article-title">Logging Tools: ELK Stack vs Loki vs Splunk</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Introduction</h2>
+      <div class="article-body"><h1>Logging Tools: ELK Stack vs Loki vs Splunk</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Centralized logging transforms noisy application output into a searchable, actionable resource. The three leading approaches--ELK Stack (Elasticsearch, Logstash, Kibana), Grafana Loki, and Splunk--take fundamentally different approaches to log ingestion, indexing, and querying. Choosing the right one affects both your daily operations and your monthly infrastructure bill.</p>
 <br>
-<h2> Architecture Comparison</h2>
+<br>
+<br>
+<br>
+<h2>  Architecture Comparison</h2>
+<br>
+<br>
+<br>
 <br>
 <h3>ELK Stack</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Elasticsearch indexes every field in every log line, enabling rich full-text search at the cost of higher storage consumption:</p>
 <br>
-<pre><code>
-# Filebeat configuration for shipping logs
-
-filebeat.inputs:
-
-  - type: container
-
-    paths:
-
-      - /var/lib/docker/containers/*/*.log
-
-    json.message_key: log
-
-    json.overwrite_keys: true
-
-    json.add_error_key: true
-
-
-
-processors:
-
-  - add_docker_metadata:
-
-      host: &quot;unix:///var/run/docker.sock&quot;
-
-  - dissect:
-
-      tokenizer: &quot;%{timestamp} %{level} %{logger} %{message}&quot;
-
-      target_prefix: &quot;parsed&quot;
-
-
-
-output.elasticsearch:
-
-  hosts: [&quot;elasticsearch:9200&quot;]
-
-  index: &quot;filebeat-%{[agent.version]}-%{+yyyy.MM.dd}&quot;
-
-  pipeline: &quot;parse-logs&quot;
-
-
-
-# Elasticsearch index lifecycle policy
-
-PUT _ilm/policy/logs-30day
-
-{
-
-  &quot;policy&quot;: {
-
-    &quot;phases&quot;: {
-
-      &quot;hot&quot;: {
-
-        &quot;min_age&quot;: &quot;0ms&quot;,
-
-        &quot;actions&quot;: {
-
-          &quot;rollover&quot;: { &quot;max_size&quot;: &quot;50GB&quot;, &quot;max_age&quot;: &quot;1d&quot; },
-
-          &quot;set_priority&quot;: { &quot;priority&quot;: 100 }
-
-        }
-
-      },
-
-      &quot;warm&quot;: {
-
-        &quot;min_age&quot;: &quot;3d&quot;,
-
-        &quot;actions&quot;: {
-
-          &quot;shrink&quot;: { &quot;number_of_shards&quot;: 1 },
-
-          &quot;forcemerge&quot;: { &quot;max_num_segments&quot;: 1 }
-
-        }
-
-      },
-
-      &quot;delete&quot;: {
-
-        &quot;min_age&quot;: &quot;30d&quot;,
-
-        &quot;actions&quot;: { &quot;delete&quot;: {} }
-
-      }
-
-    }
-
-  }
-
-}
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # Filebeat configuration for shipping logs</p>
+<br>
+<p>    filebeat.inputs:</p>
+<br>
+<p>      - type: container</p>
+<br>
+<p>        paths:</p>
+<br>
+<p>          - /var/lib/docker/containers/*/*.log</p>
+<br>
+<p>        json.message_key: log</p>
+<br>
+<p>        json.overwrite_keys: true</p>
+<br>
+<p>        json.add_error_key: true</p>
+<br>
+<br>
+<br>
+<p>    processors:</p>
+<br>
+<p>      - add_docker_metadata:</p>
+<br>
+<p>          host: "unix:///var/run/docker.sock"</p>
+<br>
+<p>      - dissect:</p>
+<br>
+<p>          tokenizer: "%{timestamp} %{level} %{logger} %{message}"</p>
+<br>
+<p>          target_prefix: "parsed"</p>
+<br>
+<br>
+<br>
+<p>    output.elasticsearch:</p>
+<br>
+<p>      hosts: ["elasticsearch:9200"]</p>
+<br>
+<p>      index: "filebeat-%{[agent.version]}-%{+yyyy.MM.dd}"</p>
+<br>
+<p>      pipeline: "parse-logs"</p>
+<br>
+<br>
+<br>
+<p>    # Elasticsearch index lifecycle policy</p>
+<br>
+<p>    PUT _ilm/policy/logs-30day</p>
+<br>
+<p>    {</p>
+<br>
+<p>      "policy": {</p>
+<br>
+<p>        "phases": {</p>
+<br>
+<p>          "hot": {</p>
+<br>
+<p>            "min_age": "0ms",</p>
+<br>
+<p>            "actions": {</p>
+<br>
+<p>              "rollover": { "max_size": "50GB", "max_age": "1d" },</p>
+<br>
+<p>              "set_priority": { "priority": 100 }</p>
+<br>
+<p>            }</p>
+<br>
+<p>          },</p>
+<br>
+<p>          "warm": {</p>
+<br>
+<p>            "min_age": "3d",</p>
+<br>
+<p>            "actions": {</p>
+<br>
+<p>              "shrink": { "number_of_shards": 1 },</p>
+<br>
+<p>              "forcemerge": { "max_num_segments": 1 }</p>
+<br>
+<p>            }</p>
+<br>
+<p>          },</p>
+<br>
+<p>          "delete": {</p>
+<br>
+<p>            "min_age": "30d",</p>
+<br>
+<p>            "actions": { "delete": {} }</p>
+<br>
+<p>          }</p>
+<br>
+<p>        }</p>
+<br>
+<p>      }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Grafana Loki</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Loki indexes only metadata labels, leaving log content unindexed for dramatically lower storage costs:</p>
 <br>
-<pre><code>
-# Loki configuration
-
-auth_enabled: false
-
-
-
-server:
-
-  http_listen_port: 3100
-
-
-
-common:
-
-  replication_factor: 1
-
-  ring:
-
-    kvstore:
-
-      store: inmemory
-
-
-
-schema_config:
-
-  configs:
-
-    - from: 2024-01-01
-
-      store: tsdb
-
-      object_store: s3
-
-      schema: v13
-
-      index:
-
-        prefix: index_
-
-        period: 24h
-
-
-
-storage_config:
-
-  tsdb_shipper:
-
-    active_index_directory: /loki/tsdb-shipper-active
-
-    cache_location: /loki/tsdb-shipper-cache
-
-    shared_store: s3
-
-  aws:
-
-    s3: s3://us-east-1/logs-bucket
-
-    s3forcepathstyle: false
-
-
-
-limits_config:
-
-  retention_period: 30d
-
-  max_query_series: 10000
-
-  ingestion_rate_mb: 10
-
-  ingestion_burst_size_mb: 20
-
-
-
-compactor:
-
-  working_directory: /loki/compactor
-
-  shared_store: s3
-
-  retention_enabled: true
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # Loki configuration</p>
+<br>
+<p>    auth_enabled: false</p>
+<br>
+<br>
+<br>
+<p>    server:</p>
+<br>
+<p>      http_listen_port: 3100</p>
+<br>
+<br>
+<br>
+<p>    common:</p>
+<br>
+<p>      replication_factor: 1</p>
+<br>
+<p>      ring:</p>
+<br>
+<p>        kvstore:</p>
+<br>
+<p>          store: inmemory</p>
+<br>
+<br>
+<br>
+<p>    schema_config:</p>
+<br>
+<p>      configs:</p>
+<br>
+<p>        - from: 2024-01-01</p>
+<br>
+<p>          store: tsdb</p>
+<br>
+<p>          object_store: s3</p>
+<br>
+<p>          schema: v13</p>
+<br>
+<p>          index:</p>
+<br>
+<p>            prefix: index_</p>
+<br>
+<p>            period: 24h</p>
+<br>
+<br>
+<br>
+<p>    storage_config:</p>
+<br>
+<p>      tsdb_shipper:</p>
+<br>
+<p>        active_index_directory: /loki/tsdb-shipper-active</p>
+<br>
+<p>        cache_location: /loki/tsdb-shipper-cache</p>
+<br>
+<p>        shared_store: s3</p>
+<br>
+<p>      aws:</p>
+<br>
+<p>        s3: s3://us-east-1/logs-bucket</p>
+<br>
+<p>        s3forcepathstyle: false</p>
+<br>
+<br>
+<br>
+<p>    limits_config:</p>
+<br>
+<p>      retention_period: 30d</p>
+<br>
+<p>      max_query_series: 10000</p>
+<br>
+<p>      ingestion_rate_mb: 10</p>
+<br>
+<p>      ingestion_burst_size_mb: 20</p>
+<br>
+<br>
+<br>
+<p>    compactor:</p>
+<br>
+<p>      working_directory: /loki/compactor</p>
+<br>
+<p>      shared_store: s3</p>
+<br>
+<p>      retention_enabled: true</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Splunk</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Splunk uses a proprietary indexer architecture with heavy indexing at ingest:</p>
 <br>
-<pre><code>
-# inputs.conf - Splunk forwarder configuration
-
-[monitor:///var/log/app/*.log]
-
-disabled = false
-
-index = production
-
-sourcetype = applog
-
-crcSalt = &lt;SOURCE&gt;
-
-
-
-# props.conf - Field extraction
-
-[applog]
-
-SHOULD_LINEMERGE = true
-
-LINE_BREAKER = ([\r\n]+)
-
-TRUNCATE = 20000
-
-KV_MODE = json
-
-REPORT-appfields = app-timestamp-extract, app-level-extract
-
-
-
-# transforms.conf
-
-[app-timestamp-extract]
-
-REGEX = (\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})
-
-FORMAT = date::$1
-
-
-
-[app-level-extract]
-
-REGEX = &quot;level&quot;:&quot;(\w+)&quot;
-
-FORMAT = level::$1
-
-</code></pre>
 <br>
-<h2> Structured Logging</h2>
+<br>
+<br>
+<br>
+<p>    # inputs.conf - Splunk forwarder configuration</p>
+<br>
+<p>    [monitor:///var/log/app/*.log]</p>
+<br>
+<p>    disabled = false</p>
+<br>
+<p>    index = production</p>
+<br>
+<p>    sourcetype = applog</p>
+<br>
+<p>    crcSalt = <SOURCE></p>
+<br>
+<br>
+<br>
+<p>    # props.conf - Field extraction</p>
+<br>
+<p>    [applog]</p>
+<br>
+<p>    SHOULD_LINEMERGE = true</p>
+<br>
+<p>    LINE_BREAKER = ([\r\n]+)</p>
+<br>
+<p>    TRUNCATE = 20000</p>
+<br>
+<p>    KV_MODE = json</p>
+<br>
+<p>    REPORT-appfields = app-timestamp-extract, app-level-extract</p>
+<br>
+<br>
+<br>
+<p>    # transforms.conf</p>
+<br>
+<p>    [app-timestamp-extract]</p>
+<br>
+<p>    REGEX = (\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})</p>
+<br>
+<p>    FORMAT = date::$1</p>
+<br>
+<br>
+<br>
+<p>    [app-level-extract]</p>
+<br>
+<p>    REGEX = "level":"(\w+)"</p>
+<br>
+<p>    FORMAT = level::$1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Structured Logging</h2>
+<br>
+<br>
+<br>
 <br>
 <p>No matter which platform you choose, structured logging at the application level is essential:</p>
 <br>
-<pre><code>
-package main
-
-
-
-import (
-
-    &quot;go.uber.org/zap&quot;
-
-)
-
-
-
-func main() {
-
-    logger, _ := zap.NewProduction(
-
-        zap.WithCaller(true),
-
-        zap.AddStacktrace(zap.ErrorLevel),
-
-    )
-
-    defer logger.Sync()
-
-
-
-    orderID := &quot;ord-12345&quot;
-
-    amount := 99.50
-
-
-
-    // Structured log with context
-
-    logger.Info(&quot;processing payment&quot;,
-
-        zap.String(&quot;order_id&quot;, orderID),
-
-        zap.Float64(&quot;amount&quot;, amount),
-
-        zap.String(&quot;currency&quot;, &quot;USD&quot;),
-
-        zap.String(&quot;payment_method&quot;, &quot;credit_card&quot;),
-
-        zap.Duration(&quot;processing_time&quot;, 250*time.Millisecond),
-
-    )
-
-}
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    package main</p>
+<br>
+<br>
+<br>
+<p>    import (</p>
+<br>
+<p>        "go.uber.org/zap"</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<p>    func main() {</p>
+<br>
+<p>        logger, _ := zap.NewProduction(</p>
+<br>
+<p>            zap.WithCaller(true),</p>
+<br>
+<p>            zap.AddStacktrace(zap.ErrorLevel),</p>
+<br>
+<p>        )</p>
+<br>
+<p>        defer logger.Sync()</p>
+<br>
+<br>
+<br>
+<p>        orderID := "ord-12345"</p>
+<br>
+<p>        amount := 99.50</p>
+<br>
+<br>
+<br>
+<p>        // Structured log with context</p>
+<br>
+<p>        logger.Info("processing payment",</p>
+<br>
+<p>            zap.String("order_id", orderID),</p>
+<br>
+<p>            zap.Float64("amount", amount),</p>
+<br>
+<p>            zap.String("currency", "USD"),</p>
+<br>
+<p>            zap.String("payment_method", "credit_card"),</p>
+<br>
+<p>            zap.Duration("processing_time", 250*time.Millisecond),</p>
+<br>
+<p>        )</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>The same structured log renders differently across platforms:</p>
 <br>
-<pre><code>
-{
-
-  &quot;level&quot;: &quot;info&quot;,
-
-  &quot;ts&quot;: &quot;2026-05-12T10:30:00Z&quot;,
-
-  &quot;caller&quot;: &quot;payment.go:42&quot;,
-
-  &quot;msg&quot;: &quot;processing payment&quot;,
-
-  &quot;order_id&quot;: &quot;ord-12345&quot;,
-
-  &quot;amount&quot;: 99.50,
-
-  &quot;currency&quot;: &quot;USD&quot;,
-
-  &quot;payment_method&quot;: &quot;credit_card&quot;,
-
-  &quot;processing_time&quot;: &quot;250ms&quot;
-
-}
-
-</code></pre>
 <br>
-<h2> Query Capabilities</h2>
+<br>
+<br>
+<br>
+<p>    {</p>
+<br>
+<p>      "level": "info",</p>
+<br>
+<p>      "ts": "2026-05-12T10:30:00Z",</p>
+<br>
+<p>      "caller": "payment.go:42",</p>
+<br>
+<p>      "msg": "processing payment",</p>
+<br>
+<p>      "order_id": "ord-12345",</p>
+<br>
+<p>      "amount": 99.50,</p>
+<br>
+<p>      "currency": "USD",</p>
+<br>
+<p>      "payment_method": "credit_card",</p>
+<br>
+<p>      "processing_time": "250ms"</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Query Capabilities</h2>
+<br>
+<br>
+<br>
 <br>
 <h3>ELK (Kibana Query Language)</h3>
 <br>
-<pre><code>
-service:payment AND level:ERROR
-
-AND NOT message:&quot;timeout retry&quot;
-
-AND @timestamp &gt;= &quot;now-1h&quot;
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    service:payment AND level:ERROR</p>
+<br>
+<p>    AND NOT message:"timeout retry"</p>
+<br>
+<p>    AND @timestamp >= "now-1h"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Loki (LogQL)</h3>
 <br>
-<pre><code>
-{service=&quot;payment&quot;, level=&quot;error&quot;}
-
-|= &quot;charge_failed&quot;
-
-| json
-
-| duration &gt; 5s
-
-| unwrap latency_ms [5m]
-
-| rate per second
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    {service="payment", level="error"}</p>
+<br>
+<p>    |= "charge_failed"</p>
+<br>
+<p>    | json</p>
+<br>
+<p>    | duration > 5s</p>
+<br>
+<p>    | unwrap latency_ms [5m]</p>
+<br>
+<p>    | rate per second</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Splunk (SPL)</h3>
 <br>
-<pre><code>
-index=production sourcetype=applog
-
-service=payment level=ERROR
-
-| rex field=message &quot;order_id=(?&lt;order_id&gt;\S+)&quot;
-
-| stats count by order_id
-
-| sort - count
-
-| head 10
-
-</code></pre>
 <br>
-<h2> Indexing Strategies</h2>
+<br>
+<br>
+<br>
+<p>    index=production sourcetype=applog</p>
+<br>
+<p>    service=payment level=ERROR</p>
+<br>
+<p>    | rex field=message "order_id=(?<order_id>\S+)"</p>
+<br>
+<p>    | stats count by order_id</p>
+<br>
+<p>    | sort - count</p>
+<br>
+<p>    | head 10</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Indexing Strategies</h2>
+<br>
+<br>
+<br>
 <br>
 <p>| Strategy | ELK | Loki | Splunk |</p>
+<br>
 <p>|---|---|---|---|</p>
+<br>
 <p>| Index approach | Inverted index on all fields | Label-only index | Proprietary inverted index |</p>
+<br>
 <p>| Storage ratio | 1:1.5 (raw to indexed) | 1:0.3 (minimal overhead) | 1:2+ (heavily optimized) |</p>
+<br>
 <p>| Cardinality limits | 20k fields/document | Label value cardinality | 10k source types |</p>
+<br>
 <p>| Full-text search | Excellent | Limited (filter + grep) | Excellent |</p>
 <br>
-<h2> Retention Policies</h2>
 <br>
-<pre><code>
-# Loki: retention via compactor
-
-compactor:
-
-  retention_enabled: true
-
-  retention_rules:
-
-    - type: series
-
-      selector:
-
-        match: &#x27;{service=&quot;payment&quot;}&#x27;
-
-      priority: 10
-
-      period: 90d  # Payment logs retained longer
-
-    - selector:
-
-        match: &#x27;{env=&quot;staging&quot;}&#x27;
-
-      priority: 1
-
-      period: 7d   # Staging logs retained shorter
-
-</code></pre>
 <br>
-<h2> Cost Comparison</h2>
+<br>
+<h2>  Retention Policies</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Loki: retention via compactor</p>
+<br>
+<p>    compactor:</p>
+<br>
+<p>      retention_enabled: true</p>
+<br>
+<p>      retention_rules:</p>
+<br>
+<p>        - type: series</p>
+<br>
+<p>          selector:</p>
+<br>
+<p>            match: '{service="payment"}'</p>
+<br>
+<p>          priority: 10</p>
+<br>
+<p>          period: 90d  # Payment logs retained longer</p>
+<br>
+<p>        - selector:</p>
+<br>
+<p>            match: '{env="staging"}'</p>
+<br>
+<p>          priority: 1</p>
+<br>
+<p>          period: 7d   # Staging logs retained shorter</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Cost Comparison</h2>
+<br>
+<br>
+<br>
 <br>
 <p>| Factor | ELK (self-hosted) | ELK (Elastic Cloud) | Loki + S3 | Splunk |</p>
+<br>
 <p>|---|---|---|---|---|</p>
+<br>
 <p>| Storage cost | $0.10/GB/month (SSD) | $0.30/GB/month | $0.023/GB/month (S3) | $2/GB/month (ingested) |</p>
+<br>
 <p>| Compute | 3-5 nodes minimum | $500+/month base | 2 nodes minimum | $2,000+/GB/day |</p>
+<br>
 <p>| Free tier | No | 500MB/month | Community (unlimited) | 500MB/day |</p>
+<br>
+<br>
+<br>
 <br>
 <p>Loki offers the lowest storage cost by far due to its S3-based object storage and label-only indexing. ELK provides the best query flexibility at moderate cost. Splunk delivers enterprise-grade reliability but at a premium that only makes sense for compliance-heavy industries.</p>
 <br>
-<h2> Decision Matrix</h2>
 <br>
-<li>**ELK Stack**: Best for teams needing full-text search across all fields, complex aggregations, and existing Elasticsearch expertise.</li>
-<li>**Grafana Loki**: Best for cost-conscious teams already using Grafana, who can tolerate grep-style log searching.</li>
-<li>**Splunk**: Best for enterprises requiring compliance auditing, RBAC, and have budget for premium support.</li>
+<br>
+<br>
+<h2>  Decision Matrix</h2>
+<br>
+<br>
+<br>
+<p>* **ELK Stack**: Best for teams needing full-text search across all fields, complex aggregations, and existing Elasticsearch expertise.</p>
+<p>* **Grafana Loki**: Best for cost-conscious teams already using Grafana, who can tolerate grep-style log searching.</p>
+<p>* **Splunk**: Best for enterprises requiring compliance auditing, RBAC, and have budget for premium support.</p>
+<br>
+<br>
 <br>
 <p>For most engineering teams, Loki paired with Grafana offers the best balance of cost and capability. Move to ELK when you need indexed structured search on arbitrary fields. Reserve Splunk for regulated environments where audit trails and access controls justify the expense.</p></div>
     </article>

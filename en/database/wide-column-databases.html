@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="wide-column-databases">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Wide-Column Databases: Cassandra, HBase, ScyllaDB">
+    <meta property="og:description" content="Explore wide-column databases: Cassandra for high-throughput writes, HBase for Hadoop ecosystems, and ScyllaDB.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/wide-column-databases.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Wide-Column Databases: Cassandra, HBase, ScyllaDB">
+    <meta name="twitter:description" content="Explore wide-column databases: Cassandra for high-throughput writes, HBase for Hadoop ecosystems, and ScyllaDB.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Wide-Column Databases: Cassandra, HBase, ScyllaDB — SourceHub</title>
+    <meta name="description" content="Explore wide-column databases: Cassandra for high-throughput writes, HBase for Hadoop ecosystems, and ScyllaDB.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/wide-column-databases.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/wide-column-databases.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Wide-Column Databases: Cassandra, HBase, ScyllaDB",
+      "description": "Explore wide-column databases: Cassandra for high-throughput writes, HBase for Hadoop ecosystems, and ScyllaDB.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "564",
+      "keywords": "Database, Backend, Data",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/wide-column-databases.html"},
+      "articleBody": "Wide-Column Databases: Cassandra, HBase, ScyllaDB Wide-column databases store data in rows with a variable number of columns. Unlike relational databases where every row has the same columns, wide-column stores treat columns as part of the data model. This design optimizes for high-throughput writes and large-scale analytical workloads. Cassandra Apache Cassandra is the most widely deployed wide-column database. It offers linear scalability, no single point of failure, and tunable consistency. Cassandra's data model uses partition keys for distribution and clustering columns for ordering within a partition. Cassandra excels at write-heavy workloads. Write throughput scales linearly as nodes are added. It is commonly used for time-series data, IoT sensor data, messaging systems, and recommendation engines. ScyllaDB ScyllaDB is a Cassandra-compatible database written in C++ instead of Java. It claims 10x better performance per node through CPU affinity, asynchronous I/O, and a shared-nothing architecture. ScyllaDB maintains Cassandra wire protocol compatibility. ScyllaDB's performance advantage is most apparent on modern hardware with many cores and NVMe drives. Each core manages its own portion of data, eliminating contention. The trade-off is operational complexity\u2014ScyllaDB requires careful hardware selection. HBase HBase is built on top of HDFS (Hadoop Distributed File System). It provides strong consistency and integrates deeply with the Hadoop ecosystem. HBase is commonly used for real-time access to large datasets that also support MapReduce or Spark jobs. HBase's architecture uses a master node (HMaster) managing region servers. Automatic failover and region splitting reduce operational overhead. However, HBase is complex to operate and requires significant Hadoop infrastructure. Data Modeling for Wide-Column Stores Wide-column data modeling differs fundamentally from relational modeling. Design tables around query patterns, not entities. Denormalize aggressively. Duplicate data across tables for different access patterns. The primary key design determines query efficiency. Cassandra queries can only filter by partition key (equality) or clustering columns (range). Queries that do not filter by partition key require full table scans. When to Choose Wide-Column Databases Use Cassandra or ScyllaDB for high-throughput write workloads, multi-region deployments, and time-series data. Use HBase when already invested in the Hadoop ecosystem and strong consistency is required. Avoid wide-column databases for complex analytical queries, ad-hoc reporting, or highly relational data."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Wide-Column Databases: Cassandra, HBase, ScyllaDB"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Wide-Column Databases: Cassandra, HBase, ScyllaDB
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Data</span></div>
+      <h1 class="article-title">Wide-Column Databases: Cassandra, HBase, ScyllaDB</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h1>
+<p>Wide-column databases store data in rows with a variable number of columns. Unlike relational databases where every row has the same columns, wide-column stores treat columns as part of the data model. This design optimizes for high-throughput writes and large-scale analytical workloads.</p>
+<br>
+<h2> Cassandra</h2>
+<br>
+<p>Apache Cassandra is the most widely deployed wide-column database. It offers linear scalability, no single point of failure, and tunable consistency. Cassandra's data model uses partition keys for distribution and clustering columns for ordering within a partition.</p>
+<br>
+<p>Cassandra excels at write-heavy workloads. Write throughput scales linearly as nodes are added. It is commonly used for time-series data, IoT sensor data, messaging systems, and recommendation engines.</p>
+<br>
+<h2> ScyllaDB</h2>
+<br>
+<p>ScyllaDB is a Cassandra-compatible database written in C++ instead of Java. It claims 10x better performance per node through CPU affinity, asynchronous I/O, and a shared-nothing architecture. ScyllaDB maintains Cassandra wire protocol compatibility.</p>
+<br>
+<p>ScyllaDB's performance advantage is most apparent on modern hardware with many cores and NVMe drives. Each core manages its own portion of data, eliminating contention. The trade-off is operational complexity—ScyllaDB requires careful hardware selection.</p>
+<br>
+<h2> HBase</h2>
+<br>
+<p>HBase is built on top of HDFS (Hadoop Distributed File System). It provides strong consistency and integrates deeply with the Hadoop ecosystem. HBase is commonly used for real-time access to large datasets that also support MapReduce or Spark jobs.</p>
+<br>
+<p>HBase's architecture uses a master node (HMaster) managing region servers. Automatic failover and region splitting reduce operational overhead. However, HBase is complex to operate and requires significant Hadoop infrastructure.</p>
+<br>
+<h2> Data Modeling for Wide-Column Stores</h2>
+<br>
+<p>Wide-column data modeling differs fundamentally from relational modeling. Design tables around query patterns, not entities. Denormalize aggressively. Duplicate data across tables for different access patterns.</p>
+<br>
+<p>The primary key design determines query efficiency. Cassandra queries can only filter by partition key (equality) or clustering columns (range). Queries that do not filter by partition key require full table scans.</p>
+<br>
+<h2> When to Choose Wide-Column Databases</h2>
+<br>
+<p>Use Cassandra or ScyllaDB for high-throughput write workloads, multi-region deployments, and time-series data. Use HBase when already invested in the Hadoop ecosystem and strong consistency is required. Avoid wide-column databases for complex analytical queries, ad-hoc reporting, or highly relational data.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

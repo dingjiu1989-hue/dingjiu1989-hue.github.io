@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1517",
+      "wordCount": "1792",
       "keywords": "Comparison, Technology",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/compare/zustand-vs-redux.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/compare/zustand-vs-redux.html"},
+      "articleBody": "Zustand vs Redux vs Jotai Introduction React state management has evolved significantly. Redux, once the default choice for complex applications, now competes with simpler alternatives like Zustand and Jotai. Each takes a different approach: Redux centralizes state with strict patterns, Zustand provides a minimal store with hooks, and Jotai offers atomic, Recoil-inspired state management. This comparison helps you choose the right state management approach. Redux Toolkit Redux Toolkit (RTK) is Redux's modern incarnation, eliminating much of the boilerplate that plagued classic Redux. **Philosophy:** Single centralized store with predictable updates through reducers and actions. import { createSlice, configureStore } from \"@reduxjs/toolkit\"; const counterSlice = createSlice({ name: \"counter\", initialState: { value: 0 }, reducers: { increment: (state) => { state.value += 1; }, incrementBy: (state, action) => { state.value += action.payload; }, }, }); const store = configureStore({ reducer: { counter: counterSlice.reducer }, }); export const { increment, incrementBy } = counterSlice.actions; export type RootState = ReturnType; // In component: function Counter() { const count = useSelector((state: RootState) => state.counter.value); const dispatch = useDispatch(); return ( {count} dispatch(increment())}>+1 ); } **Strengths:** * Mature ecosystem with middleware (Redux Thunk, Redux Saga) * DevTools with time-travel debugging * TypeScript integration is excellent with RTK * Clear patterns for large teams * Well-documented for complex async flows **Weaknesses:** * Conceptual overhead (actions, reducers, dispatch, selectors) * More boilerplate than alternatives (even with RTK) * Selectors need memoization for performance * Centralized store can become a bottleneck in very large apps Zustand Zustand provides a minimal store with React hooks, no providers needed. **Philosophy:** A small, fast, and scalable state management solution with no boilerplate. import { create } from \"zustand\"; interface CounterState { count: number; increment: () => void; incrementBy: (amount: number) => void; } const useCounterStore = create((set) => ({ count: 0, increment: () => set((state) => ({ count: state.count + 1 })), incrementBy: (amount) => set((state) => ({ count: state.count + amount })), })); // In component \u2014 no Provider needed function Counter() { const count = useCounterStore((state) => state.count); const increment = useCounterStore((state) => state.increment); return ( {count} +1 ); } **Strengths:** * Minimal boilerplate \u2014 create a store, use it * No Provider wrapping needed * Subscription-based rendering (only re-renders on accessed state) * Simple async actions (no middleware needed) * Tiny bundle size (~1KB) * Works outside React (vanilla JS stores) **Weaknesses:** * Fewer middleware options than Redux * Less structure for large teams (can lead to inconsistent patterns) * DevTools require additional setup * No built-in data fetching or caching (unlike RTK Query or TanStack Query) Jotai Jotai takes an atomic approach \u2014 each piece of state is an independent atom. **Philosophy:** Build state by composing primitive atoms, much like React's useState but shared. import { atom, useAtom } from \"jotai\"; // Primitive atom const countAtom = atom(0); // Derived atom (computed state) const doubleCountAtom = atom((get) => get(countAtom) * 2); // Async atom const userAtom = atom(async () => { const response = await fetch(\"/api/user\"); return response.json(); }); // In component function Counter() { const [count, setCount] = useAtom(countAtom); const [doubleCount] = useAtom(doubleCountAtom); return ( Count: {count} Double: {doubleCount} setCount((c) => c + 1)}>+1 ); } **Strengths:** * Granular re-renders (only components using a specific atom re-render) * Built-in async atoms (no middleware for async) * Composable atoms for derived state * Tiny bundle size (~3KB) * No global store or Provider needed **Weaknesses:** * Less mature ecosystem than Redux * Atomic approach can be unfamiliar to new team members * Debugging can be harder with many small atoms * SSR requires additional configuration Comparison Table | Aspect | Redux Toolkit | Zustand | Jotai | |--------|--------------|---------|-------| | Architecture | Centralized store | Multiple stores | Atomic atoms | | Boilerplate | Moderate | Minimal | Minimal | | Bundle size | ~12KB | ~1KB | ~3KB | | Learning curve | Steep | Gentle | Moderate | | DevTools | Built-in | Add-on | Add-on | | Middleware | Rich ecosystem | Immer, persist | None needed | | Async support | Thunks/Sagas | Native in store | Native atoms | | TypeScript | Excellent | Excellent | Good | | Provider needed | Yes | No | No (optional) | | External use | Yes (store) | Yes (store) | Limited | When to Choose What **Choose Redux Toolkit when:** * You're building a large application with a big team * You need established patterns and clear structure * You want RTK Query for data fetching and caching * Your team already knows Redux patterns * You need time-travel debugging and rich middleware **Choose Zustand when:** * You want minimal boilerplate and fast setup * You need a simple, performant store * You're building a medium-sized application * You want state management without Provider nesting * You need to access state outside React components **Choose Jotai when:** * You want React-idiomatic state (atoms = useState + useContext) * You need fine-grained re-renders * You want built-in async support * You're building an app with many small, independent state pieces * You want composeable state without a global store Conclusion The state management landscape in 2026 has moved beyond \"one size fits all.\" Redux Toolkit remains the right choice for large applications that need structure and a rich ecosystem. Zustand has become the default recommendation for most new React projects due to its simplicity and performance. Jotai offers the most React-idiomatic experience for applications with highly granular state needs. Consider your team size, application complexity, and whether you need data fetching (RTK Query) or async workflows (Jotai's async atoms) when making your choice."
     }
     </script>
     <script type="application/ld+json">
@@ -73,282 +74,376 @@
         <span class="tag-cat">Technology</span></div>
       <h1 class="article-title">Zustand vs Redux vs Jotai</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Introduction</h2>
+      <div class="article-body"><h1>Zustand vs Redux vs Jotai</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <p>React state management has evolved significantly. Redux, once the default choice for complex applications, now competes with simpler alternatives like Zustand and Jotai. Each takes a different approach: Redux centralizes state with strict patterns, Zustand provides a minimal store with hooks, and Jotai offers atomic, Recoil-inspired state management. This comparison helps you choose the right state management approach.</p>
 <br>
-<h2> Redux Toolkit</h2>
+<br>
+<br>
+<br>
+<h2>  Redux Toolkit</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Redux Toolkit (RTK) is Redux's modern incarnation, eliminating much of the boilerplate that plagued classic Redux.</p>
 <br>
+<br>
+<br>
+<br>
 <p>**Philosophy:** Single centralized store with predictable updates through reducers and actions.</p>
 <br>
-<pre><code>
-import { createSlice, configureStore } from &quot;@reduxjs/toolkit&quot;;
-
-
-
-const counterSlice = createSlice({
-
-  name: &quot;counter&quot;,
-
-  initialState: { value: 0 },
-
-  reducers: {
-
-    increment: (state) =&gt; { state.value += 1; },
-
-    incrementBy: (state, action) =&gt; { state.value += action.payload; },
-
-  },
-
-});
-
-
-
-const store = configureStore({
-
-  reducer: { counter: counterSlice.reducer },
-
-});
-
-
-
-export const { increment, incrementBy } = counterSlice.actions;
-
-export type RootState = ReturnType&lt;typeof store.getState&gt;;
-
-
-
-// In component:
-
-function Counter() {
-
-  const count = useSelector((state: RootState) =&gt; state.counter.value);
-
-  const dispatch = useDispatch();
-
-
-
-  return (
-
-    &lt;div&gt;
-
-      &lt;p&gt;{count}&lt;/p&gt;
-
-      &lt;button onClick={() =&gt; dispatch(increment())}&gt;+1&lt;/button&gt;
-
-    &lt;/div&gt;
-
-  );
-
-}
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    import { createSlice, configureStore } from "@reduxjs/toolkit";</p>
+<br>
+<br>
+<br>
+<p>    const counterSlice = createSlice({</p>
+<br>
+<p>      name: "counter",</p>
+<br>
+<p>      initialState: { value: 0 },</p>
+<br>
+<p>      reducers: {</p>
+<br>
+<p>        increment: (state) => { state.value += 1; },</p>
+<br>
+<p>        incrementBy: (state, action) => { state.value += action.payload; },</p>
+<br>
+<p>      },</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<p>    const store = configureStore({</p>
+<br>
+<p>      reducer: { counter: counterSlice.reducer },</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<p>    export const { increment, incrementBy } = counterSlice.actions;</p>
+<br>
+<p>    export type RootState = ReturnType<typeof store.getState>;</p>
+<br>
+<br>
+<br>
+<p>    // In component:</p>
+<br>
+<p>    function Counter() {</p>
+<br>
+<p>      const count = useSelector((state: RootState) => state.counter.value);</p>
+<br>
+<p>      const dispatch = useDispatch();</p>
+<br>
+<br>
+<br>
+<p>      return (</p>
+<br>
+<p>        <div></p>
+<br>
+<p>          <p>{count}</p></p>
+<br>
+<p>          <button onClick={() => dispatch(increment())}>+1</button></p>
+<br>
+<p>        </div></p>
+<br>
+<p>      );</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Strengths:**</p>
-<li>Mature ecosystem with middleware (Redux Thunk, Redux Saga)</li>
-<li>DevTools with time-travel debugging</li>
-<li>TypeScript integration is excellent with RTK</li>
-<li>Clear patterns for large teams</li>
-<li>Well-documented for complex async flows</li>
+<br>
+<p>* Mature ecosystem with middleware (Redux Thunk, Redux Saga)</p>
+<p>* DevTools with time-travel debugging</p>
+<p>* TypeScript integration is excellent with RTK</p>
+<p>* Clear patterns for large teams</p>
+<p>* Well-documented for complex async flows</p>
+<br>
+<br>
 <br>
 <p>**Weaknesses:**</p>
-<li>Conceptual overhead (actions, reducers, dispatch, selectors)</li>
-<li>More boilerplate than alternatives (even with RTK)</li>
-<li>Selectors need memoization for performance</li>
-<li>Centralized store can become a bottleneck in very large apps</li>
 <br>
-<h2> Zustand</h2>
+<p>* Conceptual overhead (actions, reducers, dispatch, selectors)</p>
+<p>* More boilerplate than alternatives (even with RTK)</p>
+<p>* Selectors need memoization for performance</p>
+<p>* Centralized store can become a bottleneck in very large apps</p>
+<br>
+<br>
+<br>
+<h2>  Zustand</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Zustand provides a minimal store with React hooks, no providers needed.</p>
 <br>
+<br>
+<br>
+<br>
 <p>**Philosophy:** A small, fast, and scalable state management solution with no boilerplate.</p>
 <br>
-<pre><code>
-import { create } from &quot;zustand&quot;;
-
-
-
-interface CounterState {
-
-  count: number;
-
-  increment: () =&gt; void;
-
-  incrementBy: (amount: number) =&gt; void;
-
-}
-
-
-
-const useCounterStore = create&lt;CounterState&gt;((set) =&gt; ({
-
-  count: 0,
-
-  increment: () =&gt; set((state) =&gt; ({ count: state.count + 1 })),
-
-  incrementBy: (amount) =&gt; set((state) =&gt; ({ count: state.count + amount })),
-
-}));
-
-
-
-// In component — no Provider needed
-
-function Counter() {
-
-  const count = useCounterStore((state) =&gt; state.count);
-
-  const increment = useCounterStore((state) =&gt; state.increment);
-
-
-
-  return (
-
-    &lt;div&gt;
-
-      &lt;p&gt;{count}&lt;/p&gt;
-
-      &lt;button onClick={increment}&gt;+1&lt;/button&gt;
-
-    &lt;/div&gt;
-
-  );
-
-}
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    import { create } from "zustand";</p>
+<br>
+<br>
+<br>
+<p>    interface CounterState {</p>
+<br>
+<p>      count: number;</p>
+<br>
+<p>      increment: () => void;</p>
+<br>
+<p>      incrementBy: (amount: number) => void;</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<p>    const useCounterStore = create<CounterState>((set) => ({</p>
+<br>
+<p>      count: 0,</p>
+<br>
+<p>      increment: () => set((state) => ({ count: state.count + 1 })),</p>
+<br>
+<p>      incrementBy: (amount) => set((state) => ({ count: state.count + amount })),</p>
+<br>
+<p>    }));</p>
+<br>
+<br>
+<br>
+<p>    // In component — no Provider needed</p>
+<br>
+<p>    function Counter() {</p>
+<br>
+<p>      const count = useCounterStore((state) => state.count);</p>
+<br>
+<p>      const increment = useCounterStore((state) => state.increment);</p>
+<br>
+<br>
+<br>
+<p>      return (</p>
+<br>
+<p>        <div></p>
+<br>
+<p>          <p>{count}</p></p>
+<br>
+<p>          <button onClick={increment}>+1</button></p>
+<br>
+<p>        </div></p>
+<br>
+<p>      );</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Strengths:**</p>
-<li>Minimal boilerplate — create a store, use it</li>
-<li>No Provider wrapping needed</li>
-<li>Subscription-based rendering (only re-renders on accessed state)</li>
-<li>Simple async actions (no middleware needed)</li>
-<li>Tiny bundle size (~1KB)</li>
-<li>Works outside React (vanilla JS stores)</li>
+<br>
+<p>* Minimal boilerplate — create a store, use it</p>
+<p>* No Provider wrapping needed</p>
+<p>* Subscription-based rendering (only re-renders on accessed state)</p>
+<p>* Simple async actions (no middleware needed)</p>
+<p>* Tiny bundle size (~1KB)</p>
+<p>* Works outside React (vanilla JS stores)</p>
+<br>
+<br>
 <br>
 <p>**Weaknesses:**</p>
-<li>Fewer middleware options than Redux</li>
-<li>Less structure for large teams (can lead to inconsistent patterns)</li>
-<li>DevTools require additional setup</li>
-<li>No built-in data fetching or caching (unlike RTK Query or TanStack Query)</li>
 <br>
-<h2> Jotai</h2>
+<p>* Fewer middleware options than Redux</p>
+<p>* Less structure for large teams (can lead to inconsistent patterns)</p>
+<p>* DevTools require additional setup</p>
+<p>* No built-in data fetching or caching (unlike RTK Query or TanStack Query)</p>
+<br>
+<br>
+<br>
+<h2>  Jotai</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Jotai takes an atomic approach — each piece of state is an independent atom.</p>
 <br>
+<br>
+<br>
+<br>
 <p>**Philosophy:** Build state by composing primitive atoms, much like React's useState but shared.</p>
 <br>
-<pre><code>
-import { atom, useAtom } from &quot;jotai&quot;;
-
-
-
-// Primitive atom
-
-const countAtom = atom(0);
-
-
-
-// Derived atom (computed state)
-
-const doubleCountAtom = atom((get) =&gt; get(countAtom) * 2);
-
-
-
-// Async atom
-
-const userAtom = atom(async () =&gt; {
-
-  const response = await fetch(&quot;/api/user&quot;);
-
-  return response.json();
-
-});
-
-
-
-// In component
-
-function Counter() {
-
-  const [count, setCount] = useAtom(countAtom);
-
-  const [doubleCount] = useAtom(doubleCountAtom);
-
-
-
-  return (
-
-    &lt;div&gt;
-
-      &lt;p&gt;Count: {count}&lt;/p&gt;
-
-      &lt;p&gt;Double: {doubleCount}&lt;/p&gt;
-
-      &lt;button onClick={() =&gt; setCount((c) =&gt; c + 1)}&gt;+1&lt;/button&gt;
-
-    &lt;/div&gt;
-
-  );
-
-}
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    import { atom, useAtom } from "jotai";</p>
+<br>
+<br>
+<br>
+<p>    // Primitive atom</p>
+<br>
+<p>    const countAtom = atom(0);</p>
+<br>
+<br>
+<br>
+<p>    // Derived atom (computed state)</p>
+<br>
+<p>    const doubleCountAtom = atom((get) => get(countAtom) * 2);</p>
+<br>
+<br>
+<br>
+<p>    // Async atom</p>
+<br>
+<p>    const userAtom = atom(async () => {</p>
+<br>
+<p>      const response = await fetch("/api/user");</p>
+<br>
+<p>      return response.json();</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<p>    // In component</p>
+<br>
+<p>    function Counter() {</p>
+<br>
+<p>      const [count, setCount] = useAtom(countAtom);</p>
+<br>
+<p>      const [doubleCount] = useAtom(doubleCountAtom);</p>
+<br>
+<br>
+<br>
+<p>      return (</p>
+<br>
+<p>        <div></p>
+<br>
+<p>          <p>Count: {count}</p></p>
+<br>
+<p>          <p>Double: {doubleCount}</p></p>
+<br>
+<p>          <button onClick={() => setCount((c) => c + 1)}>+1</button></p>
+<br>
+<p>        </div></p>
+<br>
+<p>      );</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Strengths:**</p>
-<li>Granular re-renders (only components using a specific atom re-render)</li>
-<li>Built-in async atoms (no middleware for async)</li>
-<li>Composable atoms for derived state</li>
-<li>Tiny bundle size (~3KB)</li>
-<li>No global store or Provider needed</li>
+<br>
+<p>* Granular re-renders (only components using a specific atom re-render)</p>
+<p>* Built-in async atoms (no middleware for async)</p>
+<p>* Composable atoms for derived state</p>
+<p>* Tiny bundle size (~3KB)</p>
+<p>* No global store or Provider needed</p>
+<br>
+<br>
 <br>
 <p>**Weaknesses:**</p>
-<li>Less mature ecosystem than Redux</li>
-<li>Atomic approach can be unfamiliar to new team members</li>
-<li>Debugging can be harder with many small atoms</li>
-<li>SSR requires additional configuration</li>
 <br>
-<h2> Comparison Table</h2>
+<p>* Less mature ecosystem than Redux</p>
+<p>* Atomic approach can be unfamiliar to new team members</p>
+<p>* Debugging can be harder with many small atoms</p>
+<p>* SSR requires additional configuration</p>
+<br>
+<br>
+<br>
+<h2>  Comparison Table</h2>
+<br>
+<br>
+<br>
 <br>
 <p>| Aspect | Redux Toolkit | Zustand | Jotai |</p>
+<br>
 <p>|--------|--------------|---------|-------|</p>
+<br>
 <p>| Architecture | Centralized store | Multiple stores | Atomic atoms |</p>
+<br>
 <p>| Boilerplate | Moderate | Minimal | Minimal |</p>
+<br>
 <p>| Bundle size | ~12KB | ~1KB | ~3KB |</p>
+<br>
 <p>| Learning curve | Steep | Gentle | Moderate |</p>
+<br>
 <p>| DevTools | Built-in | Add-on | Add-on |</p>
+<br>
 <p>| Middleware | Rich ecosystem | Immer, persist | None needed |</p>
+<br>
 <p>| Async support | Thunks/Sagas | Native in store | Native atoms |</p>
+<br>
 <p>| TypeScript | Excellent | Excellent | Good |</p>
+<br>
 <p>| Provider needed | Yes | No | No (optional) |</p>
+<br>
 <p>| External use | Yes (store) | Yes (store) | Limited |</p>
 <br>
-<h2> When to Choose What</h2>
+<br>
+<br>
+<br>
+<h2>  When to Choose What</h2>
+<br>
+<br>
+<br>
 <br>
 <p>**Choose Redux Toolkit when:**</p>
-<li>You're building a large application with a big team</li>
-<li>You need established patterns and clear structure</li>
-<li>You want RTK Query for data fetching and caching</li>
-<li>Your team already knows Redux patterns</li>
-<li>You need time-travel debugging and rich middleware</li>
+<br>
+<p>* You're building a large application with a big team</p>
+<p>* You need established patterns and clear structure</p>
+<p>* You want RTK Query for data fetching and caching</p>
+<p>* Your team already knows Redux patterns</p>
+<p>* You need time-travel debugging and rich middleware</p>
+<br>
+<br>
 <br>
 <p>**Choose Zustand when:**</p>
-<li>You want minimal boilerplate and fast setup</li>
-<li>You need a simple, performant store</li>
-<li>You're building a medium-sized application</li>
-<li>You want state management without Provider nesting</li>
-<li>You need to access state outside React components</li>
+<br>
+<p>* You want minimal boilerplate and fast setup</p>
+<p>* You need a simple, performant store</p>
+<p>* You're building a medium-sized application</p>
+<p>* You want state management without Provider nesting</p>
+<p>* You need to access state outside React components</p>
+<br>
+<br>
 <br>
 <p>**Choose Jotai when:**</p>
-<li>You want React-idiomatic state (atoms = useState + useContext)</li>
-<li>You need fine-grained re-renders</li>
-<li>You want built-in async support</li>
-<li>You're building an app with many small, independent state pieces</li>
-<li>You want composeable state without a global store</li>
 <br>
-<h2> Conclusion</h2>
+<p>* You want React-idiomatic state (atoms = useState + useContext)</p>
+<p>* You need fine-grained re-renders</p>
+<p>* You want built-in async support</p>
+<p>* You're building an app with many small, independent state pieces</p>
+<p>* You want composeable state without a global store</p>
+<br>
+<br>
+<br>
+<h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <p>The state management landscape in 2026 has moved beyond "one size fits all." Redux Toolkit remains the right choice for large applications that need structure and a rich ecosystem. Zustand has become the default recommendation for most new React projects due to its simplicity and performance. Jotai offers the most React-idiomatic experience for applications with highly granular state needs. Consider your team size, application complexity, and whether you need data fetching (RTK Query) or async workflows (Jotai's async atoms) when making your choice.</p></div>
     </article>

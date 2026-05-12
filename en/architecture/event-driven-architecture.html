@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2922",
+      "wordCount": "3336",
       "keywords": "Architecture, System Design",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/event-driven-architecture.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/event-driven-architecture.html"},
+      "articleBody": "Event-Driven Architecture: Patterns and Practice Event-driven architecture (EDA) is a software architecture pattern where components communicate by producing and consuming events. Instead of direct service-to-service calls, services publish events about state changes, and interested services consume those events. This decoupling enables scalability, resilience, and real-time processing. This article covers the core patterns: event sourcing, pub/sub, event streaming, schema management, and consumer reliability. Core Concepts An event is a record of something that happened in the system. It is a fact: immutable, timestamped, and meaningful. Event: OrderPlaced { orderId: \"ord-12345\", customerId: \"cus-678\", total: 99.99, items: [..., ..., ...], timestamp: \"2026-05-12T10:30:00Z\" } Events differ from commands and messages: * **Command**: A request for something to happen (imperative). \"Place this order.\" * **Event**: A record that something happened (declarative). \"Order was placed.\" * **Message**: Data sent between services, may be a command or an event. Event Sourcing Event sourcing stores the state of an application as a sequence of events. Instead of storing the current state (e.g., \"account balance = 100\"), event sourcing stores every state change (\"AccountOpened\", \"MoneyDeposited\", \"MoneyWithdrawn\"). How Event Sourcing Works class Account: def __init__(self, account_id): self.account_id = account_id self.balance = 0 self.version = 0 def apply_event(self, event): if event.type == \"AccountOpened\": self.owner = event.owner elif event.type == \"MoneyDeposited\": self.balance += event.amount elif event.type == \"MoneyWithdrawn\": self.balance -= event.amount self.version += 1 def rebuild_from_events(self, events): self.balance = 0 self.version = 0 for event in events: self.apply_event(event) class EventSourcedAccountService: def __init__(self, event_store): self.event_store = event_store def deposit(self, account_id, amount): # Rebuild current state events = self.event_store.get_events(account_id) account = Account(account_id) account.rebuild_from_events(events) # Validate business rules if amount raise ValueError(\"Amount must be positive\") # Store the new event event = Event( aggregate_id=account_id, type=\"MoneyDeposited\", data={\"amount\": amount}, version=account.version + 1 ) self.event_store.append(event) Benefits of Event Sourcing * **Complete audit trail**: Every state change is recorded. * **Temporal queries**: You can query the state at any point in time. * **Debugging and analysis**: Replay events to debug issues or analyze behavior. * **Event-driven projections**: Build multiple read models from the same events. When NOT to Use Event Sourcing * Simple CRUD applications where audit trails are not needed. * Systems requiring strong eventual consistency with no tolerance for stale projections. * When the event store becomes a performance bottleneck for write-heavy workloads. * When domain events are not a natural modeling fit. Pub/Sub Pattern Publish-subscribe is a messaging pattern where publishers emit events without knowing which subscribers will consume them. Subscribers express interest in certain event types and receive them asynchronously. # Pub/sub using Redis import redis class EventPublisher: def __init__(self, redis_client): self.redis = redis_client def publish(self, channel, event): self.redis.publish(channel, event.to_json()) class EventSubscriber: def __init__(self, redis_client, channel): self.pubsub = redis_client.pubsub() self.pubsub.subscribe(channel) def start_listening(self): for message in self.pubsub.listen(): if message['type'] == 'message': self.handle_event(Event.from_json(message['data'])) def handle_event(self, event): raise NotImplementedError When to Use Pub/Sub * **Broadcast events**: Multiple downstream services need to react to the same event. * **Dynamic subscriptions**: Subscribers come and go without affecting publishers. * **Decoupled integration**: Services should not know about each other. Event Streaming with Kafka Apache Kafka is the dominant platform for event streaming at scale. It provides durable, ordered, and partitioned event storage. Kafka Concepts * **Topic**: A category of events (e.g., \"orders\", \"payments\"). * **Partition**: A unit of parallelism within a topic. Events in a partition are ordered. * **Producer**: Publishes events to a topic partition. * **Consumer**: Reads events from a topic partition. * **Consumer group**: A set of consumers that cooperate to consume a topic. Each partition is consumed by exactly one consumer in the group. from kafka import KafkaProducer, KafkaConsumer import json # Producer producer = KafkaProducer( bootstrap_servers=['localhost:9092'], value_serializer=lambda v: json.dumps(v).encode('utf-8') ) # Publish an event producer.send( 'orders', key=b'ord-12345', # Same key = same partition = ordered value={ 'event_type': 'OrderPlaced', 'order_id': 'ord-12345', 'customer_id': 'cus-678', 'total': 99.99, 'timestamp': '2026-05-12T10:30:00Z' } ) producer.flush() # Consumer consumer = KafkaConsumer( 'orders', bootstrap_servers=['localhost:9092'], group_id='order-processor', value_deserializer=lambda v: json.loads(v.decode('utf-8')), auto_offset_reset='earliest' ) for message in consumer: event = message.value process_event(event) # Offset is committed automatically or manually after processing Partition Assignment Strategy Events with the same key go to the same partition, preserving order within that key's scope. Good partition keys evenly distribute load while preserving ordering within each entity. # Good partition key: customer_id (entities are naturally scoped) key = str(customer_id).encode() # Bad partition key: timestamp (all events go to one partition if in the same second) key = str(order_date).encode() Event Schemas Events are contracts between producers and consumers. Schema management ensures that changes are compatible and do not break consumers. Schema Registry A schema registry stores and validates event schemas. Producers and consumers retrieve schemas from the registry. // Avro schema for OrderPlaced event { \"type\": \"record\", \"name\": \"OrderPlaced\", \"namespace\": \"com.example.orders\", \"fields\": [ {\"name\": \"order_id\", \"type\": \"string\"}, {\"name\": \"customer_id\", \"type\": \"string\"}, {\"name\": \"total\", \"type\": \"double\"}, {\"name\": \"items\", \"type\": { \"type\": \"array\", \"items\": { \"type\": \"record\", \"name\": \"OrderItem\", \"fields\": [ {\"name\": \"product_id\", \"type\": \"string\"}, {\"name\": \"quantity\", \"type\": \"int\"}, {\"name\": \"price\", \"type\": \"double\"} ] } }}, {\"name\": \"timestamp\", \"type\": \"string\"} ] } Schema Evolution Rules * **Backward compatible**: New schema can read data written with the old schema. Adding optional fields is backward compatible. * **Forward compatible**: Old schema can read data written with the new schema. Removing fields is forward compatible. * **Full compatible**: Both backward and forward compatible. Rules: * Do not remove required fields. * New fields should have defaults. * Do not rename fields. * Do not change field types. Idempotent Consumers In event-driven systems, events can be delivered more than once (at-least-once delivery). Consumers must be idempotent: processing the same event multiple times produces the same result. Idempotency Strategies **Idempotency key**: Track processed event IDs in a database table. class IdempotentConsumer: def __init__(self, db_connection): self.db = db_connection def process_event(self, event): # Check if already processed already_processed = self.db.execute( \"SELECT 1 FROM processed_events WHERE event_id = ?\", (event.id,) ) if already_processed: log.info(f\"Skipping already-processed event: {event.id}\") return # Idempotent: skip # Process event self.handle_event(event) # Record as processed (in same transaction if possible) self.db.execute( \"INSERT INTO processed_events (event_id, processed_at) VALUES (?, ?)\", (event.id, datetime.utcnow()) ) **Deterministic processing**: Make event processing inherently idempotent. # Deterministic: setting status is idempotent def handle_order_shipped(event): db.execute( \"UPDATE orders SET status = ? WHERE order_id = ?\", (\"shipped\", event.order_id) ) # Running this twice sets \"shipped\" twice \u2014 same result. **Compare-and-swap**: Only apply the event if the current state matches expectations. def handle_payment_confirmed(event): db.execute( \"\"\"UPDATE orders SET status = 'paid', paid_at = ? WHERE order_id = ? AND status = 'pending'\"\"\", (event.timestamp, event.order_id) ) # If already processed, the WHERE clause prevents double application. Exactly-Once Processing Exactly-once processing is the holy grail of event-driven systems. It ensures each event is processed exactly one time, even in the presence of failures. Kafka Exactly-Once Semantics Kafka supports exactly-once semantics (EOS) through transactional producers and consumers. from kafka import KafkaProducer # Transactional producer producer = KafkaProducer( bootstrap_servers=['localhost:9092'], enable_idempotence=True, transactional_id='order-processor' ) producer.init_transactions() try: producer.begin_transaction() # Read from source topic event = read_event() # Process and produce to multiple topics producer.send('processed-orders', value=process(event)) producer.send('notifications', value=build_notification(event)) producer.commit_transaction() except Exception: producer.abort_transaction() For idempotent end-to-end processing, combine Kafka transactions with a transactional-outbox pattern. Common Patterns Transactional Outbox When a service needs to both write to its database and publish an event, use the outbox pattern to ensure atomicity: # Transactional outbox def place_order(order_data): with transaction(): # 1. Write to database order_id = db.insert(\"orders\", order_data) # 2. Write event to outbox table (same database, same transaction) db.insert(\"outbox\", { \"event_type\": \"OrderPlaced\", \"payload\": json.dumps(order_data), \"created_at\": datetime.utcnow() }) # 3. Outbox relay picks up and publishes # This runs after the transaction commits Dead Letter Queue Events that cannot be processed after retries go to a dead letter queue (DLQ): def process_with_dlq(raw_event_content, max_retries=3): try: process(raw_event_content) except Exception as e: for attempt in range(max_retries): try: process(raw_event_content) return except Exception: if attempt time.sleep(2 ** attempt) # Exponential backoff # Send to DLQ dlq.send(raw_event_content, error=str(e), original_topic=\"orders\") Conclusion Event-driven architecture decouples services through asynchronous event communication. Event sourcing provides a complete audit trail. Pub/sub enables flexible integration. Kafka provides durable, scalable event streaming. Schema management ensures compatible evolution. Idempotent consumers and exactly-once processing guarantee reliability. Use EDA when you need real-time processing, loose coupling, and multiple consumers of the same events. Start simple with pub/sub and event streaming, and add event sourcing only when the complexity is justified by the benefits."
     }
     </script>
     <script type="application/ld+json">
@@ -73,606 +74,611 @@
         <span class="tag-cat">System Design</span></div>
       <h1 class="article-title">Event-Driven Architecture: Patterns and Practice</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
-      <div class="article-body"><p>Event-driven architecture (EDA) is a software architecture pattern where components communicate by producing and consuming events. Instead of direct service-to-service calls, services publish events about state changes, and interested services consume those events. This decoupling enables scalability, resilience, and real-time processing. This article covers the core patterns: event sourcing, pub/sub, event streaming, schema management, and consumer reliability.</p>
+      <div class="article-body"><h1>Event-Driven Architecture: Patterns and Practice</h1>
 <br>
-<h2> Core Concepts</h2>
+<p>Event-driven architecture (EDA) is a software architecture pattern where components communicate by producing and consuming events. Instead of direct service-to-service calls, services publish events about state changes, and interested services consume those events. This decoupling enables scalability, resilience, and real-time processing. This article covers the core patterns: event sourcing, pub/sub, event streaming, schema management, and consumer reliability.   </p>
+<p>Core Concepts   </p>
+<p>An event is a record of something that happened in the system. It is a fact: immutable, timestamped, and meaningful.   </p>
 <br>
-<p>An event is a record of something that happened in the system. It is a fact: immutable, timestamped, and meaningful.</p>
 <br>
-<pre><code>
-Event: OrderPlaced {
-
-  orderId: &quot;ord-12345&quot;,
-
-  customerId: &quot;cus-678&quot;,
-
-  total: 99.99,
-
-  items: [..., ..., ...],
-
-  timestamp: &quot;2026-05-12T10:30:00Z&quot;
-
-}
-
-</code></pre>
 <br>
-<p>Events differ from commands and messages:</p>
+<p>    Event: OrderPlaced {</p>
 <br>
-<li>**Command**: A request for something to happen (imperative). "Place this order."</li>
-<li>**Event**: A record that something happened (declarative). "Order was placed."</li>
-<li>**Message**: Data sent between services, may be a command or an event.</li>
+<p>      orderId: "ord-12345",</p>
 <br>
-<h2> Event Sourcing</h2>
+<p>      customerId: "cus-678",</p>
 <br>
-<p>Event sourcing stores the state of an application as a sequence of events. Instead of storing the current state (e.g., "account balance = 100"), event sourcing stores every state change ("AccountOpened", "MoneyDeposited", "MoneyWithdrawn").</p>
+<p>      total: 99.99,</p>
 <br>
-<h3>How Event Sourcing Works</h3>
+<p>      items: [..., ..., ...],</p>
 <br>
-<pre><code>
-class Account:
-
-    def __init__(self, account_id):
-
-        self.account_id = account_id
-
-        self.balance = 0
-
-        self.version = 0
-
-    
-
-    def apply_event(self, event):
-
-        if event.type == &quot;AccountOpened&quot;:
-
-            self.owner = event.owner
-
-        elif event.type == &quot;MoneyDeposited&quot;:
-
-            self.balance += event.amount
-
-        elif event.type == &quot;MoneyWithdrawn&quot;:
-
-            self.balance -= event.amount
-
-        self.version += 1
-
-    
-
-    def rebuild_from_events(self, events):
-
-        self.balance = 0
-
-        self.version = 0
-
-        for event in events:
-
-            self.apply_event(event)
-
-
-
-class EventSourcedAccountService:
-
-    def __init__(self, event_store):
-
-        self.event_store = event_store
-
-    
-
-    def deposit(self, account_id, amount):
-
-        # Rebuild current state
-
-        events = self.event_store.get_events(account_id)
-
-        account = Account(account_id)
-
-        account.rebuild_from_events(events)
-
-        
-
-        # Validate business rules
-
-        if amount &lt;= 0:
-
-            raise ValueError(&quot;Amount must be positive&quot;)
-
-        
-
-        # Store the new event
-
-        event = Event(
-
-            aggregate_id=account_id,
-
-            type=&quot;MoneyDeposited&quot;,
-
-            data={&quot;amount&quot;: amount},
-
-            version=account.version + 1
-
-        )
-
-        self.event_store.append(event)
-
-</code></pre>
+<p>      timestamp: "2026-05-12T10:30:00Z"</p>
 <br>
-<h3>Benefits of Event Sourcing</h3>
+<p>    }</p>
 <br>
-<li>**Complete audit trail**: Every state change is recorded.</li>
-<li>**Temporal queries**: You can query the state at any point in time.</li>
-<li>**Debugging and analysis**: Replay events to debug issues or analyze behavior.</li>
-<li>**Event-driven projections**: Build multiple read models from the same events.</li>
 <br>
-<h3>When NOT to Use Event Sourcing</h3>
 <br>
-<li>Simple CRUD applications where audit trails are not needed.</li>
-<li>Systems requiring strong eventual consistency with no tolerance for stale projections.</li>
-<li>When the event store becomes a performance bottleneck for write-heavy workloads.</li>
-<li>When domain events are not a natural modeling fit.</li>
 <br>
-<h2> Pub/Sub Pattern</h2>
+<p>Events differ from commands and messages:   </p>
 <br>
-<p>Publish-subscribe is a messaging pattern where publishers emit events without knowing which subscribers will consume them. Subscribers express interest in certain event types and receive them asynchronously.</p>
+<p>* **Command**: A request for something to happen (imperative). "Place this order."</p>
+<p>* **Event**: A record that something happened (declarative). "Order was placed."</p>
+<p>* **Message**: Data sent between services, may be a command or an event.</p>
 <br>
-<pre><code>
-# Pub/sub using Redis
-
-import redis
-
-
-
-class EventPublisher:
-
-    def __init__(self, redis_client):
-
-        self.redis = redis_client
-
-    
-
-    def publish(self, channel, event):
-
-        self.redis.publish(channel, event.to_json())
-
-
-
-class EventSubscriber:
-
-    def __init__(self, redis_client, channel):
-
-        self.pubsub = redis_client.pubsub()
-
-        self.pubsub.subscribe(channel)
-
-    
-
-    def start_listening(self):
-
-        for message in self.pubsub.listen():
-
-            if message[&#x27;type&#x27;] == &#x27;message&#x27;:
-
-                self.handle_event(Event.from_json(message[&#x27;data&#x27;]))
-
-    
-
-    def handle_event(self, event):
-
-        raise NotImplementedError
-
-</code></pre>
+<p>Event Sourcing   </p>
+<p>Event sourcing stores the state of an application as a sequence of events. Instead of storing the current state (e.g., "account balance = 100"), event sourcing stores every state change ("AccountOpened", "MoneyDeposited", "MoneyWithdrawn").   </p>
+<p>How Event Sourcing Works   </p>
 <br>
-<h3>When to Use Pub/Sub</h3>
 <br>
-<li>**Broadcast events**: Multiple downstream services need to react to the same event.</li>
-<li>**Dynamic subscriptions**: Subscribers come and go without affecting publishers.</li>
-<li>**Decoupled integration**: Services should not know about each other.</li>
 <br>
-<h2> Event Streaming with Kafka</h2>
+<p>    class Account:</p>
 <br>
-<p>Apache Kafka is the dominant platform for event streaming at scale. It provides durable, ordered, and partitioned event storage.</p>
+<p>        def __init__(self, account_id):</p>
 <br>
-<h3>Kafka Concepts</h3>
+<p>            self.account_id = account_id</p>
 <br>
-<li>**Topic**: A category of events (e.g., "orders", "payments").</li>
-<li>**Partition**: A unit of parallelism within a topic. Events in a partition are ordered.</li>
-<li>**Producer**: Publishes events to a topic partition.</li>
-<li>**Consumer**: Reads events from a topic partition.</li>
-<li>**Consumer group**: A set of consumers that cooperate to consume a topic. Each partition is consumed by exactly one consumer in the group.</li>
+<p>            self.balance = 0</p>
 <br>
-<pre><code>
-from kafka import KafkaProducer, KafkaConsumer
-
-import json
-
-
-
-# Producer
-
-producer = KafkaProducer(
-
-    bootstrap_servers=[&#x27;localhost:9092&#x27;],
-
-    value_serializer=lambda v: json.dumps(v).encode(&#x27;utf-8&#x27;)
-
-)
-
-
-
-# Publish an event
-
-producer.send(
-
-    &#x27;orders&#x27;,
-
-    key=b&#x27;ord-12345&#x27;,  # Same key = same partition = ordered
-
-    value={
-
-        &#x27;event_type&#x27;: &#x27;OrderPlaced&#x27;,
-
-        &#x27;order_id&#x27;: &#x27;ord-12345&#x27;,
-
-        &#x27;customer_id&#x27;: &#x27;cus-678&#x27;,
-
-        &#x27;total&#x27;: 99.99,
-
-        &#x27;timestamp&#x27;: &#x27;2026-05-12T10:30:00Z&#x27;
-
-    }
-
-)
-
-producer.flush()
-
-
-
-# Consumer
-
-consumer = KafkaConsumer(
-
-    &#x27;orders&#x27;,
-
-    bootstrap_servers=[&#x27;localhost:9092&#x27;],
-
-    group_id=&#x27;order-processor&#x27;,
-
-    value_deserializer=lambda v: json.loads(v.decode(&#x27;utf-8&#x27;)),
-
-    auto_offset_reset=&#x27;earliest&#x27;
-
-)
-
-
-
-for message in consumer:
-
-    event = message.value
-
-    process_event(event)
-
-    # Offset is committed automatically or manually after processing
-
-</code></pre>
+<p>            self.version = 0</p>
 <br>
-<h3>Partition Assignment Strategy</h3>
 <br>
-<p>Events with the same key go to the same partition, preserving order within that key's scope. Good partition keys evenly distribute load while preserving ordering within each entity.</p>
 <br>
-<pre><code>
-# Good partition key: customer_id (entities are naturally scoped)
-
-key = str(customer_id).encode()
-
-
-
-# Bad partition key: timestamp (all events go to one partition if in the same second)
-
-key = str(order_date).encode()
-
-</code></pre>
+<p>        def apply_event(self, event):</p>
 <br>
-<h2> Event Schemas</h2>
+<p>            if event.type == "AccountOpened":</p>
 <br>
-<p>Events are contracts between producers and consumers. Schema management ensures that changes are compatible and do not break consumers.</p>
+<p>                self.owner = event.owner</p>
 <br>
-<h3>Schema Registry</h3>
+<p>            elif event.type == "MoneyDeposited":</p>
 <br>
-<p>A schema registry stores and validates event schemas. Producers and consumers retrieve schemas from the registry.</p>
+<p>                self.balance += event.amount</p>
 <br>
-<pre><code>
-// Avro schema for OrderPlaced event
-
-{
-
-  &quot;type&quot;: &quot;record&quot;,
-
-  &quot;name&quot;: &quot;OrderPlaced&quot;,
-
-  &quot;namespace&quot;: &quot;com.example.orders&quot;,
-
-  &quot;fields&quot;: [
-
-    {&quot;name&quot;: &quot;order_id&quot;, &quot;type&quot;: &quot;string&quot;},
-
-    {&quot;name&quot;: &quot;customer_id&quot;, &quot;type&quot;: &quot;string&quot;},
-
-    {&quot;name&quot;: &quot;total&quot;, &quot;type&quot;: &quot;double&quot;},
-
-    {&quot;name&quot;: &quot;items&quot;, &quot;type&quot;: {
-
-      &quot;type&quot;: &quot;array&quot;,
-
-      &quot;items&quot;: {
-
-        &quot;type&quot;: &quot;record&quot;,
-
-        &quot;name&quot;: &quot;OrderItem&quot;,
-
-        &quot;fields&quot;: [
-
-          {&quot;name&quot;: &quot;product_id&quot;, &quot;type&quot;: &quot;string&quot;},
-
-          {&quot;name&quot;: &quot;quantity&quot;, &quot;type&quot;: &quot;int&quot;},
-
-          {&quot;name&quot;: &quot;price&quot;, &quot;type&quot;: &quot;double&quot;}
-
-        ]
-
-      }
-
-    }},
-
-    {&quot;name&quot;: &quot;timestamp&quot;, &quot;type&quot;: &quot;string&quot;}
-
-  ]
-
-}
-
-</code></pre>
+<p>            elif event.type == "MoneyWithdrawn":</p>
 <br>
-<h3>Schema Evolution Rules</h3>
+<p>                self.balance -= event.amount</p>
 <br>
-<li>**Backward compatible**: New schema can read data written with the old schema. Adding optional fields is backward compatible.</li>
-<li>**Forward compatible**: Old schema can read data written with the new schema. Removing fields is forward compatible.</li>
-<li>**Full compatible**: Both backward and forward compatible.</li>
+<p>            self.version += 1</p>
+<br>
+<br>
+<br>
+<p>        def rebuild_from_events(self, events):</p>
+<br>
+<p>            self.balance = 0</p>
+<br>
+<p>            self.version = 0</p>
+<br>
+<p>            for event in events:</p>
+<br>
+<p>                self.apply_event(event)</p>
+<br>
+<br>
+<br>
+<p>    class EventSourcedAccountService:</p>
+<br>
+<p>        def __init__(self, event_store):</p>
+<br>
+<p>            self.event_store = event_store</p>
+<br>
+<br>
+<br>
+<p>        def deposit(self, account_id, amount):</p>
+<br>
+<p>            # Rebuild current state</p>
+<br>
+<p>            events = self.event_store.get_events(account_id)</p>
+<br>
+<p>            account = Account(account_id)</p>
+<br>
+<p>            account.rebuild_from_events(events)</p>
+<br>
+<br>
+<br>
+<p>            # Validate business rules</p>
+<br>
+<p>            if amount <= 0:</p>
+<br>
+<p>                raise ValueError("Amount must be positive")</p>
+<br>
+<br>
+<br>
+<p>            # Store the new event</p>
+<br>
+<p>            event = Event(</p>
+<br>
+<p>                aggregate_id=account_id,</p>
+<br>
+<p>                type="MoneyDeposited",</p>
+<br>
+<p>                data={"amount": amount},</p>
+<br>
+<p>                version=account.version + 1</p>
+<br>
+<p>            )</p>
+<br>
+<p>            self.event_store.append(event)</p>
+<br>
+<br>
+<br>
+<br>
+<p>Benefits of Event Sourcing   </p>
+<br>
+<p>* **Complete audit trail**: Every state change is recorded.</p>
+<p>* **Temporal queries**: You can query the state at any point in time.</p>
+<p>* **Debugging and analysis**: Replay events to debug issues or analyze behavior.</p>
+<p>* **Event-driven projections**: Build multiple read models from the same events.</p>
+<br>
+<p>When NOT to Use Event Sourcing   </p>
+<br>
+<p>* Simple CRUD applications where audit trails are not needed.</p>
+<p>* Systems requiring strong eventual consistency with no tolerance for stale projections.</p>
+<p>* When the event store becomes a performance bottleneck for write-heavy workloads.</p>
+<p>* When domain events are not a natural modeling fit.</p>
+<br>
+<p>Pub/Sub Pattern   </p>
+<p>Publish-subscribe is a messaging pattern where publishers emit events without knowing which subscribers will consume them. Subscribers express interest in certain event types and receive them asynchronously.   </p>
+<br>
+<br>
+<br>
+<p>    # Pub/sub using Redis</p>
+<br>
+<p>    import redis</p>
+<br>
+<br>
+<br>
+<p>    class EventPublisher:</p>
+<br>
+<p>        def __init__(self, redis_client):</p>
+<br>
+<p>            self.redis = redis_client</p>
+<br>
+<br>
+<br>
+<p>        def publish(self, channel, event):</p>
+<br>
+<p>            self.redis.publish(channel, event.to_json())</p>
+<br>
+<br>
+<br>
+<p>    class EventSubscriber:</p>
+<br>
+<p>        def __init__(self, redis_client, channel):</p>
+<br>
+<p>            self.pubsub = redis_client.pubsub()</p>
+<br>
+<p>            self.pubsub.subscribe(channel)</p>
+<br>
+<br>
+<br>
+<p>        def start_listening(self):</p>
+<br>
+<p>            for message in self.pubsub.listen():</p>
+<br>
+<p>                if message['type'] == 'message':</p>
+<br>
+<p>                    self.handle_event(Event.from_json(message['data']))</p>
+<br>
+<br>
+<br>
+<p>        def handle_event(self, event):</p>
+<br>
+<p>            raise NotImplementedError</p>
+<br>
+<br>
+<br>
+<br>
+<p>When to Use Pub/Sub   </p>
+<br>
+<p>* **Broadcast events**: Multiple downstream services need to react to the same event.</p>
+<p>* **Dynamic subscriptions**: Subscribers come and go without affecting publishers.</p>
+<p>* **Decoupled integration**: Services should not know about each other.</p>
+<br>
+<p>Event Streaming with Kafka   </p>
+<p>Apache Kafka is the dominant platform for event streaming at scale. It provides durable, ordered, and partitioned event storage.   </p>
+<p>Kafka Concepts   </p>
+<br>
+<p>* **Topic**: A category of events (e.g., "orders", "payments").</p>
+<p>* **Partition**: A unit of parallelism within a topic. Events in a partition are ordered.</p>
+<p>* **Producer**: Publishes events to a topic partition.</p>
+<p>* **Consumer**: Reads events from a topic partition.</p>
+<p>* **Consumer group**: A set of consumers that cooperate to consume a topic. Each partition is consumed by exactly one consumer in the group.</p>
+<br>
+<br>
+<br>
+<br>
+<p>    from kafka import KafkaProducer, KafkaConsumer</p>
+<br>
+<p>    import json</p>
+<br>
+<br>
+<br>
+<p>    # Producer</p>
+<br>
+<p>    producer = KafkaProducer(</p>
+<br>
+<p>        bootstrap_servers=['localhost:9092'],</p>
+<br>
+<p>        value_serializer=lambda v: json.dumps(v).encode('utf-8')</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<p>    # Publish an event</p>
+<br>
+<p>    producer.send(</p>
+<br>
+<p>        'orders',</p>
+<br>
+<p>        key=b'ord-12345',  # Same key = same partition = ordered</p>
+<br>
+<p>        value={</p>
+<br>
+<p>            'event_type': 'OrderPlaced',</p>
+<br>
+<p>            'order_id': 'ord-12345',</p>
+<br>
+<p>            'customer_id': 'cus-678',</p>
+<br>
+<p>            'total': 99.99,</p>
+<br>
+<p>            'timestamp': '2026-05-12T10:30:00Z'</p>
+<br>
+<p>        }</p>
+<br>
+<p>    )</p>
+<br>
+<p>    producer.flush()</p>
+<br>
+<br>
+<br>
+<p>    # Consumer</p>
+<br>
+<p>    consumer = KafkaConsumer(</p>
+<br>
+<p>        'orders',</p>
+<br>
+<p>        bootstrap_servers=['localhost:9092'],</p>
+<br>
+<p>        group_id='order-processor',</p>
+<br>
+<p>        value_deserializer=lambda v: json.loads(v.decode('utf-8')),</p>
+<br>
+<p>        auto_offset_reset='earliest'</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<p>    for message in consumer:</p>
+<br>
+<p>        event = message.value</p>
+<br>
+<p>        process_event(event)</p>
+<br>
+<p>        # Offset is committed automatically or manually after processing</p>
+<br>
+<br>
+<br>
+<br>
+<p>Partition Assignment Strategy   </p>
+<p>Events with the same key go to the same partition, preserving order within that key's scope. Good partition keys evenly distribute load while preserving ordering within each entity.   </p>
+<br>
+<br>
+<br>
+<p>    # Good partition key: customer_id (entities are naturally scoped)</p>
+<br>
+<p>    key = str(customer_id).encode()</p>
+<br>
+<br>
+<br>
+<p>    # Bad partition key: timestamp (all events go to one partition if in the same second)</p>
+<br>
+<p>    key = str(order_date).encode()</p>
+<br>
+<br>
+<br>
+<br>
+<p>Event Schemas   </p>
+<p>Events are contracts between producers and consumers. Schema management ensures that changes are compatible and do not break consumers.   </p>
+<p>Schema Registry   </p>
+<p>A schema registry stores and validates event schemas. Producers and consumers retrieve schemas from the registry.   </p>
+<br>
+<br>
+<br>
+<p>    // Avro schema for OrderPlaced event</p>
+<br>
+<p>    {</p>
+<br>
+<p>      "type": "record",</p>
+<br>
+<p>      "name": "OrderPlaced",</p>
+<br>
+<p>      "namespace": "com.example.orders",</p>
+<br>
+<p>      "fields": [</p>
+<br>
+<p>        {"name": "order_id", "type": "string"},</p>
+<br>
+<p>        {"name": "customer_id", "type": "string"},</p>
+<br>
+<p>        {"name": "total", "type": "double"},</p>
+<br>
+<p>        {"name": "items", "type": {</p>
+<br>
+<p>          "type": "array",</p>
+<br>
+<p>          "items": {</p>
+<br>
+<p>            "type": "record",</p>
+<br>
+<p>            "name": "OrderItem",</p>
+<br>
+<p>            "fields": [</p>
+<br>
+<p>              {"name": "product_id", "type": "string"},</p>
+<br>
+<p>              {"name": "quantity", "type": "int"},</p>
+<br>
+<p>              {"name": "price", "type": "double"}</p>
+<br>
+<p>            ]</p>
+<br>
+<p>          }</p>
+<br>
+<p>        }},</p>
+<br>
+<p>        {"name": "timestamp", "type": "string"}</p>
+<br>
+<p>      ]</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<p>Schema Evolution Rules   </p>
+<br>
+<p>* **Backward compatible**: New schema can read data written with the old schema. Adding optional fields is backward compatible.</p>
+<p>* **Forward compatible**: Old schema can read data written with the new schema. Removing fields is forward compatible.</p>
+<p>* **Full compatible**: Both backward and forward compatible.</p>
 <br>
 <p>Rules:</p>
-<li>Do not remove required fields.</li>
-<li>New fields should have defaults.</li>
-<li>Do not rename fields.</li>
-<li>Do not change field types.</li>
+<p>* Do not remove required fields.</p>
+<p>* New fields should have defaults.</p>
+<p>* Do not rename fields.</p>
+<p>* Do not change field types.</p>
 <br>
-<h2> Idempotent Consumers</h2>
+<p>Idempotent Consumers   </p>
+<p>In event-driven systems, events can be delivered more than once (at-least-once delivery). Consumers must be idempotent: processing the same event multiple times produces the same result.   </p>
+<p>Idempotency Strategies   </p>
+<p>**Idempotency key**: Track processed event IDs in a database table.   </p>
 <br>
-<p>In event-driven systems, events can be delivered more than once (at-least-once delivery). Consumers must be idempotent: processing the same event multiple times produces the same result.</p>
 <br>
-<h3>Idempotency Strategies</h3>
 <br>
-<p>**Idempotency key**: Track processed event IDs in a database table.</p>
+<p>    class IdempotentConsumer:</p>
 <br>
-<pre><code>
-class IdempotentConsumer:
-
-    def __init__(self, db_connection):
-
-        self.db = db_connection
-
-    
-
-    def process_event(self, event):
-
-        # Check if already processed
-
-        already_processed = self.db.execute(
-
-            &quot;SELECT 1 FROM processed_events WHERE event_id = ?&quot;,
-
-            (event.id,)
-
-        )
-
-        if already_processed:
-
-            log.info(f&quot;Skipping already-processed event: {event.id}&quot;)
-
-            return  # Idempotent: skip
-
-        
-
-        # Process event
-
-        self.handle_event(event)
-
-        
-
-        # Record as processed (in same transaction if possible)
-
-        self.db.execute(
-
-            &quot;INSERT INTO processed_events (event_id, processed_at) VALUES (?, ?)&quot;,
-
-            (event.id, datetime.utcnow())
-
-        )
-
-</code></pre>
+<p>        def __init__(self, db_connection):</p>
 <br>
-<p>**Deterministic processing**: Make event processing inherently idempotent.</p>
+<p>            self.db = db_connection</p>
 <br>
-<pre><code>
-# Deterministic: setting status is idempotent
-
-def handle_order_shipped(event):
-
-    db.execute(
-
-        &quot;UPDATE orders SET status = ? WHERE order_id = ?&quot;,
-
-        (&quot;shipped&quot;, event.order_id)
-
-    )
-
-    # Running this twice sets &quot;shipped&quot; twice — same result.
-
-</code></pre>
 <br>
-<p>**Compare-and-swap**: Only apply the event if the current state matches expectations.</p>
 <br>
-<pre><code>
-def handle_payment_confirmed(event):
-
-    db.execute(
-
-        &quot;&quot;&quot;UPDATE orders SET status = &#x27;paid&#x27;, paid_at = ?
-
-           WHERE order_id = ? AND status = &#x27;pending&#x27;&quot;&quot;&quot;,
-
-        (event.timestamp, event.order_id)
-
-    )
-
-    # If already processed, the WHERE clause prevents double application.
-
-</code></pre>
+<p>        def process_event(self, event):</p>
 <br>
-<h2> Exactly-Once Processing</h2>
+<p>            # Check if already processed</p>
 <br>
-<p>Exactly-once processing is the holy grail of event-driven systems. It ensures each event is processed exactly one time, even in the presence of failures.</p>
+<p>            already_processed = self.db.execute(</p>
 <br>
-<h3>Kafka Exactly-Once Semantics</h3>
+<p>                "SELECT 1 FROM processed_events WHERE event_id = ?",</p>
 <br>
-<p>Kafka supports exactly-once semantics (EOS) through transactional producers and consumers.</p>
+<p>                (event.id,)</p>
 <br>
-<pre><code>
-from kafka import KafkaProducer
-
-
-
-# Transactional producer
-
-producer = KafkaProducer(
-
-    bootstrap_servers=[&#x27;localhost:9092&#x27;],
-
-    enable_idempotence=True,
-
-    transactional_id=&#x27;order-processor&#x27;
-
-)
-
-
-
-producer.init_transactions()
-
-
-
-try:
-
-    producer.begin_transaction()
-
-    
-
-    # Read from source topic
-
-    event = read_event()
-
-    
-
-    # Process and produce to multiple topics
-
-    producer.send(&#x27;processed-orders&#x27;, value=process(event))
-
-    producer.send(&#x27;notifications&#x27;, value=build_notification(event))
-
-    
-
-    producer.commit_transaction()
-
-except Exception:
-
-    producer.abort_transaction()
-
-</code></pre>
+<p>            )</p>
 <br>
-<p>For idempotent end-to-end processing, combine Kafka transactions with a transactional-outbox pattern.</p>
+<p>            if already_processed:</p>
 <br>
-<h2> Common Patterns</h2>
+<p>                log.info(f"Skipping already-processed event: {event.id}")</p>
 <br>
-<h3>Transactional Outbox</h3>
+<p>                return  # Idempotent: skip</p>
 <br>
-<p>When a service needs to both write to its database and publish an event, use the outbox pattern to ensure atomicity:</p>
 <br>
-<pre><code>
-# Transactional outbox
-
-def place_order(order_data):
-
-    with transaction():
-
-        # 1. Write to database
-
-        order_id = db.insert(&quot;orders&quot;, order_data)
-
-        
-
-        # 2. Write event to outbox table (same database, same transaction)
-
-        db.insert(&quot;outbox&quot;, {
-
-            &quot;event_type&quot;: &quot;OrderPlaced&quot;,
-
-            &quot;payload&quot;: json.dumps(order_data),
-
-            &quot;created_at&quot;: datetime.utcnow()
-
-        })
-
-    
-
-    # 3. Outbox relay picks up and publishes
-
-    # This runs after the transaction commits
-
-</code></pre>
 <br>
-<h3>Dead Letter Queue</h3>
+<p>            # Process event</p>
 <br>
-<p>Events that cannot be processed after retries go to a dead letter queue (DLQ):</p>
+<p>            self.handle_event(event)</p>
 <br>
-<pre><code>
-def process_with_dlq(raw_event_content, max_retries=3):
-
-    try:
-
-        process(raw_event_content)
-
-    except Exception as e:
-
-        for attempt in range(max_retries):
-
-            try:
-
-                process(raw_event_content)
-
-                return
-
-            except Exception:
-
-                if attempt &lt; max_retries - 1:
-
-                    time.sleep(2 ** attempt)  # Exponential backoff
-
-        
-
-        # Send to DLQ
-
-        dlq.send(raw_event_content, error=str(e), original_topic=&quot;orders&quot;)
-
-</code></pre>
 <br>
-<h2> Conclusion</h2>
 <br>
+<p>            # Record as processed (in same transaction if possible)</p>
+<br>
+<p>            self.db.execute(</p>
+<br>
+<p>                "INSERT INTO processed_events (event_id, processed_at) VALUES (?, ?)",</p>
+<br>
+<p>                (event.id, datetime.utcnow())</p>
+<br>
+<p>            )</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Deterministic processing**: Make event processing inherently idempotent.   </p>
+<br>
+<br>
+<br>
+<p>    # Deterministic: setting status is idempotent</p>
+<br>
+<p>    def handle_order_shipped(event):</p>
+<br>
+<p>        db.execute(</p>
+<br>
+<p>            "UPDATE orders SET status = ? WHERE order_id = ?",</p>
+<br>
+<p>            ("shipped", event.order_id)</p>
+<br>
+<p>        )</p>
+<br>
+<p>        # Running this twice sets "shipped" twice — same result.</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Compare-and-swap**: Only apply the event if the current state matches expectations.   </p>
+<br>
+<br>
+<br>
+<p>    def handle_payment_confirmed(event):</p>
+<br>
+<p>        db.execute(</p>
+<br>
+<p>            """UPDATE orders SET status = 'paid', paid_at = ?</p>
+<br>
+<p>               WHERE order_id = ? AND status = 'pending'""",</p>
+<br>
+<p>            (event.timestamp, event.order_id)</p>
+<br>
+<p>        )</p>
+<br>
+<p>        # If already processed, the WHERE clause prevents double application.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Exactly-Once Processing   </p>
+<p>Exactly-once processing is the holy grail of event-driven systems. It ensures each event is processed exactly one time, even in the presence of failures.   </p>
+<p>Kafka Exactly-Once Semantics   </p>
+<p>Kafka supports exactly-once semantics (EOS) through transactional producers and consumers.   </p>
+<br>
+<br>
+<br>
+<p>    from kafka import KafkaProducer</p>
+<br>
+<br>
+<br>
+<p>    # Transactional producer</p>
+<br>
+<p>    producer = KafkaProducer(</p>
+<br>
+<p>        bootstrap_servers=['localhost:9092'],</p>
+<br>
+<p>        enable_idempotence=True,</p>
+<br>
+<p>        transactional_id='order-processor'</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<p>    producer.init_transactions()</p>
+<br>
+<br>
+<br>
+<p>    try:</p>
+<br>
+<p>        producer.begin_transaction()</p>
+<br>
+<br>
+<br>
+<p>        # Read from source topic</p>
+<br>
+<p>        event = read_event()</p>
+<br>
+<br>
+<br>
+<p>        # Process and produce to multiple topics</p>
+<br>
+<p>        producer.send('processed-orders', value=process(event))</p>
+<br>
+<p>        producer.send('notifications', value=build_notification(event))</p>
+<br>
+<br>
+<br>
+<p>        producer.commit_transaction()</p>
+<br>
+<p>    except Exception:</p>
+<br>
+<p>        producer.abort_transaction()</p>
+<br>
+<br>
+<br>
+<br>
+<p>For idempotent end-to-end processing, combine Kafka transactions with a transactional-outbox pattern.   </p>
+<p>Common Patterns   </p>
+<p>Transactional Outbox   </p>
+<p>When a service needs to both write to its database and publish an event, use the outbox pattern to ensure atomicity:   </p>
+<br>
+<br>
+<br>
+<p>    # Transactional outbox</p>
+<br>
+<p>    def place_order(order_data):</p>
+<br>
+<p>        with transaction():</p>
+<br>
+<p>            # 1. Write to database</p>
+<br>
+<p>            order_id = db.insert("orders", order_data)</p>
+<br>
+<br>
+<br>
+<p>            # 2. Write event to outbox table (same database, same transaction)</p>
+<br>
+<p>            db.insert("outbox", {</p>
+<br>
+<p>                "event_type": "OrderPlaced",</p>
+<br>
+<p>                "payload": json.dumps(order_data),</p>
+<br>
+<p>                "created_at": datetime.utcnow()</p>
+<br>
+<p>            })</p>
+<br>
+<br>
+<br>
+<p>        # 3. Outbox relay picks up and publishes</p>
+<br>
+<p>        # This runs after the transaction commits</p>
+<br>
+<br>
+<br>
+<br>
+<p>Dead Letter Queue   </p>
+<p>Events that cannot be processed after retries go to a dead letter queue (DLQ):   </p>
+<br>
+<br>
+<br>
+<p>    def process_with_dlq(raw_event_content, max_retries=3):</p>
+<br>
+<p>        try:</p>
+<br>
+<p>            process(raw_event_content)</p>
+<br>
+<p>        except Exception as e:</p>
+<br>
+<p>            for attempt in range(max_retries):</p>
+<br>
+<p>                try:</p>
+<br>
+<p>                    process(raw_event_content)</p>
+<br>
+<p>                    return</p>
+<br>
+<p>                except Exception:</p>
+<br>
+<p>                    if attempt < max_retries - 1:</p>
+<br>
+<p>                        time.sleep(2 ** attempt)  # Exponential backoff</p>
+<br>
+<br>
+<br>
+<p>            # Send to DLQ</p>
+<br>
+<p>            dlq.send(raw_event_content, error=str(e), original_topic="orders")</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
 <p>Event-driven architecture decouples services through asynchronous event communication. Event sourcing provides a complete audit trail. Pub/sub enables flexible integration. Kafka provides durable, scalable event streaming. Schema management ensures compatible evolution. Idempotent consumers and exactly-once processing guarantee reliability. Use EDA when you need real-time processing, loose coupling, and multiple consumers of the same events. Start simple with pub/sub and event streaming, and add event sourcing only when the complexity is justified by the benefits.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

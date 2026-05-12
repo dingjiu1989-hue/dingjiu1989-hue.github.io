@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="throttling-pattern">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Throttling Pattern for System Protection">
+    <meta property="og:description" content="Implement throttling to protect backend systems from overload and ensure fair resource allocation.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/throttling-pattern.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Throttling Pattern for System Protection">
+    <meta name="twitter:description" content="Implement throttling to protect backend systems from overload and ensure fair resource allocation.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Throttling Pattern for System Protection — SourceHub</title>
+    <meta name="description" content="Implement throttling to protect backend systems from overload and ensure fair resource allocation.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/throttling-pattern.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/throttling-pattern.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Throttling Pattern for System Protection",
+      "description": "Implement throttling to protect backend systems from overload and ensure fair resource allocation.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "490",
+      "keywords": "Architecture, System Design, Backend",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/throttling-pattern.html"},
+      "articleBody": "Throttling Pattern for System Protection Throttling controls the rate at which requests are processed to protect backend systems from overload. When request volume exceeds capacity, throttling rejects or delays excess requests instead of allowing the system to fail under load. Throttling vs Rate Limiting Rate limiting controls how many requests a client can make within a time window. Throttling controls the overall processing rate of the system, regardless of client distribution. Rate limiting is typically client-specific. Throttling is system-wide. Both patterns protect systems, but they operate at different levels. Rate limiting prevents abusive clients from monopolizing resources. Throttling prevents the system from exceeding its processing capacity. Implementation Approaches Token bucket is the most common throttling algorithm. Tokens are added to a bucket at a fixed rate. Each request consumes a token. If the bucket is empty, the request is throttled. The bucket size allows burst handling. Leaky bucket queues requests at a fixed processing rate. Burst requests are buffered and processed at the controlled rate. Excess requests beyond the buffer capacity are rejected. Concurrency limiter controls the number of in-flight requests. New requests are queued or rejected when the concurrency limit is reached. This is effective for protecting thread pools and database connections. Throttling Responses Throttled requests should return appropriate HTTP status codes. 429 Too Many Requests is standard with a Retry-After header indicating when the client should retry. Include rate limit headers (X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset) so clients can adjust their behavior. Distributed Throttling In distributed systems, throttling requires shared state. Redis is commonly used for distributed rate counters. Use atomic operations (INCR, EXPIRE) for correctness. Consider performance impact of cross-network throttling calls. When to Throttle Throttle when protecting external API dependencies with rate limits, when the system has hard capacity limits (database connections, thread pools), and during traffic spikes to maintain system stability. Monitor throttled request rates\u2014sustained throttling indicates capacity issues."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Throttling Pattern for System Protection"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Throttling Pattern for System Protection
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">Throttling Pattern for System Protection</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Throttling Pattern for System Protection</h1>
+<p>Throttling controls the rate at which requests are processed to protect backend systems from overload. When request volume exceeds capacity, throttling rejects or delays excess requests instead of allowing the system to fail under load.</p>
+<br>
+<h2> Throttling vs Rate Limiting</h2>
+<br>
+<p>Rate limiting controls how many requests a client can make within a time window. Throttling controls the overall processing rate of the system, regardless of client distribution. Rate limiting is typically client-specific. Throttling is system-wide.</p>
+<br>
+<p>Both patterns protect systems, but they operate at different levels. Rate limiting prevents abusive clients from monopolizing resources. Throttling prevents the system from exceeding its processing capacity.</p>
+<br>
+<h2> Implementation Approaches</h2>
+<br>
+<p>Token bucket is the most common throttling algorithm. Tokens are added to a bucket at a fixed rate. Each request consumes a token. If the bucket is empty, the request is throttled. The bucket size allows burst handling.</p>
+<br>
+<p>Leaky bucket queues requests at a fixed processing rate. Burst requests are buffered and processed at the controlled rate. Excess requests beyond the buffer capacity are rejected.</p>
+<br>
+<p>Concurrency limiter controls the number of in-flight requests. New requests are queued or rejected when the concurrency limit is reached. This is effective for protecting thread pools and database connections.</p>
+<br>
+<h2> Throttling Responses</h2>
+<br>
+<p>Throttled requests should return appropriate HTTP status codes. 429 Too Many Requests is standard with a Retry-After header indicating when the client should retry. Include rate limit headers (X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset) so clients can adjust their behavior.</p>
+<br>
+<h2> Distributed Throttling</h2>
+<br>
+<p>In distributed systems, throttling requires shared state. Redis is commonly used for distributed rate counters. Use atomic operations (INCR, EXPIRE) for correctness. Consider performance impact of cross-network throttling calls.</p>
+<br>
+<h2> When to Throttle</h2>
+<br>
+<p>Throttle when protecting external API dependencies with rate limits, when the system has hard capacity limits (database connections, thread pools), and during traffic spikes to maintain system stability. Monitor throttled request rates—sustained throttling indicates capacity issues.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2188",
+      "wordCount": "393",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-monitoring.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-monitoring.html"},
+      "articleBody": "Database Monitoring and Performance Alerting Why Monitor Databases? Database monitoring catches problems before they become incidents. Track key metrics and alert on anomalies. Key Metrics Query Performance -- PostgreSQL slow queries SELECT query, mean_exec_time, calls FROM pg_stat_statements ORDER BY mean_exec_time DESC LIMIT 10; -- Active queries SELECT pid, state, query_start, query FROM pg_stat_activity WHERE state = 'active'; Connection Pools Monitor active vs idle connections. Alert when connection count exceeds 80% of max_connections. Disk and Memory Track cache hit ratio (aim for 99%+), disk usage, and IOPS. Low cache hit ratio indicates the working set does not fit in memory. Replication Lag SELECT application_name, pg_wal_lsn_diff(pg_current_wal_lsn(), replay_lsn) AS lag_bytes, now() - pg_last_xact_replay_timestamp() AS lag_time FROM pg_stat_replication; Prometheus Setup # prometheus.yml scrape_configs: - job_name: 'postgres' static_configs: - targets: ['postgres_exporter:9187'] Alert Thresholds | Metric | Warning | Critical | |--------|---------|----------| | Cache hit ratio | 80% | > 90% | | Replication lag | > 30s | > 300s | | Disk usage | > 80% | > 90% | Conclusion Track QPS, latency, connections, cache hit ratio, and replication lag. Use Prometheus and Grafana for collection and visualization. Set meaningful alert thresholds and avoid alert fatigue."
     }
     </script>
     <script type="application/ld+json">
@@ -73,440 +74,76 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Database Monitoring and Performance Alerting</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
-      <div class="article-body"><p>Database monitoring tracks the health, performance, and availability of database systems. Effective monitoring catches problems before they become incidents. This article covers the key metrics to track, tools for collection and visualization, and strategies for setting meaningful alert thresholds.</p>
+      <div class="article-body"><h1>Database Monitoring and Performance Alerting</h1>
 <br>
-<h2> Key Database Metrics</h2>
+<p>Why Monitor Databases?   </p>
+<p>Database monitoring catches problems before they become incidents. Track key metrics and alert on anomalies.   </p>
+<p>Key Metrics   </p>
+<p>Query Performance   </p>
 <br>
-<h3>Queries Per Second (QPS)</h3>
 <br>
-<p>QPS measures the throughput of your database. Monitoring QPS helps you understand traffic patterns and capacity requirements.</p>
 <br>
-<li>**Spike detection**: Sudden QPS increases may indicate a traffic surge or a runaway query.</li>
-<li>**Capacity planning**: If QPS consistently approaches your database's limit, it is time to scale.</li>
-<li>**Baseline shifts**: A permanent QPS increase suggests organic growth that may require infrastructure changes.</li>
+<p>    -- PostgreSQL slow queries</p>
 <br>
-<pre><code>
--- MySQL: Current QPS
-
-SHOW GLOBAL STATUS LIKE &#x27;Questions&#x27;;
-
-
-
--- PostgreSQL: Queries per second
-
-SELECT queries_per_second()
-
-FROM pg_stat_database
-
-WHERE datname = &#x27;your_database&#x27;;
-
-</code></pre>
+<p>    SELECT query, mean_exec_time, calls</p>
 <br>
-<h3>Query Latency</h3>
+<p>    FROM pg_stat_statements</p>
 <br>
-<p>Latency measures how long queries take to execute. Latency spikes degrade user experience and indicate problems.</p>
+<p>    ORDER BY mean_exec_time DESC LIMIT 10;</p>
 <br>
-<p>**Percentile metrics matter more than averages**: p50 (median) shows typical performance. p99 shows the worst-performing queries. A 10ms p50 with a 30-second p99 means 1% of users have a terrible experience.</p>
 <br>
-<pre><code>
--- PostgreSQL: Query latency by query
-
-SELECT
-
-    queryid,
-
-    query,
-
-    mean_exec_time as avg_ms,
-
-    p99_exec_time as p99_ms,
-
-    calls
-
-FROM pg_stat_statements
-
-ORDER BY p99_exec_time DESC
-
-LIMIT 10;
-
-</code></pre>
 <br>
-<h3>Active Connections</h3>
+<p>    -- Active queries</p>
 <br>
-<p>Connection count indicates how many clients are simultaneously connected. Running out of connections causes application failures.</p>
+<p>    SELECT pid, state, query_start, query</p>
 <br>
-<li>**Connection pool saturation**: When connection count reaches the max_pool limit, new connections wait or fail.</li>
-<li>**Active vs idle**: High idle connections with low active connections indicates inefficient connection pool configuration.</li>
-<li>**Connection churn**: Rapid connect/disconnect cycles add overhead.</li>
+<p>    FROM pg_stat_activity</p>
 <br>
-<pre><code>
--- PostgreSQL: Active connection count
-
-SELECT
-
-    state,
-
-    count(*) as connections
-
-FROM pg_stat_activity
-
-WHERE backend_type = &#x27;client backend&#x27;
-
-GROUP BY state;
-
-
-
--- Check for idle in transaction (potential blocking)
-
-SELECT count(*) FROM pg_stat_activity
-
-WHERE state = &#x27;idle in transaction&#x27;
-
-AND xact_start &lt; now() - interval &#x27;5 minutes&#x27;;
-
-</code></pre>
+<p>    WHERE state = 'active';</p>
 <br>
-<h3>Cache Hit Ratio</h3>
 <br>
-<p>Cache hit ratio measures how often the database finds data in memory versus reading from disk. Higher is better.</p>
 <br>
-<li>**Buffer cache hit ratio**: 99%+ is healthy for most workloads. Below 95% indicates the working set does not fit in memory.</li>
-<li>**Index cache hit ratio**: Especially important for databases with large indexes.</li>
 <br>
-<pre><code>
--- PostgreSQL: Buffer cache hit ratio
-
-SELECT
-
-    sum(blks_hit) / nullif(sum(blks_hit + blks_read), 0) * 100 as hit_ratio
-
-FROM pg_stat_database
-
-WHERE datname = &#x27;your_database&#x27;;
-
-
-
--- MySQL: InnoDB buffer pool hit ratio
-
-SHOW STATUS LIKE &#x27;InnoDB_buffer_pool_read_%&#x27;;
-
-</code></pre>
+<p>Connection Pools   </p>
+<p>Monitor active vs idle connections. Alert when connection count exceeds 80% of max_connections.   </p>
+<p>Disk and Memory   </p>
+<p>Track cache hit ratio (aim for 99%+), disk usage, and IOPS. Low cache hit ratio indicates the working set does not fit in memory.   </p>
+<p>Replication Lag   </p>
 <br>
-<h3>Disk I/O</h3>
 <br>
-<p>Disk I/O metrics reveal storage performance issues.</p>
 <br>
-<li>**IOPS**: Input/output operations per second. Cloud databases have IOPS limits based on volume size.</li>
-<li>**Throughput**: Data read/written per second.</li>
-<li>**Latency**: Time per I/O operation. Under 10ms is healthy. Over 50ms indicates problems.</li>
-<li>**Queue depth**: Number of I/O operations waiting. High queue depth suggests the disk subsystem is overwhelmed.</li>
+<p>    SELECT application_name,</p>
 <br>
-<h3>Replication Lag</h3>
+<p>           pg_wal_lsn_diff(pg_current_wal_lsn(), replay_lsn) AS lag_bytes,</p>
 <br>
-<p>For databases with read replicas, replication lag measures how far behind replicas are from the primary.</p>
+<p>           now() - pg_last_xact_replay_timestamp() AS lag_time</p>
 <br>
-<pre><code>
--- PostgreSQL: Replication lag
-
-SELECT
-
-    application_name,
-
-    pg_size_pretty(pg_wal_lsn_diff(
-
-        pg_current_wal_lsn(),
-
-        flush_lsn
-
-    )) as lag_bytes,
-
-    now() - pg_last_xact_replay_timestamp() as lag_time
-
-FROM pg_stat_replication;
-
-
-
--- MySQL: Replication lag
-
-SHOW SLAVE STATUS\G
-
--- Look at Seconds_Behind_Master
-
-</code></pre>
+<p>    FROM pg_stat_replication;</p>
 <br>
-<h2> Prometheus Exporters</h2>
 <br>
-<p>Prometheus is the dominant metrics collection system for infrastructure monitoring. Database exporters translate database metrics into Prometheus format.</p>
 <br>
-<h3>PostgreSQL Exporter</h3>
 <br>
-<pre><code>
-# docker-compose.yml for PostgreSQL monitoring
-
-version: &#x27;3&#x27;
-
-services:
-
-  postgres:
-
-    image: postgres:16
-
-    environment:
-
-      POSTGRES_DB: myapp
-
-    ports:
-
-      - &quot;5432:5432&quot;
-
-
-
-  postgres_exporter:
-
-    image: prometheuscommunity/postgres-exporter:v0.15.0
-
-    environment:
-
-      DATA_SOURCE_NAME: &quot;postgresql://user:password@postgres:5432/myapp?sslmode=disable&quot;
-
-    ports:
-
-      - &quot;9187:9187&quot;
-
-
-
-  prometheus:
-
-    image: prom/prometheus:v2.53.0
-
-    volumes:
-
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-
-    ports:
-
-      - &quot;9090:9090&quot;
-
-</code></pre>
+<p>Prometheus Setup   </p>
 <br>
-<pre><code>
-# prometheus.yml scrape configuration
-
-scrape_configs:
-
-  - job_name: &#x27;postgres&#x27;
-
-    static_configs:
-
-      - targets: [&#x27;postgres_exporter:9187&#x27;]
-
-    metrics_path: /metrics
-
-</code></pre>
 <br>
-<h3>MySQL Exporter</h3>
 <br>
-<pre><code>
-  mysql_exporter:
-
-    image: prom/mysqld-exporter:v0.15.1
-
-    environment:
-
-      DATA_SOURCE_NAME: &quot;exporter:password@(mysql:3306)/&quot;
-
-    ports:
-
-      - &quot;9104:9104&quot;
-
-</code></pre>
+<p>    # prometheus.yml</p>
 <br>
-<h2> Grafana Dashboards</h2>
+<p>    scrape_configs:</p>
 <br>
-<p>Grafana visualizes Prometheus metrics in configurable dashboards. The community provides pre-built dashboards for most databases.</p>
+<p>      - job_name: 'postgres'</p>
 <br>
-<h3>Dashboard Sections</h3>
+<p>        static_configs:</p>
 <br>
-<p>A good database dashboard includes these panels:</p>
+<p>          - targets: ['postgres_exporter:9187']</p>
 <br>
-<li>**Overview**: QPS, active connections, cache hit ratio, replication lag.</li>
-<p>2. **Query Performance**: Top N queries by duration, calls, and rows read.</p>
-<p>3. **Resource Usage**: CPU, memory, disk I/O, network throughput.</p>
-<p>4. **Slow Queries**: Count of queries exceeding a latency threshold over time.</p>
-<p>5. **Error Rate**: Database errors (deadlocks, constraint violations, connection timeouts).</p>
 <br>
-<pre><code>
-// Grafana panel JSON (simplified)
-
-{
-
-  &quot;title&quot;: &quot;Query Latency (p99)&quot;,
-
-  &quot;type&quot;: &quot;graph&quot;,
-
-  &quot;targets&quot;: [
-
-    {
-
-      &quot;expr&quot;: &quot;pg_stat_statements_p99_ms{datname=&#x27;myapp&#x27;}&quot;,
-
-      &quot;legendFormat&quot;: &quot;{{queryid}}&quot;
-
-    }
-
-  ],
-
-  &quot;yaxes&quot;: [
-
-    { &quot;label&quot;: &quot;milliseconds&quot;, &quot;format&quot;: &quot;ms&quot; }
-
-  ],
-
-  &quot;thresholds&quot;: [
-
-    { &quot;value&quot;: 100, &quot;op&quot;: &quot;gt&quot;, &quot;color&quot;: &quot;orange&quot; },
-
-    { &quot;value&quot;: 1000, &quot;op&quot;: &quot;gt&quot;, &quot;color&quot;: &quot;red&quot; }
-
-  ]
-
-}
-
-</code></pre>
 <br>
-<h2> Alert Thresholds</h2>
 <br>
-<p>Setting the right alert thresholds is harder than it sounds. Too many alerts cause alert fatigue. Too few alerts miss critical issues.</p>
-<br>
-<h3>Threshold Strategy</h3>
-<br>
-<p>**Static thresholds**: Fixed values based on capacity. Simple but do not adapt to usage patterns.</p>
-<br>
-<pre><code>
-Alert if:
-
-  - Active connections &gt; 80% of max_connections
-
-  - Replication lag &gt; 60 seconds
-
-  - Disk usage &gt; 85%
-
-  - Cache hit ratio &lt; 97%
-
-</code></pre>
-<br>
-<p>**Dynamic thresholds**: Alert when metrics deviate from their historical baseline. Better for bursty workloads.</p>
-<br>
-<pre><code>
-# Dynamic threshold calculation
-
-def calculate_dynamic_threshold(hourly_metric, deviation_factor=2.0):
-
-    &quot;&quot;&quot;Alert when metric deviates by more than N standard deviations.&quot;&quot;&quot;
-
-    mean = hourly_metric.mean()
-
-    std = hourly_metric.std()
-
-    upper_threshold = mean + (std * deviation_factor)
-
-    lower_threshold = max(0, mean - (std * deviation_factor))
-
-    return upper_threshold, lower_threshold
-
-</code></pre>
-<br>
-<p>**Rate-of-change thresholds**: Alert on rapid changes, not absolute values. Useful for detecting anomalies.</p>
-<br>
-<pre><code>
-Alert if:
-
-  - QPS change &gt; 300% compared to same time last week
-
-  - Replication lag increased by 10 seconds in 1 minute
-
-</code></pre>
-<br>
-<h3>Alert Severity Levels</h3>
-<br>
-<p>| Severity | Response Time | Example |</p>
-<p>|----------|---------------|---------|</p>
-<p>| Critical | Immediate (24x7) | Database down, replication broken |</p>
-<p>| High | 1 hour | P99 latency > 1 second, disk > 90% |</p>
-<p>| Medium | 1 day | Cache hit ratio trending down |</p>
-<p>| Low | 1 week | Database version EOL approaching |</p>
-<br>
-<h3>Reducing Alert Fatigue</h3>
-<br>
-<li>**Use multi-condition alerts**: Alert only when A and B are both true. Example: latency > 1s AND QPS > baseline.</li>
-<p>2. **Implement hysteresis**: Require the condition to persist for N minutes before alerting.</p>
-<p>3. **Suppress during maintenance**: Automatically suppress alerts during scheduled windows.</p>
-<p>4. **Group related alerts**: A single "database slow" alert is better than 50 individual slow-query alerts.</p>
-<p>5. **Auto-resolve**: Clear alerts when the metric returns to normal.</p>
-<br>
-<h2> Database-Specific Monitoring Tools</h2>
-<br>
-<h3>pg_stat_statements (PostgreSQL)</h3>
-<br>
-<p>The pg_stat_statements extension tracks query execution statistics. It identifies which queries consume the most resources.</p>
-<br>
-<pre><code>
--- Enable the extension
-
-CREATE EXTENSION pg_stat_statements;
-
-
-
--- Find the most expensive queries
-
-SELECT
-
-    query,
-
-    total_exec_time / calls as avg_ms,
-
-    calls,
-
-    rows,
-
-    shared_blks_hit / (shared_blks_hit + shared_blks_read) * 100 as cache_hit_pct
-
-FROM pg_stat_statements
-
-WHERE query NOT LIKE &#x27;%pg_%&#x27;
-
-ORDER BY total_exec_time DESC
-
-LIMIT 10;
-
-</code></pre>
-<br>
-<h3>Performance Schema (MySQL)</h3>
-<br>
-<p>MySQL Performance Schema provides detailed instrumentation of query execution.</p>
-<br>
-<pre><code>
--- Top queries by total latency
-
-SELECT
-
-    digest_text as query,
-
-    count_star as execution_count,
-
-    round(sum_timer_wait / 1000000000, 2) as total_latency_ms
-
-FROM performance_schema.events_statements_summary_by_digest
-
-ORDER BY sum_timer_wait DESC
-
-LIMIT 10;
-
-</code></pre>
-<br>
-<h2> Conclusion</h2>
-<br>
-<p>Database monitoring is a continuous practice, not a one-time setup. Track QPS, latency, connections, cache hit ratio, and replication lag. Collect these metrics with Prometheus exporters, visualize them in Grafana dashboards, and set intelligent alert thresholds. Start with static thresholds for critical metrics and move to dynamic thresholds as you collect more data. The goal is to detect problems before users do.</p></div>
+<p>Alert Thresholds   </p>
+<p>| Metric | Warning | Critical | |--------|---------|----------| | Cache hit ratio | < 97% | < 95% | | Connections | > 80% | > 90% | | Replication lag | > 30s | > 300s | | Disk usage | > 80% | > 90% |   </p>
+<p>Conclusion   </p>
+<p>Track QPS, latency, connections, cache hit ratio, and replication lag. Use Prometheus and Grafana for collection and visualization. Set meaningful alert thresholds and avoid alert fatigue.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

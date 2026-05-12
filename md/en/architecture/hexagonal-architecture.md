@@ -6,100 +6,25 @@ board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/hexagonal-architecture.html
 ---
 
-Hexagonal architecture, also known as ports and adapters, is a software design pattern introduced by Alistair Cockburn in 2005. It creates a separation between the core business logic and the external systems it interacts with, making applications more maintainable, testable, and adaptable to change.
+# Hexagonal Architecture (Ports and Adapters)
 
-## The Core Idea
-
-The pattern gets its name from the hexagonal shape used in diagrams, though the number of sides has no particular significance. The key insight is that the application core should not depend on the details of external systems -- databases, web frameworks, message queues, or user interfaces.
-
-The architecture has three layers:
-
-1. **Core (Domain)**: The pure business logic with no external dependencies.
-2. **Ports**: Interfaces that define how the core interacts with the outside world.
-3. **Adapters**: Implementations of those interfaces that connect to specific technologies.
-
-## Ports: The Contracts
-
-Ports are interfaces defined within the domain layer. There are two types:
-
-**Inbound ports** (driving ports) define how the outside world can interact with the application. These are typically use-case interfaces:
-
-```java
-public interface OrderService {
-    Order createOrder(CreateOrderRequest request);
-    Order getOrder(String orderId);
-    void cancelOrder(String orderId);
-}
-```
-
-**Outbound ports** (driven ports) define how the application accesses external systems:
-
-```java
-public interface OrderRepository {
-    void save(Order order);
-    Order findById(String orderId);
-    List<Order> findByCustomerId(String customerId);
-}
-```
-
-## Adapters: The Implementations
-
-Adapters implement the port interfaces and handle the details of communicating with specific technologies.
-
-**Inbound adapters** handle incoming requests. A REST controller is an inbound adapter:
-
-```java
-@RestController
-public class OrderController {
-    private final OrderService orderService;
-
-    @PostMapping("/orders")
-    public ResponseEntity<OrderResponse> createOrder(@RequestBody CreateOrderRequest request) {
-        Order order = orderService.createOrder(request);
-        return ResponseEntity.status(201).map(OrderResponse::from);
-    }
-}
-```
-
-**Outbound adapters** handle outgoing calls. A JPA repository implementation is an outbound adapter:
-
-```java
-public class JpaOrderRepository implements OrderRepository {
-    private final SpringDataJpaOrderRepository repo;
-
-    @Override
-    public void save(Order order) {
-        repo.save(OrderEntity.from(order));
-    }
-}
-```
-
-## Dependency Rule
-
-The critical rule: **dependencies point inward**. The domain core knows nothing about HTTP, databases, or message queues. The adapters depend on the ports (interfaces), not the other way around. This is achieved through dependency injection at the application's entry point.
-
-```
-[External] -> [Inbound Adapter] -> [Port Interface] -> [Domain Core] -> [Port Interface] -> [Outbound Adapter] -> [External]
-```
-
-## Benefits
-
-**Testability.** You can test the domain core by mocking adapters at the port boundaries. No database, no HTTP server, no message broker needed. This results in fast, reliable unit tests.
-
-**Technology Independence.** You can swap a SQL database for MongoDB by writing a new adapter. You can change from REST to GraphQL by swapping the inbound adapter. The core business logic remains untouched.
-
-**Isolation of Changes.** When your ORM or web framework releases a breaking change, only the adapter code needs updating. The core business logic is completely isolated.
-
-**Clear Boundaries.** The explicit separation between ports and adapters makes the architecture visible in the code structure. New team members can quickly understand where different concerns live.
-
-## Common Mistakes
-
-**Leaking adapter concerns into the domain.** Your domain objects should not have JPA annotations, JSON serialization attributes, or framework-specific base classes. Use separate data transfer objects and mapping logic in the adapters.
-
-**Over-abstracting.** Not every external dependency needs a port-adapter pair. If you are writing an interface with a single implementation and no foreseeable alternative, you might be over-engineering. The testability argument still holds, but be pragmatic.
-
-**Fat ports.** Keep port interfaces focused. A repository interface with 30 methods suggests the abstraction is too broad or the domain model is not well-defined.
-
-## Summary
-
-Hexagonal architecture is a practical pattern for building maintainable applications. By defining clear boundaries between business logic and infrastructure, you gain testability, technology independence, and protection against external changes. Start by identifying the ports in your domain and implementing adapters for each external system. The investment pays off quickly as the application grows and evolves.
+Hexagonal Architecture, also known as the Ports and Adapters pattern, was introduced by Alistair Cockburn to create applications that are isolated from their technical infrastructure. The core idea is that the application's business logic is at the center, communicating with the outside world through well-defined ports and adapters. This separation makes the application testable, maintainable, and adaptable to changing infrastructure.   
+Core Concept   
+In Hexagonal Architecture, the application core contains the domain logic and business rules. It defines ports—interfaces that express what the application needs from the outside world (driven ports) and what the outside world can do with the application (driving ports). Adapters implement these ports to connect the core to specific technologies.   
+A driving adapter (like a web controller) triggers the application by calling a driving port. A driven adapter (like a database repository) implements a driven port that the application core calls. The core has no knowledge of which adapter is connected—it only knows the port interface.   
+Domain Isolation   
+The greatest benefit of Hexagonal Architecture is domain isolation. The business logic never imports or depends on frameworks, databases, or external services. It is pure code focused on the problem domain. This means you can unit test business logic without infrastructure, and you can swap technologies without changing business code.   
+For example, if you replace PostgreSQL with MongoDB, you write a new repository adapter that implements the same port interface. The core remains completely unchanged. This isolation also makes it feasible to run the same application on different infrastructure configurations for different environments.   
+Ports   
+A port is an interface that defines a boundary interaction. Driving ports are use case interfaces that expose application capabilities to the outside world. They are called "inbound ports" and typically correspond to service methods or command handlers.   
+Driven ports are interfaces for capabilities the application needs from infrastructure. They are called "outbound ports" and typically include repository interfaces, message publisher interfaces, and external API interfaces. The key constraint is that ports are defined by the application core, not by the infrastructure layer.   
+Adapters   
+Adapters implement ports to connect the core to specific technologies. A web controller adapter listens for HTTP requests, deserializes them, calls the appropriate driving port, and serializes the response. A JPA repository adapter implements a repository port using JPA and a relational database. A Kafka adapter implements a message publisher port using Kafka.   
+Adapters can contain significant complexity related to their technology, but this complexity is contained and does not leak into the core. Adapters can also be replaced or configured differently per environment.   
+Testing Benefits   
+Hexagonal Architecture enables a testing strategy where the core is tested with unit tests using mock adapters, and adapters are tested with integration tests. Domain logic tests run in milliseconds with no infrastructure setup. Adapter tests verify that the implementation correctly interacts with the actual technology.   
+This testing approach gives high confidence with fast feedback. The core tests verify business correctness. The adapter tests verify infrastructure integration. Combined, they provide comprehensive coverage without the fragility of end-to-end tests.   
+Practical Implementation   
+In practice, Hexagonal Architecture requires careful project structure. A common layout separates the project into `domain` (core), `application` (ports and use cases), and `infrastructure` (adapters) modules. Dependency injection frameworks wire the adapters to ports at application startup.   
+The key to success is discipline about dependency direction. The core must never import infrastructure code. Tools like ArchUnit (Java) or custom linting rules can enforce this constraint automatically.   
+Hexagonal Architecture pairs well with Domain-Driven Design, where the core contains the domain model and the ports express the domain's requirements from infrastructure. It also integrates naturally with Clean Architecture—the hexagonal core is the inner layer, and the adapters are the outer layers. For any long-lived application with significant business logic, the investment in hexagonal isolation pays substantial dividends.

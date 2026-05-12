@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1285",
+      "wordCount": "1518",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/local-llm-setup.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/local-llm-setup.html"},
+      "articleBody": "Running LLMs Locally Introduction Running large language models locally has become practical thanks to quantization techniques, efficient inference engines, and a thriving open-source ecosystem. Whether for privacy, cost savings, or offline availability, local LLMs offer a compelling alternative to cloud APIs for many workloads. This guide covers the two most popular local LLM platforms \u2014 Ollama and LM Studio. Ollama [Ollama](https://ollama.ai) is the most popular tool for running LLMs locally, known for its simplicity and command-line focus. Installation # macOS brew install ollama # Linux curl -fsSL https://ollama.ai/install.sh | sh # Windows # Download from https://ollama.ai/download Getting Started Ollama makes running a model a single command: # Pull and run a model ollama run llama3.2:3b # List available models ollama list # Pull a specific model without running ollama pull mistral:7b Popular Models for Ollama | Model | Size | RAM Required | Best For | |-------|------|-------------|----------| | Llama 3.2 3B | 2.0 GB | 4 GB | Fast responses, simple tasks | | Llama 3.1 8B | 4.7 GB | 8 GB | General purpose Q&A; | | Mistral 7B | 4.1 GB | 8 GB | Code, reasoning, instruction following | | Qwen2.5 7B | 4.8 GB | 8 GB | Strong multilingual, coding | | Mixtral 8x7B | 26 GB | 48 GB | High quality, close to GPT-3.5 | | DeepSeek-R1 7B | 4.5 GB | 8 GB | Strong reasoning, step-by-step | Using Ollama Programmatically Ollama provides a REST API at `http://localhost:11434`: import requests response = requests.post(\"http://localhost:11434/api/generate\", json={ \"model\": \"llama3.2:3b\", \"prompt\": \"Explain quantum computing in three sentences.\", \"stream\": False }) print(response.json()[\"response\"]) Or use the official Python library: import ollama response = ollama.chat(model=\"llama3.2:3b\", messages=[ {\"role\": \"user\", \"content\": \"What is the capital of France?\"} ]) print(response[\"message\"][\"content\"]) Custom Modelfiles Create custom models with system prompts and parameters: FROM llama3.1:8b # Set system prompt SYSTEM \"You are a helpful coding assistant. Provide concise code examples.\" # Configure parameters PARAMETER temperature 0.3 PARAMETER top_p 0.9 Build and run: ollama create my-coding-assistant -f Modelfile ollama run my-coding-assistant LM Studio [LM Studio](https://lmstudio.ai) is a GUI-focused alternative that excels for users who prefer visual interfaces and easy model browsing. Key Features * **Built-in model browser**: Search and download models from Hugging Face * **GUI chat interface**: Familiar ChatGPT-like experience * **Local API server**: OpenAI-compatible API endpoint * **Model configuration**: Easy sliders for context length, GPU offloading, and temperature * **Multi-model support**: Load multiple models and switch between them Setup * Download from [lmstudio.ai](https://lmstudio.ai) 2\\. Open the app and browse the model catalog 3\\. Download a model (start with Llama 3.2 3B or Mistral 7B) 4\\. Load the model and start chatting API Server LM Studio can serve models via an OpenAI-compatible API: http://localhost:1234/v1/chat/completions This means any tool that works with OpenAI's API can use your local model by changing the base URL: from openai import OpenAI client = OpenAI( base_url=\"http://localhost:1234/v1\", api_key=\"not-needed\" ) response = client.chat.completions.create( model=\"local-model\", messages=[{\"role\": \"user\", \"content\": \"Hello!\"}] ) Performance Optimization Quantization Levels Quantization reduces model size at the cost of some accuracy: * **Q4_K_M**: Best balance of quality and size (4-bit, recommended) * **Q5_K_M**: Higher quality, larger (5-bit, use if you have RAM headroom) * **Q8_0**: Near-full quality, 2x RAM requirement * **Q2_K**: Minimal RAM, noticeable quality loss Rule of thumb: each quantization step roughly doubles model size but improves quality marginally. Q4_K_M is the sweet spot. GPU Acceleration Both Ollama and LM Studio support GPU acceleration via CUDA (NVIDIA), Metal (Apple Silicon), or Vulkan (AMD): # Ollama uses Metal automatically on Apple Silicon # For NVIDIA, install CUDA and Ollama detects it # Check which device is being used ollama run llama3.2:3b --verbose Context Window Larger context windows consume more memory. A 128K context with Q4_K_M requires approximately: * 7B model: ~8 GB total * 13B model: ~14 GB total * 70B model: ~48 GB total Use Cases for Local LLMs * **Privacy-sensitive data**: Medical records, legal documents, personal information * **Offline environments**: Air-gapped systems, travel, remote locations * **Cost-sensitive workloads**: High-volume batch processing * **Experimentation**: Rapid testing of different models without API costs * **Latency-critical applications**: No network calls for inference Conclusion Running LLMs locally is easier than ever with Ollama and LM Studio. Ollama offers command-line simplicity and a rich set of pre-built models. LM Studio provides a polished GUI and OpenAI-compatible API. Start with a 7B model at Q4_K_M quantization on a machine with 8-16 GB of RAM, and scale up as your needs grow. Local LLMs won't replace cloud APIs for every use case, but they are an essential tool in the AI practitioner's toolkit."
     }
     </script>
     <script type="application/ld+json">
@@ -73,245 +74,386 @@
         <span class="tag-cat">Machine Learning</span></div>
       <h1 class="article-title">Running LLMs Locally</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Introduction</h2>
+      <div class="article-body"><h1>Running LLMs Locally</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Running large language models locally has become practical thanks to quantization techniques, efficient inference engines, and a thriving open-source ecosystem. Whether for privacy, cost savings, or offline availability, local LLMs offer a compelling alternative to cloud APIs for many workloads. This guide covers the two most popular local LLM platforms — Ollama and LM Studio.</p>
 <br>
-<h2> Ollama</h2>
+<br>
+<br>
+<br>
+<h2>  Ollama</h2>
+<br>
+<br>
+<br>
 <br>
 <p>[Ollama](https://ollama.ai) is the most popular tool for running LLMs locally, known for its simplicity and command-line focus.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Installation</h3>
 <br>
-<pre><code>
-# macOS
-
-brew install ollama
-
-
-
-# Linux
-
-curl -fsSL https://ollama.ai/install.sh | sh
-
-
-
-# Windows
-
-# Download from https://ollama.ai/download
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # macOS</p>
+<br>
+<p>    brew install ollama</p>
+<br>
+<br>
+<br>
+<p>    # Linux</p>
+<br>
+<p>    curl -fsSL https://ollama.ai/install.sh | sh</p>
+<br>
+<br>
+<br>
+<p>    # Windows</p>
+<br>
+<p>    # Download from https://ollama.ai/download</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Getting Started</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Ollama makes running a model a single command:</p>
 <br>
-<pre><code>
-# Pull and run a model
-
-ollama run llama3.2:3b
-
-
-
-# List available models
-
-ollama list
-
-
-
-# Pull a specific model without running
-
-ollama pull mistral:7b
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # Pull and run a model</p>
+<br>
+<p>    ollama run llama3.2:3b</p>
+<br>
+<br>
+<br>
+<p>    # List available models</p>
+<br>
+<p>    ollama list</p>
+<br>
+<br>
+<br>
+<p>    # Pull a specific model without running</p>
+<br>
+<p>    ollama pull mistral:7b</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Popular Models for Ollama</h3>
 <br>
+<br>
+<br>
+<br>
 <p>| Model | Size | RAM Required | Best For |</p>
+<br>
 <p>|-------|------|-------------|----------|</p>
+<br>
 <p>| Llama 3.2 3B | 2.0 GB | 4 GB | Fast responses, simple tasks |</p>
-<p>| Llama 3.1 8B | 4.7 GB | 8 GB | General purpose Q&A |</p>
+<br>
+<p>| Llama 3.1 8B | 4.7 GB | 8 GB | General purpose Q&A; |</p>
+<br>
 <p>| Mistral 7B | 4.1 GB | 8 GB | Code, reasoning, instruction following |</p>
+<br>
 <p>| Qwen2.5 7B | 4.8 GB | 8 GB | Strong multilingual, coding |</p>
+<br>
 <p>| Mixtral 8x7B | 26 GB | 48 GB | High quality, close to GPT-3.5 |</p>
+<br>
 <p>| DeepSeek-R1 7B | 4.5 GB | 8 GB | Strong reasoning, step-by-step |</p>
+<br>
+<br>
+<br>
 <br>
 <h3>Using Ollama Programmatically</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Ollama provides a REST API at `http://localhost:11434`:</p>
 <br>
-<pre><code>
-import requests
-
-
-
-response = requests.post(&quot;http://localhost:11434/api/generate&quot;, json={
-
-    &quot;model&quot;: &quot;llama3.2:3b&quot;,
-
-    &quot;prompt&quot;: &quot;Explain quantum computing in three sentences.&quot;,
-
-    &quot;stream&quot;: False
-
-})
-
-
-
-print(response.json()[&quot;response&quot;])
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    import requests</p>
+<br>
+<br>
+<br>
+<p>    response = requests.post("http://localhost:11434/api/generate", json={</p>
+<br>
+<p>        "model": "llama3.2:3b",</p>
+<br>
+<p>        "prompt": "Explain quantum computing in three sentences.",</p>
+<br>
+<p>        "stream": False</p>
+<br>
+<p>    })</p>
+<br>
+<br>
+<br>
+<p>    print(response.json()["response"])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Or use the official Python library:</p>
 <br>
-<pre><code>
-import ollama
-
-
-
-response = ollama.chat(model=&quot;llama3.2:3b&quot;, messages=[
-
-    {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;What is the capital of France?&quot;}
-
-])
-
-print(response[&quot;message&quot;][&quot;content&quot;])
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    import ollama</p>
+<br>
+<br>
+<br>
+<p>    response = ollama.chat(model="llama3.2:3b", messages=[</p>
+<br>
+<p>        {"role": "user", "content": "What is the capital of France?"}</p>
+<br>
+<p>    ])</p>
+<br>
+<p>    print(response["message"]["content"])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Custom Modelfiles</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Create custom models with system prompts and parameters:</p>
 <br>
-<pre><code>
-FROM llama3.1:8b
-
-
-
-# Set system prompt
-
-SYSTEM &quot;You are a helpful coding assistant. Provide concise code examples.&quot;
-
-
-
-# Configure parameters
-
-PARAMETER temperature 0.3
-
-PARAMETER top_p 0.9
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    FROM llama3.1:8b</p>
+<br>
+<br>
+<br>
+<p>    # Set system prompt</p>
+<br>
+<p>    SYSTEM "You are a helpful coding assistant. Provide concise code examples."</p>
+<br>
+<br>
+<br>
+<p>    # Configure parameters</p>
+<br>
+<p>    PARAMETER temperature 0.3</p>
+<br>
+<p>    PARAMETER top_p 0.9</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Build and run:</p>
 <br>
-<pre><code>
-ollama create my-coding-assistant -f Modelfile
-
-ollama run my-coding-assistant
-
-</code></pre>
 <br>
-<h2> LM Studio</h2>
+<br>
+<br>
+<br>
+<p>    ollama create my-coding-assistant -f Modelfile</p>
+<br>
+<p>    ollama run my-coding-assistant</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  LM Studio</h2>
+<br>
+<br>
+<br>
 <br>
 <p>[LM Studio](https://lmstudio.ai) is a GUI-focused alternative that excels for users who prefer visual interfaces and easy model browsing.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Key Features</h3>
 <br>
-<li>**Built-in model browser**: Search and download models from Hugging Face</li>
-<li>**GUI chat interface**: Familiar ChatGPT-like experience</li>
-<li>**Local API server**: OpenAI-compatible API endpoint</li>
-<li>**Model configuration**: Easy sliders for context length, GPU offloading, and temperature</li>
-<li>**Multi-model support**: Load multiple models and switch between them</li>
+<br>
+<br>
+<p>* **Built-in model browser**: Search and download models from Hugging Face</p>
+<p>* **GUI chat interface**: Familiar ChatGPT-like experience</p>
+<p>* **Local API server**: OpenAI-compatible API endpoint</p>
+<p>* **Model configuration**: Easy sliders for context length, GPU offloading, and temperature</p>
+<p>* **Multi-model support**: Load multiple models and switch between them</p>
+<br>
+<br>
 <br>
 <h3>Setup</h3>
 <br>
-<li>Download from [lmstudio.ai](https://lmstudio.ai)</li>
-<p>2. Open the app and browse the model catalog</p>
-<p>3. Download a model (start with Llama 3.2 3B or Mistral 7B)</p>
-<p>4. Load the model and start chatting</p>
+<br>
+<br>
+<p>* Download from [lmstudio.ai](https://lmstudio.ai)</p>
+<br>
+<p>2\. Open the app and browse the model catalog</p>
+<br>
+<p>3\. Download a model (start with Llama 3.2 3B or Mistral 7B)</p>
+<br>
+<p>4\. Load the model and start chatting</p>
+<br>
+<br>
+<br>
 <br>
 <h3>API Server</h3>
 <br>
+<br>
+<br>
+<br>
 <p>LM Studio can serve models via an OpenAI-compatible API:</p>
 <br>
-<pre><code>
-http://localhost:1234/v1/chat/completions
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    http://localhost:1234/v1/chat/completions</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>This means any tool that works with OpenAI's API can use your local model by changing the base URL:</p>
 <br>
-<pre><code>
-from openai import OpenAI
-
-
-
-client = OpenAI(
-
-    base_url=&quot;http://localhost:1234/v1&quot;,
-
-    api_key=&quot;not-needed&quot;
-
-)
-
-
-
-response = client.chat.completions.create(
-
-    model=&quot;local-model&quot;,
-
-    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello!&quot;}]
-
-)
-
-</code></pre>
 <br>
-<h2> Performance Optimization</h2>
+<br>
+<br>
+<br>
+<p>    from openai import OpenAI</p>
+<br>
+<br>
+<br>
+<p>    client = OpenAI(</p>
+<br>
+<p>        base_url="http://localhost:1234/v1",</p>
+<br>
+<p>        api_key="not-needed"</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<p>    response = client.chat.completions.create(</p>
+<br>
+<p>        model="local-model",</p>
+<br>
+<p>        messages=[{"role": "user", "content": "Hello!"}]</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Performance Optimization</h2>
+<br>
+<br>
+<br>
 <br>
 <h3>Quantization Levels</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Quantization reduces model size at the cost of some accuracy:</p>
 <br>
-<li>**Q4_K_M**: Best balance of quality and size (4-bit, recommended)</li>
-<li>**Q5_K_M**: Higher quality, larger (5-bit, use if you have RAM headroom)</li>
-<li>**Q8_0**: Near-full quality, 2x RAM requirement</li>
-<li>**Q2_K**: Minimal RAM, noticeable quality loss</li>
+<br>
+<br>
+<p>* **Q4_K_M**: Best balance of quality and size (4-bit, recommended)</p>
+<p>* **Q5_K_M**: Higher quality, larger (5-bit, use if you have RAM headroom)</p>
+<p>* **Q8_0**: Near-full quality, 2x RAM requirement</p>
+<p>* **Q2_K**: Minimal RAM, noticeable quality loss</p>
+<br>
+<br>
 <br>
 <p>Rule of thumb: each quantization step roughly doubles model size but improves quality marginally. Q4_K_M is the sweet spot.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>GPU Acceleration</h3>
+<br>
+<br>
+<br>
 <br>
 <p>Both Ollama and LM Studio support GPU acceleration via CUDA (NVIDIA), Metal (Apple Silicon), or Vulkan (AMD):</p>
 <br>
-<pre><code>
-# Ollama uses Metal automatically on Apple Silicon
-
-# For NVIDIA, install CUDA and Ollama detects it
-
-
-
-# Check which device is being used
-
-ollama run llama3.2:3b --verbose
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # Ollama uses Metal automatically on Apple Silicon</p>
+<br>
+<p>    # For NVIDIA, install CUDA and Ollama detects it</p>
+<br>
+<br>
+<br>
+<p>    # Check which device is being used</p>
+<br>
+<p>    ollama run llama3.2:3b --verbose</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Context Window</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Larger context windows consume more memory. A 128K context with Q4_K_M requires approximately:</p>
 <br>
-<li>7B model: ~8 GB total</li>
-<li>13B model: ~14 GB total</li>
-<li>70B model: ~48 GB total</li>
 <br>
-<h2> Use Cases for Local LLMs</h2>
 <br>
-<li>**Privacy-sensitive data**: Medical records, legal documents, personal information</li>
-<li>**Offline environments**: Air-gapped systems, travel, remote locations</li>
-<li>**Cost-sensitive workloads**: High-volume batch processing</li>
-<li>**Experimentation**: Rapid testing of different models without API costs</li>
-<li>**Latency-critical applications**: No network calls for inference</li>
+<p>* 7B model: ~8 GB total</p>
+<p>* 13B model: ~14 GB total</p>
+<p>* 70B model: ~48 GB total</p>
 <br>
-<h2> Conclusion</h2>
+<br>
+<br>
+<h2>  Use Cases for Local LLMs</h2>
+<br>
+<br>
+<br>
+<p>* **Privacy-sensitive data**: Medical records, legal documents, personal information</p>
+<p>* **Offline environments**: Air-gapped systems, travel, remote locations</p>
+<p>* **Cost-sensitive workloads**: High-volume batch processing</p>
+<p>* **Experimentation**: Rapid testing of different models without API costs</p>
+<p>* **Latency-critical applications**: No network calls for inference</p>
+<br>
+<br>
+<br>
+<h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Running LLMs locally is easier than ever with Ollama and LM Studio. Ollama offers command-line simplicity and a rich set of pre-built models. LM Studio provides a polished GUI and OpenAI-compatible API. Start with a 7B model at Q4_K_M quantization on a machine with 8-16 GB of RAM, and scale up as your needs grow. Local LLMs won't replace cloud APIs for every use case, but they are an essential tool in the AI practitioner's toolkit.</p></div>
     </article>

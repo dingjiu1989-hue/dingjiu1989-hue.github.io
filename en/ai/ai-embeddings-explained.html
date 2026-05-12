@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1141",
+      "wordCount": "1295",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-embeddings-explained.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-embeddings-explained.html"},
+      "articleBody": "AI Embeddings Explained Introduction Embeddings are the foundation of modern AI applications \u2014 powering semantic search, recommendation systems, clustering, and classification. At their core, embeddings convert text, images, or other data into dense vector representations that capture semantic meaning. This guide explains what embeddings are, how they work, and how to use them effectively. What Are Embeddings? An embedding is a numerical representation of data \u2014 typically a list of floating-point numbers \u2014 where the position in vector space encodes semantic meaning. Similar concepts cluster together, while dissimilar concepts are far apart. For example, the embeddings for \"king\" and \"queen\" would be closer to each other than to \"bicycle.\" More importantly, embeddings capture analogical relationships: the vector operation `king - man + woman` produces a vector close to `queen`. Modern embedding models produce vectors with 384 to 3072 dimensions. The trade-off is speed versus information density: smaller vectors are faster to compare but capture less nuance. How Embeddings Are Generated Embedding models are trained using contrastive learning. The model learns to pull semantically similar texts together in vector space while pushing dissimilar texts apart. **The training signal is typically:** * **If two texts are similar** (paraphrases, translations, query-document pairs): minimize the distance between their embeddings * **If two texts are dissimilar**: maximize the distance The most common loss function is **contrastive loss** or **InfoNCE loss**, which uses in-batch negative sampling to provide training signal at scale. Popular Embedding Models | Model | Dimensions | Best For | Size | |-------|-----------|----------|------| | text-embedding-3-small | 512-1536 | General purpose | API | | text-embedding-3-large | 256-3072 | High accuracy | API | | BAAI/bge-large-en-v1.5 | 1024 | RAG and search | 1.3 GB | | sentence-transformers/all-MiniLM-L6-v2 | 384 | Speed-critical apps | 80 MB | | intfloat/e5-mistral-7b-instruct | 4096 | Highest quality | 14 GB | For production RAG systems, `bge-large-en-v1.5` offers an excellent balance of quality and speed. For mobile or latency-sensitive applications, `all-MiniLM-L6-v2` is the standard choice. Using Embeddings in Practice Generating Embeddings from sentence_transformers import SentenceTransformer model = SentenceTransformer(\"BAAI/bge-large-en-v1.5\") documents = [ \"Embeddings represent text as dense vectors.\", \"Semantic search uses vector similarity to find relevant results.\", \"Vector databases store and index embeddings for fast retrieval.\" ] embeddings = model.encode(documents, normalize_embeddings=True) print(f\"Shape: {embeddings.shape}\") # (3, 1024) Measuring Similarity Cosine similarity is the standard metric for comparing embeddings: import numpy as np def cosine_similarity(a, b): return np.dot(a, b) # For normalized vectors, dot = cosine query_embedding = model.encode(\"How do vectors represent meaning?\", normalize_embeddings=True) scores = [cosine_similarity(query_embedding, doc_emb) for doc_emb in embeddings] When using normalized embeddings, dot product and cosine similarity are identical, simplifying computation. Dimensionality Reduction For visualization, reduce embeddings to 2D or 3D using UMAP or t-SNE: import umap reducer = umap.UMAP(n_components=2, random_state=42) embeddings_2d = reducer.fit_transform(embeddings) UMAP preserves more global structure than t-SNE and is significantly faster for large datasets. Advanced Techniques Multi-Task Embeddings Some models can produce different embeddings for different tasks by prepending task-specific prefixes. For example, `bge` models use: * `\"Represent this sentence for searching relevant passages: \"` for query encoding * No prefix for document encoding This simple technique improves retrieval accuracy by 2-5% in production systems. Matryoshka Embeddings Matryoshka embedding models (like OpenAI's text-embedding-3 series) produce vectors where the first N dimensions form a valid, lower-quality embedding. You can truncate the vector at inference time to trade accuracy for speed and storage \u2014 using 256 dimensions for initial retrieval and 1536 for re-ranking. Common Pitfalls * **Not normalizing embeddings**: Always normalize unless you have a specific reason not to 2\\. **Using raw cosine similarity with unnormalized vectors**: Results are dominated by vector magnitude 3\\. **Ignoring domain mismatch**: Embedding models trained on general web text may perform poorly on medical or legal text 4\\. **Fixed chunk sizes in RAG**: Large chunks dilute meaning; small chunks lose context Conclusion Embeddings are a versatile and powerful tool in the AI practitioner's toolkit. They enable semantic search, document clustering, recommendation systems, and are the backbone of RAG architectures. Choosing the right model, normalizing properly, and understanding the trade-offs between dimension count and performance will determine the success of your embedding-based application."
     }
     </script>
     <script type="application/ld+json">
@@ -73,131 +74,240 @@
         <span class="tag-cat">Machine Learning</span></div>
       <h1 class="article-title">AI Embeddings Explained</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Introduction</h2>
+      <div class="article-body"><h1>AI Embeddings Explained</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Embeddings are the foundation of modern AI applications — powering semantic search, recommendation systems, clustering, and classification. At their core, embeddings convert text, images, or other data into dense vector representations that capture semantic meaning. This guide explains what embeddings are, how they work, and how to use them effectively.</p>
 <br>
-<h2> What Are Embeddings?</h2>
+<br>
+<br>
+<br>
+<h2>  What Are Embeddings?</h2>
+<br>
+<br>
+<br>
 <br>
 <p>An embedding is a numerical representation of data — typically a list of floating-point numbers — where the position in vector space encodes semantic meaning. Similar concepts cluster together, while dissimilar concepts are far apart.</p>
 <br>
+<br>
+<br>
+<br>
 <p>For example, the embeddings for "king" and "queen" would be closer to each other than to "bicycle." More importantly, embeddings capture analogical relationships: the vector operation `king - man + woman` produces a vector close to `queen`.</p>
+<br>
+<br>
+<br>
 <br>
 <p>Modern embedding models produce vectors with 384 to 3072 dimensions. The trade-off is speed versus information density: smaller vectors are faster to compare but capture less nuance.</p>
 <br>
-<h2> How Embeddings Are Generated</h2>
+<br>
+<br>
+<br>
+<h2>  How Embeddings Are Generated</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Embedding models are trained using contrastive learning. The model learns to pull semantically similar texts together in vector space while pushing dissimilar texts apart.</p>
 <br>
+<br>
+<br>
+<br>
 <p>**The training signal is typically:**</p>
-<li>**If two texts are similar** (paraphrases, translations, query-document pairs): minimize the distance between their embeddings</li>
-<li>**If two texts are dissimilar**: maximize the distance</li>
+<br>
+<p>* **If two texts are similar** (paraphrases, translations, query-document pairs): minimize the distance between their embeddings</p>
+<p>* **If two texts are dissimilar**: maximize the distance</p>
+<br>
+<br>
 <br>
 <p>The most common loss function is **contrastive loss** or **InfoNCE loss**, which uses in-batch negative sampling to provide training signal at scale.</p>
 <br>
-<h2> Popular Embedding Models</h2>
+<br>
+<br>
+<br>
+<h2>  Popular Embedding Models</h2>
+<br>
+<br>
+<br>
 <br>
 <p>| Model | Dimensions | Best For | Size |</p>
+<br>
 <p>|-------|-----------|----------|------|</p>
+<br>
 <p>| text-embedding-3-small | 512-1536 | General purpose | API |</p>
+<br>
 <p>| text-embedding-3-large | 256-3072 | High accuracy | API |</p>
+<br>
 <p>| BAAI/bge-large-en-v1.5 | 1024 | RAG and search | 1.3 GB |</p>
+<br>
 <p>| sentence-transformers/all-MiniLM-L6-v2 | 384 | Speed-critical apps | 80 MB |</p>
+<br>
 <p>| intfloat/e5-mistral-7b-instruct | 4096 | Highest quality | 14 GB |</p>
+<br>
+<br>
+<br>
 <br>
 <p>For production RAG systems, `bge-large-en-v1.5` offers an excellent balance of quality and speed. For mobile or latency-sensitive applications, `all-MiniLM-L6-v2` is the standard choice.</p>
 <br>
-<h2> Using Embeddings in Practice</h2>
+<br>
+<br>
+<br>
+<h2>  Using Embeddings in Practice</h2>
+<br>
+<br>
+<br>
 <br>
 <h3>Generating Embeddings</h3>
 <br>
-<pre><code>
-from sentence_transformers import SentenceTransformer
-
-
-
-model = SentenceTransformer(&quot;BAAI/bge-large-en-v1.5&quot;)
-
-documents = [
-
-    &quot;Embeddings represent text as dense vectors.&quot;,
-
-    &quot;Semantic search uses vector similarity to find relevant results.&quot;,
-
-    &quot;Vector databases store and index embeddings for fast retrieval.&quot;
-
-]
-
-
-
-embeddings = model.encode(documents, normalize_embeddings=True)
-
-print(f&quot;Shape: {embeddings.shape}&quot;)  # (3, 1024)
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    from sentence_transformers import SentenceTransformer</p>
+<br>
+<br>
+<br>
+<p>    model = SentenceTransformer("BAAI/bge-large-en-v1.5")</p>
+<br>
+<p>    documents = [</p>
+<br>
+<p>        "Embeddings represent text as dense vectors.",</p>
+<br>
+<p>        "Semantic search uses vector similarity to find relevant results.",</p>
+<br>
+<p>        "Vector databases store and index embeddings for fast retrieval."</p>
+<br>
+<p>    ]</p>
+<br>
+<br>
+<br>
+<p>    embeddings = model.encode(documents, normalize_embeddings=True)</p>
+<br>
+<p>    print(f"Shape: {embeddings.shape}")  # (3, 1024)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Measuring Similarity</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Cosine similarity is the standard metric for comparing embeddings:</p>
 <br>
-<pre><code>
-import numpy as np
-
-
-
-def cosine_similarity(a, b):
-
-    return np.dot(a, b)  # For normalized vectors, dot = cosine
-
-
-
-query_embedding = model.encode(&quot;How do vectors represent meaning?&quot;, normalize_embeddings=True)
-
-scores = [cosine_similarity(query_embedding, doc_emb) for doc_emb in embeddings]
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    import numpy as np</p>
+<br>
+<br>
+<br>
+<p>    def cosine_similarity(a, b):</p>
+<br>
+<p>        return np.dot(a, b)  # For normalized vectors, dot = cosine</p>
+<br>
+<br>
+<br>
+<p>    query_embedding = model.encode("How do vectors represent meaning?", normalize_embeddings=True)</p>
+<br>
+<p>    scores = [cosine_similarity(query_embedding, doc_emb) for doc_emb in embeddings]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>When using normalized embeddings, dot product and cosine similarity are identical, simplifying computation.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Dimensionality Reduction</h3>
+<br>
+<br>
+<br>
 <br>
 <p>For visualization, reduce embeddings to 2D or 3D using UMAP or t-SNE:</p>
 <br>
-<pre><code>
-import umap
-
-
-
-reducer = umap.UMAP(n_components=2, random_state=42)
-
-embeddings_2d = reducer.fit_transform(embeddings)
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    import umap</p>
+<br>
+<br>
+<br>
+<p>    reducer = umap.UMAP(n_components=2, random_state=42)</p>
+<br>
+<p>    embeddings_2d = reducer.fit_transform(embeddings)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>UMAP preserves more global structure than t-SNE and is significantly faster for large datasets.</p>
 <br>
-<h2> Advanced Techniques</h2>
+<br>
+<br>
+<br>
+<h2>  Advanced Techniques</h2>
+<br>
+<br>
+<br>
 <br>
 <h3>Multi-Task Embeddings</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Some models can produce different embeddings for different tasks by prepending task-specific prefixes. For example, `bge` models use:</p>
-<li>`"Represent this sentence for searching relevant passages: "` for query encoding</li>
-<li>No prefix for document encoding</li>
+<br>
+<p>* `"Represent this sentence for searching relevant passages: "` for query encoding</p>
+<p>* No prefix for document encoding</p>
+<br>
+<br>
 <br>
 <p>This simple technique improves retrieval accuracy by 2-5% in production systems.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Matryoshka Embeddings</h3>
+<br>
+<br>
+<br>
 <br>
 <p>Matryoshka embedding models (like OpenAI's text-embedding-3 series) produce vectors where the first N dimensions form a valid, lower-quality embedding. You can truncate the vector at inference time to trade accuracy for speed and storage — using 256 dimensions for initial retrieval and 1536 for re-ranking.</p>
 <br>
-<h2> Common Pitfalls</h2>
 <br>
-<li>**Not normalizing embeddings**: Always normalize unless you have a specific reason not to</li>
-<p>2. **Using raw cosine similarity with unnormalized vectors**: Results are dominated by vector magnitude</p>
-<p>3. **Ignoring domain mismatch**: Embedding models trained on general web text may perform poorly on medical or legal text</p>
-<p>4. **Fixed chunk sizes in RAG**: Large chunks dilute meaning; small chunks lose context</p>
 <br>
-<h2> Conclusion</h2>
+<br>
+<h2>  Common Pitfalls</h2>
+<br>
+<br>
+<br>
+<p>* **Not normalizing embeddings**: Always normalize unless you have a specific reason not to</p>
+<br>
+<p>2\. **Using raw cosine similarity with unnormalized vectors**: Results are dominated by vector magnitude</p>
+<br>
+<p>3\. **Ignoring domain mismatch**: Embedding models trained on general web text may perform poorly on medical or legal text</p>
+<br>
+<p>4\. **Fixed chunk sizes in RAG**: Large chunks dilute meaning; small chunks lose context</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Embeddings are a versatile and powerful tool in the AI practitioner's toolkit. They enable semantic search, document clustering, recommendation systems, and are the backbone of RAG architectures. Choosing the right model, normalizing properly, and understanding the trade-offs between dimension count and performance will determine the success of your embedding-based application.</p></div>
     </article>

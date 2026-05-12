@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="infrastructure-composability">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Infrastructure Composability">
+    <meta property="og:description" content="Explore infrastructure composability: reusable modules, Terraform patterns, component design, and environment management">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/infrastructure-composability.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Infrastructure Composability">
+    <meta name="twitter:description" content="Explore infrastructure composability: reusable modules, Terraform patterns, component design, and environment management">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Infrastructure Composability — SourceHub</title>
+    <meta name="description" content="Explore infrastructure composability: reusable modules, Terraform patterns, component design, and environment management">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/infrastructure-composability.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/infrastructure-composability.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Infrastructure Composability",
+      "description": "Explore infrastructure composability: reusable modules, Terraform patterns, component design, and environment management",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1254",
+      "keywords": "Technology, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/infrastructure-composability.html"},
+      "articleBody": "Infrastructure Composability Infrastructure composability is the practice of building infrastructure as reusable, composable components. Instead of duplicating infrastructure definitions across projects, teams create modular components that can be combined and configured for different use cases. This approach reduces duplication, enforces consistency, and accelerates infrastructure delivery. The Problem Infrastructure Composability Solves Without composability, every project or environment defines infrastructure from scratch. Configuration is duplicated with slight variations. Updates must be applied to every copy. Inconsistencies accumulate as copies drift. This is the infrastructure equivalent of copy-paste programming. Composability addresses these problems by defining infrastructure components once and reusing them. A \"VPC\" module, a \"database\" module, and a \"compute\" module are defined in a central location. Projects compose these modules, configuring them with project-specific parameters. Updates to the module benefit all consumers. Terraform Modules Terraform modules are the most common implementation of infrastructure composability. A module is a directory of Terraform files that defines a reusable component. Modules accept input variables, create resources, and expose output values. A well-designed module has a clear purpose and composable interface. The \"VPC\" module creates a VPC with subnets, route tables, and NAT gateways. It accepts variables for CIDR blocks, availability zones, and tagging conventions. It outputs VPC IDs and subnet IDs for use by other modules. Modules should be versioned and published to a module registry. Terraform Cloud, Terraform Registry, and private Git repositories serve as module registries. Versioning allows consumers to pin to specific module versions and upgrade deliberately. Component Design Principles Good infrastructure components follow design principles similar to good software components. Single responsibility: each component does one thing well. Explicit interface: inputs and outputs are clearly defined and documented. Encapsulation: internal implementation details are hidden from consumers. Components should be composable: they work together without tight coupling. A compute module does not need to know about the database module's internals\u2014it just needs the database connection string, which is passed as an input variable. This loose coupling allows components to evolve independently. Components should support multiple environments through configuration, not duplication. The same module creates development, staging, and production infrastructure with different variable values. Environment-specific configuration is kept in separate variable files, not separate module definitions. Reusable Components Common reusable components include networking (VPC, subnets, DNS), compute (ECS, EKS, Lambda, EC2), data (RDS, DynamoDB, ElastiCache), CI/CD (build pipelines, artifact storage), and monitoring (alarms, dashboards, log groups). Each component should be thoroughly tested before publication. Terratest and `terraform validate` provide automated testing of Terraform modules. Tests verify that the module creates the expected resources with the expected configurations. Components should include monitoring and alerting as part of their definition. A database module should create CloudWatch alarms for CPU, memory, and disk usage. A compute module should create load balancer health checks and scaling policies. This embeds operational best practices into the component definition. Environment Management Composable infrastructure supports consistent environment management. Each environment (dev, stage, prod) uses the same modules but different configurations. Environment differences are captured in variable files, not code duplication. Terragrunt and Terraform workspaces provide environment management on top of Terraform modules. They handle state file separation, variable interpolation, and configuration inheritance. This allows a single module definition to power multiple environments with consistent behavior. CI/CD for Infrastructure Infrastructure components benefit from CI/CD pipelines. When a module changes, the pipeline runs tests, publishes a new version, and creates a release tag. Consuming projects upgrade their module version when ready. Infrastructure pipelines should include plan and apply stages. The plan stage shows what changes will be made. The apply stage executes the changes. Production infrastructure changes should require approval before apply. Organizational Adoption Adopting infrastructure composability requires organizational investment. Teams must allocate time to create and maintain modules. Module authors must follow design reviews and testing practices. Consuming teams must learn to compose modules rather than writing infrastructure from scratch. A platform engineering team often owns the shared infrastructure components. They maintain module quality, versioning, and documentation. Application teams compose modules to create their infrastructure. This division of responsibility leverages infrastructure expertise while enabling application team autonomy. Infrastructure composability transforms infrastructure management from an art into an engineering discipline. Reusable, tested, and versioned components reduce errors, improve consistency, and accelerate delivery. The initial investment in component creation pays dividends through reduced maintenance and faster infrastructure provisioning."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Infrastructure Composability"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Infrastructure Composability
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Infrastructure Composability</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Infrastructure Composability</h1>
+<br>
+<p>Infrastructure composability is the practice of building infrastructure as reusable, composable components. Instead of duplicating infrastructure definitions across projects, teams create modular components that can be combined and configured for different use cases. This approach reduces duplication, enforces consistency, and accelerates infrastructure delivery.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  The Problem Infrastructure Composability Solves</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Without composability, every project or environment defines infrastructure from scratch. Configuration is duplicated with slight variations. Updates must be applied to every copy. Inconsistencies accumulate as copies drift. This is the infrastructure equivalent of copy-paste programming.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Composability addresses these problems by defining infrastructure components once and reusing them. A "VPC" module, a "database" module, and a "compute" module are defined in a central location. Projects compose these modules, configuring them with project-specific parameters. Updates to the module benefit all consumers.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Terraform Modules</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Terraform modules are the most common implementation of infrastructure composability. A module is a directory of Terraform files that defines a reusable component. Modules accept input variables, create resources, and expose output values.</p>
+<br>
+<br>
+<br>
+<br>
+<p>A well-designed module has a clear purpose and composable interface. The "VPC" module creates a VPC with subnets, route tables, and NAT gateways. It accepts variables for CIDR blocks, availability zones, and tagging conventions. It outputs VPC IDs and subnet IDs for use by other modules.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Modules should be versioned and published to a module registry. Terraform Cloud, Terraform Registry, and private Git repositories serve as module registries. Versioning allows consumers to pin to specific module versions and upgrade deliberately.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Component Design Principles</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Good infrastructure components follow design principles similar to good software components. Single responsibility: each component does one thing well. Explicit interface: inputs and outputs are clearly defined and documented. Encapsulation: internal implementation details are hidden from consumers.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Components should be composable: they work together without tight coupling. A compute module does not need to know about the database module's internals—it just needs the database connection string, which is passed as an input variable. This loose coupling allows components to evolve independently.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Components should support multiple environments through configuration, not duplication. The same module creates development, staging, and production infrastructure with different variable values. Environment-specific configuration is kept in separate variable files, not separate module definitions.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Reusable Components</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Common reusable components include networking (VPC, subnets, DNS), compute (ECS, EKS, Lambda, EC2), data (RDS, DynamoDB, ElastiCache), CI/CD (build pipelines, artifact storage), and monitoring (alarms, dashboards, log groups).</p>
+<br>
+<br>
+<br>
+<br>
+<p>Each component should be thoroughly tested before publication. Terratest and `terraform validate` provide automated testing of Terraform modules. Tests verify that the module creates the expected resources with the expected configurations.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Components should include monitoring and alerting as part of their definition. A database module should create CloudWatch alarms for CPU, memory, and disk usage. A compute module should create load balancer health checks and scaling policies. This embeds operational best practices into the component definition.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Environment Management</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Composable infrastructure supports consistent environment management. Each environment (dev, stage, prod) uses the same modules but different configurations. Environment differences are captured in variable files, not code duplication.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Terragrunt and Terraform workspaces provide environment management on top of Terraform modules. They handle state file separation, variable interpolation, and configuration inheritance. This allows a single module definition to power multiple environments with consistent behavior.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  CI/CD for Infrastructure</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Infrastructure components benefit from CI/CD pipelines. When a module changes, the pipeline runs tests, publishes a new version, and creates a release tag. Consuming projects upgrade their module version when ready.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Infrastructure pipelines should include plan and apply stages. The plan stage shows what changes will be made. The apply stage executes the changes. Production infrastructure changes should require approval before apply.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Organizational Adoption</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Adopting infrastructure composability requires organizational investment. Teams must allocate time to create and maintain modules. Module authors must follow design reviews and testing practices. Consuming teams must learn to compose modules rather than writing infrastructure from scratch.</p>
+<br>
+<br>
+<br>
+<br>
+<p>A platform engineering team often owns the shared infrastructure components. They maintain module quality, versioning, and documentation. Application teams compose modules to create their infrastructure. This division of responsibility leverages infrastructure expertise while enabling application team autonomy.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Infrastructure composability transforms infrastructure management from an art into an engineering discipline. Reusable, tested, and versioned components reduce errors, improve consistency, and accelerate delivery. The initial investment in component creation pays dividends through reduced maintenance and faster infrastructure provisioning.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

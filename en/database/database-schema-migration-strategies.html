@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="database-schema-migration-strategies">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Database Schema Migration: Version Control, Rollback, and Zero-Downtime">
+    <meta property="og:description" content="Database migration strategies for production: version-controlled schemas, rollback planning, and zero-downtime deploys.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/database-schema-migration-strategies.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Database Schema Migration: Version Control, Rollback, and Zero-Downtime">
+    <meta name="twitter:description" content="Database migration strategies for production: version-controlled schemas, rollback planning, and zero-downtime deploys.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Database Schema Migration: Version Control, Rollback, and Zero-Downtime — SourceHub</title>
+    <meta name="description" content="Database migration strategies for production: version-controlled schemas, rollback planning, and zero-downtime deploys.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/database-schema-migration-strategies.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/database-schema-migration-strategies.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Database Schema Migration: Version Control, Rollback, and Zero-Downtime",
+      "description": "Database migration strategies for production: version-controlled schemas, rollback planning, and zero-downtime deploys.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "609",
+      "keywords": "Database, Backend, Data",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-schema-migration-strategies.html"},
+      "articleBody": "Database Schema Migration: Version Control, Rollback, and Zero-Downtime Database schema changes in production require careful planning. Unlike application code, database changes are stateful\u2014they modify existing data and structures. A bad migration can cause downtime, data loss, or performance degradation. Version Control for Schema Treat database schemas as code. Every migration is a file in version control. Use a migration tool (Flyway, Liquibase, Alembic, Prisma Migrate) that tracks which migrations have been applied. The migration tool maintains a tracking table in the database. Migration naming convention: use timestamps or sequential numbers: 20260512_create_orders_table.sql. Each migration should be additive when possible\u2014adding tables, columns, and indexes is easier to reverse than removing them. Migration Patterns Expand-migrate-contract is the standard pattern for zero-downtime migrations. Phase 1 (expand): add new columns, tables, and indexes without removing old ones. Deploy application code that writes to both old and new structures. Phase 2 (migrate): backfill new columns with data from old columns. Run data validation. Phase 3 (contract): remove old columns and tables after verifying new structures work. Backward-compatible migrations are safe to deploy at any time. Adding a nullable column is backward-compatible. Adding a column with NOT NULL requires a default value. Renaming a column requires a multi-phase migration\u2014add the new name, dual-write, backfill, then remove the old name. Rollback Planning Every migration needs a rollback script. Test rollbacks before production deployment\u2014they are harder to get right than forward migrations. Rollback of data migrations (backfilling, transformation) requires extra care because data may have changed since the forward migration. Flyway supports undo migrations with naming convention. Liquibase supports rollback commands. Alembic can generate downgrade scripts. Test the complete forward-and-rollback cycle in a staging environment. Performance Considerations Large migrations lock tables. Adding a column with a default value locks the table in PostgreSQL\u2014it rewrites the table. Adding a CHECK or NOT NULL constraint requires a full table scan. Use pg_repack or pt-online-schema-change for zero-downtime schema changes on large tables. Batch data migrations: backfill 1000-10000 rows per transaction. Monitor replication lag. Pause if lag exceeds threshold. Set statement_timeout to prevent runaway queries. Run during low-traffic periods. Production Checklist Review migration SQL for locking behavior. Check disk space\u2014ALTER TABLE can double table size temporarily. Run migration on a replica first. Have a rollback plan documented. Test on a staging database with production-scale data. Monitor query performance after migration. Set up rollback alerting."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Database Schema Migration: Version Control, Rollback, and Zero-Downtime"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Database Schema Migration: Version Control, Rollback, and Zero-Downtime
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Data</span></div>
+      <h1 class="article-title">Database Schema Migration: Version Control, Rollback, and Zero-Downtime</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Database Schema Migration: Version Control, Rollback, and Zero-Downtime</h1>
+<p>Database schema changes in production require careful planning. Unlike application code, database changes are stateful—they modify existing data and structures. A bad migration can cause downtime, data loss, or performance degradation.</p>
+<br>
+<h2> Version Control for Schema</h2>
+<br>
+<p>Treat database schemas as code. Every migration is a file in version control. Use a migration tool (Flyway, Liquibase, Alembic, Prisma Migrate) that tracks which migrations have been applied. The migration tool maintains a tracking table in the database.</p>
+<br>
+<p>Migration naming convention: use timestamps or sequential numbers: 20260512_create_orders_table.sql. Each migration should be additive when possible—adding tables, columns, and indexes is easier to reverse than removing them.</p>
+<br>
+<h2> Migration Patterns</h2>
+<br>
+<p>Expand-migrate-contract is the standard pattern for zero-downtime migrations. Phase 1 (expand): add new columns, tables, and indexes without removing old ones. Deploy application code that writes to both old and new structures. Phase 2 (migrate): backfill new columns with data from old columns. Run data validation. Phase 3 (contract): remove old columns and tables after verifying new structures work.</p>
+<br>
+<p>Backward-compatible migrations are safe to deploy at any time. Adding a nullable column is backward-compatible. Adding a column with NOT NULL requires a default value. Renaming a column requires a multi-phase migration—add the new name, dual-write, backfill, then remove the old name.</p>
+<br>
+<h2> Rollback Planning</h2>
+<br>
+<p>Every migration needs a rollback script. Test rollbacks before production deployment—they are harder to get right than forward migrations. Rollback of data migrations (backfilling, transformation) requires extra care because data may have changed since the forward migration.</p>
+<br>
+<p>Flyway supports undo migrations with naming convention. Liquibase supports rollback commands. Alembic can generate downgrade scripts. Test the complete forward-and-rollback cycle in a staging environment.</p>
+<br>
+<h2> Performance Considerations</h2>
+<br>
+<p>Large migrations lock tables. Adding a column with a default value locks the table in PostgreSQL—it rewrites the table. Adding a CHECK or NOT NULL constraint requires a full table scan. Use pg_repack or pt-online-schema-change for zero-downtime schema changes on large tables.</p>
+<br>
+<p>Batch data migrations: backfill 1000-10000 rows per transaction. Monitor replication lag. Pause if lag exceeds threshold. Set statement_timeout to prevent runaway queries. Run during low-traffic periods.</p>
+<br>
+<h2> Production Checklist</h2>
+<br>
+<p>Review migration SQL for locking behavior. Check disk space—ALTER TABLE can double table size temporarily. Run migration on a replica first. Have a rollback plan documented. Test on a staging database with production-scale data. Monitor query performance after migration. Set up rollback alerting.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

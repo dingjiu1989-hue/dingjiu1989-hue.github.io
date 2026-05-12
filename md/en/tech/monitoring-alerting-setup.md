@@ -6,199 +6,812 @@ board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/monitoring-alerting-setup.html
 ---
 
+# Monitoring and Alerting Setup
+
+# Monitoring and Alerting Setup
+
+  
+
+
 A robust monitoring and alerting system is the backbone of reliable production infrastructure. Without it, you are flying blind -- discovering outages only when users complain. This guide covers setting up a complete monitoring stack and designing effective alert rules.
 
-## The Four Golden Signals
+  
+  
+  
+  
+
+
+##  The Four Golden Signals
+
+  
+  
+  
+  
+
 
 Google's SRE book defines four key metrics for user-facing systems:
 
-1. **Latency** -- Time to service a request. Measure both average and high percentiles (p95, p99).
-2. **Traffic** -- Request rate (RPS, QPS) or throughput.
-3. **Errors** -- Rate of failed requests (5xx, timeouts, explicit error responses).
-4. **Saturation** -- How full the service is (CPU, memory, queue depth).
+  
+  
+  
+
+
+* **Latency** -- Time to service a request. Measure both average and high percentiles (p95, p99).
+
+  
+
+
+2\\. **Traffic** -- Request rate (RPS, QPS) or throughput.
+
+  
+
+
+3\\. **Errors** -- Rate of failed requests (5xx, timeouts, explicit error responses).
+
+  
+
+
+4\\. **Saturation** -- How full the service is (CPU, memory, queue depth).
+
+  
+  
+  
+  
+
 
 Every monitoring system should capture these four signals for each service.
 
-## Metrics Collection Stack
+  
+  
+  
+  
+
+
+##  Metrics Collection Stack
+
+  
+  
+  
+  
+
 
 The Prometheus ecosystem has become the standard for metrics collection:
 
-```
+  
+  
+  
+  
+  
+
+
 Application → Metrics Export → Prometheus → Grafana
-                   ↑                ↓
-             Node Exporter      Alertmanager
-                   ↑                ↓
-               System           Notification
-               Metrics          Channels
-```
+
+  
+
+
+↑ ↓
+
+  
+
+
+Node Exporter Alertmanager
+
+  
+
+
+↑ ↓
+
+  
+
+
+System Notification
+
+  
+
+
+Metrics Channels
+
+  
+  
+  
+  
+  
+  
+
 
 Install Prometheus and configure it to scrape targets:
 
-```yaml
+  
+  
+  
+  
+  
+
+
 # prometheus.yml
+
+  
+
+
 global:
-  scrape_interval: 15s
-  evaluation_interval: 15s
+
+  
+
+
+scrape_interval: 15s
+
+  
+
+
+evaluation_interval: 15s
+
+  
+  
+  
+
 
 scrape_configs:
-  - job_name: 'node'
-    static_configs:
-      - targets: ['localhost:9100']
 
-  - job_name: 'app'
-    static_configs:
-      - targets: ['localhost:3000']
-```
+  
+
+
+\- job_name: 'node'
+
+  
+
+
+static_configs:
+
+  
+
+
+\- targets: ['localhost:9100']
+
+  
+  
+  
+
+
+\- job_name: 'app'
+
+  
+
+
+static_configs:
+
+  
+
+
+\- targets: ['localhost:3000']
+
+  
+  
+  
+  
+  
+  
+
 
 Use `scrape_interval` of 15 seconds for most metrics. For high-cardinality metrics (e.g., per-request tracing), use a longer interval or sample.
 
-## Application Instrumentation
+  
+  
+  
+  
+
+
+##  Application Instrumentation
+
+  
+  
+  
+  
+
 
 Export application metrics in Prometheus format:
 
-```javascript
+  
+  
+  
+  
+  
+
+
 // Node.js with prom-client
+
+  
+
+
 const client = require('prom-client');
 
+  
+  
+  
+
+
 const httpRequestDuration = new client.Histogram({
-  name: 'http_request_duration_seconds',
-  help: 'HTTP request duration in seconds',
-  labelNames: ['method', 'route', 'status'],
-  buckets: [0.01, 0.05, 0.1, 0.5, 1, 5]
+
+  
+
+
+name: 'http_request_duration_seconds',
+
+  
+
+
+help: 'HTTP request duration in seconds',
+
+  
+
+
+labelNames: ['method', 'route', 'status'],
+
+  
+
+
+buckets: [0.01, 0.05, 0.1, 0.5, 1, 5]
+
+  
+
+
 });
 
+  
+  
+  
+
+
 // Record metrics in middleware
+
+  
+
+
 app.use((req, res, next) => {
-  const end = httpRequestDuration.startTimer();
-  res.on('finish', () => {
-    end({ method: req.method, route: req.route?.path || 'unknown', status: res.statusCode });
-  });
-  next();
+
+  
+
+
+const end = httpRequestDuration.startTimer();
+
+  
+
+
+res.on('finish', () => {
+
+  
+
+
+end({ method: req.method, route: req.route?.path || 'unknown', status: res.statusCode });
+
+  
+
+
 });
-```
+
+  
+
+
+next();
+
+  
+
+
+});
+
+  
+  
+  
+  
+  
+  
+
 
 Use Histogram metrics for latency, Counter for request counts, and Gauge for current resource usage. Avoid unbounded label cardinality.
 
-## Centralized Logging
+  
+  
+  
+  
+
+
+##  Centralized Logging
+
+  
+  
+  
+  
+
 
 The ELK stack (Elasticsearch, Logstash, Kibana) remains popular, but the Grafana Loki stack is simpler and cheaper for log aggregation:
 
-```yaml
+  
+  
+  
+  
+  
+
+
 # docker-compose for Loki + Promtail
+
+  
+
+
 services:
-  loki:
-    image: grafana/loki:3.0
-    ports: ["3100:3100"]
 
-  promtail:
-    image: grafana/promtail:3.0
-    volumes:
-      - /var/log:/var/log
-      - ./promtail.yml:/etc/promtail/promtail.yml
+  
 
-  grafana:
-    image: grafana/grafana:latest
-    ports: ["3000:3000"]
-```
+
+loki:
+
+  
+
+
+image: grafana/loki:3.0
+
+  
+
+
+ports: ["3100:3100"]
+
+  
+  
+  
+
+
+promtail:
+
+  
+
+
+image: grafana/promtail:3.0
+
+  
+
+
+volumes:
+
+  
+
+
+\- /var/log:/var/log
+
+  
+
+
+\- ./promtail.yml:/etc/promtail/promtail.yml
+
+  
+  
+  
+
+
+grafana:
+
+  
+
+
+image: grafana/grafana:latest
+
+  
+
+
+ports: ["3000:3000"]
+
+  
+  
+  
+  
+  
+  
+
 
 Promtail tails log files, adds labels, and ships them to Loki. Grafana queries both Prometheus (metrics) and Loki (logs) in a unified dashboard.
 
-## Effective Alerting Rules
+  
+  
+  
+  
+
+
+##  Effective Alerting Rules
+
+  
+  
+  
+  
+
 
 Design alerts that are actionable and meaningful:
 
-```yaml
+  
+  
+  
+  
+  
+
+
 # prometheus-alerts.yml
+
+  
+
+
 groups:
-  - name: application
-    rules:
-      - alert: HighErrorRate
-        expr: |
-          sum(rate(http_requests_total{status=~"5.."}[5m]))
-          /
-          sum(rate(http_requests_total[5m])) > 0.05
-        for: 5m
-        labels:
-          severity: critical
-        annotations:
-          summary: "High error rate ({{ $value | humanizePercentage }})"
 
-      - alert: HighLatency
-        expr: |
-          histogram_quantile(0.99,
-            rate(http_request_duration_seconds_bucket[5m])
-          ) > 2
-        for: 5m
-        labels:
-          severity: warning
-        annotations:
-          summary: "p99 latency is {{ $value }}s"
+  
 
-      - alert: InstanceDown
-        expr: up == 0
-        for: 1m
-        labels:
-          severity: critical
-```
+
+\- name: application
+
+  
+
+
+rules:
+
+  
+
+
+\- alert: HighErrorRate
+
+  
+
+
+expr: |
+
+  
+
+
+sum(rate(http_requests_total{status=~"5.."}[5m]))
+
+  
+
+
+/
+
+  
+
+
+sum(rate(http_requests_total[5m])) > 0.05
+
+  
+
+
+for: 5m
+
+  
+
+
+labels:
+
+  
+
+
+severity: critical
+
+  
+
+
+annotations:
+
+  
+
+
+summary: "High error rate ({{ $value | humanizePercentage }})"
+
+  
+  
+  
+
+
+\- alert: HighLatency
+
+  
+
+
+expr: |
+
+  
+
+
+histogram_quantile(0.99,
+
+  
+
+
+rate(http_request_duration_seconds_bucket[5m])
+
+  
+
+
+) > 2
+
+  
+
+
+for: 5m
+
+  
+
+
+labels:
+
+  
+
+
+severity: warning
+
+  
+
+
+annotations:
+
+  
+
+
+summary: "p99 latency is {{ $value }}s"
+
+  
+  
+  
+
+
+\- alert: InstanceDown
+
+  
+
+
+expr: up == 0
+
+  
+
+
+for: 1m
+
+  
+
+
+labels:
+
+  
+
+
+severity: critical
+
+  
+  
+  
+  
+  
+  
+
 
 ### Alert Design Principles
 
-- **Alert on symptoms, not causes.** Alert on error rate, not on "CPU is high." CPU spikes may be normal; error rate spikes always require investigation.
-- **Use the `for` clause.** Require the condition to persist for several minutes before firing to avoid flapping.
-- **Set appropriate severity.** Critical alerts page someone immediately. Warning alerts create a ticket for next-day investigation.
-- **Include runbooks.** Every alert annotation should reference a runbook URL.
+  
+  
+  
 
-## Notification Channels
+
+* **Alert on symptoms, not causes.** Alert on error rate, not on "CPU is high." CPU spikes may be normal; error rate spikes always require investigation.
+
+* **Use the `for` clause.** Require the condition to persist for several minutes before firing to avoid flapping.
+
+* **Set appropriate severity.** Critical alerts page someone immediately. Warning alerts create a ticket for next-day investigation.
+
+* **Include runbooks.** Every alert annotation should reference a runbook URL.
+
+  
+  
+  
+
+
+##  Notification Channels
+
+  
+  
+  
+  
+
 
 Route alerts through Alertmanager:
 
-```yaml
+  
+  
+  
+  
+  
+
+
 # alertmanager.yml
+
+  
+
+
 route:
-  receiver: 'team-page'
-  routes:
-    - match:
-        severity: warning
-      receiver: 'team-slack'
+
+  
+
+
+receiver: 'team-page'
+
+  
+
+
+routes:
+
+  
+
+
+\- match:
+
+  
+
+
+severity: warning
+
+  
+
+
+receiver: 'team-slack'
+
+  
+  
+  
+
 
 receivers:
-  - name: 'team-page'
-    pagerduty_configs:
-      - routing_key: '...'
 
-  - name: 'team-slack'
-    slack_configs:
-      - api_url: 'https://hooks.slack.com/services/...'
-        channel: '#alerts'
-```
+  
+
+
+\- name: 'team-page'
+
+  
+
+
+pagerduty_configs:
+
+  
+
+
+\- routing_key: '...'
+
+  
+  
+  
+
+
+\- name: 'team-slack'
+
+  
+
+
+slack_configs:
+
+  
+
+
+\- api_url: 'https://hooks.slack.com/services/...'
+
+  
+
+
+channel: '#alerts'
+
+  
+  
+  
+  
+  
+  
+
 
 Critical alerts go to PagerDuty or Opsgenie for immediate attention. Warnings go to Slack for team awareness.
 
-## Dashboard Best Practices
+  
+  
+  
+  
+
+
+##  Dashboard Best Practices
+
+  
+  
+  
+  
+
 
 Effective Grafana dashboards follow these principles:
 
-- **One dashboard per service**, not one dashboard per engineer.
-- **Show what matters**, not everything. Start with RED metrics (Rate, Errors, Duration).
-- **Use templates** for environment and service selection.
-- **Link to logs** -- a metric spike should have a one-click path to relevant logs.
+  
+  
+  
 
-## Synthetic Monitoring
+
+* **One dashboard per service**, not one dashboard per engineer.
+
+* **Show what matters**, not everything. Start with RED metrics (Rate, Errors, Duration).
+
+* **Use templates** for environment and service selection.
+
+* **Link to logs** -- a metric spike should have a one-click path to relevant logs.
+
+  
+  
+  
+
+
+##  Synthetic Monitoring
+
+  
+  
+  
+  
+
 
 Complement real-user monitoring with synthetic checks:
 
-```yaml
+  
+  
+  
+  
+  
+
+
 # blackbox-exporter targets
+
+  
+
+
 modules:
-  http_2xx:
-    prober: http
-    http:
-      preferred_ip_protocol: "ip4"
-      valid_status_codes: [200, 201, 204]
-```
+
+  
+
+
+http_2xx:
+
+  
+
+
+prober: http
+
+  
+
+
+http:
+
+  
+
+
+preferred_ip_protocol: "ip4"
+
+  
+
+
+valid_status_codes: [200, 201, 204]
+
+  
+  
+  
+  
+  
+  
+
 
 Run synthetic checks from multiple geographic locations to detect regional outages.
 
-## Summary
+  
+  
+  
+  
+
+
+##  Summary
+
+  
+  
+  
+  
+
 
 A complete monitoring stack requires metrics (Prometheus), logs (Loki), dashboards (Grafana), and alerting (Alertmanager). Instrument your applications with the four golden signals, design alerts that fire on symptoms not causes, and ensure every alert has a clear path to resolution. Start simple with Prometheus and Grafana, then add log aggregation and synthetic monitoring as your infrastructure grows.

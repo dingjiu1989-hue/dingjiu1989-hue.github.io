@@ -8,11 +8,7 @@ url: https://dingjiu1989-hue.github.io/tech/regex-guide.html
 
 # 正则表达式 30 分钟入门指南
 
-正则表达式是文本处理的瑞士军刀——验证表单、提取数据、搜索替换，没有比它更强的工具。学会它，一辈子受益。
-
-## 基础元字符
-
-符号| 含义| 示例匹配  
+正则表达式是文本处理的瑞士军刀——验证表单、提取数据、搜索替换，没有比它更强的工具。学会它，一辈子受益。 基础元字符 符号| 含义| 示例匹配  
 ---|---|---  
 .| 任意单个字符| a.c → abc, a1c  
 \d| 数字| \d\d\d → 123, 456  
@@ -20,18 +16,14 @@ url: https://dingjiu1989-hue.github.io/tech/regex-guide.html
 \s| 空白字符| a\sb → "a b"  
 [abc]| 字符组，匹配 a/b/c| [aeiou] → 元音字母  
 [^abc]| 取反，不匹配 a/b/c| [^0-9] → 非数字  
-  
-## 量词
-
-符号| 含义  
+量词 符号| 含义  
 ---|---  
 *| 0 次或多次  
 +| 1 次或多次  
 ?| 0 次或 1 次  
 {n}| 恰好 n 次  
 {n,m}| n 到 m 次  
-  
-## 实战 5 例
+实战 5 例
     
     
     # 1. 验证手机号（中国大陆）
@@ -49,7 +41,7 @@ url: https://dingjiu1989-hue.github.io/tech/regex-guide.html
     # 5. 验证日期格式 YYYY-MM-DD
     ^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
 
-## 分组和捕获
+分组和捕获
     
     
     # 匹配 "2026-05-07"，分别捕获年月日
@@ -58,24 +50,15 @@ url: https://dingjiu1989-hue.github.io/tech/regex-guide.html
     # Python 中可以用 group(1) group(2) group(3) 获取
     # 等价于 \1 \2 \3 在替换中引用
 
-## 零宽断言（进阶）
-
-符号| 含义| 示例  
+零宽断言（进阶） 符号| 含义| 示例  
 ---|---|---  
 (?=...)| 正向前瞻| \d+(?=元) 匹配"50元"中的50  
 (?<=...)| 正向后顾| (?<=¥)\d+ 匹配"¥50"中的50  
 (?!...)| 负向前瞻| \d+(?!元) 匹配后不跟"元"的数字  
-  
-## 练习是关键
-
-推荐在 **regex101.com** 上实操练习，它有交互式解释器、多语言支持和测试用例功能。每天练 2 个正则，一周后你就能随手写出匹配规则了。
-
-### 📖 相关推荐
+练习是关键 推荐在 **regex101.com** 上实操练习，它有交互式解释器、多语言支持和测试用例功能。每天练 2 个正则，一周后你就能随手写出匹配规则了。 📖 相关推荐
 
   * [Linux 命令行入门：30 个最常用的命令](<https://dingjiu1989-hue.github.io/tech/linux-commands.html>)
   * [Python 入门教程：从零到写出第一个程序](<https://dingjiu1989-hue.github.io/tech/python-tutorial.html>)
   * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/tech/git-advanced.html>)
-
-
 
 **See also:** [Python 入门教程：从零到写出第一个程序](</tech/python-tutorial.html>), [单元测试入门：从零到写出第一个可维护的测试](</tech/unit-testing-guide.html>), [OpenAI API 入门：用 10 行代码调用 GPT](</ai/openai-api-intro.html>).

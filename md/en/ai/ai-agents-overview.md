@@ -1,0 +1,38 @@
+---
+title: "AI Agents: Architecture and Implementation"
+description: "Design and build AI agents: tool use, planning, memory, and multi-agent coordination for autonomous task completion."
+date: 2026-05-12
+board: ai
+url: https://dingjiu1989-hue.github.io/en/ai/ai-agents-overview.html
+---
+
+# AI Agents: Architecture and Implementation
+AI agents are autonomous systems that use large language models to perceive environments, reason about goals, and take actions. They represent the next frontier of LLM applications beyond simple chat and generation.
+
+## Agent Architecture
+
+A basic agent consists of an LLM core, a set of tools, and a reasoning loop. The LLM processes input and decides which tool to call. The tool executes and returns results. The LLM incorporates results into its reasoning and decides the next action. This loop continues until the task is complete.
+
+Tool definitions include name, description, parameters (JSON schema), and implementation. The LLM selects tools based on their descriptions. Well-written tool descriptions are critical for correct tool selection.
+
+## Planning
+
+Agents plan by breaking complex tasks into subtasks. ReAct (Reasoning + Acting) alternates reasoning and action steps at each iteration. Plan-and-Solve generates a complete plan before execution. Tree-of-Thought explores multiple plan branches.
+
+Effective planning requires the agent to self-evaluate progress. Ask the agent "Have I completed the original goal?" at each step. Implement maximum iteration limits to prevent infinite loops. Add human-in-the-loop checkpoints for critical actions.
+
+## Memory
+
+Agent memory has three levels: short-term (conversation context), long-term (external storage like vector databases), and episodic (past task experiences). Context window limits constrain short-term memory. Implement summarization to compress long conversations.
+
+External memory stores embeddings of past interactions. Retrieve relevant memories at each step using semantic search. Episodic memory improves over time as the agent learns from past successes and failures. Clear episodic memory when task patterns change.
+
+## Multi-Agent Systems
+
+Complex tasks benefit from multiple specialized agents. A research agent gathers information. A writer agent produces output. A reviewer agent validates quality. Agent orchestration frameworks (LangGraph, CrewAI, AutoGen) manage agent communication.
+
+Define clear handoff protocols between agents. Each agent should have a specific role, tools, and success criteria. Shared memory allows agents to access each other's outputs. Human supervision monitors agent-to-agent interactions.
+
+## Safety
+
+Implement guardrails for agent actions. Validate tool arguments before execution. Require human approval for destructive operations (file deletion, database writes). Set budget limits for cost control. Monitor agent behavior for anomalous patterns.

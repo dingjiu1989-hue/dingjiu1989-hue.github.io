@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2019",
+      "wordCount": "2249",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/data-loss-prevention.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/data-loss-prevention.html"},
+      "articleBody": "Data Loss Prevention (DLP) Strategies Data Loss Prevention (DLP) encompasses strategies and tools that prevent sensitive data from being leaked, stolen, or improperly exposed. DLP monitors, detects, and blocks unauthorized data transfers. This article covers the key DLP strategies including data classification, content inspection, and deployment across endpoint, network, and cloud environments. Data Classification DLP starts with knowing what data you have and how sensitive it is. Data classification categorizes information based on its sensitivity and business impact. Classification Levels A typical classification scheme includes four tiers: * **Public**: Information that can be freely shared. Marketing materials, press releases, public documentation. * **Internal**: Information meant for internal use only. Internal policies, project plans, employee directories. * **Confidential**: Sensitive business information. Customer data, financial records, source code, trade secrets. * **Restricted**: Highly sensitive data with legal or regulatory requirements. PII, PHI, payment card data, credentials. Automated Classification Manual classification does not scale. Modern DLP solutions use automated methods: * **Content analysis**: Scan files for patterns like social security numbers, credit card numbers, or intellectual property keywords. * **Context analysis**: Examine metadata including file location, creator, and access patterns. * **User behavior**: Flag unusual access patterns, like a developer downloading the entire customer database. # Example: Automated data classification regex patterns import re CLASSIFICATION_PATTERNS = { \"ssn\": r\"\\d{3}-\\d{2}-\\d{4}\", \"credit_card\": r\"\\d{4}[- ]?\\d{4}[- ]?\\d{4}[- ]?\\d{4}\", \"email\": r\"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\", \"api_key\": r\"(?:sk-[a-zA-Z0-9]{32,}|AKIA[0-9A-Z]{16})\" } def classify_document(text, filename=\"\"): findings = [] for data_type, pattern in CLASSIFICATION_PATTERNS.items(): matches = re.findall(pattern, text) if matches: findings.append({ \"type\": data_type, \"count\": len(matches), \"sample\": matches[0][:8] + \"...\" # partial masking }) if any(f[\"type\"] in [\"ssn\", \"credit_card\"] for f in findings): return \"RESTRICTED\", findings elif any(f[\"type\"] in [\"api_key\"] for f in findings): return \"CONFIDENTIAL\", findings elif findings: return \"INTERNAL\", findings return \"PUBLIC\", [] Content Inspection Methods DLP systems inspect content at rest, in motion, and in use. Exact Data Matching (EDM) EDM creates a fingerprint of exact sensitive data values from a structured database. For example, you can fingerprint the actual credit card numbers from a payment database. DLP systems then compare outgoing content against these fingerprints. Partial Document Matching (PDM) PDM detects documents that are substantially similar to sensitive templates. It uses fuzzy hashing or n-gram analysis to identify documents that share significant content with a classified template. Statistical Analysis Statistical methods detect unusual data content based on machine learning models trained on normal data patterns. This catches data that follows the general shape of sensitive information even if it does not match specific patterns. Machine Learning Classification ML-based classifiers learn to identify sensitive content from labeled training data. They handle variations that regex patterns miss. For example, an ML classifier can identify a confidential business plan even if it does not contain specific keywords. Endpoint DLP Endpoint DLP protects data on laptops, desktops, and mobile devices. It monitors data leaving the device through various channels. What Endpoint DLP Monitors * **USB devices**: Block or audit file transfers to removable media. * **Clipboard**: Prevent copying sensitive data to external applications. * **Printing**: Log or block printing of classified documents. * **Email**: Scan outgoing email for sensitive content. * **Screenshot**: Block or warn before screenshots of sensitive applications. * **Cloud sync**: Monitor files uploaded to personal cloud storage. # Endpoint DLP policy example (pseudocode) DLP_POLICIES = [ { \"name\": \"Block USB Transfer of Restricted Data\", \"condition\": { \"action\": \"USB_WRITE\", \"classification\": \"RESTRICTED\" }, \"response\": \"BLOCK\", \"notification\": \"Cannot transfer RESTRICTED data via USB\" }, { \"name\": \"Warn on Email with Credit Card\", \"condition\": { \"action\": \"EMAIL_SEND\", \"content_match\": \"credit_card_pattern\" }, \"response\": \"WARN\", \"notification\": \"Email contains potential credit card data\" } ] Network DLP Network DLP inspects traffic at network chokepoints to detect data exfiltration. Inspection Points * **Web gateways**: Monitor HTTPS traffic using TLS inspection. * **Email gateways**: Scan SMTP traffic for sensitive content and attachment inspection. * **DNS**: Detect DNS tunneling used for data exfiltration. * **File transfer**: Monitor FTP, SFTP, and SCP transfers. TLS Inspection Network DLP requires decrypting TLS traffic to inspect the content. The DLP appliance acts as a man-in-the-middle, terminating TLS connections, inspecting traffic, and re-encrypting to forward. Client -> DLP Proxy (decrypts, inspects, re-encrypts) -> Server TLS inspection requires deploying a trusted root CA certificate to all managed devices. Organizations must comply with data privacy regulations regarding decryption. Cloud DLP Cloud DLP protects data in SaaS applications (Google Workspace, Microsoft 365, Salesforce) and IaaS environments (AWS, GCP, Azure). Cloud DLP Services * **GCP DLP**: Built-in DLP service with 150+ built-in infoType detectors for PII, PHI, and credentials. Supports automated classification of Cloud Storage, BigQuery, and Datastore data. * **Microsoft Purview**: DLP for Microsoft 365 covering Exchange, SharePoint, OneDrive, Teams, and endpoints. Includes policy tips that warn users in real time. * **AWS Macie**: Machine learning-powered DLP for S3. Automatically discovers and classifies sensitive data in S3 buckets. # GCP DLP inspection example from google.cloud import dlp_v2 def inspect_content(project_id, text): dlp = dlp_v2.DlpServiceClient() parent = f\"projects/{project_id}\" item = {\"value\": text} info_types = [ {\"name\": \"CREDIT_CARD_NUMBER\"}, {\"name\": \"EMAIL_ADDRESS\"}, {\"name\": \"US_SOCIAL_SECURITY_NUMBER\"}, {\"name\": \"GOOGLE_API_KEY\"} ] response = dlp.inspect_content( request={ \"parent\": parent, \"item\": item, \"inspect_config\": { \"info_types\": info_types, \"min_likelihood\": dlp_v2.Likelihood.LIKELY, \"include_quote\": True } } ) for finding in response.result.findings: print(f\"Type: {finding.info_type.name}, \" f\"Location: {finding.location.byte_range}\") Cloud DLP Challenges * **Shadow data**: Data in unknown locations or unmanaged cloud services. * **API-based DLP latency**: Inspecting data through cloud APIs adds latency. * **Global data residency**: DLP policies must respect data residency regulations. * **Scanning costs**: DLP scanning of large cloud data stores can be expensive. DLP Policy Design Effective DLP policies balance security with productivity. Policy Types * **Block**: Prevent the action entirely. Use for high-confidence violations involving restricted data. * **Quarantine**: Isolate the data for review. Use when automated classification may be incorrect. * **Warn**: Alert the user but allow the action. Use for medium-confidence violations. * **Notify**: Log and notify security without interrupting the user. Use for low-confidence or policy compliance monitoring. Policy Tuning Start with monitoring-only policies. Review alerts, tune thresholds, and validate detection accuracy before enabling blocking actions. This prevents business disruption from false positives. Conclusion DLP is not a single product but a program that combines data classification, content inspection, and policy enforcement across endpoints, networks, and cloud environments. Start by classifying your data, deploy DLP in monitoring mode, tune your policies, and progressively tighten controls. The goal is to protect sensitive data without grinding productivity to a halt."
     }
     </script>
     <script type="application/ld+json">
@@ -73,284 +74,413 @@
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">Data Loss Prevention (DLP) Strategies</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
-      <div class="article-body"><p>Data Loss Prevention (DLP) encompasses strategies and tools that prevent sensitive data from being leaked, stolen, or improperly exposed. DLP monitors, detects, and blocks unauthorized data transfers. This article covers the key DLP strategies including data classification, content inspection, and deployment across endpoint, network, and cloud environments.</p>
+      <div class="article-body"><h1>Data Loss Prevention (DLP) Strategies</h1>
 <br>
-<h2> Data Classification</h2>
+<p>Data Loss Prevention (DLP) encompasses strategies and tools that prevent sensitive data from being leaked, stolen, or improperly exposed. DLP monitors, detects, and blocks unauthorized data transfers. This article covers the key DLP strategies including data classification, content inspection, and deployment across endpoint, network, and cloud environments.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Data Classification</h2>
+<br>
+<br>
+<br>
 <br>
 <p>DLP starts with knowing what data you have and how sensitive it is. Data classification categorizes information based on its sensitivity and business impact.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Classification Levels</h3>
+<br>
+<br>
+<br>
 <br>
 <p>A typical classification scheme includes four tiers:</p>
 <br>
-<li>**Public**: Information that can be freely shared. Marketing materials, press releases, public documentation.</li>
-<li>**Internal**: Information meant for internal use only. Internal policies, project plans, employee directories.</li>
-<li>**Confidential**: Sensitive business information. Customer data, financial records, source code, trade secrets.</li>
-<li>**Restricted**: Highly sensitive data with legal or regulatory requirements. PII, PHI, payment card data, credentials.</li>
+<br>
+<br>
+<p>* **Public**: Information that can be freely shared. Marketing materials, press releases, public documentation.</p>
+<p>* **Internal**: Information meant for internal use only. Internal policies, project plans, employee directories.</p>
+<p>* **Confidential**: Sensitive business information. Customer data, financial records, source code, trade secrets.</p>
+<p>* **Restricted**: Highly sensitive data with legal or regulatory requirements. PII, PHI, payment card data, credentials.</p>
+<br>
+<br>
 <br>
 <h3>Automated Classification</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Manual classification does not scale. Modern DLP solutions use automated methods:</p>
 <br>
-<li>**Content analysis**: Scan files for patterns like social security numbers, credit card numbers, or intellectual property keywords.</li>
-<li>**Context analysis**: Examine metadata including file location, creator, and access patterns.</li>
-<li>**User behavior**: Flag unusual access patterns, like a developer downloading the entire customer database.</li>
 <br>
-<pre><code>
-# Example: Automated data classification regex patterns
-
-import re
-
-
-
-CLASSIFICATION_PATTERNS = {
-
-    &quot;ssn&quot;: r&quot;\d{3}-\d{2}-\d{4}&quot;,
-
-    &quot;credit_card&quot;: r&quot;\d{4}[- ]?\d{4}[- ]?\d{4}[- ]?\d{4}&quot;,
-
-    &quot;email&quot;: r&quot;[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}&quot;,
-
-    &quot;api_key&quot;: r&quot;(?:sk-[a-zA-Z0-9]{32,}|AKIA[0-9A-Z]{16})&quot;
-
-}
-
-
-
-def classify_document(text, filename=&quot;&quot;):
-
-    findings = []
-
-    for data_type, pattern in CLASSIFICATION_PATTERNS.items():
-
-        matches = re.findall(pattern, text)
-
-        if matches:
-
-            findings.append({
-
-                &quot;type&quot;: data_type,
-
-                &quot;count&quot;: len(matches),
-
-                &quot;sample&quot;: matches[0][:8] + &quot;...&quot;  # partial masking
-
-            })
-
-    
-
-    if any(f[&quot;type&quot;] in [&quot;ssn&quot;, &quot;credit_card&quot;] for f in findings):
-
-        return &quot;RESTRICTED&quot;, findings
-
-    elif any(f[&quot;type&quot;] in [&quot;api_key&quot;] for f in findings):
-
-        return &quot;CONFIDENTIAL&quot;, findings
-
-    elif findings:
-
-        return &quot;INTERNAL&quot;, findings
-
-    return &quot;PUBLIC&quot;, []
-
-</code></pre>
 <br>
-<h2> Content Inspection Methods</h2>
+<p>* **Content analysis**: Scan files for patterns like social security numbers, credit card numbers, or intellectual property keywords.</p>
+<p>* **Context analysis**: Examine metadata including file location, creator, and access patterns.</p>
+<p>* **User behavior**: Flag unusual access patterns, like a developer downloading the entire customer database.</p>
+<br>
+<br>
+<br>
+<br>
+<p>    # Example: Automated data classification regex patterns</p>
+<br>
+<p>    import re</p>
+<br>
+<br>
+<br>
+<p>    CLASSIFICATION_PATTERNS = {</p>
+<br>
+<p>        "ssn": r"\d{3}-\d{2}-\d{4}",</p>
+<br>
+<p>        "credit_card": r"\d{4}[- ]?\d{4}[- ]?\d{4}[- ]?\d{4}",</p>
+<br>
+<p>        "email": r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}",</p>
+<br>
+<p>        "api_key": r"(?:sk-[a-zA-Z0-9]{32,}|AKIA[0-9A-Z]{16})"</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<p>    def classify_document(text, filename=""):</p>
+<br>
+<p>        findings = []</p>
+<br>
+<p>        for data_type, pattern in CLASSIFICATION_PATTERNS.items():</p>
+<br>
+<p>            matches = re.findall(pattern, text)</p>
+<br>
+<p>            if matches:</p>
+<br>
+<p>                findings.append({</p>
+<br>
+<p>                    "type": data_type,</p>
+<br>
+<p>                    "count": len(matches),</p>
+<br>
+<p>                    "sample": matches[0][:8] + "..."  # partial masking</p>
+<br>
+<p>                })</p>
+<br>
+<br>
+<br>
+<p>        if any(f["type"] in ["ssn", "credit_card"] for f in findings):</p>
+<br>
+<p>            return "RESTRICTED", findings</p>
+<br>
+<p>        elif any(f["type"] in ["api_key"] for f in findings):</p>
+<br>
+<p>            return "CONFIDENTIAL", findings</p>
+<br>
+<p>        elif findings:</p>
+<br>
+<p>            return "INTERNAL", findings</p>
+<br>
+<p>        return "PUBLIC", []</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Content Inspection Methods</h2>
+<br>
+<br>
+<br>
 <br>
 <p>DLP systems inspect content at rest, in motion, and in use.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Exact Data Matching (EDM)</h3>
+<br>
+<br>
+<br>
 <br>
 <p>EDM creates a fingerprint of exact sensitive data values from a structured database. For example, you can fingerprint the actual credit card numbers from a payment database. DLP systems then compare outgoing content against these fingerprints.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Partial Document Matching (PDM)</h3>
+<br>
+<br>
+<br>
 <br>
 <p>PDM detects documents that are substantially similar to sensitive templates. It uses fuzzy hashing or n-gram analysis to identify documents that share significant content with a classified template.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Statistical Analysis</h3>
+<br>
+<br>
+<br>
 <br>
 <p>Statistical methods detect unusual data content based on machine learning models trained on normal data patterns. This catches data that follows the general shape of sensitive information even if it does not match specific patterns.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Machine Learning Classification</h3>
+<br>
+<br>
+<br>
 <br>
 <p>ML-based classifiers learn to identify sensitive content from labeled training data. They handle variations that regex patterns miss. For example, an ML classifier can identify a confidential business plan even if it does not contain specific keywords.</p>
 <br>
-<h2> Endpoint DLP</h2>
+<br>
+<br>
+<br>
+<h2>  Endpoint DLP</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Endpoint DLP protects data on laptops, desktops, and mobile devices. It monitors data leaving the device through various channels.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>What Endpoint DLP Monitors</h3>
 <br>
-<li>**USB devices**: Block or audit file transfers to removable media.</li>
-<li>**Clipboard**: Prevent copying sensitive data to external applications.</li>
-<li>**Printing**: Log or block printing of classified documents.</li>
-<li>**Email**: Scan outgoing email for sensitive content.</li>
-<li>**Screenshot**: Block or warn before screenshots of sensitive applications.</li>
-<li>**Cloud sync**: Monitor files uploaded to personal cloud storage.</li>
 <br>
-<pre><code>
-# Endpoint DLP policy example (pseudocode)
-
-DLP_POLICIES = [
-
-    {
-
-        &quot;name&quot;: &quot;Block USB Transfer of Restricted Data&quot;,
-
-        &quot;condition&quot;: {
-
-            &quot;action&quot;: &quot;USB_WRITE&quot;,
-
-            &quot;classification&quot;: &quot;RESTRICTED&quot;
-
-        },
-
-        &quot;response&quot;: &quot;BLOCK&quot;,
-
-        &quot;notification&quot;: &quot;Cannot transfer RESTRICTED data via USB&quot;
-
-    },
-
-    {
-
-        &quot;name&quot;: &quot;Warn on Email with Credit Card&quot;,
-
-        &quot;condition&quot;: {
-
-            &quot;action&quot;: &quot;EMAIL_SEND&quot;,
-
-            &quot;content_match&quot;: &quot;credit_card_pattern&quot;
-
-        },
-
-        &quot;response&quot;: &quot;WARN&quot;,
-
-        &quot;notification&quot;: &quot;Email contains potential credit card data&quot;
-
-    }
-
-]
-
-</code></pre>
 <br>
-<h2> Network DLP</h2>
+<p>* **USB devices**: Block or audit file transfers to removable media.</p>
+<p>* **Clipboard**: Prevent copying sensitive data to external applications.</p>
+<p>* **Printing**: Log or block printing of classified documents.</p>
+<p>* **Email**: Scan outgoing email for sensitive content.</p>
+<p>* **Screenshot**: Block or warn before screenshots of sensitive applications.</p>
+<p>* **Cloud sync**: Monitor files uploaded to personal cloud storage.</p>
+<br>
+<br>
+<br>
+<br>
+<p>    # Endpoint DLP policy example (pseudocode)</p>
+<br>
+<p>    DLP_POLICIES = [</p>
+<br>
+<p>        {</p>
+<br>
+<p>            "name": "Block USB Transfer of Restricted Data",</p>
+<br>
+<p>            "condition": {</p>
+<br>
+<p>                "action": "USB_WRITE",</p>
+<br>
+<p>                "classification": "RESTRICTED"</p>
+<br>
+<p>            },</p>
+<br>
+<p>            "response": "BLOCK",</p>
+<br>
+<p>            "notification": "Cannot transfer RESTRICTED data via USB"</p>
+<br>
+<p>        },</p>
+<br>
+<p>        {</p>
+<br>
+<p>            "name": "Warn on Email with Credit Card",</p>
+<br>
+<p>            "condition": {</p>
+<br>
+<p>                "action": "EMAIL_SEND",</p>
+<br>
+<p>                "content_match": "credit_card_pattern"</p>
+<br>
+<p>            },</p>
+<br>
+<p>            "response": "WARN",</p>
+<br>
+<p>            "notification": "Email contains potential credit card data"</p>
+<br>
+<p>        }</p>
+<br>
+<p>    ]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Network DLP</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Network DLP inspects traffic at network chokepoints to detect data exfiltration.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Inspection Points</h3>
 <br>
-<li>**Web gateways**: Monitor HTTPS traffic using TLS inspection.</li>
-<li>**Email gateways**: Scan SMTP traffic for sensitive content and attachment inspection.</li>
-<li>**DNS**: Detect DNS tunneling used for data exfiltration.</li>
-<li>**File transfer**: Monitor FTP, SFTP, and SCP transfers.</li>
+<br>
+<br>
+<p>* **Web gateways**: Monitor HTTPS traffic using TLS inspection.</p>
+<p>* **Email gateways**: Scan SMTP traffic for sensitive content and attachment inspection.</p>
+<p>* **DNS**: Detect DNS tunneling used for data exfiltration.</p>
+<p>* **File transfer**: Monitor FTP, SFTP, and SCP transfers.</p>
+<br>
+<br>
 <br>
 <h3>TLS Inspection</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Network DLP requires decrypting TLS traffic to inspect the content. The DLP appliance acts as a man-in-the-middle, terminating TLS connections, inspecting traffic, and re-encrypting to forward.</p>
 <br>
-<pre><code>
-Client -&gt; DLP Proxy (decrypts, inspects, re-encrypts) -&gt; Server
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    Client -> DLP Proxy (decrypts, inspects, re-encrypts) -> Server</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>TLS inspection requires deploying a trusted root CA certificate to all managed devices. Organizations must comply with data privacy regulations regarding decryption.</p>
 <br>
-<h2> Cloud DLP</h2>
+<br>
+<br>
+<br>
+<h2>  Cloud DLP</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Cloud DLP protects data in SaaS applications (Google Workspace, Microsoft 365, Salesforce) and IaaS environments (AWS, GCP, Azure).</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Cloud DLP Services</h3>
 <br>
-<li>**GCP DLP**: Built-in DLP service with 150+ built-in infoType detectors for PII, PHI, and credentials. Supports automated classification of Cloud Storage, BigQuery, and Datastore data.</li>
-<li>**Microsoft Purview**: DLP for Microsoft 365 covering Exchange, SharePoint, OneDrive, Teams, and endpoints. Includes policy tips that warn users in real time.</li>
-<li>**AWS Macie**: Machine learning-powered DLP for S3. Automatically discovers and classifies sensitive data in S3 buckets.</li>
 <br>
-<pre><code>
-# GCP DLP inspection example
-
-from google.cloud import dlp_v2
-
-
-
-def inspect_content(project_id, text):
-
-    dlp = dlp_v2.DlpServiceClient()
-
-    parent = f&quot;projects/{project_id}&quot;
-
-
-
-    item = {&quot;value&quot;: text}
-
-    info_types = [
-
-        {&quot;name&quot;: &quot;CREDIT_CARD_NUMBER&quot;},
-
-        {&quot;name&quot;: &quot;EMAIL_ADDRESS&quot;},
-
-        {&quot;name&quot;: &quot;US_SOCIAL_SECURITY_NUMBER&quot;},
-
-        {&quot;name&quot;: &quot;GOOGLE_API_KEY&quot;}
-
-    ]
-
-
-
-    response = dlp.inspect_content(
-
-        request={
-
-            &quot;parent&quot;: parent,
-
-            &quot;item&quot;: item,
-
-            &quot;inspect_config&quot;: {
-
-                &quot;info_types&quot;: info_types,
-
-                &quot;min_likelihood&quot;: dlp_v2.Likelihood.LIKELY,
-
-                &quot;include_quote&quot;: True
-
-            }
-
-        }
-
-    )
-
-
-
-    for finding in response.result.findings:
-
-        print(f&quot;Type: {finding.info_type.name}, &quot;
-
-              f&quot;Location: {finding.location.byte_range}&quot;)
-
-</code></pre>
+<br>
+<p>* **GCP DLP**: Built-in DLP service with 150+ built-in infoType detectors for PII, PHI, and credentials. Supports automated classification of Cloud Storage, BigQuery, and Datastore data.</p>
+<p>* **Microsoft Purview**: DLP for Microsoft 365 covering Exchange, SharePoint, OneDrive, Teams, and endpoints. Includes policy tips that warn users in real time.</p>
+<p>* **AWS Macie**: Machine learning-powered DLP for S3. Automatically discovers and classifies sensitive data in S3 buckets.</p>
+<br>
+<br>
+<br>
+<br>
+<p>    # GCP DLP inspection example</p>
+<br>
+<p>    from google.cloud import dlp_v2</p>
+<br>
+<br>
+<br>
+<p>    def inspect_content(project_id, text):</p>
+<br>
+<p>        dlp = dlp_v2.DlpServiceClient()</p>
+<br>
+<p>        parent = f"projects/{project_id}"</p>
+<br>
+<br>
+<br>
+<p>        item = {"value": text}</p>
+<br>
+<p>        info_types = [</p>
+<br>
+<p>            {"name": "CREDIT_CARD_NUMBER"},</p>
+<br>
+<p>            {"name": "EMAIL_ADDRESS"},</p>
+<br>
+<p>            {"name": "US_SOCIAL_SECURITY_NUMBER"},</p>
+<br>
+<p>            {"name": "GOOGLE_API_KEY"}</p>
+<br>
+<p>        ]</p>
+<br>
+<br>
+<br>
+<p>        response = dlp.inspect_content(</p>
+<br>
+<p>            request={</p>
+<br>
+<p>                "parent": parent,</p>
+<br>
+<p>                "item": item,</p>
+<br>
+<p>                "inspect_config": {</p>
+<br>
+<p>                    "info_types": info_types,</p>
+<br>
+<p>                    "min_likelihood": dlp_v2.Likelihood.LIKELY,</p>
+<br>
+<p>                    "include_quote": True</p>
+<br>
+<p>                }</p>
+<br>
+<p>            }</p>
+<br>
+<p>        )</p>
+<br>
+<br>
+<br>
+<p>        for finding in response.result.findings:</p>
+<br>
+<p>            print(f"Type: {finding.info_type.name}, "</p>
+<br>
+<p>                  f"Location: {finding.location.byte_range}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Cloud DLP Challenges</h3>
 <br>
-<li>**Shadow data**: Data in unknown locations or unmanaged cloud services.</li>
-<li>**API-based DLP latency**: Inspecting data through cloud APIs adds latency.</li>
-<li>**Global data residency**: DLP policies must respect data residency regulations.</li>
-<li>**Scanning costs**: DLP scanning of large cloud data stores can be expensive.</li>
 <br>
-<h2> DLP Policy Design</h2>
+<br>
+<p>* **Shadow data**: Data in unknown locations or unmanaged cloud services.</p>
+<p>* **API-based DLP latency**: Inspecting data through cloud APIs adds latency.</p>
+<p>* **Global data residency**: DLP policies must respect data residency regulations.</p>
+<p>* **Scanning costs**: DLP scanning of large cloud data stores can be expensive.</p>
+<br>
+<br>
+<br>
+<h2>  DLP Policy Design</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Effective DLP policies balance security with productivity.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Policy Types</h3>
 <br>
-<li>**Block**: Prevent the action entirely. Use for high-confidence violations involving restricted data.</li>
-<li>**Quarantine**: Isolate the data for review. Use when automated classification may be incorrect.</li>
-<li>**Warn**: Alert the user but allow the action. Use for medium-confidence violations.</li>
-<li>**Notify**: Log and notify security without interrupting the user. Use for low-confidence or policy compliance monitoring.</li>
+<br>
+<br>
+<p>* **Block**: Prevent the action entirely. Use for high-confidence violations involving restricted data.</p>
+<p>* **Quarantine**: Isolate the data for review. Use when automated classification may be incorrect.</p>
+<p>* **Warn**: Alert the user but allow the action. Use for medium-confidence violations.</p>
+<p>* **Notify**: Log and notify security without interrupting the user. Use for low-confidence or policy compliance monitoring.</p>
+<br>
+<br>
 <br>
 <h3>Policy Tuning</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Start with monitoring-only policies. Review alerts, tune thresholds, and validate detection accuracy before enabling blocking actions. This prevents business disruption from false positives.</p>
 <br>
-<h2> Conclusion</h2>
+<br>
+<br>
+<br>
+<h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <p>DLP is not a single product but a program that combines data classification, content inspection, and policy enforcement across endpoints, networks, and cloud environments. Start by classifying your data, deploy DLP in monitoring mode, tune your policies, and progressively tighten controls. The goal is to protect sensitive data without grinding productivity to a halt.</p></div>
     </article>

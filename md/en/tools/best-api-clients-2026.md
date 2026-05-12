@@ -47,5 +47,3 @@ Open-source project, budget-conscious| Bruno or Thunder Client| Both have genero
 API mocking and monitoring needed| Postman| Only Postman has built-in mock servers, monitors, and hosted docs  
   
 **My recommendation for most developers in 2026:** Use **Bruno** as your daily driver — git-native, fast, free, and your collections live with your code. Keep **HTTPie CLI** installed for quick terminal requests (`http :3000/api/health` is faster than any GUI). If your team includes QA or PMs who need to run API tests, add Postman for the collaboration features — but store your Bruno files as the source of truth.
-
-**See also:** [Best API Testing Tools 2026: Postman vs Insomnia vs Bruno vs Hurl](</en/tools/best-api-testing-tools.html>), [tRPC vs GraphQL vs REST (2026): Best API Architecture?](</en/compare/trpc-vs-graphql-vs-rest.html>), [API Architecture Comparison 2026: REST vs GraphQL vs tRPC vs gRPC vs WebSocket vs SSE](</en/compare/api-architecture-comparison.html>).

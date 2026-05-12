@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="input-validation">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Input Validation Deep Dive">
+    <meta property="og:description" content="In-depth guide to input validation covering whitelist vs blacklist approaches, sanitization techniques, encoding strategies, and common bypass methods.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/input-validation.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Input Validation Deep Dive">
+    <meta name="twitter:description" content="In-depth guide to input validation covering whitelist vs blacklist approaches, sanitization techniques, encoding strategies, and common bypass methods.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Input Validation Deep Dive — SourceHub</title>
+    <meta name="description" content="In-depth guide to input validation covering whitelist vs blacklist approaches, sanitization techniques, encoding strategies, and common bypass methods.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/input-validation.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/input-validation.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Input Validation Deep Dive",
+      "description": "In-depth guide to input validation covering whitelist vs blacklist approaches, sanitization techniques, encoding strategies, and common bypass methods.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1700",
+      "keywords": "Security, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/input-validation.html"},
+      "articleBody": "Input Validation Deep Dive Introduction Input validation is the first line of defense against injection attacks. Every piece of data entering an application \u2014 form fields, HTTP headers, URL parameters, file uploads, API payloads \u2014 must be validated before processing. The principle is simple: never trust user input. Whitelist vs Blacklist Whitelist (Allowlist) Validation Whitelist validation defines what is allowed and rejects everything else. It is far more secure than blacklisting. import re # Whitelist: only allow specific characters def validate_username_whitelist(username): \"\"\"Allow only alphanumeric, underscore, and hyphen.\"\"\" pattern = r'^[a-zA-Z0-9_-]{3,32}$' if not re.match(pattern, username): raise ValueError( f\"Username '{username}' contains invalid characters. \" \"Only letters, numbers, underscores, and hyphens are allowed.\" ) return username # Whitelist for country codes ALLOWED_COUNTRIES = {'US', 'CA', 'GB', 'DE', 'FR', 'JP'} def validate_country_code(code): if code.upper() not in ALLOWED_COUNTRIES: raise ValueError(f\"Country '{code}' is not in the allowed list\") return code.upper() Blacklist (Blocklist) Validation Blacklist validation attempts to block known malicious patterns. It is inherently fragile because attackers constantly discover new bypass techniques. # WEAK: Blacklist approach (easily bypassed) def validate_input_blacklist(input_string): # Easily bypassed \u2014 attacker uses alternative syntax blocklist = ['', 'SELECT', 'DROP', 'UNION'] for pattern in blocklist: if pattern.lower() in input_string.lower(): raise ValueError(\"Blocked pattern detected\") return input_string # Bypasses: # ipt> \u2014 nested tags # SeLeCt \u2014 case variation (if no .lower()) # \u2014 unicode encoding # /**/SELECT/**/ \u2014 SQL comment injection Sanitization Techniques Sanitization removes or neutralizes dangerous content rather than rejecting the entire input. import html import bleach from markupsafe import escape # HTML sanitization with bleach def sanitize_html(user_content): allowed_tags = ['p', 'b', 'i', 'u', 'em', 'strong', 'a', 'ul', 'ol', 'li'] allowed_attrs = { 'a': ['href', 'title', 'rel'], } allowed_protocols = ['http', 'https', 'mailto'] cleaned = bleach.clean( user_content, tags=allowed_tags, attributes=allowed_attrs, protocols=allowed_protocols, strip=True # Remove disallowed tags entirely ) return cleaned # URL sanitization from urllib.parse import urlparse def sanitize_url(user_url): parsed = urlparse(user_url) # Only allow http and https if parsed.scheme not in ('http', 'https'): return None # Block internal/host-only URLs blocked_hosts = ['localhost', '127.0.0.1', '0.0.0.0', '[::1]'] if parsed.hostname in blocked_hosts: return None # Block private IP ranges import ipaddress try: ip = ipaddress.ip_address(parsed.hostname) if ip.is_private or ip.is_loopback or ip.is_link_local: return None except ValueError: pass # Hostname, not IP \u2014 allow return parsed.geturl() Common Bypass Techniques Unicode Normalization Bypass Attackers use unicode characters that normalize to ASCII equivalents. import unicodedata # Normalize input before validation def normalize_and_validate(input_string): # NFC normalization: compose unicode characters normalized = unicodedata.normalize('NFC', input_string) # NFKC normalization: also compatibility (e.g., \u00b2 -> 2) strict_normalized = unicodedata.normalize('NFKC', input_string) # Validate the normalized version return validate_username_whitelist(strict_normalized) # Example bypass attempt: # Username: \"admin\u00b2\" (with superscript 2) # After NFKC: \"admin2\" # This avoids a blocklist for \"admin\" username Null Byte Injection import re def validate_filename(filename): # Remove null bytes before validation if '\\x00' in filename: filename = filename.replace('\\x00', '') # Also check percent-encoded null if '%00' in filename: raise ValueError(\"Null bytes not allowed\") # Path traversal check if '..' in filename: raise ValueError(\"Path traversal detected\") # Ensure extension is safe allowed_extensions = {'.pdf', '.png', '.jpg', '.txt'} _, ext = os.path.splitext(filename.lower()) if ext not in allowed_extensions: raise ValueError(f\"Extension '{ext}' not allowed\") return filename Defense in Depth Strategy class InputValidationPipeline: def validate(self, data, schema, context): # Layer 1: Schema validation (type, format, constraints) validated = schema.parse_obj(data) # Layer 2: Business rule validation validated = self._business_rules(validated, context) # Layer 3: Sanitization validated = self._sanitize(validated, context) # Layer 4: Encoding for output context # This happens at the template/render layer return validated def _business_rules(self, data, context): # Example: rate check for financial transactions if hasattr(data, 'amount') and data.amount > 10000: data.requires_approval = True return data def _sanitize(self, data, context): if context.get('allow_html'): data.body = sanitize_html(data.body) else: data.body = escape(data.body) return data Conclusion Whitelist validation is always superior to blacklist. Normalize input before validating (NFKC for Unicode), sanitize rather than reject where appropriate, and apply defense in depth with schema validation, business rules, and context-specific sanitization. Remember that input validation is only half the equation \u2014 output encoding is equally important and addresses the vulnerabilities that validation misses."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Input Validation Deep Dive"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Input Validation Deep Dive
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Input Validation Deep Dive</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Input Validation Deep Dive</h1>
+<br>
+<p>Introduction   </p>
+<p>Input validation is the first line of defense against injection attacks. Every piece of data entering an application — form fields, HTTP headers, URL parameters, file uploads, API payloads — must be validated before processing. The principle is simple: never trust user input.   </p>
+<p>Whitelist vs Blacklist   </p>
+<p>Whitelist (Allowlist) Validation   </p>
+<p>Whitelist validation defines what is allowed and rejects everything else. It is far more secure than blacklisting.   </p>
+<br>
+<br>
+<br>
+<p>    import re</p>
+<br>
+<br>
+<br>
+<p>    # Whitelist: only allow specific characters</p>
+<br>
+<p>    def validate_username_whitelist(username):</p>
+<br>
+<p>        """Allow only alphanumeric, underscore, and hyphen."""</p>
+<br>
+<p>        pattern = r'^[a-zA-Z0-9_-]{3,32}$'</p>
+<br>
+<p>        if not re.match(pattern, username):</p>
+<br>
+<p>            raise ValueError(</p>
+<br>
+<p>                f"Username '{username}' contains invalid characters. "</p>
+<br>
+<p>                "Only letters, numbers, underscores, and hyphens are allowed."</p>
+<br>
+<p>            )</p>
+<br>
+<p>        return username</p>
+<br>
+<br>
+<br>
+<p>    # Whitelist for country codes</p>
+<br>
+<p>    ALLOWED_COUNTRIES = {'US', 'CA', 'GB', 'DE', 'FR', 'JP'}</p>
+<br>
+<br>
+<br>
+<p>    def validate_country_code(code):</p>
+<br>
+<p>        if code.upper() not in ALLOWED_COUNTRIES:</p>
+<br>
+<p>            raise ValueError(f"Country '{code}' is not in the allowed list")</p>
+<br>
+<p>        return code.upper()</p>
+<br>
+<br>
+<br>
+<br>
+<p>Blacklist (Blocklist) Validation   </p>
+<p>Blacklist validation attempts to block known malicious patterns. It is inherently fragile because attackers constantly discover new bypass techniques.   </p>
+<br>
+<br>
+<br>
+<p>    # WEAK: Blacklist approach (easily bypassed)</p>
+<br>
+<p>    def validate_input_blacklist(input_string):</p>
+<br>
+<p>        # Easily bypassed — attacker uses alternative syntax</p>
+<br>
+<p>        blocklist = ['<script>', 'SELECT', 'DROP', 'UNION']</p>
+<br>
+<p>        for pattern in blocklist:</p>
+<br>
+<p>            if pattern.lower() in input_string.lower():</p>
+<br>
+<p>                raise ValueError("Blocked pattern detected")</p>
+<br>
+<p>        return input_string</p>
+<br>
+<p>        # Bypasses:</p>
+<br>
+<p>        # <scr<script>ipt>  — nested tags</p>
+<br>
+<p>        # SeLeCt  — case variation (if no .lower())</p>
+<br>
+<p>        # <script>  — unicode encoding</p>
+<br>
+<p>        # /**/SELECT/**/  — SQL comment injection</p>
+<br>
+<br>
+<br>
+<br>
+<p>Sanitization Techniques   </p>
+<p>Sanitization removes or neutralizes dangerous content rather than rejecting the entire input.   </p>
+<br>
+<br>
+<br>
+<p>    import html</p>
+<br>
+<p>    import bleach</p>
+<br>
+<p>    from markupsafe import escape</p>
+<br>
+<br>
+<br>
+<p>    # HTML sanitization with bleach</p>
+<br>
+<p>    def sanitize_html(user_content):</p>
+<br>
+<p>        allowed_tags = ['p', 'b', 'i', 'u', 'em', 'strong', 'a', 'ul', 'ol', 'li']</p>
+<br>
+<p>        allowed_attrs = {</p>
+<br>
+<p>            'a': ['href', 'title', 'rel'],</p>
+<br>
+<p>        }</p>
+<br>
+<p>        allowed_protocols = ['http', 'https', 'mailto']</p>
+<br>
+<br>
+<br>
+<p>        cleaned = bleach.clean(</p>
+<br>
+<p>            user_content,</p>
+<br>
+<p>            tags=allowed_tags,</p>
+<br>
+<p>            attributes=allowed_attrs,</p>
+<br>
+<p>            protocols=allowed_protocols,</p>
+<br>
+<p>            strip=True  # Remove disallowed tags entirely</p>
+<br>
+<p>        )</p>
+<br>
+<p>        return cleaned</p>
+<br>
+<br>
+<br>
+<p>    # URL sanitization</p>
+<br>
+<p>    from urllib.parse import urlparse</p>
+<br>
+<br>
+<br>
+<p>    def sanitize_url(user_url):</p>
+<br>
+<p>        parsed = urlparse(user_url)</p>
+<br>
+<br>
+<br>
+<p>        # Only allow http and https</p>
+<br>
+<p>        if parsed.scheme not in ('http', 'https'):</p>
+<br>
+<p>            return None</p>
+<br>
+<br>
+<br>
+<p>        # Block internal/host-only URLs</p>
+<br>
+<p>        blocked_hosts = ['localhost', '127.0.0.1', '0.0.0.0', '[::1]']</p>
+<br>
+<p>        if parsed.hostname in blocked_hosts:</p>
+<br>
+<p>            return None</p>
+<br>
+<br>
+<br>
+<p>        # Block private IP ranges</p>
+<br>
+<p>        import ipaddress</p>
+<br>
+<p>        try:</p>
+<br>
+<p>            ip = ipaddress.ip_address(parsed.hostname)</p>
+<br>
+<p>            if ip.is_private or ip.is_loopback or ip.is_link_local:</p>
+<br>
+<p>                return None</p>
+<br>
+<p>        except ValueError:</p>
+<br>
+<p>            pass  # Hostname, not IP — allow</p>
+<br>
+<br>
+<br>
+<p>        return parsed.geturl()</p>
+<br>
+<br>
+<br>
+<br>
+<p>Common Bypass Techniques   </p>
+<p>Unicode Normalization Bypass   </p>
+<p>Attackers use unicode characters that normalize to ASCII equivalents.   </p>
+<br>
+<br>
+<br>
+<p>    import unicodedata</p>
+<br>
+<br>
+<br>
+<p>    # Normalize input before validation</p>
+<br>
+<p>    def normalize_and_validate(input_string):</p>
+<br>
+<p>        # NFC normalization: compose unicode characters</p>
+<br>
+<p>        normalized = unicodedata.normalize('NFC', input_string)</p>
+<br>
+<br>
+<br>
+<p>        # NFKC normalization: also compatibility (e.g., ² -> 2)</p>
+<br>
+<p>        strict_normalized = unicodedata.normalize('NFKC', input_string)</p>
+<br>
+<br>
+<br>
+<p>        # Validate the normalized version</p>
+<br>
+<p>        return validate_username_whitelist(strict_normalized)</p>
+<br>
+<br>
+<br>
+<p>    # Example bypass attempt:</p>
+<br>
+<p>    # Username: "admin²" (with superscript 2)</p>
+<br>
+<p>    # After NFKC: "admin2"</p>
+<br>
+<p>    # This avoids a blocklist for "admin" username</p>
+<br>
+<br>
+<br>
+<br>
+<p>Null Byte Injection   </p>
+<br>
+<br>
+<br>
+<p>    import re</p>
+<br>
+<br>
+<br>
+<p>    def validate_filename(filename):</p>
+<br>
+<p>        # Remove null bytes before validation</p>
+<br>
+<p>        if '\x00' in filename:</p>
+<br>
+<p>            filename = filename.replace('\x00', '')</p>
+<br>
+<br>
+<br>
+<p>        # Also check percent-encoded null</p>
+<br>
+<p>        if '%00' in filename:</p>
+<br>
+<p>            raise ValueError("Null bytes not allowed")</p>
+<br>
+<br>
+<br>
+<p>        # Path traversal check</p>
+<br>
+<p>        if '..' in filename:</p>
+<br>
+<p>            raise ValueError("Path traversal detected")</p>
+<br>
+<br>
+<br>
+<p>        # Ensure extension is safe</p>
+<br>
+<p>        allowed_extensions = {'.pdf', '.png', '.jpg', '.txt'}</p>
+<br>
+<p>        _, ext = os.path.splitext(filename.lower())</p>
+<br>
+<p>        if ext not in allowed_extensions:</p>
+<br>
+<p>            raise ValueError(f"Extension '{ext}' not allowed")</p>
+<br>
+<br>
+<br>
+<p>        return filename</p>
+<br>
+<br>
+<br>
+<br>
+<p>Defense in Depth Strategy   </p>
+<br>
+<br>
+<br>
+<p>    class InputValidationPipeline:</p>
+<br>
+<p>        def validate(self, data, schema, context):</p>
+<br>
+<p>            # Layer 1: Schema validation (type, format, constraints)</p>
+<br>
+<p>            validated = schema.parse_obj(data)</p>
+<br>
+<br>
+<br>
+<p>            # Layer 2: Business rule validation</p>
+<br>
+<p>            validated = self._business_rules(validated, context)</p>
+<br>
+<br>
+<br>
+<p>            # Layer 3: Sanitization</p>
+<br>
+<p>            validated = self._sanitize(validated, context)</p>
+<br>
+<br>
+<br>
+<p>            # Layer 4: Encoding for output context</p>
+<br>
+<p>            # This happens at the template/render layer</p>
+<br>
+<br>
+<br>
+<p>            return validated</p>
+<br>
+<br>
+<br>
+<p>        def _business_rules(self, data, context):</p>
+<br>
+<p>            # Example: rate check for financial transactions</p>
+<br>
+<p>            if hasattr(data, 'amount') and data.amount > 10000:</p>
+<br>
+<p>                data.requires_approval = True</p>
+<br>
+<p>            return data</p>
+<br>
+<br>
+<br>
+<p>        def _sanitize(self, data, context):</p>
+<br>
+<p>            if context.get('allow_html'):</p>
+<br>
+<p>                data.body = sanitize_html(data.body)</p>
+<br>
+<p>            else:</p>
+<br>
+<p>                data.body = escape(data.body)</p>
+<br>
+<p>            return data</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
+<p>Whitelist validation is always superior to blacklist. Normalize input before validating (NFKC for Unicode), sanitize rather than reject where appropriate, and apply defense in depth with schema validation, business rules, and context-specific sanitization. Remember that input validation is only half the equation — output encoding is equally important and addresses the vulnerabilities that validation misses.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

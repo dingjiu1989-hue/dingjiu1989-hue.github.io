@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1580",
+      "wordCount": "1915",
       "keywords": "Developer Tools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/monitoring-tools.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/monitoring-tools.html"},
+      "articleBody": "Monitoring Tools: Grafana vs Datadog vs New Relic Introduction Effective monitoring is the difference between discovering incidents through user complaints and catching them proactively through dashboards and alerts. The three dominant platforms in the observability space--Grafana, Datadog, and New Relic--each take distinct approaches to metrics, logging, tracing, and alerting. This article provides a technical comparison to guide your selection. Dashboarding Capabilities Grafana Grafana excels at visualization with support for dozens of data sources: { \"dashboard\": { \"title\": \"Production Overview\", \"panels\": [ { \"title\": \"HTTP Request Rate\", \"type\": \"timeseries\", \"datasource\": \"Prometheus\", \"targets\": [{ \"expr\": \"sum(rate(http_requests_total[5m])) by (service)\", \"legendFormat\": \"{{ service }}\" }] }, { \"title\": \"Service Latency (p99)\", \"type\": \"stat\", \"datasource\": \"Tempo\", \"targets\": [{ \"query\": \"{.name = \\\"HTTP GET\\\"} | stats p99(duration_ms) as p99 by service\" }] }, { \"title\": \"Error Budget\", \"type\": \"gauge\", \"datasource\": \"Prometheus\", \"targets\": [{ \"expr\": \"(1 - (sum(rate(http_requests_total{status=~\\\"5..\\\"}[30d])) / sum(rate(http_requests_total[30d])))) * 100\" }], \"thresholds\": { \"steps\": [ {\"value\": null, \"color\": \"green\"}, {\"value\": 99.9, \"color\": \"yellow\"}, {\"value\": 99.99, \"color\": \"red\"} ] } } ] } } Datadog Datadog provides a more opinionated dashboarding experience with integrated template variables: { \"title\": \"Service Overview\", \"widgets\": [{ \"definition\": { \"type\": \"timeseries\", \"requests\": [{ \"q\": \"avg:http.requests{service:payment} by {endpoint}.as_rate()\", \"display_type\": \"line\", \"style\": {\"palette\": \"warm\"} }], \"yaxis\": {\"scale\": \"linear\", \"min\": \"auto\"} } }] } New Relic New Relic uses NRQL, a SQL-like query language for dashboards: -- NRQL query SELECT percentile(duration, 99) AS 'p99' FROM Transaction WHERE appName = 'Payment Service' TIMESERIES auto SINCE 1 hour ago -- Error rate query SELECT count(*) AS 'errors' FROM TransactionError WHERE appName = 'Payment Service' FACET error.message LIMIT 10 Alerting Configuration Grafana Alerting # Grafana managed alert rule apiVersion: grafana/v1 kind: AlertRule metadata: name: HighErrorRate spec: for: 5m annotations: summary: \"Error rate above threshold for Payment Service\" runbook_url: \"https://runbooks.internal/payment-high-errors\" labels: severity: critical team: platform data: - ref: A datasourceUid: prometheus model: expr: | sum(rate(http_requests_total{ service=\"payment\", status=~\"5..\" }[5m])) / sum(rate(http_requests_total{ service=\"payment\" }[5m])) > 0.05 - ref: B datasourceUid: prometheus model: expr: \"1\" - ref: C datasourceUid: __expr__ model: expression: \"$A && $B\" type: math Datadog Monitors # Datadog monitor via API monitor: name: \"[Payment] High Latency Alert\" type: metric alert query: \"avg(last_5m):p99:trace.servlet.request.duration{service:payment} > 1\" message: | {{#is_alert}} Payment service p99 latency is {{value}}s (threshold: 1s) @slack-alerts {{/is_alert}} options: thresholds: critical: 1.0 warning: 0.5 notify_no_data: true evaluation_delay: 60 new_group_delay: 300 APM and Distributed Tracing Datadog APM from ddtrace import tracer, patch_all # Auto-instrument supported libraries patch_all() # Custom instrumentation @tracer.writer(service_name=\"payment-service\") def process_payment(order_id, amount): with tracer.trace(\"payment.charge\") as span: span.set_tag(\"order_id\", order_id) span.set_metric(\"amount\", amount) result = gateway.charge(amount) span.set_tag(\"transaction_id\", result.id) return result New Relic APM import newrelic.agent # Custom transaction @newrelic.agent.background_task() def process_refund(transaction_id): with newrelic.agent.FunctionTrace(name=\"refund.process\"): refund_result = refund_gateway.process(transaction_id) newrelic.agent.record_custom_metric( \"Custom/RefundAmount\", refund_result.amount ) return refund_result Log Integration | Feature | Grafana + Loki | Datadog Logs | New Relic Logs | |---|---|---|---| | Structured parsing | LogQL | Grok parser | NRQL parsing | | Ingestion cost | Low (S3-based) | Medium | Medium | | Retention | Configurable | 15 days default | 30 days default | | Live tail | Yes | Yes | Yes | Example Loki query for log correlation: {service=\"payment\"} |= \"ERROR\" | logfmt | duration > 1s | line_format \"{{.timestamp}} {{.message}} (duration: {{.duration}})\" Pricing Comparison | Tier | Grafana (self-hosted) | Grafana Cloud | Datadog | New Relic | |---|---|---|---|---| | Free | Unlimited | 3 users, 10k series | 5 hosts, 15d retention | 100GB/month, 1 user | | Entry | Server cost only | $49/month | ~$15/host/month | ~$0.55/GB | | Enterprise | Support cost | Custom | Custom | Custom | Grafana self-hosted is the most cost-effective at scale because you only pay for infrastructure. Datadog and New Relic pricing scales with data volume and can become expensive for high-cardinality metrics or verbose logging. Self-Hosted vs SaaS * **Grafana**: Excellent self-hosted option with Prometheus, Loki, and Tempo forming a complete open-source stack. Grafana Cloud offers a managed alternative. * **Datadog**: SaaS-only with strong integrations but vendor lock-in. No self-hosted option exists. * **New Relic**: Cloud-first but offers a data-ingestion API that allows hybrid collection patterns. For startups and small teams, Grafana self-hosted provides the best balance of capability and cost. As teams grow to 20+ engineers, Datadog's out-of-the-box integrations reduce operational overhead. New Relic is compelling for organizations already in the Oracle/AWS ecosystem that value NRQL's analytical power."
     }
     </script>
     <script type="application/ld+json">
@@ -73,374 +74,476 @@
         <span class="tag-cat">Productivity</span></div>
       <h1 class="article-title">Monitoring Tools: Grafana vs Datadog vs New Relic</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Introduction</h2>
+      <div class="article-body"><h1>Monitoring Tools: Grafana vs Datadog vs New Relic</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Effective monitoring is the difference between discovering incidents through user complaints and catching them proactively through dashboards and alerts. The three dominant platforms in the observability space--Grafana, Datadog, and New Relic--each take distinct approaches to metrics, logging, tracing, and alerting. This article provides a technical comparison to guide your selection.</p>
 <br>
-<h2> Dashboarding Capabilities</h2>
+<br>
+<br>
+<br>
+<h2>  Dashboarding Capabilities</h2>
+<br>
+<br>
+<br>
 <br>
 <h3>Grafana</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Grafana excels at visualization with support for dozens of data sources:</p>
 <br>
-<pre><code>
-{
-
-  &quot;dashboard&quot;: {
-
-    &quot;title&quot;: &quot;Production Overview&quot;,
-
-    &quot;panels&quot;: [
-
-      {
-
-        &quot;title&quot;: &quot;HTTP Request Rate&quot;,
-
-        &quot;type&quot;: &quot;timeseries&quot;,
-
-        &quot;datasource&quot;: &quot;Prometheus&quot;,
-
-        &quot;targets&quot;: [{
-
-          &quot;expr&quot;: &quot;sum(rate(http_requests_total[5m])) by (service)&quot;,
-
-          &quot;legendFormat&quot;: &quot;{{ service }}&quot;
-
-        }]
-
-      },
-
-      {
-
-        &quot;title&quot;: &quot;Service Latency (p99)&quot;,
-
-        &quot;type&quot;: &quot;stat&quot;,
-
-        &quot;datasource&quot;: &quot;Tempo&quot;,
-
-        &quot;targets&quot;: [{
-
-          &quot;query&quot;: &quot;{.name = \&quot;HTTP GET\&quot;} | stats p99(duration_ms) as p99 by service&quot;
-
-        }]
-
-      },
-
-      {
-
-        &quot;title&quot;: &quot;Error Budget&quot;,
-
-        &quot;type&quot;: &quot;gauge&quot;,
-
-        &quot;datasource&quot;: &quot;Prometheus&quot;,
-
-        &quot;targets&quot;: [{
-
-          &quot;expr&quot;: &quot;(1 - (sum(rate(http_requests_total{status=~\&quot;5..\&quot;}[30d])) / sum(rate(http_requests_total[30d])))) * 100&quot;
-
-        }],
-
-        &quot;thresholds&quot;: {
-
-          &quot;steps&quot;: [
-
-            {&quot;value&quot;: null, &quot;color&quot;: &quot;green&quot;},
-
-            {&quot;value&quot;: 99.9, &quot;color&quot;: &quot;yellow&quot;},
-
-            {&quot;value&quot;: 99.99, &quot;color&quot;: &quot;red&quot;}
-
-          ]
-
-        }
-
-      }
-
-    ]
-
-  }
-
-}
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    {</p>
+<br>
+<p>      "dashboard": {</p>
+<br>
+<p>        "title": "Production Overview",</p>
+<br>
+<p>        "panels": [</p>
+<br>
+<p>          {</p>
+<br>
+<p>            "title": "HTTP Request Rate",</p>
+<br>
+<p>            "type": "timeseries",</p>
+<br>
+<p>            "datasource": "Prometheus",</p>
+<br>
+<p>            "targets": [{</p>
+<br>
+<p>              "expr": "sum(rate(http_requests_total[5m])) by (service)",</p>
+<br>
+<p>              "legendFormat": "{{ service }}"</p>
+<br>
+<p>            }]</p>
+<br>
+<p>          },</p>
+<br>
+<p>          {</p>
+<br>
+<p>            "title": "Service Latency (p99)",</p>
+<br>
+<p>            "type": "stat",</p>
+<br>
+<p>            "datasource": "Tempo",</p>
+<br>
+<p>            "targets": [{</p>
+<br>
+<p>              "query": "{.name = \"HTTP GET\"} | stats p99(duration_ms) as p99 by service"</p>
+<br>
+<p>            }]</p>
+<br>
+<p>          },</p>
+<br>
+<p>          {</p>
+<br>
+<p>            "title": "Error Budget",</p>
+<br>
+<p>            "type": "gauge",</p>
+<br>
+<p>            "datasource": "Prometheus",</p>
+<br>
+<p>            "targets": [{</p>
+<br>
+<p>              "expr": "(1 - (sum(rate(http_requests_total{status=~\"5..\"}[30d])) / sum(rate(http_requests_total[30d])))) * 100"</p>
+<br>
+<p>            }],</p>
+<br>
+<p>            "thresholds": {</p>
+<br>
+<p>              "steps": [</p>
+<br>
+<p>                {"value": null, "color": "green"},</p>
+<br>
+<p>                {"value": 99.9, "color": "yellow"},</p>
+<br>
+<p>                {"value": 99.99, "color": "red"}</p>
+<br>
+<p>              ]</p>
+<br>
+<p>            }</p>
+<br>
+<p>          }</p>
+<br>
+<p>        ]</p>
+<br>
+<p>      }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Datadog</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Datadog provides a more opinionated dashboarding experience with integrated template variables:</p>
 <br>
-<pre><code>
-{
-
-  &quot;title&quot;: &quot;Service Overview&quot;,
-
-  &quot;widgets&quot;: [{
-
-    &quot;definition&quot;: {
-
-      &quot;type&quot;: &quot;timeseries&quot;,
-
-      &quot;requests&quot;: [{
-
-        &quot;q&quot;: &quot;avg:http.requests{service:payment} by {endpoint}.as_rate()&quot;,
-
-        &quot;display_type&quot;: &quot;line&quot;,
-
-        &quot;style&quot;: {&quot;palette&quot;: &quot;warm&quot;}
-
-      }],
-
-      &quot;yaxis&quot;: {&quot;scale&quot;: &quot;linear&quot;, &quot;min&quot;: &quot;auto&quot;}
-
-    }
-
-  }]
-
-}
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    {</p>
+<br>
+<p>      "title": "Service Overview",</p>
+<br>
+<p>      "widgets": [{</p>
+<br>
+<p>        "definition": {</p>
+<br>
+<p>          "type": "timeseries",</p>
+<br>
+<p>          "requests": [{</p>
+<br>
+<p>            "q": "avg:http.requests{service:payment} by {endpoint}.as_rate()",</p>
+<br>
+<p>            "display_type": "line",</p>
+<br>
+<p>            "style": {"palette": "warm"}</p>
+<br>
+<p>          }],</p>
+<br>
+<p>          "yaxis": {"scale": "linear", "min": "auto"}</p>
+<br>
+<p>        }</p>
+<br>
+<p>      }]</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>New Relic</h3>
 <br>
+<br>
+<br>
+<br>
 <p>New Relic uses NRQL, a SQL-like query language for dashboards:</p>
 <br>
-<pre><code>
--- NRQL query
-
-SELECT percentile(duration, 99) AS &#x27;p99&#x27;
-
-FROM Transaction
-
-WHERE appName = &#x27;Payment Service&#x27;
-
-TIMESERIES auto
-
-SINCE 1 hour ago
-
-
-
--- Error rate query
-
-SELECT count(*) AS &#x27;errors&#x27;
-
-FROM TransactionError
-
-WHERE appName = &#x27;Payment Service&#x27;
-
-FACET error.message
-
-LIMIT 10
-
-</code></pre>
 <br>
-<h2> Alerting Configuration</h2>
+<br>
+<br>
+<br>
+<p>    -- NRQL query</p>
+<br>
+<p>    SELECT percentile(duration, 99) AS 'p99'</p>
+<br>
+<p>    FROM Transaction</p>
+<br>
+<p>    WHERE appName = 'Payment Service'</p>
+<br>
+<p>    TIMESERIES auto</p>
+<br>
+<p>    SINCE 1 hour ago</p>
+<br>
+<br>
+<br>
+<p>    -- Error rate query</p>
+<br>
+<p>    SELECT count(*) AS 'errors'</p>
+<br>
+<p>    FROM TransactionError</p>
+<br>
+<p>    WHERE appName = 'Payment Service'</p>
+<br>
+<p>    FACET error.message</p>
+<br>
+<p>    LIMIT 10</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Alerting Configuration</h2>
+<br>
+<br>
+<br>
 <br>
 <h3>Grafana Alerting</h3>
 <br>
-<pre><code>
-# Grafana managed alert rule
-
-apiVersion: grafana/v1
-
-kind: AlertRule
-
-metadata:
-
-  name: HighErrorRate
-
-spec:
-
-  for: 5m
-
-  annotations:
-
-    summary: &quot;Error rate above threshold for Payment Service&quot;
-
-    runbook_url: &quot;https://runbooks.internal/payment-high-errors&quot;
-
-  labels:
-
-    severity: critical
-
-    team: platform
-
-  data:
-
-    - ref: A
-
-      datasourceUid: prometheus
-
-      model:
-
-        expr: |
-
-          sum(rate(http_requests_total{
-
-            service=&quot;payment&quot;, status=~&quot;5..&quot;
-
-          }[5m])) / sum(rate(http_requests_total{
-
-            service=&quot;payment&quot;
-
-          }[5m])) &gt; 0.05
-
-    - ref: B
-
-      datasourceUid: prometheus
-
-      model:
-
-        expr: &quot;1&quot;
-
-    - ref: C
-
-      datasourceUid: __expr__
-
-      model:
-
-        expression: &quot;$A &amp;&amp; $B&quot;
-
-        type: math
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # Grafana managed alert rule</p>
+<br>
+<p>    apiVersion: grafana/v1</p>
+<br>
+<p>    kind: AlertRule</p>
+<br>
+<p>    metadata:</p>
+<br>
+<p>      name: HighErrorRate</p>
+<br>
+<p>    spec:</p>
+<br>
+<p>      for: 5m</p>
+<br>
+<p>      annotations:</p>
+<br>
+<p>        summary: "Error rate above threshold for Payment Service"</p>
+<br>
+<p>        runbook_url: "https://runbooks.internal/payment-high-errors"</p>
+<br>
+<p>      labels:</p>
+<br>
+<p>        severity: critical</p>
+<br>
+<p>        team: platform</p>
+<br>
+<p>      data:</p>
+<br>
+<p>        - ref: A</p>
+<br>
+<p>          datasourceUid: prometheus</p>
+<br>
+<p>          model:</p>
+<br>
+<p>            expr: |</p>
+<br>
+<p>              sum(rate(http_requests_total{</p>
+<br>
+<p>                service="payment", status=~"5.."</p>
+<br>
+<p>              }[5m])) / sum(rate(http_requests_total{</p>
+<br>
+<p>                service="payment"</p>
+<br>
+<p>              }[5m])) > 0.05</p>
+<br>
+<p>        - ref: B</p>
+<br>
+<p>          datasourceUid: prometheus</p>
+<br>
+<p>          model:</p>
+<br>
+<p>            expr: "1"</p>
+<br>
+<p>        - ref: C</p>
+<br>
+<p>          datasourceUid: __expr__</p>
+<br>
+<p>          model:</p>
+<br>
+<p>            expression: "$A && $B"</p>
+<br>
+<p>            type: math</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Datadog Monitors</h3>
 <br>
-<pre><code>
-# Datadog monitor via API
-
-monitor:
-
-  name: &quot;[Payment] High Latency Alert&quot;
-
-  type: metric alert
-
-  query: &quot;avg(last_5m):p99:trace.servlet.request.duration{service:payment} &gt; 1&quot;
-
-  message: |
-
-    {{#is_alert}}
-
-    Payment service p99 latency is {{value}}s (threshold: 1s)
-
-    @slack-alerts
-
-    {{/is_alert}}
-
-  options:
-
-    thresholds:
-
-      critical: 1.0
-
-      warning: 0.5
-
-    notify_no_data: true
-
-    evaluation_delay: 60
-
-    new_group_delay: 300
-
-</code></pre>
 <br>
-<h2> APM and Distributed Tracing</h2>
+<br>
+<br>
+<br>
+<p>    # Datadog monitor via API</p>
+<br>
+<p>    monitor:</p>
+<br>
+<p>      name: "[Payment] High Latency Alert"</p>
+<br>
+<p>      type: metric alert</p>
+<br>
+<p>      query: "avg(last_5m):p99:trace.servlet.request.duration{service:payment} > 1"</p>
+<br>
+<p>      message: |</p>
+<br>
+<p>        {{#is_alert}}</p>
+<br>
+<p>        Payment service p99 latency is {{value}}s (threshold: 1s)</p>
+<br>
+<p>        @slack-alerts</p>
+<br>
+<p>        {{/is_alert}}</p>
+<br>
+<p>      options:</p>
+<br>
+<p>        thresholds:</p>
+<br>
+<p>          critical: 1.0</p>
+<br>
+<p>          warning: 0.5</p>
+<br>
+<p>        notify_no_data: true</p>
+<br>
+<p>        evaluation_delay: 60</p>
+<br>
+<p>        new_group_delay: 300</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  APM and Distributed Tracing</h2>
+<br>
+<br>
+<br>
 <br>
 <h3>Datadog APM</h3>
 <br>
-<pre><code>
-from ddtrace import tracer, patch_all
-
-
-
-# Auto-instrument supported libraries
-
-patch_all()
-
-
-
-# Custom instrumentation
-
-@tracer.writer(service_name=&quot;payment-service&quot;)
-
-def process_payment(order_id, amount):
-
-    with tracer.trace(&quot;payment.charge&quot;) as span:
-
-        span.set_tag(&quot;order_id&quot;, order_id)
-
-        span.set_metric(&quot;amount&quot;, amount)
-
-        result = gateway.charge(amount)
-
-        span.set_tag(&quot;transaction_id&quot;, result.id)
-
-        return result
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    from ddtrace import tracer, patch_all</p>
+<br>
+<br>
+<br>
+<p>    # Auto-instrument supported libraries</p>
+<br>
+<p>    patch_all()</p>
+<br>
+<br>
+<br>
+<p>    # Custom instrumentation</p>
+<br>
+<p>    @tracer.writer(service_name="payment-service")</p>
+<br>
+<p>    def process_payment(order_id, amount):</p>
+<br>
+<p>        with tracer.trace("payment.charge") as span:</p>
+<br>
+<p>            span.set_tag("order_id", order_id)</p>
+<br>
+<p>            span.set_metric("amount", amount)</p>
+<br>
+<p>            result = gateway.charge(amount)</p>
+<br>
+<p>            span.set_tag("transaction_id", result.id)</p>
+<br>
+<p>            return result</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>New Relic APM</h3>
 <br>
-<pre><code>
-import newrelic.agent
-
-
-
-# Custom transaction
-
-@newrelic.agent.background_task()
-
-def process_refund(transaction_id):
-
-    with newrelic.agent.FunctionTrace(name=&quot;refund.process&quot;):
-
-        refund_result = refund_gateway.process(transaction_id)
-
-        newrelic.agent.record_custom_metric(
-
-            &quot;Custom/RefundAmount&quot;, refund_result.amount
-
-        )
-
-        return refund_result
-
-</code></pre>
 <br>
-<h2> Log Integration</h2>
+<br>
+<br>
+<br>
+<p>    import newrelic.agent</p>
+<br>
+<br>
+<br>
+<p>    # Custom transaction</p>
+<br>
+<p>    @newrelic.agent.background_task()</p>
+<br>
+<p>    def process_refund(transaction_id):</p>
+<br>
+<p>        with newrelic.agent.FunctionTrace(name="refund.process"):</p>
+<br>
+<p>            refund_result = refund_gateway.process(transaction_id)</p>
+<br>
+<p>            newrelic.agent.record_custom_metric(</p>
+<br>
+<p>                "Custom/RefundAmount", refund_result.amount</p>
+<br>
+<p>            )</p>
+<br>
+<p>            return refund_result</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Log Integration</h2>
+<br>
+<br>
+<br>
 <br>
 <p>| Feature | Grafana + Loki | Datadog Logs | New Relic Logs |</p>
+<br>
 <p>|---|---|---|---|</p>
+<br>
 <p>| Structured parsing | LogQL | Grok parser | NRQL parsing |</p>
+<br>
 <p>| Ingestion cost | Low (S3-based) | Medium | Medium |</p>
+<br>
 <p>| Retention | Configurable | 15 days default | 30 days default |</p>
+<br>
 <p>| Live tail | Yes | Yes | Yes |</p>
+<br>
+<br>
+<br>
 <br>
 <p>Example Loki query for log correlation:</p>
 <br>
-<pre><code>
-{service=&quot;payment&quot;} |= &quot;ERROR&quot;
-
-| logfmt
-
-| duration &gt; 1s
-
-| line_format &quot;{{.timestamp}} {{.message}} (duration: {{.duration}})&quot;
-
-</code></pre>
 <br>
-<h2> Pricing Comparison</h2>
+<br>
+<br>
+<br>
+<p>    {service="payment"} |= "ERROR"</p>
+<br>
+<p>    | logfmt</p>
+<br>
+<p>    | duration > 1s</p>
+<br>
+<p>    | line_format "{{.timestamp}} {{.message}} (duration: {{.duration}})"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Pricing Comparison</h2>
+<br>
+<br>
+<br>
 <br>
 <p>| Tier | Grafana (self-hosted) | Grafana Cloud | Datadog | New Relic |</p>
+<br>
 <p>|---|---|---|---|---|</p>
+<br>
 <p>| Free | Unlimited | 3 users, 10k series | 5 hosts, 15d retention | 100GB/month, 1 user |</p>
+<br>
 <p>| Entry | Server cost only | $49/month | ~$15/host/month | ~$0.55/GB |</p>
+<br>
 <p>| Enterprise | Support cost | Custom | Custom | Custom |</p>
+<br>
+<br>
+<br>
 <br>
 <p>Grafana self-hosted is the most cost-effective at scale because you only pay for infrastructure. Datadog and New Relic pricing scales with data volume and can become expensive for high-cardinality metrics or verbose logging.</p>
 <br>
-<h2> Self-Hosted vs SaaS</h2>
 <br>
-<li>**Grafana**: Excellent self-hosted option with Prometheus, Loki, and Tempo forming a complete open-source stack. Grafana Cloud offers a managed alternative.</li>
-<li>**Datadog**: SaaS-only with strong integrations but vendor lock-in. No self-hosted option exists.</li>
-<li>**New Relic**: Cloud-first but offers a data-ingestion API that allows hybrid collection patterns.</li>
+<br>
+<br>
+<h2>  Self-Hosted vs SaaS</h2>
+<br>
+<br>
+<br>
+<p>* **Grafana**: Excellent self-hosted option with Prometheus, Loki, and Tempo forming a complete open-source stack. Grafana Cloud offers a managed alternative.</p>
+<p>* **Datadog**: SaaS-only with strong integrations but vendor lock-in. No self-hosted option exists.</p>
+<p>* **New Relic**: Cloud-first but offers a data-ingestion API that allows hybrid collection patterns.</p>
+<br>
+<br>
 <br>
 <p>For startups and small teams, Grafana self-hosted provides the best balance of capability and cost. As teams grow to 20+ engineers, Datadog's out-of-the-box integrations reduce operational overhead. New Relic is compelling for organizations already in the Oracle/AWS ecosystem that value NRQL's analytical power.</p></div>
     </article>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tech" data-exclude="nginx-configuration">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Nginx Configuration: Performance and Security">
+    <meta property="og:description" content="Configure Nginx for production: reverse proxy, load balancing, caching, SSL termination, and security hardening.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tech/nginx-configuration.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nginx Configuration: Performance and Security">
+    <meta name="twitter:description" content="Configure Nginx for production: reverse proxy, load balancing, caching, SSL termination, and security hardening.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Nginx Configuration: Performance and Security — SourceHub</title>
+    <meta name="description" content="Configure Nginx for production: reverse proxy, load balancing, caching, SSL termination, and security hardening.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/nginx-configuration.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/nginx-configuration.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Nginx Configuration: Performance and Security",
+      "description": "Configure Nginx for production: reverse proxy, load balancing, caching, SSL termination, and security hardening.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "536",
+      "keywords": "Technology, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/nginx-configuration.html"},
+      "articleBody": "Nginx Configuration: Performance and Security Nginx is the most popular web server and reverse proxy. Proper configuration balances performance, security, and resource usage. Reverse Proxy Configuration Configure Nginx as a reverse proxy to backend applications. Use proxy_pass to forward requests. Set proxy_set_header to forward client connection details. Configure proxy_buffering for streaming applications. WebSocket proxying requires specific headers: Upgrade and Connection. FastCGI proxying (for PHP) uses fastcgi_pass. gRPC proxying requires http2 and grpc_pass. Each protocol has specific requirements for reliable proxying. Load Balancing Nginx distributes traffic across backend servers. Load balancing methods include round-robin (default), least_conn (least connections), ip_hash (session persistence), and random. upstream blocks define server groups with optional weights. Health checks monitor backend availability. Active checks (nginx plus) test endpoints periodically. Passive checks mark servers as failed after connection or timeout errors. max_fails and fail_timeout control failure detection. Caching Nginx caching reduces backend load. proxy_cache_path defines the cache location and parameters. proxy_cache enables caching for specific locations. Cache keys based on request URI, query string, and headers. Cache bypass headers (Cache-Control: no-cache) from the backend prevent caching of dynamic content. Cache purging removes stale entries. Microcaching (1-5 second cache for all responses) protects backends from traffic spikes. SSL/TLS Configure HTTPS with strong ciphers and protocols. Use TLS 1.2 and 1.3 only. Modern cipher suites prioritize ChaCha20 and AES-GCM. Enable HSTS (Strict-Transport-Security) to enforce HTTPS. OCSP stapling improves TLS performance. SSL session cache reduces handshake overhead. Use Let's Encrypt with Certbot for automated certificate management. Redirect HTTP to HTTPS in the server block. Security Headers Add security headers: X-Content-Type-Options: nosniff, X-Frame-Options: DENY, X-XSS-Protection: 0 (modern browsers handle XSS), Referrer-Policy: strict-origin-when-cross-origin, Permissions-Policy for feature control. Content-Security-Policy headers mitigate XSS and data injection attacks. Rate limiting protects against abuse. limit_req_zone defines rate zones. limit_req applies rate limiting per location. Burst and nodelay parameters allow short traffic spikes while maintaining average limits."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Nginx Configuration: Performance and Security"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Nginx Configuration: Performance and Security
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Nginx Configuration: Performance and Security</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Nginx Configuration: Performance and Security</h1>
+<p>Nginx is the most popular web server and reverse proxy. Proper configuration balances performance, security, and resource usage.</p>
+<br>
+<h2> Reverse Proxy Configuration</h2>
+<br>
+<p>Configure Nginx as a reverse proxy to backend applications. Use proxy_pass to forward requests. Set proxy_set_header to forward client connection details. Configure proxy_buffering for streaming applications.</p>
+<br>
+<p>WebSocket proxying requires specific headers: Upgrade and Connection. FastCGI proxying (for PHP) uses fastcgi_pass. gRPC proxying requires http2 and grpc_pass. Each protocol has specific requirements for reliable proxying.</p>
+<br>
+<h2> Load Balancing</h2>
+<br>
+<p>Nginx distributes traffic across backend servers. Load balancing methods include round-robin (default), least_conn (least connections), ip_hash (session persistence), and random. upstream blocks define server groups with optional weights.</p>
+<br>
+<p>Health checks monitor backend availability. Active checks (nginx plus) test endpoints periodically. Passive checks mark servers as failed after connection or timeout errors. max_fails and fail_timeout control failure detection.</p>
+<br>
+<h2> Caching</h2>
+<br>
+<p>Nginx caching reduces backend load. proxy_cache_path defines the cache location and parameters. proxy_cache enables caching for specific locations. Cache keys based on request URI, query string, and headers.</p>
+<br>
+<p>Cache bypass headers (Cache-Control: no-cache) from the backend prevent caching of dynamic content. Cache purging removes stale entries. Microcaching (1-5 second cache for all responses) protects backends from traffic spikes.</p>
+<br>
+<h2> SSL/TLS</h2>
+<br>
+<p>Configure HTTPS with strong ciphers and protocols. Use TLS 1.2 and 1.3 only. Modern cipher suites prioritize ChaCha20 and AES-GCM. Enable HSTS (Strict-Transport-Security) to enforce HTTPS.</p>
+<br>
+<p>OCSP stapling improves TLS performance. SSL session cache reduces handshake overhead. Use Let's Encrypt with Certbot for automated certificate management. Redirect HTTP to HTTPS in the server block.</p>
+<br>
+<h2> Security Headers</h2>
+<br>
+<p>Add security headers: X-Content-Type-Options: nosniff, X-Frame-Options: DENY, X-XSS-Protection: 0 (modern browsers handle XSS), Referrer-Policy: strict-origin-when-cross-origin, Permissions-Policy for feature control. Content-Security-Policy headers mitigate XSS and data injection attacks.</p>
+<br>
+<p>Rate limiting protects against abuse. limit_req_zone defines rate zones. limit_req applies rate limiting per location. Burst and nodelay parameters allow short traffic spikes while maintaining average limits.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

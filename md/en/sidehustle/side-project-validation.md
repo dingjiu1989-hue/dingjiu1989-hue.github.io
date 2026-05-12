@@ -1,0 +1,131 @@
+---
+title: "Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping"
+description: "Validate your side project idea before building: create landing pages, grow a waitlist, conduct customer interviews, and scope an MVP."
+date: 2026-05-12
+board: sidehustle
+url: https://dingjiu1989-hue.github.io/en/sidehustle/side-project-validation.html
+---
+
+# Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping
+
+Building a side project that nobody wants is the most common failure mode for indie hackers. Months of coding, zero users. The solution is validation before building. Here is a practical validation framework that takes two to four weeks.
+
+  
+
+
+##  The Landing Page Test
+
+  
+
+
+Before writing a single line of code, create a landing page for your idea. This page should describe the problem, your solution, and include a call to action to join a waitlist or pre-order.
+
+  
+
+
+The landing page validates demand signals. If nobody visits, you have a distribution problem, not a product problem. If people visit but do not join, your value proposition needs work. If people join, you have real demand.
+
+  
+
+
+Tools like Carrd, Micro, or even a simple HTML page on Vercel work for landing pages. Spend less than two hours on it. The goal is not a beautiful design. It is a clear message and a way to capture interest.
+
+  
+
+
+Drive traffic through communities where your target users hang out. Post in relevant subreddits, Hacker News, Indie Hackers, or niche Slack communities. If you cannot find communities where your target users gather, distribution will be a persistent challenge.
+
+  
+
+
+##  Waitlist Management
+
+  
+
+
+A waitlist serves two purposes. It validates demand, and it gives you a launch audience. Aim for at least 100 waitlist signups before committing to build. Fewer than that means you need to revisit your idea or your distribution.
+
+  
+
+
+Do not just collect emails. Ask waitlist members what problem they need solved. A simple survey with one question "What is the biggest challenge you face with X?" gives you product direction and validates that you are solving a real problem.
+
+  
+
+
+Engage the waitlist weekly with updates. Share what you are building, ask questions, and build relationships. By launch time, these people should feel invested in your success.
+
+  
+
+
+##  Customer Interviews
+
+  
+
+
+Customer interviews are the highest-leverage validation activity. Talk to 10 to 20 potential users before building anything. These conversations will save you months of building the wrong thing.
+
+  
+
+
+Ask about their current workflow. How do they solve the problem today? What do they hate about current solutions? What would an ideal solution look like? Do not pitch your idea. Listen more than you talk.
+
+  
+
+
+The most important question: "Would you pay for a solution to this problem?" Follow up with: "How much would you pay?" And: "Would you pay today if the solution existed?" Hypothetical willingness to pay is not reliable, but strong enthusiasm from multiple people is a positive signal.
+
+  
+
+
+##  Competitor Analysis
+
+  
+
+
+If you have no competitors, that is usually a bad sign. It likely means there is no market. Healthy markets have multiple competitors, each with different approaches.
+
+  
+
+
+Analyze competitors thoroughly. What do users complain about in their reviews? What features are missing? What pricing models do they use? Your competitive advantage will be doing something better, cheaper, or for a different audience.
+
+  
+
+
+Be honest about your differentiation. "Better UX" is table stakes, not a competitive advantage. "Works offline when competitors require internet" is real differentiation.
+
+  
+
+
+##  MVP Scoping
+
+  
+
+
+Based on validation, scope your MVP ruthlessly. The MVP should solve one core problem well. Everything else is a distraction.
+
+  
+
+
+List every feature you think your product needs. Sort by "critical for solving the core problem," "nice to have," and "future." Build only the critical list. If that list has more than five features, cut further.
+
+  
+
+
+Set a build timeline. If the MVP takes more than four to six weeks of part-time work, scope is too large. Cut features until you can ship in four weeks. You can always add features after launch. You cannot un-build a six-month MVP that nobody uses.
+
+  
+
+
+##  The Decision Point
+
+  
+
+
+After validation, you have enough information to decide. If you have 100 or more waitlist signups, positive interview signals, and a clearly differentiated MVP scope that you can build in four weeks, proceed. If any of those conditions are missing, iterate on your idea or move to the next one.
+
+  
+
+
+Validation does not guarantee success. But it dramatically improves your odds. The cost of validation is a few weeks of effort. The cost of building something nobody wants is months or years. Validate first, build second.

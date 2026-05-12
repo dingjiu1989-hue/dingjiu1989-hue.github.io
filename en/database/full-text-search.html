@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1980",
+      "wordCount": "2127",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/full-text-search.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/full-text-search.html"},
+      "articleBody": "Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense) The Need for Full-Text Search Standard database `LIKE` queries do not scale. They require full table scans, do not understand relevance ranking, and cannot handle typo tolerance, stemming, or faceted search. Dedicated search engines solve these problems with inverted indexes, relevance scoring, and specialized query parsing. How Search Engines Work An inverted index maps terms to the documents containing them: Document 1: \"The quick brown fox\" Document 2: \"The lazy dog\" Inverted Index: \"the\" -> [Doc1, Doc2] \"quick\" -> [Doc1] \"brown\" -> [Doc1] \"fox\" -> [Doc1] \"lazy\" -> [Doc2] \"dog\" -> [Doc2] When searching for \"brown fox,\" the engine finds documents containing both terms and ranks them by relevance. Search Engine Comparison | Feature | Elasticsearch | Meilisearch | Typesense | |---------|--------------|-------------|-----------| | Setup complexity | High | Low | Low | | Query language | Query DSL (JSON) | Simple search parameters | Simple API | | Relevance tuning | BM25, custom scripts | Built-in (good defaults) | Built-in (good defaults) | | Typo tolerance | Via fuzzy queries | Built-in (excellent) | Built-in (excellent) | | Faceted search | Excellent | Good | Good | | Geospatial search | Excellent | Limited | Built-in | | Scalability | Very high | Moderate | High | | Resource usage | High (Java JVM) | Low (Rust) | Low (C++) | | Managed service | Elastic Cloud | Meilisearch Cloud | Typesense Cloud | Elasticsearch Indexing Data // Create index with mapping PUT /articles { \"settings\": { \"analysis\": { \"analyzer\": { \"custom_analyzer\": { \"type\": \"standard\", \"stopwords\": \"_english_\" } } } }, \"mappings\": { \"properties\": { \"title\": { \"type\": \"text\", \"analyzer\": \"custom_analyzer\", \"fields\": { \"keyword\": { \"type\": \"keyword\" } } }, \"content\": { \"type\": \"text\" }, \"author\": { \"type\": \"keyword\" }, \"tags\": { \"type\": \"keyword\" }, \"published_at\": { \"type\": \"date\" }, \"views\": { \"type\": \"integer\" } } } } // Index a document POST /articles/_doc/1 { \"title\": \"Database Indexing Strategies\", \"content\": \"A comprehensive guide to indexing...\", \"author\": \"alice\", \"tags\": [\"database\", \"performance\"], \"published_at\": \"2026-05-11\", \"views\": 1200 } Searching // Full-text search with relevance GET /articles/_search { \"query\": { \"bool\": { \"must\": [ { \"multi_match\": { \"query\": \"database indexing performance\", \"fields\": [\"title^3\", \"content^1\"], // Title is 3x more important \"type\": \"best_fields\" } } ], \"filter\": [ { \"term\": { \"author\": \"alice\" } }, { \"range\": { \"views\": { \"gte\": 100 } } } ] } }, \"sort\": [ { \"_score\": \"desc\" }, { \"published_at\": \"desc\" } ], \"from\": 0, \"size\": 20, \"aggs\": { \"by_tag\": { \"terms\": { \"field\": \"tags\" } } } } from elasticsearch import Elasticsearch es = Elasticsearch(['https://localhost:9200']) results = es.search( index='articles', query={ 'multi_match': { 'query': 'database indexing', 'fields': ['title^3', 'content'] } }, aggs={'by_tag': {'terms': {'field': 'tags'}}}, size=20 ) for hit in results['hits']['hits']: print(f\"{hit['_score']:.2f}: {hit['_source']['title']}\") # Facet results for bucket in results['aggregations']['by_tag']['buckets']: print(f\"{bucket['key']}: {bucket['doc_count']} articles\") Meilisearch Meilisearch focuses on developer experience with sensible defaults and instant typo-tolerant search. Setup docker run -it --rm \\ -p 7700:7700 \\ -v $(pwd)/meili_data:/meili_data \\ getmeili/meilisearch:v1.6 \\ --master-key=MASTER_KEY Indexing and Search const { MeiliSearch } = require('meilisearch'); const client = new MeiliSearch({ host: 'http://localhost:7700', apiKey: 'MASTER_KEY', }); // Index documents const index = client.index('articles'); await index.addDocuments([ { id: 1, title: \"Database Indexing Strategies\", content: \"A comprehensive guide...\", tags: [\"database\", \"performance\"], views: 1200 } ]); // Configure searchable attributes await index.updateSearchableAttributes(['title', 'content']); await index.updateSortableAttributes(['views', 'published_at']); await index.updateFilterableAttributes(['tags', 'author']); // Search (typo tolerance built-in) const results = await index.search('database indexing', { limit: 20, filter: 'views > 100', sort: ['views:desc'] }); Typesense Typesense is a fast, typo-tolerant search engine written in C++. Setup # docker-compose.yml version: '3' services: typesense: image: typesense/typesense:27.0 ports: - \"8108:8108\" environment: TYPESENSE_API_KEY: \"xyz\" TYPESENSE_DATA_DIR: /data volumes: - ./typesense-data:/data Indexing and Search import typesense client = typesense.Client({ 'nodes': [{'host': 'localhost', 'port': '8108', 'protocol': 'http'}], 'api_key': 'xyz', }) # Create collection (schema) client.collections.create({ 'name': 'articles', 'fields': [ {'name': 'title', 'type': 'string'}, {'name': 'content', 'type': 'string'}, {'name': 'tags', 'type': 'string[]', 'facet': True}, {'name': 'views', 'type': 'int32'}, {'name': 'published_at', 'type': 'int64'}, ], 'default_sorting_field': 'views' }) # Index documents client.collections['articles'].documents.create({ 'id': '1', 'title': 'Database Indexing Strategies', 'content': 'A comprehensive guide...', 'tags': ['database', 'performance'], 'views': 1200, 'published_at': 1715385600 }) # Search results = client.collections['articles'].documents.search({ 'q': 'database indexing', 'query_by': 'title,content', 'filter_by': 'views:>100', 'sort_by': 'views:desc', 'facet_by': 'tags', 'per_page': 20 }) When to Use Which | Scenario | Recommended | |----------|-------------| | Complex analytics with search | Elasticsearch | | Simple, fast search out of the box | Meilisearch | | Low-latency search on limited hardware | Typesense | | Log analysis and observability | Elasticsearch (ELK stack) | | E-commerce product search | Meilisearch or Typesense | | Geo-search and aggregations | Elasticsearch | | Typo-tolerant search for user-facing features | Meilisearch | | Large-scale (100M+ documents) | Elasticsearch | Summary Full-text search engines are essential for applications that need more than simple SQL LIKE queries. Elasticsearch offers the most features and scalability at the cost of operational complexity. Meilisearch provides the best developer experience with instant typo tolerance and sensible defaults. Typesense offers excellent performance with minimal resource usage. Choose based on your scale, feature requirements, and operational capacity: start with Meilisearch or Typesense for typical web applications and move to Elasticsearch when you need advanced analytics or larger scale."
     }
     </script>
     <script type="application/ld+json">
@@ -73,473 +74,459 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> The Need for Full-Text Search</h2>
+      <div class="article-body"><h1>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h1>
 <br>
-<p>Standard database `LIKE` queries do not scale. They require full table scans, do not understand relevance ranking, and cannot handle typo tolerance, stemming, or faceted search. Dedicated search engines solve these problems with inverted indexes, relevance scoring, and specialized query parsing.</p>
+<p>The Need for Full-Text Search   </p>
+<p>Standard database `LIKE` queries do not scale. They require full table scans, do not understand relevance ranking, and cannot handle typo tolerance, stemming, or faceted search. Dedicated search engines solve these problems with inverted indexes, relevance scoring, and specialized query parsing.   </p>
+<p>How Search Engines Work   </p>
+<p>An inverted index maps terms to the documents containing them:   </p>
 <br>
-<h2> How Search Engines Work</h2>
 <br>
-<p>An inverted index maps terms to the documents containing them:</p>
 <br>
-<pre><code>
-Document 1: &quot;The quick brown fox&quot;
-
-Document 2: &quot;The lazy dog&quot;
-
-
-
-Inverted Index:
-
-&quot;the&quot;   -&gt; [Doc1, Doc2]
-
-&quot;quick&quot; -&gt; [Doc1]
-
-&quot;brown&quot; -&gt; [Doc1]
-
-&quot;fox&quot;   -&gt; [Doc1]
-
-&quot;lazy&quot;  -&gt; [Doc2]
-
-&quot;dog&quot;   -&gt; [Doc2]
-
-</code></pre>
+<p>    Document 1: "The quick brown fox"</p>
 <br>
-<p>When searching for "brown fox," the engine finds documents containing both terms and ranks them by relevance.</p>
+<p>    Document 2: "The lazy dog"</p>
 <br>
-<h2> Search Engine Comparison</h2>
 <br>
-<p>| Feature | Elasticsearch | Meilisearch | Typesense |</p>
-<p>|---------|--------------|-------------|-----------|</p>
-<p>| Setup complexity | High | Low | Low |</p>
-<p>| Query language | Query DSL (JSON) | Simple search parameters | Simple API |</p>
-<p>| Relevance tuning | BM25, custom scripts | Built-in (good defaults) | Built-in (good defaults) |</p>
-<p>| Typo tolerance | Via fuzzy queries | Built-in (excellent) | Built-in (excellent) |</p>
-<p>| Faceted search | Excellent | Good | Good |</p>
-<p>| Geospatial search | Excellent | Limited | Built-in |</p>
-<p>| Scalability | Very high | Moderate | High |</p>
-<p>| Resource usage | High (Java JVM) | Low (Rust) | Low (C++) |</p>
-<p>| Managed service | Elastic Cloud | Meilisearch Cloud | Typesense Cloud |</p>
 <br>
-<h2> Elasticsearch</h2>
+<p>    Inverted Index:</p>
 <br>
-<h3>Indexing Data</h3>
+<p>    "the"   -> [Doc1, Doc2]</p>
 <br>
-<pre><code>
-// Create index with mapping
-
-PUT /articles
-
-{
-
-  &quot;settings&quot;: {
-
-    &quot;analysis&quot;: {
-
-      &quot;analyzer&quot;: {
-
-        &quot;custom_analyzer&quot;: {
-
-          &quot;type&quot;: &quot;standard&quot;,
-
-          &quot;stopwords&quot;: &quot;_english_&quot;
-
-        }
-
-      }
-
-    }
-
-  },
-
-  &quot;mappings&quot;: {
-
-    &quot;properties&quot;: {
-
-      &quot;title&quot;: {
-
-        &quot;type&quot;: &quot;text&quot;,
-
-        &quot;analyzer&quot;: &quot;custom_analyzer&quot;,
-
-        &quot;fields&quot;: {
-
-          &quot;keyword&quot;: { &quot;type&quot;: &quot;keyword&quot; }
-
-        }
-
-      },
-
-      &quot;content&quot;: { &quot;type&quot;: &quot;text&quot; },
-
-      &quot;author&quot;: { &quot;type&quot;: &quot;keyword&quot; },
-
-      &quot;tags&quot;: { &quot;type&quot;: &quot;keyword&quot; },
-
-      &quot;published_at&quot;: { &quot;type&quot;: &quot;date&quot; },
-
-      &quot;views&quot;: { &quot;type&quot;: &quot;integer&quot; }
-
-    }
-
-  }
-
-}
-
-
-
-// Index a document
-
-POST /articles/_doc/1
-
-{
-
-  &quot;title&quot;: &quot;Database Indexing Strategies&quot;,
-
-  &quot;content&quot;: &quot;A comprehensive guide to indexing...&quot;,
-
-  &quot;author&quot;: &quot;alice&quot;,
-
-  &quot;tags&quot;: [&quot;database&quot;, &quot;performance&quot;],
-
-  &quot;published_at&quot;: &quot;2026-05-11&quot;,
-
-  &quot;views&quot;: 1200
-
-}
-
-</code></pre>
+<p>    "quick" -> [Doc1]</p>
 <br>
-<h3>Searching</h3>
+<p>    "brown" -> [Doc1]</p>
 <br>
-<pre><code>
-// Full-text search with relevance
-
-GET /articles/_search
-
-{
-
-  &quot;query&quot;: {
-
-    &quot;bool&quot;: {
-
-      &quot;must&quot;: [
-
-        {
-
-          &quot;multi_match&quot;: {
-
-            &quot;query&quot;: &quot;database indexing performance&quot;,
-
-            &quot;fields&quot;: [&quot;title^3&quot;, &quot;content^1&quot;],  // Title is 3x more important
-
-            &quot;type&quot;: &quot;best_fields&quot;
-
-          }
-
-        }
-
-      ],
-
-      &quot;filter&quot;: [
-
-        { &quot;term&quot;: { &quot;author&quot;: &quot;alice&quot; } },
-
-        { &quot;range&quot;: { &quot;views&quot;: { &quot;gte&quot;: 100 } } }
-
-      ]
-
-    }
-
-  },
-
-  &quot;sort&quot;: [
-
-    { &quot;_score&quot;: &quot;desc&quot; },
-
-    { &quot;published_at&quot;: &quot;desc&quot; }
-
-  ],
-
-  &quot;from&quot;: 0,
-
-  &quot;size&quot;: 20,
-
-  &quot;aggs&quot;: {
-
-    &quot;by_tag&quot;: {
-
-      &quot;terms&quot;: { &quot;field&quot;: &quot;tags&quot; }
-
-    }
-
-  }
-
-}
-
-</code></pre>
+<p>    "fox"   -> [Doc1]</p>
 <br>
-<pre><code>
-from elasticsearch import Elasticsearch
-
-
-
-es = Elasticsearch([&#x27;https://localhost:9200&#x27;])
-
-
-
-results = es.search(
-
-    index=&#x27;articles&#x27;,
-
-    query={
-
-        &#x27;multi_match&#x27;: {
-
-            &#x27;query&#x27;: &#x27;database indexing&#x27;,
-
-            &#x27;fields&#x27;: [&#x27;title^3&#x27;, &#x27;content&#x27;]
-
-        }
-
-    },
-
-    aggs={&#x27;by_tag&#x27;: {&#x27;terms&#x27;: {&#x27;field&#x27;: &#x27;tags&#x27;}}},
-
-    size=20
-
-)
-
-
-
-for hit in results[&#x27;hits&#x27;][&#x27;hits&#x27;]:
-
-    print(f&quot;{hit[&#x27;_score&#x27;]:.2f}: {hit[&#x27;_source&#x27;][&#x27;title&#x27;]}&quot;)
-
-
-
-# Facet results
-
-for bucket in results[&#x27;aggregations&#x27;][&#x27;by_tag&#x27;][&#x27;buckets&#x27;]:
-
-    print(f&quot;{bucket[&#x27;key&#x27;]}: {bucket[&#x27;doc_count&#x27;]} articles&quot;)
-
-</code></pre>
+<p>    "lazy"  -> [Doc2]</p>
 <br>
-<h2> Meilisearch</h2>
+<p>    "dog"   -> [Doc2]</p>
 <br>
-<p>Meilisearch focuses on developer experience with sensible defaults and instant typo-tolerant search.</p>
 <br>
-<h3>Setup</h3>
 <br>
-<pre><code>
-docker run -it --rm \
-
-    -p 7700:7700 \
-
-    -v $(pwd)/meili_data:/meili_data \
-
-    getmeili/meilisearch:v1.6 \
-
-    --master-key=MASTER_KEY
-
-</code></pre>
 <br>
-<h3>Indexing and Search</h3>
+<p>When searching for "brown fox," the engine finds documents containing both terms and ranks them by relevance.   </p>
+<p>Search Engine Comparison   </p>
+<p>| Feature | Elasticsearch | Meilisearch | Typesense | |---------|--------------|-------------|-----------| | Setup complexity | High | Low | Low | | Query language | Query DSL (JSON) | Simple search parameters | Simple API | | Relevance tuning | BM25, custom scripts | Built-in (good defaults) | Built-in (good defaults) | | Typo tolerance | Via fuzzy queries | Built-in (excellent) | Built-in (excellent) | | Faceted search | Excellent | Good | Good | | Geospatial search | Excellent | Limited | Built-in | | Scalability | Very high | Moderate | High | | Resource usage | High (Java JVM) | Low (Rust) | Low (C++) | | Managed service | Elastic Cloud | Meilisearch Cloud | Typesense Cloud |   </p>
+<p>Elasticsearch   </p>
+<p>Indexing Data   </p>
 <br>
-<pre><code>
-const { MeiliSearch } = require(&#x27;meilisearch&#x27;);
-
-
-
-const client = new MeiliSearch({
-
-    host: &#x27;http://localhost:7700&#x27;,
-
-    apiKey: &#x27;MASTER_KEY&#x27;,
-
-});
-
-
-
-// Index documents
-
-const index = client.index(&#x27;articles&#x27;);
-
-await index.addDocuments([
-
-    {
-
-        id: 1,
-
-        title: &quot;Database Indexing Strategies&quot;,
-
-        content: &quot;A comprehensive guide...&quot;,
-
-        tags: [&quot;database&quot;, &quot;performance&quot;],
-
-        views: 1200
-
-    }
-
-]);
-
-
-
-// Configure searchable attributes
-
-await index.updateSearchableAttributes([&#x27;title&#x27;, &#x27;content&#x27;]);
-
-await index.updateSortableAttributes([&#x27;views&#x27;, &#x27;published_at&#x27;]);
-
-await index.updateFilterableAttributes([&#x27;tags&#x27;, &#x27;author&#x27;]);
-
-
-
-// Search (typo tolerance built-in)
-
-const results = await index.search(&#x27;database indexing&#x27;, {
-
-    limit: 20,
-
-    filter: &#x27;views &gt; 100&#x27;,
-
-    sort: [&#x27;views:desc&#x27;]
-
-});
-
-</code></pre>
 <br>
-<h2> Typesense</h2>
 <br>
-<p>Typesense is a fast, typo-tolerant search engine written in C++.</p>
+<p>    // Create index with mapping</p>
 <br>
-<h3>Setup</h3>
+<p>    PUT /articles</p>
 <br>
-<pre><code>
-# docker-compose.yml
-
-version: &#x27;3&#x27;
-
-services:
-
-  typesense:
-
-    image: typesense/typesense:27.0
-
-    ports:
-
-      - &quot;8108:8108&quot;
-
-    environment:
-
-      TYPESENSE_API_KEY: &quot;xyz&quot;
-
-      TYPESENSE_DATA_DIR: /data
-
-    volumes:
-
-      - ./typesense-data:/data
-
-</code></pre>
+<p>    {</p>
 <br>
-<h3>Indexing and Search</h3>
+<p>      "settings": {</p>
 <br>
-<pre><code>
-import typesense
-
-
-
-client = typesense.Client({
-
-    &#x27;nodes&#x27;: [{&#x27;host&#x27;: &#x27;localhost&#x27;, &#x27;port&#x27;: &#x27;8108&#x27;, &#x27;protocol&#x27;: &#x27;http&#x27;}],
-
-    &#x27;api_key&#x27;: &#x27;xyz&#x27;,
-
-})
-
-
-
-# Create collection (schema)
-
-client.collections.create({
-
-    &#x27;name&#x27;: &#x27;articles&#x27;,
-
-    &#x27;fields&#x27;: [
-
-        {&#x27;name&#x27;: &#x27;title&#x27;, &#x27;type&#x27;: &#x27;string&#x27;},
-
-        {&#x27;name&#x27;: &#x27;content&#x27;, &#x27;type&#x27;: &#x27;string&#x27;},
-
-        {&#x27;name&#x27;: &#x27;tags&#x27;, &#x27;type&#x27;: &#x27;string[]&#x27;, &#x27;facet&#x27;: True},
-
-        {&#x27;name&#x27;: &#x27;views&#x27;, &#x27;type&#x27;: &#x27;int32&#x27;},
-
-        {&#x27;name&#x27;: &#x27;published_at&#x27;, &#x27;type&#x27;: &#x27;int64&#x27;},
-
-    ],
-
-    &#x27;default_sorting_field&#x27;: &#x27;views&#x27;
-
-})
-
-
-
-# Index documents
-
-client.collections[&#x27;articles&#x27;].documents.create({
-
-    &#x27;id&#x27;: &#x27;1&#x27;,
-
-    &#x27;title&#x27;: &#x27;Database Indexing Strategies&#x27;,
-
-    &#x27;content&#x27;: &#x27;A comprehensive guide...&#x27;,
-
-    &#x27;tags&#x27;: [&#x27;database&#x27;, &#x27;performance&#x27;],
-
-    &#x27;views&#x27;: 1200,
-
-    &#x27;published_at&#x27;: 1715385600
-
-})
-
-
-
-# Search
-
-results = client.collections[&#x27;articles&#x27;].documents.search({
-
-    &#x27;q&#x27;: &#x27;database indexing&#x27;,
-
-    &#x27;query_by&#x27;: &#x27;title,content&#x27;,
-
-    &#x27;filter_by&#x27;: &#x27;views:&gt;100&#x27;,
-
-    &#x27;sort_by&#x27;: &#x27;views:desc&#x27;,
-
-    &#x27;facet_by&#x27;: &#x27;tags&#x27;,
-
-    &#x27;per_page&#x27;: 20
-
-})
-
-</code></pre>
+<p>        "analysis": {</p>
 <br>
-<h2> When to Use Which</h2>
+<p>          "analyzer": {</p>
 <br>
-<p>| Scenario | Recommended |</p>
-<p>|----------|-------------|</p>
-<p>| Complex analytics with search | Elasticsearch |</p>
-<p>| Simple, fast search out of the box | Meilisearch |</p>
-<p>| Low-latency search on limited hardware | Typesense |</p>
-<p>| Log analysis and observability | Elasticsearch (ELK stack) |</p>
-<p>| E-commerce product search | Meilisearch or Typesense |</p>
-<p>| Geo-search and aggregations | Elasticsearch |</p>
-<p>| Typo-tolerant search for user-facing features | Meilisearch |</p>
-<p>| Large-scale (100M+ documents) | Elasticsearch |</p>
+<p>            "custom_analyzer": {</p>
 <br>
-<h2> Summary</h2>
+<p>              "type": "standard",</p>
 <br>
+<p>              "stopwords": "_english_"</p>
+<br>
+<p>            }</p>
+<br>
+<p>          }</p>
+<br>
+<p>        }</p>
+<br>
+<p>      },</p>
+<br>
+<p>      "mappings": {</p>
+<br>
+<p>        "properties": {</p>
+<br>
+<p>          "title": {</p>
+<br>
+<p>            "type": "text",</p>
+<br>
+<p>            "analyzer": "custom_analyzer",</p>
+<br>
+<p>            "fields": {</p>
+<br>
+<p>              "keyword": { "type": "keyword" }</p>
+<br>
+<p>            }</p>
+<br>
+<p>          },</p>
+<br>
+<p>          "content": { "type": "text" },</p>
+<br>
+<p>          "author": { "type": "keyword" },</p>
+<br>
+<p>          "tags": { "type": "keyword" },</p>
+<br>
+<p>          "published_at": { "type": "date" },</p>
+<br>
+<p>          "views": { "type": "integer" }</p>
+<br>
+<p>        }</p>
+<br>
+<p>      }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<p>    // Index a document</p>
+<br>
+<p>    POST /articles/_doc/1</p>
+<br>
+<p>    {</p>
+<br>
+<p>      "title": "Database Indexing Strategies",</p>
+<br>
+<p>      "content": "A comprehensive guide to indexing...",</p>
+<br>
+<p>      "author": "alice",</p>
+<br>
+<p>      "tags": ["database", "performance"],</p>
+<br>
+<p>      "published_at": "2026-05-11",</p>
+<br>
+<p>      "views": 1200</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<p>Searching   </p>
+<br>
+<br>
+<br>
+<p>    // Full-text search with relevance</p>
+<br>
+<p>    GET /articles/_search</p>
+<br>
+<p>    {</p>
+<br>
+<p>      "query": {</p>
+<br>
+<p>        "bool": {</p>
+<br>
+<p>          "must": [</p>
+<br>
+<p>            {</p>
+<br>
+<p>              "multi_match": {</p>
+<br>
+<p>                "query": "database indexing performance",</p>
+<br>
+<p>                "fields": ["title^3", "content^1"],  // Title is 3x more important</p>
+<br>
+<p>                "type": "best_fields"</p>
+<br>
+<p>              }</p>
+<br>
+<p>            }</p>
+<br>
+<p>          ],</p>
+<br>
+<p>          "filter": [</p>
+<br>
+<p>            { "term": { "author": "alice" } },</p>
+<br>
+<p>            { "range": { "views": { "gte": 100 } } }</p>
+<br>
+<p>          ]</p>
+<br>
+<p>        }</p>
+<br>
+<p>      },</p>
+<br>
+<p>      "sort": [</p>
+<br>
+<p>        { "_score": "desc" },</p>
+<br>
+<p>        { "published_at": "desc" }</p>
+<br>
+<p>      ],</p>
+<br>
+<p>      "from": 0,</p>
+<br>
+<p>      "size": 20,</p>
+<br>
+<p>      "aggs": {</p>
+<br>
+<p>        "by_tag": {</p>
+<br>
+<p>          "terms": { "field": "tags" }</p>
+<br>
+<p>        }</p>
+<br>
+<p>      }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    from elasticsearch import Elasticsearch</p>
+<br>
+<br>
+<br>
+<p>    es = Elasticsearch(['https://localhost:9200'])</p>
+<br>
+<br>
+<br>
+<p>    results = es.search(</p>
+<br>
+<p>        index='articles',</p>
+<br>
+<p>        query={</p>
+<br>
+<p>            'multi_match': {</p>
+<br>
+<p>                'query': 'database indexing',</p>
+<br>
+<p>                'fields': ['title^3', 'content']</p>
+<br>
+<p>            }</p>
+<br>
+<p>        },</p>
+<br>
+<p>        aggs={'by_tag': {'terms': {'field': 'tags'}}},</p>
+<br>
+<p>        size=20</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<p>    for hit in results['hits']['hits']:</p>
+<br>
+<p>        print(f"{hit['_score']:.2f}: {hit['_source']['title']}")</p>
+<br>
+<br>
+<br>
+<p>    # Facet results</p>
+<br>
+<p>    for bucket in results['aggregations']['by_tag']['buckets']:</p>
+<br>
+<p>        print(f"{bucket['key']}: {bucket['doc_count']} articles")</p>
+<br>
+<br>
+<br>
+<br>
+<p>Meilisearch   </p>
+<p>Meilisearch focuses on developer experience with sensible defaults and instant typo-tolerant search.   </p>
+<p>Setup   </p>
+<br>
+<br>
+<br>
+<p>    docker run -it --rm \</p>
+<br>
+<p>        -p 7700:7700 \</p>
+<br>
+<p>        -v $(pwd)/meili_data:/meili_data \</p>
+<br>
+<p>        getmeili/meilisearch:v1.6 \</p>
+<br>
+<p>        --master-key=MASTER_KEY</p>
+<br>
+<br>
+<br>
+<br>
+<p>Indexing and Search   </p>
+<br>
+<br>
+<br>
+<p>    const { MeiliSearch } = require('meilisearch');</p>
+<br>
+<br>
+<br>
+<p>    const client = new MeiliSearch({</p>
+<br>
+<p>        host: 'http://localhost:7700',</p>
+<br>
+<p>        apiKey: 'MASTER_KEY',</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<p>    // Index documents</p>
+<br>
+<p>    const index = client.index('articles');</p>
+<br>
+<p>    await index.addDocuments([</p>
+<br>
+<p>        {</p>
+<br>
+<p>            id: 1,</p>
+<br>
+<p>            title: "Database Indexing Strategies",</p>
+<br>
+<p>            content: "A comprehensive guide...",</p>
+<br>
+<p>            tags: ["database", "performance"],</p>
+<br>
+<p>            views: 1200</p>
+<br>
+<p>        }</p>
+<br>
+<p>    ]);</p>
+<br>
+<br>
+<br>
+<p>    // Configure searchable attributes</p>
+<br>
+<p>    await index.updateSearchableAttributes(['title', 'content']);</p>
+<br>
+<p>    await index.updateSortableAttributes(['views', 'published_at']);</p>
+<br>
+<p>    await index.updateFilterableAttributes(['tags', 'author']);</p>
+<br>
+<br>
+<br>
+<p>    // Search (typo tolerance built-in)</p>
+<br>
+<p>    const results = await index.search('database indexing', {</p>
+<br>
+<p>        limit: 20,</p>
+<br>
+<p>        filter: 'views > 100',</p>
+<br>
+<p>        sort: ['views:desc']</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<br>
+<p>Typesense   </p>
+<p>Typesense is a fast, typo-tolerant search engine written in C++.   </p>
+<p>Setup   </p>
+<br>
+<br>
+<br>
+<p>    # docker-compose.yml</p>
+<br>
+<p>    version: '3'</p>
+<br>
+<p>    services:</p>
+<br>
+<p>      typesense:</p>
+<br>
+<p>        image: typesense/typesense:27.0</p>
+<br>
+<p>        ports:</p>
+<br>
+<p>          - "8108:8108"</p>
+<br>
+<p>        environment:</p>
+<br>
+<p>          TYPESENSE_API_KEY: "xyz"</p>
+<br>
+<p>          TYPESENSE_DATA_DIR: /data</p>
+<br>
+<p>        volumes:</p>
+<br>
+<p>          - ./typesense-data:/data</p>
+<br>
+<br>
+<br>
+<br>
+<p>Indexing and Search   </p>
+<br>
+<br>
+<br>
+<p>    import typesense</p>
+<br>
+<br>
+<br>
+<p>    client = typesense.Client({</p>
+<br>
+<p>        'nodes': [{'host': 'localhost', 'port': '8108', 'protocol': 'http'}],</p>
+<br>
+<p>        'api_key': 'xyz',</p>
+<br>
+<p>    })</p>
+<br>
+<br>
+<br>
+<p>    # Create collection (schema)</p>
+<br>
+<p>    client.collections.create({</p>
+<br>
+<p>        'name': 'articles',</p>
+<br>
+<p>        'fields': [</p>
+<br>
+<p>            {'name': 'title', 'type': 'string'},</p>
+<br>
+<p>            {'name': 'content', 'type': 'string'},</p>
+<br>
+<p>            {'name': 'tags', 'type': 'string[]', 'facet': True},</p>
+<br>
+<p>            {'name': 'views', 'type': 'int32'},</p>
+<br>
+<p>            {'name': 'published_at', 'type': 'int64'},</p>
+<br>
+<p>        ],</p>
+<br>
+<p>        'default_sorting_field': 'views'</p>
+<br>
+<p>    })</p>
+<br>
+<br>
+<br>
+<p>    # Index documents</p>
+<br>
+<p>    client.collections['articles'].documents.create({</p>
+<br>
+<p>        'id': '1',</p>
+<br>
+<p>        'title': 'Database Indexing Strategies',</p>
+<br>
+<p>        'content': 'A comprehensive guide...',</p>
+<br>
+<p>        'tags': ['database', 'performance'],</p>
+<br>
+<p>        'views': 1200,</p>
+<br>
+<p>        'published_at': 1715385600</p>
+<br>
+<p>    })</p>
+<br>
+<br>
+<br>
+<p>    # Search</p>
+<br>
+<p>    results = client.collections['articles'].documents.search({</p>
+<br>
+<p>        'q': 'database indexing',</p>
+<br>
+<p>        'query_by': 'title,content',</p>
+<br>
+<p>        'filter_by': 'views:>100',</p>
+<br>
+<p>        'sort_by': 'views:desc',</p>
+<br>
+<p>        'facet_by': 'tags',</p>
+<br>
+<p>        'per_page': 20</p>
+<br>
+<p>    })</p>
+<br>
+<br>
+<br>
+<br>
+<p>When to Use Which   </p>
+<p>| Scenario | Recommended | |----------|-------------| | Complex analytics with search | Elasticsearch | | Simple, fast search out of the box | Meilisearch | | Low-latency search on limited hardware | Typesense | | Log analysis and observability | Elasticsearch (ELK stack) | | E-commerce product search | Meilisearch or Typesense | | Geo-search and aggregations | Elasticsearch | | Typo-tolerant search for user-facing features | Meilisearch | | Large-scale (100M+ documents) | Elasticsearch |   </p>
+<p>Summary   </p>
 <p>Full-text search engines are essential for applications that need more than simple SQL LIKE queries. Elasticsearch offers the most features and scalability at the cost of operational complexity. Meilisearch provides the best developer experience with instant typo tolerance and sensible defaults. Typesense offers excellent performance with minimal resource usage. Choose based on your scale, feature requirements, and operational capacity: start with Meilisearch or Typesense for typical web applications and move to Elasticsearch when you need advanced analytics or larger scale.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

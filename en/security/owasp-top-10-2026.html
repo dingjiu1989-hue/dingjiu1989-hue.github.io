@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="owasp-top-10-2026">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="OWASP Top 10 2026">
+    <meta property="og:description" content="Analyzing the OWASP Top 10 2026 with new entries, mitigations, and modern testing approaches.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/owasp-top-10-2026.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="OWASP Top 10 2026">
+    <meta name="twitter:description" content="Analyzing the OWASP Top 10 2026 with new entries, mitigations, and modern testing approaches.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>OWASP Top 10 2026 — SourceHub</title>
+    <meta name="description" content="Analyzing the OWASP Top 10 2026 with new entries, mitigations, and modern testing approaches.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/owasp-top-10-2026.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/owasp-top-10-2026.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "OWASP Top 10 2026",
+      "description": "Analyzing the OWASP Top 10 2026 with new entries, mitigations, and modern testing approaches.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1067",
+      "keywords": "Security, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/owasp-top-10-2026.html"},
+      "articleBody": "OWASP Top 10 2026 OWASP Top 10 2026 Overview The OWASP Top 10 represents the most critical web application security risks. The 2026 edition introduces several new categories reflecting the evolving threat landscape. Updated Categories A01: Broken Access Control Access control failures remain the top risk. Modern applications must enforce server-side checks: // Server-side access control middleware function requireRole(...roles) { return (req, res, next) => { if (!req.user || !roles.includes(req.user.role)) { // Log the attempt securityLog.warn(\"Unauthorized access attempt\", { user: req.user?.id, path: req.path, ip: req.ip }); return res.status(403).json({ error: \"Insufficient permissions\" }); } next(); }; } // Usage app.get(\"/api/admin/users\", requireRole(\"admin\"), adminController.getUsers); A02: Cryptographic Failures Weak cryptography is increasingly exploited. Use modern algorithms: from cryptography.hazmat.primitives.ciphers.aead import AESGCM import os def encrypt_data(data, key): aesgcm = AESGCM(key) nonce = os.urandom(12) ciphertext = aesgcm.encrypt(nonce, data.encode(), None) return nonce + ciphertext def decrypt_data(encrypted, key): aesgcm = AESGCM(key) nonce = encrypted[:12] ciphertext = encrypted[12:] return aesgcm.decrypt(nonce, ciphertext, None).decode() A03: Injection Injection remains prevalent. Parameterized queries are mandatory: # Secure: Parameterized query def find_user(email): query = \"SELECT * FROM users WHERE email = $1\" return db.execute(query, [email]) # Also secure: ORM abstraction def find_user_safe(email): return User.query.filter_by(email=email).first() A04: Insecure Design A new emphasis on design-level flaws: threat_modeling_checklist: - Are trust boundaries defined? - Is there a data flow diagram? - Are failure modes handled? - Is there rate limiting on auth endpoints? - Are security controls centralized? A07: Identification and Authentication Failures Passwordless and MFA are now expected baselines: // WebAuthn registration async function registerPasskey(userId) { const credential = await navigator.credentials.create({ publicKey: { challenge: new Uint8Array(32), rp: { name: \"Example Corp\" }, user: { id: new TextEncoder().encode(userId), name: userId, displayName: userId }, pubKeyCredParams: [{ alg: -7, type: \"public-key\" }] } }); return credential; } A08: Software and Data Integrity Failures CI/CD pipeline security and supply chain attacks: # Supply chain security checks supply_chain_checks: - Verify package signatures - Scan dependencies for known vulnerabilities - Pin dependency versions - Use private registries for verified packages - Sign all releases with cosign Testing Approaches Modern testing combines automation and manual review: def security_test_suite(): results = [] # 1. Automated DAST results.extend(run_dast_scan(\"https://staging.example.com\")) # 2. SAST scan results.extend(run_sast_scan(\"./src\")) # 3. Dependency check results.extend(run_dependency_check(\"./package.json\")) # 4. API fuzzing results.extend(api_fuzz(\"https://staging.example.com/api\")) return analyze_results(results) Conclusion The OWASP Top 10 2026 reflects the maturing security landscape. Broken access control remains king, but supply chain security and design flaws have rightfully gained prominence. Adapt your testing approach to cover all categories and integrate security throughout the development lifecycle."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "OWASP Top 10 2026"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › OWASP Top 10 2026
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">OWASP Top 10 2026</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>OWASP Top 10 2026</h1>
+<br>
+<p>OWASP Top 10 2026 Overview   </p>
+<p>The OWASP Top 10 represents the most critical web application security risks. The 2026 edition introduces several new categories reflecting the evolving threat landscape.   </p>
+<p>Updated Categories   </p>
+<p>A01: Broken Access Control   </p>
+<p>Access control failures remain the top risk. Modern applications must enforce server-side checks:   </p>
+<br>
+<br>
+<br>
+<p>    // Server-side access control middleware</p>
+<br>
+<p>    function requireRole(...roles) {</p>
+<br>
+<p>      return (req, res, next) => {</p>
+<br>
+<p>        if (!req.user || !roles.includes(req.user.role)) {</p>
+<br>
+<p>          // Log the attempt</p>
+<br>
+<p>          securityLog.warn("Unauthorized access attempt", {</p>
+<br>
+<p>            user: req.user?.id,</p>
+<br>
+<p>            path: req.path,</p>
+<br>
+<p>            ip: req.ip</p>
+<br>
+<p>          });</p>
+<br>
+<p>          return res.status(403).json({ error: "Insufficient permissions" });</p>
+<br>
+<p>        }</p>
+<br>
+<p>        next();</p>
+<br>
+<p>      };</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<p>    // Usage</p>
+<br>
+<p>    app.get("/api/admin/users", requireRole("admin"), adminController.getUsers);</p>
+<br>
+<br>
+<br>
+<br>
+<p>A02: Cryptographic Failures   </p>
+<p>Weak cryptography is increasingly exploited. Use modern algorithms:   </p>
+<br>
+<br>
+<br>
+<p>    from cryptography.hazmat.primitives.ciphers.aead import AESGCM</p>
+<br>
+<p>    import os</p>
+<br>
+<br>
+<br>
+<p>    def encrypt_data(data, key):</p>
+<br>
+<p>        aesgcm = AESGCM(key)</p>
+<br>
+<p>        nonce = os.urandom(12)</p>
+<br>
+<p>        ciphertext = aesgcm.encrypt(nonce, data.encode(), None)</p>
+<br>
+<p>        return nonce + ciphertext</p>
+<br>
+<br>
+<br>
+<p>    def decrypt_data(encrypted, key):</p>
+<br>
+<p>        aesgcm = AESGCM(key)</p>
+<br>
+<p>        nonce = encrypted[:12]</p>
+<br>
+<p>        ciphertext = encrypted[12:]</p>
+<br>
+<p>        return aesgcm.decrypt(nonce, ciphertext, None).decode()</p>
+<br>
+<br>
+<br>
+<br>
+<p>A03: Injection   </p>
+<p>Injection remains prevalent. Parameterized queries are mandatory:   </p>
+<br>
+<br>
+<br>
+<p>    # Secure: Parameterized query</p>
+<br>
+<p>    def find_user(email):</p>
+<br>
+<p>        query = "SELECT * FROM users WHERE email = $1"</p>
+<br>
+<p>        return db.execute(query, [email])</p>
+<br>
+<br>
+<br>
+<p>    # Also secure: ORM abstraction</p>
+<br>
+<p>    def find_user_safe(email):</p>
+<br>
+<p>        return User.query.filter_by(email=email).first()</p>
+<br>
+<br>
+<br>
+<br>
+<p>A04: Insecure Design   </p>
+<p>A new emphasis on design-level flaws:   </p>
+<br>
+<br>
+<br>
+<p>    threat_modeling_checklist:</p>
+<br>
+<p>      - Are trust boundaries defined?</p>
+<br>
+<p>      - Is there a data flow diagram?</p>
+<br>
+<p>      - Are failure modes handled?</p>
+<br>
+<p>      - Is there rate limiting on auth endpoints?</p>
+<br>
+<p>      - Are security controls centralized?</p>
+<br>
+<br>
+<br>
+<br>
+<p>A07: Identification and Authentication Failures   </p>
+<p>Passwordless and MFA are now expected baselines:   </p>
+<br>
+<br>
+<br>
+<p>    // WebAuthn registration</p>
+<br>
+<p>    async function registerPasskey(userId) {</p>
+<br>
+<p>      const credential = await navigator.credentials.create({</p>
+<br>
+<p>        publicKey: {</p>
+<br>
+<p>          challenge: new Uint8Array(32),</p>
+<br>
+<p>          rp: { name: "Example Corp" },</p>
+<br>
+<p>          user: {</p>
+<br>
+<p>            id: new TextEncoder().encode(userId),</p>
+<br>
+<p>            name: userId,</p>
+<br>
+<p>            displayName: userId</p>
+<br>
+<p>          },</p>
+<br>
+<p>          pubKeyCredParams: [{ alg: -7, type: "public-key" }]</p>
+<br>
+<p>        }</p>
+<br>
+<p>      });</p>
+<br>
+<p>      return credential;</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<p>A08: Software and Data Integrity Failures   </p>
+<p>CI/CD pipeline security and supply chain attacks:   </p>
+<br>
+<br>
+<br>
+<p>    # Supply chain security checks</p>
+<br>
+<p>    supply_chain_checks:</p>
+<br>
+<p>      - Verify package signatures</p>
+<br>
+<p>      - Scan dependencies for known vulnerabilities</p>
+<br>
+<p>      - Pin dependency versions</p>
+<br>
+<p>      - Use private registries for verified packages</p>
+<br>
+<p>      - Sign all releases with cosign</p>
+<br>
+<br>
+<br>
+<br>
+<p>Testing Approaches   </p>
+<p>Modern testing combines automation and manual review:   </p>
+<br>
+<br>
+<br>
+<p>    def security_test_suite():</p>
+<br>
+<p>        results = []</p>
+<br>
+<br>
+<br>
+<p>        # 1. Automated DAST</p>
+<br>
+<p>        results.extend(run_dast_scan("https://staging.example.com"))</p>
+<br>
+<br>
+<br>
+<p>        # 2. SAST scan</p>
+<br>
+<p>        results.extend(run_sast_scan("./src"))</p>
+<br>
+<br>
+<br>
+<p>        # 3. Dependency check</p>
+<br>
+<p>        results.extend(run_dependency_check("./package.json"))</p>
+<br>
+<br>
+<br>
+<p>        # 4. API fuzzing</p>
+<br>
+<p>        results.extend(api_fuzz("https://staging.example.com/api"))</p>
+<br>
+<br>
+<br>
+<p>        return analyze_results(results)</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
+<p>The OWASP Top 10 2026 reflects the maturing security landscape. Broken access control remains king, but supply chain security and design flaws have rightfully gained prominence. Adapt your testing approach to cover all categories and integrate security throughout the development lifecycle.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

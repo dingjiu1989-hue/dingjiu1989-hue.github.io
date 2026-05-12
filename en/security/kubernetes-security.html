@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="kubernetes-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Kubernetes Security">
+    <meta property="og:description" content="Securing Kubernetes with RBAC, Pod Security Standards, network policies, and audit logging.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/kubernetes-security.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kubernetes Security">
+    <meta name="twitter:description" content="Securing Kubernetes with RBAC, Pod Security Standards, network policies, and audit logging.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Kubernetes Security — SourceHub</title>
+    <meta name="description" content="Securing Kubernetes with RBAC, Pod Security Standards, network policies, and audit logging.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/kubernetes-security.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/kubernetes-security.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Kubernetes Security",
+      "description": "Securing Kubernetes with RBAC, Pod Security Standards, network policies, and audit logging.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1301",
+      "keywords": "Security, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/kubernetes-security.html"},
+      "articleBody": "Kubernetes Security Kubernetes Security Challenges Kubernetes introduces a large attack surface: the API server, etcd, kubelets, and container runtime all need protection. RBAC Configuration Implement least-privilege RBAC: apiVersion: rbac.authorization.k8s.io/v1 kind: Role metadata: namespace: development name: pod-reader rules: - apiGroups: [\"\"] resources: [\"pods\", \"pods/log\"] verbs: [\"get\", \"watch\", \"list\"] --- apiVersion: rbac.authorization.k8s.io/v1 kind: RoleBinding metadata: namespace: development name: read-pods subjects: - kind: ServiceAccount name: developer-sa namespace: development roleRef: kind: Role name: pod-reader apiGroup: rbac.authorization.k8s.io ClusterRole for cluster-wide resources: apiVersion: rbac.authorization.k8s.io/v1 kind: ClusterRole metadata: name: metrics-reader rules: - nonResourceURLs: [\"/metrics\"] verbs: [\"get\"] Pod Security Standards Enforce Pod Security Standards with admission controllers: # Pod Security Admission apiVersion: pods-security.admission.config.k8s.io/v1 kind: PodSecurityConfiguration defaults: enforce: \"restricted\" enforce-version: \"latest\" audit: \"restricted\" audit-version: \"latest\" warn: \"restricted\" warn-version: \"latest\" exemptions: namespaces: [\"kube-system\", \"kube-public\"] # Pod Security Standards - Restricted level apiVersion: v1 kind: Pod metadata: name: secure-pod labels: pod-security.kubernetes.io/enforce: restricted spec: securityContext: runAsNonRoot: true seccompProfile: type: RuntimeDefault containers: - name: app image: myapp:latest securityContext: allowPrivilegeEscalation: false capabilities: drop: [\"ALL\"] readOnlyRootFilesystem: true runAsNonRoot: true runAsUser: 1000 Network Policies Isolate workloads with network policies: apiVersion: networking.k8s.io/v1 kind: NetworkPolicy metadata: name: api-network-policy namespace: production spec: podSelector: matchLabels: app: api policyTypes: - Ingress - Egress ingress: - from: - namespaceSelector: matchLabels: name: frontend ports: - protocol: TCP port: 8080 egress: - to: - podSelector: matchLabels: app: database ports: - protocol: TCP port: 5432 Audit Logging Enable and monitor audit logs: # audit-policy.yaml apiVersion: audit.k8s.io/v1 kind: Policy rules: - level: RequestResponse users: [\"system:admin\"] resources: - group: \"\" resources: [\"secrets\", \"configmaps\"] - level: Metadata verbs: [\"create\", \"delete\", \"patch\", \"update\"] - level: None users: [\"system:kube-proxy\"] verbs: [\"watch\"] - level: None requestSources: [\"controller\"] # Audit log analyzer import json from collections import Counter def analyze_audit_logs(log_lines): suspicious_activities = [] for line in log_lines: event = json.loads(line) # Detect secret access patterns if event.get(\"objectRef\", {}).get(\"resource\") == \"secrets\": if event.get(\"verb\") in [\"get\", \"list\"]: suspicious_activities.append({ \"type\": \"secret_access\", \"user\": event.get(\"user\", {}).get(\"username\"), \"count\": 1 }) # Detect RBAC changes if event.get(\"objectRef\", {}).get(\"apiGroup\") == \"rbac.authorization.k8s.io\": suspicious_activities.append({ \"type\": \"rbac_change\", \"user\": event.get(\"user\", {}).get(\"username\"), \"verb\": event.get(\"verb\") }) return Counter(str(a) for a in suspicious_activities) Conclusion Kubernetes security requires a layered approach. Lock down RBAC with least privilege, enforce Pod Security Standards, isolate workloads with network policies, and enable comprehensive audit logging. Use admission controllers to enforce policies at deploy time. Monitor audit logs for suspicious activity patterns."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Kubernetes Security"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Kubernetes Security
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Kubernetes Security</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Kubernetes Security</h1>
+<br>
+<p>Kubernetes Security Challenges   </p>
+<p>Kubernetes introduces a large attack surface: the API server, etcd, kubelets, and container runtime all need protection.   </p>
+<p>RBAC Configuration   </p>
+<p>Implement least-privilege RBAC:   </p>
+<br>
+<br>
+<br>
+<p>    apiVersion: rbac.authorization.k8s.io/v1</p>
+<br>
+<p>    kind: Role</p>
+<br>
+<p>    metadata:</p>
+<br>
+<p>      namespace: development</p>
+<br>
+<p>      name: pod-reader</p>
+<br>
+<p>    rules:</p>
+<br>
+<p>    - apiGroups: [""]</p>
+<br>
+<p>      resources: ["pods", "pods/log"]</p>
+<br>
+<p>      verbs: ["get", "watch", "list"]</p>
+<br>
+<p>    ---</p>
+<br>
+<p>    apiVersion: rbac.authorization.k8s.io/v1</p>
+<br>
+<p>    kind: RoleBinding</p>
+<br>
+<p>    metadata:</p>
+<br>
+<p>      namespace: development</p>
+<br>
+<p>      name: read-pods</p>
+<br>
+<p>    subjects:</p>
+<br>
+<p>    - kind: ServiceAccount</p>
+<br>
+<p>      name: developer-sa</p>
+<br>
+<p>      namespace: development</p>
+<br>
+<p>    roleRef:</p>
+<br>
+<p>      kind: Role</p>
+<br>
+<p>      name: pod-reader</p>
+<br>
+<p>      apiGroup: rbac.authorization.k8s.io</p>
+<br>
+<br>
+<br>
+<br>
+<p>ClusterRole for cluster-wide resources:   </p>
+<br>
+<br>
+<br>
+<p>    apiVersion: rbac.authorization.k8s.io/v1</p>
+<br>
+<p>    kind: ClusterRole</p>
+<br>
+<p>    metadata:</p>
+<br>
+<p>      name: metrics-reader</p>
+<br>
+<p>    rules:</p>
+<br>
+<p>    - nonResourceURLs: ["/metrics"]</p>
+<br>
+<p>      verbs: ["get"]</p>
+<br>
+<br>
+<br>
+<br>
+<p>Pod Security Standards   </p>
+<p>Enforce Pod Security Standards with admission controllers:   </p>
+<br>
+<br>
+<br>
+<p>    # Pod Security Admission</p>
+<br>
+<p>    apiVersion: pods-security.admission.config.k8s.io/v1</p>
+<br>
+<p>    kind: PodSecurityConfiguration</p>
+<br>
+<p>    defaults:</p>
+<br>
+<p>      enforce: "restricted"</p>
+<br>
+<p>      enforce-version: "latest"</p>
+<br>
+<p>      audit: "restricted"</p>
+<br>
+<p>      audit-version: "latest"</p>
+<br>
+<p>      warn: "restricted"</p>
+<br>
+<p>      warn-version: "latest"</p>
+<br>
+<p>    exemptions:</p>
+<br>
+<p>      namespaces: ["kube-system", "kube-public"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Pod Security Standards - Restricted level</p>
+<br>
+<p>    apiVersion: v1</p>
+<br>
+<p>    kind: Pod</p>
+<br>
+<p>    metadata:</p>
+<br>
+<p>      name: secure-pod</p>
+<br>
+<p>      labels:</p>
+<br>
+<p>        pod-security.kubernetes.io/enforce: restricted</p>
+<br>
+<p>    spec:</p>
+<br>
+<p>      securityContext:</p>
+<br>
+<p>        runAsNonRoot: true</p>
+<br>
+<p>        seccompProfile:</p>
+<br>
+<p>          type: RuntimeDefault</p>
+<br>
+<p>      containers:</p>
+<br>
+<p>      - name: app</p>
+<br>
+<p>        image: myapp:latest</p>
+<br>
+<p>        securityContext:</p>
+<br>
+<p>          allowPrivilegeEscalation: false</p>
+<br>
+<p>          capabilities:</p>
+<br>
+<p>            drop: ["ALL"]</p>
+<br>
+<p>          readOnlyRootFilesystem: true</p>
+<br>
+<p>          runAsNonRoot: true</p>
+<br>
+<p>          runAsUser: 1000</p>
+<br>
+<br>
+<br>
+<br>
+<p>Network Policies   </p>
+<p>Isolate workloads with network policies:   </p>
+<br>
+<br>
+<br>
+<p>    apiVersion: networking.k8s.io/v1</p>
+<br>
+<p>    kind: NetworkPolicy</p>
+<br>
+<p>    metadata:</p>
+<br>
+<p>      name: api-network-policy</p>
+<br>
+<p>      namespace: production</p>
+<br>
+<p>    spec:</p>
+<br>
+<p>      podSelector:</p>
+<br>
+<p>        matchLabels:</p>
+<br>
+<p>          app: api</p>
+<br>
+<p>      policyTypes:</p>
+<br>
+<p>      - Ingress</p>
+<br>
+<p>      - Egress</p>
+<br>
+<p>      ingress:</p>
+<br>
+<p>      - from:</p>
+<br>
+<p>        - namespaceSelector:</p>
+<br>
+<p>            matchLabels:</p>
+<br>
+<p>              name: frontend</p>
+<br>
+<p>        ports:</p>
+<br>
+<p>        - protocol: TCP</p>
+<br>
+<p>          port: 8080</p>
+<br>
+<p>      egress:</p>
+<br>
+<p>      - to:</p>
+<br>
+<p>        - podSelector:</p>
+<br>
+<p>            matchLabels:</p>
+<br>
+<p>              app: database</p>
+<br>
+<p>        ports:</p>
+<br>
+<p>        - protocol: TCP</p>
+<br>
+<p>          port: 5432</p>
+<br>
+<br>
+<br>
+<br>
+<p>Audit Logging   </p>
+<p>Enable and monitor audit logs:   </p>
+<br>
+<br>
+<br>
+<p>    # audit-policy.yaml</p>
+<br>
+<p>    apiVersion: audit.k8s.io/v1</p>
+<br>
+<p>    kind: Policy</p>
+<br>
+<p>    rules:</p>
+<br>
+<p>    - level: RequestResponse</p>
+<br>
+<p>      users: ["system:admin"]</p>
+<br>
+<p>      resources:</p>
+<br>
+<p>      - group: ""</p>
+<br>
+<p>        resources: ["secrets", "configmaps"]</p>
+<br>
+<br>
+<br>
+<p>    - level: Metadata</p>
+<br>
+<p>      verbs: ["create", "delete", "patch", "update"]</p>
+<br>
+<br>
+<br>
+<p>    - level: None</p>
+<br>
+<p>      users: ["system:kube-proxy"]</p>
+<br>
+<p>      verbs: ["watch"]</p>
+<br>
+<br>
+<br>
+<p>    - level: None</p>
+<br>
+<p>      requestSources: ["controller"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Audit log analyzer</p>
+<br>
+<p>    import json</p>
+<br>
+<p>    from collections import Counter</p>
+<br>
+<br>
+<br>
+<p>    def analyze_audit_logs(log_lines):</p>
+<br>
+<p>        suspicious_activities = []</p>
+<br>
+<br>
+<br>
+<p>        for line in log_lines:</p>
+<br>
+<p>            event = json.loads(line)</p>
+<br>
+<br>
+<br>
+<p>            # Detect secret access patterns</p>
+<br>
+<p>            if event.get("objectRef", {}).get("resource") == "secrets":</p>
+<br>
+<p>                if event.get("verb") in ["get", "list"]:</p>
+<br>
+<p>                    suspicious_activities.append({</p>
+<br>
+<p>                        "type": "secret_access",</p>
+<br>
+<p>                        "user": event.get("user", {}).get("username"),</p>
+<br>
+<p>                        "count": 1</p>
+<br>
+<p>                    })</p>
+<br>
+<br>
+<br>
+<p>            # Detect RBAC changes</p>
+<br>
+<p>            if event.get("objectRef", {}).get("apiGroup") == "rbac.authorization.k8s.io":</p>
+<br>
+<p>                suspicious_activities.append({</p>
+<br>
+<p>                    "type": "rbac_change",</p>
+<br>
+<p>                    "user": event.get("user", {}).get("username"),</p>
+<br>
+<p>                    "verb": event.get("verb")</p>
+<br>
+<p>                })</p>
+<br>
+<br>
+<br>
+<p>        return Counter(str(a) for a in suspicious_activities)</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
+<p>Kubernetes security requires a layered approach. Lock down RBAC with least privilege, enforce Pod Security Standards, isolate workloads with network policies, and enable comprehensive audit logging. Use admission controllers to enforce policies at deploy time. Monitor audit logs for suspicious activity patterns.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

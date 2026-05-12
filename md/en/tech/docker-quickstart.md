@@ -125,5 +125,3 @@ Create a simple Python app:
 ## Docker vs VM
 
 Containers share the host OS kernel, so they start in milliseconds and use minimal RAM. VMs each need their own OS, taking gigabytes. For most web apps, Docker is the clear winner.
-
-**See also:** [Python Tutorial: From Zero to Your First Program](</en/tech/python-tutorial.html>), [DevOps for Developers: CI/CD, Docker, IaC, and Monitoring — A Practical Guide](</en/tech/devops-for-developers.html>), [Kubernetes vs Docker Swarm vs Nomad (2026): Container Orchestration Compared](</en/compare/kubernetes-vs-docker-swarm-vs-nomad.html>).

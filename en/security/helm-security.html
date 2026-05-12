@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="helm-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Helm Security">
+    <meta property="og:description" content="Securing Helm deployments with chart signing, provenance verification, secrets management, and best practices.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/helm-security.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Helm Security">
+    <meta name="twitter:description" content="Securing Helm deployments with chart signing, provenance verification, secrets management, and best practices.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Helm Security — SourceHub</title>
+    <meta name="description" content="Securing Helm deployments with chart signing, provenance verification, secrets management, and best practices.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/helm-security.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/helm-security.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Helm Security",
+      "description": "Securing Helm deployments with chart signing, provenance verification, secrets management, and best practices.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1131",
+      "keywords": "Security, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/helm-security.html"},
+      "articleBody": "Helm Security Helm Security Challenges Helm simplifies Kubernetes deployments but introduces security concerns: untrusted charts, unprotected secrets, and supply chain risks. Chart Signing Sign charts with GPG to verify authenticity: # Generate signing key gpg --full-generate-key gpg --list-secret-keys # Sign a chart helm package mychart/ helm sign mychart-1.0.0.tgz --key \"developer@example.com\" # Verify a chart helm verify mychart-1.0.0.tgz # With custom public key gpg --export developer@example.com > pubkey.asc helm verify mychart-1.0.0.tgz --keyring pubkey.asc Provenance Files Provenance files contain the chart hash and signature: # mychart-1.0.0.tgz.prov apiVersion: v1 files: - mychart-1.0.0.tgz chart: | sha256: a1b2c3d4... signature: | -----BEGIN PGP SIGNATURE----- iQEzBAABCAAdFiEE... -----END PGP SIGNATURE----- Automated Verification in CI # CI pipeline chart verification pipeline: - name: verify-charts commands: # Import trusted keys - gpg --import trusted-keys.asc # Verify all charts - for chart in charts/*.tgz; do helm verify \"$chart\" --keyring trusted-keys.asc || exit 1 done # Scan for vulnerabilities - trivy fs charts/ # Lint charts - helm lint charts/* # Check for deprecated APIs - pluto detect-files -d charts/ Secrets Management Never store secrets in values files: # BAD: Secrets in values apiKey: \"sk-1234567890\" dbPassword: \"password123\" # GOOD: Reference external secret apiKey: \"{{ .Values.externalSecrets.apiKey }}\" dbPassword: \"{{ .Values.externalSecrets.dbPassword }}\" Use external secrets operator: apiVersion: external-secrets.io/v1beta1 kind: ExternalSecret metadata: name: app-secrets spec: refreshInterval: 1h secretStoreRef: name: vault-backend kind: ClusterSecretStore target: name: app-secret data: - secretKey: api-key remoteRef: key: secret/data/app property: api-key - secretKey: db-password remoteRef: key: secret/data/app property: db-password Values Security Validate values with JSON Schema: { \"$schema\": \"https://json-schema.org/draft-07/schema\", \"type\": \"object\", \"properties\": { \"image\": { \"type\": \"object\", \"properties\": { \"repository\": { \"type\": \"string\" }, \"tag\": { \"type\": \"string\", \"pattern\": \"^[a-zA-Z0-9._-]+$\" }, \"pullPolicy\": { \"type\": \"string\", \"enum\": [\"Always\", \"IfNotPresent\", \"Never\"] } }, \"required\": [\"repository\"] }, \"securityContext\": { \"type\": \"object\", \"required\": [\"runAsNonRoot\"], \"properties\": { \"runAsNonRoot\": { \"type\": \"boolean\", \"const\": true }, \"runAsUser\": { \"type\": \"integer\", \"minimum\": 1000 } } } } } RBAC for Helm Operations apiVersion: rbac.authorization.k8s.io/v1 kind: Role metadata: name: helm-deployer rules: - apiGroups: [\"apps\", \"extensions\"] resources: [\"deployments\", \"statefulsets\"] verbs: [\"get\", \"list\", \"create\", \"update\", \"patch\"] - apiGroups: [\"\"] resources: [\"secrets\", \"configmaps\"] verbs: [\"get\", \"list\", \"create\"] - apiGroups: [\"batch\"] resources: [\"jobs\"] verbs: [\"get\", \"create\", \"delete\"] Conclusion Secure Helm deployments with chart signing and provenance verification. Use external secrets management instead of storing secrets in values files. Validate values with JSON Schema. Restrict Helm RBAC to specific operations. Scan charts for vulnerabilities before deployment. Always verify chart signatures from third-party repositories."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Helm Security"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Helm Security
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Helm Security</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Helm Security</h1>
+<br>
+<p>Helm Security Challenges   </p>
+<p>Helm simplifies Kubernetes deployments but introduces security concerns: untrusted charts, unprotected secrets, and supply chain risks.   </p>
+<p>Chart Signing   </p>
+<p>Sign charts with GPG to verify authenticity:   </p>
+<br>
+<br>
+<br>
+<p>    # Generate signing key</p>
+<br>
+<p>    gpg --full-generate-key</p>
+<br>
+<p>    gpg --list-secret-keys</p>
+<br>
+<br>
+<br>
+<p>    # Sign a chart</p>
+<br>
+<p>    helm package mychart/</p>
+<br>
+<p>    helm sign mychart-1.0.0.tgz --key "developer@example.com"</p>
+<br>
+<br>
+<br>
+<p>    # Verify a chart</p>
+<br>
+<p>    helm verify mychart-1.0.0.tgz</p>
+<br>
+<br>
+<br>
+<p>    # With custom public key</p>
+<br>
+<p>    gpg --export developer@example.com > pubkey.asc</p>
+<br>
+<p>    helm verify mychart-1.0.0.tgz --keyring pubkey.asc</p>
+<br>
+<br>
+<br>
+<br>
+<p>Provenance Files   </p>
+<p>Provenance files contain the chart hash and signature:   </p>
+<br>
+<br>
+<br>
+<p>    # mychart-1.0.0.tgz.prov</p>
+<br>
+<p>    apiVersion: v1</p>
+<br>
+<p>    files:</p>
+<br>
+<p>      - mychart-1.0.0.tgz</p>
+<br>
+<p>    chart: |</p>
+<br>
+<p>      sha256: a1b2c3d4...</p>
+<br>
+<p>    signature: |</p>
+<br>
+<p>      -----BEGIN PGP SIGNATURE-----</p>
+<br>
+<p>      iQEzBAABCAAdFiEE...</p>
+<br>
+<p>      -----END PGP SIGNATURE-----</p>
+<br>
+<br>
+<br>
+<br>
+<p>Automated Verification in CI   </p>
+<br>
+<br>
+<br>
+<p>    # CI pipeline chart verification</p>
+<br>
+<p>    pipeline:</p>
+<br>
+<p>      - name: verify-charts</p>
+<br>
+<p>        commands:</p>
+<br>
+<p>          # Import trusted keys</p>
+<br>
+<p>          - gpg --import trusted-keys.asc</p>
+<br>
+<br>
+<br>
+<p>          # Verify all charts</p>
+<br>
+<p>          - for chart in charts/*.tgz; do</p>
+<br>
+<p>              helm verify "$chart" --keyring trusted-keys.asc || exit 1</p>
+<br>
+<p>            done</p>
+<br>
+<br>
+<br>
+<p>          # Scan for vulnerabilities</p>
+<br>
+<p>          - trivy fs charts/</p>
+<br>
+<br>
+<br>
+<p>          # Lint charts</p>
+<br>
+<p>          - helm lint charts/*</p>
+<br>
+<br>
+<br>
+<p>          # Check for deprecated APIs</p>
+<br>
+<p>          - pluto detect-files -d charts/</p>
+<br>
+<br>
+<br>
+<br>
+<p>Secrets Management   </p>
+<p>Never store secrets in values files:   </p>
+<br>
+<br>
+<br>
+<p>    # BAD: Secrets in values</p>
+<br>
+<p>    apiKey: "sk-1234567890"</p>
+<br>
+<p>    dbPassword: "password123"</p>
+<br>
+<br>
+<br>
+<p>    # GOOD: Reference external secret</p>
+<br>
+<p>    apiKey: "{{ .Values.externalSecrets.apiKey }}"</p>
+<br>
+<p>    dbPassword: "{{ .Values.externalSecrets.dbPassword }}"</p>
+<br>
+<br>
+<br>
+<br>
+<p>Use external secrets operator:   </p>
+<br>
+<br>
+<br>
+<p>    apiVersion: external-secrets.io/v1beta1</p>
+<br>
+<p>    kind: ExternalSecret</p>
+<br>
+<p>    metadata:</p>
+<br>
+<p>      name: app-secrets</p>
+<br>
+<p>    spec:</p>
+<br>
+<p>      refreshInterval: 1h</p>
+<br>
+<p>      secretStoreRef:</p>
+<br>
+<p>        name: vault-backend</p>
+<br>
+<p>        kind: ClusterSecretStore</p>
+<br>
+<p>      target:</p>
+<br>
+<p>        name: app-secret</p>
+<br>
+<p>      data:</p>
+<br>
+<p>      - secretKey: api-key</p>
+<br>
+<p>        remoteRef:</p>
+<br>
+<p>          key: secret/data/app</p>
+<br>
+<p>          property: api-key</p>
+<br>
+<p>      - secretKey: db-password</p>
+<br>
+<p>        remoteRef:</p>
+<br>
+<p>          key: secret/data/app</p>
+<br>
+<p>          property: db-password</p>
+<br>
+<br>
+<br>
+<br>
+<p>Values Security   </p>
+<p>Validate values with JSON Schema:   </p>
+<br>
+<br>
+<br>
+<p>    {</p>
+<br>
+<p>      "$schema": "https://json-schema.org/draft-07/schema",</p>
+<br>
+<p>      "type": "object",</p>
+<br>
+<p>      "properties": {</p>
+<br>
+<p>        "image": {</p>
+<br>
+<p>          "type": "object",</p>
+<br>
+<p>          "properties": {</p>
+<br>
+<p>            "repository": { "type": "string" },</p>
+<br>
+<p>            "tag": { "type": "string", "pattern": "^[a-zA-Z0-9._-]+$" },</p>
+<br>
+<p>            "pullPolicy": { </p>
+<br>
+<p>              "type": "string",</p>
+<br>
+<p>              "enum": ["Always", "IfNotPresent", "Never"]</p>
+<br>
+<p>            }</p>
+<br>
+<p>          },</p>
+<br>
+<p>          "required": ["repository"]</p>
+<br>
+<p>        },</p>
+<br>
+<p>        "securityContext": {</p>
+<br>
+<p>          "type": "object",</p>
+<br>
+<p>          "required": ["runAsNonRoot"],</p>
+<br>
+<p>          "properties": {</p>
+<br>
+<p>            "runAsNonRoot": { "type": "boolean", "const": true },</p>
+<br>
+<p>            "runAsUser": { "type": "integer", "minimum": 1000 }</p>
+<br>
+<p>          }</p>
+<br>
+<p>        }</p>
+<br>
+<p>      }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<p>RBAC for Helm Operations   </p>
+<br>
+<br>
+<br>
+<p>    apiVersion: rbac.authorization.k8s.io/v1</p>
+<br>
+<p>    kind: Role</p>
+<br>
+<p>    metadata:</p>
+<br>
+<p>      name: helm-deployer</p>
+<br>
+<p>    rules:</p>
+<br>
+<p>    - apiGroups: ["apps", "extensions"]</p>
+<br>
+<p>      resources: ["deployments", "statefulsets"]</p>
+<br>
+<p>      verbs: ["get", "list", "create", "update", "patch"]</p>
+<br>
+<p>    - apiGroups: [""]</p>
+<br>
+<p>      resources: ["secrets", "configmaps"]</p>
+<br>
+<p>      verbs: ["get", "list", "create"]</p>
+<br>
+<p>    - apiGroups: ["batch"]</p>
+<br>
+<p>      resources: ["jobs"]</p>
+<br>
+<p>      verbs: ["get", "create", "delete"]</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
+<p>Secure Helm deployments with chart signing and provenance verification. Use external secrets management instead of storing secrets in values files. Validate values with JSON Schema. Restrict Helm RBAC to specific operations. Scan charts for vulnerabilities before deployment. Always verify chart signatures from third-party repositories.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

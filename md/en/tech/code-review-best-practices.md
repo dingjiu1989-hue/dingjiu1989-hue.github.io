@@ -83,5 +83,3 @@ Reviewing without context| Misses architectural problems| Include design doc lin
 Track these metrics (but never use them for performance reviews — they gamify easily): **Time to first review** (target: < 4 business hours), **Time to merge** (target: < 24 hours), **PR size** (median < 300 lines), **Review depth** (comments per PR, 3+ is healthy). Tools like LinearB, CodeClimate Velocity, and GitHub's built-in insights can track these.
 
 Great code review is a skill that compounds. Every thoughtful review makes the next one easier because the team converges on shared standards. Start with one habit from this guide — small PRs or blocking/non-blocking prefixes — and build from there.
-
-**See also:** [Advanced Prompt Engineering: Techniques That Actually Work for Developers](</en/ai/prompt-engineering-advanced.html>), [How to Build and Sell VS Code Extensions: A Developer's Guide to Recurring Revenue](</en/sidehustle/sell-vscode-extensions.html>), [Best Code Review Tools 2026: GitHub, GitLab, Graphite, Reviewable Compared](</en/tools/best-code-review-tools.html>).

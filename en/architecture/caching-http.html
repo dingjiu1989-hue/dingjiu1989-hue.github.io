@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="caching-http">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="HTTP Caching Architecture">
+    <meta property="og:description" content="Cache-Control, ETags, CDN caching, stale-while-revalidate, and cache invalidation strategies">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/caching-http.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HTTP Caching Architecture">
+    <meta name="twitter:description" content="Cache-Control, ETags, CDN caching, stale-while-revalidate, and cache invalidation strategies">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>HTTP Caching Architecture — SourceHub</title>
+    <meta name="description" content="Cache-Control, ETags, CDN caching, stale-while-revalidate, and cache invalidation strategies">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/caching-http.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/caching-http.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "HTTP Caching Architecture",
+      "description": "Cache-Control, ETags, CDN caching, stale-while-revalidate, and cache invalidation strategies",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1075",
+      "keywords": "Architecture, System Design, Backend",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/caching-http.html"},
+      "articleBody": "HTTP Caching Architecture HTTP caching is the most cost-effective performance optimization available. A single cache hit eliminates an entire request path through the network, load balancers, application servers, and databases. The HTTP specification provides a comprehensive caching framework through headers, validation mechanisms, and extension directives. Understanding and applying these correctly is essential for building performant web systems. Cache-Control headers are the primary mechanism for controlling HTTP caching behavior. The max-age directive specifies the maximum time in seconds that a response can be cached. The s-maxage directive overrides max-age for shared caches (CDNs, reverse proxies). The private directive limits caching to the browser (no shared caching). The public directive allows any cache, including shared ones. The no-cache directive requires revalidation with the origin server before serving from cache. The no-store directive prevents any caching. ETags provide cache validation. An ETag is a unique identifier for a specific version of a resource. When a client has a cached response with an ETag, it sends If-None-Match with that ETag on subsequent requests. If the resource has not changed, the server returns 304 Not Modified with an empty body. This saves bandwidth even when the cached response needs revalidation. Strong ETags change when the content changes. Weak ETags (prefixed with W/) change when the semantic meaning changes but not necessarily the byte representation. Conditional requests with If-Modified-Since and If-None-Match provide similar validation. Last-Modified headers provide a timestamp that the client can use with If-Modified-Since. However, timestamps are less reliable than ETags \u2014 they have second-level granularity, can be inconsistent across servers, and do not detect changes that occur within the same second. ETags are preferred for accuracy; Last-Modified serves as a fallback. The stale-while-revalidate directive enables serving stale content while asynchronously fetching fresh content. When a cache has a response with max-age=3600 and stale-while-revalidate=86400, for the first hour the fresh content is served. For the next 24 hours, stale content is served while the cache fetches fresh content in the background. This dramatically improves perceived latency \u2014 users never wait for cache misses. The stale-if-error extension provides stale content when the origin server is unavailable. CDN caching adds a distributed layer between users and the origin server. CDNs cache responses at edge locations geographically close to users. Cache-Control headers control what the CDN caches and for how long. The CDN respects Cache-Control directives but may override them with CDN-specific settings. CDN cache behavior should be tested \u2014 some CDNs ignore private headers on authenticated responses, accidentally caching user-specific content. Cache invalidation strategies must handle dynamic content. Purge-based invalidation explicitly removes cached content by URL or tag. The CDN API provides purge endpoints for targeted invalidation. Tag-based invalidation associates cache entries with tags and purges all entries with a given tag. For example, all product page entries carry a \"product:123\" tag, and updating product 123 triggers a tag-based purge. Pattern-based invalidation uses URL patterns \u2014 /api/products/* purges all product API responses. Surrogate keys (cache tags) extend cache invalidation for dynamic content. The origin server includes a Surrogate-Key header with space-separated tags. The CDN associates each cached response with these tags. When the origin sends a PURGE request with a tag, all responses with that tag are invalidated. This enables fine-grained invalidation \u2014 updating a product's price invalidates only the affected product pages, not the entire product catalog cache. Cache hierarchies combine browser cache, CDN cache, and origin cache. Browser cache serves the fastest response (zero network latency) but has limited capacity and no sharing. CDN cache serves regional users with low latency and shares across users. Origin cache (Redis, Memcached) serves as the application-level cache, reducing database load. Each layer is a potential cache hit that eliminates the need to go deeper. The Cache-Control headers should account for the full hierarchy. Versioned URLs eliminate the need for cache invalidation for static assets. By including a content hash in the URL (styles.a3b4c5.css, app.6d7e8f.js), each version of the asset has a unique URL. These assets can be cached with max-age=31536000 (one year) because the URL changes when the content changes. This is the most reliable caching strategy \u2014 CDN cost is minimized, and cache invalidation is automatic. Cache hit ratio is the primary metric. Monitor cache hit ratio at each layer: browser cache, CDN cache, origin cache. A low CDN cache hit ratio indicates responses that are not cacheable or have short TTLs. A low origin cache hit ratio indicates application-level caching issues. The aggregate cache hit ratio across all layers represents the fraction of requests that never reach the origin server, directly translating to infrastructure cost savings and latency reduction."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "HTTP Caching Architecture"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › HTTP Caching Architecture
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">HTTP Caching Architecture</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>HTTP Caching Architecture</h1>
+<br>
+<p>HTTP caching is the most cost-effective performance optimization available. A single cache hit eliminates an entire request path through the network, load balancers, application servers, and databases. The HTTP specification provides a comprehensive caching framework through headers, validation mechanisms, and extension directives. Understanding and applying these correctly is essential for building performant web systems.   </p>
+<p>Cache-Control headers are the primary mechanism for controlling HTTP caching behavior. The max-age directive specifies the maximum time in seconds that a response can be cached. The s-maxage directive overrides max-age for shared caches (CDNs, reverse proxies). The private directive limits caching to the browser (no shared caching). The public directive allows any cache, including shared ones. The no-cache directive requires revalidation with the origin server before serving from cache. The no-store directive prevents any caching.   </p>
+<p>ETags provide cache validation. An ETag is a unique identifier for a specific version of a resource. When a client has a cached response with an ETag, it sends If-None-Match with that ETag on subsequent requests. If the resource has not changed, the server returns 304 Not Modified with an empty body. This saves bandwidth even when the cached response needs revalidation. Strong ETags change when the content changes. Weak ETags (prefixed with W/) change when the semantic meaning changes but not necessarily the byte representation.   </p>
+<p>Conditional requests with If-Modified-Since and If-None-Match provide similar validation. Last-Modified headers provide a timestamp that the client can use with If-Modified-Since. However, timestamps are less reliable than ETags — they have second-level granularity, can be inconsistent across servers, and do not detect changes that occur within the same second. ETags are preferred for accuracy; Last-Modified serves as a fallback.   </p>
+<p>The stale-while-revalidate directive enables serving stale content while asynchronously fetching fresh content. When a cache has a response with max-age=3600 and stale-while-revalidate=86400, for the first hour the fresh content is served. For the next 24 hours, stale content is served while the cache fetches fresh content in the background. This dramatically improves perceived latency — users never wait for cache misses. The stale-if-error extension provides stale content when the origin server is unavailable.   </p>
+<p>CDN caching adds a distributed layer between users and the origin server. CDNs cache responses at edge locations geographically close to users. Cache-Control headers control what the CDN caches and for how long. The CDN respects Cache-Control directives but may override them with CDN-specific settings. CDN cache behavior should be tested — some CDNs ignore private headers on authenticated responses, accidentally caching user-specific content.   </p>
+<p>Cache invalidation strategies must handle dynamic content. Purge-based invalidation explicitly removes cached content by URL or tag. The CDN API provides purge endpoints for targeted invalidation. Tag-based invalidation associates cache entries with tags and purges all entries with a given tag. For example, all product page entries carry a "product:123" tag, and updating product 123 triggers a tag-based purge. Pattern-based invalidation uses URL patterns — /api/products/* purges all product API responses.   </p>
+<p>Surrogate keys (cache tags) extend cache invalidation for dynamic content. The origin server includes a Surrogate-Key header with space-separated tags. The CDN associates each cached response with these tags. When the origin sends a PURGE request with a tag, all responses with that tag are invalidated. This enables fine-grained invalidation — updating a product's price invalidates only the affected product pages, not the entire product catalog cache.   </p>
+<p>Cache hierarchies combine browser cache, CDN cache, and origin cache. Browser cache serves the fastest response (zero network latency) but has limited capacity and no sharing. CDN cache serves regional users with low latency and shares across users. Origin cache (Redis, Memcached) serves as the application-level cache, reducing database load. Each layer is a potential cache hit that eliminates the need to go deeper. The Cache-Control headers should account for the full hierarchy.   </p>
+<p>Versioned URLs eliminate the need for cache invalidation for static assets. By including a content hash in the URL (styles.a3b4c5.css, app.6d7e8f.js), each version of the asset has a unique URL. These assets can be cached with max-age=31536000 (one year) because the URL changes when the content changes. This is the most reliable caching strategy — CDN cost is minimized, and cache invalidation is automatic.   </p>
+<p>Cache hit ratio is the primary metric. Monitor cache hit ratio at each layer: browser cache, CDN cache, origin cache. A low CDN cache hit ratio indicates responses that are not cacheable or have short TTLs. A low origin cache hit ratio indicates application-level caching issues. The aggregate cache hit ratio across all layers represents the fraction of requests that never reach the origin server, directly translating to infrastructure cost savings and latency reduction.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

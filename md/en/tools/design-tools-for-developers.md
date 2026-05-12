@@ -71,5 +71,3 @@ See our [Best Free Stock Photo Sites](</en/sidehustle/free-images/>) guide for t
 
 
 You can build a SaaS landing page, portfolio site, or product UI with just these five tools. No design background needed.
-
-**See also:** [Selling UI Kits, Icons, and Design Assets as a Developer in 2026](</en/sidehustle/sell-ui-kits-design-assets.html>), [Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More](</en/tools/best-free-dev-tools-2026.html>), [Figma vs Canva vs Penpot (2026): Best Design Tool for Developers](</en/compare/figma-vs-canva-vs-penpot.html>).

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="database-index-types">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="B-Tree, Hash, GiST, GIN: Index Type Selection Guide">
+    <meta property="og:description" content="Choose the right database index type: B-Tree for general use, Hash for equality, GiST/GIN for full-text and JSON.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/database-index-types.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="B-Tree, Hash, GiST, GIN: Index Type Selection Guide">
+    <meta name="twitter:description" content="Choose the right database index type: B-Tree for general use, Hash for equality, GiST/GIN for full-text and JSON.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>B-Tree, Hash, GiST, GIN: Index Type Selection Guide — SourceHub</title>
+    <meta name="description" content="Choose the right database index type: B-Tree for general use, Hash for equality, GiST/GIN for full-text and JSON.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/database-index-types.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/database-index-types.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "B-Tree, Hash, GiST, GIN: Index Type Selection Guide",
+      "description": "Choose the right database index type: B-Tree for general use, Hash for equality, GiST/GIN for full-text and JSON.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "653",
+      "keywords": "Database, Backend, Data",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-index-types.html"},
+      "articleBody": "B-Tree, Hash, GiST, GIN: Index Type Selection Guide Database indexes accelerate queries by providing fast lookup paths. Different index types optimize for different query patterns. Choosing the wrong index type wastes storage and may not improve query performance. B-Tree Indexes B-Tree is the default and most versatile index type. It supports equality, range, sorting, and pattern matching queries. B-Tree indexes organize data in a balanced tree structure where leaf nodes contain sorted data values. Use B-Tree for: primary key lookups, range queries (>, Performance characteristics: O(log n) lookup time. Insert and delete cost O(log n) with page splits. B-Tree is the best general-purpose index and should be your default choice. Hash Indexes Hash indexes support only equality lookups (=, IN). They compute a hash of the index key and store the hash value. Hash indexes are smaller than B-Tree for the same data because they store fixed-length hash values. Use Hash indexes for: exact-match lookups where range queries are never needed. Hash indexes perform best when indexed values are large (long strings) where hash comparisons are faster than value comparisons. PostgreSQL's hash indexes are now WAL-logged and crash-safe (since PostgreSQL 10). They were historically discouraged but are production-ready in modern versions. Benchmark B-Tree vs Hash for your specific workload before choosing. GiST Indexes GiST (Generalized Search Tree) supports complex data types: geometric data, full-text search, range types, and nearest-neighbor searches. GiST is an extensible index framework\u2014different operators provide different capabilities. Use GiST for: geospatial queries with PostGIS, range type overlap (&& operator), full-text ranking and ordering, nearest-neighbor (ORDER BY val target). GiST indexes handle queries that B-Tree cannot express. Trade-offs: GiST indexes are larger than B-Tree and slower to build. Query performance varies by operator class. GiST has higher write overhead. GIN Indexes GIN (Generalized Inverted Index) is designed for composite values: arrays, JSONB, full-text vectors. GIN stores mappings from component values to rows containing them. Use GIN for: JSONB queries (? and @> operators), array containment (array @> value), full-text search (tsvector @@ tsquery), trigram similarity (pg_trgm extension). GIN excels at searching within composite data. GIN indexes have fast query speed but slow writes. Use fastupdate setting for write-heavy workloads\u2014it buffers index entries and bulk-inserts them. GIN indexes are significantly larger than B-Tree. Choosing Start with B-Tree. If B-Tree does not support your query type, evaluate GiST or GIN based on your data type. Hash indexes are rarely needed\u2014B-Tree handles equality queries well and supports more operations. Test index types with your actual data and query patterns."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "B-Tree, Hash, GiST, GIN: Index Type Selection Guide"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › B-Tree, Hash, GiST, GIN: Index Type Selection Guide
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Data</span></div>
+      <h1 class="article-title">B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h1>
+<p>Database indexes accelerate queries by providing fast lookup paths. Different index types optimize for different query patterns. Choosing the wrong index type wastes storage and may not improve query performance.</p>
+<br>
+<h2> B-Tree Indexes</h2>
+<br>
+<p>B-Tree is the default and most versatile index type. It supports equality, range, sorting, and pattern matching queries. B-Tree indexes organize data in a balanced tree structure where leaf nodes contain sorted data values.</p>
+<br>
+<p>Use B-Tree for: primary key lookups, range queries (>, <, BETWEEN), ORDER BY sorting, prefix matching (LIKE 'abc%'). B-Tree is optimal when queries filter by comparison operators or require sorted output.</p>
+<br>
+<p>Performance characteristics: O(log n) lookup time. Insert and delete cost O(log n) with page splits. B-Tree is the best general-purpose index and should be your default choice.</p>
+<br>
+<h2> Hash Indexes</h2>
+<br>
+<p>Hash indexes support only equality lookups (=, IN). They compute a hash of the index key and store the hash value. Hash indexes are smaller than B-Tree for the same data because they store fixed-length hash values.</p>
+<br>
+<p>Use Hash indexes for: exact-match lookups where range queries are never needed. Hash indexes perform best when indexed values are large (long strings) where hash comparisons are faster than value comparisons.</p>
+<br>
+<p>PostgreSQL's hash indexes are now WAL-logged and crash-safe (since PostgreSQL 10). They were historically discouraged but are production-ready in modern versions. Benchmark B-Tree vs Hash for your specific workload before choosing.</p>
+<br>
+<h2> GiST Indexes</h2>
+<br>
+<p>GiST (Generalized Search Tree) supports complex data types: geometric data, full-text search, range types, and nearest-neighbor searches. GiST is an extensible index framework—different operators provide different capabilities.</p>
+<br>
+<p>Use GiST for: geospatial queries with PostGIS, range type overlap (&& operator), full-text ranking and ordering, nearest-neighbor (ORDER BY val <-> target). GiST indexes handle queries that B-Tree cannot express.</p>
+<br>
+<p>Trade-offs: GiST indexes are larger than B-Tree and slower to build. Query performance varies by operator class. GiST has higher write overhead.</p>
+<br>
+<h2> GIN Indexes</h2>
+<br>
+<p>GIN (Generalized Inverted Index) is designed for composite values: arrays, JSONB, full-text vectors. GIN stores mappings from component values to rows containing them.</p>
+<br>
+<p>Use GIN for: JSONB queries (? and @> operators), array containment (array @> value), full-text search (tsvector @@ tsquery), trigram similarity (pg_trgm extension). GIN excels at searching within composite data.</p>
+<br>
+<p>GIN indexes have fast query speed but slow writes. Use fastupdate setting for write-heavy workloads—it buffers index entries and bulk-inserts them. GIN indexes are significantly larger than B-Tree.</p>
+<br>
+<h2> Choosing</h2>
+<br>
+<p>Start with B-Tree. If B-Tree does not support your query type, evaluate GiST or GIN based on your data type. Hash indexes are rarely needed—B-Tree handles equality queries well and supports more operations. Test index types with your actual data and query patterns.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

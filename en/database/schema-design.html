@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="schema-design">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Schema Design Patterns: Normalization, Denormalization, Naming Conventions">
+    <meta property="og:description" content="Explore database schema design patterns: normalization vs denormalization, naming conventions, timestamp handling, and practical schema design for production applications.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/schema-design.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Schema Design Patterns: Normalization, Denormalization, Naming Conventions">
+    <meta name="twitter:description" content="Explore database schema design patterns: normalization vs denormalization, naming conventions, timestamp handling, and practical schema design for production applications.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Schema Design Patterns: Normalization, Denormalization, Naming Conventions — SourceHub</title>
+    <meta name="description" content="Explore database schema design patterns: normalization vs denormalization, naming conventions, timestamp handling, and practical schema design for production applications.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/schema-design.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/schema-design.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Schema Design Patterns: Normalization, Denormalization, Naming Conventions",
+      "description": "Explore database schema design patterns: normalization vs denormalization, naming conventions, timestamp handling, and practical schema design for production applications.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1845",
+      "keywords": "Database, Backend, Data",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/schema-design.html"},
+      "articleBody": "Schema Design Patterns: Normalization, Denormalization, Naming Conventions Schema Design Patterns: Normalization, Denormalization, Naming Conventions Schema design is the foundation of application performance and maintainability. Good schemas are intuitive, performant, and resilient to change. This article covers normalization trade-offs, denormalization strategies, and practical naming conventions. Normalization Normalization eliminates data redundancy through a series of normal forms. Most production schemas aim for Third Normal Form (3NF). First Normal Form (1NF) Each column contains atomic values. No repeating groups or arrays. -- Violates 1NF: multi-valued column CREATE TABLE orders ( id INTEGER PRIMARY KEY, product_ids TEXT -- '1,2,3' as comma-separated values ); -- 1NF compliant: separate rows per product CREATE TABLE order_items ( order_id INTEGER REFERENCES orders(id), product_id INTEGER REFERENCES products(id), quantity INTEGER NOT NULL, PRIMARY KEY (order_id, product_id) ); Second Normal Form (2NF) 1NF + every non-key column depends on the whole primary key (relevant for composite keys): -- Violates 2NF: product_name depends only on product_id, not on order_id CREATE TABLE order_items ( order_id INTEGER, product_id INTEGER, product_name TEXT, -- depends on product_id only quantity INTEGER, PRIMARY KEY (order_id, product_id) ); -- 2NF compliant: product_name moved to products table CREATE TABLE products (id INTEGER PRIMARY KEY, name TEXT); Third Normal Form (3NF) 2NF + no transitive dependencies (non-key columns depend only on the primary key): -- Violates 3NF: category_name depends on category_id, not on order_id CREATE TABLE products ( id INTEGER PRIMARY KEY, name TEXT, category_id INTEGER, category_name TEXT -- transitively depends on category_id ); -- 3NF compliant CREATE TABLE categories (id INTEGER PRIMARY KEY, name TEXT); CREATE TABLE products (id INTEGER PRIMARY KEY, name TEXT, category_id INTEGER); Denormalization Denormalization intentionally adds redundancy for performance. Use it judiciously. Read-Optimized Denormalization -- Normalized form SELECT COUNT(*) FROM orders WHERE user_id = 42; -- Denormalized: add order_count to users table ALTER TABLE users ADD COLUMN order_count INTEGER DEFAULT 0; -- Keep it in sync (via trigger or application logic) UPDATE users SET order_count = order_count + 1 WHERE id = NEW.user_id; Pre-Joined Tables For read-heavy reporting, pre-join frequently accessed data: CREATE TABLE order_summaries ( order_id INTEGER PRIMARY KEY, user_email TEXT, total NUMERIC, item_count INTEGER, first_item_name TEXT, created_at TIMESTAMPTZ ); -- Refresh periodically INSERT INTO order_summaries SELECT o.id, u.email, o.total, COUNT(oi.id), MIN(p.name), o.created_at FROM orders o JOIN users u ON u.id = o.user_id JOIN order_items oi ON oi.order_id = o.id JOIN products p ON p.id = oi.product_id GROUP BY o.id, u.email, o.total, o.created_at ON CONFLICT (order_id) DO NOTHING; Naming Conventions Consistent naming conventions reduce cognitive load and make schemas self-documenting. Tables * **Plural nouns**: `users`, `orders`, `products`, `order_items` * **Join tables**: Combine table names: `user_roles`, `product_categories` * **Avoid reserved words**: Never name a table `user`, `order`, or `group` without quoting Columns * **Primary keys**: `id` (singular, generic) * **Foreign keys**: `{table}_id` (e.g., `user_id`, `product_id`) * **Timestamps**: `created_at`, `updated_at`, `deleted_at` * **Boolean flags**: `is_active`, `has_billing`, `email_verified` Indexes -- Naming convention: idx_{table}_{column(s)} CREATE INDEX idx_users_email ON users (email); CREATE INDEX idx_orders_user_date ON orders (user_id, created_at); -- Unique indexes: uq_{table}_{column(s)} CREATE UNIQUE INDEX uq_users_email ON users (email); Timestamp Handling Timestamps are a common source of bugs in schema design. Always Use TIMESTAMPTZ CREATE TABLE events ( id BIGSERIAL PRIMARY KEY, occurred_at TIMESTAMPTZ NOT NULL DEFAULT NOW(), created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(), updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW() ); `TIMESTAMPTZ` stores values in UTC internally and converts to the session timezone on display. Using `TIMESTAMP` without timezone invites timezone-related bugs. Automatic Updated At CREATE OR REPLACE FUNCTION trigger_set_updated_at() RETURNS TRIGGER AS $$ BEGIN NEW.updated_at = NOW(); RETURN NEW; END; $$ LANGUAGE plpgsql; CREATE TRIGGER set_updated_at BEFORE UPDATE ON users FOR EACH ROW EXECUTE FUNCTION trigger_set_updated_at(); Soft Deletes ALTER TABLE users ADD COLUMN deleted_at TIMESTAMPTZ; -- Queries must always filter: SELECT * FROM users WHERE deleted_at IS NULL; -- Create a partial index for active users CREATE INDEX idx_users_active ON users (email) WHERE deleted_at IS NULL; Schema Anti-Patterns Entity-Value-Attribute (EAV) -- Anti-pattern: EAV makes queries painful CREATE TABLE product_attributes ( product_id INTEGER, attribute_name TEXT, attribute_value TEXT, PRIMARY KEY (product_id, attribute_name) ); EAV requires complex pivoting for every query. Use JSONB or add columns instead. Polymorphic Associations -- Anti-pattern: polymorphic foreign key CREATE TABLE comments ( id BIGSERIAL PRIMARY KEY, commentable_type TEXT, -- 'Post' or 'Video' commentable_id INTEGER -- No foreign key constraint! ); Use separate join tables or inheritance patterns instead. Oversized VARCHAR -- Bad: arbitrary limit CREATE TABLE users (name VARCHAR(10)); -- Better: use TEXT with application-level validation CREATE TABLE users (name TEXT); PostgreSQL treats `VARCHAR(n)` and `TEXT` identically internally, but arbitrary limits cause unnecessary application bugs. Practical Schema Checklist * [ ] Primary key on every table (`BIGSERIAL` or `UUID`) * [ ] Foreign keys with indexes on referencing columns * [ ] `created_at` and `updated_at` timestamps * [ ] `NOT NULL` on columns that should never be null * [ ] Check constraints for domain validation * [ ] Unique constraints for business-unique columns * [ ] Consistent naming (plurals, `_id` suffix for FKs) * [ ] `TIMESTAMPTZ` everywhere (never `TIMESTAMP`) * [ ] Indexes match query patterns (verified with EXPLAIN) * [ ] Appropriate normalization level (3NF typically, denormalize knowingly) Schema design is a long-term investment. A well-designed schema reduces bugs, makes queries faster, and makes the codebase easier for new developers to understand. Invest the time upfront; the payoff compounds over years of maintenance."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Schema Design Patterns: Normalization, Denormalization, Naming Conventions"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Schema Design Patterns: Normalization, Denormalization, Naming Conventions
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Data</span></div>
+      <h1 class="article-title">Schema Design Patterns: Normalization, Denormalization, Naming Conventions</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Schema Design Patterns: Normalization, Denormalization, Naming Conventions</h1>
+<br>
+<p>Schema Design Patterns: Normalization, Denormalization, Naming Conventions   </p>
+<p>Schema design is the foundation of application performance and maintainability. Good schemas are intuitive, performant, and resilient to change. This article covers normalization trade-offs, denormalization strategies, and practical naming conventions.   </p>
+<p>Normalization   </p>
+<p>Normalization eliminates data redundancy through a series of normal forms. Most production schemas aim for Third Normal Form (3NF).   </p>
+<p>First Normal Form (1NF)   </p>
+<p>Each column contains atomic values. No repeating groups or arrays.   </p>
+<br>
+<br>
+<br>
+<p>    -- Violates 1NF: multi-valued column</p>
+<br>
+<p>    CREATE TABLE orders (</p>
+<br>
+<p>        id INTEGER PRIMARY KEY,</p>
+<br>
+<p>        product_ids TEXT -- '1,2,3' as comma-separated values</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<p>    -- 1NF compliant: separate rows per product</p>
+<br>
+<p>    CREATE TABLE order_items (</p>
+<br>
+<p>        order_id INTEGER REFERENCES orders(id),</p>
+<br>
+<p>        product_id INTEGER REFERENCES products(id),</p>
+<br>
+<p>        quantity INTEGER NOT NULL,</p>
+<br>
+<p>        PRIMARY KEY (order_id, product_id)</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<br>
+<p>Second Normal Form (2NF)   </p>
+<p>1NF + every non-key column depends on the whole primary key (relevant for composite keys):   </p>
+<br>
+<br>
+<br>
+<p>    -- Violates 2NF: product_name depends only on product_id, not on order_id</p>
+<br>
+<p>    CREATE TABLE order_items (</p>
+<br>
+<p>        order_id INTEGER,</p>
+<br>
+<p>        product_id INTEGER,</p>
+<br>
+<p>        product_name TEXT,     -- depends on product_id only</p>
+<br>
+<p>        quantity INTEGER,</p>
+<br>
+<p>        PRIMARY KEY (order_id, product_id)</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<p>    -- 2NF compliant: product_name moved to products table</p>
+<br>
+<p>    CREATE TABLE products (id INTEGER PRIMARY KEY, name TEXT);</p>
+<br>
+<br>
+<br>
+<br>
+<p>Third Normal Form (3NF)   </p>
+<p>2NF + no transitive dependencies (non-key columns depend only on the primary key):   </p>
+<br>
+<br>
+<br>
+<p>    -- Violates 3NF: category_name depends on category_id, not on order_id</p>
+<br>
+<p>    CREATE TABLE products (</p>
+<br>
+<p>        id INTEGER PRIMARY KEY,</p>
+<br>
+<p>        name TEXT,</p>
+<br>
+<p>        category_id INTEGER,</p>
+<br>
+<p>        category_name TEXT    -- transitively depends on category_id</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<p>    -- 3NF compliant</p>
+<br>
+<p>    CREATE TABLE categories (id INTEGER PRIMARY KEY, name TEXT);</p>
+<br>
+<p>    CREATE TABLE products (id INTEGER PRIMARY KEY, name TEXT, category_id INTEGER);</p>
+<br>
+<br>
+<br>
+<br>
+<p>Denormalization   </p>
+<p>Denormalization intentionally adds redundancy for performance. Use it judiciously.   </p>
+<p>Read-Optimized Denormalization   </p>
+<br>
+<br>
+<br>
+<p>    -- Normalized form</p>
+<br>
+<p>    SELECT COUNT(*) FROM orders WHERE user_id = 42;</p>
+<br>
+<br>
+<br>
+<p>    -- Denormalized: add order_count to users table</p>
+<br>
+<p>    ALTER TABLE users ADD COLUMN order_count INTEGER DEFAULT 0;</p>
+<br>
+<br>
+<br>
+<p>    -- Keep it in sync (via trigger or application logic)</p>
+<br>
+<p>    UPDATE users SET order_count = order_count + 1 WHERE id = NEW.user_id;</p>
+<br>
+<br>
+<br>
+<br>
+<p>Pre-Joined Tables   </p>
+<p>For read-heavy reporting, pre-join frequently accessed data:   </p>
+<br>
+<br>
+<br>
+<p>    CREATE TABLE order_summaries (</p>
+<br>
+<p>        order_id INTEGER PRIMARY KEY,</p>
+<br>
+<p>        user_email TEXT,</p>
+<br>
+<p>        total NUMERIC,</p>
+<br>
+<p>        item_count INTEGER,</p>
+<br>
+<p>        first_item_name TEXT,</p>
+<br>
+<p>        created_at TIMESTAMPTZ</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<p>    -- Refresh periodically</p>
+<br>
+<p>    INSERT INTO order_summaries</p>
+<br>
+<p>    SELECT o.id, u.email, o.total, COUNT(oi.id),</p>
+<br>
+<p>           MIN(p.name), o.created_at</p>
+<br>
+<p>    FROM orders o</p>
+<br>
+<p>    JOIN users u ON u.id = o.user_id</p>
+<br>
+<p>    JOIN order_items oi ON oi.order_id = o.id</p>
+<br>
+<p>    JOIN products p ON p.id = oi.product_id</p>
+<br>
+<p>    GROUP BY o.id, u.email, o.total, o.created_at</p>
+<br>
+<p>    ON CONFLICT (order_id) DO NOTHING;</p>
+<br>
+<br>
+<br>
+<br>
+<p>Naming Conventions   </p>
+<p>Consistent naming conventions reduce cognitive load and make schemas self-documenting.   </p>
+<p>Tables   </p>
+<br>
+<p>* **Plural nouns**: `users`, `orders`, `products`, `order_items`</p>
+<p>* **Join tables**: Combine table names: `user_roles`, `product_categories`</p>
+<p>* **Avoid reserved words**: Never name a table `user`, `order`, or `group` without quoting</p>
+<br>
+<p>Columns   </p>
+<br>
+<p>* **Primary keys**: `id` (singular, generic)</p>
+<p>* **Foreign keys**: `{table}_id` (e.g., `user_id`, `product_id`)</p>
+<p>* **Timestamps**: `created_at`, `updated_at`, `deleted_at`</p>
+<p>* **Boolean flags**: `is_active`, `has_billing`, `email_verified`</p>
+<br>
+<p>Indexes   </p>
+<br>
+<br>
+<br>
+<p>    -- Naming convention: idx_{table}_{column(s)}</p>
+<br>
+<p>    CREATE INDEX idx_users_email ON users (email);</p>
+<br>
+<p>    CREATE INDEX idx_orders_user_date ON orders (user_id, created_at);</p>
+<br>
+<br>
+<br>
+<p>    -- Unique indexes: uq_{table}_{column(s)}</p>
+<br>
+<p>    CREATE UNIQUE INDEX uq_users_email ON users (email);</p>
+<br>
+<br>
+<br>
+<br>
+<p>Timestamp Handling   </p>
+<p>Timestamps are a common source of bugs in schema design.   </p>
+<p>Always Use TIMESTAMPTZ   </p>
+<br>
+<br>
+<br>
+<p>    CREATE TABLE events (</p>
+<br>
+<p>        id BIGSERIAL PRIMARY KEY,</p>
+<br>
+<p>        occurred_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),</p>
+<br>
+<p>        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),</p>
+<br>
+<p>        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<br>
+<p>`TIMESTAMPTZ` stores values in UTC internally and converts to the session timezone on display. Using `TIMESTAMP` without timezone invites timezone-related bugs.   </p>
+<p>Automatic Updated At   </p>
+<br>
+<br>
+<br>
+<p>    CREATE OR REPLACE FUNCTION trigger_set_updated_at()</p>
+<br>
+<p>    RETURNS TRIGGER AS $$</p>
+<br>
+<p>    BEGIN</p>
+<br>
+<p>        NEW.updated_at = NOW();</p>
+<br>
+<p>        RETURN NEW;</p>
+<br>
+<p>    END;</p>
+<br>
+<p>    $$ LANGUAGE plpgsql;</p>
+<br>
+<br>
+<br>
+<p>    CREATE TRIGGER set_updated_at</p>
+<br>
+<p>        BEFORE UPDATE ON users</p>
+<br>
+<p>        FOR EACH ROW</p>
+<br>
+<p>        EXECUTE FUNCTION trigger_set_updated_at();</p>
+<br>
+<br>
+<br>
+<br>
+<p>Soft Deletes   </p>
+<br>
+<br>
+<br>
+<p>    ALTER TABLE users ADD COLUMN deleted_at TIMESTAMPTZ;</p>
+<br>
+<br>
+<br>
+<p>    -- Queries must always filter:</p>
+<br>
+<p>    SELECT * FROM users WHERE deleted_at IS NULL;</p>
+<br>
+<br>
+<br>
+<p>    -- Create a partial index for active users</p>
+<br>
+<p>    CREATE INDEX idx_users_active ON users (email) WHERE deleted_at IS NULL;</p>
+<br>
+<br>
+<br>
+<br>
+<p>Schema Anti-Patterns   </p>
+<p>Entity-Value-Attribute (EAV)   </p>
+<br>
+<br>
+<br>
+<p>    -- Anti-pattern: EAV makes queries painful</p>
+<br>
+<p>    CREATE TABLE product_attributes (</p>
+<br>
+<p>        product_id INTEGER,</p>
+<br>
+<p>        attribute_name TEXT,</p>
+<br>
+<p>        attribute_value TEXT,</p>
+<br>
+<p>        PRIMARY KEY (product_id, attribute_name)</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<br>
+<p>EAV requires complex pivoting for every query. Use JSONB or add columns instead.   </p>
+<p>Polymorphic Associations   </p>
+<br>
+<br>
+<br>
+<p>    -- Anti-pattern: polymorphic foreign key</p>
+<br>
+<p>    CREATE TABLE comments (</p>
+<br>
+<p>        id BIGSERIAL PRIMARY KEY,</p>
+<br>
+<p>        commentable_type TEXT,  -- 'Post' or 'Video'</p>
+<br>
+<p>        commentable_id INTEGER  -- No foreign key constraint!</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<br>
+<p>Use separate join tables or inheritance patterns instead.   </p>
+<p>Oversized VARCHAR   </p>
+<br>
+<br>
+<br>
+<p>    -- Bad: arbitrary limit</p>
+<br>
+<p>    CREATE TABLE users (name VARCHAR(10));</p>
+<br>
+<br>
+<br>
+<p>    -- Better: use TEXT with application-level validation</p>
+<br>
+<p>    CREATE TABLE users (name TEXT);</p>
+<br>
+<br>
+<br>
+<br>
+<p>PostgreSQL treats `VARCHAR(n)` and `TEXT` identically internally, but arbitrary limits cause unnecessary application bugs.   </p>
+<p>Practical Schema Checklist   </p>
+<br>
+<p>* [ ] Primary key on every table (`BIGSERIAL` or `UUID`)</p>
+<p>* [ ] Foreign keys with indexes on referencing columns</p>
+<p>* [ ] `created_at` and `updated_at` timestamps</p>
+<p>* [ ] `NOT NULL` on columns that should never be null</p>
+<p>* [ ] Check constraints for domain validation</p>
+<p>* [ ] Unique constraints for business-unique columns</p>
+<p>* [ ] Consistent naming (plurals, `_id` suffix for FKs)</p>
+<p>* [ ] `TIMESTAMPTZ` everywhere (never `TIMESTAMP`)</p>
+<p>* [ ] Indexes match query patterns (verified with EXPLAIN)</p>
+<p>* [ ] Appropriate normalization level (3NF typically, denormalize knowingly)</p>
+<br>
+<p>Schema design is a long-term investment. A well-designed schema reduces bugs, makes queries faster, and makes the codebase easier for new developers to understand. Invest the time upfront; the payoff compounds over years of maintenance.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

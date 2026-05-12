@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1850",
+      "wordCount": "456",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-sharding.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-sharding.html"},
+      "articleBody": "Database Sharding: Strategies and Trade-offs What is Sharding? Sharding splits a database across multiple servers horizontally. Each shard holds a subset of data, allowing linear scalability. Key-Based Sharding Hash the shard key to determine the target shard: class KeyBasedShardManager: def __init__(self, num_shards=4): self.num_shards = num_shards self.shards = [Shard(i) for i in range(num_shards)] def get_shard(self, shard_key): hash_val = int(hashlib.sha256(str(shard_key).encode()).hexdigest(), 16) shard_id = hash_val % self.num_shards return self.shards[shard_id] Range-Based Sharding Partition by value ranges: CREATE TABLE orders ( id BIGSERIAL, order_date DATE, total DECIMAL(10,2), PRIMARY KEY (id, order_date) ) PARTITION BY RANGE (order_date); CREATE TABLE orders_2026_01 PARTITION OF orders FOR VALUES FROM ('2026-01-01') TO ('2026-02-01'); Directory-Based Sharding Use a lookup table for shard mapping: class DirectoryShardManager: def __init__(self): self.directory = {} def map_key_to_shard(self, shard_key, shard_id): self.directory[shard_key] = shard_id def get_shard(self, shard_key): return self.directory.get(shard_key) Rebalancing When adding or removing shards, data must be redistributed. Use consistent hashing to minimize data movement. Tools like Vitess and Citus automate this process. Conclusion Choose key-based sharding for even distribution, range-based for time-series data, and directory-based for maximum flexibility. Design shard keys carefully for even distribution. Plan for rebalancing from the start. Avoid cross-shard queries where possible."
     }
     </script>
     <script type="application/ld+json">
@@ -73,266 +74,88 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Database Sharding: Strategies and Trade-offs</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
-      <div class="article-body"><p>Database sharding is the practice of horizontally partitioning a database across multiple servers. Each shard holds a subset of the data, and together they form the complete dataset. Sharding is essential for applications that outgrow a single database instance. This article covers sharding strategies, rebalancing challenges, and available tools.</p>
+      <div class="article-body"><h1>Database Sharding: Strategies and Trade-offs</h1>
 <br>
-<h2> Why Shard?</h2>
+<p>What is Sharding?   </p>
+<p>Sharding splits a database across multiple servers horizontally. Each shard holds a subset of data, allowing linear scalability.   </p>
+<p>Key-Based Sharding   </p>
+<p>Hash the shard key to determine the target shard:   </p>
 <br>
-<p>A single database instance has limits. CPU, memory, disk I/O, and network bandwidth all cap out eventually. Before resorting to sharding, consider these alternatives:</p>
 <br>
-<li>**Read replicas**: Offload read traffic to replicas. Effective for read-heavy workloads but does not help with write scaling.</li>
-<li>**Vertical scaling**: Upgrade to a larger instance. Works up to a point but has a cost ceiling and a hardware limit.</li>
-<li>**Caching**: Add Redis or Memcached. Reduces database load but does not reduce data volume.</li>
-<li>**Connection pooling**: Limited by the database's ability to handle concurrent connections.</li>
 <br>
-<p>When these options are exhausted, sharding becomes necessary. Sharding distributes both read and write load across multiple nodes.</p>
+<p>    class KeyBasedShardManager:</p>
 <br>
-<h2> Sharding Strategies</h2>
+<p>        def __init__(self, num_shards=4):</p>
 <br>
-<h3>Key-Based Sharding (Hash Sharding)</h3>
+<p>            self.num_shards = num_shards</p>
 <br>
-<p>Key-based sharding uses a hash function on the shard key to determine which shard stores a record.</p>
+<p>            self.shards = [Shard(i) for i in range(num_shards)]</p>
 <br>
-<pre><code>
-shard_id = hash(shard_key) % number_of_shards
-
-</code></pre>
 <br>
-<pre><code>
-def get_shard(user_id, num_shards=8):
-
-    return hash(user_id) % num_shards
-
-</code></pre>
 <br>
-<p>**Advantages**:</p>
-<li>Even data distribution if the hash function is good.</li>
-<li>Simple to implement.</li>
-<li>No need for a lookup service.</li>
+<p>        def get_shard(self, shard_key):</p>
 <br>
-<p>**Disadvantages**:</p>
-<li>Adding or removing shards changes the hash modulus, requiring most data to be remapped (resharding).</li>
-<li>Range queries across shards are expensive.</li>
-<li>The shard key must be chosen carefully. A poor choice leads to hotspots.</li>
+<p>            hash_val = int(hashlib.sha256(str(shard_key).encode()).hexdigest(), 16)</p>
 <br>
-<h3>Range-Based Sharding</h3>
+<p>            shard_id = hash_val % self.num_shards</p>
 <br>
-<p>Range-based sharding divides data by ranges of the shard key.</p>
+<p>            return self.shards[shard_id]</p>
 <br>
-<pre><code>
-Shard 1: user_id 0001-1000
-
-Shard 2: user_id 1001-2000
-
-Shard 3: user_id 2001-3000
-
-</code></pre>
 <br>
-<p>**Advantages**:</p>
-<li>Efficient range queries within a shard.</li>
-<li>Easy to add new shards for new data ranges without moving existing data.</li>
-<li>Intuitive to understand and administer.</li>
 <br>
-<p>**Disadvantages**:</p>
-<li>Prone to hotspots if the key space is not uniformly accessed. A shard holding active users gets more traffic than a shard holding inactive users.</li>
-<li>Uneven data distribution is common (time-series data concentrates writes on the latest shard).</li>
-<li>Manual planning of range boundaries is required.</li>
 <br>
-<h3>Directory-Based Sharding</h3>
+<p>Range-Based Sharding   </p>
+<p>Partition by value ranges:   </p>
 <br>
-<p>Directory-based sharding uses a lookup table that maps keys to shards.</p>
 <br>
-<pre><code>
-Lookup table:
-
-  user_1 -&gt; shard_3
-
-  user_2 -&gt; shard_1
-
-  user_3 -&gt; shard_3
-
-</code></pre>
 <br>
-<pre><code>
-# Directory-based routing
-
-class ShardDirectory:
-
-    def __init__(self):
-
-        self.mapping = {}  # key -&gt; shard_id
-
-    
-
-    def get_shard(self, key):
-
-        return self.mapping.get(key)
-
-    
-
-    def assign_shard(self, key, shard_id):
-
-        self.mapping[key] = shard_id
-
-</code></pre>
+<p>    CREATE TABLE orders (</p>
 <br>
-<p>**Advantages**:</p>
-<li>Maximum flexibility. Any key can be assigned to any shard.</li>
-<li>Easy resharding. Move a key by updating the directory.</li>
-<li>Supports weighted assignments (larger shards get more data).</li>
+<p>        id BIGSERIAL, order_date DATE, total DECIMAL(10,2),</p>
 <br>
-<p>**Disadvantages**:</p>
-<li>The lookup directory is a single point of failure and a performance bottleneck.</li>
-<li>Every write operation requires a directory lookup.</li>
-<li>The directory must be replicated and kept consistent.</li>
+<p>        PRIMARY KEY (id, order_date)</p>
 <br>
-<h2> Choosing a Shard Key</h2>
+<p>    ) PARTITION BY RANGE (order_date);</p>
 <br>
-<p>The shard key is the most important decision in sharding. A good shard key:</p>
 <br>
-<li>**Distributes data evenly**: No single shard should hold a disproportionate amount of data.</li>
-<li>**Distributes load evenly**: Writes and reads should be spread across all shards.</li>
-<li>**Supports common query patterns**: Ideally, most queries target a single shard.</li>
-<li>**Avoids monotonic or time-series patterns**: Time-based keys concentrate writes on one shard.</li>
 <br>
-<pre><code>
--- Bad shard key example: monotonically increasing ID
-
-CREATE TABLE orders (
-
-    order_id BIGSERIAL PRIMARY KEY,  -- monotonically increasing
-
-    user_id INT,
-
-    created_at TIMESTAMP,
-
-    -- ...
-
-);
-
-
-
--- Good shard key for order data
-
--- Use a hash of user_id or customer_id so orders stay with the customer
-
-</code></pre>
+<p>    CREATE TABLE orders_2026_01 PARTITION OF orders</p>
 <br>
-<h2> Resharding Challenges</h2>
+<p>        FOR VALUES FROM ('2026-01-01') TO ('2026-02-01');</p>
 <br>
-<p>Adding or removing shards is one of the hardest operations in database administration.</p>
 <br>
-<h3>The Resharding Problem</h3>
 <br>
-<p>With hash-based sharding using `hash(key) % N`, changing N from 8 to 9 means almost every key maps to a different shard. Moving terabytes of live data without downtime is complex.</p>
 <br>
-<h3>Resharding Approaches</h3>
+<p>Directory-Based Sharding   </p>
+<p>Use a lookup table for shard mapping:   </p>
 <br>
-<li>**Double writes**: Write new data to both old and new shards during migration. Backfill historical data in batches. Switch reads when backfill completes. This requires application-level write amplification.</li>
 <br>
-<p>2. **Virtual shards (consistent hashing)**: Use many virtual shards (e.g., 4096) mapped to fewer physical shards. Adding a physical shard involves reassigning some virtual shards, not all data.</p>
 <br>
-<p>3. **Pre-splitting**: Start with more shards than you need. As data grows, redistribute shards. This delays resharding but does not eliminate it.</p>
+<p>    class DirectoryShardManager:</p>
 <br>
-<p>4. **Read repair / write behind**: During resharding, route reads to the old shard and writes to both. A background process moves data and reconciles differences.</p>
+<p>        def __init__(self):</p>
 <br>
-<h2> Sharding Tools and Platforms</h2>
+<p>            self.directory = {}</p>
 <br>
-<h3>MySQL Fabric</h3>
 <br>
-<p>MySQL Fabric provides sharding management for MySQL. It handles shard creation, data distribution, and routing. It is an Oracle-supported solution but has limited adoption compared to alternatives.</p>
 <br>
-<h3>Vitess</h3>
+<p>        def map_key_to_shard(self, shard_key, shard_id):</p>
 <br>
-<p>Vitess is a database clustering system for horizontal scaling of MySQL. It powers YouTube's MySQL deployment and is now a CNCF project.</p>
+<p>            self.directory[shard_key] = shard_id</p>
 <br>
-<p>Key features:</p>
-<li>Automatic sharding and resharding.</li>
-<li>Connection pooling and query rewriting.</li>
-<li>Online schema migration (VReplication).</li>
-<li>Transparent routing via Vitess gateway (vtgate).</li>
 <br>
-<pre><code>
--- Vitess schema with sharding key annotation
-
-CREATE TABLE users (
-
-    user_id BIGINT,
-
-    name VARCHAR(255),
-
-    email VARCHAR(255),
-
-    PRIMARY KEY (user_id)
-
-) VITESS_SHARD_BY HASH(user_id);
-
-</code></pre>
 <br>
-<h3>Citus</h3>
+<p>        def get_shard(self, shard_key):</p>
 <br>
-<p>Citus is a PostgreSQL extension that transforms PostgreSQL into a distributed database. It distributes tables across a cluster while maintaining PostgreSQL compatibility.</p>
+<p>            return self.directory.get(shard_key)</p>
 <br>
-<pre><code>
--- Create a distributed table in Citus
-
-SELECT create_distributed_table(&#x27;orders&#x27;, &#x27;customer_id&#x27;);
-
-
-
--- Citus automatically routes queries to the correct shard
-
-SELECT COUNT(*) FROM orders WHERE customer_id = 42;
-
--- Runs on one shard (fast)
-
-
-
-SELECT COUNT(*) FROM orders WHERE created_at &gt; now() - interval &#x27;1 day&#x27;;
-
--- Runs on all shards (coordinator aggregates)
-
-</code></pre>
 <br>
-<h3>MongoDB Sharding</h3>
 <br>
-<p>MongoDB has built-in sharding with a config server replica set and mongos routers.</p>
 <br>
-<pre><code>
-// Enable sharding on a database
-
-sh.enableSharding(&quot;my_database&quot;)
-
-
-
-// Shard a collection with range-based hashed key
-
-sh.shardCollection(&quot;my_database.orders&quot;, { &quot;order_id&quot;: &quot;hashed&quot; })
-
-</code></pre>
-<br>
-<h2> Query Patterns with Sharding</h2>
-<br>
-<p>Sharding works well when queries target a single shard. Cross-shard queries are expensive.</p>
-<br>
-<li>**Single-shard queries**: `SELECT * FROM orders WHERE shard_key = ?` — fast, hits one shard.</li>
-<li>**Multi-shard queries**: `SELECT * FROM orders WHERE status = 'pending'` — hits all shards, coordinator aggregates results.</li>
-<li>**Joins across shards**: Avoid. Denormalize or pre-join data within each shard.</li>
-<li>**Transactions across shards**: Use distributed transaction protocols (2PC) or avoid them entirely.</li>
-<br>
-<h2> When Not to Shard</h2>
-<br>
-<p>Sharding adds complexity. Do not shard unless you need to:</p>
-<br>
-<li>Your dataset exceeds a single server's storage capacity.</li>
-<li>Write throughput exceeds a single server's capacity.</li>
-<li>You cannot scale vertically further.</li>
-<li>Query latency is unacceptable even with caching and replicas.</li>
-<br>
-<p>For many applications, a well-tuned single database with replicas and caching is sufficient.</p>
-<br>
-<h2> Conclusion</h2>
-<br>
-<p>Sharding is a powerful but complex scaling technique. Choose hash-based sharding for even distribution, range-based for ordered data with predictable access patterns, or directory-based for maximum flexibility. Design your shard key carefully, plan for resharding from the start, and choose tools like Vitess or Citus that handle the complexity. Most importantly, exhaust simpler scaling options before adopting sharding.</p></div>
+<p>Rebalancing   </p>
+<p>When adding or removing shards, data must be redistributed. Use consistent hashing to minimize data movement. Tools like Vitess and Citus automate this process.   </p>
+<p>Conclusion   </p>
+<p>Choose key-based sharding for even distribution, range-based for time-series data, and directory-based for maximum flexibility. Design shard keys carefully for even distribution. Plan for rebalancing from the start. Avoid cross-shard queries where possible.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

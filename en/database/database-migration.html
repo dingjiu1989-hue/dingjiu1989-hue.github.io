@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1400",
+      "wordCount": "1675",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-migration.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-migration.html"},
+      "articleBody": "Database Migration Tools and Strategies Why Database Migrations Matter Database migrations are how you version-control your schema changes. Without a migration system, schema changes are applied manually, untracked, and unrepeatable. Migrations ensure that every environment (dev, staging, production) has the same schema, changes are auditable, and rollbacks are possible. Migration Tools by Language | Language | Tool | Pros | |----------|------|------| | Python | Alembic (SQLAlchemy) | Auto-generation, async support | | Node.js | Knex.js | Transactional migrations, seed support | | Ruby | ActiveRecord Migrations | Simple DSL, mature ecosystem | | Java | Flyway, Liquibase | Repeatable migrations, CI/CD friendly | | Go | golang-migrate, Goose | No-dependency binaries | | Rust | Diesel | Type-safe, compile-time checking | Alembic (Python) Setup pip install alembic alembic init alembic # alembic/env.py from myapp.models import Base target_metadata = Base.metadata Creating Migrations # Auto-generate migration alembic revision --autogenerate -m \"add user roles table\" # Apply migrations alembic upgrade head # Rollback alembic downgrade -1 Migration File \"\"\"add user roles table Revision ID: abc123 Revises: def456 \"\"\" from alembic import op import sqlalchemy as sa def upgrade(): op.create_table( 'user_roles', sa.Column('id', sa.Integer(), nullable=False), sa.Column('user_id', sa.Integer(), nullable=False), sa.Column('role', sa.String(length=50), nullable=False), sa.Column('created_at', sa.DateTime(), server_default=sa.func.now()), sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'), sa.PrimaryKeyConstraint('id') ) op.create_index('ix_user_roles_user_id', 'user_roles', ['user_id']) def downgrade(): op.drop_index('ix_user_roles_user_id') op.drop_table('user_roles') Flyway (Java) # Migration naming convention: # V1__create_users.sql # V2__add_email_column.sql # V3__create_orders_table.sql # Apply migrations flyway migrate # Check status flyway info # Repair checksums flyway repair -- V2__add_email_column.sql ALTER TABLE users ADD COLUMN email VARCHAR(255) UNIQUE; -- V3__create_orders_table.sql CREATE TABLE orders ( id BIGSERIAL PRIMARY KEY, user_id BIGINT NOT NULL REFERENCES users(id), total DECIMAL(10,2) NOT NULL, status VARCHAR(20) NOT NULL DEFAULT 'pending', created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() ); CREATE INDEX idx_orders_user_id ON orders(user_id); Strategies for Complex Migrations Expand-Contract Pattern (Zero Downtime) For making backward-incompatible changes without downtime: **Phase 1: Expand** -- Add new column alongside old one ALTER TABLE users ADD COLUMN email_new VARCHAR(255); -- Start writing to both columns -- Backfill existing rows UPDATE users SET email_new = email WHERE email_new IS NULL; **Phase 2: Migrate** # Application reads from new column, still writes to both # Deploy application update **Phase 3: Contract** -- Stop writing to old column ALTER TABLE users DROP COLUMN email; -- Or rename ALTER TABLE users RENAME COLUMN email TO email_old; Batch Migrations for Large Tables \"\"\"migrate large table in batches\"\"\" from sqlalchemy import text def upgrade(): batch_size = 10000 offset = 0 while True: result = op.execute( text(\"\"\" UPDATE users SET email_lower = LOWER(email) WHERE id IN ( SELECT id FROM users WHERE email_lower IS NULL ORDER BY id LIMIT :batch_size ) RETURNING id \"\"\"), {'batch_size': batch_size} ) if result.rowcount == 0: break offset += batch_size print(f\"Updated {offset} rows...\") Online Schema Change (pt-online-schema-change) # For MySQL without downtime pt-online-schema-change \\ --alter \"ADD COLUMN email VARCHAR(255)\" \\ D=database,t=users \\ --execute Migration Best Practices Always Have a Rollback Every migration must have a tested downgrade path: def upgrade(): op.add_column('users', sa.Column('email', sa.String(255))) def downgrade(): op.drop_column('users', 'email') Test Migrations # Test upgrade and downgrade alembic upgrade head alembic downgrade base alembic upgrade head CI/CD Integration # .github/workflows/migrate.yml jobs: migrate: runs-on: ubuntu-latest steps: - uses: actions/checkout@v4 - name: Run migrations env: DATABASE_URL: ${{ secrets.DATABASE_URL }} run: | alembic upgrade head - name: Verify schema run: | alembic check # Detect schema drift Common Mistakes | Mistake | Consequence | Prevention | |---------|-------------|------------| | No rollback plan | Cannot undo failed migration | Always write downgrade | | Long-running locks | Table locked, queries fail | Use batch/online migrations | | Missing default values | NULL violations in existing rows | Add with default or nullable first | | Schema drift | Environments out of sync | Automate migrations, check in CI | | No data migration | New columns are empty | Backfill after schema change | Summary Database migrations bring the same version control discipline to schema changes that Git brings to code. Use tools like Alembic or Flyway, always write reversible migrations with upgrade and downgrade paths, adopt the expand-contract pattern for zero-downtime changes, batch large table modifications, and integrate migrations into your CI/CD pipeline. Test every migration against a copy of production data before deploying to production."
     }
     </script>
     <script type="application/ld+json">
@@ -73,371 +74,377 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Database Migration Tools and Strategies</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Why Database Migrations Matter</h2>
+      <div class="article-body"><h1>Database Migration Tools and Strategies</h1>
 <br>
-<p>Database migrations are how you version-control your schema changes. Without a migration system, schema changes are applied manually, untracked, and unrepeatable. Migrations ensure that every environment (dev, staging, production) has the same schema, changes are auditable, and rollbacks are possible.</p>
+<p>Why Database Migrations Matter   </p>
+<p>Database migrations are how you version-control your schema changes. Without a migration system, schema changes are applied manually, untracked, and unrepeatable. Migrations ensure that every environment (dev, staging, production) has the same schema, changes are auditable, and rollbacks are possible.   </p>
+<p>Migration Tools by Language   </p>
+<p>| Language | Tool | Pros | |----------|------|------| | Python | Alembic (SQLAlchemy) | Auto-generation, async support | | Node.js | Knex.js | Transactional migrations, seed support | | Ruby | ActiveRecord Migrations | Simple DSL, mature ecosystem | | Java | Flyway, Liquibase | Repeatable migrations, CI/CD friendly | | Go | golang-migrate, Goose | No-dependency binaries | | Rust | Diesel | Type-safe, compile-time checking |   </p>
+<p>Alembic (Python)   </p>
+<p>Setup   </p>
 <br>
-<h2> Migration Tools by Language</h2>
 <br>
-<p>| Language | Tool | Pros |</p>
-<p>|----------|------|------|</p>
-<p>| Python | Alembic (SQLAlchemy) | Auto-generation, async support |</p>
-<p>| Node.js | Knex.js | Transactional migrations, seed support |</p>
-<p>| Ruby | ActiveRecord Migrations | Simple DSL, mature ecosystem |</p>
-<p>| Java | Flyway, Liquibase | Repeatable migrations, CI/CD friendly |</p>
-<p>| Go | golang-migrate, Goose | No-dependency binaries |</p>
-<p>| Rust | Diesel | Type-safe, compile-time checking |</p>
 <br>
-<h2> Alembic (Python)</h2>
+<p>    pip install alembic</p>
 <br>
-<h3>Setup</h3>
+<p>    alembic init alembic</p>
 <br>
-<pre><code>
-pip install alembic
-
-alembic init alembic
-
-</code></pre>
 <br>
-<pre><code>
-# alembic/env.py
-
-from myapp.models import Base
-
-
-
-target_metadata = Base.metadata
-
-</code></pre>
 <br>
-<h3>Creating Migrations</h3>
 <br>
-<pre><code>
-# Auto-generate migration
-
-alembic revision --autogenerate -m &quot;add user roles table&quot;
-
-
-
-# Apply migrations
-
-alembic upgrade head
-
-
-
-# Rollback
-
-alembic downgrade -1
-
-</code></pre>
 <br>
-<h3>Migration File</h3>
 <br>
-<pre><code>
-&quot;&quot;&quot;add user roles table
-
-
-
-Revision ID: abc123
-
-Revises: def456
-
-&quot;&quot;&quot;
-
-
-
-from alembic import op
-
-import sqlalchemy as sa
-
-
-
-def upgrade():
-
-    op.create_table(
-
-        &#x27;user_roles&#x27;,
-
-        sa.Column(&#x27;id&#x27;, sa.Integer(), nullable=False),
-
-        sa.Column(&#x27;user_id&#x27;, sa.Integer(), nullable=False),
-
-        sa.Column(&#x27;role&#x27;, sa.String(length=50), nullable=False),
-
-        sa.Column(&#x27;created_at&#x27;, sa.DateTime(), server_default=sa.func.now()),
-
-        sa.ForeignKeyConstraint([&#x27;user_id&#x27;], [&#x27;users.id&#x27;], ondelete=&#x27;CASCADE&#x27;),
-
-        sa.PrimaryKeyConstraint(&#x27;id&#x27;)
-
-    )
-
-    op.create_index(&#x27;ix_user_roles_user_id&#x27;, &#x27;user_roles&#x27;, [&#x27;user_id&#x27;])
-
-
-
-def downgrade():
-
-    op.drop_index(&#x27;ix_user_roles_user_id&#x27;)
-
-    op.drop_table(&#x27;user_roles&#x27;)
-
-</code></pre>
 <br>
-<h2> Flyway (Java)</h2>
+<p>    # alembic/env.py</p>
 <br>
-<pre><code>
-# Migration naming convention:
-
-# V1__create_users.sql
-
-# V2__add_email_column.sql
-
-# V3__create_orders_table.sql
-
-
-
-# Apply migrations
-
-flyway migrate
-
-
-
-# Check status
-
-flyway info
-
-
-
-# Repair checksums
-
-flyway repair
-
-</code></pre>
+<p>    from myapp.models import Base</p>
 <br>
-<pre><code>
--- V2__add_email_column.sql
-
-ALTER TABLE users ADD COLUMN email VARCHAR(255) UNIQUE;
-
-
-
--- V3__create_orders_table.sql
-
-CREATE TABLE orders (
-
-    id BIGSERIAL PRIMARY KEY,
-
-    user_id BIGINT NOT NULL REFERENCES users(id),
-
-    total DECIMAL(10,2) NOT NULL,
-
-    status VARCHAR(20) NOT NULL DEFAULT &#x27;pending&#x27;,
-
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-
-);
-
-CREATE INDEX idx_orders_user_id ON orders(user_id);
-
-</code></pre>
 <br>
-<h2> Strategies for Complex Migrations</h2>
 <br>
-<h3>Expand-Contract Pattern (Zero Downtime)</h3>
+<p>    target_metadata = Base.metadata</p>
 <br>
-<p>For making backward-incompatible changes without downtime:</p>
 <br>
-<p>**Phase 1: Expand**</p>
 <br>
-<pre><code>
--- Add new column alongside old one
-
-ALTER TABLE users ADD COLUMN email_new VARCHAR(255);
-
--- Start writing to both columns
-
--- Backfill existing rows
-
-UPDATE users SET email_new = email WHERE email_new IS NULL;
-
-</code></pre>
 <br>
-<p>**Phase 2: Migrate**</p>
+<p>Creating Migrations   </p>
 <br>
-<pre><code>
-# Application reads from new column, still writes to both
-
-# Deploy application update
-
-</code></pre>
 <br>
-<p>**Phase 3: Contract**</p>
 <br>
-<pre><code>
--- Stop writing to old column
-
-ALTER TABLE users DROP COLUMN email;
-
--- Or rename
-
-ALTER TABLE users RENAME COLUMN email TO email_old;
-
-</code></pre>
+<p>    # Auto-generate migration</p>
 <br>
-<h3>Batch Migrations for Large Tables</h3>
+<p>    alembic revision --autogenerate -m "add user roles table"</p>
 <br>
-<pre><code>
-&quot;&quot;&quot;migrate large table in batches&quot;&quot;&quot;
-
-from sqlalchemy import text
-
-
-
-def upgrade():
-
-    batch_size = 10000
-
-    offset = 0
-
-
-
-    while True:
-
-        result = op.execute(
-
-            text(&quot;&quot;&quot;
-
-                UPDATE users
-
-                SET email_lower = LOWER(email)
-
-                WHERE id IN (
-
-                    SELECT id FROM users
-
-                    WHERE email_lower IS NULL
-
-                    ORDER BY id
-
-                    LIMIT :batch_size
-
-                )
-
-                RETURNING id
-
-            &quot;&quot;&quot;),
-
-            {&#x27;batch_size&#x27;: batch_size}
-
-        )
-
-        if result.rowcount == 0:
-
-            break
-
-        offset += batch_size
-
-        print(f&quot;Updated {offset} rows...&quot;)
-
-</code></pre>
 <br>
-<h3>Online Schema Change (pt-online-schema-change)</h3>
 <br>
-<pre><code>
-# For MySQL without downtime
-
-pt-online-schema-change \
-
-    --alter &quot;ADD COLUMN email VARCHAR(255)&quot; \
-
-    D=database,t=users \
-
-    --execute
-
-</code></pre>
+<p>    # Apply migrations</p>
 <br>
-<h2> Migration Best Practices</h2>
+<p>    alembic upgrade head</p>
 <br>
-<h3>Always Have a Rollback</h3>
 <br>
-<p>Every migration must have a tested downgrade path:</p>
 <br>
-<pre><code>
-def upgrade():
-
-    op.add_column(&#x27;users&#x27;, sa.Column(&#x27;email&#x27;, sa.String(255)))
-
-
-
-def downgrade():
-
-    op.drop_column(&#x27;users&#x27;, &#x27;email&#x27;)
-
-</code></pre>
+<p>    # Rollback</p>
 <br>
-<h3>Test Migrations</h3>
+<p>    alembic downgrade -1</p>
 <br>
-<pre><code>
-# Test upgrade and downgrade
-
-alembic upgrade head
-
-alembic downgrade base
-
-alembic upgrade head
-
-</code></pre>
 <br>
-<h3>CI/CD Integration</h3>
 <br>
-<pre><code>
-# .github/workflows/migrate.yml
-
-jobs:
-
-  migrate:
-
-    runs-on: ubuntu-latest
-
-    steps:
-
-      - uses: actions/checkout@v4
-
-
-
-      - name: Run migrations
-
-        env:
-
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
-        run: |
-
-          alembic upgrade head
-
-
-
-      - name: Verify schema
-
-        run: |
-
-          alembic check  # Detect schema drift
-
-</code></pre>
 <br>
-<h2> Common Mistakes</h2>
+<p>Migration File   </p>
 <br>
-<p>| Mistake | Consequence | Prevention |</p>
-<p>|---------|-------------|------------|</p>
-<p>| No rollback plan | Cannot undo failed migration | Always write downgrade |</p>
-<p>| Long-running locks | Table locked, queries fail | Use batch/online migrations |</p>
-<p>| Missing default values | NULL violations in existing rows | Add with default or nullable first |</p>
-<p>| Schema drift | Environments out of sync | Automate migrations, check in CI |</p>
-<p>| No data migration | New columns are empty | Backfill after schema change |</p>
 <br>
-<h2> Summary</h2>
 <br>
+<p>    """add user roles table</p>
+<br>
+<br>
+<br>
+<p>    Revision ID: abc123</p>
+<br>
+<p>    Revises: def456</p>
+<br>
+<p>    """</p>
+<br>
+<br>
+<br>
+<p>    from alembic import op</p>
+<br>
+<p>    import sqlalchemy as sa</p>
+<br>
+<br>
+<br>
+<p>    def upgrade():</p>
+<br>
+<p>        op.create_table(</p>
+<br>
+<p>            'user_roles',</p>
+<br>
+<p>            sa.Column('id', sa.Integer(), nullable=False),</p>
+<br>
+<p>            sa.Column('user_id', sa.Integer(), nullable=False),</p>
+<br>
+<p>            sa.Column('role', sa.String(length=50), nullable=False),</p>
+<br>
+<p>            sa.Column('created_at', sa.DateTime(), server_default=sa.func.now()),</p>
+<br>
+<p>            sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),</p>
+<br>
+<p>            sa.PrimaryKeyConstraint('id')</p>
+<br>
+<p>        )</p>
+<br>
+<p>        op.create_index('ix_user_roles_user_id', 'user_roles', ['user_id'])</p>
+<br>
+<br>
+<br>
+<p>    def downgrade():</p>
+<br>
+<p>        op.drop_index('ix_user_roles_user_id')</p>
+<br>
+<p>        op.drop_table('user_roles')</p>
+<br>
+<br>
+<br>
+<br>
+<p>Flyway (Java)   </p>
+<br>
+<br>
+<br>
+<p>    # Migration naming convention:</p>
+<br>
+<p>    # V1__create_users.sql</p>
+<br>
+<p>    # V2__add_email_column.sql</p>
+<br>
+<p>    # V3__create_orders_table.sql</p>
+<br>
+<br>
+<br>
+<p>    # Apply migrations</p>
+<br>
+<p>    flyway migrate</p>
+<br>
+<br>
+<br>
+<p>    # Check status</p>
+<br>
+<p>    flyway info</p>
+<br>
+<br>
+<br>
+<p>    # Repair checksums</p>
+<br>
+<p>    flyway repair</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    -- V2__add_email_column.sql</p>
+<br>
+<p>    ALTER TABLE users ADD COLUMN email VARCHAR(255) UNIQUE;</p>
+<br>
+<br>
+<br>
+<p>    -- V3__create_orders_table.sql</p>
+<br>
+<p>    CREATE TABLE orders (</p>
+<br>
+<p>        id BIGSERIAL PRIMARY KEY,</p>
+<br>
+<p>        user_id BIGINT NOT NULL REFERENCES users(id),</p>
+<br>
+<p>        total DECIMAL(10,2) NOT NULL,</p>
+<br>
+<p>        status VARCHAR(20) NOT NULL DEFAULT 'pending',</p>
+<br>
+<p>        created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()</p>
+<br>
+<p>    );</p>
+<br>
+<p>    CREATE INDEX idx_orders_user_id ON orders(user_id);</p>
+<br>
+<br>
+<br>
+<br>
+<p>Strategies for Complex Migrations   </p>
+<p>Expand-Contract Pattern (Zero Downtime)   </p>
+<p>For making backward-incompatible changes without downtime:   </p>
+<p>**Phase 1: Expand**   </p>
+<br>
+<br>
+<br>
+<p>    -- Add new column alongside old one</p>
+<br>
+<p>    ALTER TABLE users ADD COLUMN email_new VARCHAR(255);</p>
+<br>
+<p>    -- Start writing to both columns</p>
+<br>
+<p>    -- Backfill existing rows</p>
+<br>
+<p>    UPDATE users SET email_new = email WHERE email_new IS NULL;</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Phase 2: Migrate**   </p>
+<br>
+<br>
+<br>
+<p>    # Application reads from new column, still writes to both</p>
+<br>
+<p>    # Deploy application update</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Phase 3: Contract**   </p>
+<br>
+<br>
+<br>
+<p>    -- Stop writing to old column</p>
+<br>
+<p>    ALTER TABLE users DROP COLUMN email;</p>
+<br>
+<p>    -- Or rename</p>
+<br>
+<p>    ALTER TABLE users RENAME COLUMN email TO email_old;</p>
+<br>
+<br>
+<br>
+<br>
+<p>Batch Migrations for Large Tables   </p>
+<br>
+<br>
+<br>
+<p>    """migrate large table in batches"""</p>
+<br>
+<p>    from sqlalchemy import text</p>
+<br>
+<br>
+<br>
+<p>    def upgrade():</p>
+<br>
+<p>        batch_size = 10000</p>
+<br>
+<p>        offset = 0</p>
+<br>
+<br>
+<br>
+<p>        while True:</p>
+<br>
+<p>            result = op.execute(</p>
+<br>
+<p>                text("""</p>
+<br>
+<p>                    UPDATE users</p>
+<br>
+<p>                    SET email_lower = LOWER(email)</p>
+<br>
+<p>                    WHERE id IN (</p>
+<br>
+<p>                        SELECT id FROM users</p>
+<br>
+<p>                        WHERE email_lower IS NULL</p>
+<br>
+<p>                        ORDER BY id</p>
+<br>
+<p>                        LIMIT :batch_size</p>
+<br>
+<p>                    )</p>
+<br>
+<p>                    RETURNING id</p>
+<br>
+<p>                """),</p>
+<br>
+<p>                {'batch_size': batch_size}</p>
+<br>
+<p>            )</p>
+<br>
+<p>            if result.rowcount == 0:</p>
+<br>
+<p>                break</p>
+<br>
+<p>            offset += batch_size</p>
+<br>
+<p>            print(f"Updated {offset} rows...")</p>
+<br>
+<br>
+<br>
+<br>
+<p>Online Schema Change (pt-online-schema-change)   </p>
+<br>
+<br>
+<br>
+<p>    # For MySQL without downtime</p>
+<br>
+<p>    pt-online-schema-change \</p>
+<br>
+<p>        --alter "ADD COLUMN email VARCHAR(255)" \</p>
+<br>
+<p>        D=database,t=users \</p>
+<br>
+<p>        --execute</p>
+<br>
+<br>
+<br>
+<br>
+<p>Migration Best Practices   </p>
+<p>Always Have a Rollback   </p>
+<p>Every migration must have a tested downgrade path:   </p>
+<br>
+<br>
+<br>
+<p>    def upgrade():</p>
+<br>
+<p>        op.add_column('users', sa.Column('email', sa.String(255)))</p>
+<br>
+<br>
+<br>
+<p>    def downgrade():</p>
+<br>
+<p>        op.drop_column('users', 'email')</p>
+<br>
+<br>
+<br>
+<br>
+<p>Test Migrations   </p>
+<br>
+<br>
+<br>
+<p>    # Test upgrade and downgrade</p>
+<br>
+<p>    alembic upgrade head</p>
+<br>
+<p>    alembic downgrade base</p>
+<br>
+<p>    alembic upgrade head</p>
+<br>
+<br>
+<br>
+<br>
+<p>CI/CD Integration   </p>
+<br>
+<br>
+<br>
+<p>    # .github/workflows/migrate.yml</p>
+<br>
+<p>    jobs:</p>
+<br>
+<p>      migrate:</p>
+<br>
+<p>        runs-on: ubuntu-latest</p>
+<br>
+<p>        steps:</p>
+<br>
+<p>          - uses: actions/checkout@v4</p>
+<br>
+<br>
+<br>
+<p>          - name: Run migrations</p>
+<br>
+<p>            env:</p>
+<br>
+<p>              DATABASE_URL: ${{ secrets.DATABASE_URL }}</p>
+<br>
+<p>            run: |</p>
+<br>
+<p>              alembic upgrade head</p>
+<br>
+<br>
+<br>
+<p>          - name: Verify schema</p>
+<br>
+<p>            run: |</p>
+<br>
+<p>              alembic check  # Detect schema drift</p>
+<br>
+<br>
+<br>
+<br>
+<p>Common Mistakes   </p>
+<p>| Mistake | Consequence | Prevention | |---------|-------------|------------| | No rollback plan | Cannot undo failed migration | Always write downgrade | | Long-running locks | Table locked, queries fail | Use batch/online migrations | | Missing default values | NULL violations in existing rows | Add with default or nullable first | | Schema drift | Environments out of sync | Automate migrations, check in CI | | No data migration | New columns are empty | Backfill after schema change |   </p>
+<p>Summary   </p>
 <p>Database migrations bring the same version control discipline to schema changes that Git brings to code. Use tools like Alembic or Flyway, always write reversible migrations with upgrade and downgrade paths, adopt the expand-contract pattern for zero-downtime changes, batch large table modifications, and integrate migrations into your CI/CD pipeline. Test every migration against a copy of production data before deploying to production.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

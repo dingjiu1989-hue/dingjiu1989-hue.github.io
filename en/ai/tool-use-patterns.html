@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="tool-use-patterns">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning">
+    <meta property="og:description" content="Explore LLM tool use patterns including function calling, structured tool definitions, multi-step reasoning with tool loops, and error recovery strategies.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/tool-use-patterns.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning">
+    <meta name="twitter:description" content="Explore LLM tool use patterns including function calling, structured tool definitions, multi-step reasoning with tool loops, and error recovery strategies.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning — SourceHub</title>
+    <meta name="description" content="Explore LLM tool use patterns including function calling, structured tool definitions, multi-step reasoning with tool loops, and error recovery strategies.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/tool-use-patterns.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/ai/tool-use-patterns.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning",
+      "description": "Explore LLM tool use patterns including function calling, structured tool definitions, multi-step reasoning with tool loops, and error recovery strategies.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1667",
+      "keywords": "AI, Machine Learning, LLM",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/tool-use-patterns.html"},
+      "articleBody": "Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning Introduction Tool use, or function calling, enables LLMs to interact with external systems: query databases, call APIs, execute code, and retrieve information. This capability transforms LLMs from text generators into autonomous agents. This article covers the essential patterns for defining, invoking, and chaining tool calls in production systems. Defining Tools Every tool needs a clear schema that the LLM can understand and the application can execute: from openai import OpenAI from pydantic import BaseModel client = OpenAI() tools = [ { \"type\": \"function\", \"function\": { \"name\": \"search_documents\", \"description\": \"Search internal documents by keyword. Returns relevant snippets with metadata.\", \"parameters\": { \"type\": \"object\", \"properties\": { \"query\": { \"type\": \"string\", \"description\": \"Search query, use specific terms for better results\", }, \"max_results\": { \"type\": \"integer\", \"description\": \"Number of results to return (1-20)\", \"minimum\": 1, \"maximum\": 20, }, \"filters\": { \"type\": \"object\", \"properties\": { \"date_from\": {\"type\": \"string\", \"format\": \"date\"}, \"department\": {\"type\": \"string\"}, }, }, }, \"required\": [\"query\"], }, }, } ] Key principles: use descriptive parameter names with clear descriptions, set proper type constraints, and provide defaults for optional parameters. The LLM uses these descriptions to decide which tool to call and with what arguments. Function Calling Loop The standard pattern is a loop: generate, check for tool calls, execute, and feed results back: def tool_use_loop(messages: list, tools: list, max_turns=10): for turn in range(max_turns): response = client.chat.completions.create( model=\"gpt-4o\", messages=messages, tools=tools, tool_choice=\"auto\", ) message = response.choices[0].message messages.append(message) if not message.tool_calls: return message.content for tool_call in message.tool_calls: result = execute_tool(tool_call.function.name, tool_call.function.arguments) messages.append({ \"tool_call_id\": tool_call.id, \"role\": \"tool\", \"content\": str(result), }) return \"Max turns reached\" def execute_tool(name: str, args_json: str): args = json.loads(args_json) if name == \"search_documents\": return search_documents(**args) elif name == \"calculate\": return calculate(**args) raise ValueError(f\"Unknown tool: {name}\") The LLM sees the tool result as new context and decides whether to call another tool or produce a final answer. Multi-Step Reasoning with Tools Complex tasks require multiple tool calls where later calls depend on earlier results: def research_workflow(topic: str): messages = [{\"role\": \"user\", \"content\": f\"Research {topic} and write a comprehensive summary.\"}] # Step 1: Search for information response = client.chat.completions.create( model=\"gpt-4o\", messages=messages, tools=research_tools, tool_choice=\"auto\" ) # Execute search, get results # Step 2: Verify facts using a different source # Step 3: Structure the findings # Step 4: Generate the summary return final_summary Structured Tools with Validation Anthropic's tool use API supports structured tool definitions with JSON Schema and strict mode: import anthropic client = anthropic.Anthropic() response = client.messages.create( model=\"claude-sonnet-4-20260512\", max_tokens=1024, tools=[ { \"name\": \"get_weather\", \"description\": \"Get current weather for a location\", \"input_schema\": { \"type\": \"object\", \"properties\": { \"location\": {\"type\": \"string\", \"description\": \"City name\"}, \"units\": {\"type\": \"string\", \"enum\": [\"celsius\", \"fahrenheit\"]}, }, \"required\": [\"location\"], }, } ], messages=[{\"role\": \"user\", \"content\": \"What is the weather in Tokyo?\"}], ) for block in response.content: if block.type == \"tool_use\": print(f\"Calling {block.name} with {block.input}\") Error Handling in Tool Calls Tools fail. Plan for timeouts, invalid arguments, and unexpected responses: def safe_tool_execution(tool_call, timeout=10): try: with Timeout(timeout): result = execute_tool(tool_call.function.name, tool_call.function.arguments) return {\"success\": True, \"result\": result} except TimeoutError: return {\"success\": False, \"error\": \"Tool execution timed out\"} except ValueError as e: return {\"success\": False, \"error\": f\"Invalid arguments: {e}\"} except Exception as e: return {\"success\": False, \"error\": f\"Unexpected error: {e}\"} When a tool fails, pass the error message back to the LLM so it can retry with corrected arguments or choose a different approach. Conclusion Tool use transforms LLMs from passive text generators into active problem-solvers. Define tools with clear schemas, implement a robust function-calling loop, chain tool calls for multi-step tasks, and always handle errors gracefully by feeding failures back into the conversation context."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">AI</span>
+        <span class="tag-cat">Machine Learning</span>
+        <span class="tag-cat">LLM</span></div>
+      <h1 class="article-title">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Tool use, or function calling, enables LLMs to interact with external systems: query databases, call APIs, execute code, and retrieve information. This capability transforms LLMs from text generators into autonomous agents. This article covers the essential patterns for defining, invoking, and chaining tool calls in production systems.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Defining Tools</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Every tool needs a clear schema that the LLM can understand and the application can execute:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    from openai import OpenAI</p>
+<br>
+<p>    from pydantic import BaseModel</p>
+<br>
+<br>
+<br>
+<p>    client = OpenAI()</p>
+<br>
+<br>
+<br>
+<p>    tools = [</p>
+<br>
+<p>        {</p>
+<br>
+<p>            "type": "function",</p>
+<br>
+<p>            "function": {</p>
+<br>
+<p>                "name": "search_documents",</p>
+<br>
+<p>                "description": "Search internal documents by keyword. Returns relevant snippets with metadata.",</p>
+<br>
+<p>                "parameters": {</p>
+<br>
+<p>                    "type": "object",</p>
+<br>
+<p>                    "properties": {</p>
+<br>
+<p>                        "query": {</p>
+<br>
+<p>                            "type": "string",</p>
+<br>
+<p>                            "description": "Search query, use specific terms for better results",</p>
+<br>
+<p>                        },</p>
+<br>
+<p>                        "max_results": {</p>
+<br>
+<p>                            "type": "integer",</p>
+<br>
+<p>                            "description": "Number of results to return (1-20)",</p>
+<br>
+<p>                            "minimum": 1,</p>
+<br>
+<p>                            "maximum": 20,</p>
+<br>
+<p>                        },</p>
+<br>
+<p>                        "filters": {</p>
+<br>
+<p>                            "type": "object",</p>
+<br>
+<p>                            "properties": {</p>
+<br>
+<p>                                "date_from": {"type": "string", "format": "date"},</p>
+<br>
+<p>                                "department": {"type": "string"},</p>
+<br>
+<p>                            },</p>
+<br>
+<p>                        },</p>
+<br>
+<p>                    },</p>
+<br>
+<p>                    "required": ["query"],</p>
+<br>
+<p>                },</p>
+<br>
+<p>            },</p>
+<br>
+<p>        }</p>
+<br>
+<p>    ]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Key principles: use descriptive parameter names with clear descriptions, set proper type constraints, and provide defaults for optional parameters. The LLM uses these descriptions to decide which tool to call and with what arguments.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Function Calling Loop</h2>
+<br>
+<br>
+<br>
+<br>
+<p>The standard pattern is a loop: generate, check for tool calls, execute, and feed results back:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    def tool_use_loop(messages: list, tools: list, max_turns=10):</p>
+<br>
+<p>        for turn in range(max_turns):</p>
+<br>
+<p>            response = client.chat.completions.create(</p>
+<br>
+<p>                model="gpt-4o",</p>
+<br>
+<p>                messages=messages,</p>
+<br>
+<p>                tools=tools,</p>
+<br>
+<p>                tool_choice="auto",</p>
+<br>
+<p>            )</p>
+<br>
+<br>
+<br>
+<p>            message = response.choices[0].message</p>
+<br>
+<p>            messages.append(message)</p>
+<br>
+<br>
+<br>
+<p>            if not message.tool_calls:</p>
+<br>
+<p>                return message.content</p>
+<br>
+<br>
+<br>
+<p>            for tool_call in message.tool_calls:</p>
+<br>
+<p>                result = execute_tool(tool_call.function.name, tool_call.function.arguments)</p>
+<br>
+<p>                messages.append({</p>
+<br>
+<p>                    "tool_call_id": tool_call.id,</p>
+<br>
+<p>                    "role": "tool",</p>
+<br>
+<p>                    "content": str(result),</p>
+<br>
+<p>                })</p>
+<br>
+<br>
+<br>
+<p>        return "Max turns reached"</p>
+<br>
+<br>
+<br>
+<p>    def execute_tool(name: str, args_json: str):</p>
+<br>
+<p>        args = json.loads(args_json)</p>
+<br>
+<p>        if name == "search_documents":</p>
+<br>
+<p>            return search_documents(**args)</p>
+<br>
+<p>        elif name == "calculate":</p>
+<br>
+<p>            return calculate(**args)</p>
+<br>
+<p>        raise ValueError(f"Unknown tool: {name}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The LLM sees the tool result as new context and decides whether to call another tool or produce a final answer.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Multi-Step Reasoning with Tools</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Complex tasks require multiple tool calls where later calls depend on earlier results:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    def research_workflow(topic: str):</p>
+<br>
+<p>        messages = [{"role": "user", "content": f"Research {topic} and write a comprehensive summary."}]</p>
+<br>
+<br>
+<br>
+<p>        # Step 1: Search for information</p>
+<br>
+<p>        response = client.chat.completions.create(</p>
+<br>
+<p>            model="gpt-4o", messages=messages, tools=research_tools, tool_choice="auto"</p>
+<br>
+<p>        )</p>
+<br>
+<p>        # Execute search, get results</p>
+<br>
+<p>        # Step 2: Verify facts using a different source</p>
+<br>
+<p>        # Step 3: Structure the findings</p>
+<br>
+<p>        # Step 4: Generate the summary</p>
+<br>
+<br>
+<br>
+<p>        return final_summary</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Structured Tools with Validation</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Anthropic's tool use API supports structured tool definitions with JSON Schema and strict mode:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    import anthropic</p>
+<br>
+<br>
+<br>
+<p>    client = anthropic.Anthropic()</p>
+<br>
+<br>
+<br>
+<p>    response = client.messages.create(</p>
+<br>
+<p>        model="claude-sonnet-4-20260512",</p>
+<br>
+<p>        max_tokens=1024,</p>
+<br>
+<p>        tools=[</p>
+<br>
+<p>            {</p>
+<br>
+<p>                "name": "get_weather",</p>
+<br>
+<p>                "description": "Get current weather for a location",</p>
+<br>
+<p>                "input_schema": {</p>
+<br>
+<p>                    "type": "object",</p>
+<br>
+<p>                    "properties": {</p>
+<br>
+<p>                        "location": {"type": "string", "description": "City name"},</p>
+<br>
+<p>                        "units": {"type": "string", "enum": ["celsius", "fahrenheit"]},</p>
+<br>
+<p>                    },</p>
+<br>
+<p>                    "required": ["location"],</p>
+<br>
+<p>                },</p>
+<br>
+<p>            }</p>
+<br>
+<p>        ],</p>
+<br>
+<p>        messages=[{"role": "user", "content": "What is the weather in Tokyo?"}],</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<p>    for block in response.content:</p>
+<br>
+<p>        if block.type == "tool_use":</p>
+<br>
+<p>            print(f"Calling {block.name} with {block.input}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Error Handling in Tool Calls</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Tools fail. Plan for timeouts, invalid arguments, and unexpected responses:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    def safe_tool_execution(tool_call, timeout=10):</p>
+<br>
+<p>        try:</p>
+<br>
+<p>            with Timeout(timeout):</p>
+<br>
+<p>                result = execute_tool(tool_call.function.name, tool_call.function.arguments)</p>
+<br>
+<p>                return {"success": True, "result": result}</p>
+<br>
+<p>        except TimeoutError:</p>
+<br>
+<p>            return {"success": False, "error": "Tool execution timed out"}</p>
+<br>
+<p>        except ValueError as e:</p>
+<br>
+<p>            return {"success": False, "error": f"Invalid arguments: {e}"}</p>
+<br>
+<p>        except Exception as e:</p>
+<br>
+<p>            return {"success": False, "error": f"Unexpected error: {e}"}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>When a tool fails, pass the error message back to the LLM so it can retry with corrected arguments or choose a different approach.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Conclusion</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Tool use transforms LLMs from passive text generators into active problem-solvers. Define tools with clear schemas, implement a robust function-calling loop, chain tool calls for multi-step tasks, and always handle errors gracefully by feeding failures back into the conversation context.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

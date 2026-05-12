@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="api-gateway-patterns">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="API Gateway Patterns">
+    <meta property="og:description" content="Explore API Gateway patterns: routing, aggregation, authentication, rate limiting, and implementation strategies">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/api-gateway-patterns.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="API Gateway Patterns">
+    <meta name="twitter:description" content="Explore API Gateway patterns: routing, aggregation, authentication, rate limiting, and implementation strategies">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>API Gateway Patterns — SourceHub</title>
+    <meta name="description" content="Explore API Gateway patterns: routing, aggregation, authentication, rate limiting, and implementation strategies">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/api-gateway-patterns.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/api-gateway-patterns.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "API Gateway Patterns",
+      "description": "Explore API Gateway patterns: routing, aggregation, authentication, rate limiting, and implementation strategies",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1036",
+      "keywords": "Architecture, System Design, Backend",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/api-gateway-patterns.html"},
+      "articleBody": "API Gateway Patterns An API gateway is a server that acts as the single entry point for client requests in a microservice architecture. It receives client requests, routes them to appropriate backend services, aggregates responses, and enforces cross-cutting concerns like authentication, rate limiting, and logging. This article examines the core API gateway patterns and their implementation considerations. Routing The fundamental API gateway pattern is routing. The gateway inspects incoming requests and forwards them to the appropriate backend service based on URL path, headers, or other attributes. For example, `/api/users/*` routes to the user service, and `/api/orders/*` routes to the order service. Routing in the gateway decouples clients from backend service locations. Clients only know the gateway URL, and backend services can be moved, split, or scaled without client changes. The gateway manages service discovery internally, typically integrating with Consul, Kubernetes DNS, or a static configuration. API Aggregation The aggregation pattern combines responses from multiple backend services into a single response. If a mobile client needs user details, order history, and product recommendations, the gateway makes parallel calls to each service and combines the results into one response. Aggregation reduces round trips for clients, which is especially valuable for mobile applications on unreliable networks. The gateway handles error aggregation\u2014if one service fails, the gateway can return partial data, retry, or fail gracefully depending on the use case. Implementing aggregation requires careful timeout configuration. The gateway should not wait indefinitely for slow services. Circuit breaker patterns within the gateway prevent slow downstream services from degrading gateway performance. Authentication and Authorization Centralizing authentication in the gateway simplifies security. The gateway validates tokens (JWT, OAuth2), checks permissions, and enforces authentication requirements. Backend services trust the gateway to set authenticated user headers rather than implementing their own authentication. The gateway can handle token translation: accepting an OAuth2 token from the client and generating a short-lived service token for backend communication. It can also enforce IP whitelisting, API key validation, and rate limiting based on authenticated user identity. Rate Limiting Rate limiting at the gateway protects backend services from overload. The gateway tracks request rates per client, IP, or API key and rejects requests that exceed configured limits. Common algorithms include token bucket, leaky bucket, and sliding window counters. Distributed rate limiting requires a shared store like Redis to track counters across gateway instances. The gateway also needs to communicate rate limit status through response headers, allowing clients to adjust their behavior. Cross-Cutting Concerns The gateway is the natural place to implement cross-cutting concerns. Request logging captures all API traffic in a consistent format. Request ID generation enables distributed tracing across services. Response caching reduces load on backend services for frequently accessed data. The gateway can also handle protocol translation: accepting REST requests and forwarding them as gRPC calls, or converting between different serialization formats. This enables backend services to use optimal protocols while maintaining client compatibility. Implementation Options Several implementation options exist for API gateways. Kong and Tyk are purpose-built gateway platforms with plugin ecosystems. Envoy and Nginx are high-performance proxies suitable for custom gateway implementations. AWS API Gateway, Azure API Management, and Google Apigee are managed cloud gateway services. Custom gateway implementations using frameworks like Spring Cloud Gateway or Express Gateway offer maximum flexibility but require more development effort. The choice depends on your performance requirements, team expertise, and need for customization. Gateway vs Service Mesh API gateways and service meshes serve different purposes but overlap in functionality. Gateways handle north-south traffic (external clients to services). Service meshes handle east-west traffic (service to service). Some features like routing and rate limiting exist in both layers, but they operate at different boundaries. A common architecture uses both: an API gateway for external traffic management and a service mesh for internal traffic. The gateway focuses on client-facing concerns, while the mesh handles inter-service communication. This layered approach provides comprehensive traffic management across all communication boundaries. API gateway patterns are essential for microservice architectures, providing centralized control over external-facing API traffic while keeping backend services focused on business logic."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "API Gateway Patterns"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › API Gateway Patterns
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">API Gateway Patterns</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>API Gateway Patterns</h1>
+<br>
+<p>An API gateway is a server that acts as the single entry point for client requests in a microservice architecture. It receives client requests, routes them to appropriate backend services, aggregates responses, and enforces cross-cutting concerns like authentication, rate limiting, and logging. This article examines the core API gateway patterns and their implementation considerations.   </p>
+<p>Routing   </p>
+<p>The fundamental API gateway pattern is routing. The gateway inspects incoming requests and forwards them to the appropriate backend service based on URL path, headers, or other attributes. For example, `/api/users/*` routes to the user service, and `/api/orders/*` routes to the order service.   </p>
+<p>Routing in the gateway decouples clients from backend service locations. Clients only know the gateway URL, and backend services can be moved, split, or scaled without client changes. The gateway manages service discovery internally, typically integrating with Consul, Kubernetes DNS, or a static configuration.   </p>
+<p>API Aggregation   </p>
+<p>The aggregation pattern combines responses from multiple backend services into a single response. If a mobile client needs user details, order history, and product recommendations, the gateway makes parallel calls to each service and combines the results into one response.   </p>
+<p>Aggregation reduces round trips for clients, which is especially valuable for mobile applications on unreliable networks. The gateway handles error aggregation—if one service fails, the gateway can return partial data, retry, or fail gracefully depending on the use case.   </p>
+<p>Implementing aggregation requires careful timeout configuration. The gateway should not wait indefinitely for slow services. Circuit breaker patterns within the gateway prevent slow downstream services from degrading gateway performance.   </p>
+<p>Authentication and Authorization   </p>
+<p>Centralizing authentication in the gateway simplifies security. The gateway validates tokens (JWT, OAuth2), checks permissions, and enforces authentication requirements. Backend services trust the gateway to set authenticated user headers rather than implementing their own authentication.   </p>
+<p>The gateway can handle token translation: accepting an OAuth2 token from the client and generating a short-lived service token for backend communication. It can also enforce IP whitelisting, API key validation, and rate limiting based on authenticated user identity.   </p>
+<p>Rate Limiting   </p>
+<p>Rate limiting at the gateway protects backend services from overload. The gateway tracks request rates per client, IP, or API key and rejects requests that exceed configured limits. Common algorithms include token bucket, leaky bucket, and sliding window counters.   </p>
+<p>Distributed rate limiting requires a shared store like Redis to track counters across gateway instances. The gateway also needs to communicate rate limit status through response headers, allowing clients to adjust their behavior.   </p>
+<p>Cross-Cutting Concerns   </p>
+<p>The gateway is the natural place to implement cross-cutting concerns. Request logging captures all API traffic in a consistent format. Request ID generation enables distributed tracing across services. Response caching reduces load on backend services for frequently accessed data.   </p>
+<p>The gateway can also handle protocol translation: accepting REST requests and forwarding them as gRPC calls, or converting between different serialization formats. This enables backend services to use optimal protocols while maintaining client compatibility.   </p>
+<p>Implementation Options   </p>
+<p>Several implementation options exist for API gateways. Kong and Tyk are purpose-built gateway platforms with plugin ecosystems. Envoy and Nginx are high-performance proxies suitable for custom gateway implementations. AWS API Gateway, Azure API Management, and Google Apigee are managed cloud gateway services.   </p>
+<p>Custom gateway implementations using frameworks like Spring Cloud Gateway or Express Gateway offer maximum flexibility but require more development effort. The choice depends on your performance requirements, team expertise, and need for customization.   </p>
+<p>Gateway vs Service Mesh   </p>
+<p>API gateways and service meshes serve different purposes but overlap in functionality. Gateways handle north-south traffic (external clients to services). Service meshes handle east-west traffic (service to service). Some features like routing and rate limiting exist in both layers, but they operate at different boundaries.   </p>
+<p>A common architecture uses both: an API gateway for external traffic management and a service mesh for internal traffic. The gateway focuses on client-facing concerns, while the mesh handles inter-service communication. This layered approach provides comprehensive traffic management across all communication boundaries.   </p>
+<p>API gateway patterns are essential for microservice architectures, providing centralized control over external-facing API traffic while keeping backend services focused on business logic.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

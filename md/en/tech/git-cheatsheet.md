@@ -99,5 +99,3 @@ See what you did| `git log --oneline -10`
 Sync with remote| `git pull --rebase`  
   
 Bookmark this page. You'll be back.
-
-**See also:** [Linux Commands Cheat Sheet: 50 Commands Every Developer Should Know](</en/tech/linux-commands.html>), [Git Advanced: Interactive Rebase, Cherry-Pick, Bisect, and More](</en/tech/git-advanced.html>), [Best Remote Work Platforms: Upwork, Toptal, and Beyond](</en/sidehustle/remote-work.html>).

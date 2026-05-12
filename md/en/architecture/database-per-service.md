@@ -6,105 +6,28 @@ board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/database-per-service.html
 ---
 
-The database per service pattern is a fundamental principle of microservices architecture. Each service owns its data and exposes it only through its API. No other service can access a service's database directly. This article explores the pattern, its benefits, challenges, and practical implementation strategies.
+# Database per Service Pattern
 
-## The Core Principle
-
-In a monolithic application, a single database serves all modules. This creates tight coupling between modules -- changing one module's schema can break another module's queries. The database becomes a bottleneck and a single point of failure.
-
-With database per service:
-
-```
-[Order Service]    -> [Order DB]     (private)
-[Payment Service]  -> [Payment DB]   (private)
-[Inventory Service]-> [Inventory DB] (private)
-```
-
-Each service has complete ownership of its database. Other services can only interact with the data through the service's API. This ensures:
-- **Encapsulation**: Service internals are hidden.
-- **Independent evolution**: Services can change their database schema without coordinating with other teams.
-- **Independent scaling**: Each service can choose the database technology that best fits its needs.
-
-## Benefits
-
-**Decentralized data management.** Each team chooses the best database for their service's needs. The order service might use PostgreSQL for ACID compliance. The analytics service might use a columnar store or data warehouse. The product catalog might use Elasticsearch for full-text search.
-
-**Independent scalability.** Services with high data volume can scale independently. The order database can be scaled up without affecting the payment database.
-
-**Fault isolation.** A failure in one service's database does not affect other services. If the inventory database goes down, the order service can still handle requests using cached or default inventory data.
-
-**Team autonomy.** Service teams can change their schema, migrate databases, or switch technologies without coordinating with other teams. This speed is a primary goal of microservices.
-
-**Polyglot persistence.** Different data storage technologies excel at different tasks. SQL, NoSQL, key-value stores, graph databases, and time-series databases each have strengths. The database per service pattern lets you choose the right tool for each job.
-
-## Challenges
-
-### Data Consistency Across Services
-
-In a monolith, a single ACID transaction can update multiple tables atomically. In a microservices architecture with separate databases, cross-service transactions are not possible.
-
-**Solution:** Use the saga pattern. A saga is a sequence of local transactions, each within a single service. If a step fails, compensating transactions undo prior steps. Sagas provide eventual consistency without distributed transactions.
-
-### Queries Across Services
-
-A query like "find all orders containing a product that is currently on sale" spans the order service and the product service. With separate databases, a simple JOIN is impossible.
-
-**Solutions:**
-- **API composition**: The calling service queries each service individually and combines results in memory. Simple but can be slow for complex queries.
-- **CQRS**: Maintain a read-optimized view that aggregates data from multiple services. Updates are asynchronous. This is the recommended approach for complex queries.
-- **Event-driven data synchronization**: Services publish events when their data changes. Other services consume these events and update their own copies of the data.
-
-### Data Duplication
-
-Multiple services might need the same data. The order service needs customer names. The shipping service needs customer addresses. Different pieces of customer data are owned by different services.
-
-**Solution:** Each piece of data has a single source of truth (the service that owns it). Other services store cached or derived copies. Event-driven updates keep copies synchronized. Accept that some data duplication is normal and intentional in distributed systems.
-
-## Polyglot Persistence in Practice
-
-Choosing the right database for each service:
-
-- **Order Service**: PostgreSQL or MySQL for ACID transactions and relational data.
-- **Product Catalog**: Elasticsearch for full-text search and faceted filtering.
-- **Shopping Cart**: Redis for fast, temporary key-value storage.
-- **User Session**: DynamoDB or Cassandra for high-velocity, low-latency access.
-- **Analytics**: ClickHouse or BigQuery for columnar storage and aggregation queries.
-- **Graph**: Neo4j for relationship-heavy data like recommendations.
-
-The cost of polyglot persistence is operational complexity. Each database type has different management, monitoring, and backup requirements. Evaluate whether the benefits justify the additional operational burden.
-
-## Eventual Consistency and Compensations
-
-Embrace eventual consistency between services. When a user places an order:
-
-1. Order service creates the order (immediate).
-2. Order service publishes `OrderCreated` event.
-3. Inventory service consumes the event and reserves inventory (may take milliseconds).
-4. Payment service consumes the event and processes payment (may take seconds).
-
-Between steps 1 and 4, the order is in a "pending" state. This window of inconsistency is normal. The user sees "Order placed, processing payment" rather than an immediate confirmation.
-
-Design your compensation logic carefully. If payment fails:
-- Cancel the reservation (inventory compensation).
-- Notify the user.
-- Mark the order as failed.
-
-## Transactional Boundaries
-
-Define clear transactional boundaries for each service. A service should encapsulate data that changes together. If two pieces of data are always read and written together, they might belong in the same service.
-
-A common mistake is splitting data too finely. If every order operation needs to query customer data, the order and customer services are tightly coupled by data dependencies. In such cases, reconsider the service boundaries.
-
-## Migration Strategy
-
-Migrating from a shared database to database per service:
-
-1. **Identify bounded contexts** based on domain-driven design.
-2. **Extract one service at a time**. Do not attempt a big bang migration.
-3. **Use database views or triggers** as temporary bridges during migration.
-4. **Implement event-driven synchronization** to keep data in sync during the transition.
-5. **Cut over traffic** service by service.
-
-## Summary
-
-The database per service pattern is essential for microservices that need independent scalability, team autonomy, and polyglot persistence. Embrace eventual consistency across services and use the saga pattern for multi-service operations. Accept data duplication as a normal part of distributed systems. Choose database technologies based on each service's specific requirements, but be mindful of the operational complexity that comes with multiple database systems.
+The database per service pattern is a fundamental principle of microservice architecture: each service owns its data exclusively and no other service can directly access its database. This pattern ensures loose coupling between services, allowing them to evolve independently, choose appropriate storage technologies, and scale autonomously. However, it introduces significant challenges for queries that span multiple services.   
+Data Ownership   
+In the database per service pattern, each service has complete ownership of its data schema, storage technology, and access patterns. No other service can read or write to the database directly—all data access must go through the owning service's API.   
+This ownership is essential for independent evolution. A service can change its database schema, migrate to a different database technology, or refactor its data model without coordinating with other services. The API is the contract, and as long as the API remains backward compatible, the service is free to change its internal implementation.   
+Ownership also clarifies responsibility. When data issues arise, there is no ambiguity about which team owns the data. Data quality, consistency, and backup policies are the responsibility of the owning service.   
+Choosing Storage Technology   
+Database per service allows each service to choose the storage technology that best fits its needs. A product catalog service might use a document database for flexible product schemas. An analytics service might use a columnar store for efficient aggregations. A session store might use Redis for fast key-value access.   
+Polyglot persistence—using different database technologies for different services—is a key benefit of the pattern. Each service can optimize its data storage for its specific access patterns without being constrained by a shared database technology.   
+Queries Across Services   
+The most significant challenge with database per service is queries that need data from multiple services. Since services cannot directly access each other's databases, they must fetch data through APIs. This introduces latency, network overhead, and complexity.   
+Several patterns address cross-service queries. API composition involves a service or gateway calling multiple services and combining results in memory. This is simple but can be slow and resource-intensive for complex queries.   
+The CQRS pattern creates specialized query services that maintain pre-joined read models. A reporting service subscribes to events from multiple services and builds denormalized tables for efficient querying. This provides good query performance but introduces eventual consistency.   
+The materialized view pattern creates dedicated read services that aggregate data from multiple sources. These services own the read model and keep it synchronized through event subscriptions. This is the most scalable approach for complex cross-service queries.   
+Transactions Across Services   
+Distributed transactions across services require the Saga pattern rather than traditional ACID transactions. The Saga pattern coordinates a series of local transactions with compensating actions. This ensures data consistency without requiring a shared database or distributed transaction coordinator.   
+Performance implications of cross-service queries are significant. Each cross-service API call adds network latency, serialization overhead, authentication checks, and rate limiting. Services should be designed to minimize cross-service queries. This often means duplicating data (with clear ownership) across services.   
+Eventual Consistency   
+Database per service means that the system is eventually consistent. When data changes in one service, other services learn about it through events with some delay. Building a system that works correctly with eventual consistency requires careful design.   
+Strategies include displaying stale data with clear indicators, using optimistic UI updates, and designing workflows that tolerate temporary inconsistencies. The key is understanding which operations require strong consistency and which tolerate eventual consistency.   
+Practical Implementation   
+Organizations adopting database per service should start by identifying service boundaries that align with data ownership. Each service should own data that naturally belongs to its domain. Cross-service data should be analyzed to identify whether the service boundaries are correct or whether data synchronization is needed.   
+The pattern is most effective when combined with event-driven communication. Services publish events when their data changes, and other services consume events to update their cached or duplicated data. This reduces the need for synchronous cross-service queries.   
+Database per service is a powerful pattern for achieving service autonomy and independent scalability, but it requires disciplined data management, investment in cross-service query patterns, and acceptance of eventual consistency. For teams that make this investment, the pattern enables truly independent service evolution.

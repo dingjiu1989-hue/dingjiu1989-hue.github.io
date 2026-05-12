@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="rag-pipeline-optimization">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="RAG Pipeline Optimization: Production Best Practices">
+    <meta property="og:description" content="Optimize Retrieval-Augmented Generation pipelines: chunking strategies, embedding selection, retrieval tuning, and evaluation.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/rag-pipeline-optimization.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="RAG Pipeline Optimization: Production Best Practices">
+    <meta name="twitter:description" content="Optimize Retrieval-Augmented Generation pipelines: chunking strategies, embedding selection, retrieval tuning, and evaluation.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>RAG Pipeline Optimization: Production Best Practices — SourceHub</title>
+    <meta name="description" content="Optimize Retrieval-Augmented Generation pipelines: chunking strategies, embedding selection, retrieval tuning, and evaluation.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/rag-pipeline-optimization.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/ai/rag-pipeline-optimization.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "RAG Pipeline Optimization: Production Best Practices",
+      "description": "Optimize Retrieval-Augmented Generation pipelines: chunking strategies, embedding selection, retrieval tuning, and evaluation.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "497",
+      "keywords": "AI, Machine Learning, LLM",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/rag-pipeline-optimization.html"},
+      "articleBody": "RAG Pipeline Optimization: Production Best Practices Retrieval-Augmented Generation (RAG) combines information retrieval with LLM generation. Production RAG requires careful optimization of every pipeline stage. Chunking Strategies Document chunking determines what information is retrieved. Fixed-size chunking with overlap is simple but can split semantic units. Semantic chunking uses NLP to find natural boundaries (sentence, paragraph, section boundaries). Optimal chunk size depends on your retrieval task. 256-512 tokens works well for factual Q&A. Larger chunks (1000-2000 tokens) preserve context for summarization. Smaller chunks improve precision. Agentic chunking summarizes each chunk for improved retrieval relevance. Embedding Selection Choose embeddings based on your content type and language. OpenAI ada-002 works well for general English content. Multilingual embeddings (multilingual-e5, intfloat/multilingual-e5-large) support cross-lingual retrieval. Domain-specific embeddings (code-search, legal, biomedical) outperform general embeddings in specialized domains. Embedding dimension affects storage and retrieval speed. 1536 dimensions (ada-002) is a good default. 768 dimensions reduces storage with minimal accuracy loss. Consider Matryoshka embeddings (intfloat/e5-mistral-7b-instruct) for flexible dimensionality. Retrieval Tuning Hybrid search combines keyword (BM25) and semantic (embedding) retrieval. This captures exact matches that embeddings miss and semantic matches that keywords miss. Weight the two scores based on your content characteristics. Metadata filtering narrows retrieval scope. Filter by date, category, source, or document type. This improves relevance and reduces latency by limiting the search space. Pre-filtering (filter before search) is faster. Post-filtering (search then filter) is more accurate. Evaluation Evaluate RAG pipelines on retrieval metrics (hit rate, MRR, NDCG) and generation metrics (answer relevance, faithfulness, correctness). Use RAGAS framework for automated evaluation. Build golden QA datasets from real user queries. Monitor production performance with user feedback signals. Optimization is iterative. Test chunk size, embedding model, top-k, and prompt template combinations. Use A/B testing in production for significant changes."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "RAG Pipeline Optimization: Production Best Practices"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › RAG Pipeline Optimization: Production Best Practices
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">AI</span>
+        <span class="tag-cat">Machine Learning</span>
+        <span class="tag-cat">LLM</span></div>
+      <h1 class="article-title">RAG Pipeline Optimization: Production Best Practices</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>RAG Pipeline Optimization: Production Best Practices</h1>
+<p>Retrieval-Augmented Generation (RAG) combines information retrieval with LLM generation. Production RAG requires careful optimization of every pipeline stage.</p>
+<br>
+<h2> Chunking Strategies</h2>
+<br>
+<p>Document chunking determines what information is retrieved. Fixed-size chunking with overlap is simple but can split semantic units. Semantic chunking uses NLP to find natural boundaries (sentence, paragraph, section boundaries).</p>
+<br>
+<p>Optimal chunk size depends on your retrieval task. 256-512 tokens works well for factual Q&A. Larger chunks (1000-2000 tokens) preserve context for summarization. Smaller chunks improve precision. Agentic chunking summarizes each chunk for improved retrieval relevance.</p>
+<br>
+<h2> Embedding Selection</h2>
+<br>
+<p>Choose embeddings based on your content type and language. OpenAI ada-002 works well for general English content. Multilingual embeddings (multilingual-e5, intfloat/multilingual-e5-large) support cross-lingual retrieval. Domain-specific embeddings (code-search, legal, biomedical) outperform general embeddings in specialized domains.</p>
+<br>
+<p>Embedding dimension affects storage and retrieval speed. 1536 dimensions (ada-002) is a good default. 768 dimensions reduces storage with minimal accuracy loss. Consider Matryoshka embeddings (intfloat/e5-mistral-7b-instruct) for flexible dimensionality.</p>
+<br>
+<h2> Retrieval Tuning</h2>
+<br>
+<p>Hybrid search combines keyword (BM25) and semantic (embedding) retrieval. This captures exact matches that embeddings miss and semantic matches that keywords miss. Weight the two scores based on your content characteristics.</p>
+<br>
+<p>Metadata filtering narrows retrieval scope. Filter by date, category, source, or document type. This improves relevance and reduces latency by limiting the search space. Pre-filtering (filter before search) is faster. Post-filtering (search then filter) is more accurate.</p>
+<br>
+<h2> Evaluation</h2>
+<br>
+<p>Evaluate RAG pipelines on retrieval metrics (hit rate, MRR, NDCG) and generation metrics (answer relevance, faithfulness, correctness). Use RAGAS framework for automated evaluation. Build golden QA datasets from real user queries. Monitor production performance with user feedback signals.</p>
+<br>
+<p>Optimization is iterative. Test chunk size, embedding model, top-k, and prompt template combinations. Use A/B testing in production for significant changes.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

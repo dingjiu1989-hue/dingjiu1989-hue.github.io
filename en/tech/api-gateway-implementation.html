@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1562",
+      "wordCount": "2061",
       "keywords": "Technology, Programming, DevOps",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/api-gateway-implementation.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/api-gateway-implementation.html"},
+      "articleBody": "API Gateway Implementation Guide Introduction An API gateway sits at the boundary between clients and backend services, handling cross-cutting concerns like authentication, rate limiting, routing, and observability. Choosing the right gateway and deployment pattern is critical for microservice architectures. This guide compares Kong, Tyk, and Apache APISIX across the dimensions that matter in production. Gateway Comparison Kong Gateway Kong is built on OpenResty (NGINX + Lua) and offers enterprise features through a plugin ecosystem: # Kong declarative config (kong.yml) _format_version: \"3.0\" services: - name: user-service url: http://user-svc:8080 routes: - name: user-routes paths: - /api/v1/users methods: [GET, POST, PUT, DELETE] strip_path: false plugins: - name: rate-limiting config: minute: 100 hour: 1000 policy: local - name: key-auth config: key_names: [\"X-API-Key\"] - name: cors config: origins: [\"*\"] methods: [\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"] Apache APISIX APISIX provides sub-millisecond route matching via a radix tree and supports hot-reload of plugins: # APISIX Admin API curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d ' { \"uri\": \"/api/v1/orders/*\", \"methods\": [\"GET\", \"POST\"], \"upstream\": { \"type\": \"roundrobin\", \"nodes\": { \"order-svc:8080\": 1 } }, \"plugins\": { \"limit-req\": { \"rate\": 10, \"burst\": 20, \"rejected_code\": 429 }, \"jwt-auth\": { \"header\": \"Authorization\" }, \"prometheus\": {} } }' Tyk Tyk offers a dashboard-centric approach with API definitions stored in Redis: { \"name\": \"Payment API\", \"api_id\": \"payment-api-v1\", \"org_id\": \"default-org\", \"proxy\": { \"target_url\": \"http://payment-svc:8080\", \"listen_path\": \"/api/v1/payments/\", \"strip_listen_path\": true }, \"version_data\": { \"not_versioned\": true }, \"auth\": { \"auth_header_name\": \"Authorization\" }, \"rate_limit\": { \"rate\": 100, \"per\": 60 }, \"enable_coprocess_auth\": false } Routing Strategies Gateways support multiple routing strategies critical for microservice decomposition: -- Kong: complex route matching with regex { name = \"complex-route\", paths = { \"/api/v2/(users|orders|products)/?.*\" }, hosts = { \"api.example.com\" }, methods = { \"GET\", \"POST\" }, protocols = { \"https\" }, priority = 100 -- Higher priority routes checked first } APISIX supports weight-based routing for canary deployments: upstream: type: weighted_upstream nodes: user-svc-v1:8080: 90 user-svc-v2:8080: 10 Rate Limiting and Throttling Implement multi-layered rate limiting to protect backend services: -- Kong: combined rate limiting strategy { name = \"rate-limiting-advanced\", config = { limit_by = \"consumer\", -- consumer, credential, ip, service policy = \"redis\", -- local, redis, cluster minute = 60, hour = 1000, fault_tolerant = true, hide_client_headers = false, redis_host = \"redis-cluster\", redis_port = 6379, redis_timeout = 2000 } } Authentication Plugin Integration Layer multiple auth methods with priority-based execution: plugins: - name: key-auth config: key_names: [\"X-API-Key\"] key_in_header: true key_in_query: false hide_credentials: true run_on_preflight: true - name: oauth2 config: scopes: [\"read\", \"write\", \"admin\"] mandatory_scope: true provision_key: \"${OAUTH_PROVISION_KEY}\" token_expiration: 3600 enable_authorization_code: true enable_client_credentials: true Request/Response Transformation Transform payloads between client and service boundaries: -- Kong: response transformer plugin { name = \"response-transformer\", config = { remove = { json = { \"password\", \"credit_card\", \"ssn\" } }, add = { headers = { \"X-Response-Time:$(context.now)\" } } } } APISIX supports serverless functions for custom transformations: -- APISIX: serverless plugin for custom logic { \"serverless-pre-function\": { \"phase\": \"rewrite\", \"functions\": [\"return function(conf, ctx) local core = require(\\\"apisix.core\\\") local token = core.request.header(ctx, \\\"Authorization\\\") if token then core.request.set_header(ctx, \\\"X-Internal-Token\\\", token:sub(8)) end end\"] } } Analytics and Observability All three gateways export metrics for monitoring and billing: # APISIX: Prometheus and logging plugins: - name: prometheus config: prefer_name: true - name: http-logger config: uri: http://log-collector:5000/logs batch_max_size: 100 inactive_timeout: 5 - name: skywalking config: sample_ratio: 0.1 Deployment Patterns Sidecar Pattern Deploy the gateway as a sidecar alongside each service, suitable for service mesh architectures: apiVersion: apps/v1 kind: Deployment metadata: name: user-service spec: template: spec: containers: - name: user-app image: user-service:latest - name: kong-sidecar image: kong:3.6 env: - name: KONG_ROLE value: data_plane - name: KONG_CLUSTER_CONTROL_PLANE value: cp:8005 Centralized Pattern A shared gateway cluster handles all ingress traffic: apiVersion: networking.k8s.io/v1 kind: IngressClass metadata: name: apisix spec: controller: apache.org/apisix-ingress-controller --- apiVersion: apisix.apache.org/v2 kind: ApisixRoute metadata: name: main-route spec: http: - name: root match: hosts: [\"api.example.com\"] paths: [\"/*\"] backends: - serviceName: aggregator-svc servicePort: 80 Select the centralized pattern for simpler operations and the sidecar pattern for strict traffic isolation in multi-tenant environments. Whichever gateway you choose, invest in declarative configuration management and CI/CD integration from day one to avoid configuration drift at scale."
     }
     </script>
     <script type="application/ld+json">
@@ -74,473 +75,589 @@
         <span class="tag-cat">DevOps</span></div>
       <h1 class="article-title">API Gateway Implementation Guide</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Introduction</h2>
+      <div class="article-body"><h1>API Gateway Implementation Guide</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <p>An API gateway sits at the boundary between clients and backend services, handling cross-cutting concerns like authentication, rate limiting, routing, and observability. Choosing the right gateway and deployment pattern is critical for microservice architectures. This guide compares Kong, Tyk, and Apache APISIX across the dimensions that matter in production.</p>
 <br>
-<h2> Gateway Comparison</h2>
+<br>
+<br>
+<br>
+<h2>  Gateway Comparison</h2>
+<br>
+<br>
+<br>
 <br>
 <h3>Kong Gateway</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Kong is built on OpenResty (NGINX + Lua) and offers enterprise features through a plugin ecosystem:</p>
 <br>
-<pre><code>
-# Kong declarative config (kong.yml)
-
-_format_version: &quot;3.0&quot;
-
-services:
-
-  - name: user-service
-
-    url: http://user-svc:8080
-
-    routes:
-
-      - name: user-routes
-
-        paths:
-
-          - /api/v1/users
-
-        methods: [GET, POST, PUT, DELETE]
-
-        strip_path: false
-
-    plugins:
-
-      - name: rate-limiting
-
-        config:
-
-          minute: 100
-
-          hour: 1000
-
-          policy: local
-
-      - name: key-auth
-
-        config:
-
-          key_names: [&quot;X-API-Key&quot;]
-
-      - name: cors
-
-        config:
-
-          origins: [&quot;*&quot;]
-
-          methods: [&quot;GET&quot;, &quot;POST&quot;, &quot;PUT&quot;, &quot;DELETE&quot;, &quot;OPTIONS&quot;]
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # Kong declarative config (kong.yml)</p>
+<br>
+<p>    _format_version: "3.0"</p>
+<br>
+<p>    services:</p>
+<br>
+<p>      - name: user-service</p>
+<br>
+<p>        url: http://user-svc:8080</p>
+<br>
+<p>        routes:</p>
+<br>
+<p>          - name: user-routes</p>
+<br>
+<p>            paths:</p>
+<br>
+<p>              - /api/v1/users</p>
+<br>
+<p>            methods: [GET, POST, PUT, DELETE]</p>
+<br>
+<p>            strip_path: false</p>
+<br>
+<p>        plugins:</p>
+<br>
+<p>          - name: rate-limiting</p>
+<br>
+<p>            config:</p>
+<br>
+<p>              minute: 100</p>
+<br>
+<p>              hour: 1000</p>
+<br>
+<p>              policy: local</p>
+<br>
+<p>          - name: key-auth</p>
+<br>
+<p>            config:</p>
+<br>
+<p>              key_names: ["X-API-Key"]</p>
+<br>
+<p>          - name: cors</p>
+<br>
+<p>            config:</p>
+<br>
+<p>              origins: ["*"]</p>
+<br>
+<p>              methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Apache APISIX</h3>
 <br>
+<br>
+<br>
+<br>
 <p>APISIX provides sub-millisecond route matching via a radix tree and supports hot-reload of plugins:</p>
 <br>
-<pre><code>
-# APISIX Admin API
-
-curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d &#x27;
-
-{
-
-  &quot;uri&quot;: &quot;/api/v1/orders/*&quot;,
-
-  &quot;methods&quot;: [&quot;GET&quot;, &quot;POST&quot;],
-
-  &quot;upstream&quot;: {
-
-    &quot;type&quot;: &quot;roundrobin&quot;,
-
-    &quot;nodes&quot;: {
-
-      &quot;order-svc:8080&quot;: 1
-
-    }
-
-  },
-
-  &quot;plugins&quot;: {
-
-    &quot;limit-req&quot;: {
-
-      &quot;rate&quot;: 10,
-
-      &quot;burst&quot;: 20,
-
-      &quot;rejected_code&quot;: 429
-
-    },
-
-    &quot;jwt-auth&quot;: {
-
-      &quot;header&quot;: &quot;Authorization&quot;
-
-    },
-
-    &quot;prometheus&quot;: {}
-
-  }
-
-}&#x27;
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # APISIX Admin API</p>
+<br>
+<p>    curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d '</p>
+<br>
+<p>    {</p>
+<br>
+<p>      "uri": "/api/v1/orders/*",</p>
+<br>
+<p>      "methods": ["GET", "POST"],</p>
+<br>
+<p>      "upstream": {</p>
+<br>
+<p>        "type": "roundrobin",</p>
+<br>
+<p>        "nodes": {</p>
+<br>
+<p>          "order-svc:8080": 1</p>
+<br>
+<p>        }</p>
+<br>
+<p>      },</p>
+<br>
+<p>      "plugins": {</p>
+<br>
+<p>        "limit-req": {</p>
+<br>
+<p>          "rate": 10,</p>
+<br>
+<p>          "burst": 20,</p>
+<br>
+<p>          "rejected_code": 429</p>
+<br>
+<p>        },</p>
+<br>
+<p>        "jwt-auth": {</p>
+<br>
+<p>          "header": "Authorization"</p>
+<br>
+<p>        },</p>
+<br>
+<p>        "prometheus": {}</p>
+<br>
+<p>      }</p>
+<br>
+<p>    }'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Tyk</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Tyk offers a dashboard-centric approach with API definitions stored in Redis:</p>
 <br>
-<pre><code>
-{
-
-  &quot;name&quot;: &quot;Payment API&quot;,
-
-  &quot;api_id&quot;: &quot;payment-api-v1&quot;,
-
-  &quot;org_id&quot;: &quot;default-org&quot;,
-
-  &quot;proxy&quot;: {
-
-    &quot;target_url&quot;: &quot;http://payment-svc:8080&quot;,
-
-    &quot;listen_path&quot;: &quot;/api/v1/payments/&quot;,
-
-    &quot;strip_listen_path&quot;: true
-
-  },
-
-  &quot;version_data&quot;: {
-
-    &quot;not_versioned&quot;: true
-
-  },
-
-  &quot;auth&quot;: {
-
-    &quot;auth_header_name&quot;: &quot;Authorization&quot;
-
-  },
-
-  &quot;rate_limit&quot;: {
-
-    &quot;rate&quot;: 100,
-
-    &quot;per&quot;: 60
-
-  },
-
-  &quot;enable_coprocess_auth&quot;: false
-
-}
-
-</code></pre>
 <br>
-<h2> Routing Strategies</h2>
+<br>
+<br>
+<br>
+<p>    {</p>
+<br>
+<p>      "name": "Payment API",</p>
+<br>
+<p>      "api_id": "payment-api-v1",</p>
+<br>
+<p>      "org_id": "default-org",</p>
+<br>
+<p>      "proxy": {</p>
+<br>
+<p>        "target_url": "http://payment-svc:8080",</p>
+<br>
+<p>        "listen_path": "/api/v1/payments/",</p>
+<br>
+<p>        "strip_listen_path": true</p>
+<br>
+<p>      },</p>
+<br>
+<p>      "version_data": {</p>
+<br>
+<p>        "not_versioned": true</p>
+<br>
+<p>      },</p>
+<br>
+<p>      "auth": {</p>
+<br>
+<p>        "auth_header_name": "Authorization"</p>
+<br>
+<p>      },</p>
+<br>
+<p>      "rate_limit": {</p>
+<br>
+<p>        "rate": 100,</p>
+<br>
+<p>        "per": 60</p>
+<br>
+<p>      },</p>
+<br>
+<p>      "enable_coprocess_auth": false</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Routing Strategies</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Gateways support multiple routing strategies critical for microservice decomposition:</p>
 <br>
-<pre><code>
--- Kong: complex route matching with regex
-
-{
-
-  name = &quot;complex-route&quot;,
-
-  paths = { &quot;/api/v2/(users|orders|products)/?.*&quot; },
-
-  hosts = { &quot;api.example.com&quot; },
-
-  methods = { &quot;GET&quot;, &quot;POST&quot; },
-
-  protocols = { &quot;https&quot; },
-
-  priority = 100  -- Higher priority routes checked first
-
-}
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    -- Kong: complex route matching with regex</p>
+<br>
+<p>    {</p>
+<br>
+<p>      name = "complex-route",</p>
+<br>
+<p>      paths = { "/api/v2/(users|orders|products)/?.*" },</p>
+<br>
+<p>      hosts = { "api.example.com" },</p>
+<br>
+<p>      methods = { "GET", "POST" },</p>
+<br>
+<p>      protocols = { "https" },</p>
+<br>
+<p>      priority = 100  -- Higher priority routes checked first</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>APISIX supports weight-based routing for canary deployments:</p>
 <br>
-<pre><code>
-upstream:
-
-  type: weighted_upstream
-
-  nodes:
-
-    user-svc-v1:8080: 90
-
-    user-svc-v2:8080: 10
-
-</code></pre>
 <br>
-<h2> Rate Limiting and Throttling</h2>
+<br>
+<br>
+<br>
+<p>    upstream:</p>
+<br>
+<p>      type: weighted_upstream</p>
+<br>
+<p>      nodes:</p>
+<br>
+<p>        user-svc-v1:8080: 90</p>
+<br>
+<p>        user-svc-v2:8080: 10</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Rate Limiting and Throttling</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Implement multi-layered rate limiting to protect backend services:</p>
 <br>
-<pre><code>
--- Kong: combined rate limiting strategy
-
-{
-
-  name = &quot;rate-limiting-advanced&quot;,
-
-  config = {
-
-    limit_by = &quot;consumer&quot;,  -- consumer, credential, ip, service
-
-    policy = &quot;redis&quot;,        -- local, redis, cluster
-
-    minute = 60,
-
-    hour = 1000,
-
-    fault_tolerant = true,
-
-    hide_client_headers = false,
-
-    redis_host = &quot;redis-cluster&quot;,
-
-    redis_port = 6379,
-
-    redis_timeout = 2000
-
-  }
-
-}
-
-</code></pre>
 <br>
-<h2> Authentication Plugin Integration</h2>
+<br>
+<br>
+<br>
+<p>    -- Kong: combined rate limiting strategy</p>
+<br>
+<p>    {</p>
+<br>
+<p>      name = "rate-limiting-advanced",</p>
+<br>
+<p>      config = {</p>
+<br>
+<p>        limit_by = "consumer",  -- consumer, credential, ip, service</p>
+<br>
+<p>        policy = "redis",        -- local, redis, cluster</p>
+<br>
+<p>        minute = 60,</p>
+<br>
+<p>        hour = 1000,</p>
+<br>
+<p>        fault_tolerant = true,</p>
+<br>
+<p>        hide_client_headers = false,</p>
+<br>
+<p>        redis_host = "redis-cluster",</p>
+<br>
+<p>        redis_port = 6379,</p>
+<br>
+<p>        redis_timeout = 2000</p>
+<br>
+<p>      }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Authentication Plugin Integration</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Layer multiple auth methods with priority-based execution:</p>
 <br>
-<pre><code>
-plugins:
-
-  - name: key-auth
-
-    config:
-
-      key_names: [&quot;X-API-Key&quot;]
-
-      key_in_header: true
-
-      key_in_query: false
-
-      hide_credentials: true
-
-      run_on_preflight: true
-
-  - name: oauth2
-
-    config:
-
-      scopes: [&quot;read&quot;, &quot;write&quot;, &quot;admin&quot;]
-
-      mandatory_scope: true
-
-      provision_key: &quot;${OAUTH_PROVISION_KEY}&quot;
-
-      token_expiration: 3600
-
-      enable_authorization_code: true
-
-      enable_client_credentials: true
-
-</code></pre>
 <br>
-<h2> Request/Response Transformation</h2>
+<br>
+<br>
+<br>
+<p>    plugins:</p>
+<br>
+<p>      - name: key-auth</p>
+<br>
+<p>        config:</p>
+<br>
+<p>          key_names: ["X-API-Key"]</p>
+<br>
+<p>          key_in_header: true</p>
+<br>
+<p>          key_in_query: false</p>
+<br>
+<p>          hide_credentials: true</p>
+<br>
+<p>          run_on_preflight: true</p>
+<br>
+<p>      - name: oauth2</p>
+<br>
+<p>        config:</p>
+<br>
+<p>          scopes: ["read", "write", "admin"]</p>
+<br>
+<p>          mandatory_scope: true</p>
+<br>
+<p>          provision_key: "${OAUTH_PROVISION_KEY}"</p>
+<br>
+<p>          token_expiration: 3600</p>
+<br>
+<p>          enable_authorization_code: true</p>
+<br>
+<p>          enable_client_credentials: true</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Request/Response Transformation</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Transform payloads between client and service boundaries:</p>
 <br>
-<pre><code>
--- Kong: response transformer plugin
-
-{
-
-  name = &quot;response-transformer&quot;,
-
-  config = {
-
-    remove = {
-
-      json = { &quot;password&quot;, &quot;credit_card&quot;, &quot;ssn&quot; }
-
-    },
-
-    add = {
-
-      headers = {
-
-        &quot;X-Response-Time:$(context.now)&quot;
-
-      }
-
-    }
-
-  }
-
-}
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    -- Kong: response transformer plugin</p>
+<br>
+<p>    {</p>
+<br>
+<p>      name = "response-transformer",</p>
+<br>
+<p>      config = {</p>
+<br>
+<p>        remove = {</p>
+<br>
+<p>          json = { "password", "credit_card", "ssn" }</p>
+<br>
+<p>        },</p>
+<br>
+<p>        add = {</p>
+<br>
+<p>          headers = {</p>
+<br>
+<p>            "X-Response-Time:$(context.now)"</p>
+<br>
+<p>          }</p>
+<br>
+<p>        }</p>
+<br>
+<p>      }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>APISIX supports serverless functions for custom transformations:</p>
 <br>
-<pre><code>
--- APISIX: serverless plugin for custom logic
-
-{
-
-  &quot;serverless-pre-function&quot;: {
-
-    &quot;phase&quot;: &quot;rewrite&quot;,
-
-    &quot;functions&quot;: [&quot;return function(conf, ctx)
-
-      local core = require(\&quot;apisix.core\&quot;)
-
-      local token = core.request.header(ctx, \&quot;Authorization\&quot;)
-
-      if token then
-
-        core.request.set_header(ctx, \&quot;X-Internal-Token\&quot;, token:sub(8))
-
-      end
-
-    end&quot;]
-
-  }
-
-}
-
-</code></pre>
 <br>
-<h2> Analytics and Observability</h2>
+<br>
+<br>
+<br>
+<p>    -- APISIX: serverless plugin for custom logic</p>
+<br>
+<p>    {</p>
+<br>
+<p>      "serverless-pre-function": {</p>
+<br>
+<p>        "phase": "rewrite",</p>
+<br>
+<p>        "functions": ["return function(conf, ctx)</p>
+<br>
+<p>          local core = require(\"apisix.core\")</p>
+<br>
+<p>          local token = core.request.header(ctx, \"Authorization\")</p>
+<br>
+<p>          if token then</p>
+<br>
+<p>            core.request.set_header(ctx, \"X-Internal-Token\", token:sub(8))</p>
+<br>
+<p>          end</p>
+<br>
+<p>        end"]</p>
+<br>
+<p>      }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Analytics and Observability</h2>
+<br>
+<br>
+<br>
 <br>
 <p>All three gateways export metrics for monitoring and billing:</p>
 <br>
-<pre><code>
-# APISIX: Prometheus and logging
-
-plugins:
-
-  - name: prometheus
-
-    config:
-
-      prefer_name: true
-
-  - name: http-logger
-
-    config:
-
-      uri: http://log-collector:5000/logs
-
-      batch_max_size: 100
-
-      inactive_timeout: 5
-
-  - name: skywalking
-
-    config:
-
-      sample_ratio: 0.1
-
-</code></pre>
 <br>
-<h2> Deployment Patterns</h2>
+<br>
+<br>
+<br>
+<p>    # APISIX: Prometheus and logging</p>
+<br>
+<p>    plugins:</p>
+<br>
+<p>      - name: prometheus</p>
+<br>
+<p>        config:</p>
+<br>
+<p>          prefer_name: true</p>
+<br>
+<p>      - name: http-logger</p>
+<br>
+<p>        config:</p>
+<br>
+<p>          uri: http://log-collector:5000/logs</p>
+<br>
+<p>          batch_max_size: 100</p>
+<br>
+<p>          inactive_timeout: 5</p>
+<br>
+<p>      - name: skywalking</p>
+<br>
+<p>        config:</p>
+<br>
+<p>          sample_ratio: 0.1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Deployment Patterns</h2>
+<br>
+<br>
+<br>
 <br>
 <h3>Sidecar Pattern</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Deploy the gateway as a sidecar alongside each service, suitable for service mesh architectures:</p>
 <br>
-<pre><code>
-apiVersion: apps/v1
-
-kind: Deployment
-
-metadata:
-
-  name: user-service
-
-spec:
-
-  template:
-
-    spec:
-
-      containers:
-
-        - name: user-app
-
-          image: user-service:latest
-
-        - name: kong-sidecar
-
-          image: kong:3.6
-
-          env:
-
-            - name: KONG_ROLE
-
-              value: data_plane
-
-            - name: KONG_CLUSTER_CONTROL_PLANE
-
-              value: cp:8005
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    apiVersion: apps/v1</p>
+<br>
+<p>    kind: Deployment</p>
+<br>
+<p>    metadata:</p>
+<br>
+<p>      name: user-service</p>
+<br>
+<p>    spec:</p>
+<br>
+<p>      template:</p>
+<br>
+<p>        spec:</p>
+<br>
+<p>          containers:</p>
+<br>
+<p>            - name: user-app</p>
+<br>
+<p>              image: user-service:latest</p>
+<br>
+<p>            - name: kong-sidecar</p>
+<br>
+<p>              image: kong:3.6</p>
+<br>
+<p>              env:</p>
+<br>
+<p>                - name: KONG_ROLE</p>
+<br>
+<p>                  value: data_plane</p>
+<br>
+<p>                - name: KONG_CLUSTER_CONTROL_PLANE</p>
+<br>
+<p>                  value: cp:8005</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Centralized Pattern</h3>
 <br>
+<br>
+<br>
+<br>
 <p>A shared gateway cluster handles all ingress traffic:</p>
 <br>
-<pre><code>
-apiVersion: networking.k8s.io/v1
-
-kind: IngressClass
-
-metadata:
-
-  name: apisix
-
-spec:
-
-  controller: apache.org/apisix-ingress-controller
-
----
-
-apiVersion: apisix.apache.org/v2
-
-kind: ApisixRoute
-
-metadata:
-
-  name: main-route
-
-spec:
-
-  http:
-
-    - name: root
-
-      match:
-
-        hosts: [&quot;api.example.com&quot;]
-
-        paths: [&quot;/*&quot;]
-
-      backends:
-
-        - serviceName: aggregator-svc
-
-          servicePort: 80
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    apiVersion: networking.k8s.io/v1</p>
+<br>
+<p>    kind: IngressClass</p>
+<br>
+<p>    metadata:</p>
+<br>
+<p>      name: apisix</p>
+<br>
+<p>    spec:</p>
+<br>
+<p>      controller: apache.org/apisix-ingress-controller</p>
+<br>
+<p>    ---</p>
+<br>
+<p>    apiVersion: apisix.apache.org/v2</p>
+<br>
+<p>    kind: ApisixRoute</p>
+<br>
+<p>    metadata:</p>
+<br>
+<p>      name: main-route</p>
+<br>
+<p>    spec:</p>
+<br>
+<p>      http:</p>
+<br>
+<p>        - name: root</p>
+<br>
+<p>          match:</p>
+<br>
+<p>            hosts: ["api.example.com"]</p>
+<br>
+<p>            paths: ["/*"]</p>
+<br>
+<p>          backends:</p>
+<br>
+<p>            - serviceName: aggregator-svc</p>
+<br>
+<p>              servicePort: 80</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Select the centralized pattern for simpler operations and the sidecar pattern for strict traffic isolation in multi-tenant environments. Whichever gateway you choose, invest in declarative configuration management and CI/CD integration from day one to avoid configuration drift at scale.</p></div>
     </article>

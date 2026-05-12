@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1796",
+      "wordCount": "2241",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/rbac-authorization.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/rbac-authorization.html"},
+      "articleBody": "RBAC Authorization Implementation What Is RBAC? Role-Based Access Control (RBAC) is an authorization model where permissions are assigned to roles, and users are assigned to those roles. Instead of managing permissions for each user individually, you manage roles and their associated permissions, then assign users to appropriate roles. Core RBAC Concepts | Concept | Definition | Example | |---------|------------|---------| | User | An individual account | alice@example.com | | Role | A collection of permissions | Editor, Admin, Viewer | | Permission | An action on a resource | article:create, article:delete | | Resource | The object being accessed | Article, User, Comment | | Session | A user's active role mapping | Alice as Editor | The RBAC Model Level 1: Flat RBAC Users are assigned roles, and roles have permissions. This simple structure works for most applications. Users \u2500\u2500\u2500\u2500 Roles \u2500\u2500\u2500\u2500 Permissions Level 2: Hierarchical RBAC Roles can inherit permissions from other roles. For example, an Admin role inherits all Editor permissions plus additional administrative permissions. Admin \u2500\u2500inherits\u2500\u2500> Editor \u2500\u2500inherits\u2500\u2500> Viewer Database Schema -- Core RBAC tables CREATE TABLE roles ( id SERIAL PRIMARY KEY, name VARCHAR(50) UNIQUE NOT NULL, description TEXT ); CREATE TABLE permissions ( id SERIAL PRIMARY KEY, resource VARCHAR(50) NOT NULL, action VARCHAR(20) NOT NULL, UNIQUE(resource, action) ); CREATE TABLE role_permissions ( role_id INTEGER REFERENCES roles(id), permission_id INTEGER REFERENCES permissions(id), PRIMARY KEY (role_id, permission_id) ); CREATE TABLE user_roles ( user_id INTEGER REFERENCES users(id), role_id INTEGER REFERENCES roles(id), granted_by INTEGER REFERENCES users(id), granted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (user_id, role_id) ); -- For hierarchical RBAC CREATE TABLE role_hierarchy ( parent_role_id INTEGER REFERENCES roles(id), child_role_id INTEGER REFERENCES roles(id), PRIMARY KEY (parent_role_id, child_role_id) ); Implementation Patterns Node.js / Express Middleware // Permission definition const PERMISSIONS = { ARTICLE: { CREATE: 'article:create', READ: 'article:read', UPDATE: 'article:update', DELETE: 'article:delete', PUBLISH: 'article:publish' }, USER: { LIST: 'user:list', MANAGE: 'user:manage' } }; // Role definitions with permission inheritance const ROLES = { viewer: { permissions: ['article:read'], inherits: [] }, editor: { permissions: ['article:create', 'article:update'], inherits: ['viewer'] }, admin: { permissions: [ 'article:delete', 'article:publish', 'user:list', 'user:manage' ], inherits: ['editor'] } }; // Authorization middleware function authorize(...requiredPermissions) { return (req, res, next) => { const userRoles = req.user.roles; const userPermissions = getUserPermissions(userRoles); const hasPermission = requiredPermissions.every( p => userPermissions.includes(p) ); if (!hasPermission) { return res.status(403).json({ error: 'Insufficient permissions' }); } next(); }; } // Usage in routes app.post('/api/articles', authenticate, authorize(PERMISSIONS.ARTICLE.CREATE), createArticle ); app.delete('/api/articles/:id', authenticate, authorize(PERMISSIONS.ARTICLE.DELETE), deleteArticle ); Python / FastAPI from enum import Enum from functools import wraps from fastapi import HTTPException, Depends class Permission(Enum): ARTICLE_CREATE = \"article:create\" ARTICLE_READ = \"article:read\" ARTICLE_UPDATE = \"article:update\" ARTICLE_DELETE = \"article:delete\" USER_MANAGE = \"user:manage\" ROLE_PERMISSIONS = { \"viewer\": {Permission.ARTICLE_READ}, \"editor\": { Permission.ARTICLE_READ, Permission.ARTICLE_CREATE, Permission.ARTICLE_UPDATE, }, \"admin\": { Permission.ARTICLE_READ, Permission.ARTICLE_CREATE, Permission.ARTICLE_UPDATE, Permission.ARTICLE_DELETE, Permission.USER_MANAGE, }, } def require_permission(permission: Permission): def decorator(func): @wraps(func) async def wrapper(*args, **kwargs): user = kwargs.get('current_user') if not user: raise HTTPException(status_code=401) user_perms = ROLE_PERMISSIONS.get(user.role, set()) if permission not in user_perms: raise HTTPException( status_code=403, detail=\"Insufficient permissions\" ) return await func(*args, **kwargs) return wrapper return decorator # Usage @app.delete(\"/articles/{article_id}\") @require_permission(Permission.ARTICLE_DELETE) async def delete_article(article_id: int, current_user = Depends(get_current_user)): # Delete logic pass Attribute-Based Access Control (ABAC) For more granular control, extend RBAC with ABAC policies that consider resource attributes and context: def can_access_resource(user, resource, action): \"\"\"Check RBAC first, then ABAC policies.\"\"\" # RBAC check if not has_role_permission(user.role, action): return False # ABAC policies policies = { # Users can edit their own articles ('article:update', 'article'): lambda u, r: r.author_id == u.id, # Admins can edit any article ('article:update', 'article'): lambda u, r: 'admin' in u.roles, # Only article authors can delete ('article:delete', 'article'): lambda u, r: r.author_id == u.id, } policy = policies.get((action, resource.type)) if policy: return policy(user, resource) return False Performance Optimization Cache resolved permissions to avoid repeated database queries: import redis import json r = redis.Redis() def get_cached_permissions(user_id): cache_key = f\"perms:{user_id}\" cached = r.get(cache_key) if cached: return json.loads(cached) permissions = resolve_user_permissions(user_id) r.setex(cache_key, 300, json.dumps(permissions)) # 5 min TTL return permissions Audit Logging Every authorization decision should be logged: def log_authorization(user_id, action, resource, granted, reason=\"\"): log_entry = { \"timestamp\": datetime.utcnow().isoformat(), \"user_id\": user_id, \"action\": action, \"resource\": resource, \"granted\": granted, \"reason\": reason, \"source_ip\": request.remote_addr } audit_logger.info(json.dumps(log_entry)) Common Pitfalls * **Role explosion**: Too many fine-grained roles become unmanageable. Aim for 5-10 roles maximum. * **Hardcoded role checks**: `if user.role === 'admin'` spreads business logic everywhere. Always check permissions, not role names. * **Missing negative permissions**: RBAC naturally handles allow rules. For deny rules, evaluate deny before allow. * **User in multiple roles**: Decide whether permissions are additive (union) or restrictive (intersection). Summary RBAC simplifies authorization by grouping permissions into roles and assigning roles to users. Start with flat RBAC and add hierarchy as needed. Always check permissions rather than role names, cache resolved permissions for performance, and layer on ABAC policies for fine-grained access control. Log all authorization decisions for auditability."
     }
     </script>
     <script type="application/ld+json">
@@ -73,477 +74,477 @@
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">RBAC Authorization Implementation</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> What Is RBAC?</h2>
+      <div class="article-body"><h1>RBAC Authorization Implementation</h1>
 <br>
-<p>Role-Based Access Control (RBAC) is an authorization model where permissions are assigned to roles, and users are assigned to those roles. Instead of managing permissions for each user individually, you manage roles and their associated permissions, then assign users to appropriate roles.</p>
+<p>What Is RBAC?   </p>
+<p>Role-Based Access Control (RBAC) is an authorization model where permissions are assigned to roles, and users are assigned to those roles. Instead of managing permissions for each user individually, you manage roles and their associated permissions, then assign users to appropriate roles.   </p>
+<p>Core RBAC Concepts   </p>
+<p>| Concept | Definition | Example | |---------|------------|---------| | User | An individual account | alice@example.com | | Role | A collection of permissions | Editor, Admin, Viewer | | Permission | An action on a resource | article:create, article:delete | | Resource | The object being accessed | Article, User, Comment | | Session | A user's active role mapping | Alice as Editor |   </p>
+<p>The RBAC Model   </p>
+<p>Level 1: Flat RBAC   </p>
+<p>Users are assigned roles, and roles have permissions. This simple structure works for most applications.   </p>
 <br>
-<h2> Core RBAC Concepts</h2>
 <br>
-<p>| Concept | Definition | Example |</p>
-<p>|---------|------------|---------|</p>
-<p>| User | An individual account | alice@example.com |</p>
-<p>| Role | A collection of permissions | Editor, Admin, Viewer |</p>
-<p>| Permission | An action on a resource | article:create, article:delete |</p>
-<p>| Resource | The object being accessed | Article, User, Comment |</p>
-<p>| Session | A user's active role mapping | Alice as Editor |</p>
 <br>
-<h2> The RBAC Model</h2>
+<p>    Users ──< Role Assignment >── Roles ──< Permission Assignment >── Permissions</p>
 <br>
-<h3>Level 1: Flat RBAC</h3>
 <br>
-<p>Users are assigned roles, and roles have permissions. This simple structure works for most applications.</p>
 <br>
-<pre><code>
-Users ──&lt; Role Assignment &gt;── Roles ──&lt; Permission Assignment &gt;── Permissions
-
-</code></pre>
 <br>
-<h3>Level 2: Hierarchical RBAC</h3>
+<p>Level 2: Hierarchical RBAC   </p>
+<p>Roles can inherit permissions from other roles. For example, an Admin role inherits all Editor permissions plus additional administrative permissions.   </p>
 <br>
-<p>Roles can inherit permissions from other roles. For example, an Admin role inherits all Editor permissions plus additional administrative permissions.</p>
 <br>
-<pre><code>
-Admin ──inherits──&gt; Editor ──inherits──&gt; Viewer
-
-</code></pre>
 <br>
-<h2> Database Schema</h2>
+<p>    Admin ──inherits──> Editor ──inherits──> Viewer</p>
 <br>
-<pre><code>
--- Core RBAC tables
-
-CREATE TABLE roles (
-
-    id SERIAL PRIMARY KEY,
-
-    name VARCHAR(50) UNIQUE NOT NULL,
-
-    description TEXT
-
-);
-
-
-
-CREATE TABLE permissions (
-
-    id SERIAL PRIMARY KEY,
-
-    resource VARCHAR(50) NOT NULL,
-
-    action VARCHAR(20) NOT NULL,
-
-    UNIQUE(resource, action)
-
-);
-
-
-
-CREATE TABLE role_permissions (
-
-    role_id INTEGER REFERENCES roles(id),
-
-    permission_id INTEGER REFERENCES permissions(id),
-
-    PRIMARY KEY (role_id, permission_id)
-
-);
-
-
-
-CREATE TABLE user_roles (
-
-    user_id INTEGER REFERENCES users(id),
-
-    role_id INTEGER REFERENCES roles(id),
-
-    granted_by INTEGER REFERENCES users(id),
-
-    granted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    PRIMARY KEY (user_id, role_id)
-
-);
-
-
-
--- For hierarchical RBAC
-
-CREATE TABLE role_hierarchy (
-
-    parent_role_id INTEGER REFERENCES roles(id),
-
-    child_role_id INTEGER REFERENCES roles(id),
-
-    PRIMARY KEY (parent_role_id, child_role_id)
-
-);
-
-</code></pre>
 <br>
-<h2> Implementation Patterns</h2>
 <br>
-<h3>Node.js / Express Middleware</h3>
 <br>
-<pre><code>
-// Permission definition
-
-const PERMISSIONS = {
-
-    ARTICLE: {
-
-        CREATE: &#x27;article:create&#x27;,
-
-        READ: &#x27;article:read&#x27;,
-
-        UPDATE: &#x27;article:update&#x27;,
-
-        DELETE: &#x27;article:delete&#x27;,
-
-        PUBLISH: &#x27;article:publish&#x27;
-
-    },
-
-    USER: {
-
-        LIST: &#x27;user:list&#x27;,
-
-        MANAGE: &#x27;user:manage&#x27;
-
-    }
-
-};
-
-
-
-// Role definitions with permission inheritance
-
-const ROLES = {
-
-    viewer: {
-
-        permissions: [&#x27;article:read&#x27;],
-
-        inherits: []
-
-    },
-
-    editor: {
-
-        permissions: [&#x27;article:create&#x27;, &#x27;article:update&#x27;],
-
-        inherits: [&#x27;viewer&#x27;]
-
-    },
-
-    admin: {
-
-        permissions: [
-
-            &#x27;article:delete&#x27;, &#x27;article:publish&#x27;,
-
-            &#x27;user:list&#x27;, &#x27;user:manage&#x27;
-
-        ],
-
-        inherits: [&#x27;editor&#x27;]
-
-    }
-
-};
-
-
-
-// Authorization middleware
-
-function authorize(...requiredPermissions) {
-
-    return (req, res, next) =&gt; {
-
-        const userRoles = req.user.roles;
-
-        const userPermissions = getUserPermissions(userRoles);
-
-
-
-        const hasPermission = requiredPermissions.every(
-
-            p =&gt; userPermissions.includes(p)
-
-        );
-
-
-
-        if (!hasPermission) {
-
-            return res.status(403).json({
-
-                error: &#x27;Insufficient permissions&#x27;
-
-            });
-
-        }
-
-        next();
-
-    };
-
-}
-
-
-
-// Usage in routes
-
-app.post(&#x27;/api/articles&#x27;,
-
-    authenticate,
-
-    authorize(PERMISSIONS.ARTICLE.CREATE),
-
-    createArticle
-
-);
-
-
-
-app.delete(&#x27;/api/articles/:id&#x27;,
-
-    authenticate,
-
-    authorize(PERMISSIONS.ARTICLE.DELETE),
-
-    deleteArticle
-
-);
-
-</code></pre>
+<p>Database Schema   </p>
 <br>
-<h3>Python / FastAPI</h3>
 <br>
-<pre><code>
-from enum import Enum
-
-from functools import wraps
-
-from fastapi import HTTPException, Depends
-
-
-
-class Permission(Enum):
-
-    ARTICLE_CREATE = &quot;article:create&quot;
-
-    ARTICLE_READ = &quot;article:read&quot;
-
-    ARTICLE_UPDATE = &quot;article:update&quot;
-
-    ARTICLE_DELETE = &quot;article:delete&quot;
-
-    USER_MANAGE = &quot;user:manage&quot;
-
-
-
-ROLE_PERMISSIONS = {
-
-    &quot;viewer&quot;: {Permission.ARTICLE_READ},
-
-    &quot;editor&quot;: {
-
-        Permission.ARTICLE_READ,
-
-        Permission.ARTICLE_CREATE,
-
-        Permission.ARTICLE_UPDATE,
-
-    },
-
-    &quot;admin&quot;: {
-
-        Permission.ARTICLE_READ,
-
-        Permission.ARTICLE_CREATE,
-
-        Permission.ARTICLE_UPDATE,
-
-        Permission.ARTICLE_DELETE,
-
-        Permission.USER_MANAGE,
-
-    },
-
-}
-
-
-
-def require_permission(permission: Permission):
-
-    def decorator(func):
-
-        @wraps(func)
-
-        async def wrapper(*args, **kwargs):
-
-            user = kwargs.get(&#x27;current_user&#x27;)
-
-            if not user:
-
-                raise HTTPException(status_code=401)
-
-
-
-            user_perms = ROLE_PERMISSIONS.get(user.role, set())
-
-            if permission not in user_perms:
-
-                raise HTTPException(
-
-                    status_code=403,
-
-                    detail=&quot;Insufficient permissions&quot;
-
-                )
-
-            return await func(*args, **kwargs)
-
-        return wrapper
-
-    return decorator
-
-
-
-# Usage
-
-@app.delete(&quot;/articles/{article_id}&quot;)
-
-@require_permission(Permission.ARTICLE_DELETE)
-
-async def delete_article(article_id: int, current_user = Depends(get_current_user)):
-
-    # Delete logic
-
-    pass
-
-</code></pre>
 <br>
-<h2> Attribute-Based Access Control (ABAC)</h2>
+<p>    -- Core RBAC tables</p>
 <br>
-<p>For more granular control, extend RBAC with ABAC policies that consider resource attributes and context:</p>
+<p>    CREATE TABLE roles (</p>
 <br>
-<pre><code>
-def can_access_resource(user, resource, action):
-
-    &quot;&quot;&quot;Check RBAC first, then ABAC policies.&quot;&quot;&quot;
-
-    # RBAC check
-
-    if not has_role_permission(user.role, action):
-
-        return False
-
-
-
-    # ABAC policies
-
-    policies = {
-
-        # Users can edit their own articles
-
-        (&#x27;article:update&#x27;, &#x27;article&#x27;): lambda u, r: r.author_id == u.id,
-
-        # Admins can edit any article
-
-        (&#x27;article:update&#x27;, &#x27;article&#x27;): lambda u, r: &#x27;admin&#x27; in u.roles,
-
-        # Only article authors can delete
-
-        (&#x27;article:delete&#x27;, &#x27;article&#x27;): lambda u, r: r.author_id == u.id,
-
-    }
-
-
-
-    policy = policies.get((action, resource.type))
-
-    if policy:
-
-        return policy(user, resource)
-
-    return False
-
-</code></pre>
+<p>        id SERIAL PRIMARY KEY,</p>
 <br>
-<h2> Performance Optimization</h2>
+<p>        name VARCHAR(50) UNIQUE NOT NULL,</p>
 <br>
-<p>Cache resolved permissions to avoid repeated database queries:</p>
+<p>        description TEXT</p>
 <br>
-<pre><code>
-import redis
-
-import json
-
-
-
-r = redis.Redis()
-
-
-
-def get_cached_permissions(user_id):
-
-    cache_key = f&quot;perms:{user_id}&quot;
-
-    cached = r.get(cache_key)
-
-    if cached:
-
-        return json.loads(cached)
-
-
-
-    permissions = resolve_user_permissions(user_id)
-
-    r.setex(cache_key, 300, json.dumps(permissions))  # 5 min TTL
-
-    return permissions
-
-</code></pre>
+<p>    );</p>
 <br>
-<h2> Audit Logging</h2>
 <br>
-<p>Every authorization decision should be logged:</p>
 <br>
-<pre><code>
-def log_authorization(user_id, action, resource, granted, reason=&quot;&quot;):
-
-    log_entry = {
-
-        &quot;timestamp&quot;: datetime.utcnow().isoformat(),
-
-        &quot;user_id&quot;: user_id,
-
-        &quot;action&quot;: action,
-
-        &quot;resource&quot;: resource,
-
-        &quot;granted&quot;: granted,
-
-        &quot;reason&quot;: reason,
-
-        &quot;source_ip&quot;: request.remote_addr
-
-    }
-
-    audit_logger.info(json.dumps(log_entry))
-
-</code></pre>
+<p>    CREATE TABLE permissions (</p>
 <br>
-<h2> Common Pitfalls</h2>
+<p>        id SERIAL PRIMARY KEY,</p>
 <br>
-<li>**Role explosion**: Too many fine-grained roles become unmanageable. Aim for 5-10 roles maximum.</li>
-<li>**Hardcoded role checks**: `if user.role === 'admin'` spreads business logic everywhere. Always check permissions, not role names.</li>
-<li>**Missing negative permissions**: RBAC naturally handles allow rules. For deny rules, evaluate deny before allow.</li>
-<li>**User in multiple roles**: Decide whether permissions are additive (union) or restrictive (intersection).</li>
+<p>        resource VARCHAR(50) NOT NULL,</p>
 <br>
-<h2> Summary</h2>
+<p>        action VARCHAR(20) NOT NULL,</p>
 <br>
+<p>        UNIQUE(resource, action)</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<p>    CREATE TABLE role_permissions (</p>
+<br>
+<p>        role_id INTEGER REFERENCES roles(id),</p>
+<br>
+<p>        permission_id INTEGER REFERENCES permissions(id),</p>
+<br>
+<p>        PRIMARY KEY (role_id, permission_id)</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<p>    CREATE TABLE user_roles (</p>
+<br>
+<p>        user_id INTEGER REFERENCES users(id),</p>
+<br>
+<p>        role_id INTEGER REFERENCES roles(id),</p>
+<br>
+<p>        granted_by INTEGER REFERENCES users(id),</p>
+<br>
+<p>        granted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,</p>
+<br>
+<p>        PRIMARY KEY (user_id, role_id)</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<p>    -- For hierarchical RBAC</p>
+<br>
+<p>    CREATE TABLE role_hierarchy (</p>
+<br>
+<p>        parent_role_id INTEGER REFERENCES roles(id),</p>
+<br>
+<p>        child_role_id INTEGER REFERENCES roles(id),</p>
+<br>
+<p>        PRIMARY KEY (parent_role_id, child_role_id)</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<br>
+<p>Implementation Patterns   </p>
+<p>Node.js / Express Middleware   </p>
+<br>
+<br>
+<br>
+<p>    // Permission definition</p>
+<br>
+<p>    const PERMISSIONS = {</p>
+<br>
+<p>        ARTICLE: {</p>
+<br>
+<p>            CREATE: 'article:create',</p>
+<br>
+<p>            READ: 'article:read',</p>
+<br>
+<p>            UPDATE: 'article:update',</p>
+<br>
+<p>            DELETE: 'article:delete',</p>
+<br>
+<p>            PUBLISH: 'article:publish'</p>
+<br>
+<p>        },</p>
+<br>
+<p>        USER: {</p>
+<br>
+<p>            LIST: 'user:list',</p>
+<br>
+<p>            MANAGE: 'user:manage'</p>
+<br>
+<p>        }</p>
+<br>
+<p>    };</p>
+<br>
+<br>
+<br>
+<p>    // Role definitions with permission inheritance</p>
+<br>
+<p>    const ROLES = {</p>
+<br>
+<p>        viewer: {</p>
+<br>
+<p>            permissions: ['article:read'],</p>
+<br>
+<p>            inherits: []</p>
+<br>
+<p>        },</p>
+<br>
+<p>        editor: {</p>
+<br>
+<p>            permissions: ['article:create', 'article:update'],</p>
+<br>
+<p>            inherits: ['viewer']</p>
+<br>
+<p>        },</p>
+<br>
+<p>        admin: {</p>
+<br>
+<p>            permissions: [</p>
+<br>
+<p>                'article:delete', 'article:publish',</p>
+<br>
+<p>                'user:list', 'user:manage'</p>
+<br>
+<p>            ],</p>
+<br>
+<p>            inherits: ['editor']</p>
+<br>
+<p>        }</p>
+<br>
+<p>    };</p>
+<br>
+<br>
+<br>
+<p>    // Authorization middleware</p>
+<br>
+<p>    function authorize(...requiredPermissions) {</p>
+<br>
+<p>        return (req, res, next) => {</p>
+<br>
+<p>            const userRoles = req.user.roles;</p>
+<br>
+<p>            const userPermissions = getUserPermissions(userRoles);</p>
+<br>
+<br>
+<br>
+<p>            const hasPermission = requiredPermissions.every(</p>
+<br>
+<p>                p => userPermissions.includes(p)</p>
+<br>
+<p>            );</p>
+<br>
+<br>
+<br>
+<p>            if (!hasPermission) {</p>
+<br>
+<p>                return res.status(403).json({</p>
+<br>
+<p>                    error: 'Insufficient permissions'</p>
+<br>
+<p>                });</p>
+<br>
+<p>            }</p>
+<br>
+<p>            next();</p>
+<br>
+<p>        };</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<p>    // Usage in routes</p>
+<br>
+<p>    app.post('/api/articles',</p>
+<br>
+<p>        authenticate,</p>
+<br>
+<p>        authorize(PERMISSIONS.ARTICLE.CREATE),</p>
+<br>
+<p>        createArticle</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<p>    app.delete('/api/articles/:id',</p>
+<br>
+<p>        authenticate,</p>
+<br>
+<p>        authorize(PERMISSIONS.ARTICLE.DELETE),</p>
+<br>
+<p>        deleteArticle</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<br>
+<p>Python / FastAPI   </p>
+<br>
+<br>
+<br>
+<p>    from enum import Enum</p>
+<br>
+<p>    from functools import wraps</p>
+<br>
+<p>    from fastapi import HTTPException, Depends</p>
+<br>
+<br>
+<br>
+<p>    class Permission(Enum):</p>
+<br>
+<p>        ARTICLE_CREATE = "article:create"</p>
+<br>
+<p>        ARTICLE_READ = "article:read"</p>
+<br>
+<p>        ARTICLE_UPDATE = "article:update"</p>
+<br>
+<p>        ARTICLE_DELETE = "article:delete"</p>
+<br>
+<p>        USER_MANAGE = "user:manage"</p>
+<br>
+<br>
+<br>
+<p>    ROLE_PERMISSIONS = {</p>
+<br>
+<p>        "viewer": {Permission.ARTICLE_READ},</p>
+<br>
+<p>        "editor": {</p>
+<br>
+<p>            Permission.ARTICLE_READ,</p>
+<br>
+<p>            Permission.ARTICLE_CREATE,</p>
+<br>
+<p>            Permission.ARTICLE_UPDATE,</p>
+<br>
+<p>        },</p>
+<br>
+<p>        "admin": {</p>
+<br>
+<p>            Permission.ARTICLE_READ,</p>
+<br>
+<p>            Permission.ARTICLE_CREATE,</p>
+<br>
+<p>            Permission.ARTICLE_UPDATE,</p>
+<br>
+<p>            Permission.ARTICLE_DELETE,</p>
+<br>
+<p>            Permission.USER_MANAGE,</p>
+<br>
+<p>        },</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<p>    def require_permission(permission: Permission):</p>
+<br>
+<p>        def decorator(func):</p>
+<br>
+<p>            @wraps(func)</p>
+<br>
+<p>            async def wrapper(*args, **kwargs):</p>
+<br>
+<p>                user = kwargs.get('current_user')</p>
+<br>
+<p>                if not user:</p>
+<br>
+<p>                    raise HTTPException(status_code=401)</p>
+<br>
+<br>
+<br>
+<p>                user_perms = ROLE_PERMISSIONS.get(user.role, set())</p>
+<br>
+<p>                if permission not in user_perms:</p>
+<br>
+<p>                    raise HTTPException(</p>
+<br>
+<p>                        status_code=403,</p>
+<br>
+<p>                        detail="Insufficient permissions"</p>
+<br>
+<p>                    )</p>
+<br>
+<p>                return await func(*args, **kwargs)</p>
+<br>
+<p>            return wrapper</p>
+<br>
+<p>        return decorator</p>
+<br>
+<br>
+<br>
+<p>    # Usage</p>
+<br>
+<p>    @app.delete("/articles/{article_id}")</p>
+<br>
+<p>    @require_permission(Permission.ARTICLE_DELETE)</p>
+<br>
+<p>    async def delete_article(article_id: int, current_user = Depends(get_current_user)):</p>
+<br>
+<p>        # Delete logic</p>
+<br>
+<p>        pass</p>
+<br>
+<br>
+<br>
+<br>
+<p>Attribute-Based Access Control (ABAC)   </p>
+<p>For more granular control, extend RBAC with ABAC policies that consider resource attributes and context:   </p>
+<br>
+<br>
+<br>
+<p>    def can_access_resource(user, resource, action):</p>
+<br>
+<p>        """Check RBAC first, then ABAC policies."""</p>
+<br>
+<p>        # RBAC check</p>
+<br>
+<p>        if not has_role_permission(user.role, action):</p>
+<br>
+<p>            return False</p>
+<br>
+<br>
+<br>
+<p>        # ABAC policies</p>
+<br>
+<p>        policies = {</p>
+<br>
+<p>            # Users can edit their own articles</p>
+<br>
+<p>            ('article:update', 'article'): lambda u, r: r.author_id == u.id,</p>
+<br>
+<p>            # Admins can edit any article</p>
+<br>
+<p>            ('article:update', 'article'): lambda u, r: 'admin' in u.roles,</p>
+<br>
+<p>            # Only article authors can delete</p>
+<br>
+<p>            ('article:delete', 'article'): lambda u, r: r.author_id == u.id,</p>
+<br>
+<p>        }</p>
+<br>
+<br>
+<br>
+<p>        policy = policies.get((action, resource.type))</p>
+<br>
+<p>        if policy:</p>
+<br>
+<p>            return policy(user, resource)</p>
+<br>
+<p>        return False</p>
+<br>
+<br>
+<br>
+<br>
+<p>Performance Optimization   </p>
+<p>Cache resolved permissions to avoid repeated database queries:   </p>
+<br>
+<br>
+<br>
+<p>    import redis</p>
+<br>
+<p>    import json</p>
+<br>
+<br>
+<br>
+<p>    r = redis.Redis()</p>
+<br>
+<br>
+<br>
+<p>    def get_cached_permissions(user_id):</p>
+<br>
+<p>        cache_key = f"perms:{user_id}"</p>
+<br>
+<p>        cached = r.get(cache_key)</p>
+<br>
+<p>        if cached:</p>
+<br>
+<p>            return json.loads(cached)</p>
+<br>
+<br>
+<br>
+<p>        permissions = resolve_user_permissions(user_id)</p>
+<br>
+<p>        r.setex(cache_key, 300, json.dumps(permissions))  # 5 min TTL</p>
+<br>
+<p>        return permissions</p>
+<br>
+<br>
+<br>
+<br>
+<p>Audit Logging   </p>
+<p>Every authorization decision should be logged:   </p>
+<br>
+<br>
+<br>
+<p>    def log_authorization(user_id, action, resource, granted, reason=""):</p>
+<br>
+<p>        log_entry = {</p>
+<br>
+<p>            "timestamp": datetime.utcnow().isoformat(),</p>
+<br>
+<p>            "user_id": user_id,</p>
+<br>
+<p>            "action": action,</p>
+<br>
+<p>            "resource": resource,</p>
+<br>
+<p>            "granted": granted,</p>
+<br>
+<p>            "reason": reason,</p>
+<br>
+<p>            "source_ip": request.remote_addr</p>
+<br>
+<p>        }</p>
+<br>
+<p>        audit_logger.info(json.dumps(log_entry))</p>
+<br>
+<br>
+<br>
+<br>
+<p>Common Pitfalls   </p>
+<br>
+<p>* **Role explosion**: Too many fine-grained roles become unmanageable. Aim for 5-10 roles maximum.</p>
+<p>* **Hardcoded role checks**: `if user.role === 'admin'` spreads business logic everywhere. Always check permissions, not role names.</p>
+<p>* **Missing negative permissions**: RBAC naturally handles allow rules. For deny rules, evaluate deny before allow.</p>
+<p>* **User in multiple roles**: Decide whether permissions are additive (union) or restrictive (intersection).</p>
+<br>
+<p>Summary   </p>
 <p>RBAC simplifies authorization by grouping permissions into roles and assigning roles to users. Start with flat RBAC and add hierarchy as needed. Always check permissions rather than role names, cache resolved permissions for performance, and layer on ABAC policies for fine-grained access control. Log all authorization decisions for auditability.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

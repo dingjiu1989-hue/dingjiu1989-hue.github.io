@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1481",
+      "wordCount": "878",
       "keywords": "Architecture, System Design",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/serverless-architecture.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/serverless-architecture.html"},
+      "articleBody": "Serverless Architecture Patterns Serverless architecture represents a shift from managing servers to writing code. In a serverless model, cloud providers dynamically manage the allocation and provisioning of servers. Developers focus on individual functions or containers, and the provider handles scaling, availability, and infrastructure maintenance. This article examines the key serverless compute options, architectural patterns, and operational considerations. Functions as a Service (FaaS) FaaS platforms like AWS Lambda, Azure Functions, and Google Cloud Functions execute code in response to events. Each function is stateless, short-lived, and automatically scaled. The developer uploads code and configures triggers\u2014HTTP requests, queue messages, database changes, or scheduled events. The primary advantage of FaaS is granular scaling. Each function instance scales independently based on demand. During low traffic periods, functions may scale to zero, incurring no cost. During traffic spikes, the platform rapidly creates new instances to handle the load. Cold Starts Cold starts are the most significant challenge with FaaS. When a function hasn't been invoked recently, the platform needs to initialize a new execution environment\u2014loading the runtime, initializing dependencies, and executing the handler code. This initialization adds latency to the first request. Cold start latency varies by runtime: Java and .NET typically add 1-3 seconds, Node.js and Python add 200-500ms, and the custom runtime on AWS Lambda can be optimized to under 100ms. Strategies for mitigation include provisioned concurrency (keeping a minimum number of warm instances), keeping functions warm with periodic pings, and optimizing deployment package size. AWS Fargate Fargate is AWS's serverless compute engine for containers. Unlike Lambda, Fargate runs long-lived containers without requiring you to manage the underlying servers. You define the container image, CPU, and memory requirements, and Fargate places the container on optimized infrastructure. Fargate bridges the gap between Lambda and traditional container orchestration. It supports workloads that need longer execution times, larger memory allocations, or specific runtime environments that Lambda doesn't support. Fargate also integrates with AWS App Mesh for service mesh capabilities. Event-Driven Design Serverless architecture naturally aligns with event-driven design. Functions respond to events from various sources: API Gateway requests, S3 object creations, DynamoDB stream changes, SQS messages, EventBridge events, and more. This event-driven model creates loosely coupled, scalable systems. A typical event-driven serverless pattern uses SQS or SNS to decouple producers from consumers. An API Gateway receives a request, publishes a message to SQS, and returns immediately. A Lambda function processes the SQS messages asynchronously. This pattern handles traffic spikes gracefully by buffering messages in the queue. Production Considerations Production serverless systems require careful attention to several areas. Observability is critical\u2014services like AWS X-Ray, CloudWatch, and third-party tools provide distributed tracing across functions and downstream services. Error handling should use dead-letter queues for failed messages and implement exponential backoff for retries. State management must be externalized to databases, caches, or object storage since functions are stateless. Security follows the principle of least privilege\u2014each function should have only the permissions it needs. Cost management is also important. While serverless can be cost-effective at low to moderate traffic, high-volume workloads may be cheaper on provisioned infrastructure. Tools like AWS Compute Optimizer help analyze cost patterns and recommend optimizations. Serverless architecture is not appropriate for every workload. Predictable, high-throughput workloads benefit from provisioned infrastructure. Workloads requiring GPU, specialized hardware, or ultra-low latency may not fit the serverless model. For variable, event-driven workloads, however, serverless provides unmatched scalability and operational simplicity."
     }
     </script>
     <script type="application/ld+json">
@@ -73,184 +74,26 @@
         <span class="tag-cat">System Design</span></div>
       <h1 class="article-title">Serverless Architecture Patterns</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><p>Serverless architecture allows you to build and run applications without managing servers. Cloud providers handle infrastructure provisioning, scaling, and maintenance automatically. This article covers the core patterns, best practices, and trade-offs of serverless architecture.</p>
+      <div class="article-body"><h1>Serverless Architecture Patterns</h1>
 <br>
-<h2> What Serverless Really Means</h2>
-<br>
-<p>Serverless does not mean there are no servers. It means you do not think about servers. The cloud provider manages capacity, patching, and availability. You focus on writing code.</p>
-<br>
-<p>The key characteristics:</p>
-<br>
-<li>**No server management**: You do not provision, scale, or maintain servers.</li>
-<li>**Autoscaling**: Resources scale automatically with demand, from zero to thousands of concurrent executions.</li>
-<li>**Pay-per-execution**: You pay only for the compute time you use, often measured in milliseconds.</li>
-<li>**Stateless**: Functions are ephemeral and stateless. Persistent state must be stored externally.</li>
-<br>
-<h2> The Function as a Service Pattern</h2>
-<br>
-<p>FaaS is the core building block. Each function handles a single concern:</p>
-<br>
-<pre><code>
-// AWS Lambda handler for image resizing
-
-exports.handler = async (event) =&gt; {
-
-    const { key, bucket } = JSON.parse(event.body);
-
-    const image = await s3.getObject({ Bucket: bucket, Key: key });
-
-    const resized = await sharp(image.Body).resize(200, 200).toBuffer();
-
-    await s3.putObject({
-
-        Bucket: bucket,
-
-        Key: `thumbnails/${key}`,
-
-        Body: resized
-
-    });
-
-    return { statusCode: 200, body: JSON.stringify({ success: true }) };
-
-};
-
-</code></pre>
-<br>
-<p>Functions should be small, focused, and stateless. Each function does one thing and does it well.</p>
-<br>
-<h2> Event-Driven Pattern</h2>
-<br>
-<p>Serverless functions are typically triggered by events from other services:</p>
-<br>
-<pre><code>
-[S3 Upload] -&gt; [Lambda: Process File] -&gt; [DynamoDB: Update Metadata] -&gt; [SNS: Notify User]
-
-            -&gt; [Lambda: Generate Thumbnail]
-
-</code></pre>
-<br>
-<p>Common event sources:</p>
-<li>**S3 events**: File uploads trigger processing pipelines.</li>
-<li>**DynamoDB Streams**: Database changes trigger downstream updates.</li>
-<li>**SQS/SNS**: Messages trigger background processing.</li>
-<li>**API Gateway**: HTTP requests trigger request handlers.</li>
-<li>**CloudWatch Events**: Scheduled tasks trigger periodic jobs.</li>
-<br>
-<p>This pattern creates loosely coupled, resilient pipelines. If one step fails, the event can be retried or sent to a dead-letter queue.</p>
-<br>
-<h2> API Gateway + Lambda Pattern</h2>
-<br>
-<p>The most common serverless web application pattern. API Gateway handles HTTP requests and triggers Lambda functions:</p>
-<br>
-<pre><code>
-[Client] -&gt; [API Gateway] -&gt; [Lambda] -&gt; [DynamoDB]
-
-</code></pre>
-<br>
-<p>API Gateway provides:</p>
-<li>HTTP endpoint management</li>
-<li>Request validation</li>
-<li>Authentication and authorization</li>
-<li>Rate limiting</li>
-<li>CORS handling</li>
-<li>Response caching</li>
-<br>
-<p>Lambda handles business logic. DynamoDB, RDS Proxy, or Aurora Serverless provides data persistence.</p>
-<br>
-<p>This pattern works well for REST APIs, GraphQL endpoints, and webhook handlers. The combination scales automatically from zero to thousands of requests per second.</p>
-<br>
-<h2> Fan-Out Pattern</h2>
-<br>
-<p>A single event triggers multiple parallel operations:</p>
-<br>
-<pre><code>
-[Event] -&gt; [SNS Topic]
-
-                  |
-
-        +---------+---------+
-
-        |         |         |
-
-    [Lambda A] [Lambda B] [Lambda C]
-
-</code></pre>
-<br>
-<p>Use SNS, SQS, or EventBridge to broadcast events to multiple subscribers. Each subscriber processes independently. Failures in one subscriber do not affect others.</p>
-<br>
-<p>This pattern is ideal for scenarios like:</p>
-<li>New user registration triggers email verification, welcome email, analytics tracking, and CRM updates.</li>
-<li>New order triggers inventory update, payment processing, shipping label generation, and notification.</li>
-<br>
-<h2> Step Functions for Orchestration</h2>
-<br>
-<p>For complex workflows, use AWS Step Functions to coordinate multiple Lambda functions:</p>
-<br>
-<pre><code>
-[Start Order] -&gt; [Validate] -&gt; [Process Payment] -&gt; [Reserve Inventory]
-
-                                                       |
-
-                                                    [Failed]
-
-                                                       |
-
-                                               [Refund Payment] -&gt; [Notify User]
-
-</code></pre>
-<br>
-<p>Step Functions provide:</p>
-<li>State machine definition in JSON or YAML.</li>
-<li>Built-in retry, error handling, and timeout.</li>
-<li>Visual monitoring of workflow execution.</li>
-<li>Long-running workflow support (up to one year).</li>
-<br>
-<p>Use Step Functions whenever your workflow has conditional logic, parallel branches, or human-in-the-loop steps. It is far easier to manage than orchestrating Lambda functions from code.</p>
-<br>
-<h2> Warm Starts vs. Cold Starts</h2>
-<br>
-<p>Lambda functions experience cold starts when a new container is spun up. Cold starts add latency (100ms to several seconds depending on runtime).</p>
-<br>
-<p>**Strategies to reduce cold starts:**</p>
-<li>Use provisioned concurrency to keep a specified number of instances warm.</li>
-<li>Use a lighter runtime (Node.js vs. Java or .NET).</li>
-<li>Minimize deployment package size.</li>
-<li>Keep dependencies to a minimum.</li>
-<br>
-<p>**When cold starts matter:**</p>
-<li>User-facing APIs that need sub-100ms response times.</li>
-<li>Real-time applications.</li>
-<br>
-<p>**When cold starts do not matter:**</p>
-<li>Background job processing.</li>
-<li>Scheduled tasks.</li>
-<li>Queue consumers.</li>
-<br>
-<h2> Best Practices</h2>
-<br>
-<p>**Statelessness.** Do not store state in the function container. Use DynamoDB, S3, or ElastiCache for state.</p>
-<br>
-<p>**Small functions.** Each function should do one thing. A function doing multiple things is harder to test, deploy, and scale independently.</p>
-<br>
-<p>**Proper error handling.** Use dead-letter queues for failed events. Implement idempotent processing to handle duplicate invocations.</p>
-<br>
-<p>**Security.** Follow the principle of least privilege for IAM roles. Encrypt environment variables. Validate all inputs.</p>
-<br>
-<p>**Monitoring.** Use structured logging with correlation IDs. Set up CloudWatch alarms for error rates and duration. Use distributed tracing with X-Ray.</p>
-<br>
-<h2> When Not to Use Serverless</h2>
-<br>
-<p>Serverless is not ideal for:</p>
-<li>Long-running processes (Lambda max execution is 15 minutes).</li>
-<li>High-throughput, latency-sensitive workloads.</li>
-<li>Stateful applications with persistent connections.</li>
-<li>Monolithic applications that are hard to split into functions.</li>
-<li>Workloads with predictable, steady-state traffic (provisioned instances may be cheaper).</li>
-<br>
-<h2> Summary</h2>
-<br>
-<p>Serverless architecture enables building scalable applications with minimal operational overhead. Use event-driven patterns for loosely coupled pipelines. Use Step Functions for complex orchestration. Be aware of cold starts and design your application accordingly. Serverless is a powerful tool, but it is not the right choice for every workload. Evaluate your requirements against the trade-offs before committing.</p></div>
+<p>Serverless architecture represents a shift from managing servers to writing code. In a serverless model, cloud providers dynamically manage the allocation and provisioning of servers. Developers focus on individual functions or containers, and the provider handles scaling, availability, and infrastructure maintenance. This article examines the key serverless compute options, architectural patterns, and operational considerations.   </p>
+<p>Functions as a Service (FaaS)   </p>
+<p>FaaS platforms like AWS Lambda, Azure Functions, and Google Cloud Functions execute code in response to events. Each function is stateless, short-lived, and automatically scaled. The developer uploads code and configures triggers—HTTP requests, queue messages, database changes, or scheduled events.   </p>
+<p>The primary advantage of FaaS is granular scaling. Each function instance scales independently based on demand. During low traffic periods, functions may scale to zero, incurring no cost. During traffic spikes, the platform rapidly creates new instances to handle the load.   </p>
+<p>Cold Starts   </p>
+<p>Cold starts are the most significant challenge with FaaS. When a function hasn't been invoked recently, the platform needs to initialize a new execution environment—loading the runtime, initializing dependencies, and executing the handler code. This initialization adds latency to the first request.   </p>
+<p>Cold start latency varies by runtime: Java and .NET typically add 1-3 seconds, Node.js and Python add 200-500ms, and the custom runtime on AWS Lambda can be optimized to under 100ms. Strategies for mitigation include provisioned concurrency (keeping a minimum number of warm instances), keeping functions warm with periodic pings, and optimizing deployment package size.   </p>
+<p>AWS Fargate   </p>
+<p>Fargate is AWS's serverless compute engine for containers. Unlike Lambda, Fargate runs long-lived containers without requiring you to manage the underlying servers. You define the container image, CPU, and memory requirements, and Fargate places the container on optimized infrastructure.   </p>
+<p>Fargate bridges the gap between Lambda and traditional container orchestration. It supports workloads that need longer execution times, larger memory allocations, or specific runtime environments that Lambda doesn't support. Fargate also integrates with AWS App Mesh for service mesh capabilities.   </p>
+<p>Event-Driven Design   </p>
+<p>Serverless architecture naturally aligns with event-driven design. Functions respond to events from various sources: API Gateway requests, S3 object creations, DynamoDB stream changes, SQS messages, EventBridge events, and more. This event-driven model creates loosely coupled, scalable systems.   </p>
+<p>A typical event-driven serverless pattern uses SQS or SNS to decouple producers from consumers. An API Gateway receives a request, publishes a message to SQS, and returns immediately. A Lambda function processes the SQS messages asynchronously. This pattern handles traffic spikes gracefully by buffering messages in the queue.   </p>
+<p>Production Considerations   </p>
+<p>Production serverless systems require careful attention to several areas. Observability is critical—services like AWS X-Ray, CloudWatch, and third-party tools provide distributed tracing across functions and downstream services.   </p>
+<p>Error handling should use dead-letter queues for failed messages and implement exponential backoff for retries. State management must be externalized to databases, caches, or object storage since functions are stateless. Security follows the principle of least privilege—each function should have only the permissions it needs.   </p>
+<p>Cost management is also important. While serverless can be cost-effective at low to moderate traffic, high-volume workloads may be cheaper on provisioned infrastructure. Tools like AWS Compute Optimizer help analyze cost patterns and recommend optimizations.   </p>
+<p>Serverless architecture is not appropriate for every workload. Predictable, high-throughput workloads benefit from provisioned infrastructure. Workloads requiring GPU, specialized hardware, or ultra-low latency may not fit the serverless model. For variable, event-driven workloads, however, serverless provides unmatched scalability and operational simplicity.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

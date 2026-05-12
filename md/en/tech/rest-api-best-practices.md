@@ -8,8 +8,8 @@ url: https://dingjiu1989-hue.github.io/en/tech/rest-api-best-practices.html
 
 # REST API Best Practices: The Complete Guide for 2026
 
-REST APIs power the modern web, but most APIs are designed with subtle flaws that cause pain months later. This guide covers the conventions, patterns, and anti-patterns that separate production APIs from weekend projects.
-
+REST APIs power the modern web, but most APIs are designed with subtle flaws that cause pain months later. This guide covers the conventions, patterns, and anti-patterns that separate production APIs from weekend projects.  
+  
 ## 1\. Use Nouns, Not Verbs, for Resources
     
     
@@ -105,5 +105,3 @@ Always return errors in a consistent structure:
 ## 8\. API Documentation
 
 Use OpenAPI 3.1 (Swagger). It's the industry standard and generates interactive docs automatically. Tools like Stoplight, Redoc, and Swagger UI render beautiful docs from a single spec file. If your API doesn't have an OpenAPI spec, it's not ready for production.
-
-**See also:** [API Security Best Practices 2026: JWT, Rate Limiting, Input Validation, and OWASP for APIs](</en/tech/api-security-best-practices.html>), [GraphQL API Design: Schema Best Practices, Federation, and Performance](</en/tech/graphql-api-design.html>), [Webhook Implementation: Design, Security, and Best Practices (2026)](</en/tech/webhook-implementation-guide.html>).

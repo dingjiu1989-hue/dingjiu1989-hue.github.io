@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="secure-code-review">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Secure Code Review">
+    <meta property="og:description" content="A systematic approach to secure code review with checklists, automation, SAST integration, and common findings.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/secure-code-review.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Secure Code Review">
+    <meta name="twitter:description" content="A systematic approach to secure code review with checklists, automation, SAST integration, and common findings.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Secure Code Review — SourceHub</title>
+    <meta name="description" content="A systematic approach to secure code review with checklists, automation, SAST integration, and common findings.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/secure-code-review.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/secure-code-review.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Secure Code Review",
+      "description": "A systematic approach to secure code review with checklists, automation, SAST integration, and common findings.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1044",
+      "keywords": "Security, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/secure-code-review.html"},
+      "articleBody": "Secure Code Review Why Secure Code Review? Secure code review catches vulnerabilities before they reach production. It complements automated scanning by finding logic flaws and business logic vulnerabilities that tools miss. The Security Review Checklist Every code review should check these categories: # secure-code-review-checklist.yaml authentication: - Are passwords hashed with bcrypt/argon2? - Is session management secure? - Are tokens properly validated? authorization: - Are access controls checked server-side? - Is there IDOR protection? - Are roles enforced at API level? input_validation: - Are all inputs sanitized? - Is parameterized queries used for SQL? - Is there XSS protection? cryptography: - Are only modern algorithms used? - Is key management secure? - Is TLS configured properly? error_handling: - Are error messages information-free? - Is logging sensitive data avoided? - Are exceptions handled gracefully? SAST Integration Static Application Security Testing (SAST) automates vulnerability detection: # SAST results triage import json class SASTTriage: def __init__(self): self.false_positive_patterns = [ r\"test_.*\\.py\", r\"__tests__/\", r\"mock_\" ] def triage_findings(self, sast_results): actionable = [] false_positives = [] for finding in sast_results: if any(re.match(p, finding[\"file\"]) for p in self.false_positive_patterns): false_positives.append(finding) continue # Critical findings in production code if finding[\"severity\"] == \"critical\" and finding[\"branch\"] == \"main\": actionable.insert(0, finding) # Priority else: actionable.append(finding) return actionable, false_positives Common Findings SQL Injection # VULNERABLE def get_user(username): query = f\"SELECT * FROM users WHERE username = '{username}'\" return db.execute(query) # SECURE def get_user(username): query = \"SELECT * FROM users WHERE username = ?\" return db.execute(query, (username,)) Insecure Direct Object Reference (IDOR) // VULNERABLE app.get(\"/api/order/:id\", (req, res) => { const order = db.findOrder(req.params.id); res.json(order); // No ownership check! }); // SECURE app.get(\"/api/order/:id\", (req, res) => { const order = db.findOrder(req.params.id); if (order.userId !== req.session.userId) { return res.status(403).json({ error: \"Forbidden\" }); } res.json(order); }); Automated Enforcement in CI # .github/workflows/security-review.yml name: Security Review on: [pull_request] jobs: sast: runs-on: ubuntu-latest steps: - uses: actions/checkout@v4 - name: Run SAST run: semgrep --config=auto --error . - name: Dependency scan run: trivy fs --severity CRITICAL,HIGH . Manual Review Techniques For manual review, focus on: * **Data flow**: Where does untrusted data enter and exit? 2\\. **Authentication bypass**: Can you reach authenticated endpoints without a valid session? 3\\. **Privilege escalation**: Can a low-privilege user perform admin actions? 4\\. **Race conditions**: Are there TOCTOU (time-of-check-time-of-use) issues? Conclusion Effective secure code review combines automated SAST scanning with manual review of critical code paths. Build a review checklist, integrate security into your CI pipeline, and train developers on common vulnerability patterns. The best vulnerability is the one caught before it reaches production."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Secure Code Review"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Secure Code Review
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Secure Code Review</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Secure Code Review</h1>
+<br>
+<p>Why Secure Code Review?   </p>
+<p>Secure code review catches vulnerabilities before they reach production. It complements automated scanning by finding logic flaws and business logic vulnerabilities that tools miss.   </p>
+<p>The Security Review Checklist   </p>
+<p>Every code review should check these categories:   </p>
+<br>
+<br>
+<br>
+<p>    # secure-code-review-checklist.yaml</p>
+<br>
+<p>    authentication:</p>
+<br>
+<p>      - Are passwords hashed with bcrypt/argon2?</p>
+<br>
+<p>      - Is session management secure?</p>
+<br>
+<p>      - Are tokens properly validated?</p>
+<br>
+<br>
+<br>
+<p>    authorization:</p>
+<br>
+<p>      - Are access controls checked server-side?</p>
+<br>
+<p>      - Is there IDOR protection?</p>
+<br>
+<p>      - Are roles enforced at API level?</p>
+<br>
+<br>
+<br>
+<p>    input_validation:</p>
+<br>
+<p>      - Are all inputs sanitized?</p>
+<br>
+<p>      - Is parameterized queries used for SQL?</p>
+<br>
+<p>      - Is there XSS protection?</p>
+<br>
+<br>
+<br>
+<p>    cryptography:</p>
+<br>
+<p>      - Are only modern algorithms used?</p>
+<br>
+<p>      - Is key management secure?</p>
+<br>
+<p>      - Is TLS configured properly?</p>
+<br>
+<br>
+<br>
+<p>    error_handling:</p>
+<br>
+<p>      - Are error messages information-free?</p>
+<br>
+<p>      - Is logging sensitive data avoided?</p>
+<br>
+<p>      - Are exceptions handled gracefully?</p>
+<br>
+<br>
+<br>
+<br>
+<p>SAST Integration   </p>
+<p>Static Application Security Testing (SAST) automates vulnerability detection:   </p>
+<br>
+<br>
+<br>
+<p>    # SAST results triage</p>
+<br>
+<p>    import json</p>
+<br>
+<br>
+<br>
+<p>    class SASTTriage:</p>
+<br>
+<p>        def __init__(self):</p>
+<br>
+<p>            self.false_positive_patterns = [</p>
+<br>
+<p>                r"test_.*\.py",</p>
+<br>
+<p>                r"__tests__/",</p>
+<br>
+<p>                r"mock_"</p>
+<br>
+<p>            ]</p>
+<br>
+<br>
+<br>
+<p>        def triage_findings(self, sast_results):</p>
+<br>
+<p>            actionable = []</p>
+<br>
+<p>            false_positives = []</p>
+<br>
+<br>
+<br>
+<p>            for finding in sast_results:</p>
+<br>
+<p>                if any(re.match(p, finding["file"]) for p in self.false_positive_patterns):</p>
+<br>
+<p>                    false_positives.append(finding)</p>
+<br>
+<p>                    continue</p>
+<br>
+<br>
+<br>
+<p>                # Critical findings in production code</p>
+<br>
+<p>                if finding["severity"] == "critical" and finding["branch"] == "main":</p>
+<br>
+<p>                    actionable.insert(0, finding)  # Priority</p>
+<br>
+<p>                else:</p>
+<br>
+<p>                    actionable.append(finding)</p>
+<br>
+<br>
+<br>
+<p>            return actionable, false_positives</p>
+<br>
+<br>
+<br>
+<br>
+<p>Common Findings   </p>
+<p>SQL Injection   </p>
+<br>
+<br>
+<br>
+<p>    # VULNERABLE</p>
+<br>
+<p>    def get_user(username):</p>
+<br>
+<p>        query = f"SELECT * FROM users WHERE username = '{username}'"</p>
+<br>
+<p>        return db.execute(query)</p>
+<br>
+<br>
+<br>
+<p>    # SECURE</p>
+<br>
+<p>    def get_user(username):</p>
+<br>
+<p>        query = "SELECT * FROM users WHERE username = ?"</p>
+<br>
+<p>        return db.execute(query, (username,))</p>
+<br>
+<br>
+<br>
+<br>
+<p>Insecure Direct Object Reference (IDOR)   </p>
+<br>
+<br>
+<br>
+<p>    // VULNERABLE</p>
+<br>
+<p>    app.get("/api/order/:id", (req, res) => {</p>
+<br>
+<p>      const order = db.findOrder(req.params.id);</p>
+<br>
+<p>      res.json(order);  // No ownership check!</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<p>    // SECURE</p>
+<br>
+<p>    app.get("/api/order/:id", (req, res) => {</p>
+<br>
+<p>      const order = db.findOrder(req.params.id);</p>
+<br>
+<p>      if (order.userId !== req.session.userId) {</p>
+<br>
+<p>        return res.status(403).json({ error: "Forbidden" });</p>
+<br>
+<p>      }</p>
+<br>
+<p>      res.json(order);</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<br>
+<p>Automated Enforcement in CI   </p>
+<br>
+<br>
+<br>
+<p>    # .github/workflows/security-review.yml</p>
+<br>
+<p>    name: Security Review</p>
+<br>
+<p>    on: [pull_request]</p>
+<br>
+<p>    jobs:</p>
+<br>
+<p>      sast:</p>
+<br>
+<p>        runs-on: ubuntu-latest</p>
+<br>
+<p>        steps:</p>
+<br>
+<p>          - uses: actions/checkout@v4</p>
+<br>
+<p>          - name: Run SAST</p>
+<br>
+<p>            run: semgrep --config=auto --error .</p>
+<br>
+<p>          - name: Dependency scan</p>
+<br>
+<p>            run: trivy fs --severity CRITICAL,HIGH .</p>
+<br>
+<br>
+<br>
+<br>
+<p>Manual Review Techniques   </p>
+<p>For manual review, focus on:   </p>
+<br>
+<p>* **Data flow**: Where does untrusted data enter and exit?</p>
+<p>2\. **Authentication bypass**: Can you reach authenticated endpoints without a valid session? 3\. **Privilege escalation**: Can a low-privilege user perform admin actions? 4\. **Race conditions**: Are there TOCTOU (time-of-check-time-of-use) issues?   </p>
+<p>Conclusion   </p>
+<p>Effective secure code review combines automated SAST scanning with manual review of critical code paths. Build a review checklist, integrate security into your CI pipeline, and train developers on common vulnerability patterns. The best vulnerability is the one caught before it reaches production.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

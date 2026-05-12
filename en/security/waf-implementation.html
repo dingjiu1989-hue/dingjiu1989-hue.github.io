@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="waf-implementation">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Web Application Firewall Implementation">
+    <meta property="og:description" content="Practical guide to implementing ModSecurity with OWASP CRS, custom rule writing, false positive tuning, and performance optimization.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/waf-implementation.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Web Application Firewall Implementation">
+    <meta name="twitter:description" content="Practical guide to implementing ModSecurity with OWASP CRS, custom rule writing, false positive tuning, and performance optimization.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Web Application Firewall Implementation — SourceHub</title>
+    <meta name="description" content="Practical guide to implementing ModSecurity with OWASP CRS, custom rule writing, false positive tuning, and performance optimization.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/waf-implementation.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/waf-implementation.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Web Application Firewall Implementation",
+      "description": "Practical guide to implementing ModSecurity with OWASP CRS, custom rule writing, false positive tuning, and performance optimization.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "966",
+      "keywords": "Security, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/waf-implementation.html"},
+      "articleBody": "Web Application Firewall Implementation Introduction A Web Application Firewall (WAF) is a security layer that monitors, filters, and blocks HTTP traffic to and from a web application. Unlike network firewalls that operate at layers 3-4, WAFs inspect application-layer traffic (layer 7) and understand HTTP semantics, making them essential for defending against OWASP Top 10 attacks. ModSecurity and OWASP CRS ModSecurity is the most widely deployed open-source WAF engine. It operates as a module within web servers like Apache, Nginx, and IIS, or as a reverse proxy. The OWASP Core Rule Set (CRS) provides generic attack detection rules. # Basic ModSecurity configuration SecRuleEngine On SecRequestBodyAccess On SecResponseBodyAccess On SecDataDir /tmp/modsecurity/data # Include OWASP CRS Include /etc/modsecurity/crs/crs-setup.conf Include /etc/modsecurity/crs/rules/*.conf # Custom rule: block requests with suspicious User-Agent SecRule REQUEST_HEADERS:User-Agent \"@pmFromFile /etc/modsecurity/blocked-agents.txt\" \\ \"id:1000001,phase:1,deny,status:403,msg:'Blocked malicious User-Agent'\" CRS includes rules for SQL injection (942xxx), XSS (941xxx), LFI (931xxx), RFI (932xxx), and more. Each rule set is categorized by phase and severity. Custom Rule Writing Custom rules extend the WAF to handle application-specific threats or business logic. ModSecurity rules consist of three components: variables, operators, and actions. # Custom rule: protect /api/checkout from parameter tampering SecRule REQUEST_URI \"@beginsWith /api/checkout\" \\ \"id:1000002,phase:2,deny,status:403,\\ msg:'Checkout parameter tampering detected',\\ chain\" SecRule ARGS:quantity \"!@rx ^[0-9]+$\" # Rate limiting per IP SecRule IP:COUNT \"@gt 100\" \\ \"id:1000003,phase:5,deny,status:429,\\ msg:'Rate limit exceeded',\\ setvar:ip.rate_limit=1,\\ expirevar:ip.rate_limit=60\" SecAction \"id:1000004,phase:5,nolog,\\ initcol:ip=%{REMOTE_ADDR},\\ setvar:ip.count=+1\" False Positive Tuning Overly aggressive WAF rules generate false positives that block legitimate traffic. Tuning is an iterative process: * **Deploy in detection-only mode** initially to identify false positives without impacting production. 2\\. **Analyze audit logs** for blocked requests that appear legitimate. 3\\. **Disable specific rules** or adjust paranoia levels. # Set CRS paranoia level (1-4, higher = stricter) SecAction \\ \"id:900000,\\ phase:1,\\ nolog,\\ pass,\\ t:none,\\ setvar:tx.paranoia_level=2\" # Remove a specific rule for a specific URI SecRuleRemoveById 942100 # This removes the rule globally; better to scope it: SecRule REQUEST_URI \"@beginsWith /api/public\" \\ \"id:1000005,phase:1,nolog,pass,ctl:ruleRemoveById=942100\" Performance Impact WAF inspection introduces latency. Key optimization strategies: * **Request body limits**: Large request bodies increase processing time. Set practical limits. * **Static file exclusion**: Skip WAF processing for static assets (images, CSS, JS). * **Rule ordering**: Place cheaper checks (URI matching) before expensive ones (regex). # Skip WAF for static files SecRule REQUEST_URI \"\\\\.(jpg|png|css|js|ico)$\" \\ \"id:1000006,phase:1,nolog,pass,ctl:ruleEngine=Off\" Benchmarking shows ModSecurity with CRS at paranoia level 2 adds approximately 1-3ms per request on modern hardware. Full inspection at paranoia level 4 can add 10-20ms. Conclusion A properly tuned WAF is a critical defense layer. Start with CRS in detection mode, monitor logs aggressively, tune false positives before enforcing, and always be aware of the performance trade-offs at each paranoia level."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Web Application Firewall Implementation"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Web Application Firewall Implementation
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Web Application Firewall Implementation</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Web Application Firewall Implementation</h1>
+<br>
+<p>Introduction   </p>
+<p>A Web Application Firewall (WAF) is a security layer that monitors, filters, and blocks HTTP traffic to and from a web application. Unlike network firewalls that operate at layers 3-4, WAFs inspect application-layer traffic (layer 7) and understand HTTP semantics, making them essential for defending against OWASP Top 10 attacks.   </p>
+<p>ModSecurity and OWASP CRS   </p>
+<p>ModSecurity is the most widely deployed open-source WAF engine. It operates as a module within web servers like Apache, Nginx, and IIS, or as a reverse proxy. The OWASP Core Rule Set (CRS) provides generic attack detection rules.   </p>
+<br>
+<br>
+<br>
+<p>    # Basic ModSecurity configuration</p>
+<br>
+<p>    <IfModule mod_security2.c></p>
+<br>
+<p>        SecRuleEngine On</p>
+<br>
+<p>        SecRequestBodyAccess On</p>
+<br>
+<p>        SecResponseBodyAccess On</p>
+<br>
+<p>        SecDataDir /tmp/modsecurity/data</p>
+<br>
+<br>
+<br>
+<p>        # Include OWASP CRS</p>
+<br>
+<p>        Include /etc/modsecurity/crs/crs-setup.conf</p>
+<br>
+<p>        Include /etc/modsecurity/crs/rules/*.conf</p>
+<br>
+<br>
+<br>
+<p>        # Custom rule: block requests with suspicious User-Agent</p>
+<br>
+<p>        SecRule REQUEST_HEADERS:User-Agent "@pmFromFile /etc/modsecurity/blocked-agents.txt" \</p>
+<br>
+<p>            "id:1000001,phase:1,deny,status:403,msg:'Blocked malicious User-Agent'"</p>
+<br>
+<p>    </IfModule></p>
+<br>
+<br>
+<br>
+<br>
+<p>CRS includes rules for SQL injection (942xxx), XSS (941xxx), LFI (931xxx), RFI (932xxx), and more. Each rule set is categorized by phase and severity.   </p>
+<p>Custom Rule Writing   </p>
+<p>Custom rules extend the WAF to handle application-specific threats or business logic. ModSecurity rules consist of three components: variables, operators, and actions.   </p>
+<br>
+<br>
+<br>
+<p>    # Custom rule: protect /api/checkout from parameter tampering</p>
+<br>
+<p>    SecRule REQUEST_URI "@beginsWith /api/checkout" \</p>
+<br>
+<p>        "id:1000002,phase:2,deny,status:403,\</p>
+<br>
+<p>         msg:'Checkout parameter tampering detected',\</p>
+<br>
+<p>         chain"</p>
+<br>
+<p>        SecRule ARGS:quantity "!@rx ^[0-9]+$"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Rate limiting per IP</p>
+<br>
+<p>    SecRule IP:COUNT "@gt 100" \</p>
+<br>
+<p>        "id:1000003,phase:5,deny,status:429,\</p>
+<br>
+<p>         msg:'Rate limit exceeded',\</p>
+<br>
+<p>         setvar:ip.rate_limit=1,\</p>
+<br>
+<p>         expirevar:ip.rate_limit=60"</p>
+<br>
+<p>    SecAction "id:1000004,phase:5,nolog,\</p>
+<br>
+<p>         initcol:ip=%{REMOTE_ADDR},\</p>
+<br>
+<p>         setvar:ip.count=+1"</p>
+<br>
+<br>
+<br>
+<br>
+<p>False Positive Tuning   </p>
+<p>Overly aggressive WAF rules generate false positives that block legitimate traffic. Tuning is an iterative process:   </p>
+<br>
+<p>* **Deploy in detection-only mode** initially to identify false positives without impacting production.</p>
+<p>2\. **Analyze audit logs** for blocked requests that appear legitimate. 3\. **Disable specific rules** or adjust paranoia levels.   </p>
+<br>
+<br>
+<br>
+<p>    # Set CRS paranoia level (1-4, higher = stricter)</p>
+<br>
+<p>    SecAction \</p>
+<br>
+<p>        "id:900000,\</p>
+<br>
+<p>         phase:1,\</p>
+<br>
+<p>         nolog,\</p>
+<br>
+<p>         pass,\</p>
+<br>
+<p>         t:none,\</p>
+<br>
+<p>         setvar:tx.paranoia_level=2"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Remove a specific rule for a specific URI</p>
+<br>
+<p>    SecRuleRemoveById 942100</p>
+<br>
+<p>    # This removes the rule globally; better to scope it:</p>
+<br>
+<p>    SecRule REQUEST_URI "@beginsWith /api/public" \</p>
+<br>
+<p>        "id:1000005,phase:1,nolog,pass,ctl:ruleRemoveById=942100"</p>
+<br>
+<br>
+<br>
+<br>
+<p>Performance Impact   </p>
+<p>WAF inspection introduces latency. Key optimization strategies:   </p>
+<br>
+<p>* **Request body limits**: Large request bodies increase processing time. Set practical limits.</p>
+<p>* **Static file exclusion**: Skip WAF processing for static assets (images, CSS, JS).</p>
+<p>* **Rule ordering**: Place cheaper checks (URI matching) before expensive ones (regex).</p>
+<br>
+<br>
+<br>
+<br>
+<p>    # Skip WAF for static files</p>
+<br>
+<p>    SecRule REQUEST_URI "\\.(jpg|png|css|js|ico)$" \</p>
+<br>
+<p>        "id:1000006,phase:1,nolog,pass,ctl:ruleEngine=Off"</p>
+<br>
+<br>
+<br>
+<br>
+<p>Benchmarking shows ModSecurity with CRS at paranoia level 2 adds approximately 1-3ms per request on modern hardware. Full inspection at paranoia level 4 can add 10-20ms.   </p>
+<p>Conclusion   </p>
+<p>A properly tuned WAF is a critical defense layer. Start with CRS in detection mode, monitor logs aggressively, tune false positives before enforcing, and always be aware of the performance trade-offs at each paranoia level.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

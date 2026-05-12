@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2652",
+      "wordCount": "478",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-testing.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-testing.html"},
+      "articleBody": "Database Testing Strategies for Developers Database Testing Strategies Database testing is often the weakest part of test suites. Effective strategies catch issues before production. Unit Tests with In-Memory DB In-memory databases provide fast feedback during development: @pytest.fixture def repo(): conn = sqlite3.connect(':memory:') conn.execute(\"CREATE TABLE users (id INTEGER PRIMARY KEY, email TEXT)\") return UserRepository(conn) def test_find_by_email(repo): repo.create(\"alice@example.com\", \"Alice\") user = repo.find_by_email(\"alice@example.com\") assert user is not None Integration Tests with Testcontainers Testcontainers spins up disposable database containers: @pytest.fixture(scope=\"module\") def postgres(): with PostgresContainer(\"postgres:16\") as pg: yield pg def test_order_total(repo): repo.create(\"2026-01-01\", 100.00) total = repo.total_sales_between(\"2026-01-01\", \"2026-01-31\") assert total == 100.00 Migration Testing Test that migrations are backward-compatible and rollbacks work: def test_rollback(): apply_migration(\"V1__initial.sql\") apply_migration(\"V2__add_column.sql\") rollback_migration(\"V2__add_column.sql\") columns = get_table_columns(\"users\") assert \"new_column\" not in columns Data Fixtures Use factory patterns for test data: class UserFactory: email = factory.Sequence(lambda n: f\"user{n}@example.com\") name = factory.Faker('name') Conclusion Use in-memory databases for fast unit tests. Use Testcontainers for integration tests against real databases. Test migrations for backward compatibility. Use factory patterns for data fixtures. The most valuable test is one that uses a real database."
     }
     </script>
     <script type="application/ld+json">
@@ -73,625 +74,100 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Database Testing Strategies for Developers</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
-      <div class="article-body"><p>Database testing is often the weakest part of a test suite. Developers mock the database entirely and miss critical issues that only surface in production. This article covers practical database testing strategies: unit tests with in-memory databases, integration tests with Testcontainers, migration testing, data seeding, and property-based testing.</p>
+      <div class="article-body"><h1>Database Testing Strategies for Developers</h1>
 <br>
-<h2> The Database Testing Pyramid</h2>
+<p>Database Testing Strategies   </p>
+<p>Database testing is often the weakest part of test suites. Effective strategies catch issues before production.   </p>
+<p>Unit Tests with In-Memory DB   </p>
+<p>In-memory databases provide fast feedback during development:   </p>
 <br>
-<p>Just as the test pyramid guides general testing strategy, database testing has its own levels:</p>
 <br>
-<pre><code>
-         /\
-
-        /  \        Property-based tests (few, high value)
-
-       /    \
-
-      /      \      Integration tests with real DB
-
-     /        \
-
-    /          \    Migration and seed tests
-
-   /            \
-
-  /              \  Unit tests with mocked/lightweight DB
-
- /________________\
-
-</code></pre>
 <br>
-<p>Most teams over-invest in unit tests and under-invest in integration tests. For database testing, the opposite is true: the highest-value tests are those that use a real database.</p>
+<p>    @pytest.fixture</p>
 <br>
-<h2> Unit Tests with In-Memory Databases</h2>
+<p>    def repo():</p>
 <br>
-<p>In-memory databases (H2, SQLite) are useful for testing your data access layer logic without setting up a full database server.</p>
+<p>        conn = sqlite3.connect(':memory:')</p>
 <br>
-<h3>When to Use In-Memory Databases</h3>
+<p>        conn.execute("CREATE TABLE users (id INTEGER PRIMARY KEY, email TEXT)")</p>
 <br>
-<li>Testing SQL query logic that does not rely on database-specific features.</li>
-<li>Testing repository methods and data access objects.</li>
-<li>Fast feedback during development.</li>
-<li>CI environments where a real database is not available.</li>
+<p>        return UserRepository(conn)</p>
 <br>
-<h3>Limitations</h3>
 <br>
-<p>In-memory databases are not perfect substitutes. They have different behavior in areas like:</p>
-<li>SQL dialect differences (H2's SQL differs from PostgreSQL's).</li>
-<li>Transaction isolation levels.</li>
-<li>Constraint enforcement.</li>
-<li>Type handling and precision.</li>
-<li>Performance characteristics.</li>
 <br>
-<pre><code>
-// Java: Unit test with H2 in-memory database
-
-@ExtendWith(SpringExtension.class)
-
-@SpringBootTest
-
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
-
-class UserRepositoryTest {
-
-
-
-    @Autowired
-
-    private UserRepository userRepository;
-
-
-
-    @Test
-
-    void shouldFindUserByEmail() {
-
-        User saved = userRepository.save(
-
-            new User(&quot;alice@example.com&quot;, &quot;Alice&quot;)
-
-        );
-
-        
-
-        User found = userRepository.findByEmail(&quot;alice@example.com&quot;);
-
-        
-
-        assertThat(found).isNotNull();
-
-        assertThat(found.getName()).isEqualTo(&quot;Alice&quot;);
-
-    }
-
-}
-
-</code></pre>
+<p>    def test_find_by_email(repo):</p>
 <br>
-<pre><code>
-# Python: Unit test with SQLite in-memory
-
-import pytest
-
-import sqlite3
-
-from myapp.repository import UserRepository
-
-
-
-@pytest.fixture
-
-def repo():
-
-    conn = sqlite3.connect(&#x27;:memory:&#x27;)
-
-    conn.execute(&quot;&quot;&quot;
-
-        CREATE TABLE users (
-
-            id INTEGER PRIMARY KEY,
-
-            email TEXT UNIQUE,
-
-            name TEXT
-
-        )
-
-    &quot;&quot;&quot;)
-
-    return UserRepository(conn)
-
-
-
-def test_find_by_email(repo):
-
-    repo.create(&quot;alice@example.com&quot;, &quot;Alice&quot;)
-
-    user = repo.find_by_email(&quot;alice@example.com&quot;)
-
-    assert user is not None
-
-    assert user.name == &quot;Alice&quot;
-
-</code></pre>
+<p>        repo.create("alice@example.com", "Alice")</p>
 <br>
-<h2> Integration Tests with Testcontainers</h2>
+<p>        user = repo.find_by_email("alice@example.com")</p>
 <br>
-<p>Testcontainers is a library that spins up disposable database containers for integration tests. It gives you a real database with the exact version you use in production.</p>
+<p>        assert user is not None</p>
 <br>
-<h3>Why Testcontainers</h3>
 <br>
-<li>Tests run against the actual database engine (PostgreSQL, MySQL, etc.).</li>
-<li>No manual database setup or cleanup.</li>
-<li>Containers start quickly (seconds) and are isolated per test class.</li>
-<li>Supports database-specific features (PostgreSQL extensions, MySQL storage engines).</li>
 <br>
-<pre><code>
-// Java: Integration test with Testcontainers PostgreSQL
-
-@Testcontainers
-
-class OrderRepositoryTest {
-
-
-
-    @Container
-
-    static PostgreSQLContainer&lt;?&gt; postgres = new PostgreSQLContainer&lt;&gt;(&quot;postgres:16&quot;)
-
-            .withDatabaseName(&quot;testdb&quot;)
-
-            .withUsername(&quot;test&quot;)
-
-            .withPassword(&quot;test&quot;);
-
-
-
-    @DynamicPropertySource
-
-    static void configureProperties(DynamicPropertyRegistry registry) {
-
-        registry.add(&quot;spring.datasource.url&quot;, postgres::getJdbcUrl);
-
-        registry.add(&quot;spring.datasource.username&quot;, postgres::getUsername);
-
-        registry.add(&quot;spring.datasource.password&quot;, postgres::getPassword);
-
-    }
-
-
-
-    @Autowired
-
-    private OrderRepository orderRepository;
-
-
-
-    @Test
-
-    void shouldCalculateTotalSalesForPeriod() {
-
-        orderRepository.save(new Order(&quot;2026-01-01&quot;, 100.00));
-
-        orderRepository.save(new Order(&quot;2026-01-02&quot;, 200.00));
-
-        
-
-        BigDecimal total = orderRepository.totalSalesBetween(
-
-            LocalDate.of(2026, 1, 1),
-
-            LocalDate.of(2026, 1, 31)
-
-        );
-
-        
-
-        assertThat(total).isEqualByComparingTo(&quot;300.00&quot;);
-
-    }
-
-}
-
-</code></pre>
 <br>
-<pre><code>
-# Python: Integration test with testcontainers
-
-import pytest
-
-from testcontainers.postgres import PostgresContainer
-
-from myapp.repository import OrderRepository
-
-from myapp.database import create_connection
-
-
-
-@pytest.fixture(scope=&quot;module&quot;)
-
-def postgres_container():
-
-    with PostgresContainer(&quot;postgres:16&quot;) as pg:
-
-        yield pg
-
-
-
-@pytest.fixture
-
-def repo(postgres_container):
-
-    conn = create_connection(postgres_container.get_connection_url())
-
-    # Run migrations
-
-    conn.execute(&quot;&quot;&quot;
-
-        CREATE TABLE orders (
-
-            id SERIAL PRIMARY KEY,
-
-            order_date DATE,
-
-            amount DECIMAL(10,2)
-
-        )
-
-    &quot;&quot;&quot;)
-
-    return OrderRepository(conn)
-
-
-
-def test_total_sales(repo):
-
-    repo.create(&quot;2026-01-01&quot;, 100.00)
-
-    repo.create(&quot;2026-01-02&quot;, 200.00)
-
-    
-
-    total = repo.total_sales_between(
-
-        &quot;2026-01-01&quot;, &quot;2026-01-31&quot;
-
-    )
-
-    
-
-    assert total == 300.00
-
-</code></pre>
+<p>Integration Tests with Testcontainers   </p>
+<p>Testcontainers spins up disposable database containers:   </p>
 <br>
-<h3>Testcontainers for Other Databases</h3>
 <br>
-<pre><code>
-# Testcontainers for MongoDB
-
-from testcontainers.mongodb import MongoDbContainer
-
-
-
-def test_mongo_repository():
-
-    with MongoDbContainer(&quot;mongo:7&quot;) as mongo:
-
-        client = mongo.get_connection_client()
-
-        # Test code here
-
-
-
-# Testcontainers for MySQL
-
-from testcontainers.mysql import MySqlContainer
-
-
-
-def test_mysql_repository():
-
-    with MySqlContainer(&quot;mysql:8&quot;) as mysql:
-
-        connection_url = mysql.get_connection_url()
-
-        # Test code here
-
-</code></pre>
 <br>
-<h2> Migration Testing</h2>
+<p>    @pytest.fixture(scope="module")</p>
 <br>
-<p>Database migrations are one of the riskiest operations in software development. A bad migration can cause downtime or data loss.</p>
+<p>    def postgres():</p>
 <br>
-<h3>Backward Compatibility Testing</h3>
+<p>        with PostgresContainer("postgres:16") as pg:</p>
 <br>
-<p>Test that old code works after a migration:</p>
+<p>            yield pg</p>
 <br>
-<pre><code>
-def test_migration_backward_compatible():
-
-    &quot;&quot;&quot;Verify V2 migration works with V1 code.&quot;&quot;&quot;
-
-    # Apply V1 schema
-
-    apply_migration(&quot;V1__initial_schema.sql&quot;)
-
-    
-
-    # Write data with V1 code
-
-    repo = UserRepository(conn)
-
-    repo.create(&quot;alice@example.com&quot;, &quot;Alice&quot;)
-
-    
-
-    # Apply V2 migration
-
-    apply_migration(&quot;V2__add_user_preferences.sql&quot;)
-
-    
-
-    # V1 code can still read data
-
-    user = repo.find_by_email(&quot;alice@example.com&quot;)
-
-    assert user is not None  # V1 code still works!
-
-</code></pre>
 <br>
-<h3>Rollback Testing</h3>
 <br>
-<p>Test that migration rollback works:</p>
+<p>    def test_order_total(repo):</p>
 <br>
-<pre><code>
-def test_migration_rollback():
-
-    &quot;&quot;&quot;Verify migration is reversible.&quot;&quot;&quot;
-
-    apply_migration(&quot;V1__initial_schema.sql&quot;)
-
-    apply_migration(&quot;V2__add_user_preferences.sql&quot;)
-
-    
-
-    # Rollback V2
-
-    rollback_migration(&quot;V2__add_user_preferences.sql&quot;)
-
-    
-
-    # Schema should be back to V1
-
-    columns = get_table_columns(&quot;users&quot;)
-
-    assert &quot;preferences&quot; not in columns  # Preference column removed
-
-</code></pre>
+<p>        repo.create("2026-01-01", 100.00)</p>
 <br>
-<h3>Performance Regression Testing</h3>
+<p>        total = repo.total_sales_between("2026-01-01", "2026-01-31")</p>
 <br>
-<p>Test that migrations do not degrade query performance:</p>
+<p>        assert total == 100.00</p>
 <br>
-<pre><code>
-def test_migration_no_performance_regression():
-
-    &quot;&quot;&quot;Verify migration doesn&#x27;t slow common queries.&quot;&quot;&quot;
-
-    apply_migration(&quot;V1__initial_schema.sql&quot;)
-
-    insert_test_data(conn, 10000)
-
-    
-
-    time_v1 = measure_query_time(&quot;&quot;&quot;
-
-        SELECT * FROM users WHERE email LIKE &#x27;%example.com&#x27;
-
-    &quot;&quot;&quot;)
-
-    
-
-    apply_migration(&quot;V2__add_email_index.sql&quot;)
-
-    
-
-    time_v2 = measure_query_time(&quot;&quot;&quot;
-
-        SELECT * FROM users WHERE email LIKE &#x27;%example.com&#x27;
-
-    &quot;&quot;&quot;)
-
-    
-
-    # V2 should be at least as fast for this query
-
-    assert time_v2 &lt;= time_v1 * 1.1
-
-</code></pre>
 <br>
-<h2> Data Seeding for Tests</h2>
 <br>
-<p>Seeding test data requires balancing coverage with maintainability.</p>
 <br>
-<h3>Factory Approach</h3>
+<p>Migration Testing   </p>
+<p>Test that migrations are backward-compatible and rollbacks work:   </p>
 <br>
-<pre><code>
-# Data factory for test seeding
-
-import factory
-
-from myapp.models import User, Order
-
-
-
-class UserFactory(factory.Factory):
-
-    class Meta:
-
-        model = User
-
-    
-
-    email = factory.Sequence(lambda n: f&quot;user{n}@example.com&quot;)
-
-    name = factory.Faker(&#x27;name&#x27;)
-
-    status = &quot;active&quot;
-
-
-
-class OrderFactory(factory.Factory):
-
-    class Meta:
-
-        model = Order
-
-    
-
-    user = factory.SubFactory(UserFactory)
-
-    amount = factory.Faker(&#x27;pydecimal&#x27;, left_digits=4, right_digits=2)
-
-    status = &quot;completed&quot;
-
-
-
-# Usage in tests
-
-def test_order_summary():
-
-    user = UserFactory()
-
-    orders = OrderFactory.create_batch(5, user=user)
-
-    
-
-    summary = generate_order_summary(user.id)
-
-    assert summary[&quot;total_orders&quot;] == 5
-
-</code></pre>
 <br>
-<h3>Test Data Isolation</h3>
 <br>
-<p>Each test should have its own data set. Never share data between tests:</p>
+<p>    def test_rollback():</p>
 <br>
-<li>**Transaction rollback**: Run each test in a transaction and roll back at the end.</li>
-<p>2. **Schema per test**: Create a fresh schema for each test class.</p>
-<p>3. **Cleanup after**: Delete test data in teardown (slower, more complex).</p>
+<p>        apply_migration("V1__initial.sql")</p>
 <br>
-<h2> Property-Based Testing</h2>
+<p>        apply_migration("V2__add_column.sql")</p>
 <br>
-<p>Property-based testing generates random inputs to verify that database invariants hold. It is more thorough than writing individual test cases.</p>
+<p>        rollback_migration("V2__add_column.sql")</p>
 <br>
-<pre><code>
-# Property-based testing with Hypothesis
-
-from hypothesis import given, strategies as st
-
-
-
-@given(
-
-    st.lists(
-
-        st.fixed_dictionaries({
-
-            &#x27;email&#x27;: st.emails(),
-
-            &#x27;name&#x27;: st.text(min_size=1, max_size=100),
-
-            &#x27;age&#x27;: st.integers(min_value=0, max_value=150)
-
-        }),
-
-        min_size=1,
-
-        max_size=100
-
-    )
-
-)
-
-def test_user_id_uniqueness(users):
-
-    &quot;&quot;&quot;All created users should have unique IDs.&quot;&quot;&quot;
-
-    user_ids = []
-
-    for user_data in users:
-
-        user_id = repo.create(
-
-            user_data[&#x27;email&#x27;],
-
-            user_data[&#x27;name&#x27;],
-
-            user_data[&#x27;age&#x27;]
-
-        )
-
-        user_ids.append(user_id)
-
-    
-
-    assert len(set(user_ids)) == len(user_ids)
-
-</code></pre>
+<p>        columns = get_table_columns("users")</p>
 <br>
-<pre><code>
-// Property-based testing with fast-check
-
-const fc = require(&#x27;fast-check&#x27;);
-
-
-
-describe(&#x27;User repository&#x27;, () =&gt; {
-
-    it(&#x27;should enforce unique email constraint&#x27;, () =&gt; {
-
-        fc.assert(
-
-            fc.property(fc.uniqueArray(fc.email(), {minLength: 1}), (emails) =&gt; {
-
-                // Create users
-
-                for (const email of emails) {
-
-                    repo.create({email, name: &#x27;Test&#x27;});
-
-                }
-
-                // Try to create duplicate
-
-                expect(() =&gt; repo.create({
-
-                    email: emails[0],
-
-                    name: &#x27;Duplicate&#x27;
-
-                })).toThrow();
-
-            })
-
-        );
-
-    });
-
-});
-
-</code></pre>
+<p>        assert "new_column" not in columns</p>
 <br>
-<h2> Testing Anti-Patterns</h2>
 <br>
-<li>**Shared mutable state**: Tests that modify shared database state and depend on each other. Always isolate test data.</li>
-<li>**Testing the framework**: Testing that a database returns the rows you inserted tests the database, not your code.</li>
-<li>**Mocking everything**: Mocks hide real issues like constraint violations, transaction handling, and deadlocks.</li>
-<li>**Flaky tests**: Tests that fail intermittently due to timing, data ordering, or environment dependencies.</li>
 <br>
-<h2> Conclusion</h2>
 <br>
-<p>Database testing requires a layered strategy. Use in-memory databases for fast unit tests of data access logic. Use Testcontainers for integration tests against the exact production database engine. Test migrations for backward compatibility, rollback, and performance. Use property-based testing to discover edge cases. The most valuable database test is one that uses a real database, tests a real query, and verifies a real constraint.</p></div>
+<p>Data Fixtures   </p>
+<p>Use factory patterns for test data:   </p>
+<br>
+<br>
+<br>
+<p>    class UserFactory:</p>
+<br>
+<p>        email = factory.Sequence(lambda n: f"user{n}@example.com")</p>
+<br>
+<p>        name = factory.Faker('name')</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
+<p>Use in-memory databases for fast unit tests. Use Testcontainers for integration tests against real databases. Test migrations for backward compatibility. Use factory patterns for data fixtures. The most valuable test is one that uses a real database.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

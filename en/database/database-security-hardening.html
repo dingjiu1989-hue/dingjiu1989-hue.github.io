@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="database-security-hardening">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Database Security Hardening">
+    <meta property="og:description" content="Hardening database security with encryption, audit logging, access control, and network isolation.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/database-security-hardening.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Database Security Hardening">
+    <meta name="twitter:description" content="Hardening database security with encryption, audit logging, access control, and network isolation.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Database Security Hardening — SourceHub</title>
+    <meta name="description" content="Hardening database security with encryption, audit logging, access control, and network isolation.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/database-security-hardening.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/database-security-hardening.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Database Security Hardening",
+      "description": "Hardening database security with encryption, audit logging, access control, and network isolation.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "382",
+      "keywords": "Database, Backend, Data",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-security-hardening.html"},
+      "articleBody": "Database Security Hardening Defense in Depth Database security requires multiple layers: network isolation, encryption, access control, and auditing. Encryption Encryption at Rest -- PostgreSQL TDE CREATE EXTENSION pg_tde; SELECT pg_tde_add_database_key_provider('file-vault', '{\"type\":\"file\"}'); SELECT pg_tde_set_principal_key('production-db-key', 'file-vault'); Encryption in Transit # postgresql.conf ssl = on ssl_cert_file = '/etc/ssl/certs/server.crt' ssl_key_file = '/etc/ssl/private/server.key' Access Control Apply least privilege with separate roles: CREATE ROLE read_only; CREATE ROLE read_write; GRANT SELECT ON ALL TABLES TO read_only; GRANT INSERT, UPDATE, DELETE ON ALL TABLES TO read_write; Row-Level Security ALTER TABLE orders ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation ON orders USING (tenant_id = current_setting('app.tenant_id')::INT); Audit Logging CREATE EXTENSION pgaudit; -- In postgresql.conf pgaudit.log = 'write,ddl,role' Network Isolation Place databases in private subnets. Use security groups to restrict access to specific application servers only. Never expose databases directly to the internet. Conclusion Layer encryption, access control, RLS, audit logging, and network isolation. Rotate credentials regularly. Follow least privilege. Test your security controls periodically."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Database Security Hardening"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Database Security Hardening
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Data</span></div>
+      <h1 class="article-title">Database Security Hardening</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Database Security Hardening</h1>
+<br>
+<p>Defense in Depth   </p>
+<p>Database security requires multiple layers: network isolation, encryption, access control, and auditing.   </p>
+<p>Encryption   </p>
+<p>Encryption at Rest   </p>
+<br>
+<br>
+<br>
+<p>    -- PostgreSQL TDE</p>
+<br>
+<p>    CREATE EXTENSION pg_tde;</p>
+<br>
+<p>    SELECT pg_tde_add_database_key_provider('file-vault', '{"type":"file"}');</p>
+<br>
+<p>    SELECT pg_tde_set_principal_key('production-db-key', 'file-vault');</p>
+<br>
+<br>
+<br>
+<br>
+<p>Encryption in Transit   </p>
+<br>
+<br>
+<br>
+<p>    # postgresql.conf</p>
+<br>
+<p>    ssl = on</p>
+<br>
+<p>    ssl_cert_file = '/etc/ssl/certs/server.crt'</p>
+<br>
+<p>    ssl_key_file = '/etc/ssl/private/server.key'</p>
+<br>
+<br>
+<br>
+<br>
+<p>Access Control   </p>
+<p>Apply least privilege with separate roles:   </p>
+<br>
+<br>
+<br>
+<p>    CREATE ROLE read_only;</p>
+<br>
+<p>    CREATE ROLE read_write;</p>
+<br>
+<p>    GRANT SELECT ON ALL TABLES TO read_only;</p>
+<br>
+<p>    GRANT INSERT, UPDATE, DELETE ON ALL TABLES TO read_write;</p>
+<br>
+<br>
+<br>
+<br>
+<p>Row-Level Security   </p>
+<br>
+<br>
+<br>
+<p>    ALTER TABLE orders ENABLE ROW LEVEL SECURITY;</p>
+<br>
+<p>    CREATE POLICY tenant_isolation ON orders</p>
+<br>
+<p>        USING (tenant_id = current_setting('app.tenant_id')::INT);</p>
+<br>
+<br>
+<br>
+<br>
+<p>Audit Logging   </p>
+<br>
+<br>
+<br>
+<p>    CREATE EXTENSION pgaudit;</p>
+<br>
+<p>    -- In postgresql.conf</p>
+<br>
+<p>    pgaudit.log = 'write,ddl,role'</p>
+<br>
+<br>
+<br>
+<br>
+<p>Network Isolation   </p>
+<p>Place databases in private subnets. Use security groups to restrict access to specific application servers only. Never expose databases directly to the internet.   </p>
+<p>Conclusion   </p>
+<p>Layer encryption, access control, RLS, audit logging, and network isolation. Rotate credentials regularly. Follow least privilege. Test your security controls periodically.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

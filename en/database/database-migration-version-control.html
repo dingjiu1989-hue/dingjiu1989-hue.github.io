@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="database-migration-version-control">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Database Migration Version Control Strategies">
+    <meta property="og:description" content="Best practices for version-controlling database schema migrations across development, staging, and production.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/database-migration-version-control.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Database Migration Version Control Strategies">
+    <meta name="twitter:description" content="Best practices for version-controlling database schema migrations across development, staging, and production.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Database Migration Version Control Strategies — SourceHub</title>
+    <meta name="description" content="Best practices for version-controlling database schema migrations across development, staging, and production.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/database-migration-version-control.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/database-migration-version-control.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Database Migration Version Control Strategies",
+      "description": "Best practices for version-controlling database schema migrations across development, staging, and production.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "499",
+      "keywords": "Database, Backend, Data",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-migration-version-control.html"},
+      "articleBody": "Database Migration Version Control Strategies Version-controlling database migrations is essential for reproducible deployments and team collaboration. Unlike application code, database schema changes are stateful\u2014applying a migration changes the database permanently, and mistakes can cause data loss. Migration Tools Flyway is the most popular Java-based migration tool, supporting SQL and Java migrations with version ordering. Liquibase offers XML, YAML, JSON, or SQL changelogs with rollback support. Alembic is the standard for Python/Flask/SQLAlchemy projects. Prisma Migrate handles migrations for the Prisma ORM with declarative schema management. Migration File Naming Consistent naming prevents confusion. Use a version prefix (V1__, V2__), a descriptive name (create_users_table), and a timestamp or sequence number. Flyway convention: V1__create_users_table.sql, V2__add_email_to_users.sql. Liquibase uses changelog files with unique IDs. Include both forward and backward migrations where possible. Rollback migrations allow reverting changes rapidly when issues are detected. Migration Design Principles One logical change per migration. If you need to add a column and create an index, that is two migrations. This makes rollback easier and debugging clearer. For large tables, batch DDL operations. Adding a column or index to a billion-row table may lock the table for hours. Use tools like pt-online-schema-change for zero-downtime migrations. Testing Migrations Test every migration against a copy of production data. Automated CI pipelines should apply migrations, run integration tests, and verify rollbacks. Check column defaults, constraints, and foreign key behavior. Test rollbacks explicitly. A non-functional rollback is worse than no rollback because it creates false confidence. Verify that rollback restores the exact previous schema. Team Workflow The golden rule: never modify an existing migration that has been merged to the main branch. Always create a new migration for additional changes. This prevents inconsistent database states when different developers have applied different versions of the same migration. Maintain a migration status document for major schema changes. Describe the change, the expected duration, rollback procedure, and affected services."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Database Migration Version Control Strategies"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Database Migration Version Control Strategies
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Data</span></div>
+      <h1 class="article-title">Database Migration Version Control Strategies</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Database Migration Version Control Strategies</h1>
+<p>Version-controlling database migrations is essential for reproducible deployments and team collaboration. Unlike application code, database schema changes are stateful—applying a migration changes the database permanently, and mistakes can cause data loss.</p>
+<br>
+<h2> Migration Tools</h2>
+<br>
+<p>Flyway is the most popular Java-based migration tool, supporting SQL and Java migrations with version ordering. Liquibase offers XML, YAML, JSON, or SQL changelogs with rollback support. Alembic is the standard for Python/Flask/SQLAlchemy projects. Prisma Migrate handles migrations for the Prisma ORM with declarative schema management.</p>
+<br>
+<h2> Migration File Naming</h2>
+<br>
+<p>Consistent naming prevents confusion. Use a version prefix (V1__, V2__), a descriptive name (create_users_table), and a timestamp or sequence number. Flyway convention: V1__create_users_table.sql, V2__add_email_to_users.sql. Liquibase uses changelog files with unique IDs.</p>
+<br>
+<p>Include both forward and backward migrations where possible. Rollback migrations allow reverting changes rapidly when issues are detected.</p>
+<br>
+<h2> Migration Design Principles</h2>
+<br>
+<p>One logical change per migration. If you need to add a column and create an index, that is two migrations. This makes rollback easier and debugging clearer.</p>
+<br>
+<p>For large tables, batch DDL operations. Adding a column or index to a billion-row table may lock the table for hours. Use tools like pt-online-schema-change for zero-downtime migrations.</p>
+<br>
+<h2> Testing Migrations</h2>
+<br>
+<p>Test every migration against a copy of production data. Automated CI pipelines should apply migrations, run integration tests, and verify rollbacks. Check column defaults, constraints, and foreign key behavior.</p>
+<br>
+<p>Test rollbacks explicitly. A non-functional rollback is worse than no rollback because it creates false confidence. Verify that rollback restores the exact previous schema.</p>
+<br>
+<h2> Team Workflow</h2>
+<br>
+<p>The golden rule: never modify an existing migration that has been merged to the main branch. Always create a new migration for additional changes. This prevents inconsistent database states when different developers have applied different versions of the same migration.</p>
+<br>
+<p>Maintain a migration status document for major schema changes. Describe the change, the expected duration, rollback procedure, and affected services.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

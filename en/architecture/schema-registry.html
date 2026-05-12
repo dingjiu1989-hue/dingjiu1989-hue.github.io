@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="schema-registry">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Schema Registry">
+    <meta property="og:description" content="Learn schema registry principles: Avro, Protobuf, JSON Schema, compatibility checks, and evolution strategies">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/schema-registry.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Schema Registry">
+    <meta name="twitter:description" content="Learn schema registry principles: Avro, Protobuf, JSON Schema, compatibility checks, and evolution strategies">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Schema Registry — SourceHub</title>
+    <meta name="description" content="Learn schema registry principles: Avro, Protobuf, JSON Schema, compatibility checks, and evolution strategies">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/schema-registry.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/schema-registry.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Schema Registry",
+      "description": "Learn schema registry principles: Avro, Protobuf, JSON Schema, compatibility checks, and evolution strategies",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1008",
+      "keywords": "Architecture, System Design, Backend",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/schema-registry.html"},
+      "articleBody": "Schema Registry A schema registry is a centralized service that stores, validates, and manages schemas for data in event-driven and message-based systems. As organizations adopt event-driven architectures with asynchronous communication, managing data formats across producers and consumers becomes critical. The schema registry solves the problem of data contract evolution by enforcing compatibility rules and providing a single source of truth for schema definitions. The Problem Schema Registries Solve In any system where services exchange data, the producer and consumer must agree on the data format. Without a schema registry, this agreement is implicit and fragile. A producer changes a field name, and consumers break without warning. Different consumers may expect different versions. Debugging data format issues becomes a serialization nightmare. A schema registry makes data contracts explicit and enforceable. Producers register their schema before publishing data. Consumers discover schemas and validate their expectations. The registry enforces compatibility rules that prevent breaking changes while allowing controlled evolution. Avro Apache Avro is the most established schema format for event streaming, particularly with Kafka. Avro schemas are defined in JSON and support rich data types including records, enums, arrays, and unions. The key feature is Avro's binary serialization, which produces compact, fast-to-deserialize messages. Avro supports schema evolution through a well-defined set of compatibility rules. A writer uses one schema (the write schema) to serialize data, and a reader uses potentially different schema (the read schema) to deserialize. The Avro specification defines how to resolve differences between schemas, enabling forward and backward compatibility. Kafka's Schema Registry integrates natively with Avro, providing automatic schema registration, validation, and compatibility checking. This combination is the de facto standard for Kafka-based event-driven architectures. Protobuf Protocol Buffers (Protobuf) is Google's schema format, widely used for both RPC communication (gRPC) and event streaming. Protobuf schemas are defined in `.proto` files and compiled to language-specific code. Like Avro, Protobuf uses binary serialization for compact, efficient messages. Protobuf's evolution rules are defined by field numbers and rules. Fields can be added with new numbers, deprecated fields should not be reused, and field types should not change. Protobuf supports an `Any` type for schema-less payloads and `oneof` for union types. Protobuf has stronger coupling between schema and code than Avro because of code generation. This can be an advantage for type safety but adds complexity when consumers use different languages or deployment schedules. JSON Schema JSON Schema provides schema validation for JSON data. Unlike Avro and Protobuf, JSON Schema does not define a serialization format\u2014it validates existing JSON documents. This makes it the most accessible option for REST APIs and systems where human readability matters. JSON Schema evolution follows similar principles: add fields as optional, avoid removing fields, and use `additionalProperties` carefully. JSON Schema registries like Apicurio and Confluent's JSON Schema support provide compatibility checking similar to Avro. Compatibility Modes Schema registries support several compatibility modes that define which schema changes are allowed. Backward compatibility ensures that data produced with an older schema can be read with a newer schema. This is the most common mode\u2014consumers can be upgraded before producers. Forward compatibility ensures that data produced with a newer schema can be read with an older schema. This allows producers to be upgraded before consumers. Full compatibility requires both forward and backward compatibility. None disables checking entirely, which is useful during development. Choosing the right compatibility mode depends on your deployment and upgrade strategy. Backward is safest for most systems. Forward is useful when producers are independently deployable. Full is the most restrictive but safest. Best Practices Organizations should use schema registries for all event and message formats. Register schemas before publishing data. Use automated compatibility checks in CI/CD pipelines. Version schemas explicitly and never delete old versions. Monitor schema registration to track evolution. Establish governance for schema changes, particularly for shared event types consumed by multiple services. A well-managed schema registry prevents the most common data contract failures in distributed systems. Combined with good versioning practices and compatibility checking, it enables safe, independent evolution of producers and consumers."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Schema Registry"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Schema Registry
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">Schema Registry</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Schema Registry</h1>
+<br>
+<p>A schema registry is a centralized service that stores, validates, and manages schemas for data in event-driven and message-based systems. As organizations adopt event-driven architectures with asynchronous communication, managing data formats across producers and consumers becomes critical. The schema registry solves the problem of data contract evolution by enforcing compatibility rules and providing a single source of truth for schema definitions.   </p>
+<p>The Problem Schema Registries Solve   </p>
+<p>In any system where services exchange data, the producer and consumer must agree on the data format. Without a schema registry, this agreement is implicit and fragile. A producer changes a field name, and consumers break without warning. Different consumers may expect different versions. Debugging data format issues becomes a serialization nightmare.   </p>
+<p>A schema registry makes data contracts explicit and enforceable. Producers register their schema before publishing data. Consumers discover schemas and validate their expectations. The registry enforces compatibility rules that prevent breaking changes while allowing controlled evolution.   </p>
+<p>Avro   </p>
+<p>Apache Avro is the most established schema format for event streaming, particularly with Kafka. Avro schemas are defined in JSON and support rich data types including records, enums, arrays, and unions. The key feature is Avro's binary serialization, which produces compact, fast-to-deserialize messages.   </p>
+<p>Avro supports schema evolution through a well-defined set of compatibility rules. A writer uses one schema (the write schema) to serialize data, and a reader uses potentially different schema (the read schema) to deserialize. The Avro specification defines how to resolve differences between schemas, enabling forward and backward compatibility.   </p>
+<p>Kafka's Schema Registry integrates natively with Avro, providing automatic schema registration, validation, and compatibility checking. This combination is the de facto standard for Kafka-based event-driven architectures.   </p>
+<p>Protobuf   </p>
+<p>Protocol Buffers (Protobuf) is Google's schema format, widely used for both RPC communication (gRPC) and event streaming. Protobuf schemas are defined in `.proto` files and compiled to language-specific code. Like Avro, Protobuf uses binary serialization for compact, efficient messages.   </p>
+<p>Protobuf's evolution rules are defined by field numbers and rules. Fields can be added with new numbers, deprecated fields should not be reused, and field types should not change. Protobuf supports an `Any` type for schema-less payloads and `oneof` for union types.   </p>
+<p>Protobuf has stronger coupling between schema and code than Avro because of code generation. This can be an advantage for type safety but adds complexity when consumers use different languages or deployment schedules.   </p>
+<p>JSON Schema   </p>
+<p>JSON Schema provides schema validation for JSON data. Unlike Avro and Protobuf, JSON Schema does not define a serialization format—it validates existing JSON documents. This makes it the most accessible option for REST APIs and systems where human readability matters.   </p>
+<p>JSON Schema evolution follows similar principles: add fields as optional, avoid removing fields, and use `additionalProperties` carefully. JSON Schema registries like Apicurio and Confluent's JSON Schema support provide compatibility checking similar to Avro.   </p>
+<p>Compatibility Modes   </p>
+<p>Schema registries support several compatibility modes that define which schema changes are allowed. Backward compatibility ensures that data produced with an older schema can be read with a newer schema. This is the most common mode—consumers can be upgraded before producers.   </p>
+<p>Forward compatibility ensures that data produced with a newer schema can be read with an older schema. This allows producers to be upgraded before consumers. Full compatibility requires both forward and backward compatibility. None disables checking entirely, which is useful during development.   </p>
+<p>Choosing the right compatibility mode depends on your deployment and upgrade strategy. Backward is safest for most systems. Forward is useful when producers are independently deployable. Full is the most restrictive but safest.   </p>
+<p>Best Practices   </p>
+<p>Organizations should use schema registries for all event and message formats. Register schemas before publishing data. Use automated compatibility checks in CI/CD pipelines. Version schemas explicitly and never delete old versions. Monitor schema registration to track evolution. Establish governance for schema changes, particularly for shared event types consumed by multiple services.   </p>
+<p>A well-managed schema registry prevents the most common data contract failures in distributed systems. Combined with good versioning practices and compatibility checking, it enables safe, independent evolution of producers and consumers.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

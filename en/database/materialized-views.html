@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="materialized-views">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Materialized Views">
+    <meta property="og:description" content="Using materialized views for performance optimization with refresh strategies, use cases, and SQL examples.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/materialized-views.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Materialized Views">
+    <meta name="twitter:description" content="Using materialized views for performance optimization with refresh strategies, use cases, and SQL examples.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Materialized Views — SourceHub</title>
+    <meta name="description" content="Using materialized views for performance optimization with refresh strategies, use cases, and SQL examples.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/materialized-views.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/materialized-views.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Materialized Views",
+      "description": "Using materialized views for performance optimization with refresh strategies, use cases, and SQL examples.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "612",
+      "keywords": "Database, Backend, Data",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/materialized-views.html"},
+      "articleBody": "Materialized Views What are Materialized Views? Materialized views pre-compute and store query results. Unlike regular views, they persist data on disk, trading storage for query speed. Creating Materialized Views -- PostgreSQL: materialized view for daily sales CREATE MATERIALIZED VIEW daily_sales_summary AS SELECT d.date, p.category, COUNT(*) as sale_count, SUM(s.amount) as total_sales FROM fact_sales s JOIN dim_date d ON s.date_id = d.date_id JOIN dim_product p ON s.product_id = p.product_id GROUP BY d.date, p.category; -- Add index for faster queries CREATE INDEX idx_daily_sales_date ON daily_sales_summary(date); -- Query is much faster than the original SELECT * FROM daily_sales_summary WHERE date >= '2026-01-01'; Refresh Strategies Complete Refresh Rebuilds the entire view: REFRESH MATERIALIZED VIEW daily_sales_summary; Simple but locks the view during refresh. Best for small datasets or low-frequency refreshes. Concurrent Refresh Creates a new version and swaps atomically. No lock but requires a unique index: CREATE UNIQUE INDEX idx_daily_sales_pk ON daily_sales_summary(date, category); REFRESH MATERIALIZED VIEW CONCURRENTLY daily_sales_summary; Incremental Refresh Only processes changed data. Not natively supported in PostgreSQL but available in specialized databases. Use Cases | Use Case | Refresh Frequency | Benefit | |----------|------------------|---------| | Dashboards | Hourly | Sub-second queries | | Aggregations | Daily | Avoid full table scans | | Pre-joined data | On-demand | Eliminate expensive joins | | Reporting | Nightly | Consistent snapshot | Performance Considerations -- Compare query performance EXPLAIN ANALYZE SELECT date, SUM(total_sales) FROM daily_sales_summary WHERE date >= '2026-01-01' GROUP BY date; -- vs the base query (much slower) EXPLAIN ANALYZE SELECT d.date, SUM(s.amount) FROM fact_sales s JOIN dim_date d ON s.date_id = d.date_id WHERE d.date >= '2026-01-01' GROUP BY d.date; Conclusion Materialized views are essential for dashboard and reporting performance. Use concurrent refresh to avoid locks. Add indexes on frequently filtered columns. Choose refresh strategy based on freshness requirements. Monitor storage overhead for large views."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Materialized Views"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Materialized Views
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Data</span></div>
+      <h1 class="article-title">Materialized Views</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Materialized Views</h1>
+<br>
+<p>What are Materialized Views?   </p>
+<p>Materialized views pre-compute and store query results. Unlike regular views, they persist data on disk, trading storage for query speed.   </p>
+<p>Creating Materialized Views   </p>
+<br>
+<br>
+<br>
+<p>    -- PostgreSQL: materialized view for daily sales</p>
+<br>
+<p>    CREATE MATERIALIZED VIEW daily_sales_summary AS</p>
+<br>
+<p>    SELECT</p>
+<br>
+<p>        d.date,</p>
+<br>
+<p>        p.category,</p>
+<br>
+<p>        COUNT(*) as sale_count,</p>
+<br>
+<p>        SUM(s.amount) as total_sales</p>
+<br>
+<p>    FROM fact_sales s</p>
+<br>
+<p>    JOIN dim_date d ON s.date_id = d.date_id</p>
+<br>
+<p>    JOIN dim_product p ON s.product_id = p.product_id</p>
+<br>
+<p>    GROUP BY d.date, p.category;</p>
+<br>
+<br>
+<br>
+<p>    -- Add index for faster queries</p>
+<br>
+<p>    CREATE INDEX idx_daily_sales_date ON daily_sales_summary(date);</p>
+<br>
+<br>
+<br>
+<p>    -- Query is much faster than the original</p>
+<br>
+<p>    SELECT * FROM daily_sales_summary</p>
+<br>
+<p>    WHERE date >= '2026-01-01';</p>
+<br>
+<br>
+<br>
+<br>
+<p>Refresh Strategies   </p>
+<p>Complete Refresh   </p>
+<p>Rebuilds the entire view:   </p>
+<br>
+<br>
+<br>
+<p>    REFRESH MATERIALIZED VIEW daily_sales_summary;</p>
+<br>
+<br>
+<br>
+<br>
+<p>Simple but locks the view during refresh. Best for small datasets or low-frequency refreshes.   </p>
+<p>Concurrent Refresh   </p>
+<p>Creates a new version and swaps atomically. No lock but requires a unique index:   </p>
+<br>
+<br>
+<br>
+<p>    CREATE UNIQUE INDEX idx_daily_sales_pk ON daily_sales_summary(date, category);</p>
+<br>
+<p>    REFRESH MATERIALIZED VIEW CONCURRENTLY daily_sales_summary;</p>
+<br>
+<br>
+<br>
+<br>
+<p>Incremental Refresh   </p>
+<p>Only processes changed data. Not natively supported in PostgreSQL but available in specialized databases.   </p>
+<p>Use Cases   </p>
+<p>| Use Case | Refresh Frequency | Benefit | |----------|------------------|---------| | Dashboards | Hourly | Sub-second queries | | Aggregations | Daily | Avoid full table scans | | Pre-joined data | On-demand | Eliminate expensive joins | | Reporting | Nightly | Consistent snapshot |   </p>
+<p>Performance Considerations   </p>
+<br>
+<br>
+<br>
+<p>    -- Compare query performance</p>
+<br>
+<p>    EXPLAIN ANALYZE</p>
+<br>
+<p>    SELECT date, SUM(total_sales)</p>
+<br>
+<p>    FROM daily_sales_summary</p>
+<br>
+<p>    WHERE date >= '2026-01-01'</p>
+<br>
+<p>    GROUP BY date;</p>
+<br>
+<br>
+<br>
+<p>    -- vs the base query (much slower)</p>
+<br>
+<p>    EXPLAIN ANALYZE</p>
+<br>
+<p>    SELECT d.date, SUM(s.amount)</p>
+<br>
+<p>    FROM fact_sales s</p>
+<br>
+<p>    JOIN dim_date d ON s.date_id = d.date_id</p>
+<br>
+<p>    WHERE d.date >= '2026-01-01'</p>
+<br>
+<p>    GROUP BY d.date;</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
+<p>Materialized views are essential for dashboard and reporting performance. Use concurrent refresh to avoid locks. Add indexes on frequently filtered columns. Choose refresh strategy based on freshness requirements. Monitor storage overhead for large views.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="polling-consumer">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Polling Consumer vs Event-Driven Consumer">
+    <meta property="og:description" content="Compare polling and event-driven consumer patterns: when to poll, when to push, and hybrid approaches.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/polling-consumer.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Polling Consumer vs Event-Driven Consumer">
+    <meta name="twitter:description" content="Compare polling and event-driven consumer patterns: when to poll, when to push, and hybrid approaches.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Polling Consumer vs Event-Driven Consumer — SourceHub</title>
+    <meta name="description" content="Compare polling and event-driven consumer patterns: when to poll, when to push, and hybrid approaches.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/polling-consumer.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/polling-consumer.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Polling Consumer vs Event-Driven Consumer",
+      "description": "Compare polling and event-driven consumer patterns: when to poll, when to push, and hybrid approaches.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "482",
+      "keywords": "Architecture, System Design, Backend",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/polling-consumer.html"},
+      "articleBody": "Polling Consumer vs Event-Driven Consumer Consumers in distributed systems retrieve messages through two primary mechanisms: polling (pull) and event-driven (push). Each approach has distinct trade-offs for latency, resource usage, and implementation complexity. Polling Consumer A polling consumer periodically checks a queue or endpoint for new messages. The consumer controls the polling frequency, which determines the trade-off between latency (how quickly messages are received) and resource cost (API calls, CPU usage). Polling is simple to implement and provides natural backpressure\u2014if the consumer is overloaded, it can slow its polling rate. It works well when message arrival is unpredictable or when the consumer needs to control its processing cadence. The main drawback is latency. A consumer polling every 30 seconds may wait up to 30 seconds to receive time-sensitive messages. Increasing polling frequency reduces latency but increases infrastructure costs. Event-Driven Consumer An event-driven consumer receives messages as they arrive. The producer or broker pushes messages to the consumer through webhooks, streaming connections, or long-polling. This approach provides minimal latency\u2014messages are processed as soon as they are published. Event-driven consumers require persistent connections (WebSocket, gRPC stream, or HTTP/2) and must handle backpressure carefully. If the consumer falls behind, in-flight messages accumulate in memory or buffers. Hybrid Approach Many systems combine both patterns. Use push for time-sensitive notifications and polling for less urgent batch processing. For example, a notification service might use push for real-time alerts and poll a dead letter queue for retry processing. Choosing the Right Pattern Choose polling when latency requirements are relaxed (minutes, not seconds), the consumer needs strict rate control, or the message source does not support push. Choose push when low latency is critical, the consumer can scale to handle peak load, or real-time updates are a product requirement. Implementation complexity is often lower with polling libraries and frameworks, but operational overhead is higher at scale due to constant API calls even when no messages exist."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Polling Consumer vs Event-Driven Consumer"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Polling Consumer vs Event-Driven Consumer
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">Polling Consumer vs Event-Driven Consumer</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Polling Consumer vs Event-Driven Consumer</h1>
+<p>Consumers in distributed systems retrieve messages through two primary mechanisms: polling (pull) and event-driven (push). Each approach has distinct trade-offs for latency, resource usage, and implementation complexity.</p>
+<br>
+<h2> Polling Consumer</h2>
+<br>
+<p>A polling consumer periodically checks a queue or endpoint for new messages. The consumer controls the polling frequency, which determines the trade-off between latency (how quickly messages are received) and resource cost (API calls, CPU usage).</p>
+<br>
+<p>Polling is simple to implement and provides natural backpressure—if the consumer is overloaded, it can slow its polling rate. It works well when message arrival is unpredictable or when the consumer needs to control its processing cadence.</p>
+<br>
+<p>The main drawback is latency. A consumer polling every 30 seconds may wait up to 30 seconds to receive time-sensitive messages. Increasing polling frequency reduces latency but increases infrastructure costs.</p>
+<br>
+<h2> Event-Driven Consumer</h2>
+<br>
+<p>An event-driven consumer receives messages as they arrive. The producer or broker pushes messages to the consumer through webhooks, streaming connections, or long-polling. This approach provides minimal latency—messages are processed as soon as they are published.</p>
+<br>
+<p>Event-driven consumers require persistent connections (WebSocket, gRPC stream, or HTTP/2) and must handle backpressure carefully. If the consumer falls behind, in-flight messages accumulate in memory or buffers.</p>
+<br>
+<h2> Hybrid Approach</h2>
+<br>
+<p>Many systems combine both patterns. Use push for time-sensitive notifications and polling for less urgent batch processing. For example, a notification service might use push for real-time alerts and poll a dead letter queue for retry processing.</p>
+<br>
+<h2> Choosing the Right Pattern</h2>
+<br>
+<p>Choose polling when latency requirements are relaxed (minutes, not seconds), the consumer needs strict rate control, or the message source does not support push. Choose push when low latency is critical, the consumer can scale to handle peak load, or real-time updates are a product requirement.</p>
+<br>
+<p>Implementation complexity is often lower with polling libraries and frameworks, but operational overhead is higher at scale due to constant API calls even when no messages exist.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="read-replicas">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Read Replicas: Scaling Reads, Replication Lag, and Failover">
+    <meta property="og:description" content="Learn how to scale database reads with read replicas. Understand replication lag, load balancing strategies, failover, and best practices for PostgreSQL and MySQL.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/read-replicas.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Read Replicas: Scaling Reads, Replication Lag, and Failover">
+    <meta name="twitter:description" content="Learn how to scale database reads with read replicas. Understand replication lag, load balancing strategies, failover, and best practices for PostgreSQL and MySQL.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Read Replicas: Scaling Reads, Replication Lag, and Failover — SourceHub</title>
+    <meta name="description" content="Learn how to scale database reads with read replicas. Understand replication lag, load balancing strategies, failover, and best practices for PostgreSQL and MySQL.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/read-replicas.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/read-replicas.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Read Replicas: Scaling Reads, Replication Lag, and Failover",
+      "description": "Learn how to scale database reads with read replicas. Understand replication lag, load balancing strategies, failover, and best practices for PostgreSQL and MySQL.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1625",
+      "keywords": "Database, Backend, Data",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/read-replicas.html"},
+      "articleBody": "Read Replicas: Scaling Reads, Replication Lag, and Failover Read Replicas: Scaling Reads, Replication Lag, and Failover Read replicas are copies of your primary database that serve read queries. They are the most common and cost-effective way to scale database read throughput. This article covers setup, load balancing, lag monitoring, and failover strategies. How Read Replicas Work The primary database streams changes to replicas via the write-ahead log (WAL). In PostgreSQL, this is called streaming replication. The replica continuously applies WAL records to stay current. PostgreSQL Streaming Replication Setup On the primary: # postgresql.conf wal_level = replica max_wal_senders = 5 wal_keep_size = 1024 Create a replication user: CREATE ROLE replicator WITH LOGIN REPLICATION PASSWORD 'secure_password'; Allow replication in `pg_hba.conf`: host replication replicator replica-host/32 md5 On the replica: pg_basebackup -h primary-host -D /var/lib/postgresql/data \\ -U replicator -P -v --wal-method=stream Create a `standby.signal` file and start PostgreSQL. The replica streams continuously. MySQL Replica Setup # my.cnf on primary server_id = 1 log_bin = /var/log/mysql/mysql-bin.log binlog_format = ROW CREATE USER 'replicator'@'%' IDENTIFIED BY 'secure_password'; GRANT REPLICATION SLAVE ON *.* TO 'replicator'@'%'; On the replica: CHANGE MASTER TO MASTER_HOST='primary-host', MASTER_USER='replicator', MASTER_PASSWORD='secure_password', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=0; START SLAVE; SHOW SLAVE STATUS\\G; Load Balancing Strategies Application-level read/write splitting is the most common pattern: import psycopg2 class DatabaseRouter: def __init__(self, primary_dsn, replica_dsns): self.primary = psycopg2.connect(primary_dsn) self.replicas = [psycopg2.connect(dsn) for dsn in replica_dsns] self.round_robin = 0 def get_connection(self, read_only=False): if read_only and self.replicas: conn = self.replicas[self.round_robin % len(self.replicas)] self.round_robin += 1 return conn return self.primary def execute_read(self, query, params=None): conn = self.get_connection(read_only=True) with conn.cursor() as cur: cur.execute(query, params or ()) return cur.fetchall() def execute_write(self, query, params=None): conn = self.get_connection(read_only=False) with conn.cursor() as cur: cur.execute(query, params or ()) conn.commit() A **proxy layer** like PgBouncer, ProxySQL, or HAProxy handles routing transparently: # ProxySQL query rules mysql_query_rules: - rule_id: 1 active: 1 match: \"^SELECT .*\" destination_hostgroup: 1 # replicas - rule_id: 2 active: 1 match: \"^(INSERT|UPDATE|DELETE|CREATE|DROP|ALTER) .*\" destination_hostgroup: 0 # primary Replication Lag Replication lag is the time between a commit on the primary and its visibility on a replica. Causes include: * Large transactions on the primary that must be applied in full on replicas. * Replica hardware that is slower than the primary. * Network latency between primary and replica. * Long-running queries on the replica competing for I/O. Monitoring Lag PostgreSQL offers precise lag metrics: -- On the replica SELECT pg_last_wal_receive_lsn(), pg_last_wal_replay_lsn(), pg_wal_lsn_diff(pg_last_wal_receive_lsn(), pg_last_wal_replay_lsn()) AS replay_lag_bytes; In MySQL: SHOW SLAVE STATUS\\G -- Focus on: Seconds_Behind_Master, Relay_Log_Space Set up alerts. A lag of more than a few seconds (or minutes for analytics workloads) indicates a problem. Handling Stale Reads Applications that route reads of recently written data back to the primary avoid inconsistent behavior. One pattern is to mark rows with a timestamp and route queries for recent rows accordingly: def get_order(order_id): # Orders updated within the last 30 seconds route to primary order = router.execute_read( \"SELECT created_at FROM orders WHERE id = %s\", (order_id,) ) if order and (datetime.utcnow() - order[0]) conn = router.get_connection(read_only=False) # Query primary else: conn = router.get_connection(read_only=True) Failover Strategies When the primary fails, one replica must become the new primary: PostgreSQL # Promote a replica to primary pg_ctl promote -D /var/lib/postgresql/data Or via `pg_rewind` for a clean re-sync: # After promotion, rewind old primary to follow new primary pg_rewind --target-pgdata=/var/lib/postgresql/data \\ --source-server='host=new-primary-db ...' Managed Failover Tools like Patroni automate failover: # patroni.yml scope: myapp consul: host: consul.service.consul:8500 postgresql: use_pg_rewind: true use_slots: true parameters: max_connections: 200 Patroni uses a distributed consensus store (etcd, Consul, Zookeeper) to elect a new leader when the current leader fails. The election typically completes in under 30 seconds. Best Practices * **Use at least two replicas** for redundancy. * **Test failover** regularly in staging environments. * **Align replica hardware** to the primary to avoid replay stalls. * **Monitor replication slots** to prevent WAL accumulation on the primary. * **Use `hot_standby_feedback`** in PostgreSQL to prevent query cancellations on replicas due to vacuum conflicts. * **Consider cascading replication** for multi-region setups: primary in us-east-1 streams to a regional replica in us-west-2, which then feeds application replicas in the same region. Read replicas are a proven, low-risk approach to scaling reads. Combined with proper monitoring and automated failover, they form the foundation of a highly available database architecture."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Read Replicas: Scaling Reads, Replication Lag, and Failover"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Read Replicas: Scaling Reads, Replication Lag, and Failover
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Data</span></div>
+      <h1 class="article-title">Read Replicas: Scaling Reads, Replication Lag, and Failover</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Read Replicas: Scaling Reads, Replication Lag, and Failover</h1>
+<br>
+<p>Read Replicas: Scaling Reads, Replication Lag, and Failover   </p>
+<p>Read replicas are copies of your primary database that serve read queries. They are the most common and cost-effective way to scale database read throughput. This article covers setup, load balancing, lag monitoring, and failover strategies.   </p>
+<p>How Read Replicas Work   </p>
+<p>The primary database streams changes to replicas via the write-ahead log (WAL). In PostgreSQL, this is called streaming replication. The replica continuously applies WAL records to stay current.   </p>
+<p>PostgreSQL Streaming Replication Setup   </p>
+<p>On the primary:   </p>
+<br>
+<br>
+<br>
+<p>    # postgresql.conf</p>
+<br>
+<p>    wal_level = replica</p>
+<br>
+<p>    max_wal_senders = 5</p>
+<br>
+<p>    wal_keep_size = 1024</p>
+<br>
+<br>
+<br>
+<br>
+<p>Create a replication user:   </p>
+<br>
+<br>
+<br>
+<p>    CREATE ROLE replicator WITH LOGIN REPLICATION PASSWORD 'secure_password';</p>
+<br>
+<br>
+<br>
+<br>
+<p>Allow replication in `pg_hba.conf`:   </p>
+<br>
+<br>
+<br>
+<p>    host replication replicator replica-host/32 md5</p>
+<br>
+<br>
+<br>
+<br>
+<p>On the replica:   </p>
+<br>
+<br>
+<br>
+<p>    pg_basebackup -h primary-host -D /var/lib/postgresql/data \</p>
+<br>
+<p>      -U replicator -P -v --wal-method=stream</p>
+<br>
+<br>
+<br>
+<br>
+<p>Create a `standby.signal` file and start PostgreSQL. The replica streams continuously.   </p>
+<p>MySQL Replica Setup   </p>
+<br>
+<br>
+<br>
+<p>    # my.cnf on primary</p>
+<br>
+<p>    server_id = 1</p>
+<br>
+<p>    log_bin = /var/log/mysql/mysql-bin.log</p>
+<br>
+<p>    binlog_format = ROW</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    CREATE USER 'replicator'@'%' IDENTIFIED BY 'secure_password';</p>
+<br>
+<p>    GRANT REPLICATION SLAVE ON *.* TO 'replicator'@'%';</p>
+<br>
+<br>
+<br>
+<br>
+<p>On the replica:   </p>
+<br>
+<br>
+<br>
+<p>    CHANGE MASTER TO</p>
+<br>
+<p>      MASTER_HOST='primary-host',</p>
+<br>
+<p>      MASTER_USER='replicator',</p>
+<br>
+<p>      MASTER_PASSWORD='secure_password',</p>
+<br>
+<p>      MASTER_LOG_FILE='mysql-bin.000001',</p>
+<br>
+<p>      MASTER_LOG_POS=0;</p>
+<br>
+<br>
+<br>
+<p>    START SLAVE;</p>
+<br>
+<p>    SHOW SLAVE STATUS\G;</p>
+<br>
+<br>
+<br>
+<br>
+<p>Load Balancing Strategies   </p>
+<p>Application-level read/write splitting is the most common pattern:   </p>
+<br>
+<br>
+<br>
+<p>    import psycopg2</p>
+<br>
+<br>
+<br>
+<p>    class DatabaseRouter:</p>
+<br>
+<p>        def __init__(self, primary_dsn, replica_dsns):</p>
+<br>
+<p>            self.primary = psycopg2.connect(primary_dsn)</p>
+<br>
+<p>            self.replicas = [psycopg2.connect(dsn) for dsn in replica_dsns]</p>
+<br>
+<p>            self.round_robin = 0</p>
+<br>
+<br>
+<br>
+<p>        def get_connection(self, read_only=False):</p>
+<br>
+<p>            if read_only and self.replicas:</p>
+<br>
+<p>                conn = self.replicas[self.round_robin % len(self.replicas)]</p>
+<br>
+<p>                self.round_robin += 1</p>
+<br>
+<p>                return conn</p>
+<br>
+<p>            return self.primary</p>
+<br>
+<br>
+<br>
+<p>        def execute_read(self, query, params=None):</p>
+<br>
+<p>            conn = self.get_connection(read_only=True)</p>
+<br>
+<p>            with conn.cursor() as cur:</p>
+<br>
+<p>                cur.execute(query, params or ())</p>
+<br>
+<p>                return cur.fetchall()</p>
+<br>
+<br>
+<br>
+<p>        def execute_write(self, query, params=None):</p>
+<br>
+<p>            conn = self.get_connection(read_only=False)</p>
+<br>
+<p>            with conn.cursor() as cur:</p>
+<br>
+<p>                cur.execute(query, params or ())</p>
+<br>
+<p>                conn.commit()</p>
+<br>
+<br>
+<br>
+<br>
+<p>A **proxy layer** like PgBouncer, ProxySQL, or HAProxy handles routing transparently:   </p>
+<br>
+<br>
+<br>
+<p>    # ProxySQL query rules</p>
+<br>
+<p>    mysql_query_rules:</p>
+<br>
+<p>      - rule_id: 1</p>
+<br>
+<p>        active: 1</p>
+<br>
+<p>        match: "^SELECT .*"</p>
+<br>
+<p>        destination_hostgroup: 1  # replicas</p>
+<br>
+<p>      - rule_id: 2</p>
+<br>
+<p>        active: 1</p>
+<br>
+<p>        match: "^(INSERT|UPDATE|DELETE|CREATE|DROP|ALTER) .*"</p>
+<br>
+<p>        destination_hostgroup: 0  # primary</p>
+<br>
+<br>
+<br>
+<br>
+<p>Replication Lag   </p>
+<p>Replication lag is the time between a commit on the primary and its visibility on a replica. Causes include:   </p>
+<br>
+<p>* Large transactions on the primary that must be applied in full on replicas.</p>
+<p>* Replica hardware that is slower than the primary.</p>
+<p>* Network latency between primary and replica.</p>
+<p>* Long-running queries on the replica competing for I/O.</p>
+<br>
+<p>Monitoring Lag   </p>
+<p>PostgreSQL offers precise lag metrics:   </p>
+<br>
+<br>
+<br>
+<p>    -- On the replica</p>
+<br>
+<p>    SELECT pg_last_wal_receive_lsn(),</p>
+<br>
+<p>           pg_last_wal_replay_lsn(),</p>
+<br>
+<p>           pg_wal_lsn_diff(pg_last_wal_receive_lsn(),</p>
+<br>
+<p>                           pg_last_wal_replay_lsn()) AS replay_lag_bytes;</p>
+<br>
+<br>
+<br>
+<br>
+<p>In MySQL:   </p>
+<br>
+<br>
+<br>
+<p>    SHOW SLAVE STATUS\G</p>
+<br>
+<p>    -- Focus on: Seconds_Behind_Master, Relay_Log_Space</p>
+<br>
+<br>
+<br>
+<br>
+<p>Set up alerts. A lag of more than a few seconds (or minutes for analytics workloads) indicates a problem.   </p>
+<p>Handling Stale Reads   </p>
+<p>Applications that route reads of recently written data back to the primary avoid inconsistent behavior. One pattern is to mark rows with a timestamp and route queries for recent rows accordingly:   </p>
+<br>
+<br>
+<br>
+<p>    def get_order(order_id):</p>
+<br>
+<p>        # Orders updated within the last 30 seconds route to primary</p>
+<br>
+<p>        order = router.execute_read(</p>
+<br>
+<p>            "SELECT created_at FROM orders WHERE id = %s", (order_id,)</p>
+<br>
+<p>        )</p>
+<br>
+<p>        if order and (datetime.utcnow() - order[0]) < timedelta(seconds=30):</p>
+<br>
+<p>            conn = router.get_connection(read_only=False)</p>
+<br>
+<p>            # Query primary</p>
+<br>
+<p>        else:</p>
+<br>
+<p>            conn = router.get_connection(read_only=True)</p>
+<br>
+<br>
+<br>
+<br>
+<p>Failover Strategies   </p>
+<p>When the primary fails, one replica must become the new primary:   </p>
+<p>PostgreSQL   </p>
+<br>
+<br>
+<br>
+<p>    # Promote a replica to primary</p>
+<br>
+<p>    pg_ctl promote -D /var/lib/postgresql/data</p>
+<br>
+<br>
+<br>
+<br>
+<p>Or via `pg_rewind` for a clean re-sync:   </p>
+<br>
+<br>
+<br>
+<p>    # After promotion, rewind old primary to follow new primary</p>
+<br>
+<p>    pg_rewind --target-pgdata=/var/lib/postgresql/data \</p>
+<br>
+<p>      --source-server='host=new-primary-db ...'</p>
+<br>
+<br>
+<br>
+<br>
+<p>Managed Failover   </p>
+<p>Tools like Patroni automate failover:   </p>
+<br>
+<br>
+<br>
+<p>    # patroni.yml</p>
+<br>
+<p>    scope: myapp</p>
+<br>
+<p>    consul:</p>
+<br>
+<p>      host: consul.service.consul:8500</p>
+<br>
+<p>    postgresql:</p>
+<br>
+<p>      use_pg_rewind: true</p>
+<br>
+<p>      use_slots: true</p>
+<br>
+<p>      parameters:</p>
+<br>
+<p>        max_connections: 200</p>
+<br>
+<br>
+<br>
+<br>
+<p>Patroni uses a distributed consensus store (etcd, Consul, Zookeeper) to elect a new leader when the current leader fails. The election typically completes in under 30 seconds.   </p>
+<p>Best Practices   </p>
+<br>
+<p>* **Use at least two replicas** for redundancy.</p>
+<p>* **Test failover** regularly in staging environments.</p>
+<p>* **Align replica hardware** to the primary to avoid replay stalls.</p>
+<p>* **Monitor replication slots** to prevent WAL accumulation on the primary.</p>
+<p>* **Use `hot_standby_feedback`** in PostgreSQL to prevent query cancellations on replicas due to vacuum conflicts.</p>
+<p>* **Consider cascading replication** for multi-region setups: primary in us-east-1 streams to a regional replica in us-west-2, which then feeds application replicas in the same region.</p>
+<br>
+<p>Read replicas are a proven, low-risk approach to scaling reads. Combined with proper monitoring and automated failover, they form the foundation of a highly available database architecture.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

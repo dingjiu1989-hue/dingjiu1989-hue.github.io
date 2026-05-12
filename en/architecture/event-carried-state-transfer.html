@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="event-carried-state-transfer">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Event-Carried State Transfer Pattern">
+    <meta property="og:description" content="Learn the event-carried state transfer pattern for reducing service dependencies in event-driven architectures.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/event-carried-state-transfer.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Event-Carried State Transfer Pattern">
+    <meta name="twitter:description" content="Learn the event-carried state transfer pattern for reducing service dependencies in event-driven architectures.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Event-Carried State Transfer Pattern — SourceHub</title>
+    <meta name="description" content="Learn the event-carried state transfer pattern for reducing service dependencies in event-driven architectures.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/event-carried-state-transfer.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/event-carried-state-transfer.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Event-Carried State Transfer Pattern",
+      "description": "Learn the event-carried state transfer pattern for reducing service dependencies in event-driven architectures.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "481",
+      "keywords": "Architecture, System Design, Backend",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/event-carried-state-transfer.html"},
+      "articleBody": "Event-Carried State Transfer Pattern Event-carried state transfer is a messaging pattern where events include the full state needed by consumers, eliminating the need for consumers to query the producer for additional data. This reduces synchronous dependencies and improves system resilience. How It Works When a service publishes an event about a domain entity, it includes all relevant state in the event payload. A UserCreated event contains the user's name, email, role, and other attributes. The consumer that needs this information has it immediately without making an additional API call. This is a departure from traditional event design, where events contain only identifiers and consumers query the producer for details. That approach creates synchronous coupling and single points of failure. Benefits Event-carried state transfer eliminates synchronous dependencies. If the producer is down, consumers can still process events using the embedded state. It also reduces latency\u2014consumers save the round-trip time of querying the producer. System resilience improves because consumers are self-sufficient. A consumer can rebuild its state entirely from the event stream without accessing the producer's API. Drawbacks Events become larger, increasing message broker storage and network bandwidth. Schema evolution is more complex because event payloads now contain more fields. Event producers must anticipate what consumers need, which requires coordination. Stale data is a concern. If the producer updates its internal state after publishing the event, consumers have the old state. This is acceptable in eventually consistent systems but requires careful design. When to Use Use event-carried state transfer when consumer independence is a priority, when the producer is likely to experience high load from consumer queries, and when eventual consistency is acceptable. Avoid it when event payload size is constrained or when consumers need absolutely current data. Best Practices Include only the state that consumers need, not the producer's entire internal model. Version event schemas to manage payload evolution. Document which fields each consumer uses so producers understand the impact of changes."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Event-Carried State Transfer Pattern"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Event-Carried State Transfer Pattern
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">Event-Carried State Transfer Pattern</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Event-Carried State Transfer Pattern</h1>
+<p>Event-carried state transfer is a messaging pattern where events include the full state needed by consumers, eliminating the need for consumers to query the producer for additional data. This reduces synchronous dependencies and improves system resilience.</p>
+<br>
+<h2> How It Works</h2>
+<br>
+<p>When a service publishes an event about a domain entity, it includes all relevant state in the event payload. A UserCreated event contains the user's name, email, role, and other attributes. The consumer that needs this information has it immediately without making an additional API call.</p>
+<br>
+<p>This is a departure from traditional event design, where events contain only identifiers and consumers query the producer for details. That approach creates synchronous coupling and single points of failure.</p>
+<br>
+<h2> Benefits</h2>
+<br>
+<p>Event-carried state transfer eliminates synchronous dependencies. If the producer is down, consumers can still process events using the embedded state. It also reduces latency—consumers save the round-trip time of querying the producer.</p>
+<br>
+<p>System resilience improves because consumers are self-sufficient. A consumer can rebuild its state entirely from the event stream without accessing the producer's API.</p>
+<br>
+<h2> Drawbacks</h2>
+<br>
+<p>Events become larger, increasing message broker storage and network bandwidth. Schema evolution is more complex because event payloads now contain more fields. Event producers must anticipate what consumers need, which requires coordination.</p>
+<br>
+<p>Stale data is a concern. If the producer updates its internal state after publishing the event, consumers have the old state. This is acceptable in eventually consistent systems but requires careful design.</p>
+<br>
+<h2> When to Use</h2>
+<br>
+<p>Use event-carried state transfer when consumer independence is a priority, when the producer is likely to experience high load from consumer queries, and when eventual consistency is acceptable. Avoid it when event payload size is constrained or when consumers need absolutely current data.</p>
+<br>
+<h2> Best Practices</h2>
+<br>
+<p>Include only the state that consumers need, not the producer's entire internal model. Version event schemas to manage payload evolution. Document which fields each consumer uses so producers understand the impact of changes.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="orchestration-patterns">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Orchestration Patterns">
+    <meta property="og:description" content="Explore orchestration patterns: workflow engines, Temporal, state machines, and centralized workflow coordination">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/orchestration-patterns.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Orchestration Patterns">
+    <meta name="twitter:description" content="Explore orchestration patterns: workflow engines, Temporal, state machines, and centralized workflow coordination">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Orchestration Patterns — SourceHub</title>
+    <meta name="description" content="Explore orchestration patterns: workflow engines, Temporal, state machines, and centralized workflow coordination">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/orchestration-patterns.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/orchestration-patterns.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Orchestration Patterns",
+      "description": "Explore orchestration patterns: workflow engines, Temporal, state machines, and centralized workflow coordination",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "954",
+      "keywords": "Architecture, System Design, Backend",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/orchestration-patterns.html"},
+      "articleBody": "Orchestration Patterns Orchestration is an architectural pattern for coordinating distributed workflows using a central controller. Unlike choreography, where services coordinate through events, orchestration uses an explicit workflow engine or orchestrator service that tells each participant what to do and when. This centralized approach provides visibility, control, and error handling that are difficult to achieve with decentralized coordination. Centralized Coordination In an orchestrated workflow, an orchestrator service manages the entire process. It calls each participant service in sequence, handles responses, manages state, and decides the next step based on results. The orchestrator is the single place where the workflow logic lives. For example, an order fulfillment orchestrator would call the payment service, wait for the response, call the inventory service, wait for the response, and finally call the shipping service. Each participant is unaware of the larger workflow\u2014it simply performs its task and returns a result. Workflow Engines Workflow engines provide a runtime for defining and executing orchestrated workflows. Temporal, AWS Step Functions, Camunda, and Apache Airflow are popular workflow engines. They handle workflow state persistence, automatic retries, timeout management, and error handling. Temporal has emerged as a leading workflow engine for microservice orchestration. It supports long-running workflows, automatic retries with configurable policies, and deterministic workflow replay. Workflow code is written in standard programming languages (Java, Go, Python, TypeScript), and Temporal ensures that the workflow logic executes reliably even through failures and restarts. State Machines State machines are a natural model for orchestration. Each workflow instance starts in an initial state, transitions through states based on completed activities, and ends in a terminal state (success or failure). The state machine approach makes workflow logic explicit, testable, and visualizable. AWS Step Functions uses a JSON-based state machine definition. Each state can be a Task (invoke a service), Choice (branch based on input), Wait (delay), Parallel (execute branches in parallel), or Fail/Succeed (terminal states). The state machine definition captures the entire workflow in a single document. Compensation Handling One of the main advantages of orchestration is straightforward compensation handling. The orchestrator knows exactly which activities have completed and can call compensating actions in reverse order when a failure occurs. Temporal provides explicit compensation support through the Saga pattern and its `Workflow` API. When an activity fails, the orchestrator can execute compensating activities for all previously completed steps. The orchestrator also manages the compensation state, ensuring compensations are applied even if the orchestrator itself fails during compensation. Visibility and Debugging Orchestration provides excellent workflow visibility. The orchestrator or workflow engine exposes the current state of each workflow instance, including which activities have completed, which are in progress, and where failures occurred. This eliminates the need to reconstruct workflow state from distributed event logs. Temporal provides a web UI for inspecting workflow instances, viewing execution history, and replaying workflows for debugging. Step Functions offers similar visibility through the AWS Management Console. This centralized visibility dramatically simplifies debugging compared to choreographed workflows. When to Use Orchestration Orchestration is appropriate for complex workflows with many conditional paths, strict ordering requirements, or where end-to-end visibility is critical. It excels in scenarios where the workflow logic changes frequently\u2014changes are made in one place rather than across multiple services. The trade-off is coupling. The orchestrator must know about all participants and their APIs. Changes to participant services may require changes to the orchestrator. This coupling is acceptable when workflow complexity justifies the centralized control. In practice, many organizations use a hybrid approach: orchestration for complex business workflows and choreography for simple, stable event flows. Workflow engines like Temporal support both patterns, allowing teams to choose the right level of coordination for each workflow. The key is recognizing that orchestration and choreography are complementary tools, not competing philosophies."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "Orchestration Patterns"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Orchestration Patterns
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">Orchestration Patterns</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Orchestration Patterns</h1>
+<br>
+<p>Orchestration is an architectural pattern for coordinating distributed workflows using a central controller. Unlike choreography, where services coordinate through events, orchestration uses an explicit workflow engine or orchestrator service that tells each participant what to do and when. This centralized approach provides visibility, control, and error handling that are difficult to achieve with decentralized coordination.   </p>
+<p>Centralized Coordination   </p>
+<p>In an orchestrated workflow, an orchestrator service manages the entire process. It calls each participant service in sequence, handles responses, manages state, and decides the next step based on results. The orchestrator is the single place where the workflow logic lives.   </p>
+<p>For example, an order fulfillment orchestrator would call the payment service, wait for the response, call the inventory service, wait for the response, and finally call the shipping service. Each participant is unaware of the larger workflow—it simply performs its task and returns a result.   </p>
+<p>Workflow Engines   </p>
+<p>Workflow engines provide a runtime for defining and executing orchestrated workflows. Temporal, AWS Step Functions, Camunda, and Apache Airflow are popular workflow engines. They handle workflow state persistence, automatic retries, timeout management, and error handling.   </p>
+<p>Temporal has emerged as a leading workflow engine for microservice orchestration. It supports long-running workflows, automatic retries with configurable policies, and deterministic workflow replay. Workflow code is written in standard programming languages (Java, Go, Python, TypeScript), and Temporal ensures that the workflow logic executes reliably even through failures and restarts.   </p>
+<p>State Machines   </p>
+<p>State machines are a natural model for orchestration. Each workflow instance starts in an initial state, transitions through states based on completed activities, and ends in a terminal state (success or failure). The state machine approach makes workflow logic explicit, testable, and visualizable.   </p>
+<p>AWS Step Functions uses a JSON-based state machine definition. Each state can be a Task (invoke a service), Choice (branch based on input), Wait (delay), Parallel (execute branches in parallel), or Fail/Succeed (terminal states). The state machine definition captures the entire workflow in a single document.   </p>
+<p>Compensation Handling   </p>
+<p>One of the main advantages of orchestration is straightforward compensation handling. The orchestrator knows exactly which activities have completed and can call compensating actions in reverse order when a failure occurs.   </p>
+<p>Temporal provides explicit compensation support through the Saga pattern and its `Workflow` API. When an activity fails, the orchestrator can execute compensating activities for all previously completed steps. The orchestrator also manages the compensation state, ensuring compensations are applied even if the orchestrator itself fails during compensation.   </p>
+<p>Visibility and Debugging   </p>
+<p>Orchestration provides excellent workflow visibility. The orchestrator or workflow engine exposes the current state of each workflow instance, including which activities have completed, which are in progress, and where failures occurred. This eliminates the need to reconstruct workflow state from distributed event logs.   </p>
+<p>Temporal provides a web UI for inspecting workflow instances, viewing execution history, and replaying workflows for debugging. Step Functions offers similar visibility through the AWS Management Console. This centralized visibility dramatically simplifies debugging compared to choreographed workflows.   </p>
+<p>When to Use Orchestration   </p>
+<p>Orchestration is appropriate for complex workflows with many conditional paths, strict ordering requirements, or where end-to-end visibility is critical. It excels in scenarios where the workflow logic changes frequently—changes are made in one place rather than across multiple services.   </p>
+<p>The trade-off is coupling. The orchestrator must know about all participants and their APIs. Changes to participant services may require changes to the orchestrator. This coupling is acceptable when workflow complexity justifies the centralized control.   </p>
+<p>In practice, many organizations use a hybrid approach: orchestration for complex business workflows and choreography for simple, stable event flows. Workflow engines like Temporal support both patterns, allowing teams to choose the right level of coordination for each workflow. The key is recognizing that orchestration and choreography are complementary tools, not competing philosophies.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1161",
+      "wordCount": "1172",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/http-security-headers.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/http-security-headers.html"},
+      "articleBody": "HTTP Security Headers Checklist Why Security Headers Matter HTTP security headers are the first line of defense for any web application. They tell the browser how to behave when rendering your content, preventing a wide range of attacks including cross-site scripting (XSS), clickjacking, MIME-type sniffing, and protocol downgrade attacks. Many of these headers are easy to implement yet remain missing on the majority of production websites. Essential Headers Strict-Transport-Security Forces all communication to use HTTPS, preventing man-in-the-middle attacks and protocol downgrades. Strict-Transport-Security: max-age=63072000; includeSubDomains; preload Set `max-age` to at least 1 year (31536000 seconds) once you are confident HTTPS is stable. `includeSubDomains` extends protection to all subdomains. `preload` allows your domain to be included in browser preload lists. Content-Security-Policy The most powerful defense against XSS attacks. CSP restricts which resources the browser can load and execute. Content-Security-Policy: default-src 'self'; script-src 'self' https://analytics.example.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.example.com; frame-ancestors 'none'; form-action 'self' Start with a report-only policy to identify violations before enforcing: Content-Security-Policy-Report-Only: default-src 'self'; report-uri /csp-violations X-Content-Type-Options Prevents browsers from MIME-type sniffing, which can be used to bypass content type checks. X-Content-Type-Options: nosniff X-Frame-Options Prevents clickjacking by controlling whether your page can be embedded in a frame. X-Frame-Options: DENY Use `DENY` to block all framing, or `SAMEORIGIN` to allow framing on pages sharing the same origin. Referrer-Policy Controls how much referrer information is included with requests. Referrer-Policy: strict-origin-when-cross-origin This sends the full URL as referrer for same-origin requests, only the origin for cross-origin requests, and nothing when navigating from HTTPS to HTTP. Recommended Headers Permissions-Policy (formerly Feature-Policy) Controls which browser features your page can use. Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=() Disable all features you do not need. This prevents malicious scripts from accessing device capabilities even if they bypass other controls. Cross-Origin-Opener-Policy Isolates your page from cross-origin windows, preventing Spectre-type side-channel attacks. Cross-Origin-Opener-Policy: same-origin-allow-popups Cross-Origin-Resource-Policy Controls which origins can load your resources. Cross-Origin-Resource-Policy: same-origin Cross-Origin-Embedder-Policy Requires cross-origin resources to explicitly grant permission to load. Cross-Origin-Embedder-Policy: require-corp Implementation Checklist | Header | Value | Risk if Missing | |--------|-------|-----------------| | Strict-Transport-Security | `max-age=63072000; includeSubDomains` | SSL stripping | | Content-Security-Policy | Custom policy | XSS, data injection | | X-Content-Type-Options | `nosniff` | MIME confusion | | X-Frame-Options | `DENY` | Clickjacking | | Referrer-Policy | `strict-origin-when-cross-origin` | Privacy leakage | | Permissions-Policy | Restrictive policy | API abuse | | Cross-Origin-Opener-Policy | `same-origin-allow-popups` | Side-channel attacks | Testing Your Headers Several tools can validate your security headers: * **securityheaders.com**: Scans and grades your headers. * **Observatory by Mozilla**: Provides an overall security score. * **Chrome DevTools**: Inspect headers in the Network tab. * **curl**: Quick manual check: curl -sI https://example.com | grep -i '^strict-transport\\|^content-security\\|^x-content-type\\|^x-frame\\|^referrer' Common Mistakes * **Setting CSP too broadly**: `script-src 'unsafe-inline' https:` effectively disables CSP protection. Use strict CSP with nonces or hashes instead. * **Missing report-uri on CSP**: Without a reporting endpoint, you will not know when violations occur. * **Forgetting includeSubDomains on HSTS**: Users accessing subdomains over HTTP remain vulnerable. * **Not preloading HSTS**: The first request is still vulnerable without preloading. * **Overly permissive CORS headers**: `Access-Control-Allow-Origin: *` combined with credentials exposes your API to any site. Summary Implementing HTTP security headers is one of the highest-ROI security improvements you can make. Start with HSTS, CSP, X-Content-Type-Options, and X-Frame-Options, then progressively add the remaining headers. Test regularly with automated scanners, and monitor CSP reports to catch new vulnerabilities as your application evolves."
     }
     </script>
     <script type="application/ld+json">
@@ -73,162 +74,158 @@
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">HTTP Security Headers Checklist</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Why Security Headers Matter</h2>
+      <div class="article-body"><h1>HTTP Security Headers Checklist</h1>
 <br>
-<p>HTTP security headers are the first line of defense for any web application. They tell the browser how to behave when rendering your content, preventing a wide range of attacks including cross-site scripting (XSS), clickjacking, MIME-type sniffing, and protocol downgrade attacks. Many of these headers are easy to implement yet remain missing on the majority of production websites.</p>
+<p>Why Security Headers Matter   </p>
+<p>HTTP security headers are the first line of defense for any web application. They tell the browser how to behave when rendering your content, preventing a wide range of attacks including cross-site scripting (XSS), clickjacking, MIME-type sniffing, and protocol downgrade attacks. Many of these headers are easy to implement yet remain missing on the majority of production websites.   </p>
+<p>Essential Headers   </p>
+<p>Strict-Transport-Security   </p>
+<p>Forces all communication to use HTTPS, preventing man-in-the-middle attacks and protocol downgrades.   </p>
 <br>
-<h2> Essential Headers</h2>
 <br>
-<h3>Strict-Transport-Security</h3>
 <br>
-<p>Forces all communication to use HTTPS, preventing man-in-the-middle attacks and protocol downgrades.</p>
+<p>    Strict-Transport-Security: max-age=63072000; includeSubDomains; preload</p>
 <br>
-<pre><code>
-Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
-
-</code></pre>
 <br>
-<p>Set `max-age` to at least 1 year (31536000 seconds) once you are confident HTTPS is stable. `includeSubDomains` extends protection to all subdomains. `preload` allows your domain to be included in browser preload lists.</p>
 <br>
-<h3>Content-Security-Policy</h3>
 <br>
-<p>The most powerful defense against XSS attacks. CSP restricts which resources the browser can load and execute.</p>
+<p>Set `max-age` to at least 1 year (31536000 seconds) once you are confident HTTPS is stable. `includeSubDomains` extends protection to all subdomains. `preload` allows your domain to be included in browser preload lists.   </p>
+<p>Content-Security-Policy   </p>
+<p>The most powerful defense against XSS attacks. CSP restricts which resources the browser can load and execute.   </p>
 <br>
-<pre><code>
-Content-Security-Policy: default-src &#x27;self&#x27;;
-
-    script-src &#x27;self&#x27; https://analytics.example.com;
-
-    style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;;
-
-    img-src &#x27;self&#x27; data: https:;
-
-    font-src &#x27;self&#x27; https://fonts.gstatic.com;
-
-    connect-src &#x27;self&#x27; https://api.example.com;
-
-    frame-ancestors &#x27;none&#x27;;
-
-    form-action &#x27;self&#x27;
-
-</code></pre>
 <br>
-<p>Start with a report-only policy to identify violations before enforcing:</p>
 <br>
-<pre><code>
-Content-Security-Policy-Report-Only: default-src &#x27;self&#x27;;
-
-    report-uri /csp-violations
-
-</code></pre>
+<p>    Content-Security-Policy: default-src 'self';</p>
 <br>
-<h3>X-Content-Type-Options</h3>
+<p>        script-src 'self' https://analytics.example.com;</p>
 <br>
-<p>Prevents browsers from MIME-type sniffing, which can be used to bypass content type checks.</p>
+<p>        style-src 'self' 'unsafe-inline';</p>
 <br>
-<pre><code>
-X-Content-Type-Options: nosniff
-
-</code></pre>
+<p>        img-src 'self' data: https:;</p>
 <br>
-<h3>X-Frame-Options</h3>
+<p>        font-src 'self' https://fonts.gstatic.com;</p>
 <br>
-<p>Prevents clickjacking by controlling whether your page can be embedded in a frame.</p>
+<p>        connect-src 'self' https://api.example.com;</p>
 <br>
-<pre><code>
-X-Frame-Options: DENY
-
-</code></pre>
+<p>        frame-ancestors 'none';</p>
 <br>
-<p>Use `DENY` to block all framing, or `SAMEORIGIN` to allow framing on pages sharing the same origin.</p>
+<p>        form-action 'self'</p>
 <br>
-<h3>Referrer-Policy</h3>
 <br>
-<p>Controls how much referrer information is included with requests.</p>
 <br>
-<pre><code>
-Referrer-Policy: strict-origin-when-cross-origin
-
-</code></pre>
 <br>
-<p>This sends the full URL as referrer for same-origin requests, only the origin for cross-origin requests, and nothing when navigating from HTTPS to HTTP.</p>
+<p>Start with a report-only policy to identify violations before enforcing:   </p>
 <br>
-<h2> Recommended Headers</h2>
 <br>
-<h3>Permissions-Policy (formerly Feature-Policy)</h3>
 <br>
-<p>Controls which browser features your page can use.</p>
+<p>    Content-Security-Policy-Report-Only: default-src 'self';</p>
 <br>
-<pre><code>
-Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
-
-</code></pre>
+<p>        report-uri /csp-violations</p>
 <br>
-<p>Disable all features you do not need. This prevents malicious scripts from accessing device capabilities even if they bypass other controls.</p>
 <br>
-<h3>Cross-Origin-Opener-Policy</h3>
 <br>
-<p>Isolates your page from cross-origin windows, preventing Spectre-type side-channel attacks.</p>
 <br>
-<pre><code>
-Cross-Origin-Opener-Policy: same-origin-allow-popups
-
-</code></pre>
+<p>X-Content-Type-Options   </p>
+<p>Prevents browsers from MIME-type sniffing, which can be used to bypass content type checks.   </p>
 <br>
-<h3>Cross-Origin-Resource-Policy</h3>
 <br>
-<p>Controls which origins can load your resources.</p>
 <br>
-<pre><code>
-Cross-Origin-Resource-Policy: same-origin
-
-</code></pre>
+<p>    X-Content-Type-Options: nosniff</p>
 <br>
-<h3>Cross-Origin-Embedder-Policy</h3>
 <br>
-<p>Requires cross-origin resources to explicitly grant permission to load.</p>
 <br>
-<pre><code>
-Cross-Origin-Embedder-Policy: require-corp
-
-</code></pre>
 <br>
-<h2> Implementation Checklist</h2>
+<p>X-Frame-Options   </p>
+<p>Prevents clickjacking by controlling whether your page can be embedded in a frame.   </p>
 <br>
-<p>| Header | Value | Risk if Missing |</p>
-<p>|--------|-------|-----------------|</p>
-<p>| Strict-Transport-Security | `max-age=63072000; includeSubDomains` | SSL stripping |</p>
-<p>| Content-Security-Policy | Custom policy | XSS, data injection |</p>
-<p>| X-Content-Type-Options | `nosniff` | MIME confusion |</p>
-<p>| X-Frame-Options | `DENY` | Clickjacking |</p>
-<p>| Referrer-Policy | `strict-origin-when-cross-origin` | Privacy leakage |</p>
-<p>| Permissions-Policy | Restrictive policy | API abuse |</p>
-<p>| Cross-Origin-Opener-Policy | `same-origin-allow-popups` | Side-channel attacks |</p>
 <br>
-<h2> Testing Your Headers</h2>
 <br>
-<p>Several tools can validate your security headers:</p>
+<p>    X-Frame-Options: DENY</p>
 <br>
-<li>**securityheaders.com**: Scans and grades your headers.</li>
-<li>**Observatory by Mozilla**: Provides an overall security score.</li>
-<li>**Chrome DevTools**: Inspect headers in the Network tab.</li>
-<li>**curl**: Quick manual check:</li>
 <br>
-<pre><code>
-curl -sI https://example.com | grep -i &#x27;^strict-transport\|^content-security\|^x-content-type\|^x-frame\|^referrer&#x27;
-
-</code></pre>
 <br>
-<h2> Common Mistakes</h2>
 <br>
-<li>**Setting CSP too broadly**: `script-src 'unsafe-inline' https:` effectively disables CSP protection. Use strict CSP with nonces or hashes instead.</li>
-<li>**Missing report-uri on CSP**: Without a reporting endpoint, you will not know when violations occur.</li>
-<li>**Forgetting includeSubDomains on HSTS**: Users accessing subdomains over HTTP remain vulnerable.</li>
-<li>**Not preloading HSTS**: The first request is still vulnerable without preloading.</li>
-<li>**Overly permissive CORS headers**: `Access-Control-Allow-Origin: *` combined with credentials exposes your API to any site.</li>
+<p>Use `DENY` to block all framing, or `SAMEORIGIN` to allow framing on pages sharing the same origin.   </p>
+<p>Referrer-Policy   </p>
+<p>Controls how much referrer information is included with requests.   </p>
 <br>
-<h2> Summary</h2>
 <br>
+<br>
+<p>    Referrer-Policy: strict-origin-when-cross-origin</p>
+<br>
+<br>
+<br>
+<br>
+<p>This sends the full URL as referrer for same-origin requests, only the origin for cross-origin requests, and nothing when navigating from HTTPS to HTTP.   </p>
+<p>Recommended Headers   </p>
+<p>Permissions-Policy (formerly Feature-Policy)   </p>
+<p>Controls which browser features your page can use.   </p>
+<br>
+<br>
+<br>
+<p>    Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()</p>
+<br>
+<br>
+<br>
+<br>
+<p>Disable all features you do not need. This prevents malicious scripts from accessing device capabilities even if they bypass other controls.   </p>
+<p>Cross-Origin-Opener-Policy   </p>
+<p>Isolates your page from cross-origin windows, preventing Spectre-type side-channel attacks.   </p>
+<br>
+<br>
+<br>
+<p>    Cross-Origin-Opener-Policy: same-origin-allow-popups</p>
+<br>
+<br>
+<br>
+<br>
+<p>Cross-Origin-Resource-Policy   </p>
+<p>Controls which origins can load your resources.   </p>
+<br>
+<br>
+<br>
+<p>    Cross-Origin-Resource-Policy: same-origin</p>
+<br>
+<br>
+<br>
+<br>
+<p>Cross-Origin-Embedder-Policy   </p>
+<p>Requires cross-origin resources to explicitly grant permission to load.   </p>
+<br>
+<br>
+<br>
+<p>    Cross-Origin-Embedder-Policy: require-corp</p>
+<br>
+<br>
+<br>
+<br>
+<p>Implementation Checklist   </p>
+<p>| Header | Value | Risk if Missing | |--------|-------|-----------------| | Strict-Transport-Security | `max-age=63072000; includeSubDomains` | SSL stripping | | Content-Security-Policy | Custom policy | XSS, data injection | | X-Content-Type-Options | `nosniff` | MIME confusion | | X-Frame-Options | `DENY` | Clickjacking | | Referrer-Policy | `strict-origin-when-cross-origin` | Privacy leakage | | Permissions-Policy | Restrictive policy | API abuse | | Cross-Origin-Opener-Policy | `same-origin-allow-popups` | Side-channel attacks |   </p>
+<p>Testing Your Headers   </p>
+<p>Several tools can validate your security headers:   </p>
+<br>
+<p>* **securityheaders.com**: Scans and grades your headers.</p>
+<p>* **Observatory by Mozilla**: Provides an overall security score.</p>
+<p>* **Chrome DevTools**: Inspect headers in the Network tab.</p>
+<p>* **curl**: Quick manual check:</p>
+<br>
+<br>
+<br>
+<br>
+<p>    curl -sI https://example.com | grep -i '^strict-transport\|^content-security\|^x-content-type\|^x-frame\|^referrer'</p>
+<br>
+<br>
+<br>
+<br>
+<p>Common Mistakes   </p>
+<br>
+<p>* **Setting CSP too broadly**: `script-src 'unsafe-inline' https:` effectively disables CSP protection. Use strict CSP with nonces or hashes instead.</p>
+<p>* **Missing report-uri on CSP**: Without a reporting endpoint, you will not know when violations occur.</p>
+<p>* **Forgetting includeSubDomains on HSTS**: Users accessing subdomains over HTTP remain vulnerable.</p>
+<p>* **Not preloading HSTS**: The first request is still vulnerable without preloading.</p>
+<p>* **Overly permissive CORS headers**: `Access-Control-Allow-Origin: *` combined with credentials exposes your API to any site.</p>
+<br>
+<p>Summary   </p>
 <p>Implementing HTTP security headers is one of the highest-ROI security improvements you can make. Start with HSTS, CSP, X-Content-Type-Options, and X-Frame-Options, then progressively add the remaining headers. Test regularly with automated scanners, and monitor CSP reports to catch new vulnerabilities as your application evolves.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

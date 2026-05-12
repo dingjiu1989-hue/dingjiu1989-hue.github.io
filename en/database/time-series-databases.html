@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1684",
+      "wordCount": "406",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/time-series-databases.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/time-series-databases.html"},
+      "articleBody": "Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time-Series Data Time-series data is a sequence of data points indexed by time. Examples include server metrics, IoT sensor readings, and financial tick data. Database Comparison | Feature | InfluxDB | TimescaleDB | QuestDB | |---------|----------|-------------|---------| | Architecture | Custom TS engine | PostgreSQL extension | Columnar | | SQL | Flux / SQL | Full SQL | SQL | | Write throughput | Very high | High | Very high | | Compression | Excellent | Good | Excellent | InfluxDB Purpose-built time-series with automatic downsampling: from influxdb_client import InfluxDBClient client = InfluxDBClient(url=\"http://localhost:8086\", token=\"my-token\") write_api = client.write_api() p = Point(\"cpu\").tag(\"host\", \"server01\").field(\"usage_user\", 45.2) write_api.write(bucket=\"metrics\", record=p) TimescaleDB PostgreSQL extension with hypertables: CREATE TABLE sensor_data ( time TIMESTAMPTZ NOT NULL, device_id INTEGER, temperature DOUBLE PRECISION ); SELECT create_hypertable('sensor_data', 'time'); SELECT time_bucket('5m', time) AS bucket, AVG(temperature) FROM sensor_data WHERE time > NOW() - INTERVAL '24h' GROUP BY bucket; Performance For 1 billion rows, QuestDB and InfluxDB lead on write throughput. TimescaleDB wins on SQL compatibility. Choose based on your query patterns and ecosystem requirements. Conclusion Choose InfluxDB for purpose-built time-series, TimescaleDB for SQL compatibility, and QuestDB for maximum performance. All support downsampling and retention policies."
     }
     </script>
     <script type="application/ld+json">
@@ -73,392 +74,68 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> What Is Time-Series Data?</h2>
+      <div class="article-body"><h1>Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)</h1>
 <br>
-<p>Time-series data is a sequence of data points indexed by time. Examples include server metrics (CPU, memory), IoT sensor readings, financial tick data, application logs, and user behavior events. Time-series databases are optimized for high write throughput, efficient storage, and fast range queries over time intervals.</p>
+<p>Time-Series Data   </p>
+<p>Time-series data is a sequence of data points indexed by time. Examples include server metrics, IoT sensor readings, and financial tick data.   </p>
+<p>Database Comparison   </p>
+<p>| Feature | InfluxDB | TimescaleDB | QuestDB | |---------|----------|-------------|---------| | Architecture | Custom TS engine | PostgreSQL extension | Columnar | | SQL | Flux / SQL | Full SQL | SQL | | Write throughput | Very high | High | Very high | | Compression | Excellent | Good | Excellent |   </p>
+<p>InfluxDB   </p>
+<p>Purpose-built time-series with automatic downsampling:   </p>
 <br>
-<h2> Characteristics of Time-Series Workloads</h2>
 <br>
-<p>| Characteristic | Typical Requirement |</p>
-<p>|----------------|---------------------|</p>
-<p>| Write throughput | Millions of data points per second |</p>
-<p>| Data immutability | Appends only, rarely updated |</p>
-<p>| Time-ordered queries | "Last 24 hours," "Average per minute this week" |</p>
-<p>| Retention policies | Automatic data expiration |</p>
-<p>| Downsampling | Roll up old data to lower resolution |</p>
 <br>
-<h2> Time-Series DB Comparison</h2>
+<p>    from influxdb_client import InfluxDBClient</p>
 <br>
-<p>| Feature | InfluxDB | TimescaleDB | ClickHouse |</p>
-<p>|---------|----------|-------------|------------|</p>
-<p>| Architecture | Custom TS engine | PostgreSQL extension | Columnar OLAP |</p>
-<p>| Query language | Flux / SQL | SQL (full) | SQL (custom dialect) |</p>
-<p>| Write throughput | Very high | High | Very high |</p>
-<p>| Compression | Excellent | Good (native) | Excellent |</p>
-<p>| SQL compatibility | Partial | Full PostgreSQL | ClickHouse SQL |</p>
-<p>| Joins | Limited | Full SQL joins | Limited |</p>
-<p>| Deployment | Standalone | PostgreSQL-based | Standalone |</p>
 <br>
-<h2> InfluxDB</h2>
 <br>
-<p>InfluxDB is a purpose-built time-series database with automatic downsampling and retention policies.</p>
+<p>    client = InfluxDBClient(url="http://localhost:8086", token="my-token")</p>
 <br>
-<h3>Data Model</h3>
+<p>    write_api = client.write_api()</p>
 <br>
-<pre><code>
-// Measurement: cpu
-
-// Tags (indexed): host, region
-
-// Fields (values): usage_user, usage_system, usage_idle
-
-// Timestamp: automatic or explicit
-
-
-
-cpu,host=server01,region=us-east1 usage_user=45.2,usage_system=12.1 1715385600
-
-cpu,host=server01,region=us-east1 usage_user=47.8,usage_system=13.4 1715385601
-
-cpu,host=server02,region=us-west1 usage_user=32.1,usage_system=8.9  1715385600
-
-</code></pre>
 <br>
-<h3>Writing Data</h3>
 <br>
-<pre><code>
-from influxdb_client import InfluxDBClient
-
-
-
-client = InfluxDBClient(url=&quot;http://localhost:8086&quot;, token=&quot;my-token&quot;)
-
-write_api = client.write_api()
-
-
-
-# Write a single point
-
-from influxdb_client.client.write_api import SYNCHRONOUS
-
-p = Point(&quot;cpu&quot;) \
-
-    .tag(&quot;host&quot;, &quot;server01&quot;) \
-
-    .tag(&quot;region&quot;, &quot;us-east1&quot;) \
-
-    .field(&quot;usage_user&quot;, 45.2) \
-
-    .field(&quot;usage_system&quot;, 12.1) \
-
-    .time(datetime.utcnow())
-
-
-
-write_api.write(bucket=&quot;metrics&quot;, record=p)
-
-
-
-# Batch write for performance
-
-points = []
-
-for metric in metrics_batch:
-
-    points.append(
-
-        Point(&quot;sensor&quot;) \
-
-            .tag(&quot;device_id&quot;, metric.device_id) \
-
-            .field(&quot;temperature&quot;, metric.temp) \
-
-            .field(&quot;humidity&quot;, metric.humidity) \
-
-            .time(metric.timestamp)
-
-    )
-
-write_api.write(bucket=&quot;iot&quot;, record=points)
-
-</code></pre>
+<p>    p = Point("cpu").tag("host", "server01").field("usage_user", 45.2)</p>
 <br>
-<h3>Querying</h3>
+<p>    write_api.write(bucket="metrics", record=p)</p>
 <br>
-<pre><code>
--- InfluxDB SQL (v3+)
-
-SELECT
-
-    time,
-
-    mean(usage_user) AS avg_cpu
-
-FROM cpu
-
-WHERE
-
-    host = &#x27;server01&#x27;
-
-    AND time &gt;= now() - interval &#x27;1 hour&#x27;
-
-GROUP BY time(1m)
-
-ORDER BY time;
-
-
-
--- Downsampling with continuous query
-
-CREATE CONTINUOUS QUERY cpu_1h ON mydb
-
-BEGIN
-
-    SELECT mean(usage_user) AS usage_user
-
-    INTO cpu_1h
-
-    FROM cpu
-
-    GROUP BY time(1h), host
-
-END;
-
-</code></pre>
 <br>
-<h2> TimescaleDB</h2>
 <br>
-<p>TimescaleDB extends PostgreSQL with hypertables that transparently partition data by time.</p>
 <br>
-<h3>Setup</h3>
+<p>TimescaleDB   </p>
+<p>PostgreSQL extension with hypertables:   </p>
 <br>
-<pre><code>
-CREATE EXTENSION IF NOT EXISTS timescaledb;
-
-
-
--- Create a regular table
-
-CREATE TABLE sensor_data (
-
-    time TIMESTAMPTZ NOT NULL,
-
-    device_id INTEGER NOT NULL,
-
-    temperature DOUBLE PRECISION,
-
-    humidity DOUBLE PRECISION,
-
-    pressure DOUBLE PRECISION
-
-);
-
-
-
--- Convert to hypertable
-
-SELECT create_hypertable(&#x27;sensor_data&#x27;, &#x27;time&#x27;);
-
-
-
--- Add compression policy
-
-ALTER TABLE sensor_data SET (
-
-    timescaledb.compress,
-
-    timescaledb.compress_segmentby = &#x27;device_id&#x27;
-
-);
-
-SELECT add_compression_policy(&#x27;sensor_data&#x27;, INTERVAL &#x27;7 days&#x27;);
-
-</code></pre>
 <br>
-<h3>Querying</h3>
 <br>
-<pre><code>
--- Full SQL compatibility
-
-SELECT
-
-    time_bucket(&#x27;5 minutes&#x27;, time) AS bucket,
-
-    device_id,
-
-    AVG(temperature) AS avg_temp,
-
-    MAX(temperature) AS max_temp,
-
-    MIN(temperature) AS min_temp
-
-FROM sensor_data
-
-WHERE
-
-    time &gt; NOW() - INTERVAL &#x27;24 hours&#x27;
-
-    AND device_id = 42
-
-GROUP BY bucket, device_id
-
-ORDER BY bucket DESC;
-
-
-
--- Continuous aggregate (pre-computed rollup)
-
-CREATE MATERIALIZED VIEW sensor_hourly
-
-WITH (timescaledb.continuous) AS
-
-SELECT
-
-    time_bucket(&#x27;1 hour&#x27;, time) AS bucket,
-
-    device_id,
-
-    AVG(temperature) AS avg_temperature
-
-FROM sensor_data
-
-GROUP BY bucket, device_id;
-
-
-
--- Real-time aggregation (includes recent un-materialized data)
-
-SELECT * FROM sensor_hourly
-
-WHERE bucket &gt; NOW() - INTERVAL &#x27;7 days&#x27;
-
-ORDER BY bucket DESC
-
-LIMIT 100;
-
-</code></pre>
+<p>    CREATE TABLE sensor_data (</p>
 <br>
-<h3>When to Use TimescaleDB</h3>
+<p>        time TIMESTAMPTZ NOT NULL,</p>
 <br>
-<li>You already use PostgreSQL and need time-series capabilities</li>
-<li>You need SQL JOINs between time-series and relational data</li>
-<li>You value full SQL compatibility for reporting</li>
-<li>Your time-series data has relational context (e.g., sensors belong to locations)</li>
+<p>        device_id INTEGER,</p>
 <br>
-<h2> ClickHouse</h2>
+<p>        temperature DOUBLE PRECISION</p>
 <br>
-<p>ClickHouse is a columnar OLAP database optimized for real-time analytics on large datasets.</p>
+<p>    );</p>
 <br>
-<h3>Schema Design</h3>
+<p>    SELECT create_hypertable('sensor_data', 'time');</p>
 <br>
-<pre><code>
-CREATE TABLE sensor_data (
-
-    timestamp DateTime64(3),
-
-    device_id UInt32,
-
-    temperature Float32,
-
-    humidity Float32,
-
-    pressure Float32,
-
-    location String
-
-) ENGINE = MergeTree()
-
-ORDER BY (device_id, timestamp)
-
-TTL timestamp + INTERVAL 90 DAY DELETE;
-
-
-
--- Distributed version
-
-CREATE TABLE sensor_data_distributed AS sensor_data
-
-ENGINE = Distributed(&#x27;cluster&#x27;, &#x27;default&#x27;, &#x27;sensor_data&#x27;, rand());
-
-</code></pre>
 <br>
-<h3>Querying</h3>
 <br>
-<pre><code>
--- ClickHouse&#x27;s strength: fast aggregations on massive datasets
-
-SELECT
-
-    toStartOfMinute(timestamp) AS minute,
-
-    device_id,
-
-    avg(temperature) AS avg_temp,
-
-    quantile(0.95)(temperature) AS p95_temp,
-
-    quantile(0.99)(temperature) AS p99_temp
-
-FROM sensor_data
-
-WHERE timestamp &gt; now() - INTERVAL 7 DAY
-
-GROUP BY minute, device_id
-
-ORDER BY minute DESC
-
-LIMIT 100;
-
-
-
--- Using materialized views for pre-aggregation
-
-CREATE MATERIALIZED VIEW sensor_stats_hourly
-
-ENGINE = AggregatingMergeTree()
-
-ORDER BY (device_id, hour)
-
-AS SELECT
-
-    device_id,
-
-    toStartOfHour(timestamp) AS hour,
-
-    avgState(temperature) AS avg_temp,
-
-    maxState(temperature) AS max_temp
-
-FROM sensor_data
-
-GROUP BY device_id, hour;
-
-</code></pre>
+<p>    SELECT time_bucket('5m', time) AS bucket,</p>
 <br>
-<h2> Performance Comparison (1B rows)</h2>
+<p>           AVG(temperature) FROM sensor_data</p>
 <br>
-<p>| Benchmark | InfluxDB | TimescaleDB | ClickHouse |</p>
-<p>|-----------|----------|-------------|------------|</p>
-<p>| Write speed (rows/s) | 1.2M | 850K | 1.5M |</p>
-<p>| Storage (compressed) | 35 GB | 65 GB | 22 GB |</p>
-<p>| Last 24h range query | 210ms | 380ms | 120ms |</p>
-<p>| Aggregation (1 week) | 1.2s | 2.1s | 0.4s |</p>
-<p>| Memory usage | 2 GB | 4 GB | 6 GB |</p>
+<p>    WHERE time > NOW() - INTERVAL '24h'</p>
 <br>
-<h2> Choosing the Right Database</h2>
+<p>    GROUP BY bucket;</p>
 <br>
-<p>| Use Case | Recommended |</p>
-<p>|----------|-------------|</p>
-<p>| Infrastructure monitoring (Prometheus compatible) | InfluxDB |</p>
-<p>| IoT sensor data with relational context | TimescaleDB |</p>
-<p>| Real-time analytics on billions of rows | ClickHouse |</p>
-<p>| Simple metrics and events | InfluxDB |</p>
-<p>| Full SQL + time-series hybrid | TimescaleDB |</p>
-<p>| Log analytics and observability | ClickHouse |</p>
 <br>
-<h2> Summary</h2>
 <br>
-<p>Time-series databases optimize for append-heavy, time-ordered data with high compression and fast range queries. Choose InfluxDB for purpose-built time-series with minimal operational overhead, TimescaleDB when you need full SQL compatibility and relational joins with your time-series data, and ClickHouse for real-time analytics on massive datasets. All three support automatic downsampling, retention policies, and continuous aggregates to manage data at scale.</p></div>
+<br>
+<p>Performance   </p>
+<p>For 1 billion rows, QuestDB and InfluxDB lead on write throughput. TimescaleDB wins on SQL compatibility. Choose based on your query patterns and ecosystem requirements.   </p>
+<p>Conclusion   </p>
+<p>Choose InfluxDB for purpose-built time-series, TimescaleDB for SQL compatibility, and QuestDB for maximum performance. All support downsampling and retention policies.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

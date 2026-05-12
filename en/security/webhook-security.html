@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1796",
+      "wordCount": "2138",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/webhook-security.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/webhook-security.html"},
+      "articleBody": "Webhook Security Best Practices Why Webhook Security Matters Webhooks are HTTP callbacks that allow services to push real-time events to your application. Unlike APIs where you initiate the request, webhooks are delivered to a public endpoint that anyone with the URL can call. Without proper security, an attacker can replay webhook events, send fake event data, or probe your internal infrastructure. Threat Model | Threat | Impact | Likelihood | |--------|--------|------------| | Fake webhook events | Application processes false data | High | | Replay attacks | Duplicate processing of legitimate events | Medium | | Payload tampering | Corrupted data processed as valid | Medium | | Reconnaissance | Attacker probes internal network | Low | | DDoS via webhooks | Service overload from fake events | Medium | Defense 1: Signature Verification Every webhook provider signs their payloads. Your endpoint must verify this signature before processing. Stripe-Style Signatures import hmac import hashlib def verify_stripe_signature(payload, sig_header, secret): \"\"\"Verify Stripe webhook signature.\"\"\" # Signature format: t=timestamp,v1=signature parts = dict(item.split('=', 1) for item in sig_header.split(',')) if 'v1' not in parts or 't' not in parts: return False timestamp = parts['t'] expected_sig = parts['v1'] # Prevent replay: signature must be within 5 minutes if abs(int(timestamp) - time.time()) > 300: return False # Compute expected signature signed_payload = f\"{timestamp}.{payload}\".encode() computed_sig = hmac.new( secret.encode(), signed_payload, hashlib.sha256 ).hexdigest() # Constant-time comparison return hmac.compare_digest(computed_sig, expected_sig) GitHub-Style Signatures const crypto = require('crypto'); function verifyGitHubSignature(req, secret) { const signature = req.headers['x-hub-signature-256']; if (!signature) return false; const payload = JSON.stringify(req.body); const computed = 'sha256=' + crypto.createHmac('sha256', secret) .update(payload) .digest('hex'); // Constant-time comparison return crypto.timingSafeEqual( Buffer.from(signature), Buffer.from(computed) ); } // Express middleware app.post('/webhooks/github', express.raw({type: 'application/json'}), (req, res) => { if (!verifyGitHubSignature(req, process.env.GITHUB_WEBHOOK_SECRET)) { return res.status(401).send('Invalid signature'); } // Process webhook res.status(200).send('OK'); }); Generic Verification Middleware from functools import wraps from flask import request, abort import hmac import hashlib def verify_webhook(secret): \"\"\"Decorator to verify webhook signatures.\"\"\" def decorator(f): @wraps(f) def decorated_function(*args, **kwargs): payload = request.get_data() received_sig = request.headers.get('X-Webhook-Signature') if not received_sig: abort(401, 'Missing signature') computed_sig = hmac.new( secret.encode(), payload, hashlib.sha256 ).hexdigest() if not hmac.compare_digest(computed_sig, received_sig): abort(401, 'Invalid signature') return f(*args, **kwargs) return decorated_function return decorator @app.route('/webhooks/custom', methods=['POST']) @verify_webhook(WEBHOOK_SECRET) def handle_webhook(): event = request.json # Process the verified event return 'OK', 200 Defense 2: Replay Protection Timestamp-Based Prevention Include a timestamp in the signed payload and reject webhooks outside a time window: function verifyWithReplayPrevention(payload, signature, secret, toleranceMs = 300000) { // Expected format: ts=1234567890,v1=sig_here const parts = signature.split(','); const tsPart = parts.find(p => p.startsWith('ts=')); const sigPart = parts.find(p => p.startsWith('v1=')); const timestamp = parseInt(tsPart.split('=')[1]); const now = Date.now(); // Reject if outside tolerance window if (Math.abs(now - timestamp) > toleranceMs) { throw new Error('Webhook replay detected'); } // Verify signature includes timestamp const signedContent = `${timestamp}.${JSON.stringify(payload)}`; const expectedSig = crypto.createHmac('sha256', secret) .update(signedContent) .digest('hex'); return crypto.timingSafeEqual( Buffer.from(expectedSig), Buffer.from(sigPart.split('=')[1]) ); } Idempotency Keys Track processed webhook IDs to prevent duplicate processing: const processedEvents = new Set(); app.post('/webhooks/stripe', async (req, res) => { const eventId = req.headers['stripe-signature'] .split(',') .find(p => p.startsWith('t=')) ?.split('=')[1]; if (processedEvents.has(eventId)) { // Already processed, return success to avoid retries return res.status(200).json({ status: 'already_processed' }); } // Verify and process processedEvents.add(eventId); // Clean old entries periodically setTimeout(() => processedEvents.delete(eventId), 86400000); }); Defense 3: IP Allowlisting When possible, restrict webhook endpoints to known provider IPs: ALLOWED_IPS = { 'stripe': ['3.18.12.63/32', '3.130.192.231/32'], 'github': ['192.30.252.0/22', '185.199.108.0/22'], 'slack': ['52.89.214.238/32', '54.70.199.8/32'], } def ip_allowed(provider, request_ip): import ipaddress for cidr in ALLOWED_IPS.get(provider, []): if ipaddress.ip_address(request_ip) in ipaddress.ip_network(cidr): return True return False @app.before_request def restrict_webhook_ips(): if request.path.startswith('/webhooks/'): provider = request.path.split('/')[2] if not ip_allowed(provider, request.remote_addr): abort(403, 'IP not allowed') Defense 4: Payload Validation Validate the webhook payload schema before processing: from pydantic import BaseModel, ValidationError class GitHubPushEvent(BaseModel): ref: str repository: dict commits: list sender: dict forced: bool = False def validate_webhook_payload(provider, payload): validators = { 'github': GitHubPushEvent, 'stripe': StripeEvent, 'slack': SlackEvent } validator = validators.get(provider) if not validator: return False try: validator(**payload) return True except ValidationError: return False Implementation Checklist | Security Control | Implementation | Priority | |-----------------|----------------|----------| | HMAC signature verification | Verify every webhook | Critical | | Replay protection | Timestamp + tolerance | Critical | | Idempotency | Track event IDs | High | | IP allowlisting | Restrict by provider CIDR | High | | Payload validation | Schema validation | High | | Rate limiting | Per-IP and per-provider | Medium | | HTTPS only | Reject HTTP | Critical | | Error handling | Generic error messages | Medium | Summary Webhook endpoints are publicly accessible by design, making them an attractive target. Always verify payload signatures using HMAC-SHA256, implement replay protection with timestamps, track idempotency keys to prevent duplicate processing, validate payload structure, and restrict by IP when possible. These controls turn a publicly accessible endpoint into a secure integration point that only processes legitimate webhook events."
     }
     </script>
     <script type="application/ld+json">
@@ -73,436 +74,423 @@
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">Webhook Security Best Practices</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Why Webhook Security Matters</h2>
+      <div class="article-body"><h1>Webhook Security Best Practices</h1>
 <br>
-<p>Webhooks are HTTP callbacks that allow services to push real-time events to your application. Unlike APIs where you initiate the request, webhooks are delivered to a public endpoint that anyone with the URL can call. Without proper security, an attacker can replay webhook events, send fake event data, or probe your internal infrastructure.</p>
+<p>Why Webhook Security Matters   </p>
+<p>Webhooks are HTTP callbacks that allow services to push real-time events to your application. Unlike APIs where you initiate the request, webhooks are delivered to a public endpoint that anyone with the URL can call. Without proper security, an attacker can replay webhook events, send fake event data, or probe your internal infrastructure.   </p>
+<p>Threat Model   </p>
+<p>| Threat | Impact | Likelihood | |--------|--------|------------| | Fake webhook events | Application processes false data | High | | Replay attacks | Duplicate processing of legitimate events | Medium | | Payload tampering | Corrupted data processed as valid | Medium | | Reconnaissance | Attacker probes internal network | Low | | DDoS via webhooks | Service overload from fake events | Medium |   </p>
+<p>Defense 1: Signature Verification   </p>
+<p>Every webhook provider signs their payloads. Your endpoint must verify this signature before processing.   </p>
+<p>Stripe-Style Signatures   </p>
 <br>
-<h2> Threat Model</h2>
 <br>
-<p>| Threat | Impact | Likelihood |</p>
-<p>|--------|--------|------------|</p>
-<p>| Fake webhook events | Application processes false data | High |</p>
-<p>| Replay attacks | Duplicate processing of legitimate events | Medium |</p>
-<p>| Payload tampering | Corrupted data processed as valid | Medium |</p>
-<p>| Reconnaissance | Attacker probes internal network | Low |</p>
-<p>| DDoS via webhooks | Service overload from fake events | Medium |</p>
 <br>
-<h2> Defense 1: Signature Verification</h2>
+<p>    import hmac</p>
 <br>
-<p>Every webhook provider signs their payloads. Your endpoint must verify this signature before processing.</p>
+<p>    import hashlib</p>
 <br>
-<h3>Stripe-Style Signatures</h3>
 <br>
-<pre><code>
-import hmac
-
-import hashlib
-
-
-
-def verify_stripe_signature(payload, sig_header, secret):
-
-    &quot;&quot;&quot;Verify Stripe webhook signature.&quot;&quot;&quot;
-
-    # Signature format: t=timestamp,v1=signature
-
-    parts = dict(item.split(&#x27;=&#x27;, 1) for item in sig_header.split(&#x27;,&#x27;))
-
-
-
-    if &#x27;v1&#x27; not in parts or &#x27;t&#x27; not in parts:
-
-        return False
-
-
-
-    timestamp = parts[&#x27;t&#x27;]
-
-    expected_sig = parts[&#x27;v1&#x27;]
-
-
-
-    # Prevent replay: signature must be within 5 minutes
-
-    if abs(int(timestamp) - time.time()) &gt; 300:
-
-        return False
-
-
-
-    # Compute expected signature
-
-    signed_payload = f&quot;{timestamp}.{payload}&quot;.encode()
-
-    computed_sig = hmac.new(
-
-        secret.encode(),
-
-        signed_payload,
-
-        hashlib.sha256
-
-    ).hexdigest()
-
-
-
-    # Constant-time comparison
-
-    return hmac.compare_digest(computed_sig, expected_sig)
-
-</code></pre>
 <br>
-<h3>GitHub-Style Signatures</h3>
+<p>    def verify_stripe_signature(payload, sig_header, secret):</p>
 <br>
-<pre><code>
-const crypto = require(&#x27;crypto&#x27;);
-
-
-
-function verifyGitHubSignature(req, secret) {
-
-    const signature = req.headers[&#x27;x-hub-signature-256&#x27;];
-
-    if (!signature) return false;
-
-
-
-    const payload = JSON.stringify(req.body);
-
-    const computed = &#x27;sha256=&#x27; +
-
-        crypto.createHmac(&#x27;sha256&#x27;, secret)
-
-            .update(payload)
-
-            .digest(&#x27;hex&#x27;);
-
-
-
-    // Constant-time comparison
-
-    return crypto.timingSafeEqual(
-
-        Buffer.from(signature),
-
-        Buffer.from(computed)
-
-    );
-
-}
-
-
-
-// Express middleware
-
-app.post(&#x27;/webhooks/github&#x27;, express.raw({type: &#x27;application/json&#x27;}), (req, res) =&gt; {
-
-    if (!verifyGitHubSignature(req, process.env.GITHUB_WEBHOOK_SECRET)) {
-
-        return res.status(401).send(&#x27;Invalid signature&#x27;);
-
-    }
-
-    // Process webhook
-
-    res.status(200).send(&#x27;OK&#x27;);
-
-});
-
-</code></pre>
+<p>        """Verify Stripe webhook signature."""</p>
 <br>
-<h3>Generic Verification Middleware</h3>
+<p>        # Signature format: t=timestamp,v1=signature</p>
 <br>
-<pre><code>
-from functools import wraps
-
-from flask import request, abort
-
-import hmac
-
-import hashlib
-
-
-
-def verify_webhook(secret):
-
-    &quot;&quot;&quot;Decorator to verify webhook signatures.&quot;&quot;&quot;
-
-    def decorator(f):
-
-        @wraps(f)
-
-        def decorated_function(*args, **kwargs):
-
-            payload = request.get_data()
-
-            received_sig = request.headers.get(&#x27;X-Webhook-Signature&#x27;)
-
-
-
-            if not received_sig:
-
-                abort(401, &#x27;Missing signature&#x27;)
-
-
-
-            computed_sig = hmac.new(
-
-                secret.encode(),
-
-                payload,
-
-                hashlib.sha256
-
-            ).hexdigest()
-
-
-
-            if not hmac.compare_digest(computed_sig, received_sig):
-
-                abort(401, &#x27;Invalid signature&#x27;)
-
-
-
-            return f(*args, **kwargs)
-
-        return decorated_function
-
-    return decorator
-
-
-
-@app.route(&#x27;/webhooks/custom&#x27;, methods=[&#x27;POST&#x27;])
-
-@verify_webhook(WEBHOOK_SECRET)
-
-def handle_webhook():
-
-    event = request.json
-
-    # Process the verified event
-
-    return &#x27;OK&#x27;, 200
-
-</code></pre>
+<p>        parts = dict(item.split('=', 1) for item in sig_header.split(','))</p>
 <br>
-<h2> Defense 2: Replay Protection</h2>
 <br>
-<h3>Timestamp-Based Prevention</h3>
 <br>
-<p>Include a timestamp in the signed payload and reject webhooks outside a time window:</p>
+<p>        if 'v1' not in parts or 't' not in parts:</p>
 <br>
-<pre><code>
-function verifyWithReplayPrevention(payload, signature, secret, toleranceMs = 300000) {
-
-    // Expected format: ts=1234567890,v1=sig_here
-
-    const parts = signature.split(&#x27;,&#x27;);
-
-    const tsPart = parts.find(p =&gt; p.startsWith(&#x27;ts=&#x27;));
-
-    const sigPart = parts.find(p =&gt; p.startsWith(&#x27;v1=&#x27;));
-
-
-
-    const timestamp = parseInt(tsPart.split(&#x27;=&#x27;)[1]);
-
-    const now = Date.now();
-
-
-
-    // Reject if outside tolerance window
-
-    if (Math.abs(now - timestamp) &gt; toleranceMs) {
-
-        throw new Error(&#x27;Webhook replay detected&#x27;);
-
-    }
-
-
-
-    // Verify signature includes timestamp
-
-    const signedContent = `${timestamp}.${JSON.stringify(payload)}`;
-
-    const expectedSig = crypto.createHmac(&#x27;sha256&#x27;, secret)
-
-        .update(signedContent)
-
-        .digest(&#x27;hex&#x27;);
-
-
-
-    return crypto.timingSafeEqual(
-
-        Buffer.from(expectedSig),
-
-        Buffer.from(sigPart.split(&#x27;=&#x27;)[1])
-
-    );
-
-}
-
-</code></pre>
+<p>            return False</p>
 <br>
-<h3>Idempotency Keys</h3>
 <br>
-<p>Track processed webhook IDs to prevent duplicate processing:</p>
 <br>
-<pre><code>
-const processedEvents = new Set();
-
-
-
-app.post(&#x27;/webhooks/stripe&#x27;, async (req, res) =&gt; {
-
-    const eventId = req.headers[&#x27;stripe-signature&#x27;]
-
-        .split(&#x27;,&#x27;)
-
-        .find(p =&gt; p.startsWith(&#x27;t=&#x27;))
-
-        ?.split(&#x27;=&#x27;)[1];
-
-
-
-    if (processedEvents.has(eventId)) {
-
-        // Already processed, return success to avoid retries
-
-        return res.status(200).json({ status: &#x27;already_processed&#x27; });
-
-    }
-
-
-
-    // Verify and process
-
-    processedEvents.add(eventId);
-
-
-
-    // Clean old entries periodically
-
-    setTimeout(() =&gt; processedEvents.delete(eventId), 86400000);
-
-});
-
-</code></pre>
+<p>        timestamp = parts['t']</p>
 <br>
-<h2> Defense 3: IP Allowlisting</h2>
+<p>        expected_sig = parts['v1']</p>
 <br>
-<p>When possible, restrict webhook endpoints to known provider IPs:</p>
 <br>
-<pre><code>
-ALLOWED_IPS = {
-
-    &#x27;stripe&#x27;: [&#x27;3.18.12.63/32&#x27;, &#x27;3.130.192.231/32&#x27;],
-
-    &#x27;github&#x27;: [&#x27;192.30.252.0/22&#x27;, &#x27;185.199.108.0/22&#x27;],
-
-    &#x27;slack&#x27;: [&#x27;52.89.214.238/32&#x27;, &#x27;54.70.199.8/32&#x27;],
-
-}
-
-
-
-def ip_allowed(provider, request_ip):
-
-    import ipaddress
-
-    for cidr in ALLOWED_IPS.get(provider, []):
-
-        if ipaddress.ip_address(request_ip) in ipaddress.ip_network(cidr):
-
-            return True
-
-    return False
-
-
-
-@app.before_request
-
-def restrict_webhook_ips():
-
-    if request.path.startswith(&#x27;/webhooks/&#x27;):
-
-        provider = request.path.split(&#x27;/&#x27;)[2]
-
-        if not ip_allowed(provider, request.remote_addr):
-
-            abort(403, &#x27;IP not allowed&#x27;)
-
-</code></pre>
 <br>
-<h2> Defense 4: Payload Validation</h2>
+<p>        # Prevent replay: signature must be within 5 minutes</p>
 <br>
-<p>Validate the webhook payload schema before processing:</p>
+<p>        if abs(int(timestamp) - time.time()) > 300:</p>
 <br>
-<pre><code>
-from pydantic import BaseModel, ValidationError
-
-
-
-class GitHubPushEvent(BaseModel):
-
-    ref: str
-
-    repository: dict
-
-    commits: list
-
-    sender: dict
-
-    forced: bool = False
-
-
-
-def validate_webhook_payload(provider, payload):
-
-    validators = {
-
-        &#x27;github&#x27;: GitHubPushEvent,
-
-        &#x27;stripe&#x27;: StripeEvent,
-
-        &#x27;slack&#x27;: SlackEvent
-
-    }
-
-    validator = validators.get(provider)
-
-    if not validator:
-
-        return False
-
-    try:
-
-        validator(**payload)
-
-        return True
-
-    except ValidationError:
-
-        return False
-
-</code></pre>
+<p>            return False</p>
 <br>
-<h2> Implementation Checklist</h2>
 <br>
-<p>| Security Control | Implementation | Priority |</p>
-<p>|-----------------|----------------|----------|</p>
-<p>| HMAC signature verification | Verify every webhook | Critical |</p>
-<p>| Replay protection | Timestamp + tolerance | Critical |</p>
-<p>| Idempotency | Track event IDs | High |</p>
-<p>| IP allowlisting | Restrict by provider CIDR | High |</p>
-<p>| Payload validation | Schema validation | High |</p>
-<p>| Rate limiting | Per-IP and per-provider | Medium |</p>
-<p>| HTTPS only | Reject HTTP | Critical |</p>
-<p>| Error handling | Generic error messages | Medium |</p>
 <br>
-<h2> Summary</h2>
+<p>        # Compute expected signature</p>
 <br>
+<p>        signed_payload = f"{timestamp}.{payload}".encode()</p>
+<br>
+<p>        computed_sig = hmac.new(</p>
+<br>
+<p>            secret.encode(),</p>
+<br>
+<p>            signed_payload,</p>
+<br>
+<p>            hashlib.sha256</p>
+<br>
+<p>        ).hexdigest()</p>
+<br>
+<br>
+<br>
+<p>        # Constant-time comparison</p>
+<br>
+<p>        return hmac.compare_digest(computed_sig, expected_sig)</p>
+<br>
+<br>
+<br>
+<br>
+<p>GitHub-Style Signatures   </p>
+<br>
+<br>
+<br>
+<p>    const crypto = require('crypto');</p>
+<br>
+<br>
+<br>
+<p>    function verifyGitHubSignature(req, secret) {</p>
+<br>
+<p>        const signature = req.headers['x-hub-signature-256'];</p>
+<br>
+<p>        if (!signature) return false;</p>
+<br>
+<br>
+<br>
+<p>        const payload = JSON.stringify(req.body);</p>
+<br>
+<p>        const computed = 'sha256=' +</p>
+<br>
+<p>            crypto.createHmac('sha256', secret)</p>
+<br>
+<p>                .update(payload)</p>
+<br>
+<p>                .digest('hex');</p>
+<br>
+<br>
+<br>
+<p>        // Constant-time comparison</p>
+<br>
+<p>        return crypto.timingSafeEqual(</p>
+<br>
+<p>            Buffer.from(signature),</p>
+<br>
+<p>            Buffer.from(computed)</p>
+<br>
+<p>        );</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<p>    // Express middleware</p>
+<br>
+<p>    app.post('/webhooks/github', express.raw({type: 'application/json'}), (req, res) => {</p>
+<br>
+<p>        if (!verifyGitHubSignature(req, process.env.GITHUB_WEBHOOK_SECRET)) {</p>
+<br>
+<p>            return res.status(401).send('Invalid signature');</p>
+<br>
+<p>        }</p>
+<br>
+<p>        // Process webhook</p>
+<br>
+<p>        res.status(200).send('OK');</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<br>
+<p>Generic Verification Middleware   </p>
+<br>
+<br>
+<br>
+<p>    from functools import wraps</p>
+<br>
+<p>    from flask import request, abort</p>
+<br>
+<p>    import hmac</p>
+<br>
+<p>    import hashlib</p>
+<br>
+<br>
+<br>
+<p>    def verify_webhook(secret):</p>
+<br>
+<p>        """Decorator to verify webhook signatures."""</p>
+<br>
+<p>        def decorator(f):</p>
+<br>
+<p>            @wraps(f)</p>
+<br>
+<p>            def decorated_function(*args, **kwargs):</p>
+<br>
+<p>                payload = request.get_data()</p>
+<br>
+<p>                received_sig = request.headers.get('X-Webhook-Signature')</p>
+<br>
+<br>
+<br>
+<p>                if not received_sig:</p>
+<br>
+<p>                    abort(401, 'Missing signature')</p>
+<br>
+<br>
+<br>
+<p>                computed_sig = hmac.new(</p>
+<br>
+<p>                    secret.encode(),</p>
+<br>
+<p>                    payload,</p>
+<br>
+<p>                    hashlib.sha256</p>
+<br>
+<p>                ).hexdigest()</p>
+<br>
+<br>
+<br>
+<p>                if not hmac.compare_digest(computed_sig, received_sig):</p>
+<br>
+<p>                    abort(401, 'Invalid signature')</p>
+<br>
+<br>
+<br>
+<p>                return f(*args, **kwargs)</p>
+<br>
+<p>            return decorated_function</p>
+<br>
+<p>        return decorator</p>
+<br>
+<br>
+<br>
+<p>    @app.route('/webhooks/custom', methods=['POST'])</p>
+<br>
+<p>    @verify_webhook(WEBHOOK_SECRET)</p>
+<br>
+<p>    def handle_webhook():</p>
+<br>
+<p>        event = request.json</p>
+<br>
+<p>        # Process the verified event</p>
+<br>
+<p>        return 'OK', 200</p>
+<br>
+<br>
+<br>
+<br>
+<p>Defense 2: Replay Protection   </p>
+<p>Timestamp-Based Prevention   </p>
+<p>Include a timestamp in the signed payload and reject webhooks outside a time window:   </p>
+<br>
+<br>
+<br>
+<p>    function verifyWithReplayPrevention(payload, signature, secret, toleranceMs = 300000) {</p>
+<br>
+<p>        // Expected format: ts=1234567890,v1=sig_here</p>
+<br>
+<p>        const parts = signature.split(',');</p>
+<br>
+<p>        const tsPart = parts.find(p => p.startsWith('ts='));</p>
+<br>
+<p>        const sigPart = parts.find(p => p.startsWith('v1='));</p>
+<br>
+<br>
+<br>
+<p>        const timestamp = parseInt(tsPart.split('=')[1]);</p>
+<br>
+<p>        const now = Date.now();</p>
+<br>
+<br>
+<br>
+<p>        // Reject if outside tolerance window</p>
+<br>
+<p>        if (Math.abs(now - timestamp) > toleranceMs) {</p>
+<br>
+<p>            throw new Error('Webhook replay detected');</p>
+<br>
+<p>        }</p>
+<br>
+<br>
+<br>
+<p>        // Verify signature includes timestamp</p>
+<br>
+<p>        const signedContent = `${timestamp}.${JSON.stringify(payload)}`;</p>
+<br>
+<p>        const expectedSig = crypto.createHmac('sha256', secret)</p>
+<br>
+<p>            .update(signedContent)</p>
+<br>
+<p>            .digest('hex');</p>
+<br>
+<br>
+<br>
+<p>        return crypto.timingSafeEqual(</p>
+<br>
+<p>            Buffer.from(expectedSig),</p>
+<br>
+<p>            Buffer.from(sigPart.split('=')[1])</p>
+<br>
+<p>        );</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<p>Idempotency Keys   </p>
+<p>Track processed webhook IDs to prevent duplicate processing:   </p>
+<br>
+<br>
+<br>
+<p>    const processedEvents = new Set();</p>
+<br>
+<br>
+<br>
+<p>    app.post('/webhooks/stripe', async (req, res) => {</p>
+<br>
+<p>        const eventId = req.headers['stripe-signature']</p>
+<br>
+<p>            .split(',')</p>
+<br>
+<p>            .find(p => p.startsWith('t='))</p>
+<br>
+<p>            ?.split('=')[1];</p>
+<br>
+<br>
+<br>
+<p>        if (processedEvents.has(eventId)) {</p>
+<br>
+<p>            // Already processed, return success to avoid retries</p>
+<br>
+<p>            return res.status(200).json({ status: 'already_processed' });</p>
+<br>
+<p>        }</p>
+<br>
+<br>
+<br>
+<p>        // Verify and process</p>
+<br>
+<p>        processedEvents.add(eventId);</p>
+<br>
+<br>
+<br>
+<p>        // Clean old entries periodically</p>
+<br>
+<p>        setTimeout(() => processedEvents.delete(eventId), 86400000);</p>
+<br>
+<p>    });</p>
+<br>
+<br>
+<br>
+<br>
+<p>Defense 3: IP Allowlisting   </p>
+<p>When possible, restrict webhook endpoints to known provider IPs:   </p>
+<br>
+<br>
+<br>
+<p>    ALLOWED_IPS = {</p>
+<br>
+<p>        'stripe': ['3.18.12.63/32', '3.130.192.231/32'],</p>
+<br>
+<p>        'github': ['192.30.252.0/22', '185.199.108.0/22'],</p>
+<br>
+<p>        'slack': ['52.89.214.238/32', '54.70.199.8/32'],</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<p>    def ip_allowed(provider, request_ip):</p>
+<br>
+<p>        import ipaddress</p>
+<br>
+<p>        for cidr in ALLOWED_IPS.get(provider, []):</p>
+<br>
+<p>            if ipaddress.ip_address(request_ip) in ipaddress.ip_network(cidr):</p>
+<br>
+<p>                return True</p>
+<br>
+<p>        return False</p>
+<br>
+<br>
+<br>
+<p>    @app.before_request</p>
+<br>
+<p>    def restrict_webhook_ips():</p>
+<br>
+<p>        if request.path.startswith('/webhooks/'):</p>
+<br>
+<p>            provider = request.path.split('/')[2]</p>
+<br>
+<p>            if not ip_allowed(provider, request.remote_addr):</p>
+<br>
+<p>                abort(403, 'IP not allowed')</p>
+<br>
+<br>
+<br>
+<br>
+<p>Defense 4: Payload Validation   </p>
+<p>Validate the webhook payload schema before processing:   </p>
+<br>
+<br>
+<br>
+<p>    from pydantic import BaseModel, ValidationError</p>
+<br>
+<br>
+<br>
+<p>    class GitHubPushEvent(BaseModel):</p>
+<br>
+<p>        ref: str</p>
+<br>
+<p>        repository: dict</p>
+<br>
+<p>        commits: list</p>
+<br>
+<p>        sender: dict</p>
+<br>
+<p>        forced: bool = False</p>
+<br>
+<br>
+<br>
+<p>    def validate_webhook_payload(provider, payload):</p>
+<br>
+<p>        validators = {</p>
+<br>
+<p>            'github': GitHubPushEvent,</p>
+<br>
+<p>            'stripe': StripeEvent,</p>
+<br>
+<p>            'slack': SlackEvent</p>
+<br>
+<p>        }</p>
+<br>
+<p>        validator = validators.get(provider)</p>
+<br>
+<p>        if not validator:</p>
+<br>
+<p>            return False</p>
+<br>
+<p>        try:</p>
+<br>
+<p>            validator(**payload)</p>
+<br>
+<p>            return True</p>
+<br>
+<p>        except ValidationError:</p>
+<br>
+<p>            return False</p>
+<br>
+<br>
+<br>
+<br>
+<p>Implementation Checklist   </p>
+<p>| Security Control | Implementation | Priority | |-----------------|----------------|----------| | HMAC signature verification | Verify every webhook | Critical | | Replay protection | Timestamp + tolerance | Critical | | Idempotency | Track event IDs | High | | IP allowlisting | Restrict by provider CIDR | High | | Payload validation | Schema validation | High | | Rate limiting | Per-IP and per-provider | Medium | | HTTPS only | Reject HTTP | Critical | | Error handling | Generic error messages | Medium |   </p>
+<p>Summary   </p>
 <p>Webhook endpoints are publicly accessible by design, making them an attractive target. Always verify payload signatures using HMAC-SHA256, implement replay protection with timestamps, track idempotency keys to prevent duplicate processing, validate payload structure, and restrict by IP when possible. These controls turn a publicly accessible endpoint into a secure integration point that only processes legitimate webhook events.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

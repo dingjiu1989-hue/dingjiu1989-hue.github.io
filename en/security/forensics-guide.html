@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="forensics-guide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Digital Forensics Guide">
+    <meta property="og:description" content="Comprehensive guide to digital forensics covering evidence acquisition, analysis methodologies, chain of custody, and forensic tools.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/forensics-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Digital Forensics Guide">
+    <meta name="twitter:description" content="Comprehensive guide to digital forensics covering evidence acquisition, analysis methodologies, chain of custody, and forensic tools.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Digital Forensics Guide — SourceHub</title>
+    <meta name="description" content="Comprehensive guide to digital forensics covering evidence acquisition, analysis methodologies, chain of custody, and forensic tools.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/forensics-guide.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/forensics-guide.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Digital Forensics Guide",
+      "description": "Comprehensive guide to digital forensics covering evidence acquisition, analysis methodologies, chain of custody, and forensic tools.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1344",
+      "keywords": "Security, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/forensics-guide.html"},
+      "articleBody": "Digital Forensics Guide Introduction Digital forensics is the practice of identifying, preserving, analyzing, and presenting digital evidence in a legally admissible manner. It bridges the gap between technical investigation and legal proceedings, making proper methodology \u2014 and meticulous documentation \u2014 every bit as important as the technical tools used. Evidence Acquisition Acquisition is the most critical phase. Improper handling can render evidence inadmissible or destroy it entirely. Order of Volatility Digital evidence must be collected from the most volatile to the least volatile: * **CPU registers, cache** \u2014 lost at power-off 2\\. **RAM contents** \u2014 lost within seconds of power loss 3\\. **Network connections and process tables** \u2014 transient state 4\\. **System processes** \u2014 disappear with shutdown 5\\. **Disk storage** \u2014 persistent 6\\. **Remote logs and archival media** \u2014 off-device persistent # Memory acquisition with LiME on Linux insmod lime.ko \"path=/evidence/memory.dump format=lime\" # Memory acquisition with WinPmem on Windows winpmem_mini_x64_rc2.exe --output memory.raw # Capture running processes ps aux > evidence/processes.txt netstat -anp > evidence/network_connections.txt lsof > evidence/open_files.txt Disk Acquisition # Create a forensic image with dd sudo dd if=/dev/sda of=/evidence/sda.dd bs=4M conv=noerror,sync status=progress # Verify image integrity with hash sha256sum /dev/sda > evidence/sda.hash sha256sum /evidence/sda.dd >> evidence/sda.hash # Logical acquisition with forensic container (AFF/EWF) guymager -f ewf -e \"Case-2026-001\" -n \"Evidence Item 1\" /dev/sda /evidence/ Chain of Custody Chain of custody documents every interaction with evidence from collection to courtroom presentation. Every transfer must be logged with date, time, handler identity, purpose, and hash verification. chain_of_custody: item_id: \"EVID-2026-001\" description: \"Seized laptop, Dell Latitude 5540, S/N ABC123\" custody_events: - date: \"2026-05-10T09:15:00Z\" handler: \"Officer Jane Smith, Badge 4512\" action: \"Seized and logged at scene\" hash: \"sha256: a1b2c3d4e5...\" notes: \"Device was powered on. Immediately performed memory capture.\" - date: \"2026-05-10T11:30:00Z\" handler: \"Officer Jane Smith -> Analyst John Doe\" action: \"Transferred to forensics lab\" hash_verified: true notes: \"Transport in locked evidence bag, property receipt #8823\" - date: \"2026-05-11T08:00:00Z\" handler: \"Analyst John Doe\" action: \"Forensic imaging commenced\" hash_verified: true notes: \"Write-blocker engaged. Imaging to EWF container.\" Forensic Analysis with Autopsy and FTK Autopsy (Sleuth Kit GUI) Autopsy is the most widely used open-source forensic platform. It provides timeline analysis, file system parsing, keyword search, and module extensibility. # Autopsy Python module for custom analysis import jarray from org.sleuthkit.datamodel import AbstractFile from org.sleuthkit.autopsy.ingest import IngestModule class CustomAnalysisModule(IngestModule): def process_files(self, file_list): for f in file_list: if f.getName().endswith('.encrypted'): self.flag_file(f, \"Suspicious encrypted file\") # Check for known malware hashes file_hash = f.calculateHash(\"SHA256\") if file_hash in threat_intel_hashes: self.flag_file(f, f\"Known malware: {file_hash}\") FTK (Forensic Toolkit) FTK provides enterprise-grade forensic analysis with robust indexing, carving, and reporting. # FTK Command Line (FTK Imager) ftkimager /dev/sda1 /evidence/sda1_image.ext --mount --verify # FTK Loader for processing ftkloader --case=\"Case-2026\" --evidence=\"/evidence/sda1_image.ext\" \\ --index --carve File Carving and Recovery File carving recovers data from unallocated space without filesystem metadata. # Foremost: carve files by headers foremost -i /evidence/disk.dd -o /evidence/carved/ # Scalpel: configuration-based carving scalpel -c /etc/scalpel/scalpel.conf -o /evidence/carved/ -i /evidence/disk.dd # Bulk Extractor: parallelized data extraction bulk_extractor -o /evidence/bulk/ /evidence/disk.dd Timeline Analysis Timeline construction correlates file system events, logs, and artifacts to reconstruct incident sequences. # Create body file with fls fls -r -m /evidence /evidence/disk.dd > /evidence/body.txt # Generate timeline from Sleuth Kit mactime -b /evidence/body.txt -d > /evidence/timeline.csv # Plaso (log2timeline) for advanced timeline generation log2timeline.py --storage-file /evidence/timeline.plaso /evidence/disk.dd psort.py -o dynamic -w /evidence/timeline.csv /evidence/timeline.plaso Conclusion Digital forensics demands rigorous methodology above all else. Preserve evidence according to the order of volatility, maintain an unbroken chain of custody, use write-blockers during acquisition, verify hashes at every stage, and document everything. The technical skills to use Autopsy, FTK, and command-line tools are essential \u2014 but they are useless without proper forensic process."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Digital Forensics Guide"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Digital Forensics Guide
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Digital Forensics Guide</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Digital Forensics Guide</h1>
+<br>
+<p>Introduction   </p>
+<p>Digital forensics is the practice of identifying, preserving, analyzing, and presenting digital evidence in a legally admissible manner. It bridges the gap between technical investigation and legal proceedings, making proper methodology — and meticulous documentation — every bit as important as the technical tools used.   </p>
+<p>Evidence Acquisition   </p>
+<p>Acquisition is the most critical phase. Improper handling can render evidence inadmissible or destroy it entirely.   </p>
+<p>Order of Volatility   </p>
+<p>Digital evidence must be collected from the most volatile to the least volatile:   </p>
+<br>
+<p>* **CPU registers, cache** — lost at power-off</p>
+<p>2\. **RAM contents** — lost within seconds of power loss 3\. **Network connections and process tables** — transient state 4\. **System processes** — disappear with shutdown 5\. **Disk storage** — persistent 6\. **Remote logs and archival media** — off-device persistent   </p>
+<br>
+<br>
+<br>
+<p>    # Memory acquisition with LiME on Linux</p>
+<br>
+<p>    insmod lime.ko "path=/evidence/memory.dump format=lime"</p>
+<br>
+<br>
+<br>
+<p>    # Memory acquisition with WinPmem on Windows</p>
+<br>
+<p>    winpmem_mini_x64_rc2.exe --output memory.raw</p>
+<br>
+<br>
+<br>
+<p>    # Capture running processes</p>
+<br>
+<p>    ps aux > evidence/processes.txt</p>
+<br>
+<p>    netstat -anp > evidence/network_connections.txt</p>
+<br>
+<p>    lsof > evidence/open_files.txt</p>
+<br>
+<br>
+<br>
+<br>
+<p>Disk Acquisition   </p>
+<br>
+<br>
+<br>
+<p>    # Create a forensic image with dd</p>
+<br>
+<p>    sudo dd if=/dev/sda of=/evidence/sda.dd bs=4M conv=noerror,sync status=progress</p>
+<br>
+<br>
+<br>
+<p>    # Verify image integrity with hash</p>
+<br>
+<p>    sha256sum /dev/sda > evidence/sda.hash</p>
+<br>
+<p>    sha256sum /evidence/sda.dd >> evidence/sda.hash</p>
+<br>
+<br>
+<br>
+<p>    # Logical acquisition with forensic container (AFF/EWF)</p>
+<br>
+<p>    guymager -f ewf -e "Case-2026-001" -n "Evidence Item 1" /dev/sda /evidence/</p>
+<br>
+<br>
+<br>
+<br>
+<p>Chain of Custody   </p>
+<p>Chain of custody documents every interaction with evidence from collection to courtroom presentation. Every transfer must be logged with date, time, handler identity, purpose, and hash verification.   </p>
+<br>
+<br>
+<br>
+<p>    chain_of_custody:</p>
+<br>
+<p>      item_id: "EVID-2026-001"</p>
+<br>
+<p>      description: "Seized laptop, Dell Latitude 5540, S/N ABC123"</p>
+<br>
+<br>
+<br>
+<p>      custody_events:</p>
+<br>
+<p>        - date: "2026-05-10T09:15:00Z"</p>
+<br>
+<p>          handler: "Officer Jane Smith, Badge 4512"</p>
+<br>
+<p>          action: "Seized and logged at scene"</p>
+<br>
+<p>          hash: "sha256: a1b2c3d4e5..."</p>
+<br>
+<p>          notes: "Device was powered on. Immediately performed memory capture."</p>
+<br>
+<br>
+<br>
+<p>        - date: "2026-05-10T11:30:00Z"</p>
+<br>
+<p>          handler: "Officer Jane Smith -> Analyst John Doe"</p>
+<br>
+<p>          action: "Transferred to forensics lab"</p>
+<br>
+<p>          hash_verified: true</p>
+<br>
+<p>          notes: "Transport in locked evidence bag, property receipt #8823"</p>
+<br>
+<br>
+<br>
+<p>        - date: "2026-05-11T08:00:00Z"</p>
+<br>
+<p>          handler: "Analyst John Doe"</p>
+<br>
+<p>          action: "Forensic imaging commenced"</p>
+<br>
+<p>          hash_verified: true</p>
+<br>
+<p>          notes: "Write-blocker engaged. Imaging to EWF container."</p>
+<br>
+<br>
+<br>
+<br>
+<p>Forensic Analysis with Autopsy and FTK   </p>
+<p>Autopsy (Sleuth Kit GUI)   </p>
+<p>Autopsy is the most widely used open-source forensic platform. It provides timeline analysis, file system parsing, keyword search, and module extensibility.   </p>
+<br>
+<br>
+<br>
+<p>    # Autopsy Python module for custom analysis</p>
+<br>
+<p>    import jarray</p>
+<br>
+<p>    from org.sleuthkit.datamodel import AbstractFile</p>
+<br>
+<p>    from org.sleuthkit.autopsy.ingest import IngestModule</p>
+<br>
+<br>
+<br>
+<p>    class CustomAnalysisModule(IngestModule):</p>
+<br>
+<p>        def process_files(self, file_list):</p>
+<br>
+<p>            for f in file_list:</p>
+<br>
+<p>                if f.getName().endswith('.encrypted'):</p>
+<br>
+<p>                    self.flag_file(f, "Suspicious encrypted file")</p>
+<br>
+<br>
+<br>
+<p>                # Check for known malware hashes</p>
+<br>
+<p>                file_hash = f.calculateHash("SHA256")</p>
+<br>
+<p>                if file_hash in threat_intel_hashes:</p>
+<br>
+<p>                    self.flag_file(f, f"Known malware: {file_hash}")</p>
+<br>
+<br>
+<br>
+<br>
+<p>FTK (Forensic Toolkit)   </p>
+<p>FTK provides enterprise-grade forensic analysis with robust indexing, carving, and reporting.   </p>
+<br>
+<br>
+<br>
+<p>    # FTK Command Line (FTK Imager)</p>
+<br>
+<p>    ftkimager /dev/sda1 /evidence/sda1_image.ext --mount --verify</p>
+<br>
+<br>
+<br>
+<p>    # FTK Loader for processing</p>
+<br>
+<p>    ftkloader --case="Case-2026" --evidence="/evidence/sda1_image.ext" \</p>
+<br>
+<p>              --index --carve</p>
+<br>
+<br>
+<br>
+<br>
+<p>File Carving and Recovery   </p>
+<p>File carving recovers data from unallocated space without filesystem metadata.   </p>
+<br>
+<br>
+<br>
+<p>    # Foremost: carve files by headers</p>
+<br>
+<p>    foremost -i /evidence/disk.dd -o /evidence/carved/</p>
+<br>
+<br>
+<br>
+<p>    # Scalpel: configuration-based carving</p>
+<br>
+<p>    scalpel -c /etc/scalpel/scalpel.conf -o /evidence/carved/ -i /evidence/disk.dd</p>
+<br>
+<br>
+<br>
+<p>    # Bulk Extractor: parallelized data extraction</p>
+<br>
+<p>    bulk_extractor -o /evidence/bulk/ /evidence/disk.dd</p>
+<br>
+<br>
+<br>
+<br>
+<p>Timeline Analysis   </p>
+<p>Timeline construction correlates file system events, logs, and artifacts to reconstruct incident sequences.   </p>
+<br>
+<br>
+<br>
+<p>    # Create body file with fls</p>
+<br>
+<p>    fls -r -m /evidence /evidence/disk.dd > /evidence/body.txt</p>
+<br>
+<br>
+<br>
+<p>    # Generate timeline from Sleuth Kit</p>
+<br>
+<p>    mactime -b /evidence/body.txt -d > /evidence/timeline.csv</p>
+<br>
+<br>
+<br>
+<p>    # Plaso (log2timeline) for advanced timeline generation</p>
+<br>
+<p>    log2timeline.py --storage-file /evidence/timeline.plaso /evidence/disk.dd</p>
+<br>
+<p>    psort.py -o dynamic -w /evidence/timeline.csv /evidence/timeline.plaso</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
+<p>Digital forensics demands rigorous methodology above all else. Preserve evidence according to the order of volatility, maintain an unbroken chain of custody, use write-blockers during acquisition, verify hashes at every stage, and document everything. The technical skills to use Autopsy, FTK, and command-line tools are essential — but they are useless without proper forensic process.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1375",
+      "wordCount": "1627",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/llm-context-window.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/llm-context-window.html"},
+      "articleBody": "LLM Context Window Management Introduction Context window size has grown from 2K tokens in early GPT models to 200K tokens in GPT-4, 200K in Claude 3, and even 1 million tokens in Gemini 1.5 Pro. Despite this growth, effective context management remains critical \u2014 models attend less effectively to information in the middle of long contexts, token costs scale with context length, and response latency increases. This guide covers strategies for managing context windows in production. The \"Lost in the Middle\" Problem Research consistently shows that LLMs perform best when relevant information appears at the beginning or end of the context window. Information in the middle is more likely to be ignored or incorrectly processed. **Performance by position (approximate):** * Beginning (first 20%): Best recall, 90%+ accuracy * Middle (20-80%): Worst recall, 60-70% accuracy * End (last 20%): Good recall, 85%+ accuracy This has direct implications for RAG systems: placing the most relevant documents at the beginning and end of the context improves answer quality even if less relevant documents are included in the middle. Context Budgeting Treat context like a budget. Allocate tokens deliberately: Total context: 100K tokens (example) - System prompt: 2K tokens (2%) - Conversation history: 10K tokens (10%) - Retrieved documents: 80K tokens (80%) - Current query + formatting: 8K tokens (8%) For each allocation, ask: * Does every token in the system prompt need to be there? * Can conversation history be summarized instead of included verbatim? * Are all retrieved documents equally relevant? * Can the query be compressed? Strategies for Long Conversations Sliding Window Keep only the most recent N turns of conversation: def get_conversation_context(conversation, max_turns=10): \"\"\"Keep only the most recent max_turns of conversation.\"\"\" trimmed = conversation[-max_turns:] # Include a summary of earlier turns if needed if len(conversation) > max_turns: summary = summarize_conversation(conversation[:-max_turns]) trimmed = [{\"role\": \"system\", \"content\": f\"Earlier summary: {summary}\"}] + trimmed return trimmed Conversation Summarization Periodically summarize the conversation and replace older messages: def summarize_and_trim(messages, summary_threshold=20): if len(messages) return messages to_summarize = messages[:len(messages) - summary_threshold] summary_prompt = \"Summarize the key points from this conversation, preserving any critical information the user has provided:\" summary = call_llm(summary_prompt, to_summarize) remaining = messages[-summary_threshold:] return [{\"role\": \"system\", \"content\": f\"Conversation summary: {summary}\"}] + remaining Hierarchical Summarization For very long conversations, maintain a hierarchy of summaries: Level 0: Full conversation (raw messages) Level 1: Hourly summaries Level 2: Daily summaries Level 3: Conversation summary (per session) When context is full, replace Level 0 messages with Level 1 summaries, then Level 2, etc. RAG Context Management Document Ranking for Context When multiple documents are retrieved but context is limited: * Retrieve many documents (high recall) 2\\. Rank by relevance using a cross-encoder 3\\. Fill context window starting with the most relevant documents 4\\. Place the top document at the END of the context (proven best position) 5\\. Place the second-best document at the BEGINNING 6\\. Fill the middle with remaining documents Chunk-Level Re-Ranking Instead of ranking entire documents, rank individual chunks. A single relevant paragraph from a marginal document may be more useful than the entire top document: def fill_context(chunks, max_tokens): \"\"\"Select chunks to fill the context window.\"\"\" ranked = cross_encoder_rank(chunks, query) selected = [] token_count = 0 # Always include the top chunk top = ranked[0] if token_count + len(top) selected.append(top) token_count += len(top) # Fill from both ends inward for chunk in ranked[1:]: if token_count + len(chunk) selected.append(chunk) token_count += len(chunk) else: break # Reorder: best chunk last, second best first, rest in middle return reorder_for_positioning(selected) Long Document Processing Map-Reduce for Very Long Documents Split the document, process each section independently, then combine: def process_long_document(document, chunk_size=4000): chunks = split_into_chunks(document, chunk_size) summaries = [] for chunk in chunks: summary = call_llm(\"Summarize this section:\", chunk) summaries.append(summary) final_summary = call_llm( \"Combine these section summaries into a coherent overview:\", \"\\n\\n\".join(summaries) ) return final_summary Iterative Refinement For analysis of long documents, iterate with targeted queries: * Generate an initial summary 2\\. Query model for what's missing or unclear 3\\. Retrieve specific sections to fill gaps 4\\. Generate refined analysis Monitoring Context Usage Track these metrics per request: * **Total tokens used** vs. model maximum * **Effective context ratio**: useful tokens / total tokens * **Position of relevant information**: where in the context the key data appeared * **Truncation events**: how often context is being cut off Conclusion Effective context management is essential for building reliable LLM applications, regardless of context window size. Prioritize important information, use hierarchical summarization for long conversations, rank documents carefully in RAG systems, and monitor context usage in production. The models with million-token windows are impressive, but they work best when you treat their attention with respect rather than as unlimited storage."
     }
     </script>
     <script type="application/ld+json">
@@ -73,232 +74,356 @@
         <span class="tag-cat">Machine Learning</span></div>
       <h1 class="article-title">LLM Context Window Management</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Introduction</h2>
+      <div class="article-body"><h1>LLM Context Window Management</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Context window size has grown from 2K tokens in early GPT models to 200K tokens in GPT-4, 200K in Claude 3, and even 1 million tokens in Gemini 1.5 Pro. Despite this growth, effective context management remains critical — models attend less effectively to information in the middle of long contexts, token costs scale with context length, and response latency increases. This guide covers strategies for managing context windows in production.</p>
 <br>
-<h2> The "Lost in the Middle" Problem</h2>
+<br>
+<br>
+<br>
+<h2>  The "Lost in the Middle" Problem</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Research consistently shows that LLMs perform best when relevant information appears at the beginning or end of the context window. Information in the middle is more likely to be ignored or incorrectly processed.</p>
 <br>
+<br>
+<br>
+<br>
 <p>**Performance by position (approximate):**</p>
-<li>Beginning (first 20%): Best recall, 90%+ accuracy</li>
-<li>Middle (20-80%): Worst recall, 60-70% accuracy  </li>
-<li>End (last 20%): Good recall, 85%+ accuracy</li>
+<br>
+<p>* Beginning (first 20%): Best recall, 90%+ accuracy</p>
+<p>* Middle (20-80%): Worst recall, 60-70% accuracy </p>
+<p>* End (last 20%): Good recall, 85%+ accuracy</p>
+<br>
+<br>
 <br>
 <p>This has direct implications for RAG systems: placing the most relevant documents at the beginning and end of the context improves answer quality even if less relevant documents are included in the middle.</p>
 <br>
-<h2> Context Budgeting</h2>
+<br>
+<br>
+<br>
+<h2>  Context Budgeting</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Treat context like a budget. Allocate tokens deliberately:</p>
 <br>
-<pre><code>
-Total context: 100K tokens (example)
-
-- System prompt: 2K tokens (2%)
-
-- Conversation history: 10K tokens (10%)
-
-- Retrieved documents: 80K tokens (80%)
-
-- Current query + formatting: 8K tokens (8%)
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    Total context: 100K tokens (example)</p>
+<br>
+<p>    - System prompt: 2K tokens (2%)</p>
+<br>
+<p>    - Conversation history: 10K tokens (10%)</p>
+<br>
+<p>    - Retrieved documents: 80K tokens (80%)</p>
+<br>
+<p>    - Current query + formatting: 8K tokens (8%)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>For each allocation, ask:</p>
 <br>
-<li>Does every token in the system prompt need to be there?</li>
-<li>Can conversation history be summarized instead of included verbatim?</li>
-<li>Are all retrieved documents equally relevant?</li>
-<li>Can the query be compressed?</li>
 <br>
-<h2> Strategies for Long Conversations</h2>
+<br>
+<p>* Does every token in the system prompt need to be there?</p>
+<p>* Can conversation history be summarized instead of included verbatim?</p>
+<p>* Are all retrieved documents equally relevant?</p>
+<p>* Can the query be compressed?</p>
+<br>
+<br>
+<br>
+<h2>  Strategies for Long Conversations</h2>
+<br>
+<br>
+<br>
 <br>
 <h3>Sliding Window</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Keep only the most recent N turns of conversation:</p>
 <br>
-<pre><code>
-def get_conversation_context(conversation, max_turns=10):
-
-    &quot;&quot;&quot;Keep only the most recent max_turns of conversation.&quot;&quot;&quot;
-
-    trimmed = conversation[-max_turns:]
-
-    # Include a summary of earlier turns if needed
-
-    if len(conversation) &gt; max_turns:
-
-        summary = summarize_conversation(conversation[:-max_turns])
-
-        trimmed = [{&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: f&quot;Earlier summary: {summary}&quot;}] + trimmed
-
-    return trimmed
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    def get_conversation_context(conversation, max_turns=10):</p>
+<br>
+<p>        """Keep only the most recent max_turns of conversation."""</p>
+<br>
+<p>        trimmed = conversation[-max_turns:]</p>
+<br>
+<p>        # Include a summary of earlier turns if needed</p>
+<br>
+<p>        if len(conversation) > max_turns:</p>
+<br>
+<p>            summary = summarize_conversation(conversation[:-max_turns])</p>
+<br>
+<p>            trimmed = [{"role": "system", "content": f"Earlier summary: {summary}"}] + trimmed</p>
+<br>
+<p>        return trimmed</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Conversation Summarization</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Periodically summarize the conversation and replace older messages:</p>
 <br>
-<pre><code>
-def summarize_and_trim(messages, summary_threshold=20):
-
-    if len(messages) &lt;= summary_threshold:
-
-        return messages
-
-
-
-    to_summarize = messages[:len(messages) - summary_threshold]
-
-    summary_prompt = &quot;Summarize the key points from this conversation, preserving any critical information the user has provided:&quot;
-
-    summary = call_llm(summary_prompt, to_summarize)
-
-
-
-    remaining = messages[-summary_threshold:]
-
-    return [{&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: f&quot;Conversation summary: {summary}&quot;}] + remaining
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    def summarize_and_trim(messages, summary_threshold=20):</p>
+<br>
+<p>        if len(messages) <= summary_threshold:</p>
+<br>
+<p>            return messages</p>
+<br>
+<br>
+<br>
+<p>        to_summarize = messages[:len(messages) - summary_threshold]</p>
+<br>
+<p>        summary_prompt = "Summarize the key points from this conversation, preserving any critical information the user has provided:"</p>
+<br>
+<p>        summary = call_llm(summary_prompt, to_summarize)</p>
+<br>
+<br>
+<br>
+<p>        remaining = messages[-summary_threshold:]</p>
+<br>
+<p>        return [{"role": "system", "content": f"Conversation summary: {summary}"}] + remaining</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Hierarchical Summarization</h3>
 <br>
+<br>
+<br>
+<br>
 <p>For very long conversations, maintain a hierarchy of summaries:</p>
 <br>
-<pre><code>
-Level 0: Full conversation (raw messages)
-
-Level 1: Hourly summaries
-
-Level 2: Daily summaries
-
-Level 3: Conversation summary (per session)
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    Level 0: Full conversation (raw messages)</p>
+<br>
+<p>    Level 1: Hourly summaries</p>
+<br>
+<p>    Level 2: Daily summaries</p>
+<br>
+<p>    Level 3: Conversation summary (per session)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>When context is full, replace Level 0 messages with Level 1 summaries, then Level 2, etc.</p>
 <br>
-<h2> RAG Context Management</h2>
+<br>
+<br>
+<br>
+<h2>  RAG Context Management</h2>
+<br>
+<br>
+<br>
 <br>
 <h3>Document Ranking for Context</h3>
 <br>
+<br>
+<br>
+<br>
 <p>When multiple documents are retrieved but context is limited:</p>
 <br>
-<li>Retrieve many documents (high recall)</li>
-<p>2. Rank by relevance using a cross-encoder</p>
-<p>3. Fill context window starting with the most relevant documents</p>
-<p>4. Place the top document at the END of the context (proven best position)</p>
-<p>5. Place the second-best document at the BEGINNING</p>
-<p>6. Fill the middle with remaining documents</p>
+<br>
+<br>
+<p>* Retrieve many documents (high recall)</p>
+<br>
+<p>2\. Rank by relevance using a cross-encoder</p>
+<br>
+<p>3\. Fill context window starting with the most relevant documents</p>
+<br>
+<p>4\. Place the top document at the END of the context (proven best position)</p>
+<br>
+<p>5\. Place the second-best document at the BEGINNING</p>
+<br>
+<p>6\. Fill the middle with remaining documents</p>
+<br>
+<br>
+<br>
 <br>
 <h3>Chunk-Level Re-Ranking</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Instead of ranking entire documents, rank individual chunks. A single relevant paragraph from a marginal document may be more useful than the entire top document:</p>
 <br>
-<pre><code>
-def fill_context(chunks, max_tokens):
-
-    &quot;&quot;&quot;Select chunks to fill the context window.&quot;&quot;&quot;
-
-    ranked = cross_encoder_rank(chunks, query)
-
-    selected = []
-
-    token_count = 0
-
-
-
-    # Always include the top chunk
-
-    top = ranked[0]
-
-    if token_count + len(top) &lt;= max_tokens:
-
-        selected.append(top)
-
-        token_count += len(top)
-
-
-
-    # Fill from both ends inward
-
-    for chunk in ranked[1:]:
-
-        if token_count + len(chunk) &lt;= max_tokens:
-
-            selected.append(chunk)
-
-            token_count += len(chunk)
-
-        else:
-
-            break
-
-
-
-    # Reorder: best chunk last, second best first, rest in middle
-
-    return reorder_for_positioning(selected)
-
-</code></pre>
 <br>
-<h2> Long Document Processing</h2>
+<br>
+<br>
+<br>
+<p>    def fill_context(chunks, max_tokens):</p>
+<br>
+<p>        """Select chunks to fill the context window."""</p>
+<br>
+<p>        ranked = cross_encoder_rank(chunks, query)</p>
+<br>
+<p>        selected = []</p>
+<br>
+<p>        token_count = 0</p>
+<br>
+<br>
+<br>
+<p>        # Always include the top chunk</p>
+<br>
+<p>        top = ranked[0]</p>
+<br>
+<p>        if token_count + len(top) <= max_tokens:</p>
+<br>
+<p>            selected.append(top)</p>
+<br>
+<p>            token_count += len(top)</p>
+<br>
+<br>
+<br>
+<p>        # Fill from both ends inward</p>
+<br>
+<p>        for chunk in ranked[1:]:</p>
+<br>
+<p>            if token_count + len(chunk) <= max_tokens:</p>
+<br>
+<p>                selected.append(chunk)</p>
+<br>
+<p>                token_count += len(chunk)</p>
+<br>
+<p>            else:</p>
+<br>
+<p>                break</p>
+<br>
+<br>
+<br>
+<p>        # Reorder: best chunk last, second best first, rest in middle</p>
+<br>
+<p>        return reorder_for_positioning(selected)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Long Document Processing</h2>
+<br>
+<br>
+<br>
 <br>
 <h3>Map-Reduce for Very Long Documents</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Split the document, process each section independently, then combine:</p>
 <br>
-<pre><code>
-def process_long_document(document, chunk_size=4000):
-
-    chunks = split_into_chunks(document, chunk_size)
-
-    summaries = []
-
-
-
-    for chunk in chunks:
-
-        summary = call_llm(&quot;Summarize this section:&quot;, chunk)
-
-        summaries.append(summary)
-
-
-
-    final_summary = call_llm(
-
-        &quot;Combine these section summaries into a coherent overview:&quot;,
-
-        &quot;\n\n&quot;.join(summaries)
-
-    )
-
-    return final_summary
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    def process_long_document(document, chunk_size=4000):</p>
+<br>
+<p>        chunks = split_into_chunks(document, chunk_size)</p>
+<br>
+<p>        summaries = []</p>
+<br>
+<br>
+<br>
+<p>        for chunk in chunks:</p>
+<br>
+<p>            summary = call_llm("Summarize this section:", chunk)</p>
+<br>
+<p>            summaries.append(summary)</p>
+<br>
+<br>
+<br>
+<p>        final_summary = call_llm(</p>
+<br>
+<p>            "Combine these section summaries into a coherent overview:",</p>
+<br>
+<p>            "\n\n".join(summaries)</p>
+<br>
+<p>        )</p>
+<br>
+<p>        return final_summary</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Iterative Refinement</h3>
 <br>
+<br>
+<br>
+<br>
 <p>For analysis of long documents, iterate with targeted queries:</p>
 <br>
-<li>Generate an initial summary</li>
-<p>2. Query model for what's missing or unclear</p>
-<p>3. Retrieve specific sections to fill gaps</p>
-<p>4. Generate refined analysis</p>
 <br>
-<h2> Monitoring Context Usage</h2>
+<br>
+<p>* Generate an initial summary</p>
+<br>
+<p>2\. Query model for what's missing or unclear</p>
+<br>
+<p>3\. Retrieve specific sections to fill gaps</p>
+<br>
+<p>4\. Generate refined analysis</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Monitoring Context Usage</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Track these metrics per request:</p>
 <br>
-<li>**Total tokens used** vs. model maximum</li>
-<li>**Effective context ratio**: useful tokens / total tokens</li>
-<li>**Position of relevant information**: where in the context the key data appeared</li>
-<li>**Truncation events**: how often context is being cut off</li>
 <br>
-<h2> Conclusion</h2>
+<br>
+<p>* **Total tokens used** vs. model maximum</p>
+<p>* **Effective context ratio**: useful tokens / total tokens</p>
+<p>* **Position of relevant information**: where in the context the key data appeared</p>
+<p>* **Truncation events**: how often context is being cut off</p>
+<br>
+<br>
+<br>
+<h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Effective context management is essential for building reliable LLM applications, regardless of context window size. Prioritize important information, use hierarchical summarization for long conversations, rank documents carefully in RAG systems, and monitor context usage in production. The models with million-token windows are impressive, but they work best when you treat their attention with respect rather than as unlimited storage.</p></div>
     </article>

@@ -8,45 +8,31 @@ url: https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html
 
 # 如何把你的专业知识变成付费内容：从 0 到月入 5000
 
-你可能不知道自己会的东西值多少钱——在这个知识付费时代，任何专业技能都有变现潜力。这篇文章讲清楚三个主流路径。
-
-## 路径一：付费专栏/Newsletter
+你可能不知道自己会的东西值多少钱——在这个知识付费时代，任何专业技能都有变现潜力。这篇文章讲清楚三个主流路径。 路径一：付费专栏/Newsletter
 
   * **平台** — 小报童（国内）、Substack/ConvertKit（海外）
   * **适合** — 有持续输出能力、对某个领域有深度见解的人
   * **定价** — 月付 ¥20-50 或年付 ¥199-499
   * **关键** — 前 100 个付费读者最难，但过了这个坎后口碑传播会加速
 
-
-
-## 路径二：在线课程
+路径二：在线课程
 
   * **平台** — 腾讯课堂/网易云课堂（国内）、Udemy/Teachable（海外）
   * **适合** — 有完整的知识体系、能做结构化输出的人
   * **定价** — ¥99-499 一门课，Udemy 上 $9.99-199
   * **关键** — 先录一个免费迷你课验证需求，再投入时间做完整课程
 
-
-
-## 路径三：付费社群
+路径三：付费社群
 
   * **平台** — 知识星球（国内）、Discord + Stripe（海外）
   * **适合** — 喜欢互动、能持续提供价值的人
   * **定价** — 年费 ¥199-999
   * **关键** — 社群需要持续运营，不是建了就完事。设定清晰的交付物（如每周分享一个案例）
 
-
-
-## 从哪个开始
-
-先做付费专栏——门槛最低，一篇好文章就是一个付费产品。验证市场后再考虑投入更大的课程和社群。关键是**开始输出** ，大部分人都困在"准备"阶段永远没开始。
-
-### 📖 相关推荐
+从哪个开始 先做付费专栏——门槛最低，一篇好文章就是一个付费产品。验证市场后再考虑投入更大的课程和社群。关键是**开始输出** ，大部分人都困在"准备"阶段永远没开始。 📖 相关推荐
 
   * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
   * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
   * [如何通过写技术博客赚钱：从 0 到月入 1000 美元](<https://dingjiu1989-hue.github.io/sidehustle/tech-blog-monetization.html>)
-
-
 
 **See also:** [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</sidehustle/affiliate-marketing.html>), [跨境电商入门指南：从 0 到第一单的全流程](</sidehustle/cross-border-ecommerce.html>), [独立开发者出海指南：从产品 Idea 到稳定变现](</sidehustle/indie-dev-guide.html>).

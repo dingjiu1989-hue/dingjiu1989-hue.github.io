@@ -6,254 +6,1086 @@ board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/kubernetes-services-security.html
 ---
 
+# Kubernetes Security Best Practices
+
+# Kubernetes Security Best Practices
+
+  
+
+
 Kubernetes security is complex because the attack surface spans multiple layers: containers, clusters, networks, and cloud infrastructure. This guide covers the most impactful security practices for production Kubernetes deployments.
 
-## Pod Security Standards
+  
+  
+  
+  
+
+
+##  Pod Security Standards
+
+  
+  
+  
+  
+
 
 Kubernetes deprecated PodSecurityPolicies in favor of Pod Security Admission (PSA), which enforces three security levels:
 
-- **Privileged**: No restrictions (for system-level pods).
-- **Baseline**: Prevents known privilege escalations.
-- **Restricted**: Strong pod hardening.
+  
+  
+  
+
+
+* **Privileged**: No restrictions (for system-level pods).
+
+* **Baseline**: Prevents known privilege escalations.
+
+* **Restricted**: Strong pod hardening.
+
+  
+  
+  
+
 
 Apply PSA via namespace labels:
 
-```yaml
+  
+  
+  
+  
+  
+
+
 apiVersion: v1
+
+  
+
+
 kind: Namespace
+
+  
+
+
 metadata:
-  name: production
-  labels:
-    pod-security.kubernetes.io/enforce: restricted
-    pod-security.kubernetes.io/enforce-version: latest
-    pod-security.kubernetes.io/audit: restricted
-```
+
+  
+
+
+name: production
+
+  
+
+
+labels:
+
+  
+
+
+pod-security.kubernetes.io/enforce: restricted
+
+  
+
+
+pod-security.kubernetes.io/enforce-version: latest
+
+  
+
+
+pod-security.kubernetes.io/audit: restricted
+
+  
+  
+  
+  
+  
+  
+
 
 The `restricted` level enforces that containers cannot run as root, cannot use host networking, and cannot mount arbitrary host paths.
 
-## Running Containers as Non-Root
+  
+  
+  
+  
+
+
+##  Running Containers as Non-Root
+
+  
+  
+  
+  
+
 
 Never run containers as root in production:
 
-```yaml
+  
+  
+  
+  
+  
+
+
 apiVersion: v1
+
+  
+
+
 kind: Pod
+
+  
+
+
 metadata:
-  name: secure-app
+
+  
+
+
+name: secure-app
+
+  
+
+
 spec:
-  securityContext:
-    runAsNonRoot: true
-    runAsUser: 1000
-    runAsGroup: 3000
-    fsGroup: 2000
-    seccompProfile:
-      type: RuntimeDefault
-  containers:
-  - name: app
-    image: myapp:1.0.0
-    securityContext:
-      allowPrivilegeEscalation: false
-      capabilities:
-        drop: ["ALL"]
-      readOnlyRootFilesystem: true
-```
+
+  
+
+
+securityContext:
+
+  
+
+
+runAsNonRoot: true
+
+  
+
+
+runAsUser: 1000
+
+  
+
+
+runAsGroup: 3000
+
+  
+
+
+fsGroup: 2000
+
+  
+
+
+seccompProfile:
+
+  
+
+
+type: RuntimeDefault
+
+  
+
+
+containers:
+
+  
+
+
+\- name: app
+
+  
+
+
+image: myapp:1.0.0
+
+  
+
+
+securityContext:
+
+  
+
+
+allowPrivilegeEscalation: false
+
+  
+
+
+capabilities:
+
+  
+
+
+drop: ["ALL"]
+
+  
+
+
+readOnlyRootFilesystem: true
+
+  
+  
+  
+  
+  
+  
+
 
 Use `seccompProfile: RuntimeDefault` to apply the container runtime's default seccomp profile. Drop all capabilities and only add back what is absolutely necessary.
 
-## Network Policies
+  
+  
+  
+  
+
+
+##  Network Policies
+
+  
+  
+  
+  
+
 
 By default, all pods can communicate with each other. Network policies restrict this:
 
-```yaml
+  
+  
+  
+  
+  
+
+
 apiVersion: networking.k8s.io/v1
+
+  
+
+
 kind: NetworkPolicy
+
+  
+
+
 metadata:
-  name: api-network-policy
-  namespace: production
+
+  
+
+
+name: api-network-policy
+
+  
+
+
+namespace: production
+
+  
+
+
 spec:
-  podSelector:
-    matchLabels:
-      app: api
-  policyTypes:
-  - Ingress
-  - Egress
-  ingress:
-  - from:
-    - podSelector:
-        matchLabels:
-          app: frontend
-    ports:
-    - port: 3000
-  egress:
-  - to:
-    - podSelector:
-        matchLabels:
-          app: database
-    ports:
-    - port: 5432
-```
+
+  
+
+
+podSelector:
+
+  
+
+
+matchLabels:
+
+  
+
+
+app: api
+
+  
+
+
+policyTypes:
+
+  
+
+
+\- Ingress
+
+  
+
+
+\- Egress
+
+  
+
+
+ingress:
+
+  
+
+
+\- from:
+
+  
+
+
+\- podSelector:
+
+  
+
+
+matchLabels:
+
+  
+
+
+app: frontend
+
+  
+
+
+ports:
+
+  
+
+
+\- port: 3000
+
+  
+
+
+egress:
+
+  
+
+
+\- to:
+
+  
+
+
+\- podSelector:
+
+  
+
+
+matchLabels:
+
+  
+
+
+app: database
+
+  
+
+
+ports:
+
+  
+
+
+\- port: 5432
+
+  
+  
+  
+  
+  
+  
+
 
 Start with a deny-all policy and add allow rules incrementally. Use namespace isolation for multi-tenant clusters.
 
-## Role-Based Access Control (RBAC)
+  
+  
+  
+  
+
+
+##  Role-Based Access Control (RBAC)
+
+  
+  
+  
+  
+
 
 Apply the principle of least privilege to all service accounts:
 
-```yaml
+  
+  
+  
+  
+  
+
+
 apiVersion: v1
+
+  
+
+
 kind: ServiceAccount
+
+  
+
+
 metadata:
-  name: app-sa
-  namespace: production
----
+
+  
+
+
+name: app-sa
+
+  
+
+
+namespace: production
+
+  
+
+
+\---
+
+  
+
+
 apiVersion: rbac.authorization.k8s.io/v1
+
+  
+
+
 kind: Role
+
+  
+
+
 metadata:
-  namespace: production
-  name: app-role
+
+  
+
+
+namespace: production
+
+  
+
+
+name: app-role
+
+  
+
+
 rules:
-- apiGroups: [""]
-  resources: ["pods"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: [""]
-  resources: ["configmaps"]
-  verbs: ["get"]
----
+
+  
+
+
+\- apiGroups: [""]
+
+  
+
+
+resources: ["pods"]
+
+  
+
+
+verbs: ["get", "list", "watch"]
+
+  
+
+
+\- apiGroups: [""]
+
+  
+
+
+resources: ["configmaps"]
+
+  
+
+
+verbs: ["get"]
+
+  
+
+
+\---
+
+  
+
+
 apiVersion: rbac.authorization.k8s.io/v1
+
+  
+
+
 kind: RoleBinding
+
+  
+
+
 metadata:
-  namespace: production
-  name: app-role-binding
+
+  
+
+
+namespace: production
+
+  
+
+
+name: app-role-binding
+
+  
+
+
 subjects:
-- kind: ServiceAccount
-  name: app-sa
-  namespace: production
+
+  
+
+
+\- kind: ServiceAccount
+
+  
+
+
+name: app-sa
+
+  
+
+
+namespace: production
+
+  
+
+
 roleRef:
-  kind: Role
-  name: app-role
-  apiGroup: rbac.authorization.k8s.io
-```
+
+  
+
+
+kind: Role
+
+  
+
+
+name: app-role
+
+  
+
+
+apiGroup: rbac.authorization.k8s.io
+
+  
+  
+  
+  
+  
+  
+
 
 Service accounts should only have permissions required for their specific function. Use `Role` for namespace-scoped access and `ClusterRole` only for cluster-wide resources.
 
-## Secrets Management
+  
+  
+  
+  
+
+
+##  Secrets Management
+
+  
+  
+  
+  
+
 
 Kubernetes Secrets are base64-encoded, not encrypted by default. Enable encryption at rest:
 
-```bash
+  
+  
+  
+  
+  
+
+
 # Create encryption config
-cat > encryption-config.yaml <<EOF
+
+  
+
+
+cat > encryption-config.yaml <   
+
+
 apiVersion: apiserver.config.k8s.io/v1
+
+  
+
+
 kind: EncryptionConfiguration
+
+  
+
+
 resources:
-  - resources:
-      - secrets
-    providers:
-      - kms:
-          name: myKMS
-          endpoint: unix:///var/run/kmsplugin/socket.sock
-      - aescbc:
-          keys:
-            - name: key1
-              secret: $(openssl rand -base64 32)
+
+  
+
+
+\- resources:
+
+  
+
+
+\- secrets
+
+  
+
+
+providers:
+
+  
+
+
+\- kms:
+
+  
+
+
+name: myKMS
+
+  
+
+
+endpoint: unix:///var/run/kmsplugin/socket.sock
+
+  
+
+
+\- aescbc:
+
+  
+
+
+keys:
+
+  
+
+
+\- name: key1
+
+  
+
+
+secret: $(openssl rand -base64 32)
+
+  
+
+
 EOF
-```
+
+  
+  
+  
+  
+  
+  
+
 
 For production, use external secrets management:
 
-```yaml
+  
+  
+  
+  
+  
+
+
 apiVersion: external-secrets.io/v1beta1
+
+  
+
+
 kind: ExternalSecret
+
+  
+
+
 metadata:
-  name: db-credentials
+
+  
+
+
+name: db-credentials
+
+  
+
+
 spec:
-  secretStoreRef:
-    name: aws-secret-store
-    kind: SecretStore
-  target:
-    name: db-credentials
-  data:
-  - secretKey: password
-    remoteRef:
-      key: production/db/password
-```
+
+  
+
+
+secretStoreRef:
+
+  
+
+
+name: aws-secret-store
+
+  
+
+
+kind: SecretStore
+
+  
+
+
+target:
+
+  
+
+
+name: db-credentials
+
+  
+
+
+data:
+
+  
+
+
+\- secretKey: password
+
+  
+
+
+remoteRef:
+
+  
+
+
+key: production/db/password
+
+  
+  
+  
+  
+  
+  
+
 
 External Secrets Operator syncs secrets from AWS Secrets Manager, GCP Secret Manager, or HashiCorp Vault into Kubernetes Secrets.
 
-## Image Security
+  
+  
+  
+  
+
+
+##  Image Security
+
+  
+  
+  
+  
+
 
 Only run images from trusted registries:
 
-```yaml
+  
+  
+  
+  
+  
+
+
 apiVersion: v1
+
+  
+
+
 kind: Pod
+
+  
+
+
 spec:
-  containers:
-  - name: app
-    image: registry.example.com/myapp:1.0.0
-    imagePullPolicy: Always
-```
+
+  
+
+
+containers:
+
+  
+
+
+\- name: app
+
+  
+
+
+image: registry.example.com/myapp:1.0.0
+
+  
+
+
+imagePullPolicy: Always
+
+  
+  
+  
+  
+  
+  
+
 
 Use image scanning in CI/CD:
 
-```bash
+  
+  
+  
+  
+  
+
+
 # Scan container images before deployment
+
+  
+
+
 trivy image registry.example.com/myapp:1.0.0
-```
+
+  
+  
+  
+  
+  
+  
+
 
 Configure admission controllers to reject images with critical vulnerabilities.
 
-## Resource Limits
+  
+  
+  
+  
+
+
+##  Resource Limits
+
+  
+  
+  
+  
+
 
 Set resource limits on every container to prevent resource starvation:
 
-```yaml
+  
+  
+  
+  
+  
+
+
 resources:
-  requests:
-    memory: "256Mi"
-    cpu: "250m"
-  limits:
-    memory: "512Mi"
-    cpu: "500m"
-```
+
+  
+
+
+requests:
+
+  
+
+
+memory: "256Mi"
+
+  
+
+
+cpu: "250m"
+
+  
+
+
+limits:
+
+  
+
+
+memory: "512Mi"
+
+  
+
+
+cpu: "500m"
+
+  
+  
+  
+  
+  
+  
+
 
 CPU limits throttle excessive usage, while memory limits terminate containers that exceed their allocation.
 
-## Runtime Security
+  
+  
+  
+  
+
+
+##  Runtime Security
+
+  
+  
+  
+  
+
 
 Use Falco for runtime threat detection:
 
-```yaml
+  
+  
+  
+  
+  
+
+
 helm install falco falcosecurity/falco \
-  --set falco.driver.kind=modern_bpf
-```
+
+  
+
+
+\--set falco.driver.kind=modern_bpf
+
+  
+  
+  
+  
+  
+  
+
 
 Falco detects anomalous behavior: shell in a container, unexpected file system access, suspicious network connections. It can trigger alerts or kill offending pods.
 
-## Audit Logging
+  
+  
+  
+  
+
+
+##  Audit Logging
+
+  
+  
+  
+  
+
 
 Enable Kubernetes audit logging:
 
-```yaml
+  
+  
+  
+  
+  
+
+
 # kube-apiserver configuration
+
+  
+
+
 apiServer:
-  audit:
-    enabled: true
-    logPath: /var/log/kubernetes/audit.log
-    policy:
-      rules:
-        - level: RequestResponse
-          resources:
-            - group: ""
-              resources: ["secrets"]
-        - level: Metadata
-          resources:
-            - group: ""
-              resources: ["pods", "deployments"]
-```
+
+  
+
+
+audit:
+
+  
+
+
+enabled: true
+
+  
+
+
+logPath: /var/log/kubernetes/audit.log
+
+  
+
+
+policy:
+
+  
+
+
+rules:
+
+  
+
+
+\- level: RequestResponse
+
+  
+
+
+resources:
+
+  
+
+
+\- group: ""
+
+  
+
+
+resources: ["secrets"]
+
+  
+
+
+\- level: Metadata
+
+  
+
+
+resources:
+
+  
+
+
+\- group: ""
+
+  
+
+
+resources: ["pods", "deployments"]
+
+  
+  
+  
+  
+  
+  
+
 
 Ship audit logs to a SIEM for analysis. Monitor for unauthorized API access attempts.
 
-## Summary
+  
+  
+  
+  
+
+
+##  Summary
+
+  
+  
+  
+  
+
 
 Kubernetes security requires defense in depth: Pod Security Admission for pod hardening, network policies for segmentation, RBAC for access control, external secrets for sensitive data, and runtime security for threat detection. Start with pod security -- run containers as non-root, drop capabilities, and enable seccomp. Add network policies for isolation. Finally, implement RBAC and secrets management. Most Kubernetes compromises exploit misconfigurations rather than software vulnerabilities -- hardening these configurations is the highest-impact security investment.

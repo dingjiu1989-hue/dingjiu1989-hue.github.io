@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="llm-caching-deep">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies">
+    <meta property="og:description" content="Deep dive into LLM caching strategies: semantic similarity caching, exact match caching, TTL-based expiration, and cache invalidation patterns for cost reductio">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/llm-caching-deep.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies">
+    <meta name="twitter:description" content="Deep dive into LLM caching strategies: semantic similarity caching, exact match caching, TTL-based expiration, and cache invalidation patterns for cost reductio">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies — SourceHub</title>
+    <meta name="description" content="Deep dive into LLM caching strategies: semantic similarity caching, exact match caching, TTL-based expiration, and cache invalidation patterns for cost reductio">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/llm-caching-deep.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/ai/llm-caching-deep.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies",
+      "description": "Deep dive into LLM caching strategies: semantic similarity caching, exact match caching, TTL-based expiration, and cache invalidation patterns for cost reductio",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "2000",
+      "keywords": "AI, Machine Learning, LLM",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/llm-caching-deep.html"},
+      "articleBody": "LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies Introduction LLM API calls are expensive, both in cost and latency. Caching previously generated responses can reduce costs by 20-80% depending on the application. Unlike traditional HTTP caching where exact URL matching suffices, LLM caching must handle semantically equivalent but textually different queries. This article covers caching strategies from simple exact match to sophisticated semantic caching. Exact Match Cache The simplest cache: identical inputs produce identical outputs: import hashlib import json from functools import lru_cache class ExactMatchCache: def __init__(self, ttl_seconds: int = 3600): self.cache = {} self.ttl = ttl_seconds def _make_key(self, messages: list[dict], model: str, params: dict) -> str: canonical = json.dumps({ \"messages\": messages, \"model\": model, \"temperature\": params.get(\"temperature\", 0), \"max_tokens\": params.get(\"max_tokens\"), }, sort_keys=True) return hashlib.sha256(canonical.encode()).hexdigest() def get(self, messages: list[dict], model: str, params: dict) -> str | None: key = self._make_key(messages, model, params) if key in self.cache: entry = self.cache[key] if time.time() - entry[\"timestamp\"] return entry[\"response\"] else: del self.cache[key] return None def set(self, messages: list[dict], model: str, params: dict, response: str): key = self._make_key(messages, model, params) self.cache[key] = {\"response\": response, \"timestamp\": time.time()} Exact match works well when identical questions recur: FAQs, repeated classification tasks, or template-based prompts where only parameters change. Semantic Cache Semantic caching returns cached responses for semantically equivalent questions: import numpy as np from sklearn.metrics.pairwise import cosine_similarity class SemanticCache: def __init__(self, embedding_fn, similarity_threshold: float = 0.92): self.embedding = embedding_fn self.threshold = similarity_threshold self.cache_entries: list[dict] = [] def get(self, query: str) -> str | None: query_emb = self.embedding(query) for entry in self.cache_entries: similarity = cosine_similarity([query_emb], [entry[\"embedding\"]])[0][0] if similarity >= self.threshold: entry[\"access_count\"] += 1 entry[\"last_accessed\"] = time.time() return entry[\"response\"] return None def set(self, query: str, response: str): entry = { \"query\": query, \"embedding\": self.embedding(query), \"response\": response, \"created_at\": time.time(), \"access_count\": 1, \"last_accessed\": time.time(), } self.cache_entries.append(entry) def evict_lru(self, max_entries: int = 10000): if len(self.cache_entries) > max_entries: self.cache_entries.sort(key=lambda e: e[\"last_accessed\"]) self.cache_entries = self.cache_entries[-max_entries:] The similarity threshold controls the precision-recall tradeoff. A threshold of 0.95 is safe but rarely matches. A threshold of 0.85 catches more queries but risks returning irrelevant cached responses. Test on your specific query distribution. Two-Level Cache Combine both strategies for maximum coverage: class TwoLevelLLMCache: def __init__(self, embedding_fn): self.exact = ExactMatchCache(ttl_seconds=7200) self.semantic = SemanticCache(embedding_fn, similarity_threshold=0.92) def get(self, messages: list[dict], model: str, params: dict) -> str | None: # Try exact match first (fast, no embedding computation) exact_result = self.exact.get(messages, model, params) if exact_result: return exact_result # Try semantic match for the last user message last_user_msg = self._get_last_user_message(messages) if last_user_msg: semantic_result = self.semantic.get(last_user_msg) if semantic_result: return semantic_result return None def set(self, messages: list[dict], model: str, params: dict, response: str): self.exact.set(messages, model, params, response) last_user_msg = self._get_last_user_message(messages) if last_user_msg: self.semantic.set(last_user_msg, response) TTL and Invalidation Different cache entries need different expiration policies: class TTLManager: def __init__(self): # Different TTLs for different content types self.ttl_config = { \"classification\": 86400 * 30, # 30 days (stable task) \"extraction\": 86400 * 7, # 7 days \"summarization\": 3600, # 1 hour (content changes) \"generation\": 300, # 5 minutes (creative, no cache) \"factual_qa\": 86400, # 1 day (may become stale) } def get_ttl(self, task_type: str) -> int: return self.ttl_config.get(task_type, 3600) def invalidate_by_prefix(self, prefix: str): \"\"\"Invalidate cache entries matching a prefix pattern.\"\"\" # Used when source documents are updated pass def invalidate_all(self): \"\"\"Emergency invalidation.\"\"\" pass Cache-Aware Application Design Structure your application to maximize cache hits: class CacheAwareLLMClient: def __init__(self, cache: TwoLevelLLMCache, llm_fn): self.cache = cache self.llm = llm_fn async def generate(self, task_type: str, messages: list[dict], model: str, params: dict) -> str: # Check cache cached = self.cache.get(messages, model, params) if cached: return cached # Generate fresh response response = await self.llm(messages, model, params) # Cache with appropriate TTL self.cache.set(messages, model, params, response) return response Cache Hit Rate Optimization class CacheAnalytics: def track_hit_rate(self): \"\"\"Monitor and report cache effectiveness.\"\"\" metrics = { \"exact_hits\": 0, \"semantic_hits\": 0, \"misses\": 0, } # Adjust semantic threshold based on hit quality if metrics[\"semantic_hits\"] > 0 and user_feedback_score self.semantic.threshold += 0.02 # Be more conservative Conclusion LLM caching significantly reduces costs and latency. Use exact-match caching for deterministic tasks with identical inputs. Add semantic caching with embedding similarity for paraphrased questions. Implement two-level caching with exact match first (fast) then semantic match (broader). Configure TTLs based on content stability: long TTLs for classification tasks, short TTLs for generation. Monitor cache hit rates and user satisfaction to tune similarity thresholds. A well-tuned cache typically achieves 30-60% hit rates in production."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">AI</span>
+        <span class="tag-cat">Machine Learning</span>
+        <span class="tag-cat">LLM</span></div>
+      <h1 class="article-title">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<p>LLM API calls are expensive, both in cost and latency. Caching previously generated responses can reduce costs by 20-80% depending on the application. Unlike traditional HTTP caching where exact URL matching suffices, LLM caching must handle semantically equivalent but textually different queries. This article covers caching strategies from simple exact match to sophisticated semantic caching.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Exact Match Cache</h2>
+<br>
+<br>
+<br>
+<br>
+<p>The simplest cache: identical inputs produce identical outputs:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    import hashlib</p>
+<br>
+<p>    import json</p>
+<br>
+<p>    from functools import lru_cache</p>
+<br>
+<br>
+<br>
+<p>    class ExactMatchCache:</p>
+<br>
+<p>        def __init__(self, ttl_seconds: int = 3600):</p>
+<br>
+<p>            self.cache = {}</p>
+<br>
+<p>            self.ttl = ttl_seconds</p>
+<br>
+<br>
+<br>
+<p>        def _make_key(self, messages: list[dict], model: str, params: dict) -> str:</p>
+<br>
+<p>            canonical = json.dumps({</p>
+<br>
+<p>                "messages": messages,</p>
+<br>
+<p>                "model": model,</p>
+<br>
+<p>                "temperature": params.get("temperature", 0),</p>
+<br>
+<p>                "max_tokens": params.get("max_tokens"),</p>
+<br>
+<p>            }, sort_keys=True)</p>
+<br>
+<p>            return hashlib.sha256(canonical.encode()).hexdigest()</p>
+<br>
+<br>
+<br>
+<p>        def get(self, messages: list[dict], model: str, params: dict) -> str | None:</p>
+<br>
+<p>            key = self._make_key(messages, model, params)</p>
+<br>
+<p>            if key in self.cache:</p>
+<br>
+<p>                entry = self.cache[key]</p>
+<br>
+<p>                if time.time() - entry["timestamp"] < self.ttl:</p>
+<br>
+<p>                    return entry["response"]</p>
+<br>
+<p>                else:</p>
+<br>
+<p>                    del self.cache[key]</p>
+<br>
+<p>            return None</p>
+<br>
+<br>
+<br>
+<p>        def set(self, messages: list[dict], model: str, params: dict, response: str):</p>
+<br>
+<p>            key = self._make_key(messages, model, params)</p>
+<br>
+<p>            self.cache[key] = {"response": response, "timestamp": time.time()}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Exact match works well when identical questions recur: FAQs, repeated classification tasks, or template-based prompts where only parameters change.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Semantic Cache</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Semantic caching returns cached responses for semantically equivalent questions:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    import numpy as np</p>
+<br>
+<p>    from sklearn.metrics.pairwise import cosine_similarity</p>
+<br>
+<br>
+<br>
+<p>    class SemanticCache:</p>
+<br>
+<p>        def __init__(self, embedding_fn, similarity_threshold: float = 0.92):</p>
+<br>
+<p>            self.embedding = embedding_fn</p>
+<br>
+<p>            self.threshold = similarity_threshold</p>
+<br>
+<p>            self.cache_entries: list[dict] = []</p>
+<br>
+<br>
+<br>
+<p>        def get(self, query: str) -> str | None:</p>
+<br>
+<p>            query_emb = self.embedding(query)</p>
+<br>
+<br>
+<br>
+<p>            for entry in self.cache_entries:</p>
+<br>
+<p>                similarity = cosine_similarity([query_emb], [entry["embedding"]])[0][0]</p>
+<br>
+<p>                if similarity >= self.threshold:</p>
+<br>
+<p>                    entry["access_count"] += 1</p>
+<br>
+<p>                    entry["last_accessed"] = time.time()</p>
+<br>
+<p>                    return entry["response"]</p>
+<br>
+<br>
+<br>
+<p>            return None</p>
+<br>
+<br>
+<br>
+<p>        def set(self, query: str, response: str):</p>
+<br>
+<p>            entry = {</p>
+<br>
+<p>                "query": query,</p>
+<br>
+<p>                "embedding": self.embedding(query),</p>
+<br>
+<p>                "response": response,</p>
+<br>
+<p>                "created_at": time.time(),</p>
+<br>
+<p>                "access_count": 1,</p>
+<br>
+<p>                "last_accessed": time.time(),</p>
+<br>
+<p>            }</p>
+<br>
+<p>            self.cache_entries.append(entry)</p>
+<br>
+<br>
+<br>
+<p>        def evict_lru(self, max_entries: int = 10000):</p>
+<br>
+<p>            if len(self.cache_entries) > max_entries:</p>
+<br>
+<p>                self.cache_entries.sort(key=lambda e: e["last_accessed"])</p>
+<br>
+<p>                self.cache_entries = self.cache_entries[-max_entries:]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The similarity threshold controls the precision-recall tradeoff. A threshold of 0.95 is safe but rarely matches. A threshold of 0.85 catches more queries but risks returning irrelevant cached responses. Test on your specific query distribution.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Two-Level Cache</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Combine both strategies for maximum coverage:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    class TwoLevelLLMCache:</p>
+<br>
+<p>        def __init__(self, embedding_fn):</p>
+<br>
+<p>            self.exact = ExactMatchCache(ttl_seconds=7200)</p>
+<br>
+<p>            self.semantic = SemanticCache(embedding_fn, similarity_threshold=0.92)</p>
+<br>
+<br>
+<br>
+<p>        def get(self, messages: list[dict], model: str, params: dict) -> str | None:</p>
+<br>
+<p>            # Try exact match first (fast, no embedding computation)</p>
+<br>
+<p>            exact_result = self.exact.get(messages, model, params)</p>
+<br>
+<p>            if exact_result:</p>
+<br>
+<p>                return exact_result</p>
+<br>
+<br>
+<br>
+<p>            # Try semantic match for the last user message</p>
+<br>
+<p>            last_user_msg = self._get_last_user_message(messages)</p>
+<br>
+<p>            if last_user_msg:</p>
+<br>
+<p>                semantic_result = self.semantic.get(last_user_msg)</p>
+<br>
+<p>                if semantic_result:</p>
+<br>
+<p>                    return semantic_result</p>
+<br>
+<br>
+<br>
+<p>            return None</p>
+<br>
+<br>
+<br>
+<p>        def set(self, messages: list[dict], model: str, params: dict, response: str):</p>
+<br>
+<p>            self.exact.set(messages, model, params, response)</p>
+<br>
+<br>
+<br>
+<p>            last_user_msg = self._get_last_user_message(messages)</p>
+<br>
+<p>            if last_user_msg:</p>
+<br>
+<p>                self.semantic.set(last_user_msg, response)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  TTL and Invalidation</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Different cache entries need different expiration policies:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    class TTLManager:</p>
+<br>
+<p>        def __init__(self):</p>
+<br>
+<p>            # Different TTLs for different content types</p>
+<br>
+<p>            self.ttl_config = {</p>
+<br>
+<p>                "classification": 86400 * 30,    # 30 days (stable task)</p>
+<br>
+<p>                "extraction": 86400 * 7,          # 7 days</p>
+<br>
+<p>                "summarization": 3600,             # 1 hour (content changes)</p>
+<br>
+<p>                "generation": 300,                  # 5 minutes (creative, no cache)</p>
+<br>
+<p>                "factual_qa": 86400,               # 1 day (may become stale)</p>
+<br>
+<p>            }</p>
+<br>
+<br>
+<br>
+<p>        def get_ttl(self, task_type: str) -> int:</p>
+<br>
+<p>            return self.ttl_config.get(task_type, 3600)</p>
+<br>
+<br>
+<br>
+<p>        def invalidate_by_prefix(self, prefix: str):</p>
+<br>
+<p>            """Invalidate cache entries matching a prefix pattern."""</p>
+<br>
+<p>            # Used when source documents are updated</p>
+<br>
+<p>            pass</p>
+<br>
+<br>
+<br>
+<p>        def invalidate_all(self):</p>
+<br>
+<p>            """Emergency invalidation."""</p>
+<br>
+<p>            pass</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Cache-Aware Application Design</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Structure your application to maximize cache hits:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    class CacheAwareLLMClient:</p>
+<br>
+<p>        def __init__(self, cache: TwoLevelLLMCache, llm_fn):</p>
+<br>
+<p>            self.cache = cache</p>
+<br>
+<p>            self.llm = llm_fn</p>
+<br>
+<br>
+<br>
+<p>        async def generate(self, task_type: str, messages: list[dict], model: str, params: dict) -> str:</p>
+<br>
+<p>            # Check cache</p>
+<br>
+<p>            cached = self.cache.get(messages, model, params)</p>
+<br>
+<p>            if cached:</p>
+<br>
+<p>                return cached</p>
+<br>
+<br>
+<br>
+<p>            # Generate fresh response</p>
+<br>
+<p>            response = await self.llm(messages, model, params)</p>
+<br>
+<br>
+<br>
+<p>            # Cache with appropriate TTL</p>
+<br>
+<p>            self.cache.set(messages, model, params, response)</p>
+<br>
+<p>            return response</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Cache Hit Rate Optimization</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    class CacheAnalytics:</p>
+<br>
+<p>        def track_hit_rate(self):</p>
+<br>
+<p>            """Monitor and report cache effectiveness."""</p>
+<br>
+<p>            metrics = {</p>
+<br>
+<p>                "exact_hits": 0,</p>
+<br>
+<p>                "semantic_hits": 0,</p>
+<br>
+<p>                "misses": 0,</p>
+<br>
+<p>            }</p>
+<br>
+<br>
+<br>
+<p>            # Adjust semantic threshold based on hit quality</p>
+<br>
+<p>            if metrics["semantic_hits"] > 0 and user_feedback_score < 0.8:</p>
+<br>
+<p>                self.semantic.threshold += 0.02  # Be more conservative</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Conclusion</h2>
+<br>
+<br>
+<br>
+<br>
+<p>LLM caching significantly reduces costs and latency. Use exact-match caching for deterministic tasks with identical inputs. Add semantic caching with embedding similarity for paraphrased questions. Implement two-level caching with exact match first (fast) then semantic match (broader). Configure TTLs based on content stability: long TTLs for classification tasks, short TTLs for generation. Monitor cache hit rates and user satisfaction to tune similarity thresholds. A well-tuned cache typically achieves 30-60% hit rates in production.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="architecture" data-exclude="cdn-architecture">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="CDN Architecture">
+    <meta property="og:description" content="Edge caching, origin shielding, dynamic content acceleration, and purge strategies for content delivery networks">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/cdn-architecture.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CDN Architecture">
+    <meta name="twitter:description" content="Edge caching, origin shielding, dynamic content acceleration, and purge strategies for content delivery networks">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>CDN Architecture — SourceHub</title>
+    <meta name="description" content="Edge caching, origin shielding, dynamic content acceleration, and purge strategies for content delivery networks">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/cdn-architecture.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/cdn-architecture.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "CDN Architecture",
+      "description": "Edge caching, origin shielding, dynamic content acceleration, and purge strategies for content delivery networks",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1134",
+      "keywords": "Architecture, System Design, Backend",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/cdn-architecture.html"},
+      "articleBody": "CDN Architecture Content Delivery Networks (CDNs) distribute content across geographically dispersed servers to reduce latency, offload origin infrastructure, and absorb large-scale traffic spikes. Modern CDNs have evolved from simple static asset caches into sophisticated application delivery platforms that cache dynamic content, execute edge compute, and provide security functions. Understanding CDN architecture is essential for architects designing global-scale systems. Edge caching is the foundational CDN capability. Edge servers cache responses from the origin server and serve them directly to users. Cache placement is determined by the user's geographic proximity to the edge node. The CDN's global DNS resolves the domain to the nearest edge server IP based on latency measurements. When a request arrives, the edge server checks its cache \u2014 on hit, it serves the cached response instantly; on miss, it fetches from the origin, caches the response, and serves it. Origin shielding reduces load on the origin server by consolidating cache misses. Without shielding, every edge node that experiences a cache miss sends a request to the origin simultaneously during a cache fill event. With shielding, edge nodes forward cache misses to a shield or parent layer, which makes a single request to the origin and distributes the response to all requesting edges. This dramatically reduces origin request volume during cache warmup periods. Dynamic content acceleration optimizes requests that cannot be cached. The CDN uses optimized routing and TCP optimizations to accelerate uncacheable requests. Route optimization selects the best path from the edge node to the origin, avoiding internet congestion. TCP optimizations include: connection reuse (keep-alive), TLS session resumption, and optimized TCP window sizes. For users far from the origin, dynamic acceleration often provides a 2-5x improvement in connection setup time. Edge compute (CDN workers, Lambda@Edge, Cloudflare Workers) extends CDN functionality beyond caching. Code executes at the edge server on each request, enabling: request transformation (header modification, URL rewriting), authentication and authorization checks, A/B testing assignment, and response composition from multiple origins. Edge compute eliminates round trips to the origin for these operations, significantly reducing latency. The compute model is stateless with limited execution time (typically 10-50ms CPU, 30-second wall clock). SSL/TLS termination at the edge provides security benefits. The CDN terminates the user's TLS connection, decrypts the request, and can inspect and modify the content. The CDN then creates a new TLS connection to the origin server. This enables the CDN to inspect traffic for threats, inject headers for origin identification, and compress responses. Custom certificates can be uploaded for branded TLS presentation. Automatic certificate provisioning (Let's Encrypt integration) simplifies certificate management. Web Application Firewall (WAF) integration at the CDN layer blocks malicious traffic before it reaches the origin. The WAF inspects requests for SQL injection, cross-site scripting, and other attack patterns. Rate limiting at the CDN layer distributes the limiting infrastructure across edge nodes, handling DDoS attacks at the network edge rather than at the origin. Geo-blocking and IP reputation filtering further reduce malicious traffic. The CDN effectively becomes the first line of defense. Cache purge strategies determine how quickly updated content reaches users. Hard purge immediately removes cached content \u2014 the next request fetches from origin. Soft purge marks content as stale but serves it until fresh content is fetched. Instant purge is essential for breaking news, live events, and security incidents. Purge APIs support URL-precise, directory-pattern, and tag-based invalidation. Most CDNs achieve global purge within seconds, though full propagation can take minutes across thousands of edge nodes. Content pre-warming prepares the CDN cache before expected traffic spikes. For product launches, live events, or marketing campaigns, warming the cache ensures the first users receive cached responses rather than origin-cold responses. Pre-warming involves programmatically requesting the relevant URLs from CDN edge nodes in the expected traffic regions. The CDN fetches and caches the responses before user traffic arrives. Pre-warming scripts should simulate the actual user request headers to ensure correct cache behavior. Multi-CDN architectures provide redundancy and geographic optimization. Different CDNs may excel in different regions (Asia, South America, Africa). A multi-CDN strategy uses DNS-based traffic steering or client-side load balancing to direct users to the best-performing CDN for their location. Failover between CDNs ensures availability if one provider experiences an outage. The cost is increased operational complexity \u2014 managing multiple CDN configurations and monitoring requires mature tooling. Performance monitoring includes cache hit ratio, time to first byte (TTFB), and availability per edge region. Cache hit ratio should be monitored per URL pattern \u2014 a sudden drop indicates a configuration change or origin issue. TTFB from different regions reveals geographic performance disparities. Availability alerts should trigger when the CDN returns elevated error rates from any region. Real User Monitoring (RUM) provides client-side performance data that complements server-side CDN metrics."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 3, "name": "CDN Architecture"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › CDN Architecture
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+        <span class="tag-cat">System Design</span>
+        <span class="tag-cat">Backend</span></div>
+      <h1 class="article-title">CDN Architecture</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>CDN Architecture</h1>
+<br>
+<p>Content Delivery Networks (CDNs) distribute content across geographically dispersed servers to reduce latency, offload origin infrastructure, and absorb large-scale traffic spikes. Modern CDNs have evolved from simple static asset caches into sophisticated application delivery platforms that cache dynamic content, execute edge compute, and provide security functions. Understanding CDN architecture is essential for architects designing global-scale systems.   </p>
+<p>Edge caching is the foundational CDN capability. Edge servers cache responses from the origin server and serve them directly to users. Cache placement is determined by the user's geographic proximity to the edge node. The CDN's global DNS resolves the domain to the nearest edge server IP based on latency measurements. When a request arrives, the edge server checks its cache — on hit, it serves the cached response instantly; on miss, it fetches from the origin, caches the response, and serves it.   </p>
+<p>Origin shielding reduces load on the origin server by consolidating cache misses. Without shielding, every edge node that experiences a cache miss sends a request to the origin simultaneously during a cache fill event. With shielding, edge nodes forward cache misses to a shield or parent layer, which makes a single request to the origin and distributes the response to all requesting edges. This dramatically reduces origin request volume during cache warmup periods.   </p>
+<p>Dynamic content acceleration optimizes requests that cannot be cached. The CDN uses optimized routing and TCP optimizations to accelerate uncacheable requests. Route optimization selects the best path from the edge node to the origin, avoiding internet congestion. TCP optimizations include: connection reuse (keep-alive), TLS session resumption, and optimized TCP window sizes. For users far from the origin, dynamic acceleration often provides a 2-5x improvement in connection setup time.   </p>
+<p>Edge compute (CDN workers, Lambda@Edge, Cloudflare Workers) extends CDN functionality beyond caching. Code executes at the edge server on each request, enabling: request transformation (header modification, URL rewriting), authentication and authorization checks, A/B testing assignment, and response composition from multiple origins. Edge compute eliminates round trips to the origin for these operations, significantly reducing latency. The compute model is stateless with limited execution time (typically 10-50ms CPU, 30-second wall clock).   </p>
+<p>SSL/TLS termination at the edge provides security benefits. The CDN terminates the user's TLS connection, decrypts the request, and can inspect and modify the content. The CDN then creates a new TLS connection to the origin server. This enables the CDN to inspect traffic for threats, inject headers for origin identification, and compress responses. Custom certificates can be uploaded for branded TLS presentation. Automatic certificate provisioning (Let's Encrypt integration) simplifies certificate management.   </p>
+<p>Web Application Firewall (WAF) integration at the CDN layer blocks malicious traffic before it reaches the origin. The WAF inspects requests for SQL injection, cross-site scripting, and other attack patterns. Rate limiting at the CDN layer distributes the limiting infrastructure across edge nodes, handling DDoS attacks at the network edge rather than at the origin. Geo-blocking and IP reputation filtering further reduce malicious traffic. The CDN effectively becomes the first line of defense.   </p>
+<p>Cache purge strategies determine how quickly updated content reaches users. Hard purge immediately removes cached content — the next request fetches from origin. Soft purge marks content as stale but serves it until fresh content is fetched. Instant purge is essential for breaking news, live events, and security incidents. Purge APIs support URL-precise, directory-pattern, and tag-based invalidation. Most CDNs achieve global purge within seconds, though full propagation can take minutes across thousands of edge nodes.   </p>
+<p>Content pre-warming prepares the CDN cache before expected traffic spikes. For product launches, live events, or marketing campaigns, warming the cache ensures the first users receive cached responses rather than origin-cold responses. Pre-warming involves programmatically requesting the relevant URLs from CDN edge nodes in the expected traffic regions. The CDN fetches and caches the responses before user traffic arrives. Pre-warming scripts should simulate the actual user request headers to ensure correct cache behavior.   </p>
+<p>Multi-CDN architectures provide redundancy and geographic optimization. Different CDNs may excel in different regions (Asia, South America, Africa). A multi-CDN strategy uses DNS-based traffic steering or client-side load balancing to direct users to the best-performing CDN for their location. Failover between CDNs ensures availability if one provider experiences an outage. The cost is increased operational complexity — managing multiple CDN configurations and monitoring requires mature tooling.   </p>
+<p>Performance monitoring includes cache hit ratio, time to first byte (TTFB), and availability per edge region. Cache hit ratio should be monitored per URL pattern — a sudden drop indicates a configuration change or origin issue. TTFB from different regions reveals geographic performance disparities. Availability alerts should trigger when the CDN returns elevated error rates from any region. Real User Monitoring (RUM) provides client-side performance data that complements server-side CDN metrics.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

@@ -60,5 +60,3 @@ Long-term wealth (years)| SaaS (#2) or Job Board (#8)
 Build audience + income| Content Creation (#6)  
   
 Pick one. Ship it in two weeks. The only failed side hustle is the one you never start.
-
-**See also:** [Technical Writing Income: How Developers Make Money Writing](</en/sidehustle/technical-writing-income.html>), [Build vs Buy: Strategic Decisions for Developer Side Projects and SaaS](</en/sidehustle/build-vs-buy-saas-decisions.html>), [50 Micro-SaaS Ideas for Solo Developers in 2026](</en/sidehustle/micro-saas-ideas-2026.html>).

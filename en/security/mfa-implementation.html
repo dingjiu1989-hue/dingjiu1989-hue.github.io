@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="mfa-implementation">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="MFA Implementation">
+    <meta property="og:description" content="Implementing multi-factor authentication with TOTP, SMS, push notifications, and backup codes.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/mfa-implementation.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MFA Implementation">
+    <meta name="twitter:description" content="Implementing multi-factor authentication with TOTP, SMS, push notifications, and backup codes.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>MFA Implementation — SourceHub</title>
+    <meta name="description" content="Implementing multi-factor authentication with TOTP, SMS, push notifications, and backup codes.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/mfa-implementation.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/mfa-implementation.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "MFA Implementation",
+      "description": "Implementing multi-factor authentication with TOTP, SMS, push notifications, and backup codes.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1200",
+      "keywords": "Security, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/mfa-implementation.html"},
+      "articleBody": "MFA Implementation MFA Fundamentals Multi-factor authentication requires two or more factors: something you know (password), something you have (phone), or something you are (biometric). TOTP Implementation Time-based One-Time Passwords (TOTP) are the most widely deployed MFA method: import pyotp import qrcode import io import base64 class TOTPManager: def __init__(self, issuer=\"Example Corp\"): self.issuer = issuer def generate_secret(self): return pyotp.random_base32() def get_provisioning_uri(self, email, secret): totp = pyotp.TOTP(secret) return totp.provisioning_uri(name=email, issuer_name=self.issuer) def generate_qr(self, email, secret): uri = self.get_provisioning_uri(email, secret) qr = qrcode.make(uri) buf = io.BytesIO() qr.save(buf, format=\"PNG\") return base64.b64encode(buf.getvalue()).decode() def verify_code(self, secret, code): totp = pyotp.TOTP(secret) # Allow 1 step before/after for clock drift return totp.verify(code, valid_window=1) def get_current_code(self, secret): totp = pyotp.TOTP(secret) return totp.now() SMS-Based MFA import random import string class SMSMFAManager: def __init__(self, sms_provider): self.sms_provider = sms_provider self.codes = {} # phone -> {code, expires_at} def send_code(self, phone): code = ''.join(random.choices(string.digits, k=6)) expiry = datetime.utcnow() + timedelta(minutes=5) self.codes[phone] = {\"code\": code, \"expires_at\": expiry} self.sms_provider.send(phone, f\"Your code is: {code}\") return True def verify_code(self, phone, code): stored = self.codes.get(phone) if not stored: return False if datetime.utcnow() > stored[\"expires_at\"]: del self.codes[phone] return False if stored[\"code\"] != code: return False del self.codes[phone] return True Push Notification MFA // Server-side push notification async function sendPushChallenge(userId, deviceToken) { const challenge = crypto.randomUUID(); // Store challenge await redis.set( `mfa:push:${challenge}`, userId, \"EX\", 120 // 2 minute expiry ); // Send push notification await admin.messaging().send({ token: deviceToken, data: { type: \"MFA_CHALLENGE\", challenge: challenge, appName: \"Example App\", timestamp: Date.now().toString() } }); return challenge; } // Client-side approval async function respondToChallenge(challengeId, approved) { await fetch(\"/api/auth/mfa/push/respond\", { method: \"POST\", body: JSON.stringify({ challenge: challengeId, approved: approved, deviceId: deviceId }) }); } Backup Codes Always provide backup codes when users enroll in MFA: def generate_backup_codes(count=10): codes = [] for _ in range(count): code = '-'.join([ ''.join(random.choices(string.ascii_uppercase + string.digits, k=4)) for _ in range(3) ]) hashed = hashlib.sha256(code.encode()).hexdigest() codes.append({\"raw\": code, \"hashed\": hashed}) return codes Enforcement Strategy mfa_enforcement: all_users: true grace_period: 30_days exclude_service_accounts: true risk_based_prompting: - new_device: prompt_mfa - new_location: prompt_mfa - sensitive_action: require_mfa recovery: backup_codes: 10 admin_recovery: \"verify_with_id\" recovery_timeout: 24_hours Conclusion MFA is essential but must be implemented thoughtfully. TOTP offers the best balance of security and usability. Provide backup codes during enrollment. Consider risk-based prompting rather than requiring MFA on every request. Guide users toward authenticator apps over SMS when possible."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "MFA Implementation"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › MFA Implementation
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">MFA Implementation</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>MFA Implementation</h1>
+<br>
+<p>MFA Fundamentals   </p>
+<p>Multi-factor authentication requires two or more factors: something you know (password), something you have (phone), or something you are (biometric).   </p>
+<p>TOTP Implementation   </p>
+<p>Time-based One-Time Passwords (TOTP) are the most widely deployed MFA method:   </p>
+<br>
+<br>
+<br>
+<p>    import pyotp</p>
+<br>
+<p>    import qrcode</p>
+<br>
+<p>    import io</p>
+<br>
+<p>    import base64</p>
+<br>
+<br>
+<br>
+<p>    class TOTPManager:</p>
+<br>
+<p>        def __init__(self, issuer="Example Corp"):</p>
+<br>
+<p>            self.issuer = issuer</p>
+<br>
+<br>
+<br>
+<p>        def generate_secret(self):</p>
+<br>
+<p>            return pyotp.random_base32()</p>
+<br>
+<br>
+<br>
+<p>        def get_provisioning_uri(self, email, secret):</p>
+<br>
+<p>            totp = pyotp.TOTP(secret)</p>
+<br>
+<p>            return totp.provisioning_uri(name=email, issuer_name=self.issuer)</p>
+<br>
+<br>
+<br>
+<p>        def generate_qr(self, email, secret):</p>
+<br>
+<p>            uri = self.get_provisioning_uri(email, secret)</p>
+<br>
+<p>            qr = qrcode.make(uri)</p>
+<br>
+<p>            buf = io.BytesIO()</p>
+<br>
+<p>            qr.save(buf, format="PNG")</p>
+<br>
+<p>            return base64.b64encode(buf.getvalue()).decode()</p>
+<br>
+<br>
+<br>
+<p>        def verify_code(self, secret, code):</p>
+<br>
+<p>            totp = pyotp.TOTP(secret)</p>
+<br>
+<p>            # Allow 1 step before/after for clock drift</p>
+<br>
+<p>            return totp.verify(code, valid_window=1)</p>
+<br>
+<br>
+<br>
+<p>        def get_current_code(self, secret):</p>
+<br>
+<p>            totp = pyotp.TOTP(secret)</p>
+<br>
+<p>            return totp.now()</p>
+<br>
+<br>
+<br>
+<br>
+<p>SMS-Based MFA   </p>
+<br>
+<br>
+<br>
+<p>    import random</p>
+<br>
+<p>    import string</p>
+<br>
+<br>
+<br>
+<p>    class SMSMFAManager:</p>
+<br>
+<p>        def __init__(self, sms_provider):</p>
+<br>
+<p>            self.sms_provider = sms_provider</p>
+<br>
+<p>            self.codes = {}  # phone -> {code, expires_at}</p>
+<br>
+<br>
+<br>
+<p>        def send_code(self, phone):</p>
+<br>
+<p>            code = ''.join(random.choices(string.digits, k=6))</p>
+<br>
+<p>            expiry = datetime.utcnow() + timedelta(minutes=5)</p>
+<br>
+<br>
+<br>
+<p>            self.codes[phone] = {"code": code, "expires_at": expiry}</p>
+<br>
+<p>            self.sms_provider.send(phone, f"Your code is: {code}")</p>
+<br>
+<br>
+<br>
+<p>            return True</p>
+<br>
+<br>
+<br>
+<p>        def verify_code(self, phone, code):</p>
+<br>
+<p>            stored = self.codes.get(phone)</p>
+<br>
+<p>            if not stored:</p>
+<br>
+<p>                return False</p>
+<br>
+<br>
+<br>
+<p>            if datetime.utcnow() > stored["expires_at"]:</p>
+<br>
+<p>                del self.codes[phone]</p>
+<br>
+<p>                return False</p>
+<br>
+<br>
+<br>
+<p>            if stored["code"] != code:</p>
+<br>
+<p>                return False</p>
+<br>
+<br>
+<br>
+<p>            del self.codes[phone]</p>
+<br>
+<p>            return True</p>
+<br>
+<br>
+<br>
+<br>
+<p>Push Notification MFA   </p>
+<br>
+<br>
+<br>
+<p>    // Server-side push notification</p>
+<br>
+<p>    async function sendPushChallenge(userId, deviceToken) {</p>
+<br>
+<p>      const challenge = crypto.randomUUID();</p>
+<br>
+<br>
+<br>
+<p>      // Store challenge</p>
+<br>
+<p>      await redis.set(</p>
+<br>
+<p>        `mfa:push:${challenge}`,</p>
+<br>
+<p>        userId,</p>
+<br>
+<p>        "EX",</p>
+<br>
+<p>        120  // 2 minute expiry</p>
+<br>
+<p>      );</p>
+<br>
+<br>
+<br>
+<p>      // Send push notification</p>
+<br>
+<p>      await admin.messaging().send({</p>
+<br>
+<p>        token: deviceToken,</p>
+<br>
+<p>        data: {</p>
+<br>
+<p>          type: "MFA_CHALLENGE",</p>
+<br>
+<p>          challenge: challenge,</p>
+<br>
+<p>          appName: "Example App",</p>
+<br>
+<p>          timestamp: Date.now().toString()</p>
+<br>
+<p>        }</p>
+<br>
+<p>      });</p>
+<br>
+<br>
+<br>
+<p>      return challenge;</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<p>    // Client-side approval</p>
+<br>
+<p>    async function respondToChallenge(challengeId, approved) {</p>
+<br>
+<p>      await fetch("/api/auth/mfa/push/respond", {</p>
+<br>
+<p>        method: "POST",</p>
+<br>
+<p>        body: JSON.stringify({</p>
+<br>
+<p>          challenge: challengeId,</p>
+<br>
+<p>          approved: approved,</p>
+<br>
+<p>          deviceId: deviceId</p>
+<br>
+<p>        })</p>
+<br>
+<p>      });</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<p>Backup Codes   </p>
+<p>Always provide backup codes when users enroll in MFA:   </p>
+<br>
+<br>
+<br>
+<p>    def generate_backup_codes(count=10):</p>
+<br>
+<p>        codes = []</p>
+<br>
+<p>        for _ in range(count):</p>
+<br>
+<p>            code = '-'.join([</p>
+<br>
+<p>                ''.join(random.choices(string.ascii_uppercase + string.digits, k=4))</p>
+<br>
+<p>                for _ in range(3)</p>
+<br>
+<p>            ])</p>
+<br>
+<p>            hashed = hashlib.sha256(code.encode()).hexdigest()</p>
+<br>
+<p>            codes.append({"raw": code, "hashed": hashed})</p>
+<br>
+<p>        return codes</p>
+<br>
+<br>
+<br>
+<br>
+<p>Enforcement Strategy   </p>
+<br>
+<br>
+<br>
+<p>    mfa_enforcement:</p>
+<br>
+<p>      all_users: true</p>
+<br>
+<p>      grace_period: 30_days</p>
+<br>
+<p>      exclude_service_accounts: true</p>
+<br>
+<br>
+<br>
+<p>      risk_based_prompting:</p>
+<br>
+<p>        - new_device: prompt_mfa</p>
+<br>
+<p>        - new_location: prompt_mfa</p>
+<br>
+<p>        - sensitive_action: require_mfa</p>
+<br>
+<br>
+<br>
+<p>      recovery:</p>
+<br>
+<p>        backup_codes: 10</p>
+<br>
+<p>        admin_recovery: "verify_with_id"</p>
+<br>
+<p>        recovery_timeout: 24_hours</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
+<p>MFA is essential but must be implemented thoughtfully. TOTP offers the best balance of security and usability. Provide backup codes during enrollment. Consider risk-based prompting rather than requiring MFA on every request. Guide users toward authenticator apps over SMS when possible.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

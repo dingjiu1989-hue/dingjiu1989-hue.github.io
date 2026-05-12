@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="tools" data-exclude="dotfile-management">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Dotfile Management: chezmoi, GNU Stow, Bare Git Repos">
+    <meta property="og:description" content="Manage dotfiles across multiple machines with chezmoi, GNU Stow, and bare git repos. Compare approaches for versioning, templating, and secret management.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/tools/dotfile-management.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dotfile Management: chezmoi, GNU Stow, Bare Git Repos">
+    <meta name="twitter:description" content="Manage dotfiles across multiple machines with chezmoi, GNU Stow, and bare git repos. Compare approaches for versioning, templating, and secret management.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos — SourceHub</title>
+    <meta name="description" content="Manage dotfiles across multiple machines with chezmoi, GNU Stow, and bare git repos. Compare approaches for versioning, templating, and secret management.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tools/dotfile-management.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tools/dotfile-management.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Dotfile Management: chezmoi, GNU Stow, Bare Git Repos",
+      "description": "Manage dotfiles across multiple machines with chezmoi, GNU Stow, and bare git repos. Compare approaches for versioning, templating, and secret management.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1315",
+      "keywords": "Technology, DevTools, Productivity",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/dotfile-management.html"},
+      "articleBody": "Dotfile Management: chezmoi, GNU Stow, Bare Git Repos Introduction Dotfiles \u2014 configuration files for your shell, editor, git, and other tools \u2014 are the backbone of your development environment. Properly managing them ensures consistency across machines, easy recovery after a crash, and collaboration with your team. This article compares the three main approaches: chezmoi, GNU Stow, and bare git repositories. Bare Git Repo The simplest approach: use git directly without any additional tool: # Initialize a bare repository in your home directory git init --bare $HOME/.dotfiles # Create an alias to manage it alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME' # Add the alias to your shell config echo \"alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'\" >> ~/.zshrc # Start tracking files dotfiles status dotfiles add ~/.zshrc ~/.gitconfig ~/.tmux.conf dotfiles commit -m \"Initial dotfiles\" dotfiles remote add origin git@github.com:user/dotfiles.git dotfiles push -u origin main # On a new machine: git clone --bare https://github.com/user/dotfiles.git $HOME/.dotfiles alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME' dotfiles checkout **Pros**: No external dependencies, just git. Simple to understand. **Cons**: No templating (machine-specific configs require symlink hacks). Lacks encryption for secrets. Easy to accidentally commit sensitive data. GNU Stow Stow creates symlinks from a structured directory to your home directory: # Directory structure ~/dotfiles/ zsh/ .zshrc .zprofile git/ .gitconfig .gitignore_global tmux/ .tmux.conf nvim/ .config/nvim/ init.lua # Install all packages stow -t $HOME zsh git tmux nvim # Stow creates symlinks: # ~/dotfiles/zsh/.zshrc -> ~/.zshrc # ~/dotfiles/git/.gitconfig -> ~/.gitconfig # Uninstall a package stow -D -t $HOME zsh # Restow (update symlinks after changes) stow -R -t $HOME nvim **Pros**: Clean directory structure. Easy to understand. Works on any Unix system. **Cons**: No templating. No encryption. Conflicts if files overlap. Root privileges needed for system configs. chezmoi chezmoi is purpose-built for dotfile management with advanced features: # Install chezmoi sh -c \"$(curl -fsLS get.chezmoi.io)\" # Initialize chezmoi init # Add a file chezmoi add ~/.zshrc chezmoi add ~/.config/nvim/init.lua # Edit a tracked file chezmoi edit ~/.zshrc # See what would change chezmoi diff # Apply changes chezmoi apply # On a new machine chezmoi init https://github.com/user/dotfiles.git chezmoi apply Templating with chezmoi chezmoi supports Go templates for machine-specific configs: # .zshrc.tmpl \u2014 template file export EDITOR='{{ if eq .chezmoi.os \"darwin\" }}code{{ else }}nvim{{ end }}' {{ if eq .chezmoi.hostname \"work-laptop\" }} export WORK_MODE=true export AWS_PROFILE=work {{ end }} # Template data includes: OS, hostname, architecture, username, and custom variables Secret Management # Store secrets in your password manager chezmoi secret set github_token chezmoi secret set ssh_private_key # Use in templates {{ (secret \"github_token\") | quote }} # Or use encrypted files with age/gpg chezmoi age encrypt ~/.ssh/id_ed25519 > ~/.local/share/chezmoi/encrypted_dot_ssh/id_ed25519.age Comparison | Feature | Bare Git | GNU Stow | chezmoi | |---------|----------|----------|---------| | Dependencies | Git only | Stow + Git | chezmoi binary | | Templating | No | No | Full Go templates | | Secret management | Manual encryption | Manual encryption | Built-in (age/gpg/password managers) | | Learning curve | Low | Low | Medium | | Cross-platform | Yes | Unix only | Yes | | Dry-run preview | `git diff` | N/A | `chezmoi diff` | | Scriptability | Git commands | Shell scripts | `chezmoi apply` | | Community size | Very large | Large | Growing | Recommendations * **Single machine, no secrets**: Bare git repo is the simplest approach. * **Multiple Unix machines**: GNU Stow provides clean structure with minimal dependencies. * **Multiple machines with different configs**: chezmei's templating handles this elegantly. * **Need secret management**: chezmoi's built-in encryption and password manager integration is essential. * **Team dotfiles**: chezmoi's robust apply/diff workflow supports collaboration safely. Choose chezmoi if you have more than two machines or need secret management. Choose bare git for simplicity on single-machine setups. Choose Stow if you prefer Unix philosophy and have mostly identical machines."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Tool Recommendations", "item": "https://dingjiu1989-hue.github.io/en/tools/"},
+        {"@type": "ListItem", "position": 3, "name": "Dotfile Management: chezmoi, GNU Stow, Bare Git Repos"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a> › Dotfile Management: chezmoi, GNU Stow, Bare Git Repos
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Technology</span>
+        <span class="tag-cat">DevTools</span>
+        <span class="tag-cat">Productivity</span></div>
+      <h1 class="article-title">Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Dotfiles — configuration files for your shell, editor, git, and other tools — are the backbone of your development environment. Properly managing them ensures consistency across machines, easy recovery after a crash, and collaboration with your team. This article compares the three main approaches: chezmoi, GNU Stow, and bare git repositories.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Bare Git Repo</h2>
+<br>
+<br>
+<br>
+<br>
+<p>The simplest approach: use git directly without any additional tool:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Initialize a bare repository in your home directory</p>
+<br>
+<p>    git init --bare $HOME/.dotfiles</p>
+<br>
+<br>
+<br>
+<p>    # Create an alias to manage it</p>
+<br>
+<p>    alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'</p>
+<br>
+<br>
+<br>
+<p>    # Add the alias to your shell config</p>
+<br>
+<p>    echo "alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'" >> ~/.zshrc</p>
+<br>
+<br>
+<br>
+<p>    # Start tracking files</p>
+<br>
+<p>    dotfiles status</p>
+<br>
+<p>    dotfiles add ~/.zshrc ~/.gitconfig ~/.tmux.conf</p>
+<br>
+<p>    dotfiles commit -m "Initial dotfiles"</p>
+<br>
+<p>    dotfiles remote add origin git@github.com:user/dotfiles.git</p>
+<br>
+<p>    dotfiles push -u origin main</p>
+<br>
+<br>
+<br>
+<p>    # On a new machine:</p>
+<br>
+<p>    git clone --bare https://github.com/user/dotfiles.git $HOME/.dotfiles</p>
+<br>
+<p>    alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'</p>
+<br>
+<p>    dotfiles checkout</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Pros**: No external dependencies, just git. Simple to understand.</p>
+<br>
+<p>**Cons**: No templating (machine-specific configs require symlink hacks). Lacks encryption for secrets. Easy to accidentally commit sensitive data.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  GNU Stow</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Stow creates symlinks from a structured directory to your home directory:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Directory structure</p>
+<br>
+<p>    ~/dotfiles/</p>
+<br>
+<p>      zsh/</p>
+<br>
+<p>        .zshrc</p>
+<br>
+<p>        .zprofile</p>
+<br>
+<p>      git/</p>
+<br>
+<p>        .gitconfig</p>
+<br>
+<p>        .gitignore_global</p>
+<br>
+<p>      tmux/</p>
+<br>
+<p>        .tmux.conf</p>
+<br>
+<p>      nvim/</p>
+<br>
+<p>        .config/nvim/</p>
+<br>
+<p>          init.lua</p>
+<br>
+<br>
+<br>
+<p>    # Install all packages</p>
+<br>
+<p>    stow -t $HOME zsh git tmux nvim</p>
+<br>
+<br>
+<br>
+<p>    # Stow creates symlinks:</p>
+<br>
+<p>    # ~/dotfiles/zsh/.zshrc -> ~/.zshrc</p>
+<br>
+<p>    # ~/dotfiles/git/.gitconfig -> ~/.gitconfig</p>
+<br>
+<br>
+<br>
+<p>    # Uninstall a package</p>
+<br>
+<p>    stow -D -t $HOME zsh</p>
+<br>
+<br>
+<br>
+<p>    # Restow (update symlinks after changes)</p>
+<br>
+<p>    stow -R -t $HOME nvim</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Pros**: Clean directory structure. Easy to understand. Works on any Unix system.</p>
+<br>
+<p>**Cons**: No templating. No encryption. Conflicts if files overlap. Root privileges needed for system configs.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  chezmoi</h2>
+<br>
+<br>
+<br>
+<br>
+<p>chezmoi is purpose-built for dotfile management with advanced features:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Install chezmoi</p>
+<br>
+<p>    sh -c "$(curl -fsLS get.chezmoi.io)"</p>
+<br>
+<br>
+<br>
+<p>    # Initialize</p>
+<br>
+<p>    chezmoi init</p>
+<br>
+<br>
+<br>
+<p>    # Add a file</p>
+<br>
+<p>    chezmoi add ~/.zshrc</p>
+<br>
+<p>    chezmoi add ~/.config/nvim/init.lua</p>
+<br>
+<br>
+<br>
+<p>    # Edit a tracked file</p>
+<br>
+<p>    chezmoi edit ~/.zshrc</p>
+<br>
+<br>
+<br>
+<p>    # See what would change</p>
+<br>
+<p>    chezmoi diff</p>
+<br>
+<br>
+<br>
+<p>    # Apply changes</p>
+<br>
+<p>    chezmoi apply</p>
+<br>
+<br>
+<br>
+<p>    # On a new machine</p>
+<br>
+<p>    chezmoi init https://github.com/user/dotfiles.git</p>
+<br>
+<p>    chezmoi apply</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h3>Templating with chezmoi</h3>
+<br>
+<br>
+<br>
+<br>
+<p>chezmoi supports Go templates for machine-specific configs:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # .zshrc.tmpl — template file</p>
+<br>
+<p>    export EDITOR='{{ if eq .chezmoi.os "darwin" }}code{{ else }}nvim{{ end }}'</p>
+<br>
+<br>
+<br>
+<p>    {{ if eq .chezmoi.hostname "work-laptop" }}</p>
+<br>
+<p>    export WORK_MODE=true</p>
+<br>
+<p>    export AWS_PROFILE=work</p>
+<br>
+<p>    {{ end }}</p>
+<br>
+<br>
+<br>
+<p>    # Template data includes: OS, hostname, architecture, username, and custom variables</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h3>Secret Management</h3>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Store secrets in your password manager</p>
+<br>
+<p>    chezmoi secret set github_token</p>
+<br>
+<p>    chezmoi secret set ssh_private_key</p>
+<br>
+<br>
+<br>
+<p>    # Use in templates</p>
+<br>
+<p>    {{ (secret "github_token") | quote }}</p>
+<br>
+<br>
+<br>
+<p>    # Or use encrypted files with age/gpg</p>
+<br>
+<p>    chezmoi age encrypt ~/.ssh/id_ed25519 > ~/.local/share/chezmoi/encrypted_dot_ssh/id_ed25519.age</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Comparison</h2>
+<br>
+<br>
+<br>
+<br>
+<p>| Feature | Bare Git | GNU Stow | chezmoi |</p>
+<br>
+<p>|---------|----------|----------|---------|</p>
+<br>
+<p>| Dependencies | Git only | Stow + Git | chezmoi binary |</p>
+<br>
+<p>| Templating | No | No | Full Go templates |</p>
+<br>
+<p>| Secret management | Manual encryption | Manual encryption | Built-in (age/gpg/password managers) |</p>
+<br>
+<p>| Learning curve | Low | Low | Medium |</p>
+<br>
+<p>| Cross-platform | Yes | Unix only | Yes |</p>
+<br>
+<p>| Dry-run preview | `git diff` | N/A | `chezmoi diff` |</p>
+<br>
+<p>| Scriptability | Git commands | Shell scripts | `chezmoi apply` |</p>
+<br>
+<p>| Community size | Very large | Large | Growing |</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Recommendations</h2>
+<br>
+<br>
+<br>
+<p>* **Single machine, no secrets**: Bare git repo is the simplest approach.</p>
+<p>* **Multiple Unix machines**: GNU Stow provides clean structure with minimal dependencies.</p>
+<p>* **Multiple machines with different configs**: chezmei's templating handles this elegantly.</p>
+<p>* **Need secret management**: chezmoi's built-in encryption and password manager integration is essential.</p>
+<p>* **Team dotfiles**: chezmoi's robust apply/diff workflow supports collaboration safely.</p>
+<br>
+<br>
+<br>
+<p>Choose chezmoi if you have more than two machines or need secret management. Choose bare git for simplicity on single-machine setups. Choose Stow if you prefer Unix philosophy and have mostly identical machines.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div>
+      <noscript><div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

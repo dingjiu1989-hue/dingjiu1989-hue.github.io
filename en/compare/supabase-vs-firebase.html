@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1335",
+      "wordCount": "1506",
       "keywords": "Comparison, Technology",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/compare/supabase-vs-firebase.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/compare/supabase-vs-firebase.html"},
+      "articleBody": "Supabase vs Firebase Introduction Supabase and Firebase are the leading Backend-as-a-Service (BaaS) platforms, providing database, authentication, storage, and serverless functions out of the box. Both eliminate the need to build and manage backend infrastructure, but they take fundamentally different approaches. Firebase is built on NoSQL (Firestore) and is fully managed by Google. Supabase is built on PostgreSQL and is open source. This comparison helps you choose the right platform for your project. Database: SQL vs NoSQL The database choice is the most important factor in deciding between these platforms. Firebase Firestore (NoSQL) Firestore is a document-oriented NoSQL database: Collection: users Document: user123 name: \"Alice\" email: \"alice@example.com\" posts: [ref:post456, ref:post789] Collection: posts Document: post456 title: \"Hello World\" content: \"...\" **Strengths:** * Automatic real-time synchronization * Scales infinitely without configuration * Works offline with on-device persistence * Flexible schema \u2014 no migrations needed **Weaknesses:** * Complex queries (no JOIN, limited filtering, no aggregation) * Performance depends on index creation for complex queries * Data denormalization required for relational data * No migration tools \u2014 schema changes are manual // Firestore query const snapshot = await db .collection(\"posts\") .where(\"published\", \"==\", true) .orderBy(\"createdAt\", \"desc\") .limit(10) .get(); Supabase (PostgreSQL) Supabase uses full PostgreSQL with all its capabilities: **Strengths:** * Full SQL \u2014 JOINs, aggregations, window functions, CTEs * Relational data modeling with foreign keys and constraints * Postgres extensions (PostGIS for geospatial, pgvector for embeddings) * Row Level Security for granular access control * ACID compliance and transactional integrity **Weaknesses:** * Manual schema migrations required * Real-time requires explicit configuration (Realtime Server) * Scaling requires planning (connection pooling, read replicas) * Limited offline support compared to Firestore -- Supabase SQL query SELECT posts.*, profiles.username, COUNT(comments.id) as comment_count FROM posts JOIN profiles ON posts.author_id = profiles.id LEFT JOIN comments ON comments.post_id = posts.id WHERE posts.published = true GROUP BY posts.id, profiles.username ORDER BY posts.created_at DESC LIMIT 10; Authentication Both platforms offer comprehensive auth: | Feature | Firebase Auth | Supabase Auth | |---------|--------------|---------------| | Email/password | Yes | Yes | | OAuth providers | Google, Apple, Facebook, etc. | Google, GitHub, Discord, etc. | | Phone auth | Yes | Via Twilio | | Anonymous auth | Yes | Yes | | Multi-factor auth | Yes | Via third-party | | Custom claims | Yes | Via PostgreSQL | | Row Level Security integration | No | Yes (native) | Supabase's auth integrates directly with PostgreSQL Row Level Security, allowing database-level permissions without additional logic: -- Supabase RLS: users can only see their own data CREATE POLICY \"Users can view own profile\" ON profiles FOR SELECT USING (auth.uid() = user_id); Real-time Features * **Firebase**: Real-time is built into Firestore at the database level. Every listener receives updates automatically. This is seamless but can be expensive at scale. * **Supabase**: Real-time uses a separate Realtime Server that listens to PostgreSQL replication. You subscribe to specific channels and tables. It's more configurable but requires explicit setup. Pricing Comparison | Aspect | Firebase | Supabase | |--------|----------|----------| | Free tier | Spark plan: 1GB storage, 10GB/month transfer | 500MB database, 2GB storage | | Scaling cost | Pay per usage (reads, writes, bandwidth) | Pay for compute + storage | | Predictable pricing | Less predictable (usage-based) | More predictable (compute-based) | | Vendor lock-in risk | High (proprietary NoSQL) | Low (standard PostgreSQL) | Firebase's Spark plan is generous for prototyping, but costs can scale unpredictably with usage. Supabase's compute-based model is more predictable. Ecosystem and Tooling **Firebase** offers a richer ecosystem of integrations: Crashlytics, Performance Monitoring, Analytics, Cloud Messaging, Remote Config, and A/B Testing. This makes Firebase the better choice for mobile app development where you need these services. **Supabase** integrates with the broader PostgreSQL ecosystem: you can use any Postgres tool (pgAdmin, DBeaver, Prisma, Drizzle) and access the database directly with standard SQL clients. When to Choose What **Choose Firebase when:** * You're building a mobile app (iOS/Android) with Google Play Services integration * You need automatic real-time synchronization with minimal configuration * Your data model is document-oriented and doesn't require complex JOINs * You need Firebase Analytics, Crashlytics, and other Google services * You want the fastest path to a working prototype **Choose Supabase when:** * Your data has complex relationships requiring SQL * You want to avoid proprietary lock-in * You need full-text search or geospatial queries * You want to self-host or use a specific cloud region * You need vector embeddings for AI features (pgvector) * You prefer database-level security with Row Level Security Conclusion The choice between Supabase and Firebase is largely a choice between SQL and NoSQL. Firebase offers a tightly integrated ecosystem perfect for mobile apps and rapid prototyping. Supabase offers the power and flexibility of PostgreSQL with open-source transparency and lower vendor lock-in. In 2026, Supabase has matured significantly and is the preferred choice for web applications with relational data, while Firebase remains strong for mobile-first applications."
     }
     </script>
     <script type="application/ld+json">
@@ -73,175 +74,284 @@
         <span class="tag-cat">Technology</span></div>
       <h1 class="article-title">Supabase vs Firebase</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Introduction</h2>
+      <div class="article-body"><h1>Supabase vs Firebase</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Supabase and Firebase are the leading Backend-as-a-Service (BaaS) platforms, providing database, authentication, storage, and serverless functions out of the box. Both eliminate the need to build and manage backend infrastructure, but they take fundamentally different approaches. Firebase is built on NoSQL (Firestore) and is fully managed by Google. Supabase is built on PostgreSQL and is open source. This comparison helps you choose the right platform for your project.</p>
 <br>
-<h2> Database: SQL vs NoSQL</h2>
+<br>
+<br>
+<br>
+<h2>  Database: SQL vs NoSQL</h2>
+<br>
+<br>
+<br>
 <br>
 <p>The database choice is the most important factor in deciding between these platforms.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Firebase Firestore (NoSQL)</h3>
+<br>
+<br>
+<br>
 <br>
 <p>Firestore is a document-oriented NoSQL database:</p>
 <br>
-<pre><code>
-Collection: users
-
-  Document: user123
-
-    name: &quot;Alice&quot;
-
-    email: &quot;alice@example.com&quot;
-
-    posts: [ref:post456, ref:post789]
-
-
-
-Collection: posts
-
-  Document: post456
-
-    title: &quot;Hello World&quot;
-
-    content: &quot;...&quot;
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    Collection: users</p>
+<br>
+<p>      Document: user123</p>
+<br>
+<p>        name: "Alice"</p>
+<br>
+<p>        email: "alice@example.com"</p>
+<br>
+<p>        posts: [ref:post456, ref:post789]</p>
+<br>
+<br>
+<br>
+<p>    Collection: posts</p>
+<br>
+<p>      Document: post456</p>
+<br>
+<p>        title: "Hello World"</p>
+<br>
+<p>        content: "..."</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Strengths:**</p>
-<li>Automatic real-time synchronization</li>
-<li>Scales infinitely without configuration</li>
-<li>Works offline with on-device persistence</li>
-<li>Flexible schema — no migrations needed</li>
+<br>
+<p>* Automatic real-time synchronization</p>
+<p>* Scales infinitely without configuration</p>
+<p>* Works offline with on-device persistence</p>
+<p>* Flexible schema — no migrations needed</p>
+<br>
+<br>
 <br>
 <p>**Weaknesses:**</p>
-<li>Complex queries (no JOIN, limited filtering, no aggregation)</li>
-<li>Performance depends on index creation for complex queries</li>
-<li>Data denormalization required for relational data</li>
-<li>No migration tools — schema changes are manual</li>
 <br>
-<pre><code>
-// Firestore query
-
-const snapshot = await db
-
-  .collection(&quot;posts&quot;)
-
-  .where(&quot;published&quot;, &quot;==&quot;, true)
-
-  .orderBy(&quot;createdAt&quot;, &quot;desc&quot;)
-
-  .limit(10)
-
-  .get();
-
-</code></pre>
+<p>* Complex queries (no JOIN, limited filtering, no aggregation)</p>
+<p>* Performance depends on index creation for complex queries</p>
+<p>* Data denormalization required for relational data</p>
+<p>* No migration tools — schema changes are manual</p>
+<br>
+<br>
+<br>
+<br>
+<p>    // Firestore query</p>
+<br>
+<p>    const snapshot = await db</p>
+<br>
+<p>      .collection("posts")</p>
+<br>
+<p>      .where("published", "==", true)</p>
+<br>
+<p>      .orderBy("createdAt", "desc")</p>
+<br>
+<p>      .limit(10)</p>
+<br>
+<p>      .get();</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Supabase (PostgreSQL)</h3>
 <br>
+<br>
+<br>
+<br>
 <p>Supabase uses full PostgreSQL with all its capabilities:</p>
 <br>
+<br>
+<br>
+<br>
 <p>**Strengths:**</p>
-<li>Full SQL — JOINs, aggregations, window functions, CTEs</li>
-<li>Relational data modeling with foreign keys and constraints</li>
-<li>Postgres extensions (PostGIS for geospatial, pgvector for embeddings)</li>
-<li>Row Level Security for granular access control</li>
-<li>ACID compliance and transactional integrity</li>
+<br>
+<p>* Full SQL — JOINs, aggregations, window functions, CTEs</p>
+<p>* Relational data modeling with foreign keys and constraints</p>
+<p>* Postgres extensions (PostGIS for geospatial, pgvector for embeddings)</p>
+<p>* Row Level Security for granular access control</p>
+<p>* ACID compliance and transactional integrity</p>
+<br>
+<br>
 <br>
 <p>**Weaknesses:**</p>
-<li>Manual schema migrations required</li>
-<li>Real-time requires explicit configuration (Realtime Server)</li>
-<li>Scaling requires planning (connection pooling, read replicas)</li>
-<li>Limited offline support compared to Firestore</li>
 <br>
-<pre><code>
--- Supabase SQL query
-
-SELECT posts.*, profiles.username, COUNT(comments.id) as comment_count
-
-FROM posts
-
-JOIN profiles ON posts.author_id = profiles.id
-
-LEFT JOIN comments ON comments.post_id = posts.id
-
-WHERE posts.published = true
-
-GROUP BY posts.id, profiles.username
-
-ORDER BY posts.created_at DESC
-
-LIMIT 10;
-
-</code></pre>
+<p>* Manual schema migrations required</p>
+<p>* Real-time requires explicit configuration (Realtime Server)</p>
+<p>* Scaling requires planning (connection pooling, read replicas)</p>
+<p>* Limited offline support compared to Firestore</p>
 <br>
-<h2> Authentication</h2>
+<br>
+<br>
+<br>
+<p>    -- Supabase SQL query</p>
+<br>
+<p>    SELECT posts.*, profiles.username, COUNT(comments.id) as comment_count</p>
+<br>
+<p>    FROM posts</p>
+<br>
+<p>    JOIN profiles ON posts.author_id = profiles.id</p>
+<br>
+<p>    LEFT JOIN comments ON comments.post_id = posts.id</p>
+<br>
+<p>    WHERE posts.published = true</p>
+<br>
+<p>    GROUP BY posts.id, profiles.username</p>
+<br>
+<p>    ORDER BY posts.created_at DESC</p>
+<br>
+<p>    LIMIT 10;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Authentication</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Both platforms offer comprehensive auth:</p>
 <br>
+<br>
+<br>
+<br>
 <p>| Feature | Firebase Auth | Supabase Auth |</p>
+<br>
 <p>|---------|--------------|---------------|</p>
+<br>
 <p>| Email/password | Yes | Yes |</p>
+<br>
 <p>| OAuth providers | Google, Apple, Facebook, etc. | Google, GitHub, Discord, etc. |</p>
+<br>
 <p>| Phone auth | Yes | Via Twilio |</p>
+<br>
 <p>| Anonymous auth | Yes | Yes |</p>
+<br>
 <p>| Multi-factor auth | Yes | Via third-party |</p>
+<br>
 <p>| Custom claims | Yes | Via PostgreSQL |</p>
+<br>
 <p>| Row Level Security integration | No | Yes (native) |</p>
+<br>
+<br>
+<br>
 <br>
 <p>Supabase's auth integrates directly with PostgreSQL Row Level Security, allowing database-level permissions without additional logic:</p>
 <br>
-<pre><code>
--- Supabase RLS: users can only see their own data
-
-CREATE POLICY &quot;Users can view own profile&quot;
-
-ON profiles FOR SELECT
-
-USING (auth.uid() = user_id);
-
-</code></pre>
 <br>
-<h2> Real-time Features</h2>
 <br>
-<li>**Firebase**: Real-time is built into Firestore at the database level. Every listener receives updates automatically. This is seamless but can be expensive at scale.</li>
-<li>**Supabase**: Real-time uses a separate Realtime Server that listens to PostgreSQL replication. You subscribe to specific channels and tables. It's more configurable but requires explicit setup.</li>
 <br>
-<h2> Pricing Comparison</h2>
+<br>
+<p>    -- Supabase RLS: users can only see their own data</p>
+<br>
+<p>    CREATE POLICY "Users can view own profile"</p>
+<br>
+<p>    ON profiles FOR SELECT</p>
+<br>
+<p>    USING (auth.uid() = user_id);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Real-time Features</h2>
+<br>
+<br>
+<br>
+<p>* **Firebase**: Real-time is built into Firestore at the database level. Every listener receives updates automatically. This is seamless but can be expensive at scale.</p>
+<p>* **Supabase**: Real-time uses a separate Realtime Server that listens to PostgreSQL replication. You subscribe to specific channels and tables. It's more configurable but requires explicit setup.</p>
+<br>
+<br>
+<br>
+<h2>  Pricing Comparison</h2>
+<br>
+<br>
+<br>
 <br>
 <p>| Aspect | Firebase | Supabase |</p>
+<br>
 <p>|--------|----------|----------|</p>
+<br>
 <p>| Free tier | Spark plan: 1GB storage, 10GB/month transfer | 500MB database, 2GB storage |</p>
+<br>
 <p>| Scaling cost | Pay per usage (reads, writes, bandwidth) | Pay for compute + storage |</p>
+<br>
 <p>| Predictable pricing | Less predictable (usage-based) | More predictable (compute-based) |</p>
+<br>
 <p>| Vendor lock-in risk | High (proprietary NoSQL) | Low (standard PostgreSQL) |</p>
+<br>
+<br>
+<br>
 <br>
 <p>Firebase's Spark plan is generous for prototyping, but costs can scale unpredictably with usage. Supabase's compute-based model is more predictable.</p>
 <br>
-<h2> Ecosystem and Tooling</h2>
+<br>
+<br>
+<br>
+<h2>  Ecosystem and Tooling</h2>
+<br>
+<br>
+<br>
 <br>
 <p>**Firebase** offers a richer ecosystem of integrations: Crashlytics, Performance Monitoring, Analytics, Cloud Messaging, Remote Config, and A/B Testing. This makes Firebase the better choice for mobile app development where you need these services.</p>
 <br>
+<br>
+<br>
+<br>
 <p>**Supabase** integrates with the broader PostgreSQL ecosystem: you can use any Postgres tool (pgAdmin, DBeaver, Prisma, Drizzle) and access the database directly with standard SQL clients.</p>
 <br>
-<h2> When to Choose What</h2>
+<br>
+<br>
+<br>
+<h2>  When to Choose What</h2>
+<br>
+<br>
+<br>
 <br>
 <p>**Choose Firebase when:**</p>
-<li>You're building a mobile app (iOS/Android) with Google Play Services integration</li>
-<li>You need automatic real-time synchronization with minimal configuration</li>
-<li>Your data model is document-oriented and doesn't require complex JOINs</li>
-<li>You need Firebase Analytics, Crashlytics, and other Google services</li>
-<li>You want the fastest path to a working prototype</li>
+<br>
+<p>* You're building a mobile app (iOS/Android) with Google Play Services integration</p>
+<p>* You need automatic real-time synchronization with minimal configuration</p>
+<p>* Your data model is document-oriented and doesn't require complex JOINs</p>
+<p>* You need Firebase Analytics, Crashlytics, and other Google services</p>
+<p>* You want the fastest path to a working prototype</p>
+<br>
+<br>
 <br>
 <p>**Choose Supabase when:**</p>
-<li>Your data has complex relationships requiring SQL</li>
-<li>You want to avoid proprietary lock-in</li>
-<li>You need full-text search or geospatial queries</li>
-<li>You want to self-host or use a specific cloud region</li>
-<li>You need vector embeddings for AI features (pgvector)</li>
-<li>You prefer database-level security with Row Level Security</li>
 <br>
-<h2> Conclusion</h2>
+<p>* Your data has complex relationships requiring SQL</p>
+<p>* You want to avoid proprietary lock-in</p>
+<p>* You need full-text search or geospatial queries</p>
+<p>* You want to self-host or use a specific cloud region</p>
+<p>* You need vector embeddings for AI features (pgvector)</p>
+<p>* You prefer database-level security with Row Level Security</p>
+<br>
+<br>
+<br>
+<h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <p>The choice between Supabase and Firebase is largely a choice between SQL and NoSQL. Firebase offers a tightly integrated ecosystem perfect for mobile apps and rapid prototyping. Supabase offers the power and flexibility of PostgreSQL with open-source transparency and lower vendor lock-in. In 2026, Supabase has matured significantly and is the preferred choice for web applications with relational data, while Firebase remains strong for mobile-first applications.</p></div>
     </article>

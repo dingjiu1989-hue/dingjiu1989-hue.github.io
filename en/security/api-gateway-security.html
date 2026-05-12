@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1587",
+      "wordCount": "2066",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/api-gateway-security.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/api-gateway-security.html"},
+      "articleBody": "API Gateway Security Patterns The API Gateway as Security Perimeter An API gateway acts as the single entry point for all client-to-service communication in a microservices architecture. It is uniquely positioned to enforce security policies centrally, reducing complexity in individual services and providing a consistent security layer. Core Security Functions Authentication and Authorization The gateway validates tokens before requests reach backend services, offloading this responsibility from individual services. # Kong Gateway authentication configuration services: - name: user-service url: http://user-svc.internal:8080 routes: - name: user-routes paths: - /api/users plugins: - name: jwt config: key_claim_name: iss secret_is_base64: false claims_to_verify: - exp - nbf run_on_preflight: true // Custom auth middleware in Express Gateway const jwt = require('jsonwebtoken'); async function gatewayAuth(req, res, next) { const token = req.headers.authorization?.replace('Bearer ', ''); try { const decoded = jwt.verify(token, PUBLIC_KEY, { algorithms: ['RS256'], issuer: 'https://auth.example.com' }); // Inject validated claims into downstream request req.headers['x-user-id'] = decoded.sub; req.headers['x-user-roles'] = decoded.roles.join(','); req.headers['x-authenticated'] = 'true'; // Strip the original token from downstream delete req.headers.authorization; next(); } catch (err) { return res.status(401).json({ error: 'Invalid token' }); } } Rate Limiting and Throttling The gateway enforces global and per-service rate limits: plugins: - name: rate-limiting config: second: null minute: 1000 hour: 50000 policy: local fault_tolerant: true hide_client_headers: false redis: host: redis.internal port: 6379 IP Allowlisting and Blocklisting plugins: - name: ip-restriction config: allow: - 10.0.0.0/8 - 172.16.0.0/12 deny: - 10.0.0.42 # Specific blocked IP Request Validation Schema Validation Validate request bodies against OpenAPI schemas at the gateway: plugins: - name: request-validator config: body_schema: type: object required: - email - password properties: email: type: string format: email maxLength: 255 password: type: string minLength: 8 maxLength: 128 parameter_schema: - in: query name: page schema: type: integer minimum: 1 Request Size Limiting # Nginx as API gateway http { client_body_buffer_size 128k; client_max_body_size 10M; client_body_timeout 30s; server { listen 443 ssl; server_name api.example.com; location /api/ { # Limit request size per endpoint location /api/upload { client_max_body_size 100M; } location /api/query { client_max_body_size 1K; } } } } TLS Termination Terminate TLS at the gateway to encrypt traffic between clients and the gateway, and optionally re-encrypt between gateway and services: server { listen 443 ssl http2; server_name api.example.com; ssl_certificate /etc/ssl/certs/api.example.com.pem; ssl_certificate_key /etc/ssl/private/api.example.com.key; ssl_protocols TLSv1.2 TLSv1.3; ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256; ssl_prefer_server_ciphers on; ssl_session_cache shared:SSL:10m; ssl_session_timeout 10m; # Backend communication (re-encrypt) location /api/internal/ { proxy_pass https://internal-services; proxy_ssl_verify on; proxy_ssl_trusted_certificate /etc/ssl/certs/ca.crt; } } CORS Management Centrally manage CORS policies: plugins: - name: cors config: origins: - https://app.example.com - https://admin.example.com methods: - GET - POST - PUT - DELETE - PATCH headers: - Authorization - Content-Type exposed_headers: - X-RateLimit-Remaining credentials: true max_age: 3600 Threat Detection and WAF ModSecurity with OWASP CRS # Enable WAF on the gateway location /api/ { modsecurity on; modsecurity_rules_file /etc/nginx/modsecurity/owasp-crs/crs-setup.conf; # Custom rules modsecurity_rules ' # Block SQL injection patterns SecRule REQUEST_URI \"@rx (?i:(?:union[\\s]+select|select[\\s]+from))\" \\ \"id:1000,deny,status:403,msg:\\'SQL Injection blocked\\'\" # Block common XSS attempts SecRule ARGS \"@rx ]*>\" \\ \"id:1001,deny,status:403,msg:\\'XSS blocked\\'\" # Rate limit login attempts SecRule IP:LOGIN_ATTEMPT \"@gt 5\" \\ \"id:1002,deny,status:429,msg:\\'Brute force blocked\\'\" '; } GraphQL Security at the Gateway GraphQL APIs need specialized protections: plugins: - name: graphql-proxy-cache - name: graphql-rate-limiting config: max_queries_per_minute: 100 max_depth: 5 max_complexity: 1000 Security Headers at the Gateway Apply consistent security headers across all responses: plugins: - name: response-transformer config: add: headers: - \"Strict-Transport-Security: max-age=63072000; includeSubDomains; preload\" - \"X-Content-Type-Options: nosniff\" - \"X-Frame-Options: DENY\" - \"Content-Security-Policy: default-src 'self'\" - \"Referrer-Policy: strict-origin-when-cross-origin\" Audit Logging Log all API requests centrally for security analysis: plugins: - name: file-log config: path: /var/log/api-gateway/access.log custom_fields_by_lua: client_ip: \"ngx.var.remote_addr\" method: \"ngx.var.request_method\" path: \"ngx.var.request_uri\" status: \"ngx.var.status\" latency: \"ngx.var.upstream_response_time\" user_id: \"ngx.var.http_x_user_id\" Summary The API gateway is the ideal location to centralize security controls: authentication, rate limiting, request validation, IP restrictions, TLS termination, CORS management, and WAF rules. By enforcing these policies at the gateway, individual services remain simpler and can focus on business logic while maintaining a consistent security posture across your entire API surface."
     }
     </script>
     <script type="application/ld+json">
@@ -73,476 +74,489 @@
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">API Gateway Security Patterns</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> The API Gateway as Security Perimeter</h2>
+      <div class="article-body"><h1>API Gateway Security Patterns</h1>
 <br>
-<p>An API gateway acts as the single entry point for all client-to-service communication in a microservices architecture. It is uniquely positioned to enforce security policies centrally, reducing complexity in individual services and providing a consistent security layer.</p>
+<p>The API Gateway as Security Perimeter   </p>
+<p>An API gateway acts as the single entry point for all client-to-service communication in a microservices architecture. It is uniquely positioned to enforce security policies centrally, reducing complexity in individual services and providing a consistent security layer.   </p>
+<p>Core Security Functions   </p>
+<p>Authentication and Authorization   </p>
+<p>The gateway validates tokens before requests reach backend services, offloading this responsibility from individual services.   </p>
 <br>
-<h2> Core Security Functions</h2>
 <br>
-<h3>Authentication and Authorization</h3>
 <br>
-<p>The gateway validates tokens before requests reach backend services, offloading this responsibility from individual services.</p>
+<p>    # Kong Gateway authentication configuration</p>
 <br>
-<pre><code>
-# Kong Gateway authentication configuration
-
-services:
-
-  - name: user-service
-
-    url: http://user-svc.internal:8080
-
-    routes:
-
-      - name: user-routes
-
-        paths:
-
-          - /api/users
-
-    plugins:
-
-      - name: jwt
-
-        config:
-
-          key_claim_name: iss
-
-          secret_is_base64: false
-
-          claims_to_verify:
-
-            - exp
-
-            - nbf
-
-          run_on_preflight: true
-
-</code></pre>
+<p>    services:</p>
 <br>
-<pre><code>
-// Custom auth middleware in Express Gateway
-
-const jwt = require(&#x27;jsonwebtoken&#x27;);
-
-
-
-async function gatewayAuth(req, res, next) {
-
-    const token = req.headers.authorization?.replace(&#x27;Bearer &#x27;, &#x27;&#x27;);
-
-
-
-    try {
-
-        const decoded = jwt.verify(token, PUBLIC_KEY, {
-
-            algorithms: [&#x27;RS256&#x27;],
-
-            issuer: &#x27;https://auth.example.com&#x27;
-
-        });
-
-
-
-        // Inject validated claims into downstream request
-
-        req.headers[&#x27;x-user-id&#x27;] = decoded.sub;
-
-        req.headers[&#x27;x-user-roles&#x27;] = decoded.roles.join(&#x27;,&#x27;);
-
-        req.headers[&#x27;x-authenticated&#x27;] = &#x27;true&#x27;;
-
-
-
-        // Strip the original token from downstream
-
-        delete req.headers.authorization;
-
-        next();
-
-    } catch (err) {
-
-        return res.status(401).json({ error: &#x27;Invalid token&#x27; });
-
-    }
-
-}
-
-</code></pre>
+<p>      - name: user-service</p>
 <br>
-<h3>Rate Limiting and Throttling</h3>
+<p>        url: http://user-svc.internal:8080</p>
 <br>
-<p>The gateway enforces global and per-service rate limits:</p>
+<p>        routes:</p>
 <br>
-<pre><code>
-plugins:
-
-  - name: rate-limiting
-
-    config:
-
-      second: null
-
-      minute: 1000
-
-      hour: 50000
-
-      policy: local
-
-      fault_tolerant: true
-
-      hide_client_headers: false
-
-      redis:
-
-        host: redis.internal
-
-        port: 6379
-
-</code></pre>
+<p>          - name: user-routes</p>
 <br>
-<h3>IP Allowlisting and Blocklisting</h3>
+<p>            paths:</p>
 <br>
-<pre><code>
-plugins:
-
-  - name: ip-restriction
-
-    config:
-
-      allow:
-
-        - 10.0.0.0/8
-
-        - 172.16.0.0/12
-
-      deny:
-
-        - 10.0.0.42  # Specific blocked IP
-
-</code></pre>
+<p>              - /api/users</p>
 <br>
-<h2> Request Validation</h2>
+<p>        plugins:</p>
 <br>
-<h3>Schema Validation</h3>
+<p>          - name: jwt</p>
 <br>
-<p>Validate request bodies against OpenAPI schemas at the gateway:</p>
+<p>            config:</p>
 <br>
-<pre><code>
-plugins:
-
-  - name: request-validator
-
-    config:
-
-      body_schema:
-
-        type: object
-
-        required:
-
-          - email
-
-          - password
-
-        properties:
-
-          email:
-
-            type: string
-
-            format: email
-
-            maxLength: 255
-
-          password:
-
-            type: string
-
-            minLength: 8
-
-            maxLength: 128
-
-      parameter_schema:
-
-        - in: query
-
-          name: page
-
-          schema:
-
-            type: integer
-
-            minimum: 1
-
-</code></pre>
+<p>              key_claim_name: iss</p>
 <br>
-<h3>Request Size Limiting</h3>
+<p>              secret_is_base64: false</p>
 <br>
-<pre><code>
-# Nginx as API gateway
-
-http {
-
-    client_body_buffer_size 128k;
-
-    client_max_body_size 10M;
-
-    client_body_timeout 30s;
-
-
-
-    server {
-
-        listen 443 ssl;
-
-        server_name api.example.com;
-
-
-
-        location /api/ {
-
-            # Limit request size per endpoint
-
-            location /api/upload {
-
-                client_max_body_size 100M;
-
-            }
-
-
-
-            location /api/query {
-
-                client_max_body_size 1K;
-
-            }
-
-        }
-
-    }
-
-}
-
-</code></pre>
+<p>              claims_to_verify:</p>
 <br>
-<h2> TLS Termination</h2>
+<p>                - exp</p>
 <br>
-<p>Terminate TLS at the gateway to encrypt traffic between clients and the gateway, and optionally re-encrypt between gateway and services:</p>
+<p>                - nbf</p>
 <br>
-<pre><code>
-server {
-
-    listen 443 ssl http2;
-
-    server_name api.example.com;
-
-
-
-    ssl_certificate /etc/ssl/certs/api.example.com.pem;
-
-    ssl_certificate_key /etc/ssl/private/api.example.com.key;
-
-    ssl_protocols TLSv1.2 TLSv1.3;
-
-    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256;
-
-    ssl_prefer_server_ciphers on;
-
-    ssl_session_cache shared:SSL:10m;
-
-    ssl_session_timeout 10m;
-
-
-
-    # Backend communication (re-encrypt)
-
-    location /api/internal/ {
-
-        proxy_pass https://internal-services;
-
-        proxy_ssl_verify on;
-
-        proxy_ssl_trusted_certificate /etc/ssl/certs/ca.crt;
-
-    }
-
-}
-
-</code></pre>
+<p>              run_on_preflight: true</p>
 <br>
-<h2> CORS Management</h2>
 <br>
-<p>Centrally manage CORS policies:</p>
 <br>
-<pre><code>
-plugins:
-
-  - name: cors
-
-    config:
-
-      origins:
-
-        - https://app.example.com
-
-        - https://admin.example.com
-
-      methods:
-
-        - GET
-
-        - POST
-
-        - PUT
-
-        - DELETE
-
-        - PATCH
-
-      headers:
-
-        - Authorization
-
-        - Content-Type
-
-      exposed_headers:
-
-        - X-RateLimit-Remaining
-
-      credentials: true
-
-      max_age: 3600
-
-</code></pre>
 <br>
-<h2> Threat Detection and WAF</h2>
 <br>
-<h3>ModSecurity with OWASP CRS</h3>
 <br>
-<pre><code>
-# Enable WAF on the gateway
-
-location /api/ {
-
-    modsecurity on;
-
-    modsecurity_rules_file /etc/nginx/modsecurity/owasp-crs/crs-setup.conf;
-
-
-
-    # Custom rules
-
-    modsecurity_rules &#x27;
-
-        # Block SQL injection patterns
-
-        SecRule REQUEST_URI &quot;@rx (?i:(?:union[\s]+select|select[\s]+from))&quot; \
-
-            &quot;id:1000,deny,status:403,msg:\&#x27;SQL Injection blocked\&#x27;&quot;
-
-
-
-        # Block common XSS attempts
-
-        SecRule ARGS &quot;@rx &lt;script[^&gt;]*&gt;&quot; \
-
-            &quot;id:1001,deny,status:403,msg:\&#x27;XSS blocked\&#x27;&quot;
-
-
-
-        # Rate limit login attempts
-
-        SecRule IP:LOGIN_ATTEMPT &quot;@gt 5&quot; \
-
-            &quot;id:1002,deny,status:429,msg:\&#x27;Brute force blocked\&#x27;&quot;
-
-    &#x27;;
-
-}
-
-</code></pre>
 <br>
-<h2> GraphQL Security at the Gateway</h2>
+<p>    // Custom auth middleware in Express Gateway</p>
 <br>
-<p>GraphQL APIs need specialized protections:</p>
+<p>    const jwt = require('jsonwebtoken');</p>
 <br>
-<pre><code>
-plugins:
-
-  - name: graphql-proxy-cache
-
-  - name: graphql-rate-limiting
-
-    config:
-
-      max_queries_per_minute: 100
-
-      max_depth: 5
-
-      max_complexity: 1000
-
-</code></pre>
 <br>
-<h2> Security Headers at the Gateway</h2>
 <br>
-<p>Apply consistent security headers across all responses:</p>
+<p>    async function gatewayAuth(req, res, next) {</p>
 <br>
-<pre><code>
-plugins:
-
-  - name: response-transformer
-
-    config:
-
-      add:
-
-        headers:
-
-          - &quot;Strict-Transport-Security: max-age=63072000; includeSubDomains; preload&quot;
-
-          - &quot;X-Content-Type-Options: nosniff&quot;
-
-          - &quot;X-Frame-Options: DENY&quot;
-
-          - &quot;Content-Security-Policy: default-src &#x27;self&#x27;&quot;
-
-          - &quot;Referrer-Policy: strict-origin-when-cross-origin&quot;
-
-</code></pre>
+<p>        const token = req.headers.authorization?.replace('Bearer ', '');</p>
 <br>
-<h2> Audit Logging</h2>
 <br>
-<p>Log all API requests centrally for security analysis:</p>
 <br>
-<pre><code>
-plugins:
-
-  - name: file-log
-
-    config:
-
-      path: /var/log/api-gateway/access.log
-
-      custom_fields_by_lua:
-
-        client_ip: &quot;ngx.var.remote_addr&quot;
-
-        method: &quot;ngx.var.request_method&quot;
-
-        path: &quot;ngx.var.request_uri&quot;
-
-        status: &quot;ngx.var.status&quot;
-
-        latency: &quot;ngx.var.upstream_response_time&quot;
-
-        user_id: &quot;ngx.var.http_x_user_id&quot;
-
-</code></pre>
+<p>        try {</p>
 <br>
-<h2> Summary</h2>
+<p>            const decoded = jwt.verify(token, PUBLIC_KEY, {</p>
 <br>
+<p>                algorithms: ['RS256'],</p>
+<br>
+<p>                issuer: 'https://auth.example.com'</p>
+<br>
+<p>            });</p>
+<br>
+<br>
+<br>
+<p>            // Inject validated claims into downstream request</p>
+<br>
+<p>            req.headers['x-user-id'] = decoded.sub;</p>
+<br>
+<p>            req.headers['x-user-roles'] = decoded.roles.join(',');</p>
+<br>
+<p>            req.headers['x-authenticated'] = 'true';</p>
+<br>
+<br>
+<br>
+<p>            // Strip the original token from downstream</p>
+<br>
+<p>            delete req.headers.authorization;</p>
+<br>
+<p>            next();</p>
+<br>
+<p>        } catch (err) {</p>
+<br>
+<p>            return res.status(401).json({ error: 'Invalid token' });</p>
+<br>
+<p>        }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<p>Rate Limiting and Throttling   </p>
+<p>The gateway enforces global and per-service rate limits:   </p>
+<br>
+<br>
+<br>
+<p>    plugins:</p>
+<br>
+<p>      - name: rate-limiting</p>
+<br>
+<p>        config:</p>
+<br>
+<p>          second: null</p>
+<br>
+<p>          minute: 1000</p>
+<br>
+<p>          hour: 50000</p>
+<br>
+<p>          policy: local</p>
+<br>
+<p>          fault_tolerant: true</p>
+<br>
+<p>          hide_client_headers: false</p>
+<br>
+<p>          redis:</p>
+<br>
+<p>            host: redis.internal</p>
+<br>
+<p>            port: 6379</p>
+<br>
+<br>
+<br>
+<br>
+<p>IP Allowlisting and Blocklisting   </p>
+<br>
+<br>
+<br>
+<p>    plugins:</p>
+<br>
+<p>      - name: ip-restriction</p>
+<br>
+<p>        config:</p>
+<br>
+<p>          allow:</p>
+<br>
+<p>            - 10.0.0.0/8</p>
+<br>
+<p>            - 172.16.0.0/12</p>
+<br>
+<p>          deny:</p>
+<br>
+<p>            - 10.0.0.42  # Specific blocked IP</p>
+<br>
+<br>
+<br>
+<br>
+<p>Request Validation   </p>
+<p>Schema Validation   </p>
+<p>Validate request bodies against OpenAPI schemas at the gateway:   </p>
+<br>
+<br>
+<br>
+<p>    plugins:</p>
+<br>
+<p>      - name: request-validator</p>
+<br>
+<p>        config:</p>
+<br>
+<p>          body_schema:</p>
+<br>
+<p>            type: object</p>
+<br>
+<p>            required:</p>
+<br>
+<p>              - email</p>
+<br>
+<p>              - password</p>
+<br>
+<p>            properties:</p>
+<br>
+<p>              email:</p>
+<br>
+<p>                type: string</p>
+<br>
+<p>                format: email</p>
+<br>
+<p>                maxLength: 255</p>
+<br>
+<p>              password:</p>
+<br>
+<p>                type: string</p>
+<br>
+<p>                minLength: 8</p>
+<br>
+<p>                maxLength: 128</p>
+<br>
+<p>          parameter_schema:</p>
+<br>
+<p>            - in: query</p>
+<br>
+<p>              name: page</p>
+<br>
+<p>              schema:</p>
+<br>
+<p>                type: integer</p>
+<br>
+<p>                minimum: 1</p>
+<br>
+<br>
+<br>
+<br>
+<p>Request Size Limiting   </p>
+<br>
+<br>
+<br>
+<p>    # Nginx as API gateway</p>
+<br>
+<p>    http {</p>
+<br>
+<p>        client_body_buffer_size 128k;</p>
+<br>
+<p>        client_max_body_size 10M;</p>
+<br>
+<p>        client_body_timeout 30s;</p>
+<br>
+<br>
+<br>
+<p>        server {</p>
+<br>
+<p>            listen 443 ssl;</p>
+<br>
+<p>            server_name api.example.com;</p>
+<br>
+<br>
+<br>
+<p>            location /api/ {</p>
+<br>
+<p>                # Limit request size per endpoint</p>
+<br>
+<p>                location /api/upload {</p>
+<br>
+<p>                    client_max_body_size 100M;</p>
+<br>
+<p>                }</p>
+<br>
+<br>
+<br>
+<p>                location /api/query {</p>
+<br>
+<p>                    client_max_body_size 1K;</p>
+<br>
+<p>                }</p>
+<br>
+<p>            }</p>
+<br>
+<p>        }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<p>TLS Termination   </p>
+<p>Terminate TLS at the gateway to encrypt traffic between clients and the gateway, and optionally re-encrypt between gateway and services:   </p>
+<br>
+<br>
+<br>
+<p>    server {</p>
+<br>
+<p>        listen 443 ssl http2;</p>
+<br>
+<p>        server_name api.example.com;</p>
+<br>
+<br>
+<br>
+<p>        ssl_certificate /etc/ssl/certs/api.example.com.pem;</p>
+<br>
+<p>        ssl_certificate_key /etc/ssl/private/api.example.com.key;</p>
+<br>
+<p>        ssl_protocols TLSv1.2 TLSv1.3;</p>
+<br>
+<p>        ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256;</p>
+<br>
+<p>        ssl_prefer_server_ciphers on;</p>
+<br>
+<p>        ssl_session_cache shared:SSL:10m;</p>
+<br>
+<p>        ssl_session_timeout 10m;</p>
+<br>
+<br>
+<br>
+<p>        # Backend communication (re-encrypt)</p>
+<br>
+<p>        location /api/internal/ {</p>
+<br>
+<p>            proxy_pass https://internal-services;</p>
+<br>
+<p>            proxy_ssl_verify on;</p>
+<br>
+<p>            proxy_ssl_trusted_certificate /etc/ssl/certs/ca.crt;</p>
+<br>
+<p>        }</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<p>CORS Management   </p>
+<p>Centrally manage CORS policies:   </p>
+<br>
+<br>
+<br>
+<p>    plugins:</p>
+<br>
+<p>      - name: cors</p>
+<br>
+<p>        config:</p>
+<br>
+<p>          origins:</p>
+<br>
+<p>            - https://app.example.com</p>
+<br>
+<p>            - https://admin.example.com</p>
+<br>
+<p>          methods:</p>
+<br>
+<p>            - GET</p>
+<br>
+<p>            - POST</p>
+<br>
+<p>            - PUT</p>
+<br>
+<p>            - DELETE</p>
+<br>
+<p>            - PATCH</p>
+<br>
+<p>          headers:</p>
+<br>
+<p>            - Authorization</p>
+<br>
+<p>            - Content-Type</p>
+<br>
+<p>          exposed_headers:</p>
+<br>
+<p>            - X-RateLimit-Remaining</p>
+<br>
+<p>          credentials: true</p>
+<br>
+<p>          max_age: 3600</p>
+<br>
+<br>
+<br>
+<br>
+<p>Threat Detection and WAF   </p>
+<p>ModSecurity with OWASP CRS   </p>
+<br>
+<br>
+<br>
+<p>    # Enable WAF on the gateway</p>
+<br>
+<p>    location /api/ {</p>
+<br>
+<p>        modsecurity on;</p>
+<br>
+<p>        modsecurity_rules_file /etc/nginx/modsecurity/owasp-crs/crs-setup.conf;</p>
+<br>
+<br>
+<br>
+<p>        # Custom rules</p>
+<br>
+<p>        modsecurity_rules '</p>
+<br>
+<p>            # Block SQL injection patterns</p>
+<br>
+<p>            SecRule REQUEST_URI "@rx (?i:(?:union[\s]+select|select[\s]+from))" \</p>
+<br>
+<p>                "id:1000,deny,status:403,msg:\'SQL Injection blocked\'"</p>
+<br>
+<br>
+<br>
+<p>            # Block common XSS attempts</p>
+<br>
+<p>            SecRule ARGS "@rx <script[^>]*>" \</p>
+<br>
+<p>                "id:1001,deny,status:403,msg:\'XSS blocked\'"</p>
+<br>
+<br>
+<br>
+<p>            # Rate limit login attempts</p>
+<br>
+<p>            SecRule IP:LOGIN_ATTEMPT "@gt 5" \</p>
+<br>
+<p>                "id:1002,deny,status:429,msg:\'Brute force blocked\'"</p>
+<br>
+<p>        ';</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<p>GraphQL Security at the Gateway   </p>
+<p>GraphQL APIs need specialized protections:   </p>
+<br>
+<br>
+<br>
+<p>    plugins:</p>
+<br>
+<p>      - name: graphql-proxy-cache</p>
+<br>
+<p>      - name: graphql-rate-limiting</p>
+<br>
+<p>        config:</p>
+<br>
+<p>          max_queries_per_minute: 100</p>
+<br>
+<p>          max_depth: 5</p>
+<br>
+<p>          max_complexity: 1000</p>
+<br>
+<br>
+<br>
+<br>
+<p>Security Headers at the Gateway   </p>
+<p>Apply consistent security headers across all responses:   </p>
+<br>
+<br>
+<br>
+<p>    plugins:</p>
+<br>
+<p>      - name: response-transformer</p>
+<br>
+<p>        config:</p>
+<br>
+<p>          add:</p>
+<br>
+<p>            headers:</p>
+<br>
+<p>              - "Strict-Transport-Security: max-age=63072000; includeSubDomains; preload"</p>
+<br>
+<p>              - "X-Content-Type-Options: nosniff"</p>
+<br>
+<p>              - "X-Frame-Options: DENY"</p>
+<br>
+<p>              - "Content-Security-Policy: default-src 'self'"</p>
+<br>
+<p>              - "Referrer-Policy: strict-origin-when-cross-origin"</p>
+<br>
+<br>
+<br>
+<br>
+<p>Audit Logging   </p>
+<p>Log all API requests centrally for security analysis:   </p>
+<br>
+<br>
+<br>
+<p>    plugins:</p>
+<br>
+<p>      - name: file-log</p>
+<br>
+<p>        config:</p>
+<br>
+<p>          path: /var/log/api-gateway/access.log</p>
+<br>
+<p>          custom_fields_by_lua:</p>
+<br>
+<p>            client_ip: "ngx.var.remote_addr"</p>
+<br>
+<p>            method: "ngx.var.request_method"</p>
+<br>
+<p>            path: "ngx.var.request_uri"</p>
+<br>
+<p>            status: "ngx.var.status"</p>
+<br>
+<p>            latency: "ngx.var.upstream_response_time"</p>
+<br>
+<p>            user_id: "ngx.var.http_x_user_id"</p>
+<br>
+<br>
+<br>
+<br>
+<p>Summary   </p>
 <p>The API gateway is the ideal location to centralize security controls: authentication, rate limiting, request validation, IP restrictions, TLS termination, CORS management, and WAF rules. By enforcing these policies at the gateway, individual services remain simpler and can focus on business logic while maintaining a consistent security posture across your entire API surface.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

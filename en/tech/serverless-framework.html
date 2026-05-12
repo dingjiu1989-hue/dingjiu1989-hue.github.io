@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1724",
+      "wordCount": "2343",
       "keywords": "Technology, Programming, DevOps",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/serverless-framework.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/serverless-framework.html"},
+      "articleBody": "Serverless Framework: From Zero to Production Introduction The Serverless Framework provides a unified experience for deploying functions, APIs, and event-driven architectures across major cloud providers. While serverless eliminates infrastructure management, it introduces challenges around cold starts, observability, and cost control. This guide walks through taking a serverless application from development to production using the Serverless Framework on AWS Lambda. Project Setup and Structure A well-structured serverless project separates concerns across functions, layers, and configuration: # serverless.yml service: order-processor frameworkVersion: \"4\" provider: name: aws runtime: nodejs20.x region: us-east-1 stage: ${opt:stage, 'dev'} environment: ORDER_TABLE: ${self:custom.tableName} QUEUE_URL: !Ref OrderQueue plugins: - serverless-webpack - serverless-offline - serverless-prune-plugin custom: tableName: orders-${self:provider.stage} webpack: packager: pnpm excludeFiles: src/**/*.test.ts prune: automatic: true number: 3 functions: createOrder: handler: src/handlers/createOrder.handler events: - httpApi: method: POST path: /orders timeout: 10 memorySize: 256 iamRoleStatements: - Effect: Allow Action: dynamodb:PutItem Resource: !GetAtt OrdersTable.Arn Infrastructure as Code Define resources alongside functions for self-documenting infrastructure: resources: Resources: OrdersTable: Type: AWS::DynamoDB::Table Properties: TableName: orders-${self:provider.stage} BillingMode: PAY_PER_REQUEST AttributeDefinitions: - AttributeName: orderId AttributeType: S - AttributeName: status AttributeType: S KeySchema: - AttributeName: orderId KeyType: HASH GlobalSecondaryIndexes: - IndexName: StatusIndex KeySchema: - AttributeName: status KeyType: HASH Projection: ProjectionType: ALL OrderQueue: Type: AWS::SQS::Queue Properties: QueueName: orders-${self:provider.stage} VisibilityTimeout: 60 RedrivePolicy: deadLetterTargetArn: !GetAtt DeadLetterQueue.Arn maxReceiveCount: 3 DeadLetterQueue: Type: AWS::SQS::Queue Properties: QueueName: orders-dlq-${self:provider.stage} Lambda Handler Implementation Write handlers with proper error handling and observability: // src/handlers/createOrder.ts import { APIGatewayProxyEvent, APIGatewayProxyResult } from \"aws-lambda\"; import { DynamoDBClient } from \"@aws-sdk/client-dynamodb\"; import { DynamoDBDocumentClient, PutCommand } from \"@aws-sdk/lib-dynamodb\"; import { randomUUID } from \"crypto\"; import { Logger } from \"@aws-lambda-powertools/logger\"; import { Metrics } from \"@aws-lambda-powertools/metrics\"; import { Tracer } from \"@aws-lambda-powertools/tracer\"; const logger = new Logger({ serviceName: \"order-processor\" }); const metrics = new Metrics({ namespace: \"OrderProcessor\" }); const tracer = new Tracer({ serviceName: \"order-processor\" }); const ddb = DynamoDBDocumentClient.from(new DynamoDBClient({})); export const handler = async ( event: APIGatewayProxyEvent ): Promise => { try { const body = JSON.parse(event.body || \"{}\"); const orderId = randomUUID(); const order = { orderId, ...body, status: \"PENDING\", createdAt: new Date().toISOString(), }; await ddb.send(new PutCommand({ TableName: process.env.ORDER_TABLE, Item: order, })); metrics.addMetric(\"OrderCreated\", 1, \"Count\"); logger.info(\"Order created\", { orderId }); return { statusCode: 201, headers: { \"Content-Type\": \"application/json\" }, body: JSON.stringify({ orderId, status: \"PENDING\" }), }; } catch (error) { logger.error(\"Failed to create order\", { error }); metrics.addMetric(\"OrderCreationError\", 1, \"Count\"); return { statusCode: 500, body: JSON.stringify({ message: \"Internal server error\" }), }; } }; Local Development The `serverless-offline` plugin provides a local Lambda emulator: # Start local API Gateway emulator serverless offline --stage dev --httpPort 4000 # Invoke a function directly serverless invoke local --function createOrder \\ --path test/fixtures/create-order.json # Run with warm container simulation serverless offline --stage dev \\ --noPrependStageInUrl \\ --reloadHandler Cold Start Optimization Cold starts add latency when Lambda scales up a new execution environment: # Optimize for cold starts provider: # Use AWS Graviton for better price/performance architecture: arm64 # Increase memory speeds up CPU allocation # (and proportionally reduces cold start time) memorySize: 1024 functions: latencyCritical: handler: src/handlers/critical.handler # Provisioned concurrency for critical paths provisionedConcurrency: 5 # Reserve concurrency to prevent throttling reservedConcurrency: 20 Code-level optimizations: // Cold start optimization techniques // 1. Lazy initialization outside handler (reused across invocations) let client: DynamoDBDocumentClient; function getClient(): DynamoDBDocumentClient { if (!client) { client = DynamoDBDocumentClient.from(new DynamoDBClient({})); } return client; } // 2. Bundle and tree-shake dependencies // Use esbuild or webpack to exclude unused SDK clients // 3. Minimize deployment package size // Exclude in webpack: // externals: [\"@aws-sdk/client-dynamodb\"] // 4. Use AWS SDK v3 for modular imports import { DynamoDBClient } from \"@aws-sdk/client-dynamodb\"; // Instead of: import { DynamoDB } from \"aws-sdk\"; Monitoring and Observability CloudWatch is the default, but Powertools enhances observability significantly: functions: processOrder: handler: src/handlers/processOrder.handler environment: POWERTOOLS_SERVICE_NAME: order-processor POWERTOOLS_METRICS_NAMESPACE: OrderProcessor LOG_LEVEL: INFO events: - sqs: arn: !GetAtt OrderQueue.Arn batchSize: 10 maximumBatchingWindowInSeconds: 5 Create CloudWatch dashboards and alarms: resources: Resources: OrderErrorAlarm: Type: AWS::CloudWatch::Alarm Properties: AlarmName: order-processor-errors-${self:provider.stage} MetricName: Errors Namespace: AWS/Lambda Dimensions: - Name: FunctionName Value: !Ref ProcessOrderLambdaFunction Statistic: Sum Period: 300 EvaluationPeriods: 1 Threshold: 5 ComparisonOperator: GreaterThanThreshold Cost Analysis Serverless costs are driven by invocation count, duration, and memory allocation: # Calculate monthly cost estimate # Invocations: 10M/month # Avg duration: 200ms # Memory: 1024MB # Cost = 10M * (0.2s / 1000ms) * 1GB * $0.00001667/GB-second # = 10M * 0.2 * 0.00001667 # = ~$33.34/month Optimize cost with `serverless-prune-plugin` to remove old versions: custom: prune: automatic: true number: 3 # Keep only 3 latest versions For high-throughput workloads, compare Lambda cost against ECS Fargate at sustained traffic levels. Lambda often wins for variable, low-volume traffic but becomes expensive at steady-state high throughput. Use these patterns to build production-grade serverless applications that are cost-effective, observable, and performant from day one."
     }
     </script>
     <script type="application/ld+json">
@@ -74,493 +75,582 @@
         <span class="tag-cat">DevOps</span></div>
       <h1 class="article-title">Serverless Framework: From Zero to Production</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Introduction</h2>
+      <div class="article-body"><h1>Serverless Framework: From Zero to Production</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <p>The Serverless Framework provides a unified experience for deploying functions, APIs, and event-driven architectures across major cloud providers. While serverless eliminates infrastructure management, it introduces challenges around cold starts, observability, and cost control. This guide walks through taking a serverless application from development to production using the Serverless Framework on AWS Lambda.</p>
 <br>
-<h2> Project Setup and Structure</h2>
+<br>
+<br>
+<br>
+<h2>  Project Setup and Structure</h2>
+<br>
+<br>
+<br>
 <br>
 <p>A well-structured serverless project separates concerns across functions, layers, and configuration:</p>
 <br>
-<pre><code>
-# serverless.yml
-
-service: order-processor
-
-frameworkVersion: &quot;4&quot;
-
-
-
-provider:
-
-  name: aws
-
-  runtime: nodejs20.x
-
-  region: us-east-1
-
-  stage: ${opt:stage, &#x27;dev&#x27;}
-
-  environment:
-
-    ORDER_TABLE: ${self:custom.tableName}
-
-    QUEUE_URL: !Ref OrderQueue
-
-
-
-plugins:
-
-  - serverless-webpack
-
-  - serverless-offline
-
-  - serverless-prune-plugin
-
-
-
-custom:
-
-  tableName: orders-${self:provider.stage}
-
-  webpack:
-
-    packager: pnpm
-
-    excludeFiles: src/**/*.test.ts
-
-  prune:
-
-    automatic: true
-
-    number: 3
-
-
-
-functions:
-
-  createOrder:
-
-    handler: src/handlers/createOrder.handler
-
-    events:
-
-      - httpApi:
-
-          method: POST
-
-          path: /orders
-
-    timeout: 10
-
-    memorySize: 256
-
-    iamRoleStatements:
-
-      - Effect: Allow
-
-        Action: dynamodb:PutItem
-
-        Resource: !GetAtt OrdersTable.Arn
-
-</code></pre>
 <br>
-<h2> Infrastructure as Code</h2>
+<br>
+<br>
+<br>
+<p>    # serverless.yml</p>
+<br>
+<p>    service: order-processor</p>
+<br>
+<p>    frameworkVersion: "4"</p>
+<br>
+<br>
+<br>
+<p>    provider:</p>
+<br>
+<p>      name: aws</p>
+<br>
+<p>      runtime: nodejs20.x</p>
+<br>
+<p>      region: us-east-1</p>
+<br>
+<p>      stage: ${opt:stage, 'dev'}</p>
+<br>
+<p>      environment:</p>
+<br>
+<p>        ORDER_TABLE: ${self:custom.tableName}</p>
+<br>
+<p>        QUEUE_URL: !Ref OrderQueue</p>
+<br>
+<br>
+<br>
+<p>    plugins:</p>
+<br>
+<p>      - serverless-webpack</p>
+<br>
+<p>      - serverless-offline</p>
+<br>
+<p>      - serverless-prune-plugin</p>
+<br>
+<br>
+<br>
+<p>    custom:</p>
+<br>
+<p>      tableName: orders-${self:provider.stage}</p>
+<br>
+<p>      webpack:</p>
+<br>
+<p>        packager: pnpm</p>
+<br>
+<p>        excludeFiles: src/**/*.test.ts</p>
+<br>
+<p>      prune:</p>
+<br>
+<p>        automatic: true</p>
+<br>
+<p>        number: 3</p>
+<br>
+<br>
+<br>
+<p>    functions:</p>
+<br>
+<p>      createOrder:</p>
+<br>
+<p>        handler: src/handlers/createOrder.handler</p>
+<br>
+<p>        events:</p>
+<br>
+<p>          - httpApi:</p>
+<br>
+<p>              method: POST</p>
+<br>
+<p>              path: /orders</p>
+<br>
+<p>        timeout: 10</p>
+<br>
+<p>        memorySize: 256</p>
+<br>
+<p>        iamRoleStatements:</p>
+<br>
+<p>          - Effect: Allow</p>
+<br>
+<p>            Action: dynamodb:PutItem</p>
+<br>
+<p>            Resource: !GetAtt OrdersTable.Arn</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Infrastructure as Code</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Define resources alongside functions for self-documenting infrastructure:</p>
 <br>
-<pre><code>
-resources:
-
-  Resources:
-
-    OrdersTable:
-
-      Type: AWS::DynamoDB::Table
-
-      Properties:
-
-        TableName: orders-${self:provider.stage}
-
-        BillingMode: PAY_PER_REQUEST
-
-        AttributeDefinitions:
-
-          - AttributeName: orderId
-
-            AttributeType: S
-
-          - AttributeName: status
-
-            AttributeType: S
-
-        KeySchema:
-
-          - AttributeName: orderId
-
-            KeyType: HASH
-
-        GlobalSecondaryIndexes:
-
-          - IndexName: StatusIndex
-
-            KeySchema:
-
-              - AttributeName: status
-
-                KeyType: HASH
-
-            Projection:
-
-              ProjectionType: ALL
-
-    OrderQueue:
-
-      Type: AWS::SQS::Queue
-
-      Properties:
-
-        QueueName: orders-${self:provider.stage}
-
-        VisibilityTimeout: 60
-
-        RedrivePolicy:
-
-          deadLetterTargetArn: !GetAtt DeadLetterQueue.Arn
-
-          maxReceiveCount: 3
-
-    DeadLetterQueue:
-
-      Type: AWS::SQS::Queue
-
-      Properties:
-
-        QueueName: orders-dlq-${self:provider.stage}
-
-</code></pre>
 <br>
-<h2> Lambda Handler Implementation</h2>
+<br>
+<br>
+<br>
+<p>    resources:</p>
+<br>
+<p>      Resources:</p>
+<br>
+<p>        OrdersTable:</p>
+<br>
+<p>          Type: AWS::DynamoDB::Table</p>
+<br>
+<p>          Properties:</p>
+<br>
+<p>            TableName: orders-${self:provider.stage}</p>
+<br>
+<p>            BillingMode: PAY_PER_REQUEST</p>
+<br>
+<p>            AttributeDefinitions:</p>
+<br>
+<p>              - AttributeName: orderId</p>
+<br>
+<p>                AttributeType: S</p>
+<br>
+<p>              - AttributeName: status</p>
+<br>
+<p>                AttributeType: S</p>
+<br>
+<p>            KeySchema:</p>
+<br>
+<p>              - AttributeName: orderId</p>
+<br>
+<p>                KeyType: HASH</p>
+<br>
+<p>            GlobalSecondaryIndexes:</p>
+<br>
+<p>              - IndexName: StatusIndex</p>
+<br>
+<p>                KeySchema:</p>
+<br>
+<p>                  - AttributeName: status</p>
+<br>
+<p>                    KeyType: HASH</p>
+<br>
+<p>                Projection:</p>
+<br>
+<p>                  ProjectionType: ALL</p>
+<br>
+<p>        OrderQueue:</p>
+<br>
+<p>          Type: AWS::SQS::Queue</p>
+<br>
+<p>          Properties:</p>
+<br>
+<p>            QueueName: orders-${self:provider.stage}</p>
+<br>
+<p>            VisibilityTimeout: 60</p>
+<br>
+<p>            RedrivePolicy:</p>
+<br>
+<p>              deadLetterTargetArn: !GetAtt DeadLetterQueue.Arn</p>
+<br>
+<p>              maxReceiveCount: 3</p>
+<br>
+<p>        DeadLetterQueue:</p>
+<br>
+<p>          Type: AWS::SQS::Queue</p>
+<br>
+<p>          Properties:</p>
+<br>
+<p>            QueueName: orders-dlq-${self:provider.stage}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Lambda Handler Implementation</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Write handlers with proper error handling and observability:</p>
 <br>
-<pre><code>
-// src/handlers/createOrder.ts
-
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from &quot;aws-lambda&quot;;
-
-import { DynamoDBClient } from &quot;@aws-sdk/client-dynamodb&quot;;
-
-import { DynamoDBDocumentClient, PutCommand } from &quot;@aws-sdk/lib-dynamodb&quot;;
-
-import { randomUUID } from &quot;crypto&quot;;
-
-import { Logger } from &quot;@aws-lambda-powertools/logger&quot;;
-
-import { Metrics } from &quot;@aws-lambda-powertools/metrics&quot;;
-
-import { Tracer } from &quot;@aws-lambda-powertools/tracer&quot;;
-
-
-
-const logger = new Logger({ serviceName: &quot;order-processor&quot; });
-
-const metrics = new Metrics({ namespace: &quot;OrderProcessor&quot; });
-
-const tracer = new Tracer({ serviceName: &quot;order-processor&quot; });
-
-
-
-const ddb = DynamoDBDocumentClient.from(new DynamoDBClient({}));
-
-
-
-export const handler = async (
-
-  event: APIGatewayProxyEvent
-
-): Promise&lt;APIGatewayProxyResult&gt; =&gt; {
-
-  try {
-
-    const body = JSON.parse(event.body || &quot;{}&quot;);
-
-    const orderId = randomUUID();
-
-    const order = {
-
-      orderId,
-
-      ...body,
-
-      status: &quot;PENDING&quot;,
-
-      createdAt: new Date().toISOString(),
-
-    };
-
-
-
-    await ddb.send(new PutCommand({
-
-      TableName: process.env.ORDER_TABLE,
-
-      Item: order,
-
-    }));
-
-
-
-    metrics.addMetric(&quot;OrderCreated&quot;, 1, &quot;Count&quot;);
-
-    logger.info(&quot;Order created&quot;, { orderId });
-
-
-
-    return {
-
-      statusCode: 201,
-
-      headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
-
-      body: JSON.stringify({ orderId, status: &quot;PENDING&quot; }),
-
-    };
-
-  } catch (error) {
-
-    logger.error(&quot;Failed to create order&quot;, { error });
-
-    metrics.addMetric(&quot;OrderCreationError&quot;, 1, &quot;Count&quot;);
-
-    return {
-
-      statusCode: 500,
-
-      body: JSON.stringify({ message: &quot;Internal server error&quot; }),
-
-    };
-
-  }
-
-};
-
-</code></pre>
 <br>
-<h2> Local Development</h2>
+<br>
+<br>
+<br>
+<p>    // src/handlers/createOrder.ts</p>
+<br>
+<p>    import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";</p>
+<br>
+<p>    import { DynamoDBClient } from "@aws-sdk/client-dynamodb";</p>
+<br>
+<p>    import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";</p>
+<br>
+<p>    import { randomUUID } from "crypto";</p>
+<br>
+<p>    import { Logger } from "@aws-lambda-powertools/logger";</p>
+<br>
+<p>    import { Metrics } from "@aws-lambda-powertools/metrics";</p>
+<br>
+<p>    import { Tracer } from "@aws-lambda-powertools/tracer";</p>
+<br>
+<br>
+<br>
+<p>    const logger = new Logger({ serviceName: "order-processor" });</p>
+<br>
+<p>    const metrics = new Metrics({ namespace: "OrderProcessor" });</p>
+<br>
+<p>    const tracer = new Tracer({ serviceName: "order-processor" });</p>
+<br>
+<br>
+<br>
+<p>    const ddb = DynamoDBDocumentClient.from(new DynamoDBClient({}));</p>
+<br>
+<br>
+<br>
+<p>    export const handler = async (</p>
+<br>
+<p>      event: APIGatewayProxyEvent</p>
+<br>
+<p>    ): Promise<APIGatewayProxyResult> => {</p>
+<br>
+<p>      try {</p>
+<br>
+<p>        const body = JSON.parse(event.body || "{}");</p>
+<br>
+<p>        const orderId = randomUUID();</p>
+<br>
+<p>        const order = {</p>
+<br>
+<p>          orderId,</p>
+<br>
+<p>          ...body,</p>
+<br>
+<p>          status: "PENDING",</p>
+<br>
+<p>          createdAt: new Date().toISOString(),</p>
+<br>
+<p>        };</p>
+<br>
+<br>
+<br>
+<p>        await ddb.send(new PutCommand({</p>
+<br>
+<p>          TableName: process.env.ORDER_TABLE,</p>
+<br>
+<p>          Item: order,</p>
+<br>
+<p>        }));</p>
+<br>
+<br>
+<br>
+<p>        metrics.addMetric("OrderCreated", 1, "Count");</p>
+<br>
+<p>        logger.info("Order created", { orderId });</p>
+<br>
+<br>
+<br>
+<p>        return {</p>
+<br>
+<p>          statusCode: 201,</p>
+<br>
+<p>          headers: { "Content-Type": "application/json" },</p>
+<br>
+<p>          body: JSON.stringify({ orderId, status: "PENDING" }),</p>
+<br>
+<p>        };</p>
+<br>
+<p>      } catch (error) {</p>
+<br>
+<p>        logger.error("Failed to create order", { error });</p>
+<br>
+<p>        metrics.addMetric("OrderCreationError", 1, "Count");</p>
+<br>
+<p>        return {</p>
+<br>
+<p>          statusCode: 500,</p>
+<br>
+<p>          body: JSON.stringify({ message: "Internal server error" }),</p>
+<br>
+<p>        };</p>
+<br>
+<p>      }</p>
+<br>
+<p>    };</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Local Development</h2>
+<br>
+<br>
+<br>
 <br>
 <p>The `serverless-offline` plugin provides a local Lambda emulator:</p>
 <br>
-<pre><code>
-# Start local API Gateway emulator
-
-serverless offline --stage dev --httpPort 4000
-
-
-
-# Invoke a function directly
-
-serverless invoke local --function createOrder \
-
-  --path test/fixtures/create-order.json
-
-
-
-# Run with warm container simulation
-
-serverless offline --stage dev \
-
-  --noPrependStageInUrl \
-
-  --reloadHandler
-
-</code></pre>
 <br>
-<h2> Cold Start Optimization</h2>
+<br>
+<br>
+<br>
+<p>    # Start local API Gateway emulator</p>
+<br>
+<p>    serverless offline --stage dev --httpPort 4000</p>
+<br>
+<br>
+<br>
+<p>    # Invoke a function directly</p>
+<br>
+<p>    serverless invoke local --function createOrder \</p>
+<br>
+<p>      --path test/fixtures/create-order.json</p>
+<br>
+<br>
+<br>
+<p>    # Run with warm container simulation</p>
+<br>
+<p>    serverless offline --stage dev \</p>
+<br>
+<p>      --noPrependStageInUrl \</p>
+<br>
+<p>      --reloadHandler</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Cold Start Optimization</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Cold starts add latency when Lambda scales up a new execution environment:</p>
 <br>
-<pre><code>
-# Optimize for cold starts
-
-provider:
-
-  # Use AWS Graviton for better price/performance
-
-  architecture: arm64
-
-  # Increase memory speeds up CPU allocation
-
-  # (and proportionally reduces cold start time)
-
-  memorySize: 1024
-
-
-
-functions:
-
-  latencyCritical:
-
-    handler: src/handlers/critical.handler
-
-    # Provisioned concurrency for critical paths
-
-    provisionedConcurrency: 5
-
-    # Reserve concurrency to prevent throttling
-
-    reservedConcurrency: 20
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # Optimize for cold starts</p>
+<br>
+<p>    provider:</p>
+<br>
+<p>      # Use AWS Graviton for better price/performance</p>
+<br>
+<p>      architecture: arm64</p>
+<br>
+<p>      # Increase memory speeds up CPU allocation</p>
+<br>
+<p>      # (and proportionally reduces cold start time)</p>
+<br>
+<p>      memorySize: 1024</p>
+<br>
+<br>
+<br>
+<p>    functions:</p>
+<br>
+<p>      latencyCritical:</p>
+<br>
+<p>        handler: src/handlers/critical.handler</p>
+<br>
+<p>        # Provisioned concurrency for critical paths</p>
+<br>
+<p>        provisionedConcurrency: 5</p>
+<br>
+<p>        # Reserve concurrency to prevent throttling</p>
+<br>
+<p>        reservedConcurrency: 20</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Code-level optimizations:</p>
 <br>
-<pre><code>
-// Cold start optimization techniques
-
-
-
-// 1. Lazy initialization outside handler (reused across invocations)
-
-let client: DynamoDBDocumentClient;
-
-function getClient(): DynamoDBDocumentClient {
-
-  if (!client) {
-
-    client = DynamoDBDocumentClient.from(new DynamoDBClient({}));
-
-  }
-
-  return client;
-
-}
-
-
-
-// 2. Bundle and tree-shake dependencies
-
-// Use esbuild or webpack to exclude unused SDK clients
-
-
-
-// 3. Minimize deployment package size
-
-// Exclude in webpack:
-
-// externals: [&quot;@aws-sdk/client-dynamodb&quot;]
-
-
-
-// 4. Use AWS SDK v3 for modular imports
-
-import { DynamoDBClient } from &quot;@aws-sdk/client-dynamodb&quot;;
-
-// Instead of: import { DynamoDB } from &quot;aws-sdk&quot;;
-
-</code></pre>
 <br>
-<h2> Monitoring and Observability</h2>
+<br>
+<br>
+<br>
+<p>    // Cold start optimization techniques</p>
+<br>
+<br>
+<br>
+<p>    // 1. Lazy initialization outside handler (reused across invocations)</p>
+<br>
+<p>    let client: DynamoDBDocumentClient;</p>
+<br>
+<p>    function getClient(): DynamoDBDocumentClient {</p>
+<br>
+<p>      if (!client) {</p>
+<br>
+<p>        client = DynamoDBDocumentClient.from(new DynamoDBClient({}));</p>
+<br>
+<p>      }</p>
+<br>
+<p>      return client;</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<p>    // 2. Bundle and tree-shake dependencies</p>
+<br>
+<p>    // Use esbuild or webpack to exclude unused SDK clients</p>
+<br>
+<br>
+<br>
+<p>    // 3. Minimize deployment package size</p>
+<br>
+<p>    // Exclude in webpack:</p>
+<br>
+<p>    // externals: ["@aws-sdk/client-dynamodb"]</p>
+<br>
+<br>
+<br>
+<p>    // 4. Use AWS SDK v3 for modular imports</p>
+<br>
+<p>    import { DynamoDBClient } from "@aws-sdk/client-dynamodb";</p>
+<br>
+<p>    // Instead of: import { DynamoDB } from "aws-sdk";</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Monitoring and Observability</h2>
+<br>
+<br>
+<br>
 <br>
 <p>CloudWatch is the default, but Powertools enhances observability significantly:</p>
 <br>
-<pre><code>
-functions:
-
-  processOrder:
-
-    handler: src/handlers/processOrder.handler
-
-    environment:
-
-      POWERTOOLS_SERVICE_NAME: order-processor
-
-      POWERTOOLS_METRICS_NAMESPACE: OrderProcessor
-
-      LOG_LEVEL: INFO
-
-    events:
-
-      - sqs:
-
-          arn: !GetAtt OrderQueue.Arn
-
-          batchSize: 10
-
-          maximumBatchingWindowInSeconds: 5
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    functions:</p>
+<br>
+<p>      processOrder:</p>
+<br>
+<p>        handler: src/handlers/processOrder.handler</p>
+<br>
+<p>        environment:</p>
+<br>
+<p>          POWERTOOLS_SERVICE_NAME: order-processor</p>
+<br>
+<p>          POWERTOOLS_METRICS_NAMESPACE: OrderProcessor</p>
+<br>
+<p>          LOG_LEVEL: INFO</p>
+<br>
+<p>        events:</p>
+<br>
+<p>          - sqs:</p>
+<br>
+<p>              arn: !GetAtt OrderQueue.Arn</p>
+<br>
+<p>              batchSize: 10</p>
+<br>
+<p>              maximumBatchingWindowInSeconds: 5</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Create CloudWatch dashboards and alarms:</p>
 <br>
-<pre><code>
-resources:
-
-  Resources:
-
-    OrderErrorAlarm:
-
-      Type: AWS::CloudWatch::Alarm
-
-      Properties:
-
-        AlarmName: order-processor-errors-${self:provider.stage}
-
-        MetricName: Errors
-
-        Namespace: AWS/Lambda
-
-        Dimensions:
-
-          - Name: FunctionName
-
-            Value: !Ref ProcessOrderLambdaFunction
-
-        Statistic: Sum
-
-        Period: 300
-
-        EvaluationPeriods: 1
-
-        Threshold: 5
-
-        ComparisonOperator: GreaterThanThreshold
-
-</code></pre>
 <br>
-<h2> Cost Analysis</h2>
+<br>
+<br>
+<br>
+<p>    resources:</p>
+<br>
+<p>      Resources:</p>
+<br>
+<p>        OrderErrorAlarm:</p>
+<br>
+<p>          Type: AWS::CloudWatch::Alarm</p>
+<br>
+<p>          Properties:</p>
+<br>
+<p>            AlarmName: order-processor-errors-${self:provider.stage}</p>
+<br>
+<p>            MetricName: Errors</p>
+<br>
+<p>            Namespace: AWS/Lambda</p>
+<br>
+<p>            Dimensions:</p>
+<br>
+<p>              - Name: FunctionName</p>
+<br>
+<p>                Value: !Ref ProcessOrderLambdaFunction</p>
+<br>
+<p>            Statistic: Sum</p>
+<br>
+<p>            Period: 300</p>
+<br>
+<p>            EvaluationPeriods: 1</p>
+<br>
+<p>            Threshold: 5</p>
+<br>
+<p>            ComparisonOperator: GreaterThanThreshold</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Cost Analysis</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Serverless costs are driven by invocation count, duration, and memory allocation:</p>
 <br>
-<pre><code>
-# Calculate monthly cost estimate
-
-# Invocations: 10M/month
-
-# Avg duration: 200ms
-
-# Memory: 1024MB
-
-# Cost = 10M * (0.2s / 1000ms) * 1GB * $0.00001667/GB-second
-
-#      = 10M * 0.2 * 0.00001667
-
-#      = ~$33.34/month
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # Calculate monthly cost estimate</p>
+<br>
+<p>    # Invocations: 10M/month</p>
+<br>
+<p>    # Avg duration: 200ms</p>
+<br>
+<p>    # Memory: 1024MB</p>
+<br>
+<p>    # Cost = 10M * (0.2s / 1000ms) * 1GB * $0.00001667/GB-second</p>
+<br>
+<p>    #      = 10M * 0.2 * 0.00001667</p>
+<br>
+<p>    #      = ~$33.34/month</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Optimize cost with `serverless-prune-plugin` to remove old versions:</p>
 <br>
-<pre><code>
-custom:
-
-  prune:
-
-    automatic: true
-
-    number: 3  # Keep only 3 latest versions
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    custom:</p>
+<br>
+<p>      prune:</p>
+<br>
+<p>        automatic: true</p>
+<br>
+<p>        number: 3  # Keep only 3 latest versions</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>For high-throughput workloads, compare Lambda cost against ECS Fargate at sustained traffic levels. Lambda often wins for variable, low-volume traffic but becomes expensive at steady-state high throughput. Use these patterns to build production-grade serverless applications that are cost-effective, observable, and performant from day one.</p></div>
     </article>

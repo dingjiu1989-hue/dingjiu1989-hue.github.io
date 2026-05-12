@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2024",
+      "wordCount": "2436",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/devsecops-pipeline.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/devsecops-pipeline.html"},
+      "articleBody": "DevSecOps: Integrating Security into CI/CD DevSecOps embeds security into every stage of the software development lifecycle. Rather than running security assessments at the end of a release cycle, DevSecOps shifts security left into development and CI/CD pipelines. This article covers how to integrate SAST, DAST, dependency scanning, container scanning, and policy-as-code into your pipelines. Shift-Left Security The shift-left principle moves security testing earlier in the development process. Finding and fixing a vulnerability during development costs 10 times less than fixing it in production, and 100 times less than fixing it after a breach. Security Gates in the Pipeline A mature DevSecOps pipeline has security gates at every stage: Code Commit -> SAST -> Dependency Scan -> Build -> Container Scan -> Integration Test -> DAST -> Staging -> Policy Check -> Production Each gate can pass, fail with a warning, or fail and block the pipeline. The severity determines the action: critical and high findings block the pipeline, while medium and low findings create tickets for the development team. Static Application Security Testing (SAST) SAST analyzes source code without executing it. It identifies vulnerabilities like SQL injection, cross-site scripting (XSS), buffer overflows, and insecure cryptographic usage. Popular SAST Tools * **Semgrep**: Open-source, fast, and supports custom rules. Works with most programming languages. * **SonarQube**: Static analysis with quality gates and technical debt tracking. * **CodeQL**: GitHub's semantic code analysis engine. Query-based vulnerability detection. * **Checkmarx / Fortify**: Commercial SAST tools with extensive rule sets. Pipeline Integration # GitHub Actions: SAST with Semgrep name: SAST Scan on: pull_request: branches: [main] jobs: semgrep: runs-on: ubuntu-latest steps: - uses: actions/checkout@v4 - uses: semgrep/semgrep-action@v1 with: config: p/default audit_on: push - name: Check for blocking findings run: | if [ \"${{ steps.semgrep.outputs.results }}\" != \"\" ]; then echo \"SAST found vulnerabilities. Fix before merging.\" exit 1 fi SAST Best Practices * Run SAST on every pull request, not just on push to main. * Use incremental scanning for faster feedback on large codebases. * Tune rules to reduce false positives. Block only high-confidence findings. * Create custom rules for your application's specific security patterns. Dependency Scanning Modern applications use dozens of open-source libraries. Each library introduces transitive dependencies with potential vulnerabilities. Software Bill of Materials (SBOM) An SBOM is a formal inventory of all software components in an application. Generate SBOMs in CycloneDX or SPDX format. # Generate SBOM with Syft syft packages . -o cyclonedx-json > sbom.json # Scan SBOM for vulnerabilities with Grype grype sbom:./sbom.json Dependency Scanning Tools * **Dependabot**: GitHub's built-in dependency scanning and automated pull requests for patches. * **Renovate**: Open-source dependency update tool with extensive customization. * **Snyk**: Commercial vulnerability scanner with fix advice and license compliance. * **OWASP Dependency-Check**: Open-source scanner that identifies CVEs in dependencies. # Dependabot configuration version: 2 updates: - package-ecosystem: \"npm\" directory: \"/\" schedule: interval: \"weekly\" open-pull-requests-limit: 10 labels: - \"dependencies\" - \"security\" Dependency Scanning Policy * Block the pipeline on critical or high severity vulnerabilities in direct dependencies. * Flag transitive dependency vulnerabilities but only block if they are exploitable. * Require automated dependency updates within 7 days for critical, 30 days for high. * Monitor for license compliance alongside vulnerability scanning. Dynamic Application Security Testing (DAST) DAST tests the running application from the outside, simulating real-world attack patterns. It discovers vulnerabilities that SAST misses, such as authentication bypass, session management flaws, and business logic errors. DAST Tools * **OWASP ZAP**: Open-source web application scanner with automated and manual modes. * **Burp Suite**: Commercial web security testing platform with advanced scanning. * **Arachni**: Open-source web application security scanner framework. Pipeline Integration # DAST with OWASP ZAP in CI/CD services: zap: image: ghcr.io/zaproxy/zaproxy:stable options: --user root steps: - name: Run ZAP Scan run: | docker run -v $(pwd):/zap/wrk:rw \\ ghcr.io/zaproxy/zaproxy:stable \\ zap-full-scan.py \\ -t https://staging.example.com \\ -r zap_report.html \\ -z \"-config spider.maxDuration=10\" - name: Check ZAP Results run: | if grep -q \"High\" zap_report.html; then echo \"DAST found High severity issues\" exit 1 fi DAST Best Practices * Run DAST against staging or review environments, not production. * Authenticate DAST scanners to test authenticated functionality. * Use baseline scans for smoke testing and full scans for release candidates. * Integrate with Jira or ticketing for automatic issue creation. Container Scanning Container images bundle applications with their runtime dependencies. Vulnerabilities in base images or installed packages become part of the container. Scanning Pipeline Integration # Dockerfile with security best practices FROM alpine:3.19 AS builder RUN apk add --no-cache build-base FROM alpine:3.19 RUN apk add --no-cache ca-certificates && \\ addgroup -S app && adduser -S app -G app COPY --from=builder /app/bin/server /app/server USER app EXPOSE 8080 # Container scanning with Trivy in CI/CD jobs: scan: runs-on: ubuntu-latest steps: - uses: actions/checkout@v4 - name: Build image run: docker build -t myapp:${{ github.sha }} . - name: Scan with Trivy uses: aquasecurity/trivy-action@master with: image-ref: myapp:${{ github.sha }} format: sarif output: trivy-results.sarif severity: CRITICAL,HIGH - name: Upload results uses: github/codeql-action/upload-sarif@v3 with: sarif_file: trivy-results.sarif Container Security Practices * Use minimal base images (Alpine, distroless) to reduce attack surface. * Scan images before pushing to the registry. * Enforce signed images with Cosign. * Enable granular runtime security with seccomp, AppArmor, or SELinux policies. Policy-as-Code Policy-as-code defines security and compliance rules as executable code. Policies are versioned, reviewed, and enforced automatically in the pipeline. Open Policy Agent (OPA) and Rego OPA enforces policies across the software lifecycle. Rego is OPA's policy language. # Rego policy: Require encryption at rest package kubernetes.storage deny[msg] { volume := input.volumes[_] volume.persistentVolumeClaim not volume.encrypted msg := sprintf(\"Volume %v must have encryption enabled\", [volume.name]) } Policy Gates in the Pipeline # Conftest: Policy enforcement for Kubernetes manifests steps: - name: Check Kubernetes policies run: | conftest test deployment.yaml \\ --policy policies/ \\ --namespace kubernetes - name: Check Terraform policies run: | conftest test main.tf \\ --policy policies/terraform/ Common Policy Rules * Containers must not run as root. * All ingress must have TLS enabled. * S3 buckets must block public access. * Database instances must have encryption at rest. * IAM roles must have resource-level constraints. Building a DevSecOps Culture Tools alone do not make DevSecOps successful. The human elements matter more. * **Developer empowerment**: Give developers access to security scan results and fix guidance. Do not use security as a gate without providing remediation support. * **Security champions**: Train security champions in each development team. They bridge the gap between security and engineering. * **Friction reduction**: Optimize scan times. A 30-minute SAST scan encourages skipping. A 2-minute scan integrates naturally into the workflow. * **Blameless culture**: When security scans find issues, the process worked correctly. Celebrate catching issues early rather than blaming developers. Conclusion DevSecOps shifts security from a final gate to an integrated part of the development process. SAST catches code-level vulnerabilities, dependency scanning manages supply chain risk, DAST validates runtime behavior, container scanning secures artifacts, and policy-as-code enforces standards. Together, these practices make security a natural part of delivering software, not an obstacle to it."
     }
     </script>
     <script type="application/ld+json">
@@ -73,365 +74,508 @@
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">DevSecOps: Integrating Security into CI/CD</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
-      <div class="article-body"><p>DevSecOps embeds security into every stage of the software development lifecycle. Rather than running security assessments at the end of a release cycle, DevSecOps shifts security left into development and CI/CD pipelines. This article covers how to integrate SAST, DAST, dependency scanning, container scanning, and policy-as-code into your pipelines.</p>
+      <div class="article-body"><h1>DevSecOps: Integrating Security into CI/CD</h1>
 <br>
-<h2> Shift-Left Security</h2>
+<p>DevSecOps embeds security into every stage of the software development lifecycle. Rather than running security assessments at the end of a release cycle, DevSecOps shifts security left into development and CI/CD pipelines. This article covers how to integrate SAST, DAST, dependency scanning, container scanning, and policy-as-code into your pipelines.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Shift-Left Security</h2>
+<br>
+<br>
+<br>
 <br>
 <p>The shift-left principle moves security testing earlier in the development process. Finding and fixing a vulnerability during development costs 10 times less than fixing it in production, and 100 times less than fixing it after a breach.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Security Gates in the Pipeline</h3>
+<br>
+<br>
+<br>
 <br>
 <p>A mature DevSecOps pipeline has security gates at every stage:</p>
 <br>
-<pre><code>
-Code Commit -&gt; SAST -&gt; Dependency Scan -&gt; Build -&gt; Container Scan -&gt; 
-
-Integration Test -&gt; DAST -&gt; Staging -&gt; Policy Check -&gt; Production
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    Code Commit -> SAST -> Dependency Scan -> Build -> Container Scan -> </p>
+<br>
+<p>    Integration Test -> DAST -> Staging -> Policy Check -> Production</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Each gate can pass, fail with a warning, or fail and block the pipeline. The severity determines the action: critical and high findings block the pipeline, while medium and low findings create tickets for the development team.</p>
 <br>
-<h2> Static Application Security Testing (SAST)</h2>
+<br>
+<br>
+<br>
+<h2>  Static Application Security Testing (SAST)</h2>
+<br>
+<br>
+<br>
 <br>
 <p>SAST analyzes source code without executing it. It identifies vulnerabilities like SQL injection, cross-site scripting (XSS), buffer overflows, and insecure cryptographic usage.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Popular SAST Tools</h3>
 <br>
-<li>**Semgrep**: Open-source, fast, and supports custom rules. Works with most programming languages.</li>
-<li>**SonarQube**: Static analysis with quality gates and technical debt tracking.</li>
-<li>**CodeQL**: GitHub's semantic code analysis engine. Query-based vulnerability detection.</li>
-<li>**Checkmarx / Fortify**: Commercial SAST tools with extensive rule sets.</li>
+<br>
+<br>
+<p>* **Semgrep**: Open-source, fast, and supports custom rules. Works with most programming languages.</p>
+<p>* **SonarQube**: Static analysis with quality gates and technical debt tracking.</p>
+<p>* **CodeQL**: GitHub's semantic code analysis engine. Query-based vulnerability detection.</p>
+<p>* **Checkmarx / Fortify**: Commercial SAST tools with extensive rule sets.</p>
+<br>
+<br>
 <br>
 <h3>Pipeline Integration</h3>
 <br>
-<pre><code>
-# GitHub Actions: SAST with Semgrep
-
-name: SAST Scan
-
-on:
-
-  pull_request:
-
-    branches: [main]
-
-
-
-jobs:
-
-  semgrep:
-
-    runs-on: ubuntu-latest
-
-    steps:
-
-      - uses: actions/checkout@v4
-
-      - uses: semgrep/semgrep-action@v1
-
-        with:
-
-          config: p/default
-
-          audit_on: push
-
-      - name: Check for blocking findings
-
-        run: |
-
-          if [ &quot;${{ steps.semgrep.outputs.results }}&quot; != &quot;&quot; ]; then
-
-            echo &quot;SAST found vulnerabilities. Fix before merging.&quot;
-
-            exit 1
-
-          fi
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # GitHub Actions: SAST with Semgrep</p>
+<br>
+<p>    name: SAST Scan</p>
+<br>
+<p>    on:</p>
+<br>
+<p>      pull_request:</p>
+<br>
+<p>        branches: [main]</p>
+<br>
+<br>
+<br>
+<p>    jobs:</p>
+<br>
+<p>      semgrep:</p>
+<br>
+<p>        runs-on: ubuntu-latest</p>
+<br>
+<p>        steps:</p>
+<br>
+<p>          - uses: actions/checkout@v4</p>
+<br>
+<p>          - uses: semgrep/semgrep-action@v1</p>
+<br>
+<p>            with:</p>
+<br>
+<p>              config: p/default</p>
+<br>
+<p>              audit_on: push</p>
+<br>
+<p>          - name: Check for blocking findings</p>
+<br>
+<p>            run: |</p>
+<br>
+<p>              if [ "${{ steps.semgrep.outputs.results }}" != "" ]; then</p>
+<br>
+<p>                echo "SAST found vulnerabilities. Fix before merging."</p>
+<br>
+<p>                exit 1</p>
+<br>
+<p>              fi</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>SAST Best Practices</h3>
 <br>
-<li>Run SAST on every pull request, not just on push to main.</li>
-<li>Use incremental scanning for faster feedback on large codebases.</li>
-<li>Tune rules to reduce false positives. Block only high-confidence findings.</li>
-<li>Create custom rules for your application's specific security patterns.</li>
 <br>
-<h2> Dependency Scanning</h2>
+<br>
+<p>* Run SAST on every pull request, not just on push to main.</p>
+<p>* Use incremental scanning for faster feedback on large codebases.</p>
+<p>* Tune rules to reduce false positives. Block only high-confidence findings.</p>
+<p>* Create custom rules for your application's specific security patterns.</p>
+<br>
+<br>
+<br>
+<h2>  Dependency Scanning</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Modern applications use dozens of open-source libraries. Each library introduces transitive dependencies with potential vulnerabilities.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Software Bill of Materials (SBOM)</h3>
+<br>
+<br>
+<br>
 <br>
 <p>An SBOM is a formal inventory of all software components in an application. Generate SBOMs in CycloneDX or SPDX format.</p>
 <br>
-<pre><code>
-# Generate SBOM with Syft
-
-syft packages . -o cyclonedx-json &gt; sbom.json
-
-
-
-# Scan SBOM for vulnerabilities with Grype
-
-grype sbom:./sbom.json
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # Generate SBOM with Syft</p>
+<br>
+<p>    syft packages . -o cyclonedx-json > sbom.json</p>
+<br>
+<br>
+<br>
+<p>    # Scan SBOM for vulnerabilities with Grype</p>
+<br>
+<p>    grype sbom:./sbom.json</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Dependency Scanning Tools</h3>
 <br>
-<li>**Dependabot**: GitHub's built-in dependency scanning and automated pull requests for patches.</li>
-<li>**Renovate**: Open-source dependency update tool with extensive customization.</li>
-<li>**Snyk**: Commercial vulnerability scanner with fix advice and license compliance.</li>
-<li>**OWASP Dependency-Check**: Open-source scanner that identifies CVEs in dependencies.</li>
 <br>
-<pre><code>
-# Dependabot configuration
-
-version: 2
-
-updates:
-
-  - package-ecosystem: &quot;npm&quot;
-
-    directory: &quot;/&quot;
-
-    schedule:
-
-      interval: &quot;weekly&quot;
-
-    open-pull-requests-limit: 10
-
-    labels:
-
-      - &quot;dependencies&quot;
-
-      - &quot;security&quot;
-
-</code></pre>
+<br>
+<p>* **Dependabot**: GitHub's built-in dependency scanning and automated pull requests for patches.</p>
+<p>* **Renovate**: Open-source dependency update tool with extensive customization.</p>
+<p>* **Snyk**: Commercial vulnerability scanner with fix advice and license compliance.</p>
+<p>* **OWASP Dependency-Check**: Open-source scanner that identifies CVEs in dependencies.</p>
+<br>
+<br>
+<br>
+<br>
+<p>    # Dependabot configuration</p>
+<br>
+<p>    version: 2</p>
+<br>
+<p>    updates:</p>
+<br>
+<p>      - package-ecosystem: "npm"</p>
+<br>
+<p>        directory: "/"</p>
+<br>
+<p>        schedule:</p>
+<br>
+<p>          interval: "weekly"</p>
+<br>
+<p>        open-pull-requests-limit: 10</p>
+<br>
+<p>        labels:</p>
+<br>
+<p>          - "dependencies"</p>
+<br>
+<p>          - "security"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Dependency Scanning Policy</h3>
 <br>
-<li>Block the pipeline on critical or high severity vulnerabilities in direct dependencies.</li>
-<li>Flag transitive dependency vulnerabilities but only block if they are exploitable.</li>
-<li>Require automated dependency updates within 7 days for critical, 30 days for high.</li>
-<li>Monitor for license compliance alongside vulnerability scanning.</li>
 <br>
-<h2> Dynamic Application Security Testing (DAST)</h2>
+<br>
+<p>* Block the pipeline on critical or high severity vulnerabilities in direct dependencies.</p>
+<p>* Flag transitive dependency vulnerabilities but only block if they are exploitable.</p>
+<p>* Require automated dependency updates within 7 days for critical, 30 days for high.</p>
+<p>* Monitor for license compliance alongside vulnerability scanning.</p>
+<br>
+<br>
+<br>
+<h2>  Dynamic Application Security Testing (DAST)</h2>
+<br>
+<br>
+<br>
 <br>
 <p>DAST tests the running application from the outside, simulating real-world attack patterns. It discovers vulnerabilities that SAST misses, such as authentication bypass, session management flaws, and business logic errors.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>DAST Tools</h3>
 <br>
-<li>**OWASP ZAP**: Open-source web application scanner with automated and manual modes.</li>
-<li>**Burp Suite**: Commercial web security testing platform with advanced scanning.</li>
-<li>**Arachni**: Open-source web application security scanner framework.</li>
+<br>
+<br>
+<p>* **OWASP ZAP**: Open-source web application scanner with automated and manual modes.</p>
+<p>* **Burp Suite**: Commercial web security testing platform with advanced scanning.</p>
+<p>* **Arachni**: Open-source web application security scanner framework.</p>
+<br>
+<br>
 <br>
 <h3>Pipeline Integration</h3>
 <br>
-<pre><code>
-# DAST with OWASP ZAP in CI/CD
-
-services:
-
-  zap:
-
-    image: ghcr.io/zaproxy/zaproxy:stable
-
-    options: --user root
-
-
-
-steps:
-
-  - name: Run ZAP Scan
-
-    run: |
-
-      docker run -v $(pwd):/zap/wrk:rw \
-
-        ghcr.io/zaproxy/zaproxy:stable \
-
-        zap-full-scan.py \
-
-        -t https://staging.example.com \
-
-        -r zap_report.html \
-
-        -z &quot;-config spider.maxDuration=10&quot;
-
-  - name: Check ZAP Results
-
-    run: |
-
-      if grep -q &quot;High&quot; zap_report.html; then
-
-        echo &quot;DAST found High severity issues&quot;
-
-        exit 1
-
-      fi
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # DAST with OWASP ZAP in CI/CD</p>
+<br>
+<p>    services:</p>
+<br>
+<p>      zap:</p>
+<br>
+<p>        image: ghcr.io/zaproxy/zaproxy:stable</p>
+<br>
+<p>        options: --user root</p>
+<br>
+<br>
+<br>
+<p>    steps:</p>
+<br>
+<p>      - name: Run ZAP Scan</p>
+<br>
+<p>        run: |</p>
+<br>
+<p>          docker run -v $(pwd):/zap/wrk:rw \</p>
+<br>
+<p>            ghcr.io/zaproxy/zaproxy:stable \</p>
+<br>
+<p>            zap-full-scan.py \</p>
+<br>
+<p>            -t https://staging.example.com \</p>
+<br>
+<p>            -r zap_report.html \</p>
+<br>
+<p>            -z "-config spider.maxDuration=10"</p>
+<br>
+<p>      - name: Check ZAP Results</p>
+<br>
+<p>        run: |</p>
+<br>
+<p>          if grep -q "High" zap_report.html; then</p>
+<br>
+<p>            echo "DAST found High severity issues"</p>
+<br>
+<p>            exit 1</p>
+<br>
+<p>          fi</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>DAST Best Practices</h3>
 <br>
-<li>Run DAST against staging or review environments, not production.</li>
-<li>Authenticate DAST scanners to test authenticated functionality.</li>
-<li>Use baseline scans for smoke testing and full scans for release candidates.</li>
-<li>Integrate with Jira or ticketing for automatic issue creation.</li>
 <br>
-<h2> Container Scanning</h2>
+<br>
+<p>* Run DAST against staging or review environments, not production.</p>
+<p>* Authenticate DAST scanners to test authenticated functionality.</p>
+<p>* Use baseline scans for smoke testing and full scans for release candidates.</p>
+<p>* Integrate with Jira or ticketing for automatic issue creation.</p>
+<br>
+<br>
+<br>
+<h2>  Container Scanning</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Container images bundle applications with their runtime dependencies. Vulnerabilities in base images or installed packages become part of the container.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Scanning Pipeline Integration</h3>
 <br>
-<pre><code>
-# Dockerfile with security best practices
-
-FROM alpine:3.19 AS builder
-
-RUN apk add --no-cache build-base
-
-
-
-FROM alpine:3.19
-
-RUN apk add --no-cache ca-certificates &amp;&amp; \
-
-    addgroup -S app &amp;&amp; adduser -S app -G app
-
-COPY --from=builder /app/bin/server /app/server
-
-USER app
-
-EXPOSE 8080
-
-</code></pre>
 <br>
-<pre><code>
-# Container scanning with Trivy in CI/CD
-
-jobs:
-
-  scan:
-
-    runs-on: ubuntu-latest
-
-    steps:
-
-      - uses: actions/checkout@v4
-
-      - name: Build image
-
-        run: docker build -t myapp:${{ github.sha }} .
-
-      - name: Scan with Trivy
-
-        uses: aquasecurity/trivy-action@master
-
-        with:
-
-          image-ref: myapp:${{ github.sha }}
-
-          format: sarif
-
-          output: trivy-results.sarif
-
-          severity: CRITICAL,HIGH
-
-      - name: Upload results
-
-        uses: github/codeql-action/upload-sarif@v3
-
-        with:
-
-          sarif_file: trivy-results.sarif
-
-</code></pre>
+<br>
+<br>
+<br>
+<p>    # Dockerfile with security best practices</p>
+<br>
+<p>    FROM alpine:3.19 AS builder</p>
+<br>
+<p>    RUN apk add --no-cache build-base</p>
+<br>
+<br>
+<br>
+<p>    FROM alpine:3.19</p>
+<br>
+<p>    RUN apk add --no-cache ca-certificates && \</p>
+<br>
+<p>        addgroup -S app && adduser -S app -G app</p>
+<br>
+<p>    COPY --from=builder /app/bin/server /app/server</p>
+<br>
+<p>    USER app</p>
+<br>
+<p>    EXPOSE 8080</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Container scanning with Trivy in CI/CD</p>
+<br>
+<p>    jobs:</p>
+<br>
+<p>      scan:</p>
+<br>
+<p>        runs-on: ubuntu-latest</p>
+<br>
+<p>        steps:</p>
+<br>
+<p>          - uses: actions/checkout@v4</p>
+<br>
+<p>          - name: Build image</p>
+<br>
+<p>            run: docker build -t myapp:${{ github.sha }} .</p>
+<br>
+<p>          - name: Scan with Trivy</p>
+<br>
+<p>            uses: aquasecurity/trivy-action@master</p>
+<br>
+<p>            with:</p>
+<br>
+<p>              image-ref: myapp:${{ github.sha }}</p>
+<br>
+<p>              format: sarif</p>
+<br>
+<p>              output: trivy-results.sarif</p>
+<br>
+<p>              severity: CRITICAL,HIGH</p>
+<br>
+<p>          - name: Upload results</p>
+<br>
+<p>            uses: github/codeql-action/upload-sarif@v3</p>
+<br>
+<p>            with:</p>
+<br>
+<p>              sarif_file: trivy-results.sarif</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Container Security Practices</h3>
 <br>
-<li>Use minimal base images (Alpine, distroless) to reduce attack surface.</li>
-<li>Scan images before pushing to the registry.</li>
-<li>Enforce signed images with Cosign.</li>
-<li>Enable granular runtime security with seccomp, AppArmor, or SELinux policies.</li>
 <br>
-<h2> Policy-as-Code</h2>
+<br>
+<p>* Use minimal base images (Alpine, distroless) to reduce attack surface.</p>
+<p>* Scan images before pushing to the registry.</p>
+<p>* Enforce signed images with Cosign.</p>
+<p>* Enable granular runtime security with seccomp, AppArmor, or SELinux policies.</p>
+<br>
+<br>
+<br>
+<h2>  Policy-as-Code</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Policy-as-code defines security and compliance rules as executable code. Policies are versioned, reviewed, and enforced automatically in the pipeline.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Open Policy Agent (OPA) and Rego</h3>
+<br>
+<br>
+<br>
 <br>
 <p>OPA enforces policies across the software lifecycle. Rego is OPA's policy language.</p>
 <br>
-<pre><code>
-# Rego policy: Require encryption at rest
-
-package kubernetes.storage
-
-
-
-deny[msg] {
-
-  volume := input.volumes[_]
-
-  volume.persistentVolumeClaim
-
-  not volume.encrypted
-
-  msg := sprintf(&quot;Volume %v must have encryption enabled&quot;, [volume.name])
-
-}
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # Rego policy: Require encryption at rest</p>
+<br>
+<p>    package kubernetes.storage</p>
+<br>
+<br>
+<br>
+<p>    deny[msg] {</p>
+<br>
+<p>      volume := input.volumes[_]</p>
+<br>
+<p>      volume.persistentVolumeClaim</p>
+<br>
+<p>      not volume.encrypted</p>
+<br>
+<p>      msg := sprintf("Volume %v must have encryption enabled", [volume.name])</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Policy Gates in the Pipeline</h3>
 <br>
-<pre><code>
-# Conftest: Policy enforcement for Kubernetes manifests
-
-steps:
-
-  - name: Check Kubernetes policies
-
-    run: |
-
-      conftest test deployment.yaml \
-
-        --policy policies/ \
-
-        --namespace kubernetes
-
-  - name: Check Terraform policies
-
-    run: |
-
-      conftest test main.tf \
-
-        --policy policies/terraform/
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # Conftest: Policy enforcement for Kubernetes manifests</p>
+<br>
+<p>    steps:</p>
+<br>
+<p>      - name: Check Kubernetes policies</p>
+<br>
+<p>        run: |</p>
+<br>
+<p>          conftest test deployment.yaml \</p>
+<br>
+<p>            --policy policies/ \</p>
+<br>
+<p>            --namespace kubernetes</p>
+<br>
+<p>      - name: Check Terraform policies</p>
+<br>
+<p>        run: |</p>
+<br>
+<p>          conftest test main.tf \</p>
+<br>
+<p>            --policy policies/terraform/</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Common Policy Rules</h3>
 <br>
-<li>Containers must not run as root.</li>
-<li>All ingress must have TLS enabled.</li>
-<li>S3 buckets must block public access.</li>
-<li>Database instances must have encryption at rest.</li>
-<li>IAM roles must have resource-level constraints.</li>
 <br>
-<h2> Building a DevSecOps Culture</h2>
+<br>
+<p>* Containers must not run as root.</p>
+<p>* All ingress must have TLS enabled.</p>
+<p>* S3 buckets must block public access.</p>
+<p>* Database instances must have encryption at rest.</p>
+<p>* IAM roles must have resource-level constraints.</p>
+<br>
+<br>
+<br>
+<h2>  Building a DevSecOps Culture</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Tools alone do not make DevSecOps successful. The human elements matter more.</p>
 <br>
-<li>**Developer empowerment**: Give developers access to security scan results and fix guidance. Do not use security as a gate without providing remediation support.</li>
-<li>**Security champions**: Train security champions in each development team. They bridge the gap between security and engineering.</li>
-<li>**Friction reduction**: Optimize scan times. A 30-minute SAST scan encourages skipping. A 2-minute scan integrates naturally into the workflow.</li>
-<li>**Blameless culture**: When security scans find issues, the process worked correctly. Celebrate catching issues early rather than blaming developers.</li>
 <br>
-<h2> Conclusion</h2>
+<br>
+<p>* **Developer empowerment**: Give developers access to security scan results and fix guidance. Do not use security as a gate without providing remediation support.</p>
+<p>* **Security champions**: Train security champions in each development team. They bridge the gap between security and engineering.</p>
+<p>* **Friction reduction**: Optimize scan times. A 30-minute SAST scan encourages skipping. A 2-minute scan integrates naturally into the workflow.</p>
+<p>* **Blameless culture**: When security scans find issues, the process worked correctly. Celebrate catching issues early rather than blaming developers.</p>
+<br>
+<br>
+<br>
+<h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <p>DevSecOps shifts security from a final gate to an integrated part of the development process. SAST catches code-level vulnerabilities, dependency scanning manages supply chain risk, DAST validates runtime behavior, container scanning secures artifacts, and policy-as-code enforces standards. Together, these practices make security a natural part of delivering software, not an obstacle to it.</p></div>
     </article>

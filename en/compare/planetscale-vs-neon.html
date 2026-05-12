@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1352",
+      "wordCount": "1560",
       "keywords": "Comparison, Technology",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/compare/planetscale-vs-neon.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/compare/planetscale-vs-neon.html"},
+      "articleBody": "PlanetScale vs Neon Introduction PlanetScale and Neon represent a new generation of database platforms built for modern development workflows. Both offer serverless MySQL (PlanetScale) and PostgreSQL (Neon) with features like branching, instant cloning, and scale-to-zero. They eliminate traditional database management while providing developer-friendly features that integrate with modern CI/CD and version control practices. Database Technology PlanetScale: Serverless MySQL PlanetScale is built on MySQL-compatible Vitess, the same technology that powers YouTube's database infrastructure. **Key characteristics:** * MySQL-compatible (most MySQL tools and ORMs work) * Vitess-based for horizontal scaling * Strong consistency with distributed transactions * VNode-based sharding for large datasets -- PlanetScale: standard MySQL syntax CREATE TABLE users ( id BIGINT AUTO_INCREMENT PRIMARY KEY, email VARCHAR(255) NOT NULL, name VARCHAR(100), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, UNIQUE KEY idx_email (email) ); -- PlanetScale-specific: no foreign key constraints -- (Vitess does not enforce FKs across shards) **Limitation:** No foreign key constraints (Vitess limitation). Joins work within the same shard but are limited across shards. Neon: Serverless PostgreSQL Neon is built on PostgreSQL with a custom storage engine that separates compute from storage. **Key characteristics:** * Full PostgreSQL compatibility (all PG features work) * Bottomless storage with page-level tiering * Instant branching using copy-on-write * Autoscaling from 0.25 to 16 vCPU -- Neon: full PostgreSQL with all features CREATE TABLE users ( id UUID PRIMARY KEY DEFAULT gen_random_uuid(), email TEXT NOT NULL UNIQUE, name TEXT, created_at TIMESTAMPTZ DEFAULT NOW() ); CREATE TABLE posts ( id UUID PRIMARY KEY DEFAULT gen_random_uuid(), author_id UUID REFERENCES users(id), title TEXT NOT NULL, body TEXT, created_at TIMESTAMPTZ DEFAULT NOW() ); -- Full PostgreSQL features work: JSONB, full-text search, GIS CREATE INDEX idx_posts_search ON posts USING GIN(to_tsvector('english', title || ' ' || COALESCE(body, ''))); **Strengths:** Full PostgreSQL compatibility including foreign keys, JSONB, full-text search, PostGIS, and all PostgreSQL extensions. Database Branching Branching is the killer feature of both platforms, modeled after Git. How It Works # PlanetScale CLI pscale branch create myapp add-billing-feature pscale branch promote myapp add-billing-feature # Neon CLI (neonctl) neonctl branches create --parent myapp --name add-billing-feature **PlanetScale branches:** * Branches are full read-write copies of the data * Schema changes are made on branches, then deployed via deploy requests * Deploy requests show schema diff, handle migrations, and auto-resolve conflicts **Neon branches:** * Branches use copy-on-write at the page level \u2014 nearly instant and storage-efficient * Logical replication between branches is supported * Time-travel: connect to any point in time within the retention window (like `git checkout` for databases) Serverless Capabilities | Feature | PlanetScale | Neon | |---------|-------------|------| | Scale-to-zero | Yes (after inactivity) | Yes (after 5-60 min) | | Cold start | ~1-2 seconds | ~1-3 seconds | | Max storage | 500GB (scalable) | 200GB (scalable) | | Max connections | 25-250 (plan dependent) | 100-500 (plan dependent) | | Compute scaling | Vertical (plan based) | Auto (0.25-16 vCPU) | | Regions | 50+ regions | 10+ regions | Pricing | Plan | PlanetScale | Neon | |------|-------------|------| | Free tier | 1GB storage, 100M row reads/month | 0.5GB storage, 100 compute hours | | Paid starter | ~$39/month | ~$19/month | | Pro | ~$129/month | ~$69/month | | Enterprise | Custom | Custom | Neon is generally more affordable at lower tiers. PlanetScale's pricing scales with row reads, which can be unpredictable for high-traffic applications. Developer Experience **PlanetScale** offers: * Web console with schema visualization * `pscale` CLI with shell integration * Deploy request workflow (like GitHub PRs) * VSCode extension * Connection pooling via PlanetScale Boost **Neon** offers: * Web console with SQL editor * `neonctl` CLI * Connection pooling via PgBouncer (built-in) * Vercel, Netlify, and Cloudflare integration * Drizzle Studio integration Ecosystem Compatibility **PlanetScale** works with MySQL-compatible ORMs: * Prisma (MySQL adapter) * Drizzle (MySQL adapter) * TypeORM * Knex * Raw `mysql2` driver **Neon** works with PostgreSQL-compatible ORMs: * Prisma (PostgreSQL adapter) * Drizzle (PostgreSQL adapter) * TypeORM * Kysely * Raw `pg` driver * Supabase SDK When to Choose What **Choose PlanetScale when:** * Your team is more familiar with MySQL * You want the deploy-request workflow for database schema changes * You need horizontal read scaling with Vitess * Your application uses MySQL-compatible tools **Choose Neon when:** * You want full PostgreSQL compatibility (foreign keys, extensions) * You need PostgreSQL-specific features (JSONB, full-text search, PostGIS) * You want more predictable pricing * You value time-travel queries and instant branching * You're deploying on Vercel or Edge Functions Conclusion PlanetScale and Neon both solve the same fundamental problem \u2014 making databases as developer-friendly as the rest of the modern toolchain \u2014 but they serve different database ecosystems. If MySQL is your database of choice, PlanetScale's Vitess-based architecture provides scalability with a familiar workflow. If PostgreSQL is your preference, Neon offers full PG compatibility with innovative branching and autoscaling features. In 2026, Neon's PostgreSQL-based approach has broader ecosystem support and more affordable pricing, making it the default choice for new projects."
     }
     </script>
     <script type="application/ld+json">
@@ -73,204 +74,322 @@
         <span class="tag-cat">Technology</span></div>
       <h1 class="article-title">PlanetScale vs Neon</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h2> Introduction</h2>
+      <div class="article-body"><h1>PlanetScale vs Neon</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <p>PlanetScale and Neon represent a new generation of database platforms built for modern development workflows. Both offer serverless MySQL (PlanetScale) and PostgreSQL (Neon) with features like branching, instant cloning, and scale-to-zero. They eliminate traditional database management while providing developer-friendly features that integrate with modern CI/CD and version control practices.</p>
 <br>
-<h2> Database Technology</h2>
+<br>
+<br>
+<br>
+<h2>  Database Technology</h2>
+<br>
+<br>
+<br>
 <br>
 <h3>PlanetScale: Serverless MySQL</h3>
 <br>
+<br>
+<br>
+<br>
 <p>PlanetScale is built on MySQL-compatible Vitess, the same technology that powers YouTube's database infrastructure.</p>
 <br>
-<p>**Key characteristics:**</p>
-<li>MySQL-compatible (most MySQL tools and ORMs work)</li>
-<li>Vitess-based for horizontal scaling</li>
-<li>Strong consistency with distributed transactions</li>
-<li>VNode-based sharding for large datasets</li>
 <br>
-<pre><code>
--- PlanetScale: standard MySQL syntax
-
-CREATE TABLE users (
-
-  id BIGINT AUTO_INCREMENT PRIMARY KEY,
-
-  email VARCHAR(255) NOT NULL,
-
-  name VARCHAR(100),
-
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-  UNIQUE KEY idx_email (email)
-
-);
-
-
-
--- PlanetScale-specific: no foreign key constraints
-
--- (Vitess does not enforce FKs across shards)
-
-</code></pre>
+<br>
+<br>
+<p>**Key characteristics:**</p>
+<br>
+<p>* MySQL-compatible (most MySQL tools and ORMs work)</p>
+<p>* Vitess-based for horizontal scaling</p>
+<p>* Strong consistency with distributed transactions</p>
+<p>* VNode-based sharding for large datasets</p>
+<br>
+<br>
+<br>
+<br>
+<p>    -- PlanetScale: standard MySQL syntax</p>
+<br>
+<p>    CREATE TABLE users (</p>
+<br>
+<p>      id BIGINT AUTO_INCREMENT PRIMARY KEY,</p>
+<br>
+<p>      email VARCHAR(255) NOT NULL,</p>
+<br>
+<p>      name VARCHAR(100),</p>
+<br>
+<p>      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,</p>
+<br>
+<p>      UNIQUE KEY idx_email (email)</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<p>    -- PlanetScale-specific: no foreign key constraints</p>
+<br>
+<p>    -- (Vitess does not enforce FKs across shards)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Limitation:** No foreign key constraints (Vitess limitation). Joins work within the same shard but are limited across shards.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>Neon: Serverless PostgreSQL</h3>
+<br>
+<br>
+<br>
 <br>
 <p>Neon is built on PostgreSQL with a custom storage engine that separates compute from storage.</p>
 <br>
-<p>**Key characteristics:**</p>
-<li>Full PostgreSQL compatibility (all PG features work)</li>
-<li>Bottomless storage with page-level tiering</li>
-<li>Instant branching using copy-on-write</li>
-<li>Autoscaling from 0.25 to 16 vCPU</li>
 <br>
-<pre><code>
--- Neon: full PostgreSQL with all features
-
-CREATE TABLE users (
-
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-
-  email TEXT NOT NULL UNIQUE,
-
-  name TEXT,
-
-  created_at TIMESTAMPTZ DEFAULT NOW()
-
-);
-
-
-
-CREATE TABLE posts (
-
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-
-  author_id UUID REFERENCES users(id),
-
-  title TEXT NOT NULL,
-
-  body TEXT,
-
-  created_at TIMESTAMPTZ DEFAULT NOW()
-
-);
-
-
-
--- Full PostgreSQL features work: JSONB, full-text search, GIS
-
-CREATE INDEX idx_posts_search ON posts USING GIN(to_tsvector(&#x27;english&#x27;, title || &#x27; &#x27; || COALESCE(body, &#x27;&#x27;)));
-
-</code></pre>
+<br>
+<br>
+<p>**Key characteristics:**</p>
+<br>
+<p>* Full PostgreSQL compatibility (all PG features work)</p>
+<p>* Bottomless storage with page-level tiering</p>
+<p>* Instant branching using copy-on-write</p>
+<p>* Autoscaling from 0.25 to 16 vCPU</p>
+<br>
+<br>
+<br>
+<br>
+<p>    -- Neon: full PostgreSQL with all features</p>
+<br>
+<p>    CREATE TABLE users (</p>
+<br>
+<p>      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),</p>
+<br>
+<p>      email TEXT NOT NULL UNIQUE,</p>
+<br>
+<p>      name TEXT,</p>
+<br>
+<p>      created_at TIMESTAMPTZ DEFAULT NOW()</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<p>    CREATE TABLE posts (</p>
+<br>
+<p>      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),</p>
+<br>
+<p>      author_id UUID REFERENCES users(id),</p>
+<br>
+<p>      title TEXT NOT NULL,</p>
+<br>
+<p>      body TEXT,</p>
+<br>
+<p>      created_at TIMESTAMPTZ DEFAULT NOW()</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<p>    -- Full PostgreSQL features work: JSONB, full-text search, GIS</p>
+<br>
+<p>    CREATE INDEX idx_posts_search ON posts USING GIN(to_tsvector('english', title || ' ' || COALESCE(body, '')));</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Strengths:** Full PostgreSQL compatibility including foreign keys, JSONB, full-text search, PostGIS, and all PostgreSQL extensions.</p>
 <br>
-<h2> Database Branching</h2>
+<br>
+<br>
+<br>
+<h2>  Database Branching</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Branching is the killer feature of both platforms, modeled after Git.</p>
 <br>
+<br>
+<br>
+<br>
 <h3>How It Works</h3>
 <br>
-<pre><code>
-# PlanetScale CLI
-
-pscale branch create myapp add-billing-feature
-
-pscale branch promote myapp add-billing-feature
-
-
-
-# Neon CLI (neonctl)
-
-neonctl branches create --parent myapp --name add-billing-feature
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # PlanetScale CLI</p>
+<br>
+<p>    pscale branch create myapp add-billing-feature</p>
+<br>
+<p>    pscale branch promote myapp add-billing-feature</p>
+<br>
+<br>
+<br>
+<p>    # Neon CLI (neonctl)</p>
+<br>
+<p>    neonctl branches create --parent myapp --name add-billing-feature</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**PlanetScale branches:**</p>
-<li>Branches are full read-write copies of the data</li>
-<li>Schema changes are made on branches, then deployed via deploy requests</li>
-<li>Deploy requests show schema diff, handle migrations, and auto-resolve conflicts</li>
+<br>
+<p>* Branches are full read-write copies of the data</p>
+<p>* Schema changes are made on branches, then deployed via deploy requests</p>
+<p>* Deploy requests show schema diff, handle migrations, and auto-resolve conflicts</p>
+<br>
+<br>
 <br>
 <p>**Neon branches:**</p>
-<li>Branches use copy-on-write at the page level — nearly instant and storage-efficient</li>
-<li>Logical replication between branches is supported</li>
-<li>Time-travel: connect to any point in time within the retention window (like `git checkout` for databases)</li>
 <br>
-<h2> Serverless Capabilities</h2>
+<p>* Branches use copy-on-write at the page level — nearly instant and storage-efficient</p>
+<p>* Logical replication between branches is supported</p>
+<p>* Time-travel: connect to any point in time within the retention window (like `git checkout` for databases)</p>
+<br>
+<br>
+<br>
+<h2>  Serverless Capabilities</h2>
+<br>
+<br>
+<br>
 <br>
 <p>| Feature | PlanetScale | Neon |</p>
+<br>
 <p>|---------|-------------|------|</p>
+<br>
 <p>| Scale-to-zero | Yes (after inactivity) | Yes (after 5-60 min) |</p>
+<br>
 <p>| Cold start | ~1-2 seconds | ~1-3 seconds |</p>
+<br>
 <p>| Max storage | 500GB (scalable) | 200GB (scalable) |</p>
+<br>
 <p>| Max connections | 25-250 (plan dependent) | 100-500 (plan dependent) |</p>
+<br>
 <p>| Compute scaling | Vertical (plan based) | Auto (0.25-16 vCPU) |</p>
+<br>
 <p>| Regions | 50+ regions | 10+ regions |</p>
 <br>
-<h2> Pricing</h2>
+<br>
+<br>
+<br>
+<h2>  Pricing</h2>
+<br>
+<br>
+<br>
 <br>
 <p>| Plan | PlanetScale | Neon |</p>
+<br>
 <p>|------|-------------|------|</p>
+<br>
 <p>| Free tier | 1GB storage, 100M row reads/month | 0.5GB storage, 100 compute hours |</p>
+<br>
 <p>| Paid starter | ~$39/month | ~$19/month |</p>
+<br>
 <p>| Pro | ~$129/month | ~$69/month |</p>
+<br>
 <p>| Enterprise | Custom | Custom |</p>
+<br>
+<br>
+<br>
 <br>
 <p>Neon is generally more affordable at lower tiers. PlanetScale's pricing scales with row reads, which can be unpredictable for high-traffic applications.</p>
 <br>
-<h2> Developer Experience</h2>
+<br>
+<br>
+<br>
+<h2>  Developer Experience</h2>
+<br>
+<br>
+<br>
 <br>
 <p>**PlanetScale** offers:</p>
-<li>Web console with schema visualization</li>
-<li>`pscale` CLI with shell integration</li>
-<li>Deploy request workflow (like GitHub PRs)</li>
-<li>VSCode extension</li>
-<li>Connection pooling via PlanetScale Boost</li>
+<br>
+<p>* Web console with schema visualization</p>
+<p>* `pscale` CLI with shell integration</p>
+<p>* Deploy request workflow (like GitHub PRs)</p>
+<p>* VSCode extension</p>
+<p>* Connection pooling via PlanetScale Boost</p>
+<br>
+<br>
 <br>
 <p>**Neon** offers:</p>
-<li>Web console with SQL editor</li>
-<li>`neonctl` CLI</li>
-<li>Connection pooling via PgBouncer (built-in)</li>
-<li>Vercel, Netlify, and Cloudflare integration</li>
-<li>Drizzle Studio integration</li>
 <br>
-<h2> Ecosystem Compatibility</h2>
+<p>* Web console with SQL editor</p>
+<p>* `neonctl` CLI</p>
+<p>* Connection pooling via PgBouncer (built-in)</p>
+<p>* Vercel, Netlify, and Cloudflare integration</p>
+<p>* Drizzle Studio integration</p>
+<br>
+<br>
+<br>
+<h2>  Ecosystem Compatibility</h2>
+<br>
+<br>
+<br>
 <br>
 <p>**PlanetScale** works with MySQL-compatible ORMs:</p>
 <br>
-<li>Prisma (MySQL adapter)</li>
-<li>Drizzle (MySQL adapter)</li>
-<li>TypeORM</li>
-<li>Knex</li>
-<li>Raw `mysql2` driver</li>
+<br>
+<br>
+<p>* Prisma (MySQL adapter)</p>
+<p>* Drizzle (MySQL adapter)</p>
+<p>* TypeORM</p>
+<p>* Knex</p>
+<p>* Raw `mysql2` driver</p>
+<br>
+<br>
 <br>
 <p>**Neon** works with PostgreSQL-compatible ORMs:</p>
 <br>
-<li>Prisma (PostgreSQL adapter)</li>
-<li>Drizzle (PostgreSQL adapter)</li>
-<li>TypeORM</li>
-<li>Kysely</li>
-<li>Raw `pg` driver</li>
-<li>Supabase SDK</li>
 <br>
-<h2> When to Choose What</h2>
+<br>
+<p>* Prisma (PostgreSQL adapter)</p>
+<p>* Drizzle (PostgreSQL adapter)</p>
+<p>* TypeORM</p>
+<p>* Kysely</p>
+<p>* Raw `pg` driver</p>
+<p>* Supabase SDK</p>
+<br>
+<br>
+<br>
+<h2>  When to Choose What</h2>
+<br>
+<br>
+<br>
 <br>
 <p>**Choose PlanetScale when:**</p>
-<li>Your team is more familiar with MySQL</li>
-<li>You want the deploy-request workflow for database schema changes</li>
-<li>You need horizontal read scaling with Vitess</li>
-<li>Your application uses MySQL-compatible tools</li>
+<br>
+<p>* Your team is more familiar with MySQL</p>
+<p>* You want the deploy-request workflow for database schema changes</p>
+<p>* You need horizontal read scaling with Vitess</p>
+<p>* Your application uses MySQL-compatible tools</p>
+<br>
+<br>
 <br>
 <p>**Choose Neon when:**</p>
-<li>You want full PostgreSQL compatibility (foreign keys, extensions)</li>
-<li>You need PostgreSQL-specific features (JSONB, full-text search, PostGIS)</li>
-<li>You want more predictable pricing</li>
-<li>You value time-travel queries and instant branching</li>
-<li>You're deploying on Vercel or Edge Functions</li>
 <br>
-<h2> Conclusion</h2>
+<p>* You want full PostgreSQL compatibility (foreign keys, extensions)</p>
+<p>* You need PostgreSQL-specific features (JSONB, full-text search, PostGIS)</p>
+<p>* You want more predictable pricing</p>
+<p>* You value time-travel queries and instant branching</p>
+<p>* You're deploying on Vercel or Edge Functions</p>
+<br>
+<br>
+<br>
+<h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <p>PlanetScale and Neon both solve the same fundamental problem — making databases as developer-friendly as the rest of the modern toolchain — but they serve different database ecosystems. If MySQL is your database of choice, PlanetScale's Vitess-based architecture provides scalability with a familiar workflow. If PostgreSQL is your preference, Neon offers full PG compatibility with innovative branching and autoscaling features. In 2026, Neon's PostgreSQL-based approach has broader ecosystem support and more affordable pricing, making it the default choice for new projects.</p></div>
     </article>

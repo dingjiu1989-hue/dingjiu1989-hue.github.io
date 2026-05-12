@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "7621",
+      "wordCount": "8725",
       "keywords": "System Design, Microservices, Architecture, CQRS, Event-Driven, Caching, CAP Theorem, Scalability",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/system-design-fundamentals-2026.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/system-design-fundamentals-2026.html"},
+      "articleBody": "System Design Fundamentals 2026: A Developer Guide to Scalable Applications System Design Fundamentals 2026: A Developer's Guide to Scalable Applications System design interviews get all the attention, but the real value is in day-to-day decisions: should you extract that service? Add a cache? Reach for a message queue? This guide covers the fundamental patterns, their trade-offs, and the concrete decisions you'll face building production systems in 2026. \\--- 1\\. Microservices vs Monolith vs Modular Monolith The \"monolith vs microservices\" debate has matured. In 2026, the winner is often somewhere in between. | Architecture | Team Size | Deploy Frequency | Best For | |---|---|---|---| | **Monolith** | 1\u20135 | Low | Prototypes, internal tools, MVPs | | **Modular Monolith** | 3\u201315 | Medium | Most business apps, teams that aren't Spotify-sized | | **Microservices** | 10+ per service | High | Large orgs with clear domain boundaries | The Modular Monolith Sweet Spot A modular monolith is a single deployable unit with **strict module boundaries**. Modules communicate through well-defined interfaces but share the same process and database. \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 Modular Monolith \u2502 \u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 \u2502 \u2502 Orders \u2502 \u2502 Billing \u2502 \u2502 \u2502 \u2502 Module \u2502\u2500\u2500\u2502 Module \u2502 \u2502 \u2502 \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u2502 \u2502 \u2502 \u2502 \u2502 \u250c\u2500\u2500\u2500\u2500\u25bc\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25bc\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 \u2502 \u2502 Shared Kernel \u2502 \u2502 \u2502 \u2502 (DB, messaging, auth) \u2502 \u2502 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 **When to extract a service**: When two conditions are met \u2014 the module has a clear bounded context (DDD), and you need independent scaling or deploy velocity that the monolith can't provide. **Rule of thumb**: Don't break your monolith until it hurts. Premature microservices add distributed transaction complexity, network latency, and operational overhead. Start modular, extract surgically. Real-World Decision Tree Monolith \u2192 Modular Monolith \u2192 Selective Extraction \u2192 Full Microservices MVP Phase: Monolith 10k users/5 devs: Modular monolith 100k users: Extract payments (PCI scope) 1M users: Extract search (separate scale) 10M users: Extract recommendations (different stack) \\--- 2\\. CQRS: Command Query Responsibility Segregation CQRS separates **reads** from **writes** \u2014 different models, sometimes different databases. When CQRS Makes Sense * Your read queries are complex and don't map well to your write model (e.g., reporting dashboards) * Your read and write workloads have different scaling requirements (10:1 read-to-write ratio) * You need different data shapes for reading vs writing (e.g., write normalized, read denormalized) A Simple CQRS Implementation # --- Command Side (Writes) --- class CreateOrderCommand: def __init__(self, user_id: str, items: list): self.user_id = user_id self.items = items class OrderCommandHandler: def handle(self, cmd: CreateOrderCommand) -> str: # Validate business rules order = Order.create(cmd.user_id, cmd.items) order.save() # Write to transactional DB (PostgreSQL) event_bus.publish(\"order.created\", {\"order_id\": order.id}) return order.id # --- Query Side (Reads) --- class OrderQueryHandler: def get_order_summary(self, user_id: str) -> dict: # Read from denormalized read model (could be a different DB) return read_db.query( \"SELECT * FROM order_summaries WHERE user_id = :uid\", {\"uid\": user_id} ) CQRS Without Event Sourcing You don't need event sourcing to use CQRS. The most common pattern is: * **Write** to a normalized PostgreSQL table 2\\. **Sync** (or async via CDC) to a read-optimized table 3\\. **Read** from the read table -- Write model: normalized CREATE TABLE orders ( id UUID PRIMARY KEY, user_id UUID NOT NULL, status VARCHAR(20) NOT NULL, total_cents BIGINT NOT NULL, created_at TIMESTAMP DEFAULT NOW() ); CREATE TABLE order_items ( id UUID PRIMARY KEY, order_id UUID REFERENCES orders(id), product_id UUID NOT NULL, quantity INT NOT NULL, unit_price_cents BIGINT NOT NULL ); -- Read model: denormalized for fast queries CREATE TABLE order_summaries ( order_id UUID PRIMARY KEY, user_id UUID NOT NULL, status VARCHAR(20) NOT NULL, item_count INT NOT NULL, total_cents BIGINT NOT NULL, product_names TEXT[] NOT NULL, created_at TIMESTAMP DEFAULT NOW() ); When NOT to Use CQRS * Your app is a simple CRUD interface with no complex queries * You don't need separate read/write scaling * Your team is small and you can't justify the infrastructure overhead \\--- 3\\. Event-Driven Architecture Event-driven systems decouple producers from consumers. When an event happens, interested services react. Core Concepts \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 Event Bus \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 Producer \u2502\u2500\u2500\u2500\u2500\u2500(Kafka/RMQ)\u2500\u2500\u2500\u2500\u25b6\u2502 Consumer 1 \u2502 \u2502 (Orders) \u2502 \u2502 (Analytics) \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25b6\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 Consumer 2 \u2502 \u2502 (Email) \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 Message Queue Comparison | Feature | Kafka | RabbitMQ | SQS | |---|---|---|---| | **Delivery** | At-least-once, exactly-once (idempotent) | At-most-once, at-least-once | At-least-once | | **Ordering** | Per-partition guaranteed | Not guaranteed (unless single queue) | FIFO queue (limited throughput) | | **Persistence** | Disk-based, configurable retention | Memory + disk (lazy queues) | Automatic (up to 14 days) | | **Throughput** | Millions/sec | Thousands/sec | Unlimited (soft limit 300/s for FIFO) | | **Consumer model** | Pull-based (offset tracking) | Push or pull | Pull-based (long polling) | | **Use case** | Event sourcing, stream processing, logs | Task queues, RPC, work queues | Serverless workloads, simple decoupling | | **Operational cost** | High (requires Zookeeper/KRaft) | Medium | Zero (fully managed) | Kafka in Practice: The Url Shortener Click Stream # Producer \u2014 emit click events def record_click(short_code: str, ip: str, user_agent: str): producer.send( topic=\"url_clicks\", key=short_code.encode(), # Same key \u2192 same partition \u2192 ordered value={ \"short_code\": short_code, \"ip\": ip, \"user_agent\": user_agent, \"timestamp\": int(time.time()), } ) # Consumer 1 \u2014 real-time analytics (e.g., update Redis counters) def consume_clicks_for_analytics(): for message in consumer: click = message.value redis.zincrby(\"popular_urls:today\", 1, click[\"short_code\"]) redis.incr(f\"url:{click['short_code']}:clicks\") # Consumer 2 \u2014 store raw clicks in data warehouse def consume_clicks_for_storage(): for message in consumer: warehouse.insert_one(message.value) Event Sourcing: Storing State as Events Instead of storing the current state, event sourcing stores a sequence of state-changing events. The current state is derived by replaying them. # Events (immutable facts) events = [ {\"type\": \"AccountCreated\", \"data\": {\"user_id\": \"u1\", \"email\": \"a@b.com\"}}, {\"type\": \"EmailVerified\", \"data\": {\"user_id\": \"u1\", \"verified_at\": \"2026-05-01\"}}, {\"type\": \"PasswordChanged\", \"data\": {\"user_id\": \"u1\", \"changed_at\": \"2026-05-10\"}}, ] # Derive current state by replaying events def get_account_state(events): state = {\"email\": None, \"email_verified\": False, \"password_hash\": None} for event in events: if event[\"type\"] == \"AccountCreated\": state[\"email\"] = event[\"data\"][\"email\"] elif event[\"type\"] == \"EmailVerified\": state[\"email_verified\"] = True return state **Trade-offs**: Event sourcing gives you a complete audit trail and time travel, but makes querying awkward (you need projections) and schema evolution painful. \\--- 4\\. Database Scaling Strategies Read Replicas The simplest scaling strategy: one primary handles writes, replicas handle reads. \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 Primary DB \u2502\u25c0\u2500\u2500 Writes \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 \u2502 \u2502 \u250c\u2500\u2500\u2500\u2500\u25bc\u2500\u2500\u2500\u2500\u2500\u2510 \u250c\u2500\u2500\u2500\u2500\u2500\u25bc\u2500\u2500\u2500\u2500\u2510 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25bc\u2500\u2500\u2510 \u2502 Replica 1\u2502 \u2502 Replica 2\u2502 \u2502 Replica 3\u2502 \u2502 (Reads) \u2502 \u2502 (Reads) \u2502 \u2502 (Reads) \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 # Using read/write separation in code class DatabaseRouter: def __init__(self): self.primary = create_engine(PRIMARY_URL) self.replicas = [create_engine(url) for url in REPLICA_URLS] self.replica_index = 0 def write(self, query, params=None): with self.primary.begin() as conn: return conn.execute(query, params or {}) def read(self, query, params=None): # Round-robin across replicas replica = self.replicas[self.replica_index % len(self.replicas)] self.replica_index += 1 return replica.execute(query, params or {}) **Replication lag** is the #1 problem. If your app reads immediately after a write (e.g., \"you just placed an order\" page), route that read to the primary. This is called **read-after-write consistency**. async def create_order_and_redirect(user_id: str, items: list): order_id = db.write(\"INSERT INTO orders ... RETURNING id\") # Read-after-write: force this read to the primary order = db.read_from_primary( \"SELECT * FROM orders WHERE id = :oid\", {\"oid\": order_id} ) return redirect(f\"/orders/{order_id}\") Sharding (Horizontal Partitioning) Split data across databases by a shard key. | Strategy | Shard Key | Pros | Cons | |---|---|---|---| | **Hash-based** | hash(user_id) % N | Even distribution | Resharding is painful (need consistent hashing) | | **Range-based** | user_id 1\u201310000 \u2192 shard 1 | Range queries work | Hot spots possible | | **Directory-based** | Lookup table maps key \u2192 shard | Flexible, re-shardable | Extra lookup, single point of failure | # Consistent hashing \u2014 minimizes re-sharding class ConsistentHashRing: def __init__(self, nodes: list, replicas: int = 150): self.ring = {} for node in nodes: for i in range(replicas): key = self._hash(f\"{node}:{i}\") self.ring[key] = node self.sorted_keys = sorted(self.ring.keys()) def get_node(self, key: str) -> str: if not self.ring: return None hash_val = self._hash(key) for ring_key in self.sorted_keys: if hash_val return self.ring[ring_key] return self.ring[self.sorted_keys[0]] def _hash(self, key: str) -> int: return int(hashlib.md5(key.encode()).hexdigest(), 16) Partitioning (Within a Database) Split a table into smaller physical chunks. PostgreSQL declarative partitioning: CREATE TABLE events ( event_id UUID NOT NULL, occurred_at TIMESTAMP NOT NULL, payload JSONB ) PARTITION BY RANGE (occurred_at); CREATE TABLE events_2026_q1 PARTITION OF events FOR VALUES FROM ('2026-01-01') TO ('2026-04-01'); CREATE TABLE events_2026_q2 PARTITION OF events FOR VALUES FROM ('2026-04-01') TO ('2026-07-01'); Partition pruning means queries with `WHERE occurred_at >= '2026-04-01'` only scan relevant partitions. \\--- 5\\. Caching Layers The Three Cache Levels CDN \u2500\u2500\u2500 Application Cache (Redis) \u2500\u2500\u2500 In-Memory Cache (Local) \u2502 \u2502 \u2502 \u2502 Expensive to fill Fastest access \u2502 Shared across servers 1-5\u03bcs per get \u2502 50-500\u03bcs per get Lost on restart Cache Strategies | Strategy | Read Behavior | Write Behavior | Best For | |---|---|---|---| | **Cache Aside** | Check cache \u2192 miss \u2192 load from DB \u2192 populate cache | Write to DB, invalidate cache key | Most general-purpose apps | | **Read Through** | Cache is authoritative; loads from DB on miss | Write through to DB; cache handles loading | When cache handles persistence | | **Write Through** | \u2014 | Write to cache first, then DB synchronously | Apps needing strong consistency | | **Write Behind** | \u2014 | Write to cache, async flush to DB | High-write-throughput apps | | **Write Around** | \u2014 | Write to DB only; cache populated on subsequent read | Write-once, read-rarely data | Cache Aside \u2014 The Default Choice async def get_user_profile(user_id: str) -> dict: cache_key = f\"user:profile:{user_id}\" # 1. Try cache cached = await redis.get(cache_key) if cached: return json.loads(cached) # 2. Cache miss \u2014 load from database profile = await db.query( \"SELECT * FROM user_profiles WHERE user_id = :uid\", {\"uid\": user_id} ) if profile: # 3. Populate cache with TTL await redis.setex(cache_key, 300, json.dumps(profile)) return profile async def update_user_profile(user_id: str, data: dict): # 1. Write to database await db.execute( \"UPDATE user_profiles SET name = :name WHERE user_id = :uid\", {\"uid\": user_id, \"name\": data[\"name\"]} ) # 2. Invalidate cache (don't update it \u2014 let next read re-populate) await redis.delete(f\"user:profile:{user_id}\") Write Behind \u2014 For High-Volume Writes # Batch writer process \u2014 runs every 5 seconds write_buffer = [] async def write_to_cache(key: str, value: dict): write_buffer.append((key, value)) if len(write_buffer) >= 100: await flush_buffer() async def flush_buffer(): async with db.transaction(): for key, value in write_buffer: await db.execute( \"UPSERT INTO ... VALUES (:k, :v)\", {\"k\": key, \"v\": json.dumps(value)} ) write_buffer.clear() # Start background flusher async def periodic_flush(): while True: await asyncio.sleep(5) if write_buffer: await flush_buffer() **Write behind risk**: if the process crashes before the flush, data is lost. Use a persistent queue (Kafka) for critical writes. \\--- 6\\. CAP Theorem Explained Practically CAP says a distributed data store can provide at most two of three guarantees: **Consistency**, **Availability**, and **Partition Tolerance**. What CAP Actually Means * **C (Consistency)**: Every read sees the most recent write (or an error) * **A (Availability)**: Every request gets a non-error response (not necessarily the latest data) * **P (Partition Tolerance)**: System continues working despite network failures The Key Insight You **must** choose CP or AP. Partition tolerance is non-negotiable in distributed systems \u2014 networks WILL fail. | System | Choice | Real-World | |---|---|---| | PostgreSQL (single node) | CA | No distribution, no partition | | PostgreSQL + synchronous replication | CP | Writes wait for replicas | | Cassandra | AP | Writes always succeed, reads may be stale | | DynamoDB (eventual consistency) | AP | Default read is eventually consistent | | DynamoDB (strongly consistent) | CP | Higher latency, lower availability | | MongoDB (replica set) | CP | Writes acknowledged by majority | Practical CAP Decisions # AP choice \u2014 accept stale reads for availability async def get_product_stock(product_id: str) -> int: # Read from nearest replica, may be stale return await replica.query( \"SELECT stock FROM products WHERE id = :pid\", {\"pid\": product_id} ) # CP choice \u2014 accept slower reads for consistency async def get_product_stock_cp(product_id: str) -> int: # Read from primary, always latest return await primary.query( \"SELECT stock FROM products WHERE id = :pid\", {\"pid\": product_id} ) **Rule of thumb**: Use eventual consistency for read-heavy, non-critical data (product descriptions, view counts). Use strong consistency for financial data, inventory, and auth tokens. \\--- 7\\. Load Balancing Strategies Layer 4 vs Layer 7 | Aspect | Layer 4 (TCP) | Layer 7 (HTTP) | |---|---|---| | **Routing based on** | IP + port | URL, headers, cookies, body | | **Performance** | Very fast | Slower (inspects payload) | | **Features** | Simple forwarding | Content-based routing, rate limiting | | **Examples** | HAProxy (TCP mode), AWS NLB | NGINX, Envoy, AWS ALB | Algorithms # Round Robin \u2014 predictable, but doesn't handle different load sizes servers = [\"app-01\", \"app-02\", \"app-03\"] next_server = current_index % len(servers) current_index += 1 # Least Connections \u2014 better for variable request durations def least_connections(servers: list) -> str: return min(servers, key=lambda s: s.active_connections) # IP Hash \u2014 session persistence without cookies def ip_hash(client_ip: str, servers: list) -> str: hash_val = int(hashlib.md5(client_ip.encode()).hexdigest(), 16) return servers[hash_val % len(servers)] Health Checks: The Bare Minimum \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 /healthz \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 LB \u2502\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25b6\u2502 App-01 \u2502\u2500\u2500\u25b6 Returns 200 \u2502 \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502 \u2502\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25b6\u2502 App-02 \u2502\u2500\u2500\u25b6 Returns 500 (removed from pool) \u2502 \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502 \u2502\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25b6\u2502 App-03 \u2502\u2500\u2500\u25b6 Returns 200 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 # /healthz endpoint @app.get(\"/healthz\") async def health_check(): # Check critical dependencies db_ok = await check_database() cache_ok = await check_redis() if db_ok and cache_ok: return {\"status\": \"ok\"} return {\"status\": \"degraded\"}, 503 \\--- 8\\. API Gateway Patterns An API gateway sits between clients and your services, handling cross-cutting concerns. \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 API Gateway \u2502 \u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 Client \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u25b6 Auth \u2502 \u2502 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 \u2502\u2500\u25b6 Rate Limit \u2502 \u2502\u2500\u2500\u25b6 Service A \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502\u2500\u2500\u25b6 Service B \u2502\u2500\u25b6 Routing \u2502 \u2502 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502\u2500\u2500\u25b6 Service C \u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 \u2502\u2500\u25b6 Logging \u2502 \u2502 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 What the Gateway Handles # Before gateway \u2014 each service handles auth @app.route(\"/api/orders\") class OrdersResource: def get(self): token = request.headers[\"Authorization\"] user = verify_token(token) # Duplicated in EVERY service # After gateway \u2014 auth is centralized # Service code is simpler: @app.route(\"/api/orders\") class OrdersResource: def get(self): user = request.environ[\"X-Authenticated-User\"] # Set by gateway return get_orders(user[\"id\"]) Gateway vs Service Mesh | Concern | API Gateway | Service Mesh (e.g., Istio) | |---|---|---| | **Client-facing** | Yes (edge) | No (internal) | | **Auth** | Token verification, API keys | mTLS between services | | **Rate limiting** | Per-client, per-endpoint | Per-service | | **Routing** | URL-based | Traffic splitting, canary | | **Location** | Edge proxy | Sidecar per pod | **Recommendation**: Start with an API gateway. Add a service mesh only when you have dozens of services and need advanced traffic management. \\--- 9\\. Circuit Breaker and Resilience Patterns The Circuit Breaker Pattern class CircuitBreaker: STATES = [\"CLOSED\", \"OPEN\", \"HALF_OPEN\"] def __init__(self, failure_threshold=5, recovery_timeout=30): self.failure_count = 0 self.failure_threshold = failure_threshold self.recovery_timeout = recovery_timeout # seconds self.state = \"CLOSED\" self.last_failure_time = None async def call(self, func, fallback=None): if self.state == \"OPEN\": if time.time() - self.last_failure_time > self.recovery_timeout: self.state = \"HALF_OPEN\" else: return await fallback() if fallback else None try: result = await func() if self.state == \"HALF_OPEN\": self.state = \"CLOSED\" self.failure_count = 0 return result except Exception as e: self.failure_count += 1 self.last_failure_time = time.time() if self.failure_count >= self.failure_threshold: self.state = \"OPEN\" return await fallback() if fallback else None # Usage cb = CircuitBreaker(failure_threshold=3, recovery_timeout=60) async def get_recommendations(user_id: str): return await cb.call( func=lambda: recommendations_service.fetch(user_id), fallback=lambda: {\"recommendations\": [], \"source\": \"fallback\"} ) Other Resilience Patterns | Pattern | What It Does | |---|---| | **Retry with backoff** | Exponential backoff + jitter to avoid thundering herd | | **Timeout** | Hard timeout per request (e.g., 5s) to prevent cascading | | **Bulkhead** | Isolate resources \u2014 limit connections per service | | **Rate limiting** | Token bucket or leaky bucket per client | | **Dead letter queue** | Failed messages go to a DLQ for manual inspection | # Retry with exponential backoff and jitter async def retry_with_backoff(func, max_retries=3): for attempt in range(max_retries): try: return await func() except (ConnectionError, TimeoutError) as e: if attempt == max_retries - 1: raise sleep_time = (2 ** attempt) + random.random() # exp + jitter await asyncio.sleep(sleep_time) \\--- 10\\. Real Example: Design a URL Shortener Let's design bit.ly/tinyurl step by step. Requirements * Generate a short, unique code for any URL * Redirect to the original URL when the short code is accessed * Track click analytics (count, referrer, timestamp) * Handle 10M URLs, 100M redirects/day Step 1: URL Encoding BASE62 = \"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\" def encode_base62(num: int) -> str: if num == 0: return BASE62[0] result = [] while num > 0: result.append(BASE62[num % 62]) num //= 62 return ''.join(reversed(result)) def decode_base62(code: str) -> int: result = 0 for char in code: result = result * 62 + BASE62.index(char) return result # Example: 7 chars of base62 = 62^7 \u2248 3.5 trillion unique URLs encode_base62(123456789) # \"8m0Kx\" Step 2: Architecture \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 Analytics \u2502 \u2502 (Kafka \u2192 \u2502 \u2502 ClickHouse)\u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u25b2 \u2502 (async) \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 POST /shorten \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 Client \u2502\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25b6\u2502 API Gateway \u2502 \u2502 \u2502 \u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 \u2502 \u2502 GET /abc123 \u2502 \u2502 Write Service \u2502\u2500\u2500\u253c\u2500\u2500\u25b6 PostgreSQL (URLs) \u2502 \u2502\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25b6\u2502 \u2502 (generate code) \u2502 \u2502 \u2502 \u2502 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u2502 \u2502 301 Redirect \u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 \u2502 \u2502\u25c0\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2502 \u2502 Read Service \u2502 \u2502 \u2502 \u2502 \u2502 \u2502 (resolve + cache) \u2502\u2500\u2500\u253c\u2500\u2500\u25b6 Redis (cache) \u2502 \u2502 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u2502 \u2502 \u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 \u2502 \u2502 \u2502 \u2502 Click Logger \u2502\u2500\u2500\u253c\u2500\u2500\u25b6 Kafka \u2502 \u2502 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 Step 3: Data Model -- PostgreSQL CREATE TABLE urls ( id BIGSERIAL PRIMARY KEY, short_code VARCHAR(10) UNIQUE NOT NULL, original_url TEXT NOT NULL, user_id UUID, -- nullable for anonymous users created_at TIMESTAMP DEFAULT NOW(), expires_at TIMESTAMP -- nullable ); CREATE INDEX idx_short_code ON urls(short_code); -- Redis cache -- Key: \"url:abc123\" \u2192 Value: \"https://example.com/long-url\" -- TTL: 24 hours Step 4: Write Path @app.post(\"/shorten\") async def shorten_url(url: str, user_id: str = None): # 1. Check if URL already shortened (optimization) existing = await db.query( \"SELECT short_code FROM urls WHERE original_url = :url AND user_id = :uid\", {\"url\": url, \"uid\": user_id} ) if existing: return {\"short_url\": f\"https://short.domain/{existing['short_code']}\"} # 2. Generate unique code short_code = await generate_unique_code() # 3. Store in DB await db.execute( \"INSERT INTO urls (short_code, original_url, user_id) VALUES (:c, :u, :uid)\", {\"c\": short_code, \"u\": url, \"uid\": user_id} ) # 4. Warm the cache await redis.setex(f\"url:{short_code}\", 86400, url) return {\"short_url\": f\"https://short.domain/{short_code}\"} async def generate_unique_code() -> str: for _ in range(3): # Retry on collision code = encode_base62(random.randint(0, 62**7 - 1)) exists = await db.query( \"SELECT 1 FROM urls WHERE short_code = :c\", {\"c\": code} ) if not exists: return code raise Exception(\"Collision rate too high \u2014 increase code length\") Step 5: Read Path (The Hot Path \u2014 Handles 100M req/day) @app.get(\"/{short_code}\") async def redirect(short_code: str, request: Request): # 1. Try cache (99% hit rate with 24h TTL) original_url = await redis.get(f\"url:{short_code}\") if not original_url: # 2. Cache miss \u2014 hit DB row = await db.query( \"SELECT original_url FROM urls WHERE short_code = :c\", {\"c\": short_code} ) if not row: raise HTTPException(status_code=404) original_url = row[\"original_url\"] # 3. Populate cache with TTL await redis.setex(f\"url:{short_code}\", 86400, original_url) # 4. Log click asynchronously (don't block the redirect) click_event = { \"short_code\": short_code, \"ip\": request.client.host, \"user_agent\": request.headers.get(\"user-agent\"), \"referer\": request.headers.get(\"referer\"), \"timestamp\": int(time.time()), } # Fire and forget \u2014 queue to Kafka await click_producer.send(\"url_clicks\", click_event) # 5. Redirect (301 for permanent, 302 for analytics) return RedirectResponse(url=original_url, status_code=301) Step 6: Scale Considerations * **Read replicas** for URL resolution (read-heavy: 10:1 read-to-write ratio) * **Redis cluster** for cache (with consistent hashing) * **Kafka partitions** by short_code for ordered click logs * **Batch write** click analytics to ClickHouse every 30 seconds * **CDN** for the redirect page itself (not the API \u2014 API calls are cheap) \\--- 11\\. Async Processing Patterns The Problem: Synchronous Chains Client \u2500\u2500\u25b6 Service A \u2500\u2500\u25b6 Service B \u2500\u2500\u25b6 Service C \u2500\u2500\u25b6 Response 500ms 800ms 200ms = 1.5s total The client waits 1.5 seconds for something that doesn't need a response. Solution: Decouple with Async Client \u2500\u2500\u25b6 Service A \u2500\u2500\u25b6 Response (immediate: \"Accepted\") \u2502 \u25bc Queue (Kafka/SQS) \u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u25bc \u25bc Service B Service C (email) (generate PDF) Pattern 1: Fire and Forget @app.post(\"/api/send-email\") async def send_email(request: EmailRequest): # Validate request if not request.valid: raise HTTPException(400) # Queue the work \u2014 don't wait await email_queue.send({ \"to\": request.to, \"template\": request.template, \"data\": request.data, }) # Return immediately return {\"status\": \"queued\", \"message_id\": str(uuid.uuid4())} Pattern 2: Polling with Status @app.post(\"/api/report/generate\") async def generate_report(params: ReportParams): report_id = str(uuid.uuid4()) await report_queue.send({\"report_id\": report_id, \"params\": params}) return {\"report_id\": report_id, \"status_url\": f\"/api/report/{report_id}/status\"} @app.get(\"/api/report/{report_id}/status\") async def check_status(report_id: str): status = await redis.get(f\"report:{report_id}:status\") if status == \"ready\": return {\"status\": \"ready\", \"url\": f\"/api/report/{report_id}/download\"} return {\"status\": \"processing\"} Pattern 3: Webhook Callback Instead of polling, have the worker call a URL when done: async def process_report(report_id: str, params: dict, callback_url: str): # ... generate report ... await save_report(report_id, result) # Notify caller if callback_url: await httpx.post(callback_url, json={ \"report_id\": report_id, \"status\": \"completed\", \"download_url\": f\"/api/report/{report_id}/download\", }) \\--- 12\\. Common Anti-Patterns 1\\. The Distributed Monolith You split into microservices but deploy them together and fail to maintain boundaries. Every service calls every other service directly. Schema changes ripple across the system. **Signs**: A \"simple\" feature touches 5+ services. You need to coordinate deploys across teams. Services share a database \u2014 or god forbid, tables. **Fix**: Enforce bounded contexts. Each service owns its data. Communication is via APIs or events, not shared databases. 2\\. Over-Engineering from Day One \"Let's use Kafka, Cassandra, Kubernetes, and event sourcing\" \u2014 for a blog with 10 visitors/day. **Fix**: Start with the simplest thing that works. A monolith with PostgreSQL and Redis will handle 99% of applications. Extract services when there's a proven need. 3\\. Synchronous Coupling via HTTP Service A \u2500\u2500HTTP\u2500\u2500\u25b6 Service B \u2500\u2500HTTP\u2500\u2500\u25b6 Service C \u2500\u2500HTTP\u2500\u2500\u25b6 Service D If one service is slow, the whole chain slows. Latency adds up. Failures cascade. **Fix**: Use async communication for non-critical paths. Use circuit breakers for critical sync calls. Prefer eventual consistency over synchronous coordination. 4\\. The Shared Database Two services reading/writing the same database table. Schema changes require coordination. One service can deadlock the other. **Fix**: Each service owns its data. Share via APIs or events, not databases. 5\\. Ignoring Caching Every request hits the database. Database CPU is 90%. Response times are 200ms for data that changes hourly. **Fix**: Add Redis. Cache the most frequently accessed data. Even a 60-second cache TTL reduces DB load by 95% for read-heavy workloads. 6\\. The N+1 Query Problem # Anti-pattern: N+1 queries def get_orders_with_items(user_id: str): orders = db.query(\"SELECT * FROM orders WHERE user_id = :uid\", {\"uid\": user_id}) for order in orders: # One query PER order \u2014 terrible! order[\"items\"] = db.query( \"SELECT * FROM order_items WHERE order_id = :oid\", {\"oid\": order[\"id\"]} ) return orders # Fix: single query with JOIN def get_orders_with_items_fixed(user_id: str): return db.query(\"\"\" SELECT o.id, o.total, oi.product_id, oi.quantity FROM orders o LEFT JOIN order_items oi ON oi.order_id = o.id WHERE o.user_id = :uid \"\"\", {\"uid\": user_id}) 7\\. No Monitoring / No Observability \"Everything looks fine\" \u2014 until users complain that the site is slow and you have no idea why. **Baseline monitoring**: Request latency (p50, p95, p99), error rate, throughput, CPU/memory per service. Structured logging with correlation IDs. Distributed tracing for async flows. \\--- Summary: Key Decisions for 2026 | Decision | Default Choice | Upgrade When | |---|---|---| | **Architecture** | Modular monolith | Team >15 or clear independent scale need | | **Database** | PostgreSQL | Read replicas at 10k reads/s, sharding at 100k | | **Cache** | Redis (cache aside) | Write-behind for high-throughput writes | | **Queue** | SQS (serverless) \u2192 RabbitMQ (control) \u2192 Kafka (streaming) | Scale-dependent | | **Async** | Fire and forget for non-critical | Polling \u2192 Webhooks as needs grow | | **API Gateway** | NGINX / Traefik | Envoy / Kong for advanced routing | | **Resilience** | Circuit breaker + timeout | Bulkhead + rate limiting at scale | The best system design is the one that solves today's problem without creating tomorrow's nightmare. Start simple, measure everything, extract with surgical precision, and never optimize for a scale you haven't reached."
     }
     </script>
     <script type="application/ld+json">
@@ -80,1535 +81,1473 @@
         <span class="tag-cat">Scalability</span></div>
       <h1 class="article-title">System Design Fundamentals 2026: A Developer Guide to Scalable Applications</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><h1>System Design Fundamentals 2026: A Developer's Guide to Scalable Applications</h1>
-<br>
-<p>System design interviews get all the attention, but the real value is in day-to-day decisions: should you extract that service? Add a cache? Reach for a message queue? This guide covers the fundamental patterns, their trade-offs, and the concrete decisions you'll face building production systems in 2026.</p>
-<br>
-<p>---</p>
-<br>
-<h2> 1. Microservices vs Monolith vs Modular Monolith</h2>
-<br>
-<p>The "monolith vs microservices" debate has matured. In 2026, the winner is often somewhere in between.</p>
-<br>
-<p>| Architecture | Team Size | Deploy Frequency | Best For |</p>
-<p>|---|---|---|---|</p>
-<p>| **Monolith** | 1–5 | Low | Prototypes, internal tools, MVPs |</p>
-<p>| **Modular Monolith** | 3–15 | Medium | Most business apps, teams that aren't Spotify-sized |</p>
-<p>| **Microservices** | 10+ per service | High | Large orgs with clear domain boundaries |</p>
-<br>
-<h3>The Modular Monolith Sweet Spot</h3>
-<br>
-<p>A modular monolith is a single deployable unit with **strict module boundaries**. Modules communicate through well-defined interfaces but share the same process and database.</p>
-<br>
-<pre><code>
-┌─────────────────────────────────────┐
-
-│         Modular Monolith            │
-
-│  ┌──────────┐  ┌──────────┐        │
-
-│  │  Orders  │  │  Billing │        │
-
-│  │  Module  │──│  Module  │        │
-
-│  └────┬─────┘  └────┬─────┘        │
-
-│       │              │              │
-
-│  ┌────▼──────────────▼─────┐       │
-
-│  │    Shared Kernel        │       │
-
-│  │  (DB, messaging, auth)  │       │
-
-│  └─────────────────────────┘       │
-
-└─────────────────────────────────────┘
-
-</code></pre>
-<br>
-<p>**When to extract a service**: When two conditions are met — the module has a clear bounded context (DDD), and you need independent scaling or deploy velocity that the monolith can't provide.</p>
-<br>
-<p>**Rule of thumb**: Don't break your monolith until it hurts. Premature microservices add distributed transaction complexity, network latency, and operational overhead. Start modular, extract surgically.</p>
-<br>
-<h3>Real-World Decision Tree</h3>
-<br>
-<pre><code>
-Monolith → Modular Monolith → Selective Extraction → Full Microservices
-
-
-
-MVP Phase:         Monolith
-
-10k users/5 devs:  Modular monolith
-
-100k users:        Extract payments (PCI scope)
-
-1M users:          Extract search (separate scale)
-
-10M users:         Extract recommendations (different stack)
-
-</code></pre>
-<br>
-<p>---</p>
-<br>
-<h2> 2. CQRS: Command Query Responsibility Segregation</h2>
-<br>
-<p>CQRS separates **reads** from **writes** — different models, sometimes different databases.</p>
-<br>
-<h3>When CQRS Makes Sense</h3>
-<br>
-<li>Your read queries are complex and don't map well to your write model (e.g., reporting dashboards)</li>
-<li>Your read and write workloads have different scaling requirements (10:1 read-to-write ratio)</li>
-<li>You need different data shapes for reading vs writing (e.g., write normalized, read denormalized)</li>
-<br>
-<h3>A Simple CQRS Implementation</h3>
-<br>
-<pre><code>
-# --- Command Side (Writes) ---
-
-class CreateOrderCommand:
-
-    def __init__(self, user_id: str, items: list):
-
-        self.user_id = user_id
-
-        self.items = items
-
-
-
-class OrderCommandHandler:
-
-    def handle(self, cmd: CreateOrderCommand) -&gt; str:
-
-        # Validate business rules
-
-        order = Order.create(cmd.user_id, cmd.items)
-
-        order.save()  # Write to transactional DB (PostgreSQL)
-
-        event_bus.publish(&quot;order.created&quot;, {&quot;order_id&quot;: order.id})
-
-        return order.id
-
-
-
-# --- Query Side (Reads) ---
-
-class OrderQueryHandler:
-
-    def get_order_summary(self, user_id: str) -&gt; dict:
-
-        # Read from denormalized read model (could be a different DB)
-
-        return read_db.query(
-
-            &quot;SELECT * FROM order_summaries WHERE user_id = :uid&quot;,
-
-            {&quot;uid&quot;: user_id}
-
-        )
-
-</code></pre>
-<br>
-<h3>CQRS Without Event Sourcing</h3>
-<br>
-<p>You don't need event sourcing to use CQRS. The most common pattern is:</p>
-<br>
-<li>**Write** to a normalized PostgreSQL table</li>
-<p>2. **Sync** (or async via CDC) to a read-optimized table</p>
-<p>3. **Read** from the read table</p>
-<br>
-<pre><code>
--- Write model: normalized
-
-CREATE TABLE orders (
-
-    id UUID PRIMARY KEY,
-
-    user_id UUID NOT NULL,
-
-    status VARCHAR(20) NOT NULL,
-
-    total_cents BIGINT NOT NULL,
-
-    created_at TIMESTAMP DEFAULT NOW()
-
-);
-
-
-
-CREATE TABLE order_items (
-
-    id UUID PRIMARY KEY,
-
-    order_id UUID REFERENCES orders(id),
-
-    product_id UUID NOT NULL,
-
-    quantity INT NOT NULL,
-
-    unit_price_cents BIGINT NOT NULL
-
-);
-
-
-
--- Read model: denormalized for fast queries
-
-CREATE TABLE order_summaries (
-
-    order_id UUID PRIMARY KEY,
-
-    user_id UUID NOT NULL,
-
-    status VARCHAR(20) NOT NULL,
-
-    item_count INT NOT NULL,
-
-    total_cents BIGINT NOT NULL,
-
-    product_names TEXT[] NOT NULL,
-
-    created_at TIMESTAMP DEFAULT NOW()
-
-);
-
-</code></pre>
-<br>
-<h3>When NOT to Use CQRS</h3>
-<br>
-<li>Your app is a simple CRUD interface with no complex queries</li>
-<li>You don't need separate read/write scaling</li>
-<li>Your team is small and you can't justify the infrastructure overhead</li>
-<br>
-<p>---</p>
-<br>
-<h2> 3. Event-Driven Architecture</h2>
-<br>
-<p>Event-driven systems decouple producers from consumers. When an event happens, interested services react.</p>
-<br>
-<h3>Core Concepts</h3>
-<br>
-<pre><code>
-┌──────────┐     Event Bus      ┌──────────────┐
-
-│ Producer │─────(Kafka/RMQ)────▶│  Consumer 1  │
-
-│ (Orders) │                    │ (Analytics)  │
-
-└──────────┘                    └──────────────┘
-
-                ───────────────▶┌──────────────┐
-
-                                │  Consumer 2   │
-
-                                │ (Email)       │
-
-                                └──────────────┘
-
-</code></pre>
-<br>
-<h3>Message Queue Comparison</h3>
-<br>
-<p>| Feature | Kafka | RabbitMQ | SQS |</p>
-<p>|---|---|---|---|</p>
-<p>| **Delivery** | At-least-once, exactly-once (idempotent) | At-most-once, at-least-once | At-least-once |</p>
-<p>| **Ordering** | Per-partition guaranteed | Not guaranteed (unless single queue) | FIFO queue (limited throughput) |</p>
-<p>| **Persistence** | Disk-based, configurable retention | Memory + disk (lazy queues) | Automatic (up to 14 days) |</p>
-<p>| **Throughput** | Millions/sec | Thousands/sec | Unlimited (soft limit 300/s for FIFO) |</p>
-<p>| **Consumer model** | Pull-based (offset tracking) | Push or pull | Pull-based (long polling) |</p>
-<p>| **Use case** | Event sourcing, stream processing, logs | Task queues, RPC, work queues | Serverless workloads, simple decoupling |</p>
-<p>| **Operational cost** | High (requires Zookeeper/KRaft) | Medium | Zero (fully managed) |</p>
-<br>
-<h3>Kafka in Practice: The Url Shortener Click Stream</h3>
-<br>
-<pre><code>
-# Producer — emit click events
-
-def record_click(short_code: str, ip: str, user_agent: str):
-
-    producer.send(
-
-        topic=&quot;url_clicks&quot;,
-
-        key=short_code.encode(),  # Same key → same partition → ordered
-
-        value={
-
-            &quot;short_code&quot;: short_code,
-
-            &quot;ip&quot;: ip,
-
-            &quot;user_agent&quot;: user_agent,
-
-            &quot;timestamp&quot;: int(time.time()),
-
-        }
-
-    )
-
-
-
-# Consumer 1 — real-time analytics (e.g., update Redis counters)
-
-def consume_clicks_for_analytics():
-
-    for message in consumer:
-
-        click = message.value
-
-        redis.zincrby(&quot;popular_urls:today&quot;, 1, click[&quot;short_code&quot;])
-
-        redis.incr(f&quot;url:{click[&#x27;short_code&#x27;]}:clicks&quot;)
-
-
-
-# Consumer 2 — store raw clicks in data warehouse
-
-def consume_clicks_for_storage():
-
-    for message in consumer:
-
-        warehouse.insert_one(message.value)
-
-</code></pre>
-<br>
-<h3>Event Sourcing: Storing State as Events</h3>
-<br>
-<p>Instead of storing the current state, event sourcing stores a sequence of state-changing events. The current state is derived by replaying them.</p>
-<br>
-<pre><code>
-# Events (immutable facts)
-
-events = [
-
-    {&quot;type&quot;: &quot;AccountCreated&quot;, &quot;data&quot;: {&quot;user_id&quot;: &quot;u1&quot;, &quot;email&quot;: &quot;a@b.com&quot;}},
-
-    {&quot;type&quot;: &quot;EmailVerified&quot;, &quot;data&quot;: {&quot;user_id&quot;: &quot;u1&quot;, &quot;verified_at&quot;: &quot;2026-05-01&quot;}},
-
-    {&quot;type&quot;: &quot;PasswordChanged&quot;, &quot;data&quot;: {&quot;user_id&quot;: &quot;u1&quot;, &quot;changed_at&quot;: &quot;2026-05-10&quot;}},
-
-]
-
-
-
-# Derive current state by replaying events
-
-def get_account_state(events):
-
-    state = {&quot;email&quot;: None, &quot;email_verified&quot;: False, &quot;password_hash&quot;: None}
-
-    for event in events:
-
-        if event[&quot;type&quot;] == &quot;AccountCreated&quot;:
-
-            state[&quot;email&quot;] = event[&quot;data&quot;][&quot;email&quot;]
-
-        elif event[&quot;type&quot;] == &quot;EmailVerified&quot;:
-
-            state[&quot;email_verified&quot;] = True
-
-    return state
-
-</code></pre>
-<br>
-<p>**Trade-offs**: Event sourcing gives you a complete audit trail and time travel, but makes querying awkward (you need projections) and schema evolution painful.</p>
-<br>
-<p>---</p>
-<br>
-<h2> 4. Database Scaling Strategies</h2>
-<br>
-<h3>Read Replicas</h3>
-<br>
-<p>The simplest scaling strategy: one primary handles writes, replicas handle reads.</p>
-<br>
-<pre><code>
-                        ┌─────────────┐
-
-                        │  Primary DB  │◀── Writes
-
-                        └──────┬──────┘
-
-                               │
-
-              ┌────────────────┼────────────────┐
-
-              │                │                │
-
-         ┌────▼─────┐   ┌─────▼────┐   ┌───────▼──┐
-
-         │ Replica 1│   │ Replica 2│   │ Replica 3│
-
-         │  (Reads) │   │  (Reads) │   │  (Reads) │
-
-         └──────────┘   └──────────┘   └──────────┘
-
-</code></pre>
-<br>
-<pre><code>
-# Using read/write separation in code
-
-class DatabaseRouter:
-
-    def __init__(self):
-
-        self.primary = create_engine(PRIMARY_URL)
-
-        self.replicas = [create_engine(url) for url in REPLICA_URLS]
-
-        self.replica_index = 0
-
-
-
-    def write(self, query, params=None):
-
-        with self.primary.begin() as conn:
-
-            return conn.execute(query, params or {})
-
-
-
-    def read(self, query, params=None):
-
-        # Round-robin across replicas
-
-        replica = self.replicas[self.replica_index % len(self.replicas)]
-
-        self.replica_index += 1
-
-        return replica.execute(query, params or {})
-
-</code></pre>
-<br>
-<p>**Replication lag** is the #1 problem. If your app reads immediately after a write (e.g., "you just placed an order" page), route that read to the primary. This is called **read-after-write consistency**.</p>
-<br>
-<pre><code>
-async def create_order_and_redirect(user_id: str, items: list):
-
-    order_id = db.write(&quot;INSERT INTO orders ... RETURNING id&quot;)
-
-
-
-    # Read-after-write: force this read to the primary
-
-    order = db.read_from_primary(
-
-        &quot;SELECT * FROM orders WHERE id = :oid&quot;, {&quot;oid&quot;: order_id}
-
-    )
-
-
-
-    return redirect(f&quot;/orders/{order_id}&quot;)
-
-</code></pre>
-<br>
-<h3>Sharding (Horizontal Partitioning)</h3>
-<br>
-<p>Split data across databases by a shard key.</p>
-<br>
-<p>| Strategy | Shard Key | Pros | Cons |</p>
-<p>|---|---|---|---|</p>
-<p>| **Hash-based** | hash(user_id) % N | Even distribution | Resharding is painful (need consistent hashing) |</p>
-<p>| **Range-based** | user_id 1–10000 → shard 1 | Range queries work | Hot spots possible |</p>
-<p>| **Directory-based** | Lookup table maps key → shard | Flexible, re-shardable | Extra lookup, single point of failure |</p>
-<br>
-<pre><code>
-# Consistent hashing — minimizes re-sharding
-
-class ConsistentHashRing:
-
-    def __init__(self, nodes: list, replicas: int = 150):
-
-        self.ring = {}
-
-        for node in nodes:
-
-            for i in range(replicas):
-
-                key = self._hash(f&quot;{node}:{i}&quot;)
-
-                self.ring[key] = node
-
-        self.sorted_keys = sorted(self.ring.keys())
-
-
-
-    def get_node(self, key: str) -&gt; str:
-
-        if not self.ring:
-
-            return None
-
-        hash_val = self._hash(key)
-
-        for ring_key in self.sorted_keys:
-
-            if hash_val &lt;= ring_key:
-
-                return self.ring[ring_key]
-
-        return self.ring[self.sorted_keys[0]]
-
-
-
-    def _hash(self, key: str) -&gt; int:
-
-        return int(hashlib.md5(key.encode()).hexdigest(), 16)
-
-</code></pre>
-<br>
-<h3>Partitioning (Within a Database)</h3>
-<br>
-<p>Split a table into smaller physical chunks. PostgreSQL declarative partitioning:</p>
-<br>
-<pre><code>
-CREATE TABLE events (
-
-    event_id UUID NOT NULL,
-
-    occurred_at TIMESTAMP NOT NULL,
-
-    payload JSONB
-
-) PARTITION BY RANGE (occurred_at);
-
-
-
-CREATE TABLE events_2026_q1
-
-    PARTITION OF events
-
-    FOR VALUES FROM (&#x27;2026-01-01&#x27;) TO (&#x27;2026-04-01&#x27;);
-
-
-
-CREATE TABLE events_2026_q2
-
-    PARTITION OF events
-
-    FOR VALUES FROM (&#x27;2026-04-01&#x27;) TO (&#x27;2026-07-01&#x27;);
-
-</code></pre>
-<br>
-<p>Partition pruning means queries with `WHERE occurred_at >= '2026-04-01'` only scan relevant partitions.</p>
-<br>
-<p>---</p>
-<br>
-<h2> 5. Caching Layers</h2>
-<br>
-<h3>The Three Cache Levels</h3>
-<br>
-<pre><code>
-CDN ─── Application Cache (Redis) ─── In-Memory Cache (Local)
-
-│               │                           │
-
-│        Expensive to fill             Fastest access
-
-│        Shared across servers         1-5μs per get
-
-│        50-500μs per get              Lost on restart
-
-</code></pre>
-<br>
-<h3>Cache Strategies</h3>
-<br>
-<p>| Strategy | Read Behavior | Write Behavior | Best For |</p>
-<p>|---|---|---|---|</p>
-<p>| **Cache Aside** | Check cache → miss → load from DB → populate cache | Write to DB, invalidate cache key | Most general-purpose apps |</p>
-<p>| **Read Through** | Cache is authoritative; loads from DB on miss | Write through to DB; cache handles loading | When cache handles persistence |</p>
-<p>| **Write Through** | — | Write to cache first, then DB synchronously | Apps needing strong consistency |</p>
-<p>| **Write Behind** | — | Write to cache, async flush to DB | High-write-throughput apps |</p>
-<p>| **Write Around** | — | Write to DB only; cache populated on subsequent read | Write-once, read-rarely data |</p>
-<br>
-<h3>Cache Aside — The Default Choice</h3>
-<br>
-<pre><code>
-async def get_user_profile(user_id: str) -&gt; dict:
-
-    cache_key = f&quot;user:profile:{user_id}&quot;
-
-
-
-    # 1. Try cache
-
-    cached = await redis.get(cache_key)
-
-    if cached:
-
-        return json.loads(cached)
-
-
-
-    # 2. Cache miss — load from database
-
-    profile = await db.query(
-
-        &quot;SELECT * FROM user_profiles WHERE user_id = :uid&quot;,
-
-        {&quot;uid&quot;: user_id}
-
-    )
-
-
-
-    if profile:
-
-        # 3. Populate cache with TTL
-
-        await redis.setex(cache_key, 300, json.dumps(profile))
-
-
-
-    return profile
-
-
-
-async def update_user_profile(user_id: str, data: dict):
-
-    # 1. Write to database
-
-    await db.execute(
-
-        &quot;UPDATE user_profiles SET name = :name WHERE user_id = :uid&quot;,
-
-        {&quot;uid&quot;: user_id, &quot;name&quot;: data[&quot;name&quot;]}
-
-    )
-
-
-
-    # 2. Invalidate cache (don&#x27;t update it — let next read re-populate)
-
-    await redis.delete(f&quot;user:profile:{user_id}&quot;)
-
-</code></pre>
-<br>
-<h3>Write Behind — For High-Volume Writes</h3>
-<br>
-<pre><code>
-# Batch writer process — runs every 5 seconds
-
-write_buffer = []
-
-
-
-async def write_to_cache(key: str, value: dict):
-
-    write_buffer.append((key, value))
-
-    if len(write_buffer) &gt;= 100:
-
-        await flush_buffer()
-
-
-
-async def flush_buffer():
-
-    async with db.transaction():
-
-        for key, value in write_buffer:
-
-            await db.execute(
-
-                &quot;UPSERT INTO ... VALUES (:k, :v)&quot;,
-
-                {&quot;k&quot;: key, &quot;v&quot;: json.dumps(value)}
-
-            )
-
-    write_buffer.clear()
-
-
-
-# Start background flusher
-
-async def periodic_flush():
-
-    while True:
-
-        await asyncio.sleep(5)
-
-        if write_buffer:
-
-            await flush_buffer()
-
-</code></pre>
-<br>
-<p>**Write behind risk**: if the process crashes before the flush, data is lost. Use a persistent queue (Kafka) for critical writes.</p>
-<br>
-<p>---</p>
-<br>
-<h2> 6. CAP Theorem Explained Practically</h2>
-<br>
-<p>CAP says a distributed data store can provide at most two of three guarantees: **Consistency**, **Availability**, and **Partition Tolerance**.</p>
-<br>
-<h3>What CAP Actually Means</h3>
-<br>
-<li>**C (Consistency)**: Every read sees the most recent write (or an error)</li>
-<li>**A (Availability)**: Every request gets a non-error response (not necessarily the latest data)</li>
-<li>**P (Partition Tolerance)**: System continues working despite network failures</li>
-<br>
-<h3>The Key Insight</h3>
-<br>
-<p>You **must** choose CP or AP. Partition tolerance is non-negotiable in distributed systems — networks WILL fail.</p>
-<br>
-<p>| System | Choice | Real-World |</p>
-<p>|---|---|---|</p>
-<p>| PostgreSQL (single node) | CA | No distribution, no partition |</p>
-<p>| PostgreSQL + synchronous replication | CP | Writes wait for replicas |</p>
-<p>| Cassandra | AP | Writes always succeed, reads may be stale |</p>
-<p>| DynamoDB (eventual consistency) | AP | Default read is eventually consistent |</p>
-<p>| DynamoDB (strongly consistent) | CP | Higher latency, lower availability |</p>
-<p>| MongoDB (replica set) | CP | Writes acknowledged by majority |</p>
-<br>
-<h3>Practical CAP Decisions</h3>
-<br>
-<pre><code>
-# AP choice — accept stale reads for availability
-
-async def get_product_stock(product_id: str) -&gt; int:
-
-    # Read from nearest replica, may be stale
-
-    return await replica.query(
-
-        &quot;SELECT stock FROM products WHERE id = :pid&quot;,
-
-        {&quot;pid&quot;: product_id}
-
-    )
-
-
-
-# CP choice — accept slower reads for consistency
-
-async def get_product_stock_cp(product_id: str) -&gt; int:
-
-    # Read from primary, always latest
-
-    return await primary.query(
-
-        &quot;SELECT stock FROM products WHERE id = :pid&quot;,
-
-        {&quot;pid&quot;: product_id}
-
-    )
-
-</code></pre>
-<br>
-<p>**Rule of thumb**: Use eventual consistency for read-heavy, non-critical data (product descriptions, view counts). Use strong consistency for financial data, inventory, and auth tokens.</p>
-<br>
-<p>---</p>
-<br>
-<h2> 7. Load Balancing Strategies</h2>
-<br>
-<h3>Layer 4 vs Layer 7</h3>
-<br>
-<p>| Aspect | Layer 4 (TCP) | Layer 7 (HTTP) |</p>
-<p>|---|---|---|</p>
-<p>| **Routing based on** | IP + port | URL, headers, cookies, body |</p>
-<p>| **Performance** | Very fast | Slower (inspects payload) |</p>
-<p>| **Features** | Simple forwarding | Content-based routing, rate limiting |</p>
-<p>| **Examples** | HAProxy (TCP mode), AWS NLB | NGINX, Envoy, AWS ALB |</p>
-<br>
-<h3>Algorithms</h3>
-<br>
-<pre><code>
-# Round Robin — predictable, but doesn&#x27;t handle different load sizes
-
-servers = [&quot;app-01&quot;, &quot;app-02&quot;, &quot;app-03&quot;]
-
-next_server = current_index % len(servers)
-
-current_index += 1
-
-
-
-# Least Connections — better for variable request durations
-
-def least_connections(servers: list) -&gt; str:
-
-    return min(servers, key=lambda s: s.active_connections)
-
-
-
-# IP Hash — session persistence without cookies
-
-def ip_hash(client_ip: str, servers: list) -&gt; str:
-
-    hash_val = int(hashlib.md5(client_ip.encode()).hexdigest(), 16)
-
-    return servers[hash_val % len(servers)]
-
-</code></pre>
-<br>
-<h3>Health Checks: The Bare Minimum</h3>
-<br>
-<pre><code>
-┌──────────┐    /healthz    ┌──────────┐
-
-│  LB      │───────────────▶│  App-01  │──▶ Returns 200
-
-│          │                ├──────────┤
-
-│          │───────────────▶│  App-02  │──▶ Returns 500 (removed from pool)
-
-│          │                ├──────────┤
-
-│          │───────────────▶│  App-03  │──▶ Returns 200
-
-└──────────┘                └──────────┘
-
-</code></pre>
-<br>
-<pre><code>
-# /healthz endpoint
-
-@app.get(&quot;/healthz&quot;)
-
-async def health_check():
-
-    # Check critical dependencies
-
-    db_ok = await check_database()
-
-    cache_ok = await check_redis()
-
-    if db_ok and cache_ok:
-
-        return {&quot;status&quot;: &quot;ok&quot;}
-
-    return {&quot;status&quot;: &quot;degraded&quot;}, 503
-
-</code></pre>
-<br>
-<p>---</p>
-<br>
-<h2> 8. API Gateway Patterns</h2>
-<br>
-<p>An API gateway sits between clients and your services, handling cross-cutting concerns.</p>
-<br>
-<pre><code>
-                   ┌─────────────────┐
-
-                   │    API Gateway   │
-
-                   │ ┌─────────────┐  │
-
-  Client ──────────┼─▶  Auth       │  │
-
-                   │ └─────────────┘  │
-
-                   │ ┌─────────────┐  │
-
-                   │─▶  Rate Limit │  │──▶ Service A
-
-                   │ └─────────────┘  │
-
-                   │ ┌─────────────┐  │──▶ Service B
-
-                   │─▶  Routing   │  │
-
-                   │ └─────────────┘  │──▶ Service C
-
-                   │ ┌─────────────┐  │
-
-                   │─▶  Logging   │  │
-
-                   │ └─────────────┘  │
-
-                   └─────────────────┘
-
-</code></pre>
-<br>
-<h3>What the Gateway Handles</h3>
-<br>
-<pre><code>
-# Before gateway — each service handles auth
-
-@app.route(&quot;/api/orders&quot;)
-
-class OrdersResource:
-
-    def get(self):
-
-        token = request.headers[&quot;Authorization&quot;]
-
-        user = verify_token(token)  # Duplicated in EVERY service
-
-
-
-# After gateway — auth is centralized
-
-# Service code is simpler:
-
-@app.route(&quot;/api/orders&quot;)
-
-class OrdersResource:
-
-    def get(self):
-
-        user = request.environ[&quot;X-Authenticated-User&quot;]  # Set by gateway
-
-        return get_orders(user[&quot;id&quot;])
-
-</code></pre>
-<br>
-<h3>Gateway vs Service Mesh</h3>
-<br>
-<p>| Concern | API Gateway | Service Mesh (e.g., Istio) |</p>
-<p>|---|---|---|</p>
-<p>| **Client-facing** | Yes (edge) | No (internal) |</p>
-<p>| **Auth** | Token verification, API keys | mTLS between services |</p>
-<p>| **Rate limiting** | Per-client, per-endpoint | Per-service |</p>
-<p>| **Routing** | URL-based | Traffic splitting, canary |</p>
-<p>| **Location** | Edge proxy | Sidecar per pod |</p>
-<br>
-<p>**Recommendation**: Start with an API gateway. Add a service mesh only when you have dozens of services and need advanced traffic management.</p>
-<br>
-<p>---</p>
-<br>
-<h2> 9. Circuit Breaker and Resilience Patterns</h2>
-<br>
-<h3>The Circuit Breaker Pattern</h3>
-<br>
-<pre><code>
-class CircuitBreaker:
-
-    STATES = [&quot;CLOSED&quot;, &quot;OPEN&quot;, &quot;HALF_OPEN&quot;]
-
-
-
-    def __init__(self, failure_threshold=5, recovery_timeout=30):
-
-        self.failure_count = 0
-
-        self.failure_threshold = failure_threshold
-
-        self.recovery_timeout = recovery_timeout  # seconds
-
-        self.state = &quot;CLOSED&quot;
-
-        self.last_failure_time = None
-
-
-
-    async def call(self, func, fallback=None):
-
-        if self.state == &quot;OPEN&quot;:
-
-            if time.time() - self.last_failure_time &gt; self.recovery_timeout:
-
-                self.state = &quot;HALF_OPEN&quot;
-
-            else:
-
-                return await fallback() if fallback else None
-
-
-
-        try:
-
-            result = await func()
-
-            if self.state == &quot;HALF_OPEN&quot;:
-
-                self.state = &quot;CLOSED&quot;
-
-                self.failure_count = 0
-
-            return result
-
-        except Exception as e:
-
-            self.failure_count += 1
-
-            self.last_failure_time = time.time()
-
-            if self.failure_count &gt;= self.failure_threshold:
-
-                self.state = &quot;OPEN&quot;
-
-            return await fallback() if fallback else None
-
-
-
-
-
-# Usage
-
-cb = CircuitBreaker(failure_threshold=3, recovery_timeout=60)
-
-
-
-async def get_recommendations(user_id: str):
-
-    return await cb.call(
-
-        func=lambda: recommendations_service.fetch(user_id),
-
-        fallback=lambda: {&quot;recommendations&quot;: [], &quot;source&quot;: &quot;fallback&quot;}
-
-    )
-
-</code></pre>
-<br>
-<h3>Other Resilience Patterns</h3>
-<br>
-<p>| Pattern | What It Does |</p>
-<p>|---|---|</p>
-<p>| **Retry with backoff** | Exponential backoff + jitter to avoid thundering herd |</p>
-<p>| **Timeout** | Hard timeout per request (e.g., 5s) to prevent cascading |</p>
-<p>| **Bulkhead** | Isolate resources — limit connections per service |</p>
-<p>| **Rate limiting** | Token bucket or leaky bucket per client |</p>
-<p>| **Dead letter queue** | Failed messages go to a DLQ for manual inspection |</p>
-<br>
-<pre><code>
-# Retry with exponential backoff and jitter
-
-async def retry_with_backoff(func, max_retries=3):
-
-    for attempt in range(max_retries):
-
-        try:
-
-            return await func()
-
-        except (ConnectionError, TimeoutError) as e:
-
-            if attempt == max_retries - 1:
-
-                raise
-
-            sleep_time = (2 ** attempt) + random.random()  # exp + jitter
-
-            await asyncio.sleep(sleep_time)
-
-</code></pre>
-<br>
-<p>---</p>
-<br>
-<h2> 10. Real Example: Design a URL Shortener</h2>
-<br>
-<p>Let's design bit.ly/tinyurl step by step.</p>
-<br>
-<h3>Requirements</h3>
-<br>
-<li>Generate a short, unique code for any URL</li>
-<li>Redirect to the original URL when the short code is accessed</li>
-<li>Track click analytics (count, referrer, timestamp)</li>
-<li>Handle 10M URLs, 100M redirects/day</li>
-<br>
-<h3>Step 1: URL Encoding</h3>
-<br>
-<pre><code>
-BASE62 = &quot;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;
-
-
-
-def encode_base62(num: int) -&gt; str:
-
-    if num == 0:
-
-        return BASE62[0]
-
-    result = []
-
-    while num &gt; 0:
-
-        result.append(BASE62[num % 62])
-
-        num //= 62
-
-    return &#x27;&#x27;.join(reversed(result))
-
-
-
-def decode_base62(code: str) -&gt; int:
-
-    result = 0
-
-    for char in code:
-
-        result = result * 62 + BASE62.index(char)
-
-    return result
-
-
-
-# Example: 7 chars of base62 = 62^7 ≈ 3.5 trillion unique URLs
-
-encode_base62(123456789)  # &quot;8m0Kx&quot;
-
-</code></pre>
-<br>
-<h3>Step 2: Architecture</h3>
-<br>
-<pre><code>
-                                         ┌────────────┐
-
-                                         │  Analytics  │
-
-                                         │  (Kafka →   │
-
-                                         │   ClickHouse)│
-
-                                         └─────────────┘
-
-                                               ▲
-
-                                               │ (async)
-
-┌──────────┐    POST /shorten    ┌──────────────────────────┐
-
-│  Client  │────────────────────▶│     API Gateway          │
-
-│          │                     │  ┌────────────────────┐  │
-
-│          │    GET /abc123      │  │  Write Service     │──┼──▶ PostgreSQL (URLs)
-
-│          │────────────────────▶│  │  (generate code)   │  │
-
-│          │                     │  └────────────────────┘  │
-
-│          │  301 Redirect      │  ┌────────────────────┐  │
-
-│          │◀────────────────────│  │  Read Service      │  │
-
-│          │                     │  │  (resolve + cache) │──┼──▶ Redis (cache)
-
-│          │                     │  └────────────────────┘  │
-
-│          │                     │  ┌────────────────────┐  │
-
-│          │                     │  │  Click Logger      │──┼──▶ Kafka
-
-│          │                     │  └────────────────────┘  │
-
-└──────────┘                     └──────────────────────────┘
-
-</code></pre>
-<br>
-<h3>Step 3: Data Model</h3>
-<br>
-<pre><code>
--- PostgreSQL
-
-CREATE TABLE urls (
-
-    id BIGSERIAL PRIMARY KEY,
-
-    short_code VARCHAR(10) UNIQUE NOT NULL,
-
-    original_url TEXT NOT NULL,
-
-    user_id UUID,          -- nullable for anonymous users
-
-    created_at TIMESTAMP DEFAULT NOW(),
-
-    expires_at TIMESTAMP   -- nullable
-
-);
-
-
-
-CREATE INDEX idx_short_code ON urls(short_code);
-
-
-
--- Redis cache
-
--- Key: &quot;url:abc123&quot; → Value: &quot;https://example.com/long-url&quot;
-
--- TTL: 24 hours
-
-</code></pre>
-<br>
-<h3>Step 4: Write Path</h3>
-<br>
-<pre><code>
-@app.post(&quot;/shorten&quot;)
-
-async def shorten_url(url: str, user_id: str = None):
-
-    # 1. Check if URL already shortened (optimization)
-
-    existing = await db.query(
-
-        &quot;SELECT short_code FROM urls WHERE original_url = :url AND user_id = :uid&quot;,
-
-        {&quot;url&quot;: url, &quot;uid&quot;: user_id}
-
-    )
-
-    if existing:
-
-        return {&quot;short_url&quot;: f&quot;https://short.domain/{existing[&#x27;short_code&#x27;]}&quot;}
-
-
-
-    # 2. Generate unique code
-
-    short_code = await generate_unique_code()
-
-
-
-    # 3. Store in DB
-
-    await db.execute(
-
-        &quot;INSERT INTO urls (short_code, original_url, user_id) VALUES (:c, :u, :uid)&quot;,
-
-        {&quot;c&quot;: short_code, &quot;u&quot;: url, &quot;uid&quot;: user_id}
-
-    )
-
-
-
-    # 4. Warm the cache
-
-    await redis.setex(f&quot;url:{short_code}&quot;, 86400, url)
-
-
-
-    return {&quot;short_url&quot;: f&quot;https://short.domain/{short_code}&quot;}
-
-
-
-
-
-async def generate_unique_code() -&gt; str:
-
-    for _ in range(3):  # Retry on collision
-
-        code = encode_base62(random.randint(0, 62**7 - 1))
-
-        exists = await db.query(
-
-            &quot;SELECT 1 FROM urls WHERE short_code = :c&quot;, {&quot;c&quot;: code}
-
-        )
-
-        if not exists:
-
-            return code
-
-    raise Exception(&quot;Collision rate too high — increase code length&quot;)
-
-</code></pre>
-<br>
-<h3>Step 5: Read Path (The Hot Path — Handles 100M req/day)</h3>
-<br>
-<pre><code>
-@app.get(&quot;/{short_code}&quot;)
-
-async def redirect(short_code: str, request: Request):
-
-    # 1. Try cache (99% hit rate with 24h TTL)
-
-    original_url = await redis.get(f&quot;url:{short_code}&quot;)
-
-    if not original_url:
-
-        # 2. Cache miss — hit DB
-
-        row = await db.query(
-
-            &quot;SELECT original_url FROM urls WHERE short_code = :c&quot;,
-
-            {&quot;c&quot;: short_code}
-
-        )
-
-        if not row:
-
-            raise HTTPException(status_code=404)
-
-
-
-        original_url = row[&quot;original_url&quot;]
-
-
-
-        # 3. Populate cache with TTL
-
-        await redis.setex(f&quot;url:{short_code}&quot;, 86400, original_url)
-
-
-
-    # 4. Log click asynchronously (don&#x27;t block the redirect)
-
-    click_event = {
-
-        &quot;short_code&quot;: short_code,
-
-        &quot;ip&quot;: request.client.host,
-
-        &quot;user_agent&quot;: request.headers.get(&quot;user-agent&quot;),
-
-        &quot;referer&quot;: request.headers.get(&quot;referer&quot;),
-
-        &quot;timestamp&quot;: int(time.time()),
-
-    }
-
-    # Fire and forget — queue to Kafka
-
-    await click_producer.send(&quot;url_clicks&quot;, click_event)
-
-
-
-    # 5. Redirect (301 for permanent, 302 for analytics)
-
-    return RedirectResponse(url=original_url, status_code=301)
-
-</code></pre>
-<br>
-<h3>Step 6: Scale Considerations</h3>
-<br>
-<li>**Read replicas** for URL resolution (read-heavy: 10:1 read-to-write ratio)</li>
-<li>**Redis cluster** for cache (with consistent hashing)</li>
-<li>**Kafka partitions** by short_code for ordered click logs</li>
-<li>**Batch write** click analytics to ClickHouse every 30 seconds</li>
-<li>**CDN** for the redirect page itself (not the API — API calls are cheap)</li>
-<br>
-<p>---</p>
-<br>
-<h2> 11. Async Processing Patterns</h2>
-<br>
-<h3>The Problem: Synchronous Chains</h3>
-<br>
-<pre><code>
-Client ──▶ Service A ──▶ Service B ──▶ Service C ──▶ Response
-
-                         500ms          800ms        200ms = 1.5s total
-
-</code></pre>
-<br>
-<p>The client waits 1.5 seconds for something that doesn't need a response.</p>
-<br>
-<h3>Solution: Decouple with Async</h3>
-<br>
-<pre><code>
-Client ──▶ Service A ──▶ Response (immediate: &quot;Accepted&quot;)
-
-                │
-
-                ▼
-
-           Queue (Kafka/SQS)
-
-                │
-
-         ┌──────┴──────┐
-
-         ▼              ▼
-
-    Service B      Service C
-
-    (email)        (generate PDF)
-
-</code></pre>
-<br>
-<h3>Pattern 1: Fire and Forget</h3>
-<br>
-<pre><code>
-@app.post(&quot;/api/send-email&quot;)
-
-async def send_email(request: EmailRequest):
-
-    # Validate request
-
-    if not request.valid:
-
-        raise HTTPException(400)
-
-
-
-    # Queue the work — don&#x27;t wait
-
-    await email_queue.send({
-
-        &quot;to&quot;: request.to,
-
-        &quot;template&quot;: request.template,
-
-        &quot;data&quot;: request.data,
-
-    })
-
-
-
-    # Return immediately
-
-    return {&quot;status&quot;: &quot;queued&quot;, &quot;message_id&quot;: str(uuid.uuid4())}
-
-</code></pre>
-<br>
-<h3>Pattern 2: Polling with Status</h3>
-<br>
-<pre><code>
-@app.post(&quot;/api/report/generate&quot;)
-
-async def generate_report(params: ReportParams):
-
-    report_id = str(uuid.uuid4())
-
-    await report_queue.send({&quot;report_id&quot;: report_id, &quot;params&quot;: params})
-
-    return {&quot;report_id&quot;: report_id, &quot;status_url&quot;: f&quot;/api/report/{report_id}/status&quot;}
-
-
-
-@app.get(&quot;/api/report/{report_id}/status&quot;)
-
-async def check_status(report_id: str):
-
-    status = await redis.get(f&quot;report:{report_id}:status&quot;)
-
-    if status == &quot;ready&quot;:
-
-        return {&quot;status&quot;: &quot;ready&quot;, &quot;url&quot;: f&quot;/api/report/{report_id}/download&quot;}
-
-    return {&quot;status&quot;: &quot;processing&quot;}
-
-</code></pre>
-<br>
-<h3>Pattern 3: Webhook Callback</h3>
-<br>
-<p>Instead of polling, have the worker call a URL when done:</p>
-<br>
-<pre><code>
-async def process_report(report_id: str, params: dict, callback_url: str):
-
-    # ... generate report ...
-
-    await save_report(report_id, result)
-
-
-
-    # Notify caller
-
-    if callback_url:
-
-        await httpx.post(callback_url, json={
-
-            &quot;report_id&quot;: report_id,
-
-            &quot;status&quot;: &quot;completed&quot;,
-
-            &quot;download_url&quot;: f&quot;/api/report/{report_id}/download&quot;,
-
-        })
-
-</code></pre>
-<br>
-<p>---</p>
-<br>
-<h2> 12. Common Anti-Patterns</h2>
-<br>
-<h3>1. The Distributed Monolith</h3>
-<br>
-<p>You split into microservices but deploy them together and fail to maintain boundaries. Every service calls every other service directly. Schema changes ripple across the system.</p>
-<br>
-<p>**Signs**: A "simple" feature touches 5+ services. You need to coordinate deploys across teams. Services share a database — or god forbid, tables.</p>
-<br>
-<p>**Fix**: Enforce bounded contexts. Each service owns its data. Communication is via APIs or events, not shared databases.</p>
-<br>
-<h3>2. Over-Engineering from Day One</h3>
-<br>
-<p>"Let's use Kafka, Cassandra, Kubernetes, and event sourcing" — for a blog with 10 visitors/day.</p>
-<br>
-<p>**Fix**: Start with the simplest thing that works. A monolith with PostgreSQL and Redis will handle 99% of applications. Extract services when there's a proven need.</p>
-<br>
-<h3>3. Synchronous Coupling via HTTP</h3>
-<br>
-<pre><code>
-Service A ──HTTP──▶ Service B ──HTTP──▶ Service C ──HTTP──▶ Service D
-
-</code></pre>
-<p>If one service is slow, the whole chain slows. Latency adds up. Failures cascade.</p>
-<br>
-<p>**Fix**: Use async communication for non-critical paths. Use circuit breakers for critical sync calls. Prefer eventual consistency over synchronous coordination.</p>
-<br>
-<h3>4. The Shared Database</h3>
-<br>
-<p>Two services reading/writing the same database table. Schema changes require coordination. One service can deadlock the other.</p>
-<br>
-<p>**Fix**: Each service owns its data. Share via APIs or events, not databases.</p>
-<br>
-<h3>5. Ignoring Caching</h3>
-<br>
-<p>Every request hits the database. Database CPU is 90%. Response times are 200ms for data that changes hourly.</p>
-<br>
-<p>**Fix**: Add Redis. Cache the most frequently accessed data. Even a 60-second cache TTL reduces DB load by 95% for read-heavy workloads.</p>
-<br>
-<h3>6. The N+1 Query Problem</h3>
-<br>
-<pre><code>
-# Anti-pattern: N+1 queries
-
-def get_orders_with_items(user_id: str):
-
-    orders = db.query(&quot;SELECT * FROM orders WHERE user_id = :uid&quot;, {&quot;uid&quot;: user_id})
-
-    for order in orders:
-
-        # One query PER order — terrible!
-
-        order[&quot;items&quot;] = db.query(
-
-            &quot;SELECT * FROM order_items WHERE order_id = :oid&quot;,
-
-            {&quot;oid&quot;: order[&quot;id&quot;]}
-
-        )
-
-    return orders
-
-
-
-# Fix: single query with JOIN
-
-def get_orders_with_items_fixed(user_id: str):
-
-    return db.query(&quot;&quot;&quot;
-
-        SELECT o.id, o.total, oi.product_id, oi.quantity
-
-        FROM orders o
-
-        LEFT JOIN order_items oi ON oi.order_id = o.id
-
-        WHERE o.user_id = :uid
-
-    &quot;&quot;&quot;, {&quot;uid&quot;: user_id})
-
-</code></pre>
-<br>
-<h3>7. No Monitoring / No Observability</h3>
-<br>
-<p>"Everything looks fine" — until users complain that the site is slow and you have no idea why.</p>
-<br>
-<p>**Baseline monitoring**: Request latency (p50, p95, p99), error rate, throughput, CPU/memory per service. Structured logging with correlation IDs. Distributed tracing for async flows.</p>
-<br>
-<p>---</p>
-<br>
-<h2> Summary: Key Decisions for 2026</h2>
-<br>
-<p>| Decision | Default Choice | Upgrade When |</p>
-<p>|---|---|---|</p>
-<p>| **Architecture** | Modular monolith | Team >15 or clear independent scale need |</p>
-<p>| **Database** | PostgreSQL | Read replicas at 10k reads/s, sharding at 100k |</p>
-<p>| **Cache** | Redis (cache aside) | Write-behind for high-throughput writes |</p>
-<p>| **Queue** | SQS (serverless) → RabbitMQ (control) → Kafka (streaming) | Scale-dependent |</p>
-<p>| **Async** | Fire and forget for non-critical | Polling → Webhooks as needs grow |</p>
-<p>| **API Gateway** | NGINX / Traefik | Envoy / Kong for advanced routing |</p>
-<p>| **Resilience** | Circuit breaker + timeout | Bulkhead + rate limiting at scale |</p>
+      <div class="article-body"><h1>System Design Fundamentals 2026: A Developer Guide to Scalable Applications</h1>
 <br>
+<p>System Design Fundamentals 2026: A Developer's Guide to Scalable Applications   </p>
+<p>System design interviews get all the attention, but the real value is in day-to-day decisions: should you extract that service? Add a cache? Reach for a message queue? This guide covers the fundamental patterns, their trade-offs, and the concrete decisions you'll face building production systems in 2026.   </p>
+<p>\---   </p>
+<p>1\. Microservices vs Monolith vs Modular Monolith   </p>
+<p>The "monolith vs microservices" debate has matured. In 2026, the winner is often somewhere in between.   </p>
+<p>| Architecture | Team Size | Deploy Frequency | Best For | |---|---|---|---| | **Monolith** | 1–5 | Low | Prototypes, internal tools, MVPs | | **Modular Monolith** | 3–15 | Medium | Most business apps, teams that aren't Spotify-sized | | **Microservices** | 10+ per service | High | Large orgs with clear domain boundaries |   </p>
+<p>The Modular Monolith Sweet Spot   </p>
+<p>A modular monolith is a single deployable unit with **strict module boundaries**. Modules communicate through well-defined interfaces but share the same process and database.   </p>
+<br>
+<br>
+<br>
+<p>    ┌─────────────────────────────────────┐</p>
+<br>
+<p>    │         Modular Monolith            │</p>
+<br>
+<p>    │  ┌──────────┐  ┌──────────┐        │</p>
+<br>
+<p>    │  │  Orders  │  │  Billing │        │</p>
+<br>
+<p>    │  │  Module  │──│  Module  │        │</p>
+<br>
+<p>    │  └────┬─────┘  └────┬─────┘        │</p>
+<br>
+<p>    │       │              │              │</p>
+<br>
+<p>    │  ┌────▼──────────────▼─────┐       │</p>
+<br>
+<p>    │  │    Shared Kernel        │       │</p>
+<br>
+<p>    │  │  (DB, messaging, auth)  │       │</p>
+<br>
+<p>    │  └─────────────────────────┘       │</p>
+<br>
+<p>    └─────────────────────────────────────┘</p>
+<br>
+<br>
+<br>
+<br>
+<p>**When to extract a service**: When two conditions are met — the module has a clear bounded context (DDD), and you need independent scaling or deploy velocity that the monolith can't provide.   </p>
+<p>**Rule of thumb**: Don't break your monolith until it hurts. Premature microservices add distributed transaction complexity, network latency, and operational overhead. Start modular, extract surgically.   </p>
+<p>Real-World Decision Tree   </p>
+<br>
+<br>
+<br>
+<p>    Monolith → Modular Monolith → Selective Extraction → Full Microservices</p>
+<br>
+<br>
+<br>
+<p>    MVP Phase:         Monolith</p>
+<br>
+<p>    10k users/5 devs:  Modular monolith</p>
+<br>
+<p>    100k users:        Extract payments (PCI scope)</p>
+<br>
+<p>    1M users:          Extract search (separate scale)</p>
+<br>
+<p>    10M users:         Extract recommendations (different stack)</p>
+<br>
+<br>
+<br>
+<br>
+<p>\---   </p>
+<p>2\. CQRS: Command Query Responsibility Segregation   </p>
+<p>CQRS separates **reads** from **writes** — different models, sometimes different databases.   </p>
+<p>When CQRS Makes Sense   </p>
+<br>
+<p>* Your read queries are complex and don't map well to your write model (e.g., reporting dashboards)</p>
+<p>* Your read and write workloads have different scaling requirements (10:1 read-to-write ratio)</p>
+<p>* You need different data shapes for reading vs writing (e.g., write normalized, read denormalized)</p>
+<br>
+<p>A Simple CQRS Implementation   </p>
+<br>
+<br>
+<br>
+<p>    # --- Command Side (Writes) ---</p>
+<br>
+<p>    class CreateOrderCommand:</p>
+<br>
+<p>        def __init__(self, user_id: str, items: list):</p>
+<br>
+<p>            self.user_id = user_id</p>
+<br>
+<p>            self.items = items</p>
+<br>
+<br>
+<br>
+<p>    class OrderCommandHandler:</p>
+<br>
+<p>        def handle(self, cmd: CreateOrderCommand) -> str:</p>
+<br>
+<p>            # Validate business rules</p>
+<br>
+<p>            order = Order.create(cmd.user_id, cmd.items)</p>
+<br>
+<p>            order.save()  # Write to transactional DB (PostgreSQL)</p>
+<br>
+<p>            event_bus.publish("order.created", {"order_id": order.id})</p>
+<br>
+<p>            return order.id</p>
+<br>
+<br>
+<br>
+<p>    # --- Query Side (Reads) ---</p>
+<br>
+<p>    class OrderQueryHandler:</p>
+<br>
+<p>        def get_order_summary(self, user_id: str) -> dict:</p>
+<br>
+<p>            # Read from denormalized read model (could be a different DB)</p>
+<br>
+<p>            return read_db.query(</p>
+<br>
+<p>                "SELECT * FROM order_summaries WHERE user_id = :uid",</p>
+<br>
+<p>                {"uid": user_id}</p>
+<br>
+<p>            )</p>
+<br>
+<br>
+<br>
+<br>
+<p>CQRS Without Event Sourcing   </p>
+<p>You don't need event sourcing to use CQRS. The most common pattern is:   </p>
+<br>
+<p>* **Write** to a normalized PostgreSQL table</p>
+<p>2\. **Sync** (or async via CDC) to a read-optimized table 3\. **Read** from the read table   </p>
+<br>
+<br>
+<br>
+<p>    -- Write model: normalized</p>
+<br>
+<p>    CREATE TABLE orders (</p>
+<br>
+<p>        id UUID PRIMARY KEY,</p>
+<br>
+<p>        user_id UUID NOT NULL,</p>
+<br>
+<p>        status VARCHAR(20) NOT NULL,</p>
+<br>
+<p>        total_cents BIGINT NOT NULL,</p>
+<br>
+<p>        created_at TIMESTAMP DEFAULT NOW()</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<p>    CREATE TABLE order_items (</p>
+<br>
+<p>        id UUID PRIMARY KEY,</p>
+<br>
+<p>        order_id UUID REFERENCES orders(id),</p>
+<br>
+<p>        product_id UUID NOT NULL,</p>
+<br>
+<p>        quantity INT NOT NULL,</p>
+<br>
+<p>        unit_price_cents BIGINT NOT NULL</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<p>    -- Read model: denormalized for fast queries</p>
+<br>
+<p>    CREATE TABLE order_summaries (</p>
+<br>
+<p>        order_id UUID PRIMARY KEY,</p>
+<br>
+<p>        user_id UUID NOT NULL,</p>
+<br>
+<p>        status VARCHAR(20) NOT NULL,</p>
+<br>
+<p>        item_count INT NOT NULL,</p>
+<br>
+<p>        total_cents BIGINT NOT NULL,</p>
+<br>
+<p>        product_names TEXT[] NOT NULL,</p>
+<br>
+<p>        created_at TIMESTAMP DEFAULT NOW()</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<br>
+<p>When NOT to Use CQRS   </p>
+<br>
+<p>* Your app is a simple CRUD interface with no complex queries</p>
+<p>* You don't need separate read/write scaling</p>
+<p>* Your team is small and you can't justify the infrastructure overhead</p>
+<br>
+<p>\---   </p>
+<p>3\. Event-Driven Architecture   </p>
+<p>Event-driven systems decouple producers from consumers. When an event happens, interested services react.   </p>
+<p>Core Concepts   </p>
+<br>
+<br>
+<br>
+<p>    ┌──────────┐     Event Bus      ┌──────────────┐</p>
+<br>
+<p>    │ Producer │─────(Kafka/RMQ)────▶│  Consumer 1  │</p>
+<br>
+<p>    │ (Orders) │                    │ (Analytics)  │</p>
+<br>
+<p>    └──────────┘                    └──────────────┘</p>
+<br>
+<p>                    ───────────────▶┌──────────────┐</p>
+<br>
+<p>                                    │  Consumer 2   │</p>
+<br>
+<p>                                    │ (Email)       │</p>
+<br>
+<p>                                    └──────────────┘</p>
+<br>
+<br>
+<br>
+<br>
+<p>Message Queue Comparison   </p>
+<p>| Feature | Kafka | RabbitMQ | SQS | |---|---|---|---| | **Delivery** | At-least-once, exactly-once (idempotent) | At-most-once, at-least-once | At-least-once | | **Ordering** | Per-partition guaranteed | Not guaranteed (unless single queue) | FIFO queue (limited throughput) | | **Persistence** | Disk-based, configurable retention | Memory + disk (lazy queues) | Automatic (up to 14 days) | | **Throughput** | Millions/sec | Thousands/sec | Unlimited (soft limit 300/s for FIFO) | | **Consumer model** | Pull-based (offset tracking) | Push or pull | Pull-based (long polling) | | **Use case** | Event sourcing, stream processing, logs | Task queues, RPC, work queues | Serverless workloads, simple decoupling | | **Operational cost** | High (requires Zookeeper/KRaft) | Medium | Zero (fully managed) |   </p>
+<p>Kafka in Practice: The Url Shortener Click Stream   </p>
+<br>
+<br>
+<br>
+<p>    # Producer — emit click events</p>
+<br>
+<p>    def record_click(short_code: str, ip: str, user_agent: str):</p>
+<br>
+<p>        producer.send(</p>
+<br>
+<p>            topic="url_clicks",</p>
+<br>
+<p>            key=short_code.encode(),  # Same key → same partition → ordered</p>
+<br>
+<p>            value={</p>
+<br>
+<p>                "short_code": short_code,</p>
+<br>
+<p>                "ip": ip,</p>
+<br>
+<p>                "user_agent": user_agent,</p>
+<br>
+<p>                "timestamp": int(time.time()),</p>
+<br>
+<p>            }</p>
+<br>
+<p>        )</p>
+<br>
+<br>
+<br>
+<p>    # Consumer 1 — real-time analytics (e.g., update Redis counters)</p>
+<br>
+<p>    def consume_clicks_for_analytics():</p>
+<br>
+<p>        for message in consumer:</p>
+<br>
+<p>            click = message.value</p>
+<br>
+<p>            redis.zincrby("popular_urls:today", 1, click["short_code"])</p>
+<br>
+<p>            redis.incr(f"url:{click['short_code']}:clicks")</p>
+<br>
+<br>
+<br>
+<p>    # Consumer 2 — store raw clicks in data warehouse</p>
+<br>
+<p>    def consume_clicks_for_storage():</p>
+<br>
+<p>        for message in consumer:</p>
+<br>
+<p>            warehouse.insert_one(message.value)</p>
+<br>
+<br>
+<br>
+<br>
+<p>Event Sourcing: Storing State as Events   </p>
+<p>Instead of storing the current state, event sourcing stores a sequence of state-changing events. The current state is derived by replaying them.   </p>
+<br>
+<br>
+<br>
+<p>    # Events (immutable facts)</p>
+<br>
+<p>    events = [</p>
+<br>
+<p>        {"type": "AccountCreated", "data": {"user_id": "u1", "email": "a@b.com"}},</p>
+<br>
+<p>        {"type": "EmailVerified", "data": {"user_id": "u1", "verified_at": "2026-05-01"}},</p>
+<br>
+<p>        {"type": "PasswordChanged", "data": {"user_id": "u1", "changed_at": "2026-05-10"}},</p>
+<br>
+<p>    ]</p>
+<br>
+<br>
+<br>
+<p>    # Derive current state by replaying events</p>
+<br>
+<p>    def get_account_state(events):</p>
+<br>
+<p>        state = {"email": None, "email_verified": False, "password_hash": None}</p>
+<br>
+<p>        for event in events:</p>
+<br>
+<p>            if event["type"] == "AccountCreated":</p>
+<br>
+<p>                state["email"] = event["data"]["email"]</p>
+<br>
+<p>            elif event["type"] == "EmailVerified":</p>
+<br>
+<p>                state["email_verified"] = True</p>
+<br>
+<p>        return state</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Trade-offs**: Event sourcing gives you a complete audit trail and time travel, but makes querying awkward (you need projections) and schema evolution painful.   </p>
+<p>\---   </p>
+<p>4\. Database Scaling Strategies   </p>
+<p>Read Replicas   </p>
+<p>The simplest scaling strategy: one primary handles writes, replicas handle reads.   </p>
+<br>
+<br>
+<br>
+<p>                            ┌─────────────┐</p>
+<br>
+<p>                            │  Primary DB  │◀── Writes</p>
+<br>
+<p>                            └──────┬──────┘</p>
+<br>
+<p>                                   │</p>
+<br>
+<p>                  ┌────────────────┼────────────────┐</p>
+<br>
+<p>                  │                │                │</p>
+<br>
+<p>             ┌────▼─────┐   ┌─────▼────┐   ┌───────▼──┐</p>
+<br>
+<p>             │ Replica 1│   │ Replica 2│   │ Replica 3│</p>
+<br>
+<p>             │  (Reads) │   │  (Reads) │   │  (Reads) │</p>
+<br>
+<p>             └──────────┘   └──────────┘   └──────────┘</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Using read/write separation in code</p>
+<br>
+<p>    class DatabaseRouter:</p>
+<br>
+<p>        def __init__(self):</p>
+<br>
+<p>            self.primary = create_engine(PRIMARY_URL)</p>
+<br>
+<p>            self.replicas = [create_engine(url) for url in REPLICA_URLS]</p>
+<br>
+<p>            self.replica_index = 0</p>
+<br>
+<br>
+<br>
+<p>        def write(self, query, params=None):</p>
+<br>
+<p>            with self.primary.begin() as conn:</p>
+<br>
+<p>                return conn.execute(query, params or {})</p>
+<br>
+<br>
+<br>
+<p>        def read(self, query, params=None):</p>
+<br>
+<p>            # Round-robin across replicas</p>
+<br>
+<p>            replica = self.replicas[self.replica_index % len(self.replicas)]</p>
+<br>
+<p>            self.replica_index += 1</p>
+<br>
+<p>            return replica.execute(query, params or {})</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Replication lag** is the #1 problem. If your app reads immediately after a write (e.g., "you just placed an order" page), route that read to the primary. This is called **read-after-write consistency**.   </p>
+<br>
+<br>
+<br>
+<p>    async def create_order_and_redirect(user_id: str, items: list):</p>
+<br>
+<p>        order_id = db.write("INSERT INTO orders ... RETURNING id")</p>
+<br>
+<br>
+<br>
+<p>        # Read-after-write: force this read to the primary</p>
+<br>
+<p>        order = db.read_from_primary(</p>
+<br>
+<p>            "SELECT * FROM orders WHERE id = :oid", {"oid": order_id}</p>
+<br>
+<p>        )</p>
+<br>
+<br>
+<br>
+<p>        return redirect(f"/orders/{order_id}")</p>
+<br>
+<br>
+<br>
+<br>
+<p>Sharding (Horizontal Partitioning)   </p>
+<p>Split data across databases by a shard key.   </p>
+<p>| Strategy | Shard Key | Pros | Cons | |---|---|---|---| | **Hash-based** | hash(user_id) % N | Even distribution | Resharding is painful (need consistent hashing) | | **Range-based** | user_id 1–10000 → shard 1 | Range queries work | Hot spots possible | | **Directory-based** | Lookup table maps key → shard | Flexible, re-shardable | Extra lookup, single point of failure |   </p>
+<br>
+<br>
+<br>
+<p>    # Consistent hashing — minimizes re-sharding</p>
+<br>
+<p>    class ConsistentHashRing:</p>
+<br>
+<p>        def __init__(self, nodes: list, replicas: int = 150):</p>
+<br>
+<p>            self.ring = {}</p>
+<br>
+<p>            for node in nodes:</p>
+<br>
+<p>                for i in range(replicas):</p>
+<br>
+<p>                    key = self._hash(f"{node}:{i}")</p>
+<br>
+<p>                    self.ring[key] = node</p>
+<br>
+<p>            self.sorted_keys = sorted(self.ring.keys())</p>
+<br>
+<br>
+<br>
+<p>        def get_node(self, key: str) -> str:</p>
+<br>
+<p>            if not self.ring:</p>
+<br>
+<p>                return None</p>
+<br>
+<p>            hash_val = self._hash(key)</p>
+<br>
+<p>            for ring_key in self.sorted_keys:</p>
+<br>
+<p>                if hash_val <= ring_key:</p>
+<br>
+<p>                    return self.ring[ring_key]</p>
+<br>
+<p>            return self.ring[self.sorted_keys[0]]</p>
+<br>
+<br>
+<br>
+<p>        def _hash(self, key: str) -> int:</p>
+<br>
+<p>            return int(hashlib.md5(key.encode()).hexdigest(), 16)</p>
+<br>
+<br>
+<br>
+<br>
+<p>Partitioning (Within a Database)   </p>
+<p>Split a table into smaller physical chunks. PostgreSQL declarative partitioning:   </p>
+<br>
+<br>
+<br>
+<p>    CREATE TABLE events (</p>
+<br>
+<p>        event_id UUID NOT NULL,</p>
+<br>
+<p>        occurred_at TIMESTAMP NOT NULL,</p>
+<br>
+<p>        payload JSONB</p>
+<br>
+<p>    ) PARTITION BY RANGE (occurred_at);</p>
+<br>
+<br>
+<br>
+<p>    CREATE TABLE events_2026_q1</p>
+<br>
+<p>        PARTITION OF events</p>
+<br>
+<p>        FOR VALUES FROM ('2026-01-01') TO ('2026-04-01');</p>
+<br>
+<br>
+<br>
+<p>    CREATE TABLE events_2026_q2</p>
+<br>
+<p>        PARTITION OF events</p>
+<br>
+<p>        FOR VALUES FROM ('2026-04-01') TO ('2026-07-01');</p>
+<br>
+<br>
+<br>
+<br>
+<p>Partition pruning means queries with `WHERE occurred_at >= '2026-04-01'` only scan relevant partitions.   </p>
+<p>\---   </p>
+<p>5\. Caching Layers   </p>
+<p>The Three Cache Levels   </p>
+<br>
+<br>
+<br>
+<p>    CDN ─── Application Cache (Redis) ─── In-Memory Cache (Local)</p>
+<br>
+<p>    │               │                           │</p>
+<br>
+<p>    │        Expensive to fill             Fastest access</p>
+<br>
+<p>    │        Shared across servers         1-5μs per get</p>
+<br>
+<p>    │        50-500μs per get              Lost on restart</p>
+<br>
+<br>
+<br>
+<br>
+<p>Cache Strategies   </p>
+<p>| Strategy | Read Behavior | Write Behavior | Best For | |---|---|---|---| | **Cache Aside** | Check cache → miss → load from DB → populate cache | Write to DB, invalidate cache key | Most general-purpose apps | | **Read Through** | Cache is authoritative; loads from DB on miss | Write through to DB; cache handles loading | When cache handles persistence | | **Write Through** | — | Write to cache first, then DB synchronously | Apps needing strong consistency | | **Write Behind** | — | Write to cache, async flush to DB | High-write-throughput apps | | **Write Around** | — | Write to DB only; cache populated on subsequent read | Write-once, read-rarely data |   </p>
+<p>Cache Aside — The Default Choice   </p>
+<br>
+<br>
+<br>
+<p>    async def get_user_profile(user_id: str) -> dict:</p>
+<br>
+<p>        cache_key = f"user:profile:{user_id}"</p>
+<br>
+<br>
+<br>
+<p>        # 1. Try cache</p>
+<br>
+<p>        cached = await redis.get(cache_key)</p>
+<br>
+<p>        if cached:</p>
+<br>
+<p>            return json.loads(cached)</p>
+<br>
+<br>
+<br>
+<p>        # 2. Cache miss — load from database</p>
+<br>
+<p>        profile = await db.query(</p>
+<br>
+<p>            "SELECT * FROM user_profiles WHERE user_id = :uid",</p>
+<br>
+<p>            {"uid": user_id}</p>
+<br>
+<p>        )</p>
+<br>
+<br>
+<br>
+<p>        if profile:</p>
+<br>
+<p>            # 3. Populate cache with TTL</p>
+<br>
+<p>            await redis.setex(cache_key, 300, json.dumps(profile))</p>
+<br>
+<br>
+<br>
+<p>        return profile</p>
+<br>
+<br>
+<br>
+<p>    async def update_user_profile(user_id: str, data: dict):</p>
+<br>
+<p>        # 1. Write to database</p>
+<br>
+<p>        await db.execute(</p>
+<br>
+<p>            "UPDATE user_profiles SET name = :name WHERE user_id = :uid",</p>
+<br>
+<p>            {"uid": user_id, "name": data["name"]}</p>
+<br>
+<p>        )</p>
+<br>
+<br>
+<br>
+<p>        # 2. Invalidate cache (don't update it — let next read re-populate)</p>
+<br>
+<p>        await redis.delete(f"user:profile:{user_id}")</p>
+<br>
+<br>
+<br>
+<br>
+<p>Write Behind — For High-Volume Writes   </p>
+<br>
+<br>
+<br>
+<p>    # Batch writer process — runs every 5 seconds</p>
+<br>
+<p>    write_buffer = []</p>
+<br>
+<br>
+<br>
+<p>    async def write_to_cache(key: str, value: dict):</p>
+<br>
+<p>        write_buffer.append((key, value))</p>
+<br>
+<p>        if len(write_buffer) >= 100:</p>
+<br>
+<p>            await flush_buffer()</p>
+<br>
+<br>
+<br>
+<p>    async def flush_buffer():</p>
+<br>
+<p>        async with db.transaction():</p>
+<br>
+<p>            for key, value in write_buffer:</p>
+<br>
+<p>                await db.execute(</p>
+<br>
+<p>                    "UPSERT INTO ... VALUES (:k, :v)",</p>
+<br>
+<p>                    {"k": key, "v": json.dumps(value)}</p>
+<br>
+<p>                )</p>
+<br>
+<p>        write_buffer.clear()</p>
+<br>
+<br>
+<br>
+<p>    # Start background flusher</p>
+<br>
+<p>    async def periodic_flush():</p>
+<br>
+<p>        while True:</p>
+<br>
+<p>            await asyncio.sleep(5)</p>
+<br>
+<p>            if write_buffer:</p>
+<br>
+<p>                await flush_buffer()</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Write behind risk**: if the process crashes before the flush, data is lost. Use a persistent queue (Kafka) for critical writes.   </p>
+<p>\---   </p>
+<p>6\. CAP Theorem Explained Practically   </p>
+<p>CAP says a distributed data store can provide at most two of three guarantees: **Consistency**, **Availability**, and **Partition Tolerance**.   </p>
+<p>What CAP Actually Means   </p>
+<br>
+<p>* **C (Consistency)**: Every read sees the most recent write (or an error)</p>
+<p>* **A (Availability)**: Every request gets a non-error response (not necessarily the latest data)</p>
+<p>* **P (Partition Tolerance)**: System continues working despite network failures</p>
+<br>
+<p>The Key Insight   </p>
+<p>You **must** choose CP or AP. Partition tolerance is non-negotiable in distributed systems — networks WILL fail.   </p>
+<p>| System | Choice | Real-World | |---|---|---| | PostgreSQL (single node) | CA | No distribution, no partition | | PostgreSQL + synchronous replication | CP | Writes wait for replicas | | Cassandra | AP | Writes always succeed, reads may be stale | | DynamoDB (eventual consistency) | AP | Default read is eventually consistent | | DynamoDB (strongly consistent) | CP | Higher latency, lower availability | | MongoDB (replica set) | CP | Writes acknowledged by majority |   </p>
+<p>Practical CAP Decisions   </p>
+<br>
+<br>
+<br>
+<p>    # AP choice — accept stale reads for availability</p>
+<br>
+<p>    async def get_product_stock(product_id: str) -> int:</p>
+<br>
+<p>        # Read from nearest replica, may be stale</p>
+<br>
+<p>        return await replica.query(</p>
+<br>
+<p>            "SELECT stock FROM products WHERE id = :pid",</p>
+<br>
+<p>            {"pid": product_id}</p>
+<br>
+<p>        )</p>
+<br>
+<br>
+<br>
+<p>    # CP choice — accept slower reads for consistency</p>
+<br>
+<p>    async def get_product_stock_cp(product_id: str) -> int:</p>
+<br>
+<p>        # Read from primary, always latest</p>
+<br>
+<p>        return await primary.query(</p>
+<br>
+<p>            "SELECT stock FROM products WHERE id = :pid",</p>
+<br>
+<p>            {"pid": product_id}</p>
+<br>
+<p>        )</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Rule of thumb**: Use eventual consistency for read-heavy, non-critical data (product descriptions, view counts). Use strong consistency for financial data, inventory, and auth tokens.   </p>
+<p>\---   </p>
+<p>7\. Load Balancing Strategies   </p>
+<p>Layer 4 vs Layer 7   </p>
+<p>| Aspect | Layer 4 (TCP) | Layer 7 (HTTP) | |---|---|---| | **Routing based on** | IP + port | URL, headers, cookies, body | | **Performance** | Very fast | Slower (inspects payload) | | **Features** | Simple forwarding | Content-based routing, rate limiting | | **Examples** | HAProxy (TCP mode), AWS NLB | NGINX, Envoy, AWS ALB |   </p>
+<p>Algorithms   </p>
+<br>
+<br>
+<br>
+<p>    # Round Robin — predictable, but doesn't handle different load sizes</p>
+<br>
+<p>    servers = ["app-01", "app-02", "app-03"]</p>
+<br>
+<p>    next_server = current_index % len(servers)</p>
+<br>
+<p>    current_index += 1</p>
+<br>
+<br>
+<br>
+<p>    # Least Connections — better for variable request durations</p>
+<br>
+<p>    def least_connections(servers: list) -> str:</p>
+<br>
+<p>        return min(servers, key=lambda s: s.active_connections)</p>
+<br>
+<br>
+<br>
+<p>    # IP Hash — session persistence without cookies</p>
+<br>
+<p>    def ip_hash(client_ip: str, servers: list) -> str:</p>
+<br>
+<p>        hash_val = int(hashlib.md5(client_ip.encode()).hexdigest(), 16)</p>
+<br>
+<p>        return servers[hash_val % len(servers)]</p>
+<br>
+<br>
+<br>
+<br>
+<p>Health Checks: The Bare Minimum   </p>
+<br>
+<br>
+<br>
+<p>    ┌──────────┐    /healthz    ┌──────────┐</p>
+<br>
+<p>    │  LB      │───────────────▶│  App-01  │──▶ Returns 200</p>
+<br>
+<p>    │          │                ├──────────┤</p>
+<br>
+<p>    │          │───────────────▶│  App-02  │──▶ Returns 500 (removed from pool)</p>
+<br>
+<p>    │          │                ├──────────┤</p>
+<br>
+<p>    │          │───────────────▶│  App-03  │──▶ Returns 200</p>
+<br>
+<p>    └──────────┘                └──────────┘</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # /healthz endpoint</p>
+<br>
+<p>    @app.get("/healthz")</p>
+<br>
+<p>    async def health_check():</p>
+<br>
+<p>        # Check critical dependencies</p>
+<br>
+<p>        db_ok = await check_database()</p>
+<br>
+<p>        cache_ok = await check_redis()</p>
+<br>
+<p>        if db_ok and cache_ok:</p>
+<br>
+<p>            return {"status": "ok"}</p>
+<br>
+<p>        return {"status": "degraded"}, 503</p>
+<br>
+<br>
+<br>
+<br>
+<p>\---   </p>
+<p>8\. API Gateway Patterns   </p>
+<p>An API gateway sits between clients and your services, handling cross-cutting concerns.   </p>
+<br>
+<br>
+<br>
+<p>                       ┌─────────────────┐</p>
+<br>
+<p>                       │    API Gateway   │</p>
+<br>
+<p>                       │ ┌─────────────┐  │</p>
+<br>
+<p>      Client ──────────┼─▶  Auth       │  │</p>
+<br>
+<p>                       │ └─────────────┘  │</p>
+<br>
+<p>                       │ ┌─────────────┐  │</p>
+<br>
+<p>                       │─▶  Rate Limit │  │──▶ Service A</p>
+<br>
+<p>                       │ └─────────────┘  │</p>
+<br>
+<p>                       │ ┌─────────────┐  │──▶ Service B</p>
+<br>
+<p>                       │─▶  Routing   │  │</p>
+<br>
+<p>                       │ └─────────────┘  │──▶ Service C</p>
+<br>
+<p>                       │ ┌─────────────┐  │</p>
+<br>
+<p>                       │─▶  Logging   │  │</p>
+<br>
+<p>                       │ └─────────────┘  │</p>
+<br>
+<p>                       └─────────────────┘</p>
+<br>
+<br>
+<br>
+<br>
+<p>What the Gateway Handles   </p>
+<br>
+<br>
+<br>
+<p>    # Before gateway — each service handles auth</p>
+<br>
+<p>    @app.route("/api/orders")</p>
+<br>
+<p>    class OrdersResource:</p>
+<br>
+<p>        def get(self):</p>
+<br>
+<p>            token = request.headers["Authorization"]</p>
+<br>
+<p>            user = verify_token(token)  # Duplicated in EVERY service</p>
+<br>
+<br>
+<br>
+<p>    # After gateway — auth is centralized</p>
+<br>
+<p>    # Service code is simpler:</p>
+<br>
+<p>    @app.route("/api/orders")</p>
+<br>
+<p>    class OrdersResource:</p>
+<br>
+<p>        def get(self):</p>
+<br>
+<p>            user = request.environ["X-Authenticated-User"]  # Set by gateway</p>
+<br>
+<p>            return get_orders(user["id"])</p>
+<br>
+<br>
+<br>
+<br>
+<p>Gateway vs Service Mesh   </p>
+<p>| Concern | API Gateway | Service Mesh (e.g., Istio) | |---|---|---| | **Client-facing** | Yes (edge) | No (internal) | | **Auth** | Token verification, API keys | mTLS between services | | **Rate limiting** | Per-client, per-endpoint | Per-service | | **Routing** | URL-based | Traffic splitting, canary | | **Location** | Edge proxy | Sidecar per pod |   </p>
+<p>**Recommendation**: Start with an API gateway. Add a service mesh only when you have dozens of services and need advanced traffic management.   </p>
+<p>\---   </p>
+<p>9\. Circuit Breaker and Resilience Patterns   </p>
+<p>The Circuit Breaker Pattern   </p>
+<br>
+<br>
+<br>
+<p>    class CircuitBreaker:</p>
+<br>
+<p>        STATES = ["CLOSED", "OPEN", "HALF_OPEN"]</p>
+<br>
+<br>
+<br>
+<p>        def __init__(self, failure_threshold=5, recovery_timeout=30):</p>
+<br>
+<p>            self.failure_count = 0</p>
+<br>
+<p>            self.failure_threshold = failure_threshold</p>
+<br>
+<p>            self.recovery_timeout = recovery_timeout  # seconds</p>
+<br>
+<p>            self.state = "CLOSED"</p>
+<br>
+<p>            self.last_failure_time = None</p>
+<br>
+<br>
+<br>
+<p>        async def call(self, func, fallback=None):</p>
+<br>
+<p>            if self.state == "OPEN":</p>
+<br>
+<p>                if time.time() - self.last_failure_time > self.recovery_timeout:</p>
+<br>
+<p>                    self.state = "HALF_OPEN"</p>
+<br>
+<p>                else:</p>
+<br>
+<p>                    return await fallback() if fallback else None</p>
+<br>
+<br>
+<br>
+<p>            try:</p>
+<br>
+<p>                result = await func()</p>
+<br>
+<p>                if self.state == "HALF_OPEN":</p>
+<br>
+<p>                    self.state = "CLOSED"</p>
+<br>
+<p>                    self.failure_count = 0</p>
+<br>
+<p>                return result</p>
+<br>
+<p>            except Exception as e:</p>
+<br>
+<p>                self.failure_count += 1</p>
+<br>
+<p>                self.last_failure_time = time.time()</p>
+<br>
+<p>                if self.failure_count >= self.failure_threshold:</p>
+<br>
+<p>                    self.state = "OPEN"</p>
+<br>
+<p>                return await fallback() if fallback else None</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Usage</p>
+<br>
+<p>    cb = CircuitBreaker(failure_threshold=3, recovery_timeout=60)</p>
+<br>
+<br>
+<br>
+<p>    async def get_recommendations(user_id: str):</p>
+<br>
+<p>        return await cb.call(</p>
+<br>
+<p>            func=lambda: recommendations_service.fetch(user_id),</p>
+<br>
+<p>            fallback=lambda: {"recommendations": [], "source": "fallback"}</p>
+<br>
+<p>        )</p>
+<br>
+<br>
+<br>
+<br>
+<p>Other Resilience Patterns   </p>
+<p>| Pattern | What It Does | |---|---| | **Retry with backoff** | Exponential backoff + jitter to avoid thundering herd | | **Timeout** | Hard timeout per request (e.g., 5s) to prevent cascading | | **Bulkhead** | Isolate resources — limit connections per service | | **Rate limiting** | Token bucket or leaky bucket per client | | **Dead letter queue** | Failed messages go to a DLQ for manual inspection |   </p>
+<br>
+<br>
+<br>
+<p>    # Retry with exponential backoff and jitter</p>
+<br>
+<p>    async def retry_with_backoff(func, max_retries=3):</p>
+<br>
+<p>        for attempt in range(max_retries):</p>
+<br>
+<p>            try:</p>
+<br>
+<p>                return await func()</p>
+<br>
+<p>            except (ConnectionError, TimeoutError) as e:</p>
+<br>
+<p>                if attempt == max_retries - 1:</p>
+<br>
+<p>                    raise</p>
+<br>
+<p>                sleep_time = (2 ** attempt) + random.random()  # exp + jitter</p>
+<br>
+<p>                await asyncio.sleep(sleep_time)</p>
+<br>
+<br>
+<br>
+<br>
+<p>\---   </p>
+<p>10\. Real Example: Design a URL Shortener   </p>
+<p>Let's design bit.ly/tinyurl step by step.   </p>
+<p>Requirements   </p>
+<br>
+<p>* Generate a short, unique code for any URL</p>
+<p>* Redirect to the original URL when the short code is accessed</p>
+<p>* Track click analytics (count, referrer, timestamp)</p>
+<p>* Handle 10M URLs, 100M redirects/day</p>
+<br>
+<p>Step 1: URL Encoding   </p>
+<br>
+<br>
+<br>
+<p>    BASE62 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"</p>
+<br>
+<br>
+<br>
+<p>    def encode_base62(num: int) -> str:</p>
+<br>
+<p>        if num == 0:</p>
+<br>
+<p>            return BASE62[0]</p>
+<br>
+<p>        result = []</p>
+<br>
+<p>        while num > 0:</p>
+<br>
+<p>            result.append(BASE62[num % 62])</p>
+<br>
+<p>            num //= 62</p>
+<br>
+<p>        return ''.join(reversed(result))</p>
+<br>
+<br>
+<br>
+<p>    def decode_base62(code: str) -> int:</p>
+<br>
+<p>        result = 0</p>
+<br>
+<p>        for char in code:</p>
+<br>
+<p>            result = result * 62 + BASE62.index(char)</p>
+<br>
+<p>        return result</p>
+<br>
+<br>
+<br>
+<p>    # Example: 7 chars of base62 = 62^7 ≈ 3.5 trillion unique URLs</p>
+<br>
+<p>    encode_base62(123456789)  # "8m0Kx"</p>
+<br>
+<br>
+<br>
+<br>
+<p>Step 2: Architecture   </p>
+<br>
+<br>
+<br>
+<p>                                             ┌────────────┐</p>
+<br>
+<p>                                             │  Analytics  │</p>
+<br>
+<p>                                             │  (Kafka →   │</p>
+<br>
+<p>                                             │   ClickHouse)│</p>
+<br>
+<p>                                             └─────────────┘</p>
+<br>
+<p>                                                   ▲</p>
+<br>
+<p>                                                   │ (async)</p>
+<br>
+<p>    ┌──────────┐    POST /shorten    ┌──────────────────────────┐</p>
+<br>
+<p>    │  Client  │────────────────────▶│     API Gateway          │</p>
+<br>
+<p>    │          │                     │  ┌────────────────────┐  │</p>
+<br>
+<p>    │          │    GET /abc123      │  │  Write Service     │──┼──▶ PostgreSQL (URLs)</p>
+<br>
+<p>    │          │────────────────────▶│  │  (generate code)   │  │</p>
+<br>
+<p>    │          │                     │  └────────────────────┘  │</p>
+<br>
+<p>    │          │  301 Redirect      │  ┌────────────────────┐  │</p>
+<br>
+<p>    │          │◀────────────────────│  │  Read Service      │  │</p>
+<br>
+<p>    │          │                     │  │  (resolve + cache) │──┼──▶ Redis (cache)</p>
+<br>
+<p>    │          │                     │  └────────────────────┘  │</p>
+<br>
+<p>    │          │                     │  ┌────────────────────┐  │</p>
+<br>
+<p>    │          │                     │  │  Click Logger      │──┼──▶ Kafka</p>
+<br>
+<p>    │          │                     │  └────────────────────┘  │</p>
+<br>
+<p>    └──────────┘                     └──────────────────────────┘</p>
+<br>
+<br>
+<br>
+<br>
+<p>Step 3: Data Model   </p>
+<br>
+<br>
+<br>
+<p>    -- PostgreSQL</p>
+<br>
+<p>    CREATE TABLE urls (</p>
+<br>
+<p>        id BIGSERIAL PRIMARY KEY,</p>
+<br>
+<p>        short_code VARCHAR(10) UNIQUE NOT NULL,</p>
+<br>
+<p>        original_url TEXT NOT NULL,</p>
+<br>
+<p>        user_id UUID,          -- nullable for anonymous users</p>
+<br>
+<p>        created_at TIMESTAMP DEFAULT NOW(),</p>
+<br>
+<p>        expires_at TIMESTAMP   -- nullable</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<p>    CREATE INDEX idx_short_code ON urls(short_code);</p>
+<br>
+<br>
+<br>
+<p>    -- Redis cache</p>
+<br>
+<p>    -- Key: "url:abc123" → Value: "https://example.com/long-url"</p>
+<br>
+<p>    -- TTL: 24 hours</p>
+<br>
+<br>
+<br>
+<br>
+<p>Step 4: Write Path   </p>
+<br>
+<br>
+<br>
+<p>    @app.post("/shorten")</p>
+<br>
+<p>    async def shorten_url(url: str, user_id: str = None):</p>
+<br>
+<p>        # 1. Check if URL already shortened (optimization)</p>
+<br>
+<p>        existing = await db.query(</p>
+<br>
+<p>            "SELECT short_code FROM urls WHERE original_url = :url AND user_id = :uid",</p>
+<br>
+<p>            {"url": url, "uid": user_id}</p>
+<br>
+<p>        )</p>
+<br>
+<p>        if existing:</p>
+<br>
+<p>            return {"short_url": f"https://short.domain/{existing['short_code']}"}</p>
+<br>
+<br>
+<br>
+<p>        # 2. Generate unique code</p>
+<br>
+<p>        short_code = await generate_unique_code()</p>
+<br>
+<br>
+<br>
+<p>        # 3. Store in DB</p>
+<br>
+<p>        await db.execute(</p>
+<br>
+<p>            "INSERT INTO urls (short_code, original_url, user_id) VALUES (:c, :u, :uid)",</p>
+<br>
+<p>            {"c": short_code, "u": url, "uid": user_id}</p>
+<br>
+<p>        )</p>
+<br>
+<br>
+<br>
+<p>        # 4. Warm the cache</p>
+<br>
+<p>        await redis.setex(f"url:{short_code}", 86400, url)</p>
+<br>
+<br>
+<br>
+<p>        return {"short_url": f"https://short.domain/{short_code}"}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    async def generate_unique_code() -> str:</p>
+<br>
+<p>        for _ in range(3):  # Retry on collision</p>
+<br>
+<p>            code = encode_base62(random.randint(0, 62**7 - 1))</p>
+<br>
+<p>            exists = await db.query(</p>
+<br>
+<p>                "SELECT 1 FROM urls WHERE short_code = :c", {"c": code}</p>
+<br>
+<p>            )</p>
+<br>
+<p>            if not exists:</p>
+<br>
+<p>                return code</p>
+<br>
+<p>        raise Exception("Collision rate too high — increase code length")</p>
+<br>
+<br>
+<br>
+<br>
+<p>Step 5: Read Path (The Hot Path — Handles 100M req/day)   </p>
+<br>
+<br>
+<br>
+<p>    @app.get("/{short_code}")</p>
+<br>
+<p>    async def redirect(short_code: str, request: Request):</p>
+<br>
+<p>        # 1. Try cache (99% hit rate with 24h TTL)</p>
+<br>
+<p>        original_url = await redis.get(f"url:{short_code}")</p>
+<br>
+<p>        if not original_url:</p>
+<br>
+<p>            # 2. Cache miss — hit DB</p>
+<br>
+<p>            row = await db.query(</p>
+<br>
+<p>                "SELECT original_url FROM urls WHERE short_code = :c",</p>
+<br>
+<p>                {"c": short_code}</p>
+<br>
+<p>            )</p>
+<br>
+<p>            if not row:</p>
+<br>
+<p>                raise HTTPException(status_code=404)</p>
+<br>
+<br>
+<br>
+<p>            original_url = row["original_url"]</p>
+<br>
+<br>
+<br>
+<p>            # 3. Populate cache with TTL</p>
+<br>
+<p>            await redis.setex(f"url:{short_code}", 86400, original_url)</p>
+<br>
+<br>
+<br>
+<p>        # 4. Log click asynchronously (don't block the redirect)</p>
+<br>
+<p>        click_event = {</p>
+<br>
+<p>            "short_code": short_code,</p>
+<br>
+<p>            "ip": request.client.host,</p>
+<br>
+<p>            "user_agent": request.headers.get("user-agent"),</p>
+<br>
+<p>            "referer": request.headers.get("referer"),</p>
+<br>
+<p>            "timestamp": int(time.time()),</p>
+<br>
+<p>        }</p>
+<br>
+<p>        # Fire and forget — queue to Kafka</p>
+<br>
+<p>        await click_producer.send("url_clicks", click_event)</p>
+<br>
+<br>
+<br>
+<p>        # 5. Redirect (301 for permanent, 302 for analytics)</p>
+<br>
+<p>        return RedirectResponse(url=original_url, status_code=301)</p>
+<br>
+<br>
+<br>
+<br>
+<p>Step 6: Scale Considerations   </p>
+<br>
+<p>* **Read replicas** for URL resolution (read-heavy: 10:1 read-to-write ratio)</p>
+<p>* **Redis cluster** for cache (with consistent hashing)</p>
+<p>* **Kafka partitions** by short_code for ordered click logs</p>
+<p>* **Batch write** click analytics to ClickHouse every 30 seconds</p>
+<p>* **CDN** for the redirect page itself (not the API — API calls are cheap)</p>
+<br>
+<p>\---   </p>
+<p>11\. Async Processing Patterns   </p>
+<p>The Problem: Synchronous Chains   </p>
+<br>
+<br>
+<br>
+<p>    Client ──▶ Service A ──▶ Service B ──▶ Service C ──▶ Response</p>
+<br>
+<p>                             500ms          800ms        200ms = 1.5s total</p>
+<br>
+<br>
+<br>
+<br>
+<p>The client waits 1.5 seconds for something that doesn't need a response.   </p>
+<p>Solution: Decouple with Async   </p>
+<br>
+<br>
+<br>
+<p>    Client ──▶ Service A ──▶ Response (immediate: "Accepted")</p>
+<br>
+<p>                    │</p>
+<br>
+<p>                    ▼</p>
+<br>
+<p>               Queue (Kafka/SQS)</p>
+<br>
+<p>                    │</p>
+<br>
+<p>             ┌──────┴──────┐</p>
+<br>
+<p>             ▼              ▼</p>
+<br>
+<p>        Service B      Service C</p>
+<br>
+<p>        (email)        (generate PDF)</p>
+<br>
+<br>
+<br>
+<br>
+<p>Pattern 1: Fire and Forget   </p>
+<br>
+<br>
+<br>
+<p>    @app.post("/api/send-email")</p>
+<br>
+<p>    async def send_email(request: EmailRequest):</p>
+<br>
+<p>        # Validate request</p>
+<br>
+<p>        if not request.valid:</p>
+<br>
+<p>            raise HTTPException(400)</p>
+<br>
+<br>
+<br>
+<p>        # Queue the work — don't wait</p>
+<br>
+<p>        await email_queue.send({</p>
+<br>
+<p>            "to": request.to,</p>
+<br>
+<p>            "template": request.template,</p>
+<br>
+<p>            "data": request.data,</p>
+<br>
+<p>        })</p>
+<br>
+<br>
+<br>
+<p>        # Return immediately</p>
+<br>
+<p>        return {"status": "queued", "message_id": str(uuid.uuid4())}</p>
+<br>
+<br>
+<br>
+<br>
+<p>Pattern 2: Polling with Status   </p>
+<br>
+<br>
+<br>
+<p>    @app.post("/api/report/generate")</p>
+<br>
+<p>    async def generate_report(params: ReportParams):</p>
+<br>
+<p>        report_id = str(uuid.uuid4())</p>
+<br>
+<p>        await report_queue.send({"report_id": report_id, "params": params})</p>
+<br>
+<p>        return {"report_id": report_id, "status_url": f"/api/report/{report_id}/status"}</p>
+<br>
+<br>
+<br>
+<p>    @app.get("/api/report/{report_id}/status")</p>
+<br>
+<p>    async def check_status(report_id: str):</p>
+<br>
+<p>        status = await redis.get(f"report:{report_id}:status")</p>
+<br>
+<p>        if status == "ready":</p>
+<br>
+<p>            return {"status": "ready", "url": f"/api/report/{report_id}/download"}</p>
+<br>
+<p>        return {"status": "processing"}</p>
+<br>
+<br>
+<br>
+<br>
+<p>Pattern 3: Webhook Callback   </p>
+<p>Instead of polling, have the worker call a URL when done:   </p>
+<br>
+<br>
+<br>
+<p>    async def process_report(report_id: str, params: dict, callback_url: str):</p>
+<br>
+<p>        # ... generate report ...</p>
+<br>
+<p>        await save_report(report_id, result)</p>
+<br>
+<br>
+<br>
+<p>        # Notify caller</p>
+<br>
+<p>        if callback_url:</p>
+<br>
+<p>            await httpx.post(callback_url, json={</p>
+<br>
+<p>                "report_id": report_id,</p>
+<br>
+<p>                "status": "completed",</p>
+<br>
+<p>                "download_url": f"/api/report/{report_id}/download",</p>
+<br>
+<p>            })</p>
+<br>
+<br>
+<br>
+<br>
+<p>\---   </p>
+<p>12\. Common Anti-Patterns   </p>
+<p>1\. The Distributed Monolith   </p>
+<p>You split into microservices but deploy them together and fail to maintain boundaries. Every service calls every other service directly. Schema changes ripple across the system.   </p>
+<p>**Signs**: A "simple" feature touches 5+ services. You need to coordinate deploys across teams. Services share a database — or god forbid, tables.   </p>
+<p>**Fix**: Enforce bounded contexts. Each service owns its data. Communication is via APIs or events, not shared databases.   </p>
+<p>2\. Over-Engineering from Day One   </p>
+<p>"Let's use Kafka, Cassandra, Kubernetes, and event sourcing" — for a blog with 10 visitors/day.   </p>
+<p>**Fix**: Start with the simplest thing that works. A monolith with PostgreSQL and Redis will handle 99% of applications. Extract services when there's a proven need.   </p>
+<p>3\. Synchronous Coupling via HTTP   </p>
+<br>
+<br>
+<br>
+<p>    Service A ──HTTP──▶ Service B ──HTTP──▶ Service C ──HTTP──▶ Service D</p>
+<br>
+<br>
+<br>
+<p>If one service is slow, the whole chain slows. Latency adds up. Failures cascade.   </p>
+<p>**Fix**: Use async communication for non-critical paths. Use circuit breakers for critical sync calls. Prefer eventual consistency over synchronous coordination.   </p>
+<p>4\. The Shared Database   </p>
+<p>Two services reading/writing the same database table. Schema changes require coordination. One service can deadlock the other.   </p>
+<p>**Fix**: Each service owns its data. Share via APIs or events, not databases.   </p>
+<p>5\. Ignoring Caching   </p>
+<p>Every request hits the database. Database CPU is 90%. Response times are 200ms for data that changes hourly.   </p>
+<p>**Fix**: Add Redis. Cache the most frequently accessed data. Even a 60-second cache TTL reduces DB load by 95% for read-heavy workloads.   </p>
+<p>6\. The N+1 Query Problem   </p>
+<br>
+<br>
+<br>
+<p>    # Anti-pattern: N+1 queries</p>
+<br>
+<p>    def get_orders_with_items(user_id: str):</p>
+<br>
+<p>        orders = db.query("SELECT * FROM orders WHERE user_id = :uid", {"uid": user_id})</p>
+<br>
+<p>        for order in orders:</p>
+<br>
+<p>            # One query PER order — terrible!</p>
+<br>
+<p>            order["items"] = db.query(</p>
+<br>
+<p>                "SELECT * FROM order_items WHERE order_id = :oid",</p>
+<br>
+<p>                {"oid": order["id"]}</p>
+<br>
+<p>            )</p>
+<br>
+<p>        return orders</p>
+<br>
+<br>
+<br>
+<p>    # Fix: single query with JOIN</p>
+<br>
+<p>    def get_orders_with_items_fixed(user_id: str):</p>
+<br>
+<p>        return db.query("""</p>
+<br>
+<p>            SELECT o.id, o.total, oi.product_id, oi.quantity</p>
+<br>
+<p>            FROM orders o</p>
+<br>
+<p>            LEFT JOIN order_items oi ON oi.order_id = o.id</p>
+<br>
+<p>            WHERE o.user_id = :uid</p>
+<br>
+<p>        """, {"uid": user_id})</p>
+<br>
+<br>
+<br>
+<br>
+<p>7\. No Monitoring / No Observability   </p>
+<p>"Everything looks fine" — until users complain that the site is slow and you have no idea why.   </p>
+<p>**Baseline monitoring**: Request latency (p50, p95, p99), error rate, throughput, CPU/memory per service. Structured logging with correlation IDs. Distributed tracing for async flows.   </p>
+<p>\---   </p>
+<p>Summary: Key Decisions for 2026   </p>
+<p>| Decision | Default Choice | Upgrade When | |---|---|---| | **Architecture** | Modular monolith | Team >15 or clear independent scale need | | **Database** | PostgreSQL | Read replicas at 10k reads/s, sharding at 100k | | **Cache** | Redis (cache aside) | Write-behind for high-throughput writes | | **Queue** | SQS (serverless) → RabbitMQ (control) → Kafka (streaming) | Scale-dependent | | **Async** | Fire and forget for non-critical | Polling → Webhooks as needs grow | | **API Gateway** | NGINX / Traefik | Envoy / Kong for advanced routing | | **Resilience** | Circuit breaker + timeout | Bulkhead + rate limiting at scale |   </p>
 <p>The best system design is the one that solves today's problem without creating tomorrow's nightmare. Start simple, measure everything, extract with surgical precision, and never optimize for a scale you haven't reached.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

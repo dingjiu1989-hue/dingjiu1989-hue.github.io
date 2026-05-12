@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="model-deployment">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization">
+    <meta property="og:description" content="Deploy LLMs in production with vLLM, Hugging Face TGI, and ONNX Runtime. Learn quantization techniques, GPU memory optimization, and serving strategies.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/model-deployment.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization">
+    <meta name="twitter:description" content="Deploy LLMs in production with vLLM, Hugging Face TGI, and ONNX Runtime. Learn quantization techniques, GPU memory optimization, and serving strategies.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization — SourceHub</title>
+    <meta name="description" content="Deploy LLMs in production with vLLM, Hugging Face TGI, and ONNX Runtime. Learn quantization techniques, GPU memory optimization, and serving strategies.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/model-deployment.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/ai/model-deployment.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization",
+      "description": "Deploy LLMs in production with vLLM, Hugging Face TGI, and ONNX Runtime. Learn quantization techniques, GPU memory optimization, and serving strategies.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1626",
+      "keywords": "AI, Machine Learning, LLM",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/model-deployment.html"},
+      "articleBody": "Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization Introduction Deploying large language models for production inference requires specialized infrastructure. Unlike traditional ML models, LLMs demand gigabytes of GPU memory, specialized attention kernels, and careful batching strategies to achieve acceptable throughput. This article covers the major deployment frameworks and optimization techniques. vLLM vLLM is the most popular open-source LLM serving framework, featuring PagedAttention for efficient memory management: # Using vLLM's OpenAI-compatible API server # Start server: # python -m vllm.entrypoints.openai.api_server \\ # --model meta-llama/Llama-3.1-8B-Instruct \\ # --tensor-parallel-size 2 \\ # --gpu-memory-utilization 0.95 \\ # --max-model-len 8192 \\ # --dtype bfloat16 from openai import OpenAI client = OpenAI( base_url=\"http://localhost:8000/v1\", api_key=\"token-not-needed\", ) response = client.chat.completions.create( model=\"meta-llama/Llama-3.1-8B-Instruct\", messages=[{\"role\": \"user\", \"content\": \"What is vLLM?\"}], temperature=0.7, max_tokens=1024, stream=True, ) for chunk in response: if chunk.choices[0].delta.content: print(chunk.choices[0].delta.content, end=\"\") vLLM's PagedAttention manages the KV cache in fixed-size blocks, eliminating fragmentation and enabling near-100% GPU memory utilization. It supports continuous batching, meaning new requests can start processing as soon as previous ones complete generation. Performance Tuning # Key vLLM performance flags --max-num-seqs 256 # Max concurrent sequences --max-num-batched-tokens 8192 # Tokens processed per batch --enable-chunked-prefill # Longer prompts handled efficiently --enforce-eager # Disable CUDA graphs (saves memory) Hugging Face TGI Text Generation Inference (TGI) is Hugging Face's optimized serving solution: # docker-compose.yml for TGI version: \"3.8\" services: tgi: image: ghcr.io/huggingface/text-generation-inference:latest environment: - MODEL_ID=mistralai/Mistral-7B-Instruct-v0.3 - NUM_SHARD=2 - MAX_INPUT_TOKENS=4096 - MAX_TOTAL_TOKENS=8192 - HF_TOKEN=${HF_TOKEN} ports: - \"8080:80\" volumes: - ~/.cache/huggingface:/data deploy: resources: reservations: devices: - driver: nvidia count: 2 capabilities: [gpu] import requests response = requests.post( \"http://localhost:8080/generate\", json={ \"inputs\": \"Explain quantization in ML:\", \"parameters\": { \"max_new_tokens\": 256, \"temperature\": 0.7, \"top_p\": 0.95, }, }, ) print(response.json()[\"generated_text\"]) TGI provides native support for tensor parallelism across GPUs, watermarking, and speculative decoding for faster generation. ONNX Runtime ONNX Runtime enables deployment across GPU and CPU with hardware-specific optimizations: import onnxruntime as ort from transformers import AutoTokenizer, AutoConfig import numpy as np # Load ONNX-optimized model session = ort.InferenceSession( \"model_optimized.onnx\", providers=[\"CUDAExecutionProvider\", \"CPUExecutionProvider\"], ) tokenizer = AutoTokenizer.from_pretrained(\"model-name\") # Prepare inputs inputs = tokenizer(\"Explain model quantization.\", return_tensors=\"np\") onnx_inputs = { \"input_ids\": inputs[\"input_ids\"], \"attention_mask\": inputs[\"attention_mask\"], } # Run inference outputs = session.run(None, onnx_inputs) ONNX models require an initial conversion step but benefit from aggressive graph optimizations and operator fusion. Quantization Quantization reduces model size and accelerates inference by using lower-precision numbers: from transformers import AutoModelForCausalLM, BitsAndBytesConfig import torch # 4-bit quantization with bitsandbytes quant_config = BitsAndBytesConfig( load_in_4bit=True, bnb_4bit_compute_dtype=torch.bfloat16, bnb_4bit_use_double_quant=True, bnb_4bit_quant_type=\"nf4\", ) model = AutoModelForCausalLM.from_pretrained( \"meta-llama/Llama-3.1-8B-Instruct\", quantization_config=quant_config, device_map=\"auto\", ) | Technique | Bit Width | Size Reduction | Speed Impact | Quality Loss | |-----------|-----------|----------------|--------------|--------------| | FP16/BF16 | 16-bit | 2x vs FP32 | 1.5-2x | None | | INT8 | 8-bit | 4x vs FP32 | 2-3x | Minimal | | INT4 (GPTQ) | 4-bit | 8x vs FP32 | 3-4x | Minor | | INT4 (AWQ) | 4-bit | 8x vs FP32 | 3-4x | Minor | | NF4 | 4-bit | 8x vs FP32 | 3-4x | Minor | GPU Optimization Beyond framework choice, several techniques maximize GPU utilization: # Flash Attention 2: memory-efficient attention model = AutoModelForCausalLM.from_pretrained( \"model-name\", attn_implementation=\"flash_attention_2\", torch_dtype=torch.bfloat16, ) # Continuous batching: process multiple requests concurrently # (built into vLLM and TGI) # Prefix caching: reuse KV cache for shared prompt prefixes # (vLLM: --enable-prefix-caching) Conclusion Deploying LLMs requires selecting the right serving framework and optimization level. vLLM offers the best memory efficiency with PagedAttention and continuous batching. TGI excels with Hugging Face ecosystem integration. ONNX provides cross-platform deployment. Quantization with 4-bit or 8-bit formats reduces memory requirements by 4-8x with minimal quality loss. Match your deployment stack to your latency, throughput, and budget requirements."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">AI</span>
+        <span class="tag-cat">Machine Learning</span>
+        <span class="tag-cat">LLM</span></div>
+      <h1 class="article-title">Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Deploying large language models for production inference requires specialized infrastructure. Unlike traditional ML models, LLMs demand gigabytes of GPU memory, specialized attention kernels, and careful batching strategies to achieve acceptable throughput. This article covers the major deployment frameworks and optimization techniques.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  vLLM</h2>
+<br>
+<br>
+<br>
+<br>
+<p>vLLM is the most popular open-source LLM serving framework, featuring PagedAttention for efficient memory management:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Using vLLM's OpenAI-compatible API server</p>
+<br>
+<p>    # Start server:</p>
+<br>
+<p>    # python -m vllm.entrypoints.openai.api_server \</p>
+<br>
+<p>    #     --model meta-llama/Llama-3.1-8B-Instruct \</p>
+<br>
+<p>    #     --tensor-parallel-size 2 \</p>
+<br>
+<p>    #     --gpu-memory-utilization 0.95 \</p>
+<br>
+<p>    #     --max-model-len 8192 \</p>
+<br>
+<p>    #     --dtype bfloat16</p>
+<br>
+<br>
+<br>
+<p>    from openai import OpenAI</p>
+<br>
+<br>
+<br>
+<p>    client = OpenAI(</p>
+<br>
+<p>        base_url="http://localhost:8000/v1",</p>
+<br>
+<p>        api_key="token-not-needed",</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<p>    response = client.chat.completions.create(</p>
+<br>
+<p>        model="meta-llama/Llama-3.1-8B-Instruct",</p>
+<br>
+<p>        messages=[{"role": "user", "content": "What is vLLM?"}],</p>
+<br>
+<p>        temperature=0.7,</p>
+<br>
+<p>        max_tokens=1024,</p>
+<br>
+<p>        stream=True,</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<p>    for chunk in response:</p>
+<br>
+<p>        if chunk.choices[0].delta.content:</p>
+<br>
+<p>            print(chunk.choices[0].delta.content, end="")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>vLLM's PagedAttention manages the KV cache in fixed-size blocks, eliminating fragmentation and enabling near-100% GPU memory utilization. It supports continuous batching, meaning new requests can start processing as soon as previous ones complete generation.</p>
+<br>
+<br>
+<br>
+<br>
+<h3>Performance Tuning</h3>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Key vLLM performance flags</p>
+<br>
+<p>    --max-num-seqs 256        # Max concurrent sequences</p>
+<br>
+<p>    --max-num-batched-tokens 8192  # Tokens processed per batch</p>
+<br>
+<p>    --enable-chunked-prefill   # Longer prompts handled efficiently</p>
+<br>
+<p>    --enforce-eager           # Disable CUDA graphs (saves memory)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Hugging Face TGI</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Text Generation Inference (TGI) is Hugging Face's optimized serving solution:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # docker-compose.yml for TGI</p>
+<br>
+<p>    version: "3.8"</p>
+<br>
+<p>    services:</p>
+<br>
+<p>      tgi:</p>
+<br>
+<p>        image: ghcr.io/huggingface/text-generation-inference:latest</p>
+<br>
+<p>        environment:</p>
+<br>
+<p>          - MODEL_ID=mistralai/Mistral-7B-Instruct-v0.3</p>
+<br>
+<p>          - NUM_SHARD=2</p>
+<br>
+<p>          - MAX_INPUT_TOKENS=4096</p>
+<br>
+<p>          - MAX_TOTAL_TOKENS=8192</p>
+<br>
+<p>          - HF_TOKEN=${HF_TOKEN}</p>
+<br>
+<p>        ports:</p>
+<br>
+<p>          - "8080:80"</p>
+<br>
+<p>        volumes:</p>
+<br>
+<p>          - ~/.cache/huggingface:/data</p>
+<br>
+<p>        deploy:</p>
+<br>
+<p>          resources:</p>
+<br>
+<p>            reservations:</p>
+<br>
+<p>              devices:</p>
+<br>
+<p>                - driver: nvidia</p>
+<br>
+<p>                  count: 2</p>
+<br>
+<p>                  capabilities: [gpu]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    import requests</p>
+<br>
+<br>
+<br>
+<p>    response = requests.post(</p>
+<br>
+<p>        "http://localhost:8080/generate",</p>
+<br>
+<p>        json={</p>
+<br>
+<p>            "inputs": "Explain quantization in ML:",</p>
+<br>
+<p>            "parameters": {</p>
+<br>
+<p>                "max_new_tokens": 256,</p>
+<br>
+<p>                "temperature": 0.7,</p>
+<br>
+<p>                "top_p": 0.95,</p>
+<br>
+<p>            },</p>
+<br>
+<p>        },</p>
+<br>
+<p>    )</p>
+<br>
+<p>    print(response.json()["generated_text"])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>TGI provides native support for tensor parallelism across GPUs, watermarking, and speculative decoding for faster generation.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  ONNX Runtime</h2>
+<br>
+<br>
+<br>
+<br>
+<p>ONNX Runtime enables deployment across GPU and CPU with hardware-specific optimizations:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    import onnxruntime as ort</p>
+<br>
+<p>    from transformers import AutoTokenizer, AutoConfig</p>
+<br>
+<p>    import numpy as np</p>
+<br>
+<br>
+<br>
+<p>    # Load ONNX-optimized model</p>
+<br>
+<p>    session = ort.InferenceSession(</p>
+<br>
+<p>        "model_optimized.onnx",</p>
+<br>
+<p>        providers=["CUDAExecutionProvider", "CPUExecutionProvider"],</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<p>    tokenizer = AutoTokenizer.from_pretrained("model-name")</p>
+<br>
+<br>
+<br>
+<p>    # Prepare inputs</p>
+<br>
+<p>    inputs = tokenizer("Explain model quantization.", return_tensors="np")</p>
+<br>
+<p>    onnx_inputs = {</p>
+<br>
+<p>        "input_ids": inputs["input_ids"],</p>
+<br>
+<p>        "attention_mask": inputs["attention_mask"],</p>
+<br>
+<p>    }</p>
+<br>
+<br>
+<br>
+<p>    # Run inference</p>
+<br>
+<p>    outputs = session.run(None, onnx_inputs)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ONNX models require an initial conversion step but benefit from aggressive graph optimizations and operator fusion.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Quantization</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Quantization reduces model size and accelerates inference by using lower-precision numbers:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    from transformers import AutoModelForCausalLM, BitsAndBytesConfig</p>
+<br>
+<p>    import torch</p>
+<br>
+<br>
+<br>
+<p>    # 4-bit quantization with bitsandbytes</p>
+<br>
+<p>    quant_config = BitsAndBytesConfig(</p>
+<br>
+<p>        load_in_4bit=True,</p>
+<br>
+<p>        bnb_4bit_compute_dtype=torch.bfloat16,</p>
+<br>
+<p>        bnb_4bit_use_double_quant=True,</p>
+<br>
+<p>        bnb_4bit_quant_type="nf4",</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<p>    model = AutoModelForCausalLM.from_pretrained(</p>
+<br>
+<p>        "meta-llama/Llama-3.1-8B-Instruct",</p>
+<br>
+<p>        quantization_config=quant_config,</p>
+<br>
+<p>        device_map="auto",</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>| Technique | Bit Width | Size Reduction | Speed Impact | Quality Loss |</p>
+<br>
+<p>|-----------|-----------|----------------|--------------|--------------|</p>
+<br>
+<p>| FP16/BF16 | 16-bit | 2x vs FP32 | 1.5-2x | None |</p>
+<br>
+<p>| INT8 | 8-bit | 4x vs FP32 | 2-3x | Minimal |</p>
+<br>
+<p>| INT4 (GPTQ) | 4-bit | 8x vs FP32 | 3-4x | Minor |</p>
+<br>
+<p>| INT4 (AWQ) | 4-bit | 8x vs FP32 | 3-4x | Minor |</p>
+<br>
+<p>| NF4 | 4-bit | 8x vs FP32 | 3-4x | Minor |</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  GPU Optimization</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Beyond framework choice, several techniques maximize GPU utilization:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Flash Attention 2: memory-efficient attention</p>
+<br>
+<p>    model = AutoModelForCausalLM.from_pretrained(</p>
+<br>
+<p>        "model-name",</p>
+<br>
+<p>        attn_implementation="flash_attention_2",</p>
+<br>
+<p>        torch_dtype=torch.bfloat16,</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<p>    # Continuous batching: process multiple requests concurrently</p>
+<br>
+<p>    # (built into vLLM and TGI)</p>
+<br>
+<br>
+<br>
+<p>    # Prefix caching: reuse KV cache for shared prompt prefixes</p>
+<br>
+<p>    # (vLLM: --enable-prefix-caching)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Conclusion</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Deploying LLMs requires selecting the right serving framework and optimization level. vLLM offers the best memory efficiency with PagedAttention and continuous batching. TGI excels with Hugging Face ecosystem integration. ONNX provides cross-platform deployment. Quantization with 4-bit or 8-bit formats reduces memory requirements by 4-8x with minimal quality loss. Match your deployment stack to your latency, throughput, and budget requirements.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

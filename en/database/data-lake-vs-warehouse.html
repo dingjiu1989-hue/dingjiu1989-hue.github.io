@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1905",
+      "wordCount": "2065",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/data-lake-vs-warehouse.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/data-lake-vs-warehouse.html"},
+      "articleBody": "Data Lake vs Data Warehouse vs Lakehouse The data landscape has evolved from simple databases to complex architectures spanning data lakes, data warehouses, and the emerging lakehouse paradigm. Understanding the differences between these architectures is essential for building a modern data platform. Data Warehouse A data warehouse is a centralized repository optimized for structured, processed data used in reporting and analytics. Characteristics * **Schema-on-write**: Data must conform to a schema before loading. This ensures quality but adds friction at ingestion time. * **Optimized for reads**: Columnar storage, pre-computed aggregations, materialized views, and indexing for fast analytical queries. * **Clean, transformed data**: Data goes through ETL/ELT pipelines before it is available for querying. * **ACID transactions**: Warehouses support transactions, making them suitable for reliable reporting. When to Use a Data Warehouse * Business intelligence dashboards. * Financial reporting requiring accuracy. * Any use case requiring SQL on clean, structured data. * Scenarios where query performance is critical (sub-second response). Limitations * Expensive storage for raw data. Storing terabytes of raw logs in a data warehouse is cost-prohibitive. * Rigid schema changes require careful migration. * Not designed for unstructured data (images, videos, documents). * Data must be transformed before it is useful, adding latency. Data Lake A data lake stores data in its raw, native format. It is a single repository for all data, regardless of structure. Characteristics * **Schema-on-read**: Data is stored as-is. Schemas are applied when the data is read, not when it is ingested. * **Cheap storage**: Object storage (S3, ADLS, GCS) is an order of magnitude cheaper than warehouse storage. * **Any data type**: Structured, semi-structured (JSON, Parquet), unstructured (images, audio, video). * **ELT friendly**: Data lands raw, transformations happen later in the lake. When to Use a Data Lake * Data science and machine learning (access raw data for feature engineering). * Log and event data storage at petabyte scale. * Archival and data retention. * Exploratory analytics where the schema is unknown upfront. Limitations * **Performance**: Querying raw data directly is slow compared to a warehouse. * **No ACID transactions**: Multiple concurrent writers can corrupt data. * **Data quality**: Without schema enforcement, data lakes often become \"data swamps\" with unreliable data. * **Governance**: Cataloging and discovering data in a lake requires additional tooling (AWS Glue, Hive Metastore). Lakehouse Architecture The lakehouse combines the flexibility of a data lake with the reliability and performance of a data warehouse. It stores data in object storage with a metadata layer that provides ACID transactions, schema enforcement, and performance optimization. Key Innovations * **ACID transactions on object storage**: Atomic commits, rollbacks, and concurrent reader/writer isolation. 2\\. **Schema enforcement and evolution**: Enforce schemas on write while allowing controlled evolution. 3\\. **Performance optimization**: File layout statistics, compaction, indexing, and caching. 4\\. **Unified batch and streaming**: Same storage for both batch and streaming workloads. 5\\. **Open formats**: Data stored in Apache Parquet with metadata tracked by open table formats. Table Format Comparison The lakehouse is enabled by three major open-source table formats. Delta Lake Delta Lake, developed by Databricks, adds ACID transactions to Parquet files. -- Delta Lake: Create a table CREATE TABLE sales ( order_id LONG, customer_id STRING, amount DOUBLE, order_date DATE ) USING DELTA; -- Delta Lake: Time travel query SELECT * FROM sales TIMESTAMP AS OF '2026-05-01'; -- Delta Lake: Vacuum old versions VACUUM sales RETAIN 168 HOURS; Best for: Databricks environments, general purpose lakehouse, Spark workloads. Apache Iceberg Iceberg was developed at Netflix and is now an Apache top-level project. It is designed for high-performance table management at scale. -- Iceberg: Create a partitioned table CREATE TABLE sales ( order_id BIGINT, customer_id STRING, amount DECIMAL(10,2), order_date DATE ) USING ICEBERG PARTITIONED BY (month(order_date)); -- Iceberg: Incremental read (only new data) SELECT * FROM sales WHERE order_date BETWEEN '2026-05-01' AND '2026-05-12'; -- Iceberg: Schema evolution (add column) ALTER TABLE sales ADD COLUMN discount DECIMAL(5,2); Best for: Multi-engine environments (Spark, Flink, Trino, Hive), cloud-agnostic deployments. Apache Hudi Hudi (Hadoop Upserts Deletes and Incrementals) was developed at Uber for real-time data ingestion. -- Hudi: Create a Copy-on-Write table CREATE TABLE uber_trips ( trip_id BIGINT, driver_id STRING, fare DOUBLE, trip_date DATE ) USING HUDI TBLPROPERTIES ( primaryKey = 'trip_id', preCombineField = 'trip_date' ); -- Hudi: Upsert new records MERGE INTO uber_trips AS target USING new_trips AS source ON target.trip_id = source.trip_id WHEN MATCHED THEN UPDATE SET * WHEN NOT MATCHED THEN INSERT *; Best for: Real-time ingestion, upsert-heavy workloads, incremental processing pipelines. Medallion Architecture The medallion architecture organizes data lakehouse data into layers of increasing quality. Bronze Layer (Raw) Raw data ingested from source systems. No transformations. Schema-on-read. Data is append-only. bronze/orders/ order_date=2026-05-01/ file1.parquet file2.parquet order_date=2026-05-02/ file3.parquet Silver Layer (Cleaned) Data is deduplicated, validated, and lightly transformed. Null handling, type casting, and simple joins. This layer serves as the source of truth for analysts. # Bronze to Silver transformation def bronze_to_silver(spark): bronze_df = spark.read.format(\"delta\").load(\"/data/bronze/orders\") silver_df = bronze_df \\ .dropDuplicates([\"order_id\"]) \\ .filter(col(\"amount\").isNotNull()) \\ .withColumn(\"order_date\", to_date(col(\"order_raw_date\"))) \\ .withColumn(\"amount\", col(\"amount\").cast(\"decimal(10,2)\")) silver_df.write \\ .format(\"delta\") \\ .mode(\"overwrite\") \\ .save(\"/data/silver/orders\") Gold Layer (Aggregated) Business-level aggregations and metrics. Data marts for specific teams or use cases. -- Gold layer: Daily sales by region CREATE TABLE gold.daily_sales_by_region USING DELTA AS SELECT order_date, region, COUNT(DISTINCT customer_id) as unique_customers, COUNT(*) as order_count, SUM(amount) as total_revenue FROM silver.orders GROUP BY order_date, region; Architecture Decision Matrix | Factor | Warehouse | Data Lake | Lakehouse | |--------|-----------|-----------|-----------| | Data freshness | Hours to days | Minutes to hours | Minutes | | Query performance | Sub-second | Seconds to minutes | Sub-second to seconds | | Storage cost | High | Low | Low | | Schema flexibility | Rigid | Flexible | Schema on write with evolution | | ACID transactions | Yes | No | Yes | | ML/AI support | Limited | Good | Good | | BI tool support | Excellent | Poor | Good to excellent | | Complexity | Low | Medium | Medium-high | Migration Path Moving from warehouse-only or lake-only architectures to a lakehouse: * **Start with S3/ADLS as a data lake** for raw data ingestion. 2\\. **Continue using the warehouse** for BI and reporting. 3\\. **Introduce an open table format** (Delta, Iceberg, Hudi) on the lake for ACID properties. 4\\. **Move bronze/silver layers to the lake** while keeping gold aggregations in the warehouse. 5\\. **Adopt a lakehouse query engine** (Trino, Athena, Databricks SQL) for direct lake queries. 6\\. **Migrate gold layer to the lakehouse** once performance is acceptable. Conclusion Data warehouses remain essential for BI and reporting. Data lakes are ideal for raw storage and ML workloads. The lakehouse architecture bridges both worlds by bringing ACID transactions, schema enforcement, and performance optimization to object storage. Choose the medallion architecture (bronze, silver, gold) to organize lakehouse data. Start with a data warehouse, add a lake for raw data, and converge on a lakehouse as your platform matures."
     }
     </script>
     <script type="application/ld+json">
@@ -73,308 +74,280 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Data Lake vs Data Warehouse vs Lakehouse</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
-      <div class="article-body"><p>The data landscape has evolved from simple databases to complex architectures spanning data lakes, data warehouses, and the emerging lakehouse paradigm. Understanding the differences between these architectures is essential for building a modern data platform.</p>
+      <div class="article-body"><h1>Data Lake vs Data Warehouse vs Lakehouse</h1>
 <br>
-<h2> Data Warehouse</h2>
+<p>The data landscape has evolved from simple databases to complex architectures spanning data lakes, data warehouses, and the emerging lakehouse paradigm. Understanding the differences between these architectures is essential for building a modern data platform.   </p>
+<p>Data Warehouse   </p>
+<p>A data warehouse is a centralized repository optimized for structured, processed data used in reporting and analytics.   </p>
+<p>Characteristics   </p>
 <br>
-<p>A data warehouse is a centralized repository optimized for structured, processed data used in reporting and analytics.</p>
+<p>* **Schema-on-write**: Data must conform to a schema before loading. This ensures quality but adds friction at ingestion time.</p>
+<p>* **Optimized for reads**: Columnar storage, pre-computed aggregations, materialized views, and indexing for fast analytical queries.</p>
+<p>* **Clean, transformed data**: Data goes through ETL/ELT pipelines before it is available for querying.</p>
+<p>* **ACID transactions**: Warehouses support transactions, making them suitable for reliable reporting.</p>
 <br>
-<h3>Characteristics</h3>
+<p>When to Use a Data Warehouse   </p>
 <br>
-<li>**Schema-on-write**: Data must conform to a schema before loading. This ensures quality but adds friction at ingestion time.</li>
-<li>**Optimized for reads**: Columnar storage, pre-computed aggregations, materialized views, and indexing for fast analytical queries.</li>
-<li>**Clean, transformed data**: Data goes through ETL/ELT pipelines before it is available for querying.</li>
-<li>**ACID transactions**: Warehouses support transactions, making them suitable for reliable reporting.</li>
+<p>* Business intelligence dashboards.</p>
+<p>* Financial reporting requiring accuracy.</p>
+<p>* Any use case requiring SQL on clean, structured data.</p>
+<p>* Scenarios where query performance is critical (sub-second response).</p>
 <br>
-<h3>When to Use a Data Warehouse</h3>
+<p>Limitations   </p>
 <br>
-<li>Business intelligence dashboards.</li>
-<li>Financial reporting requiring accuracy.</li>
-<li>Any use case requiring SQL on clean, structured data.</li>
-<li>Scenarios where query performance is critical (sub-second response).</li>
+<p>* Expensive storage for raw data. Storing terabytes of raw logs in a data warehouse is cost-prohibitive.</p>
+<p>* Rigid schema changes require careful migration.</p>
+<p>* Not designed for unstructured data (images, videos, documents).</p>
+<p>* Data must be transformed before it is useful, adding latency.</p>
 <br>
-<h3>Limitations</h3>
+<p>Data Lake   </p>
+<p>A data lake stores data in its raw, native format. It is a single repository for all data, regardless of structure.   </p>
+<p>Characteristics   </p>
 <br>
-<li>Expensive storage for raw data. Storing terabytes of raw logs in a data warehouse is cost-prohibitive.</li>
-<li>Rigid schema changes require careful migration.</li>
-<li>Not designed for unstructured data (images, videos, documents).</li>
-<li>Data must be transformed before it is useful, adding latency.</li>
+<p>* **Schema-on-read**: Data is stored as-is. Schemas are applied when the data is read, not when it is ingested.</p>
+<p>* **Cheap storage**: Object storage (S3, ADLS, GCS) is an order of magnitude cheaper than warehouse storage.</p>
+<p>* **Any data type**: Structured, semi-structured (JSON, Parquet), unstructured (images, audio, video).</p>
+<p>* **ELT friendly**: Data lands raw, transformations happen later in the lake.</p>
 <br>
-<h2> Data Lake</h2>
+<p>When to Use a Data Lake   </p>
 <br>
-<p>A data lake stores data in its raw, native format. It is a single repository for all data, regardless of structure.</p>
+<p>* Data science and machine learning (access raw data for feature engineering).</p>
+<p>* Log and event data storage at petabyte scale.</p>
+<p>* Archival and data retention.</p>
+<p>* Exploratory analytics where the schema is unknown upfront.</p>
 <br>
-<h3>Characteristics</h3>
+<p>Limitations   </p>
 <br>
-<li>**Schema-on-read**: Data is stored as-is. Schemas are applied when the data is read, not when it is ingested.</li>
-<li>**Cheap storage**: Object storage (S3, ADLS, GCS) is an order of magnitude cheaper than warehouse storage.</li>
-<li>**Any data type**: Structured, semi-structured (JSON, Parquet), unstructured (images, audio, video).</li>
-<li>**ELT friendly**: Data lands raw, transformations happen later in the lake.</li>
+<p>* **Performance**: Querying raw data directly is slow compared to a warehouse.</p>
+<p>* **No ACID transactions**: Multiple concurrent writers can corrupt data.</p>
+<p>* **Data quality**: Without schema enforcement, data lakes often become "data swamps" with unreliable data.</p>
+<p>* **Governance**: Cataloging and discovering data in a lake requires additional tooling (AWS Glue, Hive Metastore).</p>
 <br>
-<h3>When to Use a Data Lake</h3>
+<p>Lakehouse Architecture   </p>
+<p>The lakehouse combines the flexibility of a data lake with the reliability and performance of a data warehouse. It stores data in object storage with a metadata layer that provides ACID transactions, schema enforcement, and performance optimization.   </p>
+<p>Key Innovations   </p>
 <br>
-<li>Data science and machine learning (access raw data for feature engineering).</li>
-<li>Log and event data storage at petabyte scale.</li>
-<li>Archival and data retention.</li>
-<li>Exploratory analytics where the schema is unknown upfront.</li>
+<p>* **ACID transactions on object storage**: Atomic commits, rollbacks, and concurrent reader/writer isolation.</p>
+<p>2\. **Schema enforcement and evolution**: Enforce schemas on write while allowing controlled evolution. 3\. **Performance optimization**: File layout statistics, compaction, indexing, and caching. 4\. **Unified batch and streaming**: Same storage for both batch and streaming workloads. 5\. **Open formats**: Data stored in Apache Parquet with metadata tracked by open table formats.   </p>
+<p>Table Format Comparison   </p>
+<p>The lakehouse is enabled by three major open-source table formats.   </p>
+<p>Delta Lake   </p>
+<p>Delta Lake, developed by Databricks, adds ACID transactions to Parquet files.   </p>
 <br>
-<h3>Limitations</h3>
 <br>
-<li>**Performance**: Querying raw data directly is slow compared to a warehouse.</li>
-<li>**No ACID transactions**: Multiple concurrent writers can corrupt data.</li>
-<li>**Data quality**: Without schema enforcement, data lakes often become "data swamps" with unreliable data.</li>
-<li>**Governance**: Cataloging and discovering data in a lake requires additional tooling (AWS Glue, Hive Metastore).</li>
 <br>
-<h2> Lakehouse Architecture</h2>
+<p>    -- Delta Lake: Create a table</p>
 <br>
-<p>The lakehouse combines the flexibility of a data lake with the reliability and performance of a data warehouse. It stores data in object storage with a metadata layer that provides ACID transactions, schema enforcement, and performance optimization.</p>
+<p>    CREATE TABLE sales (</p>
 <br>
-<h3>Key Innovations</h3>
+<p>        order_id LONG,</p>
 <br>
-<li>**ACID transactions on object storage**: Atomic commits, rollbacks, and concurrent reader/writer isolation.</li>
-<p>2. **Schema enforcement and evolution**: Enforce schemas on write while allowing controlled evolution.</p>
-<p>3. **Performance optimization**: File layout statistics, compaction, indexing, and caching.</p>
-<p>4. **Unified batch and streaming**: Same storage for both batch and streaming workloads.</p>
-<p>5. **Open formats**: Data stored in Apache Parquet with metadata tracked by open table formats.</p>
+<p>        customer_id STRING,</p>
 <br>
-<h2> Table Format Comparison</h2>
+<p>        amount DOUBLE,</p>
 <br>
-<p>The lakehouse is enabled by three major open-source table formats.</p>
+<p>        order_date DATE</p>
 <br>
-<h3>Delta Lake</h3>
+<p>    ) USING DELTA;</p>
 <br>
-<p>Delta Lake, developed by Databricks, adds ACID transactions to Parquet files.</p>
 <br>
-<pre><code>
--- Delta Lake: Create a table
-
-CREATE TABLE sales (
-
-    order_id LONG,
-
-    customer_id STRING,
-
-    amount DOUBLE,
-
-    order_date DATE
-
-) USING DELTA;
-
-
-
--- Delta Lake: Time travel query
-
-SELECT * FROM sales TIMESTAMP AS OF &#x27;2026-05-01&#x27;;
-
-
-
--- Delta Lake: Vacuum old versions
-
-VACUUM sales RETAIN 168 HOURS;
-
-</code></pre>
 <br>
-<p>Best for: Databricks environments, general purpose lakehouse, Spark workloads.</p>
+<p>    -- Delta Lake: Time travel query</p>
 <br>
-<h3>Apache Iceberg</h3>
+<p>    SELECT * FROM sales TIMESTAMP AS OF '2026-05-01';</p>
 <br>
-<p>Iceberg was developed at Netflix and is now an Apache top-level project. It is designed for high-performance table management at scale.</p>
 <br>
-<pre><code>
--- Iceberg: Create a partitioned table
-
-CREATE TABLE sales (
-
-    order_id BIGINT,
-
-    customer_id STRING,
-
-    amount DECIMAL(10,2),
-
-    order_date DATE
-
-) USING ICEBERG
-
-PARTITIONED BY (month(order_date));
-
-
-
--- Iceberg: Incremental read (only new data)
-
-SELECT * FROM sales
-
-WHERE order_date BETWEEN &#x27;2026-05-01&#x27; AND &#x27;2026-05-12&#x27;;
-
-
-
--- Iceberg: Schema evolution (add column)
-
-ALTER TABLE sales ADD COLUMN discount DECIMAL(5,2);
-
-</code></pre>
 <br>
-<p>Best for: Multi-engine environments (Spark, Flink, Trino, Hive), cloud-agnostic deployments.</p>
+<p>    -- Delta Lake: Vacuum old versions</p>
 <br>
-<h3>Apache Hudi</h3>
+<p>    VACUUM sales RETAIN 168 HOURS;</p>
 <br>
-<p>Hudi (Hadoop Upserts Deletes and Incrementals) was developed at Uber for real-time data ingestion.</p>
 <br>
-<pre><code>
--- Hudi: Create a Copy-on-Write table
-
-CREATE TABLE uber_trips (
-
-    trip_id BIGINT,
-
-    driver_id STRING,
-
-    fare DOUBLE,
-
-    trip_date DATE
-
-) USING HUDI
-
-TBLPROPERTIES (
-
-    primaryKey = &#x27;trip_id&#x27;,
-
-    preCombineField = &#x27;trip_date&#x27;
-
-);
-
-
-
--- Hudi: Upsert new records
-
-MERGE INTO uber_trips AS target
-
-USING new_trips AS source
-
-ON target.trip_id = source.trip_id
-
-WHEN MATCHED THEN UPDATE SET *
-
-WHEN NOT MATCHED THEN INSERT *;
-
-</code></pre>
 <br>
-<p>Best for: Real-time ingestion, upsert-heavy workloads, incremental processing pipelines.</p>
 <br>
-<h2> Medallion Architecture</h2>
+<p>Best for: Databricks environments, general purpose lakehouse, Spark workloads.   </p>
+<p>Apache Iceberg   </p>
+<p>Iceberg was developed at Netflix and is now an Apache top-level project. It is designed for high-performance table management at scale.   </p>
 <br>
-<p>The medallion architecture organizes data lakehouse data into layers of increasing quality.</p>
 <br>
-<h3>Bronze Layer (Raw)</h3>
 <br>
-<p>Raw data ingested from source systems. No transformations. Schema-on-read. Data is append-only.</p>
+<p>    -- Iceberg: Create a partitioned table</p>
 <br>
-<pre><code>
-bronze/orders/
-
-  order_date=2026-05-01/
-
-    file1.parquet
-
-    file2.parquet
-
-  order_date=2026-05-02/
-
-    file3.parquet
-
-</code></pre>
+<p>    CREATE TABLE sales (</p>
 <br>
-<h3>Silver Layer (Cleaned)</h3>
+<p>        order_id BIGINT,</p>
 <br>
-<p>Data is deduplicated, validated, and lightly transformed. Null handling, type casting, and simple joins. This layer serves as the source of truth for analysts.</p>
+<p>        customer_id STRING,</p>
 <br>
-<pre><code>
-# Bronze to Silver transformation
-
-def bronze_to_silver(spark):
-
-    bronze_df = spark.read.format(&quot;delta&quot;).load(&quot;/data/bronze/orders&quot;)
-
-    
-
-    silver_df = bronze_df \
-
-        .dropDuplicates([&quot;order_id&quot;]) \
-
-        .filter(col(&quot;amount&quot;).isNotNull()) \
-
-        .withColumn(&quot;order_date&quot;, to_date(col(&quot;order_raw_date&quot;))) \
-
-        .withColumn(&quot;amount&quot;, col(&quot;amount&quot;).cast(&quot;decimal(10,2)&quot;))
-
-    
-
-    silver_df.write \
-
-        .format(&quot;delta&quot;) \
-
-        .mode(&quot;overwrite&quot;) \
-
-        .save(&quot;/data/silver/orders&quot;)
-
-</code></pre>
+<p>        amount DECIMAL(10,2),</p>
 <br>
-<h3>Gold Layer (Aggregated)</h3>
+<p>        order_date DATE</p>
 <br>
-<p>Business-level aggregations and metrics. Data marts for specific teams or use cases.</p>
+<p>    ) USING ICEBERG</p>
 <br>
-<pre><code>
--- Gold layer: Daily sales by region
-
-CREATE TABLE gold.daily_sales_by_region
-
-USING DELTA
-
-AS
-
-SELECT
-
-    order_date,
-
-    region,
-
-    COUNT(DISTINCT customer_id) as unique_customers,
-
-    COUNT(*) as order_count,
-
-    SUM(amount) as total_revenue
-
-FROM silver.orders
-
-GROUP BY order_date, region;
-
-</code></pre>
+<p>    PARTITIONED BY (month(order_date));</p>
 <br>
-<h2> Architecture Decision Matrix</h2>
 <br>
-<p>| Factor | Warehouse | Data Lake | Lakehouse |</p>
-<p>|--------|-----------|-----------|-----------|</p>
-<p>| Data freshness | Hours to days | Minutes to hours | Minutes |</p>
-<p>| Query performance | Sub-second | Seconds to minutes | Sub-second to seconds |</p>
-<p>| Storage cost | High | Low | Low |</p>
-<p>| Schema flexibility | Rigid | Flexible | Schema on write with evolution |</p>
-<p>| ACID transactions | Yes | No | Yes |</p>
-<p>| ML/AI support | Limited | Good | Good |</p>
-<p>| BI tool support | Excellent | Poor | Good to excellent |</p>
-<p>| Complexity | Low | Medium | Medium-high |</p>
 <br>
-<h2> Migration Path</h2>
+<p>    -- Iceberg: Incremental read (only new data)</p>
 <br>
-<p>Moving from warehouse-only or lake-only architectures to a lakehouse:</p>
+<p>    SELECT * FROM sales</p>
 <br>
-<li>**Start with S3/ADLS as a data lake** for raw data ingestion.</li>
-<p>2. **Continue using the warehouse** for BI and reporting.</p>
-<p>3. **Introduce an open table format** (Delta, Iceberg, Hudi) on the lake for ACID properties.</p>
-<p>4. **Move bronze/silver layers to the lake** while keeping gold aggregations in the warehouse.</p>
-<p>5. **Adopt a lakehouse query engine** (Trino, Athena, Databricks SQL) for direct lake queries.</p>
-<p>6. **Migrate gold layer to the lakehouse** once performance is acceptable.</p>
+<p>    WHERE order_date BETWEEN '2026-05-01' AND '2026-05-12';</p>
 <br>
-<h2> Conclusion</h2>
 <br>
+<br>
+<p>    -- Iceberg: Schema evolution (add column)</p>
+<br>
+<p>    ALTER TABLE sales ADD COLUMN discount DECIMAL(5,2);</p>
+<br>
+<br>
+<br>
+<br>
+<p>Best for: Multi-engine environments (Spark, Flink, Trino, Hive), cloud-agnostic deployments.   </p>
+<p>Apache Hudi   </p>
+<p>Hudi (Hadoop Upserts Deletes and Incrementals) was developed at Uber for real-time data ingestion.   </p>
+<br>
+<br>
+<br>
+<p>    -- Hudi: Create a Copy-on-Write table</p>
+<br>
+<p>    CREATE TABLE uber_trips (</p>
+<br>
+<p>        trip_id BIGINT,</p>
+<br>
+<p>        driver_id STRING,</p>
+<br>
+<p>        fare DOUBLE,</p>
+<br>
+<p>        trip_date DATE</p>
+<br>
+<p>    ) USING HUDI</p>
+<br>
+<p>    TBLPROPERTIES (</p>
+<br>
+<p>        primaryKey = 'trip_id',</p>
+<br>
+<p>        preCombineField = 'trip_date'</p>
+<br>
+<p>    );</p>
+<br>
+<br>
+<br>
+<p>    -- Hudi: Upsert new records</p>
+<br>
+<p>    MERGE INTO uber_trips AS target</p>
+<br>
+<p>    USING new_trips AS source</p>
+<br>
+<p>    ON target.trip_id = source.trip_id</p>
+<br>
+<p>    WHEN MATCHED THEN UPDATE SET *</p>
+<br>
+<p>    WHEN NOT MATCHED THEN INSERT *;</p>
+<br>
+<br>
+<br>
+<br>
+<p>Best for: Real-time ingestion, upsert-heavy workloads, incremental processing pipelines.   </p>
+<p>Medallion Architecture   </p>
+<p>The medallion architecture organizes data lakehouse data into layers of increasing quality.   </p>
+<p>Bronze Layer (Raw)   </p>
+<p>Raw data ingested from source systems. No transformations. Schema-on-read. Data is append-only.   </p>
+<br>
+<br>
+<br>
+<p>    bronze/orders/</p>
+<br>
+<p>      order_date=2026-05-01/</p>
+<br>
+<p>        file1.parquet</p>
+<br>
+<p>        file2.parquet</p>
+<br>
+<p>      order_date=2026-05-02/</p>
+<br>
+<p>        file3.parquet</p>
+<br>
+<br>
+<br>
+<br>
+<p>Silver Layer (Cleaned)   </p>
+<p>Data is deduplicated, validated, and lightly transformed. Null handling, type casting, and simple joins. This layer serves as the source of truth for analysts.   </p>
+<br>
+<br>
+<br>
+<p>    # Bronze to Silver transformation</p>
+<br>
+<p>    def bronze_to_silver(spark):</p>
+<br>
+<p>        bronze_df = spark.read.format("delta").load("/data/bronze/orders")</p>
+<br>
+<br>
+<br>
+<p>        silver_df = bronze_df \</p>
+<br>
+<p>            .dropDuplicates(["order_id"]) \</p>
+<br>
+<p>            .filter(col("amount").isNotNull()) \</p>
+<br>
+<p>            .withColumn("order_date", to_date(col("order_raw_date"))) \</p>
+<br>
+<p>            .withColumn("amount", col("amount").cast("decimal(10,2)"))</p>
+<br>
+<br>
+<br>
+<p>        silver_df.write \</p>
+<br>
+<p>            .format("delta") \</p>
+<br>
+<p>            .mode("overwrite") \</p>
+<br>
+<p>            .save("/data/silver/orders")</p>
+<br>
+<br>
+<br>
+<br>
+<p>Gold Layer (Aggregated)   </p>
+<p>Business-level aggregations and metrics. Data marts for specific teams or use cases.   </p>
+<br>
+<br>
+<br>
+<p>    -- Gold layer: Daily sales by region</p>
+<br>
+<p>    CREATE TABLE gold.daily_sales_by_region</p>
+<br>
+<p>    USING DELTA</p>
+<br>
+<p>    AS</p>
+<br>
+<p>    SELECT</p>
+<br>
+<p>        order_date,</p>
+<br>
+<p>        region,</p>
+<br>
+<p>        COUNT(DISTINCT customer_id) as unique_customers,</p>
+<br>
+<p>        COUNT(*) as order_count,</p>
+<br>
+<p>        SUM(amount) as total_revenue</p>
+<br>
+<p>    FROM silver.orders</p>
+<br>
+<p>    GROUP BY order_date, region;</p>
+<br>
+<br>
+<br>
+<br>
+<p>Architecture Decision Matrix   </p>
+<p>| Factor | Warehouse | Data Lake | Lakehouse | |--------|-----------|-----------|-----------| | Data freshness | Hours to days | Minutes to hours | Minutes | | Query performance | Sub-second | Seconds to minutes | Sub-second to seconds | | Storage cost | High | Low | Low | | Schema flexibility | Rigid | Flexible | Schema on write with evolution | | ACID transactions | Yes | No | Yes | | ML/AI support | Limited | Good | Good | | BI tool support | Excellent | Poor | Good to excellent | | Complexity | Low | Medium | Medium-high |   </p>
+<p>Migration Path   </p>
+<p>Moving from warehouse-only or lake-only architectures to a lakehouse:   </p>
+<br>
+<p>* **Start with S3/ADLS as a data lake** for raw data ingestion.</p>
+<p>2\. **Continue using the warehouse** for BI and reporting. 3\. **Introduce an open table format** (Delta, Iceberg, Hudi) on the lake for ACID properties. 4\. **Move bronze/silver layers to the lake** while keeping gold aggregations in the warehouse. 5\. **Adopt a lakehouse query engine** (Trino, Athena, Databricks SQL) for direct lake queries. 6\. **Migrate gold layer to the lakehouse** once performance is acceptable.   </p>
+<p>Conclusion   </p>
 <p>Data warehouses remain essential for BI and reporting. Data lakes are ideal for raw storage and ML workloads. The lakehouse architecture bridges both worlds by bringing ACID transactions, schema enforcement, and performance optimization to object storage. Choose the medallion architecture (bronze, silver, gold) to organize lakehouse data. Start with a data warehouse, add a lake for raw data, and converge on a lakehouse as your platform matures.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

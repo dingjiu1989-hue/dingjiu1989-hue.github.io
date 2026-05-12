@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="software-signing">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Software Signing">
+    <meta property="og:description" content="Implementing software signing with GPG, Sigstore, cosign, and in-toto attestations for supply chain security.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/software-signing.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Software Signing">
+    <meta name="twitter:description" content="Implementing software signing with GPG, Sigstore, cosign, and in-toto attestations for supply chain security.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Software Signing — SourceHub</title>
+    <meta name="description" content="Implementing software signing with GPG, Sigstore, cosign, and in-toto attestations for supply chain security.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/software-signing.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/software-signing.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Software Signing",
+      "description": "Implementing software signing with GPG, Sigstore, cosign, and in-toto attestations for supply chain security.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1273",
+      "keywords": "Security, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/software-signing.html"},
+      "articleBody": "Software Signing Why Sign Software? Software signing verifies the origin and integrity of code. It ensures that artifacts haven't been tampered with and come from a trusted source. GPG Signing Traditional signing with PGP/GPG: # Generate GPG key gpg --full-generate-key gpg --armor --export \"developer@example.com\" > public.key # Sign artifacts gpg --armor --detach-sign myapp.tar.gz gpg --verify myapp.tar.gz.asc myapp.tar.gz # Sign git commits git config commit.gpgsign true git config user.signingkey KEY_ID git commit -S -m \"Signed commit\" # Programmatic GPG verification import gnupg def verify_signature(artifact, signature_file): gpg = gnupg.GPG() with open(signature_file, \"rb\") as sf: verified = gpg.verify_file(sf, artifact) if verified.valid: return { \"valid\": True, \"fingerprint\": verified.fingerprint, \"username\": verified.username, \"timestamp\": verified.timestamp } return {\"valid\": False} Sigstore and cosign Sigstore simplifies code signing with keyless options: # Keyless signing with cosign cosign sign myregistry.io/myapp:latest # Sign with identity cosign sign \\ --identity-token $GITHUB_TOKEN \\ ghcr.io/myorg/myapp@sha256:abc123 # Verify cosign verify \\ --certificate-identity \"developer@example.com\" \\ --certificate-oidc-issuer \"https://github.com/login/oauth\" \\ myregistry.io/myapp:latest # Cosign in CI pipeline jobs: sign: runs-on: ubuntu-latest permissions: id-token: write packages: write steps: - uses: actions/checkout@v4 - uses: sigstore/cosign-installer@main - name: Sign container image run: | cosign sign \\ --yes \\ ghcr.io/${{ github.repository }}@${{ steps.push.outputs.digest }} - name: Sign SBOM run: | cosign attest-blob sbom.json \\ --predicate sbom.json \\ --type cyclonedx \\ --yes in-toto Attestations in-toto provides end-to-end supply chain integrity: # Create in-toto attestation from in_toto_attestation.v1 import Statement, Attestation def create_attestation(subject, predicate_type, predicate): statement = Statement( type=\"https://in-toto.io/Statement/v1\", subject=[{ \"name\": subject[\"name\"], \"digest\": subject[\"digest\"] }], predicate_type=predicate_type, predicate=predicate ) return Attestation( statement=statement, signatures=[{ \"sig\": sign_statement(statement), \"keyid\": get_key_id() }] ) # SLSA provenance attestation provenance = create_attestation( subject={\"name\": \"myapp\", \"digest\": {\"sha256\": \"abc...\"}}, predicate_type=\"https://slsa.dev/provenance/v1\", predicate={ \"builder\": {\"id\": \"https://github.com/actions/runner\"}, \"buildType\": \"https://github.com/actions/workflow\", \"materials\": [{ \"uri\": \"git+https://github.com/org/repo\", \"digest\": {\"sha1\": \"def...\"} }], \"buildConfig\": { \"steps\": [{ \"command\": \"docker build -t myapp .\", \"env\": {} }] } } ) Verification Policies # signing-policy.yaml verification_policy: container_images: - require_signature: true - allowed_signers: - identity: \"*.github.com\" issuer: \"https://token.actions.githubusercontent.com\" - require_attestations: - slsa_provenance - vulnerability_scan packages: - require_pgp_signature: true - trusted_keys: - fingerprint: \"ABCD1234...\" - fingerprint: \"EFGH5678...\" git_commits: - require_signed_commits: true - minimum_key_strength: 2048 Conclusion Software signing is fundamental to supply chain security. GPG works well for traditional signing, but Sigstore and cosign offer easier keyless signing workflows. Use in-toto attestations for end-to-end provenance. Enforce signing policies in your CI/CD pipeline. Verify signatures at every consumption point: container registries, package managers, and deployment pipelines."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Software Signing"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Software Signing
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Software Signing</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Software Signing</h1>
+<br>
+<p>Why Sign Software?   </p>
+<p>Software signing verifies the origin and integrity of code. It ensures that artifacts haven't been tampered with and come from a trusted source.   </p>
+<p>GPG Signing   </p>
+<p>Traditional signing with PGP/GPG:   </p>
+<br>
+<br>
+<br>
+<p>    # Generate GPG key</p>
+<br>
+<p>    gpg --full-generate-key</p>
+<br>
+<p>    gpg --armor --export "developer@example.com" > public.key</p>
+<br>
+<br>
+<br>
+<p>    # Sign artifacts</p>
+<br>
+<p>    gpg --armor --detach-sign myapp.tar.gz</p>
+<br>
+<p>    gpg --verify myapp.tar.gz.asc myapp.tar.gz</p>
+<br>
+<br>
+<br>
+<p>    # Sign git commits</p>
+<br>
+<p>    git config commit.gpgsign true</p>
+<br>
+<p>    git config user.signingkey KEY_ID</p>
+<br>
+<p>    git commit -S -m "Signed commit"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Programmatic GPG verification</p>
+<br>
+<p>    import gnupg</p>
+<br>
+<br>
+<br>
+<p>    def verify_signature(artifact, signature_file):</p>
+<br>
+<p>        gpg = gnupg.GPG()</p>
+<br>
+<br>
+<br>
+<p>        with open(signature_file, "rb") as sf:</p>
+<br>
+<p>            verified = gpg.verify_file(sf, artifact)</p>
+<br>
+<br>
+<br>
+<p>        if verified.valid:</p>
+<br>
+<p>            return {</p>
+<br>
+<p>                "valid": True,</p>
+<br>
+<p>                "fingerprint": verified.fingerprint,</p>
+<br>
+<p>                "username": verified.username,</p>
+<br>
+<p>                "timestamp": verified.timestamp</p>
+<br>
+<p>            }</p>
+<br>
+<p>        return {"valid": False}</p>
+<br>
+<br>
+<br>
+<br>
+<p>Sigstore and cosign   </p>
+<p>Sigstore simplifies code signing with keyless options:   </p>
+<br>
+<br>
+<br>
+<p>    # Keyless signing with cosign</p>
+<br>
+<p>    cosign sign myregistry.io/myapp:latest</p>
+<br>
+<br>
+<br>
+<p>    # Sign with identity</p>
+<br>
+<p>    cosign sign \</p>
+<br>
+<p>      --identity-token $GITHUB_TOKEN \</p>
+<br>
+<p>      ghcr.io/myorg/myapp@sha256:abc123</p>
+<br>
+<br>
+<br>
+<p>    # Verify</p>
+<br>
+<p>    cosign verify \</p>
+<br>
+<p>      --certificate-identity "developer@example.com" \</p>
+<br>
+<p>      --certificate-oidc-issuer "https://github.com/login/oauth" \</p>
+<br>
+<p>      myregistry.io/myapp:latest</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    # Cosign in CI pipeline</p>
+<br>
+<p>    jobs:</p>
+<br>
+<p>      sign:</p>
+<br>
+<p>        runs-on: ubuntu-latest</p>
+<br>
+<p>        permissions:</p>
+<br>
+<p>          id-token: write</p>
+<br>
+<p>          packages: write</p>
+<br>
+<br>
+<br>
+<p>        steps:</p>
+<br>
+<p>        - uses: actions/checkout@v4</p>
+<br>
+<p>        - uses: sigstore/cosign-installer@main</p>
+<br>
+<br>
+<br>
+<p>        - name: Sign container image</p>
+<br>
+<p>          run: |</p>
+<br>
+<p>            cosign sign \</p>
+<br>
+<p>              --yes \</p>
+<br>
+<p>              ghcr.io/${{ github.repository }}@${{ steps.push.outputs.digest }}</p>
+<br>
+<br>
+<br>
+<p>        - name: Sign SBOM</p>
+<br>
+<p>          run: |</p>
+<br>
+<p>            cosign attest-blob sbom.json \</p>
+<br>
+<p>              --predicate sbom.json \</p>
+<br>
+<p>              --type cyclonedx \</p>
+<br>
+<p>              --yes</p>
+<br>
+<br>
+<br>
+<br>
+<p>in-toto Attestations   </p>
+<p>in-toto provides end-to-end supply chain integrity:   </p>
+<br>
+<br>
+<br>
+<p>    # Create in-toto attestation</p>
+<br>
+<p>    from in_toto_attestation.v1 import Statement, Attestation</p>
+<br>
+<br>
+<br>
+<p>    def create_attestation(subject, predicate_type, predicate):</p>
+<br>
+<p>        statement = Statement(</p>
+<br>
+<p>            type="https://in-toto.io/Statement/v1",</p>
+<br>
+<p>            subject=[{</p>
+<br>
+<p>                "name": subject["name"],</p>
+<br>
+<p>                "digest": subject["digest"]</p>
+<br>
+<p>            }],</p>
+<br>
+<p>            predicate_type=predicate_type,</p>
+<br>
+<p>            predicate=predicate</p>
+<br>
+<p>        )</p>
+<br>
+<br>
+<br>
+<p>        return Attestation(</p>
+<br>
+<p>            statement=statement,</p>
+<br>
+<p>            signatures=[{</p>
+<br>
+<p>                "sig": sign_statement(statement),</p>
+<br>
+<p>                "keyid": get_key_id()</p>
+<br>
+<p>            }]</p>
+<br>
+<p>        )</p>
+<br>
+<br>
+<br>
+<p>    # SLSA provenance attestation</p>
+<br>
+<p>    provenance = create_attestation(</p>
+<br>
+<p>        subject={"name": "myapp", "digest": {"sha256": "abc..."}},</p>
+<br>
+<p>        predicate_type="https://slsa.dev/provenance/v1",</p>
+<br>
+<p>        predicate={</p>
+<br>
+<p>            "builder": {"id": "https://github.com/actions/runner"},</p>
+<br>
+<p>            "buildType": "https://github.com/actions/workflow",</p>
+<br>
+<p>            "materials": [{</p>
+<br>
+<p>                "uri": "git+https://github.com/org/repo",</p>
+<br>
+<p>                "digest": {"sha1": "def..."}</p>
+<br>
+<p>            }],</p>
+<br>
+<p>            "buildConfig": {</p>
+<br>
+<p>                "steps": [{</p>
+<br>
+<p>                    "command": "docker build -t myapp .",</p>
+<br>
+<p>                    "env": {}</p>
+<br>
+<p>                }]</p>
+<br>
+<p>            }</p>
+<br>
+<p>        }</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<br>
+<p>Verification Policies   </p>
+<br>
+<br>
+<br>
+<p>    # signing-policy.yaml</p>
+<br>
+<p>    verification_policy:</p>
+<br>
+<p>      container_images:</p>
+<br>
+<p>        - require_signature: true</p>
+<br>
+<p>        - allowed_signers:</p>
+<br>
+<p>            - identity: "*.github.com"</p>
+<br>
+<p>              issuer: "https://token.actions.githubusercontent.com"</p>
+<br>
+<p>        - require_attestations:</p>
+<br>
+<p>            - slsa_provenance</p>
+<br>
+<p>            - vulnerability_scan</p>
+<br>
+<br>
+<br>
+<p>      packages:</p>
+<br>
+<p>        - require_pgp_signature: true</p>
+<br>
+<p>        - trusted_keys:</p>
+<br>
+<p>            - fingerprint: "ABCD1234..."</p>
+<br>
+<p>            - fingerprint: "EFGH5678..."</p>
+<br>
+<br>
+<br>
+<p>      git_commits:</p>
+<br>
+<p>        - require_signed_commits: true</p>
+<br>
+<p>        - minimum_key_strength: 2048</p>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion   </p>
+<p>Software signing is fundamental to supply chain security. GPG works well for traditional signing, but Sigstore and cosign offer easier keyless signing workflows. Use in-toto attestations for end-to-end provenance. Enforce signing policies in your CI/CD pipeline. Verify signatures at every consumption point: container registries, package managers, and deployment pipelines.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

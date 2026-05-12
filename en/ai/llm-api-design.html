@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="llm-api-design">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits">
+    <meta property="og:description" content="Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handling patterns, and rate limiting strategies for production sys">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/llm-api-design.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits">
+    <meta name="twitter:description" content="Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handling patterns, and rate limiting strategies for production sys">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits — SourceHub</title>
+    <meta name="description" content="Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handling patterns, and rate limiting strategies for production sys">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/llm-api-design.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/ai/llm-api-design.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits",
+      "description": "Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handling patterns, and rate limiting strategies for production sys",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1714",
+      "keywords": "AI, Machine Learning, LLM",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/llm-api-design.html"},
+      "articleBody": "LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits Introduction Designing APIs that wrap large language models requires handling concerns that traditional REST APIs do not face: streaming token-by-token responses, enforcing structured output schemas, managing unpredictable latency, and protecting against runaway costs. This guide covers the four critical pillars of LLM API design with production-ready patterns. Streaming Responses Streaming is the standard way to return LLM outputs. Instead of waiting for the full response, the client receives tokens as they are generated: from fastapi import FastAPI, Request from fastapi.responses import StreamingResponse from anthropic import AsyncAnthropic import asyncio app = FastAPI() client = AsyncAnthropic(api_key=\"sk-ant-...\") async def generate_stream(prompt: str): async with client.messages.stream( model=\"claude-sonnet-4-20260512\", max_tokens=4096, messages=[{\"role\": \"user\", \"content\": prompt}], ) as stream: async for chunk in stream: if chunk.type == \"content_block_delta\": yield f\"data: {chunk.delta.text}\\n\\n\" @app.post(\"/chat\") async def chat(request: Request): body = await request.json() return StreamingResponse( generate_stream(body[\"prompt\"]), media_type=\"text/event-stream\", headers={ \"Cache-Control\": \"no-cache\", \"Connection\": \"keep-alive\", \"X-Accel-Buffering\": \"no\", }, ) The Server-Sent Events protocol is the most compatible streaming format. Each `data:` line is a new token chunk. Clients use `EventSource` or fetch with `ReadableStream` to consume the stream progressively. Structured Output Raw LLM text is unreliable for programmatic consumption. Use structured output modes to enforce JSON schemas: from pydantic import BaseModel from openai import OpenAI client = OpenAI() class ExtractedEntity(BaseModel): name: str type: str confidence: float source_text: str class ExtractionResult(BaseModel): entities: list[ExtractedEntity] summary: str language: str response = client.beta.chat.completions.parse( model=\"gpt-4o\", messages=[ {\"role\": \"system\", \"content\": \"Extract entities from the text.\"}, {\"role\": \"user\", \"content\": user_text}, ], response_format=ExtractionResult, ) result: ExtractionResult = response.choices[0].message.parsed When the API does not support native structured output, use a two-step approach: request JSON in the prompt, then validate and re-request on failure: import json from pydantic import ValidationError def safe_structured_generate(prompt: str, schema: type[BaseModel], max_retries=3): for attempt in range(max_retries): raw = call_llm(prompt + \"\\n\\nRespond in valid JSON matching this schema: \" + str(schema.model_json_schema())) try: parsed = json.loads(clean_json(raw)) return schema.model_validate(parsed) except (json.JSONDecodeError, ValidationError) as e: if attempt == max_retries - 1: raise prompt += f\"\\n\\nPrevious attempt failed: {e}. Please fix the JSON.\" return None Error Handling LLM APIs fail in distinctive ways. Build a retry strategy around each failure mode: import time from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type class RateLimitError(Exception): pass class ContextWindowExceeded(Exception): pass class ContentFilterError(Exception): pass @retry( stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=30), retry=retry_if_exception_type(RateLimitError), ) def call_with_retry(prompt: str) -> str: try: response = client.messages.create(model=\"claude-sonnet-4-20260512\", max_tokens=1024, messages=[{\"role\": \"user\", \"content\": prompt}]) return response.content[0].text except APIStatusError as e: if e.status_code == 429: retry_after = int(e.response.headers.get(\"retry-after\", 5)) time.sleep(retry_after) raise RateLimitError from e elif e.status_code == 400 and \"context_length_exceeded\" in str(e): raise ContextWindowExceeded from e elif e.status_code == 400 and \"content_filter\" in str(e): raise ContentFilterError from e raise Each error type deserves a different handler: rate limits get exponential backoff, context windows trigger input truncation, and content filter errors should be logged and escalated. Rate Limiting Protect your API from abuse and cost spikes with layered rate limiting: from fastapi import HTTPException import time from collections import defaultdict class RateLimiter: def __init__(self): self.tokens_per_second = 10 self.burst_limit = 20 self.cost_per_token = 0.000003 self.daily_budget = 10.0 self.user_usage = defaultdict(float) async def check(self, user_id: str, estimated_tokens: int): cost = estimated_tokens * self.cost_per_token if self.user_usage[user_id] + cost > self.daily_budget: raise HTTPException(status_code=429, detail=\"Daily budget exceeded\") self.user_usage[user_id] += cost def get_usage(self, user_id: str) -> dict: return {\"cost\": self.user_usage[user_id], \"budget\": self.daily_budget} rate_limiter = RateLimiter() @app.post(\"/chat\") async def chat(request: Request): user_id = request.headers.get(\"X-User-Id\") body = await request.json() estimated = len(body[\"prompt\"].split()) * 2 + int(body.get(\"max_tokens\", 1024)) await rate_limiter.check(user_id, estimated) return await generate_response(body[\"prompt\"]) Conclusion Designing LLM APIs requires balancing responsiveness with cost control. Stream responses for user experience, enforce structured output for programmatic reliability, implement retry logic calibrated to each error type, and gate access with rate and budget limits. These four patterns form the foundation of any production LLM service."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">AI</span>
+        <span class="tag-cat">Machine Learning</span>
+        <span class="tag-cat">LLM</span></div>
+      <h1 class="article-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
+<br>
+<h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Designing APIs that wrap large language models requires handling concerns that traditional REST APIs do not face: streaming token-by-token responses, enforcing structured output schemas, managing unpredictable latency, and protecting against runaway costs. This guide covers the four critical pillars of LLM API design with production-ready patterns.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Streaming Responses</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Streaming is the standard way to return LLM outputs. Instead of waiting for the full response, the client receives tokens as they are generated:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    from fastapi import FastAPI, Request</p>
+<br>
+<p>    from fastapi.responses import StreamingResponse</p>
+<br>
+<p>    from anthropic import AsyncAnthropic</p>
+<br>
+<p>    import asyncio</p>
+<br>
+<br>
+<br>
+<p>    app = FastAPI()</p>
+<br>
+<p>    client = AsyncAnthropic(api_key="sk-ant-...")</p>
+<br>
+<br>
+<br>
+<p>    async def generate_stream(prompt: str):</p>
+<br>
+<p>        async with client.messages.stream(</p>
+<br>
+<p>            model="claude-sonnet-4-20260512",</p>
+<br>
+<p>            max_tokens=4096,</p>
+<br>
+<p>            messages=[{"role": "user", "content": prompt}],</p>
+<br>
+<p>        ) as stream:</p>
+<br>
+<p>            async for chunk in stream:</p>
+<br>
+<p>                if chunk.type == "content_block_delta":</p>
+<br>
+<p>                    yield f"data: {chunk.delta.text}\n\n"</p>
+<br>
+<br>
+<br>
+<p>    @app.post("/chat")</p>
+<br>
+<p>    async def chat(request: Request):</p>
+<br>
+<p>        body = await request.json()</p>
+<br>
+<p>        return StreamingResponse(</p>
+<br>
+<p>            generate_stream(body["prompt"]),</p>
+<br>
+<p>            media_type="text/event-stream",</p>
+<br>
+<p>            headers={</p>
+<br>
+<p>                "Cache-Control": "no-cache",</p>
+<br>
+<p>                "Connection": "keep-alive",</p>
+<br>
+<p>                "X-Accel-Buffering": "no",</p>
+<br>
+<p>            },</p>
+<br>
+<p>        )</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The Server-Sent Events protocol is the most compatible streaming format. Each `data:` line is a new token chunk. Clients use `EventSource` or fetch with `ReadableStream` to consume the stream progressively.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Structured Output</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Raw LLM text is unreliable for programmatic consumption. Use structured output modes to enforce JSON schemas:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    from pydantic import BaseModel</p>
+<br>
+<p>    from openai import OpenAI</p>
+<br>
+<br>
+<br>
+<p>    client = OpenAI()</p>
+<br>
+<br>
+<br>
+<p>    class ExtractedEntity(BaseModel):</p>
+<br>
+<p>        name: str</p>
+<br>
+<p>        type: str</p>
+<br>
+<p>        confidence: float</p>
+<br>
+<p>        source_text: str</p>
+<br>
+<br>
+<br>
+<p>    class ExtractionResult(BaseModel):</p>
+<br>
+<p>        entities: list[ExtractedEntity]</p>
+<br>
+<p>        summary: str</p>
+<br>
+<p>        language: str</p>
+<br>
+<br>
+<br>
+<p>    response = client.beta.chat.completions.parse(</p>
+<br>
+<p>        model="gpt-4o",</p>
+<br>
+<p>        messages=[</p>
+<br>
+<p>            {"role": "system", "content": "Extract entities from the text."},</p>
+<br>
+<p>            {"role": "user", "content": user_text},</p>
+<br>
+<p>        ],</p>
+<br>
+<p>        response_format=ExtractionResult,</p>
+<br>
+<p>    )</p>
+<br>
+<br>
+<br>
+<p>    result: ExtractionResult = response.choices[0].message.parsed</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>When the API does not support native structured output, use a two-step approach: request JSON in the prompt, then validate and re-request on failure:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    import json</p>
+<br>
+<p>    from pydantic import ValidationError</p>
+<br>
+<br>
+<br>
+<p>    def safe_structured_generate(prompt: str, schema: type[BaseModel], max_retries=3):</p>
+<br>
+<p>        for attempt in range(max_retries):</p>
+<br>
+<p>            raw = call_llm(prompt + "\n\nRespond in valid JSON matching this schema: " + str(schema.model_json_schema()))</p>
+<br>
+<p>            try:</p>
+<br>
+<p>                parsed = json.loads(clean_json(raw))</p>
+<br>
+<p>                return schema.model_validate(parsed)</p>
+<br>
+<p>            except (json.JSONDecodeError, ValidationError) as e:</p>
+<br>
+<p>                if attempt == max_retries - 1:</p>
+<br>
+<p>                    raise</p>
+<br>
+<p>                prompt += f"\n\nPrevious attempt failed: {e}. Please fix the JSON."</p>
+<br>
+<p>        return None</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Error Handling</h2>
+<br>
+<br>
+<br>
+<br>
+<p>LLM APIs fail in distinctive ways. Build a retry strategy around each failure mode:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    import time</p>
+<br>
+<p>    from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type</p>
+<br>
+<br>
+<br>
+<p>    class RateLimitError(Exception): pass</p>
+<br>
+<p>    class ContextWindowExceeded(Exception): pass</p>
+<br>
+<p>    class ContentFilterError(Exception): pass</p>
+<br>
+<br>
+<br>
+<p>    @retry(</p>
+<br>
+<p>        stop=stop_after_attempt(3),</p>
+<br>
+<p>        wait=wait_exponential(multiplier=1, min=2, max=30),</p>
+<br>
+<p>        retry=retry_if_exception_type(RateLimitError),</p>
+<br>
+<p>    )</p>
+<br>
+<p>    def call_with_retry(prompt: str) -> str:</p>
+<br>
+<p>        try:</p>
+<br>
+<p>            response = client.messages.create(model="claude-sonnet-4-20260512", max_tokens=1024, messages=[{"role": "user", "content": prompt}])</p>
+<br>
+<p>            return response.content[0].text</p>
+<br>
+<p>        except APIStatusError as e:</p>
+<br>
+<p>            if e.status_code == 429:</p>
+<br>
+<p>                retry_after = int(e.response.headers.get("retry-after", 5))</p>
+<br>
+<p>                time.sleep(retry_after)</p>
+<br>
+<p>                raise RateLimitError from e</p>
+<br>
+<p>            elif e.status_code == 400 and "context_length_exceeded" in str(e):</p>
+<br>
+<p>                raise ContextWindowExceeded from e</p>
+<br>
+<p>            elif e.status_code == 400 and "content_filter" in str(e):</p>
+<br>
+<p>                raise ContentFilterError from e</p>
+<br>
+<p>            raise</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Each error type deserves a different handler: rate limits get exponential backoff, context windows trigger input truncation, and content filter errors should be logged and escalated.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Rate Limiting</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Protect your API from abuse and cost spikes with layered rate limiting:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>    from fastapi import HTTPException</p>
+<br>
+<p>    import time</p>
+<br>
+<p>    from collections import defaultdict</p>
+<br>
+<br>
+<br>
+<p>    class RateLimiter:</p>
+<br>
+<p>        def __init__(self):</p>
+<br>
+<p>            self.tokens_per_second = 10</p>
+<br>
+<p>            self.burst_limit = 20</p>
+<br>
+<p>            self.cost_per_token = 0.000003</p>
+<br>
+<p>            self.daily_budget = 10.0</p>
+<br>
+<p>            self.user_usage = defaultdict(float)</p>
+<br>
+<br>
+<br>
+<p>        async def check(self, user_id: str, estimated_tokens: int):</p>
+<br>
+<p>            cost = estimated_tokens * self.cost_per_token</p>
+<br>
+<p>            if self.user_usage[user_id] + cost > self.daily_budget:</p>
+<br>
+<p>                raise HTTPException(status_code=429, detail="Daily budget exceeded")</p>
+<br>
+<p>            self.user_usage[user_id] += cost</p>
+<br>
+<br>
+<br>
+<p>        def get_usage(self, user_id: str) -> dict:</p>
+<br>
+<p>            return {"cost": self.user_usage[user_id], "budget": self.daily_budget}</p>
+<br>
+<br>
+<br>
+<p>    rate_limiter = RateLimiter()</p>
+<br>
+<br>
+<br>
+<p>    @app.post("/chat")</p>
+<br>
+<p>    async def chat(request: Request):</p>
+<br>
+<p>        user_id = request.headers.get("X-User-Id")</p>
+<br>
+<p>        body = await request.json()</p>
+<br>
+<p>        estimated = len(body["prompt"].split()) * 2 + int(body.get("max_tokens", 1024))</p>
+<br>
+<p>        await rate_limiter.check(user_id, estimated)</p>
+<br>
+<p>        return await generate_response(body["prompt"])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Conclusion</h2>
+<br>
+<br>
+<br>
+<br>
+<p>Designing LLM APIs requires balancing responsiveness with cost control. Stream responses for user experience, enforce structured output for programmatic reliability, implement retry logic calibrated to each error type, and gate access with rate and budget limits. These four patterns form the foundation of any production LLM service.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

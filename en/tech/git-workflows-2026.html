@@ -41,11 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/logo.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1158",
+      "wordCount": "1337",
       "keywords": "Technology, Programming, DevOps",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/git-workflows-2026.html"}
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/git-workflows-2026.html"},
+      "articleBody": "Git Workflows for Teams Git workflows define how teams collaborate on code. Choosing the right workflow impacts productivity, release cadence, and code quality. In 2026, several mature patterns dominate, each suited to different team structures and deployment strategies. Trunk-Based Development Trunk-based development has become the default for teams practicing continuous deployment. Developers work on short-lived feature branches (hours to a couple of days) and merge directly into `main` multiple times per day. Key practices: * Branch from `main`, commit frequently, merge back quickly. * Use feature flags to hide incomplete work in production. * Run CI on every push to catch integration issues early. * Keep branches small -- ideally a single logical change. Trunk-based development minimizes merge conflicts and keeps integration pain low. It pairs well with feature flagging systems like LaunchDarkly or Flagsmith. GitHub Flow GitHub Flow is a simplified trunk-based variant popular with open source and small teams: * Create a branch from `main`. 2\\. Make changes and open a pull request. 3\\. Discuss, review, and iterate. 4\\. Merge to `main` and deploy immediately. The simplicity is its strength -- there is no `develop` branch, no release branches, and no hotfix branches. Every branch is treated equally, and `main` is always deployable. GitFlow GitFlow remains relevant for projects with scheduled releases and strict versioning: * `main` stores the release history. * `develop` serves as the integration branch. * `feature/*` branches branch from `develop`. * `release/*` branches prepare releases. * `hotfix/*` branches fix production issues directly from `main`. GitFlow provides clear separation between work-in-progress and released code. However, it adds complexity -- teams should only adopt it when they genuinely need release branches and maintenance branches simultaneously. Pull Request Best Practices Regardless of workflow, effective pull requests are critical: **Keep PRs small.** A PR should represent a single logical change. Research shows that reviews are most effective under 250 lines changed. Large PRs get less thorough reviews and take longer to merge. **Write descriptive titles and descriptions.** A good PR description explains what changed, why it changed, and how to test it. Include screenshots for UI changes. **Use draft PRs for early feedback.** Open a draft PR before the code is complete to get architectural feedback early. Rebase vs Merge The debate between rebasing and merging continues. Most teams adopt a pragmatic hybrid: # Rebase feature branch onto main git checkout feature/xyz git rebase main # Merge with --no-ff for pull requests git checkout main git merge --no-ff feature/xyz Use rebase to keep feature branches up to date and maintain a clean history. Use merge commits to record when a feature was integrated. Squash-merge is popular for trunk-based workflows since it creates a single commit per PR. Commit Message Conventions Conventional Commits has become the standard: feat(api): add user authentication endpoint fix(parser): handle null input gracefully docs(readme): update installation instructions This format enables automated changelog generation, semantic versioning, and changelog-driven releases. Tools like `commitlint` enforce these conventions in CI. Branch Naming Conventions Adopt a consistent branch naming scheme: * `feat/description` for features * `fix/description` for bug fixes * `chore/description` for maintenance tasks * `docs/description` for documentation Use hyphens to separate words and keep names under 50 characters. Code Review Automation Modern Git platforms support automated checks that must pass before merging: * Static analysis (linters, type checkers). * Unit and integration tests. * Security scanning (SAST, dependency scanning). * Coverage thresholds. Configure branch protection rules to require passing CI checks and approved reviews. This prevents unreviewed or broken code from reaching main. Handling Merge Conflicts Conflicts are inevitable. Best practices for resolution: # Update your branch first git fetch origin git rebase origin/main # Resolve conflicts in your editor git add resolved-file.py git rebase --continue For complex conflicts, use a visual merge tool like `kdiff3`, `meld`, or VS Code's built-in merge editor. Always test after resolving conflicts. Git Hooks and Automation Client-side hooks enforce local standards: #!/bin/sh # .git/hooks/pre-commit npm run lint && npm run typecheck Team-wide hooks can be managed with `husky` (JavaScript) or `lefthook` (multi-language). Server-side hooks in CI prevent non-compliant commits from being merged. Summary The best Git workflow is the one your team consistently follows. Start simple -- GitHub Flow or trunk-based development -- and adopt more structure only when the team's scale demands it. Combine clear branching policies, small PRs, automated checks, and Conventional Commits to build a workflow that keeps your team shipping quality code."
     }
     </script>
     <script type="application/ld+json">
@@ -74,153 +75,281 @@
         <span class="tag-cat">DevOps</span></div>
       <h1 class="article-title">Git Workflows for Teams</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
-      <div class="article-body"><p>Git workflows define how teams collaborate on code. Choosing the right workflow impacts productivity, release cadence, and code quality. In 2026, several mature patterns dominate, each suited to different team structures and deployment strategies.</p>
+      <div class="article-body"><h1>Git Workflows for Teams</h1>
 <br>
-<h2> Trunk-Based Development</h2>
+<p>Git workflows define how teams collaborate on code. Choosing the right workflow impacts productivity, release cadence, and code quality. In 2026, several mature patterns dominate, each suited to different team structures and deployment strategies.</p>
+<br>
+<br>
+<br>
+<br>
+<h2>  Trunk-Based Development</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Trunk-based development has become the default for teams practicing continuous deployment. Developers work on short-lived feature branches (hours to a couple of days) and merge directly into `main` multiple times per day.</p>
 <br>
+<br>
+<br>
+<br>
 <p>Key practices:</p>
 <br>
-<li>Branch from `main`, commit frequently, merge back quickly.</li>
-<li>Use feature flags to hide incomplete work in production.</li>
-<li>Run CI on every push to catch integration issues early.</li>
-<li>Keep branches small -- ideally a single logical change.</li>
+<br>
+<br>
+<p>* Branch from `main`, commit frequently, merge back quickly.</p>
+<p>* Use feature flags to hide incomplete work in production.</p>
+<p>* Run CI on every push to catch integration issues early.</p>
+<p>* Keep branches small -- ideally a single logical change.</p>
+<br>
+<br>
 <br>
 <p>Trunk-based development minimizes merge conflicts and keeps integration pain low. It pairs well with feature flagging systems like LaunchDarkly or Flagsmith.</p>
 <br>
-<h2> GitHub Flow</h2>
+<br>
+<br>
+<br>
+<h2>  GitHub Flow</h2>
+<br>
+<br>
+<br>
 <br>
 <p>GitHub Flow is a simplified trunk-based variant popular with open source and small teams:</p>
 <br>
-<li>Create a branch from `main`.</li>
-<p>2. Make changes and open a pull request.</p>
-<p>3. Discuss, review, and iterate.</p>
-<p>4. Merge to `main` and deploy immediately.</p>
+<br>
+<br>
+<p>* Create a branch from `main`.</p>
+<br>
+<p>2\. Make changes and open a pull request.</p>
+<br>
+<p>3\. Discuss, review, and iterate.</p>
+<br>
+<p>4\. Merge to `main` and deploy immediately.</p>
+<br>
+<br>
+<br>
 <br>
 <p>The simplicity is its strength -- there is no `develop` branch, no release branches, and no hotfix branches. Every branch is treated equally, and `main` is always deployable.</p>
 <br>
-<h2> GitFlow</h2>
+<br>
+<br>
+<br>
+<h2>  GitFlow</h2>
+<br>
+<br>
+<br>
 <br>
 <p>GitFlow remains relevant for projects with scheduled releases and strict versioning:</p>
 <br>
-<li>`main` stores the release history.</li>
-<li>`develop` serves as the integration branch.</li>
-<li>`feature/*` branches branch from `develop`.</li>
-<li>`release/*` branches prepare releases.</li>
-<li>`hotfix/*` branches fix production issues directly from `main`.</li>
+<br>
+<br>
+<p>* `main` stores the release history.</p>
+<p>* `develop` serves as the integration branch.</p>
+<p>* `feature/*` branches branch from `develop`.</p>
+<p>* `release/*` branches prepare releases.</p>
+<p>* `hotfix/*` branches fix production issues directly from `main`.</p>
+<br>
+<br>
 <br>
 <p>GitFlow provides clear separation between work-in-progress and released code. However, it adds complexity -- teams should only adopt it when they genuinely need release branches and maintenance branches simultaneously.</p>
 <br>
-<h2> Pull Request Best Practices</h2>
+<br>
+<br>
+<br>
+<h2>  Pull Request Best Practices</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Regardless of workflow, effective pull requests are critical:</p>
 <br>
+<br>
+<br>
+<br>
 <p>**Keep PRs small.** A PR should represent a single logical change. Research shows that reviews are most effective under 250 lines changed. Large PRs get less thorough reviews and take longer to merge.</p>
+<br>
+<br>
+<br>
 <br>
 <p>**Write descriptive titles and descriptions.** A good PR description explains what changed, why it changed, and how to test it. Include screenshots for UI changes.</p>
 <br>
+<br>
+<br>
+<br>
 <p>**Use draft PRs for early feedback.** Open a draft PR before the code is complete to get architectural feedback early.</p>
 <br>
-<h2> Rebase vs Merge</h2>
+<br>
+<br>
+<br>
+<h2>  Rebase vs Merge</h2>
+<br>
+<br>
+<br>
 <br>
 <p>The debate between rebasing and merging continues. Most teams adopt a pragmatic hybrid:</p>
 <br>
-<pre><code>
-# Rebase feature branch onto main
-
-git checkout feature/xyz
-
-git rebase main
-
-
-
-# Merge with --no-ff for pull requests
-
-git checkout main
-
-git merge --no-ff feature/xyz
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # Rebase feature branch onto main</p>
+<br>
+<p>    git checkout feature/xyz</p>
+<br>
+<p>    git rebase main</p>
+<br>
+<br>
+<br>
+<p>    # Merge with --no-ff for pull requests</p>
+<br>
+<p>    git checkout main</p>
+<br>
+<p>    git merge --no-ff feature/xyz</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Use rebase to keep feature branches up to date and maintain a clean history. Use merge commits to record when a feature was integrated. Squash-merge is popular for trunk-based workflows since it creates a single commit per PR.</p>
 <br>
-<h2> Commit Message Conventions</h2>
+<br>
+<br>
+<br>
+<h2>  Commit Message Conventions</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Conventional Commits has become the standard:</p>
 <br>
-<pre><code>
-feat(api): add user authentication endpoint
-
-fix(parser): handle null input gracefully
-
-docs(readme): update installation instructions
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    feat(api): add user authentication endpoint</p>
+<br>
+<p>    fix(parser): handle null input gracefully</p>
+<br>
+<p>    docs(readme): update installation instructions</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>This format enables automated changelog generation, semantic versioning, and changelog-driven releases. Tools like `commitlint` enforce these conventions in CI.</p>
 <br>
-<h2> Branch Naming Conventions</h2>
+<br>
+<br>
+<br>
+<h2>  Branch Naming Conventions</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Adopt a consistent branch naming scheme:</p>
 <br>
-<li>`feat/description` for features</li>
-<li>`fix/description` for bug fixes</li>
-<li>`chore/description` for maintenance tasks</li>
-<li>`docs/description` for documentation</li>
+<br>
+<br>
+<p>* `feat/description` for features</p>
+<p>* `fix/description` for bug fixes</p>
+<p>* `chore/description` for maintenance tasks</p>
+<p>* `docs/description` for documentation</p>
+<br>
+<br>
 <br>
 <p>Use hyphens to separate words and keep names under 50 characters.</p>
 <br>
-<h2> Code Review Automation</h2>
+<br>
+<br>
+<br>
+<h2>  Code Review Automation</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Modern Git platforms support automated checks that must pass before merging:</p>
 <br>
-<li>Static analysis (linters, type checkers).</li>
-<li>Unit and integration tests.</li>
-<li>Security scanning (SAST, dependency scanning).</li>
-<li>Coverage thresholds.</li>
+<br>
+<br>
+<p>* Static analysis (linters, type checkers).</p>
+<p>* Unit and integration tests.</p>
+<p>* Security scanning (SAST, dependency scanning).</p>
+<p>* Coverage thresholds.</p>
+<br>
+<br>
 <br>
 <p>Configure branch protection rules to require passing CI checks and approved reviews. This prevents unreviewed or broken code from reaching main.</p>
 <br>
-<h2> Handling Merge Conflicts</h2>
+<br>
+<br>
+<br>
+<h2>  Handling Merge Conflicts</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Conflicts are inevitable. Best practices for resolution:</p>
 <br>
-<pre><code>
-# Update your branch first
-
-git fetch origin
-
-git rebase origin/main
-
-
-
-# Resolve conflicts in your editor
-
-git add resolved-file.py
-
-git rebase --continue
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    # Update your branch first</p>
+<br>
+<p>    git fetch origin</p>
+<br>
+<p>    git rebase origin/main</p>
+<br>
+<br>
+<br>
+<p>    # Resolve conflicts in your editor</p>
+<br>
+<p>    git add resolved-file.py</p>
+<br>
+<p>    git rebase --continue</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>For complex conflicts, use a visual merge tool like `kdiff3`, `meld`, or VS Code's built-in merge editor. Always test after resolving conflicts.</p>
 <br>
-<h2> Git Hooks and Automation</h2>
+<br>
+<br>
+<br>
+<h2>  Git Hooks and Automation</h2>
+<br>
+<br>
+<br>
 <br>
 <p>Client-side hooks enforce local standards:</p>
 <br>
-<pre><code>
-#!/bin/sh
-
-# .git/hooks/pre-commit
-
-npm run lint &amp;&amp; npm run typecheck
-
-</code></pre>
+<br>
+<br>
+<br>
+<br>
+<p>    #!/bin/sh</p>
+<br>
+<p>    # .git/hooks/pre-commit</p>
+<br>
+<p>    npm run lint && npm run typecheck</p>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Team-wide hooks can be managed with `husky` (JavaScript) or `lefthook` (multi-language). Server-side hooks in CI prevent non-compliant commits from being merged.</p>
 <br>
-<h2> Summary</h2>
+<br>
+<br>
+<br>
+<h2>  Summary</h2>
+<br>
+<br>
+<br>
 <br>
 <p>The best Git workflow is the one your team consistently follows. Start simple -- GitHub Flow or trunk-based development -- and adopt more structure only when the team's scale demands it. Combine clear branching policies, small PRs, automated checks, and Conventional Commits to build a workflow that keeps your team shipping quality code.</p></div>
     </article>

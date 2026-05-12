@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="database" data-exclude="database-query-profiling">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Database Query Profiling: Finding and Fixing Performance Bottlenecks">
+    <meta property="og:description" content="Profile database queries to identify bottlenecks: execution plans, wait events, and systematic optimization.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/database/database-query-profiling.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Database Query Profiling: Finding and Fixing Performance Bottlenecks">
+    <meta name="twitter:description" content="Profile database queries to identify bottlenecks: execution plans, wait events, and systematic optimization.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Database Query Profiling: Finding and Fixing Performance Bottlenecks — SourceHub</title>
+    <meta name="description" content="Profile database queries to identify bottlenecks: execution plans, wait events, and systematic optimization.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/database-query-profiling.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/database-query-profiling.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Database Query Profiling: Finding and Fixing Performance Bottlenecks",
+      "description": "Profile database queries to identify bottlenecks: execution plans, wait events, and systematic optimization.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "300",
+      "keywords": "Database, Backend, Data",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-query-profiling.html"},
+      "articleBody": "Database Query Profiling: Finding and Fixing Performance Bottlenecks Query profiling identifies why a query is slow. Rather than guessing, profiling measures where time is spent: CPU, I/O, locks, or network. This data guides targeted optimization. Profiling Tools PostgreSQL: EXPLAIN ANALYZE BUFFERS shows execution plan with actual timing and buffer access. pg_stat_statements tracks query statistics. auto_explain logs slow queries automatically. pgBadger analyzes PostgreSQL logs for query performance patterns. MySQL: EXPLAIN ANALYZE (MySQL 8.0.18+) shows execution plan. performance_schema tracks query execution statistics. sys schema provides query performance summaries. pt-query-digest analyzes slow query logs. Key Metrics Execution time: total time and time per execution. Buffer usage: shared hit reveals cache efficiency. Rows examined vs returned: high examined-to-returned ratio suggests missing indexes. Wait events: what the query is waiting for (I/O, locks, CPU). Optimization Workflow Identify slow queries via monitoring. Profile with EXPLAIN ANALYZE. Check for sequential scans on large tables. Verify index usage. Examine join strategies. Review sort operations. Test the fix. Profile again to confirm improvement. Monitor in production."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
+        {"@type": "ListItem", "position": 3, "name": "Database Query Profiling: Finding and Fixing Performance Bottlenecks"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Database Query Profiling: Finding and Fixing Performance Bottlenecks
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Database</span>
+        <span class="tag-cat">Backend</span>
+        <span class="tag-cat">Data</span></div>
+      <h1 class="article-title">Database Query Profiling: Finding and Fixing Performance Bottlenecks</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Database Query Profiling: Finding and Fixing Performance Bottlenecks</h1>
+<p>Query profiling identifies why a query is slow. Rather than guessing, profiling measures where time is spent: CPU, I/O, locks, or network. This data guides targeted optimization.</p>
+<br>
+<h2> Profiling Tools</h2>
+<br>
+<p>PostgreSQL: EXPLAIN ANALYZE BUFFERS shows execution plan with actual timing and buffer access. pg_stat_statements tracks query statistics. auto_explain logs slow queries automatically. pgBadger analyzes PostgreSQL logs for query performance patterns.</p>
+<br>
+<p>MySQL: EXPLAIN ANALYZE (MySQL 8.0.18+) shows execution plan. performance_schema tracks query execution statistics. sys schema provides query performance summaries. pt-query-digest analyzes slow query logs.</p>
+<br>
+<h2> Key Metrics</h2>
+<br>
+<p>Execution time: total time and time per execution. Buffer usage: shared hit reveals cache efficiency. Rows examined vs returned: high examined-to-returned ratio suggests missing indexes. Wait events: what the query is waiting for (I/O, locks, CPU).</p>
+<br>
+<h2> Optimization Workflow</h2>
+<br>
+<p>Identify slow queries via monitoring. Profile with EXPLAIN ANALYZE. Check for sequential scans on large tables. Verify index usage. Examine join strategies. Review sort operations. Test the fix. Profile again to confirm improvement. Monitor in production.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

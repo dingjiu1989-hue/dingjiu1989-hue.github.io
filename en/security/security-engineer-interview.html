@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="security" data-exclude="security-engineer-interview">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Security Engineer Interview">
+    <meta property="og:description" content="Key topics, system design questions, and practical exercises for security engineer interviews.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/security/security-engineer-interview.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Security Engineer Interview">
+    <meta name="twitter:description" content="Key topics, system design questions, and practical exercises for security engineer interviews.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Security Engineer Interview — SourceHub</title>
+    <meta name="description" content="Key topics, system design questions, and practical exercises for security engineer interviews.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/security-engineer-interview.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/security-engineer-interview.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Security Engineer Interview",
+      "description": "Key topics, system design questions, and practical exercises for security engineer interviews.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1182",
+      "keywords": "Security, DevOps, Cloud",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/security-engineer-interview.html"},
+      "articleBody": "Security Engineer Interview Interview Structure Security engineer interviews typically cover: security fundamentals, hands-on exercises, system design, and behavioral scenarios. Core Knowledge Topics Cryptography Understand encryption algorithms and their properties: # Interview question: Implement a secure password hasher import hashlib import os def hash_password(password): \"\"\"Hash password with bcrypt (the correct answer)\"\"\" import bcrypt salt = bcrypt.gensalt(rounds=12) return bcrypt.hashpw(password.encode(), salt) # Follow-up: Why not SHA-256? # Answer: SHA-256 is fast, making brute-force feasible. # bcrypt/argon2 are deliberately slow and include salt. # Follow-up: What about MD5? # Answer: MD5 is broken for collision resistance. Never use. Network Security # Interview question: Implement a simple port scanner import socket def scan_port(host, port, timeout=1): sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) sock.settimeout(timeout) result = sock.connect_ex((host, port)) sock.close() return result == 0 # Follow-up: How would you scan without being detected? # Answer: Use SYN scan (stealth scan), randomize port order, # and introduce delays between probes. System Design Questions Design a Secure Authentication System # High-level design class SecureAuthSystem: components = [ \"Rate limiter (token bucket per IP)\", \"Account lockout (5 failures, 15 min lockout)\", \"MFA enforcement (TOTP preferred)\", \"Session management (JWT, short-lived)\", \"Anomaly detection (new device/location)\", \"Audit logging (immutable, SIEM-forwarded)\" ] def login_flow(self): return { \"1\": \"Validate credentials (bcrypt compare)\", \"2\": \"Check rate limits\", \"3\": \"Verify MFA if enabled\", \"4\": \"Check for suspicious context\", \"5\": \"Generate session tokens\", \"6\": \"Log authentication event\" } Design a Secrets Management System Requirements: - Store secrets encrypted at rest (AES-256-GCM) - Access control (RBAC) - Audit logging - Automatic rotation - High availability Data flow: 1. Client request -> API Gateway -> Auth check 2. Auth check -> JWT validation -> Permission check 3. Permission check -> Key hierarchy -> Decrypt secret 4. Return secret (with audit log) Key hierarchy: - Master key (HSM/KMS) - Database encryption keys - Secret encryption keys Practical Exercise # Exercise: Security incident investigation incident_logs = [ {\"time\": \"10:00\", \"user\": \"alice\", \"event\": \"login\", \"ip\": \"192.168.1.1\"}, {\"time\": \"10:01\", \"user\": \"alice\", \"event\": \"login_failed\", \"ip\": \"10.0.0.5\"}, {\"time\": \"10:02\", \"user\": \"alice\", \"event\": \"login_failed\", \"ip\": \"10.0.0.5\"}, {\"time\": \"10:03\", \"user\": \"alice\", \"event\": \"login_failed\", \"ip\": \"10.0.0.5\"}, {\"time\": \"10:04\", \"user\": \"alice\", \"event\": \"login_failed\", \"ip\": \"10.0.0.5\"}, {\"time\": \"10:05\", \"user\": \"alice\", \"event\": \"login_success\", \"ip\": \"10.0.0.5\"}, {\"time\": \"10:06\", \"user\": \"alice\", \"event\": \"export_data\", \"ip\": \"10.0.0.5\"}, {\"time\": \"10:07\", \"user\": \"alice\", \"event\": \"delete_logs\", \"ip\": \"10.0.0.5\"}, ] # Questions: # 1. What indicators of compromise do you see? # 2. What is the likely attack vector? # 3. What immediate containment actions? # 4. What forensic data would you collect? # Analysis: # - IP change: 192.168.1.1 (corp) -> 10.0.0.5 (internal) # - Brute force pattern: 4 failed logins # - Suspicious actions after login: data export + log deletion # - Likely: credential stuffing -> account takeover -> data exfiltration Behavioral Questions Be prepared to discuss: * A time you found a critical vulnerability * How you convinced developers to fix security issues * A security incident you handled * How you stay current with security research * Conflict between security and business needs Resources for Preparation Study these areas in depth: OWASP Top 10, cloud security (AWS/GCP/Azure), network protocols, cryptography fundamentals, and compliance frameworks. Practice with hands-on labs and capture-the-flag challenges. Be ready to whiteboard system designs and discuss real-world threat scenarios."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Security Engineer Interview"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Security Engineer Interview
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">Security</span>
+        <span class="tag-cat">DevOps</span>
+        <span class="tag-cat">Cloud</span></div>
+      <h1 class="article-title">Security Engineer Interview</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Security Engineer Interview</h1>
+<br>
+<p>Interview Structure   </p>
+<p>Security engineer interviews typically cover: security fundamentals, hands-on exercises, system design, and behavioral scenarios.   </p>
+<p>Core Knowledge Topics   </p>
+<p>Cryptography   </p>
+<p>Understand encryption algorithms and their properties:   </p>
+<br>
+<br>
+<br>
+<p>    # Interview question: Implement a secure password hasher</p>
+<br>
+<p>    import hashlib</p>
+<br>
+<p>    import os</p>
+<br>
+<br>
+<br>
+<p>    def hash_password(password):</p>
+<br>
+<p>        """Hash password with bcrypt (the correct answer)"""</p>
+<br>
+<p>        import bcrypt</p>
+<br>
+<p>        salt = bcrypt.gensalt(rounds=12)</p>
+<br>
+<p>        return bcrypt.hashpw(password.encode(), salt)</p>
+<br>
+<br>
+<br>
+<p>    # Follow-up: Why not SHA-256?</p>
+<br>
+<p>    # Answer: SHA-256 is fast, making brute-force feasible.</p>
+<br>
+<p>    # bcrypt/argon2 are deliberately slow and include salt.</p>
+<br>
+<br>
+<br>
+<p>    # Follow-up: What about MD5?</p>
+<br>
+<p>    # Answer: MD5 is broken for collision resistance. Never use.</p>
+<br>
+<br>
+<br>
+<br>
+<p>Network Security   </p>
+<br>
+<br>
+<br>
+<p>    # Interview question: Implement a simple port scanner</p>
+<br>
+<p>    import socket</p>
+<br>
+<br>
+<br>
+<p>    def scan_port(host, port, timeout=1):</p>
+<br>
+<p>        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</p>
+<br>
+<p>        sock.settimeout(timeout)</p>
+<br>
+<p>        result = sock.connect_ex((host, port))</p>
+<br>
+<p>        sock.close()</p>
+<br>
+<p>        return result == 0</p>
+<br>
+<br>
+<br>
+<p>    # Follow-up: How would you scan without being detected?</p>
+<br>
+<p>    # Answer: Use SYN scan (stealth scan), randomize port order,</p>
+<br>
+<p>    # and introduce delays between probes.</p>
+<br>
+<br>
+<br>
+<br>
+<p>System Design Questions   </p>
+<p>Design a Secure Authentication System   </p>
+<br>
+<br>
+<br>
+<p>    # High-level design</p>
+<br>
+<p>    class SecureAuthSystem:</p>
+<br>
+<p>        components = [</p>
+<br>
+<p>            "Rate limiter (token bucket per IP)",</p>
+<br>
+<p>            "Account lockout (5 failures, 15 min lockout)",</p>
+<br>
+<p>            "MFA enforcement (TOTP preferred)",</p>
+<br>
+<p>            "Session management (JWT, short-lived)",</p>
+<br>
+<p>            "Anomaly detection (new device/location)",</p>
+<br>
+<p>            "Audit logging (immutable, SIEM-forwarded)"</p>
+<br>
+<p>        ]</p>
+<br>
+<br>
+<br>
+<p>        def login_flow(self):</p>
+<br>
+<p>            return {</p>
+<br>
+<p>                "1": "Validate credentials (bcrypt compare)",</p>
+<br>
+<p>                "2": "Check rate limits",</p>
+<br>
+<p>                "3": "Verify MFA if enabled",</p>
+<br>
+<p>                "4": "Check for suspicious context",</p>
+<br>
+<p>                "5": "Generate session tokens",</p>
+<br>
+<p>                "6": "Log authentication event"</p>
+<br>
+<p>            }</p>
+<br>
+<br>
+<br>
+<br>
+<p>Design a Secrets Management System   </p>
+<br>
+<br>
+<br>
+<p>    Requirements:</p>
+<br>
+<p>    - Store secrets encrypted at rest (AES-256-GCM)</p>
+<br>
+<p>    - Access control (RBAC)</p>
+<br>
+<p>    - Audit logging</p>
+<br>
+<p>    - Automatic rotation</p>
+<br>
+<p>    - High availability</p>
+<br>
+<br>
+<br>
+<p>    Data flow:</p>
+<br>
+<p>    1. Client request -> API Gateway -> Auth check</p>
+<br>
+<p>    2. Auth check -> JWT validation -> Permission check</p>
+<br>
+<p>    3. Permission check -> Key hierarchy -> Decrypt secret</p>
+<br>
+<p>    4. Return secret (with audit log)</p>
+<br>
+<br>
+<br>
+<p>    Key hierarchy:</p>
+<br>
+<p>    - Master key (HSM/KMS)</p>
+<br>
+<p>    - Database encryption keys</p>
+<br>
+<p>    - Secret encryption keys</p>
+<br>
+<br>
+<br>
+<br>
+<p>Practical Exercise   </p>
+<br>
+<br>
+<br>
+<p>    # Exercise: Security incident investigation</p>
+<br>
+<p>    incident_logs = [</p>
+<br>
+<p>        {"time": "10:00", "user": "alice", "event": "login", "ip": "192.168.1.1"},</p>
+<br>
+<p>        {"time": "10:01", "user": "alice", "event": "login_failed", "ip": "10.0.0.5"},</p>
+<br>
+<p>        {"time": "10:02", "user": "alice", "event": "login_failed", "ip": "10.0.0.5"},</p>
+<br>
+<p>        {"time": "10:03", "user": "alice", "event": "login_failed", "ip": "10.0.0.5"},</p>
+<br>
+<p>        {"time": "10:04", "user": "alice", "event": "login_failed", "ip": "10.0.0.5"},</p>
+<br>
+<p>        {"time": "10:05", "user": "alice", "event": "login_success", "ip": "10.0.0.5"},</p>
+<br>
+<p>        {"time": "10:06", "user": "alice", "event": "export_data", "ip": "10.0.0.5"},</p>
+<br>
+<p>        {"time": "10:07", "user": "alice", "event": "delete_logs", "ip": "10.0.0.5"},</p>
+<br>
+<p>    ]</p>
+<br>
+<br>
+<br>
+<p>    # Questions:</p>
+<br>
+<p>    # 1. What indicators of compromise do you see?</p>
+<br>
+<p>    # 2. What is the likely attack vector?</p>
+<br>
+<p>    # 3. What immediate containment actions?</p>
+<br>
+<p>    # 4. What forensic data would you collect?</p>
+<br>
+<br>
+<br>
+<p>    # Analysis:</p>
+<br>
+<p>    # - IP change: 192.168.1.1 (corp) -> 10.0.0.5 (internal)</p>
+<br>
+<p>    # - Brute force pattern: 4 failed logins</p>
+<br>
+<p>    # - Suspicious actions after login: data export + log deletion</p>
+<br>
+<p>    # - Likely: credential stuffing -> account takeover -> data exfiltration</p>
+<br>
+<br>
+<br>
+<br>
+<p>Behavioral Questions   </p>
+<p>Be prepared to discuss:   </p>
+<br>
+<p>* A time you found a critical vulnerability</p>
+<p>* How you convinced developers to fix security issues</p>
+<p>* A security incident you handled</p>
+<p>* How you stay current with security research</p>
+<p>* Conflict between security and business needs</p>
+<br>
+<p>Resources for Preparation   </p>
+<p>Study these areas in depth: OWASP Top 10, cloud security (AWS/GCP/Azure), network protocols, cryptography fundamentals, and compliance frameworks. Practice with hands-on labs and capture-the-flag challenges. Be ready to whiteboard system designs and discuss real-world threat scenarios.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>

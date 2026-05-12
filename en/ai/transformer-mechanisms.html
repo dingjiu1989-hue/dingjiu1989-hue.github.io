@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="transformer-mechanisms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Transformer Mechanisms in Deep Learning">
+    <meta property="og:description" content="Understand transformer model internals: self-attention, multi-head attention, positional encoding, and feed-forward networks.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/transformer-mechanisms.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Transformer Mechanisms in Deep Learning">
+    <meta name="twitter:description" content="Understand transformer model internals: self-attention, multi-head attention, positional encoding, and feed-forward networks.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <title>Transformer Mechanisms in Deep Learning — SourceHub</title>
+    <meta name="description" content="Understand transformer model internals: self-attention, multi-head attention, positional encoding, and feed-forward networks.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/transformer-mechanisms.html">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/ai/transformer-mechanisms.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Transformer Mechanisms in Deep Learning",
+      "description": "Understand transformer model internals: self-attention, multi-head attention, positional encoding, and feed-forward networks.",
+      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "570",
+      "keywords": "AI, Machine Learning, LLM",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/transformer-mechanisms.html"},
+      "articleBody": "Transformer Mechanisms in Deep Learning The transformer architecture, introduced in \"Attention Is All You Need\" (Vaswani et al., 2017), revolutionized deep learning. Understanding its mechanisms is essential for working with modern LLMs. Self-Attention Self-attention computes weighted representations of input sequences. Each input token generates Query (Q), Key (K), and Value (V) vectors through learned linear transformations. The attention score between tokens is computed as Q\u00b7K^T / sqrt(d_k), measuring how much each token should attend to others. The softmax function normalizes attention scores into a probability distribution over attended tokens. The weighted sum of Value vectors produces the attention output. Self-attention captures relationships between all token pairs regardless of distance\u2014unlike RNNs which process sequentially. Multi-Head Attention Multi-head attention runs multiple self-attention operations (heads) in parallel. Each head learns different relationship types: syntactic relationships, semantic relationships, positional relationships. Typical configurations use 8-96 heads with dimension 64-128 per head. Head outputs are concatenated and linearly projected to the model dimension. Different heads specialize in different patterns. Some heads learn positional relationships (next token prediction). Others learn syntactic dependencies (subject-verb agreement). Analyzing head patterns reveals how the model processes language. Positional Encoding Transformers have no inherent notion of token order. Positional encodings add position information to input embeddings. Sinusoidal encodings (original paper) use sine and cosine functions of different frequencies. Learned positional embeddings train position vectors during pre-training. Rotary Position Embedding (RoPE) rotates query and key vectors based on position. RoPE provides relative position information\u2014attention depends on token distance, not absolute position. RoPE is used in Llama, Mistral, and most modern LLMs. ALiBi (Attention with Linear Biases) adds position-based bias to attention scores. Feed-Forward Networks Each transformer layer includes a feed-forward network (FFN) after the attention sublayer. The FFN consists of two linear transformations with a non-linear activation (ReLU, GELU, SwiGLU). The hidden dimension is typically 2-4x the model dimension. The FFN stores factual knowledge learned during training. Intermediate representations at the FFN's wide layer capture complex patterns. The gating mechanism (SwiGLU, used in Llama 2/3) adds a learnable gate for improved expressiveness. Sparse MoE layers replace FFNs with multiple experts for efficient scaling."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "Transformer Mechanisms in Deep Learning"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › Transformer Mechanisms in Deep Learning
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">AI</span>
+        <span class="tag-cat">Machine Learning</span>
+        <span class="tag-cat">LLM</span></div>
+      <h1 class="article-title">Transformer Mechanisms in Deep Learning</h1>
+      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-body"><h1>Transformer Mechanisms in Deep Learning</h1>
+<p>The transformer architecture, introduced in "Attention Is All You Need" (Vaswani et al., 2017), revolutionized deep learning. Understanding its mechanisms is essential for working with modern LLMs.</p>
+<br>
+<h2> Self-Attention</h2>
+<br>
+<p>Self-attention computes weighted representations of input sequences. Each input token generates Query (Q), Key (K), and Value (V) vectors through learned linear transformations. The attention score between tokens is computed as Q·K^T / sqrt(d_k), measuring how much each token should attend to others.</p>
+<br>
+<p>The softmax function normalizes attention scores into a probability distribution over attended tokens. The weighted sum of Value vectors produces the attention output. Self-attention captures relationships between all token pairs regardless of distance—unlike RNNs which process sequentially.</p>
+<br>
+<h2> Multi-Head Attention</h2>
+<br>
+<p>Multi-head attention runs multiple self-attention operations (heads) in parallel. Each head learns different relationship types: syntactic relationships, semantic relationships, positional relationships. Typical configurations use 8-96 heads with dimension 64-128 per head.</p>
+<br>
+<p>Head outputs are concatenated and linearly projected to the model dimension. Different heads specialize in different patterns. Some heads learn positional relationships (next token prediction). Others learn syntactic dependencies (subject-verb agreement). Analyzing head patterns reveals how the model processes language.</p>
+<br>
+<h2> Positional Encoding</h2>
+<br>
+<p>Transformers have no inherent notion of token order. Positional encodings add position information to input embeddings. Sinusoidal encodings (original paper) use sine and cosine functions of different frequencies. Learned positional embeddings train position vectors during pre-training.</p>
+<br>
+<p>Rotary Position Embedding (RoPE) rotates query and key vectors based on position. RoPE provides relative position information—attention depends on token distance, not absolute position. RoPE is used in Llama, Mistral, and most modern LLMs. ALiBi (Attention with Linear Biases) adds position-based bias to attention scores.</p>
+<br>
+<h2> Feed-Forward Networks</h2>
+<br>
+<p>Each transformer layer includes a feed-forward network (FFN) after the attention sublayer. The FFN consists of two linear transformations with a non-linear activation (ReLU, GELU, SwiGLU). The hidden dimension is typically 2-4x the model dimension.</p>
+<br>
+<p>The FFN stores factual knowledge learned during training. Intermediate representations at the FFN's wide layer capture complex patterns. The gating mechanism (SwiGLU, used in Llama 2/3) adds a learnable gate for improved expressiveness. Sparse MoE layers replace FFNs with multiple experts for efficient scaling.</p></div>
+    </article>
+    <div style="margin:2rem 0;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <section class="related">
+      <h3>Related Articles</h3>
+      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div id="related-posts" style="display:none;"></div>
+    </section>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+</body>
+</html>
