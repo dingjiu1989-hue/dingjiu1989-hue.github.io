@@ -22,7 +22,7 @@ tRPC| Procedure calls (RPC)| JSON (or superjson)| ★★★★★ (automatic, en
 gRPC| RPC with Protocol Buffers| Protobuf (binary)| Codegen from .proto| Microservices, low-latency, polyglot| ★ (not designed for caching)| Mature, Google ecosystem  
 WebSocket| Bidirectional stream| JSON, MsgPack, Protobuf| Manual| Real-time: chat, live dashboards, gaming| ★ (ephemeral connections)| Mature, universal  
 SSE (Server-Sent Events)| Unidirectional stream| Plain text| Manual| Real-time updates, notifications, logs| ★ (ephemeral)| Simple (native HTTP, no library needed)  
-  
+
 ## When Each Wins
 
 **REST — The universal default.** REST's strength is simplicity and universality: every HTTP client supports it, caching works (CDN, browser, proxy), and the semantics (GET=read, POST=create, PUT=update, DELETE=delete) are well-understood. REST is the right choice for: public APIs consumed by third parties (they already know REST), content-heavy APIs that benefit from HTTP caching, APIs where the consumer doesn't need deeply nested data, and microservices where each service has a simple data model. **Weak spot:** over-fetching (getting more data than you need) and under-fetching (needing multiple requests for related data).
@@ -48,5 +48,5 @@ Microservices at scale, polyglot environment| gRPC
 Chat, live dashboard, collaborative editing| WebSocket  
 Server-to-client push notifications, live logs| SSE  
 Content site / e-commerce (cache-heavy)| REST (HTTP caching is critical)  
-  
+
 **My recommendation:** Use **REST + OpenAPI** for public APIs and content-heavy services — it's the most cacheable, debuggable, and universally understood. Use **tRPC** for internal TypeScript APIs — the end-to-end type safety eliminates an entire class of integration bugs. Add **WebSocket** or **SSE** selectively for real-time features, not as the primary API architecture. Use **gRPC** when you have 10+ microservices and serialization performance matters (or your organization already uses Protobuf). You can also mix architectures: REST for external, gRPC for internal service-to-service, WebSocket for real-time — each where it fits best. See also: [tRPC vs GraphQL vs REST](</en/compare/trpc-vs-graphql-vs-rest.html>) for a deeper comparison of the three data-fetching architectures.

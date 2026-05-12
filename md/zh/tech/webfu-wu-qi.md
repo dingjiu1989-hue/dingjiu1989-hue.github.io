@@ -27,13 +27,13 @@ Nginx以其高并发处理能力和低资源消耗著称，是当前市场占有
 server {
     listen 80;
     server_name example.com;
-    
+
     location / {
         proxy_pass http://localhost:3000;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
     }
-    
+
     location /static/ {
         alias /var/www/static/;
         expires 7d;
@@ -61,13 +61,13 @@ Caddy以自动HTTPS和简洁配置闻名，是现代Web应用的新选择。
 ```caddy
 example.com {
     reverse_proxy localhost:3000
-    
+
     # 静态文件服务
     handle_path /static/* {
         root * /var/www/static
         file_server
     }
-    
+
     # 自动HTTPS默认开启
 }
 ```

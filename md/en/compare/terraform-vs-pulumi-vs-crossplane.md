@@ -24,7 +24,7 @@ Provider Ecosystem| 3,000+ providers (largest ecosystem)| ~200 providers (native
 Module/Component Reuse| Terraform Registry (public + private modules)| Pulumi packages (npm, PyPI, etc.)| Composition Resources (K8s CRDs)  
 Secrets Handling| sensitive = true, Vault integration| Pulumi secrets (encrypted in state)| K8s Secrets + External Secrets Operator  
 CI/CD Integration| Terraform Cloud, Atlantis, Spacelift, Env0| Pulumi Deployments, GitHub Actions| ArgoCD, Flux (GitOps native)  
-  
+
 ## When Each Tool Wins
 
 **Terraform — Best for:** Teams that want the largest provider ecosystem, the most mature tooling, and HCL's declarative simplicity. Terraform is the safe corporate choice — every cloud provider supports it, and the talent pool is largest. **Weak spot:** HCL is not a real programming language — abstraction and code reuse (modules, count, for_each) are limited compared to general-purpose languages.
@@ -42,5 +42,5 @@ Dev teams managing infra with app code| Pulumi| Use the same language as your ap
 K8s-native team, GitOps workflow| Crossplane| Continuous reconciliation, Kubernetes-native API  
 Multi-cloud, complex orchestration| Terraform or Pulumi| Both handle multi-cloud well; Pulumi better for complex logic  
 Internal developer platform| Crossplane| Composition Resources let you build self-service APIs for devs  
-  
+
 **Bottom line:** Terraform is the safe default — largest ecosystem, most mature, most examples. Pulumi wins when your infrastructure logic is sufficiently complex that you need real programming constructs. Crossplane is the future for K8s-native teams who want continuous reconciliation and self-service infrastructure. See also: [AWS vs Azure vs GCP](</en/compare/aws-vs-azure-vs-gcp.html>) and [DevOps for Developers](</en/tech/devops-for-developers.html>).

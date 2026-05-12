@@ -20,16 +20,15 @@ Pagination| Cursor-based (Relay spec): `articles(first: Int, after: String): Art
 Mutations| Specific input types per mutation: `createArticle(input: CreateArticleInput!): Article!`| Reusing types between queries and mutations (they diverge)  
 Errors| Union type for success/error: `CreateArticlePayload = Article | ValidationError | PermissionError`| Using HTTP status codes or top-level errors for business logic errors  
 Versioning| Add fields, deprecate with @deprecated, never remove| Breaking changes without deprecation period  
-  
+
 ## Solving the N+1 Problem with DataLoader
 
 **Best for:** Batching and caching database queries during a single GraphQL request. Without DataLoader, each user in a list would trigger a separate database query for their posts.
-    
-    
+
     // Without DataLoader: N+1 queries
     // Query: { users { name posts { title } } }
     // Result: 1 query for users + N queries for each user's posts
-    
+
     // With DataLoader: 2 queries total
     const userLoader = new DataLoader(async (userIds) => {
       const posts = await db.posts.findMany({
@@ -48,7 +47,7 @@ Component| Responsibility| Example
 Subgraph| One team's slice of the schema| Users subgraph, Products subgraph, Orders subgraph  
 Entity| Type shared across subgraphs via @key directive| User type: @key(fields: "id") in both subgraphs  
 Gateway| Routes queries to the right subgraph(s), stitches responses| Apollo Router (Rust, fast), GraphOS  
-  
+
 ## Performance Checklist
 
   * **Persisted queries:** Register queries at build time, clients send a hash instead of the full query — reduces bandwidth and blocks arbitrary queries
@@ -56,7 +55,5 @@ Gateway| Routes queries to the right subgraph(s), stitches responses| Apollo Rou
   * **Query cost analysis:** Assign costs to fields (scalar=1, connection=10) and reject queries exceeding a total cost threshold
   * **Response caching:** Cache resolver results with cache-control headers or Redis; use schema-level caching hints (@cacheControl)
   * **Batched HTTP requests:** Use @apollo/client's batchHttpLink to combine multiple queries into a single HTTP request
-
-
 
 **Bottom line:** GraphQL's flexibility is also its biggest risk — without guardrails (depth limiting, cost analysis, persisted queries), a single malicious query can take down your server. Invest in the DataLoader pattern from day one. If you are a single team, start with a monolith schema before reaching for federation. See also: [tRPC vs GraphQL vs REST](</en/compare/trpc-vs-graphql-vs-rest.html>) and [API Design Patterns](</en/tech/api-design-patterns.html>).

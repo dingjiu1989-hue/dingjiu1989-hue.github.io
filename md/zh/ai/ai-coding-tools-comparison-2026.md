@@ -3,7 +3,7 @@ title: "AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选"
 description: "2026 年三大 AI 编程助手横向评测：Cursor、GitHub Copilot、Claude Code 在代码补全、多文件重构、项目理解、价格等方面的深度对比，帮你选出最适合的工具。"
 date: 2026-05-09
 board: ai
-url: https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html
+url: https://dingjiu1989-hue.github.io/zh/ai/ai-coding-tools-comparison-2026.html
 ---
 
 # AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选
@@ -69,8 +69,8 @@ url: https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html
 
 如果只能选一个：**后端开发者选 Claude Code** （Agent 能力无敌），**前端/全栈选 Cursor** （IDE 体验和项目理解最优），**预算敏感选 Copilot** （$10/月最实惠）。 总结 2026 年的 AI 编程工具已经分化出清晰的定位：**Copilot 做补全，Cursor 做搭档，Claude Code 做 Agent** 。你不必只选一个——它们不是竞品，而是**互补工具** 。真正高效的开发者已经在组合使用它们，就像有人同时用 VS Code 和终端一样自然。 📖 相关推荐
 
-  * [用 AI 辅助编程：从零到生产力](<https://dingjiu1989-hue.github.io/ai/ai-coding.html>)
-  * [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](<https://dingjiu1989-hue.github.io/ai/claude-vs-chatgpt.html>)
-  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
+  * [用 AI 辅助编程：从零到生产力](<https://dingjiu1989-hue.github.io/zh/ai/ai-coding.html>)
+  * [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](<https://dingjiu1989-hue.github.io/zh/ai/claude-vs-chatgpt.html>)
+  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/zh/ai/mcp-protocol-guide.html>)
 
-**See also:** [用 AI 辅助编程：从零到生产力](</ai/ai-coding.html>), [GitHub Copilot 完全使用指南：从安装到高效协作](</tech/github-copilot-guide.html>), [VS Code vs JetBrains vs Cursor：2026 年代码编辑器终极对比](</tools/editor-comparison-2026.html>).
+**See also:** [用 AI 辅助编程：从零到生产力](</zh/ai/ai-coding.html>), [GitHub Copilot 完全使用指南：从安装到高效协作](</zh/tech/github-copilot-guide.html>), [VS Code vs JetBrains vs Cursor：2026 年代码编辑器终极对比](</zh/tools/editor-comparison-2026.html>).

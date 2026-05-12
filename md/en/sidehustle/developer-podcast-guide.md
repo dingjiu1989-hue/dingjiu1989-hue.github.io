@@ -19,7 +19,7 @@ Listener Donations (Patreon)| Fans pay $3–$10/mo for bonus content| $500–$10
 Consulting Funnel| Podcast → credibility → high-paying clients| $5,000–$50,000/mo (indirect)| Expertise-driven shows (devops, security, architecture)  
 Product / Course Sales| Promote your own digital products to listeners| Variable| Shows with a clear product tie-in  
 Affiliate Marketing| Promote tools/services, earn commission| $100–$2,000/mo| Supplemental — rarely the primary model  
-  
+
 ## Technical Setup: From Minimum to Professional
 
 Component| Minimum Setup ($150)| Professional Setup ($800)  
@@ -29,7 +29,7 @@ Audio Interface| None (USB mic)| Focusrite Scarlett 2i2 ($180)
 Recording| Riverside.fm (free) or Audacity (free)| Riverside.fm Pro ($19/mo) — local recording, separate tracks  
 Editing| Descript ($24/mo) — AI-powered, text-based editing| Descript Pro + manual EQ/compression in Audacity  
 Hosting| Spotify for Podcasters (free)| Transistor.fm ($19/mo) — unlimited shows, analytics  
-  
+
 ## Growing Your Developer Podcast
 
 Channel| Impact| Effort| Strategy  
@@ -40,7 +40,7 @@ Show Notes as Blog Posts| High| Medium| Each episode → 1 blog post (SEO long-t
 Social Media Clips| Medium| Low| Descript auto-generates 60-second social clips from each episode  
 Developer Communities| Medium| Low| Share relevant episodes in Reddit, Hacker News, Discord (don't spam)  
 YouTube (Audio + Static Image)| Medium| Low| Upload audio with a static image; YouTube is the #2 podcast platform  
-  
+
 ## Sponsorship CPM Calculator
 
 Downloads per Episode| CPM ($20 avg)| Per Episode Revenue| Monthly (4 episodes)  
@@ -49,5 +49,5 @@ Downloads per Episode| CPM ($20 avg)| Per Episode Revenue| Monthly (4 episodes)
 5,000| $25| $125| $500  
 10,000| $30| $300| $1,200  
 50,000| $40| $2,000| $8,000  
-  
+
 **Bottom line:** A developer podcast is a long-game side hustle — expect 6-12 months before meaningful revenue. The most reliable monetization is using the podcast as a credibility engine: it opens doors to consulting clients, conference talks, and job opportunities that pay far more than ads. Pick a narrow niche ("PostgreSQL Performance," "Rust in Production"), publish consistently for 6 months before expecting traction, and use each episode as blog post content for SEO. See also: [Developer Social Media Monetization](</en/sidehustle/developer-social-media-monetization.html>) and [Best Dev Podcasts](</en/tools/best-dev-podcasts.html>).

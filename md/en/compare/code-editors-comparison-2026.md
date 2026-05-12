@@ -21,7 +21,7 @@ Cursor| VS Code fork + native AI| Same as VS Code| ★★★★★ (deeply integ
 JetBrains IntelliJ IDEA| JVM-based IDE| Good (indexed, heavy startup)| ★★★ (JetBrains AI Assistant, Copilot plugin, slower than Cursor)| ★★★★★ (deepest for Java, Kotlin, Python, Go, Rust)| ★★★★ (2.5K+ plugins, high quality)| $18.30/mo (All Products)  
 Zed| Rust-native (GPU-accelerated)| ★★★★★ (instant, 120fps, 0ms keystroke latency)| ★★★★ (Zed AI, Anthropic-powered, inline editing)| ★★★ (growing: Rust, TS, Python, Go, JS, C)| ★★ (young ecosystem, growing fast)| Free (OSS) / Zed AI $10/mo  
 Neovim| Terminal-based modal editor| ★★★★★ (native, sub-ms latency, 50MB memory)| ★★★ (via plugins: Copilot, Codeium, avante.nvim, gen.nvim)| ★★★★★ (LSP: all languages, tree-sitter: all grammars)| ★★★★ (Lua ecosystem, 3K+ plugins, high quality)| Free (OSS)  
-  
+
 ## Deep Dive
 
 **VS Code — The safe default.** VS Code is still the default editor for good reason: it has the largest extension ecosystem, the most tutorials/documentation, and it works well enough for every language. If you work across many languages and frameworks, VS Code is the Swiss Army knife. The downside: it's an Electron app (600MB+ RAM with extensions), and the AI experience via extensions (Copilot, Cline, Continue) is good but not as seamless as Cursor's native integration. VS Code is the Toyota Camry of editors — it won't excite you, but it will never leave you stranded.
@@ -44,5 +44,5 @@ You care about editor performance above all| Zed or Neovim| Zed for GUI + perfor
 You want the largest ecosystem and most tutorials| VS Code| 30K+ extensions, every language, every framework, every tutorial  
 You prefer open-source and community-owned| VS Code / Neovim / Zed| All three are open-source; VS Code (MIT), Neovim (Apache 2), Zed (GPL)  
 You want both AI-native + JetBrains intelligence| Cursor + JetBrains| Cursor for daily coding, JetBrains for refactoring/debugging deep dives  
-  
+
 **My setup in 2026:** Cursor for daily coding (best AI integration, VS Code ecosystem), Neovim for quick terminal edits and config files (instant, zero context switching), JetBrains Rider for C#/.NET work (nothing else matches its intelligence). The editor war is over, and the winner is "use the right tool for the task." See also: [Cursor vs Copilot vs Claude Code](</en/compare/cursor-vs-copilot-vs-claude-code.html>) for AI tool comparison.

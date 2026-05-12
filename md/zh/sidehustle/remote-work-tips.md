@@ -2,7 +2,7 @@
 title: "远程工作效率提升技巧"
 description: "面向远程开发者的效率提升指南，涵盖时间管理、沟通协作、工具选择、精力管理和家庭办公环境搭建等实用建议。"
 date: 2026-05-11
-board: zh/sidehustle
+board: sidehustle
 url: https://dingjiu1989-hue.github.io/zh/sidehustle/remote-work-tips.html
 ---
 

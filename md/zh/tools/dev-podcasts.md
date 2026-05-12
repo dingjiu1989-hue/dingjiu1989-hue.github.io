@@ -3,7 +3,7 @@ title: "10 个程序员必听的播客：学技术、追趋势、听故事"
 description: "精选 10 个中文和英文优质技术播客，涵盖编程技能、行业趋势、职业发展和创业故事，通勤和健身时充电最佳。"
 date: 2026-05-07
 board: tools
-url: https://dingjiu1989-hue.github.io/tools/dev-podcasts.html
+url: https://dingjiu1989-hue.github.io/zh/tools/dev-podcasts.html
 ---
 
 # 10 个程序员必听的播客：学技术、追趋势、听故事
@@ -24,8 +24,8 @@ CoRecursive| 编程故事和人物| 中等
 Lex Fridman Podcast| 科技+AI+哲学| 较难  
 收听建议1.5-2x 倍速是甜蜜点——不会漏内容又省时间。Spotify / 小宇宙 / Apple Podcasts 都有。重要的是**听完后写三条收获** ，否则和没听一样。 📖 相关推荐
 
-  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
-  * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/tools/project-management-tools.html>)
-  * [2026 年最佳屏幕录制和视频剪辑工具推荐](<https://dingjiu1989-hue.github.io/tools/screen-recording-tools.html>)
+  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/zh/tools/terminal-tools-2026.html>)
+  * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/zh/tools/project-management-tools.html>)
+  * [2026 年最佳屏幕录制和视频剪辑工具推荐](<https://dingjiu1989-hue.github.io/zh/tools/screen-recording-tools.html>)
 
-**See also:** [2026 年 10 款必装终端工具：让你的命令行效率翻倍](</tools/terminal-tools-2026.html>), [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](</tools/project-management-tools.html>), [2026 年最佳密码管理器对比：LastPass vs 1Password vs Bitwarden](</tools/password-manager-comparison.html>).
+**See also:** [2026 年 10 款必装终端工具：让你的命令行效率翻倍](</zh/tools/terminal-tools-2026.html>), [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](</zh/tools/project-management-tools.html>), [2026 年最佳密码管理器对比：LastPass vs 1Password vs Bitwarden](</zh/tools/password-manager-comparison.html>).

@@ -19,7 +19,7 @@ Teachable| You keep 95% (Pro plan)| Building your own brand| $39-119/mo| Full co
 Podia| You keep 100% (no transaction fees)| All-in-one: courses + community + email| $39-79/mo| Built-in email marketing, webinars  
 Skillshare| Royalty pool based on watch time| Supplemental income, short-form content| Free| Low barrier to publish, recurring royalty  
 Gumroad| 10% (free) or $10/mo (flat)| Simple, one-off course sales| Free or $10/mo| Dead simple, great for small courses  
-  
+
 ## Picking a Winning Course Topic
 
 **Best for:** Developers who enjoy teaching and have deep knowledge in a specific technology or framework. **Weak spot:** Courses take 40-80 hours to produce — do not create one without validating demand first.
@@ -32,8 +32,6 @@ The IDEAL framework for topic selection:
   * **A — Angle:** Your course has a unique spin — "React for Backend Developers" vs generic "Learn React"
   * **L — Longevity:** The technology has staying power (React, Python, AWS — not a framework released last month)
 
-
-
 ## Course Pricing Strategy
 
 Course Type| Length| Price Range| Example  
@@ -42,5 +40,5 @@ Mini-course / Workshop| 1-3 hours| $19-49| "Docker in 2 Hours for Developers"
 Standard Course| 5-12 hours| $49-149| "Complete Next.js 15 Bootcamp"  
 Premium Deep Dive| 15-30 hours| $149-499| "System Design for Senior Engineers"  
 Cohort-Based Course| 4-8 weeks live| $500-2,000| "AI Engineering Bootcamp"  
-  
+
 **Bottom line:** Start with a mini-course ($29-49) on a platform like Gumroad or Podia to validate your topic and teaching style. Use the feedback to create a premium full course. The money is not in the course itself — it is in the audience you build around it, which leads to consulting, speaking, and higher-ticket offers. See also: [YouTube Channel Guide](</en/sidehustle/youtube-channel-developers.html>) and [Selling Digital Products](</en/sidehustle/sell-digital-products.html>).

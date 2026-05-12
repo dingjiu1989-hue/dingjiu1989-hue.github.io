@@ -24,7 +24,7 @@ Dashboards| Good — pre-built + custom| Best in class — Grafana dashboards| G
 AI Features| Watchdog (anomaly), Bits AI (chat)| ML in Grafana (forecasting)| Grok (AI assistant), anomaly detection| Basic (developing)  
 Data Retention| 15 months (logs 15-30 days)| Configurable (your storage)| 8 days (logs), configurable| Configurable (S3, ClickHouse)  
 Learning Curve| Medium| High (many components to configure)| Medium| Medium-High  
-  
+
 ## Cost Comparison (for a 20-server team)
 
 Platform| Monthly Cost (Est.)| What You Get| Hidden Costs  
@@ -34,7 +34,7 @@ Grafana Cloud| $200-500| Metrics, logs (Loki), traces (Tempo)| Need expertise to
 Grafana OSS (self-hosted)| $150-400 (infra cost)| Full control, no data egress fees| You manage everything — upgrades, scaling, backups  
 New Relic| $600-1,200| Full platform, 1 user free| Data ingest pricing is unpredictable; user seats cost extra  
 SigNoz (self-hosted OSS)| $100-300 (infra cost)| Metrics, traces, logs (OTEL native)| Younger project; fewer integrations; manual setup  
-  
+
 ## Decision Matrix
 
 Situation| Best Choice| Why  
@@ -45,5 +45,5 @@ Kubernetes-heavy, OSS preference| Grafana OSS + Prometheus| De facto K8s monitor
 OpenTelemetry-first strategy| SigNoz or Grafana + Tempo| OTEL native, vendor-neutral data format  
 Need AI/ML-driven insights| Datadog or New Relic| Best AI features — anomaly detection, forecasting, AI assistants  
 Large enterprise (100+ servers)| Datadog (negotiate) or Grafana Cloud| Negotiate enterprise pricing or own your stack with Grafana  
-  
+
 **Bottom line:** Start with Grafana Cloud's generous free tier — it covers most small-to-medium teams. Graduate to Datadog when you need the integrations and AI features and can justify the cost. The most important decision is not the tool — it is committing to OpenTelemetry as your instrumentation standard, so you can switch observability backends without re-instrumenting your entire codebase. See also: [AI for DevOps](</en/ai/ai-devops-tools.html>) and [DevOps for Developers](</en/tech/devops-for-developers.html>).

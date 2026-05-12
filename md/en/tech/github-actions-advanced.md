@@ -10,1141 +10,402 @@ url: https://dingjiu1989-hue.github.io/en/tech/github-actions-advanced.html
 
 # Advanced GitHub Actions Workflows
 
-  
-
-
 ##  Introduction
-
-  
-  
-  
-  
-
 
 GitHub Actions has evolved beyond simple CI/CD into a full-featured automation platform. Teams managing monorepos, multi-service architectures, or compliance-sensitive deployments need advanced workflows that are maintainable, fast, and secure. This article explores production-ready patterns for GitHub Actions at scale.
 
-  
-  
-  
-  
-
-
 ##  Reusable Workflows
-
-  
-  
-  
-  
-
 
 Reusable workflows eliminate duplication across repositories. Define a workflow in `.github/workflows/deploy-shared.yml` with `workflow_call`:
 
-  
-  
-  
-  
-  
-
-
 # .github/workflows/deploy-shared.yml
-
-  
-
 
 name: Shared Deployment Workflow
 
-  
-
-
 on:
-
-  
-
 
 workflow_call:
 
-  
-
-
 inputs:
-
-  
-
 
 environment:
 
-  
-
-
 required: true
 
-  
-
-
 type: string
-
-  
-
 
 image-tag:
 
-  
-
-
 required: true
-
-  
-
 
 type: string
 
-  
-
-
 secrets:
-
-  
-
 
 CLOUD_PROVIDER_KEY:
 
-  
-
-
 required: true
-
-  
-  
-  
-
 
 jobs:
 
-  
-
-
 deploy:
 
-  
-
-
 runs-on: ubuntu-latest
-
-  
-
 
 environment: ${{ inputs.environment }}
 
-  
-
-
 steps:
 
-  
-
-
 \- uses: actions/checkout@v4
-
-  
-
 
 \- name: Deploy to ${{ inputs.environment }}
 
-  
-
-
 run: |
-
-  
-
 
 echo "Deploying ${{ inputs.image-tag }} to ${{ inputs.environment }}"
 
-  
-
-
 # Actual deployment logic here
-
-  
-  
-  
-  
-  
-  
-
 
 Consume it from any repository:
 
-  
-  
-  
-  
-  
-
-
 # .github/workflows/release.yml
-
-  
-
 
 name: Release
 
-  
-
-
 on:
-
-  
-
 
 push:
 
-  
-
-
 branches: [main]
 
-  
-
-
 jobs:
-
-  
-
 
 call-deploy:
 
-  
-
-
 uses: org/shared-workflows/.github/workflows/deploy-shared.yml@v1
 
-  
-
-
 with:
-
-  
-
 
 environment: staging
 
-  
-
-
 image-tag: ${{ github.sha }}
-
-  
-
 
 secrets:
 
-  
-
-
 CLOUD_PROVIDER_KEY: ${{ secrets.CLOUD_PROVIDER_KEY }}
-
-  
-  
-  
-  
-  
-  
-
 
 ##  Matrix Builds
 
-  
-  
-  
-  
-
-
 Matrix strategies test across multiple dimensions without duplicating workflow YAML:
 
-  
-  
-  
-  
-  
-
-
 jobs:
-
-  
-
 
 test:
 
-  
-
-
 runs-on: ubuntu-latest
-
-  
-
 
 strategy:
 
-  
-
-
 matrix:
-
-  
-
 
 node: [18, 20, 22]
 
-  
-
-
 os: [ubuntu-latest, windows-latest]
-
-  
-
 
 include:
 
-  
-
-
 \- node: 22
-
-  
-
 
 os: ubuntu-latest
 
-  
-
-
 coverage: true
-
-  
-
 
 exclude:
 
-  
-
-
 \- node: 18
-
-  
-
 
 os: windows-latest
 
-  
-
-
 steps:
-
-  
-
 
 \- uses: actions/checkout@v4
 
-  
-
-
 \- uses: actions/setup-node@v4
 
-  
-
-
 with:
-
-  
-
 
 node-version: ${{ matrix.node }}
 
-  
-
-
 \- run: npm ci
-
-  
-
 
 \- run: npm test
 
-  
-
-
 \- if: matrix.coverage
-
-  
-
 
 uses: codecov/codecov-action@v3
 
-  
-  
-  
-  
-  
-  
-
-
 The `include` key adds jobs to the matrix, while `exclude` removes specific combinations. For large matrices, use `max-parallel: 3` to avoid saturating runner capacity.
-
-  
-  
-  
-  
-
 
 ##  Composite Actions
 
-  
-  
-  
-  
-
-
 Composite actions bundle multiple steps into a reusable unit, ideal for organization-wide standards:
-
-  
-  
-  
-  
-  
-
 
 # .github/actions/setup-node-env/action.yml
 
-  
-
-
 name: "Setup Node.js Environment"
-
-  
-
 
 description: "Configures Node with pnpm, cache, and dependency audit"
 
-  
-
-
 inputs:
-
-  
-
 
 node-version:
 
-  
-
-
 description: "Node.js version"
 
-  
-
-
 required: false
-
-  
-
 
 default: "20"
 
-  
-
-
 working-directory:
-
-  
-
 
 description: "Directory containing package.json"
 
-  
-
-
 required: false
-
-  
-
 
 default: "."
 
-  
-
-
 runs:
-
-  
-
 
 using: "composite"
 
-  
-
-
 steps:
-
-  
-
 
 \- uses: actions/setup-node@v4
 
-  
-
-
 with:
-
-  
-
 
 node-version: ${{ inputs.node-version }}
 
-  
-
-
 \- uses: pnpm/action-setup@v2
 
-  
-
-
 with:
-
-  
-
 
 version: 8
 
-  
-
-
 \- name: Get pnpm store directory
-
-  
-
 
 id: pnpm-cache
 
-  
-
-
 shell: bash
-
-  
-
 
 run: |
 
-  
-
-
 echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-  
-
 
 \- uses: actions/cache@v3
 
-  
-
-
 with:
-
-  
-
 
 path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
 
-  
-
-
 key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
 
-  
-
-
 restore-keys: |
-
-  
-
 
 ${{ runner.os }}-pnpm-
 
-  
-
-
 \- name: Install dependencies
 
-  
-
-
 shell: bash
-
-  
-
 
 working-directory: ${{ inputs.working-directory }}
 
-  
-
-
 run: pnpm install --frozen-lockfile
-
-  
-
 
 \- name: Security audit
 
-  
-
-
 shell: bash
-
-  
-
 
 run: pnpm audit --audit-level=high
 
-  
-  
-  
-  
-  
-  
-
-
 Usage in any workflow:
-
-  
-  
-  
-  
-  
-
 
 jobs:
 
-  
-
-
 build:
-
-  
-
 
 runs-on: ubuntu-latest
 
-  
-
-
 steps:
 
-  
-
-
 \- uses: actions/checkout@v4
-
-  
-
 
 \- uses: ./.github/actions/setup-node-env
 
-  
-
-
 with:
-
-  
-
 
 node-version: "22"
 
-  
-
-
 \- run: pnpm build
-
-  
-  
-  
-  
-  
-  
-
 
 ##  OIDC and Cloud Authentication
 
-  
-  
-  
-  
-
-
 OpenID Connect eliminates static credentials by exchanging GitHub's JWT tokens for cloud provider credentials:
-
-  
-  
-  
-  
-  
-
 
 jobs:
 
-  
-
-
 deploy:
 
-  
-
-
 runs-on: ubuntu-latest
-
-  
-
 
 permissions:
 
-  
-
-
 id-token: write # Required for OIDC
-
-  
-
 
 contents: read
 
-  
-
-
 steps:
 
-  
-
-
 \- uses: actions/checkout@v4
-
-  
-
 
 \- uses: aws-actions/configure-aws-credentials@v4
 
-  
-
-
 with:
-
-  
-
 
 role-to-assume: arn:aws:iam::123456789012:role/github-actions-role
 
-  
-
-
 aws-region: us-east-1
-
-  
-
 
 \- run: aws s3 sync ./dist s3://my-bucket
 
-  
-  
-  
-  
-  
-  
-
-
 Configure the AWS IAM role with a trust policy scoped to specific repositories and branches:
-
-  
-  
-  
-  
-  
-
 
 {
 
-  
-
-
 "Version": "2012-10-17",
-
-  
-
 
 "Statement": [{
 
-  
-
-
 "Effect": "Allow",
-
-  
-
 
 "Principal": { "Federated": "arn:aws:iam::ACCOUNT:oidc-provider/token.actions.githubusercontent.com" },
 
-  
-
-
 "Action": "sts:AssumeRoleWithWebIdentity",
-
-  
-
 
 "Condition": {
 
-  
-
-
 "StringLike": {
-
-  
-
 
 "token.actions.githubusercontent.com:sub": "repo:org/my-repo:ref:refs/heads/main"
 
-  
-
-
 }
 
-  
-
-
 }
-
-  
-
 
 }]
 
-  
-
-
 }
-
-  
-  
-  
-  
-  
-  
-
 
 ##  Environment Protection Rules
 
-  
-  
-  
-  
-
-
 Protect production deployments with required reviewers, wait gates, and custom deployment branch policies:
-
-  
-  
-  
-  
-  
-
 
 name: Deploy
 
-  
-
-
 on:
-
-  
-
 
 workflow_dispatch:
 
-  
-
-
 inputs:
 
-  
-
-
 environment:
-
-  
-
 
 description: "Target environment"
 
-  
-
-
 required: true
-
-  
-
 
 default: "production"
 
-  
-
-
 type: choice
-
-  
-
 
 options:
 
-  
-
-
 \- staging
-
-  
-
 
 \- production
 
-  
-  
-  
-
-
 jobs:
-
-  
-
 
 deploy:
 
-  
-
-
 runs-on: ubuntu-latest
-
-  
-
 
 environment:
 
-  
-
-
 name: ${{ github.event.inputs.environment || 'staging' }}
-
-  
-
 
 url: https://${{ github.event.inputs.environment }}.myapp.com
 
-  
-
-
 concurrency:
-
-  
-
 
 group: ${{ github.event.inputs.environment }}
 
-  
-
-
 cancel-in-progress: false
 
-  
-
-
 steps:
-
-  
-
 
 \- run: echo "Deploying to ${{ github.event.inputs.environment }}"
 
-  
-  
-  
-  
-  
-  
-
-
 Configure required reviewers in the repository's environment settings to enforce manual approval gates.
-
-  
-  
-  
-  
-
 
 ##  Self-Hosted Runners
 
-  
-  
-  
-  
-
-
 Self-hosted runners provide custom hardware, internal network access, and reduced costs:
-
-  
-  
-  
-  
-  
-
 
 jobs:
 
-  
-
-
 build:
-
-  
-
 
 runs-on: [self-hosted, linux, x64, gpu]
 
-  
-
-
 steps:
-
-  
-
 
 \- run: nvidia-smi # Verify GPU availability
 
-  
-
-
 \- uses: actions/checkout@v4
-
-  
-
 
 \- run: docker build -t my-model:latest .
 
-  
-  
-  
-  
-  
-  
-
-
 Scale self-hosted runners with the `actions-runner-controller` on Kubernetes, which auto-provisions and auto-scales runner pods based on workflow demand.
-
-  
-  
-  
-  
-
 
 ##  Caching Strategies
 
-  
-  
-  
-  
-
-
 Effective caching reduces workflow runtime significantly:
-
-  
-  
-  
-  
-  
-
 
 \- uses: actions/cache@v3
 
-  
-
-
 with:
-
-  
-
 
 path: |
 
-  
-
-
 ~/.cache/go-build
-
-  
-
 
 ~/go/pkg/mod
 
-  
-
-
 key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-
-  
-
 
 restore-keys: |
 
-  
-
-
 ${{ runner.os }}-go-
-
-  
-  
-  
-  
-  
-  
-
 
 For monorepos, cache per workspace directory:
 
-  
-  
-  
-  
-  
-
-
 \- uses: actions/cache@v3
-
-  
-
 
 with:
 
-  
-
-
 path: packages/*/node_modules/.cache
 
-  
-
-
 key: ${{ runner.os }}-${{ github.workflow }}-${{ hashFiles('packages/*/package-lock.json') }}
-
-  
-  
-  
-  
-  
-  
-
 
 These patterns form the foundation of scalable, secure GitHub Actions usage in enterprise environments. Start with reusable workflows and matrix builds, then layer on OIDC and self-hosted runners as your infrastructure grows.

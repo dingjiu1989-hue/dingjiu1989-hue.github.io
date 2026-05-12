@@ -25,7 +25,7 @@ Database / Tables| Basic (Markdown tables + Dataview plugin)| Excellent (relatio
 Plugins / Extensions| 2,000+ community plugins| Integrations + API| 100+ plugins  
 Pricing| Free (personal), $50/yr (commercial)| Free, $10/mo Plus, $18/mo Business| Free (OSS)  
 Mobile App| Yes (iOS, Android)| Yes (iOS, Android)| Yes (iOS, Android, beta quality)  
-  
+
 ## Deep Dive: Which App for Which Developer
 
 **Obsidian — Best for:** Developers who think in linked ideas and want ownership of their data. Your notes are plain Markdown files on your filesystem — they will still be readable in 20 years. The Dataview plugin lets you query your notes like a database (e.g., "show all notes tagged #bug with status:open"). **Weak spot:** Collaboration is weak; Obsidian is built for individual thinking, not team wikis.
@@ -43,5 +43,5 @@ Team wiki, project tracking, structured data| Notion| Databases, collaboration, 
 Daily journaling, task tracking, outlining| Logseq| Journal-first, block references, open source  
 Combining personal notes + team wiki| Obsidian (personal) + Notion (team)| Use each for its strength  
 Academic research, Zettelkasten method| Obsidian or Logseq| Both support Zettelkasten linking natively  
-  
+
 **Bottom line:** Obsidian wins for personal developer notes — local Markdown files, Git integration, and the plugin ecosystem are unmatched. Use Notion for team documentation and project management. Logseq is the dark horse: if the outlining + journaling paradigm clicks with you, it can be transformative. All three have free tiers, so try each for a week. See also: [Best PM Tools for Dev Teams](</en/tools/best-project-management-dev.html>) and [Best Free Dev Tools](</en/tools/best-free-dev-tools-2026.html>).

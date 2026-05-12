@@ -46,7 +46,7 @@ Notion / Airtable Templates| $15-49| Price to the value of time saved
 Code Templates / Starters| $49-199| Days or weeks of dev time saved  
 Component Libraries| $99-299| Professional tool pricing  
 Online Courses| $49-199| Compare to Udemy/Pluralsight pricing  
-  
+
 ## Where to Sell
 
 Platform| Fees| Best For  
@@ -56,7 +56,7 @@ Lemon Squeezy| 5% + 50c| Developer-focused, handles EU VAT, great API
 Notion Marketplace| 0% (for now)| Notion templates only  
 ThemeForest| 45-75%| Website themes and templates (high fees, high traffic)  
 Your own site + Stripe| 2.9% + 30c| Maximum margin, requires driving your own traffic  
-  
+
 ## The Launch Playbook
 
   1. **Build the product in public.** Tweet your progress, share screenshots, get early feedback. By launch day, you should have 50-100 people who already want to buy it.

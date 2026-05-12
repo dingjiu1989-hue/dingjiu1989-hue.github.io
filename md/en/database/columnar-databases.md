@@ -13,48 +13,36 @@ Columnar databases store data by column rather than by row. This enables aggress
 Row vs Columnar   
 Row-oriented storage writes each row contiguously. Columnar stores all values of a column together, enabling efficient scans of a few columns across millions of rows.   
 
-    
-    
     -- ClickHouse: columnar query
-    
-    SELECT region, SUM(revenue)
-    
-    FROM sales
-    
-    WHERE year = 2026
-    
-    GROUP BY region;
-    
-    
-    
-    -- Only reads 3 columns instead of all columns
-    
-    
 
-  
+    SELECT region, SUM(revenue)
+
+    FROM sales
+
+    WHERE year = 2026
+
+    GROUP BY region;
+
+    -- Only reads 3 columns instead of all columns
+
 Compression Techniques   
 Columnar databases use specialized compression: run-length encoding for low-cardinality columns, dictionary encoding, and delta encoding for sorted columns. Compression ratios of 5-10x are common.   
 When to Use Columnar   
 | Database | Best For | Notable Feature | |----------|----------|-----------------| | ClickHouse | Real-time analytics | MergeTree engine | | DuckDB | Embedded analytics | In-process OLAP | | Redshift | Cloud data warehousing | MPP architecture |   
 
-    
-    
     -- ClickHouse table
-    
-    CREATE TABLE events (
-    
-        timestamp DateTime,
-    
-        event_type String,
-    
-        user_id UInt32
-    
-    ) ENGINE = MergeTree()
-    
-    ORDER BY (event_type, timestamp);
-    
-    
 
-  
+    CREATE TABLE events (
+
+        timestamp DateTime,
+
+        event_type String,
+
+        user_id UInt32
+
+    ) ENGINE = MergeTree()
+
+    ORDER BY (event_type, timestamp);
+
 Conclusion   
 Use columnar databases for analytical workloads scanning many rows but few columns. ClickHouse for real-time, DuckDB for embedded, Redshift for cloud. Avoid for transactional workloads with frequent single-row operations.

@@ -16,162 +16,130 @@ Define clear tiers:
 Automated Classification   
 Use content inspection to classify data automatically:   
 
-    
-    
     import re
-    
-    import hashlib
-    
-    
-    
-    class DataClassifier:
-    
-        def __init__(self):
-    
-            self.patterns = {
-    
-                "ssn": r"\d{3}-\d{2}-\d{4}",
-    
-                "email": r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}",
-    
-                "credit_card": r"\b(?:\d[ -]*?){13,16}\b"
-    
-            }
-    
-        
-    
-        def classify_document(self, content, metadata):
-    
-            score = 0
-    
-            findings = []
-    
-            
-    
-            for label, pattern in self.patterns.items():
-    
-                matches = re.findall(pattern, content)
-    
-                if matches:
-    
-                    score += len(matches) * 10
-    
-                    findings.append({"type": label, "count": len(matches)})
-    
-            
-    
-            if score > 50:
-    
-                return "restricted", findings
-    
-            elif score > 10:
-    
-                return "confidential", findings
-    
-            elif metadata.get("internal"):
-    
-                return "internal", findings
-    
-            return "public", findings
-    
-    
 
-  
+    import hashlib
+
+    class DataClassifier:
+
+        def __init__(self):
+
+            self.patterns = {
+
+                "ssn": r"\d{3}-\d{2}-\d{4}",
+
+                "email": r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}",
+
+                "credit_card": r"\b(?:\d[ -]*?){13,16}\b"
+
+            }
+
+        def classify_document(self, content, metadata):
+
+            score = 0
+
+            findings = []
+
+            for label, pattern in self.patterns.items():
+
+                matches = re.findall(pattern, content)
+
+                if matches:
+
+                    score += len(matches) * 10
+
+                    findings.append({"type": label, "count": len(matches)})
+
+            if score > 50:
+
+                return "restricted", findings
+
+            elif score > 10:
+
+                return "confidential", findings
+
+            elif metadata.get("internal"):
+
+                return "internal", findings
+
+            return "public", findings
+
 Handling Procedures   
 Define procedures for each classification level:   
 
-    
-    
     # handling-policies.yaml
-    
-    restricted:
-    
-      storage: encrypted_bucket_kms
-    
-      transmission: require_tls_1.3
-    
-      retention: 7_years
-    
-      destruction: shred_and_degauss
-    
-      sharing: require_nda_and_approval
-    
-      
-    
-    confidential:
-    
-      storage: encrypted_bucket
-    
-      transmission: require_tls_1.2
-    
-      retention: 3_years
-    
-      destruction: shred
-    
-      sharing: require_approval
-    
-    
 
-  
+    restricted:
+
+      storage: encrypted_bucket_kms
+
+      transmission: require_tls_1.3
+
+      retention: 7_years
+
+      destruction: shred_and_degauss
+
+      sharing: require_nda_and_approval
+
+    confidential:
+
+      storage: encrypted_bucket
+
+      transmission: require_tls_1.2
+
+      retention: 3_years
+
+      destruction: shred
+
+      sharing: require_approval
+
 Labeling Implementation   
 Apply labels at multiple layers:   
 
-    
-    
     // S3 object tagging for classification
-    
-    const AWS = require("aws-sdk");
-    
-    const s3 = new AWS.S3();
-    
-    
-    
-    async function tagObject(bucket, key, classification) {
-    
-      await s3.putObjectTagging({
-    
-        Bucket: bucket,
-    
-        Key: key,
-    
-        Tagging: {
-    
-          TagSet: [
-    
-            { Key: "classification", Value: classification },
-    
-            { Key: "classified-by", Value: "auto-classifier-v2" },
-    
-            { Key: "classified-at", Value: new Date().toISOString() }
-    
-          ]
-    
-        }
-    
-      }).promise();
-    
-    }
-    
-    
 
-  
+    const AWS = require("aws-sdk");
+
+    const s3 = new AWS.S3();
+
+    async function tagObject(bucket, key, classification) {
+
+      await s3.putObjectTagging({
+
+        Bucket: bucket,
+
+        Key: key,
+
+        Tagging: {
+
+          TagSet: [
+
+            { Key: "classification", Value: classification },
+
+            { Key: "classified-by", Value: "auto-classifier-v2" },
+
+            { Key: "classified-at", Value: new Date().toISOString() }
+
+          ]
+
+        }
+
+      }).promise();
+
+    }
+
 Integration with DLP   
 Classification feeds directly into DLP policies:   
 
-    
-    
     -- Block restricted data leaving the network
-    
-    CREATE DLP POLICY block_restricted_exfiltration
-    
-    MATCHES classification = 'restricted'
-    
-      AND operation IN ('email.send', 'usb.copy', 'cloud.upload')
-    
-    ACTION block;
-    
-    
 
-  
+    CREATE DLP POLICY block_restricted_exfiltration
+
+    MATCHES classification = 'restricted'
+
+      AND operation IN ('email.send', 'usb.copy', 'cloud.upload')
+
+    ACTION block;
+
 Conclusion   
 Data classification is foundational to information security. Automate where possible, define clear handling procedures, and integrate classification labels across your data protection stack. Start with the most sensitive data and expand coverage iteratively.

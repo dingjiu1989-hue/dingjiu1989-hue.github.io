@@ -3,7 +3,7 @@ title: "独立开发者出海指南：从产品 Idea 到稳定变现"
 description: "面向程序员的独立开发者完整指南：产品创意验证、技术选型、海外支付接入、推广引流和变现策略。"
 date: 2026-05-11
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/sidehustle/indie-dev-guide.html
+url: https://dingjiu1989-hue.github.io/zh/sidehustle/indie-dev-guide.html
 ---
 
 # 独立开发者出海指南：从产品 Idea 到稳定变现
@@ -45,8 +45,8 @@ url: https://dingjiu1989-hue.github.io/sidehustle/indie-dev-guide.html
 
 关键心态90% 的独立产品不赚钱，但不代表你不该试。**失败的产品也是经验** 。用最小成本验证 Idea，不行就快速换方向。 📖 相关推荐
 
-  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
-  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)
-  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/zh/sidehustle/ai-era-side-hustles.html>)
+  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/zh/sidehustle/knowledge-monetization.html>)
+  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/zh/sidehustle/affiliate-marketing.html>)
 
-**See also:** [SaaS 创意验证：不写代码也能测试你的Idea能不能赚钱](</sidehustle/saas-idea-validation.html>), [AI 时代程序员的 5 个新副业机会（2026）](</sidehustle/ai-era-side-hustles.html>), [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</sidehustle/affiliate-marketing.html>).
+**See also:** [SaaS 创意验证：不写代码也能测试你的Idea能不能赚钱](</zh/sidehustle/saas-idea-validation.html>), [AI 时代程序员的 5 个新副业机会（2026）](</zh/sidehustle/ai-era-side-hustles.html>), [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</zh/sidehustle/affiliate-marketing.html>).

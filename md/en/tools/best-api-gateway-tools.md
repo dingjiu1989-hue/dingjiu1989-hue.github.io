@@ -23,7 +23,7 @@ Configuration| Declarative (YAML/JSON) + Admin API| Declarative + Admin API + Da
 Kubernetes Native| Yes (Kong Ingress Controller)| Yes (APISIX Ingress Controller)| Yes (Tyk Operator)| N/A (AWS managed)  
 Pricing| Free (OSS), Enterprise from $500/mo| Free (Apache 2.0)| Free (OSS), Pro from $500/mo| $3.50/1M requests (REST)  
 Best For| Large enterprises, broad plugin needs| Cloud-native, performance-focused| Teams wanting Go-native, good dashboard| AWS-native applications  
-  
+
 ## Key API Gateway Features Checklist
 
 Feature| Why It Matters  
@@ -37,7 +37,7 @@ Observability (Logs, Metrics, Tracing)| Prometheus metrics, request logging, dis
 Circuit Breaking| Stop routing to failing backends; return fallback response  
 Service Discovery| Auto-detect backend services (Kubernetes, Consul, DNS)  
 mTLS| Mutual TLS between gateway and backends for zero-trust networking  
-  
+
 ## Decision Matrix
 
 Scenario| Best Gateway| Why  
@@ -47,5 +47,5 @@ Cloud-native, Kubernetes-first| Apache APISIX| Best performance, Wasm plugins, A
 Go ecosystem, want excellent dashboard| Tyk| Go-native, best admin dashboard of the open source options  
 AWS ecosystem, zero ops| AWS API Gateway| Fully managed, tight AWS service integration  
 Simple reverse proxy needs| None (use Caddy/Nginx/Traefik)| API Gateway is overkill for simple routing  
-  
+
 **Bottom line:** Apache APISIX is the rising star — best performance, Apache 2.0 license (no open core tricks), and growing plugin ecosystem. Kong is the safe enterprise choice with the largest plugin library. AWS API Gateway is the obvious pick if you are all-in on AWS. For most projects, start without an API gateway (Nginx/Caddy/Traefik handle simple routing), then add one when you need per-route auth, rate limiting, or request transformation. See also: [Nginx vs Caddy vs Traefik](</en/compare/nginx-vs-caddy-vs-traefik.html>) and [API Design Patterns](</en/tech/api-design-patterns.html>).

@@ -3,7 +3,7 @@ title: "告别 Excel 公式：用 AI 做数据分析实战"
 description: "用自然语言操作数据，上传 CSV 直接出图表和分析报告。详解 ChatGPT Code Interpreter、Julius AI 等工具的真实能力与边界。"
 date: 2026-05-09
 board: ai
-url: https://dingjiu1989-hue.github.io/ai/ai-data-analysis.html
+url: https://dingjiu1989-hue.github.io/zh/ai/ai-data-analysis.html
 ---
 
 # 告别 Excel 公式：用 AI 做数据分析实战
@@ -23,15 +23,14 @@ url: https://dingjiu1989-hue.github.io/ai/ai-data-analysis.html
   4. 有没有明显的季节性规律？
 
 在 ChatGPT 中上传 CSV，输入提示词：
-    
-    
+
     我上传了一份电商销售数据（CSV 格式）。请帮我做以下分析，每个问题都要出图：
-    
+
     1. 按月份和品类汇总销售额，画一个折线图
     2. 计算每个品类的利润率（(销售额-成本)/销售额），用柱状图展示
     3. 按城市分组统计平均订单金额，画箱线图展示分布
     4. 分析一周中每天的平均销售额，判断哪天表现最佳
-    
+
     请在分析过程中告诉我你从数据中发现了哪些异常值或值得注意的模式。
 
 接下来发生的事非常惊人：ChatGPT 先读取 CSV 文件预览数据结构，自动识别日期列、数字列和文本列；然后为每个问题生成 pandas 代码并逐段执行，过程中还会"自言自语"地解释每一步做了什么；生成的图表可以直接下载为 PNG。整个过程从上传到拿到 4 张图 + 一份文字报告，不超过 2 分钟。 看到代码你也不用怕 非技术用户最常见的误解是"看到代码就慌"。但注意：你在 ChatGPT Advanced Data Analysis 中**不需要理解代码** 。代码是 AI 自己写自己跑的，你只需要看自然语言解释和最终的图表。不过，如果你愿意瞄一眼代码，会发现 pandas 的语法比想象中直观：`df.groupby('品类')['销售额'].mean()` 的字面意思就是"按品类分组，计算销售额平均值"——跟你的需求描述几乎一样。 AI 数据分析的局限性 必须坦诚地说，AI 数据分析并非万能。以下是它的主要限制：
@@ -43,8 +42,8 @@ url: https://dingjiu1989-hue.github.io/ai/ai-data-analysis.html
 
 什么时候你仍然需要一个真实分析师 AI 最适合探索性数据分析和常规报表生成。但以下场景还需要人类分析师的判断：数据清洗（AI 可能做出错误的数据清洗决策）、实验设计与 A/B 测试分析、需要业务领域知识深度解读的洞察、以及向管理层汇报的正式报告。AI 是最好的分析助手，但决策仍然需要人来做。 📖 相关推荐
 
-  * [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](<https://dingjiu1989-hue.github.io/ai/claude-vs-chatgpt.html>)
-  * [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](<https://dingjiu1989-hue.github.io/ai/chatgpt-plus-worth.html>)
-  * [ChatGPT 提示词工程入门：从新手到高手](<https://dingjiu1989-hue.github.io/ai/prompt-engineering.html>)
+  * [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](<https://dingjiu1989-hue.github.io/zh/ai/claude-vs-chatgpt.html>)
+  * [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](<https://dingjiu1989-hue.github.io/zh/ai/chatgpt-plus-worth.html>)
+  * [ChatGPT 提示词工程入门：从新手到高手](<https://dingjiu1989-hue.github.io/zh/ai/prompt-engineering.html>)
 
-**See also:** [ChatGPT 提示词工程入门：从新手到高手](</ai/prompt-engineering.html>), [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](</ai/claude-vs-chatgpt.html>), [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](</ai/chatgpt-plus-worth.html>).
+**See also:** [ChatGPT 提示词工程入门：从新手到高手](</zh/ai/prompt-engineering.html>), [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](</zh/ai/claude-vs-chatgpt.html>), [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](</zh/ai/chatgpt-plus-worth.html>).

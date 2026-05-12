@@ -20,7 +20,7 @@ Data Sources| Static files (PDF, CSV, text)| Live APIs, databases, any HTTP endp
 Authentication| None| API key, OAuth 2.0, service accounts  
 Real-Time Data| No (static at creation time)| Yes (fetches live data on every query)  
 Best For| Knowledge bases, style guides, templates| Interactive tools, live dashboards, CRUD operations  
-  
+
 ## Building a Plugin: Architecture
 
 **Best for:** Integrating live data, external APIs, or business logic. **Weak spot:** You need to run a backend server and maintain an OpenAPI 3.1 specification.
@@ -31,33 +31,30 @@ The architecture has three components:
   2. **OpenAPI Specification:** A JSON/YAML file describing your API endpoints (what ChatGPT reads to understand your plugin)
   3. **Plugin Manifest:** A JSON file registered with OpenAI describing your plugin and pointing to your API + OpenAPI spec
 
-
-
 ## Step-by-Step Implementation (Python/FastAPI)
-    
-    
+
     # main.py — FastAPI backend for a "DevTools" GPT plugin
     from fastapi import FastAPI, HTTPException
     from fastapi.middleware.cors import CORSMiddleware
     from pydantic import BaseModel
     import httpx
-    
+
     app = FastAPI(title="DevTools Plugin API", version="1.0.0")
     app.add_middleware(CORSMiddleware, allow_origins=["*"])
-    
+
     # --- Models ---
     class URLInput(BaseModel):
         url: str
-    
+
     class CodeInput(BaseModel):
         code: str
         language: str = "python"
-    
+
     # --- Endpoints ---
     @app.get("/api/health")
     async def health():
         return {"status": "ok"}
-    
+
     @app.post("/api/analyze-website")
     async def analyze_website(input: URLInput):
         """Analyze a website's tech stack and performance."""
@@ -70,7 +67,7 @@ The architecture has three components:
             "size_bytes": len(resp.content),
             "server": resp.headers.get("server", "unknown"),
         }
-    
+
     @app.post("/api/review-code")
     async def review_code(input: CodeInput):
         """Review code for common issues."""
@@ -82,13 +79,11 @@ The architecture has three components:
         if "password" in input.code.lower() or "secret" in input.code.lower():
             issues.append({"severity": "high", "message": "Potential hardcoded credentials"})
         return {"language": input.language, "issues": issues, "total_lines": len(input.code.splitlines())}
-    
 
 ## OpenAPI Spec for Your Plugin
 
 Create an `openapi.json` file that ChatGPT reads to understand your API. This must be hosted at a public URL:
-    
-    
+
     {
       "openapi": "3.1.0",
       "info": { "title": "DevTools Plugin", "version": "1.0.0" },

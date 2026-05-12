@@ -3,7 +3,7 @@ title: "程序员效率提升 2026：AI 时代的 10 倍开发效率方法论"
 description: "传统的搬砖式编码正在被 AI 取代。本文从工具链升级、认知模式转变到精力管理，系统讲解 2026 年程序员实现 10 倍效率突破的具体方法。"
 date: 2026-05-09
 board: tech
-url: https://dingjiu1989-hue.github.io/tech/developer-productivity-2026.html
+url: https://dingjiu1989-hue.github.io/zh/tech/developer-productivity-2026.html
 ---
 
 # 程序员效率提升 2026：AI 时代的 10 倍开发效率方法论
@@ -71,8 +71,8 @@ AI 编程| Cursor / Claude Code| 代码生成、重构、解释、测试
 API 调试| Bruno / Hoppscotch| API 请求调试、团队共享  
 总结 10 倍效率的秘诀不在"更努力"，而在**做更少但更重要的事，把剩下的事交给工具** 。2026 年的工具——尤其是 AI——已经足够强大，关键是你愿不愿意改变工作习惯去用它们。 这周可以开始做的一件事：选一项你在本文中读到的实践（建议从时间审计开始），下周这个时间检查效果。知道和做到之间，差了一整个职业生涯。 📖 相关推荐
 
-  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
-  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
-  * [VS Code 十大必备插件：让编码效率翻倍](<https://dingjiu1989-hue.github.io/tech/vscode-extensions.html>)
+  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/zh/tools/terminal-tools-2026.html>)
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/zh/ai/ai-coding-tools-comparison-2026.html>)
+  * [VS Code 十大必备插件：让编码效率翻倍](<https://dingjiu1989-hue.github.io/zh/tech/vscode-extensions.html>)
 
-**See also:** [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](</tech/git-advanced.html>), [单元测试入门：从零到写出第一个可维护的测试](</tech/unit-testing-guide.html>), [REST API 设计最佳实践：写出让人愿意用的接口](</tech/rest-api-best-practices.html>).
+**See also:** [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](</zh/tech/git-advanced.html>), [单元测试入门：从零到写出第一个可维护的测试](</zh/tech/unit-testing-guide.html>), [REST API 设计最佳实践：写出让人愿意用的接口](</zh/tech/rest-api-best-practices.html>).

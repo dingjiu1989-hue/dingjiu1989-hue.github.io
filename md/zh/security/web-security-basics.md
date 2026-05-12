@@ -2,7 +2,7 @@
 title: "Web安全基础指南"
 description: "系统介绍Web安全核心知识，包括XSS、CSRF、SQL注入等常见攻击原理与防御方案，帮助开发者构建安全的Web应用。"
 date: 2026-05-11
-board: zh/security
+board: security
 url: https://dingjiu1989-hue.github.io/zh/security/web-security-basics.html
 ---
 

@@ -2,7 +2,7 @@
 title: "API设计最佳实践"
 description: "系统化讲解RESTful API设计原则，包括资源命名、版本管理、错误处理、认证授权以及文档规范等关键实践方法。"
 date: 2026-05-11
-board: zh/tech
+board: tech
 url: https://dingjiu1989-hue.github.io/zh/tech/api-design-best-practices.html
 ---
 

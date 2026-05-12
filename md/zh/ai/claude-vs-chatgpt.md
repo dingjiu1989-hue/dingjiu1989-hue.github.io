@@ -3,7 +3,7 @@ title: "Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你"
 description: "Claude 和 ChatGPT 在编程、写作、分析、多模态等方面的真实能力对比，帮你根据不同场景选择最佳 AI 助手。"
 date: 2026-05-07
 board: ai
-url: https://dingjiu1989-hue.github.io/ai/claude-vs-chatgpt.html
+url: https://dingjiu1989-hue.github.io/zh/ai/claude-vs-chatgpt.html
 ---
 
 # Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你
@@ -28,8 +28,8 @@ url: https://dingjiu1989-hue.github.io/ai/claude-vs-chatgpt.html
 
 我的推荐方案 **双持是最优解** ——免费版 Claude + 免费版 ChatGPT 组合，零成本覆盖几乎所有场景。如果只买一个 Pro：写作和研究为主选 Claude Pro，需要图片和联网搜索选 ChatGPT Plus。 不必纠结模型能力在快速收敛，差距越来越小。选择一个深入使用比反复切换更有价值。你花在比较工具上的时间已经够写一篇好文章了。 📖 相关推荐
 
-  * [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](<https://dingjiu1989-hue.github.io/ai/chatgpt-plus-worth.html>)
-  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
-  * [ChatGPT 提示词工程入门：从新手到高手](<https://dingjiu1989-hue.github.io/ai/prompt-engineering.html>)
+  * [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](<https://dingjiu1989-hue.github.io/zh/ai/chatgpt-plus-worth.html>)
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/zh/ai/ai-coding-tools-comparison-2026.html>)
+  * [ChatGPT 提示词工程入门：从新手到高手](<https://dingjiu1989-hue.github.io/zh/ai/prompt-engineering.html>)
 
-**See also:** [ChatGPT 提示词工程入门：从新手到高手](</ai/prompt-engineering.html>), [AI 自动化工作流实战：让 AI 替你干重复活](</ai/ai-automation-workflow.html>), [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](</ai/chatgpt-plus-worth.html>).
+**See also:** [ChatGPT 提示词工程入门：从新手到高手](</zh/ai/prompt-engineering.html>), [AI 自动化工作流实战：让 AI 替你干重复活](</zh/ai/ai-automation-workflow.html>), [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](</zh/ai/chatgpt-plus-worth.html>).

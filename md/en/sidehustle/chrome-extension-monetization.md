@@ -19,7 +19,7 @@ One-Time Purchase| $500–$5,000/mo| Low| Niche tools with clear value (data exp
 Usage-Based Pricing (API)| $2,000–$20,000/mo| Medium-High| Extensions that consume AI APIs (summarizers, translators)  
 Affiliate + Ads| $500–$3,000/mo| Low| Shopping tools, coupon finders, cashback extensions  
 White-Label / Enterprise| $10,000–$100,000/mo| High| Team productivity tools, enterprise browser management  
-  
+
 ## Top Extension Niches in 2026
 
 Niche| Example| Revenue Model| Competition  
@@ -30,21 +30,20 @@ Productivity / Tab Management| AI tab organizer, session saver| $3.99/mo subscri
 Privacy & Security| Email tracker blocker, cookie auto-deleter| Freemium, $4.99/mo Pro| Low  
 E-Commerce / Shopping| Price tracker, coupon auto-apply| Affiliate commissions| High (but huge TAM)  
 Content / Media| YouTube summarizer, screenshot annotator| $7.99/mo subscription| Medium  
-  
+
 ## Chrome Web Store Optimization (ASO)
 
 **Title formula:** "[Primary Keyword] - [Benefit]" — e.g., "Email Tracker Blocker - See Who Tracks Your Email." Include the primary search term in the title, keep it under 70 characters. **Description:** Lead with the problem you solve in the first 2 sentences (visible above the fold). Include keywords naturally. **Pricing:** Clearly state the pricing model in the description — users filter by "Free" vs "Paid." **Screenshots:** Upload 5+ screenshots showing the UI + benefits text overlay. **Reviews:** Ask users to review at key moments (after successful use, not on install).
 
 ## Implementation Tech Stack
-    
-    
+
     # Minimum Viable Chrome Extension Structure
     manifest.json     # Permissions, content scripts, background worker
     background.js     # Long-lived event handlers, API calls
     content.js        # Injected into web pages, DOM manipulation
     popup.html/js     # The UI when user clicks your extension icon
     options.html      # Settings page (right-click → Options)
-    
+
     # Use Manifest V3 (required by Chrome Web Store as of 2024)
     # Key limits: service workers (not persistent background pages),
     #              declarativeNetRequest (not webRequest blocking)
@@ -57,5 +56,5 @@ Users| Free → Paid Conversion| Monthly Price| Monthly Revenue
 10,000| 3% (300 paid)| $4.99| $1,497/mo  
 10,000| 5% (500 paid)| $9.99| $4,995/mo  
 100,000| 3% (3,000 paid)| $9.99| $29,970/mo  
-  
+
 **Bottom line:** Chrome extensions are a high-leverage side hustle for developers — the technical skill required is moderate (JS/HTML/CSS), distribution is free (Chrome Web Store), and recurring subscription revenue scales well. Focus on a narrow niche where the big players (Grammarly, Honey) don't compete, solve one pain point deeply, and charge a subscription. See also: [Browser Extension Development](</en/sidehustle/browser-extension-development.html>) and [Selling UI Kits and Design Assets](</en/sidehustle/sell-ui-kits-design-assets.html>).

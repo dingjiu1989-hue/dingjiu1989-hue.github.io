@@ -102,7 +102,7 @@ alert_rules:
     condition: 5分钟内同一IP登录失败超过10次
     action: 自动阻断该IP 30分钟
     severity: high
-    
+
   - name: 异常数据导出
     condition: 单个用户在10分钟内导出超过1000条记录
     action: 暂停该用户权限并通知管理员

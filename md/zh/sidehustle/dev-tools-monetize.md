@@ -2,7 +2,7 @@
 title: "开发者工具变现策略"
 description: "面向开发者的工具类产品的变现方法论，涵盖开源商业化、SaaS工具订阅、IDE插件付费和API服务等商业模式。"
 date: 2026-05-11
-board: zh/sidehustle
+board: sidehustle
 url: https://dingjiu1989-hue.github.io/zh/sidehustle/dev-tools-monetize.html
 ---
 

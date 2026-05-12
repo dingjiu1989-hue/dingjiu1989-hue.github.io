@@ -18,8 +18,6 @@ You don't need a design degree to build polished, professional-looking products.
   * Grab free UI kits from the Figma Community: search "iOS UI kit" or "dashboard template"
   * Export assets at 1x/2x/3x for web and mobile
 
-
-
 ## Color: Never Guess Hex Codes Again
 
 Tool| Use For  
@@ -28,7 +26,7 @@ Tool| Use For
 [Realtime Colors](<https://realtimecolors.com>)| See your palette applied to a real UI preview (buttons, cards, text, nav). The fastest way to validate a color scheme.  
 [UI Colors](<https://uicolors.app>)| Generate a full Tailwind-compatible color scale from a single hex code. Gives you 50-950 shades instantly.  
 [Adobe Color](<https://color.adobe.com>)| Extract palette from an image. Useful when you have a hero image and want a matching theme.  
-  
+
 ## Icons: Never Draw One from Scratch
 
 Library| Style| Count  
@@ -38,7 +36,7 @@ Library| Style| Count
 [Tabler Icons](<https://tabler.io/icons>)| Pixel-perfect strokes, great for dashboards| 5,200+  
 [Heroicons](<https://heroicons.com>)| Tailwind team's official set, outline + solid| 300+  
 [SVG Repo](<https://svgrepo.com>)| Massive searchable collection of SVG logos and icons| 500,000+  
-  
+
 ## Illustrations & Visual Polish
 
 Resource| Description  
@@ -46,15 +44,13 @@ Resource| Description
 [unDraw](<https://undraw.co>)| Open-source illustrations. Change the accent color to match your brand. SVG download, no attribution.  
 [Blush](<https://blush.design>)| Mix-and-match illustrations by professional artists. Each illustration is customizable with different characters and scenes.  
 [Storyset](<https://storyset.com>)| Animated illustrations by Freepik. Great for onboarding flows and empty states. Free with attribution.  
-  
+
 ## Typography: Fonts That Look Professional
 
   * **Google Fonts** — Inter, JetBrains Mono, and Space Grotesk are the developer favorites in 2026
   * **Fontsource** — self-host Google Fonts as npm packages for better performance and GDPR compliance
   * [Fontpair](<https://fontpair.co>) — curated font pairings. When you can't decide what goes with what.
   * [Type Scale](<https://typescale.com>) — visual type scale calculator. Set body size → get the perfect h1-h6 scale.
-
-
 
 ## Stock Photos That Don't Look Like Stock Photos
 
@@ -67,7 +63,5 @@ See our [Best Free Stock Photo Sites](</en/sidehustle/free-images/>) guide for t
   3. **Lucide or Phosphor** — icons
   4. **unDraw or Storyset** — illustrations
   5. **Google Fonts (Inter + JetBrains Mono)** — typography
-
-
 
 You can build a SaaS landing page, portfolio site, or product UI with just these five tools. No design background needed.

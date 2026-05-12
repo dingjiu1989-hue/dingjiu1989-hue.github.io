@@ -18,24 +18,23 @@ Duplicate tsconfig, ESLint config, etc. in 5 repos| One shared config package. U
 Copy-pasting UI components between apps| Shared UI package. One component, used everywhere.  
 Can't refactor across apps safely| TypeScript validates ALL consumers when you change a shared package.  
 CI runs unrelated changes on every commit| Turborepo caches tasks. Only changed packages rebuild.  
-  
+
 ## Step-by-Step Setup
-    
-    
+
     # 1. Create the monorepo structure
     mkdir my-monorepo && cd my-monorepo
     pnpm init
-    
+
     # 2. Create pnpm-workspace.yaml
     cat > pnpm-workspace.yaml << 'EOF'
     packages:
       - "apps/*"
       - "packages/*"
     EOF
-    
+
     # 3. Create directory structure
     mkdir -p apps/web apps/docs packages/ui packages/config
-    
+
     # 4. Create root package.json with Turborepo
     cat > package.json << 'EOF'
     {
@@ -52,10 +51,10 @@ CI runs unrelated changes on every commit| Turborepo caches tasks. Only changed 
       }
     }
     EOF
-    
+
     # 5. Install Turborepo
     pnpm install
-    
+
     # 6. Create turbo.json
     cat > turbo.json << 'EOF'
     {
@@ -73,8 +72,7 @@ CI runs unrelated changes on every commit| Turborepo caches tasks. Only changed 
     EOF
 
 ## Shared Config Package
-    
-    
+
     # packages/config/package.json
     {
       "name": "@repo/config",
@@ -85,7 +83,7 @@ CI runs unrelated changes on every commit| Turborepo caches tasks. Only changed 
         "./eslint": "./eslint.base.js"
       }
     }
-    
+
     # packages/config/tsconfig.base.json
     {
       "compilerOptions": {
@@ -100,8 +98,7 @@ CI runs unrelated changes on every commit| Turborepo caches tasks. Only changed 
     }
 
 ## App Configuration
-    
-    
+
     # apps/web/tsconfig.json — each app extends the shared base
     {
       "extends": "@repo/config/typescript",
@@ -122,7 +119,5 @@ CI runs unrelated changes on every commit| Turborepo caches tasks. Only changed 
   * **Parallel builds:** Turborepo runs independent tasks in parallel. A build across 5 packages finishes in the time of the slowest one, not the sum.
   * **Remote caching:** Turborepo can cache builds remotely (Vercel). CI builds reuse cache from previous CI runs.
   * **Don't go monorepo for <3 packages.** The overhead isn't worth it for tiny projects. Start with a single repo, extract when you have sharing pain.
-
-
 
 **Bottom line:** Monorepos shine when you have 3+ apps/packages that share code. pnpm workspaces + Turborepo is the best stack in 2026. The shared config package alone saves hours of boilerplate setup per new project. See also: [Package Manager Comparison](</en/compare/pnpm-vs-npm-vs-yarn.html>) and [Build Tools Comparison](</en/compare/vite-vs-webpack-vs-turbopack.html>).

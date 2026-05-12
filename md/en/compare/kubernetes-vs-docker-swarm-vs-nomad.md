@@ -25,7 +25,7 @@ Rolling Updates| Built-in (Deployments)| Built-in (service update)| Built-in (up
 Secrets Management| Built-in (base64 encoded)| Built-in (encrypted at rest)| Vault integration (native)  
 Non-Container Workloads| No (containers only)| No (containers only)| Yes — Java, executables, QEMU, containers  
 Managed Offerings| GKE, EKS, AKS, DO K8s| Docker Universal Control Plane| HashiCorp Cloud Platform  
-  
+
 ## When Each Tool Wins
 
 **Kubernetes — Best for:** Teams running 20+ microservices, multi-cloud strategies, and organizations that can dedicate at least one person to K8s operations. **Weak spot:** The operational burden is real — even with managed K8s, you need K8s expertise on the team.
@@ -42,5 +42,5 @@ Startup with 2-10 containers| Docker Swarm or managed K8s| Swarm for simplicity;
 Enterprise, 50+ services| Kubernetes| Ecosystem, talent pool, multi-cloud portability  
 Mixed workloads| Nomad| Only orchestrator that handles non-container workloads natively  
 Multi-cloud or hybrid cloud| Kubernetes| Portability across AWS, GCP, Azure, on-prem  
-  
+
 **Bottom line:** For 80% of teams, a managed Kubernetes service is the pragmatic choice. Docker Swarm is still the simplest path for "it just works." Nomad is the dark horse for heterogeneous infrastructure. See also: [Docker vs Podman](</en/compare/docker-vs-podman.html>) and [DevOps for Developers](</en/tech/devops-for-developers.html>).

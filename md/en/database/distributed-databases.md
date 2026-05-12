@@ -16,37 +16,30 @@ Consensus Algorithms
 Raft   
 Raft is a consensus algorithm designed for understandability:   
 
-    
-    
     class RaftNode:
-    
-        def __init__(self):
-    
-            self.state = "FOLLOWER"
-    
-            self.current_term = 0
-    
-        
-    
-        def start_election(self):
-    
-            self.state = "CANDIDATE"
-    
-            votes = 1
-    
-            for peer in self.peers:
-    
-                if peer.request_vote(self.current_term):
-    
-                    votes += 1
-    
-            if votes > len(self.peers) // 2:
-    
-                self.state = "LEADER"
-    
-    
 
-  
+        def __init__(self):
+
+            self.state = "FOLLOWER"
+
+            self.current_term = 0
+
+        def start_election(self):
+
+            self.state = "CANDIDATE"
+
+            votes = 1
+
+            for peer in self.peers:
+
+                if peer.request_vote(self.current_term):
+
+                    votes += 1
+
+            if votes > len(self.peers) // 2:
+
+                self.state = "LEADER"
+
 Raft powers etcd, Consul, and MongoDB replication.   
 Paxos   
 Paxos is the original consensus algorithm. It is correct but difficult to understand. Used in Google Spanner and Chubby.   
@@ -55,23 +48,16 @@ Nodes periodically exchange state with random peers. Information spreads in O(lo
 Dynamo-Style Architecture   
 Amazon DynamoDB and Cassandra prioritize availability:   
 
-    
-    
     -- Cassandra: tunable consistency
-    
-    INSERT INTO users (user_id, name) VALUES ('u1', 'Alice')
-    
-    USING CONSISTENCY QUORUM;
-    
-    
-    
-    SELECT * FROM users WHERE user_id = 'u1'
-    
-    USING CONSISTENCY ONE;
-    
-    
 
-  
+    INSERT INTO users (user_id, name) VALUES ('u1', 'Alice')
+
+    USING CONSISTENCY QUORUM;
+
+    SELECT * FROM users WHERE user_id = 'u1'
+
+    USING CONSISTENCY ONE;
+
 Spanner-Style Architecture   
 Google Spanner provides strong consistency globally using TrueTime (GPS + atomic clocks) for external consistency.   
 Conclusion   

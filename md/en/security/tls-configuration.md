@@ -13,274 +13,196 @@ Transport Layer Security (TLS) is the foundation of secure internet communicatio
 Cipher Suites   
 A cipher suite defines the cryptographic algorithms used for key exchange, authentication, encryption, and message authentication.   
 
-    
-    
     # Modern Nginx TLS configuration
-    
-    server {
-    
-        listen 443 ssl http2;
-    
-        server_name example.com;
-    
-        
-    
-        ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
-    
-        ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
-    
-        
-    
-        # Modern cipher suite selection
-    
-        ssl_protocols TLSv1.2 TLSv1.3;
-    
-        ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305;
-    
-        ssl_prefer_server_ciphers off;  # Let client negotiate for TLS 1.3
-    
-        
-    
-        # Modern key exchange
-    
-        ssl_ecdh_curve X25519:prime256v1:secp384r1;
-    
-        
-    
-        # OCSP stapling
-    
-        ssl_stapling on;
-    
-        ssl_stapling_verify on;
-    
-        resolver 1.1.1.1 8.8.8.8 valid=300s;
-    
-        resolver_timeout 5s;
-    
-    }
-    
-    
 
-  
+    server {
+
+        listen 443 ssl http2;
+
+        server_name example.com;
+
+        ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+
+        ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+
+        # Modern cipher suite selection
+
+        ssl_protocols TLSv1.2 TLSv1.3;
+
+        ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305;
+
+        ssl_prefer_server_ciphers off;  # Let client negotiate for TLS 1.3
+
+        # Modern key exchange
+
+        ssl_ecdh_curve X25519:prime256v1:secp384r1;
+
+        # OCSP stapling
+
+        ssl_stapling on;
+
+        ssl_stapling_verify on;
+
+        resolver 1.1.1.1 8.8.8.8 valid=300s;
+
+        resolver_timeout 5s;
+
+    }
+
 Cipher Suite Breakdown   
 
-    
-    
     ECDHE   - Ephemeral Diffie-Hellman (forward secrecy)
-    
-    ECDSA   - Elliptic Curve Digital Signature Algorithm (authentication)
-    
-    AES128  - AES with 128-bit key (symmetric encryption)
-    
-    GCM     - Galois/Counter Mode (authenticated encryption)
-    
-    SHA256  - SHA-256 HMAC (integrity)
-    
-    
 
-  
+    ECDSA   - Elliptic Curve Digital Signature Algorithm (authentication)
+
+    AES128  - AES with 128-bit key (symmetric encryption)
+
+    GCM     - Galois/Counter Mode (authenticated encryption)
+
+    SHA256  - SHA-256 HMAC (integrity)
+
 Deprecated Ciphers   
 
-    
-    
     # NEVER use these
-    
-    ssl_protocols SSLv3 TLSv1 TLSv1.1;   # All broken
-    
-    ssl_ciphers RC4:3DES:EXPORT:NULL;     # Weak or broken
-    
-    
 
-  
+    ssl_protocols SSLv3 TLSv1 TLSv1.1;   # All broken
+
+    ssl_ciphers RC4:3DES:EXPORT:NULL;     # Weak or broken
+
 HSTS (HTTP Strict Transport Security)   
 HSTS instructs browsers to always connect via HTTPS, preventing SSL stripping attacks.   
 
-    
-    
     # Strict HSTS for production
-    
+
     add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
-    
-    
-    
+
     # Explanation:
-    
+
     # max-age=63072000    - 2 years in seconds
-    
+
     # includeSubDomains   - Applies to all subdomains
-    
+
     # preload             - Allow inclusion in browser preload lists
-    
-    
 
-  
-
-    
-    
     # Flask HSTS implementation
-    
-    from flask import Flask, make_response
-    
-    
-    
-    app = Flask(__name__)
-    
-    
-    
-    @app.after_request
-    
-    def add_security_headers(response):
-    
-        if request.is_secure:
-    
-            response.headers['Strict-Transport-Security'] = \
-    
-                'max-age=63072000; includeSubDomains; preload'
-    
-        return response
-    
-    
 
-  
+    from flask import Flask, make_response
+
+    app = Flask(__name__)
+
+    @app.after_request
+
+    def add_security_headers(response):
+
+        if request.is_secure:
+
+            response.headers['Strict-Transport-Security'] = \
+
+                'max-age=63072000; includeSubDomains; preload'
+
+        return response
+
 Certificate Pinning   
 While HTTP Public Key Pinning (HPKP) is deprecated, certificate pinning techniques remain useful in controlled environments.   
 
-    
-    
     # TLS fingerprint validation (alternative to deprecated HPKP)
-    
-    import ssl
-    
-    import hashlib
-    
-    import requests
-    
-    from cryptography import x509
-    
-    from cryptography.hazmat.primitives import hashes
-    
-    
-    
-    def validate_certificate_fingerprint(hostname, port=443, expected_hash=None):
-    
-        cert_pem = ssl.get_server_certificate((hostname, port))
-    
-        cert = x509.load_pem_x509_certificate(cert_pem.encode())
-    
-        
-    
-        # Calculate SHA-256 fingerprint
-    
-        fingerprint = cert.fingerprint(hashes.SHA256())
-    
-        fingerprint_hex = fingerprint.hex()
-    
-        
-    
-        if expected_hash and fingerprint_hex != expected_hash:
-    
-            raise ValueError(
-    
-                f"Certificate fingerprint mismatch for {hostname}: "
-    
-                f"expected {expected_hash}, got {fingerprint_hex}"
-    
-            )
-    
-        
-    
-        return fingerprint_hex
-    
-    
-    
-    # Usage: pin to expected fingerprint
-    
-    PINNED_FINGERPRINTS = {
-    
-        'api.example.com': 'a1b2c3d4e5f6...',
-    
-    }
-    
-    
 
-  
+    import ssl
+
+    import hashlib
+
+    import requests
+
+    from cryptography import x509
+
+    from cryptography.hazmat.primitives import hashes
+
+    def validate_certificate_fingerprint(hostname, port=443, expected_hash=None):
+
+        cert_pem = ssl.get_server_certificate((hostname, port))
+
+        cert = x509.load_pem_x509_certificate(cert_pem.encode())
+
+        # Calculate SHA-256 fingerprint
+
+        fingerprint = cert.fingerprint(hashes.SHA256())
+
+        fingerprint_hex = fingerprint.hex()
+
+        if expected_hash and fingerprint_hex != expected_hash:
+
+            raise ValueError(
+
+                f"Certificate fingerprint mismatch for {hostname}: "
+
+                f"expected {expected_hash}, got {fingerprint_hex}"
+
+            )
+
+        return fingerprint_hex
+
+    # Usage: pin to expected fingerprint
+
+    PINNED_FINGERPRINTS = {
+
+        'api.example.com': 'a1b2c3d4e5f6...',
+
+    }
+
 TLS 1.3 Benefits   
 TLS 1.3 simplifies the handshake to one round trip (or zero with pre-shared keys), removes insecure features, and mandates forward secrecy.   
 
-    
-    
     # Test TLS 1.3 support
-    
-    openssl s_client -connect example.com:443 -tls1_3
-    
-    
 
-  
+    openssl s_client -connect example.com:443 -tls1_3
+
 Testing with SSL Labs   
 
-    
-    
     # Using ssllabs-scan
-    
-    docker run --rm -t jumanjiman/ssllabs-scan example.com
-    
-    
-    
-    # Using testssl.sh
-    
-    testssl.sh --quiet --htmlfile report.html example.com
-    
-    
-    
-    # Quick curl-based check
-    
-    curl -sI https://example.com | grep -i "strict-transport-security\|x-frame-options\|content-security-policy"
-    
-    
 
-  
+    docker run --rm -t jumanjiman/ssllabs-scan example.com
+
+    # Using testssl.sh
+
+    testssl.sh --quiet --htmlfile report.html example.com
+
+    # Quick curl-based check
+
+    curl -sI https://example.com | grep -i "strict-transport-security\|x-frame-options\|content-security-policy"
+
 Full Hardened Configuration   
 
-    
-    
     # /etc/nginx/conf.d/ssl.conf - hardened TLS
-    
-    ssl_protocols TLSv1.2 TLSv1.3;
-    
-    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305;
-    
-    ssl_prefer_server_ciphers off;
-    
-    ssl_ecdh_curve X25519:prime256v1:secp384r1;
-    
-    ssl_session_cache shared:SSL:10m;
-    
-    ssl_session_timeout 1d;
-    
-    ssl_session_tickets off;
-    
-    
-    
-    # OCSP Stapling
-    
-    ssl_stapling on;
-    
-    ssl_stapling_verify on;
-    
-    resolver 1.1.1.1 8.8.8.8 valid=300s;
-    
-    
-    
-    # Security Headers
-    
-    add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
-    
-    add_header X-Content-Type-Options nosniff always;
-    
-    add_header X-Frame-Options DENY always;
-    
-    
 
-  
+    ssl_protocols TLSv1.2 TLSv1.3;
+
+    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305;
+
+    ssl_prefer_server_ciphers off;
+
+    ssl_ecdh_curve X25519:prime256v1:secp384r1;
+
+    ssl_session_cache shared:SSL:10m;
+
+    ssl_session_timeout 1d;
+
+    ssl_session_tickets off;
+
+    # OCSP Stapling
+
+    ssl_stapling on;
+
+    ssl_stapling_verify on;
+
+    resolver 1.1.1.1 8.8.8.8 valid=300s;
+
+    # Security Headers
+
+    add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
+
+    add_header X-Content-Type-Options nosniff always;
+
+    add_header X-Frame-Options DENY always;
+
 Conclusion   
 A proper TLS configuration requires modern protocol versions (TLS 1.2 and 1.3), forward-secrecy cipher suites, HSTS enforcement, and regular testing with tools like SSL Labs and testssl.sh. Disable all legacy protocols and ciphers, enable OCSP stapling for performance, and consider certificate pinning for high-security APIs.

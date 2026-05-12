@@ -10,35 +10,15 @@ url: https://dingjiu1989-hue.github.io/en/security/jwt-authentication-guide.html
 
 # JWT Authentication Best Practices
 
-  
-
-
 What Are JSON Web Tokens? 
 
 JSON Web Tokens (JWT) are a compact, URL-safe means of representing claims between two parties. A JWT consists of three Base64URL-encoded segments separated by dots: header, payload, and signature. 
 
-  
-  
-  
-
-
 eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.
-
-  
-
 
 eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFsZXgiLCJpYXQiOjE1MTYyMzkwMjJ9.
 
-  
-
-
 SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-
-  
-  
-  
-  
-
 
 Structure Breakdown 
 
@@ -50,38 +30,15 @@ Symmetric: HS256 (HMAC with SHA-256)
 
 Uses a single shared secret for both signing and verification. Fast and simple, but the secret must be kept confidential on both the issuer and verifier. 
 
-  
-  
-  
-
-
 const jwt = require('jsonwebtoken');
-
-  
-
 
 const token = jwt.sign({ userId: '123' }, SECRET, {
 
-  
-
-
 algorithm: 'HS256',
-
-  
-
 
 expiresIn: '15m'
 
-  
-
-
 });
-
-  
-  
-  
-  
-
 
 Use HS256 only when issuer and verifier are the same service. 
 
@@ -89,43 +46,17 @@ Asymmetric: RS256 (RSA with SHA-256)
 
 Uses a private key for signing and a public key for verification. This enables third-party verification without exposing the signing key. 
 
-  
-  
-  
-
-
 const token = jwt.sign({ userId: '123' }, PRIVATE_KEY, {
-
-  
-
 
 algorithm: 'RS256',
 
-  
-
-
 expiresIn: '15m'
-
-  
-
 
 });
 
-  
-
-
 // Verifier uses PUBLIC_KEY
 
-  
-
-
 const decoded = jwt.verify(token, PUBLIC_KEY, { algorithms: ['RS256'] });
-
-  
-  
-  
-  
-
 
 Use RS256 (or ES256 for better performance) when multiple services need to verify tokens issued by a central auth service. 
 
@@ -135,48 +66,19 @@ Critical Security Practices
 
 Never trust the token blindly. Always validate: 
 
-  
-  
-  
-
-
 const options = {
-
-  
-
 
 algorithms: ['RS256'],
 
-  
-
-
 issuer: 'https://auth.example.com',
-
-  
-
 
 audience: 'https://api.example.com',
 
-  
-
-
 clockTolerance: 30 // seconds
-
-  
-
 
 };
 
-  
-
-
 const payload = jwt.verify(token, PUBLIC_KEY, options);
-
-  
-  
-  
-  
-
 
 2\\. Prevent Algorithm Confusion 
 
@@ -186,50 +88,19 @@ An attacker could change the header from `RS256` to `HS256` and sign with the pu
 
 Access tokens should expire in 15-60 minutes. This limits the damage window if a token is stolen. 
 
-  
-  
-  
-
-
 const accessToken = jwt.sign(payload, PRIVATE_KEY, {
-
-  
-
 
 algorithm: 'RS256',
 
-  
-
-
 expiresIn: '15m'
 
-  
-
-
 });
-
-  
-  
-  
-  
-
 
 4\\. Implement Token Rotation 
 
 Refresh tokens should be rotated with each use. When a client exchanges a refresh token, issue a new one and invalidate the old: 
 
-  
-  
-  
-
-
 Old refresh token --> New access token + New refresh token (old invalidated)
-
-  
-  
-  
-  
-
 
 If a refresh token is used after being rotated, it signals potential theft — revoke all tokens for that user. 
 
@@ -242,9 +113,6 @@ Never store JWTs in localStorage or sessionStorage in a browser — they are acc
 Blacklisting and Revocation 
 
 JWTs are stateless, which means they cannot be revoked without additional infrastructure. Options include: 
-
-  
-
 
 * **Token blacklist**: Maintain a Redis cache of revoked token IDs (jti claims) until their natural expiry.
 

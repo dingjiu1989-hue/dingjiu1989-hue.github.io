@@ -21,7 +21,7 @@ Expo (React Native)| JS/TS| Managed React Native, cloud builds| Same as React Na
 Flutter| Dart| Own rendering engine (Impeller)| Excellent (compiled, 60/120fps)| ~98%| Good (production-ready)| Good (Linux, macOS, Windows)| Medium (learn Dart + widget tree)  
 SwiftUI + Kotlin Multiplatform| Swift + Kotlin| Native UI + shared business logic| ★★★★★ (full native)| ~60% (shared logic, native UI)| None| Native (iOS + macOS / none)| High (learn both platforms)  
 Tauri Mobile| Rust + JS frontend| Native wrapper (WebView) + Rust backend| Good (Rust is fast, WebView=fair)| ~85%| Via same web frontend| ★★★★★ (Tauri's primary target)| Medium-High (Rust knowledge needed)  
-  
+
 ## When Each Framework Wins
 
 **React Native / Expo — Best for web developers going mobile.** The React Native ecosystem in 2026 is the strongest it's ever been. The New Architecture (Fabric renderer, TurboModules, JSI) has closed the performance gap with native. Expo is now the recommended way to start — it handles build configuration, native modules, OTA updates, and push notifications without ejecting. If your team knows React, React Native (especially via Expo) is the fastest path to a cross-platform mobile app. _Downside:_ debugging native issues still requires understanding the bridge (though much less than before), and complex animations/gestures can be tricky.
@@ -42,5 +42,5 @@ Must feel 100% native on iOS and Android| SwiftUI + Kotlin Multiplatform
 Desktop app that also needs mobile presence| Tauri Mobile  
 Startup that needs iOS + Android + web MVP fast| Expo (with Expo Router for web)  
 Performance-critical app (graphics, real-time data)| Flutter or Native (SwiftUI/Kotlin)  
-  
+
 **My recommendation for 2026:** Start with **Expo (React Native)** unless you have a specific reason not to. It covers iOS, Android, and web from a single codebase; the developer experience is excellent; the React knowledge transfers directly; and Expo's managed workflow eliminates most build configuration pain. Use **Flutter** if you need pixel-perfect custom UI, heavy animations, or your team has no React background. Go **native** only when your app's competitive advantage depends on platform-specific features (AR, advanced camera, system integrations). See also: [React vs Vue vs Angular vs Svelte](</en/compare/react-vs-vue-vs-angular-vs-svelte.html>) for the web framework comparison.

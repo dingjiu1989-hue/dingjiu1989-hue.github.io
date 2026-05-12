@@ -20,14 +20,13 @@ Client Credentials| Machine-to-machine, service accounts, API integrations| Medi
 Device Code| TV apps, CLI tools, IoT devices (input-constrained)| Medium| No  
 Refresh Token| Renew access tokens without re-authentication| N/A| Yes (usually)  
 Implicit (DEPRECATED)| Do NOT use — insecure, tokens in URL fragment| None| Do NOT use  
-  
+
 ## The Authorization Code + PKCE Flow (Step by Step)
-    
-    
+
     # Complete OAuth 2.0 + PKCE Flow
     # Step 1: Generate PKCE code verifier and challenge
     import hashlib, base64, os, secrets
-    
+
     def generate_pkce_pair():
         # Code verifier: 43-128 random characters
         code_verifier = base64.urlsafe_b64encode(os.urandom(32)).rstrip(b'=').decode()
@@ -36,9 +35,9 @@ Implicit (DEPRECATED)| Do NOT use — insecure, tokens in URL fragment| None| Do
             hashlib.sha256(code_verifier.encode()).digest()
         ).rstrip(b'=').decode()
         return code_verifier, code_challenge
-    
+
     code_verifier, code_challenge = generate_pkce_pair()
-    
+
     # Step 2: Redirect user to authorization endpoint
     state = secrets.token_urlsafe(32)  # CSRF protection
     auth_url = (
@@ -52,10 +51,10 @@ Implicit (DEPRECATED)| Do NOT use — insecure, tokens in URL fragment| None| Do
         f"&state;={state}"
     )
     # Store state + code_verifier in session; redirect user to auth_url
-    
+
     # Step 3: User authenticates → provider redirects to your callback with ?code=xxx&state;=yyy
     # Verify state matches (prevents CSRF)
-    
+
     # Step 4: Exchange authorization code for tokens
     token_response = requests.post("https://provider.com/token", data={
         "grant_type": "authorization_code",
@@ -77,7 +76,7 @@ Validate ID tokens| Prevents token injection and replay attacks| Check signature
 Store tokens server-side| Access tokens in browser local storage are XSS-vulnerable| HttpOnly, Secure, SameSite cookies for session ID  
 Use short-lived access tokens| Limits damage if a token is leaked| 5-15 minutes; use refresh tokens for renewal  
 Implement token rotation| Each refresh token use returns a new refresh token| Invalidate the old refresh token after rotation  
-  
+
 ## OAuth Providers: Self-Hosted vs Managed
 
 Provider| Type| Best For| Pricing  
@@ -87,5 +86,5 @@ Clerk| Managed| React/Next.js apps, best developer experience| Free (10K MAU), $
 Lucia Auth| Library (self-hosted)| Full control, TypeScript-native| Free (MIT)  
 Supabase Auth| Managed + Self-hosted| Apps already using Supabase| Free (50K MAU), $25/mo (100K MAU)  
 NextAuth.js (Auth.js)| Library (self-hosted)| Next.js apps, OAuth provider agnostic| Free (MIT)  
-  
+
 **Bottom line:** Use a library or managed service for OAuth 2.0 — never implement the protocol from scratch unless you are building an auth provider. The spec is complex and the security consequences of getting it wrong are severe. For most projects, Clerk or Supabase Auth provides the best balance of security, developer experience, and cost. When building your own, always use Authorization Code + PKCE flow — the implicit flow is deprecated and unsafe. See also: [Authentication Best Practices](</en/tech/authentication-best-practices-2026.html>) and [Clerk vs Auth0 vs Lucia](</en/compare/clerk-vs-auth0-vs-lucia.html>).

@@ -71,19 +71,19 @@ def refresh_access_token(refresh_token):
     # 验证Refresh Token
     payload = verify_refresh_token(refresh_token)
     user_id = payload["sub"]
-    
+
     # 检查是否已被使用（轮转检测）
     if is_token_revoked(refresh_token):
         revoke_all_user_tokens(user_id)  # 可能被攻击，清理所有令牌
         raise SecurityException("检测到令牌重用")
-    
+
     # 吊销旧Refresh Token
     revoke_token(refresh_token)
-    
+
     # 生成新的Access Token和Refresh Token
     new_access = create_access_token(user_id)
     new_refresh = create_refresh_token(user_id)
-    
+
     return new_access, new_refresh
 ```
 

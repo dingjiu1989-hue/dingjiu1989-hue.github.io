@@ -10,122 +10,50 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/saas-bookkeeping.html
 
 ##  SaaS Bookkeeping for Solo Founders
 
-  
-
-
 Bookkeeping is the least glamorous but most essential aspect of running a SaaS business. Proper accounting ensures tax compliance, investor-ready financials, and informed business decisions. For solo founders, understanding SaaS-specific accounting principles is critical.
-
-  
-
 
 ### Revenue Recognition
 
-  
-
-
 SaaS revenue is recognized differently from traditional product sales. Subscription revenue is earned over time, not at the point of sale. If a customer pays $1,200 annually on January 1, you recognize $100 revenue each month, not $1,200 in January.
-
-  
-
 
 ASC 606 (the revenue recognition standard) requires: identify the contract, identify performance obligations, determine transaction price, allocate price to obligations, and recognize revenue when obligations are satisfied. For most SaaS products, monthly subscription is a single performance obligation satisfied over the subscription period.
 
-  
-
-
 Annual prepayments create deferred revenue (a liability). Record unearned revenue when payment is received and reduce it as you recognize revenue monthly. Deferred revenue is a critical metric for SaaS investors — it indicates future committed revenue.
-
-  
-
 
 ### SaaS-Specific Accounting Metrics
 
-  
-
-
 Monthly Recurring Revenue (MRR) is the normalized monthly subscription revenue. Calculate MRR by summing all active subscriptions adjusted for upgrades, downgrades, and churn. Annual Run Rate (ARR) is MRR x 12.
-
-  
-
 
 Net Revenue Retention (NRR) measures revenue growth from existing customers. NRR above 100% means expansion revenue exceeds churned revenue. Calculate as (starting MRR + expansion - churn - contraction) / starting MRR. NRR above 120% is exceptional for SaaS.
 
-  
-
-
 Gross Margin = (Revenue - Cost of Revenue) / Revenue. Cost of Revenue includes hosting, infrastructure, payment processing fees, and customer support. Target gross margin above 70% for healthy SaaS. Below 60% indicates infrastructure cost issues.
-
-  
-
 
 ### Sales Tax Compliance
 
-  
-
-
 Sales tax is the most complex tax obligation for SaaS businesses. In the US, sales tax applies to SaaS differently by state. Some states tax SaaS as tangible personal property, others as a service. South Dakota v. Wayfair (2018) enabled states to require out-of-state sellers to collect tax.
-
-  
-
 
 Use tax automation tools to reduce complexity. Stripe Tax automatically determines tax rates and remits collected tax. TaxJar (now Stripe Tax) handles multi-state filing. Anrok specializes in SaaS tax compliance, including state nexus tracking.
 
-  
-
-
 International tax obligations: EU requires VAT collection on digital services sold to consumers (OSS scheme simplifies cross-border). UK requires 20% VAT on digital services. Australia, Japan, and other countries have similar digital service tax requirements. Paddle and Lemon Squeezy act as Merchant of Record, handling global tax compliance.
-
-  
-
 
 ### Accounting Software
 
-  
-
-
 QuickBooks Online is the standard for SaaS startups. It integrates with Stripe, PayPal, and bank feeds. Chart of accounts should include SaaS-specific categories: deferred revenue, subscription revenue, hosting costs, and customer acquisition costs.
-
-  
-
 
 Xero is the alternative cloud accounting platform with good Stripe integration. Its reporting capabilities handle recurring revenue schedules and deferred revenue calculations. Wave is a free alternative for micro-SaaS operations.
 
-  
-
-
 Pilot or Bench provide bookkeeping services combined with accounting software. For $200-500/month, a dedicated bookkeeper handles categorization, reconciliation, and financial statements. This frees founder time for product development.
-
-  
-
 
 ### Tax Planning for SaaS Founders
 
-  
-
-
 Quarterly estimated tax payments prevent underpayment penalties. Calculate based on projected annual income, deduct business expenses, and pay 25% of tax liability quarterly. Most SaaS founders underestimate their first-year tax burden.
-
-  
-
 
 Business structure matters. LLC taxed as S-Corp (once revenue exceeds $60,000) reduces self-employment tax. C-Corp is preferred for venture-backed startups. Consult a CPA specializing in SaaS for entity selection guidance.
 
-  
-
-
 ### Financial Reporting
-
-  
-
 
 Monthly financial reports should include: profit and loss statement, balance sheet, cash flow statement, MRR and ARR, churn rate, gross margin, and deferred revenue schedule. Review these monthly to understand business health and identify issues early.
 
-  
-
-
 ### Conclusion
-
-  
-
 
 SaaS bookkeeping requires understanding subscription-specific accounting principles. Proper revenue recognition, sales tax compliance, and financial reporting are essential for tax compliance and business management. Invest in good accounting software, use tax automation tools, and consult a SaaS-specialized CPA. Clean financials enable informed decisions and simplify fundraising or exit processes.

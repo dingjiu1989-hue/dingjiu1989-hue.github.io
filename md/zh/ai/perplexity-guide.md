@@ -3,7 +3,7 @@ title: "Perplexity 深度使用指南：比 Google 更聪明的搜索方式"
 description: "从基础搜索到 Pro Search 深度研究，详解 Perplexity 的 Collections、Focus、Pages 三大功能，附实战查询范例和与传统搜索的对比。"
 date: 2026-05-07
 board: ai
-url: https://dingjiu1989-hue.github.io/ai/perplexity-guide.html
+url: https://dingjiu1989-hue.github.io/zh/ai/perplexity-guide.html
 ---
 
 # Perplexity 深度使用指南：比 Google 更聪明的搜索方式
@@ -31,8 +31,8 @@ url: https://dingjiu1989-hue.github.io/ai/perplexity-guide.html
 快速查找定义或事实| Perplexity 或 Google| 都行，Perplexity 更省一步  
 Pages 功能：把你的研究变成文章 Perplexity 的 Pages 功能非常实用：当你完成一系列搜索后，可以把整个过程"整理"成一篇文章。比如你搜索了"如何搭建个人博客"相关的 5 个问题，点击"Create Page"，Perplexity 会将这些问答整合成一篇结构化的指南文章。你可以编辑、设置分享链接、甚至嵌入到自己的网站里。对于做内容的人来说，这相当于一个"从研究到输出的零摩擦管道"。 几点使用技巧 **写精确的问题。** Perplexity 对长问题处理得很好，比如"Explain the difference between Redis and Memcached in terms of persistence and data types"的效果远好于"Redis vs Memcached"。问题越长越具体，回答越精准。 **善用追问。** Perplexity 支持上下文对话。看了一个回答后觉得不够深入，可以直接说"展开讲第三点"或"有这个说法的反方观点吗"。它能记住之前的搜索上下文。 **把 Collections 当成"第二大脑"。** 创建一个"正在学习的课题"收藏集，每周往里扔 5 到 10 个查询，一个月后你就有了一份该领域详尽的研究档案。 **下载桌面端。** Perplexity 有 Mac 和 Windows 桌面客户端，用 Cmd+K (Mac) 或 Ctrl+K (Windows) 可以全局唤醒，比打开浏览器搜索快很多。 Perplexity 并不是要取代 Google——Google 仍然是世界上最好的"网页目录"。但当你的需求是"获得一个问题的综合答案"时，Perplexity 的效率优势是非常明显的。不妨从今天开始，把每天的前 5 次搜索从 Google 换成 Perplexity，体验一下"答案引擎"的魅力。 📖 相关推荐
 
-  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
-  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
-  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/ai/ai-art-monetization.html>)
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/zh/ai/ai-coding-tools-comparison-2026.html>)
+  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/zh/ai/mcp-protocol-guide.html>)
+  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/zh/ai/ai-art-monetization.html>)
 
-**See also:** [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](</ai/chatgpt-plus-worth.html>), [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</ai/ai-coding-tools-comparison-2026.html>), [MCP 协议入门：让 AI 模型安全访问你的工具和数据](</ai/mcp-protocol-guide.html>).
+**See also:** [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](</zh/ai/chatgpt-plus-worth.html>), [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</zh/ai/ai-coding-tools-comparison-2026.html>), [MCP 协议入门：让 AI 模型安全访问你的工具和数据](</zh/ai/mcp-protocol-guide.html>).

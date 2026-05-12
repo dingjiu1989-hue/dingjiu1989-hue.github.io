@@ -24,7 +24,7 @@ Large Repo Performance| Good (can slow on 100K+ commits)| Medium (can be sluggis
 GitHub/GitLab/Bitbucket| Integrated (PR management built in)| Via remote setup| Via remote setup| GitHub integration  
 Submodules| Good support| Limited| Good support| Basic  
 Undo / Redo| Built-in undo button for Git actions| Limited undo| Good — reset to any previous state| Limited  
-  
+
 ## When a GUI Beats the CLI
 
 **Best for:** Visual learners, complex rebase operations, and newcomers to Git. **Weak spot:** Advanced scripting, custom Git hooks, and CI pipeline configuration still require CLI knowledge.
@@ -36,7 +36,7 @@ Interactive rebase| Drag-and-drop commit order, see the result before executing|
 Merge conflicts| Visual 3-pane view (theirs / yours / result) — much faster to understand| Can use custom merge drivers and scripts  
 History exploration| Zoomable graph, click-to-inspect commits, blame annotations| git log with complex --graph --format flags  
 Bulk operations| CLI wins — scripting, CI, automation| CLI wins — scripting, CI, automation  
-  
+
 ## Decision Matrix
 
 If you...| Use| Why  
@@ -46,5 +46,5 @@ Want free + cross-platform| GitFiend| Open source, modern UI, all platforms
 Work with very large repos| Fork| Fastest performance, one-time purchase  
 Are on a budget + Mac/Windows| Sourcetree| Free, mature, good feature set  
 Do a lot of rebasing| Fork or GitKraken| Best interactive rebase UIs  
-  
+
 **Bottom line:** Fork is the best overall value — fast, one-time purchase, and the interactive rebase + conflict resolution are best in class. GitKraken is the most polished if you can justify the subscription. GitFiend is the best free option for cross-platform users. A GUI does not replace the CLI — it complements it for visualization-heavy tasks. See also: [Git Commands Cheatsheet](</en/tech/git-cheatsheet.html>) and [Advanced Git Guide](</en/tech/git-advanced.html>).

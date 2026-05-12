@@ -23,7 +23,7 @@ Instant Flag Evaluation| Yes (streaming updates)| Yes (streaming)| Yes (streamin
 Change Log / Audit| Yes (full audit trail)| Yes| Yes| Yes  
 Pricing| Starts at $12/user/mo (Team)| Starts at $33/user/mo| Free (self-hosted), $45/mo Cloud| Free (1M events), $0.00031/event  
 Best For| Enterprise, complex flag workflows| Experimentation-heavy teams| Cost-conscious teams, open source| Product analytics + flagging combined  
-  
+
 ## Feature Flag Use Cases
 
 Use Case| Pattern| Example  
@@ -34,7 +34,7 @@ A/B Testing| Randomly assign users to variant A or B| Test new pricing page desi
 Beta Access| Enable feature only for beta users| Allow beta testers to access new features early  
 Ops Toggles| Control operational behavior| Switch to read-only mode during database maintenance  
 Permission Flags| Gate features by plan/tier| Enterprise plan gets SSO, Pro gets 2FA  
-  
+
 ## Decision Matrix
 
 Scenario| Best Tool| Why  
@@ -43,5 +43,5 @@ Enterprise, complex flag workflows, compliance| LaunchDarkly| Most powerful targ
 Experimentation and A/B testing focused| Split| Best-in-class experimentation and metrics  
 Open source, self-hosted, cost matters| Flagsmith| Free self-hosted, good feature coverage  
 Already use PostHog for product analytics| PostHog| Flags + analytics in one platform  
-  
+
 **Bottom line:** Feature flags are now essential infrastructure — not just for experiments, but for safe deployments and operational control. Flagsmith is the best entry point (free, open source, solid SDKs). LaunchDarkly is worth the cost for enterprises with complex targeting needs. PostHog is ideal if you want flags and analytics in one. See also: [CI/CD Pipeline Guide](</en/tech/ci-cd-pipeline-guide.html>) and [Best Error Tracking Tools](</en/tools/best-error-tracking-tools.html>).

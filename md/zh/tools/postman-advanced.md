@@ -2,7 +2,7 @@
 title: "Postman高级使用技巧"
 description: "深入讲解Postman的高级功能，包括环境管理、预请求脚本、测试断言、集合运行、API文档生成和团队协作实践。"
 date: 2026-05-11
-board: zh/tools
+board: tools
 url: https://dingjiu1989-hue.github.io/zh/tools/postman-advanced.html
 ---
 

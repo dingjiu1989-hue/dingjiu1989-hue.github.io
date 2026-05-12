@@ -19,46 +19,44 @@ Layer| What to Cache| TTL| Invalidation
 **Application (Redis/Memcached)**|  DB query results, computed values, sessions| 1 second to 1 hour| Delete on write. TTL-based. Cache-aside pattern.  
 **Database query cache**|  Query results (PostgreSQL/MySQL built-in)| Automatic| Invalidated on table writes.  
 **Next.js data cache**|  fetch() results in Server Components| Configurable| revalidateTag(), revalidatePath()  
-  
+
 ## 1\. Browser & CDN: Cache-Control Headers
-    
-    
+
     # Static assets with content hash (1 year)
     # /_next/static/chunks/main-abc123.js
     Cache-Control: public, max-age=31536000, immutable
-    
+
     # HTML pages (revalidate at CDN, serve stale if origin is down)
     # /blog/my-post
     Cache-Control: public, s-maxage=60, stale-while-revalidate=300
-    
+
     # API responses that don't change often
     # /api/posts/trending
     Cache-Control: public, max-age=300, s-maxage=300
-    
+
     # Never cache (user-specific data)
     # /api/user/profile
     Cache-Control: private, no-cache, no-store, must-revalidate
 
 ## 2\. Application Cache: Redis
-    
-    
+
     // Cache-aside pattern — the most common approach
     async function getUserPosts(userId: string): Promise<Post[]> {
       const cacheKey = `user:${userId}:posts`;
-    
+
       // 1. Try cache
       const cached = await redis.get(cacheKey);
       if (cached) return JSON.parse(cached);
-    
+
       // 2. Cache miss — fetch from DB
       const posts = await db.posts.findMany({ where: { userId } });
-    
+
       // 3. Store in cache (5 minutes)
       await redis.set(cacheKey, JSON.stringify(posts), "EX", 300);
-    
+
       return posts;
     }
-    
+
     // Delete cache on write — prevent stale data
     async function createPost(userId: string, data: CreatePostInput) {
       const post = await db.posts.create({ data: { userId, ...data } });
@@ -67,14 +65,13 @@ Layer| What to Cache| TTL| Invalidation
     }
 
 ## 3\. Next.js Caching (App Router)
-    
-    
+
     // Static data — cached permanently
     async function getNavigation() {
       const res = await fetch("https://cms.example.com/navigation");
       return res.json(); // Cached forever (build-time)
     }
-    
+
     // Revalidated data — cached, then refreshed
     async function getBlogPosts() {
       const res = await fetch("https://cms.example.com/posts", {
@@ -82,10 +79,10 @@ Layer| What to Cache| TTL| Invalidation
       });
       return res.json();
     }
-    
+
     // On-demand revalidation (webhook from CMS)
     import { revalidateTag } from "next/cache";
-    
+
     export async function POST(request: Request) {
       const { tag } = await request.json();
       revalidateTag(tag); // Revalidate everything with this tag
@@ -99,8 +96,6 @@ Layer| What to Cache| TTL| Invalidation
   * **Data that must be accurate:** Bank balances, inventory counts during flash sales. Use the database directly or use a cache with write-through.
   * **Before you have a performance problem:** Caching prematurely adds complexity. Wait until you measure a bottleneck.
 
-
-
 ## Cache Invalidation Strategies
 
 Strategy| How| When  
@@ -109,5 +104,5 @@ Strategy| How| When
 **Write-through**|  Write to cache AND DB simultaneously.| When you need consistency and read latency matters  
 **Cache-aside (lazy)**|  Read from cache, fall back to DB. Delete on write.| Most common. Good balance of simplicity and freshness.  
 **Stale-while-revalidate**|  Serve stale, refresh in background.| CDN. Tolerates staleness for a few seconds for massive latency wins.  
-  
+
 **Bottom line:** Cache at the CDN first (biggest win, simplest). Add Redis when you have specific slow queries. Use Next.js built-in caching for data fetching. Invalidate on write, not on a timer, for user-facing data. See also: [Web Performance Tools](</en/tools/best-web-performance-tools.html>) and [Database Comparison](</en/compare/postgresql-vs-mysql-vs-sqlite.html>).

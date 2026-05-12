@@ -9,17 +9,16 @@ url: https://dingjiu1989-hue.github.io/en/tech/rest-api-best-practices.html
 # REST API Best Practices: The Complete Guide for 2026
 
 REST APIs power the modern web, but most APIs are designed with subtle flaws that cause pain months later. This guide covers the conventions, patterns, and anti-patterns that separate production APIs from weekend projects.  
-  
+
 ## 1\. Use Nouns, Not Verbs, for Resources
-    
-    
+
     # Good
     GET    /users
     GET    /users/42
     POST   /users
     PUT    /users/42
     DELETE /users/42
-    
+
     # Bad
     GET    /getUsers
     POST   /createUser
@@ -30,14 +29,13 @@ REST APIs power the modern web, but most APIs are designed with subtle flaws tha
 Use URL prefix versioning (`/v1/users`) or header-based versioning (`Accept: application/vnd.api.v2+json`). URL versioning is simpler for public APIs. Choose one and stick with it everywhere — mixing strategies is worse than either alone.
 
 ## 3\. Consistent Naming Conventions
-    
-    
+
     // JSON: camelCase for properties
     {{"userId": 42, "createdAt": "2026-05-07"}}
-    
+
     // URL paths: kebab-case
     GET /user-orders/42
-    
+
     // Query parameters: snake_case
     GET /users?sort_by=name&page;_size=20
 
@@ -56,12 +54,11 @@ Code| When to Use
 422 Unprocessable| Valid syntax but semantic error  
 429 Too Many| Rate limit exceeded — include Retry-After header  
 500 Internal Error| Unexpected server failure (never expose stack traces)  
-  
+
 ## 5\. Error Response Format
 
 Always return errors in a consistent structure:
-    
-    
+
     {{
       "error": {{
         "code": "VALIDATION_ERROR",
@@ -75,18 +72,17 @@ Always return errors in a consistent structure:
     }}
 
 ## 6\. Pagination, Filtering, and Sorting
-    
-    
+
     # Pagination with cursor (preferred for large datasets)
     GET /users?cursor=eyJpZCI6NDJ9&limit;=20
     Response: {{"data": [...], "nextCursor": "eyJpZCI6NjJ9", "hasMore": true}}
-    
+
     # Or offset-based for simpler use cases
     GET /users?offset=0&limit;=20
-    
+
     # Filtering
     GET /users?status=active&role;=admin
-    
+
     # Sorting
     GET /users?sort=-createdAt  # descending
     GET /users?sort=+name       # ascending
@@ -99,8 +95,6 @@ Always return errors in a consistent structure:
   * **Set CORS explicitly.** Never use `Access-Control-Allow-Origin: *` with credentials.
   * **Use API keys or OAuth2.** Never roll your own auth protocol.
   * **Keep secrets out of responses.** Password hashes, internal IDs, stack traces, server versions.
-
-
 
 ## 8\. API Documentation
 

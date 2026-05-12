@@ -3,7 +3,7 @@ title: "REST API 设计最佳实践：写出让人愿意用的接口"
 description: "从 URL 设计、HTTP 方法选择到错误处理和分页，系统讲解 REST API 设计规范，附常见反模式避坑。"
 date: 2026-05-07
 board: tech
-url: https://dingjiu1989-hue.github.io/tech/rest-api-best-practices.html
+url: https://dingjiu1989-hue.github.io/zh/tech/rest-api-best-practices.html
 ---
 
 # REST API 设计最佳实践：写出让人愿意用的接口
@@ -23,8 +23,7 @@ PUT| 全量更新| ✅| `PUT /articles/1`
 PATCH| 部分更新| ❌| `PATCH /articles/1`  
 DELETE| 删除| ✅| `DELETE /articles/1`  
 响应格式规范
-    
-    
+
     {
       "data": { "id": 1, "title": "..." },
       "meta": { "page": 1, "per_page": 20, "total": 150 },
@@ -46,8 +45,8 @@ DELETE| 删除| ✅| `DELETE /articles/1`
 
 📖 相关推荐
 
-  * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/tech/git-advanced.html>)
-  * [单元测试入门：从零到写出第一个可维护的测试](<https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html>)
-  * [正则表达式 30 分钟入门指南](<https://dingjiu1989-hue.github.io/tech/regex-guide.html>)
+  * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/zh/tech/git-advanced.html>)
+  * [单元测试入门：从零到写出第一个可维护的测试](<https://dingjiu1989-hue.github.io/zh/tech/unit-testing-guide.html>)
+  * [正则表达式 30 分钟入门指南](<https://dingjiu1989-hue.github.io/zh/tech/regex-guide.html>)
 
-**See also:** [30 个免费又好用的 API 合集：开发者必备](</tools/free-api-collection.html>), [OpenAI API 入门：用 10 行代码调用 GPT](</ai/openai-api-intro.html>), [AI 自动化工作流实战：让 AI 替你干重复活](</ai/ai-automation-workflow.html>).
+**See also:** [30 个免费又好用的 API 合集：开发者必备](</zh/tools/free-api-collection.html>), [OpenAI API 入门：用 10 行代码调用 GPT](</zh/ai/openai-api-intro.html>), [AI 自动化工作流实战：让 AI 替你干重复活](</zh/ai/ai-automation-workflow.html>).

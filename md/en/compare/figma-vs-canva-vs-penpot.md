@@ -22,7 +22,7 @@ You don't need a design degree to create polished UI. But you do need the right 
 **Developer handoff**|  CSS, Swift, Android code export| None (export as image/PDF)| CSS, SVG code, design tokens  
 **Prototyping**|  Full interactive prototyping| Basic click-through| Interactive prototyping  
 **Asset library**|  Community + plugins| Massive built-in library (stock photos, icons, templates)| Growing community library  
-  
+
 ## Figma — The Professional Standard
 
 Figma dominates UI/UX design for good reason. Its real-time collaboration, component system (think React components for design), and Auto Layout (flexbox equivalent) make it the go-to for product teams. The free tier covers most solo developer needs.
@@ -62,5 +62,5 @@ Quick blog header or social media graphic| **Canva** (free tier)
 Open-source project, privacy-first| **Penpot** (free)  
 Template-heavy work (slides, resumes, flyers)| **Canva**  
 Professional UI with developer handoff| **Figma**  
-  
+
 **Bottom line for developers:** Use Figma for UI design, Canva for marketing graphics. Both have excellent free tiers. See our [full design tools guide](</en/tools/design-tools-for-developers.html>) for color palettes, icons, and illustration resources.

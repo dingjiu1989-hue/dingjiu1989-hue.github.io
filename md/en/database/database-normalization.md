@@ -14,61 +14,44 @@ Normal Forms
 First Normal Form (1NF)   
 Each column contains atomic values. Each row is unique.   
 
-    
-    
     -- Violates 1NF
-    
-    CREATE TABLE orders (id SERIAL, products TEXT);  -- "Laptop,Mouse"
-    
-    
-    
-    -- 1NF compliant
-    
-    CREATE TABLE order_items (
-    
-        order_id INT REFERENCES orders(id),
-    
-        product_name TEXT,
-    
-        PRIMARY KEY (order_id, product_name)
-    
-    );
-    
-    
 
-  
+    CREATE TABLE orders (id SERIAL, products TEXT);  -- "Laptop,Mouse"
+
+    -- 1NF compliant
+
+    CREATE TABLE order_items (
+
+        order_id INT REFERENCES orders(id),
+
+        product_name TEXT,
+
+        PRIMARY KEY (order_id, product_name)
+
+    );
+
 Second Normal Form (2NF)   
 Must be in 1NF. All non-key columns depend on the entire primary key.   
 
-    
-    
     -- Violates 2NF: product_name depends only on product_id, not order_id
-    
-    CREATE TABLE order_details (
-    
-        order_id INT, product_id INT,
-    
-        product_name TEXT, quantity INT,
-    
-        PRIMARY KEY (order_id, product_id)
-    
-    );
-    
-    
 
-  
+    CREATE TABLE order_details (
+
+        order_id INT, product_id INT,
+
+        product_name TEXT, quantity INT,
+
+        PRIMARY KEY (order_id, product_id)
+
+    );
+
 Third Normal Form (3NF)   
 Must be in 2NF. No transitive dependencies (non-key depends on non-key).   
 
-    
-    
     -- Violates 3NF: customer_name depends on customer_id
-    
-    CREATE TABLE orders (id SERIAL, customer_id INT, customer_name TEXT);
-    
-    
 
-  
+    CREATE TABLE orders (id SERIAL, customer_id INT, customer_name TEXT);
+
 BCNF through 5NF   
 BCNF: Every determinant is a candidate key. 4NF: No multi-valued dependencies. 5NF: Join dependencies only from candidate keys.   
 Practical Guidance   

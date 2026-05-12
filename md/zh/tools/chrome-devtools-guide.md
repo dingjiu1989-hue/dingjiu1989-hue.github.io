@@ -2,7 +2,7 @@
 title: "Chrome DevTools完全指南"
 description: "全面讲解Chrome开发者工具的核心功能，涵盖元素检查、网络分析、性能调优和内存调试等实战技巧。"
 date: 2026-05-11
-board: zh/tools
+board: tools
 url: https://dingjiu1989-hue.github.io/zh/tools/chrome-devtools-guide.html
 ---
 

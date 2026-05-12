@@ -2,7 +2,7 @@
 title: "密码安全最佳实践"
 description: "全面讲解密码安全的核心原则与技术方案，涵盖密码哈希算法选择、MFA多因素认证、密码管理器使用和企业密码策略制定。"
 date: 2026-05-11
-board: zh/security
+board: security
 url: https://dingjiu1989-hue.github.io/zh/security/password-security.html
 ---
 

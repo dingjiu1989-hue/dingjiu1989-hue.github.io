@@ -3,7 +3,7 @@ title: "GitHub Copilot 完全使用指南：从安装到高效协作"
 description: "全面掌握 GitHub Copilot 的使用技巧，包括快捷键、上下文工程、最佳实践和常见陷阱，让 AI 编程工具真正为你提效。"
 date: 2026-05-07
 board: tech
-url: https://dingjiu1989-hue.github.io/tech/github-copilot-guide.html
+url: https://dingjiu1989-hue.github.io/zh/tech/github-copilot-guide.html
 ---
 
 # GitHub Copilot 完全使用指南：从安装到高效协作
@@ -45,8 +45,8 @@ Chat 功能：不只是补全
 
 📖 相关推荐
 
-  * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/tech/git-advanced.html>)
-  * [单元测试入门：从零到写出第一个可维护的测试](<https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html>)
-  * [REST API 设计最佳实践：写出让人愿意用的接口](<https://dingjiu1989-hue.github.io/tech/rest-api-best-practices.html>)
+  * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/zh/tech/git-advanced.html>)
+  * [单元测试入门：从零到写出第一个可维护的测试](<https://dingjiu1989-hue.github.io/zh/tech/unit-testing-guide.html>)
+  * [REST API 设计最佳实践：写出让人愿意用的接口](<https://dingjiu1989-hue.github.io/zh/tech/rest-api-best-practices.html>)
 
-**See also:** [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</ai/ai-coding-tools-comparison-2026.html>), [用 AI 辅助编程：从零到生产力](</ai/ai-coding.html>), [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](</tech/git-advanced.html>).
+**See also:** [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</zh/ai/ai-coding-tools-comparison-2026.html>), [用 AI 辅助编程：从零到生产力](</zh/ai/ai-coding.html>), [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](</zh/tech/git-advanced.html>).

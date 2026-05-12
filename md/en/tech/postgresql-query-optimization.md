@@ -18,8 +18,6 @@ A slow PostgreSQL query is the most common performance bottleneck in web applica
   4. **Fix:** Apply the specific optimization, measure the improvement
   5. **Prevent:** Add an index, adjust work_mem, or rewrite the query permanently
 
-
-
 ## Reading EXPLAIN ANALYZE Output
 
 Node Type| What It Means| Good or Bad?| Action  
@@ -31,7 +29,7 @@ Bitmap Index Scan → Bitmap Heap Scan| Combines multiple indexes, then reads he
 Nested Loop| For each row in A, look up B| Good if A is small, B is indexed| Bad for large tables without index  
 Hash Join| Build hash of one table, probe with other| Good for joining two large tables| Usually fine; ensure work_mem is sufficient  
 Merge Join| Both inputs sorted, merge like zipper| Good for pre-sorted inputs (from indexes)| Excellent if both are index scans  
-  
+
 ## Index Types and When to Use Them
 
 Index Type| Best For| Example| Size Overhead  
@@ -42,7 +40,7 @@ Covering Index (INCLUDE)| Index-Only Scans for specific columns| INDEX ON users 
 GIN (Generalized Inverted)| Full-text search, arrays, JSONB| WHERE document @@ to_tsquery('search & query')| Large  
 GiST| Geometric data, full-text search| WHERE location <@ ST_MakeEnvelope(...)| Medium-Large  
 BRIN (Block Range)| Very large tables, naturally sorted data| WHERE created_at BETWEEN ... (on 1B+ row tables)| Very Small (<0.1%)  
-  
+
 ## Common Optimizations by Root Cause
 
 Symptom| Root Cause| Fix| Speedup  
@@ -53,17 +51,16 @@ Sort using external merge (disk)| work_mem too low| SET work_mem = '256MB' for t
 N+1 queries (ORM)| Lazy loading in application| Use eager loading (includes/joins)| 10-100x  
 Slow COUNT(*)| MVCC visibility checks| Use estimate: SELECT reltuples FROM pg_class WHERE relname = 'table'| 100-1000x  
 Table bloat| Dead tuples from UPDATE/DELETE| VACUUM ANALYZE; adjust autovacuum settings| 2-10x  
-  
+
 ## Key PostgreSQL Configuration Tuning
-    
-    
+
     -- Check current settings
     SHOW shared_buffers;        -- Default: 128MB. Set to 25% of RAM.
     SHOW work_mem;              -- Default: 4MB. Increase to 64-256MB for reporting queries.
     SHOW maintenance_work_mem;  -- Default: 64MB. Set to 10% of RAM for VACUUM/INDEX speed.
     SHOW effective_cache_size;  -- Default: 4GB. Set to 75% of RAM (hint for planner).
     SHOW random_page_cost;      -- Default: 4.0. Set to 1.1 for SSD (encourages index use).
-    
+
     -- Enable slow query logging
     ALTER SYSTEM SET log_min_duration_statement = 1000;  -- Log queries > 1s
     SELECT pg_reload_conf();

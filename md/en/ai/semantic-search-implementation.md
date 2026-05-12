@@ -13,8 +13,7 @@ url: https://dingjiu1989-hue.github.io/en/ai/semantic-search-implementation.html
 Keyword search (TF-IDF, BM25) matches exact words — great when users type the right keywords, terrible when they don't. Semantic search understands meaning: "how to deploy a Next.js app" matches "deploy a React application" even without shared keywords. In 2026, implementing semantic search is practical with open-source tools and embedding APIs. Here's how to actually build it.
 
 ## The Architecture
-    
-    
+
     ┌──────────┐    ┌──────────────┐    ┌───────────────┐    ┌──────────┐
     │  Query   │───▶│ Embedding    │───▶│ Vector Search  │───▶│ Results  │
     │  String  │    │ Model/API    │    │ (pgvector, etc)│    │ (ranked) │
@@ -23,7 +22,6 @@ Keyword search (TF-IDF, BM25) matches exact words — great when users type the 
                           ▼                      ▼
                   float32[] array        cosine similarity
                   (1536 dims typical)    or approximate (ANN)
-    
 
 ## Embedding Model Comparison
 
@@ -35,7 +33,7 @@ Cohere Embed v4| 1024/2048| 8,192| $0.10/1M tokens| 63.8| No
 BGE-M3 (BAAI)| 1024| 8,192| Free (self-host)| 62.0| Yes (MIT)  
 jina-embeddings-v3| 1024| 8,192| $0.02/1M tokens| 62.5| No (API only)  
 gte-Qwen2-7B-instruct| 3584| 32,768| Free (self-host)| 66.3 (leading)| Yes (Apache 2.0)  
-  
+
 _MTEB = Massive Text Embedding Benchmark. Higher is better. Scores from MTEB leaderboard as of early 2026._
 
 ## Vector Database Options
@@ -47,7 +45,7 @@ Qdrant| Dedicated vector DB| HNSW, quantization (binary, scalar, product)| Paylo
 Pinecone| Managed vector DB| Proprietary (serverless)| Metadata filtering| Zero-ops, serverless scaling, no tuning needed| Free tier (2GB) → $0.33/GB/mo  
 Weaviate| Vector + hybrid DB| HNSW, flat, dynamic| GraphQL filtering, BM25 + vector hybrid| Hybrid search (keyword + semantic), built-in modules| Free (OSS) / Cloud from $25/mo  
 Milvus| Distributed vector DB| 12+ index types| Scalar filtering, boolean expressions| Billion-scale vectors, distributed, GPU acceleration| Free (OSS) / Cloud from $0.55/hr  
-  
+
 ## Implementation Steps
 
 **Step 1: Chunk your documents.** The quality of your chunks determines the quality of your search. Strategies: fixed-size (simple, 256-512 tokens with overlap), sentence-based (split on sentence boundaries), recursive character splitting (LangChain's default — splits on separators: , , ., space), semantic chunking (use a smaller model to detect topic boundaries — most accurate, more expensive). For most applications, recursive splitting with 512-token chunks and 50-token overlap works well. For code search, split on function/class boundaries.
@@ -69,5 +67,5 @@ Internal knowledge base| Yes| Employees search differently; semantic bridges the
 E-commerce product search| Yes (hybrid)| "running shoes" should match "trainers" — but exact product codes need keyword  
 Legal/contract search| No (or hybrid)| Exact terminology matters; "shall" vs "may" is legally significant  
 Code search| Maybe (hybrid)| Function names need exact match; bug descriptions need semantic  
-  
+
 **Bottom line:** For most applications in 2026, the pragmatic choice is **pgvector + OpenAI embeddings + a reranker**. You already have Postgres, pgvector is a single extension, embeddings cost pennies per thousand documents, and the two-stage retrieval gives production-quality results. If you're doing this at scale (1M+ documents), add Qdrant or Pinecone. See also: [Vector Database Comparison](</en/ai/vector-database-comparison.html>) and [RAG Best Practices](</en/ai/rag-best-practices.html>).

@@ -18,7 +18,7 @@ Perceivable| Users can perceive the content| Alt text for images, captions for v
 Operable| Users can operate the interface| Keyboard navigation, no keyboard traps, enough time to read  
 Understandable| Users can understand the content| Readable text, predictable navigation, input assistance (error messages)  
 Robust| Content works with assistive technologies| Semantic HTML, valid ARIA (when needed), works across browsers  
-  
+
 ## Semantic HTML: Your Best Accessibility Tool
 
 **The most important rule:** Use semantic HTML elements. They are accessible by default — no ARIA needed.
@@ -30,7 +30,7 @@ Instead of| Use| Why
 `<div class="main">`| `<main>`| Screen readers have a "skip to main content" shortcut  
 `<span class="heading">`| `<h1>-<h6>`| Screen readers navigate by heading hierarchy  
 `<div> + CSS grid`| `<table>` for tabular data| Screen readers have table navigation (row/column headers)  
-  
+
 ## ARIA: When HTML Is Not Enough
 
 **Critical rule:** No ARIA is better than bad ARIA. Only use ARIA when native HTML cannot express the semantics you need.
@@ -42,21 +42,20 @@ aria-describedby| Link an element to its description| `<input aria-describedby="
 aria-expanded| Indicate if a collapsible element is open| `<button aria-expanded="true">Section 1</button>`  
 aria-live| Announce dynamic content changes| `<div aria-live="polite">5 results found</div>`  
 role="alert"| Important, time-sensitive notification| `<div role="alert">Your session will expire in 2 minutes</div>`  
-  
+
 ## Automated Testing in CI/CD
-    
-    
+
     // axe-core: The accessibility testing standard
     // Integrate into Jest, Playwright, or Cypress tests
     import { axe, toHaveNoViolations } from 'jest-axe';
     expect.extend(toHaveNoViolations);
-    
+
     it('homepage should have no accessibility violations', async () => {
       const { container } = render();
       const results = await axe(container);
       expect(results).toHaveNoViolations();
     });
-    
+
     // Playwright test
     import { injectAxe, checkA11y } from 'axe-playwright';
     await injectAxe(page);

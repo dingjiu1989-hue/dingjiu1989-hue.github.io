@@ -13,38 +13,26 @@ Data consistency models define guarantees about when updates become visible to r
 Strong Consistency   
 All reads return the latest write. Behaves like a single copy:   
 
-    
-    
     -- Strong: reads always see latest write
-    
-    SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
-    
-    SELECT balance FROM accounts WHERE id = 1;
-    
-    
 
-  
+    SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+
+    SELECT balance FROM accounts WHERE id = 1;
+
 Strong consistency requires coordination, adding latency and reducing availability during partitions.   
 Eventual Consistency   
 Replicas converge over time. Reads may return stale data:   
 
-    
-    
     def read(key):
-    
-        return any_replica.get(key)  # May be stale
-    
-    
-    
-    def write(key, value):
-    
-        local.set(key, value)
-    
-        background_replicate(key, value)  # Async
-    
-    
 
-  
+        return any_replica.get(key)  # May be stale
+
+    def write(key, value):
+
+        local.set(key, value)
+
+        background_replicate(key, value)  # Async
+
 Causal Consistency   
 Preserves cause-and-effect relationships. If A causes B, all observers see A before B. Unrelated operations can be seen in any order.   
 Read-After-Write (Read-Your-Writes)   

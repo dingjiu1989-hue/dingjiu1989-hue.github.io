@@ -3,7 +3,7 @@ title: "LangChain 入门：构建你的第一个 AI 应用"
 description: "深入浅出讲解 LangChain 核心概念（Chain、Agent、Tool、Memory），用可运行的 RAG 问答代码示例带你写出第一个 LLM 应用。"
 date: 2026-05-01
 board: ai
-url: https://dingjiu1989-hue.github.io/ai/langchain-intro.html
+url: https://dingjiu1989-hue.github.io/zh/ai/langchain-intro.html
 ---
 
 # LangChain 入门：构建你的第一个 AI 应用
@@ -24,51 +24,50 @@ LangChain 是当前 AI 应用开发领域最热门的框架之一。但坦白说
   * **Agent：** 一个"大脑"，它接收自然语言指令，决定用哪些 Tools 来完成任务，并解析工具返回的结果继续推理。
 
 实战：RAG 问答应用 我们做一个实际的 RAG（检索增强生成）应用，让用户上传一份 PDF，然后对 PDF 内容提问。完整代码不到 60 行：
-    
-    
+
     from langchain_community.document_loaders import PyPDFLoader
     from langchain.text_splitter import RecursiveCharacterTextSplitter
     from langchain_community.vectorstores import Chroma
     from langchain_openai import OpenAIEmbeddings, ChatOpenAI
     from langchain.chains import RetrievalQA
     from langchain.prompts import PromptTemplate
-    
+
     # 1. 加载 PDF 文档
     loader = PyPDFLoader("report.pdf")
     documents = loader.load()
-    
+
     # 2. 将长文档切分成小段
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=500, chunk_overlap=50
     )
     chunks = text_splitter.split_documents(documents)
-    
+
     # 3. 向量化并存储
     vectorstore = Chroma.from_documents(
         documents=chunks,
         embedding=OpenAIEmbeddings()
     )
-    
+
     # 4. 构建检索问答链
     prompt_template = """根据以下上下文回答问题。如果你无法从上下文中找到答案，请直接说不知道。
-    
+
     上下文：
     {context}
-    
+
     问题：{question}
     """
     prompt = PromptTemplate(
         template=prompt_template,
         input_variables=["context", "question"]
     )
-    
+
     qa_chain = RetrievalQA.from_chain_type(
         llm=ChatOpenAI(model="gpt-4o-mini"),
         retriever=vectorstore.as_retriever(search_k=3),
         chain_type="stuff",
         return_source_documents=True
     )
-    
+
     # 5. 提问
     result = qa_chain.invoke({
         "query": "报告中提到的核心指标是什么？"
@@ -83,8 +82,8 @@ LangChain 是当前 AI 应用开发领域最热门的框架之一。但坦白说
 
 一句话总结：LangChain 最适合快速原型验证和中等复杂度的 LLM 应用。它降低了组合 LLM + 外部数据的门槛，但当你需要精细控制或追求极致性能时，不妨考虑更轻量的替代方案。 📖 相关推荐
 
-  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
-  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
-  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/ai/ai-art-monetization.html>)
+  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/zh/ai/mcp-protocol-guide.html>)
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/zh/ai/ai-coding-tools-comparison-2026.html>)
+  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/zh/ai/ai-art-monetization.html>)
 
-**See also:** [AI Agent 开发入门 2026：从原理到第一个智能体](</ai/ai-agent-development-2026.html>), [零代码搭建 AI 聊天机器人：客服、知识库、个人助手](</ai/no-code-ai-chatbot.html>), [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</ai/ai-coding-tools-comparison-2026.html>).
+**See also:** [AI Agent 开发入门 2026：从原理到第一个智能体](</zh/ai/ai-agent-development-2026.html>), [零代码搭建 AI 聊天机器人：客服、知识库、个人助手](</zh/ai/no-code-ai-chatbot.html>), [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</zh/ai/ai-coding-tools-comparison-2026.html>).

@@ -2,7 +2,7 @@
 title: "自动化工具集推荐"
 description: "系统整理开发运维中常用的自动化工具，涵盖CI/CD流水线、基础设施即代码、任务编排和定时任务管理等实用方案。"
 date: 2026-05-11
-board: zh/tools
+board: tools
 url: https://dingjiu1989-hue.github.io/zh/tools/automation-tools.html
 ---
 

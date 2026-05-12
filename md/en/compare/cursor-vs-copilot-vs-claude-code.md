@@ -21,7 +21,7 @@ AI coding tools have gone from "nice to have" to "mandatory for developer produc
 **Multi-file edits**|  Excellent (Composer)| Good (agent mode)| Best-in-class  
 **Terminal access**|  Built-in terminal| Via IDE terminal| Native terminal agent  
 **Code review**|  Inline suggestions| PR review (Business)| Full codebase audit  
-  
+
 ## Cursor — The AI-Native IDE
 
 Cursor is a fork of VS Code rebuilt from the ground up for AI-assisted development. Its killer feature is **Composer** — describe a feature in natural language and Cursor writes, edits, and refactors across multiple files in one go.
@@ -61,7 +61,7 @@ Full AI-native IDE experience| **Cursor**
 Deep codebase analysis and complex refactoring| **Claude Code**  
 Free option with good results| **Cursor Free + Claude Code Free**  
 Maximum productivity (cost no object)| **Copilot in IDE + Claude Code for hard problems**  
-  
+
 The optimal setup in 2026: **Cursor or Copilot for daily coding, Claude Code for code review and complex refactoring.** Many senior developers use both — IDE tool for flow, Claude Code for the hard stuff. The combined cost is $20-40/month and pays for itself in a single afternoon of saved debugging.
 
 See also: [AI-Assisted Programming Guide](</en/ai/ai-coding.html>) and [Claude vs ChatGPT comparison](</en/ai/claude-vs-chatgpt.html>).

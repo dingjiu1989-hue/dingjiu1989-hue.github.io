@@ -11,8 +11,7 @@ url: https://dingjiu1989-hue.github.io/en/tech/ci-cd-pipeline-guide.html
 A well-designed CI/CD pipeline is the difference between deploying with confidence and deploying with prayer. In 2026, modern CI/CD goes beyond "run tests and deploy" — it includes automated canary analysis, security scanning, and instant rollbacks. This guide covers the complete pipeline architecture, tool comparison, and the practices that ship code faster with fewer incidents.
 
 ## The Modern CI/CD Pipeline Stages
-    
-    
+
     Git Push
       → 1. Lint & Format (Biome, ESLint)           [<30s]
       → 2. Type Check (TypeScript, mypy)           [<60s]
@@ -36,7 +35,7 @@ GitLab CI| GitLab users, self-hosted| Free (400 min/mo), $19/user/mo| Integrated
 CircleCI| Large monorepos, high concurrency| $15/mo (6,000 min)| Fast caching, dynamic config, parallelism| More expensive at scale, less integrated than GitHub Actions  
 Buildkite| Enterprise, hybrid cloud/on-prem| $20/user/mo| Hybrid runners (your infra), unlimited concurrency| Requires managing your own build infrastructure  
 ArgoCD + Tekton| Kubernetes-native teams| Free (OSS)| GitOps native, declarative, Kubernetes-native| Complex setup, K8s expertise required  
-  
+
 ## Pipeline Optimization: The 10-Minute Rule
 
 Strategy| Time Saved| Implementation  
@@ -46,7 +45,7 @@ Dependency caching| 30-60%| Cache node_modules, pip packages, Docker layers
 Incremental builds| 40-70%| Only build/test what changed (Nx, Turborepo, Bazel)  
 Skip unnecessary runs| 20-50%| Skip CI on docs-only changes, skip deploy on non-main branches  
 Optimized Docker builds| 30-50%| Multi-stage builds, layer caching, minimal base images (distroless)  
-  
+
 ## Deployment Strategies Compared
 
 Strategy| Risk| Rollback Time| Infra Cost| Best For  
@@ -55,10 +54,9 @@ Rolling Update| Medium| 1-5 min| No extra| Stateless services, most web apps
 Blue-Green| Low| <1 min (instant switch)| 2x (two full environments)| Critical services, zero-downtime required  
 Canary| Very Low| <1 min| 1.1-1.5x| High-traffic services with good observability  
 Feature Flags| Very Low| Instant| Flag management system| Decoupling deploy from release  
-  
+
 ## GitHub Actions Pipeline Example
-    
-    
+
     # .github/workflows/ci.yml
     name: CI/CD Pipeline
     on:
@@ -66,7 +64,7 @@ Feature Flags| Very Low| Instant| Flag management system| Decoupling deploy from
         branches: [main, staging]
       pull_request:
         branches: [main]
-    
+
     jobs:
       lint-and-test:
         runs-on: ubuntu-latest
@@ -80,7 +78,7 @@ Feature Flags| Very Low| Instant| Flag management system| Decoupling deploy from
           - run: npx tsc --noEmit             # Type check
           - run: npm test -- --coverage       # Tests
           - run: npx vitest --shard=${{ matrix.shard }}/4  # Parallel
-    
+
       security:
         runs-on: ubuntu-latest
         steps:
@@ -89,7 +87,7 @@ Feature Flags| Very Low| Instant| Flag management system| Decoupling deploy from
           - run: npm audit --audit-level=high  # Dependency scan
           - uses: aquasecurity/trivy-action@master  # Container scan
             with: { scan-type: 'fs', scanners: 'vuln,secret' }
-    
+
       deploy-staging:
         needs: [lint-and-test, security]
         if: github.ref == 'refs/heads/staging'
@@ -99,7 +97,7 @@ Feature Flags| Very Low| Instant| Flag management system| Decoupling deploy from
           - run: npm run build
           - uses: cloudflare/wrangler-action@v3
             with: { environment: 'staging' }
-    
+
       deploy-production:
         needs: [lint-and-test, security]
         if: github.ref == 'refs/heads/main'

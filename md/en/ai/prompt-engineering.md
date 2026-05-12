@@ -20,33 +20,29 @@ Every effective prompt has some combination of these five elements:
   4. **Format** — How should the output look? "List each vulnerability with: location, severity, and fix."
   5. **Constraints** — What are the boundaries? "Only flag HIGH or CRITICAL severity issues. Ignore style concerns."
 
-
-
 ## Before/After: The Same Request, Different Results
 
 ### Bad Prompt
-    
-    
+
     Write a blog post about Docker.
 
 **Result:** Generic 200-word overview that reads like a Wikipedia article. Useless.
 
 ### Good Prompt
-    
-    
+
     You are a senior DevOps engineer writing for an audience of junior
     developers who have never used containers.
-    
+
     Write a blog post titled "Docker in 30 Minutes: From Zero to First
     Container." Use a friendly, conversational tone. Every concept should
     include a hands-on code example. Structure it as:
-    
+
     1. What problem Docker solves (1 paragraph)
     2. Installation (2 sentences + command)
     3. Core concepts (image, container, Dockerfile — with analogies)
     4. Your first container (step-by-step walkthrough)
     5. Common gotchas (bullet points)
-    
+
     Keep the post under 800 words. Use simple English — if a high school
     student wouldn't understand a sentence, rewrite it.
 
@@ -57,23 +53,21 @@ Every effective prompt has some combination of these five elements:
 ### 1\. Chain of Thought
 
 Ask the model to think step by step before answering. This dramatically improves accuracy on reasoning tasks:
-    
-    
+
     Q: A bat and a ball cost $1.10 total. The bat costs $1.00 more than
     the ball. How much does the ball cost?
-    
+
     Think through this step by step before giving the final answer.
 
 ### 2\. Few-Shot Prompting
 
 Show 2-3 examples of what you want:
-    
-    
+
     Convert these sentences to active voice:
-    
+
     Input: The bug was found by the QA team.
     Output: The QA team found the bug.
-    
+
     Input: The deployment was completed by the DevOps engineer.
     Output: 
 
@@ -84,8 +78,6 @@ Your first prompt rarely produces a perfect result. Use the conversation like a 
   1. Start broad: "Write a Python script that processes CSV files."
   2. Add constraints: "The CSV has headers. Skip empty lines. Handle FileNotFoundError."
   3. Refine output: "Make the error messages user-friendly. Add a progress bar."
-
-
 
 ## Common Mistakes
 

@@ -3,7 +3,7 @@ title: "AI 绘画变现指南：从出图到接单的完整路径"
 description: "手把手教你将 AI 绘画技能变现：接单平台、素材销售、自媒体涨粉、定制服务四大路径，附定价策略和接单避坑。"
 date: 2026-05-08
 board: ai
-url: https://dingjiu1989-hue.github.io/ai/ai-art-monetization.html
+url: https://dingjiu1989-hue.github.io/zh/ai/ai-art-monetization.html
 ---
 
 # AI 绘画变现指南：从出图到接单的完整路径
@@ -55,8 +55,8 @@ Upwork| 海外| 客单价更高，但需要 Pro 级别的作品集。
 
 我的建议 最稳健的起步路径：**小红书发 AI 作品 → 积累作品集和粉丝 → 同时在 Fiverr 开店 → 接单赚到第一笔钱 → 把最好的作品上传素材平台做被动收入。** 先用路径一和三赚到正反馈，再逐步扩展到路径二和四。关键是开始行动——先做出 10 张你觉得能卖的作品。 📖 相关推荐
 
-  * [Midjourney 提示词大全：从入门到进阶](<https://dingjiu1989-hue.github.io/ai/midjourney-prompts.html>)
-  * [Stable Diffusion 出图入门指南](<https://dingjiu1989-hue.github.io/ai/stable-diffusion.html>)
-  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
+  * [Midjourney 提示词大全：从入门到进阶](<https://dingjiu1989-hue.github.io/zh/ai/midjourney-prompts.html>)
+  * [Stable Diffusion 出图入门指南](<https://dingjiu1989-hue.github.io/zh/ai/stable-diffusion.html>)
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/zh/sidehustle/ai-era-side-hustles.html>)
 
-**See also:** [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</ai/ai-coding-tools-comparison-2026.html>), [MCP 协议入门：让 AI 模型安全访问你的工具和数据](</ai/mcp-protocol-guide.html>), [AI Agent 开发入门 2026：从原理到第一个智能体](</ai/ai-agent-development-2026.html>).
+**See also:** [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</zh/ai/ai-coding-tools-comparison-2026.html>), [MCP 协议入门：让 AI 模型安全访问你的工具和数据](</zh/ai/mcp-protocol-guide.html>), [AI Agent 开发入门 2026：从原理到第一个智能体](</zh/ai/ai-agent-development-2026.html>).

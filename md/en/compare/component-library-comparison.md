@@ -22,7 +22,7 @@ Headless UI (Tailwind Labs)| 15 components| Unstyled (Tailwind-friendly APIs)| R
 Ark UI (Chakra team)| 35+ components| Unstyled (CSS/data attributes)| React, Solid, Vue (soon)| Yes (individual packages)| ★★★★★| Free (MIT)  
 React Aria (Adobe)| 45+ hooks + components| Unstyled (hooks-based, bring your own CSS)| React only| Yes (tree-shakeable)| ★★★★★ (WAI-ARIA compliant)| Free (Apache 2.0)  
 Mantine| 100+ components| Styled (theme object, CSS modules)| React only| Yes (tree-shakeable)| ★★★★| Free (MIT)  
-  
+
 ## Deep Dive
 
 **shadcn/ui — The dominant paradigm.** shadcn/ui isn't a library you install — it's a collection of beautifully designed, accessible React components that you copy into your project. This means you own the source code and can modify anything. Components are built on Radix UI primitives (for accessibility) and styled with Tailwind CSS. The result: production-quality components that you can fully customize, with zero dependency churn (the code is yours). shadcn/ui has become the de facto standard for new React projects in 2026, with a massive community producing extensions (data tables, calendars, charts, AI chat components). _Best for:_ React projects where you want beautiful, accessible components without a design system's visual lock-in, teams that want to customize components deeply.
@@ -47,5 +47,5 @@ Need multi-framework support (React + Vue + Solid)| Ark UI (framework-agnostic s
 Government/healthcare/finance (accessibility critical)| React Aria (WAI-ARIA compliance, Adobe's accessibility expertise)  
 Tailwind CSS project, need core interaction components| Headless UI (official Tailwind ecosystem, seamless integration)  
 Want a complete styled library, everything included| Mantine (100+ components, great theme system, hooks)  
-  
+
 **How I choose in 2026:** For new React projects, **shadcn/ui** is the default — beautiful, accessible, and I own the code. For custom design systems, **Radix UI** provides the accessibility foundation. For enterprise accessibility requirements, **React Aria** covers the edge cases no other library handles. For internal tools that need to be built fast, **Mantine** 's 100+ components mean I write almost no custom UI code. The headless paradigm isn't just a trend — it's the correct separation of concerns: behavior (Radix/Headless UI) and presentation (Tailwind/CSS) are different concerns that should be controlled independently. See also: [Tailwind vs Bootstrap vs MUI](</en/compare/tailwind-vs-bootstrap-vs-mui.html>) for the styling framework comparison.

@@ -23,7 +23,7 @@ Alerting| Flexible (per-project, per-issue)| Very powerful (ML-based anomaly)| B
 Self-Hosted| Yes (open source, self-hosted option)| No (SaaS only)| No (SaaS only)| No (SaaS only)  
 Pricing| Free (5K errors/mo), $26/mo Team| $31/host/mo (APM)| Free (1K sessions), $69/mo Team| Free (7.5K errors/mo), $59/mo Standard  
 Best For| Most teams — best all-around| Enterprise with full observability needs| Frontend-heavy apps needing replay| Mobile app stability monitoring  
-  
+
 ## When to Choose Each Tool
 
 **Sentry — Best for:** 90% of teams. Sentry is the default error tracking tool — great SDK coverage, fair pricing, open source option, and the best balance of features. **Weak spot:** Can get expensive at scale; session replay is newer and less mature than LogRocket.
@@ -43,5 +43,5 @@ Already use Datadog for infra/APM| Datadog APM| Unified platform, single vendor
 Frontend-heavy (React/Vue), need session replay| LogRocket| Best session replay, frontend-focused  
 Mobile-first app (iOS/Android)| Bugsnag| Best mobile stability monitoring  
 Cost-sensitive small team| Sentry (self-hosted)| Free and open source  
-  
+
 **Bottom line:** Start with Sentry — it is free for small teams, open source, and covers 90% of use cases. Add LogRocket if you need session replay for frontend debugging. Only consider Datadog if you already use their ecosystem. See also: [Best Log Management Tools](</en/tools/best-log-management-tools.html>) and [Best Monitoring Tools](</en/tools/best-monitoring-tools.html>).

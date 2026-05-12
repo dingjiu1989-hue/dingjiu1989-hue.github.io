@@ -10,518 +10,318 @@ url: https://dingjiu1989-hue.github.io/en/tools/code-formatters-linters.html
 
 Code formatters and linters enforce consistent style and catch bugs before they reach production. Modern tools have evolved significantly, with Rust-based formatters offering dramatic speed improvements over earlier JavaScript-based tools.
 
-  
-
-
 ##  The Modern Tooling Stack
-
-  
-
 
 In 2026, the landscape has shifted toward unified, fast tools that combine formatting and linting:
 
-  
-
-    
-    
     JavaScript:   ESLint → Biome (migration in progress)
-    
+
     Python:       autopep8 → Ruff (fast, Rust-based)
-    
+
     Rust:         rustfmt, Clippy (built-in)
-    
+
     Go:           gofmt (official)
-    
+
     Ruby:         RuboCop
-    
+
     Swift:        SwiftFormat
-    
+
     Kotlin:       ktlint
-    
-    
-
-  
-
 
 The trend is clear: Rust-based tools are replacing slower alternatives across the ecosystem.
 
-  
-
-
 ##  JavaScript/TypeScript: Biome
-
-  
-
 
 Biome has emerged as the leading tool for JavaScript and TypeScript, unifying the roles of ESLint (linting) and Prettier (formatting).
 
-  
-
-    
-    
     # Install
-    
+
     npm install --save-dev --save-exact @biomejs/biome
-    
-    
-    
+
     # Initialize configuration
-    
+
     npx @biomejs/biome init
-    
-    
 
-  
-
-    
-    
     // biome.json
-    
+
     {
-    
+
       "$schema": "https://biomejs.dev/schemas/1.8.0/schema.json",
-    
+
       "organizeImports": {
-    
+
         "enabled": true
-    
+
       },
-    
+
       "linter": {
-    
+
         "enabled": true,
-    
+
         "rules": {
-    
+
           "recommended": true,
-    
+
           "complexity": {
-    
+
             "noUselessConstructor": "error"
-    
+
           },
-    
+
           "correctness": {
-    
+
             "noUnusedVariables": "error"
-    
+
           },
-    
+
           "style": {
-    
+
             "useConst": "error"
-    
+
           }
-    
+
         }
-    
+
       },
-    
+
       "formatter": {
-    
+
         "enabled": true,
-    
+
         "indentStyle": "space",
-    
+
         "indentWidth": 2,
-    
+
         "lineWidth": 100
-    
+
       }
-    
+
     }
-    
-    
 
-  
-
-    
-    
     # Check code
-    
+
     npx @biomejs/biome check src/
-    
-    
-    
+
     # Format code
-    
+
     npx @biomejs/biome format --write src/
-    
-    
-    
+
     # Fix lint violations
-    
+
     npx @biomejs/biome check --apply src/
-    
-    
-
-  
-
 
 Biome is 20-50x faster than Prettier and ESLint combined for most projects.
 
-  
-
-
 ### ESLint (Still Relevant)
-
-  
-
 
 For projects with extensive custom rules or older codebases, ESLint remains the standard:
 
-  
-
-    
-    
     npm init @eslint/config@latest
-    
-    
 
-  
-
-    
-    
     // eslint.config.js (flat config, v9+)
-    
+
     import js from "@eslint/js";
-    
-    
-    
+
     export default [
-    
+
       js.configs.recommended,
-    
+
       {
-    
+
         rules: {
-    
+
           "no-unused-vars": "error",
-    
+
           "no-console": "warn",
-    
+
           "prefer-const": "error",
-    
+
         },
-    
+
       },
-    
+
     ];
-    
-    
-
-  
-
 
 ESLint's flat config (v9+) simplified the configuration significantly. The ecosystem is gradually migrating, but the large plugin library still makes ESLint valuable for specialized needs.
 
-  
-
-
 ##  Python: Ruff
-
-  
-
 
 Ruff has revolutionized Python linting and formatting. Written in Rust, it is 10-100x faster than Flake8 and Black.
 
-  
-
-    
-    
     pip install ruff
-    
-    
 
-  
-
-    
-    
     # pyproject.toml
-    
+
     [tool.ruff]
-    
+
     line-length = 88
-    
+
     target-version = "py312"
-    
-    
-    
+
     [tool.ruff.lint]
-    
+
     select = ["E", "F", "I", "N", "W", "UP"]
-    
+
     ignore = ["E501"]
-    
-    
-    
+
     [tool.ruff.format]
-    
+
     quote-style = "double"
-    
+
     indent-style = "space"
-    
-    
 
-  
-
-    
-    
     # Lint
-    
+
     ruff check src/
-    
-    
-    
+
     # Format
-    
+
     ruff format src/
-    
-    
-    
+
     # Fix
-    
+
     ruff check --fix src/
-    
-    
-
-  
-
 
 Ruff replaces Flake8, isort, pyupgrade, and autopep8 with a single tool.
 
-  
-
-
 ##  Rust: rustfmt and Clippy
-
-  
-
 
 Rust's tooling is built-in and first-class:
 
-  
-
-    
-    
     # Format
-    
+
     rustfmt src/main.rs
-    
-    
-    
+
     # Lint
-    
+
     cargo clippy
-    
-    
-    
+
     # Clippy with strict checks
-    
+
     cargo clippy -- -W clippy::pedantic
-    
-    
 
-  
-
-    
-    
     # rustfmt.toml
-    
+
     max_width = 100
-    
+
     tab_spaces = 4
-    
+
     edition = "2024"
-    
-    
-
-  
-
 
 ##  Go: gofmt and Staticcheck
 
-  
-
-
 Go has the simplest approach -- `gofmt` is the official formatter, and there is no debate about style:
 
-  
-
-    
-    
     # Format (enforces the one true style)
-    
+
     gofmt -w .
-    
-    
-    
+
     # Vet for suspicious constructs
-    
+
     go vet ./...
-    
-    
-    
+
     # Staticcheck for additional linting
-    
+
     go install honnef.co/go/tools/cmd/staticcheck@latest
-    
+
     staticcheck ./...
-    
-    
-
-  
-
 
 ##  Multi-Language: pre-commit Hooks
 
-  
-
-
 Run formatters and linters automatically before every commit:
 
-  
-
-    
-    
     # .pre-commit-config.yaml
-    
+
     repos:
-    
+
       - repo: https://github.com/biomejs/pre-commit
-    
+
         rev: v0.1.0
-    
+
         hooks:
-    
+
           - id: biome-check
-    
+
             args: [--apply]
-    
-    
-    
+
       - repo: https://github.com/astral-sh/ruff-pre-commit
-    
+
         rev: v0.4.0
-    
+
         hooks:
-    
+
           - id: ruff
-    
+
             args: [--fix]
-    
-    
-    
+
       - repo: https://github.com/pre-commit/mirrors-prettier
-    
+
         rev: v3.1.0
-    
+
         hooks:
-    
+
           - id: prettier
-    
-    
-    
+
       - repo: https://github.com/pre-commit/pre-commit-hooks
-    
+
         rev: v4.6.0
-    
+
         hooks:
-    
+
           - id: trailing-whitespace
-    
+
           - id: end-of-file-fixer
-    
+
           - id: check-yaml
-    
-    
 
-  
-
-    
-    
     pip install pre-commit
-    
+
     pre-commit install
-    
-    
-
-  
-
 
 ##  Editor Integration
 
-  
-
-
 All major editors support formatters and linters via LSP:
 
-  
-
-    
-    
     // VS Code settings.json
-    
+
     {
-    
+
       "editor.formatOnSave": true,
-    
+
       "[javascript]": { "editor.defaultFormatter": "biomejs.biome" },
-    
+
       "[typescript]": { "editor.defaultFormatter": "biomejs.biome" },
-    
+
       "[python]": { "editor.defaultFormatter": "charliermarsh.ruff" }
-    
+
     }
-    
-    
-
-  
-
 
 ##  CI Integration
 
-  
-
-
 Enforce formatting and linting in CI:
 
-  
-
-    
-    
     # .github/workflows/lint.yml
-    
+
     name: Lint
-    
+
     on: [pull_request]
-    
-    
-    
+
     jobs:
-    
+
       lint:
-    
+
         runs-on: ubuntu-latest
-    
+
         steps:
-    
+
           - uses: actions/checkout@v4
-    
+
           - uses: actions/setup-node@v4
-    
+
           - run: npm ci
-    
+
           - run: npx @biomejs/biome ci src/
-    
-    
-
-  
-
 
 ##  Summary
-
-  
-
 
 The code quality tooling landscape in 2026 is defined by speed. Rust-based tools (Biome, Ruff) have displaced slower alternatives in the JavaScript and Python ecosystems. Go and Rust have official tooling that eliminates style debates. Use pre-commit hooks to enforce formatting locally and CI checks to prevent unformatted code from reaching the main branch. The key principle is automation -- manually policing code style is a waste of human attention. Let the tools handle formatting so code reviews can focus on architecture and logic.

@@ -80,7 +80,7 @@ subscription = stripe.Subscription.create(
 @app.post("/stripe/webhook")
 async def stripe_webhook(payload: bytes, sig: str):
     event = stripe.Webhook.construct_event(payload, sig, webhook_secret)
-    
+
     if event.type == "customer.subscription.updated":
         subscription = event.data.object
         # 更新数据库中的订阅状态

@@ -2,7 +2,7 @@
 title: "数据隐私保护指南"
 description: "全面解析数据隐私保护的核心原则与实践方法，涵盖GDPR合规、数据加密、匿名化处理、隐私设计和个人信息保护策略。"
 date: 2026-05-11
-board: zh/security
+board: security
 url: https://dingjiu1989-hue.github.io/zh/security/data-privacy.html
 ---
 

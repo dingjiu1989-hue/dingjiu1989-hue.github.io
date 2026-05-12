@@ -79,7 +79,7 @@ class AsyncDB:
     async def __aenter__(self):
         self.conn = await create_connection()
         return self.conn
-    
+
     async def __aexit__(self, exc_type, exc_val, exc_tb):
         await self.conn.close()
 ```

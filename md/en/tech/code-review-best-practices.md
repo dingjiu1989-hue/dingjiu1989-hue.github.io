@@ -37,21 +37,20 @@ If something is clever, elegant, or well-tested, say so. Positive feedback reinf
 ### 1\. Make Your PR Easy to Review
 
 Keep PRs small — ideally under 400 lines. Write a clear description: what problem does this solve, what approach did you choose and why, how did you test it, and are there any risks or follow-ups? Link the issue/ticket. Add screenshots or screen recordings for UI changes.
-    
-    
+
     ## What
     Adds rate limiting middleware for the API Gateway.
     Uses token bucket algorithm per API key.
-    
+
     ## Why
     We hit production last week when a misconfigured
     client sent 15K req/min. This prevents that.
-    
+
     ## Testing
     - Unit tests for bucket refill and exhaustion
     - Integration test with Redis backend
     - Load test: 10K concurrent keys, p99 < 2ms
-    
+
     ## Risks
     - Redis dependency: if Redis is down, fail open
       (allow requests rather than blocking all traffic)
@@ -77,7 +76,7 @@ Mega-PRs (>1K lines)| Reviewers skim, miss bugs, rubber-stamp| Stack smaller PRs
 Style nitpicks in review| Wastes human attention on automatable issues| Auto-formatter + linter in CI; humans focus on logic  
 Review bottleneck (one gatekeeper)| PRs queue up, velocity drops| Distribute review load; any senior dev can approve  
 Reviewing without context| Misses architectural problems| Include design doc link or 2-sentence context  
-  
+
 ## Measuring Code Review Health
 
 Track these metrics (but never use them for performance reviews — they gamify easily): **Time to first review** (target: < 4 business hours), **Time to merge** (target: < 24 hours), **PR size** (median < 300 lines), **Review depth** (comments per PR, 3+ is healthy). Tools like LinearB, CodeClimate Velocity, and GitHub's built-in insights can track these.

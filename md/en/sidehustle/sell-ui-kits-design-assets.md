@@ -20,7 +20,7 @@ Icon Sets (SVG)| $19–$79| $5,000–$30,000| Medium| No
 HTML/CSS Templates| $29–$99| $10,000–$50,000| Medium-High| No  
 React/Vue Component Libraries| $99–$399| $15,000–$60,000| High| Yes (annual license)  
 Figma Plugins| $3–$15/mo| $1,000–$15,000/mo| Medium| Yes (subscription)  
-  
+
 ## Marketplace Comparison
 
 Platform| Commission| Audience| Best For  
@@ -31,7 +31,7 @@ Creative Market| 30–50%| Designers, broad| Icons, fonts, templates — largest
 Tailwind UI| Vendor-specific| Tailwind developers| Tailwind component libraries (invite-only)  
 ThemeForest| 55–75% (exclusive)| Massive, price-sensitive| HTML templates, WordPress themes (high competition)  
 Self-Hosted (Lemon Squeezy)| 5% + $0.50| Your own| Maximum profit, but you drive all traffic  
-  
+
 ## What Makes a UI Kit Sell
 
   1. **Component count:** 50+ components minimum. The more pre-built screens and components, the higher the perceived value. Include dashboard, landing page, settings, auth, and empty states.
@@ -41,8 +41,6 @@ Self-Hosted (Lemon Squeezy)| 5% + $0.50| Your own| Maximum profit, but you drive
   5. **Documentation:** Storybook or equivalent. Component API docs with copy-paste examples. Good docs reduce support load by 80%.
   6. **Regular updates:** Publish a changelog. Buyers check "last updated" dates before purchasing.
 
-
-
 ## Revenue Example: Tailwind Component Library
 
 Month| Sales| Price| Revenue| Traffic Source  
@@ -51,5 +49,5 @@ Month| Sales| Price| Revenue| Traffic Source
 3| 45| $79| $3,555| SEO + word of mouth  
 6| 80| $99 (raised)| $7,920| SEO ranking for "Tailwind components"  
 12| 120| $99| $11,880| SEO + marketplace + newsletter  
-  
+
 **Bottom line:** UI kits and design assets are one of the highest-leverage developer side hustles — build once, sell infinitely. The key insight: developers who can code AND design are rare. If you can produce technically clean code with good design, you have less competition than either pure designers or pure developers. Start with one framework (React + Tailwind), hit 50 components, include a Figma file, and launch on Gumroad. See also: [SaaS Bootstrapping Guide](</en/sidehustle/saas-bootstrapping-guide.html>) and [Browser Extension Development](</en/sidehustle/browser-extension-development.html>).

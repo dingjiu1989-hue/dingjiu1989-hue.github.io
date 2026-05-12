@@ -157,11 +157,11 @@ plugins:
     config:
       minute: 100
       policy: local
-      
+
   - name: key-auth
     config:
       key_names: ["X-API-Key"]
-      
+
   - name: cors
     config:
       origins: ["https://app.example.com"]

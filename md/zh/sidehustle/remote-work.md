@@ -3,7 +3,7 @@ title: "远程工作平台大盘点"
 description: "盘点国内外主流远程工作平台，包括 Upwork、Toptal、电鸭社区等，自由职业者和数字游民必看。"
 date: 2026-05-08
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/sidehustle/remote-work.html
+url: https://dingjiu1989-hue.github.io/zh/sidehustle/remote-work.html
 ---
 
 # 远程工作平台大盘点
@@ -37,8 +37,8 @@ Freelancer| 项目竞标模式，价格竞争激烈| 10%
 
 📖 相关推荐
 
-  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
-  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
-  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/zh/sidehustle/ai-era-side-hustles.html>)
+  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/zh/sidehustle/affiliate-marketing.html>)
+  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/zh/sidehustle/knowledge-monetization.html>)
 
-**See also:** [AI 时代程序员的 5 个新副业机会（2026）](</sidehustle/ai-era-side-hustles.html>), [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</sidehustle/affiliate-marketing.html>), [如何把你的专业知识变成付费内容：从 0 到月入 5000](</sidehustle/knowledge-monetization.html>).
+**See also:** [AI 时代程序员的 5 个新副业机会（2026）](</zh/sidehustle/ai-era-side-hustles.html>), [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</zh/sidehustle/affiliate-marketing.html>), [如何把你的专业知识变成付费内容：从 0 到月入 5000](</zh/sidehustle/knowledge-monetization.html>).

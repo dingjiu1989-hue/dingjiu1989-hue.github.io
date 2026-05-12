@@ -20,7 +20,7 @@ Stock Videos| $15-$100 per clip| $200-$5,000/mo| Medium (video shooting + editin
 Motion Graphics / Lottie| $5-$50 per animation| $300-$5,000/mo| Medium (After Effects, Rive)  
 Code Snippets & Templates| $5-$50 per item| $200-$8,000/mo| Low for devs  
 Technical Illustrations| $10-$100 per illustration| $200-$3,000/mo| Medium (Illustrator, Figma)  
-  
+
 ## Platform Comparison for Selling Digital Media
 
 Platform| Commission| Best For| Exclusivity Required?  
@@ -31,7 +31,7 @@ Envato Market| 37-70% (exclusive vs non-exclusive)| Code, templates, motion grap
 Gumroad| 10%| Any digital product, you set the price| No  
 ArtStation| 5-12%| 3D models, game assets, concept art| No  
 Sketchfab| 30%| 3D models (best 3D viewer)| No  
-  
+
 ## What Sells Best for Developers
 
   1. **Coding/tech lifestyle photos:** Authentic developer workspace shots, coding on laptop, pair programming — high demand, low supply.
@@ -40,17 +40,14 @@ Sketchfab| 30%| 3D models (best 3D viewer)| No
   4. **3D device mockups:** Realistic 3D renders of iPhones, laptops, and tablets in isometric view — used in every SaaS landing page.
   5. **Code snippet templates:** Production-ready snippets (authentication flow, Stripe integration, file upload) that save developers hours.
 
-
-
 ## Developer-Optimized Workflow
-    
-    
+
     # Automate your stock media business
     # 1. Batch create: shoot 50 photos in a session, edit in bulk
     # 2. Metadata automation: script title/description/keyword generation
     # 3. Multi-platform upload: use each platform's API or Zapier to upload once, distribute everywhere
     # 4. Track sales: aggregate sales data from all platforms into a dashboard
-    
+
     # Key metric: earnings per asset per month
     # 100 assets × $0.50/asset/month = $50/mo
     # 500 assets × $1.00/asset/month = $500/mo

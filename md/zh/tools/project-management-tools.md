@@ -3,7 +3,7 @@ title: "2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs Cli
 description: "四大主流项目管理工具全方位横评，涵盖任务管理、自动化、AI 功能、价格，帮团队选出最佳协作平台。"
 date: 2026-05-07
 board: tools
-url: https://dingjiu1989-hue.github.io/tools/project-management-tools.html
+url: https://dingjiu1989-hue.github.io/zh/tools/project-management-tools.html
 ---
 
 # 2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp
@@ -25,8 +25,8 @@ AI 能力| Atlassian Intelligence| Linear AI（自动分派、相似问题检测
 
 避坑指南不要同时用两个项目管理工具——信息分散、更新不同步、最终两个都不用。选定一个，全团队强制使用，三个月后再评估是否要换。 📖 相关推荐
 
-  * [2026 年最佳密码管理器对比：LastPass vs 1Password vs Bitwarden](<https://dingjiu1989-hue.github.io/tools/password-manager-comparison.html>)
-  * [VS Code vs JetBrains vs Cursor：2026 年代码编辑器终极对比](<https://dingjiu1989-hue.github.io/tools/editor-comparison-2026.html>)
-  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
+  * [2026 年最佳密码管理器对比：LastPass vs 1Password vs Bitwarden](<https://dingjiu1989-hue.github.io/zh/tools/password-manager-comparison.html>)
+  * [VS Code vs JetBrains vs Cursor：2026 年代码编辑器终极对比](<https://dingjiu1989-hue.github.io/zh/tools/editor-comparison-2026.html>)
+  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/zh/tools/terminal-tools-2026.html>)
 
-**See also:** [Notion 完全使用指南：从入门到精通](</tools/notion-complete-guide.html>), [数字产品创作指南：Notion 模板、Ebook、设计素材怎么做](</sidehustle/digital-products-guide.html>), [白板/笔记/思维导图工具对比](</tools/note-apps.html>).
+**See also:** [Notion 完全使用指南：从入门到精通](</zh/tools/notion-complete-guide.html>), [数字产品创作指南：Notion 模板、Ebook、设计素材怎么做](</zh/sidehustle/digital-products-guide.html>), [白板/笔记/思维导图工具对比](</zh/tools/note-apps.html>).

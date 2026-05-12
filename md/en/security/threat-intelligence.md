@@ -10,17 +10,9 @@ url: https://dingjiu1989-hue.github.io/en/security/threat-intelligence.html
 
 Threat intelligence is evidence-based knowledge about existing or emerging threats to an organization. It transforms raw data into actionable insights that help security teams prevent attacks, detect intrusions faster, and respond more effectively. This article covers the sources, frameworks, and tools for operational threat intelligence.
 
-  
-
-
 ##  The Intelligence Lifecycle
 
-  
-
-
 Threat intelligence follows a structured lifecycle:
-
-  
 
 * **Requirements**: What do you need to know? For example, which threat actors target your industry, what TTPs they use, and what indicators to watch for.
 
@@ -34,22 +26,11 @@ Threat intelligence follows a structured lifecycle:
 
 6\. **Feedback**: Refine requirements and collection based on what was useful.
 
-  
-
-
 ##  Open Source Intelligence (OSINT)
-
-  
-
 
 OSINT is intelligence derived from publicly available sources. It is free, accessible, and provides valuable context about threats.
 
-  
-
-
 ### OSINT Sources
-
-  
 
 * **Shodan**: Search engine for internet-connected devices. Find exposed databases, industrial control systems, and vulnerable services.
 * **Censys**: Continuous internet scan data. Search for specific certificates, open ports, and protocols.
@@ -57,122 +38,75 @@ OSINT is intelligence derived from publicly available sources. It is free, acces
 * **Have I Been Pwned**: Check if email addresses or passwords appear in known breaches.
 * **GitHub**: Search for leaked credentials, API keys, or configuration files in public repositories.
 * **Telegram channels / Discord servers**: Some threat actor groups communicate openly about tactics and targets.
-  
 
-    
-    
     # OSINT example: Find exposed S3 buckets
-    
+
     curl -s "https://censys.io/api/v1/search/ipv4" \
-    
+
       -H "Content-Type: application/json" \
-    
+
       -u "$API_ID:$API_SECRET" \
-    
+
       -d '{"query": "services.service_name: S3"}'
-    
-    
-    
+
     # Check if a domain appears in breach data
-    
+
     curl -s "https://haveibeenpwned.com/api/v3/breacheddomain/example.com" \
-    
+
       -H "hibp-api-key: $API_KEY"
-    
-    
-
-  
-
 
 ##  Threat Feeds
 
-  
-
-
 Threat feeds provide structured data about known malicious indicators. Feeds range from free community lists to premium commercial services.
 
-  
-
-
 ### Types of Feeds
-
-  
 
 * **IP reputation feeds**: Lists of known malicious IP addresses (spam sources, C2 servers, scanners).
 * **Domain feeds**: Malicious domains used for phishing, malware delivery, or command and control.
 * **URL feeds**: Specific URLs hosting malware or phishing pages.
 * **Hash feeds**: File hashes (MD5, SHA256) of known malware.
 * **Behavioral feeds**: Descriptions of attacker behaviors and TTPs rather than static indicators.
-  
-
 
 ### Popular Feeds
-
-  
 
 * **AlienVault OTX**: Community-driven threat feed with thousands of pulses. Free API access.
 * **MISP (Malware Information Sharing Platform)**: Open-source platform for sharing, storing, and correlating indicators.
 * **CrowdStrike Falcon Intelligence**: Commercial feed with actor profiles and contextual enrichment.
 * **Abuse.ch**: Free feeds for malware URLs (URLhaus), C2 servers (Feodo Tracker), and ransomware domains.
-  
 
-    
-    
     # Python: Consuming AlienVault OTX feed
-    
+
     import requests
-    
-    
-    
+
     OTX_API_KEY = "your-api-key"
-    
+
     headers = {"X-OTX-API-KEY": OTX_API_KEY}
-    
-    
-    
+
     # Get latest pulses
-    
+
     response = requests.get(
-    
+
         "https://otx.alienvault.com/api/v1/pulses/subscribed",
-    
+
         headers=headers
-    
+
     )
-    
-    
-    
+
     for pulse in response.json()["results"][:5]:
-    
+
         print(f"Pulse: {pulse['name']}")
-    
+
         for indicator in pulse["indicators"][:3]:
-    
+
             print(f"  {indicator['type']}: {indicator['indicator']}")
-    
-    
-
-  
-
 
 ##  MITRE ATT&CK; Framework
 
-  
-
-
 MITRE ATT&CK; is a globally accessible knowledge base of adversary tactics and techniques based on real-world observations. It provides a common language for describing attacker behavior.
-
-  
-
 
 ### ATT&CK; Matrix
 
-  
-
-
 The framework organizes attacks into tactics (the "why") and techniques (the "how"):
-
-  
 
 * **Initial Access**: T1078 Valid Accounts, T1190 Exploit Public-Facing Application, T1566 Phishing
 * **Execution**: T1059 Command and Scripting Interpreter, T1204 User Execution
@@ -185,93 +119,53 @@ The framework organizes attacks into tactics (the "why") and techniques (the "ho
 * **Collection**: T1005 Data from Local System, T1074 Data Staged
 * **Command and Control**: T1071 Application Layer Protocol, T1573 Encrypted Channel
 * **Exfiltration**: T1041 Exfiltration Over C2 Channel, T1567 Exfiltration Over Web Service
-  
-
 
 ### Using ATT&CK; for Threat Intelligence
 
-  
-
-
 Map observed indicators and behaviors to ATT&CK; techniques to understand attacker objectives and capabilities.
 
-  
-
-    
-    
     # Threat actor profile using ATT&CK
-    
+
     threat_actor: "APT-Example"
-    
+
     motivation: "Financial gain"
-    
+
     targeted_sectors: ["Finance", "Technology"]
-    
+
     techniques_observed:
-    
+
       - T1566.001: "Spearphishing Attachment"
-    
+
       - T1204.002: "Malicious File Execution"
-    
+
       - T1059.001: "PowerShell"
-    
+
       - T1041: "Exfiltration Over C2 Channel"
-    
+
       - T1573.001: "Symmetric Encryption for C2"
-    
-    
-
-  
-
 
 Mapping to ATT&CK; helps security teams prioritize defenses and detection rules against the techniques most likely to be used against them.
 
-  
-
-
 ##  Indicators of Compromise (IoC) Sharing
-
-  
-
 
 IoC sharing enables organizations to benefit from each other's detection experiences. Effective sharing requires standardized formats and secure distribution.
 
-  
-
-
 ### IoC Types
-
-  
 
 * **Atomic indicators**: Cannot be broken down (IP address, email address, domain name).
 * **Computed indicators**: Derived from analysis (file hash, YARA rule).
 * **Behavioral indicators**: Describe patterns (network traffic patterns, registry changes).
-  
-
 
 ### Sharing Platforms
 
-  
-
 * **MISP**: Self-hosted platform for IoC management and sharing. Supports automatic correlation and feed generation.
 * **STIX/TAXII**: Standardized exchange protocols.
-  
-
 
 ##  STIX and TAXII
 
-  
-
-
 Structured Threat Information Expression (STIX) is a language for describing threat information. Trusted Automated Exchange of Intelligence Information (TAXII) is a protocol for exchanging STIX data.
 
-  
-
-
 ### STIX Objects
-
-  
-
 
 STIX 2.1 defines domain objects including:
 
@@ -281,121 +175,81 @@ STIX 2.1 defines domain objects including:
 * **Threat Actor**: Individuals or groups causing malicious events.
 * **Report**: Collections of threat intelligence.
 * **Malware**: Malicious software.
-  
 
-    
-    
     // STIX 2.1 Indicator object
-    
+
     {
-    
+
       "type": "indicator",
-    
+
       "spec_version": "2.1",
-    
+
       "id": "indicator--12345678-9abc-def0-1234-56789abcdef0",
-    
+
       "created": "2026-05-12T10:00:00Z",
-    
+
       "modified": "2026-05-12T10:00:00Z",
-    
+
       "name": "Malicious IP",
-    
+
       "pattern": "[ipv4-addr:value = '203.0.113.50']",
-    
+
       "pattern_type": "stix",
-    
+
       "valid_from": "2026-05-12T10:00:00Z",
-    
+
       "indicator_types": ["malicious-activity"]
-    
+
     }
-    
-    
-
-  
-
 
 ### TAXII Endpoints
-
-  
-
 
 TAXII defines two service types:
 
 * **Collection**: A managed feed of STIX objects that consumers can pull.
 * **Channel**: A publish-subscribe mechanism for real-time intelligence sharing.
-  
 
-    
-    
     # Fetch indicators from a TAXII collection
-    
+
     curl -s -H "Accept: application/taxii+json" \
-    
+
       -H "Authorization: Bearer $TOKEN" \
-    
+
       https://taxii.example.com/api/v2/collections/collection-id/objects/
-    
-    
-
-  
-
 
 ##  Applying Threat Intelligence
 
-  
-
-
 Operationalizing threat intelligence is the hardest part. Raw intelligence without action is just noise.
-
-  
-
 
 ### Detection Engineering
 
-  
-
-
 Create detection rules based on intel. If a threat feed shows a new C2 IP range, add a firewall block rule. If a campaign uses a specific file hash, create a YARA rule.
 
-  
-
-    
-    
     rule Example_Malware_2026 {
-    
+
       meta:
-    
+
         description = "Detects Example Malware sample"
-    
+
         author = "SOC Team"
-    
+
         date = "2026-05-12"
-    
+
         hash = "sha256:abcdef..."
-    
+
       strings:
-    
+
         $s1 = "c2.example.com" wide ascii
-    
+
         $s2 = { 6A 40 68 00 30 00 00 6A 14 }
-    
+
       condition:
-    
+
         2 of them
-    
+
     }
-    
-    
-
-  
-
 
 ### Risk Prioritization
-
-  
-
 
 Not all intelligence is equally relevant. Prioritize based on:
 
@@ -403,12 +257,7 @@ Not all intelligence is equally relevant. Prioritize based on:
 * **Veracity**: Is the intelligence from a trusted source with low false-positive rates?
 * **Actionability**: Can you do something about it? Can you block, detect, or mitigate?
 * **Timeliness**: Is the intelligence current, or is it historical noise?
-  
-
 
 ##  Conclusion
-
-  
-
 
 Threat intelligence turns raw data into defensive action. Invest in OSINT collection, subscribe to relevant threat feeds, map observations to the MITRE ATT&CK; framework, and share intelligence using STIX/TAXII standards. Most importantly, operationalize the intelligence — a feed that nobody acts on has zero security value.

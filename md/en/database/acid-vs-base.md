@@ -13,57 +13,43 @@ ACID and BASE represent opposing philosophies for database consistency. ACID gua
 ACID Properties   
 Atomicity, Consistency, Isolation, Durability:   
 
-    
-    
     -- ACID transaction example
-    
-    BEGIN TRANSACTION;
-    
-    UPDATE accounts SET balance = balance - 100 WHERE account_id = 1;
-    
-    UPDATE accounts SET balance = balance + 100 WHERE account_id = 2;
-    
-    COMMIT;
-    
-    
 
-  
+    BEGIN TRANSACTION;
+
+    UPDATE accounts SET balance = balance - 100 WHERE account_id = 1;
+
+    UPDATE accounts SET balance = balance + 100 WHERE account_id = 2;
+
+    COMMIT;
+
 BASE Properties   
 Basically Available, Soft state, Eventual consistency:   
 
-    
-    
     class EventualConsistentLedger:
-    
-        def __init__(self):
-    
-            self.pending = []
-    
-        
-    
-        def transfer(self, sender, recipient, amount):
-    
-            self.pending.append({
-    
-                "sender": sender, "recipient": recipient,
-    
-                "amount": amount, "timestamp": time.time()
-    
-            })
-    
-            return {"status": "accepted"}
-    
-        
-    
-        def reconcile(self):
-    
-            for tx in self.pending:
-    
-                self.apply_transaction(tx)
-    
-    
 
-  
+        def __init__(self):
+
+            self.pending = []
+
+        def transfer(self, sender, recipient, amount):
+
+            self.pending.append({
+
+                "sender": sender, "recipient": recipient,
+
+                "amount": amount, "timestamp": time.time()
+
+            })
+
+            return {"status": "accepted"}
+
+        def reconcile(self):
+
+            for tx in self.pending:
+
+                self.apply_transaction(tx)
+
 When to Relax ACID   
 | Requirement | ACID | BASE | |-------------|------|------| | Consistency | Strong | Eventual | | Availability | Lower | Higher | | Latency | Higher | Lower | | Use case | Financial | Analytics |   
 Conclusion   

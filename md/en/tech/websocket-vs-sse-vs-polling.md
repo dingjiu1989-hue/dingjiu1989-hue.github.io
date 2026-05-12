@@ -20,20 +20,19 @@ Real-time features — live chat, notifications, dashboards, collaborative editi
 **HTTP/2 friendly**|  N/A (upgrades from HTTP)| Yes| Yes| Yes  
 **Reconnection**|  Manual (build it)| Built-in (automatic)| Manual| Manual  
 **Complexity**|  High| Low| Lowest| Moderate  
-  
+
 ## WebSocket — Bidirectional Real-Time
 
 WebSocket is the only option when both client and server need to push messages. Use it for: chat applications, collaborative editing, multiplayer games, live auctions, trading platforms.
-    
-    
+
     // Server (using ws)
     import { WebSocketServer } from "ws";
-    
+
     const wss = new WebSocketServer({ port: 8080 });
-    
+
     wss.on("connection", (ws, req) => {
       const userId = authenticate(req);
-    
+
       ws.on("message", (data) => {
         const message = JSON.parse(data.toString());
         // Broadcast to all clients in a room
@@ -43,7 +42,7 @@ WebSocket is the only option when both client and server need to push messages. 
           }
         });
       });
-    
+
       ws.on("close", () => {
         // Handle disconnect
       });
@@ -52,28 +51,27 @@ WebSocket is the only option when both client and server need to push messages. 
 ## Server-Sent Events (SSE) — Simple Server Push
 
 SSE is simpler than WebSocket when you only need server → client updates. Built-in reconnection, works over HTTP/2, and doesn't need a special protocol. Use for: live dashboards, notification feeds, progress bars, log streaming, sports scores.
-    
-    
+
     // Server (Hono)
     app.get("/events", (c) => {
       return c.streamText(async (stream) => {
         // Send events as they happen
         stream.write(`data: ${JSON.stringify({ type: "connected" })}
-    
+
     `);
-    
+
         const interval = setInterval(async () => {
           const updates = await getUpdates();
           stream.write(`data: ${JSON.stringify(updates)}
-    
+
     `);
         }, 1000);
-    
+
         // Auto-cleanup on client disconnect
         stream.onAbort(() => clearInterval(interval));
       });
     });
-    
+
     // Client (native EventSource — zero dependencies)
     const es = new EventSource("/events");
     es.onmessage = (event) => {
@@ -84,8 +82,7 @@ SSE is simpler than WebSocket when you only need server → client updates. Buil
 ## Short Polling — Simplest, Least Efficient
 
 Client sends a request every N seconds. Simple but wasteful — most requests return empty. Only use when you can't use SSE or WebSocket (e.g., legacy infrastructure) or when data changes very infrequently.
-    
-    
+
     // Client — poll every 30 seconds
     setInterval(async () => {
       const res = await fetch("/api/updates?since=" + lastUpdate);
@@ -111,5 +108,5 @@ Notifications| **SSE** or **Web Push**|  SSE if browser is open. Web Push for ba
 Progress bar / file upload| **SSE**|  Push progress from server. Simple to implement.  
 Collaborative editing| **WebSocket** (or CRDT)| Low latency bidirectional required.  
 Simple status check| **Short Polling**|  If data changes every 5+ minutes, polling is fine.  
-  
+
 **Bottom line:** Use SSE for server→client streaming — it's simpler than WebSocket, HTTP/2 friendly, and has built-in reconnection. Use WebSocket only when you need bidirectional communication. Use polling only as a last resort. Server-Sent Events is the most underrated real-time pattern. See also: [Backend Framework Comparison](</en/compare/hono-vs-express-vs-fastify.html>) and [Edge Functions Comparison](</en/compare/cloudflare-workers-vs-lambda-vs-deno-deploy.html>).

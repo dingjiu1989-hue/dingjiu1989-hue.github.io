@@ -3,7 +3,7 @@ title: "AI Agent 开发入门 2026：从原理到第一个智能体"
 description: "AI Agent 是 2026 年最热的开发方向。本文从原理、框架选型到完整代码示例，手把手教你开发第一个能自主执行任务的 AI 智能体。"
 date: 2026-05-09
 board: ai
-url: https://dingjiu1989-hue.github.io/ai/ai-agent-development-2026.html
+url: https://dingjiu1989-hue.github.io/zh/ai/ai-agent-development-2026.html
 ---
 
 # AI Agent 开发入门 2026：从原理到第一个智能体
@@ -16,8 +16,7 @@ url: https://dingjiu1989-hue.github.io/ai/ai-agent-development-2026.html
   * **反思（Reflection）** ：检查自己的输出，发现错误后自我修正
 
 Agent 的核心架构 一个典型的 AI Agent 架构长这样：
-    
-    
+
     用户目标: "帮我研究竞品 A 的定价策略"
         ↓
     [规划模块]: 拆成 3 步：
@@ -46,12 +45,11 @@ OpenAI Agents SDK| Python| 官方出品，API 简洁，原生支持工具调用|
 Anthropic Tool Use| Python/JS| Claude 原生工具链，MCP 协议集成| 用 Claude API 的开发者  
 Vercel AI SDK| TypeScript| 前端优先，流式响应，边生成边展示| Next.js/React 开发者  
 **推荐路径** ：新手从 OpenAI Agents SDK 或 Anthropic Tool Use 开始（概念最清晰），熟悉后用 LangGraph 构建复杂工作流。 手写第一个 Agent（Python + Claude API） 不用任何框架，30 行代码理解 Agent 的核心机制：
-    
-    
+
     import anthropic
-    
+
     client = anthropic.Anthropic()
-    
+
     # 定义 Agent 能用的工具
     tools = [
         {
@@ -77,11 +75,11 @@ Vercel AI SDK| TypeScript| 前端优先，流式响应，边生成边展示| Nex
             }
         }
     ]
-    
+
     # Agent 主循环
     def run_agent(user_goal, max_steps=5):
         messages = [{"role": "user", "content": user_goal}]
-    
+
         for step in range(max_steps):
             response = client.messages.create(
                 model="claude-sonnet-4-6",
@@ -90,7 +88,7 @@ Vercel AI SDK| TypeScript| 前端优先，流式响应，边生成边展示| Nex
                 tools=tools,
                 messages=messages
             )
-    
+
             # 检查是否有工具调用
             if response.stop_reason == "tool_use":
                 for block in response.content:
@@ -108,15 +106,15 @@ Vercel AI SDK| TypeScript| 前端优先，流式响应，边生成边展示| Nex
             else:
                 # 没有工具调用 = Agent 认为任务完成了
                 return response.content[0].text
-    
+
         return "Agent 达到最大步数限制"
-    
+
     def execute_tool(name, params):
         # 实际项目中这里接真实的搜索 API / 计算器
         if name == "calculator":
             return eval(params["expression"])  # 生产环境用安全的 math parser
         return f"搜索结果: 关于 '{params['query']}' 的信息..."
-    
+
     # 使用
     result = run_agent("奔驰 E300 和宝马 530 哪个保值率高？按 3 年车龄算差价多少？")
     print(result)
@@ -138,8 +136,8 @@ Vercel AI SDK| TypeScript| 前端优先，流式响应，边生成边展示| Nex
 
 总结 AI Agent 不是一个新技术，而是一种新范式——从"人指挥 AI"变成"人定目标、AI 自己干"。2026 年这个方向的人才缺口巨大，因为每个公司都在问同一个问题："我们的工作流能不能让 AI Agent 自动化？" 这个周末可以做的事：用 Claude API + 一个真实工具（搜索/文件读写/API调用）写出你的第一个 Agent。30 行代码，你就站在了 2026 年最有价值的开发赛道起点。 📖 相关推荐
 
-  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
-  * [AI 自动化工作流实战：让 AI 替你干重复活](<https://dingjiu1989-hue.github.io/ai/ai-automation-workflow.html>)
-  * [LangChain 入门：构建你的第一个 AI 应用](<https://dingjiu1989-hue.github.io/ai/langchain-intro.html>)
+  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/zh/ai/mcp-protocol-guide.html>)
+  * [AI 自动化工作流实战：让 AI 替你干重复活](<https://dingjiu1989-hue.github.io/zh/ai/ai-automation-workflow.html>)
+  * [LangChain 入门：构建你的第一个 AI 应用](<https://dingjiu1989-hue.github.io/zh/ai/langchain-intro.html>)
 
-**See also:** [LangChain 入门：构建你的第一个 AI 应用](</ai/langchain-intro.html>), [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</ai/ai-coding-tools-comparison-2026.html>), [MCP 协议入门：让 AI 模型安全访问你的工具和数据](</ai/mcp-protocol-guide.html>).
+**See also:** [LangChain 入门：构建你的第一个 AI 应用](</zh/ai/langchain-intro.html>), [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</zh/ai/ai-coding-tools-comparison-2026.html>), [MCP 协议入门：让 AI 模型安全访问你的工具和数据](</zh/ai/mcp-protocol-guide.html>).

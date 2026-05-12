@@ -21,7 +21,7 @@ Edge functions run your code close to users worldwide. Cloudflare Workers, AWS L
 **Max execution time**|  30s (paid: 15 min with tail workers)| 15 min| 10s (request), 30s (queue)  
 **Node.js compat**|  Limited (not Node — V8 isolates)| Full Node.js| Web-standard APIs  
 **npm support**|  Limited (subset works)| Full (entire ecosystem)| Good (npm: specifier in Deno 2+)  
-  
+
 ## Cloudflare Workers — Largest Edge, Lowest Latency
 
 Cloudflare Workers run on 330+ locations worldwide. The V8 isolate model means near-zero cold starts — your code starts in microseconds, not milliseconds. The free tier (100K req/day) is extremely generous. For globally-distributed APIs, nothing beats the latency profile.
@@ -55,5 +55,5 @@ Complex app, full Node.js ecosystem| **AWS Lambda**
 Simple web-standard service, fastest deploy| **Deno Deploy**  
 Most generous free tier| **Cloudflare Workers**  
 Multi-language (Python, Go, Java)| **AWS Lambda**  
-  
+
 **Bottom line:** Cloudflare Workers for global APIs and generous free tier. AWS Lambda for complex, full-ecosystem serverless. Deno Deploy for web-standard simplicity. Each has a generous free tier — try all three for your next side project. See also: [Backend Frameworks](</en/compare/hono-vs-express-vs-fastify.html>) and [Modern PaaS Comparison](</en/compare/fly-io-vs-railway-vs-render.html>).

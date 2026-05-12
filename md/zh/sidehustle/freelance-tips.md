@@ -2,7 +2,7 @@
 title: "自由职业接单技巧"
 description: "技术自由职业者从入门到精通的实战指南，涵盖平台选择、报价策略、合同管理、客户沟通和项目交付等核心技能。"
 date: 2026-05-11
-board: zh/sidehustle
+board: sidehustle
 url: https://dingjiu1989-hue.github.io/zh/sidehustle/freelance-tips.html
 ---
 

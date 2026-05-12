@@ -10,54 +10,29 @@ url: https://dingjiu1989-hue.github.io/en/compare/fastapi-vs-flask.html
 
 ##  Introduction
 
-  
-
-
 Python offers three dominant web frameworks: Flask (the micro-framework), Django (the full-featured framework), and FastAPI (the modern, async-first framework). Each serves different needs, and understanding their strengths helps you choose the right one for your project.
-
-  
-
 
 ##  Flask
 
-  
-
-
 Flask is the veteran micro-framework, known for its simplicity and flexibility.
-
-  
-
 
 **Core philosophy:** Give developers the essentials — routing, request handling, templating — and let them choose everything else.
 
-  
-
-    
-    
     from flask import Flask, request, jsonify
-    
-    
-    
+
     app = Flask(__name__)
-    
-    
-    
+
     @app.route("/api/users/<int:user_id>", methods=["GET"])
-    
+
     def get_user(user_id):
-    
+
         user = query_db("SELECT * FROM users WHERE id = ?", [user_id])
-    
+
         if user is None:
-    
+
             return jsonify({"error": "Not found"}), 404
-    
+
         return jsonify(user)
-    
-    
-
-  
-
 
 **Strengths:**
 
@@ -65,8 +40,6 @@ Flask is the veteran micro-framework, known for its simplicity and flexibility.
 * Extreme flexibility — choose your ORM, template engine, authentication library
 * Huge ecosystem of extensions (Flask-SQLAlchemy, Flask-Login, Flask-Admin)
 * Excellent for small to medium applications
-  
-
 
 **Weaknesses:**
 
@@ -74,67 +47,44 @@ Flask is the veteran micro-framework, known for its simplicity and flexibility.
 * No built-in validation or serialization
 * "Batteries not included" means more decisions and potential inconsistencies
 * WSGI-only, cannot take full advantage of async Python
-  
-
 
 ##  Django
 
-  
-
-
 Django is the "batteries-included" framework, providing everything you need for a data-driven web application.
-
-  
-
 
 **Core philosophy:** Provide a complete, opinionated framework that handles common web development tasks out of the box.
 
-  
-
-    
-    
     # models.py
-    
+
     from django.db import models
-    
-    
-    
+
     class User(models.Model):
-    
+
         email = models.EmailField(unique=True)
-    
+
         name = models.CharField(max_length=100)
-    
+
         created_at = models.DateTimeField(auto_now_add=True)
-    
-    
-    
+
     # views.py
-    
+
     from rest_framework.decorators import api_view
-    
+
     from rest_framework.response import Response
-    
-    
-    
+
     @api_view(["GET"])
-    
+
     def get_user(request, user_id):
-    
+
         try:
-    
+
             user = User.objects.get(pk=user_id)
-    
+
             return Response({"id": user.id, "name": user.name, "email": user.email})
-    
+
         except User.DoesNotExist:
-    
+
             return Response({"error": "Not found"}, status=404)
-    
-    
-
-  
-
 
 **Strengths:**
 
@@ -142,8 +92,6 @@ Django is the "batteries-included" framework, providing everything you need for 
 * Excellent admin interface generated from models
 * Mature and battle-tested with decades of production usage
 * Large community and extensive documentation
-  
-
 
 **Weaknesses:**
 
@@ -151,61 +99,38 @@ Django is the "batteries-included" framework, providing everything you need for 
 * Steep learning curve compared to Flask
 * ORM is powerful but can be slow for complex queries
 * Async support is relatively new and not as seamless as FastAPI
-  
-
 
 ##  FastAPI
 
-  
-
-
 FastAPI is the modern contender, built around Python type hints and async/await.
-
-  
-
 
 **Core philosophy:** Maximize developer productivity and API performance through type safety, automatic documentation, and async support.
 
-  
-
-    
-    
     from fastapi import FastAPI, HTTPException
-    
+
     from pydantic import BaseModel
-    
-    
-    
+
     app = FastAPI()
-    
-    
-    
+
     class UserResponse(BaseModel):
-    
+
         id: int
-    
+
         name: str
-    
+
         email: str
-    
-    
-    
+
     @app.get("/api/users/{user_id}", response_model=UserResponse)
-    
+
     async def get_user(user_id: int):
-    
+
         user = await db.fetch_one("SELECT * FROM users WHERE id = :id", {"id": user_id})
-    
+
         if user is None:
-    
+
             raise HTTPException(status_code=404, detail="Not found")
-    
+
         return user
-    
-    
-
-  
-
 
 **Strengths:**
 
@@ -214,8 +139,6 @@ FastAPI is the modern contender, built around Python type hints and async/await.
 * Pydantic integration for request/response validation
 * Top performance (on par with Node.js and Go frameworks)
 * Modern Python features (type hints, dataclasses, async/await)
-  
-
 
 **Weaknesses:**
 
@@ -223,13 +146,8 @@ FastAPI is the modern contender, built around Python type hints and async/await.
 * Fewer third-party extensions and reusable apps
 * Less suitable for traditional server-rendered HTML applications
 * ORM choices (SQLAlchemy, Tortoise-ORM) require additional setup
-  
-
 
 ##  Comparison Table
-
-  
-
 
 | Aspect | Flask | Django | FastAPI |
 
@@ -253,33 +171,17 @@ FastAPI is the modern contender, built around Python type hints and async/await.
 
 | Best for | Small apps, APIs | Full-stack apps | High-performance APIs |
 
-  
-
-
 ##  Performance Benchmarks
 
-  
-
-
 FastAPI's async-native architecture gives it a significant performance advantage for I/O-bound workloads:
-
-  
 
 * **FastAPI** (with Uvicorn): ~10,000+ requests/second
 * **Django** (with Gunicorn): ~3,000-5,000 requests/second
 * **Flask** (with Gunicorn): ~2,000-4,000 requests/second
-  
-
 
 For CPU-bound tasks, the difference narrows since Python's GIL still applies.
 
-  
-
-
 ##  When to Choose What
-
-  
-
 
 **Choose Flask when:**
 
@@ -288,8 +190,6 @@ For CPU-bound tasks, the difference narrows since Python's GIL still applies.
 * You're building a small microservice or API
 * You value minimal overhead for simple projects
 * You're prototyping and want the fastest setup
-  
-
 
 **Choose Django when:**
 
@@ -298,8 +198,6 @@ For CPU-bound tasks, the difference narrows since Python's GIL still applies.
 * Your application has authentication, content management, and user management needs
 * You value convention over configuration
 * You're building a content management system or e-commerce platform
-  
-
 
 **Choose FastAPI when:**
 
@@ -308,12 +206,7 @@ For CPU-bound tasks, the difference narrows since Python's GIL still applies.
 * You need async support for WebSockets or streaming
 * Your API serves AI/ML models (FastAPI's async model serving is excellent)
 * You value type safety and automatic validation
-  
-
 
 ##  Conclusion
-
-  
-
 
 Flask offers simplicity and flexibility, Django provides a complete framework with everything included, and FastAPI delivers modern async performance with automatic documentation. In 2026, FastAPI is the default choice for new API projects, Django remains the best choice for full-stack applications, and Flask is still ideal for small projects and microservices where minimalism matters.

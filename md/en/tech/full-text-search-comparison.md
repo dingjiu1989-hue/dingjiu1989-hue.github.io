@@ -25,7 +25,7 @@ Query Latency| 10-100ms| 1-10ms| 5-50ms| 1-5ms
 Max Scale| Billions of documents| Millions of documents| Millions (depends on hardware)| Millions of documents  
 Operational Cost| High (dedicated cluster)| Low (single server)| None (same DB server)| Low (single server)  
 Best For| Enterprise, log analytics, massive scale| SaaS apps, developer-friendly search| Simple search, when you only have PostgreSQL| SaaS apps, instant search experiences  
-  
+
 ## When to Use What
 
 Scenario| Recommended Solution| Why  
@@ -36,26 +36,25 @@ Log analytics, SIEM, massive text corpus (1B+ docs)| Elasticsearch| Only option 
 E-commerce product search with facets| Meilisearch or Typesense| Built-in facets, typo tolerance, instant search  
 You already run Elasticsearch for logging (ELK stack)| Elasticsearch| Use existing infrastructure, operational expertise already present  
 Minimum operational overhead, small team| Meilisearch| Single binary, zero config, auto-indexing  
-  
+
 ## PostgreSQL Full-Text Search: Getting Started
-    
-    
+
     -- Enable FTS with a generated column + index
     ALTER TABLE articles ADD COLUMN search_vector tsvector
       GENERATED ALWAYS AS (
         setweight(to_tsvector('english', coalesce(title, '')), 'A') ||
         setweight(to_tsvector('english', coalesce(body, '')), 'B')
       ) STORED;
-    
+
     CREATE INDEX articles_search_idx ON articles USING GIN (search_vector);
-    
+
     -- Search with ranking
     SELECT title, ts_rank(search_vector, query) AS rank
     FROM articles, to_tsquery('english', 'postgresql & performance') query
     WHERE search_vector @@ query
     ORDER BY rank DESC
     LIMIT 20;
-    
+
     -- Limitations to know:
     -- No typo tolerance (use pg_trgm for fuzzy matching)
     -- No faceted search (implement with COUNT + GROUP BY)
@@ -73,5 +72,5 @@ Client Libraries| 35+ official SDKs| 20+ official SDKs
 Self-Hosted| Free (open source)| Free (open source)  
 Cloud| Meilisearch Cloud| Typesense Cloud  
 Best For| Developer happiness, rapid integration| Instant search (sub-10ms), high throughput  
-  
+
 **Bottom line:** Start with PostgreSQL FTS if you only need basic keyword search — it is free, already running, and handles 80% of use cases. Move to Meilisearch or Typesense when you need typo tolerance, faceted search, or instant-search UX. Only reach for Elasticsearch when you have a dedicated ops team and need to scale to billions of documents or complex aggregations. See also: [PostgreSQL Query Optimization](</en/tech/postgresql-query-optimization.html>) and [PostgreSQL vs MySQL vs SQLite](</en/compare/postgresql-vs-mysql-vs-sqlite.html>).

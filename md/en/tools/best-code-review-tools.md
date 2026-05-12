@@ -19,7 +19,7 @@ Code review is where quality happens — or doesn't. The right review tools make
 **AI review**|  Copilot PR review| GitLab Duo| In preview| No| No  
 **Inline suggestions**|  Yes (commit suggestion)| Yes| Yes| Excellent| No  
 **Review state tracking**|  Basic (requested, reviewed)| Good (approval rules)| Good| Excellent (per-file tracking)| Excellent (+1/+2 system)  
-  
+
 ## GitHub PR Reviews — The Default for Most Teams
 
 GitHub's pull request review system is the most widely used. Copilot PR review (AI) summarizes changes and suggests improvements. The "suggest changes" feature lets reviewers propose exact code edits that the author can accept with one click. Branch protection rules enforce required reviewers, status checks, and signed commits.
@@ -46,5 +46,5 @@ Standard team on GitHub| **GitHub PRs**
 Large PRs, fast shipping, stacked diffs| **Graphite**  
 Most thorough, formal review process| **Reviewable**  
 On GitLab| **GitLab MRs**  
-  
+
 **Bottom line:** GitHub PRs for most teams. Graphite if your PRs routinely exceed 500 lines (it will change how you ship). Reviewable if your industry requires rigorous review. Good code review is a habit, not a tool — the tool just makes it easier. See also: [GitHub vs GitLab vs Bitbucket](</en/compare/github-vs-gitlab-vs-bitbucket.html>) and [Git Workflows Guide](</en/tech/git-workflows-team-guide.html>).

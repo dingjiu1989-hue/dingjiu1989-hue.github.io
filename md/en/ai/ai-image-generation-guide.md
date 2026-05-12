@@ -20,7 +20,7 @@ AI image generation has matured into distinct tools for different needs. DALL-E 
 **Quality**|  Excellent (follows prompts)| Best-in-class (aesthetics)| Very good (configurable)| Good (safe, professional)  
 **Open source**|  No| No| Yes| No  
 **Commercial use**|  Yes (via API)| Yes (paid plans)| Yes (varies by model)| Yes (copyright-safe training)  
-  
+
 ## DALL-E 3 — Best Prompt Understanding
 
 DALL-E 3 understands natural language better than any other image model. Describe what you want in plain English and it just works. Via OpenAI's API, it's the easiest to integrate programmatically. It also auto-generates improved prompts from your description.
@@ -63,5 +63,5 @@ Build an AI image generation feature into your app| **Stable Diffusion API** or 
 Self-host, custom fine-tuned model| **Stable Diffusion**  
 Commercial work, copyright safety| **Adobe Firefly**  
 Best value for occasional use| **DALL-E 3** ($0.04/image, no subscription)  
-  
+
 **Bottom line:** DALL-E 3 for API-driven image generation — it's the easiest to integrate and charges per image. Midjourney for the best-looking results (but can't automate). Stable Diffusion for maximum control and self-hosting. Firefly for copyright-safe commercial work. See also: [Midjourney Prompt Guide](</en/ai/midjourney-prompts.html>) and [design tools guide](</en/tools/design-tools-for-developers.html>).

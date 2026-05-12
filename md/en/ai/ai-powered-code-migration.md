@@ -23,7 +23,7 @@ Language migration (e.g., JS → TS, Python 2 → 3)| Good — pattern matching 
 Testing migration (e.g., Jest → Vitest)| Good — similar APIs, mechanical translation| Verify test intent preserved, async behavior  
 Architecture migration (e.g., monolith → microservices)| Limited — requires system-level understanding| Boundary design, data splitting, distributed system logic  
 Database migration (e.g., MySQL → PostgreSQL)| Limited — query dialect differences| Data type mapping, performance, transactions  
-  
+
 ## The Proven Migration Workflow
 
 **Phase 1: Understand before you move.** Feed the AI the source codebase and ask it to generate: a high-level architecture overview, a list of all external dependencies and their purpose, the data flow for key operations, and any non-obvious patterns or hacks. This gives you (and the AI) a shared understanding of what you're migrating. Don't skip this — migrations fail when you don't understand what the code actually does.
@@ -50,5 +50,5 @@ Claude Code / Cursor with Agent mode| Multi-file refactoring, framework upgrades
 GitHub Copilot Workspace| Feature-level changes, issue-to-PR workflow| Spec-driven: describe the migration, AI plans and executes  
 AI-powered codemods (jscodeshift + AI)| AST-level transformations at scale| Guaranteed correctness for AST-level changes, AI helps write transforms  
 Aider| Terminal-based, incremental file migration| Edit individual files with AI, git-aware, map-reduce for large repos  
-  
+
 **Bottom line:** AI-assisted migration is real and production-ready for well-defined, mechanical migrations (JS→TS, class components→hooks, library swaps). For architectural migrations (monolith→microservices, framework changes), AI is a powerful assistant but not a replacement for human architectural judgment. The winning pattern: **incremental migration + comprehensive tests + human review of every change**. AI reduces the mechanical work by 50-80%; the human's job shifts from writing migration code to reviewing and verifying AI-generated migration code. See also: [AI Code Review Tools](</en/ai/ai-code-review-tools.html>) and [Cursor Advanced Tips](</en/ai/cursor-advanced-tips.html>).

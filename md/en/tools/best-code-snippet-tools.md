@@ -23,7 +23,7 @@ IDE Integration| No (system-level launcher)| VS Code, JetBrains, Jupyter, Obsidi
 Code Formatting| Plain text| Syntax highlighting, markdown, code blocks| Syntax highlighting, markdown| Plain text (but supports variables, dates, scripts)  
 Open Source| No (Raycast is proprietary)| Yes (Apache 2.0 for app, not cloud)| Yes (AGPL-3.0)| Yes (GPL-3.0)  
 Pricing| Free (Raycast Pro $8/mo for AI)| Free (personal), $8/mo Team| Free| Free  
-  
+
 ## When to Choose Each Tool
 
 **Raycast Snippets — Best for:** macOS developers who already use Raycast. The killer feature: press a hotkey, search snippets instantly, paste. No context switching — the snippet search is always one keystroke away. **Weak spot:** macOS only; limited to plain text snippets; no IDE integration.
@@ -43,5 +43,5 @@ Want AI-powered organization and IDE integration| Pieces| Best AI features, best
 Free, open source, clean snippet library| massCode| Free, open source, focused on snippets  
 Text expansion everywhere (all apps)| Espanso| Works system-wide, not just in code editor  
 Terminal-only snippets (commands, aliases)| Shell aliases + functions| No tool needed — ~/.zshrc or ~/.bashrc  
-  
+
 **Bottom line:** The best setup for most developers: Raycast Snippets (if on Mac) for instant snippet access + Espanso for system-wide text expansion + your IDE's built-in snippets/live templates for language-specific patterns. Pieces is worth trying for its AI-powered organization, especially if you work across multiple IDEs and want a unified snippet library. See also: [Best Terminal Emulators](</en/tools/best-terminal-emulators.html>) and [Code Editor Comparison](</en/tools/editor-comparison-2026.html>).

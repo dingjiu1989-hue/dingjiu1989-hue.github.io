@@ -2,7 +2,7 @@
 title: "Web性能优化指南"
 description: "全面覆盖前端性能优化策略，包括加载优化、渲染性能、资源压缩、缓存策略以及性能监控等核心实践方法。"
 date: 2026-05-11
-board: zh/tech
+board: tech
 url: https://dingjiu1989-hue.github.io/zh/tech/web-performance.html
 ---
 

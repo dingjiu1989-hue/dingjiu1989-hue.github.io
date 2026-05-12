@@ -22,7 +22,7 @@ Static site generators (SSGs) are the backbone of modern documentation, blogs, a
 **Markdown**|  MDX support| Goldmark (excellent)| markdown-it (configurable)| Kramdown  
 **Plugins**|  Growing (Astro integrations)| Built-in (most features included)| 400+ plugins| 300+ plugins  
 **GitHub Pages**|  Yes (GitHub Action)| Yes (native)| Yes (GitHub Action)| Native  
-  
+
 ## Astro — The Modern Standard
 
 Astro's killer feature is the Islands Architecture: ship zero JavaScript by default, hydrate only the interactive components that need it. You can use React, Vue, Svelte, or Solid components in the same project. Content Collections provide type-safe Markdown with Zod schema validation.
@@ -73,5 +73,5 @@ Complex data-driven static site| **11ty**
 Simple GitHub Pages blog| **Jekyll**  
 Mixed framework components| **Astro**  
 Fastest build, no npm| **Hugo**  
-  
+
 **Bottom line:** Astro is the best default for new projects in 2026 — modern, fast, and framework-flexible. Hugo for speed and large sites. 11ty for maximum control. Jekyll for simple GitHub Pages blogs. This site (AI Study Room) is built with a custom Python generator, but if we were starting today, Astro would be the pick. See our [hosting comparison](</en/compare/vercel-vs-netlify-vs-cloudflare.html>) for where to deploy your SSG.

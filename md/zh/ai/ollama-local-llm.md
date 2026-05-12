@@ -3,7 +3,7 @@ title: "本地运行大模型：Ollama 完全入门指南"
 description: "从安装到实战，手把手教你用 Ollama 在个人电脑上运行 Llama、Mistral、Qwen 等开源大模型，实现隐私安全的本地 AI 助手。"
 date: 2026-05-02
 board: ai
-url: https://dingjiu1989-hue.github.io/ai/ollama-local-llm.html
+url: https://dingjiu1989-hue.github.io/zh/ai/ollama-local-llm.html
 ---
 
 # 本地运行大模型：Ollama 完全入门指南
@@ -15,8 +15,7 @@ url: https://dingjiu1989-hue.github.io/ai/ollama-local-llm.html
   * **Linux：** 一行命令 `curl -fsSL https://ollama.com/install.sh | sh`，脚本会自动配置 systemd 服务和 NVIDIA 驱动检测。
 
 安装完成后在终端运行 `ollama --version` 验证是否成功。 下载并运行模型 Ollama 的核心操作只有一条命令。以下载并运行 Meta 最新开源的 Llama 3.1 8B 为例：
-    
-    
+
     ollama run llama3.1
 
 这条命令会自动下载模型（约 4.7GB 的量化版本），然后进入交互式对话模式。你可以直接打字提问，就像在跟 ChatGPT 聊天一样。 以下是几个推荐入门的模型： 模型 | 参数规模 | 磁盘占用 | 推荐内存 | 特点  
@@ -34,8 +33,7 @@ Ollama CLI 常用命令 除了 `ollama run`，还有几个命令非常常用：
   * `ollama ps` — 查看当前正在运行的模型进程。
 
 Ollama 还内置了 REST API。启动服务后，你可以用 curl 或者其他 HTTP 客户端调用模型：
-    
-    
+
     curl http://localhost:11434/api/generate -d '{
       "model": "llama3.1",
       "prompt": "用 Python 写一个快速排序",
@@ -43,8 +41,7 @@ Ollama 还内置了 REST API。启动服务后，你可以用 curl 或者其他 
     }'
 
 搭配 Open WebUI：获得 ChatGPT 般的体验 命令行虽然够用，但大多数人还是喜欢图形界面。Open WebUI（原 Ollama WebUI）是一个开源的 Web 前端，界面设计向 ChatGPT 致敬，功能却更丰富。 安装方式也极其简单：
-    
-    
+
     docker run -d -p 3000:8080 \
       -v open-webui:/app/backend/data \
       --name open-webui \
@@ -58,8 +55,8 @@ Ollama 还内置了 REST API。启动服务后，你可以用 curl 或者其他 
 
 如果你的 Mac 有 16GB 以上统一内存，Ollama + Qwen2.5 7B 的组合可以稳定输出每秒 30-50 个 Token，日常使用完全够用。Windows 用户如果有 NVIDIA 显卡（6GB+ VRAM），开启 CUDA 加速后速度会快很多。 实战：本地编码助手 我的日常使用场景是 Ollama + Continue（VS Code 插件）。Continue 是一款开源的 AI 编码插件，支持接入本地 Ollama 模型。配置完成后，在 VS Code 中选中代码按 Cmd+I 就能让本地模型帮你解释、重构或生成代码。数据全程不离开电脑，公司敏感项目也能放心使用。 本地大模型的时代已经到来。Ollama 极大地降低了门槛，让每个人都能在自己的电脑上拥有一个私有 AI。试试看吧——从 `ollama run llama3.1` 开始。 📖 相关推荐
 
-  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
-  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
-  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/ai/ai-art-monetization.html>)
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/zh/ai/ai-coding-tools-comparison-2026.html>)
+  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/zh/ai/mcp-protocol-guide.html>)
+  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/zh/ai/ai-art-monetization.html>)
 
-**See also:** [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</ai/ai-coding-tools-comparison-2026.html>), [MCP 协议入门：让 AI 模型安全访问你的工具和数据](</ai/mcp-protocol-guide.html>), [AI Agent 开发入门 2026：从原理到第一个智能体](</ai/ai-agent-development-2026.html>).
+**See also:** [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</zh/ai/ai-coding-tools-comparison-2026.html>), [MCP 协议入门：让 AI 模型安全访问你的工具和数据](</zh/ai/mcp-protocol-guide.html>), [AI Agent 开发入门 2026：从原理到第一个智能体](</zh/ai/ai-agent-development-2026.html>).

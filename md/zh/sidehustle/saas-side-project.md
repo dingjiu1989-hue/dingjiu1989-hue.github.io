@@ -2,7 +2,7 @@
 title: "独立开发SaaS副业指南"
 description: "面向独立开发者的SaaS创业全流程指南，涵盖需求验证、MVP开发、定价策略、用户获取和持续运营等关键环节。"
 date: 2026-05-11
-board: zh/sidehustle
+board: sidehustle
 url: https://dingjiu1989-hue.github.io/zh/sidehustle/saas-side-project.html
 ---
 

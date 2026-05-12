@@ -20,7 +20,7 @@ Serverless databases promise zero-downtime scaling, branching workflows, and pay
 **Edge**|  Limited| Excellent (25+ locations, embedded replicas)| Good (growing edge network)  
 **Scale to zero**|  Yes (sleeps after inactivity)| N/A (SQLite is always ready)| Yes (auto-suspend)  
 **Pricing model**|  Rows read + storage| Rows read + storage| Compute hours + storage  
-  
+
 ## PlanetScale — Git Workflows for Databases
 
 PlanetScale is built on Vitess (YouTube's MySQL scaling layer). Its killer feature: database branching. Create a branch off your production schema, make changes, open a deploy request. Schema changes are automatically checked for compatibility before merging. This eliminates "works on my machine" database issues.
@@ -54,5 +54,5 @@ Edge-heavy, globally distributed| **Turso**
 Database branching workflow| **PlanetScale** (MySQL) or **Neon** (Postgres)  
 SQLite at the edge| **Turso**  
 Most generous free tier| **PlanetScale** or **Turso**  
-  
+
 **Bottom line:** Neon for Postgres-first projects. Turso for edge/global SQLite. PlanetScale for MySQL workflows with database branching. All three have excellent free tiers — start there and scale when you need to. See also: [Database Engine Comparison](</en/compare/postgresql-vs-mysql-vs-sqlite.html>) and [Supabase vs Firebase vs Neon](</en/compare/supabase-vs-firebase-vs-neon.html>).

@@ -27,10 +27,10 @@ Spring Boot是Java生态中最成熟的微服务框架。
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-    
+
     @Autowired
     private UserService userService;
-    
+
     @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable Long id) {
         return ResponseEntity.ok(userService.findById(id));
@@ -60,10 +60,10 @@ Quarkus是为云原生和Serverless优化的Java框架，由Red Hat开发。
 ```java
 @Path("/api/users")
 public class UserResource {
-    
+
     @Inject
     UserService userService;
-    
+
     @GET
     @Path("/{id}")
     public User getUser(@PathParam Long id) {

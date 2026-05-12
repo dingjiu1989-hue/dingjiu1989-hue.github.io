@@ -21,7 +21,7 @@ BGE-M3 (BAAI)| 1,024| 63.8| 8,192| Free (OSS)| Yes
 E5-Mistral-7B-Instruct| 4,096| 66.1| 32,768| Free (OSS, needs GPU)| Yes  
 Jina embeddings v3| 1,024| 62.4| 8,192| Free (up to 1M/day)| Yes (via Jina)  
 Nomic Embed v2| 768-1,376| 62.0| 8,192| Free (OSS)| Yes  
-  
+
 ## Matryoshka Embeddings: One Model, Many Dimensions
 
 Matryoshka representation learning (MRL) lets you use a subset of the embedding dimensions without losing much quality. OpenAI's text-embedding-3-large can produce 3,072-dimension vectors — but if you only use 256 dimensions, you get 90%+ of the quality at 8% of the storage cost. This is a game-changer for vector databases: store vectors at 256 dims for initial retrieval, then re-rank candidates at full 3,072 dims. Supported by: OpenAI v3 models, Nomic Embed v2, and some open source models.
@@ -48,5 +48,5 @@ Self-hosted, want to eliminate API dependency| BGE-M3| Best open source, dense +
 Multilingual (20+ languages)| Cohere Embed v4 or BGE-M3| Both have strong multilingual benchmarks  
 Maximum quality, budget for GPU| E5-Mistral-7B-Instruct| Highest MTEB score among open models  
 Long documents (newsletters, legal, research)| Jina embeddings v3 or E5-Mistral| Best long-context (8K+) embeddings  
-  
+
 **Bottom line:** OpenAI text-embedding-3-large at 256 dimensions is the best default for 90% of projects — good enough quality, managed, and Matryoshka lets you increase dimensions later. Switch to BGE-M3 if you want to self-host and eliminate API costs. Use Cohere Embed v4 for multilingual needs. E5-Mistral is overkill for most projects but worth considering when every percentage point of search accuracy matters. See also: [RAG Best Practices](</en/ai/rag-best-practices.html>) and [Open Source LLM Comparison](</en/ai/open-source-llm-comparison.html>).

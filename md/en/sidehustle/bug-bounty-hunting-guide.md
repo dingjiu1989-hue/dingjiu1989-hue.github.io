@@ -21,7 +21,7 @@ Bugcrowd| 800+| Median 5-15 days| Strong, good documentation| Enterprise program
 Intigriti| 500+ (EU-focused)| Median 7-21 days| Growing, good for EU researchers| EU companies, GDPR-related bugs  
 YesWeHack| 400+| Median 5-20 days| European, good API programs| API security, EU/Asian companies  
 Synack Red Team| Invite-only (~100 programs)| Varies| Professional, vetted researchers| Experienced hunters, high-end enterprise  
-  
+
 ## Bug Types and Payout Ranges
 
 Bug Type| Low End| High End| Difficulty| Demand in 2026  
@@ -34,7 +34,7 @@ Authentication bypass / Account takeover| $500| $25,000| Medium-High| Very High 
 Remote Code Execution (RCE)| $1,000| $100,000+| High| High (rare but highest payouts)  
 Business Logic / Abuse| $200| $20,000| Varies| Increasing (hard to automate, human creativity wins)  
 API Authorization / Mass Assignment| $300| $12,000| Medium| High (API-first companies all have auth issues)  
-  
+
 ## Getting Started as a Developer
 
 **Your development background is your advantage.** Most successful bug bounty hunters are developers first, security researchers second. Understanding how applications are built — how auth flows work, how APIs handle state, what ORM queries look like under the hood — gives you an edge over pure security researchers who only know the attack side. The best bug hunters think like engineers debugging a system, not just attackers throwing payloads.
@@ -54,7 +54,7 @@ First 3 months| Mostly learning. Expect to find 0-1 valid bugs. You're building 
 6-12 months| Developing intuition. 3-10 bugs/month. Earnings: $1K-5K/mo. Some high-impact finds.  
 1-2 years| Professional level. 5-20 bugs/month. Earnings: $3K-20K/mo. Private invites appear.  
 2+ years| Top 1%: private programs ($500+/hr), critical bugs ($10K-100K+ each), consulting offers.  
-  
+
 **The hard truth:** Bug bounty hunting is not "easy money." The median bug bounty hunter makes less than $1,000/year. The top 1% make $100K-400K+. It's a skill-based meritocracy: your earnings directly reflect your technical depth, persistence, and methodology. The developers who succeed treat it like learning a new programming language — deliberate practice, reading other hunters' write-ups, and consistent effort over months. If you're looking for quick cash, this isn't it. If you love the puzzle of finding how systems break, there's nothing else like it.
 
 **Recommended first steps:** Read the HackerOne Hacktivity feed (public disclosed reports) daily for 2 weeks to understand what valid bugs look like. Watch the NahamSec and InsiderPhD YouTube channels for methodology. Set up your own lab (Damn Vulnerable Web Application, OWASP Juice Shop, or PortSwigger Web Security Academy — all free) and practice before touching a real program. See also: [Web Scraping Business Guide](</en/sidehustle/web-scraping-business.html>) for another technical side hustle path.

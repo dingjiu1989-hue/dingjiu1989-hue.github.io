@@ -24,7 +24,7 @@ Vector Store Integrations| 50+ (Pinecone, Chroma, Weaviate, Qdrant, etc.)| 20+ (
 LLM Providers| 60+ (OpenAI, Anthropic, Cohere, HuggingFace, etc.)| 20+ (OpenAI, Anthropic, local models via Ollama)| 15+ (OpenAI, Cohere, HuggingFace, local models)  
 Evaluation| LangSmith (commercial), basic eval callbacks| Built-in evaluators (faithfulness, relevancy, correctness)| Built-in eval (metrics, annotation tools)  
 Production Readiness| LangServe (API deployment), LangSmith (monitoring)| LlamaDeploy (beta), integrations with FastAPI| Hayhooks (API deployment), REST API baked in  
-  
+
 ## When Each Framework Wins
 
 **LangChain — Best for:** General-purpose LLM applications, especially agents that need to call multiple tools and APIs. LangChain's ecosystem (LangSmith for observability, LangServe for deployment, LangGraph for stateful agents) is the most mature. **Weak spot:** Heavy abstraction — LangChain's chain-of-abstractions makes simple things feel complex; debugging can be painful; rapid API changes.
@@ -43,5 +43,5 @@ Enterprise search/QA system| Haystack| Most mature, production-proven, reliable
 Complex PDFs with tables and charts| LlamaIndex| LlamaParse handles complex documents beautifully  
 Rapid prototyping of LLM features| LangChain| Fastest to get started, most examples online  
 Multi-step reasoning + RAG| LangChain + LlamaIndex| LangChain for agent logic, LlamaIndex for retrieval  
-  
+
 **Bottom line:** LangChain is the default for general LLM applications and agents — it has the largest ecosystem and community. LlamaIndex is superior for RAG-heavy applications where document loading and retrieval quality matter most. Haystack is the dark horse for enterprise deployments that need reliability over hype. Many teams combine LangChain (orchestration) with LlamaIndex (retrieval). See also: [AI Agents Guide](</en/ai/ai-agents-guide.html>) and [AI API Integration Guide](</en/ai/ai-api-integration-guide.html>).

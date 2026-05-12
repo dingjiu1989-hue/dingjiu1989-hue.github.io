@@ -2,7 +2,7 @@
 title: "VS Code高效使用技巧"
 description: "全面提升VS Code使用效率的技巧合集，涵盖快捷键、编辑器配置、片段定制、调试技巧和多光标编辑等实用内容。"
 date: 2026-05-11
-board: zh/tools
+board: tools
 url: https://dingjiu1989-hue.github.io/zh/tools/vscode-tips.html
 ---
 

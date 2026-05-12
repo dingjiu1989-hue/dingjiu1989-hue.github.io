@@ -10,265 +10,158 @@ url: https://dingjiu1989-hue.github.io/en/compare/tailwind-vs-bootstrap.html
 
 ##  Introduction
 
-  
-
-
 Tailwind CSS and Bootstrap represent two fundamentally different philosophies for styling web applications. Bootstrap provides pre-built components with opinionated styles. Tailwind offers low-level utility classes that you compose into custom designs. Both are widely used in 2026, and each excels in different scenarios.
-
-  
-
 
 ##  Philosophy
 
-  
-
-
 ### Bootstrap: The Component Framework
 
-  
-
-
 Bootstrap's approach is "start with a button that looks like a button, customize as needed." It provides:
-
-  
 
 * Pre-styled components (buttons, cards, navbars, modals)
 * A consistent design system out of the box
 * Responsive grid layout built in
 * JavaScript plugins for interactive components
-  
 
-    
-    
     <!-- Bootstrap component approach -->
-    
+
     <div class="card" style="width: 18rem;">
-    
+
       <img src="..." class="card-img-top" alt="...">
-    
+
       <div class="card-body">
-    
+
         <h5 class="card-title">Card Title</h5>
-    
+
         <p class="card-text">Some quick example text.</p>
-    
+
         <a href="#" class="btn btn-primary">Go somewhere</a>
-    
+
       </div>
-    
+
     </div>
-    
-    
-
-  
-
 
 ### Tailwind CSS: The Utility-First Framework
 
-  
-
-
 Tailwind's approach is "compose your design from primitive utility classes." It provides:
-
-  
 
 * Hundreds of single-purpose utility classes
 * A highly customizable design system via config
 * No pre-built components (you build everything from utilities)
 * Zero runtime — all styles are generated at build time
-  
 
-    
-    
     <!-- Tailwind utility approach -->
-    
+
     <div class="max-w-sm rounded overflow-hidden shadow-lg">
-    
+
       <img class="w-full" src="..." alt="...">
-    
+
       <div class="px-6 py-4">
-    
+
         <h5 class="font-bold text-xl mb-2">Card Title</h5>
-    
+
         <p class="text-gray-700 text-base">Some quick example text.</p>
-    
+
         <a href="#" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-    
+
           Go somewhere
-    
+
         </a>
-    
+
       </div>
-    
+
     </div>
-    
-    
-
-  
-
 
 ##  Customization
 
-  
-
-
 ### Bootstrap Customization
-
-  
-
 
 Bootstrap uses Sass variables for theming:
 
-  
-
-    
-    
     // Custom Bootstrap theme
-    
+
     $primary: #7c3aed;
-    
+
     $font-family-base: 'Inter', sans-serif;
-    
+
     $border-radius: 0.5rem;
-    
-    
-    
+
     @import "bootstrap/scss/bootstrap";
-    
-    
-
-  
-
 
 Customization requires Sass preprocessing and understanding Bootstrap's variable hierarchy. Deep customization (completely different component designs) often requires overriding substantial CSS.
 
-  
-
-
 ### Tailwind Customization
-
-  
-
 
 Tailwind uses a JavaScript config file:
 
-  
-
-    
-    
     // tailwind.config.js
-    
+
     module.exports = {
-    
+
       theme: {
-    
+
         extend: {
-    
+
           colors: {
-    
+
             brand: {
-    
+
               50: '#f5f3ff',
-    
+
               500: '#7c3aed',
-    
+
               900: '#4c1d95',
-    
+
             }
-    
+
           },
-    
+
           fontFamily: {
-    
+
             sans: ['Inter', 'sans-serif'],
-    
+
           },
-    
+
           borderRadius: {
-    
+
             'xl': '0.75rem',
-    
+
           }
-    
+
         }
-    
+
       }
-    
+
     }
-    
-    
-
-  
-
 
 Tailwind's design token system makes it easy to create completely custom designs while maintaining consistency through the config.
 
-  
-
-
 ##  Development Speed
-
-  
-
 
 **Bootstrap wins for rapid prototyping.** You can build a good-looking interface in minutes by composing pre-built components. For internal tools, admin panels, and MVPs where custom design isn't a priority, Bootstrap gets you further faster.
 
-  
-
-
 **Tailwind wins for production apps with custom designs.** Once you internalize the utility class system, you can build custom interfaces faster than writing custom CSS. The utility classes eliminate context-switching between HTML and CSS files.
-
-  
-
 
 ##  Bundle Size
 
-  
-
 * **Bootstrap full**: ~12KB compressed JavaScript + ~27KB CSS (compressed)
 * **Tailwind default**: ~15KB CSS (compressed) with purge — often smaller for actual projects since unused utilities are removed
-  
-
 
 Both are comparable in final bundle size when properly configured. Tailwind's JIT compiler ensures only used classes appear in the output.
 
-  
-
-
 ##  Ecosystem and Components
-
-  
-
 
 **Bootstrap**: Thousands of themes and templates available. Popular component libraries extend Bootstrap with date pickers, data tables, and form components.
 
-  
-
-
 **Tailwind**: A growing ecosystem of component libraries (Tailwind UI, Flowbite, DaisyUI) that provide pre-built components built with Tailwind utilities. These are typically paid or require attribution.
-
-  
-
 
 ##  Learning Curve
 
-  
-
-
 **Bootstrap**: Easy to start — add the CSS file, copy HTML examples, done. The learning curve is about learning which classes to use for which components.
-
-  
-
 
 **Tailwind**: Steeper initial learning curve. The utility class names feel foreign at first. However, the class naming is systematic — once you learn the pattern (`{property}-{value}`), you can predict most class names.
 
-  
-
-
 ##  When to Choose What
-
-  
-
 
 **Choose Bootstrap when:**
 
@@ -277,8 +170,6 @@ Both are comparable in final bundle size when properly configured. Tailwind's JI
 * Your team prefers working with pre-built components
 * You want a consistent, professional look without custom design
 * The site/app doesn't need a unique visual identity
-  
-
 
 **Choose Tailwind when:**
 
@@ -287,22 +178,11 @@ Both are comparable in final bundle size when properly configured. Tailwind's JI
 * You're building a design system from scratch
 * Your team prefers composing from utilities
 * You want the smallest possible CSS bundle
-  
-
 
 ##  Real-World Usage
 
-  
-
-
 Bootstrap powers millions of websites, especially in the WordPress ecosystem and startup MVPs. Tailwind dominates modern SaaS applications, frontend-heavy apps built with React/Vue/Svelte, and projects where design matters.
 
-  
-
-
 ##  Conclusion
-
-  
-
 
 The choice between Tailwind and Bootstrap is less about technical capability and more about workflow preference. Bootstrap gives you a head start with pre-built components at the cost of design flexibility. Tailwind gives you complete design freedom with a steeper initial learning curve. Many teams use both — Bootstrap for admin panels and prototypes, Tailwind for customer-facing applications that need custom design.

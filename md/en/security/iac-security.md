@@ -10,9 +10,6 @@ url: https://dingjiu1989-hue.github.io/en/security/iac-security.html
 
 # Infrastructure as Code Security
 
-  
-
-
 Introduction 
 
 Infrastructure as Code (IaC) enables automated, repeatable infrastructure provisioning. However, IaC also codifies security misconfigurations — a mistake in a Terraform file can propagate to thousands of resources. Securing IaC means scanning for issues before deployment, enforcing policy as code, and preventing configuration drift. 
@@ -23,960 +20,345 @@ Scan Terraform configurations for security misconfigurations before applying the
 
 checkov 
 
-  
-  
-  
-
-
 # Basic scan
-
-  
-
 
 checkov -d terraform/environments/production/
 
-  
-  
-  
-
-
 # Scan with specific framework
-
-  
-
 
 checkov -d . --framework terraform --skip-framework dockerfile
 
-  
-  
-  
-
-
 # Output in multiple formats
-
-  
-
 
 checkov -d . -o json | jq '.results.failed_checks[] | {resource: .resource, check: .check_id, severity: .severity}'
 
-  
-  
-  
-
-
 # Run in CI/CD with threshold
-
-  
-
 
 checkov -d . --soft-fail-on MEDIUM # Fail only on HIGH/CRITICAL
 
-  
-  
-  
-  
-  
-  
-  
-
-
 # Custom Checkov policy for Terraform
-
-  
-
 
 from checkov.terraform.checks.resource.base_resource_check import BaseResourceCheck
 
-  
-
-
 from checkov.common.models.enums import CheckResult
-
-  
-  
-  
-
 
 class RDSEncryptionCheck(BaseResourceCheck):
 
-  
-
-
 def __init__(self):
-
-  
-
 
 name = "Ensure RDS instances have encryption enabled"
 
-  
-
-
 id = "CKV_CUSTOM_002"
-
-  
-
 
 supported_resources = ['aws_db_instance']
 
-  
-
-
 super().__init__(name=name, id=id, supported_resources=supported_resources)
-
-  
-  
-  
-
 
 def scan_resource_conf(self, conf):
 
-  
-
-
 # Check if storage_encrypted is set to true
-
-  
-
 
 if conf.get('storage_encrypted') == [True]:
 
-  
-
-
 return CheckResult.PASSED
-
-  
-
 
 return CheckResult.FAILED
 
-  
-  
-  
-
-
 check = RDSEncryptionCheck()
-
-  
-  
-  
-  
-
 
 tfsec 
 
-  
-  
-  
-
-
 # Basic scan
-
-  
-
 
 tfsec terraform/
 
-  
-  
-  
-
-
 # Scan with custom configuration
-
-  
-
 
 tfsec . --config-file tfsec.yaml
 
-  
-  
-  
-
-
 # Generate SARIF output for GitHub Code Scanning
-
-  
-
 
 tfsec . --format sarif --out tfsec-results.sarif
 
-  
-  
-  
-
-
 # Ignore specific checks
-
-  
-
 
 tfsec . --exclude aws-s3-enable-bucket-logging,aws-s3-specify-public-access-block
 
-  
-  
-  
-  
-  
-  
-  
-
-
 # tfsec.yaml
-
-  
-
 
 exclude:
 
-  
-
-
 \- aws-s3-enable-bucket-logging
-
-  
-
 
 include:
 
-  
-
-
 \- aws-*
-
-  
-
 
 severity_threshold: HIGH
 
-  
-
-
 custom_checks:
-
-  
-
 
 \- name: custom-restrict-ssh
 
-  
-
-
 description: Security groups should not allow SSH from 0.0.0.0/0
-
-  
-
 
 impact: Open SSH access to the internet
 
-  
-
-
 severity: CRITICAL
-
-  
-
 
 match:
 
-  
-
-
 \- resource_type: aws_security_group
-
-  
-
 
 attribute_path: ingress
 
-  
-
-
 condition: >
-
-  
-
 
 any(ingress, 
 
-  
-
-
 i.from_port == 22 &&
-
-  
-
 
 any(i.cidr_blocks, c == "0.0.0.0/0")
 
-  
-
-
 )
-
-  
-  
-  
-  
-
 
 Policy as Code with Open Policy Agent 
 
 OPA allows you to write policies that enforce infrastructure standards across your IaC. 
 
-  
-  
-  
-
-
 # OPA policy for Terraform
-
-  
-
 
 package terraform.analysis
 
-  
-  
-  
-
-
 # All resources must have tags
 
-  
-
-
 deny[msg] {
-
-  
-
 
 resource := input.resource[name][_]
 
-  
-
-
 not resource.tags
-
-  
-
 
 msg = sprintf("%v %v must have tags", [name, resource.type])
 
-  
-
-
 }
-
-  
-  
-  
-
 
 # S3 buckets must be private
 
-  
-
-
 deny[msg] {
-
-  
-
 
 resource := input.resource.aws_s3_bucket[name]
 
-  
-
-
 resource.acl == "public-read"
-
-  
-
 
 msg = sprintf("S3 bucket %v must not be public", [name])
 
-  
-
-
 }
-
-  
-  
-  
-
 
 # Security groups must not have wide open ingress
 
-  
-
-
 deny[msg] {
-
-  
-
 
 sg := input.resource.aws_security_group[name]
 
-  
-
-
 rule := sg.ingress[_]
-
-  
-
 
 rule.cidr_blocks[_] == "0.0.0.0/0"
 
-  
-
-
 rule.from_port == 22
-
-  
-
 
 msg = sprintf("Security group %v allows SSH from anywhere", [name])
 
-  
-
-
 }
-
-  
-  
-  
-  
-  
-  
-  
-
 
 # Evaluate OPA policy against Terraform plan
 
-  
-
-
 terraform plan -out=plan.tfplan
-
-  
-
 
 terraform show -json plan.tfplan > plan.json
 
-  
-
-
 opa eval --data policies/ --input plan.json "data.terraform.analysis.deny"
-
-  
-  
-  
-  
-
 
 Sentinel (HashiCorp) 
 
 Sentinel is HashiCorp's policy-as-code framework for Terraform Enterprise/Cloud. 
 
-  
-  
-  
-
-
 # sentinel.hcl
-
-  
-
 
 policy "restrict-instance-type" {
 
-  
-
-
 source = "./restrict-instance-type.sentinel"
-
-  
-
 
 enforcement_level = "hard-mandatory"
 
-  
-
-
 }
-
-  
-  
-  
-
 
 policy "require-encryption" {
 
-  
-
-
 source = "./require-encryption.sentinel"
-
-  
-
 
 enforcement_level = "soft-mandatory"
 
-  
-
-
 }
-
-  
-  
-  
-  
-  
-  
-  
-
 
 # restrict-instance-type.sentinel
 
-  
-
-
 import "tfplan/v2" as tfplan
-
-  
-  
-  
-
 
 allowed_instance_types = [
 
-  
-
-
 "t3.medium",
-
-  
-
 
 "t3.large",
 
-  
-
-
 "m5.large",
-
-  
-
 
 ]
 
-  
-  
-  
-
-
 # Get all EC2 instances
-
-  
-
 
 instances = filter tfplan.resource_changes as _, rc {
 
-  
-
-
 rc.mode is "managed" and 
-
-  
-
 
 rc.type is "aws_instance" and
 
-  
-
-
 rc.change.actions contains "create"
 
-  
-
-
 }
-
-  
-  
-  
-
 
 # Check each instance
 
-  
-
-
 for _, instance in instances {
-
-  
-
 
 instance_type = instance.change.after.instance_type
 
-  
-  
-  
-
-
 if instance_type not in allowed_instance_types {
-
-  
-
 
 print("Instance type", instance_type, "not allowed")
 
-  
-
-
 return false
 
-  
-
-
 }
 
-  
-
-
 }
-
-  
-  
-  
-
 
 return true
 
-  
-  
-  
-  
-
-
 CI/CD Integration 
-
-  
-  
-  
-
 
 # GitLab CI pipeline for IaC security
 
-  
-
-
 stages:
-
-  
-
 
 \- validate
 
-  
-
-
 \- security
-
-  
-
 
 \- plan
 
-  
-
-
 \- apply
-
-  
-  
-  
-
 
 terraform-validate:
 
-  
-
-
 stage: validate
 
-  
-
-
 script:
-
-  
-
 
 \- terraform init
 
-  
-
-
 \- terraform fmt -check
-
-  
-
 
 \- terraform validate
 
-  
-  
-  
-
-
 iac-security-scan:
-
-  
-
 
 stage: security
 
-  
-
-
 script:
-
-  
-
 
 \- checkov -d . --framework terraform --skip-check CKV_AWS_126
 
-  
-
-
 \- tfsec . --no-color
-
-  
-
 
 \- opa eval --data policies/ --input plan.json "data.terraform.analysis.deny"
 
-  
-
-
 artifacts:
-
-  
-
 
 reports:
 
-  
-
-
 checkov: checkov-report.json
-
-  
-  
-  
-
 
 terraform-plan:
 
-  
-
-
 stage: plan
 
-  
-
-
 script:
-
-  
-
 
 \- terraform plan -out=plan.tfplan
 
-  
-
-
 artifacts:
-
-  
-
 
 paths:
 
-  
-
-
 \- plan.tfplan
 
-  
-
-
 only:
-
-  
-
 
 \- merge_requests
 
-  
-  
-  
-
-
 terraform-apply:
-
-  
-
 
 stage: apply
 
-  
-
-
 script:
-
-  
-
 
 \- terraform apply plan.tfplan
 
-  
-
-
 when: manual
-
-  
-
 
 only:
 
-  
-
-
 \- main
-
-  
-  
-  
-  
-
 
 Drift Detection 
 
-  
-  
-  
-
-
 # Terraform drift detection with AWS Config
-
-  
-
 
 resource "aws_config_config_rule" "required_tags" {
 
-  
-
-
 name = "required-tags"
-
-  
-  
-  
-
 
 source {
 
-  
-
-
 owner = "AWS"
-
-  
-
 
 source_identifier = "REQUIRED_TAGS"
 
-  
-
-
 }
-
-  
-  
-  
-
 
 input_parameters = jsonencode({
 
-  
-
-
 tag1Key = "Environment"
-
-  
-
 
 tag2Key = "Owner"
 
-  
-
-
 })
-
-  
-
 
 }
 
-  
-  
-  
-  
-  
-  
-  
-
-
 # Automated drift detection
-
-  
-
 
 #!/bin/bash
 
-  
-
-
 aws configservice get-compliance-details-by-config-rule \
-
-  
-
 
 \--config-rule-name required-tags \
 
-  
-
-
 \--compliance-types NON_COMPLIANT \
-
-  
-
 
 \--query 'EvaluationResults[].EvaluationResultIdentifier.EvaluationResultQualifier[].ResourceId' \
 
-  
-
-
 \--output json
-
-  
-  
-  
-  
-
 
 Conclusion 
 

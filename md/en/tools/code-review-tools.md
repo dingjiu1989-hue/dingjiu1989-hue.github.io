@@ -10,577 +10,395 @@ url: https://dingjiu1989-hue.github.io/en/tools/code-review-tools.html
 
 ##  Introduction
 
-  
-
-
 Code review is the most effective practice for improving code quality and sharing knowledge across a team. While the human element is irreplaceable, the right tools and automation can make reviews faster, more consistent, and less error-prone. This article covers the tooling landscape and best practices for effective code review at scale.
-
-  
-
 
 ##  GitHub Pull Requests
 
-  
-
-
 GitHub's PR workflow is the most widely adopted code review system:
 
-  
-
-    
-    
     # .github/PULL_REQUEST_TEMPLATE.md
-    
+
     ---
-    
+
     name: Feature Request
-    
+
     about: Describe a new feature or enhancement
-    
+
     title: "[FEATURE] "
-    
+
     ---
-    
-    
-    
+
     ## Description
-    
+
     <!-- Brief description of the changes -->
-    
-    
-    
+
     ## Type of Change
-    
+
     - [ ] Bug fix
-    
+
     - [ ] New feature
-    
+
     - [ ] Refactoring
-    
+
     - [ ] Documentation
-    
+
     - [ ] Performance improvement
-    
-    
-    
+
     ## Testing
-    
+
     - [ ] Unit tests added/updated
-    
+
     - [ ] Integration tests added/updated
-    
+
     - [ ] Manual testing completed
-    
-    
-    
+
     ## Checklist
-    
+
     - [ ] Code follows project style guidelines
-    
+
     - [ ] Self-review completed
-    
+
     - [ ] Documentation updated
-    
+
     - [ ] No new warnings introduced
-    
+
     - [ ] Breaking changes documented
-    
-    
-    
+
     ## Deployment Notes
-    
+
     <!-- Any special deployment considerations -->
-    
-    
-
-  
-
 
 ### Required Reviews via Branch Protection
 
-  
-
-    
-    
     # .github/settings.yml
-    
+
     branches:
-    
+
       - name: main
-    
+
         protection:
-    
+
           required_status_checks:
-    
+
             strict: true
-    
+
             contexts:
-    
+
               - "continuous-integration/tests"
-    
+
               - "codecov/patch"
-    
+
               - "lint"
-    
+
           required_pull_request_reviews:
-    
+
             required_approving_review_count: 2
-    
+
             dismiss_stale_reviews: true
-    
+
             require_code_owner_reviews: true
-    
+
             require_last_push_approval: true
-    
+
           restrictions:
-    
+
             users: []
-    
+
             teams: ["core-committers"]
-    
-    
-
-  
-
 
 ##  GitLab Merge Requests
 
-  
-
-
 GitLab's MR workflow includes merge trains and pipeline-integrated reviews:
 
-  
-
-    
-    
     # .gitlab/merge_request_templates/Default.md
-    
+
     ## Summary
-    
+
     <!-- Provide a summary of your changes -->
-    
-    
-    
+
     ## Related Issues
-    
+
     Closes #ISSUE_ID
-    
-    
-    
+
     ## MR Type
-    
+
     /label ~"type::feature"
-    
-    
-    
+
     ## Merge Checklist
-    
+
     - [ ] Pipeline passes
-    
+
     - [ ] Code reviewed by at least one team member
-    
+
     - [ ] Performance impact assessed
-    
+
     - [ ] Database migrations reviewed
-    
+
     - [ ] API documentation updated
-    
-    
-    
+
     ## Merge Options
-    
+
     - [ ] Squash commits
-    
+
     - [ ] Delete source branch
-    
+
     - [ ] Add to merge train
-    
-    
-
-  
-
 
 GitLab merge trains prevent broken main by serializing merges with validation:
 
-  
-
-    
-    
     # .gitlab-ci.yml
-    
+
     merge_train:
-    
+
       stage: pre-merge
-    
+
       rules:
-    
+
         - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    
+
       script:
-    
+
         - echo "Validating merge train entry"
-    
+
       environment:
-    
+
         name: merge_train
-    
-    
-
-  
-
 
 ##  Automated Review Strategies
 
-  
-
-
 ### Linting and Static Analysis
 
-  
-
-    
-    
     # .github/workflows/auto-review.yml
-    
+
     name: Automated Code Review
-    
+
     on: [pull_request]
-    
+
     jobs:
-    
+
       lint-review:
-    
+
         runs-on: ubuntu-latest
-    
+
         steps:
-    
+
           - uses: actions/checkout@v4
-    
+
           - uses: actions/setup-node@v4
-    
+
             with:
-    
+
               node-version: "20"
-    
+
           - run: npm ci
-    
-    
-    
+
           # ESLint auto-review
-    
+
           - uses: reviewdog/action-eslint@v1
-    
+
             with:
-    
+
               reporter: github-pr-review
-    
+
               level: warning
-    
+
               filter_mode: diff_context
-    
-    
-    
+
           # TypeScript type checking
-    
+
           - run: npm run type-check
-    
-    
-    
+
           # Dependency vulnerability check
-    
+
           - uses: actions/dependency-review-action@v4
-    
+
             with:
-    
+
               fail-on-severity: high
-    
-    
-    
+
           # Code complexity check
-    
+
           - name: Check complexity
-    
+
             run: |
-    
+
               npx complexity-report src/ --threshold 10
-    
-    
-
-  
-
 
 ### AI-Assisted Review
 
-  
-
-    
-    
     // Custom AI review bot (pseudo-code)
-    
+
     import { Octokit } from '@octokit/rest';
-    
-    
-    
+
     async function reviewPullRequest(owner, repo, prNumber) {
-    
+
       const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
-    
-    
-    
+
       // Get PR diff
-    
+
       const { data: diff } = await octokit.pulls.get({
-    
+
         owner, repo, pull_number: prNumber,
-    
+
         mediaType: { format: 'diff' },
-    
+
       });
-    
-    
-    
+
       // Send diff to AI for review
-    
+
       const review = await aiReview(diff);
-    
-    
-    
+
       // Submit review comments
-    
+
       await octokit.pulls.createReview({
-    
+
         owner, repo, pull_number: prNumber,
-    
+
         body: review.summary,
-    
+
         event: 'COMMENT', // or APPROVE / REQUEST_CHANGES
-    
+
         comments: review.comments.map(c => ({
-    
+
           path: c.file,
-    
+
           line: c.line,
-    
+
           body: c.comment,
-    
+
         })),
-    
+
       });
-    
+
     }
-    
-    
-
-  
-
 
 ##  Code Review Checklist
 
-  
-
-
 ### Security Review Items
 
-  
-
-    
-    
     security_checklist:
-    
+
       - "SQL injection: use parameterized queries, not string interpolation"
-    
+
       - "XSS: sanitize user input before rendering"
-    
+
       - "CSRF: verify tokens on state-changing endpoints"
-    
+
       - "Authentication: use existing auth middleware"
-    
+
       - "Authorization: verify permissions, not just authentication"
-    
+
       - "Secrets: no API keys or passwords in code"
-    
+
       - "Rate limiting: validate limits on public endpoints"
-    
-    
-
-  
-
 
 ### Performance Review Items
 
-  
-
-    
-    
     ## Performance Checklist
-    
+
     - [ ] N+1 queries eliminated?
-    
+
     - [ ] Database indexes cover new queries?
-    
+
     - [ ] Caching strategy appropriate for access pattern?
-    
+
     - [ ] Large payloads paginated or streamed?
-    
+
     - [ ] Expensive operations async or deferred?
-    
+
     - [ ] Memory leak risks from closures or event listeners?
-    
+
     - [ ] Bundle size impact for frontend changes?
-    
-    
-
-  
-
 
 ##  Review Strategies
 
-  
-
-
 ### Small PRs
-
-  
-
 
 Keep PRs under 400 lines of code. Research shows review effectiveness drops sharply beyond this threshold:
 
-  
-
-    
-    
     # Check diff size
-    
+
     git diff main...HEAD --stat
-    
-    
-    
+
     # Warn on large PRs
-    
+
     #!/bin/bash
-    
+
     CHANGES=$(git diff main...HEAD --numstat | awk '{sum+=$1+$2} END {print sum}')
-    
+
     if [ "$CHANGES" -gt 400 ]; then
-    
+
       echo "Warning: $CHANGES lines changed. Consider splitting into smaller PRs."
-    
+
     fi
-    
-    
-
-  
-
 
 ### Reviewer Rotation
 
-  
-
-    
-    
     # CODEOWNERS file for automatic reviewer assignment
-    
+
     *.ts           @team-frontend @team-backend
-    
+
     *.go           @team-backend
-    
+
     *.sql          @team-data
-    
+
     Dockerfile     @team-infra
-    
+
     *.yml          @team-infra
-    
+
     docs/*.md      @team-docs
-    
+
     dangerfile.js  @team-leads
-    
-    
-
-  
-
 
 ### Time-Bound Reviews
 
-  
-
-    
-    
     // Slack reminder for stale reviews
-    
+
     const STALE_THRESHOLD = 24 * 60 * 60 * 1000; // 24 hours
-    
-    
-    
+
     async function checkStaleReviews() {
-    
+
       const { data: pulls } = await octokit.pulls.list({
-    
+
         owner: 'my-org',
-    
+
         repo: 'my-repo',
-    
+
         state: 'open',
-    
+
       });
-    
-    
-    
+
       for (const pull of pulls) {
-    
+
         const age = Date.now() - new Date(pull.created_at).getTime();
-    
+
         if (age > STALE_THRESHOLD) {
-    
+
           await remindReviewers(pull);
-    
+
         }
-    
+
       }
-    
+
     }
-    
-    
-
-  
-
 
 ##  Performance Considerations
 
-  
-
-
 Large repositories require optimization:
 
-  
-
-    
-    
     # Git sparse checkout for faster clones
-    
+
     git clone --filter=blob:none --sparse <repo-url>
-    
+
     git sparse-checkout set services/payment
-    
-    
-    
+
     # Use git blame with ignore-revs for formatting changes
-    
+
     git blame --ignore-revs-file .git-blame-ignore-revs file.go
-    
-    
-
-  
-
 
 ##  Building a Review Culture
 
-  
-
-
 Effective code review is about culture, not just tools:
-
-  
 
 * **Review within 24 hours**: set explicit SLAs for review turnaround.
 
@@ -591,8 +409,5 @@ Effective code review is about culture, not just tools:
 4\. **Celebrate good code**: leave positive comments on well-written sections.
 
 5\. **Automate the obvious**: let linters catch style issues so humans focus on logic.
-
-  
-
 
 The goal of code review is not to catch every bug but to ensure shared understanding of the codebase and maintain a consistent quality bar across the team.

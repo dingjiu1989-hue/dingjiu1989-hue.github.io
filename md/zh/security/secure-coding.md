@@ -2,7 +2,7 @@
 title: "安全编码实践"
 description: "面向开发者的安全编码指南，涵盖输入验证、输出编码、安全处理文件上传、防止信息泄露以及常见语言的安全编码规范。"
 date: 2026-05-11
-board: zh/security
+board: security
 url: https://dingjiu1989-hue.github.io/zh/security/secure-coding.html
 ---
 

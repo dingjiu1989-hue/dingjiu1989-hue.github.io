@@ -24,7 +24,7 @@ Split Panes| Yes (blocks + tabs)| Yes| Yes (native multiplexing)| Yes (native mu
 Ligature Support| Yes| Yes (3.5+)| Yes| Yes  
 Image Display| Yes (inline)| Yes (imgcat)| Yes (icat protocol)| Yes (iterm2 protocol)  
 SSH Integration| Basic (terminal only)| Good (profiles, triggers)| Excellent (native ssh kitten)| Good (multiplexer over SSH)  
-  
+
 ## Which Terminal Fits Your Workflow?
 
 **Warp — Best for:** Developers who want a modern, AI-assisted experience out of the box. Warp's killer feature is the AI-powered command search — type what you want in natural language and Warp suggests the command. The "blocks" concept groups command input/output into navigable units. **Weak spot:** No Linux or Windows support; requires account creation for some features.
@@ -45,5 +45,5 @@ Need maximum speed| Kitty| GPU-accelerated, fastest rendering
 Work across platforms| WezTerm| True cross-platform with Lua config  
 Use SSH extensively| Kitty| Native SSH kittens solve remote pain points  
 Want pretty defaults| Warp| Best out-of-box experience  
-  
+
 **Bottom line:** If you are on a Mac, try Warp first — the AI features genuinely save time. If you prefer total control or need cross-platform, go with Kitty or WezTerm. iTerm2 remains the safest choice for established workflows. All four are free, so test each for a day before committing. See also: [Linux Commands Guide](</en/tech/linux-commands.html>) and [Best Free Dev Tools](</en/tools/best-free-dev-tools-2026.html>).

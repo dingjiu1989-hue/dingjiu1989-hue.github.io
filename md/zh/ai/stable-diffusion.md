@@ -3,7 +3,7 @@ title: "Stable Diffusion 出图入门指南"
 description: "零基础入门 Stable Diffusion，详解 Checkpoint、Sampler、Steps、CFG Scale 等核心参数，手把手教你从安装到出第一张高质量图片。"
 date: 2026-05-12
 board: ai
-url: https://dingjiu1989-hue.github.io/ai/stable-diffusion.html
+url: https://dingjiu1989-hue.github.io/zh/ai/stable-diffusion.html
 ---
 
 # Stable Diffusion 出图入门指南
@@ -22,20 +22,18 @@ AI 绘画领域三足鼎立：Midjourney 以品质著称，DALL-E 3 以理解力
 **Resolution** | 输出图片分辨率 | 512x512 / 768x768 | 超过 1024 可能导致人物崩坏；需配合高分辨率修复（Hires.fix）  
 **Seed（种子）** | 随机数种子 | -1 (随机) | 固定种子可复现结果，微调提示词时使用相同种子来对比效果  
 提示词结构：高质量出图的基础 Stable Diffusion 的提示词遵循一个经典的四段式结构：
-    
-    
+
     最佳画质, 主体描述, 环境/背景, 风格/艺术家参考, 技术参数
 
 一个实际例子：
-    
-    
+
     positive prompt:
     masterpiece, best quality, (1girl:1.2), solo, detailed face,
     beautiful detailed eyes, (flower crown:1.1), soft lighting,
     cherry blossoms in background, spring atmosphere,
     art by wlop and akihiko yoshida,
     highres, 8k, cinematic lighting, depth of field
-    
+
     negative prompt:
     worst quality, low quality, ugly, deformed, blurry,
     bad anatomy, bad hands, extra fingers, missing fingers,
@@ -50,8 +48,8 @@ CFG 7, Steps 20, Euler a, 512x512
 Checkpoint: DreamShaper, CFG 7, Steps 25, DPM++ 2M Karras, 768x768  
 结果：人物面部清晰，手部基本正常，整体构图有了氛围感。 差距出在哪？第一是 Checkpoint 的选择——基础模型对特定风格的支持远不如社区微调模型。第二是提示词的颗粒度——"樱花树下"太模糊，"petals falling, soft afternoon light"给了 AI 可执行的视觉指令。第三是负面提示词排除了最常见的劣质输出模式。 进阶建议 当你掌握了基础出图后，可以按这个顺序进阶：先学 LoRA 模型（给特定角色或风格做微调），再学 ControlNet （用姿态图、深度图控制构图），最后学 Inpainting （局部重绘修复细节）。每一步都能显著提升你的出图质量，但前提是基础参数已经掌握扎实。 📖 相关推荐
 
-  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/ai/ai-art-monetization.html>)
-  * [Midjourney 提示词大全：从入门到进阶](<https://dingjiu1989-hue.github.io/ai/midjourney-prompts.html>)
-  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
+  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/zh/ai/ai-art-monetization.html>)
+  * [Midjourney 提示词大全：从入门到进阶](<https://dingjiu1989-hue.github.io/zh/ai/midjourney-prompts.html>)
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/zh/ai/ai-coding-tools-comparison-2026.html>)
 
-**See also:** [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</ai/ai-coding-tools-comparison-2026.html>), [MCP 协议入门：让 AI 模型安全访问你的工具和数据](</ai/mcp-protocol-guide.html>), [AI Agent 开发入门 2026：从原理到第一个智能体](</ai/ai-agent-development-2026.html>).
+**See also:** [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</zh/ai/ai-coding-tools-comparison-2026.html>), [MCP 协议入门：让 AI 模型安全访问你的工具和数据](</zh/ai/mcp-protocol-guide.html>), [AI Agent 开发入门 2026：从原理到第一个智能体](</zh/ai/ai-agent-development-2026.html>).

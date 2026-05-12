@@ -10,112 +10,46 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/customer-acquisition.html
 
 Customer acquisition is the engine of any SaaS business. But with dozens of channels available, spreading yourself too thin is the fastest way to waste time and money. Here is a framework for choosing and executing the right acquisition strategies for your stage.
 
-  
-
-
 ##  Content Marketing
-
-  
-
 
 Content marketing is the highest-leverage channel for early-stage B2B SaaS. Write about problems your target customers search for. Each piece of content is an asset that compounds over time. A well-written article published today might generate leads for years.
 
-  
-
-
 Practical approach: publish two high-quality posts per week. Each should target a specific keyword with search volume between 100 and 1,000 monthly searches. Higher volume keywords are too competitive for new domains. Focus on long-tail queries like "how to calculate SaaS payback period" rather than "SaaS metrics."
-
-  
-
 
 Distribute your content on Hacker News, relevant subreddits, and LinkedIn. Repurpose long-form content into Twitter threads and LinkedIn posts. Most of your traffic will come from a handful of articles, so double down on what works.
 
-  
-
-
 ##  SEO
-
-  
-
 
 SEO complements content marketing but requires patience. Technical SEO foundations matter: fast page load speeds, proper heading structure, descriptive meta titles, and clean URL slugs. Use a tool like Ahrefs or Semrush to find keyword gaps.
 
-  
-
-
 Build backlinks through guest posting on industry blogs, contributing to open-source projects, and creating linkable assets like free tools, benchmarks, or original research. A single high-quality backlink from a domain authority above 60 is worth more than fifty low-quality directory links.
-
-  
-
 
 Remember that SEO is a six-to-twelve-month play. Do not rely on it for immediate traction. Build it alongside shorter-term channels.
 
-  
-
-
 ##  Paid Ads
-
-  
-
 
 Paid acquisition works best when you know your unit economics. If your LTV to CAC ratio is above 3:1 and you have payback period under 12 months, you can scale with ads. If you do not know these numbers, advertising is gambling.
 
-  
-
-
 Start with Google Ads for intent-based searches. Someone searching "project management software for agencies" has a clear problem. Your ad can offer a solution directly. Facebook and LinkedIn ads work for brand awareness and retargeting but have lower intent.
-
-  
-
 
 Set strict daily budgets. A common mistake is spending $50 per day on five different campaigns. Concentrate that budget on one well-targeted campaign and optimize before expanding.
 
-  
-
-
 ##  Strategic Partnerships
-
-  
-
 
 Partnerships are an underrated channel for B2B SaaS. Integrate with complementary products and cross-promote to each other's user bases. A project management tool could partner with a time tracking app, a CRM, and a documentation platform.
 
-  
-
-
 Build an integration marketplace early. Even if you only have three integrations, listing them creates partnership opportunities. Most platforms have affiliate programs that pay 20-30% recurring commission.
-
-  
-
 
 ##  Product-Led Growth
 
-  
-
-
 PLG means letting the product sell itself through free tiers, trials, or usage-based entry points. Slack, Zoom, and Notion all grew through PLG because users could adopt them without talking to sales.
-
-  
-
 
 For PLG to work, your product must deliver value within minutes of signup. If setup takes more than 15 minutes or requires training, PLG will not work. Measure time-to-value and optimize ruthlessly.
 
-  
-
-
 PLG works best for products with low switching costs and viral loops. A collaboration tool benefits when users invite teammates. A backend API does not have the same network effects.
-
-  
-
 
 ##  Channel Selection by Stage
 
-  
-
-
 Pre-revenue: content marketing, community building, founder-led sales. Under $10k MRR: content, SEO, one paid channel, partnerships. $10k to $100k MRR: scale what works, add one experimental channel per quarter. Above $100k MRR: build a dedicated growth team and run multiple channels in parallel.
-
-  
-
 
 The key insight is that most startups fail not because they picked the wrong channel, but because they gave up too early. Pick two channels, commit to them for six months, measure rigorously, then decide.

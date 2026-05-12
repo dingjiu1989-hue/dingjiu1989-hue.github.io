@@ -79,7 +79,7 @@ groups:
     annotations:
       summary: "实例 {{ $labels.instance }} CPU使用率超过80%"
       description: "CPU使用率当前为 {{ $value }}%"
-  
+
   - alert: DiskSpaceLow
     expr: (node_filesystem_avail_bytes / node_filesystem_size_bytes) < 0.1
     for: 2m

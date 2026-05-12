@@ -3,7 +3,7 @@ title: "数字产品创作指南：Notion 模板、Ebook、设计素材怎么做
 description: "手把手教你创作和销售数字产品——Notion 模板、电子书、设计素材等，一次创作持续变现的被动收入模式。"
 date: 2026-05-10
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/sidehustle/digital-products-guide.html
+url: https://dingjiu1989-hue.github.io/zh/sidehustle/digital-products-guide.html
 ---
 
 # 数字产品创作指南：Notion 模板、Ebook、设计素材怎么做
@@ -35,8 +35,8 @@ Notion 模板| $5-$50| 低| 项目管理、日记、知识库模板
 
 持续收入的核心 数字产品的难点不是制作，而是被看到。把 50% 的时间花在营销上——在社交媒体分享你的创作过程和使用技巧，这些内容本身就是最好的广告。 📖 相关推荐
 
-  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
-  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
-  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/zh/sidehustle/ai-era-side-hustles.html>)
+  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/zh/sidehustle/affiliate-marketing.html>)
+  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/zh/sidehustle/knowledge-monetization.html>)
 
-**See also:** [Notion 完全使用指南：从入门到精通](</tools/notion-complete-guide.html>), [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](</tools/project-management-tools.html>), [白板/笔记/思维导图工具对比](</tools/note-apps.html>).
+**See also:** [Notion 完全使用指南：从入门到精通](</zh/tools/notion-complete-guide.html>), [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](</zh/tools/project-management-tools.html>), [白板/笔记/思维导图工具对比](</zh/tools/note-apps.html>).

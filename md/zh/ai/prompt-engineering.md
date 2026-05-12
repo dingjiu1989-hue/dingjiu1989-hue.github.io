@@ -3,7 +3,7 @@ title: "ChatGPT 提示词工程入门：从新手到高手"
 description: "系统学习提示词工程的核心方法论，掌握角色设定、任务描述、格式约束、示例引导五大要素，用真实案例对比展示好提示词与坏提示词的本质区别。"
 date: 2026-05-07
 board: ai
-url: https://dingjiu1989-hue.github.io/ai/prompt-engineering.html
+url: https://dingjiu1989-hue.github.io/zh/ai/prompt-engineering.html
 ---
 
 # ChatGPT 提示词工程入门：从新手到高手
@@ -16,22 +16,20 @@ url: https://dingjiu1989-hue.github.io/ai/prompt-engineering.html
 **约束（Constraints）** | 设置边界条件，过滤不需要的内容 | "不超过 200 字，不要用专业术语"  
 **示例（Examples）** | 给出 1-3 个参考，让 AI 理解期望的质量标准 | "参考这个例子改写：<原文>→<改后>"  
 坏提示词 vs 好提示词：真实对比 来看一个业务场景：团队需要为新的用户系统编写 API 文档。 **坏提示词：**
-    
-    
+
     帮我写一段 API 文档。
 
 ChatGPT 通常会输出一段泛泛的、只有一两个端点的 Markdown 文档，格式随模型心情而定，关键信息（认证方式、错误码、限流策略）统统缺失。 **好提示词：**
-    
-    
+
     你是一位资深 API 技术写手。请为以下用户系统的 API 编写文档。
-    
+
     要求：
     1. 格式采用 OpenAPI 3.0 规范（YAML）
     2. 至少包含：登录、注册、获取用户信息、更新资料 4 个端点
     3. 每个端点需标注：请求方法、URL、请求体参数、响应结构、错误码
     4. 认证方式使用 Bearer Token，请在 Security 部分定义
     5. 每条错误响应附带一个真实的错误示例
-    
+
     API 接口列表：
     - POST /api/v1/auth/login
     - POST /api/v1/auth/register
@@ -39,17 +37,15 @@ ChatGPT 通常会输出一段泛泛的、只有一两个端点的 Markdown 文�
     - PATCH /api/v1/users/profile
 
 好提示词的输出不需要二次返工，直接可用或者只需要微调细节。 思维链（Chain-of-Thought） 思维链是目前最有效的提示词技巧之一。核心思想是引导模型在给出最终答案之前，先展示推理过程。这特别适用于逻辑推理、数学计算、数据分析等场景。 **不使用思维链：**
-    
-    
+
     Q: 小明有 3 个苹果，小红有 5 个，他们一共有几个？
     A: 8 个。
 
 **使用思维链：**
-    
-    
+
     Q: 小明有 3 个苹果，小红有 5 个，他们一共有几个？
     A: 小明有 3 个苹果，小红有 5 个苹果。3 + 5 = 8。所以他们一共有 8 个苹果。
-    
+
     Q: 一个长方形的长是 8 米，宽是 4 米，求它的周长。
     A:
 
@@ -63,8 +59,8 @@ ChatGPT 通常会输出一段泛泛的、只有一两个端点的 Markdown 文�
 
 写在最后 提示词工程不是玄学，而是一套可复用的沟通方法论。它的本质是降低模型的猜测空间，让你的意图以最精确的方式传递过去。掌握这五大要素和思维链技巧，你的 ChatGPT 使用效率至少提升 3 倍。后续的文章中，我们还会深入讨论角色扮演、少样本学习、提示词模板管理等进阶话题。 📖 相关推荐
 
-  * [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](<https://dingjiu1989-hue.github.io/ai/claude-vs-chatgpt.html>)
-  * [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](<https://dingjiu1989-hue.github.io/ai/chatgpt-plus-worth.html>)
-  * [如何用 AI 写高质量原创文章](<https://dingjiu1989-hue.github.io/ai/ai-writing.html>)
+  * [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](<https://dingjiu1989-hue.github.io/zh/ai/claude-vs-chatgpt.html>)
+  * [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](<https://dingjiu1989-hue.github.io/zh/ai/chatgpt-plus-worth.html>)
+  * [如何用 AI 写高质量原创文章](<https://dingjiu1989-hue.github.io/zh/ai/ai-writing.html>)
 
-**See also:** [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](</ai/claude-vs-chatgpt.html>), [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](</ai/chatgpt-plus-worth.html>), [AI 自动化工作流实战：让 AI 替你干重复活](</ai/ai-automation-workflow.html>).
+**See also:** [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](</zh/ai/claude-vs-chatgpt.html>), [ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比](</zh/ai/chatgpt-plus-worth.html>), [AI 自动化工作流实战：让 AI 替你干重复活](</zh/ai/ai-automation-workflow.html>).

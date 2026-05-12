@@ -21,7 +21,7 @@ Target market is a niche, not "everyone"| Easier to market, less competition, hi
 Can be built in 4-6 weeks solo| If it needs a team and 12 months, it's not a bootstrapped MVP  
 Monthly recurring revenue model| Predictable income. One-time purchases are harder to sustain  
 Customers already pay for similar tools| If nobody pays for a similar solution, there's probably no market  
-  
+
 ### Where to Find SaaS Ideas
 
   * **Your own workflow.** What repetitive task do you automate with a custom script? That script is probably a product.
@@ -29,8 +29,6 @@ Customers already pay for similar tools| If nobody pays for a similar solution, 
   * **Browse "Alternatives to X" queries.** Tools with unhappy users are opportunities.
   * **Indie Hackers and Hacker News.** See what solo founders are building and look for adjacent problems.
   * **Reddit pain points.** Search for "I wish there was a tool that..." or "frustrated with [tool]"
-
-
 
 ## Phase 2: Validate Before You Build (Week 2-3)
 
@@ -40,8 +38,6 @@ The #1 mistake: building for 6 months before showing anyone. Instead:
   2. **Talk to 10 potential customers.** Not friends or family. Actual people in your target market. Ask: "What do you currently use to solve this problem? What would make you switch?"
   3. **Get 50 email signups.** Post your landing page on relevant Reddit communities, Twitter, LinkedIn, and niche forums. If you can't get 50 people to give you their email, you haven't found a painful enough problem.
   4. **Pre-sell if possible.** Offer a 50% lifetime discount for the first 20 customers who pay before launch. Pre-sales validate that people will actually open their wallets.
-
-
 
 ## Phase 3: Build the MVP (Week 3-7)
 
@@ -56,7 +52,7 @@ Auth| Clerk / Supabase Auth / Lucia| Don't build auth from scratch
 Payments| Stripe + Lemon Squeezy| Stripe for flexibility, LS for simplicity + tax handling  
 Hosting| Vercel / Railway / Fly.io| Free tier for MVP, scales when needed  
 Email| Resend / Loops / Postmark| Transactional + marketing emails  
-  
+
 ### What to Include in the MVP
 
 Ship the smallest thing someone will pay for:
@@ -66,8 +62,6 @@ Ship the smallest thing someone will pay for:
   * Payment integration (Stripe Checkout is fine)
   * A simple onboarding flow (2-3 steps max)
   * Basic error messages and loading states
-
-
 
 Skip: user analytics dashboards, team features, custom domains, white-label, detailed documentation, and anything "nice to have."
 
@@ -79,8 +73,6 @@ Skip: user analytics dashboards, team features, custom domains, white-label, det
   4. **Reach out to your pre-launch email list.** These people already expressed interest. Offer them a launch-week discount.
   5. **Engage in relevant communities.** Not by spamming your link, but by genuinely helping people and mentioning your tool only when it directly solves their stated problem.
 
-
-
 ## Phase 5: Pricing That Works
 
 Tier| Price| Purpose  
@@ -88,7 +80,7 @@ Tier| Price| Purpose
 Free| $0| Get users in the door. Generous enough to be useful, limited enough to upgrade  
 Pro| $15-49/mo| Your main revenue tier. Where most individual users land  
 Team/Business| $49-199/mo| For companies. Usually 2-5x the Pro price  
-  
+
 Charge monthly by default, offer a 20-30% discount for annual plans. Annual customers have much lower churn — if your monthly churn is 5%, your annual churn on the same product might be only 20-30% (vs. 46% if everyone was monthly).
 
 ## Common Bootstrapping Mistakes

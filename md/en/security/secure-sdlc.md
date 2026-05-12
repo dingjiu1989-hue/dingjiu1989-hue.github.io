@@ -10,9 +10,6 @@ url: https://dingjiu1989-hue.github.io/en/security/secure-sdlc.html
 
 # Secure Software Development Lifecycle
 
-  
-
-
 What Is Secure SDLC? 
 
 Secure Software Development Lifecycle (Secure SDLC) is the practice of integrating security activities into every phase of the software development process, rather than treating security as a separate phase or an afterthought. The goal is to identify and fix vulnerabilities as early as possible when they are cheapest to remediate. 
@@ -27,55 +24,21 @@ Phase 1: Requirements and Planning
 
 Security Requirements Gathering 
 
-  
-  
-  
-
-
 ### Security Requirements Template
-
-  
-  
-  
-
 
 **Feature:** User Authentication
 
-  
-
-
 **Security Requirements:**
-
-  
-
 
 \- [SR-001] Passwords must be hashed with Argon2id
 
-  
-
-
 \- [SR-002] Rate limit login attempts to 5 per 15 minutes
-
-  
-
 
 \- [SR-003] MFA must be available for all accounts
 
-  
-
-
 \- [SR-004] Session tokens must expire after 15 minutes
 
-  
-
-
 \- [SR-005] Failed login attempts must be logged to SIEM
-
-  
-  
-  
-  
-
 
 Abuse Case Development 
 
@@ -91,662 +54,249 @@ Threat Modeling with STRIDE
 
 Creating a Threat Model 
 
-  
-  
-  
-
-
 # Structured threat model entry
-
-  
-
 
 threat_model = {
 
-  
-
-
 "id": "TM-001",
-
-  
-
 
 "feature": "Payment Processing",
 
-  
-
-
 "diagram": "https://miro.com/board/payment-flow",
-
-  
-
 
 "entries": [
 
-  
-
-
 {
-
-  
-
 
 "threat": "Credit card data intercepted in transit",
 
-  
-
-
 "category": "Information Disclosure",
-
-  
-
 
 "risk": "Critical",
 
-  
-
-
 "mitigation": "TLS 1.3 with HSTS",
-
-  
-
 
 "status": "Implemented"
 
-  
-
-
 },
-
-  
-
 
 {
 
-  
-
-
 "threat": "Payment amount modified during API call",
-
-  
-
 
 "category": "Tampering",
 
-  
-
-
 "risk": "High",
-
-  
-
 
 "mitigation": "Request signing with HMAC",
 
-  
-
-
 "status": "Planned"
 
-  
-
-
 }
-
-  
-
 
 ]
 
-  
-
-
 }
-
-  
-  
-  
-  
-
 
 Phase 3: Implementation 
 
 Secure Coding Standards 
 
-  
-  
-  
-
-
 // Secure coding checklist enforced via ESLint
-
-  
-  
-  
-
 
 // GOOD: Parameterized query
 
-  
-
-
 db.execute('SELECT * FROM users WHERE id = $1', [userId]);
-
-  
-  
-  
-
 
 // BAD: String concatenation
 
-  
-
-
 db.execute(`SELECT * FROM users WHERE id = ${userId}`);
-
-  
-  
-  
-
 
 // GOOD: Input validation
 
-  
-
-
 const id = parseInt(userInput, 10);
-
-  
-
 
 if (isNaN(id)) throw new Error('Invalid ID');
 
-  
-  
-  
-
-
 // GOOD: Output encoding
-
-  
-
 
 res.send(encodeURIComponent(userProvidedUrl));
 
-  
-  
-  
-
-
 // GOOD: Secure defaults
-
-  
-
 
 const cookie = sessionCookie.serialize('sid', sessionId, {
 
-  
-
-
 httpOnly: true,
-
-  
-
 
 secure: true,
 
-  
-
-
 sameSite: 'strict',
-
-  
-
 
 maxAge: 900000
 
-  
-
-
 });
-
-  
-  
-  
-  
-
 
 Pre-Commit Hooks 
 
-  
-  
-  
-
-
 # .pre-commit-config.yaml
-
-  
-
 
 repos:
 
-  
-
-
 \- repo: https://github.com/pre-commit/pre-commit-hooks
-
-  
-
 
 rev: v4.5.0
 
-  
-
-
 hooks:
-
-  
-
 
 \- id: detect-private-key
 
-  
-
-
 \- id: check-added-large-files
-
-  
-
 
 \- id: check-merge-conflict
 
-  
-  
-  
-
-
 \- repo: https://github.com/gitleaks/gitleaks
-
-  
-
 
 rev: v8.18.0
 
-  
-
-
 hooks:
-
-  
-
 
 \- id: gitleaks
 
-  
-  
-  
-
-
 \- repo: https://github.com/returntocorp/semgrep
-
-  
-
 
 rev: v1.54.0
 
-  
-
-
 hooks:
-
-  
-
 
 \- id: semgrep
 
-  
-
-
 args: ['--config=auto', '--error']
-
-  
-  
-  
-  
-
 
 Phase 4: Testing 
 
 SAST (Static Application Security Testing) 
 
-  
-  
-  
-
-
 # GitHub CodeQL configuration
-
-  
-
 
 name: "CodeQL"
 
-  
-
-
 on:
-
-  
-
 
 push:
 
-  
-
-
 branches: [main]
-
-  
-
 
 pull_request:
 
-  
-
-
 branches: [main]
 
-  
-  
-  
-
-
 jobs:
-
-  
-
 
 analyze:
 
-  
-
-
 name: Analyze
 
-  
-
-
 runs-on: ubuntu-latest
-
-  
-
 
 strategy:
 
-  
-
-
 matrix:
-
-  
-
 
 language: ['javascript', 'python']
 
-  
-
-
 steps:
 
-  
-
-
 \- uses: actions/checkout@v4
-
-  
-
 
 \- uses: github/codeql-action/init@v3
 
-  
-
-
 with:
-
-  
-
 
 languages: ${{ matrix.language }}
 
-  
-
-
 \- uses: github/codeql-action/analyze@v3
-
-  
-  
-  
-  
-
 
 Dependency Scanning 
 
-  
-  
-  
-
-
 name: Dependency Security Scan
-
-  
-
 
 on:
 
-  
-
-
 schedule:
-
-  
-
 
 \- cron: '0 6 * * 1' # Every Monday
 
-  
-  
-  
-
-
 jobs:
-
-  
-
 
 scan:
 
-  
-
-
 runs-on: ubuntu-latest
-
-  
-
 
 steps:
 
-  
-
-
 \- uses: actions/checkout@v4
-
-  
-
 
 \- uses: actions/setup-node@v4
 
-  
-
-
 \- run: npm audit --audit-level=high
-
-  
-
 
 \- name: Check for known vulnerabilities
 
-  
-
-
 run: |
-
-  
-
 
 npx snyk test --severity-threshold=high
 
-  
-
-
 npx snyk monitor
-
-  
-  
-  
-  
-
 
 DAST (Dynamic Application Security Testing) 
 
-  
-  
-  
-
-
 # Run OWASP ZAP against staging environment
-
-  
-
 
 docker run -v $(pwd):/zap/wrk:rw \
 
-  
-
-
 -t ghcr.io/zaproxy/zaproxy:stable \
-
-  
-
 
 zap-full-scan.py \
 
-  
-
-
 -t https://staging.example.com \
-
-  
-
 
 -r zap-report.html \
 
-  
-
-
 -I # Include passive scan warnings
-
-  
-  
-  
-  
-
 
 Phase 5: Deployment 
 
 Security Gates 
 
-  
-  
-  
-
-
 # Deployment approval gates
-
-  
-
 
 environment:
 
-  
-
-
 name: production
-
-  
-
 
 required_approvals: 2
 
-  
-
-
 security_gates:
-
-  
-
 
 \- name: SAST Scan
 
-  
-
-
 status: passed
-
-  
-
 
 \- name: Dependency Scan
 
-  
-
-
 status: passed
-
-  
-
 
 \- name: Container Scan
 
-  
-
-
 status: passed
-
-  
-
 
 \- name: DAST Scan (Staging)
 
-  
-
-
 status: passed
-
-  
-
 
 \- name: Manual Security Review
 
-  
-
-
 status: approved
-
-  
-  
-  
-  
-
 
 Phase 6: Operations 
 
@@ -756,43 +306,17 @@ Vulnerability Management
 
 Incident Response Plan 
 
-  
-  
-  
-
-
 1\. Detect: Monitor alerts, user reports
-
-  
-
 
 2\. Triage: Determine severity and impact
 
-  
-
-
 3\. Contain: Isolate affected systems
-
-  
-
 
 4\. Eradicate: Remove root cause
 
-  
-
-
 5\. Recover: Restore normal operations
 
-  
-
-
 6\. Learn: Post-mortem and process improvement
-
-  
-  
-  
-  
-
 
 Summary 
 

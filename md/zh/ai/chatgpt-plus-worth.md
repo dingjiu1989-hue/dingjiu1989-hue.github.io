@@ -3,7 +3,7 @@ title: "ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比"
 description: "2026 年 ChatGPT 三档价格方案深度对比：免费版、Plus($20/月)、Pro($200/月) 各自适合什么人？帮你做出不后悔的选择。"
 date: 2026-05-07
 board: ai
-url: https://dingjiu1989-hue.github.io/ai/chatgpt-plus-worth.html
+url: https://dingjiu1989-hue.github.io/zh/ai/chatgpt-plus-worth.html
 ---
 
 # ChatGPT Plus 值得买吗？免费版 vs Plus vs Pro 深度对比
@@ -39,8 +39,8 @@ Operator (AI Agent)| ❌| 有限| ✅ 完整
 
 我的建议 如果你每天用 AI 超过 30 分钟，Plus 的 $20 是物有所值的——GPT-4o 比 GPT-4o mini 在复杂任务上强一个档次，文件上传和联网搜索也很实用。但如果只是偶尔问几个问题，免费版足够。 📖 相关推荐
 
-  * [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](<https://dingjiu1989-hue.github.io/ai/claude-vs-chatgpt.html>)
-  * [ChatGPT 提示词工程入门：从新手到高手](<https://dingjiu1989-hue.github.io/ai/prompt-engineering.html>)
-  * [如何用 AI 写高质量原创文章](<https://dingjiu1989-hue.github.io/ai/ai-writing.html>)
+  * [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](<https://dingjiu1989-hue.github.io/zh/ai/claude-vs-chatgpt.html>)
+  * [ChatGPT 提示词工程入门：从新手到高手](<https://dingjiu1989-hue.github.io/zh/ai/prompt-engineering.html>)
+  * [如何用 AI 写高质量原创文章](<https://dingjiu1989-hue.github.io/zh/ai/ai-writing.html>)
 
-**See also:** [ChatGPT 提示词工程入门：从新手到高手](</ai/prompt-engineering.html>), [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](</ai/claude-vs-chatgpt.html>), [AI 自动化工作流实战：让 AI 替你干重复活](</ai/ai-automation-workflow.html>).
+**See also:** [ChatGPT 提示词工程入门：从新手到高手](</zh/ai/prompt-engineering.html>), [Claude vs ChatGPT 2026 深度对比：哪个 AI 更适合你](</zh/ai/claude-vs-chatgpt.html>), [AI 自动化工作流实战：让 AI 替你干重复活](</zh/ai/ai-automation-workflow.html>).

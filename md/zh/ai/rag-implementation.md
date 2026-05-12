@@ -2,7 +2,7 @@
 title: "RAG检索增强生成实战"
 description: "从理论到实践，详解RAG系统的构建方法，包括文档分块、向量检索、检索排序优化等关键环节，助你打造高效的知识问答系统。"
 date: 2026-05-11
-board: zh/ai
+board: ai
 url: https://dingjiu1989-hue.github.io/zh/ai/rag-implementation.html
 ---
 

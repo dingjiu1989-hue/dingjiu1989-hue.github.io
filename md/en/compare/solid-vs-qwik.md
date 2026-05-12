@@ -10,64 +10,39 @@ url: https://dingjiu1989-hue.github.io/en/compare/solid-vs-qwik.html
 
 ##  Introduction
 
-  
-
-
 Solid.js and Qwik represent the cutting edge of web framework design. Both challenge the virtual DOM paradigm that has dominated frontend development for a decade, but they take radically different approaches. Solid.js offers fine-grained reactivity without a virtual DOM — updates are precise and surgical. Qwik introduces resumability, where applications can start on the server and resume on the client with almost no JavaScript. This comparison explores how these frameworks work and when to use each.
-
-  
-
 
 ##  Solid.js
 
-  
-
-
 Solid.js was created by Ryan Carniato and pioneered the concept of fine-grained reactivity inspired by Knockout.js and MobX.
-
-  
-
 
 **How it works:**
 
 Solid compiles your JSX into real DOM nodes wrapped in reactive computations. When state changes, only the specific DOM nodes depending on that state are updated — no virtual DOM diffing needed.
 
-  
-
-    
-    
     import { createSignal } from "solid-js";
-    
-    
-    
+
     function Counter() {
-    
+
       const [count, setCount] = createSignal(0);
-    
+
       const doubleCount = () => count() * 2;
-    
-    
-    
+
       return (
-    
+
         <div>
-    
+
           <p>Count: {count()}</p>
-    
+
           <p>Double: {doubleCount()}</p>
-    
+
           <button onClick={() => setCount(c => c + 1)}>+1</button>
-    
+
         </div>
-    
+
       );
-    
+
     }
-    
-    
-
-  
-
 
 **Core concepts:**
 
@@ -75,50 +50,36 @@ Solid compiles your JSX into real DOM nodes wrapped in reactive computations. Wh
 * **Effects**: Automatically re-run when dependent signals change (`createEffect`)
 * **Memos**: Cached derived values that only recompute when dependencies change (`createMemo`)
 * **No virtual DOM**: Direct DOM manipulation via compilation
-  
 
-    
-    
     // Solid.js: automatic dependency tracking
-    
+
     import { createSignal, createEffect, createMemo } from "solid-js";
-    
-    
-    
+
     const [todos, setTodos] = createSignal([]);
-    
+
     const [filter, setFilter] = createSignal("all");
-    
-    
-    
+
     const filteredTodos = createMemo(() => {
-    
+
       switch (filter()) {
-    
+
         case "active": return todos().filter(t => !t.done);
-    
+
         case "completed": return todos().filter(t => t.done);
-    
+
         default: return todos();
-    
+
       }
-    
+
     });
-    
-    
-    
+
     // Automatically re-runs when filteredTodos changes
-    
+
     createEffect(() => {
-    
+
       console.log(`Showing ${filteredTodos().length} todos`);
-    
+
     });
-    
-    
-
-  
-
 
 **Strengths:**
 
@@ -128,8 +89,6 @@ Solid compiles your JSX into real DOM nodes wrapped in reactive computations. Wh
 * Excellent TypeScript support
 * React-compatible JSX (similar mental model to React)
 * SolidStart meta-framework for full-stack applications
-  
-
 
 **Weaknesses:**
 
@@ -137,55 +96,34 @@ Solid compiles your JSX into real DOM nodes wrapped in reactive computations. Wh
 * Fewer job opportunities
 * JSX without re-rendering requires mental model shift from React
 * Less community content and learning resources
-  
-
 
 ##  Qwik
 
-  
-
-
 Qwik was created by Misko Hevery (creator of Angular) and introduces the concept of resumability.
-
-  
-
 
 **How it works:**
 
 Qwik serializes application state on the server and sends minimal JavaScript to the client. Instead of downloading and executing the application to "rehydrate" it, Qwik "resumes" execution on the client — picking up exactly where the server left off.
 
-  
-
-    
-    
     import { component$, useSignal, $ } from "@builder.io/qwik";
-    
-    
-    
+
     export const Counter = component$(() => {
-    
+
       const count = useSignal(0);
-    
-    
-    
+
       return (
-    
+
         <div>
-    
+
           <p>Count: {count.value}</p>
-    
+
           <button onClick$={$(() => count.value++)}>+1</button>
-    
+
         </div>
-    
+
       );
-    
+
     });
-    
-    
-
-  
-
 
 **Core concepts:**
 
@@ -194,56 +132,44 @@ Qwik serializes application state on the server and sends minimal JavaScript to 
 * **`component$`**: Lazy-loadable component boundary
 * **`$` suffix**: Identifies lazy-loadable boundaries (events, stores, effects)
 * **Prefetching**: Predicts user interactions and preloads handlers
-  
 
-    
-    
     // Qwik: code is split per-event by default
-    
+
     import { component$, useStore } from "@builder.io/qwik";
-    
-    
-    
+
     export const TodoApp = component$(() => {
-    
+
       const state = useStore({ todos: [], filter: "all" });
-    
-    
-    
+
       return (
-    
+
         <div>
-    
+
           <button onClick$={async () => {
-    
+
             // This handler is a separate JS chunk
-    
+
             // Only loaded when the user clicks this button
-    
+
             const data = await fetch("/api/todos");
-    
+
             state.todos = await data.json();
-    
+
           }}>
-    
+
             Load Todos
-    
+
           </button>
-    
+
           <TodoList todos={state.todos} />
-    
+
           {/* TodoList component is also lazy-loaded */}
-    
+
         </div>
-    
+
       );
-    
+
     });
-    
-    
-
-  
-
 
 **Strengths:**
 
@@ -252,8 +178,6 @@ Qwik serializes application state on the server and sends minimal JavaScript to 
 * Best Core Web Vitals scores of any framework
 * Scales to complex applications with no performance cliff
 * Qwik City meta-framework with routing and data loading
-  
-
 
 **Weaknesses:**
 
@@ -262,13 +186,8 @@ Qwik serializes application state on the server and sends minimal JavaScript to 
 * Smallest ecosystem and community
 * Tooling and developer experience still maturing
 * Resumability debugging is harder than traditional approaches
-  
-
 
 ##  Performance Comparison
-
-  
-
 
 | Metric | Solid.js | Qwik |
 
@@ -286,18 +205,9 @@ Qwik serializes application state on the server and sends minimal JavaScript to 
 
 | Lighthouse score | 95-100 | 98-100 |
 
-  
-
-
 Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load performance (JavaScript size).
 
-  
-
-
 ##  Ecosystem and Meta-Frameworks
-
-  
-
 
 | Aspect | Solid | Qwik |
 
@@ -317,13 +227,7 @@ Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load pe
 
 | State management | Solid stores, signals | useStore, useContext |
 
-  
-
-
 ##  When to Choose What
-
-  
-
 
 **Choose Solid.js when:**
 
@@ -332,8 +236,6 @@ Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load pe
 * You value predictable rendering and runtime performance
 * You want to minimize bundle size in a traditional SPA
 * Your team knows React and wants a familiar but faster alternative
-  
-
 
 **Choose Qwik when:**
 
@@ -342,12 +244,7 @@ Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load pe
 * You need to support slow connections or low-end devices
 * You want the most advanced code-splitting available
 * You're willing to learn a new mental model for maximum performance
-  
-
 
 ##  Conclusion
-
-  
-
 
 Solid.js and Qwik represent two different paths beyond the virtual DOM. Solid.js optimizes runtime performance through fine-grained reactivity with a familiar React-like syntax. Qwik optimizes initial load performance through resumability, sending the absolute minimum JavaScript to the client. In 2026, Solid.js is the more practical choice for most developers — it offers dramatic performance improvements over React with a much gentler learning curve. Qwik is the choice when first-impression performance is critical and your team has the expertise to handle its unique mental model. Both represent the future of web development beyond virtual DOM frameworks.

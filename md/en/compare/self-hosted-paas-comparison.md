@@ -21,7 +21,7 @@ Dokploy| Web UI + Docker, open-source Vercel alternative| Single server or multi
 CapRover| Web UI + Docker, mature project| Single server| ★★★ (functional, dated UI)| Yes (caprover deploy via CLI)| Yes (Let's Encrypt, default on)| Limited (via captain-definition)| No  
 Kamal (37signals)| CLI-only, Docker on bare metal| Single or multi-server| None (CLI + config file)| No (kamal deploy)| Yes (via kamal-proxy, Let's Encrypt)| No (single containers, Traefik)| No (by design: simpler)  
 Dokku| CLI-only, Heroku-compatible (buildpacks)| Single server| Minimal (community web UI available)| Yes (git push dokku master)| Yes (Let's Encrypt plugin)| Via docker-compose plugin| No  
-  
+
 ## Deep Dive
 
 **Coolify — The closest thing to an open-source Vercel/Heroku.** Coolify has the most polished experience: a beautiful web dashboard where you create projects, connect your GitHub repo, and click "Deploy." It supports static sites, Node.js, Python, Go, PHP, Rust, and Dockerfile-based deployments. The UI handles environment variables, custom domains with auto-SSL, database provisioning (PostgreSQL, MySQL, Redis, MongoDB), and deployment rollbacks. Coolify uses Docker under the hood but abstracts it away — you don't need to write Dockerfiles or compose files. _The current state:_ actively maintained (daily commits), growing community, already powering thousands of production deployments. _Best for:_ Developers who want the Heroku/Vercel experience on their own server, teams with multiple apps, anyone who doesn't want to SSH into a server to deploy.
@@ -44,5 +44,5 @@ I want proven stability and a large community| CapRover
 I prefer CLI + config files over web UIs| Kamal or Dokku  
 I'm a solo developer with a few apps on a VPS| Coolify (easy) or Dokku (Heroku-like)  
 I'm deploying Rails monoliths (37signals fan)| Kamal  
-  
+
 **What I use:** Coolify on a $40/mo Hetzner VPS running 8 apps (2 Next.js, 3 Python/FastAPI, 2 static Astro sites, 1 Go API). Setup took 10 minutes, adding a new app takes 2 minutes, and the auto-SSL + auto-deploy on git push has never failed. Total monthly cost: $40 instead of $250+ for managed PaaS equivalents. See also: [Best Free Hosting for Side Projects](</en/tools/best-free-hosting-side-projects.html>) and [Best CI/CD Tools](</en/tools/best-cicd-tools-2026.html>).

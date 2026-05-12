@@ -20,7 +20,7 @@ Career/Interview Prep| $20-35| Medium| High — SaaS upsells
 Live Coding/Build in Public| $8-12| Low| Growing — community-driven  
 AI/ML Explainers| $18-28| Medium| Explosive — trending topic  
 Developer Vlogging| $10-15| Low| Moderate — personality-based  
-  
+
 ## Equipment: What You Actually Need
 
 **Start with what you have.** The biggest mistake new YouTubers make is buying expensive gear before recording a single video. Here is the minimum vs pro setup:
@@ -33,7 +33,7 @@ Lighting| Natural window light| Neewer ring light ($60) + softbox kit ($80)
 Screen Recording| OBS Studio (free)| ScreenFlow ($149) or OBS + plugins  
 Editing| DaVinci Resolve (free)| Final Cut Pro ($299) or Premiere Pro  
 Thumbnails| Canva (free)| Figma (free) or Photoshop  
-  
+
 ## Content Strategy for Developer Channels
 
 **Best for:** Programming tutorials, tech reviews, career advice, live coding, AI/ML explainers. **Key insight:** Tutorial-based channels grow slower but have much higher long-term value — a "How to Set Up Docker" video from 2024 still gets views in 2026. News/reaction videos spike and die within 48 hours.
@@ -43,8 +43,6 @@ Thumbnails| Canva (free)| Figma (free) or Photoshop
   * **Discovery videos (40%):** "Top 5 VS Code Extensions 2026" — broad appeal, high CTR, brings in new subscribers
   * **Authority videos (40%):** "Build a Full-Stack App with Next.js 15" — deep content, builds trust, long watch time
   * **Community videos (20%):** Q&As;, career stories, "day in the life" — builds connection, increases engagement
-
-
 
 ## Monetization: Beyond AdSense
 
@@ -56,5 +54,5 @@ Affiliate Links| Commission on product sales| $100-1,000/month
 Course/Product Sales| Your own digital products| $500-10,000/month  
 Channel Memberships| Monthly subscriber donations| $50-500/month  
 Consulting Leads| Clients from your content| $1,000-5,000/month  
-  
+
 **Bottom line:** YouTube for developers is a 6-12 month investment before meaningful income. Focus on tutorial + authority content, treat sponsorships (not AdSense) as your primary revenue goal, and use the channel as a funnel for higher-value products. See also: [Selling Online Courses](</en/sidehustle/create-online-course.html>) and [Social Media Monetization](</en/sidehustle/developer-social-media-monetization.html>).

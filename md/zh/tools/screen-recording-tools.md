@@ -3,7 +3,7 @@ title: "2026 年最佳屏幕录制和视频剪辑工具推荐"
 description: "精选 8 款屏幕录制和轻量视频编辑工具，涵盖免费和付费，适合做教程、演示和产品介绍视频。"
 date: 2026-05-10
 board: tools
-url: https://dingjiu1989-hue.github.io/tools/screen-recording-tools.html
+url: https://dingjiu1989-hue.github.io/zh/tools/screen-recording-tools.html
 ---
 
 # 2026 年最佳屏幕录制和视频剪辑工具推荐
@@ -30,8 +30,8 @@ Screen Studio| $89 一次性| 自动跟随鼠标、平滑缩放，生成的视�
 
 📖 相关推荐
 
-  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
-  * [10 款开发者必备的命令行工具（2026 版）](<https://dingjiu1989-hue.github.io/tools/cli-tools-collection.html>)
-  * [10 个你每天都会用到的免费在线工具网站](<https://dingjiu1989-hue.github.io/tools/online-tools-2026.html>)
+  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/zh/tools/terminal-tools-2026.html>)
+  * [10 款开发者必备的命令行工具（2026 版）](<https://dingjiu1989-hue.github.io/zh/tools/cli-tools-collection.html>)
+  * [10 个你每天都会用到的免费在线工具网站](<https://dingjiu1989-hue.github.io/zh/tools/online-tools-2026.html>)
 
-**See also:** [2026 年 10 款必装终端工具：让你的命令行效率翻倍](</tools/terminal-tools-2026.html>), [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](</tools/project-management-tools.html>), [2026 年最佳密码管理器对比：LastPass vs 1Password vs Bitwarden](</tools/password-manager-comparison.html>).
+**See also:** [2026 年 10 款必装终端工具：让你的命令行效率翻倍](</zh/tools/terminal-tools-2026.html>), [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](</zh/tools/project-management-tools.html>), [2026 年最佳密码管理器对比：LastPass vs 1Password vs Bitwarden](</zh/tools/password-manager-comparison.html>).

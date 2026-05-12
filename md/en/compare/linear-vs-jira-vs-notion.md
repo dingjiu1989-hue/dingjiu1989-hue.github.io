@@ -24,7 +24,7 @@ GitHub/GitLab Auto-Sync| Yes — PRs auto-link to issues, auto-close on merge| Y
 Roadmap / Planning| Built-in (Roadmap, Projects)| Advanced (Advanced Roadmaps, Plans)| Manual (Timeline view, or build your own)  
 Pricing (per user/mo)| $8 (Basic), $14 (Business)| $8.15 (Standard), $16 (Premium)| $10 (Plus), $18 (Business)  
 Best Team Size| 1-500 engineers| 50-5,000+ (any dept)| 1-100 (works as wiki + PM)  
-  
+
 ## When Each Tool Wins
 
 **Linear — Best for:** Engineering teams that want speed, simplicity, and a tool that feels like it was built by developers. Linear is the choice when you want project management to get out of your way. **Weak spot:** Limited customization — if your workflow doesn't fit Linear's opinions, you cannot bend it much. Non-engineering teams often find it too minimal.
@@ -42,5 +42,5 @@ Enterprise, 500+ employees, complex workflows| Jira| Customization, enterprise f
 Docs + lightweight task tracking for small team| Notion| All-in-one workspace, flexible  
 Engineering team that also manages roadmap publicly| Linear| Best roadmap features, public roadmaps  
 Non-engineering teams need PM too| Jira or Notion| Jira if complex, Notion if simple  
-  
+
 **Bottom line:** Linear is the best project management tool for engineering teams in 2026 — it is fast, intuitive, and was designed by developers for developers. Jira remains the enterprise standard but only use it if you need the complexity. Notion is great for wikis and lightweight tracking but is not a real project management tool for software teams. See also: [Best Project Management Tools](</en/tools/best-project-management-dev.html>) and [Best Code Review Tools](</en/tools/best-code-review-tools.html>).

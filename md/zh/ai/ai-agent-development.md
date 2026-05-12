@@ -2,7 +2,7 @@
 title: "AI Agent实战指南：从入门到生产部署"
 description: "全面解析AI Agent架构设计与开发实践，涵盖规划、工具使用、记忆管理等核心概念，帮助开发者快速构建可靠的AI智能体应用。"
 date: 2026-05-11
-board: zh/ai
+board: ai
 url: https://dingjiu1989-hue.github.io/zh/ai/ai-agent-development.html
 ---
 

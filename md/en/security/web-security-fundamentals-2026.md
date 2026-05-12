@@ -10,117 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/security/web-security-fundamentals-202
 
 ### Stored XSS
 
-  
-  
-  
-  
-
-
 The payload is persisted on the server (e.g., in a comment, user bio) and served to every visitor.
-
-  
-  
-  
-  
-  
-
 
 Example: A comment containing 
 
-  
-  
-  
-  
-  
-  
-
-
 ### DOM-Based XSS
-
-  
-  
-  
-  
-
 
 The vulnerability lives entirely in client-side JavaScript. The server response is clean, but the browser executes attacker-controlled input via `innerHTML`, `document.write`, or `eval`.
 
-  
-  
-  
-  
-  
-
-
 // VULNERABLE — DOM XSS
-
-  
-
 
 const name = new URLSearchParams(window.location.search).get('name');
 
-  
-
-
 document.getElementById('greeting').innerHTML = `Hello, ${name}`;
-
-  
-  
-  
-
 
 // SAFE — use textContent, not innerHTML
 
-  
-
-
 document.getElementById('greeting').textContent = `Hello, ${name}`;
-
-  
-  
-  
-  
-  
-  
-
 
 ### XSS Prevention Table
 
-  
-  
-  
-  
-
-
 | Context | Safe Approach | Dangerous Approach |
-
-  
-
 
 |---------|--------------|-------------------|
 
-  
-
-
 | HTML body | `textContent`, template escaping | `innerHTML`, `outerHTML` |
-
-  
-
 
 | HTML attribute | `setAttribute()` with safe values | String concatenation into `onclick` or `href` |
 
-  
-
-
 | JavaScript string | JSON.stringify + proper encoding | Direct concatenation into `eval` or `setTimeout` string |
 
-  
-
-
 | CSS | Use CSS custom properties | Dynamic `url()` or `expression()` |
-
-  
-
 
 | URL | Validate against allowlist | `javascript:` URLs in `` | 
 
@@ -138,19 +58,7 @@ What Every Developer Needs to Know
 
 Setting Up HSTS 
 
-  
-  
-  
-
-
 Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
-
-  
-  
-  
-  
-  
-
 
 * `max-age` in seconds (2 years = 63072000)
 
@@ -158,108 +66,41 @@ Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
 
 * `preload` — submit your domain to browser preload lists
 
-  
-
-
 Redirect HTTP to HTTPS 
-
-  
-  
-  
-
 
 // Express.js
 
-  
-
-
 app.use((req, res, next) => {
-
-  
-
 
 if (!req.secure && req.headers['x-forwarded-proto'] !== 'https') {
 
-  
-
-
 return res.redirect(301, `https://${req.headers.host}${req.url}`);
-
-  
-
 
 }
 
-  
-
-
 next();
-
-  
-
 
 });
 
-  
-  
-  
-  
-
-
 TLS Configuration Check (2026 Minimum) 
-
-  
-  
-  
-
 
 # nginx TLS config — modern profile
 
-  
-
-
 ssl_protocols TLSv1.2 TLSv1.3;
-
-  
-
 
 ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256;
 
-  
-
-
 ssl_prefer_server_ciphers off;
-
-  
-
 
 ssl_session_cache shared:SSL:10m;
 
-  
-
-
 ssl_session_timeout 1d;
-
-  
-
 
 ssl_session_tickets off;
 
-  
-
-
 ssl_stapling on;
 
-  
-
-
 ssl_stapling_verify on;
-
-  
-  
-  
-  
-
 
 Test your TLS setup with: `openssl s_client -connect example.com:443 -tls1_3` 
 
@@ -275,218 +116,85 @@ Dependency Scanning Tools
 
 Running a Scan in CI 
 
-  
-  
-  
-
-
 # .github/workflows/security-scan.yml
-
-  
-
 
 name: Security Scan
 
-  
-
-
 on: [push, pull_request]
-
-  
-
 
 jobs:
 
-  
-
-
 scan:
-
-  
-
 
 runs-on: ubuntu-latest
 
-  
-
-
 steps:
-
-  
-
 
 \- uses: actions/checkout@v4
 
-  
-
-
 \- name: Run Trivy vulnerability scanner
-
-  
-
 
 uses: aquasecurity/trivy-action@master
 
-  
-
-
 with:
-
-  
-
 
 scan-type: 'fs'
 
-  
-
-
 scan-ref: '.'
-
-  
-
 
 format: 'sarif'
 
-  
-
-
 output: 'trivy-results.sarif'
-
-  
-
 
 \- name: Generate SBOM
 
-  
-
-
 uses: anchore/sbom-action@v0
-
-  
-
 
 with:
 
-  
-
-
 format: 'spdx-json'
-
-  
-
 
 output-file: 'sbom.spdx.json'
 
-  
-  
-  
-  
-
-
 What Goes Into an SBOM 
 
-  
-  
-  
-
-
 {
-
-  
-
 
 "bomFormat": "CycloneDX",
 
-  
-
-
 "specVersion": "1.5",
-
-  
-
 
 "metadata": {
 
-  
-
-
 "component": {
-
-  
-
 
 "name": "my-app",
 
-  
-
-
 "version": "1.2.3",
-
-  
-
 
 "type": "application"
 
-  
-
-
 }
-
-  
-
 
 },
 
-  
-
-
 "components": [
-
-  
-
 
 {
 
-  
-
-
 "name": "express",
-
-  
-
 
 "version": "4.18.2",
 
-  
-
-
 "type": "library",
-
-  
-
 
 "purl": "pkg:npm/express@4.18.2"
 
-  
-
-
 }
-
-  
-
 
 ]
 
-  
-
-
 }
-
-  
-  
-  
-  
-
 
 **Action item:** Run `pip freeze > requirements.txt` or `npm list --json > deps.json` and pipe it through an SBOM generator in your CI pipeline. Store the SBOM alongside your release artifact. 
 
@@ -500,120 +208,43 @@ Apply these HTTP response headers to every page and every API response.
 
 Apply Them in One Shot 
 
-  
-  
-  
-
-
 // Express.js helmet — sets most security headers automatically
-
-  
-
 
 const helmet = require('helmet');
 
-  
-
-
 app.use(helmet());
-
-  
-  
-  
-
 
 // Or set manually for fine control
 
-  
-
-
 app.use((req, res, next) => {
-
-  
-
 
 res.setHeader('X-Content-Type-Options', 'nosniff');
 
-  
-
-
 res.setHeader('X-Frame-Options', 'DENY');
-
-  
-
 
 res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
 
-  
-
-
 res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
-
-  
-
 
 next();
 
-  
-
-
 });
-
-  
-  
-  
-  
-  
-  
-  
-
 
 # FastAPI with SecureHeaders middleware
 
-  
-
-
 from secure import SecureHeaders
-
-  
-  
-  
-
 
 secure_headers = SecureHeaders()
 
-  
-  
-  
-
-
 @app.middleware("http")
-
-  
-
 
 async def add_security_headers(request, call_next):
 
-  
-
-
 response = await call_next(request)
-
-  
-
 
 secure_headers.framework.fastapi(response)
 
-  
-
-
 return response
-
-  
-  
-  
-  
-
 
 \\--- 
 
@@ -623,308 +254,115 @@ APIs are the backbone of modern web applications and a prime attack target.
 
 Rate Limiting 
 
-  
-  
-  
-
-
 // Express.js with express-rate-limit
-
-  
-
 
 const rateLimit = require('express-rate-limit');
 
-  
-  
-  
-
-
 const globalLimiter = rateLimit({
-
-  
-
 
 windowMs: 15 * 60 * 1000, // 15 minutes
 
-  
-
-
 max: 100, // limit each IP
-
-  
-
 
 standardHeaders: true,
 
-  
-
-
 legacyHeaders: false,
-
-  
-
 
 message: { error: 'Too many requests' }
 
-  
-
-
 });
-
-  
-  
-  
-
 
 const authLimiter = rateLimit({
 
-  
-
-
 windowMs: 60 * 1000, // 1 minute
-
-  
-
 
 max: 5, // 5 attempts per minute
 
-  
-
-
 message: { error: 'Too many auth attempts' }
-
-  
-
 
 });
 
-  
-  
-  
-
-
 app.use('/api/', globalLimiter);
 
-  
-
-
 app.use('/api/auth/login', authLimiter);
-
-  
-  
-  
-  
-
 
 Input Validation 
 
 Use a schema validation library. Never trust incoming data. 
 
-  
-  
-  
-
-
 // Zod validation — reject unexpected fields and bad types
-
-  
-
 
 const { z } = require('zod');
 
-  
-  
-  
-
-
 const CreateUserSchema = z.object({
-
-  
-
 
 email: z.string().email(),
 
-  
-
-
 password: z.string().min(12).max(128),
-
-  
-
 
 role: z.enum(['user', 'admin']).default('user'),
 
-  
-
-
 }).strict(); // strips or rejects extra fields
-
-  
-  
-  
-
 
 app.post('/api/users', (req, res) => {
 
-  
-
-
 const parsed = CreateUserSchema.parse(req.body);
-
-  
-
 
 // parsed is now type-safe and validated
 
-  
-
-
 });
-
-  
-  
-  
-  
-
 
 Proper Error Handling 
 
 Never leak stack traces, database schemas, or internal paths to API consumers. 
 
-  
-  
-  
-
-
 # BAD — leaks internals
 
-  
-
-
 @app.exception_handler(Exception)
-
-  
-
 
 async def debug_error(request, exc):
 
-  
-
-
 return JSONResponse(
 
-  
-
-
 status_code=500,
-
-  
-
 
 content={"error": str(exc), "traceback": traceback.format_exc()}
 
-  
-
-
 )
-
-  
-  
-  
-
 
 # GOOD — sanitized errors with logging
 
-  
-
-
 import logging
-
-  
-
 
 logger = logging.getLogger(__name__)
 
-  
-  
-  
-
-
 @app.exception_handler(HTTPException)
-
-  
-
 
 async def http_error(request, exc):
 
-  
-
-
 return JSONResponse(
-
-  
-
 
 status_code=exc.status_code,
 
-  
-
-
 content={"error": exc.detail}
 
-  
-
-
 )
-
-  
-  
-  
-
 
 @app.exception_handler(Exception)
 
-  
-
-
 async def generic_error(request, exc):
-
-  
-
 
 logger.error("Internal error", exc_info=True)
 
-  
-
-
 return JSONResponse(
-
-  
-
 
 status_code=500,
 
-  
-
-
 content={"error": "An internal error occurred"}
-
-  
-
 
 )
 
-  
-  
-  
-  
-
-
 API Security Checklist 
-
-  
-
 
 * [ ] Rate limiting on all endpoints (stricter on auth)
 
@@ -942,9 +380,6 @@ API Security Checklist
 
 * [ ] UUIDs instead of auto-increment IDs in URLs
 
-  
-
-
 \\--- 
 
 11\\. Production Security Checklist 
@@ -952,9 +387,6 @@ API Security Checklist
 A practical runbook to harden any web application before launch. 
 
 Infrastructure 
-
-  
-
 
 * [ ] All traffic is HTTPS (HSTS preloaded)
 
@@ -968,13 +400,7 @@ Infrastructure
 
 * [ ] Container images scanned for CVEs before deployment
 
-  
-
-
 Application 
-
-  
-
 
 * [ ] All user input is validated and sanitized
 
@@ -998,13 +424,7 @@ Application
 
 * [ ] Rate limiting is active on all endpoints
 
-  
-
-
 Process 
-
-  
-
 
 * [ ] Dependency scanning runs on every PR
 
@@ -1017,9 +437,6 @@ Process
 * [ ] Incident response plan documented
 
 * [ ] Dependabot or Renovate configured for auto-updates
-
-  
-
 
 \\--- 
 

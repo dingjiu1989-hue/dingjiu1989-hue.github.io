@@ -3,7 +3,7 @@ title: "正则表达式 30 分钟入门指南"
 description: "从完全不懂到能写出实用的正则表达式，涵盖元字符、量词、分组、断言和 Python/JS 实战示例。"
 date: 2026-05-07
 board: tech
-url: https://dingjiu1989-hue.github.io/tech/regex-guide.html
+url: https://dingjiu1989-hue.github.io/zh/tech/regex-guide.html
 ---
 
 # 正则表达式 30 分钟入门指南
@@ -24,29 +24,27 @@ url: https://dingjiu1989-hue.github.io/tech/regex-guide.html
 {n}| 恰好 n 次  
 {n,m}| n 到 m 次  
 实战 5 例
-    
-    
+
     # 1. 验证手机号（中国大陆）
     ^1[3-9]\d{9}$
-    
+
     # 2. 提取邮箱地址
     [a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}
-    
+
     # 3. 匹配 URL
     https?://[\w.-]+(:\d+)?(/[\w./-]*)?
-    
+
     # 4. 提取 HTML 标签内容
     >([^<]+)<
-    
+
     # 5. 验证日期格式 YYYY-MM-DD
     ^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
 
 分组和捕获
-    
-    
+
     # 匹配 "2026-05-07"，分别捕获年月日
     (\d{4})-(\d{2})-(\d{2})
-    
+
     # Python 中可以用 group(1) group(2) group(3) 获取
     # 等价于 \1 \2 \3 在替换中引用
 
@@ -57,8 +55,8 @@ url: https://dingjiu1989-hue.github.io/tech/regex-guide.html
 (?!...)| 负向前瞻| \d+(?!元) 匹配后不跟"元"的数字  
 练习是关键 推荐在 **regex101.com** 上实操练习，它有交互式解释器、多语言支持和测试用例功能。每天练 2 个正则，一周后你就能随手写出匹配规则了。 📖 相关推荐
 
-  * [Linux 命令行入门：30 个最常用的命令](<https://dingjiu1989-hue.github.io/tech/linux-commands.html>)
-  * [Python 入门教程：从零到写出第一个程序](<https://dingjiu1989-hue.github.io/tech/python-tutorial.html>)
-  * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/tech/git-advanced.html>)
+  * [Linux 命令行入门：30 个最常用的命令](<https://dingjiu1989-hue.github.io/zh/tech/linux-commands.html>)
+  * [Python 入门教程：从零到写出第一个程序](<https://dingjiu1989-hue.github.io/zh/tech/python-tutorial.html>)
+  * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/zh/tech/git-advanced.html>)
 
-**See also:** [Python 入门教程：从零到写出第一个程序](</tech/python-tutorial.html>), [单元测试入门：从零到写出第一个可维护的测试](</tech/unit-testing-guide.html>), [OpenAI API 入门：用 10 行代码调用 GPT](</ai/openai-api-intro.html>).
+**See also:** [Python 入门教程：从零到写出第一个程序](</zh/tech/python-tutorial.html>), [单元测试入门：从零到写出第一个可维护的测试](</zh/tech/unit-testing-guide.html>), [OpenAI API 入门：用 10 行代码调用 GPT](</zh/ai/openai-api-intro.html>).

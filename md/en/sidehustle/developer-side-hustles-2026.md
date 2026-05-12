@@ -58,5 +58,5 @@ Fastest cash (weeks)| Freelancing (#1) or Templates (#4)
 Passive income (months)| Digital Products (#7) or APIs (#5)  
 Long-term wealth (years)| SaaS (#2) or Job Board (#8)  
 Build audience + income| Content Creation (#6)  
-  
+
 Pick one. Ship it in two weeks. The only failed side hustle is the one you never start.

@@ -16,27 +16,20 @@ Rate limiting prevents a single client from consuming an unfair share of resourc
 * Control costs in metered infrastructure.
 * Enforce service level agreements (SLAs).
 * Prevent cascading failures in distributed systems.
-  
+
 Token Bucket Algorithm   
 The token bucket is one of the most popular rate limiting algorithms. A bucket holds a fixed number of tokens. Tokens are added at a steady rate. Each request consumes one token. If the bucket is empty, the request is denied.   
 
-    
-    
     Capacity: 100 tokens
-    
-    Refill rate: 10 tokens/second
-    
-    
-    
-    Request at t=0: 100 tokens available -> success, 99 remaining
-    
-    Request at t=1: 99 + 10 = 100 -> success, 99 remaining
-    
-    Request at t=0.5: 99 + 5 = 100 -> success, 99 remaining
-    
-    
 
-  
+    Refill rate: 10 tokens/second
+
+    Request at t=0: 100 tokens available -> success, 99 remaining
+
+    Request at t=1: 99 + 10 = 100 -> success, 99 remaining
+
+    Request at t=0.5: 99 + 5 = 100 -> success, 99 remaining
+
 **Pros:** Allows bursts up to the bucket capacity. Memory efficient -- you only need to store the token count and last refill timestamp.   
 **Cons:** The burst behavior may not suit all use cases. With a large bucket, a client can send an entire day's worth of requests in a few seconds.   
 The token bucket is used by Amazon (AWS API Gateway), Stripe, and GitHub.   
@@ -48,23 +41,16 @@ Leaky bucket is ideal for scenarios where a steady processing rate is critical, 
 Fixed Window Counter   
 Divide time into fixed windows (e.g., 1 minute). Count requests in each window. If the count exceeds the limit, reject further requests until the next window.   
 
-    
-    
     Limit: 100 requests per minute
-    
-    Window: 00:00:00 to 00:01:00
-    
-    
-    
-    95 requests at 00:00:45 -> allowed
-    
-    6 requests at 00:00:55 -> 5 allowed, 1 rejected (exceeds 100)
-    
-    Window resets at 00:01:00
-    
-    
 
-  
+    Window: 00:00:00 to 00:01:00
+
+    95 requests at 00:00:45 -> allowed
+
+    6 requests at 00:00:55 -> 5 allowed, 1 rejected (exceeds 100)
+
+    Window resets at 00:01:00
+
 **Pros:** Extremely simple to implement. Only requires a counter per window per client.   
 **Cons:** The "boundary problem." At the edge of a window, a client can send 100 requests at 00:00:59 and another 100 at 00:01:01, effectively 200 requests in 2 seconds. This can overwhelm your system.   
 Sliding Window Log   
@@ -74,23 +60,16 @@ Instead of fixed windows, track a timestamp for each request. Count requests wit
 Sliding Window Counter   
 A hybrid approach combining fixed windows with sliding precision. Track counters for the current and previous windows. Approximate the count for the sliding window using weighted averages.   
 
-    
-    
     Limit: 100 requests per minute
-    
-    Current 1-minute window: 80 requests
-    
-    Previous 1-minute window: 40 requests
-    
-    
-    
-    At 30 seconds into the current window:
-    
-    Estimated count = 40 * (30/60) + 80 = 100
-    
-    
 
-  
+    Current 1-minute window: 80 requests
+
+    Previous 1-minute window: 40 requests
+
+    At 30 seconds into the current window:
+
+    Estimated count = 40 * (30/60) + 80 = 100
+
 **Pros:** Smooths out the boundary problem with minimal memory (just two counters per client). Good enough for most use cases.   
 **Cons:** Not perfectly accurate. The approximation error varies but is typically acceptable for rate limiting purposes.   
 This is the algorithm used by Cloudflare and many CDN-based rate limiters.   
@@ -102,28 +81,18 @@ In a distributed system with multiple application instances, rate limiting becom
 Response Headers   
 Tell clients about their rate limit status through response headers:   
 
-    
-    
     X-RateLimit-Limit: 100
-    
-    X-RateLimit-Remaining: 42
-    
-    X-RateLimit-Reset: 1640995200
-    
-    
 
-  
+    X-RateLimit-Remaining: 42
+
+    X-RateLimit-Reset: 1640995200
+
 When a client exceeds the limit, return `429 Too Many Requests` with a `Retry-After` header:   
 
-    
-    
     HTTP/1.1 429 Too Many Requests
-    
-    Retry-After: 30
-    
-    
 
-  
+    Retry-After: 30
+
 Choosing the Right Algorithm   
 
 * **Token bucket** is a good default choice. It handles bursts and is memory efficient.
@@ -131,6 +100,6 @@ Choosing the Right Algorithm
 * **Sliding window log** is best for strict, precise rate limiting.
 * **Sliding window counter** is a good compromise between accuracy and efficiency.
 * **Leaky bucket** works when you need a constant processing rate.
-  
+
 Summary   
 Rate limiting is essential for production APIs. Start with the token bucket algorithm for general-purpose rate limiting. Use Redis for distributed scenarios. Always return descriptive headers so clients can adjust their behavior. Monitor your rate limiting effectiveness and adjust thresholds based on real traffic patterns.

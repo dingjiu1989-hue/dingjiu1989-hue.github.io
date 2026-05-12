@@ -20,7 +20,7 @@ Your branching strategy determines how code moves from development to production
 **Branch lifespan**|  Long (feature branches: days-weeks)| Short (hours-days)| Very short (minutes-hours)  
 **Merge conflicts**|  Painful (long-lived branches diverge)| Moderate| Minimal (frequent integration)  
 **Rollback**|  Revert release branch| Revert merge commit| Revert or fix-forward  
-  
+
 ## Git Flow — The Traditional Model
 
 Git Flow uses multiple long-lived branches: main (production), develop (integration), feature branches, release branches, and hotfix branches. It's designed for versioned software with scheduled releases — think mobile apps, desktop software, or on-premise products.
@@ -54,5 +54,5 @@ Team 2-50, web app / SaaS| **GitHub Flow**
 Mobile app or library with releases| **Git Flow**  
 High-performance CI/CD team| **Trunk-Based Development**  
 Open source project| **GitHub Flow** (fork + PR)  
-  
+
 **Bottom line:** GitHub Flow is the right choice for 80% of teams in 2026. Start there. Evolve to Trunk-Based if your CI/CD maturity allows. Use Git Flow only if you ship versioned releases (mobile, on-premise). See also: [Git Cheatsheet](</en/tech/git-cheatsheet.html>) and [Advanced Git Guide](</en/tech/git-advanced.html>).

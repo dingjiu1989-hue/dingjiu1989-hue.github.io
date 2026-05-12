@@ -22,7 +22,7 @@ Writing SQL in a terminal is great until you need to browse data, visualize sche
 **Schema designer**|  Basic| Excellent (ER diagrams)| Basic| Excellent (ER diagrams)  
 **SSH/SSL**|  Yes| Yes| Yes| Yes  
 **NoSQL support**|  Redis, Cassandra| MongoDB, Redis, Cassandra, etc.| No| MongoDB, Redis, etc.  
-  
+
 ## TablePlus — The Beautiful, Native Choice
 
 TablePlus is a native macOS (and now Windows/Linux) app with a focus on polish and speed. It feels like a first-class citizen on every platform. The query editor is fast, the data browser is smooth, and the design is minimal without sacrificing power.
@@ -72,5 +72,5 @@ Multiple database types, free| **DBeaver CE**
 Simple, beautiful, beginner-friendly| **Beekeeper Studio**  
 JetBrains user, complex SQL| **DataGrip**  
 DBA tasks, ER diagrams, broad support| **DBeaver Pro**  
-  
+
 **Bottom line:** TablePlus for macOS developers (beautiful, fast, one-time purchase). DBeaver CE for everyone who wants a powerful free tool. Beekeeper for simplicity. DataGrip for JetBrains users and SQL power users. See also: [database comparison](</en/compare/postgresql-vs-mysql-vs-sqlite.html>) and [ORM comparison](</en/compare/prisma-vs-drizzle-vs-typeorm.html>).

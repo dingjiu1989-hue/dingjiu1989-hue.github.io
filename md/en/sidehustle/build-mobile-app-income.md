@@ -19,7 +19,7 @@ Freemium + IAP| Free app with paid features/consumables| $20-100/month| Producti
 Subscription| Monthly/yearly recurring payment| $50-500/month| Professional tools, fitness, education  
 Paid Upfront| One-time purchase to download| $1-5 (one-time per user)| Premium games, niche pro tools  
 B2B / Enterprise| Per-seat licensing for teams| $500-5,000/month| Business productivity, industry-specific apps  
-  
+
 ## Real Indie App Revenue Case Studies
 
 App Category| Monthly Revenue| Monetization| Team Size| Platform  
@@ -30,7 +30,7 @@ Meditation Timer| $5,000-12,000| Subscription + IAP| Solo| iOS + Android (React 
 Code Editor (iPad)| $2,000-5,000| Paid ($14.99 one-time)| Solo| iPadOS (Swift)  
 Plant Identifier| $20,000-50,000| Subscription ($6.99/mo)| 2-person team| iOS + Android (Flutter)  
 Expense Tracker| $10,000-25,000| Subscription ($3.99/mo)| Solo| iOS + Android (Kotlin Multiplatform)  
-  
+
 ## Tech Stack for Solo App Developers
 
 **Best for:** Developers who want to build once and earn recurring revenue. **Weak spot:** App Store algorithms change — what works today may not work tomorrow. Diversify across platforms and monetization models.
@@ -41,5 +41,5 @@ Flutter| Cross-platform apps with native performance| Medium| Excellent
 React Native| Web developers entering mobile| Easy (if you know React)| Good (with Hermes)  
 Kotlin Multiplatform| Android-first developers expanding to iOS| Medium-High| Near-native  
 SwiftUI (iOS only)| iOS-only apps with best UX| Medium| Best  
-  
+
 **Bottom line:** The $100K+/year solo app developer is still achievable in 2026, but it requires finding an underserved niche, nailing ASO (App Store Optimization), and committing to subscription pricing. One app is rarely enough — successful indies typically have 3-5 apps in their portfolio. See also: [Micro-SaaS Ideas](</en/sidehustle/micro-saas-ideas-2026.html>) and [SaaS Bootstrapping](</en/sidehustle/saas-bootstrapping-guide.html>).

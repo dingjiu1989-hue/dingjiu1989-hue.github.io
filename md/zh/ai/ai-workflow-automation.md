@@ -2,7 +2,7 @@
 title: "AI工作流自动化"
 description: "探索如何利用AI技术构建自动化工作流，涵盖流程设计、工具集成、决策节点设计以及监控优化等实践方法。"
 date: 2026-05-11
-board: zh/ai
+board: ai
 url: https://dingjiu1989-hue.github.io/zh/ai/ai-workflow-automation.html
 ---
 

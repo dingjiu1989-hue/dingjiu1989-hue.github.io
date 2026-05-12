@@ -17,10 +17,9 @@ Scale| Best Tool| Why
 1-3 services, single host| Docker Compose| Simplest setup, single docker-compose.yml, no orchestration overhead  
 3-10 services, 2-5 hosts| Docker Swarm| Compose-compatible syntax, built-in load balancing, secrets  
 10+ services, multi-region, auto-scaling| Kubernetes| Full orchestration, service mesh, auto-scaling, ecosystem  
-  
+
 ## Production-Ready Compose File
-    
-    
+
     # docker-compose.prod.yml
     services:
       app:
@@ -52,7 +51,7 @@ Scale| Best Tool| Why
           - jwt_secret
         volumes:
           - app_uploads:/app/uploads
-    
+
       postgres:
         image: postgres:16-alpine
         healthcheck:
@@ -64,13 +63,13 @@ Scale| Best Tool| Why
           - pgdata:/var/lib/postgresql/data
         secrets:
           - db_password
-    
+
     secrets:
       db_password:
         file: ./secrets/db_password.txt
       jwt_secret:
         file: ./secrets/jwt_secret.txt
-    
+
     volumes:
       pgdata:
       app_uploads:
@@ -85,12 +84,11 @@ deploy.resources.reservations| Soft minimum — Docker scheduler guarantees this
 restart| Policy for when a container exits| unless-stopped (production), no for one-off jobs  
 logging| Log driver + rotation — prevents disk from filling with logs| json-file with 10MB max per file, 3 files max (~30MB per service)  
 secrets| In Swarm mode: encrypted at rest, tmpfs-mounted. In Compose: file-based| Use Docker secrets in Swarm; use env_file + vault in Compose  
-  
+
 ## Zero-Downtime Rolling Updates (Swarm Mode)
 
 With Swarm mode, Compose files gain rolling update support — update your containers without dropping requests:
-    
-    
+
     services:
       app:
         image: myapp:latest
@@ -104,6 +102,5 @@ With Swarm mode, Compose files gain rolling update support — update your conta
           rollback_config:
             parallelism: 1
             delay: 5s
-    
 
 **Bottom line:** Docker Compose in production is underrated. If you have fewer than 10 services and do not need auto-scaling or multi-region, Compose (or Compose + Swarm for multi-host) is simpler and more maintainable than Kubernetes. The production checklist: health checks, resource limits, log rotation, secrets management, and a restart policy. See also: [Kubernetes vs Docker Swarm vs Nomad](</en/compare/kubernetes-vs-docker-swarm-vs-nomad.html>) and [Deploy Next.js for Free](</en/tech/deploy-nextjs-free.html>).

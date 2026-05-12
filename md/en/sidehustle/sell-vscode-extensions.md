@@ -22,7 +22,7 @@ Language/framework support| Python, Rust Analyzer, Vue Language Features, MDX| $
 API/Tool integrations| GitHub Copilot Chat, GitLab Workflow, Docker, Postman| $3K-25K/mo| Medium (API wrappers)  
 Database/SQL tools| Database Client (paid), SQLTools, MySQL| $2K-20K/mo| Medium-High  
 Collaboration tools| Live Share, CodeTogether, GitLive| $5K-40K+/mo| High (real-time sync)  
-  
+
 ## The Playbook: Free → Paid Funnel
 
 **Step 1: Ship a free extension that solves a real pain point.** The free version must be genuinely useful on its own — this builds your install base and reviews. Most successful paid extensions started as popular free extensions. Example: GitLens launched free in 2016, grew to millions of installs, then introduced GitLens+ (paid) in 2022 with visual file history, Worktree support, and premium integrations.
@@ -41,7 +41,7 @@ Material Theme| Equinusocio (solo)| ~$15K/mo| Paid theme variants + icon packs
 GitLens / GitKraken| GitKraken (company)| ~$50K+/mo| Freemium SaaS (GitLens+ $5-25/mo)  
 Database Client| Weijan Chen (solo)| ~$20K/mo| Freemium (Pro $39-99 lifetime)  
 Symbol Icons| Miguel Solorio (solo)| ~$3K/mo| Paid icon themes  
-  
+
 _* Revenue estimates based on public install counts, pricing, and creator interviews_
 
 ## Technical Considerations

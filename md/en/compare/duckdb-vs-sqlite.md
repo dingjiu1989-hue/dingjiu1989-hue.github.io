@@ -26,7 +26,7 @@ Query Performance (OLAP)| Poor to decent (row scans are slow on wide tables)| Ex
 Memory / Disk| Minimal memory, works on tiny devices| Happier with more memory (in-memory mode for speed)  
 Embedded / IoT| Yes — runs on phones, browsers (Wasm), embedded| Yes — but heavier; not for constrained devices  
 Pricing| Free (public domain)| Free (MIT, DuckDB Labs for support)  
-  
+
 ## When Each Database Wins
 
 **SQLite — Best for:** Application databases — the database behind your mobile app, desktop app, or web app backend. SQLite is the most deployed database in the world: every iPhone, Android phone, browser (Wasm), and operating system uses it. It is perfect for configuration storage, caching, application state, and any workload where you do point lookups and small-range queries on indexed data. **Weak spot:** Analytical queries — SELECT AVG(), GROUP BY on large tables with many columns — are slow because SQLite must read entire rows even when you only need 2 columns.
@@ -44,7 +44,7 @@ CSV / Parquet Import| ★ (manual; .import or external tools)| ★★★★★ (
 Concurrent Writes| ★★★ (single writer, WAL helps)| ★★ (optimistic, not designed for many writers)  
 Python Integration| ★★★★ (sqlite3 standard library)| ★★★★★ (deep Pandas/Polars/Arrow integration)  
 Embeddability / Size| ★★★★★ (~600KB library)| ★★★ (~30MB library, richer dependencies)  
-  
+
 ## Decision Matrix
 
 Scenario| Best Choice| Why  
@@ -56,5 +56,5 @@ Data warehouse queries on Parquet files in S3| DuckDB| Query Parquet directly fr
 Embedded IoT device with 64MB RAM| SQLite| Minimal footprint, runs on anything  
 BI dashboard with complex aggregations| DuckDB| Vectorized execution, rich SQL, fast on aggregates  
 Both OLTP + OLAP in the same app| Both| SQLite for transactions, DuckDB for analytics queries  
-  
+
 **Bottom line:** SQLite and DuckDB are not competitors — they are complementary. SQLite is your application's transactional database; DuckDB is your analytical engine. Use SQLite for writes, point lookups, and application state. Use DuckDB for queries that scan, aggregate, or join large datasets. Many modern data stacks use both: SQLite for the operational database, DuckDB for the analytical queries, and they happily coexist. See also: [Best Database Tools for Developers](</en/tools/best-database-gui-tools.html>) and [Columnar Database Guide](</en/compare/duckdb-vs-sqlite.html>).

@@ -25,7 +25,7 @@ Parallel Execution| Per-file (worker_threads)| Per-file (threads or forks)| Per-
 TypeScript| Via ts-jest or @swc/jest| Native (via esbuild)| Native (Bun's TS transpiler)  
 Vite Project Integration| Manual (jest.config to match Vite aliases)| Zero-config (reads vite.config.ts)| Manual  
 Ecosystem Size| Largest (jest-dom, testing-library, jest-axe)| Large (most Jest plugins work via compat)| Small (growing, but many Jest plugins don't work)  
-  
+
 ## When Each Runner Wins
 
 **Jest — Best for:** Large enterprise codebases with established Jest configurations, custom transformers, and complex module mocking. Jest's ecosystem (jest-dom, jest-axe, jest-image-snapshot, jest-cucumber) is the deepest. **Weak spot:** Slow startup (especially with ts-jest on large projects); Vite-based projects need manual config to resolve aliases correctly.
@@ -44,5 +44,5 @@ Step| What Changes
 4\. Replace jest.* calls| jest.fn() → vi.fn(), jest.mock() → vi.mock(), jest.spyOn() → vi.spyOn()  
 5\. Update package.json| Change "test" script from jest to vitest  
 6\. Remove Jest deps| npm uninstall jest ts-jest @types/jest jest-environment-jsdom  
-  
+
 **Bottom line:** Vitest is the best choice for 90% of new projects — it is faster than Jest, compatible with the Jest ecosystem, and integrates seamlessly with Vite. Jest is still the safe choice for large enterprise codebases with established test infrastructure. Bun Test is worth watching but its ecosystem is not ready for most production use cases yet. See also: [Playwright vs Cypress vs Selenium](</en/compare/playwright-vs-cypress-vs-selenium.html>) and [Testing Strategies for Web Apps](</en/tech/testing-strategies-web-apps.html>).

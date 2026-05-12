@@ -3,7 +3,7 @@ title: "白板/笔记/思维导图工具对比"
 description: "对比 Notion、Obsidian、Miro、Heptabase 等主流笔记和思维导图工具的优缺点，帮你选适合自己的。"
 date: 2026-05-09
 board: tools
-url: https://dingjiu1989-hue.github.io/tools/note-apps.html
+url: https://dingjiu1989-hue.github.io/zh/tools/note-apps.html
 ---
 
 # 白板/笔记/思维导图工具对比
@@ -27,8 +27,8 @@ XMind| 专业思维导图| 基础免费| 桌面版支持
 
 📖 相关推荐
 
-  * [Notion 完全使用指南：从入门到精通](<https://dingjiu1989-hue.github.io/tools/notion-complete-guide.html>)
-  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
-  * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/tools/project-management-tools.html>)
+  * [Notion 完全使用指南：从入门到精通](<https://dingjiu1989-hue.github.io/zh/tools/notion-complete-guide.html>)
+  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/zh/tools/terminal-tools-2026.html>)
+  * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/zh/tools/project-management-tools.html>)
 
-**See also:** [Notion 完全使用指南：从入门到精通](</tools/notion-complete-guide.html>), [数字产品创作指南：Notion 模板、Ebook、设计素材怎么做](</sidehustle/digital-products-guide.html>), [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](</tools/project-management-tools.html>).
+**See also:** [Notion 完全使用指南：从入门到精通](</zh/tools/notion-complete-guide.html>), [数字产品创作指南：Notion 模板、Ebook、设计素材怎么做](</zh/sidehustle/digital-products-guide.html>), [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](</zh/tools/project-management-tools.html>).

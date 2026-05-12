@@ -2,7 +2,7 @@
 title: "API安全防护指南"
 description: "系统讲解API安全防护策略，涵盖认证授权、输入验证、速率限制、敏感数据保护和API网关配置等关键实践。"
 date: 2026-05-11
-board: zh/security
+board: security
 url: https://dingjiu1989-hue.github.io/zh/security/api-security.html
 ---
 

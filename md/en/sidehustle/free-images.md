@@ -17,7 +17,7 @@ Site| Library Size| License| Standout Feature
 **Unsplash**|  3M+ images| Free for commercial use| Highest quality curation. The go-to for "professional but not stock-photo-y" images.  
 **Pexels**|  3M+ images + video| Free for commercial use| Includes free stock videos. Strong search with color filtering.  
 **Pixabay**|  4.2M+ images, videos, vectors| Free for commercial use| Largest library. Includes illustrations and vector graphics. Quality is more variable.  
-  
+
 ## Hidden Gems
 
 Site| What Makes It Special  
@@ -27,7 +27,7 @@ Site| What Makes It Special
 **Stocksnap**|  No repeat images from the big sites. Smaller library (~5K) but uniquely curated.  
 **FoodiesFeed**|  Thousands of high-res food photos. All shot by professional food photographers. If you blog about food, this is your goldmine.  
 **Gratisography**|  Quirky, surreal images you won't find elsewhere. A rabbit wearing sunglasses. A serious businessman with a rubber chicken. For when stock photos feel too stock.  
-  
+
 ## Illustrations & Icons
 
 Site| What You Get  
@@ -35,7 +35,7 @@ Site| What You Get
 **unDraw**|  Open-source SVG illustrations. Change the color to match your brand with one click. Download as SVG or PNG.  
 **Humaaans**|  Mix-and-match illustrations of people. Customize hair, clothing, pose. All free for commercial use.  
 **Feather Icons**|  280+ open-source icons designed on a 24x24 grid. Consistent, minimal, beautiful.  
-  
+
 ## The Legal Stuff (in Plain English)
 
   * **"Free for commercial use"** means you can use it on your blog, in products, in ads — without paying.

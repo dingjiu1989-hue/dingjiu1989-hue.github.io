@@ -3,15 +3,15 @@ title: "AI 时代的个人效率提升：我的 10 个日常使用场景"
 description: "从写邮件、读论文到自动化工作流，分享 AI 融入日常生活的 10 个真实场景和具体工具推荐，每个场景附带可复制的提示词模板。"
 date: 2026-05-10
 board: ai
-url: https://dingjiu1989-hue.github.io/ai/ai-personal-efficiency.html
+url: https://dingjiu1989-hue.github.io/zh/ai/ai-personal-efficiency.html
 ---
 
 # AI 时代的个人效率提升：我的 10 个日常使用场景
 
 关于 AI，最常见的提问不是"这东西有什么用"，而是"除了聊天我到底拿它干啥"。这篇文章不讲概念，只列我每天都在用的 10 个具体场景，每个场景都附带使用的工具和一套可复制的提示词/工作流。 1\. 邮件起草与润色 **工具：** Claude / ChatGPT 我现在写正式邮件几乎不再从零开始。把背景信息告诉 AI——收件人关系、邮件目的、语气要求——30 秒内得到初稿。修改 2-3 处措辞即可发送。关键是提供足够的上下文，否则 AI 写出来的邮件太像 AI 写的。提示词示例："我要给客户写一封跟进邮件，上周五我们演示了产品，他说月底前给答复，我想礼貌地确认一下时间线。语气专业但不生硬。" 2\. 会议纪要自动生成 **工具：** Otter.ai / Fireflies.ai 会议时开启 Otter.ai 录音，它会自动实时转写并标记发言者。会后直接获得完整文字记录 + AI 自动生成的重点摘要。我最常用的功能是"Ask Otter"——会议结束后直接问"这次会议我们定了哪些待办事项"，Otter 从转写记录中提取答案，省去回听录音的时间。 3\. 快速学习新知识 **工具：** ChatGPT 语音模式 / Perplexity 碎片时间（通勤、做家务时）用 ChatGPT App 的语音对话模式。我最近用它快速了解了"Rust 语言的核心设计理念"——AI 像老师一样由浅入深地讲解，遇到不懂的随时打断追问。和看书相比，语音交互的学习体验更接近一对一辅导，效率大约高 2-3 倍。 4\. AI 代码审查 **工具：** Claude Code / GitHub Copilot Chat 代码写完后，让 AI 做一次"code review"比人类同事更快、更仔细。Claude Code 可以在终端直接 diff 当前分支的改动，逐段分析潜在 bug、性能问题和安全漏洞。Copilot Chat 的 /review 命令在 PR 中自动生成审查意见。关键提示：明确告诉 AI 关注什么——"重点检查 SQL 注入风险"或"看有没有内存泄漏"。 5\. 高质量翻译 **工具：** DeepL / ChatGPT DeepL 在正式文档翻译中仍然是最优选择，尤其在英中互译上，短语地道程度碾压传统机器翻译。但遇到需要"意译"的文案——广告词、品牌 slogan、幽默段子——ChatGPT 的翻译加上"请意译，不要直译"的提示效果更好。我的组合策略是：技术文档用 DeepL，创意文案用 ChatGPT。 6\. PPT 配图与封面生成 **工具：** Midjourney / DALL-E 3 每次做 presentation 最头疼的不是内容，而是找配图。现在我把需求描述给 Midjourney："/imagine 一张 16:9 的商业配图，科技感，蓝色调，抽象网络连接，不要文字"。生成 4 张选 1 张直接放进 PPT。唯一注意：AI 生成的图片不适合做产品宣传图（细节可能出错），但作为概念配图效果非常好。 7\. 研究资料综述 **工具：** Perplexity / Consensus 需要快速了解某个领域的研究现状时，Perplexity Pro 是最佳选择。它会在回答中附上引用来源（论文链接或网页 URL），支持追问深入。相比自己在 Google Scholar 一篇篇读摘要，这种方式把调研时间从 2 小时缩短到 20 分钟。学术研究场景推荐 Consensus——它专门索引同行评审论文，不会给你推荐博客文章。 8\. PDF 文档问答 **工具：** Claude（文件上传）/ ChatGPT 收到几十页的 PDF 报告，不需要从头读到尾。直接上传给 Claude 或 ChatGPT，提问："这份合同里的赔偿条款是什么？""Q3 财报中我关注的核心指标是？""这篇论文的创新点在哪里？"AI 从数百页文档中精确找到答案并引用原文位置。我每周至少用这个场景节省 3-4 小时。 9\. 任务自动化 **工具：** ChatGPT + Zapier / Make ChatGPT 的 Zapier 插件连起来可以做很多自动化流程。例如：收到 Invoice PDF 邮件 → AI 提取关键字段 → 写入 Google Sheets → 通知审批人。全程不需要写一行代码。Zapier 的 AI 版块已有数百个预制模板，复制即可使用。 10\. 个人知识管理 **工具：** Obsidian + Copilot 插件 / Notion AI 我的笔记系统中积累了上千条笔记。以前找东西靠标签和目录，现在用 Obsidian 的 Copilot 插件，可以直接问："半年前我看过一篇关于 HTTP/3 性能测试的文章，核心结论是什么？"AI 在向量化后的笔记库中检索并给出答案。Notion AI 也提供了类似功能。这不是简单的全文搜索——AI 会综合多篇笔记给出总结性回答。 这 10 个场景覆盖了写作、沟通、学习、开发、设计、研究、自动化等不同维度的效率提升。关键是不要试图一次性全部用上——选 2-3 个对你当前痛点最明显的场景先开始，养成习惯后再扩展。AI 效率提升不是一朝一夕的事，而是持续迭代的过程。 📖 相关推荐
 
-  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
-  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
-  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/ai/ai-art-monetization.html>)
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/zh/ai/ai-coding-tools-comparison-2026.html>)
+  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/zh/ai/mcp-protocol-guide.html>)
+  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/zh/ai/ai-art-monetization.html>)
 
-**See also:** [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</ai/ai-coding-tools-comparison-2026.html>), [MCP 协议入门：让 AI 模型安全访问你的工具和数据](</ai/mcp-protocol-guide.html>), [AI Agent 开发入门 2026：从原理到第一个智能体](</ai/ai-agent-development-2026.html>).
+**See also:** [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</zh/ai/ai-coding-tools-comparison-2026.html>), [MCP 协议入门：让 AI 模型安全访问你的工具和数据](</zh/ai/mcp-protocol-guide.html>), [AI Agent 开发入门 2026：从原理到第一个智能体](</zh/ai/ai-agent-development-2026.html>).

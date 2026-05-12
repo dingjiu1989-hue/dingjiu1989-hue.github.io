@@ -3,7 +3,7 @@ title: "单元测试入门：从零到写出第一个可维护的测试"
 description: "零基础单元测试入门教程，覆盖 Python/pytest 实战，AAA 模式、Mock、Fixture 核心概念一网打尽。"
 date: 2026-05-09
 board: tech
-url: https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html
+url: https://dingjiu1989-hue.github.io/zh/tech/unit-testing-guide.html
 ---
 
 # 单元测试入门：从零到写出第一个可维护的测试
@@ -15,8 +15,7 @@ url: https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html
   * **减少回归 Bug** — 修一个 Bug 加一个测试，同样的错不会再犯第二次
 
 AAA 模式（Arrange-Act-Assert）
-    
-    
+
     def test_add_two_numbers():
         # Arrange（准备）
         a, b = 2, 3
@@ -26,32 +25,30 @@ AAA 模式（Arrange-Act-Assert）
         assert result == 5
 
 第一个真实测试
-    
-    
+
     # user_service.py
     def get_full_name(user):
         return f"{user.first_name} {user.last_name}"
-    
+
     # test_user_service.py
     def test_get_full_name():
         user = type('User', (), {'first_name': '张', 'last_name': '三'})()
         assert get_full_name(user) == "张 三"
-    
+
     def test_get_full_name_empty_last():
         user = type('User', (), {'first_name': '李', 'last_name': ''})()
         assert get_full_name(user) == "李 "
 
 Mock 和 Fixture
-    
-    
+
     # Fixture: 共享的测试数据
     @pytest.fixture
     def sample_user():
         return User(id=1, name="张三", email="zhang@test.com")
-    
+
     def test_user_email(sample_user):
         assert sample_user.email == "zhang@test.com"
-    
+
     # Mock: 隔离外部依赖
     @patch("requests.get")
     def test_fetch_user(mock_get):
@@ -66,8 +63,8 @@ Mock 和 Fixture
 
 起步建议不用追求 100% 覆盖率——那会增加大量维护负担。先给核心业务逻辑写测试，看到覆盖率数字攀升的成就感会推着你继续写。 📖 相关推荐
 
-  * [Python 入门教程：从零到写出第一个程序](<https://dingjiu1989-hue.github.io/tech/python-tutorial.html>)
-  * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/tech/git-advanced.html>)
-  * [REST API 设计最佳实践：写出让人愿意用的接口](<https://dingjiu1989-hue.github.io/tech/rest-api-best-practices.html>)
+  * [Python 入门教程：从零到写出第一个程序](<https://dingjiu1989-hue.github.io/zh/tech/python-tutorial.html>)
+  * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/zh/tech/git-advanced.html>)
+  * [REST API 设计最佳实践：写出让人愿意用的接口](<https://dingjiu1989-hue.github.io/zh/tech/rest-api-best-practices.html>)
 
-**See also:** [Python 入门教程：从零到写出第一个程序](</tech/python-tutorial.html>), [正则表达式 30 分钟入门指南](</tech/regex-guide.html>), [OpenAI API 入门：用 10 行代码调用 GPT](</ai/openai-api-intro.html>).
+**See also:** [Python 入门教程：从零到写出第一个程序](</zh/tech/python-tutorial.html>), [正则表达式 30 分钟入门指南](</zh/tech/regex-guide.html>), [OpenAI API 入门：用 10 行代码调用 GPT](</zh/ai/openai-api-intro.html>).

@@ -3,7 +3,7 @@ title: "2026 年最佳密码管理器对比：LastPass vs 1Password vs Bitwarden
 description: "六大主流密码管理器全方位对比，涵盖安全性、易用性、跨平台、价格，帮你选出最适合的一款。"
 date: 2026-05-11
 board: tools
-url: https://dingjiu1989-hue.github.io/tools/password-manager-comparison.html
+url: https://dingjiu1989-hue.github.io/zh/tools/password-manager-comparison.html
 ---
 
 # 2026 年最佳密码管理器对比：LastPass vs 1Password vs Bitwarden
@@ -25,8 +25,8 @@ KeePassXC| ✅ 完全免费| —| ✅| 极客首选，完全本地离线
 
 安全提示不要用浏览器内置的密码保存功能——安全性远不如专业密码管理器。记住一个强主密码，开启两步验证。 📖 相关推荐
 
-  * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/tools/project-management-tools.html>)
-  * [VS Code vs JetBrains vs Cursor：2026 年代码编辑器终极对比](<https://dingjiu1989-hue.github.io/tools/editor-comparison-2026.html>)
-  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
+  * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/zh/tools/project-management-tools.html>)
+  * [VS Code vs JetBrains vs Cursor：2026 年代码编辑器终极对比](<https://dingjiu1989-hue.github.io/zh/tools/editor-comparison-2026.html>)
+  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/zh/tools/terminal-tools-2026.html>)
 
-**See also:** [2026 年 10 款必装终端工具：让你的命令行效率翻倍](</tools/terminal-tools-2026.html>), [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](</tools/project-management-tools.html>), [10 个程序员必听的播客：学技术、追趋势、听故事](</tools/dev-podcasts.html>).
+**See also:** [2026 年 10 款必装终端工具：让你的命令行效率翻倍](</zh/tools/terminal-tools-2026.html>), [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](</zh/tools/project-management-tools.html>), [10 个程序员必听的播客：学技术、追趋势、听故事](</zh/tools/dev-podcasts.html>).

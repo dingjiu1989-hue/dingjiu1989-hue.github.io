@@ -18,16 +18,15 @@ Readable| Produces data that can be consumed| fs.createReadStream, HTTP request 
 Writable| Consumes data that is written to it| fs.createWriteStream, HTTP response (res), process.stdout| write(), end(), drain, finish  
 Transform| Both reads and writes — modifies data in transit| zlib.createGzip, crypto.createCipher, CSV parser| Same as Readable + Writable, _transform() method  
 Duplex| Independent read and write sides (like a telephone)| net.Socket, TLS socket, WebSocket| read() + write(), data flowing in both directions  
-  
+
 ## Pipeline API (Modern, Recommended)
 
 **Best for:** Any time you connect streams together. pipeline() handles cleanup and error propagation automatically — raw .pipe() does not.
-    
-    
+
     const { pipeline } = require('node:stream/promises');
     const { createReadStream, createWriteStream } = require('node:fs');
     const { createGzip } = require('node:zlib');
-    
+
     await pipeline(
       createReadStream('input.json'),
       createGzip(),
@@ -38,12 +37,11 @@ Duplex| Independent read and write sides (like a telephone)| net.Socket, TLS soc
 ## Real-World Use Cases
 
 ### 1\. Streaming CSV Processing (Avoid OOM on Large Files)
-    
-    
+
     const { createReadStream } = require('node:fs');
     const { parse } = require('csv-parse');
     const { Transform } = require('node:stream');
-    
+
     // Process a 5GB CSV file with constant memory (~50MB)
     const results = [];
     createReadStream('massive-file.csv')
@@ -62,8 +60,7 @@ Duplex| Independent read and write sides (like a telephone)| net.Socket, TLS soc
       .on('end', () => console.log(`Processed ${results.length} rows`));
 
 ### 2\. HTTP Streaming Large Responses
-    
-    
+
     // Instead of: res.json(allData) — loads all data into memory
     // Use: stream data to client as you produce it
     app.get('/api/export', async (req, res) => {
@@ -83,11 +80,10 @@ Duplex| Independent read and write sides (like a telephone)| net.Socket, TLS soc
 ### 3\. Handling Backpressure
 
 **Best practice:** Respect the return value of write(). When write() returns false, the writable stream's internal buffer is full — pause reading until the drain event fires.
-    
-    
+
     const readStream = createReadStream('huge-file.bin');
     const writeStream = createWriteStream('copy.bin');
-    
+
     readStream.on('data', (chunk) => {
       const canContinue = writeStream.write(chunk);
       if (!canContinue) {

@@ -18,7 +18,7 @@ Step| Time Budget| What to Do| Interviewer Looks For
 2\. High-Level Design| 10 min| Draw major components, data flow, API design| Clean separation of concerns, reasonable APIs  
 3\. Deep Dive| 20 min| Pick 2-3 critical components, detail the data model, scaling strategy| Technical depth, trade-off reasoning  
 4\. Wrap-Up| 10 min| Identify bottlenecks, discuss scaling limits, suggest improvements| Bottleneck awareness, realistic scaling  
-  
+
 ## Back-of-the-Envelope Estimation
 
 Metric| How to Calculate| Example (Twitter-scale)  
@@ -28,7 +28,7 @@ QPS (Queries Per Second)| DAU × avg requests per user / 86,400| 200M × 50 / 86
 Storage (per day)| QPS × avg data size × 86,400| 115K × 1KB × 86,400 ≈ 10 TB/day  
 Bandwidth| Storage per second (MB/s)| 10 TB / 86,400 ≈ 120 MB/s  
 Cache Size| Daily storage × 0.2 (80-20 rule)| 10 TB × 0.2 = 2 TB cache  
-  
+
 ## Core Building Blocks for Any Design
 
 Problem| Solution| When to Use  
@@ -42,7 +42,7 @@ Long-running tasks| Message queue (Kafka, SQS) + workers| Video processing, emai
 Rate limiting| Token bucket / sliding window + Redis| API protection, DDoS prevention  
 Search| Elasticsearch or PostgreSQL FTS| Full-text search, filtering  
 Analytics| ClickHouse, BigQuery, data lake| Event tracking, reporting  
-  
+
 ## Common System Design Questions & Key Decisions
 
 System| Key Decision Points| Common Pitfall  
@@ -52,5 +52,5 @@ Chat System| Long polling vs WebSocket, message ordering, read receipts| Not han
 News Feed| Fan-out-on-write vs fan-out-on-read, feed ranking| Underestimating celebrity user fan-out cost  
 Rate Limiter| Token bucket vs sliding window, distributed vs centralized| Race conditions in distributed counters  
 Video Streaming| Transcoding pipeline, adaptive bitrate (HLS/DASH), CDN| Not discussing encoding formats and device compatibility  
-  
+
 **Bottom line:** System design interviews test breadth, not depth. The interviewer wants to see that you can decompose a complex system, identify the critical path, and make reasonable trade-offs. Master the 4-step framework, memorize the 10 core building blocks, and practice estimating QPS/storage quickly. The difference between a "pass" and "fail" is rarely technical accuracy — it is structured thinking and communication. See also: [PostgreSQL Query Optimization](</en/tech/postgresql-query-optimization.html>) and [Full-Text Search Comparison](</en/tech/full-text-search-comparison.html>).

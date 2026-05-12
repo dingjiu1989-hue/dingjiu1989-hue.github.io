@@ -10,414 +10,301 @@ url: https://dingjiu1989-hue.github.io/en/compare/mysql-vs-mariadb.html
 
 ##  Introduction
 
-  
-
-
 MySQL and MariaDB share a common origin but have diverged significantly since MariaDB was forked from MySQL in 2009. While both systems remain largely compatible at the SQL level, their storage engines, optimization strategies, and feature sets have evolved in different directions. Understanding these differences is critical for migration decisions and new project planning.
-
-  
-
 
 ##  Divergence History
 
-  
-
-    
-    
     # Timeline of divergence
-    
+
     timeline:
-    
+
       - year: 1995
-    
+
         event: "MySQL 1.0 released by TCX DataKonsult AB"
-    
+
       - year: 2008
-    
+
         event: "Sun Microsystems acquires MySQL AB for $1B"
-    
+
       - year: 2009
-    
+
         event: "Oracle acquires Sun; MariaDB forked by MySQL founder Monty Widenius"
-    
+
       - year: 2013
-    
+
         event: "MySQL 5.6 (Oracle) diverges further from MariaDB 10.0"
-    
+
       - year: 2018
-    
+
         event: "MySQL 8.0 released with data dictionary rewrite, roles, CTE"
-    
+
       - year: 2024
-    
+
         event: "MariaDB 11.x and MySQL 8.4 LTS diverge on optimizer and engine features"
-    
-    
-
-  
-
 
 Key fork motivations:
 
 * **License concerns**: MySQL moved toward Oracle-controlled development; MariaDB remains fully GPL with a community-driven governance model
 * **Feature inclusion**: Oracle rejected some community patches that MariaDB adopted
 * **Storage engine philosophy**: MariaDB encourages engine diversity; MySQL centralizes around InnoDB
-  
-
 
 ##  Storage Engine Differences
 
-  
-
-
 ### InnoDB (Both) vs Aria (MariaDB)
 
-  
-
-    
-    
     -- MySQL/MariaDB: InnoDB configuration
-    
+
     -- Both support this, but default settings differ
-    
-    
-    
+
     -- MySQL default:
-    
+
     innodb_buffer_pool_size = 70% of RAM
-    
+
     innodb_log_file_size = 2GB
-    
+
     innodb_flush_log_at_trx_commit = 1  -- ACID compliant
-    
+
     innodb_io_capacity = 2000
-    
+
     innodb_autoinc_lock_mode = 2  -- Interleaved (MySQL 8+)
-    
-    
-    
+
     -- MariaDB default:
-    
+
     innodb_buffer_pool_size = 50% of RAM
-    
+
     innodb_log_file_size = 512MB
-    
+
     innodb_flush_log_at_trx_commit = 1
-    
+
     innodb_io_capacity = 200
-    
+
     -- MariaDB also defaults to InnoDB for transactional tables
-    
-    
-
-  
-
 
 MariaDB's Aria engine (fork of MyISAM):
 
-  
-
-    
-    
     -- Create Aria table (MariaDB only)
-    
+
     CREATE TABLE analytics_events (
-    
+
         event_id BIGINT AUTO_INCREMENT,
-    
+
         user_id INT NOT NULL,
-    
+
         event_type VARCHAR(50),
-    
+
         event_data JSON,
-    
+
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    
+
         PRIMARY KEY (event_id),
-    
+
         INDEX idx_user (user_id),
-    
+
         INDEX idx_type (event_type)
-    
+
     ) ENGINE=Aria TRANSACTIONAL=1 PAGE_CHECKSUM=1;
-    
-    
-    
+
     -- Aria advantages:
-    
+
     -- 1. Crash-safe (unlike MyISAM) without full InnoDB overhead
-    
+
     -- 2. Better performance for read-heavy analytics workloads
-    
+
     -- 3. Lower memory footprint for large tables
-    
+
     -- 4. Supports FULLTEXT indexes
-    
-    
-    
+
     -- MariaDB: ColumnStore for analytical queries
-    
+
     -- Install ColumnStore for columnar storage
-    
+
     -- CREATE TABLE sales_analytics (...) ENGINE=ColumnStore;
-    
+
     -- Optimized for large-scale aggregations
-    
-    
-
-  
-
 
 ##  Feature Comparison
 
-  
-
-
 ### Common Features (Both)
 
-  
-
-    
-    
     -- Both MySQL 8.x and MariaDB 11.x support:
-    
+
     -- Common Table Expressions (CTE)
-    
+
     WITH RECURSIVE org_tree AS (
-    
+
         SELECT id, name, manager_id, 1 AS level
-    
+
         FROM employees WHERE manager_id IS NULL
-    
+
         UNION ALL
-    
+
         SELECT e.id, e.name, e.manager_id, ot.level + 1
-    
+
         FROM employees e
-    
+
         JOIN org_tree ot ON e.manager_id = ot.id
-    
+
     )
-    
+
     SELECT * FROM org_tree ORDER BY level, name;
-    
-    
-    
+
     -- Window functions
-    
+
     SELECT
-    
+
         department,
-    
+
         employee_name,
-    
+
         salary,
-    
+
         RANK() OVER (PARTITION BY department ORDER BY salary DESC) as rank,
-    
+
         AVG(salary) OVER (PARTITION BY department) as dept_avg
-    
+
     FROM employees;
-    
-    
-    
+
     -- JSON functions
-    
+
     SELECT JSON_EXTRACT(data, '$.address.city') as city
-    
+
     FROM users WHERE JSON_CONTAINS(data, '{"active": true}');
-    
-    
-
-  
-
 
 ### MariaDB-Only Features
 
-  
-
-    
-    
     -- Temporal tables (system-versioned)
-    
+
     CREATE TABLE customer_audit (
-    
+
         id INT PRIMARY KEY,
-    
+
         name VARCHAR(100),
-    
+
         email VARCHAR(200),
-    
+
         credit_limit DECIMAL(10,2),
-    
+
         -- Automatic versioning
-    
+
         ROW_START TIMESTAMP(6) GENERATED ALWAYS AS ROW START,
-    
+
         ROW_END TIMESTAMP(6) GENERATED ALWAYS AS ROW END,
-    
+
         PERIOD FOR SYSTEM_TIME (ROW_START, ROW_END)
-    
+
     ) WITH SYSTEM VERSIONING;
-    
-    
-    
+
     -- Query historical state
-    
+
     SELECT * FROM customer_audit
-    
+
     FOR SYSTEM_TIME AS OF '2026-01-15 10:00:00'
-    
+
     WHERE id = 42;
-    
-    
-    
+
     -- Dynamic columns (schema-less within column)
-    
+
     CREATE TABLE product_metadata (
-    
+
         product_id INT PRIMARY KEY,
-    
+
         attributes BLOB  -- Dynamic columns
-    
+
     );
-    
+
     INSERT INTO product_metadata VALUES (
-    
+
         1,
-    
+
         COLUMN_CREATE('color', 'red', 'weight', 150, 'material', 'steel')
-    
+
     );
-    
+
     SELECT COLUMN_GET(attributes, 'weight' AS INT) as weight
-    
+
     FROM product_metadata WHERE product_id = 1;
-    
-    
-
-  
-
 
 ### MySQL-Only Features
 
-  
-
-    
-    
     -- MySQL 8.4: Histogram-based optimizer stats
-    
+
     ANALYZE TABLE orders UPDATE HISTOGRAM ON status, customer_id;
-    
-    
-    
+
     -- MySQL: Invisible indexes
-    
+
     ALTER TABLE orders ALTER INDEX idx_order_date INVISIBLE;
-    
+
     -- Test query performance without removing the index
-    
-    
-    
+
     -- MySQL: VECTOR type (MySQL 9.0+)
-    
+
     CREATE TABLE embeddings (
-    
+
         id INT PRIMARY KEY,
-    
+
         embedding VECTOR(1536)
-    
+
     );
-    
+
     CREATE VECTOR INDEX idx_embed ON embeddings ((VECTOR_DISTANCE(embedding, '[...]')));
-    
-    
-    
+
     -- MySQL: Resource groups
-    
+
     CREATE RESOURCE GROUP reporting_group
-    
+
         TYPE = USER
-    
+
         VCPU = 2-3
-    
+
         THREAD_PRIORITY = 5;
-    
+
     SET RESOURCE GROUP reporting_group;
-    
+
     -- Limit analytics queries to specific CPU cores
-    
-    
-
-  
-
 
 ##  Performance and Optimization
 
-  
-
-    
-    
     -- Benchmark: Concurrent OLTP workload
-    
+
     -- Similar performance for basic queries
-    
-    
-    
+
     -- MariaDB thread pool (default in 11.x)
-    
+
     -- Better scalability for high-connection workloads
-    
+
     thread_pool_size = 16
-    
+
     thread_pool_max_threads = 500
-    
+
     thread_pool_idle_timeout = 60
-    
-    
-    
+
     -- MySQL: Connection handling
-    
+
     -- Dedicated thread per connection (default)
-    
+
     -- Or Thread Pool plugin (Enterprise only)
-    
+
     thread_handling = one-thread-per-connection
-    
+
     -- MariaDB includes thread pool free (MySQL charges for it)
-    
-    
-    
+
     -- Query optimizer differences:
-    
+
     -- MySQL 8.4: Cost-based, uses histograms
-    
+
     -- MariaDB 11.x: Cost-based with table statistics feedback loop
-    
-    
-    
+
     -- EXPLAIN output differences
-    
+
     EXPLAIN FORMAT=JSON SELECT * FROM orders WHERE status = 'pending';
-    
+
     -- MySQL: JSON plan with cost breakdown
-    
+
     -- MariaDB: JSON plan with optimization trace
-    
-    
-
-  
-
 
 ##  Compatibility and Migration
 
-  
-
-
 ### Application Compatibility
-
-  
-
 
 | Feature | MySQL 8.4 | MariaDB 11.x |
 
@@ -435,87 +322,56 @@ MariaDB's Aria engine (fork of MyISAM):
 
 | JSON | Native type | LONGTEXT + JSON functions |
 
-  
-
-
 ### Data Replication Between MySQL and MariaDB
 
-  
-
-    
-    
     # MariaDB as replica of MySQL
-    
+
     [mysqld]
-    
+
     server-id = 2
-    
+
     replicate-do-db = production
-    
+
     binlog_format = ROW
-    
+
     slave_parallel_threads = 4
-    
-    
-    
+
     # Known limitations:
-    
+
     # - GTID formats differ (MariaDB uses own format)
-    
+
     # - Use binlog_checksum = NONE for cross-compatibility
-    
+
     # - Some DDL may not replicate correctly
-    
-    
-
-  
-
 
 ### Migration Steps
 
-  
-
-    
-    
     # Option 1: Logical dump (most compatible)
-    
+
     mysqldump --compatible=ansi --skip-definer \
-    
+
       --routines --triggers --events \
-    
+
       production_db > backup.sql
-    
-    
-    
+
     # Option 2: Percona XtraBackup (physical)
-    
+
     xtrabackup --backup --target-dir=/backup/mysql
-    
-    
-    
+
     # Option 3: Replication-based (zero-downtime)
-    
+
     # 1. Set up MySQL as master
-    
+
     # 2. Configure MariaDB as replica
-    
+
     # 3. Verify data consistency
-    
+
     # 4. Promote MariaDB to master
-    
-    
-
-  
-
 
 ##  Decision Guide
-
-  
 
 * **Choose MySQL** if you rely on Oracle ecosystem compatibility, need MySQL HeatWave for analytics, require MySQL Enterprise support, or need the VECTOR data type for AI/ML embeddings.
 * **Choose MariaDB** if you want fully open-source (no Oracle licensing), need thread pool performance (free), require temporal tables or dynamic columns, prefer a community-governed project, or want storage engine diversity (Aria, ColumnStore, Spider).
 * **Stay on current** if you already run either in production without migration pain; the differences are rarely worth a migration for existing deployments.
-  
-
 
 For new projects starting in 2026, MariaDB offers the better value proposition for most use cases due to its open governance and free enterprise features, while MySQL remains the safer choice for organizations that already have Oracle relationships or need its specific enterprise integrations.

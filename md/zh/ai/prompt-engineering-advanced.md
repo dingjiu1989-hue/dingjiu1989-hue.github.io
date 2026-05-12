@@ -2,7 +2,7 @@
 title: "高级Prompt Engineering技巧"
 description: "深入探讨高级提示工程方法，包括思维链、Few-Shot学习、结构化输出等关键技术，助你充分发挥大语言模型的能力。"
 date: 2026-05-11
-board: zh/ai
+board: ai
 url: https://dingjiu1989-hue.github.io/zh/ai/prompt-engineering-advanced.html
 ---
 

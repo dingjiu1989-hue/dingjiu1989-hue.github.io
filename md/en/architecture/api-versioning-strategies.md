@@ -21,18 +21,17 @@ Date-Based (Calendar Versioning)| 2026-05-01| APIs that evolve continuously with
 Semantic (Major.Minor)| v1, v2, v3| APIs with clear, infrequent major breaking changes| GitHub, most REST APIs  
 Rolling (No Version)| No version identifier| Internal APIs, GraphQL (deprecation instead of versioning)| GraphQL, internal services  
 Stripe's Versioning Model (The Gold Standard)
-    
-    
+
     # Stripe's approach: date-based versioning via custom header
     # Stripe-Version: 2026-05-01
-    
+
     # Key principles:
     # 1. Every API request is pinned to a specific version date
     # 2. New features are added without breaking existing code
     # 3. Breaking changes: old behavior is maintained for old versions
     # 4. Upgrading is explicit: change the date, test, deploy
     # 5. Old versions are supported for a long time (years)
-    
+
     # Why this works:
     # - No URL changes ever
     # - Clients control when they upgrade

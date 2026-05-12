@@ -15,12 +15,11 @@ A well-designed database makes every query simpler and faster. A poorly-designed
 Normalization eliminates duplicate data and prevents update anomalies. You need at least 3NF (Third Normal Form) for most applications.
 
 ### 1NF: Atomic Values, No Repeating Groups
-    
-    
+
     -- ❌ Denormalized: multiple phone numbers in one field
     | id | name  | phones              |
     | 1  | Alice | "555-0001, 555-0002"|
-    
+
     -- ✅ 1NF: each value is atomic, or use a separate table
     | id | name  |
     | 1  | Alice |
@@ -31,12 +30,11 @@ Normalization eliminates duplicate data and prevents update anomalies. You need 
 ### 2NF: No Partial Dependencies
 
 Every non-key column must depend on the WHOLE primary key, not part of it. This only applies to tables with composite keys.
-    
-    
+
     -- ❌ 2NF violation: course_name depends only on course_id, not the full key
     | student_id | course_id | course_name | grade |
     | 1          | CS101     | Intro CS    | A     |
-    
+
     -- ✅ 2NF: split into two tables
     Students: student_id → course_id → grade
     Courses: course_id → course_name
@@ -44,12 +42,11 @@ Every non-key column must depend on the WHOLE primary key, not part of it. This 
 ### 3NF: No Transitive Dependencies
 
 Non-key columns must not depend on other non-key columns.
-    
-    
+
     -- ❌ 3NF violation: city_population depends on city, not directly on the key
     | student_id | city    | city_population |
     | 1          | Boston  | 675000          |
-    
+
     -- ✅ 3NF: city_population in a cities table
     Students: student_id → city_id
     Cities: city_id → name, population
@@ -63,7 +60,7 @@ Composite| Multi-column queries| WHERE user_id = ? AND status = ?
 Partial| Filtering by condition| WHERE deleted_at IS NULL  
 Full-text (GIN/GiST)| Text search| WHERE body @@ to_tsquery('typescript')  
 Unique| Enforce uniqueness| UNIQUE(email)  
-  
+
 ### Index Rules of Thumb
 
   * **Index WHERE and JOIN columns.** Every foreign key gets an index.
@@ -71,25 +68,22 @@ Unique| Enforce uniqueness| UNIQUE(email)
   * **Don't over-index.** Each index slows down INSERT/UPDATE/DELETE.
   * **Use EXPLAIN ANALYZE.** Verify the index is actually being used.
 
-
-
 ## 3\. Relationship Types
-    
-    
+
     -- One-to-Many (most common):
     CREATE TABLE posts (
       id SERIAL PRIMARY KEY,
       user_id INT REFERENCES users(id),  -- FK to users
       title TEXT NOT NULL
     );  -- One user → many posts
-    
+
     -- Many-to-Many (use junction table):
     CREATE TABLE post_tags (
       post_id INT REFERENCES posts(id),
       tag_id INT REFERENCES tags(id),
       PRIMARY KEY (post_id, tag_id)
     );  -- One post → many tags, one tag → many posts
-    
+
     -- One-to-One (rare, use for optional extension):
     CREATE TABLE user_profiles (
       user_id INT PRIMARY KEY REFERENCES users(id),
@@ -105,7 +99,7 @@ Storing JSON blobs instead of columns| Can't index, can't query efficiently| Rel
 No TIMESTAMPTZ| Timezone bugs are a nightmare| Always use TIMESTAMPTZ, store UTC  
 Missing foreign key constraints| Orphaned data, referential chaos| Always add FK constraints (ON DELETE CASCADE or SET NULL)  
 EAV (Entity-Attribute-Value)| Unqueriable soup| Use JSONB for dynamic fields per row, or normal columns  
-  
+
 ## 5\. Choosing Your Primary Key
 
 Strategy| Pros| Cons  
@@ -115,7 +109,7 @@ Strategy| Pros| Cons
 **Auto-increment INT**|  Small index, fast joins, ordered| Predictable, can't merge across servers, exposes count  
 **Auto-increment BIGINT**|  Same as INT, won't overflow| Same cons. Use this over INT for new projects.  
 **Nano ID / CUID2**|  URL-safe, collision-resistant| String-based (slower than UUID in Postgres)  
-  
+
 **Recommendation:** UUID v7 for distributed systems and public-facing IDs. BIGINT for internal tables. Avoid exposing auto-increment IDs in URLs.
 
 **Bottom line:** Normalize to 3NF, index every FK and query column, use appropriate data types, and always have foreign key constraints. A well-designed schema is cheaper to fix now than later. See also: [database comparison](</en/compare/postgresql-vs-mysql-vs-sqlite.html>) and [ORM comparison](</en/compare/prisma-vs-drizzle-vs-typeorm.html>).

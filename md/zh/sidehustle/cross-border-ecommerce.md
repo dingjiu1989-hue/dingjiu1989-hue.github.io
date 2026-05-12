@@ -3,7 +3,7 @@ title: "跨境电商入门指南：从 0 到第一单的全流程"
 description: "新手友好的跨境电商入门教程，Shopee/Lazada/Tokopedia 三大平台对比，选品、运营、物流全链路讲解。"
 date: 2026-05-07
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/sidehustle/cross-border-ecommerce.html
+url: https://dingjiu1989-hue.github.io/zh/sidehustle/cross-border-ecommerce.html
 ---
 
 # 跨境电商入门指南：从 0 到第一单的全流程
@@ -40,8 +40,8 @@ Tokopedia| 印尼（人口 2.7 亿）| 佣金 2-4%| 印尼最大电商平台
 
 📖 相关推荐
 
-  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
-  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
-  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/zh/sidehustle/ai-era-side-hustles.html>)
+  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/zh/sidehustle/affiliate-marketing.html>)
+  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/zh/sidehustle/knowledge-monetization.html>)
 
-**See also:** [AI 时代程序员的 5 个新副业机会（2026）](</sidehustle/ai-era-side-hustles.html>), [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</sidehustle/affiliate-marketing.html>), [如何把你的专业知识变成付费内容：从 0 到月入 5000](</sidehustle/knowledge-monetization.html>).
+**See also:** [AI 时代程序员的 5 个新副业机会（2026）](</zh/sidehustle/ai-era-side-hustles.html>), [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</zh/sidehustle/affiliate-marketing.html>), [如何把你的专业知识变成付费内容：从 0 到月入 5000](</zh/sidehustle/knowledge-monetization.html>).

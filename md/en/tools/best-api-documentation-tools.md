@@ -22,7 +22,7 @@ ReadMe| Documentation platform| $99/mo (starter)| Interactive docs, API keys man
 Redocly (Redoc)| Spec renderer + platform| Free (OSS), Team $299/mo| Beautiful 3-column layout, API registry  
 GitBook| General docs platform| Free (Team $38/user/mo)| Multi-product docs, non-API documentation  
 Docusaurus + OpenAPI plugin| Static site + API plugin| Free (OSS)| Self-hosted docs with full customization  
-  
+
 ## Feature Comparison
 
 Feature| Postman| Mintlify| ReadMe| Redocly| Scalar  
@@ -36,7 +36,7 @@ Versioning| Yes (collections + env)| Yes (Git-based)| Yes (stable + preview)| Ye
 Analytics| Yes (team plan)| Yes (page views, search)| Yes (API usage, errors)| Yes (registry metrics)| No  
 Custom Domain| Yes (team plan)| Yes (Pro)| Yes ($99/mo+)| Yes (Team)| N/A (self-hosted)  
 Open Source| No| No| No| Redoc is OSS, platform is not| Yes (MIT)  
-  
+
 ## Which Tool for Your Situation?
 
 **Best for:** Any team building a public or internal API. **Weak spot:** The tools diverge quickly — Postman is a full API platform; Mintlify and ReadMe are pure documentation. Pick based on whether you need testing/mocking or just docs.
@@ -49,5 +49,5 @@ Startup, great-looking docs fast| Mintlify| Best design, AI features, developer-
 Public API with users| ReadMe| API key management, usage analytics, onboarding  
 Enterprise, API governance| Redocly| API registry, style guides, multi-team  
 Existing static site (Docusaurus, etc.)| OpenAPI plugin| Embed API docs in existing docs site  
-  
+
 **Bottom line:** Every API needs an OpenAPI 3.1 specification — it is the universal format all these tools consume. Write your spec first, then pick a renderer. For 80% of teams, Postman's free tier (design + test + document) or Scalar's open source renderer (for self-hosted) covers all needs. Upgrade to Mintlify or ReadMe when you need a polished public-facing docs website with analytics. See also: [REST API Best Practices](</en/tech/rest-api-best-practices.html>) and [Build and Sell an API](</en/sidehustle/build-and-sell-api.html>).

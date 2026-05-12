@@ -3,7 +3,7 @@ title: "MCP 协议入门：让 AI 模型安全访问你的工具和数据"
 description: "Model Context Protocol (MCP) 是 Anthropic 推出的开放协议，让 AI 助手通过标准化接口连接外部工具和数据源。本文从零讲解 MCP 的核心概念、服务端开发、客户端集成。"
 date: 2026-05-09
 board: ai
-url: https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html
+url: https://dingjiu1989-hue.github.io/zh/ai/mcp-protocol-guide.html
 ---
 
 # MCP 协议入门：让 AI 模型安全访问你的工具和数据
@@ -21,17 +21,16 @@ MCP 解决了这三个问题。它定义了一套**客户端-服务器** 架构�
   * **MCP 协议** ：客户端和服务器之间通过 JSON-RPC 2.0 通信
 
 MCP 的核心概念 MCP 定义了三种核心原语（Primitives）： 1\. Tools（工具） 让 AI 模型执行具体操作。比如：搜索网页、发送邮件、创建文件、查询数据库。每个 Tool 有名称、描述和参数 Schema（JSON Schema 格式）。AI 模型通过 Function Calling 选择调用哪个 Tool。 2\. Resources（资源） 暴露数据给 AI 模型读取。比如：文件内容、数据库记录、API 响应。Resources 是只读的，模型可以读取但不能修改——这比直接给文件系统权限安全得多。 3\. Prompts（提示模板） 预定义的提示词模板。Server 可以提供特定领域的 Prompt 模板，Client 可以直接使用。比如一个 SQL Server 可以提供"分析这张表的结构"的 Prompt 模板。 动手：构建一个 MCP Server 以 Python 为例，用官方 SDK 创建一个天气查询 Server：
-    
-    
+
     # weather_server.py
     from mcp.server import Server, NotificationOptions
     from mcp.server.models import InitializationCapabilities
     import mcp.server.stdio
     import mcp.types as types
     import httpx
-    
+
     server = Server("weather-server")
-    
+
     @server.list_tools()
     async def handle_list_tools() -> list[types.Tool]:
         return [
@@ -50,7 +49,7 @@ MCP 的核心概念 MCP 定义了三种核心原语（Primitives）： 1\. Tools
                 }
             )
         ]
-    
+
     @server.call_tool()
     async def handle_call_tool(
         name: str,
@@ -69,7 +68,7 @@ MCP 的核心概念 MCP 定义了三种核心原语（Primitives）： 1\. Tools
                 text=f"{city} 当前温度 {data['temp']}°C，{data['desc']}"
             )]
         raise ValueError(f"Unknown tool: {name}")
-    
+
     async def main():
         async with mcp.server.stdio.stdio_server() as streams:
             await server.run(
@@ -78,14 +77,13 @@ MCP 的核心概念 MCP 定义了三种核心原语（Primitives）： 1\. Tools
                     sampling={},
                 ),
             )
-    
+
     if __name__ == "__main__":
         import asyncio
         asyncio.run(main())
 
 在 Claude Desktop 中配置 MCP Server 创建好 Server 后，在 Claude Desktop 的配置文件中注册即可：
-    
-    
+
     // ~/Library/Application Support/Claude/claude_desktop_config.json
     {
       "mcpServers": {
@@ -135,8 +133,8 @@ MCP vs 传统 Function Calling 特性| MCP| 传统 Function Calling
 
 总结 MCP 正在成为 AI 工具生态的"USB-C 接口"。它的价值不在于技术有多复杂，而在于**标准化带来的生态效应** ——一个人写的 MCP Server，所有人都能用。如果你在做 AI 应用开发，MCP 是 2026 年必须了解的基础设施。 下一步建议：安装 Claude Desktop 或支持 MCP 的客户端，从官方 Filesystem Server 开始体验，然后再尝试接入 GitHub 或数据库 Server。 📖 相关推荐
 
-  * [LangChain 入门：构建你的第一个 AI 应用](<https://dingjiu1989-hue.github.io/ai/langchain-intro.html>)
-  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
-  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/ai/ai-art-monetization.html>)
+  * [LangChain 入门：构建你的第一个 AI 应用](<https://dingjiu1989-hue.github.io/zh/ai/langchain-intro.html>)
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/zh/ai/ai-coding-tools-comparison-2026.html>)
+  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/zh/ai/ai-art-monetization.html>)
 
-**See also:** [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</ai/ai-coding-tools-comparison-2026.html>), [AI Agent 开发入门 2026：从原理到第一个智能体](</ai/ai-agent-development-2026.html>), [AI 绘画变现指南：从出图到接单的完整路径](</ai/ai-art-monetization.html>).
+**See also:** [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</zh/ai/ai-coding-tools-comparison-2026.html>), [AI Agent 开发入门 2026：从原理到第一个智能体](</zh/ai/ai-agent-development-2026.html>), [AI 绘画变现指南：从出图到接单的完整路径](</zh/ai/ai-art-monetization.html>).

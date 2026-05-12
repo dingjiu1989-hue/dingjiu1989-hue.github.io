@@ -3,7 +3,7 @@ title: "2026 年程序员接私活指南：渠道、报价、避坑全攻略"
 description: "程序员做副业的完整指南，涵盖国内外接单平台、报价策略、合同模板、税务处理，帮你安全高效地增加收入。"
 date: 2026-05-09
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/sidehustle/programmer-side-hustle.html
+url: https://dingjiu1989-hue.github.io/zh/sidehustle/programmer-side-hustle.html
 ---
 
 # 2026 年程序员接私活指南：渠道、报价、避坑全攻略
@@ -30,8 +30,8 @@ Fiverr| 技能服务化| 20%| 小单、快速交付
 
 税务问题 国内：单次收入 800 以下免税；劳务报酬按 20%-40% 累进税率（可次年汇算清缴退税）。建议年收入超过 5 万就注册个体户，税负更低。 📖 相关推荐
 
-  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
-  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
-  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/zh/sidehustle/ai-era-side-hustles.html>)
+  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/zh/sidehustle/affiliate-marketing.html>)
+  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/zh/sidehustle/knowledge-monetization.html>)
 
-**See also:** [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</sidehustle/affiliate-marketing.html>), [跨境电商入门指南：从 0 到第一单的全流程](</sidehustle/cross-border-ecommerce.html>), [独立开发者出海指南：从产品 Idea 到稳定变现](</sidehustle/indie-dev-guide.html>).
+**See also:** [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</zh/sidehustle/affiliate-marketing.html>), [跨境电商入门指南：从 0 到第一单的全流程](</zh/sidehustle/cross-border-ecommerce.html>), [独立开发者出海指南：从产品 Idea 到稳定变现](</zh/sidehustle/indie-dev-guide.html>).

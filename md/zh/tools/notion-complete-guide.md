@@ -3,7 +3,7 @@ title: "Notion 完全使用指南：从入门到精通"
 description: "最完整的 Notion 中文教程，覆盖数据库、公式、模板、自动化等核心功能，附 10 个可以直接用的模板。"
 date: 2026-05-07
 board: tools
-url: https://dingjiu1989-hue.github.io/tools/notion-complete-guide.html
+url: https://dingjiu1989-hue.github.io/zh/tools/notion-complete-guide.html
 ---
 
 # Notion 完全使用指南：从入门到精通
@@ -24,11 +24,10 @@ Gallery（画廊）| 图文卡片，适合设计灵感墙
 List（列表）| 极简视图，适合快速浏览  
 Timeline（时间线）| 甘特图，适合项目排期  
 Formula 公式入门
-    
-    
+
     # 计算两个日期之间的天数
     dateBetween(prop("截止日期"), prop("开始日期"), "days")
-    
+
     # 根据进度显示状态
     if(prop("进度") == 100, "✅ 完成",
       prop("进度") >= 50, "🟡 进行中", "🔴 未开始")
@@ -54,8 +53,8 @@ Formula 公式入门
 
 📖 相关推荐
 
-  * [白板/笔记/思维导图工具对比](<https://dingjiu1989-hue.github.io/tools/note-apps.html>)
-  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
-  * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/tools/project-management-tools.html>)
+  * [白板/笔记/思维导图工具对比](<https://dingjiu1989-hue.github.io/zh/tools/note-apps.html>)
+  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/zh/tools/terminal-tools-2026.html>)
+  * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/zh/tools/project-management-tools.html>)
 
-**See also:** [数字产品创作指南：Notion 模板、Ebook、设计素材怎么做](</sidehustle/digital-products-guide.html>), [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](</tools/project-management-tools.html>), [白板/笔记/思维导图工具对比](</tools/note-apps.html>).
+**See also:** [数字产品创作指南：Notion 模板、Ebook、设计素材怎么做](</zh/sidehustle/digital-products-guide.html>), [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](</zh/tools/project-management-tools.html>), [白板/笔记/思维导图工具对比](</zh/tools/note-apps.html>).

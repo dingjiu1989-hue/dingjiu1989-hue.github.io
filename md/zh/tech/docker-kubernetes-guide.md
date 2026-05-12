@@ -2,7 +2,7 @@
 title: "Docker与Kubernetes入门实战"
 description: "从零开始学习容器化技术与容器编排，涵盖Docker基础操作、镜像构建、Kubernetes集群部署与日常运维管理实践。"
 date: 2026-05-11
-board: zh/tech
+board: tech
 url: https://dingjiu1989-hue.github.io/zh/tech/docker-kubernetes-guide.html
 ---
 

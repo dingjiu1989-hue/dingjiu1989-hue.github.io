@@ -3,7 +3,7 @@ title: "SaaS 创意验证：不写代码也能测试你的Idea能不能赚钱"
 description: "90% 的 SaaS 产品死于没人要。本文教你用 Landing Page 测试、模拟门铃、电梯测试等方法，在写代码前就验证产品想法，避免浪费数月开发。"
 date: 2026-05-09
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/sidehustle/saas-idea-validation.html
+url: https://dingjiu1989-hue.github.io/zh/sidehustle/saas-idea-validation.html
 ---
 
 # SaaS 创意验证：不写代码也能测试你的Idea能不能赚钱
@@ -40,8 +40,8 @@ Landing Page 转化| > 5% 留邮箱| < 1%
 你自己的热情| 愿意在这个领域干 5 年| 已经觉得无聊了  
 **最危险的信号** ："挺有意思的"——这句话翻译过来是"我不需要，但不想伤你感情"。 总结 程序员做产品最大的诅咒是"我能做"——因为你能做，你就会做，而不是先问"有人需要吗"。这 6 个验证方法的核心逻辑是**把失败的成本从数百小时降到数小时** 。 如果你现在有一个 SaaS 想法：这周末不要写代码，做一个 Landing Page，发到 3 个社区，看有没有人留邮箱。这是你花 2 小时能做的投资回报率最高的事。 📖 相关推荐
 
-  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
-  * [独立开发者出海指南：从产品 Idea 到稳定变现](<https://dingjiu1989-hue.github.io/sidehustle/indie-dev-guide.html>)
-  * [数字产品创作指南：Notion 模板、Ebook、设计素材怎么做](<https://dingjiu1989-hue.github.io/sidehustle/digital-products-guide.html>)
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/zh/sidehustle/ai-era-side-hustles.html>)
+  * [独立开发者出海指南：从产品 Idea 到稳定变现](<https://dingjiu1989-hue.github.io/zh/sidehustle/indie-dev-guide.html>)
+  * [数字产品创作指南：Notion 模板、Ebook、设计素材怎么做](<https://dingjiu1989-hue.github.io/zh/sidehustle/digital-products-guide.html>)
 
-**See also:** [独立开发者出海指南：从产品 Idea 到稳定变现](</sidehustle/indie-dev-guide.html>), [AI 时代程序员的 5 个新副业机会（2026）](</sidehustle/ai-era-side-hustles.html>), [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</sidehustle/affiliate-marketing.html>).
+**See also:** [独立开发者出海指南：从产品 Idea 到稳定变现](</zh/sidehustle/indie-dev-guide.html>), [AI 时代程序员的 5 个新副业机会（2026）](</zh/sidehustle/ai-era-side-hustles.html>), [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</zh/sidehustle/affiliate-marketing.html>).

@@ -21,7 +21,7 @@ ZSA Moonlander| Split ortholinear (programmable)| Hot-swap (any MX-style)| $365|
 Keychron Q1 Pro| 75% mechanical (aluminum)| Hot-swap Gateron Jupiter| $199| Best value: premium build, wireless, QMK/VIA, Mac-friendly  
 NuPhy Air75 V2| Low-profile mechanical| Low-profile Gateron (hot-swap)| $119| Portable, low-profile typing, best laptop companion  
 ZSA Voyager| Ultra-compact split| Low-profile Kailh Choc (hot-swap)| $365| Minimalist ergo, best for travel, extreme programmability  
-  
+
 **The Topre difference:** The HHKB (Happy Hacking Keyboard) uses Topre switches — a hybrid of mechanical and rubber dome that feels like typing on clouds. The layout is intentionally minimal: no dedicated arrow keys (function layer), Control where Caps Lock normally lives (UNIX tradition). It's the keyboard for people who spend 10+ hours a day in vim/emacs/terminal. The Type-S (silent) variant is quiet enough for open-plan offices. _Downside:_ expensive, no backlight, non-standard layout takes 2 weeks to adapt to.
 
 **Split ergo keyboards (Moonlander, Voyager):** If you have any wrist or shoulder discomfort, a split keyboard is the single best investment you can make. The Moonlander lets you position each half at shoulder width, tent (angle) each side up to 45°, and customize every key via the Oryx configurator (web-based, compiles to QMK firmware). The Voyager is the portable version — fits in a laptop bag. The learning curve is real (2-4 weeks), but developers who switch rarely go back.
@@ -36,7 +36,7 @@ Dell U2724D| 27" 2560×1440| IPS Black (2000:1 contrast)| $450| Best all-around:
 Apple Studio Display| 27" 5120×2880| IPS (600 nits)| $1,599| Mac users: 5K retina, built-in speakers/mic, no scaling issues  
 LG 42" C4 OLED| 42" 3840×2160| OLED (120Hz)| $900| Maximum screen real estate, deep blacks, also a great TV  
 Dell U4025QW| 40" 5120×2160| IPS Black| $1,800| Ultrawide: replace dual monitors, 140 PPI, Thunderbolt 4  
-  
+
 **The resolution/size sweet spot:** For coding, 27" 1440p at 100% scaling gives the best text clarity without HiDPI scaling headaches. On macOS, 27" 1440p text is slightly soft (macOS expects ~220 PPI for retina), so Mac users often prefer 27" 5K (Studio Display) or 27" 4K at 150% scaling. On Linux and Windows, 1440p at 27" is perfect at native scaling.
 
 **One big monitor vs dual monitors:** A single 40" ultrawide (5120×2160) or 42" 4K OLED gives you the equivalent of 3-4 code panes without bezels. Many senior developers have moved from dual monitors to a single large screen — less neck movement, cleaner desk, no alignment issues. The 42" LG C4 OLED is popular because it doubles as a gaming/movie display after work. Just make sure your desk is deep enough (30"+) — you don't want to sit 18 inches from a 42" screen.
@@ -54,5 +54,5 @@ Budget| Keyboard| Monitor| Chair
 ~$800 (minimum worthwhile)| Keychron V1 ($84)| Dell S2722QC 27" 4K ($280)| Used Steelcase Leap ($400)  
 ~$2,500 (professional)| Keychron Q1 Pro ($199)| Dell U2724D ($450)| Used Aeron ($600) + Uplift V2 desk ($800)  
 ~$5,000 (endgame)| HHKB Type-S + Moonlander ($665)| Apple Studio Display ($1,599)| Herman Miller Embody ($1,900) + Uplift V2 ($900)  
-  
+
 **The most impactful upgrade under $100:** A good mechanical keyboard (Keychron V1, $84). Better than any monitor upgrade for daily comfort. **The most impactful upgrade period:** A used premium chair. Your 45-year-old back will thank your 25-year-old self.

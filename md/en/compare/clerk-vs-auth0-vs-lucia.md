@@ -24,7 +24,7 @@ Multi-Tenant / Organizations| Built-in organizations API| Organizations, RBAC, f
 MFA / 2FA| Built-in (TOTP, SMS, passkeys)| Built-in (TOTP, SMS, push, email, recovery codes)| Manual (integrate with TOTP library)  
 WebAuthn / Passkeys| Yes (first-class support)| Yes (FIDO2/WebAuthn)| Yes (via @simplewebauthn)  
 Session Management| Managed (JWT or database sessions)| Managed (JWT with refresh tokens)| Database sessions (you control)  
-  
+
 ## When Each Solution Wins
 
 **Clerk — Best for:** React/Next.js applications where you want auth to "just work" with the least code. Clerk's pre-built components are genuinely production-ready — you can go from zero to working auth in 15 minutes. **Weak spot:** Vendor lock-in for user data; pricing scales per MAU (monthly active users), which can get expensive at scale; React-only (not ideal for other frameworks).
@@ -42,5 +42,5 @@ Enterprise app, complex requirements| Auth0| Most features, most identity provid
 Full data control, don't want vendor lock-in| Lucia| Open source, you own your user data and auth logic  
 Passkeys-first authentication| Clerk| Best passkey UX out of the box  
 Multi-tenant / B2B SaaS| Clerk or Auth0| Both have organizations/RBAC; Clerk for DX, Auth0 for complexity  
-  
+
 **Bottom line:** Clerk wins for React/Next.js projects where you want to move fast — the developer experience is the best in auth right now. Auth0 is the enterprise choice when you need every feature and have time to configure them. Lucia is for developers who want full control and are willing to invest the time to own their auth stack. See also: [Authentication Best Practices 2026](</en/tech/authentication-best-practices-2026.html>) and [Web Security Basics](</en/tech/web-security-basics.html>).

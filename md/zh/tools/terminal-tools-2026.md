@@ -3,7 +3,7 @@ title: "2026 年 10 款必装终端工具：让你的命令行效率翻倍"
 description: "从现代终端模拟器到智能 Shell 增强工具，盘点 2026 年程序员最值得安装的 10 款命令行工具。涵盖 Warp、Starship、fzf、zoxide、bat 等效率神器。"
 date: 2026-05-10
 board: tools
-url: https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html
+url: https://dingjiu1989-hue.github.io/zh/tools/terminal-tools-2026.html
 ---
 
 # 2026 年 10 款必装终端工具：让你的命令行效率翻倍
@@ -71,17 +71,16 @@ url: https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html
   * 解决冲突时有并排对比视图
 
 **安装** ：`brew install lazygit` 一键安装全部 macOS 用户可以直接运行：
-    
-    
+
     brew install starship fzf zoxide bat fd ripgrep tldr jq lazygit
     brew install --cask warp
-    
+
     # 配置 Starship
     echo 'eval "$(starship init zsh)"' >> ~/.zshrc
-    
+
     # 配置 zoxide
     echo 'eval "$(zoxide init zsh)"' >> ~/.zshrc
-    
+
     # 配置 fzf
     $(brew --prefix)/opt/fzf/install --all
 
@@ -99,8 +98,8 @@ jq| JSON 处理| 手写 Python 脚本| ★★★★
 lazygit| 终端 Git GUI| git CLI| ★★★★  
 📖 相关推荐
 
-  * [10 款开发者必备的命令行工具（2026 版）](<https://dingjiu1989-hue.github.io/tools/cli-tools-collection.html>)
-  * [2026 年最佳屏幕录制和视频剪辑工具推荐](<https://dingjiu1989-hue.github.io/tools/screen-recording-tools.html>)
-  * [10 个你每天都会用到的免费在线工具网站](<https://dingjiu1989-hue.github.io/tools/online-tools-2026.html>)
+  * [10 款开发者必备的命令行工具（2026 版）](<https://dingjiu1989-hue.github.io/zh/tools/cli-tools-collection.html>)
+  * [2026 年最佳屏幕录制和视频剪辑工具推荐](<https://dingjiu1989-hue.github.io/zh/tools/screen-recording-tools.html>)
+  * [10 个你每天都会用到的免费在线工具网站](<https://dingjiu1989-hue.github.io/zh/tools/online-tools-2026.html>)
 
-**See also:** [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](</tools/project-management-tools.html>), [10 个程序员必听的播客：学技术、追趋势、听故事](</tools/dev-podcasts.html>), [2026 年最佳屏幕录制和视频剪辑工具推荐](</tools/screen-recording-tools.html>).
+**See also:** [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](</zh/tools/project-management-tools.html>), [10 个程序员必听的播客：学技术、追趋势、听故事](</zh/tools/dev-podcasts.html>), [2026 年最佳屏幕录制和视频剪辑工具推荐](</zh/tools/screen-recording-tools.html>).

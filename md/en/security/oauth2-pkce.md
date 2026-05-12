@@ -10,9 +10,6 @@ url: https://dingjiu1989-hue.github.io/en/security/oauth2-pkce.html
 
 # OAuth 2.0 and PKCE Explained
 
-  
-
-
 OAuth 2.0 Overview 
 
 OAuth 2.0 is an authorization framework that enables third-party applications to obtain limited access to a user's resources without exposing credentials. It has become the industry standard for API authorization, used by Google, GitHub, Facebook, and virtually every major platform. 
@@ -25,9 +22,6 @@ Grant Types
 
 OAuth 2.0 defines several grant types for different scenarios: 
 
-  
-
-
 * **Authorization Code**: The most secure flow, designed for server-side applications.
 
 * **Authorization Code with PKCE**: An enhanced version for mobile and single-page applications.
@@ -36,15 +30,9 @@ OAuth 2.0 defines several grant types for different scenarios:
 
 * **Device Code**: For devices without a browser, like smart TVs or CLI tools.
 
-  
-
-
 The Problem PKCE Solves 
 
 Before PKCE (Proof Key for Code Exchange), public clients like SPAs and mobile apps used the Implicit Grant, which returned the access token directly in the URL fragment. This approach had serious security issues: 
-
-  
-
 
 * Access tokens leaked via browser history
 
@@ -58,149 +46,57 @@ Step 1: Generate Code Verifier and Challenge
 
 The client generates a cryptographically random string called the code verifier, then creates a SHA-256 hash (the code challenge). 
 
-  
-  
-  
-
-
 function generateCodeVerifier() {
-
-  
-
 
 const array = new Uint8Array(32);
 
-  
-
-
 crypto.getRandomValues(array);
-
-  
-
 
 return base64URLEncode(array);
 
-  
-
-
 }
-
-  
-  
-  
-
 
 async function generateCodeChallenge(verifier) {
 
-  
-
-
 const encoder = new TextEncoder();
-
-  
-
 
 const data = encoder.encode(verifier);
 
-  
-
-
 const digest = await crypto.subtle.digest('SHA-256', data);
-
-  
-
 
 return base64URLEncode(new Uint8Array(digest));
 
-  
-
-
 }
-
-  
-  
-  
-
 
 function base64URLEncode(buffer) {
 
-  
-
-
 return btoa(String.fromCharCode(...new Uint8Array(buffer)))
-
-  
-
 
 .replace(/\\+/g, '-')
 
-  
-
-
 .replace(/\//g, '_')
-
-  
-
 
 .replace(/=+$/, '');
 
-  
-
-
 }
-
-  
-  
-  
-  
-
 
 Step 2: Redirect to Authorization Server 
 
 The client redirects the user to the authorization server, including the code challenge and the method used (`S256`). 
 
-  
-  
-  
-
-
 https://auth.example.com/authorize?
-
-  
-
 
 response_type=code&
 
-  
-
-
 client_id=YOUR_CLIENT_ID&
-
-  
-
 
 redirect_uri=https://yourapp.com/callback&
 
-  
-
-
 code_challenge=YOUR_SHA256_CHALLENGE&
-
-  
-
 
 code_challenge_method=S256&
 
-  
-
-
 state=CSRF_TOKEN
-
-  
-  
-  
-  
-
 
 The `state` parameter is a CSRF token that must be verified when the user returns. 
 
@@ -208,18 +104,7 @@ Step 3: User Authenticates and Consents
 
 The authorization server authenticates the user, presents a consent screen, and redirects back to the client with a temporary authorization code. 
 
-  
-  
-  
-
-
 https://yourapp.com/callback?code=AUTH_CODE&state;=CSRF_TOKEN
-
-  
-  
-  
-  
-
 
 The client must verify that the `state` parameter matches what it sent. 
 
@@ -227,93 +112,35 @@ Step 4: Exchange Code for Token
 
 The client sends the authorization code along with the original plain-text code verifier to the token endpoint. 
 
-  
-  
-  
-
-
 curl -X POST https://auth.example.com/token \
-
-  
-
 
 -H "Content-Type: application/x-www-form-urlencoded" \
 
-  
-
-
 -d "grant_type=authorization_code" \
-
-  
-
 
 -d "code=AUTH_CODE" \
 
-  
-
-
 -d "redirect_uri=https://yourapp.com/callback" \
-
-  
-
 
 -d "client_id=YOUR_CLIENT_ID" \
 
-  
-
-
 -d "code_verifier=ORIGINAL_VERIFIER"
-
-  
-  
-  
-  
-
 
 The authorization server computes the SHA-256 hash of the verifier and compares it to the challenge received in step 2. If they match, it issues tokens. 
 
-  
-  
-  
-
-
 {
-
-  
-
 
 "access_token": "eyJhbGciOiJSUzI1NiIs...",
 
-  
-
-
 "token_type": "Bearer",
-
-  
-
 
 "expires_in": 3600,
 
-  
-
-
 "refresh_token": "dGhpcyBpcyBhIHJlZnJl...",
-
-  
-
 
 "scope": "openid profile email"
 
-  
-
-
 }
-
-  
-  
-  
-  
-
 
 Why PKCE Is Secure 
 
@@ -323,43 +150,17 @@ Refresh Tokens with PKCE
 
 Refresh tokens extend access without requiring the user to re-authenticate. When the access token expires, the client uses the refresh token to obtain a new one: 
 
-  
-  
-  
-
-
 curl -X POST https://auth.example.com/token \
-
-  
-
 
 -H "Content-Type: application/x-www-form-urlencoded" \
 
-  
-
-
 -d "grant_type=refresh_token" \
-
-  
-
 
 -d "refresh_token=REFRESH_TOKEN" \
 
-  
-
-
 -d "client_id=YOUR_CLIENT_ID"
 
-  
-  
-  
-  
-
-
 Best Practices 
-
-  
-
 
 * Always use PKCE for SPAs and mobile apps. Never use the Implicit Grant.
 
@@ -374,9 +175,6 @@ Best Practices
 * Use the `S256` challenge method instead of `plain`.
 
 * Never log tokens or authorization codes in server logs.
-
-  
-
 
 Summary 
 

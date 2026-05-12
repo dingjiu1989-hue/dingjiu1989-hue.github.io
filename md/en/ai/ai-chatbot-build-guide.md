@@ -11,8 +11,7 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-chatbot-build-guide.html
 Building an AI chatbot that actually works — one that stays on topic, doesn't hallucinate, and can take real actions — requires more than wrapping a ChatGPT API call. In 2026, production chatbots combine RAG (for accurate information), function calling (for taking actions), and careful prompt engineering (for personality and guardrails). This guide walks through the complete architecture.
 
 ## AI Chatbot Architecture
-    
-    
+
     User Message
         → 1. Intent Classification (what does the user want?)
              ├─ Question → RAG pipeline
@@ -40,15 +39,13 @@ Actions| None (text only)| Basic function calling (lookup, search)| Transactiona
 Memory| Conversation only (lost on refresh)| Session persistence + user profile| Long-term memory (vector DB of past conversations)  
 Guardrails| None| Content safety filter (toxicity, PII)| LLM-as-guard + content filter + human escalation path  
 Analytics| None| Basic (conversation count, satisfaction)| Full analytics (resolution rate, topic clustering, cost tracking)  
-  
+
 ## RAG for Chatbots: Production Tips
 
   1. **Citation is non-negotiable:** Every factual claim must link to a source. Users trust chatbots more when they can verify the answer.
   2. **"I don't know" is better than hallucinating:** Set a confidence threshold. If no retrieved document has similarity > 0.75, the chatbot should say "I don't have that information" rather than guessing.
   3. **Hybrid retrieval (keyword + vector):** Users ask precise questions ("What is the refund policy for international orders?") that vector search alone may miss. BM25 keyword matching catches exact terms.
   4. **Conversation context matters:** "What about for Europe?" → must expand to "What is the refund policy for international orders in Europe?" using conversation history.
-
-
 
 ## Function Calling for Chatbots: What to Enable
 
@@ -59,7 +56,7 @@ Look up user account| "Where is my order #12345?"| Verify user identity before l
 Check inventory| "Is the blue XL in stock?"| Read-only, safe  
 Create support ticket| "I want to return my order"| Rate limit, verify user, idempotency key  
 Process refund (advanced)| "Refund my last order"| Human approval required, amount limits  
-  
+
 ## Cost Optimization for Chatbots
 
 Strategy| Savings| Implementation  
@@ -68,5 +65,5 @@ Intent routing: simple questions → Haiku, complex → Sonnet| 50-70%| Classify
 FAQ caching: common questions → cached answer| 30-50%| Semantic cache (embedding similarity > 0.95)  
 Prompt caching: system prompt + few-shot examples cached| 50-90%| Static prefix at the start of every prompt  
 Truncate conversation history| 20-30%| Summarize old messages instead of keeping all  
-  
+
 **Bottom line:** Start with a simple RAG chatbot (docs → embeddings → LLM) and add complexity incrementally. The biggest mistakes: (1) not implementing "I don't know" handling — chatbots that hallucinate destroy user trust; (2) not tracking what users actually ask — analytics reveal the gaps in your knowledge base; (3) not having a human escalation path — for customer support, 5% of queries should go to a human. See also: [RAG Best Practices](</en/ai/rag-best-practices.html>) and [Function Calling Guide](</en/ai/function-calling-guide.html>).

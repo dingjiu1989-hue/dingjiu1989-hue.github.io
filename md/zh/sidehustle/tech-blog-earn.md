@@ -2,7 +2,7 @@
 title: "技术博客赚钱途径"
 description: "详解技术博客变现的多种方式，包括广告收入、赞助合作、付费订阅、知识付费和联盟营销等主流商业化路径。"
 date: 2026-05-11
-board: zh/sidehustle
+board: sidehustle
 url: https://dingjiu1989-hue.github.io/zh/sidehustle/tech-blog-earn.html
 ---
 

@@ -18,7 +18,7 @@ Platform| Free Tier| Best For
 **Cloudflare Pages**|  Unlimited bandwidth, 500 builds/month| Static sites, unlimited traffic  
 **Netlify**|  100GB bandwidth, 300 build min| JAMstack, form handling  
 **GitHub Pages**|  100GB bandwidth, unlimited repos| Project docs, personal sites  
-  
+
 ## Backend & Compute
 
 Platform| Free Tier| Best For  
@@ -29,7 +29,7 @@ Platform| Free Tier| Best For
 **Railway**|  $5 credit/month| Quick deploys, databases  
 **Deno Deploy**|  100K req/day| Deno/web-standard APIs  
 **Val.town**|  50 vals, 1 cron per hour| Micro-scripts, webhooks  
-  
+
 ## Databases
 
 Platform| Free Tier| Engine  
@@ -41,7 +41,7 @@ Platform| Free Tier| Engine
 **MongoDB Atlas**|  512MB storage, shared cluster| MongoDB  
 **Upstash**|  10K commands/day, 256MB| Redis (edge)  
 **Cloudflare D1**|  5GB storage, 5M rows read/day| SQLite (edge)  
-  
+
 ## Authentication
 
 Platform| Free Tier| Best For  
@@ -50,7 +50,7 @@ Platform| Free Tier| Best For
 **Supabase Auth**|  50K MAU (with Supabase)| Supabase users  
 **Auth0**|  7.5K MAU (B2C)| Enterprise, multi-protocol  
 **Logto**|  5K MAU (self-host: unlimited)| Open-source alternative to Auth0  
-  
+
 ## Storage & Media
 
 Platform| Free Tier| Best For  
@@ -59,7 +59,7 @@ Platform| Free Tier| Best For
 **Supabase Storage**|  1GB storage, 2GB bandwidth| User uploads, images  
 **Uploadthing**|  2GB storage, unlimited uploads| File uploads (React/Next.js)  
 **ImageKit**|  20GB bandwidth, 20GB storage| Image optimization + CDN  
-  
+
 ## Monitoring, CI/CD & Email
 
 Platform| Free Tier| Best For  
@@ -69,7 +69,7 @@ Platform| Free Tier| Best For
 **Checkly**|  50K check runs/mo| Uptime monitoring + E2E  
 **Resend**|  100 emails/day| Transactional email  
 **Plausible**|  Self-host: unlimited (cloud: paid)| Privacy-first analytics  
-  
+
 ## The Complete $0/Month Stack
 
   * **Frontend:** Vercel or Cloudflare Pages
@@ -82,7 +82,5 @@ Platform| Free Tier| Best For
   * **Monitoring:** Sentry + Checkly
   * **CI/CD:** GitHub Actions (2K min/mo)
   * **Analytics:** Plausible (self-hosted) or Umami
-
-
 
 **This stack handles 10K-100K+ users before you pay anything.** When you do start paying, it's $5-50/month per service, not $500. See also: [Free Hosting Guide](</en/tools/best-free-hosting-side-projects.html>) and [SaaS Bootstrapping](</en/sidehustle/saas-bootstrapping-guide.html>).

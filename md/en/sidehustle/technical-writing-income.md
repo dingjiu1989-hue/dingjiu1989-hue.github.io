@@ -20,7 +20,7 @@ Channel| Rate Range| How It Works
 **Your own blog + sponsorships**|  $500-5,000+/mo| Build audience, sell sponsorships. Takes 6-18 months.  
 **API documentation (contract)**|  $75-150/hr| Write docs for developer tools. High barrier, high pay.  
 **Technical books / ebooks**|  $2K-50K+ (lifetime)| Long tail income. Self-publish on Gumroad or Leanpub.  
-  
+
 ## Where to Find Paid Writing Gigs
 
   1. **Who pays for dev content?** Dev tool companies (Vercel, Supabase, Stripe, Prisma, etc.) — they ALL need blog posts, docs, and tutorials.
@@ -29,16 +29,12 @@ Channel| Rate Range| How It Works
   4. **Dev.to:** Build a following. Companies will reach out to you.
   5. **Agency approach:** Offer "blog content as a service" to 3-5 dev tool companies. $2K-5K/mo retainer.
 
-
-
 ## How to Build a Portfolio That Gets Hired
 
   * **Write 5 high-quality articles on your own blog first.** These are your samples.
   * **Pick a niche:** "TypeScript" and "frontend" is too broad. "Next.js performance optimization" or "Postgres query optimization" is specific and valuable.
   * **Show results:** "This article got 50K views and was featured in Next.js weekly" proves value better than "I write about TypeScript."
   * **Format matters:** Code blocks, tables, clear headings, practical examples. A well-formatted article IS your portfolio.
-
-
 
 ## Writing That Attracts Clients
 
@@ -48,5 +44,5 @@ Hands-on tutorials with working code| Theoretical overviews without code
 Specific, practical titles: "How to Reduce Next.js Build Time by 60%"| "An Introduction to Next.js Performance"  
 Tables, code examples, decision matrices| Wall of text  
 Opinionated takes based on experience| Generic summaries anyone could write with ChatGPT  
-  
+
 **Bottom line:** Technical writing is a $50K-150K/year side hustle for developers who do it well. Start with your own blog to build samples. Then reach out to dev tool companies directly — they're always looking for good writers who actually understand the code. See also: [Newsletter Monetization](</en/sidehustle/newsletter-monetization-guide.html>) and [Selling Digital Products](</en/sidehustle/sell-digital-products.html>).

@@ -3,7 +3,7 @@ title: "AI 时代程序员的 5 个新副业机会（2026）"
 description: "AI 不是来抢你饭碗的——它是来给你送新工具的。本文盘点 2026 年程序员最值得尝试的 5 个 AI 副业方向，每个都附具体入行路径和收入参考。"
 date: 2026-05-09
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html
+url: https://dingjiu1989-hue.github.io/zh/sidehustle/ai-era-side-hustles.html
 ---
 
 # AI 时代程序员的 5 个新副业机会（2026）
@@ -53,8 +53,8 @@ AI 培训| 1-2 周| ¥5,000-¥20,000| 低| 表达能力强
 AI 评测自媒体| 1-2 周| $1,000-$5,000| 低| 喜欢写作/做视频  
 总结 AI 时代的副业逻辑变了：**以前你需要成为专家才能赚钱，现在你只需要比普通人早用 AI 工具 6 个月** 。这 5 个方向共同的特点是——不需要融资、不需要团队、一个人就能启动。选一个你感兴趣的，这个周末就开始。 如果只能推荐一个：**AI 工作流自动化** 。启动最快（一天内能接到第一个客户），需求最刚性（每个公司都有重复劳动），竞争最少（做的人还不多）。 📖 相关推荐
 
-  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
-  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)
-  * [数字产品创作指南：Notion 模板、Ebook、设计素材怎么做](<https://dingjiu1989-hue.github.io/sidehustle/digital-products-guide.html>)
+  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/zh/sidehustle/affiliate-marketing.html>)
+  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/zh/sidehustle/knowledge-monetization.html>)
+  * [数字产品创作指南：Notion 模板、Ebook、设计素材怎么做](<https://dingjiu1989-hue.github.io/zh/sidehustle/digital-products-guide.html>)
 
-**See also:** [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</sidehustle/affiliate-marketing.html>), [跨境电商入门指南：从 0 到第一单的全流程](</sidehustle/cross-border-ecommerce.html>), [独立开发者出海指南：从产品 Idea 到稳定变现](</sidehustle/indie-dev-guide.html>).
+**See also:** [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</zh/sidehustle/affiliate-marketing.html>), [跨境电商入门指南：从 0 到第一单的全流程](</zh/sidehustle/cross-border-ecommerce.html>), [独立开发者出海指南：从产品 Idea 到稳定变现](</zh/sidehustle/indie-dev-guide.html>).

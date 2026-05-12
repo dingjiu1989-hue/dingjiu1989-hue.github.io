@@ -3,7 +3,7 @@ title: "从零开始做自媒体：平台选择、内容定位与变现路径"
 description: "2026 年自媒体运营全攻略：公众号、知乎、小红书、抖音四大平台对比，帮你找到适合自己的内容方向和变现模式。"
 date: 2026-05-07
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/sidehustle/content-creator-startup.html
+url: https://dingjiu1989-hue.github.io/zh/sidehustle/content-creator-startup.html
 ---
 
 # 从零开始做自媒体：平台选择、内容定位与变现路径
@@ -30,8 +30,8 @@ url: https://dingjiu1989-hue.github.io/sidehustle/content-creator-startup.html
 千粉到万粉 → 开通平台广告分成（公众号流量主、知乎好物推荐）。  
 万粉以上 → 接品牌合作、出付费内容、建立社群。 核心原则 **真诚大于技巧。** 读者能分辨你是真心分享还是在凑字数。如果你在某个领域有真实经验，这个优势是 AI 无法替代的。 📖 相关推荐
 
-  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
-  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
-  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/zh/sidehustle/ai-era-side-hustles.html>)
+  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/zh/sidehustle/affiliate-marketing.html>)
+  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/zh/sidehustle/knowledge-monetization.html>)
 
-**See also:** [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</sidehustle/affiliate-marketing.html>), [跨境电商入门指南：从 0 到第一单的全流程](</sidehustle/cross-border-ecommerce.html>), [独立开发者出海指南：从产品 Idea 到稳定变现](</sidehustle/indie-dev-guide.html>).
+**See also:** [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</zh/sidehustle/affiliate-marketing.html>), [跨境电商入门指南：从 0 到第一单的全流程](</zh/sidehustle/cross-border-ecommerce.html>), [独立开发者出海指南：从产品 Idea 到稳定变现](</zh/sidehustle/indie-dev-guide.html>).

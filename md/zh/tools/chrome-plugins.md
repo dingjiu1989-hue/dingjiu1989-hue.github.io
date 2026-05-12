@@ -3,7 +3,7 @@ title: "2025 年度必备 Chrome 插件推荐"
 description: "精选 15 款必备 Chrome 浏览器插件，涵盖效率、安全、开发、设计等场景。"
 date: 2026-04-15
 board: tools
-url: https://dingjiu1989-hue.github.io/tools/chrome-plugins.html
+url: https://dingjiu1989-hue.github.io/zh/tools/chrome-plugins.html
 ---
 
 # 2025 年度必备 Chrome 插件推荐
@@ -34,8 +34,8 @@ GoFullPage| 全页截图| 滚动截取整个网页为 PNG，支持长图
 
 📖 相关推荐
 
-  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
-  * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/tools/project-management-tools.html>)
-  * [10 个程序员必听的播客：学技术、追趋势、听故事](<https://dingjiu1989-hue.github.io/tools/dev-podcasts.html>)
+  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/zh/tools/terminal-tools-2026.html>)
+  * [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](<https://dingjiu1989-hue.github.io/zh/tools/project-management-tools.html>)
+  * [10 个程序员必听的播客：学技术、追趋势、听故事](<https://dingjiu1989-hue.github.io/zh/tools/dev-podcasts.html>)
 
-**See also:** [2026 年 10 款必装终端工具：让你的命令行效率翻倍](</tools/terminal-tools-2026.html>), [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](</tools/project-management-tools.html>), [10 个程序员必听的播客：学技术、追趋势、听故事](</tools/dev-podcasts.html>).
+**See also:** [2026 年 10 款必装终端工具：让你的命令行效率翻倍](</zh/tools/terminal-tools-2026.html>), [2026 年最佳项目管理工具对比：Jira vs Linear vs Notion vs ClickUp](</zh/tools/project-management-tools.html>), [10 个程序员必听的播客：学技术、追趋势、听故事](</zh/tools/dev-podcasts.html>).

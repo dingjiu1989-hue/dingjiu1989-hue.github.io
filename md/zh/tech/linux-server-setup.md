@@ -2,7 +2,7 @@
 title: "Linux服务器初始化配置"
 description: "新服务器到手后的标准操作流程，包括系统更新、安全加固、SSH配置、防火墙设置以及开发环境搭建等关键步骤。"
 date: 2026-05-11
-board: zh/tech
+board: tech
 url: https://dingjiu1989-hue.github.io/zh/tech/linux-server-setup.html
 ---
 

@@ -10,9 +10,6 @@ url: https://dingjiu1989-hue.github.io/en/security/email-security.html
 
 # Email Security
 
-  
-
-
 Introduction 
 
 Email remains the primary attack vector for most organizations. Phishing, business email compromise (BEC), and spam represent significant risks. A robust email security strategy combines authentication protocols, gateway filtering, and user awareness training. 
@@ -25,18 +22,7 @@ SPF (Sender Policy Framework)
 
 SPF specifies which mail servers are authorized to send email for a domain via DNS TXT records. 
 
-  
-  
-  
-
-
 example.com. TXT "v=spf1 ip4:203.0.113.0/24 include:_spf.google.com ~all"
-
-  
-  
-  
-  
-
 
 Mechanisms: `ip4`, `ip6`, `include`, `a`, `mx`, `exists`. Qualifiers: `+` (pass), `-` (fail), `~` (softfail), `?` (neutral). Use `-all` for strict enforcement after testing with `~all`. 
 
@@ -44,71 +30,25 @@ DKIM (DomainKeys Identified Mail)
 
 DKIM adds a digital signature to email headers, allowing receivers to verify the message was not modified in transit. 
 
-  
-  
-  
-
-
 # Generate DKIM key pair with OpenSSL
-
-  
-
 
 openssl genrsa -out dkim-private.pem 2048
 
-  
-
-
 openssl rsa -in dkim-private.pem -pubout -out dkim-public.pem
-
-  
-  
-  
-
 
 # Extract public key for DNS record
 
-  
-
-
 openssl rsa -pubin -in dkim-public.pem -outform DER | base64
-
-  
-  
-  
-  
-
 
 DNS record for DKIM:
 
-  
-  
-
-
 default._domainkey.example.com. TXT "v=DKIM1; h=sha256; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA..."
-
-  
-  
-  
-  
-
 
 DMARC (Domain-based Message Authentication, Reporting, and Conformance) 
 
 DMARC tells receiving mail servers how to handle messages that fail SPF or DKIM checks, and provides reporting on authentication results. 
 
-  
-  
-  
-
-
 _dmarc.example.com. TXT "v=DMARC1; p=quarantine; rua=mailto:dmarc@example.com; ruf=mailto:forensic@example.com; pct=100; fo=1"
-
-  
-  
-  
-  
-
 
 Key tags: `p` (policy: none/quarantine/reject), `rua` (aggregate reports), `ruf` (forensic reports), `pct` (sampling percentage), `sp` (subdomain policy), `adkim`/`aspf` (strict alignment). 
 
@@ -116,208 +56,81 @@ Email Gateway Deployment
 
 Email gateways filter inbound and outbound traffic, applying policy controls, antivirus scanning, URL rewriting, and attachment sandboxing. 
 
-  
-  
-  
-
-
 # Sample gateway filtering policy
-
-  
-
 
 inbound_policies:
 
-  
-
-
 \- name: "Block executable attachments"
-
-  
-
 
 condition: attachment.extension in ['.exe', '.scr', '.bat', '.cmd', '.js']
 
-  
-
-
 action: quarantine
-
-  
-
 
 notify: security@example.com
 
-  
-  
-  
-
-
 \- name: "URL rewrite for external links"
-
-  
-
 
 condition: contains_any(body.urls)
 
-  
-
-
 action: rewrite_urls
-
-  
-
 
 rewrite_domain: click.example.com
 
-  
-  
-  
-
-
 \- name: "Suspicious header analysis"
-
-  
-
 
 condition: mismatch(spf, dkim)
 
-  
-
-
 action: add_header "X-Suspicious: yes"
 
-  
-
-
 score: +30
-
-  
-  
-  
-  
-
 
 Phishing Protection 
 
 Phishing defense requires multiple layers: 
 
-  
-
-
 * **Attachment scanning**: Sandbox all attachments in isolated environments
 
 2\\. **URL inspection**: Rewrite and scan links at click-time for malicious content 3\\. **Impersonation detection**: Identify display-name spoofing and lookalike domains 4\\. **AI-based analysis**: ML models detect anomalous language patterns and social engineering 
 
-  
-  
-  
-
-
 # Simple lookalike domain detection
-
-  
-
 
 import re
 
-  
-  
-  
-
-
 def detect_lookalike(domain, trusted_domains):
-
-  
-
 
 lookalike_patterns = {
 
-  
-
-
 'rn': 'm', 'vv': 'w', '0': 'o', '1': 'l', 'l': 'i'
-
-  
-
 
 }
 
-  
-
-
 normalized = domain.lower()
-
-  
-
 
 for trusted in trusted_domains:
 
-  
-
-
 # Check for typosquatting
-
-  
-
 
 if normalized != trusted:
 
-  
-
-
 # Levenshtein distance check
-
-  
-
 
 if levenshtein_distance(normalized, trusted) <= 2:
 
-  
-
-
 return True
-
-  
-
 
 # Homoglyph check
 
-  
-
-
 for pattern, replacement in lookalike_patterns.items():
-
-  
-
 
 if pattern in normalized:
 
-  
-
-
 test = normalized.replace(pattern, replacement)
-
-  
-
 
 if test == trusted:
 
-  
-
-
 return True
 
-  
-
-
 return False
-
-  
-  
-  
-  
-
 
 Business Email Compromise Defense 
 
@@ -333,64 +146,25 @@ Key BEC defenses:
 
 * **User training**: Simulated BEC campaigns and reporting mechanisms
 
-  
-  
-  
-  
-
-
 # BEC detection rule
-
-  
-
 
 def flag_bec_email(email):
 
-  
-
-
 flags = []
-
-  
-
 
 if email.display_name in executive_names and email.from_domain != org_domain:
 
-  
-
-
 flags.append("display_name_spoofing")
-
-  
-
 
 if email.urgency_indicators and email.request_type == "payment":
 
-  
-
-
 flags.append("urgent_payment_request")
-
-  
-
 
 if email.reply_to_domain and email.reply_to_domain != org_domain:
 
-  
-
-
 flags.append("suspicious_reply_to")
 
-  
-
-
 return flags
-
-  
-  
-  
-  
-
 
 Conclusion 
 

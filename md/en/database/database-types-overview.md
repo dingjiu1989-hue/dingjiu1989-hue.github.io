@@ -18,55 +18,45 @@ Relational databases organize data into tables with predefined schemas, linked b
 * Complex joins and aggregations across multiple tables.
 * Rich constraint system (foreign keys, unique, check).
 * Mature ecosystem and tooling.
-  
+
 **Weaknesses**:   
 
 * Schema changes require migrations.
 * Horizontal scaling is complex (sharding).
 * Rigid for highly varied, sparse data.
-  
 
-    
-    
     -- Typical relational model
-    
-    CREATE TABLE users (
-    
-        id BIGSERIAL PRIMARY KEY,
-    
-        email TEXT UNIQUE NOT NULL,
-    
-        created_at TIMESTAMPTZ DEFAULT NOW()
-    
-    );
-    
-    
-    
-    CREATE TABLE orders (
-    
-        id BIGSERIAL PRIMARY KEY,
-    
-        user_id BIGINT REFERENCES users(id),
-    
-        total NUMERIC(10,2),
-    
-        created_at TIMESTAMPTZ DEFAULT NOW()
-    
-    );
-    
-    
-    
-    SELECT u.email, COUNT(o.id) AS order_count
-    
-    FROM users u
-    
-    LEFT JOIN orders o ON o.user_id = u.id
-    
-    GROUP BY u.email;
-    
-    
 
-  
+    CREATE TABLE users (
+
+        id BIGSERIAL PRIMARY KEY,
+
+        email TEXT UNIQUE NOT NULL,
+
+        created_at TIMESTAMPTZ DEFAULT NOW()
+
+    );
+
+    CREATE TABLE orders (
+
+        id BIGSERIAL PRIMARY KEY,
+
+        user_id BIGINT REFERENCES users(id),
+
+        total NUMERIC(10,2),
+
+        created_at TIMESTAMPTZ DEFAULT NOW()
+
+    );
+
+    SELECT u.email, COUNT(o.id) AS order_count
+
+    FROM users u
+
+    LEFT JOIN orders o ON o.user_id = u.id
+
+    GROUP BY u.email;
+
 **Best for**: Financial systems, ERP, CRM, any application where data integrity is paramount.   
 Document Databases (MongoDB, Couchbase)   
 Document databases store semi-structured data in JSON-like documents. Schemas are flexible, and documents can have varying structures.   
@@ -76,37 +66,31 @@ Document databases store semi-structured data in JSON-like documents. Schemas ar
 * Native JSON support with rich query operations.
 * Horizontal scaling with native sharding.
 * Developer productivity for rapidly evolving models.
-  
+
 **Weaknesses**:   
 
 * Limited join capabilities (`$lookup` is less performant than SQL JOINs).
 * Multi-document transactions are newer and slower than ACID RDBMS.
 * No enforced schema means application-level validation is essential.
-  
 
-    
-    
     // MongoDB document model
-    
-    db.users.insertOne({
-    
-      _id: ObjectId(),
-    
-      email: "alice@example.com",
-    
-      profile: { name: "Alice", avatar: "avatar.jpg" },
-    
-      orders: [
-    
-        { order_id: 1, total: 99.99, items: ["Widget"] }
-    
-      ]
-    
-    });
-    
-    
 
-  
+    db.users.insertOne({
+
+      _id: ObjectId(),
+
+      email: "alice@example.com",
+
+      profile: { name: "Alice", avatar: "avatar.jpg" },
+
+      orders: [
+
+        { order_id: 1, total: 99.99, items: ["Widget"] }
+
+      ]
+
+    });
+
 **Best for**: Content management, catalogs, rapid prototyping, applications with evolving schemas.   
 Key-Value Stores (Redis, DynamoDB, Riak)   
 Key-value stores are the simplest database type. They store values accessed by a unique key, optimized for high-throughput, low-latency lookups.   
@@ -116,27 +100,21 @@ Key-value stores are the simplest database type. They store values accessed by a
 * Simple data model with no schema.
 * Easy to scale horizontally.
 * Ideal for caching and session storage.
-  
+
 **Weaknesses**:   
 
 * No query capabilities beyond key lookups (in pure KV stores).
 * Limited to simple data structures (without secondary indexes).
 * Application must manage data relationships.
-  
 
-    
-    
     SET user:42 '{"email": "alice@example.com", "name": "Alice"}'
-    
-    GET user:42
-    
-    LPUSH recent_views:42 "product:100"
-    
-    ZADD leaderboard 1000 "player_alice"
-    
-    
 
-  
+    GET user:42
+
+    LPUSH recent_views:42 "product:100"
+
+    ZADD leaderboard 1000 "player_alice"
+
 **Best for**: Caching, session management, real-time counters, pub/sub, rate limiting.   
 Graph Databases (Neo4j, Amazon Neptune)   
 Graph databases model data as nodes and edges, optimized for traversing relationships.   
@@ -145,27 +123,21 @@ Graph databases model data as nodes and edges, optimized for traversing relation
 * Relationship traversal is extremely fast, independent of graph size.
 * Natural modeling of highly connected data.
 * Pattern matching queries for complex relationships.
-  
+
 **Weaknesses**:   
 
 * Less efficient for non-graph workloads (simple aggregations).
 * Smaller ecosystem and fewer hosting options.
 * Requires learning specialized query languages (Cypher, SPARQL).
-  
 
-    
-    
     // Neo4j Cypher query
-    
-    MATCH (u:User {email: "alice@example.com"})-[:FRIENDS_WITH]->(f:User)
-    
-    WHERE (f)-[:PURCHASED]->(:Product {category: "Electronics"})
-    
-    RETURN f.name
-    
-    
 
-  
+    MATCH (u:User {email: "alice@example.com"})-[:FRIENDS_WITH]->(f:User)
+
+    WHERE (f)-[:PURCHASED]->(:Product {category: "Electronics"})
+
+    RETURN f.name
+
 **Best for**: Social networks, recommendation engines, fraud detection, knowledge graphs.   
 Time-Series Databases (TimescaleDB, InfluxDB, ClickHouse)   
 Time-series databases optimize for append-heavy, time-ordered data with automatic retention and downsampling.   
@@ -175,37 +147,31 @@ Time-series databases optimize for append-heavy, time-ordered data with automati
 * Automatic data retention and compaction.
 * Time-bucket aggregations and downsampling.
 * Compression ratios of 90%+.
-  
+
 **Weaknesses**:   
 
 * Less suitable for transactional workloads.
 * Joins and complex relationships are not a focus.
 * Query language varies widely (Flux vs SQL vs custom).
-  
 
-    
-    
     -- TimescaleDB (SQL-based time-series)
-    
-    SELECT time_bucket('1 hour', time) AS bucket,
-    
-           AVG(temperature) AS avg_temp,
-    
-           MAX(temperature) AS max_temp
-    
-    FROM sensor_readings
-    
-    WHERE sensor_id = 42
-    
-      AND time > now() - INTERVAL '7 days'
-    
-    GROUP BY bucket
-    
-    ORDER BY bucket;
-    
-    
 
-  
+    SELECT time_bucket('1 hour', time) AS bucket,
+
+           AVG(temperature) AS avg_temp,
+
+           MAX(temperature) AS max_temp
+
+    FROM sensor_readings
+
+    WHERE sensor_id = 42
+
+      AND time > now() - INTERVAL '7 days'
+
+    GROUP BY bucket
+
+    ORDER BY bucket;
+
 **Best for**: IoT, monitoring, observability, financial tick data, analytics.   
 Vector Databases (pgvector, Pinecone, Milvus, Qdrant)   
 Vector databases store and search high-dimensional vectors (embeddings) using similarity metrics.   
@@ -214,45 +180,35 @@ Vector databases store and search high-dimensional vectors (embeddings) using si
 * Efficient approximate nearest neighbor (ANN) search.
 * Support for multiple distance metrics (cosine, Euclidean, dot product).
 * CRUD operations on vector embeddings.
-  
+
 **Weaknesses**:   
 
 * Orthogonal use case to traditional databases (complement, not replace).
 * Index build times can be significant for large datasets.
 * Requires vector embeddings from ML models.
-  
 
-    
-    
     -- pgvector (PostgreSQL extension)
-    
-    CREATE TABLE documents (
-    
-        id BIGSERIAL PRIMARY KEY,
-    
-        content TEXT,
-    
-        embedding VECTOR(1536)  -- OpenAI embedding dimension
-    
-    );
-    
-    
-    
-    CREATE INDEX ON documents USING IVFFLAT (embedding vector_cosine_ops);
-    
-    
-    
-    SELECT content, 1 - (embedding <=> $1) AS similarity
-    
-    FROM documents
-    
-    ORDER BY embedding <=> $1
-    
-    LIMIT 10;
-    
-    
 
-  
+    CREATE TABLE documents (
+
+        id BIGSERIAL PRIMARY KEY,
+
+        content TEXT,
+
+        embedding VECTOR(1536)  -- OpenAI embedding dimension
+
+    );
+
+    CREATE INDEX ON documents USING IVFFLAT (embedding vector_cosine_ops);
+
+    SELECT content, 1 - (embedding <=> $1) AS similarity
+
+    FROM documents
+
+    ORDER BY embedding <=> $1
+
+    LIMIT 10;
+
 **Best for**: Semantic search, RAG (retrieval-augmented generation), recommendation systems, image similarity.   
 Multi-Model Databases   
 Many modern databases support multiple models. PostgreSQL is the best example: with JSONB, PostGIS, pgvector, and extensions, it handles relational, document, geospatial, and vector workloads in a single system.   

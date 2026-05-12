@@ -21,7 +21,7 @@ Bruno| Standalone (Electron, lightweight)| Free / $6/user/mo| ★★★★| ★�
 Insomnia| Standalone (Electron)| Free / $8/user/mo| ★★★| ★★★| Plugin system| No (cloud sync or manual export)  
 HTTPie Desktop| Standalone (Tauri, native)| Free / $12/user/mo| ★★★| ★★★| Minimal| Yes (JSON export)  
 Thunder Client| VS Code extension| Free / $6/user/mo| ★★★| ★★★★| JavaScript (via VS Code)| Yes (JSON in .vscode/)  
-  
+
 ## Deep Dive: Each Tool's Real Character
 
 **Postman — The 800-pound gorilla.** Postman has the richest feature set: visual API design, mock servers, monitoring, documentation hosting, and the largest collection marketplace. The problem: it's become heavy (2GB+ RAM idle), the free tier keeps losing features, and collections live in Postman's cloud — there's no git-native workflow. If you work on a large team where non-developers (QA, PMs) also use the API tool, Postman is still the default. For solo developers or small dev teams, the bloat is increasingly hard to justify. _Best for:_ Large orgs, cross-functional teams, API-first companies with dedicated API governance.
@@ -45,5 +45,5 @@ You love the terminal and want a lightweight GUI| HTTPie Desktop| Tauri-based (l
 You never leave VS Code| Thunder Client| Zero context switching, git-friendly JSON storage, fast and free  
 Open-source project, budget-conscious| Bruno or Thunder Client| Both have generous free tiers and git-native storage  
 API mocking and monitoring needed| Postman| Only Postman has built-in mock servers, monitors, and hosted docs  
-  
+
 **My recommendation for most developers in 2026:** Use **Bruno** as your daily driver — git-native, fast, free, and your collections live with your code. Keep **HTTPie CLI** installed for quick terminal requests (`http :3000/api/health` is faster than any GUI). If your team includes QA or PMs who need to run API tests, add Postman for the collaboration features — but store your Bruno files as the source of truth.

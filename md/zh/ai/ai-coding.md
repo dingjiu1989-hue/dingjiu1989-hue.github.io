@@ -3,7 +3,7 @@ title: "用 AI 辅助编程：从零到生产力"
 description: "全面对比 GitHub Copilot、Cursor、Claude Code 等 AI 编程工具，教你建立人机协作的高效开发工作流，避免 AI 写代码的常见陷阱。"
 date: 2026-05-06
 board: ai
-url: https://dingjiu1989-hue.github.io/ai/ai-coding.html
+url: https://dingjiu1989-hue.github.io/zh/ai/ai-coding.html
 ---
 
 # 用 AI 辅助编程：从零到生产力
@@ -23,17 +23,16 @@ url: https://dingjiu1989-hue.github.io/ai/ai-coding.html
   5. **测试覆盖（人 + AI）。** 让 AI 为你的代码生成测试用例，但你需要确认测试是否覆盖了所有重要路径。
 
 代码生成提示词示例 编写清晰的提示词是 AI 编程的核心技能。以下是一个经过优化的实际案例：
-    
-    
+
     请用 TypeScript 实现一个带过期时间的 LRU 缓存。
-    
+
     要求：
     - 支持 get(key)、set(key, value, ttlSeconds) 方法
     - ttl 过期后 get 返回 undefined 并自动删除条目
     - 内部使用 Map 保证 O(1) 读写，双向链表维护访问顺序
     - 线程安全不是必须的（单线程环境）
     - 导出类定义和类型接口
-    
+
     输出格式：
     1. 完整的 TypeScript 代码
     2. 单元测试（使用 Vitest）
@@ -48,8 +47,8 @@ url: https://dingjiu1989-hue.github.io/ai/ai-coding.html
 
 AI 编程的局限性 坦诚地说，AI 在以下场景中表现很差：老旧代码库的维护（训练数据中缺乏类似代码）、需要深度业务领域知识的逻辑、跨多个服务的调试排错、以及涉及合规审计的系统。这些场景下，AI 更适合做一个"高级 StackOverflow"，而不是主力开发者。 总结：AI 编程工具的最佳定位是一个能力极强但判断力为零的初级工程师。它写代码的速度是你的 10 倍，但你需要像 tech lead 一样审查它每一行产出。把 AI 当成队友，而不是替代品，这才是正确的 AI 编程之道。 📖 相关推荐
 
-  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
-  * [GitHub Copilot 完全使用指南：从安装到高效协作](<https://dingjiu1989-hue.github.io/tech/github-copilot-guide.html>)
-  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/zh/ai/ai-coding-tools-comparison-2026.html>)
+  * [GitHub Copilot 完全使用指南：从安装到高效协作](<https://dingjiu1989-hue.github.io/zh/tech/github-copilot-guide.html>)
+  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/zh/ai/mcp-protocol-guide.html>)
 
-**See also:** [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</ai/ai-coding-tools-comparison-2026.html>), [GitHub Copilot 完全使用指南：从安装到高效协作](</tech/github-copilot-guide.html>), [VS Code vs JetBrains vs Cursor：2026 年代码编辑器终极对比](</tools/editor-comparison-2026.html>).
+**See also:** [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</zh/ai/ai-coding-tools-comparison-2026.html>), [GitHub Copilot 完全使用指南：从安装到高效协作](</zh/tech/github-copilot-guide.html>), [VS Code vs JetBrains vs Cursor：2026 年代码编辑器终极对比](</zh/tools/editor-comparison-2026.html>).

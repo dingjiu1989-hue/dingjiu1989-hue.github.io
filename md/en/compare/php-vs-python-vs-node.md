@@ -24,7 +24,7 @@ Ecosystem / Libraries| Web-focused, smaller but high-quality (Packagist)| Enormo
 Database ORMs| Eloquent (Laravel), Doctrine (enterprise)| SQLAlchemy (gold standard), Django ORM, Peewee| Prisma, Drizzle, TypeORM, Knex  
 Deployment| Trivial: drop files in a folder, any shared hosting| Moderate: WSGI/ASGI server, Docker common| Moderate: process manager (PM2), Docker, serverless  
 Hosting Cost (cheapest)| $3-5/mo (shared hosting, cPanel)| $5-7/mo (VPS, or serverless)| $5-7/mo (VPS, or serverless/Vercel)  
-  
+
 ## When Each Language Wins
 
 **PHP — Best for:** Content-heavy websites, CMS-driven projects, and rapid web app development with Laravel. PHP's shared-nothing architecture is a surprising advantage: no memory leaks, no state bugs between requests, infinite horizontal scaling. Laravel provides the most complete ecosystem in any language — queues, WebSockets, auth, billing, caching, all included. **Weak spot:** CPU-bound tasks, long-running processes (WebSockets, background workers are better in other languages); smaller non-web ecosystem; reputation baggage from PHP 5 era.
@@ -42,7 +42,7 @@ ORM / Database| ★★★★★ (Eloquent, migrations, seeding)| ★★★★★
 Admin Panel| ★★★★ (Nova, Filament — paid)| ★★★★★ (Django Admin — free, auto-generated)| ★ (No standard; DIY or React Admin)  
 Queues / Background Jobs| ★★★★★ (built-in, Redis/DB/SQS drivers)| ★★★★ (Celery, Django-Q, async tasks)| ★★★ (BullMQ, Inngest — external libs)  
 API Development| ★★★★ (API resources, Sanctum)| ★★★★★ (Django REST Framework, FastAPI)| ★★★★ (tRPC, GraphQL Yoga, API routes)  
-  
+
 ## Decision Matrix
 
 Scenario| Best Choice| Why  
@@ -54,5 +54,5 @@ Full-stack with shared TypeScript types| Node.js| T3 stack, end-to-end type safe
 Internal tools, admin dashboards| Python (Django)| Django Admin = instant CRUD, zero frontend code  
 Lowest hosting cost, easiest deployment| PHP| Shared hosting $3/mo, drop files via FTP, works everywhere  
 API that serves mobile + web + third-parties| Node.js or Python| Fastify or FastAPI — both excellent API frameworks  
-  
+
 **Bottom line:** The "best" backend language doesn't exist — it depends on your project. PHP is the pragmatic choice for content-driven websites (WordPress, Laravel). Python is the choice for anything touching data, AI, or internal tools (Django, FastAPI). Node.js is the choice for real-time apps, full-stack TypeScript teams, and I/O-heavy services. All three are mature, well-supported, and capable of scaling to millions of users. Pick the one that fits your problem domain and team expertise. See also: [TypeScript vs JavaScript vs Python](</en/compare/php-vs-python-vs-node.html>) and [Best Web Frameworks](</en/compare/nextjs-vs-nuxt-vs-sveltekit.html>).

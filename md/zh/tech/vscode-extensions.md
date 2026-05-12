@@ -3,7 +3,7 @@ title: "VS Code 十大必备插件：让编码效率翻倍"
 description: "精选 10 款 VS Code 必备插件，涵盖 AI 补全、Git 可视化、代码格式化、远程开发等高频场景，新装编辑器第一件事就是装这些。"
 date: 2026-05-07
 board: tech
-url: https://dingjiu1989-hue.github.io/tech/vscode-extensions.html
+url: https://dingjiu1989-hue.github.io/zh/tech/vscode-extensions.html
 ---
 
 # VS Code 十大必备插件：让编码效率翻倍
@@ -32,8 +32,8 @@ Git 可视化
 
 经验之谈 插件不是越多越好——装太多会拖慢启动速度。这 10 个是我用过上百个插件后留下的"真必需品"。Copilot 或 Codeium 二选一即可，两个同时开会冲突。 📖 相关推荐
 
-  * [macOS 效率工具推荐合集](<https://dingjiu1989-hue.github.io/tech/macos-tools.html>)
-  * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/tech/git-advanced.html>)
-  * [单元测试入门：从零到写出第一个可维护的测试](<https://dingjiu1989-hue.github.io/tech/unit-testing-guide.html>)
+  * [macOS 效率工具推荐合集](<https://dingjiu1989-hue.github.io/zh/tech/macos-tools.html>)
+  * [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](<https://dingjiu1989-hue.github.io/zh/tech/git-advanced.html>)
+  * [单元测试入门：从零到写出第一个可维护的测试](<https://dingjiu1989-hue.github.io/zh/tech/unit-testing-guide.html>)
 
-**See also:** [Git 常用命令速查表](</tech/git-cheatsheet.html>), [10 款开发者必备的命令行工具（2026 版）](</tools/cli-tools-collection.html>), [VS Code vs JetBrains vs Cursor：2026 年代码编辑器终极对比](</tools/editor-comparison-2026.html>).
+**See also:** [Git 常用命令速查表](</zh/tech/git-cheatsheet.html>), [10 款开发者必备的命令行工具（2026 版）](</zh/tools/cli-tools-collection.html>), [VS Code vs JetBrains vs Cursor：2026 年代码编辑器终极对比](</zh/tools/editor-comparison-2026.html>).

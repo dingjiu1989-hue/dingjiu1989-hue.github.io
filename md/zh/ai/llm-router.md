@@ -97,7 +97,7 @@ class LLMRouter:
     def __init__(self):
         self.models = {"L1": fast_model, "L2": standard_model, "L3": premium_model}
         self.router = self._init_router()
-    
+
     def route(self, query):
         complexity = self.evaluate_complexity(query)
         if complexity == "simple":

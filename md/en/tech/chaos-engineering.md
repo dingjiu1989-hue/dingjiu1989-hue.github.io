@@ -10,1170 +10,415 @@ url: https://dingjiu1989-hue.github.io/en/tech/chaos-engineering.html
 
 # Chaos Engineering: Principles and Practical Tools
 
-  
-
-
 ##  Introduction
-
-  
-  
-  
-  
-
 
 Chaos engineering is the discipline of experimenting on a distributed system to build confidence in its ability to withstand turbulent conditions in production. Unlike traditional testing, chaos experiments proactively inject failures to uncover weaknesses before they cause customer-impacting incidents. This article covers the principles and practical tools for implementing chaos engineering.
 
-  
-  
-  
-  
-
-
 ##  Core Principles
-
-  
-  
-  
-  
-
 
 The practice of chaos engineering rests on four principles defined in the Principles of Chaos:
 
-  
-  
-  
-
-
 * **Build a hypothesis around steady-state behavior**: Define measurable indicators that your system is healthy.
-
-  
-
 
 2\\. **Vary real-world events**: Inject failures that mirror actual production incidents.
 
-  
-
-
 3\\. **Run experiments in production**: Use a small blast radius and automated rollback.
-
-  
-
 
 4\\. **Automate experiments to run continuously**: Chaos should be a regular part of operations.
 
-  
-  
-  
-  
-
-
 ##  Steady-State Hypothesis
-
-  
-  
-  
-  
-
 
 Define measurable metrics that represent healthy behavior before and after experiments:
 
-  
-  
-  
-  
-  
-
-
 # steady-state.yml
-
-  
-
 
 steady_state_hypothesis:
 
-  
-
-
 title: "Payment service remains available during node failure"
-
-  
-
 
 probes:
 
-  
-
-
 \- name: payment-api-health
-
-  
-
 
 type: http
 
-  
-
-
 provider:
-
-  
-
 
 url: "https://api.example.com/health"
 
-  
-
-
 expected_status: 200
-
-  
-
 
 timeout: 5
 
-  
-
-
 \- name: payment-latency-p99
-
-  
-
 
 type: promql
 
-  
-
-
 provider:
 
-  
-
-
 query: |
-
-  
-
 
 histogram_quantile(0.99,
 
-  
-
-
 sum(rate(http_request_duration_seconds_bucket{
-
-  
-
 
 service="payment", status="200"
 
-  
-
-
 }[5m])) by (le))
 
-  
-
-
 expected_value:
-
-  
-
 
 max: 500 # p99 under 500ms
 
-  
-
-
 \- name: error-rate
-
-  
-
 
 type: promql
 
-  
-
-
 provider:
-
-  
-
 
 query: |
 
-  
-
-
 sum(rate(http_requests_total{
-
-  
-
 
 service="payment", status=~"5.."
 
-  
-
-
 }[5m])) / sum(rate(http_requests_total{
-
-  
-
 
 service="payment"
 
-  
-
-
 }[5m]))
-
-  
-
 
 expected_value:
 
-  
-
-
 max: 0.01 # Error rate under 1%
-
-  
-  
-  
-  
-  
-  
-
 
 ##  Chaos Monkey and Simian Army
 
-  
-  
-  
-  
-
-
 Netflix's Chaos Monkey randomly terminates EC2 instances to ensure services survive instance failures:
-
-  
-  
-  
-  
-  
-
 
 // Chaos Monkey configuration
 
-  
-
-
 chaos.monkey:
-
-  
-
 
 enabled: true
 
-  
-
-
 assaults:
-
-  
-
 
 level: 3 # 1-5 intensity
 
-  
-
-
 latency-active: true
-
-  
-
 
 latency-range-start: 3000
 
-  
-
-
 latency-range-end: 10000
-
-  
-
 
 watcher:
 
-  
-
-
 controller: true
-
-  
-
 
 restController: true
 
-  
-
-
 service: true
-
-  
-
 
 component: true
 
-  
-
-
 repository: true
-
-  
-  
-  
-  
-  
-  
-
 
 For Spring Boot applications, integrate Chaos Monkey directly:
 
-  
-  
-  
-  
-  
-
-
 # application.yml
-
-  
-
 
 spring:
 
-  
-
-
 application:
-
-  
-
 
 name: payment-service
 
-  
-  
-  
-
-
 chaos:
-
-  
-
 
 monkey:
 
-  
-
-
 enabled: true
-
-  
-
 
 watcher:
 
-  
-
-
 controller: true
-
-  
-
 
 assaults:
 
-  
-
-
 exceptions-active: true
-
-  
-
 
 kill-application-active: false
 
-  
-
-
 memory-active: false
-
-  
-  
-  
-  
-  
-  
-
 
 ##  LitmusChaos on Kubernetes
 
-  
-  
-  
-  
-
-
 LitmusChaos provides declarative chaos experiments as Kubernetes CRDs:
-
-  
-  
-  
-  
-  
-
 
 apiVersion: litmuschaos.io/v1alpha1
 
-  
-
-
 kind: ChaosEngine
-
-  
-
 
 metadata:
 
-  
-
-
 name: payment-chaos
 
-  
-
-
 spec:
-
-  
-
 
 appinfo:
 
-  
-
-
 appns: "production"
-
-  
-
 
 applabel: "app=payment"
 
-  
-
-
 appkind: "deployment"
-
-  
-
 
 chaosServiceAccount: litmus-admin
 
-  
-
-
 experiments:
-
-  
-
 
 \- name: pod-delete
 
-  
-
-
 spec:
-
-  
-
 
 probe:
 
-  
-
-
 \- name: payment-health-probe
-
-  
-
 
 type: httpProbe
 
-  
-
-
 httpProbe/input:
-
-  
-
 
 url: "http://payment-svc.production:8080/health"
 
-  
-
-
 expectedStatusCode: 200
-
-  
-
 
 mode: Continuous
 
-  
-
-
 runProperties:
-
-  
-
 
 probeTimeout: 5
 
-  
-
-
 interval: 2
-
-  
-
 
 retry: 1
 
-  
-
-
 components:
-
-  
-
 
 env:
 
-  
-
-
 \- name: TOTAL_CHAOS_DURATION
-
-  
-
 
 value: "60"
 
-  
-
-
 \- name: CHAOS_INTERVAL
 
-  
-
-
 value: "10"
-
-  
-
 
 \- name: FORCE
 
-  
-
-
 value: "false"
-
-  
-
 
 \- name: RAMP_TIME
 
-  
-
-
 value: "10"
-
-  
-
 
 rank: 1
 
-  
-
-
 \- name: pod-cpu-hog
 
-  
-
-
 spec:
-
-  
-
 
 rank: 2
 
-  
-
-
 components:
 
-  
-
-
 env:
-
-  
-
 
 \- name: TOTAL_CHAOS_DURATION
 
-  
-
-
 value: "120"
-
-  
-
 
 \- name: CPU_CORES
 
-  
-
-
 value: "1"
-
-  
-  
-  
-  
-  
-  
-
 
 Observe experiment results programmatically:
 
-  
-  
-  
-  
-  
-
-
 # Get experiment status
-
-  
-
 
 kubectl get chaosresult payment-chaos-pod-delete \
 
-  
-
-
 -n production -o jsonpath='{.status.experimentStatus.verdict}'
-
-  
-  
-  
-
 
 # Expected output: "Pass" or "Fail"
 
-  
-  
-  
-  
-  
-  
-
-
 ##  Gremlin
-
-  
-  
-  
-  
-
 
 Gremlin offers a SaaS platform with a rich set of attack types:
 
-  
-  
-  
-  
-  
-
-
 # Install Gremlin agent
-
-  
-
 
 curl -sSL https://get.gremlin.com | sudo bash
 
-  
-
-
 sudo gremlin config auth --client-id $CLIENT_ID --client-secret $CLIENT_SECRET
-
-  
-  
-  
-
 
 # Run a CPU attack on a specific container
 
-  
-
-
 gremlin attack container cpu \
 
-  
-
-
 \--container-name payment-api \
-
-  
-
 
 \--capacity 1 \
 
-  
-
-
 \--length 60 \
-
-  
-
 
 \--target $(hostname)
 
-  
-  
-  
-
-
 # Blackhole network traffic to a specific host
-
-  
-
 
 gremlin attack container blackhole \
 
-  
-
-
 \--container-name payment-api \
-
-  
-
 
 \--length 30 \
 
-  
-
-
 \--destination-ip 10.0.1.50
-
-  
-  
-  
-
 
 # Shutdown a process
 
-  
-
-
 gremlin attack container process \
-
-  
-
 
 \--container-name payment-api \
 
-  
-
-
 \--process "java" \
-
-  
-
 
 \--length 0 # Indefinite until manually halted
 
-  
-  
-  
-  
-  
-  
-
-
 Gremlin's API enables automated experiment orchestration:
-
-  
-  
-  
-  
-  
-
 
 import gremlinapi
 
-  
-  
-  
-
-
 client = gremlinapi.Client(api_key="...")
-
-  
-  
-  
-
 
 experiment = client.create_experiment(
 
-  
-
-
 name="Payment Service Node Failure",
-
-  
-
 
 blast_radius={"targets": {"tags": {"service": "payment"}}},
 
-  
-
-
 attacks=[{
-
-  
-
 
 "type": "Shutdown",
 
-  
-
-
 "target": {"type": "RandomPod", "count": 1},
-
-  
-
 
 "length": 120,
 
-  
-
-
 }],
-
-  
-
 
 hypothesis={
 
-  
-
-
 "metrics": [
-
-  
-
 
 {"type": "latency", "query": "p99_latency{service='payment'}",
 
-  
-
-
 "threshold": 1000, "comparison": "less_than"},
-
-  
-
 
 ]
 
-  
-
-
 }
-
-  
-
 
 )
 
-  
-
-
 experiment.run()
-
-  
-
 
 experiment.wait_for_completion()
 
-  
-  
-  
-  
-  
-  
-
-
 ##  Blast Radius Control
-
-  
-  
-  
-  
-
 
 Always limit the scope of chaos experiments:
 
-  
-  
-  
-  
-  
-
-
 # LitmusChaos: blast radius constraints
 
-  
-
-
 spec:
-
-  
-
 
 # Restrict to non-critical hours
 
-  
-
-
 experiments:
-
-  
-
 
 \- name: pod-delete
 
-  
-
-
 spec:
-
-  
-
 
 components:
 
-  
-
-
 env:
-
-  
-
 
 \- name: PODS_AFFECTED_PERC
 
-  
-
-
 value: "20" # Max 20% of pods
-
-  
-
 
 \- name: TARGET_PODS
 
-  
-
-
 value: "1" # Max 1 pod absolute
-
-  
-
 
 \- name: SEQUENCE
 
-  
-
-
 value: "serial" # Serial execution
-
-  
-
 
 # Run only during window
 
-  
-
-
 schedule:
-
-  
-
 
 instant: false
 
-  
-
-
 cron: "0 14 * * 1-5" # Weekdays 2 PM
-
-  
-  
-  
-  
-  
-  
-
 
 ##  Game Days
 
-  
-  
-  
-  
-
-
 Game days are structured chaos exercises involving the whole team:
-
-  
-  
-  
-  
-  
-
 
 # Game Day Plan: Payment Service Outage
 
-  
-  
-  
-
-
 ## Scenario
-
-  
-
 
 Primary payment database experiences a regional failure.
 
-  
-  
-  
-
-
 ## Timeline
-
-  
-
 
 1\. T-15min: Brief team on scenario and objectives
 
-  
-
-
 2\. T-0: Inject failure (block database traffic)
-
-  
-
 
 3\. T+5min: Monitor alerts and team response
 
-  
-
-
 4\. T+15min: Declare incident if threshold breached
-
-  
-
 
 5\. T+30min: Evaluate failover mechanisms
 
-  
-
-
 6\. T+60min: Restore and debrief
-
-  
-  
-  
-
 
 ## Success Criteria
 
-  
-
-
 \- [ ] Read traffic served from replica within 30s
-
-  
-
 
 \- [ ] Failed payments queued for retry
 
-  
-
-
 \- [ ] Alert triggers within 2 minutes
-
-  
-
 
 \- [ ] No data loss
 
-  
-  
-  
-
-
 ## Rollback Plan
-
-  
-
 
 \- Execute ChaosEngine with `abort: true`
 
-  
-
-
 \- Verify replica promotion succeeded
-
-  
-
 
 \- Confirm application health endpoints
 
-  
-  
-  
-  
-  
-  
-
-
 ##  Experiment Design Checklist
-
-  
-  
-  
-
 
 * **Start small**: begin in staging, target non-critical services
 
@@ -1184,10 +429,5 @@ Primary payment database experiences a regional failure.
 * **Document findings**: share results in blameless post-mortems
 
 * **Incrementally increase scope**: expand blast radius and attack types gradually
-
-  
-  
-  
-
 
 Chaos engineering transforms the way teams think about reliability. Instead of hoping failures do not happen, you proactively prove your system survives them. Start with weekly pod-delete experiments in staging, then graduate to more complex scenarios like network partitions and regional failures in production.

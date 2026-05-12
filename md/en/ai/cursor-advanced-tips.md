@@ -13,8 +13,7 @@ Most Cursor users barely scratch the surface — they use Tab autocomplete and o
 ## 1\. Composer Mastery
 
 Composer (Cmd+I) is Cursor's killer feature — but most developers underutilize it.
-    
-    
+
     // Instead of "add a login form", give Composer full context:
     "Add a login form with:
     - Email + password fields with validation
@@ -30,8 +29,7 @@ Composer (Cmd+I) is Cursor's killer feature — but most developers underutilize
 ## 2\. Custom Instructions That Actually Work
 
 Cursor Settings → Rules for AI → add custom instructions. But the default template is weak. Use this instead:
-    
-    
+
     You are an expert TypeScript developer working in a Next.js + Tailwind codebase.
     - Write concise, idiomatic code. No unnecessary comments.
     - Prefer server components. Only use 'use client' when necessary.
@@ -51,8 +49,6 @@ Cursor Agent (Cmd+Shift+I) can read your codebase, run terminal commands, and ed
   * Upgrading dependencies and fixing breaking changes
   * Setting up CI/CD or configuration files
 
-
-
 ## 4\. Keyboard Shortcuts That Save Hours
 
 Shortcut| Action| When to Use  
@@ -63,7 +59,7 @@ Cmd+K| Quick Edit| Single-line changes, "rename this", "add error handling"
 Cmd+L| Chat| Questions about codebase, "how does X work?"  
 Cmd+Shift+Enter| Apply chat changes| After chat generates code, apply to file  
 Ctrl+Enter (in Composer)| Accept all changes| Approve multi-file edits  
-  
+
 ## 5\. Context Management — The Real Superpower
 
 Technique| How| Why  
@@ -74,7 +70,7 @@ Technique| How| Why
 @Web| Search web for docs/examples| Pull in latest API docs  
 @Docs| Index documentation sites| Add Next.js, Tailwind, or any lib's docs  
 .cursorrules| Project-level instructions| Enforce conventions across team  
-  
+
 ## 6\. Pair Programming Patterns
 
   * **Draft → Review → Refine:** Let Cursor draft a feature, review every line, ask for refinements. Always review.
@@ -82,8 +78,6 @@ Technique| How| Why
   * **Explain first, code second:** "Explain the approach before writing code" prevents hasty, wrong implementation.
   * **Write the test first:** "Write a failing test for X, then implement it." The best guardrail.
   * **Tab autocomplete is for flow, Composer is for features.** Don't use Composer for single lines; don't use Tab for architecture.
-
-
 
 ## Quick Wins Checklist
 
@@ -93,7 +87,5 @@ Technique| How| Why
   4. After every AI-generated change, ask: "Check this for edge cases."
   5. Write custom instructions specific to your codebase.
   6. Use Agent mode for tasks touching 5+ files.
-
-
 
 **Bottom line:** The difference between casual and power Cursor users is context. Power users give rich, specific context with @Files, @Docs, and detailed instructions. Casual users type one-liners and wonder why the output is generic. See also: [Cursor vs Copilot vs Claude Code](</en/compare/cursor-vs-copilot-vs-claude-code.html>) and [AI-Assisted Programming Guide](</en/ai/ai-coding.html>).

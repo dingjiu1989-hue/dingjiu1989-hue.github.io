@@ -3,7 +3,7 @@ title: "用 AI 做 PPT：从 3 小时到 10 分钟"
 description: "对比 Gamma、Beautiful.ai、Tome、iSlide AI、WPS AI 五大 AI PPT 工具，掌握人机协作的正确工作流程，避免 AI 生成千篇一律的幻灯片。"
 date: 2026-05-08
 board: ai
-url: https://dingjiu1989-hue.github.io/ai/ai-ppt-presentation.html
+url: https://dingjiu1989-hue.github.io/zh/ai/ai-ppt-presentation.html
 ---
 
 # 用 AI 做 PPT：从 3 小时到 10 分钟
@@ -34,8 +34,8 @@ url: https://dingjiu1989-hue.github.io/ai/ai-ppt-presentation.html
 
 AI 做 PPT 最大的价值不是"取代你做 PPT"，而是把你在排版和格式上浪费的时间省下来，让你把精力花在真正重要的事情上——想清楚你要说什么。工具永远只是工具，内容才是王道。 📖 相关推荐
 
-  * [AI 自动化工作流实战：让 AI 替你干重复活](<https://dingjiu1989-hue.github.io/ai/ai-automation-workflow.html>)
-  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
-  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/ai/mcp-protocol-guide.html>)
+  * [AI 自动化工作流实战：让 AI 替你干重复活](<https://dingjiu1989-hue.github.io/zh/ai/ai-automation-workflow.html>)
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/zh/ai/ai-coding-tools-comparison-2026.html>)
+  * [MCP 协议入门：让 AI 模型安全访问你的工具和数据](<https://dingjiu1989-hue.github.io/zh/ai/mcp-protocol-guide.html>)
 
-**See also:** [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</ai/ai-coding-tools-comparison-2026.html>), [MCP 协议入门：让 AI 模型安全访问你的工具和数据](</ai/mcp-protocol-guide.html>), [AI Agent 开发入门 2026：从原理到第一个智能体](</ai/ai-agent-development-2026.html>).
+**See also:** [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</zh/ai/ai-coding-tools-comparison-2026.html>), [MCP 协议入门：让 AI 模型安全访问你的工具和数据](</zh/ai/mcp-protocol-guide.html>), [AI Agent 开发入门 2026：从原理到第一个智能体](</zh/ai/ai-agent-development-2026.html>).

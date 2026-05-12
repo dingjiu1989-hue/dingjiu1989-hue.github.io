@@ -3,7 +3,7 @@ title: "Linux 命令行入门：30 个最常用的命令"
 description: "Linux 新手必学的 30 个命令，从文件操作、权限管理到进程查看，每个带示例，收藏这一篇就够了。"
 date: 2026-05-11
 board: tech
-url: https://dingjiu1989-hue.github.io/tech/linux-commands.html
+url: https://dingjiu1989-hue.github.io/zh/tech/linux-commands.html
 ---
 
 # Linux 命令行入门：30 个最常用的命令
@@ -52,8 +52,8 @@ netstat| 网络连接状态
 >>| 追加输出| `echo "world" >> file.txt`  
 推荐学习路径 先掌握文件操作 → 文本处理 → 管道重定向（这是 Linux 的精髓）→ 权限管理 → Shell 脚本编写。 📖 相关推荐
 
-  * [正则表达式 30 分钟入门指南](<https://dingjiu1989-hue.github.io/tech/regex-guide.html>)
-  * [Python 入门教程：从零到写出第一个程序](<https://dingjiu1989-hue.github.io/tech/python-tutorial.html>)
-  * [Git 常用命令速查表](<https://dingjiu1989-hue.github.io/tech/git-cheatsheet.html>)
+  * [正则表达式 30 分钟入门指南](<https://dingjiu1989-hue.github.io/zh/tech/regex-guide.html>)
+  * [Python 入门教程：从零到写出第一个程序](<https://dingjiu1989-hue.github.io/zh/tech/python-tutorial.html>)
+  * [Git 常用命令速查表](<https://dingjiu1989-hue.github.io/zh/tech/git-cheatsheet.html>)
 
-**See also:** [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](</tech/git-advanced.html>), [单元测试入门：从零到写出第一个可维护的测试](</tech/unit-testing-guide.html>), [REST API 设计最佳实践：写出让人愿意用的接口](</tech/rest-api-best-practices.html>).
+**See also:** [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](</zh/tech/git-advanced.html>), [单元测试入门：从零到写出第一个可维护的测试](</zh/tech/unit-testing-guide.html>), [REST API 设计最佳实践：写出让人愿意用的接口](</zh/tech/rest-api-best-practices.html>).

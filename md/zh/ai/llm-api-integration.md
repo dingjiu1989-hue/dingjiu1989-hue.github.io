@@ -2,7 +2,7 @@
 title: "LLM API集成最佳实践"
 description: "系统介绍大语言模型API的集成方法，涵盖调用优化、错误处理、成本控制与安全防护等生产环境关键考量。"
 date: 2026-05-11
-board: zh/ai
+board: ai
 url: https://dingjiu1989-hue.github.io/zh/ai/llm-api-integration.html
 ---
 

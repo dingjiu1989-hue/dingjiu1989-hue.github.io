@@ -16,22 +16,17 @@ Direct HTTP calls between services create tight coupling. When Service A calls S
 * Service A is blocked while Service B processes the request.
 * If Service B is down, Service A fails.
 * Scaling Service B does not help Service A's performance.
-  
+
 Messaging intermediaries (message brokers like Kafka, RabbitMQ, SQS, or Pub/Sub) solve these problems by decoupling senders from receivers.   
 Publish-Subscribe (Pub/Sub)   
 In the pub/sub pattern, publishers send messages to a topic without knowing who the subscribers are. Subscribers receive messages from topics they have subscribed to.   
 
-    
-    
     [Publisher] -> [Topic] -> [Subscriber A]
-    
-                           -> [Subscriber B]
-    
-                           -> [Subscriber C]
-    
-    
 
-  
+                           -> [Subscriber B]
+
+                           -> [Subscriber C]
+
 How Pub/Sub Works   
 
 * **Topics** are named channels that hold messages.
@@ -42,111 +37,80 @@ Use Cases
 **Log aggregation.** Multiple services publish log entries to a central topic. A log processing service stores and indexes them.   
 Example with Kafka   
 
-    
-    
     # Publisher
-    
-    producer.send('order-events', {
-    
-        'type': 'OrderPlaced',
-    
-        'order_id': '123',
-    
-        'customer_id': '456',
-    
-        'total': 99.99
-    
-    })
-    
-    
-    
-    # Subscriber
-    
-    @kafka_listener('order-events')
-    
-    def handle_order_placed(event):
-    
-        if event['type'] == 'OrderPlaced':
-    
-            inventory_service.reserve_inventory(event['order_id'])
-    
-            notification_service.send_confirmation(event['customer_id'])
-    
-    
 
-  
+    producer.send('order-events', {
+
+        'type': 'OrderPlaced',
+
+        'order_id': '123',
+
+        'customer_id': '456',
+
+        'total': 99.99
+
+    })
+
+    # Subscriber
+
+    @kafka_listener('order-events')
+
+    def handle_order_placed(event):
+
+        if event['type'] == 'OrderPlaced':
+
+            inventory_service.reserve_inventory(event['order_id'])
+
+            notification_service.send_confirmation(event['customer_id'])
+
 Pub/Sub is ideal for one-to-many communication where the publisher does not need a response.   
 Request-Reply   
 The request-reply pattern is fundamentally different from pub/sub. A sender sends a request and expects a response. The two are correlated so the sender knows which response goes with which request.   
 In messaging systems, request-reply requires correlation:   
 
-    
-    
     [Requestor] -> [Request Queue] -> [Replier]
-    
-                                               
-    
-    [Requestor] <- [Reply Queue]   <- [Replier]
-    
-    
 
-  
+    [Requestor] <- [Reply Queue]   <- [Replier]
+
 Correlation ID   
 The key mechanism is the correlation ID. The requestor includes a unique ID in the request message. The replier includes the same ID in the reply message. The requestor uses this ID to match replies to pending requests.   
 
-    
-    
     # Requestor
-    
+
     correlation_id = str(uuid.uuid4())
-    
+
     reply_queue = f"reply-{correlation_id}"
-    
-    
-    
+
     message = {
-    
+
         'correlation_id': correlation_id,
-    
+
         'payload': {'user_id': '123', 'amount': 100}
-    
+
     }
-    
-    
-    
+
     request_queue.send(message)
-    
-    
-    
+
     # Wait for reply on the reply queue
-    
+
     reply = reply_queue.receive(timeout=30)
-    
-    
 
-  
-
-    
-    
     # Replier
-    
-    def handle_request(message):
-    
-        result = process(message['payload'])
-    
-        reply = {
-    
-            'correlation_id': message['correlation_id'],
-    
-            'payload': result
-    
-        }
-    
-        reply_queue.send(reply)
-    
-    
 
-  
+    def handle_request(message):
+
+        result = process(message['payload'])
+
+        reply = {
+
+            'correlation_id': message['correlation_id'],
+
+            'payload': result
+
+        }
+
+        reply_queue.send(reply)
+
 Use Cases   
 **Remote procedure calls.** Service A asks Service B to compute something and return the result. Unlike HTTP RPC, the messaging-based approach allows the requestor to be decoupled in time -- it can send the request and check for the reply later.   
 **Long-running operations.** Submit a job, get back a job ID, check progress, and eventually receive the result. The reply might arrive minutes or hours later.   

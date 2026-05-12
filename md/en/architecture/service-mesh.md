@@ -13,72 +13,62 @@ What is a Service Mesh?
 In a traditional architecture, each service handles network communication directly. This leads to duplicated logic for retries, timeouts, load balancing, TLS, and tracing across every service.   
 A service mesh extracts these concerns into a separate infrastructure layer. Each service gets a sidecar proxy that intercepts all network traffic. The proxies form a mesh that manages all service-to-service communication.   
 
-    
-    
     [Service A] -> [Sidecar Proxy] ----> [Sidecar Proxy] -> [Service B]
-    
-                        |                         |
-    
-                   Control Plane              Control Plane
-    
-                        |                         |
-    
-                        +------[Control Plane]----+
-    
-    
 
-  
+                        |                         |
+
+                   Control Plane              Control Plane
+
+                        |                         |
+
+                        +------[Control Plane]----+
+
 The mesh has two components:   
 
 * **Data plane**: The sidecar proxies that handle the actual traffic. Envoy is the most common proxy.
 * **Control plane**: The management component that configures proxies, distributes certificates, and collects telemetry.
-  
+
 Sidecar Proxy Pattern   
 The sidecar proxy is the foundation of service mesh. It runs as a separate container in the same pod as the application.   
 
-    
-    
     # Kubernetes pod with Istio sidecar
-    
-    apiVersion: v1
-    
-    kind: Pod
-    
-    metadata:
-    
-      annotations:
-    
-        sidecar.istio.io/inject: "true"
-    
-    spec:
-    
-      containers:
-    
-        - name: my-app          # Application container
-    
-          image: my-app:latest
-    
-          ports:
-    
-            - containerPort: 8080
-    
-        - name: istio-proxy     # Sidecar proxy (injected automatically)
-    
-          image: istio/proxyv2:1.20
-    
-          args:
-    
-            - proxy
-    
-            - sidecar
-    
-            - --domain
-    
-            - $(POD_NAMESPACE).svc.cluster.local
-    
-    
 
-  
+    apiVersion: v1
+
+    kind: Pod
+
+    metadata:
+
+      annotations:
+
+        sidecar.istio.io/inject: "true"
+
+    spec:
+
+      containers:
+
+        - name: my-app          # Application container
+
+          image: my-app:latest
+
+          ports:
+
+            - containerPort: 8080
+
+        - name: istio-proxy     # Sidecar proxy (injected automatically)
+
+          image: istio/proxyv2:1.20
+
+          args:
+
+            - proxy
+
+            - sidecar
+
+            - --domain
+
+            - $(POD_NAMESPACE).svc.cluster.local
+
 What the Sidecar Does   
 
 * **Intercepts all inbound and outbound traffic** using iptables rules.
@@ -87,474 +77,423 @@ Traffic Management
 Service meshes provide fine-grained traffic control beyond simple round-robin load balancing.   
 Virtual Services and Destination Rules (Istio)   
 
-    
-    
     # Istio VirtualService: Route traffic based on headers
-    
-    apiVersion: networking.istio.io/v1beta1
-    
-    kind: VirtualService
-    
-    metadata:
-    
-      name: reviews
-    
-    spec:
-    
-      hosts:
-    
-        - reviews
-    
-      http:
-    
-        - match:
-    
-            - headers:
-    
-                end-user:
-    
-                  exact: "test-user"
-    
-          route:
-    
-            - destination:
-    
-                host: reviews
-    
-                subset: v2  # Route test-user to v2
-    
-        - route:
-    
-            - destination:
-    
-                host: reviews
-    
-                subset: v1  # Everyone else goes to v1
-    
-    ---
-    
-    # Istio DestinationRule: Load balancing and connection pool
-    
-    apiVersion: networking.istio.io/v1beta1
-    
-    kind: DestinationRule
-    
-    metadata:
-    
-      name: reviews-destination
-    
-    spec:
-    
-      host: reviews
-    
-      subsets:
-    
-        - name: v1
-    
-          labels:
-    
-            version: v1
-    
-        - name: v2
-    
-          labels:
-    
-            version: v2
-    
-      trafficPolicy:
-    
-        loadBalancer:
-    
-          simple: ROUND_ROBIN
-    
-        connectionPool:
-    
-          tcp:
-    
-            maxConnections: 100
-    
-          http:
-    
-            http1MaxPendingRequests: 10
-    
-            maxRequestsPerConnection: 10
-    
-    
 
-  
+    apiVersion: networking.istio.io/v1beta1
+
+    kind: VirtualService
+
+    metadata:
+
+      name: reviews
+
+    spec:
+
+      hosts:
+
+        - reviews
+
+      http:
+
+        - match:
+
+            - headers:
+
+                end-user:
+
+                  exact: "test-user"
+
+          route:
+
+            - destination:
+
+                host: reviews
+
+                subset: v2  # Route test-user to v2
+
+        - route:
+
+            - destination:
+
+                host: reviews
+
+                subset: v1  # Everyone else goes to v1
+
+    ---
+
+    # Istio DestinationRule: Load balancing and connection pool
+
+    apiVersion: networking.istio.io/v1beta1
+
+    kind: DestinationRule
+
+    metadata:
+
+      name: reviews-destination
+
+    spec:
+
+      host: reviews
+
+      subsets:
+
+        - name: v1
+
+          labels:
+
+            version: v1
+
+        - name: v2
+
+          labels:
+
+            version: v2
+
+      trafficPolicy:
+
+        loadBalancer:
+
+          simple: ROUND_ROBIN
+
+        connectionPool:
+
+          tcp:
+
+            maxConnections: 100
+
+          http:
+
+            http1MaxPendingRequests: 10
+
+            maxRequestsPerConnection: 10
+
 Traffic Splitting (Canary Deployments)   
 
-    
-    
     # Canary deployment: 10% traffic to new version
-    
-    apiVersion: networking.istio.io/v1beta1
-    
-    kind: VirtualService
-    
-    metadata:
-    
-      name: productpage
-    
-    spec:
-    
-      hosts:
-    
-        - productpage
-    
-      http:
-    
-        - route:
-    
-            - destination:
-    
-                host: productpage
-    
-                subset: v2
-    
-              weight: 10
-    
-            - destination:
-    
-                host: productpage
-    
-                subset: v1
-    
-              weight: 90
-    
-    
 
-  
+    apiVersion: networking.istio.io/v1beta1
+
+    kind: VirtualService
+
+    metadata:
+
+      name: productpage
+
+    spec:
+
+      hosts:
+
+        - productpage
+
+      http:
+
+        - route:
+
+            - destination:
+
+                host: productpage
+
+                subset: v2
+
+              weight: 10
+
+            - destination:
+
+                host: productpage
+
+                subset: v1
+
+              weight: 90
+
 Linkerd uses a similar approach with TrafficSplit:   
 
-    
-    
     # Linkerd TrafficSplit for canary
-    
-    apiVersion: split.smi-spec.io/v1alpha2
-    
-    kind: TrafficSplit
-    
-    metadata:
-    
-      name: productpage-split
-    
-    spec:
-    
-      service: productpage
-    
-      backends:
-    
-        - service: productpage-v1
-    
-          weight: 900m
-    
-        - service: productpage-v2
-    
-          weight: 100m
-    
-    
 
-  
+    apiVersion: split.smi-spec.io/v1alpha2
+
+    kind: TrafficSplit
+
+    metadata:
+
+      name: productpage-split
+
+    spec:
+
+      service: productpage
+
+      backends:
+
+        - service: productpage-v1
+
+          weight: 900m
+
+        - service: productpage-v2
+
+          weight: 100m
+
 Timeouts and Retries   
 
-    
-    
     # Istio: Request timeouts and retries
-    
-    apiVersion: networking.istio.io/v1beta1
-    
-    kind: VirtualService
-    
-    metadata:
-    
-      name: ratings
-    
-    spec:
-    
-      hosts:
-    
-        - ratings
-    
-      http:
-    
-        - timeout: 5s
-    
-          retries:
-    
-            attempts: 3
-    
-            perTryTimeout: 2s
-    
-            retryOn: gateway-error,connect-failure,refused-stream
-    
-          route:
-    
-            - destination:
-    
-                host: ratings
-    
-    
 
-  
+    apiVersion: networking.istio.io/v1beta1
+
+    kind: VirtualService
+
+    metadata:
+
+      name: ratings
+
+    spec:
+
+      hosts:
+
+        - ratings
+
+      http:
+
+        - timeout: 5s
+
+          retries:
+
+            attempts: 3
+
+            perTryTimeout: 2s
+
+            retryOn: gateway-error,connect-failure,refused-stream
+
+          route:
+
+            - destination:
+
+                host: ratings
+
 Mutual TLS (mTLS)   
 Service meshes provide automatic mutual TLS between services without application changes. Each sidecar proxy has a certificate issued by the mesh's certificate authority.   
 Istio mTLS modes   
 
-    
-    
     # STRICT mTLS: All traffic must use mTLS
-    
-    apiVersion: security.istio.io/v1beta1
-    
-    kind: PeerAuthentication
-    
-    metadata:
-    
-      name: default
-    
-      namespace: istio-system
-    
-    spec:
-    
-      mtls:
-    
-        mode: STRICT
-    
-    
-    
-    # PERMISSIVE: Accept both mTLS and plaintext (migration mode)
-    
-    apiVersion: security.istio.io/v1beta1
-    
-    kind: PeerAuthentication
-    
-    metadata:
-    
-      name: default
-    
-      namespace: istio-system
-    
-    spec:
-    
-      mtls:
-    
-        mode: PERMISSIVE
-    
-    
-    
-    # DISABLE: Disable mTLS for specific workloads
-    
-    apiVersion: security.istio.io/v1beta1
-    
-    kind: PeerAuthentication
-    
-    metadata:
-    
-      name: legacy-service
-    
-      namespace: legacy
-    
-    spec:
-    
-      selector:
-    
-        matchLabels:
-    
-          app: legacy-app
-    
-      mtls:
-    
-        mode: DISABLE
-    
-    
 
-  
+    apiVersion: security.istio.io/v1beta1
+
+    kind: PeerAuthentication
+
+    metadata:
+
+      name: default
+
+      namespace: istio-system
+
+    spec:
+
+      mtls:
+
+        mode: STRICT
+
+    # PERMISSIVE: Accept both mTLS and plaintext (migration mode)
+
+    apiVersion: security.istio.io/v1beta1
+
+    kind: PeerAuthentication
+
+    metadata:
+
+      name: default
+
+      namespace: istio-system
+
+    spec:
+
+      mtls:
+
+        mode: PERMISSIVE
+
+    # DISABLE: Disable mTLS for specific workloads
+
+    apiVersion: security.istio.io/v1beta1
+
+    kind: PeerAuthentication
+
+    metadata:
+
+      name: legacy-service
+
+      namespace: legacy
+
+    spec:
+
+      selector:
+
+        matchLabels:
+
+          app: legacy-app
+
+      mtls:
+
+        mode: DISABLE
+
 Linkerd mTLS   
 Linkerd automatically enables mTLS between meshed pods. It uses a 24-hour certificate rotation with automatic renewal.   
 
-    
-    
     # Check mTLS status in Linkerd
-    
-    linkerd viz stat deploy --from deploy
-    
-    # Look for TLS columns showing encrypted traffic
-    
-    
 
-  
+    linkerd viz stat deploy --from deploy
+
+    # Look for TLS columns showing encrypted traffic
+
 mTLS benefits:
 * All service-to-service traffic is encrypted.
 * Automatic certificate rotation.
 * Identity-based authorization (which service, not which IP).
-  
+
 Observability   
 Service meshes provide rich observability without code instrumentation.   
 Metrics   
 
-    
-    
     # Istio: Enable Prometheus metrics
-    
-    apiVersion: telemetry.istio.io/v1alpha1
-    
-    kind: Telemetry
-    
-    metadata:
-    
-      name: mesh-default
-    
-      namespace: istio-system
-    
-    spec:
-    
-      metrics:
-    
-        - overrides:
-    
-            - match:
-    
-                metric: ALL_METRICS
-    
-              mode: REPORT
-    
-    
 
-  
+    apiVersion: telemetry.istio.io/v1alpha1
+
+    kind: Telemetry
+
+    metadata:
+
+      name: mesh-default
+
+      namespace: istio-system
+
+    spec:
+
+      metrics:
+
+        - overrides:
+
+            - match:
+
+                metric: ALL_METRICS
+
+              mode: REPORT
+
 Istio exports standard metrics:
 * `istio_requests_total`: Total requests (by source, dest, response code).
 * `istio_request_duration_milliseconds`: Request latencies.
 * `istio_request_bytes`: Request sizes.
 * `istio_response_bytes`: Response sizes.
 * `istio_tcp_sent_bytes_total`: TCP throughput.
-  
+
 Distributed Tracing   
 
-    
-    
     # Istio: Enable tracing with Zipkin, Jaeger, or OpenTelemetry
-    
-    apiVersion: telemetry.istio.io/v1alpha1
-    
-    kind: Telemetry
-    
-    metadata:
-    
-      name: mesh-default
-    
-    spec:
-    
-      tracing:
-    
-        - providers:
-    
-            - name: otel-tracing
-    
-          randomSamplingPercentage: 10
-    
-    
 
-  
+    apiVersion: telemetry.istio.io/v1alpha1
+
+    kind: Telemetry
+
+    metadata:
+
+      name: mesh-default
+
+    spec:
+
+      tracing:
+
+        - providers:
+
+            - name: otel-tracing
+
+          randomSamplingPercentage: 10
+
 Tracing headers (b3, x-request-id) are propagated automatically by the sidecar. Services that forward the tracing headers receive full distributed trace visibility without adding any tracing SDK.   
 Authorization Policies   
 Service meshes enforce authorization at the network level. Policies specify which services can communicate.   
 
-    
-    
     # Istio: Authorization policy
-    
-    apiVersion: security.istio.io/v1beta1
-    
-    kind: AuthorizationPolicy
-    
-    metadata:
-    
-      name: payment-service-policy
-    
-      namespace: prod
-    
-    spec:
-    
-      selector:
-    
-        matchLabels:
-    
-          app: payment-service
-    
-      action: ALLOW
-    
-      rules:
-    
-        - from:
-    
-            - source:
-    
-                principals: ["cluster.local/ns/prod/sa/order-service"]
-    
-          to:
-    
-            - operation:
-    
-                methods: ["POST", "GET", "PUT"]
-    
-                paths: ["/api/v1/*"]
-    
-        - from:
-    
-            - source:
-    
-                principals: ["cluster.local/ns/prod/sa/admin-service"]
-    
-          to:
-    
-            - operation:
-    
-                methods: ["*"]
-    
-                paths: ["*"]
-    
-    
-    
-    ---
-    
-    apiVersion: security.istio.io/v1beta1
-    
-    kind: AuthorizationPolicy
-    
-    metadata:
-    
-      name: payment-service-deny
-    
-      namespace: prod
-    
-    spec:
-    
-      selector:
-    
-        matchLabels:
-    
-          app: payment-service
-    
-      action: DENY
-    
-      rules:
-    
-        - from:
-    
-            - source:
-    
-                notPrincipals: [
-    
-                  "cluster.local/ns/prod/sa/order-service",
-    
-                  "cluster.local/ns/prod/sa/admin-service"
-    
-                ]
-    
-    
 
-  
+    apiVersion: security.istio.io/v1beta1
+
+    kind: AuthorizationPolicy
+
+    metadata:
+
+      name: payment-service-policy
+
+      namespace: prod
+
+    spec:
+
+      selector:
+
+        matchLabels:
+
+          app: payment-service
+
+      action: ALLOW
+
+      rules:
+
+        - from:
+
+            - source:
+
+                principals: ["cluster.local/ns/prod/sa/order-service"]
+
+          to:
+
+            - operation:
+
+                methods: ["POST", "GET", "PUT"]
+
+                paths: ["/api/v1/*"]
+
+        - from:
+
+            - source:
+
+                principals: ["cluster.local/ns/prod/sa/admin-service"]
+
+          to:
+
+            - operation:
+
+                methods: ["*"]
+
+                paths: ["*"]
+
+    ---
+
+    apiVersion: security.istio.io/v1beta1
+
+    kind: AuthorizationPolicy
+
+    metadata:
+
+      name: payment-service-deny
+
+      namespace: prod
+
+    spec:
+
+      selector:
+
+        matchLabels:
+
+          app: payment-service
+
+      action: DENY
+
+      rules:
+
+        - from:
+
+            - source:
+
+                notPrincipals: [
+
+                  "cluster.local/ns/prod/sa/order-service",
+
+                  "cluster.local/ns/prod/sa/admin-service"
+
+                ]
+
 When to Use a Service Mesh   
 Service Mesh Adds Value When   
 
@@ -564,7 +503,7 @@ Service Mesh Adds Value When
 * **Advanced traffic management** needed (canary, blue-green, A/B testing).
 * **Observability requirements** across all services without code changes.
 * **Large platform team** available to operate the mesh.
-  
+
 Service Mesh is Overkill When   
 
 * **Few services** (under 10). The operational overhead outweighs the benefits.
@@ -572,7 +511,7 @@ Service Mesh is Overkill When
 * **Simple deployment**. If round-robin DNS is sufficient, a mesh is unnecessary.
 * **No mTLS requirement**. If all services are in the same network boundary.
 * **Homogeneous stack**. If all services use the same language framework with built-in resilience.
-  
+
 Istio vs Linkerd   
 | Aspect | Istio | Linkerd | |--------|-------|---------| | Proxy | Envoy | Linkerd2-proxy (Rust) | | Resource usage | Higher (Envoy is heavier) | Lower (Rust proxy is lightweight) | | Features | Extensive, many CRDs | Focused, simpler | | Configuration | Complex, many CRDs | Simple, fewer CRDs | | mTLS | STRICT, PERMISSIVE, DISABLE | Automatic | | Traffic splitting | VirtualService + weight | TrafficSplit | | Community | Large, CNCF | Large, CNCF | | Learning curve | Steep | Moderate |   
 Choose Istio if you need extensive configuration and are willing to invest in learning. Choose Linkerd if you want a simpler, lighter-weight mesh with less operational overhead.   

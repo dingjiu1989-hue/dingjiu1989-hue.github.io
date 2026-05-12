@@ -3,7 +3,7 @@ title: "如何把你的专业知识变成付费内容：从 0 到月入 5000"
 description: "手把手教你将专业技能包装为付费内容产品：在线课程、付费专栏、社群运营，三个变现路径的完整实操指南。"
 date: 2026-05-07
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html
+url: https://dingjiu1989-hue.github.io/zh/sidehustle/knowledge-monetization.html
 ---
 
 # 如何把你的专业知识变成付费内容：从 0 到月入 5000
@@ -31,8 +31,8 @@ url: https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html
 
 从哪个开始 先做付费专栏——门槛最低，一篇好文章就是一个付费产品。验证市场后再考虑投入更大的课程和社群。关键是**开始输出** ，大部分人都困在"准备"阶段永远没开始。 📖 相关推荐
 
-  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
-  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
-  * [如何通过写技术博客赚钱：从 0 到月入 1000 美元](<https://dingjiu1989-hue.github.io/sidehustle/tech-blog-monetization.html>)
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/zh/sidehustle/ai-era-side-hustles.html>)
+  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/zh/sidehustle/affiliate-marketing.html>)
+  * [如何通过写技术博客赚钱：从 0 到月入 1000 美元](<https://dingjiu1989-hue.github.io/zh/sidehustle/tech-blog-monetization.html>)
 
-**See also:** [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</sidehustle/affiliate-marketing.html>), [跨境电商入门指南：从 0 到第一单的全流程](</sidehustle/cross-border-ecommerce.html>), [独立开发者出海指南：从产品 Idea 到稳定变现](</sidehustle/indie-dev-guide.html>).
+**See also:** [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</zh/sidehustle/affiliate-marketing.html>), [跨境电商入门指南：从 0 到第一单的全流程](</zh/sidehustle/cross-border-ecommerce.html>), [独立开发者出海指南：从产品 Idea 到稳定变现](</zh/sidehustle/indie-dev-guide.html>).

@@ -24,7 +24,7 @@ Relationship Queries| relations() API, findMany with joins| Manual JOINs (no rel
 Raw SQL Escape Hatch| sql tagged template| sql tagged template| knex.raw()  
 Connection Pooling| Via drivers (pg, mysql2, better-sqlite3)| Via drivers (pg, mysql2, better-sqlite3)| Built-in (tarn.js)  
 Bundle Size| ~10 KB (core)| ~15 KB| ~40 KB  
-  
+
 ## When Each Tool Wins
 
 **Drizzle ORM — Best for:** Teams that want a happy medium between a full ORM (Prisma) and raw SQL. Drizzle's schema-in-TypeScript approach gives you end-to-end type safety without code generation. The relations API handles basic joins while giving you raw SQL escape hatches when needed. **Weak spot:** Newer than Knex.js; smaller community; less documentation for complex patterns.
@@ -42,5 +42,5 @@ Want maximum SQL control with types| Kysely| Pure query builder, no abstraction 
 Existing Knex.js codebase| Knex.js| Migration cost not worth it for established projects  
 Need Oracle or Redshift support| Knex.js| Only option with broad legacy DB support  
 Serverless / edge (minimal bundle)| Drizzle ORM| Smallest bundle size, works great at edge  
-  
+
 **Bottom line:** Drizzle ORM hits the sweet spot for most new TypeScript projects — you get the type safety of Prisma with the SQL-level control of a query builder. Kysely is the choice for SQL purists who want zero abstraction. Knex.js remains solid but its TypeScript story is weaker than the newcomers. See also: [Prisma vs Drizzle vs TypeORM](</en/compare/prisma-vs-drizzle-vs-typeorm.html>) and [Database Design Fundamentals](</en/tech/database-design-fundamentals.html>).

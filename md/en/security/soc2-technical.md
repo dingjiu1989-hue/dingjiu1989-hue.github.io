@@ -13,346 +13,279 @@ SOC 2 audits trust service criteria: Security, Availability, Processing Integrit
 Logging and Monitoring   
 Comprehensive logging is the foundation of SOC 2:   
 
-    
-    
     import structlog
-    
-    from datetime import datetime
-    
-    
-    
-    class SOC2Logger:
-    
-        def __init__(self):
-    
-            self.logger = structlog.get_logger()
-    
-            self.required_fields = [
-    
-                "timestamp", "user_id", "action", "resource",
-    
-                "source_ip", "outcome", "correlation_id"
-    
-            ]
-    
-        
-    
-        def log_access(self, user_id, action, resource, outcome, metadata=None):
-    
-            log_entry = {
-    
-                "timestamp": datetime.utcnow().isoformat(),
-    
-                "user_id": user_id,
-    
-                "action": action,
-    
-                "resource": resource,
-    
-                "source_ip": metadata.get("ip", "unknown"),
-    
-                "outcome": outcome,
-    
-                "correlation_id": metadata.get("correlation_id", str(uuid.uuid4())),
-    
-                "user_agent": metadata.get("user_agent"),
-    
-                "geo_location": metadata.get("geo"),
-    
-                "auth_method": metadata.get("auth_method")
-    
-            }
-    
-            
-    
-            self.logger.info("access_log", **log_entry)
-    
-            self.store_immutable(log_entry)
-    
-            return log_entry
-    
-        
-    
-        def store_immutable(self, log_entry):
-    
-            """Store logs in immutable storage for audit"""
-    
-            # Write to append-only log
-    
-            with open("/var/log/soc2/access.log", "a") as f:
-    
-                f.write(json.dumps(log_entry) + "\n")
-    
-            
-    
-            # Also send to SIEM
-    
-            self.send_to_siem(log_entry)
-    
-    
 
-  
+    from datetime import datetime
+
+    class SOC2Logger:
+
+        def __init__(self):
+
+            self.logger = structlog.get_logger()
+
+            self.required_fields = [
+
+                "timestamp", "user_id", "action", "resource",
+
+                "source_ip", "outcome", "correlation_id"
+
+            ]
+
+        def log_access(self, user_id, action, resource, outcome, metadata=None):
+
+            log_entry = {
+
+                "timestamp": datetime.utcnow().isoformat(),
+
+                "user_id": user_id,
+
+                "action": action,
+
+                "resource": resource,
+
+                "source_ip": metadata.get("ip", "unknown"),
+
+                "outcome": outcome,
+
+                "correlation_id": metadata.get("correlation_id", str(uuid.uuid4())),
+
+                "user_agent": metadata.get("user_agent"),
+
+                "geo_location": metadata.get("geo"),
+
+                "auth_method": metadata.get("auth_method")
+
+            }
+
+            self.logger.info("access_log", **log_entry)
+
+            self.store_immutable(log_entry)
+
+            return log_entry
+
+        def store_immutable(self, log_entry):
+
+            """Store logs in immutable storage for audit"""
+
+            # Write to append-only log
+
+            with open("/var/log/soc2/access.log", "a") as f:
+
+                f.write(json.dumps(log_entry) + "\n")
+
+            # Also send to SIEM
+
+            self.send_to_siem(log_entry)
+
 Access Review Automation   
 Automate periodic access reviews:   
 
-    
-    
     class AccessReviewAutomation:
-    
-        def __init__(self, identity_provider):
-    
-            self.idp = identity_provider
-    
-            self.reviewers = {
-    
-                "engineering": "eng-manager@example.com",
-    
-                "sales": "sales-director@example.com",
-    
-                "finance": "cfo@example.com"
-    
-            }
-    
-        
-    
-        def generate_review(self, department):
-    
-            users = self.idp.get_users_by_department(department)
-    
-            
-    
-            review = {
-    
-                "department": department,
-    
-                "review_date": datetime.utcnow().isoformat(),
-    
-                "reviewer": self.reviewers[department],
-    
-                "users": []
-    
-            }
-    
-            
-    
-            for user in users:
-    
-                review["users"].append({
-    
-                    "name": user["name"],
-    
-                    "email": user["email"],
-    
-                    "roles": user["roles"],
-    
-                    "last_login": user["last_login"],
-    
-                    "access_keys_count": user.get("access_keys", 0),
-    
-                    "days_since_last_access": (
-    
-                        datetime.utcnow() - user["last_login"]
-    
-                    ).days if user["last_login"] else None
-    
-                })
-    
-            
-    
-            return review
-    
-        
-    
-        def auto_disable_inactive(self, days_threshold=90):
-    
-            cutoff = datetime.utcnow() - timedelta(days=days_threshold)
-    
-            disabled = []
-    
-            
-    
-            for user in self.idp.get_all_users():
-    
-                if user.get("last_login", datetime.min) < cutoff:
-    
-                    self.idp.disable_user(user["email"])
-    
-                    disabled.append(user["email"])
-    
-            
-    
-            return disabled
-    
-    
 
-  
+        def __init__(self, identity_provider):
+
+            self.idp = identity_provider
+
+            self.reviewers = {
+
+                "engineering": "eng-manager@example.com",
+
+                "sales": "sales-director@example.com",
+
+                "finance": "cfo@example.com"
+
+            }
+
+        def generate_review(self, department):
+
+            users = self.idp.get_users_by_department(department)
+
+            review = {
+
+                "department": department,
+
+                "review_date": datetime.utcnow().isoformat(),
+
+                "reviewer": self.reviewers[department],
+
+                "users": []
+
+            }
+
+            for user in users:
+
+                review["users"].append({
+
+                    "name": user["name"],
+
+                    "email": user["email"],
+
+                    "roles": user["roles"],
+
+                    "last_login": user["last_login"],
+
+                    "access_keys_count": user.get("access_keys", 0),
+
+                    "days_since_last_access": (
+
+                        datetime.utcnow() - user["last_login"]
+
+                    ).days if user["last_login"] else None
+
+                })
+
+            return review
+
+        def auto_disable_inactive(self, days_threshold=90):
+
+            cutoff = datetime.utcnow() - timedelta(days=days_threshold)
+
+            disabled = []
+
+            for user in self.idp.get_all_users():
+
+                if user.get("last_login", datetime.min) < cutoff:
+
+                    self.idp.disable_user(user["email"])
+
+                    disabled.append(user["email"])
+
+            return disabled
+
 Change Management   
 Track and approve all infrastructure changes:   
 
-    
-    
     # change-management-pipeline.yaml
-    
+
     change_management:
-    
+
       required_for:
-    
+
         - infrastructure_changes
-    
+
         - code_deployments
-    
+
         - configuration_changes
-    
+
         - access_policy_changes
-    
-        
-    
+
       workflow:
-    
+
         - request:
-    
+
             fields:
-    
+
               - change_description
-    
+
               - risk_assessment
-    
+
               - rollback_plan
-    
+
               - testing_completed
-    
-        
-    
+
         - review:
-    
+
             required_approvals:
-    
+
               - technical_reviewer
-    
+
               - security_reviewer
-    
+
             auto_approve:
-    
+
               - risk: low
-    
+
               - owner: same_team
-    
-        
-    
+
         - implementation:
-    
+
             window: business_hours
-    
+
             blackout_periods:
-    
+
               - end_of_month
-    
+
               - holiday_season
-    
+
             require_change_window: high_risk
-    
-        
-    
+
         - verification:
-    
+
             - monitoring_metrics_normal
-    
+
             - smoke_tests_passed
-    
+
             - no_security_events
-    
-    
 
-  
-
-    
-    
     # Change management API
-    
-    class ChangeManager:
-    
-        def __init__(self):
-    
-            self.changes = []
-    
-        
-    
-        def create_change(self, request):
-    
-            change = {
-    
-                "id": str(uuid.uuid4()),
-    
-                "description": request["description"],
-    
-                "risk": request.get("risk", "medium"),
-    
-                "requester": request["requester"],
-    
-                "status": "pending_review",
-    
-                "created_at": datetime.utcnow().isoformat(),
-    
-                "approvals": [],
-    
-                "rollback_plan": request["rollback_plan"]
-    
-            }
-    
-            
-    
-            self.changes.append(change)
-    
-            self.notify_reviewers(change)
-    
-            
-    
-            return change
-    
-        
-    
-        def approve_change(self, change_id, reviewer, decision, comments):
-    
-            change = self.find_change(change_id)
-    
-            
-    
-            change["approvals"].append({
-    
-                "reviewer": reviewer,
-    
-                "decision": decision,
-    
-                "comments": comments,
-    
-                "timestamp": datetime.utcnow().isoformat()
-    
-            })
-    
-            
-    
-            if decision == "approved":
-    
-                change["status"] = "approved"
-    
-                self.schedule_implementation(change)
-    
-            else:
-    
-                change["status"] = "rejected"
-    
-        
-    
-        def post_implementation_review(self, change_id):
-    
-            change = self.find_change(change_id)
-    
-            change["status"] = "completed"
-    
-            change["completed_at"] = datetime.utcnow().isoformat()
-    
-    
 
-  
+    class ChangeManager:
+
+        def __init__(self):
+
+            self.changes = []
+
+        def create_change(self, request):
+
+            change = {
+
+                "id": str(uuid.uuid4()),
+
+                "description": request["description"],
+
+                "risk": request.get("risk", "medium"),
+
+                "requester": request["requester"],
+
+                "status": "pending_review",
+
+                "created_at": datetime.utcnow().isoformat(),
+
+                "approvals": [],
+
+                "rollback_plan": request["rollback_plan"]
+
+            }
+
+            self.changes.append(change)
+
+            self.notify_reviewers(change)
+
+            return change
+
+        def approve_change(self, change_id, reviewer, decision, comments):
+
+            change = self.find_change(change_id)
+
+            change["approvals"].append({
+
+                "reviewer": reviewer,
+
+                "decision": decision,
+
+                "comments": comments,
+
+                "timestamp": datetime.utcnow().isoformat()
+
+            })
+
+            if decision == "approved":
+
+                change["status"] = "approved"
+
+                self.schedule_implementation(change)
+
+            else:
+
+                change["status"] = "rejected"
+
+        def post_implementation_review(self, change_id):
+
+            change = self.find_change(change_id)
+
+            change["status"] = "completed"
+
+            change["completed_at"] = datetime.utcnow().isoformat()
+
 Conclusion   
 SOC 2 technical controls require systematic implementation across logging, access review, and change management. Implement immutable audit logging, automate access recertification, and enforce change management workflows. Continuous monitoring provides evidence for auditors and early detection of control failures. Automate evidence collection to reduce audit burden.

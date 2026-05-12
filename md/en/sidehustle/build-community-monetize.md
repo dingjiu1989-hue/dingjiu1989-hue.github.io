@@ -19,7 +19,7 @@ Circle| Paid professional communities, courses + community| Built-in subscriptio
 Slack| Professional communities, B2B, existing Slack users| Manual (Stripe links, Patreon)| Familiar to professionals; great integrations| Free plan has 90-day message limit; expensive at scale  
 Discourse| Long-form discussions, forums, knowledge bases| Membership plugins, manual subscriptions| Open source, best for searchable knowledge, SEO-friendly| Less engaging for real-time conversation  
 Skool| Courses + community, monetized learning| Built-in ($99/mo flat)| Gamification, simple pricing, course hosting included| Limited customization; newer platform  
-  
+
 ## Community Monetization Models
 
 Model| Revenue Potential| Best For| Example  
@@ -28,7 +28,7 @@ Paid Membership ($5-50/mo)| $1K-$100K/mo| Exclusive communities, learning groups
 Free Community + Sponsorships| $500-$10K/mo| Large open communities (10K+ members)| Sponsorship slots in welcome message, events, newsletter  
 Community + Course Bundle| $2K-$50K/mo| Learning-focused communities| Wes Bos ($200-400/course + Discord), Kent C. Dodds  
 Community as SaaS Funnel| $5K-$200K/mo| Developer tool companies| Supabase Discord → Supabase Cloud; Vercel Discord → Vercel Pro  
-  
+
 ## How to Grow a Developer Community from Zero
 
   1. **Start with 10 people:** Invite 10 developers you know personally. A community of 10 engaged members is infinitely better than 1,000 lurkers. These first 10 set the tone.
@@ -37,7 +37,5 @@ Community as SaaS Funnel| $5K-$200K/mo| Developer tool companies| Supabase Disco
   4. **Create rituals:** Weekly events (office hours, code review sessions, showcase threads). Rituals give people a reason to come back.
   5. **Celebrate wins publicly:** When a member gets a job, launches a project, or solves a problem — highlight it. Their success is your community's marketing.
   6. **Protect the culture:** One toxic member can destroy a community. Have clear rules, enforce them consistently, and remove bad actors quickly.
-
-
 
 **Bottom line:** A paid developer community is one of the most sustainable side hustles — recurring revenue, high margins, and genuine impact. Start with a free community on Discord or Discourse, build engagement for 6-12 months, then add a paid tier when members start asking "how can I support this?" The key: the community must provide value EVEN TO LURKERS — if you charge from day one, you will never reach critical mass. See also: [Paid Communities Guide](</en/sidehustle/paid-communities-guide.html>) and [Newsletter Monetization Guide](</en/sidehustle/newsletter-monetization-guide.html>).

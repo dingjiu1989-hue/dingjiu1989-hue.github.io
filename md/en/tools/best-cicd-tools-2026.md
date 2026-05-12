@@ -22,7 +22,7 @@ CI/CD automates testing, building, and deploying your code. GitHub Actions, GitL
 **Parallelism**|  Matrix builds| Parallel jobs| Excellent (native parallel)| N/A (GitOps model)  
 **Docker support**|  Native| Native (container registry)| Excellent| K8s-native  
 **Secrets mgmt**|  Encrypted secrets + OIDC| CI/CD Variables + Vault| Contexts + OIDC| K8s Secrets + Sealed Secrets  
-  
+
 ## GitHub Actions — The Most Popular (By Far)
 
 GitHub Actions is the default CI/CD for the world's largest code host. The marketplace of 20,000+ pre-built actions means you rarely write automation from scratch. OIDC support lets you deploy to AWS/GCP/Azure without storing cloud credentials.
@@ -72,5 +72,5 @@ GitLab project, DevOps integration| **GitLab CI**
 Complex parallel pipelines, max free min| **CircleCI**  
 Kubernetes, GitOps| **ArgoCD + GitHub Actions**  
 Solo developer, side project| **GitHub Actions** (free 2000 min)  
-  
+
 **Bottom line:** GitHub Actions for any GitHub project — it's free, integrated, and the marketplace has everything. GitLab CI if you're on GitLab. CircleCI for complex parallel pipelines. ArgoCD for Kubernetes GitOps (use alongside a CI tool, not instead of). See also: [GitHub vs GitLab comparison](</en/compare/github-vs-gitlab-vs-bitbucket.html>) for where to host your code.

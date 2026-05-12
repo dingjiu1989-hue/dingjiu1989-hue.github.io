@@ -25,7 +25,7 @@ Load Balancing| Round-robin, least_conn, ip_hash, random, consistent_hash| Round
 WebSocket| Yes (since 1.3)| Yes (automatic)| Yes (automatic)  
 Observability| stub_status, access/error logs| Metrics endpoint, structured logs| Metrics, traces, access logs, dashboard UI  
 Plugin/Module System| Compile-time modules (no dynamic loading on most distros)| Compile-time modules (Go plugins or xcaddy)| Middleware plugins, providers (dynamic at runtime)  
-  
+
 ## Nginx — The Battle-Tested Standard
 
 **Best for:** High-traffic sites (Netflix, Cloudflare scale), static file serving at extreme throughput, and teams that already have Nginx expertise and config management in place. **Weak spot:** Config syntax is arcane (if statements in Nginx are notoriously tricky); no automatic HTTPS; Docker/K8s integration requires extra tooling.
@@ -47,5 +47,5 @@ Docker Compose multi-service app| Traefik| Auto-discovery via Docker labels, per
 Kubernetes cluster| Traefik or Nginx Ingress| Both excellent; Traefik for simplicity, Nginx for maximum control  
 High-traffic static file serving (CDN origin)| Nginx| Proven at massive scale, lowest resource usage  
 Simple reverse proxy + automatic HTTPS| Caddy| The Caddyfile is the most readable config of all three  
-  
+
 **Bottom line:** Caddy is the best default for 80% of projects — automatic HTTPS alone saves hours of certificate management. Traefik wins in container-heavy environments where services are dynamic. Nginx is still king at extreme scale and when you need maximum performance with minimal resources. See also: [Fly.io vs Railway vs Render](</en/compare/fly-io-vs-railway-vs-render.html>) and [DevOps for Developers](</en/tech/devops-for-developers.html>).

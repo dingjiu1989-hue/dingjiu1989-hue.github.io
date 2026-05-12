@@ -31,133 +31,96 @@ However in 2026, PostgreSQL's `pgbouncer` (connection pooler) is essentially man
 JSON Support   
 PostgreSQL has been the king of JSON since 9.2, and the gap has only widened.   
 
-    
-    
     -- PostgreSQL: index a JSON path and query efficiently
-    
-    CREATE INDEX idx_events_actor ON events
-    
-      USING GIN ((payload -> 'actor') jsonb_path_ops);
-    
-    
-    
-    SELECT * FROM events
-    
-    WHERE payload @> '{"actor": {"login": "daniel"}}';
-    
-    
 
-  
+    CREATE INDEX idx_events_actor ON events
+
+      USING GIN ((payload -> 'actor') jsonb_path_ops);
+
+    SELECT * FROM events
+
+    WHERE payload @> '{"actor": {"login": "daniel"}}';
+
 MySQL added the `JSON` data type in 5.7 and has improved it steadily. In MySQL 9.1 you can create multi-value indexes on JSON, but you still cannot index arbitrary JSON paths the way PostgreSQL does with GIN indexes.   
 
-    
-    
     -- MySQL: multi-value index on JSON array
-    
-    CREATE INDEX idx_events_tags ON events(
-    
-      (CAST(payload->'$.tags' AS CHAR(100) ARRAY))
-    
-    );
-    
-    
-    
-    SELECT * FROM events
-    
-    WHERE 'database' MEMBER OF (payload->'$.tags');
-    
-    
 
-  
+    CREATE INDEX idx_events_tags ON events(
+
+      (CAST(payload->'$.tags' AS CHAR(100) ARRAY))
+
+    );
+
+    SELECT * FROM events
+
+    WHERE 'database' MEMBER OF (payload->'$.tags');
+
 SQLite added JSON support via extension in 3.38 and made it built-in by 3.49. It handles extraction and manipulation but lacks indexing into JSON documents.   
 **Winner:** PostgreSQL, by a wide margin.   
 Full-Text Search   
 
-    
-    
     -- PostgreSQL full-text search with ranking
-    
+
     SELECT title, ts_rank(to_tsvector('english', content), query) AS rank
-    
+
     FROM articles, to_tsquery('database & performance') query
-    
+
     WHERE to_tsvector('english', content) @@ query
-    
+
     ORDER BY rank DESC
-    
+
     LIMIT 10;
-    
-    
 
-  
-
-    
-    
     -- MySQL full-text search in InnoDB
-    
-    SELECT title, MATCH(title, content) AGAINST('database performance' IN NATURAL LANGUAGE MODE) AS relevance
-    
-    FROM articles
-    
-    WHERE MATCH(title, content) AGAINST('database performance' IN NATURAL LANGUAGE MODE)
-    
-    ORDER BY relevance DESC
-    
-    LIMIT 10;
-    
-    
 
-  
+    SELECT title, MATCH(title, content) AGAINST('database performance' IN NATURAL LANGUAGE MODE) AS relevance
+
+    FROM articles
+
+    WHERE MATCH(title, content) AGAINST('database performance' IN NATURAL LANGUAGE MODE)
+
+    ORDER BY relevance DESC
+
+    LIMIT 10;
+
 PostgreSQL supports custom dictionaries, stemming per language, and `tsvector`/`tsquery` types for advanced ranking. MySQL's full-text is simpler and faster for basic searches but lacks PostgreSQL's depth. SQLite supports FTS5 extension with BM25 ranking, which is excellent for local search but not designed for production-scale web search.   
 GIS / Spatial Data   
 PostgreSQL with **PostGIS** remains the gold standard. There is no competition.   
 
-    
-    
     -- Find restaurants within 5km
-    
-    SELECT name, ST_Distance(geom, ST_SetSRID(ST_MakePoint(116.4, 39.9), 4326)) AS dist
-    
-    FROM restaurants
-    
-    WHERE ST_DWithin(geom, ST_SetSRID(ST_MakePoint(116.4, 39.9), 4326), 5000)
-    
-    ORDER BY dist;
-    
-    
 
-  
+    SELECT name, ST_Distance(geom, ST_SetSRID(ST_MakePoint(116.4, 39.9), 4326)) AS dist
+
+    FROM restaurants
+
+    WHERE ST_DWithin(geom, ST_SetSRID(ST_MakePoint(116.4, 39.9), 4326), 5000)
+
+    ORDER BY dist;
+
 MySQL supports spatial indexes via `SRID` constraints (added in 8.0) and is adequate for simple geo-queries. But it lacks support for geography types (spheroidal calculations), 3D operations, and the vast PostGIS function library. SQLite has **SpatiaLite** but it is a separate extension and not commonly used.   
 Replication   
 | Feature | PostgreSQL 18 | MySQL 9.1 | SQLite | |---|---|---|---| | Built-in streaming | Logical + physical | Async + semi-sync | None (via Litestream, Turso) | | Multi-primary | Via pglogical, Bucardo | Group Replication, Cluster | Via rqlite, dqlite | | Conflict resolution | Configurable (per-table) | Last-write-wins, certifier | Application-level | | Cascading | Yes | Yes | N/A |   
 Partitioning   
 PostgreSQL supports declarative partitioning (RANGE, LIST, HASH) with partition pruning. MySQL also supports RANGE, LIST, HASH, and KEY partitioning, plus `PARTITION BY` with explicit partition selection. For most workloads, both are functionally equivalent in 2026.   
 
-    
-    
     -- PostgreSQL declarative partitioning
-    
-    CREATE TABLE logs (
-    
-        id BIGSERIAL,
-    
-        created_at TIMESTAMPTZ NOT NULL,
-    
-        level TEXT NOT NULL,
-    
-        message TEXT
-    
-    ) PARTITION BY RANGE (created_at);
-    
-    
-    
-    CREATE TABLE logs_2026_q1 PARTITION OF logs
-    
-        FOR VALUES FROM ('2026-01-01') TO ('2026-04-01');
-    
-    
 
-  
+    CREATE TABLE logs (
+
+        id BIGSERIAL,
+
+        created_at TIMESTAMPTZ NOT NULL,
+
+        level TEXT NOT NULL,
+
+        message TEXT
+
+    ) PARTITION BY RANGE (created_at);
+
+    CREATE TABLE logs_2026_q1 PARTITION OF logs
+
+        FOR VALUES FROM ('2026-01-01') TO ('2026-04-01');
+
 \---   
 3\. ACID Compliance Differences   
 All three databases claim ACID compliance, but the details matter.   
@@ -165,124 +128,94 @@ All three databases claim ACID compliance, but the details matter.
 **The critical difference:** PostgreSQL's default isolation level is Read Committed but it supports true Serializable isolation via Serializable Snapshot Isolation (SSI). MySQL's Repeatable Read default can produce phantom reads in certain edge cases. SQLite defaults to Serializable but converts writes to serial execution under the hood.   
 In practice, 99% of applications work fine on all three at the Read Committed level. You only need Serializable when you are doing financial transactions or inventory systems where race conditions on range queries would be catastrophic.   
 
-    
-    
     -- PostgreSQL: true serializable isolation
-    
-    BEGIN ISOLATION LEVEL SERIALIZABLE;
-    
-    UPDATE accounts SET balance = balance - 100 WHERE id = 1;
-    
-    UPDATE accounts SET balance = balance + 100 WHERE id = 2;
-    
-    -- If another transaction moved money between these same accounts
-    
-    -- concurrently, PostgreSQL retries with a serialization failure
-    
-    COMMIT;
-    
-    
 
-  
+    BEGIN ISOLATION LEVEL SERIALIZABLE;
+
+    UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+
+    UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+
+    -- If another transaction moved money between these same accounts
+
+    -- concurrently, PostgreSQL retries with a serialization failure
+
+    COMMIT;
+
 MySQL's `SERIALIZABLE` mode works but forces lock-based execution, which kills concurrency. PostgreSQL's SSI uses optimistic concurrency control and only fails on actual conflicts.   
 \---   
 4\. SQL Dialect Differences   
 If you ever migrate between databases, these differences will matter.   
 LIMIT / OFFSET   
 
-    
-    
     -- PostgreSQL and SQLite
-    
-    SELECT * FROM users ORDER BY id LIMIT 10 OFFSET 20;
-    
-    
-    
-    -- MySQL (alternative syntax)
-    
-    SELECT * FROM users ORDER BY id LIMIT 20, 10;
-    
-    
 
-  
+    SELECT * FROM users ORDER BY id LIMIT 10 OFFSET 20;
+
+    -- MySQL (alternative syntax)
+
+    SELECT * FROM users ORDER BY id LIMIT 20, 10;
+
 MySQL supports `LIMIT 20, 10` as shorthand for `LIMIT 10 OFFSET 20`. PostgreSQL and SQLite only support the standard `LIMIT ... OFFSET ...` syntax. Since MySQL 8.0 both syntaxes work.   
 INSERT ... ON CONFLICT   
 
-    
-    
     -- PostgreSQL: UPSERT
-    
-    INSERT INTO users (id, email, name)
-    
-    VALUES (1, 'daniel@example.com', 'Daniel')
-    
-    ON CONFLICT (id) DO UPDATE
-    
-    SET email = EXCLUDED.email,
-    
-        name = EXCLUDED.name;
-    
-    
-    
-    -- MySQL: REPLACE or INSERT ... ON DUPLICATE KEY UPDATE
-    
-    INSERT INTO users (id, email, name)
-    
-    VALUES (1, 'daniel@example.com', 'Daniel')
-    
-    ON DUPLICATE KEY UPDATE
-    
-        email = VALUES(email),
-    
-        name = VALUES(name);
-    
-    
-    
-    -- SQLite: INSERT ... ON CONFLICT (since 3.24)
-    
-    INSERT INTO users (id, email, name)
-    
-    VALUES (1, 'daniel@example.com', 'Daniel')
-    
-    ON CONFLICT (id) DO UPDATE SET
-    
-        email = excluded.email,
-    
-        name = excluded.name;
-    
-    
 
-  
+    INSERT INTO users (id, email, name)
+
+    VALUES (1, 'daniel@example.com', 'Daniel')
+
+    ON CONFLICT (id) DO UPDATE
+
+    SET email = EXCLUDED.email,
+
+        name = EXCLUDED.name;
+
+    -- MySQL: REPLACE or INSERT ... ON DUPLICATE KEY UPDATE
+
+    INSERT INTO users (id, email, name)
+
+    VALUES (1, 'daniel@example.com', 'Daniel')
+
+    ON DUPLICATE KEY UPDATE
+
+        email = VALUES(email),
+
+        name = VALUES(name);
+
+    -- SQLite: INSERT ... ON CONFLICT (since 3.24)
+
+    INSERT INTO users (id, email, name)
+
+    VALUES (1, 'daniel@example.com', 'Daniel')
+
+    ON CONFLICT (id) DO UPDATE SET
+
+        email = excluded.email,
+
+        name = excluded.name;
+
 Note: MySQL's `ON DUPLICATE KEY UPDATE` applies to any unique key violation, not just the specified one. PostgreSQL's `ON CONFLICT` lets you target a specific constraint, which is safer.   
 RETURNING Clause   
 
-    
-    
     -- PostgreSQL and SQLite: RETURNING is standard
-    
-    INSERT INTO users (name, email) VALUES ('Daniel', 'daniel@example.com')
-    
-    RETURNING id, created_at;
-    
-    
-    
-    DELETE FROM users WHERE email LIKE '%@test.com'
-    
-    RETURNING id, email;
-    
-    
-    
-    -- MySQL: no RETURNING clause (not supported as of 9.1)
-    
-    -- Workaround: use LAST_INSERT_ID()
-    
-    INSERT INTO users (name, email) VALUES ('Daniel', 'daniel@example.com');
-    
-    SELECT LAST_INSERT_ID();
-    
-    
 
-  
+    INSERT INTO users (name, email) VALUES ('Daniel', 'daniel@example.com')
+
+    RETURNING id, created_at;
+
+    DELETE FROM users WHERE email LIKE '%@test.com'
+
+    RETURNING id, email;
+
+    -- MySQL: no RETURNING clause (not supported as of 9.1)
+
+    -- Workaround: use LAST_INSERT_ID()
+
+    INSERT INTO users (name, email) VALUES ('Daniel', 'daniel@example.com');
+
+    SELECT LAST_INSERT_ID();
+
 This is a genuine pain point if you migrate to MySQL. You lose the ability to chain DML operations in a single round-trip.   
 Data Type Differences   
 | Concept | PostgreSQL | MySQL | SQLite | |---|---|---|---| | Auto-increment | `SERIAL` / `BIGSERIAL` / `IDENTITY` | `AUTO_INCREMENT` | `INTEGER PRIMARY KEY` | | Boolean | `BOOLEAN` (actual type) | `TINYINT(1)` (alias) | `INTEGER` (0/1) | | Timestamp with TZ | `TIMESTAMPTZ` | `TIMESTAMP` (converts to UTC) | `TEXT` (ISO 8601) | | Array | Native arrays | No (JSON workaround) | No | | Interval | `INTERVAL` type | No | No | | UUID | Native `UUID` type | `BINARY(16)` or `CHAR(36)` | `TEXT` | | Enum | `CREATE TYPE ... AS ENUM` | `ENUM` (native) | `TEXT` with CHECK | | Network types | `INET`, `CIDR` | No | No | | Full-text search | `TSVECTOR` / `TSQUERY` | Built-in FULLTEXT index | FTS5 extension |   
@@ -305,20 +238,20 @@ PostgreSQL 18
 * **Improved MERGE performance.** The `MERGE` statement (UPSERT) is now on par with hand-optimized `INSERT ... ON CONFLICT`.
 * **Built-in connection pooling** via `pgpool` mode in core (preview). PgBouncer-style pooling without the extra process.
 * **ALTER TABLE ... SET ACCESS METHOD** allows changing heap, ZSON, or `pg_brin` without rebuilding the table.
-  
+
 MySQL 9.1
 * **Event-driven replication.** Replication channels can now react to schema changes automatically, reducing DDL-related replication lag.
 * **Improved vector data type** for AI workloads with VECTOR cosine distance indexes. Targeted at RAG (retrieval-augmented generation) applications.
 * **Optimizer hints for CTE materialization.** You can now hint whether a Common Table Expression should be materialized or inlined.
 * **Performance Schema enhancement** for real-time query sampling every 100ms without enabling full instrumentation overhead.
 * **`ALTER TABLE ... ALGORITHM=INSTANT`** extended to more DDL operations, reducing infamous MySQL table rebuild locks.
-  
+
 SQLite 3.49
 * **Asynchronous WAL mode** using `PRAGMA journal_mode=WAL2` (second-generation write-ahead log). Reduces checkpoint overhead and improves concurrent read performance by 30%.
 * **Built-in regex functions** (`regexp_like`, `regexp_substr`, `regexp_replace`) without loading an extension.
 * **CLI improvements** with `.mode box` for modern table rendering and colored output by default.
 * **SAVEPOINT performance** improved 5x for deeply nested transactions.
-  
+
 \---   
 7\. Ecosystem   
 ORM Compatibility   
@@ -342,7 +275,7 @@ Key Takeaways from Benchmarks
 * SQLite on a single connection equals or beats both for simple operations
 * PostgreSQL's P99 latency is more predictable due to its mature MVCC implementation
 * MySQL's P99 spikes under heavy write load due to index page splits
-  
+
 \---   
 9\. Migration Guide   
 PostgreSQL to MySQL   
@@ -353,24 +286,17 @@ PostgreSQL to MySQL
 * `SERIAL` and `IDENTITY` columns become `AUTO_INCREMENT`
 * `tsvector` full-text becomes MATCH ... AGAINST with different ranking
 * `INTERVAL` type becomes stored seconds or an application-level calculation
-  
+
 **Tool:** `pg2mysql` CLI converter handles 80% of schema conversion automatically. For data, dump CSV from PostgreSQL and load into MySQL.   
 
-    
-    
     # Export from PostgreSQL
-    
-    psql -c "\COPY (SELECT * FROM users) TO 'users.csv' CSV HEADER"
-    
-    
-    
-    # Import to MySQL
-    
-    mysql -e "LOAD DATA INFILE 'users.csv' INTO TABLE users FIELDS TERMINATED BY ',' IGNORE 1 ROWS"
-    
-    
 
-  
+    psql -c "\COPY (SELECT * FROM users) TO 'users.csv' CSV HEADER"
+
+    # Import to MySQL
+
+    mysql -e "LOAD DATA INFILE 'users.csv' INTO TABLE users FIELDS TERMINATED BY ',' IGNORE 1 ROWS"
+
 MySQL to PostgreSQL   
 **Pain points:**
 * `AUTO_INCREMENT` becomes `SERIAL` or `IDENTITY` — check current sequences
@@ -379,32 +305,22 @@ MySQL to PostgreSQL
 * `ON DUPLICATE KEY UPDATE` becomes `ON CONFLICT ... DO UPDATE`
 * `LIMIT 10, 20` becomes `LIMIT 20 OFFSET 10`
 * MySQL's loose type checking exposes data quality issues — catch them early
-  
+
 **Tool:** `pgloader` is the best tool for MySQL-to-PostgreSQL migration. It handles schema conversion, data transfer, and even index creation with a single command.   
 
-    
-    
     pgloader mysql://user:pass@host/dbname postgresql://user:pass@host/dbname
-    
-    
 
-  
 SQLite to PostgreSQL   
 **Pain points:**
 * `INTEGER PRIMARY KEY` becomes `SERIAL PRIMARY KEY` — reset the sequence
 * No `TEXT` date validation — validate all date strings before migration
 * `BLOB` handling differs slightly between databases
 * Triggers and views need manual conversion (SQLite's syntax is more permissive)
-  
+
 **Tool:** Use `pgloader` for SQLite too:   
 
-    
-    
     pgloader sqlite://path/to/db.sqlite postgresql://user:pass@host/dbname
-    
-    
 
-  
 PostgreSQL to SQLite   
 **Pain points:**
 * No `CREATE TYPE ENUM` — map to `TEXT` with `CHECK`
@@ -413,7 +329,7 @@ PostgreSQL to SQLite
 * No `INTERVAL` — store durations as seconds
 * No `GIN` or `GiST` indexes — benchmark query performance before migrating
 * No `LISTEN/NOTIFY` — implement application-level event bus
-  
+
 \---   
 10\. Cost Comparison for Managed Services   
 Prices are approximate as of May 2026 for a 2 vCPU, 8 GB RAM instance with 100 GB storage in us-east-1.   

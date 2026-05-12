@@ -10,9 +10,6 @@ url: https://dingjiu1989-hue.github.io/en/security/cloud-iam.html
 
 # Cloud IAM Deep Dive
 
-  
-
-
 Introduction 
 
 Cloud Identity and Access Management (IAM) is the foundation of cloud security. Misconfigured IAM policies remain the leading cause of cloud data breaches. Understanding how to properly scope permissions across AWS, GCP, and Azure is essential for any cloud security practitioner. 
@@ -21,118 +18,47 @@ AWS IAM Policies
 
 AWS IAM uses JSON policy documents to define permissions. Policies can be attached to users, groups, or roles. AWS evaluates all policies attached to a principal, combining them with resource-based policies, and applies an explicit deny override. 
 
-  
-  
-  
-
-
 {
-
-  
-
 
 "Version": "2012-10-17",
 
-  
-
-
 "Statement": [
-
-  
-
 
 {
 
-  
-
-
 "Effect": "Allow",
-
-  
-
 
 "Action": [
 
-  
-
-
 "s3:GetObject",
-
-  
-
 
 "s3:ListBucket"
 
-  
-
-
 ],
-
-  
-
 
 "Resource": [
 
-  
-
-
 "arn:aws:s3:::critical-data",
-
-  
-
 
 "arn:aws:s3:::critical-data/*"
 
-  
-
-
 ],
-
-  
-
 
 "Condition": {
 
-  
-
-
 "IpAddress": {
-
-  
-
 
 "aws:SourceIp": "203.0.113.0/24"
 
-  
-
+}
 
 }
 
-  
-
-
 }
-
-  
-
-
-}
-
-  
-
 
 ]
 
-  
-
-
 }
-
-  
-  
-  
-  
-
 
 Key AWS IAM concepts:
 
@@ -146,251 +72,91 @@ Key AWS IAM concepts:
 
 * **Effect**: Allow or Deny
 
-  
-
-
 Least Privilege with AWS 
 
 AWS Access Advisor shows service last-accessed information, helping identify unused permissions. IAM Access Analyzer generates policies based on CloudTrail access patterns. 
 
-  
-  
-  
-
-
 # Generate policy from CloudTrail activity
-
-  
-
 
 aws accessanalyzer create-analyzer --analyzer-name my-analyzer --type ACCOUNT
 
-  
-
-
 aws accessanalyzer start-policy-generation \
-
-  
-
 
 \--policy-generation-details \
 
-  
-
-
 '{"principalArn":"arn:aws:iam::123456789012:user/service-account"}' \
-
-  
-
 
 \--cloud-trail-details \
 
-  
-
-
 '{"trails":[{"trailArn":"arn:aws:cloudtrail:us-east-1:123456789012:trail/management-trail"}],\
 
-  
-
-
 "startTime":"2026-01-01T00:00:00Z","endTime":"2026-05-01T00:00:00Z"}'
-
-  
-  
-  
-  
-
 
 GCP IAM Roles 
 
 GCP IAM uses a different model: roles are collections of permissions assigned to principals at specific resource hierarchies. 
 
-  
-  
-  
-
-
 // Organization level
-
-  
-
 
 organizations/123456789012/roles/customStorageAdmin
 
-  
-  
-  
-
-
 // Folder level
-
-  
-
 
 folders/987654321/roles/customInstanceAdmin
 
-  
-  
-  
-
-
 // Project level
-
-  
-
 
 projects/my-project/roles/customComputeAdmin
 
-  
-  
-  
-  
-  
-  
-  
-
-
 # Create a custom GCP IAM role
-
-  
-
 
 gcloud iam roles create customComputeAdmin \
 
-  
-
-
 \--project=my-project \
-
-  
-
 
 \--title="Custom Compute Admin" \
 
-  
-
-
 \--description="Limited compute admin without delete" \
-
-  
-
 
 \--permissions=compute.instances.create,compute.instances.start,\
 
-  
-
-
 compute.instances.stop,compute.instances.list \
-
-  
-
 
 \--stage=GA
 
-  
-  
-  
-  
-  
-  
-  
-
-
 # Bind role to a service account at the project level
-
-  
-
 
 gcloud projects add-iam-policy-binding my-project \
 
-  
-
-
 \--member="serviceAccount:deploy-sa@my-project.iam.gserviceaccount.com" \
 
-  
-
-
 \--role="projects/my-project/roles/customComputeAdmin"
-
-  
-  
-  
-  
-
 
 Policy Simulation 
 
 Both AWS and GCP provide policy simulation tools to verify permissions before deployment. 
 
-  
-  
-  
-
-
 # AWS IAM policy simulation
-
-  
-
 
 aws iam simulate-principal-policy \
 
-  
-
-
 \--policy-source-arn arn:aws:iam::123456789012:user/testuser \
-
-  
-
 
 \--action-names s3:GetObject s3:DeleteObject ec2:TerminateInstances \
 
-  
-
-
 \--resource-arns arn:aws:s3:::my-bucket
-
-  
-  
-  
-  
-  
-  
-  
-
 
 # GCP policy troubleshooter
 
-  
-
-
 gcloud policy-intelligence query-activity \
-
-  
-
 
 \--project=my-project \
 
-  
-
-
 \--identity="user:admin@example.com" \
-
-  
-
 
 \--activity-type=policy.troubleshoot
 
-  
-  
-  
-  
-
-
 Common IAM Misconfigurations 
-
-  
-
 
 * **Wildcard permissions**: `"Action": ["*"]` grants access to all services
 

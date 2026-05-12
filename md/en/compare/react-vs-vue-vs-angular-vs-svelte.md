@@ -22,7 +22,7 @@ Choosing a frontend framework is one of the highest-stakes technical decisions y
 **Ecosystem**|  Largest| Large| Large| Growing fast  
 **Job market**|  #1| #2| Enterprise-heavy| Growing  
 **Meta-framework**|  Next.js| Nuxt| Analog| SvelteKit  
-  
+
 ## React — The Safe, Ubiquitous Choice
 
 React remains the most popular frontend framework in 2026. It's not a framework — it's a library surrounded by a massive ecosystem of routers, state managers, and meta-frameworks. The community is so large that any problem you hit, someone has already solved and documented it.
@@ -72,5 +72,5 @@ Ship a side project fastest| **Vue or Svelte**
 Work in enterprise| **Angular**  
 Best performance + DX combo| **Svelte**  
 Safest bet for a startup| **React + Next.js**  
-  
+
 **Bottom line:** React is the safe default — biggest job market, richest ecosystem, and Next.js makes it full-stack. Vue is the productivity pick for solo developers. Angular for enterprise. Svelte if you want the future today. See also: [Next.js vs Nuxt vs SvelteKit comparison](</en/compare/nextjs-vs-nuxt-vs-sveltekit.html>).

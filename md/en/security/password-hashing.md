@@ -10,9 +10,6 @@ url: https://dingjiu1989-hue.github.io/en/security/password-hashing.html
 
 # Password Hashing Algorithms Compared
 
-  
-
-
 The Difference Between Hashing and Encryption 
 
 Password hashing is fundamentally different from encryption. Hashing is a one-way function: you cannot reverse a hash to recover the original password. Encryption is two-way: data can be decrypted with the correct key. Passwords must always be hashed, never encrypted, because the application should never be able to recover the original plaintext. 
@@ -31,137 +28,47 @@ bcrypt
 
 bcrypt remains the most widely deployed password hashing algorithm. It includes a built-in salt and a configurable cost factor. 
 
-  
-  
-  
-
-
 const bcrypt = require('bcrypt');
-
-  
-  
-  
-
 
 async function hashPassword(password) {
 
-  
-
-
 const saltRounds = 12; // Cost factor
-
-  
-
 
 const hash = await bcrypt.hash(password, saltRounds);
 
-  
-
-
 return hash;
 
-  
-
-
 }
-
-  
-  
-  
-
 
 async function verifyPassword(password, hash) {
 
-  
-
-
 return await bcrypt.compare(password, hash);
-
-  
-
 
 }
 
-  
-  
-  
-  
-  
-  
-  
-
-
 import bcrypt
-
-  
-  
-  
-
 
 def hash_password(password):
 
-  
-
-
 salt = bcrypt.gensalt(rounds=12)
-
-  
-
 
 return bcrypt.hashpw(password.encode(), salt)
 
-  
-  
-  
-
-
 def verify_password(password, hashed):
-
-  
-
 
 return bcrypt.checkpw(password.encode(), hashed)
 
-  
-  
-  
-  
-
-
 The bcrypt output includes the version, cost factor, salt, and hash: 
-
-  
-  
-  
-
 
 $2b$12$LJ3m4ys3Lk0TSwHnbfgZxeCk7NaML3C1yVvvSxYf1UcJm9xHvKXq
 
-  
-
-
 \\__/ \\_/ \\____________________/\\_____________________________/
-
-  
-
 
 | | Salt Hash
 
-  
-
-
 | Cost
 
-  
-
-
 Version
-
-  
-  
-  
-  
-
 
 Choosing the Cost Factor 
 
@@ -175,117 +82,41 @@ Argon2id
 
 Argon2id is the winner of the Password Hashing Competition (2015) and is the recommended algorithm for new applications. It resists both side-channel and GPU-based attacks. 
 
-  
-  
-  
-
-
 from argon2 import PasswordHasher
-
-  
-  
-  
-
 
 ph = PasswordHasher(
 
-  
-
-
 time_cost=3, # Number of iterations
-
-  
-
 
 memory_cost=65536, # 64 MB
 
-  
-
-
 parallelism=4, # Number of threads
-
-  
-
 
 hash_len=32, # Output length
 
-  
-
-
 salt_len=16 # Salt length
-
-  
-
 
 )
 
-  
-  
-  
-
-
 hash = ph.hash("correct horse battery staple")
-
-  
-
 
 verify = ph.verify(hash, "correct horse battery staple")
 
-  
-  
-  
-  
-  
-  
-  
-
-
 const argon2 = require('argon2');
-
-  
-  
-  
-
 
 const hash = await argon2.hash(password, {
 
-  
-
-
 type: argon2.argon2id,
-
-  
-
 
 memoryCost: 65536, // 64 MB
 
-  
-
-
 timeCost: 3, // 3 iterations
-
-  
-
 
 parallelism: 4
 
-  
-
-
 });
 
-  
-  
-  
-
-
 const valid = await argon2.verify(hash, password);
-
-  
-  
-  
-  
-
 
 Tuning Argon2 Parameters 
 
@@ -295,55 +126,21 @@ scrypt
 
 scrypt is a memory-hard function designed to be expensive on custom hardware. 
 
-  
-  
-  
-
-
 const crypto = require('crypto');
-
-  
-  
-  
-
 
 crypto.scrypt(password, salt, 64, {
 
-  
-
-
 N: 16384, // CPU/memory cost
-
-  
-
 
 r: 8, // Block size
 
-  
-
-
 p: 1 // Parallelization
-
-  
-
 
 }, (err, key) => {
 
-  
-
-
 // key is the derived hash
 
-  
-
-
 });
-
-  
-  
-  
-  
-
 
 Common Mistakes 
 
@@ -353,63 +150,25 @@ Migration Strategy
 
 When upgrading from a weaker algorithm, use a rehash-on-verify pattern: 
 
-  
-  
-  
-
-
 def verify_and_upgrade(password, stored_hash):
-
-  
-
 
 if is_bcrypt_hash(stored_hash):
 
-  
-
-
 if bcrypt.checkpw(password.encode(), stored_hash):
-
-  
-
 
 if needs_upgrade(stored_hash): # cost factor too low?
 
-  
-
-
 new_hash = argon2.hash(password)
-
-  
-
 
 update_user_hash(user_id, new_hash)
 
-  
-
-
 return True
-
-  
-
 
 elif is_argon2_hash(stored_hash):
 
-  
-
-
 return argon2.verify(stored_hash, password)
 
-  
-
-
 return False
-
-  
-  
-  
-  
-
 
 Summary 
 

@@ -13,335 +13,269 @@ Software supply chain attacks target the processes and tools used to build, pack
 Software Bill of Materials (SBOM)   
 An SBOM is a machine-readable inventory of all components in a software artifact. It enables consumers to quickly identify exposure when a vulnerability is disclosed.   
 
-    
-    
     {
-    
+
       "$schema": "http://cyclonedx.org/schema/bom-1.5.schema.json",
-    
+
       "bomFormat": "CycloneDX",
-    
+
       "specVersion": "1.5",
-    
+
       "serialNumber": "urn:uuid:3e671687-395b-41f5-a30f-a58921a69b79",
-    
+
       "version": 1,
-    
+
       "metadata": {
-    
+
         "component": {
-    
+
           "name": "my-application",
-    
+
           "version": "1.2.3",
-    
+
           "type": "application",
-    
+
           "supplier": {
-    
+
             "name": "ACME Corp"
-    
+
           }
-    
+
         }
-    
+
       },
-    
+
       "components": [
-    
+
         {
-    
+
           "type": "library",
-    
+
           "name": "lodash",
-    
+
           "version": "4.17.21",
-    
+
           "purl": "pkg:npm/lodash@4.17.21",
-    
+
           "licenses": [{"license": {"id": "MIT"}}]
-    
+
         },
-    
+
         {
-    
+
           "type": "library", 
-    
+
           "name": "express",
-    
+
           "version": "4.18.2",
-    
+
           "purl": "pkg:npm/express@4.18.2"
-    
+
         }
-    
+
       ],
-    
+
       "vulnerabilities": []
-    
+
     }
-    
-    
 
-  
-
-    
-    
     # Generate SPDX SBOM with syft
-    
-    syft packages ./myapp:latest -o spdx-json > sbom.spdx.json
-    
-    
-    
-    # Generate CycloneDX SBOM
-    
-    cyclonedx-bom -o bom.xml -t file
-    
-    
-    
-    # Compare SBOMs for change detection
-    
-    diff <(jq '.components[].purl' bom-v1.json | sort) \
-    
-         <(jq '.components[].purl' bom-v2.json | sort)
-    
-    
 
-  
+    syft packages ./myapp:latest -o spdx-json > sbom.spdx.json
+
+    # Generate CycloneDX SBOM
+
+    cyclonedx-bom -o bom.xml -t file
+
+    # Compare SBOMs for change detection
+
+    diff <(jq '.components[].purl' bom-v1.json | sort) \
+
+         <(jq '.components[].purl' bom-v2.json | sort)
+
 Sigstore and Artifact Signing   
 Sigstore simplifies code signing and verification through ephemeral key material and transparency logs.   
 
-    
-    
     # Sign a container image with cosign
-    
+
     cosign sign --key gcpkms://projects/my-project/locations/global/keyRings/my-ring/cryptoKeys/my-key/my-version \
-    
+
         myregistry.io/myapp:latest
-    
-    
-    
+
     # Keyless signing (OIDC-based)
-    
+
     cosign sign myregistry.io/myapp:latest
-    
-    
-    
+
     # Verify a signed image
-    
+
     cosign verify --key pubkey.pem myregistry.io/myapp:latest
-    
-    
-    
+
     # Verify keyless signature
-    
+
     cosign verify myregistry.io/myapp:latest
-    
-    
 
-  
-
-    
-    
     # Cosign keyless verification policy
-    
-    cosign_policy:
-    
-      identity:
-    
-        subject: "developer@acme.com"
-    
-        issuer: "https://accounts.google.com"
-    
-      
-    
-      signatures:
-    
-        - hash: "sha256:abc123..."
-    
-          bundle: "sigstore-bundle.json"
-    
-    
 
-  
+    cosign_policy:
+
+      identity:
+
+        subject: "developer@acme.com"
+
+        issuer: "https://accounts.google.com"
+
+      signatures:
+
+        - hash: "sha256:abc123..."
+
+          bundle: "sigstore-bundle.json"
+
 Generating provenance with SLSA   
 
-    
-    
     # Generate SLSA provenance for a build
-    
-    gitsign --sign-commits HEAD
-    
-    
-    
-    # Attest provenance
-    
-    cosign attest --predicate slsa-provenance.json --type slsa.dev/provenance/v1 \
-    
-        myregistry.io/myapp:latest
-    
-    
 
-  
+    gitsign --sign-commits HEAD
+
+    # Attest provenance
+
+    cosign attest --predicate slsa-provenance.json --type slsa.dev/provenance/v1 \
+
+        myregistry.io/myapp:latest
+
 in-toto: Framework for Supply Chain Integrity   
 in-toto defines a framework to protect the integrity of the software supply chain by verifying that each step in the build and release pipeline was performed by authorized actors.   
 
-    
-    
     # in-toto layout definition
-    
-    layout = Layout(
-    
-        keys={
-    
-            'developer': load_key('developer.pub'),
-    
-            'builder': load_key('builder.pub'),
-    
-            'tester': load_key('tester.pub'),
-    
-        },
-    
-        steps=[
-    
-            Step(name='write-code',
-    
-                 materials=[MaterialRule('ALLOW', '*')],
-    
-                 products=[ProductRule('ALLOW', 'src/**')],
-    
-                 pubkeys=['developer']),
-    
-            Step(name='build',
-    
-                 materials=[MaterialRule('MATCH', 'src/**', ['write-code'])],
-    
-                 products=[ProductRule('ALLOW', 'build/**')],
-    
-                 pubkeys=['builder']),
-    
-            Step(name='test',
-    
-                 materials=[MaterialRule('MATCH', 'build/**', ['build'])],
-    
-                 products=[ProductRule('ALLOW', '*')],
-    
-                 pubkeys=['tester']),
-    
-            Inspection(name='verify-signature',
-    
-                       expected_command=['gpg', '--verify', 'build/signed-artifact'])
-    
-        ]
-    
-    )
-    
-    
 
-  
+    layout = Layout(
+
+        keys={
+
+            'developer': load_key('developer.pub'),
+
+            'builder': load_key('builder.pub'),
+
+            'tester': load_key('tester.pub'),
+
+        },
+
+        steps=[
+
+            Step(name='write-code',
+
+                 materials=[MaterialRule('ALLOW', '*')],
+
+                 products=[ProductRule('ALLOW', 'src/**')],
+
+                 pubkeys=['developer']),
+
+            Step(name='build',
+
+                 materials=[MaterialRule('MATCH', 'src/**', ['write-code'])],
+
+                 products=[ProductRule('ALLOW', 'build/**')],
+
+                 pubkeys=['builder']),
+
+            Step(name='test',
+
+                 materials=[MaterialRule('MATCH', 'build/**', ['build'])],
+
+                 products=[ProductRule('ALLOW', '*')],
+
+                 pubkeys=['tester']),
+
+            Inspection(name='verify-signature',
+
+                       expected_command=['gpg', '--verify', 'build/signed-artifact'])
+
+        ]
+
+    )
+
 Dependency Confusion   
 Dependency confusion attacks exploit package manager behaviors where internal package names are also available in public registries. If a package manager prefers higher version numbers or public registries over private ones, attackers can publish malicious packages with the same name.   
 
-    
-    
     # Detect potential dependency confusion
-    
-    import requests
-    
-    
-    
-    def check_dependency_confusion(requirements_file):
-    
-        vulnerable = []
-    
-        with open(requirements_file) as f:
-    
-            for line in f:
-    
-                if '==' not in line:
-    
-                    continue
-    
-                pkg_name = line.split('=')[0].strip().lower()
-    
-                
-    
-                # Check if package exists on PyPI
-    
-                resp = requests.get(f"https://pypi.org/pypi/{pkg_name}/json")
-    
-                if resp.status_code == 200:
-    
-                    vulnerable.append({
-    
-                        'package': pkg_name,
-    
-                        'risk': 'Package exists on public registry',
-    
-                        'mitigation': 'Scope pip to private index with --index-url'
-    
-                    })
-    
-        return vulnerable
-    
-    
 
-  
+    import requests
+
+    def check_dependency_confusion(requirements_file):
+
+        vulnerable = []
+
+        with open(requirements_file) as f:
+
+            for line in f:
+
+                if '==' not in line:
+
+                    continue
+
+                pkg_name = line.split('=')[0].strip().lower()
+
+                # Check if package exists on PyPI
+
+                resp = requests.get(f"https://pypi.org/pypi/{pkg_name}/json")
+
+                if resp.status_code == 200:
+
+                    vulnerable.append({
+
+                        'package': pkg_name,
+
+                        'risk': 'Package exists on public registry',
+
+                        'mitigation': 'Scope pip to private index with --index-url'
+
+                    })
+
+        return vulnerable
+
 SLSA Framework   
 Supply-chain Levels for Software Artifacts (SLSA, pronounced "salsa") provides a security framework with four levels of increasing trust.   
 
-    
-    
     slsa_levels:
-    
-      level_1:
-    
-        description: "Build process must be scripted and automated"
-    
-        requirements:
-    
-          - provenance_exists: true
-    
-          - provenance_authentic: false
-    
-      
-    
-      level_2:
-    
-        description: "Build service generates and signs provenance"
-    
-        requirements:
-    
-          - provenance_authentic: true
-    
-          - provenance_generated_by_build_service: true
-    
-      
-    
-      level_3:
-    
-        description: "Hardened build service resists tampering"
-    
-        requirements:
-    
-          - build_service_hardened: true
-    
-          - provenance_non_falsifiable: true
-    
-      
-    
-      level_4:
-    
-        description: "Two-party review and hermetic builds"
-    
-        requirements:
-    
-          - build_hermetic: true
-    
-          - provenance_has_reproducible_info: true
-    
-    
 
-  
+      level_1:
+
+        description: "Build process must be scripted and automated"
+
+        requirements:
+
+          - provenance_exists: true
+
+          - provenance_authentic: false
+
+      level_2:
+
+        description: "Build service generates and signs provenance"
+
+        requirements:
+
+          - provenance_authentic: true
+
+          - provenance_generated_by_build_service: true
+
+      level_3:
+
+        description: "Hardened build service resists tampering"
+
+        requirements:
+
+          - build_service_hardened: true
+
+          - provenance_non_falsifiable: true
+
+      level_4:
+
+        description: "Two-party review and hermetic builds"
+
+        requirements:
+
+          - build_hermetic: true
+
+          - provenance_has_reproducible_info: true
+
 Conclusion   
 Supply chain security is no longer optional. Generate SBOMs for all artifacts, sign them with Sigstore, define in-toto layouts for pipeline integrity, protect against dependency confusion with scoped registries, and target SLSA Level 3+ for critical builds. Build verification into your deployment pipeline so that unsigned or unverified artifacts are automatically rejected.

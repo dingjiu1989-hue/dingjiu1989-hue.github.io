@@ -3,19 +3,17 @@ title: "Midjourney 提示词大全：从入门到进阶"
 description: "系统整理 Midjourney 提示词结构、参数体系与风格参考，附赠 10 套实战验证的提示词模板，涵盖写实人像、Logo 设计、产品摄影等高频场景。"
 date: 2026-05-11
 board: ai
-url: https://dingjiu1989-hue.github.io/ai/midjourney-prompts.html
+url: https://dingjiu1989-hue.github.io/zh/ai/midjourney-prompts.html
 ---
 
 # Midjourney 提示词大全：从入门到进阶
 
 Midjourney 凭借其出色的美学质量和极低的使用门槛，已经成为 AI 绘画领域用户最多的平台。但很多人使用 MJ 的方式是"随缘出图"——同样的提示词在不同版本下效果天差地别，或者始终无法复现别人的惊艳效果。本文从提示词结构到参数体系，再到 10 套可以直接复用的提示词模板，帮你系统掌握 Midjourney。 提示词的基本结构 一条完整的 Midjourney 提示词由以下元素组成，建议按照这个顺序排列：
-    
-    
+
     [主体] + [媒介/风格] + [环境] + [光线] + [色彩] + [情绪] + [构图] --参数1 值1 --参数2 值2
 
 举例说明：
-    
-    
+
     a samurai warrior with a glowing katana, digital painting, misty mountain peak at dawn,
     volumetric lighting, amber and indigo color palette, epic and melancholic mood,
     low angle shot, dynamic pose --ar 16:9 --v 6.1 --s 300
@@ -59,8 +57,8 @@ Midjourney 凭借其出色的美学质量和极低的使用门槛，已经成为
 
 每个模板中的核心变量都标注了方括号。建议先原样跑一次确认效果，再逐步替换变量。注意，V6.1 下效果最稳定——V7 的风格化逻辑不同，部分模板需要微调 --s 值。 写在最后 Midjourney 的进化速度非常快，每两到三个月就有重大更新。保持学习的最好方式不是背诵参数，而是理解每个参数背后的原理——它控制的是 AI 的"自由度"还是"约束力"。掌握了这个底层逻辑，任何版本更新你都能快速上手。 📖 相关推荐
 
-  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/ai/ai-art-monetization.html>)
-  * [Stable Diffusion 出图入门指南](<https://dingjiu1989-hue.github.io/ai/stable-diffusion.html>)
-  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/ai/ai-coding-tools-comparison-2026.html>)
+  * [AI 绘画变现指南：从出图到接单的完整路径](<https://dingjiu1989-hue.github.io/zh/ai/ai-art-monetization.html>)
+  * [Stable Diffusion 出图入门指南](<https://dingjiu1989-hue.github.io/zh/ai/stable-diffusion.html>)
+  * [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](<https://dingjiu1989-hue.github.io/zh/ai/ai-coding-tools-comparison-2026.html>)
 
-**See also:** [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</ai/ai-coding-tools-comparison-2026.html>), [MCP 协议入门：让 AI 模型安全访问你的工具和数据](</ai/mcp-protocol-guide.html>), [AI Agent 开发入门 2026：从原理到第一个智能体](</ai/ai-agent-development-2026.html>).
+**See also:** [AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选](</zh/ai/ai-coding-tools-comparison-2026.html>), [MCP 协议入门：让 AI 模型安全访问你的工具和数据](</zh/ai/mcp-protocol-guide.html>), [AI Agent 开发入门 2026：从原理到第一个智能体](</zh/ai/ai-agent-development-2026.html>).

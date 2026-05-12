@@ -12,17 +12,12 @@ REST (Representational State Transfer) remains the dominant architectural style 
 Use Consistent Resource Naming   
 Your API endpoints represent resources. Use nouns, not verbs, and stick to a consistent naming convention.   
 
-    
-    
     GET /users          # Good
-    
-    GET /getUsers       # Bad
-    
-    POST /createUser    # Bad
-    
-    
 
-  
+    GET /getUsers       # Bad
+
+    POST /createUser    # Bad
+
 Use plural nouns for collections (`/users`, `/orders`) and nest resources to express relationships (`/users/123/orders`). Avoid deep nesting beyond two or three levels. If you find yourself nesting four levels deep, consider flattening the structure or using query parameters.   
 Leverage HTTP Methods Correctly   
 Each HTTP method has a specific semantic meaning. Use them correctly:   
@@ -32,7 +27,7 @@ Each HTTP method has a specific semantic meaning. Use them correctly:
 * `PUT` — Replace an entire resource. Idempotent.
 * `PATCH` — Partially update a resource. Idempotent when used with merge-style patches.
 * `DELETE` — Remove a resource. Idempotent.
-  
+
 A common mistake is using POST for everything. Proper method usage makes your API self-documenting and allows HTTP clients to make intelligent caching and retry decisions.   
 Use Proper HTTP Status Codes   
 Your API should return meaningful status codes. Group them logically:   
@@ -41,138 +36,103 @@ Your API should return meaningful status codes. Group them logically:
 * **3xx Redirection**: `301 Moved Permanently`, `303 See Other` for redirecting after a POST.
 * **4xx Client Error**: `400 Bad Request` for malformed input, `401 Unauthorized` when authentication is missing, `403 Forbidden` when the user lacks permission, `404 Not Found`, `409 Conflict` for duplicate resources, `422 Unprocessable Entity` for validation errors.
 * **5xx Server Error**: `500 Internal Server Error`, `502 Bad Gateway`, `503 Service Unavailable`.
-  
+
 Returning `200 OK` for everything forces API consumers to inspect the response body to determine success or failure. This defeats the purpose of HTTP status codes.   
 Pagination, Filtering, and Sorting   
 Collections should always support pagination, filtering, and sorting.   
 
-    
-    
     GET /users?page=2&per_page=20
-    
-    GET /users?sort=created_at&order=desc
-    
-    GET /users?filter[status]=active
-    
-    
 
-  
+    GET /users?sort=created_at&order=desc
+
+    GET /users?filter[status]=active
+
 Return pagination metadata in the response:   
 
-    
-    
     {
-    
-      "data": [...],
-    
-      "pagination": {
-    
-        "page": 2,
-    
-        "per_page": 20,
-    
-        "total": 153,
-    
-        "total_pages": 8
-    
-      }
-    
-    }
-    
-    
 
-  
+      "data": [...],
+
+      "pagination": {
+
+        "page": 2,
+
+        "per_page": 20,
+
+        "total": 153,
+
+        "total_pages": 8
+
+      }
+
+    }
+
 Using cursor-based pagination is recommended for large, frequently updated datasets, as it is more performant than offset-based pagination.   
 Consistent Error Responses   
 Design a standard error response format and use it everywhere:   
 
-    
-    
     {
-    
-      "error": {
-    
-        "code": "VALIDATION_ERROR",
-    
-        "message": "Validation failed",
-    
-        "details": [
-    
-          { "field": "email", "message": "Must be a valid email address" }
-    
-        ]
-    
-      }
-    
-    }
-    
-    
 
-  
+      "error": {
+
+        "code": "VALIDATION_ERROR",
+
+        "message": "Validation failed",
+
+        "details": [
+
+          { "field": "email", "message": "Must be a valid email address" }
+
+        ]
+
+      }
+
+    }
+
 Include a machine-readable error code, a human-readable message, and detailed validation errors when appropriate. This allows clients to handle errors programmatically.   
 Versioning   
 APIs evolve. Plan for it from day one. The simplest approach is URL-based versioning:   
 
-    
-    
     /api/v1/users
-    
-    /api/v2/users
-    
-    
 
-  
+    /api/v2/users
+
 Header-based versioning (e.g., `Accept: application/vnd.myapi.v1+json`) is more RESTful but harder for clients to discover. Choose whichever approach your consumers will find more intuitive.   
 Use HATEOAS for Discoverability   
 HATEOAS (Hypermedia as the Engine of Application State) includes links in responses to guide clients:   
 
-    
-    
     {
-    
-      "id": 123,
-    
-      "name": "John Doe",
-    
-      "_links": {
-    
-        "self": { "href": "/users/123" },
-    
-        "orders": { "href": "/users/123/orders" }
-    
-      }
-    
-    }
-    
-    
 
-  
+      "id": 123,
+
+      "name": "John Doe",
+
+      "_links": {
+
+        "self": { "href": "/users/123" },
+
+        "orders": { "href": "/users/123/orders" }
+
+      }
+
+    }
+
 While many APIs skip HATEOAS, it significantly improves discoverability and reduces the need for external documentation for navigating resource relationships.   
 Authentication and Authorization   
 Use industry-standard authentication mechanisms. Token-based auth (JWT) is the most common choice for REST APIs. Include tokens in the `Authorization` header:   
 
-    
-    
     Authorization: Bearer <token>
-    
-    
 
-  
 Use scopes or claims within the token to implement fine-grained authorization. Always use HTTPS in production to protect tokens and data in transit.   
 Rate Limiting   
 Protect your API from abuse by implementing rate limiting. Return rate limit information in response headers:   
 
-    
-    
     X-RateLimit-Limit: 100
-    
-    X-RateLimit-Remaining: 42
-    
-    X-RateLimit-Reset: 1640995200
-    
-    
 
-  
+    X-RateLimit-Remaining: 42
+
+    X-RateLimit-Reset: 1640995200
+
 When a client exceeds the limit, return `429 Too Many Requests` with a `Retry-After` header.   
 Documentation   
 An API is only as good as its documentation. Use OpenAPI/Swagger to document your API. Generate interactive documentation that allows developers to test endpoints directly from the browser. Keep your documentation in sync with your implementation by using a code-first approach where the OpenAPI spec is generated from annotations in your code.   

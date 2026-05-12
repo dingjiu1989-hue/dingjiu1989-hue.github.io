@@ -2,7 +2,7 @@
 title: "程序员效率工具推荐"
 description: "精选提升开发效率的实用工具，涵盖终端增强、窗口管理、笔记系统、搜索工具和自动化脚本等生产力利器。"
 date: 2026-05-11
-board: zh/tools
+board: tools
 url: https://dingjiu1989-hue.github.io/zh/tools/productivity-tools.html
 ---
 

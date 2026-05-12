@@ -3,7 +3,7 @@ title: "免费可商用图片资源汇总"
 description: "盘点 10+ 免费可商用的高质量图片资源网站，包括 Unsplash、Pexels、Pixabay 等，设计师和运营必备。"
 date: 2026-05-09
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/sidehustle/free-images.html
+url: https://dingjiu1989-hue.github.io/zh/sidehustle/free-images.html
 ---
 
 # 免费可商用图片资源汇总
@@ -35,8 +35,8 @@ Icon 图标
 
 📖 相关推荐
 
-  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
-  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/sidehustle/affiliate-marketing.html>)
-  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/zh/sidehustle/ai-era-side-hustles.html>)
+  * [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](<https://dingjiu1989-hue.github.io/zh/sidehustle/affiliate-marketing.html>)
+  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/zh/sidehustle/knowledge-monetization.html>)
 
-**See also:** [AI 时代程序员的 5 个新副业机会（2026）](</sidehustle/ai-era-side-hustles.html>), [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</sidehustle/affiliate-marketing.html>), [如何把你的专业知识变成付费内容：从 0 到月入 5000](</sidehustle/knowledge-monetization.html>).
+**See also:** [AI 时代程序员的 5 个新副业机会（2026）](</zh/sidehustle/ai-era-side-hustles.html>), [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</zh/sidehustle/affiliate-marketing.html>), [如何把你的专业知识变成付费内容：从 0 到月入 5000](</zh/sidehustle/knowledge-monetization.html>).

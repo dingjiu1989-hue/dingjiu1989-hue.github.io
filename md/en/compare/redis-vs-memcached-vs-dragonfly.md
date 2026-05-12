@@ -24,7 +24,7 @@ Pub/Sub| Yes (PUBLISH/SUBSCRIBE, Streams)| No| Yes
 Multi-Threading| Single-threaded (I/O threading in 6+)| Multi-threaded by default| Multi-threaded (shared-nothing architecture)  
 Max Memory Efficiency| Good (jemalloc)| Slab-based (fragmentation issues)| Excellent (30% less memory than Redis)  
 Throughput (Ops/sec, 1M keys)| ~120K ops/sec| ~400K ops/sec (pure cache)| ~4M ops/sec (25x Redis)  
-  
+
 ## When Each Tool Wins
 
 **Redis — Best for:** Applications that need more than simple key-value caching: rate limiting (Sorted Sets), message queues (Streams), leaderboards (Sorted Sets), session stores (Hashes with TTL), and distributed locking (Redlock). **Weak spot:** Single-threaded bottleneck — one slow command blocks everything; vertical scaling only.
@@ -42,5 +42,5 @@ Session store, rate limiting, leaderboards, queues| Redis| Data structures solve
 Redis-compatible but need higher throughput| Dragonfly| Drop-in replacement, 25x faster on multi-core  
 Message queuing / event streaming| Redis Streams| Lightweight alternative to Kafka for moderate volumes  
 Distributed locking| Redis (with Redlock library)| Mature, well-understood patterns  
-  
+
 **Bottom line:** Redis is the default choice — the data structures, persistence, and ecosystem are unmatched. Use Memcached if you need pure caching at maximum speed. Dragonfly is the most exciting alternative: Redis-compatible, 25x faster, and 30% less memory — perfect for teams hitting Redis scaling limits. See also: [PostgreSQL vs MySQL vs SQLite](</en/compare/postgresql-vs-mysql-vs-sqlite.html>) and [Caching Strategies for Web Apps](</en/tech/caching-strategies-web-apps.html>).

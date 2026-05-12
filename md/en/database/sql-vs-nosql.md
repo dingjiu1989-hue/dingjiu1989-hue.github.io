@@ -15,78 +15,61 @@ Core Differences
 SQL Strengths   
 Complex Queries and Joins   
 
-    
-    
     -- SQL excels at complex reporting queries
-    
-    SELECT
-    
-        c.name AS customer_name,
-    
-        COUNT(o.id) AS order_count,
-    
-        SUM(o.total) AS total_spent,
-    
-        AVG(o.total) AS avg_order_value
-    
-    FROM customers c
-    
-    LEFT JOIN orders o ON c.id = o.customer_id
-    
-    WHERE o.created_at >= '2026-01-01'
-    
-    GROUP BY c.id, c.name
-    
-    HAVING COUNT(o.id) > 5
-    
-    ORDER BY total_spent DESC
-    
-    LIMIT 10;
-    
-    
 
-  
+    SELECT
+
+        c.name AS customer_name,
+
+        COUNT(o.id) AS order_count,
+
+        SUM(o.total) AS total_spent,
+
+        AVG(o.total) AS avg_order_value
+
+    FROM customers c
+
+    LEFT JOIN orders o ON c.id = o.customer_id
+
+    WHERE o.created_at >= '2026-01-01'
+
+    GROUP BY c.id, c.name
+
+    HAVING COUNT(o.id) > 5
+
+    ORDER BY total_spent DESC
+
+    LIMIT 10;
+
 Data Integrity   
 Referential integrity enforced at the database level:   
 
-    
-    
     ALTER TABLE orders
-    
-    ADD CONSTRAINT fk_orders_customer
-    
-    FOREIGN KEY (customer_id) REFERENCES customers(id)
-    
-    ON DELETE CASCADE;
-    
-    
-    
-    -- The database prevents:
-    
-    DELETE FROM customers WHERE id = 1;
-    
-    -- If customer 1 has orders, this fails (or cascades)
-    
-    
 
-  
+    ADD CONSTRAINT fk_orders_customer
+
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+
+    ON DELETE CASCADE;
+
+    -- The database prevents:
+
+    DELETE FROM customers WHERE id = 1;
+
+    -- If customer 1 has orders, this fails (or cascades)
+
 Transactions   
 
-    
-    
     -- Multi-statement ACID transaction
-    
-    BEGIN;
-    
-    UPDATE inventory SET quantity = quantity - 1 WHERE product_id = 100 AND quantity > 0;
-    
-    INSERT INTO order_items (order_id, product_id, quantity) VALUES (500, 100, 1);
-    
-    COMMIT;
-    
-    
 
-  
+    BEGIN;
+
+    UPDATE inventory SET quantity = quantity - 1 WHERE product_id = 100 AND quantity > 0;
+
+    INSERT INTO order_items (order_id, product_id, quantity) VALUES (500, 100, 1);
+
+    COMMIT;
+
 When to Choose SQL   
 
 * **Data integrity is critical**: Financial systems, inventory, booking engines.
@@ -94,126 +77,104 @@ When to Choose SQL
 * **Ad-hoc queries**: Reporting and analytics with unpredictable query patterns.
 * **ACID transactions**: Multi-operation atomicity is required.
 * **Standardized access**: Multiple applications need to query the same data.
-  
+
 NoSQL Strengths   
 Flexible Schema   
 
-    
-    
     // MongoDB: each document can have different fields
-    
-    db.users.insertOne({ name: "Alice", email: "alice@email.com" });
-    
-    db.users.insertOne({
-    
-        name: "Bob",
-    
-        email: "bob@email.com",
-    
-        phone: "+1234567890",     // Extra field
-    
-        preferences: {             // Nested object
-    
-            theme: "dark",
-    
-            notifications: true
-    
-        }
-    
-    });
-    
-    
 
-  
+    db.users.insertOne({ name: "Alice", email: "alice@email.com" });
+
+    db.users.insertOne({
+
+        name: "Bob",
+
+        email: "bob@email.com",
+
+        phone: "+1234567890",     // Extra field
+
+        preferences: {             // Nested object
+
+            theme: "dark",
+
+            notifications: true
+
+        }
+
+    });
+
 Horizontal Scaling   
 
-    
-    
     # MongoDB sharding
-    
-    sh.shardCollection("mydb.users", { "region": "hashed" })
-    
-    
-    
-    # Cassandra auto-sharding (no manual setup)
-    
-    # Just add nodes to the cluster
-    
-    
 
-  
+    sh.shardCollection("mydb.users", { "region": "hashed" })
+
+    # Cassandra auto-sharding (no manual setup)
+
+    # Just add nodes to the cluster
+
 High Write Throughput   
 
-    
-    
     // DynamoDB: 10,000 writes/second per partition
-    
-    const params = {
-    
-        TableName: 'events',
-    
-        Item: {
-    
-            eventId: uuid(),
-    
-            type: 'page_view',
-    
-            timestamp: Date.now(),
-    
-            userId: userId
-    
-        }
-    
-    };
-    
-    await docClient.put(params);
-    
-    
 
-  
+    const params = {
+
+        TableName: 'events',
+
+        Item: {
+
+            eventId: uuid(),
+
+            type: 'page_view',
+
+            timestamp: Date.now(),
+
+            userId: userId
+
+        }
+
+    };
+
+    await docClient.put(params);
+
 Embedded Data (Avoiding Joins)   
 
-    
-    
     // MongoDB: embed related data in a single document
-    
-    {
-    
-        _id: "order_123",
-    
-        customer: {
-    
-            id: "cust_456",
-    
-            name: "Alice",
-    
-            email: "alice@email.com"
-    
-        },
-    
-        items: [
-    
-            { product: "Laptop", price: 1200, quantity: 1 },
-    
-            { product: "Mouse", price: 25, quantity: 2 }
-    
-        ],
-    
-        total: 1250,
-    
-        shipping_address: {
-    
-            street: "123 Main St",
-    
-            city: "San Francisco"
-    
-        }
-    
-    }
-    
-    
 
-  
+    {
+
+        _id: "order_123",
+
+        customer: {
+
+            id: "cust_456",
+
+            name: "Alice",
+
+            email: "alice@email.com"
+
+        },
+
+        items: [
+
+            { product: "Laptop", price: 1200, quantity: 1 },
+
+            { product: "Mouse", price: 25, quantity: 2 }
+
+        ],
+
+        total: 1250,
+
+        shipping_address: {
+
+            street: "123 Main St",
+
+            city: "San Francisco"
+
+        }
+
+    }
+
 When to Choose NoSQL   
 
 * **Rapid prototyping**: Schema changes are frequent and unpredictable.
@@ -221,43 +182,32 @@ When to Choose NoSQL
 * **Hierarchical data**: One document often contains all related data.
 * **Global scale**: Need multi-region replication and automatic sharding.
 * **Real-time feeds**: Social media, activity streams.
-  
+
 Decision Matrix   
 | Requirement | SQL (PostgreSQL) | NoSQL (MongoDB) | NoSQL (DynamoDB) | |-------------|------------------|-----------------|-------------------| | Complex queries | Excellent | Moderate (aggregation) | Limited | | Data integrity | Strong | Moderate | Moderate | | Write throughput | Moderate | High | Very high | | Read performance | Good (with indexes) | Good | Excellent (PK queries) | | Schema flexibility | Low | High | High | | Operational overhead | Medium | Medium | Low (serverless) | | Cost (large scale) | Higher | Moderate | Pay-per-request |   
 Hybrid: Using Both   
 Many successful architectures use both SQL and NoSQL for different purposes:   
 
-    
-    
     # Example: SQL for transactions, NoSQL for reads
-    
-    
-    
-    # Write to PostgreSQL (ACID guarantee)
-    
-    db.execute("""
-    
-        INSERT INTO orders (id, customer_id, total)
-    
-        VALUES (%s, %s, %s)
-    
-    """, [order_id, customer_id, total])
-    
-    
-    
-    # Update Redis cache for fast reads
-    
-    redis.setex(f"order:{order_id}", 3600, json.dumps(order_data))
-    
-    
-    
-    # Update Elasticsearch for search
-    
-    es.index(index='orders', id=order_id, body=order_data)
-    
-    
 
-  
+    # Write to PostgreSQL (ACID guarantee)
+
+    db.execute("""
+
+        INSERT INTO orders (id, customer_id, total)
+
+        VALUES (%s, %s, %s)
+
+    """, [order_id, customer_id, total])
+
+    # Update Redis cache for fast reads
+
+    redis.setex(f"order:{order_id}", 3600, json.dumps(order_data))
+
+    # Update Elasticsearch for search
+
+    es.index(index='orders', id=order_id, body=order_data)
+
 Migration Paths   
 | Starting Point | Problem | Target | Strategy | |----------------|---------|--------|----------| | SQL | Scaling writes | NoSQL | Dual-write, then cut over | | NoSQL | Complex queries | SQL | Define schema, migrate data | | NoSQL | Data integrity issues | SQL | Add constraints, enforce at app level first | | SQL | Flexible schema needed | NoSQL | Start with embedded docs for polymorphic data |   
 Summary   

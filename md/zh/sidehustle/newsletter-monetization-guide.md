@@ -3,7 +3,7 @@ title: "程序员的 Newsletter 副业指南：从 0 到 1000 订阅"
 description: "Newsletter 是 2026 年程序员最被低估的副业。本文从选题、平台选择、内容策略到变现模式，手把手教你从零搭建一个能赚钱的邮件通讯。"
 date: 2026-05-11
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/sidehustle/newsletter-monetization-guide.html
+url: https://dingjiu1989-hue.github.io/zh/sidehustle/newsletter-monetization-guide.html
 ---
 
 # 程序员的 Newsletter 副业指南：从 0 到 1000 订阅
@@ -30,35 +30,34 @@ Buttondown| $9/月起| 程序员友好，Markdown 原生，API 支持
 Ghost| $9/月起（自托管免费）| 想要博客 + Newsletter 一体化  
 自建| 域名 + SES ≈ $1/月| 极客向，完全控制  
 **推荐路径** ：用 Substack 或 Buttondown 启动（第一天就能发第一期），等超过 500 订阅后再考虑迁移到自建或 Ghost。 第三步：内容结构模版 一个高质量的 Newsletter 不需要你每天写 2000 字。90% 的价值在于**筛选和解读** 。推荐的内容结构（以"每周 AI 工具精选"为例）：
-    
-    
+
     # 本周 AI 工具快报 #12
     **日期**: 2026-05-09
     **订阅人数**: 847
-    
+
     ---
     ## 本周精选
-    
+
     ### 1. [工具名] — [一句话描述]
     [你为什么要关注它，1-2 句解读]
     🔗 链接 | ⭐ 推荐度: 8/10
-    
+
     ### 2. [工具名] — [一句话描述]
     [1-2 句解读]
     🔗 链接 | ⭐ 推荐度: 7/10
-    
+
     ### 3. [工具名] — [一句话描述]
     🔗 链接
-    
+
     ---
     ## 快讯（3-5 条一句话新闻）
     - OpenAI 发布了 xxx...
     - Anthropic 更新了 xxx...
-    
+
     ---
     ## 每周技巧
     [1 个实用小技巧，300 字以内]
-    
+
     ---
     *Thanks for reading. 如果这期有帮助，请转发给同事。*
     *[退订链接]*
@@ -79,8 +78,8 @@ Bytes.dev| JavaScript| 200,000+| 赞助广告
 Console.dev| 开发工具| 50,000+| 赞助广告  
 总结 Newsletter 的魔力在于**复利效应** ：每写一期，存档就是一份内容资产。一年后你有一个 52 期的资料库，Google 会源源不断带来新读者，而你的每个订阅者都是直接联系渠道——不发邮件不进垃圾箱就不被平台算法裁掉。 这个周末做什么：**选一个方向，注册 Buttondown，写第一期，发到 Twitter** 。第一期不需要完美，只需要发出。 📖 相关推荐
 
-  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/sidehustle/ai-era-side-hustles.html>)
-  * [如何通过写技术博客赚钱：从 0 到月入 1000 美元](<https://dingjiu1989-hue.github.io/sidehustle/tech-blog-monetization.html>)
-  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/sidehustle/knowledge-monetization.html>)
+  * [AI 时代程序员的 5 个新副业机会（2026）](<https://dingjiu1989-hue.github.io/zh/sidehustle/ai-era-side-hustles.html>)
+  * [如何通过写技术博客赚钱：从 0 到月入 1000 美元](<https://dingjiu1989-hue.github.io/zh/sidehustle/tech-blog-monetization.html>)
+  * [如何把你的专业知识变成付费内容：从 0 到月入 5000](<https://dingjiu1989-hue.github.io/zh/sidehustle/knowledge-monetization.html>)
 
-**See also:** [AI 时代程序员的 5 个新副业机会（2026）](</sidehustle/ai-era-side-hustles.html>), [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</sidehustle/affiliate-marketing.html>), [如何把你的专业知识变成付费内容：从 0 到月入 5000](</sidehustle/knowledge-monetization.html>).
+**See also:** [AI 时代程序员的 5 个新副业机会（2026）](</zh/sidehustle/ai-era-side-hustles.html>), [Affiliate Marketing 完全入门指南：从 0 到第一笔佣金](</zh/sidehustle/affiliate-marketing.html>), [如何把你的专业知识变成付费内容：从 0 到月入 5000](</zh/sidehustle/knowledge-monetization.html>).

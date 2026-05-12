@@ -3,7 +3,7 @@ title: "10 款开发者必备的命令行工具（2026 版）"
 description: "精选 10 款提升终端效率的命令行工具，涵盖文件管理、JSON 处理、Git 增强、系统监控等场景。"
 date: 2026-05-10
 board: tools
-url: https://dingjiu1989-hue.github.io/tools/cli-tools-collection.html
+url: https://dingjiu1989-hue.github.io/zh/tools/cli-tools-collection.html
 ---
 
 # 10 款开发者必备的命令行工具（2026 版）
@@ -31,20 +31,18 @@ Git 增强
   * **btm (bottom)** — Rust 写的系统资源监控，比 `top` 和 `htop` 更现代的 UI，CPU/内存/磁盘/网络/温度一屏显示。
 
 一行安装（macOS）
-    
-    
+
     brew install fd ripgrep fzf zoxide bat jq lazygit git-delta bottom
 
 组合使用的威力
-    
-    
+
     # 在所有 Python 文件中搜索 "user"，模糊筛选后用 bat 查看
     rg -l "user" --type py | fzf --preview "bat --color=always {}"
 
 把这些工具加到你的工作流里，两周后你会奇怪之前没有它们是怎么活下来的。 📖 相关推荐
 
-  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/tools/terminal-tools-2026.html>)
-  * [2026 年最佳屏幕录制和视频剪辑工具推荐](<https://dingjiu1989-hue.github.io/tools/screen-recording-tools.html>)
-  * [10 个你每天都会用到的免费在线工具网站](<https://dingjiu1989-hue.github.io/tools/online-tools-2026.html>)
+  * [2026 年 10 款必装终端工具：让你的命令行效率翻倍](<https://dingjiu1989-hue.github.io/zh/tools/terminal-tools-2026.html>)
+  * [2026 年最佳屏幕录制和视频剪辑工具推荐](<https://dingjiu1989-hue.github.io/zh/tools/screen-recording-tools.html>)
+  * [10 个你每天都会用到的免费在线工具网站](<https://dingjiu1989-hue.github.io/zh/tools/online-tools-2026.html>)
 
-**See also:** [Git 常用命令速查表](</tech/git-cheatsheet.html>), [VS Code 十大必备插件：让编码效率翻倍](</tech/vscode-extensions.html>), [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](</tech/git-advanced.html>).
+**See also:** [Git 常用命令速查表](</zh/tech/git-cheatsheet.html>), [VS Code 十大必备插件：让编码效率翻倍](</zh/tech/vscode-extensions.html>), [Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战](</zh/tech/git-advanced.html>).
