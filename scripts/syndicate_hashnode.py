@@ -216,6 +216,15 @@ def publish_to_hashnode(art, board_id, publication_id):
 def main():
     print(f"=== Hashnode Syndicator — {date.today().isoformat()} ===\n")
 
+    # ── Daily cap check ──────────────────────────────────────
+    from syndicate_config import DAILY_MAX, ARTICLES_PER_RUN, SLEEP_BETWEEN_ARTICLES, get_daily_count, record_published
+    daily_count = get_daily_count()
+    remaining = DAILY_MAX - daily_count
+    if remaining <= 0:
+        print(f"Daily cap reached ({DAILY_MAX}/{DAILY_MAX}). Stopping.")
+        return
+    print(f"[Hashnode] Daily: {daily_count}/{DAILY_MAX} — {remaining} remaining")
+
     # Load articles
     en_data = json.loads(EN_ARTICLES.read_text(encoding="utf-8"))
     all_articles = []
@@ -243,10 +252,12 @@ def main():
         print("Set HASHNODE_PUBLICATION_ID env var to skip discovery.")
         sys.exit(1)
 
-    # Publish up to 3 articles per run
+    # Publish (cap by daily remaining)
+    max_to_publish = min(ARTICLES_PER_RUN, remaining)
     published_this_run = 0
-    for art, board_id in unpublished[:3]:
-        print(f"  [{published_this_run + 1}/3] {art['title'][:60]}...")
+    fail_count = 0
+    for art, board_id in unpublished[:max_to_publish]:
+        print(f"  [{published_this_run + 1}/{max_to_publish}] {art['title'][:60]}...")
         post, error = publish_to_hashnode(art, board_id, publication_id)
 
         if error == "rate_limited":
@@ -254,18 +265,27 @@ def main():
             break
         elif error:
             print(f"    ERROR: {error[:200]}")
-            break
+            fail_count += 1
+            if fail_count >= 2:
+                print(f"    ⛔ 2 consecutive failures — circuit breaker stopped batch.")
+                break
+            break  # Single error = skip this article but continue next time
         elif post:
             post_url = post.get('url', '')
             print(f"    URL: {post_url}")
             existing_urls[art["slug"]] = post_url
             published_this_run += 1
+            fail_count = 0  # reset on success
             save_tracking(existing_urls)
 
-        time.sleep(3)  # Be respectful with API calls
+        # Natural pacing between articles
+        if published_this_run or fail_count:
+            time.sleep(SLEEP_BETWEEN_ARTICLES)
 
+    if published_this_run > 0:
+        record_published("hashnode", published_this_run)
     print(f"\nDone. {published_this_run} articles syndicated to Hashnode this run.")
-    print(f"Total: {len(existing)}/{len(all_articles)} published.")
+    print(f"Total: {already_published}/{len(all_articles)} published.")
 
 
 if __name__ == "__main__":

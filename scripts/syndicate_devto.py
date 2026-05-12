@@ -2,13 +2,11 @@
 """
 Syndicate articles to dev.to via their API.
 
-Strategy:
-- Post a summary/teaser on dev.to with a canonical URL pointing back to our site
-- dev.to has DA 90+ and is heavily crawled by AI (GPTBot, ClaudeBot, PerplexityBot)
-- The canonical link tells search engines our site is the original source
-- AI crawlers discover our content through dev.to's high-authority domain
-
-Rate limit: dev.to allows 3 articles/hour on free tier.
+Risk controls:
+- Daily cap: max 30 articles/day across all platforms
+- Circuit breaker: stops if 2+ articles in a batch fail
+- Natural pacing: 120s between articles
+- Every 3 hours via GitHub Actions is the primary rhythm
 """
 import json, time, os, sys
 from pathlib import Path
@@ -18,6 +16,10 @@ import _ssl_compat  # noqa: F401 — fix macOS LibreSSL TLS 1.3 issue
 
 ROOT = Path(__file__).resolve().parent.parent
 BASE = "https://dingjiu1989-hue.github.io"
+
+# Risk control config
+sys.path.insert(0, str(ROOT / "scripts"))
+from syndicate_config import DAILY_MAX, ARTICLES_PER_RUN, SLEEP_BETWEEN_ARTICLES, get_daily_count, record_published
 
 # Read API key from env var or file
 API_KEY = os.environ.get("DEVTO_API_KEY")
@@ -168,6 +170,14 @@ canonical_url: "{original_url}"
     return body
 
 def main():
+    # ── Daily cap check ──────────────────────────────────────
+    daily_count = get_daily_count()
+    remaining = DAILY_MAX - daily_count
+    if remaining <= 0:
+        print(f"Daily cap reached ({DAILY_MAX}/{DAILY_MAX}). Stopping.")
+        return
+    print(f"[Dev.to] Daily: {daily_count}/{DAILY_MAX} — {remaining} remaining")
+
     en_json = ROOT / "en" / "articles.json"
     if not en_json.exists():
         print("ERROR: articles.json not found")
@@ -189,12 +199,13 @@ def main():
     published = get_published_slugs()
     print(f"Already published on dev.to: {len(published)}")
 
-    # Pick articles to publish (limit: 3 per run per dev.to rate limits)
+    # Pick articles to publish (limit: capped by daily remaining)
+    max_to_publish = min(ARTICLES_PER_RUN, remaining)
     to_publish = []
     for board_id, art in all_articles:
         if art["slug"] not in published:
             to_publish.append((board_id, art))
-        if len(to_publish) >= 3:
+        if len(to_publish) >= max_to_publish:
             break
 
     if not to_publish:
@@ -205,6 +216,7 @@ def main():
 
     print(f"Publishing up to {len(to_publish)} articles to dev.to...")
     published_count = 0
+    fail_count = 0
     for i, (board_id, art) in enumerate(to_publish):
         body = make_article_body(art, board_id, en_data)
         if not body:
@@ -229,6 +241,7 @@ def main():
             print(f"         URL: {devto_url}")
             published.add(art["slug"])
             published_count += 1
+            fail_count = 0  # reset on success
         elif isinstance(result, dict) and result.get("error") == "rate_limit":
             print(f"  ⏳ Rate limited. Stopping batch. Published {published_count} this run.")
             break
@@ -236,13 +249,22 @@ def main():
             err_msg = str(result)[:200] if result else "no response"
             print(f"  [{i+1}/{len(to_publish)}] FAILED: {art['title'][:60]}...")
             print(f"         Error: {err_msg}")
+            fail_count += 1
 
-        # Respect rate limit — dev.to allows ~3 articles per 15 min
+        # Circuit breaker: 2 consecutive failures = stop
+        if fail_count >= 2:
+            print(f"  ⛔ 2 consecutive failures — circuit breaker stopped batch.")
+            break
+
+        # Natural pacing
         if i < len(to_publish) - 1:
-            time.sleep(90)
+            time.sleep(SLEEP_BETWEEN_ARTICLES)
 
     # Update cache with newly published slugs
     cache_path.write_text(json.dumps({"ts": time.time(), "slugs": list(published)}), encoding="utf-8")
+    # Log to daily tracker
+    if published_count > 0:
+        record_published("devto", published_count)
     print(f"\nDone. {published_count} articles syndicated to dev.to this run.")
 
 if __name__ == "__main__":
