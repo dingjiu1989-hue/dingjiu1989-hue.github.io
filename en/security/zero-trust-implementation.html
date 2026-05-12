@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/zero-trust-implementation.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Zero Trust Implementation">
     <meta name="twitter:description" content="A practical guide to implementing Zero Trust architecture with micro-segmentation, least privilege, and continuous verification.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/zero-trust-implementation.png">
     <title>Zero Trust Implementation — SourceHub</title>
     <meta name="description" content="A practical guide to implementing Zero Trust architecture with micro-segmentation, least privilege, and continuous verification.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Zero Trust Implementation",
       "description": "A practical guide to implementing Zero Trust architecture with micro-segmentation, least privilege, and continuous verification.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/zero-trust-implementation.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "876",
+      "wordCount": "848",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Zero Trust Implementation</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/zero-trust-implementation.png" alt="Zero Trust Implementation" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Zero Trust Implementation</h1>
 <br>
 <p>Zero Trust Principles   </p>
 <p>Zero Trust replaces the castle-and-moat model with "never trust, always verify." Every request is authenticated, authorized, and inspected regardless of origin.   </p>
 <p>Micro-Segmentation   </p>
 <p>Divide your network into small, isolated zones. Each zone requires separate authentication.   </p>
-<br>
-<br>
 <br>
 <p>    # Terraform: AWS security group micro-segmentation</p>
 <br>
@@ -93,8 +92,6 @@
 <p>      description = "Allow app tier to database"</p>
 <br>
 <p>      vpc_id      = var.vpc_id</p>
-<br>
-<br>
 <br>
 <p>      ingress {</p>
 <br>
@@ -107,8 +104,6 @@
 <p>        security_groups = [aws_security_group.app_tier.id]</p>
 <br>
 <p>      }</p>
-<br>
-<br>
 <br>
 <p>      egress {</p>
 <br>
@@ -124,21 +119,14 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Least Privilege Access   </p>
 <p>Implement just-in-time (JIT) access with ephemeral credentials.   </p>
-<br>
-<br>
 <br>
 <p>    # JIT access broker</p>
 <br>
 <p>    from datetime import datetime, timedelta</p>
 <br>
 <p>    import boto3</p>
-<br>
-<br>
 <br>
 <p>    def grant_just_in_time_access(user, resource, duration_minutes=60):</p>
 <br>
@@ -176,13 +164,8 @@
 <br>
 <p>                                 PolicyDocument=json.dumps(policy))</p>
 <br>
-<br>
-<br>
-<br>
 <p>Verify Every Request   </p>
 <p>Every API call must be verified at the application layer.   </p>
-<br>
-<br>
 <br>
 <p>    // Zero Trust API gateway middleware</p>
 <br>
@@ -201,8 +184,6 @@
 <p>        path: req.path</p>
 <br>
 <p>      };</p>
-<br>
-<br>
 <br>
 <p>      Promise.all([</p>
 <br>
@@ -230,13 +211,8 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Continuous Monitoring   </p>
 <p>Log and analyze all access attempts in real time.   </p>
-<br>
-<br>
 <br>
 <p>    -- Anomaly detection query</p>
 <br>
@@ -255,9 +231,6 @@
 <p>    GROUP BY user_id</p>
 <br>
 <p>    HAVING COUNT(*) > 10;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Zero Trust is an architectural shift, not a product. Start with a single application, implement micro-segmentation, enforce least privilege, and expand gradually. Measure progress by reduction in lateral movement capability and mean time to detect anomalies.</p></div>

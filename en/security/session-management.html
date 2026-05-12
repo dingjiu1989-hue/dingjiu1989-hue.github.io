@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/session-management.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Session Management Security">
     <meta name="twitter:description" content="Guide to secure session management covering JWT vs opaque tokens, rotation strategies, secure cookies, and session fixation prevention.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/session-management.png">
     <title>Session Management Security — SourceHub</title>
     <meta name="description" content="Guide to secure session management covering JWT vs opaque tokens, rotation strategies, secure cookies, and session fixation prevention.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Session Management Security",
       "description": "Guide to secure session management covering JWT vs opaque tokens, rotation strategies, secure cookies, and session fixation prevention.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/session-management.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1892",
+      "wordCount": "1814",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Session Management Security</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/session-management.png" alt="Session Management Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Session Management Security</h1>
 <br>
 <p>Introduction   </p>
@@ -83,13 +84,9 @@
 <p>JSON Web Tokens   </p>
 <p>JWTs are self-contained tokens carrying claims in a signed JSON payload. They enable stateless authentication — the server validates the signature without database lookups.   </p>
 <br>
-<br>
-<br>
 <p>    import jwt</p>
 <br>
 <p>    from datetime import datetime, timedelta</p>
-<br>
-<br>
 <br>
 <p>    # Generate a JWT access token</p>
 <br>
@@ -113,8 +110,6 @@
 <br>
 <p>        return jwt.encode(payload, secret_key, algorithm='HS256')</p>
 <br>
-<br>
-<br>
 <p>    # Generate a refresh token</p>
 <br>
 <p>    def create_refresh_token(user_id, secret_key):</p>
@@ -132,8 +127,6 @@
 <p>        }</p>
 <br>
 <p>        return jwt.encode(payload, secret_key, algorithm='HS256')</p>
-<br>
-<br>
 <br>
 <p>    # Verify and decode</p>
 <br>
@@ -159,20 +152,13 @@
 <br>
 <p>            raise</p>
 <br>
-<br>
-<br>
-<br>
 <p>JWT advantages: stateless, self-validating, carries user claims. Disadvantages: cannot revoke without a blocklist, payload is signed not encrypted (unless JWE), token size can be large.   </p>
 <p>Opaque Tokens   </p>
 <p>Opaque tokens are random strings stored server-side in a session store. The client presents the token, and the server looks up the associated session data.   </p>
 <br>
-<br>
-<br>
 <p>    import secrets</p>
 <br>
 <p>    import redis</p>
-<br>
-<br>
 <br>
 <p>    class OpaqueTokenManager:</p>
 <br>
@@ -182,15 +168,11 @@
 <br>
 <p>            self.token_length = 32</p>
 <br>
-<br>
-<br>
 <p>        def create_session(self, user_id, claims, ttl_seconds=3600):</p>
 <br>
 <p>            token = secrets.token_hex(self.token_length)</p>
 <br>
 <p>            session_key = f"session:{token}"</p>
-<br>
-<br>
 <br>
 <p>            session_data = {</p>
 <br>
@@ -204,13 +186,9 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
 <p>            self.redis.setex(session_key, ttl_seconds, json.dumps(session_data))</p>
 <br>
 <p>            return token</p>
-<br>
-<br>
 <br>
 <p>        def validate_session(self, token):</p>
 <br>
@@ -222,8 +200,6 @@
 <br>
 <p>                return None</p>
 <br>
-<br>
-<br>
 <p>            session = json.loads(data)</p>
 <br>
 <p>            # Update last activity</p>
@@ -234,13 +210,9 @@
 <br>
 <p>            return session</p>
 <br>
-<br>
-<br>
 <p>        def revoke_session(self, token):</p>
 <br>
 <p>            self.redis.delete(f"session:{token}")</p>
-<br>
-<br>
 <br>
 <p>        def revoke_all_user_sessions(self, user_id):</p>
 <br>
@@ -254,13 +226,8 @@
 <br>
 <p>                    self.redis.delete(key)</p>
 <br>
-<br>
-<br>
-<br>
 <p>Token Rotation   </p>
 <p>Rotating tokens limits the window of opportunity for stolen tokens.   </p>
-<br>
-<br>
 <br>
 <p>    # Refresh token rotation</p>
 <br>
@@ -268,19 +235,13 @@
 <br>
 <p>        payload = verify_token(refresh_token, secret_key)</p>
 <br>
-<br>
-<br>
 <p>        if payload['type'] != 'refresh':</p>
 <br>
 <p>            raise InvalidTokenError('Not a refresh token')</p>
 <br>
-<br>
-<br>
 <p>        # Revoke old refresh token</p>
 <br>
 <p>        revoke_token(payload['jti'])</p>
-<br>
-<br>
 <br>
 <p>        # Issue new tokens</p>
 <br>
@@ -288,21 +249,12 @@
 <br>
 <p>        new_refresh = create_refresh_token(payload['sub'], secret_key)</p>
 <br>
-<br>
-<br>
 <p>        return {'access_token': new_access, 'refresh_token': new_refresh}</p>
-<br>
-<br>
-<br>
 <br>
 <p>Secure Cookies   </p>
 <p>For web applications, cookies remain the primary session token transport mechanism.   </p>
 <br>
-<br>
-<br>
 <p>    from flask import make_response</p>
-<br>
-<br>
 <br>
 <p>    def set_session_cookie(response, token):</p>
 <br>
@@ -323,8 +275,6 @@
 <p>            path='/'</p>
 <br>
 <p>        )</p>
-<br>
-<br>
 <br>
 <p>    # Modern recommended cookie configuration</p>
 <br>
@@ -348,13 +298,8 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Session Fixation Prevention   </p>
 <p>Session fixation occurs when an attacker forces a victim to use a known session identifier. Mitigation: regenerate the session ID after authentication.   </p>
-<br>
-<br>
 <br>
 <p>    def login(request, username, password):</p>
 <br>
@@ -366,8 +311,6 @@
 <br>
 <p>            request.session.regenerate()  # New session ID, same data</p>
 <br>
-<br>
-<br>
 <p>            # Copy relevant data and invalidate old session</p>
 <br>
 <p>            request.session['user_id'] = get_user_id(username)</p>
@@ -376,22 +319,13 @@
 <br>
 <p>            request.session['auth_time'] = datetime.utcnow().isoformat()</p>
 <br>
-<br>
-<br>
 <p>            # Invalidate old session in store</p>
 <br>
 <p>            session_store.delete(old_session.session_key)</p>
 <br>
-<br>
-<br>
 <p>            return redirect('/dashboard')</p>
 <br>
-<br>
-<br>
-<br>
 <p>Session Timeout Strategies   </p>
-<br>
-<br>
 <br>
 <p>    session_timeouts = {</p>
 <br>
@@ -401,13 +335,9 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
 <p>    def check_session_timeout(session):</p>
 <br>
 <p>        now = datetime.utcnow()</p>
-<br>
-<br>
 <br>
 <p>        # Idle timeout</p>
 <br>
@@ -417,8 +347,6 @@
 <br>
 <p>            return {'expired': True, 'reason': 'idle_timeout'}</p>
 <br>
-<br>
-<br>
 <p>        # Absolute timeout</p>
 <br>
 <p>        auth_time = datetime.fromisoformat(session['auth_time'])</p>
@@ -427,12 +355,7 @@
 <br>
 <p>            return {'expired': True, 'reason': 'absolute_timeout'}</p>
 <br>
-<br>
-<br>
 <p>        return {'expired': False}</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Secure session management requires defense in depth. Use JWTs for stateless distributed systems with short expiration times, or opaque tokens for server-side control with instant revocation. Always use `HttpOnly`, `Secure`, and `SameSite` attributes on session cookies, regenerate session IDs after login, enforce idle and absolute timeouts, and implement proper token rotation for refresh flows.</p></div>

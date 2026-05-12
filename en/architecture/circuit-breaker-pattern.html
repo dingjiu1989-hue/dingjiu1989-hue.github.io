@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Circuit Breaker Pattern: Building Resilient Systems">
     <meta name="twitter:description" content="Circuit breaker state machine (closed/open/half-open), implementation with Resilience4j, monitoring, and recovery strategies.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.png">
     <title>Circuit Breaker Pattern: Building Resilient Systems — SourceHub</title>
     <meta name="description" content="Circuit breaker state machine (closed/open/half-open), implementation with Resilience4j, monitoring, and recovery strategies.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Circuit Breaker Pattern: Building Resilient Systems",
       "description": "Circuit breaker state machine (closed/open/half-open), implementation with Resilience4j, monitoring, and recovery strategies.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "3337",
+      "wordCount": "3232",
       "keywords": "Architecture, System Design",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,13 +74,12 @@
         <span class="tag-cat">System Design</span></div>
       <h1 class="article-title">Circuit Breaker Pattern: Building Resilient Systems</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.png" alt="Circuit Breaker Pattern: Building Resilient Systems" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Circuit Breaker Pattern: Building Resilient Systems</h1>
 <br>
 <p>The circuit breaker pattern prevents cascading failures in distributed systems. When a service depends on another service that is failing, the circuit breaker detects the failures and stops sending requests to the failing service, allowing it time to recover. This article covers the circuit breaker state machine, implementation with Resilience4j, monitoring, and recovery strategies.   </p>
 <p>The Circuit Breaker State Machine   </p>
 <p>A circuit breaker has three states: Closed, Open, and Half-Open.   </p>
-<br>
-<br>
 <br>
 <p>                        +-----------+</p>
 <br>
@@ -120,9 +119,6 @@
 <br>
 <p>                        +-----------+</p>
 <br>
-<br>
-<br>
-<br>
 <p>Closed State   </p>
 <p>In the closed state, the circuit breaker allows requests to pass through to the remote service. It tracks the failure rate. When the failure rate exceeds a threshold, the circuit breaker trips to the open state.   </p>
 <br>
@@ -148,8 +144,6 @@
 <p>Resilience4j is a lightweight, easy-to-use fault tolerance library for Java. It provides circuit breaker, rate limiter, retry, bulkhead, and time limiter modules.   </p>
 <p>Basic Circuit Breaker Configuration   </p>
 <br>
-<br>
-<br>
 <p>    import io.github.resilience4j.circuitbreaker.CircuitBreaker;</p>
 <br>
 <p>    import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;</p>
@@ -157,8 +151,6 @@
 <p>    import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;</p>
 <br>
 <p>    import java.time.Duration;</p>
-<br>
-<br>
 <br>
 <p>    // Create a circuit breaker configuration</p>
 <br>
@@ -186,28 +178,19 @@
 <br>
 <p>        .build();</p>
 <br>
-<br>
-<br>
 <p>    // Create the circuit breaker</p>
 <br>
 <p>    CircuitBreakerRegistry registry = CircuitBreakerRegistry.of(config);</p>
 <br>
 <p>    CircuitBreaker circuitBreaker = registry.circuitBreaker("paymentService");</p>
 <br>
-<br>
-<br>
-<br>
 <p>Decorating Calls   </p>
-<br>
-<br>
 <br>
 <p>    // Decorate a function with circuit breaker</p>
 <br>
 <p>    Supplier<String> decoratedSupplier = CircuitBreaker</p>
 <br>
 <p>        .decorateSupplier(circuitBreaker, () -> paymentService.processPayment(request));</p>
-<br>
-<br>
 <br>
 <p>    // Call with circuit breaker protection</p>
 <br>
@@ -223,24 +206,15 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Spring Boot Integration   </p>
-<br>
-<br>
 <br>
 <p>    import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;</p>
 <br>
 <p>    import org.springframework.stereotype.Service;</p>
 <br>
-<br>
-<br>
 <p>    @Service</p>
 <br>
 <p>    public class PaymentService {</p>
-<br>
-<br>
 <br>
 <p>        @CircuitBreaker(name = "paymentService", fallbackMethod = "paymentFallback")</p>
 <br>
@@ -249,8 +223,6 @@
 <p>            return paymentGateway.charge(request);</p>
 <br>
 <p>        }</p>
-<br>
-<br>
 <br>
 <p>        public PaymentResponse paymentFallback(PaymentRequest request, Throwable t) {</p>
 <br>
@@ -261,12 +233,6 @@
 <p>        }</p>
 <br>
 <p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # application.yml</p>
 <br>
@@ -298,20 +264,13 @@
 <br>
 <p>          waitDurationInOpenState: 60s</p>
 <br>
-<br>
-<br>
-<br>
 <p>Python Implementation (Simple)   </p>
-<br>
-<br>
 <br>
 <p>    import time</p>
 <br>
 <p>    import threading</p>
 <br>
 <p>    from enum import Enum</p>
-<br>
-<br>
 <br>
 <p>    class CircuitState(Enum):</p>
 <br>
@@ -320,8 +279,6 @@
 <p>        OPEN = "open"</p>
 <br>
 <p>        HALF_OPEN = "half_open"</p>
-<br>
-<br>
 <br>
 <p>    class CircuitBreaker:</p>
 <br>
@@ -333,8 +290,6 @@
 <br>
 <p>            self.half_open_max_calls = half_open_max_calls</p>
 <br>
-<br>
-<br>
 <p>            self.state = CircuitState.CLOSED</p>
 <br>
 <p>            self.failure_count = 0</p>
@@ -344,8 +299,6 @@
 <p>            self.half_open_calls = 0</p>
 <br>
 <p>            self.lock = threading.Lock()</p>
-<br>
-<br>
 <br>
 <p>        def call(self, func, fallback_func=None, *args, **kwargs):</p>
 <br>
@@ -363,8 +316,6 @@
 <br>
 <p>                        return self._handle_open(fallback_func)</p>
 <br>
-<br>
-<br>
 <p>                if self.state == CircuitState.HALF_OPEN:</p>
 <br>
 <p>                    if self.half_open_calls >= self.half_open_max_calls:</p>
@@ -372,8 +323,6 @@
 <p>                        return self._handle_open(fallback_func)</p>
 <br>
 <p>                    self.half_open_calls += 1</p>
-<br>
-<br>
 <br>
 <p>            try:</p>
 <br>
@@ -389,8 +338,6 @@
 <br>
 <p>                return self._handle_open(fallback_func)</p>
 <br>
-<br>
-<br>
 <p>        def _on_success(self):</p>
 <br>
 <p>            with self.lock:</p>
@@ -405,8 +352,6 @@
 <br>
 <p>                    self.failure_count = max(0, self.failure_count - 1)</p>
 <br>
-<br>
-<br>
 <p>        def _on_failure(self):</p>
 <br>
 <p>            with self.lock:</p>
@@ -419,8 +364,6 @@
 <br>
 <p>                    self.state = CircuitState.OPEN</p>
 <br>
-<br>
-<br>
 <p>        def _handle_open(self, fallback_func):</p>
 <br>
 <p>            if fallback_func:</p>
@@ -429,14 +372,9 @@
 <br>
 <p>            raise CircuitBreakerOpenException("Circuit breaker is open")</p>
 <br>
-<br>
-<br>
-<br>
 <p>Monitoring Circuit Breakers   </p>
 <p>Exposing Metrics   </p>
 <p>Resilience4j integrates with Micrometer for metrics export:   </p>
-<br>
-<br>
 <br>
 <p>    // Register circuit breaker metrics with Micrometer</p>
 <br>
@@ -445,8 +383,6 @@
 <p>    CircuitBreakerMetrics circuitBreakerMetrics = </p>
 <br>
 <p>        circuitBreaker.getMetrics();</p>
-<br>
-<br>
 <br>
 <p>    // Record state changes</p>
 <br>
@@ -470,9 +406,6 @@
 <br>
 <p>        });</p>
 <br>
-<br>
-<br>
-<br>
 <p>Key Metrics to Monitor   </p>
 <br>
 <p>* **State**: Is the circuit closed, open, or half-open?</p>
@@ -480,9 +413,6 @@
 <p>* **Call count**: Total calls, successful calls, failed calls, and ignored calls.</p>
 <p>* **Not permitted calls**: Number of calls rejected while the breaker is open.</p>
 <p>* **Buffered calls**: Number of buffered calls in the current sliding window.</p>
-<br>
-<br>
-<br>
 <br>
 <p>    # Prometheus metric format (from Resilience4j exporter)</p>
 <br>
@@ -494,12 +424,7 @@
 <br>
 <p>    resilience4j_circuitbreaker_not_permitted_calls{name="paymentService"} 34</p>
 <br>
-<br>
-<br>
-<br>
 <p>Grafana Alert Rules   </p>
-<br>
-<br>
 <br>
 <p>    - alert: CircuitBreakerOpen</p>
 <br>
@@ -511,8 +436,6 @@
 <br>
 <p>        summary: "Circuit breaker {{ $labels.name }} is open"</p>
 <br>
-<br>
-<br>
 <p>    - alert: HighFailureRate</p>
 <br>
 <p>      expr: resilience4j_circuitbreaker_failure_rate > 40</p>
@@ -523,14 +446,9 @@
 <br>
 <p>        summary: "Circuit breaker {{ $labels.name }} failure rate is {{ $value }}%"</p>
 <br>
-<br>
-<br>
-<br>
 <p>Recovery Strategies   </p>
 <p>Gradual Recovery   </p>
 <p>When a circuit breaker closes after recovery, the previously failing service may be overwhelmed by the sudden return of all traffic. Use gradual recovery:   </p>
-<br>
-<br>
 <br>
 <p>    // Gradual recovery: allow 50% of usual traffic initially, ramp up</p>
 <br>
@@ -544,18 +462,12 @@
 <br>
 <p>        .build();</p>
 <br>
-<br>
-<br>
-<br>
 <p>Fallback Strategies   </p>
 <br>
 <p>* **Cache**: Return cached response from the last successful call.</p>
 <p>* **Default value**: Return a safe default (empty list, zero).</p>
 <p>* **Degraded functionality**: Return partial results (e.g., show product page without recommendations).</p>
 <p>* **Queue for retry**: Store the request and retry later.</p>
-<br>
-<br>
-<br>
 <br>
 <p>    @CircuitBreaker(name = "recommendationService", fallbackMethod = "recommendationFallback")</p>
 <br>
@@ -564,8 +476,6 @@
 <p>        return recommendationClient.fetch(userId);</p>
 <br>
 <p>    }</p>
-<br>
-<br>
 <br>
 <p>    public List<Product> recommendationFallback(String userId, Throwable t) {</p>
 <br>
@@ -581,19 +491,12 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Bulkhead Pattern   </p>
 <p>Combine circuit breakers with bulkheads to isolate failure domains:   </p>
-<br>
-<br>
 <br>
 <p>    import io.github.resilience4j.bulkhead.Bulkhead;</p>
 <br>
 <p>    import io.github.resilience4j.bulkhead.BulkheadConfig;</p>
-<br>
-<br>
 <br>
 <p>    BulkheadConfig bulkheadConfig = BulkheadConfig.custom()</p>
 <br>
@@ -603,11 +506,7 @@
 <br>
 <p>        .build();</p>
 <br>
-<br>
-<br>
 <p>    Bulkhead bulkhead = Bulkhead.of("paymentService", bulkheadConfig);</p>
-<br>
-<br>
 <br>
 <p>    // Combined: circuit breaker wraps bulkhead wraps function</p>
 <br>
@@ -620,9 +519,6 @@
 <p>        .withBulkhead(bulkhead)</p>
 <br>
 <p>        .decorate();</p>
-<br>
-<br>
-<br>
 <br>
 <p>Common Pitfalls   </p>
 <br>

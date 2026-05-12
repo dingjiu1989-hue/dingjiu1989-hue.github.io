@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/key-management.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Key Management Systems">
     <meta name="twitter:description" content="Deep dive into key management systems covering KMS, HSM, key rotation strategies, envelope encryption, and AWS KMS vs GCP Cloud KMS comparison.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/key-management.png">
     <title>Key Management Systems — SourceHub</title>
     <meta name="description" content="Deep dive into key management systems covering KMS, HSM, key rotation strategies, envelope encryption, and AWS KMS vs GCP Cloud KMS comparison.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Key Management Systems",
       "description": "Deep dive into key management systems covering KMS, HSM, key rotation strategies, envelope encryption, and AWS KMS vs GCP Cloud KMS comparison.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/key-management.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1631",
+      "wordCount": "1568",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Key Management Systems</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/key-management.png" alt="Key Management Systems" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Key Management Systems</h1>
 <br>
 <p>Introduction   </p>
@@ -82,8 +83,6 @@
 <p>Cloud KMS: AWS KMS vs GCP Cloud KMS   </p>
 <p>AWS Key Management Service   </p>
 <p>AWS KMS is a managed service for creating and controlling encryption keys. It integrates with most AWS services and provides FIPS 140-2 validated HSM-backed key storage.   </p>
-<br>
-<br>
 <br>
 <p>    # Create a symmetric KMS key</p>
 <br>
@@ -97,8 +96,6 @@
 <br>
 <p>        --tags TagKey=Environment,TagValue=Production</p>
 <br>
-<br>
-<br>
 <p>    # Create an alias</p>
 <br>
 <p>    aws kms create-alias \</p>
@@ -106,8 +103,6 @@
 <p>        --alias-name alias/production-key \</p>
 <br>
 <p>        --target-key-id <key-id></p>
-<br>
-<br>
 <br>
 <p>    # Encrypt data</p>
 <br>
@@ -121,8 +116,6 @@
 <br>
 <p>        --query CiphertextBlob | base64 --decode > secret.encrypted</p>
 <br>
-<br>
-<br>
 <p>    # Decrypt data</p>
 <br>
 <p>    aws kms decrypt \</p>
@@ -132,12 +125,6 @@
 <p>        --output text \</p>
 <br>
 <p>        --query Plaintext | base64 --decode</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    {</p>
 <br>
@@ -175,21 +162,14 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>GCP Cloud KMS   </p>
 <p>GCP Cloud KMS offers similar functionality with an emphasis on hierarchical key management and integration with Cloud HSM.   </p>
-<br>
-<br>
 <br>
 <p>    # Create a keyring</p>
 <br>
 <p>    gcloud kms keyrings create production-keyring \</p>
 <br>
 <p>        --location global</p>
-<br>
-<br>
 <br>
 <p>    # Create a symmetric key</p>
 <br>
@@ -204,8 +184,6 @@
 <p>        --rotation-period 90d \</p>
 <br>
 <p>        --next-rotation-time "2026-08-10T00:00:00Z"</p>
-<br>
-<br>
 <br>
 <p>    # Encrypt with CMEK</p>
 <br>
@@ -223,8 +201,6 @@
 <br>
 <p>        | base64</p>
 <br>
-<br>
-<br>
 <p>    # Decrypt</p>
 <br>
 <p>    echo -n "encrypted-data" | base64 --decode | gcloud kms decrypt \</p>
@@ -239,13 +215,8 @@
 <br>
 <p>        --key production-key</p>
 <br>
-<br>
-<br>
-<br>
 <p>Envelope Encryption   </p>
 <p>Envelope encryption encrypts data with a data key (DEK), then encrypts the DEK with a key encryption key (KEK) stored in KMS. This enables local encryption while delegating key management to KMS.   </p>
-<br>
-<br>
 <br>
 <p>    import boto3</p>
 <br>
@@ -253,11 +224,7 @@
 <br>
 <p>    import base64</p>
 <br>
-<br>
-<br>
 <p>    kms = boto3.client('kms')</p>
-<br>
-<br>
 <br>
 <p>    def envelope_encrypt(plaintext, kms_key_id):</p>
 <br>
@@ -275,15 +242,11 @@
 <br>
 <p>        encrypted_data_key = response['CiphertextBlob']</p>
 <br>
-<br>
-<br>
 <p>        # Encrypt data locally with Fernet</p>
 <br>
 <p>        fernet = Fernet(base64.urlsafe_b64encode(plaintext_data_key))</p>
 <br>
 <p>        encrypted_data = fernet.encrypt(plaintext.encode())</p>
-<br>
-<br>
 <br>
 <p>        return {</p>
 <br>
@@ -292,8 +255,6 @@
 <p>            'encrypted_data_key': encrypted_data_key,</p>
 <br>
 <p>        }</p>
-<br>
-<br>
 <br>
 <p>    def envelope_decrypt(encrypted_payload):</p>
 <br>
@@ -307,29 +268,20 @@
 <br>
 <p>        plaintext_data_key = response['Plaintext']</p>
 <br>
-<br>
-<br>
 <p>        # Decrypt data locally</p>
 <br>
 <p>        fernet = Fernet(base64.urlsafe_b64encode(plaintext_data_key))</p>
 <br>
 <p>        return fernet.decrypt(encrypted_payload['encrypted_data']).decode()</p>
 <br>
-<br>
-<br>
-<br>
 <p>Hardware Security Modules (HSM)   </p>
 <p>HSMs provide tamper-resistant hardware for key generation, storage, and cryptographic operations. Cloud HSMs (AWS CloudHSM, GCP Cloud HSM) offer dedicated HSM instances.   </p>
-<br>
-<br>
 <br>
 <p>    # AWS CloudHSM: list keys via PKCS#11 library</p>
 <br>
 <p>    pkcs11-tool --module /opt/cloudhsm/lib/libcloudhsm_pkcs11.so \</p>
 <br>
 <p>        --slot 0 --login --list-objects --pin <crypto-user>:<password></p>
-<br>
-<br>
 <br>
 <p>    # Generate key on HSM</p>
 <br>
@@ -341,13 +293,8 @@
 <br>
 <p>        --id 1234</p>
 <br>
-<br>
-<br>
-<br>
 <p>Key Rotation   </p>
 <p>Automatic key rotation reduces the impact of key compromise. Both AWS KMS and GCP KMS support automatic rotation.   </p>
-<br>
-<br>
 <br>
 <p>    # Automated key rotation script</p>
 <br>
@@ -369,8 +316,6 @@
 <br>
 <p>        new_key_id = new_key['KeyMetadata']['KeyId']</p>
 <br>
-<br>
-<br>
 <p>        # Alias update to point to new key</p>
 <br>
 <p>        client.update_alias(</p>
@@ -380,8 +325,6 @@
 <p>            TargetKeyId=new_key_id</p>
 <br>
 <p>        )</p>
-<br>
-<br>
 <br>
 <p>        # Schedule old key deletion (after grace period)</p>
 <br>
@@ -393,16 +336,11 @@
 <br>
 <p>        )</p>
 <br>
-<br>
-<br>
 <p>        # Re-encrypt data with new key</p>
 <br>
 <p>        # Applications using the alias will automatically use the new key</p>
 <br>
 <p>        logger.info(f'Key rotated: {key_id} -> {new_key_id}')</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Effective key management requires centralized control, hardware-backed security, automatic rotation, and strict access policies. Envelope encryption balances security and performance by combining KMS-managed key encryption keys with locally-generated data keys. AWS KMS and GCP Cloud KMS both provide robust solutions — choose based on your cloud provider ecosystem and compliance requirements.</p></div>

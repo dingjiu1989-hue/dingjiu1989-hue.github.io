@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-workflow-automation.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="AI Workflow Automation: LangChain, Temporal, Event-Driven Agents">
     <meta name="twitter:description" content="Build robust AI workflow automation with LangChain for LLM orchestration, Temporal for durable execution, and event-driven patterns for resilient agent pipeline">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-workflow-automation.png">
     <title>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents — SourceHub</title>
     <meta name="description" content="Build robust AI workflow automation with LangChain for LLM orchestration, Temporal for durable execution, and event-driven patterns for resilient agent pipeline">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "AI Workflow Automation: LangChain, Temporal, Event-Driven Agents",
       "description": "Build robust AI workflow automation with LangChain for LLM orchestration, Temporal for durable execution, and event-driven patterns for resilient agent pipeline",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-workflow-automation.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2222",
+      "wordCount": "2110",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,28 +75,16 @@
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-workflow-automation.png" alt="AI Workflow Automation: LangChain, Temporal, Event-Driven Agents" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Production AI systems need more than a single LLM call or a simple chain. They require reliable, long-running workflows that handle failures, retries, human-in-the-loop interventions, and complex state management. This article covers three complementary approaches to AI workflow automation: LangChain for LLM orchestration, Temporal for durable execution, and event-driven architectures for scalable pipelines.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  LangChain Workflows</h2>
 <br>
-<br>
-<br>
-<br>
 <p>LangChain provides abstractions for building LLM-powered workflows:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from langchain.chains import LLMChain, SequentialChain</p>
 <br>
@@ -106,11 +94,7 @@
 <br>
 <p>    from langchain.memory import ConversationBufferMemory</p>
 <br>
-<br>
-<br>
 <p>    llm = ChatAnthropic(model="claude-sonnet-4-20260512")</p>
-<br>
-<br>
 <br>
 <p>    # Define individual chain steps</p>
 <br>
@@ -124,8 +108,6 @@
 <br>
 <p>    extract_chain = LLMChain(llm=llm, prompt=extract_prompt, output_key="requirements")</p>
 <br>
-<br>
-<br>
 <p>    analyze_prompt = PromptTemplate(</p>
 <br>
 <p>        input_variables=["requirements"],</p>
@@ -136,8 +118,6 @@
 <br>
 <p>    analyze_chain = LLMChain(llm=llm, prompt=analyze_prompt, output_key="analysis")</p>
 <br>
-<br>
-<br>
 <p>    generate_prompt = PromptTemplate(</p>
 <br>
 <p>        input_variables=["requirements", "analysis"],</p>
@@ -147,8 +127,6 @@
 <p>    )</p>
 <br>
 <p>    generate_chain = LLMChain(llm=llm, prompt=generate_prompt, output_key="solution")</p>
-<br>
-<br>
 <br>
 <p>    # Compose into a sequential workflow</p>
 <br>
@@ -164,25 +142,11 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    result = workflow({"text": "Build a REST API for user management with authentication"})</p>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <h2>  Temporal for Durable Execution</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Temporal provides reliability guarantees for long-running AI workflows:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from temporalio import activity, workflow</p>
 <br>
@@ -192,8 +156,6 @@
 <br>
 <p>    import asyncio</p>
 <br>
-<br>
-<br>
 <p>    # Define activities (individual steps)</p>
 <br>
 <p>    @activity.defn</p>
@@ -202,15 +164,11 @@
 <br>
 <p>        return await vector_search(query)</p>
 <br>
-<br>
-<br>
 <p>    @activity.defn</p>
 <br>
 <p>    async def generate_answer(context: list[str], question: str) -> str:</p>
 <br>
 <p>        return await call_llm(f"Context: {context}\nQuestion: {question}")</p>
-<br>
-<br>
 <br>
 <p>    @activity.defn</p>
 <br>
@@ -225,8 +183,6 @@
 <p>            return answer</p>
 <br>
 <p>        return f"Needs revision: {review['feedback']}"</p>
-<br>
-<br>
 <br>
 <p>    # Define workflow</p>
 <br>
@@ -250,8 +206,6 @@
 <br>
 <p>            )</p>
 <br>
-<br>
-<br>
 <p>            # Step 2: Generate answer</p>
 <br>
 <p>            answer = await workflow.execute_activity(</p>
@@ -261,8 +215,6 @@
 <p>                start_to_close_timeout=timedelta(minutes=2),</p>
 <br>
 <p>            )</p>
-<br>
-<br>
 <br>
 <p>            # Step 3: Human review</p>
 <br>
@@ -274,11 +226,7 @@
 <br>
 <p>            )</p>
 <br>
-<br>
-<br>
 <p>            return {"question": question, "answer": final}</p>
-<br>
-<br>
 <br>
 <p>    # Run the workflow</p>
 <br>
@@ -302,32 +250,15 @@
 <br>
 <p>        print(result)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Temporal automatically retries failed activities, persists workflow state, and enables human-in-the-loop pauses.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Event-Driven Architecture</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Event-driven workflows react to events with loosely coupled agents:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    import asyncio</p>
 <br>
 <p>    from enum import Enum</p>
-<br>
-<br>
 <br>
 <p>    class EventType(Enum):</p>
 <br>
@@ -341,8 +272,6 @@
 <br>
 <p>        WORKFLOW_COMPLETE = "workflow.complete"</p>
 <br>
-<br>
-<br>
 <p>    @dataclass</p>
 <br>
 <p>    class Event:</p>
@@ -355,8 +284,6 @@
 <br>
 <p>        timestamp: float = None</p>
 <br>
-<br>
-<br>
 <p>    class EventBus:</p>
 <br>
 <p>        def __init__(self):</p>
@@ -365,8 +292,6 @@
 <br>
 <p>            self.event_log: list[Event] = []</p>
 <br>
-<br>
-<br>
 <p>        def subscribe(self, event_type: EventType, handler: callable):</p>
 <br>
 <p>            if event_type not in self.subscribers:</p>
@@ -374,8 +299,6 @@
 <p>                self.subscribers[event_type] = []</p>
 <br>
 <p>            self.subscribers[event_type].append(handler)</p>
-<br>
-<br>
 <br>
 <p>        async def emit(self, event: Event):</p>
 <br>
@@ -393,8 +316,6 @@
 <br>
 <p>            return results</p>
 <br>
-<br>
-<br>
 <p>    # Event-driven document processing pipeline</p>
 <br>
 <p>    class DocumentProcessingPipeline:</p>
@@ -405,8 +326,6 @@
 <br>
 <p>            self._register_handlers()</p>
 <br>
-<br>
-<br>
 <p>        def _register_handlers(self):</p>
 <br>
 <p>            self.bus.subscribe(EventType.DOCUMENT_UPLOADED, self.handle_document)</p>
@@ -414,8 +333,6 @@
 <p>            self.bus.subscribe(EventType.ANALYSIS_COMPLETE, self.handle_analysis)</p>
 <br>
 <p>            self.bus.subscribe(EventType.QUERY_RECEIVED, self.handle_query)</p>
-<br>
-<br>
 <br>
 <p>        async def handle_document(self, event: Event):</p>
 <br>
@@ -429,8 +346,6 @@
 <br>
 <p>            store_embeddings(embeddings)</p>
 <br>
-<br>
-<br>
 <p>            await self.bus.emit(Event(</p>
 <br>
 <p>                type=EventType.ANALYSIS_COMPLETE,</p>
@@ -441,8 +356,6 @@
 <br>
 <p>            ))</p>
 <br>
-<br>
-<br>
 <p>        async def handle_query(self, event: Event):</p>
 <br>
 <p>            query = event.data["query"]</p>
@@ -450,8 +363,6 @@
 <p>            docs = vector_search(query)</p>
 <br>
 <p>            answer = call_llm(f"Context: {docs}\nQuery: {query}")</p>
-<br>
-<br>
 <br>
 <p>            await self.bus.emit(Event(</p>
 <br>
@@ -463,25 +374,11 @@
 <br>
 <p>            ))</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Error Recovery and Retry</h2>
-<br>
-<br>
-<br>
 <br>
 <p>All workflows need robust error handling:</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    from tenacity import retry, stop_after_attempt, wait_exponential</p>
-<br>
-<br>
 <br>
 <p>    class WorkflowExecutor:</p>
 <br>
@@ -523,15 +420,7 @@
 <br>
 <p>                raise</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>AI workflow automation requires reliability guarantees beyond simple scripting. LangChain provides the LLM orchestration layer with composable chains. Temporal adds durability with automatic retries, state persistence, and human-in-the-loop capabilities. Event-driven architectures enable loosely coupled, scalable pipelines. For production systems, combine all three: use LangChain for LLM logic within Temporal activities, and wire everything together with an event bus for scalability.</p></div>
     </article>

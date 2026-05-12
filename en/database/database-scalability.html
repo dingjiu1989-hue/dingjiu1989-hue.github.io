@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-scalability.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Scalability">
     <meta name="twitter:description" content="Strategies for database scalability: vertical scaling, horizontal scaling, read replicas, and caching.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-scalability.png">
     <title>Database Scalability — SourceHub</title>
     <meta name="description" content="Strategies for database scalability: vertical scaling, horizontal scaling, read replicas, and caching.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Scalability",
       "description": "Strategies for database scalability: vertical scaling, horizontal scaling, read replicas, and caching.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-scalability.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "584",
+      "wordCount": "553",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Scalability</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-scalability.png" alt="Database Scalability" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Scalability</h1>
 <br>
 <p>Scalability Options   </p>
 <p>Database scalability options range from simple to complex. Start with the simplest approach and evolve.   </p>
 <p>Vertical Scaling   </p>
 <p>Upgrade to a larger server with more CPU, RAM, and storage.   </p>
-<br>
-<br>
 <br>
 <p>    # AWS RDS instance upgrade</p>
 <br>
@@ -94,14 +93,9 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Simple but has a cost ceiling and hardware limits.   </p>
 <p>Read Replicas   </p>
 <p>Offload read traffic to replicas:   </p>
-<br>
-<br>
 <br>
 <p>    class DatabaseRouter:</p>
 <br>
@@ -111,8 +105,6 @@
 <br>
 <p>            self.replicas = replicas</p>
 <br>
-<br>
-<br>
 <p>        def get_conn(self, write=False):</p>
 <br>
 <p>            if write:</p>
@@ -121,22 +113,15 @@
 <br>
 <p>            return random.choice(self.replicas)</p>
 <br>
-<br>
-<br>
 <p>    # Route reads to replicas, writes to primary</p>
 <br>
 <p>    db_router.get_conn(write=True).execute("INSERT INTO ...")</p>
 <br>
 <p>    results = db_router.get_conn(write=False).execute("SELECT ...")</p>
 <br>
-<br>
-<br>
-<br>
 <p>Effective for read-heavy workloads. Does not help with write scaling.   </p>
 <p>Caching   </p>
 <p>Reduce database load with in-memory caching:   </p>
-<br>
-<br>
 <br>
 <p>    def get_user(user_id):</p>
 <br>
@@ -150,13 +135,8 @@
 <br>
 <p>        return user</p>
 <br>
-<br>
-<br>
-<br>
 <p>Horizontal Scaling (Sharding)   </p>
 <p>Distribute data across multiple database servers:   </p>
-<br>
-<br>
 <br>
 <p>    class ShardManager:</p>
 <br>
@@ -164,19 +144,12 @@
 <br>
 <p>            self.shards = shards</p>
 <br>
-<br>
-<br>
 <p>        def get_shard(self, customer_id):</p>
 <br>
 <p>            return self.shards[hash(customer_id) % len(self.shards)]</p>
 <br>
-<br>
-<br>
-<br>
 <p>Most complex. Use tools like Vitess, Citus, or CockroachDB.   </p>
 <p>Scaling Decision Tree   </p>
-<br>
-<br>
 <br>
 <p>    Is DB overloaded?</p>
 <br>
@@ -189,9 +162,6 @@
 <p>    │   └── Cache insufficient? → Shard</p>
 <br>
 <p>    └── Both? → Scale vertically first, then shard</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Scale vertically first (simple). Add read replicas for read loads. Add caching for repeated queries. Shard only when necessary. Monitor your bottleneck before choosing a strategy. Most applications never need sharding.</p></div>

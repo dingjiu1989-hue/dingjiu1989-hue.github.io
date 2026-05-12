@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/helm-security.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Helm Security">
     <meta name="twitter:description" content="Securing Helm deployments with chart signing, provenance verification, secrets management, and best practices.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/helm-security.png">
     <title>Helm Security — SourceHub</title>
     <meta name="description" content="Securing Helm deployments with chart signing, provenance verification, secrets management, and best practices.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Helm Security",
       "description": "Securing Helm deployments with chart signing, provenance verification, secrets management, and best practices.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/helm-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1131",
+      "wordCount": "1080",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Helm Security</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/helm-security.png" alt="Helm Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Helm Security</h1>
 <br>
 <p>Helm Security Challenges   </p>
@@ -82,15 +83,11 @@
 <p>Chart Signing   </p>
 <p>Sign charts with GPG to verify authenticity:   </p>
 <br>
-<br>
-<br>
 <p>    # Generate signing key</p>
 <br>
 <p>    gpg --full-generate-key</p>
 <br>
 <p>    gpg --list-secret-keys</p>
-<br>
-<br>
 <br>
 <p>    # Sign a chart</p>
 <br>
@@ -98,13 +95,9 @@
 <br>
 <p>    helm sign mychart-1.0.0.tgz --key "developer@example.com"</p>
 <br>
-<br>
-<br>
 <p>    # Verify a chart</p>
 <br>
 <p>    helm verify mychart-1.0.0.tgz</p>
-<br>
-<br>
 <br>
 <p>    # With custom public key</p>
 <br>
@@ -112,13 +105,8 @@
 <br>
 <p>    helm verify mychart-1.0.0.tgz --keyring pubkey.asc</p>
 <br>
-<br>
-<br>
-<br>
 <p>Provenance Files   </p>
 <p>Provenance files contain the chart hash and signature:   </p>
-<br>
-<br>
 <br>
 <p>    # mychart-1.0.0.tgz.prov</p>
 <br>
@@ -140,12 +128,7 @@
 <br>
 <p>      -----END PGP SIGNATURE-----</p>
 <br>
-<br>
-<br>
-<br>
 <p>Automated Verification in CI   </p>
-<br>
-<br>
 <br>
 <p>    # CI pipeline chart verification</p>
 <br>
@@ -159,8 +142,6 @@
 <br>
 <p>          - gpg --import trusted-keys.asc</p>
 <br>
-<br>
-<br>
 <p>          # Verify all charts</p>
 <br>
 <p>          - for chart in charts/*.tgz; do</p>
@@ -169,31 +150,20 @@
 <br>
 <p>            done</p>
 <br>
-<br>
-<br>
 <p>          # Scan for vulnerabilities</p>
 <br>
 <p>          - trivy fs charts/</p>
-<br>
-<br>
 <br>
 <p>          # Lint charts</p>
 <br>
 <p>          - helm lint charts/*</p>
 <br>
-<br>
-<br>
 <p>          # Check for deprecated APIs</p>
 <br>
 <p>          - pluto detect-files -d charts/</p>
 <br>
-<br>
-<br>
-<br>
 <p>Secrets Management   </p>
 <p>Never store secrets in values files:   </p>
-<br>
-<br>
 <br>
 <p>    # BAD: Secrets in values</p>
 <br>
@@ -201,20 +171,13 @@
 <br>
 <p>    dbPassword: "password123"</p>
 <br>
-<br>
-<br>
 <p>    # GOOD: Reference external secret</p>
 <br>
 <p>    apiKey: "{{ .Values.externalSecrets.apiKey }}"</p>
 <br>
 <p>    dbPassword: "{{ .Values.externalSecrets.dbPassword }}"</p>
 <br>
-<br>
-<br>
-<br>
 <p>Use external secrets operator:   </p>
-<br>
-<br>
 <br>
 <p>    apiVersion: external-secrets.io/v1beta1</p>
 <br>
@@ -256,13 +219,8 @@
 <br>
 <p>          property: db-password</p>
 <br>
-<br>
-<br>
-<br>
 <p>Values Security   </p>
 <p>Validate values with JSON Schema:   </p>
-<br>
-<br>
 <br>
 <p>    {</p>
 <br>
@@ -316,12 +274,7 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>RBAC for Helm Operations   </p>
-<br>
-<br>
 <br>
 <p>    apiVersion: rbac.authorization.k8s.io/v1</p>
 <br>
@@ -350,9 +303,6 @@
 <p>      resources: ["jobs"]</p>
 <br>
 <p>      verbs: ["get", "create", "delete"]</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Secure Helm deployments with chart signing and provenance verification. Use external secrets management instead of storing secrets in values files. Validate values with JSON Schema. Restrict Helm RBAC to specific operations. Scan charts for vulnerabilities before deployment. Always verify chart signatures from third-party repositories.</p></div>

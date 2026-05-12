@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-api-design.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits">
     <meta name="twitter:description" content="Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handling patterns, and rate limiting strategies for production sys">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-api-design.png">
     <title>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits — SourceHub</title>
     <meta name="description" content="Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handling patterns, and rate limiting strategies for production sys">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits",
       "description": "Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handling patterns, and rate limiting strategies for production sys",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-api-design.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1714",
+      "wordCount": "1610",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,28 +75,16 @@
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-api-design.png" alt="LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Designing APIs that wrap large language models requires handling concerns that traditional REST APIs do not face: streaming token-by-token responses, enforcing structured output schemas, managing unpredictable latency, and protecting against runaway costs. This guide covers the four critical pillars of LLM API design with production-ready patterns.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Streaming Responses</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Streaming is the standard way to return LLM outputs. Instead of waiting for the full response, the client receives tokens as they are generated:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from fastapi import FastAPI, Request</p>
 <br>
@@ -106,13 +94,9 @@
 <br>
 <p>    import asyncio</p>
 <br>
-<br>
-<br>
 <p>    app = FastAPI()</p>
 <br>
 <p>    client = AsyncAnthropic(api_key="sk-ant-...")</p>
-<br>
-<br>
 <br>
 <p>    async def generate_stream(prompt: str):</p>
 <br>
@@ -131,8 +115,6 @@
 <p>                if chunk.type == "content_block_delta":</p>
 <br>
 <p>                    yield f"data: {chunk.delta.text}\n\n"</p>
-<br>
-<br>
 <br>
 <p>    @app.post("/chat")</p>
 <br>
@@ -158,36 +140,17 @@
 <br>
 <p>        )</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>The Server-Sent Events protocol is the most compatible streaming format. Each `data:` line is a new token chunk. Clients use `EventSource` or fetch with `ReadableStream` to consume the stream progressively.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Structured Output</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Raw LLM text is unreliable for programmatic consumption. Use structured output modes to enforce JSON schemas:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from pydantic import BaseModel</p>
 <br>
 <p>    from openai import OpenAI</p>
 <br>
-<br>
-<br>
 <p>    client = OpenAI()</p>
-<br>
-<br>
 <br>
 <p>    class ExtractedEntity(BaseModel):</p>
 <br>
@@ -199,8 +162,6 @@
 <br>
 <p>        source_text: str</p>
 <br>
-<br>
-<br>
 <p>    class ExtractionResult(BaseModel):</p>
 <br>
 <p>        entities: list[ExtractedEntity]</p>
@@ -208,8 +169,6 @@
 <p>        summary: str</p>
 <br>
 <p>        language: str</p>
-<br>
-<br>
 <br>
 <p>    response = client.beta.chat.completions.parse(</p>
 <br>
@@ -227,26 +186,13 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    result: ExtractionResult = response.choices[0].message.parsed</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>When the API does not support native structured output, use a two-step approach: request JSON in the prompt, then validate and re-request on failure:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    import json</p>
 <br>
 <p>    from pydantic import ValidationError</p>
-<br>
-<br>
 <br>
 <p>    def safe_structured_generate(prompt: str, schema: type[BaseModel], max_retries=3):</p>
 <br>
@@ -270,35 +216,19 @@
 <br>
 <p>        return None</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Error Handling</h2>
 <br>
-<br>
-<br>
-<br>
 <p>LLM APIs fail in distinctive ways. Build a retry strategy around each failure mode:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    import time</p>
 <br>
 <p>    from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type</p>
-<br>
-<br>
 <br>
 <p>    class RateLimitError(Exception): pass</p>
 <br>
 <p>    class ContextWindowExceeded(Exception): pass</p>
 <br>
 <p>    class ContentFilterError(Exception): pass</p>
-<br>
-<br>
 <br>
 <p>    @retry(</p>
 <br>
@@ -338,34 +268,17 @@
 <br>
 <p>            raise</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Each error type deserves a different handler: rate limits get exponential backoff, context windows trigger input truncation, and content filter errors should be logged and escalated.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Rate Limiting</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Protect your API from abuse and cost spikes with layered rate limiting:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from fastapi import HTTPException</p>
 <br>
 <p>    import time</p>
 <br>
 <p>    from collections import defaultdict</p>
-<br>
-<br>
 <br>
 <p>    class RateLimiter:</p>
 <br>
@@ -381,8 +294,6 @@
 <br>
 <p>            self.user_usage = defaultdict(float)</p>
 <br>
-<br>
-<br>
 <p>        async def check(self, user_id: str, estimated_tokens: int):</p>
 <br>
 <p>            cost = estimated_tokens * self.cost_per_token</p>
@@ -393,17 +304,11 @@
 <br>
 <p>            self.user_usage[user_id] += cost</p>
 <br>
-<br>
-<br>
 <p>        def get_usage(self, user_id: str) -> dict:</p>
 <br>
 <p>            return {"cost": self.user_usage[user_id], "budget": self.daily_budget}</p>
 <br>
-<br>
-<br>
 <p>    rate_limiter = RateLimiter()</p>
-<br>
-<br>
 <br>
 <p>    @app.post("/chat")</p>
 <br>
@@ -419,15 +324,7 @@
 <br>
 <p>        return await generate_response(body["prompt"])</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Designing LLM APIs requires balancing responsiveness with cost control. Stream responses for user experience, enforce structured output for programmatic reliability, implement retry logic calibrated to each error type, and gate access with rate and budget limits. These four patterns form the foundation of any production LLM service.</p></div>
     </article>

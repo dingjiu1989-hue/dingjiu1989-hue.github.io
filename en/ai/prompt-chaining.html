@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/prompt-chaining.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Prompt Chaining: Decomposition, Parallel Execution, State Management">
     <meta name="twitter:description" content="Master prompt chaining techniques: decompose complex tasks into steps, execute chains in parallel, manage state across calls, and handle errors gracefully.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/prompt-chaining.png">
     <title>Prompt Chaining: Decomposition, Parallel Execution, State Management — SourceHub</title>
     <meta name="description" content="Master prompt chaining techniques: decompose complex tasks into steps, execute chains in parallel, manage state across calls, and handle errors gracefully.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Prompt Chaining: Decomposition, Parallel Execution, State Management",
       "description": "Master prompt chaining techniques: decompose complex tasks into steps, execute chains in parallel, manage state across calls, and handle errors gracefully.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/prompt-chaining.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1654",
+      "wordCount": "1556",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,28 +75,16 @@
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">Prompt Chaining: Decomposition, Parallel Execution, State Management</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/prompt-chaining.png" alt="Prompt Chaining: Decomposition, Parallel Execution, State Management" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Prompt Chaining: Decomposition, Parallel Execution, State Management</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Prompt chaining connects multiple LLM calls into pipelines where each step refines, validates, or transforms the output of the previous one. This pattern is essential for tasks too complex for a single prompt: multi-page document generation, multi-step analysis, and workflows requiring both creativity and precision. This article covers decomposition strategies, parallel execution, and state management across chain steps.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Task Decomposition</h2>
 <br>
-<br>
-<br>
-<br>
 <p>The first step in prompt chaining is breaking a complex task into discrete, independently verifiable steps:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    def decompose_task(complex_request: str) -> list[dict]:</p>
 <br>
@@ -114,15 +102,9 @@
 <br>
 <p>        - validation_criteria: how to verify correctness</p>
 <br>
-<br>
-<br>
 <p>        Request: """ + complex_request)</p>
 <br>
-<br>
-<br>
 <p>        return parse_steps(plan)</p>
-<br>
-<br>
 <br>
 <p>    # Example decomposition for "write a product page"</p>
 <br>
@@ -140,26 +122,11 @@
 <br>
 <p>    ]</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Each step has a narrow focus. Narrow prompts produce more reliable outputs than monolithic ones because the model can concentrate its attention on one objective at a time.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Sequential Chain Execution</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Once decomposed, execute steps in order, passing outputs as inputs:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class ChainStep:</p>
 <br>
@@ -171,15 +138,11 @@
 <br>
 <p>            self.inputs = inputs</p>
 <br>
-<br>
-<br>
 <p>    class SequentialChain:</p>
 <br>
 <p>        def __init__(self, steps: list[ChainStep]):</p>
 <br>
 <p>            self.steps = steps</p>
-<br>
-<br>
 <br>
 <p>        async def execute(self, initial_inputs: dict) -> dict:</p>
 <br>
@@ -199,8 +162,6 @@
 <br>
 <p>            return state</p>
 <br>
-<br>
-<br>
 <p>        async def validate_step(self, step: ChainStep, output: str):</p>
 <br>
 <p>            validation = call_llm(f"Validate this {step.name} output: {output}")</p>
@@ -209,25 +170,11 @@
 <br>
 <p>                raise ChainValidationError(f"Step {step.name} failed validation: {validation}")</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Parallel Execution</h2>
-<br>
-<br>
-<br>
 <br>
 <p>When steps are independent, execute them concurrently to reduce wall-clock time:</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    import asyncio</p>
-<br>
-<br>
 <br>
 <p>    async def parallel_chain(initial_inputs: dict, parallel_groups: list[list[ChainStep]]):</p>
 <br>
@@ -253,8 +200,6 @@
 <br>
 <p>        return state</p>
 <br>
-<br>
-<br>
 <p>    # Example: generate three sections of a report simultaneously</p>
 <br>
 <p>    parallel_groups = [</p>
@@ -277,27 +222,13 @@
 <br>
 <p>    ]</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  State Management</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Chains accumulate state as they execute. A formal state machine approach prevents data loss and enables error recovery:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from dataclasses import dataclass, field</p>
 <br>
 <p>    from typing import Any, Optional</p>
-<br>
-<br>
 <br>
 <p>    @dataclass</p>
 <br>
@@ -311,27 +242,19 @@
 <br>
 <p>        metadata: dict[str, Any] = field(default_factory=dict)</p>
 <br>
-<br>
-<br>
 <p>        def set_output(self, step: str, value: Any):</p>
 <br>
 <p>            self.outputs[step] = value</p>
 <br>
 <p>            self.metadata[f"{step}_completed_at"] = time.time()</p>
 <br>
-<br>
-<br>
 <p>        def get(self, key: str) -> Optional[Any]:</p>
 <br>
 <p>            return self.outputs.get(key) or self.inputs.get(key)</p>
 <br>
-<br>
-<br>
 <p>        def snapshot(self) -> dict:</p>
 <br>
 <p>            return {"outputs": self.outputs, "errors": self.errors}</p>
-<br>
-<br>
 <br>
 <p>        def restore(self, snapshot: dict):</p>
 <br>
@@ -339,21 +262,9 @@
 <br>
 <p>            self.errors.update(snapshot.get("errors", {}))</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Error Recovery Chains</h2>
 <br>
-<br>
-<br>
-<br>
 <p>When a step fails, the chain should attempt recovery rather than aborting entirely:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    async def execute_with_recovery(step: ChainStep, state: ChainState, max_retries=2):</p>
 <br>
@@ -383,15 +294,7 @@
 <br>
 <p>                state.metadata[f"{step.name}_retry_{attempt}"] = str(e)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Prompt chaining transforms unreliable single-shot generation into reliable multi-step pipelines. Decompose complex tasks into narrow steps, execute independent steps in parallel, maintain state explicitly, and implement recovery logic for each failure mode. The result is LLM-powered workflows that match the reliability of traditional software pipelines.</p></div>
     </article>

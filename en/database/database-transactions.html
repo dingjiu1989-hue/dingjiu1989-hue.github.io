@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-transactions.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints">
     <meta name="twitter:description" content="Master database transactions with a deep dive into ACID properties, isolation levels, nested transactions, savepoints, and PostgreSQL-specific transaction semantics.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-transactions.png">
     <title>Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints — SourceHub</title>
     <meta name="description" content="Master database transactions with a deep dive into ACID properties, isolation levels, nested transactions, savepoints, and PostgreSQL-specific transaction semantics.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints",
       "description": "Master database transactions with a deep dive into ACID properties, isolation levels, nested transactions, savepoints, and PostgreSQL-specific transaction semantics.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-transactions.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1507",
+      "wordCount": "1445",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-transactions.png" alt="Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</h1>
 <br>
 <p>Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints   </p>
@@ -82,8 +83,6 @@
 <p>ACID in Practice   </p>
 <p>ACID stands for Atomicity, Consistency, Isolation, Durability. Each property maps to concrete database behavior.   </p>
 <p>**Atomicity**: All operations within a transaction succeed or none do. In PostgreSQL, atomicity is guaranteed by the write-ahead log (WAL). If the server crashes mid-transaction, the WAL replay applies only committed transactions and discards partial ones.   </p>
-<br>
-<br>
 <br>
 <p>    BEGIN;</p>
 <br>
@@ -93,21 +92,13 @@
 <br>
 <p>    COMMIT; -- Both succeed, or neither does</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Consistency**: A transaction brings the database from one valid state to another. Constraints, triggers, and foreign keys enforce consistency rules automatically.   </p>
-<br>
-<br>
 <br>
 <p>    ALTER TABLE accounts ADD CONSTRAINT positive_balance</p>
 <br>
 <p>        CHECK (balance >= 0);</p>
 <br>
 <p>    -- Any transaction that would violate this constraint is rolled back</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Isolation**: Concurrent transactions should not interfere. PostgreSQL implements four isolation levels to control how much concurrency is allowed.   </p>
 <p>**Durability**: Once `COMMIT` returns, the data is safe. PostgreSQL writes transaction commit records to the WAL and forces a `fsync()` before returning success.   </p>
@@ -116,21 +107,15 @@
 <p>Read Committed (Default)   </p>
 <p>Each statement in the transaction sees a snapshot of rows committed before the statement began. Two `SELECT` statements in the same transaction can see different data.   </p>
 <br>
-<br>
-<br>
 <p>    -- Session 1</p>
 <br>
 <p>    BEGIN;</p>
 <br>
 <p>    SELECT balance FROM accounts WHERE id = 1; -- returns 1000</p>
 <br>
-<br>
-<br>
 <p>    -- Session 2 concurrently:</p>
 <br>
 <p>    UPDATE accounts SET balance = 500 WHERE id = 1; COMMIT;</p>
-<br>
-<br>
 <br>
 <p>    -- Session 1 continues:</p>
 <br>
@@ -138,19 +123,12 @@
 <br>
 <p>    COMMIT;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Repeatable Read   </p>
 <p>The transaction sees a snapshot taken when the first query or data-modification statement executes. Subsequent reads return the same data, even if concurrent transactions commit changes.   </p>
-<br>
-<br>
 <br>
 <p>    BEGIN ISOLATION LEVEL REPEATABLE READ;</p>
 <br>
 <p>    SELECT balance FROM accounts WHERE id = 1; -- returns 1000</p>
-<br>
-<br>
 <br>
 <p>    -- Session 2 updates and commits</p>
 <br>
@@ -166,13 +144,8 @@
 <br>
 <p>    COMMIT;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Serializable   </p>
 <p>The strictest level. PostgreSQL detects serialization anomalies and enforces true serial execution behavior. Queries may fail with serialization errors that require retries.   </p>
-<br>
-<br>
 <br>
 <p>    BEGIN ISOLATION LEVEL SERIALIZABLE;</p>
 <br>
@@ -180,36 +153,23 @@
 <br>
 <p>    COMMIT;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Serializable transactions incur overhead from predicate locking. Use it only when correctness requirements truly require it (e.g., financial systems with complex cross-row invariants).   </p>
 <p>Nested Transactions and Savepoints   </p>
 <p>PostgreSQL does not support true nested transactions (subtransactions that can commit independently of the parent). Instead, it offers **savepoints**:   </p>
-<br>
-<br>
 <br>
 <p>    BEGIN;</p>
 <br>
 <p>    INSERT INTO orders (user_id, total) VALUES (1, 100);</p>
 <br>
-<br>
-<br>
 <p>    SAVEPOINT order_inserted;</p>
-<br>
-<br>
 <br>
 <p>    INSERT INTO order_items (order_id, product_id, quantity)</p>
 <br>
 <p>    VALUES (currval('orders_id_seq'), 42, 1);</p>
 <br>
-<br>
-<br>
 <p>    -- Something went wrong with the item</p>
 <br>
 <p>    ROLLBACK TO SAVEPOINT order_inserted;</p>
-<br>
-<br>
 <br>
 <p>    -- Try a different item</p>
 <br>
@@ -217,17 +177,10 @@
 <br>
 <p>    VALUES (currval('orders_id_seq'), 99, 2);</p>
 <br>
-<br>
-<br>
 <p>    COMMIT; -- Only the second order_item is kept</p>
-<br>
-<br>
-<br>
 <br>
 <p>Savepoints let you abort part of a transaction without aborting the whole thing. They are useful in batch processing, ETL pipelines, and complex workflows where partial failures must be isolated.   </p>
 <p>The general structure for safe savepoint use:   </p>
-<br>
-<br>
 <br>
 <p>    BEGIN;</p>
 <br>
@@ -251,13 +204,8 @@
 <br>
 <p>    COMMIT;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Transaction IDs and Wraparound   </p>
 <p>PostgreSQL assigns a 32-bit transaction ID (XID) to each transaction. With roughly 4 billion IDs available, a busy system could exhaust them. This is called **transaction ID wraparound**.   </p>
-<br>
-<br>
 <br>
 <p>    -- Check for wraparound risk</p>
 <br>
@@ -269,9 +217,6 @@
 <br>
 <p>    ORDER BY xid_age DESC;</p>
 <br>
-<br>
-<br>
-<br>
 <p>When a table's `age` approaches 2 billion, PostgreSQL runs aggressive autovacuum. If that process falls behind, the database shuts down to prevent data loss. Monitoring XID age is an essential operational task.   </p>
 <p>Best Practices   </p>
 <br>
@@ -282,9 +227,6 @@
 <p>* **Use `COMMIT AND CHAIN`** to avoid re-declaring isolation level on successive transactions.</p>
 <p>* **Monitor long-running transactions** via `pg_stat_activity`:</p>
 <br>
-<br>
-<br>
-<br>
 <p>    SELECT pid, NOW() - xact_start AS duration, state, query</p>
 <br>
 <p>    FROM pg_stat_activity</p>
@@ -294,9 +236,6 @@
 <p>      AND xact_start IS NOT NULL</p>
 <br>
 <p>    ORDER BY duration DESC;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Transactions are not just a SQL feature; they are a correctness contract between your application and the database. Understanding isolation levels and their performance implications is essential for building reliable, concurrent systems.</p></div>
     </article>

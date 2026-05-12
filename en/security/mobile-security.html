@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/mobile-security.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Mobile Application Security Guide">
     <meta name="twitter:description" content="Mobile app security covering OWASP Mobile Top 10, code obfuscation, certificate pinning, secure storage, and runtime protection.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/mobile-security.png">
     <title>Mobile Application Security Guide — SourceHub</title>
     <meta name="description" content="Mobile app security covering OWASP Mobile Top 10, code obfuscation, certificate pinning, secure storage, and runtime protection.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Mobile Application Security Guide",
       "description": "Mobile app security covering OWASP Mobile Top 10, code obfuscation, certificate pinning, secure storage, and runtime protection.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/mobile-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2584",
+      "wordCount": "2403",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,21 +74,14 @@
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">Mobile Application Security Guide</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/mobile-security.png" alt="Mobile Application Security Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Mobile Application Security Guide</h1>
 <br>
 <p>Mobile applications handle sensitive data and run in untrusted environments. Users download apps from various sources, connect to public Wi-Fi, and often jailbreak or root their devices. This guide covers the key security practices for mobile application development, based on the OWASP Mobile Top 10 and industry best practices.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  OWASP Mobile Top 10</h2>
 <br>
-<br>
-<br>
-<br>
 <p>The OWASP Mobile Top 10 is the authoritative list of mobile security risks. Understanding these risks is the first step toward mitigating them.</p>
-<br>
-<br>
 <br>
 <p>* **Improper Platform Usage**: Misuse of mobile platform features, such as intents, custom URL schemes, or fingerprint APIs.</p>
 <br>
@@ -110,29 +103,13 @@
 <br>
 <p>10\. **Extraneous Functionality**: Hidden backdoors, debug endpoints, or test code left in production builds.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Code Obfuscation</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Mobile apps are distributed as binaries that run on user devices. Without protection, attackers can decompile the app and analyze its logic.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Android Obfuscation with ProGuard / R8</h3>
 <br>
-<br>
-<br>
-<br>
 <p>ProGuard and R8 shrink, optimize, and obfuscate Android bytecode. They rename classes, methods, and fields to meaningless names and remove unused code.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // build.gradle (app level)</p>
 <br>
@@ -156,19 +133,11 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # proguard-rules.pro</p>
 <br>
 <p>    # Keep model classes used by Gson serialization</p>
 <br>
 <p>    -keep class com.example.app.model.** { *; }</p>
-<br>
-<br>
 <br>
 <p>    # Keep logging in debug but strip in release</p>
 <br>
@@ -182,27 +151,14 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>iOS Obfuscation</h3>
 <br>
-<br>
-<br>
-<br>
 <p>iOS apps are harder to reverse engineer than Android APKs due to the compiled ARM binary, but they are not immune. Use these techniques:</p>
-<br>
-<br>
 <br>
 <p>* Strip debug symbols with the `strip` command during build.</p>
 <p>* Enable compiler optimizations (`-O2` or `-Os`).</p>
 <p>* Use LLVM obfuscator passes or commercial tools like iXGuard.</p>
 <p>* Encrypt string literals at compile time.</p>
-<br>
-<br>
-<br>
 <br>
 <p>    // String encryption helper</p>
 <br>
@@ -212,8 +168,6 @@
 <br>
 <p>        private let key: UInt8</p>
 <br>
-<br>
-<br>
 <p>        func decrypt() -> String {</p>
 <br>
 <p>            return String(bytes: encrypted.map { $0 ^ key }, encoding: .utf8) ?? ""</p>
@@ -221,8 +175,6 @@
 <p>        }</p>
 <br>
 <p>    }</p>
-<br>
-<br>
 <br>
 <p>    // Usage</p>
 <br>
@@ -234,41 +186,17 @@
 <br>
 <p>    ).decrypt()</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Certificate Pinning</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Mobile apps must protect against man-in-the-middle (MITM) attacks, even when the device trusts a rogue CA due to malware or user action.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>What Certificate Pinning Does</h3>
-<br>
-<br>
-<br>
 <br>
 <p>Certificate pinning hardcodes the expected server certificate or public key in the app. The app rejects any connection where the server presents a different certificate, even if it chains to a trusted root CA.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Implementation</h3>
 <br>
-<br>
-<br>
-<br>
 <p>**Android (OkHttp)**:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // Certificate pinning with OkHttp</p>
 <br>
@@ -280,24 +208,13 @@
 <br>
 <p>        .build()</p>
 <br>
-<br>
-<br>
 <p>    val client = OkHttpClient.Builder()</p>
 <br>
 <p>        .certificatePinner(certificatePinner)</p>
 <br>
 <p>        .build()</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**iOS (URLSession)**:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // Certificate pinning in URLSession delegate</p>
 <br>
@@ -316,8 +233,6 @@
 <p>            return</p>
 <br>
 <p>        }</p>
-<br>
-<br>
 <br>
 <p>        // Compare server certificate with pinned certificate</p>
 <br>
@@ -341,42 +256,20 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Pinning Update Strategy</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Certificate pinning breaks when you rotate certificates. Plan for updates:</p>
-<br>
-<br>
 <br>
 <p>* Pin against the public key, not the full certificate. This allows CA re-issuance with the same key.</p>
 <p>* Include a backup pin for a second CA in case the primary certificate expires.</p>
 <p>* Push new pins through app updates well before certificate expiry.</p>
 <p>* Consider using certificate transparency instead of pinning for some environments.</p>
 <br>
-<br>
-<br>
 <h2>  Secure Storage</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Mobile OS platforms provide secure storage mechanisms that encrypt data at rest.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Android Encrypted SharedPreferences</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // Using EncryptedSharedPreferences</p>
 <br>
@@ -385,8 +278,6 @@
 <p>        .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)</p>
 <br>
 <p>        .build()</p>
-<br>
-<br>
 <br>
 <p>    val sharedPreferences = EncryptedSharedPreferences.create(</p>
 <br>
@@ -402,29 +293,15 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    sharedPreferences.edit()</p>
 <br>
 <p>        .putString("auth_token", token)</p>
 <br>
 <p>        .apply()</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Android Keystore</h3>
 <br>
-<br>
-<br>
-<br>
 <p>The Android Keystore stores cryptographic keys in a hardware-backed environment (TEE or StrongBox). Extracting the key requires physical device access and specialized tools.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // Generate a key in Android Keystore</p>
 <br>
@@ -452,27 +329,13 @@
 <br>
 <p>        .build()</p>
 <br>
-<br>
-<br>
 <p>    keyGenerator.init(spec)</p>
 <br>
 <p>    val secretKey = keyGenerator.generateKey()</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>iOS Keychain</h3>
 <br>
-<br>
-<br>
-<br>
 <p>iOS Keychain is the secure storage mechanism on Apple devices. It encrypts data using device-specific keys that never leave the Secure Enclave.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // Store data in Keychain</p>
 <br>
@@ -502,26 +365,11 @@
 <br>
 <p>    SecItemAdd(query as CFDictionary, nil)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Runtime Protection</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Runtime protection defends against tampering while the app is running.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Root/Jailbreak Detection</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // Android root detection</p>
 <br>
@@ -553,12 +401,6 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    // iOS jailbreak detection</p>
 <br>
 <p>    func isDeviceJailbroken() -> Bool {</p>
@@ -583,21 +425,9 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Never terminate the app immediately on detecting a compromised device. This gives attackers a signal to bypass your detection. Instead, degrade functionality silently or report the event to your backend.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Debugger Detection</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // iOS debugger detection</p>
 <br>
@@ -609,23 +439,13 @@
 <br>
 <p>        var infoSize = MemoryLayout<kinfo_proc>.size</p>
 <br>
-<br>
-<br>
 <p>        sysctl(&name, 4, &info, &infoSize, nil, 0)</p>
 <br>
 <p>        return (info.kp_proc.p_flag & P_TRACED) != 0</p>
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Mobile security requires defense in depth. Obfuscate your code to slow down reverse engineering. Pin certificates to prevent MITM attacks. Use platform-provided secure storage for sensitive data. Add runtime protection against root/jailbreak and debugging. Most importantly, follow the OWASP Mobile Top 10 as your baseline and validate controls with regular penetration testing.</p></div>
     </article>

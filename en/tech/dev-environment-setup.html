@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/dev-environment-setup.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Developer Environment Setup Guide">
     <meta name="twitter:description" content="Comprehensive guide to setting up a productive developer environment with tools, configuration, and automation.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/dev-environment-setup.png">
     <title>Developer Environment Setup Guide — SourceHub</title>
     <meta name="description" content="Comprehensive guide to setting up a productive developer environment with tools, configuration, and automation.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,15 +38,15 @@
       "@type": "Article",
       "headline": "Developer Environment Setup Guide",
       "description": "Comprehensive guide to setting up a productive developer environment with tools, configuration, and automation.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/dev-environment-setup.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1846",
+      "wordCount": "1558",
       "keywords": "Technology, Programming, DevOps",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/dev-environment-setup.html"},
-      "articleBody": "Developer Environment Setup Guide A well-configured developer environment is the foundation of productivity. Investing time in setting up your shell, editor, and tooling pays dividends every single day. This guide covers a complete development environment setup that works across platforms. Operating System Choice Choose an operating system that supports the tools you need: * **macOS**: Excellent developer experience, Unix-based terminal, Homebrew package manager. Preferred for iOS/macOS development. * **Linux (Ubuntu/Debian/Fedora)**: Native Docker performance, full control over the system. Preferred for server-side and Linux-targeted development. * **Windows with WSL2**: Windows Subsystem for Linux 2 provides a Linux kernel inside Windows. Run Linux tools natively while using Windows applications. For most developers, macOS or WSL2 on Windows provides the best balance of tooling and usability. Shell Configuration Modern shells improve daily productivity. Zsh with Oh My Zsh is the standard: # Install Zsh and Oh My Zsh sudo apt install zsh -y sh -c \"$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\" Essential Zsh plugins: # ~/.zshrc plugins=( git docker docker-compose npm node history colored-man-pages zsh-autosuggestions zsh-syntax-highlighting command-not-found ) For power users, consider Fish shell for autosuggestions out of the box, or Nushell for structured data pipelines. Git Configuration Set up a robust Git configuration: git config --global user.name \"Your Name\" git config --global user.email \"your@email.com\" git config --global init.defaultBranch main git config --global pull.rebase true git config --global fetch.prune true git config --global diff.colorMoved zebra git config --global alias.co checkout git config --global alias.br branch git config --global alias.ci commit git config --global alias.st status git config --global alias.lg \"log --oneline --graph --decorate --all\" git config --global core.excludesfile ~/.gitignore_global A global `.gitignore` prevents committing common OS and editor files: # ~/.gitignore_global .DS_Store Thumbs.db *.swp *.swo *~ .vscode/ .idea/ *.log .env.local Package Managers Install language-specific package managers: # Node.js (via nvm for version management) curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash nvm install --lts nvm use --lts # Python sudo apt install python3 python3-pip python3-venv # Rust curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh # Go wget https://go.dev/dl/go1.22.linux-amd64.tar.gz sudo tar -C /usr/local -xzf go1.22.linux-amd64.tar.gz Use version managers (`nvm`, `pyenv`, `rbenv`, `sdkman`) to manage multiple language versions. Editor Setup VS Code is the most popular editor for good reason. Essential extensions: # Install via CLI code --install-extension ms-python.python code --install-extension dbaeumer.vscode-eslint code --install-extension esbenp.prettier-vscode code --install-extension github.copilot code --install-extension bierner.markdown-mermaid code --install-extension eamodio.gitlens code --install-extension ms-azuretools.vscode-docker code --install-extension streetsidesoftware.code-spell-checker Settings to consider: { \"editor.formatOnSave\": true, \"editor.defaultFormatter\": \"esbenp.prettier-vscode\", \"editor.minimap.enabled\": false, \"editor.fontSize\": 14, \"editor.fontFamily\": \"'JetBrains Mono', 'Fira Code', monospace\", \"editor.fontLigatures\": true, \"editor.cursorBlinking\": \"smooth\", \"files.autoSave\": \"onFocusChange\", \"workbench.colorTheme\": \"One Dark Pro\", \"terminal.integrated.fontFamily\": \"JetBrains Mono\", \"git.autofetch\": true } Docker Setup Docker is essential for local development consistency: # Ubuntu sudo apt install docker.io docker-compose-v2 sudo usermod -aG docker $USER # Log out and back in # macOS brew install --cask docker Create a development Docker Compose file for your project's dependencies: # dev-dependencies.yml services: postgres: image: postgres:16-alpine ports: [\"5432:5432\"] environment: POSTGRES_DB: myapp_dev POSTGRES_PASSWORD: devpassword volumes: - pgdata:/var/lib/postgresql/data redis: image: redis:7-alpine ports: [\"6379:6379\"] volumes: pgdata: Local HTTPS with mkcert Test HTTPS locally: brew install mkcert # or sudo apt install mkcert mkcert -install mkcert localhost 127.0.0.1 ::1 This creates locally trusted TLS certificates for development. Dotfiles Management Store your configuration in a Git repository: git init --bare $HOME/.dotfiles alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME' config remote add origin https://github.com/you/dotfiles.git config add ~/.zshrc ~/.gitconfig ~/.vimrc config commit -m \"Initial dotfiles\" config push Restore on a new machine: git clone --bare https://github.com/you/dotfiles.git $HOME/.dotfiles alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME' config checkout Containerized Development with Dev Containers VS Code Dev Containers package the entire development environment: // .devcontainer/devcontainer.json { \"name\": \"My Project\", \"image\": \"mcr.microsoft.com/devcontainers/typescript-node:22\", \"features\": { \"ghcr.io/devcontainers/features/docker-in-docker:2\": {} }, \"postCreateCommand\": \"npm install\", \"forwardPorts\": [3000], \"customizations\": { \"vscode\": { \"extensions\": [\"dbaeumer.vscode-eslint\"] } } } Every developer gets identical tools regardless of their host OS. Summary A productive developer environment is personal, but some investments benefit everyone: a modern shell with autosuggestions, a well-configured editor with formatting on save, Docker for reproducible dependencies, and dotfiles versioned in Git. The initial setup takes an afternoon, but the time saved over a career is immense. Start with the basics -- shell, Git, editor, and Docker -- then add specialized tools as your workflow requires them."
+      "articleBody": "Developer Environment Setup Guide Developer Environment Setup Guide A well-configured developer environment is the foundation of productivity. Investing time in setting up your shell, editor, and tooling pays dividends every single day. This guide covers a complete development environment setup that works across platforms. Operating System Choice Choose an operating system that supports the tools you need: * **macOS**: Excellent developer experience, Unix-based terminal, Homebrew package manager. Preferred for iOS/macOS development. * **Linux (Ubuntu/Debian/Fedora)**: Native Docker performance, full control over the system. Preferred for server-side and Linux-targeted development. * **Windows with WSL2**: Windows Subsystem for Linux 2 provides a Linux kernel inside Windows. Run Linux tools natively while using Windows applications. For most developers, macOS or WSL2 on Windows provides the best balance of tooling and usability. Shell Configuration Modern shells improve daily productivity. Zsh with Oh My Zsh is the standard: Install Zsh and Oh My Zsh sudo apt install zsh -y sh -c \"$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\" Essential Zsh plugins: ~/.zshrc plugins=( git docker docker-compose npm node history colored-man-pages zsh-autosuggestions zsh-syntax-highlighting command-not-found ) For power users, consider Fish shell for autosuggestions out of the box, or Nushell for structured data pipelines. Git Configuration Set up a robust Git configuration: git config --global user.name \"Your Name\" git config --global user.email \"your@email.com\" git config --global init.defaultBranch main git config --global pull.rebase true git config --global fetch.prune true git config --global diff.colorMoved zebra git config --global alias.co checkout git config --global alias.br branch git config --global alias.ci commit git config --global alias.st status git config --global alias.lg \"log --oneline --graph --decorate --all\" git config --global core.excludesfile ~/.gitignore_global A global `.gitignore` prevents committing common OS and editor files: ~/.gitignore_global .DS_Store Thumbs.db *.swp *.swo *~ .vscode/ .idea/ *.log .env.local Package Managers Install language-specific package managers: Node.js (via nvm for version management) curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash nvm install --lts nvm use --lts Python sudo apt install python3 python3-pip python3-venv Rust curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh Go wget https://go.dev/dl/go1.22.linux-amd64.tar.gz sudo tar -C /usr/local -xzf go1.22.linux-amd64.tar.gz Use version managers (`nvm`, `pyenv`, `rbenv`, `sdkman`) to manage multiple language versions. Editor Setup VS Code is the most popular editor for good reason. Essential extensions: Install via CLI code --install-extension ms-python.python code --install-extension dbaeumer.vscode-eslint code --install-extension esbenp.prettier-vscode code --install-extension github.copilot code --install-extension bierner.markdown-mermaid code --install-extension eamodio.gitlens code --install-extension ms-azuretools.vscode-docker code --install-extension streetsidesoftware.code-spell-checker Settings to consider: { \"editor.formatOnSave\": true, \"editor.defaultFormatter\": \"esbenp.prettier-vscode\", \"editor.minimap.enabled\": false, \"editor.fontSize\": 14, \"editor.fontFamily\": \"'JetBrains Mono', 'Fira Code', monospace\", \"editor.fontLigatures\": true, \"editor.cursorBlinking\": \"smooth\", \"files.autoSave\": \"onFocusChange\", \"workbench.colorTheme\": \"One Dark Pro\", \"terminal.integrated.fontFamily\": \"JetBrains Mono\", \"git.autofetch\": true } Docker Setup Docker is essential for local development consistency: Ubuntu sudo apt install docker.io docker-compose-v2 sudo usermod -aG docker $USER # Log out and back in macOS brew install --cask docker Create a development Docker Compose file for your project's dependencies: dev-dependencies.yml services: postgres: image: postgres:16-alpine ports: [\"5432:5432\"] environment: POSTGRES_DB: myapp_dev POSTGRES_PASSWORD: devpassword volumes: \\- pgdata:/var/lib/postgresql/data redis: image: redis:7-alpine ports: [\"6379:6379\"] volumes: pgdata: Local HTTPS with mkcert Test HTTPS locally: brew install mkcert # or sudo apt install mkcert mkcert -install mkcert localhost 127.0.0.1 ::1 This creates locally trusted TLS certificates for development. Dotfiles Management Store your configuration in a Git repository: git init --bare $HOME/.dotfiles alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME' config remote add origin https://github.com/you/dotfiles.git config add ~/.zshrc ~/.gitconfig ~/.vimrc config commit -m \"Initial dotfiles\" config push Restore on a new machine: git clone --bare https://github.com/you/dotfiles.git $HOME/.dotfiles alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME' config checkout Containerized Development with Dev Containers VS Code Dev Containers package the entire development environment: // .devcontainer/devcontainer.json { \"name\": \"My Project\", \"image\": \"mcr.microsoft.com/devcontainers/typescript-node:22\", \"features\": { \"ghcr.io/devcontainers/features/docker-in-docker:2\": {} }, \"postCreateCommand\": \"npm install\", \"forwardPorts\": [3000], \"customizations\": { \"vscode\": { \"extensions\": [\"dbaeumer.vscode-eslint\"] } } } Every developer gets identical tools regardless of their host OS. Summary A productive developer environment is personal, but some investments benefit everyone: a modern shell with autosuggestions, a well-configured editor with formatting on save, Docker for reproducible dependencies, and dotfiles versioned in Git. The initial setup takes an afternoon, but the time saved over a career is immense. Start with the basics -- shell, Git, editor, and Docker -- then add specialized tools as your workflow requires them."
     }
     </script>
     <script type="application/ld+json">
@@ -75,488 +75,312 @@
         <span class="tag-cat">DevOps</span></div>
       <h1 class="article-title">Developer Environment Setup Guide</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/dev-environment-setup.png" alt="Developer Environment Setup Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Developer Environment Setup Guide</h1>
+<br>
+<h1>Developer Environment Setup Guide</h1>
 <br>
 <p>A well-configured developer environment is the foundation of productivity. Investing time in setting up your shell, editor, and tooling pays dividends every single day. This guide covers a complete development environment setup that works across platforms.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Operating System Choice</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Choose an operating system that supports the tools you need:</p>
 <br>
-<br>
-<br>
 <p>* **macOS**: Excellent developer experience, Unix-based terminal, Homebrew package manager. Preferred for iOS/macOS development.</p>
+<br>
 <p>* **Linux (Ubuntu/Debian/Fedora)**: Native Docker performance, full control over the system. Preferred for server-side and Linux-targeted development.</p>
+<br>
 <p>* **Windows with WSL2**: Windows Subsystem for Linux 2 provides a Linux kernel inside Windows. Run Linux tools natively while using Windows applications.</p>
-<br>
-<br>
 <br>
 <p>For most developers, macOS or WSL2 on Windows provides the best balance of tooling and usability.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Shell Configuration</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Modern shells improve daily productivity. Zsh with Oh My Zsh is the standard:</p>
 <br>
+<h1>Install Zsh and Oh My Zsh</h1>
 <br>
+<p>sudo apt install zsh -y</p>
 <br>
-<br>
-<br>
-<p>    # Install Zsh and Oh My Zsh</p>
-<br>
-<p>    sudo apt install zsh -y</p>
-<br>
-<p>    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"</p>
 <br>
 <p>Essential Zsh plugins:</p>
 <br>
+<h1>~/.zshrc</h1>
 <br>
+<p>plugins=(</p>
 <br>
+<p>git</p>
 <br>
+<p>docker</p>
 <br>
-<p>    # ~/.zshrc</p>
+<p>docker-compose</p>
 <br>
-<p>    plugins=(</p>
+<p>npm</p>
 <br>
-<p>      git</p>
+<p>node</p>
 <br>
-<p>      docker</p>
+<p>history</p>
 <br>
-<p>      docker-compose</p>
+<p>colored-man-pages</p>
 <br>
-<p>      npm</p>
+<p>zsh-autosuggestions</p>
 <br>
-<p>      node</p>
+<p>zsh-syntax-highlighting</p>
 <br>
-<p>      history</p>
+<p>command-not-found</p>
 <br>
-<p>      colored-man-pages</p>
-<br>
-<p>      zsh-autosuggestions</p>
-<br>
-<p>      zsh-syntax-highlighting</p>
-<br>
-<p>      command-not-found</p>
-<br>
-<p>    )</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>)</p>
 <br>
 <p>For power users, consider Fish shell for autosuggestions out of the box, or Nushell for structured data pipelines.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Git Configuration</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Set up a robust Git configuration:</p>
 <br>
+<p>git config --global user.name "Your Name"</p>
 <br>
+<p>git config --global user.email "your@email.com"</p>
 <br>
+<p>git config --global init.defaultBranch main</p>
 <br>
+<p>git config --global pull.rebase true</p>
 <br>
-<p>    git config --global user.name "Your Name"</p>
+<p>git config --global fetch.prune true</p>
 <br>
-<p>    git config --global user.email "your@email.com"</p>
+<p>git config --global diff.colorMoved zebra</p>
 <br>
-<p>    git config --global init.defaultBranch main</p>
+<p>git config --global alias.co checkout</p>
 <br>
-<p>    git config --global pull.rebase true</p>
+<p>git config --global alias.br branch</p>
 <br>
-<p>    git config --global fetch.prune true</p>
+<p>git config --global alias.ci commit</p>
 <br>
-<p>    git config --global diff.colorMoved zebra</p>
+<p>git config --global alias.st status</p>
 <br>
-<p>    git config --global alias.co checkout</p>
+<p>git config --global alias.lg "log --oneline --graph --decorate --all"</p>
 <br>
-<p>    git config --global alias.br branch</p>
-<br>
-<p>    git config --global alias.ci commit</p>
-<br>
-<p>    git config --global alias.st status</p>
-<br>
-<p>    git config --global alias.lg "log --oneline --graph --decorate --all"</p>
-<br>
-<p>    git config --global core.excludesfile ~/.gitignore_global</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>git config --global core.excludesfile ~/.gitignore_global</p>
 <br>
 <p>A global `.gitignore` prevents committing common OS and editor files:</p>
 <br>
+<h1>~/.gitignore_global</h1>
 <br>
+<p>.DS_Store</p>
 <br>
+<p>Thumbs.db</p>
 <br>
+<p>*.swp</p>
 <br>
-<p>    # ~/.gitignore_global</p>
+<p>*.swo</p>
 <br>
-<p>    .DS_Store</p>
+<p>*~</p>
 <br>
-<p>    Thumbs.db</p>
+<p>.vscode/</p>
 <br>
-<p>    *.swp</p>
+<p>.idea/</p>
 <br>
-<p>    *.swo</p>
+<p>*.log</p>
 <br>
-<p>    *~</p>
-<br>
-<p>    .vscode/</p>
-<br>
-<p>    .idea/</p>
-<br>
-<p>    *.log</p>
-<br>
-<p>    .env.local</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>.env.local</p>
 <br>
 <h2>  Package Managers</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Install language-specific package managers:</p>
 <br>
+<h1>Node.js (via nvm for version management)</h1>
 <br>
+<p>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash</p>
 <br>
+<p>nvm install --lts</p>
 <br>
+<p>nvm use --lts</p>
 <br>
-<p>    # Node.js (via nvm for version management)</p>
+<h1>Python</h1>
 <br>
-<p>    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash</p>
+<p>sudo apt install python3 python3-pip python3-venv</p>
 <br>
-<p>    nvm install --lts</p>
+<h1>Rust</h1>
 <br>
-<p>    nvm use --lts</p>
+<p>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</p>
 <br>
+<h1>Go</h1>
 <br>
+<p>wget https://go.dev/dl/go1.22.linux-amd64.tar.gz</p>
 <br>
-<p>    # Python</p>
-<br>
-<p>    sudo apt install python3 python3-pip python3-venv</p>
-<br>
-<br>
-<br>
-<p>    # Rust</p>
-<br>
-<p>    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</p>
-<br>
-<br>
-<br>
-<p>    # Go</p>
-<br>
-<p>    wget https://go.dev/dl/go1.22.linux-amd64.tar.gz</p>
-<br>
-<p>    sudo tar -C /usr/local -xzf go1.22.linux-amd64.tar.gz</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>sudo tar -C /usr/local -xzf go1.22.linux-amd64.tar.gz</p>
 <br>
 <p>Use version managers (`nvm`, `pyenv`, `rbenv`, `sdkman`) to manage multiple language versions.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Editor Setup</h2>
-<br>
-<br>
-<br>
 <br>
 <p>VS Code is the most popular editor for good reason. Essential extensions:</p>
 <br>
+<h1>Install via CLI</h1>
 <br>
+<p>code --install-extension ms-python.python</p>
 <br>
+<p>code --install-extension dbaeumer.vscode-eslint</p>
 <br>
+<p>code --install-extension esbenp.prettier-vscode</p>
 <br>
-<p>    # Install via CLI</p>
+<p>code --install-extension github.copilot</p>
 <br>
-<p>    code --install-extension ms-python.python</p>
+<p>code --install-extension bierner.markdown-mermaid</p>
 <br>
-<p>    code --install-extension dbaeumer.vscode-eslint</p>
+<p>code --install-extension eamodio.gitlens</p>
 <br>
-<p>    code --install-extension esbenp.prettier-vscode</p>
+<p>code --install-extension ms-azuretools.vscode-docker</p>
 <br>
-<p>    code --install-extension github.copilot</p>
-<br>
-<p>    code --install-extension bierner.markdown-mermaid</p>
-<br>
-<p>    code --install-extension eamodio.gitlens</p>
-<br>
-<p>    code --install-extension ms-azuretools.vscode-docker</p>
-<br>
-<p>    code --install-extension streetsidesoftware.code-spell-checker</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>code --install-extension streetsidesoftware.code-spell-checker</p>
 <br>
 <p>Settings to consider:</p>
 <br>
+<p>{</p>
 <br>
+<p>"editor.formatOnSave": true,</p>
 <br>
+<p>"editor.defaultFormatter": "esbenp.prettier-vscode",</p>
 <br>
+<p>"editor.minimap.enabled": false,</p>
 <br>
-<p>    {</p>
+<p>"editor.fontSize": 14,</p>
 <br>
-<p>      "editor.formatOnSave": true,</p>
+<p>"editor.fontFamily": "'JetBrains Mono', 'Fira Code', monospace",</p>
 <br>
-<p>      "editor.defaultFormatter": "esbenp.prettier-vscode",</p>
+<p>"editor.fontLigatures": true,</p>
 <br>
-<p>      "editor.minimap.enabled": false,</p>
+<p>"editor.cursorBlinking": "smooth",</p>
 <br>
-<p>      "editor.fontSize": 14,</p>
+<p>"files.autoSave": "onFocusChange",</p>
 <br>
-<p>      "editor.fontFamily": "'JetBrains Mono', 'Fira Code', monospace",</p>
+<p>"workbench.colorTheme": "One Dark Pro",</p>
 <br>
-<p>      "editor.fontLigatures": true,</p>
+<p>"terminal.integrated.fontFamily": "JetBrains Mono",</p>
 <br>
-<p>      "editor.cursorBlinking": "smooth",</p>
+<p>"git.autofetch": true</p>
 <br>
-<p>      "files.autoSave": "onFocusChange",</p>
-<br>
-<p>      "workbench.colorTheme": "One Dark Pro",</p>
-<br>
-<p>      "terminal.integrated.fontFamily": "JetBrains Mono",</p>
-<br>
-<p>      "git.autofetch": true</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <h2>  Docker Setup</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Docker is essential for local development consistency:</p>
 <br>
+<h1>Ubuntu</h1>
 <br>
+<p>sudo apt install docker.io docker-compose-v2</p>
 <br>
+<p>sudo usermod -aG docker $USER # Log out and back in</p>
 <br>
+<h1>macOS</h1>
 <br>
-<p>    # Ubuntu</p>
-<br>
-<p>    sudo apt install docker.io docker-compose-v2</p>
-<br>
-<p>    sudo usermod -aG docker $USER  # Log out and back in</p>
-<br>
-<br>
-<br>
-<p>    # macOS</p>
-<br>
-<p>    brew install --cask docker</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>brew install --cask docker</p>
 <br>
 <p>Create a development Docker Compose file for your project's dependencies:</p>
 <br>
+<h1>dev-dependencies.yml</h1>
 <br>
+<p>services:</p>
 <br>
+<p>postgres:</p>
 <br>
+<p>image: postgres:16-alpine</p>
 <br>
-<p>    # dev-dependencies.yml</p>
+<p>ports: ["5432:5432"]</p>
 <br>
-<p>    services:</p>
+<p>environment:</p>
 <br>
-<p>      postgres:</p>
+<p>POSTGRES_DB: myapp_dev</p>
 <br>
-<p>        image: postgres:16-alpine</p>
+<p>POSTGRES_PASSWORD: devpassword</p>
 <br>
-<p>        ports: ["5432:5432"]</p>
+<p>volumes:</p>
 <br>
-<p>        environment:</p>
+<p>\- pgdata:/var/lib/postgresql/data</p>
 <br>
-<p>          POSTGRES_DB: myapp_dev</p>
+<p>redis:</p>
 <br>
-<p>          POSTGRES_PASSWORD: devpassword</p>
+<p>image: redis:7-alpine</p>
 <br>
-<p>        volumes:</p>
+<p>ports: ["6379:6379"]</p>
 <br>
-<p>          - pgdata:/var/lib/postgresql/data</p>
+<p>volumes:</p>
 <br>
-<br>
-<br>
-<p>      redis:</p>
-<br>
-<p>        image: redis:7-alpine</p>
-<br>
-<p>        ports: ["6379:6379"]</p>
-<br>
-<br>
-<br>
-<p>    volumes:</p>
-<br>
-<p>      pgdata:</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>pgdata:</p>
 <br>
 <h2>  Local HTTPS with mkcert</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Test HTTPS locally:</p>
 <br>
+<p>brew install mkcert # or sudo apt install mkcert</p>
 <br>
+<p>mkcert -install</p>
 <br>
-<br>
-<br>
-<p>    brew install mkcert  # or sudo apt install mkcert</p>
-<br>
-<p>    mkcert -install</p>
-<br>
-<p>    mkcert localhost 127.0.0.1 ::1</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>mkcert localhost 127.0.0.1 ::1</p>
 <br>
 <p>This creates locally trusted TLS certificates for development.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Dotfiles Management</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Store your configuration in a Git repository:</p>
 <br>
+<p>git init --bare $HOME/.dotfiles</p>
 <br>
+<p>alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'</p>
 <br>
+<p>config remote add origin https://github.com/you/dotfiles.git</p>
 <br>
+<p>config add ~/.zshrc ~/.gitconfig ~/.vimrc</p>
 <br>
-<p>    git init --bare $HOME/.dotfiles</p>
+<p>config commit -m "Initial dotfiles"</p>
 <br>
-<p>    alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'</p>
-<br>
-<p>    config remote add origin https://github.com/you/dotfiles.git</p>
-<br>
-<p>    config add ~/.zshrc ~/.gitconfig ~/.vimrc</p>
-<br>
-<p>    config commit -m "Initial dotfiles"</p>
-<br>
-<p>    config push</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>config push</p>
 <br>
 <p>Restore on a new machine:</p>
 <br>
+<p>git clone --bare https://github.com/you/dotfiles.git $HOME/.dotfiles</p>
 <br>
+<p>alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'</p>
 <br>
-<br>
-<br>
-<p>    git clone --bare https://github.com/you/dotfiles.git $HOME/.dotfiles</p>
-<br>
-<p>    alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'</p>
-<br>
-<p>    config checkout</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>config checkout</p>
 <br>
 <h2>  Containerized Development with Dev Containers</h2>
 <br>
-<br>
-<br>
-<br>
 <p>VS Code Dev Containers package the entire development environment:</p>
 <br>
+<p>// .devcontainer/devcontainer.json</p>
 <br>
+<p>{</p>
 <br>
+<p>"name": "My Project",</p>
 <br>
+<p>"image": "mcr.microsoft.com/devcontainers/typescript-node:22",</p>
 <br>
-<p>    // .devcontainer/devcontainer.json</p>
+<p>"features": {</p>
 <br>
-<p>    {</p>
+<p>"ghcr.io/devcontainers/features/docker-in-docker:2": {}</p>
 <br>
-<p>      "name": "My Project",</p>
+<p>},</p>
 <br>
-<p>      "image": "mcr.microsoft.com/devcontainers/typescript-node:22",</p>
+<p>"postCreateCommand": "npm install",</p>
 <br>
-<p>      "features": {</p>
+<p>"forwardPorts": [3000],</p>
 <br>
-<p>        "ghcr.io/devcontainers/features/docker-in-docker:2": {}</p>
+<p>"customizations": {</p>
 <br>
-<p>      },</p>
+<p>"vscode": {</p>
 <br>
-<p>      "postCreateCommand": "npm install",</p>
+<p>"extensions": ["dbaeumer.vscode-eslint"]</p>
 <br>
-<p>      "forwardPorts": [3000],</p>
+<p>}</p>
 <br>
-<p>      "customizations": {</p>
+<p>}</p>
 <br>
-<p>        "vscode": {</p>
-<br>
-<p>          "extensions": ["dbaeumer.vscode-eslint"]</p>
-<br>
-<p>        }</p>
-<br>
-<p>      }</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <p>Every developer gets identical tools regardless of their host OS.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Summary</h2>
-<br>
-<br>
-<br>
 <br>
 <p>A productive developer environment is personal, but some investments benefit everyone: a modern shell with autosuggestions, a well-configured editor with formatting on save, Docker for reproducible dependencies, and dotfiles versioned in Git. The initial setup takes an afternoon, but the time saved over a career is immense. Start with the basics -- shell, Git, editor, and Docker -- then add specialized tools as your workflow requires them.</p></div>
     </article>

@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/api-versioning.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="API Versioning Strategies">
     <meta name="twitter:description" content="Explore API versioning strategies for maintaining backward compatibility as your API evolves.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/api-versioning.png">
     <title>API Versioning Strategies — SourceHub</title>
     <meta name="description" content="Explore API versioning strategies for maintaining backward compatibility as your API evolves.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "API Versioning Strategies",
       "description": "Explore API versioning strategies for maintaining backward compatibility as your API evolves.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/api-versioning.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1496",
+      "wordCount": "1461",
       "keywords": "Architecture, System Design",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,6 +74,7 @@
         <span class="tag-cat">System Design</span></div>
       <h1 class="article-title">API Versioning Strategies</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/api-versioning.png" alt="API Versioning Strategies" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>API Versioning Strategies</h1>
 <br>
 <p>APIs evolve. New features are added, existing endpoints change, and eventually, breaking changes are unavoidable. API versioning is the practice of managing these changes without breaking existing clients. This article covers the major versioning strategies and when to use each.   </p>
@@ -83,14 +84,9 @@
 <p>URL Path Versioning   </p>
 <p>The most common and straightforward approach:   </p>
 <br>
-<br>
-<br>
 <p>    /api/v1/users</p>
 <br>
 <p>    /api/v2/users</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Pros:**</p>
 <p>* Extremely simple to implement and understand.</p>
@@ -107,14 +103,9 @@
 <p>Query Parameter Versioning   </p>
 <p>Include the version as a query parameter:   </p>
 <br>
-<br>
-<br>
 <p>    /api/users?version=1</p>
 <br>
 <p>    /api/users?version=2</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Pros:**</p>
 <p>* Keeps the URL structure clean.</p>
@@ -131,25 +122,15 @@
 <p>Header Versioning   </p>
 <p>Include the version in an HTTP header:   </p>
 <br>
-<br>
-<br>
 <p>    GET /api/users</p>
 <br>
 <p>    Accept: application/vnd.myapi.v1+json</p>
 <br>
-<br>
-<br>
-<br>
 <p>Or a custom header:   </p>
-<br>
-<br>
 <br>
 <p>    GET /api/users</p>
 <br>
 <p>    X-API-Version: 1</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Pros:**</p>
 <p>* Keeps URLs clean and RESTful.</p>
@@ -183,22 +164,15 @@
 <p>When you support multiple API versions, you need a strategy for maintaining old versions:   </p>
 <p>**Deprecation policy.** Announce deprecation well in advance. Give clients at least 6-12 months to migrate. Include deprecation warnings in response headers:   </p>
 <br>
-<br>
-<br>
 <p>    Sunset: Sat, 31 Dec 2026 23:59:59 GMT</p>
 <br>
 <p>    Deprecation: true</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Minimum version support.** Support a minimum number of active versions (typically 2-3). Drop the oldest when a new one is introduced.   </p>
 <p>**Version sunset.** Actually retire old versions. Maintaining versions indefinitely is expensive. Be clear about your timeline and enforce it.   </p>
 <p>Implementation Patterns   </p>
 <p>**Code branching.** Maintain separate code for each version. Simple but leads to code duplication. Use only for small, stable APIs.   </p>
 <p>**Conditional logic.** Single codebase with version checks. More maintainable but can become complex:   </p>
-<br>
-<br>
 <br>
 <p>    if version == 1:</p>
 <br>
@@ -208,12 +182,7 @@
 <br>
 <p>        return serialize_v2(data)</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Interceptor/middleware.** Transform responses between versions at the middleware layer. Keeps core logic version-agnostic:   </p>
-<br>
-<br>
 <br>
 <p>    if request_version == 1:</p>
 <br>
@@ -222,9 +191,6 @@
 <p>    elif request_version == 2:</p>
 <br>
 <p>        response = transform_to_v2(handler.handle(request))</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Adapter layer.** Use the adapter pattern to translate between internal models and versioned API responses. The cleanest approach for complex APIs.   </p>
 <p>Avoiding Versioning Altogether   </p>

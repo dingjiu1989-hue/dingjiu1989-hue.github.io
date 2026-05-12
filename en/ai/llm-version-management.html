@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-version-management.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="LLM Version Management: Model Registry, A/B Testing, Rollback">
     <meta name="twitter:description" content="Manage LLM versions in production with model registries, A/B testing frameworks, gradual rollouts, automated evaluation gates, and instant rollback strategies.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-version-management.png">
     <title>LLM Version Management: Model Registry, A/B Testing, Rollback — SourceHub</title>
     <meta name="description" content="Manage LLM versions in production with model registries, A/B testing frameworks, gradual rollouts, automated evaluation gates, and instant rollback strategies.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "LLM Version Management: Model Registry, A/B Testing, Rollback",
       "description": "Manage LLM versions in production with model registries, A/B testing frameworks, gradual rollouts, automated evaluation gates, and instant rollback strategies.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-version-management.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2152",
+      "wordCount": "2049",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,36 +75,22 @@
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">LLM Version Management: Model Registry, A/B Testing, Rollback</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-version-management.png" alt="LLM Version Management: Model Registry, A/B Testing, Rollback" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>LLM Version Management: Model Registry, A/B Testing, Rollback</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>LLMs change frequently: new model releases, fine-tuned versions, updated system prompts, and modified retrieval pipelines all constitute "versions" of your AI system. Unlike traditional software where you can pin a dependency version, LLM behavior shifts with each API update. This article covers the tools and practices for managing LLM versions in production.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Model Registry</h2>
 <br>
-<br>
-<br>
-<br>
 <p>A model registry tracks metadata for every deployed model version:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from datetime import datetime</p>
 <br>
 <p>    from enum import Enum</p>
 <br>
 <p>    import json</p>
-<br>
-<br>
 <br>
 <p>    class ModelStatus(Enum):</p>
 <br>
@@ -118,15 +104,11 @@
 <br>
 <p>        DEPRECATED = "deprecated"</p>
 <br>
-<br>
-<br>
 <p>    class ModelRegistry:</p>
 <br>
 <p>        def __init__(self, storage_backend):</p>
 <br>
 <p>            self.storage = storage_backend</p>
-<br>
-<br>
 <br>
 <p>        def register_model(self, model_id: str, metadata: dict) -> dict:</p>
 <br>
@@ -158,8 +140,6 @@
 <br>
 <p>            return entry</p>
 <br>
-<br>
-<br>
 <p>        def promote(self, model_id: str, target_status: ModelStatus):</p>
 <br>
 <p>            entry = self.storage.load(f"models/{model_id}")</p>
@@ -176,8 +156,6 @@
 <br>
 <p>            self.storage.save(f"models/{model_id}", entry)</p>
 <br>
-<br>
-<br>
 <p>        def get_active_model(self) -> dict:</p>
 <br>
 <p>            """Get the current production model."""</p>
@@ -191,8 +169,6 @@
 <p>                    return model</p>
 <br>
 <p>            return None</p>
-<br>
-<br>
 <br>
 <p>    # Usage</p>
 <br>
@@ -208,27 +184,13 @@
 <br>
 <p>    })</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  A/B Testing Framework</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Compare model versions on live traffic with statistical significance:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    import random</p>
 <br>
 <p>    import hashlib</p>
-<br>
-<br>
 <br>
 <p>    class ModelABTest:</p>
 <br>
@@ -237,8 +199,6 @@
 <p>            self.registry = registry</p>
 <br>
 <p>            self.experiments = {}</p>
-<br>
-<br>
 <br>
 <p>        def start_experiment(self, name: str, model_a: str, model_b: str, traffic_split: float = 0.5):</p>
 <br>
@@ -258,8 +218,6 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
 <p>        def select_model(self, experiment: str, user_id: str) -> str:</p>
 <br>
 <p>            exp = self.experiments[experiment]</p>
@@ -274,8 +232,6 @@
 <br>
 <p>            return exp["model_b"], "b"</p>
 <br>
-<br>
-<br>
 <p>        def record_result(self, experiment: str, variant: str, latency_ms: float, error: bool = False):</p>
 <br>
 <p>            exp = self.experiments[experiment]</p>
@@ -288,8 +244,6 @@
 <br>
 <p>                exp["results"][variant]["errors"] += 1</p>
 <br>
-<br>
-<br>
 <p>        def get_winner(self, experiment: str) -> str | None:</p>
 <br>
 <p>            exp = self.experiments[experiment]</p>
@@ -300,13 +254,9 @@
 <br>
 <p>                return None  # Not enough data</p>
 <br>
-<br>
-<br>
 <p>            error_rate_a = results["a"]["errors"] / results["a"]["calls"]</p>
 <br>
 <p>            error_rate_b = results["b"]["errors"] / results["b"]["calls"]</p>
-<br>
-<br>
 <br>
 <p>            # Simple decision: lower error rate wins</p>
 <br>
@@ -316,21 +266,9 @@
 <br>
 <p>            return exp["model_b"]</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Gradual Rollout</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Deploy new models incrementally with automatic rollback:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class GradualRollout:</p>
 <br>
@@ -339,8 +277,6 @@
 <p>            self.registry = registry</p>
 <br>
 <p>            self.evaluate = evaluation_fn</p>
-<br>
-<br>
 <br>
 <p>        async def deploy(self, model_id: str, stages: list[dict] = None):</p>
 <br>
@@ -360,8 +296,6 @@
 <br>
 <p>                ]</p>
 <br>
-<br>
-<br>
 <p>            for stage in stages:</p>
 <br>
 <p>                print(f"Deploying to stage: {stage['name']} ({stage['traffic']*100}% traffic)")</p>
@@ -370,13 +304,9 @@
 <br>
 <p>                await self._route_traffic(model_id, stage["traffic"])</p>
 <br>
-<br>
-<br>
 <p>                # Wait for evaluation period</p>
 <br>
 <p>                await asyncio.sleep(stage["duration_min"] * 60)</p>
-<br>
-<br>
 <br>
 <p>                # Evaluate performance</p>
 <br>
@@ -390,13 +320,9 @@
 <br>
 <p>                    return False</p>
 <br>
-<br>
-<br>
 <p>            self.registry.promote(model_id, ModelStatus.PRODUCTION)</p>
 <br>
 <p>            return True</p>
-<br>
-<br>
 <br>
 <p>        async def rollback(self, model_id: str):</p>
 <br>
@@ -408,21 +334,9 @@
 <br>
 <p>            print(f"Rolled back to {previous_model['model_id']}")</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Evaluation Gate</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Automated evaluation runs before any model promotion:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class EvaluationGate:</p>
 <br>
@@ -430,13 +344,9 @@
 <br>
 <p>            self.test_suite = test_suite  # [{input, expected_output, metrics}]</p>
 <br>
-<br>
-<br>
 <p>        async def evaluate_model(self, model_fn) -> dict:</p>
 <br>
 <p>            results = {"passed": 0, "failed": 0, "details": []}</p>
-<br>
-<br>
 <br>
 <p>            for test in self.test_suite:</p>
 <br>
@@ -454,13 +364,9 @@
 <br>
 <p>                results["details"].append({"test": test["input"], "score": score})</p>
 <br>
-<br>
-<br>
 <p>            results["pass_rate"] = results["passed"] / len(self.test_suite)</p>
 <br>
 <p>            return results</p>
-<br>
-<br>
 <br>
 <p>        def _score_output(self, output: str, test: dict) -> float:</p>
 <br>
@@ -470,15 +376,7 @@
 <br>
 <p>            return 0.0</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Treat LLM versions as managed artifacts, not API parameters. Use a model registry to track every version with its metadata, system prompt, and evaluation scores. Implement A/B testing to compare versions on live traffic. Deploy new models gradually through canary, small, medium, and full rollout stages with automated evaluation gates at each stage. Maintain the ability to roll back instantly when metrics degrade. This discipline makes LLM version management as reliable as traditional software deployment.</p></div>
     </article>

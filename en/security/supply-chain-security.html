@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/supply-chain-security.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Supply Chain Security">
     <meta name="twitter:description" content="Comprehensive guide to software supply chain security covering SBOM, Sigstore, in-toto, dependency confusion, and the SLSA framework.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/supply-chain-security.png">
     <title>Supply Chain Security — SourceHub</title>
     <meta name="description" content="Comprehensive guide to software supply chain security covering SBOM, Sigstore, in-toto, dependency confusion, and the SLSA framework.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Supply Chain Security",
       "description": "Comprehensive guide to software supply chain security covering SBOM, Sigstore, in-toto, dependency confusion, and the SLSA framework.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/supply-chain-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1706",
+      "wordCount": "1640",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Supply Chain Security</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/supply-chain-security.png" alt="Supply Chain Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Supply Chain Security</h1>
 <br>
 <p>Introduction   </p>
 <p>Software supply chain attacks target the processes and tools used to build, package, and distribute software. High-profile incidents like SolarWinds and Codecov demonstrated that compromising a single trusted vendor can cascade into thousands of downstream victims. Defending the supply chain requires verifiable integrity, provenance, and policy enforcement at every stage.   </p>
 <p>Software Bill of Materials (SBOM)   </p>
 <p>An SBOM is a machine-readable inventory of all components in a software artifact. It enables consumers to quickly identify exposure when a vulnerability is disclosed.   </p>
-<br>
-<br>
 <br>
 <p>    {</p>
 <br>
@@ -150,23 +149,13 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # Generate SPDX SBOM with syft</p>
 <br>
 <p>    syft packages ./myapp:latest -o spdx-json > sbom.spdx.json</p>
 <br>
-<br>
-<br>
 <p>    # Generate CycloneDX SBOM</p>
 <br>
 <p>    cyclonedx-bom -o bom.xml -t file</p>
-<br>
-<br>
 <br>
 <p>    # Compare SBOMs for change detection</p>
 <br>
@@ -174,13 +163,8 @@
 <br>
 <p>         <(jq '.components[].purl' bom-v2.json | sort)</p>
 <br>
-<br>
-<br>
-<br>
 <p>Sigstore and Artifact Signing   </p>
 <p>Sigstore simplifies code signing and verification through ephemeral key material and transparency logs.   </p>
-<br>
-<br>
 <br>
 <p>    # Sign a container image with cosign</p>
 <br>
@@ -188,29 +172,17 @@
 <br>
 <p>        myregistry.io/myapp:latest</p>
 <br>
-<br>
-<br>
 <p>    # Keyless signing (OIDC-based)</p>
 <br>
 <p>    cosign sign myregistry.io/myapp:latest</p>
-<br>
-<br>
 <br>
 <p>    # Verify a signed image</p>
 <br>
 <p>    cosign verify --key pubkey.pem myregistry.io/myapp:latest</p>
 <br>
-<br>
-<br>
 <p>    # Verify keyless signature</p>
 <br>
 <p>    cosign verify myregistry.io/myapp:latest</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Cosign keyless verification policy</p>
 <br>
@@ -222,26 +194,17 @@
 <br>
 <p>        issuer: "https://accounts.google.com"</p>
 <br>
-<br>
-<br>
 <p>      signatures:</p>
 <br>
 <p>        - hash: "sha256:abc123..."</p>
 <br>
 <p>          bundle: "sigstore-bundle.json"</p>
 <br>
-<br>
-<br>
-<br>
 <p>Generating provenance with SLSA   </p>
-<br>
-<br>
 <br>
 <p>    # Generate SLSA provenance for a build</p>
 <br>
 <p>    gitsign --sign-commits HEAD</p>
-<br>
-<br>
 <br>
 <p>    # Attest provenance</p>
 <br>
@@ -249,13 +212,8 @@
 <br>
 <p>        myregistry.io/myapp:latest</p>
 <br>
-<br>
-<br>
-<br>
 <p>in-toto: Framework for Supply Chain Integrity   </p>
 <p>in-toto defines a framework to protect the integrity of the software supply chain by verifying that each step in the build and release pipeline was performed by authorized actors.   </p>
-<br>
-<br>
 <br>
 <p>    # in-toto layout definition</p>
 <br>
@@ -305,19 +263,12 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
-<br>
 <p>Dependency Confusion   </p>
 <p>Dependency confusion attacks exploit package manager behaviors where internal package names are also available in public registries. If a package manager prefers higher version numbers or public registries over private ones, attackers can publish malicious packages with the same name.   </p>
-<br>
-<br>
 <br>
 <p>    # Detect potential dependency confusion</p>
 <br>
 <p>    import requests</p>
-<br>
-<br>
 <br>
 <p>    def check_dependency_confusion(requirements_file):</p>
 <br>
@@ -332,8 +283,6 @@
 <p>                    continue</p>
 <br>
 <p>                pkg_name = line.split('=')[0].strip().lower()</p>
-<br>
-<br>
 <br>
 <p>                # Check if package exists on PyPI</p>
 <br>
@@ -353,13 +302,8 @@
 <br>
 <p>        return vulnerable</p>
 <br>
-<br>
-<br>
-<br>
 <p>SLSA Framework   </p>
 <p>Supply-chain Levels for Software Artifacts (SLSA, pronounced "salsa") provides a security framework with four levels of increasing trust.   </p>
-<br>
-<br>
 <br>
 <p>    slsa_levels:</p>
 <br>
@@ -373,8 +317,6 @@
 <br>
 <p>          - provenance_authentic: false</p>
 <br>
-<br>
-<br>
 <p>      level_2:</p>
 <br>
 <p>        description: "Build service generates and signs provenance"</p>
@@ -384,8 +326,6 @@
 <p>          - provenance_authentic: true</p>
 <br>
 <p>          - provenance_generated_by_build_service: true</p>
-<br>
-<br>
 <br>
 <p>      level_3:</p>
 <br>
@@ -397,8 +337,6 @@
 <br>
 <p>          - provenance_non_falsifiable: true</p>
 <br>
-<br>
-<br>
 <p>      level_4:</p>
 <br>
 <p>        description: "Two-party review and hermetic builds"</p>
@@ -408,9 +346,6 @@
 <p>          - build_hermetic: true</p>
 <br>
 <p>          - provenance_has_reproducible_info: true</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Supply chain security is no longer optional. Generate SBOMs for all artifacts, sign them with Sigstore, define in-toto layouts for pipeline integrity, protect against dependency confusion with scoped registries, and target SLSA Level 3+ for critical builds. Build verification into your deployment pipeline so that unsigned or unverified artifacts are automatically rejected.</p></div>

@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/ai-cli-tools-guide.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Building AI-Powered CLI Tools: A Complete Guide for Developers">
     <meta name="twitter:description" content="How to build command-line tools that leverage LLMs — from simple wrappers to intelligent agents that automate workflows, with Python and Node.js examples.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/ai-cli-tools-guide.png">
     <title>Building AI-Powered CLI Tools: A Complete Guide for Developers — SourceHub</title>
     <meta name="description" content="How to build command-line tools that leverage LLMs — from simple wrappers to intelligent agents that automate workflows, with Python and Node.js examples.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Building AI-Powered CLI Tools: A Complete Guide for Developers",
       "description": "How to build command-line tools that leverage LLMs — from simple wrappers to intelligent agents that automate workflows, with Python and Node.js examples.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/ai-cli-tools-guide.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "6759",
+      "wordCount": "6306",
       "keywords": "CLI, AI, Python, Node.js, LLM, Developer Tools, Automation",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -83,44 +83,25 @@
         <span class="tag-cat">Automation</span></div>
       <h1 class="article-title">Building AI-Powered CLI Tools: A Complete Guide for Developers</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/ai-cli-tools-guide.png" alt="Building AI-Powered CLI Tools: A Complete Guide for Developers" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Building AI-Powered CLI Tools: A Complete Guide for Developers</h1>
 <br>
 <h1>Building AI-Powered CLI Tools: A Complete Guide for Developers</h1>
 <br>
-<br>
-<br>
-<br>
 <p>The terminal is having a renaissance. Developers spend hours in it every day — and LLMs have turned it from a read-only window into something that can understand, generate, and transform code and text. An AI-powered CLI tool isn't just an API wrapper with a flag parser. It's a new kind of interface: one where the computer can *interpret intent, reason about context, and take action*.</p>
-<br>
-<br>
-<br>
 <br>
 <p>This guide covers how to build these tools end-to-end: architecture patterns, Python and Node.js implementations, streaming, interactive flows, file-aware agents, packaging, and two real-world examples you can adapt right now.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Why AI CLI Tools Are Different</h2>
 <br>
-<br>
-<br>
-<br>
 <p>A traditional CLI tool maps flags to function calls. An AI CLI tool does something fundamentally different:</p>
-<br>
-<br>
 <br>
 <p>* **It interprets natural language.** `tldr docker-compose` searches a cheat sheet. `gpt "explain docker-compose networking"` understands intent.</p>
 <p>* **It has context.** File-aware tools read your codebase before answering.</p>
 <p>* **It can take multi-step actions.** Not just "output text" but "read files, plan, execute, verify."</p>
 <p>* **It streams reasoning.** Users see the model think, which builds trust and lets them cancel early.</p>
 <br>
-<br>
-<br>
 <p>The architecture looks like this:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    User Input (args, stdin, interactive) → CLI Framework (Click/Commander)</p>
 <br>
@@ -130,71 +111,31 @@
 <br>
 <p>          → Streaming stdout / file writes / git commits / API calls</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>The CLI framework handles input parsing and help text. The orchestrator constructs prompts, manages conversation history, and decides when to call tools. The LLM SDK is a thin wrapper — the real work is in prompt engineering and tool orchestration.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Architecture of AI CLI Tools</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Every AI CLI tool shares these layers:</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Input Layer.** Accepts flags, arguments, stdin, and interactive input. This is where you decide between `tool ask "question"`, `cat file | tool`, and `tool --interactive`.</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Context Layer.** Gathers information the model needs: file contents, git diff output, directory listings, environment variables, previous conversation turns.</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Orchestration Layer.** Manages the conversation loop. For simple tools this is one request/response. For agents, it's a loop: model responds, you execute tool calls, you feed results back, model responds again.</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Output Layer.** Streams tokens to stdout, formats structured output (JSON, markdown), and handles errors gracefully.</p>
-<br>
-<br>
-<br>
 <br>
 <p>The key design decision is **stateless vs. stateful**. Stateless tools (one question, one answer) are simpler. Stateful tools (multi-turn conversations, file edits, undo) require persistence — typically a session file or a temp directory.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Python: Click + LLM SDK</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Python is the most popular language for CLI tools, and [Click](https://click.palletsprojects.com/) is the standard framework. Pair it with the `openai` or `anthropic` SDK.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    import click</p>
 <br>
 <p>    from openai import OpenAI</p>
 <br>
-<br>
-<br>
 <p>    client = OpenAI()</p>
-<br>
-<br>
 <br>
 <p>    @click.command()</p>
 <br>
@@ -212,15 +153,11 @@
 <br>
 <p>            prompt = click.get_text_stream("stdin").read().strip()</p>
 <br>
-<br>
-<br>
 <p>        if not prompt:</p>
 <br>
 <p>            click.echo("Usage: ask PROMPT or pipe input")</p>
 <br>
 <p>            return</p>
-<br>
-<br>
 <br>
 <p>        stream = client.chat.completions.create(</p>
 <br>
@@ -238,8 +175,6 @@
 <br>
 <p>        )</p>
 <br>
-<br>
-<br>
 <p>        for chunk in stream:</p>
 <br>
 <p>            content = chunk.choices[0].delta.content or ""</p>
@@ -248,27 +183,13 @@
 <br>
 <p>        click.echo()</p>
 <br>
-<br>
-<br>
 <p>    if __name__ == "__main__":</p>
 <br>
 <p>        ask()</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>This tool accepts input as an argument or via stdin pipe, streams the response character by character, and uses Click's built-in help formatting. The streaming loop is the critical difference from a non-AI CLI — users expect to see output appear incrementally, not wait for a full response.</p>
 <br>
-<br>
-<br>
-<br>
 <p>For a richer experience with [Typer](https://typer.tiangolo.com/) (Click with type hints):</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    import typer</p>
 <br>
@@ -280,15 +201,11 @@
 <br>
 <p>    from anthropic import Anthropic</p>
 <br>
-<br>
-<br>
 <p>    app = typer.Typer()</p>
 <br>
 <p>    console = Console()</p>
 <br>
 <p>    client = Anthropic()</p>
-<br>
-<br>
 <br>
 <p>    @app.command()</p>
 <br>
@@ -307,8 +224,6 @@
 <p>            import sys</p>
 <br>
 <p>            prompt = sys.stdin.read().strip()</p>
-<br>
-<br>
 <br>
 <p>        with client.messages.stream(</p>
 <br>
@@ -330,32 +245,15 @@
 <br>
 <p>                    live.update(Markdown(collected))</p>
 <br>
-<br>
-<br>
 <p>    if __name__ == "__main__":</p>
 <br>
 <p>        app()</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Rich's `Live` display with Markdown rendering makes the terminal feel like a chat UI. The `stream.text_stream` pattern gives you tokens as they arrive.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Node.js: Commander + LangChain</h2>
 <br>
-<br>
-<br>
-<br>
 <p>In the Node.js ecosystem, [Commander](https://github.com/tj/commander.js) is the standard CLI framework. [LangChain](https://js.langchain.com/) adds LLM orchestration, or you can use the SDK directly.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    #!/usr/bin/env node</p>
 <br>
@@ -363,11 +261,7 @@
 <br>
 <p>    import Anthropic from '@anthropic-ai/sdk';</p>
 <br>
-<br>
-<br>
 <p>    const client = new Anthropic();</p>
-<br>
-<br>
 <br>
 <p>    const program = new Command()</p>
 <br>
@@ -399,8 +293,6 @@
 <br>
 <p>        }</p>
 <br>
-<br>
-<br>
 <p>        const stream = await client.messages.stream({</p>
 <br>
 <p>          model: options.model,</p>
@@ -413,26 +305,13 @@
 <br>
 <p>        }).on('text', (text) => process.stdout.write(text));</p>
 <br>
-<br>
-<br>
 <p>        console.log();</p>
 <br>
 <p>      });</p>
 <br>
-<br>
-<br>
 <p>    program.parse();</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>The `@anthropic-ai/sdk` Node.js streaming API emits `text` events. Write each chunk to `process.stdout` for that real-time feel. For more complex tools, LangChain's `RunnableSequence` lets you chain prompts, tools, and output parsers:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    import { Command } from 'commander';</p>
 <br>
@@ -442,13 +321,9 @@
 <br>
 <p>    import { ChatPromptTemplate } from '@langchain/core/prompts';</p>
 <br>
-<br>
-<br>
 <p>    const model = new ChatOpenAI({ model: 'gpt-4o', streaming: true });</p>
 <br>
 <p>    const parser = new StringOutputParser();</p>
-<br>
-<br>
 <br>
 <p>    const prompt = ChatPromptTemplate.fromMessages([</p>
 <br>
@@ -458,11 +333,7 @@
 <br>
 <p>    ]);</p>
 <br>
-<br>
-<br>
 <p>    const chain = prompt.pipe(model).pipe(parser);</p>
-<br>
-<br>
 <br>
 <p>    const program = new Command()</p>
 <br>
@@ -482,28 +353,13 @@
 <br>
 <p>      });</p>
 <br>
-<br>
-<br>
 <p>    program.parse();</p>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>LangChain shines when you need tool-calling agents (reading files, running commands, browsing the web). The chain abstraction keeps the orchestration readable.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Pattern: Streaming Responses to stdout</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Streaming is table stakes. Users won't wait 10 seconds for a full response. Here's the pattern that works across languages:</p>
-<br>
-<br>
 <br>
 <p>* **Open a streaming connection** to the LLM API.</p>
 <br>
@@ -513,20 +369,11 @@
 <br>
 <p>4\. **Support Ctrl+C.** Trap SIGINT to print a clean exit, not a traceback.</p>
 <br>
-<br>
-<br>
-<br>
 <p>In Python with Click:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    import signal</p>
 <br>
 <p>    import sys</p>
-<br>
-<br>
 <br>
 <p>    def handle_interrupt(sig, frame):</p>
 <br>
@@ -534,20 +381,9 @@
 <br>
 <p>        sys.exit(130)</p>
 <br>
-<br>
-<br>
 <p>    signal.signal(signal.SIGINT, handle_interrupt)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>In Node.js with Commander:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    process.on('SIGINT', () => {</p>
 <br>
@@ -557,36 +393,17 @@
 <br>
 <p>    });</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Rich formatting (Markdown, syntax highlighting) makes streaming output readable. But be careful with Rich's `Live` — it re-renders the entire output on each frame, which can be slow for long streams. For long outputs, raw `click.echo` or `process.stdout.write` is more performant.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Pattern: Interactive Multi-Step Tools</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Not every tool is a single query. Interactive tools maintain state across turns. The pattern is a **REPL loop** with AI-generated responses.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    import click</p>
 <br>
 <p>    from openai import OpenAI</p>
 <br>
-<br>
-<br>
 <p>    client = OpenAI()</p>
-<br>
-<br>
 <br>
 <p>    @click.command()</p>
 <br>
@@ -600,8 +417,6 @@
 <br>
 <p>        messages = [{"role": "system", "content": "You are a helpful assistant."}]</p>
 <br>
-<br>
-<br>
 <p>        while True:</p>
 <br>
 <p>            user_input = click.prompt("You", prompt_suffix="> ")</p>
@@ -610,8 +425,6 @@
 <br>
 <p>                break</p>
 <br>
-<br>
-<br>
 <p>            messages.append({"role": "user", "content": user_input})</p>
 <br>
 <p>            stream = client.chat.completions.create(</p>
@@ -619,8 +432,6 @@
 <p>                model=model, messages=messages, stream=True</p>
 <br>
 <p>            )</p>
-<br>
-<br>
 <br>
 <p>            click.echo("AI: ", nl=False)</p>
 <br>
@@ -636,20 +447,9 @@
 <br>
 <p>            click.echo()</p>
 <br>
-<br>
-<br>
 <p>            messages.append({"role": "assistant", "content": collected})</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>For **tool-using agents**, the pattern extends to a loop: the model requests a tool call, your code executes it and feeds the result back, the model continues:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    while True:</p>
 <br>
@@ -687,8 +487,6 @@
 <br>
 <p>        )</p>
 <br>
-<br>
-<br>
 <p>        if response.output[0].type == "function_call":</p>
 <br>
 <p>            fn = response.output[0]</p>
@@ -703,26 +501,11 @@
 <br>
 <p>            break</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>This is the same pattern powering Claude Code and similar AI coding agents. The complexity is in which tools you expose (file read/write, git, shell, search) and how much context you pack into the system prompt.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Pattern: File-Aware Tools</h2>
 <br>
-<br>
-<br>
-<br>
 <p>File-aware tools read the user's working directory before generating responses. This is the most useful pattern for developer tools.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    import os</p>
 <br>
@@ -730,11 +513,7 @@
 <br>
 <p>    from anthropic import Anthropic</p>
 <br>
-<br>
-<br>
 <p>    client = Anthropic()</p>
-<br>
-<br>
 <br>
 <p>    @click.command()</p>
 <br>
@@ -774,13 +553,9 @@
 <br>
 <p>                            pass</p>
 <br>
-<br>
-<br>
 <p>        context = "\n\n".join(contents[:20])  # limit context size</p>
 <br>
 <p>        prompt = f"The user wants to understand these files:\n\n{context}"</p>
-<br>
-<br>
 <br>
 <p>        with client.messages.stream(</p>
 <br>
@@ -798,26 +573,14 @@
 <br>
 <p>        click.echo()</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>The key challenge is **context window management**. You can't dump every file in a monorepo into the prompt. Strategies:</p>
-<br>
-<br>
 <br>
 <p>* **Token counting.** Use `tiktoken` (Python) or `gpt-tokenizer` (Node.js) to count tokens before sending. Truncate when approaching the model's limit.</p>
 <p>* **File globbing.** Let users specify patterns: `analyze src/**/*.py`.</p>
 <p>* **Smart filtering.** Skip binary files, node_modules, .git, and other non-text directories automatically.</p>
 <p>* **Chunking.** For large files, send only relevant sections (first 50 lines, function signatures, recent git changes).</p>
 <br>
-<br>
-<br>
 <h2>  CLI Framework Comparison</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| Feature | Click | Typer | Commander | Clack |</p>
 <br>
@@ -839,44 +602,19 @@
 <br>
 <p>| **Best for** | Any Python CLI | Python CLI + type safety | Any Node.js CLI | Interactive Node.js CLIs |</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Click** is the battle-tested Python standard. It handles argument parsing, help text formatting, subcommands, and shell completion. The decorator API is clean and composable.</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Typer** wraps Click with Python type hints. Less boilerplate, better autocomplete in IDEs, and built-in Rich integration for colored output and spinners.</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Commander** is Click's Node.js equivalent. It's minimal, widely used, and easy to extend. You handle streaming and spinners yourself.</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Clack** is newer and focused on *interactive* CLIs — prompts with autocomplete, multiselect, spinners, and cancel handling. It's not great for traditional flag-based tools, but excellent for `npm init`-style interactive setups.</p>
 <br>
-<br>
-<br>
-<br>
 <p>For AI CLI tools, Typer + Rich (Python) or Commander + `@clack/prompt` (Node.js) are the most productive combinations.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Real Example: AI Code Review CLI</h2>
 <br>
-<br>
-<br>
-<br>
 <p>This tool runs `git diff` against the staging area, sends the diff to an LLM for review, and outputs structured feedback.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    #!/usr/bin/env python3</p>
 <br>
@@ -886,11 +624,7 @@
 <br>
 <p>    from anthropic import Anthropic</p>
 <br>
-<br>
-<br>
 <p>    client = Anthropic()</p>
-<br>
-<br>
 <br>
 <p>    @click.command()</p>
 <br>
@@ -912,8 +646,6 @@
 <br>
 <p>            cmd = ["git", "diff"]</p>
 <br>
-<br>
-<br>
 <p>        result = subprocess.run(cmd, capture_output=True, text=True)</p>
 <br>
 <p>        if not result.stdout.strip():</p>
@@ -921,8 +653,6 @@
 <p>            click.echo("No changes to review.", err=True)</p>
 <br>
 <p>            raise click.Abort()</p>
-<br>
-<br>
 <br>
 <p>        # Count lines and warn</p>
 <br>
@@ -932,8 +662,6 @@
 <br>
 <p>            click.echo(f"Diff is {lines} lines, will review first 2000.", err=True)</p>
 <br>
-<br>
-<br>
 <p>        system = """You are a senior code reviewer. Review the git diff below.</p>
 <br>
 <p>    Focus on: logic errors, security issues, performance problems, style violations.</p>
@@ -942,11 +670,7 @@
 <br>
 <p>    Output in the format requested."""</p>
 <br>
-<br>
-<br>
 <p>        prompt = f"Review this git diff:\n\n```diff\n{result.stdout[:50000]}\n```"</p>
-<br>
-<br>
 <br>
 <p>        if output == "json":</p>
 <br>
@@ -980,38 +704,20 @@
 <br>
 <p>            click.echo()</p>
 <br>
-<br>
-<br>
 <p>    if __name__ == "__main__":</p>
 <br>
 <p>        review()</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>The code review tool is a good example of the **file-aware + git-aware** pattern. It captures context (the diff) without needing file I/O itself. The key design choices:</p>
-<br>
-<br>
 <br>
 <p>* **Git integration** via `subprocess` — no git library dependency.</p>
 <p>* **Size limits** — warns if the diff is too large.</p>
 <p>* **Output format selection** — text/markdown for human reading, JSON for CI pipeline consumption.</p>
 <p>* **Streaming** for interactive use, full response for JSON mode.</p>
 <br>
-<br>
-<br>
 <h2>  Real Example: AI Git Commit Message Generator</h2>
 <br>
-<br>
-<br>
-<br>
 <p>This is the most common AI CLI tool in the wild. It reads staged changes and generates a conventional commit message.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    #!/usr/bin/env python3</p>
 <br>
@@ -1023,11 +729,7 @@
 <br>
 <p>    from anthropic import Anthropic</p>
 <br>
-<br>
-<br>
 <p>    client = Anthropic()</p>
-<br>
-<br>
 <br>
 <p>    @click.command()</p>
 <br>
@@ -1055,17 +757,11 @@
 <br>
 <p>            raise click.Abort()</p>
 <br>
-<br>
-<br>
 <p>        prompt = f"""Generate a conventional commit message for this diff.</p>
 <br>
 <p>    Format: {commit_type or '<type>'}({scope or '<scope>'}): <description></p>
 <br>
-<br>
-<br>
 <p>    <body></p>
-<br>
-<br>
 <br>
 <p>    Rules:</p>
 <br>
@@ -1077,16 +773,9 @@
 <br>
 <p>    - Focus on WHAT and WHY, not HOW</p>
 <br>
-<br>
-<br>
 <p>    Diff:</p>
 <br>
-<br>
-<br>
 <p>{result.stdout[:20000]}</p>
-<br>
-<br>
-<br>
 <br>
 <p>        with client.messages.stream(</p>
 <br>
@@ -1106,43 +795,22 @@
 <br>
 <p>        click.echo("\n")</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Extended versions of this tool:</p>
-<br>
-<br>
 <br>
 <p>* **Interactive mode** — preview the message, accept/edit/reject.</p>
 <p>* **Multiple suggestions** — generate 3 options, let the user pick.</p>
 <p>* **Template support** — read `.gitmessage` templates.</p>
 <p>* **AI commit body generation** — expand the body with detailed reasoning.</p>
 <br>
-<br>
-<br>
 <h2>  Error Handling for LLM Calls in CLI</h2>
-<br>
-<br>
-<br>
 <br>
 <p>LLM calls fail in ways normal API calls don't. Your CLI must handle:</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Rate limits.** The API returns 429. Handle with exponential backoff plus jitter:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    import time</p>
 <br>
 <p>    import random</p>
-<br>
-<br>
 <br>
 <p>    def call_with_retry(client, max_retries=3, **kwargs):</p>
 <br>
@@ -1166,20 +834,9 @@
 <br>
 <p>                    raise</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Context overflow.** The prompt exceeds the model's context window. Pre-count tokens and truncate:</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    import tiktoken</p>
-<br>
-<br>
 <br>
 <p>    def truncate(text, model="claude-sonnet-4-20250514", max_tokens=80000):</p>
 <br>
@@ -1195,16 +852,7 @@
 <br>
 <p>        return text</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Network errors.** `ConnectionError`, `Timeout` — catch these specifically and give actionable messages:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    try:</p>
 <br>
@@ -1222,16 +870,7 @@
 <br>
 <p>        raise click.Abort()</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Structured error output.** For JSON mode, errors should also be JSON:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    @click.command()</p>
 <br>
@@ -1255,21 +894,9 @@
 <br>
 <p>            raise click.Abort()</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Packaging and Distribution</h2>
 <br>
-<br>
-<br>
-<br>
 <h3>PyPI (Python)</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # pyproject.toml</p>
 <br>
@@ -1278,8 +905,6 @@
 <p>    requires = ["setuptools", "wheel"]</p>
 <br>
 <p>    build-backend = "setuptools.build_meta"</p>
-<br>
-<br>
 <br>
 <p>    [project]</p>
 <br>
@@ -1297,27 +922,13 @@
 <br>
 <p>    ]</p>
 <br>
-<br>
-<br>
 <p>    [project.scripts]</p>
 <br>
 <p>    my-ai-tool = "my_ai_tool.cli:main"</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Install with `pip install my-ai-tool` or publish with `flit publish`.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>npm (Node.js)</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    {</p>
 <br>
@@ -1341,26 +952,11 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Publish with `npm publish`.</p>
-<br>
-<br>
-<br>
 <br>
 <h3>Homebrew (macOS/Linux)</h3>
 <br>
-<br>
-<br>
-<br>
 <p>For a Go or compiled binary, a Homebrew tap is the standard distribution channel:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class MyAiTool < Formula</p>
 <br>
@@ -1374,8 +970,6 @@
 <br>
 <p>      depends_on "python@3.12"</p>
 <br>
-<br>
-<br>
 <p>      def install</p>
 <br>
 <p>        bin.install "my-ai-tool"</p>
@@ -1384,42 +978,22 @@
 <br>
 <p>    end</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>For interpreted languages (Python, Node.js), PyPI and npm are better distribution channels. Homebrew makes sense for compiled binaries (Rust, Go, Zig) that embed the LLM client.</p>
-<br>
-<br>
-<br>
 <br>
 <h3>Environment and Configuration</h3>
 <br>
-<br>
-<br>
-<br>
 <p>AI CLI tools need API keys. Best practices:</p>
-<br>
-<br>
 <br>
 <p>* **Read `ANTHROPIC_API_KEY` or `OPENAI_API_KEY`** from environment variables by default.</p>
 <p>* **Support `.env` files** in the working directory.</p>
 <p>* **Store preferences** in `~/.config/my-tool/config.toml`.</p>
 <p>* **Never hardcode keys** — not even for testing. Use environment variables in CI too.</p>
 <br>
-<br>
-<br>
-<br>
 <p>    import os</p>
 <br>
 <p>    from dotenv import load_dotenv</p>
 <br>
-<br>
-<br>
 <p>    load_dotenv()  # load .env file</p>
-<br>
-<br>
 <br>
 <p>    api_key = os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("OPENAI_API_KEY")</p>
 <br>
@@ -1429,19 +1003,9 @@
 <br>
 <p>        raise click.Abort()</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Putting It All Together: Architecture Checklist</h2>
 <br>
-<br>
-<br>
-<br>
 <p>When designing a new AI CLI tool, run through these questions:</p>
-<br>
-<br>
 <br>
 <p>* **Input:** Arguments, flags, stdin, or interactive? What's the primary interface?</p>
 <br>
@@ -1459,22 +1023,11 @@
 <br>
 <p>8\. **Distribution:** PyPI, npm, Homebrew, or a single binary?</p>
 <br>
-<br>
-<br>
-<br>
 <p>The answers define your architecture. A simple "explain this error" tool needs only streaming Q&A.; A "refactor this codebase" tool needs file I/O, git integration, multi-step planning, and undo support.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Beyond Simple Wrappers</h2>
 <br>
-<br>
-<br>
-<br>
 <p>The tools described here are the foundation. The next generation of AI CLI tools will:</p>
-<br>
-<br>
 <br>
 <p>* **Watch files and react** (like `entr` or `watchexec`, but with AI analysis).</p>
 <p>* **Run as daemons** with persistent context (think `tmux` for AI sessions).</p>
@@ -1482,12 +1035,7 @@
 <p>* **Cache aggressively** — prompt caching cuts latency 2-3x and cost in half.</p>
 <p>* **Use local models** — `llama.cpp` and `mlx` make local LLMs viable for many CLI tasks.</p>
 <br>
-<br>
-<br>
 <p>The pattern is always the same: CLI framework handles input, LLM SDK handles generation, your orchestration code connects them. Get the streaming right, handle errors gracefully, and you have a tool that feels like magic in the terminal.</p>
-<br>
-<br>
-<br>
 <br>
 <p>See also: [Click vs Typer vs argparse](), [Best Terminal Emulators 2026](), [Best Local Dev Tools]().</p></div>
     </article>

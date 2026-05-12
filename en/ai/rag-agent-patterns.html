@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-agent-patterns.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval">
     <meta name="twitter:description" content="Explore RAG agent patterns that go beyond simple retrieval: self-querying agents, corrective RAG with verification, and adaptive retrieval strategies for comple">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-agent-patterns.png">
     <title>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval — SourceHub</title>
     <meta name="description" content="Explore RAG agent patterns that go beyond simple retrieval: self-querying agents, corrective RAG with verification, and adaptive retrieval strategies for comple">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval",
       "description": "Explore RAG agent patterns that go beyond simple retrieval: self-querying agents, corrective RAG with verification, and adaptive retrieval strategies for comple",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-agent-patterns.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1733",
+      "wordCount": "1628",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,28 +75,16 @@
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-agent-patterns.png" alt="RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Basic RAG retrieves documents once and generates an answer. RAG agents take this further: they decide when to retrieve, formulate their own queries, verify retrieved information, and adapt their strategy based on the question complexity. This article covers three agentic RAG patterns that dramatically improve retrieval quality.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Self-Query RAG</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Instead of using the raw user question as the search query, the agent generates an optimized query:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    def self_query_rag(question: str) -> str:</p>
 <br>
@@ -110,19 +98,13 @@
 <br>
 <p>        Output ONLY the search query, nothing else.</p>
 <br>
-<br>
-<br>
 <p>        User question: {question}</p>
 <br>
 <p>        """)</p>
 <br>
-<br>
-<br>
 <p>        # Step 2: Retrieve using optimized query</p>
 <br>
 <p>        chunks = vector_search(search_query, k=5)</p>
-<br>
-<br>
 <br>
 <p>        # Step 3: Generate answer from retrieved chunks</p>
 <br>
@@ -134,8 +116,6 @@
 <br>
 <p>        If the context does not contain enough information, say so.</p>
 <br>
-<br>
-<br>
 <p>        Context: {context}</p>
 <br>
 <p>        Question: {question}</p>
@@ -144,26 +124,11 @@
 <br>
 <p>        return answer</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>The self-query pattern resolves the fundamental mismatch between natural language questions and keyword-optimized search indices. A question like "How do I handle rate limiting?" becomes the search query "rate limiting strategies implementation patterns error handling."</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Corrective RAG (CRAG)</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Corrective RAG adds a verification step between retrieval and generation. If retrieved documents are irrelevant, the agent takes corrective action:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    def corrective_rag(question: str, max_attempts: int = 3) -> str:</p>
 <br>
@@ -172,8 +137,6 @@
 <p>            # Retrieve</p>
 <br>
 <p>            chunks = vector_search(question, k=5)</p>
-<br>
-<br>
 <br>
 <p>            # Score relevance</p>
 <br>
@@ -193,11 +156,7 @@
 <br>
 <p>                relevance_scores.append(float(score.strip()))</p>
 <br>
-<br>
-<br>
 <p>            avg_relevance = sum(relevance_scores) / len(relevance_scores)</p>
-<br>
-<br>
 <br>
 <p>            if avg_relevance >= 7:</p>
 <br>
@@ -223,30 +182,13 @@
 <br>
 <p>                question = reformulate_query(question, chunks)</p>
 <br>
-<br>
-<br>
 <p>        return "Unable to find sufficient information to answer this question."</p>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>CRAG prevents the "hallucinate confidently from irrelevant context" failure mode common in naive RAG. Each attempt either improves the query or escalates to a more sophisticated strategy.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Adaptive Retrieval</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Adaptive retrieval dynamically selects the retrieval strategy based on question characteristics:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class AdaptiveRetriever:</p>
 <br>
@@ -264,8 +206,6 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
 <p>        def retrieve(self, question: str) -> list[str]:</p>
 <br>
 <p>            # Classify the question type</p>
@@ -276,27 +216,19 @@
 <br>
 <p>            Respond with only the type name.</p>
 <br>
-<br>
-<br>
 <p>            Question: {question}</p>
 <br>
 <p>            """)</p>
 <br>
-<br>
-<br>
 <p>            strategy = self.strategies.get(q_type.strip(), self.factoid_retrieval)</p>
 <br>
 <p>            return strategy(question)</p>
-<br>
-<br>
 <br>
 <p>        def factoid_retrieval(self, question: str) -> list[str]:</p>
 <br>
 <p>            # Simple direct retrieval</p>
 <br>
 <p>            return vector_search(question, k=3)</p>
-<br>
-<br>
 <br>
 <p>        def comparison_retrieval(self, question: str) -> list[str]:</p>
 <br>
@@ -312,8 +244,6 @@
 <br>
 <p>            return docs[:6]</p>
 <br>
-<br>
-<br>
 <p>        def procedural_retrieval(self, question: str) -> list[str]:</p>
 <br>
 <p>            # Step-by-step retrieval</p>
@@ -328,8 +258,6 @@
 <br>
 <p>            return docs[:8]</p>
 <br>
-<br>
-<br>
 <p>        def analytical_retrieval(self, question: str) -> list[str]:</p>
 <br>
 <p>            # Retrieve broadly then narrow</p>
@@ -340,21 +268,9 @@
 <br>
 <p>            return reranked[:5]</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Multi-Hop Retrieval</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Some questions require retrieving information about entities discovered during retrieval:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    def multi_hop_rag(question: str, max_hops=3):</p>
 <br>
@@ -362,15 +278,11 @@
 <br>
 <p>        current_query = question</p>
 <br>
-<br>
-<br>
 <p>        for hop in range(max_hops):</p>
 <br>
 <p>            chunks = vector_search(current_query, k=3)</p>
 <br>
 <p>            context_chunks.extend(chunks)</p>
-<br>
-<br>
 <br>
 <p>            # Check if we need another hop</p>
 <br>
@@ -380,19 +292,13 @@
 <br>
 <p>            Answer YES or NO. If NO, specify what additional information is needed.</p>
 <br>
-<br>
-<br>
 <p>            Context so far: {' '.join(context_chunks[:5])}</p>
 <br>
 <p>            """)</p>
 <br>
-<br>
-<br>
 <p>            if needs_more.startswith("YES"):</p>
 <br>
 <p>                break</p>
-<br>
-<br>
 <br>
 <p>            # Extract the next search target</p>
 <br>
@@ -406,19 +312,9 @@
 <br>
 <p>            """)</p>
 <br>
-<br>
-<br>
 <p>        return generate_answer(question, context_chunks)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>RAG agents extend basic retrieval with reasoning. Self-query RAG optimizes the search query for better retrieval. Corrective RAG verifies retrieved content and adapts when relevance is low. Adaptive retrieval selects the strategy that fits the question type. Multi-hop retrieval follows information chains across documents. These patterns transform RAG from a single-pass lookup into an intelligent research process.</p></div>
     </article>

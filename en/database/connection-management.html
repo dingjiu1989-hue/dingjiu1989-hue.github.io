@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-management.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning">
     <meta name="twitter:description" content="Comprehensive guide to database connection management. Learn connection pooling with PgBouncer and HikariCP, max connections tuning, and best practices.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-management.png">
     <title>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning — SourceHub</title>
     <meta name="description" content="Comprehensive guide to database connection management. Learn connection pooling with PgBouncer and HikariCP, max connections tuning, and best practices.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning",
       "description": "Comprehensive guide to database connection management. Learn connection pooling with PgBouncer and HikariCP, max connections tuning, and best practices.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/connection-management.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1983",
+      "wordCount": "1890",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-management.png" alt="Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h1>
 <br>
 <p>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning   </p>
@@ -83,13 +84,9 @@
 <p>Each PostgreSQL backend process consumes approximately 5-10 MB of RAM, even when idle. A server with 500 connections uses 2.5-5 GB just for connection overhead. Beyond memory, connection creation is expensive: a new connection requires a TCP handshake, SSL negotiation, authentication, and backend forking.   </p>
 <p>The "Too Many Connections" Problem   </p>
 <br>
-<br>
-<br>
 <p>    -- Check current connections</p>
 <br>
 <p>    SELECT count(*), state FROM pg_stat_activity GROUP BY state;</p>
-<br>
-<br>
 <br>
 <p>    -- Find connections by application</p>
 <br>
@@ -99,23 +96,16 @@
 <br>
 <p>    GROUP BY application_name;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Connection pooling maintains a persistent set of database connections that applications borrow and return, avoiding the overhead of establishing connections on every request.   </p>
 <p>PgBouncer (Server-Side Pooling)   </p>
 <p>PgBouncer is a lightweight connection pooler for PostgreSQL. It runs as a separate process and proxies connections to the database.   </p>
 <p>Installation and Configuration   </p>
-<br>
-<br>
 <br>
 <p>    # pgbouncer.ini</p>
 <br>
 <p>    [databases]</p>
 <br>
 <p>    mydb = host=127.0.0.1 port=5432 dbname=mydb</p>
-<br>
-<br>
 <br>
 <p>    [pgbouncer]</p>
 <br>
@@ -141,27 +131,15 @@
 <br>
 <p>    query_timeout = 30</p>
 <br>
-<br>
-<br>
-<br>
 <p>Pooling Modes   </p>
 <p>| Mode | Description | Use Case | |------|-------------|----------| | `session` | Connection assigned for entire client session | Legacy apps, long-lived transactions | | `transaction` | Connection assigned per transaction | Default for web applications | | `statement` | Connection assigned per statement | Rare; only when no session state needed |   </p>
 <p>User List   </p>
 <br>
-<br>
-<br>
 <p>    echo '"app_user"' '"secure_password_hash"' > /etc/pgbouncer/userlist.txt</p>
-<br>
-<br>
-<br>
 <br>
 <p>Connecting Through PgBouncer   </p>
 <br>
-<br>
-<br>
 <p>    import psycopg2</p>
-<br>
-<br>
 <br>
 <p>    # Connect to PgBouncer port, not PostgreSQL directly</p>
 <br>
@@ -179,18 +157,11 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
-<br>
 <p>Monitoring PgBouncer   </p>
-<br>
-<br>
 <br>
 <p>    -- Connect to PgBouncer's admin database</p>
 <br>
 <p>    psql -p 6432 -U admin pgbouncer</p>
-<br>
-<br>
 <br>
 <p>    -- Show pool statistics</p>
 <br>
@@ -202,15 +173,10 @@
 <br>
 <p>    SHOW SERVERS;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Key metrics: `clients_active`, `clients_waiting`, `servers_active`, `servers_idle`, `maxwait`.   </p>
 <p>HikariCP (Client-Side Pooling)   </p>
 <p>HikariCP is the most popular connection pool for Java applications. It manages connections from within the application process.   </p>
 <p>Spring Boot Configuration   </p>
-<br>
-<br>
 <br>
 <p>    # application.yml</p>
 <br>
@@ -240,12 +206,7 @@
 <br>
 <p>          connection-test-query: SELECT 1</p>
 <br>
-<br>
-<br>
-<br>
 <p>HikariCP Validation   </p>
-<br>
-<br>
 <br>
 <p>    // Programmatic configuration</p>
 <br>
@@ -275,36 +236,19 @@
 <br>
 <p>    config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");</p>
 <br>
-<br>
-<br>
 <p>    HikariDataSource ds = new HikariDataSource(config);</p>
-<br>
-<br>
-<br>
 <br>
 <p>Pool Sizing Formula   </p>
 <p>The conventional formula for `max_connections` in PostgreSQL:   </p>
 <br>
-<br>
-<br>
 <p>    max_connections = (max_client_conn / default_pool_size) * 2 + superuser_reserved_connections</p>
-<br>
-<br>
-<br>
 <br>
 <p>But the **Formula rule of thumb** for optimal throughput is:   </p>
 <br>
-<br>
-<br>
 <p>    connections = 2 * CPU_cores + effective_spindle_count</p>
-<br>
-<br>
-<br>
 <br>
 <p>A 4-core machine with SSDs: `2 * 4 + 1 = 9` concurrent connections for optimal throughput. Beyond this, context switching and lock contention degrade performance.   </p>
 <p>Max Connections Tuning   </p>
-<br>
-<br>
 <br>
 <p>    # postgresql.conf</p>
 <br>
@@ -312,12 +256,7 @@
 <br>
 <p>    superuser_reserved_connections = 5</p>
 <br>
-<br>
-<br>
-<br>
 <p>Application Statement Timeout   </p>
-<br>
-<br>
 <br>
 <p>    -- Prevent runaway queries from holding connections</p>
 <br>
@@ -325,13 +264,8 @@
 <br>
 <p>    ALTER DATABASE mydb SET idle_in_transaction_session_timeout = '5min';</p>
 <br>
-<br>
-<br>
-<br>
 <p>Common Pitfalls   </p>
 <p>Connection Leaks   </p>
-<br>
-<br>
 <br>
 <p>    # Bad: connection not returned to pool</p>
 <br>
@@ -348,8 +282,6 @@
 <p>        # Missing: pool.putconn(conn)</p>
 <br>
 <p>        return result</p>
-<br>
-<br>
 <br>
 <p>    # Good: always use try/finally or context manager</p>
 <br>
@@ -369,18 +301,11 @@
 <br>
 <p>            pool.putconn(conn)</p>
 <br>
-<br>
-<br>
-<br>
 <p>Long-Running Queries in Pool   </p>
-<br>
-<br>
 <br>
 <p>    -- Set statement timeout at database level</p>
 <br>
 <p>    ALTER DATABASE mydb SET statement_timeout = '30000'; -- 30 seconds</p>
-<br>
-<br>
 <br>
 <p>    -- Kill queries exceeding threshold</p>
 <br>
@@ -392,13 +317,8 @@
 <br>
 <p>      AND now() - query_start > interval '5 minutes';</p>
 <br>
-<br>
-<br>
-<br>
 <p>Connection Starvation   </p>
 <p>When all pool connections are busy and requests queue:   </p>
-<br>
-<br>
 <br>
 <p>    spring.datasource.hikari:</p>
 <br>
@@ -408,12 +328,7 @@
 <br>
 <p>      # After 5 seconds, throw SQLException instead of hanging forever</p>
 <br>
-<br>
-<br>
-<br>
 <p>Monitoring Connection Health   </p>
-<br>
-<br>
 <br>
 <p>    -- Connection utilization</p>
 <br>
@@ -429,8 +344,6 @@
 <br>
 <p>    FROM pg_stat_activity;</p>
 <br>
-<br>
-<br>
 <p>    -- Waiting queries</p>
 <br>
 <p>    SELECT count(*) AS waiting_count</p>
@@ -438,8 +351,6 @@
 <p>    FROM pg_stat_activity</p>
 <br>
 <p>    WHERE wait_event IS NOT NULL AND state = 'active';</p>
-<br>
-<br>
 <br>
 <p>    -- Connection age</p>
 <br>
@@ -450,9 +361,6 @@
 <p>    ORDER BY connection_age DESC</p>
 <br>
 <p>    LIMIT 10;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Best Practices   </p>
 <br>

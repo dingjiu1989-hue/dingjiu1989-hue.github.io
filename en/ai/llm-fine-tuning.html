@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-fine-tuning.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="LLM Fine-Tuning Guide">
     <meta name="twitter:description" content="Learn how to fine-tune LLMs effectively using LoRA, QLoRA, and full fine-tuning techniques with practical code examples.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-fine-tuning.png">
     <title>LLM Fine-Tuning Guide — SourceHub</title>
     <meta name="description" content="Learn how to fine-tune LLMs effectively using LoRA, QLoRA, and full fine-tuning techniques with practical code examples.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "LLM Fine-Tuning Guide",
       "description": "Learn how to fine-tune LLMs effectively using LoRA, QLoRA, and full fine-tuning techniques with practical code examples.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-fine-tuning.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1411",
+      "wordCount": "1300",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,52 +74,28 @@
         <span class="tag-cat">Machine Learning</span></div>
       <h1 class="article-title">LLM Fine-Tuning Guide</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-fine-tuning.png" alt="LLM Fine-Tuning Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>LLM Fine-Tuning Guide</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Fine-tuning adapts a pre-trained language model to a specific task or domain. While prompt engineering and RAG handle many use cases out of the box, fine-tuning is essential when you need consistent formatting, domain-specific knowledge, or behavior that base models cannot achieve through prompting alone. This guide covers the full spectrum of fine-tuning approaches.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  When to Fine-Tune</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Before investing in fine-tuning, consider whether simpler approaches suffice:</p>
-<br>
-<br>
 <br>
 <p>* **Prompt engineering**: Good for simple formatting changes and basic instructions</p>
 <p>* **RAG**: Ideal for knowledge-intensive tasks with verifiable sources</p>
 <p>* **Fine-tuning**: Necessary for specialized output formats, tone adaptation, and consistent behavior patterns</p>
 <br>
-<br>
-<br>
 <p>Fine-tuning becomes cost-effective when you need to run many similar queries and can amortize the training cost over thousands or millions of inference calls.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Fine-Tuning Approaches</h2>
 <br>
-<br>
-<br>
-<br>
 <h3>Full Fine-Tuning</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Full fine-tuning updates all model parameters on a target dataset. This approach achieves the highest quality but requires substantial compute — full fine-tuning of a 7B parameter model requires approximately 56 GB of GPU memory per batch.</p>
-<br>
-<br>
-<br>
 <br>
 <p>**When to use full fine-tuning:**</p>
 <br>
@@ -128,22 +104,11 @@
 <p>* The domain shift from pre-training data is significant</p>
 <p>* Maximum quality is critical</p>
 <br>
-<br>
-<br>
 <h3>LoRA (Low-Rank Adaptation)</h3>
-<br>
-<br>
-<br>
 <br>
 <p>LoRA injects trainable rank-decomposition matrices into the model's attention layers, reducing the number of trainable parameters by 10,000x. A 7B model can be fine-tuned with LoRA on a single consumer GPU with 24 GB memory.</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    from peft import LoraConfig, get_peft_model</p>
-<br>
-<br>
 <br>
 <p>    lora_config = LoraConfig(</p>
 <br>
@@ -161,18 +126,11 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    model = get_peft_model(base_model, lora_config)</p>
 <br>
 <p>    print(f"Trainable params: {model.num_parameters(only_trainable=True):,}")</p>
 <br>
 <p>    # Output for Llama 2 7B: ~4,194,304 params (0.06% of total)</p>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>**Key hyperparameters:**</p>
 <br>
@@ -180,22 +138,11 @@
 <p>* **alpha**: Typically double the rank value (alpha = 2 * r)</p>
 <p>* **Target modules**: Include all attention projection matrices for best results</p>
 <br>
-<br>
-<br>
 <h3>QLoRA (Quantized LoRA)</h3>
-<br>
-<br>
-<br>
 <br>
 <p>QLoRA combines 4-bit quantization with LoRA, enabling fine-tuning of 65B models on a single 48GB GPU. The model weights are quantized to 4-bit while LoRA adapters remain in full precision.</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    from transformers import BitsAndBytesConfig</p>
-<br>
-<br>
 <br>
 <p>    bnb_config = BitsAndBytesConfig(</p>
 <br>
@@ -209,8 +156,6 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    model = AutoModelForCausalLM.from_pretrained(</p>
 <br>
 <p>        "meta-llama/Llama-2-7b-hf",</p>
@@ -221,29 +166,13 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>QLoRA achieves approximately 99% of full fine-tuning performance while reducing memory requirements by 4x.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Dataset Preparation</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Dataset quality matters more than quantity. A well-curated 1,000-example dataset outperforms a noisy 10,000-example one.</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Guidelines for instruction tuning datasets:**</p>
-<br>
-<br>
 <br>
 <p>* **Diverse prompts**: Cover all edge cases your system will encounter</p>
 <br>
@@ -255,14 +184,7 @@
 <br>
 <p>5\. **Validation split**: Hold out 5-10% for evaluation</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Format example:**</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    {</p>
 <br>
@@ -274,25 +196,11 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Training Process</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Modern fine-tuning uses the SFT (Supervised Fine-Tuning) trainer:</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    from trl import SFTTrainer</p>
-<br>
-<br>
 <br>
 <p>    trainer = SFTTrainer(</p>
 <br>
@@ -324,19 +232,9 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    trainer.train()</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Evaluation</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Evaluate fine-tuned models on:</p>
 <br>
@@ -345,17 +243,9 @@
 <p>* **Hallucination rate**: Does it invent facts?</p>
 <p>* **Regression**: Has performance degraded on unrelated tasks?</p>
 <br>
-<br>
-<br>
 <p>Use an automated evaluation harness comparing the fine-tuned model against the base model on a held-out test set.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Fine-tuning remains the most powerful tool for adapting LLMs to specific domains and tasks. Start with QLoRA for cost-effective experimentation, scale to full fine-tuning only when quality demands it. Focus on dataset quality over quantity, and always measure performance against a clear baseline.</p></div>
     </article>

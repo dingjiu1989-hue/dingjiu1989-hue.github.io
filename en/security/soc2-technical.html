@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/soc2-technical.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="SOC 2 Technical Controls">
     <meta name="twitter:description" content="Implementing SOC 2 technical controls for logging, monitoring, access review, and change management.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/soc2-technical.png">
     <title>SOC 2 Technical Controls — SourceHub</title>
     <meta name="description" content="Implementing SOC 2 technical controls for logging, monitoring, access review, and change management.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "SOC 2 Technical Controls",
       "description": "Implementing SOC 2 technical controls for logging, monitoring, access review, and change management.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/soc2-technical.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1656",
+      "wordCount": "1589",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">SOC 2 Technical Controls</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/soc2-technical.png" alt="SOC 2 Technical Controls" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>SOC 2 Technical Controls</h1>
 <br>
 <p>SOC 2 Overview   </p>
@@ -82,13 +83,9 @@
 <p>Logging and Monitoring   </p>
 <p>Comprehensive logging is the foundation of SOC 2:   </p>
 <br>
-<br>
-<br>
 <p>    import structlog</p>
 <br>
 <p>    from datetime import datetime</p>
-<br>
-<br>
 <br>
 <p>    class SOC2Logger:</p>
 <br>
@@ -103,8 +100,6 @@
 <p>                "source_ip", "outcome", "correlation_id"</p>
 <br>
 <p>            ]</p>
-<br>
-<br>
 <br>
 <p>        def log_access(self, user_id, action, resource, outcome, metadata=None):</p>
 <br>
@@ -132,15 +127,11 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
 <p>            self.logger.info("access_log", **log_entry)</p>
 <br>
 <p>            self.store_immutable(log_entry)</p>
 <br>
 <p>            return log_entry</p>
-<br>
-<br>
 <br>
 <p>        def store_immutable(self, log_entry):</p>
 <br>
@@ -152,19 +143,12 @@
 <br>
 <p>                f.write(json.dumps(log_entry) + "\n")</p>
 <br>
-<br>
-<br>
 <p>            # Also send to SIEM</p>
 <br>
 <p>            self.send_to_siem(log_entry)</p>
 <br>
-<br>
-<br>
-<br>
 <p>Access Review Automation   </p>
 <p>Automate periodic access reviews:   </p>
-<br>
-<br>
 <br>
 <p>    class AccessReviewAutomation:</p>
 <br>
@@ -182,13 +166,9 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
 <p>        def generate_review(self, department):</p>
 <br>
 <p>            users = self.idp.get_users_by_department(department)</p>
-<br>
-<br>
 <br>
 <p>            review = {</p>
 <br>
@@ -201,8 +181,6 @@
 <p>                "users": []</p>
 <br>
 <p>            }</p>
-<br>
-<br>
 <br>
 <p>            for user in users:</p>
 <br>
@@ -226,19 +204,13 @@
 <br>
 <p>                })</p>
 <br>
-<br>
-<br>
 <p>            return review</p>
-<br>
-<br>
 <br>
 <p>        def auto_disable_inactive(self, days_threshold=90):</p>
 <br>
 <p>            cutoff = datetime.utcnow() - timedelta(days=days_threshold)</p>
 <br>
 <p>            disabled = []</p>
-<br>
-<br>
 <br>
 <p>            for user in self.idp.get_all_users():</p>
 <br>
@@ -248,17 +220,10 @@
 <br>
 <p>                    disabled.append(user["email"])</p>
 <br>
-<br>
-<br>
 <p>            return disabled</p>
-<br>
-<br>
-<br>
 <br>
 <p>Change Management   </p>
 <p>Track and approve all infrastructure changes:   </p>
-<br>
-<br>
 <br>
 <p>    # change-management-pipeline.yaml</p>
 <br>
@@ -274,8 +239,6 @@
 <br>
 <p>        - access_policy_changes</p>
 <br>
-<br>
-<br>
 <p>      workflow:</p>
 <br>
 <p>        - request:</p>
@@ -289,8 +252,6 @@
 <p>              - rollback_plan</p>
 <br>
 <p>              - testing_completed</p>
-<br>
-<br>
 <br>
 <p>        - review:</p>
 <br>
@@ -306,8 +267,6 @@
 <br>
 <p>              - owner: same_team</p>
 <br>
-<br>
-<br>
 <p>        - implementation:</p>
 <br>
 <p>            window: business_hours</p>
@@ -320,8 +279,6 @@
 <br>
 <p>            require_change_window: high_risk</p>
 <br>
-<br>
-<br>
 <p>        - verification:</p>
 <br>
 <p>            - monitoring_metrics_normal</p>
@@ -330,12 +287,6 @@
 <br>
 <p>            - no_security_events</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # Change management API</p>
 <br>
 <p>    class ChangeManager:</p>
@@ -343,8 +294,6 @@
 <p>        def __init__(self):</p>
 <br>
 <p>            self.changes = []</p>
-<br>
-<br>
 <br>
 <p>        def create_change(self, request):</p>
 <br>
@@ -368,23 +317,15 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
 <p>            self.changes.append(change)</p>
 <br>
 <p>            self.notify_reviewers(change)</p>
 <br>
-<br>
-<br>
 <p>            return change</p>
-<br>
-<br>
 <br>
 <p>        def approve_change(self, change_id, reviewer, decision, comments):</p>
 <br>
 <p>            change = self.find_change(change_id)</p>
-<br>
-<br>
 <br>
 <p>            change["approvals"].append({</p>
 <br>
@@ -398,8 +339,6 @@
 <br>
 <p>            })</p>
 <br>
-<br>
-<br>
 <p>            if decision == "approved":</p>
 <br>
 <p>                change["status"] = "approved"</p>
@@ -410,8 +349,6 @@
 <br>
 <p>                change["status"] = "rejected"</p>
 <br>
-<br>
-<br>
 <p>        def post_implementation_review(self, change_id):</p>
 <br>
 <p>            change = self.find_change(change_id)</p>
@@ -419,9 +356,6 @@
 <p>            change["status"] = "completed"</p>
 <br>
 <p>            change["completed_at"] = datetime.utcnow().isoformat()</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>SOC 2 technical controls require systematic implementation across logging, access review, and change management. Implement immutable audit logging, automate access recertification, and enforce change management workflows. Continuous monitoring provides evidence for auditors and early detection of control failures. Automate evidence collection to reduce audit burden.</p></div>

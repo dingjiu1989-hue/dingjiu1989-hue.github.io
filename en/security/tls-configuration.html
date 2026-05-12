@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/tls-configuration.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="TLS Configuration Guide">
     <meta name="twitter:description" content="Practical TLS configuration guide covering cipher suites, HSTS, certificate pinning, TLS 1.3, and testing with SSL Labs.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/tls-configuration.png">
     <title>TLS Configuration Guide — SourceHub</title>
     <meta name="description" content="Practical TLS configuration guide covering cipher suites, HSTS, certificate pinning, TLS 1.3, and testing with SSL Labs.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "TLS Configuration Guide",
       "description": "Practical TLS configuration guide covering cipher suites, HSTS, certificate pinning, TLS 1.3, and testing with SSL Labs.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/tls-configuration.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1409",
+      "wordCount": "1331",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">TLS Configuration Guide</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/tls-configuration.png" alt="TLS Configuration Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>TLS Configuration Guide</h1>
 <br>
 <p>Introduction   </p>
 <p>Transport Layer Security (TLS) is the foundation of secure internet communication. However, TLS is only as strong as its configuration. Weak cipher suites, outdated protocol versions, and missing security headers leave connections vulnerable to downgrade attacks, protocol flaws, and traffic interception.   </p>
 <p>Cipher Suites   </p>
 <p>A cipher suite defines the cryptographic algorithms used for key exchange, authentication, encryption, and message authentication.   </p>
-<br>
-<br>
 <br>
 <p>    # Modern Nginx TLS configuration</p>
 <br>
@@ -92,13 +91,9 @@
 <br>
 <p>        server_name example.com;</p>
 <br>
-<br>
-<br>
 <p>        ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;</p>
 <br>
 <p>        ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;</p>
-<br>
-<br>
 <br>
 <p>        # Modern cipher suite selection</p>
 <br>
@@ -108,13 +103,9 @@
 <br>
 <p>        ssl_prefer_server_ciphers off;  # Let client negotiate for TLS 1.3</p>
 <br>
-<br>
-<br>
 <p>        # Modern key exchange</p>
 <br>
 <p>        ssl_ecdh_curve X25519:prime256v1:secp384r1;</p>
-<br>
-<br>
 <br>
 <p>        # OCSP stapling</p>
 <br>
@@ -128,12 +119,7 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Cipher Suite Breakdown   </p>
-<br>
-<br>
 <br>
 <p>    ECDHE   - Ephemeral Diffie-Hellman (forward secrecy)</p>
 <br>
@@ -145,12 +131,7 @@
 <br>
 <p>    SHA256  - SHA-256 HMAC (integrity)</p>
 <br>
-<br>
-<br>
-<br>
 <p>Deprecated Ciphers   </p>
-<br>
-<br>
 <br>
 <p>    # NEVER use these</p>
 <br>
@@ -158,19 +139,12 @@
 <br>
 <p>    ssl_ciphers RC4:3DES:EXPORT:NULL;     # Weak or broken</p>
 <br>
-<br>
-<br>
-<br>
 <p>HSTS (HTTP Strict Transport Security)   </p>
 <p>HSTS instructs browsers to always connect via HTTPS, preventing SSL stripping attacks.   </p>
-<br>
-<br>
 <br>
 <p>    # Strict HSTS for production</p>
 <br>
 <p>    add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;</p>
-<br>
-<br>
 <br>
 <p>    # Explanation:</p>
 <br>
@@ -180,21 +154,11 @@
 <br>
 <p>    # preload             - Allow inclusion in browser preload lists</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # Flask HSTS implementation</p>
 <br>
 <p>    from flask import Flask, make_response</p>
 <br>
-<br>
-<br>
 <p>    app = Flask(__name__)</p>
-<br>
-<br>
 <br>
 <p>    @app.after_request</p>
 <br>
@@ -208,13 +172,8 @@
 <br>
 <p>        return response</p>
 <br>
-<br>
-<br>
-<br>
 <p>Certificate Pinning   </p>
 <p>While HTTP Public Key Pinning (HPKP) is deprecated, certificate pinning techniques remain useful in controlled environments.   </p>
-<br>
-<br>
 <br>
 <p>    # TLS fingerprint validation (alternative to deprecated HPKP)</p>
 <br>
@@ -228,23 +187,17 @@
 <br>
 <p>    from cryptography.hazmat.primitives import hashes</p>
 <br>
-<br>
-<br>
 <p>    def validate_certificate_fingerprint(hostname, port=443, expected_hash=None):</p>
 <br>
 <p>        cert_pem = ssl.get_server_certificate((hostname, port))</p>
 <br>
 <p>        cert = x509.load_pem_x509_certificate(cert_pem.encode())</p>
 <br>
-<br>
-<br>
 <p>        # Calculate SHA-256 fingerprint</p>
 <br>
 <p>        fingerprint = cert.fingerprint(hashes.SHA256())</p>
 <br>
 <p>        fingerprint_hex = fingerprint.hex()</p>
-<br>
-<br>
 <br>
 <p>        if expected_hash and fingerprint_hex != expected_hash:</p>
 <br>
@@ -256,11 +209,7 @@
 <br>
 <p>            )</p>
 <br>
-<br>
-<br>
 <p>        return fingerprint_hex</p>
-<br>
-<br>
 <br>
 <p>    # Usage: pin to expected fingerprint</p>
 <br>
@@ -270,47 +219,28 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>TLS 1.3 Benefits   </p>
 <p>TLS 1.3 simplifies the handshake to one round trip (or zero with pre-shared keys), removes insecure features, and mandates forward secrecy.   </p>
-<br>
-<br>
 <br>
 <p>    # Test TLS 1.3 support</p>
 <br>
 <p>    openssl s_client -connect example.com:443 -tls1_3</p>
 <br>
-<br>
-<br>
-<br>
 <p>Testing with SSL Labs   </p>
-<br>
-<br>
 <br>
 <p>    # Using ssllabs-scan</p>
 <br>
 <p>    docker run --rm -t jumanjiman/ssllabs-scan example.com</p>
 <br>
-<br>
-<br>
 <p>    # Using testssl.sh</p>
 <br>
 <p>    testssl.sh --quiet --htmlfile report.html example.com</p>
-<br>
-<br>
 <br>
 <p>    # Quick curl-based check</p>
 <br>
 <p>    curl -sI https://example.com | grep -i "strict-transport-security\|x-frame-options\|content-security-policy"</p>
 <br>
-<br>
-<br>
-<br>
 <p>Full Hardened Configuration   </p>
-<br>
-<br>
 <br>
 <p>    # /etc/nginx/conf.d/ssl.conf - hardened TLS</p>
 <br>
@@ -328,8 +258,6 @@
 <br>
 <p>    ssl_session_tickets off;</p>
 <br>
-<br>
-<br>
 <p>    # OCSP Stapling</p>
 <br>
 <p>    ssl_stapling on;</p>
@@ -338,8 +266,6 @@
 <br>
 <p>    resolver 1.1.1.1 8.8.8.8 valid=300s;</p>
 <br>
-<br>
-<br>
 <p>    # Security Headers</p>
 <br>
 <p>    add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;</p>
@@ -347,9 +273,6 @@
 <p>    add_header X-Content-Type-Options nosniff always;</p>
 <br>
 <p>    add_header X-Frame-Options DENY always;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>A proper TLS configuration requires modern protocol versions (TLS 1.2 and 1.3), forward-secrecy cipher suites, HSTS enforcement, and regular testing with tools like SSL Labs and testssl.sh. Disable all legacy protocols and ciphers, enable OCSP stapling for performance, and consider certificate pinning for high-security APIs.</p></div>

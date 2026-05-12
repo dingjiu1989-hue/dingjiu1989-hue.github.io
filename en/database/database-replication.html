@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-replication.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Replication Patterns">
     <meta name="twitter:description" content="Explore database replication patterns including leader-follower, multi-leader, peer-to-peer, and strategies for high availability and read scaling.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-replication.png">
     <title>Database Replication Patterns — SourceHub</title>
     <meta name="description" content="Explore database replication patterns including leader-follower, multi-leader, peer-to-peer, and strategies for high availability and read scaling.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Replication Patterns",
       "description": "Explore database replication patterns including leader-follower, multi-leader, peer-to-peer, and strategies for high availability and read scaling.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-replication.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "451",
+      "wordCount": "434",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,6 +74,7 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Database Replication Patterns</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-replication.png" alt="Database Replication Patterns" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Replication Patterns</h1>
 <br>
 <p>Replication Fundamentals   </p>
@@ -81,28 +82,19 @@
 <p>Synchronous Replication   </p>
 <p>The primary waits for replicas to acknowledge writes:   </p>
 <br>
-<br>
-<br>
 <p>    -- PostgreSQL synchronous replication</p>
 <br>
 <p>    synchronous_commit = on</p>
 <br>
 <p>    synchronous_standby_names = '2 (standby1, standby2, standby3)'</p>
 <br>
-<br>
-<br>
 <p>    SELECT application_name, state, sync_state, sync_priority</p>
 <br>
 <p>    FROM pg_stat_replication;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Synchronous replication guarantees no data loss but increases latency.   </p>
 <p>Asynchronous Replication   </p>
 <p>The primary does not wait for replicas:   </p>
-<br>
-<br>
 <br>
 <p>    def check_replication_lag():</p>
 <br>
@@ -124,13 +116,8 @@
 <br>
 <p>                alert(f"Replication lag critical on {row[1]}")</p>
 <br>
-<br>
-<br>
-<br>
 <p>Conflict Resolution   </p>
 <p>Multi-primary replication requires conflict resolution:   </p>
-<br>
-<br>
 <br>
 <p>    class ConflictResolver:</p>
 <br>
@@ -141,9 +128,6 @@
 <p>            "majority_wins": lambda versions: Counter(versions).most_common(1)[0][0]</p>
 <br>
 <p>        }</p>
-<br>
-<br>
-<br>
 <br>
 <p>Replication Topologies   </p>
 <p>| Topology | Pros | Cons | |----------|------|------| | Primary-replica | Simple | Single point of failure | | Multi-primary | HA writes | Conflict resolution needed | | Cascading | Reduced primary load | Increased lag |   </p>

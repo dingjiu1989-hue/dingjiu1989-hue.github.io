@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-driven-architecture.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Event-Driven Architecture: Patterns and Practice">
     <meta name="twitter:description" content="Event-driven architecture with event sourcing, pub/sub, Kafka streaming, event schemas, idempotent consumers, and exactly-once processing.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-driven-architecture.png">
     <title>Event-Driven Architecture: Patterns and Practice — SourceHub</title>
     <meta name="description" content="Event-driven architecture with event sourcing, pub/sub, Kafka streaming, event schemas, idempotent consumers, and exactly-once processing.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Event-Driven Architecture: Patterns and Practice",
       "description": "Event-driven architecture with event sourcing, pub/sub, Kafka streaming, event schemas, idempotent consumers, and exactly-once processing.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-driven-architecture.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "3336",
+      "wordCount": "3219",
       "keywords": "Architecture, System Design",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,13 +74,12 @@
         <span class="tag-cat">System Design</span></div>
       <h1 class="article-title">Event-Driven Architecture: Patterns and Practice</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-driven-architecture.png" alt="Event-Driven Architecture: Patterns and Practice" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Event-Driven Architecture: Patterns and Practice</h1>
 <br>
 <p>Event-driven architecture (EDA) is a software architecture pattern where components communicate by producing and consuming events. Instead of direct service-to-service calls, services publish events about state changes, and interested services consume those events. This decoupling enables scalability, resilience, and real-time processing. This article covers the core patterns: event sourcing, pub/sub, event streaming, schema management, and consumer reliability.   </p>
 <p>Core Concepts   </p>
 <p>An event is a record of something that happened in the system. It is a fact: immutable, timestamped, and meaningful.   </p>
-<br>
-<br>
 <br>
 <p>    Event: OrderPlaced {</p>
 <br>
@@ -96,9 +95,6 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Events differ from commands and messages:   </p>
 <br>
 <p>* **Command**: A request for something to happen (imperative). "Place this order."</p>
@@ -109,8 +105,6 @@
 <p>Event sourcing stores the state of an application as a sequence of events. Instead of storing the current state (e.g., "account balance = 100"), event sourcing stores every state change ("AccountOpened", "MoneyDeposited", "MoneyWithdrawn").   </p>
 <p>How Event Sourcing Works   </p>
 <br>
-<br>
-<br>
 <p>    class Account:</p>
 <br>
 <p>        def __init__(self, account_id):</p>
@@ -120,8 +114,6 @@
 <p>            self.balance = 0</p>
 <br>
 <p>            self.version = 0</p>
-<br>
-<br>
 <br>
 <p>        def apply_event(self, event):</p>
 <br>
@@ -139,8 +131,6 @@
 <br>
 <p>            self.version += 1</p>
 <br>
-<br>
-<br>
 <p>        def rebuild_from_events(self, events):</p>
 <br>
 <p>            self.balance = 0</p>
@@ -151,15 +141,11 @@
 <br>
 <p>                self.apply_event(event)</p>
 <br>
-<br>
-<br>
 <p>    class EventSourcedAccountService:</p>
 <br>
 <p>        def __init__(self, event_store):</p>
 <br>
 <p>            self.event_store = event_store</p>
-<br>
-<br>
 <br>
 <p>        def deposit(self, account_id, amount):</p>
 <br>
@@ -171,15 +157,11 @@
 <br>
 <p>            account.rebuild_from_events(events)</p>
 <br>
-<br>
-<br>
 <p>            # Validate business rules</p>
 <br>
 <p>            if amount <= 0:</p>
 <br>
 <p>                raise ValueError("Amount must be positive")</p>
-<br>
-<br>
 <br>
 <p>            # Store the new event</p>
 <br>
@@ -196,9 +178,6 @@
 <p>            )</p>
 <br>
 <p>            self.event_store.append(event)</p>
-<br>
-<br>
-<br>
 <br>
 <p>Benefits of Event Sourcing   </p>
 <br>
@@ -217,13 +196,9 @@
 <p>Pub/Sub Pattern   </p>
 <p>Publish-subscribe is a messaging pattern where publishers emit events without knowing which subscribers will consume them. Subscribers express interest in certain event types and receive them asynchronously.   </p>
 <br>
-<br>
-<br>
 <p>    # Pub/sub using Redis</p>
 <br>
 <p>    import redis</p>
-<br>
-<br>
 <br>
 <p>    class EventPublisher:</p>
 <br>
@@ -231,13 +206,9 @@
 <br>
 <p>            self.redis = redis_client</p>
 <br>
-<br>
-<br>
 <p>        def publish(self, channel, event):</p>
 <br>
 <p>            self.redis.publish(channel, event.to_json())</p>
-<br>
-<br>
 <br>
 <p>    class EventSubscriber:</p>
 <br>
@@ -247,8 +218,6 @@
 <br>
 <p>            self.pubsub.subscribe(channel)</p>
 <br>
-<br>
-<br>
 <p>        def start_listening(self):</p>
 <br>
 <p>            for message in self.pubsub.listen():</p>
@@ -257,14 +226,9 @@
 <br>
 <p>                    self.handle_event(Event.from_json(message['data']))</p>
 <br>
-<br>
-<br>
 <p>        def handle_event(self, event):</p>
 <br>
 <p>            raise NotImplementedError</p>
-<br>
-<br>
-<br>
 <br>
 <p>When to Use Pub/Sub   </p>
 <br>
@@ -282,14 +246,9 @@
 <p>* **Consumer**: Reads events from a topic partition.</p>
 <p>* **Consumer group**: A set of consumers that cooperate to consume a topic. Each partition is consumed by exactly one consumer in the group.</p>
 <br>
-<br>
-<br>
-<br>
 <p>    from kafka import KafkaProducer, KafkaConsumer</p>
 <br>
 <p>    import json</p>
-<br>
-<br>
 <br>
 <p>    # Producer</p>
 <br>
@@ -300,8 +259,6 @@
 <p>        value_serializer=lambda v: json.dumps(v).encode('utf-8')</p>
 <br>
 <p>    )</p>
-<br>
-<br>
 <br>
 <p>    # Publish an event</p>
 <br>
@@ -329,8 +286,6 @@
 <br>
 <p>    producer.flush()</p>
 <br>
-<br>
-<br>
 <p>    # Consumer</p>
 <br>
 <p>    consumer = KafkaConsumer(</p>
@@ -347,8 +302,6 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    for message in consumer:</p>
 <br>
 <p>        event = message.value</p>
@@ -357,33 +310,21 @@
 <br>
 <p>        # Offset is committed automatically or manually after processing</p>
 <br>
-<br>
-<br>
-<br>
 <p>Partition Assignment Strategy   </p>
 <p>Events with the same key go to the same partition, preserving order within that key's scope. Good partition keys evenly distribute load while preserving ordering within each entity.   </p>
-<br>
-<br>
 <br>
 <p>    # Good partition key: customer_id (entities are naturally scoped)</p>
 <br>
 <p>    key = str(customer_id).encode()</p>
 <br>
-<br>
-<br>
 <p>    # Bad partition key: timestamp (all events go to one partition if in the same second)</p>
 <br>
 <p>    key = str(order_date).encode()</p>
-<br>
-<br>
-<br>
 <br>
 <p>Event Schemas   </p>
 <p>Events are contracts between producers and consumers. Schema management ensures that changes are compatible and do not break consumers.   </p>
 <p>Schema Registry   </p>
 <p>A schema registry stores and validates event schemas. Producers and consumers retrieve schemas from the registry.   </p>
-<br>
-<br>
 <br>
 <p>    // Avro schema for OrderPlaced event</p>
 <br>
@@ -433,9 +374,6 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Schema Evolution Rules   </p>
 <br>
 <p>* **Backward compatible**: New schema can read data written with the old schema. Adding optional fields is backward compatible.</p>
@@ -453,15 +391,11 @@
 <p>Idempotency Strategies   </p>
 <p>**Idempotency key**: Track processed event IDs in a database table.   </p>
 <br>
-<br>
-<br>
 <p>    class IdempotentConsumer:</p>
 <br>
 <p>        def __init__(self, db_connection):</p>
 <br>
 <p>            self.db = db_connection</p>
-<br>
-<br>
 <br>
 <p>        def process_event(self, event):</p>
 <br>
@@ -481,13 +415,9 @@
 <br>
 <p>                return  # Idempotent: skip</p>
 <br>
-<br>
-<br>
 <p>            # Process event</p>
 <br>
 <p>            self.handle_event(event)</p>
-<br>
-<br>
 <br>
 <p>            # Record as processed (in same transaction if possible)</p>
 <br>
@@ -499,12 +429,7 @@
 <br>
 <p>            )</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Deterministic processing**: Make event processing inherently idempotent.   </p>
-<br>
-<br>
 <br>
 <p>    # Deterministic: setting status is idempotent</p>
 <br>
@@ -520,12 +445,7 @@
 <br>
 <p>        # Running this twice sets "shipped" twice — same result.</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Compare-and-swap**: Only apply the event if the current state matches expectations.   </p>
-<br>
-<br>
 <br>
 <p>    def handle_payment_confirmed(event):</p>
 <br>
@@ -541,19 +461,12 @@
 <br>
 <p>        # If already processed, the WHERE clause prevents double application.</p>
 <br>
-<br>
-<br>
-<br>
 <p>Exactly-Once Processing   </p>
 <p>Exactly-once processing is the holy grail of event-driven systems. It ensures each event is processed exactly one time, even in the presence of failures.   </p>
 <p>Kafka Exactly-Once Semantics   </p>
 <p>Kafka supports exactly-once semantics (EOS) through transactional producers and consumers.   </p>
 <br>
-<br>
-<br>
 <p>    from kafka import KafkaProducer</p>
-<br>
-<br>
 <br>
 <p>    # Transactional producer</p>
 <br>
@@ -567,23 +480,15 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    producer.init_transactions()</p>
-<br>
-<br>
 <br>
 <p>    try:</p>
 <br>
 <p>        producer.begin_transaction()</p>
 <br>
-<br>
-<br>
 <p>        # Read from source topic</p>
 <br>
 <p>        event = read_event()</p>
-<br>
-<br>
 <br>
 <p>        # Process and produce to multiple topics</p>
 <br>
@@ -591,23 +496,16 @@
 <br>
 <p>        producer.send('notifications', value=build_notification(event))</p>
 <br>
-<br>
-<br>
 <p>        producer.commit_transaction()</p>
 <br>
 <p>    except Exception:</p>
 <br>
 <p>        producer.abort_transaction()</p>
 <br>
-<br>
-<br>
-<br>
 <p>For idempotent end-to-end processing, combine Kafka transactions with a transactional-outbox pattern.   </p>
 <p>Common Patterns   </p>
 <p>Transactional Outbox   </p>
 <p>When a service needs to both write to its database and publish an event, use the outbox pattern to ensure atomicity:   </p>
-<br>
-<br>
 <br>
 <p>    # Transactional outbox</p>
 <br>
@@ -618,8 +516,6 @@
 <p>            # 1. Write to database</p>
 <br>
 <p>            order_id = db.insert("orders", order_data)</p>
-<br>
-<br>
 <br>
 <p>            # 2. Write event to outbox table (same database, same transaction)</p>
 <br>
@@ -633,19 +529,12 @@
 <br>
 <p>            })</p>
 <br>
-<br>
-<br>
 <p>        # 3. Outbox relay picks up and publishes</p>
 <br>
 <p>        # This runs after the transaction commits</p>
 <br>
-<br>
-<br>
-<br>
 <p>Dead Letter Queue   </p>
 <p>Events that cannot be processed after retries go to a dead letter queue (DLQ):   </p>
-<br>
-<br>
 <br>
 <p>    def process_with_dlq(raw_event_content, max_retries=3):</p>
 <br>
@@ -669,14 +558,9 @@
 <br>
 <p>                        time.sleep(2 ** attempt)  # Exponential backoff</p>
 <br>
-<br>
-<br>
 <p>            # Send to DLQ</p>
 <br>
 <p>            dlq.send(raw_event_content, error=str(e), original_topic="orders")</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Event-driven architecture decouples services through asynchronous event communication. Event sourcing provides a complete audit trail. Pub/sub enables flexible integration. Kafka provides durable, scalable event streaming. Schema management ensures compatible evolution. Idempotent consumers and exactly-once processing guarantee reliability. Use EDA when you need real-time processing, loose coupling, and multiple consumers of the same events. Start simple with pub/sub and event streaming, and add event sourcing only when the complexity is justified by the benefits.</p></div>

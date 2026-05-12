@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/sql-query-optimization.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="SQL Query Optimization">
     <meta name="twitter:description" content="Master SQL query optimization with EXPLAIN plans, indexing strategies, JOIN optimization, and common performance anti-patterns.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/sql-query-optimization.png">
     <title>SQL Query Optimization — SourceHub</title>
     <meta name="description" content="Master SQL query optimization with EXPLAIN plans, indexing strategies, JOIN optimization, and common performance anti-patterns.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "SQL Query Optimization",
       "description": "Master SQL query optimization with EXPLAIN plans, indexing strategies, JOIN optimization, and common performance anti-patterns.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/sql-query-optimization.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1498",
+      "wordCount": "1426",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,14 +74,13 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">SQL Query Optimization</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/sql-query-optimization.png" alt="SQL Query Optimization" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>SQL Query Optimization</h1>
 <br>
 <p>Why Query Optimization Matters   </p>
 <p>A poorly written query can take seconds or minutes instead of milliseconds, consuming database resources and degrading the experience for all users. Optimizing queries is often the highest-ROI performance improvement you can make because it requires no infrastructure changes.   </p>
 <p>Understanding EXPLAIN   </p>
 <p>Every database has a query planner that decides how to execute your SQL. EXPLAIN shows you the plan.   </p>
-<br>
-<br>
 <br>
 <p>    EXPLAIN ANALYZE</p>
 <br>
@@ -97,12 +96,7 @@
 <br>
 <p>    HAVING COUNT(o.id) > 5;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Output analysis:   </p>
-<br>
-<br>
 <br>
 <p>    Hash Join  (cost=125.4..892.1 rows=342 width=72)</p>
 <br>
@@ -116,16 +110,11 @@
 <br>
 <p>            ->  Seq Scan on orders o  (cost=0.0..89.2 rows=2892 width=8)</p>
 <br>
-<br>
-<br>
-<br>
 <p>Key metrics to watch:   </p>
 <p>| Metric | What It Means | Good | Bad | |--------|---------------|------|-----| | `cost` | Estimated cost (arbitrary units) | Low | High | | `rows` | Estimated rows returned | Accurate | Off by 10x+ | | `actual time` | Actual execution time | ms | seconds | | `Seq Scan` | Full table scan | Small tables | Large tables | | `Sort` | Explicit sort operation | Sorted data | Large sorts to disk |   </p>
 <p>Indexing for Query Performance   </p>
 <p>Covering Indexes   </p>
 <p>An index that contains all columns needed by a query, enabling index-only scans:   </p>
-<br>
-<br>
 <br>
 <p>    -- Query needs: id, email, status, created_at</p>
 <br>
@@ -133,15 +122,11 @@
 <br>
 <p>    CREATE INDEX idx_users_status ON users(status);</p>
 <br>
-<br>
-<br>
 <p>    -- Create a covering index:</p>
 <br>
 <p>    CREATE INDEX idx_users_status_covering</p>
 <br>
 <p>    ON users(status) INCLUDE (email, created_at);</p>
-<br>
-<br>
 <br>
 <p>    -- Now this query uses an index-only scan:</p>
 <br>
@@ -153,15 +138,10 @@
 <br>
 <p>    ORDER BY created_at DESC;</p>
 <br>
-<br>
-<br>
-<br>
 <p>JOIN Optimization   </p>
 <p>Nested Loop vs Hash Join vs Merge Join   </p>
 <p>| Join Type | When It Is Used | Best For | |-----------|-----------------|----------| | Nested Loop | One table is small, other is indexed | Small result sets | | Hash Join | No useful index, medium tables | Unindexed joins | | Merge Join | Both tables sorted on join key | Large sorted datasets |   </p>
 <p>Optimizing JOINs   </p>
-<br>
-<br>
 <br>
 <p>    -- INEFFICIENT: Joining without indexes</p>
 <br>
@@ -173,32 +153,21 @@
 <br>
 <p>    WHERE c.country = 'US';</p>
 <br>
-<br>
-<br>
 <p>    -- Add index on the join column</p>
 <br>
 <p>    CREATE INDEX idx_orders_customer ON orders(customer_id);</p>
 <br>
 <p>    CREATE INDEX idx_customers_country ON customers(country);</p>
 <br>
-<br>
-<br>
 <p>    -- Now the planner can use indexes effectively</p>
 <br>
-<br>
-<br>
-<br>
 <p>Subquery vs CTE vs JOIN   </p>
-<br>
-<br>
 <br>
 <p>    -- Option 1: Subquery</p>
 <br>
 <p>    SELECT name, (SELECT COUNT(*) FROM orders WHERE user_id = users.id) AS order_count</p>
 <br>
 <p>    FROM users;</p>
-<br>
-<br>
 <br>
 <p>    -- Option 2: Lateral join (often fastest)</p>
 <br>
@@ -216,8 +185,6 @@
 <br>
 <p>    ) sq ON true;</p>
 <br>
-<br>
-<br>
 <p>    -- Option 3: Regular JOIN + GROUP BY</p>
 <br>
 <p>    SELECT u.name, COUNT(o.id) AS order_count</p>
@@ -228,22 +195,15 @@
 <br>
 <p>    GROUP BY u.id, u.name;</p>
 <br>
-<br>
-<br>
-<br>
 <p>For correlated subqueries, LATERAL joins are often the best choice because they can use indexes efficiently.   </p>
 <p>Avoiding Common Anti-Patterns   </p>
 <p>SELECT * (Especially with JOINs)   </p>
-<br>
-<br>
 <br>
 <p>    -- BAD: Selects all columns, may force heap lookups</p>
 <br>
 <p>    SELECT * FROM users</p>
 <br>
 <p>    JOIN orders ON users.id = orders.user_id;</p>
-<br>
-<br>
 <br>
 <p>    -- GOOD: Select only needed columns</p>
 <br>
@@ -253,12 +213,7 @@
 <br>
 <p>    JOIN orders ON users.id = orders.user_id;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Functions on Indexed Columns   </p>
-<br>
-<br>
 <br>
 <p>    -- BAD: Function prevents index use</p>
 <br>
@@ -266,20 +221,13 @@
 <br>
 <p>    WHERE LOWER(email) = 'alice@example.com';</p>
 <br>
-<br>
-<br>
 <p>    -- GOOD: Use a proper case-insensitive index or column</p>
 <br>
 <p>    CREATE INDEX idx_users_email_lower ON users(LOWER(email));</p>
 <br>
 <p>    SELECT * FROM users WHERE LOWER(email) = 'alice@example.com';</p>
 <br>
-<br>
-<br>
-<br>
 <p>Implicit Type Conversion   </p>
-<br>
-<br>
 <br>
 <p>    -- BAD: Type conversion prevents index use</p>
 <br>
@@ -287,26 +235,17 @@
 <br>
 <p>    WHERE order_date = '2026-05-11';  -- text vs date</p>
 <br>
-<br>
-<br>
 <p>    -- GOOD: Explicit cast</p>
 <br>
 <p>    SELECT * FROM orders</p>
 <br>
 <p>    WHERE order_date = DATE '2026-05-11';</p>
 <br>
-<br>
-<br>
-<br>
 <p>Pagination with OFFSET   </p>
-<br>
-<br>
 <br>
 <p>    -- BAD: OFFSET re-scans skipped rows</p>
 <br>
 <p>    SELECT * FROM orders ORDER BY id LIMIT 20 OFFSET 10000;</p>
-<br>
-<br>
 <br>
 <p>    -- GOOD: Keyset pagination (seek method)</p>
 <br>
@@ -318,12 +257,7 @@
 <br>
 <p>    LIMIT 20;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Query Rewriting Examples   </p>
-<br>
-<br>
 <br>
 <p>    -- BEFORE (Slow - 12s)</p>
 <br>
@@ -334,8 +268,6 @@
 <p>    FROM products p</p>
 <br>
 <p>    WHERE p.category_id = 5;</p>
-<br>
-<br>
 <br>
 <p>    -- AFTER (Fast - 0.3s)</p>
 <br>
@@ -356,9 +288,6 @@
 <p>    ) gr ON p.id = gr.product_id</p>
 <br>
 <p>    WHERE p.category_id = 5;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Performance Budgets   </p>
 <p>| Query Type | Target Latency | Max Rows Returned | |------------|---------------|-------------------| | Simple lookup (by PK) | < 5ms | 1 | | List with filter | < 50ms | 100 | | Report/aggregation | < 500ms | 10000 | | Dashboard | < 2s | 1000 | | Batch/ETL | < 30min | Unlimited |   </p>

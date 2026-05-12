@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/columnar-databases.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Columnar Databases: When and How to Use Them">
     <meta name="twitter:description" content="Columnar databases like ClickHouse, Redshift, and BigQuery, their compression techniques, query performance advantages, and use cases.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/columnar-databases.png">
     <title>Columnar Databases: When and How to Use Them — SourceHub</title>
     <meta name="description" content="Columnar databases like ClickHouse, Redshift, and BigQuery, their compression techniques, query performance advantages, and use cases.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Columnar Databases: When and How to Use Them",
       "description": "Columnar databases like ClickHouse, Redshift, and BigQuery, their compression techniques, query performance advantages, and use cases.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/columnar-databases.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "359",
+      "wordCount": "347",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,14 +74,13 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Columnar Databases: When and How to Use Them</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/columnar-databases.png" alt="Columnar Databases: When and How to Use Them" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Columnar Databases: When and How to Use Them</h1>
 <br>
 <p>Columnar Storage   </p>
 <p>Columnar databases store data by column rather than by row. This enables aggressive compression and fast analytical queries.   </p>
 <p>Row vs Columnar   </p>
 <p>Row-oriented storage writes each row contiguously. Columnar stores all values of a column together, enabling efficient scans of a few columns across millions of rows.   </p>
-<br>
-<br>
 <br>
 <p>    -- ClickHouse: columnar query</p>
 <br>
@@ -93,19 +92,12 @@
 <br>
 <p>    GROUP BY region;</p>
 <br>
-<br>
-<br>
 <p>    -- Only reads 3 columns instead of all columns</p>
-<br>
-<br>
-<br>
 <br>
 <p>Compression Techniques   </p>
 <p>Columnar databases use specialized compression: run-length encoding for low-cardinality columns, dictionary encoding, and delta encoding for sorted columns. Compression ratios of 5-10x are common.   </p>
 <p>When to Use Columnar   </p>
 <p>| Database | Best For | Notable Feature | |----------|----------|-----------------| | ClickHouse | Real-time analytics | MergeTree engine | | DuckDB | Embedded analytics | In-process OLAP | | Redshift | Cloud data warehousing | MPP architecture |   </p>
-<br>
-<br>
 <br>
 <p>    -- ClickHouse table</p>
 <br>
@@ -120,9 +112,6 @@
 <p>    ) ENGINE = MergeTree()</p>
 <br>
 <p>    ORDER BY (event_type, timestamp);</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Use columnar databases for analytical workloads scanning many rows but few columns. ClickHouse for real-time, DuckDB for embedded, Redshift for cloud. Avoid for transactional workloads with frequent single-row operations.</p></div>

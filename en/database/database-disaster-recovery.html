@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-disaster-recovery.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Disaster Recovery: RPO, RTO, Cross-Region Replication">
     <meta name="twitter:description" content="Learn database disaster recovery planning: RPO and RPO definitions, cross-region replication strategies, backup testing, and DR drill execution.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-disaster-recovery.png">
     <title>Database Disaster Recovery: RPO, RTO, Cross-Region Replication — SourceHub</title>
     <meta name="description" content="Learn database disaster recovery planning: RPO and RPO definitions, cross-region replication strategies, backup testing, and DR drill execution.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Disaster Recovery: RPO, RTO, Cross-Region Replication",
       "description": "Learn database disaster recovery planning: RPO and RPO definitions, cross-region replication strategies, backup testing, and DR drill execution.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-disaster-recovery.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1646",
+      "wordCount": "1555",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-disaster-recovery.png" alt="Database Disaster Recovery: RPO, RTO, Cross-Region Replication" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h1>
 <br>
 <p>Database Disaster Recovery: RPO, RTO, Cross-Region Replication   </p>
@@ -87,13 +88,9 @@
 <p>Cross-Region Replication   </p>
 <p>PostgreSQL Logical Replication Across Regions   </p>
 <br>
-<br>
-<br>
 <p>    -- On primary (us-east-1)</p>
 <br>
 <p>    CREATE PUBLICATION dr_pub FOR ALL TABLES;</p>
-<br>
-<br>
 <br>
 <p>    -- On standby (us-west-2)</p>
 <br>
@@ -105,12 +102,7 @@
 <br>
 <p>        WITH (copy_data = true, connect = true, create_slot = true);</p>
 <br>
-<br>
-<br>
-<br>
 <p>Logical replication works across regions with asynchronous delivery. Monitor lag carefully:   </p>
-<br>
-<br>
 <br>
 <p>    SELECT pg_size_pretty(</p>
 <br>
@@ -128,12 +120,7 @@
 <br>
 <p>    WHERE application_name = 'dr_sub';</p>
 <br>
-<br>
-<br>
-<br>
 <p>AWS RDS Cross-Region Read Replicas   </p>
-<br>
-<br>
 <br>
 <p>    # Create cross-region read replica</p>
 <br>
@@ -147,8 +134,6 @@
 <br>
 <p>      --db-instance-class db.r6g.large</p>
 <br>
-<br>
-<br>
 <p>    # Promote to standalone for DR</p>
 <br>
 <p>    aws rds promote-read-replica \</p>
@@ -157,13 +142,8 @@
 <br>
 <p>      --region us-west-2</p>
 <br>
-<br>
-<br>
-<br>
 <p>Multi-Region with Patroni   </p>
 <p>Patroni can manage clusters across regions with careful configuration:   </p>
-<br>
-<br>
 <br>
 <p>    # DR site configuration</p>
 <br>
@@ -173,33 +153,22 @@
 <br>
 <p>    name: pg-dr-node-1</p>
 <br>
-<br>
-<br>
 <p>    consul:</p>
 <br>
 <p>      host: dr-consul.service.consul:8500</p>
 <br>
 <p>      # Separate DCS for DR isolation</p>
 <br>
-<br>
-<br>
 <p>    tags:</p>
 <br>
 <p>      nofailover: true  # DR site should not automatically become primary</p>
 <br>
-<br>
-<br>
-<br>
 <p>Backup-Based DR   </p>
 <p>For cost-sensitive environments, backups plus WAL archiving to S3 provide DR:   </p>
-<br>
-<br>
 <br>
 <p>    # Continuous WAL archiving to cross-region S3 bucket</p>
 <br>
 <p>    archive_command = 'aws s3 cp %p s3://myapp-wal-dr/region/us-east-1/%f'</p>
-<br>
-<br>
 <br>
 <p>    # DR restore procedure</p>
 <br>
@@ -207,24 +176,15 @@
 <br>
 <p>    pg_receivewal --directory /backups/dr/wal</p>
 <br>
-<br>
-<br>
-<br>
 <p>Recovery Workflow   </p>
-<br>
-<br>
 <br>
 <p>    #!/bin/bash</p>
 <br>
 <p>    # Dr: restore to us-west-2</p>
 <br>
-<br>
-<br>
 <p>    # 1. Restore latest full backup</p>
 <br>
 <p>    pgbackrest --stanza=prod --db-path=/var/lib/postgresql/dr restore</p>
-<br>
-<br>
 <br>
 <p>    # 2. Set recovery target</p>
 <br>
@@ -238,13 +198,9 @@
 <br>
 <p>    EOF</p>
 <br>
-<br>
-<br>
 <p>    # 3. Start and recover</p>
 <br>
 <p>    pg_ctl start -D /var/lib/postgresql/dr</p>
-<br>
-<br>
 <br>
 <p>    # 4. Verify data integrity</p>
 <br>
@@ -252,14 +208,9 @@
 <br>
 <p>    psql -c "SELECT max(created_at) FROM orders;"</p>
 <br>
-<br>
-<br>
-<br>
 <p>Backup Testing   </p>
 <p>Backups are worthless until proven restorable. Regular testing is mandatory.   </p>
 <p>Automated Restore Test   </p>
-<br>
-<br>
 <br>
 <p>    #!/bin/bash</p>
 <br>
@@ -267,27 +218,17 @@
 <br>
 <p>    set -euo pipefail</p>
 <br>
-<br>
-<br>
 <p>    TEST_DIR=/tmp/dr_test_$(date +%Y%m%d)</p>
 <br>
 <p>    LOG_FILE=$TEST_DIR/restore.log</p>
 <br>
-<br>
-<br>
 <p>    mkdir -p $TEST_DIR</p>
 <br>
-<br>
-<br>
 <p>    echo "=== DR Restore Test $(date) ===" >> $LOG_FILE</p>
-<br>
-<br>
 <br>
 <p>    # Full restore</p>
 <br>
 <p>    pgbackrest --stanza=prod --db-path=$TEST_DIR/data restore >> $LOG_FILE 2>&1</p>
-<br>
-<br>
 <br>
 <p>    # Start database</p>
 <br>
@@ -295,15 +236,11 @@
 <br>
 <p>    sleep 5</p>
 <br>
-<br>
-<br>
 <p>    # Verify</p>
 <br>
 <p>    echo "Database size:"</p>
 <br>
 <p>    psql -p 5433 -c "SELECT pg_size_pretty(pg_database_size('proddb'));"</p>
-<br>
-<br>
 <br>
 <p>    echo "Row counts:"</p>
 <br>
@@ -321,8 +258,6 @@
 <br>
 <p>    "</p>
 <br>
-<br>
-<br>
 <p>    echo "Max dates (data freshness):"</p>
 <br>
 <p>    psql -p 5433 -c "</p>
@@ -335,29 +270,17 @@
 <br>
 <p>    "</p>
 <br>
-<br>
-<br>
 <p>    # Cleanup</p>
 <br>
 <p>    pg_ctl -D $TEST_DIR/data stop >> $LOG_FILE 2>&1</p>
 <br>
 <p>    rm -rf $TEST_DIR</p>
 <br>
-<br>
-<br>
 <p>    echo "=== Test Complete ===" >> $LOG_FILE</p>
-<br>
-<br>
-<br>
 <br>
 <p>Schedule this via cron:   </p>
 <br>
-<br>
-<br>
 <p>    0 2 * * 0 /usr/local/bin/dr_restore_test.sh</p>
-<br>
-<br>
-<br>
 <br>
 <p>DR Plan Components   </p>
 <p>A complete DR plan should document:   </p>
@@ -368,38 +291,25 @@
 <p>| Scenario | Mitigation | RPO Impact | |----------|------------|------------| | Region outage | Cross-region replica promotion | RPO = replication lag | | Accidental DROP TABLE | PITR to before the statement | RPO = time since last WAL backup | | Ransomware | Immutable WAL backups | RPO depends on backup frequency | | Data corruption | Replay WAL; keep multiple backups | Dependent on detection time |   </p>
 <p>Testing DR with Chaos Engineering   </p>
 <br>
-<br>
-<br>
 <p>    # Simulate region failure: block traffic to primary</p>
 <br>
 <p>    iptables -A INPUT -s dr-test-region -j DROP</p>
-<br>
-<br>
 <br>
 <p>    # Trigger DR failover script</p>
 <br>
 <p>    ./dr_failover.sh --target us-west-2</p>
 <br>
-<br>
-<br>
 <p>    # Verify applications work from DR region</p>
 <br>
 <p>    curl -f https://dr-api.myapp.com/health</p>
-<br>
-<br>
 <br>
 <p>    # Fail back</p>
 <br>
 <p>    ./dr_failback.sh --target us-east-1</p>
 <br>
-<br>
-<br>
 <p>    # Clean up</p>
 <br>
 <p>    iptables -D INPUT -s dr-test-region -j DROP</p>
-<br>
-<br>
-<br>
 <br>
 <p>Run DR drills quarterly at minimum. Document every drill outcome and update the runbook with lessons learned. A DR plan that has never been tested is not a plan; it is a hope.</p></div>
     </article>

@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/code-review-tools.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Code Review Tools and Best Practices">
     <meta name="twitter:description" content="Explore code review tools and practices including GitHub pull requests, GitLab merge requests, automated review strategies, checklists, and performance optimization.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/code-review-tools.png">
     <title>Code Review Tools and Best Practices — SourceHub</title>
     <meta name="description" content="Explore code review tools and practices including GitHub pull requests, GitLab merge requests, automated review strategies, checklists, and performance optimization.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Code Review Tools and Best Practices",
       "description": "Explore code review tools and practices including GitHub pull requests, GitLab merge requests, automated review strategies, checklists, and performance optimization.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/code-review-tools.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2223",
+      "wordCount": "2038",
       "keywords": "Developer Tools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,28 +74,16 @@
         <span class="tag-cat">Productivity</span></div>
       <h1 class="article-title">Code Review Tools and Best Practices</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/code-review-tools.png" alt="Code Review Tools and Best Practices" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Code Review Tools and Best Practices</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Code review is the most effective practice for improving code quality and sharing knowledge across a team. While the human element is irreplaceable, the right tools and automation can make reviews faster, more consistent, and less error-prone. This article covers the tooling landscape and best practices for effective code review at scale.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  GitHub Pull Requests</h2>
 <br>
-<br>
-<br>
-<br>
 <p>GitHub's PR workflow is the most widely adopted code review system:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # .github/PULL_REQUEST_TEMPLATE.md</p>
 <br>
@@ -109,13 +97,9 @@
 <br>
 <p>    ---</p>
 <br>
-<br>
-<br>
 <p>    ## Description</p>
 <br>
 <p>    <!-- Brief description of the changes --></p>
-<br>
-<br>
 <br>
 <p>    ## Type of Change</p>
 <br>
@@ -129,8 +113,6 @@
 <br>
 <p>    - [ ] Performance improvement</p>
 <br>
-<br>
-<br>
 <p>    ## Testing</p>
 <br>
 <p>    - [ ] Unit tests added/updated</p>
@@ -138,8 +120,6 @@
 <p>    - [ ] Integration tests added/updated</p>
 <br>
 <p>    - [ ] Manual testing completed</p>
-<br>
-<br>
 <br>
 <p>    ## Checklist</p>
 <br>
@@ -153,22 +133,11 @@
 <br>
 <p>    - [ ] Breaking changes documented</p>
 <br>
-<br>
-<br>
 <p>    ## Deployment Notes</p>
 <br>
 <p>    <!-- Any special deployment considerations --></p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Required Reviews via Branch Protection</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # .github/settings.yml</p>
 <br>
@@ -206,21 +175,9 @@
 <br>
 <p>            teams: ["core-committers"]</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  GitLab Merge Requests</h2>
 <br>
-<br>
-<br>
-<br>
 <p>GitLab's MR workflow includes merge trains and pipeline-integrated reviews:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # .gitlab/merge_request_templates/Default.md</p>
 <br>
@@ -228,19 +185,13 @@
 <br>
 <p>    <!-- Provide a summary of your changes --></p>
 <br>
-<br>
-<br>
 <p>    ## Related Issues</p>
 <br>
 <p>    Closes #ISSUE_ID</p>
 <br>
-<br>
-<br>
 <p>    ## MR Type</p>
 <br>
 <p>    /label ~"type::feature"</p>
-<br>
-<br>
 <br>
 <p>    ## Merge Checklist</p>
 <br>
@@ -254,8 +205,6 @@
 <br>
 <p>    - [ ] API documentation updated</p>
 <br>
-<br>
-<br>
 <p>    ## Merge Options</p>
 <br>
 <p>    - [ ] Squash commits</p>
@@ -264,16 +213,7 @@
 <br>
 <p>    - [ ] Add to merge train</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>GitLab merge trains prevent broken main by serializing merges with validation:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # .gitlab-ci.yml</p>
 <br>
@@ -293,21 +233,9 @@
 <br>
 <p>        name: merge_train</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Automated Review Strategies</h2>
 <br>
-<br>
-<br>
-<br>
 <h3>Linting and Static Analysis</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # .github/workflows/auto-review.yml</p>
 <br>
@@ -333,8 +261,6 @@
 <br>
 <p>          - run: npm ci</p>
 <br>
-<br>
-<br>
 <p>          # ESLint auto-review</p>
 <br>
 <p>          - uses: reviewdog/action-eslint@v1</p>
@@ -347,13 +273,9 @@
 <br>
 <p>              filter_mode: diff_context</p>
 <br>
-<br>
-<br>
 <p>          # TypeScript type checking</p>
 <br>
 <p>          - run: npm run type-check</p>
-<br>
-<br>
 <br>
 <p>          # Dependency vulnerability check</p>
 <br>
@@ -363,8 +285,6 @@
 <br>
 <p>              fail-on-severity: high</p>
 <br>
-<br>
-<br>
 <p>          # Code complexity check</p>
 <br>
 <p>          - name: Check complexity</p>
@@ -373,28 +293,15 @@
 <br>
 <p>              npx complexity-report src/ --threshold 10</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>AI-Assisted Review</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // Custom AI review bot (pseudo-code)</p>
 <br>
 <p>    import { Octokit } from '@octokit/rest';</p>
 <br>
-<br>
-<br>
 <p>    async function reviewPullRequest(owner, repo, prNumber) {</p>
 <br>
 <p>      const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });</p>
-<br>
-<br>
 <br>
 <p>      // Get PR diff</p>
 <br>
@@ -406,13 +313,9 @@
 <br>
 <p>      });</p>
 <br>
-<br>
-<br>
 <p>      // Send diff to AI for review</p>
 <br>
 <p>      const review = await aiReview(diff);</p>
-<br>
-<br>
 <br>
 <p>      // Submit review comments</p>
 <br>
@@ -438,21 +341,9 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Code Review Checklist</h2>
 <br>
-<br>
-<br>
-<br>
 <h3>Security Review Items</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    security_checklist:</p>
 <br>
@@ -470,16 +361,7 @@
 <br>
 <p>      - "Rate limiting: validate limits on public endpoints"</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Performance Review Items</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    ## Performance Checklist</p>
 <br>
@@ -497,32 +379,15 @@
 <br>
 <p>    - [ ] Bundle size impact for frontend changes?</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Review Strategies</h2>
-<br>
-<br>
-<br>
 <br>
 <h3>Small PRs</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Keep PRs under 400 lines of code. Research shows review effectiveness drops sharply beyond this threshold:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Check diff size</p>
 <br>
 <p>    git diff main...HEAD --stat</p>
-<br>
-<br>
 <br>
 <p>    # Warn on large PRs</p>
 <br>
@@ -536,16 +401,7 @@
 <br>
 <p>    fi</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Reviewer Rotation</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # CODEOWNERS file for automatic reviewer assignment</p>
 <br>
@@ -563,22 +419,11 @@
 <br>
 <p>    dangerfile.js  @team-leads</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Time-Bound Reviews</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // Slack reminder for stale reviews</p>
 <br>
 <p>    const STALE_THRESHOLD = 24 * 60 * 60 * 1000; // 24 hours</p>
-<br>
-<br>
 <br>
 <p>    async function checkStaleReviews() {</p>
 <br>
@@ -591,8 +436,6 @@
 <p>        state: 'open',</p>
 <br>
 <p>      });</p>
-<br>
-<br>
 <br>
 <p>      for (const pull of pulls) {</p>
 <br>
@@ -608,21 +451,9 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Performance Considerations</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Large repositories require optimization:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Git sparse checkout for faster clones</p>
 <br>
@@ -630,25 +461,13 @@
 <br>
 <p>    git sparse-checkout set services/payment</p>
 <br>
-<br>
-<br>
 <p>    # Use git blame with ignore-revs for formatting changes</p>
 <br>
 <p>    git blame --ignore-revs-file .git-blame-ignore-revs file.go</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Building a Review Culture</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Effective code review is about culture, not just tools:</p>
-<br>
-<br>
 <br>
 <p>* **Review within 24 hours**: set explicit SLAs for review turnaround.</p>
 <br>
@@ -659,9 +478,6 @@
 <p>4\. **Celebrate good code**: leave positive comments on well-written sections.</p>
 <br>
 <p>5\. **Automate the obvious**: let linters catch style issues so humans focus on logic.</p>
-<br>
-<br>
-<br>
 <br>
 <p>The goal of code review is not to catch every bug but to ensure shared understanding of the codebase and maintain a consistent quality bar across the team.</p></div>
     </article>

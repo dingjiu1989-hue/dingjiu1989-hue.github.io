@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-compression.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST">
     <meta name="twitter:description" content="Explore database compression techniques including page-level, tuple-level, and columnar compression. Learn about PostgreSQL TOAST and real-world storage savings.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-compression.png">
     <title>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST — SourceHub</title>
     <meta name="description" content="Explore database compression techniques including page-level, tuple-level, and columnar compression. Learn about PostgreSQL TOAST and real-world storage savings.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST",
       "description": "Explore database compression techniques including page-level, tuple-level, and columnar compression. Learn about PostgreSQL TOAST and real-world storage savings.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-compression.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1522",
+      "wordCount": "1475",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-compression.png" alt="Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h1>
 <br>
 <p>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST   </p>
@@ -91,8 +92,6 @@
 <p>Page-Level Compression   </p>
 <p>PostgreSQL stores data in 8 KB pages. Page-level compression compresses the entire page as a unit. The `page_compression` feature (available since PostgreSQL 15 with `zstd`) reduces page size on disk:   </p>
 <br>
-<br>
-<br>
 <p>    -- Enable page compression on a table</p>
 <br>
 <p>    CREATE TABLE logs_compressed (</p>
@@ -105,20 +104,13 @@
 <br>
 <p>    ) WITH (compression = 'zstd');</p>
 <br>
-<br>
-<br>
 <p>    -- Or alter existing table</p>
 <br>
 <p>    ALTER TABLE logs SET (compression = 'pglz');</p>
 <br>
-<br>
-<br>
-<br>
 <p>Page compression works transparently: the database decompresses pages when reading and compresses when writing. The overhead is minimal for sequential scans.   </p>
 <p>TOAST (The Oversized-Attribute Storage Technique)   </p>
 <p>TOAST is PostgreSQL's built-in mechanism for handling large field values. When a row exceeds the 8 KB page size, PostgreSQL moves oversized values to a secondary TOAST table:   </p>
-<br>
-<br>
 <br>
 <p>    -- Check TOAST compression settings</p>
 <br>
@@ -142,9 +134,6 @@
 <br>
 <p>      AND attnum > 0;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Storage types:   </p>
 <br>
 <p>* `PLAIN`: No compression, no TOAST. For fixed-width types like `INTEGER`.</p>
@@ -152,21 +141,13 @@
 <p>* `EXTERNAL`: Move to TOAST without compression. Useful for data that is already compressed (e.g., JPEG, JSON).</p>
 <p>* `MAIN`: Try compression but keep in main table if possible.</p>
 <br>
-<br>
-<br>
-<br>
 <p>    -- Change storage type for a column</p>
 <br>
 <p>    ALTER TABLE documents ALTER COLUMN image SET STORAGE EXTERNAL;</p>
 <br>
-<br>
-<br>
-<br>
 <p>TOAST compression uses a fast, lightweight algorithm (pglz or zstd). It is invisible to queries: SELECT statements decompress transparently.   </p>
 <p>Tuple-Level Compression   </p>
 <p>Tuple-level compression compresses individual row values. PostgreSQL's built-in `COMPRESSION` clause (PostgreSQL 14+) allows per-column compression:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE events (</p>
 <br>
@@ -180,30 +161,18 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
-<br>
 <p>Supported algorithms: `pglz`, `lz4`, `zstd` (with `--with-zstd` build flag). LZ4 is fastest with moderate compression; Zstd offers the best ratio.   </p>
 <p>External Compression with pgstattuple   </p>
 <p>Measure your current compression benefits:   </p>
 <br>
-<br>
-<br>
 <p>    CREATE EXTENSION pgstattuple;</p>
-<br>
-<br>
 <br>
 <p>    SELECT * FROM pgstattuple('large_table');</p>
 <br>
 <p>    -- free_space, tuple_count, tuple_len, dead_tuple_count, dead_tuple_len</p>
 <br>
-<br>
-<br>
-<br>
 <p>Columnar Compression   </p>
 <p>Columnar databases like ClickHouse, Redshift, and Parquet-format files compress extremely well because same-typed values repeat within a column:   </p>
-<br>
-<br>
 <br>
 <p>    -- ClickHouse example: columnar compression is automatic</p>
 <br>
@@ -221,8 +190,6 @@
 <br>
 <p>    ORDER BY timestamp;</p>
 <br>
-<br>
-<br>
 <p>    -- Each column is compressed independently</p>
 <br>
 <p>    -- event_type: run-length encoding after dictionary compression</p>
@@ -231,9 +198,6 @@
 <br>
 <p>    -- payload: zstd</p>
 <br>
-<br>
-<br>
-<br>
 <p>Columnar compression ratios are often 5x-10x higher than row-oriented compression because similar values cluster together.   </p>
 <p>Compression Algorithm Comparison   </p>
 <p>| Algorithm | Speed | Ratio | CPU Use | PostgreSQL Support | |-----------|-------|-------|---------|-------------------| | pglz | Fast | Low | Low | Built-in (default) | | LZ4 | Very fast | Low-Medium | Very low | PG 14+ | | Zstd | Moderate | High | Moderate | PG 15+ | | zlib | Slow | High | High | Extension |   </p>
@@ -241,8 +205,6 @@
 <p>Real-World Storage Savings   </p>
 <p>| Data Type | Raw Size | pglz | zstd | Notes | |-----------|----------|------|------|-------| | Log text | 100 GB | 35 GB | 22 GB | Highly compressible | | JSON payloads | 50 GB | 42 GB | 30 GB | Semi-structured | | UUIDs | 10 GB | 10 GB | 10 GB | Incompressible | | Numeric arrays | 20 GB | 8 GB | 5 GB | Delta encoding helps |   </p>
 <p>Monitoring Compression   </p>
-<br>
-<br>
 <br>
 <p>    -- Table size breakdown</p>
 <br>
@@ -258,12 +220,7 @@
 <br>
 <p>    ORDER BY pg_total_relation_size(relid) DESC;</p>
 <br>
-<br>
-<br>
-<br>
 <p>For TOAST-specific sizes:   </p>
-<br>
-<br>
 <br>
 <p>    SELECT relname,</p>
 <br>
@@ -276,9 +233,6 @@
 <p>        SELECT reltoastrelid FROM pg_class WHERE relname = 'large_table'</p>
 <br>
 <p>    );</p>
-<br>
-<br>
-<br>
 <br>
 <p>Best Practices   </p>
 <br>

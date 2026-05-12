@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/compare/mysql-vs-mariadb.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="MySQL vs MariaDB: The Complete Comparison">
     <meta name="twitter:description" content="Compare MySQL and MariaDB covering their divergence history, feature differences, performance benchmarks, compatibility, and migration guide.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/compare/mysql-vs-mariadb.png">
     <title>MySQL vs MariaDB: The Complete Comparison — SourceHub</title>
     <meta name="description" content="Compare MySQL and MariaDB covering their divergence history, feature differences, performance benchmarks, compatibility, and migration guide.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "MySQL vs MariaDB: The Complete Comparison",
       "description": "Compare MySQL and MariaDB covering their divergence history, feature differences, performance benchmarks, compatibility, and migration guide.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/compare/mysql-vs-mariadb.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2316",
+      "wordCount": "2172",
       "keywords": "Comparison, Technology",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,23 +74,14 @@
         <span class="tag-cat">Technology</span></div>
       <h1 class="article-title">MySQL vs MariaDB: The Complete Comparison</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/compare/mysql-vs-mariadb.png" alt="MySQL vs MariaDB: The Complete Comparison" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>MySQL vs MariaDB: The Complete Comparison</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>MySQL and MariaDB share a common origin but have diverged significantly since MariaDB was forked from MySQL in 2009. While both systems remain largely compatible at the SQL level, their storage engines, optimization strategies, and feature sets have evolved in different directions. Understanding these differences is critical for migration decisions and new project planning.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Divergence History</h2>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Timeline of divergence</p>
 <br>
@@ -120,35 +111,19 @@
 <br>
 <p>        event: "MariaDB 11.x and MySQL 8.4 LTS diverge on optimizer and engine features"</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Key fork motivations:</p>
 <br>
 <p>* **License concerns**: MySQL moved toward Oracle-controlled development; MariaDB remains fully GPL with a community-driven governance model</p>
 <p>* **Feature inclusion**: Oracle rejected some community patches that MariaDB adopted</p>
 <p>* **Storage engine philosophy**: MariaDB encourages engine diversity; MySQL centralizes around InnoDB</p>
 <br>
-<br>
-<br>
 <h2>  Storage Engine Differences</h2>
 <br>
-<br>
-<br>
-<br>
 <h3>InnoDB (Both) vs Aria (MariaDB)</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    -- MySQL/MariaDB: InnoDB configuration</p>
 <br>
 <p>    -- Both support this, but default settings differ</p>
-<br>
-<br>
 <br>
 <p>    -- MySQL default:</p>
 <br>
@@ -162,8 +137,6 @@
 <br>
 <p>    innodb_autoinc_lock_mode = 2  -- Interleaved (MySQL 8+)</p>
 <br>
-<br>
-<br>
 <p>    -- MariaDB default:</p>
 <br>
 <p>    innodb_buffer_pool_size = 50% of RAM</p>
@@ -176,16 +149,7 @@
 <br>
 <p>    -- MariaDB also defaults to InnoDB for transactional tables</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>MariaDB's Aria engine (fork of MyISAM):</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    -- Create Aria table (MariaDB only)</p>
 <br>
@@ -209,8 +173,6 @@
 <br>
 <p>    ) ENGINE=Aria TRANSACTIONAL=1 PAGE_CHECKSUM=1;</p>
 <br>
-<br>
-<br>
 <p>    -- Aria advantages:</p>
 <br>
 <p>    -- 1. Crash-safe (unlike MyISAM) without full InnoDB overhead</p>
@@ -221,8 +183,6 @@
 <br>
 <p>    -- 4. Supports FULLTEXT indexes</p>
 <br>
-<br>
-<br>
 <p>    -- MariaDB: ColumnStore for analytical queries</p>
 <br>
 <p>    -- Install ColumnStore for columnar storage</p>
@@ -231,21 +191,9 @@
 <br>
 <p>    -- Optimized for large-scale aggregations</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Feature Comparison</h2>
 <br>
-<br>
-<br>
-<br>
 <h3>Common Features (Both)</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    -- Both MySQL 8.x and MariaDB 11.x support:</p>
 <br>
@@ -269,8 +217,6 @@
 <br>
 <p>    SELECT * FROM org_tree ORDER BY level, name;</p>
 <br>
-<br>
-<br>
 <p>    -- Window functions</p>
 <br>
 <p>    SELECT</p>
@@ -287,24 +233,13 @@
 <br>
 <p>    FROM employees;</p>
 <br>
-<br>
-<br>
 <p>    -- JSON functions</p>
 <br>
 <p>    SELECT JSON_EXTRACT(data, '$.address.city') as city</p>
 <br>
 <p>    FROM users WHERE JSON_CONTAINS(data, '{"active": true}');</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>MariaDB-Only Features</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    -- Temporal tables (system-versioned)</p>
 <br>
@@ -328,8 +263,6 @@
 <br>
 <p>    ) WITH SYSTEM VERSIONING;</p>
 <br>
-<br>
-<br>
 <p>    -- Query historical state</p>
 <br>
 <p>    SELECT * FROM customer_audit</p>
@@ -337,8 +270,6 @@
 <p>    FOR SYSTEM_TIME AS OF '2026-01-15 10:00:00'</p>
 <br>
 <p>    WHERE id = 42;</p>
-<br>
-<br>
 <br>
 <p>    -- Dynamic columns (schema-less within column)</p>
 <br>
@@ -362,30 +293,17 @@
 <br>
 <p>    FROM product_metadata WHERE product_id = 1;</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>MySQL-Only Features</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    -- MySQL 8.4: Histogram-based optimizer stats</p>
 <br>
 <p>    ANALYZE TABLE orders UPDATE HISTOGRAM ON status, customer_id;</p>
-<br>
-<br>
 <br>
 <p>    -- MySQL: Invisible indexes</p>
 <br>
 <p>    ALTER TABLE orders ALTER INDEX idx_order_date INVISIBLE;</p>
 <br>
 <p>    -- Test query performance without removing the index</p>
-<br>
-<br>
 <br>
 <p>    -- MySQL: VECTOR type (MySQL 9.0+)</p>
 <br>
@@ -398,8 +316,6 @@
 <p>    );</p>
 <br>
 <p>    CREATE VECTOR INDEX idx_embed ON embeddings ((VECTOR_DISTANCE(embedding, '[...]')));</p>
-<br>
-<br>
 <br>
 <p>    -- MySQL: Resource groups</p>
 <br>
@@ -415,22 +331,11 @@
 <br>
 <p>    -- Limit analytics queries to specific CPU cores</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Performance and Optimization</h2>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    -- Benchmark: Concurrent OLTP workload</p>
 <br>
 <p>    -- Similar performance for basic queries</p>
-<br>
-<br>
 <br>
 <p>    -- MariaDB thread pool (default in 11.x)</p>
 <br>
@@ -442,8 +347,6 @@
 <br>
 <p>    thread_pool_idle_timeout = 60</p>
 <br>
-<br>
-<br>
 <p>    -- MySQL: Connection handling</p>
 <br>
 <p>    -- Dedicated thread per connection (default)</p>
@@ -454,15 +357,11 @@
 <br>
 <p>    -- MariaDB includes thread pool free (MySQL charges for it)</p>
 <br>
-<br>
-<br>
 <p>    -- Query optimizer differences:</p>
 <br>
 <p>    -- MySQL 8.4: Cost-based, uses histograms</p>
 <br>
 <p>    -- MariaDB 11.x: Cost-based with table statistics feedback loop</p>
-<br>
-<br>
 <br>
 <p>    -- EXPLAIN output differences</p>
 <br>
@@ -472,20 +371,9 @@
 <br>
 <p>    -- MariaDB: JSON plan with optimization trace</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Compatibility and Migration</h2>
 <br>
-<br>
-<br>
-<br>
 <h3>Application Compatibility</h3>
-<br>
-<br>
-<br>
 <br>
 <p>| Feature | MySQL 8.4 | MariaDB 11.x |</p>
 <br>
@@ -503,14 +391,7 @@
 <br>
 <p>| JSON | Native type | LONGTEXT + JSON functions |</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Data Replication Between MySQL and MariaDB</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # MariaDB as replica of MySQL</p>
 <br>
@@ -524,8 +405,6 @@
 <br>
 <p>    slave_parallel_threads = 4</p>
 <br>
-<br>
-<br>
 <p>    # Known limitations:</p>
 <br>
 <p>    # - GTID formats differ (MariaDB uses own format)</p>
@@ -534,16 +413,7 @@
 <br>
 <p>    # - Some DDL may not replicate correctly</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Migration Steps</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Option 1: Logical dump (most compatible)</p>
 <br>
@@ -553,13 +423,9 @@
 <br>
 <p>      production_db > backup.sql</p>
 <br>
-<br>
-<br>
 <p>    # Option 2: Percona XtraBackup (physical)</p>
 <br>
 <p>    xtrabackup --backup --target-dir=/backup/mysql</p>
-<br>
-<br>
 <br>
 <p>    # Option 3: Replication-based (zero-downtime)</p>
 <br>
@@ -571,20 +437,11 @@
 <br>
 <p>    # 4. Promote MariaDB to master</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Decision Guide</h2>
-<br>
-<br>
 <br>
 <p>* **Choose MySQL** if you rely on Oracle ecosystem compatibility, need MySQL HeatWave for analytics, require MySQL Enterprise support, or need the VECTOR data type for AI/ML embeddings.</p>
 <p>* **Choose MariaDB** if you want fully open-source (no Oracle licensing), need thread pool performance (free), require temporal tables or dynamic columns, prefer a community-governed project, or want storage engine diversity (Aria, ColumnStore, Spider).</p>
 <p>* **Stay on current** if you already run either in production without migration pain; the differences are rarely worth a migration for existing deployments.</p>
-<br>
-<br>
 <br>
 <p>For new projects starting in 2026, MariaDB offers the better value proposition for most use cases due to its open governance and free enterprise features, while MySQL remains the safer choice for organizations that already have Oracle relationships or need its specific enterprise integrations.</p></div>
     </article>

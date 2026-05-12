@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/compare/redis-vs-memcached.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Redis vs Memcached: Caching Solution Comparison">
     <meta name="twitter:description" content="Compare Redis and Memcached across data structures, persistence, clustering, memory efficiency, and use cases for caching, sessions, and message queuing.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/compare/redis-vs-memcached.png">
     <title>Redis vs Memcached: Caching Solution Comparison — SourceHub</title>
     <meta name="description" content="Compare Redis and Memcached across data structures, persistence, clustering, memory efficiency, and use cases for caching, sessions, and message queuing.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Redis vs Memcached: Caching Solution Comparison",
       "description": "Compare Redis and Memcached across data structures, persistence, clustering, memory efficiency, and use cases for caching, sessions, and message queuing.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/compare/redis-vs-memcached.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2164",
+      "wordCount": "1995",
       "keywords": "Comparison, Technology",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,41 +74,22 @@
         <span class="tag-cat">Technology</span></div>
       <h1 class="article-title">Redis vs Memcached: Caching Solution Comparison</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/compare/redis-vs-memcached.png" alt="Redis vs Memcached: Caching Solution Comparison" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Redis vs Memcached: Caching Solution Comparison</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Redis and Memcached are the two most widely used in-memory data stores, but they serve different purposes despite overlapping use cases. Memcached is a purpose-built cache; Redis is a versatile data structure server that happens to excel at caching. Choosing between them requires understanding their architectural differences and the specific requirements of your application.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Data Structure Support</h2>
 <br>
-<br>
-<br>
-<br>
 <h3>Redis: Rich Data Types</h3>
-<br>
-<br>
-<br>
 <br>
 <p>Redis supports a wide range of data structures beyond simple key-value pairs:</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    import redis.asyncio as redis</p>
 <br>
-<br>
-<br>
 <p>    r = redis.Redis(host='localhost', port=6379, decode_responses=True)</p>
-<br>
-<br>
 <br>
 <p>    # Strings (basic key-value)</p>
 <br>
@@ -116,15 +97,11 @@
 <br>
 <p>    name = await r.get('user:1000:name')</p>
 <br>
-<br>
-<br>
 <p>    # Lists (ordered collection, great for queues)</p>
 <br>
 <p>    await r.lpush('notifications:queue', 'email_1', 'email_2')</p>
 <br>
 <p>    notification = await r.brpop('notifications:queue', timeout=5)</p>
-<br>
-<br>
 <br>
 <p>    # Sets (unique members, set operations)</p>
 <br>
@@ -136,15 +113,11 @@
 <br>
 <p>    # Returns: {'editor', 'viewer'}</p>
 <br>
-<br>
-<br>
 <p>    # Sorted Sets (leaderboards, rate limiting)</p>
 <br>
 <p>    await r.zadd('leaderboard:weekly', {'user:1000': 1500, 'user:1001': 2300})</p>
 <br>
 <p>    top_players = await r.zrevrange('leaderboard:weekly', 0, 9, withscores=True)</p>
-<br>
-<br>
 <br>
 <p>    # Hashes (objects)</p>
 <br>
@@ -160,15 +133,11 @@
 <br>
 <p>    product = await r.hgetall('product:500')</p>
 <br>
-<br>
-<br>
 <p>    # Bitmaps (analytics, feature flags)</p>
 <br>
 <p>    await r.setbit('active:users:2026-05-12', user_id=1000, value=1)</p>
 <br>
 <p>    daily_active = await r.bitcount('active:users:2026-05-12')</p>
-<br>
-<br>
 <br>
 <p>    # Streams (event log, message queue)</p>
 <br>
@@ -176,37 +145,19 @@
 <br>
 <p>    events = await r.xread({'order:events': '0'}, count=10)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Memcached: Simple Key-Value</h3>
-<br>
-<br>
-<br>
 <br>
 <p>Memcached provides a minimal key-value API:</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    import pymemcache</p>
 <br>
-<br>
-<br>
 <p>    client = pymemcache.Client(('localhost', 11211))</p>
-<br>
-<br>
 <br>
 <p>    # Basic get/set</p>
 <br>
 <p>    client.set('user:1000:profile', profile_data, expire=3600)</p>
 <br>
 <p>    profile = client.get('user:1000:profile')</p>
-<br>
-<br>
 <br>
 <p>    # Multi-get for batch operations</p>
 <br>
@@ -220,8 +171,6 @@
 <br>
 <p>    ])</p>
 <br>
-<br>
-<br>
 <p>    # Atomic operations</p>
 <br>
 <p>    client.add('lock:payment:123', 'locked', expire=30)  # Only if not exists</p>
@@ -232,23 +181,13 @@
 <br>
 <p>    client.prepend('log:buffer', 'header\n')  # Prepend</p>
 <br>
-<br>
-<br>
 <p>    # Increment/Decrement</p>
 <br>
 <p>    client.set('counter:api:day', '0')</p>
 <br>
 <p>    client.incr('counter:api:day', 1)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Persistence and Durability</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| Feature | Redis | Memcached |</p>
 <br>
@@ -262,14 +201,7 @@
 <br>
 <p>| Durability modes | fsync policies (always, every sec, no) | N/A |</p>
 <br>
-<br>
-<br>
-<br>
 <p>Redis persistence configuration:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # redis.conf</p>
 <br>
@@ -281,8 +213,6 @@
 <br>
 <p>    save 60 10000  # Save if 10000 keys changed in 60 seconds</p>
 <br>
-<br>
-<br>
 <p>    # AOF (append-only log)</p>
 <br>
 <p>    appendonly yes</p>
@@ -293,40 +223,21 @@
 <br>
 <p>    auto-aof-rewrite-min-size 64mb</p>
 <br>
-<br>
-<br>
 <p>    # Hybrid persistence (Redis 7+)</p>
 <br>
 <p>    aof-use-rdb-preamble yes  # RDB prefix for faster loading</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Memory Efficiency and Eviction</h2>
-<br>
-<br>
-<br>
 <br>
 <h3>Memcached: Slab Allocation</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Memcached uses slab allocation to minimize fragmentation:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Memcached slab configuration</p>
 <br>
 <p>    # Memory is divided into slabs of various chunk sizes</p>
 <br>
 <p>    # Items are stored in the smallest slab that fits</p>
-<br>
-<br>
 <br>
 <p>    stats = client.stats()</p>
 <br>
@@ -338,30 +249,17 @@
 <br>
 <p>    # STAT slab_reassign_busy_items 0</p>
 <br>
-<br>
-<br>
 <p>    # Eviction: LRU only</p>
 <br>
 <p>    client.set('key', 'value', expire=0, noreply=False)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Redis: Multiple Eviction Policies</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # redis.conf eviction policies</p>
 <br>
 <p>    maxmemory 2gb</p>
 <br>
 <p>    maxmemory-policy allkeys-lru  # Evict least recently used keys</p>
-<br>
-<br>
 <br>
 <p>    # Available policies:</p>
 <br>
@@ -381,16 +279,7 @@
 <br>
 <p>    #   volatile-ttl:      Evict keys with shortest TTL</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Memory overhead comparison:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Redis: ~50 bytes overhead per key + value size</p>
 <br>
@@ -398,29 +287,15 @@
 <br>
 <p>    overhead_redis = 1_000_000 * (50 + 100)  # ~150MB</p>
 <br>
-<br>
-<br>
 <p>    # Memcached: ~56 bytes overhead per key + value size + slab fragmentation</p>
 <br>
 <p>    # Example: 1M keys with 100-byte values</p>
 <br>
 <p>    overhead_memcached = 1_000_000 * (56 + 100)  # ~156MB + ~10% fragmentation</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Clustering and High Availability</h2>
 <br>
-<br>
-<br>
-<br>
 <h3>Redis Cluster</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # redis-cluster.conf (per node)</p>
 <br>
@@ -436,17 +311,9 @@
 <br>
 <p>    # 3 master, 3 replica (production minimum)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # Redis Cluster client</p>
 <br>
 <p>    from redis.cluster import RedisCluster</p>
-<br>
-<br>
 <br>
 <p>    rc = RedisCluster(</p>
 <br>
@@ -464,8 +331,6 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    # Automatic sharding: keys are distributed across 16384 slots</p>
 <br>
 <p>    # slot = CRC16(key) % 16384</p>
@@ -473,8 +338,6 @@
 <p>    await rc.set("user:1000:session", session_data)</p>
 <br>
 <p>    await rc.get("user:1000:session")</p>
-<br>
-<br>
 <br>
 <p>    # Cross-slot operations require tags</p>
 <br>
@@ -484,25 +347,11 @@
 <br>
 <p>    users = await rc.mget("{users}:1000", "{users}:1001")</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Memcached: No Built-in Clustering</h3>
-<br>
-<br>
-<br>
 <br>
 <p>Memcached has no built-in clustering. Sharding is implemented at the client level:</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    from pymemcache.client.hash import HashClient</p>
-<br>
-<br>
 <br>
 <p>    # Client-side consistent hashing</p>
 <br>
@@ -516,23 +365,13 @@
 <br>
 <p>    ], use_pooling=True)</p>
 <br>
-<br>
-<br>
 <p>    # Consistent hashing minimizes cache misses when nodes change</p>
 <br>
 <p>    client.set("key", "value")</p>
 <br>
 <p>    result = client.get("key")</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Use Case Comparison</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| Use Case | Redis | Memcached |</p>
 <br>
@@ -554,18 +393,11 @@
 <br>
 <p>| Time-series data | Yes (RedisTimeSeries module) | No |</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  When to Use Which</h2>
-<br>
-<br>
 <br>
 <p>* **Use Memcached** when you need a simple, fast, memory-only cache for database query results or computed data that can be regenerated. Memcached excels at its single purpose.</p>
 <p>* **Use Redis** when you need data structures beyond key-value, persistence, replication, or any advanced caching patterns like rate limiting, session stores, or leaderboards.</p>
 <p>* **Use both** when you want a two-tier caching strategy: Memcached for hot cache (regenerable) and Redis for persistent cache (session, counter) and non-cache workloads.</p>
-<br>
-<br>
 <br>
 <p>For most modern applications, Redis is the better default due to its versatility. Reserve Memcached for specific high-throughput caching scenarios where Redis's overhead and feature set are unnecessary.</p></div>
     </article>

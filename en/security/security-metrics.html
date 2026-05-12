@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/security-metrics.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Security Metrics and Reporting">
     <meta name="twitter:description" content="Guide to security metrics covering KPIs and KRIs, dashboard design, board-level reporting, benchmarking, and measuring security program effectiveness.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/security-metrics.png">
     <title>Security Metrics and Reporting — SourceHub</title>
     <meta name="description" content="Guide to security metrics covering KPIs and KRIs, dashboard design, board-level reporting, benchmarking, and measuring security program effectiveness.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Security Metrics and Reporting",
       "description": "Guide to security metrics covering KPIs and KRIs, dashboard design, board-level reporting, benchmarking, and measuring security program effectiveness.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/security-metrics.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2345",
+      "wordCount": "2272",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Security Metrics and Reporting</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/security-metrics.png" alt="Security Metrics and Reporting" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Security Metrics and Reporting</h1>
 <br>
 <p>Introduction   </p>
@@ -83,15 +84,11 @@
 <p>Key Performance Indicators (KPIs)   </p>
 <p>KPIs measure the efficiency and effectiveness of security operations.   </p>
 <br>
-<br>
-<br>
 <p>    class SecurityKPI:</p>
 <br>
 <p>        def __init__(self):</p>
 <br>
 <p>            self.metrics = {}</p>
-<br>
-<br>
 <br>
 <p>        def calculate_mttd(self, detection_times):</p>
 <br>
@@ -103,8 +100,6 @@
 <br>
 <p>            return sum(detection_times) / len(detection_times)</p>
 <br>
-<br>
-<br>
 <p>        def calculate_mttr(self, response_times):</p>
 <br>
 <p>            """Mean Time to Respond — average time from detection to containment."""</p>
@@ -115,8 +110,6 @@
 <br>
 <p>            return sum(response_times) / len(response_times)</p>
 <br>
-<br>
-<br>
 <p>        def calculate_coverage_rate(self, monitored_assets, total_assets):</p>
 <br>
 <p>            """Percentage of assets under monitoring."""</p>
@@ -126,8 +119,6 @@
 <p>                return 0</p>
 <br>
 <p>            return (monitored_assets / total_assets) * 100</p>
-<br>
-<br>
 <br>
 <p>        def calculate_patch_compliance(self, patched_systems, vulnerable_systems):</p>
 <br>
@@ -141,13 +132,8 @@
 <br>
 <p>            return (patched_systems / total) * 100</p>
 <br>
-<br>
-<br>
-<br>
 <p>Key Risk Indicators (KRIs)   </p>
 <p>KRIs measure the level of security risk exposure.   </p>
-<br>
-<br>
 <br>
 <p>    class SecurityKRI:</p>
 <br>
@@ -163,8 +149,6 @@
 <br>
 <p>                risk = vuln['cvss'] * (vuln['asset_criticality'] / 5)</p>
 <br>
-<br>
-<br>
 <p>                # Exploit availability multiplier</p>
 <br>
 <p>                if vuln.get('exploit_available'):</p>
@@ -175,15 +159,9 @@
 <br>
 <p>                    risk *= 2.0</p>
 <br>
-<br>
-<br>
 <p>                total_risk += risk</p>
 <br>
-<br>
-<br>
 <p>            return total_risk</p>
-<br>
-<br>
 <br>
 <p>        def calculate_mean_time_to_patch(self, patch_times):</p>
 <br>
@@ -191,13 +169,9 @@
 <br>
 <p>            categories = {'critical': [], 'high': [], 'medium': [], 'low': []}</p>
 <br>
-<br>
-<br>
 <p>            for patch in patch_times:</p>
 <br>
 <p>                categories[patch['severity']].append(patch['hours_to_patch'])</p>
-<br>
-<br>
 <br>
 <p>            return {</p>
 <br>
@@ -207,14 +181,9 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Dashboard Design   </p>
 <p>Effective dashboards present the right information at the right level of detail for the audience.   </p>
 <p>Executive Dashboard   </p>
-<br>
-<br>
 <br>
 <p>    def generate_executive_dashboard(metrics):</p>
 <br>
@@ -270,12 +239,7 @@
 <br>
 <p>        }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Operational Dashboard   </p>
-<br>
-<br>
 <br>
 <p>    def generate_operational_dashboard(soc_metrics):</p>
 <br>
@@ -337,12 +301,7 @@
 <br>
 <p>        }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Board Reporting Framework   </p>
-<br>
-<br>
 <br>
 <p>    quarterly_board_report:</p>
 <br>
@@ -357,8 +316,6 @@
 <p>            - "Zero critical incidents this quarter"</p>
 <br>
 <p>            - "Three compliance audits passed"</p>
-<br>
-<br>
 <br>
 <p>        - title: "Incident Summary"</p>
 <br>
@@ -394,8 +351,6 @@
 <br>
 <p>              status: "on_track"</p>
 <br>
-<br>
-<br>
 <p>        - title: "Risk Profile"</p>
 <br>
 <p>          risks:</p>
@@ -411,8 +366,6 @@
 <p>              mitigation: "Vendor access review in progress"</p>
 <br>
 <p>              target_date: "2026-07-01"</p>
-<br>
-<br>
 <br>
 <p>        - title: "Compliance Status"</p>
 <br>
@@ -436,8 +389,6 @@
 <br>
 <p>              target: "2026-09-01"</p>
 <br>
-<br>
-<br>
 <p>        - title: "Resource Allocation"</p>
 <br>
 <p>          budget:</p>
@@ -454,12 +405,7 @@
 <br>
 <p>              - "Penetration testing: $120K"</p>
 <br>
-<br>
-<br>
-<br>
 <p>Security Scorecards   </p>
-<br>
-<br>
 <br>
 <p>    def generate_team_scorecard(metrics):</p>
 <br>
@@ -478,8 +424,6 @@
 <p>            'mttr_hours': {'good': 2, 'acceptable': 4},</p>
 <br>
 <p>        }</p>
-<br>
-<br>
 <br>
 <p>        scorecard = {}</p>
 <br>
@@ -503,16 +447,9 @@
 <br>
 <p>                scorecard[metric] = 'RED'</p>
 <br>
-<br>
-<br>
 <p>        return scorecard</p>
 <br>
-<br>
-<br>
-<br>
 <p>Industry Benchmarks   </p>
-<br>
-<br>
 <br>
 <p>    industry_benchmarks:</p>
 <br>
@@ -524,8 +461,6 @@
 <br>
 <p>        below_average: "> 1 week"</p>
 <br>
-<br>
-<br>
 <p>      mttr:</p>
 <br>
 <p>        top_performer: "< 2 hours"</p>
@@ -534,24 +469,17 @@
 <br>
 <p>        below_average: "> 24 hours"</p>
 <br>
-<br>
-<br>
 <p>      vulnerability_remediation:</p>
 <br>
 <p>        critical: "15 days (top), 30 days (average)"</p>
 <br>
 <p>        high: "30 days (top), 60 days (average)"</p>
 <br>
-<br>
-<br>
 <p>      security_spend:</p>
 <br>
 <p>        as_percentage_of_it: "5-10% (recommended)"</p>
 <br>
 <p>        per_employee: "$1,500-2,500 (enterprise)"</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Security metrics must be meaningful, measurable, and actionable. Distinguish between KPIs that measure operational effectiveness and KRIs that measure risk exposure. Tailor dashboards for each audience — executives need strategic trends and risk summaries, while SOC teams need real-time operational data. Benchmark against industry peers, track trends over time (not just snapshots), and always tie metrics back to business impact and risk reduction.</p></div>

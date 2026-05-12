@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/soc-operations.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="SOC Operations">
     <meta name="twitter:description" content="Practical guide to Security Operations Center operations including tier model, SIEM tuning, playbooks, KPIs, and shift handoff procedures.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/soc-operations.png">
     <title>SOC Operations — SourceHub</title>
     <meta name="description" content="Practical guide to Security Operations Center operations including tier model, SIEM tuning, playbooks, KPIs, and shift handoff procedures.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "SOC Operations",
       "description": "Practical guide to Security Operations Center operations including tier model, SIEM tuning, playbooks, KPIs, and shift handoff procedures.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/soc-operations.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1313",
+      "wordCount": "1270",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">SOC Operations</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/soc-operations.png" alt="SOC Operations" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>SOC Operations</h1>
 <br>
 <p>Introduction   </p>
@@ -90,9 +91,6 @@
 <p>* Create tickets for escalated incidents</p>
 <p>* Maintain shift logs</p>
 <br>
-<br>
-<br>
-<br>
 <p>    # Tier 1 triage automation example</p>
 <br>
 <p>    def triage_alert(alert):</p>
@@ -107,13 +105,9 @@
 <br>
 <p>                return</p>
 <br>
-<br>
-<br>
 <p>        # Enrich with threat intelligence</p>
 <br>
 <p>        alert.iocs = enrich_iocs(alert.extract_iocs())</p>
-<br>
-<br>
 <br>
 <p>        # Escalate if critical</p>
 <br>
@@ -126,9 +120,6 @@
 <p>        else:</p>
 <br>
 <p>            alert.assign_tier(2, queue='standard')</p>
-<br>
-<br>
-<br>
 <br>
 <p>Tier 2 — Investigation   </p>
 <p>Tier 2 analysts perform deep investigation, containment, and remediation. They correlate data from multiple sources and determine the full scope of incidents.   </p>
@@ -151,8 +142,6 @@
 <p>SIEM Tuning   </p>
 <p>SIEM tuning reduces noise while maintaining detection coverage. A well-tuned SIEM generates alerts that analysts can actually investigate.   </p>
 <br>
-<br>
-<br>
 <p>    # Example: correlation rule tuning cycle</p>
 <br>
 <p>    SIEM_ALERTS=10000</p>
@@ -163,21 +152,14 @@
 <br>
 <p>    ESCALATIONS=500</p>
 <br>
-<br>
-<br>
 <p>    echo "Alert volume: $SIEM_ALERTS"</p>
 <br>
 <p>    echo "False positive rate: $((FALSE_POSITIVES * 100 / SIEM_ALERTS))%"</p>
 <br>
 <p>    echo "Escalation rate: $((ESCALATIONS * 100 / SIEM_ALERTS))%"</p>
 <br>
-<br>
-<br>
-<br>
 <p>Playbooks   </p>
 <p>Playbooks provide step-by-step instructions for handling specific scenarios. They reduce mean time to respond (MTTR) and ensure consistency.   </p>
-<br>
-<br>
 <br>
 <p>    # Incident response playbook example</p>
 <br>
@@ -188,8 +170,6 @@
 <p>      name: "Ransomware Detection and Response"</p>
 <br>
 <p>      severity: critical</p>
-<br>
-<br>
 <br>
 <p>      steps:</p>
 <br>
@@ -203,8 +183,6 @@
 <br>
 <p>            - task: "Determine ransomware variant via IOC hash"</p>
 <br>
-<br>
-<br>
 <p>        - phase: containment</p>
 <br>
 <p>          actions:</p>
@@ -214,8 +192,6 @@
 <p>            - task: "Disable compromised accounts"</p>
 <br>
 <p>            - task: "Block C2 infrastructure at firewall"</p>
-<br>
-<br>
 <br>
 <p>        - phase: eradication</p>
 <br>
@@ -227,8 +203,6 @@
 <br>
 <p>            - task: "Reset credentials for affected accounts"</p>
 <br>
-<br>
-<br>
 <p>        - phase: recovery</p>
 <br>
 <p>          actions:</p>
@@ -239,16 +213,11 @@
 <br>
 <p>            - task: "Gradually restore connectivity"</p>
 <br>
-<br>
-<br>
-<br>
 <p>SOC KPIs   </p>
 <p>Key performance indicators measure SOC effectiveness and efficiency.   </p>
 <p>| KPI | Target | Measurement | |-----|--------|-------------| | Mean Time to Detect (MTTD) | < 1 hour | Time from compromise to detection | | Mean Time to Respond (MTTR) | < 4 hours | Time from detection to containment | | Alert Triage Time | < 15 minutes | Time to categorize initial alert | | False Positive Rate | < 30% | False alerts / total alerts | | Escalation Rate | 5-15% | Escalated alerts / total alerts | | Coverage Gap | < 5% | Unmonitored assets / total assets |   </p>
 <p>Shift Handoff   </p>
 <p>Effective shift handoffs prevent incidents from falling through the cracks.   </p>
-<br>
-<br>
 <br>
 <p>    shift_handoff:</p>
 <br>
@@ -258,32 +227,21 @@
 <br>
 <p>          fields: [id, severity, status, owner, summary, next_steps]</p>
 <br>
-<br>
-<br>
 <p>        - name: "Pending Investigations"</p>
 <br>
 <p>          fields: [alert_id, initial_findings, pending_actions]</p>
-<br>
-<br>
 <br>
 <p>        - name: "Maintenance and Outages"</p>
 <br>
 <p>          fields: [system, type, eta, impact]</p>
 <br>
-<br>
-<br>
 <p>        - name: "Notable Events"</p>
 <br>
 <p>          fields: [timestamp, description, action_taken]</p>
 <br>
-<br>
-<br>
 <p>        - name: "Tool Status"</p>
 <br>
 <p>          fields: [tool, status, known_issues]</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>A well-structured SOC combines skilled personnel, documented processes, and appropriate technology. Focus on reducing alert fatigue through continuous tuning, maintaining comprehensive playbooks, measuring performance with meaningful KPIs, and ensuring smooth shift transitions.</p></div>

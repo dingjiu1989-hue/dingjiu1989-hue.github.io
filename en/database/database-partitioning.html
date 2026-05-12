@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-partitioning.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Table Partitioning: Range, List, Hash">
     <meta name="twitter:description" content="Explore PostgreSQL table partitioning methods including range, list, and hash. Learn partition pruning, maintenance strategies, and performance implications.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-partitioning.png">
     <title>Database Table Partitioning: Range, List, Hash — SourceHub</title>
     <meta name="description" content="Explore PostgreSQL table partitioning methods including range, list, and hash. Learn partition pruning, maintenance strategies, and performance implications.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Table Partitioning: Range, List, Hash",
       "description": "Explore PostgreSQL table partitioning methods including range, list, and hash. Learn partition pruning, maintenance strategies, and performance implications.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-partitioning.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1502",
+      "wordCount": "1432",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Table Partitioning: Range, List, Hash</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-partitioning.png" alt="Database Table Partitioning: Range, List, Hash" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Table Partitioning: Range, List, Hash</h1>
 <br>
 <p>Database Table Partitioning: Range, List, Hash   </p>
@@ -92,8 +93,6 @@
 <p>Range Partitioning   </p>
 <p>Range partitioning divides data by contiguous ranges of the partition key. It is ideal for time-series data, log tables, and date-range datasets.   </p>
 <br>
-<br>
-<br>
 <p>    CREATE TABLE orders (</p>
 <br>
 <p>        id BIGSERIAL,</p>
@@ -106,42 +105,26 @@
 <br>
 <p>    ) PARTITION BY RANGE (order_date);</p>
 <br>
-<br>
-<br>
 <p>    CREATE TABLE orders_2025_q1 PARTITION OF orders</p>
 <br>
 <p>        FOR VALUES FROM ('2025-01-01') TO ('2025-04-01');</p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE orders_2025_q2 PARTITION OF orders</p>
 <br>
 <p>        FOR VALUES FROM ('2025-04-01') TO ('2025-07-01');</p>
 <br>
-<br>
-<br>
 <p>    CREATE TABLE orders_2025_q3 PARTITION OF orders</p>
 <br>
 <p>        FOR VALUES FROM ('2025-07-01') TO ('2025-10-01');</p>
 <br>
-<br>
-<br>
-<br>
 <p>The planner prunes partitions when the query includes a filter on `order_date`:   </p>
-<br>
-<br>
 <br>
 <p>    EXPLAIN SELECT * FROM orders WHERE order_date = '2025-05-15';</p>
 <br>
 <p>    -- Only scans orders_2025_q2</p>
 <br>
-<br>
-<br>
-<br>
 <p>List Partitioning   </p>
 <p>List partitioning assigns rows to partitions based on a discrete set of values. This works well for categorical data such as region, status, or department.   </p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE events (</p>
 <br>
@@ -155,42 +138,26 @@
 <br>
 <p>    ) PARTITION BY LIST (event_type);</p>
 <br>
-<br>
-<br>
 <p>    CREATE TABLE events_pageview PARTITION OF events</p>
 <br>
 <p>        FOR VALUES IN ('pageview');</p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE events_click PARTITION OF events</p>
 <br>
 <p>        FOR VALUES IN ('click', 'dblclick');</p>
 <br>
-<br>
-<br>
 <p>    CREATE TABLE events_custom PARTITION OF events</p>
 <br>
 <p>        FOR VALUES IN ('custom');</p>
 <br>
-<br>
-<br>
-<br>
 <p>Queries filtering on `event_type` prune to the matching partition:   </p>
-<br>
-<br>
 <br>
 <p>    EXPLAIN SELECT * FROM events WHERE event_type = 'click';</p>
 <br>
 <p>    -- Only scans events_click</p>
 <br>
-<br>
-<br>
-<br>
 <p>Hash Partitioning   </p>
 <p>Hash partitioning distributes rows evenly across a fixed number of partitions using a hash function on the partition key. It is useful when there is no natural partitioning column and you want uniform data distribution for parallel I/O.   </p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE sessions (</p>
 <br>
@@ -204,51 +171,33 @@
 <br>
 <p>    ) PARTITION BY HASH (session_id);</p>
 <br>
-<br>
-<br>
 <p>    CREATE TABLE sessions_0 PARTITION OF sessions</p>
 <br>
 <p>        FOR VALUES WITH (MODULUS 4, REMAINDER 0);</p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE sessions_1 PARTITION OF sessions</p>
 <br>
 <p>        FOR VALUES WITH (MODULUS 4, REMAINDER 1);</p>
 <br>
-<br>
-<br>
 <p>    CREATE TABLE sessions_2 PARTITION OF sessions</p>
 <br>
 <p>        FOR VALUES WITH (MODULUS 4, REMAINDER 2);</p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE sessions_3 PARTITION OF sessions</p>
 <br>
 <p>        FOR VALUES WITH (MODULUS 4, REMAINDER 3);</p>
 <br>
-<br>
-<br>
-<br>
 <p>Hash partitioning ensures roughly equal row counts across partitions. It does not support partition pruning on range queries, but it does prune when the partition key is filtered by equality.   </p>
 <p>Partition Pruning   </p>
 <p>Partition pruning is the query planner's ability to skip partitions that cannot contain matching rows. This optimization applies at execution time and, since PostgreSQL 11, also at plan time.   </p>
-<br>
-<br>
 <br>
 <p>    EXPLAIN (ANALYZE, BUFFERS)</p>
 <br>
 <p>    SELECT * FROM orders WHERE order_date = '2025-06-20';</p>
 <br>
-<br>
-<br>
-<br>
 <p>The plan should show only one partition being scanned. Without pruning, a query scans every partition in sequence.   </p>
 <p>Sub-partitioning   </p>
 <p>Partitions can themselves be partitioned, creating a hierarchical design:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE logs (</p>
 <br>
@@ -262,39 +211,26 @@
 <br>
 <p>    ) PARTITION BY RANGE (logged_at);</p>
 <br>
-<br>
-<br>
 <p>    CREATE TABLE logs_2025 PARTITION OF logs</p>
 <br>
 <p>        FOR VALUES FROM ('2025-01-01') TO ('2026-01-01')</p>
 <br>
 <p>        PARTITION BY LIST (severity);</p>
 <br>
-<br>
-<br>
 <p>    CREATE TABLE logs_2025_error PARTITION OF logs_2025</p>
 <br>
 <p>        FOR VALUES IN ('ERROR', 'FATAL');</p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE logs_2025_info PARTITION OF logs_2025</p>
 <br>
 <p>        FOR VALUES IN ('INFO', 'DEBUG');</p>
 <br>
-<br>
-<br>
-<br>
 <p>Maintenance   </p>
 <p>Managing partitions over time is a routine task. A typical monthly maintenance workflow includes:   </p>
-<br>
-<br>
 <br>
 <p>    -- Detach an old partition for archival</p>
 <br>
 <p>    ALTER TABLE orders DETACH PARTITION orders_2025_q1;</p>
-<br>
-<br>
 <br>
 <p>    -- Attach a new partition</p>
 <br>
@@ -302,14 +238,9 @@
 <br>
 <p>        FOR VALUES FROM ('2025-10-01') TO ('2026-01-01');</p>
 <br>
-<br>
-<br>
 <p>    -- Reindex a specific partition</p>
 <br>
 <p>    REINDEX INDEX orders_2025_q2_total_idx;</p>
-<br>
-<br>
-<br>
 <br>
 <p>An automated job (often via `pg_cron` or a scheduled task) handles partition rotation.   </p>
 <p>Common Pitfalls   </p>

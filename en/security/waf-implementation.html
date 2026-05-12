@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/waf-implementation.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Web Application Firewall Implementation">
     <meta name="twitter:description" content="Practical guide to implementing ModSecurity with OWASP CRS, custom rule writing, false positive tuning, and performance optimization.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/waf-implementation.png">
     <title>Web Application Firewall Implementation — SourceHub</title>
     <meta name="description" content="Practical guide to implementing ModSecurity with OWASP CRS, custom rule writing, false positive tuning, and performance optimization.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Web Application Firewall Implementation",
       "description": "Practical guide to implementing ModSecurity with OWASP CRS, custom rule writing, false positive tuning, and performance optimization.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/waf-implementation.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "966",
+      "wordCount": "929",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Web Application Firewall Implementation</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/waf-implementation.png" alt="Web Application Firewall Implementation" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Web Application Firewall Implementation</h1>
 <br>
 <p>Introduction   </p>
 <p>A Web Application Firewall (WAF) is a security layer that monitors, filters, and blocks HTTP traffic to and from a web application. Unlike network firewalls that operate at layers 3-4, WAFs inspect application-layer traffic (layer 7) and understand HTTP semantics, making them essential for defending against OWASP Top 10 attacks.   </p>
 <p>ModSecurity and OWASP CRS   </p>
 <p>ModSecurity is the most widely deployed open-source WAF engine. It operates as a module within web servers like Apache, Nginx, and IIS, or as a reverse proxy. The OWASP Core Rule Set (CRS) provides generic attack detection rules.   </p>
-<br>
-<br>
 <br>
 <p>    # Basic ModSecurity configuration</p>
 <br>
@@ -96,15 +95,11 @@
 <br>
 <p>        SecDataDir /tmp/modsecurity/data</p>
 <br>
-<br>
-<br>
 <p>        # Include OWASP CRS</p>
 <br>
 <p>        Include /etc/modsecurity/crs/crs-setup.conf</p>
 <br>
 <p>        Include /etc/modsecurity/crs/rules/*.conf</p>
-<br>
-<br>
 <br>
 <p>        # Custom rule: block requests with suspicious User-Agent</p>
 <br>
@@ -114,14 +109,9 @@
 <br>
 <p>    </IfModule></p>
 <br>
-<br>
-<br>
-<br>
 <p>CRS includes rules for SQL injection (942xxx), XSS (941xxx), LFI (931xxx), RFI (932xxx), and more. Each rule set is categorized by phase and severity.   </p>
 <p>Custom Rule Writing   </p>
 <p>Custom rules extend the WAF to handle application-specific threats or business logic. ModSecurity rules consist of three components: variables, operators, and actions.   </p>
-<br>
-<br>
 <br>
 <p>    # Custom rule: protect /api/checkout from parameter tampering</p>
 <br>
@@ -134,12 +124,6 @@
 <p>         chain"</p>
 <br>
 <p>        SecRule ARGS:quantity "!@rx ^[0-9]+$"</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Rate limiting per IP</p>
 <br>
@@ -159,16 +143,11 @@
 <br>
 <p>         setvar:ip.count=+1"</p>
 <br>
-<br>
-<br>
-<br>
 <p>False Positive Tuning   </p>
 <p>Overly aggressive WAF rules generate false positives that block legitimate traffic. Tuning is an iterative process:   </p>
 <br>
 <p>* **Deploy in detection-only mode** initially to identify false positives without impacting production.</p>
 <p>2\. **Analyze audit logs** for blocked requests that appear legitimate. 3\. **Disable specific rules** or adjust paranoia levels.   </p>
-<br>
-<br>
 <br>
 <p>    # Set CRS paranoia level (1-4, higher = stricter)</p>
 <br>
@@ -186,12 +165,6 @@
 <br>
 <p>         setvar:tx.paranoia_level=2"</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # Remove a specific rule for a specific URI</p>
 <br>
 <p>    SecRuleRemoveById 942100</p>
@@ -202,9 +175,6 @@
 <br>
 <p>        "id:1000005,phase:1,nolog,pass,ctl:ruleRemoveById=942100"</p>
 <br>
-<br>
-<br>
-<br>
 <p>Performance Impact   </p>
 <p>WAF inspection introduces latency. Key optimization strategies:   </p>
 <br>
@@ -212,17 +182,11 @@
 <p>* **Static file exclusion**: Skip WAF processing for static assets (images, CSS, JS).</p>
 <p>* **Rule ordering**: Place cheaper checks (URI matching) before expensive ones (regex).</p>
 <br>
-<br>
-<br>
-<br>
 <p>    # Skip WAF for static files</p>
 <br>
 <p>    SecRule REQUEST_URI "\\.(jpg|png|css|js|ico)$" \</p>
 <br>
 <p>        "id:1000006,phase:1,nolog,pass,ctl:ruleEngine=Off"</p>
-<br>
-<br>
-<br>
 <br>
 <p>Benchmarking shows ModSecurity with CRS at paranoia level 2 adds approximately 1-3ms per request on modern hardware. Full inspection at paranoia level 4 can add 10-20ms.   </p>
 <p>Conclusion   </p>

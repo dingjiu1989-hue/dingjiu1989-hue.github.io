@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/data-consistency-models.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Data Consistency Models Explained">
     <meta name="twitter:description" content="Learn about strong, eventual, causal, read-your-writes, and monotonic read consistency models plus CAP theorem trade-offs in practice.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/data-consistency-models.png">
     <title>Data Consistency Models Explained — SourceHub</title>
     <meta name="description" content="Learn about strong, eventual, causal, read-your-writes, and monotonic read consistency models plus CAP theorem trade-offs in practice.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Data Consistency Models Explained",
       "description": "Learn about strong, eventual, causal, read-your-writes, and monotonic read consistency models plus CAP theorem trade-offs in practice.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/data-consistency-models.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "397",
+      "wordCount": "385",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,6 +74,7 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Data Consistency Models Explained</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/data-consistency-models.png" alt="Data Consistency Models Explained" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Data Consistency Models Explained</h1>
 <br>
 <p>Consistency in Distributed Systems   </p>
@@ -81,37 +82,25 @@
 <p>Strong Consistency   </p>
 <p>All reads return the latest write. Behaves like a single copy:   </p>
 <br>
-<br>
-<br>
 <p>    -- Strong: reads always see latest write</p>
 <br>
 <p>    SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;</p>
 <br>
 <p>    SELECT balance FROM accounts WHERE id = 1;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Strong consistency requires coordination, adding latency and reducing availability during partitions.   </p>
 <p>Eventual Consistency   </p>
 <p>Replicas converge over time. Reads may return stale data:   </p>
 <br>
-<br>
-<br>
 <p>    def read(key):</p>
 <br>
 <p>        return any_replica.get(key)  # May be stale</p>
-<br>
-<br>
 <br>
 <p>    def write(key, value):</p>
 <br>
 <p>        local.set(key, value)</p>
 <br>
 <p>        background_replicate(key, value)  # Async</p>
-<br>
-<br>
-<br>
 <br>
 <p>Causal Consistency   </p>
 <p>Preserves cause-and-effect relationships. If A causes B, all observers see A before B. Unrelated operations can be seen in any order.   </p>

@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/retry-backoff.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Retry and Backoff Strategies">
     <meta name="twitter:description" content="Learn retry and backoff strategies for building resilient distributed systems.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/retry-backoff.png">
     <title>Retry and Backoff Strategies — SourceHub</title>
     <meta name="description" content="Learn retry and backoff strategies for building resilient distributed systems.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Retry and Backoff Strategies",
       "description": "Learn retry and backoff strategies for building resilient distributed systems.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/retry-backoff.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1319",
+      "wordCount": "1274",
       "keywords": "Architecture, System Design",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,6 +74,7 @@
         <span class="tag-cat">System Design</span></div>
       <h1 class="article-title">Retry and Backoff Strategies</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/retry-backoff.png" alt="Retry and Backoff Strategies" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Retry and Backoff Strategies</h1>
 <br>
 <p>In distributed systems, failures are inevitable. Networks drop packets, services restart, databases time out. Retry and backoff strategies are essential for building systems that gracefully handle transient failures without overwhelming downstream services.   </p>
@@ -86,13 +87,9 @@
 <p>Never retry an operation unless it is idempotent. If a request succeeds on the server but the response is lost, a retry will create a duplicate. This is catastrophic for operations like charging a credit card or creating an order.   </p>
 <p>The solution is idempotency keys. Clients generate a unique key for each operation and include it in the request header:   </p>
 <br>
-<br>
-<br>
 <p>    POST /payments</p>
 <br>
 <p>    Idempotency-Key: 550e8400-e29b-41d4-a716-446655440000</p>
-<br>
-<br>
 <br>
 <p>    {</p>
 <br>
@@ -102,20 +99,13 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>The server stores the result keyed by the idempotency key. If the same key is received again, the server returns the stored result instead of executing the operation again. Stripe's API is a canonical example of this pattern.   </p>
 <p>Fixed Retry   </p>
 <p>The simplest strategy: wait N seconds between each retry, up to a maximum number of attempts.   </p>
 <br>
-<br>
-<br>
 <p>    max_retries = 3</p>
 <br>
 <p>    delay = 1  # second</p>
-<br>
-<br>
 <br>
 <p>    for attempt in range(max_retries):</p>
 <br>
@@ -131,20 +121,13 @@
 <br>
 <p>            time.sleep(delay)</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Pros:** Simple to implement and understand. **Cons:** If the service is still recovering, all clients retry simultaneously, potentially causing a thundering herd.   </p>
 <p>Exponential Backoff   </p>
 <p>Increase the delay exponentially between each retry. If the first retry waits 1 second, the second waits 2, the third waits 4, then 8, 16, and so on.   </p>
 <br>
-<br>
-<br>
 <p>    max_retries = 5</p>
 <br>
 <p>    base_delay = 1</p>
-<br>
-<br>
 <br>
 <p>    for attempt in range(max_retries):</p>
 <br>
@@ -162,9 +145,6 @@
 <br>
 <p>            time.sleep(delay)</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Pros:** Reduces load on the recovering service. Quickly retries when the failure might be brief, but backs off aggressively for longer outages.   </p>
 <p>**Cons:** The delays compound quickly. After 6 attempts with base 1, the delay is 64 seconds. This may be too slow for latency-sensitive applications.   </p>
 <p>Exponential Backoff with Jitter   </p>
@@ -172,29 +152,17 @@
 <p>There are several jitter strategies:   </p>
 <p>**Full jitter:**</p>
 <br>
-<br>
 <p>    delay = random.uniform(0, base_delay * (2 ** attempt))</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Equal jitter:**</p>
-<br>
 <br>
 <p>    half = base_delay * (2 ** attempt) / 2</p>
 <br>
 <p>    delay = half + random.uniform(0, half)</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Decorrelated jitter:** (recommended for production)</p>
 <br>
-<br>
 <p>    delay = min(cap, random.uniform(base_delay, delay * 3))</p>
-<br>
-<br>
-<br>
 <br>
 <p>Full jitter is the most common and works well for most scenarios. The randomness spreads retries across a window, giving the recovering service breathing room. AWS and Google Cloud use exponential backoff with jitter in their SDKs.   </p>
 <p>Circuit Breaker Integration   </p>
@@ -205,15 +173,11 @@
 <p>Maximum Retries and Timeouts   </p>
 <p>Set a maximum number of retries and a maximum total time budget. A request that has been retried for 5 minutes should probably fail fast and return an error to the user.   </p>
 <br>
-<br>
-<br>
 <p>    max_retries = 3</p>
 <br>
 <p>    timeout = 30  # seconds total</p>
 <br>
 <p>    start = time.now()</p>
-<br>
-<br>
 <br>
 <p>    for attempt in range(max_retries):</p>
 <br>
@@ -231,18 +195,10 @@
 <br>
 <p>                raise</p>
 <br>
-<br>
-<br>
-<br>
 <p>Retry-After Header   </p>
 <p>When a server returns `429 Too Many Requests` or `503 Service Unavailable`, it should include a `Retry-After` header. The client should respect this header and wait the specified duration before retrying. This allows the server to communicate its preferred retry timing.   </p>
 <br>
-<br>
-<br>
 <p>    delay = response.headers.get('Retry-After', default_delay)</p>
-<br>
-<br>
-<br>
 <br>
 <p>Summary   </p>
 <p>Effective retry strategies are essential for distributed system resilience. Always combine retries with idempotency keys to prevent duplicate operations. Use exponential backoff with jitter to spread retries and prevent thundering herds. Integrate with circuit breakers for long-term failure handling. Set strict retry limits and time budgets to fail fast when recovery is not imminent.</p></div>

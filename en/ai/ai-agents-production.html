@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-agents-production.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Deploying AI Agents to Production">
     <meta name="twitter:description" content="Learn agent orchestration, error handling, human-in-the-loop patterns, monitoring agent behavior, cost tracking, rate limiting, and observability strategies.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-agents-production.png">
     <title>Deploying AI Agents to Production — SourceHub</title>
     <meta name="description" content="Learn agent orchestration, error handling, human-in-the-loop patterns, monitoring agent behavior, cost tracking, rate limiting, and observability strategies.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Deploying AI Agents to Production",
       "description": "Learn agent orchestration, error handling, human-in-the-loop patterns, monitoring agent behavior, cost tracking, rate limiting, and observability strategies.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-agents-production.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2723",
+      "wordCount": "2580",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,36 +74,22 @@
         <span class="tag-cat">Machine Learning</span></div>
       <h1 class="article-title">Deploying AI Agents to Production</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-agents-production.png" alt="Deploying AI Agents to Production" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Deploying AI Agents to Production</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>AI agents that autonomously execute multi-step tasks are transitioning from experimental prototypes to production systems. Unlike traditional API calls, agents make decisions, use tools, and interact with external systems--introducing new challenges around reliability, cost, safety, and observability. This article covers the patterns and practices needed to deploy AI agents safely and efficiently.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Agent Orchestration</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Production agents typically follow a structured execution loop:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    import asyncio</p>
 <br>
 <p>    from typing import List, Optional</p>
 <br>
 <p>    from dataclasses import dataclass, field</p>
-<br>
-<br>
 <br>
 <p>    @dataclass</p>
 <br>
@@ -121,8 +107,6 @@
 <br>
 <p>        total_cost: float = 0.0</p>
 <br>
-<br>
-<br>
 <p>    class AgentOrchestrator:</p>
 <br>
 <p>        def __init__(self, model: str = "claude-sonnet-4-20260512"):</p>
@@ -133,27 +117,19 @@
 <br>
 <p>            self.cost_per_token = {"input": 0.000003, "output": 0.000015}</p>
 <br>
-<br>
-<br>
 <p>        async def run(self, task: str) -> dict:</p>
 <br>
 <p>            ctx = AgentContext(task=task)</p>
 <br>
-<br>
-<br>
 <p>            while ctx.current_step < ctx.max_steps:</p>
 <br>
 <p>                ctx.current_step += 1</p>
-<br>
-<br>
 <br>
 <p>                try:</p>
 <br>
 <p>                    # 1. Think: decide next action</p>
 <br>
 <p>                    action = await self.think(ctx)</p>
-<br>
-<br>
 <br>
 <p>                    # 2. Act: execute tool or respond</p>
 <br>
@@ -162,8 +138,6 @@
 <p>                        result = await self.execute_tool(action["tool"], action["args"])</p>
 <br>
 <p>                        ctx.tools_used.append(action["tool"]["name"])</p>
-<br>
-<br>
 <br>
 <p>                    elif action["type"] == "final_answer":</p>
 <br>
@@ -181,8 +155,6 @@
 <br>
 <p>                        }</p>
 <br>
-<br>
-<br>
 <p>                    # 3. Observe: store result</p>
 <br>
 <p>                    ctx.history.append({</p>
@@ -195,13 +167,9 @@
 <br>
 <p>                    })</p>
 <br>
-<br>
-<br>
 <p>                    # 4. Cost tracking</p>
 <br>
 <p>                    ctx.total_cost += self._calculate_cost(action)</p>
-<br>
-<br>
 <br>
 <p>                except ToolError as e:</p>
 <br>
@@ -209,33 +177,17 @@
 <br>
 <p>                    await self.handle_tool_error(ctx, e)</p>
 <br>
-<br>
-<br>
 <p>                except Exception as e:</p>
 <br>
 <p>                    # Catch-all for unexpected errors</p>
 <br>
 <p>                    await self.handle_unexpected_error(ctx, e)</p>
 <br>
-<br>
-<br>
 <p>            return {"status": "max_steps_exceeded", "steps": ctx.max_steps}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <h2>  Error Handling and Retry Logic</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Agents must gracefully handle failures across multiple dimensions:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class AgentErrorHandler:</p>
 <br>
@@ -253,13 +205,9 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
 <p>        async def execute_with_retry(self, tool_call: dict) -> dict:</p>
 <br>
 <p>            policy = self._get_policy(tool_call["tool"]["name"])</p>
-<br>
-<br>
 <br>
 <p>            for attempt in range(policy.max_retries):</p>
 <br>
@@ -289,11 +237,7 @@
 <br>
 <p>                    continue</p>
 <br>
-<br>
-<br>
 <p>            return {"error": "max_retries_exceeded", "tool": tool_call["tool"]["name"]}</p>
-<br>
-<br>
 <br>
 <p>        def _graceful_degradation(self, tool_call: dict) -> dict:</p>
 <br>
@@ -309,21 +253,9 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Human-in-the-Loop</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Critical agent actions require human approval before execution:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class HumanInTheLoop:</p>
 <br>
@@ -332,8 +264,6 @@
 <p>            self.thresholds = approval_thresholds</p>
 <br>
 <p>            self.pending_approvals = {}</p>
-<br>
-<br>
 <br>
 <p>        async def request_approval(</p>
 <br>
@@ -346,8 +276,6 @@
 <p>            if not self._requires_approval(action):</p>
 <br>
 <p>                return True</p>
-<br>
-<br>
 <br>
 <p>            approval_id = str(uuid.uuid4())</p>
 <br>
@@ -363,8 +291,6 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
 <p>            # Notify human reviewer</p>
 <br>
 <p>            await self._notify_reviewer(</p>
@@ -378,8 +304,6 @@
 <p>                current_state=context.history[-3:],</p>
 <br>
 <p>            )</p>
-<br>
-<br>
 <br>
 <p>            # Wait for approval (with timeout)</p>
 <br>
@@ -401,8 +325,6 @@
 <br>
 <p>                return False</p>
 <br>
-<br>
-<br>
 <p>        def _requires_approval(self, action: dict) -> bool:</p>
 <br>
 <p>            return any([</p>
@@ -417,21 +339,9 @@
 <br>
 <p>            ])</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Monitoring Agent Behavior</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Track agent decisions and outcomes with structured telemetry:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class AgentTelemetry:</p>
 <br>
@@ -441,13 +351,9 @@
 <br>
 <p>            self.tracer = Tracer()</p>
 <br>
-<br>
-<br>
 <p>        def record_step(self, ctx: AgentContext, action: dict, observation: dict):</p>
 <br>
 <p>            span = self.tracer.start_span("agent_step")</p>
-<br>
-<br>
 <br>
 <p>            span.set_attributes({</p>
 <br>
@@ -465,8 +371,6 @@
 <br>
 <p>            })</p>
 <br>
-<br>
-<br>
 <p>            self.metrics.histogram(</p>
 <br>
 <p>                "agent.step.duration",</p>
@@ -483,17 +387,11 @@
 <br>
 <p>            )</p>
 <br>
-<br>
-<br>
 <p>            span.end()</p>
-<br>
-<br>
 <br>
 <p>        def detect_anomalies(self, ctx: AgentContext) -> List[str]:</p>
 <br>
 <p>            warnings = []</p>
-<br>
-<br>
 <br>
 <p>            # Looping detection</p>
 <br>
@@ -505,15 +403,11 @@
 <br>
 <p>                warnings.append("POSSIBLE_LOOP")</p>
 <br>
-<br>
-<br>
 <p>            # Cost anomaly</p>
 <br>
 <p>            if ctx.total_cost > 0.50:</p>
 <br>
 <p>                warnings.append("HIGH_COST")</p>
-<br>
-<br>
 <br>
 <p>            # Token usage</p>
 <br>
@@ -527,20 +421,9 @@
 <br>
 <p>                warnings.append("HIGH_TOKEN_USAGE")</p>
 <br>
-<br>
-<br>
 <p>            return warnings</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Cost Tracking and Rate Limiting</h2>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class AgentCostManager:</p>
 <br>
@@ -552,8 +435,6 @@
 <br>
 <p>            self.token_buckets = {}</p>
 <br>
-<br>
-<br>
 <p>        async def check_budget(self, estimated_cost: float) -> bool:</p>
 <br>
 <p>            # Reset daily counter</p>
@@ -562,19 +443,13 @@
 <br>
 <p>                self.daily_spend = 0.0</p>
 <br>
-<br>
-<br>
 <p>            if self.daily_spend + estimated_cost > self.daily_budget:</p>
 <br>
 <p>                return False  # Budget exceeded</p>
 <br>
-<br>
-<br>
 <p>            self.daily_spend += estimated_cost</p>
 <br>
 <p>            return True</p>
-<br>
-<br>
 <br>
 <p>        async def rate_limit_check(self, tool: str) -> bool:</p>
 <br>
@@ -590,21 +465,9 @@
 <br>
 <p>            return bucket.consume()</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Observability</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Log agent decision traces for debugging and audit:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    {</p>
 <br>
@@ -651,11 +514,6 @@
 <p>      "warnings": []</p>
 <br>
 <p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>Deploy agents incrementally: start with read-only tools, add human-in-the-loop for destructive actions, and only move to fully autonomous mode after extensive monitoring and failure mode analysis.</p></div>
     </article>

@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/multi-modal-rag.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval">
     <meta name="twitter:description" content="Build multi-modal RAG systems that handle images, tables, and documents. Learn chunking strategies, embedding approaches, and retrieval fusion for different dat">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/multi-modal-rag.png">
     <title>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval — SourceHub</title>
     <meta name="description" content="Build multi-modal RAG systems that handle images, tables, and documents. Learn chunking strategies, embedding approaches, and retrieval fusion for different dat">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval",
       "description": "Build multi-modal RAG systems that handle images, tables, and documents. Learn chunking strategies, embedding approaches, and retrieval fusion for different dat",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/multi-modal-rag.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2045",
+      "wordCount": "1922",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,28 +75,16 @@
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/multi-modal-rag.png" alt="Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Real-world documents contain more than text: images, charts, tables, and diagrams carry critical information that text-only RAG systems cannot access. Multi-modal RAG extends retrieval to include visual content, enabling questions like "What does the Q3 revenue chart show?" or "What values are in the configuration table?" This article covers the architectures and techniques for building multi-modal RAG.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Strategies for Multi-Modal RAG</h2>
 <br>
-<br>
-<br>
-<br>
 <p>There are three main approaches to handling non-text content:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Strategy 1: Convert everything to text (simplest)</p>
 <br>
@@ -104,39 +92,21 @@
 <br>
 <p>    # Strategy 3: Multi-modal retrieval with specialized models (most powerful)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Strategy 1: Text Conversion</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Convert images and tables to text using vision models or OCR:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from openai import OpenAI</p>
 <br>
 <p>    import base64</p>
 <br>
-<br>
-<br>
 <p>    client = OpenAI()</p>
-<br>
-<br>
 <br>
 <p>    def describe_image(image_path: str) -> str:</p>
 <br>
 <p>        with open(image_path, "rb") as f:</p>
 <br>
 <p>            image_data = base64.b64encode(f.read()).decode("utf-8")</p>
-<br>
-<br>
 <br>
 <p>        response = client.chat.completions.create(</p>
 <br>
@@ -166,8 +136,6 @@
 <br>
 <p>        return response.choices[0].message.content</p>
 <br>
-<br>
-<br>
 <p>    def convert_table_to_text(table_data: list[list[str]]) -> str:</p>
 <br>
 <p>        """Convert a parsed table to searchable text."""</p>
@@ -178,33 +146,17 @@
 <br>
 <p>        text_parts = []</p>
 <br>
-<br>
-<br>
 <p>        for row in rows:</p>
 <br>
 <p>            row_desc = ", ".join(f"{headers[i]}: {cell}" for i, cell in enumerate(row))</p>
 <br>
 <p>            text_parts.append(row_desc)</p>
 <br>
-<br>
-<br>
 <p>        return "\n".join(text_parts)</p>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <h3>Strategy 2: Multi-Vector Retriever</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Store both text representations and visual embeddings:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from langchain.retrievers.multi_vector import MultiVectorRetriever</p>
 <br>
@@ -215,8 +167,6 @@
 <p>    from langchain.embeddings import OpenAIEmbeddings</p>
 <br>
 <p>    from langchain.schema.document import Document</p>
-<br>
-<br>
 <br>
 <p>    # Store text summaries alongside raw elements</p>
 <br>
@@ -230,8 +180,6 @@
 <br>
 <p>    store = InMemoryStore()</p>
 <br>
-<br>
-<br>
 <p>    retriever = MultiVectorRetriever(</p>
 <br>
 <p>        vectorstore=vectorstore,</p>
@@ -242,8 +190,6 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    # For each document element (text, image, table):</p>
 <br>
 <p>    # 1. Generate a text summary</p>
@@ -253,8 +199,6 @@
 <p>    # 3. Store the original element in the doc store</p>
 <br>
 <p>    # 4. Link them with a shared doc_id</p>
-<br>
-<br>
 <br>
 <p>    doc_id = "doc_001_image_03"</p>
 <br>
@@ -268,27 +212,13 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    retriever.vectorstore.add_documents([Document(page_content=summary, metadata={"doc_id": doc_id})])</p>
 <br>
 <p>    retriever.docstore.mset([(doc_id, original)])</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Strategy 3: Multi-Modal Embeddings</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Use embedding models that handle both text and images in a shared space:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from sentence_transformers import SentenceTransformer</p>
 <br>
@@ -296,29 +226,21 @@
 <br>
 <p>    from PIL import Image</p>
 <br>
-<br>
-<br>
 <p>    class MultiModalEmbedder:</p>
 <br>
 <p>        def __init__(self, model_name="clip-ViT-B-32"):</p>
 <br>
 <p>            self.model = SentenceTransformer(model_name)</p>
 <br>
-<br>
-<br>
 <p>        def embed_text(self, text: str) -> list[float]:</p>
 <br>
 <p>            return self.model.encode(text).tolist()</p>
-<br>
-<br>
 <br>
 <p>        def embed_image(self, image_path: str) -> list[float]:</p>
 <br>
 <p>            image = Image.open(image_path)</p>
 <br>
 <p>            return self.model.encode(image).tolist()</p>
-<br>
-<br>
 <br>
 <p>        def search_by_text(self, query: str, image_embeddings: list, top_k: int = 5):</p>
 <br>
@@ -336,21 +258,9 @@
 <br>
 <p>            return top_indices, scores[top_indices].tolist()</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Chunking Strategies for Multi-Modal Data</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Each content type needs a different chunking approach:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class MultiModalChunker:</p>
 <br>
@@ -360,13 +270,9 @@
 <br>
 <p>            import fitz  # PyMuPDF</p>
 <br>
-<br>
-<br>
 <p>            doc = fitz.open(pdf_path)</p>
 <br>
 <p>            chunks = []</p>
-<br>
-<br>
 <br>
 <p>            for page_num, page in enumerate(doc):</p>
 <br>
@@ -410,11 +316,7 @@
 <br>
 <p>                        })</p>
 <br>
-<br>
-<br>
 <p>            return chunks</p>
-<br>
-<br>
 <br>
 <p>        def chunk_table(self, table_df) -> dict:</p>
 <br>
@@ -436,21 +338,9 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Retrieval and Fusion</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Query across all content types and fuse the results:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    def multi_modal_retrieve(query: str, text_index, image_index, table_index, top_k: int = 3):</p>
 <br>
@@ -459,8 +349,6 @@
 <p>        image_results = search_images(query, image_index, top_k)</p>
 <br>
 <p>        table_results = search_tables(query, table_index, top_k)</p>
-<br>
-<br>
 <br>
 <p>        # Fuse results with type-aware scoring</p>
 <br>
@@ -478,21 +366,11 @@
 <br>
 <p>            all_results.append({"content": tbl["summary"], "type": "table", "data": tbl["content"], "score": 0.9})</p>
 <br>
-<br>
-<br>
 <p>        all_results.sort(key=lambda x: x["score"], reverse=True)</p>
 <br>
 <p>        return all_results[:top_k * 2]</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Multi-modal RAG extends retrieval to images, tables, and other visual content. The simplest approach converts non-text content to text descriptions using vision models. More sophisticated approaches use multi-vector retrievers or shared embedding spaces like CLIP. Choose your strategy based on the complexity of your visual content and the precision required for retrieval. Always evaluate retrieval quality separately for each modality.</p></div>
     </article>

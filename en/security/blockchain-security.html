@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/blockchain-security.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Blockchain and Smart Contract Security">
     <meta name="twitter:description" content="Smart contract vulnerabilities including reentrancy and oracle manipulation, plus auditing tools, formal verification, and wallet security.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/blockchain-security.png">
     <title>Blockchain and Smart Contract Security — SourceHub</title>
     <meta name="description" content="Smart contract vulnerabilities including reentrancy and oracle manipulation, plus auditing tools, formal verification, and wallet security.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Blockchain and Smart Contract Security",
       "description": "Smart contract vulnerabilities including reentrancy and oracle manipulation, plus auditing tools, formal verification, and wallet security.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/blockchain-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2465",
+      "wordCount": "2280",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,36 +74,22 @@
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">Blockchain and Smart Contract Security</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/blockchain-security.png" alt="Blockchain and Smart Contract Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Blockchain and Smart Contract Security</h1>
 <br>
 <p>Blockchain and smart contract security presents unique challenges. Once deployed, smart contracts are immutable. A vulnerability in a contract can result in millions of dollars in losses with no recourse. This article covers common smart contract vulnerabilities, auditing tools and techniques, formal verification, and wallet security.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Common Smart Contract Vulnerabilities</h2>
-<br>
-<br>
-<br>
 <br>
 <h3>Reentrancy</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Reentrancy is the most infamous smart contract vulnerability. It occurs when a contract calls an external contract before updating its own state, allowing the external contract to recursively call back into the original contract before the first invocation completes.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // VULNERABLE: Reentrancy</p>
 <br>
 <p>    contract VulnerableWithdraw {</p>
 <br>
 <p>        mapping(address => uint) public balances;</p>
-<br>
-<br>
 <br>
 <p>        function withdraw(uint amount) public {</p>
 <br>
@@ -121,23 +107,12 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>An attacker contract can exploit this by calling `withdraw` repeatedly from its `receive` function, draining all funds before the balance is updated.</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Prevention**:</p>
 <br>
 <p>* Use the checks-effects-interactions pattern: update state before making external calls.</p>
 <p>* Use OpenZeppelin's ReentrancyGuard modifier.</p>
-<br>
-<br>
-<br>
 <br>
 <p>    // SAFE: Checks-Effects-Interactions</p>
 <br>
@@ -146,8 +121,6 @@
 <p>        using ReentrancyGuard for *;</p>
 <br>
 <p>        mapping(address => uint) public balances;</p>
-<br>
-<br>
 <br>
 <p>        function withdraw(uint amount) public nonReentrant {</p>
 <br>
@@ -163,25 +136,11 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Oracle Manipulation</h3>
-<br>
-<br>
-<br>
 <br>
 <p>Smart contracts rely on oracles to bring off-chain data (price feeds, randomness) on-chain. If an oracle is manipulated, contracts depending on that data behave incorrectly.</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Flash loan attacks**: An attacker borrows a large amount of tokens, trades them to manipulate the pool price, then exploits a contract that reads the manipulated price. The attacker repays the flash loan in the same transaction.</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Prevention**:</p>
 <br>
@@ -189,16 +148,11 @@
 <p>* Implement time-weighted average prices (TWAP) rather than spot prices.</p>
 <p>* Add sanity checks and circuit breakers for price movements beyond normal ranges.</p>
 <br>
-<br>
-<br>
-<br>
 <p>    // Using Chainlink price feed with TWAP protection</p>
 <br>
 <p>    contract SafePrice {</p>
 <br>
 <p>        AggregatorV3Interface internal priceFeed;</p>
-<br>
-<br>
 <br>
 <p>        constructor() {</p>
 <br>
@@ -209,8 +163,6 @@
 <p>            );</p>
 <br>
 <p>        }</p>
-<br>
-<br>
 <br>
 <p>        function getSafePrice() public view returns (uint) {</p>
 <br>
@@ -228,20 +180,9 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Front-Running</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Transactions in the mempool are visible to all. MEV (Maximal Extractable Value) bots monitor the mempool and submit transactions ahead of profitable trades.</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Prevention**:</p>
 <br>
@@ -249,26 +190,15 @@
 <p>* Set slippage tolerances to limit the impact of price changes.</p>
 <p>* Use private transaction relayers (Flashbots, MEV Blocker).</p>
 <br>
-<br>
-<br>
 <h3>Integer Overflow and Underflow</h3>
 <br>
-<br>
-<br>
-<br>
 <p>While Solidity 0.8+ includes built-in overflow checking via `unchecked` blocks, older versions required SafeMath. Always use SafeMath or Solidity 0.8+ for arithmetic.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // Solidity 0.8+ automatically reverts on overflow</p>
 <br>
 <p>    uint256 max = type(uint256).max;</p>
 <br>
 <p>    uint256 result = max + 1;  // Reverts</p>
-<br>
-<br>
 <br>
 <p>    // Use unchecked only when you know bounds are safe</p>
 <br>
@@ -278,20 +208,9 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Access Control Vulnerabilities</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Improper access control allows unauthorized users to call privileged functions. The Parity multi-sig wallet hack (2017) lost 30 million dollars due to an unprotected `initWallet` function.</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Prevention**:</p>
 <br>
@@ -300,22 +219,15 @@
 <p>* Follow the principle of least privilege for admin functions.</p>
 <p>* Use multi-signature wallets for privileged operations.</p>
 <br>
-<br>
-<br>
-<br>
 <p>    // Secure access control with OpenZeppelin</p>
 <br>
 <p>    import "@openzeppelin/contracts/access/AccessControl.sol";</p>
-<br>
-<br>
 <br>
 <p>    contract SecureContract is AccessControl {</p>
 <br>
 <p>        bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");</p>
 <br>
 <p>        bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");</p>
-<br>
-<br>
 <br>
 <p>        constructor() {</p>
 <br>
@@ -325,8 +237,6 @@
 <br>
 <p>        }</p>
 <br>
-<br>
-<br>
 <p>        function pause() public onlyRole(PAUSER_ROLE) {</p>
 <br>
 <p>            _pause();</p>
@@ -335,63 +245,31 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Smart Contract Auditing</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Auditing is the primary defense against smart contract vulnerabilities. A thorough audit combines automated scanning with manual review.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Automated Auditing Tools</h3>
-<br>
-<br>
 <br>
 <p>* **Slither**: Static analysis framework for Solidity. Detects common vulnerabilities, generates contract inheritance graphs, and identifies dangerous patterns.</p>
 <p>* **Mythril**: Security analysis tool that uses symbolic execution to find vulnerabilities.</p>
 <p>* **Echidna**: Fuzzing tool that tests contract properties using random inputs.</p>
 <br>
-<br>
-<br>
-<br>
 <p>    # Slither analysis</p>
 <br>
 <p>    slither my_contract.sol --print human-summary</p>
-<br>
-<br>
 <br>
 <p>    # Run specific detectors</p>
 <br>
 <p>    slither my_contract.sol --detect reentrancy-eth,reentrancy-no-eth</p>
 <br>
-<br>
-<br>
 <p>    # Mythril analysis</p>
 <br>
 <p>    myth analyze my_contract.sol --solc-json solc.json</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Property-Based Fuzzing with Foundry</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Foundry is a modern Solidity testing framework that supports fuzz testing and invariant testing.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // Foundry fuzz test</p>
 <br>
@@ -399,15 +277,11 @@
 <br>
 <p>        Token token;</p>
 <br>
-<br>
-<br>
 <p>        function setUp() public {</p>
 <br>
 <p>            token = new Token();</p>
 <br>
 <p>        }</p>
-<br>
-<br>
 <br>
 <p>        // Fuzz test: total supply should never decrease</p>
 <br>
@@ -427,19 +301,9 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Manual Review Checklist</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Automated tools catch common patterns but miss business logic flaws. Manual review is essential.</p>
-<br>
-<br>
 <br>
 <p>* **Access control**: Can every user call every function? Are admin functions protected?</p>
 <p>* **State consistency**: Are internal bookkeeping values consistent with actual token balances?</p>
@@ -448,28 +312,15 @@
 <p>* **Emergency stop**: Can the contract be paused during an attack? Is the pause function itself protected?</p>
 <p>* **Token handling**: Does the contract handle non-standard ERC-20 tokens (USDT, fee-on-transfer)?</p>
 <br>
-<br>
-<br>
 <h2>  Formal Verification</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Formal verification mathematically proves that a contract satisfies specified properties. It is the highest assurance level for smart contract security.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Tools</h3>
-<br>
-<br>
 <br>
 <p>* **Certora Prover**: Automated formal verification platform with property specification language.</p>
 <p>* **KEVM / K Framework**: Executable formal semantics of the EVM.</p>
 <p>* **Halmos**: Symbolic testing tool for Foundry-compatible projects.</p>
-<br>
-<br>
-<br>
 <br>
 <p>    // Certora property specification</p>
 <br>
@@ -493,46 +344,21 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Formal verification is most valuable for high-value contracts (DeFi protocols, bridges, stablecoins) where failure is catastrophic.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Wallet Security</h2>
 <br>
-<br>
-<br>
-<br>
 <p>User wallets are a major attack vector. Protecting wallet infrastructure is critical for any blockchain application.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Key Management</h3>
-<br>
-<br>
 <br>
 <p>* Never store private keys in plaintext.</p>
 <p>* Use hardware security modules (HSMs) or cloud KMS for server-side keys.</p>
 <p>* Implement multi-party computation (MPC) for distributed key management.</p>
 <br>
-<br>
-<br>
 <h3>EIP-712 Structured Data Signing</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Use typed data signing (EIP-712) to make signed data readable in wallets, reducing phishing risk.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // EIP-712 typed data</p>
 <br>
@@ -550,23 +376,13 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
 <p>    bytes32 constant PERMIT_TYPEHASH = keccak256(</p>
 <br>
 <p>        "Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)"</p>
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Smart contract security requires a multi-layered approach. Understand common vulnerabilities like reentrancy, oracle manipulation, and front-running. Use automated analysis tools like Slither and Mythril. Invest in formal verification for high-value contracts. Implement rigorous access control and follow patterns like checks-effects-interactions. Finally, secure the wallet infrastructure that interacts with your contracts. In the immutable world of blockchain, security is not optional.</p></div>
     </article>

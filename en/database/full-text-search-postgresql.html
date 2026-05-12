@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/full-text-search-postgresql.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes">
     <meta name="twitter:description" content="Learn full-text search in PostgreSQL using tsvector, tsquery, and GIN indexes. Understand ranking, stemming, and when to use PostgreSQL vs Elasticsearch.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/full-text-search-postgresql.png">
     <title>Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes — SourceHub</title>
     <meta name="description" content="Learn full-text search in PostgreSQL using tsvector, tsquery, and GIN indexes. Understand ranking, stemming, and when to use PostgreSQL vs Elasticsearch.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes",
       "description": "Learn full-text search in PostgreSQL using tsvector, tsquery, and GIN indexes. Understand ranking, stemming, and when to use PostgreSQL vs Elasticsearch.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/full-text-search-postgresql.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1571",
+      "wordCount": "1482",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/full-text-search-postgresql.png" alt="Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</h1>
 <br>
 <p>Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes   </p>
@@ -88,51 +89,33 @@
 <p>tsvector   </p>
 <p>A `tsvector` is a sorted list of distinct lexemes with positional information:   </p>
 <br>
-<br>
-<br>
 <p>    SELECT to_tsvector('english',</p>
 <br>
 <p>        'The quick brown fox jumps over the lazy dog');</p>
 <br>
 <p>    -- 'brown':3 'dog':9 'fox':4 'jump':5 'lazy':8 'quick':2</p>
 <br>
-<br>
-<br>
-<br>
 <p>Notice "jumps" became "jump" (stemming), and "the", "over" are removed (stop words).   </p>
 <p>tsquery   </p>
 <p>A `tsquery` represents a search query:   </p>
-<br>
-<br>
 <br>
 <p>    SELECT to_tsquery('english', 'fox & dog');</p>
 <br>
 <p>    -- 'fox' & 'dog'</p>
 <br>
-<br>
-<br>
 <p>    SELECT to_tsquery('english', 'jump | run');</p>
 <br>
 <p>    -- 'jump' | 'run'</p>
-<br>
-<br>
 <br>
 <p>    SELECT to_tsquery('english', '!cat');</p>
 <br>
 <p>    -- !'cat'</p>
 <br>
-<br>
-<br>
 <p>    SELECT to_tsquery('english', 'quick <-> brown');</p>
 <br>
 <p>    -- 'quick' <-> 'brown'  (adjacency: quick followed by brown)</p>
 <br>
-<br>
-<br>
-<br>
 <p>Basic Search   </p>
-<br>
-<br>
 <br>
 <p>    SELECT title, body</p>
 <br>
@@ -140,13 +123,8 @@
 <br>
 <p>    WHERE to_tsvector('english', body) @@ to_tsquery('english', 'database & performance');</p>
 <br>
-<br>
-<br>
-<br>
 <p>Creating a Search Column   </p>
 <p>For production use, store the `tsvector` in a generated column to avoid repeated conversion:   </p>
-<br>
-<br>
 <br>
 <p>    ALTER TABLE articles</p>
 <br>
@@ -158,16 +136,9 @@
 <br>
 <p>    ) STORED;</p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX idx_articles_search ON articles USING GIN (search_vector);</p>
 <br>
-<br>
-<br>
-<br>
 <p>Now queries become:   </p>
-<br>
-<br>
 <br>
 <p>    SELECT title, body</p>
 <br>
@@ -175,13 +146,8 @@
 <br>
 <p>    WHERE search_vector @@ to_tsquery('english', 'postgresql & indexing');</p>
 <br>
-<br>
-<br>
-<br>
 <p>Search Ranking   </p>
 <p>PostgreSQL offers ranking functions to sort results by relevance:   </p>
-<br>
-<br>
 <br>
 <p>    SELECT title,</p>
 <br>
@@ -197,12 +163,7 @@
 <br>
 <p>    LIMIT 20;</p>
 <br>
-<br>
-<br>
-<br>
 <p>`ts_rank` considers term frequency (TF) and inverse document frequency (IDF). A variant `ts_rank_cd` uses cover density, which rewards terms that appear close together:   </p>
-<br>
-<br>
 <br>
 <p>    SELECT title,</p>
 <br>
@@ -214,12 +175,7 @@
 <br>
 <p>    ORDER BY rank DESC;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Highlighting   </p>
-<br>
-<br>
 <br>
 <p>    SELECT title,</p>
 <br>
@@ -231,13 +187,8 @@
 <br>
 <p>    WHERE search_vector @@ query;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Multi-Column and Weighted Search   </p>
 <p>Assign different weights to columns for ranking:   </p>
-<br>
-<br>
 <br>
 <p>    ALTER TABLE articles ADD COLUMN search_weighted tsvector</p>
 <br>
@@ -249,16 +200,9 @@
 <br>
 <p>    ) STORED;</p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX idx_articles_weighted ON articles USING GIN (search_weighted);</p>
 <br>
-<br>
-<br>
-<br>
 <p>The weight function `ts_rank` can use these weights:   </p>
-<br>
-<br>
 <br>
 <p>    SELECT title,</p>
 <br>
@@ -270,9 +214,6 @@
 <br>
 <p>    ORDER BY rank DESC;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Dictionaries and Custom Configurations   </p>
 <p>PostgreSQL supports multiple text search dictionaries:   </p>
 <br>
@@ -283,11 +224,7 @@
 <br>
 <p>Create a custom configuration:   </p>
 <br>
-<br>
-<br>
 <p>    CREATE TEXT SEARCH CONFIGURATION my_search (COPY = english);</p>
-<br>
-<br>
 <br>
 <p>    CREATE TEXT SEARCH DICTIONARY my_thesaurus (</p>
 <br>
@@ -297,26 +234,17 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
 <p>    ALTER TEXT SEARCH CONFIGURATION my_search</p>
 <br>
 <p>        ALTER MAPPING FOR asciiword</p>
 <br>
 <p>        WITH my_thesaurus, english_stem;</p>
 <br>
-<br>
-<br>
 <p>    SELECT to_tsvector('my_search', 'The database is performing well');</p>
-<br>
-<br>
-<br>
 <br>
 <p>PostgreSQL vs Elasticsearch   </p>
 <p>| Aspect | PostgreSQL FTS | Elasticsearch | |--------|---------------|---------------| | Setup | Built-in, no extra service | Separate cluster, JVM | | Index freshness | Real-time within transaction | Near-real-time (refresh interval) | | Ranking | TF-IDF based | BM25, learning-to-rank | | Faceted search | GROUP BY with tsvector | Dedicated aggregation API | | Scale | Single node + replicas | Distributed by design | | Fuzzy search | pg_trgm extension | Built-in fuzzy matching | | Language support | 20+ languages via Snowball | 40+ language analyzers | | Query syntax | @@ tsquery operator | JSON-based Query DSL |   </p>
 <p>Performance Tuning   </p>
-<br>
-<br>
 <br>
 <p>    -- Analyze GIN index usage</p>
 <br>
@@ -326,40 +254,24 @@
 <br>
 <p>    WHERE indexrelname = 'idx_articles_search';</p>
 <br>
-<br>
-<br>
 <p>    -- Track search index size</p>
 <br>
 <p>    SELECT pg_size_pretty(pg_indexes_size('articles'));</p>
-<br>
-<br>
-<br>
 <br>
 <p>For large datasets (millions of documents), consider:   </p>
 <br>
 <p>* Partial indexes for recent documents if search is time-sensitive:</p>
 <br>
-<br>
 <p>    CREATE INDEX idx_recent_search ON articles USING GIN (search_vector)</p>
 <br>
 <p>        WHERE published_at > now() - interval '30 days';</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>* Partitioning the table by date and creating GIN indexes per partition.</p>
 <p>* Using `pg_trgm` for prefix/similarity matching as a complement to FTS:</p>
-<br>
-<br>
-<br>
 <br>
 <p>    CREATE INDEX idx_articles_title_trgm ON articles USING GIN (title gin_trgm_ops);</p>
 <br>
 <p>    SELECT * FROM articles WHERE title % 'databas'; -- similarity search</p>
-<br>
-<br>
-<br>
 <br>
 <p>PostgreSQL full-text search is adequate for the majority of applications: documentation sites, blog search, e-commerce product search, and knowledge bases. Consider dedicated search engines only when you need fuzzy matching, faceted aggregation across millions of documents, or distributed search at scale.</p></div>
     </article>

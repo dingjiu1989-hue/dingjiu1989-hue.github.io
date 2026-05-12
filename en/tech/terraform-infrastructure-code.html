@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/terraform-infrastructure-code.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Terraform Infrastructure as Code">
     <meta name="twitter:description" content="Master Terraform for managing cloud infrastructure with state management, modules, and production best practices.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/terraform-infrastructure-code.png">
     <title>Terraform Infrastructure as Code — SourceHub</title>
     <meta name="description" content="Master Terraform for managing cloud infrastructure with state management, modules, and production best practices.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,15 +38,15 @@
       "@type": "Article",
       "headline": "Terraform Infrastructure as Code",
       "description": "Master Terraform for managing cloud infrastructure with state management, modules, and production best practices.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/terraform-infrastructure-code.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1978",
+      "wordCount": "1627",
       "keywords": "Technology, Programming, DevOps",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/terraform-infrastructure-code.html"},
-      "articleBody": "Terraform Infrastructure as Code Terraform has become the standard tool for Infrastructure as Code (IaC). It allows you to define, provision, and manage cloud resources across providers using declarative configuration. This guide covers practical Terraform patterns for production use. Core Concepts Terraform uses a declarative approach -- you describe the desired state, and Terraform figures out how to reach it: # main.tf terraform { required_version = \">= 1.8\" required_providers { aws = { source = \"hashicorp/aws\" version = \"~> 5.0\" } } backend \"s3\" { bucket = \"myapp-terraform-state\" key = \"production/terraform.tfstate\" region = \"us-east-1\" } } provider \"aws\" { region = var.aws_region } resource \"aws_s3_bucket\" \"app_data\" { bucket = \"myapp-production-data\" tags = { Name = \"Application Data\" Environment = \"production\" } } Key components: providers connect to cloud APIs, resources define infrastructure components, and the backend stores state. State Management State is the most critical part of Terraform. It maps configuration to real-world resources. Remote State Backend Always use remote state storage with locking: # backend configuration during init: terraform init -backend-config=backend.hcl bucket = \"company-terraform-state\" key = \"env:/${environment}/networking/terraform.tfstate\" region = \"us-east-1\" dynamodb_table = \"terraform-state-lock\" encrypt = true DynamoDB provides state locking to prevent concurrent modifications. S3 versioning provides state history for rollback. State Access for Other Configurations Share outputs across configurations: data \"terraform_remote_state\" \"vpc\" { backend = \"s3\" config = { bucket = \"company-terraform-state\" key = \"env:/production/vpc/terraform.tfstate\" region = \"us-east-1\" } } resource \"aws_instance\" \"app\" { subnet_id = data.terraform_remote_state.vpc.outputs.private_subnet_ids[0] } Module Design Modules are reusable Terraform configurations. Design them for composability: # modules/vpc/main.tf variable \"vpc_cidr\" { description = \"CIDR block for the VPC\" type = string validation { condition = can(cidrhost(var.vpc_cidr, 0)) error_message = \"Must be a valid CIDR notation.\" } } variable \"environment\" { description = \"Environment name for tagging\" type = string } resource \"aws_vpc\" \"this\" { cidr_block = var.vpc_cidr enable_dns_hostnames = true enable_dns_support = true tags = { Name = \"vpc-${var.environment}\" Environment = var.environment } } output \"vpc_id\" { value = aws_vpc.this.id } output \"vpc_cidr\" { value = aws_vpc.this.cidr_block } Use input validation to catch errors early. Document all variables and outputs with descriptions. Workspace and Environment Management Use workspaces or directory structure for environment isolation: # Directory structure: terraform/ env/ production/ main.tf terraform.tfvars staging/ main.tf terraform.tfvars Or use Terraform workspaces: terraform workspace new staging terraform workspace new production terraform workspace select staging terraform plan -var-file=staging.tfvars Workspaces are simpler but can become confusing with many environments. Directory-based separation is clearer for complex setups. Terraform Plan and Apply Workflow The standard workflow in CI/CD: # Initialize with backend terraform init -backend-config=backend-$ENV.hcl # Format and validate terraform fmt -check terraform validate # Plan terraform plan -out=tfplan -var-file=$ENV.tfvars # Apply (typically in CI with approval gate) terraform apply tfplan Never run `terraform apply` without a plan file in CI. Always review the plan output before applying. Managing Secrets Never hardcode secrets. Use variables with sensitive flag: variable \"db_password\" { description = \"Database administrator password\" type = string sensitive = true } For secrets that must be in state, encrypt with a key management service: resource \"aws_db_instance\" \"main\" { password = var.db_password # Still goes to state, but you can encrypt state } Better approach: use AWS Secrets Manager or Vault and reference secrets via data sources: data \"aws_secretsmanager_secret_version\" \"db_password\" { secret_id = \"production/db/password\" } Testing Terraform Code `terraform plan` as a Test Run `terraform plan` in CI to detect drift and validate changes without applying: terraform plan -detailed-exitcode # Exit code 0: no changes # Exit code 1: error # Exit code 2: changes needed Terratest for Integration Tests // test/vpc_test.go func TestVPC(t *testing.T) { terraformOptions := &terraform.Options{ TerraformDir: \"../modules/vpc\", Vars: map[string]interface{}{ \"vpc_cidr\": \"10.0.0.0/16\", \"environment\": \"test\", }, } defer terraform.Destroy(t, terraformOptions) terraform.InitAndApply(t, terraformOptions) output := terraform.Output(t, terraformOptions, \"vpc_id\") assert.NotEmpty(t, output) } Common Pitfalls * **State file leaks**: Never commit state files to Git. Use `.gitignore` and remote backends. * **Hardcoded values**: Use variables and locals for everything that varies. * **Missing `prevent_destroy`**: Protect critical resources: resource &quot;aws_db_instance&quot; &quot;production&quot; { lifecycle { prevent_destroy = true } } * **Large state files**: Split infrastructure into manageable chunks by service layer (networking, compute, data). Sentinel and Policy as Code For teams, enforce policies with Sentinel (HashiCorp Enterprise) or Open Policy Agent: # Deny public S3 buckets deny[msg] { resource := input.resource_changes[_] resource.type == \"aws_s3_bucket\" resource.change.after.acl == \"public-read\" msg := \"S3 buckets must not be publicly readable\" } Summary Terraform brings software engineering practices to infrastructure. Use remote state with locking, compose resources into modules, separate environments, and integrate planning into CI/CD. Never hardcode secrets, always validate configurations, and protect critical resources from accidental destruction. With these practices, Terraform enables infrastructure that is versioned, reviewable, reproducible, and auditable."
+      "articleBody": "Terraform Infrastructure as Code Terraform Infrastructure as Code Terraform has become the standard tool for Infrastructure as Code (IaC). It allows you to define, provision, and manage cloud resources across providers using declarative configuration. This guide covers practical Terraform patterns for production use. Core Concepts Terraform uses a declarative approach -- you describe the desired state, and Terraform figures out how to reach it: main.tf terraform { required_version = \">= 1.8\" required_providers { aws = { source = \"hashicorp/aws\" version = \"~> 5.0\" } } backend \"s3\" { bucket = \"myapp-terraform-state\" key = \"production/terraform.tfstate\" region = \"us-east-1\" } } provider \"aws\" { region = var.aws_region } resource \"aws_s3_bucket\" \"app_data\" { bucket = \"myapp-production-data\" tags = { Name = \"Application Data\" Environment = \"production\" } } Key components: providers connect to cloud APIs, resources define infrastructure components, and the backend stores state. State Management State is the most critical part of Terraform. It maps configuration to real-world resources. Remote State Backend Always use remote state storage with locking: backend configuration during init: terraform init -backend-config=backend.hcl bucket = \"company-terraform-state\" key = \"env:/${environment}/networking/terraform.tfstate\" region = \"us-east-1\" dynamodb_table = \"terraform-state-lock\" encrypt = true DynamoDB provides state locking to prevent concurrent modifications. S3 versioning provides state history for rollback. State Access for Other Configurations Share outputs across configurations: data \"terraform_remote_state\" \"vpc\" { backend = \"s3\" config = { bucket = \"company-terraform-state\" key = \"env:/production/vpc/terraform.tfstate\" region = \"us-east-1\" } } resource \"aws_instance\" \"app\" { subnet_id = data.terraform_remote_state.vpc.outputs.private_subnet_ids[0] } Module Design Modules are reusable Terraform configurations. Design them for composability: modules/vpc/main.tf variable \"vpc_cidr\" { description = \"CIDR block for the VPC\" type = string validation { condition = can(cidrhost(var.vpc_cidr, 0)) error_message = \"Must be a valid CIDR notation.\" } } variable \"environment\" { description = \"Environment name for tagging\" type = string } resource \"aws_vpc\" \"this\" { cidr_block = var.vpc_cidr enable_dns_hostnames = true enable_dns_support = true tags = { Name = \"vpc-${var.environment}\" Environment = var.environment } } output \"vpc_id\" { value = aws_vpc.this.id } output \"vpc_cidr\" { value = aws_vpc.this.cidr_block } Use input validation to catch errors early. Document all variables and outputs with descriptions. Workspace and Environment Management Use workspaces or directory structure for environment isolation: Directory structure: terraform/ env/ production/ main.tf terraform.tfvars staging/ main.tf terraform.tfvars Or use Terraform workspaces: terraform workspace new staging terraform workspace new production terraform workspace select staging terraform plan -var-file=staging.tfvars Workspaces are simpler but can become confusing with many environments. Directory-based separation is clearer for complex setups. Terraform Plan and Apply Workflow The standard workflow in CI/CD: Initialize with backend terraform init -backend-config=backend-$ENV.hcl Format and validate terraform fmt -check terraform validate Plan terraform plan -out=tfplan -var-file=$ENV.tfvars Apply (typically in CI with approval gate) terraform apply tfplan Never run `terraform apply` without a plan file in CI. Always review the plan output before applying. Managing Secrets Never hardcode secrets. Use variables with sensitive flag: variable \"db_password\" { description = \"Database administrator password\" type = string sensitive = true } For secrets that must be in state, encrypt with a key management service: resource \"aws_db_instance\" \"main\" { password = var.db_password # Still goes to state, but you can encrypt state } Better approach: use AWS Secrets Manager or Vault and reference secrets via data sources: data \"aws_secretsmanager_secret_version\" \"db_password\" { secret_id = \"production/db/password\" } Testing Terraform Code `terraform plan` as a Test Run `terraform plan` in CI to detect drift and validate changes without applying: terraform plan -detailed-exitcode Exit code 0: no changes Exit code 1: error Exit code 2: changes needed Terratest for Integration Tests // test/vpc_test.go func TestVPC(t *testing.T) { terraformOptions := &terraform.Options;{ TerraformDir: \"../modules/vpc\", Vars: map[string]interface{}{ \"vpc_cidr\": \"10.0.0.0/16\", \"environment\": \"test\", }, } defer terraform.Destroy(t, terraformOptions) terraform.InitAndApply(t, terraformOptions) output := terraform.Output(t, terraformOptions, \"vpc_id\") assert.NotEmpty(t, output) } Common Pitfalls * **State file leaks**: Never commit state files to Git. Use `.gitignore` and remote backends. * **Hardcoded values**: Use variables and locals for everything that varies. * **Missing `prevent_destroy`**: Protect critical resources: resource \"aws_db_instance\" \"production\" { lifecycle { prevent_destroy = true } } * **Large state files**: Split infrastructure into manageable chunks by service layer (networking, compute, data). Sentinel and Policy as Code For teams, enforce policies with Sentinel (HashiCorp Enterprise) or Open Policy Agent: Deny public S3 buckets deny[msg] { resource := input.resource_changes[_] resource.type == \"aws_s3_bucket\" resource.change.after.acl == \"public-read\" msg := \"S3 buckets must not be publicly readable\" } Summary Terraform brings software engineering practices to infrastructure. Use remote state with locking, compose resources into modules, separate environments, and integrate planning into CI/CD. Never hardcode secrets, always validate configurations, and protect critical resources from accidental destruction. With these practices, Terraform enables infrastructure that is versioned, reviewable, reproducible, and auditable."
     }
     </script>
     <script type="application/ld+json">
@@ -75,562 +75,350 @@
         <span class="tag-cat">DevOps</span></div>
       <h1 class="article-title">Terraform Infrastructure as Code</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/terraform-infrastructure-code.png" alt="Terraform Infrastructure as Code" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Terraform Infrastructure as Code</h1>
+<br>
+<h1>Terraform Infrastructure as Code</h1>
 <br>
 <p>Terraform has become the standard tool for Infrastructure as Code (IaC). It allows you to define, provision, and manage cloud resources across providers using declarative configuration. This guide covers practical Terraform patterns for production use.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Core Concepts</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Terraform uses a declarative approach -- you describe the desired state, and Terraform figures out how to reach it:</p>
 <br>
+<h1>main.tf</h1>
 <br>
+<p>terraform {</p>
 <br>
+<p>required_version = ">= 1.8"</p>
 <br>
+<p>required_providers {</p>
 <br>
-<p>    # main.tf</p>
+<p>aws = {</p>
 <br>
-<p>    terraform {</p>
+<p>source = "hashicorp/aws"</p>
 <br>
-<p>      required_version = ">= 1.8"</p>
+<p>version = "~> 5.0"</p>
 <br>
-<p>      required_providers {</p>
+<p>}</p>
 <br>
-<p>        aws = {</p>
+<p>}</p>
 <br>
-<p>          source  = "hashicorp/aws"</p>
+<p>backend "s3" {</p>
 <br>
-<p>          version = "~> 5.0"</p>
+<p>bucket = "myapp-terraform-state"</p>
 <br>
-<p>        }</p>
+<p>key = "production/terraform.tfstate"</p>
 <br>
-<p>      }</p>
+<p>region = "us-east-1"</p>
 <br>
-<p>      backend "s3" {</p>
+<p>}</p>
 <br>
-<p>        bucket = "myapp-terraform-state"</p>
+<p>}</p>
 <br>
-<p>        key    = "production/terraform.tfstate"</p>
+<p>provider "aws" {</p>
 <br>
-<p>        region = "us-east-1"</p>
+<p>region = var.aws_region</p>
 <br>
-<p>      }</p>
+<p>}</p>
 <br>
-<p>    }</p>
+<p>resource "aws_s3_bucket" "app_data" {</p>
 <br>
+<p>bucket = "myapp-production-data"</p>
 <br>
+<p>tags = {</p>
 <br>
-<p>    provider "aws" {</p>
+<p>Name = "Application Data"</p>
 <br>
-<p>      region = var.aws_region</p>
+<p>Environment = "production"</p>
 <br>
-<p>    }</p>
+<p>}</p>
 <br>
-<br>
-<br>
-<p>    resource "aws_s3_bucket" "app_data" {</p>
-<br>
-<p>      bucket = "myapp-production-data"</p>
-<br>
-<p>      tags = {</p>
-<br>
-<p>        Name        = "Application Data"</p>
-<br>
-<p>        Environment = "production"</p>
-<br>
-<p>      }</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <p>Key components: providers connect to cloud APIs, resources define infrastructure components, and the backend stores state.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  State Management</h2>
-<br>
-<br>
-<br>
 <br>
 <p>State is the most critical part of Terraform. It maps configuration to real-world resources.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Remote State Backend</h3>
-<br>
-<br>
-<br>
 <br>
 <p>Always use remote state storage with locking:</p>
 <br>
+<h1>backend configuration during init: terraform init -backend-config=backend.hcl</h1>
 <br>
+<p>bucket = "company-terraform-state"</p>
 <br>
+<p>key = "env:/${environment}/networking/terraform.tfstate"</p>
 <br>
+<p>region = "us-east-1"</p>
 <br>
-<p>    # backend configuration during init: terraform init -backend-config=backend.hcl</p>
+<p>dynamodb_table = "terraform-state-lock"</p>
 <br>
-<p>    bucket         = "company-terraform-state"</p>
-<br>
-<p>    key            = "env:/${environment}/networking/terraform.tfstate"</p>
-<br>
-<p>    region         = "us-east-1"</p>
-<br>
-<p>    dynamodb_table = "terraform-state-lock"</p>
-<br>
-<p>    encrypt        = true</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>encrypt = true</p>
 <br>
 <p>DynamoDB provides state locking to prevent concurrent modifications. S3 versioning provides state history for rollback.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>State Access for Other Configurations</h3>
-<br>
-<br>
-<br>
 <br>
 <p>Share outputs across configurations:</p>
 <br>
+<p>data "terraform_remote_state" "vpc" {</p>
 <br>
+<p>backend = "s3"</p>
 <br>
+<p>config = {</p>
 <br>
+<p>bucket = "company-terraform-state"</p>
 <br>
-<p>    data "terraform_remote_state" "vpc" {</p>
+<p>key = "env:/production/vpc/terraform.tfstate"</p>
 <br>
-<p>      backend = "s3"</p>
+<p>region = "us-east-1"</p>
 <br>
-<p>      config = {</p>
+<p>}</p>
 <br>
-<p>        bucket = "company-terraform-state"</p>
+<p>}</p>
 <br>
-<p>        key    = "env:/production/vpc/terraform.tfstate"</p>
+<p>resource "aws_instance" "app" {</p>
 <br>
-<p>        region = "us-east-1"</p>
+<p>subnet_id = data.terraform_remote_state.vpc.outputs.private_subnet_ids[0]</p>
 <br>
-<p>      }</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<p>    resource "aws_instance" "app" {</p>
-<br>
-<p>      subnet_id = data.terraform_remote_state.vpc.outputs.private_subnet_ids[0]</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <h2>  Module Design</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Modules are reusable Terraform configurations. Design them for composability:</p>
 <br>
+<h1>modules/vpc/main.tf</h1>
 <br>
+<p>variable "vpc_cidr" {</p>
 <br>
+<p>description = "CIDR block for the VPC"</p>
 <br>
+<p>type = string</p>
 <br>
-<p>    # modules/vpc/main.tf</p>
+<p>validation {</p>
 <br>
-<p>    variable "vpc_cidr" {</p>
+<p>condition = can(cidrhost(var.vpc_cidr, 0))</p>
 <br>
-<p>      description = "CIDR block for the VPC"</p>
+<p>error_message = "Must be a valid CIDR notation."</p>
 <br>
-<p>      type        = string</p>
+<p>}</p>
 <br>
-<p>      validation {</p>
+<p>}</p>
 <br>
-<p>        condition     = can(cidrhost(var.vpc_cidr, 0))</p>
+<p>variable "environment" {</p>
 <br>
-<p>        error_message = "Must be a valid CIDR notation."</p>
+<p>description = "Environment name for tagging"</p>
 <br>
-<p>      }</p>
+<p>type = string</p>
 <br>
-<p>    }</p>
+<p>}</p>
 <br>
+<p>resource "aws_vpc" "this" {</p>
 <br>
+<p>cidr_block = var.vpc_cidr</p>
 <br>
-<p>    variable "environment" {</p>
+<p>enable_dns_hostnames = true</p>
 <br>
-<p>      description = "Environment name for tagging"</p>
+<p>enable_dns_support = true</p>
 <br>
-<p>      type        = string</p>
+<p>tags = {</p>
 <br>
-<p>    }</p>
+<p>Name = "vpc-${var.environment}"</p>
 <br>
+<p>Environment = var.environment</p>
 <br>
+<p>}</p>
 <br>
-<p>    resource "aws_vpc" "this" {</p>
+<p>}</p>
 <br>
-<p>      cidr_block           = var.vpc_cidr</p>
+<p>output "vpc_id" {</p>
 <br>
-<p>      enable_dns_hostnames = true</p>
+<p>value = aws_vpc.this.id</p>
 <br>
-<p>      enable_dns_support   = true</p>
+<p>}</p>
 <br>
+<p>output "vpc_cidr" {</p>
 <br>
+<p>value = aws_vpc.this.cidr_block</p>
 <br>
-<p>      tags = {</p>
-<br>
-<p>        Name        = "vpc-${var.environment}"</p>
-<br>
-<p>        Environment = var.environment</p>
-<br>
-<p>      }</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<p>    output "vpc_id" {</p>
-<br>
-<p>      value = aws_vpc.this.id</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<p>    output "vpc_cidr" {</p>
-<br>
-<p>      value = aws_vpc.this.cidr_block</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <p>Use input validation to catch errors early. Document all variables and outputs with descriptions.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Workspace and Environment Management</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Use workspaces or directory structure for environment isolation:</p>
 <br>
+<h1>Directory structure:</h1>
 <br>
+<p>terraform/</p>
 <br>
+<p>env/</p>
 <br>
+<p>production/</p>
 <br>
-<p>    # Directory structure:</p>
+<p>main.tf</p>
 <br>
-<p>    terraform/</p>
+<p>terraform.tfvars</p>
 <br>
-<p>      env/</p>
+<p>staging/</p>
 <br>
-<p>        production/</p>
+<p>main.tf</p>
 <br>
-<p>          main.tf</p>
-<br>
-<p>          terraform.tfvars</p>
-<br>
-<p>        staging/</p>
-<br>
-<p>          main.tf</p>
-<br>
-<p>          terraform.tfvars</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>terraform.tfvars</p>
 <br>
 <p>Or use Terraform workspaces:</p>
 <br>
+<p>terraform workspace new staging</p>
 <br>
+<p>terraform workspace new production</p>
 <br>
+<p>terraform workspace select staging</p>
 <br>
-<br>
-<p>    terraform workspace new staging</p>
-<br>
-<p>    terraform workspace new production</p>
-<br>
-<p>    terraform workspace select staging</p>
-<br>
-<br>
-<br>
-<p>    terraform plan -var-file=staging.tfvars</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>terraform plan -var-file=staging.tfvars</p>
 <br>
 <p>Workspaces are simpler but can become confusing with many environments. Directory-based separation is clearer for complex setups.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Terraform Plan and Apply Workflow</h2>
-<br>
-<br>
-<br>
 <br>
 <p>The standard workflow in CI/CD:</p>
 <br>
+<h1>Initialize with backend</h1>
 <br>
+<p>terraform init -backend-config=backend-$ENV.hcl</p>
 <br>
+<h1>Format and validate</h1>
 <br>
+<p>terraform fmt -check</p>
 <br>
-<p>    # Initialize with backend</p>
+<p>terraform validate</p>
 <br>
-<p>    terraform init -backend-config=backend-$ENV.hcl</p>
+<h1>Plan</h1>
 <br>
+<p>terraform plan -out=tfplan -var-file=$ENV.tfvars</p>
 <br>
+<h1>Apply (typically in CI with approval gate)</h1>
 <br>
-<p>    # Format and validate</p>
-<br>
-<p>    terraform fmt -check</p>
-<br>
-<p>    terraform validate</p>
-<br>
-<br>
-<br>
-<p>    # Plan</p>
-<br>
-<p>    terraform plan -out=tfplan -var-file=$ENV.tfvars</p>
-<br>
-<br>
-<br>
-<p>    # Apply (typically in CI with approval gate)</p>
-<br>
-<p>    terraform apply tfplan</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>terraform apply tfplan</p>
 <br>
 <p>Never run `terraform apply` without a plan file in CI. Always review the plan output before applying.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Managing Secrets</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Never hardcode secrets. Use variables with sensitive flag:</p>
 <br>
+<p>variable "db_password" {</p>
 <br>
+<p>description = "Database administrator password"</p>
 <br>
+<p>type = string</p>
 <br>
+<p>sensitive = true</p>
 <br>
-<p>    variable "db_password" {</p>
-<br>
-<p>      description = "Database administrator password"</p>
-<br>
-<p>      type        = string</p>
-<br>
-<p>      sensitive   = true</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <p>For secrets that must be in state, encrypt with a key management service:</p>
 <br>
+<p>resource "aws_db_instance" "main" {</p>
 <br>
+<p>password = var.db_password # Still goes to state, but you can encrypt state</p>
 <br>
-<br>
-<br>
-<p>    resource "aws_db_instance" "main" {</p>
-<br>
-<p>      password = var.db_password  # Still goes to state, but you can encrypt state</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <p>Better approach: use AWS Secrets Manager or Vault and reference secrets via data sources:</p>
 <br>
+<p>data "aws_secretsmanager_secret_version" "db_password" {</p>
 <br>
+<p>secret_id = "production/db/password"</p>
 <br>
-<br>
-<br>
-<p>    data "aws_secretsmanager_secret_version" "db_password" {</p>
-<br>
-<p>      secret_id = "production/db/password"</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <h2>  Testing Terraform Code</h2>
 <br>
-<br>
-<br>
-<br>
 <h3>`terraform plan` as a Test</h3>
-<br>
-<br>
-<br>
 <br>
 <p>Run `terraform plan` in CI to detect drift and validate changes without applying:</p>
 <br>
+<p>terraform plan -detailed-exitcode</p>
 <br>
+<h1>Exit code 0: no changes</h1>
 <br>
+<h1>Exit code 1: error</h1>
 <br>
-<br>
-<p>    terraform plan -detailed-exitcode</p>
-<br>
-<p>    # Exit code 0: no changes</p>
-<br>
-<p>    # Exit code 1: error</p>
-<br>
-<p>    # Exit code 2: changes needed</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<h1>Exit code 2: changes needed</h1>
 <br>
 <h3>Terratest for Integration Tests</h3>
 <br>
+<p>// test/vpc_test.go</p>
 <br>
+<p>func TestVPC(t *testing.T) {</p>
 <br>
+<p>terraformOptions := &terraform.Options;{</p>
 <br>
+<p>TerraformDir: "../modules/vpc",</p>
 <br>
-<p>    // test/vpc_test.go</p>
+<p>Vars: map[string]interface{}{</p>
 <br>
-<p>    func TestVPC(t *testing.T) {</p>
+<p>"vpc_cidr": "10.0.0.0/16",</p>
 <br>
-<p>      terraformOptions := &terraform.Options{</p>
+<p>"environment": "test",</p>
 <br>
-<p>        TerraformDir: "../modules/vpc",</p>
+<p>},</p>
 <br>
-<p>        Vars: map[string]interface{}{</p>
+<p>}</p>
 <br>
-<p>          "vpc_cidr": "10.0.0.0/16",</p>
+<p>defer terraform.Destroy(t, terraformOptions)</p>
 <br>
-<p>          "environment": "test",</p>
+<p>terraform.InitAndApply(t, terraformOptions)</p>
 <br>
-<p>        },</p>
+<p>output := terraform.Output(t, terraformOptions, "vpc_id")</p>
 <br>
-<p>      }</p>
+<p>assert.NotEmpty(t, output)</p>
 <br>
-<p>      defer terraform.Destroy(t, terraformOptions)</p>
-<br>
-<p>      terraform.InitAndApply(t, terraformOptions)</p>
-<br>
-<p>      output := terraform.Output(t, terraformOptions, "vpc_id")</p>
-<br>
-<p>      assert.NotEmpty(t, output)</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <h2>  Common Pitfalls</h2>
 <br>
-<br>
-<br>
 <p>* **State file leaks**: Never commit state files to Git. Use `.gitignore` and remote backends.</p>
+<br>
 <p>* **Hardcoded values**: Use variables and locals for everything that varies.</p>
+<br>
 <p>* **Missing `prevent_destroy`**: Protect critical resources:</p>
 <br>
-<pre><code>
-
-
-resource &quot;aws_db_instance&quot; &quot;production&quot; {
-
-
-
-lifecycle {
-
-
-
-prevent_destroy = true
-
-
-
-}
-
-
-
-}
-
-
-
-</code></pre>
+<p>    resource "aws_db_instance" "production" {</p>
 <br>
-<p>* **Large state files**: Split infrastructure into manageable chunks by service layer (networking, compute, data).</p>
+<p>    lifecycle {</p>
 <br>
-<br>
-<br>
-<h2>  Sentinel and Policy as Code</h2>
-<br>
-<br>
-<br>
-<br>
-<p>For teams, enforce policies with Sentinel (HashiCorp Enterprise) or Open Policy Agent:</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>    # Deny public S3 buckets</p>
-<br>
-<p>    deny[msg] {</p>
-<br>
-<p>      resource := input.resource_changes[_]</p>
-<br>
-<p>      resource.type == "aws_s3_bucket"</p>
-<br>
-<p>      resource.change.after.acl == "public-read"</p>
-<br>
-<p>      msg := "S3 buckets must not be publicly readable"</p>
+<p>    prevent_destroy = true</p>
 <br>
 <p>    }</p>
 <br>
+<p>    }</p>
 <br>
+<p>* **Large state files**: Split infrastructure into manageable chunks by service layer (networking, compute, data).</p>
 <br>
+<h2>  Sentinel and Policy as Code</h2>
 <br>
+<p>For teams, enforce policies with Sentinel (HashiCorp Enterprise) or Open Policy Agent:</p>
 <br>
+<h1>Deny public S3 buckets</h1>
+<br>
+<p>deny[msg] {</p>
+<br>
+<p>resource := input.resource_changes[_]</p>
+<br>
+<p>resource.type == "aws_s3_bucket"</p>
+<br>
+<p>resource.change.after.acl == "public-read"</p>
+<br>
+<p>msg := "S3 buckets must not be publicly readable"</p>
+<br>
+<p>}</p>
 <br>
 <h2>  Summary</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Terraform brings software engineering practices to infrastructure. Use remote state with locking, compose resources into modules, separate environments, and integrate planning into CI/CD. Never hardcode secrets, always validate configurations, and protect critical resources from accidental destruction. With these practices, Terraform enables infrastructure that is versioned, reviewable, reproducible, and auditable.</p></div>
     </article>

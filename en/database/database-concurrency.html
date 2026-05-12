@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-concurrency.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Concurrency Control: MVCC, Locking, and Deadlocks">
     <meta name="twitter:description" content="Deep dive into database concurrency control mechanisms: optimistic vs pessimistic locking, MVCC internals, deadlock detection, and PostgreSQL implementation.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-concurrency.png">
     <title>Database Concurrency Control: MVCC, Locking, and Deadlocks — SourceHub</title>
     <meta name="description" content="Deep dive into database concurrency control mechanisms: optimistic vs pessimistic locking, MVCC internals, deadlock detection, and PostgreSQL implementation.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Concurrency Control: MVCC, Locking, and Deadlocks",
       "description": "Deep dive into database concurrency control mechanisms: optimistic vs pessimistic locking, MVCC internals, deadlock detection, and PostgreSQL implementation.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-concurrency.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1410",
+      "wordCount": "1345",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Concurrency Control: MVCC, Locking, and Deadlocks</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-concurrency.png" alt="Database Concurrency Control: MVCC, Locking, and Deadlocks" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Concurrency Control: MVCC, Locking, and Deadlocks</h1>
 <br>
 <p>Database Concurrency Control: MVCC, Locking, and Deadlocks   </p>
@@ -83,20 +84,13 @@
 <p>MVCC is the foundation of concurrency in PostgreSQL and Oracle. Instead of locking rows for readers, MVCC preserves multiple versions of each row. Each transaction sees a snapshot of data as it existed at that transaction's start time.   </p>
 <p>Every row in PostgreSQL carries two hidden system columns: `xmin` (the transaction ID that created this version) and `xmax` (the transaction ID that deleted or updated this version). When a transaction reads a row, it checks visibility rules:   </p>
 <br>
-<br>
-<br>
 <p>    -- xmin must be committed and <= current transaction ID</p>
 <br>
 <p>    -- xmax must be uncommitted or > current transaction ID</p>
 <br>
-<br>
-<br>
-<br>
 <p>This design means **readers never block writers, and writers never block readers**. It is the single most important property for OLTP workloads.   </p>
 <p>Transaction Snapshots   </p>
 <p>A transaction's snapshot captures which transactions were in-progress at the moment the snapshot was taken. The `REPEATABLE READ` isolation level uses snapshot semantics:   </p>
-<br>
-<br>
 <br>
 <p>    BEGIN ISOLATION LEVEL REPEATABLE READ;</p>
 <br>
@@ -108,14 +102,9 @@
 <br>
 <p>    COMMIT;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Optimistic vs Pessimistic Locking   </p>
 <p>Optimistic Locking   </p>
 <p>Optimistic locking assumes conflicts are rare. The application reads a row, performs work, and checks that the row has not changed before writing. It is typically implemented with a version column:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE inventory (</p>
 <br>
@@ -127,8 +116,6 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
 <p>    -- Application reads: SELECT quantity, version FROM inventory WHERE id = 42;</p>
 <br>
 <p>    -- Application computes new quantity</p>
@@ -139,18 +126,11 @@
 <br>
 <p>    WHERE id = 42 AND version = 3; -- version from the read</p>
 <br>
-<br>
-<br>
 <p>    -- If 0 rows updated, another transaction changed the row → retry</p>
-<br>
-<br>
-<br>
 <br>
 <p>Optimistic locking works well when contention is low and transactions are short. It avoids holding database locks between application operations.   </p>
 <p>Pessimistic Locking   </p>
 <p>Pessimistic locking assumes conflicts are likely and acquires locks proactively:   </p>
-<br>
-<br>
 <br>
 <p>    BEGIN;</p>
 <br>
@@ -162,18 +142,12 @@
 <br>
 <p>    COMMIT; -- lock released</p>
 <br>
-<br>
-<br>
-<br>
 <p>PostgreSQL offers three row-level lock modes:   </p>
 <br>
 <p>* `FOR UPDATE`: Prevents other transactions from updating or deleting the row.</p>
 <p>* `FOR NO KEY UPDATE`: Weaker variant that allows concurrent key-column updates.</p>
 <p>* `FOR SHARE`: Allows concurrent reads but prevents updates.</p>
 <p>* `FOR KEY SHARE`: Prevents key-column deletions only.</p>
-<br>
-<br>
-<br>
 <br>
 <p>    -- Advisory locks for application-level concurrency</p>
 <br>
@@ -183,24 +157,14 @@
 <br>
 <p>    SELECT pg_advisory_unlock(12345);</p>
 <br>
-<br>
-<br>
-<br>
 <p>Deadlock Detection   </p>
 <p>A deadlock occurs when two or more transactions each hold locks the other needs:   </p>
-<br>
-<br>
 <br>
 <p>    Transaction A: locks row 1, waits for row 2</p>
 <br>
 <p>    Transaction B: locks row 2, waits for row 1</p>
 <br>
-<br>
-<br>
-<br>
 <p>PostgreSQL's deadlock detector runs periodically (every `deadlock_timeout`, default 1 second). When it detects a cycle, it aborts one transaction:   </p>
-<br>
-<br>
 <br>
 <p>    ERROR: deadlock detected</p>
 <br>
@@ -210,27 +174,17 @@
 <br>
 <p>    HINT: See server log for query details.</p>
 <br>
-<br>
-<br>
-<br>
 <p>To minimize deadlocks:   </p>
 <br>
 <p>* **Access tables in a consistent order** across all transactions.</p>
 <p>2\. **Keep transactions short** to reduce the window for conflicts. 3\. **Use `NOWAIT` or `SKIP LOCKED`** to fail fast instead of waiting:   </p>
 <br>
-<br>
-<br>
 <p>    SELECT * FROM inventory WHERE id = 42 FOR UPDATE NOWAIT;</p>
 <br>
 <p>    SELECT * FROM jobs ORDER BY priority LIMIT 1 FOR UPDATE SKIP LOCKED;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Lock Monitoring   </p>
 <p>The `pg_locks` view shows current lock state:   </p>
-<br>
-<br>
 <br>
 <p>    SELECT locktype, relation::regclass, mode, granted,</p>
 <br>
@@ -240,12 +194,7 @@
 <br>
 <p>    WHERE NOT granted;</p>
 <br>
-<br>
-<br>
-<br>
 <p>This query reveals which backends are waiting for locks and who holds them. The `pg_blocking_pids()` function helps identify blockers:   </p>
-<br>
-<br>
 <br>
 <p>    SELECT pid, pg_blocking_pids(pid) AS blocked_by,</p>
 <br>
@@ -255,13 +204,8 @@
 <br>
 <p>    WHERE state = 'active';</p>
 <br>
-<br>
-<br>
-<br>
 <p>MVCC Bloat   </p>
 <p>MVCC's strength creates a weakness: dead row versions accumulate. Old row versions remain until they become visible to no active snapshot. This is called bloat.   </p>
-<br>
-<br>
 <br>
 <p>    -- Query to estimate table bloat</p>
 <br>
@@ -275,21 +219,13 @@
 <br>
 <p>    ORDER BY dead_pct DESC;</p>
 <br>
-<br>
-<br>
-<br>
 <p>`VACUUM` reclaims space from dead tuples. `VACUUM FREEZE` prevents transaction ID wraparound, an operational imperative in PostgreSQL:   </p>
-<br>
-<br>
 <br>
 <p>    VACUUM ANALYZE accounts;</p>
 <br>
 <p>    -- For aggressive cleanup:</p>
 <br>
 <p>    VACUUM (VERBOSE, INDEX_CLEANUP ON) accounts;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Summary   </p>
 <p>PostgreSQL's MVCC provides the foundation: readers and writers coexist without blocking. On top of MVCC, row-level locks enable pessimistic patterns when needed. The key is choosing the right strategy for each operation and monitoring for deadlocks, long-held locks, and MVCC bloat. Proper concurrency control is what separates a smoothly scaling application from one that stalls under load.</p></div>

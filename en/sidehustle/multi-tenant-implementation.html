@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/sidehustle/multi-tenant-implementation.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing">
     <meta name="twitter:description" content="Implement multi-tenant SaaS architecture: isolation strategies, tenant routing, and pricing models for B2B applications.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/sidehustle/multi-tenant-implementation.png">
     <title>Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing — SourceHub</title>
     <meta name="description" content="Implement multi-tenant SaaS architecture: isolation strategies, tenant routing, and pricing models for B2B applications.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing",
       "description": "Implement multi-tenant SaaS architecture: isolation strategies, tenant routing, and pricing models for B2B applications.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/sidehustle/multi-tenant-implementation.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1113",
+      "wordCount": "1044",
       "keywords": "Business, Startup, SaaS",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,122 +75,54 @@
         <span class="tag-cat">SaaS</span></div>
       <h1 class="article-title">Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/sidehustle/multi-tenant-implementation.png" alt="Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing</h1>
 <br>
 <h2>  Multi-Tenant SaaS: Architecture and Implementation</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Multi-tenancy is the foundation of SaaS architecture, allowing a single application instance to serve multiple customers (tenants) while maintaining data isolation. The choice of isolation strategy has profound implications for security, performance, operational complexity, and pricing flexibility.</p>
-<br>
-<br>
-<br>
 <br>
 <h3>Tenant Isolation Strategies</h3>
 <br>
-<br>
-<br>
-<br>
 <p>**Database per tenant** provides the strongest isolation. Each customer has their own database instance. This strategy simplifies backup and restore (per-customer), enables per-tenant performance tuning, and provides natural data separation. The downside: operational complexity grows with tenant count, and connection management becomes challenging beyond hundreds of tenants.</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Schema per tenant** uses a single database with separate schemas per tenant. PostgreSQL schemas provide good isolation with shared connection pooling. Schema creation is lightweight, supporting thousands of tenants per database. Migration deployment requires updating all schemas, which can be slow at scale.</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Shared schema (discriminator column)** uses a single database and schema with a tenant_id column on every table. This offers the simplest operations and best resource utilization. However, isolation relies entirely on application logic — a missing WHERE clause leaks data between tenants. Row-Level Security (RLS) in PostgreSQL mitigates this risk by enforcing tenant filtering at the database level.</p>
-<br>
-<br>
-<br>
 <br>
 <h3>Choosing an Isolation Strategy</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Start with shared schema and RLS for early-stage SaaS. It provides the simplest operations and lowest infrastructure cost. Implement RLS policies on every table: `CREATE POLICY tenant_isolation ON orders USING (tenant_id = current_setting('app.tenant_id')::int)`.</p>
-<br>
-<br>
-<br>
 <br>
 <p>Add schema-per-tenant as you grow to hundreds of customers. This provides better data isolation and per-tenant backup capabilities. Use PostgreSQL schemas with dynamic search_path configuration.</p>
 <br>
-<br>
-<br>
-<br>
 <p>Database-per-tenant is for enterprise customers with compliance requirements (HIPAA, SOC 2) or data sovereignty needs. Each tenant gets dedicated resources with configurable performance characteristics.</p>
-<br>
-<br>
-<br>
 <br>
 <h3>Tenant Routing</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Tenant routing directs users to the correct data partition. Subdomain-based routing (customer1.yourapp.com) is most common for B2B SaaS. Extract tenant from the request hostname and set the tenant context early in the request lifecycle.</p>
-<br>
-<br>
-<br>
 <br>
 <p>Implement a middleware that resolves the tenant from the request and configures the database connection accordingly. For shared schema, set `app.tenant_id` via `SET SESSION` in PostgreSQL. For schema-per-tenant, switch the schema search path. For database-per-tenant, select the appropriate connection pool.</p>
 <br>
-<br>
-<br>
-<br>
 <p>Caching tenant metadata (database connections, schema names, feature flags) reduces per-request overhead. Use Redis with tenant metadata loaded from a central configuration table. Invalidated only when tenant configuration changes.</p>
-<br>
-<br>
-<br>
 <br>
 <h3>Multi-Tenant Pricing Models</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Per-seat pricing charges per user per month. Simple to understand but penalizes large organizations and discourages adoption. Slack charges $7.25/user/month, scaling naturally with organization size.</p>
-<br>
-<br>
-<br>
 <br>
 <p>Usage-based pricing charges per resource consumed (API calls, storage, compute). Aligns cost with value but introduces unpredictable billing. AWS and Stripe use usage-based components in their SaaS pricing.</p>
 <br>
-<br>
-<br>
-<br>
 <p>Tiered pricing offers feature-based plans. Free tier for evaluation (limited features, usage caps), Pro tier for growing teams (full features, standard limits), Enterprise tier for large organizations (unlimited everything, SSO, dedicated support). Feature differentiation between tiers drives upgrades.</p>
-<br>
-<br>
-<br>
 <br>
 <h3>Implementation Considerations</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Connection pooling is critical for multi-tenant architectures. PgBouncer in transaction mode provides efficient connection reuse across tenants. For database-per-tenant, a routing proxy selects the correct pool based on tenant ID.</p>
-<br>
-<br>
-<br>
 <br>
 <p>Backup strategies differ by isolation level: shared schema requires point-in-time recovery for the entire database (all tenants restored together). Schema-per-tenant can back up individual schemas. Database-per-tenant provides the most granular backup and restore capabilities.</p>
 <br>
-<br>
-<br>
-<br>
 <p>Tenant monitoring tracks per-tenant resource usage, error rates, and performance. Use database-level monitoring with tenant context to identify noisy neighbors. Alert on tenants exceeding resource quotas.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Conclusion</h3>
-<br>
-<br>
-<br>
 <br>
 <p>Multi-tenant architecture choices have long-term implications for your SaaS. Start simple with shared schema and PostgreSQL RLS, graduating to increased isolation as your customer base grows. Implement robust tenant routing middleware early. Choose pricing models that align with your value proposition. The right isolation strategy balances operational complexity against customer requirements.</p></div>
     </article>

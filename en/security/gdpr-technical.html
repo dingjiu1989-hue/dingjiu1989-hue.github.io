@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/gdpr-technical.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="GDPR Technical Controls">
     <meta name="twitter:description" content="Implementing GDPR technical controls for data mapping, consent management, right to deletion, and PIA.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/gdpr-technical.png">
     <title>GDPR Technical Controls — SourceHub</title>
     <meta name="description" content="Implementing GDPR technical controls for data mapping, consent management, right to deletion, and PIA.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "GDPR Technical Controls",
       "description": "Implementing GDPR technical controls for data mapping, consent management, right to deletion, and PIA.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/gdpr-technical.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1768",
+      "wordCount": "1710",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">GDPR Technical Controls</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/gdpr-technical.png" alt="GDPR Technical Controls" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>GDPR Technical Controls</h1>
 <br>
 <p>GDPR Technical Requirements   </p>
@@ -82,15 +83,11 @@
 <p>Data Mapping   </p>
 <p>Maintain a comprehensive data inventory:   </p>
 <br>
-<br>
-<br>
 <p>    class DataMappingService:</p>
 <br>
 <p>        def __init__(self):</p>
 <br>
 <p>            self.data_flows = []</p>
-<br>
-<br>
 <br>
 <p>        def register_data_flow(self, flow):</p>
 <br>
@@ -120,8 +117,6 @@
 <br>
 <p>            })</p>
 <br>
-<br>
-<br>
 <p>        def search_data_subject(self, subject_id):</p>
 <br>
 <p>            """Find all data related to a specific subject"""</p>
@@ -135,8 +130,6 @@
 <p>                    results.append(flow)</p>
 <br>
 <p>            return results</p>
-<br>
-<br>
 <br>
 <p>        def generate_roppa_report(self):</p>
 <br>
@@ -154,13 +147,8 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Consent Management   </p>
 <p>Implement granular consent tracking:   </p>
-<br>
-<br>
 <br>
 <p>    // Consent management API</p>
 <br>
@@ -171,8 +159,6 @@
 <p>        this.consentRecords = new Map();</p>
 <br>
 <p>      }</p>
-<br>
-<br>
 <br>
 <p>      recordConsent(userId, purposes) {</p>
 <br>
@@ -200,19 +186,13 @@
 <br>
 <p>        };</p>
 <br>
-<br>
-<br>
 <p>        this.consentRecords.set(userId, record);</p>
 <br>
 <p>        this.auditLog('consent_recorded', { userId, purposes: p.id });</p>
 <br>
-<br>
-<br>
 <p>        return record;</p>
 <br>
 <p>      }</p>
-<br>
-<br>
 <br>
 <p>      checkConsent(userId, purposeId) {</p>
 <br>
@@ -220,15 +200,11 @@
 <br>
 <p>        if (!record) return false;</p>
 <br>
-<br>
-<br>
 <p>        const purpose = record.purposes.find(p => p.id === purposeId);</p>
 <br>
 <p>        return purpose?.granted === true && !this.isWithdrawn(userId, purposeId);</p>
 <br>
 <p>      }</p>
-<br>
-<br>
 <br>
 <p>      withdrawConsent(userId, purposeId) {</p>
 <br>
@@ -246,15 +222,11 @@
 <br>
 <p>        });</p>
 <br>
-<br>
-<br>
 <p>        // Trigger data deletion if necessary</p>
 <br>
 <p>        this.deleteDataForPurpose(userId, purposeId);</p>
 <br>
 <p>      }</p>
-<br>
-<br>
 <br>
 <p>      auditLog(action, details) {</p>
 <br>
@@ -274,21 +246,14 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Right to Deletion   </p>
 <p>Implement the right to be forgotten:   </p>
-<br>
-<br>
 <br>
 <p>    class DeletionOrchestrator:</p>
 <br>
 <p>        def __init__(self):</p>
 <br>
 <p>            self.data_sources = []</p>
-<br>
-<br>
 <br>
 <p>        def register_data_source(self, name, delete_func, retention_days=30):</p>
 <br>
@@ -302,15 +267,11 @@
 <br>
 <p>            })</p>
 <br>
-<br>
-<br>
 <p>        def delete_user_data(self, user_id):</p>
 <br>
 <p>            results = []</p>
 <br>
 <p>            errors = []</p>
-<br>
-<br>
 <br>
 <p>            for source in self.data_sources:</p>
 <br>
@@ -344,13 +305,9 @@
 <br>
 <p>                    })</p>
 <br>
-<br>
-<br>
 <p>            # Hard delete after retention period</p>
 <br>
 <p>            schedule_hard_delete(user_id, self.data_sources)</p>
-<br>
-<br>
 <br>
 <p>            return {</p>
 <br>
@@ -364,12 +321,7 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Privacy Impact Assessment   </p>
-<br>
-<br>
 <br>
 <p>    # Automated PIA template</p>
 <br>
@@ -421,8 +373,6 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
 <p>    def conduct_pia(project_name, data_flows):</p>
 <br>
 <p>        pia = copy.deepcopy(PIA_TEMPLATE)</p>
@@ -430,8 +380,6 @@
 <p>        pia["project_name"] = project_name</p>
 <br>
 <p>        pia["data_flows"] = data_flows</p>
-<br>
-<br>
 <br>
 <p>        # Auto-detect high risk indicators</p>
 <br>
@@ -451,12 +399,7 @@
 <br>
 <p>                })</p>
 <br>
-<br>
-<br>
 <p>        return pia</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>GDPR technical controls require systematic implementation. Maintain detailed data mapping, implement robust consent management, build capabilities for right to deletion, and conduct privacy impact assessments. Automate where possible and maintain comprehensive audit trails. Remember: privacy by design means building controls into your architecture from the start.</p></div>

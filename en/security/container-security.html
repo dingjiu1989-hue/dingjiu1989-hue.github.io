@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/container-security.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Container Security Best Practices">
     <meta name="twitter:description" content="Essential container security practices including image scanning, minimal base images, runtime security, and Kubernetes pod security.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/container-security.png">
     <title>Container Security Best Practices — SourceHub</title>
     <meta name="description" content="Essential container security practices including image scanning, minimal base images, runtime security, and Kubernetes pod security.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,15 +38,15 @@
       "@type": "Article",
       "headline": "Container Security Best Practices",
       "description": "Essential container security practices including image scanning, minimal base images, runtime security, and Kubernetes pod security.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/container-security.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1580",
+      "wordCount": "1383",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/container-security.html"},
-      "articleBody": "Container Security Best Practices The Container Attack Surface Containers share the host kernel, which introduces unique security considerations. While containers provide process isolation through namespaces and cgroups, a misconfigured container can expose the host system to significant risk. Container security spans the entire lifecycle: build, ship, and run. Build Phase Security Use Minimal Base Images Smaller base images reduce the attack surface by eliminating unnecessary tools and libraries. # UNSAFE: Large attack surface FROM ubuntu:22.04 RUN apt-get update && apt-get install -y python3 # BETTER: Minimal distribution FROM python:3.12-slim # BEST: Distroless (no shell, no package manager) FROM gcr.io/distroless/python3 | Image | Size | Packages | Attack Surface | |-------|------|----------|----------------| | ubuntu:22.04 | 77 MB | 600+ | Large | | python:3.12-slim | 120 MB | 100+ | Moderate | | gcr.io/distroless/python3 | 60 MB | ~10 | Minimal | | alpine:3.19 | 7 MB | ~5 | Small (uses musl libc) | Scan for Vulnerabilities Integrate image scanning into your CI/CD pipeline: # .github/workflows/security.yml name: Container Security Scan on: [push] jobs: scan: runs-on: ubuntu-latest steps: - uses: actions/checkout@v4 - name: Build image run: docker build -t app:latest . - name: Scan with Trivy uses: aquasecurity/trivy-action@master with: image-ref: 'app:latest' format: 'sarif' output: 'trivy-results.sarif' severity: 'HIGH,CRITICAL' - name: Upload results uses: github/codeql-action/upload-sarif@v3 with: sarif_file: 'trivy-results.sarif' Multi-Stage Builds Use multi-stage builds to keep the final image clean: # Build stage FROM golang:1.22 AS builder WORKDIR /app COPY go.mod go.sum ./ RUN go mod download COPY . . RUN CGO_ENABLED=0 go build -o /app/server # Runtime stage FROM gcr.io/distroless/static:nonroot COPY --from=builder /app/server /server USER nonroot:nonroot EXPOSE 8080 ENTRYPOINT [\"/server\"] Ship Phase Security Sign and Verify Images Use Docker Content Trust or cosign to sign images and verify integrity: # Generate a signing key pair cosign generate-key-pair # Sign the image cosign sign --key cosign.key ghcr.io/myorg/myapp:latest # Verify before deployment cosign verify --key cosign.pub ghcr.io/myorg/myapp:latest Use a Private Registry Push images to a private registry with access controls and vulnerability scanning: # Push to private ECR aws ecr get-login-password --region us-east-1 | \\ docker login --username AWS --password-stdin $ACCOUNT.dkr.ecr.us-east-1.amazonaws.com docker tag app:latest $ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/app:latest docker push $ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/app:latest Run Phase Security Run as Non-Root Never run containers as root. Create and use a non-root user: FROM node:22-alpine RUN addgroup -S appgroup && adduser -S appuser -G appgroup COPY --chown=appuser:appgroup . /app USER appuser EXPOSE 3000 CMD [\"node\", \"server.js\"] Read-Only Root Filesystem Mount the root filesystem as read-only to prevent file-system-based attacks: # Kubernetes pod security context apiVersion: v1 kind: Pod metadata: name: secure-pod spec: securityContext: runAsNonRoot: true runAsUser: 1001 fsGroup: 1001 containers: - name: app image: myapp:latest securityContext: readOnlyRootFilesystem: true capabilities: drop: [\"ALL\"] add: [\"NET_BIND_SERVICE\"] allowPrivilegeEscalation: false volumeMounts: - name: tmp mountPath: /tmp volumes: - name: tmp emptyDir: {} Resource Limits Prevent DoS attacks through resource exhaustion: resources: requests: memory: \"128Mi\" cpu: \"250m\" limits: memory: \"256Mi\" cpu: \"500m\" Seccomp and AppArmor Restrict system calls available to containers: securityContext: seccompProfile: type: RuntimeDefault # Uses the container runtime's default seccomp profile Kubernetes Pod Security Standards Kubernetes defines three Pod Security Standards: | Standard | Description | When to Use | |----------|-------------|-------------| | Privileged | Unrestricted policy | System-level pods | | Baseline | Minimally restrictive, prevents known escalations | Most workloads | | Restricted | Heavily restricted, follows pod hardening best practices | Security-critical workloads | # Apply Restricted standard via namespace labels apiVersion: v1 kind: Namespace metadata: name: production labels: pod-security.kubernetes.io/enforce: restricted pod-security.kubernetes.io/enforce-version: latest Runtime Monitoring Use tools like Falco for runtime threat detection: # Install Falco helm install falco falcosecurity/falco \\ --set falco.driver.kind=modern-bpf # Falco detects: # - Shell spawned in container # - Sensitive file reads # - Unexpected network connections # - Privilege escalation attempts Summary Container security requires attention at every stage of the lifecycle. Build minimal images based on distroless or scratch, scan for vulnerabilities before deployment, sign images to verify integrity, run containers as non-root with read-only filesystems, drop all unnecessary capabilities, set resource limits, and enforce Pod Security Standards in Kubernetes. Combine these preventive measures with runtime monitoring for defense in depth."
+      "articleBody": "Container Security Best Practices Container Security Best Practices The Container Attack Surface Containers share the host kernel, which introduces unique security considerations. While containers provide process isolation through namespaces and cgroups, a misconfigured container can expose the host system to significant risk. Container security spans the entire lifecycle: build, ship, and run. Build Phase Security Use Minimal Base Images Smaller base images reduce the attack surface by eliminating unnecessary tools and libraries. UNSAFE: Large attack surface FROM ubuntu:22.04 RUN apt-get update && apt-get install -y python3 BETTER: Minimal distribution FROM python:3.12-slim BEST: Distroless (no shell, no package manager) FROM gcr.io/distroless/python3 | Image | Size | Packages | Attack Surface | |-------|------|----------|----------------| | ubuntu:22.04 | 77 MB | 600+ | Large | | python:3.12-slim | 120 MB | 100+ | Moderate | | gcr.io/distroless/python3 | 60 MB | ~10 | Minimal | | alpine:3.19 | 7 MB | ~5 | Small (uses musl libc) | Scan for Vulnerabilities Integrate image scanning into your CI/CD pipeline: .github/workflows/security.yml name: Container Security Scan on: [push] jobs: scan: runs-on: ubuntu-latest steps: \\- uses: actions/checkout@v4 \\- name: Build image run: docker build -t app:latest . \\- name: Scan with Trivy uses: aquasecurity/trivy-action@master with: image-ref: 'app:latest' format: 'sarif' output: 'trivy-results.sarif' severity: 'HIGH,CRITICAL' \\- name: Upload results uses: github/codeql-action/upload-sarif@v3 with: sarif_file: 'trivy-results.sarif' Multi-Stage Builds Use multi-stage builds to keep the final image clean: Build stage FROM golang:1.22 AS builder WORKDIR /app COPY go.mod go.sum ./ RUN go mod download COPY . . RUN CGO_ENABLED=0 go build -o /app/server Runtime stage FROM gcr.io/distroless/static:nonroot COPY --from=builder /app/server /server USER nonroot:nonroot EXPOSE 8080 ENTRYPOINT [\"/server\"] Ship Phase Security Sign and Verify Images Use Docker Content Trust or cosign to sign images and verify integrity: Generate a signing key pair cosign generate-key-pair Sign the image cosign sign --key cosign.key ghcr.io/myorg/myapp:latest Verify before deployment cosign verify --key cosign.pub ghcr.io/myorg/myapp:latest Use a Private Registry Push images to a private registry with access controls and vulnerability scanning: Push to private ECR aws ecr get-login-password --region us-east-1 | \\ docker login --username AWS --password-stdin $ACCOUNT.dkr.ecr.us-east-1.amazonaws.com docker tag app:latest $ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/app:latest docker push $ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/app:latest Run Phase Security Run as Non-Root Never run containers as root. Create and use a non-root user: FROM node:22-alpine RUN addgroup -S appgroup && adduser -S appuser -G appgroup COPY --chown=appuser:appgroup . /app USER appuser EXPOSE 3000 CMD [\"node\", \"server.js\"] Read-Only Root Filesystem Mount the root filesystem as read-only to prevent file-system-based attacks: Kubernetes pod security context apiVersion: v1 kind: Pod metadata: name: secure-pod spec: securityContext: runAsNonRoot: true runAsUser: 1001 fsGroup: 1001 containers: \\- name: app image: myapp:latest securityContext: readOnlyRootFilesystem: true capabilities: drop: [\"ALL\"] add: [\"NET_BIND_SERVICE\"] allowPrivilegeEscalation: false volumeMounts: \\- name: tmp mountPath: /tmp volumes: \\- name: tmp emptyDir: {} Resource Limits Prevent DoS attacks through resource exhaustion: resources: requests: memory: \"128Mi\" cpu: \"250m\" limits: memory: \"256Mi\" cpu: \"500m\" Seccomp and AppArmor Restrict system calls available to containers: securityContext: seccompProfile: type: RuntimeDefault # Uses the container runtime's default seccomp profile Kubernetes Pod Security Standards Kubernetes defines three Pod Security Standards: | Standard | Description | When to Use | |----------|-------------|-------------| | Privileged | Unrestricted policy | System-level pods | | Baseline | Minimally restrictive, prevents known escalations | Most workloads | | Restricted | Heavily restricted, follows pod hardening best practices | Security-critical workloads | Apply Restricted standard via namespace labels apiVersion: v1 kind: Namespace metadata: name: production labels: pod-security.kubernetes.io/enforce: restricted pod-security.kubernetes.io/enforce-version: latest Runtime Monitoring Use tools like Falco for runtime threat detection: Install Falco helm install falco falcosecurity/falco \\ \\--set falco.driver.kind=modern-bpf Falco detects: - Shell spawned in container - Sensitive file reads - Unexpected network connections - Privilege escalation attempts Summary Container security requires attention at every stage of the lifecycle. Build minimal images based on distroless or scratch, scan for vulnerabilities before deployment, sign images to verify integrity, run containers as non-root with read-only filesystems, drop all unnecessary capabilities, set resource limits, and enforce Pod Security Standards in Kubernetes. Combine these preventive measures with runtime monitoring for defense in depth."
     }
     </script>
     <script type="application/ld+json">
@@ -74,344 +74,289 @@
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">Container Security Best Practices</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/container-security.png" alt="Container Security Best Practices" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Container Security Best Practices</h1>
 <br>
-<p>The Container Attack Surface   </p>
-<p>Containers share the host kernel, which introduces unique security considerations. While containers provide process isolation through namespaces and cgroups, a misconfigured container can expose the host system to significant risk. Container security spans the entire lifecycle: build, ship, and run.   </p>
-<p>Build Phase Security   </p>
-<p>Use Minimal Base Images   </p>
-<p>Smaller base images reduce the attack surface by eliminating unnecessary tools and libraries.   </p>
+<h1>Container Security Best Practices</h1>
 <br>
+<p>The Container Attack Surface </p>
 <br>
+<p>Containers share the host kernel, which introduces unique security considerations. While containers provide process isolation through namespaces and cgroups, a misconfigured container can expose the host system to significant risk. Container security spans the entire lifecycle: build, ship, and run. </p>
 <br>
-<p>    # UNSAFE: Large attack surface</p>
+<p>Build Phase Security </p>
 <br>
-<p>    FROM ubuntu:22.04</p>
+<p>Use Minimal Base Images </p>
 <br>
-<p>    RUN apt-get update && apt-get install -y python3</p>
+<p>Smaller base images reduce the attack surface by eliminating unnecessary tools and libraries. </p>
 <br>
+<h1>UNSAFE: Large attack surface</h1>
 <br>
+<p>FROM ubuntu:22.04</p>
 <br>
-<p>    # BETTER: Minimal distribution</p>
+<p>RUN apt-get update && apt-get install -y python3</p>
 <br>
-<p>    FROM python:3.12-slim</p>
+<h1>BETTER: Minimal distribution</h1>
 <br>
+<p>FROM python:3.12-slim</p>
 <br>
+<h1>BEST: Distroless (no shell, no package manager)</h1>
 <br>
-<p>    # BEST: Distroless (no shell, no package manager)</p>
+<p>FROM gcr.io/distroless/python3</p>
 <br>
-<p>    FROM gcr.io/distroless/python3</p>
+<p>| Image | Size | Packages | Attack Surface | |-------|------|----------|----------------| | ubuntu:22.04 | 77 MB | 600+ | Large | | python:3.12-slim | 120 MB | 100+ | Moderate | | gcr.io/distroless/python3 | 60 MB | ~10 | Minimal | | alpine:3.19 | 7 MB | ~5 | Small (uses musl libc) | </p>
 <br>
+<p>Scan for Vulnerabilities </p>
 <br>
+<p>Integrate image scanning into your CI/CD pipeline: </p>
 <br>
+<h1>.github/workflows/security.yml</h1>
 <br>
-<p>| Image | Size | Packages | Attack Surface | |-------|------|----------|----------------| | ubuntu:22.04 | 77 MB | 600+ | Large | | python:3.12-slim | 120 MB | 100+ | Moderate | | gcr.io/distroless/python3 | 60 MB | ~10 | Minimal | | alpine:3.19 | 7 MB | ~5 | Small (uses musl libc) |   </p>
-<p>Scan for Vulnerabilities   </p>
-<p>Integrate image scanning into your CI/CD pipeline:   </p>
+<p>name: Container Security Scan</p>
 <br>
+<p>on: [push]</p>
 <br>
+<p>jobs:</p>
 <br>
-<p>    # .github/workflows/security.yml</p>
+<p>scan:</p>
 <br>
-<p>    name: Container Security Scan</p>
+<p>runs-on: ubuntu-latest</p>
 <br>
-<p>    on: [push]</p>
+<p>steps:</p>
 <br>
-<p>    jobs:</p>
+<p>\- uses: actions/checkout@v4</p>
 <br>
-<p>      scan:</p>
+<p>\- name: Build image</p>
 <br>
-<p>        runs-on: ubuntu-latest</p>
+<p>run: docker build -t app:latest .</p>
 <br>
-<p>        steps:</p>
+<p>\- name: Scan with Trivy</p>
 <br>
-<p>          - uses: actions/checkout@v4</p>
+<p>uses: aquasecurity/trivy-action@master</p>
 <br>
+<p>with:</p>
 <br>
+<p>image-ref: 'app:latest'</p>
 <br>
-<p>          - name: Build image</p>
+<p>format: 'sarif'</p>
 <br>
-<p>            run: docker build -t app:latest .</p>
+<p>output: 'trivy-results.sarif'</p>
 <br>
+<p>severity: 'HIGH,CRITICAL'</p>
 <br>
+<p>\- name: Upload results</p>
 <br>
-<p>          - name: Scan with Trivy</p>
+<p>uses: github/codeql-action/upload-sarif@v3</p>
 <br>
-<p>            uses: aquasecurity/trivy-action@master</p>
+<p>with:</p>
 <br>
-<p>            with:</p>
+<p>sarif_file: 'trivy-results.sarif'</p>
 <br>
-<p>              image-ref: 'app:latest'</p>
+<p>Multi-Stage Builds </p>
 <br>
-<p>              format: 'sarif'</p>
+<p>Use multi-stage builds to keep the final image clean: </p>
 <br>
-<p>              output: 'trivy-results.sarif'</p>
+<h1>Build stage</h1>
 <br>
-<p>              severity: 'HIGH,CRITICAL'</p>
+<p>FROM golang:1.22 AS builder</p>
 <br>
+<p>WORKDIR /app</p>
 <br>
+<p>COPY go.mod go.sum ./</p>
 <br>
-<p>          - name: Upload results</p>
+<p>RUN go mod download</p>
 <br>
-<p>            uses: github/codeql-action/upload-sarif@v3</p>
+<p>COPY . .</p>
 <br>
-<p>            with:</p>
+<p>RUN CGO_ENABLED=0 go build -o /app/server</p>
 <br>
-<p>              sarif_file: 'trivy-results.sarif'</p>
+<h1>Runtime stage</h1>
 <br>
+<p>FROM gcr.io/distroless/static:nonroot</p>
 <br>
+<p>COPY --from=builder /app/server /server</p>
 <br>
+<p>USER nonroot:nonroot</p>
 <br>
-<p>Multi-Stage Builds   </p>
-<p>Use multi-stage builds to keep the final image clean:   </p>
+<p>EXPOSE 8080</p>
 <br>
+<p>ENTRYPOINT ["/server"]</p>
 <br>
+<p>Ship Phase Security </p>
 <br>
-<p>    # Build stage</p>
+<p>Sign and Verify Images </p>
 <br>
-<p>    FROM golang:1.22 AS builder</p>
+<p>Use Docker Content Trust or cosign to sign images and verify integrity: </p>
 <br>
-<p>    WORKDIR /app</p>
+<h1>Generate a signing key pair</h1>
 <br>
-<p>    COPY go.mod go.sum ./</p>
+<p>cosign generate-key-pair</p>
 <br>
-<p>    RUN go mod download</p>
+<h1>Sign the image</h1>
 <br>
-<p>    COPY . .</p>
+<p>cosign sign --key cosign.key ghcr.io/myorg/myapp:latest</p>
 <br>
-<p>    RUN CGO_ENABLED=0 go build -o /app/server</p>
+<h1>Verify before deployment</h1>
 <br>
+<p>cosign verify --key cosign.pub ghcr.io/myorg/myapp:latest</p>
 <br>
+<p>Use a Private Registry </p>
 <br>
-<p>    # Runtime stage</p>
+<p>Push images to a private registry with access controls and vulnerability scanning: </p>
 <br>
-<p>    FROM gcr.io/distroless/static:nonroot</p>
+<h1>Push to private ECR</h1>
 <br>
-<p>    COPY --from=builder /app/server /server</p>
+<p>aws ecr get-login-password --region us-east-1 | \</p>
 <br>
-<p>    USER nonroot:nonroot</p>
+<p>docker login --username AWS --password-stdin $ACCOUNT.dkr.ecr.us-east-1.amazonaws.com</p>
 <br>
-<p>    EXPOSE 8080</p>
+<p>docker tag app:latest $ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/app:latest</p>
 <br>
-<p>    ENTRYPOINT ["/server"]</p>
+<p>docker push $ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/app:latest</p>
 <br>
+<p>Run Phase Security </p>
 <br>
+<p>Run as Non-Root </p>
 <br>
+<p>Never run containers as root. Create and use a non-root user: </p>
 <br>
-<p>Ship Phase Security   </p>
-<p>Sign and Verify Images   </p>
-<p>Use Docker Content Trust or cosign to sign images and verify integrity:   </p>
+<p>FROM node:22-alpine</p>
 <br>
+<p>RUN addgroup -S appgroup && adduser -S appuser -G appgroup</p>
 <br>
+<p>COPY --chown=appuser:appgroup . /app</p>
 <br>
-<p>    # Generate a signing key pair</p>
+<p>USER appuser</p>
 <br>
-<p>    cosign generate-key-pair</p>
+<p>EXPOSE 3000</p>
 <br>
+<p>CMD ["node", "server.js"]</p>
 <br>
+<p>Read-Only Root Filesystem </p>
 <br>
-<p>    # Sign the image</p>
+<p>Mount the root filesystem as read-only to prevent file-system-based attacks: </p>
 <br>
-<p>    cosign sign --key cosign.key ghcr.io/myorg/myapp:latest</p>
+<h1>Kubernetes pod security context</h1>
 <br>
+<p>apiVersion: v1</p>
 <br>
+<p>kind: Pod</p>
 <br>
-<p>    # Verify before deployment</p>
+<p>metadata:</p>
 <br>
-<p>    cosign verify --key cosign.pub ghcr.io/myorg/myapp:latest</p>
+<p>name: secure-pod</p>
 <br>
+<p>spec:</p>
 <br>
+<p>securityContext:</p>
 <br>
+<p>runAsNonRoot: true</p>
 <br>
-<p>Use a Private Registry   </p>
-<p>Push images to a private registry with access controls and vulnerability scanning:   </p>
+<p>runAsUser: 1001</p>
 <br>
+<p>fsGroup: 1001</p>
 <br>
+<p>containers:</p>
 <br>
-<p>    # Push to private ECR</p>
+<p>\- name: app</p>
 <br>
-<p>    aws ecr get-login-password --region us-east-1 | \</p>
+<p>image: myapp:latest</p>
 <br>
-<p>        docker login --username AWS --password-stdin $ACCOUNT.dkr.ecr.us-east-1.amazonaws.com</p>
+<p>securityContext:</p>
 <br>
+<p>readOnlyRootFilesystem: true</p>
 <br>
+<p>capabilities:</p>
 <br>
-<p>    docker tag app:latest $ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/app:latest</p>
+<p>drop: ["ALL"]</p>
 <br>
-<p>    docker push $ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/app:latest</p>
+<p>add: ["NET_BIND_SERVICE"]</p>
 <br>
+<p>allowPrivilegeEscalation: false</p>
 <br>
+<p>volumeMounts:</p>
 <br>
+<p>\- name: tmp</p>
 <br>
-<p>Run Phase Security   </p>
-<p>Run as Non-Root   </p>
-<p>Never run containers as root. Create and use a non-root user:   </p>
+<p>mountPath: /tmp</p>
 <br>
+<p>volumes:</p>
 <br>
+<p>\- name: tmp</p>
 <br>
-<p>    FROM node:22-alpine</p>
+<p>emptyDir: {}</p>
 <br>
+<p>Resource Limits </p>
 <br>
+<p>Prevent DoS attacks through resource exhaustion: </p>
 <br>
-<p>    RUN addgroup -S appgroup && adduser -S appuser -G appgroup</p>
+<p>resources:</p>
 <br>
-<p>    COPY --chown=appuser:appgroup . /app</p>
+<p>requests:</p>
 <br>
-<p>    USER appuser</p>
+<p>memory: "128Mi"</p>
 <br>
-<p>    EXPOSE 3000</p>
+<p>cpu: "250m"</p>
 <br>
-<p>    CMD ["node", "server.js"]</p>
+<p>limits:</p>
 <br>
+<p>memory: "256Mi"</p>
 <br>
+<p>cpu: "500m"</p>
 <br>
+<p>Seccomp and AppArmor </p>
 <br>
-<p>Read-Only Root Filesystem   </p>
-<p>Mount the root filesystem as read-only to prevent file-system-based attacks:   </p>
+<p>Restrict system calls available to containers: </p>
 <br>
+<p>securityContext:</p>
 <br>
+<p>seccompProfile:</p>
 <br>
-<p>    # Kubernetes pod security context</p>
+<p>type: RuntimeDefault # Uses the container runtime's default seccomp profile</p>
 <br>
-<p>    apiVersion: v1</p>
+<p>Kubernetes Pod Security Standards </p>
 <br>
-<p>    kind: Pod</p>
+<p>Kubernetes defines three Pod Security Standards: </p>
 <br>
-<p>    metadata:</p>
+<p>| Standard | Description | When to Use | |----------|-------------|-------------| | Privileged | Unrestricted policy | System-level pods | | Baseline | Minimally restrictive, prevents known escalations | Most workloads | | Restricted | Heavily restricted, follows pod hardening best practices | Security-critical workloads | </p>
 <br>
-<p>      name: secure-pod</p>
+<h1>Apply Restricted standard via namespace labels</h1>
 <br>
-<p>    spec:</p>
+<p>apiVersion: v1</p>
 <br>
-<p>      securityContext:</p>
+<p>kind: Namespace</p>
 <br>
-<p>        runAsNonRoot: true</p>
+<p>metadata:</p>
 <br>
-<p>        runAsUser: 1001</p>
+<p>name: production</p>
 <br>
-<p>        fsGroup: 1001</p>
+<p>labels:</p>
 <br>
-<p>      containers:</p>
+<p>pod-security.kubernetes.io/enforce: restricted</p>
 <br>
-<p>      - name: app</p>
+<p>pod-security.kubernetes.io/enforce-version: latest</p>
 <br>
-<p>        image: myapp:latest</p>
+<p>Runtime Monitoring </p>
 <br>
-<p>        securityContext:</p>
+<p>Use tools like Falco for runtime threat detection: </p>
 <br>
-<p>          readOnlyRootFilesystem: true</p>
+<h1>Install Falco</h1>
 <br>
-<p>          capabilities:</p>
+<p>helm install falco falcosecurity/falco \</p>
 <br>
-<p>            drop: ["ALL"]</p>
+<p>\--set falco.driver.kind=modern-bpf</p>
 <br>
-<p>            add: ["NET_BIND_SERVICE"]</p>
+<h1>Falco detects:</h1>
 <br>
-<p>          allowPrivilegeEscalation: false</p>
+<h1>- Shell spawned in container</h1>
 <br>
-<p>        volumeMounts:</p>
+<h1>- Sensitive file reads</h1>
 <br>
-<p>        - name: tmp</p>
+<h1>- Unexpected network connections</h1>
 <br>
-<p>          mountPath: /tmp</p>
+<h1>- Privilege escalation attempts</h1>
 <br>
-<p>      volumes:</p>
+<p>Summary </p>
 <br>
-<p>      - name: tmp</p>
-<br>
-<p>        emptyDir: {}</p>
-<br>
-<br>
-<br>
-<br>
-<p>Resource Limits   </p>
-<p>Prevent DoS attacks through resource exhaustion:   </p>
-<br>
-<br>
-<br>
-<p>    resources:</p>
-<br>
-<p>      requests:</p>
-<br>
-<p>        memory: "128Mi"</p>
-<br>
-<p>        cpu: "250m"</p>
-<br>
-<p>      limits:</p>
-<br>
-<p>        memory: "256Mi"</p>
-<br>
-<p>        cpu: "500m"</p>
-<br>
-<br>
-<br>
-<br>
-<p>Seccomp and AppArmor   </p>
-<p>Restrict system calls available to containers:   </p>
-<br>
-<br>
-<br>
-<p>    securityContext:</p>
-<br>
-<p>      seccompProfile:</p>
-<br>
-<p>        type: RuntimeDefault  # Uses the container runtime's default seccomp profile</p>
-<br>
-<br>
-<br>
-<br>
-<p>Kubernetes Pod Security Standards   </p>
-<p>Kubernetes defines three Pod Security Standards:   </p>
-<p>| Standard | Description | When to Use | |----------|-------------|-------------| | Privileged | Unrestricted policy | System-level pods | | Baseline | Minimally restrictive, prevents known escalations | Most workloads | | Restricted | Heavily restricted, follows pod hardening best practices | Security-critical workloads |   </p>
-<br>
-<br>
-<br>
-<p>    # Apply Restricted standard via namespace labels</p>
-<br>
-<p>    apiVersion: v1</p>
-<br>
-<p>    kind: Namespace</p>
-<br>
-<p>    metadata:</p>
-<br>
-<p>      name: production</p>
-<br>
-<p>      labels:</p>
-<br>
-<p>        pod-security.kubernetes.io/enforce: restricted</p>
-<br>
-<p>        pod-security.kubernetes.io/enforce-version: latest</p>
-<br>
-<br>
-<br>
-<br>
-<p>Runtime Monitoring   </p>
-<p>Use tools like Falco for runtime threat detection:   </p>
-<br>
-<br>
-<br>
-<p>    # Install Falco</p>
-<br>
-<p>    helm install falco falcosecurity/falco \</p>
-<br>
-<p>        --set falco.driver.kind=modern-bpf</p>
-<br>
-<br>
-<br>
-<p>    # Falco detects:</p>
-<br>
-<p>    # - Shell spawned in container</p>
-<br>
-<p>    # - Sensitive file reads</p>
-<br>
-<p>    # - Unexpected network connections</p>
-<br>
-<p>    # - Privilege escalation attempts</p>
-<br>
-<br>
-<br>
-<br>
-<p>Summary   </p>
 <p>Container security requires attention at every stage of the lifecycle. Build minimal images based on distroless or scratch, scan for vulnerabilities before deployment, sign images to verify integrity, run containers as non-root with read-only filesystems, drop all unnecessary capabilities, set resource limits, and enforce Pod Security Standards in Kubernetes. Combine these preventive measures with runtime monitoring for defense in depth.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

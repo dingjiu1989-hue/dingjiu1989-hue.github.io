@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/nosql-databases-guide.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)">
     <meta name="twitter:description" content="A practical guide to NoSQL databases comparing MongoDB, DynamoDB, and Firestore for document storage, scalability, and query patterns.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/nosql-databases-guide.png">
     <title>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore) — SourceHub</title>
     <meta name="description" content="A practical guide to NoSQL databases comparing MongoDB, DynamoDB, and Firestore for document storage, scalability, and query patterns.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)",
       "description": "A practical guide to NoSQL databases comparing MongoDB, DynamoDB, and Firestore for document storage, scalability, and query patterns.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/nosql-databases-guide.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1494",
+      "wordCount": "1443",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,6 +74,7 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/nosql-databases-guide.png" alt="NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
 <br>
 <p>What Are NoSQL Databases?   </p>
@@ -83,8 +84,6 @@
 <p>MongoDB   </p>
 <p>MongoDB stores data as flexible JSON-like documents in collections. It is schema-less by design.   </p>
 <p>Data Modeling   </p>
-<br>
-<br>
 <br>
 <p>    // MongoDB document (embedded)</p>
 <br>
@@ -124,12 +123,7 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Query Examples   </p>
-<br>
-<br>
 <br>
 <p>    // Basic queries</p>
 <br>
@@ -138,8 +132,6 @@
 <p>    db.users.find({ "addresses.city": "San Francisco" })</p>
 <br>
 <p>    db.users.find({ created_at: { $gte: ISODate("2026-01-01") } })</p>
-<br>
-<br>
 <br>
 <p>    // Aggregation pipeline</p>
 <br>
@@ -155,16 +147,11 @@
 <br>
 <p>    ])</p>
 <br>
-<br>
-<br>
 <p>    // Index creation</p>
 <br>
 <p>    db.users.createIndex({ email: 1 }, { unique: true })</p>
 <br>
 <p>    db.orders.createIndex({ customer_id: 1, created_at: -1 })</p>
-<br>
-<br>
-<br>
 <br>
 <p>When to Use MongoDB   </p>
 <br>
@@ -177,21 +164,15 @@
 <p>DynamoDB is AWS's managed key-value and document database. It requires careful up-front schema design.   </p>
 <p>Table Design   </p>
 <br>
-<br>
-<br>
 <p>    // DynamoDB table with single-table design</p>
 <br>
 <p>    // Partition Key: PK (string)</p>
 <br>
 <p>    // Sort Key: SK (string)</p>
 <br>
-<br>
-<br>
 <p>    // User entity</p>
 <br>
 <p>    { PK: "USER#alice", SK: "PROFILE", email: "alice@example.com", name: "Alice" }</p>
-<br>
-<br>
 <br>
 <p>    // Order entity (access pattern: all orders for a user)</p>
 <br>
@@ -199,18 +180,11 @@
 <br>
 <p>    { PK: "USER#alice", SK: "ORDER#2026-05-15#ORD002", amount: 250, status: "pending" }</p>
 <br>
-<br>
-<br>
 <p>    // Product entity (access pattern: get product by ID)</p>
 <br>
 <p>    { PK: "PROD#001", SK: "META", name: "Laptop", price: 1200 }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Query Patterns   </p>
-<br>
-<br>
 <br>
 <p>    // AWS SDK v3</p>
 <br>
@@ -218,11 +192,7 @@
 <br>
 <p>    import { QueryCommand } from "@aws-sdk/lib-dynamodb";</p>
 <br>
-<br>
-<br>
 <p>    const client = new DynamoDBClient({ region: "us-east-1" });</p>
-<br>
-<br>
 <br>
 <p>    // Get user with all related data (single query)</p>
 <br>
@@ -239,8 +209,6 @@
 <p>        }</p>
 <br>
 <p>    }));</p>
-<br>
-<br>
 <br>
 <p>    // Query specific entity type</p>
 <br>
@@ -260,9 +228,6 @@
 <br>
 <p>    }));</p>
 <br>
-<br>
-<br>
-<br>
 <p>When to Use DynamoDB   </p>
 <br>
 <p>* Serverless applications</p>
@@ -274,17 +239,11 @@
 <p>Firestore is Google Cloud's NoSQL document database with real-time synchronization.   </p>
 <p>Data Model   </p>
 <br>
-<br>
-<br>
 <p>    import firebase_admin</p>
 <br>
 <p>    from firebase_admin import firestore</p>
 <br>
-<br>
-<br>
 <p>    db = firestore.client()</p>
-<br>
-<br>
 <br>
 <p>    # Document reference</p>
 <br>
@@ -302,8 +261,6 @@
 <br>
 <p>    })</p>
 <br>
-<br>
-<br>
 <p>    # Subcollection for hierarchical data</p>
 <br>
 <p>    orders_ref = user_ref.collection('orders')</p>
@@ -318,8 +275,6 @@
 <br>
 <p>    })</p>
 <br>
-<br>
-<br>
 <p>    # Real-time listener</p>
 <br>
 <p>    def on_snapshot(doc_snapshot, changes, read_time):</p>
@@ -328,12 +283,7 @@
 <br>
 <p>            print(f"Order changed: {change.document.id}")</p>
 <br>
-<br>
-<br>
 <p>    user_ref.collection('orders').on_snapshot(on_snapshot)</p>
-<br>
-<br>
-<br>
 <br>
 <p>When to Use Firestore   </p>
 <br>

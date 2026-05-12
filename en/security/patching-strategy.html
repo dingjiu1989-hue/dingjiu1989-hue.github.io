@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/patching-strategy.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Patching Strategy">
     <meta name="twitter:description" content="Guide to vulnerability patching strategy covering prioritization, patch testing, emergency patches, rollback planning, and vulnerability management workflows.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/patching-strategy.png">
     <title>Patching Strategy — SourceHub</title>
     <meta name="description" content="Guide to vulnerability patching strategy covering prioritization, patch testing, emergency patches, rollback planning, and vulnerability management workflows.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Patching Strategy",
       "description": "Guide to vulnerability patching strategy covering prioritization, patch testing, emergency patches, rollback planning, and vulnerability management workflows.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/patching-strategy.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1865",
+      "wordCount": "1774",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Patching Strategy</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/patching-strategy.png" alt="Patching Strategy" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Patching Strategy</h1>
 <br>
 <p>Introduction   </p>
@@ -82,13 +83,9 @@
 <p>Vulnerability Prioritization   </p>
 <p>Not all vulnerabilities are equal. Prioritize based on exploitability, asset criticality, and threat intelligence.   </p>
 <br>
-<br>
-<br>
 <p>    from dataclasses import dataclass</p>
 <br>
 <p>    from enum import Enum</p>
-<br>
-<br>
 <br>
 <p>    class Severity(Enum):</p>
 <br>
@@ -99,8 +96,6 @@
 <p>        MEDIUM = 3</p>
 <br>
 <p>        LOW = 4</p>
-<br>
-<br>
 <br>
 <p>    @dataclass</p>
 <br>
@@ -118,19 +113,13 @@
 <br>
 <p>        affected_systems: int</p>
 <br>
-<br>
-<br>
 <p>    def prioritize(vuln: Vulnerability) -> int:</p>
 <br>
 <p>        score = vuln.cvss_score</p>
 <br>
-<br>
-<br>
 <p>        # Asset criticality multiplier</p>
 <br>
 <p>        score *= (vuln.asset_criticality / 3)</p>
-<br>
-<br>
 <br>
 <p>        # Exploit availability</p>
 <br>
@@ -142,24 +131,15 @@
 <br>
 <p>            score *= 2.0</p>
 <br>
-<br>
-<br>
 <p>        # Reachability</p>
 <br>
 <p>        if vuln.affected_systems > 100:</p>
 <br>
 <p>            score *= 1.3</p>
 <br>
-<br>
-<br>
 <p>        return round(score, 1)</p>
 <br>
-<br>
-<br>
-<br>
 <p>Prioritization Matrix   </p>
-<br>
-<br>
 <br>
 <p>    patch_priority:</p>
 <br>
@@ -173,8 +153,6 @@
 <br>
 <p>        - process: emergency_change</p>
 <br>
-<br>
-<br>
 <p>      high:</p>
 <br>
 <p>        - cvss_score: "7.0 - 8.9"</p>
@@ -185,8 +163,6 @@
 <br>
 <p>        - process: standard_change_fast_track</p>
 <br>
-<br>
-<br>
 <p>      medium:</p>
 <br>
 <p>        - cvss_score: "4.0 - 6.9"</p>
@@ -194,8 +170,6 @@
 <p>        - sla_days: 30</p>
 <br>
 <p>        - process: standard_change</p>
-<br>
-<br>
 <br>
 <p>      low:</p>
 <br>
@@ -205,13 +179,8 @@
 <br>
 <p>        - process: next_maintenance_window</p>
 <br>
-<br>
-<br>
-<br>
 <p>Patch Testing Pipeline   </p>
 <p>Test patches in a progressive environment chain before production deployment.   </p>
-<br>
-<br>
 <br>
 <p>    patch_pipeline:</p>
 <br>
@@ -227,8 +196,6 @@
 <br>
 <p>          rollback: immediate_redeploy</p>
 <br>
-<br>
-<br>
 <p>        - environment: staging</p>
 <br>
 <p>          validation:</p>
@@ -240,8 +207,6 @@
 <p>            - security_scan_pass</p>
 <br>
 <p>          duration: 24_hours</p>
-<br>
-<br>
 <br>
 <p>        - environment: canary</p>
 <br>
@@ -257,8 +222,6 @@
 <br>
 <p>          percentage: 10%</p>
 <br>
-<br>
-<br>
 <p>        - environment: production</p>
 <br>
 <p>          strategy: rolling_update</p>
@@ -267,31 +230,19 @@
 <br>
 <p>          max_unavailable: 0</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    #!/bin/bash</p>
 <br>
 <p>    # Automated patch testing script</p>
 <br>
 <p>    set -euo pipefail</p>
 <br>
-<br>
-<br>
 <p>    PATCH_ID="$1"</p>
 <br>
 <p>    ENVIRONMENTS=("dev" "staging" "canary" "prod")</p>
 <br>
-<br>
-<br>
 <p>    for env in "${ENVIRONMENTS[@]}"; do</p>
 <br>
 <p>        echo "=== Deploying patch $PATCH_ID to $env ==="</p>
-<br>
-<br>
 <br>
 <p>        # Apply patch</p>
 <br>
@@ -307,8 +258,6 @@
 <br>
 <p>        fi</p>
 <br>
-<br>
-<br>
 <p>        # Run validation</p>
 <br>
 <p>        if ! run_validation_tests $env; then</p>
@@ -321,13 +270,9 @@
 <br>
 <p>        fi</p>
 <br>
-<br>
-<br>
 <p>        # Monitor for issues</p>
 <br>
 <p>        sleep $([ "$env" == "production" ] && echo 3600 || echo 300)</p>
-<br>
-<br>
 <br>
 <p>        if check_alerts $env; then</p>
 <br>
@@ -339,25 +284,16 @@
 <br>
 <p>        fi</p>
 <br>
-<br>
-<br>
 <p>        echo "=== Patch $PATCH_ID passed in $env ==="</p>
 <br>
 <p>    done</p>
 <br>
-<br>
-<br>
-<br>
 <p>Emergency Patches   </p>
 <p>Zero-day exploits require immediate action, bypassing normal testing cycles.   </p>
-<br>
-<br>
 <br>
 <p>    emergency_patch_workflow:</p>
 <br>
 <p>      trigger: active_exploitation_of_critical_vulnerability</p>
-<br>
-<br>
 <br>
 <p>      steps:</p>
 <br>
@@ -373,8 +309,6 @@
 <br>
 <p>            - assess_business_impact</p>
 <br>
-<br>
-<br>
 <p>        - phase: decision</p>
 <br>
 <p>          duration: 30_minutes</p>
@@ -386,8 +320,6 @@
 <p>            - change_advisory_board_notification</p>
 <br>
 <p>            - communication_plan_activation</p>
-<br>
-<br>
 <br>
 <p>        - phase: deployment</p>
 <br>
@@ -405,8 +337,6 @@
 <br>
 <p>            - monitor_for_side_effects</p>
 <br>
-<br>
-<br>
 <p>        - phase: recovery</p>
 <br>
 <p>          duration: 24_hours</p>
@@ -418,12 +348,6 @@
 <p>            - post_incident_review</p>
 <br>
 <p>            - remove_virtual_patches_if_applicable</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Virtual patching via WAF as immediate stopgap</p>
 <br>
@@ -441,13 +365,8 @@
 <br>
 <p>    nginx -t && systemctl reload nginx</p>
 <br>
-<br>
-<br>
-<br>
 <p>Rollback Planning   </p>
 <p>Every patch must have a tested rollback procedure.   </p>
-<br>
-<br>
 <br>
 <p>    class PatchRollbackPlan:</p>
 <br>
@@ -465,13 +384,9 @@
 <br>
 <p>            self.validation_commands = []</p>
 <br>
-<br>
-<br>
 <p>        def add_rollback_step(self, command):</p>
 <br>
 <p>            self.rollback_commands.append(command)</p>
-<br>
-<br>
 <br>
 <p>        def execute_rollback(self):</p>
 <br>
@@ -489,8 +404,6 @@
 <br>
 <p>            return True</p>
 <br>
-<br>
-<br>
 <p>        def validate_rollback(self):</p>
 <br>
 <p>            """Verify system is back to pre-patch state."""</p>
@@ -504,9 +417,6 @@
 <p>                    return False</p>
 <br>
 <p>            return True</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>A mature patching strategy prioritizes based on exploitability and asset criticality, tests patches in progressive environments, maintains emergency procedures for zero-day vulnerabilities, and always plans for rollback. Automate as much of the pipeline as possible — manual patching does not scale and is prone to error in high-pressure situations.</p></div>

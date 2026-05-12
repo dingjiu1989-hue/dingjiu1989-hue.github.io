@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/zero-trust-architecture.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Zero Trust Architecture for Startups">
     <meta name="twitter:description" content="Implement zero trust architecture for startups: microsegmentation, identity-based access, continuous verification, and least privilege.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/zero-trust-architecture.png">
     <title>Zero Trust Architecture for Startups — SourceHub</title>
     <meta name="description" content="Implement zero trust architecture for startups: microsegmentation, identity-based access, continuous verification, and least privilege.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,15 +38,15 @@
       "@type": "Article",
       "headline": "Zero Trust Architecture for Startups",
       "description": "Implement zero trust architecture for startups: microsegmentation, identity-based access, continuous verification, and least privilege.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/zero-trust-architecture.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1883",
+      "wordCount": "1628",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/zero-trust-architecture.html"},
-      "articleBody": "Zero Trust Architecture for Startups The Zero Trust Mindset Zero Trust Architecture (ZTA) is a security model based on the principle \"never trust, always verify.\" Unlike the traditional perimeter-based approach where everything inside the corporate network is trusted by default, Zero Trust assumes that no user, device, or network is trustworthy until proven otherwise. Core Principles | Principle | Description | Implementation | |-----------|-------------|----------------| | Verify explicitly | Always authenticate and authorize based on all available data | MFA, device posture checks | | Least privilege | Grant minimum access required | Just-in-time access, RBAC | | Assume breach | Design as if the network is already compromised | Segmentation, encryption, monitoring | Identity Is the New Perimeter In Zero Trust, identity replaces the network perimeter as the primary security boundary. Every request must be authenticated and authorized regardless of origin. Identity-Aware Proxy # Google Identity-Aware Proxy (IAP) configuration # All access to GKE clusters goes through IAP resource: - service: compute.googleapis.com methods: - '*' required_permissions: - compute.instances.get # Access levels based on context accessLevels: - name: trusted_devices conditions: - device_policy: require_screen_lock: true allowed_encryption_statuses: - ENCRYPTED os_type: DESKTOP_MAC - ip_subnetworks: - 203.0.113.0/24 BeyondCorp-Style Access def check_access(user, resource, context): \"\"\"Continuous verification for each request.\"\"\" # Check identity if not user.authenticated: return DENY # Check device posture if not context.device.is_trusted: return DENY if context.device.os_version return DENY if not context.device.has_disk_encryption: return DENY # Check authorization if not has_permission(user, resource): return DENY # Check context if context.location not in ALLOWED_REGIONS: return DENY if context.time not in ALLOWED_HOURS.get(user.role, ALL): return DENY # Log the decision audit.log_access_granted(user, resource, context) return ALLOW Microsegmentation Microsegmentation divides the network into isolated zones, limiting lateral movement. Kubernetes Network Policies apiVersion: networking.k8s.io/v1 kind: NetworkPolicy metadata: name: api-service-policy spec: podSelector: matchLabels: app: api-service policyTypes: - Ingress - Egress ingress: - from: - podSelector: matchLabels: role: gateway ports: - protocol: TCP port: 8080 egress: - to: - podSelector: matchLabels: app: database ports: - protocol: TCP port: 5432 - to: - podSelector: matchLabels: app: redis ports: - protocol: TCP port: 6379 - to: - namespaceSelector: matchLabels: name: monitoring ports: - protocol: TCP port: 4318 Service-to-Service mTLS # Istio PeerAuthentication for mTLS apiVersion: security.istio.io/v1beta1 kind: PeerAuthentication metadata: name: default namespace: production spec: mtls: mode: STRICT --- # Authorization policy apiVersion: security.istio.io/v1beta1 kind: AuthorizationPolicy metadata: name: api-policy spec: selector: matchLabels: app: api action: ALLOW rules: - from: - source: principals: - \"cluster.local/ns/production/sa/gateway\" to: - operation: methods: [\"GET\"] paths: [\"/api/*\"] Just-in-Time Access Replace standing privileges with time-bound, request-based access: import boto3 from datetime import datetime, timedelta def request_elevated_access(user_id, reason, duration_minutes=60): \"\"\"Request temporary privileged access.\"\"\" # Record the request ticket = create_access_ticket( user_id=user_id, reason=reason, duration=duration_minutes, approved_by=current_approver ) # Grant time-bound IAM role sts = boto3.client('sts') credentials = sts.assume_role( RoleArn='arn:aws:iam::123456789:role/Admin-JIT', RoleSessionName=f'{user_id}-{ticket.id}', DurationSeconds=duration_minutes * 60 ) # Schedule automatic revocation schedule_revocation(ticket.id, duration_minutes) return credentials Continuous Monitoring Zero Trust requires real-time visibility into all traffic: | Data Source | What to Monitor | Detection | |-------------|-----------------|-----------| | Authentication | Login patterns, MFA failures | Impossible travel, brute force | | Network flows | East-west traffic | Lateral movement | | API calls | Unusual patterns, new endpoints | Data exfiltration | | DNS | Unusual domain queries | C2 communication | | Cloud API | Resource creation, IAM changes | Privilege escalation | Implementation Roadmap Phase 1: Foundation * Enable MFA for all users 2\\. Implement SSO with OAuth 2.0 / OIDC 3\\. Deploy endpoint detection and response (EDR) 4\\. Enforce HTTPS everywhere Phase 2: Access Control * Implement RBAC/ABAC 2\\. Deploy identity-aware proxy for internal apps 3\\. Enable service mesh with mTLS 4\\. Implement just-in-time access for admin roles Phase 3: Segmentation * Apply network policies in Kubernetes 2\\. Implement firewall rules between VPCs 3\\. Deploy API gateway with WAF 4\\. Restrict egress traffic by policy Phase 4: Verification * Continuous compliance scanning 2\\. User and entity behavior analytics (UEBA) 3\\. Automated incident response 4\\. Regular red team exercises Common Pitfalls * **All-or-nothing approach**: Zero Trust is incremental. Start with the most critical assets. * **Ignoring legacy systems**: Some systems cannot support mTLS or modern auth. Use sidecars or wrappers. * **Operational complexity**: Granular policies require maintenance. Automate policy management. * **Poor user experience**: Overly aggressive verification frustrates users. Balance security with usability. Summary Zero Trust replaces implicit trust with explicit, continuous verification. For startups, implementing Zero Trust incrementally starting with identity-based access and microsegmentation provides immediate security improvements without requiring a complete infrastructure overhaul. Focus on the highest-value assets first, automate policy management, and use just-in-time access to minimize standing privileges."
+      "articleBody": "Zero Trust Architecture for Startups Zero Trust Architecture for Startups The Zero Trust Mindset Zero Trust Architecture (ZTA) is a security model based on the principle \"never trust, always verify.\" Unlike the traditional perimeter-based approach where everything inside the corporate network is trusted by default, Zero Trust assumes that no user, device, or network is trustworthy until proven otherwise. Core Principles | Principle | Description | Implementation | |-----------|-------------|----------------| | Verify explicitly | Always authenticate and authorize based on all available data | MFA, device posture checks | | Least privilege | Grant minimum access required | Just-in-time access, RBAC | | Assume breach | Design as if the network is already compromised | Segmentation, encryption, monitoring | Identity Is the New Perimeter In Zero Trust, identity replaces the network perimeter as the primary security boundary. Every request must be authenticated and authorized regardless of origin. Identity-Aware Proxy Google Identity-Aware Proxy (IAP) configuration All access to GKE clusters goes through IAP resource: \\- service: compute.googleapis.com methods: \\- '*' required_permissions: \\- compute.instances.get Access levels based on context accessLevels: \\- name: trusted_devices conditions: \\- device_policy: require_screen_lock: true allowed_encryption_statuses: \\- ENCRYPTED os_type: DESKTOP_MAC \\- ip_subnetworks: \\- 203.0.113.0/24 BeyondCorp-Style Access def check_access(user, resource, context): \"\"\"Continuous verification for each request.\"\"\" Check identity if not user.authenticated: return DENY Check device posture if not context.device.is_trusted: return DENY if context.device.os_version return DENY if not context.device.has_disk_encryption: return DENY Check authorization if not has_permission(user, resource): return DENY Check context if context.location not in ALLOWED_REGIONS: return DENY if context.time not in ALLOWED_HOURS.get(user.role, ALL): return DENY Log the decision audit.log_access_granted(user, resource, context) return ALLOW Microsegmentation Microsegmentation divides the network into isolated zones, limiting lateral movement. Kubernetes Network Policies apiVersion: networking.k8s.io/v1 kind: NetworkPolicy metadata: name: api-service-policy spec: podSelector: matchLabels: app: api-service policyTypes: \\- Ingress \\- Egress ingress: \\- from: \\- podSelector: matchLabels: role: gateway ports: \\- protocol: TCP port: 8080 egress: \\- to: \\- podSelector: matchLabels: app: database ports: \\- protocol: TCP port: 5432 \\- to: \\- podSelector: matchLabels: app: redis ports: \\- protocol: TCP port: 6379 \\- to: \\- namespaceSelector: matchLabels: name: monitoring ports: \\- protocol: TCP port: 4318 Service-to-Service mTLS Istio PeerAuthentication for mTLS apiVersion: security.istio.io/v1beta1 kind: PeerAuthentication metadata: name: default namespace: production spec: mtls: mode: STRICT \\--- Authorization policy apiVersion: security.istio.io/v1beta1 kind: AuthorizationPolicy metadata: name: api-policy spec: selector: matchLabels: app: api action: ALLOW rules: \\- from: \\- source: principals: \\- \"cluster.local/ns/production/sa/gateway\" to: \\- operation: methods: [\"GET\"] paths: [\"/api/*\"] Just-in-Time Access Replace standing privileges with time-bound, request-based access: import boto3 from datetime import datetime, timedelta def request_elevated_access(user_id, reason, duration_minutes=60): \"\"\"Request temporary privileged access.\"\"\" Record the request ticket = create_access_ticket( user_id=user_id, reason=reason, duration=duration_minutes, approved_by=current_approver ) Grant time-bound IAM role sts = boto3.client('sts') credentials = sts.assume_role( RoleArn='arn:aws:iam::123456789:role/Admin-JIT', RoleSessionName=f'{user_id}-{ticket.id}', DurationSeconds=duration_minutes * 60 ) Schedule automatic revocation schedule_revocation(ticket.id, duration_minutes) return credentials Continuous Monitoring Zero Trust requires real-time visibility into all traffic: | Data Source | What to Monitor | Detection | |-------------|-----------------|-----------| | Authentication | Login patterns, MFA failures | Impossible travel, brute force | | Network flows | East-west traffic | Lateral movement | | API calls | Unusual patterns, new endpoints | Data exfiltration | | DNS | Unusual domain queries | C2 communication | | Cloud API | Resource creation, IAM changes | Privilege escalation | Implementation Roadmap Phase 1: Foundation * Enable MFA for all users 2\\\\. Implement SSO with OAuth 2.0 / OIDC 3\\\\. Deploy endpoint detection and response (EDR) 4\\\\. Enforce HTTPS everywhere Phase 2: Access Control * Implement RBAC/ABAC 2\\\\. Deploy identity-aware proxy for internal apps 3\\\\. Enable service mesh with mTLS 4\\\\. Implement just-in-time access for admin roles Phase 3: Segmentation * Apply network policies in Kubernetes 2\\\\. Implement firewall rules between VPCs 3\\\\. Deploy API gateway with WAF 4\\\\. Restrict egress traffic by policy Phase 4: Verification * Continuous compliance scanning 2\\\\. User and entity behavior analytics (UEBA) 3\\\\. Automated incident response 4\\\\. Regular red team exercises Common Pitfalls * **All-or-nothing approach**: Zero Trust is incremental. Start with the most critical assets. * **Ignoring legacy systems**: Some systems cannot support mTLS or modern auth. Use sidecars or wrappers. * **Operational complexity**: Granular policies require maintenance. Automate policy management. * **Poor user experience**: Overly aggressive verification frustrates users. Balance security with usability. Summary Zero Trust replaces implicit trust with explicit, continuous verification. For startups, implementing Zero Trust incrementally starting with identity-based access and microsegmentation provides immediate security improvements without requiring a complete infrastructure overhaul. Focus on the highest-value assets first, automate policy management, and use just-in-time access to minimize standing privileges."
     }
     </script>
     <script type="application/ld+json">
@@ -74,364 +74,349 @@
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">Zero Trust Architecture for Startups</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/zero-trust-architecture.png" alt="Zero Trust Architecture for Startups" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Zero Trust Architecture for Startups</h1>
 <br>
-<p>The Zero Trust Mindset   </p>
-<p>Zero Trust Architecture (ZTA) is a security model based on the principle "never trust, always verify." Unlike the traditional perimeter-based approach where everything inside the corporate network is trusted by default, Zero Trust assumes that no user, device, or network is trustworthy until proven otherwise.   </p>
-<p>Core Principles   </p>
-<p>| Principle | Description | Implementation | |-----------|-------------|----------------| | Verify explicitly | Always authenticate and authorize based on all available data | MFA, device posture checks | | Least privilege | Grant minimum access required | Just-in-time access, RBAC | | Assume breach | Design as if the network is already compromised | Segmentation, encryption, monitoring |   </p>
-<p>Identity Is the New Perimeter   </p>
-<p>In Zero Trust, identity replaces the network perimeter as the primary security boundary. Every request must be authenticated and authorized regardless of origin.   </p>
-<p>Identity-Aware Proxy   </p>
+<h1>Zero Trust Architecture for Startups</h1>
 <br>
+<p>The Zero Trust Mindset </p>
 <br>
+<p>Zero Trust Architecture (ZTA) is a security model based on the principle "never trust, always verify." Unlike the traditional perimeter-based approach where everything inside the corporate network is trusted by default, Zero Trust assumes that no user, device, or network is trustworthy until proven otherwise. </p>
 <br>
-<p>    # Google Identity-Aware Proxy (IAP) configuration</p>
+<p>Core Principles </p>
 <br>
-<p>    # All access to GKE clusters goes through IAP</p>
+<p>| Principle | Description | Implementation | |-----------|-------------|----------------| | Verify explicitly | Always authenticate and authorize based on all available data | MFA, device posture checks | | Least privilege | Grant minimum access required | Just-in-time access, RBAC | | Assume breach | Design as if the network is already compromised | Segmentation, encryption, monitoring | </p>
 <br>
-<p>    resource:</p>
+<p>Identity Is the New Perimeter </p>
 <br>
-<p>      - service: compute.googleapis.com</p>
+<p>In Zero Trust, identity replaces the network perimeter as the primary security boundary. Every request must be authenticated and authorized regardless of origin. </p>
 <br>
-<p>        methods:</p>
+<p>Identity-Aware Proxy </p>
 <br>
-<p>          - '*'</p>
+<h1>Google Identity-Aware Proxy (IAP) configuration</h1>
 <br>
-<p>        required_permissions:</p>
+<h1>All access to GKE clusters goes through IAP</h1>
 <br>
-<p>          - compute.instances.get</p>
+<p>resource:</p>
 <br>
+<p>\- service: compute.googleapis.com</p>
 <br>
+<p>methods:</p>
 <br>
-<p>    # Access levels based on context</p>
+<p>\- '*'</p>
 <br>
-<p>    accessLevels:</p>
+<p>required_permissions:</p>
 <br>
-<p>      - name: trusted_devices</p>
+<p>\- compute.instances.get</p>
 <br>
-<p>        conditions:</p>
+<h1>Access levels based on context</h1>
 <br>
-<p>          - device_policy:</p>
+<p>accessLevels:</p>
 <br>
-<p>              require_screen_lock: true</p>
+<p>\- name: trusted_devices</p>
 <br>
-<p>              allowed_encryption_statuses:</p>
+<p>conditions:</p>
 <br>
-<p>                - ENCRYPTED</p>
+<p>\- device_policy:</p>
 <br>
-<p>              os_type: DESKTOP_MAC</p>
+<p>require_screen_lock: true</p>
 <br>
-<p>          - ip_subnetworks:</p>
+<p>allowed_encryption_statuses:</p>
 <br>
-<p>              - 203.0.113.0/24</p>
+<p>\- ENCRYPTED</p>
 <br>
+<p>os_type: DESKTOP_MAC</p>
 <br>
+<p>\- ip_subnetworks:</p>
 <br>
+<p>\- 203.0.113.0/24</p>
 <br>
-<p>BeyondCorp-Style Access   </p>
+<p>BeyondCorp-Style Access </p>
 <br>
+<p>def check_access(user, resource, context):</p>
 <br>
+<p>"""Continuous verification for each request."""</p>
 <br>
-<p>    def check_access(user, resource, context):</p>
+<h1>Check identity</h1>
 <br>
-<p>        """Continuous verification for each request."""</p>
+<p>if not user.authenticated:</p>
 <br>
+<p>return DENY</p>
 <br>
+<h1>Check device posture</h1>
 <br>
-<p>        # Check identity</p>
+<p>if not context.device.is_trusted:</p>
 <br>
-<p>        if not user.authenticated:</p>
+<p>return DENY</p>
 <br>
-<p>            return DENY</p>
+<p>if context.device.os_version < MINIMUM_VERSION:</p>
 <br>
+<p>return DENY</p>
 <br>
+<p>if not context.device.has_disk_encryption:</p>
 <br>
-<p>        # Check device posture</p>
+<p>return DENY</p>
 <br>
-<p>        if not context.device.is_trusted:</p>
+<h1>Check authorization</h1>
 <br>
-<p>            return DENY</p>
+<p>if not has_permission(user, resource):</p>
 <br>
-<p>        if context.device.os_version < MINIMUM_VERSION:</p>
+<p>return DENY</p>
 <br>
-<p>            return DENY</p>
+<h1>Check context</h1>
 <br>
-<p>        if not context.device.has_disk_encryption:</p>
+<p>if context.location not in ALLOWED_REGIONS:</p>
 <br>
-<p>            return DENY</p>
+<p>return DENY</p>
 <br>
+<p>if context.time not in ALLOWED_HOURS.get(user.role, ALL):</p>
 <br>
+<p>return DENY</p>
 <br>
-<p>        # Check authorization</p>
+<h1>Log the decision</h1>
 <br>
-<p>        if not has_permission(user, resource):</p>
+<p>audit.log_access_granted(user, resource, context)</p>
 <br>
-<p>            return DENY</p>
+<p>return ALLOW</p>
 <br>
+<p>Microsegmentation </p>
 <br>
+<p>Microsegmentation divides the network into isolated zones, limiting lateral movement. </p>
 <br>
-<p>        # Check context</p>
+<p>Kubernetes Network Policies </p>
 <br>
-<p>        if context.location not in ALLOWED_REGIONS:</p>
+<p>apiVersion: networking.k8s.io/v1</p>
 <br>
-<p>            return DENY</p>
+<p>kind: NetworkPolicy</p>
 <br>
-<p>        if context.time not in ALLOWED_HOURS.get(user.role, ALL):</p>
+<p>metadata:</p>
 <br>
-<p>            return DENY</p>
+<p>name: api-service-policy</p>
 <br>
+<p>spec:</p>
 <br>
+<p>podSelector:</p>
 <br>
-<p>        # Log the decision</p>
+<p>matchLabels:</p>
 <br>
-<p>        audit.log_access_granted(user, resource, context)</p>
+<p>app: api-service</p>
 <br>
-<p>        return ALLOW</p>
+<p>policyTypes:</p>
 <br>
+<p>\- Ingress</p>
 <br>
+<p>\- Egress</p>
 <br>
+<p>ingress:</p>
 <br>
-<p>Microsegmentation   </p>
-<p>Microsegmentation divides the network into isolated zones, limiting lateral movement.   </p>
-<p>Kubernetes Network Policies   </p>
+<p>\- from:</p>
 <br>
+<p>\- podSelector:</p>
 <br>
+<p>matchLabels:</p>
 <br>
-<p>    apiVersion: networking.k8s.io/v1</p>
+<p>role: gateway</p>
 <br>
-<p>    kind: NetworkPolicy</p>
+<p>ports:</p>
 <br>
-<p>    metadata:</p>
+<p>\- protocol: TCP</p>
 <br>
-<p>      name: api-service-policy</p>
+<p>port: 8080</p>
 <br>
-<p>    spec:</p>
+<p>egress:</p>
 <br>
-<p>      podSelector:</p>
+<p>\- to:</p>
 <br>
-<p>        matchLabels:</p>
+<p>\- podSelector:</p>
 <br>
-<p>          app: api-service</p>
+<p>matchLabels:</p>
 <br>
-<p>      policyTypes:</p>
+<p>app: database</p>
 <br>
-<p>        - Ingress</p>
+<p>ports:</p>
 <br>
-<p>        - Egress</p>
+<p>\- protocol: TCP</p>
 <br>
-<p>      ingress:</p>
+<p>port: 5432</p>
 <br>
-<p>        - from:</p>
+<p>\- to:</p>
 <br>
-<p>            - podSelector:</p>
+<p>\- podSelector:</p>
 <br>
-<p>                matchLabels:</p>
+<p>matchLabels:</p>
 <br>
-<p>                  role: gateway</p>
+<p>app: redis</p>
 <br>
-<p>          ports:</p>
+<p>ports:</p>
 <br>
-<p>            - protocol: TCP</p>
+<p>\- protocol: TCP</p>
 <br>
-<p>              port: 8080</p>
+<p>port: 6379</p>
 <br>
-<p>      egress:</p>
+<p>\- to:</p>
 <br>
-<p>        - to:</p>
+<p>\- namespaceSelector:</p>
 <br>
-<p>            - podSelector:</p>
+<p>matchLabels:</p>
 <br>
-<p>                matchLabels:</p>
+<p>name: monitoring</p>
 <br>
-<p>                  app: database</p>
+<p>ports:</p>
 <br>
-<p>          ports:</p>
+<p>\- protocol: TCP</p>
 <br>
-<p>            - protocol: TCP</p>
+<p>port: 4318</p>
 <br>
-<p>              port: 5432</p>
+<p>Service-to-Service mTLS </p>
 <br>
-<p>        - to:</p>
+<h1>Istio PeerAuthentication for mTLS</h1>
 <br>
-<p>            - podSelector:</p>
+<p>apiVersion: security.istio.io/v1beta1</p>
 <br>
-<p>                matchLabels:</p>
+<p>kind: PeerAuthentication</p>
 <br>
-<p>                  app: redis</p>
+<p>metadata:</p>
 <br>
-<p>          ports:</p>
+<p>name: default</p>
 <br>
-<p>            - protocol: TCP</p>
+<p>namespace: production</p>
 <br>
-<p>              port: 6379</p>
+<p>spec:</p>
 <br>
-<p>        - to:</p>
+<p>mtls:</p>
 <br>
-<p>            - namespaceSelector:</p>
+<p>mode: STRICT</p>
 <br>
-<p>                matchLabels:</p>
+<p>\---</p>
 <br>
-<p>                  name: monitoring</p>
+<h1>Authorization policy</h1>
 <br>
-<p>          ports:</p>
+<p>apiVersion: security.istio.io/v1beta1</p>
 <br>
-<p>            - protocol: TCP</p>
+<p>kind: AuthorizationPolicy</p>
 <br>
-<p>              port: 4318</p>
+<p>metadata:</p>
 <br>
+<p>name: api-policy</p>
 <br>
+<p>spec:</p>
 <br>
+<p>selector:</p>
 <br>
-<p>Service-to-Service mTLS   </p>
+<p>matchLabels:</p>
 <br>
+<p>app: api</p>
 <br>
+<p>action: ALLOW</p>
 <br>
-<p>    # Istio PeerAuthentication for mTLS</p>
+<p>rules:</p>
 <br>
-<p>    apiVersion: security.istio.io/v1beta1</p>
+<p>\- from:</p>
 <br>
-<p>    kind: PeerAuthentication</p>
+<p>\- source:</p>
 <br>
-<p>    metadata:</p>
+<p>principals:</p>
 <br>
-<p>      name: default</p>
+<p>\- "cluster.local/ns/production/sa/gateway"</p>
 <br>
-<p>      namespace: production</p>
+<p>to:</p>
 <br>
-<p>    spec:</p>
+<p>\- operation:</p>
 <br>
-<p>      mtls:</p>
+<p>methods: ["GET"]</p>
 <br>
-<p>        mode: STRICT</p>
+<p>paths: ["/api/*"]</p>
 <br>
-<p>    ---</p>
+<p>Just-in-Time Access </p>
 <br>
-<p>    # Authorization policy</p>
+<p>Replace standing privileges with time-bound, request-based access: </p>
 <br>
-<p>    apiVersion: security.istio.io/v1beta1</p>
+<p>import boto3</p>
 <br>
-<p>    kind: AuthorizationPolicy</p>
+<p>from datetime import datetime, timedelta</p>
 <br>
-<p>    metadata:</p>
+<p>def request_elevated_access(user_id, reason, duration_minutes=60):</p>
 <br>
-<p>      name: api-policy</p>
+<p>"""Request temporary privileged access."""</p>
 <br>
-<p>    spec:</p>
+<h1>Record the request</h1>
 <br>
-<p>      selector:</p>
+<p>ticket = create_access_ticket(</p>
 <br>
-<p>        matchLabels:</p>
+<p>user_id=user_id,</p>
 <br>
-<p>          app: api</p>
+<p>reason=reason,</p>
 <br>
-<p>      action: ALLOW</p>
+<p>duration=duration_minutes,</p>
 <br>
-<p>      rules:</p>
+<p>approved_by=current_approver</p>
 <br>
-<p>        - from:</p>
+<p>)</p>
 <br>
-<p>            - source:</p>
+<h1>Grant time-bound IAM role</h1>
 <br>
-<p>                principals:</p>
+<p>sts = boto3.client('sts')</p>
 <br>
-<p>                  - "cluster.local/ns/production/sa/gateway"</p>
+<p>credentials = sts.assume_role(</p>
 <br>
-<p>          to:</p>
+<p>RoleArn='arn:aws:iam::123456789:role/Admin-JIT',</p>
 <br>
-<p>            - operation:</p>
+<p>RoleSessionName=f'{user_id}-{ticket.id}',</p>
 <br>
-<p>                methods: ["GET"]</p>
+<p>DurationSeconds=duration_minutes * 60</p>
 <br>
-<p>                paths: ["/api/*"]</p>
+<p>)</p>
 <br>
+<h1>Schedule automatic revocation</h1>
 <br>
+<p>schedule_revocation(ticket.id, duration_minutes)</p>
 <br>
+<p>return credentials</p>
 <br>
-<p>Just-in-Time Access   </p>
-<p>Replace standing privileges with time-bound, request-based access:   </p>
+<p>Continuous Monitoring </p>
 <br>
+<p>Zero Trust requires real-time visibility into all traffic: </p>
 <br>
+<p>| Data Source | What to Monitor | Detection | |-------------|-----------------|-----------| | Authentication | Login patterns, MFA failures | Impossible travel, brute force | | Network flows | East-west traffic | Lateral movement | | API calls | Unusual patterns, new endpoints | Data exfiltration | | DNS | Unusual domain queries | C2 communication | | Cloud API | Resource creation, IAM changes | Privilege escalation | </p>
 <br>
-<p>    import boto3</p>
+<p>Implementation Roadmap </p>
 <br>
-<p>    from datetime import datetime, timedelta</p>
-<br>
-<br>
-<br>
-<p>    def request_elevated_access(user_id, reason, duration_minutes=60):</p>
-<br>
-<p>        """Request temporary privileged access."""</p>
-<br>
-<p>        # Record the request</p>
-<br>
-<p>        ticket = create_access_ticket(</p>
-<br>
-<p>            user_id=user_id,</p>
-<br>
-<p>            reason=reason,</p>
-<br>
-<p>            duration=duration_minutes,</p>
-<br>
-<p>            approved_by=current_approver</p>
-<br>
-<p>        )</p>
-<br>
-<br>
-<br>
-<p>        # Grant time-bound IAM role</p>
-<br>
-<p>        sts = boto3.client('sts')</p>
-<br>
-<p>        credentials = sts.assume_role(</p>
-<br>
-<p>            RoleArn='arn:aws:iam::123456789:role/Admin-JIT',</p>
-<br>
-<p>            RoleSessionName=f'{user_id}-{ticket.id}',</p>
-<br>
-<p>            DurationSeconds=duration_minutes * 60</p>
-<br>
-<p>        )</p>
-<br>
-<br>
-<br>
-<p>        # Schedule automatic revocation</p>
-<br>
-<p>        schedule_revocation(ticket.id, duration_minutes)</p>
-<br>
-<p>        return credentials</p>
-<br>
-<br>
-<br>
-<br>
-<p>Continuous Monitoring   </p>
-<p>Zero Trust requires real-time visibility into all traffic:   </p>
-<p>| Data Source | What to Monitor | Detection | |-------------|-----------------|-----------| | Authentication | Login patterns, MFA failures | Impossible travel, brute force | | Network flows | East-west traffic | Lateral movement | | API calls | Unusual patterns, new endpoints | Data exfiltration | | DNS | Unusual domain queries | C2 communication | | Cloud API | Resource creation, IAM changes | Privilege escalation |   </p>
-<p>Implementation Roadmap   </p>
-<p>Phase 1: Foundation   </p>
+<p>Phase 1: Foundation </p>
 <br>
 <p>* Enable MFA for all users</p>
-<p>2\. Implement SSO with OAuth 2.0 / OIDC 3\. Deploy endpoint detection and response (EDR) 4\. Enforce HTTPS everywhere   </p>
-<p>Phase 2: Access Control   </p>
+<br>
+<p>2\\. Implement SSO with OAuth 2.0 / OIDC 3\\. Deploy endpoint detection and response (EDR) 4\\. Enforce HTTPS everywhere </p>
+<br>
+<p>Phase 2: Access Control </p>
 <br>
 <p>* Implement RBAC/ABAC</p>
-<p>2\. Deploy identity-aware proxy for internal apps 3\. Enable service mesh with mTLS 4\. Implement just-in-time access for admin roles   </p>
-<p>Phase 3: Segmentation   </p>
+<br>
+<p>2\\. Deploy identity-aware proxy for internal apps 3\\. Enable service mesh with mTLS 4\\. Implement just-in-time access for admin roles </p>
+<br>
+<p>Phase 3: Segmentation </p>
 <br>
 <p>* Apply network policies in Kubernetes</p>
-<p>2\. Implement firewall rules between VPCs 3\. Deploy API gateway with WAF 4\. Restrict egress traffic by policy   </p>
-<p>Phase 4: Verification   </p>
+<br>
+<p>2\\. Implement firewall rules between VPCs 3\\. Deploy API gateway with WAF 4\\. Restrict egress traffic by policy </p>
+<br>
+<p>Phase 4: Verification </p>
 <br>
 <p>* Continuous compliance scanning</p>
-<p>2\. User and entity behavior analytics (UEBA) 3\. Automated incident response 4\. Regular red team exercises   </p>
-<p>Common Pitfalls   </p>
+<br>
+<p>2\\. User and entity behavior analytics (UEBA) 3\\. Automated incident response 4\\. Regular red team exercises </p>
+<br>
+<p>Common Pitfalls </p>
 <br>
 <p>* **All-or-nothing approach**: Zero Trust is incremental. Start with the most critical assets.</p>
+<br>
 <p>* **Ignoring legacy systems**: Some systems cannot support mTLS or modern auth. Use sidecars or wrappers.</p>
+<br>
 <p>* **Operational complexity**: Granular policies require maintenance. Automate policy management.</p>
+<br>
 <p>* **Poor user experience**: Overly aggressive verification frustrates users. Balance security with usability.</p>
 <br>
-<p>Summary   </p>
+<p>Summary </p>
+<br>
 <p>Zero Trust replaces implicit trust with explicit, continuous verification. For startups, implementing Zero Trust incrementally starting with identity-based access and microsegmentation provides immediate security improvements without requiring a complete infrastructure overhaul. Focus on the highest-value assets first, automate policy management, and use just-in-time access to minimize standing privileges.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

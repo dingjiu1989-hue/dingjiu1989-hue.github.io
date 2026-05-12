@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/git-advanced-techniques.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Advanced Git Techniques for Developers">
     <meta name="twitter:description" content="Master advanced Git: interactive rebase, bisect, worktree, submodules, and reflog for complex workflows.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/git-advanced-techniques.png">
     <title>Advanced Git Techniques for Developers — SourceHub</title>
     <meta name="description" content="Master advanced Git: interactive rebase, bisect, worktree, submodules, and reflog for complex workflows.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,15 +38,15 @@
       "@type": "Article",
       "headline": "Advanced Git Techniques for Developers",
       "description": "Master advanced Git: interactive rebase, bisect, worktree, submodules, and reflog for complex workflows.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/git-advanced-techniques.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "492",
+      "wordCount": "300",
       "keywords": "Technology, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/git-advanced-techniques.html"},
-      "articleBody": "Advanced Git Techniques for Developers Git powers modern software development, but most developers only use a fraction of its capabilities. Advanced Git techniques save time and solve complex version control problems. Interactive Rebase Interactive rebase (git rebase -i) rewrites commit history by squashing, reordering, or editing commits. Use it to clean up messy history before merging. Common operations: squash fixup commits, reorder commits for logical progression, edit commit messages, and split large commits. Interactive rebase rewrites history. Never rebase commits that have been pushed to a shared branch. Use rebase on feature branches before merging to main. Git Bisect Git bisect finds the commit that introduced a bug through binary search. Start with git bisect start, mark the current commit as bad (git bisect bad), mark a known-good commit as good (git bisect good ). Git checks out the midpoint commit. Test it and mark as good or bad. Repeat until Git identifies the first bad commit. Automate bisect with git bisect run . The script returns 0 for good commits and non-0 for bad commits. This runs the binary search automatically. Git Worktree Git worktree checks out multiple branches simultaneously. Each worktree is a separate working directory connected to the same repository. Use worktrees to work on multiple features without stashing changes or creating clones. Worktrees are useful for reviewing pull requests, running parallel builds, and switching context without losing state. Add a worktree with git worktree add ../path branch-name. Reflog The reflog records every HEAD change in your local repository. Recover lost commits, restore deleted branches, and undo rebase mistakes. Run git reflog to see the history of WHERE HEAD has been. If you accidentally reset --hard or rebase the wrong way, the reflog saves you. Find the commit before the mistake and use git reset --hard HEAD@{n} or git checkout . Submodules Git submodules include one repository within another. Submodules track a specific commit of the external repository. This pins dependencies to known versions. Update submodules with git submodule update --remote. Initialize a repository with submodules using git clone --recurse-submodules."
+      "articleBody": "Advanced Git Techniques for Developers Advanced Git Techniques for Developers Git powers modern software development, but most developers only use a fraction of its capabilities. Advanced Git techniques save time and solve complex version control problems. Interactive Rebase Interactive rebase (git rebase -i) rewrites commit history by squashing, reordering, or editing commits. Use it to clean up messy history before merging. Common operations: squash fixup commits, reorder commits for logical progression, edit commit messages, and split large commits. Interactive rebase rewrites history. Never rebase commits that have been pushed to a shared branch. Use rebase on feature branches before merging to main. Git Bisect Git bisect finds the commit that introduced a bug through binary search. Start with git bisect start, mark the current commit as bad (git bisect bad), mark a known-good commit as good (git bisect good ). Git checks out the midpoint commit. Test it and mark as good or bad. Repeat until Git identifies the first bad commit. Automate bisect with git bisect run"
     }
     </script>
     <script type="application/ld+json">
@@ -75,36 +75,24 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Advanced Git Techniques for Developers</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/git-advanced-techniques.png" alt="Advanced Git Techniques for Developers" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Advanced Git Techniques for Developers</h1>
+<br>
+<h1>Advanced Git Techniques for Developers</h1>
+<br>
 <p>Git powers modern software development, but most developers only use a fraction of its capabilities. Advanced Git techniques save time and solve complex version control problems.</p>
 <br>
-<h2> Interactive Rebase</h2>
+<h2>  Interactive Rebase</h2>
 <br>
 <p>Interactive rebase (git rebase -i) rewrites commit history by squashing, reordering, or editing commits. Use it to clean up messy history before merging. Common operations: squash fixup commits, reorder commits for logical progression, edit commit messages, and split large commits.</p>
 <br>
 <p>Interactive rebase rewrites history. Never rebase commits that have been pushed to a shared branch. Use rebase on feature branches before merging to main.</p>
 <br>
-<h2> Git Bisect</h2>
+<h2>  Git Bisect</h2>
 <br>
-<p>Git bisect finds the commit that introduced a bug through binary search. Start with git bisect start, mark the current commit as bad (git bisect bad), mark a known-good commit as good (git bisect good <commit>). Git checks out the midpoint commit. Test it and mark as good or bad. Repeat until Git identifies the first bad commit.</p>
+<p>Git bisect finds the commit that introduced a bug through binary search. Start with git bisect start, mark the current commit as bad (git bisect bad), mark a known-good commit as good (git bisect good ). Git checks out the midpoint commit. Test it and mark as good or bad. Repeat until Git identifies the first bad commit.</p>
 <br>
-<p>Automate bisect with git bisect run <script>. The script returns 0 for good commits and non-0 for bad commits. This runs the binary search automatically.</p>
-<br>
-<h2> Git Worktree</h2>
-<br>
-<p>Git worktree checks out multiple branches simultaneously. Each worktree is a separate working directory connected to the same repository. Use worktrees to work on multiple features without stashing changes or creating clones.</p>
-<br>
-<p>Worktrees are useful for reviewing pull requests, running parallel builds, and switching context without losing state. Add a worktree with git worktree add ../path branch-name.</p>
-<br>
-<h2> Reflog</h2>
-<br>
-<p>The reflog records every HEAD change in your local repository. Recover lost commits, restore deleted branches, and undo rebase mistakes. Run git reflog to see the history of WHERE HEAD has been.</p>
-<br>
-<p>If you accidentally reset --hard or rebase the wrong way, the reflog saves you. Find the commit before the mistake and use git reset --hard HEAD@{n} or git checkout <sha>.</p>
-<br>
-<h2> Submodules</h2>
-<br>
-<p>Git submodules include one repository within another. Submodules track a specific commit of the external repository. This pins dependencies to known versions. Update submodules with git submodule update --remote. Initialize a repository with submodules using git clone --recurse-submodules.</p></div>
+<p>Automate bisect with git bisect run</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

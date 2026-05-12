@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/agent-memory-systems.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory">
     <meta name="twitter:description" content="Design memory systems for AI agents inspired by cognitive architecture: short-term working memory, long-term storage, episodic experiences, and semantic knowled">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/agent-memory-systems.png">
     <title>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory — SourceHub</title>
     <meta name="description" content="Design memory systems for AI agents inspired by cognitive architecture: short-term working memory, long-term storage, episodic experiences, and semantic knowled">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory",
       "description": "Design memory systems for AI agents inspired by cognitive architecture: short-term working memory, long-term storage, episodic experiences, and semantic knowled",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/agent-memory-systems.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2563",
+      "wordCount": "2436",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,34 +75,20 @@
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/agent-memory-systems.png" alt="Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Memory is what separates stateless LLM calls from true autonomous agents. Without memory, an agent cannot learn from past interactions, maintain context across sessions, or build a model of the world. Drawing from cognitive science, agent memory can be structured into four types: short-term (working memory), long-term (persistent storage), episodic (specific experiences), and semantic (general knowledge).</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Short-Term Memory (Working Memory)</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Short-term memory holds the current conversation context and immediate state:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from collections import deque</p>
 <br>
 <p>    from typing import Any</p>
-<br>
-<br>
 <br>
 <p>    class ShortTermMemory:</p>
 <br>
@@ -114,15 +100,11 @@
 <br>
 <p>            self.current_tokens = 0</p>
 <br>
-<br>
-<br>
 <p>        def add(self, role: str, content: str):</p>
 <br>
 <p>            message = {"role": role, "content": content}</p>
 <br>
 <p>            estimated_tokens = len(content.split()) * 1.3</p>
-<br>
-<br>
 <br>
 <p>            # Evict oldest messages when over token limit</p>
 <br>
@@ -132,19 +114,13 @@
 <br>
 <p>                self.current_tokens -= len(removed["content"].split()) * 1.3</p>
 <br>
-<br>
-<br>
 <p>            self.messages.append(message)</p>
 <br>
 <p>            self.current_tokens += estimated_tokens</p>
 <br>
-<br>
-<br>
 <p>        def get_context(self) -> list[dict]:</p>
 <br>
 <p>            return list(self.messages)</p>
-<br>
-<br>
 <br>
 <p>        def summarize_and_compress(self, llm_fn) -> str:</p>
 <br>
@@ -162,29 +138,15 @@
 <br>
 <p>            return ""</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Long-Term Memory</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Long-term memory persists across sessions and is typically backed by a vector store:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    import uuid</p>
 <br>
 <p>    from datetime import datetime</p>
 <br>
 <p>    import numpy as np</p>
-<br>
-<br>
 <br>
 <p>    class LongTermMemory:</p>
 <br>
@@ -196,8 +158,6 @@
 <br>
 <p>            self.collection = "agent_memory"</p>
 <br>
-<br>
-<br>
 <p>        def remember(self, content: str, importance: float = 0.5, metadata: dict = None):</p>
 <br>
 <p>            """Store a memory with importance score for selective recall."""</p>
@@ -205,8 +165,6 @@
 <p>            memory_id = str(uuid.uuid4())</p>
 <br>
 <p>            embedding = self.embedding_fn(content)</p>
-<br>
-<br>
 <br>
 <p>            self.vector_store.add(</p>
 <br>
@@ -230,8 +188,6 @@
 <br>
 <p>            return memory_id</p>
 <br>
-<br>
-<br>
 <p>        def recall(self, query: str, k: int = 5, min_importance: float = 0.0) -> list[dict]:</p>
 <br>
 <p>            """Retrieve the most relevant memories."""</p>
@@ -247,8 +203,6 @@
 <p>                where={"importance": {"$gte": min_importance}},</p>
 <br>
 <p>            )</p>
-<br>
-<br>
 <br>
 <p>            memories = []</p>
 <br>
@@ -272,15 +226,11 @@
 <br>
 <p>            return memories</p>
 <br>
-<br>
-<br>
 <p>        def forget(self, memory_id: str):</p>
 <br>
 <p>            """Delete a specific memory."""</p>
 <br>
 <p>            self.vector_store.delete(ids=[memory_id])</p>
-<br>
-<br>
 <br>
 <p>        def consolidate(self, llm_fn):</p>
 <br>
@@ -292,21 +242,9 @@
 <br>
 <p>            # This runs as a background task</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Episodic Memory</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Episodic memory stores specific experiences: what happened, when, and what the outcome was:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    @dataclass</p>
 <br>
@@ -326,15 +264,11 @@
 <br>
 <p>        context: dict</p>
 <br>
-<br>
-<br>
 <p>    class EpisodicMemory:</p>
 <br>
 <p>        def __init__(self, storage_backend):</p>
 <br>
 <p>            self.storage = storage_backend</p>
-<br>
-<br>
 <br>
 <p>        def record_episode(self, task: str, actions: list, outcome: str, reward: float):</p>
 <br>
@@ -360,8 +294,6 @@
 <br>
 <p>            return episode.id</p>
 <br>
-<br>
-<br>
 <p>        def retrieve_similar_episodes(self, task: str, k: int = 3) -> list[Episode]:</p>
 <br>
 <p>            """Find past episodes similar to the current task."""</p>
@@ -370,21 +302,15 @@
 <br>
 <p>            scored = []</p>
 <br>
-<br>
-<br>
 <p>            for ep in all_episodes:</p>
 <br>
 <p>                similarity = self._task_similarity(task, ep["task"])</p>
 <br>
 <p>                scored.append((ep, similarity))</p>
 <br>
-<br>
-<br>
 <p>            scored.sort(key=lambda x: x[1], reverse=True)</p>
 <br>
 <p>            return [Episode(**ep) for ep, _ in scored[:k]]</p>
-<br>
-<br>
 <br>
 <p>        def _task_similarity(self, task_a: str, task_b: str) -> float:</p>
 <br>
@@ -396,21 +322,9 @@
 <br>
 <p>            return cosine_similarity(emb_a, emb_b)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Semantic Memory</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Semantic memory stores factual knowledge extracted from experiences:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class SemanticMemory:</p>
 <br>
@@ -419,8 +333,6 @@
 <p>            self.facts: dict[str, list[dict]] = {}</p>
 <br>
 <p>            self.confidence_threshold = 0.7</p>
-<br>
-<br>
 <br>
 <p>        def add_fact(self, subject: str, predicate: str, object_: str, confidence: float):</p>
 <br>
@@ -440,8 +352,6 @@
 <br>
 <p>            })</p>
 <br>
-<br>
-<br>
 <p>        def query_fact(self, subject: str, predicate: str = None) -> list[str]:</p>
 <br>
 <p>            if subject not in self.facts:</p>
@@ -460,8 +370,6 @@
 <br>
 <p>            return results</p>
 <br>
-<br>
-<br>
 <p>        def extract_facts_from_experience(self, episode: Episode, llm_fn):</p>
 <br>
 <p>            """Extract general knowledge from a specific experience."""</p>
@@ -471,8 +379,6 @@
 <p>            Extract factual statements from this experience.</p>
 <br>
 <p>            Output as JSON array of {{"subject", "predicate", "object"}}.</p>
-<br>
-<br>
 <br>
 <p>            Task: {episode.task}</p>
 <br>
@@ -486,21 +392,9 @@
 <br>
 <p>                self.add_fact(fact["subject"], fact["predicate"], fact["object"], confidence=0.5)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Integrated Agent Memory</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Bring all four types together in a unified memory system:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class AgentMemory:</p>
 <br>
@@ -514,21 +408,15 @@
 <br>
 <p>            self.semantic = SemanticMemory()</p>
 <br>
-<br>
-<br>
 <p>        def build_prompt_context(self, query: str) -> str:</p>
 <br>
 <p>            context_parts = []</p>
-<br>
-<br>
 <br>
 <p>            # Recent conversation</p>
 <br>
 <p>            context_parts.append("=== Recent Context ===\n")</p>
 <br>
 <p>            context_parts.extend(self.short_term.get_context())</p>
-<br>
-<br>
 <br>
 <p>            # Relevant long-term memories</p>
 <br>
@@ -539,8 +427,6 @@
 <p>                context_parts.append("\n=== Related Memories ===\n")</p>
 <br>
 <p>                context_parts.extend([m["content"] for m in memories])</p>
-<br>
-<br>
 <br>
 <p>            # Similar past episodes</p>
 <br>
@@ -553,8 +439,6 @@
 <p>                for ep in episodes:</p>
 <br>
 <p>                    context_parts.append(f"Task: {ep.task}, Outcome: {ep.outcome}")</p>
-<br>
-<br>
 <br>
 <p>            # Relevant semantic facts</p>
 <br>
@@ -570,19 +454,9 @@
 <br>
 <p>                    context_parts.extend(facts)</p>
 <br>
-<br>
-<br>
 <p>            return "\n".join(context_parts)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Agent memory systems mirror human cognitive architecture. Short-term memory maintains immediate conversation context with token-aware eviction. Long-term memory persistently stores important information with vector-based retrieval. Episodic memory records specific experiences for future reference. Semantic memory extracts and stores general knowledge from experiences. An integrated memory system combines all four types, giving agents both the immediate context and the accumulated wisdom needed for complex, long-running tasks.</p></div>
     </article>

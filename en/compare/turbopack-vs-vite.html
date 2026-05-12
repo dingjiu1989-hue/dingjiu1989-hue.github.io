@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/compare/turbopack-vs-vite.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Turbopack vs Vite">
     <meta name="twitter:description" content="Compare Turbopack and Vite for JavaScript bundling — speed, features, ecosystem compatibility, and which build tool to choose for your project.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/compare/turbopack-vs-vite.png">
     <title>Turbopack vs Vite — SourceHub</title>
     <meta name="description" content="Compare Turbopack and Vite for JavaScript bundling — speed, features, ecosystem compatibility, and which build tool to choose for your project.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,14 +38,17 @@
       "@type": "Article",
       "headline": "Turbopack vs Vite",
       "description": "Compare Turbopack and Vite for JavaScript bundling — speed, features, ecosystem compatibility, and which build tool to choose for your project.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/compare/turbopack-vs-vite.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1531",
+      "wordCount": "1428",
       "keywords": "Comparison, Technology",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/compare/turbopack-vs-vite.html"},
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/turbopack-vs-vite-1c97"
+      ],
       "articleBody": "Turbopack vs Vite Introduction Turbopack and Vite are the two leading next-generation JavaScript build tools. Both promise dramatically faster development servers and build times compared to webpack, but they take different approaches. Vite, built on esbuild and Rollup, has been production-ready since 2021. Turbopack, built in Rust and created by the Vercel team, is newer and tightly integrated with Next.js. This comparison covers their architectures, performance, and ecosystem compatibility. Architecture Vite: esbuild + Rollup Vite uses a two-tier architecture: * **Development**: esbuild pre-bundles dependencies and serves ESM natively via the browser * **Production**: Rollup handles the final build for maximum compatibility and tree-shaking // vite.config.js import { defineConfig } from \"vite\"; import react from \"@vitejs/plugin-react\"; export default defineConfig({ plugins: [react()], build: { rollupOptions: { output: { manualChunks: { vendor: [\"react\", \"react-dom\"], }, }, }, }, }); **Strengths:** * Mature and battle-tested in production since 2021 * Extensive plugin ecosystem (hundreds of plugins) * Framework-agnostic (React, Vue, Svelte, Solid, Lit, vanilla JS) * Instant HMR through native ESM **Weaknesses:** * Two different bundlers for dev and production (potential inconsistencies) * esbuild's extensibility is limited compared to Rollup * Large monorepos can experience slowdowns Turbopack: Rust-Based Turbopack is built in Rust for maximum performance: * **Incremental computation**: Only recomputes what changed * **Function-level caching**: Individual module functions are cached, not entire files * **Parallel processing**: Leverages all CPU cores efficiently // next.config.js module.exports = { experimental: { turbo: { rules: { \"*.svg\": [\"@svgr/webpack\"], }, }, }, }; **Strengths:** * Fastest cold start times (Rust compilation) * Incremental computation means subsequent builds are near-instant * Deep Next.js integration (App Router, Server Components) * Function-level caching for extreme performance **Weaknesses:** * Currently limited to Next.js ecosystem * Fewer community plugins than Vite * Newer and less battle-tested * Documentation is still maturing Performance Benchmarks In real-world projects, benchmarks show: | Operation | Vite | Turbopack | |-----------|------|-----------| | Cold start (small app) | ~200ms | ~100ms | | Cold start (large app) | ~2-5s | ~500ms-2s | | HMR update | ~10-50ms | ~5-30ms | | Production build (small) | ~2s | N/A (Next.js only) | | Production build (large) | ~30-60s | N/A (Next.js only) | Turbopack is faster in cold start scenarios due to Rust's compilation speed. HMR speeds are comparable for most practical purposes. Plugin Ecosystem **Vite** has the richest plugin ecosystem, with hundreds of plugins available. Many Rollup plugins are compatible with Vite's production build. Popular plugins include: * @vitejs/plugin-react (Fast Refresh) * @vitejs/plugin-vue (SFC compilation) * unplugin-auto-import (auto-import APIs) * vite-plugin-pwa (Progressive Web Apps) * vite-plugin-svg-icons **Turbopack** has a growing but limited plugin system. In 2026, Turbopack supports webpack loaders for compatibility, but the native plugin API is still evolving. Most plugins in the Next.js ecosystem work through webpack compatibility rather than native Turbopack plugins. Framework Support **Vite** is framework-agnostic. It works out of the box with: * React (via create-vite with react template) * Vue (Vue's official build tool is Vite-based) * Svelte (SvelteKit uses Vite) * Solid (SolidStart uses Vite) * Lit, Preact, Qwik, vanilla JS **Turbopack** is primarily a Next.js tool. While it technically works with any Node.js application, its optimizations and features are designed for Next.js. Third-party framework integration is not a priority. Development Server Features Both tools offer excellent development experiences: | Feature | Vite | Turbopack | |---------|------|-----------| | HMR | Instant (ESM-based) | Near-instant | | CSS/SCSS | Built-in | Built-in | | TypeScript | Transpilation (no type-checking) | Transpilation (no type-checking) | | Image import | Built-in | Built-in | | Asset URL handling | Built-in | Built-in | | Proxy | Built-in dev server proxy | Built-in Next.js rewrites | | HTTPS | Built-in | Built-in | Migration Path **Moving to Vite** from webpack: Use `vite-plugin-webpack` for gradual migration, or rewrite the config (most webpack configs translate directly). Community migration guides exist for CRA, Vue CLI, and Svelte. **Moving to Turbopack**: Enable in Next.js with `--turbo` flag. Most webpack loaders work via compatibility. Some webpack-specific plugins may need alternatives. When to Choose What **Choose Vite when:** * You're building a non-Next.js project (Vue, Svelte, vanilla JS) * You need the largest plugin ecosystem * You want a mature, production-proven tool * You're building a library (Vite's library mode is excellent) * You want framework-agnostic tooling **Choose Turbopack when:** * You're using Next.js (it's the default recommendation) * You need the fastest possible cold start in large monorepos * You want tight integration with Next.js features (RSC, App Router) * You're building on Vercel's infrastructure Conclusion Vite and Turbopack serve different ecosystems. Vite is the mature, universal build tool that works with any framework. Turbopack is the cutting-edge, React-optimized bundler that excels within the Next.js ecosystem. For Next.js projects, Turbopack is the natural choice. For everything else \u2014 Vue, Svelte, Solid, libraries, or vanilla JS \u2014 Vite offers a richer ecosystem and more proven track record. Both are excellent tools that make webpack-era bundling seem archaic."
     }
     </script>
@@ -74,45 +77,27 @@
         <span class="tag-cat">Technology</span></div>
       <h1 class="article-title">Turbopack vs Vite</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/compare/turbopack-vs-vite.png" alt="Turbopack vs Vite" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Turbopack vs Vite</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Turbopack and Vite are the two leading next-generation JavaScript build tools. Both promise dramatically faster development servers and build times compared to webpack, but they take different approaches. Vite, built on esbuild and Rollup, has been production-ready since 2021. Turbopack, built in Rust and created by the Vercel team, is newer and tightly integrated with Next.js. This comparison covers their architectures, performance, and ecosystem compatibility.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Architecture</h2>
 <br>
-<br>
-<br>
-<br>
 <h3>Vite: esbuild + Rollup</h3>
-<br>
-<br>
-<br>
 <br>
 <p>Vite uses a two-tier architecture:</p>
 <br>
-<br>
-<br>
 <p>* **Development**: esbuild pre-bundles dependencies and serves ESM natively via the browser</p>
 <p>* **Production**: Rollup handles the final build for maximum compatibility and tree-shaking</p>
-<br>
-<br>
-<br>
 <br>
 <p>    // vite.config.js</p>
 <br>
 <p>    import { defineConfig } from "vite";</p>
 <br>
 <p>    import react from "@vitejs/plugin-react";</p>
-<br>
-<br>
 <br>
 <p>    export default defineConfig({</p>
 <br>
@@ -138,11 +123,6 @@
 <br>
 <p>    });</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Strengths:**</p>
 <br>
 <p>* Mature and battle-tested in production since 2021</p>
@@ -150,31 +130,19 @@
 <p>* Framework-agnostic (React, Vue, Svelte, Solid, Lit, vanilla JS)</p>
 <p>* Instant HMR through native ESM</p>
 <br>
-<br>
-<br>
 <p>**Weaknesses:**</p>
 <br>
 <p>* Two different bundlers for dev and production (potential inconsistencies)</p>
 <p>* esbuild's extensibility is limited compared to Rollup</p>
 <p>* Large monorepos can experience slowdowns</p>
 <br>
-<br>
-<br>
 <h3>Turbopack: Rust-Based</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Turbopack is built in Rust for maximum performance:</p>
-<br>
-<br>
 <br>
 <p>* **Incremental computation**: Only recomputes what changed</p>
 <p>* **Function-level caching**: Individual module functions are cached, not entire files</p>
 <p>* **Parallel processing**: Leverages all CPU cores efficiently</p>
-<br>
-<br>
-<br>
 <br>
 <p>    // next.config.js</p>
 <br>
@@ -196,19 +164,12 @@
 <br>
 <p>    };</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Strengths:**</p>
 <br>
 <p>* Fastest cold start times (Rust compilation)</p>
 <p>* Incremental computation means subsequent builds are near-instant</p>
 <p>* Deep Next.js integration (App Router, Server Components)</p>
 <p>* Function-level caching for extreme performance</p>
-<br>
-<br>
 <br>
 <p>**Weaknesses:**</p>
 <br>
@@ -217,17 +178,9 @@
 <p>* Newer and less battle-tested</p>
 <p>* Documentation is still maturing</p>
 <br>
-<br>
-<br>
 <h2>  Performance Benchmarks</h2>
 <br>
-<br>
-<br>
-<br>
 <p>In real-world projects, benchmarks show:</p>
-<br>
-<br>
-<br>
 <br>
 <p>| Operation | Vite | Turbopack |</p>
 <br>
@@ -243,22 +196,11 @@
 <br>
 <p>| Production build (large) | ~30-60s | N/A (Next.js only) |</p>
 <br>
-<br>
-<br>
-<br>
 <p>Turbopack is faster in cold start scenarios due to Rust's compilation speed. HMR speeds are comparable for most practical purposes.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Plugin Ecosystem</h2>
 <br>
-<br>
-<br>
-<br>
 <p>**Vite** has the richest plugin ecosystem, with hundreds of plugins available. Many Rollup plugins are compatible with Vite's production build. Popular plugins include:</p>
-<br>
-<br>
 <br>
 <p>* @vitejs/plugin-react (Fast Refresh)</p>
 <p>* @vitejs/plugin-vue (SFC compilation)</p>
@@ -266,17 +208,9 @@
 <p>* vite-plugin-pwa (Progressive Web Apps)</p>
 <p>* vite-plugin-svg-icons</p>
 <br>
-<br>
-<br>
 <p>**Turbopack** has a growing but limited plugin system. In 2026, Turbopack supports webpack loaders for compatibility, but the native plugin API is still evolving. Most plugins in the Next.js ecosystem work through webpack compatibility rather than native Turbopack plugins.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Framework Support</h2>
-<br>
-<br>
-<br>
 <br>
 <p>**Vite** is framework-agnostic. It works out of the box with:</p>
 <br>
@@ -286,22 +220,11 @@
 <p>* Solid (SolidStart uses Vite)</p>
 <p>* Lit, Preact, Qwik, vanilla JS</p>
 <br>
-<br>
-<br>
 <p>**Turbopack** is primarily a Next.js tool. While it technically works with any Node.js application, its optimizations and features are designed for Next.js. Third-party framework integration is not a priority.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Development Server Features</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Both tools offer excellent development experiences:</p>
-<br>
-<br>
-<br>
 <br>
 <p>| Feature | Vite | Turbopack |</p>
 <br>
@@ -321,28 +244,13 @@
 <br>
 <p>| HTTPS | Built-in | Built-in |</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Migration Path</h2>
-<br>
-<br>
-<br>
 <br>
 <p>**Moving to Vite** from webpack: Use `vite-plugin-webpack` for gradual migration, or rewrite the config (most webpack configs translate directly). Community migration guides exist for CRA, Vue CLI, and Svelte.</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Moving to Turbopack**: Enable in Next.js with `--turbo` flag. Most webpack loaders work via compatibility. Some webpack-specific plugins may need alternatives.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  When to Choose What</h2>
-<br>
-<br>
-<br>
 <br>
 <p>**Choose Vite when:**</p>
 <br>
@@ -352,8 +260,6 @@
 <p>* You're building a library (Vite's library mode is excellent)</p>
 <p>* You want framework-agnostic tooling</p>
 <br>
-<br>
-<br>
 <p>**Choose Turbopack when:**</p>
 <br>
 <p>* You're using Next.js (it's the default recommendation)</p>
@@ -361,12 +267,7 @@
 <p>* You want tight integration with Next.js features (RSC, App Router)</p>
 <p>* You're building on Vercel's infrastructure</p>
 <br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Vite and Turbopack serve different ecosystems. Vite is the mature, universal build tool that works with any framework. Turbopack is the cutting-edge, React-optimized bundler that excels within the Next.js ecosystem. For Next.js projects, Turbopack is the natural choice. For everything else — Vue, Svelte, Solid, libraries, or vanilla JS — Vite offers a richer ecosystem and more proven track record. Both are excellent tools that make webpack-era bundling seem archaic.</p></div>
     </article>

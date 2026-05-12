@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-cost-optimization.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering">
     <meta name="twitter:description" content="Learn database cost optimization strategies: right-sizing instances, reserved instances, storage tiering, serverless databases, and practical cost-saving techniques.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-cost-optimization.png">
     <title>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering — SourceHub</title>
     <meta name="description" content="Learn database cost optimization strategies: right-sizing instances, reserved instances, storage tiering, serverless databases, and practical cost-saving techniques.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering",
       "description": "Learn database cost optimization strategies: right-sizing instances, reserved instances, storage tiering, serverless databases, and practical cost-saving techniques.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-cost-optimization.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1609",
+      "wordCount": "1544",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-cost-optimization.png" alt="Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h1>
 <br>
 <p>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering   </p>
@@ -83,15 +84,11 @@
 <p>Over-provisioning is the most common cause of wasted database spend. Most teams provision for peak load and never scale down.   </p>
 <p>Measuring Utilization   </p>
 <br>
-<br>
-<br>
 <p>    -- CPU utilization (via pg_stat_statements)</p>
 <br>
 <p>    SELECT ROUND(AVG(extract(epoch FROM total_exec_time) / calls), 2) AS avg_query_time</p>
 <br>
 <p>    FROM pg_stat_statements;</p>
-<br>
-<br>
 <br>
 <p>    -- Connection utilization</p>
 <br>
@@ -102,8 +99,6 @@
 <p>    WHERE name = 'max_connections'</p>
 <br>
 <p>    GROUP BY setting;</p>
-<br>
-<br>
 <br>
 <p>    -- Disk IOPS</p>
 <br>
@@ -117,9 +112,6 @@
 <br>
 <p>    ORDER BY seq_scan DESC;</p>
 <br>
-<br>
-<br>
-<br>
 <p>In cloud environments, monitor CloudWatch (AWS), Azure Monitor, or GCP Cloud Monitoring metrics:   </p>
 <br>
 <p>* **CPU Utilization**: If consistently below 20%, downsize.</p>
@@ -129,13 +121,9 @@
 <br>
 <p>The Sizing Process   </p>
 <br>
-<br>
-<br>
 <p>    # Before: 8 vCPU, 32 GB RAM, 1000 GB gp2 ($700/month)</p>
 <br>
 <p>    # After monitoring for 2 weeks:</p>
-<br>
-<br>
 <br>
 <p>    # Peak CPU: 25%, average CPU: 12%</p>
 <br>
@@ -143,12 +131,7 @@
 <br>
 <p>    # Storage used: 120 GB</p>
 <br>
-<br>
-<br>
 <p>    # Optimized: 4 vCPU, 16 GB RAM, 150 GB gp3 ($200/month - 71% savings)</p>
-<br>
-<br>
-<br>
 <br>
 <p>Reserved Instances   </p>
 <p>Cloud providers offer significant discounts for committing to 1-year or 3-year terms:   </p>
@@ -161,24 +144,17 @@
 <p>Using Reserved Instances with Auto-Scaling   </p>
 <p>If you use read replicas that scale dynamically, consider a mixed strategy:   </p>
 <br>
-<br>
-<br>
 <p>    Production primary:  3-year reserved instance (60% savings)</p>
 <br>
 <p>    Read replicas (fixed): 1-year reserved (30% savings)</p>
 <br>
 <p>    Read replicas (auto-scaling): On-demand (flexibility premium)</p>
 <br>
-<br>
-<br>
-<br>
 <p>Storage Tiering   </p>
 <p>Different data needs different storage performance:   </p>
 <p>AWS RDS Storage Options   </p>
 <p>| Type | IOPS/GB | Max IOPS | Cost/GB/Month | Use Case | |------|---------|----------|---------------|----------| | gp2 | 3 baseline | 16,000 | $0.10 | Development, low-throughput workloads | | gp3 | 3,000 baseline | 16,000 | $0.08 | General purpose (cheaper than gp2) | | io1 | Provisioned | 256,000 | $0.125 + IOPS | High-throughput OLTP | | io2 | Provisioned | 256,000 | $0.125 + IOPS | Mission-critical, 99.999% durability |   </p>
 <p>Storage Tiering Strategy   </p>
-<br>
-<br>
 <br>
 <p>    -- Move historical data to cheaper storage</p>
 <br>
@@ -194,15 +170,11 @@
 <br>
 <p>    ) PARTITION BY RANGE (created_at);</p>
 <br>
-<br>
-<br>
 <p>    CREATE TABLE orders_current PARTITION OF orders</p>
 <br>
 <p>        FOR VALUES FROM ('2026-01-01') TO ('2027-01-01')</p>
 <br>
 <p>        TABLESPACE fast_ssd;</p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE orders_archive PARTITION OF orders</p>
 <br>
@@ -210,12 +182,7 @@
 <br>
 <p>        TABLESPACE cold_hdd;</p>
 <br>
-<br>
-<br>
-<br>
 <p>S3 Integration for Long-Term Storage   </p>
-<br>
-<br>
 <br>
 <p>    -- Using pg_export or custom archival to S3</p>
 <br>
@@ -231,24 +198,15 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
 <p>    DROP TABLE orders_archive;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Serverless Databases   </p>
 <p>Serverless databases (Aurora Serverless, Cloud SQL, Azure Serverless) scale compute automatically and charge only for usage:   </p>
 <p>Aurora Serverless v2   </p>
 <br>
-<br>
-<br>
 <p>    # Automatic scaling from 0.5 to 64 ACUs</p>
 <br>
 <p>    # 1 ACU = ~2 GB RAM, proportional CPU</p>
-<br>
-<br>
 <br>
 <p>    aurora:</p>
 <br>
@@ -266,15 +224,10 @@
 <br>
 <p>        auto_pause: true</p>
 <br>
-<br>
-<br>
-<br>
 <p>Cost scenarios:   </p>
 <p>| Workload | Traditional (db.r6g.large) | Serverless | |----------|---------------------------|------------| | 24/7 moderate | $170/month | $180/month (slightly more) | | Development (8 hours/day) | $170/month | $60/month (65% savings) | | Spiky/unpredictable | $340/month (over-provisioned) | $120/month (65% savings) |   </p>
 <p>Data Compression Savings   </p>
 <p>As discussed in the compression article, compression directly reduces storage costs:   </p>
-<br>
-<br>
 <br>
 <p>    -- Before: 200 GB table on gp3 ($16/month)</p>
 <br>
@@ -282,12 +235,7 @@
 <br>
 <p>    -- Savings: $11/month per table</p>
 <br>
-<br>
-<br>
 <p>    ALTER TABLE large_logs SET (compression = 'zstd');</p>
-<br>
-<br>
-<br>
 <br>
 <p>Practical Cost-Saving Checklist   </p>
 <br>
@@ -304,8 +252,6 @@
 <br>
 <p>Monitoring Cost Efficiency   </p>
 <br>
-<br>
-<br>
 <p>    -- Track wasted storage: dead tuples</p>
 <br>
 <p>    SELECT schemaname, tablename,</p>
@@ -316,12 +262,7 @@
 <br>
 <p>    ORDER BY wasted_bytes DESC;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Set up cloud cost budgets and alerts:   </p>
-<br>
-<br>
 <br>
 <p>    # AWS Budget example</p>
 <br>
@@ -331,12 +272,7 @@
 <br>
 <p>      --budget file://budget.json</p>
 <br>
-<br>
-<br>
 <p>    # Alert at 80% and 100% of monthly budget</p>
-<br>
-<br>
-<br>
 <br>
 <p>Database cost optimization is an ongoing practice, not a one-time project. Review your database costs quarterly, right-size based on actual usage patterns, and leverage cloud provider discounts for predictable workloads.</p></div>
     </article>

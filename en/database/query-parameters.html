@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/query-parameters.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection">
     <meta name="twitter:description" content="Learn query parameterization in PostgreSQL: bind parameters, prepared statements, plan caching, and protection against SQL injection attacks.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/query-parameters.png">
     <title>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection — SourceHub</title>
     <meta name="description" content="Learn query parameterization in PostgreSQL: bind parameters, prepared statements, plan caching, and protection against SQL injection attacks.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection",
       "description": "Learn query parameterization in PostgreSQL: bind parameters, prepared statements, plan caching, and protection against SQL injection attacks.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/query-parameters.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1870",
+      "wordCount": "1756",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/query-parameters.png" alt="Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h1>
 <br>
 <p>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection   </p>
@@ -82,43 +83,26 @@
 <p>SQL Injection: The Problem   </p>
 <p>Without parameterization, user input is concatenated into SQL strings:   </p>
 <br>
-<br>
-<br>
 <p>    # DANGEROUS: Never do this</p>
 <br>
 <p>    user_id = request.args.get("id")</p>
 <br>
 <p>    cursor.execute(f"SELECT * FROM users WHERE id = {user_id}")</p>
 <br>
-<br>
-<br>
-<br>
 <p>An attacker provides `1; DROP TABLE users;` as the `id` parameter, and the query becomes:   </p>
-<br>
-<br>
 <br>
 <p>    SELECT * FROM users WHERE id = 1; DROP TABLE users;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Parameterization prevents this by separating SQL code from data:   </p>
-<br>
-<br>
 <br>
 <p>    # SAFE: Use parameterized query</p>
 <br>
 <p>    cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))</p>
 <br>
-<br>
-<br>
-<br>
 <p>The database receives the SQL structure and the parameter values separately. The parameter value `1; DROP TABLE users;` is treated as a literal string, not executable SQL.   </p>
 <p>Bind Parameters   </p>
 <p>PostgreSQL supports two parameter syntaxes depending on the driver:   </p>
 <p>**psycopg2** (`%s`):   </p>
-<br>
-<br>
 <br>
 <p>    cursor.execute(</p>
 <br>
@@ -128,12 +112,7 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
-<br>
 <p>**asyncpg** (`$1`, `$2`):   </p>
-<br>
-<br>
 <br>
 <p>    await conn.execute(</p>
 <br>
@@ -143,12 +122,7 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
-<br>
 <p>**JDBC** (`?`):   </p>
-<br>
-<br>
 <br>
 <p>    PreparedStatement stmt = conn.prepareStatement(</p>
 <br>
@@ -160,16 +134,11 @@
 <br>
 <p>    ResultSet rs = stmt.executeQuery();</p>
 <br>
-<br>
-<br>
-<br>
 <p>Prepared Statements   </p>
 <p>PostgreSQL separates prepared statements into two phases:   </p>
 <br>
 <p>* **PREPARE**: The database parses, analyzes, and plans the query.</p>
 <p>2\. **EXECUTE**: The database runs the plan with specific parameter values.   </p>
-<br>
-<br>
 <br>
 <p>    -- Explicit prepared statement</p>
 <br>
@@ -177,33 +146,22 @@
 <br>
 <p>    SELECT * FROM users WHERE id = $1;</p>
 <br>
-<br>
-<br>
 <p>    -- Execute with parameter</p>
 <br>
 <p>    EXECUTE find_user(42);</p>
 <br>
 <p>    EXECUTE find_user(99);</p>
 <br>
-<br>
-<br>
 <p>    -- Deallocate when done</p>
 <br>
 <p>    DEALLOCATE find_user;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Automatic Prepared Statements in Drivers   </p>
 <p>Most PostgreSQL drivers implement automatic prepared statement caching:   </p>
-<br>
-<br>
 <br>
 <p>    import psycopg2</p>
 <br>
 <p>    from psycopg2 import pool</p>
-<br>
-<br>
 <br>
 <p>    # psycopg2 automatically caches prepared statements per connection</p>
 <br>
@@ -211,31 +169,20 @@
 <br>
 <p>    cursor = conn.cursor()</p>
 <br>
-<br>
-<br>
 <p>    # First call: prepares and executes</p>
 <br>
 <p>    cursor.execute("SELECT * FROM users WHERE id = %s", (42,))</p>
-<br>
-<br>
 <br>
 <p>    # Second call: reuses cached prepared statement</p>
 <br>
 <p>    cursor.execute("SELECT * FROM users WHERE id = %s", (99,))</p>
 <br>
-<br>
-<br>
-<br>
 <p>Generic Query Plans   </p>
 <p>For prepared statements with bind parameters, PostgreSQL generates a **generic plan** after the fifth execution. The generic plan assumes average parameter values rather than specific ones:   </p>
-<br>
-<br>
 <br>
 <p>    PREPARE search_orders(INTEGER, TEXT) AS</p>
 <br>
 <p>    SELECT * FROM orders WHERE user_id = $1 AND status = $2;</p>
-<br>
-<br>
 <br>
 <p>    -- First 5 executions: custom plans</p>
 <br>
@@ -243,18 +190,11 @@
 <br>
 <p>    EXECUTE search_orders(99, 'pending');</p>
 <br>
-<br>
-<br>
 <p>    -- After 5: switches to generic plan</p>
 <br>
 <p>    -- The generic plan might use a hash join where the custom plan used nested loops</p>
 <br>
-<br>
-<br>
-<br>
 <p>Generic plans are more stable but can be suboptimal for skewed data distributions. Use `PLAN_CACHE_MODE` in some drivers or disable generic plans via `SET plan_cache_mode = force_custom_plan`:   </p>
-<br>
-<br>
 <br>
 <p>    -- Force custom plans for this prepared statement</p>
 <br>
@@ -264,18 +204,10 @@
 <br>
 <p>    SELECT * FROM orders WHERE user_id = $1 AND total > 1000;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Plan Caching   </p>
 <p>How prepared statements interact with connection pooling:   </p>
 <br>
-<br>
-<br>
 <p>    Application → Connection Pool → PostgreSQL</p>
-<br>
-<br>
-<br>
 <br>
 <p>If each application request gets a different pooled connection, prepared statements are not reused across requests. Solutions:   </p>
 <br>
@@ -283,11 +215,7 @@
 <p>2\. **Server-side prepared statements**: Use `PREPARE`/`EXECUTE` explicitly, but manage lifecycle. 3\. **Statement pooling**: PgBouncer with `pool_mode = session` shares the same connection for the same client.   </p>
 <p>pg_stat_statements Insights   </p>
 <br>
-<br>
-<br>
 <p>    CREATE EXTENSION pg_stat_statements;</p>
-<br>
-<br>
 <br>
 <p>    SELECT query, calls, total_exec_time, rows,</p>
 <br>
@@ -301,14 +229,9 @@
 <br>
 <p>    LIMIT 10;</p>
 <br>
-<br>
-<br>
-<br>
 <p>High `stddev_exec_time` on parameterized queries suggests plan instability: the same query performs very differently depending on parameter values.   </p>
 <p>Parameterization Beyond SQL Injection   </p>
 <p>Parameterization also handles type conversion automatically:   </p>
-<br>
-<br>
 <br>
 <p>    # Without parameterization: type conversion issues</p>
 <br>
@@ -316,37 +239,23 @@
 <br>
 <p>    cursor.execute(f"SELECT * FROM orders WHERE created_at = '{date_string}'")</p>
 <br>
-<br>
-<br>
 <p>    # With parameterization: driver handles quoting</p>
 <br>
 <p>    cursor.execute("SELECT * FROM orders WHERE created_at = %s", (date_obj,))</p>
 <br>
-<br>
-<br>
-<br>
 <p>Best Practices   </p>
 <p>Always Parameterize   </p>
-<br>
-<br>
 <br>
 <p>    # Good</p>
 <br>
 <p>    cursor.execute("UPDATE users SET email = %s WHERE id = %s", (new_email, uid))</p>
 <br>
-<br>
-<br>
 <p>    # Bad: f-string or string concatenation</p>
 <br>
 <p>    cursor.execute(f"UPDATE users SET email = '{new_email}' WHERE id = {uid}")</p>
 <br>
-<br>
-<br>
-<br>
 <p>Dynamic IN Clauses   </p>
 <p>For variable-length IN clauses, use `ANY(ARRAY[...])`:   </p>
-<br>
-<br>
 <br>
 <p>    user_ids = [1, 2, 3, 4, 5]</p>
 <br>
@@ -358,12 +267,7 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
-<br>
 <p>Or generate positional parameters:   </p>
-<br>
-<br>
 <br>
 <p>    placeholders = ','.join(['%s'] * len(user_ids))</p>
 <br>
@@ -375,12 +279,7 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
-<br>
 <p>Batch Execution   </p>
-<br>
-<br>
 <br>
 <p>    data = [</p>
 <br>
@@ -391,8 +290,6 @@
 <p>        ("carol@example.com", "Carol"),</p>
 <br>
 <p>    ]</p>
-<br>
-<br>
 <br>
 <p>    # Uses server-side prepared statement for all rows</p>
 <br>
@@ -408,12 +305,7 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
-<br>
 <p>Stored Procedures   </p>
-<br>
-<br>
 <br>
 <p>    CREATE FUNCTION get_user(p_id INTEGER)</p>
 <br>
@@ -423,14 +315,9 @@
 <br>
 <p>    $$ LANGUAGE sql STABLE;</p>
 <br>
-<br>
-<br>
 <p>    -- Call with parameter</p>
 <br>
 <p>    SELECT * FROM get_user(42);</p>
-<br>
-<br>
-<br>
 <br>
 <p>Common Mistakes   </p>
 <br>

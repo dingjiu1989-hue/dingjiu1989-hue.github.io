@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/agent-planning.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection">
     <meta name="twitter:description" content="Explore agent planning frameworks: ReAct for reasoning and acting, Plan-and-Execute for task decomposition, Tree of Thoughts for exploration, and self-reflectio">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/agent-planning.png">
     <title>Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection — SourceHub</title>
     <meta name="description" content="Explore agent planning frameworks: ReAct for reasoning and acting, Plan-and-Execute for task decomposition, Tree of Thoughts for exploration, and self-reflectio">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection",
       "description": "Explore agent planning frameworks: ReAct for reasoning and acting, Plan-and-Execute for task decomposition, Tree of Thoughts for exploration, and self-reflectio",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/agent-planning.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2606",
+      "wordCount": "2467",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,28 +75,16 @@
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/agent-planning.png" alt="Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Planning transforms LLMs from reactive responders into proactive agents that can decompose complex goals, explore solution paths, and recover from failures. This article covers four major planning frameworks: ReAct for tight coupling of reasoning and action, Plan-and-Execute for hierarchical decomposition, Tree of Thoughts for exploring multiple reasoning paths, and self-reflection for learning from mistakes.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  ReAct (Reasoning + Acting)</h2>
 <br>
-<br>
-<br>
-<br>
 <p>ReAct interleaves reasoning traces with tool calls, allowing the agent to think about what to do next based on current observations:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class ReActAgent:</p>
 <br>
@@ -106,27 +94,19 @@
 <br>
 <p>            self.llm = llm_fn</p>
 <br>
-<br>
-<br>
 <p>        def run(self, task: str, max_steps: int = 10) -> str:</p>
 <br>
 <p>            messages = [{"role": "system", "content": self._system_prompt()},</p>
 <br>
 <p>                        {"role": "user", "content": task}]</p>
 <br>
-<br>
-<br>
 <p>            for step in range(max_steps):</p>
 <br>
 <p>                response = self.llm(messages, tools=self.tools)</p>
 <br>
-<br>
-<br>
 <p>                if "Final Answer:" in response:</p>
 <br>
 <p>                    return response.split("Final Answer:")[-1].strip()</p>
-<br>
-<br>
 <br>
 <p>                # Parse the Thought/Action/Observation cycle</p>
 <br>
@@ -142,11 +122,7 @@
 <br>
 <p>                    messages.append({"role": "system", "content": f"Observation: {observation}"})</p>
 <br>
-<br>
-<br>
 <p>            return "Failed to complete task within step limit."</p>
-<br>
-<br>
 <br>
 <p>        def _system_prompt(self) -> str:</p>
 <br>
@@ -161,8 +137,6 @@
 <p>    ...repeat until done...</p>
 <br>
 <p>    Final Answer: Provide the complete answer"""</p>
-<br>
-<br>
 <br>
 <p>        def _extract_action(self, text: str) -> dict | None:</p>
 <br>
@@ -184,8 +158,6 @@
 <br>
 <p>            return {"name": tool_name, "args": args}</p>
 <br>
-<br>
-<br>
 <p>        def _execute_tool(self, action: dict) -> str:</p>
 <br>
 <p>            for tool in self.tools:</p>
@@ -196,21 +168,9 @@
 <br>
 <p>            return f"Error: Unknown tool '{action['name']}'"</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Plan-and-Execute</h2>
 <br>
-<br>
-<br>
-<br>
 <p>This framework separates planning from execution. A planner creates a step-by-step plan, then an executor follows it:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class PlanAndExecute:</p>
 <br>
@@ -222,8 +182,6 @@
 <br>
 <p>            self.tools = tools</p>
 <br>
-<br>
-<br>
 <p>        async def run(self, task: str) -> str:</p>
 <br>
 <p>            # Phase 1: Create a plan</p>
@@ -232,23 +190,17 @@
 <br>
 <p>            results = []</p>
 <br>
-<br>
-<br>
 <p>            # Phase 2: Execute each step</p>
 <br>
 <p>            for i, step in enumerate(plan):</p>
 <br>
 <p>                print(f"Executing step {i+1}: {step['description']}")</p>
 <br>
-<br>
-<br>
 <p>                # Check dependencies</p>
 <br>
 <p>                context = self._gather_context(step, results)</p>
 <br>
 <p>                result = await self._execute_step(step, context)</p>
-<br>
-<br>
 <br>
 <p>                # Verify step completion</p>
 <br>
@@ -262,17 +214,11 @@
 <br>
 <p>                    continue</p>
 <br>
-<br>
-<br>
 <p>                results.append({"step": step, "result": result})</p>
-<br>
-<br>
 <br>
 <p>            # Phase 3: Synthesize final answer</p>
 <br>
 <p>            return await self._synthesize(task, plan, results)</p>
-<br>
-<br>
 <br>
 <p>        async def _create_plan(self, task: str) -> list[dict]:</p>
 <br>
@@ -288,15 +234,11 @@
 <br>
 <p>            - dependencies: which step numbers this step depends on</p>
 <br>
-<br>
-<br>
 <p>            Output as a JSON array.</p>
 <br>
 <p>            """)</p>
 <br>
 <p>            return json.loads(response)</p>
-<br>
-<br>
 <br>
 <p>        async def _replan(self, original_task: str, failed_step: int, old_plan: list, error: str) -> list:</p>
 <br>
@@ -308,29 +250,15 @@
 <br>
 <p>            Original task: {original_task}</p>
 <br>
-<br>
-<br>
 <p>            Create a revised plan starting from the failure point.</p>
 <br>
 <p>            """)</p>
 <br>
 <p>            return json.loads(response)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Tree of Thoughts (ToT)</h2>
 <br>
-<br>
-<br>
-<br>
 <p>ToT explores multiple reasoning paths simultaneously, evaluating each branch:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class TreeOfThoughts:</p>
 <br>
@@ -342,8 +270,6 @@
 <br>
 <p>            self.depth = depth</p>
 <br>
-<br>
-<br>
 <p>        def solve(self, problem: str) -> str:</p>
 <br>
 <p>            # Initialize the tree with root thoughts</p>
@@ -353,8 +279,6 @@
 <p>            best_path = None</p>
 <br>
 <p>            best_score = float("-inf")</p>
-<br>
-<br>
 <br>
 <p>            for level in range(self.depth):</p>
 <br>
@@ -370,23 +294,17 @@
 <br>
 <p>                    scored.append((state, score))</p>
 <br>
-<br>
-<br>
 <p>                    if score > best_score and level == self.depth - 1:</p>
 <br>
 <p>                        best_score = score</p>
 <br>
 <p>                        best_path = state</p>
 <br>
-<br>
-<br>
 <p>                # Select top-k candidates for expansion</p>
 <br>
 <p>                scored.sort(key=lambda x: x[1], reverse=True)</p>
 <br>
 <p>                top_candidates = scored[:self.branches]</p>
-<br>
-<br>
 <br>
 <p>                if level < self.depth - 1:</p>
 <br>
@@ -400,11 +318,7 @@
 <br>
 <p>                        candidates.extend(next_thoughts)</p>
 <br>
-<br>
-<br>
 <p>            return best_path or "No solution found."</p>
-<br>
-<br>
 <br>
 <p>        def _generate_thoughts(self, problem: str, current_state: list[str]) -> list[list[str]]:</p>
 <br>
@@ -416,8 +330,6 @@
 <br>
 <p>            Current reasoning: {context}</p>
 <br>
-<br>
-<br>
 <p>            Generate {self.branches} different next steps in reasoning.</p>
 <br>
 <p>            Each should be a plausible continuation. Be diverse.</p>
@@ -427,8 +339,6 @@
 <p>            # Parse response into multiple thought continuations</p>
 <br>
 <p>            return [current_state + [t] for t in parse_thoughts(response)]</p>
-<br>
-<br>
 <br>
 <p>        def _evaluate_thought(self, problem: str, state: list[str]) -> float:</p>
 <br>
@@ -440,8 +350,6 @@
 <br>
 <p>            Reasoning so far: {context}</p>
 <br>
-<br>
-<br>
 <p>            Rate the promise of this reasoning path on a scale of 0 to 1.</p>
 <br>
 <p>            Output ONLY a number.</p>
@@ -450,21 +358,9 @@
 <br>
 <p>            return float(score.strip())</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Reflection</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Reflection enables agents to learn from their mistakes during execution:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class ReflectiveAgent:</p>
 <br>
@@ -476,8 +372,6 @@
 <br>
 <p>            self.reflection_log = []</p>
 <br>
-<br>
-<br>
 <p>        async def run(self, task: str) -> str:</p>
 <br>
 <p>            max_attempts = 3</p>
@@ -486,13 +380,9 @@
 <br>
 <p>                result = await self._attempt(task)</p>
 <br>
-<br>
-<br>
 <p>                if self._is_successful(result):</p>
 <br>
 <p>                    return result["output"]</p>
-<br>
-<br>
 <br>
 <p>                # Reflect on the failure</p>
 <br>
@@ -500,17 +390,11 @@
 <br>
 <p>                self.reflection_log.append(reflection)</p>
 <br>
-<br>
-<br>
 <p>                # Update strategy based on reflection</p>
 <br>
 <p>                task = self._revise_task(task, reflection)</p>
 <br>
-<br>
-<br>
 <p>            return "Failed after multiple attempts."</p>
-<br>
-<br>
 <br>
 <p>        def _reflect(self, task: str, result: dict) -> str:</p>
 <br>
@@ -524,8 +408,6 @@
 <br>
 <p>            Partial output: {result.get('partial_output', '')}</p>
 <br>
-<br>
-<br>
 <p>            Reflect on:</p>
 <br>
 <p>            1. What was the root cause of the failure?</p>
@@ -534,13 +416,9 @@
 <br>
 <p>            3. Is there missing information needed?</p>
 <br>
-<br>
-<br>
 <p>            Reflection:</p>
 <br>
 <p>            """)</p>
-<br>
-<br>
 <br>
 <p>        def _revise_task(self, task: str, reflection: str) -> str:</p>
 <br>
@@ -550,23 +428,13 @@
 <br>
 <p>            After reflecting: {reflection}</p>
 <br>
-<br>
-<br>
 <p>            Revise the task description to incorporate lessons learned</p>
 <br>
 <p>            and avoid repeating the same mistake.</p>
 <br>
 <p>            """)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Choosing a Framework</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| Framework | Best For | When to Use |</p>
 <br>
@@ -580,13 +448,7 @@
 <br>
 <p>| Reflection | Error-prone environments | When learning from mistakes is critical |</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Agent planning frameworks provide structure for LLM reasoning. ReAct couples reasoning with tool use for interactive tasks. Plan-and-Execute separates planning from execution for complex workflows. Tree of Thoughts explores multiple reasoning paths for problems with branching solutions. Reflection enables continuous improvement by learning from failures. In practice, combine these patterns: use ReAct for execution, Plan-and-Execute for structure, ToT for exploration, and Reflection for improvement.</p></div>
     </article>

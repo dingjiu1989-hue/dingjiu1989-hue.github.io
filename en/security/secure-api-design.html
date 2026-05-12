@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-api-design.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Secure API Design Principles">
     <meta name="twitter:description" content="Guide to secure API design covering input validation, rate limiting, idempotency, error handling, and defense-in-depth strategies.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-api-design.png">
     <title>Secure API Design Principles — SourceHub</title>
     <meta name="description" content="Guide to secure API design covering input validation, rate limiting, idempotency, error handling, and defense-in-depth strategies.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Secure API Design Principles",
       "description": "Guide to secure API design covering input validation, rate limiting, idempotency, error handling, and defense-in-depth strategies.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/secure-api-design.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2120",
+      "wordCount": "2025",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Secure API Design Principles</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-api-design.png" alt="Secure API Design Principles" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Secure API Design Principles</h1>
 <br>
 <p>Introduction   </p>
 <p>APIs are the backbone of modern application architecture. A well-designed API considers security at every layer, from request validation to response handling. Security must be built into the API contract — it cannot be bolted on afterward.   </p>
 <p>Input Validation   </p>
 <p>Validate all input at the API boundary before processing. Never trust client-provided data.   </p>
-<br>
-<br>
 <br>
 <p>    from pydantic import BaseModel, Field, validator</p>
 <br>
@@ -92,11 +91,7 @@
 <br>
 <p>    import re</p>
 <br>
-<br>
-<br>
 <p>    app = FastAPI()</p>
-<br>
-<br>
 <br>
 <p>    class CreateUserRequest(BaseModel):</p>
 <br>
@@ -105,8 +100,6 @@
 <p>        email: str = Field(..., max_length=255)</p>
 <br>
 <p>        age: int = Field(..., ge=0, le=150)</p>
-<br>
-<br>
 <br>
 <p>        @validator('username')</p>
 <br>
@@ -126,8 +119,6 @@
 <br>
 <p>            return v.lower()</p>
 <br>
-<br>
-<br>
 <p>        @validator('email')</p>
 <br>
 <p>        def validate_email(cls, v):</p>
@@ -138,21 +129,14 @@
 <br>
 <p>            return v.lower()</p>
 <br>
-<br>
-<br>
 <p>    @app.post("/api/users")</p>
 <br>
 <p>    def create_user(user: CreateUserRequest):</p>
 <br>
 <p>        return {"user": user.username, "email": user.email}</p>
 <br>
-<br>
-<br>
-<br>
 <p>Rate Limiting   </p>
 <p>Rate limiting prevents abuse, brute force attacks, and resource exhaustion.   </p>
-<br>
-<br>
 <br>
 <p>    import time</p>
 <br>
@@ -160,23 +144,17 @@
 <br>
 <p>    from functools import wraps</p>
 <br>
-<br>
-<br>
 <p>    class RateLimiter:</p>
 <br>
 <p>        def __init__(self):</p>
 <br>
 <p>            self.requests = defaultdict(list)</p>
 <br>
-<br>
-<br>
 <p>        def check(self, key: str, max_requests: int, window_seconds: int) -> bool:</p>
 <br>
 <p>            now = time.time()</p>
 <br>
 <p>            window_start = now - window_seconds</p>
-<br>
-<br>
 <br>
 <p>            # Clean old entries</p>
 <br>
@@ -186,21 +164,15 @@
 <br>
 <p>            ]</p>
 <br>
-<br>
-<br>
 <p>            # Check limit</p>
 <br>
 <p>            if len(self.requests[key]) >= max_requests:</p>
 <br>
 <p>                return False</p>
 <br>
-<br>
-<br>
 <p>            self.requests[key].append(now)</p>
 <br>
 <p>            return True</p>
-<br>
-<br>
 <br>
 <p>    # Token bucket algorithm</p>
 <br>
@@ -216,8 +188,6 @@
 <br>
 <p>            self.last_refill = time.time()</p>
 <br>
-<br>
-<br>
 <p>        def consume(self, tokens: int = 1) -> bool:</p>
 <br>
 <p>            self._refill()</p>
@@ -229,8 +199,6 @@
 <p>                return True</p>
 <br>
 <p>            return False</p>
-<br>
-<br>
 <br>
 <p>        def _refill(self):</p>
 <br>
@@ -244,17 +212,11 @@
 <br>
 <p>            self.last_refill = now</p>
 <br>
-<br>
-<br>
 <p>    # Apply rate limiting via middleware</p>
 <br>
 <p>    from fastapi import Request, HTTPException</p>
 <br>
-<br>
-<br>
 <p>    RATE_LIMITER = TokenBucket(capacity=100, refill_rate=10)</p>
-<br>
-<br>
 <br>
 <p>    @app.middleware("http")</p>
 <br>
@@ -268,19 +230,12 @@
 <br>
 <p>        return await call_next(request)</p>
 <br>
-<br>
-<br>
-<br>
 <p>Idempotency   </p>
 <p>Idempotent APIs prevent duplicate operations when clients retry requests.   </p>
-<br>
-<br>
 <br>
 <p>    import uuid</p>
 <br>
 <p>    from datetime import datetime, timedelta</p>
-<br>
-<br>
 <br>
 <p>    class IdempotencyMiddleware:</p>
 <br>
@@ -290,8 +245,6 @@
 <br>
 <p>            self.ttl = timedelta(hours=ttl_hours)</p>
 <br>
-<br>
-<br>
 <p>        async def process_request(self, request):</p>
 <br>
 <p>            # Check for idempotency key on mutating requests</p>
@@ -299,8 +252,6 @@
 <p>            if request.method in ('POST', 'PATCH', 'PUT', 'DELETE'):</p>
 <br>
 <p>                idempotency_key = request.headers.get('Idempotency-Key')</p>
-<br>
-<br>
 <br>
 <p>                if not idempotency_key:</p>
 <br>
@@ -312,15 +263,11 @@
 <br>
 <p>                    )</p>
 <br>
-<br>
-<br>
 <p>                # Check for existing result</p>
 <br>
 <p>                cache_key = f"idempotency:{idempotency_key}"</p>
 <br>
 <p>                existing = await self.redis.get(cache_key)</p>
-<br>
-<br>
 <br>
 <p>                if existing:</p>
 <br>
@@ -328,13 +275,9 @@
 <br>
 <p>                    return json.loads(existing)</p>
 <br>
-<br>
-<br>
 <p>                # Process request and cache result</p>
 <br>
 <p>                response = await self.process_request_internal(request)</p>
-<br>
-<br>
 <br>
 <p>                await self.redis.setex(</p>
 <br>
@@ -346,23 +289,14 @@
 <br>
 <p>                )</p>
 <br>
-<br>
-<br>
 <p>                return response</p>
-<br>
-<br>
-<br>
 <br>
 <p>Error Handling   </p>
 <p>Secure error handling reveals minimal information while providing useful feedback to legitimate clients.   </p>
 <br>
-<br>
-<br>
 <p>    from fastapi import Request, HTTPException</p>
 <br>
 <p>    from fastapi.responses import JSONResponse</p>
-<br>
-<br>
 <br>
 <p>    class SecureExceptionHandler:</p>
 <br>
@@ -386,8 +320,6 @@
 <br>
 <p>            )</p>
 <br>
-<br>
-<br>
 <p>        @staticmethod</p>
 <br>
 <p>        def handle_auth_error(request: Request, exc: Exception):</p>
@@ -408,8 +340,6 @@
 <br>
 <p>            )</p>
 <br>
-<br>
-<br>
 <p>        @staticmethod</p>
 <br>
 <p>        def handle_internal_error(request: Request, exc: Exception):</p>
@@ -422,13 +352,9 @@
 <br>
 <p>            logger.error(f"Internal error: {exc}", exc_info=True)</p>
 <br>
-<br>
-<br>
 <p>            # Return minimal info to client</p>
 <br>
 <p>            error_id = str(uuid.uuid4())</p>
-<br>
-<br>
 <br>
 <p>            return JSONResponse(</p>
 <br>
@@ -446,18 +372,11 @@
 <br>
 <p>            )</p>
 <br>
-<br>
-<br>
 <p>    app.add_exception_handler(ValueError, SecureExceptionHandler.handle_validation_error)</p>
 <br>
 <p>    app.add_exception_handler(HTTPException, SecureExceptionHandler.handle_auth_error)</p>
 <br>
-<br>
-<br>
-<br>
 <p>API Security Checklist   </p>
-<br>
-<br>
 <br>
 <p>    api_security:</p>
 <br>
@@ -469,8 +388,6 @@
 <br>
 <p>        - implement_token_rotation</p>
 <br>
-<br>
-<br>
 <p>      authorization:</p>
 <br>
 <p>        - enforce_least_privilege</p>
@@ -478,8 +395,6 @@
 <p>        - validate_permissions_on_every_request</p>
 <br>
 <p>        - never_trust_url_parameters_for_authz</p>
-<br>
-<br>
 <br>
 <p>      input_validation:</p>
 <br>
@@ -489,8 +404,6 @@
 <br>
 <p>        - enforce_strict_data_types</p>
 <br>
-<br>
-<br>
 <p>      rate_limiting:</p>
 <br>
 <p>        - per_client_rate_limits</p>
@@ -498,8 +411,6 @@
 <p>        - tiered_throttling</p>
 <br>
 <p>        - ip_based_fallback</p>
-<br>
-<br>
 <br>
 <p>      error_handling:</p>
 <br>
@@ -509,8 +420,6 @@
 <br>
 <p>        - log_all_errors_internally</p>
 <br>
-<br>
-<br>
 <p>      headers:</p>
 <br>
 <p>        - enforce_strict_transport_security</p>
@@ -518,9 +427,6 @@
 <p>        - set_x_content_type_options: nosniff</p>
 <br>
 <p>        - set_x_frame_options: DENY</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Secure API design integrates security into every layer: validate and sanitize all input, apply rate limiting to prevent abuse, implement idempotency for reliable retries, handle errors without leaking information, and enforce authentication and authorization on every endpoint. Security is not an endpoint feature — it is a design property.</p></div>

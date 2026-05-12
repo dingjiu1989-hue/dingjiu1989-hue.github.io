@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-migration.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Migration Tools and Strategies">
     <meta name="twitter:description" content="Learn database migration tools and strategies including schema evolution, zero-downtime migrations, rollback plans, and testing.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-migration.png">
     <title>Database Migration Tools and Strategies — SourceHub</title>
     <meta name="description" content="Learn database migration tools and strategies including schema evolution, zero-downtime migrations, rollback plans, and testing.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Migration Tools and Strategies",
       "description": "Learn database migration tools and strategies including schema evolution, zero-downtime migrations, rollback plans, and testing.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-migration.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1675",
+      "wordCount": "1571",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,6 +74,7 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Database Migration Tools and Strategies</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-migration.png" alt="Database Migration Tools and Strategies" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Migration Tools and Strategies</h1>
 <br>
 <p>Why Database Migrations Matter   </p>
@@ -83,59 +84,33 @@
 <p>Alembic (Python)   </p>
 <p>Setup   </p>
 <br>
-<br>
-<br>
 <p>    pip install alembic</p>
 <br>
 <p>    alembic init alembic</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # alembic/env.py</p>
 <br>
 <p>    from myapp.models import Base</p>
 <br>
-<br>
-<br>
 <p>    target_metadata = Base.metadata</p>
 <br>
-<br>
-<br>
-<br>
 <p>Creating Migrations   </p>
-<br>
-<br>
 <br>
 <p>    # Auto-generate migration</p>
 <br>
 <p>    alembic revision --autogenerate -m "add user roles table"</p>
 <br>
-<br>
-<br>
 <p>    # Apply migrations</p>
 <br>
 <p>    alembic upgrade head</p>
-<br>
-<br>
 <br>
 <p>    # Rollback</p>
 <br>
 <p>    alembic downgrade -1</p>
 <br>
-<br>
-<br>
-<br>
 <p>Migration File   </p>
 <br>
-<br>
-<br>
 <p>    """add user roles table</p>
-<br>
-<br>
 <br>
 <p>    Revision ID: abc123</p>
 <br>
@@ -143,13 +118,9 @@
 <br>
 <p>    """</p>
 <br>
-<br>
-<br>
 <p>    from alembic import op</p>
 <br>
 <p>    import sqlalchemy as sa</p>
-<br>
-<br>
 <br>
 <p>    def upgrade():</p>
 <br>
@@ -173,20 +144,13 @@
 <br>
 <p>        op.create_index('ix_user_roles_user_id', 'user_roles', ['user_id'])</p>
 <br>
-<br>
-<br>
 <p>    def downgrade():</p>
 <br>
 <p>        op.drop_index('ix_user_roles_user_id')</p>
 <br>
 <p>        op.drop_table('user_roles')</p>
 <br>
-<br>
-<br>
-<br>
 <p>Flyway (Java)   </p>
-<br>
-<br>
 <br>
 <p>    # Migration naming convention:</p>
 <br>
@@ -196,35 +160,21 @@
 <br>
 <p>    # V3__create_orders_table.sql</p>
 <br>
-<br>
-<br>
 <p>    # Apply migrations</p>
 <br>
 <p>    flyway migrate</p>
-<br>
-<br>
 <br>
 <p>    # Check status</p>
 <br>
 <p>    flyway info</p>
 <br>
-<br>
-<br>
 <p>    # Repair checksums</p>
 <br>
 <p>    flyway repair</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    -- V2__add_email_column.sql</p>
 <br>
 <p>    ALTER TABLE users ADD COLUMN email VARCHAR(255) UNIQUE;</p>
-<br>
-<br>
 <br>
 <p>    -- V3__create_orders_table.sql</p>
 <br>
@@ -244,15 +194,10 @@
 <br>
 <p>    CREATE INDEX idx_orders_user_id ON orders(user_id);</p>
 <br>
-<br>
-<br>
-<br>
 <p>Strategies for Complex Migrations   </p>
 <p>Expand-Contract Pattern (Zero Downtime)   </p>
 <p>For making backward-incompatible changes without downtime:   </p>
 <p>**Phase 1: Expand**   </p>
-<br>
-<br>
 <br>
 <p>    -- Add new column alongside old one</p>
 <br>
@@ -264,23 +209,13 @@
 <br>
 <p>    UPDATE users SET email_new = email WHERE email_new IS NULL;</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Phase 2: Migrate**   </p>
-<br>
-<br>
 <br>
 <p>    # Application reads from new column, still writes to both</p>
 <br>
 <p>    # Deploy application update</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Phase 3: Contract**   </p>
-<br>
-<br>
 <br>
 <p>    -- Stop writing to old column</p>
 <br>
@@ -290,26 +225,17 @@
 <br>
 <p>    ALTER TABLE users RENAME COLUMN email TO email_old;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Batch Migrations for Large Tables   </p>
-<br>
-<br>
 <br>
 <p>    """migrate large table in batches"""</p>
 <br>
 <p>    from sqlalchemy import text</p>
-<br>
-<br>
 <br>
 <p>    def upgrade():</p>
 <br>
 <p>        batch_size = 10000</p>
 <br>
 <p>        offset = 0</p>
-<br>
-<br>
 <br>
 <p>        while True:</p>
 <br>
@@ -349,12 +275,7 @@
 <br>
 <p>            print(f"Updated {offset} rows...")</p>
 <br>
-<br>
-<br>
-<br>
 <p>Online Schema Change (pt-online-schema-change)   </p>
-<br>
-<br>
 <br>
 <p>    # For MySQL without downtime</p>
 <br>
@@ -366,31 +287,19 @@
 <br>
 <p>        --execute</p>
 <br>
-<br>
-<br>
-<br>
 <p>Migration Best Practices   </p>
 <p>Always Have a Rollback   </p>
 <p>Every migration must have a tested downgrade path:   </p>
-<br>
-<br>
 <br>
 <p>    def upgrade():</p>
 <br>
 <p>        op.add_column('users', sa.Column('email', sa.String(255)))</p>
 <br>
-<br>
-<br>
 <p>    def downgrade():</p>
 <br>
 <p>        op.drop_column('users', 'email')</p>
 <br>
-<br>
-<br>
-<br>
 <p>Test Migrations   </p>
-<br>
-<br>
 <br>
 <p>    # Test upgrade and downgrade</p>
 <br>
@@ -400,12 +309,7 @@
 <br>
 <p>    alembic upgrade head</p>
 <br>
-<br>
-<br>
-<br>
 <p>CI/CD Integration   </p>
-<br>
-<br>
 <br>
 <p>    # .github/workflows/migrate.yml</p>
 <br>
@@ -419,8 +323,6 @@
 <br>
 <p>          - uses: actions/checkout@v4</p>
 <br>
-<br>
-<br>
 <p>          - name: Run migrations</p>
 <br>
 <p>            env:</p>
@@ -431,16 +333,11 @@
 <br>
 <p>              alembic upgrade head</p>
 <br>
-<br>
-<br>
 <p>          - name: Verify schema</p>
 <br>
 <p>            run: |</p>
 <br>
 <p>              alembic check  # Detect schema drift</p>
-<br>
-<br>
-<br>
 <br>
 <p>Common Mistakes   </p>
 <p>| Mistake | Consequence | Prevention | |---------|-------------|------------| | No rollback plan | Cannot undo failed migration | Always write downgrade | | Long-running locks | Table locked, queries fail | Use batch/online migrations | | Missing default values | NULL violations in existing rows | Add with default or nullable first | | Schema drift | Environments out of sync | Automate migrations, check in CI | | No data migration | New columns are empty | Backfill after schema change |   </p>

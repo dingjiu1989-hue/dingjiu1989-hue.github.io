@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/container-runtimes-compared.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Container Runtimes Compared">
     <meta name="twitter:description" content="In-depth comparison of Docker, Podman, containerd, and other container runtimes for development and production.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/container-runtimes-compared.png">
     <title>Container Runtimes Compared — SourceHub</title>
     <meta name="description" content="In-depth comparison of Docker, Podman, containerd, and other container runtimes for development and production.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Container Runtimes Compared",
       "description": "In-depth comparison of Docker, Podman, containerd, and other container runtimes for development and production.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/container-runtimes-compared.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1677",
+      "wordCount": "1543",
       "keywords": "Developer Tools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,41 +74,23 @@
         <span class="tag-cat">Productivity</span></div>
       <h1 class="article-title">Container Runtimes Compared</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/container-runtimes-compared.png" alt="Container Runtimes Compared" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Container Runtimes Compared</h1>
 <br>
 <p>Container runtimes are the engines that actually run containers. While Docker is the most well-known, alternatives like Podman and containerd have gained significant traction. Understanding the differences helps you choose the right runtime for your use case.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  What is a Container Runtime?</h2>
 <br>
-<br>
-<br>
-<br>
 <p>A container runtime manages the lifecycle of containers -- pulling images, creating container filesystems, and running processes in isolated environments. Runtimes exist at two levels:</p>
-<br>
-<br>
 <br>
 <p>* **Low-level runtimes**: runc, crun, gVisor -- directly manage container processes.</p>
 <p>* **High-level runtimes**: Docker, containerd, Podman -- provide a user-facing API and image management.</p>
 <br>
-<br>
-<br>
 <p>Most developers interact with high-level runtimes. The low-level runtime handles the actual container execution.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Docker</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Docker is the original developer-friendly container platform. It bundles build tools, image management, and runtime into one cohesive tool.</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Pros:**</p>
 <br>
@@ -118,21 +100,13 @@
 <p>* Vast image registry (Docker Hub).</p>
 <p>* Widest platform support (Linux, macOS, Windows).</p>
 <br>
-<br>
-<br>
 <p>**Cons:**</p>
 <br>
 <p>* Daemon-based architecture with root privileges by default.</p>
 <p>* Running without root requires `rootless` mode setup.</p>
 <p>* Slower startup than containerd alone.</p>
 <br>
-<br>
-<br>
 <p>**Best for**: Development environments, CI/CD pipelines, and teams that need the largest ecosystem.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Typical Docker workflow</p>
 <br>
@@ -142,20 +116,9 @@
 <br>
 <p>    docker compose up -d  # Multi-service</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Podman</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Podman is a daemonless container engine developed by Red Hat. It is designed as a drop-in replacement for Docker.</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Pros:**</p>
 <br>
@@ -165,21 +128,13 @@
 <p>* Support for pods (like Kubernetes) -- start multiple containers together.</p>
 <p>* Built-in systemd integration for running containers as services.</p>
 <br>
-<br>
-<br>
 <p>**Cons:**</p>
 <br>
 <p>* Smaller ecosystem and community compared to Docker.</p>
 <p>* Some advanced Docker features not yet implemented.</p>
 <p>* Docker Compose support requires `podman-compose` (third-party).</p>
 <br>
-<br>
-<br>
 <p>**Best for**: Security-conscious teams, production environments, and users who want rootless containers.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Podman commands mirror Docker</p>
 <br>
@@ -187,28 +142,15 @@
 <br>
 <p>    podman run -d -p 3000:3000 myapp</p>
 <br>
-<br>
-<br>
 <p>    # Podman-specific: run in a pod</p>
 <br>
 <p>    podman pod create --name my-pod -p 3000:3000</p>
 <br>
 <p>    podman run --pod my-pod -d myapp</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  containerd</h2>
 <br>
-<br>
-<br>
-<br>
 <p>containerd is the industry-standard container runtime, used internally by Docker and Kubernetes. It focuses on the core runtime functionality.</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Pros:**</p>
 <br>
@@ -217,21 +159,13 @@
 <p>* Supports snapshotters (e.g., Stargz, overlayfs) for efficient image pulling.</p>
 <p>* Stable and battle-tested (core of Docker Engine).</p>
 <br>
-<br>
-<br>
 <p>**Cons:**</p>
 <br>
 <p>* No developer-friendly CLI -- mostly used through higher-level tools.</p>
 <p>* Cannot build images natively (requires buildkit).</p>
 <p>* No Docker Compose equivalent.</p>
 <br>
-<br>
-<br>
 <p>**Best for**: Kubernetes nodes, embedded systems, and users who need a minimal runtime.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # interact with containerd directly using ctr or nerdctl</p>
 <br>
@@ -239,26 +173,13 @@
 <br>
 <p>    sudo ctr run --rm -t docker.io/library/alpine:latest alpine sh</p>
 <br>
-<br>
-<br>
 <p>    # nerdctl provides a Docker-compatible CLI for containerd</p>
 <br>
 <p>    nerdctl run -d -p 3000:3000 myapp</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  CRI-O</h2>
 <br>
-<br>
-<br>
-<br>
 <p>CRI-O is a Kubernetes-specific runtime optimized for CRI (Container Runtime Interface) compliance.</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Pros:**</p>
 <br>
@@ -267,24 +188,14 @@
 <p>* Built-in metrics for monitoring.</p>
 <p>* Kubelet integration without extra daemons.</p>
 <br>
-<br>
-<br>
 <p>**Cons:**</p>
 <br>
 <p>* Not designed for standalone use.</p>
 <p>* Smaller ecosystem than containerd.</p>
 <br>
-<br>
-<br>
 <p>**Best for**: Kubernetes clusters where security and compliance are priorities.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Performance Comparison</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| Runtime | Image Pull | Container Start | Memory Overhead | CPU Overhead |</p>
 <br>
@@ -298,13 +209,7 @@
 <br>
 <p>| CRI-O | Fast | ~200ms | ~20MB | Negligible |</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Security Comparison</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| Runtime | Rootless by Default | Seccomp by Default | AppArmor/SELinux | User Namespace Support |</p>
 <br>
@@ -316,18 +221,9 @@
 <br>
 <p>| containerd | Via CRI config | Via CRI config | Via CRI config | Via CRI config |</p>
 <br>
-<br>
-<br>
-<br>
 <p>Podman's rootless-by-default model provides the strongest security posture for development. In production, all runtimes can be hardened with proper configuration.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Docker vs Podman: Detailed Comparison</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| Feature | Docker | Podman |</p>
 <br>
@@ -347,27 +243,15 @@
 <br>
 <p>| Kubernetes YAML | Can use | Can use directly |</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Migration Guide</h2>
 <br>
-<br>
-<br>
-<br>
 <p>**Moving from Docker to Podman:**</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # On Fedora/RHEL</p>
 <br>
 <p>    sudo dnf install podman podman-docker</p>
 <br>
 <p>    # The podman-docker package provides the /usr/bin/docker symlink</p>
-<br>
-<br>
 <br>
 <p>    # Test compatibility</p>
 <br>
@@ -377,16 +261,7 @@
 <br>
 <p>    docker run hello-world</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Moving from Docker to containerd + nerdctl:**</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Install containerd</p>
 <br>
@@ -398,15 +273,7 @@
 <br>
 <p>    sudo tar -C /usr/local/bin -xzf nerdctl-1.7-linux-amd64.tar.gz</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Summary</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Docker remains the best choice for development environments due to its ecosystem and tooling. Podman is the strongest alternative for production and security-conscious teams, offering daemonless and rootless operation. containerd is the runtime of choice for Kubernetes nodes and embedded systems. All three are mature and production-ready -- choose based on your security requirements, ecosystem needs, and team expertise.</p></div>
     </article>

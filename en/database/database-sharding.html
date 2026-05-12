@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-sharding.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Sharding: Strategies and Trade-offs">
     <meta name="twitter:description" content="Explore key-based, range-based, and directory-based sharding strategies with rebalancing challenges and tools like Vitess and Citus.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-sharding.png">
     <title>Database Sharding: Strategies and Trade-offs — SourceHub</title>
     <meta name="description" content="Explore key-based, range-based, and directory-based sharding strategies with rebalancing challenges and tools like Vitess and Citus.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Sharding: Strategies and Trade-offs",
       "description": "Explore key-based, range-based, and directory-based sharding strategies with rebalancing challenges and tools like Vitess and Citus.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-sharding.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "456",
+      "wordCount": "433",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,14 +74,13 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Database Sharding: Strategies and Trade-offs</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-sharding.png" alt="Database Sharding: Strategies and Trade-offs" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Sharding: Strategies and Trade-offs</h1>
 <br>
 <p>What is Sharding?   </p>
 <p>Sharding splits a database across multiple servers horizontally. Each shard holds a subset of data, allowing linear scalability.   </p>
 <p>Key-Based Sharding   </p>
 <p>Hash the shard key to determine the target shard:   </p>
-<br>
-<br>
 <br>
 <p>    class KeyBasedShardManager:</p>
 <br>
@@ -91,8 +90,6 @@
 <br>
 <p>            self.shards = [Shard(i) for i in range(num_shards)]</p>
 <br>
-<br>
-<br>
 <p>        def get_shard(self, shard_key):</p>
 <br>
 <p>            hash_val = int(hashlib.sha256(str(shard_key).encode()).hexdigest(), 16)</p>
@@ -101,13 +98,8 @@
 <br>
 <p>            return self.shards[shard_id]</p>
 <br>
-<br>
-<br>
-<br>
 <p>Range-Based Sharding   </p>
 <p>Partition by value ranges:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE orders (</p>
 <br>
@@ -117,19 +109,12 @@
 <br>
 <p>    ) PARTITION BY RANGE (order_date);</p>
 <br>
-<br>
-<br>
 <p>    CREATE TABLE orders_2026_01 PARTITION OF orders</p>
 <br>
 <p>        FOR VALUES FROM ('2026-01-01') TO ('2026-02-01');</p>
 <br>
-<br>
-<br>
-<br>
 <p>Directory-Based Sharding   </p>
 <p>Use a lookup table for shard mapping:   </p>
-<br>
-<br>
 <br>
 <p>    class DirectoryShardManager:</p>
 <br>
@@ -137,20 +122,13 @@
 <br>
 <p>            self.directory = {}</p>
 <br>
-<br>
-<br>
 <p>        def map_key_to_shard(self, shard_key, shard_id):</p>
 <br>
 <p>            self.directory[shard_key] = shard_id</p>
 <br>
-<br>
-<br>
 <p>        def get_shard(self, shard_key):</p>
 <br>
 <p>            return self.directory.get(shard_key)</p>
-<br>
-<br>
-<br>
 <br>
 <p>Rebalancing   </p>
 <p>When adding or removing shards, data must be redistributed. Use consistent hashing to minimize data movement. Tools like Vitess and Citus automate this process.   </p>

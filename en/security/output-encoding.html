@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/output-encoding.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Output Encoding">
     <meta name="twitter:description" content="Guide to output encoding covering context-sensitive encoding, XSS prevention, template engine auto-escaping, and common encoding pitfalls.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/output-encoding.png">
     <title>Output Encoding — SourceHub</title>
     <meta name="description" content="Guide to output encoding covering context-sensitive encoding, XSS prevention, template engine auto-escaping, and common encoding pitfalls.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,15 +38,15 @@
       "@type": "Article",
       "headline": "Output Encoding",
       "description": "Guide to output encoding covering context-sensitive encoding, XSS prevention, template engine auto-escaping, and common encoding pitfalls.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/output-encoding.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1598",
+      "wordCount": "978",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/output-encoding.html"},
-      "articleBody": "Output Encoding Introduction Output encoding transforms data before rendering it in a specific context to prevent injection attacks. While input validation filters dangerous content, output encoding ensures that even if dangerous characters slip through, they are rendered as data rather than code. Context-sensitive encoding is critical \u2014 the same string must be encoded differently depending on whether it appears in HTML, JavaScript, CSS, or a URL. Context-Sensitive Encoding Different output contexts require different encoding strategies. Applying the wrong encoding is equivalent to no encoding at all. | Context | Example | Encoding Method | Risk if Wrong | |---------|---------|----------------|---------------| | HTML Body | `USER` | HTML entity encode | HTML injection | | HTML Attribute | `` | Attribute encode | Attribute break-out | | JavaScript | `` | JavaScript string encode | XSS | | URL | `[` | URL encode | Open redirect, XSS | | CSS | `` | CSS hex encode | CSS injection | HTML Body Context import html def encode_html_body(user_input): \"\"\"Encode for HTML element content context.\"\"\" encoded = html.escape(user_input, quote=True) # alert(1) becomes # &lt;script&gt;alert(1)&lt;/script&gt; return encoded HTML Attribute Context def encode_html_attribute(user_input): \"\"\"Encode for HTML attribute values.\"\"\" # More aggressive than body encoding replacements = { '&': '&amp;', '\"': '&quot;', \"'\": '&#x27;', ' '>': '&gt;', '/': '&#x2F;', # Prevents attribute closing '`': '&#x60;', # Backtick can close attributes in some browsers } for char, replacement in replacements.items(): user_input = user_input.replace(char, replacement) return user_input JavaScript Context import json import re def encode_javascript_string(user_input): \"\"\"Encode for JavaScript string context.\"\"\" # JSON encoding is safe for JS string literals encoded = json.dumps(user_input, ensure_ascii=False) # Additional hardening for in script blocks encoded = encoded.replace(' return encoded def encode_javascript_variable(user_input): \"\"\"Hex encode each character for JS variable context.\"\"\" encoded = '' for char in user_input: encoded += f'\\\\x{ord(char):02x}' return encoded URL Context from urllib.parse import quote, urlencode def encode_url_param(user_input): \"\"\"Encode for URL parameter values.\"\"\" return quote(user_input, safe='') def encode_url_path(component): \"\"\"Encode for URL path segments.\"\"\" return quote(component, safe='') # Defense against javascript: protocol def sanitize_url_for_href(user_input): \"\"\"Block dangerous URL schemes.\"\"\" allowed_schemes = {'http', 'https', 'mailto', 'tel'} user_input = user_input.strip() # Lowercase for scheme check for scheme in allowed_schemes: if user_input.lower().startswith(f'{scheme}:'): return quote(user_input, safe=':/?#[]@!$&\\'()*+,;=-._~') # Dangerous schemes dangerous = ['javascript:', 'data:', 'vbscript:', 'file:'] for scheme in dangerous: if scheme in user_input.lower(): return '' # Remove dangerous URLs return quote(user_input, safe=':/?#[]@!$&\\'()*+,;=-._~') Template Engine Auto-Escaping Modern template engines provide auto-escaping, which encodes output based on context. Jinja2 (Python) {# Jinja2 auto-escape enabled by default #} {{ user.bio }} {# Hello &lt;script&gt;alert(1)&lt;/script&gt; #} {# Safe filter marks as trusted HTML #} {{ user.bio|safe }} {# WARNING: only use safe for trusted content #} {# Escaping for specific attributes #} {# Manual escaping functions #} {% set encoded = user.name|e %} React JSX // React automatically escapes by default function UserProfile({ user }) { return ( {/* Automatic escaping \u2014 XSS safe */} {user.bio} {/* DangerouslySetInnerHTML bypasses escaping */} {/* Manual URL encoding for href */} Website ); } Common Pitfalls Double Encoding Input: After double URL decode: %253Cscript%253E \u2192 %3Cscript%3E \u2192 Solution: Decode input only once at boundary, then encode for output context. Encoding for Wrong Context # WRONG: URL encoding for HTML body user_input = \"https://evil.com?q=\" encoded = quote(user_input) # https%3A//evil.com%3Fq%3D%3Cscript%3E # HTML entity encoding is needed here, not URL encoding # RIGHT: Use HTML encoding for HTML body encoded = html.escape(user_input) Defense in Depth Strategy class OutputEncoder: def encode(self, data, context): encoders = { 'html_body': self._encode_html_body, 'html_attr': self._encode_html_attribute, 'js_string': self._encode_js_string, 'js_block': self._encode_js_block, 'url_param': self._encode_url_param, 'css': self._encode_css, } encoder = encoders.get(context) if not encoder: raise ValueError(f\"Unknown context: {context}\") return encoder(data) Conclusion Output encoding is the definitive defense against XSS. Always encode data for the specific context in which it appears \u2014 HTML body, attribute, JavaScript, URL, or CSS. Rely on template engine auto-escaping for the common case, understand when and how to use explicit encoding functions, and never trust user-supplied content marked as safe."
+      "articleBody": "Output Encoding: Cross-Site Scripting (XSS) Prevention Guide Output encoding is the strongest defense against Cross-Site Scripting (XSS). It transforms untrusted data into a safe representation before inserting it into an HTML page. When done correctly for each output context, it neutralizes even sophisticated injection attacks. Why Encoding Matters XSS happens when user-controlled data is inserted into a web page without proper encoding. An attacker who submits `alert(1)` as their username expects the browser to execute that script. Output encoding converts `` to `&gt;`, rendering the attack inert \u2014 the browser displays the text literally instead of executing it. Encoding must be context-aware. The same data needs different encoding depending on where it appears: HTML body, HTML attribute, JavaScript string, URL parameter, or CSS. Using the wrong encoder for the context leaves an opening for attackers. HTML Body Context Data inserted between HTML tags needs HTML entity encoding. The critical characters are ``, `&`, `\"`, and `'`. Most frameworks handle this automatically through template engines. import html safe_output = html.escape(user_input) # &quot;&lt;script&gt;alert(1)&lt;/script&gt;&quot; becomes &quot;&amp;lt;script&amp;gt;alert(1)&amp;lt;/script&amp;gt;&quot; Template engines like Jinja2, ERB, and Thymeleaf auto-escape by default. This handles 80% of encoding needs. Verify that auto-escaping is enabled and never disable it without a documented reason. HTML Attribute Context Attribute encoding is stricter than body encoding. In addition to the standard entities, you must encode spaces, equals signs, and backticks. Unquoted attributes are particularly dangerous \u2014 avoid them entirely. def encode_html_attribute(value): value = value.replace(&#x27;&amp;&#x27;, &#x27;&amp;amp;&#x27;) value = value.replace(&#x27;&quot;&#x27;, &#x27;&amp;quot;&#x27;) value = value.replace(&quot;&#x27;&quot;, &#x27;&amp;#x27;&#x27;) value = value.replace(&#x27;&lt;&#x27;, &#x27;&amp;lt;&#x27;) value = value.replace(&#x27;&gt;&#x27;, &#x27;&amp;gt;&#x27;) value = value.replace(&#x27;/&#x27;, &#x27;&amp;#x2F;&#x27;) value = value.replace(&#x27;`&#x27;, &#x27;&amp;#x60;&#x27;) return value Always quote HTML attributes. Never construct HTML by concatenating strings \u2014 use the DOM API or a template engine. JavaScript Context Data inserted into JavaScript requires JSON encoding or hex entity encoding. Never insert untrusted data directly into a `` block. import json safe_js = json.dumps(user_input) # &quot;&lt;/script&gt;&lt;script&gt;alert(1)&lt;/script&gt;&quot; becomes # &quot;&lt;\\/script&gt;&lt;script&gt;alert(1)&lt;\\/script&gt;&quot; Avoid inline event handlers (`onclick`, `onerror`) with dynamic data. Use `addEventListener` instead. If you must embed server data in JavaScript, use JSON script tags with CSP nonces. URL Context Data inserted into URLs must be percent-encoded, which is different from HTML encoding. from urllib.parse import quote safe_url = quote(user_input, safe=&#x27;&#x27;) Validate URL protocols before encoding. Only allow `http:` and `https:` for href attributes. Block `javascript:`, `data:`, and `vbscript:` protocols. CSS Context CSS injection can exfiltrate data through attribute selectors and background-image URLs. The safest approach is to avoid inserting user data into CSS entirely. Use CSS custom properties with predefined values instead of inline styles. import re def encode_css(value): if not re.match(r&#x27;^[a-zA-Z0-9\\s\\-_.#]+$&#x27;, value): raise ValueError(&quot;Unsafe CSS value&quot;) return value Nested Contexts The hardest case: data that passes through multiple contexts. A URL inside a JavaScript string inside an HTML attribute requires three layers of encoding. Each layer demands the correct encoder. Simplify by avoiding nested contexts \u2014 use data attributes and DOM manipulation instead of inline handlers. Defense in Depth Encoding is your last line of defense. Validate input at the boundary using strict allowlists. Use Content Security Policy (CSP) to block inline scripts. Set `HttpOnly` and `Secure` flags on cookies. Deploy a WAF for an additional security layer. Output encoding remains essential because validation alone cannot catch every attack vector. Encode all output, in the correct context, every time."
     }
     </script>
     <script type="application/ld+json">
@@ -75,327 +75,115 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Output Encoding</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
-      <div class="article-body"><h1>Output Encoding</h1>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/output-encoding.png" alt="Output Encoding" width="1200" height="630" loading="lazy">
+      <div class="article-body"><h1>Output Encoding: Cross-Site Scripting (XSS) Prevention Guide</h1>
+<br>
+<p>Output encoding is the strongest defense against Cross-Site Scripting (XSS). It transforms untrusted data into a safe representation before inserting it into an HTML page. When done correctly for each output context, it neutralizes even sophisticated injection attacks.</p>
 <br>
-<p>Introduction   </p>
-<p>Output encoding transforms data before rendering it in a specific context to prevent injection attacks. While input validation filters dangerous content, output encoding ensures that even if dangerous characters slip through, they are rendered as data rather than code. Context-sensitive encoding is critical — the same string must be encoded differently depending on whether it appears in HTML, JavaScript, CSS, or a URL.   </p>
-<p>Context-Sensitive Encoding   </p>
-<p>Different output contexts require different encoding strategies. Applying the wrong encoding is equivalent to no encoding at all.   </p>
-<p>| Context | Example | Encoding Method | Risk if Wrong | |---------|---------|----------------|---------------| | HTML Body | `USER` | HTML entity encode | HTML injection | | HTML Attribute | `` | Attribute encode | Attribute break-out | | JavaScript | `` | JavaScript string encode | XSS | | URL | `[` | URL encode | Open redirect, XSS | | CSS | `` | CSS hex encode | CSS injection |   </p>
-<p>HTML Body Context   </p>
+<h2> Why Encoding Matters</h2>
 <br>
+<p>XSS happens when user-controlled data is inserted into a web page without proper encoding. An attacker who submits `<script>alert(1)</script>` as their username expects the browser to execute that script. Output encoding converts `<` to `&lt;` and `>` to `&gt;`, rendering the attack inert — the browser displays the text literally instead of executing it.</p>
 <br>
+<p>Encoding must be context-aware. The same data needs different encoding depending on where it appears: HTML body, HTML attribute, JavaScript string, URL parameter, or CSS. Using the wrong encoder for the context leaves an opening for attackers.</p>
 <br>
-<p>    import html</p>
+<h2> HTML Body Context</h2>
 <br>
+<p>Data inserted between HTML tags needs HTML entity encoding. The critical characters are `<`, `>`, `&`, `"`, and `'`. Most frameworks handle this automatically through template engines.</p>
 <br>
+<pre><code>
+import html
+
+safe_output = html.escape(user_input)
+
+# &quot;&lt;script&gt;alert(1)&lt;/script&gt;&quot; becomes &quot;&amp;lt;script&amp;gt;alert(1)&amp;lt;/script&amp;gt;&quot;
+
+</code></pre>
 <br>
-<p>    def encode_html_body(user_input):</p>
+<p>Template engines like Jinja2, ERB, and Thymeleaf auto-escape by default. This handles 80% of encoding needs. Verify that auto-escaping is enabled and never disable it without a documented reason.</p>
 <br>
-<p>        """Encode for HTML element content context."""</p>
+<h2> HTML Attribute Context</h2>
 <br>
-<p>        encoded = html.escape(user_input, quote=True)</p>
+<p>Attribute encoding is stricter than body encoding. In addition to the standard entities, you must encode spaces, equals signs, and backticks. Unquoted attributes are particularly dangerous — avoid them entirely.</p>
 <br>
-<p>        # <script>alert(1)</script> becomes</p>
+<pre><code>
+def encode_html_attribute(value):
+
+    value = value.replace(&#x27;&amp;&#x27;, &#x27;&amp;amp;&#x27;)
+
+    value = value.replace(&#x27;&quot;&#x27;, &#x27;&amp;quot;&#x27;)
+
+    value = value.replace(&quot;&#x27;&quot;, &#x27;&amp;#x27;&#x27;)
+
+    value = value.replace(&#x27;&lt;&#x27;, &#x27;&amp;lt;&#x27;)
+
+    value = value.replace(&#x27;&gt;&#x27;, &#x27;&amp;gt;&#x27;)
+
+    value = value.replace(&#x27;/&#x27;, &#x27;&amp;#x2F;&#x27;)
+
+    value = value.replace(&#x27;`&#x27;, &#x27;&amp;#x60;&#x27;)
+
+    return value
+
+</code></pre>
 <br>
-<p>        # &lt;script&gt;alert(1)&lt;/script&gt;</p>
+<p>Always quote HTML attributes. Never construct HTML by concatenating strings — use the DOM API or a template engine.</p>
 <br>
-<p>        return encoded</p>
+<h2> JavaScript Context</h2>
 <br>
+<p>Data inserted into JavaScript requires JSON encoding or hex entity encoding. Never insert untrusted data directly into a `<script>` block.</p>
 <br>
+<pre><code>
+import json
+
+safe_js = json.dumps(user_input)
+
+# &quot;&lt;/script&gt;&lt;script&gt;alert(1)&lt;/script&gt;&quot; becomes
+
+# &quot;&lt;\/script&gt;&lt;script&gt;alert(1)&lt;\/script&gt;&quot;
+
+</code></pre>
 <br>
+<p>Avoid inline event handlers (`onclick`, `onerror`) with dynamic data. Use `addEventListener` instead. If you must embed server data in JavaScript, use JSON script tags with CSP nonces.</p>
 <br>
-<p>HTML Attribute Context   </p>
+<h2> URL Context</h2>
 <br>
+<p>Data inserted into URLs must be percent-encoded, which is different from HTML encoding.</p>
 <br>
+<pre><code>
+from urllib.parse import quote
+
+safe_url = quote(user_input, safe=&#x27;&#x27;)
+
+</code></pre>
 <br>
-<p>    def encode_html_attribute(user_input):</p>
+<p>Validate URL protocols before encoding. Only allow `http:` and `https:` for href attributes. Block `javascript:`, `data:`, and `vbscript:` protocols.</p>
 <br>
-<p>        """Encode for HTML attribute values."""</p>
+<h2> CSS Context</h2>
 <br>
-<p>        # More aggressive than body encoding</p>
+<p>CSS injection can exfiltrate data through attribute selectors and background-image URLs. The safest approach is to avoid inserting user data into CSS entirely. Use CSS custom properties with predefined values instead of inline styles.</p>
 <br>
-<p>        replacements = {</p>
+<pre><code>
+import re
+
+def encode_css(value):
+
+    if not re.match(r&#x27;^[a-zA-Z0-9\s\-_.#]+$&#x27;, value):
+
+        raise ValueError(&quot;Unsafe CSS value&quot;)
+
+    return value
+
+</code></pre>
 <br>
-<p>            '&': '&amp;',</p>
+<h2> Nested Contexts</h2>
 <br>
-<p>            '"': '&quot;',</p>
+<p>The hardest case: data that passes through multiple contexts. A URL inside a JavaScript string inside an HTML attribute requires three layers of encoding. Each layer demands the correct encoder. Simplify by avoiding nested contexts — use data attributes and DOM manipulation instead of inline handlers.</p>
 <br>
-<p>            "'": '&#x27;',</p>
+<h2> Defense in Depth</h2>
 <br>
-<p>            '<': '&lt;',</p>
+<p>Encoding is your last line of defense. Validate input at the boundary using strict allowlists. Use Content Security Policy (CSP) to block inline scripts. Set `HttpOnly` and `Secure` flags on cookies. Deploy a WAF for an additional security layer.</p>
 <br>
-<p>            '>': '&gt;',</p>
-<br>
-<p>            '/': '&#x2F;',  # Prevents attribute closing</p>
-<br>
-<p>            '`': '&#x60;',  # Backtick can close attributes in some browsers</p>
-<br>
-<p>        }</p>
-<br>
-<p>        for char, replacement in replacements.items():</p>
-<br>
-<p>            user_input = user_input.replace(char, replacement)</p>
-<br>
-<p>        return user_input</p>
-<br>
-<br>
-<br>
-<br>
-<p>JavaScript Context   </p>
-<br>
-<br>
-<br>
-<p>    import json</p>
-<br>
-<p>    import re</p>
-<br>
-<br>
-<br>
-<p>    def encode_javascript_string(user_input):</p>
-<br>
-<p>        """Encode for JavaScript string context."""</p>
-<br>
-<p>        # JSON encoding is safe for JS string literals</p>
-<br>
-<p>        encoded = json.dumps(user_input, ensure_ascii=False)</p>
-<br>
-<br>
-<br>
-<p>        # Additional hardening for </script> in script blocks</p>
-<br>
-<p>        encoded = encoded.replace('</', '<\\/')</p>
-<br>
-<br>
-<br>
-<p>        return encoded</p>
-<br>
-<br>
-<br>
-<p>    def encode_javascript_variable(user_input):</p>
-<br>
-<p>        """Hex encode each character for JS variable context."""</p>
-<br>
-<p>        encoded = ''</p>
-<br>
-<p>        for char in user_input:</p>
-<br>
-<p>            encoded += f'\\x{ord(char):02x}'</p>
-<br>
-<p>        return encoded</p>
-<br>
-<br>
-<br>
-<br>
-<p>URL Context   </p>
-<br>
-<br>
-<br>
-<p>    from urllib.parse import quote, urlencode</p>
-<br>
-<br>
-<br>
-<p>    def encode_url_param(user_input):</p>
-<br>
-<p>        """Encode for URL parameter values."""</p>
-<br>
-<p>        return quote(user_input, safe='')</p>
-<br>
-<br>
-<br>
-<p>    def encode_url_path(component):</p>
-<br>
-<p>        """Encode for URL path segments."""</p>
-<br>
-<p>        return quote(component, safe='')</p>
-<br>
-<br>
-<br>
-<p>    # Defense against javascript: protocol</p>
-<br>
-<p>    def sanitize_url_for_href(user_input):</p>
-<br>
-<p>        """Block dangerous URL schemes."""</p>
-<br>
-<p>        allowed_schemes = {'http', 'https', 'mailto', 'tel'}</p>
-<br>
-<p>        user_input = user_input.strip()</p>
-<br>
-<br>
-<br>
-<p>        # Lowercase for scheme check</p>
-<br>
-<p>        for scheme in allowed_schemes:</p>
-<br>
-<p>            if user_input.lower().startswith(f'{scheme}:'):</p>
-<br>
-<p>                return quote(user_input, safe=':/?#[]@!$&\'()*+,;=-._~')</p>
-<br>
-<br>
-<br>
-<p>        # Dangerous schemes</p>
-<br>
-<p>        dangerous = ['javascript:', 'data:', 'vbscript:', 'file:']</p>
-<br>
-<p>        for scheme in dangerous:</p>
-<br>
-<p>            if scheme in user_input.lower():</p>
-<br>
-<p>                return ''  # Remove dangerous URLs</p>
-<br>
-<br>
-<br>
-<p>        return quote(user_input, safe=':/?#[]@!$&\'()*+,;=-._~')</p>
-<br>
-<br>
-<br>
-<br>
-<p>Template Engine Auto-Escaping   </p>
-<p>Modern template engines provide auto-escaping, which encodes output based on context.   </p>
-<p>Jinja2 (Python)   </p>
-<br>
-<br>
-<br>
-<p>    {# Jinja2 auto-escape enabled by default #}</p>
-<br>
-<p>    <p>{{ user.bio }}</p>  </p>
-<br>
-<p>    {# <p>Hello &lt;script&gt;alert(1)&lt;/script&gt;</p> #}</p>
-<br>
-<br>
-<br>
-<p>    {# Safe filter marks as trusted HTML #}</p>
-<br>
-<p>    <p>{{ user.bio|safe }}</p></p>
-<br>
-<p>    {# WARNING: only use safe for trusted content #}</p>
-<br>
-<br>
-<br>
-<p>    {# Escaping for specific attributes #}</p>
-<br>
-<p>    <input value="{{ user.name|e }}" /></p>
-<br>
-<br>
-<br>
-<p>    {# Manual escaping functions #}</p>
-<br>
-<p>    {% set encoded = user.name|e %}</p>
-<br>
-<br>
-<br>
-<br>
-<p>React JSX   </p>
-<br>
-<br>
-<br>
-<p>    // React automatically escapes by default</p>
-<br>
-<p>    function UserProfile({ user }) {</p>
-<br>
-<p>      return (</p>
-<br>
-<p>        <div></p>
-<br>
-<p>          {/* Automatic escaping — XSS safe */}</p>
-<br>
-<p>          <p>{user.bio}</p></p>
-<br>
-<br>
-<br>
-<p>          {/* DangerouslySetInnerHTML bypasses escaping */}</p>
-<br>
-<p>          <div dangerouslySetInnerHTML={{ __html: user.htmlContent }} /></p>
-<br>
-<br>
-<br>
-<p>          {/* Manual URL encoding for href */}</p>
-<br>
-<p>          <a href={encodeURI(user.website)}>Website</a></p>
-<br>
-<p>        </div></p>
-<br>
-<p>      );</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<p>Common Pitfalls   </p>
-<p>Double Encoding   </p>
-<br>
-<br>
-<br>
-<p>    Input: <script></p>
-<br>
-<p>    After double URL decode: %253Cscript%253E → %3Cscript%3E → <script></p>
-<br>
-<p>    Solution: Decode input only once at boundary, then encode for output context.</p>
-<br>
-<br>
-<br>
-<br>
-<p>Encoding for Wrong Context   </p>
-<br>
-<br>
-<br>
-<p>    # WRONG: URL encoding for HTML body</p>
-<br>
-<p>    user_input = "https://evil.com?q=<script>"</p>
-<br>
-<p>    encoded = quote(user_input)</p>
-<br>
-<p>    # <p>https%3A//evil.com%3Fq%3D%3Cscript%3E</p></p>
-<br>
-<p>    # HTML entity encoding is needed here, not URL encoding</p>
-<br>
-<br>
-<br>
-<p>    # RIGHT: Use HTML encoding for HTML body</p>
-<br>
-<p>    encoded = html.escape(user_input)</p>
-<br>
-<br>
-<br>
-<br>
-<p>Defense in Depth Strategy   </p>
-<br>
-<br>
-<br>
-<p>    class OutputEncoder:</p>
-<br>
-<p>        def encode(self, data, context):</p>
-<br>
-<p>            encoders = {</p>
-<br>
-<p>                'html_body': self._encode_html_body,</p>
-<br>
-<p>                'html_attr': self._encode_html_attribute,</p>
-<br>
-<p>                'js_string': self._encode_js_string,</p>
-<br>
-<p>                'js_block': self._encode_js_block,</p>
-<br>
-<p>                'url_param': self._encode_url_param,</p>
-<br>
-<p>                'css': self._encode_css,</p>
-<br>
-<p>            }</p>
-<br>
-<p>            encoder = encoders.get(context)</p>
-<br>
-<p>            if not encoder:</p>
-<br>
-<p>                raise ValueError(f"Unknown context: {context}")</p>
-<br>
-<p>            return encoder(data)</p>
-<br>
-<br>
-<br>
-<br>
-<p>Conclusion   </p>
-<p>Output encoding is the definitive defense against XSS. Always encode data for the specific context in which it appears — HTML body, attribute, JavaScript, URL, or CSS. Rely on template engine auto-escaping for the common case, understand when and how to use explicit encoding functions, and never trust user-supplied content marked as safe.</p></div>
+<p>Output encoding remains essential because validation alone cannot catch every attack vector. Encode all output, in the correct context, every time.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/data-classification.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Data Classification">
     <meta name="twitter:description" content="Implementing data classification with labeling, handling procedures, and automated classification tools.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/data-classification.png">
     <title>Data Classification — SourceHub</title>
     <meta name="description" content="Implementing data classification with labeling, handling procedures, and automated classification tools.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Data Classification",
       "description": "Implementing data classification with labeling, handling procedures, and automated classification tools.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/data-classification.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "856",
+      "wordCount": "824",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Data Classification</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/data-classification.png" alt="Data Classification" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Data Classification</h1>
 <br>
 <p>Why Classify Data?   </p>
@@ -85,13 +86,9 @@
 <p>Automated Classification   </p>
 <p>Use content inspection to classify data automatically:   </p>
 <br>
-<br>
-<br>
 <p>    import re</p>
 <br>
 <p>    import hashlib</p>
-<br>
-<br>
 <br>
 <p>    class DataClassifier:</p>
 <br>
@@ -107,15 +104,11 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
 <p>        def classify_document(self, content, metadata):</p>
 <br>
 <p>            score = 0</p>
 <br>
 <p>            findings = []</p>
-<br>
-<br>
 <br>
 <p>            for label, pattern in self.patterns.items():</p>
 <br>
@@ -126,8 +119,6 @@
 <p>                    score += len(matches) * 10</p>
 <br>
 <p>                    findings.append({"type": label, "count": len(matches)})</p>
-<br>
-<br>
 <br>
 <p>            if score > 50:</p>
 <br>
@@ -143,13 +134,8 @@
 <br>
 <p>            return "public", findings</p>
 <br>
-<br>
-<br>
-<br>
 <p>Handling Procedures   </p>
 <p>Define procedures for each classification level:   </p>
-<br>
-<br>
 <br>
 <p>    # handling-policies.yaml</p>
 <br>
@@ -165,8 +151,6 @@
 <br>
 <p>      sharing: require_nda_and_approval</p>
 <br>
-<br>
-<br>
 <p>    confidential:</p>
 <br>
 <p>      storage: encrypted_bucket</p>
@@ -179,21 +163,14 @@
 <br>
 <p>      sharing: require_approval</p>
 <br>
-<br>
-<br>
-<br>
 <p>Labeling Implementation   </p>
 <p>Apply labels at multiple layers:   </p>
-<br>
-<br>
 <br>
 <p>    // S3 object tagging for classification</p>
 <br>
 <p>    const AWS = require("aws-sdk");</p>
 <br>
 <p>    const s3 = new AWS.S3();</p>
-<br>
-<br>
 <br>
 <p>    async function tagObject(bucket, key, classification) {</p>
 <br>
@@ -221,13 +198,8 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Integration with DLP   </p>
 <p>Classification feeds directly into DLP policies:   </p>
-<br>
-<br>
 <br>
 <p>    -- Block restricted data leaving the network</p>
 <br>
@@ -238,9 +210,6 @@
 <p>      AND operation IN ('email.send', 'usb.copy', 'cloud.upload')</p>
 <br>
 <p>    ACTION block;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Data classification is foundational to information security. Automate where possible, define clear handling procedures, and integrate classification labels across your data protection stack. Start with the most sensitive data and expand coverage iteratively.</p></div>

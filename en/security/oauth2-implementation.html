@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/oauth2-implementation.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="OAuth2 Implementation">
     <meta name="twitter:description" content="Implementing OAuth2 with grant types, token handling, PKCE, and security best practices.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/oauth2-implementation.png">
     <title>OAuth2 Implementation — SourceHub</title>
     <meta name="description" content="Implementing OAuth2 with grant types, token handling, PKCE, and security best practices.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "OAuth2 Implementation",
       "description": "Implementing OAuth2 with grant types, token handling, PKCE, and security best practices.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/oauth2-implementation.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1165",
+      "wordCount": "1116",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">OAuth2 Implementation</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/oauth2-implementation.png" alt="OAuth2 Implementation" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>OAuth2 Implementation</h1>
 <br>
 <p>OAuth2 Fundamentals   </p>
@@ -83,13 +84,9 @@
 <p>Authorization Code Grant (with PKCE)   </p>
 <p>The recommended flow for public clients:   </p>
 <br>
-<br>
-<br>
 <p>    // PKCE code challenge generation</p>
 <br>
 <p>    const crypto = require("crypto");</p>
-<br>
-<br>
 <br>
 <p>    function generatePKCE() {</p>
 <br>
@@ -103,13 +100,9 @@
 <br>
 <p>        .digest("base64url");</p>
 <br>
-<br>
-<br>
 <p>      return { verifier, challenge };</p>
 <br>
 <p>    }</p>
-<br>
-<br>
 <br>
 <p>    // Authorization request</p>
 <br>
@@ -128,8 +121,6 @@
 <p>      code_challenge_method=S256&</p>
 <br>
 <p>      scope=openid%20profile`;</p>
-<br>
-<br>
 <br>
 <p>    // Token exchange</p>
 <br>
@@ -161,17 +152,10 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Client Credentials Grant   </p>
 <p>For server-to-server communication:   </p>
 <br>
-<br>
-<br>
 <p>    import requests</p>
-<br>
-<br>
 <br>
 <p>    def get_client_credentials_token(client_id, client_secret, scope):</p>
 <br>
@@ -197,13 +181,8 @@
 <br>
 <p>        return resp.json()["access_token"]</p>
 <br>
-<br>
-<br>
-<br>
 <p>Token Handling   </p>
 <p>Access Token Validation   </p>
-<br>
-<br>
 <br>
 <p>    // JWT verification middleware</p>
 <br>
@@ -211,15 +190,11 @@
 <br>
 <p>    const jwksClient = require("jwks-rsa");</p>
 <br>
-<br>
-<br>
 <p>    const client = jwksClient({</p>
 <br>
 <p>      jwksUri: "https://auth.example.com/.well-known/jwks.json"</p>
 <br>
 <p>    });</p>
-<br>
-<br>
 <br>
 <p>    function verifyToken(req, res, next) {</p>
 <br>
@@ -231,11 +206,7 @@
 <br>
 <p>      }</p>
 <br>
-<br>
-<br>
 <p>      const token = authHeader.split(" ")[1];</p>
-<br>
-<br>
 <br>
 <p>      jwt.verify(token, (header, callback) => {</p>
 <br>
@@ -265,12 +236,7 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Refresh Token Rotation   </p>
-<br>
-<br>
 <br>
 <p>    def rotate_refresh_token(old_token):</p>
 <br>
@@ -278,21 +244,15 @@
 <br>
 <p>        token_data = verify_refresh_token(old_token)</p>
 <br>
-<br>
-<br>
 <p>        # Revoke the old token</p>
 <br>
 <p>        revoke_token(old_token)</p>
-<br>
-<br>
 <br>
 <p>        # Issue new tokens</p>
 <br>
 <p>        new_access = create_access_token(token_data["user_id"])</p>
 <br>
 <p>        new_refresh = create_refresh_token(token_data["user_id"])</p>
-<br>
-<br>
 <br>
 <p>        return {</p>
 <br>
@@ -304,12 +264,7 @@
 <br>
 <p>        }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Best Practices   </p>
-<br>
-<br>
 <br>
 <p>    oauth2_best_practices:</p>
 <br>
@@ -328,9 +283,6 @@
 <p>      - Implement token revocation</p>
 <br>
 <p>      - Log all token issuance and usage</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>OAuth2 is complex but essential for modern authentication. PKCE makes authorization code flow safe for single-page apps. Use short-lived access tokens with refresh token rotation. Always validate tokens thoroughly on the server side. Keep your JWKS endpoint secure and rotate signing keys regularly.</p></div>

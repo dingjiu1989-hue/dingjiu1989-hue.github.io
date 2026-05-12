@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-modeling.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Threat Modeling">
     <meta name="twitter:description" content="Threat modeling methodologies including STRIDE, DREAD, PASTA, attack trees, and practical tooling.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-modeling.png">
     <title>Threat Modeling — SourceHub</title>
     <meta name="description" content="Threat modeling methodologies including STRIDE, DREAD, PASTA, attack trees, and practical tooling.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Threat Modeling",
       "description": "Threat modeling methodologies including STRIDE, DREAD, PASTA, attack trees, and practical tooling.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/threat-modeling.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1560",
+      "wordCount": "1488",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Threat Modeling</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-modeling.png" alt="Threat Modeling" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Threat Modeling</h1>
 <br>
 <p>Why Threat Model?   </p>
@@ -83,15 +84,11 @@
 <p>Microsoft's STRIDE categorizes threats:   </p>
 <p>| Category | Definition | Example | |----------|------------|---------| | Spoofing | Impersonating someone | Fake login page | | Tampering | Modifying data | Altering database records | | Repudiation | Denying actions | Missing audit logs | | Information Disclosure | Exposing data | SQL injection | | Denial of Service | Disrupting service | DDoS attack | | Elevation of Privilege | Gaining unauthorized access | Buffer overflow |   </p>
 <br>
-<br>
-<br>
 <p>    # STRIDE threat analysis</p>
 <br>
 <p>    def analyze_with_stride(component, data_flow):</p>
 <br>
 <p>        threats = []</p>
-<br>
-<br>
 <br>
 <p>        # Spoofing</p>
 <br>
@@ -107,8 +104,6 @@
 <br>
 <p>            })</p>
 <br>
-<br>
-<br>
 <p>        # Tampering</p>
 <br>
 <p>        if not data_flow.get("integrity_check"):</p>
@@ -122,8 +117,6 @@
 <p>                "mitigation": "Use message signing or HMAC"</p>
 <br>
 <p>            })</p>
-<br>
-<br>
 <br>
 <p>        # Information Disclosure</p>
 <br>
@@ -139,17 +132,10 @@
 <br>
 <p>            })</p>
 <br>
-<br>
-<br>
 <p>        return threats</p>
-<br>
-<br>
-<br>
 <br>
 <p>DREAD Risk Rating   </p>
 <p>DREAD helps prioritize threats:   </p>
-<br>
-<br>
 <br>
 <p>    def dread_rating(threat):</p>
 <br>
@@ -167,13 +153,9 @@
 <br>
 <p>        }</p>
 <br>
-<br>
-<br>
 <p>        total = sum(scores.values())</p>
 <br>
 <p>        rating = total / 5</p>
-<br>
-<br>
 <br>
 <p>        if rating >= 7:</p>
 <br>
@@ -191,13 +173,8 @@
 <br>
 <p>            return "Low"</p>
 <br>
-<br>
-<br>
-<br>
 <p>PASTA Methodology   </p>
 <p>Process for Attack Simulation and Threat Analysis (PASTA) has seven stages:   </p>
-<br>
-<br>
 <br>
 <p>    pasta_stages:</p>
 <br>
@@ -215,8 +192,6 @@
 <br>
 <p>      7: "Risk and impact analysis"</p>
 <br>
-<br>
-<br>
 <p>    stage_4_threat_analysis:</p>
 <br>
 <p>      - technique: "Create threat tree for each asset"</p>
@@ -233,13 +208,8 @@
 <br>
 <p>            - "Unencrypted backup compromise"</p>
 <br>
-<br>
-<br>
-<br>
 <p>Attack Trees   </p>
 <p>Model attacker goals and paths:   </p>
-<br>
-<br>
 <br>
 <p>    class AttackTreeNode:</p>
 <br>
@@ -253,23 +223,17 @@
 <br>
 <p>            self.mitigations = []</p>
 <br>
-<br>
-<br>
 <p>        def add_child(self, node):</p>
 <br>
 <p>            self.children.append(node)</p>
 <br>
 <p>            return self</p>
 <br>
-<br>
-<br>
 <p>        def add_mitigation(self, mitigation):</p>
 <br>
 <p>            self.mitigations.append(mitigation)</p>
 <br>
 <p>            return self</p>
-<br>
-<br>
 <br>
 <p>    # Example: Attack tree for credential theft</p>
 <br>
@@ -280,8 +244,6 @@
 <p>        "Attacker goal: acquire valid credentials"</p>
 <br>
 <p>    )</p>
-<br>
-<br>
 <br>
 <p>    root.add_child(AttackTreeNode(</p>
 <br>
@@ -297,8 +259,6 @@
 <br>
 <p>    )))</p>
 <br>
-<br>
-<br>
 <p>    root.add_child(AttackTreeNode(</p>
 <br>
 <p>        "Credential Stuffing",</p>
@@ -306,8 +266,6 @@
 <p>        "Use leaked credentials from other breaches"</p>
 <br>
 <p>    ))</p>
-<br>
-<br>
 <br>
 <p>    root.add_child(AttackTreeNode(</p>
 <br>
@@ -323,12 +281,7 @@
 <br>
 <p>    )))</p>
 <br>
-<br>
-<br>
-<br>
 <p>Threat Modeling Tools   </p>
-<br>
-<br>
 <br>
 <p>    # Microsoft Threat Modeling Tool</p>
 <br>
@@ -336,17 +289,11 @@
 <br>
 <p>    # PyTM - Pythonic threat modeling</p>
 <br>
-<br>
-<br>
 <p>    # Example: PyTM model</p>
 <br>
 <p>    from pytm import TM, Server, Dataflow, Boundary</p>
 <br>
-<br>
-<br>
 <p>    tm = TM("Web Application")</p>
-<br>
-<br>
 <br>
 <p>    internet = Boundary("Internet")</p>
 <br>
@@ -354,11 +301,7 @@
 <br>
 <p>    database = Server("Database")</p>
 <br>
-<br>
-<br>
 <p>    web_server.inBoundary = internet</p>
-<br>
-<br>
 <br>
 <p>    request = Dataflow(web_server, database, "SQL Query")</p>
 <br>
@@ -366,16 +309,9 @@
 <br>
 <p>    request.data = "SQL Query"</p>
 <br>
-<br>
-<br>
 <p>    tm.process()</p>
 <br>
-<br>
-<br>
-<br>
 <p>Integration with Development   </p>
-<br>
-<br>
 <br>
 <p>    # Threat modeling in CI</p>
 <br>
@@ -389,8 +325,6 @@
 <br>
 <p>        - third_party_integration</p>
 <br>
-<br>
-<br>
 <p>      automated_checks:</p>
 <br>
 <p>        - data_flow_diagram_required</p>
@@ -401,8 +335,6 @@
 <br>
 <p>        - authorization_model_defined</p>
 <br>
-<br>
-<br>
 <p>      review_gates:</p>
 <br>
 <p>        - critical_threats: must_have_mitigation</p>
@@ -410,9 +342,6 @@
 <p>        - high_threats: must_have_mitigation_or_acceptance</p>
 <br>
 <p>        - medium_threats: reviewed_and_documented</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Threat modeling is an essential security practice. Use STRIDE for threat identification, DREAD for prioritization, and PASTA for comprehensive analysis. Build attack trees to explore attacker paths. Integrate threat modeling into your development lifecycle. Automate where possible but maintain human oversight for design-level analysis. The goal is to find and fix security issues before they reach production.</p></div>

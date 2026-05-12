@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/backup-types.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Backup Types: Full, Incremental, Differential, WAL Archiving">
     <meta name="twitter:description" content="Explore database backup strategies including full, incremental, differential backups, WAL archiving, and point-in-time recovery with PostgreSQL.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/backup-types.png">
     <title>Database Backup Types: Full, Incremental, Differential, WAL Archiving — SourceHub</title>
     <meta name="description" content="Explore database backup strategies including full, incremental, differential backups, WAL archiving, and point-in-time recovery with PostgreSQL.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Backup Types: Full, Incremental, Differential, WAL Archiving",
       "description": "Explore database backup strategies including full, incremental, differential backups, WAL archiving, and point-in-time recovery with PostgreSQL.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/backup-types.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1336",
+      "wordCount": "1264",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Backup Types: Full, Incremental, Differential, WAL Archiving</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/backup-types.png" alt="Database Backup Types: Full, Incremental, Differential, WAL Archiving" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h1>
 <br>
 <p>Database Backup Types: Full, Incremental, Differential, WAL Archiving   </p>
@@ -83,19 +84,13 @@
 <p>Full Backup   </p>
 <p>A full backup copies the entire database cluster. It is the foundation of any backup strategy.   </p>
 <br>
-<br>
-<br>
 <p>    # PostgreSQL full backup with pg_dump (logical)</p>
 <br>
 <p>    pg_dump -h localhost -U admin -Fc -f prod_backup.dump proddb</p>
 <br>
-<br>
-<br>
 <p>    # Or directory format for parallel dumps</p>
 <br>
 <p>    pg_dump -h localhost -U admin -Fd -j 4 -f /backups/proddb proddb</p>
-<br>
-<br>
 <br>
 <p>    # Physical full backup with pg_basebackup</p>
 <br>
@@ -105,14 +100,9 @@
 <br>
 <p>      -X stream -P -v</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Pros**: Complete snapshot, simple restoration. **Cons**: Large, time-consuming, resource-intensive.   </p>
 <p>Incremental Backup   </p>
 <p>An incremental backup captures only changes since the last backup (of any type). PostgreSQL achieves this via WAL archiving:   </p>
-<br>
-<br>
 <br>
 <p>    # Archive WAL segments continuously</p>
 <br>
@@ -122,27 +112,17 @@
 <br>
 <p>    archive_command = 'cp %p /backups/wal/%f'</p>
 <br>
-<br>
-<br>
-<br>
 <p>Each 16 MB WAL segment is an incremental backup.   </p>
 <p>Differential Backup   </p>
 <p>A differential backup captures changes since the last full backup. It is larger than an incremental but faster to restore (only the full + one differential needed).   </p>
-<br>
-<br>
 <br>
 <p>    -- pgBackRest differential backup</p>
 <br>
 <p>    pgbackrest --stanza=prod --type=diff backup</p>
 <br>
-<br>
-<br>
-<br>
 <p>WAL Archiving and Point-in-Time Recovery   </p>
 <p>WAL archiving is PostgreSQL's mechanism for continuous archiving. Combined with a base backup, it enables restoring to any point in time.   </p>
 <p>Configuration   </p>
-<br>
-<br>
 <br>
 <p>    # postgresql.conf</p>
 <br>
@@ -154,17 +134,10 @@
 <br>
 <p>    archive_timeout = 60</p>
 <br>
-<br>
-<br>
-<br>
 <p>Recovery   </p>
 <p>To restore to a specific point in time:   </p>
 <br>
-<br>
-<br>
 <p>    # recovery.signal (or standby.signal for replica)</p>
-<br>
-<br>
 <br>
 <p>    restore_command = 'aws s3 cp s3://my-backups/wal/%f %p'</p>
 <br>
@@ -172,23 +145,14 @@
 <br>
 <p>    recovery_target_action = promote</p>
 <br>
-<br>
-<br>
-<br>
 <p>Start PostgreSQL. It replays WAL segments until it reaches the target time and then promotes itself to a primary.   </p>
 <p>Complete PITR Workflow   </p>
-<br>
-<br>
 <br>
 <p>    # 1. Take a base backup</p>
 <br>
 <p>    pg_basebackup -h prod-db -U replicator -D /backups/base_20260512 -X stream</p>
 <br>
-<br>
-<br>
 <p>    # 2. Archive WAL continuously (configured in postgresql.conf)</p>
-<br>
-<br>
 <br>
 <p>    # 3. Restore to a point in time</p>
 <br>
@@ -197,8 +161,6 @@
 <p>    cp -r /backups/base_20260512/* /var/lib/postgresql/restored/</p>
 <br>
 <p>    touch /var/lib/postgresql/restored/recovery.signal</p>
-<br>
-<br>
 <br>
 <p>    cat > /var/lib/postgresql/restored/postgresql.conf << EOF</p>
 <br>
@@ -210,12 +172,7 @@
 <br>
 <p>    EOF</p>
 <br>
-<br>
-<br>
 <p>    pg_ctl start -D /var/lib/postgresql/restored</p>
-<br>
-<br>
-<br>
 <br>
 <p>Backup Strategies Compared   </p>
 <p>| Type | Size | Restore Speed | Complexity | Frequency | |------|------|---------------|------------|-----------| | Full | Largest | Slowest | Low | Weekly | | Incremental | Smallest | Slowest | Medium | Continuous | | Differential | Medium | Medium | Medium | Daily | | WAL archiving | Tiny per segment | Fast (with base) | High | Continuous |   </p>
@@ -236,31 +193,21 @@
 <p>pgBackRest   </p>
 <p>pgBackRest is the most popular dedicated backup tool for PostgreSQL:   </p>
 <br>
-<br>
-<br>
 <p>    # Configure stanza</p>
 <br>
 <p>    pgbackrest --stanza=prod stanza-create</p>
-<br>
-<br>
 <br>
 <p>    # Full backup</p>
 <br>
 <p>    pgbackrest --stanza=prod --type=full backup</p>
 <br>
-<br>
-<br>
 <p>    # Incremental backup (default)</p>
 <br>
 <p>    pgbackrest --stanza=prod --type=incr backup</p>
 <br>
-<br>
-<br>
 <p>    # List backups</p>
 <br>
 <p>    pgbackrest --stanza=prod info</p>
-<br>
-<br>
 <br>
 <p>    # Restore to specific point</p>
 <br>
@@ -268,13 +215,8 @@
 <br>
 <p>      --target="2026-05-12 03:15:00" restore</p>
 <br>
-<br>
-<br>
-<br>
 <p>Testing Backups   </p>
 <p>A backup that cannot be restored is worthless. Regular restore testing is mandatory:   </p>
-<br>
-<br>
 <br>
 <p>    # Automated restore test script</p>
 <br>
@@ -282,25 +224,17 @@
 <br>
 <p>    set -e</p>
 <br>
-<br>
-<br>
 <p>    RESTORE_DIR=/tmp/restore_test</p>
 <br>
 <p>    BACKUP_DIR=/backups/weekly</p>
-<br>
-<br>
 <br>
 <p>    rm -rf $RESTORE_DIR</p>
 <br>
 <p>    pgbackrest --stanza=prod --db-path=$RESTORE_DIR restore</p>
 <br>
-<br>
-<br>
 <p>    pg_ctl start -D $RESTORE_DIR -l $RESTORE_DIR/logfile</p>
 <br>
 <p>    sleep 10</p>
-<br>
-<br>
 <br>
 <p>    psql -d postgres -c "SELECT count(*) FROM pg_database;"</p>
 <br>
@@ -308,12 +242,7 @@
 <br>
 <p>    rm -rf $RESTORE_DIR</p>
 <br>
-<br>
-<br>
 <p>    echo "Restore test PASSED at $(date)"</p>
-<br>
-<br>
-<br>
 <br>
 <p>Cloud Backup Integration   </p>
 <p>Most cloud providers offer managed backup services:   </p>

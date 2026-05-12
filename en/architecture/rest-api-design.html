@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/rest-api-design.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="REST API Design Best Practices">
     <meta name="twitter:description" content="Learn REST API design best practices for building scalable, maintainable web APIs.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/rest-api-design.png">
     <title>REST API Design Best Practices — SourceHub</title>
     <meta name="description" content="Learn REST API design best practices for building scalable, maintainable web APIs.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "REST API Design Best Practices",
       "description": "Learn REST API design best practices for building scalable, maintainable web APIs.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/rest-api-design.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1306",
+      "wordCount": "1266",
       "keywords": "Architecture, System Design",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,22 +74,18 @@
         <span class="tag-cat">System Design</span></div>
       <h1 class="article-title">REST API Design Best Practices</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/rest-api-design.png" alt="REST API Design Best Practices" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>REST API Design Best Practices</h1>
 <br>
 <p>REST (Representational State Transfer) remains the dominant architectural style for web APIs. A well-designed REST API is intuitive, consistent, and easy to maintain. This article covers the core principles and practical guidelines for designing REST APIs that developers love to use.   </p>
 <p>Use Consistent Resource Naming   </p>
 <p>Your API endpoints represent resources. Use nouns, not verbs, and stick to a consistent naming convention.   </p>
 <br>
-<br>
-<br>
 <p>    GET /users          # Good</p>
 <br>
 <p>    GET /getUsers       # Bad</p>
 <br>
 <p>    POST /createUser    # Bad</p>
-<br>
-<br>
-<br>
 <br>
 <p>Use plural nouns for collections (`/users`, `/orders`) and nest resources to express relationships (`/users/123/orders`). Avoid deep nesting beyond two or three levels. If you find yourself nesting four levels deep, consider flattening the structure or using query parameters.   </p>
 <p>Leverage HTTP Methods Correctly   </p>
@@ -114,20 +110,13 @@
 <p>Pagination, Filtering, and Sorting   </p>
 <p>Collections should always support pagination, filtering, and sorting.   </p>
 <br>
-<br>
-<br>
 <p>    GET /users?page=2&per_page=20</p>
 <br>
 <p>    GET /users?sort=created_at&order=desc</p>
 <br>
 <p>    GET /users?filter[status]=active</p>
 <br>
-<br>
-<br>
-<br>
 <p>Return pagination metadata in the response:   </p>
-<br>
-<br>
 <br>
 <p>    {</p>
 <br>
@@ -147,14 +136,9 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Using cursor-based pagination is recommended for large, frequently updated datasets, as it is more performant than offset-based pagination.   </p>
 <p>Consistent Error Responses   </p>
 <p>Design a standard error response format and use it everywhere:   </p>
-<br>
-<br>
 <br>
 <p>    {</p>
 <br>
@@ -174,27 +158,17 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Include a machine-readable error code, a human-readable message, and detailed validation errors when appropriate. This allows clients to handle errors programmatically.   </p>
 <p>Versioning   </p>
 <p>APIs evolve. Plan for it from day one. The simplest approach is URL-based versioning:   </p>
-<br>
-<br>
 <br>
 <p>    /api/v1/users</p>
 <br>
 <p>    /api/v2/users</p>
 <br>
-<br>
-<br>
-<br>
 <p>Header-based versioning (e.g., `Accept: application/vnd.myapi.v1+json`) is more RESTful but harder for clients to discover. Choose whichever approach your consumers will find more intuitive.   </p>
 <p>Use HATEOAS for Discoverability   </p>
 <p>HATEOAS (Hypermedia as the Engine of Application State) includes links in responses to guide clients:   </p>
-<br>
-<br>
 <br>
 <p>    {</p>
 <br>
@@ -212,34 +186,21 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>While many APIs skip HATEOAS, it significantly improves discoverability and reduces the need for external documentation for navigating resource relationships.   </p>
 <p>Authentication and Authorization   </p>
 <p>Use industry-standard authentication mechanisms. Token-based auth (JWT) is the most common choice for REST APIs. Include tokens in the `Authorization` header:   </p>
 <br>
-<br>
-<br>
 <p>    Authorization: Bearer <token></p>
-<br>
-<br>
-<br>
 <br>
 <p>Use scopes or claims within the token to implement fine-grained authorization. Always use HTTPS in production to protect tokens and data in transit.   </p>
 <p>Rate Limiting   </p>
 <p>Protect your API from abuse by implementing rate limiting. Return rate limit information in response headers:   </p>
-<br>
-<br>
 <br>
 <p>    X-RateLimit-Limit: 100</p>
 <br>
 <p>    X-RateLimit-Remaining: 42</p>
 <br>
 <p>    X-RateLimit-Reset: 1640995200</p>
-<br>
-<br>
-<br>
 <br>
 <p>When a client exceeds the limit, return `429 Too Many Requests` with a `Retry-After` header.   </p>
 <p>Documentation   </p>

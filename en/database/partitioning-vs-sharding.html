@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/partitioning-vs-sharding.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Partitioning vs Sharding">
     <meta name="twitter:description" content="Comparing database partitioning and sharding: differences, use cases, and implementation approaches.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/partitioning-vs-sharding.png">
     <title>Partitioning vs Sharding — SourceHub</title>
     <meta name="description" content="Comparing database partitioning and sharding: differences, use cases, and implementation approaches.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Partitioning vs Sharding",
       "description": "Comparing database partitioning and sharding: differences, use cases, and implementation approaches.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/partitioning-vs-sharding.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "543",
+      "wordCount": "521",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Partitioning vs Sharding</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/partitioning-vs-sharding.png" alt="Partitioning vs Sharding" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Partitioning vs Sharding</h1>
 <br>
 <p>Partitioning vs Sharding   </p>
 <p>Partitioning splits a table within a single database. Sharding splits data across multiple database servers.   </p>
 <p>Table Partitioning   </p>
 <p>Divide a large table into smaller physical pieces within one database:   </p>
-<br>
-<br>
 <br>
 <p>    -- Range partitioning</p>
 <br>
@@ -92,13 +91,9 @@
 <br>
 <p>    ) PARTITION BY RANGE (order_date);</p>
 <br>
-<br>
-<br>
 <p>    CREATE TABLE orders_2026_01 PARTITION OF orders</p>
 <br>
 <p>        FOR VALUES FROM ('2026-01-01') TO ('2026-02-01');</p>
-<br>
-<br>
 <br>
 <p>    -- List partitioning</p>
 <br>
@@ -108,13 +103,9 @@
 <br>
 <p>    ) PARTITION BY LIST (event_type);</p>
 <br>
-<br>
-<br>
 <p>    CREATE TABLE events_pageview PARTITION OF events</p>
 <br>
 <p>        FOR VALUES IN ('pageview');</p>
-<br>
-<br>
 <br>
 <p>    -- Hash partitioning</p>
 <br>
@@ -124,20 +115,13 @@
 <br>
 <p>    ) PARTITION BY HASH (session_id);</p>
 <br>
-<br>
-<br>
 <p>    CREATE TABLE sessions_0 PARTITION OF sessions</p>
 <br>
 <p>        FOR VALUES WITH (MODULUS 4, REMAINDER 0);</p>
 <br>
-<br>
-<br>
-<br>
 <p>Partitioning benefits: partition pruning (skip irrelevant partitions), faster maintenance, efficient bulk deletes.   </p>
 <p>Database Sharding   </p>
 <p>Distribute data across multiple database servers:   </p>
-<br>
-<br>
 <br>
 <p>    class ShardRouter:</p>
 <br>
@@ -145,16 +129,11 @@
 <br>
 <p>            self.shards = shards</p>
 <br>
-<br>
-<br>
 <p>        def get_shard(self, key):</p>
 <br>
 <p>            shard_id = hash(key) % len(self.shards)</p>
 <br>
 <p>            return self.shards[shard_id]</p>
-<br>
-<br>
-<br>
 <br>
 <p>Sharding benefits: horizontal scalability for writes, distributes load across servers.   </p>
 <p>Key Differences   </p>

@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-network-security.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Cloud Network Security">
     <meta name="twitter:description" content="Designing cloud network security with security groups, NACLs, firewall rules, and traffic inspection.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-network-security.png">
     <title>Cloud Network Security — SourceHub</title>
     <meta name="description" content="Designing cloud network security with security groups, NACLs, firewall rules, and traffic inspection.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Cloud Network Security",
       "description": "Designing cloud network security with security groups, NACLs, firewall rules, and traffic inspection.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-network-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1138",
+      "wordCount": "1088",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Cloud Network Security</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-network-security.png" alt="Cloud Network Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Cloud Network Security</h1>
 <br>
 <p>Cloud Network Security Layers   </p>
 <p>Cloud networks require defense in depth: VPC isolation, subnet segmentation, security groups, network ACLs, and traffic inspection.   </p>
 <p>Security Groups vs NACLs   </p>
 <p>Security groups are stateful instance-level firewalls. NACLs are stateless subnet-level filters:   </p>
-<br>
-<br>
 <br>
 <p>    # Security Group (stateful)</p>
 <br>
@@ -93,8 +92,6 @@
 <p>      description = "Security group for web instances"</p>
 <br>
 <p>      vpc_id      = var.vpc_id</p>
-<br>
-<br>
 <br>
 <p>      ingress {</p>
 <br>
@@ -110,8 +107,6 @@
 <br>
 <p>      }</p>
 <br>
-<br>
-<br>
 <p>      ingress {</p>
 <br>
 <p>        description = "SSH from bastion only"</p>
@@ -125,8 +120,6 @@
 <p>        security_groups = [aws_security_group.bastion.id]</p>
 <br>
 <p>      }</p>
-<br>
-<br>
 <br>
 <p>      egress {</p>
 <br>
@@ -142,15 +135,11 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
 <p>    # NACL (stateless - must allow both directions)</p>
 <br>
 <p>    resource "aws_network_acl" "public_subnet_acl" {</p>
 <br>
 <p>      vpc_id = var.vpc_id</p>
-<br>
-<br>
 <br>
 <p>      ingress {</p>
 <br>
@@ -167,8 +156,6 @@
 <p>        action     = "allow"</p>
 <br>
 <p>      }</p>
-<br>
-<br>
 <br>
 <p>      egress {</p>
 <br>
@@ -188,12 +175,7 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>VPC Design   </p>
-<br>
-<br>
 <br>
 <p>    # Multi-tier VPC design</p>
 <br>
@@ -217,13 +199,9 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
 <p>        def generate_routing_rules(self):</p>
 <br>
 <p>            rules = []</p>
-<br>
-<br>
 <br>
 <p>            # Web tier: inbound from public, outbound to app</p>
 <br>
@@ -239,8 +217,6 @@
 <br>
 <p>            })</p>
 <br>
-<br>
-<br>
 <p>            # App tier: outbound to db</p>
 <br>
 <p>            rules.append({</p>
@@ -255,19 +231,12 @@
 <br>
 <p>            })</p>
 <br>
-<br>
-<br>
 <p>            # No direct public access to app or db</p>
 <br>
 <p>            return rules</p>
 <br>
-<br>
-<br>
-<br>
 <p>Traffic Inspection   </p>
 <p>Deploy inline inspection for east-west traffic:   </p>
-<br>
-<br>
 <br>
 <p>    # Traffic inspection rules</p>
 <br>
@@ -283,8 +252,6 @@
 <br>
 <p>        threat_prevention: enabled</p>
 <br>
-<br>
-<br>
 <p>      - name: inspect_app_db_traffic</p>
 <br>
 <p>        source: app-subnet</p>
@@ -295,20 +262,13 @@
 <br>
 <p>        anomaly_detection: enabled</p>
 <br>
-<br>
-<br>
-<br>
 <p>Firewall Rule Management   </p>
-<br>
-<br>
 <br>
 <p>    # Firewall rule analyzer</p>
 <br>
 <p>    def analyze_firewall_rules(rules):</p>
 <br>
 <p>        issues = []</p>
-<br>
-<br>
 <br>
 <p>        for rule in rules:</p>
 <br>
@@ -318,26 +278,17 @@
 <br>
 <p>                issues.append(f"Overly permissive: {rule['name']} allows SSH/RDP from anywhere")</p>
 <br>
-<br>
-<br>
 <p>            # Check for rules with no hits</p>
 <br>
 <p>            if rule.get("hit_count", 0) == 0 and rule["age_days"] > 30:</p>
 <br>
 <p>                issues.append(f"Unused rule: {rule['name']} has no hits in 30+ days")</p>
 <br>
-<br>
-<br>
 <p>            # Check for duplicate rules</p>
 <br>
 <p>            # ...</p>
 <br>
-<br>
-<br>
 <p>        return issues</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Cloud network security requires layered controls. Use security groups for instance-level filtering and NACLs for subnet-level guardrails. Design VPCs with multiple tiers and restrict traffic between them. Deploy traffic inspection for critical paths. Review firewall rules quarterly and remove unused rules. Automate everything with infrastructure as code.</p></div>

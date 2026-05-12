@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/orm-performance.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="ORM Performance">
     <meta name="twitter:description" content="Optimizing ORM performance by fixing N+1 queries, managing lazy loading, and tuning query generation.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/orm-performance.png">
     <title>ORM Performance — SourceHub</title>
     <meta name="description" content="Optimizing ORM performance by fixing N+1 queries, managing lazy loading, and tuning query generation.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "ORM Performance",
       "description": "Optimizing ORM performance by fixing N+1 queries, managing lazy loading, and tuning query generation.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/orm-performance.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "686",
+      "wordCount": "648",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">ORM Performance</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/orm-performance.png" alt="ORM Performance" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>ORM Performance</h1>
 <br>
 <p>ORM Performance Challenges   </p>
 <p>Object-Relational Mappers (ORMs) simplify database access but introduce performance pitfalls. Understanding these issues is essential for production applications.   </p>
 <p>The N+1 Query Problem   </p>
 <p>The most common ORM performance issue:   </p>
-<br>
-<br>
 <br>
 <p>    # N+1: One query for users, then N queries for orders</p>
 <br>
@@ -94,12 +93,7 @@
 <br>
 <p>        print(len(orders))</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Fix**: Use eager loading:   </p>
-<br>
-<br>
 <br>
 <p>    # Solution: 2 queries total</p>
 <br>
@@ -111,13 +105,8 @@
 <br>
 <p>        print(len(orders))</p>
 <br>
-<br>
-<br>
-<br>
 <p>Lazy Loading   </p>
 <p>Lazy loading defers data loading until accessed. It reduces initial query cost but can cause N+1:   </p>
-<br>
-<br>
 <br>
 <p>    # SQLAlchemy: configure relationship loading</p>
 <br>
@@ -129,13 +118,8 @@
 <br>
 <p>        orders = relationship("Order", lazy="selectin")  # Eager load</p>
 <br>
-<br>
-<br>
-<br>
 <p>| Loading Strategy | Queries | Memory | When to Use | |-----------------|---------|--------|-------------| | Lazy | 1 + N | Low | Rarely accessed | | Joined | 1 join | High | Always needed | | Selectin | 1 + 1 | Medium | Lists of related | | Subquery | 1 + 1 | Medium | Complex filters |   </p>
 <p>Query Optimization   </p>
-<br>
-<br>
 <br>
 <p>    # BAD: Fetch all columns when only one is needed</p>
 <br>
@@ -143,13 +127,9 @@
 <br>
 <p>    emails = [u.email for u in users]</p>
 <br>
-<br>
-<br>
 <p>    # GOOD: Fetch only needed columns</p>
 <br>
 <p>    emails = session.query(User.email).all()</p>
-<br>
-<br>
 <br>
 <p>    # BAD: Loading entire objects</p>
 <br>
@@ -159,8 +139,6 @@
 <br>
 <p>        u.last_login = datetime.utcnow()</p>
 <br>
-<br>
-<br>
 <p>    # GOOD: Bulk update</p>
 <br>
 <p>    User.query.filter(User.status == 'active').update(</p>
@@ -169,13 +147,8 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
-<br>
 <p>Understanding Generated SQL   </p>
 <p>Always check the SQL your ORM generates:   </p>
-<br>
-<br>
 <br>
 <p>    # SQLAlchemy: see the query</p>
 <br>
@@ -185,12 +158,7 @@
 <br>
 <p>    # SELECT users.id, users.email, users.name FROM users WHERE users.email = ?</p>
 <br>
-<br>
-<br>
-<br>
 <p>Batch Operations   </p>
-<br>
-<br>
 <br>
 <p>    # BAD: Individual inserts</p>
 <br>
@@ -200,16 +168,11 @@
 <br>
 <p>    session.commit()  # N individual INSERTs</p>
 <br>
-<br>
-<br>
 <p>    # GOOD: Bulk insert</p>
 <br>
 <p>    session.bulk_insert_mappings(User, [u.__dict__ for u in users])</p>
 <br>
 <p>    session.commit()  # Single batch INSERT</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Profile your ORM queries in production. Fix N+1 with eager loading. Select only needed columns. Use bulk operations for batch processing. Monitor the SQL your ORM generates. The ORM is a tool, not a magic black box.</p></div>

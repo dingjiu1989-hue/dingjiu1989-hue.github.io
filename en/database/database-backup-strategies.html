@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-strategies.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Backup and Recovery Strategies">
     <meta name="twitter:description" content="Learn database backup strategies including full, incremental, and differential backups, point-in-time recovery, and disaster recovery planning.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-strategies.png">
     <title>Database Backup and Recovery Strategies — SourceHub</title>
     <meta name="description" content="Learn database backup strategies including full, incremental, and differential backups, point-in-time recovery, and disaster recovery planning.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Backup and Recovery Strategies",
       "description": "Learn database backup strategies including full, incremental, and differential backups, point-in-time recovery, and disaster recovery planning.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-strategies.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "433",
+      "wordCount": "417",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,6 +74,7 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Database Backup and Recovery Strategies</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-strategies.png" alt="Database Backup and Recovery Strategies" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Backup and Recovery Strategies</h1>
 <br>
 <p>RPO and RTO   </p>
@@ -82,8 +83,6 @@
 <p>Backup Types   </p>
 <p>| Type | Size | Speed | Restore | |------|------|-------|---------| | Full | Largest | Slowest | Fastest | | Incremental | Smallest | Fastest | Slowest | | Differential | Medium | Medium | Medium |   </p>
 <p>Point-in-Time Recovery (WAL Archiving)   </p>
-<br>
-<br>
 <br>
 <p>    # postgresql.conf</p>
 <br>
@@ -95,13 +94,9 @@
 <br>
 <p>    archive_timeout = 60</p>
 <br>
-<br>
-<br>
 <p>    # Full base backup</p>
 <br>
 <p>    pg_basebackup -h localhost -D /backups/base/$(date +%Y%m%d) -X stream -P</p>
-<br>
-<br>
 <br>
 <p>    # Restore to point in time</p>
 <br>
@@ -111,12 +106,7 @@
 <br>
 <p>    recovery_target_time = '2026-05-11 14:23:45'</p>
 <br>
-<br>
-<br>
-<br>
 <p>Cloud Backups   </p>
-<br>
-<br>
 <br>
 <p>    # AWS RDS</p>
 <br>
@@ -128,8 +118,6 @@
 <br>
 <p>        --db-snapshot-identifier mydb-snapshot</p>
 <br>
-<br>
-<br>
 <p>    # Point-in-time restore</p>
 <br>
 <p>    aws rds restore-db-instance-to-point-in-time \</p>
@@ -139,9 +127,6 @@
 <p>        --target-db-instance-identifier mydb-restored \</p>
 <br>
 <p>        --restore-time "2026-05-11T14:23:45Z"</p>
-<br>
-<br>
-<br>
 <br>
 <p>The 3-2-1 Rule   </p>
 <p>3 copies of data, 2 different media types, 1 off-site copy. Test restores regularly.   </p>

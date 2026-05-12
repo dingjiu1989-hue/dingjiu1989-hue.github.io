@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-database-query.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Natural Language to SQL with LLMs">
     <meta name="twitter:description" content="Build systems that convert natural language questions into SQL queries using LLMs, with schema context, query validation, and safety guards.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-database-query.png">
     <title>Natural Language to SQL with LLMs — SourceHub</title>
     <meta name="description" content="Build systems that convert natural language questions into SQL queries using LLMs, with schema context, query validation, and safety guards.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Natural Language to SQL with LLMs",
       "description": "Build systems that convert natural language questions into SQL queries using LLMs, with schema context, query validation, and safety guards.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-database-query.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "2139",
+      "wordCount": "1983",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,51 +74,24 @@
         <span class="tag-cat">Machine Learning</span></div>
       <h1 class="article-title">Natural Language to SQL with LLMs</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-database-query.png" alt="Natural Language to SQL with LLMs" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Natural Language to SQL with LLMs</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Natural language to SQL (NL2SQL) is one of the most impactful applications of LLMs in data analytics. It enables non-technical users to query databases using plain English, democratizing data access across organizations. While early NL2SQL systems were fragile, modern LLMs can generate accurate SQL for complex analytical queries — when properly configured with schema context, safety guards, and validation.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  How NL2SQL Works</h2>
 <br>
-<br>
-<br>
-<br>
 <p>The core architecture is straightforward:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    User Question → Context Assembly → LLM SQL Generation → Query Validation → Execution → Result Formatting</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>The critical step is **context assembly** — providing the LLM with enough database metadata to generate correct SQL.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Schema Context</h2>
 <br>
-<br>
-<br>
-<br>
 <p>The LLM needs to understand your database schema. A well-structured schema prompt includes:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE customers (</p>
 <br>
@@ -138,8 +111,6 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
 <p>    CREATE TABLE orders (</p>
 <br>
 <p>        order_id INTEGER PRIMARY KEY,</p>
@@ -153,8 +124,6 @@
 <p>        status VARCHAR(20) -- pending, shipped, delivered, cancelled</p>
 <br>
 <p>    );</p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE order_items (</p>
 <br>
@@ -170,22 +139,12 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Key additions for better accuracy:**</p>
-<br>
-<br>
 <br>
 <p>* Column descriptions: `-- customer's two-letter ISO country code`</p>
 <p>* Value examples: `-- status options: pending, shipped, delivered, cancelled`</p>
 <p>* Relationship hints: `-- join via customer_id to get customer details`</p>
 <p>* Index hints: `-- indexed on order_date for range queries`</p>
-<br>
-<br>
-<br>
 <br>
 <p>    def build_schema_context(tables):</p>
 <br>
@@ -211,21 +170,9 @@
 <br>
 <p>        return "\n\n".join(context_parts)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Few-Shot Examples</h2>
 <br>
-<br>
-<br>
-<br>
 <p>For complex schemas, provide question-SQL pairs relevant to the query:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    few_shot_examples = [</p>
 <br>
@@ -287,38 +234,19 @@
 <br>
 <p>    ]</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Dynamic example retrieval** using embedding similarity improves accuracy significantly. Store question-query pairs in a vector database and retrieve the most relevant ones for each new question.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  SQL Generation Prompt</h2>
 <br>
-<br>
-<br>
-<br>
 <p>The complete prompt combines schema, examples, and safety instructions:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    def build_nl2sql_prompt(question, schema, examples, dialect="postgresql"):</p>
 <br>
 <p>        prompt = f"""You are a {dialect} SQL expert. Convert natural language questions into SQL queries.</p>
 <br>
-<br>
-<br>
 <p>    Database Schema:</p>
 <br>
 <p>    {schema}</p>
-<br>
-<br>
 <br>
 <p>    Rules:</p>
 <br>
@@ -338,8 +266,6 @@
 <br>
 <p>    8. Never use DELETE, UPDATE, INSERT, DROP, or ALTER statements</p>
 <br>
-<br>
-<br>
 <p>    Examples:</p>
 <br>
 <p>    """</p>
@@ -348,33 +274,17 @@
 <br>
 <p>            prompt += f"\nQ: {ex['question']}\nSQL: {ex['query']}\n"</p>
 <br>
-<br>
-<br>
 <p>        prompt += f"\nQ: {question}\nSQL:"</p>
 <br>
 <p>        return prompt</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Query Validation</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Before executing generated SQL, validate it:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    def validate_sql(query, allowed_tables):</p>
 <br>
 <p>        errors = []</p>
-<br>
-<br>
 <br>
 <p>        # Safety check: no mutations</p>
 <br>
@@ -385,8 +295,6 @@
 <p>            if keyword in query.upper():</p>
 <br>
 <p>                errors.append(f"Forbidden operation: {keyword}")</p>
-<br>
-<br>
 <br>
 <p>        # Check table references</p>
 <br>
@@ -400,8 +308,6 @@
 <br>
 <p>                errors.append(f"Unauthorized table: {table}")</p>
 <br>
-<br>
-<br>
 <p>        # Syntax validation</p>
 <br>
 <p>        try:</p>
@@ -414,30 +320,13 @@
 <br>
 <p>            errors.append(f"SQL syntax error: {str(e)}")</p>
 <br>
-<br>
-<br>
 <p>        return errors</p>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <h2>  Advanced Techniques</h2>
 <br>
-<br>
-<br>
-<br>
 <h3>Self-Correction Loop</h3>
 <br>
-<br>
-<br>
-<br>
 <p>When the generated SQL fails or returns empty results, the system can self-correct:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    def nl2sql_with_correction(question, schema, max_attempts=3):</p>
 <br>
@@ -446,8 +335,6 @@
 <p>            query = generate_sql(question, schema)</p>
 <br>
 <p>            errors = validate_sql(query)</p>
-<br>
-<br>
 <br>
 <p>            if not errors:</p>
 <br>
@@ -471,25 +358,11 @@
 <br>
 <p>                feedback = f"Validation errors: {', '.join(errors)}"</p>
 <br>
-<br>
-<br>
 <p>            question = f"Original question: {question}\nPrevious attempt failed: {feedback}\nPlease fix the SQL query."</p>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <h3>Schema Linking</h3>
 <br>
-<br>
-<br>
-<br>
 <p>For large schemas with many tables, first identify relevant tables before generating SQL:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    def identify_relevant_tables(question, all_tables, table_descriptions):</p>
 <br>
@@ -501,8 +374,6 @@
 <br>
 <p>        {table_descriptions}</p>
 <br>
-<br>
-<br>
 <p>        List only the tables needed to answer this question, comma-separated:</p>
 <br>
 <p>        """</p>
@@ -511,45 +382,19 @@
 <br>
 <p>        return [t.strip() for t in response.split(",")]</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>This dramatically reduces context size and improves accuracy on large databases.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Production Deployment</h2>
 <br>
-<br>
-<br>
-<br>
 <p>**Security**: Always use a read-only database user, set statement timeouts, and implement rate limiting per user.</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Caching**: Cache common NL2SQL conversions to reduce LLM costs, but invalidate when schema changes.</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Monitoring**: Log all generated queries and user feedback. Track query success rate, execution time, and correction frequency.</p>
-<br>
-<br>
-<br>
 <br>
 <p>**User experience**: Show the generated SQL to users (with a "view query" option), and allow them to provide feedback on results.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Natural language to SQL with LLMs is production-ready for analytical queries. The key success factors are high-quality schema context, relevant few-shot examples, robust query validation, and a self-correction loop. Start with a limited set of tables, measure query accuracy, and expand as you gain confidence. This technology is transforming data access, making self-serve analytics a reality for non-technical team members.</p></div>
     </article>

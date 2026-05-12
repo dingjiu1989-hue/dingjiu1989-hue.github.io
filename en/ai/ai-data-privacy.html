@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-data-privacy.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="AI Data Privacy: PII Detection, Data Anonymization, Local Processing">
     <meta name="twitter:description" content="Protect user privacy in AI applications with PII detection and redaction, data anonymization techniques, and local processing strategies for sensitive data.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-data-privacy.png">
     <title>AI Data Privacy: PII Detection, Data Anonymization, Local Processing — SourceHub</title>
     <meta name="description" content="Protect user privacy in AI applications with PII detection and redaction, data anonymization techniques, and local processing strategies for sensitive data.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "AI Data Privacy: PII Detection, Data Anonymization, Local Processing",
       "description": "Protect user privacy in AI applications with PII detection and redaction, data anonymization techniques, and local processing strategies for sensitive data.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-data-privacy.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1944",
+      "wordCount": "1839",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,28 +75,16 @@
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-data-privacy.png" alt="AI Data Privacy: PII Detection, Data Anonymization, Local Processing" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>AI applications process vast amounts of data, much of it containing personally identifiable information (PII). Sending raw PII to LLM APIs creates compliance risks under GDPR, CCPA, and other regulations. This article covers practical techniques for detecting and redacting PII, anonymizing training data, and processing sensitive information locally.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  PII Detection</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Automated detection identifies sensitive data before it reaches an LLM API:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    import re</p>
 <br>
@@ -106,8 +94,6 @@
 <br>
 <p>    from presidio_anonymizer import AnonymizerEngine</p>
 <br>
-<br>
-<br>
 <p>    # Initialize Presidio analyzers</p>
 <br>
 <p>    nlp = spacy.load("en_core_web_lg")</p>
@@ -115,8 +101,6 @@
 <p>    analyzer = AnalyzerEngine()</p>
 <br>
 <p>    anonymizer = AnonymizerEngine()</p>
-<br>
-<br>
 <br>
 <p>    def detect_pii(text: str) -> list[dict]:</p>
 <br>
@@ -150,52 +134,29 @@
 <br>
 <p>        ]</p>
 <br>
-<br>
-<br>
 <p>    def redact_pii(text: str) -> str:</p>
 <br>
 <p>        analyzer_results = analyzer.analyze(text=text, language="en")</p>
 <br>
 <p>        return anonymizer.anonymize(text=text, analyzer_results=analyzer_results).text</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Presidio combines pattern-based detection (regex for credit cards, SSNs, phone numbers) with NLP-based detection (spaCy for person names, locations, organizations). This dual approach catches both structured and unstructured PII.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Data Anonymization</h2>
 <br>
-<br>
-<br>
-<br>
 <p>For training data or analytics, full removal may be too destructive. Anonymization preserves utility while protecting privacy:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from faker import Faker</p>
 <br>
 <p>    import hashlib</p>
 <br>
-<br>
-<br>
 <p>    fake = Faker()</p>
-<br>
-<br>
 <br>
 <p>    class DataAnonymizer:</p>
 <br>
 <p>        def __init__(self):</p>
 <br>
 <p>            self.mapping_cache = {}</p>
-<br>
-<br>
 <br>
 <p>        def anonymize_record(self, record: dict, pii_fields: list[str]) -> dict:</p>
 <br>
@@ -208,8 +169,6 @@
 <p>                    anonymized[field] = self._replace_value(field, anonymized[field])</p>
 <br>
 <p>            return anonymized</p>
-<br>
-<br>
 <br>
 <p>        def _replace_value(self, field: str, value: str) -> str:</p>
 <br>
@@ -241,8 +200,6 @@
 <br>
 <p>                return f"USER_{hashed}"</p>
 <br>
-<br>
-<br>
 <p>    # Differential privacy: add calibrated noise</p>
 <br>
 <p>    def add_laplace_noise(true_value: float, epsilon: float = 1.0) -> float:</p>
@@ -259,15 +216,7 @@
 <br>
 <p>        return true_value + noise</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Anonymization Strategies</h3>
-<br>
-<br>
-<br>
 <br>
 <p>| Technique | Privacy Level | Utility | Use Case |</p>
 <br>
@@ -285,23 +234,11 @@
 <br>
 <p>| Tokenization | High | High | Deterministic replacement |</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Local Processing</h2>
-<br>
-<br>
-<br>
 <br>
 <p>For maximum privacy, process sensitive data locally without sending it to external APIs:</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    from transformers import pipeline</p>
-<br>
-<br>
 <br>
 <p>    class LocalTextProcessor:</p>
 <br>
@@ -339,8 +276,6 @@
 <br>
 <p>            )</p>
 <br>
-<br>
-<br>
 <p>        def process_sensitive_data(self, text: str, task: str) -> dict:</p>
 <br>
 <p>            # All processing happens locally; nothing leaves this machine</p>
@@ -357,21 +292,9 @@
 <br>
 <p>                return {"summary": self.summarizer(text, max_length=130, min_length=30)[0]["summary_text"]}</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Hybrid Approach</h3>
 <br>
-<br>
-<br>
-<br>
 <p>For complex tasks requiring powerful LLMs, strip PII before sending, then re-integrate after:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    def safe_llm_call(user_text: str) -> str:</p>
 <br>
@@ -380,8 +303,6 @@
 <p>        pii_entities = detect_pii(user_text)</p>
 <br>
 <p>        redacted_text = redact_pii(user_text)</p>
-<br>
-<br>
 <br>
 <p>        # Store PII mapping for later restoration</p>
 <br>
@@ -393,25 +314,17 @@
 <br>
 <p>        }</p>
 <br>
-<br>
-<br>
 <p>        # Step 2: Send redacted text to LLM</p>
 <br>
 <p>        safe_prompt = f"Process this text: {redacted_text}"</p>
 <br>
 <p>        response = call_llm(safe_prompt)</p>
 <br>
-<br>
-<br>
 <p>        # Step 3: The response should use placeholders, not real data</p>
 <br>
 <p>        # No restoration needed if the LLM just processes the structure</p>
 <br>
-<br>
-<br>
 <p>        return response</p>
-<br>
-<br>
 <br>
 <p>    # For cases where PII must be restored:</p>
 <br>
@@ -425,16 +338,7 @@
 <br>
 <p>        return result</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Compliance Checklist</h2>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    data_privacy_audit:</p>
 <br>
@@ -470,15 +374,7 @@
 <br>
 <p>          - Maintain processing records for audits</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>AI data privacy requires proactive protection rather than reactive compliance. Detect and redact PII before any external API call. Use local models for sensitive processing when possible. Implement a hybrid approach for complex tasks: strip PII before cloud LLM inference, and never log raw user data. Regular privacy audits ensure that your protection measures stay effective as your application evolves.</p></div>
     </article>

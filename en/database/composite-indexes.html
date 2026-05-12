@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/composite-indexes.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Composite Indexes: Column Order, Covering Indexes, and Partial Indexes">
     <meta name="twitter:description" content="Master composite indexes in PostgreSQL: column order optimization, covering indexes, partial indexes, and index-only scans for maximum query performance.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/composite-indexes.png">
     <title>Composite Indexes: Column Order, Covering Indexes, and Partial Indexes — SourceHub</title>
     <meta name="description" content="Master composite indexes in PostgreSQL: column order optimization, covering indexes, partial indexes, and index-only scans for maximum query performance.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Composite Indexes: Column Order, Covering Indexes, and Partial Indexes",
       "description": "Master composite indexes in PostgreSQL: column order optimization, covering indexes, partial indexes, and index-only scans for maximum query performance.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/composite-indexes.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1784",
+      "wordCount": "1679",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/composite-indexes.png" alt="Composite Indexes: Column Order, Covering Indexes, and Partial Indexes" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</h1>
 <br>
 <p>Composite Indexes: Column Order, Covering Indexes, and Partial Indexes   </p>
@@ -83,65 +84,41 @@
 <p>The general rule for column order in a composite B-tree index is:   </p>
 <p>**Put columns with the highest cardinality (most distinct values) first.**   </p>
 <br>
-<br>
-<br>
 <p>    -- Correct: high cardinality first</p>
 <br>
 <p>    CREATE INDEX idx_user_status ON orders (user_id, status);</p>
-<br>
-<br>
 <br>
 <p>    -- Less optimal: low cardinality first</p>
 <br>
 <p>    CREATE INDEX idx_status_user ON orders (status, user_id);</p>
 <br>
-<br>
-<br>
-<br>
 <p>Why? B-tree indexes sort by the first column, then the second, and so on. Equality conditions on the leading column prune the search space immediately. Range conditions on the leading column defeat subsequent columns.   </p>
 <p>Query Scenarios   </p>
 <br>
-<br>
-<br>
 <p>    -- Index: (user_id, status)</p>
-<br>
-<br>
 <br>
 <p>    -- Excellent: equality on first column</p>
 <br>
 <p>    SELECT * FROM orders WHERE user_id = 42; -- uses index</p>
 <br>
-<br>
-<br>
 <p>    -- Excellent: equality on first column, equality on second</p>
 <br>
 <p>    SELECT * FROM orders WHERE user_id = 42 AND status = 'paid'; -- uses index</p>
-<br>
-<br>
 <br>
 <p>    -- Good: equality on first, range on second</p>
 <br>
 <p>    SELECT * FROM orders WHERE user_id = 42 AND total > 100; -- still uses index</p>
 <br>
-<br>
-<br>
 <p>    -- Excellent: ORDER BY on leading columns</p>
 <br>
 <p>    SELECT * FROM orders WHERE user_id = 42 ORDER BY status; -- index provides sort order</p>
-<br>
-<br>
 <br>
 <p>    -- Poor: only second column in WHERE</p>
 <br>
 <p>    SELECT * FROM orders WHERE status = 'paid'; -- cannot use leading column</p>
 <br>
-<br>
-<br>
-<br>
 <p>The "Skip Scan" Limitation   </p>
 <p>Without the first column in the WHERE clause, PostgreSQL cannot use the composite index efficiently (before PostgreSQL 16). Since PostgreSQL 16, the `enable_skip_scan` parameter allows the planner to skip through distinct values of the leading column, but it is less efficient than a dedicated index:   </p>
-<br>
-<br>
 <br>
 <p>    -- PostgreSQL 16+ can use this with skip scan, but still suboptimal</p>
 <br>
@@ -149,17 +126,10 @@
 <br>
 <p>    -- Better: CREATE INDEX idx_status ON orders (status);</p>
 <br>
-<br>
-<br>
-<br>
 <p>Covering Indexes   </p>
 <p>A covering index contains all the columns needed by a query, enabling index-only scans. PostgreSQL calls these INCLUDE indexes:   </p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX idx_orders_covering ON orders (user_id, status) INCLUDE (total, created_at);</p>
-<br>
-<br>
 <br>
 <p>    -- This query can be satisfied entirely from the index:</p>
 <br>
@@ -167,46 +137,30 @@
 <br>
 <p>    -- Index Only Scan, no heap access</p>
 <br>
-<br>
-<br>
 <p>    -- This query needs columns not in the index:</p>
 <br>
 <p>    SELECT total, shipping_address FROM orders WHERE user_id = 42 AND status = 'paid';</p>
 <br>
 <p>    -- Includes heap access for shipping_address</p>
 <br>
-<br>
-<br>
-<br>
 <p>The `INCLUDE` columns are stored in the index's leaf pages but do not participate in sorting. They allow index-only scans without bloating the index's internal pages.   </p>
 <p>When to Use INCLUDE   </p>
-<br>
-<br>
 <br>
 <p>    -- Without INCLUDE: index has only the key column</p>
 <br>
 <p>    CREATE INDEX idx_user_created ON orders (user_id, created_at);</p>
 <br>
-<br>
-<br>
 <p>    -- Query triggers bitmap heap scan or fetches from heap:</p>
 <br>
 <p>    SELECT user_id, created_at, total FROM orders WHERE user_id = 42;</p>
-<br>
-<br>
 <br>
 <p>    -- With INCLUDE: total is stored in leaf pages</p>
 <br>
 <p>    CREATE INDEX idx_user_created_covering ON orders (user_id, created_at) INCLUDE (total);</p>
 <br>
-<br>
-<br>
 <p>    -- Index-only scan:</p>
 <br>
 <p>    SELECT user_id, created_at, total FROM orders WHERE user_id = 42;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Key INCLUDE columns are those that:   </p>
 <br>
@@ -217,28 +171,17 @@
 <p>Partial Indexes   </p>
 <p>Partial indexes cover only a subset of rows, making them smaller and faster to maintain:   </p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX idx_orders_active ON orders (user_id) WHERE status NOT IN ('cancelled', 'refunded');</p>
-<br>
-<br>
 <br>
 <p>    -- This query uses the partial index:</p>
 <br>
 <p>    SELECT * FROM orders WHERE user_id = 42 AND status NOT IN ('cancelled', 'refunded');</p>
 <br>
-<br>
-<br>
 <p>    -- This query does NOT use the partial index:</p>
 <br>
 <p>    SELECT * FROM orders WHERE user_id = 42 AND status = 'cancelled';</p>
 <br>
-<br>
-<br>
-<br>
 <p>Partial indexes excel in scenarios where queries consistently target a subset of data:   </p>
-<br>
-<br>
 <br>
 <p>    -- Index for recent orders only</p>
 <br>
@@ -246,42 +189,26 @@
 <br>
 <p>        WHERE created_at > NOW() - INTERVAL '30 days';</p>
 <br>
-<br>
-<br>
 <p>    -- Index for high-value customers</p>
 <br>
 <p>    CREATE INDEX idx_orders_vip ON orders (user_id, total)</p>
 <br>
 <p>        WHERE total > 1000;</p>
 <br>
-<br>
-<br>
 <p>    -- Index that excludes nulls entirely (common pattern)</p>
 <br>
 <p>    CREATE INDEX idx_users_email ON users (email) WHERE email IS NOT NULL;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Partial Unique Indexes   </p>
-<br>
-<br>
 <br>
 <p>    -- Enforce unique email only for active users</p>
 <br>
 <p>    CREATE UNIQUE INDEX idx_active_email ON users (email) WHERE active = true;</p>
 <br>
-<br>
-<br>
 <p>    -- Users can have duplicate inactive emails, but active users must have unique ones</p>
-<br>
-<br>
-<br>
 <br>
 <p>Index-Only Scans   </p>
 <p>An index-only scan returns all needed data from the index without touching the heap table. For this to work, the visibility map must confirm that all tuples are visible to the current transaction:   </p>
-<br>
-<br>
 <br>
 <p>    -- Table with frequent updates: heap fetches still needed</p>
 <br>
@@ -291,22 +218,12 @@
 <br>
 <p>    -- Look for: Heap Fetches: 0 (true index-only) or > 0 (partial)</p>
 <br>
-<br>
-<br>
-<br>
 <p>Autovacuum maintains the visibility map. Run `VACUUM` aggressively on tables where index-only scans are critical:   </p>
-<br>
-<br>
 <br>
 <p>    ALTER TABLE orders SET (autovacuum_vacuum_scale_factor = 0.01);</p>
 <br>
-<br>
-<br>
-<br>
 <p>Practical Examples   </p>
 <p>Multi-Column Filter and Sort   </p>
-<br>
-<br>
 <br>
 <p>    -- Query: find recent paid orders for a user, sorted by date</p>
 <br>
@@ -318,18 +235,11 @@
 <br>
 <p>    ORDER BY created_at DESC;</p>
 <br>
-<br>
-<br>
 <p>    -- Optimal index:</p>
 <br>
 <p>    CREATE INDEX idx_orders_lookup ON orders (user_id, status, created_at DESC) INCLUDE (total);</p>
 <br>
-<br>
-<br>
-<br>
 <p>Reporting Query   </p>
-<br>
-<br>
 <br>
 <p>    -- Query: aggregate orders by status for a date range</p>
 <br>
@@ -341,25 +251,16 @@
 <br>
 <p>    GROUP BY status;</p>
 <br>
-<br>
-<br>
 <p>    -- Index: if created_at is monotonically increasing, BRIN might work</p>
 <br>
 <p>    CREATE INDEX idx_orders_date_brin ON orders USING BRIN (created_at);</p>
-<br>
-<br>
 <br>
 <p>    -- Or a regular B-tree for range scans</p>
 <br>
 <p>    CREATE INDEX idx_orders_date ON orders (created_at, status) INCLUDE (total);</p>
 <br>
-<br>
-<br>
-<br>
 <p>Maintenance   </p>
 <p>Composite indexes can become bloated. Monitor their efficiency:   </p>
-<br>
-<br>
 <br>
 <p>    -- Check index usage</p>
 <br>
@@ -371,8 +272,6 @@
 <br>
 <p>    ORDER BY idx_scan;</p>
 <br>
-<br>
-<br>
 <p>    -- Find unused indexes</p>
 <br>
 <p>    SELECT schemaname, tablename, indexname, idx_scan</p>
@@ -380,9 +279,6 @@
 <p>    FROM pg_stat_user_indexes</p>
 <br>
 <p>    WHERE idx_scan = 0 AND indexname NOT LIKE '%_pkey';</p>
-<br>
-<br>
-<br>
 <br>
 <p>A well-designed composite index can eliminate the need for multiple single-column indexes. Audit your indexes regularly: remove duplicates, add covering columns, and trim unused partial indexes. Each index adds write overhead, so the total set should serve your query patterns without redundancy.</p></div>
     </article>

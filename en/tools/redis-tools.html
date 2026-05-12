@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/redis-tools.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Redis Tools: RedisInsight, Redis CLI, Redis Commander">
     <meta name="twitter:description" content="Essential tools for Redis management: RedisInsight for GUI-based visualization and analysis, Redis CLI for command-line operations, and Redis Commander for web-">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/redis-tools.png">
     <title>Redis Tools: RedisInsight, Redis CLI, Redis Commander — SourceHub</title>
     <meta name="description" content="Essential tools for Redis management: RedisInsight for GUI-based visualization and analysis, Redis CLI for command-line operations, and Redis Commander for web-">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Redis Tools: RedisInsight, Redis CLI, Redis Commander",
       "description": "Essential tools for Redis management: RedisInsight for GUI-based visualization and analysis, Redis CLI for command-line operations, and Redis Commander for web-",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/redis-tools.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1785",
+      "wordCount": "1646",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,28 +75,16 @@
         <span class="tag-cat">Productivity</span></div>
       <h1 class="article-title">Redis Tools: RedisInsight, Redis CLI, Redis Commander</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/redis-tools.png" alt="Redis Tools: RedisInsight, Redis CLI, Redis Commander" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Redis is one of the most widely used data stores for caching, session management, message queues, and real-time applications. Managing Redis effectively requires the right tools for visualizing data, profiling performance, and debugging issues. This article covers the essential Redis tools: RedisInsight, the Redis CLI, and web-based administration tools.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Redis CLI</h2>
 <br>
-<br>
-<br>
-<br>
 <p>The command-line interface is the most fundamental Redis tool, shipped with every Redis installation:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Basic commands</p>
 <br>
@@ -108,8 +96,6 @@
 <br>
 <p>    redis-cli --stat          # Real-time statistics</p>
 <br>
-<br>
-<br>
 <p>    # Key operations</p>
 <br>
 <p>    redis-cli keys "*"        # List all keys (avoid in production!)</p>
@@ -117,8 +103,6 @@
 <p>    redis-cli --scan --pattern "session:*"  # Safe key scanning</p>
 <br>
 <p>    redis-cli dbsize          # Number of keys in database</p>
-<br>
-<br>
 <br>
 <p>    # Value inspection</p>
 <br>
@@ -129,8 +113,6 @@
 <p>    redis-cli hgetall user:123</p>
 <br>
 <p>    redis-cli smembers "tags:article:456"</p>
-<br>
-<br>
 <br>
 <p>    # Performance debugging</p>
 <br>
@@ -144,52 +126,29 @@
 <br>
 <p>    redis-cli --rdb /tmp/dump.rdb  # Generate RDB dump</p>
 <br>
-<br>
-<br>
 <p>    # Cluster mode</p>
 <br>
 <p>    redis-cli -c cluster nodes</p>
 <br>
 <p>    redis-cli -c cluster info</p>
 <br>
-<br>
-<br>
 <p>    # With SSL/tls</p>
 <br>
 <p>    redis-cli --tls --cacert ca.crt --cert client.crt --key client.key</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Pipeline mode** for bulk operations:</p>
-<br>
 <br>
 <p>    # Load data from file</p>
 <br>
 <p>    cat commands.txt | redis-cli --pipe</p>
 <br>
-<br>
-<br>
 <p>    # Generate test data with inline scripting</p>
 <br>
 <p>    redis-cli --eval script.lua key1 key2 , arg1 arg2</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  RedisInsight</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Redis's official GUI tool for visualization and analysis:</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Key features**:</p>
 <br>
@@ -202,9 +161,6 @@
 <p>* Pub/Sub message inspector</p>
 <p>* Redis Stream management and TRIM operations</p>
 <br>
-<br>
-<br>
-<br>
 <p>    # Start RedisInsight</p>
 <br>
 <p>    # Download from https://redis.com/redis-enterprise/redis-insight/</p>
@@ -213,17 +169,9 @@
 <br>
 <p>    docker run -d -p 5540:5540 redis/redisinsight:latest</p>
 <br>
-<br>
-<br>
 <p>    # Access at http://localhost:5540</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Workbench** for advanced querying:</p>
-<br>
 <br>
 <p>    # RedisInsight Workbench supports:</p>
 <br>
@@ -235,8 +183,6 @@
 <br>
 <p>    # - Command autocomplete</p>
 <br>
-<br>
-<br>
 <p>    # Memory analysis commands</p>
 <br>
 <p>    MEMORY DOCTOR          # Get memory optimization suggestions</p>
@@ -244,8 +190,6 @@
 <p>    MEMORY USAGE user:123  # Memory used by a specific key</p>
 <br>
 <p>    MEMORY STATS          # Overall memory statistics</p>
-<br>
-<br>
 <br>
 <p>    # Performance analysis</p>
 <br>
@@ -255,38 +199,19 @@
 <br>
 <p>    INFO COMMANDSTATS     # Command execution statistics</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Strengths**: Official Redis tool, excellent memory analysis and optimization recommendations, professional data visualization, free.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Redis Commander</h2>
 <br>
-<br>
-<br>
-<br>
 <p>A web-based Redis management tool built with Node.js:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Install globally</p>
 <br>
 <p>    npm install -g redis-commander</p>
 <br>
-<br>
-<br>
 <p>    # Start with default settings</p>
 <br>
 <p>    redis-commander</p>
-<br>
-<br>
 <br>
 <p>    # With custom configuration</p>
 <br>
@@ -294,21 +219,11 @@
 <br>
 <p>    redis-commander --redis-password yourpassword</p>
 <br>
-<br>
-<br>
 <p>    # Docker</p>
 <br>
 <p>    docker run -d -p 8081:8081 rediscommander/redis-commander:latest</p>
 <br>
-<br>
-<br>
 <p>    # Access at http://localhost:8081</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // Custom configuration</p>
 <br>
@@ -336,11 +251,6 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Features**:</p>
 <br>
 <p>* Tree-based key browser with auto-refresh</p>
@@ -350,58 +260,33 @@
 <p>* Lightweight and simple UI</p>
 <p>* Connection to multiple Redis instances</p>
 <br>
-<br>
-<br>
 <h2>  Redis Monitoring with redis-stat</h2>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Install via gem</p>
 <br>
 <p>    gem install redis-stat</p>
 <br>
-<br>
-<br>
 <p>    # Run monitoring dashboard</p>
 <br>
 <p>    redis-stat --server=6379 1  # 1 second refresh interval</p>
-<br>
-<br>
 <br>
 <p>    # Run on headless server</p>
 <br>
 <p>    redis-stat --daemon --server=redis:6379 5</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Production Usage</h2>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    #!/bin/bash</p>
 <br>
 <p>    # Redis production health check script</p>
 <br>
-<br>
-<br>
 <p>    echo "=== Redis Health Check ==="</p>
 <br>
 <p>    echo ""</p>
 <br>
-<br>
-<br>
 <p>    # Connection test</p>
 <br>
 <p>    echo "Ping: $(redis-cli ping)"</p>
-<br>
-<br>
 <br>
 <p>    # Memory usage</p>
 <br>
@@ -411,15 +296,11 @@
 <br>
 <p>    echo "Memory: $MEM / $MAXMEM"</p>
 <br>
-<br>
-<br>
 <p>    # Key count</p>
 <br>
 <p>    KEYS=$(redis-cli dbsize)</p>
 <br>
 <p>    echo "Total keys: $KEYS"</p>
-<br>
-<br>
 <br>
 <p>    # Connected clients</p>
 <br>
@@ -427,15 +308,11 @@
 <br>
 <p>    echo "Clients: $CLIENTS"</p>
 <br>
-<br>
-<br>
 <p>    # Commands per second</p>
 <br>
 <p>    OPS=$(redis-cli info stats | grep "instantaneous_ops_per_sec" | cut -d: -f2)</p>
 <br>
 <p>    echo "Operations/sec: $OPS"</p>
-<br>
-<br>
 <br>
 <p>    # Hit rate</p>
 <br>
@@ -451,15 +328,7 @@
 <br>
 <p>    fi</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Comparison</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| Tool | Type | Best For | Complexity |</p>
 <br>
@@ -473,20 +342,13 @@
 <br>
 <p>| redis-stat | CLI dashboard | Real-time monitoring | Low |</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Recommendations</h2>
-<br>
-<br>
 <br>
 <p>* **Daily operations**: Redis CLI for quick commands and scripting.</p>
 <p>* **Data exploration**: RedisInsight for browsing keys, visualizing data, and memory optimization.</p>
 <p>* **Quick web access**: Redis Commander for lightweight management without installing a desktop app.</p>
 <p>* **Production monitoring**: redis-stat for real-time dashboards, RedisInsight for deep memory analysis.</p>
 <p>* **Performance debugging**: Slow log analysis in Redis CLI or RedisInsight, big keys analysis.</p>
-<br>
-<br>
 <br>
 <p>The most effective setup combines the Redis CLI for scripting and automation with RedisInsight for data visualization and memory optimization. Use Redis Commander for lightweight web-based access when a desktop GUI is not available.</p></div>
     </article>

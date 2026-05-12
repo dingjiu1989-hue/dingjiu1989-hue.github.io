@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-patterns.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Rate Limiting Patterns">
     <meta name="twitter:description" content="Explore rate limiting patterns for protecting APIs and services from abuse.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-patterns.png">
     <title>Rate Limiting Patterns — SourceHub</title>
     <meta name="description" content="Explore rate limiting patterns for protecting APIs and services from abuse.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Rate Limiting Patterns",
       "description": "Explore rate limiting patterns for protecting APIs and services from abuse.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-patterns.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1353",
+      "wordCount": "1322",
       "keywords": "Architecture, System Design",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,6 +74,7 @@
         <span class="tag-cat">System Design</span></div>
       <h1 class="article-title">Rate Limiting Patterns</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-patterns.png" alt="Rate Limiting Patterns" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Rate Limiting Patterns</h1>
 <br>
 <p>Rate limiting is a critical component of any production API or service. It protects your system from abuse, ensures fair usage among consumers, and maintains service quality under load. This article explores the most common rate limiting algorithms and how to choose the right one for your use case.   </p>
@@ -88,22 +89,15 @@
 <p>Token Bucket Algorithm   </p>
 <p>The token bucket is one of the most popular rate limiting algorithms. A bucket holds a fixed number of tokens. Tokens are added at a steady rate. Each request consumes one token. If the bucket is empty, the request is denied.   </p>
 <br>
-<br>
-<br>
 <p>    Capacity: 100 tokens</p>
 <br>
 <p>    Refill rate: 10 tokens/second</p>
-<br>
-<br>
 <br>
 <p>    Request at t=0: 100 tokens available -> success, 99 remaining</p>
 <br>
 <p>    Request at t=1: 99 + 10 = 100 -> success, 99 remaining</p>
 <br>
 <p>    Request at t=0.5: 99 + 5 = 100 -> success, 99 remaining</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Pros:** Allows bursts up to the bucket capacity. Memory efficient -- you only need to store the token count and last refill timestamp.   </p>
 <p>**Cons:** The burst behavior may not suit all use cases. With a large bucket, a client can send an entire day's worth of requests in a few seconds.   </p>
@@ -116,22 +110,15 @@
 <p>Fixed Window Counter   </p>
 <p>Divide time into fixed windows (e.g., 1 minute). Count requests in each window. If the count exceeds the limit, reject further requests until the next window.   </p>
 <br>
-<br>
-<br>
 <p>    Limit: 100 requests per minute</p>
 <br>
 <p>    Window: 00:00:00 to 00:01:00</p>
-<br>
-<br>
 <br>
 <p>    95 requests at 00:00:45 -> allowed</p>
 <br>
 <p>    6 requests at 00:00:55 -> 5 allowed, 1 rejected (exceeds 100)</p>
 <br>
 <p>    Window resets at 00:01:00</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Pros:** Extremely simple to implement. Only requires a counter per window per client.   </p>
 <p>**Cons:** The "boundary problem." At the edge of a window, a client can send 100 requests at 00:00:59 and another 100 at 00:01:01, effectively 200 requests in 2 seconds. This can overwhelm your system.   </p>
@@ -142,22 +129,15 @@
 <p>Sliding Window Counter   </p>
 <p>A hybrid approach combining fixed windows with sliding precision. Track counters for the current and previous windows. Approximate the count for the sliding window using weighted averages.   </p>
 <br>
-<br>
-<br>
 <p>    Limit: 100 requests per minute</p>
 <br>
 <p>    Current 1-minute window: 80 requests</p>
 <br>
 <p>    Previous 1-minute window: 40 requests</p>
 <br>
-<br>
-<br>
 <p>    At 30 seconds into the current window:</p>
 <br>
 <p>    Estimated count = 40 * (30/60) + 80 = 100</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Pros:** Smooths out the boundary problem with minimal memory (just two counters per client). Good enough for most use cases.   </p>
 <p>**Cons:** Not perfectly accurate. The approximation error varies but is typically acceptable for rate limiting purposes.   </p>
@@ -170,27 +150,17 @@
 <p>Response Headers   </p>
 <p>Tell clients about their rate limit status through response headers:   </p>
 <br>
-<br>
-<br>
 <p>    X-RateLimit-Limit: 100</p>
 <br>
 <p>    X-RateLimit-Remaining: 42</p>
 <br>
 <p>    X-RateLimit-Reset: 1640995200</p>
 <br>
-<br>
-<br>
-<br>
 <p>When a client exceeds the limit, return `429 Too Many Requests` with a `Retry-After` header:   </p>
-<br>
-<br>
 <br>
 <p>    HTTP/1.1 429 Too Many Requests</p>
 <br>
 <p>    Retry-After: 30</p>
-<br>
-<br>
-<br>
 <br>
 <p>Choosing the Right Algorithm   </p>
 <br>

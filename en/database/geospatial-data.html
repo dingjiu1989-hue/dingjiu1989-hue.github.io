@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/geospatial-data.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries">
     <meta name="twitter:description" content="Comprehensive guide to geospatial data with PostGIS. Understand geometry vs geography types, spatial indexes, and common geospatial queries for GIS applications.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/geospatial-data.png">
     <title>Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries — SourceHub</title>
     <meta name="description" content="Comprehensive guide to geospatial data with PostGIS. Understand geometry vs geography types, spatial indexes, and common geospatial queries for GIS applications.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries",
       "description": "Comprehensive guide to geospatial data with PostGIS. Understand geometry vs geography types, spatial indexes, and common geospatial queries for GIS applications.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/geospatial-data.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1609",
+      "wordCount": "1524",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,28 +75,22 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/geospatial-data.png" alt="Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries</h1>
 <br>
 <p>Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries   </p>
 <p>PostGIS transforms PostgreSQL into a full-featured spatial database. It adds support for geographic objects, spatial indexing, and hundreds of spatial functions. This article covers fundamental concepts and practical query patterns.   </p>
 <p>Setting Up PostGIS   </p>
 <br>
-<br>
-<br>
 <p>    CREATE EXTENSION postgis;</p>
 <br>
 <p>    CREATE EXTENSION postgis_topology;</p>
-<br>
-<br>
 <br>
 <p>    -- Verify installation</p>
 <br>
 <p>    SELECT postgis_version();</p>
 <br>
 <p>    -- 3.4.0 or similar</p>
-<br>
-<br>
-<br>
 <br>
 <p>Geometry vs Geography   </p>
 <p>The most important design decision in PostGIS is choosing between the `geometry` and `geography` data types.   </p>
@@ -105,9 +99,6 @@
 <p>* Local datasets where Earth curvature is negligible.</p>
 <p>* Data in projected coordinate systems (UTM, State Plane).</p>
 <p>* Operations that require planar spatial functions.</p>
-<br>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE buildings (</p>
 <br>
@@ -121,23 +112,15 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
 <p>    INSERT INTO buildings (name, location) VALUES</p>
 <br>
 <p>        ('City Hall', ST_SetSRID(ST_MakePoint(-73.9857, 40.7484), 4326));</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Geography** treats coordinates on a sphere (or spheroid). It accounts for Earth curvature, making it appropriate for:   </p>
 <br>
 <p>* Global datasets spanning large distances.</p>
 <p>* Accurate distance calculations in degrees.</p>
 <p>* Queries like "find all points within 10 km."</p>
-<br>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE pois (</p>
 <br>
@@ -149,33 +132,21 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
 <p>    INSERT INTO pois (name, location) VALUES</p>
 <br>
 <p>        ('Statue of Liberty', ST_SetSRID(ST_MakePoint(-74.0445, 40.6892), 4326));</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Performance note**: Geography calculations are 2-3x slower than geometry because they use more complex spherical math. For local datasets, cast geography to geometry when precision is not critical.   </p>
 <p>Spatial Indexes   </p>
 <p>PostGIS uses GiST (Generalized Search Tree) indexes for spatial data:   </p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX idx_buildings_location ON buildings USING GIST (location);</p>
 <br>
 <p>    CREATE INDEX idx_pois_location ON pois USING GIST (location);</p>
 <br>
-<br>
-<br>
-<br>
 <p>GiST indexes enable indexed spatial operators: `ST_DWithin`, `ST_Intersects`, `ST_Contains`, `ST_Within`, and bounding box comparisons.   </p>
 <p>Common Spatial Queries   </p>
 <p>Distance Queries   </p>
-<br>
-<br>
 <br>
 <p>    -- Find all POIs within 1000 meters of a point</p>
 <br>
@@ -187,13 +158,8 @@
 <br>
 <p>    ORDER BY dist_meters;</p>
 <br>
-<br>
-<br>
-<br>
 <p>`ST_DWithin` uses the index and is far faster than filtering by `ST_Distance` in a WHERE clause.   </p>
 <p>Spatial Joins   </p>
-<br>
-<br>
 <br>
 <p>    -- Find all buildings within each neighborhood</p>
 <br>
@@ -207,12 +173,7 @@
 <br>
 <p>    ORDER BY building_count DESC;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Area Calculations   </p>
-<br>
-<br>
 <br>
 <p>    -- Calculate building footprint areas in square meters</p>
 <br>
@@ -222,13 +183,8 @@
 <br>
 <p>    ORDER BY area_sqm DESC;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Nearest Neighbor Search   </p>
 <p>The `<->` operator enables efficient nearest-neighbor searches using the GiST index:   </p>
-<br>
-<br>
 <br>
 <p>    SELECT name, location,</p>
 <br>
@@ -240,13 +196,8 @@
 <br>
 <p>    LIMIT 5;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Data Import and Export   </p>
 <p>Importing GeoJSON   </p>
-<br>
-<br>
 <br>
 <p>    -- Cast GeoJSON to geometry</p>
 <br>
@@ -260,21 +211,11 @@
 <br>
 <p>    FROM jsonb_array_elements('...geojson array...') AS features;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Importing Shapefiles   </p>
-<br>
-<br>
 <br>
 <p>    shp2pgsql -s 4326 -I -g geom neighborhoods.shp public.neighborhoods | psql -d mydb</p>
 <br>
-<br>
-<br>
-<br>
 <p>Exporting as GeoJSON   </p>
-<br>
-<br>
 <br>
 <p>    SELECT row_to_json(fc) AS geojson</p>
 <br>
@@ -302,12 +243,7 @@
 <br>
 <p>    ) AS fc;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Common Spatial Functions   </p>
-<br>
-<br>
 <br>
 <p>    -- Transform between coordinate systems</p>
 <br>
@@ -315,25 +251,17 @@
 <br>
 <p>    SELECT ST_Transform(location, 32618) FROM buildings; -- to UTM zone 18N</p>
 <br>
-<br>
-<br>
 <p>    -- Simplify geometry for map display</p>
 <br>
 <p>    SELECT ST_Simplify(footprint, 1.0) FROM buildings;   -- 1.0 threshold</p>
-<br>
-<br>
 <br>
 <p>    -- Buffer around a point</p>
 <br>
 <p>    SELECT ST_Buffer(location::geography, 500) AS five_hundred_m_buffer FROM pois;</p>
 <br>
-<br>
-<br>
 <p>    -- Compute convex hull</p>
 <br>
 <p>    SELECT ST_ConvexHull(ST_Collect(location)) FROM pois;</p>
-<br>
-<br>
 <br>
 <p>    -- Intersection of two geometries</p>
 <br>
@@ -343,20 +271,13 @@
 <br>
 <p>    WHERE ST_Intersects(n.geom, b.footprint);</p>
 <br>
-<br>
-<br>
-<br>
 <p>Performance Optimization   </p>
-<br>
-<br>
 <br>
 <p>    -- Cluster a table on its spatial index for faster range scans</p>
 <br>
 <p>    CLUSTER buildings USING idx_buildings_location;</p>
 <br>
 <p>    ANALYZE buildings;</p>
-<br>
-<br>
 <br>
 <p>    -- Use ST_Subdivide for very large geometries</p>
 <br>
@@ -368,12 +289,7 @@
 <br>
 <p>    FROM neighborhoods;</p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX idx_neighborhoods_subdivided ON neighborhoods_subdivided USING GIST (geom);</p>
-<br>
-<br>
-<br>
 <br>
 <p>PostGIS vs Other Tools   </p>
 <p>| Feature | PostGIS | MongoDB 2dsphere | Elasticsearch Geo | |---------|---------|------------------|-------------------| | CRS support | 5000+ SRIDs | WGS84 only | WGS84 only | | Spatial functions | 400+ | 30+ | 20+ | | Topology | Full support | None | None | | Raster support | Yes (PostGIS raster) | No | No | | Routing | pgRouting extension | No | No |   </p>

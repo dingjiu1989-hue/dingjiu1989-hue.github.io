@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/acid-vs-base.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="ACID vs BASE Transactions">
     <meta name="twitter:description" content="Compare ACID and BASE transaction models, when to use each, and how modern databases balance consistency, availability, and partition tolerance.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/acid-vs-base.png">
     <title>ACID vs BASE Transactions — SourceHub</title>
     <meta name="description" content="Compare ACID and BASE transaction models, when to use each, and how modern databases balance consistency, availability, and partition tolerance.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "ACID vs BASE Transactions",
       "description": "Compare ACID and BASE transaction models, when to use each, and how modern databases balance consistency, availability, and partition tolerance.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/acid-vs-base.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "359",
+      "wordCount": "345",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,14 +74,13 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">ACID vs BASE Transactions</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/acid-vs-base.png" alt="ACID vs BASE Transactions" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>ACID vs BASE Transactions</h1>
 <br>
 <p>Consistency Models   </p>
 <p>ACID and BASE represent opposing philosophies for database consistency. ACID guarantees strict consistency while BASE prioritizes availability.   </p>
 <p>ACID Properties   </p>
 <p>Atomicity, Consistency, Isolation, Durability:   </p>
-<br>
-<br>
 <br>
 <p>    -- ACID transaction example</p>
 <br>
@@ -93,21 +92,14 @@
 <br>
 <p>    COMMIT;</p>
 <br>
-<br>
-<br>
-<br>
 <p>BASE Properties   </p>
 <p>Basically Available, Soft state, Eventual consistency:   </p>
-<br>
-<br>
 <br>
 <p>    class EventualConsistentLedger:</p>
 <br>
 <p>        def __init__(self):</p>
 <br>
 <p>            self.pending = []</p>
-<br>
-<br>
 <br>
 <p>        def transfer(self, sender, recipient, amount):</p>
 <br>
@@ -121,16 +113,11 @@
 <br>
 <p>            return {"status": "accepted"}</p>
 <br>
-<br>
-<br>
 <p>        def reconcile(self):</p>
 <br>
 <p>            for tx in self.pending:</p>
 <br>
 <p>                self.apply_transaction(tx)</p>
-<br>
-<br>
-<br>
 <br>
 <p>When to Relax ACID   </p>
 <p>| Requirement | ACID | BASE | |-------------|------|------| | Consistency | Strong | Eventual | | Availability | Lower | Higher | | Latency | Higher | Lower | | Use case | Financial | Analytics |   </p>

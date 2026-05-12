@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/xsrf-csrf-protection.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="XSRF/CSRF Protection Guide">
     <meta name="twitter:description" content="A practical guide to preventing Cross-Site Request Forgery attacks using CSRF tokens, SameSite cookies, and custom headers.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/xsrf-csrf-protection.png">
     <title>XSRF/CSRF Protection Guide — SourceHub</title>
     <meta name="description" content="A practical guide to preventing Cross-Site Request Forgery attacks using CSRF tokens, SameSite cookies, and custom headers.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,15 +38,15 @@
       "@type": "Article",
       "headline": "XSRF/CSRF Protection Guide",
       "description": "A practical guide to preventing Cross-Site Request Forgery attacks using CSRF tokens, SameSite cookies, and custom headers.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/xsrf-csrf-protection.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1516",
+      "wordCount": "1207",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/xsrf-csrf-protection.html"},
-      "articleBody": "XSRF/CSRF Protection Guide What Is CSRF? Cross-Site Request Forgery (CSRF or XSRF) is an attack that forces an authenticated user to execute unwanted actions on a web application. The attacker crafts a malicious page that, when visited by the victim, automatically submits a request to the target application using the victim's existing session cookies. Attack Scenario * Alice logs into `bank.example.com` and has a valid session cookie. 2\\. Alice visits `evil.com`, which contains an auto-submitting form targeting `bank.example.com/transfer`. 3\\. The browser automatically includes Alice's session cookie with the request. 4\\. The bank processes the transfer, believing Alice authorized it. document.forms[0].submit(); Defense 1: CSRF Tokens (Synchronizer Token Pattern) The server embeds a unique, unpredictable token in each form or request. The server validates the token on state-changing requests. Server-Side Implementation (Express) const crypto = require('crypto'); function generateCSRFToken(req) { const token = crypto.randomBytes(32).toString('hex'); req.session.csrfToken = token; return token; } function csrfMiddleware(req, res, next) { if (['POST', 'PUT', 'DELETE', 'PATCH'].includes(req.method)) { const token = req.headers['x-csrf-token'] || req.body._csrfToken; if (!token || token !== req.session.csrfToken) { return res.status(403).json({ error: 'CSRF validation failed' }); } } next(); } HTML Form Usage \"> Transfer Framework Built-In Support Most modern frameworks include CSRF protection: # Django {% csrf_token %} # Rails // Spring Security @EnableWebSecurity public class SecurityConfig { @Bean public SecurityFilterChain filterChain(HttpSecurity http) { http.csrf(Customizer.withDefaults()); return http.build(); } } Defense 2: SameSite Cookies The `SameSite` cookie attribute tells the browser when to send cookies with cross-origin requests. | Attribute | Behavior | Security | |-----------|----------|----------| | `Strict` | Cookie sent only for same-site requests | Most secure, breaks some legitimate cross-site flows | | `Lax` | Cookie sent for top-level GET navigations | Good balance for most apps | | `None` | Cookie sent for all requests (requires Secure) | Insecure, use only when necessary | # Django settings SESSION_COOKIE_SAMESITE = 'Lax' CSRF_COOKIE_SAMESITE = 'Lax' // Express with cookie-session app.use(session({ cookie: { sameSite: 'lax', // or 'strict' secure: true, httpOnly: true } })); For most applications, `SameSite=Lax` provides strong CSRF protection without breaking user experience. Use `SameSite=Strict` for sensitive operations like password changes or money transfers. Defense 3: Custom Request Headers Single-page applications that use JavaScript for API calls can leverage custom headers as a CSRF defense. Browsers enforce the same-origin policy, preventing custom headers from being set by cross-origin requests without CORS preflight. // Client-side fetch('/api/transfer', { method: 'POST', headers: { 'X-Requested-By': 'XMLHttpRequest', 'Content-Type': 'application/json' }, body: JSON.stringify({ toAccount, amount }), credentials: 'include' }); // Server-side validation app.post('/api/transfer', (req, res) => { if (req.get('X-Requested-By') !== 'XMLHttpRequest') { return res.status(403).json({ error: 'Invalid request origin' }); } // Process transfer... }); Defense 4: Origin and Referer Validation Check the `Origin` or `Referer` header on incoming requests: function validateOrigin(req) { const origin = req.get('Origin'); const referer = req.get('Referer'); const allowed = ['https://example.com', 'https://app.example.com']; if (origin && !allowed.includes(origin)) { return false; } if (!origin && referer) { const url = new URL(referer); if (!allowed.includes(url.origin)) { return false; } } return true; } Defense Comparison | Method | Complexity | Browser Support | Protection Level | |--------|-----------|-----------------|------------------| | CSRF Token | Medium | Universal | Strong | | SameSite Cookie (Lax) | Low | 95%+ | Strong | | Custom Header | Low | Universal | Strong (CORS protected) | | Origin/Referer Check | Low | Universal | Moderate | For maximum protection, use CSRF tokens plus SameSite cookies. This covers both legacy browsers (no SameSite support) and modern browsers with the additional layer of SameSite protection. Summary CSRF attacks exploit the browser's automatic inclusion of credentials in cross-origin requests. Defend using synchronizer token patterns for traditional server-rendered apps, SameSite cookies for modern browsers, and custom headers for API-driven SPAs. The most robust approach combines CSRF tokens with SameSite cookies to protect users across all browser versions."
+      "articleBody": "XSRF/CSRF Protection Guide XSRF/CSRF Protection Guide What Is CSRF? Cross-Site Request Forgery (CSRF or XSRF) is an attack that forces an authenticated user to execute unwanted actions on a web application. The attacker crafts a malicious page that, when visited by the victim, automatically submits a request to the target application using the victim's existing session cookies. Attack Scenario * Alice logs into `bank.example.com` and has a valid session cookie. 2\\\\. Alice visits `evil.com`, which contains an auto-submitting form targeting `bank.example.com/transfer`. 3\\\\. The browser automatically includes Alice's session cookie with the request. 4\\\\. The bank processes the transfer, believing Alice authorized it. Defense 1: CSRF Tokens (Synchronizer Token Pattern) The server embeds a unique, unpredictable token in each form or request. The server validates the token on state-changing requests. Server-Side Implementation (Express) const crypto = require('crypto'); function generateCSRFToken(req) { const token = crypto.randomBytes(32).toString('hex'); req.session.csrfToken = token; return token; } function csrfMiddleware(req, res, next) { if (['POST', 'PUT', 'DELETE', 'PATCH'].includes(req.method)) { const token = req.headers['x-csrf-token'] || req.body._csrfToken; if (!token || token !== req.session.csrfToken) { return res.status(403).json({ error: 'CSRF validation failed' }); } } next(); } HTML Form Usage Transfer Framework Built-In Support Most modern frameworks include CSRF protection: Django {% csrf_token %} Rails // Spring Security @EnableWebSecurity public class SecurityConfig { @Bean public SecurityFilterChain filterChain(HttpSecurity http) { http.csrf(Customizer.withDefaults()); return http.build(); } } Defense 2: SameSite Cookies The `SameSite` cookie attribute tells the browser when to send cookies with cross-origin requests. | Attribute | Behavior | Security | |-----------|----------|----------| | `Strict` | Cookie sent only for same-site requests | Most secure, breaks some legitimate cross-site flows | | `Lax` | Cookie sent for top-level GET navigations | Good balance for most apps | | `None` | Cookie sent for all requests (requires Secure) | Insecure, use only when necessary | Django settings SESSION_COOKIE_SAMESITE = 'Lax' CSRF_COOKIE_SAMESITE = 'Lax' // Express with cookie-session app.use(session({ cookie: { sameSite: 'lax', // or 'strict' secure: true, httpOnly: true } })); For most applications, `SameSite=Lax` provides strong CSRF protection without breaking user experience. Use `SameSite=Strict` for sensitive operations like password changes or money transfers. Defense 3: Custom Request Headers Single-page applications that use JavaScript for API calls can leverage custom headers as a CSRF defense. Browsers enforce the same-origin policy, preventing custom headers from being set by cross-origin requests without CORS preflight. // Client-side fetch('/api/transfer', { method: 'POST', headers: { 'X-Requested-By': 'XMLHttpRequest', 'Content-Type': 'application/json' }, body: JSON.stringify({ toAccount, amount }), credentials: 'include' }); // Server-side validation app.post('/api/transfer', (req, res) => { if (req.get('X-Requested-By') !== 'XMLHttpRequest') { return res.status(403).json({ error: 'Invalid request origin' }); } // Process transfer... }); Defense 4: Origin and Referer Validation Check the `Origin` or `Referer` header on incoming requests: function validateOrigin(req) { const origin = req.get('Origin'); const referer = req.get('Referer'); const allowed = ['https://example.com', 'https://app.example.com']; if (origin && !allowed.includes(origin)) { return false; } if (!origin && referer) { const url = new URL(referer); if (!allowed.includes(url.origin)) { return false; } } return true; } Defense Comparison | Method | Complexity | Browser Support | Protection Level | |--------|-----------|-----------------|------------------| | CSRF Token | Medium | Universal | Strong | | SameSite Cookie (Lax) | Low | 95%+ | Strong | | Custom Header | Low | Universal | Strong (CORS protected) | | Origin/Referer Check | Low | Universal | Moderate | For maximum protection, use CSRF tokens plus SameSite cookies. This covers both legacy browsers (no SameSite support) and modern browsers with the additional layer of SameSite protection. Summary CSRF attacks exploit the browser's automatic inclusion of credentials in cross-origin requests. Defend using synchronizer token patterns for traditional server-rendered apps, SameSite cookies for modern browsers, and custom headers for API-driven SPAs. The most robust approach combines CSRF tokens with SameSite cookies to protect users across all browser versions."
     }
     </script>
     <script type="application/ld+json">
@@ -74,278 +74,209 @@
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">XSRF/CSRF Protection Guide</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/xsrf-csrf-protection.png" alt="XSRF/CSRF Protection Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>XSRF/CSRF Protection Guide</h1>
 <br>
-<p>What Is CSRF?   </p>
-<p>Cross-Site Request Forgery (CSRF or XSRF) is an attack that forces an authenticated user to execute unwanted actions on a web application. The attacker crafts a malicious page that, when visited by the victim, automatically submits a request to the target application using the victim's existing session cookies.   </p>
-<p>Attack Scenario   </p>
+<h1>XSRF/CSRF Protection Guide</h1>
+<br>
+<p>What Is CSRF? </p>
+<br>
+<p>Cross-Site Request Forgery (CSRF or XSRF) is an attack that forces an authenticated user to execute unwanted actions on a web application. The attacker crafts a malicious page that, when visited by the victim, automatically submits a request to the target application using the victim's existing session cookies. </p>
+<br>
+<p>Attack Scenario </p>
 <br>
 <p>* Alice logs into `bank.example.com` and has a valid session cookie.</p>
-<p>2\. Alice visits `evil.com`, which contains an auto-submitting form targeting `bank.example.com/transfer`. 3\. The browser automatically includes Alice's session cookie with the request. 4\. The bank processes the transfer, believing Alice authorized it.   </p>
 <br>
+<p>2\\. Alice visits `evil.com`, which contains an auto-submitting form targeting `bank.example.com/transfer`. 3\\. The browser automatically includes Alice's session cookie with the request. 4\\. The bank processes the transfer, believing Alice authorized it. </p>
 <br>
+<p>Defense 1: CSRF Tokens (Synchronizer Token Pattern) </p>
 <br>
-<p>    <!-- evil.com's attack page --></p>
+<p>The server embeds a unique, unpredictable token in each form or request. The server validates the token on state-changing requests. </p>
 <br>
-<p>    <form action="https://bank.example.com/transfer" method="POST"></p>
+<p>Server-Side Implementation (Express) </p>
 <br>
-<p>        <input type="hidden" name="toAccount" value="attacker_123"></p>
+<p>const crypto = require('crypto');</p>
 <br>
-<p>        <input type="hidden" name="amount" value="10000"></p>
+<p>function generateCSRFToken(req) {</p>
 <br>
-<p>    </form></p>
+<p>const token = crypto.randomBytes(32).toString('hex');</p>
 <br>
-<p>    <script>document.forms[0].submit();</script></p>
+<p>req.session.csrfToken = token;</p>
 <br>
+<p>return token;</p>
 <br>
+<p>}</p>
 <br>
+<p>function csrfMiddleware(req, res, next) {</p>
 <br>
-<p>Defense 1: CSRF Tokens (Synchronizer Token Pattern)   </p>
-<p>The server embeds a unique, unpredictable token in each form or request. The server validates the token on state-changing requests.   </p>
-<p>Server-Side Implementation (Express)   </p>
+<p>if (['POST', 'PUT', 'DELETE', 'PATCH'].includes(req.method)) {</p>
 <br>
+<p>const token = req.headers['x-csrf-token']</p>
 <br>
+<p>|| req.body._csrfToken;</p>
 <br>
-<p>    const crypto = require('crypto');</p>
+<p>if (!token || token !== req.session.csrfToken) {</p>
 <br>
+<p>return res.status(403).json({</p>
 <br>
+<p>error: 'CSRF validation failed'</p>
 <br>
-<p>    function generateCSRFToken(req) {</p>
+<p>});</p>
 <br>
-<p>        const token = crypto.randomBytes(32).toString('hex');</p>
+<p>}</p>
 <br>
-<p>        req.session.csrfToken = token;</p>
+<p>}</p>
 <br>
-<p>        return token;</p>
+<p>next();</p>
 <br>
-<p>    }</p>
+<p>}</p>
 <br>
+<p>HTML Form Usage </p>
 <br>
+<p>Transfer</p>
 <br>
-<p>    function csrfMiddleware(req, res, next) {</p>
+<p>Framework Built-In Support </p>
 <br>
-<p>        if (['POST', 'PUT', 'DELETE', 'PATCH'].includes(req.method)) {</p>
+<p>Most modern frameworks include CSRF protection: </p>
 <br>
-<p>            const token = req.headers['x-csrf-token']</p>
+<h1>Django</h1>
 <br>
-<p>                || req.body._csrfToken;</p>
+<p>{% csrf_token %} </p>
 <br>
-<p>            if (!token || token !== req.session.csrfToken) {</p>
+<h1>Rails</h1>
 <br>
-<p>                return res.status(403).json({</p>
+<p><%= csrf_meta_tags %></p>
 <br>
-<p>                    error: 'CSRF validation failed'</p>
+<p><%= hidden_field_tag :authenticity_token, form_authenticity_token %></p>
 <br>
-<p>                });</p>
+<p>// Spring Security</p>
 <br>
-<p>            }</p>
+<p>@EnableWebSecurity</p>
 <br>
-<p>        }</p>
+<p>public class SecurityConfig {</p>
 <br>
-<p>        next();</p>
+<p>@Bean</p>
 <br>
-<p>    }</p>
+<p>public SecurityFilterChain filterChain(HttpSecurity http) {</p>
 <br>
+<p>http.csrf(Customizer.withDefaults());</p>
 <br>
+<p>return http.build();</p>
 <br>
+<p>}</p>
 <br>
-<p>HTML Form Usage   </p>
+<p>}</p>
 <br>
+<p>Defense 2: SameSite Cookies </p>
 <br>
+<p>The `SameSite` cookie attribute tells the browser when to send cookies with cross-origin requests. </p>
 <br>
-<p>    <form method="POST" action="/transfer"></p>
+<p>| Attribute | Behavior | Security | |-----------|----------|----------| | `Strict` | Cookie sent only for same-site requests | Most secure, breaks some legitimate cross-site flows | | `Lax` | Cookie sent for top-level GET navigations | Good balance for most apps | | `None` | Cookie sent for all requests (requires Secure) | Insecure, use only when necessary | </p>
 <br>
-<p>        <input type="hidden" name="_csrfToken" value="<%= csrfToken %>"></p>
+<h1>Django settings</h1>
 <br>
-<p>        <input type="text" name="toAccount"></p>
+<p>SESSION_COOKIE_SAMESITE = 'Lax'</p>
 <br>
-<p>        <input type="number" name="amount"></p>
+<p>CSRF_COOKIE_SAMESITE = 'Lax'</p>
 <br>
-<p>        <button type="submit">Transfer</button></p>
+<p>// Express with cookie-session</p>
 <br>
-<p>    </form></p>
+<p>app.use(session({</p>
 <br>
+<p>cookie: {</p>
 <br>
+<p>sameSite: 'lax', // or 'strict'</p>
 <br>
+<p>secure: true,</p>
 <br>
-<p>Framework Built-In Support   </p>
-<p>Most modern frameworks include CSRF protection:   </p>
+<p>httpOnly: true</p>
 <br>
+<p>}</p>
 <br>
+<p>}));</p>
 <br>
-<p>    # Django</p>
+<p>For most applications, `SameSite=Lax` provides strong CSRF protection without breaking user experience. Use `SameSite=Strict` for sensitive operations like password changes or money transfers. </p>
 <br>
-<p>    {% csrf_token %}  <!-- Template tag --></p>
+<p>Defense 3: Custom Request Headers </p>
 <br>
+<p>Single-page applications that use JavaScript for API calls can leverage custom headers as a CSRF defense. Browsers enforce the same-origin policy, preventing custom headers from being set by cross-origin requests without CORS preflight. </p>
 <br>
+<p>// Client-side</p>
 <br>
+<p>fetch('/api/transfer', {</p>
 <br>
+<p>method: 'POST',</p>
 <br>
+<p>headers: {</p>
 <br>
+<p>'X-Requested-By': 'XMLHttpRequest',</p>
 <br>
-<p>    # Rails</p>
+<p>'Content-Type': 'application/json'</p>
 <br>
-<p>    <%= csrf_meta_tags %></p>
+<p>},</p>
 <br>
-<p>    <%= hidden_field_tag :authenticity_token, form_authenticity_token %></p>
+<p>body: JSON.stringify({ toAccount, amount }),</p>
 <br>
+<p>credentials: 'include'</p>
 <br>
+<p>});</p>
 <br>
+<p>// Server-side validation</p>
 <br>
+<p>app.post('/api/transfer', (req, res) => {</p>
 <br>
+<p>if (req.get('X-Requested-By') !== 'XMLHttpRequest') {</p>
 <br>
+<p>return res.status(403).json({ error: 'Invalid request origin' });</p>
 <br>
-<p>    // Spring Security</p>
+<p>}</p>
 <br>
-<p>    @EnableWebSecurity</p>
+<p>// Process transfer...</p>
 <br>
-<p>    public class SecurityConfig {</p>
+<p>});</p>
 <br>
-<p>        @Bean</p>
+<p>Defense 4: Origin and Referer Validation </p>
 <br>
-<p>        public SecurityFilterChain filterChain(HttpSecurity http) {</p>
+<p>Check the `Origin` or `Referer` header on incoming requests: </p>
 <br>
-<p>            http.csrf(Customizer.withDefaults());</p>
+<p>function validateOrigin(req) {</p>
 <br>
-<p>            return http.build();</p>
+<p>const origin = req.get('Origin');</p>
 <br>
-<p>        }</p>
+<p>const referer = req.get('Referer');</p>
 <br>
-<p>    }</p>
+<p>const allowed = ['https://example.com', 'https://app.example.com'];</p>
 <br>
+<p>if (origin && !allowed.includes(origin)) {</p>
 <br>
+<p>return false;</p>
 <br>
+<p>}</p>
 <br>
-<p>Defense 2: SameSite Cookies   </p>
-<p>The `SameSite` cookie attribute tells the browser when to send cookies with cross-origin requests.   </p>
-<p>| Attribute | Behavior | Security | |-----------|----------|----------| | `Strict` | Cookie sent only for same-site requests | Most secure, breaks some legitimate cross-site flows | | `Lax` | Cookie sent for top-level GET navigations | Good balance for most apps | | `None` | Cookie sent for all requests (requires Secure) | Insecure, use only when necessary |   </p>
+<p>if (!origin && referer) {</p>
 <br>
+<p>const url = new URL(referer);</p>
 <br>
+<p>if (!allowed.includes(url.origin)) {</p>
 <br>
-<p>    # Django settings</p>
+<p>return false;</p>
 <br>
-<p>    SESSION_COOKIE_SAMESITE = 'Lax'</p>
+<p>}</p>
 <br>
-<p>    CSRF_COOKIE_SAMESITE = 'Lax'</p>
+<p>}</p>
 <br>
+<p>return true;</p>
 <br>
+<p>}</p>
 <br>
+<p>Defense Comparison </p>
 <br>
+<p>| Method | Complexity | Browser Support | Protection Level | |--------|-----------|-----------------|------------------| | CSRF Token | Medium | Universal | Strong | | SameSite Cookie (Lax) | Low | 95%+ | Strong | | Custom Header | Low | Universal | Strong (CORS protected) | | Origin/Referer Check | Low | Universal | Moderate | </p>
 <br>
+<p>For maximum protection, use CSRF tokens plus SameSite cookies. This covers both legacy browsers (no SameSite support) and modern browsers with the additional layer of SameSite protection. </p>
 <br>
+<p>Summary </p>
 <br>
-<p>    // Express with cookie-session</p>
-<br>
-<p>    app.use(session({</p>
-<br>
-<p>        cookie: {</p>
-<br>
-<p>            sameSite: 'lax',  // or 'strict'</p>
-<br>
-<p>            secure: true,</p>
-<br>
-<p>            httpOnly: true</p>
-<br>
-<p>        }</p>
-<br>
-<p>    }));</p>
-<br>
-<br>
-<br>
-<br>
-<p>For most applications, `SameSite=Lax` provides strong CSRF protection without breaking user experience. Use `SameSite=Strict` for sensitive operations like password changes or money transfers.   </p>
-<p>Defense 3: Custom Request Headers   </p>
-<p>Single-page applications that use JavaScript for API calls can leverage custom headers as a CSRF defense. Browsers enforce the same-origin policy, preventing custom headers from being set by cross-origin requests without CORS preflight.   </p>
-<br>
-<br>
-<br>
-<p>    // Client-side</p>
-<br>
-<p>    fetch('/api/transfer', {</p>
-<br>
-<p>        method: 'POST',</p>
-<br>
-<p>        headers: {</p>
-<br>
-<p>            'X-Requested-By': 'XMLHttpRequest',</p>
-<br>
-<p>            'Content-Type': 'application/json'</p>
-<br>
-<p>        },</p>
-<br>
-<p>        body: JSON.stringify({ toAccount, amount }),</p>
-<br>
-<p>        credentials: 'include'</p>
-<br>
-<p>    });</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>    // Server-side validation</p>
-<br>
-<p>    app.post('/api/transfer', (req, res) => {</p>
-<br>
-<p>        if (req.get('X-Requested-By') !== 'XMLHttpRequest') {</p>
-<br>
-<p>            return res.status(403).json({ error: 'Invalid request origin' });</p>
-<br>
-<p>        }</p>
-<br>
-<p>        // Process transfer...</p>
-<br>
-<p>    });</p>
-<br>
-<br>
-<br>
-<br>
-<p>Defense 4: Origin and Referer Validation   </p>
-<p>Check the `Origin` or `Referer` header on incoming requests:   </p>
-<br>
-<br>
-<br>
-<p>    function validateOrigin(req) {</p>
-<br>
-<p>        const origin = req.get('Origin');</p>
-<br>
-<p>        const referer = req.get('Referer');</p>
-<br>
-<p>        const allowed = ['https://example.com', 'https://app.example.com'];</p>
-<br>
-<br>
-<br>
-<p>        if (origin && !allowed.includes(origin)) {</p>
-<br>
-<p>            return false;</p>
-<br>
-<p>        }</p>
-<br>
-<p>        if (!origin && referer) {</p>
-<br>
-<p>            const url = new URL(referer);</p>
-<br>
-<p>            if (!allowed.includes(url.origin)) {</p>
-<br>
-<p>                return false;</p>
-<br>
-<p>            }</p>
-<br>
-<p>        }</p>
-<br>
-<p>        return true;</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<p>Defense Comparison   </p>
-<p>| Method | Complexity | Browser Support | Protection Level | |--------|-----------|-----------------|------------------| | CSRF Token | Medium | Universal | Strong | | SameSite Cookie (Lax) | Low | 95%+ | Strong | | Custom Header | Low | Universal | Strong (CORS protected) | | Origin/Referer Check | Low | Universal | Moderate |   </p>
-<p>For maximum protection, use CSRF tokens plus SameSite cookies. This covers both legacy browsers (no SameSite support) and modern browsers with the additional layer of SameSite protection.   </p>
-<p>Summary   </p>
 <p>CSRF attacks exploit the browser's automatic inclusion of credentials in cross-origin requests. Defend using synchronizer token patterns for traditional server-rendered apps, SameSite cookies for modern browsers, and custom headers for API-driven SPAs. The most robust approach combines CSRF tokens with SameSite cookies to protect users across all browser versions.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

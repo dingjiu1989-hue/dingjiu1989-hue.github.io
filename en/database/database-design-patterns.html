@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-design-patterns.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance">
     <meta name="twitter:description" content="Explore database design patterns for application development: Repository pattern, Unit of Work, Query Objects, and table inheritance strategies.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-design-patterns.png">
     <title>Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance — SourceHub</title>
     <meta name="description" content="Explore database design patterns for application development: Repository pattern, Unit of Work, Query Objects, and table inheritance strategies.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance",
       "description": "Explore database design patterns for application development: Repository pattern, Unit of Work, Query Objects, and table inheritance strategies.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-design-patterns.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2822",
+      "wordCount": "2697",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-design-patterns.png" alt="Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</h1>
 <br>
 <p>Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance   </p>
@@ -83,13 +84,9 @@
 <p>The Repository pattern mediates between the domain model and the database, providing a collection-like interface for accessing domain objects.   </p>
 <p>Interface   </p>
 <br>
-<br>
-<br>
 <p>    from abc import ABC, abstractmethod</p>
 <br>
 <p>    from typing import Optional, List</p>
-<br>
-<br>
 <br>
 <p>    class UserRepository(ABC):</p>
 <br>
@@ -99,15 +96,11 @@
 <br>
 <p>            pass</p>
 <br>
-<br>
-<br>
 <p>        @abstractmethod</p>
 <br>
 <p>        def find_by_email(self, email: str) -> Optional[dict]:</p>
 <br>
 <p>            pass</p>
-<br>
-<br>
 <br>
 <p>        @abstractmethod</p>
 <br>
@@ -115,34 +108,23 @@
 <br>
 <p>            pass</p>
 <br>
-<br>
-<br>
 <p>        @abstractmethod</p>
 <br>
 <p>        def delete(self, user_id: int) -> bool:</p>
 <br>
 <p>            pass</p>
 <br>
-<br>
-<br>
-<br>
 <p>Implementation   </p>
-<br>
-<br>
 <br>
 <p>    import psycopg2</p>
 <br>
 <p>    from psycopg2.extras import RealDictCursor</p>
-<br>
-<br>
 <br>
 <p>    class PostgresUserRepository(UserRepository):</p>
 <br>
 <p>        def __init__(self, conn):</p>
 <br>
 <p>            self.conn = conn</p>
-<br>
-<br>
 <br>
 <p>        def find_by_id(self, user_id: int) -> Optional[dict]:</p>
 <br>
@@ -158,8 +140,6 @@
 <br>
 <p>                return cur.fetchone()</p>
 <br>
-<br>
-<br>
 <p>        def find_by_email(self, email: str) -> Optional[dict]:</p>
 <br>
 <p>            with self.conn.cursor(cursor_factory=RealDictCursor) as cur:</p>
@@ -173,8 +153,6 @@
 <p>                )</p>
 <br>
 <p>                return cur.fetchone()</p>
-<br>
-<br>
 <br>
 <p>        def save(self, user: dict) -> int:</p>
 <br>
@@ -202,8 +180,6 @@
 <br>
 <p>                return cur.fetchone()[0]</p>
 <br>
-<br>
-<br>
 <p>        def delete(self, user_id: int) -> bool:</p>
 <br>
 <p>            with self.conn.cursor() as cur:</p>
@@ -216,9 +192,6 @@
 <br>
 <p>                return cur.rowcount > 0</p>
 <br>
-<br>
-<br>
-<br>
 <p>Benefits   </p>
 <br>
 <p>* **Testability**: Mock the repository interface for unit tests.</p>
@@ -228,8 +201,6 @@
 <br>
 <p>Unit of Work Pattern   </p>
 <p>Unit of Work tracks changes to objects during a business transaction and writes them as a single unit:   </p>
-<br>
-<br>
 <br>
 <p>    class UnitOfWork:</p>
 <br>
@@ -245,13 +216,9 @@
 <br>
 <p>            self.repositories = {}</p>
 <br>
-<br>
-<br>
 <p>        def register_new(self, obj):</p>
 <br>
 <p>            self.new_objects.append(obj)</p>
-<br>
-<br>
 <br>
 <p>        def register_dirty(self, obj):</p>
 <br>
@@ -259,21 +226,15 @@
 <br>
 <p>                self.dirty_objects.append(obj)</p>
 <br>
-<br>
-<br>
 <p>        def register_deleted(self, obj):</p>
 <br>
 <p>            self.deleted_objects.append(obj)</p>
-<br>
-<br>
 <br>
 <p>        def commit(self):</p>
 <br>
 <p>            if not self.new_objects and not self.dirty_objects and not self.deleted_objects:</p>
 <br>
 <p>                return</p>
-<br>
-<br>
 <br>
 <p>            with self.conn:</p>
 <br>
@@ -289,15 +250,11 @@
 <br>
 <p>                    self._insert(obj)</p>
 <br>
-<br>
-<br>
 <p>            self.new_objects.clear()</p>
 <br>
 <p>            self.dirty_objects.clear()</p>
 <br>
 <p>            self.deleted_objects.clear()</p>
-<br>
-<br>
 <br>
 <p>        def _insert(self, obj):</p>
 <br>
@@ -305,15 +262,11 @@
 <br>
 <p>            repo.save(obj)</p>
 <br>
-<br>
-<br>
 <p>        def _update(self, obj):</p>
 <br>
 <p>            repo = self._get_repo(type(obj))</p>
 <br>
 <p>            repo.save(obj)</p>
-<br>
-<br>
 <br>
 <p>        def _delete(self, obj):</p>
 <br>
@@ -321,32 +274,21 @@
 <br>
 <p>            repo.delete(obj.id)</p>
 <br>
-<br>
-<br>
 <p>        def _get_repo(self, obj_type):</p>
 <br>
 <p>            # Repository registry determines which repository maps to which type</p>
 <br>
 <p>            pass</p>
 <br>
-<br>
-<br>
-<br>
 <p>Usage   </p>
-<br>
-<br>
 <br>
 <p>    def create_order(user_id, items):</p>
 <br>
 <p>        uow = UnitOfWork(connection)</p>
 <br>
-<br>
-<br>
 <p>        user_repo = UserRepository(uow)</p>
 <br>
 <p>        order_repo = OrderRepository(uow)</p>
-<br>
-<br>
 <br>
 <p>        user = user_repo.find_by_id(user_id)</p>
 <br>
@@ -354,29 +296,18 @@
 <br>
 <p>        uow.register_dirty(user)</p>
 <br>
-<br>
-<br>
 <p>        order = {'user_id': user_id, 'items': items, 'total': calculate_total(items)}</p>
 <br>
 <p>        uow.register_new(order)</p>
 <br>
-<br>
-<br>
 <p>        uow.commit()  # All changes in one transaction</p>
-<br>
-<br>
-<br>
 <br>
 <p>Query Object Pattern   </p>
 <p>Query Objects encapsulate database queries as reusable objects:   </p>
 <br>
-<br>
-<br>
 <p>    from dataclasses import dataclass</p>
 <br>
 <p>    from typing import Optional, List</p>
-<br>
-<br>
 <br>
 <p>    @dataclass</p>
 <br>
@@ -402,8 +333,6 @@
 <br>
 <p>        offset: int = 0</p>
 <br>
-<br>
-<br>
 <p>        def to_sql(self) -> tuple:</p>
 <br>
 <p>            conditions = []</p>
@@ -411,8 +340,6 @@
 <p>            params = []</p>
 <br>
 <p>            param_index = 1</p>
-<br>
-<br>
 <br>
 <p>            if self.user_id is not None:</p>
 <br>
@@ -422,8 +349,6 @@
 <br>
 <p>                param_index += 1</p>
 <br>
-<br>
-<br>
 <p>            if self.status is not None:</p>
 <br>
 <p>                conditions.append(f"status = ${param_index}")</p>
@@ -431,8 +356,6 @@
 <p>                params.append(self.status)</p>
 <br>
 <p>                param_index += 1</p>
-<br>
-<br>
 <br>
 <p>            if self.min_total is not None:</p>
 <br>
@@ -442,8 +365,6 @@
 <br>
 <p>                param_index += 1</p>
 <br>
-<br>
-<br>
 <p>            if self.max_total is not None:</p>
 <br>
 <p>                conditions.append(f"total <= ${param_index}")</p>
@@ -451,8 +372,6 @@
 <p>                params.append(self.max_total)</p>
 <br>
 <p>                param_index += 1</p>
-<br>
-<br>
 <br>
 <p>            if self.created_after is not None:</p>
 <br>
@@ -462,8 +381,6 @@
 <br>
 <p>                param_index += 1</p>
 <br>
-<br>
-<br>
 <p>            if self.created_before is not None:</p>
 <br>
 <p>                conditions.append(f"created_at <= ${param_index}")</p>
@@ -471,8 +388,6 @@
 <p>                params.append(self.created_before)</p>
 <br>
 <p>                param_index += 1</p>
-<br>
-<br>
 <br>
 <p>            where_clause = " AND ".join(conditions) if conditions else "TRUE"</p>
 <br>
@@ -490,21 +405,13 @@
 <br>
 <p>            params.extend([self.limit, self.offset])</p>
 <br>
-<br>
-<br>
 <p>            return sql, params</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class OrderRepository:</p>
 <br>
 <p>        def __init__(self, conn):</p>
 <br>
 <p>            self.conn = conn</p>
-<br>
-<br>
 <br>
 <p>        def find_by_query(self, query: OrderQuery) -> List[dict]:</p>
 <br>
@@ -516,14 +423,9 @@
 <br>
 <p>                return cur.fetchall()</p>
 <br>
-<br>
-<br>
-<br>
 <p>Table Inheritance Patterns   </p>
 <p>Single Table Inheritance (STI)   </p>
 <p>All types in one table with a type discriminator column:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE content_items (</p>
 <br>
@@ -545,18 +447,11 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX idx_content_type ON content_items (type);</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Pros**: Simple queries, no joins. **Cons**: Many nullable columns, wasted space.   </p>
 <p>Class Table Inheritance (CTI)   </p>
 <p>One table for base type, separate tables for subtypes:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE content_items (</p>
 <br>
@@ -568,8 +463,6 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
 <p>    CREATE TABLE articles (</p>
 <br>
 <p>        id BIGINT PRIMARY KEY REFERENCES content_items(id),</p>
@@ -577,8 +470,6 @@
 <p>        body TEXT NOT NULL</p>
 <br>
 <p>    );</p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE videos (</p>
 <br>
@@ -590,12 +481,7 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Pros**: No wasted space, clean schema. **Cons**: Requires JOIN to read full object.   </p>
-<br>
-<br>
 <br>
 <p>    class ContentRepository:</p>
 <br>
@@ -613,13 +499,8 @@
 <br>
 <p>            """, (article_id,))</p>
 <br>
-<br>
-<br>
-<br>
 <p>Concrete Table Inheritance   </p>
 <p>Each subtype has its own complete table:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE articles (</p>
 <br>
@@ -632,8 +513,6 @@
 <p>        created_at TIMESTAMPTZ DEFAULT NOW()</p>
 <br>
 <p>    );</p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE videos (</p>
 <br>
@@ -648,9 +527,6 @@
 <p>        created_at TIMESTAMPTZ DEFAULT NOW()</p>
 <br>
 <p>    );</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Pros**: No joins, no nullable columns. **Cons**: Duplicated columns, hard to query across types.   </p>
 <p>When to Use Each   </p>

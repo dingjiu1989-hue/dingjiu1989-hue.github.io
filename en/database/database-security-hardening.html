@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-security-hardening.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Security Hardening">
     <meta name="twitter:description" content="Hardening database security with encryption, audit logging, access control, and network isolation.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-security-hardening.png">
     <title>Database Security Hardening — SourceHub</title>
     <meta name="description" content="Hardening database security with encryption, audit logging, access control, and network isolation.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Security Hardening",
       "description": "Hardening database security with encryption, audit logging, access control, and network isolation.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-security-hardening.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "382",
+      "wordCount": "357",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Security Hardening</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-security-hardening.png" alt="Database Security Hardening" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Security Hardening</h1>
 <br>
 <p>Defense in Depth   </p>
 <p>Database security requires multiple layers: network isolation, encryption, access control, and auditing.   </p>
 <p>Encryption   </p>
 <p>Encryption at Rest   </p>
-<br>
-<br>
 <br>
 <p>    -- PostgreSQL TDE</p>
 <br>
@@ -92,12 +91,7 @@
 <br>
 <p>    SELECT pg_tde_set_principal_key('production-db-key', 'file-vault');</p>
 <br>
-<br>
-<br>
-<br>
 <p>Encryption in Transit   </p>
-<br>
-<br>
 <br>
 <p>    # postgresql.conf</p>
 <br>
@@ -107,13 +101,8 @@
 <br>
 <p>    ssl_key_file = '/etc/ssl/private/server.key'</p>
 <br>
-<br>
-<br>
-<br>
 <p>Access Control   </p>
 <p>Apply least privilege with separate roles:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE ROLE read_only;</p>
 <br>
@@ -123,12 +112,7 @@
 <br>
 <p>    GRANT INSERT, UPDATE, DELETE ON ALL TABLES TO read_write;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Row-Level Security   </p>
-<br>
-<br>
 <br>
 <p>    ALTER TABLE orders ENABLE ROW LEVEL SECURITY;</p>
 <br>
@@ -136,21 +120,13 @@
 <br>
 <p>        USING (tenant_id = current_setting('app.tenant_id')::INT);</p>
 <br>
-<br>
-<br>
-<br>
 <p>Audit Logging   </p>
-<br>
-<br>
 <br>
 <p>    CREATE EXTENSION pgaudit;</p>
 <br>
 <p>    -- In postgresql.conf</p>
 <br>
 <p>    pgaudit.log = 'write,ddl,role'</p>
-<br>
-<br>
-<br>
 <br>
 <p>Network Isolation   </p>
 <p>Place databases in private subnets. Use security groups to restrict access to specific application servers only. Never expose databases directly to the internet.   </p>

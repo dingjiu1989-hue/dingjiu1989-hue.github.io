@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/service-mesh.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Service Mesh Patterns: Istio and Linkerd">
     <meta name="twitter:description" content="Service mesh with sidecar proxy, traffic management, mTLS, observability, canary deployments, and when to use a mesh.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/service-mesh.png">
     <title>Service Mesh Patterns: Istio and Linkerd — SourceHub</title>
     <meta name="description" content="Service mesh with sidecar proxy, traffic management, mTLS, observability, canary deployments, and when to use a mesh.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Service Mesh Patterns: Istio and Linkerd",
       "description": "Service mesh with sidecar proxy, traffic management, mTLS, observability, canary deployments, and when to use a mesh.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/service-mesh.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "3048",
+      "wordCount": "2987",
       "keywords": "Architecture, System Design",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,14 +74,13 @@
         <span class="tag-cat">System Design</span></div>
       <h1 class="article-title">Service Mesh Patterns: Istio and Linkerd</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/service-mesh.png" alt="Service Mesh Patterns: Istio and Linkerd" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Service Mesh Patterns: Istio and Linkerd</h1>
 <br>
 <p>A service mesh is a dedicated infrastructure layer for handling service-to-service communication. It manages traffic routing, security, observability, and resilience without requiring changes to application code. This article covers the core patterns of service meshes, how Istio and Linkerd implement them, and guidance on when a service mesh adds value.   </p>
 <p>What is a Service Mesh?   </p>
 <p>In a traditional architecture, each service handles network communication directly. This leads to duplicated logic for retries, timeouts, load balancing, TLS, and tracing across every service.   </p>
 <p>A service mesh extracts these concerns into a separate infrastructure layer. Each service gets a sidecar proxy that intercepts all network traffic. The proxies form a mesh that manages all service-to-service communication.   </p>
-<br>
-<br>
 <br>
 <p>    [Service A] -> [Sidecar Proxy] ----> [Sidecar Proxy] -> [Service B]</p>
 <br>
@@ -93,9 +92,6 @@
 <br>
 <p>                        +------[Control Plane]----+</p>
 <br>
-<br>
-<br>
-<br>
 <p>The mesh has two components:   </p>
 <br>
 <p>* **Data plane**: The sidecar proxies that handle the actual traffic. Envoy is the most common proxy.</p>
@@ -103,8 +99,6 @@
 <br>
 <p>Sidecar Proxy Pattern   </p>
 <p>The sidecar proxy is the foundation of service mesh. It runs as a separate container in the same pod as the application.   </p>
-<br>
-<br>
 <br>
 <p>    # Kubernetes pod with Istio sidecar</p>
 <br>
@@ -144,9 +138,6 @@
 <br>
 <p>            - $(POD_NAMESPACE).svc.cluster.local</p>
 <br>
-<br>
-<br>
-<br>
 <p>What the Sidecar Does   </p>
 <br>
 <p>* **Intercepts all inbound and outbound traffic** using iptables rules.</p>
@@ -154,8 +145,6 @@
 <p>Traffic Management   </p>
 <p>Service meshes provide fine-grained traffic control beyond simple round-robin load balancing.   </p>
 <p>Virtual Services and Destination Rules (Istio)   </p>
-<br>
-<br>
 <br>
 <p>    # Istio VirtualService: Route traffic based on headers</p>
 <br>
@@ -247,12 +236,7 @@
 <br>
 <p>            maxRequestsPerConnection: 10</p>
 <br>
-<br>
-<br>
-<br>
 <p>Traffic Splitting (Canary Deployments)   </p>
-<br>
-<br>
 <br>
 <p>    # Canary deployment: 10% traffic to new version</p>
 <br>
@@ -290,12 +274,7 @@
 <br>
 <p>              weight: 90</p>
 <br>
-<br>
-<br>
-<br>
 <p>Linkerd uses a similar approach with TrafficSplit:   </p>
-<br>
-<br>
 <br>
 <p>    # Linkerd TrafficSplit for canary</p>
 <br>
@@ -321,12 +300,7 @@
 <br>
 <p>          weight: 100m</p>
 <br>
-<br>
-<br>
-<br>
 <p>Timeouts and Retries   </p>
-<br>
-<br>
 <br>
 <p>    # Istio: Request timeouts and retries</p>
 <br>
@@ -362,14 +336,9 @@
 <br>
 <p>                host: ratings</p>
 <br>
-<br>
-<br>
-<br>
 <p>Mutual TLS (mTLS)   </p>
 <p>Service meshes provide automatic mutual TLS between services without application changes. Each sidecar proxy has a certificate issued by the mesh's certificate authority.   </p>
 <p>Istio mTLS modes   </p>
-<br>
-<br>
 <br>
 <p>    # STRICT mTLS: All traffic must use mTLS</p>
 <br>
@@ -389,8 +358,6 @@
 <br>
 <p>        mode: STRICT</p>
 <br>
-<br>
-<br>
 <p>    # PERMISSIVE: Accept both mTLS and plaintext (migration mode)</p>
 <br>
 <p>    apiVersion: security.istio.io/v1beta1</p>
@@ -408,8 +375,6 @@
 <p>      mtls:</p>
 <br>
 <p>        mode: PERMISSIVE</p>
-<br>
-<br>
 <br>
 <p>    # DISABLE: Disable mTLS for specific workloads</p>
 <br>
@@ -435,22 +400,14 @@
 <br>
 <p>        mode: DISABLE</p>
 <br>
-<br>
-<br>
-<br>
 <p>Linkerd mTLS   </p>
 <p>Linkerd automatically enables mTLS between meshed pods. It uses a 24-hour certificate rotation with automatic renewal.   </p>
-<br>
-<br>
 <br>
 <p>    # Check mTLS status in Linkerd</p>
 <br>
 <p>    linkerd viz stat deploy --from deploy</p>
 <br>
 <p>    # Look for TLS columns showing encrypted traffic</p>
-<br>
-<br>
-<br>
 <br>
 <p>mTLS benefits:</p>
 <p>* All service-to-service traffic is encrypted.</p>
@@ -460,8 +417,6 @@
 <p>Observability   </p>
 <p>Service meshes provide rich observability without code instrumentation.   </p>
 <p>Metrics   </p>
-<br>
-<br>
 <br>
 <p>    # Istio: Enable Prometheus metrics</p>
 <br>
@@ -487,9 +442,6 @@
 <br>
 <p>              mode: REPORT</p>
 <br>
-<br>
-<br>
-<br>
 <p>Istio exports standard metrics:</p>
 <p>* `istio_requests_total`: Total requests (by source, dest, response code).</p>
 <p>* `istio_request_duration_milliseconds`: Request latencies.</p>
@@ -498,8 +450,6 @@
 <p>* `istio_tcp_sent_bytes_total`: TCP throughput.</p>
 <br>
 <p>Distributed Tracing   </p>
-<br>
-<br>
 <br>
 <p>    # Istio: Enable tracing with Zipkin, Jaeger, or OpenTelemetry</p>
 <br>
@@ -521,14 +471,9 @@
 <br>
 <p>          randomSamplingPercentage: 10</p>
 <br>
-<br>
-<br>
-<br>
 <p>Tracing headers (b3, x-request-id) are propagated automatically by the sidecar. Services that forward the tracing headers receive full distributed trace visibility without adding any tracing SDK.   </p>
 <p>Authorization Policies   </p>
 <p>Service meshes enforce authorization at the network level. Policies specify which services can communicate.   </p>
-<br>
-<br>
 <br>
 <p>    # Istio: Authorization policy</p>
 <br>
@@ -582,8 +527,6 @@
 <br>
 <p>                paths: ["*"]</p>
 <br>
-<br>
-<br>
 <p>    ---</p>
 <br>
 <p>    apiVersion: security.istio.io/v1beta1</p>
@@ -619,9 +562,6 @@
 <p>                  "cluster.local/ns/prod/sa/admin-service"</p>
 <br>
 <p>                ]</p>
-<br>
-<br>
-<br>
 <br>
 <p>When to Use a Service Mesh   </p>
 <p>Service Mesh Adds Value When   </p>

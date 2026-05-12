@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-retrieval-optimization.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation">
     <meta name="twitter:description" content="Optimize RAG retrieval with hybrid search combining dense and sparse methods, cross-encoder re-ranking, and query transformation techniques for better results.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-retrieval-optimization.png">
     <title>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation — SourceHub</title>
     <meta name="description" content="Optimize RAG retrieval with hybrid search combining dense and sparse methods, cross-encoder re-ranking, and query transformation techniques for better results.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation",
       "description": "Optimize RAG retrieval with hybrid search combining dense and sparse methods, cross-encoder re-ranking, and query transformation techniques for better results.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-retrieval-optimization.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1691",
+      "wordCount": "1572",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,38 +75,22 @@
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-retrieval-optimization.png" alt="RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Retrieval quality is the single biggest factor in RAG system performance. Even the best LLM cannot produce accurate answers from irrelevant context. This article covers three optimization layers: hybrid search that combines embedding similarity with keyword matching, re-ranking that refines initial results, and query transformation that bridges the gap between user questions and searchable terms.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Hybrid Search</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Pure vector search excels at semantic similarity but misses exact keyword matches. Pure keyword search finds exact terms but misses conceptually related content. Hybrid search combines both:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from qdrant_client import QdrantClient</p>
 <br>
 <p>    from qdrant_client.models import Filter, HybridFusion</p>
 <br>
-<br>
-<br>
 <p>    client = QdrantClient(host="localhost", port=6333)</p>
-<br>
-<br>
 <br>
 <p>    def hybrid_search(</p>
 <br>
@@ -118,13 +102,9 @@
 <br>
 <p>        dense_vector = embedding_model.encode(query).tolist()</p>
 <br>
-<br>
-<br>
 <p>        # Sparse vector (BM25-style)</p>
 <br>
 <p>        sparse_vector = sparse_encoder.encode(query)</p>
-<br>
-<br>
 <br>
 <p>        results = client.search_batch(</p>
 <br>
@@ -160,27 +140,13 @@
 <br>
 <p>        )</p>
 <br>
-<br>
-<br>
 <p>        # Fusion: Reciprocal Rank Fusion</p>
 <br>
 <p>        return rrf_fusion(results[0], results[1], k=60)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Reciprocal Rank Fusion</h3>
 <br>
-<br>
-<br>
-<br>
 <p>RRF combines ranked lists from multiple retrieval methods:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    def rrf_fusion(dense_results: list, sparse_results: list, k: int = 60) -> list[dict]:</p>
 <br>
@@ -194,40 +160,19 @@
 <br>
 <p>            scores[result.id] = scores.get(result.id, 0) + 1 / (k + rank + 1)</p>
 <br>
-<br>
-<br>
 <p>        reranked = sorted(scores.items(), key=lambda x: x[1], reverse=True)</p>
 <br>
 <p>        return [{"id": id_, "score": score} for id_, score in reranked[:limit]]</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>RRF is simple, effective, and requires no training. The constant `k` (typically 60) prevents a single high rank from dominating.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Cross-Encoder Re-Ranking</h2>
 <br>
-<br>
-<br>
-<br>
 <p>After initial retrieval, a cross-encoder model re-scores candidates with higher accuracy:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from sentence_transformers import CrossEncoder</p>
 <br>
-<br>
-<br>
 <p>    reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")</p>
-<br>
-<br>
 <br>
 <p>    def retrieve_and_rerank(query: str, top_k: int = 50, rerank_top: int = 5) -> list[dict]:</p>
 <br>
@@ -235,46 +180,25 @@
 <br>
 <p>        candidates = hybrid_search(query, limit=top_k)</p>
 <br>
-<br>
-<br>
 <p>        # Second stage: cross-encoder re-ranking</p>
 <br>
 <p>        pairs = [(query, cand["text"]) for cand in candidates]</p>
 <br>
 <p>        scores = reranker.predict(pairs)</p>
 <br>
-<br>
-<br>
 <p>        for cand, score in zip(candidates, scores):</p>
 <br>
 <p>            cand["rerank_score"] = float(score)</p>
-<br>
-<br>
 <br>
 <p>        candidates.sort(key=lambda x: x["rerank_score"], reverse=True)</p>
 <br>
 <p>        return candidates[:rerank_top]</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Cross-encoders are 10-100x slower than bi-encoders but significantly more accurate. The two-stage pattern (wide bi-encoder retrieval, narrow cross-encoder re-ranking) balances speed and quality.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Query Transformation</h2>
 <br>
-<br>
-<br>
-<br>
 <p>User queries are rarely optimal for retrieval. Transform them before searching:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    def transform_query(user_query: str, technique: str = "expansion") -> str:</p>
 <br>
@@ -290,8 +214,6 @@
 <br>
 <p>            return hyde_query(user_query)</p>
 <br>
-<br>
-<br>
 <p>    def expand_query(query: str) -> str:</p>
 <br>
 <p>        """Generate search-friendly expansions of the original query."""</p>
@@ -302,15 +224,11 @@
 <br>
 <p>        Keep the core meaning but vary terminology.</p>
 <br>
-<br>
-<br>
 <p>        Original: {query}</p>
 <br>
 <p>        """)</p>
 <br>
 <p>        return f"{query}\n{expansions}"</p>
-<br>
-<br>
 <br>
 <p>    def hyde_query(query: str) -> str:</p>
 <br>
@@ -322,21 +240,9 @@
 <br>
 <p>        return hypothetical</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Query Decomposition</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Complex questions should be split into sub-queries, each searched independently:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    def decompose_and_retrieve(question: str) -> list[dict]:</p>
 <br>
@@ -350,8 +256,6 @@
 <br>
 <p>        sub_queries = parse_list(sub_queries)</p>
 <br>
-<br>
-<br>
 <p>        all_results = []</p>
 <br>
 <p>        for sq in sub_queries:</p>
@@ -359,8 +263,6 @@
 <p>            results = hybrid_search(sq, limit=5)</p>
 <br>
 <p>            all_results.extend(results)</p>
-<br>
-<br>
 <br>
 <p>        # Deduplicate by ID</p>
 <br>
@@ -378,21 +280,9 @@
 <br>
 <p>        return unique_results[:10]</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Measuring Retrieval Quality</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Track these metrics to validate improvements:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    def evaluate_retrieval(test_queries: list[dict], retriever_fn) -> dict:</p>
 <br>
@@ -420,15 +310,7 @@
 <br>
 <p>        return metrics</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Optimize RAG retrieval in three layers. First, implement hybrid search combining dense and sparse vectors with RRF fusion. Second, add cross-encoder re-ranking for precision on early-stage results. Third, transform user queries through expansion, decomposition, or HyDE techniques. Measure recall@k after each change to validate improvements before deploying.</p></div>
     </article>

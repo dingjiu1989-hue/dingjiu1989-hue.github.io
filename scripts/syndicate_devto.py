@@ -85,8 +85,17 @@ def devto_request(method, path, data=None):
         print(f"  API error ({e.code}): {err[:200]}")
         return None
 
-def get_published_slugs():
-    """Get list of already-published dev.to article slugs."""
+def get_published_slugs(force_refresh=False):
+    """Get list of already-published dev.to article slugs. Cached to avoid re-pagination."""
+    cache_path = ROOT / ".devto-published-cache.json"
+    cache_ttl = 7200  # 2 hours
+    if not force_refresh and cache_path.exists():
+        try:
+            cache = json.loads(cache_path.read_text(encoding="utf-8"))
+            if time.time() - cache.get("ts", 0) < cache_ttl:
+                return set(cache.get("slugs", []))
+        except Exception:
+            pass
     slugs = set()
     page = 1
     while True:
@@ -94,7 +103,6 @@ def get_published_slugs():
         if not articles:
             break
         for art in articles:
-            # Extract our source slug from canonical URL
             canon = art.get("canonical_url", "")
             if "dingjiu1989-hue.github.io" in canon:
                 slug = canon.split("/")[-1].replace(".html", "")
@@ -102,6 +110,7 @@ def get_published_slugs():
         page += 1
         if len(articles) < 100:
             break
+    cache_path.write_text(json.dumps({"ts": time.time(), "slugs": list(slugs)}), encoding="utf-8")
     return slugs
 
 def parse_tags(tags_val):
@@ -192,6 +201,8 @@ def main():
         print("All articles already syndicated!")
         return
 
+    cache_path = ROOT / ".devto-published-cache.json"
+
     print(f"Publishing up to {len(to_publish)} articles to dev.to...")
     published_count = 0
     for i, (board_id, art) in enumerate(to_publish):
@@ -216,17 +227,22 @@ def main():
             devto_url = result.get("url", "unknown")
             print(f"  [{i+1}/{len(to_publish)}] {art['title'][:60]}...")
             print(f"         URL: {devto_url}")
+            published.add(art["slug"])
             published_count += 1
         elif isinstance(result, dict) and result.get("error") == "rate_limit":
             print(f"  ⏳ Rate limited. Stopping batch. Published {published_count} this run.")
             break
         else:
+            err_msg = str(result)[:200] if result else "no response"
             print(f"  [{i+1}/{len(to_publish)}] FAILED: {art['title'][:60]}...")
+            print(f"         Error: {err_msg}")
 
         # Respect rate limit — dev.to allows ~3 articles per 15 min
         if i < len(to_publish) - 1:
             time.sleep(90)
 
+    # Update cache with newly published slugs
+    cache_path.write_text(json.dumps({"ts": time.time(), "slugs": list(published)}), encoding="utf-8")
     print(f"\nDone. {published_count} articles syndicated to dev.to this run.")
 
 if __name__ == "__main__":

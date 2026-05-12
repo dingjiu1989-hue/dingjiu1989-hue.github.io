@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/compliance-automation.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Compliance Automation">
     <meta name="twitter:description" content="Automating compliance with CIS benchmarks, automated scanning, reporting, and continuous monitoring.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/compliance-automation.png">
     <title>Compliance Automation — SourceHub</title>
     <meta name="description" content="Automating compliance with CIS benchmarks, automated scanning, reporting, and continuous monitoring.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Compliance Automation",
       "description": "Automating compliance with CIS benchmarks, automated scanning, reporting, and continuous monitoring.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/compliance-automation.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1550",
+      "wordCount": "1496",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Compliance Automation</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/compliance-automation.png" alt="Compliance Automation" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Compliance Automation</h1>
 <br>
 <p>Why Automate Compliance?   </p>
 <p>Manual compliance is slow, error-prone, and unsustainable. Automation provides continuous verification, instant reporting, and faster audit cycles.   </p>
 <p>CIS Benchmark Scanning   </p>
 <p>Automate CIS benchmark checks across infrastructure:   </p>
-<br>
-<br>
 <br>
 <p>    # cis-benchmark-config.yaml</p>
 <br>
@@ -104,8 +103,6 @@
 <br>
 <p>            severity: "critical"</p>
 <br>
-<br>
-<br>
 <p>          - id: "1.3"</p>
 <br>
 <p>            title: "Ensure MFA for root account"</p>
@@ -115,8 +112,6 @@
 <p>            expected: "1"</p>
 <br>
 <p>            severity: "critical"</p>
-<br>
-<br>
 <br>
 <p>          - id: "2.1"</p>
 <br>
@@ -128,19 +123,11 @@
 <br>
 <p>            severity: "high"</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # CIS compliance checker</p>
 <br>
 <p>    import subprocess</p>
 <br>
 <p>    import json</p>
-<br>
-<br>
 <br>
 <p>    class CISChecker:</p>
 <br>
@@ -149,8 +136,6 @@
 <p>            self.checks = config["checks"]</p>
 <br>
 <p>            self.results = []</p>
-<br>
-<br>
 <br>
 <p>        def run_checks(self):</p>
 <br>
@@ -162,8 +147,6 @@
 <br>
 <p>            return self.generate_report()</p>
 <br>
-<br>
-<br>
 <p>        def run_single_check(self, check):</p>
 <br>
 <p>            try:</p>
@@ -174,11 +157,7 @@
 <br>
 <p>                ).strip()</p>
 <br>
-<br>
-<br>
 <p>                passed = output == check["expected"]</p>
-<br>
-<br>
 <br>
 <p>                return {</p>
 <br>
@@ -212,12 +191,7 @@
 <br>
 <p>                }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Automated Remediation   </p>
-<br>
-<br>
 <br>
 <p>    def auto_remediate(findings):</p>
 <br>
@@ -269,8 +243,6 @@
 <br>
 <p>        }</p>
 <br>
-<br>
-<br>
 <p>        for finding in findings:</p>
 <br>
 <p>            if finding["auto_remediable"] and finding["severity"] == "critical":</p>
@@ -283,19 +255,12 @@
 <br>
 <p>                    finding["remediated"] = True</p>
 <br>
-<br>
-<br>
-<br>
 <p>Compliance Reporting   </p>
 <p>Generate auditor-ready reports:   </p>
-<br>
-<br>
 <br>
 <p>    from jinja2 import Template</p>
 <br>
 <p>    import markdown</p>
-<br>
-<br>
 <br>
 <p>    def generate_compliance_report(results, framework="CIS AWS v3.0"):</p>
 <br>
@@ -315,8 +280,6 @@
 <br>
 <p>        }</p>
 <br>
-<br>
-<br>
 <p>        report_md = f"""</p>
 <br>
 <p>    # Compliance Report: {framework}</p>
@@ -324,8 +287,6 @@
 <p>    **Date:** {summary['timestamp']}</p>
 <br>
 <p>    **Score:** {summary['compliance_score']:.1f}%</p>
-<br>
-<br>
 <br>
 <p>    ## Summary</p>
 <br>
@@ -335,13 +296,9 @@
 <br>
 <p>    - Failed: {summary['failed']}</p>
 <br>
-<br>
-<br>
 <p>    ## Failed Controls</p>
 <br>
 <p>    """</p>
-<br>
-<br>
 <br>
 <p>        for result in results:</p>
 <br>
@@ -359,16 +316,9 @@
 <br>
 <p>    """</p>
 <br>
-<br>
-<br>
 <p>        return markdown.markdown(report_md)</p>
 <br>
-<br>
-<br>
-<br>
 <p>Continuous Monitoring   </p>
-<br>
-<br>
 <br>
 <p>    -- Compliance monitoring dashboard</p>
 <br>
@@ -395,9 +345,6 @@
 <p>    WHERE checked_at > NOW() - INTERVAL '24 hours'</p>
 <br>
 <p>    GROUP BY framework, account_id;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Automate compliance with CIS benchmark scanning, remediation, reporting, and monitoring. Start with critical controls and expand coverage gradually. Use infrastructure-as-code to enforce compliance at deploy time. Continuously monitor compliance posture and alert on drift. Automation turns compliance from a periodic burden into a continuous assurance program.</p></div>

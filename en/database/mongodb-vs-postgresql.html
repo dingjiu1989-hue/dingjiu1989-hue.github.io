@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/mongodb-vs-postgresql.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="MongoDB vs PostgreSQL">
     <meta name="twitter:description" content="An in-depth comparison of MongoDB and PostgreSQL covering performance, features, use cases, and migration strategies.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/mongodb-vs-postgresql.png">
     <title>MongoDB vs PostgreSQL — SourceHub</title>
     <meta name="description" content="An in-depth comparison of MongoDB and PostgreSQL covering performance, features, use cases, and migration strategies.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "MongoDB vs PostgreSQL",
       "description": "An in-depth comparison of MongoDB and PostgreSQL covering performance, features, use cases, and migration strategies.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/mongodb-vs-postgresql.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "356",
+      "wordCount": "344",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,14 +74,13 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">MongoDB vs PostgreSQL</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/mongodb-vs-postgresql.png" alt="MongoDB vs PostgreSQL" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>MongoDB vs PostgreSQL</h1>
 <br>
 <p>The Great Database Debate   </p>
 <p>MongoDB and PostgreSQL are two of the most popular databases. Each excels in different scenarios.   </p>
 <p>When to Choose MongoDB   </p>
 <p>MongoDB shines with flexible schemas and nested data:   </p>
-<br>
-<br>
 <br>
 <p>    db.orders.insertOne({</p>
 <br>
@@ -103,17 +102,10 @@
 <br>
 <p>    });</p>
 <br>
-<br>
-<br>
 <p>    db.orders.findOne({ orderId: "ORD-5001" });</p>
-<br>
-<br>
-<br>
 <br>
 <p>When to Choose PostgreSQL   </p>
 <p>PostgreSQL excels with relational data and complex queries:   </p>
-<br>
-<br>
 <br>
 <p>    SELECT c.name, COUNT(o.id) as order_count, SUM(o.total) as total_spent</p>
 <br>
@@ -128,9 +120,6 @@
 <p>    HAVING COUNT(o.id) > 5</p>
 <br>
 <p>    ORDER BY total_spent DESC;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Decision Matrix   </p>
 <p>| Factor | MongoDB | PostgreSQL | |--------|---------|------------| | Schema | Flexible | Fixed | | Joins | $lookup (slower) | Native (fast) | | Transactions | Multi-doc (v7+) | ACID by default | | Sharding | Native | Extensions (Citus) |   </p>

@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/mock-tools.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization">
     <meta name="twitter:description" content="Compare mocking and service virtualization tools: MSW for API mocking in the browser, nock for Node.js HTTP interception, sinon for function stubs, and WireMock">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/mock-tools.png">
     <title>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization — SourceHub</title>
     <meta name="description" content="Compare mocking and service virtualization tools: MSW for API mocking in the browser, nock for Node.js HTTP interception, sinon for function stubs, and WireMock">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization",
       "description": "Compare mocking and service virtualization tools: MSW for API mocking in the browser, nock for Node.js HTTP interception, sinon for function stubs, and WireMock",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/mock-tools.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1964",
+      "wordCount": "1830",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,34 +75,20 @@
         <span class="tag-cat">Productivity</span></div>
       <h1 class="article-title">Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/mock-tools.png" alt="Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Mocking is essential for isolated testing. The right mocking strategy depends on what you are testing: frontend components that make HTTP calls, backend services with external dependencies, or complex interactions between multiple services. This article covers four complementary mocking approaches.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  MSW (Mock Service Worker)</h2>
 <br>
-<br>
-<br>
-<br>
 <p>MSW intercepts network requests at the service worker level, working in both browser and Node.js:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // mocks/handlers.ts</p>
 <br>
 <p>    import { http, HttpResponse } from "msw";</p>
-<br>
-<br>
 <br>
 <p>    export const handlers = [</p>
 <br>
@@ -113,8 +99,6 @@
 <p>        const url = new URL(request.url);</p>
 <br>
 <p>        const page = url.searchParams.get("page") || "1";</p>
-<br>
-<br>
 <br>
 <p>        return HttpResponse.json({</p>
 <br>
@@ -133,8 +117,6 @@
 <p>        });</p>
 <br>
 <p>      }),</p>
-<br>
-<br>
 <br>
 <p>      // POST handler with request validation</p>
 <br>
@@ -164,8 +146,6 @@
 <br>
 <p>      }),</p>
 <br>
-<br>
-<br>
 <p>      // GraphQL handler</p>
 <br>
 <p>      http.post("https://api.example.com/graphql", async ({ request }) => {</p>
@@ -186,31 +166,19 @@
 <br>
 <p>    ];</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    // test setup</p>
 <br>
 <p>    import { setupServer } from "msw/node";</p>
 <br>
 <p>    import { handlers } from "./handlers";</p>
 <br>
-<br>
-<br>
 <p>    const server = setupServer(...handlers);</p>
-<br>
-<br>
 <br>
 <p>    beforeAll(() => server.listen());</p>
 <br>
 <p>    afterEach(() => server.resetHandlers());</p>
 <br>
 <p>    afterAll(() => server.close());</p>
-<br>
-<br>
 <br>
 <p>    // Override handler for specific test</p>
 <br>
@@ -230,30 +198,13 @@
 <br>
 <p>    });</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Strengths**: Works at the network level (not module level), browser and Node.js support, realistic interception, first-class GraphQL support.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  nock</h2>
 <br>
-<br>
-<br>
-<br>
 <p>nock intercepts HTTP requests at the Node.js `http` module level:</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    const nock = require("nock");</p>
-<br>
-<br>
 <br>
 <p>    // Mock a GET request</p>
 <br>
@@ -271,8 +222,6 @@
 <br>
 <p>      });</p>
 <br>
-<br>
-<br>
 <p>    // Mock with dynamic response</p>
 <br>
 <p>    nock("https://api.example.com")</p>
@@ -287,8 +236,6 @@
 <br>
 <p>      });</p>
 <br>
-<br>
-<br>
 <p>    // Mock multiple times with different responses</p>
 <br>
 <p>    nock("https://api.example.com")</p>
@@ -298,8 +245,6 @@
 <p>      .times(3)</p>
 <br>
 <p>      .reply(200, { status: "ok" });</p>
-<br>
-<br>
 <br>
 <p>    // Persist mock for repeated calls</p>
 <br>
@@ -311,8 +256,6 @@
 <br>
 <p>      .reply(200, { healthy: true });</p>
 <br>
-<br>
-<br>
 <p>    // Scope assertion</p>
 <br>
 <p>    const scope = nock("https://api.example.com")</p>
@@ -321,43 +264,21 @@
 <br>
 <p>      .reply(200, []);</p>
 <br>
-<br>
-<br>
 <p>    // After test, verify all mocked endpoints were called</p>
 <br>
 <p>    expect(scope.isDone()).toBe(true);</p>
 <br>
 <p>    nock.cleanAll();</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Strengths**: Fine-grained request matching, supports regex URL matching, response templating, scope isolation.</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Weaknesses**: Node.js only, module-level interception (not browser), can be slow with many mocks.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Sinon</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Sinon provides standalone test doubles (spies, stubs, mocks):</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    const sinon = require("sinon");</p>
-<br>
-<br>
 <br>
 <p>    // Spy: observe function calls</p>
 <br>
@@ -368,8 +289,6 @@
 <p>    console.log(spy.calledOnce); // true</p>
 <br>
 <p>    console.log(spy.args[0]); // ["hello", "world"]</p>
-<br>
-<br>
 <br>
 <p>    // Stub: replace function behavior</p>
 <br>
@@ -383,8 +302,6 @@
 <br>
 <p>    console.log(stub("special")); // 100</p>
 <br>
-<br>
-<br>
 <p>    // Stub an object method</p>
 <br>
 <p>    const api = { fetch: async (url) => ({ data: [] }) };</p>
@@ -395,13 +312,9 @@
 <br>
 <p>    fetchStub.rejects(new Error("Network error"));</p>
 <br>
-<br>
-<br>
 <p>    // Restore original after test</p>
 <br>
 <p>    fetchStub.restore();</p>
-<br>
-<br>
 <br>
 <p>    // Timers: control time-dependent code</p>
 <br>
@@ -417,40 +330,21 @@
 <br>
 <p>    clock.restore();</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Strengths**: Rich assertion API, fake timers, standalone (framework-agnostic), excellent for module-level mocking.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  WireMock</h2>
 <br>
-<br>
-<br>
-<br>
 <p>WireMock runs as a standalone HTTP server, perfect for integration tests:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // Java example (WireMock also has HTTP API)</p>
 <br>
 <p>    import static com.github.tomakehurst.wiremock.client.WireMock.*;</p>
-<br>
-<br>
 <br>
 <p>    // Start WireMock server</p>
 <br>
 <p>    WireMockServer wireMockServer = new WireMockServer(8089);</p>
 <br>
 <p>    wireMockServer.start();</p>
-<br>
-<br>
 <br>
 <p>    // Stub a GET endpoint</p>
 <br>
@@ -464,8 +358,6 @@
 <br>
 <p>            .withBody("{ \"id\": 1, \"name\": \"Alice\" }")));</p>
 <br>
-<br>
-<br>
 <p>    // Stub with response templating</p>
 <br>
 <p>    stubFor(post(urlEqualTo("/api/users"))</p>
@@ -478,39 +370,21 @@
 <br>
 <p>            .withTransformers("response-template")));</p>
 <br>
-<br>
-<br>
 <p>    // Verify request was made</p>
 <br>
 <p>    verify(getRequestedFor(urlPathEqualTo("/api/users/1"))</p>
 <br>
 <p>        .withHeader("Authorization", containing("Bearer")));</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # Start WireMock standalone</p>
 <br>
 <p>    java -jar wiremock-standalone.jar --port 8089 --verbose</p>
-<br>
-<br>
 <br>
 <p>    # Configure via JSON files in mappings/ directory</p>
 <br>
 <p>    # __files/response.json contains the response body</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Comparison</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| Feature | MSW | nock | Sinon | WireMock |</p>
 <br>
@@ -528,19 +402,12 @@
 <br>
 <p>| Best for | Frontend tests | Backend tests | Unit tests | Integration tests |</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Recommendations</h2>
-<br>
-<br>
 <br>
 <p>* **Frontend API mocking**: MSW is the best choice — it works in both test and development environments.</p>
 <p>* **Backend HTTP mocking**: nock for simple cases, WireMock for complex integration tests.</p>
 <p>* **Function-level mocking**: Sinon for spying, stubbing, and fake timers.</p>
 <p>* **Integration/E2E tests**: WireMock as a standalone HTTP server for contract testing.</p>
-<br>
-<br>
 <br>
 <p>Use MSW + Sinon as your core mocking stack. Add nock or WireMock when testing service-to-service HTTP interactions at the integration level.</p></div>
     </article>

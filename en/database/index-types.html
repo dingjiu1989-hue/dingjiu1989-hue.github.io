@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/index-types.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN">
     <meta name="twitter:description" content="Comprehensive guide to PostgreSQL index types: B-tree, Hash, GiST, GIN, SP-GiST, and BRIN. Learn when and why to use each index type for optimal performance.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/index-types.png">
     <title>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN — SourceHub</title>
     <meta name="description" content="Comprehensive guide to PostgreSQL index types: B-tree, Hash, GiST, GIN, SP-GiST, and BRIN. Learn when and why to use each index type for optimal performance.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN",
       "description": "Comprehensive guide to PostgreSQL index types: B-tree, Hash, GiST, GIN, SP-GiST, and BRIN. Learn when and why to use each index type for optimal performance.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/index-types.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1411",
+      "wordCount": "1379",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/index-types.png" alt="Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h1>
 <br>
 <p>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN   </p>
@@ -82,14 +83,9 @@
 <p>B-tree (Default)   </p>
 <p>B-tree is PostgreSQL's default and most versatile index type. It supports equality, range, sorting, and pattern matching.   </p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX idx_users_email ON users USING BTREE (email);</p>
 <br>
 <p>    CREATE INDEX idx_orders_date ON orders USING BTREE (order_date);</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Supported operators**: `<`, `<=`, `=`, `>=`, `>`, `BETWEEN`, `IN`, `LIKE` (non-wildcard prefix), `IS NULL`   </p>
 <p>B-tree indexes are balanced trees with fan-out on the order of hundreds. Height grows logarithmically with table size. A B-tree on a table with 10 million rows has a height of approximately 4.   </p>
@@ -102,26 +98,16 @@
 <p>Hash   </p>
 <p>Hash indexes support only equality comparisons (`=`). They are typically smaller than B-tree for the same data:   </p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX idx_sessions_token ON sessions USING HASH (token);</p>
-<br>
-<br>
-<br>
 <br>
 <p>**When to use**: Columns with many distinct values that are only queried with equality conditions. Before PostgreSQL 10, hash indexes were not WAL-logged and could not be replicated. Since PostgreSQL 10, they are fully transaction-safe.   </p>
 <p>**Considerations**: Hash indexes do not support ordering or range queries. For most workloads, btree is a better choice even for equality-only queries because B-tree indexes can also support sort operations and are more robust.   </p>
 <p>GiST (Generalized Search Tree)   </p>
 <p>GiST is a balanced tree structure that supports custom data types and operators. It is an "indexing framework" rather than a specific algorithm:   </p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX idx_locations ON places USING GIST (location);</p>
 <br>
 <p>    CREATE INDEX idx_daterange ON bookings USING GIST (booking_period);</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Supported operators**:</p>
 <p>* Geometries: `<<`, `&<`, `&>`, `>>`, `<<|`, `&<|`, `|&>`, `|>>`, `@>`, `<@`, `~=`, `&&`</p>
@@ -139,16 +125,11 @@
 <p>GIN (Generalized Inverted Index)   </p>
 <p>GIN indexes map each distinct value (element) to a list of rows containing that value. They excel at indexing composite values like arrays, JSONB, and full-text documents:   </p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX idx_articles_fts ON articles USING GIN (search_vector);</p>
 <br>
 <p>    CREATE INDEX idx_products_tags ON products USING GIN (tags);</p>
 <br>
 <p>    CREATE INDEX idx_products_attrs ON products USING GIN (attributes jsonb_path_ops);</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Supported operators**:</p>
 <p>* Arrays: `&&`, `@>`, `<@`, `=`</p>
@@ -165,14 +146,9 @@
 <p>SP-GiST (Space-Partitioned GiST)   </p>
 <p>SP-GiST supports partitioned search trees like quad-trees, k-d trees, and radix trees. It divides the search space into non-overlapping partitions:   </p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX idx_points ON locations USING SPGIST (point);</p>
 <br>
 <p>    CREATE INDEX idx_text_prefix ON texts USING SPGIST (text);</p>
-<br>
-<br>
-<br>
 <br>
 <p>**When to use**:</p>
 <p>* Point data with natural clustering</p>
@@ -184,20 +160,13 @@
 <p>BRIN (Block Range INdex)   </p>
 <p>BRIN indexes aggregate summary information about physical page ranges (typically 32-128 pages per range). They are orders of magnitude smaller than B-tree:   </p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX idx_orders_date_brin ON orders USING BRIN (order_date)</p>
 <br>
 <p>        WITH (pages_per_range = 32);</p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX idx_logs_brin ON access_logs USING BRIN (logged_at, severity)</p>
 <br>
 <p>        WITH (pages_per_range = 64);</p>
-<br>
-<br>
-<br>
 <br>
 <p>**When to use**:</p>
 <p>* Very large tables (100GB+) where B-tree index size is prohibitive</p>

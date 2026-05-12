@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/waf-deployment.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="WAF Deployment Patterns">
     <meta name="twitter:description" content="WAF deployment patterns including inline, reverse proxy, cloud WAF, and API protection strategies.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/waf-deployment.png">
     <title>WAF Deployment Patterns — SourceHub</title>
     <meta name="description" content="WAF deployment patterns including inline, reverse proxy, cloud WAF, and API protection strategies.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "WAF Deployment Patterns",
       "description": "WAF deployment patterns including inline, reverse proxy, cloud WAF, and API protection strategies.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/waf-deployment.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1262",
+      "wordCount": "1209",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">WAF Deployment Patterns</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/waf-deployment.png" alt="WAF Deployment Patterns" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>WAF Deployment Patterns</h1>
 <br>
 <p>WAF Overview   </p>
 <p>A Web Application Firewall (WAF) filters and monitors HTTP traffic between web applications and the internet. It protects against common attacks like SQL injection, XSS, and CSRF.   </p>
 <p>Inline WAF Deployment   </p>
 <p>The WAF sits directly in the request path:   </p>
-<br>
-<br>
 <br>
 <p>    # ModSecurity configuration</p>
 <br>
@@ -91,8 +90,6 @@
 <p>    SecRequestBodyAccess On</p>
 <br>
 <p>    SecResponseBodyAccess On</p>
-<br>
-<br>
 <br>
 <p>    # SQL Injection prevention</p>
 <br>
@@ -110,8 +107,6 @@
 <br>
 <p>      msg:'SQL Injection Attack'"</p>
 <br>
-<br>
-<br>
 <p>    # XSS prevention</p>
 <br>
 <p>    SecRule ARGS "@detectXSS" \</p>
@@ -126,13 +121,8 @@
 <br>
 <p>      msg:'XSS Attack Detected'"</p>
 <br>
-<br>
-<br>
-<br>
 <p>Reverse Proxy WAF   </p>
 <p>Deploy WAF as a reverse proxy for centralized protection:   </p>
-<br>
-<br>
 <br>
 <p>    # Nginx with ModSecurity</p>
 <br>
@@ -142,15 +132,11 @@
 <br>
 <p>        server_name app.example.com;</p>
 <br>
-<br>
-<br>
 <p>        # ModSecurity enabled</p>
 <br>
 <p>        modsecurity on;</p>
 <br>
 <p>        modsecurity_rules_file /etc/nginx/modsec/main.conf;</p>
-<br>
-<br>
 <br>
 <p>        location / {</p>
 <br>
@@ -166,12 +152,7 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Cloud WAF (AWS WAF)   </p>
-<br>
-<br>
 <br>
 <p>    # AWS WAF with rate limiting and SQL injection protection</p>
 <br>
@@ -183,15 +164,11 @@
 <br>
 <p>      scope       = "REGIONAL"</p>
 <br>
-<br>
-<br>
 <p>      default_action {</p>
 <br>
 <p>        allow {}</p>
 <br>
 <p>      }</p>
-<br>
-<br>
 <br>
 <p>      rule {</p>
 <br>
@@ -199,15 +176,11 @@
 <br>
 <p>        priority = 1</p>
 <br>
-<br>
-<br>
 <p>        action {</p>
 <br>
 <p>          block {}</p>
 <br>
 <p>        }</p>
-<br>
-<br>
 <br>
 <p>        statement {</p>
 <br>
@@ -221,8 +194,6 @@
 <br>
 <p>        }</p>
 <br>
-<br>
-<br>
 <p>        visibility_config {</p>
 <br>
 <p>          cloudwatch_metrics_enabled = true</p>
@@ -235,23 +206,17 @@
 <br>
 <p>      }</p>
 <br>
-<br>
-<br>
 <p>      rule {</p>
 <br>
 <p>        name     = "SQLInjection"</p>
 <br>
 <p>        priority = 2</p>
 <br>
-<br>
-<br>
 <p>        action {</p>
 <br>
 <p>          block {}</p>
 <br>
 <p>        }</p>
-<br>
-<br>
 <br>
 <p>        statement {</p>
 <br>
@@ -275,8 +240,6 @@
 <br>
 <p>        }</p>
 <br>
-<br>
-<br>
 <p>        visibility_config {</p>
 <br>
 <p>          cloudwatch_metrics_enabled = true</p>
@@ -291,13 +254,8 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>API Protection   </p>
 <p>APIs require different WAF rules than web applications:   </p>
-<br>
-<br>
 <br>
 <p>    # Custom WAF rule for API protection</p>
 <br>
@@ -347,12 +305,7 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>WAF Logging and Monitoring   </p>
-<br>
-<br>
 <br>
 <p>    -- Analyze blocked requests</p>
 <br>
@@ -370,8 +323,6 @@
 <br>
 <p>    ORDER BY blocked_count DESC;</p>
 <br>
-<br>
-<br>
 <p>    -- False positive analysis</p>
 <br>
 <p>    SELECT rule_id, COUNT(*) as false_positives</p>
@@ -387,9 +338,6 @@
 <p>    GROUP BY rule_id</p>
 <br>
 <p>    ORDER BY false_positives DESC;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Choose the WAF deployment pattern that fits your architecture. Inline WAF offers the strongest protection but adds latency. Cloud WAF provides scalability with minimal maintenance. Reverse proxy WAF is ideal for centralized management. Tune your WAF rules carefully to minimize false positives and monitor blocked requests regularly.</p></div>

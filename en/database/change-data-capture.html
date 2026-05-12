@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/change-data-capture.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing">
     <meta name="twitter:description" content="Learn Change Data Capture patterns with Debezium, PostgreSQL logical replication, and stream processing integration. Real-time data pipelines without performance overhead.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/change-data-capture.png">
     <title>Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing — SourceHub</title>
     <meta name="description" content="Learn Change Data Capture patterns with Debezium, PostgreSQL logical replication, and stream processing integration. Real-time data pipelines without performance overhead.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing",
       "description": "Learn Change Data Capture patterns with Debezium, PostgreSQL logical replication, and stream processing integration. Real-time data pipelines without performance overhead.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/change-data-capture.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1492",
+      "wordCount": "1449",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/change-data-capture.png" alt="Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</h1>
 <br>
 <p>Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing   </p>
@@ -91,25 +92,17 @@
 <p>PostgreSQL's built-in logical replication is the foundation for CDC. Unlike physical replication (which copies entire WAL segments and requires identical servers), logical replication streams decoded changes as row-level operations.   </p>
 <p>Publisher Setup   </p>
 <br>
-<br>
-<br>
 <p>    -- wal_level must be logical</p>
 <br>
 <p>    SHOW wal_level; -- must be 'logical'</p>
-<br>
-<br>
 <br>
 <p>    -- Create a publication</p>
 <br>
 <p>    CREATE PUBLICATION cdc_pub FOR TABLE orders, order_items, payments;</p>
 <br>
-<br>
-<br>
 <p>    -- Optionally filter rows</p>
 <br>
 <p>    CREATE PUBLICATION cdc_pub_usa FOR TABLE orders WHERE (country = 'US');</p>
-<br>
-<br>
 <br>
 <p>    -- Specify publish operations</p>
 <br>
@@ -117,13 +110,8 @@
 <br>
 <p>        WITH (publish = 'insert');</p>
 <br>
-<br>
-<br>
-<br>
 <p>Subscriber Setup   </p>
 <p>The subscriber can be another PostgreSQL database or any consumer that speaks the `pgoutput` protocol:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE SUBSCRIPTION cdc_sub</p>
 <br>
@@ -131,15 +119,10 @@
 <br>
 <p>        PUBLICATION cdc_pub;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Each logical replication slot tracks the WAL position, ensuring no data loss even if the consumer is offline for extended periods.   </p>
 <p>Debezium   </p>
 <p>Debezium is an open-source CDC platform built on Apache Kafka. It uses PostgreSQL's logical decoding plugin (`pgoutput` or `decoderbufs`) to capture changes and publishes each row change as a Kafka message.   </p>
 <p>Debezium Connector Configuration   </p>
-<br>
-<br>
 <br>
 <p>    {</p>
 <br>
@@ -177,12 +160,7 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Each change event has a standard envelope:   </p>
-<br>
-<br>
 <br>
 <p>    {</p>
 <br>
@@ -216,16 +194,11 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Operation codes: `c` (create), `u` (update), `d` (delete), `r` (snapshot).   </p>
 <p>Schema Evolution   </p>
 <p>Debezium publishes schema information to a separate Kafka topic. When your database schema evolves (column added, type changed), the schema registry tracks versions. Consumers can adapt dynamically.   </p>
 <p>Stream Processing Integration   </p>
 <p>CDC naturally feeds into stream processors like Apache Flink, Kafka Streams, or ksqlDB:   </p>
-<br>
-<br>
 <br>
 <p>    // Kafka Streams CDC consumer example</p>
 <br>
@@ -236,8 +209,6 @@
 <p>        Consumed.with(Serdes.String(), orderSerde)</p>
 <br>
 <p>    );</p>
-<br>
-<br>
 <br>
 <p>    orders</p>
 <br>
@@ -255,33 +226,20 @@
 <br>
 <p>            Produced.with(Serdes.String(), orderSerde));</p>
 <br>
-<br>
-<br>
-<br>
 <p>Materialized Cache   </p>
 <p>CDC can keep a Redis cache or Elasticsearch index in sync with the database:   </p>
 <br>
-<br>
-<br>
 <p>    PostgreSQL → Debezium → Kafka → Kafka Connect (Elasticsearch Sink) → Elasticsearch</p>
-<br>
-<br>
-<br>
 <br>
 <p>This architecture eliminates application-level cache-warming code. The cache is always consistent (within the replication lag, typically milliseconds).   </p>
 <p>Logical Replication Slots   </p>
 <p>Replication slots are the backbone of PostgreSQL CDC. They retain WAL segments until the consumer acknowledges receipt. Monitoring slot state is critical:   </p>
-<br>
-<br>
 <br>
 <p>    SELECT slot_name, database, active, restart_lsn,</p>
 <br>
 <p>           pg_size_pretty(pg_wal_lsn_diff(pg_current_wal_lsn(), restart_lsn)) AS wal_retained</p>
 <br>
 <p>    FROM pg_replication_slots;</p>
-<br>
-<br>
-<br>
 <br>
 <p>A stalled consumer causes WAL accumulation, potentially filling disk. Set up alerts on slot lag.   </p>
 <p>CDC vs Triggers   </p>

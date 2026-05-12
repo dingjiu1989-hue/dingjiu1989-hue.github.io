@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/helm-tools.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing">
     <meta name="twitter:description" content="Essential Helm ecosystem tools: Helmfile for declarative chart management, helm-docs for documentation generation, helm-secrets for encrypted values, and chart-">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/helm-tools.png">
     <title>Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing — SourceHub</title>
     <meta name="description" content="Essential Helm ecosystem tools: Helmfile for declarative chart management, helm-docs for documentation generation, helm-secrets for encrypted values, and chart-">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing",
       "description": "Essential Helm ecosystem tools: Helmfile for declarative chart management, helm-docs for documentation generation, helm-secrets for encrypted values, and chart-",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/helm-tools.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1941",
+      "wordCount": "1777",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,28 +75,16 @@
         <span class="tag-cat">Productivity</span></div>
       <h1 class="article-title">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/helm-tools.png" alt="Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Helm is the standard package manager for Kubernetes, but managing Helm charts at scale requires additional tooling. Helmfile provides declarative chart management across environments. helm-docs generates README documentation from chart metadata. helm-secrets securely manages sensitive values. Chart-testing validates charts in CI pipelines. This article covers each tool with practical examples.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Helmfile</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Declarative management of Helm releases across environments:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # helmfile.yaml</p>
 <br>
@@ -109,8 +97,6 @@
 <p>      - name: prometheus-community</p>
 <br>
 <p>        url: https://prometheus-community.github.io/helm-charts</p>
-<br>
-<br>
 <br>
 <p>    environments:</p>
 <br>
@@ -127,8 +113,6 @@
 <p>          - env/production.yaml</p>
 <br>
 <p>          - env/secrets.yaml  # Encrypted values</p>
-<br>
-<br>
 <br>
 <p>    releases:</p>
 <br>
@@ -147,8 +131,6 @@
 <p>          - values/prometheus.yaml</p>
 <br>
 <p>          - {{ env "PROMETHEUS_VALUES" | default "values/prometheus-default.yaml" }}</p>
-<br>
-<br>
 <br>
 <p>      - name: ingress-nginx</p>
 <br>
@@ -171,8 +153,6 @@
 <p>        installed: true</p>
 <br>
 <p>        wait: true</p>
-<br>
-<br>
 <br>
 <p>      # Application charts</p>
 <br>
@@ -200,57 +180,31 @@
 <br>
 <p>            command: "helm test {{ .Release.Name }}"</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # Apply environment</p>
 <br>
 <p>    helmfile -e production apply</p>
-<br>
-<br>
 <br>
 <p>    # Diff changes before applying</p>
 <br>
 <p>    helmfile -e development diff</p>
 <br>
-<br>
-<br>
 <p>    # Sync specific releases</p>
 <br>
 <p>    helmfile -e staging -l app=my-app sync</p>
-<br>
-<br>
 <br>
 <p>    # Destroy releases</p>
 <br>
 <p>    helmfile -e development destroy</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  helm-docs</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Automatically generate README documentation from chart metadata:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Install</p>
 <br>
 <p>    go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest</p>
 <br>
 <p>    brew install helm-docs</p>
-<br>
-<br>
 <br>
 <p>    # Generate README for all charts in repo</p>
 <br>
@@ -260,19 +214,11 @@
 <br>
 <p>    helm-docs --chart-search-root ./charts/my-app</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # charts/my-app/values.yaml</p>
 <br>
 <p>    # -- Number of replicas to run</p>
 <br>
 <p>    replicaCount: 3</p>
-<br>
-<br>
 <br>
 <p>    image:</p>
 <br>
@@ -287,8 +233,6 @@
 <p>      # -- Image pull policy</p>
 <br>
 <p>      pullPolicy: Always</p>
-<br>
-<br>
 <br>
 <p>    # -- Resource limits and requests</p>
 <br>
@@ -310,38 +254,19 @@
 <br>
 <p>        memory: 256Mi</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    <!-- README.md.gotmpl — template for helm-docs --></p>
 <br>
 <p>    # {{ .Name }}</p>
 <br>
-<br>
-<br>
 <p>    {{ .Description }}</p>
 <br>
-<br>
-<br>
 <p>    ## Installation</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>helm repo add myrepo https://charts.example.com</p>
 <br>
 <p>helm install myrepo/{{ .Name }}</p>
 <br>
-<br>
-<br>
-<br>
 <p>    ## Parameters</p>
-<br>
-<br>
 <br>
 <p>    | Name | Description | Default |</p>
 <br>
@@ -353,51 +278,27 @@
 <br>
 <p>    {{- end }}</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  helm-secrets</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Encrypt sensitive values using SOPS with various backends:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Install</p>
 <br>
 <p>    helm plugin install https://github.com/jkroepke/helm-secrets</p>
 <br>
-<br>
-<br>
 <p>    # Encrypt values file</p>
 <br>
 <p>    helm secrets encrypt secrets.yaml > secrets.enc.yaml</p>
 <br>
-<br>
-<br>
 <p>    # Decrypt and use with Helm</p>
 <br>
 <p>    helm secrets install my-app ./chart -f secrets.enc.yaml</p>
-<br>
-<br>
 <br>
 <p>    # With helmfile</p>
 <br>
 <p>    # helmfile.yaml references secrets.enc.yaml</p>
 <br>
 <p>    helmfile -e production apply</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # .sops.yaml — SOPS configuration</p>
 <br>
@@ -413,21 +314,9 @@
 <br>
 <p>        encrypted_regex: "^(password|token|key|secret)$"</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Chart Testing (ct)</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Validate charts in CI pipelines:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # ct.yaml — chart testing configuration</p>
 <br>
@@ -443,8 +332,6 @@
 <br>
 <p>    validate-maintainers: true</p>
 <br>
-<br>
-<br>
 <p>    # Linting options</p>
 <br>
 <p>    lint-conf: |</p>
@@ -453,17 +340,9 @@
 <br>
 <p>      --namespace default</p>
 <br>
-<br>
-<br>
 <p>    # Test installation</p>
 <br>
 <p>    # ct install --charts charts/my-app</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # .github/workflows/helm-ci.yml</p>
 <br>
@@ -477,8 +356,6 @@
 <br>
 <p>          - "charts/**"</p>
 <br>
-<br>
-<br>
 <p>    jobs:</p>
 <br>
 <p>      lint-test:</p>
@@ -491,64 +368,39 @@
 <br>
 <p>          - uses: helm/chart-testing-action@v2</p>
 <br>
-<br>
-<br>
 <p>          - name: Lint charts</p>
 <br>
 <p>            run: ct lint --all --check-version-increment</p>
-<br>
-<br>
 <br>
 <p>          - name: Create kind cluster</p>
 <br>
 <p>            uses: helm/kind-action@v1</p>
 <br>
-<br>
-<br>
 <p>          - name: Install and test charts</p>
 <br>
 <p>            run: ct install --all</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Essential Helm CLI Tips</h2>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Template rendering (debugging)</p>
 <br>
 <p>    helm template my-app ./chart --values values.yaml</p>
 <br>
-<br>
-<br>
 <p>    # Dry-run install</p>
 <br>
 <p>    helm install my-app ./chart --dry-run --debug</p>
-<br>
-<br>
 <br>
 <p>    # Rollback</p>
 <br>
 <p>    helm rollback my-app 2</p>
 <br>
-<br>
-<br>
 <p>    # Get notes</p>
 <br>
 <p>    helm get notes my-app</p>
 <br>
-<br>
-<br>
 <p>    # View release history</p>
 <br>
 <p>    helm history my-app</p>
-<br>
-<br>
 <br>
 <p>    # Plugin management</p>
 <br>
@@ -558,15 +410,7 @@
 <br>
 <p>    helm diff release my-app ./chart</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Comparison</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| Tool | Purpose | Essential For |</p>
 <br>
@@ -582,20 +426,13 @@
 <br>
 <p>| helm-diff | Change preview | Reviewing changes before apply |</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Recommendations</h2>
-<br>
-<br>
 <br>
 <p>* **Multi-environment deployments**: Helmfile is essential for managing differences across dev, staging, and production.</p>
 <p>* **Public or shared charts**: Use helm-docs to maintain README documentation automatically.</p>
 <p>* **Production deployments**: Use helm-secrets with SOPS and age/PGP for encrypted values.</p>
 <p>* **CI/CD pipeline**: Use chart-testing to validate chart changes before merging.</p>
 <p>* **Review before apply**: Use helm-diff to preview changes without actually applying them.</p>
-<br>
-<br>
 <br>
 <p>The most complete Helm workflow combines all these tools: Helmfile for release management, helm-secrets for secure values, helm-docs for documentation, chart-testing for CI validation, and helm-diff for change preview.</p></div>
     </article>

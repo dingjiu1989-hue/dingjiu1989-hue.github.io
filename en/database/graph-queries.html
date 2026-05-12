@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/graph-queries.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE">
     <meta name="twitter:description" content="Master graph queries in SQL using recursive CTEs, adjacency lists, and the WITH RECURSIVE clause. Compare SQL graph queries vs dedicated graph databases.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/graph-queries.png">
     <title>Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE — SourceHub</title>
     <meta name="description" content="Master graph queries in SQL using recursive CTEs, adjacency lists, and the WITH RECURSIVE clause. Compare SQL graph queries vs dedicated graph databases.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE",
       "description": "Master graph queries in SQL using recursive CTEs, adjacency lists, and the WITH RECURSIVE clause. Compare SQL graph queries vs dedicated graph databases.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/graph-queries.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1647",
+      "wordCount": "1581",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/graph-queries.png" alt="Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</h1>
 <br>
 <p>Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE   </p>
 <p>Relational databases can model and query graph data effectively using recursive Common Table Expressions (CTEs). While not as optimized as dedicated graph databases, SQL-based graph queries handle many real-world use cases without adding infrastructure.   </p>
 <p>Modeling Graphs in SQL   </p>
 <p>The adjacency list model represents nodes and edges as separate tables:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE nodes (</p>
 <br>
@@ -93,8 +92,6 @@
 <p>        properties JSONB DEFAULT '{}'</p>
 <br>
 <p>    );</p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE edges (</p>
 <br>
@@ -112,8 +109,6 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
 <p>    -- Indexes for graph traversal</p>
 <br>
 <p>    CREATE INDEX idx_edges_source ON edges (source_id);</p>
@@ -122,12 +117,7 @@
 <br>
 <p>    CREATE INDEX idx_edges_type ON edges (edge_type);</p>
 <br>
-<br>
-<br>
-<br>
 <p>For an organizational hierarchy, the "manager-employee" relationship:   </p>
-<br>
-<br>
 <br>
 <p>    INSERT INTO nodes (id, label) VALUES</p>
 <br>
@@ -143,8 +133,6 @@
 <br>
 <p>        (6, 'Frank Junior Engineer');</p>
 <br>
-<br>
-<br>
 <p>    INSERT INTO edges (source_id, target_id, edge_type) VALUES</p>
 <br>
 <p>        (1, 2, 'manages'),</p>
@@ -157,13 +145,8 @@
 <br>
 <p>        (5, 6, 'manages');</p>
 <br>
-<br>
-<br>
-<br>
 <p>WITH RECURSIVE Basics   </p>
 <p>A recursive CTE has two parts: a base term and a recursive term, joined by `UNION ALL`:   </p>
-<br>
-<br>
 <br>
 <p>    WITH RECURSIVE org_chart AS (</p>
 <br>
@@ -175,11 +158,7 @@
 <br>
 <p>        WHERE id = 1</p>
 <br>
-<br>
-<br>
 <p>        UNION ALL</p>
-<br>
-<br>
 <br>
 <p>        -- Recursive: find direct reports</p>
 <br>
@@ -199,12 +178,7 @@
 <br>
 <p>    ORDER BY path;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Result:   </p>
-<br>
-<br>
 <br>
 <p>    Alice CEO</p>
 <br>
@@ -218,13 +192,8 @@
 <br>
 <p>      Carol CFO</p>
 <br>
-<br>
-<br>
-<br>
 <p>Graph Traversal Patterns   </p>
 <p>Shortest Path (BFS)   </p>
-<br>
-<br>
 <br>
 <p>    WITH RECURSIVE bfs AS (</p>
 <br>
@@ -234,11 +203,7 @@
 <br>
 <p>        FROM nodes WHERE id = 1</p>
 <br>
-<br>
-<br>
 <p>        UNION ALL</p>
-<br>
-<br>
 <br>
 <p>        -- Explore neighbors</p>
 <br>
@@ -260,12 +225,7 @@
 <br>
 <p>    LIMIT 1;</p>
 <br>
-<br>
-<br>
-<br>
 <p>All Paths Between Two Nodes   </p>
-<br>
-<br>
 <br>
 <p>    WITH RECURSIVE paths AS (</p>
 <br>
@@ -275,11 +235,7 @@
 <br>
 <p>        WHERE e.source_id = 1 AND e.target_id = 6</p>
 <br>
-<br>
-<br>
 <p>        UNION ALL</p>
-<br>
-<br>
 <br>
 <p>        SELECT p.source_id, e.target_id, p.path || e.target_id</p>
 <br>
@@ -295,12 +251,7 @@
 <br>
 <p>    SELECT path FROM paths WHERE target_id = 6;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Cycle Detection   </p>
-<br>
-<br>
 <br>
 <p>    WITH RECURSIVE detect_cycles AS (</p>
 <br>
@@ -310,11 +261,7 @@
 <br>
 <p>        WHERE label = 'Alice CEO'</p>
 <br>
-<br>
-<br>
 <p>        UNION ALL</p>
-<br>
-<br>
 <br>
 <p>        SELECT n.id, dc.visited || n.id, n.id = ANY(dc.visited)</p>
 <br>
@@ -330,16 +277,11 @@
 <br>
 <p>    SELECT * FROM detect_cycles WHERE is_cycle;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Optimizing Recursive Queries   </p>
 <p>Recursive CTEs execute sequentially (each iteration is one plan node). Optimization strategies:   </p>
 <br>
 <p>* **Limit depth early**: Add a depth guard in the `WHERE` clause.</p>
 <p>2\. **Use cycle detection**: The `ARRAY[...]` path check can be expensive for deep graphs. Use PostgreSQL 14+'s `CYCLE` clause:   </p>
-<br>
-<br>
 <br>
 <p>    WITH RECURSIVE org_chart AS (</p>
 <br>
@@ -347,11 +289,7 @@
 <br>
 <p>        FROM nodes WHERE id = 1</p>
 <br>
-<br>
-<br>
 <p>        UNION ALL</p>
-<br>
-<br>
 <br>
 <p>        SELECT n.id, n.label, oc.depth + 1</p>
 <br>
@@ -366,9 +304,6 @@
 <p>    CYCLE id SET is_cycle USING path</p>
 <br>
 <p>    SELECT * FROM org_chart;</p>
-<br>
-<br>
-<br>
 <br>
 <p>The `CYCLE` clause is more efficient than manual `ARRAY` checks because it uses efficient internal data structures.   </p>
 <p>3\. **Create indexes**: The source and target columns must be indexed for good join performance.   </p>

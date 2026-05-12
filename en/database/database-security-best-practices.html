@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-security-best-practices.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Security Hardening Guide">
     <meta name="twitter:description" content="Database security best practices: encryption at rest and in transit, row-level security, audit logging, network isolation, and secret rotation.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-security-best-practices.png">
     <title>Database Security Hardening Guide — SourceHub</title>
     <meta name="description" content="Database security best practices: encryption at rest and in transit, row-level security, audit logging, network isolation, and secret rotation.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Security Hardening Guide",
       "description": "Database security best practices: encryption at rest and in transit, row-level security, audit logging, network isolation, and secret rotation.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-security-best-practices.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2666",
+      "wordCount": "2546",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,6 +74,7 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Database Security Hardening Guide</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-security-best-practices.png" alt="Database Security Hardening Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Security Hardening Guide</h1>
 <br>
 <p>Database security is a critical component of any organization's security posture. Databases store the most valuable data: customer records, financial data, intellectual property, and credentials. This guide covers the key security practices including encryption, access control, network isolation, and secret management.   </p>
@@ -82,13 +83,9 @@
 <p>Transparent Data Encryption (TDE)   </p>
 <p>TDE encrypts database files automatically. The database engine handles encryption and decryption transparently.   </p>
 <br>
-<br>
-<br>
 <p>    -- PostgreSQL: Enable TDE with pg_tde extension</p>
 <br>
 <p>    CREATE EXTENSION pg_tde;</p>
-<br>
-<br>
 <br>
 <p>    -- Create an encrypted table</p>
 <br>
@@ -104,8 +101,6 @@
 <br>
 <p>    ) USING tde;</p>
 <br>
-<br>
-<br>
 <p>    -- MySQL: Enable InnoDB tablespace encryption</p>
 <br>
 <p>    CREATE TABLE orders (</p>
@@ -118,21 +113,14 @@
 <br>
 <p>    ) ENCRYPTION='Y';</p>
 <br>
-<br>
-<br>
-<br>
 <p>Application-Level Encryption   </p>
 <p>For maximum protection, encrypt sensitive columns at the application level. The database never sees the plaintext.   </p>
-<br>
-<br>
 <br>
 <p>    # Application-level encryption with AWS KMS</p>
 <br>
 <p>    import boto3</p>
 <br>
 <p>    from cryptography.fernet import Fernet</p>
-<br>
-<br>
 <br>
 <p>    def encrypt_column(plaintext, kms_key_id):</p>
 <br>
@@ -152,19 +140,13 @@
 <br>
 <p>        encrypted_key = response['CiphertextBlob']</p>
 <br>
-<br>
-<br>
 <p>        # Encrypt the data with the data key</p>
 <br>
 <p>        f = Fernet(base64.urlsafe_b64encode(data_key))</p>
 <br>
 <p>        ciphertext = f.encrypt(plaintext.encode())</p>
 <br>
-<br>
-<br>
 <p>        return ciphertext, encrypted_key</p>
-<br>
-<br>
 <br>
 <p>    def decrypt_column(ciphertext, encrypted_key):</p>
 <br>
@@ -174,14 +156,9 @@
 <br>
 <p>        data_key = response['Plaintext']</p>
 <br>
-<br>
-<br>
 <p>        f = Fernet(base64.urlsafe_b64encode(data_key))</p>
 <br>
 <p>        return f.decrypt(ciphertext).decode()</p>
-<br>
-<br>
-<br>
 <br>
 <p>Key Management for Encryption at Rest   </p>
 <br>
@@ -193,8 +170,6 @@
 <p>Encryption in Transit   </p>
 <p>Encryption in transit protects data as it travels between the database and clients.   </p>
 <p>TLS Configuration   </p>
-<br>
-<br>
 <br>
 <p>    -- PostgreSQL: Require TLS for all connections</p>
 <br>
@@ -208,19 +183,11 @@
 <br>
 <p>    ssl_ca_file = '/etc/ssl/certs/ca.crt'</p>
 <br>
-<br>
-<br>
 <p>    -- In pg_hba.conf</p>
 <br>
 <p>    # Require TLS for all connections</p>
 <br>
 <p>    hostssl all all 0.0.0.0/0 md5</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # MySQL: Require TLS</p>
 <br>
@@ -234,9 +201,6 @@
 <br>
 <p>    ssl_key = /etc/ssl/private/server-key.pem</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Best practices**:</p>
 <p>* Enforce TLS for all database connections.</p>
 <p>* Use TLS 1.2 or 1.3. Disable older versions.</p>
@@ -247,8 +211,6 @@
 <p>Row-Level Security (RLS)   </p>
 <p>RLS restricts which rows a user can access based on a policy. It implements multi-tenancy and data isolation at the database level.   </p>
 <p>PostgreSQL Row-Level Security   </p>
-<br>
-<br>
 <br>
 <p>    -- Create a table with RLS</p>
 <br>
@@ -264,13 +226,9 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
 <p>    -- Enable RLS on the table</p>
 <br>
 <p>    ALTER TABLE orders ENABLE ROW LEVEL SECURITY;</p>
-<br>
-<br>
 <br>
 <p>    -- Create a policy: users can only see their tenant's orders</p>
 <br>
@@ -278,18 +236,11 @@
 <br>
 <p>        USING (tenant_id = current_setting('app.tenant_id')::INT);</p>
 <br>
-<br>
-<br>
 <p>    -- Grant access to the table</p>
 <br>
 <p>    GRANT SELECT, INSERT ON orders TO app_user;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Row-Level Security in Other Databases   </p>
-<br>
-<br>
 <br>
 <p>    -- SQL Server: Row-level security with security predicates</p>
 <br>
@@ -305,16 +256,11 @@
 <br>
 <p>        WHERE @tenant_id = CAST(SESSION_CONTEXT(N'tenant_id') AS INT);</p>
 <br>
-<br>
-<br>
 <p>    CREATE SECURITY POLICY dbo.tenantSecurityPolicy</p>
 <br>
 <p>        ADD FILTER PREDICATE dbo.tenantAccessPredicate(tenant_id)</p>
 <br>
 <p>        ON dbo.orders;</p>
-<br>
-<br>
-<br>
 <br>
 <p>RLS ensures that even if a query accesses rows it should not, the database engine filters them out automatically.   </p>
 <p>Audit Logging   </p>
@@ -330,13 +276,9 @@
 <br>
 <p>PostgreSQL Audit with pgaudit   </p>
 <br>
-<br>
-<br>
 <p>    -- Install pgaudit extension</p>
 <br>
 <p>    CREATE EXTENSION pgaudit;</p>
-<br>
-<br>
 <br>
 <p>    -- Configure audit logging in postgresql.conf</p>
 <br>
@@ -350,20 +292,13 @@
 <br>
 <p>    pgaudit.log_statement_once = off</p>
 <br>
-<br>
-<br>
-<br>
 <p>MySQL Audit Log   </p>
-<br>
-<br>
 <br>
 <p>    -- MySQL Enterprise Audit</p>
 <br>
 <p>    INSTALL PLUGIN audit_log SONAME 'audit_log.so';</p>
 <br>
 <p>    SET GLOBAL audit_log_policy = 'ALL';</p>
-<br>
-<br>
 <br>
 <p>    -- Query audit logs</p>
 <br>
@@ -375,13 +310,8 @@
 <br>
 <p>    ORDER BY timestamp DESC;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Centralized Audit Log Collection   </p>
 <p>Forward database audit logs to a SIEM for analysis and alerting.   </p>
-<br>
-<br>
 <br>
 <p>    # Filebeat configuration for shipping database audit logs</p>
 <br>
@@ -399,21 +329,14 @@
 <br>
 <p>          environment: production</p>
 <br>
-<br>
-<br>
 <p>    output.elasticsearch:</p>
 <br>
 <p>      hosts: ["https://elasticsearch.example.com:9200"]</p>
-<br>
-<br>
-<br>
 <br>
 <p>Network Isolation   </p>
 <p>Network isolation limits which systems can reach the database.   </p>
 <p>VPC and Subnet Design   </p>
 <p>Place databases in private subnets with no direct internet access. Only application servers in the same VPC should connect.   </p>
-<br>
-<br>
 <br>
 <p>    # Terraform: Database in private subnet</p>
 <br>
@@ -422,8 +345,6 @@
 <p>      vpc_id     = aws_vpc.main.id</p>
 <br>
 <p>      cidr_block = "10.0.3.0/24"</p>
-<br>
-<br>
 <br>
 <p>      tags = {</p>
 <br>
@@ -435,15 +356,11 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
 <p>    resource "aws_security_group" "db" {</p>
 <br>
 <p>      name_prefix = "db-sg-"</p>
 <br>
 <p>      vpc_id      = aws_vpc.main.id</p>
-<br>
-<br>
 <br>
 <p>      ingress {</p>
 <br>
@@ -459,8 +376,6 @@
 <br>
 <p>      }</p>
 <br>
-<br>
-<br>
 <p>      egress {</p>
 <br>
 <p>        from_port   = 0</p>
@@ -475,12 +390,7 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Database Firewall Rules   </p>
-<br>
-<br>
 <br>
 <p>    -- PostgreSQL: Restrict listen address</p>
 <br>
@@ -488,14 +398,9 @@
 <br>
 <p>    listen_addresses = '10.0.1.0,10.0.2.0'</p>
 <br>
-<br>
-<br>
-<br>
 <p>Least Privilege Access   </p>
 <p>Apply the principle of least privilege to database access.   </p>
 <p>Separate Roles by Function   </p>
-<br>
-<br>
 <br>
 <p>    -- Create separate roles for different access patterns</p>
 <br>
@@ -505,8 +410,6 @@
 <br>
 <p>    CREATE ROLE admin;</p>
 <br>
-<br>
-<br>
 <p>    -- Grant minimal permissions</p>
 <br>
 <p>    GRANT SELECT ON ALL TABLES IN SCHEMA public TO read_only;</p>
@@ -515,8 +418,6 @@
 <br>
 <p>    GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO admin;</p>
 <br>
-<br>
-<br>
 <p>    -- Grant roles to users</p>
 <br>
 <p>    GRANT read_only TO reporting_user;</p>
@@ -524,9 +425,6 @@
 <p>    GRANT read_write TO app_user;</p>
 <br>
 <p>    GRANT admin TO dba_team;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Application Users vs Admin Users   </p>
 <br>
@@ -538,8 +436,6 @@
 <p>Database credentials need regular rotation. Compromised credentials that are never rotated become permanent backdoors.   </p>
 <p>Automated Rotation with HashiCorp Vault   </p>
 <br>
-<br>
-<br>
 <p>    # Vault database secrets engine configuration</p>
 <br>
 <p>    path "database/creds/my-app" {</p>
@@ -548,23 +444,13 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # Dynamic database credentials with Vault</p>
 <br>
 <p>    import hvac</p>
 <br>
-<br>
-<br>
 <p>    client = hvac.Client(url='https://vault.example.com')</p>
 <br>
 <p>    client.auth.approle('my-role-id', 'my-secret-id')</p>
-<br>
-<br>
 <br>
 <p>    # Get short-lived database credentials</p>
 <br>
@@ -574,16 +460,11 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    db_user = creds['data']['username']    # v-token-myapp-a1b2c3...</p>
 <br>
 <p>    db_pass = creds['data']['password']    # random password</p>
 <br>
 <p>    # These credentials expire in 1 hour</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Rotation frequency**:</p>
 <p>* Application credentials: Every 24-48 hours (dynamic).</p>

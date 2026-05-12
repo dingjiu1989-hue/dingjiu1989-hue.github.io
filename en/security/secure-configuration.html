@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-configuration.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Secure Configuration Management">
     <meta name="twitter:description" content="Comprehensive guide to secure configuration covering infrastructure as code scanning, drift detection, configuration validation, and policy enforcement.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-configuration.png">
     <title>Secure Configuration Management — SourceHub</title>
     <meta name="description" content="Comprehensive guide to secure configuration covering infrastructure as code scanning, drift detection, configuration validation, and policy enforcement.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Secure Configuration Management",
       "description": "Comprehensive guide to secure configuration covering infrastructure as code scanning, drift detection, configuration validation, and policy enforcement.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/secure-configuration.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1701",
+      "wordCount": "1605",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Secure Configuration Management</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-configuration.png" alt="Secure Configuration Management" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Secure Configuration Management</h1>
 <br>
 <p>Introduction   </p>
@@ -82,29 +83,17 @@
 <p>Infrastructure as Code Scanning   </p>
 <p>IaC scanning catches misconfigurations before they reach production.   </p>
 <br>
-<br>
-<br>
 <p>    # Checkov: scan Terraform for security issues</p>
 <br>
 <p>    checkov -d terraform/environments/production</p>
-<br>
-<br>
 <br>
 <p>    # tfsec: Terraform security scanner</p>
 <br>
 <p>    tfsec terraform/environments/production --config-file tfsec.yaml</p>
 <br>
-<br>
-<br>
 <p>    # kics: Keep Infrastructure as Code Secure</p>
 <br>
 <p>    kics scan -p kubernetes/deployments --output-path kics-report.json</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # checkov policy: S3 bucket must have encryption enabled</p>
 <br>
@@ -118,19 +107,11 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # Custom Checkov policy</p>
 <br>
 <p>    from checkov.common.models.enums import CheckResult</p>
 <br>
 <p>    from checkov.terraform.checks.resource.base_resource_check import BaseResourceCheck</p>
-<br>
-<br>
 <br>
 <p>    class S3EncryptionCheck(BaseResourceCheck):</p>
 <br>
@@ -144,8 +125,6 @@
 <br>
 <p>            super().__init__(name=name, id=id, supported_resources=supported_resources)</p>
 <br>
-<br>
-<br>
 <p>        def scan_resource_conf(self, conf):</p>
 <br>
 <p>            if 'server_side_encryption_configuration' in conf:</p>
@@ -154,27 +133,18 @@
 <br>
 <p>            return CheckResult.FAILED</p>
 <br>
-<br>
-<br>
-<br>
 <p>Drift Detection   </p>
 <p>Drift detection identifies when live infrastructure differs from the declared configuration.   </p>
-<br>
-<br>
 <br>
 <p>    # Terraform plan detects drift</p>
 <br>
 <p>    terraform plan -refresh-only  # Check for manual changes</p>
-<br>
-<br>
 <br>
 <p>    # Terraform drift detection with AWS Config</p>
 <br>
 <p>    resource "aws_config_config_rule" "s3_bucket_ssl" {</p>
 <br>
 <p>      name = "s3-bucket-ssl-requests-only"</p>
-<br>
-<br>
 <br>
 <p>      source {</p>
 <br>
@@ -186,12 +156,6 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # Continuous drift monitoring</p>
 <br>
 <p>    # 1. Schedule terraform plan to run daily</p>
@@ -199,8 +163,6 @@
 <p>    # 2. Compare output with baseline</p>
 <br>
 <p>    # 3. Alert on unexpected changes</p>
-<br>
-<br>
 <br>
 <p>    #!/bin/bash</p>
 <br>
@@ -210,8 +172,6 @@
 <br>
 <p>    REPORT_DIR="/config/reports"</p>
 <br>
-<br>
-<br>
 <p>    for env in production staging; do</p>
 <br>
 <p>        cd terraform/environments/$env</p>
@@ -219,8 +179,6 @@
 <p>        terraform plan -refresh-only -out=plan.tfplan 2>&1 | \</p>
 <br>
 <p>            grep -E "changed|destroyed|added" > /tmp/drift.txt</p>
-<br>
-<br>
 <br>
 <p>        if [ -s /tmp/drift.txt ]; then</p>
 <br>
@@ -234,12 +192,7 @@
 <br>
 <p>    done</p>
 <br>
-<br>
-<br>
-<br>
 <p>Configuration Validation Pipeline   </p>
-<br>
-<br>
 <br>
 <p>    # CI/CD configuration validation stage</p>
 <br>
@@ -251,8 +204,6 @@
 <br>
 <p>      - deploy</p>
 <br>
-<br>
-<br>
 <p>    validate:</p>
 <br>
 <p>      stage: validate</p>
@@ -262,8 +213,6 @@
 <p>        - terraform fmt -check</p>
 <br>
 <p>        - terraform validate</p>
-<br>
-<br>
 <br>
 <p>    scan:</p>
 <br>
@@ -277,8 +226,6 @@
 <br>
 <p>        - conftest test . --policy policies/</p>
 <br>
-<br>
-<br>
 <p>      artifacts:</p>
 <br>
 <p>        reports:</p>
@@ -286,8 +233,6 @@
 <p>          checkov: checkov-report.json</p>
 <br>
 <p>          tfsec: tfsec-report.sarif</p>
-<br>
-<br>
 <br>
 <p>    deploy:</p>
 <br>
@@ -303,19 +248,12 @@
 <br>
 <p>      when: manual</p>
 <br>
-<br>
-<br>
-<br>
 <p>Configuration Validation with Conftest   </p>
 <p>Conftest applies policy-as-code to configuration files using Open Policy Agent (OPA).   </p>
-<br>
-<br>
 <br>
 <p>    # conftest policy for Kubernetes</p>
 <br>
 <p>    package main</p>
-<br>
-<br>
 <br>
 <p>    deny[msg] {</p>
 <br>
@@ -327,8 +265,6 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
 <p>    deny[msg] {</p>
 <br>
 <p>        input.kind == "Deployment"</p>
@@ -338,8 +274,6 @@
 <p>        msg = "Privileged containers are not allowed"</p>
 <br>
 <p>    }</p>
-<br>
-<br>
 <br>
 <p>    deny[msg] {</p>
 <br>
@@ -351,8 +285,6 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
 <p>    deny[msg] {</p>
 <br>
 <p>        input.kind == "Pod"</p>
@@ -363,28 +295,15 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # Run conftest policies</p>
 <br>
 <p>    conftest test deployment.yaml --policy conftest/policies/</p>
 <br>
-<br>
-<br>
-<br>
 <p>Policy as Code with OPA   </p>
-<br>
-<br>
 <br>
 <p>    # OPA policy for Terraform</p>
 <br>
 <p>    package terraform</p>
-<br>
-<br>
 <br>
 <p>    deny[msg] {</p>
 <br>
@@ -400,8 +319,6 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
 <p>    deny[msg] {</p>
 <br>
 <p>        resource := input.resource.aws_s3_bucket[_]</p>
@@ -412,13 +329,8 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Secrets in Configuration   </p>
 <p>Never hardcode secrets in configuration. Use a secrets manager.   </p>
-<br>
-<br>
 <br>
 <p>    # BAD: Hardcoded secret</p>
 <br>
@@ -430,8 +342,6 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
 <p>    # GOOD: Secrets Manager reference</p>
 <br>
 <p>    data "aws_secretsmanager_secret_version" "db_creds" {</p>
@@ -439,8 +349,6 @@
 <p>      secret_id = "production/database/credentials"</p>
 <br>
 <p>    }</p>
-<br>
-<br>
 <br>
 <p>    resource "aws_db_instance" "database" {</p>
 <br>
@@ -457,9 +365,6 @@
 <p>      )["password"]</p>
 <br>
 <p>    }</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Secure configuration management requires automation at every stage: scan IaC before deployment, validate against policy as code, detect drift continuously, and never embed secrets in configuration. Shift security left by validating configuration at build time rather than discovering issues in production. Use tools like Checkov, tfsec, conftest, and OPA to enforce your security baseline automatically.</p></div>

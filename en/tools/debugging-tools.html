@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/debugging-tools.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging">
     <meta name="twitter:description" content="Essential debugging tools for developers: lldb and gdb for native debugging, strace for system call tracing, ltrace for library call tracing, and rr for reverse">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/debugging-tools.png">
     <title>Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging — SourceHub</title>
     <meta name="description" content="Essential debugging tools for developers: lldb and gdb for native debugging, strace for system call tracing, ltrace for library call tracing, and rr for reverse">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging",
       "description": "Essential debugging tools for developers: lldb and gdb for native debugging, strace for system call tracing, ltrace for library call tracing, and rr for reverse",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/debugging-tools.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1842",
+      "wordCount": "1701",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,28 +75,16 @@
         <span class="tag-cat">Productivity</span></div>
       <h1 class="article-title">Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/debugging-tools.png" alt="Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Debugging is a core developer skill. Beyond print statements and basic breakpoints, advanced debugging tools provide deep insight into program behavior. This article covers lldb and gdb for native code debugging, strace for system call tracing, ltrace for library call analysis, and rr for the revolutionary capability of reverse execution.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  lldb (LLVM Debugger)</h2>
 <br>
-<br>
-<br>
-<br>
 <p>The modern debugger from the LLVM project, preferred for Clang-compiled code:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Start debugging</p>
 <br>
@@ -105,8 +93,6 @@
 <p>    lldb -p 12345  # Attach to process</p>
 <br>
 <p>    lldb -c core.dump ./myapp  # Analyze core dump</p>
-<br>
-<br>
 <br>
 <p>    # Breakpoints</p>
 <br>
@@ -126,8 +112,6 @@
 <br>
 <p>    > DONE</p>
 <br>
-<br>
-<br>
 <p>    # Execution control</p>
 <br>
 <p>    (lldb) run</p>
@@ -139,8 +123,6 @@
 <p>    (lldb) step        # Step into</p>
 <br>
 <p>    (lldb) finish      # Step out</p>
-<br>
-<br>
 <br>
 <p>    # Variable inspection</p>
 <br>
@@ -154,8 +136,6 @@
 <br>
 <p>    (lldb) expression --objc -- print [NSString stringWithFormat:@"%@", myString]</p>
 <br>
-<br>
-<br>
 <p>    # Thread and backtrace</p>
 <br>
 <p>    (lldb) thread backtrace</p>
@@ -164,35 +144,19 @@
 <br>
 <p>    (lldb) thread select 2</p>
 <br>
-<br>
-<br>
 <p>    # Watchpoints (break on data access)</p>
 <br>
 <p>    (lldb) watchpoint set variable myVar</p>
 <br>
 <p>    (lldb) watchpoint set expression -- myPointer[5]</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  gdb (GNU Debugger)</h2>
 <br>
-<br>
-<br>
-<br>
 <p>The traditional Unix debugger:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Compile with debug symbols</p>
 <br>
 <p>    gcc -g -O0 myapp.c -o myapp</p>
-<br>
-<br>
 <br>
 <p>    # Start debugging</p>
 <br>
@@ -201,8 +165,6 @@
 <p>    gdb -p 12345</p>
 <br>
 <p>    gdb ./myapp core</p>
-<br>
-<br>
 <br>
 <p>    # Common commands</p>
 <br>
@@ -226,8 +188,6 @@
 <br>
 <p>    (gdb) disassemble  # Show assembly</p>
 <br>
-<br>
-<br>
 <p>    # Scripted debugging</p>
 <br>
 <p>    (gdb) set pagination off</p>
@@ -242,35 +202,19 @@
 <br>
 <p>    > end</p>
 <br>
-<br>
-<br>
 <p>    # TUI mode (split view)</p>
 <br>
 <p>    gdb -tui ./myapp</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  strace (System Call Trace)</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Trace all system calls a program makes:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Trace a command</p>
 <br>
 <p>    strace -o trace.log ./myapp</p>
 <br>
 <p>    strace -f ./myapp  # Follow forks</p>
-<br>
-<br>
 <br>
 <p>    # Common filters</p>
 <br>
@@ -284,8 +228,6 @@
 <br>
 <p>    strace -e trace=signal ./myapp        # Signal handling</p>
 <br>
-<br>
-<br>
 <p>    # Performance analysis</p>
 <br>
 <p>    strace -c ./myapp                     # Syscall count and time summary</p>
@@ -293,8 +235,6 @@
 <p>    strace -T ./myapp                     # Time spent in each syscall</p>
 <br>
 <p>    strace -r ./myapp                     # Relative timestamps</p>
-<br>
-<br>
 <br>
 <p>    # Useful patterns</p>
 <br>
@@ -304,40 +244,21 @@
 <br>
 <p>    strace -e read -s 10000 python3 app.py  # Show read content</p>
 <br>
-<br>
-<br>
 <p>    # PID tracking and timing</p>
 <br>
 <p>    strace -fy -t -T -o trace.log -p 12345</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**What to look for**: `ENOENT` (file not found), `EACCES` (permission denied), `ECONNREFUSED` (connection refused), slow syscalls (high `-T` values), unexpected file opens, excessive context switching.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  ltrace (Library Call Trace)</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Trace library function calls:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Basic usage</p>
 <br>
 <p>    ltrace ./myapp</p>
 <br>
 <p>    ltrace -o libcalls.log ./myapp</p>
-<br>
-<br>
 <br>
 <p>    # Filter specific libraries</p>
 <br>
@@ -347,13 +268,9 @@
 <br>
 <p>    ltrace -e 'libc.*' ./myapp      # All libc functions</p>
 <br>
-<br>
-<br>
 <p>    # Count library calls</p>
 <br>
 <p>    ltrace -c ./myapp</p>
-<br>
-<br>
 <br>
 <p>    # With timing</p>
 <br>
@@ -361,27 +278,13 @@
 <br>
 <p>    ltrace -S ./myapp  # Show syscalls too</p>
 <br>
-<br>
-<br>
 <p>    # Suppress repetitive calls</p>
 <br>
 <p>    ltrace -n 2 ./myapp  # Indent by call depth</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  rr (Reverse Debugger)</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Record and replay debugging with reverse execution:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Record execution</p>
 <br>
@@ -389,15 +292,11 @@
 <br>
 <p>    rr record -- ./myapp arg1 arg2</p>
 <br>
-<br>
-<br>
 <p>    # Replay (deterministic)</p>
 <br>
 <p>    rr replay</p>
 <br>
 <p>    rr replay -p 12345</p>
-<br>
-<br>
 <br>
 <p>    # Reverse debugging commands</p>
 <br>
@@ -409,41 +308,23 @@
 <br>
 <p>    (gdb) reverse-finish      # Go back to function entry</p>
 <br>
-<br>
-<br>
 <p>    # Find when a variable changed</p>
 <br>
 <p>    (gdb) watch -l myVar</p>
 <br>
 <p>    (gdb) reverse-continue    # Stops when myVar last changed</p>
 <br>
-<br>
-<br>
 <p>    # Go to specific event</p>
 <br>
 <p>    rr replay -M 12345        # Replay to event number 12345</p>
-<br>
-<br>
 <br>
 <p>    # Chaos mode (test concurrency)</p>
 <br>
 <p>    rr record --chaos ./myapp  # Randomize thread scheduling</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Key strength**: Debug intermittent bugs by recording once, then replaying infinitely. When you miss the bug, just restart replay and be more prepared. Chaos mode helps find concurrency bugs.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Debugging Workflow</h2>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # 1. Program crashes — get a core dump</p>
 <br>
@@ -453,15 +334,11 @@
 <br>
 <p>    gdb ./myapp core</p>
 <br>
-<br>
-<br>
 <p>    # 2. Use strace to see what the program is doing</p>
 <br>
 <p>    strace -f -o trace.log ./myapp</p>
 <br>
 <p>    less trace.log  # Look for error syscalls</p>
-<br>
-<br>
 <br>
 <p>    # 3. For tricky bugs, use rr</p>
 <br>
@@ -471,21 +348,11 @@
 <br>
 <p>    # Now you can step forward AND backward</p>
 <br>
-<br>
-<br>
 <p>    # 4. Library call issues</p>
 <br>
 <p>    ltrace -c ./myapp  # Which library calls are most frequent?</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Comparison</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| Tool | Best For | Overhead | Learning Curve |</p>
 <br>
@@ -501,20 +368,13 @@
 <br>
 <p>| rr | Reverse debugging | High (record) | Medium |</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Recommendations</h2>
-<br>
-<br>
 <br>
 <p>* **General debugging**: lldb for new projects, gdb for legacy code. Both support the same core debugging workflow.</p>
 <p>* **File/permission issues**: strace is the fastest way to find "file not found" or "permission denied" problems.</p>
 <p>* **Performance debugging**: strace -c shows where your program spends time in syscalls.</p>
 <p>* **Intermittent bugs**: rr is revolutionary — record once, replay infinitely with reverse execution.</p>
 <p>* **Library comprehension**: ltrace shows which library functions are called and how often.</p>
-<br>
-<br>
 <br>
 <p>Start with strace for quick diagnostics. Use lldb/gdb for step-through debugging. Deploy rr for your hardest bugs — the reverse execution capability makes "oops, I missed that" a thing of the past.</p></div>
     </article>

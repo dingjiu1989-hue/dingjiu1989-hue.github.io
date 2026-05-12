@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/read-replicas.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Read Replicas: Scaling Reads, Replication Lag, and Failover">
     <meta name="twitter:description" content="Learn how to scale database reads with read replicas. Understand replication lag, load balancing strategies, failover, and best practices for PostgreSQL and MySQL.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/read-replicas.png">
     <title>Read Replicas: Scaling Reads, Replication Lag, and Failover — SourceHub</title>
     <meta name="description" content="Learn how to scale database reads with read replicas. Understand replication lag, load balancing strategies, failover, and best practices for PostgreSQL and MySQL.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Read Replicas: Scaling Reads, Replication Lag, and Failover",
       "description": "Learn how to scale database reads with read replicas. Understand replication lag, load balancing strategies, failover, and best practices for PostgreSQL and MySQL.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/read-replicas.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1625",
+      "wordCount": "1539",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Read Replicas: Scaling Reads, Replication Lag, and Failover</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/read-replicas.png" alt="Read Replicas: Scaling Reads, Replication Lag, and Failover" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Read Replicas: Scaling Reads, Replication Lag, and Failover</h1>
 <br>
 <p>Read Replicas: Scaling Reads, Replication Lag, and Failover   </p>
@@ -84,8 +85,6 @@
 <p>PostgreSQL Streaming Replication Setup   </p>
 <p>On the primary:   </p>
 <br>
-<br>
-<br>
 <p>    # postgresql.conf</p>
 <br>
 <p>    wal_level = replica</p>
@@ -94,42 +93,22 @@
 <br>
 <p>    wal_keep_size = 1024</p>
 <br>
-<br>
-<br>
-<br>
 <p>Create a replication user:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE ROLE replicator WITH LOGIN REPLICATION PASSWORD 'secure_password';</p>
 <br>
-<br>
-<br>
-<br>
 <p>Allow replication in `pg_hba.conf`:   </p>
-<br>
-<br>
 <br>
 <p>    host replication replicator replica-host/32 md5</p>
 <br>
-<br>
-<br>
-<br>
 <p>On the replica:   </p>
-<br>
-<br>
 <br>
 <p>    pg_basebackup -h primary-host -D /var/lib/postgresql/data \</p>
 <br>
 <p>      -U replicator -P -v --wal-method=stream</p>
 <br>
-<br>
-<br>
-<br>
 <p>Create a `standby.signal` file and start PostgreSQL. The replica streams continuously.   </p>
 <p>MySQL Replica Setup   </p>
-<br>
-<br>
 <br>
 <p>    # my.cnf on primary</p>
 <br>
@@ -139,22 +118,11 @@
 <br>
 <p>    binlog_format = ROW</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    CREATE USER 'replicator'@'%' IDENTIFIED BY 'secure_password';</p>
 <br>
 <p>    GRANT REPLICATION SLAVE ON *.* TO 'replicator'@'%';</p>
 <br>
-<br>
-<br>
-<br>
 <p>On the replica:   </p>
-<br>
-<br>
 <br>
 <p>    CHANGE MASTER TO</p>
 <br>
@@ -168,23 +136,14 @@
 <br>
 <p>      MASTER_LOG_POS=0;</p>
 <br>
-<br>
-<br>
 <p>    START SLAVE;</p>
 <br>
 <p>    SHOW SLAVE STATUS\G;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Load Balancing Strategies   </p>
 <p>Application-level read/write splitting is the most common pattern:   </p>
 <br>
-<br>
-<br>
 <p>    import psycopg2</p>
-<br>
-<br>
 <br>
 <p>    class DatabaseRouter:</p>
 <br>
@@ -195,8 +154,6 @@
 <p>            self.replicas = [psycopg2.connect(dsn) for dsn in replica_dsns]</p>
 <br>
 <p>            self.round_robin = 0</p>
-<br>
-<br>
 <br>
 <p>        def get_connection(self, read_only=False):</p>
 <br>
@@ -210,8 +167,6 @@
 <br>
 <p>            return self.primary</p>
 <br>
-<br>
-<br>
 <p>        def execute_read(self, query, params=None):</p>
 <br>
 <p>            conn = self.get_connection(read_only=True)</p>
@@ -221,8 +176,6 @@
 <p>                cur.execute(query, params or ())</p>
 <br>
 <p>                return cur.fetchall()</p>
-<br>
-<br>
 <br>
 <p>        def execute_write(self, query, params=None):</p>
 <br>
@@ -234,12 +187,7 @@
 <br>
 <p>                conn.commit()</p>
 <br>
-<br>
-<br>
-<br>
 <p>A **proxy layer** like PgBouncer, ProxySQL, or HAProxy handles routing transparently:   </p>
-<br>
-<br>
 <br>
 <p>    # ProxySQL query rules</p>
 <br>
@@ -261,9 +209,6 @@
 <br>
 <p>        destination_hostgroup: 0  # primary</p>
 <br>
-<br>
-<br>
-<br>
 <p>Replication Lag   </p>
 <p>Replication lag is the time between a commit on the primary and its visibility on a replica. Causes include:   </p>
 <br>
@@ -275,8 +220,6 @@
 <p>Monitoring Lag   </p>
 <p>PostgreSQL offers precise lag metrics:   </p>
 <br>
-<br>
-<br>
 <p>    -- On the replica</p>
 <br>
 <p>    SELECT pg_last_wal_receive_lsn(),</p>
@@ -287,25 +230,15 @@
 <br>
 <p>                           pg_last_wal_replay_lsn()) AS replay_lag_bytes;</p>
 <br>
-<br>
-<br>
-<br>
 <p>In MySQL:   </p>
-<br>
-<br>
 <br>
 <p>    SHOW SLAVE STATUS\G</p>
 <br>
 <p>    -- Focus on: Seconds_Behind_Master, Relay_Log_Space</p>
 <br>
-<br>
-<br>
-<br>
 <p>Set up alerts. A lag of more than a few seconds (or minutes for analytics workloads) indicates a problem.   </p>
 <p>Handling Stale Reads   </p>
 <p>Applications that route reads of recently written data back to the primary avoid inconsistent behavior. One pattern is to mark rows with a timestamp and route queries for recent rows accordingly:   </p>
-<br>
-<br>
 <br>
 <p>    def get_order(order_id):</p>
 <br>
@@ -327,25 +260,15 @@
 <br>
 <p>            conn = router.get_connection(read_only=True)</p>
 <br>
-<br>
-<br>
-<br>
 <p>Failover Strategies   </p>
 <p>When the primary fails, one replica must become the new primary:   </p>
 <p>PostgreSQL   </p>
-<br>
-<br>
 <br>
 <p>    # Promote a replica to primary</p>
 <br>
 <p>    pg_ctl promote -D /var/lib/postgresql/data</p>
 <br>
-<br>
-<br>
-<br>
 <p>Or via `pg_rewind` for a clean re-sync:   </p>
-<br>
-<br>
 <br>
 <p>    # After promotion, rewind old primary to follow new primary</p>
 <br>
@@ -353,13 +276,8 @@
 <br>
 <p>      --source-server='host=new-primary-db ...'</p>
 <br>
-<br>
-<br>
-<br>
 <p>Managed Failover   </p>
 <p>Tools like Patroni automate failover:   </p>
-<br>
-<br>
 <br>
 <p>    # patroni.yml</p>
 <br>
@@ -378,9 +296,6 @@
 <p>      parameters:</p>
 <br>
 <p>        max_connections: 200</p>
-<br>
-<br>
-<br>
 <br>
 <p>Patroni uses a distributed consensus store (etcd, Consul, Zookeeper) to elect a new leader when the current leader fails. The election typically completes in under 30 seconds.   </p>
 <p>Best Practices   </p>

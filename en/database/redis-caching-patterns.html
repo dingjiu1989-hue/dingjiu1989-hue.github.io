@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/redis-caching-patterns.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Redis Caching Patterns">
     <meta name="twitter:description" content="Redis caching patterns including cache-aside, read-through, write-through, and cache invalidation strategies.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/redis-caching-patterns.png">
     <title>Redis Caching Patterns — SourceHub</title>
     <meta name="description" content="Redis caching patterns including cache-aside, read-through, write-through, and cache invalidation strategies.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Redis Caching Patterns",
       "description": "Redis caching patterns including cache-aside, read-through, write-through, and cache invalidation strategies.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/redis-caching-patterns.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "494",
+      "wordCount": "479",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Redis Caching Patterns</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/redis-caching-patterns.png" alt="Redis Caching Patterns" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Redis Caching Patterns</h1>
 <br>
 <p>Redis as Cache   </p>
 <p>Redis is an in-memory data store that excels as a cache due to sub-millisecond latency and rich data types.   </p>
 <p>Cache-Aside Pattern   </p>
 <p>Application checks cache first, falls back to database:   </p>
-<br>
-<br>
 <br>
 <p>    def get_user(user_id):</p>
 <br>
@@ -102,15 +101,10 @@
 <br>
 <p>        return user</p>
 <br>
-<br>
-<br>
-<br>
 <p>Read-Through   </p>
 <p>Cache sits between app and database, auto-loading on miss. Logic is in the cache layer, not the application.   </p>
 <p>Write-Through   </p>
 <p>Data written to cache first, then database:   </p>
-<br>
-<br>
 <br>
 <p>    def update_user(user_id, data):</p>
 <br>
@@ -120,16 +114,11 @@
 <br>
 <p>        db.execute("UPDATE users SET name = %s WHERE id = %s", [data['name'], user_id])</p>
 <br>
-<br>
-<br>
-<br>
 <p>Write-Behind   </p>
 <p>Write to cache immediately, batch database writes asynchronously. Fastest writes but risk of data loss if cache fails.   </p>
 <p>Invalidation Strategies   </p>
 <p>| Strategy | Approach | Best For | |----------|----------|----------| | TTL | Auto-expire | Most cases | | Key deletion | Delete on update | Write-through | | Versioned | Include version in key | Schema changes | | Pub/sub | Notify all instances | Distributed caches |   </p>
 <p>Rate Limiting with Sorted Sets   </p>
-<br>
-<br>
 <br>
 <p>    def is_rate_limited(user_id, max_requests=100, window=60):</p>
 <br>
@@ -148,9 +137,6 @@
 <p>        redis.expire(key, window)</p>
 <br>
 <p>        return False</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Use cache-aside as the default pattern. Always set TTLs to prevent memory exhaustion. Monitor cache hit rates. Implement mutex locking for stampede prevention. Pipeline batch operations for performance.</p></div>

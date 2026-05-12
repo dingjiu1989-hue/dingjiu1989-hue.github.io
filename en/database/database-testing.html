@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-testing.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Testing Strategies for Developers">
     <meta name="twitter:description" content="Database testing with in-memory DBs for unit tests, Testcontainers for integration tests, migration testing, and property-based testing.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-testing.png">
     <title>Database Testing Strategies for Developers — SourceHub</title>
     <meta name="description" content="Database testing with in-memory DBs for unit tests, Testcontainers for integration tests, migration testing, and property-based testing.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Testing Strategies for Developers",
       "description": "Database testing with in-memory DBs for unit tests, Testcontainers for integration tests, migration testing, and property-based testing.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-testing.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "478",
+      "wordCount": "454",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,14 +74,13 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Database Testing Strategies for Developers</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-testing.png" alt="Database Testing Strategies for Developers" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Testing Strategies for Developers</h1>
 <br>
 <p>Database Testing Strategies   </p>
 <p>Database testing is often the weakest part of test suites. Effective strategies catch issues before production.   </p>
 <p>Unit Tests with In-Memory DB   </p>
 <p>In-memory databases provide fast feedback during development:   </p>
-<br>
-<br>
 <br>
 <p>    @pytest.fixture</p>
 <br>
@@ -93,8 +92,6 @@
 <br>
 <p>        return UserRepository(conn)</p>
 <br>
-<br>
-<br>
 <p>    def test_find_by_email(repo):</p>
 <br>
 <p>        repo.create("alice@example.com", "Alice")</p>
@@ -103,13 +100,8 @@
 <br>
 <p>        assert user is not None</p>
 <br>
-<br>
-<br>
-<br>
 <p>Integration Tests with Testcontainers   </p>
 <p>Testcontainers spins up disposable database containers:   </p>
-<br>
-<br>
 <br>
 <p>    @pytest.fixture(scope="module")</p>
 <br>
@@ -119,8 +111,6 @@
 <br>
 <p>            yield pg</p>
 <br>
-<br>
-<br>
 <p>    def test_order_total(repo):</p>
 <br>
 <p>        repo.create("2026-01-01", 100.00)</p>
@@ -129,13 +119,8 @@
 <br>
 <p>        assert total == 100.00</p>
 <br>
-<br>
-<br>
-<br>
 <p>Migration Testing   </p>
 <p>Test that migrations are backward-compatible and rollbacks work:   </p>
-<br>
-<br>
 <br>
 <p>    def test_rollback():</p>
 <br>
@@ -149,22 +134,14 @@
 <br>
 <p>        assert "new_column" not in columns</p>
 <br>
-<br>
-<br>
-<br>
 <p>Data Fixtures   </p>
 <p>Use factory patterns for test data:   </p>
-<br>
-<br>
 <br>
 <p>    class UserFactory:</p>
 <br>
 <p>        email = factory.Sequence(lambda n: f"user{n}@example.com")</p>
 <br>
 <p>        name = factory.Faker('name')</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Use in-memory databases for fast unit tests. Use Testcontainers for integration tests against real databases. Test migrations for backward compatibility. Use factory patterns for data fixtures. The most valuable test is one that uses a real database.</p></div>

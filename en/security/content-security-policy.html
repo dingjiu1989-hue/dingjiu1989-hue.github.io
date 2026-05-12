@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/content-security-policy.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Content Security Policy">
     <meta name="twitter:description" content="Complete guide to Content Security Policy covering directives, nonce/hash strategies, reporting mechanisms, and strict CSP migration.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/content-security-policy.png">
     <title>Content Security Policy — SourceHub</title>
     <meta name="description" content="Complete guide to Content Security Policy covering directives, nonce/hash strategies, reporting mechanisms, and strict CSP migration.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,15 +38,15 @@
       "@type": "Article",
       "headline": "Content Security Policy",
       "description": "Complete guide to Content Security Policy covering directives, nonce/hash strategies, reporting mechanisms, and strict CSP migration.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/content-security-policy.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1578",
+      "wordCount": "1289",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/content-security-policy.html"},
-      "articleBody": "Content Security Policy Introduction Content Security Policy (CSP) is a browser security mechanism that mitigates Cross-Site Scripting (XSS), data injection, and clickjacking attacks. By defining a whitelist of trusted content sources, CSP prevents the browser from executing malicious scripts or loading unauthorized resources. CSP Directives CSP uses HTTP headers with directives that control specific resource types. Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.trusted.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.cloudfront.net; connect-src 'self' https://api.example.com; font-src 'self' https://fonts.gstatic.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; Key directives: | Directive | Controls | Example | |-----------|----------|---------| | `default-src` | Fallback for all resource types | `default-src 'self'` | | `script-src` | JavaScript sources | `script-src 'self' https://cdn.example.com` | | `style-src` | CSS sources | `style-src 'self' 'unsafe-inline'` | | `img-src` | Image sources | `img-src 'self' data:` | | `connect-src` | XMLHttpRequest, fetch, WebSocket | `connect-src 'self'` | | `frame-ancestors` | Parent page framing | `frame-ancestors 'none'` | | `form-action` | Form submission targets | `form-action 'self'` | | `base-uri` | `` tag URLs | `base-uri 'self'` | Nonce and Hash Strategies Using `'unsafe-inline'` for scripts weakens CSP. Nonce and hash strategies provide secure inline script handling. Nonce-Based CSP A nonce is a cryptographically random token generated per-request and included in both the CSP header and the script tag. import secrets from flask import Flask, render_template app = Flask(__name__) @app.route('/') def index(): nonce = secrets.token_urlsafe(16) response = make_response(render_template('index.html', nonce=nonce)) response.headers['Content-Security-Policy'] = \\ f\"script-src 'nonce-{nonce}'; object-src 'none'; base-uri 'self'\" return response function initApp() { loadDashboard(); } alert('This will NOT execute'); // Blocked by CSP Hash-Based CSP For static inline scripts, use a hash of the script content instead of a nonce. import hashlib import base64 def generate_script_hash(script_content): hash_bytes = hashlib.sha256(script_content.encode()).digest() hash_b64 = base64.b64encode(hash_bytes).decode() return f\"'sha256-{hash_b64}'\" # Generate once, add to CSP script = \"document.getElementById('app').innerHTML = 'Hello';\" script_hash = generate_script_hash(script) # CSP: script-src 'sha256-abc123...' Content-Security-Policy: script-src 'sha256-abc123def456...'; object-src 'none'; CSP Reporting CSP violations can be reported to an endpoint for monitoring and debugging. Content-Security-Policy: default-src 'self'; script-src 'self'; report-uri /csp-violation-report; report-to csp-endpoint; { \"csp-report\": { \"document-uri\": \"https://example.com/page\", \"referrer\": \"\", \"blocked-uri\": \"https://evil.com/script.js\", \"violated-directive\": \"script-src 'self'\", \"effective-directive\": \"script-src\", \"original-policy\": \"default-src 'self'; script-src 'self'\", \"source-file\": \"https://example.com/page\", \"line-number\": 42, \"column-number\": 10 } } # Flask CSP report collector @app.route('/csp-violation-report', methods=['POST']) def csp_report(): report = request.get_json(force=True) blocked = report['csp-report']['blocked-uri'] directive = report['csp-report']['violated-directive'] page = report['csp-report']['document-uri'] # Log to security monitoring security_logger.warning( f\"CSP violation on {page}: {directive} blocked {blocked}\" ) # Alert if critical pattern if 'exfiltration' in blocked.lower(): security_logger.critical(f\"Potential data exfiltration: {blocked}\") return '', 204 Strict CSP Migration Migrating from allowlist CSP to strict CSP provides better security. # Allowlist CSP (vulnerable to CDN-based bypass) Content-Security-Policy: script-src 'self' https://ajax.googleapis.com https://cdnjs.cloudflare.com; # Strict CSP (nonce-based, resistant to bypass) Content-Security-Policy: script-src 'nonce-random123' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'none'; The `'strict-dynamic'` keyword propagates trust from nonced scripts to their dynamically loaded children, enabling modern SPA frameworks while maintaining security. Deployment Strategy # Step 1: Deploy in report-only mode Content-Security-Policy-Report-Only: default-src 'self'; script-src 'nonce-abc123'; report-uri /csp-reports; # Step 2: Monitor reports for 2-4 weeks # Step 3: Fix violations identified in reports # Step 4: Switch to enforcement mode Content-Security-Policy: default-src 'self'; script-src 'nonce-abc123'; report-uri /csp-reports; # Step 5: Gradually remove report-uri when confident Conclusion CSP is one of the most powerful defense-in-depth mechanisms against XSS. Use nonce-based strict CSP rather than allowlist-based policies, deploy in report-only mode initially to identify violations, always set `object-src 'none'` and `base-uri 'self'` as hardening measures, and monitor reports continuously for policy violations and potential attacks."
+      "articleBody": "Content Security Policy Content Security Policy Introduction Content Security Policy (CSP) is a browser security mechanism that mitigates Cross-Site Scripting (XSS), data injection, and clickjacking attacks. By defining a whitelist of trusted content sources, CSP prevents the browser from executing malicious scripts or loading unauthorized resources. CSP Directives CSP uses HTTP headers with directives that control specific resource types. Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.trusted.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.cloudfront.net; connect-src 'self' https://api.example.com; font-src 'self' https://fonts.gstatic.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; Key directives: | Directive | Controls | Example | |-----------|----------|---------| | `default-src` | Fallback for all resource types | `default-src 'self'` | | `script-src` | JavaScript sources | `script-src 'self' https://cdn.example.com` | | `style-src` | CSS sources | `style-src 'self' 'unsafe-inline'` | | `img-src` | Image sources | `img-src 'self' data:` | | `connect-src` | XMLHttpRequest, fetch, WebSocket | `connect-src 'self'` | | `frame-ancestors` | Parent page framing | `frame-ancestors 'none'` | | `form-action` | Form submission targets | `form-action 'self'` | | `base-uri` | `` tag URLs | `base-uri 'self'` | Nonce and Hash Strategies Using `'unsafe-inline'` for scripts weakens CSP. Nonce and hash strategies provide secure inline script handling. Nonce-Based CSP A nonce is a cryptographically random token generated per-request and included in both the CSP header and the script tag. import secrets from flask import Flask, render_template app = Flask(__name__) @app.route('/') def index(): nonce = secrets.token_urlsafe(16) response = make_response(render_template('index.html', nonce=nonce)) response.headers['Content-Security-Policy'] = \\ f\"script-src 'nonce-{nonce}'; object-src 'none'; base-uri 'self'\" return response Hash-Based CSP For static inline scripts, use a hash of the script content instead of a nonce. import hashlib import base64 def generate_script_hash(script_content): hash_bytes = hashlib.sha256(script_content.encode()).digest() hash_b64 = base64.b64encode(hash_bytes).decode() return f\"'sha256-{hash_b64}'\" Generate once, add to CSP script = \"document.getElementById('app').innerHTML = ' Hello ';\" script_hash = generate_script_hash(script) CSP: script-src 'sha256-abc123...' Content-Security-Policy: script-src 'sha256-abc123def456...'; object-src 'none'; CSP Reporting CSP violations can be reported to an endpoint for monitoring and debugging. Content-Security-Policy: default-src 'self'; script-src 'self'; report-uri /csp-violation-report; report-to csp-endpoint; { \"csp-report\": { \"document-uri\": \"https://example.com/page\", \"referrer\": \"\", \"blocked-uri\": \"https://evil.com/script.js\", \"violated-directive\": \"script-src 'self'\", \"effective-directive\": \"script-src\", \"original-policy\": \"default-src 'self'; script-src 'self'\", \"source-file\": \"https://example.com/page\", \"line-number\": 42, \"column-number\": 10 } } Flask CSP report collector @app.route('/csp-violation-report', methods=['POST']) def csp_report(): report = request.get_json(force=True) blocked = report['csp-report']['blocked-uri'] directive = report['csp-report']['violated-directive'] page = report['csp-report']['document-uri'] Log to security monitoring security_logger.warning( f\"CSP violation on {page}: {directive} blocked {blocked}\" ) Alert if critical pattern if 'exfiltration' in blocked.lower(): security_logger.critical(f\"Potential data exfiltration: {blocked}\") return '', 204 Strict CSP Migration Migrating from allowlist CSP to strict CSP provides better security. Allowlist CSP (vulnerable to CDN-based bypass) Content-Security-Policy: script-src 'self' https://ajax.googleapis.com https://cdnjs.cloudflare.com; Strict CSP (nonce-based, resistant to bypass) Content-Security-Policy: script-src 'nonce-random123' 'strict-dynamic' https: 'unsafe-inline'; object-src 'none'; base-uri 'none'; The `'strict-dynamic'` keyword propagates trust from nonced scripts to their dynamically loaded children, enabling modern SPA frameworks while maintaining security. Deployment Strategy Step 1: Deploy in report-only mode Content-Security-Policy-Report-Only: default-src 'self'; script-src 'nonce-abc123'; report-uri /csp-reports; Step 2: Monitor reports for 2-4 weeks Step 3: Fix violations identified in reports Step 4: Switch to enforcement mode Content-Security-Policy: default-src 'self'; script-src 'nonce-abc123'; report-uri /csp-reports; Step 5: Gradually remove report-uri when confident Conclusion CSP is one of the most powerful defense-in-depth mechanisms against XSS. Use nonce-based strict CSP rather than allowlist-based policies, deploy in report-only mode initially to identify violations, always set `object-src 'none'` and `base-uri 'self'` as hardening measures, and monitor reports continuously for policy violations and potential attacks."
     }
     </script>
     <script type="application/ld+json">
@@ -75,313 +75,229 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Content Security Policy</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/content-security-policy.png" alt="Content Security Policy" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Content Security Policy</h1>
 <br>
-<p>Introduction   </p>
-<p>Content Security Policy (CSP) is a browser security mechanism that mitigates Cross-Site Scripting (XSS), data injection, and clickjacking attacks. By defining a whitelist of trusted content sources, CSP prevents the browser from executing malicious scripts or loading unauthorized resources.   </p>
-<p>CSP Directives   </p>
-<p>CSP uses HTTP headers with directives that control specific resource types.   </p>
+<h1>Content Security Policy</h1>
 <br>
+<p>Introduction </p>
 <br>
+<p>Content Security Policy (CSP) is a browser security mechanism that mitigates Cross-Site Scripting (XSS), data injection, and clickjacking attacks. By defining a whitelist of trusted content sources, CSP prevents the browser from executing malicious scripts or loading unauthorized resources. </p>
 <br>
-<p>    Content-Security-Policy: </p>
+<p>CSP Directives </p>
 <br>
-<p>        default-src 'self';</p>
+<p>CSP uses HTTP headers with directives that control specific resource types. </p>
 <br>
-<p>        script-src 'self' https://cdn.trusted.com;</p>
+<p>Content-Security-Policy: </p>
 <br>
-<p>        style-src 'self' 'unsafe-inline';</p>
+<p>default-src 'self';</p>
 <br>
-<p>        img-src 'self' data: https://*.cloudfront.net;</p>
+<p>script-src 'self' https://cdn.trusted.com;</p>
 <br>
-<p>        connect-src 'self' https://api.example.com;</p>
+<p>style-src 'self' 'unsafe-inline';</p>
 <br>
-<p>        font-src 'self' https://fonts.gstatic.com;</p>
+<p>img-src 'self' data: https://*.cloudfront.net;</p>
 <br>
-<p>        frame-src 'none';</p>
+<p>connect-src 'self' https://api.example.com;</p>
 <br>
-<p>        object-src 'none';</p>
+<p>font-src 'self' https://fonts.gstatic.com;</p>
 <br>
-<p>        base-uri 'self';</p>
+<p>frame-src 'none';</p>
 <br>
-<p>        form-action 'self';</p>
+<p>object-src 'none';</p>
 <br>
+<p>base-uri 'self';</p>
 <br>
+<p>form-action 'self';</p>
 <br>
+<p>Key directives: </p>
 <br>
-<p>Key directives:   </p>
-<p>| Directive | Controls | Example | |-----------|----------|---------| | `default-src` | Fallback for all resource types | `default-src 'self'` | | `script-src` | JavaScript sources | `script-src 'self' https://cdn.example.com` | | `style-src` | CSS sources | `style-src 'self' 'unsafe-inline'` | | `img-src` | Image sources | `img-src 'self' data:` | | `connect-src` | XMLHttpRequest, fetch, WebSocket | `connect-src 'self'` | | `frame-ancestors` | Parent page framing | `frame-ancestors 'none'` | | `form-action` | Form submission targets | `form-action 'self'` | | `base-uri` | `` tag URLs | `base-uri 'self'` |   </p>
-<p>Nonce and Hash Strategies   </p>
-<p>Using `'unsafe-inline'` for scripts weakens CSP. Nonce and hash strategies provide secure inline script handling.   </p>
-<p>Nonce-Based CSP   </p>
-<p>A nonce is a cryptographically random token generated per-request and included in both the CSP header and the script tag.   </p>
+<p>| Directive | Controls | Example | |-----------|----------|---------| | `default-src` | Fallback for all resource types | `default-src 'self'` | | `script-src` | JavaScript sources | `script-src 'self' https://cdn.example.com` | | `style-src` | CSS sources | `style-src 'self' 'unsafe-inline'` | | `img-src` | Image sources | `img-src 'self' data:` | | `connect-src` | XMLHttpRequest, fetch, WebSocket | `connect-src 'self'` | | `frame-ancestors` | Parent page framing | `frame-ancestors 'none'` | | `form-action` | Form submission targets | `form-action 'self'` | | `base-uri` | `` tag URLs | `base-uri 'self'` | </p>
 <br>
+<p>Nonce and Hash Strategies </p>
 <br>
+<p>Using `'unsafe-inline'` for scripts weakens CSP. Nonce and hash strategies provide secure inline script handling. </p>
 <br>
-<p>    import secrets</p>
+<p>Nonce-Based CSP </p>
 <br>
-<p>    from flask import Flask, render_template</p>
+<p>A nonce is a cryptographically random token generated per-request and included in both the CSP header and the script tag. </p>
 <br>
+<p>import secrets</p>
 <br>
+<p>from flask import Flask, render_template</p>
 <br>
-<p>    app = Flask(__name__)</p>
+<p>app = Flask(__name__)</p>
 <br>
+<p>@app.route('/')</p>
 <br>
+<p>def index():</p>
 <br>
-<p>    @app.route('/')</p>
+<p>nonce = secrets.token_urlsafe(16)</p>
 <br>
-<p>    def index():</p>
+<p>response = make_response(render_template('index.html', nonce=nonce))</p>
 <br>
-<p>        nonce = secrets.token_urlsafe(16)</p>
+<p>response.headers['Content-Security-Policy'] = \</p>
 <br>
-<p>        response = make_response(render_template('index.html', nonce=nonce))</p>
+<p>f"script-src 'nonce-{nonce}'; object-src 'none'; base-uri 'self'"</p>
 <br>
-<p>        response.headers['Content-Security-Policy'] = \</p>
+<p>return response</p>
 <br>
-<p>            f"script-src 'nonce-{nonce}'; object-src 'none'; base-uri 'self'"</p>
+<p>Hash-Based CSP </p>
 <br>
-<p>        return response</p>
+<p>For static inline scripts, use a hash of the script content instead of a nonce. </p>
 <br>
+<p>import hashlib</p>
 <br>
+<p>import base64</p>
 <br>
+<p>def generate_script_hash(script_content):</p>
 <br>
+<p>hash_bytes = hashlib.sha256(script_content.encode()).digest()</p>
 <br>
+<p>hash_b64 = base64.b64encode(hash_bytes).decode()</p>
 <br>
+<p>return f"'sha256-{hash_b64}'"</p>
 <br>
-<p>    <!-- Template uses the nonce --></p>
+<h1>Generate once, add to CSP</h1>
 <br>
-<p>    <script nonce="{{ nonce }}"></p>
+<p>script = "document.getElementById('app').innerHTML = '</p>
 <br>
-<p>        function initApp() {</p>
+<p>Hello</p>
 <br>
-<p>            loadDashboard();</p>
+<p>';"</p>
 <br>
-<p>        }</p>
+<p>script_hash = generate_script_hash(script)</p>
 <br>
-<p>    </script></p>
+<h1>CSP: script-src 'sha256-abc123...'</h1>
 <br>
+<p>Content-Security-Policy: </p>
 <br>
+<p>script-src 'sha256-abc123def456...';</p>
 <br>
-<p>    <script nonce="{{ nonce }}" src="/static/app.js"></script></p>
+<p>object-src 'none';</p>
 <br>
+<p>CSP Reporting </p>
 <br>
+<p>CSP violations can be reported to an endpoint for monitoring and debugging. </p>
 <br>
-<p>    <!-- Script without nonce is blocked by the browser --></p>
+<p>Content-Security-Policy: </p>
 <br>
-<p>    <script></p>
+<p>default-src 'self';</p>
 <br>
-<p>        alert('This will NOT execute');  // Blocked by CSP</p>
+<p>script-src 'self';</p>
 <br>
-<p>    </script></p>
+<p>report-uri /csp-violation-report;</p>
 <br>
+<p>report-to csp-endpoint;</p>
 <br>
+<p>{</p>
 <br>
+<p>"csp-report": {</p>
 <br>
-<p>Hash-Based CSP   </p>
-<p>For static inline scripts, use a hash of the script content instead of a nonce.   </p>
+<p>"document-uri": "https://example.com/page",</p>
 <br>
+<p>"referrer": "",</p>
 <br>
+<p>"blocked-uri": "https://evil.com/script.js",</p>
 <br>
-<p>    import hashlib</p>
+<p>"violated-directive": "script-src 'self'",</p>
 <br>
-<p>    import base64</p>
+<p>"effective-directive": "script-src",</p>
 <br>
+<p>"original-policy": "default-src 'self'; script-src 'self'",</p>
 <br>
+<p>"source-file": "https://example.com/page",</p>
 <br>
-<p>    def generate_script_hash(script_content):</p>
+<p>"line-number": 42,</p>
 <br>
-<p>        hash_bytes = hashlib.sha256(script_content.encode()).digest()</p>
+<p>"column-number": 10</p>
 <br>
-<p>        hash_b64 = base64.b64encode(hash_bytes).decode()</p>
+<p>}</p>
 <br>
-<p>        return f"'sha256-{hash_b64}'"</p>
+<p>}</p>
 <br>
+<h1>Flask CSP report collector</h1>
 <br>
+<p>@app.route('/csp-violation-report', methods=['POST'])</p>
 <br>
-<p>    # Generate once, add to CSP</p>
+<p>def csp_report():</p>
 <br>
-<p>    script = "document.getElementById('app').innerHTML = '<p>Hello</p>';"</p>
+<p>report = request.get_json(force=True)</p>
 <br>
-<p>    script_hash = generate_script_hash(script)</p>
+<p>blocked = report['csp-report']['blocked-uri']</p>
 <br>
+<p>directive = report['csp-report']['violated-directive']</p>
 <br>
+<p>page = report['csp-report']['document-uri']</p>
 <br>
-<p>    # CSP: script-src 'sha256-abc123...'</p>
+<h1>Log to security monitoring</h1>
 <br>
+<p>security_logger.warning(</p>
 <br>
+<p>f"CSP violation on {page}: {directive} blocked {blocked}"</p>
 <br>
+<p>)</p>
 <br>
+<h1>Alert if critical pattern</h1>
 <br>
+<p>if 'exfiltration' in blocked.lower():</p>
 <br>
+<p>security_logger.critical(f"Potential data exfiltration: {blocked}")</p>
 <br>
-<p>    Content-Security-Policy: </p>
+<p>return '', 204</p>
 <br>
-<p>        script-src 'sha256-abc123def456...';</p>
+<p>Strict CSP Migration </p>
 <br>
-<p>        object-src 'none';</p>
+<p>Migrating from allowlist CSP to strict CSP provides better security. </p>
 <br>
+<h1>Allowlist CSP (vulnerable to CDN-based bypass)</h1>
 <br>
+<p>Content-Security-Policy: </p>
 <br>
+<p>script-src 'self' https://ajax.googleapis.com https://cdnjs.cloudflare.com;</p>
 <br>
-<p>CSP Reporting   </p>
-<p>CSP violations can be reported to an endpoint for monitoring and debugging.   </p>
+<h1>Strict CSP (nonce-based, resistant to bypass)</h1>
 <br>
+<p>Content-Security-Policy: </p>
 <br>
+<p>script-src 'nonce-random123' 'strict-dynamic' https: 'unsafe-inline';</p>
 <br>
-<p>    Content-Security-Policy: </p>
+<p>object-src 'none';</p>
 <br>
-<p>        default-src 'self';</p>
+<p>base-uri 'none';</p>
 <br>
-<p>        script-src 'self';</p>
+<p>The `'strict-dynamic'` keyword propagates trust from nonced scripts to their dynamically loaded children, enabling modern SPA frameworks while maintaining security. </p>
 <br>
-<p>        report-uri /csp-violation-report;</p>
+<p>Deployment Strategy </p>
 <br>
-<p>        report-to csp-endpoint;</p>
+<h1>Step 1: Deploy in report-only mode</h1>
 <br>
+<p>Content-Security-Policy-Report-Only: </p>
 <br>
+<p>default-src 'self';</p>
 <br>
+<p>script-src 'nonce-abc123';</p>
 <br>
+<p>report-uri /csp-reports;</p>
 <br>
+<h1>Step 2: Monitor reports for 2-4 weeks</h1>
 <br>
+<h1>Step 3: Fix violations identified in reports</h1>
 <br>
-<p>    {</p>
+<h1>Step 4: Switch to enforcement mode</h1>
 <br>
-<p>        "csp-report": {</p>
+<p>Content-Security-Policy:</p>
 <br>
-<p>            "document-uri": "https://example.com/page",</p>
+<p>default-src 'self';</p>
 <br>
-<p>            "referrer": "",</p>
+<p>script-src 'nonce-abc123';</p>
 <br>
-<p>            "blocked-uri": "https://evil.com/script.js",</p>
+<p>report-uri /csp-reports;</p>
 <br>
-<p>            "violated-directive": "script-src 'self'",</p>
+<h1>Step 5: Gradually remove report-uri when confident</h1>
 <br>
-<p>            "effective-directive": "script-src",</p>
+<p>Conclusion </p>
 <br>
-<p>            "original-policy": "default-src 'self'; script-src 'self'",</p>
-<br>
-<p>            "source-file": "https://example.com/page",</p>
-<br>
-<p>            "line-number": 42,</p>
-<br>
-<p>            "column-number": 10</p>
-<br>
-<p>        }</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>    # Flask CSP report collector</p>
-<br>
-<p>    @app.route('/csp-violation-report', methods=['POST'])</p>
-<br>
-<p>    def csp_report():</p>
-<br>
-<p>        report = request.get_json(force=True)</p>
-<br>
-<br>
-<br>
-<p>        blocked = report['csp-report']['blocked-uri']</p>
-<br>
-<p>        directive = report['csp-report']['violated-directive']</p>
-<br>
-<p>        page = report['csp-report']['document-uri']</p>
-<br>
-<br>
-<br>
-<p>        # Log to security monitoring</p>
-<br>
-<p>        security_logger.warning(</p>
-<br>
-<p>            f"CSP violation on {page}: {directive} blocked {blocked}"</p>
-<br>
-<p>        )</p>
-<br>
-<br>
-<br>
-<p>        # Alert if critical pattern</p>
-<br>
-<p>        if 'exfiltration' in blocked.lower():</p>
-<br>
-<p>            security_logger.critical(f"Potential data exfiltration: {blocked}")</p>
-<br>
-<br>
-<br>
-<p>        return '', 204</p>
-<br>
-<br>
-<br>
-<br>
-<p>Strict CSP Migration   </p>
-<p>Migrating from allowlist CSP to strict CSP provides better security.   </p>
-<br>
-<br>
-<br>
-<p>    # Allowlist CSP (vulnerable to CDN-based bypass)</p>
-<br>
-<p>    Content-Security-Policy: </p>
-<br>
-<p>        script-src 'self' https://ajax.googleapis.com https://cdnjs.cloudflare.com;</p>
-<br>
-<br>
-<br>
-<p>    # Strict CSP (nonce-based, resistant to bypass)</p>
-<br>
-<p>    Content-Security-Policy: </p>
-<br>
-<p>        script-src 'nonce-random123' 'strict-dynamic' https: 'unsafe-inline';</p>
-<br>
-<p>        object-src 'none';</p>
-<br>
-<p>        base-uri 'none';</p>
-<br>
-<br>
-<br>
-<br>
-<p>The `'strict-dynamic'` keyword propagates trust from nonced scripts to their dynamically loaded children, enabling modern SPA frameworks while maintaining security.   </p>
-<p>Deployment Strategy   </p>
-<br>
-<br>
-<br>
-<p>    # Step 1: Deploy in report-only mode</p>
-<br>
-<p>    Content-Security-Policy-Report-Only: </p>
-<br>
-<p>        default-src 'self';</p>
-<br>
-<p>        script-src 'nonce-abc123';</p>
-<br>
-<p>        report-uri /csp-reports;</p>
-<br>
-<br>
-<br>
-<p>    # Step 2: Monitor reports for 2-4 weeks</p>
-<br>
-<p>    # Step 3: Fix violations identified in reports</p>
-<br>
-<p>    # Step 4: Switch to enforcement mode</p>
-<br>
-<p>    Content-Security-Policy:</p>
-<br>
-<p>        default-src 'self';</p>
-<br>
-<p>        script-src 'nonce-abc123';</p>
-<br>
-<p>        report-uri /csp-reports;</p>
-<br>
-<br>
-<br>
-<p>    # Step 5: Gradually remove report-uri when confident</p>
-<br>
-<br>
-<br>
-<br>
-<p>Conclusion   </p>
 <p>CSP is one of the most powerful defense-in-depth mechanisms against XSS. Use nonce-based strict CSP rather than allowlist-based policies, deploy in report-only mode initially to identify violations, always set `object-src 'none'` and `base-uri 'self'` as hardening measures, and monitor reports continuously for policy violations and potential attacks.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

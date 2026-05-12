@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-strategies.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Testing Strategies for AI Applications">
     <meta name="twitter:description" content="Implement robust AI testing with evaluation datasets, regression testing, A/B evaluation, hallucination detection, prompt testing, and performance benchmarking.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-strategies.png">
     <title>Testing Strategies for AI Applications — SourceHub</title>
     <meta name="description" content="Implement robust AI testing with evaluation datasets, regression testing, A/B evaluation, hallucination detection, prompt testing, and performance benchmarking.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Testing Strategies for AI Applications",
       "description": "Implement robust AI testing with evaluation datasets, regression testing, A/B evaluation, hallucination detection, prompt testing, and performance benchmarking.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-strategies.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "3303",
+      "wordCount": "3139",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,36 +74,22 @@
         <span class="tag-cat">Machine Learning</span></div>
       <h1 class="article-title">Testing Strategies for AI Applications</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-strategies.png" alt="Testing Strategies for AI Applications" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Testing Strategies for AI Applications</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Testing AI applications differs fundamentally from testing deterministic software. Model outputs are probabilistic, edge cases are infinite, and a passing unit test does not guarantee correct behavior in production. A comprehensive AI testing strategy combines traditional software testing with AI-specific evaluation methodologies to catch regressions, hallucinations, and performance degradations before they reach users.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Evaluation Datasets</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Curate high-quality evaluation datasets that reflect real-world usage:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from dataclasses import dataclass</p>
 <br>
 <p>    from typing import List, Callable</p>
 <br>
 <p>    import json</p>
-<br>
-<br>
 <br>
 <p>    @dataclass</p>
 <br>
@@ -125,8 +111,6 @@
 <br>
 <p>        criteria: List[Callable[[str], bool]]</p>
 <br>
-<br>
-<br>
 <p>    class EvalDataset:</p>
 <br>
 <p>        def __init__(self, name: str):</p>
@@ -134,8 +118,6 @@
 <p>            self.name = name</p>
 <br>
 <p>            self.test_cases: List[TestCase] = []</p>
-<br>
-<br>
 <br>
 <p>        def add_golden_set(self, path: str):</p>
 <br>
@@ -171,8 +153,6 @@
 <br>
 <p>                ))</p>
 <br>
-<br>
-<br>
 <p>        def add_adversarial(self, path: str):</p>
 <br>
 <p>            """Load adversarial test cases (edge cases, jailbreaks)."""</p>
@@ -207,21 +187,9 @@
 <br>
 <p>                ))</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Regression Testing</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Automated regression testing catches model behavior changes:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class ModelRegressionTest:</p>
 <br>
@@ -230,8 +198,6 @@
 <p>            self.dataset = eval_dataset</p>
 <br>
 <p>            self.results_history: List[dict] = []</p>
-<br>
-<br>
 <br>
 <p>        async def run_regression_suite(</p>
 <br>
@@ -261,15 +227,11 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
 <p>            for test_case in self.dataset.test_cases:</p>
 <br>
 <p>                try:</p>
 <br>
 <p>                    output = await self._invoke_model(model_name, test_case.input)</p>
-<br>
-<br>
 <br>
 <p>                    # Evaluate against all criteria</p>
 <br>
@@ -278,8 +240,6 @@
 <p>                        criterion(output) for criterion in test_case.criteria</p>
 <br>
 <p>                    )</p>
-<br>
-<br>
 <br>
 <p>                    if passed:</p>
 <br>
@@ -315,11 +275,7 @@
 <br>
 <p>                    })</p>
 <br>
-<br>
-<br>
 <p>            results["score"] = results["passed"] / results["total"]</p>
-<br>
-<br>
 <br>
 <p>            # Compare with previous run</p>
 <br>
@@ -331,11 +287,7 @@
 <br>
 <p>                results["score_delta"] = score_delta</p>
 <br>
-<br>
-<br>
 <p>            return results</p>
-<br>
-<br>
 <br>
 <p>        def fail_pipeline_if_regression(self, results: dict):</p>
 <br>
@@ -355,29 +307,15 @@
 <br>
 <p>                )</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  A/B Evaluation</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Compare model versions side by side with structured evaluation:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class ABEvaluation:</p>
 <br>
 <p>        def __init__(self, judge_model: str = "claude-opus-4-20260512"):</p>
 <br>
 <p>            self.judge = judge_model</p>
-<br>
-<br>
 <br>
 <p>        async def evaluate_pair(</p>
 <br>
@@ -399,29 +337,19 @@
 <br>
 <p>    Compare these two AI responses to the same prompt.</p>
 <br>
-<br>
-<br>
 <p>    Prompt: "{prompt}"</p>
-<br>
-<br>
 <br>
 <p>    Response A: "{output_a}"</p>
 <br>
 <p>    Response B: "{output_b}"</p>
 <br>
-<br>
-<br>
 <p>    Evaluate on these criteria: {', '.join(criteria)}</p>
-<br>
-<br>
 <br>
 <p>    For each criterion, state which response is better (A, B, or tie)</p>
 <br>
 <p>    and provide a brief justification.</p>
 <br>
 <p>    """</p>
-<br>
-<br>
 <br>
 <p>            response = client.messages.create(</p>
 <br>
@@ -433,11 +361,7 @@
 <br>
 <p>            )</p>
 <br>
-<br>
-<br>
 <p>            return self._parse_evaluation(response.content[0].text)</p>
-<br>
-<br>
 <br>
 <p>        async def batch_evaluate(</p>
 <br>
@@ -455,15 +379,11 @@
 <br>
 <p>            results = {"model_a_wins": 0, "model_b_wins": 0, "ties": 0}</p>
 <br>
-<br>
-<br>
 <p>            for prompt in prompts:</p>
 <br>
 <p>                output_a = await self._invoke(model_a, prompt)</p>
 <br>
 <p>                output_b = await self._invoke(model_b, prompt)</p>
-<br>
-<br>
 <br>
 <p>                evaluation = await self.evaluate_pair(</p>
 <br>
@@ -471,15 +391,11 @@
 <br>
 <p>                )</p>
 <br>
-<br>
-<br>
 <p>                # Aggregate across criteria</p>
 <br>
 <p>                winner = evaluation["winner"]</p>
 <br>
 <p>                results[f"{winner}_wins"] += 1</p>
-<br>
-<br>
 <br>
 <p>            results["total"] = len(prompts)</p>
 <br>
@@ -487,33 +403,17 @@
 <br>
 <p>            results["b_win_rate"] = results["model_b_wins"] / results["total"]</p>
 <br>
-<br>
-<br>
 <p>            return results</p>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <h2>  Hallucination Detection</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Automated hallucination checks verify factual accuracy:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class HallucinationDetector:</p>
 <br>
 <p>        def __init__(self, knowledge_base: Callable):</p>
 <br>
 <p>            self.kb = knowledge_base</p>
-<br>
-<br>
 <br>
 <p>        async def check_factual_claims(self, output: str) -> List[dict]:</p>
 <br>
@@ -523,8 +423,6 @@
 <br>
 <p>            claims = await self._extract_claims(output)</p>
 <br>
-<br>
-<br>
 <p>            verified_claims = []</p>
 <br>
 <p>            for claim in claims:</p>
@@ -532,8 +430,6 @@
 <p>                # 2. Search knowledge base</p>
 <br>
 <p>                evidence = await self.kb.search(claim["text"])</p>
-<br>
-<br>
 <br>
 <p>                # 3. Verify claim against evidence</p>
 <br>
@@ -546,8 +442,6 @@
 <p>                    claim["context"],</p>
 <br>
 <p>                )</p>
-<br>
-<br>
 <br>
 <p>                verified_claims.append({</p>
 <br>
@@ -563,11 +457,7 @@
 <br>
 <p>                })</p>
 <br>
-<br>
-<br>
 <p>            return verified_claims</p>
-<br>
-<br>
 <br>
 <p>        async def _verify_claim(</p>
 <br>
@@ -589,8 +479,6 @@
 <br>
 <p>    Evidence: {' '.join(evidence[:3])}</p>
 <br>
-<br>
-<br>
 <p>    Is this claim supported by the evidence?</p>
 <br>
 <p>    Respond with JSON:</p>
@@ -602,8 +490,6 @@
 <p>            response = await self._llm_call(prompt)</p>
 <br>
 <p>            return json.loads(response)</p>
-<br>
-<br>
 <br>
 <p>        def compute_hallucination_rate(</p>
 <br>
@@ -621,29 +507,15 @@
 <br>
 <p>            return unsupported / total if total > 0 else 0.0</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Prompt Testing</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Version-control prompts with structured testing:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class PromptRegistry:</p>
 <br>
 <p>        def __init__(self):</p>
 <br>
 <p>            self.prompts = {}</p>
-<br>
-<br>
 <br>
 <p>        def register(</p>
 <br>
@@ -671,8 +543,6 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
 <p>        async def test_prompt(</p>
 <br>
 <p>            self, name: str, test_cases: List[dict]</p>
@@ -683,8 +553,6 @@
 <br>
 <p>            results = []</p>
 <br>
-<br>
-<br>
 <p>            for case in test_cases:</p>
 <br>
 <p>                # Render template with test inputs</p>
@@ -693,8 +561,6 @@
 <br>
 <p>                output = await self._invoke(rendered)</p>
 <br>
-<br>
-<br>
 <p>                # Run tests</p>
 <br>
 <p>                test_results = [</p>
@@ -702,8 +568,6 @@
 <p>                    test(output) for test in prompt["tests"]</p>
 <br>
 <p>                ]</p>
-<br>
-<br>
 <br>
 <p>                results.append({</p>
 <br>
@@ -717,8 +581,6 @@
 <br>
 <p>                })</p>
 <br>
-<br>
-<br>
 <p>            return {</p>
 <br>
 <p>                "prompt": name,</p>
@@ -731,21 +593,9 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Performance Testing</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Benchmark latency, throughput, and cost across model versions:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class AIPerformanceTest:</p>
 <br>
@@ -765,13 +615,9 @@
 <br>
 <p>            import asyncio</p>
 <br>
-<br>
-<br>
 <p>            semaphore = asyncio.Semaphore(concurrency)</p>
 <br>
 <p>            latencies = []</p>
-<br>
-<br>
 <br>
 <p>            async def single_request():</p>
 <br>
@@ -783,13 +629,9 @@
 <br>
 <p>                    latencies.append(time.monotonic() - start)</p>
 <br>
-<br>
-<br>
 <p>            tasks = [single_request() for _ in range(requests)]</p>
 <br>
 <p>            await asyncio.gather(*tasks)</p>
-<br>
-<br>
 <br>
 <p>            latencies.sort()</p>
 <br>
@@ -810,11 +652,6 @@
 <p>                "total_cost": self._calculate_cost(model, requests),</p>
 <br>
 <p>            }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>A mature AI testing pipeline runs golden set regression on every PR, A/B evaluations before model upgrades, hallucination detection on every production response, and performance benchmarks weekly. No single metric captures model quality; combine automated tests with human evaluation for production releases.</p></div>
     </article>

@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/query-performance-tuning.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Query Performance Tuning Tools">
     <meta name="twitter:description" content="Master query performance tuning with EXPLAIN ANALYZE, pg_stat_statements, slow query logs, and database profiling tools.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/query-performance-tuning.png">
     <title>Query Performance Tuning Tools — SourceHub</title>
     <meta name="description" content="Master query performance tuning with EXPLAIN ANALYZE, pg_stat_statements, slow query logs, and database profiling tools.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Query Performance Tuning Tools",
       "description": "Master query performance tuning with EXPLAIN ANALYZE, pg_stat_statements, slow query logs, and database profiling tools.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/query-performance-tuning.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "2233",
+      "wordCount": "2146",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,14 +74,13 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Query Performance Tuning Tools</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/query-performance-tuning.png" alt="Query Performance Tuning Tools" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Query Performance Tuning Tools</h1>
 <br>
 <p>The Performance Tuning Process   </p>
 <p>Database performance tuning is a systematic process of identifying slow queries, understanding why they are slow, and making targeted improvements. It is not about guessing — every change should be informed by data from monitoring and profiling tools.   </p>
 <p>Step 1: Identify Slow Queries   </p>
 <p>PostgreSQL Slow Query Log   </p>
-<br>
-<br>
 <br>
 <p>    # postgresql.conf</p>
 <br>
@@ -94,12 +93,6 @@
 <p>    log_checkpoints = on</p>
 <br>
 <p>    log_lock_waits = on</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    -- Query log directly from the database</p>
 <br>
@@ -125,12 +118,7 @@
 <br>
 <p>    LIMIT 20;</p>
 <br>
-<br>
-<br>
-<br>
 <p>MySQL Slow Query Log   </p>
-<br>
-<br>
 <br>
 <p>    # my.cnf</p>
 <br>
@@ -142,17 +130,9 @@
 <br>
 <p>    log_queries_not_using_indexes = 1</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # Analyze slow query log</p>
 <br>
 <p>    pt-query-digest /var/log/mysql/slow.log</p>
-<br>
-<br>
 <br>
 <p>    # Output includes:</p>
 <br>
@@ -162,13 +142,8 @@
 <br>
 <p>    # - Query patterns and response time distribution</p>
 <br>
-<br>
-<br>
-<br>
 <p>Step 2: Analyze Query Plans   </p>
 <p>EXPLAIN ANALYZE   </p>
-<br>
-<br>
 <br>
 <p>    EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON)</p>
 <br>
@@ -194,14 +169,9 @@
 <br>
 <p>    LIMIT 50;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Key Metrics to Analyze   </p>
 <p>| Metric | What It Tells You | |--------|-------------------| | `actual time` | Real execution time (first row, all rows) | | `rows` vs `rows est` | Accuracy of planner estimates (off by 10x+ needs ANALYZE) | | `buffers` | How much data was read (shared hit=from cache, read=from disk) | | `Seq Scan` | Full table scan (may need index) | | `Sort Method` | `quicksort` (memory) vs `external merge` (disk) | | `loops` | How many times a node executed (high loops on Nested Loop = problem) |   </p>
 <p>Example Analysis   </p>
-<br>
-<br>
 <br>
 <p>    -- Problematic query</p>
 <br>
@@ -215,11 +185,7 @@
 <br>
 <p>    ORDER BY created_at DESC;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Output:</p>
-<br>
 <br>
 <p>    Sort  (cost=8921.4..9123.5 rows=80842 width=72)</p>
 <br>
@@ -231,46 +197,29 @@
 <br>
 <p>            Filter: (status = 'pending')</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Diagnosis**: Sequential scan on 80K rows, sort spilling to disk.   </p>
 <p>**Fix**: Add a composite index:</p>
-<br>
 <br>
 <p>    CREATE INDEX idx_orders_status_created</p>
 <br>
 <p>    ON orders(status, created_at DESC);</p>
 <br>
-<br>
-<br>
-<br>
 <p>After fix:</p>
-<br>
 <br>
 <p>    Index Only Scan using idx_orders_status_created  (cost=0.29..341.2 rows=80842 width=72)</p>
 <br>
 <p>      Index Cond: (status = 'pending')</p>
 <br>
-<br>
-<br>
-<br>
 <p>Step 3: Database Profiling Tools   </p>
 <p>pg_stat_statements (PostgreSQL)   </p>
-<br>
-<br>
 <br>
 <p>    -- Install extension</p>
 <br>
 <p>    CREATE EXTENSION pg_stat_statements;</p>
 <br>
-<br>
-<br>
 <p>    -- Reset statistics</p>
 <br>
 <p>    SELECT pg_stat_statements_reset();</p>
-<br>
-<br>
 <br>
 <p>    -- Find queries with highest total time</p>
 <br>
@@ -296,8 +245,6 @@
 <br>
 <p>    LIMIT 10;</p>
 <br>
-<br>
-<br>
 <p>    -- Find queries reading the most data</p>
 <br>
 <p>    SELECT</p>
@@ -318,18 +265,11 @@
 <br>
 <p>    LIMIT 10;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Performance Schema (MySQL)   </p>
-<br>
-<br>
 <br>
 <p>    -- Enable performance schema</p>
 <br>
 <p>    -- my.cnf: performance_schema=ON</p>
-<br>
-<br>
 <br>
 <p>    -- Find queries with full table scans</p>
 <br>
@@ -351,8 +291,6 @@
 <br>
 <p>    LIMIT 20;</p>
 <br>
-<br>
-<br>
 <p>    -- Find queries with temporary tables</p>
 <br>
 <p>    SELECT</p>
@@ -371,12 +309,7 @@
 <br>
 <p>    LIMIT 10;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Step 4: Lock Monitoring   </p>
-<br>
-<br>
 <br>
 <p>    -- PostgreSQL: Blocked queries</p>
 <br>
@@ -414,8 +347,6 @@
 <br>
 <p>    WHERE NOT blocked_locks.granted;</p>
 <br>
-<br>
-<br>
 <p>    -- Check for long-running transactions</p>
 <br>
 <p>    SELECT</p>
@@ -440,12 +371,7 @@
 <br>
 <p>    ORDER BY query_duration DESC;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Step 5: Index Usage Analysis   </p>
-<br>
-<br>
 <br>
 <p>    -- PostgreSQL: Index usage statistics</p>
 <br>
@@ -471,8 +397,6 @@
 <br>
 <p>    LIMIT 20;</p>
 <br>
-<br>
-<br>
 <p>    -- Find unused indexes</p>
 <br>
 <p>    SELECT</p>
@@ -493,19 +417,12 @@
 <br>
 <p>    ORDER BY pg_relation_size(indexrelid) DESC;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Automated Tuning Tools   </p>
 <p>| Tool | Database | Features | |------|----------|----------| | pgBadger | PostgreSQL | Log analysis with visual reports | | pgbadger | PostgreSQL | Query distribution, temp files, locks | | pg_stat_monitor | PostgreSQL | Enhanced pg_stat_statements with query groups | | MySQLTuner | MySQL | Configuration recommendations | | pt-query-digest | MySQL | Query analysis and pattern matching | | mongostat | MongoDB | Real-time MongoDB metrics |   </p>
-<br>
-<br>
 <br>
 <p>    # Generate a visual report with pgBadger</p>
 <br>
 <p>    pgbadger /var/log/postgresql/postgresql.log -o report.html</p>
-<br>
-<br>
 <br>
 <p>    # Analyze the report for:</p>
 <br>
@@ -516,9 +433,6 @@
 <p>    # - Lock wait events</p>
 <br>
 <p>    # - Checkpoint frequency</p>
-<br>
-<br>
-<br>
 <br>
 <p>Performance Tuning Workflow   </p>
 <br>

@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/microservice-security.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Microservice Security">
     <meta name="twitter:description" content="Comprehensive guide to microservice security covering service mesh mTLS, API gateways, secret distribution, and observability for distributed systems.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/microservice-security.png">
     <title>Microservice Security — SourceHub</title>
     <meta name="description" content="Comprehensive guide to microservice security covering service mesh mTLS, API gateways, secret distribution, and observability for distributed systems.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Microservice Security",
       "description": "Comprehensive guide to microservice security covering service mesh mTLS, API gateways, secret distribution, and observability for distributed systems.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/microservice-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2293",
+      "wordCount": "2213",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Microservice Security</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/microservice-security.png" alt="Microservice Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Microservice Security</h1>
 <br>
 <p>Introduction   </p>
@@ -82,8 +83,6 @@
 <p>Service Mesh mTLS   </p>
 <p>A service mesh provides a dedicated infrastructure layer for handling service-to-service communication. It transparently encrypts traffic between services using mutual TLS (mTLS).   </p>
 <p>Istio mTLS Configuration   </p>
-<br>
-<br>
 <br>
 <p>    # Enable mTLS across the mesh</p>
 <br>
@@ -102,12 +101,6 @@
 <p>      mtls:</p>
 <br>
 <p>        mode: STRICT  # Reject plain-text traffic</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Per-namespace mTLS policy</p>
 <br>
@@ -138,12 +131,6 @@
 <p>        8080:</p>
 <br>
 <p>          mode: DISABLE  # Allow plaintext for health checks only</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Authorization policy for service-to-service access</p>
 <br>
@@ -183,12 +170,7 @@
 <br>
 <p>                paths: ["/api/v1/charges"]</p>
 <br>
-<br>
-<br>
-<br>
 <p>Envoy Sidecar Configuration   </p>
-<br>
-<br>
 <br>
 <p>    # Envoy TLS configuration (used under the hood by Istio)</p>
 <br>
@@ -254,13 +236,8 @@
 <br>
 <p>                      trusted_ca: { filename: "/etc/certs/ca.pem" }</p>
 <br>
-<br>
-<br>
-<br>
 <p>API Gateway Security   </p>
 <p>The API gateway is the ingress point for external traffic and performs authentication, rate limiting, and request validation.   </p>
-<br>
-<br>
 <br>
 <p>    # Kong API Gateway security configuration</p>
 <br>
@@ -286,8 +263,6 @@
 <br>
 <p>            methods: [GET, POST]</p>
 <br>
-<br>
-<br>
 <p>        plugins:</p>
 <br>
 <p>          - name: oauth2</p>
@@ -300,8 +275,6 @@
 <br>
 <p>              token_expiration: 3600</p>
 <br>
-<br>
-<br>
 <p>          - name: rate-limiting</p>
 <br>
 <p>            config:</p>
@@ -312,8 +285,6 @@
 <br>
 <p>              policy: local</p>
 <br>
-<br>
-<br>
 <p>          - name: ip-restriction</p>
 <br>
 <p>            config:</p>
@@ -321,8 +292,6 @@
 <p>              allow:</p>
 <br>
 <p>                - 10.0.0.0/8</p>
-<br>
-<br>
 <br>
 <p>          - name: cors</p>
 <br>
@@ -334,13 +303,8 @@
 <br>
 <p>              headers: ["Authorization", "Content-Type"]</p>
 <br>
-<br>
-<br>
-<br>
 <p>Secret Distribution   </p>
 <p>Never store secrets in code or configuration files. Use a dedicated secret management system.   </p>
-<br>
-<br>
 <br>
 <p>    # Kubernetes External Secrets Operator</p>
 <br>
@@ -386,17 +350,9 @@
 <br>
 <p>            property: password</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # HashiCorp Vault integration</p>
 <br>
 <p>    import hvac</p>
-<br>
-<br>
 <br>
 <p>    class VaultSecretManager:</p>
 <br>
@@ -409,8 +365,6 @@
 <p>                token=self._get_vault_token()</p>
 <br>
 <p>            )</p>
-<br>
-<br>
 <br>
 <p>        def get_database_credentials(self, role_name):</p>
 <br>
@@ -432,8 +386,6 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
 <p>        def rotate_secret(self, path):</p>
 <br>
 <p>            """Force rotation of a static secret."""</p>
@@ -446,13 +398,8 @@
 <br>
 <p>            )</p>
 <br>
-<br>
-<br>
-<br>
 <p>Observability   </p>
 <p>Distributed tracing correlates requests across service boundaries, enabling security incident reconstruction.   </p>
-<br>
-<br>
 <br>
 <p>    from opentelemetry import trace</p>
 <br>
@@ -461,8 +408,6 @@
 <p>    from opentelemetry.sdk.trace import TracerProvider</p>
 <br>
 <p>    from opentelemetry.sdk.trace.export import BatchSpanProcessor</p>
-<br>
-<br>
 <br>
 <p>    # Initialize distributed tracing</p>
 <br>
@@ -474,11 +419,7 @@
 <br>
 <p>    trace.set_tracer_provider(provider)</p>
 <br>
-<br>
-<br>
 <p>    tracer = trace.get_tracer(__name__)</p>
-<br>
-<br>
 <br>
 <p>    def process_order(request):</p>
 <br>
@@ -488,15 +429,11 @@
 <br>
 <p>            span.set_attribute("user_id", request.user_id)</p>
 <br>
-<br>
-<br>
 <p>            # Add security-relevant attributes</p>
 <br>
 <p>            span.set_attribute("auth.method", "oauth2")</p>
 <br>
 <p>            span.set_attribute("ip_address", request.client_ip)</p>
-<br>
-<br>
 <br>
 <p>            # Call downstream service</p>
 <br>
@@ -506,12 +443,7 @@
 <br>
 <p>                result = payment_service.validate(request)</p>
 <br>
-<br>
-<br>
-<br>
 <p>Defense in Depth for Microservices   </p>
-<br>
-<br>
 <br>
 <p>    microservice_security_layers:</p>
 <br>
@@ -523,8 +455,6 @@
 <br>
 <p>        - api_gateway_authentication</p>
 <br>
-<br>
-<br>
 <p>      identity:</p>
 <br>
 <p>        - service_accounts_per_pod</p>
@@ -532,8 +462,6 @@
 <p>        - jwt_token_validation</p>
 <br>
 <p>        - oauth2_for_external_apis</p>
-<br>
-<br>
 <br>
 <p>      data:</p>
 <br>
@@ -543,8 +471,6 @@
 <br>
 <p>        - dynamic_secret_rotation</p>
 <br>
-<br>
-<br>
 <p>      runtime:</p>
 <br>
 <p>        - pod_security_policies</p>
@@ -553,8 +479,6 @@
 <br>
 <p>        - resource_limits</p>
 <br>
-<br>
-<br>
 <p>      observability:</p>
 <br>
 <p>        - distributed_tracing</p>
@@ -562,9 +486,6 @@
 <p>        - centralized_logging</p>
 <br>
 <p>        - anomaly_detection</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Microservice security requires shifting from perimeter-based defense to identity-based security. Use a service mesh for automatic mTLS between services, enforce authorization at the API gateway, distribute secrets through dedicated systems like Vault or External Secrets Operator, and implement distributed tracing for cross-service visibility. Each service should be treated as an untrusted external system — authenticate and authorize every request, regardless of source.</p></div>

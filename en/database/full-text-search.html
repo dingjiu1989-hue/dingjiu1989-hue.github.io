@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/full-text-search.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)">
     <meta name="twitter:description" content="Compare Elasticsearch, Meilisearch, and Typesense for full-text search capabilities, performance, ease of use, and deployment models.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/full-text-search.png">
     <title>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense) — SourceHub</title>
     <meta name="description" content="Compare Elasticsearch, Meilisearch, and Typesense for full-text search capabilities, performance, ease of use, and deployment models.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)",
       "description": "Compare Elasticsearch, Meilisearch, and Typesense for full-text search capabilities, performance, ease of use, and deployment models.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/full-text-search.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "2127",
+      "wordCount": "2058",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,6 +74,7 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/full-text-search.png" alt="Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h1>
 <br>
 <p>The Need for Full-Text Search   </p>
@@ -81,13 +82,9 @@
 <p>How Search Engines Work   </p>
 <p>An inverted index maps terms to the documents containing them:   </p>
 <br>
-<br>
-<br>
 <p>    Document 1: "The quick brown fox"</p>
 <br>
 <p>    Document 2: "The lazy dog"</p>
-<br>
-<br>
 <br>
 <p>    Inverted Index:</p>
 <br>
@@ -103,16 +100,11 @@
 <br>
 <p>    "dog"   -> [Doc2]</p>
 <br>
-<br>
-<br>
-<br>
 <p>When searching for "brown fox," the engine finds documents containing both terms and ranks them by relevance.   </p>
 <p>Search Engine Comparison   </p>
 <p>| Feature | Elasticsearch | Meilisearch | Typesense | |---------|--------------|-------------|-----------| | Setup complexity | High | Low | Low | | Query language | Query DSL (JSON) | Simple search parameters | Simple API | | Relevance tuning | BM25, custom scripts | Built-in (good defaults) | Built-in (good defaults) | | Typo tolerance | Via fuzzy queries | Built-in (excellent) | Built-in (excellent) | | Faceted search | Excellent | Good | Good | | Geospatial search | Excellent | Limited | Built-in | | Scalability | Very high | Moderate | High | | Resource usage | High (Java JVM) | Low (Rust) | Low (C++) | | Managed service | Elastic Cloud | Meilisearch Cloud | Typesense Cloud |   </p>
 <p>Elasticsearch   </p>
 <p>Indexing Data   </p>
-<br>
-<br>
 <br>
 <p>    // Create index with mapping</p>
 <br>
@@ -174,8 +166,6 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
 <p>    // Index a document</p>
 <br>
 <p>    POST /articles/_doc/1</p>
@@ -196,12 +186,7 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Searching   </p>
-<br>
-<br>
 <br>
 <p>    // Full-text search with relevance</p>
 <br>
@@ -267,19 +252,9 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    from elasticsearch import Elasticsearch</p>
 <br>
-<br>
-<br>
 <p>    es = Elasticsearch(['https://localhost:9200'])</p>
-<br>
-<br>
 <br>
 <p>    results = es.search(</p>
 <br>
@@ -303,13 +278,9 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    for hit in results['hits']['hits']:</p>
 <br>
 <p>        print(f"{hit['_score']:.2f}: {hit['_source']['title']}")</p>
-<br>
-<br>
 <br>
 <p>    # Facet results</p>
 <br>
@@ -317,14 +288,9 @@
 <br>
 <p>        print(f"{bucket['key']}: {bucket['doc_count']} articles")</p>
 <br>
-<br>
-<br>
-<br>
 <p>Meilisearch   </p>
 <p>Meilisearch focuses on developer experience with sensible defaults and instant typo-tolerant search.   </p>
 <p>Setup   </p>
-<br>
-<br>
 <br>
 <p>    docker run -it --rm \</p>
 <br>
@@ -336,16 +302,9 @@
 <br>
 <p>        --master-key=MASTER_KEY</p>
 <br>
-<br>
-<br>
-<br>
 <p>Indexing and Search   </p>
 <br>
-<br>
-<br>
 <p>    const { MeiliSearch } = require('meilisearch');</p>
-<br>
-<br>
 <br>
 <p>    const client = new MeiliSearch({</p>
 <br>
@@ -354,8 +313,6 @@
 <p>        apiKey: 'MASTER_KEY',</p>
 <br>
 <p>    });</p>
-<br>
-<br>
 <br>
 <p>    // Index documents</p>
 <br>
@@ -379,8 +336,6 @@
 <br>
 <p>    ]);</p>
 <br>
-<br>
-<br>
 <p>    // Configure searchable attributes</p>
 <br>
 <p>    await index.updateSearchableAttributes(['title', 'content']);</p>
@@ -388,8 +343,6 @@
 <p>    await index.updateSortableAttributes(['views', 'published_at']);</p>
 <br>
 <p>    await index.updateFilterableAttributes(['tags', 'author']);</p>
-<br>
-<br>
 <br>
 <p>    // Search (typo tolerance built-in)</p>
 <br>
@@ -403,14 +356,9 @@
 <br>
 <p>    });</p>
 <br>
-<br>
-<br>
-<br>
 <p>Typesense   </p>
 <p>Typesense is a fast, typo-tolerant search engine written in C++.   </p>
 <p>Setup   </p>
-<br>
-<br>
 <br>
 <p>    # docker-compose.yml</p>
 <br>
@@ -436,16 +384,9 @@
 <br>
 <p>          - ./typesense-data:/data</p>
 <br>
-<br>
-<br>
-<br>
 <p>Indexing and Search   </p>
 <br>
-<br>
-<br>
 <p>    import typesense</p>
-<br>
-<br>
 <br>
 <p>    client = typesense.Client({</p>
 <br>
@@ -454,8 +395,6 @@
 <p>        'api_key': 'xyz',</p>
 <br>
 <p>    })</p>
-<br>
-<br>
 <br>
 <p>    # Create collection (schema)</p>
 <br>
@@ -481,8 +420,6 @@
 <br>
 <p>    })</p>
 <br>
-<br>
-<br>
 <p>    # Index documents</p>
 <br>
 <p>    client.collections['articles'].documents.create({</p>
@@ -501,8 +438,6 @@
 <br>
 <p>    })</p>
 <br>
-<br>
-<br>
 <p>    # Search</p>
 <br>
 <p>    results = client.collections['articles'].documents.search({</p>
@@ -520,9 +455,6 @@
 <p>        'per_page': 20</p>
 <br>
 <p>    })</p>
-<br>
-<br>
-<br>
 <br>
 <p>When to Use Which   </p>
 <p>| Scenario | Recommended | |----------|-------------| | Complex analytics with search | Elasticsearch | | Simple, fast search out of the box | Meilisearch | | Low-latency search on limited hardware | Typesense | | Log analysis and observability | Elasticsearch (ELK stack) | | E-commerce product search | Meilisearch or Typesense | | Geo-search and aggregations | Elasticsearch | | Typo-tolerant search for user-facing features | Meilisearch | | Large-scale (100M+ documents) | Elasticsearch |   </p>

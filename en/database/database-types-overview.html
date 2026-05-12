@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-types-overview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector">
     <meta name="twitter:description" content="Comprehensive overview of database types: relational, document, key-value, graph, time-series, and vector databases. Compare use cases and trade-offs.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-types-overview.png">
     <title>Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector — SourceHub</title>
     <meta name="description" content="Comprehensive overview of database types: relational, document, key-value, graph, time-series, and vector databases. Compare use cases and trade-offs.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector",
       "description": "Comprehensive overview of database types: relational, document, key-value, graph, time-series, and vector databases. Compare use cases and trade-offs.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-types-overview.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1737",
+      "wordCount": "1693",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-types-overview.png" alt="Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</h1>
 <br>
 <p>Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector   </p>
@@ -94,9 +95,6 @@
 <p>* Horizontal scaling is complex (sharding).</p>
 <p>* Rigid for highly varied, sparse data.</p>
 <br>
-<br>
-<br>
-<br>
 <p>    -- Typical relational model</p>
 <br>
 <p>    CREATE TABLE users (</p>
@@ -108,8 +106,6 @@
 <p>        created_at TIMESTAMPTZ DEFAULT NOW()</p>
 <br>
 <p>    );</p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE orders (</p>
 <br>
@@ -123,8 +119,6 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
 <p>    SELECT u.email, COUNT(o.id) AS order_count</p>
 <br>
 <p>    FROM users u</p>
@@ -132,9 +126,6 @@
 <p>    LEFT JOIN orders o ON o.user_id = u.id</p>
 <br>
 <p>    GROUP BY u.email;</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Best for**: Financial systems, ERP, CRM, any application where data integrity is paramount.   </p>
 <p>Document Databases (MongoDB, Couchbase)   </p>
@@ -151,9 +142,6 @@
 <p>* Limited join capabilities (`$lookup` is less performant than SQL JOINs).</p>
 <p>* Multi-document transactions are newer and slower than ACID RDBMS.</p>
 <p>* No enforced schema means application-level validation is essential.</p>
-<br>
-<br>
-<br>
 <br>
 <p>    // MongoDB document model</p>
 <br>
@@ -173,9 +161,6 @@
 <br>
 <p>    });</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Best for**: Content management, catalogs, rapid prototyping, applications with evolving schemas.   </p>
 <p>Key-Value Stores (Redis, DynamoDB, Riak)   </p>
 <p>Key-value stores are the simplest database type. They store values accessed by a unique key, optimized for high-throughput, low-latency lookups.   </p>
@@ -192,9 +177,6 @@
 <p>* Limited to simple data structures (without secondary indexes).</p>
 <p>* Application must manage data relationships.</p>
 <br>
-<br>
-<br>
-<br>
 <p>    SET user:42 '{"email": "alice@example.com", "name": "Alice"}'</p>
 <br>
 <p>    GET user:42</p>
@@ -202,9 +184,6 @@
 <p>    LPUSH recent_views:42 "product:100"</p>
 <br>
 <p>    ZADD leaderboard 1000 "player_alice"</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Best for**: Caching, session management, real-time counters, pub/sub, rate limiting.   </p>
 <p>Graph Databases (Neo4j, Amazon Neptune)   </p>
@@ -221,9 +200,6 @@
 <p>* Smaller ecosystem and fewer hosting options.</p>
 <p>* Requires learning specialized query languages (Cypher, SPARQL).</p>
 <br>
-<br>
-<br>
-<br>
 <p>    // Neo4j Cypher query</p>
 <br>
 <p>    MATCH (u:User {email: "alice@example.com"})-[:FRIENDS_WITH]->(f:User)</p>
@@ -231,9 +207,6 @@
 <p>    WHERE (f)-[:PURCHASED]->(:Product {category: "Electronics"})</p>
 <br>
 <p>    RETURN f.name</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Best for**: Social networks, recommendation engines, fraud detection, knowledge graphs.   </p>
 <p>Time-Series Databases (TimescaleDB, InfluxDB, ClickHouse)   </p>
@@ -250,9 +223,6 @@
 <p>* Less suitable for transactional workloads.</p>
 <p>* Joins and complex relationships are not a focus.</p>
 <p>* Query language varies widely (Flux vs SQL vs custom).</p>
-<br>
-<br>
-<br>
 <br>
 <p>    -- TimescaleDB (SQL-based time-series)</p>
 <br>
@@ -272,9 +242,6 @@
 <br>
 <p>    ORDER BY bucket;</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Best for**: IoT, monitoring, observability, financial tick data, analytics.   </p>
 <p>Vector Databases (pgvector, Pinecone, Milvus, Qdrant)   </p>
 <p>Vector databases store and search high-dimensional vectors (embeddings) using similarity metrics.   </p>
@@ -290,9 +257,6 @@
 <p>* Index build times can be significant for large datasets.</p>
 <p>* Requires vector embeddings from ML models.</p>
 <br>
-<br>
-<br>
-<br>
 <p>    -- pgvector (PostgreSQL extension)</p>
 <br>
 <p>    CREATE TABLE documents (</p>
@@ -305,11 +269,7 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX ON documents USING IVFFLAT (embedding vector_cosine_ops);</p>
-<br>
-<br>
 <br>
 <p>    SELECT content, 1 - (embedding <=> $1) AS similarity</p>
 <br>
@@ -318,9 +278,6 @@
 <p>    ORDER BY embedding <=> $1</p>
 <br>
 <p>    LIMIT 10;</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Best for**: Semantic search, RAG (retrieval-augmented generation), recommendation systems, image similarity.   </p>
 <p>Multi-Model Databases   </p>

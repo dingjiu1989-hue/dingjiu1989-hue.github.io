@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/clickjacking-protection.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Clickjacking Protection">
     <meta name="twitter:description" content="Complete guide to clickjacking defense covering X-Frame-Options, CSP frame-ancestors, framebusting techniques, and testing tools.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/clickjacking-protection.png">
     <title>Clickjacking Protection — SourceHub</title>
     <meta name="description" content="Complete guide to clickjacking defense covering X-Frame-Options, CSP frame-ancestors, framebusting techniques, and testing tools.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,15 +38,15 @@
       "@type": "Article",
       "headline": "Clickjacking Protection",
       "description": "Complete guide to clickjacking defense covering X-Frame-Options, CSP frame-ancestors, framebusting techniques, and testing tools.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/clickjacking-protection.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1750",
+      "wordCount": "1330",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/clickjacking-protection.html"},
-      "articleBody": "Clickjacking Protection Introduction Clickjacking, also known as a UI redress attack, tricks users into clicking on something different from what they perceive. An attacker embeds a target page in a transparent iframe overlaid on a decoy interface. When the user clicks a visible button, they actually interact with the hidden target page \u2014 potentially authorizing a transaction, changing settings, or granting permissions. How Clickjacking Works A clickjacking exploit involves three elements: iframe { position: absolute; top: 50px; left: 100px; opacity: 0.001; /* Nearly invisible */ z-index: 10; width: 500px; height: 500px; } .decoy-button { position: absolute; top: 200px; left: 150px; z-index: 1; } Click here for a free prize! The user sees a game or prize button but actually clicks the bank's transfer confirmation. With precise CSS positioning, the attacker makes the real button overlap the decoy. X-Frame-Options X-Frame-Options is a response header that controls whether a page can be displayed in an iframe. # Deny all framing add_header X-Frame-Options \"DENY\" always; # Allow only same-origin framing add_header X-Frame-Options \"SAMEORIGIN\" always; # Flask example: set X-Frame-Options from flask import Flask, make_response app = Flask(__name__) @app.after_request def set_frame_options(response): response.headers['X-Frame-Options'] = 'SAMEORIGIN' return response # For sensitive pages (banking, admin panels), use DENY @app.route('/admin/transfer') def admin_transfer(): response = make_response(render_template('transfer.html')) response.headers['X-Frame-Options'] = 'DENY' return response X-Frame-Options has three values: `DENY` (no framing ever), `SAMEORIGIN` (same-origin only), and `ALLOW-FROM` (deprecated, not supported in modern browsers). CSP frame-ancestors Content Security Policy's `frame-ancestors` directive supersedes X-Frame-Options with more granular control. It specifies which origins are allowed to embed the page. # Allow only same-origin add_header Content-Security-Policy \"frame-ancestors 'self'\" always; # Allow specific origins add_header Content-Security-Policy \"frame-ancestors 'self' https://trusted-app.example.com\" always; # Allow none (equivalent to DENY) add_header Content-Security-Policy \"frame-ancestors 'none'\" always; # Allow multiple specific origins add_header Content-Security-Policy \"frame-ancestors https://app1.example.com https://app2.example.com\" always; When both X-Frame-Options and CSP `frame-ancestors` are present, browsers honor the more restrictive policy. CSP `frame-ancestors` is preferred because it supports multiple origins. # Python/Flask CSP middleware from flask import Flask from flask_talisman import Talisman app = Flask(__name__) Talisman(app, content_security_policy={ 'frame-ancestors': [\"'self'\", \"https://dashboard.example.com\"] } ) Framebusting JavaScript Client-side framebusting detects if the page is loaded in an iframe and breaks out. However, JavaScript-based protection can be bypassed. // Basic framebuster if (top !== self) { top.location = self.location; } // Robust framebuster with null check if (top.location !== self.location) { // In some browsers, accessing top.location throws SecurityError try { top.location.href = self.location.href; } catch (e) { // If blocked by cross-origin policy, still possible to break out top.location = self.location; } } // Prevention of iframe-based clickjacking with style override body { display: none; } if (self === top) { document.getElementById('anti-clickjack').remove(); } else { top.location = self.location; } Framebusting limitations: * `sandbox` attribute on iframes can prevent `top.location` modification * `noopener` links bypass frame busters * Attackers can use `onbeforeunload` to prevent navigation Testing for Clickjacking Vulnerabilities # Test with curl curl -I https://target-website.com/admin | grep -i \"x-frame-options\\|content-security-policy\" # Check for frame-ancestors specifically curl -sI https://target-website.com | \\ grep -E 'X-Frame-Options|frame-ancestors' || \\ echo \"NO PROTECTION DETECTED\" # Python automated check python3 -c \" import requests urls = [ 'https://target.com/login', 'https://target.com/transfer', 'https://target.com/admin', ] for url in urls: resp = requests.get(url) xfo = resp.headers.get('X-Frame-Options', 'MISSING') csp = resp.headers.get('Content-Security-Policy', '') fa = 'frame-ancestors' in csp or 'frame-ancestors' not in csp if 'frame-ancestors' in csp: print(f'[PROTECTED] {url}: CSP frame-ancestors') elif xfo in ('DENY', 'SAMEORIGIN'): print(f'[PROTECTED] {url}: X-Frame-Options: {xfo}') else: print(f'[VULNERABLE] {url}: No framing protection') \" Comprehensive Protection Strategy # Nginx: full clickjacking protection server { # X-Frame-Options as fallback add_header X-Frame-Options \"SAMEORIGIN\" always; # CSP frame-ancestors as modern replacement add_header Content-Security-Policy \"frame-ancestors 'self'\" always; location /admin/ { # Stricter for sensitive areas add_header X-Frame-Options \"DENY\" always; add_header Content-Security-Policy \"frame-ancestors 'none'\" always; } location /api/ { # APIs should never be framed add_header X-Frame-Options \"DENY\" always; add_header Content-Security-Policy \"frame-ancestors 'none'\" always; } } Conclusion Clickjacking is one of the easiest vulnerabilities to prevent but remains surprisingly common. Set `X-Frame-Options: DENY` or `SAMEORIGIN` on every response, and use CSP `frame-ancestors` for fine-grained control. For the strongest protection, deploy both headers, and always test new pages before deployment."
+      "articleBody": "Clickjacking Protection Clickjacking Protection Introduction Clickjacking, also known as a UI redress attack, tricks users into clicking on something different from what they perceive. An attacker embeds a target page in a transparent iframe overlaid on a decoy interface. When the user clicks a visible button, they actually interact with the hidden target page \u2014 potentially authorizing a transaction, changing settings, or granting permissions. How Clickjacking Works A clickjacking exploit involves three elements: Click here for a free prize! The user sees a game or prize button but actually clicks the bank's transfer confirmation. With precise CSS positioning, the attacker makes the real button overlap the decoy. X-Frame-Options X-Frame-Options is a response header that controls whether a page can be displayed in an iframe. Deny all framing add_header X-Frame-Options \"DENY\" always; Allow only same-origin framing add_header X-Frame-Options \"SAMEORIGIN\" always; Flask example: set X-Frame-Options from flask import Flask, make_response app = Flask(__name__) @app.after_request def set_frame_options(response): response.headers['X-Frame-Options'] = 'SAMEORIGIN' return response For sensitive pages (banking, admin panels), use DENY @app.route('/admin/transfer') def admin_transfer(): response = make_response(render_template('transfer.html')) response.headers['X-Frame-Options'] = 'DENY' return response X-Frame-Options has three values: `DENY` (no framing ever), `SAMEORIGIN` (same-origin only), and `ALLOW-FROM` (deprecated, not supported in modern browsers). CSP frame-ancestors Content Security Policy's `frame-ancestors` directive supersedes X-Frame-Options with more granular control. It specifies which origins are allowed to embed the page. Allow only same-origin add_header Content-Security-Policy \"frame-ancestors 'self'\" always; Allow specific origins add_header Content-Security-Policy \"frame-ancestors 'self' https://trusted-app.example.com\" always; Allow none (equivalent to DENY) add_header Content-Security-Policy \"frame-ancestors 'none'\" always; Allow multiple specific origins add_header Content-Security-Policy \"frame-ancestors https://app1.example.com https://app2.example.com\" always; When both X-Frame-Options and CSP `frame-ancestors` are present, browsers honor the more restrictive policy. CSP `frame-ancestors` is preferred because it supports multiple origins. Python/Flask CSP middleware from flask import Flask from flask_talisman import Talisman app = Flask(__name__) Talisman(app, content_security_policy={ 'frame-ancestors': [\"'self'\", \"https://dashboard.example.com\"] } ) Framebusting JavaScript Client-side framebusting detects if the page is loaded in an iframe and breaks out. However, JavaScript-based protection can be bypassed. // Basic framebuster if (top !== self) { top.location = self.location; } // Robust framebuster with null check if (top.location !== self.location) { // In some browsers, accessing top.location throws SecurityError try { top.location.href = self.location.href; } catch (e) { // If blocked by cross-origin policy, still possible to break out top.location = self.location; } } // Prevention of iframe-based clickjacking with style override Framebusting limitations: * `sandbox` attribute on iframes can prevent `top.location` modification * `noopener` links bypass frame busters * Attackers can use `onbeforeunload` to prevent navigation Testing for Clickjacking Vulnerabilities Test with curl curl -I https://target-website.com/admin | grep -i \"x-frame-options\\|content-security-policy\" Check for frame-ancestors specifically curl -sI https://target-website.com | \\ grep -E 'X-Frame-Options|frame-ancestors' || \\ echo \"NO PROTECTION DETECTED\" Python automated check python3 -c \" import requests urls = [ 'https://target.com/login', 'https://target.com/transfer', 'https://target.com/admin', ] for url in urls: resp = requests.get(url) xfo = resp.headers.get('X-Frame-Options', 'MISSING') csp = resp.headers.get('Content-Security-Policy', '') fa = 'frame-ancestors' in csp or 'frame-ancestors' not in csp if 'frame-ancestors' in csp: print(f'[PROTECTED] {url}: CSP frame-ancestors') elif xfo in ('DENY', 'SAMEORIGIN'): print(f'[PROTECTED] {url}: X-Frame-Options: {xfo}') else: print(f'[VULNERABLE] {url}: No framing protection') \" Comprehensive Protection Strategy Nginx: full clickjacking protection server { X-Frame-Options as fallback add_header X-Frame-Options \"SAMEORIGIN\" always; CSP frame-ancestors as modern replacement add_header Content-Security-Policy \"frame-ancestors 'self'\" always; location /admin/ { Stricter for sensitive areas add_header X-Frame-Options \"DENY\" always; add_header Content-Security-Policy \"frame-ancestors 'none'\" always; } location /api/ { APIs should never be framed add_header X-Frame-Options \"DENY\" always; add_header Content-Security-Policy \"frame-ancestors 'none'\" always; } } Conclusion Clickjacking is one of the easiest vulnerabilities to prevent but remains surprisingly common. Set `X-Frame-Options: DENY` or `SAMEORIGIN` on every response, and use CSP `frame-ancestors` for fine-grained control. For the strongest protection, deploy both headers, and always test new pages before deployment."
     }
     </script>
     <script type="application/ld+json">
@@ -75,363 +75,237 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Clickjacking Protection</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/clickjacking-protection.png" alt="Clickjacking Protection" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Clickjacking Protection</h1>
 <br>
-<p>Introduction   </p>
-<p>Clickjacking, also known as a UI redress attack, tricks users into clicking on something different from what they perceive. An attacker embeds a target page in a transparent iframe overlaid on a decoy interface. When the user clicks a visible button, they actually interact with the hidden target page — potentially authorizing a transaction, changing settings, or granting permissions.   </p>
-<p>How Clickjacking Works   </p>
-<p>A clickjacking exploit involves three elements:   </p>
+<h1>Clickjacking Protection</h1>
 <br>
+<p>Introduction </p>
 <br>
+<p>Clickjacking, also known as a UI redress attack, tricks users into clicking on something different from what they perceive. An attacker embeds a target page in a transparent iframe overlaid on a decoy interface. When the user clicks a visible button, they actually interact with the hidden target page — potentially authorizing a transaction, changing settings, or granting permissions. </p>
 <br>
-<p>    <!-- Attacker's page: victim thinks they are playing a game --></p>
+<p>How Clickjacking Works </p>
 <br>
-<p>    <style></p>
+<p>A clickjacking exploit involves three elements: </p>
 <br>
-<p>      iframe {</p>
+<p>Click here for a free prize!</p>
 <br>
-<p>        position: absolute;</p>
+<p>The user sees a game or prize button but actually clicks the bank's transfer confirmation. With precise CSS positioning, the attacker makes the real button overlap the decoy. </p>
 <br>
-<p>        top: 50px;</p>
+<p>X-Frame-Options </p>
 <br>
-<p>        left: 100px;</p>
+<p>X-Frame-Options is a response header that controls whether a page can be displayed in an iframe. </p>
 <br>
-<p>        opacity: 0.001;  /* Nearly invisible */</p>
+<h1>Deny all framing</h1>
 <br>
-<p>        z-index: 10;</p>
+<p>add_header X-Frame-Options "DENY" always;</p>
 <br>
-<p>        width: 500px;</p>
+<h1>Allow only same-origin framing</h1>
 <br>
-<p>        height: 500px;</p>
+<p>add_header X-Frame-Options "SAMEORIGIN" always;</p>
 <br>
-<p>      }</p>
+<h1>Flask example: set X-Frame-Options</h1>
 <br>
-<p>      .decoy-button {</p>
+<p>from flask import Flask, make_response</p>
 <br>
-<p>        position: absolute;</p>
+<p>app = Flask(__name__)</p>
 <br>
-<p>        top: 200px;</p>
+<p>@app.after_request</p>
 <br>
-<p>        left: 150px;</p>
+<p>def set_frame_options(response):</p>
 <br>
-<p>        z-index: 1;</p>
+<p>response.headers['X-Frame-Options'] = 'SAMEORIGIN'</p>
 <br>
-<p>      }</p>
+<p>return response</p>
 <br>
-<p>    </style></p>
+<h1>For sensitive pages (banking, admin panels), use DENY</h1>
 <br>
+<p>@app.route('/admin/transfer')</p>
 <br>
+<p>def admin_transfer():</p>
 <br>
-<p>    <div class="decoy-button"></p>
+<p>response = make_response(render_template('transfer.html'))</p>
 <br>
-<p>      <button>Click here for a free prize!</button></p>
+<p>response.headers['X-Frame-Options'] = 'DENY'</p>
 <br>
-<p>    </div></p>
+<p>return response</p>
 <br>
+<p>X-Frame-Options has three values: `DENY` (no framing ever), `SAMEORIGIN` (same-origin only), and `ALLOW-FROM` (deprecated, not supported in modern browsers). </p>
 <br>
+<p>CSP frame-ancestors </p>
 <br>
-<p>    <iframe src="https://victim-bank.com/transfer?amount=1000&to=attacker"></p>
+<p>Content Security Policy's `frame-ancestors` directive supersedes X-Frame-Options with more granular control. It specifies which origins are allowed to embed the page. </p>
 <br>
-<p>    </iframe></p>
+<h1>Allow only same-origin</h1>
 <br>
+<p>add_header Content-Security-Policy "frame-ancestors 'self'" always;</p>
 <br>
+<h1>Allow specific origins</h1>
 <br>
+<p>add_header Content-Security-Policy "frame-ancestors 'self' https://trusted-app.example.com" always;</p>
 <br>
-<p>The user sees a game or prize button but actually clicks the bank's transfer confirmation. With precise CSS positioning, the attacker makes the real button overlap the decoy.   </p>
-<p>X-Frame-Options   </p>
-<p>X-Frame-Options is a response header that controls whether a page can be displayed in an iframe.   </p>
+<h1>Allow none (equivalent to DENY)</h1>
 <br>
+<p>add_header Content-Security-Policy "frame-ancestors 'none'" always;</p>
 <br>
+<h1>Allow multiple specific origins</h1>
 <br>
-<p>    # Deny all framing</p>
+<p>add_header Content-Security-Policy "frame-ancestors https://app1.example.com https://app2.example.com" always;</p>
 <br>
-<p>    add_header X-Frame-Options "DENY" always;</p>
+<p>When both X-Frame-Options and CSP `frame-ancestors` are present, browsers honor the more restrictive policy. CSP `frame-ancestors` is preferred because it supports multiple origins. </p>
 <br>
+<h1>Python/Flask CSP middleware</h1>
 <br>
+<p>from flask import Flask</p>
 <br>
-<p>    # Allow only same-origin framing</p>
+<p>from flask_talisman import Talisman</p>
 <br>
-<p>    add_header X-Frame-Options "SAMEORIGIN" always;</p>
+<p>app = Flask(__name__)</p>
 <br>
+<p>Talisman(app, </p>
 <br>
+<p>content_security_policy={</p>
 <br>
+<p>'frame-ancestors': ["'self'", "https://dashboard.example.com"]</p>
 <br>
+<p>}</p>
 <br>
+<p>)</p>
 <br>
+<p>Framebusting JavaScript </p>
 <br>
-<p>    # Flask example: set X-Frame-Options</p>
+<p>Client-side framebusting detects if the page is loaded in an iframe and breaks out. However, JavaScript-based protection can be bypassed. </p>
 <br>
-<p>    from flask import Flask, make_response</p>
+<p>// Basic framebuster</p>
 <br>
+<p>if (top !== self) {</p>
 <br>
+<p>top.location = self.location;</p>
 <br>
-<p>    app = Flask(__name__)</p>
+<p>}</p>
 <br>
+<p>// Robust framebuster with null check</p>
 <br>
+<p>if (top.location !== self.location) {</p>
 <br>
-<p>    @app.after_request</p>
+<p>// In some browsers, accessing top.location throws SecurityError</p>
 <br>
-<p>    def set_frame_options(response):</p>
+<p>try {</p>
 <br>
-<p>        response.headers['X-Frame-Options'] = 'SAMEORIGIN'</p>
+<p>top.location.href = self.location.href;</p>
 <br>
-<p>        return response</p>
+<p>} catch (e) {</p>
 <br>
+<p>// If blocked by cross-origin policy, still possible to break out</p>
 <br>
+<p>top.location = self.location;</p>
 <br>
-<p>    # For sensitive pages (banking, admin panels), use DENY</p>
+<p>}</p>
 <br>
-<p>    @app.route('/admin/transfer')</p>
+<p>}</p>
 <br>
-<p>    def admin_transfer():</p>
-<br>
-<p>        response = make_response(render_template('transfer.html'))</p>
-<br>
-<p>        response.headers['X-Frame-Options'] = 'DENY'</p>
-<br>
-<p>        return response</p>
-<br>
-<br>
-<br>
-<br>
-<p>X-Frame-Options has three values: `DENY` (no framing ever), `SAMEORIGIN` (same-origin only), and `ALLOW-FROM` (deprecated, not supported in modern browsers).   </p>
-<p>CSP frame-ancestors   </p>
-<p>Content Security Policy's `frame-ancestors` directive supersedes X-Frame-Options with more granular control. It specifies which origins are allowed to embed the page.   </p>
-<br>
-<br>
-<br>
-<p>    # Allow only same-origin</p>
-<br>
-<p>    add_header Content-Security-Policy "frame-ancestors 'self'" always;</p>
-<br>
-<br>
-<br>
-<p>    # Allow specific origins</p>
-<br>
-<p>    add_header Content-Security-Policy "frame-ancestors 'self' https://trusted-app.example.com" always;</p>
-<br>
-<br>
-<br>
-<p>    # Allow none (equivalent to DENY)</p>
-<br>
-<p>    add_header Content-Security-Policy "frame-ancestors 'none'" always;</p>
-<br>
-<br>
-<br>
-<p>    # Allow multiple specific origins</p>
-<br>
-<p>    add_header Content-Security-Policy "frame-ancestors https://app1.example.com https://app2.example.com" always;</p>
-<br>
-<br>
-<br>
-<br>
-<p>When both X-Frame-Options and CSP `frame-ancestors` are present, browsers honor the more restrictive policy. CSP `frame-ancestors` is preferred because it supports multiple origins.   </p>
-<br>
-<br>
-<br>
-<p>    # Python/Flask CSP middleware</p>
-<br>
-<p>    from flask import Flask</p>
-<br>
-<p>    from flask_talisman import Talisman</p>
-<br>
-<br>
-<br>
-<p>    app = Flask(__name__)</p>
-<br>
-<p>    Talisman(app, </p>
-<br>
-<p>        content_security_policy={</p>
-<br>
-<p>            'frame-ancestors': ["'self'", "https://dashboard.example.com"]</p>
-<br>
-<p>        }</p>
-<br>
-<p>    )</p>
-<br>
-<br>
-<br>
-<br>
-<p>Framebusting JavaScript   </p>
-<p>Client-side framebusting detects if the page is loaded in an iframe and breaks out. However, JavaScript-based protection can be bypassed.   </p>
-<br>
-<br>
-<br>
-<p>    // Basic framebuster</p>
-<br>
-<p>    if (top !== self) {</p>
-<br>
-<p>        top.location = self.location;</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<p>    // Robust framebuster with null check</p>
-<br>
-<p>    if (top.location !== self.location) {</p>
-<br>
-<p>        // In some browsers, accessing top.location throws SecurityError</p>
-<br>
-<p>        try {</p>
-<br>
-<p>            top.location.href = self.location.href;</p>
-<br>
-<p>        } catch (e) {</p>
-<br>
-<p>            // If blocked by cross-origin policy, still possible to break out</p>
-<br>
-<p>            top.location = self.location;</p>
-<br>
-<p>        }</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<p>    // Prevention of iframe-based clickjacking with style override</p>
-<br>
-<p>    <style id="anti-clickjack">body { display: none; }</style></p>
-<br>
-<p>    <script></p>
-<br>
-<p>    if (self === top) {</p>
-<br>
-<p>        document.getElementById('anti-clickjack').remove();</p>
-<br>
-<p>    } else {</p>
-<br>
-<p>        top.location = self.location;</p>
-<br>
-<p>    }</p>
-<br>
-<p>    </script></p>
-<br>
-<br>
-<br>
+<p>// Prevention of iframe-based clickjacking with style override</p>
 <br>
 <p>Framebusting limitations:</p>
+<br>
 <p>* `sandbox` attribute on iframes can prevent `top.location` modification</p>
+<br>
 <p>* `noopener` links bypass frame busters</p>
+<br>
 <p>* Attackers can use `onbeforeunload` to prevent navigation</p>
 <br>
-<p>Testing for Clickjacking Vulnerabilities   </p>
+<p>Testing for Clickjacking Vulnerabilities </p>
 <br>
+<h1>Test with curl</h1>
 <br>
+<p>curl -I https://target-website.com/admin | grep -i "x-frame-options\|content-security-policy"</p>
 <br>
-<p>    # Test with curl</p>
+<h1>Check for frame-ancestors specifically</h1>
 <br>
-<p>    curl -I https://target-website.com/admin | grep -i "x-frame-options\|content-security-policy"</p>
+<p>curl -sI https://target-website.com | \</p>
 <br>
+<p>grep -E 'X-Frame-Options|frame-ancestors' || \</p>
 <br>
+<p>echo "NO PROTECTION DETECTED"</p>
 <br>
-<p>    # Check for frame-ancestors specifically</p>
+<h1>Python automated check</h1>
 <br>
-<p>    curl -sI https://target-website.com | \</p>
+<p>python3 -c "</p>
 <br>
-<p>        grep -E 'X-Frame-Options|frame-ancestors' || \</p>
+<p>import requests</p>
 <br>
-<p>        echo "NO PROTECTION DETECTED"</p>
+<p>urls = [</p>
 <br>
+<p>'https://target.com/login',</p>
 <br>
+<p>'https://target.com/transfer',</p>
 <br>
-<p>    # Python automated check</p>
+<p>'https://target.com/admin',</p>
 <br>
-<p>    python3 -c "</p>
+<p>]</p>
 <br>
-<p>    import requests</p>
+<p>for url in urls:</p>
 <br>
+<p>resp = requests.get(url)</p>
 <br>
+<p>xfo = resp.headers.get('X-Frame-Options', 'MISSING')</p>
 <br>
-<p>    urls = [</p>
+<p>csp = resp.headers.get('Content-Security-Policy', '')</p>
 <br>
-<p>        'https://target.com/login',</p>
+<p>fa = 'frame-ancestors' in csp or 'frame-ancestors' not in csp</p>
 <br>
-<p>        'https://target.com/transfer',</p>
+<p>if 'frame-ancestors' in csp:</p>
 <br>
-<p>        'https://target.com/admin',</p>
+<p>print(f'[PROTECTED] {url}: CSP frame-ancestors')</p>
 <br>
-<p>    ]</p>
+<p>elif xfo in ('DENY', 'SAMEORIGIN'):</p>
 <br>
+<p>print(f'[PROTECTED] {url}: X-Frame-Options: {xfo}')</p>
 <br>
+<p>else:</p>
 <br>
-<p>    for url in urls:</p>
+<p>print(f'[VULNERABLE] {url}: No framing protection')</p>
 <br>
-<p>        resp = requests.get(url)</p>
+<p>"</p>
 <br>
-<p>        xfo = resp.headers.get('X-Frame-Options', 'MISSING')</p>
+<p>Comprehensive Protection Strategy </p>
 <br>
-<p>        csp = resp.headers.get('Content-Security-Policy', '')</p>
+<h1>Nginx: full clickjacking protection</h1>
 <br>
-<p>        fa = 'frame-ancestors' in csp or 'frame-ancestors' not in csp</p>
+<p>server {</p>
 <br>
+<h1>X-Frame-Options as fallback</h1>
 <br>
+<p>add_header X-Frame-Options "SAMEORIGIN" always;</p>
 <br>
-<p>        if 'frame-ancestors' in csp:</p>
+<h1>CSP frame-ancestors as modern replacement</h1>
 <br>
-<p>            print(f'[PROTECTED] {url}: CSP frame-ancestors')</p>
+<p>add_header Content-Security-Policy "frame-ancestors 'self'" always;</p>
 <br>
-<p>        elif xfo in ('DENY', 'SAMEORIGIN'):</p>
+<p>location /admin/ {</p>
 <br>
-<p>            print(f'[PROTECTED] {url}: X-Frame-Options: {xfo}')</p>
+<h1>Stricter for sensitive areas</h1>
 <br>
-<p>        else:</p>
+<p>add_header X-Frame-Options "DENY" always;</p>
 <br>
-<p>            print(f'[VULNERABLE] {url}: No framing protection')</p>
+<p>add_header Content-Security-Policy "frame-ancestors 'none'" always;</p>
 <br>
-<p>    "</p>
+<p>}</p>
 <br>
+<p>location /api/ {</p>
 <br>
+<h1>APIs should never be framed</h1>
 <br>
+<p>add_header X-Frame-Options "DENY" always;</p>
 <br>
-<p>Comprehensive Protection Strategy   </p>
+<p>add_header Content-Security-Policy "frame-ancestors 'none'" always;</p>
 <br>
+<p>}</p>
 <br>
+<p>}</p>
 <br>
-<p>    # Nginx: full clickjacking protection</p>
+<p>Conclusion </p>
 <br>
-<p>    server {</p>
-<br>
-<p>        # X-Frame-Options as fallback</p>
-<br>
-<p>        add_header X-Frame-Options "SAMEORIGIN" always;</p>
-<br>
-<br>
-<br>
-<p>        # CSP frame-ancestors as modern replacement</p>
-<br>
-<p>        add_header Content-Security-Policy "frame-ancestors 'self'" always;</p>
-<br>
-<br>
-<br>
-<p>        location /admin/ {</p>
-<br>
-<p>            # Stricter for sensitive areas</p>
-<br>
-<p>            add_header X-Frame-Options "DENY" always;</p>
-<br>
-<p>            add_header Content-Security-Policy "frame-ancestors 'none'" always;</p>
-<br>
-<p>        }</p>
-<br>
-<br>
-<br>
-<p>        location /api/ {</p>
-<br>
-<p>            # APIs should never be framed</p>
-<br>
-<p>            add_header X-Frame-Options "DENY" always;</p>
-<br>
-<p>            add_header Content-Security-Policy "frame-ancestors 'none'" always;</p>
-<br>
-<p>        }</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<p>Conclusion   </p>
 <p>Clickjacking is one of the easiest vulnerabilities to prevent but remains surprisingly common. Set `X-Frame-Options: DENY` or `SAMEORIGIN` on every response, and use CSP `frame-ancestors` for fine-grained control. For the strongest protection, deploy both headers, and always test new pages before deployment.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

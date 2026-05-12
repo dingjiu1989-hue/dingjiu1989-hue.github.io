@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/serverless-security.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Serverless Security">
     <meta name="twitter:description" content="Guide to serverless security covering function permissions, event validation, cold start risks, dependency management, and defense in depth.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/serverless-security.png">
     <title>Serverless Security — SourceHub</title>
     <meta name="description" content="Guide to serverless security covering function permissions, event validation, cold start risks, dependency management, and defense in depth.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Serverless Security",
       "description": "Guide to serverless security covering function permissions, event validation, cold start risks, dependency management, and defense in depth.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/serverless-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2109",
+      "wordCount": "2008",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Serverless Security</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/serverless-security.png" alt="Serverless Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Serverless Security</h1>
 <br>
 <p>Introduction   </p>
 <p>Serverless computing shifts operational responsibility to the cloud provider but introduces unique security challenges. Functions have expanded attack surfaces through event sources, third-party dependencies, and IAM roles. Understanding the serverless shared responsibility model is the first step toward securing these architectures.   </p>
 <p>Function Permissions   </p>
 <p>Serverless functions operate under IAM roles that should follow least privilege. Overly permissive roles are the most common serverless security issue.   </p>
-<br>
-<br>
 <br>
 <p>    {</p>
 <br>
@@ -102,12 +101,6 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    // BAD: Wildcard permissions on DynamoDB</p>
 <br>
 <p>    {</p>
@@ -119,8 +112,6 @@
 <p>        "Resource": "*"</p>
 <br>
 <p>    }</p>
-<br>
-<br>
 <br>
 <p>    // GOOD: Scoped to specific table and actions</p>
 <br>
@@ -142,23 +133,13 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # AWS Lambda function handler with minimal permissions</p>
 <br>
 <p>    import boto3</p>
 <br>
 <p>    import os</p>
 <br>
-<br>
-<br>
 <p>    TABLE_NAME = os.environ['TABLE_NAME']</p>
-<br>
-<br>
 <br>
 <p>    def handler(event, context):</p>
 <br>
@@ -168,27 +149,18 @@
 <br>
 <p>        table = dynamodb.Table(TABLE_NAME)</p>
 <br>
-<br>
-<br>
 <p>        order_id = event['order_id']</p>
 <br>
 <p>        response = table.get_item(Key={'id': order_id})</p>
 <br>
 <p>        return response['Item']</p>
 <br>
-<br>
-<br>
-<br>
 <p>Event Validation   </p>
 <p>Serverless functions are triggered by events from various sources. Each event must be validated before processing.   </p>
-<br>
-<br>
 <br>
 <p>    import json</p>
 <br>
 <p>    import re</p>
-<br>
-<br>
 <br>
 <p>    def validate_s3_event(event):</p>
 <br>
@@ -196,13 +168,9 @@
 <br>
 <p>        required_keys = {'Records', 'eventVersion', 'eventSource'}</p>
 <br>
-<br>
-<br>
 <p>        if not all(key in event for key in required_keys):</p>
 <br>
 <p>            raise ValueError("Invalid S3 event structure")</p>
-<br>
-<br>
 <br>
 <p>        for record in event['Records']:</p>
 <br>
@@ -214,13 +182,9 @@
 <br>
 <p>            obj = s3.get('object', {})</p>
 <br>
-<br>
-<br>
 <p>            if not bucket.get('name') or not obj.get('key'):</p>
 <br>
 <p>                raise ValueError("Invalid S3 record")</p>
-<br>
-<br>
 <br>
 <p>            # Validate object key to prevent path traversal</p>
 <br>
@@ -230,8 +194,6 @@
 <br>
 <p>                raise ValueError(f"Invalid object key: {key}")</p>
 <br>
-<br>
-<br>
 <p>            # Check file extension whitelist</p>
 <br>
 <p>            allowed_extensions = {'.csv', '.json', '.parquet'}</p>
@@ -240,11 +202,7 @@
 <br>
 <p>                raise ValueError(f"Unsupported file type: {key}")</p>
 <br>
-<br>
-<br>
 <p>        return True</p>
-<br>
-<br>
 <br>
 <p>    def validate_api_gateway_event(event):</p>
 <br>
@@ -256,13 +214,9 @@
 <br>
 <p>        method = event.get('httpMethod')</p>
 <br>
-<br>
-<br>
 <p>        if method not in allowed_methods:</p>
 <br>
 <p>            raise ValueError(f"Invalid HTTP method: {method}")</p>
-<br>
-<br>
 <br>
 <p>        # Validate path parameters</p>
 <br>
@@ -271,8 +225,6 @@
 <p>        if not re.match(r'^/[a-zA-Z0-9/_-]+$', path):</p>
 <br>
 <p>            raise ValueError(f"Invalid path: {path}")</p>
-<br>
-<br>
 <br>
 <p>        # Validate query string parameters</p>
 <br>
@@ -284,17 +236,10 @@
 <br>
 <p>                raise ValueError(f"Parameter {key} exceeds maximum length")</p>
 <br>
-<br>
-<br>
 <p>        return True</p>
-<br>
-<br>
-<br>
 <br>
 <p>Cold Start Risks   </p>
 <p>Cold starts occur when a function is invoked after being idle. They create windows where code is freshly loaded, which can be exploited.   </p>
-<br>
-<br>
 <br>
 <p>    # Vulnerability scanner for cold start</p>
 <br>
@@ -302,23 +247,17 @@
 <br>
 <p>    import sys</p>
 <br>
-<br>
-<br>
 <p>    class ColdStartScanner:</p>
 <br>
 <p>        def __init__(self):</p>
 <br>
 <p>            self.known_vulnerable = self._load_vulnerability_db()</p>
 <br>
-<br>
-<br>
 <p>        def scan_dependencies(self):</p>
 <br>
 <p>            """Scan all imported modules for known vulnerabilities."""</p>
 <br>
 <p>            vulnerabilities = []</p>
-<br>
-<br>
 <br>
 <p>            for module_name, module in sys.modules.items():</p>
 <br>
@@ -346,15 +285,7 @@
 <br>
 <p>                                })</p>
 <br>
-<br>
-<br>
 <p>            return vulnerabilities</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Dependencies: pin versions and scan regularly</p>
 <br>
@@ -365,8 +296,6 @@
 <p>    pydantic==2.5.0</p>
 <br>
 <p>    cryptography==41.0.7</p>
-<br>
-<br>
 <br>
 <p>    # npm package.json</p>
 <br>
@@ -388,13 +317,8 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Defense in Depth   </p>
 <p>Serverless security requires multiple layers, as there is no host-based security (no antivirus, no host IDS).   </p>
-<br>
-<br>
 <br>
 <p>    # Defense layer 1: Input validation at API Gateway</p>
 <br>
@@ -420,8 +344,6 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
 <p>    # Defense layer 2: Function-level validation</p>
 <br>
 <p>    def process_order(event, context):</p>
@@ -436,15 +358,11 @@
 <br>
 <p>                return {'statusCode': 400, 'body': f'Missing field: {field}'}</p>
 <br>
-<br>
-<br>
 <p>        # Validate data types and ranges</p>
 <br>
 <p>        if not isinstance(event['quantity'], int) or event['quantity'] < 1:</p>
 <br>
 <p>            return {'statusCode': 400, 'body': 'Invalid quantity'}</p>
-<br>
-<br>
 <br>
 <p>        # Defense layer 3: Principle of least function scope</p>
 <br>
@@ -452,13 +370,9 @@
 <br>
 <p>        return process_payment(event)</p>
 <br>
-<br>
-<br>
 <p>    # Defense layer 4: Encryption at rest and in transit</p>
 <br>
 <p>    from cryptography.fernet import Fernet</p>
-<br>
-<br>
 <br>
 <p>    def encrypt_sensitive_data(data, key):</p>
 <br>
@@ -466,24 +380,15 @@
 <br>
 <p>        return f.encrypt(data.encode())</p>
 <br>
-<br>
-<br>
-<br>
 <p>Monitoring and Logging   </p>
 <br>
-<br>
-<br>
 <p>    import json</p>
-<br>
-<br>
 <br>
 <p>    class ServerlessAuditLogger:</p>
 <br>
 <p>        def __init__(self):</p>
 <br>
 <p>            self.logs = []</p>
-<br>
-<br>
 <br>
 <p>        def log_invocation(self, event, context, response):</p>
 <br>
@@ -505,16 +410,11 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
 <p>            # Don't log sensitive data</p>
 <br>
 <p>            self.logs.append(log_entry)</p>
 <br>
 <p>            print(json.dumps(log_entry))</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Serverless security requires adapting traditional security principles to a new execution model. Enforce least privilege on function IAM roles, validate every event before processing, pin and scan dependencies, and implement defense in depth since traditional host-based controls are unavailable. Monitor function invocations and log appropriately, but never log sensitive data in function output.</p></div>

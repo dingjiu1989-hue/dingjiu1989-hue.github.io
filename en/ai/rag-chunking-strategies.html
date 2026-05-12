@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-chunking-strategies.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting">
     <meta name="twitter:description" content="Master document chunking for RAG pipelines: semantic chunking with embeddings, overlapping strategies for context preservation, and recursive splitting for hete">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-chunking-strategies.png">
     <title>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting — SourceHub</title>
     <meta name="description" content="Master document chunking for RAG pipelines: semantic chunking with embeddings, overlapping strategies for context preservation, and recursive splitting for hete">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting",
       "description": "Master document chunking for RAG pipelines: semantic chunking with embeddings, overlapping strategies for context preservation, and recursive splitting for hete",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-chunking-strategies.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1457",
+      "wordCount": "1345",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,28 +75,16 @@
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-chunking-strategies.png" alt="RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Document chunking is the foundation of any RAG system. How you split documents into chunks directly determines retrieval quality: chunks that are too small lose context, chunks that are too large dilute relevance, and naive splits break semantic units mid-thought. This article covers the major chunking strategies and when to use each.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Naive Fixed-Size Chunking</h2>
 <br>
-<br>
-<br>
-<br>
 <p>The simplest approach splits text every N characters or tokens:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    def fixed_size_chunks(text: str, chunk_size: int = 512, overlap: int = 64) -> list[str]:</p>
 <br>
@@ -116,30 +104,13 @@
 <br>
 <p>        return chunks</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Fixed-size chunking is fast and predictable. However, it frequently splits in the middle of sentences, paragraphs, or code blocks, producing chunks that are semantically incomplete. Use it only for homogeneous text where content quality is not critical.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Recursive Character Text Splitter</h2>
 <br>
-<br>
-<br>
-<br>
 <p>LangChain's RecursiveCharacterTextSplitter tries to split on natural boundaries first, falling back to smaller separators:</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    from langchain.text_splitter import RecursiveCharacterTextSplitter</p>
-<br>
-<br>
 <br>
 <p>    splitter = RecursiveCharacterTextSplitter(</p>
 <br>
@@ -153,40 +124,19 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    chunks = splitter.split_text(long_document)</p>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>The algorithm tries each separator in order. It first attempts to split on paragraph boundaries (`\n\n`). If a paragraph exceeds the chunk size, it splits on line breaks, then sentences, then spaces. This preserves as much natural structure as possible.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Semantic Chunking</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Semantic chunking uses embedding similarity to detect natural boundaries:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    import numpy as np</p>
 <br>
 <p>    from sentence_transformers import SentenceTransformer</p>
 <br>
-<br>
-<br>
 <p>    model = SentenceTransformer("all-MiniLM-L6-v2")</p>
-<br>
-<br>
 <br>
 <p>    def semantic_chunk(text: str, threshold: float = 0.7) -> list[str]:</p>
 <br>
@@ -195,8 +145,6 @@
 <p>        chunks = []</p>
 <br>
 <p>        current_chunk = [sentences[0]]</p>
-<br>
-<br>
 <br>
 <p>        for i in range(1, len(sentences)):</p>
 <br>
@@ -208,8 +156,6 @@
 <br>
 <p>            similarity = cosine_similarity(emb_current, emb_next)</p>
 <br>
-<br>
-<br>
 <p>            if similarity < threshold or len(" ".join(current_chunk)) > 1000:</p>
 <br>
 <p>                chunks.append(" ".join(current_chunk))</p>
@@ -220,46 +166,25 @@
 <br>
 <p>                current_chunk.append(sentences[i])</p>
 <br>
-<br>
-<br>
 <p>        if current_chunk:</p>
 <br>
 <p>            chunks.append(" ".join(current_chunk))</p>
 <br>
 <p>        return chunks</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Semantic chunking produces chunks that are internally coherent: each chunk discusses a single topic. The threshold controls chunk granularity. Lower values create larger chunks with more context; higher values create smaller, tighter chunks.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Chunking by Document Structure</h2>
 <br>
-<br>
-<br>
-<br>
 <p>When documents have known structures (headings, sections), use the structure to define chunks:</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    import re</p>
-<br>
-<br>
 <br>
 <p>    def structure_aware_chunk(markdown_text: str) -> list[dict]:</p>
 <br>
 <p>        chunks = []</p>
 <br>
 <p>        current_section = {"heading": "Introduction", "content": []}</p>
-<br>
-<br>
 <br>
 <p>        for line in markdown_text.split("\n"):</p>
 <br>
@@ -285,36 +210,17 @@
 <br>
 <p>                current_section["content"].append(line)</p>
 <br>
-<br>
-<br>
 <p>        if current_section["content"]:</p>
 <br>
 <p>            chunks.append(current_section)</p>
 <br>
-<br>
-<br>
 <p>        return chunks</p>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>Structure-aware chunking preserves document hierarchy. Each chunk retains a heading reference, enabling richer retrieval context and more accurate citation.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Sliding Window with Overlap</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Overlap between adjacent chunks prevents information loss at boundaries:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    def sliding_window_chunks(text: str, window: int = 512, stride: int = 384) -> list[str]:</p>
 <br>
@@ -326,20 +232,9 @@
 <br>
 <p>        return chunks</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>A 512-token window with 384-token stride means each adjacent pair overlaps by 128 tokens. This ensures that no query misses context that spans a chunk boundary. The trade-off is increased storage and more chunks to search.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Choosing the Right Strategy</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| Strategy | Best For | Pros | Cons |</p>
 <br>
@@ -355,13 +250,7 @@
 <br>
 <p>| Sliding window | Dense technical docs | No information loss | More chunks, overlap |</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Chunking strategy is one of the highest-leverage decisions in RAG system design. Start with recursive character splitting for general use, add structure-aware splitting for documents with clear hierarchy, and adopt semantic chunking when topic coherence is critical. Always include overlap to prevent boundary information loss, and measure retrieval recall on your specific document types to validate your choice.</p></div>
     </article>

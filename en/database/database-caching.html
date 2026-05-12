@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-caching.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Caching">
     <meta name="twitter:description" content="Implementing database caching with query cache, result cache, and Redis integration patterns.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-caching.png">
     <title>Database Caching — SourceHub</title>
     <meta name="description" content="Implementing database caching with query cache, result cache, and Redis integration patterns.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Caching",
       "description": "Implementing database caching with query cache, result cache, and Redis integration patterns.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-caching.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "642",
+      "wordCount": "619",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Caching</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-caching.png" alt="Database Caching" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Caching</h1>
 <br>
 <p>Why Cache?   </p>
@@ -82,8 +83,6 @@
 <p>Caching Strategies   </p>
 <p>Cache-Aside   </p>
 <p>Application checks cache first, loads from database on miss:   </p>
-<br>
-<br>
 <br>
 <p>    def get_user(user_id):</p>
 <br>
@@ -103,9 +102,6 @@
 <br>
 <p>        return user</p>
 <br>
-<br>
-<br>
-<br>
 <p>Read-Through   </p>
 <p>Cache sits between application and database. The cache itself loads from the database on miss.   </p>
 <p>Write-Through   </p>
@@ -116,19 +112,13 @@
 <p>| Strategy | Description | Best For | |----------|-------------|----------| | TTL | Automatic expiry | Most cases | | Key deletion | Delete on update | Write-through | | Versioned keys | Include version | Schema changes |   </p>
 <p>Redis Integration   </p>
 <br>
-<br>
-<br>
 <p>    import redis</p>
-<br>
-<br>
 <br>
 <p>    class CacheManager:</p>
 <br>
 <p>        def __init__(self):</p>
 <br>
 <p>            self.redis = redis.Redis(host='localhost', port=6379, decode_responses=True)</p>
-<br>
-<br>
 <br>
 <p>        def get_or_compute(self, key, compute_func, ttl=3600):</p>
 <br>
@@ -144,13 +134,8 @@
 <br>
 <p>            return value</p>
 <br>
-<br>
-<br>
-<br>
 <p>Cache Stampede Prevention   </p>
 <p>When a popular key expires, many requests may try to recompute simultaneously:   </p>
-<br>
-<br>
 <br>
 <p>    def get_with_mutex(key, compute_func, ttl=3600):</p>
 <br>
@@ -159,8 +144,6 @@
 <p>        if value:</p>
 <br>
 <p>            return json.loads(value)</p>
-<br>
-<br>
 <br>
 <p>        # Try to acquire lock</p>
 <br>
@@ -178,8 +161,6 @@
 <br>
 <p>            return value</p>
 <br>
-<br>
-<br>
 <p>        # Wait for the other thread</p>
 <br>
 <p>        import time</p>
@@ -187,9 +168,6 @@
 <p>        time.sleep(0.1)</p>
 <br>
 <p>        return json.loads(redis.get(key))</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Use cache-aside as the default pattern. Set appropriate TTLs. Implement mutex locking for cache stampede prevention. Monitor cache hit rates. Always have a fallback when cache is unavailable.</p></div>

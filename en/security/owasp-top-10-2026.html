@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/owasp-top-10-2026.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="OWASP Top 10 2026">
     <meta name="twitter:description" content="Analyzing the OWASP Top 10 2026 with new entries, mitigations, and modern testing approaches.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/owasp-top-10-2026.png">
     <title>OWASP Top 10 2026 — SourceHub</title>
     <meta name="description" content="Analyzing the OWASP Top 10 2026 with new entries, mitigations, and modern testing approaches.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "OWASP Top 10 2026",
       "description": "Analyzing the OWASP Top 10 2026 with new entries, mitigations, and modern testing approaches.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/owasp-top-10-2026.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1067",
+      "wordCount": "1014",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">OWASP Top 10 2026</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/owasp-top-10-2026.png" alt="OWASP Top 10 2026" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>OWASP Top 10 2026</h1>
 <br>
 <p>OWASP Top 10 2026 Overview   </p>
@@ -82,8 +83,6 @@
 <p>Updated Categories   </p>
 <p>A01: Broken Access Control   </p>
 <p>Access control failures remain the top risk. Modern applications must enforce server-side checks:   </p>
-<br>
-<br>
 <br>
 <p>    // Server-side access control middleware</p>
 <br>
@@ -115,25 +114,16 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
 <p>    // Usage</p>
 <br>
 <p>    app.get("/api/admin/users", requireRole("admin"), adminController.getUsers);</p>
 <br>
-<br>
-<br>
-<br>
 <p>A02: Cryptographic Failures   </p>
 <p>Weak cryptography is increasingly exploited. Use modern algorithms:   </p>
-<br>
-<br>
 <br>
 <p>    from cryptography.hazmat.primitives.ciphers.aead import AESGCM</p>
 <br>
 <p>    import os</p>
-<br>
-<br>
 <br>
 <p>    def encrypt_data(data, key):</p>
 <br>
@@ -145,8 +135,6 @@
 <br>
 <p>        return nonce + ciphertext</p>
 <br>
-<br>
-<br>
 <p>    def decrypt_data(encrypted, key):</p>
 <br>
 <p>        aesgcm = AESGCM(key)</p>
@@ -157,13 +145,8 @@
 <br>
 <p>        return aesgcm.decrypt(nonce, ciphertext, None).decode()</p>
 <br>
-<br>
-<br>
-<br>
 <p>A03: Injection   </p>
 <p>Injection remains prevalent. Parameterized queries are mandatory:   </p>
-<br>
-<br>
 <br>
 <p>    # Secure: Parameterized query</p>
 <br>
@@ -173,21 +156,14 @@
 <br>
 <p>        return db.execute(query, [email])</p>
 <br>
-<br>
-<br>
 <p>    # Also secure: ORM abstraction</p>
 <br>
 <p>    def find_user_safe(email):</p>
 <br>
 <p>        return User.query.filter_by(email=email).first()</p>
 <br>
-<br>
-<br>
-<br>
 <p>A04: Insecure Design   </p>
 <p>A new emphasis on design-level flaws:   </p>
-<br>
-<br>
 <br>
 <p>    threat_modeling_checklist:</p>
 <br>
@@ -201,13 +177,8 @@
 <br>
 <p>      - Are security controls centralized?</p>
 <br>
-<br>
-<br>
-<br>
 <p>A07: Identification and Authentication Failures   </p>
 <p>Passwordless and MFA are now expected baselines:   </p>
-<br>
-<br>
 <br>
 <p>    // WebAuthn registration</p>
 <br>
@@ -241,13 +212,8 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>A08: Software and Data Integrity Failures   </p>
 <p>CI/CD pipeline security and supply chain attacks:   </p>
-<br>
-<br>
 <br>
 <p>    # Supply chain security checks</p>
 <br>
@@ -263,48 +229,30 @@
 <br>
 <p>      - Sign all releases with cosign</p>
 <br>
-<br>
-<br>
-<br>
 <p>Testing Approaches   </p>
 <p>Modern testing combines automation and manual review:   </p>
-<br>
-<br>
 <br>
 <p>    def security_test_suite():</p>
 <br>
 <p>        results = []</p>
 <br>
-<br>
-<br>
 <p>        # 1. Automated DAST</p>
 <br>
 <p>        results.extend(run_dast_scan("https://staging.example.com"))</p>
-<br>
-<br>
 <br>
 <p>        # 2. SAST scan</p>
 <br>
 <p>        results.extend(run_sast_scan("./src"))</p>
 <br>
-<br>
-<br>
 <p>        # 3. Dependency check</p>
 <br>
 <p>        results.extend(run_dependency_check("./package.json"))</p>
-<br>
-<br>
 <br>
 <p>        # 4. API fuzzing</p>
 <br>
 <p>        results.extend(api_fuzz("https://staging.example.com/api"))</p>
 <br>
-<br>
-<br>
 <p>        return analyze_results(results)</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>The OWASP Top 10 2026 reflects the maturing security landscape. Broken access control remains king, but supply chain security and design flaws have rightfully gained prominence. Adapt your testing approach to cover all categories and integrate security throughout the development lifecycle.</p></div>

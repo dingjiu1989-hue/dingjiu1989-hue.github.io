@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-security.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Kubernetes Security">
     <meta name="twitter:description" content="Securing Kubernetes with RBAC, Pod Security Standards, network policies, and audit logging.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-security.png">
     <title>Kubernetes Security — SourceHub</title>
     <meta name="description" content="Securing Kubernetes with RBAC, Pod Security Standards, network policies, and audit logging.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Kubernetes Security",
       "description": "Securing Kubernetes with RBAC, Pod Security Standards, network policies, and audit logging.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1301",
+      "wordCount": "1248",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Kubernetes Security</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-security.png" alt="Kubernetes Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Kubernetes Security</h1>
 <br>
 <p>Kubernetes Security Challenges   </p>
 <p>Kubernetes introduces a large attack surface: the API server, etcd, kubelets, and container runtime all need protection.   </p>
 <p>RBAC Configuration   </p>
 <p>Implement least-privilege RBAC:   </p>
-<br>
-<br>
 <br>
 <p>    apiVersion: rbac.authorization.k8s.io/v1</p>
 <br>
@@ -130,12 +129,7 @@
 <br>
 <p>      apiGroup: rbac.authorization.k8s.io</p>
 <br>
-<br>
-<br>
-<br>
 <p>ClusterRole for cluster-wide resources:   </p>
-<br>
-<br>
 <br>
 <p>    apiVersion: rbac.authorization.k8s.io/v1</p>
 <br>
@@ -151,13 +145,8 @@
 <br>
 <p>      verbs: ["get"]</p>
 <br>
-<br>
-<br>
-<br>
 <p>Pod Security Standards   </p>
 <p>Enforce Pod Security Standards with admission controllers:   </p>
-<br>
-<br>
 <br>
 <p>    # Pod Security Admission</p>
 <br>
@@ -182,12 +171,6 @@
 <p>    exemptions:</p>
 <br>
 <p>      namespaces: ["kube-system", "kube-public"]</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Pod Security Standards - Restricted level</p>
 <br>
@@ -233,13 +216,8 @@
 <br>
 <p>          runAsUser: 1000</p>
 <br>
-<br>
-<br>
-<br>
 <p>Network Policies   </p>
 <p>Isolate workloads with network policies:   </p>
-<br>
-<br>
 <br>
 <p>    apiVersion: networking.k8s.io/v1</p>
 <br>
@@ -297,13 +275,8 @@
 <br>
 <p>          port: 5432</p>
 <br>
-<br>
-<br>
-<br>
 <p>Audit Logging   </p>
 <p>Enable and monitor audit logs:   </p>
-<br>
-<br>
 <br>
 <p>    # audit-policy.yaml</p>
 <br>
@@ -323,13 +296,9 @@
 <br>
 <p>        resources: ["secrets", "configmaps"]</p>
 <br>
-<br>
-<br>
 <p>    - level: Metadata</p>
 <br>
 <p>      verbs: ["create", "delete", "patch", "update"]</p>
-<br>
-<br>
 <br>
 <p>    - level: None</p>
 <br>
@@ -337,17 +306,9 @@
 <br>
 <p>      verbs: ["watch"]</p>
 <br>
-<br>
-<br>
 <p>    - level: None</p>
 <br>
 <p>      requestSources: ["controller"]</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Audit log analyzer</p>
 <br>
@@ -355,19 +316,13 @@
 <br>
 <p>    from collections import Counter</p>
 <br>
-<br>
-<br>
 <p>    def analyze_audit_logs(log_lines):</p>
 <br>
 <p>        suspicious_activities = []</p>
 <br>
-<br>
-<br>
 <p>        for line in log_lines:</p>
 <br>
 <p>            event = json.loads(line)</p>
-<br>
-<br>
 <br>
 <p>            # Detect secret access patterns</p>
 <br>
@@ -385,8 +340,6 @@
 <br>
 <p>                    })</p>
 <br>
-<br>
-<br>
 <p>            # Detect RBAC changes</p>
 <br>
 <p>            if event.get("objectRef", {}).get("apiGroup") == "rbac.authorization.k8s.io":</p>
@@ -401,12 +354,7 @@
 <br>
 <p>                })</p>
 <br>
-<br>
-<br>
 <p>        return Counter(str(a) for a in suspicious_activities)</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Kubernetes security requires a layered approach. Lock down RBAC with least privilege, enforce Pod Security Standards, isolate workloads with network policies, and enable comprehensive audit logging. Use admission controllers to enforce policies at deploy time. Monitor audit logs for suspicious activity patterns.</p></div>

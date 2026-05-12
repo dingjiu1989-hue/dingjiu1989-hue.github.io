@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/triggers-patterns.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Triggers: Use Cases, Performance Costs, and Alternatives">
     <meta name="twitter:description" content="Explore database triggers for audit logging, validation, and synchronization. Understand performance costs, debugging challenges, and CDC alternatives.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/triggers-patterns.png">
     <title>Database Triggers: Use Cases, Performance Costs, and Alternatives — SourceHub</title>
     <meta name="description" content="Explore database triggers for audit logging, validation, and synchronization. Understand performance costs, debugging challenges, and CDC alternatives.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Triggers: Use Cases, Performance Costs, and Alternatives",
       "description": "Explore database triggers for audit logging, validation, and synchronization. Understand performance costs, debugging challenges, and CDC alternatives.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/triggers-patterns.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1494",
+      "wordCount": "1456",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Triggers: Use Cases, Performance Costs, and Alternatives</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/triggers-patterns.png" alt="Database Triggers: Use Cases, Performance Costs, and Alternatives" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Triggers: Use Cases, Performance Costs, and Alternatives</h1>
 <br>
 <p>Database Triggers: Use Cases, Performance Costs, and Alternatives   </p>
 <p>A trigger is a named database object that executes a function automatically in response to `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE` events on a table. Triggers run inside the same transaction and offer powerful guarantees, but they carry real costs.   </p>
 <p>Anatomy of a Trigger   </p>
 <p>A trigger consists of two parts: the trigger definition and the trigger function. PostgreSQL separates them, allowing one function to serve multiple triggers.   </p>
-<br>
-<br>
 <br>
 <p>    CREATE OR REPLACE FUNCTION log_changes()</p>
 <br>
@@ -114,16 +113,11 @@
 <br>
 <p>    $$ LANGUAGE plpgsql;</p>
 <br>
-<br>
-<br>
 <p>    CREATE TRIGGER audit_users</p>
 <br>
 <p>        AFTER UPDATE OR DELETE ON users</p>
 <br>
 <p>        FOR EACH ROW EXECUTE FUNCTION log_changes();</p>
-<br>
-<br>
-<br>
 <br>
 <p>Trigger timing options:   </p>
 <br>
@@ -134,8 +128,6 @@
 <p>Common Use Cases   </p>
 <p>Audit Logging   </p>
 <p>Recording every change to sensitive tables is the most common trigger use case:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE audit_log (</p>
 <br>
@@ -157,8 +149,6 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
 <p>    CREATE OR REPLACE FUNCTION audit_employee_changes()</p>
 <br>
 <p>    RETURNS TRIGGER AS $$</p>
@@ -179,13 +169,8 @@
 <br>
 <p>    $$ LANGUAGE plpgsql SECURITY DEFINER;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Business Rule Validation   </p>
 <p>BEFORE triggers enforce invariants that cannot be expressed as `CHECK` constraints:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE OR REPLACE FUNCTION validate_order()</p>
 <br>
@@ -199,15 +184,11 @@
 <br>
 <p>        END IF;</p>
 <br>
-<br>
-<br>
 <p>        IF NEW.status = 'shipped' AND OLD.status != 'paid' THEN</p>
 <br>
 <p>            RAISE EXCEPTION 'Cannot ship unpaid order %', NEW.id;</p>
 <br>
 <p>        END IF;</p>
-<br>
-<br>
 <br>
 <p>        RETURN NEW;</p>
 <br>
@@ -215,13 +196,8 @@
 <br>
 <p>    $$ LANGUAGE plpgsql;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Cross-Table Synchronization   </p>
 <p>Keep denormalized counters or summary tables in sync:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE OR REPLACE FUNCTION update_user_order_count()</p>
 <br>
@@ -245,9 +221,6 @@
 <br>
 <p>    $$ LANGUAGE plpgsql;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Performance Costs   </p>
 <p>Triggers add overhead that is easy to underestimate:   </p>
 <br>
@@ -257,8 +230,6 @@
 <p>* **Lock duration**: Triggers extend the time a row or page lock is held, increasing contention in high-concurrency workloads.</p>
 <br>
 <p>The `pg_stat_user_functions` view helps identify trigger overhead:   </p>
-<br>
-<br>
 <br>
 <p>    SELECT total_time / calls AS avg_time_per_call,</p>
 <br>
@@ -272,25 +243,17 @@
 <br>
 <p>    ORDER BY total_time DESC;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Debugging Challenges   </p>
 <p>Triggers execute transparently. Developers new to a codebase often discover triggers only when an `UPDATE` suddenly fails with an unexpected error. Mitigation strategies:   </p>
 <br>
 <p>* **Naming conventions**: Prefix trigger functions with `trg_` and trigger names with the table name.</p>
 <p>2\. **Document dependencies**: Maintain a trigger dependency map. 3\. **Session-level disable** (requires superuser or explicit privilege):   </p>
 <br>
-<br>
-<br>
 <p>    SET session_replication_role = replica;</p>
 <br>
 <p>    -- Perform bulk operation</p>
 <br>
 <p>    SET session_replication_role = origin;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Alternatives: Change Data Capture (CDC)   </p>
 <p>When triggers become too expensive or complex, Change Data Capture offers a streaming alternative:   </p>

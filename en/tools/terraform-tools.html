@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/terraform-tools.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Terraform Tools: Terragrunt, terratest, tfsec, Infracost">
     <meta name="twitter:description" content="Essential Terraform ecosystem tools: Terragrunt for DRY configurations, terratest for infrastructure testing, tfsec for security scanning, and Infracost for cos">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/terraform-tools.png">
     <title>Terraform Tools: Terragrunt, terratest, tfsec, Infracost — SourceHub</title>
     <meta name="description" content="Essential Terraform ecosystem tools: Terragrunt for DRY configurations, terratest for infrastructure testing, tfsec for security scanning, and Infracost for cos">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Terraform Tools: Terragrunt, terratest, tfsec, Infracost",
       "description": "Essential Terraform ecosystem tools: Terragrunt for DRY configurations, terratest for infrastructure testing, tfsec for security scanning, and Infracost for cos",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/terraform-tools.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2045",
+      "wordCount": "1896",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,28 +75,16 @@
         <span class="tag-cat">Productivity</span></div>
       <h1 class="article-title">Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/terraform-tools.png" alt="Terraform Tools: Terragrunt, terratest, tfsec, Infracost" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Terraform has become the standard for infrastructure as code, but managing Terraform at scale requires additional tools. Terragrunt reduces configuration duplication. Terratest enables automated infrastructure testing. Tfsec scans configurations for security issues. Infracost provides cost estimates before deployment. This article covers each tool with practical examples.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Terragrunt</h2>
 <br>
-<br>
-<br>
-<br>
 <p>A thin wrapper that keeps Terraform configurations DRY:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # terragrunt.hcl (root configuration)</p>
 <br>
@@ -119,8 +107,6 @@
 <p>      }</p>
 <br>
 <p>    }</p>
-<br>
-<br>
 <br>
 <p>    generate "provider" {</p>
 <br>
@@ -152,8 +138,6 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
 <p>    locals {</p>
 <br>
 <p>      aws_region  = "us-east-1"</p>
@@ -161,12 +145,6 @@
 <p>      environment = reverse(split("/", get_terragrunt_dir()))[1]</p>
 <br>
 <p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # dev/vpc/terragrunt.hcl</p>
 <br>
@@ -176,15 +154,11 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
 <p>    include "root" {</p>
 <br>
 <p>      path = find_in_parent_folders()</p>
 <br>
 <p>    }</p>
-<br>
-<br>
 <br>
 <p>    inputs = {</p>
 <br>
@@ -202,59 +176,31 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # Apply all modules in dependency order</p>
 <br>
 <p>    terragrunt run-all apply</p>
-<br>
-<br>
 <br>
 <p>    # Plan only changed modules</p>
 <br>
 <p>    terragrunt run-all plan</p>
 <br>
-<br>
-<br>
 <p>    # Output dependency graph</p>
 <br>
 <p>    terragrunt graph | dot -Tpng > graph.png</p>
-<br>
-<br>
 <br>
 <p>    # Validate all configurations</p>
 <br>
 <p>    terragrunt run-all validate</p>
 <br>
-<br>
-<br>
 <p>    # Destroy with confirmation</p>
 <br>
 <p>    terragrunt run-all destroy</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Terratest</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Go library for writing automated infrastructure tests:</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    package test</p>
-<br>
-<br>
 <br>
 <p>    import (</p>
 <br>
@@ -267,8 +213,6 @@
 <p>        "github.com/stretchr/testify/assert"</p>
 <br>
 <p>    )</p>
-<br>
-<br>
 <br>
 <p>    func TestVPCDeployment(t *testing.T) {</p>
 <br>
@@ -288,19 +232,13 @@
 <br>
 <p>        }</p>
 <br>
-<br>
-<br>
 <p>        // Clean up at the end</p>
 <br>
 <p>        defer terraform.Destroy(t, terraformOptions)</p>
 <br>
-<br>
-<br>
 <p>        // Deploy infrastructure</p>
 <br>
 <p>        terraform.InitAndApply(t, terraformOptions)</p>
-<br>
-<br>
 <br>
 <p>        // Verify outputs</p>
 <br>
@@ -308,23 +246,17 @@
 <br>
 <p>        assert.NotEmpty(t, vpcID)</p>
 <br>
-<br>
-<br>
 <p>        // Verify the VPC actually exists in AWS</p>
 <br>
 <p>        vpc := aws.GetVpcById(t, vpcID, "us-east-1")</p>
 <br>
 <p>        assert.Equal(t, "10.0.0.0/16", vpc.CidrBlock)</p>
 <br>
-<br>
-<br>
 <p>        // Verify subnets were created</p>
 <br>
 <p>        subnets := aws.GetSubnetsForVpc(t, vpcID, "us-east-1")</p>
 <br>
 <p>        assert.Len(t, subnets, 4)</p>
-<br>
-<br>
 <br>
 <p>        // Verify security group rules</p>
 <br>
@@ -336,21 +268,9 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  tfsec (now Trivy)</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Security scanning for Terraform configurations:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Install tfsec</p>
 <br>
@@ -360,8 +280,6 @@
 <br>
 <p>    brew install trivy</p>
 <br>
-<br>
-<br>
 <p>    # Scan Terraform files</p>
 <br>
 <p>    tfsec .</p>
@@ -370,23 +288,13 @@
 <br>
 <p>    tfsec --no-color --format json > scan-results.json</p>
 <br>
-<br>
-<br>
 <p>    # In CI</p>
 <br>
 <p>    tfsec --soft-fail  # Don't fail CI, just report</p>
 <br>
-<br>
-<br>
 <p>    # Trivy equivalent</p>
 <br>
 <p>    trivy config --severity HIGH,CRITICAL .</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Bad configuration that tfsec catches</p>
 <br>
@@ -397,8 +305,6 @@
 <p>      acl    = "public-read"  # tfsec: aws-s3-no-public-read-acl</p>
 <br>
 <p>    }</p>
-<br>
-<br>
 <br>
 <p>    resource "aws_security_group" "web" {</p>
 <br>
@@ -416,8 +322,6 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
 <p>    # Fixed configuration</p>
 <br>
 <p>    resource "aws_s3_bucket" "data" {</p>
@@ -427,8 +331,6 @@
 <p>      acl    = "private"</p>
 <br>
 <p>    }</p>
-<br>
-<br>
 <br>
 <p>    resource "aws_security_group" "web" {</p>
 <br>
@@ -446,21 +348,9 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Infracost</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Cost estimation for Terraform projects:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Install</p>
 <br>
@@ -468,19 +358,13 @@
 <br>
 <p>    infracost auth login</p>
 <br>
-<br>
-<br>
 <p>    # Generate cost estimate for current state</p>
 <br>
 <p>    infracost breakdown --path .</p>
 <br>
-<br>
-<br>
 <p>    # Compare with previous state</p>
 <br>
 <p>    infracost diff --path . --compare-to previous-cost.json</p>
-<br>
-<br>
 <br>
 <p>    # Output in different formats</p>
 <br>
@@ -488,17 +372,9 @@
 <br>
 <p>    infracost breakdown --path . --format html --out-file cost-report.html</p>
 <br>
-<br>
-<br>
 <p>    # In CI</p>
 <br>
 <p>    infracost diff --path . --show-skipped</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # .infracost.yml — usage estimates</p>
 <br>
@@ -528,18 +404,9 @@
 <br>
 <p>            monthly_tier_1_requests: 10000</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Other Essential Tools</h2>
 <br>
-<br>
-<br>
-<br>
 <p>**pre-commit hooks** for Terraform:</p>
-<br>
 <br>
 <p>    # .pre-commit-config.yaml</p>
 <br>
@@ -563,15 +430,7 @@
 <br>
 <p>          - id: checkov</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Comparison</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| Tool | Purpose | Essential For |</p>
 <br>
@@ -587,20 +446,13 @@
 <br>
 <p>| pre-commit | Code quality | Consistent formatting and validation |</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Recommendations</h2>
-<br>
-<br>
 <br>
 <p>* **Multi-environment IaC**: Use Terragrunt to eliminate configuration duplication across environments.</p>
 <p>* **Production safety**: Use Terratest to write automated tests that verify infrastructure after deployment.</p>
 <p>* **Security compliance**: Run tfsec or Trivy in CI pipelines to catch misconfigurations before merge.</p>
 <p>* **Cost awareness**: Use Infracost in PR pipelines to show cost implications of infrastructure changes.</p>
 <p>* **Code quality**: Set up pre-commit hooks for terraform fmt, validate, tflint, and docs.</p>
-<br>
-<br>
 <br>
 <p>The ideal Terraform workflow combines all these tools: Terragrunt for structure, pre-commit for quality, tfssec for security, Infracost for cost awareness, and Terratest for deployment validation.</p></div>
     </article>

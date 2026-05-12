@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-code-review.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Secure Code Review">
     <meta name="twitter:description" content="A systematic approach to secure code review with checklists, automation, SAST integration, and common findings.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-code-review.png">
     <title>Secure Code Review — SourceHub</title>
     <meta name="description" content="A systematic approach to secure code review with checklists, automation, SAST integration, and common findings.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Secure Code Review",
       "description": "A systematic approach to secure code review with checklists, automation, SAST integration, and common findings.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/secure-code-review.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1044",
+      "wordCount": "997",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Secure Code Review</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-code-review.png" alt="Secure Code Review" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Secure Code Review</h1>
 <br>
 <p>Why Secure Code Review?   </p>
 <p>Secure code review catches vulnerabilities before they reach production. It complements automated scanning by finding logic flaws and business logic vulnerabilities that tools miss.   </p>
 <p>The Security Review Checklist   </p>
 <p>Every code review should check these categories:   </p>
-<br>
-<br>
 <br>
 <p>    # secure-code-review-checklist.yaml</p>
 <br>
@@ -94,8 +93,6 @@
 <br>
 <p>      - Are tokens properly validated?</p>
 <br>
-<br>
-<br>
 <p>    authorization:</p>
 <br>
 <p>      - Are access controls checked server-side?</p>
@@ -103,8 +100,6 @@
 <p>      - Is there IDOR protection?</p>
 <br>
 <p>      - Are roles enforced at API level?</p>
-<br>
-<br>
 <br>
 <p>    input_validation:</p>
 <br>
@@ -114,8 +109,6 @@
 <br>
 <p>      - Is there XSS protection?</p>
 <br>
-<br>
-<br>
 <p>    cryptography:</p>
 <br>
 <p>      - Are only modern algorithms used?</p>
@@ -123,8 +116,6 @@
 <p>      - Is key management secure?</p>
 <br>
 <p>      - Is TLS configured properly?</p>
-<br>
-<br>
 <br>
 <p>    error_handling:</p>
 <br>
@@ -134,19 +125,12 @@
 <br>
 <p>      - Are exceptions handled gracefully?</p>
 <br>
-<br>
-<br>
-<br>
 <p>SAST Integration   </p>
 <p>Static Application Security Testing (SAST) automates vulnerability detection:   </p>
-<br>
-<br>
 <br>
 <p>    # SAST results triage</p>
 <br>
 <p>    import json</p>
-<br>
-<br>
 <br>
 <p>    class SASTTriage:</p>
 <br>
@@ -162,15 +146,11 @@
 <br>
 <p>            ]</p>
 <br>
-<br>
-<br>
 <p>        def triage_findings(self, sast_results):</p>
 <br>
 <p>            actionable = []</p>
 <br>
 <p>            false_positives = []</p>
-<br>
-<br>
 <br>
 <p>            for finding in sast_results:</p>
 <br>
@@ -179,8 +159,6 @@
 <p>                    false_positives.append(finding)</p>
 <br>
 <p>                    continue</p>
-<br>
-<br>
 <br>
 <p>                # Critical findings in production code</p>
 <br>
@@ -192,17 +170,10 @@
 <br>
 <p>                    actionable.append(finding)</p>
 <br>
-<br>
-<br>
 <p>            return actionable, false_positives</p>
-<br>
-<br>
-<br>
 <br>
 <p>Common Findings   </p>
 <p>SQL Injection   </p>
-<br>
-<br>
 <br>
 <p>    # VULNERABLE</p>
 <br>
@@ -212,8 +183,6 @@
 <br>
 <p>        return db.execute(query)</p>
 <br>
-<br>
-<br>
 <p>    # SECURE</p>
 <br>
 <p>    def get_user(username):</p>
@@ -222,12 +191,7 @@
 <br>
 <p>        return db.execute(query, (username,))</p>
 <br>
-<br>
-<br>
-<br>
 <p>Insecure Direct Object Reference (IDOR)   </p>
-<br>
-<br>
 <br>
 <p>    // VULNERABLE</p>
 <br>
@@ -238,8 +202,6 @@
 <p>      res.json(order);  // No ownership check!</p>
 <br>
 <p>    });</p>
-<br>
-<br>
 <br>
 <p>    // SECURE</p>
 <br>
@@ -257,12 +219,7 @@
 <br>
 <p>    });</p>
 <br>
-<br>
-<br>
-<br>
 <p>Automated Enforcement in CI   </p>
-<br>
-<br>
 <br>
 <p>    # .github/workflows/security-review.yml</p>
 <br>
@@ -287,9 +244,6 @@
 <p>          - name: Dependency scan</p>
 <br>
 <p>            run: trivy fs --severity CRITICAL,HIGH .</p>
-<br>
-<br>
-<br>
 <br>
 <p>Manual Review Techniques   </p>
 <p>For manual review, focus on:   </p>

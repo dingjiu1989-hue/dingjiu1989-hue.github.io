@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/query-optimization-explain.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types">
     <meta name="twitter:description" content="Master PostgreSQL EXPLAIN ANALYZE: read query plans, understand cost estimation, compare scan types, and analyze join strategies for query optimization.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/query-optimization-explain.png">
     <title>EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types — SourceHub</title>
     <meta name="description" content="Master PostgreSQL EXPLAIN ANALYZE: read query plans, understand cost estimation, compare scan types, and analyze join strategies for query optimization.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types",
       "description": "Master PostgreSQL EXPLAIN ANALYZE: read query plans, understand cost estimation, compare scan types, and analyze join strategies for query optimization.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/query-optimization-explain.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1652",
+      "wordCount": "1578",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,46 +75,30 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/query-optimization-explain.png" alt="EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</h1>
 <br>
 <p>EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types   </p>
 <p>The `EXPLAIN` command is the single most important tool for understanding query performance. This article teaches you to read execution plans, interpret cost estimates, and identify optimization opportunities in PostgreSQL.   </p>
 <p>EXPLAIN Basics   </p>
 <br>
-<br>
-<br>
 <p>    EXPLAIN SELECT * FROM users WHERE email = 'alice@example.com';</p>
 <br>
-<br>
-<br>
-<br>
 <p>Output:   </p>
-<br>
-<br>
 <br>
 <p>    Seq Scan on users  (cost=0.00..1243.12 rows=1 width=84)</p>
 <br>
 <p>      Filter: (email = 'alice@example.com'::text)</p>
 <br>
-<br>
-<br>
-<br>
 <p>This shows a sequential scan (Seq Scan) scanning the entire table at an estimated cost of 0.00 to 1243.12, producing 1 row.   </p>
 <p>EXPLAIN ANALYZE   </p>
 <p>`EXPLAIN ANALYZE` actually executes the query and shows real metrics:   </p>
-<br>
-<br>
 <br>
 <p>    EXPLAIN (ANALYZE, BUFFERS, TIMING) </p>
 <br>
 <p>    SELECT * FROM users WHERE email = 'alice@example.com';</p>
 <br>
-<br>
-<br>
-<br>
 <p>Output:   </p>
-<br>
-<br>
 <br>
 <p>    Seq Scan on users  (cost=0.00..1243.12 rows=1 width=84) (actual time=0.532..12.843 rows=1 loops=1)</p>
 <br>
@@ -128,9 +112,6 @@
 <br>
 <p>    Execution Time: 12.912 ms</p>
 <br>
-<br>
-<br>
-<br>
 <p>Key differences from the estimated plan:   </p>
 <br>
 <p>* **actual time**: The real time (startup..total) for this node.</p>
@@ -143,20 +124,13 @@
 <p>Sequential Scan   </p>
 <p>The database reads every page of the table. Efficient for tables that fit in memory or when most rows are returned:   </p>
 <br>
-<br>
-<br>
 <p>    EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM orders WHERE total > 0;</p>
 <br>
 <p>    -- Seq Scan on orders  (cost=0.00..5432.10 rows=500000 width=42)</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Ideal when**: The query returns more than ~10% of the table. Sequential reads are faster than random reads for large fractions.   </p>
 <p>Index Scan   </p>
 <p>The database traverses a B-tree index and fetches matching rows from the heap:   </p>
-<br>
-<br>
 <br>
 <p>    EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM orders WHERE id = 42;</p>
 <br>
@@ -164,27 +138,17 @@
 <br>
 <p>    --   Index Cond: (id = 42)</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Ideal when**: Highly selective queries returning a small fraction of rows. Each row fetch requires a random I/O to the heap.   </p>
 <p>Index Only Scan   </p>
 <p>PostgreSQL fetches the result entirely from the index, avoiding heap access:   </p>
-<br>
-<br>
 <br>
 <p>    EXPLAIN (ANALYZE, BUFFERS) SELECT id, status FROM orders WHERE status = 'paid';</p>
 <br>
 <p>    -- Index Only Scan using idx_orders_status on orders  (cost=0.29..123.43 rows=5000 width=36)</p>
 <br>
-<br>
-<br>
-<br>
 <p>The `Heap Fetches: 0` line confirms no heap visits. Visibility map checks ensure rows are visible without visiting the heap.   </p>
 <p>Bitmap Scan   </p>
 <p>Combines multiple index lookups and sorts pages before fetching:   </p>
-<br>
-<br>
 <br>
 <p>    EXPLAIN (ANALYZE, BUFFERS)</p>
 <br>
@@ -200,15 +164,10 @@
 <br>
 <p>    --         -> Bitmap Index Scan on idx_orders_total  (cost=0.00..4.56 rows=5000 width=0)</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Ideal when**: The query can use multiple indexes. The BitmapAnd/BitmapOr operations combine index results efficiently.   </p>
 <p>Join Strategies   </p>
 <p>Nested Loop Join   </p>
 <p>For each row in the outer relation, scan the inner relation:   </p>
-<br>
-<br>
 <br>
 <p>    EXPLAIN (ANALYZE, BUFFERS)</p>
 <br>
@@ -222,14 +181,9 @@
 <br>
 <p>    --         Index Cond: (user_id = 42)</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Ideal when**: Outer relation produces few rows and inner join column has an index.   </p>
 <p>Hash Join   </p>
 <p>Hash the inner relation, then probe with rows from the outer:   </p>
-<br>
-<br>
 <br>
 <p>    EXPLAIN (ANALYZE, BUFFERS)</p>
 <br>
@@ -245,14 +199,9 @@
 <br>
 <p>    --         -> Seq Scan on users u  (cost=0.00..843.00 rows=32000 width=84)</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Ideal when**: Joining a large portion of two tables, especially without indexed join columns.   </p>
 <p>Merge Join   </p>
 <p>Sort both relations and merge them in parallel:   </p>
-<br>
-<br>
 <br>
 <p>    EXPLAIN (ANALYZE, BUFFERS)</p>
 <br>
@@ -266,14 +215,9 @@
 <br>
 <p>    --   -> Index Scan using idx_orders_user_id on orders o  (cost=0.29..3210.00 rows=500000 width=42)</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Ideal when**: Inputs are already sorted by the join key (e.g., from index scans).   </p>
 <p>Cost Parameters   </p>
 <p>PostgreSQL's cost model uses tunable constants:   </p>
-<br>
-<br>
 <br>
 <p>    SELECT name, setting, unit</p>
 <br>
@@ -282,9 +226,6 @@
 <p>    WHERE name LIKE 'seq_page_cost' OR name LIKE 'random_page_cost'</p>
 <br>
 <p>       OR name LIKE 'cpu_%' OR name LIKE 'parallel_%';</p>
-<br>
-<br>
-<br>
 <br>
 <p>Default values assume spinning disks:   </p>
 <br>
@@ -295,24 +236,15 @@
 <br>
 <p>For SSD-based systems, set `random_page_cost` to 1.1 to reflect the lower cost of random I/O:   </p>
 <br>
-<br>
-<br>
 <p>    ALTER SYSTEM SET random_page_cost = 1.1;</p>
 <br>
 <p>    SELECT pg_reload_conf();</p>
 <br>
-<br>
-<br>
-<br>
 <p>Common Optimization Patterns   </p>
-<br>
-<br>
 <br>
 <p>    -- Always check: is an index being used?</p>
 <br>
 <p>    EXPLAIN (ANALYZE, BUFFERS) SELECT ...;</p>
-<br>
-<br>
 <br>
 <p>    -- Check for sequential scans on large tables</p>
 <br>
@@ -322,16 +254,11 @@
 <br>
 <p>    ORDER BY seq_scan DESC;</p>
 <br>
-<br>
-<br>
 <p>    -- Look for sorts that spill to disk</p>
 <br>
 <p>    EXPLAIN (ANALYZE, BUFFERS) SELECT ... ORDER BY ...;</p>
 <br>
 <p>    -- Watch for: Sort Method: external merge  Disk: 1234kB</p>
-<br>
-<br>
-<br>
 <br>
 <p>Summary   </p>
 <p>Reading `EXPLAIN ANALYZE` output is the most important skill for query optimization. Focus on:   </p>

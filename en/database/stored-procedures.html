@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/stored-procedures.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Stored Procedures vs Functions: When to Use, Languages, Security">
     <meta name="twitter:description" content="An in-depth guide to stored procedures and functions in PostgreSQL and SQL Server. Learn language options, security considerations, testing, and best practices.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/stored-procedures.png">
     <title>Stored Procedures vs Functions: When to Use, Languages, Security — SourceHub</title>
     <meta name="description" content="An in-depth guide to stored procedures and functions in PostgreSQL and SQL Server. Learn language options, security considerations, testing, and best practices.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Stored Procedures vs Functions: When to Use, Languages, Security",
       "description": "An in-depth guide to stored procedures and functions in PostgreSQL and SQL Server. Learn language options, security considerations, testing, and best practices.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/stored-procedures.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1518",
+      "wordCount": "1455",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Stored Procedures vs Functions: When to Use, Languages, Security</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/stored-procedures.png" alt="Stored Procedures vs Functions: When to Use, Languages, Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Stored Procedures vs Functions: When to Use, Languages, Security</h1>
 <br>
 <p>Stored Procedures vs Functions: When to Use, Languages, Security   </p>
@@ -83,8 +84,6 @@
 <p>In PostgreSQL, the distinction is clearer since version 11 introduced `CREATE PROCEDURE`:   </p>
 <p>| Aspect | Function (`FUNCTION`) | Procedure (`PROCEDURE`) | |--------|----------------------|------------------------| | Return value | Always returns a value | Can return nothing | | Called from SQL | Yes: `SELECT my_func()` | No: `CALL my_proc()` | | Transaction control | Cannot commit/rollback | Can commit/rollback | | Used in expressions | Yes | No |   </p>
 <p>A typical function in PL/pgSQL:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE OR REPLACE FUNCTION calculate_discount(</p>
 <br>
@@ -104,8 +103,6 @@
 <br>
 <p>        SELECT membership_tier INTO tier FROM customers WHERE id = customer_id;</p>
 <br>
-<br>
-<br>
 <p>        IF tier = 'gold' THEN</p>
 <br>
 <p>            discount := order_total * 0.20;</p>
@@ -116,31 +113,19 @@
 <br>
 <p>        END IF;</p>
 <br>
-<br>
-<br>
 <p>        RETURN discount;</p>
 <br>
 <p>    END;</p>
 <br>
 <p>    $$ LANGUAGE plpgsql IMMUTABLE;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Calling it inline:   </p>
-<br>
-<br>
 <br>
 <p>    SELECT id, total, calculate_discount(id, total) AS discount</p>
 <br>
 <p>    FROM orders WHERE status = 'pending';</p>
 <br>
-<br>
-<br>
-<br>
 <p>A stored procedure for multi-step operations with transaction control:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE OR REPLACE PROCEDURE process_order_payment(</p>
 <br>
@@ -162,23 +147,15 @@
 <br>
 <p>        FROM orders WHERE id = p_order_id;</p>
 <br>
-<br>
-<br>
 <p>        UPDATE accounts SET balance = balance - v_total</p>
 <br>
 <p>        WHERE id = v_account_id;</p>
-<br>
-<br>
 <br>
 <p>        INSERT INTO payments (order_id, method, amount, paid_at)</p>
 <br>
 <p>        VALUES (p_order_id, p_payment_method, v_total, NOW());</p>
 <br>
-<br>
-<br>
 <p>        UPDATE orders SET status = 'paid' WHERE id = p_order_id;</p>
-<br>
-<br>
 <br>
 <p>        COMMIT;</p>
 <br>
@@ -192,12 +169,7 @@
 <br>
 <p>    $$ LANGUAGE plpgsql;</p>
 <br>
-<br>
-<br>
 <p>    CALL process_order_payment(1001, 'credit_card');</p>
-<br>
-<br>
-<br>
 <br>
 <p>Language Options   </p>
 <p>PostgreSQL supports multiple procedural languages, each with distinct advantages.   </p>
@@ -205,8 +177,6 @@
 <p>**PL/Python** (via `CREATE EXTENSION plpython3u`) allows Python logic inside the database. It is useful for business rules expressed naturally in Python, but it adds interpreter overhead and runs in a separate process.   </p>
 <p>**PL/v8** supports JavaScript via V8. It is fast for compute-heavy functions but less commonly used in production.   </p>
 <p>**PL/SQL** in Oracle and **T-SQL** in SQL Server are proprietary equivalents. T-SQL uses a `CREATE PROCEDURE` syntax with `SET` and `SELECT` semantics:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE OR ALTER PROCEDURE GetCustomerOrders</p>
 <br>
@@ -220,8 +190,6 @@
 <br>
 <p>        SET NOCOUNT ON;</p>
 <br>
-<br>
-<br>
 <p>        SELECT o.Id, o.OrderDate, o.Total</p>
 <br>
 <p>        FROM Orders o</p>
@@ -234,18 +202,11 @@
 <br>
 <p>    END;</p>
 <br>
-<br>
-<br>
 <p>    EXEC GetCustomerOrders @CustomerId = 42, @MinTotal = 100;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Security Considerations   </p>
 <p>Procedures and functions can be powerful security tools or vectors.   </p>
 <p>**Definer vs invoker permissions**: By default, functions execute with the privileges of their owner (`SECURITY DEFINER`). This allows controlled privilege escalation:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE OR REPLACE FUNCTION get_user_email(user_id INTEGER)</p>
 <br>
@@ -261,19 +222,12 @@
 <br>
 <p>    $$ LANGUAGE sql;</p>
 <br>
-<br>
-<br>
 <p>    REVOKE ALL ON FUNCTION get_user_email FROM public;</p>
 <br>
 <p>    GRANT EXECUTE ON FUNCTION get_user_email TO app_readonly;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Note the `SET search_path = public`. Without this, a `SECURITY DEFINER` function can be hijacked by temporarily altering `search_path` to load a malicious table named `users` in a different schema.   </p>
 <p>**SQL injection** inside dynamic SQL within a procedure is a real risk. Always use `EXECUTE ... USING` for parameterized execution:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE FUNCTION search_products(query TEXT)</p>
 <br>
@@ -291,42 +245,26 @@
 <br>
 <p>    $$ LANGUAGE plpgsql;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Testing   </p>
 <p>Database code deserves the same testing rigor as application code. The `db-tests` or `pgtap` framework enables unit tests:   </p>
-<br>
-<br>
 <br>
 <p>    -- pgtap example</p>
 <br>
 <p>    SELECT plan(3);</p>
 <br>
-<br>
-<br>
 <p>    SELECT is(calculate_discount(1, 100.00), 20.00,</p>
 <br>
 <p>              'Gold member gets 20% discount');</p>
-<br>
-<br>
 <br>
 <p>    SELECT is(calculate_discount(2, 100.00), 10.00,</p>
 <br>
 <p>              'Silver member gets 10% discount');</p>
 <br>
-<br>
-<br>
 <p>    SELECT is(calculate_discount(3, 100.00), 0.00,</p>
 <br>
 <p>              'Regular member gets no discount');</p>
 <br>
-<br>
-<br>
 <p>    SELECT * FROM finish();</p>
-<br>
-<br>
-<br>
 <br>
 <p>When to Use Stored Procedures   </p>
 <p>Favor procedures when:   </p>

@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/materialized-views.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Materialized Views">
     <meta name="twitter:description" content="Using materialized views for performance optimization with refresh strategies, use cases, and SQL examples.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/materialized-views.png">
     <title>Materialized Views — SourceHub</title>
     <meta name="description" content="Using materialized views for performance optimization with refresh strategies, use cases, and SQL examples.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Materialized Views",
       "description": "Using materialized views for performance optimization with refresh strategies, use cases, and SQL examples.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/materialized-views.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "612",
+      "wordCount": "586",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,13 +75,12 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Materialized Views</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/materialized-views.png" alt="Materialized Views" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Materialized Views</h1>
 <br>
 <p>What are Materialized Views?   </p>
 <p>Materialized views pre-compute and store query results. Unlike regular views, they persist data on disk, trading storage for query speed.   </p>
 <p>Creating Materialized Views   </p>
-<br>
-<br>
 <br>
 <p>    -- PostgreSQL: materialized view for daily sales</p>
 <br>
@@ -105,13 +104,9 @@
 <br>
 <p>    GROUP BY d.date, p.category;</p>
 <br>
-<br>
-<br>
 <p>    -- Add index for faster queries</p>
 <br>
 <p>    CREATE INDEX idx_daily_sales_date ON daily_sales_summary(date);</p>
-<br>
-<br>
 <br>
 <p>    -- Query is much faster than the original</p>
 <br>
@@ -119,40 +114,25 @@
 <br>
 <p>    WHERE date >= '2026-01-01';</p>
 <br>
-<br>
-<br>
-<br>
 <p>Refresh Strategies   </p>
 <p>Complete Refresh   </p>
 <p>Rebuilds the entire view:   </p>
 <br>
-<br>
-<br>
 <p>    REFRESH MATERIALIZED VIEW daily_sales_summary;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Simple but locks the view during refresh. Best for small datasets or low-frequency refreshes.   </p>
 <p>Concurrent Refresh   </p>
 <p>Creates a new version and swaps atomically. No lock but requires a unique index:   </p>
 <br>
-<br>
-<br>
 <p>    CREATE UNIQUE INDEX idx_daily_sales_pk ON daily_sales_summary(date, category);</p>
 <br>
 <p>    REFRESH MATERIALIZED VIEW CONCURRENTLY daily_sales_summary;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Incremental Refresh   </p>
 <p>Only processes changed data. Not natively supported in PostgreSQL but available in specialized databases.   </p>
 <p>Use Cases   </p>
 <p>| Use Case | Refresh Frequency | Benefit | |----------|------------------|---------| | Dashboards | Hourly | Sub-second queries | | Aggregations | Daily | Avoid full table scans | | Pre-joined data | On-demand | Eliminate expensive joins | | Reporting | Nightly | Consistent snapshot |   </p>
 <p>Performance Considerations   </p>
-<br>
-<br>
 <br>
 <p>    -- Compare query performance</p>
 <br>
@@ -165,8 +145,6 @@
 <p>    WHERE date >= '2026-01-01'</p>
 <br>
 <p>    GROUP BY date;</p>
-<br>
-<br>
 <br>
 <p>    -- vs the base query (much slower)</p>
 <br>
@@ -181,9 +159,6 @@
 <p>    WHERE d.date >= '2026-01-01'</p>
 <br>
 <p>    GROUP BY d.date;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Materialized views are essential for dashboard and reporting performance. Use concurrent refresh to avoid locks. Add indexes on frequently filtered columns. Choose refresh strategy based on freshness requirements. Monitor storage overhead for large views.</p></div>

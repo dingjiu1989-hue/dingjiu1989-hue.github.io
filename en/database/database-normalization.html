@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-normalization.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Normalization Explained">
     <meta name="twitter:description" content="Learn database normalization from 1NF to 5NF with practical examples, denormalization trade-offs, and real-world schema design.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-normalization.png">
     <title>Database Normalization Explained — SourceHub</title>
     <meta name="description" content="Learn database normalization from 1NF to 5NF with practical examples, denormalization trade-offs, and real-world schema design.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Normalization Explained",
       "description": "Learn database normalization from 1NF to 5NF with practical examples, denormalization trade-offs, and real-world schema design.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-normalization.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "445",
+      "wordCount": "428",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,6 +74,7 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Database Normalization Explained</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-normalization.png" alt="Database Normalization Explained" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Normalization Explained</h1>
 <br>
 <p>What is Normalization?   </p>
@@ -82,13 +83,9 @@
 <p>First Normal Form (1NF)   </p>
 <p>Each column contains atomic values. Each row is unique.   </p>
 <br>
-<br>
-<br>
 <p>    -- Violates 1NF</p>
 <br>
 <p>    CREATE TABLE orders (id SERIAL, products TEXT);  -- "Laptop,Mouse"</p>
-<br>
-<br>
 <br>
 <p>    -- 1NF compliant</p>
 <br>
@@ -102,13 +99,8 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
-<br>
 <p>Second Normal Form (2NF)   </p>
 <p>Must be in 1NF. All non-key columns depend on the entire primary key.   </p>
-<br>
-<br>
 <br>
 <p>    -- Violates 2NF: product_name depends only on product_id, not order_id</p>
 <br>
@@ -122,20 +114,12 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
-<br>
 <p>Third Normal Form (3NF)   </p>
 <p>Must be in 2NF. No transitive dependencies (non-key depends on non-key).   </p>
-<br>
-<br>
 <br>
 <p>    -- Violates 3NF: customer_name depends on customer_id</p>
 <br>
 <p>    CREATE TABLE orders (id SERIAL, customer_id INT, customer_name TEXT);</p>
-<br>
-<br>
-<br>
 <br>
 <p>BCNF through 5NF   </p>
 <p>BCNF: Every determinant is a candidate key. 4NF: No multi-valued dependencies. 5NF: Join dependencies only from candidate keys.   </p>

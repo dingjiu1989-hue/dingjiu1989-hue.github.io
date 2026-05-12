@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/multi-agent-systems.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Multi-Agent Systems: Coordination, Communication, Consensus">
     <meta name="twitter:description" content="Design multi-agent systems with LLM-powered agents: coordination patterns, inter-agent communication protocols, consensus mechanisms, and conflict resolution st">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/multi-agent-systems.png">
     <title>Multi-Agent Systems: Coordination, Communication, Consensus — SourceHub</title>
     <meta name="description" content="Design multi-agent systems with LLM-powered agents: coordination patterns, inter-agent communication protocols, consensus mechanisms, and conflict resolution st">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Multi-Agent Systems: Coordination, Communication, Consensus",
       "description": "Design multi-agent systems with LLM-powered agents: coordination patterns, inter-agent communication protocols, consensus mechanisms, and conflict resolution st",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/multi-agent-systems.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2299",
+      "wordCount": "2165",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,28 +75,16 @@
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">Multi-Agent Systems: Coordination, Communication, Consensus</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/multi-agent-systems.png" alt="Multi-Agent Systems: Coordination, Communication, Consensus" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Multi-Agent Systems: Coordination, Communication, Consensus</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>A single LLM agent has limitations: finite context windows, single perspective bias, and vulnerability to cascading errors. Multi-agent systems address these by distributing work across specialized agents that communicate, coordinate, and reach consensus. This article covers the architectural patterns for building effective multi-agent systems.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Agent Roles and Specialization</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Each agent should have a narrow, defined role:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    @dataclass</p>
 <br>
@@ -112,8 +100,6 @@
 <br>
 <p>        model: str</p>
 <br>
-<br>
-<br>
 <p>    class Agent:</p>
 <br>
 <p>        def __init__(self, spec: AgentSpec, llm_fn):</p>
@@ -124,8 +110,6 @@
 <br>
 <p>            self.message_history = [{"role": "system", "content": spec.system_prompt}]</p>
 <br>
-<br>
-<br>
 <p>        async def process(self, task: str, context: str = "") -> str:</p>
 <br>
 <p>            messages = self.message_history + [{"role": "user", "content": f"{context}\n\nTask: {task}"}]</p>
@@ -135,8 +119,6 @@
 <p>            self.message_history.append({"role": "assistant", "content": response})</p>
 <br>
 <p>            return response</p>
-<br>
-<br>
 <br>
 <p>    # Define specialized agents</p>
 <br>
@@ -154,8 +136,6 @@
 <br>
 <p>    ))</p>
 <br>
-<br>
-<br>
 <p>    writer = Agent(AgentSpec(</p>
 <br>
 <p>        name="Writer",</p>
@@ -169,8 +149,6 @@
 <p>        model="claude-sonnet-4-20260512",</p>
 <br>
 <p>    ))</p>
-<br>
-<br>
 <br>
 <p>    critic = Agent(AgentSpec(</p>
 <br>
@@ -186,27 +164,13 @@
 <br>
 <p>    ))</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Communication Protocols</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Agents communicate through structured messages:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from enum import Enum</p>
 <br>
 <p>    from datetime import datetime</p>
-<br>
-<br>
 <br>
 <p>    class MessageType(Enum):</p>
 <br>
@@ -221,8 +185,6 @@
 <p>        FEEDBACK = "feedback"</p>
 <br>
 <p>        COORDINATION = "coordination"</p>
-<br>
-<br>
 <br>
 <p>    @dataclass</p>
 <br>
@@ -242,15 +204,11 @@
 <br>
 <p>        timestamp: str = None</p>
 <br>
-<br>
-<br>
 <p>        def __post_init__(self):</p>
 <br>
 <p>            if self.timestamp is None:</p>
 <br>
 <p>                self.timestamp = datetime.now().isoformat()</p>
-<br>
-<br>
 <br>
 <p>    class MessageBus:</p>
 <br>
@@ -259,8 +217,6 @@
 <p>            self.queues: dict[str, list[AgentMessage]] = {}</p>
 <br>
 <p>            self.broadcast_log: list[AgentMessage] = []</p>
-<br>
-<br>
 <br>
 <p>        def send(self, message: AgentMessage):</p>
 <br>
@@ -276,13 +232,9 @@
 <br>
 <p>                self.broadcast_log.append(message)</p>
 <br>
-<br>
-<br>
 <p>        def receive(self, agent_name: str) -> list[AgentMessage]:</p>
 <br>
 <p>            return self.queues.pop(agent_name, [])</p>
-<br>
-<br>
 <br>
 <p>        def broadcast(self, message: AgentMessage):</p>
 <br>
@@ -292,26 +244,11 @@
 <br>
 <p>            self.broadcast_log.append(message)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Orchestration Patterns</h2>
-<br>
-<br>
-<br>
 <br>
 <h3>Sequential Handoff</h3>
 <br>
-<br>
-<br>
-<br>
 <p>One agent passes results to the next in a pipeline:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class SequentialOrchestrator:</p>
 <br>
@@ -320,8 +257,6 @@
 <p>            self.agents = agents</p>
 <br>
 <p>            self.bus = bus</p>
-<br>
-<br>
 <br>
 <p>        async def run(self, initial_task: str) -> str:</p>
 <br>
@@ -332,8 +267,6 @@
 <p>                result = await agent.process(current_output)</p>
 <br>
 <p>                current_output = result</p>
-<br>
-<br>
 <br>
 <p>                if i < len(self.agents) - 1:</p>
 <br>
@@ -353,21 +286,9 @@
 <br>
 <p>            return current_output</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Debate and Consensus</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Multiple agents work on the same problem and then converge:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class DebateOrchestrator:</p>
 <br>
@@ -377,21 +298,15 @@
 <br>
 <p>            self.rounds = rounds</p>
 <br>
-<br>
-<br>
 <p>        async def debate(self, problem: str) -> str:</p>
 <br>
 <p>            positions = {a.spec.name: await a.process(problem) for a in self.agents}</p>
-<br>
-<br>
 <br>
 <p>            for round_num in range(self.rounds):</p>
 <br>
 <p>                # Share positions</p>
 <br>
 <p>                summary = "\n".join(f"{name}: {pos}" for name, pos in positions.items())</p>
-<br>
-<br>
 <br>
 <p>                # Each agent critiques and refines</p>
 <br>
@@ -409,11 +324,7 @@
 <br>
 <p>                    new_positions[agent.spec.name] = critique</p>
 <br>
-<br>
-<br>
 <p>                positions = new_positions</p>
-<br>
-<br>
 <br>
 <p>            # Final consensus</p>
 <br>
@@ -429,21 +340,9 @@
 <br>
 <p>            return consensus</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Manager-Worker Pattern</h3>
 <br>
-<br>
-<br>
-<br>
 <p>A manager agent decomposes tasks and delegates to workers:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class ManagerWorkerOrchestrator:</p>
 <br>
@@ -455,8 +354,6 @@
 <br>
 <p>            self.bus = bus</p>
 <br>
-<br>
-<br>
 <p>        async def run(self, task: str) -> str:</p>
 <br>
 <p>            # Manager creates a plan</p>
@@ -464,8 +361,6 @@
 <p>            plan = await self.manager.process(f"Decompose this task into sub-tasks and assign to workers: {task}")</p>
 <br>
 <p>            sub_tasks = self._parse_plan(plan)</p>
-<br>
-<br>
 <br>
 <p>            # Distribute to workers</p>
 <br>
@@ -479,13 +374,9 @@
 <br>
 <p>                worker_futures.append(future)</p>
 <br>
-<br>
-<br>
 <p>            # Collect results</p>
 <br>
 <p>            results = await asyncio.gather(*worker_futures)</p>
-<br>
-<br>
 <br>
 <p>            # Manager synthesizes final output</p>
 <br>
@@ -501,8 +392,6 @@
 <br>
 <p>            return final</p>
 <br>
-<br>
-<br>
 <p>        def _select_worker(self, sub_task: dict) -> Agent:</p>
 <br>
 <p>            skill = sub_task.get("required_skill", "general")</p>
@@ -515,21 +404,9 @@
 <br>
 <p>            return self.workers[0]</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Consensus with Voting</h2>
 <br>
-<br>
-<br>
-<br>
 <p>When agents disagree, a voting mechanism resolves conflicts:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    def weighted_vote(proposals: list[dict], agent_weights: dict[str, float]) -> dict:</p>
 <br>
@@ -545,21 +422,11 @@
 <br>
 <p>            vote_counts[key] = vote_counts.get(key, 0) + weight</p>
 <br>
-<br>
-<br>
 <p>        winner = max(vote_counts, key=vote_counts.get)</p>
 <br>
 <p>        return {"winner": winner, "confidence": vote_counts[winner] / sum(vote_counts.values())}</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Multi-agent systems distribute intelligence across specialized agents. Sequential handoff is suitable for linear pipelines. Debate and consensus produces higher-quality answers by challenging assumptions. Manager-worker scales to complex tasks by decomposing and delegating. Choose your coordination pattern based on the task: sequential for well-defined steps, debate for decisions requiring multiple perspectives, and manager-worker for complex projects with parallelizable sub-tasks.</p></div>
     </article>

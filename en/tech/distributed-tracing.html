@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-tracing.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Distributed Tracing with OpenTelemetry">
     <meta name="twitter:description" content="Implement distributed tracing with OpenTelemetry covering spans, context propagation, sampling strategies, Jaeger/Zipkin visualization, and log/metric correlation.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-tracing.png">
     <title>Distributed Tracing with OpenTelemetry — SourceHub</title>
     <meta name="description" content="Implement distributed tracing with OpenTelemetry covering spans, context propagation, sampling strategies, Jaeger/Zipkin visualization, and log/metric correlation.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,15 +38,15 @@
       "@type": "Article",
       "headline": "Distributed Tracing with OpenTelemetry",
       "description": "Implement distributed tracing with OpenTelemetry covering spans, context propagation, sampling strategies, Jaeger/Zipkin visualization, and log/metric correlation.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-tracing.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2293",
+      "wordCount": "1858",
       "keywords": "Technology, Programming, DevOps",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/distributed-tracing.html"},
-      "articleBody": "Distributed Tracing with OpenTelemetry Introduction Distributed tracing provides end-to-end visibility into requests as they traverse multiple services. Unlike logs (which are service-local) and metrics (which are aggregate), traces capture the causal relationship between operations in a distributed system. OpenTelemetry has become the industry standard for instrumentation, offering a unified API for traces, metrics, and logs. This article covers implementing distributed tracing with OpenTelemetry in production. Core Concepts: Traces, Spans, and Context A trace represents a complete request flow. Each unit of work within a trace is a span, carrying metadata about timing, status, and parent-child relationships: import { trace, Span, SpanStatusCode } from \"@opentelemetry/api\"; const tracer = trace.getTracer(\"payment-service\"); async function processPayment(orderId: string, amount: number) { // Create a new span as the root of a sub-operation const span = tracer.startSpan(\"process-payment\", { attributes: { \"payment.order_id\": orderId, \"payment.amount\": amount, \"payment.currency\": \"USD\", }, }); try { const result = await chargePaymentGateway(orderId, amount); span.setStatus({ code: SpanStatusCode.OK }); span.setAttribute(\"payment.transaction_id\", result.transactionId); return result; } catch (error) { span.setStatus({ code: SpanStatusCode.ERROR, message: error.message, }); span.recordException(error); throw error; } finally { span.end(); } } Context Propagation Propagation carries trace context across service boundaries. For HTTP services, the `W3C TraceContext` format is standard: // Instrument outgoing HTTP requests import { context, propagation } from \"@opentelemetry/api\"; import * as http from \"http\"; function makeRequest(url: string, headers: Record) { // Inject current context into outgoing headers const activeContext = context.active(); const carrier: Record = {}; propagation.inject(activeContext, carrier); const allHeaders = { ...headers, ...carrier }; return http.get(url, { headers: allHeaders }); } For message queues, propagate context through message headers: // Producer: inject context into message import { propagation } from \"@opentelemetry/api\"; function publishMessage(topic: string, payload: any) { const carrier: Record = {}; propagation.inject(context.active(), carrier); const message = { value: JSON.stringify(payload), headers: { ...carrier, \"content-type\": \"application/json\", }, }; return kafkaProducer.send({ topic, messages: [message] }); } // Consumer: extract context from message import { propagation, context } from \"@opentelemetry/api\"; kafkaConsumer.on(\"message\", (message) => { const extractedContext = propagation.extract( context.active(), message.headers ); context.with(extractedContext, async () => { // This operation is now part of the parent trace const span = tracer.startSpan(\"process-order\"); // Process message... span.end(); }); }); Sampling Strategies Sampling controls the volume of traces collected. Use head-based sampling for simplicity or tail-based for intelligent selection: # OpenTelemetry Collector: tail-based sampling processors: tail_sampling: decision_wait: 30s num_traces: 10000 expected_new_traces_per_sec: 100 policies: - name: error-sampling type: status_code config: status_code: ERROR sampling_percentage: 100 - name: latency-sampling type: latency config: threshold_ms: 500 sampling_percentage: 50 - name: probabilistic type: probabilistic config: sampling_percentage: 5 For head-based sampling in application code: import { SamplingDecision } from \"@opentelemetry/api\"; import { Sampler, SpanKind, Attributes } from \"@opentelemetry/api\"; class CustomSampler implements Sampler { shouldSample( context: Context, traceId: string, spanName: string, spanKind: SpanKind, attributes: Attributes ) { // Always sample error-prone operations if (spanName.startsWith(\"payment.\")) { return { decision: SamplingDecision.RECORD_AND_SAMPLED }; } // Sample 10% of health checks if (spanName === \"health-check\") { return { decision: SamplingDecision.DROP }; } // Default probabilistic sampling return { decision: SamplingDecision.RECORD_AND_SAMPLED }; } } Visualization with Jaeger and Zipkin Jaeger provides rich trace visualization and analysis capabilities: # docker-compose.yml for Jaeger services: jaeger: image: jaegertracing/all-in-one:latest environment: COLLECTOR_OTLP_ENABLED: \"true\" ports: - \"16686:16686\" # UI - \"4318:4318\" # OTLP HTTP Configure the OpenTelemetry Collector to forward traces to Jaeger: receivers: otlp: protocols: http: endpoint: \"0.0.0.0:4318\" exporters: jaeger: endpoint: \"jaeger:14250\" tls: insecure: true service: pipelines: traces: receivers: [otlp] exporters: [jaeger] Baggage Propagation Baggage carries non-sampling key-value pairs across service boundaries for contextual information: import { propagation } from \"@opentelemetry/api\"; // Set baggage in the entry service propagation.setBaggage(context.active(), propagation.createBaggage({ \"user.id\": { value: userId }, \"session.region\": { value: region }, \"request.source\": { value: source }, }) ); Access baggage in downstream services without modifying API contracts: import { propagation, getBaggage } from \"@opentelemetry/api\"; function getCurrentUserId(): string | undefined { const baggage = getBaggage(context.active()); return baggage?.getEntry(\"user.id\")?.value; } Correlation with Logs and Metrics Link traces to logs using `trace_id` and `span_id`: import { trace } from \"@opentelemetry/api\"; function enrichLogger(logger: Logger): Logger { const span = trace.getActiveSpan(); return logger.child({ trace_id: span?.spanContext().traceId, span_id: span?.spanContext().spanId, trace_flags: span?.spanContext().traceFlags, }); } Emit metrics with trace context for full observability: import { metrics } from \"@opentelemetry/api\"; const meter = metrics.getMeter(\"payment-service\"); const requestCounter = meter.createCounter(\"payment.requests\", { description: \"Count of payment requests\", }); function trackPayment(status: string) { const spanContext = trace.getActiveSpan()?.spanContext(); requestCounter.add(1, { status, trace_id: spanContext?.traceId, }); } Production Configuration Deploy the OpenTelemetry Collector as a sidecar or DaemonSet for centralized configuration: apiVersion: apps/v1 kind: DaemonSet metadata: name: otel-collector spec: template: spec: containers: - name: otel-collector image: otel/opentelemetry-collector-contrib:latest args: [\"--config=/etc/otel/config.yaml\"] ports: - containerPort: 4318 # OTLP HTTP Instrumentation should be additive and never break business logic. Start with critical paths (payment, auth, order creation) and expand coverage iteratively. A well-instrumented system reduces mean time to diagnosis from hours to minutes."
+      "articleBody": "Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Introduction Distributed tracing provides end-to-end visibility into requests as they traverse multiple services. Unlike logs (which are service-local) and metrics (which are aggregate), traces capture the causal relationship between operations in a distributed system. OpenTelemetry has become the industry standard for instrumentation, offering a unified API for traces, metrics, and logs. This article covers implementing distributed tracing with OpenTelemetry in production. Core Concepts: Traces, Spans, and Context A trace represents a complete request flow. Each unit of work within a trace is a span, carrying metadata about timing, status, and parent-child relationships: import { trace, Span, SpanStatusCode } from \"@opentelemetry/api\"; const tracer = trace.getTracer(\"payment-service\"); async function processPayment(orderId: string, amount: number) { // Create a new span as the root of a sub-operation const span = tracer.startSpan(\"process-payment\", { attributes: { \"payment.order_id\": orderId, \"payment.amount\": amount, \"payment.currency\": \"USD\", }, }); try { const result = await chargePaymentGateway(orderId, amount); span.setStatus({ code: SpanStatusCode.OK }); span.setAttribute(\"payment.transaction_id\", result.transactionId); return result; } catch (error) { span.setStatus({ code: SpanStatusCode.ERROR, message: error.message, }); span.recordException(error); throw error; } finally { span.end(); } } Context Propagation Propagation carries trace context across service boundaries. For HTTP services, the `W3C TraceContext` format is standard: // Instrument outgoing HTTP requests import { context, propagation } from \"@opentelemetry/api\"; import * as http from \"http\"; function makeRequest(url: string, headers: Record) { // Inject current context into outgoing headers const activeContext = context.active(); const carrier: Record = {}; propagation.inject(activeContext, carrier); const allHeaders = { ...headers, ...carrier }; return http.get(url, { headers: allHeaders }); } For message queues, propagate context through message headers: // Producer: inject context into message import { propagation } from \"@opentelemetry/api\"; function publishMessage(topic: string, payload: any) { const carrier: Record = {}; propagation.inject(context.active(), carrier); const message = { value: JSON.stringify(payload), headers: { ...carrier, \"content-type\": \"application/json\", }, }; return kafkaProducer.send({ topic, messages: [message] }); } // Consumer: extract context from message import { propagation, context } from \"@opentelemetry/api\"; kafkaConsumer.on(\"message\", (message) => { const extractedContext = propagation.extract( context.active(), message.headers ); context.with(extractedContext, async () => { // This operation is now part of the parent trace const span = tracer.startSpan(\"process-order\"); // Process message... span.end(); }); }); Sampling Strategies Sampling controls the volume of traces collected. Use head-based sampling for simplicity or tail-based for intelligent selection: OpenTelemetry Collector: tail-based sampling processors: tail_sampling: decision_wait: 30s num_traces: 10000 expected_new_traces_per_sec: 100 policies: \\- name: error-sampling type: status_code config: status_code: ERROR sampling_percentage: 100 \\- name: latency-sampling type: latency config: threshold_ms: 500 sampling_percentage: 50 \\- name: probabilistic type: probabilistic config: sampling_percentage: 5 For head-based sampling in application code: import { SamplingDecision } from \"@opentelemetry/api\"; import { Sampler, SpanKind, Attributes } from \"@opentelemetry/api\"; class CustomSampler implements Sampler { shouldSample( context: Context, traceId: string, spanName: string, spanKind: SpanKind, attributes: Attributes ) { // Always sample error-prone operations if (spanName.startsWith(\"payment.\")) { return { decision: SamplingDecision.RECORD_AND_SAMPLED }; } // Sample 10% of health checks if (spanName === \"health-check\") { return { decision: SamplingDecision.DROP }; } // Default probabilistic sampling return { decision: SamplingDecision.RECORD_AND_SAMPLED }; } } Visualization with Jaeger and Zipkin Jaeger provides rich trace visualization and analysis capabilities: docker-compose.yml for Jaeger services: jaeger: image: jaegertracing/all-in-one:latest environment: COLLECTOR_OTLP_ENABLED: \"true\" ports: \\- \"16686:16686\" # UI \\- \"4318:4318\" # OTLP HTTP Configure the OpenTelemetry Collector to forward traces to Jaeger: receivers: otlp: protocols: http: endpoint: \"0.0.0.0:4318\" exporters: jaeger: endpoint: \"jaeger:14250\" tls: insecure: true service: pipelines: traces: receivers: [otlp] exporters: [jaeger] Baggage Propagation Baggage carries non-sampling key-value pairs across service boundaries for contextual information: import { propagation } from \"@opentelemetry/api\"; // Set baggage in the entry service propagation.setBaggage(context.active(), propagation.createBaggage({ \"user.id\": { value: userId }, \"session.region\": { value: region }, \"request.source\": { value: source }, }) ); Access baggage in downstream services without modifying API contracts: import { propagation, getBaggage } from \"@opentelemetry/api\"; function getCurrentUserId(): string | undefined { const baggage = getBaggage(context.active()); return baggage?.getEntry(\"user.id\")?.value; } Correlation with Logs and Metrics Link traces to logs using `trace_id` and `span_id`: import { trace } from \"@opentelemetry/api\"; function enrichLogger(logger: Logger): Logger { const span = trace.getActiveSpan(); return logger.child({ trace_id: span?.spanContext().traceId, span_id: span?.spanContext().spanId, trace_flags: span?.spanContext().traceFlags, }); } Emit metrics with trace context for full observability: import { metrics } from \"@opentelemetry/api\"; const meter = metrics.getMeter(\"payment-service\"); const requestCounter = meter.createCounter(\"payment.requests\", { description: \"Count of payment requests\", }); function trackPayment(status: string) { const spanContext = trace.getActiveSpan()?.spanContext(); requestCounter.add(1, { status, trace_id: spanContext?.traceId, }); } Production Configuration Deploy the OpenTelemetry Collector as a sidecar or DaemonSet for centralized configuration: apiVersion: apps/v1 kind: DaemonSet metadata: name: otel-collector spec: template: spec: containers: \\- name: otel-collector image: otel/opentelemetry-collector-contrib:latest args: [\"--config=/etc/otel/config.yaml\"] ports: \\- containerPort: 4318 # OTLP HTTP Instrumentation should be additive and never break business logic. Start with critical paths (payment, auth, order creation) and expand coverage iteratively. A well-instrumented system reduces mean time to diagnosis from hours to minutes."
     }
     </script>
     <script type="application/ld+json">
@@ -75,588 +75,414 @@
         <span class="tag-cat">DevOps</span></div>
       <h1 class="article-title">Distributed Tracing with OpenTelemetry</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-tracing.png" alt="Distributed Tracing with OpenTelemetry" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Distributed Tracing with OpenTelemetry</h1>
+<br>
+<h1>Distributed Tracing with OpenTelemetry</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Distributed tracing provides end-to-end visibility into requests as they traverse multiple services. Unlike logs (which are service-local) and metrics (which are aggregate), traces capture the causal relationship between operations in a distributed system. OpenTelemetry has become the industry standard for instrumentation, offering a unified API for traces, metrics, and logs. This article covers implementing distributed tracing with OpenTelemetry in production.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Core Concepts: Traces, Spans, and Context</h2>
 <br>
-<br>
-<br>
-<br>
 <p>A trace represents a complete request flow. Each unit of work within a trace is a span, carrying metadata about timing, status, and parent-child relationships:</p>
 <br>
+<p>import { trace, Span, SpanStatusCode } from "@opentelemetry/api";</p>
 <br>
+<p>const tracer = trace.getTracer("payment-service");</p>
 <br>
+<p>async function processPayment(orderId: string, amount: number) {</p>
 <br>
+<p>// Create a new span as the root of a sub-operation</p>
 <br>
-<p>    import { trace, Span, SpanStatusCode } from "@opentelemetry/api";</p>
+<p>const span = tracer.startSpan("process-payment", {</p>
 <br>
+<p>attributes: {</p>
 <br>
+<p>"payment.order_id": orderId,</p>
 <br>
-<p>    const tracer = trace.getTracer("payment-service");</p>
+<p>"payment.amount": amount,</p>
 <br>
+<p>"payment.currency": "USD",</p>
 <br>
+<p>},</p>
 <br>
-<p>    async function processPayment(orderId: string, amount: number) {</p>
+<p>});</p>
 <br>
-<p>      // Create a new span as the root of a sub-operation</p>
+<p>try {</p>
 <br>
-<p>      const span = tracer.startSpan("process-payment", {</p>
+<p>const result = await chargePaymentGateway(orderId, amount);</p>
 <br>
-<p>        attributes: {</p>
+<p>span.setStatus({ code: SpanStatusCode.OK });</p>
 <br>
-<p>          "payment.order_id": orderId,</p>
+<p>span.setAttribute("payment.transaction_id", result.transactionId);</p>
 <br>
-<p>          "payment.amount": amount,</p>
+<p>return result;</p>
 <br>
-<p>          "payment.currency": "USD",</p>
+<p>} catch (error) {</p>
 <br>
-<p>        },</p>
+<p>span.setStatus({</p>
 <br>
-<p>      });</p>
+<p>code: SpanStatusCode.ERROR,</p>
 <br>
+<p>message: error.message,</p>
 <br>
+<p>});</p>
 <br>
-<p>      try {</p>
+<p>span.recordException(error);</p>
 <br>
-<p>        const result = await chargePaymentGateway(orderId, amount);</p>
+<p>throw error;</p>
 <br>
+<p>} finally {</p>
 <br>
+<p>span.end();</p>
 <br>
-<p>        span.setStatus({ code: SpanStatusCode.OK });</p>
+<p>}</p>
 <br>
-<p>        span.setAttribute("payment.transaction_id", result.transactionId);</p>
-<br>
-<p>        return result;</p>
-<br>
-<p>      } catch (error) {</p>
-<br>
-<p>        span.setStatus({</p>
-<br>
-<p>          code: SpanStatusCode.ERROR,</p>
-<br>
-<p>          message: error.message,</p>
-<br>
-<p>        });</p>
-<br>
-<p>        span.recordException(error);</p>
-<br>
-<p>        throw error;</p>
-<br>
-<p>      } finally {</p>
-<br>
-<p>        span.end();</p>
-<br>
-<p>      }</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <h2>  Context Propagation</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Propagation carries trace context across service boundaries. For HTTP services, the `W3C TraceContext` format is standard:</p>
 <br>
+<p>// Instrument outgoing HTTP requests</p>
 <br>
+<p>import { context, propagation } from "@opentelemetry/api";</p>
 <br>
+<p>import * as http from "http";</p>
 <br>
+<p>function makeRequest(url: string, headers: Record) {</p>
 <br>
-<p>    // Instrument outgoing HTTP requests</p>
+<p>// Inject current context into outgoing headers</p>
 <br>
-<p>    import { context, propagation } from "@opentelemetry/api";</p>
+<p>const activeContext = context.active();</p>
 <br>
-<p>    import * as http from "http";</p>
+<p>const carrier: Record = {};</p>
 <br>
+<p>propagation.inject(activeContext, carrier);</p>
 <br>
+<p>const allHeaders = { ...headers, ...carrier };</p>
 <br>
-<p>    function makeRequest(url: string, headers: Record<string, string>) {</p>
+<p>return http.get(url, { headers: allHeaders });</p>
 <br>
-<p>      // Inject current context into outgoing headers</p>
-<br>
-<p>      const activeContext = context.active();</p>
-<br>
-<p>      const carrier: Record<string, string> = {};</p>
-<br>
-<p>      propagation.inject(activeContext, carrier);</p>
-<br>
-<br>
-<br>
-<p>      const allHeaders = { ...headers, ...carrier };</p>
-<br>
-<p>      return http.get(url, { headers: allHeaders });</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <p>For message queues, propagate context through message headers:</p>
 <br>
+<p>// Producer: inject context into message</p>
 <br>
+<p>import { propagation } from "@opentelemetry/api";</p>
 <br>
+<p>function publishMessage(topic: string, payload: any) {</p>
 <br>
+<p>const carrier: Record = {};</p>
 <br>
-<p>    // Producer: inject context into message</p>
+<p>propagation.inject(context.active(), carrier);</p>
 <br>
-<p>    import { propagation } from "@opentelemetry/api";</p>
+<p>const message = {</p>
 <br>
+<p>value: JSON.stringify(payload),</p>
 <br>
+<p>headers: {</p>
 <br>
-<p>    function publishMessage(topic: string, payload: any) {</p>
+<p>...carrier,</p>
 <br>
-<p>      const carrier: Record<string, string> = {};</p>
+<p>"content-type": "application/json",</p>
 <br>
-<p>      propagation.inject(context.active(), carrier);</p>
+<p>},</p>
 <br>
+<p>};</p>
 <br>
+<p>return kafkaProducer.send({ topic, messages: [message] });</p>
 <br>
-<p>      const message = {</p>
+<p>}</p>
 <br>
-<p>        value: JSON.stringify(payload),</p>
+<p>// Consumer: extract context from message</p>
 <br>
-<p>        headers: {</p>
+<p>import { propagation, context } from "@opentelemetry/api";</p>
 <br>
-<p>          ...carrier,</p>
+<p>kafkaConsumer.on("message", (message) => {</p>
 <br>
-<p>          "content-type": "application/json",</p>
+<p>const extractedContext = propagation.extract(</p>
 <br>
-<p>        },</p>
+<p>context.active(),</p>
 <br>
-<p>      };</p>
+<p>message.headers</p>
 <br>
-<p>      return kafkaProducer.send({ topic, messages: [message] });</p>
+<p>);</p>
 <br>
-<p>    }</p>
+<p>context.with(extractedContext, async () => {</p>
 <br>
+<p>// This operation is now part of the parent trace</p>
 <br>
+<p>const span = tracer.startSpan("process-order");</p>
 <br>
+<p>// Process message...</p>
 <br>
+<p>span.end();</p>
 <br>
+<p>});</p>
 <br>
-<br>
-<p>    // Consumer: extract context from message</p>
-<br>
-<p>    import { propagation, context } from "@opentelemetry/api";</p>
-<br>
-<br>
-<br>
-<p>    kafkaConsumer.on("message", (message) => {</p>
-<br>
-<p>      const extractedContext = propagation.extract(</p>
-<br>
-<p>        context.active(),</p>
-<br>
-<p>        message.headers</p>
-<br>
-<p>      );</p>
-<br>
-<br>
-<br>
-<p>      context.with(extractedContext, async () => {</p>
-<br>
-<p>        // This operation is now part of the parent trace</p>
-<br>
-<p>        const span = tracer.startSpan("process-order");</p>
-<br>
-<p>        // Process message...</p>
-<br>
-<p>        span.end();</p>
-<br>
-<p>      });</p>
-<br>
-<p>    });</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>});</p>
 <br>
 <h2>  Sampling Strategies</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Sampling controls the volume of traces collected. Use head-based sampling for simplicity or tail-based for intelligent selection:</p>
 <br>
+<h1>OpenTelemetry Collector: tail-based sampling</h1>
 <br>
+<p>processors:</p>
 <br>
+<p>tail_sampling:</p>
 <br>
+<p>decision_wait: 30s</p>
 <br>
-<p>    # OpenTelemetry Collector: tail-based sampling</p>
+<p>num_traces: 10000</p>
 <br>
-<p>    processors:</p>
+<p>expected_new_traces_per_sec: 100</p>
 <br>
-<p>      tail_sampling:</p>
+<p>policies:</p>
 <br>
-<p>        decision_wait: 30s</p>
+<p>\- name: error-sampling</p>
 <br>
-<p>        num_traces: 10000</p>
+<p>type: status_code</p>
 <br>
-<p>        expected_new_traces_per_sec: 100</p>
+<p>config:</p>
 <br>
-<p>        policies:</p>
+<p>status_code: ERROR</p>
 <br>
-<p>          - name: error-sampling</p>
+<p>sampling_percentage: 100</p>
 <br>
-<p>            type: status_code</p>
+<p>\- name: latency-sampling</p>
 <br>
-<p>            config:</p>
+<p>type: latency</p>
 <br>
-<p>              status_code: ERROR</p>
+<p>config:</p>
 <br>
-<p>              sampling_percentage: 100</p>
+<p>threshold_ms: 500</p>
 <br>
-<p>          - name: latency-sampling</p>
+<p>sampling_percentage: 50</p>
 <br>
-<p>            type: latency</p>
+<p>\- name: probabilistic</p>
 <br>
-<p>            config:</p>
+<p>type: probabilistic</p>
 <br>
-<p>              threshold_ms: 500</p>
+<p>config:</p>
 <br>
-<p>              sampling_percentage: 50</p>
-<br>
-<p>          - name: probabilistic</p>
-<br>
-<p>            type: probabilistic</p>
-<br>
-<p>            config:</p>
-<br>
-<p>              sampling_percentage: 5</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>sampling_percentage: 5</p>
 <br>
 <p>For head-based sampling in application code:</p>
 <br>
+<p>import { SamplingDecision } from "@opentelemetry/api";</p>
 <br>
+<p>import { Sampler, SpanKind, Attributes } from "@opentelemetry/api";</p>
 <br>
+<p>class CustomSampler implements Sampler {</p>
 <br>
+<p>shouldSample(</p>
 <br>
-<p>    import { SamplingDecision } from "@opentelemetry/api";</p>
+<p>context: Context,</p>
 <br>
-<p>    import { Sampler, SpanKind, Attributes } from "@opentelemetry/api";</p>
+<p>traceId: string,</p>
 <br>
+<p>spanName: string,</p>
 <br>
+<p>spanKind: SpanKind,</p>
 <br>
-<p>    class CustomSampler implements Sampler {</p>
+<p>attributes: Attributes</p>
 <br>
-<p>      shouldSample(</p>
+<p>) {</p>
 <br>
-<p>        context: Context,</p>
+<p>// Always sample error-prone operations</p>
 <br>
-<p>        traceId: string,</p>
+<p>if (spanName.startsWith("payment.")) {</p>
 <br>
-<p>        spanName: string,</p>
+<p>return { decision: SamplingDecision.RECORD_AND_SAMPLED };</p>
 <br>
-<p>        spanKind: SpanKind,</p>
+<p>}</p>
 <br>
-<p>        attributes: Attributes</p>
+<p>// Sample 10% of health checks</p>
 <br>
-<p>      ) {</p>
+<p>if (spanName === "health-check") {</p>
 <br>
-<p>        // Always sample error-prone operations</p>
+<p>return { decision: SamplingDecision.DROP };</p>
 <br>
-<p>        if (spanName.startsWith("payment.")) {</p>
+<p>}</p>
 <br>
-<p>          return { decision: SamplingDecision.RECORD_AND_SAMPLED };</p>
+<p>// Default probabilistic sampling</p>
 <br>
-<p>        }</p>
+<p>return { decision: SamplingDecision.RECORD_AND_SAMPLED };</p>
 <br>
-<p>        // Sample 10% of health checks</p>
+<p>}</p>
 <br>
-<p>        if (spanName === "health-check") {</p>
-<br>
-<p>          return { decision: SamplingDecision.DROP };</p>
-<br>
-<p>        }</p>
-<br>
-<p>        // Default probabilistic sampling</p>
-<br>
-<p>        return { decision: SamplingDecision.RECORD_AND_SAMPLED };</p>
-<br>
-<p>      }</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <h2>  Visualization with Jaeger and Zipkin</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Jaeger provides rich trace visualization and analysis capabilities:</p>
 <br>
+<h1>docker-compose.yml for Jaeger</h1>
 <br>
+<p>services:</p>
 <br>
+<p>jaeger:</p>
 <br>
+<p>image: jaegertracing/all-in-one:latest</p>
 <br>
-<p>    # docker-compose.yml for Jaeger</p>
+<p>environment:</p>
 <br>
-<p>    services:</p>
+<p>COLLECTOR_OTLP_ENABLED: "true"</p>
 <br>
-<p>      jaeger:</p>
+<p>ports:</p>
 <br>
-<p>        image: jaegertracing/all-in-one:latest</p>
+<p>\- "16686:16686" # UI</p>
 <br>
-<p>        environment:</p>
-<br>
-<p>          COLLECTOR_OTLP_ENABLED: "true"</p>
-<br>
-<p>        ports:</p>
-<br>
-<p>          - "16686:16686"  # UI</p>
-<br>
-<p>          - "4318:4318"    # OTLP HTTP</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>\- "4318:4318" # OTLP HTTP</p>
 <br>
 <p>Configure the OpenTelemetry Collector to forward traces to Jaeger:</p>
 <br>
+<p>receivers:</p>
 <br>
+<p>otlp:</p>
 <br>
+<p>protocols:</p>
 <br>
+<p>http:</p>
 <br>
-<p>    receivers:</p>
+<p>endpoint: "0.0.0.0:4318"</p>
 <br>
-<p>      otlp:</p>
+<p>exporters:</p>
 <br>
-<p>        protocols:</p>
+<p>jaeger:</p>
 <br>
-<p>          http:</p>
+<p>endpoint: "jaeger:14250"</p>
 <br>
-<p>            endpoint: "0.0.0.0:4318"</p>
+<p>tls:</p>
 <br>
+<p>insecure: true</p>
 <br>
+<p>service:</p>
 <br>
-<p>    exporters:</p>
+<p>pipelines:</p>
 <br>
-<p>      jaeger:</p>
+<p>traces:</p>
 <br>
-<p>        endpoint: "jaeger:14250"</p>
+<p>receivers: [otlp]</p>
 <br>
-<p>        tls:</p>
-<br>
-<p>          insecure: true</p>
-<br>
-<br>
-<br>
-<p>    service:</p>
-<br>
-<p>      pipelines:</p>
-<br>
-<p>        traces:</p>
-<br>
-<p>          receivers: [otlp]</p>
-<br>
-<p>          exporters: [jaeger]</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>exporters: [jaeger]</p>
 <br>
 <h2>  Baggage Propagation</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Baggage carries non-sampling key-value pairs across service boundaries for contextual information:</p>
 <br>
+<p>import { propagation } from "@opentelemetry/api";</p>
 <br>
+<p>// Set baggage in the entry service</p>
 <br>
+<p>propagation.setBaggage(context.active(),</p>
 <br>
+<p>propagation.createBaggage({</p>
 <br>
-<p>    import { propagation } from "@opentelemetry/api";</p>
+<p>"user.id": { value: userId },</p>
 <br>
+<p>"session.region": { value: region },</p>
 <br>
+<p>"request.source": { value: source },</p>
 <br>
-<p>    // Set baggage in the entry service</p>
+<p>})</p>
 <br>
-<p>    propagation.setBaggage(context.active(),</p>
-<br>
-<p>      propagation.createBaggage({</p>
-<br>
-<p>        "user.id": { value: userId },</p>
-<br>
-<p>        "session.region": { value: region },</p>
-<br>
-<p>        "request.source": { value: source },</p>
-<br>
-<p>      })</p>
-<br>
-<p>    );</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>);</p>
 <br>
 <p>Access baggage in downstream services without modifying API contracts:</p>
 <br>
+<p>import { propagation, getBaggage } from "@opentelemetry/api";</p>
 <br>
+<p>function getCurrentUserId(): string | undefined {</p>
 <br>
+<p>const baggage = getBaggage(context.active());</p>
 <br>
+<p>return baggage?.getEntry("user.id")?.value;</p>
 <br>
-<p>    import { propagation, getBaggage } from "@opentelemetry/api";</p>
-<br>
-<br>
-<br>
-<p>    function getCurrentUserId(): string | undefined {</p>
-<br>
-<p>      const baggage = getBaggage(context.active());</p>
-<br>
-<p>      return baggage?.getEntry("user.id")?.value;</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <h2>  Correlation with Logs and Metrics</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Link traces to logs using `trace_id` and `span_id`:</p>
 <br>
+<p>import { trace } from "@opentelemetry/api";</p>
 <br>
+<p>function enrichLogger(logger: Logger): Logger {</p>
 <br>
+<p>const span = trace.getActiveSpan();</p>
 <br>
+<p>return logger.child({</p>
 <br>
-<p>    import { trace } from "@opentelemetry/api";</p>
+<p>trace_id: span?.spanContext().traceId,</p>
 <br>
+<p>span_id: span?.spanContext().spanId,</p>
 <br>
+<p>trace_flags: span?.spanContext().traceFlags,</p>
 <br>
-<p>    function enrichLogger(logger: Logger): Logger {</p>
+<p>});</p>
 <br>
-<p>      const span = trace.getActiveSpan();</p>
-<br>
-<p>      return logger.child({</p>
-<br>
-<p>        trace_id: span?.spanContext().traceId,</p>
-<br>
-<p>        span_id: span?.spanContext().spanId,</p>
-<br>
-<p>        trace_flags: span?.spanContext().traceFlags,</p>
-<br>
-<p>      });</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <p>Emit metrics with trace context for full observability:</p>
 <br>
+<p>import { metrics } from "@opentelemetry/api";</p>
 <br>
+<p>const meter = metrics.getMeter("payment-service");</p>
 <br>
+<p>const requestCounter = meter.createCounter("payment.requests", {</p>
 <br>
+<p>description: "Count of payment requests",</p>
 <br>
-<p>    import { metrics } from "@opentelemetry/api";</p>
+<p>});</p>
 <br>
+<p>function trackPayment(status: string) {</p>
 <br>
+<p>const spanContext = trace.getActiveSpan()?.spanContext();</p>
 <br>
-<p>    const meter = metrics.getMeter("payment-service");</p>
+<p>requestCounter.add(1, {</p>
 <br>
-<p>    const requestCounter = meter.createCounter("payment.requests", {</p>
+<p>status,</p>
 <br>
-<p>      description: "Count of payment requests",</p>
+<p>trace_id: spanContext?.traceId,</p>
 <br>
-<p>    });</p>
+<p>});</p>
 <br>
-<br>
-<br>
-<p>    function trackPayment(status: string) {</p>
-<br>
-<p>      const spanContext = trace.getActiveSpan()?.spanContext();</p>
-<br>
-<p>      requestCounter.add(1, {</p>
-<br>
-<p>        status,</p>
-<br>
-<p>        trace_id: spanContext?.traceId,</p>
-<br>
-<p>      });</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <h2>  Production Configuration</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Deploy the OpenTelemetry Collector as a sidecar or DaemonSet for centralized configuration:</p>
 <br>
+<p>apiVersion: apps/v1</p>
 <br>
+<p>kind: DaemonSet</p>
 <br>
+<p>metadata:</p>
 <br>
+<p>name: otel-collector</p>
 <br>
-<p>    apiVersion: apps/v1</p>
+<p>spec:</p>
 <br>
-<p>    kind: DaemonSet</p>
+<p>template:</p>
 <br>
-<p>    metadata:</p>
+<p>spec:</p>
 <br>
-<p>      name: otel-collector</p>
+<p>containers:</p>
 <br>
-<p>    spec:</p>
+<p>\- name: otel-collector</p>
 <br>
-<p>      template:</p>
+<p>image: otel/opentelemetry-collector-contrib:latest</p>
 <br>
-<p>        spec:</p>
+<p>args: ["--config=/etc/otel/config.yaml"]</p>
 <br>
-<p>          containers:</p>
+<p>ports:</p>
 <br>
-<p>            - name: otel-collector</p>
-<br>
-<p>              image: otel/opentelemetry-collector-contrib:latest</p>
-<br>
-<p>              args: ["--config=/etc/otel/config.yaml"]</p>
-<br>
-<p>              ports:</p>
-<br>
-<p>                - containerPort: 4318 # OTLP HTTP</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>\- containerPort: 4318 # OTLP HTTP</p>
 <br>
 <p>Instrumentation should be additive and never break business logic. Start with critical paths (payment, auth, order creation) and expand coverage iteratively. A well-instrumented system reduces mean time to diagnosis from hours to minutes.</p></div>
     </article>

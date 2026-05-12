@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/multi-master-replication.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR">
     <meta name="twitter:description" content="Explore multi-master replication strategies including conflict resolution techniques, CRDTs, Galera Cluster for MySQL, and PostgreSQL BDR.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/multi-master-replication.png">
     <title>Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR — SourceHub</title>
     <meta name="description" content="Explore multi-master replication strategies including conflict resolution techniques, CRDTs, Galera Cluster for MySQL, and PostgreSQL BDR.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR",
       "description": "Explore multi-master replication strategies including conflict resolution techniques, CRDTs, Galera Cluster for MySQL, and PostgreSQL BDR.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/multi-master-replication.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1501",
+      "wordCount": "1457",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/multi-master-replication.png" alt="Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR</h1>
 <br>
 <p>Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR   </p>
@@ -91,22 +92,15 @@
 <p>Last-Write-Wins (LWW)   </p>
 <p>Each row carries a timestamp. The write with the latest timestamp wins. Simple but lossy:   </p>
 <br>
-<br>
-<br>
 <p>    -- Cassandra default</p>
 <br>
 <p>    UPDATE users SET email = 'new@example.com', updated_at = now() WHERE id = 1;</p>
 <br>
 <p>    -- The LWW with the highest timestamp wins</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Pros**: Simple, always converges. **Cons**: Loses data silently.   </p>
 <p>Application-Mediated Conflict Resolution   </p>
 <p>The database detects conflicts and presents them to the application for resolution. BDR (Bi-Directional Replication) for PostgreSQL supports this:   </p>
-<br>
-<br>
 <br>
 <p>    -- Create a conflict handler function</p>
 <br>
@@ -130,19 +124,12 @@
 <br>
 <p>    $$ LANGUAGE plpgsql;</p>
 <br>
-<br>
-<br>
 <p>    -- Apply to the replication set</p>
 <br>
 <p>    SELECT bdr.conflict_handler('orders', 'resolve_conflict');</p>
 <br>
-<br>
-<br>
-<br>
 <p>CRDT-Based Reconciliation   </p>
 <p>Conflict-free Replicated Data Types (CRDTs) mathematically guarantee convergence without coordination. Instead of storing a scalar value, you store a data structure where concurrent operations commute or combine:   </p>
-<br>
-<br>
 <br>
 <p>    -- Counter CRDT table</p>
 <br>
@@ -154,20 +141,13 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
 <p>    -- Each replica increments independently</p>
 <br>
 <p>    UPDATE page_views SET counter = counter + 1 WHERE page_id = 42;</p>
 <br>
-<br>
-<br>
 <p>    -- The final value after reconciliation: MAX of all replicas' counters (for grow-only counters)</p>
 <br>
 <p>    -- or SUM (for counters implemented as PN-Counters)</p>
-<br>
-<br>
-<br>
 <br>
 <p>More sophisticated CRDTs include:   </p>
 <br>
@@ -177,8 +157,6 @@
 <br>
 <p>Galera Cluster (MySQL / MariaDB)   </p>
 <p>Galera Cluster implements synchronous multi-master replication for MySQL. All nodes coordinate before committing:   </p>
-<br>
-<br>
 <br>
 <p>    -- All nodes are writable</p>
 <br>
@@ -192,14 +170,9 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
 <p>    INSERT INTO users (email) VALUES ('alice@example.com');</p>
 <br>
 <p>    -- This INSERT is certified on all nodes before returning</p>
-<br>
-<br>
-<br>
 <br>
 <p>Galera Key Properties   </p>
 <br>
@@ -218,8 +191,6 @@
 <p>PostgreSQL BDR (Bi-Directional Replication)   </p>
 <p>BDR extends PostgreSQL's logical replication for multi-master scenarios. It operates at row level with conflict resolution:   </p>
 <br>
-<br>
-<br>
 <p>    -- Configure BDR group</p>
 <br>
 <p>    SELECT bdr.create_node(</p>
@@ -230,8 +201,6 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
 <p>    SELECT bdr.create_node(</p>
 <br>
 <p>        node_name := 'node2',</p>
@@ -240,8 +209,6 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
 <p>    SELECT bdr.create_group(</p>
 <br>
 <p>        group_name := 'global_app',</p>
@@ -249,9 +216,6 @@
 <p>        nodes := ARRAY['node1', 'node2']</p>
 <br>
 <p>    );</p>
-<br>
-<br>
-<br>
 <br>
 <p>BDR supports multiple conflict resolution modes:   </p>
 <br>
@@ -277,22 +241,15 @@
 <p>Monitoring Conflicts   </p>
 <p>Whichever system you choose, monitor conflict rates:   </p>
 <br>
-<br>
-<br>
 <p>    -- BDR conflict stats</p>
 <br>
 <p>    SELECT * FROM bdr.conflict_history;</p>
-<br>
-<br>
 <br>
 <p>    -- Galeria cluster status</p>
 <br>
 <p>    SHOW STATUS LIKE 'wsrep_cluster_size';</p>
 <br>
 <p>    SHOW STATUS LIKE 'wsrep_local_cert_failures';</p>
-<br>
-<br>
-<br>
 <br>
 <p>A rising conflict rate indicates application-level contention that might be better solved by sharding the data model rather than relying on replication to resolve conflicts.   </p>
 <p>Multi-master replication is a powerful but complex tool. Start with single-master and add multi-master only when your availability or latency requirements genuinely demand it.</p></div>

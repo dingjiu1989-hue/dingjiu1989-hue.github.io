@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/json-in-postgresql.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations">
     <meta name="twitter:description" content="Comprehensive guide to using JSON in PostgreSQL. Compare JSONB and JSON types, indexing strategies, query operators, and when to choose PostgreSQL over MongoDB.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/json-in-postgresql.png">
     <title>JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations — SourceHub</title>
     <meta name="description" content="Comprehensive guide to using JSON in PostgreSQL. Compare JSONB and JSON types, indexing strategies, query operators, and when to choose PostgreSQL over MongoDB.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations",
       "description": "Comprehensive guide to using JSON in PostgreSQL. Compare JSONB and JSON types, indexing strategies, query operators, and when to choose PostgreSQL over MongoDB.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/json-in-postgresql.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1584",
+      "wordCount": "1515",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/json-in-postgresql.png" alt="JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</h1>
 <br>
 <p>JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations   </p>
@@ -83,8 +84,6 @@
 <p>PostgreSQL offers two JSON data types:   </p>
 <p>| Aspect | `json` | `jsonb` | |--------|--------|---------| | Storage | Exact copy of input text | Decomposed binary format | | Duplicate keys | Preserved | Last key wins | | Whitespace | Preserved | Removed | | Key ordering | Preserved | Not preserved | | Indexing | Function-based only | GIN indexes supported | | Parsing overhead | On each access | On insert only |   </p>
 <p>**Always use `jsonb`** for new projects unless you have a specific need for `json` (such as preserving duplicate keys exactly as input).   </p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE products (</p>
 <br>
@@ -96,33 +95,22 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
 <p>    INSERT INTO products (name, attributes) VALUES</p>
 <br>
 <p>        ('Widget', '{"color": "red", "weight": 1.5, "tags": ["sale", "new"]}'),</p>
 <br>
 <p>        ('Gadget', '{"color": "blue", "dimensions": {"width": 10, "height": 5}}');</p>
 <br>
-<br>
-<br>
-<br>
 <p>Query Operators   </p>
 <p>PostgreSQL provides a rich set of JSONB operators:   </p>
-<br>
-<br>
 <br>
 <p>    -- -> returns JSONB (preserves types)</p>
 <br>
 <p>    SELECT attributes -> 'color' FROM products; -- "red" (jsonb)</p>
 <br>
-<br>
-<br>
 <p>    -- ->> returns TEXT</p>
 <br>
 <p>    SELECT attributes ->> 'color' FROM products; -- red (text)</p>
-<br>
-<br>
 <br>
 <p>    -- Path access</p>
 <br>
@@ -130,19 +118,13 @@
 <br>
 <p>    SELECT attributes #>> '{dimensions, width}' FROM products;</p>
 <br>
-<br>
-<br>
 <p>    -- Containment check</p>
 <br>
 <p>    SELECT * FROM products WHERE attributes @> '{"color": "red"}';</p>
 <br>
-<br>
-<br>
 <p>    -- Key existence</p>
 <br>
 <p>    SELECT * FROM products WHERE attributes ? 'dimensions';</p>
-<br>
-<br>
 <br>
 <p>    -- Multiple key existence</p>
 <br>
@@ -150,63 +132,36 @@
 <br>
 <p>    SELECT * FROM products WHERE attributes ?& ARRAY['color', 'weight'];</p>
 <br>
-<br>
-<br>
-<br>
 <p>Indexing JSONB   </p>
 <p>GIN Index   </p>
 <p>The default GIN index supports containment (`@>`), key existence (`?`), and key/element existence (`?|`, `?&`):   </p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX idx_products_attributes ON products USING GIN (attributes);</p>
-<br>
-<br>
-<br>
 <br>
 <p>GIN with jsonb_path_ops   </p>
 <p>The `jsonb_path_ops` operator class creates a more focused index that is faster for containment queries:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE INDEX idx_products_attributes_path ON products</p>
 <br>
 <p>        USING GIN (attributes jsonb_path_ops);</p>
 <br>
-<br>
-<br>
-<br>
 <p>The `jsonb_path_ops` index is typically 1/3 the size of the default GIN index and 2-3x faster for `@>` queries. However, it does not support `?`, `?|`, or `?&` operators.   </p>
 <p>B-tree Index for JSONB Fields   </p>
 <p>For equality and range queries on specific JSONB fields, use a B-tree index on an expression:   </p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX idx_products_color ON products ((attributes ->> 'color'));</p>
-<br>
-<br>
 <br>
 <p>    -- Now this query uses the index:</p>
 <br>
 <p>    SELECT * FROM products WHERE attributes ->> 'color' = 'red';</p>
 <br>
-<br>
-<br>
-<br>
 <p>Partial Index for Specific JSON Structures   </p>
-<br>
-<br>
 <br>
 <p>    CREATE INDEX idx_products_sale ON products ((attributes ->> 'price'))</p>
 <br>
 <p>        WHERE attributes @> '{"sale": true}';</p>
 <br>
-<br>
-<br>
-<br>
 <p>JSONB Modification Functions   </p>
-<br>
-<br>
 <br>
 <p>    -- Add or update a key</p>
 <br>
@@ -216,8 +171,6 @@
 <br>
 <p>    WHERE id = 1;</p>
 <br>
-<br>
-<br>
 <p>    -- Remove a key</p>
 <br>
 <p>    UPDATE products</p>
@@ -225,8 +178,6 @@
 <p>    SET attributes = attributes - 'temporary_flag'</p>
 <br>
 <p>    WHERE id = 1;</p>
-<br>
-<br>
 <br>
 <p>    -- Concatenate (merge) JSONB</p>
 <br>
@@ -236,8 +187,6 @@
 <br>
 <p>    WHERE id = 1;</p>
 <br>
-<br>
-<br>
 <p>    -- Delete from array</p>
 <br>
 <p>    UPDATE products</p>
@@ -246,13 +195,8 @@
 <br>
 <p>    WHERE id = 1;</p>
 <br>
-<br>
-<br>
-<br>
 <p>JSONB in Queries with Relational Data   </p>
 <p>The real power of JSONB in PostgreSQL is combining document flexibility with relational integrity:   </p>
-<br>
-<br>
 <br>
 <p>    -- Join JSONB data with relational tables</p>
 <br>
@@ -272,8 +216,6 @@
 <br>
 <p>      AND o.order_date > '2026-01-01';</p>
 <br>
-<br>
-<br>
 <p>    -- Aggregate JSONB data per category</p>
 <br>
 <p>    SELECT category,</p>
@@ -283,9 +225,6 @@
 <p>    FROM products</p>
 <br>
 <p>    GROUP BY category;</p>
-<br>
-<br>
-<br>
 <br>
 <p>PostgreSQL vs MongoDB   </p>
 <p>When does PostgreSQL's JSONB make sense as a MongoDB alternative?   </p>
@@ -308,16 +247,9 @@
 <p>* **Always use `jsonb`**, not `json`, unless you have a specific reason.</p>
 <p>* **Add CHECK constraints** to validate JSON structure when possible:</p>
 <br>
-<br>
-<br>
-<br>
 <p>    ALTER TABLE products ADD CONSTRAINT valid_attributes</p>
 <br>
 <p>        CHECK (jsonb_typeof(attributes -> 'price') = 'number');</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>* **Combine JSONB with regular columns**: Use relational columns for primary keys, timestamps, and foreign keys. Use JSONB for variable or extensible attributes.</p>
 <p>* **Benchmark GIN indexes**: The default GIN index covers more operators. The `jsonb_path_ops` variant is faster for containment but less flexible.</p>

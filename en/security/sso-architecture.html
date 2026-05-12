@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/sso-architecture.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="SSO Architecture">
     <meta name="twitter:description" content="Designing SSO architecture with SAML, OIDC, session management, and identity provider integration.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/sso-architecture.png">
     <title>SSO Architecture — SourceHub</title>
     <meta name="description" content="Designing SSO architecture with SAML, OIDC, session management, and identity provider integration.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "SSO Architecture",
       "description": "Designing SSO architecture with SAML, OIDC, session management, and identity provider integration.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/sso-architecture.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1094",
+      "wordCount": "1038",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">SSO Architecture</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/sso-architecture.png" alt="SSO Architecture" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>SSO Architecture</h1>
 <br>
 <p>SSO Fundamentals   </p>
 <p>Single Sign-On (SSO) allows users to authenticate once and access multiple applications without re-entering credentials. It improves security by centralizing authentication and reducing password fatigue.   </p>
 <p>SAML 2.0   </p>
 <p>Security Assertion Markup Language (SAML) is the mature standard for enterprise SSO:   </p>
-<br>
-<br>
 <br>
 <p>    <!-- SAML AuthnRequest --></p>
 <br>
@@ -102,19 +101,11 @@
 <br>
 <p>    </samlp:AuthnRequest></p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # SAML response parsing</p>
 <br>
 <p>    from signxml import XMLVerifier</p>
 <br>
 <p>    import xml.etree.ElementTree as ET</p>
-<br>
-<br>
 <br>
 <p>    def parse_saml_response(response_xml):</p>
 <br>
@@ -122,15 +113,11 @@
 <br>
 <p>        verified_data = XMLVerifier().verify(response_xml).signed_xml</p>
 <br>
-<br>
-<br>
 <p>        # Extract attributes</p>
 <br>
 <p>        ns = {"saml2": "urn:oasis:names:tc:SAML:2.0:assertion"}</p>
 <br>
 <p>        root = ET.fromstring(verified_data)</p>
-<br>
-<br>
 <br>
 <p>        attributes = {}</p>
 <br>
@@ -142,29 +129,18 @@
 <br>
 <p>            attributes[name] = values</p>
 <br>
-<br>
-<br>
 <p>        return attributes</p>
-<br>
-<br>
-<br>
 <br>
 <p>OpenID Connect (OIDC)   </p>
 <p>OIDC is the modern SSO protocol built on OAuth2:   </p>
-<br>
-<br>
 <br>
 <p>    // OIDC client configuration</p>
 <br>
 <p>    const { Issuer } = require("openid-client");</p>
 <br>
-<br>
-<br>
 <p>    async function configureOIDC() {</p>
 <br>
 <p>      const issuer = await Issuer.discover("https://accounts.example.com");</p>
-<br>
-<br>
 <br>
 <p>      const client = new issuer.Client({</p>
 <br>
@@ -180,13 +156,9 @@
 <br>
 <p>      });</p>
 <br>
-<br>
-<br>
 <p>      return client;</p>
 <br>
 <p>    }</p>
-<br>
-<br>
 <br>
 <p>    // Generate authentication URL</p>
 <br>
@@ -204,20 +176,13 @@
 <br>
 <p>      });</p>
 <br>
-<br>
-<br>
 <p>      req.session.oidcState = state;</p>
 <br>
 <p>      res.redirect(authUrl);</p>
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Token Exchange   </p>
-<br>
-<br>
 <br>
 <p>    # Token exchange handler</p>
 <br>
@@ -227,21 +192,15 @@
 <br>
 <p>        state = request.query_params["state"]</p>
 <br>
-<br>
-<br>
 <p>        # Verify state matches</p>
 <br>
 <p>        if state != request.session["oidc_state"]:</p>
 <br>
 <p>            raise SecurityError("State mismatch - possible CSRF")</p>
 <br>
-<br>
-<br>
 <p>        # Exchange code for tokens</p>
 <br>
 <p>        token_response = await oidc_client.authorize_token(code)</p>
-<br>
-<br>
 <br>
 <p>        # Validate ID token</p>
 <br>
@@ -253,8 +212,6 @@
 <br>
 <p>        )</p>
 <br>
-<br>
-<br>
 <p>        return {</p>
 <br>
 <p>            "access_token": token_response["access_token"],</p>
@@ -263,12 +220,7 @@
 <br>
 <p>        }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Session Management   </p>
-<br>
-<br>
 <br>
 <p>    session_management:</p>
 <br>
@@ -280,8 +232,6 @@
 <br>
 <p>        extend_on_activity: true</p>
 <br>
-<br>
-<br>
 <p>      token_strategy:</p>
 <br>
 <p>        access_token_ttl: 15m</p>
@@ -290,8 +240,6 @@
 <br>
 <p>        rotate_refresh: true</p>
 <br>
-<br>
-<br>
 <p>      logout:</p>
 <br>
 <p>        - clear local session</p>
@@ -299,9 +247,6 @@
 <p>        - call IdP logout endpoint (SLO)</p>
 <br>
 <p>        - revoke all tokens for user</p>
-<br>
-<br>
-<br>
 <br>
 <p>IdP Integration Patterns   </p>
 <p>| Protocol | Use Case | Complexity | Security | |----------|----------|------------|----------| | SAML | Enterprise, government | High | Strong | | OIDC | Modern web, mobile | Medium | Strong | | LDAP | Legacy applications | Low | Weak |   </p>

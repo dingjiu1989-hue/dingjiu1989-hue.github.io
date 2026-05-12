@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/load-testing-tools.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Load Testing Tools: k6, Locust, Gatling, Artillery">
     <meta name="twitter:description" content="Compare load testing frameworks: k6 for JavaScript-based testing, Locust for Python, Gatling for Scala/Java, and Artillery for Node.js. Script examples, metrics">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/load-testing-tools.png">
     <title>Load Testing Tools: k6, Locust, Gatling, Artillery — SourceHub</title>
     <meta name="description" content="Compare load testing frameworks: k6 for JavaScript-based testing, Locust for Python, Gatling for Scala/Java, and Artillery for Node.js. Script examples, metrics">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Load Testing Tools: k6, Locust, Gatling, Artillery",
       "description": "Compare load testing frameworks: k6 for JavaScript-based testing, Locust for Python, Gatling for Scala/Java, and Artillery for Node.js. Script examples, metrics",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/load-testing-tools.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2145",
+      "wordCount": "2014",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,28 +75,16 @@
         <span class="tag-cat">Productivity</span></div>
       <h1 class="article-title">Load Testing Tools: k6, Locust, Gatling, Artillery</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/load-testing-tools.png" alt="Load Testing Tools: k6, Locust, Gatling, Artillery" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Load Testing Tools: k6, Locust, Gatling, Artillery</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Load testing ensures your application handles expected traffic without degradation. Modern load testing tools use real programming languages instead of XML/JSON configuration, making tests maintainable, version-controllable, and integrable with CI/CD pipelines. This article compares k6, Locust, Gatling, and Artillery.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  k6</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Grafana k6 is a JavaScript-based load testing tool with excellent performance metrics:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // load-test.js</p>
 <br>
@@ -106,15 +94,11 @@
 <br>
 <p>    import { Rate, Trend, Counter } from "k6/metrics";</p>
 <br>
-<br>
-<br>
 <p>    // Custom metrics</p>
 <br>
 <p>    const errorRate = new Rate("errors");</p>
 <br>
 <p>    const responseTime = new Trend("response_time");</p>
-<br>
-<br>
 <br>
 <p>    // Test configuration</p>
 <br>
@@ -146,8 +130,6 @@
 <br>
 <p>    };</p>
 <br>
-<br>
-<br>
 <p>    export default function () {</p>
 <br>
 <p>      group("User API endpoints", () => {</p>
@@ -160,8 +142,6 @@
 <br>
 <p>        });</p>
 <br>
-<br>
-<br>
 <p>        check(getRes, {</p>
 <br>
 <p>          "status is 200": (r) => r.status === 200,</p>
@@ -170,13 +150,9 @@
 <br>
 <p>        });</p>
 <br>
-<br>
-<br>
 <p>        errorRate.add(getRes.status !== 200);</p>
 <br>
 <p>        responseTime.add(getRes.timings.duration);</p>
-<br>
-<br>
 <br>
 <p>        // POST request</p>
 <br>
@@ -188,15 +164,11 @@
 <br>
 <p>        });</p>
 <br>
-<br>
-<br>
 <p>        check(postRes, {</p>
 <br>
 <p>          "created status is 201": (r) => r.status === 201,</p>
 <br>
 <p>        });</p>
-<br>
-<br>
 <br>
 <p>        sleep(1);</p>
 <br>
@@ -204,42 +176,19 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # Run test</p>
 <br>
 <p>    k6 run load-test.js</p>
-<br>
-<br>
 <br>
 <p>    # With HTML report</p>
 <br>
 <p>    k6 run load-test.js --out json=results.json --out html=report.html</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Strengths**: Go-based (efficient), JavaScript scripting, rich metrics, threshold system, extensive protocol support (HTTP, gRPC, WebSocket, browser), cloud integration.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Locust</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Python-based load testing with a web UI for real-time monitoring:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # locustfile.py</p>
 <br>
@@ -247,13 +196,9 @@
 <br>
 <p>    import json</p>
 <br>
-<br>
-<br>
 <p>    class WebsiteUser(HttpUser):</p>
 <br>
 <p>        wait_time = between(1, 5)  # Simulate user think time</p>
-<br>
-<br>
 <br>
 <p>        def on_start(self):</p>
 <br>
@@ -268,8 +213,6 @@
 <p>            })</p>
 <br>
 <p>            self.token = response.json().get("token")</p>
-<br>
-<br>
 <br>
 <p>        @task(3)  # Weight: 3x more likely</p>
 <br>
@@ -299,8 +242,6 @@
 <br>
 <p>                    response.failure(f"Got status {response.status_code}")</p>
 <br>
-<br>
-<br>
 <p>        @task(1)</p>
 <br>
 <p>        @tag("write")</p>
@@ -317,32 +258,15 @@
 <br>
 <p>            self.client.post("/users", json=payload)</p>
 <br>
-<br>
-<br>
 <p>    # Run: locust -f locustfile.py --headless -u 100 -r 10 -t 10m</p>
 <br>
 <p>    # Web UI: locust -f locustfile.py (then open http://localhost:8089)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Strengths**: Python scripting (familiar for data teams), distributed execution, web UI for live monitoring, extensible with custom event hooks.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Gatling</h2>
 <br>
-<br>
-<br>
-<br>
 <p>High-performance Scala/Java load testing with detailed HTML reports:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // BasicSimulation.scala</p>
 <br>
@@ -351,8 +275,6 @@
 <p>    import io.gatling.http.Predef._</p>
 <br>
 <p>    import scala.concurrent.duration._</p>
-<br>
-<br>
 <br>
 <p>    class BasicSimulation extends Simulation {</p>
 <br>
@@ -366,11 +288,7 @@
 <br>
 <p>        .userAgentHeader("Gatling")</p>
 <br>
-<br>
-<br>
 <p>      val feeder = csv("users.csv").circular</p>
-<br>
-<br>
 <br>
 <p>      val scn = scenario("User API Test")</p>
 <br>
@@ -404,8 +322,6 @@
 <br>
 <p>          .check(status.is(200)))</p>
 <br>
-<br>
-<br>
 <p>      setUp(</p>
 <br>
 <p>        scn.inject(</p>
@@ -424,36 +340,15 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # Run</p>
 <br>
 <p>    gatling.sh -s BasicSimulation -rf results/</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Strengths**: Best performance (Akka-based), richest HTML reports, powerful DSL, excellent for high-throughput testing.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Artillery</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Node.js-based load testing focused on developer experience:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # artillery.yml</p>
 <br>
@@ -482,8 +377,6 @@
 <p>        headers:</p>
 <br>
 <p>          Authorization: "Bearer {{ token }}"</p>
-<br>
-<br>
 <br>
 <p>    scenarios:</p>
 <br>
@@ -521,17 +414,9 @@
 <br>
 <p>                payment_method: "card"</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # Run</p>
 <br>
 <p>    npx artillery run artillery.yml</p>
-<br>
-<br>
 <br>
 <p>    # Report</p>
 <br>
@@ -539,15 +424,7 @@
 <br>
 <p>    npx artillery report report.json</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Comparison</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| Feature | k6 | Locust | Gatling | Artillery |</p>
 <br>
@@ -567,20 +444,13 @@
 <br>
 <p>| Reports | JSON/HTML | CSV/HTML | HTML (excellent) | JSON/HTML |</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Recommendations</h2>
-<br>
-<br>
 <br>
 <p>* **JavaScript teams**: k6 for the best balance of scripting ease and performance.</p>
 <p>* **Python teams**: Locust for familiar Python scripting with live web monitoring.</p>
 <p>* **High-throughput testing**: Gatling for the most detailed performance analysis.</p>
 <p>* **Quick setup**: Artillery for YAML-based configuration without coding.</p>
 <p>* **CI/CD integration**: k6 with Grafana dashboards for production load testing.</p>
-<br>
-<br>
 <br>
 <p>All four tools support CI integration. k6 has the strongest Grafana ecosystem. Locust excels for teams already using Python data tools. Gatling produces the most detailed HTML reports. Artillery is the fastest to set up for simple tests.</p></div>
     </article>

@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/devsecops-pipeline.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="DevSecOps: Integrating Security into CI/CD">
     <meta name="twitter:description" content="Integrate SAST, DAST, dependency scanning, container scanning, and policy-as-code into your CI/CD pipeline for shift-left security.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/devsecops-pipeline.png">
     <title>DevSecOps: Integrating Security into CI/CD — SourceHub</title>
     <meta name="description" content="Integrate SAST, DAST, dependency scanning, container scanning, and policy-as-code into your CI/CD pipeline for shift-left security.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "DevSecOps: Integrating Security into CI/CD",
       "description": "Integrate SAST, DAST, dependency scanning, container scanning, and policy-as-code into your CI/CD pipeline for shift-left security.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/devsecops-pipeline.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2436",
+      "wordCount": "2258",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,74 +74,37 @@
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">DevSecOps: Integrating Security into CI/CD</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/devsecops-pipeline.png" alt="DevSecOps: Integrating Security into CI/CD" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>DevSecOps: Integrating Security into CI/CD</h1>
 <br>
 <p>DevSecOps embeds security into every stage of the software development lifecycle. Rather than running security assessments at the end of a release cycle, DevSecOps shifts security left into development and CI/CD pipelines. This article covers how to integrate SAST, DAST, dependency scanning, container scanning, and policy-as-code into your pipelines.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Shift-Left Security</h2>
-<br>
-<br>
-<br>
 <br>
 <p>The shift-left principle moves security testing earlier in the development process. Finding and fixing a vulnerability during development costs 10 times less than fixing it in production, and 100 times less than fixing it after a breach.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Security Gates in the Pipeline</h3>
 <br>
-<br>
-<br>
-<br>
 <p>A mature DevSecOps pipeline has security gates at every stage:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    Code Commit -> SAST -> Dependency Scan -> Build -> Container Scan -> </p>
 <br>
 <p>    Integration Test -> DAST -> Staging -> Policy Check -> Production</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Each gate can pass, fail with a warning, or fail and block the pipeline. The severity determines the action: critical and high findings block the pipeline, while medium and low findings create tickets for the development team.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Static Application Security Testing (SAST)</h2>
 <br>
-<br>
-<br>
-<br>
 <p>SAST analyzes source code without executing it. It identifies vulnerabilities like SQL injection, cross-site scripting (XSS), buffer overflows, and insecure cryptographic usage.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Popular SAST Tools</h3>
-<br>
-<br>
 <br>
 <p>* **Semgrep**: Open-source, fast, and supports custom rules. Works with most programming languages.</p>
 <p>* **SonarQube**: Static analysis with quality gates and technical debt tracking.</p>
 <p>* **CodeQL**: GitHub's semantic code analysis engine. Query-based vulnerability detection.</p>
 <p>* **Checkmarx / Fortify**: Commercial SAST tools with extensive rule sets.</p>
 <br>
-<br>
-<br>
 <h3>Pipeline Integration</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # GitHub Actions: SAST with Semgrep</p>
 <br>
@@ -152,8 +115,6 @@
 <p>      pull_request:</p>
 <br>
 <p>        branches: [main]</p>
-<br>
-<br>
 <br>
 <p>    jobs:</p>
 <br>
@@ -185,69 +146,35 @@
 <br>
 <p>              fi</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>SAST Best Practices</h3>
-<br>
-<br>
 <br>
 <p>* Run SAST on every pull request, not just on push to main.</p>
 <p>* Use incremental scanning for faster feedback on large codebases.</p>
 <p>* Tune rules to reduce false positives. Block only high-confidence findings.</p>
 <p>* Create custom rules for your application's specific security patterns.</p>
 <br>
-<br>
-<br>
 <h2>  Dependency Scanning</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Modern applications use dozens of open-source libraries. Each library introduces transitive dependencies with potential vulnerabilities.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Software Bill of Materials (SBOM)</h3>
 <br>
-<br>
-<br>
-<br>
 <p>An SBOM is a formal inventory of all software components in an application. Generate SBOMs in CycloneDX or SPDX format.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Generate SBOM with Syft</p>
 <br>
 <p>    syft packages . -o cyclonedx-json > sbom.json</p>
 <br>
-<br>
-<br>
 <p>    # Scan SBOM for vulnerabilities with Grype</p>
 <br>
 <p>    grype sbom:./sbom.json</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Dependency Scanning Tools</h3>
-<br>
-<br>
 <br>
 <p>* **Dependabot**: GitHub's built-in dependency scanning and automated pull requests for patches.</p>
 <p>* **Renovate**: Open-source dependency update tool with extensive customization.</p>
 <p>* **Snyk**: Commercial vulnerability scanner with fix advice and license compliance.</p>
 <p>* **OWASP Dependency-Check**: Open-source scanner that identifies CVEs in dependencies.</p>
-<br>
-<br>
-<br>
 <br>
 <p>    # Dependabot configuration</p>
 <br>
@@ -271,47 +198,24 @@
 <br>
 <p>          - "security"</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Dependency Scanning Policy</h3>
-<br>
-<br>
 <br>
 <p>* Block the pipeline on critical or high severity vulnerabilities in direct dependencies.</p>
 <p>* Flag transitive dependency vulnerabilities but only block if they are exploitable.</p>
 <p>* Require automated dependency updates within 7 days for critical, 30 days for high.</p>
 <p>* Monitor for license compliance alongside vulnerability scanning.</p>
 <br>
-<br>
-<br>
 <h2>  Dynamic Application Security Testing (DAST)</h2>
-<br>
-<br>
-<br>
 <br>
 <p>DAST tests the running application from the outside, simulating real-world attack patterns. It discovers vulnerabilities that SAST misses, such as authentication bypass, session management flaws, and business logic errors.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>DAST Tools</h3>
-<br>
-<br>
 <br>
 <p>* **OWASP ZAP**: Open-source web application scanner with automated and manual modes.</p>
 <p>* **Burp Suite**: Commercial web security testing platform with advanced scanning.</p>
 <p>* **Arachni**: Open-source web application security scanner framework.</p>
 <br>
-<br>
-<br>
 <h3>Pipeline Integration</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # DAST with OWASP ZAP in CI/CD</p>
 <br>
@@ -322,8 +226,6 @@
 <p>        image: ghcr.io/zaproxy/zaproxy:stable</p>
 <br>
 <p>        options: --user root</p>
-<br>
-<br>
 <br>
 <p>    steps:</p>
 <br>
@@ -355,45 +257,24 @@
 <br>
 <p>          fi</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>DAST Best Practices</h3>
-<br>
-<br>
 <br>
 <p>* Run DAST against staging or review environments, not production.</p>
 <p>* Authenticate DAST scanners to test authenticated functionality.</p>
 <p>* Use baseline scans for smoke testing and full scans for release candidates.</p>
 <p>* Integrate with Jira or ticketing for automatic issue creation.</p>
 <br>
-<br>
-<br>
 <h2>  Container Scanning</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Container images bundle applications with their runtime dependencies. Vulnerabilities in base images or installed packages become part of the container.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Scanning Pipeline Integration</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Dockerfile with security best practices</p>
 <br>
 <p>    FROM alpine:3.19 AS builder</p>
 <br>
 <p>    RUN apk add --no-cache build-base</p>
-<br>
-<br>
 <br>
 <p>    FROM alpine:3.19</p>
 <br>
@@ -406,12 +287,6 @@
 <p>    USER app</p>
 <br>
 <p>    EXPOSE 8080</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Container scanning with Trivy in CI/CD</p>
 <br>
@@ -451,48 +326,24 @@
 <br>
 <p>              sarif_file: trivy-results.sarif</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Container Security Practices</h3>
-<br>
-<br>
 <br>
 <p>* Use minimal base images (Alpine, distroless) to reduce attack surface.</p>
 <p>* Scan images before pushing to the registry.</p>
 <p>* Enforce signed images with Cosign.</p>
 <p>* Enable granular runtime security with seccomp, AppArmor, or SELinux policies.</p>
 <br>
-<br>
-<br>
 <h2>  Policy-as-Code</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Policy-as-code defines security and compliance rules as executable code. Policies are versioned, reviewed, and enforced automatically in the pipeline.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Open Policy Agent (OPA) and Rego</h3>
 <br>
-<br>
-<br>
-<br>
 <p>OPA enforces policies across the software lifecycle. Rego is OPA's policy language.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Rego policy: Require encryption at rest</p>
 <br>
 <p>    package kubernetes.storage</p>
-<br>
-<br>
 <br>
 <p>    deny[msg] {</p>
 <br>
@@ -506,16 +357,7 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Policy Gates in the Pipeline</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Conftest: Policy enforcement for Kubernetes manifests</p>
 <br>
@@ -539,14 +381,7 @@
 <br>
 <p>            --policy policies/terraform/</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Common Policy Rules</h3>
-<br>
-<br>
 <br>
 <p>* Containers must not run as root.</p>
 <p>* All ingress must have TLS enabled.</p>
@@ -554,28 +389,16 @@
 <p>* Database instances must have encryption at rest.</p>
 <p>* IAM roles must have resource-level constraints.</p>
 <br>
-<br>
-<br>
 <h2>  Building a DevSecOps Culture</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Tools alone do not make DevSecOps successful. The human elements matter more.</p>
-<br>
-<br>
 <br>
 <p>* **Developer empowerment**: Give developers access to security scan results and fix guidance. Do not use security as a gate without providing remediation support.</p>
 <p>* **Security champions**: Train security champions in each development team. They bridge the gap between security and engineering.</p>
 <p>* **Friction reduction**: Optimize scan times. A 30-minute SAST scan encourages skipping. A 2-minute scan integrates naturally into the workflow.</p>
 <p>* **Blameless culture**: When security scans find issues, the process worked correctly. Celebrate catching issues early rather than blaming developers.</p>
 <br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>DevSecOps shifts security from a final gate to an integrated part of the development process. SAST catches code-level vulnerabilities, dependency scanning manages supply chain risk, DAST validates runtime behavior, container scanning secures artifacts, and policy-as-code enforces standards. Together, these practices make security a natural part of delivering software, not an obstacle to it.</p></div>
     </article>

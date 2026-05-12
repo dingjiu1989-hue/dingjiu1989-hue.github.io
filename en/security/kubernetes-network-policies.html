@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-network-policies.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Kubernetes Network Policies">
     <meta name="twitter:description" content="In-depth guide to Kubernetes network policies covering ingress/egress rules, Cilium, Calico, and zero-trust networking for pods.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-network-policies.png">
     <title>Kubernetes Network Policies — SourceHub</title>
     <meta name="description" content="In-depth guide to Kubernetes network policies covering ingress/egress rules, Cilium, Calico, and zero-trust networking for pods.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Kubernetes Network Policies",
       "description": "In-depth guide to Kubernetes network policies covering ingress/egress rules, Cilium, Calico, and zero-trust networking for pods.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-network-policies.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1802",
+      "wordCount": "1752",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Kubernetes Network Policies</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-network-policies.png" alt="Kubernetes Network Policies" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Kubernetes Network Policies</h1>
 <br>
 <p>Introduction   </p>
 <p>Kubernetes by default allows all pod-to-pod communication — a flat network model that is convenient but insecure. Network policies provide pod-level firewalling, enabling micro-segmentation and zero-trust networking within the cluster.   </p>
 <p>Understanding Network Policies   </p>
 <p>A NetworkPolicy is a Kubernetes resource that specifies how groups of pods communicate with each other and with external endpoints. Policies are selector-based, namespace-scoped, and implemented by a Container Network Interface (CNI) plugin.   </p>
-<br>
-<br>
 <br>
 <p>    apiVersion: networking.k8s.io/v1</p>
 <br>
@@ -166,13 +165,8 @@
 <br>
 <p>              port: 443</p>
 <br>
-<br>
-<br>
-<br>
 <p>Default Deny Policies   </p>
 <p>Start with default deny policies and explicitly allow required traffic. This enforces least-privilege networking.   </p>
-<br>
-<br>
 <br>
 <p>    ---</p>
 <br>
@@ -194,8 +188,6 @@
 <br>
 <p>        - Ingress</p>
 <br>
-<br>
-<br>
 <p>    ---</p>
 <br>
 <p>    # Default deny all egress</p>
@@ -216,13 +208,8 @@
 <br>
 <p>        - Egress</p>
 <br>
-<br>
-<br>
-<br>
 <p>Cilium: eBPF-Based Networking   </p>
 <p>Cilium leverages eBPF to provide network policies with identity-based security, HTTP-aware rules, and cluster mesh capabilities.   </p>
-<br>
-<br>
 <br>
 <p>    # CiliumNetworkPolicy with HTTP-aware filtering</p>
 <br>
@@ -274,12 +261,6 @@
 <br>
 <p>                      - "X-API-Version: 2"</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # DNS-aware egress policy with Cilium</p>
 <br>
 <p>    apiVersion: cilium.io/v2</p>
@@ -322,13 +303,8 @@
 <br>
 <p>                  - matchPattern: "*"</p>
 <br>
-<br>
-<br>
-<br>
 <p>Calico: Policy-First Networking   </p>
 <p>Calico provides a rich policy model with both Kubernetes-native and extended policy resources.   </p>
-<br>
-<br>
 <br>
 <p>    # Calico network policy with advanced features</p>
 <br>
@@ -388,12 +364,6 @@
 <br>
 <p>              - 443</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # Calico policy enforcement and troubleshooting</p>
 <br>
 <p>    calicoctl get networkpolicy -n production</p>
@@ -402,21 +372,14 @@
 <br>
 <p>    calicoctl get profiles</p>
 <br>
-<br>
-<br>
 <p>    # Test connectivity</p>
 <br>
 <p>    calicoctl policy test --pod production/payment-pod-xyz \</p>
 <br>
 <p>        --to-pod production/database-pod-abc --port 5432</p>
 <br>
-<br>
-<br>
-<br>
 <p>Zero-Trust for Pods   </p>
 <p>Zero-trust networking assumes no pod is inherently trusted. Every connection must be authenticated and authorized.   </p>
-<br>
-<br>
 <br>
 <p>    # Zero-trust: identity-aware policy with SPIFFE</p>
 <br>
@@ -474,12 +437,7 @@
 <br>
 <p>              port: 8443</p>
 <br>
-<br>
-<br>
-<br>
 <p>Policy Testing and Validation   </p>
-<br>
-<br>
 <br>
 <p>    # Test network policies before deployment</p>
 <br>
@@ -493,20 +451,13 @@
 <br>
 <p>        --output detailed</p>
 <br>
-<br>
-<br>
 <p>    # Monitor policy decisions</p>
 <br>
 <p>    cilium monitor -v --type drop | grep policy</p>
 <br>
-<br>
-<br>
 <p>    # Policy audit mode (log without enforcing)</p>
 <br>
 <p>    kubectl annotate ns production "projectcalico.org/policy-audit-mode=enabled"</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Kubernetes network policies are essential for cluster security. Start with default-deny, use namespace isolation, leverage CNI-specific features like HTTP-aware filtering with Cilium or service-account policies with Calico, and adopt zero-trust principles where every connection is explicitly authorized. Always test policies in audit mode before enforcement.</p></div>

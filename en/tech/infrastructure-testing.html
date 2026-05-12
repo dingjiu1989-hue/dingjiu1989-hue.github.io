@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/infrastructure-testing.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Infrastructure Testing with Terratest and Other Tools">
     <meta name="twitter:description" content="Test your infrastructure code with unit tests for Terraform, integration testing for cloud resources, compliance validation, and CI pipeline automation.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/infrastructure-testing.png">
     <title>Infrastructure Testing with Terratest and Other Tools — SourceHub</title>
     <meta name="description" content="Test your infrastructure code with unit tests for Terraform, integration testing for cloud resources, compliance validation, and CI pipeline automation.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,15 +38,15 @@
       "@type": "Article",
       "headline": "Infrastructure Testing with Terratest and Other Tools",
       "description": "Test your infrastructure code with unit tests for Terraform, integration testing for cloud resources, compliance validation, and CI pipeline automation.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/infrastructure-testing.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2184",
+      "wordCount": "1773",
       "keywords": "Technology, Programming, DevOps",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/infrastructure-testing.html"},
-      "articleBody": "Infrastructure Testing with Terratest and Other Tools Introduction Infrastructure as Code (IaC) brings software engineering practices to infrastructure management, but testing remains an afterthought in many teams. Without proper testing, misconfigured infrastructure causes outages, security vulnerabilities, and costly re-provisioning. This guide covers practical approaches to testing Terraform configurations, cloud resources, and compliance policies using tools like Terratest, OPA, and tflint. Unit Testing Terraform with Terratest Terratest is a Go library for writing automated tests against infrastructure. For unit-level tests, validate Terraform outputs and resource configurations: package test import ( \"testing\" \"github.com/gruntwork-io/terratest/modules/terraform\" \"github.com/stretchr/testify/assert\" ) func TestVPCModule(t *testing.T) { t.Parallel() terraformOptions := &terraform.Options{ TerraformDir: \"../examples/vpc\", // Use mock variables for unit testing Vars: map[string]interface{}{ \"region\": \"us-east-1\", \"vpc_cidr\": \"10.0.0.0/16\", \"enable_nat_gateway\": false, \"environment\": \"test\", }, } defer terraform.Destroy(t, terraformOptions) terraform.InitAndApply(t, terraformOptions) vpcID := terraform.Output(t, terraformOptions, \"vpc_id\") assert.NotEmpty(t, vpcID, \"VPC ID should not be empty\") assert.Contains(t, vpcID, \"vpc-\", \"VPC ID should start with vpc-\") subnetIDs := terraform.OutputList(t, terraformOptions, \"public_subnet_ids\") assert.Len(t, subnetIDs, 3, \"Should have 3 public subnets\") } Integration Testing Cloud Resources Integration tests validate real cloud resources are configured correctly: package test import ( \"testing\" \"github.com/aws/aws-sdk-go/aws\" \"github.com/aws/aws-sdk-go/service/ec2\" \"github.com/gruntwork-io/terratest/modules/terraform\" \"github.com/stretchr/testify/assert\" ) func TestSecurityGroupCompliance(t *testing.T) { t.Parallel() terraformOptions := &terraform.Options{ TerraformDir: \"../examples/web-app\", } defer terraform.Destroy(t, terraformOptions) terraform.InitAndApply(t, terraformOptions) vpcID := terraform.Output(t, terraformOptions, \"vpc_id\") sgID := terraform.Output(t, terraformOptions, \"web_sg_id\") // Create EC2 client ec2Client := ec2.New(session.New(), &aws.Config{ Region: aws.String(\"us-east-1\"), }) // Describe security group rules result, err := ec2Client.DescribeSecurityGroupRules(&ec2.DescribeSecurityGroupRulesInput{ Filters: []*ec2.Filter{ { Name: aws.String(\"group-id\"), Values: []*string{aws.String(sgID)}, }, }, }) assert.NoError(t, err) // Verify no public ingress from 0.0.0.0/0 on port 22 for _, rule := range result.SecurityGroupRules { if *rule.CidrIpv4 == \"0.0.0.0/0\" && *rule.FromPort == 22 { t.Error(\"Found SSH open to the world - security violation!\") } } } Compliance Testing with OPA and Sentinel Open Policy Agent (OPA) enforces policies at plan time: # policies/terraform/restrict_public_s3.rego package terraform import future.keywords.if import future.keywords.in default deny = false deny if { resource := input.resource_changes[_] resource.type == \"aws_s3_bucket_public_access_block\" resource.change.after.block_public_acls == false } deny if { resource := input.resource_changes[_] resource.type == \"aws_s3_bucket\" not aws_s3_bucket_public_access_block_exists(resource.address) } aws_s3_bucket_public_access_block_exists(address) { block := input.resource_changes[_] block.type == \"aws_s3_bucket_public_access_block\" startswith(block.address, address) } Run OPA in CI pipeline: # Generate a plan JSON terraform plan -out=plan.tfplan terraform show -json plan.tfplan > plan.json # Evaluate policies opa eval --data policies/ --input plan.json \"data.terraform.deny\" Static Analysis with tflint and tfsec Integrate static analysis into your pre-commit hooks and CI: # .github/workflows/terraform-lint.yml name: Terraform Lint on: [pull_request] jobs: lint: runs-on: ubuntu-latest steps: - uses: actions/checkout@v4 - uses: hashicorp/setup-terraform@v3 with: terraform_version: \"1.7.0\" - name: Terraform fmt run: terraform fmt -check -recursive working-directory: terraform/ - name: tflint uses: terraform-linters/setup-tflint@v4 with: tflint_version: \"v0.50.0\" - run: tflint --init && tflint --format compact working-directory: terraform/ - name: tfsec uses: aquasecurity/tfsec-action@v1 with: working_directory: terraform/ format: sarif Example `tflint` configuration: # .tflint.hcl plugin \"aws\" { enabled = true version = \"0.26.0\" source = \"github.com/terraform-linters/tflint-ruleset-aws\" } rule \"aws_instance_invalid_type\" { enabled = false } rule \"aws_resource_missing_tags\" { enabled = true } config { module = true force = false } Testing Terragrunt Configurations For teams using Terragrunt, test the generated Terraform configurations: package test import ( \"testing\" \"github.com/gruntwork-io/terratest/modules/terraform\" ) func TestTerragruntDevEnvironment(t *testing.T) { opts := &terraform.Options{ TerraformDir: \"../terragrunt/dev/us-east-1/vpc\", NoColor: true, } // Dry-run validation stdout := terraform.InitAndPlan(t, opts) assert.Contains(t, stdout, \"Plan:\", \"Plan output expected\") assert.NotContains(t, stdout, \"Error:\", \"No errors in plan\") } Test Validation Pipeline Combine all testing stages in a CI pipeline: stages: - validate # terraform validate - lint # tflint, tfsec, fmt - unit # Terratest unit tests (mock) - compliance # OPA policy checks - plan # terraform plan - test # Terratest integration (real resources) - deploy # terraform apply Use environment variables to skip integration tests when not needed: func TestSkipIfShort(t *testing.T) { if testing.Short() { t.Skip(\"Skipping integration test in short mode\") } // Integration test logic... } Best Practices * **Test from the outside in**: validate outputs and behavior, not internal Terraform state. * **Use unique resource names**: avoid collisions in CI environments by appending build IDs. * **Parallel execution**: set `t.Parallel()` but watch for shared resource contention. * **Clean up with defer**: always `terraform destroy` even on test failure. * **Snapshot testing**: use `terraform plan -out` and compare plan snapshots across PRs. * **Test data isolation**: use separate AWS accounts or dedicated test projects. A comprehensive infrastructure testing strategy combines static analysis for fast feedback, unit tests for module validation, integration tests for real resource behavior, and policy-as-code for compliance. The upfront investment pays dividends when a test catches a misconfiguration before it reaches production."
+      "articleBody": "Infrastructure Testing with Terratest and Other Tools Infrastructure Testing with Terratest and Other Tools Introduction Infrastructure as Code (IaC) brings software engineering practices to infrastructure management, but testing remains an afterthought in many teams. Without proper testing, misconfigured infrastructure causes outages, security vulnerabilities, and costly re-provisioning. This guide covers practical approaches to testing Terraform configurations, cloud resources, and compliance policies using tools like Terratest, OPA, and tflint. Unit Testing Terraform with Terratest Terratest is a Go library for writing automated tests against infrastructure. For unit-level tests, validate Terraform outputs and resource configurations: package test import ( \"testing\" \"github.com/gruntwork-io/terratest/modules/terraform\" \"github.com/stretchr/testify/assert\" ) func TestVPCModule(t *testing.T) { t.Parallel() terraformOptions := &terraform.Options;{ TerraformDir: \"../examples/vpc\", // Use mock variables for unit testing Vars: map[string]interface{}{ \"region\": \"us-east-1\", \"vpc_cidr\": \"10.0.0.0/16\", \"enable_nat_gateway\": false, \"environment\": \"test\", }, } defer terraform.Destroy(t, terraformOptions) terraform.InitAndApply(t, terraformOptions) vpcID := terraform.Output(t, terraformOptions, \"vpc_id\") assert.NotEmpty(t, vpcID, \"VPC ID should not be empty\") assert.Contains(t, vpcID, \"vpc-\", \"VPC ID should start with vpc-\") subnetIDs := terraform.OutputList(t, terraformOptions, \"public_subnet_ids\") assert.Len(t, subnetIDs, 3, \"Should have 3 public subnets\") } Integration Testing Cloud Resources Integration tests validate real cloud resources are configured correctly: package test import ( \"testing\" \"github.com/aws/aws-sdk-go/aws\" \"github.com/aws/aws-sdk-go/service/ec2\" \"github.com/gruntwork-io/terratest/modules/terraform\" \"github.com/stretchr/testify/assert\" ) func TestSecurityGroupCompliance(t *testing.T) { t.Parallel() terraformOptions := &terraform.Options;{ TerraformDir: \"../examples/web-app\", } defer terraform.Destroy(t, terraformOptions) terraform.InitAndApply(t, terraformOptions) vpcID := terraform.Output(t, terraformOptions, \"vpc_id\") sgID := terraform.Output(t, terraformOptions, \"web_sg_id\") // Create EC2 client ec2Client := ec2.New(session.New(), &aws.Config;{ Region: aws.String(\"us-east-1\"), }) // Describe security group rules result, err := ec2Client.DescribeSecurityGroupRules(&ec2.DescribeSecurityGroupRulesInput;{ Filters: []*ec2.Filter{ { Name: aws.String(\"group-id\"), Values: []*string{aws.String(sgID)}, }, }, }) assert.NoError(t, err) // Verify no public ingress from 0.0.0.0/0 on port 22 for _, rule := range result.SecurityGroupRules { if *rule.CidrIpv4 == \"0.0.0.0/0\" && *rule.FromPort == 22 { t.Error(\"Found SSH open to the world - security violation!\") } } } Compliance Testing with OPA and Sentinel Open Policy Agent (OPA) enforces policies at plan time: policies/terraform/restrict_public_s3.rego package terraform import future.keywords.if import future.keywords.in default deny = false deny if { resource := input.resource_changes[_] resource.type == \"aws_s3_bucket_public_access_block\" resource.change.after.block_public_acls == false } deny if { resource := input.resource_changes[_] resource.type == \"aws_s3_bucket\" not aws_s3_bucket_public_access_block_exists(resource.address) } aws_s3_bucket_public_access_block_exists(address) { block := input.resource_changes[_] block.type == \"aws_s3_bucket_public_access_block\" startswith(block.address, address) } Run OPA in CI pipeline: Generate a plan JSON terraform plan -out=plan.tfplan terraform show -json plan.tfplan > plan.json Evaluate policies opa eval --data policies/ --input plan.json \"data.terraform.deny\" Static Analysis with tflint and tfsec Integrate static analysis into your pre-commit hooks and CI: .github/workflows/terraform-lint.yml name: Terraform Lint on: [pull_request] jobs: lint: runs-on: ubuntu-latest steps: \\- uses: actions/checkout@v4 \\- uses: hashicorp/setup-terraform@v3 with: terraform_version: \"1.7.0\" \\- name: Terraform fmt run: terraform fmt -check -recursive working-directory: terraform/ \\- name: tflint uses: terraform-linters/setup-tflint@v4 with: tflint_version: \"v0.50.0\" \\- run: tflint --init && tflint --format compact working-directory: terraform/ \\- name: tfsec uses: aquasecurity/tfsec-action@v1 with: working_directory: terraform/ format: sarif Example `tflint` configuration: .tflint.hcl plugin \"aws\" { enabled = true version = \"0.26.0\" source = \"github.com/terraform-linters/tflint-ruleset-aws\" } rule \"aws_instance_invalid_type\" { enabled = false } rule \"aws_resource_missing_tags\" { enabled = true } config { module = true force = false } Testing Terragrunt Configurations For teams using Terragrunt, test the generated Terraform configurations: package test import ( \"testing\" \"github.com/gruntwork-io/terratest/modules/terraform\" ) func TestTerragruntDevEnvironment(t *testing.T) { opts := &terraform.Options;{ TerraformDir: \"../terragrunt/dev/us-east-1/vpc\", NoColor: true, } // Dry-run validation stdout := terraform.InitAndPlan(t, opts) assert.Contains(t, stdout, \"Plan:\", \"Plan output expected\") assert.NotContains(t, stdout, \"Error:\", \"No errors in plan\") } Test Validation Pipeline Combine all testing stages in a CI pipeline: stages: \\- validate # terraform validate \\- lint # tflint, tfsec, fmt \\- unit # Terratest unit tests (mock) \\- compliance # OPA policy checks \\- plan # terraform plan \\- test # Terratest integration (real resources) \\- deploy # terraform apply Use environment variables to skip integration tests when not needed: func TestSkipIfShort(t *testing.T) { if testing.Short() { t.Skip(\"Skipping integration test in short mode\") } // Integration test logic... } Best Practices * **Test from the outside in**: validate outputs and behavior, not internal Terraform state. * **Use unique resource names**: avoid collisions in CI environments by appending build IDs. * **Parallel execution**: set `t.Parallel()` but watch for shared resource contention. * **Clean up with defer**: always `terraform destroy` even on test failure. * **Snapshot testing**: use `terraform plan -out` and compare plan snapshots across PRs. * **Test data isolation**: use separate AWS accounts or dedicated test projects. A comprehensive infrastructure testing strategy combines static analysis for fast feedback, unit tests for module validation, integration tests for real resource behavior, and policy-as-code for compliance. The upfront investment pays dividends when a test catches a misconfiguration before it reaches production."
     }
     </script>
     <script type="application/ld+json">
@@ -75,537 +75,376 @@
         <span class="tag-cat">DevOps</span></div>
       <h1 class="article-title">Infrastructure Testing with Terratest and Other Tools</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/infrastructure-testing.png" alt="Infrastructure Testing with Terratest and Other Tools" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Infrastructure Testing with Terratest and Other Tools</h1>
+<br>
+<h1>Infrastructure Testing with Terratest and Other Tools</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Infrastructure as Code (IaC) brings software engineering practices to infrastructure management, but testing remains an afterthought in many teams. Without proper testing, misconfigured infrastructure causes outages, security vulnerabilities, and costly re-provisioning. This guide covers practical approaches to testing Terraform configurations, cloud resources, and compliance policies using tools like Terratest, OPA, and tflint.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Unit Testing Terraform with Terratest</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Terratest is a Go library for writing automated tests against infrastructure. For unit-level tests, validate Terraform outputs and resource configurations:</p>
 <br>
+<p>package test</p>
 <br>
+<p>import (</p>
 <br>
+<p>"testing"</p>
 <br>
+<p>"github.com/gruntwork-io/terratest/modules/terraform"</p>
 <br>
-<p>    package test</p>
+<p>"github.com/stretchr/testify/assert"</p>
 <br>
+<p>)</p>
 <br>
+<p>func TestVPCModule(t *testing.T) {</p>
 <br>
-<p>    import (</p>
+<p>t.Parallel()</p>
 <br>
-<p>        "testing"</p>
+<p>terraformOptions := &terraform.Options;{</p>
 <br>
-<p>        "github.com/gruntwork-io/terratest/modules/terraform"</p>
+<p>TerraformDir: "../examples/vpc",</p>
 <br>
-<p>        "github.com/stretchr/testify/assert"</p>
+<p>// Use mock variables for unit testing</p>
 <br>
-<p>    )</p>
+<p>Vars: map[string]interface{}{</p>
 <br>
+<p>"region": "us-east-1",</p>
 <br>
+<p>"vpc_cidr": "10.0.0.0/16",</p>
 <br>
-<p>    func TestVPCModule(t *testing.T) {</p>
+<p>"enable_nat_gateway": false,</p>
 <br>
-<p>        t.Parallel()</p>
+<p>"environment": "test",</p>
 <br>
+<p>},</p>
 <br>
+<p>}</p>
 <br>
-<p>        terraformOptions := &terraform.Options{</p>
+<p>defer terraform.Destroy(t, terraformOptions)</p>
 <br>
-<p>            TerraformDir: "../examples/vpc",</p>
+<p>terraform.InitAndApply(t, terraformOptions)</p>
 <br>
+<p>vpcID := terraform.Output(t, terraformOptions, "vpc_id")</p>
 <br>
+<p>assert.NotEmpty(t, vpcID, "VPC ID should not be empty")</p>
 <br>
-<p>            // Use mock variables for unit testing</p>
+<p>assert.Contains(t, vpcID, "vpc-", "VPC ID should start with vpc-")</p>
 <br>
-<p>            Vars: map[string]interface{}{</p>
+<p>subnetIDs := terraform.OutputList(t, terraformOptions, "public_subnet_ids")</p>
 <br>
-<p>                "region":           "us-east-1",</p>
+<p>assert.Len(t, subnetIDs, 3, "Should have 3 public subnets")</p>
 <br>
-<p>                "vpc_cidr":        "10.0.0.0/16",</p>
-<br>
-<p>                "enable_nat_gateway": false,</p>
-<br>
-<p>                "environment":     "test",</p>
-<br>
-<p>            },</p>
-<br>
-<p>        }</p>
-<br>
-<br>
-<br>
-<p>        defer terraform.Destroy(t, terraformOptions)</p>
-<br>
-<p>        terraform.InitAndApply(t, terraformOptions)</p>
-<br>
-<br>
-<br>
-<p>        vpcID := terraform.Output(t, terraformOptions, "vpc_id")</p>
-<br>
-<p>        assert.NotEmpty(t, vpcID, "VPC ID should not be empty")</p>
-<br>
-<p>        assert.Contains(t, vpcID, "vpc-", "VPC ID should start with vpc-")</p>
-<br>
-<br>
-<br>
-<p>        subnetIDs := terraform.OutputList(t, terraformOptions, "public_subnet_ids")</p>
-<br>
-<p>        assert.Len(t, subnetIDs, 3, "Should have 3 public subnets")</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <h2>  Integration Testing Cloud Resources</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Integration tests validate real cloud resources are configured correctly:</p>
 <br>
+<p>package test</p>
 <br>
+<p>import (</p>
 <br>
+<p>"testing"</p>
 <br>
+<p>"github.com/aws/aws-sdk-go/aws"</p>
 <br>
-<p>    package test</p>
+<p>"github.com/aws/aws-sdk-go/service/ec2"</p>
 <br>
+<p>"github.com/gruntwork-io/terratest/modules/terraform"</p>
 <br>
+<p>"github.com/stretchr/testify/assert"</p>
 <br>
-<p>    import (</p>
+<p>)</p>
 <br>
-<p>        "testing"</p>
+<p>func TestSecurityGroupCompliance(t *testing.T) {</p>
 <br>
-<p>        "github.com/aws/aws-sdk-go/aws"</p>
+<p>t.Parallel()</p>
 <br>
-<p>        "github.com/aws/aws-sdk-go/service/ec2"</p>
+<p>terraformOptions := &terraform.Options;{</p>
 <br>
-<p>        "github.com/gruntwork-io/terratest/modules/terraform"</p>
+<p>TerraformDir: "../examples/web-app",</p>
 <br>
-<p>        "github.com/stretchr/testify/assert"</p>
+<p>}</p>
 <br>
-<p>    )</p>
+<p>defer terraform.Destroy(t, terraformOptions)</p>
 <br>
+<p>terraform.InitAndApply(t, terraformOptions)</p>
 <br>
+<p>vpcID := terraform.Output(t, terraformOptions, "vpc_id")</p>
 <br>
-<p>    func TestSecurityGroupCompliance(t *testing.T) {</p>
+<p>sgID := terraform.Output(t, terraformOptions, "web_sg_id")</p>
 <br>
-<p>        t.Parallel()</p>
+<p>// Create EC2 client</p>
 <br>
+<p>ec2Client := ec2.New(session.New(), &aws.Config;{</p>
 <br>
+<p>Region: aws.String("us-east-1"),</p>
 <br>
-<p>        terraformOptions := &terraform.Options{</p>
+<p>})</p>
 <br>
-<p>            TerraformDir: "../examples/web-app",</p>
+<p>// Describe security group rules</p>
 <br>
-<p>        }</p>
+<p>result, err := ec2Client.DescribeSecurityGroupRules(&ec2.DescribeSecurityGroupRulesInput;{</p>
 <br>
+<p>Filters: []*ec2.Filter{</p>
 <br>
+<p>{</p>
 <br>
-<p>        defer terraform.Destroy(t, terraformOptions)</p>
+<p>Name: aws.String("group-id"),</p>
 <br>
-<p>        terraform.InitAndApply(t, terraformOptions)</p>
+<p>Values: []*string{aws.String(sgID)},</p>
 <br>
+<p>},</p>
 <br>
+<p>},</p>
 <br>
-<p>        vpcID := terraform.Output(t, terraformOptions, "vpc_id")</p>
+<p>})</p>
 <br>
-<p>        sgID := terraform.Output(t, terraformOptions, "web_sg_id")</p>
+<p>assert.NoError(t, err)</p>
 <br>
+<p>// Verify no public ingress from 0.0.0.0/0 on port 22</p>
 <br>
+<p>for _, rule := range result.SecurityGroupRules {</p>
 <br>
-<p>        // Create EC2 client</p>
+<p>if *rule.CidrIpv4 == "0.0.0.0/0" && *rule.FromPort == 22 {</p>
 <br>
-<p>        ec2Client := ec2.New(session.New(), &aws.Config{</p>
+<p>t.Error("Found SSH open to the world - security violation!")</p>
 <br>
-<p>            Region: aws.String("us-east-1"),</p>
+<p>}</p>
 <br>
-<p>        })</p>
+<p>}</p>
 <br>
-<br>
-<br>
-<p>        // Describe security group rules</p>
-<br>
-<p>        result, err := ec2Client.DescribeSecurityGroupRules(&ec2.DescribeSecurityGroupRulesInput{</p>
-<br>
-<p>            Filters: []*ec2.Filter{</p>
-<br>
-<p>                {</p>
-<br>
-<p>                    Name:   aws.String("group-id"),</p>
-<br>
-<p>                    Values: []*string{aws.String(sgID)},</p>
-<br>
-<p>                },</p>
-<br>
-<p>            },</p>
-<br>
-<p>        })</p>
-<br>
-<p>        assert.NoError(t, err)</p>
-<br>
-<br>
-<br>
-<p>        // Verify no public ingress from 0.0.0.0/0 on port 22</p>
-<br>
-<p>        for _, rule := range result.SecurityGroupRules {</p>
-<br>
-<p>            if *rule.CidrIpv4 == "0.0.0.0/0" && *rule.FromPort == 22 {</p>
-<br>
-<p>                t.Error("Found SSH open to the world - security violation!")</p>
-<br>
-<p>            }</p>
-<br>
-<p>        }</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <h2>  Compliance Testing with OPA and Sentinel</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Open Policy Agent (OPA) enforces policies at plan time:</p>
 <br>
+<h1>policies/terraform/restrict_public_s3.rego</h1>
 <br>
+<p>package terraform</p>
 <br>
+<p>import future.keywords.if</p>
 <br>
+<p>import future.keywords.in</p>
 <br>
-<p>    # policies/terraform/restrict_public_s3.rego</p>
+<p>default deny = false</p>
 <br>
-<p>    package terraform</p>
+<p>deny if {</p>
 <br>
+<p>resource := input.resource_changes[_]</p>
 <br>
+<p>resource.type == "aws_s3_bucket_public_access_block"</p>
 <br>
-<p>    import future.keywords.if</p>
+<p>resource.change.after.block_public_acls == false</p>
 <br>
-<p>    import future.keywords.in</p>
+<p>}</p>
 <br>
+<p>deny if {</p>
 <br>
+<p>resource := input.resource_changes[_]</p>
 <br>
-<p>    default deny = false</p>
+<p>resource.type == "aws_s3_bucket"</p>
 <br>
+<p>not aws_s3_bucket_public_access_block_exists(resource.address)</p>
 <br>
+<p>}</p>
 <br>
-<p>    deny if {</p>
+<p>aws_s3_bucket_public_access_block_exists(address) {</p>
 <br>
-<p>        resource := input.resource_changes[_]</p>
+<p>block := input.resource_changes[_]</p>
 <br>
-<p>        resource.type == "aws_s3_bucket_public_access_block"</p>
+<p>block.type == "aws_s3_bucket_public_access_block"</p>
 <br>
-<p>        resource.change.after.block_public_acls == false</p>
+<p>startswith(block.address, address)</p>
 <br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<p>    deny if {</p>
-<br>
-<p>        resource := input.resource_changes[_]</p>
-<br>
-<p>        resource.type == "aws_s3_bucket"</p>
-<br>
-<p>        not aws_s3_bucket_public_access_block_exists(resource.address)</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<p>    aws_s3_bucket_public_access_block_exists(address) {</p>
-<br>
-<p>        block := input.resource_changes[_]</p>
-<br>
-<p>        block.type == "aws_s3_bucket_public_access_block"</p>
-<br>
-<p>        startswith(block.address, address)</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <p>Run OPA in CI pipeline:</p>
 <br>
+<h1>Generate a plan JSON</h1>
 <br>
+<p>terraform plan -out=plan.tfplan</p>
 <br>
+<p>terraform show -json plan.tfplan > plan.json</p>
 <br>
+<h1>Evaluate policies</h1>
 <br>
-<p>    # Generate a plan JSON</p>
-<br>
-<p>    terraform plan -out=plan.tfplan</p>
-<br>
-<p>    terraform show -json plan.tfplan > plan.json</p>
-<br>
-<br>
-<br>
-<p>    # Evaluate policies</p>
-<br>
-<p>    opa eval --data policies/ --input plan.json "data.terraform.deny"</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>opa eval --data policies/ --input plan.json "data.terraform.deny"</p>
 <br>
 <h2>  Static Analysis with tflint and tfsec</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Integrate static analysis into your pre-commit hooks and CI:</p>
 <br>
+<h1>.github/workflows/terraform-lint.yml</h1>
 <br>
+<p>name: Terraform Lint</p>
 <br>
+<p>on: [pull_request]</p>
 <br>
+<p>jobs:</p>
 <br>
-<p>    # .github/workflows/terraform-lint.yml</p>
+<p>lint:</p>
 <br>
-<p>    name: Terraform Lint</p>
+<p>runs-on: ubuntu-latest</p>
 <br>
-<p>    on: [pull_request]</p>
+<p>steps:</p>
 <br>
-<p>    jobs:</p>
+<p>\- uses: actions/checkout@v4</p>
 <br>
-<p>      lint:</p>
+<p>\- uses: hashicorp/setup-terraform@v3</p>
 <br>
-<p>        runs-on: ubuntu-latest</p>
+<p>with:</p>
 <br>
-<p>        steps:</p>
+<p>terraform_version: "1.7.0"</p>
 <br>
-<p>          - uses: actions/checkout@v4</p>
+<p>\- name: Terraform fmt</p>
 <br>
-<p>          - uses: hashicorp/setup-terraform@v3</p>
+<p>run: terraform fmt -check -recursive</p>
 <br>
-<p>            with:</p>
+<p>working-directory: terraform/</p>
 <br>
-<p>              terraform_version: "1.7.0"</p>
+<p>\- name: tflint</p>
 <br>
+<p>uses: terraform-linters/setup-tflint@v4</p>
 <br>
+<p>with:</p>
 <br>
-<p>          - name: Terraform fmt</p>
+<p>tflint_version: "v0.50.0"</p>
 <br>
-<p>            run: terraform fmt -check -recursive</p>
+<p>\- run: tflint --init && tflint --format compact</p>
 <br>
-<p>            working-directory: terraform/</p>
+<p>working-directory: terraform/</p>
 <br>
+<p>\- name: tfsec</p>
 <br>
+<p>uses: aquasecurity/tfsec-action@v1</p>
 <br>
-<p>          - name: tflint</p>
+<p>with:</p>
 <br>
-<p>            uses: terraform-linters/setup-tflint@v4</p>
+<p>working_directory: terraform/</p>
 <br>
-<p>            with:</p>
-<br>
-<p>              tflint_version: "v0.50.0"</p>
-<br>
-<p>          - run: tflint --init && tflint --format compact</p>
-<br>
-<p>            working-directory: terraform/</p>
-<br>
-<br>
-<br>
-<p>          - name: tfsec</p>
-<br>
-<p>            uses: aquasecurity/tfsec-action@v1</p>
-<br>
-<p>            with:</p>
-<br>
-<p>              working_directory: terraform/</p>
-<br>
-<p>              format: sarif</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>format: sarif</p>
 <br>
 <p>Example `tflint` configuration:</p>
 <br>
+<h1>.tflint.hcl</h1>
 <br>
+<p>plugin "aws" {</p>
 <br>
+<p>enabled = true</p>
 <br>
+<p>version = "0.26.0"</p>
 <br>
-<p>    # .tflint.hcl</p>
+<p>source = "github.com/terraform-linters/tflint-ruleset-aws"</p>
 <br>
-<p>    plugin "aws" {</p>
+<p>}</p>
 <br>
-<p>        enabled = true</p>
+<p>rule "aws_instance_invalid_type" {</p>
 <br>
-<p>        version = "0.26.0"</p>
+<p>enabled = false</p>
 <br>
-<p>        source  = "github.com/terraform-linters/tflint-ruleset-aws"</p>
+<p>}</p>
 <br>
-<p>    }</p>
+<p>rule "aws_resource_missing_tags" {</p>
 <br>
+<p>enabled = true</p>
 <br>
+<p>}</p>
 <br>
-<p>    rule "aws_instance_invalid_type" {</p>
+<p>config {</p>
 <br>
-<p>        enabled = false</p>
+<p>module = true</p>
 <br>
-<p>    }</p>
+<p>force = false</p>
 <br>
-<br>
-<br>
-<p>    rule "aws_resource_missing_tags" {</p>
-<br>
-<p>        enabled = true</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<p>    config {</p>
-<br>
-<p>        module = true</p>
-<br>
-<p>        force = false</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <h2>  Testing Terragrunt Configurations</h2>
 <br>
-<br>
-<br>
-<br>
 <p>For teams using Terragrunt, test the generated Terraform configurations:</p>
 <br>
+<p>package test</p>
 <br>
+<p>import (</p>
 <br>
+<p>"testing"</p>
 <br>
+<p>"github.com/gruntwork-io/terratest/modules/terraform"</p>
 <br>
-<p>    package test</p>
+<p>)</p>
 <br>
+<p>func TestTerragruntDevEnvironment(t *testing.T) {</p>
 <br>
+<p>opts := &terraform.Options;{</p>
 <br>
-<p>    import (</p>
+<p>TerraformDir: "../terragrunt/dev/us-east-1/vpc",</p>
 <br>
-<p>        "testing"</p>
+<p>NoColor: true,</p>
 <br>
-<p>        "github.com/gruntwork-io/terratest/modules/terraform"</p>
+<p>}</p>
 <br>
-<p>    )</p>
+<p>// Dry-run validation</p>
 <br>
+<p>stdout := terraform.InitAndPlan(t, opts)</p>
 <br>
+<p>assert.Contains(t, stdout, "Plan:", "Plan output expected")</p>
 <br>
-<p>    func TestTerragruntDevEnvironment(t *testing.T) {</p>
+<p>assert.NotContains(t, stdout, "Error:", "No errors in plan")</p>
 <br>
-<p>        opts := &terraform.Options{</p>
-<br>
-<p>            TerraformDir: "../terragrunt/dev/us-east-1/vpc",</p>
-<br>
-<p>            NoColor:      true,</p>
-<br>
-<p>        }</p>
-<br>
-<br>
-<br>
-<p>        // Dry-run validation</p>
-<br>
-<p>        stdout := terraform.InitAndPlan(t, opts)</p>
-<br>
-<p>        assert.Contains(t, stdout, "Plan:", "Plan output expected")</p>
-<br>
-<p>        assert.NotContains(t, stdout, "Error:", "No errors in plan")</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <h2>  Test Validation Pipeline</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Combine all testing stages in a CI pipeline:</p>
 <br>
+<p>stages:</p>
 <br>
+<p>\- validate # terraform validate</p>
 <br>
+<p>\- lint # tflint, tfsec, fmt</p>
 <br>
+<p>\- unit # Terratest unit tests (mock)</p>
 <br>
-<p>    stages:</p>
+<p>\- compliance # OPA policy checks</p>
 <br>
-<p>      - validate  # terraform validate</p>
+<p>\- plan # terraform plan</p>
 <br>
-<p>      - lint      # tflint, tfsec, fmt</p>
+<p>\- test # Terratest integration (real resources)</p>
 <br>
-<p>      - unit      # Terratest unit tests (mock)</p>
-<br>
-<p>      - compliance # OPA policy checks</p>
-<br>
-<p>      - plan      # terraform plan</p>
-<br>
-<p>      - test      # Terratest integration (real resources)</p>
-<br>
-<p>      - deploy    # terraform apply</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>\- deploy # terraform apply</p>
 <br>
 <p>Use environment variables to skip integration tests when not needed:</p>
 <br>
+<p>func TestSkipIfShort(t *testing.T) {</p>
 <br>
+<p>if testing.Short() {</p>
 <br>
+<p>t.Skip("Skipping integration test in short mode")</p>
 <br>
+<p>}</p>
 <br>
-<p>    func TestSkipIfShort(t *testing.T) {</p>
+<p>// Integration test logic...</p>
 <br>
-<p>        if testing.Short() {</p>
-<br>
-<p>            t.Skip("Skipping integration test in short mode")</p>
-<br>
-<p>        }</p>
-<br>
-<p>        // Integration test logic...</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <h2>  Best Practices</h2>
 <br>
-<br>
-<br>
 <p>* **Test from the outside in**: validate outputs and behavior, not internal Terraform state.</p>
+<br>
 <p>* **Use unique resource names**: avoid collisions in CI environments by appending build IDs.</p>
+<br>
 <p>* **Parallel execution**: set `t.Parallel()` but watch for shared resource contention.</p>
+<br>
 <p>* **Clean up with defer**: always `terraform destroy` even on test failure.</p>
+<br>
 <p>* **Snapshot testing**: use `terraform plan -out` and compare plan snapshots across PRs.</p>
+<br>
 <p>* **Test data isolation**: use separate AWS accounts or dedicated test projects.</p>
-<br>
-<br>
 <br>
 <p>A comprehensive infrastructure testing strategy combines static analysis for fast feedback, unit tests for module validation, integration tests for real resource behavior, and policy-as-code for compliance. The upfront investment pays dividends when a test catches a misconfiguration before it reaches production.</p></div>
     </article>

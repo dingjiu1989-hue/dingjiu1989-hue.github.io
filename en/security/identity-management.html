@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/identity-management.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Identity and Access Management (IAM) Guide">
     <meta name="twitter:description" content="Comprehensive guide to IAM covering SSO, SAML, OIDC, SCIM provisioning, just-in-time access, and access reviews.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/identity-management.png">
     <title>Identity and Access Management (IAM) Guide — SourceHub</title>
     <meta name="description" content="Comprehensive guide to IAM covering SSO, SAML, OIDC, SCIM provisioning, just-in-time access, and access reviews.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Identity and Access Management (IAM) Guide",
       "description": "Comprehensive guide to IAM covering SSO, SAML, OIDC, SCIM provisioning, just-in-time access, and access reviews.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/identity-management.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2246",
+      "wordCount": "2104",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,27 +74,16 @@
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">Identity and Access Management (IAM) Guide</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/identity-management.png" alt="Identity and Access Management (IAM) Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Identity and Access Management (IAM) Guide</h1>
 <br>
 <p>Identity and Access Management (IAM) is the discipline of ensuring the right people have access to the right resources at the right time for the right reasons. Poor IAM is the leading cause of data breaches. This guide covers modern IAM concepts including SSO, SAML, OIDC, SCIM, just-in-time access, and access reviews.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Single Sign-On (SSO)</h2>
-<br>
-<br>
-<br>
 <br>
 <p>SSO allows users to authenticate once and gain access to multiple applications without re-entering credentials. It improves both security and user experience.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>How SSO Works</h3>
-<br>
-<br>
-<br>
 <br>
 <p>An SSO system has three components:</p>
 <br>
@@ -104,38 +93,20 @@
 <br>
 <p>3\. **User Agent**: Typically a web browser.</p>
 <br>
-<br>
-<br>
-<br>
 <p>When a user accesses an SP, the SP redirects them to the IdP for authentication. The IdP authenticates the user and issues a token. The SP validates the token and grants access.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Benefits of SSO</h3>
-<br>
-<br>
 <br>
 <p>* Users manage one password instead of dozens.</p>
 <p>* Password policies (complexity, rotation) are enforced centrally.</p>
 <p>* Account lockout and deactivation propagate instantly across all applications.</p>
 <p>* Failed login attempts are tracked in one place.</p>
 <br>
-<br>
-<br>
 <h2>  SAML 2.0</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Security Assertion Markup Language (SAML) 2.0 is an XML-based protocol for exchanging authentication and authorization data between IdPs and SPs.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>SAML Flow</h3>
-<br>
-<br>
 <br>
 <p>* User attempts to access an SP resource.</p>
 <br>
@@ -148,10 +119,6 @@
 <p>5\. User is redirected back to the SP with the SAML assertion.</p>
 <br>
 <p>6\. SP validates the signature, extracts attributes, and creates a session.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    <!-- SAML Assertion (simplified) --></p>
 <br>
@@ -187,48 +154,24 @@
 <br>
 <p>    </saml:Assertion></p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>SAML is widely used in enterprise environments for web application SSO. Its XML-based nature makes it verbose, but it remains the standard for many SaaS applications and federated identity scenarios.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  OpenID Connect (OIDC)</h2>
 <br>
-<br>
-<br>
-<br>
 <p>OIDC is a modern authentication protocol built on top of OAuth 2.0. It is the preferred protocol for newer applications, particularly in cloud-native environments.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>OIDC vs SAML</h3>
-<br>
-<br>
 <br>
 <p>* OIDC uses JSON (JWT tokens) rather than XML. Tokens are smaller and easier to parse.</p>
 <p>* OIDC is designed for modern web and mobile applications, including SPAs and native apps.</p>
 <p>* OIDC provides the `id_token` (authentication) alongside the OAuth `access_token` (authorization).</p>
 <p>* OIDC is the default for cloud provider IAM roles, Kubernetes authentication, and serverless applications.</p>
 <br>
-<br>
-<br>
 <h3>OIDC Flow</h3>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Python example: OIDC authentication request</p>
 <br>
 <p>    import requests</p>
-<br>
-<br>
 <br>
 <p>    # Step 1: Redirect user to IdP authorization endpoint</p>
 <br>
@@ -249,8 +192,6 @@
 <p>    }</p>
 <br>
 <p>    # User is redirected to: auth_url?response_type=code&client_id=...</p>
-<br>
-<br>
 <br>
 <p>    # Step 2: Exchange authorization code for tokens</p>
 <br>
@@ -274,21 +215,9 @@
 <br>
 <p>    # tokens contains: access_token, id_token, refresh_token</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>OIDC in Cloud Infrastructure</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Cloud providers use OIDC for workload identity. A service running in AWS can get an OIDC token from the AWS metadata endpoint and use it to authenticate to external services.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # GitHub Actions OIDC with AWS</p>
 <br>
@@ -299,8 +228,6 @@
 <p>      id-token: write</p>
 <br>
 <p>      contents: read</p>
-<br>
-<br>
 <br>
 <p>    jobs:</p>
 <br>
@@ -322,39 +249,19 @@
 <br>
 <p>          - run: aws s3 sync ./dist s3://my-bucket</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  SCIM Provisioning</h2>
-<br>
-<br>
-<br>
 <br>
 <p>System for Cross-domain Identity Management (SCIM) is a standard for automating user provisioning and deprovisioning between identity domains.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>How SCIM Works</h3>
 <br>
-<br>
-<br>
-<br>
 <p>SCIM exposes RESTful endpoints for creating, reading, updating, and deleting user accounts and groups. An IdP like Okta or Azure AD connects to an SCIM endpoint to synchronize users automatically.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // SCIM Create User Request</p>
 <br>
 <p>    POST /scim/v2/Users</p>
 <br>
 <p>    Content-Type: application/scim+json</p>
-<br>
-<br>
 <br>
 <p>    {</p>
 <br>
@@ -388,30 +295,13 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>SCIM ensures that when an employee leaves the company, their access is automatically revoked across all SCIM-integrated applications within minutes.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Just-in-Time (JIT) Access</h2>
 <br>
-<br>
-<br>
-<br>
 <p>JIT access grants elevated permissions only when needed, for a limited duration. It replaces standing privileges that attackers can exploit.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Implementation</h3>
-<br>
-<br>
-<br>
 <br>
 <p>JIT access typically requires:</p>
 <br>
@@ -422,10 +312,6 @@
 <p>3\. Automatic expiration after the approved window.</p>
 <br>
 <p>4\. Full audit logging of the elevation.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Example: PagerDuty JIT access request</p>
 <br>
@@ -459,29 +345,13 @@
 <br>
 <p>        raise PermissionError("Access request denied")</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>JIT access is critical for protecting sensitive systems like production databases, cloud admin consoles, and CI/CD deployment pipelines.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Access Reviews</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Access reviews are periodic audits of who has access to what. They are required by compliance frameworks (SOC 2, SOX) and are essential for preventing privilege creep.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Best Practices</h3>
-<br>
-<br>
 <br>
 <p>* Conduct access reviews every quarter for critical systems, annually for low-risk systems.</p>
 <p>* Automate the review process using your IdP or dedicated tools.</p>
@@ -489,9 +359,6 @@
 <p>* Review group memberships, not just individual permissions.</p>
 <p>* Require managers to certify their direct reports' access.</p>
 <p>* Document all review outcomes for audit purposes.</p>
-<br>
-<br>
-<br>
 <br>
 <p>    # Automated access review report</p>
 <br>
@@ -519,15 +386,7 @@
 <br>
 <p>        return report</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Modern IAM requires SSO for user convenience, SAML or OIDC for protocol support, SCIM for automated provisioning, JIT access for privilege management, and regular access reviews to prevent creep. The goal is simple: every access decision should be intentional, verifiable, and timely.</p></div>
     </article>

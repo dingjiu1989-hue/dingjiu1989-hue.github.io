@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/security-engineer-interview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Security Engineer Interview">
     <meta name="twitter:description" content="Key topics, system design questions, and practical exercises for security engineer interviews.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/security-engineer-interview.png">
     <title>Security Engineer Interview — SourceHub</title>
     <meta name="description" content="Key topics, system design questions, and practical exercises for security engineer interviews.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Security Engineer Interview",
       "description": "Key topics, system design questions, and practical exercises for security engineer interviews.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/security-engineer-interview.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1182",
+      "wordCount": "1137",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Security Engineer Interview</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/security-engineer-interview.png" alt="Security Engineer Interview" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Security Engineer Interview</h1>
 <br>
 <p>Interview Structure   </p>
@@ -83,15 +84,11 @@
 <p>Cryptography   </p>
 <p>Understand encryption algorithms and their properties:   </p>
 <br>
-<br>
-<br>
 <p>    # Interview question: Implement a secure password hasher</p>
 <br>
 <p>    import hashlib</p>
 <br>
 <p>    import os</p>
-<br>
-<br>
 <br>
 <p>    def hash_password(password):</p>
 <br>
@@ -103,32 +100,21 @@
 <br>
 <p>        return bcrypt.hashpw(password.encode(), salt)</p>
 <br>
-<br>
-<br>
 <p>    # Follow-up: Why not SHA-256?</p>
 <br>
 <p>    # Answer: SHA-256 is fast, making brute-force feasible.</p>
 <br>
 <p>    # bcrypt/argon2 are deliberately slow and include salt.</p>
 <br>
-<br>
-<br>
 <p>    # Follow-up: What about MD5?</p>
 <br>
 <p>    # Answer: MD5 is broken for collision resistance. Never use.</p>
 <br>
-<br>
-<br>
-<br>
 <p>Network Security   </p>
-<br>
-<br>
 <br>
 <p>    # Interview question: Implement a simple port scanner</p>
 <br>
 <p>    import socket</p>
-<br>
-<br>
 <br>
 <p>    def scan_port(host, port, timeout=1):</p>
 <br>
@@ -142,21 +128,14 @@
 <br>
 <p>        return result == 0</p>
 <br>
-<br>
-<br>
 <p>    # Follow-up: How would you scan without being detected?</p>
 <br>
 <p>    # Answer: Use SYN scan (stealth scan), randomize port order,</p>
 <br>
 <p>    # and introduce delays between probes.</p>
 <br>
-<br>
-<br>
-<br>
 <p>System Design Questions   </p>
 <p>Design a Secure Authentication System   </p>
-<br>
-<br>
 <br>
 <p>    # High-level design</p>
 <br>
@@ -178,8 +157,6 @@
 <br>
 <p>        ]</p>
 <br>
-<br>
-<br>
 <p>        def login_flow(self):</p>
 <br>
 <p>            return {</p>
@@ -198,12 +175,7 @@
 <br>
 <p>            }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Design a Secrets Management System   </p>
-<br>
-<br>
 <br>
 <p>    Requirements:</p>
 <br>
@@ -217,8 +189,6 @@
 <br>
 <p>    - High availability</p>
 <br>
-<br>
-<br>
 <p>    Data flow:</p>
 <br>
 <p>    1. Client request -> API Gateway -> Auth check</p>
@@ -229,8 +199,6 @@
 <br>
 <p>    4. Return secret (with audit log)</p>
 <br>
-<br>
-<br>
 <p>    Key hierarchy:</p>
 <br>
 <p>    - Master key (HSM/KMS)</p>
@@ -239,12 +207,7 @@
 <br>
 <p>    - Secret encryption keys</p>
 <br>
-<br>
-<br>
-<br>
 <p>Practical Exercise   </p>
-<br>
-<br>
 <br>
 <p>    # Exercise: Security incident investigation</p>
 <br>
@@ -268,8 +231,6 @@
 <br>
 <p>    ]</p>
 <br>
-<br>
-<br>
 <p>    # Questions:</p>
 <br>
 <p>    # 1. What indicators of compromise do you see?</p>
@@ -280,8 +241,6 @@
 <br>
 <p>    # 4. What forensic data would you collect?</p>
 <br>
-<br>
-<br>
 <p>    # Analysis:</p>
 <br>
 <p>    # - IP change: 192.168.1.1 (corp) -> 10.0.0.5 (internal)</p>
@@ -291,9 +250,6 @@
 <p>    # - Suspicious actions after login: data export + log deletion</p>
 <br>
 <p>    # - Likely: credential stuffing -> account takeover -> data exfiltration</p>
-<br>
-<br>
-<br>
 <br>
 <p>Behavioral Questions   </p>
 <p>Be prepared to discuss:   </p>

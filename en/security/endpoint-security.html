@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/endpoint-security.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Endpoint Security">
     <meta name="twitter:description" content="Deep dive into endpoint security comparing EDR, XDR, and antivirus solutions, detection techniques, and automated incident response.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/endpoint-security.png">
     <title>Endpoint Security — SourceHub</title>
     <meta name="description" content="Deep dive into endpoint security comparing EDR, XDR, and antivirus solutions, detection techniques, and automated incident response.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,15 +38,15 @@
       "@type": "Article",
       "headline": "Endpoint Security",
       "description": "Deep dive into endpoint security comparing EDR, XDR, and antivirus solutions, detection techniques, and automated incident response.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/endpoint-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1113",
+      "wordCount": "986",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/endpoint-security.html"},
-      "articleBody": "Endpoint Security Introduction Endpoint security protects devices \u2014 laptops, servers, mobile devices, and IoT \u2014 that connect to corporate networks. Modern endpoint protection has evolved from signature-based antivirus to sophisticated platforms combining behavioral detection, threat intelligence, and automated response. EDR vs XDR vs Traditional Antivirus Traditional Antivirus (AV) Signature-based AV compares files against a database of known malware hashes. It is effective against commodity malware but fails against zero-day threats, fileless attacks, and polymorphic malware. # ClamAV command-line scanning clamscan --recursive --infected /home/user clamscan --database=/var/lib/clamav --log=/var/log/clamav.log / Limitations of signature-based AV: * Cannot detect unknown threats * No behavioral monitoring * Limited or no response capabilities * No cross-host correlation Endpoint Detection and Response (EDR) EDR platforms continuously monitor endpoint activity, recording system calls, process creation, network connections, file system changes, and registry modifications. They provide visibility into attacker behavior across the kill chain. # Hypothetical EDR telemetry query def query_process_tree(process_id, timespan_hours=24): return edr_api.query(f\"\"\" SELECT pid, parent_pid, name, command_line, event_time, user, hash FROM process_events WHERE (pid = {process_id} OR parent_pid = {process_id}) AND event_time > NOW() - INTERVAL '{timespan_hours} hours' ORDER BY event_time \"\"\") Extended Detection and Response (XDR) XDR extends EDR by correlating telemetry across endpoints, network traffic, email, cloud workloads, and identity systems. This cross-domain correlation reveals multi-stage attacks spanning different infrastructure layers. # XDR cross-domain correlation example def correlate_alerts(): # Correlate endpoint alert with network flow endpoint_alerts = xdr.get_alerts(sources=['endpoint'], severity='high') network_flows = xdr.get_flows(source_ip_subnet='10.0.0.0/8', time_range='last_1h') for alert in endpoint_alerts: matching_flows = [ flow for flow in network_flows if flow.dest_ip == alert.external_ip and abs(flow.timestamp - alert.timestamp).seconds ] if matching_flows: alert.add_evidence(matching_flows) alert.escalate_severity('critical') Detection Techniques Behavioral Detection Monitors sequences of actions rather than static indicators. Detects ransomware by observing mass file encryption patterns. # Behavioral detection rule detection_rules: - name: \"Ransomware Behavior\" conditions: - process.file_operations.count > 100 - process.file_operations.extension_changes > 50 - process.file_operations.avg_write_size_bytes > 500000 - duration_seconds severity: critical response: isolate_host ML-Based Detection Machine learning models analyze features extracted from endpoint telemetry to classify benign and malicious behavior. Models must be trained on diverse datasets and continuously updated to avoid concept drift. Response Automation SOAR (Security Orchestration, Automation, and Response) platforms automate response actions based on detection triggers. # Automated response playbook playbook: name: \"Host Isolation and Investigation\" trigger: severity == critical AND threat_type == ransomware steps: - action: isolate_host target: alert.host_id network_scope: full - action: capture_memory target: alert.host_id - action: collect_process_tree target: alert.process.id - action: enrich_iocs targets: [alert.file_hash, alert.dest_ip] feeds: [virustotal, abuseipdb] - action: create_ticket system: jira priority: P1 assignee_group: \"SOC Tier 3\" Conclusion Modern endpoint protection demands more than antivirus. EDR provides deep visibility into endpoint activity, while XDR extends correlation across the entire security stack. Automated response reduces dwell time, but requires careful tuning to avoid disrupting legitimate operations."
+      "articleBody": "Endpoint Security Endpoint Security Introduction Endpoint security protects devices \u2014 laptops, servers, mobile devices, and IoT \u2014 that connect to corporate networks. Modern endpoint protection has evolved from signature-based antivirus to sophisticated platforms combining behavioral detection, threat intelligence, and automated response. EDR vs XDR vs Traditional Antivirus Traditional Antivirus (AV) Signature-based AV compares files against a database of known malware hashes. It is effective against commodity malware but fails against zero-day threats, fileless attacks, and polymorphic malware. ClamAV command-line scanning clamscan --recursive --infected /home/user clamscan --database=/var/lib/clamav --log=/var/log/clamav.log / Limitations of signature-based AV: * Cannot detect unknown threats * No behavioral monitoring * Limited or no response capabilities * No cross-host correlation Endpoint Detection and Response (EDR) EDR platforms continuously monitor endpoint activity, recording system calls, process creation, network connections, file system changes, and registry modifications. They provide visibility into attacker behavior across the kill chain. Hypothetical EDR telemetry query def query_process_tree(process_id, timespan_hours=24): return edr_api.query(f\"\"\" SELECT pid, parent_pid, name, command_line, event_time, user, hash FROM process_events WHERE (pid = {process_id} OR parent_pid = {process_id}) AND event_time > NOW() - INTERVAL '{timespan_hours} hours' ORDER BY event_time \"\"\") Extended Detection and Response (XDR) XDR extends EDR by correlating telemetry across endpoints, network traffic, email, cloud workloads, and identity systems. This cross-domain correlation reveals multi-stage attacks spanning different infrastructure layers. XDR cross-domain correlation example def correlate_alerts(): Correlate endpoint alert with network flow endpoint_alerts = xdr.get_alerts(sources=['endpoint'], severity='high') network_flows = xdr.get_flows(source_ip_subnet='10.0.0.0/8', time_range='last_1h') for alert in endpoint_alerts: matching_flows = [ flow for flow in network_flows if flow.dest_ip == alert.external_ip and abs(flow.timestamp - alert.timestamp).seconds ] if matching_flows: alert.add_evidence(matching_flows) alert.escalate_severity('critical') Detection Techniques Behavioral Detection Monitors sequences of actions rather than static indicators. Detects ransomware by observing mass file encryption patterns. Behavioral detection rule detection_rules: \\- name: \"Ransomware Behavior\" conditions: \\- process.file_operations.count > 100 \\- process.file_operations.extension_changes > 50 \\- process.file_operations.avg_write_size_bytes > 500000 \\- duration_seconds severity: critical response: isolate_host ML-Based Detection Machine learning models analyze features extracted from endpoint telemetry to classify benign and malicious behavior. Models must be trained on diverse datasets and continuously updated to avoid concept drift. Response Automation SOAR (Security Orchestration, Automation, and Response) platforms automate response actions based on detection triggers. Automated response playbook playbook: name: \"Host Isolation and Investigation\" trigger: severity == critical AND threat_type == ransomware steps: \\- action: isolate_host target: alert.host_id network_scope: full \\- action: capture_memory target: alert.host_id \\- action: collect_process_tree target: alert.process.id \\- action: enrich_iocs targets: [alert.file_hash, alert.dest_ip] feeds: [virustotal, abuseipdb] \\- action: create_ticket system: jira priority: P1 assignee_group: \"SOC Tier 3\" Conclusion Modern endpoint protection demands more than antivirus. EDR provides deep visibility into endpoint activity, while XDR extends correlation across the entire security stack. Automated response reduces dwell time, but requires careful tuning to avoid disrupting legitimate operations."
     }
     </script>
     <script type="application/ld+json">
@@ -75,185 +75,169 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Endpoint Security</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/endpoint-security.png" alt="Endpoint Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Endpoint Security</h1>
 <br>
-<p>Introduction   </p>
-<p>Endpoint security protects devices — laptops, servers, mobile devices, and IoT — that connect to corporate networks. Modern endpoint protection has evolved from signature-based antivirus to sophisticated platforms combining behavioral detection, threat intelligence, and automated response.   </p>
-<p>EDR vs XDR vs Traditional Antivirus   </p>
-<p>Traditional Antivirus (AV)   </p>
-<p>Signature-based AV compares files against a database of known malware hashes. It is effective against commodity malware but fails against zero-day threats, fileless attacks, and polymorphic malware.   </p>
+<h1>Endpoint Security</h1>
 <br>
+<p>Introduction </p>
 <br>
+<p>Endpoint security protects devices — laptops, servers, mobile devices, and IoT — that connect to corporate networks. Modern endpoint protection has evolved from signature-based antivirus to sophisticated platforms combining behavioral detection, threat intelligence, and automated response. </p>
 <br>
-<p>    # ClamAV command-line scanning</p>
+<p>EDR vs XDR vs Traditional Antivirus </p>
 <br>
-<p>    clamscan --recursive --infected /home/user</p>
+<p>Traditional Antivirus (AV) </p>
 <br>
-<p>    clamscan --database=/var/lib/clamav --log=/var/log/clamav.log /</p>
+<p>Signature-based AV compares files against a database of known malware hashes. It is effective against commodity malware but fails against zero-day threats, fileless attacks, and polymorphic malware. </p>
 <br>
+<h1>ClamAV command-line scanning</h1>
 <br>
+<p>clamscan --recursive --infected /home/user</p>
 <br>
+<p>clamscan --database=/var/lib/clamav --log=/var/log/clamav.log /</p>
 <br>
 <p>Limitations of signature-based AV:</p>
+<br>
 <p>* Cannot detect unknown threats</p>
+<br>
 <p>* No behavioral monitoring</p>
+<br>
 <p>* Limited or no response capabilities</p>
+<br>
 <p>* No cross-host correlation</p>
 <br>
-<p>Endpoint Detection and Response (EDR)   </p>
-<p>EDR platforms continuously monitor endpoint activity, recording system calls, process creation, network connections, file system changes, and registry modifications. They provide visibility into attacker behavior across the kill chain.   </p>
+<p>Endpoint Detection and Response (EDR) </p>
 <br>
+<p>EDR platforms continuously monitor endpoint activity, recording system calls, process creation, network connections, file system changes, and registry modifications. They provide visibility into attacker behavior across the kill chain. </p>
 <br>
+<h1>Hypothetical EDR telemetry query</h1>
 <br>
-<p>    # Hypothetical EDR telemetry query</p>
+<p>def query_process_tree(process_id, timespan_hours=24):</p>
 <br>
-<p>    def query_process_tree(process_id, timespan_hours=24):</p>
+<p>return edr_api.query(f"""</p>
 <br>
-<p>        return edr_api.query(f"""</p>
+<p>SELECT pid, parent_pid, name, command_line, </p>
 <br>
-<p>            SELECT pid, parent_pid, name, command_line, </p>
+<p>event_time, user, hash</p>
 <br>
-<p>                   event_time, user, hash</p>
+<p>FROM process_events</p>
 <br>
-<p>            FROM process_events</p>
+<p>WHERE (pid = {process_id} OR parent_pid = {process_id})</p>
 <br>
-<p>            WHERE (pid = {process_id} OR parent_pid = {process_id})</p>
+<p>AND event_time > NOW() - INTERVAL '{timespan_hours} hours'</p>
 <br>
-<p>              AND event_time > NOW() - INTERVAL '{timespan_hours} hours'</p>
+<p>ORDER BY event_time</p>
 <br>
-<p>            ORDER BY event_time</p>
+<p>""")</p>
 <br>
-<p>        """)</p>
+<p>Extended Detection and Response (XDR) </p>
 <br>
+<p>XDR extends EDR by correlating telemetry across endpoints, network traffic, email, cloud workloads, and identity systems. This cross-domain correlation reveals multi-stage attacks spanning different infrastructure layers. </p>
 <br>
+<h1>XDR cross-domain correlation example</h1>
 <br>
+<p>def correlate_alerts():</p>
 <br>
-<p>Extended Detection and Response (XDR)   </p>
-<p>XDR extends EDR by correlating telemetry across endpoints, network traffic, email, cloud workloads, and identity systems. This cross-domain correlation reveals multi-stage attacks spanning different infrastructure layers.   </p>
+<h1>Correlate endpoint alert with network flow</h1>
 <br>
+<p>endpoint_alerts = xdr.get_alerts(sources=['endpoint'], severity='high')</p>
 <br>
+<p>network_flows = xdr.get_flows(source_ip_subnet='10.0.0.0/8', </p>
 <br>
-<p>    # XDR cross-domain correlation example</p>
+<p>time_range='last_1h')</p>
 <br>
-<p>    def correlate_alerts():</p>
+<p>for alert in endpoint_alerts:</p>
 <br>
-<p>        # Correlate endpoint alert with network flow</p>
+<p>matching_flows = [</p>
 <br>
-<p>        endpoint_alerts = xdr.get_alerts(sources=['endpoint'], severity='high')</p>
+<p>flow for flow in network_flows</p>
 <br>
-<p>        network_flows = xdr.get_flows(source_ip_subnet='10.0.0.0/8', </p>
+<p>if flow.dest_ip == alert.external_ip</p>
 <br>
-<p>                                       time_range='last_1h')</p>
+<p>and abs(flow.timestamp - alert.timestamp).seconds < 300</p>
 <br>
+<p>]</p>
 <br>
+<p>if matching_flows:</p>
 <br>
-<p>        for alert in endpoint_alerts:</p>
+<p>alert.add_evidence(matching_flows)</p>
 <br>
-<p>            matching_flows = [</p>
+<p>alert.escalate_severity('critical')</p>
 <br>
-<p>                flow for flow in network_flows</p>
+<p>Detection Techniques </p>
 <br>
-<p>                if flow.dest_ip == alert.external_ip</p>
+<p>Behavioral Detection </p>
 <br>
-<p>                and abs(flow.timestamp - alert.timestamp).seconds < 300</p>
+<p>Monitors sequences of actions rather than static indicators. Detects ransomware by observing mass file encryption patterns. </p>
 <br>
-<p>            ]</p>
+<h1>Behavioral detection rule</h1>
 <br>
-<p>            if matching_flows:</p>
+<p>detection_rules:</p>
 <br>
-<p>                alert.add_evidence(matching_flows)</p>
+<p>\- name: "Ransomware Behavior"</p>
 <br>
-<p>                alert.escalate_severity('critical')</p>
+<p>conditions:</p>
 <br>
+<p>\- process.file_operations.count > 100</p>
 <br>
+<p>\- process.file_operations.extension_changes > 50</p>
 <br>
+<p>\- process.file_operations.avg_write_size_bytes > 500000</p>
 <br>
-<p>Detection Techniques   </p>
-<p>Behavioral Detection   </p>
-<p>Monitors sequences of actions rather than static indicators. Detects ransomware by observing mass file encryption patterns.   </p>
+<p>\- duration_seconds < 60</p>
 <br>
+<p>severity: critical</p>
 <br>
+<p>response: isolate_host</p>
 <br>
-<p>    # Behavioral detection rule</p>
+<p>ML-Based Detection </p>
 <br>
-<p>    detection_rules:</p>
+<p>Machine learning models analyze features extracted from endpoint telemetry to classify benign and malicious behavior. Models must be trained on diverse datasets and continuously updated to avoid concept drift. </p>
 <br>
-<p>      - name: "Ransomware Behavior"</p>
+<p>Response Automation </p>
 <br>
-<p>        conditions:</p>
+<p>SOAR (Security Orchestration, Automation, and Response) platforms automate response actions based on detection triggers. </p>
 <br>
-<p>          - process.file_operations.count > 100</p>
+<h1>Automated response playbook</h1>
 <br>
-<p>          - process.file_operations.extension_changes > 50</p>
+<p>playbook:</p>
 <br>
-<p>          - process.file_operations.avg_write_size_bytes > 500000</p>
+<p>name: "Host Isolation and Investigation"</p>
 <br>
-<p>          - duration_seconds < 60</p>
+<p>trigger: severity == critical AND threat_type == ransomware</p>
 <br>
-<p>        severity: critical</p>
+<p>steps:</p>
 <br>
-<p>        response: isolate_host</p>
+<p>\- action: isolate_host</p>
 <br>
+<p>target: alert.host_id</p>
 <br>
+<p>network_scope: full</p>
 <br>
+<p>\- action: capture_memory</p>
 <br>
-<p>ML-Based Detection   </p>
-<p>Machine learning models analyze features extracted from endpoint telemetry to classify benign and malicious behavior. Models must be trained on diverse datasets and continuously updated to avoid concept drift.   </p>
-<p>Response Automation   </p>
-<p>SOAR (Security Orchestration, Automation, and Response) platforms automate response actions based on detection triggers.   </p>
+<p>target: alert.host_id</p>
 <br>
+<p>\- action: collect_process_tree</p>
 <br>
+<p>target: alert.process.id</p>
 <br>
-<p>    # Automated response playbook</p>
+<p>\- action: enrich_iocs</p>
 <br>
-<p>    playbook:</p>
+<p>targets: [alert.file_hash, alert.dest_ip]</p>
 <br>
-<p>      name: "Host Isolation and Investigation"</p>
+<p>feeds: [virustotal, abuseipdb]</p>
 <br>
-<p>      trigger: severity == critical AND threat_type == ransomware</p>
+<p>\- action: create_ticket</p>
 <br>
-<p>      steps:</p>
+<p>system: jira</p>
 <br>
-<p>        - action: isolate_host</p>
+<p>priority: P1</p>
 <br>
-<p>          target: alert.host_id</p>
+<p>assignee_group: "SOC Tier 3"</p>
 <br>
-<p>          network_scope: full</p>
+<p>Conclusion </p>
 <br>
-<br>
-<br>
-<p>        - action: capture_memory</p>
-<br>
-<p>          target: alert.host_id</p>
-<br>
-<br>
-<br>
-<p>        - action: collect_process_tree</p>
-<br>
-<p>          target: alert.process.id</p>
-<br>
-<br>
-<br>
-<p>        - action: enrich_iocs</p>
-<br>
-<p>          targets: [alert.file_hash, alert.dest_ip]</p>
-<br>
-<p>          feeds: [virustotal, abuseipdb]</p>
-<br>
-<br>
-<br>
-<p>        - action: create_ticket</p>
-<br>
-<p>          system: jira</p>
-<br>
-<p>          priority: P1</p>
-<br>
-<p>          assignee_group: "SOC Tier 3"</p>
-<br>
-<br>
-<br>
-<br>
-<p>Conclusion   </p>
 <p>Modern endpoint protection demands more than antivirus. EDR provides deep visibility into endpoint activity, while XDR extends correlation across the entire security stack. Automated response reduces dwell time, but requires careful tuning to avoid disrupting legitimate operations.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

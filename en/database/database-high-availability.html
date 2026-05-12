@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-high-availability.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database High Availability: Failover, Standby Types, Health Checks">
     <meta name="twitter:description" content="Learn database high availability patterns: failover strategies, standby types (hot, warm, cold), health checks, automated recovery, and PostgreSQL HA setup.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-high-availability.png">
     <title>Database High Availability: Failover, Standby Types, Health Checks — SourceHub</title>
     <meta name="description" content="Learn database high availability patterns: failover strategies, standby types (hot, warm, cold), health checks, automated recovery, and PostgreSQL HA setup.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database High Availability: Failover, Standby Types, Health Checks",
       "description": "Learn database high availability patterns: failover strategies, standby types (hot, warm, cold), health checks, automated recovery, and PostgreSQL HA setup.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-high-availability.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1750",
+      "wordCount": "1683",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database High Availability: Failover, Standby Types, Health Checks</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-high-availability.png" alt="Database High Availability: Failover, Standby Types, Health Checks" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database High Availability: Failover, Standby Types, Health Checks</h1>
 <br>
 <p>Database High Availability: Failover, Standby Types, Health Checks   </p>
@@ -87,17 +88,11 @@
 <p>Hot Standby   </p>
 <p>A hot standby accepts read queries while replicating from the primary. PostgreSQL's `hot_standby = on` enables this:   </p>
 <br>
-<br>
-<br>
 <p>    # standby postgresql.conf</p>
 <br>
 <p>    hot_standby = on</p>
 <br>
 <p>    hot_standby_feedback = on</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>* **Failover time**: Seconds (already running, just promote).</p>
 <p>* **Resource usage**: Full database server resources.</p>
@@ -106,15 +101,9 @@
 <p>Warm Standby   </p>
 <p>A warm standby is running but does not accept connections until promoted:   </p>
 <br>
-<br>
-<br>
 <p>    # warm standby: accept no connections</p>
 <br>
 <p>    hot_standby = off</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>* **Failover time**: Tens of seconds (start postmaster + recovery).</p>
 <p>* **Resource usage**: Moderate (receives WAL but no query processing).</p>
@@ -131,26 +120,17 @@
 <p>Manual Failover   </p>
 <p>The operator promotes a standby and redirects applications:   </p>
 <br>
-<br>
-<br>
 <p>    # Promote standby</p>
 <br>
 <p>    pg_ctl promote -D /var/lib/postgresql/data</p>
-<br>
-<br>
 <br>
 <p>    # Update application DNS or connection string</p>
 <br>
 <p>    # This may take minutes and requires human intervention</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Pros**: Simple, operator has full control. **Cons**: Slow (minutes), error-prone under pressure.   </p>
 <p>Automated Failover with Patroni   </p>
 <p>Patroni is the most popular HA solution for PostgreSQL. It uses distributed consensus (etcd, Consul, or Zookeeper) to elect a new leader:   </p>
-<br>
-<br>
 <br>
 <p>    # patroni.yml</p>
 <br>
@@ -160,15 +140,11 @@
 <br>
 <p>    name: pg-node-1</p>
 <br>
-<br>
-<br>
 <p>    consul:</p>
 <br>
 <p>      host: consul.service.consul:8500</p>
 <br>
 <p>      register_service: true</p>
-<br>
-<br>
 <br>
 <p>    postgresql:</p>
 <br>
@@ -202,16 +178,11 @@
 <br>
 <p>      use_slots: true</p>
 <br>
-<br>
-<br>
 <p>    watchdog:</p>
 <br>
 <p>      mode: required</p>
 <br>
 <p>      device: /dev/watchdog</p>
-<br>
-<br>
-<br>
 <br>
 <p>Health Checks   </p>
 <p>Patroni performs regular health checks:   </p>
@@ -219,22 +190,15 @@
 <p>* **pg_isready**: Checks if PostgreSQL is accepting connections.</p>
 <p>2\. **Replication lag**: If lag exceeds a threshold, the standby is not eligible for promotion. 3\. **Consensus health**: The node must be reachable to the DCS (etcd/Consul).   </p>
 <br>
-<br>
-<br>
 <p>    # Manual health check</p>
 <br>
 <p>    pg_isready -h localhost -p 5432</p>
 <br>
 <p>    # localhost:5432 - accepting connections</p>
 <br>
-<br>
-<br>
 <p>    # Check replication status</p>
 <br>
 <p>    psql -c "SELECT * FROM pg_stat_replication;"</p>
-<br>
-<br>
-<br>
 <br>
 <p>Failover Flow   </p>
 <br>
@@ -243,11 +207,7 @@
 <p>Connection Draining and Routing   </p>
 <p>During failover, in-flight transactions are lost. Applications must handle this:   </p>
 <br>
-<br>
-<br>
 <p>    from tenacity import retry, stop_after_attempt, wait_exponential</p>
-<br>
-<br>
 <br>
 <p>    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1))</p>
 <br>
@@ -269,16 +229,9 @@
 <br>
 <p>            raise</p>
 <br>
-<br>
-<br>
-<br>
 <p>Smart DNS (Route53, CloudDNS)   </p>
 <br>
-<br>
-<br>
 <p>    import boto3</p>
-<br>
-<br>
 <br>
 <p>    def failover_to_standby(region, standby_dns):</p>
 <br>
@@ -312,17 +265,12 @@
 <br>
 <p>        )</p>
 <br>
-<br>
-<br>
-<br>
 <p>Low TTL (30 seconds) ensures fast propagation.   </p>
 <p>PostgreSQL High Availability Stack   </p>
 <p>A production HA setup combines:   </p>
 <br>
 <p>* **Streaming replication**: 2-3 synchronous standbys.</p>
 <p>2\. **Patroni**: Automated failover and cluster management. 3\. **etcd/Consul**: Distributed consensus for leader election. 4\. **HAProxy or PgBouncer**: Connection routing to the current primary. 5\. **Watchdog**: Fencing to prevent split-brain.   </p>
-<br>
-<br>
 <br>
 <p>    # HAProxy configuration</p>
 <br>
@@ -331,8 +279,6 @@
 <p>        bind *:5000</p>
 <br>
 <p>        default_backend pg_backend</p>
-<br>
-<br>
 <br>
 <p>    backend pg_backend</p>
 <br>
@@ -344,19 +290,12 @@
 <br>
 <p>        server pg-node-3 pg-node-3:5432 check port 8008 inter 2s</p>
 <br>
-<br>
-<br>
-<br>
 <p>Testing HA   </p>
 <p>Regular failover testing is essential:   </p>
-<br>
-<br>
 <br>
 <p>    # Test: Kill the primary</p>
 <br>
 <p>    ssh pg-node-1 "systemctl stop postgresql"</p>
-<br>
-<br>
 <br>
 <p>    # Expected:</p>
 <br>
@@ -366,16 +305,11 @@
 <br>
 <p>    # - Applications reconnect and continue</p>
 <br>
-<br>
-<br>
 <p>    # Verify:</p>
 <br>
 <p>    psql -h haproxy -p 5000 -c "SELECT inet_server_addr();"</p>
 <br>
 <p>    # Should show pg-node-2's IP</p>
-<br>
-<br>
-<br>
 <br>
 <p>Common Pitfalls   </p>
 <br>

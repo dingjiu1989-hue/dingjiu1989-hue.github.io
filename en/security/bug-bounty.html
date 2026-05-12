@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/bug-bounty.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Bug Bounty Guide">
     <meta name="twitter:description" content="Practical guide to bug bounty hunting including vulnerability discovery techniques, report writing, and platform-specific tips for HackerOne and Bugcrowd.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/bug-bounty.png">
     <title>Bug Bounty Guide — SourceHub</title>
     <meta name="description" content="Practical guide to bug bounty hunting including vulnerability discovery techniques, report writing, and platform-specific tips for HackerOne and Bugcrowd.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,15 +38,15 @@
       "@type": "Article",
       "headline": "Bug Bounty Guide",
       "description": "Practical guide to bug bounty hunting including vulnerability discovery techniques, report writing, and platform-specific tips for HackerOne and Bugcrowd.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/bug-bounty.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1355",
+      "wordCount": "1147",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/bug-bounty.html"},
-      "articleBody": "Bug Bounty Guide Introduction Bug bounty programs invite security researchers to find and report vulnerabilities in exchange for monetary rewards or acknowledgment. They represent a paradigm shift from traditional security testing \u2014 continuous, crowd-sourced, and performance-based. Success requires methodical technique, clear communication, and platform-specific knowledge. Finding Vulnerabilities Reconnaissance-Driven Approach Successful bug bounty hunters invest heavily in reconnaissance. The more you know about a target, the more attack surface you can discover. # Subdomain enumeration pipeline subfinder -d target.com -silent | tee subs_raw.txt assetfinder --subs-only target.com | tee -a subs_raw.txt # Deduplicate and validate cat subs_raw.txt | sort -u | httprobe -c 50 > live_subs.txt # Technology fingerprinting on discovered subdomains cat live_subs.txt | httpx -sc -title -tech-detect -o tech_report.txt # Directory brute-forcing ffuf -u https://admin.target.com/FUZZ -w /usr/share/wordlists/dirb/common.txt \\ -ac -t 100 -o admin_fuzz.json Attack-Specific Techniques # Automated XSS discovery import requests from urllib.parse import urljoin, urlparse, parse_qs def hunt_xss(base_url): payloads = [ 'alert(1)', '\">alert(1)', 'javascript:alert(1)', '\">', '{{constructor.constructor(\"alert(1)\")()}}', # SSTI-based XSS ] # Extract all forms response = requests.get(base_url) # Parse and find all forms, inputs for endpoint in discover_endpoints(base_url): params = extract_params(endpoint) for param in params: for payload in payloads: test_url = endpoint.replace( f'{param}={params[param]}', f'{param}={urlencode(payload)}' ) resp = requests.get(test_url) if payload in resp.text and not resp.text.count('\"') > 3: # Check if payload rendered unescaped print(f\"[+] XSS found: {test_url}\") # IDOR detection with autorize (Burp extension) # 1. Record authenticated session cookies # 2. Enable Autorize with victim cookie # 3. Browse application as victim user # 4. Monitor BApp output for unauthorized access # GraphQL introspection for API discovery curl -X POST https://api.target.com/graphql \\ -H \"Content-Type: application/json\" \\ -d '{\"query\":\"query { __schema { types { name fields { name } } } }\"}' Writing Effective Reports A clear, well-structured report increases the likelihood of acceptance and higher bounties. report_template: title: \"Stored XSS in User Profile Bio Field\" vulnerability_type: \"Stored Cross-Site Scripting (XSS)\" severity: \"High\" cvss: \"7.3 (AV:N/AC:L/PR:L/UI:R/S:U/C:H/I:N/A:N)\" summary: > The user profile bio field does not sanitize HTML input, allowing an attacker to inject JavaScript that executes when other users view the profile. steps_to_reproduce: - step: 1 action: \"Log in as attacker user\" detail: \"Create account at https://app.target.com/register\" - step: 2 action: \"Navigate to profile settings\" detail: \"https://app.target.com/settings/profile\" - step: 3 action: \"Set bio to: \" - step: 4 action: \"Save profile and navigate to public profile\" detail: \"https://app.target.com/users/attacker\" - step: 5 action: \"Observe JavaScript execution\" detail: \"alert box displays current user's cookies\" impact: > An attacker can steal session cookies, exfiltrate CSRF tokens, perform actions on behalf of other users, or deface profiles. remediation_suggestion: > Apply context-sensitive output encoding to the bio field. Use a DOMPurify-style sanitizer on input and properly escape on output using the template engine's auto-escaping. supporting_evidence: - type: \"screenshot\" file: \"xss_bio_alert.png\" caption: \"Alert box showing cookies on profile view\" - type: \"poc_script\" file: \"xss_exploit.html\" Platform Tips HackerOne * Start with the `hackerone.com/security` page for each target * Use the disclosure timeline feature for managed programs * Leverage the `hackerone.com/trending` for current attack patterns * Build reputation through quality reports, not volume Bugcrowd * Complete priority rating correctly (P1-P5 based on CVSS) * Use the built-in POC video recording for complex vulnerabilities * Engage in VRT (Vulnerability Rating Taxonomy) disputes professionally Conclusion Bug bounty hunting combines technical skill, persistence, and communication. Invest heavily in recon, develop methodical testing approaches, write clear reports with reproducible steps, and understand each platform's nuances. Quality always outperforms quantity \u2014 one critical bug well reported is worth more than dozens of duplicates."
+      "articleBody": "Bug Bounty Guide Bug Bounty Guide Introduction Bug bounty programs invite security researchers to find and report vulnerabilities in exchange for monetary rewards or acknowledgment. They represent a paradigm shift from traditional security testing \u2014 continuous, crowd-sourced, and performance-based. Success requires methodical technique, clear communication, and platform-specific knowledge. Finding Vulnerabilities Reconnaissance-Driven Approach Successful bug bounty hunters invest heavily in reconnaissance. The more you know about a target, the more attack surface you can discover. Subdomain enumeration pipeline subfinder -d target.com -silent | tee subs_raw.txt assetfinder --subs-only target.com | tee -a subs_raw.txt Deduplicate and validate cat subs_raw.txt | sort -u | httprobe -c 50 > live_subs.txt Technology fingerprinting on discovered subdomains cat live_subs.txt | httpx -sc -title -tech-detect -o tech_report.txt Directory brute-forcing ffuf -u https://admin.target.com/FUZZ -w /usr/share/wordlists/dirb/common.txt \\ -ac -t 100 -o admin_fuzz.json Attack-Specific Techniques Automated XSS discovery import requests from urllib.parse import urljoin, urlparse, parse_qs def hunt_xss(base_url): payloads = [ '', '\">', 'javascript:alert(1)', '\">', '{{constructor.constructor(\"alert(1)\")()}}', # SSTI-based XSS ] Extract all forms response = requests.get(base_url) Parse and find all forms, inputs for endpoint in discover_endpoints(base_url): params = extract_params(endpoint) for param in params: for payload in payloads: test_url = endpoint.replace( f'{param}={params[param]}', f'{param}={urlencode(payload)}' ) resp = requests.get(test_url) if payload in resp.text and not resp.text.count('\"') > 3: Check if payload rendered unescaped print(f\"[+] XSS found: {test_url}\") IDOR detection with autorize (Burp extension) 1. Record authenticated session cookies 2. Enable Autorize with victim cookie 3. Browse application as victim user 4. Monitor BApp output for unauthorized access GraphQL introspection for API discovery curl -X POST https://api.target.com/graphql \\ -H \"Content-Type: application/json\" \\ -d '{\"query\":\"query { __schema { types { name fields { name } } } }\"}' Writing Effective Reports A clear, well-structured report increases the likelihood of acceptance and higher bounties. report_template: title: \"Stored XSS in User Profile Bio Field\" vulnerability_type: \"Stored Cross-Site Scripting (XSS)\" severity: \"High\" cvss: \"7.3 (AV:N/AC:L/PR:L/UI:R/S:U/C:H/I:N/A:N)\" summary: > The user profile bio field does not sanitize HTML input, allowing an attacker to inject JavaScript that executes when other users view the profile. steps_to_reproduce: \\- step: 1 action: \"Log in as attacker user\" detail: \"Create account at https://app.target.com/register\" \\- step: 2 action: \"Navigate to profile settings\" detail: \"https://app.target.com/settings/profile\" \\- step: 3 action: \"Set bio to: \" \\- step: 4 action: \"Save profile and navigate to public profile\" detail: \"https://app.target.com/users/attacker\" \\- step: 5 action: \"Observe JavaScript execution\" detail: \"alert box displays current user's cookies\" impact: > An attacker can steal session cookies, exfiltrate CSRF tokens, perform actions on behalf of other users, or deface profiles. remediation_suggestion: > Apply context-sensitive output encoding to the bio field. Use a DOMPurify-style sanitizer on input and properly escape on output using the template engine's auto-escaping. supporting_evidence: \\- type: \"screenshot\" file: \"xss_bio_alert.png\" caption: \"Alert box showing cookies on profile view\" \\- type: \"poc_script\" file: \"xss_exploit.html\" Platform Tips HackerOne * Start with the `hackerone.com/security` page for each target * Use the disclosure timeline feature for managed programs * Leverage the `hackerone.com/trending` for current attack patterns * Build reputation through quality reports, not volume Bugcrowd * Complete priority rating correctly (P1-P5 based on CVSS) * Use the built-in POC video recording for complex vulnerabilities * Engage in VRT (Vulnerability Rating Taxonomy) disputes professionally Conclusion Bug bounty hunting combines technical skill, persistence, and communication. Invest heavily in recon, develop methodical testing approaches, write clear reports with reproducible steps, and understand each platform's nuances. Quality always outperforms quantity \u2014 one critical bug well reported is worth more than dozens of duplicates."
     }
     </script>
     <script type="application/ld+json">
@@ -75,253 +75,213 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Bug Bounty Guide</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/bug-bounty.png" alt="Bug Bounty Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Bug Bounty Guide</h1>
 <br>
-<p>Introduction   </p>
-<p>Bug bounty programs invite security researchers to find and report vulnerabilities in exchange for monetary rewards or acknowledgment. They represent a paradigm shift from traditional security testing — continuous, crowd-sourced, and performance-based. Success requires methodical technique, clear communication, and platform-specific knowledge.   </p>
-<p>Finding Vulnerabilities   </p>
-<p>Reconnaissance-Driven Approach   </p>
-<p>Successful bug bounty hunters invest heavily in reconnaissance. The more you know about a target, the more attack surface you can discover.   </p>
+<h1>Bug Bounty Guide</h1>
 <br>
+<p>Introduction </p>
 <br>
+<p>Bug bounty programs invite security researchers to find and report vulnerabilities in exchange for monetary rewards or acknowledgment. They represent a paradigm shift from traditional security testing — continuous, crowd-sourced, and performance-based. Success requires methodical technique, clear communication, and platform-specific knowledge. </p>
 <br>
-<p>    # Subdomain enumeration pipeline</p>
+<p>Finding Vulnerabilities </p>
 <br>
-<p>    subfinder -d target.com -silent | tee subs_raw.txt</p>
+<p>Reconnaissance-Driven Approach </p>
 <br>
-<p>    assetfinder --subs-only target.com | tee -a subs_raw.txt</p>
+<p>Successful bug bounty hunters invest heavily in reconnaissance. The more you know about a target, the more attack surface you can discover. </p>
 <br>
+<h1>Subdomain enumeration pipeline</h1>
 <br>
+<p>subfinder -d target.com -silent | tee subs_raw.txt</p>
 <br>
-<p>    # Deduplicate and validate</p>
+<p>assetfinder --subs-only target.com | tee -a subs_raw.txt</p>
 <br>
-<p>    cat subs_raw.txt | sort -u | httprobe -c 50 > live_subs.txt</p>
+<h1>Deduplicate and validate</h1>
 <br>
+<p>cat subs_raw.txt | sort -u | httprobe -c 50 > live_subs.txt</p>
 <br>
+<h1>Technology fingerprinting on discovered subdomains</h1>
 <br>
-<p>    # Technology fingerprinting on discovered subdomains</p>
+<p>cat live_subs.txt | httpx -sc -title -tech-detect -o tech_report.txt</p>
 <br>
-<p>    cat live_subs.txt | httpx -sc -title -tech-detect -o tech_report.txt</p>
+<h1>Directory brute-forcing</h1>
 <br>
+<p>ffuf -u https://admin.target.com/FUZZ -w /usr/share/wordlists/dirb/common.txt \</p>
 <br>
+<p>-ac -t 100 -o admin_fuzz.json</p>
 <br>
-<p>    # Directory brute-forcing</p>
+<p>Attack-Specific Techniques </p>
 <br>
-<p>    ffuf -u https://admin.target.com/FUZZ -w /usr/share/wordlists/dirb/common.txt \</p>
+<h1>Automated XSS discovery</h1>
 <br>
-<p>         -ac -t 100 -o admin_fuzz.json</p>
+<p>import requests</p>
 <br>
+<p>from urllib.parse import urljoin, urlparse, parse_qs</p>
 <br>
+<p>def hunt_xss(base_url):</p>
 <br>
+<p>payloads = [</p>
 <br>
-<p>Attack-Specific Techniques   </p>
+<p>'',</p>
 <br>
+<p>'">',</p>
 <br>
+<p>'javascript:alert(1)',</p>
 <br>
-<p>    # Automated XSS discovery</p>
+<p>'">',</p>
 <br>
-<p>    import requests</p>
+<p>'{{constructor.constructor("alert(1)")()}}', # SSTI-based XSS</p>
 <br>
-<p>    from urllib.parse import urljoin, urlparse, parse_qs</p>
+<p>]</p>
 <br>
+<h1>Extract all forms</h1>
 <br>
+<p>response = requests.get(base_url)</p>
 <br>
-<p>    def hunt_xss(base_url):</p>
+<h1>Parse and find all forms, inputs</h1>
 <br>
-<p>        payloads = [</p>
+<p>for endpoint in discover_endpoints(base_url):</p>
 <br>
-<p>            '<script>alert(1)</script>',</p>
+<p>params = extract_params(endpoint)</p>
 <br>
-<p>            '"><script>alert(1)</script>',</p>
+<p>for param in params:</p>
 <br>
-<p>            'javascript:alert(1)',</p>
+<p>for payload in payloads:</p>
 <br>
-<p>            '"><img src=x onerror=alert(1)>',</p>
+<p>test_url = endpoint.replace(</p>
 <br>
-<p>            '{{constructor.constructor("alert(1)")()}}',  # SSTI-based XSS</p>
+<p>f'{param}={params[param]}', </p>
 <br>
-<p>        ]</p>
+<p>f'{param}={urlencode(payload)}'</p>
 <br>
+<p>)</p>
 <br>
+<p>resp = requests.get(test_url)</p>
 <br>
-<p>        # Extract all forms</p>
+<p>if payload in resp.text and not resp.text.count('"') > 3:</p>
 <br>
-<p>        response = requests.get(base_url)</p>
+<h1>Check if payload rendered unescaped</h1>
 <br>
-<p>        # Parse and find all forms, inputs</p>
+<p>print(f"[+] XSS found: {test_url}")</p>
 <br>
+<h1>IDOR detection with autorize (Burp extension)</h1>
 <br>
+<h1>1. Record authenticated session cookies</h1>
 <br>
-<p>        for endpoint in discover_endpoints(base_url):</p>
+<h1>2. Enable Autorize with victim cookie</h1>
 <br>
-<p>            params = extract_params(endpoint)</p>
+<h1>3. Browse application as victim user</h1>
 <br>
-<p>            for param in params:</p>
+<h1>4. Monitor BApp output for unauthorized access</h1>
 <br>
-<p>                for payload in payloads:</p>
+<h1>GraphQL introspection for API discovery</h1>
 <br>
-<p>                    test_url = endpoint.replace(</p>
+<p>curl -X POST https://api.target.com/graphql \</p>
 <br>
-<p>                        f'{param}={params[param]}', </p>
+<p>-H "Content-Type: application/json" \</p>
 <br>
-<p>                        f'{param}={urlencode(payload)}'</p>
+<p>-d '{"query":"query { __schema { types { name fields { name } } } }"}'</p>
 <br>
-<p>                    )</p>
+<p>Writing Effective Reports </p>
 <br>
-<p>                    resp = requests.get(test_url)</p>
+<p>A clear, well-structured report increases the likelihood of acceptance and higher bounties. </p>
 <br>
-<p>                    if payload in resp.text and not resp.text.count('"') > 3:</p>
+<p>report_template:</p>
 <br>
-<p>                        # Check if payload rendered unescaped</p>
+<p>title: "Stored XSS in User Profile Bio Field"</p>
 <br>
-<p>                        print(f"[+] XSS found: {test_url}")</p>
+<p>vulnerability_type: "Stored Cross-Site Scripting (XSS)"</p>
 <br>
+<p>severity: "High"</p>
 <br>
+<p>cvss: "7.3 (AV:N/AC:L/PR:L/UI:R/S:U/C:H/I:N/A:N)"</p>
 <br>
+<p>summary: ></p>
 <br>
+<p>The user profile bio field does not sanitize HTML input,</p>
 <br>
+<p>allowing an attacker to inject JavaScript that executes when</p>
 <br>
+<p>other users view the profile.</p>
 <br>
-<p>    # IDOR detection with autorize (Burp extension)</p>
+<p>steps_to_reproduce:</p>
 <br>
-<p>    # 1. Record authenticated session cookies</p>
+<p>\- step: 1</p>
 <br>
-<p>    # 2. Enable Autorize with victim cookie</p>
+<p>action: "Log in as attacker user"</p>
 <br>
-<p>    # 3. Browse application as victim user</p>
+<p>detail: "Create account at https://app.target.com/register"</p>
 <br>
-<p>    # 4. Monitor BApp output for unauthorized access</p>
+<p>\- step: 2</p>
 <br>
+<p>action: "Navigate to profile settings"</p>
 <br>
+<p>detail: "https://app.target.com/settings/profile"</p>
 <br>
-<p>    # GraphQL introspection for API discovery</p>
+<p>\- step: 3</p>
 <br>
-<p>    curl -X POST https://api.target.com/graphql \</p>
+<p>action: "Set bio to: "</p>
 <br>
-<p>      -H "Content-Type: application/json" \</p>
+<p>\- step: 4</p>
 <br>
-<p>      -d '{"query":"query { __schema { types { name fields { name } } } }"}'</p>
+<p>action: "Save profile and navigate to public profile"</p>
 <br>
+<p>detail: "https://app.target.com/users/attacker"</p>
 <br>
+<p>\- step: 5</p>
 <br>
+<p>action: "Observe JavaScript execution"</p>
 <br>
-<p>Writing Effective Reports   </p>
-<p>A clear, well-structured report increases the likelihood of acceptance and higher bounties.   </p>
+<p>detail: "alert box displays current user's cookies"</p>
 <br>
+<p>impact: ></p>
 <br>
+<p>An attacker can steal session cookies, exfiltrate CSRF tokens,</p>
 <br>
-<p>    report_template:</p>
+<p>perform actions on behalf of other users, or deface profiles.</p>
 <br>
-<p>      title: "Stored XSS in User Profile Bio Field"</p>
+<p>remediation_suggestion: ></p>
 <br>
+<p>Apply context-sensitive output encoding to the bio field.</p>
 <br>
+<p>Use a DOMPurify-style sanitizer on input and properly escape</p>
 <br>
-<p>      vulnerability_type: "Stored Cross-Site Scripting (XSS)"</p>
+<p>on output using the template engine's auto-escaping.</p>
 <br>
-<p>      severity: "High"</p>
+<p>supporting_evidence:</p>
 <br>
-<p>      cvss: "7.3 (AV:N/AC:L/PR:L/UI:R/S:U/C:H/I:N/A:N)"</p>
+<p>\- type: "screenshot"</p>
 <br>
+<p>file: "xss_bio_alert.png"</p>
 <br>
+<p>caption: "Alert box showing cookies on profile view"</p>
 <br>
-<p>      summary: ></p>
+<p>\- type: "poc_script"</p>
 <br>
-<p>        The user profile bio field does not sanitize HTML input,</p>
+<p>file: "xss_exploit.html"</p>
 <br>
-<p>        allowing an attacker to inject JavaScript that executes when</p>
+<p>Platform Tips </p>
 <br>
-<p>        other users view the profile.</p>
-<br>
-<br>
-<br>
-<p>      steps_to_reproduce:</p>
-<br>
-<p>        - step: 1</p>
-<br>
-<p>          action: "Log in as attacker user"</p>
-<br>
-<p>          detail: "Create account at https://app.target.com/register"</p>
-<br>
-<br>
-<br>
-<p>        - step: 2</p>
-<br>
-<p>          action: "Navigate to profile settings"</p>
-<br>
-<p>          detail: "https://app.target.com/settings/profile"</p>
-<br>
-<br>
-<br>
-<p>        - step: 3</p>
-<br>
-<p>          action: "Set bio to: <img src=x onerror=alert(document.cookie)>"</p>
-<br>
-<br>
-<br>
-<p>        - step: 4</p>
-<br>
-<p>          action: "Save profile and navigate to public profile"</p>
-<br>
-<p>          detail: "https://app.target.com/users/attacker"</p>
-<br>
-<br>
-<br>
-<p>        - step: 5</p>
-<br>
-<p>          action: "Observe JavaScript execution"</p>
-<br>
-<p>          detail: "alert box displays current user's cookies"</p>
-<br>
-<br>
-<br>
-<p>      impact: ></p>
-<br>
-<p>        An attacker can steal session cookies, exfiltrate CSRF tokens,</p>
-<br>
-<p>        perform actions on behalf of other users, or deface profiles.</p>
-<br>
-<br>
-<br>
-<p>      remediation_suggestion: ></p>
-<br>
-<p>        Apply context-sensitive output encoding to the bio field.</p>
-<br>
-<p>        Use a DOMPurify-style sanitizer on input and properly escape</p>
-<br>
-<p>        on output using the template engine's auto-escaping.</p>
-<br>
-<br>
-<br>
-<p>      supporting_evidence:</p>
-<br>
-<p>        - type: "screenshot"</p>
-<br>
-<p>          file: "xss_bio_alert.png"</p>
-<br>
-<p>          caption: "Alert box showing cookies on profile view"</p>
-<br>
-<br>
-<br>
-<p>        - type: "poc_script"</p>
-<br>
-<p>          file: "xss_exploit.html"</p>
-<br>
-<br>
-<br>
-<br>
-<p>Platform Tips   </p>
 <p>HackerOne</p>
+<br>
 <p>* Start with the `hackerone.com/security` page for each target</p>
+<br>
 <p>* Use the disclosure timeline feature for managed programs</p>
+<br>
 <p>* Leverage the `hackerone.com/trending` for current attack patterns</p>
+<br>
 <p>* Build reputation through quality reports, not volume</p>
 <br>
 <p>Bugcrowd</p>
+<br>
 <p>* Complete priority rating correctly (P1-P5 based on CVSS)</p>
+<br>
 <p>* Use the built-in POC video recording for complex vulnerabilities</p>
+<br>
 <p>* Engage in VRT (Vulnerability Rating Taxonomy) disputes professionally</p>
 <br>
-<p>Conclusion   </p>
+<p>Conclusion </p>
+<br>
 <p>Bug bounty hunting combines technical skill, persistence, and communication. Invest heavily in recon, develop methodical testing approaches, write clear reports with reproducible steps, and understand each platform's nuances. Quality always outperforms quantity — one critical bug well reported is worth more than dozens of duplicates.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-file-upload.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Secure File Upload Implementation">
     <meta name="twitter:description" content="Best practices for implementing secure file upload functionality including validation, storage, scanning, and access control.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-file-upload.png">
     <title>Secure File Upload Implementation — SourceHub</title>
     <meta name="description" content="Best practices for implementing secure file upload functionality including validation, storage, scanning, and access control.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,15 +38,15 @@
       "@type": "Article",
       "headline": "Secure File Upload Implementation",
       "description": "Best practices for implementing secure file upload functionality including validation, storage, scanning, and access control.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/secure-file-upload.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1526",
+      "wordCount": "1325",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/secure-file-upload.html"},
-      "articleBody": "Secure File Upload Implementation The Risk of File Uploads File upload functionality is one of the most dangerous features an application can expose. An unrestricted file upload can lead to remote code execution, malware distribution, data breaches, and server compromise. Every file upload endpoint must be treated as a critical attack surface. Threat Model | Attack | Description | |--------|-------------| | Malicious file upload | Attacker uploads a PHP shell or executable | | File size DoS | Huge files exhaust disk space or memory | | Path traversal | Filename manipulates directory traversal | | MIME type spoofing | File extension does not match content | | Malware distribution | Legitimate-looking files containing malware | | Zip bombs | Compressed archive that expands to enormous size | | SSRF via file processing | Server-side parsing of attacker-controlled files | Validation Strategy 1\\. Validate File Extension Allowlist-based validation is essential. Blocklisting (e.g., rejecting `.exe` files) will always miss edge cases. ALLOWED_EXTENSIONS = { # Images '.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', # Documents '.pdf', '.doc', '.docx', '.xls', '.xlsx', # Other '.txt', '.csv' } def validate_extension(filename): ext = os.path.splitext(filename)[1].lower() if ext not in ALLOWED_EXTENSIONS: raise ValueError(f\"Extension {ext} not allowed\") 2\\. Validate MIME Type Never trust the `Content-Type` header from the client. Inspect the actual file content: import magic def validate_mime(file_stream): mime = magic.from_buffer(file_stream.read(2048), mime=True) file_stream.seek(0) ALLOWED_MIMES = { 'image/jpeg', 'image/png', 'image/gif', 'image/webp', 'application/pdf', 'text/plain', 'text/csv' } if mime not in ALLOWED_MIMES: raise ValueError(f\"MIME type {mime} not allowed\") 3\\. Validate File Size Enforce strict limits at multiple layers: // Express middleware const multer = require('multer'); const upload = multer({ limits: { fileSize: 10 * 1024 * 1024, // 10 MB files: 1 }, fileFilter: (req, file, cb) => { const allowed = ['image/jpeg', 'image/png', 'application/pdf']; if (!allowed.includes(file.mimetype)) { return cb(new Error('Invalid file type'), false); } cb(null, true); } }); 4\\. Validate File Content For images, attempt to re-process them. This strips embedded metadata and breaks hidden payloads: from PIL import Image import io def sanitize_image(file_bytes): \"\"\"Re-encode image to strip metadata and break embedded payloads.\"\"\" img = Image.open(io.BytesIO(file_bytes)) # Convert to ensure clean output img = img.convert('RGB') output = io.BytesIO() img.save(output, format='PNG') return output.getvalue() Secure Storage Never Store in Webroot Storing uploaded files inside the web server's document root is dangerous. If the filename or path is guessable, files can be accessed directly. # UNSAFE: Stored in webroot upload_dir = '/var/www/html/uploads/' # SAFE: Outside webroot upload_dir = '/data/uploads/' # Served through app logic Generate Safe Filenames Never use user-provided filenames. Generate random filenames: import uuid import os def safe_filename(original_name): ext = os.path.splitext(original_name)[1].lower() return f\"{uuid.uuid4().hex}{ext}\" Object Storage For production systems, use object storage with pre-signed URLs: import boto3 s3 = boto3.client('s3') def upload_file(file_bytes, content_type): key = f\"uploads/{uuid.uuid4().hex}.pdf\" s3.put_object( Bucket='my-app-uploads', Key=key, Body=file_bytes, ContentType=content_type ) return key def get_download_url(key, expires=3600): return s3.generate_presigned_url( 'get_object', Params={'Bucket': 'my-app-uploads', 'Key': key}, ExpiresIn=expires ) Antivirus Scanning Integrate virus scanning into the upload pipeline: import subprocess def scan_file(file_path): result = subprocess.run( ['clamscan', '--stdout', file_path], capture_output=True, text=True ) if 'FOUND' in result.stdout: os.remove(file_path) raise SecurityError(\"Malware detected in uploaded file\") Storage Limits and Quotas | Level | Limit | Mitigation | |-------|-------|------------| | Per file | 10 MB | Reject on client and server | | Per user | 500 MB | Track in database, reject when exceeded | | Per day (total) | 5 GB | Aggregate monitoring, rate limit | | Disk usage | 80% capacity | Alert, stop accepting uploads | Server Configuration Prevent uploaded files from being executed by the web server: # Nginx configuration location /uploads/ { # Only serve specific file types location ~* \\.(jpg|jpeg|png|gif|pdf)$ { add_header Content-Disposition 'attachment'; expires 30d; } # Deny everything else location ~* \\. { deny all; return 404; } } Summary Secure file upload requires defense in depth. Validate extensions and MIME types server-side, sanitize images by re-encoding them, generate random filenames, store files outside the webroot or in object storage, enforce strict size limits at multiple layers, and scan for malware. Never trust client-provided metadata, and process uploaded files with minimal privileges in isolated environments."
+      "articleBody": "Secure File Upload Implementation Secure File Upload Implementation The Risk of File Uploads File upload functionality is one of the most dangerous features an application can expose. An unrestricted file upload can lead to remote code execution, malware distribution, data breaches, and server compromise. Every file upload endpoint must be treated as a critical attack surface. Threat Model | Attack | Description | |--------|-------------| | Malicious file upload | Attacker uploads a PHP shell or executable | | File size DoS | Huge files exhaust disk space or memory | | Path traversal | Filename manipulates directory traversal | | MIME type spoofing | File extension does not match content | | Malware distribution | Legitimate-looking files containing malware | | Zip bombs | Compressed archive that expands to enormous size | | SSRF via file processing | Server-side parsing of attacker-controlled files | Validation Strategy 1\\\\. Validate File Extension Allowlist-based validation is essential. Blocklisting (e.g., rejecting `.exe` files) will always miss edge cases. ALLOWED_EXTENSIONS = { Images '.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', Documents '.pdf', '.doc', '.docx', '.xls', '.xlsx', Other '.txt', '.csv' } def validate_extension(filename): ext = os.path.splitext(filename)[1].lower() if ext not in ALLOWED_EXTENSIONS: raise ValueError(f\"Extension {ext} not allowed\") 2\\\\. Validate MIME Type Never trust the `Content-Type` header from the client. Inspect the actual file content: import magic def validate_mime(file_stream): mime = magic.from_buffer(file_stream.read(2048), mime=True) file_stream.seek(0) ALLOWED_MIMES = { 'image/jpeg', 'image/png', 'image/gif', 'image/webp', 'application/pdf', 'text/plain', 'text/csv' } if mime not in ALLOWED_MIMES: raise ValueError(f\"MIME type {mime} not allowed\") 3\\\\. Validate File Size Enforce strict limits at multiple layers: // Express middleware const multer = require('multer'); const upload = multer({ limits: { fileSize: 10 * 1024 * 1024, // 10 MB files: 1 }, fileFilter: (req, file, cb) => { const allowed = ['image/jpeg', 'image/png', 'application/pdf']; if (!allowed.includes(file.mimetype)) { return cb(new Error('Invalid file type'), false); } cb(null, true); } }); 4\\\\. Validate File Content For images, attempt to re-process them. This strips embedded metadata and breaks hidden payloads: from PIL import Image import io def sanitize_image(file_bytes): \"\"\"Re-encode image to strip metadata and break embedded payloads.\"\"\" img = Image.open(io.BytesIO(file_bytes)) Convert to ensure clean output img = img.convert('RGB') output = io.BytesIO() img.save(output, format='PNG') return output.getvalue() Secure Storage Never Store in Webroot Storing uploaded files inside the web server's document root is dangerous. If the filename or path is guessable, files can be accessed directly. UNSAFE: Stored in webroot upload_dir = '/var/www/html/uploads/' SAFE: Outside webroot upload_dir = '/data/uploads/' # Served through app logic Generate Safe Filenames Never use user-provided filenames. Generate random filenames: import uuid import os def safe_filename(original_name): ext = os.path.splitext(original_name)[1].lower() return f\"{uuid.uuid4().hex}{ext}\" Object Storage For production systems, use object storage with pre-signed URLs: import boto3 s3 = boto3.client('s3') def upload_file(file_bytes, content_type): key = f\"uploads/{uuid.uuid4().hex}.pdf\" s3.put_object( Bucket='my-app-uploads', Key=key, Body=file_bytes, ContentType=content_type ) return key def get_download_url(key, expires=3600): return s3.generate_presigned_url( 'get_object', Params={'Bucket': 'my-app-uploads', 'Key': key}, ExpiresIn=expires ) Antivirus Scanning Integrate virus scanning into the upload pipeline: import subprocess def scan_file(file_path): result = subprocess.run( ['clamscan', '--stdout', file_path], capture_output=True, text=True ) if 'FOUND' in result.stdout: os.remove(file_path) raise SecurityError(\"Malware detected in uploaded file\") Storage Limits and Quotas | Level | Limit | Mitigation | |-------|-------|------------| | Per file | 10 MB | Reject on client and server | | Per user | 500 MB | Track in database, reject when exceeded | | Per day (total) | 5 GB | Aggregate monitoring, rate limit | | Disk usage | 80% capacity | Alert, stop accepting uploads | Server Configuration Prevent uploaded files from being executed by the web server: Nginx configuration location /uploads/ { Only serve specific file types location ~* \\\\.(jpg|jpeg|png|gif|pdf)$ { add_header Content-Disposition 'attachment'; expires 30d; } Deny everything else location ~* \\\\. { deny all; return 404; } } Summary Secure file upload requires defense in depth. Validate extensions and MIME types server-side, sanitize images by re-encoding them, generate random filenames, store files outside the webroot or in object storage, enforce strict size limits at multiple layers, and scan for malware. Never trust client-provided metadata, and process uploaded files with minimal privileges in isolated environments."
     }
     </script>
     <script type="application/ld+json">
@@ -74,301 +74,259 @@
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">Secure File Upload Implementation</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-file-upload.png" alt="Secure File Upload Implementation" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Secure File Upload Implementation</h1>
 <br>
-<p>The Risk of File Uploads   </p>
-<p>File upload functionality is one of the most dangerous features an application can expose. An unrestricted file upload can lead to remote code execution, malware distribution, data breaches, and server compromise. Every file upload endpoint must be treated as a critical attack surface.   </p>
-<p>Threat Model   </p>
-<p>| Attack | Description | |--------|-------------| | Malicious file upload | Attacker uploads a PHP shell or executable | | File size DoS | Huge files exhaust disk space or memory | | Path traversal | Filename manipulates directory traversal | | MIME type spoofing | File extension does not match content | | Malware distribution | Legitimate-looking files containing malware | | Zip bombs | Compressed archive that expands to enormous size | | SSRF via file processing | Server-side parsing of attacker-controlled files |   </p>
-<p>Validation Strategy   </p>
-<p>1\. Validate File Extension   </p>
-<p>Allowlist-based validation is essential. Blocklisting (e.g., rejecting `.exe` files) will always miss edge cases.   </p>
+<h1>Secure File Upload Implementation</h1>
 <br>
+<p>The Risk of File Uploads </p>
 <br>
+<p>File upload functionality is one of the most dangerous features an application can expose. An unrestricted file upload can lead to remote code execution, malware distribution, data breaches, and server compromise. Every file upload endpoint must be treated as a critical attack surface. </p>
 <br>
-<p>    ALLOWED_EXTENSIONS = {</p>
+<p>Threat Model </p>
 <br>
-<p>        # Images</p>
+<p>| Attack | Description | |--------|-------------| | Malicious file upload | Attacker uploads a PHP shell or executable | | File size DoS | Huge files exhaust disk space or memory | | Path traversal | Filename manipulates directory traversal | | MIME type spoofing | File extension does not match content | | Malware distribution | Legitimate-looking files containing malware | | Zip bombs | Compressed archive that expands to enormous size | | SSRF via file processing | Server-side parsing of attacker-controlled files | </p>
 <br>
-<p>        '.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg',</p>
+<p>Validation Strategy </p>
 <br>
-<p>        # Documents</p>
+<p>1\\. Validate File Extension </p>
 <br>
-<p>        '.pdf', '.doc', '.docx', '.xls', '.xlsx',</p>
+<p>Allowlist-based validation is essential. Blocklisting (e.g., rejecting `.exe` files) will always miss edge cases. </p>
 <br>
-<p>        # Other</p>
+<p>ALLOWED_EXTENSIONS = {</p>
 <br>
-<p>        '.txt', '.csv'</p>
+<h1>Images</h1>
 <br>
-<p>    }</p>
+<p>'.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg',</p>
 <br>
+<h1>Documents</h1>
 <br>
+<p>'.pdf', '.doc', '.docx', '.xls', '.xlsx',</p>
 <br>
-<p>    def validate_extension(filename):</p>
+<h1>Other</h1>
 <br>
-<p>        ext = os.path.splitext(filename)[1].lower()</p>
+<p>'.txt', '.csv'</p>
 <br>
-<p>        if ext not in ALLOWED_EXTENSIONS:</p>
+<p>}</p>
 <br>
-<p>            raise ValueError(f"Extension {ext} not allowed")</p>
+<p>def validate_extension(filename):</p>
 <br>
+<p>ext = os.path.splitext(filename)[1].lower()</p>
 <br>
+<p>if ext not in ALLOWED_EXTENSIONS:</p>
 <br>
+<p>raise ValueError(f"Extension {ext} not allowed")</p>
 <br>
-<p>2\. Validate MIME Type   </p>
-<p>Never trust the `Content-Type` header from the client. Inspect the actual file content:   </p>
+<p>2\\. Validate MIME Type </p>
 <br>
+<p>Never trust the `Content-Type` header from the client. Inspect the actual file content: </p>
 <br>
+<p>import magic</p>
 <br>
-<p>    import magic</p>
+<p>def validate_mime(file_stream):</p>
 <br>
+<p>mime = magic.from_buffer(file_stream.read(2048), mime=True)</p>
 <br>
+<p>file_stream.seek(0)</p>
 <br>
-<p>    def validate_mime(file_stream):</p>
+<p>ALLOWED_MIMES = {</p>
 <br>
-<p>        mime = magic.from_buffer(file_stream.read(2048), mime=True)</p>
+<p>'image/jpeg', 'image/png', 'image/gif',</p>
 <br>
-<p>        file_stream.seek(0)</p>
+<p>'image/webp', 'application/pdf',</p>
 <br>
-<p>        ALLOWED_MIMES = {</p>
+<p>'text/plain', 'text/csv'</p>
 <br>
-<p>            'image/jpeg', 'image/png', 'image/gif',</p>
+<p>}</p>
 <br>
-<p>            'image/webp', 'application/pdf',</p>
+<p>if mime not in ALLOWED_MIMES:</p>
 <br>
-<p>            'text/plain', 'text/csv'</p>
+<p>raise ValueError(f"MIME type {mime} not allowed")</p>
 <br>
-<p>        }</p>
+<p>3\\. Validate File Size </p>
 <br>
-<p>        if mime not in ALLOWED_MIMES:</p>
+<p>Enforce strict limits at multiple layers: </p>
 <br>
-<p>            raise ValueError(f"MIME type {mime} not allowed")</p>
+<p>// Express middleware</p>
 <br>
+<p>const multer = require('multer');</p>
 <br>
+<p>const upload = multer({</p>
 <br>
+<p>limits: {</p>
 <br>
-<p>3\. Validate File Size   </p>
-<p>Enforce strict limits at multiple layers:   </p>
+<p>fileSize: 10 * 1024 * 1024, // 10 MB</p>
 <br>
+<p>files: 1</p>
 <br>
+<p>},</p>
 <br>
-<p>    // Express middleware</p>
+<p>fileFilter: (req, file, cb) => {</p>
 <br>
-<p>    const multer = require('multer');</p>
+<p>const allowed = ['image/jpeg', 'image/png', 'application/pdf'];</p>
 <br>
-<p>    const upload = multer({</p>
+<p>if (!allowed.includes(file.mimetype)) {</p>
 <br>
-<p>        limits: {</p>
+<p>return cb(new Error('Invalid file type'), false);</p>
 <br>
-<p>            fileSize: 10 * 1024 * 1024, // 10 MB</p>
+<p>}</p>
 <br>
-<p>            files: 1</p>
+<p>cb(null, true);</p>
 <br>
-<p>        },</p>
+<p>}</p>
 <br>
-<p>        fileFilter: (req, file, cb) => {</p>
+<p>});</p>
 <br>
-<p>            const allowed = ['image/jpeg', 'image/png', 'application/pdf'];</p>
+<p>4\\. Validate File Content </p>
 <br>
-<p>            if (!allowed.includes(file.mimetype)) {</p>
+<p>For images, attempt to re-process them. This strips embedded metadata and breaks hidden payloads: </p>
 <br>
-<p>                return cb(new Error('Invalid file type'), false);</p>
+<p>from PIL import Image</p>
 <br>
-<p>            }</p>
+<p>import io</p>
 <br>
-<p>            cb(null, true);</p>
+<p>def sanitize_image(file_bytes):</p>
 <br>
-<p>        }</p>
+<p>"""Re-encode image to strip metadata and break embedded payloads."""</p>
 <br>
-<p>    });</p>
+<p>img = Image.open(io.BytesIO(file_bytes))</p>
 <br>
+<h1>Convert to ensure clean output</h1>
 <br>
+<p>img = img.convert('RGB')</p>
 <br>
+<p>output = io.BytesIO()</p>
 <br>
-<p>4\. Validate File Content   </p>
-<p>For images, attempt to re-process them. This strips embedded metadata and breaks hidden payloads:   </p>
+<p>img.save(output, format='PNG')</p>
 <br>
+<p>return output.getvalue()</p>
 <br>
+<p>Secure Storage </p>
 <br>
-<p>    from PIL import Image</p>
+<p>Never Store in Webroot </p>
 <br>
-<p>    import io</p>
+<p>Storing uploaded files inside the web server's document root is dangerous. If the filename or path is guessable, files can be accessed directly. </p>
 <br>
+<h1>UNSAFE: Stored in webroot</h1>
 <br>
+<p>upload_dir = '/var/www/html/uploads/'</p>
 <br>
-<p>    def sanitize_image(file_bytes):</p>
+<h1>SAFE: Outside webroot</h1>
 <br>
-<p>        """Re-encode image to strip metadata and break embedded payloads."""</p>
+<p>upload_dir = '/data/uploads/' # Served through app logic</p>
 <br>
-<p>        img = Image.open(io.BytesIO(file_bytes))</p>
+<p>Generate Safe Filenames </p>
 <br>
-<p>        # Convert to ensure clean output</p>
+<p>Never use user-provided filenames. Generate random filenames: </p>
 <br>
-<p>        img = img.convert('RGB')</p>
+<p>import uuid</p>
 <br>
-<p>        output = io.BytesIO()</p>
+<p>import os</p>
 <br>
-<p>        img.save(output, format='PNG')</p>
+<p>def safe_filename(original_name):</p>
 <br>
-<p>        return output.getvalue()</p>
+<p>ext = os.path.splitext(original_name)[1].lower()</p>
 <br>
+<p>return f"{uuid.uuid4().hex}{ext}"</p>
 <br>
+<p>Object Storage </p>
 <br>
+<p>For production systems, use object storage with pre-signed URLs: </p>
 <br>
-<p>Secure Storage   </p>
-<p>Never Store in Webroot   </p>
-<p>Storing uploaded files inside the web server's document root is dangerous. If the filename or path is guessable, files can be accessed directly.   </p>
+<p>import boto3</p>
 <br>
+<p>s3 = boto3.client('s3')</p>
 <br>
+<p>def upload_file(file_bytes, content_type):</p>
 <br>
-<p>    # UNSAFE: Stored in webroot</p>
+<p>key = f"uploads/{uuid.uuid4().hex}.pdf"</p>
 <br>
-<p>    upload_dir = '/var/www/html/uploads/'</p>
+<p>s3.put_object(</p>
 <br>
+<p>Bucket='my-app-uploads',</p>
 <br>
+<p>Key=key,</p>
 <br>
-<p>    # SAFE: Outside webroot</p>
+<p>Body=file_bytes,</p>
 <br>
-<p>    upload_dir = '/data/uploads/'  # Served through app logic</p>
+<p>ContentType=content_type</p>
 <br>
+<p>)</p>
 <br>
+<p>return key</p>
 <br>
+<p>def get_download_url(key, expires=3600):</p>
 <br>
-<p>Generate Safe Filenames   </p>
-<p>Never use user-provided filenames. Generate random filenames:   </p>
+<p>return s3.generate_presigned_url(</p>
 <br>
+<p>'get_object',</p>
 <br>
+<p>Params={'Bucket': 'my-app-uploads', 'Key': key},</p>
 <br>
-<p>    import uuid</p>
+<p>ExpiresIn=expires</p>
 <br>
-<p>    import os</p>
+<p>)</p>
 <br>
+<p>Antivirus Scanning </p>
 <br>
+<p>Integrate virus scanning into the upload pipeline: </p>
 <br>
-<p>    def safe_filename(original_name):</p>
+<p>import subprocess</p>
 <br>
-<p>        ext = os.path.splitext(original_name)[1].lower()</p>
+<p>def scan_file(file_path):</p>
 <br>
-<p>        return f"{uuid.uuid4().hex}{ext}"</p>
+<p>result = subprocess.run(</p>
 <br>
+<p>['clamscan', '--stdout', file_path],</p>
 <br>
+<p>capture_output=True,</p>
 <br>
+<p>text=True</p>
 <br>
-<p>Object Storage   </p>
-<p>For production systems, use object storage with pre-signed URLs:   </p>
+<p>)</p>
 <br>
+<p>if 'FOUND' in result.stdout:</p>
 <br>
+<p>os.remove(file_path)</p>
 <br>
-<p>    import boto3</p>
+<p>raise SecurityError("Malware detected in uploaded file")</p>
 <br>
+<p>Storage Limits and Quotas </p>
 <br>
+<p>| Level | Limit | Mitigation | |-------|-------|------------| | Per file | 10 MB | Reject on client and server | | Per user | 500 MB | Track in database, reject when exceeded | | Per day (total) | 5 GB | Aggregate monitoring, rate limit | | Disk usage | 80% capacity | Alert, stop accepting uploads | </p>
 <br>
-<p>    s3 = boto3.client('s3')</p>
+<p>Server Configuration </p>
 <br>
+<p>Prevent uploaded files from being executed by the web server: </p>
 <br>
+<h1>Nginx configuration</h1>
 <br>
-<p>    def upload_file(file_bytes, content_type):</p>
+<p>location /uploads/ {</p>
 <br>
-<p>        key = f"uploads/{uuid.uuid4().hex}.pdf"</p>
+<h1>Only serve specific file types</h1>
 <br>
-<p>        s3.put_object(</p>
+<p>location ~* \\.(jpg|jpeg|png|gif|pdf)$ {</p>
 <br>
-<p>            Bucket='my-app-uploads',</p>
+<p>add_header Content-Disposition 'attachment';</p>
 <br>
-<p>            Key=key,</p>
+<p>expires 30d;</p>
 <br>
-<p>            Body=file_bytes,</p>
+<p>}</p>
 <br>
-<p>            ContentType=content_type</p>
+<h1>Deny everything else</h1>
 <br>
-<p>        )</p>
+<p>location ~* \\. {</p>
 <br>
-<p>        return key</p>
+<p>deny all;</p>
 <br>
+<p>return 404;</p>
 <br>
+<p>}</p>
 <br>
-<p>    def get_download_url(key, expires=3600):</p>
+<p>}</p>
 <br>
-<p>        return s3.generate_presigned_url(</p>
+<p>Summary </p>
 <br>
-<p>            'get_object',</p>
-<br>
-<p>            Params={'Bucket': 'my-app-uploads', 'Key': key},</p>
-<br>
-<p>            ExpiresIn=expires</p>
-<br>
-<p>        )</p>
-<br>
-<br>
-<br>
-<br>
-<p>Antivirus Scanning   </p>
-<p>Integrate virus scanning into the upload pipeline:   </p>
-<br>
-<br>
-<br>
-<p>    import subprocess</p>
-<br>
-<br>
-<br>
-<p>    def scan_file(file_path):</p>
-<br>
-<p>        result = subprocess.run(</p>
-<br>
-<p>            ['clamscan', '--stdout', file_path],</p>
-<br>
-<p>            capture_output=True,</p>
-<br>
-<p>            text=True</p>
-<br>
-<p>        )</p>
-<br>
-<p>        if 'FOUND' in result.stdout:</p>
-<br>
-<p>            os.remove(file_path)</p>
-<br>
-<p>            raise SecurityError("Malware detected in uploaded file")</p>
-<br>
-<br>
-<br>
-<br>
-<p>Storage Limits and Quotas   </p>
-<p>| Level | Limit | Mitigation | |-------|-------|------------| | Per file | 10 MB | Reject on client and server | | Per user | 500 MB | Track in database, reject when exceeded | | Per day (total) | 5 GB | Aggregate monitoring, rate limit | | Disk usage | 80% capacity | Alert, stop accepting uploads |   </p>
-<p>Server Configuration   </p>
-<p>Prevent uploaded files from being executed by the web server:   </p>
-<br>
-<br>
-<br>
-<p>    # Nginx configuration</p>
-<br>
-<p>    location /uploads/ {</p>
-<br>
-<p>        # Only serve specific file types</p>
-<br>
-<p>        location ~* \.(jpg|jpeg|png|gif|pdf)$ {</p>
-<br>
-<p>            add_header Content-Disposition 'attachment';</p>
-<br>
-<p>            expires 30d;</p>
-<br>
-<p>        }</p>
-<br>
-<p>        # Deny everything else</p>
-<br>
-<p>        location ~* \. {</p>
-<br>
-<p>            deny all;</p>
-<br>
-<p>            return 404;</p>
-<br>
-<p>        }</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<p>Summary   </p>
 <p>Secure file upload requires defense in depth. Validate extensions and MIME types server-side, sanitize images by re-encoding them, generate random filenames, store files outside the webroot or in object storage, enforce strict size limits at multiple layers, and scan for malware. Never trust client-provided metadata, and process uploaded files with minimal privileges in isolated environments.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

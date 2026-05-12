@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/cloud-cli-tools.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons">
     <meta name="twitter:description" content="Compare cloud CLI tools: aws-cli for AWS, gcloud for GCP, az for Azure, and s5cmd for high-speed S3 operations. Installation, authentication, and productivity t">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/cloud-cli-tools.png">
     <title>Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons — SourceHub</title>
     <meta name="description" content="Compare cloud CLI tools: aws-cli for AWS, gcloud for GCP, az for Azure, and s5cmd for high-speed S3 operations. Installation, authentication, and productivity t">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons",
       "description": "Compare cloud CLI tools: aws-cli for AWS, gcloud for GCP, az for Azure, and s5cmd for high-speed S3 operations. Installation, authentication, and productivity t",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/cloud-cli-tools.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1621",
+      "wordCount": "1512",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,28 +75,16 @@
         <span class="tag-cat">Productivity</span></div>
       <h1 class="article-title">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/cloud-cli-tools.png" alt="Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Cloud provider CLIs are essential for infrastructure management, automation, and day-to-day operations. Each major cloud provider has its own CLI with unique features and syntax. This article covers the primary CLIs (aws-cli, gcloud, az) plus s5cmd for high-performance S3 operations, with practical examples and productivity patterns.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  AWS CLI</h2>
 <br>
-<br>
-<br>
-<br>
 <p>The most mature cloud CLI, now at version 2:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Installation</p>
 <br>
@@ -108,8 +96,6 @@
 <br>
 <p>    brew install awscli</p>
 <br>
-<br>
-<br>
 <p>    # Configuration</p>
 <br>
 <p>    aws configure</p>
@@ -118,8 +104,6 @@
 <br>
 <p>    aws configure set cli_pager ""</p>
 <br>
-<br>
-<br>
 <p>    # Profile management</p>
 <br>
 <p>    aws configure --profile production</p>
@@ -127,8 +111,6 @@
 <p>    aws s3 ls --profile production</p>
 <br>
 <p>    export AWS_PROFILE=production</p>
-<br>
-<br>
 <br>
 <p>    # Common operations</p>
 <br>
@@ -142,8 +124,6 @@
 <br>
 <p>    aws ecs update-service --cluster prod --service api --force-new-deployment</p>
 <br>
-<br>
-<br>
 <p>    # With JMESPath filtering</p>
 <br>
 <p>    aws ec2 describe-instances \</p>
@@ -154,13 +134,7 @@
 <br>
 <p>      --output json</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Productivity aliases**:</p>
-<br>
 <br>
 <p>    # ~/.zshrc</p>
 <br>
@@ -176,30 +150,17 @@
 <br>
 <p>    alias logs-tail="aws logs tail --follow"</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  gcloud (Google Cloud CLI)</h2>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Installation</p>
 <br>
 <p>    brew install --cask google-cloud-sdk</p>
-<br>
-<br>
 <br>
 <p>    # Or via curl</p>
 <br>
 <p>    curl https://sdk.cloud.google.com | bash</p>
 <br>
 <p>    exec -l $SHELL</p>
-<br>
-<br>
 <br>
 <p>    # Authentication</p>
 <br>
@@ -210,8 +171,6 @@
 <p>    gcloud config set project my-project</p>
 <br>
 <p>    gcloud config set compute/region us-central1</p>
-<br>
-<br>
 <br>
 <p>    # Common operations</p>
 <br>
@@ -227,8 +186,6 @@
 <br>
 <p>    gcloud sql instances describe my-db</p>
 <br>
-<br>
-<br>
 <p>    # Configuration management</p>
 <br>
 <p>    gcloud config configurations create dev</p>
@@ -237,30 +194,17 @@
 <br>
 <p>    gcloud config list</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Azure CLI (az)</h2>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Installation</p>
 <br>
 <p>    brew install azure-cli</p>
-<br>
-<br>
 <br>
 <p>    # Authentication</p>
 <br>
 <p>    az login</p>
 <br>
 <p>    az account set --subscription "my-subscription"</p>
-<br>
-<br>
 <br>
 <p>    # Common operations</p>
 <br>
@@ -276,39 +220,21 @@
 <br>
 <p>    az group list --query "[].{Name:name, Location:location}" --output table</p>
 <br>
-<br>
-<br>
 <p>    # JMESPath queries</p>
 <br>
 <p>    az vm list --query "[?tags.Environment=='production'].{Name:name, Size:hardwareProfile.vmSize}" --output table</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  s5cmd</h2>
 <br>
-<br>
-<br>
-<br>
 <p>A high-performance S3 CLI written in Go:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Installation</p>
 <br>
 <p>    brew install s5cmd</p>
 <br>
-<br>
-<br>
 <p>    # Configuration (reuses AWS CLI credentials)</p>
 <br>
 <p>    # Just set AWS_PROFILE or AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY</p>
-<br>
-<br>
 <br>
 <p>    # Speed comparison</p>
 <br>
@@ -317,8 +243,6 @@
 <p>    time aws s3 cp --recursive s3://bucket/prefix/ ./local/  # ~60 seconds</p>
 <br>
 <p>    time s5cmd cp "s3://bucket/prefix/*" ./local/             # ~8 seconds</p>
-<br>
-<br>
 <br>
 <p>    # Operations</p>
 <br>
@@ -330,8 +254,6 @@
 <br>
 <p>    s5cmd rm s3://bucket/old-prefix/*</p>
 <br>
-<br>
-<br>
 <p>    # Batch operations from file</p>
 <br>
 <p>    echo "s3://bucket/logs/2026-01-01.log" > files.txt</p>
@@ -340,28 +262,15 @@
 <br>
 <p>    s5cmd cp files.txt ./logs/</p>
 <br>
-<br>
-<br>
 <p>    # Run commands in parallel</p>
 <br>
 <p>    s5cmd --numworkers 64 cp s3://large-bucket/* ./downloads/</p>
-<br>
-<br>
 <br>
 <p>    # Dry run</p>
 <br>
 <p>    s5cmd --dry-run cp s3://bucket/* ./local/</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Multi-Cloud Tools</h2>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Cloud-specific environment management</p>
 <br>
@@ -373,15 +282,11 @@
 <br>
 <p>    aws-vault exec prod -- aws s3 ls</p>
 <br>
-<br>
-<br>
 <p>    # AWS SSO helper</p>
 <br>
 <p>    aws sso login --profile prod</p>
 <br>
 <p>    export AWS_PROFILE=prod</p>
-<br>
-<br>
 <br>
 <p>    # Cloud comparison commands</p>
 <br>
@@ -397,15 +302,7 @@
 <br>
 <p>    az account show</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Comparison</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| Feature | aws-cli v2 | gcloud | az | s5cmd |</p>
 <br>
@@ -425,12 +322,7 @@
 <br>
 <p>| File transfer | Sequential | Sequential | Sequential | Parallel |</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Recommendations</h2>
-<br>
-<br>
 <br>
 <p>* **AWS-focused**: aws-cli v2 for full API coverage with s5cmd for large S3 transfers.</p>
 <p>* **GCP-focused**: gcloud with `gcloud alpha` and `gcloud beta` commands for latest features.</p>

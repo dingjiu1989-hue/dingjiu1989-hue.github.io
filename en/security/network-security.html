@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/network-security.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Network Security Fundamentals">
     <meta name="twitter:description" content="Core network security concepts: firewalls, VPNs, IDS/IPS, zero-trust networking, segmentation, and micro-segmentation.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/network-security.png">
     <title>Network Security Fundamentals — SourceHub</title>
     <meta name="description" content="Core network security concepts: firewalls, VPNs, IDS/IPS, zero-trust networking, segmentation, and micro-segmentation.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Network Security Fundamentals",
       "description": "Core network security concepts: firewalls, VPNs, IDS/IPS, zero-trust networking, segmentation, and micro-segmentation.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/network-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1888",
+      "wordCount": "1732",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,33 +74,18 @@
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">Network Security Fundamentals</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/network-security.png" alt="Network Security Fundamentals" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Network Security Fundamentals</h1>
 <br>
 <p>Network security protects the communication channels between systems. As organizations move to the cloud and adopt zero-trust architectures, traditional perimeter-based network security is giving way to more granular, identity-aware approaches. This article covers the foundational concepts every developer and security practitioner needs.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Firewalls</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Firewalls filter network traffic based on pre-defined rules. They are the first line of defense in network security.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Packet Filtering Firewalls</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Packet filtering firewalls inspect individual packets against rule sets. They examine source and destination IP addresses, ports, and protocols. They operate at layers 3 and 4 of the OSI model.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    Rule table example:</p>
 <br>
@@ -110,31 +95,13 @@
 <br>
 <p>    0.0.0.0/0    10.0.1.5     22    TCP       Deny</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Stateful Firewalls</h3>
-<br>
-<br>
-<br>
 <br>
 <p>Stateful firewalls maintain a connection table. They track the state of active connections and make decisions based on the connection state, not just individual packets. This allows them to permit return traffic for legitimate outbound connections while blocking unsolicited inbound traffic.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Next-Generation Firewalls (NGFW)</h3>
 <br>
-<br>
-<br>
-<br>
 <p>NGFWs combine traditional firewall capabilities with application-layer inspection, intrusion prevention, and threat intelligence. They can identify applications regardless of port or protocol and enforce policies based on user identity.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # iptables stateful rule example</p>
 <br>
@@ -146,31 +113,13 @@
 <br>
 <p>    iptables -A INPUT -j DROP</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Virtual Private Networks (VPNs)</h2>
-<br>
-<br>
-<br>
 <br>
 <p>VPNs create encrypted tunnels between endpoints over untrusted networks. They extend a private network across a public network, allowing remote users and branch offices to access internal resources.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Site-to-Site VPN</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Connects entire networks to each other, such as an office to a cloud VPC. AWS VPN, Azure VPN Gateway, and GCP Cloud VPN all implement IPsec tunnels.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # AWS CLI: create a VPN connection</p>
 <br>
@@ -182,61 +131,29 @@
 <br>
 <p>      --type ipsec.1</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Remote Access VPN</h3>
-<br>
-<br>
-<br>
 <br>
 <p>Connects individual users to the corporate network. VPN clients include OpenVPN, WireGuard, and proprietary solutions like Palo Alto GlobalProtect.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>VPN Limitations</h3>
-<br>
-<br>
-<br>
 <br>
 <p>VPNs are not a panacea. They grant broad network access, often violating least-privilege principles. If a VPN credential is compromised, the attacker gains full network access. Modern architectures increasingly replace VPNs with zero-trust network access (ZTNA) solutions.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Intrusion Detection and Prevention Systems (IDS/IPS)</h2>
-<br>
-<br>
-<br>
 <br>
 <p>IDS monitors network traffic for suspicious activity and generates alerts. IPS sits inline and actively blocks detected threats.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Detection Methods</h3>
-<br>
-<br>
 <br>
 <p>* **Signature-based**: Matches traffic against known attack patterns. Effective for known threats but misses zero-day attacks.</p>
 <p>* **Anomaly-based**: Establishes a baseline of normal traffic and alerts on deviations. Catches novel attacks but produces more false positives.</p>
 <p>* **Behavioral**: Analyzes traffic patterns over time. Detects slow, low-and-slow attacks that evade other methods.</p>
 <br>
-<br>
-<br>
 <h3>Popular Tools</h3>
-<br>
-<br>
 <br>
 <p>* **Snort**: Open-source NIDS with a large rule set. Widely deployed for packet logging and real-time traffic analysis.</p>
 <p>* **Suricata**: High-performance IDS/IPS with GPU acceleration. Supports multi-threading and modern protocols like HTTP/2.</p>
 <p>* **Zeek (formerly Bro)**: Network analysis framework that produces detailed logs about connections, protocols, and files.</p>
-<br>
-<br>
-<br>
 <br>
 <p>    # Suricata configuration snippet</p>
 <br>
@@ -248,15 +165,11 @@
 <br>
 <p>        EXTERNAL_NET: "!$HOME_NET"</p>
 <br>
-<br>
-<br>
 <p>    rule-files:</p>
 <br>
 <p>      - emerging-threats.rules</p>
 <br>
 <p>      - malware-cnc.rules</p>
-<br>
-<br>
 <br>
 <p>    af-packet:</p>
 <br>
@@ -266,24 +179,11 @@
 <br>
 <p>        cluster-type: cluster_flow</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Zero-Trust Networking</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Zero trust assumes no implicit trust based on network location. Every access request must be authenticated, authorized, and encrypted.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Core Principles</h3>
-<br>
-<br>
 <br>
 <p>* **Never trust, always verify**: Every request, whether from inside or outside the network, must be validated.</p>
 <br>
@@ -291,19 +191,11 @@
 <br>
 <p>3\. **Least privilege**: Grant the minimum access necessary for each user or service.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Zero-Trust Implementation</h3>
-<br>
-<br>
 <br>
 <p>* **Micro-segmentation**: Divide the network into small, isolated zones. Each zone requires separate authentication.</p>
 <p>* **Identity-aware proxies**: Gateways that authenticate every request before forwarding traffic to internal services.</p>
 <p>* **BeyondCorp / Cloudflare Access**: Google's BeyondCorp model removes the VPN entirely. Access decisions are based on device identity, user identity, and context, not network location.</p>
-<br>
-<br>
-<br>
 <br>
 <p>    # Example: zero-trust access policy via proxy</p>
 <br>
@@ -331,49 +223,19 @@
 <br>
 <p>        action: "allow"</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Network Segmentation and Micro-Segmentation</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Segmentation divides a network into smaller segments to limit attack propagation.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Traditional Segmentation</h3>
-<br>
-<br>
-<br>
 <br>
 <p>Uses VLANs and subnets to separate traffic. A web server resides in one subnet, a database server in another. Firewalls control traffic between subnets.</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    [Internet] -> [DMZ: Web Servers] -> [App Tier] -> [DB Tier]</p>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <h3>Micro-Segmentation</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Micro-segmentation takes segmentation to the individual workload level. In a cloud environment, every workload has its own security group that allows traffic only from specific sources on specific ports.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # AWS Security Group for a database instance</p>
 <br>
@@ -405,16 +267,7 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Micro-segmentation is essential in Kubernetes environments. Network policies control which pods can communicate.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Kubernetes network policy</p>
 <br>
@@ -448,15 +301,7 @@
 <br>
 <p>            - port: 8080</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Network security has evolved from simple perimeter firewalls to sophisticated zero-trust architectures. The fundamentals still matter: proper firewall rules, careful VPN use, intrusion detection, and network segmentation. But the trend is clear — the network boundary is disappearing, and security must follow the workload, not the perimeter.</p></div>
     </article>

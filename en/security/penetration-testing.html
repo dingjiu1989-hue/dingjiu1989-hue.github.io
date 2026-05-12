@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/penetration-testing.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Penetration Testing Methodology">
     <meta name="twitter:description" content="Complete penetration testing methodology covering reconnaissance, scanning, exploitation, reporting, and the PTES standard framework.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/penetration-testing.png">
     <title>Penetration Testing Methodology — SourceHub</title>
     <meta name="description" content="Complete penetration testing methodology covering reconnaissance, scanning, exploitation, reporting, and the PTES standard framework.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Penetration Testing Methodology",
       "description": "Complete penetration testing methodology covering reconnaissance, scanning, exploitation, reporting, and the PTES standard framework.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/penetration-testing.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1368",
+      "wordCount": "1308",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Penetration Testing Methodology</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/penetration-testing.png" alt="Penetration Testing Methodology" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Penetration Testing Methodology</h1>
 <br>
 <p>Introduction   </p>
@@ -83,8 +84,6 @@
 <p>PTES defines seven phases for penetration testing, each with specific activities and deliverables.   </p>
 <p>Phase 1: Pre-Engagement Interactions   </p>
 <p>Define scope, rules of engagement, and legal boundaries before any testing begins.   </p>
-<br>
-<br>
 <br>
 <p>    rules_of_engagement:</p>
 <br>
@@ -104,8 +103,6 @@
 <br>
 <p>          - "10.0.0.0/8"           # Internal only</p>
 <br>
-<br>
-<br>
 <p>      restrictions:</p>
 <br>
 <p>        - no_social_engineering: true</p>
@@ -116,8 +113,6 @@
 <br>
 <p>        - notification_list: ["security@acme.com", "incident-response@acme.com"]</p>
 <br>
-<br>
-<br>
 <p>      legal:</p>
 <br>
 <p>        - authorized_signatory: "Jane Doe, CISO"</p>
@@ -126,13 +121,8 @@
 <br>
 <p>        - data_handling_nda_signed: true</p>
 <br>
-<br>
-<br>
-<br>
 <p>Phase 2: Intelligence Gathering (Reconnaissance)   </p>
 <p>Reconnaissance builds a target profile through passive and active information gathering.   </p>
-<br>
-<br>
 <br>
 <p>    # Passive recon — DNS enumeration</p>
 <br>
@@ -142,37 +132,24 @@
 <br>
 <p>    dnsrecon -d acme.com -t std --db acme_recon.db</p>
 <br>
-<br>
-<br>
 <p>    # Subdomain discovery</p>
 <br>
 <p>    sublist3r -d acme.com -o subdomains.txt</p>
-<br>
-<br>
 <br>
 <p>    # Technology fingerprinting</p>
 <br>
 <p>    whatweb -a 3 https://www.acme.com --log-verbose=tech_report.txt</p>
 <br>
-<br>
-<br>
 <p>    # Certificate transparency logs</p>
 <br>
 <p>    curl -s "https://crt.sh/?q=%.acme.com&output=json" | jq -r '.[].name_value' | sort -u</p>
 <br>
-<br>
-<br>
-<br>
 <p>Phase 3: Vulnerability Analysis   </p>
 <p>Analyze gathered information to identify potential vulnerabilities.   </p>
-<br>
-<br>
 <br>
 <p>    # Port scanning with Nmap</p>
 <br>
 <p>    nmap -sV -sC -O -p- --min-rate=1000 -oA acme_scan 203.0.113.0/24</p>
-<br>
-<br>
 <br>
 <p>    # Service enumeration</p>
 <br>
@@ -180,25 +157,16 @@
 <br>
 <p>         -p 80,443 203.0.113.0/24 -oA acme_web_scan</p>
 <br>
-<br>
-<br>
 <p>    # Vulnerability scanning</p>
 <br>
 <p>    nmap --script=vuln -p 80,443,22,3389 203.0.113.0/24 -oA acme_vuln</p>
 <br>
-<br>
-<br>
-<br>
 <p>Phase 4: Exploitation   </p>
 <p>Exploitation attempts to breach the target using identified vulnerabilities.   </p>
-<br>
-<br>
 <br>
 <p>    # Custom exploit example — SQL injection test</p>
 <br>
 <p>    import requests</p>
-<br>
-<br>
 <br>
 <p>    def test_sqli(url, params):</p>
 <br>
@@ -214,8 +182,6 @@
 <br>
 <p>        ]</p>
 <br>
-<br>
-<br>
 <p>        for param, value in params.items():</p>
 <br>
 <p>            for payload in payloads:</p>
@@ -224,15 +190,11 @@
 <br>
 <p>                test_params[param] = payload</p>
 <br>
-<br>
-<br>
 <p>                start = time.time()</p>
 <br>
 <p>                resp = requests.get(url, params=test_params, timeout=10)</p>
 <br>
 <p>                elapsed = time.time() - start</p>
-<br>
-<br>
 <br>
 <p>                # Time-based detection</p>
 <br>
@@ -240,21 +202,14 @@
 <br>
 <p>                    print(f"[!] Time-based SQLi in {param}: {payload}")</p>
 <br>
-<br>
-<br>
 <p>                # Error-based detection</p>
 <br>
 <p>                if any(err in resp.text for err in ["SQL syntax", "mysql_fetch", "ORA-"]):</p>
 <br>
 <p>                    print(f"[!] Error-based SQLi in {param}: {payload}")</p>
 <br>
-<br>
-<br>
-<br>
 <p>Phase 5: Post-Exploitation   </p>
 <p>After gaining access, assess the value of compromised systems and establish persistence.   </p>
-<br>
-<br>
 <br>
 <p>    # Post-exploitation enumeration</p>
 <br>
@@ -268,19 +223,12 @@
 <br>
 <p>    wmic product get name,version</p>
 <br>
-<br>
-<br>
 <p>    # Lateral movement check</p>
 <br>
 <p>    powershell -Command "Get-WmiObject -Class Win32_ComputerSystem -ComputerName TARGET"</p>
 <br>
-<br>
-<br>
-<br>
 <p>Phase 6: Reporting   </p>
 <p>The report is the primary deliverable. It must be clear, actionable, and properly scoped for different audiences.   </p>
-<br>
-<br>
 <br>
 <p>    report_structure:</p>
 <br>
@@ -300,8 +248,6 @@
 <br>
 <p>        - business_impact: "SQL injection in main application could lead to complete data breach"</p>
 <br>
-<br>
-<br>
 <p>      technical_findings:</p>
 <br>
 <p>        - finding_id: "F-001"</p>
@@ -320,8 +266,6 @@
 <br>
 <p>          remediation: "Use parameterized queries; implement input validation"</p>
 <br>
-<br>
-<br>
 <p>      remediation_timeline:</p>
 <br>
 <p>        - immediate: "Patch critical SQL injection and RCE vulnerabilities"</p>
@@ -329,9 +273,6 @@
 <p>        - short_term: "Implement WAF and input validation"</p>
 <br>
 <p>        - long_term: "Security training for developers, SAST integration in CI/CD"</p>
-<br>
-<br>
-<br>
 <br>
 <p>Phase 7: Post-Engagement   </p>
 <p>Cleanup, evidence destruction, and lessons learned.   </p>

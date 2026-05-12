@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/incident-response-plan.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Incident Response Plan">
     <meta name="twitter:description" content="Building an incident response plan using the NIST framework with tabletop exercises and communication strategies.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/incident-response-plan.png">
     <title>Incident Response Plan — SourceHub</title>
     <meta name="description" content="Building an incident response plan using the NIST framework with tabletop exercises and communication strategies.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Incident Response Plan",
       "description": "Building an incident response plan using the NIST framework with tabletop exercises and communication strategies.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/incident-response-plan.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1166",
+      "wordCount": "1112",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Incident Response Plan</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/incident-response-plan.png" alt="Incident Response Plan" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Incident Response Plan</h1>
 <br>
 <p>The NIST Framework   </p>
 <p>The NIST SP 800-61 framework defines four phases of incident response: Preparation, Detection & Analysis, Containment Eradication & Recovery, and Post-Incident Activity.   </p>
 <p>Phase 1: Preparation   </p>
 <p>Preparation determines response success. Key elements include:   </p>
-<br>
-<br>
 <br>
 <p>    # incident-response-tools.yaml</p>
 <br>
@@ -96,8 +95,6 @@
 <br>
 <p>      communication: slack + pagerduty</p>
 <br>
-<br>
-<br>
 <p>    playbooks:</p>
 <br>
 <p>      - ransomware.md</p>
@@ -107,8 +104,6 @@
 <p>      - ddos.md</p>
 <br>
 <p>      - insider-threat.md</p>
-<br>
-<br>
 <br>
 <p>    team:</p>
 <br>
@@ -120,19 +115,12 @@
 <br>
 <p>      communications: PR team</p>
 <br>
-<br>
-<br>
-<br>
 <p>Phase 2: Detection and Analysis   </p>
 <p>Detect incidents through multiple signals:   </p>
-<br>
-<br>
 <br>
 <p>    import json</p>
 <br>
 <p>    from datetime import datetime, timedelta</p>
-<br>
-<br>
 <br>
 <p>    class IncidentDetector:</p>
 <br>
@@ -140,13 +128,9 @@
 <br>
 <p>            self.correlation_rules = []</p>
 <br>
-<br>
-<br>
 <p>        def add_rule(self, rule):</p>
 <br>
 <p>            self.correlation_rules.append(rule)</p>
-<br>
-<br>
 <br>
 <p>        def evaluate(self, events):</p>
 <br>
@@ -172,8 +156,6 @@
 <br>
 <p>            return alerts</p>
 <br>
-<br>
-<br>
 <p>    # Example: Correlate failed logins across accounts</p>
 <br>
 <p>    detector = IncidentDetector()</p>
@@ -192,12 +174,7 @@
 <br>
 <p>    })</p>
 <br>
-<br>
-<br>
-<br>
 <p>Phase 3: Containment, Eradication, Recovery   </p>
-<br>
-<br>
 <br>
 <p>    #!/bin/bash</p>
 <br>
@@ -207,13 +184,9 @@
 <br>
 <p>        local host=$1</p>
 <br>
-<br>
-<br>
 <p>        # Block at network level</p>
 <br>
 <p>        ansible-playbook isolate_host.yml -e "target=$host"</p>
-<br>
-<br>
 <br>
 <p>        # Capture forensic data</p>
 <br>
@@ -221,19 +194,13 @@
 <br>
 <p>        scp "user@$host:/tmp/forensics.tar.gz" ./evidence/</p>
 <br>
-<br>
-<br>
 <p>        # Snapshot for analysis</p>
 <br>
 <p>        aws ec2 create-snapshot --volume-id $(get_volume_id $host)</p>
 <br>
-<br>
-<br>
 <p>        echo "Host $host isolated. Forensic data captured."</p>
 <br>
 <p>    }</p>
-<br>
-<br>
 <br>
 <p>    # Eradicate malware</p>
 <br>
@@ -247,13 +214,8 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Communication Plan   </p>
 <p>Clear communication channels are critical:   </p>
-<br>
-<br>
 <br>
 <p>    incident_communication:</p>
 <br>
@@ -270,8 +232,6 @@
 <p>            purpose: "Executive updates"</p>
 <br>
 <p>        email: incident-response@company.com</p>
-<br>
-<br>
 <br>
 <p>      external:</p>
 <br>
@@ -291,13 +251,8 @@
 <br>
 <p>            notification_url: "https://ico.org.uk/breach"</p>
 <br>
-<br>
-<br>
-<br>
 <p>Tabletop Exercises   </p>
 <p>Run quarterly tabletops to test the plan:   </p>
-<br>
-<br>
 <br>
 <p>    Scenario: Ransomware on critical database server</p>
 <br>
@@ -313,13 +268,8 @@
 <br>
 <p>    Question: What is the fallback?</p>
 <br>
-<br>
-<br>
-<br>
 <p>Post-Incident Activity   </p>
 <p>Conduct thorough post-mortems:   </p>
-<br>
-<br>
 <br>
 <p>    -- Track incident metrics</p>
 <br>
@@ -334,9 +284,6 @@
 <p>    WHERE created_at > NOW() - INTERVAL '1 year'</p>
 <br>
 <p>    GROUP BY incident_type;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>A well-rehearsed incident response plan reduces breach impact by 50% or more. Invest in preparation, run regular tabletop exercises, automate containment where possible, and learn from every incident.</p></div>

@@ -13336,20 +13336,22 @@ def make_article_html(art, board_id, board_name, all_posts):
     art_url = en_url
     cn_hreflang = f'    <link rel="alternate" hreflang="zh-CN" href="{cn_url}">\n' if cn_path.exists() else ''
 
-    # OG / Twitter Card
+    # Cover image for social sharing + article hero
+    cover_url = f'https://dingjiu1989-hue.github.io/images/covers/en/{board_id}/{slug}.png'
+
     og_tags = f'''    <meta property="og:title" content="{art['title']}">
     <meta property="og:description" content="{art['description']}">
     <meta property="og:url" content="{art_url}">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="{cover_url}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{art['title']}">
     <meta name="twitter:description" content="{art['description']}">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">'''
+    <meta name="twitter:image" content="{cover_url}">'''
 
     # sameAs cross-platform identity for AI crawlers
     sameas_urls = SAMEAS_URLS.get(slug, [])
@@ -13436,7 +13438,7 @@ def make_article_html(art, board_id, board_name, all_posts):
       "@type": "Article",
       "headline": "{art['title']}",
       "description": "{art['description']}",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "{cover_url}",
       "datePublished": "{art['date']}",
       "dateModified": "{art['date']}",
       "wordCount": "{word_est}",
@@ -13471,6 +13473,7 @@ def make_article_html(art, board_id, board_name, all_posts):
       <div class="article-tags">{pin_h}{tags_h}</div>
       <h1 class="article-title">{art['title']}</h1>
       <div class="article-meta">Published {art['date']} · {art['replies'] * 120} views · {art['replies']} replies</div>
+      <img class="article-cover" src="{cover_url}" alt="{art['title']}" width="1200" height="630" loading="lazy">
       <div class="article-body">{get_body(art['slug'], board_id)}</div>
     </article>
     {ad_mid}

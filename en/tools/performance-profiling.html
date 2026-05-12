@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/performance-profiling.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Performance Profiling: perf, Flamegraphs, py-spy, pprof">
     <meta name="twitter:description" content="Practical guide to performance profiling tools: perf for Linux kernel profiling, flamegraphs for visualization, py-spy for Python profiling, and pprof for Go ap">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/performance-profiling.png">
     <title>Performance Profiling: perf, Flamegraphs, py-spy, pprof — SourceHub</title>
     <meta name="description" content="Practical guide to performance profiling tools: perf for Linux kernel profiling, flamegraphs for visualization, py-spy for Python profiling, and pprof for Go ap">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Performance Profiling: perf, Flamegraphs, py-spy, pprof",
       "description": "Practical guide to performance profiling tools: perf for Linux kernel profiling, flamegraphs for visualization, py-spy for Python profiling, and pprof for Go ap",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/performance-profiling.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1757",
+      "wordCount": "1611",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,28 +75,16 @@
         <span class="tag-cat">Productivity</span></div>
       <h1 class="article-title">Performance Profiling: perf, Flamegraphs, py-spy, pprof</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/performance-profiling.png" alt="Performance Profiling: perf, Flamegraphs, py-spy, pprof" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Performance Profiling: perf, Flamegraphs, py-spy, pprof</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Performance profiling identifies where your application spends its time — CPU, memory, I/O, or blocking. Without profiling, optimization is guesswork. This article covers four profiling approaches: perf for system-level Linux profiling, flamegraphs for visualization, py-spy for Python without code changes, and pprof for Go applications.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  perf (Linux Profiler)</h2>
 <br>
-<br>
-<br>
-<br>
 <p>The built-in Linux profiler for CPU, hardware events, and tracepoints:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # CPU profiling</p>
 <br>
@@ -108,8 +96,6 @@
 <br>
 <p>    perf report -g graph                  # Call graph report</p>
 <br>
-<br>
-<br>
 <p>    # Common events</p>
 <br>
 <p>    perf stat ./myapp                     # Execution statistics</p>
@@ -120,13 +106,9 @@
 <br>
 <p>    perf stat -e context-switches -p PID  # Context switch monitoring</p>
 <br>
-<br>
-<br>
 <p>    # Hardware event sampling</p>
 <br>
 <p>    perf record -e cycles -F 99 -a -g --sleep 10  # System-wide CPU sampling</p>
-<br>
-<br>
 <br>
 <p>    # Tracepoints</p>
 <br>
@@ -134,54 +116,31 @@
 <br>
 <p>    perf record -e syscalls:sys_enter_write -a  # Write syscall tracing</p>
 <br>
-<br>
-<br>
 <p>    # Top-like live view</p>
 <br>
 <p>    perf top -p PID</p>
 <br>
 <p>    perf top -e cache-misses</p>
 <br>
-<br>
-<br>
 <p>    # Generate flamegraph data</p>
 <br>
 <p>    perf script > out.perf</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Key metrics**: `cycles` for CPU time, `cache-misses` for memory bottleneck detection, `context-switches` for contention issues.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Flamegraphs</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Brendan Gregg's visualization for profiler output:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Install FlameGraph tools</p>
 <br>
 <p>    git clone https://github.com/brendangregg/FlameGraph</p>
-<br>
-<br>
 <br>
 <p>    # Generate flamegraph from perf data</p>
 <br>
 <p>    perf script | ./FlameGraph/stackcollapse-perf.pl > out.folded</p>
 <br>
 <p>    ./FlameGraph/flamegraph.pl out.folded > flamegraph.svg</p>
-<br>
-<br>
 <br>
 <p>    # Generate differential flamegraph (before/after)</p>
 <br>
@@ -191,18 +150,9 @@
 <br>
 <p>    ./FlameGraph/difffolded.pl before.folded optimized.folded | ./FlameGraph/flamegraph.pl > diff.svg</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Reading flamegraphs**: The x-axis shows stack profile population (not time). Each rectangle is a function call; wider rectangles mean more CPU time. The y-axis is stack depth. Look for wide top rectangles — those are the hot functions.</p>
 <br>
-<br>
-<br>
-<br>
 <p>**For other languages**:</p>
-<br>
 <br>
 <p>    # JavaScript (Node.js)</p>
 <br>
@@ -210,39 +160,21 @@
 <br>
 <p>    perf script | ./FlameGraph/stackcollapse-perf.pl > out.folded</p>
 <br>
-<br>
-<br>
 <p>    # Python with py-spy</p>
 <br>
 <p>    py-spy record -o profile.svg --pid $PID</p>
-<br>
-<br>
 <br>
 <p>    # Go with pprof</p>
 <br>
 <p>    go tool pprof -http=:8080 http://localhost:6060/debug/pprof/profile?seconds=30</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  py-spy</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Sampling profiler for Python without modifying code:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Installation</p>
 <br>
 <p>    pip install py-spy</p>
-<br>
-<br>
 <br>
 <p>    # Profile a running process</p>
 <br>
@@ -250,66 +182,37 @@
 <br>
 <p>    py-spy record -o profile.svg -- python myapp.py</p>
 <br>
-<br>
-<br>
 <p>    # Top-like live view</p>
 <br>
 <p>    py-spy top --pid 12345</p>
-<br>
-<br>
 <br>
 <p>    # Dump current stack traces</p>
 <br>
 <p>    py-spy dump --pid 12345</p>
 <br>
-<br>
-<br>
 <p>    # Profile specific duration</p>
 <br>
 <p>    py-spy record -o profile.svg --pid 12345 --duration 30</p>
-<br>
-<br>
 <br>
 <p>    # With subprocesses</p>
 <br>
 <p>    py-spy record -o profile.svg -- python myapp.py --subprocesses</p>
 <br>
-<br>
-<br>
 <p>    # Native frames</p>
 <br>
 <p>    py-spy record --native -o profile.svg --pid 12345</p>
-<br>
-<br>
 <br>
 <p>    # Save raw data for later analysis</p>
 <br>
 <p>    py-spy record -o profile.raw --pid 12345 --format raw</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Key advantages**: No code changes required, works with running processes, safe for production (read-only), native code frame support.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  pprof (Go)</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Go's built-in profiling tool:</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    package main</p>
-<br>
-<br>
 <br>
 <p>    import (</p>
 <br>
@@ -318,8 +221,6 @@
 <p>        _ "net/http/pprof"</p>
 <br>
 <p>    )</p>
-<br>
-<br>
 <br>
 <p>    func main() {</p>
 <br>
@@ -331,17 +232,9 @@
 <br>
 <p>        }()</p>
 <br>
-<br>
-<br>
 <p>        // Your application code...</p>
 <br>
 <p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Collect profiles</p>
 <br>
@@ -354,8 +247,6 @@
 <p>    go tool pprof http://localhost:6060/debug/pprof/block              # Blocking</p>
 <br>
 <p>    go tool pprof http://localhost:6060/debug/pprof/mutex              # Mutex contention</p>
-<br>
-<br>
 <br>
 <p>    # Interactive exploration</p>
 <br>
@@ -371,34 +262,19 @@
 <br>
 <p>    (pprof) peek myFunc     # Caller/callee view</p>
 <br>
-<br>
-<br>
 <p>    # Web interface</p>
 <br>
 <p>    go tool pprof -http=:8080 cpu.pprof</p>
-<br>
-<br>
 <br>
 <p>    # Allocations profiling</p>
 <br>
 <p>    go tool pprof -http=:8080 http://localhost:6060/debug/pprof/allocs</p>
 <br>
-<br>
-<br>
 <p>    # Compare profiles</p>
 <br>
 <p>    go tool pprof -http=:8080 -diff_base=before.pprof after.pprof</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Profiling Workflow</h2>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # 1. Identify the problem (slow response, high CPU, OOM)</p>
 <br>
@@ -406,13 +282,9 @@
 <br>
 <p>    perf record -F 99 -p $(pgrep myapp) -g --sleep 30</p>
 <br>
-<br>
-<br>
 <p>    # 3. Generate flamegraph</p>
 <br>
 <p>    perf script | stackcollapse-perf.pl | flamegraph.pl > before.svg</p>
-<br>
-<br>
 <br>
 <p>    # 4. Make optimization</p>
 <br>
@@ -422,21 +294,11 @@
 <br>
 <p>    perf script | stackcollapse-perf.pl | flamegraph.pl > after.svg</p>
 <br>
-<br>
-<br>
 <p>    # 6. Create differential flamegraph</p>
 <br>
 <p>    ./difffolded.pl before.folded after.folded | flamegraph.pl > diff.svg</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Comparison</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| Tool | Language | Overhead | Best For |</p>
 <br>
@@ -452,20 +314,13 @@
 <br>
 <p>| FlameGraph | Any (post-processing) | None | Comparative analysis |</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Recommendations</h2>
-<br>
-<br>
 <br>
 <p>* **Initial investigation**: Use `perf top` to quickly identify CPU hotspots.</p>
 <p>* **Detailed analysis**: Collect perf data and generate flamegraphs for visual hotspot identification.</p>
 <p>* **Python profiling**: Use py-spy for production-safe sampling without code changes.</p>
 <p>* **Go profiling**: Use pprof with its web interface for interactive exploration.</p>
 <p>* **Comparison**: Use differential flamegraphs to verify optimization impact.</p>
-<br>
-<br>
 <br>
 <p>Profiling is an iterative process: identify hotspots, form a hypothesis, make a change, and re-profile to verify improvement. Flamegraphs make this loop faster by providing immediate visual feedback on where time is spent.</p></div>
     </article>

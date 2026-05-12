@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/sidehustle/subscription-business.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Building a Subscription Business as a Developer">
     <meta name="twitter:description" content="Learn subscription business fundamentals including pricing tiers, churn reduction, Stripe billing integration, customer lifecycle, and key SaaS metrics.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/sidehustle/subscription-business.png">
     <title>Building a Subscription Business as a Developer — SourceHub</title>
     <meta name="description" content="Learn subscription business fundamentals including pricing tiers, churn reduction, Stripe billing integration, customer lifecycle, and key SaaS metrics.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Building a Subscription Business as a Developer",
       "description": "Learn subscription business fundamentals including pricing tiers, churn reduction, Stripe billing integration, customer lifecycle, and key SaaS metrics.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/sidehustle/subscription-business.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2334",
+      "wordCount": "2227",
       "keywords": "Side Hustle, Freelancing",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,28 +74,16 @@
         <span class="tag-cat">Freelancing</span></div>
       <h1 class="article-title">Building a Subscription Business as a Developer</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/sidehustle/subscription-business.png" alt="Building a Subscription Business as a Developer" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Building a Subscription Business as a Developer</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Subscription-based business models generate predictable recurring revenue and are the dominant monetization strategy for SaaS products. As a developer, your technical skills give you a significant advantage in building, measuring, and optimizing a subscription business. This guide covers the essential components from pricing strategy to billing implementation and metric tracking.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Pricing Tier Design</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Effective pricing tiers balance value capture with customer acquisition:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Pricing strategy framework</p>
 <br>
@@ -181,38 +169,23 @@
 <br>
 <p>        goal: "High-value accounts"</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Pricing psychology tips:</p>
 <br>
 <p>* **Decoy effect**: offer three tiers where the middle one is your target</p>
 <p>* **Annual discount**: 20-30% discount for annual billing improves cash flow and reduces churn</p>
 <p>* **Usage-based caps**: set fair usage limits that encourage upgrades</p>
 <br>
-<br>
-<br>
 <h2>  Stripe Billing Integration</h2>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // Stripe subscription management</p>
 <br>
 <p>    import Stripe from 'stripe';</p>
-<br>
-<br>
 <br>
 <p>    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {</p>
 <br>
 <p>      apiVersion: '2025-09-01',</p>
 <br>
 <p>    });</p>
-<br>
-<br>
 <br>
 <p>    // Create a checkout session for subscription</p>
 <br>
@@ -262,13 +235,9 @@
 <br>
 <p>      });</p>
 <br>
-<br>
-<br>
 <p>      return session.url;</p>
 <br>
 <p>    }</p>
-<br>
-<br>
 <br>
 <p>    // Handle subscription lifecycle via webhooks</p>
 <br>
@@ -310,8 +279,6 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
 <p>    async function onPaymentFailed(invoice: Stripe.Invoice) {</p>
 <br>
 <p>      // Send dunning emails</p>
@@ -330,8 +297,6 @@
 <br>
 <p>      }</p>
 <br>
-<br>
-<br>
 <p>      // Notify via Slack for manual follow-up</p>
 <br>
 <p>      if (invoice.attempt_count >= 3) {</p>
@@ -348,21 +313,9 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Churn Reduction Strategies</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Track churn with event analytics and implement proactive retention:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    // Churn prediction and intervention</p>
 <br>
@@ -378,13 +331,9 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
 <p>    function calculateChurnRisk(factors: ChurnRiskFactors): 'low' | 'medium' | 'high' {</p>
 <br>
 <p>      let score = 0;</p>
-<br>
-<br>
 <br>
 <p>      // Login frequency</p>
 <br>
@@ -392,25 +341,17 @@
 <br>
 <p>      if (factors.daysSinceLastLogin > 30) score += 3;</p>
 <br>
-<br>
-<br>
 <p>      // Usage decline</p>
 <br>
 <p>      if (factors.apiCallDeclinePercent > 50) score += 2;</p>
-<br>
-<br>
 <br>
 <p>      // Support issues</p>
 <br>
 <p>      if (factors.supportTicketsOpen > 2) score += 2;</p>
 <br>
-<br>
-<br>
 <p>      // Billing problems</p>
 <br>
 <p>      if (factors.paymentFailures > 0) score += 3;</p>
-<br>
-<br>
 <br>
 <p>      if (score >= 5) return 'high';</p>
 <br>
@@ -419,8 +360,6 @@
 <p>      return 'low';</p>
 <br>
 <p>    }</p>
-<br>
-<br>
 <br>
 <p>    async function applyChurnIntervention(userId: string, risk: ChurnRiskFactors) {</p>
 <br>
@@ -440,8 +379,6 @@
 <br>
 <p>      }</p>
 <br>
-<br>
-<br>
 <p>      // Offer downgrade path before cancel</p>
 <br>
 <p>      if (risk.paymentFailures > 0) {</p>
@@ -452,21 +389,9 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Customer Lifecycle</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Map the customer journey from acquisition to expansion:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    Acquisition → Activation → Retention → Revenue → Referral</p>
 <br>
@@ -476,16 +401,7 @@
 <br>
 <p>      page        value       check-in   prompts    friends</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Automate each stage:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    async function handleCustomerLifecycle(userId: string, daysSinceSignup: number) {</p>
 <br>
@@ -545,15 +461,7 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Key SaaS Metrics</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| Metric | Formula | Target | Why It Matters |</p>
 <br>
@@ -571,14 +479,7 @@
 <br>
 <p>| Churn Rate | Cancelled / Total Customers | <5% monthly | Revenue retention |</p>
 <br>
-<br>
-<br>
-<br>
 <p>Track these with a simple dashboard:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    -- Monthly recurring revenue calculation</p>
 <br>
@@ -599,8 +500,6 @@
 <p>    GROUP BY 1</p>
 <br>
 <p>    ORDER BY 1 DESC;</p>
-<br>
-<br>
 <br>
 <p>    -- Churn rate</p>
 <br>
@@ -625,11 +524,6 @@
 <p>    GROUP BY 1</p>
 <br>
 <p>    ORDER BY 1 DESC;</p>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>Start with a simple pricing model (one paid tier), launch with Stripe's pre-built checkout, and focus on the first $1K MRR before optimizing pricing or building complex billing logic.</p></div>
     </article>

@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-migration-tools.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Migration Tools: Alembic, Flyway, Liquibase, Versioning">
     <meta name="twitter:description" content="Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategies, rollback patterns, and best practices for schema changes.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-migration-tools.png">
     <title>Database Migration Tools: Alembic, Flyway, Liquibase, Versioning — SourceHub</title>
     <meta name="description" content="Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategies, rollback patterns, and best practices for schema changes.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Migration Tools: Alembic, Flyway, Liquibase, Versioning",
       "description": "Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategies, rollback patterns, and best practices for schema changes.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-migration-tools.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1880",
+      "wordCount": "1788",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-migration-tools.png" alt="Database Migration Tools: Alembic, Flyway, Liquibase, Versioning" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</h1>
 <br>
 <p>Database Migration Tools: Alembic, Flyway, Liquibase, Versioning   </p>
@@ -91,8 +92,6 @@
 <p>Alembic is the migration tool for SQLAlchemy (Python). It generates migration scripts from model definitions and supports auto-generation.   </p>
 <p>Setup   </p>
 <br>
-<br>
-<br>
 <p>    # alembic.ini</p>
 <br>
 <p>    [alembic]</p>
@@ -101,26 +100,13 @@
 <br>
 <p>    sqlalchemy.url = postgresql://user:pass@localhost/mydb</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    alembic init alembic</p>
 <br>
-<br>
-<br>
-<br>
 <p>Creating a Migration   </p>
-<br>
-<br>
 <br>
 <p>    # alembic/versions/0001_create_users.py</p>
 <br>
 <p>    """create users table</p>
-<br>
-<br>
 <br>
 <p>    Revision ID: 0001</p>
 <br>
@@ -133,8 +119,6 @@
 <p>    from alembic import op</p>
 <br>
 <p>    import sqlalchemy as sa</p>
-<br>
-<br>
 <br>
 <p>    def upgrade():</p>
 <br>
@@ -154,32 +138,20 @@
 <br>
 <p>        op.create_index('idx_users_email', 'users', ['email'], unique=True)</p>
 <br>
-<br>
-<br>
 <p>    def downgrade():</p>
 <br>
 <p>        op.drop_index('idx_users_email')</p>
 <br>
 <p>        op.drop_table('users')</p>
 <br>
-<br>
-<br>
-<br>
 <p>Auto-Generation   </p>
-<br>
-<br>
 <br>
 <p>    # Generate migration from model changes</p>
 <br>
 <p>    alembic revision --autogenerate -m "add avatar column"</p>
 <br>
-<br>
-<br>
-<br>
 <p>This compares the current database state against SQLAlchemy models and generates `upgrade()` and `downgrade()` functions.   </p>
 <p>Running Migrations   </p>
-<br>
-<br>
 <br>
 <p>    alembic upgrade head      # Apply all pending migrations</p>
 <br>
@@ -191,14 +163,9 @@
 <br>
 <p>    alembic current           # Show current revision</p>
 <br>
-<br>
-<br>
-<br>
 <p>Flyway   </p>
 <p>Flyway is a Java-based migration tool that works with SQL scripts. It is simple, opinionated, and supports multiple databases.   </p>
 <p>Directory Structure   </p>
-<br>
-<br>
 <br>
 <p>    sql/</p>
 <br>
@@ -208,12 +175,7 @@
 <br>
 <p>      V3__create_orders_table.sql</p>
 <br>
-<br>
-<br>
-<br>
 <p>Migration Script   </p>
-<br>
-<br>
 <br>
 <p>    -- V1__create_users.sql</p>
 <br>
@@ -229,18 +191,11 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
 <p>    -- V2__add_avatar_column.sql</p>
 <br>
 <p>    ALTER TABLE users ADD COLUMN avatar_url VARCHAR(500);</p>
 <br>
-<br>
-<br>
-<br>
 <p>Configuration   </p>
-<br>
-<br>
 <br>
 <p>    # flyway.conf</p>
 <br>
@@ -254,12 +209,7 @@
 <br>
 <p>    flyway.baselineOnMigrate = true</p>
 <br>
-<br>
-<br>
-<br>
 <p>Running   </p>
-<br>
-<br>
 <br>
 <p>    flyway migrate</p>
 <br>
@@ -269,17 +219,12 @@
 <br>
 <p>    flyway validate          # Check for changes to applied migrations</p>
 <br>
-<br>
-<br>
-<br>
 <p>Checksum Validation   </p>
 <p>Flyway stores a checksum of each migration script. If a script is modified after being applied, `flyway validate` detects the change and warns:   </p>
 <p>> If a deployed migration is edited, Flyway catches it and refuses to apply further migrations until the discrepancy is resolved.   </p>
 <p>Liquibase   </p>
 <p>Liquibase supports multiple change formats: SQL, XML, YAML, and JSON. It is the most flexible but most verbose option.   </p>
 <p>Changeset (XML)   </p>
-<br>
-<br>
 <br>
 <p>    <?xml version="1.0" encoding="UTF-8"?></p>
 <br>
@@ -292,8 +237,6 @@
 <p>        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog</p>
 <br>
 <p>        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"></p>
-<br>
-<br>
 <br>
 <p>        <changeSet id="1" author="alice"></p>
 <br>
@@ -321,12 +264,7 @@
 <br>
 <p>    </databaseChangeLog></p>
 <br>
-<br>
-<br>
-<br>
 <p>Changeset (YAML)   </p>
-<br>
-<br>
 <br>
 <p>    databaseChangeLog:</p>
 <br>
@@ -350,12 +288,7 @@
 <br>
 <p>                      type: varchar(500)</p>
 <br>
-<br>
-<br>
-<br>
 <p>Rolling Back   </p>
-<br>
-<br>
 <br>
 <p>    liquibase rollbackCount 1          # Rollback 1 changeset</p>
 <br>
@@ -363,39 +296,24 @@
 <br>
 <p>    liquibase rollback --tag v1.0      # Rollback to tagged release</p>
 <br>
-<br>
-<br>
-<br>
 <p>Tool Comparison   </p>
 <p>| Feature | Alembic | Flyway | Liquibase | |---------|---------|--------|-----------| | Language | Python | Java/SQL | Java | | Auto-generation | Yes (from models) | No | No | | Rollback | Code-defined | Undo migration | Rollback changeset | | CI/CD integration | Pipeline script | Maven/Gradle/CLI | Maven/Gradle/CLI | | Complex logic | Python code | SQL only | SQL + XML/YAML | | Learning curve | Medium | Low | Medium | | Database support | SQLAlchemy-supported | 20+ databases | 15+ databases |   </p>
 <p>Migration Strategy Patterns   </p>
 <p>Linear Migrations   </p>
 <p>The simplest pattern: each migration depends on the previous one.   </p>
 <br>
-<br>
-<br>
 <p>    V1 → V2 → V3 → V4</p>
-<br>
-<br>
-<br>
 <br>
 <p>Branching with Merges   </p>
 <p>For larger teams, branches create divergent migration histories:   </p>
-<br>
-<br>
 <br>
 <p>    V1 → V2 → V3 → V4 (main branch)</p>
 <br>
 <p>           └→ V2a → V2b (feature branch)</p>
 <br>
-<br>
-<br>
-<br>
 <p>When the feature branch merges, use `flyway merge` or adjust `Alembic` revision dependencies.   </p>
 <p>Repeatable Migrations   </p>
 <p>Views, functions, and stored procedures benefit from repeatable migrations that reapply on every change:   </p>
-<br>
-<br>
 <br>
 <p>    -- Flyway: R__update_user_view.sql</p>
 <br>
@@ -403,18 +321,9 @@
 <br>
 <p>    SELECT * FROM users WHERE deleted_at IS NULL;</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    # Alembic: revision_identifiers.py with %(revision)s</p>
 <br>
 <p>    # Or mark as "revision_identifiers = False" for repeatable patterns</p>
-<br>
-<br>
-<br>
 <br>
 <p>Best Practices   </p>
 <br>

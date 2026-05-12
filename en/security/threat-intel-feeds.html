@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-intel-feeds.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Threat Intelligence Feeds">
     <meta name="twitter:description" content="Integrating threat intelligence feeds with STIX/TAXII, SIEM correlation, and scoring for actionable insights.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-intel-feeds.png">
     <title>Threat Intelligence Feeds — SourceHub</title>
     <meta name="description" content="Integrating threat intelligence feeds with STIX/TAXII, SIEM correlation, and scoring for actionable insights.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Threat Intelligence Feeds",
       "description": "Integrating threat intelligence feeds with STIX/TAXII, SIEM correlation, and scoring for actionable insights.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/threat-intel-feeds.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "996",
+      "wordCount": "954",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Threat Intelligence Feeds</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-intel-feeds.png" alt="Threat Intelligence Feeds" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Threat Intelligence Feeds</h1>
 <br>
 <p>Threat Intelligence Fundamentals   </p>
@@ -82,13 +83,9 @@
 <p>STIX and TAXII Standards   </p>
 <p>STIX (Structured Threat Information Expression) and TAXII (Trusted Automated Exchange of Intelligence Indicators) are the industry standards for threat intelligence exchange.   </p>
 <br>
-<br>
-<br>
 <p>    from stix2 import Indicator, Bundle, TAXIICollectionSource</p>
 <br>
 <p>    from taxii2client import Collection</p>
-<br>
-<br>
 <br>
 <p>    # Create a STIX indicator</p>
 <br>
@@ -106,15 +103,11 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    # Bundle indicators</p>
 <br>
 <p>    bundle = Bundle(indicator)</p>
 <br>
 <p>    print(bundle.serialize(pretty=True))</p>
-<br>
-<br>
 <br>
 <p>    # Consume from TAXII feed</p>
 <br>
@@ -126,19 +119,12 @@
 <br>
 <p>        print(indicator["name"], indicator["pattern"])</p>
 <br>
-<br>
-<br>
-<br>
 <p>Feed Integration with SIEM   </p>
 <p>Ingest feeds into your SIEM for correlation:   </p>
-<br>
-<br>
 <br>
 <p>    import requests</p>
 <br>
 <p>    from elasticsearch import Elasticsearch</p>
-<br>
-<br>
 <br>
 <p>    class ThreatIntelIngestor:</p>
 <br>
@@ -146,15 +132,11 @@
 <br>
 <p>            self.es = Elasticsearch([es_host])</p>
 <br>
-<br>
-<br>
 <p>        def fetch_and_index(self, feed_url, feed_name):</p>
 <br>
 <p>            resp = requests.get(feed_url, headers={"Accept": "application/stix+json"})</p>
 <br>
 <p>            indicators = resp.json().get("objects", [])</p>
-<br>
-<br>
 <br>
 <p>            for ioc in indicators:</p>
 <br>
@@ -176,23 +158,14 @@
 <br>
 <p>                self.es.index(index="threat-intel", body=doc)</p>
 <br>
-<br>
-<br>
 <p>            print(f"Ingested {len(indicators)} indicators from {feed_name}")</p>
-<br>
-<br>
-<br>
 <br>
 <p>IOC Scoring   </p>
 <p>Not all indicators are equally reliable. Implement scoring:   </p>
 <br>
-<br>
-<br>
 <p>    def score_indicator(ioc, context):</p>
 <br>
 <p>        score = 50  # Base score</p>
-<br>
-<br>
 <br>
 <p>        # Age decay: newer indicators are more valuable</p>
 <br>
@@ -200,15 +173,11 @@
 <br>
 <p>        score -= min(age_days * 2, 30)</p>
 <br>
-<br>
-<br>
 <p>        # Multiple feeds increase confidence</p>
 <br>
 <p>        feed_count = len(ioc.get("sources", []))</p>
 <br>
 <p>        score += feed_count * 10</p>
-<br>
-<br>
 <br>
 <p>        # Context matching increases relevance</p>
 <br>
@@ -216,20 +185,13 @@
 <br>
 <p>            score += 20</p>
 <br>
-<br>
-<br>
 <p>        return min(max(score, 0), 100)</p>
-<br>
-<br>
-<br>
 <br>
 <p>Feed Quality Metrics   </p>
 <p>Evaluate feeds on these criteria:   </p>
 <p>| Metric | Description | Target | |--------|-------------|--------| | False positive rate | Incorrect alerts | < 5% | | Time to detection | Speed of indicator publication | < 1 hour | | Coverage | Breadth of TTPs covered | > 80% | | Freshness | Update frequency | Continuous |   </p>
 <p>Automated Blocking   </p>
 <p>High-confidence indicators can trigger automated blocking:   </p>
-<br>
-<br>
 <br>
 <p>    # threat-intel-automation.yaml</p>
 <br>
@@ -258,9 +220,6 @@
 <p>              severity: high</p>
 <br>
 <p>              channel: security-operations</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Threat intelligence feeds provide critical context for security operations. Standardize on STIX/TAXII, integrate with your SIEM, score indicators for relevance, and automate high-confidence blocking. Quality over quantity: five well-curated feeds beat fifty noisy ones.</p></div>

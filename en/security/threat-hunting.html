@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-hunting.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Threat Hunting">
     <meta name="twitter:description" content="Comprehensive guide to hypothesis-driven threat hunting with MITRE ATT&CK mapping, tooling strategies, and data source analysis.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-hunting.png">
     <title>Threat Hunting — SourceHub</title>
     <meta name="description" content="Comprehensive guide to hypothesis-driven threat hunting with MITRE ATT&CK mapping, tooling strategies, and data source analysis.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Threat Hunting",
       "description": "Comprehensive guide to hypothesis-driven threat hunting with MITRE ATT&CK mapping, tooling strategies, and data source analysis.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/threat-hunting.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1389",
+      "wordCount": "1350",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Threat Hunting</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-hunting.png" alt="Threat Hunting" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Threat Hunting</h1>
 <br>
 <p>Introduction   </p>
@@ -91,13 +92,9 @@
 <p>Hypothesis-Driven Hunting   </p>
 <p>The hypothesis is the foundation of every hunt. It should be testable, specific, and grounded in threat intelligence or risk assessment.   </p>
 <br>
-<br>
-<br>
 <p>    # Hypothesis: An adversary is using PowerShell for C2 communication</p>
 <br>
 <p>    # Test: Find PowerShell processes making outbound connections</p>
-<br>
-<br>
 <br>
 <p>    def hunt_powershell_c2(time_window_hours=72):</p>
 <br>
@@ -125,8 +122,6 @@
 <br>
 <p>        results = execute_hunt(query)</p>
 <br>
-<br>
-<br>
 <p>        for row in results:</p>
 <br>
 <p>            if suspicious_patterns.match(row.command_line):</p>
@@ -141,13 +136,8 @@
 <br>
 <p>                )</p>
 <br>
-<br>
-<br>
-<br>
 <p>MITRE ATT&CK; Mapping   </p>
 <p>The MITRE ATT&CK; framework provides a common taxonomy for adversary behavior. Mapping hunts to ATT&CK; techniques ensures comprehensive coverage.   </p>
-<br>
-<br>
 <br>
 <p>    hunt:</p>
 <br>
@@ -157,8 +147,6 @@
 <br>
 <p>      tactic: Persistence, Privilege Escalation</p>
 <br>
-<br>
-<br>
 <p>      data_sources:</p>
 <br>
 <p>        - Windows Event ID 4688 (Process Creation)</p>
@@ -167,11 +155,7 @@
 <br>
 <p>        - File creation events in system directories</p>
 <br>
-<br>
-<br>
 <p>      hypothesis: "Adversary places malicious DLL in search path before legitimate application loads"</p>
-<br>
-<br>
 <br>
 <p>      query:</p>
 <br>
@@ -195,16 +179,11 @@
 <br>
 <p>           ) on ProcessGuid</p>
 <br>
-<br>
-<br>
-<br>
 <p>Data Sources for Hunting   </p>
 <p>Effective hunting requires rich telemetry. The best sources include:   </p>
 <br>
 <p>* **Process creation logs** (Event ID 4688 / Sysmon Event ID 1)</p>
 <p>2\. **Network connections** (Sysmon Event ID 3, NetFlow, Zeek logs) 3\. **DNS queries** (Zeek DNS, Windows DNS client logs) 4\. **File system changes** (Sysmon Event ID 11) 5\. **Registry modifications** (Sysmon Event ID 12-14) 6\. **PowerShell operational logs** (Event ID 4103, 4104)   </p>
-<br>
-<br>
 <br>
 <p>    <!-- Sysmon configuration for hunting data collection --></p>
 <br>
@@ -240,12 +219,7 @@
 <br>
 <p>    </Sysmon></p>
 <br>
-<br>
-<br>
-<br>
 <p>Hunting Tools   </p>
-<br>
-<br>
 <br>
 <p>    # Velociraptor: collect process listing across fleet</p>
 <br>
@@ -254,8 +228,6 @@
 <p>        --artifacts Windows.System.TaskScheduler </p>
 <br>
 <p>        --format json > scheduled_tasks.json</p>
-<br>
-<br>
 <br>
 <p>    # Zeek: analyze DNS logs for DGA patterns</p>
 <br>
@@ -266,8 +238,6 @@
 <p>        awk '{len=length($1)} len>20 {print $1, len}' | \</p>
 <br>
 <p>        sort | uniq -c | sort -rn | head -20</p>
-<br>
-<br>
 <br>
 <p>    # KQL: hunting in Microsoft 365 Defender</p>
 <br>
@@ -283,12 +253,7 @@
 <br>
 <p>    | project DeviceName, AccountName, ProcessCommandLine, Timestamp</p>
 <br>
-<br>
-<br>
-<br>
 <p>Data Analysis Techniques   </p>
-<br>
-<br>
 <br>
 <p>    # Stack counting for anomaly detection</p>
 <br>
@@ -309,9 +274,6 @@
 <p>            if ratio > baseline * 3:  # 3x expected baseline</p>
 <br>
 <p>                yield Anomaly(field, value, ratio, baseline)</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Threat hunting transforms security operations from reactive to proactive. Start with structured hypotheses based on threat intelligence, map hunts to MITRE ATT&CK; techniques, ensure comprehensive data collection, and iterate based on findings. Mature hunting programs progressively automate successful hunt patterns into detection rules.</p></div>

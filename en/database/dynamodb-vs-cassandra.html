@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/dynamodb-vs-cassandra.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost">
     <meta name="twitter:description" content="In-depth comparison of DynamoDB vs Cassandra covering data model, consistency levels, scaling strategies, query patterns, and cost considerations.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/dynamodb-vs-cassandra.png">
     <title>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost — SourceHub</title>
     <meta name="description" content="In-depth comparison of DynamoDB vs Cassandra covering data model, consistency levels, scaling strategies, query patterns, and cost considerations.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost",
       "description": "In-depth comparison of DynamoDB vs Cassandra covering data model, consistency levels, scaling strategies, query patterns, and cost considerations.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/dynamodb-vs-cassandra.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1688",
+      "wordCount": "1621",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/dynamodb-vs-cassandra.png" alt="DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h1>
 <br>
 <p>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost   </p>
@@ -83,15 +84,11 @@
 <p>DynamoDB   </p>
 <p>DynamoDB uses tables with items (rows) and attributes (columns). Each item must have a partition key and optionally a sort key:   </p>
 <br>
-<br>
-<br>
 <p>    // DynamoDB table: Users</p>
 <br>
 <p>    // Partition key: user_id (String)</p>
 <br>
 <p>    // Sort key: created_at (Number)</p>
-<br>
-<br>
 <br>
 <p>    {</p>
 <br>
@@ -113,9 +110,6 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Key design rules:   </p>
 <br>
 <p>* The partition key determines which partition stores the item.</p>
@@ -123,14 +117,9 @@
 <p>* Query operations require the partition key; optional sort key conditions.</p>
 <p>* Secondary indexes can be local (same partition key, different sort key) or global (different partition key).</p>
 <br>
-<br>
-<br>
-<br>
 <p>    # DynamoDB query</p>
 <br>
 <p>    import boto3</p>
-<br>
-<br>
 <br>
 <p>    client = boto3.client('dynamodb')</p>
 <br>
@@ -148,13 +137,8 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
-<br>
 <p>Cassandra   </p>
 <p>Cassandra uses tables with rows and columns, but the data model is designed around query patterns. The PRIMARY KEY defines partitioning and clustering:   </p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE users_by_email (</p>
 <br>
@@ -167,8 +151,6 @@
 <p>        address TEXT</p>
 <br>
 <p>    );</p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE orders_by_user (</p>
 <br>
@@ -184,9 +166,6 @@
 <br>
 <p>    ) WITH CLUSTERING ORDER BY (created_at DESC);</p>
 <br>
-<br>
-<br>
-<br>
 <p>Key design rules:   </p>
 <br>
 <p>* The first column in PRIMARY KEY is the partition key.</p>
@@ -194,14 +173,9 @@
 <p>* You model tables around your access patterns (query-first design).</p>
 <p>* Denormalization is expected and encouraged.</p>
 <br>
-<br>
-<br>
-<br>
 <p>    # Cassandra query</p>
 <br>
 <p>    from cassandra.cluster import Cluster</p>
-<br>
-<br>
 <br>
 <p>    cluster = Cluster(['127.0.0.1'])</p>
 <br>
@@ -215,15 +189,10 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
-<br>
 <p>Consistency   </p>
 <p>DynamoDB Consistency Levels   </p>
 <p>| Level | Description | Cost | |-------|-------------|------| | Eventual | Reads may return stale data | 0.5 RCU per read | | Strong | Returns most up-to-date data | 1 RCU per read | | Transactional | Serial isolation for reads/writes | 2 RCU/WCU per operation |   </p>
 <p>DynamoDB offers tunable consistency at the request level:   </p>
-<br>
-<br>
 <br>
 <p>    # Eventually consistent read (cheaper)</p>
 <br>
@@ -237,8 +206,6 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    # Strongly consistent read</p>
 <br>
 <p>    response = client.get_item(</p>
@@ -251,13 +218,8 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
-<br>
 <p>Cassandra Consistency Levels   </p>
 <p>Cassandra's consistency is tunable per query using the consistency level (CL):   </p>
-<br>
-<br>
 <br>
 <p>    -- QUORUM: majority of replicas must respond</p>
 <br>
@@ -265,15 +227,11 @@
 <br>
 <p>    CONSISTENCY QUORUM;</p>
 <br>
-<br>
-<br>
 <p>    -- ONE: fastest, weakest guarantee</p>
 <br>
 <p>    SELECT * FROM users WHERE email = 'alice@example.com'</p>
 <br>
 <p>    CONSISTENCY ONE;</p>
-<br>
-<br>
 <br>
 <p>    -- ALL: strongest guarantee, slowest</p>
 <br>
@@ -281,22 +239,15 @@
 <br>
 <p>    CONSISTENCY ALL;</p>
 <br>
-<br>
-<br>
 <p>    -- LOCAL_QUORUM: quorum within local datacenter</p>
 <br>
 <p>    SELECT * FROM users WHERE email = 'alice@example.com'</p>
 <br>
 <p>    CONSISTENCY LOCAL_QUORUM;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Scaling   </p>
 <p>DynamoDB Scaling   </p>
 <p>DynamoDB scales vertically by provisioning read and write capacity units (RCUs and WCUs). Auto-scaling adjusts capacity based on traffic:   </p>
-<br>
-<br>
 <br>
 <p>    # Configure auto-scaling</p>
 <br>
@@ -314,20 +265,13 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    # Or use on-demand mode (pay-per-request)</p>
 <br>
 <p>    # No capacity planning needed, but higher per-request cost</p>
 <br>
-<br>
-<br>
-<br>
 <p>DynamoDB partitions are invisible to users. The service automatically splits partitions when they exceed 10 GB or when throughput exceeds 3000 RCU or 1000 WCU per partition.   </p>
 <p>Cassandra Scaling   </p>
 <p>Cassandra scales horizontally by adding nodes. Data is distributed using consistent hashing:   </p>
-<br>
-<br>
 <br>
 <p>    # cassandra.yaml</p>
 <br>
@@ -337,12 +281,7 @@
 <br>
 <p>    replication_factor: 3</p>
 <br>
-<br>
-<br>
-<br>
 <p>Adding a node:   </p>
-<br>
-<br>
 <br>
 <p>    # Add node to cluster</p>
 <br>
@@ -350,14 +289,9 @@
 <br>
 <p>    nodetool join</p>
 <br>
-<br>
-<br>
 <p>    # Rebalance data</p>
 <br>
 <p>    nodetool rebuild</p>
-<br>
-<br>
-<br>
 <br>
 <p>Scaling is linear: doubling nodes doubles throughput. No partitioning limits; the only constraint is disk space per node.   </p>
 <p>Cost Comparison   </p>

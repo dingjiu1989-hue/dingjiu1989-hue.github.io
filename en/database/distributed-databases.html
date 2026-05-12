@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/distributed-databases.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Distributed Databases: Concepts and Implementation">
     <meta name="twitter:description" content="Explore Raft/Paxos consensus, gossip protocols, CRDTs, and the architectures behind Amazon Dynamo and Google Spanner.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/distributed-databases.png">
     <title>Distributed Databases: Concepts and Implementation — SourceHub</title>
     <meta name="description" content="Explore Raft/Paxos consensus, gossip protocols, CRDTs, and the architectures behind Amazon Dynamo and Google Spanner.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Distributed Databases: Concepts and Implementation",
       "description": "Explore Raft/Paxos consensus, gossip protocols, CRDTs, and the architectures behind Amazon Dynamo and Google Spanner.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/distributed-databases.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "481",
+      "wordCount": "467",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,6 +74,7 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Distributed Databases: Concepts and Implementation</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/distributed-databases.png" alt="Distributed Databases: Concepts and Implementation" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Distributed Databases: Concepts and Implementation</h1>
 <br>
 <p>Distributed Database Architecture   </p>
@@ -84,8 +85,6 @@
 <p>Raft   </p>
 <p>Raft is a consensus algorithm designed for understandability:   </p>
 <br>
-<br>
-<br>
 <p>    class RaftNode:</p>
 <br>
 <p>        def __init__(self):</p>
@@ -93,8 +92,6 @@
 <p>            self.state = "FOLLOWER"</p>
 <br>
 <p>            self.current_term = 0</p>
-<br>
-<br>
 <br>
 <p>        def start_election(self):</p>
 <br>
@@ -112,9 +109,6 @@
 <br>
 <p>                self.state = "LEADER"</p>
 <br>
-<br>
-<br>
-<br>
 <p>Raft powers etcd, Consul, and MongoDB replication.   </p>
 <p>Paxos   </p>
 <p>Paxos is the original consensus algorithm. It is correct but difficult to understand. Used in Google Spanner and Chubby.   </p>
@@ -123,22 +117,15 @@
 <p>Dynamo-Style Architecture   </p>
 <p>Amazon DynamoDB and Cassandra prioritize availability:   </p>
 <br>
-<br>
-<br>
 <p>    -- Cassandra: tunable consistency</p>
 <br>
 <p>    INSERT INTO users (user_id, name) VALUES ('u1', 'Alice')</p>
 <br>
 <p>    USING CONSISTENCY QUORUM;</p>
 <br>
-<br>
-<br>
 <p>    SELECT * FROM users WHERE user_id = 'u1'</p>
 <br>
 <p>    USING CONSISTENCY ONE;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Spanner-Style Architecture   </p>
 <p>Google Spanner provides strong consistency globally using TrueTime (GPS + atomic clocks) for external consistency.   </p>

@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-indexing.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Indexing Strategies">
     <meta name="twitter:description" content="A comprehensive guide to database indexing covering B-tree, hash, GiST, GIN indexes, composite indexes, and query optimization.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-indexing.png">
     <title>Database Indexing Strategies — SourceHub</title>
     <meta name="description" content="A comprehensive guide to database indexing covering B-tree, hash, GiST, GIN indexes, composite indexes, and query optimization.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Indexing Strategies",
       "description": "A comprehensive guide to database indexing covering B-tree, hash, GiST, GIN indexes, composite indexes, and query optimization.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-indexing.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1363",
+      "wordCount": "1298",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,6 +74,7 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Database Indexing Strategies</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-indexing.png" alt="Database Indexing Strategies" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Indexing Strategies</h1>
 <br>
 <p>What Is Database Indexing?   </p>
@@ -81,26 +82,17 @@
 <p>How Indexes Work   </p>
 <p>Without an index, the database performs a sequential scan, reading every row until it finds matches. With an index, the database navigates a balanced tree structure to locate data in O(log n) time instead of O(n).   </p>
 <br>
-<br>
-<br>
 <p>    Sequential Scan:  [Row1] [Row2] [Row3] ... [Row1M]  = 1,000,000 reads</p>
 <br>
 <p>    B-Tree Index:     [Root] -> [Branch] -> [Leaf] -> [Row] = 3-4 reads</p>
-<br>
-<br>
-<br>
 <br>
 <p>Index Types   </p>
 <p>B-Tree Index   </p>
 <p>The default and most common index type. Works well for equality and range queries.   </p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX idx_users_email ON users(email);</p>
 <br>
 <p>    CREATE INDEX idx_users_created ON users(created_at);</p>
-<br>
-<br>
 <br>
 <p>    -- Used for:</p>
 <br>
@@ -110,33 +102,19 @@
 <br>
 <p>    SELECT * FROM users WHERE email LIKE 'alice%';</p>
 <br>
-<br>
-<br>
-<br>
 <p>Hash Index   </p>
 <p>Optimized for equality comparisons. Not suitable for range queries or sorting.   </p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX idx_sessions_token ON sessions USING HASH(session_token);</p>
-<br>
-<br>
 <br>
 <p>    -- Good for:</p>
 <br>
 <p>    SELECT * FROM sessions WHERE session_token = 'abc123';</p>
 <br>
-<br>
-<br>
-<br>
 <p>GiST Index   </p>
 <p>Generalized Search Tree, useful for full-text search and geometric data.   </p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX idx_posts_content ON posts USING GIST(to_tsvector('english', content));</p>
-<br>
-<br>
 <br>
 <p>    -- Used for:</p>
 <br>
@@ -144,17 +122,10 @@
 <br>
 <p>    WHERE to_tsvector('english', content) @@ to_tsquery('database & indexing');</p>
 <br>
-<br>
-<br>
-<br>
 <p>GIN Index   </p>
 <p>Generalized Inverted Index, optimized for composite types and arrays.   </p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX idx_article_tags ON articles USING GIN(tags);</p>
-<br>
-<br>
 <br>
 <p>    -- Used for:</p>
 <br>
@@ -162,39 +133,25 @@
 <br>
 <p>    SELECT * FROM articles WHERE tags && ARRAY['database', 'sql'];</p>
 <br>
-<br>
-<br>
-<br>
 <p>BRIN Index   </p>
 <p>Block Range INdex, efficient for very large tables with naturally ordered data.   </p>
-<br>
-<br>
 <br>
 <p>    CREATE INDEX idx_logs_created ON logs USING BRIN(created_at)</p>
 <br>
 <p>    WITH (pages_per_range = 32);</p>
 <br>
-<br>
-<br>
 <p>    -- Best for:</p>
 <br>
 <p>    -- Time-series data where rows are inserted in order</p>
 <br>
-<br>
-<br>
-<br>
 <p>Composite Indexes   </p>
 <p>Indexes on multiple columns. Column order matters significantly.   </p>
-<br>
-<br>
 <br>
 <p>    -- Composite index</p>
 <br>
 <p>    CREATE INDEX idx_users_status_created</p>
 <br>
 <p>    ON users(status, created_at);</p>
-<br>
-<br>
 <br>
 <p>    -- This index can serve:</p>
 <br>
@@ -204,22 +161,15 @@
 <br>
 <p>    -- 3. WHERE status IN ('active', 'pending') ORDER BY created_at</p>
 <br>
-<br>
-<br>
 <p>    -- But NOT:</p>
 <br>
 <p>    -- WHERE created_at > '2026-01-01'  (status is leading column)</p>
-<br>
-<br>
-<br>
 <br>
 <p>Column Order Rules   </p>
 <p>| Rule | Example | |------|---------| | Equality conditions first | `WHERE status = 'active' AND created_at > '2026-01-01'` -> index on `(status, created_at)` | | High cardinality columns first for range | `WHERE type = 'user' AND email LIKE 'a%'` -> index on `(type, email)` | | Most selective column first | `WHERE country = 'US' AND status = 'active'` — US is 10% of data, active is 90% -> index on `(country, status)` |   </p>
 <p>Index Scan Types   </p>
 <p>| Scan Type | When Used | Performance | |-----------|-----------|-------------| | Sequential Scan | No index, or query returns large percentage of table | Full table read | | Index Scan | Index lookup + heap access | Fast for selective queries | | Index Only Scan | All needed columns are in the index | Fastest, no heap access | | Bitmap Scan | Combines multiple indexes, returns moderate row count | Good for multi-condition queries |   </p>
 <p>Monitoring Index Usage   </p>
-<br>
-<br>
 <br>
 <p>    -- PostgreSQL: Find unused indexes</p>
 <br>
@@ -238,8 +188,6 @@
 <p>      AND indexrelname NOT LIKE '%_pkey'</p>
 <br>
 <p>    ORDER BY idx_scan ASC;</p>
-<br>
-<br>
 <br>
 <p>    -- Find missing indexes</p>
 <br>
@@ -261,12 +209,7 @@
 <br>
 <p>    ORDER BY seq_scan DESC;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Index Maintenance   </p>
-<br>
-<br>
 <br>
 <p>    -- Rebuild indexes to reclaim space (PostgreSQL)</p>
 <br>
@@ -274,13 +217,9 @@
 <br>
 <p>    REINDEX TABLE users;</p>
 <br>
-<br>
-<br>
 <p>    -- Update statistics for query planner</p>
 <br>
 <p>    ANALYZE users;</p>
-<br>
-<br>
 <br>
 <p>    -- Check index size</p>
 <br>
@@ -289,9 +228,6 @@
 <p>        pg_size_pretty(pg_indexes_size('users')) AS total_index_size,</p>
 <br>
 <p>        pg_size_pretty(pg_total_relation_size('users')) AS total_size;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Common Anti-Patterns   </p>
 <p>| Anti-Pattern | Why It Hurts | |--------------|--------------| | Indexing every column | Writes become slow, storage bloats | | Forgetting composite indexes | Query uses multiple single-column indexes inefficiently | | Indexing boolean columns | Very low cardinality, rarely useful | | Not indexing foreign keys | JOIN queries perform sequential scans | | Over-indexing small tables | Tables under 1000 rows are faster to scan sequentially |   </p>

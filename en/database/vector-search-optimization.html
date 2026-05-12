@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/vector-search-optimization.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Vector Search Optimization Techniques">
     <meta name="twitter:description" content="Optimize vector search with HNSW tuning, quantization (PQ, scalar), IVF parameters, filtered search performance, and multi-vector indexing.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/vector-search-optimization.png">
     <title>Vector Search Optimization Techniques — SourceHub</title>
     <meta name="description" content="Optimize vector search with HNSW tuning, quantization (PQ, scalar), IVF parameters, filtered search performance, and multi-vector indexing.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Vector Search Optimization Techniques",
       "description": "Optimize vector search with HNSW tuning, quantization (PQ, scalar), IVF parameters, filtered search performance, and multi-vector indexing.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/vector-search-optimization.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "410",
+      "wordCount": "391",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,6 +74,7 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Vector Search Optimization Techniques</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/vector-search-optimization.png" alt="Vector Search Optimization Techniques" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Vector Search Optimization Techniques</h1>
 <br>
 <p>Vector Search Fundamentals   </p>
@@ -81,19 +82,13 @@
 <p>HNSW Index Parameters   </p>
 <p>Hierarchical Navigable Small World (HNSW) is the most popular vector index:   </p>
 <br>
-<br>
-<br>
 <p>    -- pgvector HNSW index</p>
 <br>
 <p>    CREATE INDEX ON documents USING hnsw (embedding vector_cosine_ops)</p>
 <br>
 <p>    WITH (m = 16, ef_construction = 200);</p>
 <br>
-<br>
-<br>
 <p>    SET hnsw.ef_search = 100;</p>
-<br>
-<br>
 <br>
 <p>    SELECT id, embedding <=> '[0.1, 0.2, ...]' as distance</p>
 <br>
@@ -101,14 +96,9 @@
 <br>
 <p>    ORDER BY embedding <=> '[0.1, 0.2, ...]' LIMIT 10;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Key HNSW parameters: M (connections per node, default 16), ef_construction (build quality, default 200), ef_search (query recall, set per-query).   </p>
 <p>Quantization   </p>
 <p>Reduce memory footprint:   </p>
-<br>
-<br>
 <br>
 <p>    def quantize_int8(vectors):</p>
 <br>
@@ -122,13 +112,8 @@
 <br>
 <p>        return quantized, mins, scale</p>
 <br>
-<br>
-<br>
-<br>
 <p>FP16 halves memory. INT8 reduces by 4x. Product quantization achieves 10-30x compression.   </p>
 <p>Pre-filtering Strategies   </p>
-<br>
-<br>
 <br>
 <p>    -- Post-filtering: search then filter</p>
 <br>
@@ -139,9 +124,6 @@
 <p>    WHERE category = 'technology'</p>
 <br>
 <p>    ORDER BY embedding <=> '[0.1, 0.2]' LIMIT 10;</p>
-<br>
-<br>
-<br>
 <br>
 <p>Prefer pre-filtering with separate indexes per filter category for optimal performance.   </p>
 <p>Conclusion   </p>

@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/two-factor-authentication.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Two-Factor Authentication Guide">
     <meta name="twitter:description" content="A comprehensive guide to implementing two-factor authentication with TOTP, SMS, backup codes, and WebAuthn passkeys.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/two-factor-authentication.png">
     <title>Two-Factor Authentication Guide — SourceHub</title>
     <meta name="description" content="A comprehensive guide to implementing two-factor authentication with TOTP, SMS, backup codes, and WebAuthn passkeys.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,15 +38,15 @@
       "@type": "Article",
       "headline": "Two-Factor Authentication Guide",
       "description": "A comprehensive guide to implementing two-factor authentication with TOTP, SMS, backup codes, and WebAuthn passkeys.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/two-factor-authentication.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1556",
+      "wordCount": "1371",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/two-factor-authentication.html"},
-      "articleBody": "Two-Factor Authentication Guide Why 2FA Matters Passwords alone are insufficient. Data breaches expose billions of credentials annually, phishing campaigns trick users into revealing their passwords, and credential stuffing attacks automate login attempts across services. Two-factor authentication (2FA) adds a second layer of verification that renders stolen passwords useless. 2FA Factor Types | Factor | Examples | Security Level | |--------|----------|----------------| | Knowledge | Password, PIN | Weak | | Possession | Phone, hardware key, authenticator app | Strong | | Inherence | Fingerprint, face scan | Strong | | Location | GPS, IP range | Moderate | | Time | One-time codes | Moderate | Strong 2FA combines something you know (password) with something you have (phone or key). TOTP (Time-Based One-Time Password) TOTP is the most widely implemented 2FA method. The client and server share a secret key, and both derive the same 6-8 digit code from the current time. Server-Side Implementation import pyotp import base64 import os class TOTPManager: def __init__(self): self.issuer = \"MyApp\" def generate_secret(self): \"\"\"Generate a new TOTP secret.\"\"\" return pyotp.random_base32() def get_provisioning_uri(self, username, secret): \"\"\"Generate URI for QR code.\"\"\" return pyotp.totp.TOTP(secret).provisioning_uri( name=username, issuer_name=self.issuer ) def verify_code(self, secret, code): \"\"\"Verify a TOTP code with a 1-step window for clock drift.\"\"\" totp = pyotp.TOTP(secret) return totp.verify(code, valid_window=1) Displaying the QR Code import qrcode import qrcode.image.svg def render_qr(uri): img = qrcode.make(uri, image_factory=qrcode.image.svg.SvgImage) return img.to_string().decode() Client-Side Setup // Generate QR in the browser const secret = await generateTOTPSecret(); const uri = `otpauth://totp/MyApp:${username}?secret=${secret}&issuer=MyApp`; // Show QR code new QRCode(document.getElementById('qrcode'), { text: uri }); // Verify setup const result = await fetch('/api/2fa/verify', { method: 'POST', body: JSON.stringify({ secret, code: userInputCode }) }); SMS-Based 2FA While less secure than TOTP (vulnerable to SIM swapping), SMS remains widely used due to its simplicity. import twilio from twilio.rest import Client def send_sms_code(phone_number): code = ''.join(random.choices('0123456789', k=6)) # Store code with expiry in Redis redis.setex(f\"2fa:{phone_number}\", 300, code) client = Client(TWILIO_SID, TWILIO_TOKEN) client.messages.create( body=f\"Your verification code is: {code}\", from_=TWILIO_PHONE, to=phone_number ) return code Backup Codes When users lose access to their 2FA device, backup codes provide a recovery path. Generate 8-10 single-use codes: import hashlib import secrets def generate_backup_codes(count=10): codes = [] hashes = [] for _ in range(count): code = f\"{secrets.randbelow(10**8):08d}\" codes.append(code) hashes.append(hashlib.sha256(code.encode()).hexdigest()) return codes, hashes Store only the SHA-256 hashes of backup codes in the database. When a user enters a backup code, hash it and compare against stored hashes, then remove the used hash. WebAuthn and Passkeys WebAuthn is the gold standard for 2FA. It uses public-key cryptography: the private key never leaves the user's device, and the server stores only the public key. Registration // Server sends challenge const challenge = await getWebAuthnChallenge(); // Browser creates credential const credential = await navigator.credentials.create({ publicKey: { challenge: Uint8Array.from(challenge, c => c.charCodeAt(0)), rp: { name: \"MyApp\", id: \"example.com\" }, user: { id: Uint8Array.from(userId, c => c.charCodeAt(0)), name: username, displayName: displayName }, pubKeyCredParams: [{ type: \"public-key\", alg: -7 }], // ES256 authenticatorSelection: { userVerification: \"required\" } } }); // Send credential to server for storage await registerCredential(credential); Authentication const assertion = await navigator.credentials.get({ publicKey: { challenge: Uint8Array.from(challenge, c => c.charCodeAt(0)), allowCredentials: credentials.map(c => ({ id: Uint8Array.from(c.credentialId, c => c.charCodeAt(0)), type: 'public-key' })), userVerification: 'required' } }); await verifyAssertion(assertion); Rate Limiting 2FA Attempts 2FA endpoints are targets for brute-force attacks. Always rate limit: | Endpoint | Limit | Window | |----------|-------|--------| | TOTP verification | 5 attempts | 15 minutes | | SMS send | 3 requests | 30 minutes | | Backup code use | 10 attempts | 1 hour | | Recovery request | 3 attempts | 24 hours | User Experience Best Practices * Allow users to register multiple 2FA methods (TOTP + backup codes + passkey). * Provide a recovery workflow with backup codes during initial setup. * Remember trusted devices with a cookie so 2FA is not required on every login. * Send notification emails when 2FA is enabled, disabled, or recovery codes are used. * Show which 2FA methods are registered in the security settings page. Summary Implement TOTP as the primary 2FA method, supplement with backup codes for recovery, and offer WebAuthn/passkeys as an upgrade path for security-conscious users. Always rate limit 2FA endpoints, hash backup codes before storage, and provide clear recovery workflows. SMS-based 2FA is better than no 2FA but should be deprecated in favor of app-based or hardware-based authenticators."
+      "articleBody": "Two-Factor Authentication Guide Two-Factor Authentication Guide Why 2FA Matters Passwords alone are insufficient. Data breaches expose billions of credentials annually, phishing campaigns trick users into revealing their passwords, and credential stuffing attacks automate login attempts across services. Two-factor authentication (2FA) adds a second layer of verification that renders stolen passwords useless. 2FA Factor Types | Factor | Examples | Security Level | |--------|----------|----------------| | Knowledge | Password, PIN | Weak | | Possession | Phone, hardware key, authenticator app | Strong | | Inherence | Fingerprint, face scan | Strong | | Location | GPS, IP range | Moderate | | Time | One-time codes | Moderate | Strong 2FA combines something you know (password) with something you have (phone or key). TOTP (Time-Based One-Time Password) TOTP is the most widely implemented 2FA method. The client and server share a secret key, and both derive the same 6-8 digit code from the current time. Server-Side Implementation import pyotp import base64 import os class TOTPManager: def __init__(self): self.issuer = \"MyApp\" def generate_secret(self): \"\"\"Generate a new TOTP secret.\"\"\" return pyotp.random_base32() def get_provisioning_uri(self, username, secret): \"\"\"Generate URI for QR code.\"\"\" return pyotp.totp.TOTP(secret).provisioning_uri( name=username, issuer_name=self.issuer ) def verify_code(self, secret, code): \"\"\"Verify a TOTP code with a 1-step window for clock drift.\"\"\" totp = pyotp.TOTP(secret) return totp.verify(code, valid_window=1) Displaying the QR Code import qrcode import qrcode.image.svg def render_qr(uri): img = qrcode.make(uri, image_factory=qrcode.image.svg.SvgImage) return img.to_string().decode() Client-Side Setup // Generate QR in the browser const secret = await generateTOTPSecret(); const uri = `otpauth://totp/MyApp:${username}?secret=${secret}&issuer;=MyApp`; // Show QR code new QRCode(document.getElementById('qrcode'), { text: uri }); // Verify setup const result = await fetch('/api/2fa/verify', { method: 'POST', body: JSON.stringify({ secret, code: userInputCode }) }); SMS-Based 2FA While less secure than TOTP (vulnerable to SIM swapping), SMS remains widely used due to its simplicity. import twilio from twilio.rest import Client def send_sms_code(phone_number): code = ''.join(random.choices('0123456789', k=6)) Store code with expiry in Redis redis.setex(f\"2fa:{phone_number}\", 300, code) client = Client(TWILIO_SID, TWILIO_TOKEN) client.messages.create( body=f\"Your verification code is: {code}\", from_=TWILIO_PHONE, to=phone_number ) return code Backup Codes When users lose access to their 2FA device, backup codes provide a recovery path. Generate 8-10 single-use codes: import hashlib import secrets def generate_backup_codes(count=10): codes = [] hashes = [] for _ in range(count): code = f\"{secrets.randbelow(10**8):08d}\" codes.append(code) hashes.append(hashlib.sha256(code.encode()).hexdigest()) return codes, hashes Store only the SHA-256 hashes of backup codes in the database. When a user enters a backup code, hash it and compare against stored hashes, then remove the used hash. WebAuthn and Passkeys WebAuthn is the gold standard for 2FA. It uses public-key cryptography: the private key never leaves the user's device, and the server stores only the public key. Registration // Server sends challenge const challenge = await getWebAuthnChallenge(); // Browser creates credential const credential = await navigator.credentials.create({ publicKey: { challenge: Uint8Array.from(challenge, c => c.charCodeAt(0)), rp: { name: \"MyApp\", id: \"example.com\" }, user: { id: Uint8Array.from(userId, c => c.charCodeAt(0)), name: username, displayName: displayName }, pubKeyCredParams: [{ type: \"public-key\", alg: -7 }], // ES256 authenticatorSelection: { userVerification: \"required\" } } }); // Send credential to server for storage await registerCredential(credential); Authentication const assertion = await navigator.credentials.get({ publicKey: { challenge: Uint8Array.from(challenge, c => c.charCodeAt(0)), allowCredentials: credentials.map(c => ({ id: Uint8Array.from(c.credentialId, c => c.charCodeAt(0)), type: 'public-key' })), userVerification: 'required' } }); await verifyAssertion(assertion); Rate Limiting 2FA Attempts 2FA endpoints are targets for brute-force attacks. Always rate limit: | Endpoint | Limit | Window | |----------|-------|--------| | TOTP verification | 5 attempts | 15 minutes | | SMS send | 3 requests | 30 minutes | | Backup code use | 10 attempts | 1 hour | | Recovery request | 3 attempts | 24 hours | User Experience Best Practices * Allow users to register multiple 2FA methods (TOTP + backup codes + passkey). * Provide a recovery workflow with backup codes during initial setup. * Remember trusted devices with a cookie so 2FA is not required on every login. * Send notification emails when 2FA is enabled, disabled, or recovery codes are used. * Show which 2FA methods are registered in the security settings page. Summary Implement TOTP as the primary 2FA method, supplement with backup codes for recovery, and offer WebAuthn/passkeys as an upgrade path for security-conscious users. Always rate limit 2FA endpoints, hash backup codes before storage, and provide clear recovery workflows. SMS-based 2FA is better than no 2FA but should be deprecated in favor of app-based or hardware-based authenticators."
     }
     </script>
     <script type="application/ld+json">
@@ -74,279 +74,241 @@
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">Two-Factor Authentication Guide</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/two-factor-authentication.png" alt="Two-Factor Authentication Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Two-Factor Authentication Guide</h1>
 <br>
-<p>Why 2FA Matters   </p>
-<p>Passwords alone are insufficient. Data breaches expose billions of credentials annually, phishing campaigns trick users into revealing their passwords, and credential stuffing attacks automate login attempts across services. Two-factor authentication (2FA) adds a second layer of verification that renders stolen passwords useless.   </p>
-<p>2FA Factor Types   </p>
-<p>| Factor | Examples | Security Level | |--------|----------|----------------| | Knowledge | Password, PIN | Weak | | Possession | Phone, hardware key, authenticator app | Strong | | Inherence | Fingerprint, face scan | Strong | | Location | GPS, IP range | Moderate | | Time | One-time codes | Moderate |   </p>
-<p>Strong 2FA combines something you know (password) with something you have (phone or key).   </p>
-<p>TOTP (Time-Based One-Time Password)   </p>
-<p>TOTP is the most widely implemented 2FA method. The client and server share a secret key, and both derive the same 6-8 digit code from the current time.   </p>
-<p>Server-Side Implementation   </p>
+<h1>Two-Factor Authentication Guide</h1>
 <br>
+<p>Why 2FA Matters </p>
 <br>
+<p>Passwords alone are insufficient. Data breaches expose billions of credentials annually, phishing campaigns trick users into revealing their passwords, and credential stuffing attacks automate login attempts across services. Two-factor authentication (2FA) adds a second layer of verification that renders stolen passwords useless. </p>
 <br>
-<p>    import pyotp</p>
+<p>2FA Factor Types </p>
 <br>
-<p>    import base64</p>
+<p>| Factor | Examples | Security Level | |--------|----------|----------------| | Knowledge | Password, PIN | Weak | | Possession | Phone, hardware key, authenticator app | Strong | | Inherence | Fingerprint, face scan | Strong | | Location | GPS, IP range | Moderate | | Time | One-time codes | Moderate | </p>
 <br>
-<p>    import os</p>
+<p>Strong 2FA combines something you know (password) with something you have (phone or key). </p>
 <br>
+<p>TOTP (Time-Based One-Time Password) </p>
 <br>
+<p>TOTP is the most widely implemented 2FA method. The client and server share a secret key, and both derive the same 6-8 digit code from the current time. </p>
 <br>
-<p>    class TOTPManager:</p>
+<p>Server-Side Implementation </p>
 <br>
-<p>        def __init__(self):</p>
+<p>import pyotp</p>
 <br>
-<p>            self.issuer = "MyApp"</p>
+<p>import base64</p>
 <br>
+<p>import os</p>
 <br>
+<p>class TOTPManager:</p>
 <br>
-<p>        def generate_secret(self):</p>
+<p>def __init__(self):</p>
 <br>
-<p>            """Generate a new TOTP secret."""</p>
+<p>self.issuer = "MyApp"</p>
 <br>
-<p>            return pyotp.random_base32()</p>
+<p>def generate_secret(self):</p>
 <br>
+<p>"""Generate a new TOTP secret."""</p>
 <br>
+<p>return pyotp.random_base32()</p>
 <br>
-<p>        def get_provisioning_uri(self, username, secret):</p>
+<p>def get_provisioning_uri(self, username, secret):</p>
 <br>
-<p>            """Generate URI for QR code."""</p>
+<p>"""Generate URI for QR code."""</p>
 <br>
-<p>            return pyotp.totp.TOTP(secret).provisioning_uri(</p>
+<p>return pyotp.totp.TOTP(secret).provisioning_uri(</p>
 <br>
-<p>                name=username,</p>
+<p>name=username,</p>
 <br>
-<p>                issuer_name=self.issuer</p>
+<p>issuer_name=self.issuer</p>
 <br>
-<p>            )</p>
+<p>)</p>
 <br>
+<p>def verify_code(self, secret, code):</p>
 <br>
+<p>"""Verify a TOTP code with a 1-step window for clock drift."""</p>
 <br>
-<p>        def verify_code(self, secret, code):</p>
+<p>totp = pyotp.TOTP(secret)</p>
 <br>
-<p>            """Verify a TOTP code with a 1-step window for clock drift."""</p>
+<p>return totp.verify(code, valid_window=1)</p>
 <br>
-<p>            totp = pyotp.TOTP(secret)</p>
+<p>Displaying the QR Code </p>
 <br>
-<p>            return totp.verify(code, valid_window=1)</p>
+<p>import qrcode</p>
 <br>
+<p>import qrcode.image.svg</p>
 <br>
+<p>def render_qr(uri):</p>
 <br>
+<p>img = qrcode.make(uri, image_factory=qrcode.image.svg.SvgImage)</p>
 <br>
-<p>Displaying the QR Code   </p>
+<p>return img.to_string().decode()</p>
 <br>
+<p>Client-Side Setup </p>
 <br>
+<p>// Generate QR in the browser</p>
 <br>
-<p>    import qrcode</p>
+<p>const secret = await generateTOTPSecret();</p>
 <br>
-<p>    import qrcode.image.svg</p>
+<p>const uri = `otpauth://totp/MyApp:${username}?secret=${secret}&issuer;=MyApp`;</p>
 <br>
+<p>// Show QR code</p>
 <br>
+<p>new QRCode(document.getElementById('qrcode'), { text: uri });</p>
 <br>
-<p>    def render_qr(uri):</p>
+<p>// Verify setup</p>
 <br>
-<p>        img = qrcode.make(uri, image_factory=qrcode.image.svg.SvgImage)</p>
+<p>const result = await fetch('/api/2fa/verify', {</p>
 <br>
-<p>        return img.to_string().decode()</p>
+<p>method: 'POST',</p>
 <br>
+<p>body: JSON.stringify({ secret, code: userInputCode })</p>
 <br>
+<p>});</p>
 <br>
+<p>SMS-Based 2FA </p>
 <br>
-<p>Client-Side Setup   </p>
+<p>While less secure than TOTP (vulnerable to SIM swapping), SMS remains widely used due to its simplicity. </p>
 <br>
+<p>import twilio</p>
 <br>
+<p>from twilio.rest import Client</p>
 <br>
-<p>    // Generate QR in the browser</p>
+<p>def send_sms_code(phone_number):</p>
 <br>
-<p>    const secret = await generateTOTPSecret();</p>
+<p>code = ''.join(random.choices('0123456789', k=6))</p>
 <br>
-<p>    const uri = `otpauth://totp/MyApp:${username}?secret=${secret}&issuer=MyApp`;</p>
+<h1>Store code with expiry in Redis</h1>
 <br>
+<p>redis.setex(f"2fa:{phone_number}", 300, code)</p>
 <br>
+<p>client = Client(TWILIO_SID, TWILIO_TOKEN)</p>
 <br>
-<p>    // Show QR code</p>
+<p>client.messages.create(</p>
 <br>
-<p>    new QRCode(document.getElementById('qrcode'), { text: uri });</p>
+<p>body=f"Your verification code is: {code}",</p>
 <br>
+<p>from_=TWILIO_PHONE,</p>
 <br>
+<p>to=phone_number</p>
 <br>
-<p>    // Verify setup</p>
+<p>)</p>
 <br>
-<p>    const result = await fetch('/api/2fa/verify', {</p>
+<p>return code</p>
 <br>
-<p>        method: 'POST',</p>
+<p>Backup Codes </p>
 <br>
-<p>        body: JSON.stringify({ secret, code: userInputCode })</p>
+<p>When users lose access to their 2FA device, backup codes provide a recovery path. Generate 8-10 single-use codes: </p>
 <br>
-<p>    });</p>
+<p>import hashlib</p>
 <br>
+<p>import secrets</p>
 <br>
+<p>def generate_backup_codes(count=10):</p>
 <br>
+<p>codes = []</p>
 <br>
-<p>SMS-Based 2FA   </p>
-<p>While less secure than TOTP (vulnerable to SIM swapping), SMS remains widely used due to its simplicity.   </p>
+<p>hashes = []</p>
 <br>
+<p>for _ in range(count):</p>
 <br>
+<p>code = f"{secrets.randbelow(10**8):08d}"</p>
 <br>
-<p>    import twilio</p>
+<p>codes.append(code)</p>
 <br>
-<p>    from twilio.rest import Client</p>
+<p>hashes.append(hashlib.sha256(code.encode()).hexdigest())</p>
 <br>
+<p>return codes, hashes</p>
 <br>
+<p>Store only the SHA-256 hashes of backup codes in the database. When a user enters a backup code, hash it and compare against stored hashes, then remove the used hash. </p>
 <br>
-<p>    def send_sms_code(phone_number):</p>
+<p>WebAuthn and Passkeys </p>
 <br>
-<p>        code = ''.join(random.choices('0123456789', k=6))</p>
+<p>WebAuthn is the gold standard for 2FA. It uses public-key cryptography: the private key never leaves the user's device, and the server stores only the public key. </p>
 <br>
-<p>        # Store code with expiry in Redis</p>
+<p>Registration </p>
 <br>
-<p>        redis.setex(f"2fa:{phone_number}", 300, code)</p>
+<p>// Server sends challenge</p>
 <br>
+<p>const challenge = await getWebAuthnChallenge();</p>
 <br>
+<p>// Browser creates credential</p>
 <br>
-<p>        client = Client(TWILIO_SID, TWILIO_TOKEN)</p>
+<p>const credential = await navigator.credentials.create({</p>
 <br>
-<p>        client.messages.create(</p>
+<p>publicKey: {</p>
 <br>
-<p>            body=f"Your verification code is: {code}",</p>
+<p>challenge: Uint8Array.from(challenge, c => c.charCodeAt(0)),</p>
 <br>
-<p>            from_=TWILIO_PHONE,</p>
+<p>rp: { name: "MyApp", id: "example.com" },</p>
 <br>
-<p>            to=phone_number</p>
+<p>user: {</p>
 <br>
-<p>        )</p>
+<p>id: Uint8Array.from(userId, c => c.charCodeAt(0)),</p>
 <br>
-<p>        return code</p>
+<p>name: username,</p>
 <br>
+<p>displayName: displayName</p>
 <br>
+<p>},</p>
 <br>
+<p>pubKeyCredParams: [{ type: "public-key", alg: -7 }], // ES256</p>
 <br>
-<p>Backup Codes   </p>
-<p>When users lose access to their 2FA device, backup codes provide a recovery path. Generate 8-10 single-use codes:   </p>
+<p>authenticatorSelection: { userVerification: "required" }</p>
 <br>
+<p>}</p>
 <br>
+<p>});</p>
 <br>
-<p>    import hashlib</p>
+<p>// Send credential to server for storage</p>
 <br>
-<p>    import secrets</p>
+<p>await registerCredential(credential);</p>
 <br>
+<p>Authentication </p>
 <br>
+<p>const assertion = await navigator.credentials.get({</p>
 <br>
-<p>    def generate_backup_codes(count=10):</p>
+<p>publicKey: {</p>
 <br>
-<p>        codes = []</p>
+<p>challenge: Uint8Array.from(challenge, c => c.charCodeAt(0)),</p>
 <br>
-<p>        hashes = []</p>
+<p>allowCredentials: credentials.map(c => ({</p>
 <br>
-<p>        for _ in range(count):</p>
+<p>id: Uint8Array.from(c.credentialId, c => c.charCodeAt(0)),</p>
 <br>
-<p>            code = f"{secrets.randbelow(10**8):08d}"</p>
+<p>type: 'public-key'</p>
 <br>
-<p>            codes.append(code)</p>
+<p>})),</p>
 <br>
-<p>            hashes.append(hashlib.sha256(code.encode()).hexdigest())</p>
+<p>userVerification: 'required'</p>
 <br>
-<p>        return codes, hashes</p>
+<p>}</p>
 <br>
+<p>});</p>
 <br>
+<p>await verifyAssertion(assertion);</p>
 <br>
+<p>Rate Limiting 2FA Attempts </p>
 <br>
-<p>Store only the SHA-256 hashes of backup codes in the database. When a user enters a backup code, hash it and compare against stored hashes, then remove the used hash.   </p>
-<p>WebAuthn and Passkeys   </p>
-<p>WebAuthn is the gold standard for 2FA. It uses public-key cryptography: the private key never leaves the user's device, and the server stores only the public key.   </p>
-<p>Registration   </p>
+<p>2FA endpoints are targets for brute-force attacks. Always rate limit: </p>
 <br>
+<p>| Endpoint | Limit | Window | |----------|-------|--------| | TOTP verification | 5 attempts | 15 minutes | | SMS send | 3 requests | 30 minutes | | Backup code use | 10 attempts | 1 hour | | Recovery request | 3 attempts | 24 hours | </p>
 <br>
-<br>
-<p>    // Server sends challenge</p>
-<br>
-<p>    const challenge = await getWebAuthnChallenge();</p>
-<br>
-<br>
-<br>
-<p>    // Browser creates credential</p>
-<br>
-<p>    const credential = await navigator.credentials.create({</p>
-<br>
-<p>        publicKey: {</p>
-<br>
-<p>            challenge: Uint8Array.from(challenge, c => c.charCodeAt(0)),</p>
-<br>
-<p>            rp: { name: "MyApp", id: "example.com" },</p>
-<br>
-<p>            user: {</p>
-<br>
-<p>                id: Uint8Array.from(userId, c => c.charCodeAt(0)),</p>
-<br>
-<p>                name: username,</p>
-<br>
-<p>                displayName: displayName</p>
-<br>
-<p>            },</p>
-<br>
-<p>            pubKeyCredParams: [{ type: "public-key", alg: -7 }], // ES256</p>
-<br>
-<p>            authenticatorSelection: { userVerification: "required" }</p>
-<br>
-<p>        }</p>
-<br>
-<p>    });</p>
-<br>
-<br>
-<br>
-<p>    // Send credential to server for storage</p>
-<br>
-<p>    await registerCredential(credential);</p>
-<br>
-<br>
-<br>
-<br>
-<p>Authentication   </p>
-<br>
-<br>
-<br>
-<p>    const assertion = await navigator.credentials.get({</p>
-<br>
-<p>        publicKey: {</p>
-<br>
-<p>            challenge: Uint8Array.from(challenge, c => c.charCodeAt(0)),</p>
-<br>
-<p>            allowCredentials: credentials.map(c => ({</p>
-<br>
-<p>                id: Uint8Array.from(c.credentialId, c => c.charCodeAt(0)),</p>
-<br>
-<p>                type: 'public-key'</p>
-<br>
-<p>            })),</p>
-<br>
-<p>            userVerification: 'required'</p>
-<br>
-<p>        }</p>
-<br>
-<p>    });</p>
-<br>
-<br>
-<br>
-<p>    await verifyAssertion(assertion);</p>
-<br>
-<br>
-<br>
-<br>
-<p>Rate Limiting 2FA Attempts   </p>
-<p>2FA endpoints are targets for brute-force attacks. Always rate limit:   </p>
-<p>| Endpoint | Limit | Window | |----------|-------|--------| | TOTP verification | 5 attempts | 15 minutes | | SMS send | 3 requests | 30 minutes | | Backup code use | 10 attempts | 1 hour | | Recovery request | 3 attempts | 24 hours |   </p>
-<p>User Experience Best Practices   </p>
+<p>User Experience Best Practices </p>
 <br>
 <p>* Allow users to register multiple 2FA methods (TOTP + backup codes + passkey).</p>
+<br>
 <p>* Provide a recovery workflow with backup codes during initial setup.</p>
+<br>
 <p>* Remember trusted devices with a cookie so 2FA is not required on every login.</p>
+<br>
 <p>* Send notification emails when 2FA is enabled, disabled, or recovery codes are used.</p>
+<br>
 <p>* Show which 2FA methods are registered in the security settings page.</p>
 <br>
-<p>Summary   </p>
+<p>Summary </p>
+<br>
 <p>Implement TOTP as the primary 2FA method, supplement with backup codes for recovery, and offer WebAuthn/passkeys as an upgrade path for security-conscious users. Always rate limit 2FA endpoints, hash backup codes before storage, and provide clear recovery workflows. SMS-based 2FA is better than no 2FA but should be deprecated in favor of app-based or hardware-based authenticators.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/helm-kubernetes-package-management.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Helm Charts: Kubernetes Package Management">
     <meta name="twitter:description" content="A comprehensive guide to Helm chart structure, templates, values management, dependency handling, and CI/CD integration for Kubernetes deployments.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/helm-kubernetes-package-management.png">
     <title>Helm Charts: Kubernetes Package Management — SourceHub</title>
     <meta name="description" content="A comprehensive guide to Helm chart structure, templates, values management, dependency handling, and CI/CD integration for Kubernetes deployments.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,15 +38,15 @@
       "@type": "Article",
       "headline": "Helm Charts: Kubernetes Package Management",
       "description": "A comprehensive guide to Helm chart structure, templates, values management, dependency handling, and CI/CD integration for Kubernetes deployments.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/helm-kubernetes-package-management.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2146",
+      "wordCount": "1762",
       "keywords": "Technology, Programming, DevOps",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/helm-kubernetes-package-management.html"},
-      "articleBody": "Helm Charts: Kubernetes Package Management Introduction Helm is the de facto package manager for Kubernetes, enabling developers to define, install, and upgrade complex applications through reusable chart packages. A single Helm chart can encapsulate dozens of Kubernetes resources into a versioned, configurable unit that can be deployed across multiple environments with minimal repetition. This guide covers advanced Helm concepts including chart structure, templating, dependency management, CI/CD integration, and enterprise best practices. Chart Structure A well-organized Helm chart follows a standard directory layout: my-app/ Chart.yaml # Metadata: name, version, dependencies values.yaml # Default configuration values values.schema.json # JSON Schema for values validation charts/ # Sub-charts (managed by helm dependency) templates/ # Go template YAML files _helpers.tpl # Named template definitions deployment.yaml service.yaml ingress.yaml hpa.yaml tests/ # Test pods for chart validation test-connection.yaml crds/ # Custom Resource Definitions README.md The `Chart.yaml` file defines metadata and dependencies: apiVersion: v2 name: my-app description: A production-grade web application version: 1.2.3 appVersion: 2.0.0 kubeVersion: \">=1.25.0-0\" type: application dependencies: - name: postgresql version: \"12.x\" repository: https://charts.bitnami.com/bitnami condition: postgresql.enabled - name: redis version: \"18.x\" repository: https://charts.bitnami.com/bitnami condition: redis.enabled Advanced Templating Helm uses Go templates with the Sprig function library for dynamic resource generation. Beyond simple variable substitution, you can implement complex logic: {{- /* Conditional resource creation */}} {{- if .Values.ingress.enabled }} apiVersion: networking.k8s.io/v1 kind: Ingress metadata: name: {{ include \"my-app.fullname\" . }} annotations: {{- toYaml .Values.ingress.annotations | nindent 4 }} spec: ingressClassName: {{ .Values.ingress.className }} rules: {{- range .Values.ingress.hosts }} - host: {{ .host | quote }} http: paths: {{- range .paths }} - path: {{ .path }} pathType: {{ .pathType }} backend: service: name: {{ include \"my-app.fullname\" $ }} port: number: {{ $.Values.service.port }} {{- end }} {{- end }} {{- end }} Named templates in `_helpers.tpl` promote reuse: {{- define \"my-app.labels\" -}} app.kubernetes.io/name: {{ include \"my-app.name\" . }} app.kubernetes.io/instance: {{ .Release.Name }} app.kubernetes.io/version: {{ .Chart.AppVersion }} app.kubernetes.io/managed-by: {{ .Release.Service }} helm.sh/chart: {{ include \"my-app.chart\" . }} {{- end -}} {{- define \"my-app.probe\" -}} initialDelaySeconds: {{ .initialDelay | default 5 }} periodSeconds: {{ .period | default 10 }} timeoutSeconds: {{ .timeout | default 3 }} successThreshold: {{ .successThreshold | default 1 }} failureThreshold: {{ .failureThreshold | default 3 }} {{- end -}} Values Management and Validation JSON Schema validation catches configuration errors early: { \"$schema\": \"https://json-schema.org/draft-07/schema#\", \"type\": \"object\", \"properties\": { \"replicaCount\": { \"type\": \"integer\", \"minimum\": 1, \"maximum\": 100 }, \"image\": { \"type\": \"object\", \"properties\": { \"repository\": { \"type\": \"string\" }, \"tag\": { \"type\": \"string\", \"pattern\": \"^v?[0-9]\" }, \"pullPolicy\": { \"type\": \"string\", \"enum\": [\"Always\", \"IfNotPresent\", \"Never\"] } }, \"required\": [\"repository\"] }, \"resources\": { \"type\": \"object\", \"properties\": { \"limits\": { \"$ref\": \"#/$defs/ResourceSpec\" }, \"requests\": { \"$ref\": \"#/$defs/ResourceSpec\" } } } }, \"required\": [\"image\", \"replicaCount\"] } Environment-specific overrides keep values DRY: # values.yaml (defaults) replicaCount: 1 image: tag: latest # values-staging.yaml replicaCount: 2 image: tag: staging-abc123 ingress: enabled: true hosts: - host: staging.my-app.com # values-production.yaml replicaCount: 6 image: tag: v2.0.0 resources: limits: cpu: 2 memory: 4Gi requests: cpu: 1 memory: 2Gi ingress: enabled: true hosts: - host: my-app.com - host: www.my-app.com Dependency Management Lock dependency versions with `Chart.lock`: helm dependency update ./charts/my-app Use alias and condition fields for environment-optimized dependencies: dependencies: - name: postgresql alias: primary-db version: \"12.x\" repository: https://charts.bitnami.com/bitnami condition: primary-db.enabled - name: postgresql alias: replica-db version: \"12.x\" repository: https://charts.bitnami.com/bitnami condition: replica-db.enabled CI/CD Integration Integrate Helm linting and testing into pipelines: # .github/workflows/helm-release.yml name: Helm Release on: push: branches: [main] jobs: lint: runs-on: ubuntu-latest steps: - uses: actions/checkout@v4 - uses: azure/setup-helm@v3 with: version: \"v3.14.0\" - run: helm lint ./charts/my-app - run: helm template --validate ./charts/my-app release: needs: lint runs-on: ubuntu-latest steps: - uses: actions/checkout@v4 - uses: azure/setup-helm@v3 - name: Package and push to OCI registry run: | helm package ./charts/my-app helm push my-app-*.tgz oci://ghcr.io/${{ github.repository }}/charts Chart Versioning and Publishing Use OCI registries for chart distribution: # Login and push helm registry login ghcr.io -u $USER helm push my-app-1.2.3.tgz oci://ghcr.io/my-org/charts # Install from OCI helm install my-app oci://ghcr.io/my-org/charts/my-app --version 1.2.3 Follow semantic versioning strictly. Breaking template changes require a major version bump, as `helm upgrade` must never silently break deployed resources. Best Practices * **Use `helm create` scaffolds** as a starting point but customize helpers aggressively. * **Validate in CI**: run `helm lint`, `helm template --validate`, and `kubeconform` on every PR. * **Unit test templates**: use the `helm-unittest` plugin to test template output without a cluster. * **Library charts**: extract common helpers into a library chart (`type: library`) shared across microservices. * **Avoid sprints in templates**: complex logic belongs in application code, not chart templates. * **Resource policy annotations**: use `helm.sh/resource-policy: keep` sparingly and document its use. Helm remains the most widely adopted packaging tool in the Kubernetes ecosystem, and mastering its advanced features is essential for operating production-grade workloads at scale."
+      "articleBody": "Helm Charts: Kubernetes Package Management Helm Charts: Kubernetes Package Management Introduction Helm is the de facto package manager for Kubernetes, enabling developers to define, install, and upgrade complex applications through reusable chart packages. A single Helm chart can encapsulate dozens of Kubernetes resources into a versioned, configurable unit that can be deployed across multiple environments with minimal repetition. This guide covers advanced Helm concepts including chart structure, templating, dependency management, CI/CD integration, and enterprise best practices. Chart Structure A well-organized Helm chart follows a standard directory layout: my-app/ Chart.yaml # Metadata: name, version, dependencies values.yaml # Default configuration values values.schema.json # JSON Schema for values validation charts/ # Sub-charts (managed by helm dependency) templates/ # Go template YAML files _helpers.tpl # Named template definitions deployment.yaml service.yaml ingress.yaml hpa.yaml tests/ # Test pods for chart validation test-connection.yaml crds/ # Custom Resource Definitions README.md The `Chart.yaml` file defines metadata and dependencies: apiVersion: v2 name: my-app description: A production-grade web application version: 1.2.3 appVersion: 2.0.0 kubeVersion: \">=1.25.0-0\" type: application dependencies: \\- name: postgresql version: \"12.x\" repository: https://charts.bitnami.com/bitnami condition: postgresql.enabled \\- name: redis version: \"18.x\" repository: https://charts.bitnami.com/bitnami condition: redis.enabled Advanced Templating Helm uses Go templates with the Sprig function library for dynamic resource generation. Beyond simple variable substitution, you can implement complex logic: {{- /* Conditional resource creation */}} {{- if .Values.ingress.enabled }} apiVersion: networking.k8s.io/v1 kind: Ingress metadata: name: {{ include \"my-app.fullname\" . }} annotations: {{- toYaml .Values.ingress.annotations | nindent 4 }} spec: ingressClassName: {{ .Values.ingress.className }} rules: {{- range .Values.ingress.hosts }} \\- host: {{ .host | quote }} http: paths: {{- range .paths }} \\- path: {{ .path }} pathType: {{ .pathType }} backend: service: name: {{ include \"my-app.fullname\" $ }} port: number: {{ $.Values.service.port }} {{- end }} {{- end }} {{- end }} Named templates in `_helpers.tpl` promote reuse: {{- define \"my-app.labels\" -}} app.kubernetes.io/name: {{ include \"my-app.name\" . }} app.kubernetes.io/instance: {{ .Release.Name }} app.kubernetes.io/version: {{ .Chart.AppVersion }} app.kubernetes.io/managed-by: {{ .Release.Service }} helm.sh/chart: {{ include \"my-app.chart\" . }} {{- end -}} {{- define \"my-app.probe\" -}} initialDelaySeconds: {{ .initialDelay | default 5 }} periodSeconds: {{ .period | default 10 }} timeoutSeconds: {{ .timeout | default 3 }} successThreshold: {{ .successThreshold | default 1 }} failureThreshold: {{ .failureThreshold | default 3 }} {{- end -}} Values Management and Validation JSON Schema validation catches configuration errors early: { \"$schema\": \"https://json-schema.org/draft-07/schema#\", \"type\": \"object\", \"properties\": { \"replicaCount\": { \"type\": \"integer\", \"minimum\": 1, \"maximum\": 100 }, \"image\": { \"type\": \"object\", \"properties\": { \"repository\": { \"type\": \"string\" }, \"tag\": { \"type\": \"string\", \"pattern\": \"^v?[0-9]\" }, \"pullPolicy\": { \"type\": \"string\", \"enum\": [\"Always\", \"IfNotPresent\", \"Never\"] } }, \"required\": [\"repository\"] }, \"resources\": { \"type\": \"object\", \"properties\": { \"limits\": { \"$ref\": \"#/$defs/ResourceSpec\" }, \"requests\": { \"$ref\": \"#/$defs/ResourceSpec\" } } } }, \"required\": [\"image\", \"replicaCount\"] } Environment-specific overrides keep values DRY: values.yaml (defaults) replicaCount: 1 image: tag: latest values-staging.yaml replicaCount: 2 image: tag: staging-abc123 ingress: enabled: true hosts: \\- host: staging.my-app.com values-production.yaml replicaCount: 6 image: tag: v2.0.0 resources: limits: cpu: 2 memory: 4Gi requests: cpu: 1 memory: 2Gi ingress: enabled: true hosts: \\- host: my-app.com \\- host: www.my-app.com Dependency Management Lock dependency versions with `Chart.lock`: helm dependency update ./charts/my-app Use alias and condition fields for environment-optimized dependencies: dependencies: \\- name: postgresql alias: primary-db version: \"12.x\" repository: https://charts.bitnami.com/bitnami condition: primary-db.enabled \\- name: postgresql alias: replica-db version: \"12.x\" repository: https://charts.bitnami.com/bitnami condition: replica-db.enabled CI/CD Integration Integrate Helm linting and testing into pipelines: .github/workflows/helm-release.yml name: Helm Release on: push: branches: [main] jobs: lint: runs-on: ubuntu-latest steps: \\- uses: actions/checkout@v4 \\- uses: azure/setup-helm@v3 with: version: \"v3.14.0\" \\- run: helm lint ./charts/my-app \\- run: helm template --validate ./charts/my-app release: needs: lint runs-on: ubuntu-latest steps: \\- uses: actions/checkout@v4 \\- uses: azure/setup-helm@v3 \\- name: Package and push to OCI registry run: | helm package ./charts/my-app helm push my-app-*.tgz oci://ghcr.io/${{ github.repository }}/charts Chart Versioning and Publishing Use OCI registries for chart distribution: Login and push helm registry login ghcr.io -u $USER helm push my-app-1.2.3.tgz oci://ghcr.io/my-org/charts Install from OCI helm install my-app oci://ghcr.io/my-org/charts/my-app --version 1.2.3 Follow semantic versioning strictly. Breaking template changes require a major version bump, as `helm upgrade` must never silently break deployed resources. Best Practices * **Use `helm create` scaffolds** as a starting point but customize helpers aggressively. * **Validate in CI**: run `helm lint`, `helm template --validate`, and `kubeconform` on every PR. * **Unit test templates**: use the `helm-unittest` plugin to test template output without a cluster. * **Library charts**: extract common helpers into a library chart (`type: library`) shared across microservices. * **Avoid sprints in templates**: complex logic belongs in application code, not chart templates. * **Resource policy annotations**: use `helm.sh/resource-policy: keep` sparingly and document its use. Helm remains the most widely adopted packaging tool in the Kubernetes ecosystem, and mastering its advanced features is essential for operating production-grade workloads at scale."
     }
     </script>
     <script type="application/ld+json">
@@ -75,534 +75,408 @@
         <span class="tag-cat">DevOps</span></div>
       <h1 class="article-title">Helm Charts: Kubernetes Package Management</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/helm-kubernetes-package-management.png" alt="Helm Charts: Kubernetes Package Management" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Helm Charts: Kubernetes Package Management</h1>
+<br>
+<h1>Helm Charts: Kubernetes Package Management</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Helm is the de facto package manager for Kubernetes, enabling developers to define, install, and upgrade complex applications through reusable chart packages. A single Helm chart can encapsulate dozens of Kubernetes resources into a versioned, configurable unit that can be deployed across multiple environments with minimal repetition.</p>
-<br>
-<br>
-<br>
 <br>
 <p>This guide covers advanced Helm concepts including chart structure, templating, dependency management, CI/CD integration, and enterprise best practices.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Chart Structure</h2>
-<br>
-<br>
-<br>
 <br>
 <p>A well-organized Helm chart follows a standard directory layout:</p>
 <br>
+<p>my-app/</p>
 <br>
+<p>Chart.yaml # Metadata: name, version, dependencies</p>
 <br>
+<p>values.yaml # Default configuration values</p>
 <br>
+<p>values.schema.json # JSON Schema for values validation</p>
 <br>
-<p>    my-app/</p>
+<p>charts/ # Sub-charts (managed by helm dependency)</p>
 <br>
-<p>      Chart.yaml          # Metadata: name, version, dependencies</p>
+<p>templates/ # Go template YAML files</p>
 <br>
-<p>      values.yaml         # Default configuration values</p>
+<p>_helpers.tpl # Named template definitions</p>
 <br>
-<p>      values.schema.json  # JSON Schema for values validation</p>
+<p>deployment.yaml</p>
 <br>
-<p>      charts/             # Sub-charts (managed by helm dependency)</p>
+<p>service.yaml</p>
 <br>
-<p>      templates/          # Go template YAML files</p>
+<p>ingress.yaml</p>
 <br>
-<p>        _helpers.tpl      # Named template definitions</p>
+<p>hpa.yaml</p>
 <br>
-<p>        deployment.yaml</p>
+<p>tests/ # Test pods for chart validation</p>
 <br>
-<p>        service.yaml</p>
+<p>test-connection.yaml</p>
 <br>
-<p>        ingress.yaml</p>
+<p>crds/ # Custom Resource Definitions</p>
 <br>
-<p>        hpa.yaml</p>
-<br>
-<p>        tests/            # Test pods for chart validation</p>
-<br>
-<p>          test-connection.yaml</p>
-<br>
-<p>      crds/               # Custom Resource Definitions</p>
-<br>
-<p>      README.md</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>README.md</p>
 <br>
 <p>The `Chart.yaml` file defines metadata and dependencies:</p>
 <br>
+<p>apiVersion: v2</p>
 <br>
+<p>name: my-app</p>
 <br>
+<p>description: A production-grade web application</p>
 <br>
+<p>version: 1.2.3</p>
 <br>
-<p>    apiVersion: v2</p>
+<p>appVersion: 2.0.0</p>
 <br>
-<p>    name: my-app</p>
+<p>kubeVersion: ">=1.25.0-0"</p>
 <br>
-<p>    description: A production-grade web application</p>
+<p>type: application</p>
 <br>
-<p>    version: 1.2.3</p>
+<p>dependencies:</p>
 <br>
-<p>    appVersion: 2.0.0</p>
+<p>\- name: postgresql</p>
 <br>
-<p>    kubeVersion: ">=1.25.0-0"</p>
+<p>version: "12.x"</p>
 <br>
-<p>    type: application</p>
+<p>repository: https://charts.bitnami.com/bitnami</p>
 <br>
-<p>    dependencies:</p>
+<p>condition: postgresql.enabled</p>
 <br>
-<p>      - name: postgresql</p>
+<p>\- name: redis</p>
 <br>
-<p>        version: "12.x"</p>
+<p>version: "18.x"</p>
 <br>
-<p>        repository: https://charts.bitnami.com/bitnami</p>
+<p>repository: https://charts.bitnami.com/bitnami</p>
 <br>
-<p>        condition: postgresql.enabled</p>
-<br>
-<p>      - name: redis</p>
-<br>
-<p>        version: "18.x"</p>
-<br>
-<p>        repository: https://charts.bitnami.com/bitnami</p>
-<br>
-<p>        condition: redis.enabled</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>condition: redis.enabled</p>
 <br>
 <h2>  Advanced Templating</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Helm uses Go templates with the Sprig function library for dynamic resource generation. Beyond simple variable substitution, you can implement complex logic:</p>
 <br>
+<p>{{- /* Conditional resource creation */}}</p>
 <br>
+<p>{{- if .Values.ingress.enabled }}</p>
 <br>
+<p>apiVersion: networking.k8s.io/v1</p>
 <br>
+<p>kind: Ingress</p>
 <br>
-<p>    {{- /* Conditional resource creation */}}</p>
+<p>metadata:</p>
 <br>
-<p>    {{- if .Values.ingress.enabled }}</p>
+<p>name: {{ include "my-app.fullname" . }}</p>
 <br>
-<p>    apiVersion: networking.k8s.io/v1</p>
+<p>annotations:</p>
 <br>
-<p>    kind: Ingress</p>
+<p>{{- toYaml .Values.ingress.annotations | nindent 4 }}</p>
 <br>
-<p>    metadata:</p>
+<p>spec:</p>
 <br>
-<p>      name: {{ include "my-app.fullname" . }}</p>
+<p>ingressClassName: {{ .Values.ingress.className }}</p>
 <br>
-<p>      annotations:</p>
+<p>rules:</p>
 <br>
-<p>        {{- toYaml .Values.ingress.annotations | nindent 4 }}</p>
+<p>{{- range .Values.ingress.hosts }}</p>
 <br>
-<p>    spec:</p>
+<p>\- host: {{ .host | quote }}</p>
 <br>
-<p>      ingressClassName: {{ .Values.ingress.className }}</p>
+<p>http:</p>
 <br>
-<p>      rules:</p>
+<p>paths:</p>
 <br>
-<p>        {{- range .Values.ingress.hosts }}</p>
+<p>{{- range .paths }}</p>
 <br>
-<p>        - host: {{ .host | quote }}</p>
+<p>\- path: {{ .path }}</p>
 <br>
-<p>          http:</p>
+<p>pathType: {{ .pathType }}</p>
 <br>
-<p>            paths:</p>
+<p>backend:</p>
 <br>
-<p>              {{- range .paths }}</p>
+<p>service:</p>
 <br>
-<p>              - path: {{ .path }}</p>
+<p>name: {{ include "my-app.fullname" $ }}</p>
 <br>
-<p>                pathType: {{ .pathType }}</p>
+<p>port:</p>
 <br>
-<p>                backend:</p>
+<p>number: {{ $.Values.service.port }}</p>
 <br>
-<p>                  service:</p>
+<p>{{- end }}</p>
 <br>
-<p>                    name: {{ include "my-app.fullname" $ }}</p>
+<p>{{- end }}</p>
 <br>
-<p>                    port:</p>
-<br>
-<p>                      number: {{ $.Values.service.port }}</p>
-<br>
-<p>              {{- end }}</p>
-<br>
-<p>        {{- end }}</p>
-<br>
-<p>    {{- end }}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>{{- end }}</p>
 <br>
 <p>Named templates in `_helpers.tpl` promote reuse:</p>
 <br>
+<p>{{- define "my-app.labels" -}}</p>
 <br>
+<p>app.kubernetes.io/name: {{ include "my-app.name" . }}</p>
 <br>
+<p>app.kubernetes.io/instance: {{ .Release.Name }}</p>
 <br>
+<p>app.kubernetes.io/version: {{ .Chart.AppVersion }}</p>
 <br>
-<p>    {{- define "my-app.labels" -}}</p>
+<p>app.kubernetes.io/managed-by: {{ .Release.Service }}</p>
 <br>
-<p>    app.kubernetes.io/name: {{ include "my-app.name" . }}</p>
+<p>helm.sh/chart: {{ include "my-app.chart" . }}</p>
 <br>
-<p>    app.kubernetes.io/instance: {{ .Release.Name }}</p>
+<p>{{- end -}}</p>
 <br>
-<p>    app.kubernetes.io/version: {{ .Chart.AppVersion }}</p>
+<p>{{- define "my-app.probe" -}}</p>
 <br>
-<p>    app.kubernetes.io/managed-by: {{ .Release.Service }}</p>
+<p>initialDelaySeconds: {{ .initialDelay | default 5 }}</p>
 <br>
-<p>    helm.sh/chart: {{ include "my-app.chart" . }}</p>
+<p>periodSeconds: {{ .period | default 10 }}</p>
 <br>
-<p>    {{- end -}}</p>
+<p>timeoutSeconds: {{ .timeout | default 3 }}</p>
 <br>
+<p>successThreshold: {{ .successThreshold | default 1 }}</p>
 <br>
+<p>failureThreshold: {{ .failureThreshold | default 3 }}</p>
 <br>
-<p>    {{- define "my-app.probe" -}}</p>
-<br>
-<p>    initialDelaySeconds: {{ .initialDelay | default 5 }}</p>
-<br>
-<p>    periodSeconds: {{ .period | default 10 }}</p>
-<br>
-<p>    timeoutSeconds: {{ .timeout | default 3 }}</p>
-<br>
-<p>    successThreshold: {{ .successThreshold | default 1 }}</p>
-<br>
-<p>    failureThreshold: {{ .failureThreshold | default 3 }}</p>
-<br>
-<p>    {{- end -}}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>{{- end -}}</p>
 <br>
 <h2>  Values Management and Validation</h2>
 <br>
-<br>
-<br>
-<br>
 <p>JSON Schema validation catches configuration errors early:</p>
 <br>
+<p>{</p>
 <br>
+<p>"$schema": "https://json-schema.org/draft-07/schema#",</p>
 <br>
+<p>"type": "object",</p>
 <br>
+<p>"properties": {</p>
 <br>
-<p>    {</p>
+<p>"replicaCount": {</p>
 <br>
-<p>      "$schema": "https://json-schema.org/draft-07/schema#",</p>
+<p>"type": "integer",</p>
 <br>
-<p>      "type": "object",</p>
+<p>"minimum": 1,</p>
 <br>
-<p>      "properties": {</p>
+<p>"maximum": 100</p>
 <br>
-<p>        "replicaCount": {</p>
+<p>},</p>
 <br>
-<p>          "type": "integer",</p>
+<p>"image": {</p>
 <br>
-<p>          "minimum": 1,</p>
+<p>"type": "object",</p>
 <br>
-<p>          "maximum": 100</p>
+<p>"properties": {</p>
 <br>
-<p>        },</p>
+<p>"repository": { "type": "string" },</p>
 <br>
-<p>        "image": {</p>
+<p>"tag": { "type": "string", "pattern": "^v?[0-9]" },</p>
 <br>
-<p>          "type": "object",</p>
+<p>"pullPolicy": {</p>
 <br>
-<p>          "properties": {</p>
+<p>"type": "string",</p>
 <br>
-<p>            "repository": { "type": "string" },</p>
+<p>"enum": ["Always", "IfNotPresent", "Never"]</p>
 <br>
-<p>            "tag": { "type": "string", "pattern": "^v?[0-9]" },</p>
+<p>}</p>
 <br>
-<p>            "pullPolicy": {</p>
+<p>},</p>
 <br>
-<p>              "type": "string",</p>
+<p>"required": ["repository"]</p>
 <br>
-<p>              "enum": ["Always", "IfNotPresent", "Never"]</p>
+<p>},</p>
 <br>
-<p>            }</p>
+<p>"resources": {</p>
 <br>
-<p>          },</p>
+<p>"type": "object",</p>
 <br>
-<p>          "required": ["repository"]</p>
+<p>"properties": {</p>
 <br>
-<p>        },</p>
+<p>"limits": { "$ref": "#/$defs/ResourceSpec" },</p>
 <br>
-<p>        "resources": {</p>
+<p>"requests": { "$ref": "#/$defs/ResourceSpec" }</p>
 <br>
-<p>          "type": "object",</p>
+<p>}</p>
 <br>
-<p>          "properties": {</p>
+<p>}</p>
 <br>
-<p>            "limits": { "$ref": "#/$defs/ResourceSpec" },</p>
+<p>},</p>
 <br>
-<p>            "requests": { "$ref": "#/$defs/ResourceSpec" }</p>
+<p>"required": ["image", "replicaCount"]</p>
 <br>
-<p>          }</p>
-<br>
-<p>        }</p>
-<br>
-<p>      },</p>
-<br>
-<p>      "required": ["image", "replicaCount"]</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <p>Environment-specific overrides keep values DRY:</p>
 <br>
+<h1>values.yaml (defaults)</h1>
 <br>
+<p>replicaCount: 1</p>
 <br>
+<p>image:</p>
 <br>
+<p>tag: latest</p>
 <br>
-<p>    # values.yaml (defaults)</p>
+<h1>values-staging.yaml</h1>
 <br>
-<p>    replicaCount: 1</p>
+<p>replicaCount: 2</p>
 <br>
-<p>    image:</p>
+<p>image:</p>
 <br>
-<p>      tag: latest</p>
+<p>tag: staging-abc123</p>
 <br>
+<p>ingress:</p>
 <br>
+<p>enabled: true</p>
 <br>
-<p>    # values-staging.yaml</p>
+<p>hosts:</p>
 <br>
-<p>    replicaCount: 2</p>
+<p>\- host: staging.my-app.com</p>
 <br>
-<p>    image:</p>
+<h1>values-production.yaml</h1>
 <br>
-<p>      tag: staging-abc123</p>
+<p>replicaCount: 6</p>
 <br>
-<p>    ingress:</p>
+<p>image:</p>
 <br>
-<p>      enabled: true</p>
+<p>tag: v2.0.0</p>
 <br>
-<p>      hosts:</p>
+<p>resources:</p>
 <br>
-<p>        - host: staging.my-app.com</p>
+<p>limits:</p>
 <br>
+<p>cpu: 2</p>
 <br>
+<p>memory: 4Gi</p>
 <br>
-<p>    # values-production.yaml</p>
+<p>requests:</p>
 <br>
-<p>    replicaCount: 6</p>
+<p>cpu: 1</p>
 <br>
-<p>    image:</p>
+<p>memory: 2Gi</p>
 <br>
-<p>      tag: v2.0.0</p>
+<p>ingress:</p>
 <br>
-<p>    resources:</p>
+<p>enabled: true</p>
 <br>
-<p>      limits:</p>
+<p>hosts:</p>
 <br>
-<p>        cpu: 2</p>
+<p>\- host: my-app.com</p>
 <br>
-<p>        memory: 4Gi</p>
-<br>
-<p>      requests:</p>
-<br>
-<p>        cpu: 1</p>
-<br>
-<p>        memory: 2Gi</p>
-<br>
-<p>    ingress:</p>
-<br>
-<p>      enabled: true</p>
-<br>
-<p>      hosts:</p>
-<br>
-<p>        - host: my-app.com</p>
-<br>
-<p>        - host: www.my-app.com</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>\- host: www.my-app.com</p>
 <br>
 <h2>  Dependency Management</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Lock dependency versions with `Chart.lock`:</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<p>    helm dependency update ./charts/my-app</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>helm dependency update ./charts/my-app</p>
 <br>
 <p>Use alias and condition fields for environment-optimized dependencies:</p>
 <br>
+<p>dependencies:</p>
 <br>
+<p>\- name: postgresql</p>
 <br>
+<p>alias: primary-db</p>
 <br>
+<p>version: "12.x"</p>
 <br>
-<p>    dependencies:</p>
+<p>repository: https://charts.bitnami.com/bitnami</p>
 <br>
-<p>      - name: postgresql</p>
+<p>condition: primary-db.enabled</p>
 <br>
-<p>        alias: primary-db</p>
+<p>\- name: postgresql</p>
 <br>
-<p>        version: "12.x"</p>
+<p>alias: replica-db</p>
 <br>
-<p>        repository: https://charts.bitnami.com/bitnami</p>
+<p>version: "12.x"</p>
 <br>
-<p>        condition: primary-db.enabled</p>
+<p>repository: https://charts.bitnami.com/bitnami</p>
 <br>
-<p>      - name: postgresql</p>
-<br>
-<p>        alias: replica-db</p>
-<br>
-<p>        version: "12.x"</p>
-<br>
-<p>        repository: https://charts.bitnami.com/bitnami</p>
-<br>
-<p>        condition: replica-db.enabled</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>condition: replica-db.enabled</p>
 <br>
 <h2>  CI/CD Integration</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Integrate Helm linting and testing into pipelines:</p>
 <br>
+<h1>.github/workflows/helm-release.yml</h1>
 <br>
+<p>name: Helm Release</p>
 <br>
+<p>on:</p>
 <br>
+<p>push:</p>
 <br>
-<p>    # .github/workflows/helm-release.yml</p>
+<p>branches: [main]</p>
 <br>
-<p>    name: Helm Release</p>
+<p>jobs:</p>
 <br>
-<p>    on:</p>
+<p>lint:</p>
 <br>
-<p>      push:</p>
+<p>runs-on: ubuntu-latest</p>
 <br>
-<p>        branches: [main]</p>
+<p>steps:</p>
 <br>
-<p>    jobs:</p>
+<p>\- uses: actions/checkout@v4</p>
 <br>
-<p>      lint:</p>
+<p>\- uses: azure/setup-helm@v3</p>
 <br>
-<p>        runs-on: ubuntu-latest</p>
+<p>with:</p>
 <br>
-<p>        steps:</p>
+<p>version: "v3.14.0"</p>
 <br>
-<p>          - uses: actions/checkout@v4</p>
+<p>\- run: helm lint ./charts/my-app</p>
 <br>
-<p>          - uses: azure/setup-helm@v3</p>
+<p>\- run: helm template --validate ./charts/my-app</p>
 <br>
-<p>            with:</p>
+<p>release:</p>
 <br>
-<p>              version: "v3.14.0"</p>
+<p>needs: lint</p>
 <br>
-<p>          - run: helm lint ./charts/my-app</p>
+<p>runs-on: ubuntu-latest</p>
 <br>
-<p>          - run: helm template --validate ./charts/my-app</p>
+<p>steps:</p>
 <br>
+<p>\- uses: actions/checkout@v4</p>
 <br>
+<p>\- uses: azure/setup-helm@v3</p>
 <br>
-<p>      release:</p>
+<p>\- name: Package and push to OCI registry</p>
 <br>
-<p>        needs: lint</p>
+<p>run: |</p>
 <br>
-<p>        runs-on: ubuntu-latest</p>
+<p>helm package ./charts/my-app</p>
 <br>
-<p>        steps:</p>
-<br>
-<p>          - uses: actions/checkout@v4</p>
-<br>
-<p>          - uses: azure/setup-helm@v3</p>
-<br>
-<p>          - name: Package and push to OCI registry</p>
-<br>
-<p>            run: |</p>
-<br>
-<p>              helm package ./charts/my-app</p>
-<br>
-<p>              helm push my-app-*.tgz oci://ghcr.io/${{ github.repository }}/charts</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>helm push my-app-*.tgz oci://ghcr.io/${{ github.repository }}/charts</p>
 <br>
 <h2>  Chart Versioning and Publishing</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Use OCI registries for chart distribution:</p>
 <br>
+<h1>Login and push</h1>
 <br>
+<p>helm registry login ghcr.io -u $USER</p>
 <br>
+<p>helm push my-app-1.2.3.tgz oci://ghcr.io/my-org/charts</p>
 <br>
+<h1>Install from OCI</h1>
 <br>
-<p>    # Login and push</p>
-<br>
-<p>    helm registry login ghcr.io -u $USER</p>
-<br>
-<p>    helm push my-app-1.2.3.tgz oci://ghcr.io/my-org/charts</p>
-<br>
-<br>
-<br>
-<p>    # Install from OCI</p>
-<br>
-<p>    helm install my-app oci://ghcr.io/my-org/charts/my-app --version 1.2.3</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>helm install my-app oci://ghcr.io/my-org/charts/my-app --version 1.2.3</p>
 <br>
 <p>Follow semantic versioning strictly. Breaking template changes require a major version bump, as `helm upgrade` must never silently break deployed resources.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Best Practices</h2>
 <br>
-<br>
-<br>
 <p>* **Use `helm create` scaffolds** as a starting point but customize helpers aggressively.</p>
+<br>
 <p>* **Validate in CI**: run `helm lint`, `helm template --validate`, and `kubeconform` on every PR.</p>
+<br>
 <p>* **Unit test templates**: use the `helm-unittest` plugin to test template output without a cluster.</p>
+<br>
 <p>* **Library charts**: extract common helpers into a library chart (`type: library`) shared across microservices.</p>
+<br>
 <p>* **Avoid sprints in templates**: complex logic belongs in application code, not chart templates.</p>
+<br>
 <p>* **Resource policy annotations**: use `helm.sh/resource-policy: keep` sparingly and document its use.</p>
-<br>
-<br>
 <br>
 <p>Helm remains the most widely adopted packaging tool in the Kubernetes ecosystem, and mastering its advanced features is essential for operating production-grade workloads at scale.</p></div>
     </article>

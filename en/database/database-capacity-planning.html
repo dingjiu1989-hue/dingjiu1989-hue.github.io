@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-capacity-planning.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Capacity Planning: Sizing, Growth Forecasting, and Scaling">
     <meta name="twitter:description" content="Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monitoring key metrics, and scaling strategies for PostgreSQL.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-capacity-planning.png">
     <title>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling — SourceHub</title>
     <meta name="description" content="Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monitoring key metrics, and scaling strategies for PostgreSQL.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Database Capacity Planning: Sizing, Growth Forecasting, and Scaling",
       "description": "Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monitoring key metrics, and scaling strategies for PostgreSQL.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-capacity-planning.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1853",
+      "wordCount": "1763",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,6 +75,7 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-capacity-planning.png" alt="Database Capacity Planning: Sizing, Growth Forecasting, and Scaling" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h1>
 <br>
 <p>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling   </p>
@@ -82,8 +83,6 @@
 <p>Key Capacity Metrics   </p>
 <p>Storage   </p>
 <p>Storage is the most predictable resource to plan. Track:   </p>
-<br>
-<br>
 <br>
 <p>    -- Database sizes</p>
 <br>
@@ -94,8 +93,6 @@
 <p>    FROM pg_database</p>
 <br>
 <p>    ORDER BY pg_database_size(datname) DESC;</p>
-<br>
-<br>
 <br>
 <p>    -- Table sizes (top 10)</p>
 <br>
@@ -113,8 +110,6 @@
 <br>
 <p>    LIMIT 10;</p>
 <br>
-<br>
-<br>
 <p>    -- Growth by day</p>
 <br>
 <p>    SELECT date(created_at) AS day,</p>
@@ -131,13 +126,8 @@
 <br>
 <p>    ORDER BY day;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Compute (CPU)   </p>
 <p>CPU usage correlates with query complexity and concurrency:   </p>
-<br>
-<br>
 <br>
 <p>    -- Queries with highest total CPU time</p>
 <br>
@@ -157,13 +147,8 @@
 <br>
 <p>    LIMIT 20;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Monitor: CPU utilization %, replication CPU usage, autovacuum CPU usage.   </p>
 <p>Memory   </p>
-<br>
-<br>
 <br>
 <p>    -- Shared buffers usage</p>
 <br>
@@ -177,8 +162,6 @@
 <br>
 <p>                   'work_mem', 'maintenance_work_mem');</p>
 <br>
-<br>
-<br>
 <p>    -- Hit ratio (should be >99%)</p>
 <br>
 <p>    SELECT 'shared_buffers' AS area,</p>
@@ -187,12 +170,7 @@
 <br>
 <p>    FROM pg_stat_database;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Connections   </p>
-<br>
-<br>
 <br>
 <p>    SELECT max_conn.setting AS max_connections,</p>
 <br>
@@ -204,13 +182,8 @@
 <br>
 <p>         (SELECT count(*) AS count FROM pg_stat_activity) used_conn;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Growth Forecasting   </p>
 <p>Simple Linear Model   </p>
-<br>
-<br>
 <br>
 <p>    import psycopg2</p>
 <br>
@@ -218,13 +191,9 @@
 <br>
 <p>    import numpy as np</p>
 <br>
-<br>
-<br>
 <p>    conn = psycopg2.connect("dbname=mydb")</p>
 <br>
 <p>    cur = conn.cursor()</p>
-<br>
-<br>
 <br>
 <p>    # Get daily row counts for last 90 days</p>
 <br>
@@ -244,21 +213,15 @@
 <br>
 <p>    data = cur.fetchall()</p>
 <br>
-<br>
-<br>
 <p>    days = np.array([(row[0] - data[0][0]).days for row in data])</p>
 <br>
 <p>    rows = np.array([row[1] for row in data])</p>
-<br>
-<br>
 <br>
 <p>    # Linear regression</p>
 <br>
 <p>    coefficients = np.polyfit(days, rows, 1)</p>
 <br>
 <p>    daily_growth = coefficients[0]</p>
-<br>
-<br>
 <br>
 <p>    # Forecast: 90 days out</p>
 <br>
@@ -268,20 +231,13 @@
 <br>
 <p>    forecast_total = current_total + daily_growth * forecast_days</p>
 <br>
-<br>
-<br>
 <p>    print(f"Daily growth: {daily_growth:.0f} rows")</p>
 <br>
 <p>    print(f"Current monthly row count: {current_total}")</p>
 <br>
 <p>    print(f"Forecast in 90 days: {forecast_total:.0f} rows")</p>
 <br>
-<br>
-<br>
-<br>
 <p>Projecting Storage   </p>
-<br>
-<br>
 <br>
 <p>    avg_row_size_bytes = 250  # From pgstattuple</p>
 <br>
@@ -289,26 +245,17 @@
 <br>
 <p>    gb_per_month = bytes_per_day * 30 / (1024**3)</p>
 <br>
-<br>
-<br>
 <p>    current_gb = 10  # Current database size</p>
 <br>
 <p>    months_to_full = (50 - current_gb) / gb_per_month  # Assuming 50 GB limit</p>
-<br>
-<br>
 <br>
 <p>    print(f"Growth: {gb_per_month:.1f} GB/month")</p>
 <br>
 <p>    print(f"Time to 50 GB: {months_to_full:.0f} months")</p>
 <br>
-<br>
-<br>
-<br>
 <p>Scaling Strategies   </p>
 <p>Vertical Scaling (Scale Up)   </p>
 <p>Increase the size of the existing database instance:   </p>
-<br>
-<br>
 <br>
 <p>    # AWS RDS</p>
 <br>
@@ -320,8 +267,6 @@
 <br>
 <p>      --apply-immediately</p>
 <br>
-<br>
-<br>
 <p>    # Or via Terraform</p>
 <br>
 <p>    resource "aws_db_instance" "mydb" {</p>
@@ -332,14 +277,9 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Pros**: Simple, no application changes. **Cons**: Instance size limits, downtime for some changes, no infinite scaling.   </p>
 <p>Horizontal Scaling (Scale Out)   </p>
 <p>Add read replicas for read workloads:   </p>
-<br>
-<br>
 <br>
 <p>    # Add read replica</p>
 <br>
@@ -351,30 +291,18 @@
 <br>
 <p>      --db-instance-class db.r6g.large</p>
 <br>
-<br>
-<br>
-<br>
 <p>For write scaling, consider sharding (Citus):   </p>
-<br>
-<br>
 <br>
 <p>    -- Citus distributed table</p>
 <br>
 <p>    SELECT create_distributed_table('orders', 'user_id');</p>
 <br>
-<br>
-<br>
 <p>    -- Queries automatically route to correct shard</p>
 <br>
 <p>    SELECT * FROM orders WHERE user_id = 42;</p>
 <br>
-<br>
-<br>
-<br>
 <p>Autoscaling Configuration   </p>
 <p>Aurora Serverless   </p>
-<br>
-<br>
 <br>
 <p>    # Automatic scaling based on load</p>
 <br>
@@ -394,12 +322,7 @@
 <br>
 <p>            MaxCapacity: 64</p>
 <br>
-<br>
-<br>
-<br>
 <p>Storage Autoscaling   </p>
-<br>
-<br>
 <br>
 <p>    # Enable storage autoscaling on RDS</p>
 <br>
@@ -411,24 +334,17 @@
 <br>
 <p>      --apply-immediately</p>
 <br>
-<br>
-<br>
-<br>
 <p>Monitoring Dashboard   </p>
 <p>Build a capacity monitoring dashboard with these key metrics:   </p>
 <p>| Metric | Alert Threshold | Action | |--------|-----------------|--------| | Storage utilization | >80% | Increase storage or archive data | | CPU utilization | >80% for 5 minutes | Scale up or optimize queries | | Connection utilization | >80% | Increase max_connections or add pooler | | Replication lag | >60 seconds | Investigate replica or network | | IOPS utilization | >80% of provisioned | Increase IOPS provision | | Cache hit ratio | <99% | Increase shared_buffers |   </p>
 <p>Seasonal Capacity   </p>
 <p>Many workloads are not uniform. Plan for seasonal peaks:   </p>
 <br>
-<br>
-<br>
 <p>    # Example: Black Friday capacity plan</p>
 <br>
 <p>    # Normal: 4 vCPU, 16 GB RAM, 1000 connections</p>
 <br>
 <p>    # Black Friday: 16 vCPU, 64 GB RAM, 5000 connections</p>
-<br>
-<br>
 <br>
 <p>    # Pre-scale 2 weeks before</p>
 <br>
@@ -438,8 +354,6 @@
 <br>
 <p>      target: db.r6g.4xlarge</p>
 <br>
-<br>
-<br>
 <p>    # Post-scale 1 week after</p>
 <br>
 <p>    - date: 2026-12-07</p>
@@ -447,9 +361,6 @@
 <p>      action: scale_down</p>
 <br>
 <p>      target: db.r6g.xlarge</p>
-<br>
-<br>
-<br>
 <br>
 <p>The Planning Cycle   </p>
 <br>

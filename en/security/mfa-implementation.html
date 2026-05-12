@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/mfa-implementation.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="MFA Implementation">
     <meta name="twitter:description" content="Implementing multi-factor authentication with TOTP, SMS, push notifications, and backup codes.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/mfa-implementation.png">
     <title>MFA Implementation — SourceHub</title>
     <meta name="description" content="Implementing multi-factor authentication with TOTP, SMS, push notifications, and backup codes.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "MFA Implementation",
       "description": "Implementing multi-factor authentication with TOTP, SMS, push notifications, and backup codes.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/mfa-implementation.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1200",
+      "wordCount": "1135",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,14 +75,13 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">MFA Implementation</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/mfa-implementation.png" alt="MFA Implementation" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>MFA Implementation</h1>
 <br>
 <p>MFA Fundamentals   </p>
 <p>Multi-factor authentication requires two or more factors: something you know (password), something you have (phone), or something you are (biometric).   </p>
 <p>TOTP Implementation   </p>
 <p>Time-based One-Time Passwords (TOTP) are the most widely deployed MFA method:   </p>
-<br>
-<br>
 <br>
 <p>    import pyotp</p>
 <br>
@@ -92,29 +91,21 @@
 <br>
 <p>    import base64</p>
 <br>
-<br>
-<br>
 <p>    class TOTPManager:</p>
 <br>
 <p>        def __init__(self, issuer="Example Corp"):</p>
 <br>
 <p>            self.issuer = issuer</p>
 <br>
-<br>
-<br>
 <p>        def generate_secret(self):</p>
 <br>
 <p>            return pyotp.random_base32()</p>
-<br>
-<br>
 <br>
 <p>        def get_provisioning_uri(self, email, secret):</p>
 <br>
 <p>            totp = pyotp.TOTP(secret)</p>
 <br>
 <p>            return totp.provisioning_uri(name=email, issuer_name=self.issuer)</p>
-<br>
-<br>
 <br>
 <p>        def generate_qr(self, email, secret):</p>
 <br>
@@ -128,8 +119,6 @@
 <br>
 <p>            return base64.b64encode(buf.getvalue()).decode()</p>
 <br>
-<br>
-<br>
 <p>        def verify_code(self, secret, code):</p>
 <br>
 <p>            totp = pyotp.TOTP(secret)</p>
@@ -138,26 +127,17 @@
 <br>
 <p>            return totp.verify(code, valid_window=1)</p>
 <br>
-<br>
-<br>
 <p>        def get_current_code(self, secret):</p>
 <br>
 <p>            totp = pyotp.TOTP(secret)</p>
 <br>
 <p>            return totp.now()</p>
 <br>
-<br>
-<br>
-<br>
 <p>SMS-Based MFA   </p>
-<br>
-<br>
 <br>
 <p>    import random</p>
 <br>
 <p>    import string</p>
-<br>
-<br>
 <br>
 <p>    class SMSMFAManager:</p>
 <br>
@@ -167,25 +147,17 @@
 <br>
 <p>            self.codes = {}  # phone -> {code, expires_at}</p>
 <br>
-<br>
-<br>
 <p>        def send_code(self, phone):</p>
 <br>
 <p>            code = ''.join(random.choices(string.digits, k=6))</p>
 <br>
 <p>            expiry = datetime.utcnow() + timedelta(minutes=5)</p>
 <br>
-<br>
-<br>
 <p>            self.codes[phone] = {"code": code, "expires_at": expiry}</p>
 <br>
 <p>            self.sms_provider.send(phone, f"Your code is: {code}")</p>
 <br>
-<br>
-<br>
 <p>            return True</p>
-<br>
-<br>
 <br>
 <p>        def verify_code(self, phone, code):</p>
 <br>
@@ -195,40 +167,27 @@
 <br>
 <p>                return False</p>
 <br>
-<br>
-<br>
 <p>            if datetime.utcnow() > stored["expires_at"]:</p>
 <br>
 <p>                del self.codes[phone]</p>
 <br>
 <p>                return False</p>
 <br>
-<br>
-<br>
 <p>            if stored["code"] != code:</p>
 <br>
 <p>                return False</p>
-<br>
-<br>
 <br>
 <p>            del self.codes[phone]</p>
 <br>
 <p>            return True</p>
 <br>
-<br>
-<br>
-<br>
 <p>Push Notification MFA   </p>
-<br>
-<br>
 <br>
 <p>    // Server-side push notification</p>
 <br>
 <p>    async function sendPushChallenge(userId, deviceToken) {</p>
 <br>
 <p>      const challenge = crypto.randomUUID();</p>
-<br>
-<br>
 <br>
 <p>      // Store challenge</p>
 <br>
@@ -243,8 +202,6 @@
 <p>        120  // 2 minute expiry</p>
 <br>
 <p>      );</p>
-<br>
-<br>
 <br>
 <p>      // Send push notification</p>
 <br>
@@ -266,13 +223,9 @@
 <br>
 <p>      });</p>
 <br>
-<br>
-<br>
 <p>      return challenge;</p>
 <br>
 <p>    }</p>
-<br>
-<br>
 <br>
 <p>    // Client-side approval</p>
 <br>
@@ -296,13 +249,8 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
 <p>Backup Codes   </p>
 <p>Always provide backup codes when users enroll in MFA:   </p>
-<br>
-<br>
 <br>
 <p>    def generate_backup_codes(count=10):</p>
 <br>
@@ -324,12 +272,7 @@
 <br>
 <p>        return codes</p>
 <br>
-<br>
-<br>
-<br>
 <p>Enforcement Strategy   </p>
-<br>
-<br>
 <br>
 <p>    mfa_enforcement:</p>
 <br>
@@ -339,8 +282,6 @@
 <br>
 <p>      exclude_service_accounts: true</p>
 <br>
-<br>
-<br>
 <p>      risk_based_prompting:</p>
 <br>
 <p>        - new_device: prompt_mfa</p>
@@ -349,8 +290,6 @@
 <br>
 <p>        - sensitive_action: require_mfa</p>
 <br>
-<br>
-<br>
 <p>      recovery:</p>
 <br>
 <p>        backup_codes: 10</p>
@@ -358,9 +297,6 @@
 <p>        admin_recovery: "verify_with_id"</p>
 <br>
 <p>        recovery_timeout: 24_hours</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>MFA is essential but must be implemented thoughtfully. TOTP offers the best balance of security and usability. Provide backup codes during enrollment. Consider risk-based prompting rather than requiring MFA on every request. Guide users toward authenticator apps over SMS when possible.</p></div>

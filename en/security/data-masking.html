@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/data-masking.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Data Masking and Redaction">
     <meta name="twitter:description" content="Guide to data masking and redaction covering dynamic masking, static masking, tokenization, and compliance with GDPR and data privacy regulations.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/data-masking.png">
     <title>Data Masking and Redaction — SourceHub</title>
     <meta name="description" content="Guide to data masking and redaction covering dynamic masking, static masking, tokenization, and compliance with GDPR and data privacy regulations.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,15 +38,15 @@
       "@type": "Article",
       "headline": "Data Masking and Redaction",
       "description": "Guide to data masking and redaction covering dynamic masking, static masking, tokenization, and compliance with GDPR and data privacy regulations.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/data-masking.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2445",
+      "wordCount": "1865",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/data-masking.html"},
-      "articleBody": "Data Masking and Redaction Introduction Data masking protects sensitive information by replacing it with realistic but fictional data. Unlike encryption, masked data is permanently de-identified \u2014 it cannot be reversed to recover the original value. Organizations use masking for development, testing, analytics, and compliance with privacy regulations like GDPR and CCPA. Static Data Masking Static masking creates a sanitized copy of a production database for non-production use. import hashlib import random import string class StaticDataMasker: def __init__(self, seed=42): self.seed = seed self.rng = random.Random(seed) def mask_email(self, email): \"\"\"Generate a consistent fake email from the real one.\"\"\" local, domain = email.split('@') hash_obj = hashlib.sha256(email.encode()) fake_local = hash_obj.hexdigest()[:12] return f\"{fake_local}@masked-domain.com\" def mask_phone(self, phone): \"\"\"Mask phone number, keeping format but replacing digits.\"\"\" masked = [] for char in phone: if char.isdigit(): masked.append(str(self.rng.randint(0, 9))) else: masked.append(char) return ''.join(masked) def mask_credit_card(self, cc_number): \"\"\"Mask all but last 4 digits.\"\"\" clean = cc_number.replace(' ', '').replace('-', '') if len(clean) >= 4: masked = '*' * (len(clean) - 4) + clean[-4:] else: masked = clean return masked def mask_name(self, name): \"\"\"Replace name with a fake name.\"\"\" first_names = ['John', 'Jane', 'Alex', 'Sarah', 'Michael'] last_names = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones'] parts = name.split() if len(parts) >= 2: return f\"{self.rng.choice(first_names)} {self.rng.choice(last_names)}\" return self.rng.choice(first_names) SQL-Based Static Masking -- PostgreSQL static masking CREATE TABLE users_masked AS SELECT id, md5(email) || '@masked.com' AS email, '***-***-' || RIGHT(phone, 4) AS phone, CASE WHEN position(' ' IN full_name) > 0 THEN 'User ' || id::text ELSE full_name END AS full_name, encode(sha256(ssn::bytea), 'hex') AS ssn FROM users_production; -- Consistent masking across tables UPDATE customers SET email = 'customer_' || id || '@example.com', phone = CONCAT('555-', LPAD((id % 10000)::text, 4, '0')), credit_card = CONCAT('XXXX-XXXX-XXXX-', RIGHT(credit_card, 4)); Dynamic Data Masking Dynamic masking applies real-time transformations to query results without modifying the underlying data. PostgreSQL Dynamic Masking -- Create a masked view CREATE VIEW users_redacted AS SELECT id, CASE WHEN current_user = 'admin' THEN email ELSE '***@***.com' END AS email, CASE WHEN current_user = 'admin' THEN phone ELSE regexp_replace(phone, '\\d(?=\\d{4})', '*', 'g') END AS phone, CASE WHEN current_user IN ('admin', 'support') THEN full_name ELSE CONCAT(LEFT(full_name, 1), '***') END AS full_name FROM users; -- Grant access to masked view GRANT SELECT ON users_redacted TO app_user; GRANT SELECT ON users_redacted TO support_agent; Application-Level Dynamic Masking from functools import wraps def mask_sensitive_fields(fields_to_mask): \"\"\"Decorator to dynamically mask sensitive fields in API responses.\"\"\" def decorator(func): @wraps(func) def wrapper(*args, **kwargs): result = func(*args, **kwargs) if isinstance(result, dict): for field in fields_to_mask: if field in result: value = result[field] if field in ('email', 'email_address'): local, domain = value.split('@') result[field] = f\"{local[0]}***@{domain}\" elif field in ('phone', 'phone_number'): result[field] = f\"***-***-{value[-4:]}\" elif field in ('ssn', 'social_security'): result[field] = f\"***-**-{value[-4:]}\" elif 'card' in field.lower(): result[field] = f\"****-****-****-{value[-4:]}\" return result return wrapper return decorator @mask_sensitive_fields(['email', 'phone', 'credit_card']) def get_user_profile(user_id): # Returns full data; masking applied by decorator return { 'user_id': user_id, 'email': 'john.doe@example.com', 'phone': '555-123-4567', 'credit_card': '4111-1111-1111-1111', } Tokenization Tokenization replaces sensitive data with non-sensitive placeholders (tokens) while storing the mapping in a secure vault. class TokenizationService: def __init__(self, vault_client): self.vault = vault_client self.token_prefix = \"tok_\" def tokenize(self, sensitive_value, context): \"\"\"Replace sensitive value with a token.\"\"\" # Generate unique token token_id = secrets.token_hex(16) token = f\"{self.token_prefix}{token_id}\" # Store mapping in secure vault self.vault.store( f\"tokens/{token}\", { 'value': sensitive_value, 'context': context, 'created_at': datetime.utcnow().isoformat(), 'access_count': 0 } ) return token def detokenize(self, token, requester_role): \"\"\"Retrieve original value from token (if authorized).\"\"\" if not token.startswith(self.token_prefix): raise ValueError(\"Invalid token format\") if requester_role not in ['admin', 'auditor', 'compliance']: raise PermissionError(\"Not authorized to detokenize\") record = self.vault.retrieve(f\"tokens/{token}\") # Increment access counter record['access_count'] += 1 record['last_accessed'] = datetime.utcnow().isoformat() self.vault.store(f\"tokens/{token}\", record) # Log access self._audit_log('detokenize', token, requester_role) return record['value'] GDPR Compliance from datetime import datetime, timedelta class GDPRDataProcessor: RETENTION_PERIODS = { 'user_profile': timedelta(days=365), 'transaction_log': timedelta(days=730), 'session_log': timedelta(days=90), 'analytics': timedelta(days=180), } def mask_for_export(self, user_data): \"\"\"GDPR Article 20: data portability with masking.\"\"\" masked = { 'basic_info': { 'email': user_data['email'], 'username': user_data['username'] }, 'transactions': [ { 'date': t['date'], 'amount': t['amount'], 'reference': f\"REF-{hashlib.sha256(t['reference'].encode()).hexdigest()[:8]}\" } for t in user_data.get('transactions', []) ], 'communications': [ { 'date': c['date'], 'type': c['type'], 'content_snippet': c['content'][:100] if c.get('content') else None } for c in user_data.get('communications', []) ] } return masked def delete_user_data(self, user_id, databases): \"\"\"GDPR Article 17: right to erasure.\"\"\" deletion_log = [] for db in databases: try: db.delete_user(user_id) deletion_log.append({ 'database': db.name, 'status': 'deleted', 'timestamp': datetime.utcnow().isoformat() }) except Exception as e: deletion_log.append({ 'database': db.name, 'status': 'failed', 'error': str(e) }) return deletion_log Conclusion Data masking is essential for privacy compliance and reducing the risk of data exposure. Use static masking for non-production environments, dynamic masking for real-time access control, and tokenization for scenarios requiring reversible de-identification. Always log access to sensitive data, enforce role-based masking policies, and ensure masking is consistent across all data stores and applications."
+      "articleBody": "Data Masking and Redaction Data Masking and Redaction Introduction Data masking protects sensitive information by replacing it with realistic but fictional data. Unlike encryption, masked data is permanently de-identified \u2014 it cannot be reversed to recover the original value. Organizations use masking for development, testing, analytics, and compliance with privacy regulations like GDPR and CCPA. Static Data Masking Static masking creates a sanitized copy of a production database for non-production use. import hashlib import random import string class StaticDataMasker: def __init__(self, seed=42): self.seed = seed self.rng = random.Random(seed) def mask_email(self, email): \"\"\"Generate a consistent fake email from the real one.\"\"\" local, domain = email.split('@') hash_obj = hashlib.sha256(email.encode()) fake_local = hash_obj.hexdigest()[:12] return f\"{fake_local}@masked-domain.com\" def mask_phone(self, phone): \"\"\"Mask phone number, keeping format but replacing digits.\"\"\" masked = [] for char in phone: if char.isdigit(): masked.append(str(self.rng.randint(0, 9))) else: masked.append(char) return ''.join(masked) def mask_credit_card(self, cc_number): \"\"\"Mask all but last 4 digits.\"\"\" clean = cc_number.replace(' ', '').replace('-', '') if len(clean) >= 4: masked = '*' * (len(clean) - 4) + clean[-4:] else: masked = clean return masked def mask_name(self, name): \"\"\"Replace name with a fake name.\"\"\" first_names = ['John', 'Jane', 'Alex', 'Sarah', 'Michael'] last_names = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones'] parts = name.split() if len(parts) >= 2: return f\"{self.rng.choice(first_names)} {self.rng.choice(last_names)}\" return self.rng.choice(first_names) SQL-Based Static Masking \\-- PostgreSQL static masking CREATE TABLE users_masked AS SELECT id, md5(email) || '@masked.com' AS email, '***-***-' || RIGHT(phone, 4) AS phone, CASE WHEN position(' ' IN full_name) > 0 THEN 'User ' || id::text ELSE full_name END AS full_name, encode(sha256(ssn::bytea), 'hex') AS ssn FROM users_production; \\-- Consistent masking across tables UPDATE customers SET email = 'customer_' || id || '@example.com', phone = CONCAT('555-', LPAD((id % 10000)::text, 4, '0')), credit_card = CONCAT('XXXX-XXXX-XXXX-', RIGHT(credit_card, 4)); Dynamic Data Masking Dynamic masking applies real-time transformations to query results without modifying the underlying data. PostgreSQL Dynamic Masking \\-- Create a masked view CREATE VIEW users_redacted AS SELECT id, CASE WHEN current_user = 'admin' THEN email ELSE '***@***.com' END AS email, CASE WHEN current_user = 'admin' THEN phone ELSE regexp_replace(phone, '\\d(?=\\d{4})', '*', 'g') END AS phone, CASE WHEN current_user IN ('admin', 'support') THEN full_name ELSE CONCAT(LEFT(full_name, 1), '***') END AS full_name FROM users; \\-- Grant access to masked view GRANT SELECT ON users_redacted TO app_user; GRANT SELECT ON users_redacted TO support_agent; Application-Level Dynamic Masking from functools import wraps def mask_sensitive_fields(fields_to_mask): \"\"\"Decorator to dynamically mask sensitive fields in API responses.\"\"\" def decorator(func): @wraps(func) def wrapper(*args, **kwargs): result = func(*args, **kwargs) if isinstance(result, dict): for field in fields_to_mask: if field in result: value = result[field] if field in ('email', 'email_address'): local, domain = value.split('@') result[field] = f\"{local[0]}***@{domain}\" elif field in ('phone', 'phone_number'): result[field] = f\"***-***-{value[-4:]}\" elif field in ('ssn', 'social_security'): result[field] = f\"***-**-{value[-4:]}\" elif 'card' in field.lower(): result[field] = f\"****-****-****-{value[-4:]}\" return result return wrapper return decorator @mask_sensitive_fields(['email', 'phone', 'credit_card']) def get_user_profile(user_id): Returns full data; masking applied by decorator return { 'user_id': user_id, 'email': 'john.doe@example.com', 'phone': '555-123-4567', 'credit_card': '4111-1111-1111-1111', } Tokenization Tokenization replaces sensitive data with non-sensitive placeholders (tokens) while storing the mapping in a secure vault. class TokenizationService: def __init__(self, vault_client): self.vault = vault_client self.token_prefix = \"tok_\" def tokenize(self, sensitive_value, context): \"\"\"Replace sensitive value with a token.\"\"\" Generate unique token token_id = secrets.token_hex(16) token = f\"{self.token_prefix}{token_id}\" Store mapping in secure vault self.vault.store( f\"tokens/{token}\", { 'value': sensitive_value, 'context': context, 'created_at': datetime.utcnow().isoformat(), 'access_count': 0 } ) return token def detokenize(self, token, requester_role): \"\"\"Retrieve original value from token (if authorized).\"\"\" if not token.startswith(self.token_prefix): raise ValueError(\"Invalid token format\") if requester_role not in ['admin', 'auditor', 'compliance']: raise PermissionError(\"Not authorized to detokenize\") record = self.vault.retrieve(f\"tokens/{token}\") Increment access counter record['access_count'] += 1 record['last_accessed'] = datetime.utcnow().isoformat() self.vault.store(f\"tokens/{token}\", record) Log access self._audit_log('detokenize', token, requester_role) return record['value'] GDPR Compliance from datetime import datetime, timedelta class GDPRDataProcessor: RETENTION_PERIODS = { 'user_profile': timedelta(days=365), 'transaction_log': timedelta(days=730), 'session_log': timedelta(days=90), 'analytics': timedelta(days=180), } def mask_for_export(self, user_data): \"\"\"GDPR Article 20: data portability with masking.\"\"\" masked = { 'basic_info': { 'email': user_data['email'], 'username': user_data['username'] }, 'transactions': [ { 'date': t['date'], 'amount': t['amount'], 'reference': f\"REF-{hashlib.sha256(t['reference'].encode()).hexdigest()[:8]}\" } for t in user_data.get('transactions', []) ], 'communications': [ { 'date': c['date'], 'type': c['type'], 'content_snippet': c['content'][:100] if c.get('content') else None } for c in user_data.get('communications', []) ] } return masked def delete_user_data(self, user_id, databases): \"\"\"GDPR Article 17: right to erasure.\"\"\" deletion_log = [] for db in databases: try: db.delete_user(user_id) deletion_log.append({ 'database': db.name, 'status': 'deleted', 'timestamp': datetime.utcnow().isoformat() }) except Exception as e: deletion_log.append({ 'database': db.name, 'status': 'failed', 'error': str(e) }) return deletion_log Conclusion Data masking is essential for privacy compliance and reducing the risk of data exposure. Use static masking for non-production environments, dynamic masking for real-time access control, and tokenization for scenarios requiring reversible de-identification. Always log access to sensitive data, enforce role-based masking policies, and ensure masking is consistent across all data stores and applications."
     }
     </script>
     <script type="application/ld+json">
@@ -75,491 +75,423 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Data Masking and Redaction</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/data-masking.png" alt="Data Masking and Redaction" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Data Masking and Redaction</h1>
 <br>
-<p>Introduction   </p>
-<p>Data masking protects sensitive information by replacing it with realistic but fictional data. Unlike encryption, masked data is permanently de-identified — it cannot be reversed to recover the original value. Organizations use masking for development, testing, analytics, and compliance with privacy regulations like GDPR and CCPA.   </p>
-<p>Static Data Masking   </p>
-<p>Static masking creates a sanitized copy of a production database for non-production use.   </p>
+<h1>Data Masking and Redaction</h1>
 <br>
+<p>Introduction </p>
 <br>
+<p>Data masking protects sensitive information by replacing it with realistic but fictional data. Unlike encryption, masked data is permanently de-identified — it cannot be reversed to recover the original value. Organizations use masking for development, testing, analytics, and compliance with privacy regulations like GDPR and CCPA. </p>
 <br>
-<p>    import hashlib</p>
+<p>Static Data Masking </p>
 <br>
-<p>    import random</p>
+<p>Static masking creates a sanitized copy of a production database for non-production use. </p>
 <br>
-<p>    import string</p>
+<p>import hashlib</p>
 <br>
+<p>import random</p>
 <br>
+<p>import string</p>
 <br>
-<p>    class StaticDataMasker:</p>
+<p>class StaticDataMasker:</p>
 <br>
-<p>        def __init__(self, seed=42):</p>
+<p>def __init__(self, seed=42):</p>
 <br>
-<p>            self.seed = seed</p>
+<p>self.seed = seed</p>
 <br>
-<p>            self.rng = random.Random(seed)</p>
+<p>self.rng = random.Random(seed)</p>
 <br>
+<p>def mask_email(self, email):</p>
 <br>
+<p>"""Generate a consistent fake email from the real one."""</p>
 <br>
-<p>        def mask_email(self, email):</p>
+<p>local, domain = email.split('@')</p>
 <br>
-<p>            """Generate a consistent fake email from the real one."""</p>
+<p>hash_obj = hashlib.sha256(email.encode())</p>
 <br>
-<p>            local, domain = email.split('@')</p>
+<p>fake_local = hash_obj.hexdigest()[:12]</p>
 <br>
-<p>            hash_obj = hashlib.sha256(email.encode())</p>
+<p>return f"{fake_local}@masked-domain.com"</p>
 <br>
-<p>            fake_local = hash_obj.hexdigest()[:12]</p>
+<p>def mask_phone(self, phone):</p>
 <br>
-<p>            return f"{fake_local}@masked-domain.com"</p>
+<p>"""Mask phone number, keeping format but replacing digits."""</p>
 <br>
+<p>masked = []</p>
 <br>
+<p>for char in phone:</p>
 <br>
-<p>        def mask_phone(self, phone):</p>
+<p>if char.isdigit():</p>
 <br>
-<p>            """Mask phone number, keeping format but replacing digits."""</p>
+<p>masked.append(str(self.rng.randint(0, 9)))</p>
 <br>
-<p>            masked = []</p>
+<p>else:</p>
 <br>
-<p>            for char in phone:</p>
+<p>masked.append(char)</p>
 <br>
-<p>                if char.isdigit():</p>
+<p>return ''.join(masked)</p>
 <br>
-<p>                    masked.append(str(self.rng.randint(0, 9)))</p>
+<p>def mask_credit_card(self, cc_number):</p>
 <br>
-<p>                else:</p>
+<p>"""Mask all but last 4 digits."""</p>
 <br>
-<p>                    masked.append(char)</p>
+<p>clean = cc_number.replace(' ', '').replace('-', '')</p>
 <br>
-<p>            return ''.join(masked)</p>
+<p>if len(clean) >= 4:</p>
 <br>
+<p>masked = '*' * (len(clean) - 4) + clean[-4:]</p>
 <br>
+<p>else:</p>
 <br>
-<p>        def mask_credit_card(self, cc_number):</p>
+<p>masked = clean</p>
 <br>
-<p>            """Mask all but last 4 digits."""</p>
+<p>return masked</p>
 <br>
-<p>            clean = cc_number.replace(' ', '').replace('-', '')</p>
+<p>def mask_name(self, name):</p>
 <br>
-<p>            if len(clean) >= 4:</p>
+<p>"""Replace name with a fake name."""</p>
 <br>
-<p>                masked = '*' * (len(clean) - 4) + clean[-4:]</p>
+<p>first_names = ['John', 'Jane', 'Alex', 'Sarah', 'Michael']</p>
 <br>
-<p>            else:</p>
+<p>last_names = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones']</p>
 <br>
-<p>                masked = clean</p>
+<p>parts = name.split()</p>
 <br>
-<p>            return masked</p>
+<p>if len(parts) >= 2:</p>
 <br>
+<p>return f"{self.rng.choice(first_names)} {self.rng.choice(last_names)}"</p>
 <br>
+<p>return self.rng.choice(first_names)</p>
 <br>
-<p>        def mask_name(self, name):</p>
+<p>SQL-Based Static Masking </p>
 <br>
-<p>            """Replace name with a fake name."""</p>
+<p>\-- PostgreSQL static masking</p>
 <br>
-<p>            first_names = ['John', 'Jane', 'Alex', 'Sarah', 'Michael']</p>
+<p>CREATE TABLE users_masked AS</p>
 <br>
-<p>            last_names = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones']</p>
+<p>SELECT </p>
 <br>
+<p>id,</p>
 <br>
+<p>md5(email) || '@masked.com' AS email,</p>
 <br>
-<p>            parts = name.split()</p>
+<p>'***-***-' || RIGHT(phone, 4) AS phone,</p>
 <br>
-<p>            if len(parts) >= 2:</p>
+<p>CASE WHEN position(' ' IN full_name) > 0 THEN</p>
 <br>
-<p>                return f"{self.rng.choice(first_names)} {self.rng.choice(last_names)}"</p>
+<p>'User ' || id::text</p>
 <br>
-<p>            return self.rng.choice(first_names)</p>
+<p>ELSE</p>
 <br>
+<p>full_name</p>
 <br>
+<p>END AS full_name,</p>
 <br>
+<p>encode(sha256(ssn::bytea), 'hex') AS ssn</p>
 <br>
-<p>SQL-Based Static Masking   </p>
+<p>FROM users_production;</p>
 <br>
+<p>\-- Consistent masking across tables</p>
 <br>
+<p>UPDATE customers SET</p>
 <br>
-<p>    -- PostgreSQL static masking</p>
+<p>email = 'customer_' || id || '@example.com',</p>
 <br>
-<p>    CREATE TABLE users_masked AS</p>
+<p>phone = CONCAT('555-', LPAD((id % 10000)::text, 4, '0')),</p>
 <br>
-<p>    SELECT </p>
+<p>credit_card = CONCAT('XXXX-XXXX-XXXX-', RIGHT(credit_card, 4));</p>
 <br>
-<p>        id,</p>
+<p>Dynamic Data Masking </p>
 <br>
-<p>        md5(email) || '@masked.com' AS email,</p>
+<p>Dynamic masking applies real-time transformations to query results without modifying the underlying data. </p>
 <br>
-<p>        '***-***-' || RIGHT(phone, 4) AS phone,</p>
+<p>PostgreSQL Dynamic Masking </p>
 <br>
-<p>        CASE WHEN position(' ' IN full_name) > 0 THEN</p>
+<p>\-- Create a masked view</p>
 <br>
-<p>            'User ' || id::text</p>
+<p>CREATE VIEW users_redacted AS</p>
 <br>
-<p>        ELSE</p>
+<p>SELECT</p>
 <br>
-<p>            full_name</p>
+<p>id,</p>
 <br>
-<p>        END AS full_name,</p>
+<p>CASE </p>
 <br>
-<p>        encode(sha256(ssn::bytea), 'hex') AS ssn</p>
+<p>WHEN current_user = 'admin' THEN email</p>
 <br>
-<p>    FROM users_production;</p>
+<p>ELSE '***@***.com'</p>
 <br>
+<p>END AS email,</p>
 <br>
+<p>CASE</p>
 <br>
-<p>    -- Consistent masking across tables</p>
+<p>WHEN current_user = 'admin' THEN phone</p>
 <br>
-<p>    UPDATE customers SET</p>
+<p>ELSE regexp_replace(phone, '\d(?=\d{4})', '*', 'g')</p>
 <br>
-<p>        email = 'customer_' || id || '@example.com',</p>
+<p>END AS phone,</p>
 <br>
-<p>        phone = CONCAT('555-', LPAD((id % 10000)::text, 4, '0')),</p>
+<p>CASE</p>
 <br>
-<p>        credit_card = CONCAT('XXXX-XXXX-XXXX-', RIGHT(credit_card, 4));</p>
+<p>WHEN current_user IN ('admin', 'support') THEN full_name</p>
 <br>
+<p>ELSE CONCAT(LEFT(full_name, 1), '***')</p>
 <br>
+<p>END AS full_name</p>
 <br>
+<p>FROM users;</p>
 <br>
-<p>Dynamic Data Masking   </p>
-<p>Dynamic masking applies real-time transformations to query results without modifying the underlying data.   </p>
-<p>PostgreSQL Dynamic Masking   </p>
+<p>\-- Grant access to masked view</p>
 <br>
+<p>GRANT SELECT ON users_redacted TO app_user;</p>
 <br>
+<p>GRANT SELECT ON users_redacted TO support_agent;</p>
 <br>
-<p>    -- Create a masked view</p>
+<p>Application-Level Dynamic Masking </p>
 <br>
-<p>    CREATE VIEW users_redacted AS</p>
+<p>from functools import wraps</p>
 <br>
-<p>    SELECT</p>
+<p>def mask_sensitive_fields(fields_to_mask):</p>
 <br>
-<p>        id,</p>
+<p>"""Decorator to dynamically mask sensitive fields in API responses."""</p>
 <br>
-<p>        CASE </p>
+<p>def decorator(func):</p>
 <br>
-<p>            WHEN current_user = 'admin' THEN email</p>
+<p>@wraps(func)</p>
 <br>
-<p>            ELSE '***@***.com'</p>
+<p>def wrapper(*args, **kwargs):</p>
 <br>
-<p>        END AS email,</p>
+<p>result = func(*args, **kwargs)</p>
 <br>
-<p>        CASE</p>
+<p>if isinstance(result, dict):</p>
 <br>
-<p>            WHEN current_user = 'admin' THEN phone</p>
+<p>for field in fields_to_mask:</p>
 <br>
-<p>            ELSE regexp_replace(phone, '\d(?=\d{4})', '*', 'g')</p>
+<p>if field in result:</p>
 <br>
-<p>        END AS phone,</p>
+<p>value = result[field]</p>
 <br>
-<p>        CASE</p>
+<p>if field in ('email', 'email_address'):</p>
 <br>
-<p>            WHEN current_user IN ('admin', 'support') THEN full_name</p>
+<p>local, domain = value.split('@')</p>
 <br>
-<p>            ELSE CONCAT(LEFT(full_name, 1), '***')</p>
+<p>result[field] = f"{local[0]}***@{domain}"</p>
 <br>
-<p>        END AS full_name</p>
+<p>elif field in ('phone', 'phone_number'):</p>
 <br>
-<p>    FROM users;</p>
+<p>result[field] = f"***-***-{value[-4:]}"</p>
 <br>
+<p>elif field in ('ssn', 'social_security'):</p>
 <br>
+<p>result[field] = f"***-**-{value[-4:]}"</p>
 <br>
-<p>    -- Grant access to masked view</p>
+<p>elif 'card' in field.lower():</p>
 <br>
-<p>    GRANT SELECT ON users_redacted TO app_user;</p>
+<p>result[field] = f"****-****-****-{value[-4:]}"</p>
 <br>
-<p>    GRANT SELECT ON users_redacted TO support_agent;</p>
+<p>return result</p>
 <br>
+<p>return wrapper</p>
 <br>
+<p>return decorator</p>
 <br>
+<p>@mask_sensitive_fields(['email', 'phone', 'credit_card'])</p>
 <br>
-<p>Application-Level Dynamic Masking   </p>
+<p>def get_user_profile(user_id):</p>
 <br>
+<h1>Returns full data; masking applied by decorator</h1>
 <br>
+<p>return {</p>
 <br>
-<p>    from functools import wraps</p>
+<p>'user_id': user_id,</p>
 <br>
+<p>'email': 'john.doe@example.com',</p>
 <br>
+<p>'phone': '555-123-4567',</p>
 <br>
-<p>    def mask_sensitive_fields(fields_to_mask):</p>
+<p>'credit_card': '4111-1111-1111-1111',</p>
 <br>
-<p>        """Decorator to dynamically mask sensitive fields in API responses."""</p>
+<p>}</p>
 <br>
-<p>        def decorator(func):</p>
+<p>Tokenization </p>
 <br>
-<p>            @wraps(func)</p>
+<p>Tokenization replaces sensitive data with non-sensitive placeholders (tokens) while storing the mapping in a secure vault. </p>
 <br>
-<p>            def wrapper(*args, **kwargs):</p>
+<p>class TokenizationService:</p>
 <br>
-<p>                result = func(*args, **kwargs)</p>
+<p>def __init__(self, vault_client):</p>
 <br>
+<p>self.vault = vault_client</p>
 <br>
+<p>self.token_prefix = "tok_"</p>
 <br>
-<p>                if isinstance(result, dict):</p>
+<p>def tokenize(self, sensitive_value, context):</p>
 <br>
-<p>                    for field in fields_to_mask:</p>
+<p>"""Replace sensitive value with a token."""</p>
 <br>
-<p>                        if field in result:</p>
+<h1>Generate unique token</h1>
 <br>
-<p>                            value = result[field]</p>
+<p>token_id = secrets.token_hex(16)</p>
 <br>
-<p>                            if field in ('email', 'email_address'):</p>
+<p>token = f"{self.token_prefix}{token_id}"</p>
 <br>
-<p>                                local, domain = value.split('@')</p>
+<h1>Store mapping in secure vault</h1>
 <br>
-<p>                                result[field] = f"{local[0]}***@{domain}"</p>
+<p>self.vault.store(</p>
 <br>
-<p>                            elif field in ('phone', 'phone_number'):</p>
+<p>f"tokens/{token}",</p>
 <br>
-<p>                                result[field] = f"***-***-{value[-4:]}"</p>
+<p>{</p>
 <br>
-<p>                            elif field in ('ssn', 'social_security'):</p>
+<p>'value': sensitive_value,</p>
 <br>
-<p>                                result[field] = f"***-**-{value[-4:]}"</p>
+<p>'context': context,</p>
 <br>
-<p>                            elif 'card' in field.lower():</p>
+<p>'created_at': datetime.utcnow().isoformat(),</p>
 <br>
-<p>                                result[field] = f"****-****-****-{value[-4:]}"</p>
+<p>'access_count': 0</p>
 <br>
+<p>}</p>
 <br>
+<p>)</p>
 <br>
-<p>                return result</p>
+<p>return token</p>
 <br>
-<p>            return wrapper</p>
+<p>def detokenize(self, token, requester_role):</p>
 <br>
-<p>        return decorator</p>
+<p>"""Retrieve original value from token (if authorized)."""</p>
 <br>
+<p>if not token.startswith(self.token_prefix):</p>
 <br>
+<p>raise ValueError("Invalid token format")</p>
 <br>
-<p>    @mask_sensitive_fields(['email', 'phone', 'credit_card'])</p>
+<p>if requester_role not in ['admin', 'auditor', 'compliance']:</p>
 <br>
-<p>    def get_user_profile(user_id):</p>
+<p>raise PermissionError("Not authorized to detokenize")</p>
 <br>
-<p>        # Returns full data; masking applied by decorator</p>
+<p>record = self.vault.retrieve(f"tokens/{token}")</p>
 <br>
-<p>        return {</p>
+<h1>Increment access counter</h1>
 <br>
-<p>            'user_id': user_id,</p>
+<p>record['access_count'] += 1</p>
 <br>
-<p>            'email': 'john.doe@example.com',</p>
+<p>record['last_accessed'] = datetime.utcnow().isoformat()</p>
 <br>
-<p>            'phone': '555-123-4567',</p>
+<p>self.vault.store(f"tokens/{token}", record)</p>
 <br>
-<p>            'credit_card': '4111-1111-1111-1111',</p>
+<h1>Log access</h1>
 <br>
-<p>        }</p>
+<p>self._audit_log('detokenize', token, requester_role)</p>
 <br>
+<p>return record['value']</p>
 <br>
+<p>GDPR Compliance </p>
 <br>
+<p>from datetime import datetime, timedelta</p>
 <br>
-<p>Tokenization   </p>
-<p>Tokenization replaces sensitive data with non-sensitive placeholders (tokens) while storing the mapping in a secure vault.   </p>
+<p>class GDPRDataProcessor:</p>
 <br>
+<p>RETENTION_PERIODS = {</p>
 <br>
+<p>'user_profile': timedelta(days=365),</p>
 <br>
-<p>    class TokenizationService:</p>
+<p>'transaction_log': timedelta(days=730),</p>
 <br>
-<p>        def __init__(self, vault_client):</p>
+<p>'session_log': timedelta(days=90),</p>
 <br>
-<p>            self.vault = vault_client</p>
+<p>'analytics': timedelta(days=180),</p>
 <br>
-<p>            self.token_prefix = "tok_"</p>
+<p>}</p>
 <br>
+<p>def mask_for_export(self, user_data):</p>
 <br>
+<p>"""GDPR Article 20: data portability with masking."""</p>
 <br>
-<p>        def tokenize(self, sensitive_value, context):</p>
+<p>masked = {</p>
 <br>
-<p>            """Replace sensitive value with a token."""</p>
+<p>'basic_info': {</p>
 <br>
-<p>            # Generate unique token</p>
+<p>'email': user_data['email'],</p>
 <br>
-<p>            token_id = secrets.token_hex(16)</p>
+<p>'username': user_data['username']</p>
 <br>
-<p>            token = f"{self.token_prefix}{token_id}"</p>
+<p>},</p>
 <br>
+<p>'transactions': [</p>
 <br>
+<p>{</p>
 <br>
-<p>            # Store mapping in secure vault</p>
+<p>'date': t['date'],</p>
 <br>
-<p>            self.vault.store(</p>
+<p>'amount': t['amount'],</p>
 <br>
-<p>                f"tokens/{token}",</p>
+<p>'reference': f"REF-{hashlib.sha256(t['reference'].encode()).hexdigest()[:8]}"</p>
 <br>
-<p>                {</p>
+<p>}</p>
 <br>
-<p>                    'value': sensitive_value,</p>
+<p>for t in user_data.get('transactions', [])</p>
 <br>
-<p>                    'context': context,</p>
+<p>],</p>
 <br>
-<p>                    'created_at': datetime.utcnow().isoformat(),</p>
+<p>'communications': [</p>
 <br>
-<p>                    'access_count': 0</p>
+<p>{</p>
 <br>
-<p>                }</p>
+<p>'date': c['date'],</p>
 <br>
-<p>            )</p>
+<p>'type': c['type'],</p>
 <br>
+<p>'content_snippet': c['content'][:100] if c.get('content') else None</p>
 <br>
+<p>}</p>
 <br>
-<p>            return token</p>
+<p>for c in user_data.get('communications', [])</p>
 <br>
+<p>]</p>
 <br>
+<p>}</p>
 <br>
-<p>        def detokenize(self, token, requester_role):</p>
+<p>return masked</p>
 <br>
-<p>            """Retrieve original value from token (if authorized)."""</p>
+<p>def delete_user_data(self, user_id, databases):</p>
 <br>
-<p>            if not token.startswith(self.token_prefix):</p>
+<p>"""GDPR Article 17: right to erasure."""</p>
 <br>
-<p>                raise ValueError("Invalid token format")</p>
+<p>deletion_log = []</p>
 <br>
+<p>for db in databases:</p>
 <br>
+<p>try:</p>
 <br>
-<p>            if requester_role not in ['admin', 'auditor', 'compliance']:</p>
+<p>db.delete_user(user_id)</p>
 <br>
-<p>                raise PermissionError("Not authorized to detokenize")</p>
+<p>deletion_log.append({</p>
 <br>
+<p>'database': db.name,</p>
 <br>
+<p>'status': 'deleted',</p>
 <br>
-<p>            record = self.vault.retrieve(f"tokens/{token}")</p>
+<p>'timestamp': datetime.utcnow().isoformat()</p>
 <br>
+<p>})</p>
 <br>
+<p>except Exception as e:</p>
 <br>
-<p>            # Increment access counter</p>
+<p>deletion_log.append({</p>
 <br>
-<p>            record['access_count'] += 1</p>
+<p>'database': db.name,</p>
 <br>
-<p>            record['last_accessed'] = datetime.utcnow().isoformat()</p>
+<p>'status': 'failed',</p>
 <br>
-<p>            self.vault.store(f"tokens/{token}", record)</p>
+<p>'error': str(e)</p>
 <br>
+<p>})</p>
 <br>
+<p>return deletion_log</p>
 <br>
-<p>            # Log access</p>
+<p>Conclusion </p>
 <br>
-<p>            self._audit_log('detokenize', token, requester_role)</p>
-<br>
-<br>
-<br>
-<p>            return record['value']</p>
-<br>
-<br>
-<br>
-<br>
-<p>GDPR Compliance   </p>
-<br>
-<br>
-<br>
-<p>    from datetime import datetime, timedelta</p>
-<br>
-<br>
-<br>
-<p>    class GDPRDataProcessor:</p>
-<br>
-<p>        RETENTION_PERIODS = {</p>
-<br>
-<p>            'user_profile': timedelta(days=365),</p>
-<br>
-<p>            'transaction_log': timedelta(days=730),</p>
-<br>
-<p>            'session_log': timedelta(days=90),</p>
-<br>
-<p>            'analytics': timedelta(days=180),</p>
-<br>
-<p>        }</p>
-<br>
-<br>
-<br>
-<p>        def mask_for_export(self, user_data):</p>
-<br>
-<p>            """GDPR Article 20: data portability with masking."""</p>
-<br>
-<p>            masked = {</p>
-<br>
-<p>                'basic_info': {</p>
-<br>
-<p>                    'email': user_data['email'],</p>
-<br>
-<p>                    'username': user_data['username']</p>
-<br>
-<p>                },</p>
-<br>
-<p>                'transactions': [</p>
-<br>
-<p>                    {</p>
-<br>
-<p>                        'date': t['date'],</p>
-<br>
-<p>                        'amount': t['amount'],</p>
-<br>
-<p>                        'reference': f"REF-{hashlib.sha256(t['reference'].encode()).hexdigest()[:8]}"</p>
-<br>
-<p>                    }</p>
-<br>
-<p>                    for t in user_data.get('transactions', [])</p>
-<br>
-<p>                ],</p>
-<br>
-<p>                'communications': [</p>
-<br>
-<p>                    {</p>
-<br>
-<p>                        'date': c['date'],</p>
-<br>
-<p>                        'type': c['type'],</p>
-<br>
-<p>                        'content_snippet': c['content'][:100] if c.get('content') else None</p>
-<br>
-<p>                    }</p>
-<br>
-<p>                    for c in user_data.get('communications', [])</p>
-<br>
-<p>                ]</p>
-<br>
-<p>            }</p>
-<br>
-<p>            return masked</p>
-<br>
-<br>
-<br>
-<p>        def delete_user_data(self, user_id, databases):</p>
-<br>
-<p>            """GDPR Article 17: right to erasure."""</p>
-<br>
-<p>            deletion_log = []</p>
-<br>
-<p>            for db in databases:</p>
-<br>
-<p>                try:</p>
-<br>
-<p>                    db.delete_user(user_id)</p>
-<br>
-<p>                    deletion_log.append({</p>
-<br>
-<p>                        'database': db.name,</p>
-<br>
-<p>                        'status': 'deleted',</p>
-<br>
-<p>                        'timestamp': datetime.utcnow().isoformat()</p>
-<br>
-<p>                    })</p>
-<br>
-<p>                except Exception as e:</p>
-<br>
-<p>                    deletion_log.append({</p>
-<br>
-<p>                        'database': db.name,</p>
-<br>
-<p>                        'status': 'failed',</p>
-<br>
-<p>                        'error': str(e)</p>
-<br>
-<p>                    })</p>
-<br>
-<p>            return deletion_log</p>
-<br>
-<br>
-<br>
-<br>
-<p>Conclusion   </p>
 <p>Data masking is essential for privacy compliance and reducing the risk of data exposure. Use static masking for non-production environments, dynamic masking for real-time access control, and tokenization for scenarios requiring reversible de-identification. Always log access to sensitive data, enforce role-based masking policies, and ensure masking is consistent across all data stores and applications.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

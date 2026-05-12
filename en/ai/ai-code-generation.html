@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-code-generation.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="AI Code Generation Best Practices">
     <meta name="twitter:description" content="Practical best practices for using AI code generation tools effectively in production development workflows.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-code-generation.png">
     <title>AI Code Generation Best Practices — SourceHub</title>
     <meta name="description" content="Practical best practices for using AI code generation tools effectively in production development workflows.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "AI Code Generation Best Practices",
       "description": "Practical best practices for using AI code generation tools effectively in production development workflows.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-code-generation.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1215",
+      "wordCount": "1141",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,26 +74,16 @@
         <span class="tag-cat">Machine Learning</span></div>
       <h1 class="article-title">AI Code Generation Best Practices</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-code-generation.png" alt="AI Code Generation Best Practices" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>AI Code Generation Best Practices</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>AI code generation has transformed from a novelty into a core development tool. GitHub Copilot, Cursor, Claude, and similar tools now handle everything from boilerplate generation to complex algorithm implementation. However, using these tools effectively requires understanding their strengths, limitations, and the workflows that maximize their value.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Understanding Model Capabilities</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Current code generation models excel at:</p>
-<br>
-<br>
 <br>
 <p>* **Boilerplate and repetitive code**: API clients, CRUD operations, data models, and config files</p>
 <p>* **Common algorithms and patterns**: Sorting, searching, caching, and standard design patterns</p>
@@ -102,11 +92,7 @@
 <p>* **Code translation**: Converting code between languages or frameworks</p>
 <p>* **Regex and string manipulation**: Complex pattern matching and text processing</p>
 <br>
-<br>
-<br>
 <p>They struggle with:</p>
-<br>
-<br>
 <br>
 <p>* **Novel algorithms**: Problems requiring genuine innovation or specialized domain knowledge</p>
 <p>* **Security-critical code**: Authentication, authorization, and encryption require careful human review</p>
@@ -114,21 +100,11 @@
 <p>* **Rare edge cases**: Unusual combinations of constraints that appear simple but have hidden complexity</p>
 <p>* **Consistent style across large codebases**: Generated code may not match existing patterns</p>
 <br>
-<br>
-<br>
 <h2>  Effective Prompting for Code Generation</h2>
-<br>
-<br>
-<br>
 <br>
 <h3>Context is Everything</h3>
 <br>
-<br>
-<br>
-<br>
 <p>The quality of generated code depends directly on the context provided. A good prompt includes:</p>
-<br>
-<br>
 <br>
 <p>* **The programming language and framework** (explicitly, not implied)</p>
 <p>* **The data structures involved** (types, interfaces, schemas)</p>
@@ -136,36 +112,17 @@
 <p>* **Error handling expectations** (what should happen on failure)</p>
 <p>* **The surrounding code** (other functions, imports, and conventions)</p>
 <br>
-<br>
-<br>
 <p>**Weak prompt:**</p>
-<br>
 <br>
 <p>    Write a function to sort users by name.</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Strong prompt:**</p>
-<br>
 <br>
 <p>    Write a TypeScript function that sorts an array of User objects by their lastName field, then firstName. Users have {id: number, firstName: string, lastName: string, email: string}. Handle null/undefined lastName values by falling back to firstName. Use the native Array.sort() method. Return a new sorted array (don't mutate the input).</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Iterative Development</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Work with AI code generation in iterations:</p>
-<br>
-<br>
 <br>
 <p>* **Generate a skeleton**: Get the function signature and basic structure</p>
 <br>
@@ -173,27 +130,15 @@
 <br>
 <p>3\. **Review each addition**: Generated code might introduce subtle bugs in new layers</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Use the Right Tool for the Task</h3>
-<br>
-<br>
 <br>
 <p>* **Inline completion** (Copilot-style): Best for predictable continuations — completing a function body, adding a parameter, or writing a simple loop</p>
 <p>* **Chat-based generation** (Claude, ChatGPT): Best for complex implementations requiring discussion, multiple files, or architectural decisions</p>
 <p>* **Agent-based tools** (Devin, Cursor Agent): Best for multi-step tasks like "add a user authentication system" that span multiple files</p>
 <br>
-<br>
-<br>
 <h2>  Code Review Practices for AI-Generated Code</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Generated code requires more thorough review than human-written code, for different reasons:</p>
-<br>
-<br>
 <br>
 <p>* **Check for hallucinations**: AI may use non-existent libraries, functions, or API endpoints</p>
 <br>
@@ -205,28 +150,16 @@
 <br>
 <p>5\. **Check dependencies**: The model might suggest libraries that don't exist or are outdated</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Integrating Into CI/CD</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Establish guidelines for AI-generated code in your workflow:</p>
-<br>
-<br>
 <br>
 <p>* All generated code must be reviewed by a human</p>
 <p>* Generated code should pass existing linting, formatting, and type-checking</p>
 <p>* Test coverage requirements apply equally to AI-generated code</p>
 <p>* Attribution tags (`// AI-generated: reviewed by @username`) help track origins</p>
 <br>
-<br>
-<br>
 <h2>  Common Mistakes</h2>
-<br>
-<br>
 <br>
 <p>* **Over-reliance without review**: Treating generated code as correct without verification</p>
 <br>
@@ -238,13 +171,7 @@
 <br>
 <p>5\. **Inconsistent architecture**: Letting the AI make architectural decisions without oversight</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>AI code generation is a powerful productivity multiplier when used correctly. Provide rich context, iterate on prompts, review generated code carefully, and maintain your existing quality standards. The developers who benefit most are those who use AI as an accelerator while applying their own judgment to architecture, security, and correctness. The tool amplifies your ability — it does not replace it.</p></div>
     </article>

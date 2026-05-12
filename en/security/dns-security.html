@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/dns-security.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="DNS Security">
     <meta name="twitter:description" content="Comprehensive guide to DNS security including DNSSEC, DNS over HTTPS/TLS, split-horizon DNS, filtering strategies, and common attack vectors.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/dns-security.png">
     <title>DNS Security — SourceHub</title>
     <meta name="description" content="Comprehensive guide to DNS security including DNSSEC, DNS over HTTPS/TLS, split-horizon DNS, filtering strategies, and common attack vectors.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,15 +38,15 @@
       "@type": "Article",
       "headline": "DNS Security",
       "description": "Comprehensive guide to DNS security including DNSSEC, DNS over HTTPS/TLS, split-horizon DNS, filtering strategies, and common attack vectors.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/dns-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1194",
+      "wordCount": "1075",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/dns-security.html"},
-      "articleBody": "DNS Security Introduction The Domain Name System (DNS) is a foundational internet protocol that translates human-readable domain names to IP addresses. Despite its critical role, DNS was designed without security considerations, making it a prime target for attacks including cache poisoning, tunneling, and DDoS amplification. DNSSEC DNS Security Extensions (DNSSEC) adds cryptographic signatures to DNS records, ensuring authenticity and integrity. It protects against cache poisoning attacks where an attacker injects forged DNS responses. DNSSEC uses a chain of trust starting from the DNS root zone. Each zone signs its records with a private key, and resolvers verify signatures using corresponding public keys stored as DNSKEY records. # Checking DNSSEC validation with dig dig +dnssec example.com # Verify DNSSEC chain delv example.com # Check if a domain is DNSSEC-signed dig example.com DNSKEY Key DNSSEC record types: * **RRSIG**: Resource Record Signature \u2014 cryptographic signature for a record set * **DNSKEY**: Public key used for signature verification * **DS**: Delegation Signer \u2014 hash of the child zone's DNSKEY, stored in the parent zone * **NSEC/NSEC3**: Next Secure \u2014 provides authenticated denial of existence # BIND DNSSEC configuration example zone \"example.com\" { type master; file \"/etc/bind/db.example.com\"; auto-dnssec maintain; inline-signing yes; key-directory \"/etc/bind/keys\"; }; DNS over HTTPS and DNS over TLS Traditional DNS queries are sent in cleartext over UDP, making them visible to network observers and susceptible to manipulation. DNS over HTTPS (DoH) and DNS over TLS (DoT) encrypt queries. * **DoT** (RFC 7858): DNS over a dedicated TLS connection on port 853 * **DoH** (RFC 8484): DNS over HTTP/2 or HTTP/3 on port 443, blending with HTTPS traffic # Nginx DoH proxy configuration location /dns-query { proxy_pass http://127.0.0.1:8053; proxy_set_header Host $host; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; } # unbound configuration with DoT forwarder forward-zone: name: \".\" forward-tls-upstream: yes forward-addr: 1.1.1.1@853#cloudflare-dns.com forward-addr: 8.8.8.8@853#dns.google Split-Horizon DNS Split-horizon DNS returns different responses based on the requester's network origin. Internal users receive private IP addresses while external users receive public addresses. # BIND split-horizon configuration view \"internal\" { match-clients { 10.0.0.0/8; 172.16.0.0/12; 192.168.0.0/16; }; zone \"example.com\" { type master; file \"/etc/bind/db.example.com.internal\"; }; }; view \"external\" { match-clients { any; }; zone \"example.com\" { type master; file \"/etc/bind/db.example.com.external\"; }; }; DNS Filtering and Threat Blocking DNS filtering blocks resolution of known malicious domains. Modern solutions integrate threat intelligence feeds to dynamically block malware, phishing, and command-and-control (C2) domains. # Simple DNS filter using dnspython import dns.resolver THREAT_FEED = set() def load_threat_feed(feed_url): # Download and parse threat intelligence feed response = requests.get(feed_url) for domain in response.text.splitlines(): THREAT_FEED.add(domain.strip().lower()) def safe_resolve(domain, resolver): if domain.lower() in THREAT_FEED: return None # Block resolution return resolver.resolve(domain, 'A') Common DNS Attacks * **Cache Poisoning**: Attacker injects forged records into a resolver's cache. Mitigated by DNSSEC and source port randomization. 2\\. **DNS Tunneling**: Encodes data in DNS queries to exfiltrate data or bypass network controls. Detected via traffic analysis of unusual query patterns. 3\\. **DNS Amplification DDoS**: Attacker sends small queries with spoofed source IPs; responses can be 50x larger. Mitigated by response rate limiting (RRL) and BCP38 filtering. 4\\. **NXDOMAIN Attacks**: High volume of queries for non-existent domains exhausts resolver resources. # Response Rate Limiting in BIND options { rate-limit { responses-per-second 5; window 5; log-only yes; }; }; Conclusion Securing DNS requires a layered approach: DNSSEC for integrity, encrypted transports for confidentiality, split-horizon for network segmentation, and threat intelligence for proactive blocking. Regular monitoring and logging of DNS traffic is essential for detecting anomalous behavior indicative of compromise."
+      "articleBody": "DNS Security DNS Security Introduction The Domain Name System (DNS) is a foundational internet protocol that translates human-readable domain names to IP addresses. Despite its critical role, DNS was designed without security considerations, making it a prime target for attacks including cache poisoning, tunneling, and DDoS amplification. DNSSEC DNS Security Extensions (DNSSEC) adds cryptographic signatures to DNS records, ensuring authenticity and integrity. It protects against cache poisoning attacks where an attacker injects forged DNS responses. DNSSEC uses a chain of trust starting from the DNS root zone. Each zone signs its records with a private key, and resolvers verify signatures using corresponding public keys stored as DNSKEY records. Checking DNSSEC validation with dig dig +dnssec example.com Verify DNSSEC chain delv example.com Check if a domain is DNSSEC-signed dig example.com DNSKEY Key DNSSEC record types: * **RRSIG**: Resource Record Signature \u2014 cryptographic signature for a record set * **DNSKEY**: Public key used for signature verification * **DS**: Delegation Signer \u2014 hash of the child zone's DNSKEY, stored in the parent zone * **NSEC/NSEC3**: Next Secure \u2014 provides authenticated denial of existence BIND DNSSEC configuration example zone \"example.com\" { type master; file \"/etc/bind/db.example.com\"; auto-dnssec maintain; inline-signing yes; key-directory \"/etc/bind/keys\"; }; DNS over HTTPS and DNS over TLS Traditional DNS queries are sent in cleartext over UDP, making them visible to network observers and susceptible to manipulation. DNS over HTTPS (DoH) and DNS over TLS (DoT) encrypt queries. * **DoT** (RFC 7858): DNS over a dedicated TLS connection on port 853 * **DoH** (RFC 8484): DNS over HTTP/2 or HTTP/3 on port 443, blending with HTTPS traffic Nginx DoH proxy configuration location /dns-query { proxy_pass http://127.0.0.1:8053; proxy_set_header Host $host; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; } unbound configuration with DoT forwarder forward-zone: name: \".\" forward-tls-upstream: yes forward-addr: 1.1.1.1@853#cloudflare-dns.com forward-addr: 8.8.8.8@853#dns.google Split-Horizon DNS Split-horizon DNS returns different responses based on the requester's network origin. Internal users receive private IP addresses while external users receive public addresses. BIND split-horizon configuration view \"internal\" { match-clients { 10.0.0.0/8; 172.16.0.0/12; 192.168.0.0/16; }; zone \"example.com\" { type master; file \"/etc/bind/db.example.com.internal\"; }; }; view \"external\" { match-clients { any; }; zone \"example.com\" { type master; file \"/etc/bind/db.example.com.external\"; }; }; DNS Filtering and Threat Blocking DNS filtering blocks resolution of known malicious domains. Modern solutions integrate threat intelligence feeds to dynamically block malware, phishing, and command-and-control (C2) domains. Simple DNS filter using dnspython import dns.resolver THREAT_FEED = set() def load_threat_feed(feed_url): Download and parse threat intelligence feed response = requests.get(feed_url) for domain in response.text.splitlines(): THREAT_FEED.add(domain.strip().lower()) def safe_resolve(domain, resolver): if domain.lower() in THREAT_FEED: return None # Block resolution return resolver.resolve(domain, 'A') Common DNS Attacks * **Cache Poisoning**: Attacker injects forged records into a resolver's cache. Mitigated by DNSSEC and source port randomization. 2\\\\. **DNS Tunneling**: Encodes data in DNS queries to exfiltrate data or bypass network controls. Detected via traffic analysis of unusual query patterns. 3\\\\. **DNS Amplification DDoS**: Attacker sends small queries with spoofed source IPs; responses can be 50x larger. Mitigated by response rate limiting (RRL) and BCP38 filtering. 4\\\\. **NXDOMAIN Attacks**: High volume of queries for non-existent domains exhausts resolver resources. Response Rate Limiting in BIND options { rate-limit { responses-per-second 5; window 5; log-only yes; }; }; Conclusion Securing DNS requires a layered approach: DNSSEC for integrity, encrypted transports for confidentiality, split-horizon for network segmentation, and threat intelligence for proactive blocking. Regular monitoring and logging of DNS traffic is essential for detecting anomalous behavior indicative of compromise."
     }
     </script>
     <script type="application/ld+json">
@@ -75,210 +75,177 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">DNS Security</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/dns-security.png" alt="DNS Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>DNS Security</h1>
 <br>
-<p>Introduction   </p>
-<p>The Domain Name System (DNS) is a foundational internet protocol that translates human-readable domain names to IP addresses. Despite its critical role, DNS was designed without security considerations, making it a prime target for attacks including cache poisoning, tunneling, and DDoS amplification.   </p>
-<p>DNSSEC   </p>
-<p>DNS Security Extensions (DNSSEC) adds cryptographic signatures to DNS records, ensuring authenticity and integrity. It protects against cache poisoning attacks where an attacker injects forged DNS responses.   </p>
-<p>DNSSEC uses a chain of trust starting from the DNS root zone. Each zone signs its records with a private key, and resolvers verify signatures using corresponding public keys stored as DNSKEY records.   </p>
+<h1>DNS Security</h1>
 <br>
+<p>Introduction </p>
 <br>
+<p>The Domain Name System (DNS) is a foundational internet protocol that translates human-readable domain names to IP addresses. Despite its critical role, DNS was designed without security considerations, making it a prime target for attacks including cache poisoning, tunneling, and DDoS amplification. </p>
 <br>
-<p>    # Checking DNSSEC validation with dig</p>
+<p>DNSSEC </p>
 <br>
-<p>    dig +dnssec example.com</p>
+<p>DNS Security Extensions (DNSSEC) adds cryptographic signatures to DNS records, ensuring authenticity and integrity. It protects against cache poisoning attacks where an attacker injects forged DNS responses. </p>
 <br>
+<p>DNSSEC uses a chain of trust starting from the DNS root zone. Each zone signs its records with a private key, and resolvers verify signatures using corresponding public keys stored as DNSKEY records. </p>
 <br>
+<h1>Checking DNSSEC validation with dig</h1>
 <br>
-<p>    # Verify DNSSEC chain</p>
+<p>dig +dnssec example.com</p>
 <br>
-<p>    delv example.com</p>
+<h1>Verify DNSSEC chain</h1>
 <br>
+<p>delv example.com</p>
 <br>
+<h1>Check if a domain is DNSSEC-signed</h1>
 <br>
-<p>    # Check if a domain is DNSSEC-signed</p>
-<br>
-<p>    dig example.com DNSKEY</p>
-<br>
-<br>
-<br>
+<p>dig example.com DNSKEY</p>
 <br>
 <p>Key DNSSEC record types:</p>
+<br>
 <p>* **RRSIG**: Resource Record Signature — cryptographic signature for a record set</p>
+<br>
 <p>* **DNSKEY**: Public key used for signature verification</p>
+<br>
 <p>* **DS**: Delegation Signer — hash of the child zone's DNSKEY, stored in the parent zone</p>
+<br>
 <p>* **NSEC/NSEC3**: Next Secure — provides authenticated denial of existence</p>
 <br>
+<h1>BIND DNSSEC configuration example</h1>
 <br>
+<p>zone "example.com" {</p>
 <br>
+<p>type master;</p>
 <br>
-<p>    # BIND DNSSEC configuration example</p>
+<p>file "/etc/bind/db.example.com";</p>
 <br>
-<p>    zone "example.com" {</p>
+<p>auto-dnssec maintain;</p>
 <br>
-<p>        type master;</p>
+<p>inline-signing yes;</p>
 <br>
-<p>        file "/etc/bind/db.example.com";</p>
+<p>key-directory "/etc/bind/keys";</p>
 <br>
-<p>        auto-dnssec maintain;</p>
+<p>};</p>
 <br>
-<p>        inline-signing yes;</p>
+<p>DNS over HTTPS and DNS over TLS </p>
 <br>
-<p>        key-directory "/etc/bind/keys";</p>
-<br>
-<p>    };</p>
-<br>
-<br>
-<br>
-<br>
-<p>DNS over HTTPS and DNS over TLS   </p>
-<p>Traditional DNS queries are sent in cleartext over UDP, making them visible to network observers and susceptible to manipulation. DNS over HTTPS (DoH) and DNS over TLS (DoT) encrypt queries.   </p>
+<p>Traditional DNS queries are sent in cleartext over UDP, making them visible to network observers and susceptible to manipulation. DNS over HTTPS (DoH) and DNS over TLS (DoT) encrypt queries. </p>
 <br>
 <p>* **DoT** (RFC 7858): DNS over a dedicated TLS connection on port 853</p>
+<br>
 <p>* **DoH** (RFC 8484): DNS over HTTP/2 or HTTP/3 on port 443, blending with HTTPS traffic</p>
 <br>
+<h1>Nginx DoH proxy configuration</h1>
 <br>
+<p>location /dns-query {</p>
 <br>
+<p>proxy_pass http://127.0.0.1:8053;</p>
 <br>
-<p>    # Nginx DoH proxy configuration</p>
+<p>proxy_set_header Host $host;</p>
 <br>
-<p>    location /dns-query {</p>
+<p>proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</p>
 <br>
-<p>        proxy_pass http://127.0.0.1:8053;</p>
+<p>}</p>
 <br>
-<p>        proxy_set_header Host $host;</p>
+<h1>unbound configuration with DoT forwarder</h1>
 <br>
-<p>        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</p>
+<p>forward-zone:</p>
 <br>
-<p>    }</p>
+<p>name: "."</p>
 <br>
+<p>forward-tls-upstream: yes</p>
 <br>
+<p>forward-addr: 1.1.1.1@853#cloudflare-dns.com</p>
 <br>
+<p>forward-addr: 8.8.8.8@853#dns.google</p>
 <br>
+<p>Split-Horizon DNS </p>
 <br>
+<p>Split-horizon DNS returns different responses based on the requester's network origin. Internal users receive private IP addresses while external users receive public addresses. </p>
 <br>
+<h1>BIND split-horizon configuration</h1>
 <br>
-<p>    # unbound configuration with DoT forwarder</p>
+<p>view "internal" {</p>
 <br>
-<p>    forward-zone:</p>
+<p>match-clients { 10.0.0.0/8; 172.16.0.0/12; 192.168.0.0/16; };</p>
 <br>
-<p>        name: "."</p>
+<p>zone "example.com" {</p>
 <br>
-<p>        forward-tls-upstream: yes</p>
+<p>type master;</p>
 <br>
-<p>        forward-addr: 1.1.1.1@853#cloudflare-dns.com</p>
+<p>file "/etc/bind/db.example.com.internal";</p>
 <br>
-<p>        forward-addr: 8.8.8.8@853#dns.google</p>
+<p>};</p>
 <br>
+<p>};</p>
 <br>
+<p>view "external" {</p>
 <br>
+<p>match-clients { any; };</p>
 <br>
-<p>Split-Horizon DNS   </p>
-<p>Split-horizon DNS returns different responses based on the requester's network origin. Internal users receive private IP addresses while external users receive public addresses.   </p>
+<p>zone "example.com" {</p>
 <br>
+<p>type master;</p>
 <br>
+<p>file "/etc/bind/db.example.com.external";</p>
 <br>
-<p>    # BIND split-horizon configuration</p>
+<p>};</p>
 <br>
-<p>    view "internal" {</p>
+<p>};</p>
 <br>
-<p>        match-clients { 10.0.0.0/8; 172.16.0.0/12; 192.168.0.0/16; };</p>
+<p>DNS Filtering and Threat Blocking </p>
 <br>
-<p>        zone "example.com" {</p>
+<p>DNS filtering blocks resolution of known malicious domains. Modern solutions integrate threat intelligence feeds to dynamically block malware, phishing, and command-and-control (C2) domains. </p>
 <br>
-<p>            type master;</p>
+<h1>Simple DNS filter using dnspython</h1>
 <br>
-<p>            file "/etc/bind/db.example.com.internal";</p>
+<p>import dns.resolver</p>
 <br>
-<p>        };</p>
+<p>THREAT_FEED = set()</p>
 <br>
-<p>    };</p>
+<p>def load_threat_feed(feed_url):</p>
 <br>
+<h1>Download and parse threat intelligence feed</h1>
 <br>
+<p>response = requests.get(feed_url)</p>
 <br>
-<p>    view "external" {</p>
+<p>for domain in response.text.splitlines():</p>
 <br>
-<p>        match-clients { any; };</p>
+<p>THREAT_FEED.add(domain.strip().lower())</p>
 <br>
-<p>        zone "example.com" {</p>
+<p>def safe_resolve(domain, resolver):</p>
 <br>
-<p>            type master;</p>
+<p>if domain.lower() in THREAT_FEED:</p>
 <br>
-<p>            file "/etc/bind/db.example.com.external";</p>
+<p>return None # Block resolution</p>
 <br>
-<p>        };</p>
+<p>return resolver.resolve(domain, 'A')</p>
 <br>
-<p>    };</p>
-<br>
-<br>
-<br>
-<br>
-<p>DNS Filtering and Threat Blocking   </p>
-<p>DNS filtering blocks resolution of known malicious domains. Modern solutions integrate threat intelligence feeds to dynamically block malware, phishing, and command-and-control (C2) domains.   </p>
-<br>
-<br>
-<br>
-<p>    # Simple DNS filter using dnspython</p>
-<br>
-<p>    import dns.resolver</p>
-<br>
-<br>
-<br>
-<p>    THREAT_FEED = set()</p>
-<br>
-<br>
-<br>
-<p>    def load_threat_feed(feed_url):</p>
-<br>
-<p>        # Download and parse threat intelligence feed</p>
-<br>
-<p>        response = requests.get(feed_url)</p>
-<br>
-<p>        for domain in response.text.splitlines():</p>
-<br>
-<p>            THREAT_FEED.add(domain.strip().lower())</p>
-<br>
-<br>
-<br>
-<p>    def safe_resolve(domain, resolver):</p>
-<br>
-<p>        if domain.lower() in THREAT_FEED:</p>
-<br>
-<p>            return None  # Block resolution</p>
-<br>
-<p>        return resolver.resolve(domain, 'A')</p>
-<br>
-<br>
-<br>
-<br>
-<p>Common DNS Attacks   </p>
+<p>Common DNS Attacks </p>
 <br>
 <p>* **Cache Poisoning**: Attacker injects forged records into a resolver's cache. Mitigated by DNSSEC and source port randomization.</p>
-<p>2\. **DNS Tunneling**: Encodes data in DNS queries to exfiltrate data or bypass network controls. Detected via traffic analysis of unusual query patterns. 3\. **DNS Amplification DDoS**: Attacker sends small queries with spoofed source IPs; responses can be 50x larger. Mitigated by response rate limiting (RRL) and BCP38 filtering. 4\. **NXDOMAIN Attacks**: High volume of queries for non-existent domains exhausts resolver resources.   </p>
 <br>
+<p>2\\. **DNS Tunneling**: Encodes data in DNS queries to exfiltrate data or bypass network controls. Detected via traffic analysis of unusual query patterns. 3\\. **DNS Amplification DDoS**: Attacker sends small queries with spoofed source IPs; responses can be 50x larger. Mitigated by response rate limiting (RRL) and BCP38 filtering. 4\\. **NXDOMAIN Attacks**: High volume of queries for non-existent domains exhausts resolver resources. </p>
 <br>
+<h1>Response Rate Limiting in BIND</h1>
 <br>
-<p>    # Response Rate Limiting in BIND</p>
+<p>options {</p>
 <br>
-<p>    options {</p>
+<p>rate-limit {</p>
 <br>
-<p>        rate-limit {</p>
+<p>responses-per-second 5;</p>
 <br>
-<p>            responses-per-second 5;</p>
+<p>window 5;</p>
 <br>
-<p>            window 5;</p>
+<p>log-only yes;</p>
 <br>
-<p>            log-only yes;</p>
+<p>};</p>
 <br>
-<p>        };</p>
+<p>};</p>
 <br>
-<p>    };</p>
+<p>Conclusion </p>
 <br>
-<br>
-<br>
-<br>
-<p>Conclusion   </p>
 <p>Securing DNS requires a layered approach: DNSSEC for integrity, encrypted transports for confidentiality, split-horizon for network segmentation, and threat intelligence for proactive blocking. Regular monitoring and logging of DNS traffic is essential for detecting anomalous behavior indicative of compromise.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

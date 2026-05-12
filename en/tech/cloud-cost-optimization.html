@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/cloud-cost-optimization.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Cloud Cost Optimization Tips">
     <meta name="twitter:description" content="Actionable strategies to reduce cloud infrastructure costs across AWS, GCP, and Azure without sacrificing performance.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/cloud-cost-optimization.png">
     <title>Cloud Cost Optimization Tips — SourceHub</title>
     <meta name="description" content="Actionable strategies to reduce cloud infrastructure costs across AWS, GCP, and Azure without sacrificing performance.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,15 +38,15 @@
       "@type": "Article",
       "headline": "Cloud Cost Optimization Tips",
       "description": "Actionable strategies to reduce cloud infrastructure costs across AWS, GCP, and Azure without sacrificing performance.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/cloud-cost-optimization.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1725",
+      "wordCount": "1527",
       "keywords": "Technology, Programming, DevOps",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/cloud-cost-optimization.html"},
-      "articleBody": "Cloud Cost Optimization Tips Cloud costs are often the second-largest expense after payroll for SaaS companies. Without active management, spending grows faster than revenue. This guide covers practical cost optimization strategies that reduce bills by 30-50% without sacrificing performance. Right-Sizing Instances The most common waste is over-provisioned resources. Use cloud provider tools to analyze utilization: * **AWS Compute Optimizer**: Analyzes CPU, memory, and network utilization to recommend instance types. * **GCP Rightsizing Recommendations**: Built into the Compute Engine console. * **Azure Advisor**: Provides cost recommendations across all services. Target utilization rules of thumb: | Resource | Target Utilization | |----------|-------------------| | CPU | 40-70% average | | Memory | 60-80% average | | Disk IOPS | Below 80% of provisioned | Downsize instances that consistently run below 20% utilization. For variable workloads, consider scaling horizontally rather than vertically. Reserved Instances and Savings Plans Commit to usage in exchange for discounts: | Option | Discount | Commitment | |--------|----------|------------| | AWS Reserved Instances | 40-60% | 1 or 3 years | | AWS Savings Plans | 40-60% | 1 or 3 years ($/hour) | | GCP Committed Use | 40-57% | 1 or 3 years | | Azure Reserved | 40-60% | 1 or 3 years | Start with 1-year commitments for baseline workloads (30-50% of your total compute). Use 3-year commitments for stable, predictable workloads. Combine Savings Plans with Spot Instances for maximum flexibility. Spot and Preemptible Instances Use spot instances (AWS), preemptible VMs (GCP), or low-priority VMs (Azure) for fault-tolerant workloads: # AWS: Request spot instances in Auto Scaling aws autoscaling create-auto-scaling-group \\ --mixed-instances-policy file://spot-policy.json # GCP: Create preemptible VM gcloud compute instances create worker \\ --preemptible Ideal workloads: batch processing, CI/CD runners, stateless web workers, data analytics, rendering. Savings: 60-90% compared to on-demand pricing. Combine with Spot Instance interruption handling (checkpointing, graceful shutdown). Storage Optimization Storage costs accumulate silently. Audit your storage regularly: * **Delete unused volumes**: Snapshots of deleted volumes and unattached EBS volumes. * **Use lifecycle policies**: Move infrequently accessed data to colder tiers. * **Object storage tiers**: | Tier | Cost/GB/Month | Use Case | |------|--------------|----------| | S3 Standard | $0.023 | Active data | | S3 Infrequent Access | $0.0125 | Accessed monthly | | S3 Glacier | $0.0036 | Archived data | | S3 Deep Archive | $0.001 | Regulatory retention | Set S3 Lifecycle rules to transition objects automatically: { \"Rules\": [ { \"Id\": \"MoveToIA\", \"Filter\": {\"Prefix\": \"logs/\"}, \"Status\": \"Enabled\", \"Transitions\": [ {\"Days\": 30, \"StorageClass\": \"STANDARD_IA\"}, {\"Days\": 90, \"StorageClass\": \"GLACIER\"} ], \"Expiration\": {\"Days\": 365} } ] } Network Egress Costs Data transfer out of cloud providers is expensive. Minimize egress: * **Use the same region**: Keep services that communicate frequently in the same region. Cross-region traffic is billed. * **CloudFront/CDN**: Serve static assets through a CDN. CloudFront data transfer to the internet is cheaper than S3 direct access. * **Leverage direct connect**: For large data transfers, use AWS Direct Connect or equivalent. * **NAT Gateway costs**: Use NAT instances instead of NAT Gateway for high-volume traffic (cost savings of 70-80%). Autoscaling Scale resources to match demand: # AWS Auto Scaling with target tracking autoscaling: target_tracking: - predefined_metric_specification: predefined_metric_type: ASGAverageCPUUtilization target_value: 60 For containerized workloads, use Kubernetes Cluster Autoscaler: # Karpenter for AWS EKS kubectl scale deployment api-server --replicas=0 # Automated idle scaling Karpenter and similar tools scale nodes based on actual pod resource requests, eliminating node-level waste. Database Cost Optimization Databases are often the most expensive service: * **Serverless databases**: Use Aurora Serverless, Cloud SQL auto-scaling, or Azure SQL Serverless for variable workloads. * **Read replicas**: Add replicas for read-heavy workloads instead of upscaling a single instance. * **Connection pooling**: Use PgBouncer or RDS Proxy to handle thousands of connections without provisioning for peak. * **Delete old data**: Archive historical data to object storage. Reserved Capacity with Spot Combine reserved capacity for baseline with spot for spikes: # Terraform: Mix OD and Spot in ASG resource \"aws_autoscaling_group\" \"app\" { mixed_instances_policy { launch_template { launch_template_specification { ... } override { instance_type = \"t3.medium\" } } instances_distribution { on_demand_base_capacity = 2 on_demand_percentage_above_base_capacity = 50 # Rest from Spot spot_allocation_strategy = \"capacity-optimized\" } } } Monitoring and Budgets Set up cost monitoring to catch anomalies early: # AWS Budget with action aws budgets create-budget \\ --budget-name \"Monthly-Infra\" \\ --budget-file monthly-budget.json \\ --notifications-with-subscribers file://alert-config.json # GCP budget alert gcloud billing budgets create \\ --billing-account=XXXXXX \\ --display-name=\"Monthly Budget\" \\ --budget-amount=5000USD \\ --threshold-rules=percent=50,percent=90 \\ --notifications-pubsub-topic=budget-alerts Set up alerts at 50%, 80%, and 90% of budget. Tag resources by cost center and review spending weekly. Summary Cloud cost optimization is an ongoing process, not a one-time cleanup. Start with right-sizing (the quickest wins), add reserved capacity for baseline workloads, use spot instances for fault-tolerant work, and configure autoscaling to match demand. Monitor storage lifecycle, minimize data egress, and optimize database tiering. The most effective approach is a 20% time investment per quarter: review spending, tag resources, and implement the top three savings opportunities. Most organizations can reduce their cloud bill by 30-50% within three months by following these practices."
+      "articleBody": "Cloud Cost Optimization Tips Cloud Cost Optimization Tips Cloud costs are often the second-largest expense after payroll for SaaS companies. Without active management, spending grows faster than revenue. This guide covers practical cost optimization strategies that reduce bills by 30-50% without sacrificing performance. Right-Sizing Instances The most common waste is over-provisioned resources. Use cloud provider tools to analyze utilization: * **AWS Compute Optimizer**: Analyzes CPU, memory, and network utilization to recommend instance types. * **GCP Rightsizing Recommendations**: Built into the Compute Engine console. * **Azure Advisor**: Provides cost recommendations across all services. Target utilization rules of thumb: | Resource | Target Utilization | |----------|-------------------| | CPU | 40-70% average | | Memory | 60-80% average | | Disk IOPS | Below 80% of provisioned | Downsize instances that consistently run below 20% utilization. For variable workloads, consider scaling horizontally rather than vertically. Reserved Instances and Savings Plans Commit to usage in exchange for discounts: | Option | Discount | Commitment | |--------|----------|------------| | AWS Reserved Instances | 40-60% | 1 or 3 years | | AWS Savings Plans | 40-60% | 1 or 3 years ($/hour) | | GCP Committed Use | 40-57% | 1 or 3 years | | Azure Reserved | 40-60% | 1 or 3 years | Start with 1-year commitments for baseline workloads (30-50% of your total compute). Use 3-year commitments for stable, predictable workloads. Combine Savings Plans with Spot Instances for maximum flexibility. Spot and Preemptible Instances Use spot instances (AWS), preemptible VMs (GCP), or low-priority VMs (Azure) for fault-tolerant workloads: AWS: Request spot instances in Auto Scaling aws autoscaling create-auto-scaling-group \\ \\--mixed-instances-policy file://spot-policy.json GCP: Create preemptible VM gcloud compute instances create worker \\ \\--preemptible Ideal workloads: batch processing, CI/CD runners, stateless web workers, data analytics, rendering. Savings: 60-90% compared to on-demand pricing. Combine with Spot Instance interruption handling (checkpointing, graceful shutdown). Storage Optimization Storage costs accumulate silently. Audit your storage regularly: * **Delete unused volumes**: Snapshots of deleted volumes and unattached EBS volumes. * **Use lifecycle policies**: Move infrequently accessed data to colder tiers. * **Object storage tiers**: | Tier | Cost/GB/Month | Use Case | |------|--------------|----------| | S3 Standard | $0.023 | Active data | | S3 Infrequent Access | $0.0125 | Accessed monthly | | S3 Glacier | $0.0036 | Archived data | | S3 Deep Archive | $0.001 | Regulatory retention | Set S3 Lifecycle rules to transition objects automatically: { \"Rules\": [ { \"Id\": \"MoveToIA\", \"Filter\": {\"Prefix\": \"logs/\"}, \"Status\": \"Enabled\", \"Transitions\": [ {\"Days\": 30, \"StorageClass\": \"STANDARD_IA\"}, {\"Days\": 90, \"StorageClass\": \"GLACIER\"} ], \"Expiration\": {\"Days\": 365} } ] } Network Egress Costs Data transfer out of cloud providers is expensive. Minimize egress: * **Use the same region**: Keep services that communicate frequently in the same region. Cross-region traffic is billed. * **CloudFront/CDN**: Serve static assets through a CDN. CloudFront data transfer to the internet is cheaper than S3 direct access. * **Leverage direct connect**: For large data transfers, use AWS Direct Connect or equivalent. * **NAT Gateway costs**: Use NAT instances instead of NAT Gateway for high-volume traffic (cost savings of 70-80%). Autoscaling Scale resources to match demand: AWS Auto Scaling with target tracking autoscaling: target_tracking: \\- predefined_metric_specification: predefined_metric_type: ASGAverageCPUUtilization target_value: 60 For containerized workloads, use Kubernetes Cluster Autoscaler: Karpenter for AWS EKS kubectl scale deployment api-server --replicas=0 # Automated idle scaling Karpenter and similar tools scale nodes based on actual pod resource requests, eliminating node-level waste. Database Cost Optimization Databases are often the most expensive service: * **Serverless databases**: Use Aurora Serverless, Cloud SQL auto-scaling, or Azure SQL Serverless for variable workloads. * **Read replicas**: Add replicas for read-heavy workloads instead of upscaling a single instance. * **Connection pooling**: Use PgBouncer or RDS Proxy to handle thousands of connections without provisioning for peak. * **Delete old data**: Archive historical data to object storage. Reserved Capacity with Spot Combine reserved capacity for baseline with spot for spikes: Terraform: Mix OD and Spot in ASG resource \"aws_autoscaling_group\" \"app\" { mixed_instances_policy { launch_template { launch_template_specification { ... } override { instance_type = \"t3.medium\" } } instances_distribution { on_demand_base_capacity = 2 on_demand_percentage_above_base_capacity = 50 # Rest from Spot spot_allocation_strategy = \"capacity-optimized\" } } } Monitoring and Budgets Set up cost monitoring to catch anomalies early: AWS Budget with action aws budgets create-budget \\ \\--budget-name \"Monthly-Infra\" \\ \\--budget-file monthly-budget.json \\ \\--notifications-with-subscribers file://alert-config.json GCP budget alert gcloud billing budgets create \\ \\--billing-account=XXXXXX \\ \\--display-name=\"Monthly Budget\" \\ \\--budget-amount=5000USD \\ \\--threshold-rules=percent=50,percent=90 \\ \\--notifications-pubsub-topic=budget-alerts Set up alerts at 50%, 80%, and 90% of budget. Tag resources by cost center and review spending weekly. Summary Cloud cost optimization is an ongoing process, not a one-time cleanup. Start with right-sizing (the quickest wins), add reserved capacity for baseline workloads, use spot instances for fault-tolerant work, and configure autoscaling to match demand. Monitor storage lifecycle, minimize data egress, and optimize database tiering. The most effective approach is a 20% time investment per quarter: review spending, tag resources, and implement the top three savings opportunities. Most organizations can reduce their cloud bill by 30-50% within three months by following these practices."
     }
     </script>
     <script type="application/ld+json">
@@ -75,32 +75,24 @@
         <span class="tag-cat">DevOps</span></div>
       <h1 class="article-title">Cloud Cost Optimization Tips</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/cloud-cost-optimization.png" alt="Cloud Cost Optimization Tips" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Cloud Cost Optimization Tips</h1>
+<br>
+<h1>Cloud Cost Optimization Tips</h1>
 <br>
 <p>Cloud costs are often the second-largest expense after payroll for SaaS companies. Without active management, spending grows faster than revenue. This guide covers practical cost optimization strategies that reduce bills by 30-50% without sacrificing performance.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Right-Sizing Instances</h2>
-<br>
-<br>
-<br>
 <br>
 <p>The most common waste is over-provisioned resources. Use cloud provider tools to analyze utilization:</p>
 <br>
-<br>
-<br>
 <p>* **AWS Compute Optimizer**: Analyzes CPU, memory, and network utilization to recommend instance types.</p>
+<br>
 <p>* **GCP Rightsizing Recommendations**: Built into the Compute Engine console.</p>
+<br>
 <p>* **Azure Advisor**: Provides cost recommendations across all services.</p>
 <br>
-<br>
-<br>
 <p>Target utilization rules of thumb:</p>
-<br>
-<br>
-<br>
 <br>
 <p>| Resource | Target Utilization |</p>
 <br>
@@ -112,23 +104,11 @@
 <br>
 <p>| Disk IOPS | Below 80% of provisioned |</p>
 <br>
-<br>
-<br>
-<br>
 <p>Downsize instances that consistently run below 20% utilization. For variable workloads, consider scaling horizontally rather than vertically.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Reserved Instances and Savings Plans</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Commit to usage in exchange for discounts:</p>
-<br>
-<br>
-<br>
 <br>
 <p>| Option | Discount | Commitment |</p>
 <br>
@@ -142,68 +122,37 @@
 <br>
 <p>| Azure Reserved | 40-60% | 1 or 3 years |</p>
 <br>
-<br>
-<br>
-<br>
 <p>Start with 1-year commitments for baseline workloads (30-50% of your total compute). Use 3-year commitments for stable, predictable workloads. Combine Savings Plans with Spot Instances for maximum flexibility.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Spot and Preemptible Instances</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Use spot instances (AWS), preemptible VMs (GCP), or low-priority VMs (Azure) for fault-tolerant workloads:</p>
 <br>
+<h1>AWS: Request spot instances in Auto Scaling</h1>
 <br>
+<p>aws autoscaling create-auto-scaling-group \</p>
 <br>
+<p>\--mixed-instances-policy file://spot-policy.json</p>
 <br>
+<h1>GCP: Create preemptible VM</h1>
 <br>
-<p>    # AWS: Request spot instances in Auto Scaling</p>
+<p>gcloud compute instances create worker \</p>
 <br>
-<p>    aws autoscaling create-auto-scaling-group \</p>
-<br>
-<p>      --mixed-instances-policy file://spot-policy.json</p>
-<br>
-<br>
-<br>
-<p>    # GCP: Create preemptible VM</p>
-<br>
-<p>    gcloud compute instances create worker \</p>
-<br>
-<p>      --preemptible</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>\--preemptible</p>
 <br>
 <p>Ideal workloads: batch processing, CI/CD runners, stateless web workers, data analytics, rendering.</p>
 <br>
-<br>
-<br>
-<br>
 <p>Savings: 60-90% compared to on-demand pricing. Combine with Spot Instance interruption handling (checkpointing, graceful shutdown).</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Storage Optimization</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Storage costs accumulate silently. Audit your storage regularly:</p>
 <br>
-<br>
-<br>
 <p>* **Delete unused volumes**: Snapshots of deleted volumes and unattached EBS volumes.</p>
+<br>
 <p>* **Use lifecycle policies**: Move infrequently accessed data to colder tiers.</p>
+<br>
 <p>* **Object storage tiers**: </p>
-<br>
-<br>
 <br>
 <p>| Tier | Cost/GB/Month | Use Case |</p>
 <br>
@@ -217,227 +166,151 @@
 <br>
 <p>| S3 Deep Archive | $0.001 | Regulatory retention |</p>
 <br>
-<br>
-<br>
-<br>
 <p>Set S3 Lifecycle rules to transition objects automatically:</p>
 <br>
+<p>{</p>
 <br>
+<p>"Rules": [</p>
 <br>
+<p>{</p>
 <br>
+<p>"Id": "MoveToIA",</p>
 <br>
-<p>    {</p>
+<p>"Filter": {"Prefix": "logs/"},</p>
 <br>
-<p>      "Rules": [</p>
+<p>"Status": "Enabled",</p>
 <br>
-<p>        {</p>
+<p>"Transitions": [</p>
 <br>
-<p>          "Id": "MoveToIA",</p>
+<p>{"Days": 30, "StorageClass": "STANDARD_IA"},</p>
 <br>
-<p>          "Filter": {"Prefix": "logs/"},</p>
+<p>{"Days": 90, "StorageClass": "GLACIER"}</p>
 <br>
-<p>          "Status": "Enabled",</p>
+<p>],</p>
 <br>
-<p>          "Transitions": [</p>
+<p>"Expiration": {"Days": 365}</p>
 <br>
-<p>            {"Days": 30, "StorageClass": "STANDARD_IA"},</p>
+<p>}</p>
 <br>
-<p>            {"Days": 90, "StorageClass": "GLACIER"}</p>
+<p>]</p>
 <br>
-<p>          ],</p>
-<br>
-<p>          "Expiration": {"Days": 365}</p>
-<br>
-<p>        }</p>
-<br>
-<p>      ]</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <h2>  Network Egress Costs</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Data transfer out of cloud providers is expensive. Minimize egress:</p>
 <br>
-<br>
-<br>
 <p>* **Use the same region**: Keep services that communicate frequently in the same region. Cross-region traffic is billed.</p>
+<br>
 <p>* **CloudFront/CDN**: Serve static assets through a CDN. CloudFront data transfer to the internet is cheaper than S3 direct access.</p>
+<br>
 <p>* **Leverage direct connect**: For large data transfers, use AWS Direct Connect or equivalent.</p>
+<br>
 <p>* **NAT Gateway costs**: Use NAT instances instead of NAT Gateway for high-volume traffic (cost savings of 70-80%).</p>
-<br>
-<br>
 <br>
 <h2>  Autoscaling</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Scale resources to match demand:</p>
 <br>
+<h1>AWS Auto Scaling with target tracking</h1>
 <br>
+<p>autoscaling:</p>
 <br>
+<p>target_tracking:</p>
 <br>
+<p>\- predefined_metric_specification:</p>
 <br>
-<p>    # AWS Auto Scaling with target tracking</p>
+<p>predefined_metric_type: ASGAverageCPUUtilization</p>
 <br>
-<p>    autoscaling:</p>
-<br>
-<p>      target_tracking:</p>
-<br>
-<p>        - predefined_metric_specification:</p>
-<br>
-<p>            predefined_metric_type: ASGAverageCPUUtilization</p>
-<br>
-<p>          target_value: 60</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>target_value: 60</p>
 <br>
 <p>For containerized workloads, use Kubernetes Cluster Autoscaler:</p>
 <br>
+<h1>Karpenter for AWS EKS</h1>
 <br>
-<br>
-<br>
-<br>
-<p>    # Karpenter for AWS EKS</p>
-<br>
-<p>    kubectl scale deployment api-server --replicas=0  # Automated idle scaling</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>kubectl scale deployment api-server --replicas=0 # Automated idle scaling</p>
 <br>
 <p>Karpenter and similar tools scale nodes based on actual pod resource requests, eliminating node-level waste.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Database Cost Optimization</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Databases are often the most expensive service:</p>
 <br>
-<br>
-<br>
 <p>* **Serverless databases**: Use Aurora Serverless, Cloud SQL auto-scaling, or Azure SQL Serverless for variable workloads.</p>
+<br>
 <p>* **Read replicas**: Add replicas for read-heavy workloads instead of upscaling a single instance.</p>
+<br>
 <p>* **Connection pooling**: Use PgBouncer or RDS Proxy to handle thousands of connections without provisioning for peak.</p>
+<br>
 <p>* **Delete old data**: Archive historical data to object storage.</p>
-<br>
-<br>
 <br>
 <h2>  Reserved Capacity with Spot</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Combine reserved capacity for baseline with spot for spikes:</p>
 <br>
+<h1>Terraform: Mix OD and Spot in ASG</h1>
 <br>
+<p>resource "aws_autoscaling_group" "app" {</p>
 <br>
+<p>mixed_instances_policy {</p>
 <br>
+<p>launch_template {</p>
 <br>
-<p>    # Terraform: Mix OD and Spot in ASG</p>
+<p>launch_template_specification { ... }</p>
 <br>
-<p>    resource "aws_autoscaling_group" "app" {</p>
+<p>override {</p>
 <br>
-<p>      mixed_instances_policy {</p>
+<p>instance_type = "t3.medium"</p>
 <br>
-<p>        launch_template {</p>
+<p>}</p>
 <br>
-<p>          launch_template_specification { ... }</p>
+<p>}</p>
 <br>
-<p>          override {</p>
+<p>instances_distribution {</p>
 <br>
-<p>            instance_type = "t3.medium"</p>
+<p>on_demand_base_capacity = 2</p>
 <br>
-<p>          }</p>
+<p>on_demand_percentage_above_base_capacity = 50 # Rest from Spot</p>
 <br>
-<p>        }</p>
+<p>spot_allocation_strategy = "capacity-optimized"</p>
 <br>
-<p>        instances_distribution {</p>
+<p>}</p>
 <br>
-<p>          on_demand_base_capacity = 2</p>
+<p>}</p>
 <br>
-<p>          on_demand_percentage_above_base_capacity = 50  # Rest from Spot</p>
-<br>
-<p>          spot_allocation_strategy = "capacity-optimized"</p>
-<br>
-<p>        }</p>
-<br>
-<p>      }</p>
-<br>
-<p>    }</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>}</p>
 <br>
 <h2>  Monitoring and Budgets</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Set up cost monitoring to catch anomalies early:</p>
 <br>
+<h1>AWS Budget with action</h1>
 <br>
+<p>aws budgets create-budget \</p>
 <br>
+<p>\--budget-name "Monthly-Infra" \</p>
 <br>
+<p>\--budget-file monthly-budget.json \</p>
 <br>
-<p>    # AWS Budget with action</p>
+<p>\--notifications-with-subscribers file://alert-config.json</p>
 <br>
-<p>    aws budgets create-budget \</p>
+<h1>GCP budget alert</h1>
 <br>
-<p>      --budget-name "Monthly-Infra" \</p>
+<p>gcloud billing budgets create \</p>
 <br>
-<p>      --budget-file monthly-budget.json \</p>
+<p>\--billing-account=XXXXXX \</p>
 <br>
-<p>      --notifications-with-subscribers file://alert-config.json</p>
+<p>\--display-name="Monthly Budget" \</p>
 <br>
+<p>\--budget-amount=5000USD \</p>
 <br>
+<p>\--threshold-rules=percent=50,percent=90 \</p>
 <br>
-<p>    # GCP budget alert</p>
-<br>
-<p>    gcloud billing budgets create \</p>
-<br>
-<p>      --billing-account=XXXXXX \</p>
-<br>
-<p>      --display-name="Monthly Budget" \</p>
-<br>
-<p>      --budget-amount=5000USD \</p>
-<br>
-<p>      --threshold-rules=percent=50,percent=90 \</p>
-<br>
-<p>      --notifications-pubsub-topic=budget-alerts</p>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>\--notifications-pubsub-topic=budget-alerts</p>
 <br>
 <p>Set up alerts at 50%, 80%, and 90% of budget. Tag resources by cost center and review spending weekly.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Summary</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Cloud cost optimization is an ongoing process, not a one-time cleanup. Start with right-sizing (the quickest wins), add reserved capacity for baseline workloads, use spot instances for fault-tolerant work, and configure autoscaling to match demand. Monitor storage lifecycle, minimize data egress, and optimize database tiering. The most effective approach is a 20% time investment per quarter: review spending, tag resources, and implement the top three savings opportunities. Most organizations can reduce their cloud bill by 30-50% within three months by following these practices.</p></div>
     </article>

@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-frameworks.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration">
     <meta name="twitter:description" content="Comprehensive guide to AI testing frameworks including DeepEval, Ragas, and LangSmith. Implement automated evaluation in CI pipelines for LLM applications.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-frameworks.png">
     <title>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration — SourceHub</title>
     <meta name="description" content="Comprehensive guide to AI testing frameworks including DeepEval, Ragas, and LangSmith. Implement automated evaluation in CI pipelines for LLM applications.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration",
       "description": "Comprehensive guide to AI testing frameworks including DeepEval, Ragas, and LangSmith. Implement automated evaluation in CI pipelines for LLM applications.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-frameworks.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1673",
+      "wordCount": "1570",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,28 +75,16 @@
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-frameworks.png" alt="AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Testing AI applications is fundamentally different from testing traditional software. LLM outputs are non-deterministic, there is no single correct answer, and failures manifest as subtle quality degradations rather than crashes. Dedicated AI testing frameworks address these challenges with automated evaluation metrics, test case generation, and regression detection.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  DeepEval</h2>
 <br>
-<br>
-<br>
-<br>
 <p>DeepEval is an open-source testing framework designed for LLM applications:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from deepeval import assert_test</p>
 <br>
@@ -118,8 +106,6 @@
 <br>
 <p>    from deepeval.test_case import LLMTestCase</p>
 <br>
-<br>
-<br>
 <p>    def test_rag_response_no_hallucination():</p>
 <br>
 <p>        test_case = LLMTestCase(</p>
@@ -132,13 +118,9 @@
 <br>
 <p>        )</p>
 <br>
-<br>
-<br>
 <p>        hallucination_metric = HallucinationMetric(threshold=0.3)</p>
 <br>
 <p>        assert_test(test_case, [hallucination_metric])</p>
-<br>
-<br>
 <br>
 <p>    def test_response_relevancy():</p>
 <br>
@@ -158,36 +140,17 @@
 <br>
 <p>        )</p>
 <br>
-<br>
-<br>
 <p>        relevancy_metric = AnswerRelevancyMetric(threshold=0.7)</p>
 <br>
 <p>        assert_test(test_case, [relevancy_metric])</p>
 <br>
-<br>
-<br>
 <p>    # Run tests: deepeval test run test_ai.py</p>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>DeepEval supports 15+ evaluation metrics including hallucination detection, answer relevancy, faithfulness, contextual precision, bias detection, and toxicity scoring. Each metric returns a score (0-1) that can be compared against a configurable threshold.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Ragas</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Ragas is specialized for evaluating RAG pipelines end-to-end:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from ragas import evaluate</p>
 <br>
@@ -204,8 +167,6 @@
 <p>    )</p>
 <br>
 <p>    from datasets import Dataset</p>
-<br>
-<br>
 <br>
 <p>    # Prepare evaluation dataset</p>
 <br>
@@ -245,8 +206,6 @@
 <br>
 <p>    })</p>
 <br>
-<br>
-<br>
 <p>    # Compute RAG metrics</p>
 <br>
 <p>    result = evaluate(</p>
@@ -267,8 +226,6 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    print(result)</p>
 <br>
 <p>    # {</p>
@@ -283,36 +240,17 @@
 <br>
 <p>    # }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Ragas decomposes RAG quality into four independent metrics: faithfulness (is the answer grounded in context?), answer relevancy (does the answer address the question?), context precision (are retrieved documents relevant?), and context recall (are all relevant documents retrieved?).</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  LangSmith</h2>
 <br>
-<br>
-<br>
-<br>
 <p>LangSmith provides a hosted evaluation platform with tracing and annotation:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from langsmith import Client, evaluate</p>
 <br>
 <p>    from langsmith.schemas import Example, Run</p>
 <br>
-<br>
-<br>
 <p>    client = Client()</p>
-<br>
-<br>
 <br>
 <p>    # Define a custom evaluator</p>
 <br>
@@ -324,15 +262,11 @@
 <br>
 <p>        expected = example.outputs.get("answer", "")</p>
 <br>
-<br>
-<br>
 <p>        # Use LLM-as-judge for evaluation</p>
 <br>
 <p>        from langsmith.evaluation import evaluate as langsmith_eval</p>
 <br>
 <p>        return {"score": compute_similarity(predicted, expected)}</p>
-<br>
-<br>
 <br>
 <p>    # Run evaluation on a dataset</p>
 <br>
@@ -348,32 +282,15 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    # View results in LangSmith dashboard</p>
 <br>
 <p>    print(results)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>LangSmith excels at trace-level evaluation. Every LLM call, retrieval step, and prompt template is recorded and can be compared across experiments.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  CI Integration</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Integrate AI tests into your CI pipeline to catch regressions automatically:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # .github/workflows/ai-tests.yml</p>
 <br>
@@ -386,8 +303,6 @@
 <p>        branches: [main]</p>
 <br>
 <p>      pull_request:</p>
-<br>
-<br>
 <br>
 <p>    jobs:</p>
 <br>
@@ -405,13 +320,9 @@
 <br>
 <p>              python-version: "3.11"</p>
 <br>
-<br>
-<br>
 <p>          - name: Install dependencies</p>
 <br>
 <p>            run: pip install deepeval ragas langsmith</p>
-<br>
-<br>
 <br>
 <p>          - name: Run AI evaluation tests</p>
 <br>
@@ -425,28 +336,15 @@
 <br>
 <p>              deepeval test run tests/ai_evaluation.py</p>
 <br>
-<br>
-<br>
 <p>          - name: Check quality gate</p>
 <br>
 <p>            run: |</p>
 <br>
 <p>              deepeval metrics --min-threshold 0.7</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Set a quality gate that blocks merges when metrics fall below thresholds. This prevents gradual quality degradation that is invisible in traditional tests.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>AI testing requires specialized frameworks that understand non-deterministic outputs. Use DeepEval for unit-test-style evaluation with configurable metrics. Use Ragas for end-to-end RAG pipeline evaluation. Use LangSmith for trace-level debugging and comparison across experiments. Integrate all three into CI pipelines with automated quality gates to maintain production AI quality over time.</p></div>
     </article>

@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/data-modeling.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Data Modeling Best Practices">
     <meta name="twitter:description" content="Learn data modeling best practices including entity-relationship diagrams, normalization, patterns for SQL and NoSQL, and schema design.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/data-modeling.png">
     <title>Data Modeling Best Practices — SourceHub</title>
     <meta name="description" content="Learn data modeling best practices including entity-relationship diagrams, normalization, patterns for SQL and NoSQL, and schema design.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Data Modeling Best Practices",
       "description": "Learn data modeling best practices including entity-relationship diagrams, normalization, patterns for SQL and NoSQL, and schema design.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/data-modeling.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "401",
+      "wordCount": "383",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,6 +74,7 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Data Modeling Best Practices</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/data-modeling.png" alt="Data Modeling Best Practices" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Data Modeling Best Practices</h1>
 <br>
 <p>Data Modeling Fundamentals   </p>
@@ -81,15 +82,11 @@
 <p>Entity-Relationship Diagrams   </p>
 <p>ER diagrams map entities (nouns) and relationships (verbs). Key cardinalities: one-to-one, one-to-many, many-to-many.   </p>
 <br>
-<br>
-<br>
 <p>    Customer:</p>
 <br>
 <p>      attributes: id, email, name, created_at</p>
 <br>
 <p>      relationships: has_many Order</p>
-<br>
-<br>
 <br>
 <p>    Order:</p>
 <br>
@@ -97,18 +94,12 @@
 <br>
 <p>      relationships: belongs_to Customer, has_many OrderItem</p>
 <br>
-<br>
-<br>
-<br>
 <p>Normalization   </p>
 <p>Aim for third normal form (3NF) in transactional systems:   </p>
 <br>
 <p>* 1NF: Atomic columns, unique rows</p>
 <p>* 2NF: Full PK dependency</p>
 <p>* 3NF: No transitive dependencies</p>
-<br>
-<br>
-<br>
 <br>
 <p>    -- 3NF design</p>
 <br>
@@ -118,15 +109,10 @@
 <br>
 <p>    CREATE TABLE order_items (id SERIAL PRIMARY KEY, order_id INT REFERENCES orders(id), product_id INT, quantity INT);</p>
 <br>
-<br>
-<br>
-<br>
 <p>Denormalization   </p>
 <p>Denormalize selectively for read performance. Common cases: reporting tables, cached aggregates, distributed databases avoiding joins.   </p>
 <p>NoSQL Modeling   </p>
 <p>Model for access patterns first:   </p>
-<br>
-<br>
 <br>
 <p>    // Embed for co-accessed data</p>
 <br>
@@ -139,9 +125,6 @@
 <p>      items: [{ product_id: "p1", qty: 2 }]</p>
 <br>
 <p>    }</p>
-<br>
-<br>
-<br>
 <br>
 <p>Conclusion   </p>
 <p>Start with 3NF for data integrity. Denormalize for performance when needed. For NoSQL, design your schema around your query patterns. Document all denormalization decisions with rationale.</p></div>

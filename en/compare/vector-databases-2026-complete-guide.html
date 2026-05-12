@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/compare/vector-databases-2026-complete-guide.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant — Complete Guide">
     <meta name="twitter:description" content="How vector databases work, when to use them, and a head-to-head comparison of Pinecone, Chroma, Weaviate, Qdrant, Milvus, and pgvector with production benchmarks.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/compare/vector-databases-2026-complete-guide.png">
     <title>Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant — Complete Guide — SourceHub</title>
     <meta name="description" content="How vector databases work, when to use them, and a head-to-head comparison of Pinecone, Chroma, Weaviate, Qdrant, Milvus, and pgvector with production benchmarks.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant — Complete Guide",
       "description": "How vector databases work, when to use them, and a head-to-head comparison of Pinecone, Chroma, Weaviate, Qdrant, Milvus, and pgvector with production benchmarks.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/compare/vector-databases-2026-complete-guide.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "4146",
+      "wordCount": "3839",
       "keywords": "Vector Database, Pinecone, Qdrant, Weaviate, Milvus, pgvector, AI, RAG, Semantic Search",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -85,33 +85,18 @@
         <span class="tag-cat">Semantic Search</span></div>
       <h1 class="article-title">Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant — Complete Guide</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/compare/vector-databases-2026-complete-guide.png" alt="Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant — Complete Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant — Complete Guide</h1>
 <br>
 <h1>Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant — Complete Guide</h1>
 <br>
-<br>
-<br>
-<br>
 <p>Vector databases have become essential infrastructure for AI applications — from RAG (Retrieval-Augmented Generation) to semantic search to recommendation systems. If you're building LLM-powered apps in 2026, you'll almost certainly need one.</p>
-<br>
-<br>
-<br>
 <br>
 <p>This guide covers what vector databases are, how they work under the hood, and a hands-on comparison of every major option: Pinecone, Chroma, Weaviate, Qdrant, Milvus, and pgvector.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  What Is a Vector Database?</h2>
 <br>
-<br>
-<br>
-<br>
 <p>A vector database stores and indexes high-dimensional vectors (arrays of floats) and enables fast similarity search. Instead of exact keyword matching, it finds items that are *semantically similar* — vectors that are close together in the embedding space.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    User query: "How do I deploy a microservice?"</p>
 <br>
@@ -129,20 +114,9 @@
 <br>
 <p>              "Docker compose tutorial"     (cosine sim: 0.89)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>The key operation is **ANN (Approximate Nearest Neighbor)** search — finding the closest vectors without scanning everything. This is what separates vector databases from plain PostgreSQL arrays.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Why You Need One in 2026</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| Use Case | Without Vector DB | With Vector DB |</p>
 <br>
@@ -158,18 +132,9 @@
 <br>
 <p>| Multimodal search | Separate text/image pipelines | Same embedding space for all modalities |</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  How Vector Search Works</h2>
 <br>
-<br>
-<br>
-<br>
 <h3>Algorithms (what you need to know)</h3>
-<br>
-<br>
-<br>
 <br>
 <p>| Algorithm | Speed | Accuracy | Build Time | Memory |</p>
 <br>
@@ -183,18 +148,9 @@
 <br>
 <p>| **DiskANN** | ⚡ Fast | 🎯 Excellent | 🐌 Slow | 📈 Moderate (SSD) |</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Rule of thumb**: Use HNSW for production (best accuracy-speed tradeoff). Use IVF for large datasets (>10M vectors) where memory matters. Use PQ when you need to fit in RAM at all costs.</p>
 <br>
-<br>
-<br>
-<br>
 <h3>Similarity Metrics</h3>
-<br>
-<br>
-<br>
 <br>
 <p>| Metric | When to Use |</p>
 <br>
@@ -208,13 +164,7 @@
 <br>
 <p>| **Manhattan (L1)** | High-dimensional sparse vectors |</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  The Contenders</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| Feature | Pinecone | Chroma | Weaviate | Qdrant | Milvus | pgvector |</p>
 <br>
@@ -232,34 +182,17 @@
 <br>
 <p>| **Pricing** | ~$0.10/M vectors/mo | Free | ~$25/mo start | ~$25/mo start | ~$0.07/hr | Free (in Postgres) |</p>
 <br>
-<br>
-<br>
-<br>
 <h3>1\. Pinecone</h3>
-<br>
-<br>
-<br>
 <br>
 <p>**Best for**: Teams that want zero ops — just create an index and start querying.</p>
 <br>
-<br>
-<br>
-<br>
 <p>Pinecone is the market leader and the most mature managed vector database. It handles sharding, replication, and scaling automatically. You don't think about infrastructure.</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    import pinecone</p>
-<br>
-<br>
 <br>
 <p>    pc = pinecone.Pinecone(api_key="pc-...")</p>
 <br>
 <p>    index = pc.Index("my-index")</p>
-<br>
-<br>
 <br>
 <p>    # Upsert vectors</p>
 <br>
@@ -270,8 +203,6 @@
 <p>        ("id2", [0.3, 0.4, ...], {"text": "Goodbye world"}),</p>
 <br>
 <p>    ])</p>
-<br>
-<br>
 <br>
 <p>    # Query</p>
 <br>
@@ -285,48 +216,23 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Pros:** Fastest setup, automatic scaling, best managed experience, 99.99% SLA.</p>
 <br>
 <p>**Cons:** $$$ at scale, vendor lock-in (proprietary), no offline/local use, no control over internals.</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Best for:** Startups and teams that want to move fast without DevOps overhead.</p>
-<br>
-<br>
-<br>
 <br>
 <h3>2\. Chroma</h3>
 <br>
-<br>
-<br>
-<br>
 <p>**Best for**: Prototyping, local development, small to medium projects.</p>
-<br>
-<br>
-<br>
 <br>
 <p>Chroma is the simplest vector database to get started with. It runs in-process (like SQLite for vectors) and requires zero configuration.</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    import chromadb</p>
-<br>
-<br>
 <br>
 <p>    client = chromadb.Client()</p>
 <br>
 <p>    collection = client.create_collection("my-collection")</p>
-<br>
-<br>
 <br>
 <p>    collection.add(</p>
 <br>
@@ -336,8 +242,6 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    results = collection.query(</p>
 <br>
 <p>        query_texts=["greeting"],</p>
@@ -346,46 +250,21 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Pros:** Extremely simple API, runs anywhere (including browser with Pyodide), Pythonic, embeddable.</p>
 <br>
 <p>**Cons:** Not designed for production at scale (single-node, limited replication), limited query features (no hybrid search), slower at scale.</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Best for:** Prototyping, hackathons, educational projects, small apps under 100K vectors.</p>
-<br>
-<br>
-<br>
 <br>
 <h3>3\. Weaviate</h3>
 <br>
-<br>
-<br>
-<br>
 <p>**Best for**: Teams that need a full-featured vector database with hybrid search.</p>
-<br>
-<br>
-<br>
 <br>
 <p>Weaviate is the most feature-complete option: it combines vector search with keyword (BM25) search, has built-in modules for embedding generation, and supports GraphQL.</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    import weaviate</p>
 <br>
-<br>
-<br>
 <p>    client = weaviate.connect_to_local()</p>
-<br>
-<br>
 <br>
 <p>    # Auto-schema from data</p>
 <br>
@@ -396,8 +275,6 @@
 <p>        vectorizer_config=weaviate.config.Configure.Vectorizer.text2vec_openai()</p>
 <br>
 <p>    )</p>
-<br>
-<br>
 <br>
 <p>    # Auto-embeds on insert</p>
 <br>
@@ -411,8 +288,6 @@
 <br>
 <p>    })</p>
 <br>
-<br>
-<br>
 <p>    # Hybrid search</p>
 <br>
 <p>    response = collection.query.hybrid(</p>
@@ -425,46 +300,21 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Pros:** Hybrid search (BM25 + vector) built-in, GraphQL API, built-in vectorizer modules (auto-embed on write), modular architecture, multi-tenancy.</p>
 <br>
 <p>**Cons:** More complex to operate, heavier resource footprint, smaller community than Milvus/Qdrant.</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Best for:** Production apps that need hybrid search, multi-modal applications, GraphQL-native teams.</p>
-<br>
-<br>
-<br>
 <br>
 <h3>4\. Qdrant</h3>
 <br>
-<br>
-<br>
-<br>
 <p>**Best for**: Performance-critical applications with high QPS requirements.</p>
-<br>
-<br>
-<br>
 <br>
 <p>Qdrant is written in Rust and optimized for low-latency, high-throughput scenarios. It has a clean REST API and gRPC support.</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    from qdrant_client import QdrantClient</p>
 <br>
-<br>
-<br>
 <p>    client = QdrantClient(url="http://localhost:6333")</p>
-<br>
-<br>
 <br>
 <p>    client.create_collection(</p>
 <br>
@@ -473,8 +323,6 @@
 <p>        vectors_config=VectorParams(size=768, distance=Distance.COSINE),</p>
 <br>
 <p>    )</p>
-<br>
-<br>
 <br>
 <p>    client.upsert(</p>
 <br>
@@ -488,8 +336,6 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    client.search(</p>
 <br>
 <p>        collection_name="my-collection",</p>
@@ -500,46 +346,21 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Pros:** Fastest query performance in benchmarks, Rust — low memory footprint, excellent filtering (payload indexing), quantization for memory reduction.</p>
 <br>
 <p>**Cons:** Smaller ecosystem, less mature managed service (recent), fewer integrations.</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Best for:** High-throughput production apps, real-time recommendation systems, cost-sensitive deployments.</p>
-<br>
-<br>
-<br>
 <br>
 <h3>5\. Milvus</h3>
 <br>
-<br>
-<br>
-<br>
 <p>**Best for**: Massive-scale deployments with billions of vectors.</p>
-<br>
-<br>
-<br>
 <br>
 <p>Milvus is designed for horizontal scaling from the ground up. It uses a cloud-native architecture with separate storage and compute layers.</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    from pymilvus import connections, Collection, FieldSchema, CollectionSchema</p>
 <br>
-<br>
-<br>
 <p>    connections.connect("default", host="localhost", port="19530")</p>
-<br>
-<br>
 <br>
 <p>    schema = CollectionSchema([</p>
 <br>
@@ -549,15 +370,11 @@
 <br>
 <p>    ])</p>
 <br>
-<br>
-<br>
 <p>    collection = Collection("my-collection", schema)</p>
 <br>
 <p>    index_params = {"index_type": "IVF_FLAT", "params": {"nlist": 1024}, "metric_type": "L2"}</p>
 <br>
 <p>    collection.create_index("embedding", index_params)</p>
-<br>
-<br>
 <br>
 <p>    results = collection.search(</p>
 <br>
@@ -571,42 +388,19 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Pros:** Best horizontal scaling, supports GPU acceleration, mature project (5+ years), rich index types.</p>
 <br>
 <p>**Cons:** Complex to deploy and operate (requires Kafka, etcd, MinIO), most complex API, overkill for small-medium needs.</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Best for:** Enterprise-scale apps (>100M vectors), GPU-accelerated search, complex production pipelines.</p>
-<br>
-<br>
-<br>
 <br>
 <h3>6\. pgvector</h3>
 <br>
-<br>
-<br>
-<br>
 <p>**Best for**: Teams already on PostgreSQL that want vector search without another infrastructure component.</p>
-<br>
-<br>
-<br>
 <br>
 <p>pgvector adds vector similarity search as a PostgreSQL extension. It's not a separate database — it's a new index type in your existing Postgres instance.</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    CREATE EXTENSION vector;</p>
-<br>
-<br>
 <br>
 <p>    CREATE TABLE documents (</p>
 <br>
@@ -618,11 +412,7 @@
 <br>
 <p>    );</p>
 <br>
-<br>
-<br>
 <p>    CREATE INDEX ON documents USING hnsw (embedding vector_cosine_ops);</p>
-<br>
-<br>
 <br>
 <p>    SELECT content, 1 - (embedding <=> '[0.1, 0.2, ...]') AS similarity</p>
 <br>
@@ -632,21 +422,11 @@
 <br>
 <p>    LIMIT 5;</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>    import psycopg2</p>
-<br>
-<br>
 <br>
 <p>    conn = psycopg2.connect("dbname=postgres")</p>
 <br>
 <p>    cur = conn.cursor()</p>
-<br>
-<br>
 <br>
 <p>    cur.execute(</p>
 <br>
@@ -656,32 +436,15 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>**Pros:** No new infrastructure, ACID compliance, joins with relational data, free, PostgreSQL ecosystem (backup, replication, tooling).</p>
 <br>
 <p>**Cons:** No hybrid search out of the box (use pg_bm25 extension), limited to single-node, slower than dedicated vector DBs at scale, fewer tuning options.</p>
 <br>
-<br>
-<br>
-<br>
 <p>**Best for:** Small to medium projects (under 1M vectors) already on PostgreSQL, MVPs, teams that want simplicity.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Performance Benchmarks</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large), HNSW index, 100 concurrent queries:</p>
-<br>
-<br>
-<br>
 <br>
 <p>| Database | Query Latency (p50) | Query Latency (p99) | QPS | Recall@10 | Memory (1M vecs) |</p>
 <br>
@@ -703,23 +466,11 @@
 <br>
 <p>| **pgvector** (IVFFlat) | 20ms | 60ms | 1,500 | 0.90 | 1.3 GB |</p>
 <br>
-<br>
-<br>
-<br>
 <p>*Pinecone uses their own proprietary index — memory is managed server-side.</p>
-<br>
-<br>
-<br>
 <br>
 <p>**Key takeaway**: For up to 1M vectors, differences are negligible for most apps. The choice should be driven by features and ops overhead, not raw speed. Past 10M vectors, Qdrant and Milvus pull ahead.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  When to Use What</h2>
-<br>
-<br>
-<br>
 <br>
 <h3>✅ Use Pinecone if:</h3>
 <br>
@@ -728,16 +479,12 @@
 <p>* Your team has no DevOps experience</p>
 <p>* Budget is not the primary concern</p>
 <br>
-<br>
-<br>
 <h3>✅ Use Chroma if:</h3>
 <br>
 <p>* You're prototyping or building a demo</p>
 <p>* You need in-process/embeddable vector search</p>
 <p>* You're building for edge/browser deployment</p>
 <p>* You're in a Jupyter notebook exploring data</p>
-<br>
-<br>
 <br>
 <h3>✅ Use Weaviate if:</h3>
 <br>
@@ -746,16 +493,12 @@
 <p>* You like GraphQL</p>
 <p>* You need multi-tenancy built in</p>
 <br>
-<br>
-<br>
 <h3>✅ Use Qdrant if:</h3>
 <br>
 <p>* Performance is your top priority</p>
 <p>* You need advanced payload filtering</p>
 <p>* You want to minimize infrastructure cost</p>
 <p>* You're building real-time recommendation systems</p>
-<br>
-<br>
 <br>
 <h3>✅ Use Milvus if:</h3>
 <br>
@@ -764,8 +507,6 @@
 <p>* You're building enterprise-scale infrastructure</p>
 <p>* You need to scale to billions of vectors</p>
 <br>
-<br>
-<br>
 <h3>✅ Use pgvector if:</h3>
 <br>
 <p>* You already use PostgreSQL</p>
@@ -773,16 +514,9 @@
 <p>* You want atomic vector + relational data updates</p>
 <p>* Your dataset is under 1M vectors</p>
 <br>
-<br>
-<br>
 <h2>  Production Checklist</h2>
 <br>
-<br>
-<br>
-<br>
 <p>When moving to production with any vector database:</p>
-<br>
-<br>
 <br>
 <p>* **Monitor recall** — run regular quality checks. A 90% recall means 10% of relevant results are missing.</p>
 <br>
@@ -796,19 +530,9 @@
 <br>
 <p>6\. **Cost model** — managed services look cheap until you have millions of vectors with replication. Self-hosting Qdrant on a $40/mo VPS handles 5M+ vectors.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Sample Architecture: RAG Pipeline</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Here's how a production RAG system looks with Qdrant + FastAPI:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from fastapi import FastAPI</p>
 <br>
@@ -818,8 +542,6 @@
 <br>
 <p>    from openai import OpenAI</p>
 <br>
-<br>
-<br>
 <p>    app = FastAPI()</p>
 <br>
 <p>    encoder = SentenceTransformer("all-MiniLM-L6-v2")</p>
@@ -828,11 +550,7 @@
 <br>
 <p>    llm = OpenAI()</p>
 <br>
-<br>
-<br>
 <p>    COLLECTION = "knowledge-base"</p>
-<br>
-<br>
 <br>
 <p>    @app.post("/ask")</p>
 <br>
@@ -841,8 +559,6 @@
 <p>        # 1. Embed the question</p>
 <br>
 <p>        vector = encoder.encode(question).tolist()</p>
-<br>
-<br>
 <br>
 <p>        # 2. Retrieve relevant context</p>
 <br>
@@ -857,8 +573,6 @@
 <p>        )</p>
 <br>
 <p>        context = "\n".join(r.payload["text"] for r in results)</p>
-<br>
-<br>
 <br>
 <p>        # 3. Generate answer with context</p>
 <br>
@@ -878,16 +592,7 @@
 <br>
 <p>        return {"answer": response.choices[0].message.content}</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Quick Decision Flowchart</h2>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    Starting a new project?</p>
 <br>
@@ -923,15 +628,7 @@
 <br>
 <p>        └── Milvus (mature, GPU, 100B+ vectors)</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Summary</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| If you want… | Pick this |</p>
 <br>
@@ -948,9 +645,6 @@
 <p>| Enterprise scale | **Milvus** |</p>
 <br>
 <p>| No new infra (Postgres) | **pgvector** |</p>
-<br>
-<br>
-<br>
 <br>
 <p>The best vector database is the one you actually deploy. Start simple (pgvector or Chroma), validate your use case, then migrate to Qdrant or Weaviate when you need the advanced features. Don't over-engineer — most applications work perfectly well with pgvector through the first million vectors.</p></div>
     </article>

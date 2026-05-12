@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/devcontainer-setup.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces">
     <meta name="twitter:description" content="Technical guide to development containers covering devcontainer.json configuration, features, dotfiles integration, remote development workflows, and GitHub Codespaces.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/devcontainer-setup.png">
     <title>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces — SourceHub</title>
     <meta name="description" content="Technical guide to development containers covering devcontainer.json configuration, features, dotfiles integration, remote development workflows, and GitHub Codespaces.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces",
       "description": "Technical guide to development containers covering devcontainer.json configuration, features, dotfiles integration, remote development workflows, and GitHub Codespaces.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/devcontainer-setup.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1663",
+      "wordCount": "1547",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -75,33 +75,18 @@
         <span class="tag-cat">Productivity</span></div>
       <h1 class="article-title">Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/devcontainer-setup.png" alt="Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Development containers (dev containers) provide consistent, reproducible development environments defined as code. Instead of developers manually installing language runtimes, databases, and tools on their local machines, dev containers package the entire development environment into a Docker container. This eliminates "works on my machine" problems, reduces onboarding time from days to minutes, and ensures consistency across team environments.</p>
-<br>
-<br>
-<br>
 <br>
 <p>This article covers devcontainer.json configuration, features, dotfiles integration, remote development workflows, and GitHub Codespaces.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Dev Container Specification</h2>
 <br>
-<br>
-<br>
-<br>
 <p>The dev container specification, maintained by the Community Specification Contributor Agreement, defines a standard format for configuring development containers. The primary configuration file is `.devcontainer/devcontainer.json` at the repository root.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    {</p>
 <br>
@@ -139,31 +124,13 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>The `image` property specifies the base container image. Alternatively, `build` references a Dockerfile for custom images. The Dockerfile approach provides complete control over the environment but requires more maintenance.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Base Images and Features</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Microsoft maintains a library of pre-built dev container base images: `javascript-node`, `python`, `go`, `rust`, `java`, `dotnet`, and more. These images include the runtime, common development tools (git, curl, zsh, Oh My Zsh), and non-root user configuration.</p>
 <br>
-<br>
-<br>
-<br>
 <p>Features are self-contained, shareable units of configuration that install additional tools into a dev container. The features repository includes CLI tools (Azure CLI, AWS CLI, Docker-in-Docker), language runtimes (Ruby, PHP, Elixir), and databases (PostgreSQL, SQLite, Redis).</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    {</p>
 <br>
@@ -185,26 +152,11 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Features are versioned and published as OCI artifacts. The community contributes features to the shared registry, providing a growing catalog of ready-to-use environment components.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Dotfiles Integration</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Dotfiles — configuration files for shell, editors, and tools — can be automatically applied when creating a dev container. The devcontainer.json specifies a dotfiles repository:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    {</p>
 <br>
@@ -216,76 +168,33 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>The dotfiles repository typically contains shell configuration (.zshrc, .bashrc), git configuration (.gitconfig), editor settings, and tool configuration. The install script links or copies files to the appropriate locations inside the container.</p>
-<br>
-<br>
-<br>
 <br>
 <p>This feature enables personalized development environments within the standardized container, balancing consistency with individual preferences.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Remote Development Workflows</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Dev containers support four connection modes:</p>
 <br>
-<br>
-<br>
-<br>
 <p>Docker (local): The container runs on the local Docker daemon. VS Code's Remote - Containers extension attaches to the container. This is the simplest mode for individual development.</p>
-<br>
-<br>
-<br>
 <br>
 <p>Docker (remote SSH): The container runs on a remote Docker host accessed via SSH. Useful for development on powerful remote machines without transferring local setup.</p>
 <br>
-<br>
-<br>
-<br>
 <p>Dev Tunnel: VS Code tunnels through firewalls to connect to a dev container on any machine. Enabled by the `devcontainer up` CLI command.</p>
 <br>
-<br>
-<br>
-<br>
 <p>Codespaces: GitHub managed remote dev containers in the cloud.</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Build and open a dev container</p>
 <br>
 <p>    devcontainer open .</p>
 <br>
-<br>
-<br>
 <p>    # Rebuild from scratch</p>
 <br>
 <p>    devcontainer build --workspace-folder . --image-name my-devcontainer</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  GitHub Codespaces</h2>
 <br>
-<br>
-<br>
-<br>
 <p>GitHub Codespaces provides cloud-hosted dev containers integrated directly with GitHub repositories. When `devcontainer.json` exists in a repository, Codespaces automatically provisions a container with the specified configuration.</p>
-<br>
-<br>
-<br>
 <br>
 <p>Codespaces supports:</p>
 <br>
@@ -293,9 +202,6 @@
 <p>* Multi-machine configuration: Different container specs for different branches or PRs.</p>
 <p>* Core hours billing: Consumption-based pricing for compute resources.</p>
 <p>* VS Code and browser-based editors.</p>
-<br>
-<br>
-<br>
 <br>
 <p>    {</p>
 <br>
@@ -327,41 +233,20 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Prebuilds significantly improve the Codespaces experience. A GitHub Actions workflow builds the container on each push, caching layers for instant startup. Without prebuilds, Codespaces builds the container on first launch, which can take several minutes.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Best Practices</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Keep devcontainer.json in the repository root for broadest tool compatibility. Pin feature versions for reproducibility. Use postCreateCommand for setup scripts, not for tools that should be permanently installed. Configure lifecycle hooks for different timing phases:</p>
-<br>
-<br>
 <br>
 <p>* `onCreateCommand`: Runs when container is first created.</p>
 <p>* `updateContentCommand`: Runs when source code changes.</p>
 <p>* `postCreateCommand`: Runs after container creation completes.</p>
 <p>* `postStartCommand`: Runs each time container starts.</p>
 <br>
-<br>
-<br>
 <p>Minimize image size by using specific base images rather than the universal image unless diverse tooling is needed. Test dev container configuration in CI to catch configuration drift.</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Conclusion</h2>
-<br>
-<br>
-<br>
 <br>
 <p>Dev containers transform development environment management. devcontainer.json defines environments as code. Features provide composable tool installation. Dotfiles integration preserves personal preferences. Remote development workflows support diverse connectivity modes. GitHub Codespaces extends the model to cloud-hosted environments. Organizations adopting dev containers reduce onboarding friction, eliminate environment inconsistencies, and enable developers to contribute to any repository with zero local configuration.</p></div>
     </article>

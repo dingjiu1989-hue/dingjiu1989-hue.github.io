@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/multimodal-ai.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Multimodal AI Applications in 2026">
     <meta name="twitter:description" content="Explore text+image+audio AI models, vision-language models, speech-to-text, document AI, multimodal RAG, and real-world use cases and limitations.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/multimodal-ai.png">
     <title>Multimodal AI Applications in 2026 — SourceHub</title>
     <meta name="description" content="Explore text+image+audio AI models, vision-language models, speech-to-text, document AI, multimodal RAG, and real-world use cases and limitations.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Multimodal AI Applications in 2026",
       "description": "Explore text+image+audio AI models, vision-language models, speech-to-text, document AI, multimodal RAG, and real-world use cases and limitations.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/multimodal-ai.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2760",
+      "wordCount": "2623",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,36 +74,20 @@
         <span class="tag-cat">Machine Learning</span></div>
       <h1 class="article-title">Multimodal AI Applications in 2026</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/multimodal-ai.png" alt="Multimodal AI Applications in 2026" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Multimodal AI Applications in 2026</h1>
 <br>
 <h2>  Introduction</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Multimodal AI models that understand and generate across text, images, audio, and video have moved from research papers to production APIs. By 2026, models like GPT-4o, Claude 3.5 Sonnet, Gemini 2.0, and open-source alternatives support native multimodal inputs, enabling applications that were impractical with separate unimodal pipelines. This article covers current capabilities, architectures, and production patterns for multimodal AI applications.</p>
-<br>
-<br>
-<br>
 <br>
 <h2>  Vision-Language Models</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Modern vision-language models (VLMs) accept images and text together in a single context window:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    from anthropic import Anthropic</p>
 <br>
-<br>
-<br>
 <p>    client = Anthropic(api_key="sk-...")</p>
-<br>
-<br>
 <br>
 <p>    # Analyze an image with text instructions</p>
 <br>
@@ -161,27 +145,13 @@
 <br>
 <p>    )</p>
 <br>
-<br>
-<br>
 <p>    # The model "sees" the image and processes it jointly with text</p>
 <br>
 <p>    analysis = response.content[0].text</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h3>Document AI and OCR</h3>
 <br>
-<br>
-<br>
-<br>
 <p>Extract structured data from complex documents:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    async def process_invoice(invoice_path: str) -> dict:</p>
 <br>
@@ -189,13 +159,9 @@
 <br>
 <p>        import base64</p>
 <br>
-<br>
-<br>
 <p>        with open(invoice_path, "rb") as f:</p>
 <br>
 <p>            image_data = base64.b64encode(f.read()).decode("utf-8")</p>
-<br>
-<br>
 <br>
 <p>        response = client.messages.create(</p>
 <br>
@@ -253,29 +219,13 @@
 <br>
 <p>        )</p>
 <br>
-<br>
-<br>
 <p>        return json.loads(response.content[0].text)</p>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <h2>  Speech-to-Text and Audio Understanding</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Multimodal models now handle audio directly without separate ASR pipelines:</p>
 <br>
-<br>
-<br>
-<br>
-<br>
 <p>    import asyncio</p>
-<br>
-<br>
 <br>
 <p>    async def analyze_call_recording(audio_path: str) -> dict:</p>
 <br>
@@ -283,13 +233,9 @@
 <br>
 <p>        import base64</p>
 <br>
-<br>
-<br>
 <p>        with open(audio_path, "rb") as f:</p>
 <br>
 <p>            audio_data = base64.b64encode(f.read()).decode("utf-8")</p>
-<br>
-<br>
 <br>
 <p>        response = client.messages.create(</p>
 <br>
@@ -349,33 +295,17 @@
 <br>
 <p>        )</p>
 <br>
-<br>
-<br>
 <p>        return parse_analysis(response.content[0].text)</p>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <h2>  Multimodal RAG</h2>
 <br>
-<br>
-<br>
-<br>
 <p>Traditional RAG is text-only. Multimodal RAG retrieves and reasons across images, diagrams, and tables:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    import chromadb</p>
 <br>
 <p>    from sentence_transformers import SentenceTransformer</p>
 <br>
 <p>    import numpy as np</p>
-<br>
-<br>
 <br>
 <p>    class MultimodalRAG:</p>
 <br>
@@ -395,8 +325,6 @@
 <br>
 <p>            )</p>
 <br>
-<br>
-<br>
 <p>        def index_document(</p>
 <br>
 <p>            self,</p>
@@ -413,8 +341,6 @@
 <br>
 <p>            embeddings = []</p>
 <br>
-<br>
-<br>
 <p>            # Index text chunks</p>
 <br>
 <p>            text_chunks = self._chunk_text(text)</p>
@@ -423,8 +349,6 @@
 <br>
 <p>            embeddings.extend(text_embeddings)</p>
 <br>
-<br>
-<br>
 <p>            # Index images</p>
 <br>
 <p>            for img in images:</p>
@@ -432,8 +356,6 @@
 <p>                img_embedding = self.image_encoder.encode(img)</p>
 <br>
 <p>                embeddings.append(img_embedding)</p>
-<br>
-<br>
 <br>
 <p>            # Index with metadata about modality</p>
 <br>
@@ -455,15 +377,11 @@
 <br>
 <p>            )</p>
 <br>
-<br>
-<br>
 <p>        def query(self, question: str, top_k: int = 5) -> List[dict]:</p>
 <br>
 <p>            # Encode query</p>
 <br>
 <p>            query_embedding = self.text_encoder.encode(question)</p>
-<br>
-<br>
 <br>
 <p>            # Retrieve across all modalities</p>
 <br>
@@ -475,25 +393,11 @@
 <br>
 <p>            )</p>
 <br>
-<br>
-<br>
 <p>            return results</p>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <h2>  Audio Transcription and Analysis Pipeline</h2>
 <br>
-<br>
-<br>
-<br>
 <p>For production audio processing, combine streaming with multimodal analysis:</p>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    class AudioProcessingPipeline:</p>
 <br>
@@ -503,15 +407,11 @@
 <br>
 <p>            self.overlap = 30  # 30-second overlap for continuity</p>
 <br>
-<br>
-<br>
 <p>        async def process_stream(self, audio_stream: AsyncGenerator[bytes]):</p>
 <br>
 <p>            buffer = []</p>
 <br>
 <p>            buffer_duration = 0</p>
-<br>
-<br>
 <br>
 <p>            async for chunk in audio_stream:</p>
 <br>
@@ -519,21 +419,15 @@
 <br>
 <p>                buffer_duration += self._chunk_duration(chunk)</p>
 <br>
-<br>
-<br>
 <p>                if buffer_duration >= self.buffer_duration:</p>
 <br>
 <p>                    # Process buffer</p>
 <br>
 <p>                    segment = b"".join(buffer)</p>
 <br>
-<br>
-<br>
 <p>                    # Real-time transcription + analysis</p>
 <br>
 <p>                    result = await self._analyze_segment(segment)</p>
-<br>
-<br>
 <br>
 <p>                    # Extract action items, sentiment, entities</p>
 <br>
@@ -542,8 +436,6 @@
 <p>                    if actions:</p>
 <br>
 <p>                        await self._route_actions(actions)</p>
-<br>
-<br>
 <br>
 <p>                    # Keep overlap for continuity</p>
 <br>
@@ -556,8 +448,6 @@
 <p>                    buffer = [segment[-overlap_bytes:]]</p>
 <br>
 <p>                    buffer_duration = self.overlap</p>
-<br>
-<br>
 <br>
 <p>        async def _analyze_segment(self, audio_bytes: bytes) -> dict:</p>
 <br>
@@ -605,15 +495,7 @@
 <br>
 <p>            return response</p>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2>  Use Cases and Limitations</h2>
-<br>
-<br>
-<br>
 <br>
 <p>| Use Case | Capability | Current Limitations |</p>
 <br>
@@ -631,14 +513,7 @@
 <br>
 <p>| Video understanding | Summarize meetings, detect events | Long video context limits |</p>
 <br>
-<br>
-<br>
-<br>
 <h2>  Production Considerations</h2>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Multimodal model selection criteria</p>
 <br>
@@ -654,8 +529,6 @@
 <br>
 <p>        video_analysis: "< 30s (batch)"</p>
 <br>
-<br>
-<br>
 <p>      cost:</p>
 <br>
 <p>        text: "Baseline"</p>
@@ -666,8 +539,6 @@
 <br>
 <p>        video: "10-20x text cost (per minute)"</p>
 <br>
-<br>
-<br>
 <p>      context_window:</p>
 <br>
 <p>        text: "200K tokens"</p>
@@ -676,8 +547,6 @@
 <br>
 <p>        video: "Limited by token count (~10-15 min)"</p>
 <br>
-<br>
-<br>
 <p>      accuracy:</p>
 <br>
 <p>        OCR: ">99% on printed, >90% on handwriting"</p>
@@ -685,11 +554,6 @@
 <p>        scene_description: "Good on common scenes, poor on niche domains"</p>
 <br>
 <p>        audio_transcription: ">95% WER on clean speech, >80% on accented"</p>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>Multimodal AI is rapidly maturing but still requires careful evaluation for each use case. Start with well-scoped document processing or image analysis tasks before expanding to real-time audio or video pipelines.</p></div>
     </article>

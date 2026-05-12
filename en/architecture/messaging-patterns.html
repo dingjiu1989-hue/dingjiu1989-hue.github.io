@@ -19,13 +19,13 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/messaging-patterns.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Messaging Patterns: Pub/Sub and Request/Reply">
     <meta name="twitter:description" content="Explore messaging patterns including publish-subscribe and request-reply for distributed systems.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/messaging-patterns.png">
     <title>Messaging Patterns: Pub/Sub and Request/Reply — SourceHub</title>
     <meta name="description" content="Explore messaging patterns including publish-subscribe and request-reply for distributed systems.">
     <link rel="stylesheet" href="/css/style.css">
@@ -38,10 +38,10 @@
       "@type": "Article",
       "headline": "Messaging Patterns: Pub/Sub and Request/Reply",
       "description": "Explore messaging patterns including publish-subscribe and request-reply for distributed systems.",
-      "image": "https://dingjiu1989-hue.github.io/images/logo.png",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/messaging-patterns.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1509",
+      "wordCount": "1473",
       "keywords": "Architecture, System Design",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -74,6 +74,7 @@
         <span class="tag-cat">System Design</span></div>
       <h1 class="article-title">Messaging Patterns: Pub/Sub and Request/Reply</h1>
       <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/messaging-patterns.png" alt="Messaging Patterns: Pub/Sub and Request/Reply" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Messaging Patterns: Pub/Sub and Request/Reply</h1>
 <br>
 <p>Messaging is the backbone of distributed systems. It enables services to communicate asynchronously, decouple dependencies, and build resilient architectures. This article covers the two most fundamental messaging patterns: publish-subscribe and request-reply.   </p>
@@ -89,16 +90,11 @@
 <p>Publish-Subscribe (Pub/Sub)   </p>
 <p>In the pub/sub pattern, publishers send messages to a topic without knowing who the subscribers are. Subscribers receive messages from topics they have subscribed to.   </p>
 <br>
-<br>
-<br>
 <p>    [Publisher] -> [Topic] -> [Subscriber A]</p>
 <br>
 <p>                           -> [Subscriber B]</p>
 <br>
 <p>                           -> [Subscriber C]</p>
-<br>
-<br>
-<br>
 <br>
 <p>How Pub/Sub Works   </p>
 <br>
@@ -109,8 +105,6 @@
 <p>**Broadcasting.** A live sports app publishes score updates. Thousands of clients receive updates in real-time.   </p>
 <p>**Log aggregation.** Multiple services publish log entries to a central topic. A log processing service stores and indexes them.   </p>
 <p>Example with Kafka   </p>
-<br>
-<br>
 <br>
 <p>    # Publisher</p>
 <br>
@@ -126,8 +120,6 @@
 <br>
 <p>    })</p>
 <br>
-<br>
-<br>
 <p>    # Subscriber</p>
 <br>
 <p>    @kafka_listener('order-events')</p>
@@ -140,37 +132,23 @@
 <br>
 <p>            notification_service.send_confirmation(event['customer_id'])</p>
 <br>
-<br>
-<br>
-<br>
 <p>Pub/Sub is ideal for one-to-many communication where the publisher does not need a response.   </p>
 <p>Request-Reply   </p>
 <p>The request-reply pattern is fundamentally different from pub/sub. A sender sends a request and expects a response. The two are correlated so the sender knows which response goes with which request.   </p>
 <p>In messaging systems, request-reply requires correlation:   </p>
 <br>
-<br>
-<br>
 <p>    [Requestor] -> [Request Queue] -> [Replier]</p>
-<br>
-<br>
 <br>
 <p>    [Requestor] <- [Reply Queue]   <- [Replier]</p>
 <br>
-<br>
-<br>
-<br>
 <p>Correlation ID   </p>
 <p>The key mechanism is the correlation ID. The requestor includes a unique ID in the request message. The replier includes the same ID in the reply message. The requestor uses this ID to match replies to pending requests.   </p>
-<br>
-<br>
 <br>
 <p>    # Requestor</p>
 <br>
 <p>    correlation_id = str(uuid.uuid4())</p>
 <br>
 <p>    reply_queue = f"reply-{correlation_id}"</p>
-<br>
-<br>
 <br>
 <p>    message = {</p>
 <br>
@@ -180,21 +158,11 @@
 <br>
 <p>    }</p>
 <br>
-<br>
-<br>
 <p>    request_queue.send(message)</p>
-<br>
-<br>
 <br>
 <p>    # Wait for reply on the reply queue</p>
 <br>
 <p>    reply = reply_queue.receive(timeout=30)</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <p>    # Replier</p>
 <br>
@@ -211,9 +179,6 @@
 <p>        }</p>
 <br>
 <p>        reply_queue.send(reply)</p>
-<br>
-<br>
-<br>
 <br>
 <p>Use Cases   </p>
 <p>**Remote procedure calls.** Service A asks Service B to compute something and return the result. Unlike HTTP RPC, the messaging-based approach allows the requestor to be decoupled in time -- it can send the request and check for the reply later.   </p>
