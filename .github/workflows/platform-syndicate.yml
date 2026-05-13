@@ -11,6 +11,8 @@ permissions:
 jobs:
   syndicate:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - uses: actions/checkout@v4
 
@@ -23,7 +25,7 @@ jobs:
           DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
         run: |
           echo "$DEVTO_API_KEY" > .devto-key
-          python3 scripts/syndicate_devto.py
+          python3 scripts/syndicate_devto.py || true
 
       - name: Syndicate to Hashnode
         env:
