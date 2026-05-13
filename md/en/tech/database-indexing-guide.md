@@ -22,7 +22,7 @@ BRIN (Block Range INdex)| Summary per block range (min/max)| Very large tables (
 SP-GiST (Space-Partitioned GiST)| Partitioned search tree| Non-overlapping data, phone numbers, IP addresses| Specialized; narrow use case| PostgreSQL  
 Full-Text Index| Tokenized inverted index| MATCH ... AGAINST, CONTAINS, @@ tsquery| Language-specific tokenization; keyword search ≠ semantic search| PostgreSQL (GIN), MySQL (FULLTEXT), MSSQL (Full-Text)  
 Bitmap (Columnar)| Bitmap per distinct value| Low-cardinality columns (status, category, boolean)| High-cardinality columns create massive bitmaps| PostgreSQL (via extensions), Oracle, Data Warehouses  
-
+  
 ## Advanced Index Patterns
 
 Pattern| What It Is| When to Use| Example  
@@ -32,9 +32,10 @@ Covering Index (INCLUDE)| Index contains all columns the query needs| Enable Ind
 Partial Index| Index only rows matching WHERE| Index a subset of data, save space| INDEX ON orders (created_at) WHERE status = 'active'  
 Expression / Functional Index| Index on expression result| Queries filter on computed values| INDEX ON users (LOWER(email)), INDEX ON orders (date_trunc('day', created_at))  
 Descending Index| Index sorted DESC (not default ASC)| ORDER BY col DESC is the primary access pattern| INDEX ON events (created_at DESC)  
-
+  
 ## How to Verify Your Index Is Working
-
+    
+    
     -- PostgreSQL: Check index usage
     SELECT
         schemaname || '.' || relname AS table,
@@ -46,7 +47,7 @@ Descending Index| Index sorted DESC (not default ASC)| ORDER BY col DESC is the 
     FROM pg_stat_user_indexes
     WHERE idx_scan = 0  -- Unused indexes! Safe to drop
     ORDER BY pg_relation_size(indexrelid) DESC;
-
+    
     -- Find missing indexes (seq scans on tables > 1MB)
     SELECT
         schemaname || '.' || relname AS table,
@@ -64,5 +65,7 @@ Descending Index| Index sorted DESC (not default ASC)| ORDER BY col DESC is the 
   3. **Match index type to query:** = → B-Tree or Hash; range/LIKE prefix → B-Tree; JSONB/array → GIN; full-text → GIN + tsvector
   4. **Create with purpose:** Partial index for subsets, covering index (INCLUDE) for Index-Only Scans, composite for multi-column filters
   5. **Verify with EXPLAIN:** Did the plan change from Seq Scan → Index Scan / Index Only Scan? Run ANALYZE first.
+
+
 
 **Bottom line:** B-Tree indexes solve 90% of indexing needs — they handle =, range, sorting, and prefix matching. GIN is essential for JSONB and full-text search workloads. The most common indexing mistakes: (1) indexing columns that are never queried, (2) missing composite indexes for multi-column WHERE clauses, and (3) not using covering indexes (INCLUDE) to enable Index-Only Scans. Run the unused index query above quarterly — dropping unused indexes speeds up every INSERT/UPDATE. See also: [PostgreSQL Query Optimization](</en/tech/postgresql-query-optimization.html>) and [Database Design Fundamentals](</en/tech/database-design-fundamentals.html>).

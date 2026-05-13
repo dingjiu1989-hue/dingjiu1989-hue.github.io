@@ -22,7 +22,7 @@ Not all LLMs are equally good at coding. Claude, GPT-4o, Gemini, DeepSeek, and C
 **Cost**|  $20/mo (Pro)| $20/mo (Plus)| $20/mo (Advanced)| Free / $0.50/M tokens| Free (self-hosted)  
 **Speed**|  Fast| Very fast| Very fast| Fast| Depends on hardware  
 **Open source**|  No| No| No| Yes (weights)| Yes  
-
+  
 ## Claude 4.5 Sonnet — Complex Codebase Master
 
 Claude excels at large-scale codebase understanding. Its 200K context window means it can read your entire project and make changes across dozens of files. For refactoring, code review, and architecture work, it has a clear edge. The code it generates is clean, idiomatic, and well-explained.
@@ -73,5 +73,5 @@ Massive codebase (100K+ lines)| **Gemini 2.5 Pro** (1M ctx) or **Claude** (200K 
 Budget-sensitive, self-hosted| **DeepSeek V3**  
 Privacy/air-gapped environment| **CodeLlama 70B**  
 Best value ($0)| **Claude Free + Copilot Free**  
-
+  
 **Bottom line:** Claude 4.5 Sonnet is the best all-around coding LLM in 2026. GPT-4o for data-heavy work. Gemini for massive context. The free tier combo (Claude Free + Copilot Free) handles 90% of developer needs. See also: [AI-Assisted Programming Guide](</en/ai/ai-coding.html>) and [AI coding tools comparison](</en/compare/cursor-vs-copilot-vs-claude-code.html>).

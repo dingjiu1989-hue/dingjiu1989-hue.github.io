@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-security-hardening.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "357",
+      "wordCount": "638",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-security-hardening.html"},
-      "articleBody": "Database Security Hardening Defense in Depth Database security requires multiple layers: network isolation, encryption, access control, and auditing. Encryption Encryption at Rest -- PostgreSQL TDE CREATE EXTENSION pg_tde; SELECT pg_tde_add_database_key_provider('file-vault', '{\"type\":\"file\"}'); SELECT pg_tde_set_principal_key('production-db-key', 'file-vault'); Encryption in Transit # postgresql.conf ssl = on ssl_cert_file = '/etc/ssl/certs/server.crt' ssl_key_file = '/etc/ssl/private/server.key' Access Control Apply least privilege with separate roles: CREATE ROLE read_only; CREATE ROLE read_write; GRANT SELECT ON ALL TABLES TO read_only; GRANT INSERT, UPDATE, DELETE ON ALL TABLES TO read_write; Row-Level Security ALTER TABLE orders ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation ON orders USING (tenant_id = current_setting('app.tenant_id')::INT); Audit Logging CREATE EXTENSION pgaudit; -- In postgresql.conf pgaudit.log = 'write,ddl,role' Network Isolation Place databases in private subnets. Use security groups to restrict access to specific application servers only. Never expose databases directly to the internet. Conclusion Layer encryption, access control, RLS, audit logging, and network isolation. Rotate credentials regularly. Follow least privilege. Test your security controls periodically."
+      "articleBody": "Database Security Hardening Database Security Hardening Database Security Hardening Database Security Hardening Defense in Depth Database security requires multiple layers: network isolation, encryption, access control, and auditing. Encryption Encryption at Rest \\\\\\\\-- PostgreSQL TDE CREATE EXTENSION pg_tde; SELECT pg_tde_add_database_key_provider('file-vault', '{\"type\":\"file\"}'); SELECT pg_tde_set_principal_key('production-db-key', 'file-vault'); Encryption in Transit postgresql.conf ssl = on ssl_cert_file = '/etc/ssl/certs/server.crt' ssl_key_file = '/etc/ssl/private/server.key' Access Control Apply least privilege with separate roles: CREATE ROLE read_only; CREATE ROLE read_write; GRANT SELECT ON ALL TABLES TO read_only; GRANT INSERT, UPDATE, DELETE ON ALL TABLES TO read_write; Row-Level Security ALTER TABLE orders ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation ON orders USING (tenant_id = current_setting('app.tenant_id')::INT); Audit Logging CREATE EXTENSION pgaudit; \\\\\\\\-- In postgresql.conf pgaudit.log = 'write,ddl,role' Network Isolation Place databases in private subnets. Use security groups to restrict access to specific application servers only. Never expose databases directly to the internet. Conclusion Layer encryption, access control, RLS, audit logging, and network isolation. Rotate credentials regularly. Follow least privilege. Test your security controls periodically."
     }
     </script>
     <script type="application/ld+json">
@@ -78,59 +78,339 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-security-hardening.png" alt="Database Security Hardening" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Security Hardening</h1>
 <br>
-<p>Defense in Depth   </p>
-<p>Database security requires multiple layers: network isolation, encryption, access control, and auditing.   </p>
-<p>Encryption   </p>
-<p>Encryption at Rest   </p>
+<h1>Database Security Hardening</h1>
 <br>
-<p>    -- PostgreSQL TDE</p>
 <br>
-<p>    CREATE EXTENSION pg_tde;</p>
 <br>
-<p>    SELECT pg_tde_add_database_key_provider('file-vault', '{"type":"file"}');</p>
 <br>
-<p>    SELECT pg_tde_set_principal_key('production-db-key', 'file-vault');</p>
+<h1>Database Security Hardening</h1>
 <br>
-<p>Encryption in Transit   </p>
 <br>
-<p>    # postgresql.conf</p>
 <br>
-<p>    ssl = on</p>
 <br>
-<p>    ssl_cert_file = '/etc/ssl/certs/server.crt'</p>
 <br>
-<p>    ssl_key_file = '/etc/ssl/private/server.key'</p>
 <br>
-<p>Access Control   </p>
-<p>Apply least privilege with separate roles:   </p>
 <br>
-<p>    CREATE ROLE read_only;</p>
+<h1>Database Security Hardening</h1>
 <br>
-<p>    CREATE ROLE read_write;</p>
 <br>
-<p>    GRANT SELECT ON ALL TABLES TO read_only;</p>
 <br>
-<p>    GRANT INSERT, UPDATE, DELETE ON ALL TABLES TO read_write;</p>
 <br>
-<p>Row-Level Security   </p>
 <br>
-<p>    ALTER TABLE orders ENABLE ROW LEVEL SECURITY;</p>
 <br>
-<p>    CREATE POLICY tenant_isolation ON orders</p>
 <br>
-<p>        USING (tenant_id = current_setting('app.tenant_id')::INT);</p>
 <br>
-<p>Audit Logging   </p>
 <br>
-<p>    CREATE EXTENSION pgaudit;</p>
 <br>
-<p>    -- In postgresql.conf</p>
+<p>Defense in Depth </p>
 <br>
-<p>    pgaudit.log = 'write,ddl,role'</p>
 <br>
-<p>Network Isolation   </p>
-<p>Place databases in private subnets. Use security groups to restrict access to specific application servers only. Never expose databases directly to the internet.   </p>
-<p>Conclusion   </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Database security requires multiple layers: network isolation, encryption, access control, and auditing. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Encryption </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Encryption at Rest </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- PostgreSQL TDE</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE EXTENSION pg_tde;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT pg_tde_add_database_key_provider('file-vault', '{"type":"file"}');</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT pg_tde_set_principal_key('production-db-key', 'file-vault');</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Encryption in Transit </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>postgresql.conf</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ssl = on</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ssl_cert_file = '/etc/ssl/certs/server.crt'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ssl_key_file = '/etc/ssl/private/server.key'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Access Control </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Apply least privilege with separate roles: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE ROLE read_only;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE ROLE read_write;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>GRANT SELECT ON ALL TABLES TO read_only;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>GRANT INSERT, UPDATE, DELETE ON ALL TABLES TO read_write;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Row-Level Security </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ALTER TABLE orders ENABLE ROW LEVEL SECURITY;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE POLICY tenant_isolation ON orders</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>USING (tenant_id = current_setting('app.tenant_id')::INT);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Audit Logging </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE EXTENSION pgaudit;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- In postgresql.conf</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pgaudit.log = 'write,ddl,role'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Network Isolation </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Place databases in private subnets. Use security groups to restrict access to specific application servers only. Never expose databases directly to the internet. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Layer encryption, access control, RLS, audit logging, and network isolation. Rotate credentials regularly. Follow least privilege. Test your security controls periodically.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -147,6 +427,7 @@
       <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

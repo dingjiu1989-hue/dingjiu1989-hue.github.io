@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/prompt-management.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2079",
+      "wordCount": "3859",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/prompt-management.html"},
-      "articleBody": "Prompt Management: Versioning, Testing, Collaboration, Deployment Introduction Prompts are the primary interface for controlling LLM behavior, yet most teams manage them as copy-pasted text files or hardcoded strings in source code. As AI applications grow, prompts need the same rigor as application code: versioning, testing, review, staging, and deployment pipelines. This article covers the tools and workflows for professional prompt management. Prompt as Code Store prompts in a structured, version-controlled format: # prompts/summarization.yaml name: document_summarizer version: 2.3.0 model: claude-sonnet-4-20260512 parameters: temperature: 0.3 max_tokens: 1024 system_prompt: | You are a technical document summarizer. Follow these rules: 1. Extract the core thesis and key supporting points 2. Preserve technical accuracy - do not simplify concepts 3. Maintain the original document's structure 4. Output in the requested format 5. Never add information not present in the source user_template: | Document: {document_text} Format: {output_format} Max length: {max_length} words Summary: tests: - input: document_text: \"Kubernetes is a container orchestration platform...\" output_format: bullet_points max_length: 100 expected_output_contains: [\"container orchestration\", \"pods\"] min_length: 50 max_length: 150 Prompt Registry A central registry stores all prompt versions with metadata: import hashlib import yaml from datetime import datetime class PromptRegistry: def __init__(self, storage_backend): self.storage = storage_backend def register_prompt(self, name: str, prompt_data: dict) -> str: version = prompt_data.get(\"version\", \"1.0.0\") prompt_hash = hashlib.sha256(yaml.dump(prompt_data).encode()).hexdigest()[:12] entry = { \"name\": name, \"version\": version, \"hash\": prompt_hash, \"prompt\": prompt_data, \"created_at\": datetime.now().isoformat(), \"status\": \"draft\", } self.storage.save(f\"prompts/{name}/{version}\", entry) return prompt_hash def get_prompt(self, name: str, version: str = \"latest\") -> dict: if version == \"latest\": versions = self.storage.list(f\"prompts/{name}\") version = sorted(versions)[-1] return self.storage.load(f\"prompts/{name}/{version}\") def promote_to_production(self, name: str, version: str): entry = self.storage.load(f\"prompts/{name}/{version}\") entry[\"status\"] = \"production\" entry[\"promoted_at\"] = datetime.now().isoformat() self.storage.save(f\"prompts/{name}/{version}\", entry) def diff(self, name: str, version_a: str, version_b: str) -> str: prompt_a = self.get_prompt(name, version_a)[\"prompt\"] prompt_b = self.get_prompt(name, version_b)[\"prompt\"] return self._compute_diff(prompt_a, prompt_b) Automated Prompt Testing Test prompts against a suite of evaluation cases: class PromptTester: def __init__(self, llm_fn): self.llm = llm_fn def run_tests(self, prompt_entry: dict) -> dict: prompt_data = prompt_entry[\"prompt\"] tests = prompt_data.get(\"tests\", []) results = {\"passed\": 0, \"failed\": 0, \"details\": []} for test in tests: try: result = self._run_single_test(prompt_data, test) results[\"details\"].append(result) if result[\"passed\"]: results[\"passed\"] += 1 else: results[\"failed\"] += 1 except Exception as e: results[\"failed\"] += 1 results[\"details\"].append({ \"test\": test, \"passed\": False, \"error\": str(e), }) results[\"pass_rate\"] = results[\"passed\"] / len(tests) if tests else 1.0 return results def _run_single_test(self, prompt_data: dict, test: dict) -> dict: # Build the prompt system = prompt_data.get(\"system_prompt\", \"\") template = prompt_data.get(\"user_template\", \"\") inputs = test.get(\"input\", {}) full_prompt = template.format(**inputs) if inputs else template # Run the model response = self.llm(system, full_prompt, prompt_data.get(\"parameters\", {})) # Check assertions failures = [] if \"expected_output_contains\" in test: for expected in test[\"expected_output_contains\"]: if expected not in response: failures.append(f\"Missing expected content: {expected}\") if \"min_length\" in test and len(response) failures.append(f\"Response too short: {len(response)} if \"max_length\" in test and len(response) > test[\"max_length\"]: failures.append(f\"Response too long: {len(response)} > {test['max_length']}\") return {\"test\": test, \"passed\": len(failures) == 0, \"failures\": failures, \"response_preview\": response[:200]} CI/CD for Prompts Integrate prompt changes into your deployment pipeline: # .github/workflows/prompt-deploy.yml name: Prompt Deployment on: push: paths: - 'prompts/**/*.yaml' jobs: test-prompts: runs-on: ubuntu-latest steps: - uses: actions/checkout@v4 - uses: actions/setup-python@v5 - name: Validate prompt YAML run: python scripts/validate_prompts.py - name: Run prompt tests env: ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }} run: python scripts/test_prompts.py --min-pass-rate 0.8 - name: Deploy to staging if: github.ref == 'refs/heads/main' run: python scripts/deploy_prompts.py --env staging deploy-production: needs: test-prompts if: github.event_name == 'push' && github.ref == 'refs/heads/main' runs-on: ubuntu-latest steps: - run: python scripts/deploy_prompts.py --env production Collaboration Workflow class PromptReviewWorkflow: def __init__(self, registry: PromptRegistry): self.registry = registry def create_pr(self, prompt_name: str, new_version: dict, author: str) -> str: \"\"\"Create a prompt change request for review.\"\"\" current = self.registry.get_prompt(prompt_name) diff = self.registry.diff(prompt_name, current[\"version\"], \"new\") pr = { \"id\": f\"prompt-pr-{uuid.uuid4().hex[:8]}\", \"prompt_name\": prompt_name, \"author\": author, \"current_version\": current[\"version\"], \"proposed_version\": new_version.get(\"version\"), \"diff\": diff, \"status\": \"open\", \"reviewers\": [], \"comments\": [], \"tests_passed\": None, } self.storage.save(f\"reviews/{pr['id']}\", pr) return pr[\"id\"] def approve(self, pr_id: str, reviewer: str, comment: str = \"\"): pr = self.storage.load(f\"reviews/{pr_id}\") pr[\"status\"] = \"approved\" pr[\"reviewers\"].append({\"name\": reviewer, \"action\": \"approve\", \"comment\": comment}) self.storage.save(f\"reviews/{pr_id}\", pr) Conclusion Manage prompts with the same rigor as code. Store them in YAML with version numbers, test cases, and metadata. Use a registry to track all versions and promote them through staging environments. Write automated tests that validate prompt outputs against assertions. Integrate prompt changes into CI/CD pipelines with review gates. This systematic approach prevents the common problems of prompt drift, broken deployments, and untracked changes that plague ad-hoc prompt management."
+      "articleBody": "Prompt Management: Versioning, Testing, Collaboration, Deployment Prompt Management: Versioning, Testing, Collaboration, Deployment Prompt Management: Versioning, Testing, Collaboration, Deployment Prompt Management: Versioning, Testing, Collaboration, Deployment Prompt Management: Versioning, Testing, Collaboration, Deployment Introduction Prompts are the primary interface for controlling LLM behavior, yet most teams manage them as copy-pasted text files or hardcoded strings in source code. As AI applications grow, prompts need the same rigor as application code: versioning, testing, review, staging, and deployment pipelines. This article covers the tools and workflows for professional prompt management. Prompt as Code Store prompts in a structured, version-controlled format: prompts/summarization.yaml name: document_summarizer version: 2.3.0 model: claude-sonnet-4-20260512 parameters: temperature: 0.3 max_tokens: 1024 system_prompt: | You are a technical document summarizer. Follow these rules: 1\\\\\\\\\\\\\\\\. Extract the core thesis and key supporting points 2\\\\\\\\\\\\\\\\. Preserve technical accuracy - do not simplify concepts 3\\\\\\\\\\\\\\\\. Maintain the original document's structure 4\\\\\\\\\\\\\\\\. Output in the requested format 5\\\\\\\\\\\\\\\\. Never add information not present in the source user_template: | Document: {document_text} Format: {output_format} Max length: {max_length} words Summary: tests: \\\\\\\\\\\\\\\\- input: document_text: \"Kubernetes is a container orchestration platform...\" output_format: bullet_points max_length: 100 expected_output_contains: [\"container orchestration\", \"pods\"] min_length: 50 max_length: 150 Prompt Registry A central registry stores all prompt versions with metadata: import hashlib import yaml from datetime import datetime class PromptRegistry: def __init__(self, storage_backend): self.storage = storage_backend def register_prompt(self, name: str, prompt_data: dict) -> str: version = prompt_data.get(\"version\", \"1.0.0\") prompt_hash = hashlib.sha256(yaml.dump(prompt_data).encode()).hexdigest()[:12] entry = { \"name\": name, \"version\": version, \"hash\": prompt_hash, \"prompt\": prompt_data, \"created_at\": datetime.now().isoformat(), \"status\": \"draft\", } self.storage.save(f\"prompts/{name}/{version}\", entry) return prompt_hash def get_prompt(self, name: str, version: str = \"latest\") -> dict: if version == \"latest\": versions = self.storage.list(f\"prompts/{name}\") version = sorted(versions)[-1] return self.storage.load(f\"prompts/{name}/{version}\") def promote_to_production(self, name: str, version: str): entry = self.storage.load(f\"prompts/{name}/{version}\") entry[\"status\"] = \"production\" entry[\"promoted_at\"] = datetime.now().isoformat() self.storage.save(f\"prompts/{name}/{version}\", entry) def diff(self, name: str, version_a: str, version_b: str) -> str: prompt_a = self.get_prompt(name, version_a)[\"prompt\"] prompt_b = self.get_prompt(name, version_b)[\"prompt\"] return self._compute_diff(prompt_a, prompt_b) Automated Prompt Testing Test prompts against a suite of evaluation cases: class PromptTester: def __init__(self, llm_fn): self.llm = llm_fn def run_tests(self, prompt_entry: dict) -> dict: prompt_data = prompt_entry[\"prompt\"] tests = prompt_data.get(\"tests\", []) results = {\"passed\": 0, \"failed\": 0, \"details\": []} for test in tests: try: result = self._run_single_test(prompt_data, test) results[\"details\"].append(result) if result[\"passed\"]: results[\"passed\"] += 1 else: results[\"failed\"] += 1 except Exception as e: results[\"failed\"] += 1 results[\"details\"].append({ \"test\": test, \"passed\": False, \"error\": str(e), }) results[\"pass_rate\"] = results[\"passed\"] / len(tests) if tests else 1.0 return results def _run_single_test(self, prompt_data: dict, test: dict) -> dict: Build the prompt system = prompt_data.get(\"system_prompt\", \"\") template = prompt_data.get(\"user_template\", \"\") inputs = test.get(\"input\", {}) full_prompt = template.format(**inputs) if inputs else template Run the model response = self.llm(system, full_prompt, prompt_data.get(\"parameters\", {})) Check assertions failures = [] if \"expected_output_contains\" in test: for expected in test[\"expected_output_contains\"]: if expected not in response: failures.append(f\"Missing expected content: {expected}\") if \"min_length\" in test and len(response) failures.append(f\"Response too short: {len(response)} if \"max_length\" in test and len(response) > test[\"max_length\"]: failures.append(f\"Response too long: {len(response)} > {test['max_length']}\") return {\"test\": test, \"passed\": len(failures) == 0, \"failures\": failures, \"response_preview\": response[:200]} CI/CD for Prompts Integrate prompt changes into your deployment pipeline: .github/workflows/prompt-deploy.yml name: Prompt Deployment on: push: paths: \\\\\\\\\\\\\\\\- 'prompts/**/*.yaml' jobs: test-prompts: runs-on: ubuntu-latest steps: \\\\\\\\\\\\\\\\- uses: actions/checkout@v4 \\\\\\\\\\\\\\\\- uses: actions/setup-python@v5 \\\\\\\\\\\\\\\\- name: Validate prompt YAML run: python scripts/validate_prompts.py \\\\\\\\\\\\\\\\- name: Run prompt tests env: ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }} run: python scripts/test_prompts.py --min-pass-rate 0.8 \\\\\\\\\\\\\\\\- name: Deploy to staging if: github.ref == 'refs/heads/main' run: python scripts/deploy_prompts.py --env staging deploy-production: needs: test-prompts if: github.event_name == 'push' && github.ref == 'refs/heads/main' runs-on: ubuntu-latest steps: \\\\\\\\\\\\\\\\- run: python scripts/deploy_prompts.py --env production Collaboration Workflow class PromptReviewWorkflow: def __init__(self, registry: PromptRegistry): self.registry = registry def create_pr(self, prompt_name: str, new_version: dict, author: str) -> str: \"\"\"Create a prompt change request for review.\"\"\" current = self.registry.get_prompt(prompt_name) diff = self.registry.diff(prompt_name, current[\"version\"], \"new\") pr = { \"id\": f\"prompt-pr-{uuid.uuid4().hex[:8]}\", \"prompt_name\": prompt_name, \"author\": author, \"current_version\": current[\"version\"], \"proposed_version\": new_version.get(\"version\"), \"diff\": diff, \"status\": \"open\", \"reviewers\": [], \"comments\": [], \"tests_passed\": None, } self.storage.save(f\"reviews/{pr['id']}\", pr) return pr[\"id\"] def approve(self, pr_id: str, reviewer: str, comment: str = \"\"): pr = self.storage.load(f\"reviews/{pr_id}\") pr[\"status\"] = \"approved\" pr[\"reviewers\"].append({\"name\": reviewer, \"action\": \"approve\", \"comment\": comment}) self.storage.save(f\"reviews/{pr_id}\", pr) Conclusion Manage prompts with the same rigor as code. Store them in YAML with version numbers, test cases, and metadata. Use a registry to track all versions and promote them through staging environments. Write automated tests that validate prompt outputs against assertions. Integrate prompt changes into CI/CD pipelines with review gates. This systematic approach prevents the common problems of prompt drift, broken deployments, and untracked changes that plague ad-hoc prompt management."
     }
     </script>
     <script type="application/ld+json">
@@ -78,341 +78,2395 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/prompt-management.png" alt="Prompt Management: Versioning, Testing, Collaboration, Deployment" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Prompt Management: Versioning, Testing, Collaboration, Deployment</h1>
 <br>
+<h1>Prompt Management: Versioning, Testing, Collaboration, Deployment</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>Prompt Management: Versioning, Testing, Collaboration, Deployment</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Prompt Management: Versioning, Testing, Collaboration, Deployment</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Prompt Management: Versioning, Testing, Collaboration, Deployment</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Prompts are the primary interface for controlling LLM behavior, yet most teams manage them as copy-pasted text files or hardcoded strings in source code. As AI applications grow, prompts need the same rigor as application code: versioning, testing, review, staging, and deployment pipelines. This article covers the tools and workflows for professional prompt management.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Prompt as Code</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Store prompts in a structured, version-controlled format:</p>
 <br>
-<p>    # prompts/summarization.yaml</p>
 <br>
-<p>    name: document_summarizer</p>
 <br>
-<p>    version: 2.3.0</p>
 <br>
-<p>    model: claude-sonnet-4-20260512</p>
 <br>
-<p>    parameters:</p>
 <br>
-<p>      temperature: 0.3</p>
 <br>
-<p>      max_tokens: 1024</p>
 <br>
-<p>    system_prompt: |</p>
 <br>
-<p>      You are a technical document summarizer. Follow these rules:</p>
 <br>
-<p>      1. Extract the core thesis and key supporting points</p>
 <br>
-<p>      2. Preserve technical accuracy - do not simplify concepts</p>
 <br>
-<p>      3. Maintain the original document's structure</p>
 <br>
-<p>      4. Output in the requested format</p>
+<h1>prompts/summarization.yaml</h1>
 <br>
-<p>      5. Never add information not present in the source</p>
 <br>
-<p>    user_template: |</p>
 <br>
-<p>      Document: {document_text}</p>
 <br>
-<p>      Format: {output_format}</p>
 <br>
-<p>      Max length: {max_length} words</p>
 <br>
-<p>      Summary:</p>
 <br>
-<p>    tests:</p>
 <br>
-<p>      - input:</p>
 <br>
-<p>          document_text: "Kubernetes is a container orchestration platform..."</p>
 <br>
-<p>          output_format: bullet_points</p>
 <br>
-<p>          max_length: 100</p>
 <br>
-<p>        expected_output_contains: ["container orchestration", "pods"]</p>
 <br>
-<p>        min_length: 50</p>
+<p>name: document_summarizer</p>
 <br>
-<p>        max_length: 150</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>version: 2.3.0</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model: claude-sonnet-4-20260512</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>parameters:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>temperature: 0.3</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>max_tokens: 1024</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>system_prompt: |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>You are a technical document summarizer. Follow these rules:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>1\\\\\\\\. Extract the core thesis and key supporting points</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>2\\\\\\\\. Preserve technical accuracy - do not simplify concepts</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>3\\\\\\\\. Maintain the original document's structure</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>4\\\\\\\\. Output in the requested format</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>5\\\\\\\\. Never add information not present in the source</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>user_template: |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Document: {document_text}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Format: {output_format}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Max length: {max_length} words</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Summary:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tests:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- input:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>document_text: "Kubernetes is a container orchestration platform..."</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>output_format: bullet_points</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>max_length: 100</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>expected_output_contains: ["container orchestration", "pods"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>min_length: 50</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>max_length: 150</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Prompt Registry</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>A central registry stores all prompt versions with metadata:</p>
 <br>
-<p>    import hashlib</p>
 <br>
-<p>    import yaml</p>
 <br>
-<p>    from datetime import datetime</p>
 <br>
-<p>    class PromptRegistry:</p>
 <br>
-<p>        def __init__(self, storage_backend):</p>
 <br>
-<p>            self.storage = storage_backend</p>
 <br>
-<p>        def register_prompt(self, name: str, prompt_data: dict) -> str:</p>
 <br>
-<p>            version = prompt_data.get("version", "1.0.0")</p>
 <br>
-<p>            prompt_hash = hashlib.sha256(yaml.dump(prompt_data).encode()).hexdigest()[:12]</p>
 <br>
-<p>            entry = {</p>
 <br>
-<p>                "name": name,</p>
 <br>
-<p>                "version": version,</p>
 <br>
-<p>                "hash": prompt_hash,</p>
+<p>import hashlib</p>
 <br>
-<p>                "prompt": prompt_data,</p>
 <br>
-<p>                "created_at": datetime.now().isoformat(),</p>
 <br>
-<p>                "status": "draft",</p>
 <br>
-<p>            }</p>
 <br>
-<p>            self.storage.save(f"prompts/{name}/{version}", entry)</p>
 <br>
-<p>            return prompt_hash</p>
 <br>
-<p>        def get_prompt(self, name: str, version: str = "latest") -> dict:</p>
 <br>
-<p>            if version == "latest":</p>
 <br>
-<p>                versions = self.storage.list(f"prompts/{name}")</p>
 <br>
-<p>                version = sorted(versions)[-1]</p>
 <br>
-<p>            return self.storage.load(f"prompts/{name}/{version}")</p>
 <br>
-<p>        def promote_to_production(self, name: str, version: str):</p>
 <br>
-<p>            entry = self.storage.load(f"prompts/{name}/{version}")</p>
+<p>import yaml</p>
 <br>
-<p>            entry["status"] = "production"</p>
 <br>
-<p>            entry["promoted_at"] = datetime.now().isoformat()</p>
 <br>
-<p>            self.storage.save(f"prompts/{name}/{version}", entry)</p>
 <br>
-<p>        def diff(self, name: str, version_a: str, version_b: str) -> str:</p>
 <br>
-<p>            prompt_a = self.get_prompt(name, version_a)["prompt"]</p>
 <br>
-<p>            prompt_b = self.get_prompt(name, version_b)["prompt"]</p>
 <br>
-<p>            return self._compute_diff(prompt_a, prompt_b)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from datetime import datetime</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class PromptRegistry:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def __init__(self, storage_backend):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.storage = storage_backend</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def register_prompt(self, name: str, prompt_data: dict) -> str:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>version = prompt_data.get("version", "1.0.0")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>prompt_hash = hashlib.sha256(yaml.dump(prompt_data).encode()).hexdigest()[:12]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>entry = {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"name": name,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"version": version,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"hash": prompt_hash,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"prompt": prompt_data,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"created_at": datetime.now().isoformat(),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"status": "draft",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.storage.save(f"prompts/{name}/{version}", entry)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return prompt_hash</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def get_prompt(self, name: str, version: str = "latest") -> dict:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if version == "latest":</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>versions = self.storage.list(f"prompts/{name}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>version = sorted(versions)[-1]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return self.storage.load(f"prompts/{name}/{version}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def promote_to_production(self, name: str, version: str):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>entry = self.storage.load(f"prompts/{name}/{version}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>entry["status"] = "production"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>entry["promoted_at"] = datetime.now().isoformat()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.storage.save(f"prompts/{name}/{version}", entry)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def diff(self, name: str, version_a: str, version_b: str) -> str:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>prompt_a = self.get_prompt(name, version_a)["prompt"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>prompt_b = self.get_prompt(name, version_b)["prompt"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return self._compute_diff(prompt_a, prompt_b)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Automated Prompt Testing</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Test prompts against a suite of evaluation cases:</p>
 <br>
-<p>    class PromptTester:</p>
 <br>
-<p>        def __init__(self, llm_fn):</p>
 <br>
-<p>            self.llm = llm_fn</p>
 <br>
-<p>        def run_tests(self, prompt_entry: dict) -> dict:</p>
 <br>
-<p>            prompt_data = prompt_entry["prompt"]</p>
 <br>
-<p>            tests = prompt_data.get("tests", [])</p>
 <br>
-<p>            results = {"passed": 0, "failed": 0, "details": []}</p>
 <br>
-<p>            for test in tests:</p>
 <br>
-<p>                try:</p>
 <br>
-<p>                    result = self._run_single_test(prompt_data, test)</p>
 <br>
-<p>                    results["details"].append(result)</p>
 <br>
-<p>                    if result["passed"]:</p>
 <br>
-<p>                        results["passed"] += 1</p>
+<p>class PromptTester:</p>
 <br>
-<p>                    else:</p>
 <br>
-<p>                        results["failed"] += 1</p>
 <br>
-<p>                except Exception as e:</p>
 <br>
-<p>                    results["failed"] += 1</p>
 <br>
-<p>                    results["details"].append({</p>
 <br>
-<p>                        "test": test,</p>
 <br>
-<p>                        "passed": False,</p>
 <br>
-<p>                        "error": str(e),</p>
 <br>
-<p>                    })</p>
 <br>
-<p>            results["pass_rate"] = results["passed"] / len(tests) if tests else 1.0</p>
 <br>
-<p>            return results</p>
 <br>
-<p>        def _run_single_test(self, prompt_data: dict, test: dict) -> dict:</p>
 <br>
-<p>            # Build the prompt</p>
+<p>def __init__(self, llm_fn):</p>
 <br>
-<p>            system = prompt_data.get("system_prompt", "")</p>
 <br>
-<p>            template = prompt_data.get("user_template", "")</p>
 <br>
-<p>            inputs = test.get("input", {})</p>
 <br>
-<p>            full_prompt = template.format(**inputs) if inputs else template</p>
 <br>
-<p>            # Run the model</p>
 <br>
-<p>            response = self.llm(system, full_prompt, prompt_data.get("parameters", {}))</p>
 <br>
-<p>            # Check assertions</p>
 <br>
-<p>            failures = []</p>
 <br>
-<p>            if "expected_output_contains" in test:</p>
 <br>
-<p>                for expected in test["expected_output_contains"]:</p>
 <br>
-<p>                    if expected not in response:</p>
 <br>
-<p>                        failures.append(f"Missing expected content: {expected}")</p>
 <br>
-<p>            if "min_length" in test and len(response) < test["min_length"]:</p>
+<p>self.llm = llm_fn</p>
 <br>
-<p>                failures.append(f"Response too short: {len(response)} < {test['min_length']}")</p>
 <br>
-<p>            if "max_length" in test and len(response) > test["max_length"]:</p>
 <br>
-<p>                failures.append(f"Response too long: {len(response)} > {test['max_length']}")</p>
 <br>
-<p>            return {"test": test, "passed": len(failures) == 0, "failures": failures, "response_preview": response[:200]}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def run_tests(self, prompt_entry: dict) -> dict:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>prompt_data = prompt_entry["prompt"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tests = prompt_data.get("tests", [])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>results = {"passed": 0, "failed": 0, "details": []}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for test in tests:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>try:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>result = self._run_single_test(prompt_data, test)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>results["details"].append(result)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if result["passed"]:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>results["passed"] += 1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>else:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>results["failed"] += 1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except Exception as e:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>results["failed"] += 1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>results["details"].append({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"test": test,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"passed": False,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"error": str(e),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>})</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>results["pass_rate"] = results["passed"] / len(tests) if tests else 1.0</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return results</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def _run_single_test(self, prompt_data: dict, test: dict) -> dict:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Build the prompt</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>system = prompt_data.get("system_prompt", "")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>template = prompt_data.get("user_template", "")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>inputs = test.get("input", {})</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>full_prompt = template.format(**inputs) if inputs else template</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Run the model</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response = self.llm(system, full_prompt, prompt_data.get("parameters", {}))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Check assertions</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>failures = []</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if "expected_output_contains" in test:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for expected in test["expected_output_contains"]:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if expected not in response:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>failures.append(f"Missing expected content: {expected}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if "min_length" in test and len(response) < test["min_length"]:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>failures.append(f"Response too short: {len(response)} < {test['min_length']}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if "max_length" in test and len(response) > test["max_length"]:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>failures.append(f"Response too long: {len(response)} > {test['max_length']}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return {"test": test, "passed": len(failures) == 0, "failures": failures, "response_preview": response[:200]}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  CI/CD for Prompts</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Integrate prompt changes into your deployment pipeline:</p>
 <br>
-<p>    # .github/workflows/prompt-deploy.yml</p>
 <br>
-<p>    name: Prompt Deployment</p>
 <br>
-<p>    on:</p>
 <br>
-<p>      push:</p>
 <br>
-<p>        paths:</p>
 <br>
-<p>          - 'prompts/**/*.yaml'</p>
 <br>
-<p>    jobs:</p>
 <br>
-<p>      test-prompts:</p>
 <br>
-<p>        runs-on: ubuntu-latest</p>
 <br>
-<p>        steps:</p>
 <br>
-<p>          - uses: actions/checkout@v4</p>
 <br>
-<p>          - uses: actions/setup-python@v5</p>
 <br>
-<p>          - name: Validate prompt YAML</p>
+<h1>.github/workflows/prompt-deploy.yml</h1>
 <br>
-<p>            run: python scripts/validate_prompts.py</p>
 <br>
-<p>          - name: Run prompt tests</p>
 <br>
-<p>            env:</p>
 <br>
-<p>              ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}</p>
 <br>
-<p>            run: python scripts/test_prompts.py --min-pass-rate 0.8</p>
 <br>
-<p>          - name: Deploy to staging</p>
 <br>
-<p>            if: github.ref == 'refs/heads/main'</p>
 <br>
-<p>            run: python scripts/deploy_prompts.py --env staging</p>
 <br>
-<p>      deploy-production:</p>
 <br>
-<p>        needs: test-prompts</p>
 <br>
-<p>        if: github.event_name == 'push' && github.ref == 'refs/heads/main'</p>
 <br>
-<p>        runs-on: ubuntu-latest</p>
 <br>
-<p>        steps:</p>
+<p>name: Prompt Deployment</p>
 <br>
-<p>          - run: python scripts/deploy_prompts.py --env production</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>on:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>push:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>paths:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- 'prompts/**/*.yaml'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>jobs:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>test-prompts:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>runs-on: ubuntu-latest</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>steps:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- uses: actions/checkout@v4</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- uses: actions/setup-python@v5</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: Validate prompt YAML</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>run: python scripts/validate_prompts.py</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: Run prompt tests</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>env:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>run: python scripts/test_prompts.py --min-pass-rate 0.8</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: Deploy to staging</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if: github.ref == 'refs/heads/main'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>run: python scripts/deploy_prompts.py --env staging</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>deploy-production:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>needs: test-prompts</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if: github.event_name == 'push' && github.ref == 'refs/heads/main'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>runs-on: ubuntu-latest</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>steps:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- run: python scripts/deploy_prompts.py --env production</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Collaboration Workflow</h2>
 <br>
-<p>    class PromptReviewWorkflow:</p>
 <br>
-<p>        def __init__(self, registry: PromptRegistry):</p>
 <br>
-<p>            self.registry = registry</p>
 <br>
-<p>        def create_pr(self, prompt_name: str, new_version: dict, author: str) -> str:</p>
 <br>
-<p>            """Create a prompt change request for review."""</p>
 <br>
-<p>            current = self.registry.get_prompt(prompt_name)</p>
 <br>
-<p>            diff = self.registry.diff(prompt_name, current["version"], "new")</p>
 <br>
-<p>            pr = {</p>
 <br>
-<p>                "id": f"prompt-pr-{uuid.uuid4().hex[:8]}",</p>
 <br>
-<p>                "prompt_name": prompt_name,</p>
 <br>
-<p>                "author": author,</p>
 <br>
-<p>                "current_version": current["version"],</p>
 <br>
-<p>                "proposed_version": new_version.get("version"),</p>
+<p>class PromptReviewWorkflow:</p>
 <br>
-<p>                "diff": diff,</p>
 <br>
-<p>                "status": "open",</p>
 <br>
-<p>                "reviewers": [],</p>
 <br>
-<p>                "comments": [],</p>
 <br>
-<p>                "tests_passed": None,</p>
 <br>
-<p>            }</p>
 <br>
-<p>            self.storage.save(f"reviews/{pr['id']}", pr)</p>
 <br>
-<p>            return pr["id"]</p>
 <br>
-<p>        def approve(self, pr_id: str, reviewer: str, comment: str = ""):</p>
 <br>
-<p>            pr = self.storage.load(f"reviews/{pr_id}")</p>
 <br>
-<p>            pr["status"] = "approved"</p>
 <br>
-<p>            pr["reviewers"].append({"name": reviewer, "action": "approve", "comment": comment})</p>
 <br>
-<p>            self.storage.save(f"reviews/{pr_id}", pr)</p>
+<p>def __init__(self, registry: PromptRegistry):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.registry = registry</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def create_pr(self, prompt_name: str, new_version: dict, author: str) -> str:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"""Create a prompt change request for review."""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>current = self.registry.get_prompt(prompt_name)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>diff = self.registry.diff(prompt_name, current["version"], "new")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pr = {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"id": f"prompt-pr-{uuid.uuid4().hex[:8]}",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"prompt_name": prompt_name,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"author": author,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"current_version": current["version"],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"proposed_version": new_version.get("version"),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"diff": diff,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"status": "open",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"reviewers": [],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"comments": [],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"tests_passed": None,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.storage.save(f"reviews/{pr['id']}", pr)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return pr["id"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def approve(self, pr_id: str, reviewer: str, comment: str = ""):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pr = self.storage.load(f"reviews/{pr_id}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pr["status"] = "approved"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pr["reviewers"].append({"name": reviewer, "action": "approve", "comment": comment})</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.storage.save(f"reviews/{pr_id}", pr)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Conclusion</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Manage prompts with the same rigor as code. Store them in YAML with version numbers, test cases, and metadata. Use a registry to track all versions and promote them through staging environments. Write automated tests that validate prompt outputs against assertions. Integrate prompt changes into CI/CD pipelines with review gates. This systematic approach prevents the common problems of prompt drift, broken deployments, and untracked changes that plague ad-hoc prompt management.</p></div>
     </article>
@@ -426,9 +2480,15 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
-      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
+    </section>
+    
+    <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
+      <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
+      <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
+      <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
   </div>
 </main>

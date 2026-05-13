@@ -23,7 +23,7 @@ Developers need different tools for different types of "knowledge work": note-ta
 **APIs**|  Notion API| Community plugins| Linear API (excellent)  
 **AI features**|  Notion AI (built-in)| Via plugins (Copilot, etc.)| Linear AI (summaries, etc.)  
 **Keyboard-first**|  Good (/)| Excellent| Excellent (⌘K)  
-
+  
 ## Notion — The All-in-One Workspace
 
 Notion combines docs, databases, wikis, and project management into one tool. Its killer feature is the database: a spreadsheet-meets-database that can be viewed as a table, board, calendar, or gallery. For team documentation and shared knowledge, Notion is hard to beat.
@@ -64,5 +64,5 @@ Bug tracking, sprints, roadmaps| **Linear**
 Project briefs and product specs| **Notion**  
 Daily journal, Zettelkasten| **Obsidian**  
 Issue tracker devs won't hate| **Linear**  
-
+  
 **Bottom line:** These three tools complement each other — they're not competitors. Obsidian for personal knowledge (your second brain). Notion for team documentation and collaborative planning. Linear for tracking what needs to be built. The optimal stack: Obsidian for you, Notion for the team, Linear for the code. See also: [free online tools guide](</en/tools/online-tools-2026.html>) for more developer productivity tools.

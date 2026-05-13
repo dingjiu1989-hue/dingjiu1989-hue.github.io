@@ -21,17 +21,18 @@ Node.js backend frameworks have come a long way since Express. Hono is the new e
 **Middleware**|  Growing, Express-compatible| Largest ecosystem (50K+ packages)| Large (plugin system)  
 **Validation**|  Built-in (Zod integration)| Third-party (express-validator)| Built-in (schema-based)  
 **Edge runtime**|  Yes (Cloudflare Workers, Deno, Bun)| No| Limited  
-
+  
 ## Hono — Edge-Native, Ultralight
 
 Hono ("flame" in Japanese) is built for the edge: Cloudflare Workers, Deno, Bun, and Node.js all from the same codebase. At ~5KB, it's the smallest option. Its Zod integration for request validation is built-in and elegant. If you deploy to the edge, Hono is the clear choice.
-
+    
+    
     import { Hono } from "hono";
     import { zValidator } from "@hono/zod-validator";
     import { z } from "zod";
-
+    
     const app = new Hono();
-
+    
     app.post("/users", zValidator("json", z.object({
       name: z.string(),
       email: z.string().email(),
@@ -65,5 +66,5 @@ Rapid prototyping, maximum middleware| **Express**
 Production API, best balance| **Fastify** or **Hono**  
 Express migration (performance)| **Fastify**  
 Smallest bundle, edge-first| **Hono**  
-
+  
 **Bottom line:** Hono for edge/serverless. Fastify for production Node.js servers. Express for quick prototypes and when you need the largest middleware ecosystem. New projects should default to Hono or Fastify. See also: [Edge Functions Comparison](</en/compare/cloudflare-workers-vs-lambda-vs-deno-deploy.html>) and [REST API Best Practices](</en/tech/rest-api-best-practices.html>).

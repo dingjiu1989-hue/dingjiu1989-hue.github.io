@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-api-design.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1610",
+      "wordCount": "3001",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/llm-api-design.html"},
-      "articleBody": "LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits Introduction Designing APIs that wrap large language models requires handling concerns that traditional REST APIs do not face: streaming token-by-token responses, enforcing structured output schemas, managing unpredictable latency, and protecting against runaway costs. This guide covers the four critical pillars of LLM API design with production-ready patterns. Streaming Responses Streaming is the standard way to return LLM outputs. Instead of waiting for the full response, the client receives tokens as they are generated: from fastapi import FastAPI, Request from fastapi.responses import StreamingResponse from anthropic import AsyncAnthropic import asyncio app = FastAPI() client = AsyncAnthropic(api_key=\"sk-ant-...\") async def generate_stream(prompt: str): async with client.messages.stream( model=\"claude-sonnet-4-20260512\", max_tokens=4096, messages=[{\"role\": \"user\", \"content\": prompt}], ) as stream: async for chunk in stream: if chunk.type == \"content_block_delta\": yield f\"data: {chunk.delta.text}\\n\\n\" @app.post(\"/chat\") async def chat(request: Request): body = await request.json() return StreamingResponse( generate_stream(body[\"prompt\"]), media_type=\"text/event-stream\", headers={ \"Cache-Control\": \"no-cache\", \"Connection\": \"keep-alive\", \"X-Accel-Buffering\": \"no\", }, ) The Server-Sent Events protocol is the most compatible streaming format. Each `data:` line is a new token chunk. Clients use `EventSource` or fetch with `ReadableStream` to consume the stream progressively. Structured Output Raw LLM text is unreliable for programmatic consumption. Use structured output modes to enforce JSON schemas: from pydantic import BaseModel from openai import OpenAI client = OpenAI() class ExtractedEntity(BaseModel): name: str type: str confidence: float source_text: str class ExtractionResult(BaseModel): entities: list[ExtractedEntity] summary: str language: str response = client.beta.chat.completions.parse( model=\"gpt-4o\", messages=[ {\"role\": \"system\", \"content\": \"Extract entities from the text.\"}, {\"role\": \"user\", \"content\": user_text}, ], response_format=ExtractionResult, ) result: ExtractionResult = response.choices[0].message.parsed When the API does not support native structured output, use a two-step approach: request JSON in the prompt, then validate and re-request on failure: import json from pydantic import ValidationError def safe_structured_generate(prompt: str, schema: type[BaseModel], max_retries=3): for attempt in range(max_retries): raw = call_llm(prompt + \"\\n\\nRespond in valid JSON matching this schema: \" + str(schema.model_json_schema())) try: parsed = json.loads(clean_json(raw)) return schema.model_validate(parsed) except (json.JSONDecodeError, ValidationError) as e: if attempt == max_retries - 1: raise prompt += f\"\\n\\nPrevious attempt failed: {e}. Please fix the JSON.\" return None Error Handling LLM APIs fail in distinctive ways. Build a retry strategy around each failure mode: import time from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type class RateLimitError(Exception): pass class ContextWindowExceeded(Exception): pass class ContentFilterError(Exception): pass @retry( stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=30), retry=retry_if_exception_type(RateLimitError), ) def call_with_retry(prompt: str) -> str: try: response = client.messages.create(model=\"claude-sonnet-4-20260512\", max_tokens=1024, messages=[{\"role\": \"user\", \"content\": prompt}]) return response.content[0].text except APIStatusError as e: if e.status_code == 429: retry_after = int(e.response.headers.get(\"retry-after\", 5)) time.sleep(retry_after) raise RateLimitError from e elif e.status_code == 400 and \"context_length_exceeded\" in str(e): raise ContextWindowExceeded from e elif e.status_code == 400 and \"content_filter\" in str(e): raise ContentFilterError from e raise Each error type deserves a different handler: rate limits get exponential backoff, context windows trigger input truncation, and content filter errors should be logged and escalated. Rate Limiting Protect your API from abuse and cost spikes with layered rate limiting: from fastapi import HTTPException import time from collections import defaultdict class RateLimiter: def __init__(self): self.tokens_per_second = 10 self.burst_limit = 20 self.cost_per_token = 0.000003 self.daily_budget = 10.0 self.user_usage = defaultdict(float) async def check(self, user_id: str, estimated_tokens: int): cost = estimated_tokens * self.cost_per_token if self.user_usage[user_id] + cost > self.daily_budget: raise HTTPException(status_code=429, detail=\"Daily budget exceeded\") self.user_usage[user_id] += cost def get_usage(self, user_id: str) -> dict: return {\"cost\": self.user_usage[user_id], \"budget\": self.daily_budget} rate_limiter = RateLimiter() @app.post(\"/chat\") async def chat(request: Request): user_id = request.headers.get(\"X-User-Id\") body = await request.json() estimated = len(body[\"prompt\"].split()) * 2 + int(body.get(\"max_tokens\", 1024)) await rate_limiter.check(user_id, estimated) return await generate_response(body[\"prompt\"]) Conclusion Designing LLM APIs requires balancing responsiveness with cost control. Stream responses for user experience, enforce structured output for programmatic reliability, implement retry logic calibrated to each error type, and gate access with rate and budget limits. These four patterns form the foundation of any production LLM service."
+      "articleBody": "LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits Introduction Designing APIs that wrap large language models requires handling concerns that traditional REST APIs do not face: streaming token-by-token responses, enforcing structured output schemas, managing unpredictable latency, and protecting against runaway costs. This guide covers the four critical pillars of LLM API design with production-ready patterns. Streaming Responses Streaming is the standard way to return LLM outputs. Instead of waiting for the full response, the client receives tokens as they are generated: from fastapi import FastAPI, Request from fastapi.responses import StreamingResponse from anthropic import AsyncAnthropic import asyncio app = FastAPI() client = AsyncAnthropic(api_key=\"sk-ant-...\") async def generate_stream(prompt: str): async with client.messages.stream( model=\"claude-sonnet-4-20260512\", max_tokens=4096, messages=[{\"role\": \"user\", \"content\": prompt}], ) as stream: async for chunk in stream: if chunk.type == \"content_block_delta\": yield f\"data: {chunk.delta.text}\\n\\n\" @app.post(\"/chat\") async def chat(request: Request): body = await request.json() return StreamingResponse( generate_stream(body[\"prompt\"]), media_type=\"text/event-stream\", headers={ \"Cache-Control\": \"no-cache\", \"Connection\": \"keep-alive\", \"X-Accel-Buffering\": \"no\", }, ) The Server-Sent Events protocol is the most compatible streaming format. Each `data:` line is a new token chunk. Clients use `EventSource` or fetch with `ReadableStream` to consume the stream progressively. Structured Output Raw LLM text is unreliable for programmatic consumption. Use structured output modes to enforce JSON schemas: from pydantic import BaseModel from openai import OpenAI client = OpenAI() class ExtractedEntity(BaseModel): name: str type: str confidence: float source_text: str class ExtractionResult(BaseModel): entities: list[ExtractedEntity] summary: str language: str response = client.beta.chat.completions.parse( model=\"gpt-4o\", messages=[ {\"role\": \"system\", \"content\": \"Extract entities from the text.\"}, {\"role\": \"user\", \"content\": user_text}, ], response_format=ExtractionResult, ) result: ExtractionResult = response.choices[0].message.parsed When the API does not support native structured output, use a two-step approach: request JSON in the prompt, then validate and re-request on failure: import json from pydantic import ValidationError def safe_structured_generate(prompt: str, schema: type[BaseModel], max_retries=3): for attempt in range(max_retries): raw = call_llm(prompt + \"\\n\\nRespond in valid JSON matching this schema: \" + str(schema.model_json_schema())) try: parsed = json.loads(clean_json(raw)) return schema.model_validate(parsed) except (json.JSONDecodeError, ValidationError) as e: if attempt == max_retries - 1: raise prompt += f\"\\n\\nPrevious attempt failed: {e}. Please fix the JSON.\" return None Error Handling LLM APIs fail in distinctive ways. Build a retry strategy around each failure mode: import time from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type class RateLimitError(Exception): pass class ContextWindowExceeded(Exception): pass class ContentFilterError(Exception): pass @retry( stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=30), retry=retry_if_exception_type(RateLimitError), ) def call_with_retry(prompt: str) -> str: try: response = client.messages.create(model=\"claude-sonnet-4-20260512\", max_tokens=1024, messages=[{\"role\": \"user\", \"content\": prompt}]) return response.content[0].text except APIStatusError as e: if e.status_code == 429: retry_after = int(e.response.headers.get(\"retry-after\", 5)) time.sleep(retry_after) raise RateLimitError from e elif e.status_code == 400 and \"context_length_exceeded\" in str(e): raise ContextWindowExceeded from e elif e.status_code == 400 and \"content_filter\" in str(e): raise ContentFilterError from e raise Each error type deserves a different handler: rate limits get exponential backoff, context windows trigger input truncation, and content filter errors should be logged and escalated. Rate Limiting Protect your API from abuse and cost spikes with layered rate limiting: from fastapi import HTTPException import time from collections import defaultdict class RateLimiter: def __init__(self): self.tokens_per_second = 10 self.burst_limit = 20 self.cost_per_token = 0.000003 self.daily_budget = 10.0 self.user_usage = defaultdict(float) async def check(self, user_id: str, estimated_tokens: int): cost = estimated_tokens * self.cost_per_token if self.user_usage[user_id] + cost > self.daily_budget: raise HTTPException(status_code=429, detail=\"Daily budget exceeded\") self.user_usage[user_id] += cost def get_usage(self, user_id: str) -> dict: return {\"cost\": self.user_usage[user_id], \"budget\": self.daily_budget} rate_limiter = RateLimiter() @app.post(\"/chat\") async def chat(request: Request): user_id = request.headers.get(\"X-User-Id\") body = await request.json() estimated = len(body[\"prompt\"].split()) * 2 + int(body.get(\"max_tokens\", 1024)) await rate_limiter.check(user_id, estimated) return await generate_response(body[\"prompt\"]) Conclusion Designing LLM APIs requires balancing responsiveness with cost control. Stream responses for user experience, enforce structured output for programmatic reliability, implement retry logic calibrated to each error type, and gate access with rate and budget limits. These four patterns form the foundation of any production LLM service."
     }
     </script>
     <script type="application/ld+json">
@@ -78,253 +78,1779 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-api-design.png" alt="LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
 <br>
+<h1>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Designing APIs that wrap large language models requires handling concerns that traditional REST APIs do not face: streaming token-by-token responses, enforcing structured output schemas, managing unpredictable latency, and protecting against runaway costs. This guide covers the four critical pillars of LLM API design with production-ready patterns.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Streaming Responses</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Streaming is the standard way to return LLM outputs. Instead of waiting for the full response, the client receives tokens as they are generated:</p>
 <br>
-<p>    from fastapi import FastAPI, Request</p>
 <br>
-<p>    from fastapi.responses import StreamingResponse</p>
 <br>
-<p>    from anthropic import AsyncAnthropic</p>
 <br>
-<p>    import asyncio</p>
 <br>
-<p>    app = FastAPI()</p>
 <br>
-<p>    client = AsyncAnthropic(api_key="sk-ant-...")</p>
 <br>
-<p>    async def generate_stream(prompt: str):</p>
 <br>
-<p>        async with client.messages.stream(</p>
 <br>
-<p>            model="claude-sonnet-4-20260512",</p>
 <br>
-<p>            max_tokens=4096,</p>
 <br>
-<p>            messages=[{"role": "user", "content": prompt}],</p>
 <br>
-<p>        ) as stream:</p>
 <br>
-<p>            async for chunk in stream:</p>
+<p>from fastapi import FastAPI, Request</p>
 <br>
-<p>                if chunk.type == "content_block_delta":</p>
 <br>
-<p>                    yield f"data: {chunk.delta.text}\n\n"</p>
 <br>
-<p>    @app.post("/chat")</p>
 <br>
-<p>    async def chat(request: Request):</p>
 <br>
-<p>        body = await request.json()</p>
 <br>
-<p>        return StreamingResponse(</p>
 <br>
-<p>            generate_stream(body["prompt"]),</p>
 <br>
-<p>            media_type="text/event-stream",</p>
 <br>
-<p>            headers={</p>
 <br>
-<p>                "Cache-Control": "no-cache",</p>
 <br>
-<p>                "Connection": "keep-alive",</p>
 <br>
-<p>                "X-Accel-Buffering": "no",</p>
 <br>
-<p>            },</p>
+<p>from fastapi.responses import StreamingResponse</p>
 <br>
-<p>        )</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from anthropic import AsyncAnthropic</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import asyncio</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>app = FastAPI()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>client = AsyncAnthropic(api_key="sk-ant-...")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def generate_stream(prompt: str):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async with client.messages.stream(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model="claude-sonnet-4-20260512",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>max_tokens=4096,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages=[{"role": "user", "content": prompt}],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>) as stream:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async for chunk in stream:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if chunk.type == "content_block_delta":</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>yield f"data: {chunk.delta.text}\n\n"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@app.post("/chat")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def chat(request: Request):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>body = await request.json()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return StreamingResponse(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>generate_stream(body["prompt"]),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>media_type="text/event-stream",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>headers={</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"Cache-Control": "no-cache",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"Connection": "keep-alive",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"X-Accel-Buffering": "no",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>The Server-Sent Events protocol is the most compatible streaming format. Each `data:` line is a new token chunk. Clients use `EventSource` or fetch with `ReadableStream` to consume the stream progressively.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Structured Output</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Raw LLM text is unreliable for programmatic consumption. Use structured output modes to enforce JSON schemas:</p>
 <br>
-<p>    from pydantic import BaseModel</p>
 <br>
-<p>    from openai import OpenAI</p>
 <br>
-<p>    client = OpenAI()</p>
 <br>
-<p>    class ExtractedEntity(BaseModel):</p>
 <br>
-<p>        name: str</p>
 <br>
-<p>        type: str</p>
 <br>
-<p>        confidence: float</p>
 <br>
-<p>        source_text: str</p>
 <br>
-<p>    class ExtractionResult(BaseModel):</p>
 <br>
-<p>        entities: list[ExtractedEntity]</p>
 <br>
-<p>        summary: str</p>
 <br>
-<p>        language: str</p>
 <br>
-<p>    response = client.beta.chat.completions.parse(</p>
+<p>from pydantic import BaseModel</p>
 <br>
-<p>        model="gpt-4o",</p>
 <br>
-<p>        messages=[</p>
 <br>
-<p>            {"role": "system", "content": "Extract entities from the text."},</p>
 <br>
-<p>            {"role": "user", "content": user_text},</p>
 <br>
-<p>        ],</p>
 <br>
-<p>        response_format=ExtractionResult,</p>
 <br>
-<p>    )</p>
 <br>
-<p>    result: ExtractionResult = response.choices[0].message.parsed</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from openai import OpenAI</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>client = OpenAI()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class ExtractedEntity(BaseModel):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: str</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>type: str</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>confidence: float</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>source_text: str</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class ExtractionResult(BaseModel):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>entities: list[ExtractedEntity]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>summary: str</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>language: str</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response = client.beta.chat.completions.parse(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model="gpt-4o",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages=[</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{"role": "system", "content": "Extract entities from the text."},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{"role": "user", "content": user_text},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response_format=ExtractionResult,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>result: ExtractionResult = response.choices[0].message.parsed</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>When the API does not support native structured output, use a two-step approach: request JSON in the prompt, then validate and re-request on failure:</p>
 <br>
-<p>    import json</p>
 <br>
-<p>    from pydantic import ValidationError</p>
 <br>
-<p>    def safe_structured_generate(prompt: str, schema: type[BaseModel], max_retries=3):</p>
 <br>
-<p>        for attempt in range(max_retries):</p>
 <br>
-<p>            raw = call_llm(prompt + "\n\nRespond in valid JSON matching this schema: " + str(schema.model_json_schema()))</p>
 <br>
-<p>            try:</p>
 <br>
-<p>                parsed = json.loads(clean_json(raw))</p>
 <br>
-<p>                return schema.model_validate(parsed)</p>
 <br>
-<p>            except (json.JSONDecodeError, ValidationError) as e:</p>
 <br>
-<p>                if attempt == max_retries - 1:</p>
 <br>
-<p>                    raise</p>
 <br>
-<p>                prompt += f"\n\nPrevious attempt failed: {e}. Please fix the JSON."</p>
 <br>
-<p>        return None</p>
+<p>import json</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from pydantic import ValidationError</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def safe_structured_generate(prompt: str, schema: type[BaseModel], max_retries=3):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for attempt in range(max_retries):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raw = call_llm(prompt + "\n\nRespond in valid JSON matching this schema: " + str(schema.model_json_schema()))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>try:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>parsed = json.loads(clean_json(raw))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return schema.model_validate(parsed)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except (json.JSONDecodeError, ValidationError) as e:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if attempt == max_retries - 1:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>prompt += f"\n\nPrevious attempt failed: {e}. Please fix the JSON."</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return None</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Error Handling</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>LLM APIs fail in distinctive ways. Build a retry strategy around each failure mode:</p>
 <br>
-<p>    import time</p>
 <br>
-<p>    from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type</p>
 <br>
-<p>    class RateLimitError(Exception): pass</p>
 <br>
-<p>    class ContextWindowExceeded(Exception): pass</p>
 <br>
-<p>    class ContentFilterError(Exception): pass</p>
 <br>
-<p>    @retry(</p>
 <br>
-<p>        stop=stop_after_attempt(3),</p>
 <br>
-<p>        wait=wait_exponential(multiplier=1, min=2, max=30),</p>
 <br>
-<p>        retry=retry_if_exception_type(RateLimitError),</p>
 <br>
-<p>    )</p>
 <br>
-<p>    def call_with_retry(prompt: str) -> str:</p>
 <br>
-<p>        try:</p>
 <br>
-<p>            response = client.messages.create(model="claude-sonnet-4-20260512", max_tokens=1024, messages=[{"role": "user", "content": prompt}])</p>
+<p>import time</p>
 <br>
-<p>            return response.content[0].text</p>
 <br>
-<p>        except APIStatusError as e:</p>
 <br>
-<p>            if e.status_code == 429:</p>
 <br>
-<p>                retry_after = int(e.response.headers.get("retry-after", 5))</p>
 <br>
-<p>                time.sleep(retry_after)</p>
 <br>
-<p>                raise RateLimitError from e</p>
 <br>
-<p>            elif e.status_code == 400 and "context_length_exceeded" in str(e):</p>
 <br>
-<p>                raise ContextWindowExceeded from e</p>
 <br>
-<p>            elif e.status_code == 400 and "content_filter" in str(e):</p>
 <br>
-<p>                raise ContentFilterError from e</p>
 <br>
-<p>            raise</p>
+<br>
+<br>
+<p>from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class RateLimitError(Exception): pass</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class ContextWindowExceeded(Exception): pass</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class ContentFilterError(Exception): pass</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@retry(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>stop=stop_after_attempt(3),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>wait=wait_exponential(multiplier=1, min=2, max=30),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>retry=retry_if_exception_type(RateLimitError),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def call_with_retry(prompt: str) -> str:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>try:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response = client.messages.create(model="claude-sonnet-4-20260512", max_tokens=1024, messages=[{"role": "user", "content": prompt}])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return response.content[0].text</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except APIStatusError as e:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if e.status_code == 429:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>retry_after = int(e.response.headers.get("retry-after", 5))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>time.sleep(retry_after)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise RateLimitError from e</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>elif e.status_code == 400 and "context_length_exceeded" in str(e):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise ContextWindowExceeded from e</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>elif e.status_code == 400 and "content_filter" in str(e):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise ContentFilterError from e</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Each error type deserves a different handler: rate limits get exponential backoff, context windows trigger input truncation, and content filter errors should be logged and escalated.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Rate Limiting</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Protect your API from abuse and cost spikes with layered rate limiting:</p>
 <br>
-<p>    from fastapi import HTTPException</p>
 <br>
-<p>    import time</p>
 <br>
-<p>    from collections import defaultdict</p>
 <br>
-<p>    class RateLimiter:</p>
 <br>
-<p>        def __init__(self):</p>
 <br>
-<p>            self.tokens_per_second = 10</p>
 <br>
-<p>            self.burst_limit = 20</p>
 <br>
-<p>            self.cost_per_token = 0.000003</p>
 <br>
-<p>            self.daily_budget = 10.0</p>
 <br>
-<p>            self.user_usage = defaultdict(float)</p>
 <br>
-<p>        async def check(self, user_id: str, estimated_tokens: int):</p>
 <br>
-<p>            cost = estimated_tokens * self.cost_per_token</p>
 <br>
-<p>            if self.user_usage[user_id] + cost > self.daily_budget:</p>
+<p>from fastapi import HTTPException</p>
 <br>
-<p>                raise HTTPException(status_code=429, detail="Daily budget exceeded")</p>
 <br>
-<p>            self.user_usage[user_id] += cost</p>
 <br>
-<p>        def get_usage(self, user_id: str) -> dict:</p>
 <br>
-<p>            return {"cost": self.user_usage[user_id], "budget": self.daily_budget}</p>
 <br>
-<p>    rate_limiter = RateLimiter()</p>
 <br>
-<p>    @app.post("/chat")</p>
 <br>
-<p>    async def chat(request: Request):</p>
 <br>
-<p>        user_id = request.headers.get("X-User-Id")</p>
 <br>
-<p>        body = await request.json()</p>
 <br>
-<p>        estimated = len(body["prompt"].split()) * 2 + int(body.get("max_tokens", 1024))</p>
 <br>
-<p>        await rate_limiter.check(user_id, estimated)</p>
 <br>
-<p>        return await generate_response(body["prompt"])</p>
+<br>
+<p>import time</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from collections import defaultdict</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class RateLimiter:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def __init__(self):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.tokens_per_second = 10</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.burst_limit = 20</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.cost_per_token = 0.000003</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.daily_budget = 10.0</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.user_usage = defaultdict(float)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def check(self, user_id: str, estimated_tokens: int):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cost = estimated_tokens * self.cost_per_token</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if self.user_usage[user_id] + cost > self.daily_budget:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise HTTPException(status_code=429, detail="Daily budget exceeded")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.user_usage[user_id] += cost</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def get_usage(self, user_id: str) -> dict:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return {"cost": self.user_usage[user_id], "budget": self.daily_budget}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>rate_limiter = RateLimiter()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@app.post("/chat")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def chat(request: Request):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>user_id = request.headers.get("X-User-Id")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>body = await request.json()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>estimated = len(body["prompt"].split()) * 2 + int(body.get("max_tokens", 1024))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await rate_limiter.check(user_id, estimated)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return await generate_response(body["prompt"])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Conclusion</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Designing LLM APIs requires balancing responsiveness with cost control. Stream responses for user experience, enforce structured output for programmatic reliability, implement retry logic calibrated to each error type, and gate access with rate and budget limits. These four patterns form the foundation of any production LLM service.</p></div>
     </article>
@@ -338,9 +1864,15 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
-      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
+    </section>
+    
+    <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
+      <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
+      <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
+      <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
   </div>
 </main>

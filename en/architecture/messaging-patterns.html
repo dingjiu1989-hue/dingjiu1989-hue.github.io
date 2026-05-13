@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/messaging-patterns.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1473",
+      "wordCount": "2103",
       "keywords": "Architecture, System Design",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/messaging-patterns.html"},
-      "articleBody": "Messaging Patterns: Pub/Sub and Request/Reply Messaging is the backbone of distributed systems. It enables services to communicate asynchronously, decouple dependencies, and build resilient architectures. This article covers the two most fundamental messaging patterns: publish-subscribe and request-reply. The Case for Messaging Direct HTTP calls between services create tight coupling. When Service A calls Service B directly: * Service A must know Service B's location and API contract. * Service A is blocked while Service B processes the request. * If Service B is down, Service A fails. * Scaling Service B does not help Service A's performance. Messaging intermediaries (message brokers like Kafka, RabbitMQ, SQS, or Pub/Sub) solve these problems by decoupling senders from receivers. Publish-Subscribe (Pub/Sub) In the pub/sub pattern, publishers send messages to a topic without knowing who the subscribers are. Subscribers receive messages from topics they have subscribed to. [Publisher] -> [Topic] -> [Subscriber A] -> [Subscriber B] -> [Subscriber C] How Pub/Sub Works * **Topics** are named channels that hold messages. 2\\. **Publishers** send messages to a topic. 3\\. **Subscribers** register interest in a topic and receive all messages published to it. 4\\. Each subscriber receives a copy of every message (fan-out delivery). Use Cases **Event notification.** When a user signs up, publish a `UserRegistered` event. Multiple subscribers react: the email service sends a welcome email, the analytics service records the event, the CRM service creates a contact. **Broadcasting.** A live sports app publishes score updates. Thousands of clients receive updates in real-time. **Log aggregation.** Multiple services publish log entries to a central topic. A log processing service stores and indexes them. Example with Kafka # Publisher producer.send('order-events', { 'type': 'OrderPlaced', 'order_id': '123', 'customer_id': '456', 'total': 99.99 }) # Subscriber @kafka_listener('order-events') def handle_order_placed(event): if event['type'] == 'OrderPlaced': inventory_service.reserve_inventory(event['order_id']) notification_service.send_confirmation(event['customer_id']) Pub/Sub is ideal for one-to-many communication where the publisher does not need a response. Request-Reply The request-reply pattern is fundamentally different from pub/sub. A sender sends a request and expects a response. The two are correlated so the sender knows which response goes with which request. In messaging systems, request-reply requires correlation: [Requestor] -> [Request Queue] -> [Replier] [Requestor] Correlation ID The key mechanism is the correlation ID. The requestor includes a unique ID in the request message. The replier includes the same ID in the reply message. The requestor uses this ID to match replies to pending requests. # Requestor correlation_id = str(uuid.uuid4()) reply_queue = f\"reply-{correlation_id}\" message = { 'correlation_id': correlation_id, 'payload': {'user_id': '123', 'amount': 100} } request_queue.send(message) # Wait for reply on the reply queue reply = reply_queue.receive(timeout=30) # Replier def handle_request(message): result = process(message['payload']) reply = { 'correlation_id': message['correlation_id'], 'payload': result } reply_queue.send(reply) Use Cases **Remote procedure calls.** Service A asks Service B to compute something and return the result. Unlike HTTP RPC, the messaging-based approach allows the requestor to be decoupled in time -- it can send the request and check for the reply later. **Long-running operations.** Submit a job, get back a job ID, check progress, and eventually receive the result. The reply might arrive minutes or hours later. Pub/Sub vs. Request-Reply | Aspect | Pub/Sub | Request-Reply | |--------|---------|---------------| | Communication | One-to-many | One-to-one | | Response expected? | No | Yes | | Coupling | Very loose | Moderate | | Use case | Event notification, broadcasting | Remote procedure, query | | Message ordering | Per partition/topic | Per conversation | | Error handling | Dead letter queue | Timeout + retry | Choosing a Message Broker **Apache Kafka:** Best for high-throughput event streaming, log aggregation, and event sourcing. Messages are persisted and replayable. Excellent for building event-driven architectures. **RabbitMQ:** Best for traditional messaging with complex routing (direct, topic, headers, fanout exchanges). Good for request-reply patterns. Lower throughput than Kafka but richer routing features. **Amazon SQS/SNS:** Fully managed. SQS for request-reply, SNS for pub/sub. No infrastructure to manage. Good for AWS-native applications. **Google Cloud Pub/Sub:** Fully managed, global. Good for Google Cloud-native applications. Advanced Patterns **Dead letter queues.** When a message cannot be processed (after retries), move it to a dead letter queue for manual inspection. Prevents poison messages from blocking the main queue. **Message bridging.** Forward messages between different messaging systems. For example, consume from SQS and publish to Kafka for long-term storage. **Publisher confirms.** In Pub/Sub, some brokers support acknowledgments from publishers to confirm the message was received. Use this for at-least-once delivery guarantees. Common Pitfalls **Message ordering.** Distributed messaging systems rarely guarantee total order. Kafka guarantees order within a partition, not across partitions. Design your system to handle out-of-order messages. **Idempotency.** Messages may be delivered more than once. Ensure your message handlers are idempotent. Use idempotency keys or deduplication. **Monitoring.** Monitor queue depth, consumer lag, and processing time. Set up alerts for growing backlog. Summary Pub/Sub and Request-Reply serve different purposes. Use Pub/Sub when you need to notify multiple consumers of an event. Use Request-Reply when a service needs a response. Many systems use both patterns together. Choose your message broker based on throughput requirements, routing complexity, and operational preferences. Always design for idempotency and handle duplicate messages gracefully."
+      "articleBody": "Messaging Patterns: Pub/Sub and Request/Reply Messaging Patterns: Pub/Sub and Request/Reply Messaging Patterns: Pub/Sub and Request/Reply Messaging Patterns: Pub/Sub and Request/Reply Messaging is the backbone of distributed systems. It enables services to communicate asynchronously, decouple dependencies, and build resilient architectures. This article covers the two most fundamental messaging patterns: publish-subscribe and request-reply. The Case for Messaging Direct HTTP calls between services create tight coupling. When Service A calls Service B directly: * Service A must know Service B's location and API contract. * Service A is blocked while Service B processes the request. * If Service B is down, Service A fails. * Scaling Service B does not help Service A's performance. Messaging intermediaries (message brokers like Kafka, RabbitMQ, SQS, or Pub/Sub) solve these problems by decoupling senders from receivers. Publish-Subscribe (Pub/Sub) In the pub/sub pattern, publishers send messages to a topic without knowing who the subscribers are. Subscribers receive messages from topics they have subscribed to. [Publisher] -> [Topic] -> [Subscriber A] -> [Subscriber B] -> [Subscriber C] How Pub/Sub Works * **Topics** are named channels that hold messages. 2\\\\\\\\\\\\\\\\. **Publishers** send messages to a topic. 3\\\\\\\\\\\\\\\\. **Subscribers** register interest in a topic and receive all messages published to it. 4\\\\\\\\\\\\\\\\. Each subscriber receives a copy of every message (fan-out delivery). Use Cases **Event notification.** When a user signs up, publish a `UserRegistered` event. Multiple subscribers react: the email service sends a welcome email, the analytics service records the event, the CRM service creates a contact. **Broadcasting.** A live sports app publishes score updates. Thousands of clients receive updates in real-time. **Log aggregation.** Multiple services publish log entries to a central topic. A log processing service stores and indexes them. Example with Kafka Publisher producer.send('order-events', { 'type': 'OrderPlaced', 'order_id': '123', 'customer_id': '456', 'total': 99.99 }) Subscriber @kafka_listener('order-events') def handle_order_placed(event): if event['type'] == 'OrderPlaced': inventory_service.reserve_inventory(event['order_id']) notification_service.send_confirmation(event['customer_id']) Pub/Sub is ideal for one-to-many communication where the publisher does not need a response. Request-Reply The request-reply pattern is fundamentally different from pub/sub. A sender sends a request and expects a response. The two are correlated so the sender knows which response goes with which request. In messaging systems, request-reply requires correlation: [Requestor] -> [Request Queue] -> [Replier] [Requestor] Correlation ID The key mechanism is the correlation ID. The requestor includes a unique ID in the request message. The replier includes the same ID in the reply message. The requestor uses this ID to match replies to pending requests. Requestor correlation_id = str(uuid.uuid4()) reply_queue = f\"reply-{correlation_id}\" message = { 'correlation_id': correlation_id, 'payload': {'user_id': '123', 'amount': 100} } request_queue.send(message) Wait for reply on the reply queue reply = reply_queue.receive(timeout=30) Replier def handle_request(message): result = process(message['payload']) reply = { 'correlation_id': message['correlation_id'], 'payload': result } reply_queue.send(reply) Use Cases **Remote procedure calls.** Service A asks Service B to compute something and return the result. Unlike HTTP RPC, the messaging-based approach allows the requestor to be decoupled in time -- it can send the request and check for the reply later. **Long-running operations.** Submit a job, get back a job ID, check progress, and eventually receive the result. The reply might arrive minutes or hours later. Pub/Sub vs. Request-Reply | Aspect | Pub/Sub | Request-Reply | |--------|---------|---------------| | Communication | One-to-many | One-to-one | | Response expected? | No | Yes | | Coupling | Very loose | Moderate | | Use case | Event notification, broadcasting | Remote procedure, query | | Message ordering | Per partition/topic | Per conversation | | Error handling | Dead letter queue | Timeout + retry | Choosing a Message Broker **Apache Kafka:** Best for high-throughput event streaming, log aggregation, and event sourcing. Messages are persisted and replayable. Excellent for building event-driven architectures. **RabbitMQ:** Best for traditional messaging with complex routing (direct, topic, headers, fanout exchanges). Good for request-reply patterns. Lower throughput than Kafka but richer routing features. **Amazon SQS/SNS:** Fully managed. SQS for request-reply, SNS for pub/sub. No infrastructure to manage. Good for AWS-native applications. **Google Cloud Pub/Sub:** Fully managed, global. Good for Google Cloud-native applications. Advanced Patterns **Dead letter queues.** When a message cannot be processed (after retries), move it to a dead letter queue for manual inspection. Prevents poison messages from blocking the main queue. **Message bridging.** Forward messages between different messaging systems. For example, consume from SQS and publish to Kafka for long-term storage. **Publisher confirms.** In Pub/Sub, some brokers support acknowledgments from publishers to confirm the message was received. Use this for at-least-once delivery guarantees. Common Pitfalls **Message ordering.** Distributed messaging systems rarely guarantee total order. Kafka guarantees order within a partition, not across partitions. Design your system to handle out-of-order messages. **Idempotency.** Messages may be delivered more than once. Ensure your message handlers are idempotent. Use idempotency keys or deduplication. **Monitoring.** Monitor queue depth, consumer lag, and processing time. Set up alerts for growing backlog. Summary Pub/Sub and Request-Reply serve different purposes. Use Pub/Sub when you need to notify multiple consumers of an event. Use Request-Reply when a service needs a response. Many systems use both patterns together. Choose your message broker based on throughput requirements, routing complexity, and operational preferences. Always design for idempotency and handle duplicate messages gracefully."
     }
     </script>
     <script type="application/ld+json">
@@ -77,128 +77,791 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/messaging-patterns.png" alt="Messaging Patterns: Pub/Sub and Request/Reply" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Messaging Patterns: Pub/Sub and Request/Reply</h1>
 <br>
-<p>Messaging is the backbone of distributed systems. It enables services to communicate asynchronously, decouple dependencies, and build resilient architectures. This article covers the two most fundamental messaging patterns: publish-subscribe and request-reply.   </p>
-<p>The Case for Messaging   </p>
-<p>Direct HTTP calls between services create tight coupling. When Service A calls Service B directly:   </p>
+<h1>Messaging Patterns: Pub/Sub and Request/Reply</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>Messaging Patterns: Pub/Sub and Request/Reply</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Messaging Patterns: Pub/Sub and Request/Reply</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Messaging is the backbone of distributed systems. It enables services to communicate asynchronously, decouple dependencies, and build resilient architectures. This article covers the two most fundamental messaging patterns: publish-subscribe and request-reply. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The Case for Messaging </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Direct HTTP calls between services create tight coupling. When Service A calls Service B directly: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>* Service A must know Service B's location and API contract.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Service A is blocked while Service B processes the request.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* If Service B is down, Service A fails.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Scaling Service B does not help Service A's performance.</p>
 <br>
-<p>Messaging intermediaries (message brokers like Kafka, RabbitMQ, SQS, or Pub/Sub) solve these problems by decoupling senders from receivers.   </p>
-<p>Publish-Subscribe (Pub/Sub)   </p>
-<p>In the pub/sub pattern, publishers send messages to a topic without knowing who the subscribers are. Subscribers receive messages from topics they have subscribed to.   </p>
 <br>
-<p>    [Publisher] -> [Topic] -> [Subscriber A]</p>
 <br>
-<p>                           -> [Subscriber B]</p>
 <br>
-<p>                           -> [Subscriber C]</p>
 <br>
-<p>How Pub/Sub Works   </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Messaging intermediaries (message brokers like Kafka, RabbitMQ, SQS, or Pub/Sub) solve these problems by decoupling senders from receivers. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Publish-Subscribe (Pub/Sub) </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>In the pub/sub pattern, publishers send messages to a topic without knowing who the subscribers are. Subscribers receive messages from topics they have subscribed to. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>[Publisher] -> [Topic] -> [Subscriber A]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>-> [Subscriber B]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>-> [Subscriber C]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>How Pub/Sub Works </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>* **Topics** are named channels that hold messages.</p>
-<p>2\. **Publishers** send messages to a topic. 3\. **Subscribers** register interest in a topic and receive all messages published to it. 4\. Each subscriber receives a copy of every message (fan-out delivery).   </p>
-<p>Use Cases   </p>
-<p>**Event notification.** When a user signs up, publish a `UserRegistered` event. Multiple subscribers react: the email service sends a welcome email, the analytics service records the event, the CRM service creates a contact.   </p>
-<p>**Broadcasting.** A live sports app publishes score updates. Thousands of clients receive updates in real-time.   </p>
-<p>**Log aggregation.** Multiple services publish log entries to a central topic. A log processing service stores and indexes them.   </p>
-<p>Example with Kafka   </p>
 <br>
-<p>    # Publisher</p>
 <br>
-<p>    producer.send('order-events', {</p>
 <br>
-<p>        'type': 'OrderPlaced',</p>
 <br>
-<p>        'order_id': '123',</p>
 <br>
-<p>        'customer_id': '456',</p>
 <br>
-<p>        'total': 99.99</p>
 <br>
-<p>    })</p>
+<p>2\\\\\\\\. **Publishers** send messages to a topic. 3\\\\\\\\. **Subscribers** register interest in a topic and receive all messages published to it. 4\\\\\\\\. Each subscriber receives a copy of every message (fan-out delivery). </p>
 <br>
-<p>    # Subscriber</p>
 <br>
-<p>    @kafka_listener('order-events')</p>
 <br>
-<p>    def handle_order_placed(event):</p>
 <br>
-<p>        if event['type'] == 'OrderPlaced':</p>
 <br>
-<p>            inventory_service.reserve_inventory(event['order_id'])</p>
 <br>
-<p>            notification_service.send_confirmation(event['customer_id'])</p>
 <br>
-<p>Pub/Sub is ideal for one-to-many communication where the publisher does not need a response.   </p>
-<p>Request-Reply   </p>
-<p>The request-reply pattern is fundamentally different from pub/sub. A sender sends a request and expects a response. The two are correlated so the sender knows which response goes with which request.   </p>
-<p>In messaging systems, request-reply requires correlation:   </p>
+<p>Use Cases </p>
 <br>
-<p>    [Requestor] -> [Request Queue] -> [Replier]</p>
 <br>
-<p>    [Requestor] <- [Reply Queue]   <- [Replier]</p>
 <br>
-<p>Correlation ID   </p>
-<p>The key mechanism is the correlation ID. The requestor includes a unique ID in the request message. The replier includes the same ID in the reply message. The requestor uses this ID to match replies to pending requests.   </p>
 <br>
-<p>    # Requestor</p>
 <br>
-<p>    correlation_id = str(uuid.uuid4())</p>
 <br>
-<p>    reply_queue = f"reply-{correlation_id}"</p>
 <br>
-<p>    message = {</p>
+<p>**Event notification.** When a user signs up, publish a `UserRegistered` event. Multiple subscribers react: the email service sends a welcome email, the analytics service records the event, the CRM service creates a contact. </p>
 <br>
-<p>        'correlation_id': correlation_id,</p>
 <br>
-<p>        'payload': {'user_id': '123', 'amount': 100}</p>
 <br>
-<p>    }</p>
 <br>
-<p>    request_queue.send(message)</p>
 <br>
-<p>    # Wait for reply on the reply queue</p>
 <br>
-<p>    reply = reply_queue.receive(timeout=30)</p>
 <br>
-<p>    # Replier</p>
+<p>**Broadcasting.** A live sports app publishes score updates. Thousands of clients receive updates in real-time. </p>
 <br>
-<p>    def handle_request(message):</p>
 <br>
-<p>        result = process(message['payload'])</p>
 <br>
-<p>        reply = {</p>
 <br>
-<p>            'correlation_id': message['correlation_id'],</p>
 <br>
-<p>            'payload': result</p>
 <br>
-<p>        }</p>
 <br>
-<p>        reply_queue.send(reply)</p>
+<p>**Log aggregation.** Multiple services publish log entries to a central topic. A log processing service stores and indexes them. </p>
 <br>
-<p>Use Cases   </p>
-<p>**Remote procedure calls.** Service A asks Service B to compute something and return the result. Unlike HTTP RPC, the messaging-based approach allows the requestor to be decoupled in time -- it can send the request and check for the reply later.   </p>
-<p>**Long-running operations.** Submit a job, get back a job ID, check progress, and eventually receive the result. The reply might arrive minutes or hours later.   </p>
-<p>Pub/Sub vs. Request-Reply   </p>
-<p>| Aspect | Pub/Sub | Request-Reply | |--------|---------|---------------| | Communication | One-to-many | One-to-one | | Response expected? | No | Yes | | Coupling | Very loose | Moderate | | Use case | Event notification, broadcasting | Remote procedure, query | | Message ordering | Per partition/topic | Per conversation | | Error handling | Dead letter queue | Timeout + retry |   </p>
-<p>Choosing a Message Broker   </p>
-<p>**Apache Kafka:** Best for high-throughput event streaming, log aggregation, and event sourcing. Messages are persisted and replayable. Excellent for building event-driven architectures.   </p>
-<p>**RabbitMQ:** Best for traditional messaging with complex routing (direct, topic, headers, fanout exchanges). Good for request-reply patterns. Lower throughput than Kafka but richer routing features.   </p>
-<p>**Amazon SQS/SNS:** Fully managed. SQS for request-reply, SNS for pub/sub. No infrastructure to manage. Good for AWS-native applications.   </p>
-<p>**Google Cloud Pub/Sub:** Fully managed, global. Good for Google Cloud-native applications.   </p>
-<p>Advanced Patterns   </p>
-<p>**Dead letter queues.** When a message cannot be processed (after retries), move it to a dead letter queue for manual inspection. Prevents poison messages from blocking the main queue.   </p>
-<p>**Message bridging.** Forward messages between different messaging systems. For example, consume from SQS and publish to Kafka for long-term storage.   </p>
-<p>**Publisher confirms.** In Pub/Sub, some brokers support acknowledgments from publishers to confirm the message was received. Use this for at-least-once delivery guarantees.   </p>
-<p>Common Pitfalls   </p>
-<p>**Message ordering.** Distributed messaging systems rarely guarantee total order. Kafka guarantees order within a partition, not across partitions. Design your system to handle out-of-order messages.   </p>
-<p>**Idempotency.** Messages may be delivered more than once. Ensure your message handlers are idempotent. Use idempotency keys or deduplication.   </p>
-<p>**Monitoring.** Monitor queue depth, consumer lag, and processing time. Set up alerts for growing backlog.   </p>
-<p>Summary   </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Example with Kafka </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Publisher</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>producer.send('order-events', {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>'type': 'OrderPlaced',</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>'order_id': '123',</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>'customer_id': '456',</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>'total': 99.99</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>})</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Subscriber</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@kafka_listener('order-events')</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def handle_order_placed(event):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if event['type'] == 'OrderPlaced':</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>inventory_service.reserve_inventory(event['order_id'])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>notification_service.send_confirmation(event['customer_id'])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Pub/Sub is ideal for one-to-many communication where the publisher does not need a response. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Request-Reply </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The request-reply pattern is fundamentally different from pub/sub. A sender sends a request and expects a response. The two are correlated so the sender knows which response goes with which request. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>In messaging systems, request-reply requires correlation: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>[Requestor] -> [Request Queue] -> [Replier]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>[Requestor] <\\\\- [Reply Queue] <\\\\- [Replier]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Correlation ID </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The key mechanism is the correlation ID. The requestor includes a unique ID in the request message. The replier includes the same ID in the reply message. The requestor uses this ID to match replies to pending requests. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Requestor</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>correlation_id = str(uuid.uuid4())</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>reply_queue = f"reply-{correlation_id}"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>message = {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>'correlation_id': correlation_id,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>'payload': {'user_id': '123', 'amount': 100}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>request_queue.send(message)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Wait for reply on the reply queue</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>reply = reply_queue.receive(timeout=30)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Replier</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def handle_request(message):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>result = process(message['payload'])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>reply = {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>'correlation_id': message['correlation_id'],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>'payload': result</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>reply_queue.send(reply)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Use Cases </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Remote procedure calls.** Service A asks Service B to compute something and return the result. Unlike HTTP RPC, the messaging-based approach allows the requestor to be decoupled in time -- it can send the request and check for the reply later. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Long-running operations.** Submit a job, get back a job ID, check progress, and eventually receive the result. The reply might arrive minutes or hours later. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Pub/Sub vs. Request-Reply </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>| Aspect | Pub/Sub | Request-Reply | |--------|---------|---------------| | Communication | One-to-many | One-to-one | | Response expected? | No | Yes | | Coupling | Very loose | Moderate | | Use case | Event notification, broadcasting | Remote procedure, query | | Message ordering | Per partition/topic | Per conversation | | Error handling | Dead letter queue | Timeout + retry | </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Choosing a Message Broker </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Apache Kafka:** Best for high-throughput event streaming, log aggregation, and event sourcing. Messages are persisted and replayable. Excellent for building event-driven architectures. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**RabbitMQ:** Best for traditional messaging with complex routing (direct, topic, headers, fanout exchanges). Good for request-reply patterns. Lower throughput than Kafka but richer routing features. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Amazon SQS/SNS:** Fully managed. SQS for request-reply, SNS for pub/sub. No infrastructure to manage. Good for AWS-native applications. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Google Cloud Pub/Sub:** Fully managed, global. Good for Google Cloud-native applications. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Advanced Patterns </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Dead letter queues.** When a message cannot be processed (after retries), move it to a dead letter queue for manual inspection. Prevents poison messages from blocking the main queue. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Message bridging.** Forward messages between different messaging systems. For example, consume from SQS and publish to Kafka for long-term storage. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Publisher confirms.** In Pub/Sub, some brokers support acknowledgments from publishers to confirm the message was received. Use this for at-least-once delivery guarantees. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Common Pitfalls </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Message ordering.** Distributed messaging systems rarely guarantee total order. Kafka guarantees order within a partition, not across partitions. Design your system to handle out-of-order messages. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Idempotency.** Messages may be delivered more than once. Ensure your message handlers are idempotent. Use idempotency keys or deduplication. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Monitoring.** Monitor queue depth, consumer lag, and processing time. Set up alerts for growing backlog. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Summary </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Pub/Sub and Request-Reply serve different purposes. Use Pub/Sub when you need to notify multiple consumers of an event. Use Request-Reply when a service needs a response. Many systems use both patterns together. Choose your message broker based on throughput requirements, routing complexity, and operational preferences. Always design for idempotency and handle duplicate messages gracefully.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -215,6 +878,7 @@
       <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

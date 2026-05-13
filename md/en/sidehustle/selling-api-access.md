@@ -19,7 +19,7 @@ Tiered Subscription| Free/Pro/Enterprise tiers with rate limits at each level| A
 Freemium + Rate Limits| Free tier (1K calls/mo), paid tiers unlock higher limits| Developer tools where adoption is the priority| Resend (100 emails/day free), Supabase (50K MAU free)  
 Revenue Share| Take a % of transactions processed through your API| Payment, marketplace, or commerce APIs| Stripe (2.9% + $0.30), Shopify (1.5-2.9%)  
 Enterprise / Custom Pricing| Fixed annual contracts with SLAs and support| Large enterprises with predictable high volume| AWS Enterprise, Twilio Enterprise  
-
+  
 ## Designing a Great API Product
 
 Element| Good Practice| Example  
@@ -31,7 +31,7 @@ Error Messages| Actionable: "Invalid API key. Create one at https://..."| Not "E
 Rate Limiting| Clear headers: X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset| Let consumers self-regulate before hitting limits  
 Webhooks| Push events for async operations instead of making users poll| payment.succeeded, subscription.renewed, export.completed  
 Status Page| Public uptime and incident history| status.yourapi.com — builds trust  
-
+  
 ## Pricing Your API: The Framework
 
 Step| What to Do  
@@ -42,9 +42,10 @@ Step| What to Do
 4\. Free Tier| Generous enough for real adoption (1K-10K calls/mo) but not enough for production use. Free users are your future paid customers.  
 5\. Pro Tier (3-5x free)| For indie devs and small teams. This is where 80% of your revenue should come from.  
 6\. Enterprise Tier (custom)| For companies that need SLA, dedicated support, SSO, audit logs. Minimum $500-1,000/mo.  
-
+  
 ## Technical Infrastructure for a Paid API
-
+    
+    
     # Essential infrastructure for any paid API
     # 1. Authentication: API keys (simple) or OAuth 2.0 (for user-data APIs)
     # 2. Rate Limiting: Token bucket per API key, with clear headers
@@ -52,12 +53,12 @@ Step| What to Do
     # 4. Billing: Integrate Stripe for usage-based billing
     # 5. Analytics: Dashboard showing usage, errors, latency per customer
     # 6. Webhook Delivery: Reliable webhook infrastructure for async events
-
+    
     # Architecture pattern:
     # Client → API Gateway (auth + rate limit + metering) → Your API → Database
     #                                                              ↓
     #                                         Stripe (billing) ← Metering data
-
+    
     # Minimum stack: Cloudflare Workers (edge auth + rate limiting) +
     #               Your API (Node.js/Python/Go) +
     #               Stripe (billing) +

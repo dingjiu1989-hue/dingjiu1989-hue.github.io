@@ -20,27 +20,28 @@ MT-Bench| Multi-turn conversation quality (LLM-as-judge)| GPT-4 as judge has bia
 SWE-bench| Real GitHub issue → PR (solving actual bugs)| Hard, expensive to run; narrow (Python repos on GitHub)| AI coding agents, automated PR tools  
 AlpacaEval| Win rate vs reference model (GPT-4 as judge)| Length bias (longer responses win); position bias| Instruction following, general helpfulness  
 Chatbot Arena (LMSYS)| Blind A/B testing by humans (Elo rating)| Slow, expensive, depends on user population| Real-world human preference  
-
+  
 ## Building Custom Evals: The Only Eval That Matters
-
+    
+    
     # Custom eval framework in Python
     # The gold standard: a representative dataset of YOUR real use cases
     # graded by domain experts (or LLM-as-judge with expert calibration)
-
+    
     class LLMEval:
         def __init__(self, test_cases, grader_model="gpt-4o"):
             self.test_cases = test_cases  # [(input, expected_output, rubric)]
             self.grader = grader_model
-
+    
         def evaluate(self, model_under_test, prompt_template):
             results = []
             for input_text, expected, rubric in self.test_cases:
                 # Generate response from model under test
                 output = model_under_test.generate(prompt_template.format(input=input_text))
-
+    
                 # Grade using LLM-as-judge with the rubric
                 grade = self.grade_with_llm(input_text, output, expected, rubric)
-
+    
                 results.append({
                     "input": input_text,
                     "expected": expected,
@@ -49,7 +50,7 @@ Chatbot Arena (LMSYS)| Blind A/B testing by humans (Elo rating)| Slow, expensive
                     "explanation": grade["explanation"]
                 })
             return results
-
+    
     # Key: the rubric must be specific to your use case
     # Bad rubric: "Is this response good?"
     # Good rubric: "Rate 1-5: Does the response correctly identify the SQL
@@ -65,16 +66,17 @@ LLM-as-Judge (GPT-4o)| $0.01-0.10/eval| 1-5 seconds| Good (correlates ~80% with 
 Human Evaluation| $1-5/eval| Hours-days| Gold standard| Final validation, calibration  
 Embedding Similarity| $0.0001/eval| <100ms| Moderate (misses nuance)| Quick filtering, semantic similarity  
 Auto-Eval Frameworks (Ragas, DeepEval)| $0.001-0.01/eval| 1-3 seconds| Good for RAG, moderate for general| RAG evaluation, ROUGE/BLEU metrics  
-
+  
 ## Evaluation Pipeline Architecture
-
+    
+    
     # Production eval pipeline (runs on every PR that changes prompts/models)
     # 1. Trigger: Prompt change or model upgrade PR opened
     # 2. Run test suite: 100-500 representative test cases
     # 3. Compare: Old prompt/model vs new on identical inputs
     # 4. Report: Win/Loss/Tie summary with per-category breakdown
     # 5. Gate: Block merge if overall score drops >2% or any category drops >5%
-
+    
     # Key metric: not "is this model good?" but "is this model BETTER than
     # what we have in production for OUR use case?"
 

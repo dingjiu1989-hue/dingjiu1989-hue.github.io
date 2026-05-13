@@ -21,7 +21,7 @@ Swimm| Coupled-to-code documentation with auto-sync| All (code-agnostic, syncs v
 Docusaurus + AI plugins| Static site + AI-assisted content| MDX, React| Free (OSS) + AI API costs| Full control, CI/CD integration, no vendor lock-in  
 GitBook AI| AI-assisted collaborative docs platform| All (pasted code blocks)| Free / Team $17/user/mo| AI search + AI writer + public docs hosting  
 Unblocked| Codebase context for AI answers| All (reads entire repo)| Free / Pro $20/user/mo| Answers questions with knowledge of your full codebase  
-
+  
 ## Deep Dive
 
 **Mintlify Writer — Inline docs that don't suck.** Highlight a function, press Cmd+. (or Ctrl+.), and Mintlify generates a complete docstring — description, parameters, return type, and examples. It reads the function body and surrounding context, so the docs are actually accurate (not generic templates). Supports JSDoc, Python docstrings (Google/NumPy/Sphinx styles), GoDoc, JavaDoc, and Rust doc comments. The free tier is generous for individual developers. _Best for:_ Developers who want to document as they code, teams enforcing documentation standards, reducing the "I'll document it later" backlog.
@@ -44,5 +44,5 @@ I want full control, no vendor lock-in| Docusaurus + AI plugins (OSS, CI/CD)
 I need a polished public docs site quickly| GitBook AI (hosted, AI search, collaboration)  
 I want to answer questions about my codebase| Unblocked (codebase-aware AI answers)  
 I want both inline docs + stale detection| Mintlify + Swimm (complementary)  
-
+  
 **My recommendation:** Use **Mintlify Writer** for daily inline documentation (it's free and it just works). For teams, add **Swimm** if documentation rot is a problem you've actually experienced (it's expensive otherwise). For public-facing docs, **Docusaurus** remains the best open-source option — add AI assistance via your preferred AI coding tool rather than a specialized docs AI. See also: [Best AI Tools for Developers](</en/ai/best-ai-tools-developers-2026.html>) and [AI Code Review Tools](</en/ai/ai-code-review-tools.html>).

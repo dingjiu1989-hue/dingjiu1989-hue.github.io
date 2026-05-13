@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/microservice-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2213",
+      "wordCount": "4414",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/microservice-security.html"},
-      "articleBody": "Microservice Security Introduction Microservice architectures distribute application functionality across multiple independent services, each with its own data store, API, and deployment lifecycle. This distribution increases the attack surface \u2014 intra-service communication must be secured, secrets must be distributed without exposure, and visibility must span service boundaries. Service Mesh mTLS A service mesh provides a dedicated infrastructure layer for handling service-to-service communication. It transparently encrypts traffic between services using mutual TLS (mTLS). Istio mTLS Configuration # Enable mTLS across the mesh apiVersion: security.istio.io/v1beta1 kind: PeerAuthentication metadata: name: default namespace: istio-system spec: mtls: mode: STRICT # Reject plain-text traffic # Per-namespace mTLS policy apiVersion: security.istio.io/v1beta1 kind: PeerAuthentication metadata: name: payment-service namespace: production spec: selector: matchLabels: app: payment-service mtls: mode: STRICT portLevelMtls: 8080: mode: DISABLE # Allow plaintext for health checks only # Authorization policy for service-to-service access apiVersion: security.istio.io/v1beta1 kind: AuthorizationPolicy metadata: name: payment-service-authz namespace: production spec: selector: matchLabels: app: payment-service rules: - from: - source: principals: [\"cluster.local/ns/production/sa/order-service\"] namespaces: [\"production\"] to: - operation: methods: [\"POST\", \"GET\"] paths: [\"/api/v1/charges\"] Envoy Sidecar Configuration # Envoy TLS configuration (used under the hood by Istio) static_resources: listeners: - name: service_listener address: socket_address: { address: 0.0.0.0, port_value: 8443 } filter_chains: - filters: - name: envoy.filters.network.http_connection_manager typed_config: \"@type\": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager codec_type: AUTO stat_prefix: ingress_http route_config: virtual_hosts: - name: backend domains: [\"*\"] routes: - match: { prefix: \"/\" } route: { cluster: service_cluster } http_filters: - name: envoy.filters.http.router transport_socket: name: envoy.transport_sockets.tls typed_config: \"@type\": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext common_tls_context: tls_certificates: - certificate_chain: { filename: \"/etc/certs/cert.pem\" } private_key: { filename: \"/etc/certs/key.pem\" } validation_context: trusted_ca: { filename: \"/etc/certs/ca.pem\" } API Gateway Security The API gateway is the ingress point for external traffic and performs authentication, rate limiting, and request validation. # Kong API Gateway security configuration _format_version: \"3.0\" services: - name: order-service host: order-service.production.svc.cluster.local port: 8080 protocol: http routes: - name: order-route paths: - /api/v1/orders methods: [GET, POST] plugins: - name: oauth2 config: scopes: [\"read:orders\", \"write:orders\"] mandatory_scope: true token_expiration: 3600 - name: rate-limiting config: minute: 100 hour: 1000 policy: local - name: ip-restriction config: allow: - 10.0.0.0/8 - name: cors config: origins: [\"https://app.example.com\"] methods: [\"GET\", \"POST\"] headers: [\"Authorization\", \"Content-Type\"] Secret Distribution Never store secrets in code or configuration files. Use a dedicated secret management system. # Kubernetes External Secrets Operator apiVersion: external-secrets.io/v1beta1 kind: ExternalSecret metadata: name: database-credentials namespace: production spec: secretStoreRef: name: aws-secret-store kind: ClusterSecretStore target: name: database-credentials creationPolicy: Owner data: - secretKey: username remoteRef: key: production/database/credentials property: username - secretKey: password remoteRef: key: production/database/credentials property: password # HashiCorp Vault integration import hvac class VaultSecretManager: def __init__(self): self.client = hvac.Client( url='https://vault.example.com:8200', token=self._get_vault_token() ) def get_database_credentials(self, role_name): \"\"\"Get dynamic database credentials from Vault.\"\"\" creds = self.client.secrets.database.generate_credentials( name=role_name, mount_point='database' ) return { 'username': creds['data']['username'], 'password': creds['data']['password'] } def rotate_secret(self, path): \"\"\"Force rotation of a static secret.\"\"\" self.client.secrets.kv.v2.delete_metadata_and_all_versions( path=path, mount_point='secret' ) Observability Distributed tracing correlates requests across service boundaries, enabling security incident reconstruction. from opentelemetry import trace from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter from opentelemetry.sdk.trace import TracerProvider from opentelemetry.sdk.trace.export import BatchSpanProcessor # Initialize distributed tracing provider = TracerProvider() processor = BatchSpanProcessor(OTLPSpanExporter()) provider.add_span_processor(processor) trace.set_tracer_provider(provider) tracer = trace.get_tracer(__name__) def process_order(request): with tracer.start_as_current_span(\"process_order\") as span: span.set_attribute(\"order_id\", request.order_id) span.set_attribute(\"user_id\", request.user_id) # Add security-relevant attributes span.set_attribute(\"auth.method\", \"oauth2\") span.set_attribute(\"ip_address\", request.client_ip) # Call downstream service with tracer.start_as_current_span(\"validate_payment\") as child_span: child_span.set_attribute(\"payment_provider\", \"stripe\") result = payment_service.validate(request) Defense in Depth for Microservices microservice_security_layers: network: - service_mesh_mtls: strict - network_policies: default_deny - api_gateway_authentication identity: - service_accounts_per_pod - jwt_token_validation - oauth2_for_external_apis data: - encryption_at_rest - encrypted_service_communication - dynamic_secret_rotation runtime: - pod_security_policies - container_immutable_filesystem - resource_limits observability: - distributed_tracing - centralized_logging - anomaly_detection Conclusion Microservice security requires shifting from perimeter-based defense to identity-based security. Use a service mesh for automatic mTLS between services, enforce authorization at the API gateway, distribute secrets through dedicated systems like Vault or External Secrets Operator, and implement distributed tracing for cross-service visibility. Each service should be treated as an untrusted external system \u2014 authenticate and authorize every request, regardless of source."
+      "articleBody": "Microservice Security Microservice Security Microservice Security Microservice Security Microservice Security Introduction Microservice architectures distribute application functionality across multiple independent services, each with its own data store, API, and deployment lifecycle. This distribution increases the attack surface \u2014 intra-service communication must be secured, secrets must be distributed without exposure, and visibility must span service boundaries. Service Mesh mTLS A service mesh provides a dedicated infrastructure layer for handling service-to-service communication. It transparently encrypts traffic between services using mutual TLS (mTLS). Istio mTLS Configuration Enable mTLS across the mesh apiVersion: security.istio.io/v1beta1 kind: PeerAuthentication metadata: name: default namespace: istio-system spec: mtls: mode: STRICT # Reject plain-text traffic Per-namespace mTLS policy apiVersion: security.istio.io/v1beta1 kind: PeerAuthentication metadata: name: payment-service namespace: production spec: selector: matchLabels: app: payment-service mtls: mode: STRICT portLevelMtls: 8080: mode: DISABLE # Allow plaintext for health checks only Authorization policy for service-to-service access apiVersion: security.istio.io/v1beta1 kind: AuthorizationPolicy metadata: name: payment-service-authz namespace: production spec: selector: matchLabels: app: payment-service rules: \\\\\\\\\\\\\\\\- from: \\\\\\\\\\\\\\\\- source: principals: [\"cluster.local/ns/production/sa/order-service\"] namespaces: [\"production\"] to: \\\\\\\\\\\\\\\\- operation: methods: [\"POST\", \"GET\"] paths: [\"/api/v1/charges\"] Envoy Sidecar Configuration Envoy TLS configuration (used under the hood by Istio) static_resources: listeners: \\\\\\\\\\\\\\\\- name: service_listener address: socket_address: { address: 0.0.0.0, port_value: 8443 } filter_chains: \\\\\\\\\\\\\\\\- filters: \\\\\\\\\\\\\\\\- name: envoy.filters.network.http_connection_manager typed_config: \"@type\": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager codec_type: AUTO stat_prefix: ingress_http route_config: virtual_hosts: \\\\\\\\\\\\\\\\- name: backend domains: [\"*\"] routes: \\\\\\\\\\\\\\\\- match: { prefix: \"/\" } route: { cluster: service_cluster } http_filters: \\\\\\\\\\\\\\\\- name: envoy.filters.http.router transport_socket: name: envoy.transport_sockets.tls typed_config: \"@type\": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext common_tls_context: tls_certificates: \\\\\\\\\\\\\\\\- certificate_chain: { filename: \"/etc/certs/cert.pem\" } private_key: { filename: \"/etc/certs/key.pem\" } validation_context: trusted_ca: { filename: \"/etc/certs/ca.pem\" } API Gateway Security The API gateway is the ingress point for external traffic and performs authentication, rate limiting, and request validation. Kong API Gateway security configuration _format_version: \"3.0\" services: \\\\\\\\\\\\\\\\- name: order-service host: order-service.production.svc.cluster.local port: 8080 protocol: http routes: \\\\\\\\\\\\\\\\- name: order-route paths: \\\\\\\\\\\\\\\\- /api/v1/orders methods: [GET, POST] plugins: \\\\\\\\\\\\\\\\- name: oauth2 config: scopes: [\"read:orders\", \"write:orders\"] mandatory_scope: true token_expiration: 3600 \\\\\\\\\\\\\\\\- name: rate-limiting config: minute: 100 hour: 1000 policy: local \\\\\\\\\\\\\\\\- name: ip-restriction config: allow: \\\\\\\\\\\\\\\\- 10.0.0.0/8 \\\\\\\\\\\\\\\\- name: cors config: origins: [\"https://app.example.com\"] methods: [\"GET\", \"POST\"] headers: [\"Authorization\", \"Content-Type\"] Secret Distribution Never store secrets in code or configuration files. Use a dedicated secret management system. Kubernetes External Secrets Operator apiVersion: external-secrets.io/v1beta1 kind: ExternalSecret metadata: name: database-credentials namespace: production spec: secretStoreRef: name: aws-secret-store kind: ClusterSecretStore target: name: database-credentials creationPolicy: Owner data: \\\\\\\\\\\\\\\\- secretKey: username remoteRef: key: production/database/credentials property: username \\\\\\\\\\\\\\\\- secretKey: password remoteRef: key: production/database/credentials property: password HashiCorp Vault integration import hvac class VaultSecretManager: def __init__(self): self.client = hvac.Client( url='https://vault.example.com:8200', token=self._get_vault_token() ) def get_database_credentials(self, role_name): \"\"\"Get dynamic database credentials from Vault.\"\"\" creds = self.client.secrets.database.generate_credentials( name=role_name, mount_point='database' ) return { 'username': creds['data']['username'], 'password': creds['data']['password'] } def rotate_secret(self, path): \"\"\"Force rotation of a static secret.\"\"\" self.client.secrets.kv.v2.delete_metadata_and_all_versions( path=path, mount_point='secret' ) Observability Distributed tracing correlates requests across service boundaries, enabling security incident reconstruction. from opentelemetry import trace from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter from opentelemetry.sdk.trace import TracerProvider from opentelemetry.sdk.trace.export import BatchSpanProcessor Initialize distributed tracing provider = TracerProvider() processor = BatchSpanProcessor(OTLPSpanExporter()) provider.add_span_processor(processor) trace.set_tracer_provider(provider) tracer = trace.get_tracer(__name__) def process_order(request): with tracer.start_as_current_span(\"process_order\") as span: span.set_attribute(\"order_id\", request.order_id) span.set_attribute(\"user_id\", request.user_id) Add security-relevant attributes span.set_attribute(\"auth.method\", \"oauth2\") span.set_attribute(\"ip_address\", request.client_ip) Call downstream service with tracer.start_as_current_span(\"validate_payment\") as child_span: child_span.set_attribute(\"payment_provider\", \"stripe\") result = payment_service.validate(request) Defense in Depth for Microservices microservice_security_layers: network: \\\\\\\\\\\\\\\\- service_mesh_mtls: strict \\\\\\\\\\\\\\\\- network_policies: default_deny \\\\\\\\\\\\\\\\- api_gateway_authentication identity: \\\\\\\\\\\\\\\\- service_accounts_per_pod \\\\\\\\\\\\\\\\- jwt_token_validation \\\\\\\\\\\\\\\\- oauth2_for_external_apis data: \\\\\\\\\\\\\\\\- encryption_at_rest \\\\\\\\\\\\\\\\- encrypted_service_communication \\\\\\\\\\\\\\\\- dynamic_secret_rotation runtime: \\\\\\\\\\\\\\\\- pod_security_policies \\\\\\\\\\\\\\\\- container_immutable_filesystem \\\\\\\\\\\\\\\\- resource_limits observability: \\\\\\\\\\\\\\\\- distributed_tracing \\\\\\\\\\\\\\\\- centralized_logging \\\\\\\\\\\\\\\\- anomaly_detection Conclusion Microservice security requires shifting from perimeter-based defense to identity-based security. Use a service mesh for automatic mTLS between services, enforce authorization at the API gateway, distribute secrets through dedicated systems like Vault or External Secrets Operator, and implement distributed tracing for cross-service visibility. Each service should be treated as an untrusted external system \u2014 authenticate and authorize every request, regardless of source."
     }
     </script>
     <script type="application/ld+json">
@@ -78,416 +78,2946 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/microservice-security.png" alt="Microservice Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Microservice Security</h1>
 <br>
-<p>Introduction   </p>
-<p>Microservice architectures distribute application functionality across multiple independent services, each with its own data store, API, and deployment lifecycle. This distribution increases the attack surface — intra-service communication must be secured, secrets must be distributed without exposure, and visibility must span service boundaries.   </p>
-<p>Service Mesh mTLS   </p>
-<p>A service mesh provides a dedicated infrastructure layer for handling service-to-service communication. It transparently encrypts traffic between services using mutual TLS (mTLS).   </p>
-<p>Istio mTLS Configuration   </p>
+<h1>Microservice Security</h1>
 <br>
-<p>    # Enable mTLS across the mesh</p>
 <br>
-<p>    apiVersion: security.istio.io/v1beta1</p>
 <br>
-<p>    kind: PeerAuthentication</p>
 <br>
-<p>    metadata:</p>
+<h1>Microservice Security</h1>
 <br>
-<p>      name: default</p>
 <br>
-<p>      namespace: istio-system</p>
 <br>
-<p>    spec:</p>
 <br>
-<p>      mtls:</p>
 <br>
-<p>        mode: STRICT  # Reject plain-text traffic</p>
 <br>
-<p>    # Per-namespace mTLS policy</p>
 <br>
-<p>    apiVersion: security.istio.io/v1beta1</p>
+<h1>Microservice Security</h1>
 <br>
-<p>    kind: PeerAuthentication</p>
 <br>
-<p>    metadata:</p>
 <br>
-<p>      name: payment-service</p>
 <br>
-<p>      namespace: production</p>
 <br>
-<p>    spec:</p>
 <br>
-<p>      selector:</p>
 <br>
-<p>        matchLabels:</p>
 <br>
-<p>          app: payment-service</p>
 <br>
-<p>      mtls:</p>
 <br>
-<p>        mode: STRICT</p>
+<h1>Microservice Security</h1>
 <br>
-<p>      portLevelMtls:</p>
 <br>
-<p>        8080:</p>
 <br>
-<p>          mode: DISABLE  # Allow plaintext for health checks only</p>
 <br>
-<p>    # Authorization policy for service-to-service access</p>
 <br>
-<p>    apiVersion: security.istio.io/v1beta1</p>
 <br>
-<p>    kind: AuthorizationPolicy</p>
 <br>
-<p>    metadata:</p>
 <br>
-<p>      name: payment-service-authz</p>
 <br>
-<p>      namespace: production</p>
 <br>
-<p>    spec:</p>
 <br>
-<p>      selector:</p>
 <br>
-<p>        matchLabels:</p>
 <br>
-<p>          app: payment-service</p>
+<p>Introduction </p>
 <br>
-<p>      rules:</p>
 <br>
-<p>        - from:</p>
 <br>
-<p>            - source:</p>
 <br>
-<p>                principals: ["cluster.local/ns/production/sa/order-service"]</p>
 <br>
-<p>                namespaces: ["production"]</p>
 <br>
-<p>          to:</p>
 <br>
-<p>            - operation:</p>
 <br>
-<p>                methods: ["POST", "GET"]</p>
 <br>
-<p>                paths: ["/api/v1/charges"]</p>
 <br>
-<p>Envoy Sidecar Configuration   </p>
+<p>Microservice architectures distribute application functionality across multiple independent services, each with its own data store, API, and deployment lifecycle. This distribution increases the attack surface — intra-service communication must be secured, secrets must be distributed without exposure, and visibility must span service boundaries. </p>
 <br>
-<p>    # Envoy TLS configuration (used under the hood by Istio)</p>
 <br>
-<p>    static_resources:</p>
 <br>
-<p>      listeners:</p>
 <br>
-<p>        - name: service_listener</p>
 <br>
-<p>          address:</p>
 <br>
-<p>            socket_address: { address: 0.0.0.0, port_value: 8443 }</p>
 <br>
-<p>          filter_chains:</p>
 <br>
-<p>            - filters:</p>
 <br>
-<p>                - name: envoy.filters.network.http_connection_manager</p>
 <br>
-<p>                  typed_config:</p>
+<p>Service Mesh mTLS </p>
 <br>
-<p>                    "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager</p>
 <br>
-<p>                    codec_type: AUTO</p>
 <br>
-<p>                    stat_prefix: ingress_http</p>
 <br>
-<p>                    route_config:</p>
 <br>
-<p>                      virtual_hosts:</p>
 <br>
-<p>                        - name: backend</p>
 <br>
-<p>                          domains: ["*"]</p>
 <br>
-<p>                          routes:</p>
 <br>
-<p>                            - match: { prefix: "/" }</p>
 <br>
-<p>                              route: { cluster: service_cluster }</p>
+<p>A service mesh provides a dedicated infrastructure layer for handling service-to-service communication. It transparently encrypts traffic between services using mutual TLS (mTLS). </p>
 <br>
-<p>                    http_filters:</p>
 <br>
-<p>                      - name: envoy.filters.http.router</p>
 <br>
-<p>              transport_socket:</p>
 <br>
-<p>                name: envoy.transport_sockets.tls</p>
 <br>
-<p>                typed_config:</p>
 <br>
-<p>                  "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext</p>
 <br>
-<p>                  common_tls_context:</p>
 <br>
-<p>                    tls_certificates:</p>
 <br>
-<p>                      - certificate_chain: { filename: "/etc/certs/cert.pem" }</p>
 <br>
-<p>                        private_key: { filename: "/etc/certs/key.pem" }</p>
+<p>Istio mTLS Configuration </p>
 <br>
-<p>                    validation_context:</p>
 <br>
-<p>                      trusted_ca: { filename: "/etc/certs/ca.pem" }</p>
 <br>
-<p>API Gateway Security   </p>
-<p>The API gateway is the ingress point for external traffic and performs authentication, rate limiting, and request validation.   </p>
 <br>
-<p>    # Kong API Gateway security configuration</p>
 <br>
-<p>    _format_version: "3.0"</p>
 <br>
-<p>    services:</p>
 <br>
-<p>      - name: order-service</p>
 <br>
-<p>        host: order-service.production.svc.cluster.local</p>
 <br>
-<p>        port: 8080</p>
 <br>
-<p>        protocol: http</p>
 <br>
-<p>        routes:</p>
 <br>
-<p>          - name: order-route</p>
 <br>
-<p>            paths:</p>
+<h1>Enable mTLS across the mesh</h1>
 <br>
-<p>              - /api/v1/orders</p>
 <br>
-<p>            methods: [GET, POST]</p>
 <br>
-<p>        plugins:</p>
 <br>
-<p>          - name: oauth2</p>
 <br>
-<p>            config:</p>
 <br>
-<p>              scopes: ["read:orders", "write:orders"]</p>
 <br>
-<p>              mandatory_scope: true</p>
 <br>
-<p>              token_expiration: 3600</p>
 <br>
-<p>          - name: rate-limiting</p>
 <br>
-<p>            config:</p>
 <br>
-<p>              minute: 100</p>
 <br>
-<p>              hour: 1000</p>
 <br>
-<p>              policy: local</p>
+<p>apiVersion: security.istio.io/v1beta1</p>
 <br>
-<p>          - name: ip-restriction</p>
 <br>
-<p>            config:</p>
 <br>
-<p>              allow:</p>
 <br>
-<p>                - 10.0.0.0/8</p>
 <br>
-<p>          - name: cors</p>
 <br>
-<p>            config:</p>
 <br>
-<p>              origins: ["https://app.example.com"]</p>
 <br>
-<p>              methods: ["GET", "POST"]</p>
 <br>
-<p>              headers: ["Authorization", "Content-Type"]</p>
 <br>
-<p>Secret Distribution   </p>
-<p>Never store secrets in code or configuration files. Use a dedicated secret management system.   </p>
 <br>
-<p>    # Kubernetes External Secrets Operator</p>
 <br>
-<p>    apiVersion: external-secrets.io/v1beta1</p>
 <br>
-<p>    kind: ExternalSecret</p>
+<p>kind: PeerAuthentication</p>
 <br>
-<p>    metadata:</p>
 <br>
-<p>      name: database-credentials</p>
 <br>
-<p>      namespace: production</p>
 <br>
-<p>    spec:</p>
 <br>
-<p>      secretStoreRef:</p>
 <br>
-<p>        name: aws-secret-store</p>
 <br>
-<p>        kind: ClusterSecretStore</p>
 <br>
-<p>      target:</p>
 <br>
-<p>        name: database-credentials</p>
 <br>
-<p>        creationPolicy: Owner</p>
 <br>
-<p>      data:</p>
 <br>
-<p>        - secretKey: username</p>
 <br>
-<p>          remoteRef:</p>
+<p>metadata:</p>
 <br>
-<p>            key: production/database/credentials</p>
 <br>
-<p>            property: username</p>
 <br>
-<p>        - secretKey: password</p>
 <br>
-<p>          remoteRef:</p>
 <br>
-<p>            key: production/database/credentials</p>
 <br>
-<p>            property: password</p>
 <br>
-<p>    # HashiCorp Vault integration</p>
 <br>
-<p>    import hvac</p>
 <br>
-<p>    class VaultSecretManager:</p>
 <br>
-<p>        def __init__(self):</p>
 <br>
-<p>            self.client = hvac.Client(</p>
 <br>
-<p>                url='https://vault.example.com:8200',</p>
 <br>
-<p>                token=self._get_vault_token()</p>
+<p>name: default</p>
 <br>
-<p>            )</p>
 <br>
-<p>        def get_database_credentials(self, role_name):</p>
 <br>
-<p>            """Get dynamic database credentials from Vault."""</p>
 <br>
-<p>            creds = self.client.secrets.database.generate_credentials(</p>
 <br>
-<p>                name=role_name,</p>
 <br>
-<p>                mount_point='database'</p>
 <br>
-<p>            )</p>
 <br>
-<p>            return {</p>
 <br>
-<p>                'username': creds['data']['username'],</p>
 <br>
-<p>                'password': creds['data']['password']</p>
 <br>
-<p>            }</p>
 <br>
-<p>        def rotate_secret(self, path):</p>
 <br>
-<p>            """Force rotation of a static secret."""</p>
+<p>namespace: istio-system</p>
 <br>
-<p>            self.client.secrets.kv.v2.delete_metadata_and_all_versions(</p>
 <br>
-<p>                path=path,</p>
 <br>
-<p>                mount_point='secret'</p>
 <br>
-<p>            )</p>
 <br>
-<p>Observability   </p>
-<p>Distributed tracing correlates requests across service boundaries, enabling security incident reconstruction.   </p>
 <br>
-<p>    from opentelemetry import trace</p>
 <br>
-<p>    from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter</p>
 <br>
-<p>    from opentelemetry.sdk.trace import TracerProvider</p>
 <br>
-<p>    from opentelemetry.sdk.trace.export import BatchSpanProcessor</p>
 <br>
-<p>    # Initialize distributed tracing</p>
 <br>
-<p>    provider = TracerProvider()</p>
 <br>
-<p>    processor = BatchSpanProcessor(OTLPSpanExporter())</p>
 <br>
-<p>    provider.add_span_processor(processor)</p>
+<p>spec:</p>
 <br>
-<p>    trace.set_tracer_provider(provider)</p>
 <br>
-<p>    tracer = trace.get_tracer(__name__)</p>
 <br>
-<p>    def process_order(request):</p>
 <br>
-<p>        with tracer.start_as_current_span("process_order") as span:</p>
 <br>
-<p>            span.set_attribute("order_id", request.order_id)</p>
 <br>
-<p>            span.set_attribute("user_id", request.user_id)</p>
 <br>
-<p>            # Add security-relevant attributes</p>
 <br>
-<p>            span.set_attribute("auth.method", "oauth2")</p>
 <br>
-<p>            span.set_attribute("ip_address", request.client_ip)</p>
 <br>
-<p>            # Call downstream service</p>
 <br>
-<p>            with tracer.start_as_current_span("validate_payment") as child_span:</p>
 <br>
-<p>                child_span.set_attribute("payment_provider", "stripe")</p>
 <br>
-<p>                result = payment_service.validate(request)</p>
+<p>mtls:</p>
 <br>
-<p>Defense in Depth for Microservices   </p>
 <br>
-<p>    microservice_security_layers:</p>
 <br>
-<p>      network:</p>
 <br>
-<p>        - service_mesh_mtls: strict</p>
 <br>
-<p>        - network_policies: default_deny</p>
 <br>
-<p>        - api_gateway_authentication</p>
 <br>
-<p>      identity:</p>
 <br>
-<p>        - service_accounts_per_pod</p>
 <br>
-<p>        - jwt_token_validation</p>
 <br>
-<p>        - oauth2_for_external_apis</p>
 <br>
-<p>      data:</p>
 <br>
-<p>        - encryption_at_rest</p>
 <br>
-<p>        - encrypted_service_communication</p>
+<p>mode: STRICT # Reject plain-text traffic</p>
 <br>
-<p>        - dynamic_secret_rotation</p>
 <br>
-<p>      runtime:</p>
 <br>
-<p>        - pod_security_policies</p>
 <br>
-<p>        - container_immutable_filesystem</p>
 <br>
-<p>        - resource_limits</p>
 <br>
-<p>      observability:</p>
 <br>
-<p>        - distributed_tracing</p>
 <br>
-<p>        - centralized_logging</p>
 <br>
-<p>        - anomaly_detection</p>
 <br>
-<p>Conclusion   </p>
+<br>
+<br>
+<br>
+<h1>Per-namespace mTLS policy</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>apiVersion: security.istio.io/v1beta1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kind: PeerAuthentication</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>metadata:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: payment-service</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>namespace: production</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>selector:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>matchLabels:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>app: payment-service</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>mtls:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>mode: STRICT</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>portLevelMtls:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>8080:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>mode: DISABLE # Allow plaintext for health checks only</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Authorization policy for service-to-service access</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>apiVersion: security.istio.io/v1beta1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kind: AuthorizationPolicy</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>metadata:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: payment-service-authz</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>namespace: production</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>selector:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>matchLabels:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>app: payment-service</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>rules:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- from:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- source:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>principals: ["cluster.local/ns/production/sa/order-service"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>namespaces: ["production"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>to:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- operation:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>methods: ["POST", "GET"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>paths: ["/api/v1/charges"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Envoy Sidecar Configuration </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Envoy TLS configuration (used under the hood by Istio)</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>static_resources:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>listeners:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: service_listener</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>address:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>socket_address: { address: 0.0.0.0, port_value: 8443 }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>filter_chains:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- filters:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: envoy.filters.network.http_connection_manager</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>typed_config:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>codec_type: AUTO</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>stat_prefix: ingress_http</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>route_config:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>virtual_hosts:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: backend</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>domains: ["*"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>routes:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- match: { prefix: "/" }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>route: { cluster: service_cluster }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>http_filters:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: envoy.filters.http.router</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>transport_socket:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: envoy.transport_sockets.tls</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>typed_config:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>common_tls_context:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tls_certificates:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- certificate_chain: { filename: "/etc/certs/cert.pem" }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>private_key: { filename: "/etc/certs/key.pem" }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>validation_context:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>trusted_ca: { filename: "/etc/certs/ca.pem" }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>API Gateway Security </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The API gateway is the ingress point for external traffic and performs authentication, rate limiting, and request validation. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Kong API Gateway security configuration</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>_format_version: "3.0"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>services:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: order-service</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>host: order-service.production.svc.cluster.local</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>port: 8080</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>protocol: http</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>routes:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: order-route</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>paths:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- /api/v1/orders</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>methods: [GET, POST]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>plugins:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: oauth2</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>config:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>scopes: ["read:orders", "write:orders"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>mandatory_scope: true</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>token_expiration: 3600</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: rate-limiting</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>config:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>minute: 100</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>hour: 1000</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>policy: local</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: ip-restriction</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>config:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>allow:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- 10.0.0.0/8</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: cors</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>config:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>origins: ["https://app.example.com"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>methods: ["GET", "POST"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>headers: ["Authorization", "Content-Type"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Secret Distribution </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Never store secrets in code or configuration files. Use a dedicated secret management system. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Kubernetes External Secrets Operator</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>apiVersion: external-secrets.io/v1beta1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kind: ExternalSecret</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>metadata:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: database-credentials</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>namespace: production</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>secretStoreRef:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: aws-secret-store</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kind: ClusterSecretStore</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>target:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: database-credentials</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>creationPolicy: Owner</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>data:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- secretKey: username</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>remoteRef:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>key: production/database/credentials</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>property: username</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- secretKey: password</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>remoteRef:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>key: production/database/credentials</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>property: password</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>HashiCorp Vault integration</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import hvac</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class VaultSecretManager:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def __init__(self):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.client = hvac.Client(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>url='https://vault.example.com:8200',</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>token=self._get_vault_token()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def get_database_credentials(self, role_name):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"""Get dynamic database credentials from Vault."""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>creds = self.client.secrets.database.generate_credentials(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name=role_name,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>mount_point='database'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>'username': creds['data']['username'],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>'password': creds['data']['password']</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def rotate_secret(self, path):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"""Force rotation of a static secret."""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.client.secrets.kv.v2.delete_metadata_and_all_versions(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>path=path,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>mount_point='secret'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Observability </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Distributed tracing correlates requests across service boundaries, enabling security incident reconstruction. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from opentelemetry import trace</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from opentelemetry.sdk.trace import TracerProvider</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from opentelemetry.sdk.trace.export import BatchSpanProcessor</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Initialize distributed tracing</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>provider = TracerProvider()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>processor = BatchSpanProcessor(OTLPSpanExporter())</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>provider.add_span_processor(processor)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>trace.set_tracer_provider(provider)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tracer = trace.get_tracer(__name__)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def process_order(request):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>with tracer.start_as_current_span("process_order") as span:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>span.set_attribute("order_id", request.order_id)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>span.set_attribute("user_id", request.user_id)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Add security-relevant attributes</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>span.set_attribute("auth.method", "oauth2")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>span.set_attribute("ip_address", request.client_ip)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Call downstream service</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>with tracer.start_as_current_span("validate_payment") as child_span:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>child_span.set_attribute("payment_provider", "stripe")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>result = payment_service.validate(request)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Defense in Depth for Microservices </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>microservice_security_layers:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>network:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- service_mesh_mtls: strict</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- network_policies: default_deny</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- api_gateway_authentication</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>identity:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- service_accounts_per_pod</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- jwt_token_validation</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- oauth2_for_external_apis</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>data:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- encryption_at_rest</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- encrypted_service_communication</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- dynamic_secret_rotation</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>runtime:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- pod_security_policies</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- container_immutable_filesystem</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- resource_limits</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>observability:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- distributed_tracing</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- centralized_logging</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- anomaly_detection</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Microservice security requires shifting from perimeter-based defense to identity-based security. Use a service mesh for automatic mTLS between services, enforce authorization at the API gateway, distribute secrets through dedicated systems like Vault or External Secrets Operator, and implement distributed tracing for cross-service visibility. Each service should be treated as an untrusted external system — authenticate and authorize every request, regardless of source.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -504,6 +3034,7 @@
       <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

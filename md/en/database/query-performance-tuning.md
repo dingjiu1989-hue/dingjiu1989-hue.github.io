@@ -8,366 +8,2624 @@ url: https://dingjiu1989-hue.github.io/en/database/query-performance-tuning.html
 
 # Query Performance Tuning Tools
 
-The Performance Tuning Process   
-Database performance tuning is a systematic process of identifying slow queries, understanding why they are slow, and making targeted improvements. It is not about guessing — every change should be informed by data from monitoring and profiling tools.   
-Step 1: Identify Slow Queries   
-PostgreSQL Slow Query Log   
+# Query Performance Tuning Tools
 
-    # postgresql.conf
+  
 
-    log_min_duration_statement = 1000  # Log queries slower than 1 second
 
-    log_Queries = on
+# Query Performance Tuning Tools
 
-    log_line_prefix = '%t [%p]: [%l-1] user=%u,db=%d,app=%a,client=%h '
+  
+  
+  
+  
 
-    log_checkpoints = on
 
-    log_lock_waits = on
+# Query Performance Tuning Tools
 
-    -- Query log directly from the database
+  
+  
+  
+  
+  
+  
+  
 
-    SELECT
 
-        query,
+# Query Performance Tuning Tools
 
-        calls,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        total_exec_time / calls AS avg_time_ms,
 
-        rows / calls AS avg_rows,
+The Performance Tuning Process 
 
-        mean_exec_time,
+  
+  
+  
+  
+  
+  
+  
 
-        max_exec_time,
 
-        stddev_exec_time
+Database performance tuning is a systematic process of identifying slow queries, understanding why they are slow, and making targeted improvements. It is not about guessing — every change should be informed by data from monitoring and profiling tools. 
 
-    FROM pg_stat_statements
+  
+  
+  
+  
+  
+  
+  
 
-    ORDER BY total_exec_time DESC
 
-    LIMIT 20;
+Step 1: Identify Slow Queries 
 
-MySQL Slow Query Log   
+  
+  
+  
+  
+  
+  
+  
 
-    # my.cnf
 
-    slow_query_log = 1
+PostgreSQL Slow Query Log 
 
-    slow_query_log_file = /var/log/mysql/slow.log
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    long_query_time = 1
 
-    log_queries_not_using_indexes = 1
+# postgresql.conf
 
-    # Analyze slow query log
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    pt-query-digest /var/log/mysql/slow.log
 
-    # Output includes:
+log_min_duration_statement = 1000 # Log queries slower than 1 second
 
-    # - Worst queries by execution time
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    # - Worst queries by frequency
 
-    # - Query patterns and response time distribution
+log_Queries = on
 
-Step 2: Analyze Query Plans   
-EXPLAIN ANALYZE   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON)
 
-    SELECT
+log_line_prefix = '%t [%p]: [%l-1] user=%u,db=%d,app=%a,client=%h '
 
-        u.name,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        COUNT(o.id) AS order_count,
 
-        SUM(o.total) AS total_spent
+log_checkpoints = on
 
-    FROM users u
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    LEFT JOIN orders o ON u.id = o.user_id
 
-    WHERE u.created_at > '2026-01-01'
+log_lock_waits = on
 
-    GROUP BY u.id, u.name
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    HAVING COUNT(o.id) > 3
 
-    ORDER BY total_spent DESC
+\\\\\\\\-- Query log directly from the database
 
-    LIMIT 50;
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-Key Metrics to Analyze   
-| Metric | What It Tells You | |--------|-------------------| | `actual time` | Real execution time (first row, all rows) | | `rows` vs `rows est` | Accuracy of planner estimates (off by 10x+ needs ANALYZE) | | `buffers` | How much data was read (shared hit=from cache, read=from disk) | | `Seq Scan` | Full table scan (may need index) | | `Sort Method` | `quicksort` (memory) vs `external merge` (disk) | | `loops` | How many times a node executed (high loops on Nested Loop = problem) |   
-Example Analysis   
 
-    -- Problematic query
+SELECT
 
-    EXPLAIN ANALYZE
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    SELECT *
 
-    FROM orders
+query,
 
-    WHERE status = 'pending'
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    ORDER BY created_at DESC;
+
+calls,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+total_exec_time / calls AS avg_time_ms,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+rows / calls AS avg_rows,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+mean_exec_time,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+max_exec_time,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+stddev_exec_time
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+FROM pg_stat_statements
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+ORDER BY total_exec_time DESC
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+LIMIT 20;
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+MySQL Slow Query Log 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# my.cnf
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+slow_query_log = 1
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+slow_query_log_file = /var/log/mysql/slow.log
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+long_query_time = 1
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+log_queries_not_using_indexes = 1
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Analyze slow query log
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+pt-query-digest /var/log/mysql/slow.log
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Output includes:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# \\\\- Worst queries by execution time
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# \\\\- Worst queries by frequency
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# \\\\- Query patterns and response time distribution
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Step 2: Analyze Query Plans 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+EXPLAIN ANALYZE 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+SELECT
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+u.name,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+COUNT(o.id) AS order_count,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+SUM(o.total) AS total_spent
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+FROM users u
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+LEFT JOIN orders o ON u.id = o.user_id
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+WHERE u.created_at > '2026-01-01'
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+GROUP BY u.id, u.name
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+HAVING COUNT(o.id) > 3
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+ORDER BY total_spent DESC
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+LIMIT 50;
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Key Metrics to Analyze 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+| Metric | What It Tells You | |--------|-------------------| | `actual time` | Real execution time (first row, all rows) | | `rows` vs `rows est` | Accuracy of planner estimates (off by 10x+ needs ANALYZE) | | `buffers` | How much data was read (shared hit=from cache, read=from disk) | | `Seq Scan` | Full table scan (may need index) | | `Sort Method` | `quicksort` (memory) vs `external merge` (disk) | | `loops` | How many times a node executed (high loops on Nested Loop = problem) | 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+Example Analysis 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\-- Problematic query
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+EXPLAIN ANALYZE
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+SELECT *
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+FROM orders
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+WHERE status = 'pending'
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+ORDER BY created_at DESC;
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Output:
 
-    Sort  (cost=8921.4..9123.5 rows=80842 width=72)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      Sort Key: created_at DESC
 
-      Sort Method: external merge  Disk: 6128kB
+Sort (cost=8921.4..9123.5 rows=80842 width=72)
 
-      ->  Seq Scan on orders  (cost=0.0..1234.5 rows=80842 width=72)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            Filter: (status = 'pending')
 
-**Diagnosis**: Sequential scan on 80K rows, sort spilling to disk.   
+Sort Key: created_at DESC
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Sort Method: external merge Disk: 6128kB
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+-> Seq Scan on orders (cost=0.0..1234.5 rows=80842 width=72)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Filter: (status = 'pending')
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+**Diagnosis**: Sequential scan on 80K rows, sort spilling to disk. 
+
+  
+  
+  
+  
+  
+  
+  
+
+
 **Fix**: Add a composite index:
 
-    CREATE INDEX idx_orders_status_created
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    ON orders(status, created_at DESC);
+
+CREATE INDEX idx_orders_status_created
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+ON orders(status, created_at DESC);
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 After fix:
 
-    Index Only Scan using idx_orders_status_created  (cost=0.29..341.2 rows=80842 width=72)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Index Only Scan using idx_orders_status_created (cost=0.29..341.2 rows=80842 width=72)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Index Cond: (status = 'pending')
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Step 3: Database Profiling Tools 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+pg_stat_statements (PostgreSQL) 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\-- Install extension
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+CREATE EXTENSION pg_stat_statements;
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\-- Reset statistics
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+SELECT pg_stat_statements_reset();
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\-- Find queries with highest total time
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+SELECT
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+queryid,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+left(query, 80) AS query_preview,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+calls,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+round(total_exec_time::numeric, 1) AS total_ms,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+round(mean_exec_time::numeric, 1) AS avg_ms,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+round(shared_blks_hit::numeric / (shared_blks_hit + shared_blks_read + 1) * 100, 1) AS cache_hit_pct
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+FROM pg_stat_statements
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+WHERE query NOT LIKE '%pg_%'
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+ORDER BY total_exec_time DESC
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+LIMIT 10;
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\-- Find queries reading the most data
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+SELECT
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+queryid,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+left(query, 80) AS query_preview,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+calls,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+shared_blks_read + local_blks_read AS blocks_read,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+temp_blks_written AS temp_blocks -- spilled to disk
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+FROM pg_stat_statements
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+ORDER BY blocks_read DESC
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+LIMIT 10;
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Performance Schema (MySQL) 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\-- Enable performance schema
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\-- my.cnf: performance_schema=ON
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\-- Find queries with full table scans
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+SELECT
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+digest_text,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+count_star,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+sum_rows_examined,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+sum_rows_sent,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+(sum_rows_examined / NULLIF(sum_rows_sent, 0)) AS exam_sent_ratio
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+FROM performance_schema.events_statements_summary_by_digest
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+ORDER BY exam_sent_ratio DESC
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+LIMIT 20;
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\-- Find queries with temporary tables
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+SELECT
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+digest_text,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+sum_created_tmp_tables,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+sum_created_tmp_disk_tables
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+FROM performance_schema.events_statements_summary_by_digest
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+WHERE sum_created_tmp_disk_tables > 0
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+ORDER BY sum_created_tmp_disk_tables DESC
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+LIMIT 10;
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Step 4: Lock Monitoring 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\-- PostgreSQL: Blocked queries
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+SELECT
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+blocked_locks.pid AS blocked_pid,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+blocked_activity.query AS blocked_query,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+blocking_locks.pid AS blocking_pid,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+blocking_activity.query AS blocking_query,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+blocked_activity.wait_event_type,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+blocked_activity.state,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+now() - blocked_activity.query_start AS blocked_duration
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+FROM pg_catalog.pg_locks blocked_locks
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+JOIN pg_catalog.pg_stat_activity blocked_activity ON blocked_locks.pid = blocked_activity.pid
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+JOIN pg_catalog.pg_locks blocking_locks
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+ON blocking_locks.locktype = blocked_locks.locktype
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+AND blocking_locks.database = blocked_locks.database
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+AND blocking_locks.relation = blocked_locks.relation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+AND blocking_locks.pid != blocked_locks.pid
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+JOIN pg_catalog.pg_stat_activity blocking_activity ON blocking_locks.pid = blocking_activity.pid
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+WHERE NOT blocked_locks.granted;
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\-- Check for long-running transactions
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+SELECT
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+pid,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+state,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+query,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+now() - query_start AS query_duration,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+now() - xact_start AS transaction_duration
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+FROM pg_stat_activity
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+WHERE state IN ('active', 'idle in transaction')
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+AND now() - query_start > interval '5 minutes'
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+AND query NOT LIKE '%pg_stat%'
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+ORDER BY query_duration DESC;
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Step 5: Index Usage Analysis 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\-- PostgreSQL: Index usage statistics
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+SELECT
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+schemaname || '.' || relname AS table_name,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+seq_scan,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+seq_tup_read,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+idx_scan,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+idx_tup_fetch,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+seq_tup_read / NULLIF(seq_scan, 0) AS avg_rows_per_seq_scan
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+FROM pg_stat_user_tables
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+WHERE seq_scan > 0
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+ORDER BY seq_scan DESC
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+LIMIT 20;
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\-- Find unused indexes
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+SELECT
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+schemaname || '.' || relname AS table,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+indexrelname AS index_name,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+idx_scan,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+pg_size_pretty(pg_relation_size(indexrelid)) AS index_size
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+FROM pg_stat_user_indexes
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+WHERE idx_scan = 0
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+AND indexrelname NOT LIKE '%_pkey%'
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+ORDER BY pg_relation_size(indexrelid) DESC;
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Automated Tuning Tools 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+| Tool | Database | Features | |------|----------|----------| | pgBadger | PostgreSQL | Log analysis with visual reports | | pgbadger | PostgreSQL | Query distribution, temp files, locks | | pg_stat_monitor | PostgreSQL | Enhanced pg_stat_statements with query groups | | MySQLTuner | MySQL | Configuration recommendations | | pt-query-digest | MySQL | Query analysis and pattern matching | | mongostat | MongoDB | Real-time MongoDB metrics | 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Generate a visual report with pgBadger
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+pgbadger /var/log/postgresql/postgresql.log -o report.html
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Analyze the report for:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# \\\\- Most time-consuming queries
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# \\\\- Temporary file usage
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# \\\\- Lock wait events
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# \\\\- Checkpoint frequency
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Performance Tuning Workflow 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      Index Cond: (status = 'pending')
-
-Step 3: Database Profiling Tools   
-pg_stat_statements (PostgreSQL)   
-
-    -- Install extension
-
-    CREATE EXTENSION pg_stat_statements;
-
-    -- Reset statistics
-
-    SELECT pg_stat_statements_reset();
-
-    -- Find queries with highest total time
-
-    SELECT
-
-        queryid,
-
-        left(query, 80) AS query_preview,
-
-        calls,
-
-        round(total_exec_time::numeric, 1) AS total_ms,
-
-        round(mean_exec_time::numeric, 1) AS avg_ms,
-
-        round(shared_blks_hit::numeric / (shared_blks_hit + shared_blks_read + 1) * 100, 1) AS cache_hit_pct
-
-    FROM pg_stat_statements
-
-    WHERE query NOT LIKE '%pg_%'
-
-    ORDER BY total_exec_time DESC
-
-    LIMIT 10;
-
-    -- Find queries reading the most data
-
-    SELECT
-
-        queryid,
-
-        left(query, 80) AS query_preview,
-
-        calls,
-
-        shared_blks_read + local_blks_read AS blocks_read,
-
-        temp_blks_written AS temp_blocks  -- spilled to disk
-
-    FROM pg_stat_statements
-
-    ORDER BY blocks_read DESC
-
-    LIMIT 10;
-
-Performance Schema (MySQL)   
-
-    -- Enable performance schema
-
-    -- my.cnf: performance_schema=ON
-
-    -- Find queries with full table scans
-
-    SELECT
-
-        digest_text,
-
-        count_star,
-
-        sum_rows_examined,
-
-        sum_rows_sent,
-
-        (sum_rows_examined / NULLIF(sum_rows_sent, 0)) AS exam_sent_ratio
-
-    FROM performance_schema.events_statements_summary_by_digest
-
-    ORDER BY exam_sent_ratio DESC
-
-    LIMIT 20;
-
-    -- Find queries with temporary tables
-
-    SELECT
-
-        digest_text,
-
-        sum_created_tmp_tables,
-
-        sum_created_tmp_disk_tables
-
-    FROM performance_schema.events_statements_summary_by_digest
-
-    WHERE sum_created_tmp_disk_tables > 0
-
-    ORDER BY sum_created_tmp_disk_tables DESC
-
-    LIMIT 10;
-
-Step 4: Lock Monitoring   
-
-    -- PostgreSQL: Blocked queries
-
-    SELECT
-
-        blocked_locks.pid AS blocked_pid,
-
-        blocked_activity.query AS blocked_query,
-
-        blocking_locks.pid AS blocking_pid,
-
-        blocking_activity.query AS blocking_query,
-
-        blocked_activity.wait_event_type,
-
-        blocked_activity.state,
-
-        now() - blocked_activity.query_start AS blocked_duration
-
-    FROM pg_catalog.pg_locks blocked_locks
-
-    JOIN pg_catalog.pg_stat_activity blocked_activity ON blocked_locks.pid = blocked_activity.pid
-
-    JOIN pg_catalog.pg_locks blocking_locks
-
-        ON blocking_locks.locktype = blocked_locks.locktype
-
-        AND blocking_locks.database = blocked_locks.database
-
-        AND blocking_locks.relation = blocked_locks.relation
-
-        AND blocking_locks.pid != blocked_locks.pid
-
-    JOIN pg_catalog.pg_stat_activity blocking_activity ON blocking_locks.pid = blocking_activity.pid
-
-    WHERE NOT blocked_locks.granted;
-
-    -- Check for long-running transactions
-
-    SELECT
-
-        pid,
-
-        state,
-
-        query,
-
-        now() - query_start AS query_duration,
-
-        now() - xact_start AS transaction_duration
-
-    FROM pg_stat_activity
-
-    WHERE state IN ('active', 'idle in transaction')
-
-      AND now() - query_start > interval '5 minutes'
-
-      AND query NOT LIKE '%pg_stat%'
-
-    ORDER BY query_duration DESC;
-
-Step 5: Index Usage Analysis   
-
-    -- PostgreSQL: Index usage statistics
-
-    SELECT
-
-        schemaname || '.' || relname AS table_name,
-
-        seq_scan,
-
-        seq_tup_read,
-
-        idx_scan,
-
-        idx_tup_fetch,
-
-        seq_tup_read / NULLIF(seq_scan, 0) AS avg_rows_per_seq_scan
-
-    FROM pg_stat_user_tables
-
-    WHERE seq_scan > 0
-
-    ORDER BY seq_scan DESC
-
-    LIMIT 20;
-
-    -- Find unused indexes
-
-    SELECT
-
-        schemaname || '.' || relname AS table,
-
-        indexrelname AS index_name,
-
-        idx_scan,
-
-        pg_size_pretty(pg_relation_size(indexrelid)) AS index_size
-
-    FROM pg_stat_user_indexes
-
-    WHERE idx_scan = 0
-
-      AND indexrelname NOT LIKE '%_pkey%'
-
-    ORDER BY pg_relation_size(indexrelid) DESC;
-
-Automated Tuning Tools   
-| Tool | Database | Features | |------|----------|----------| | pgBadger | PostgreSQL | Log analysis with visual reports | | pgbadger | PostgreSQL | Query distribution, temp files, locks | | pg_stat_monitor | PostgreSQL | Enhanced pg_stat_statements with query groups | | MySQLTuner | MySQL | Configuration recommendations | | pt-query-digest | MySQL | Query analysis and pattern matching | | mongostat | MongoDB | Real-time MongoDB metrics |   
-
-    # Generate a visual report with pgBadger
-
-    pgbadger /var/log/postgresql/postgresql.log -o report.html
-
-    # Analyze the report for:
-
-    # - Most time-consuming queries
-
-    # - Temporary file usage
-
-    # - Lock wait events
-
-    # - Checkpoint frequency
-
-Performance Tuning Workflow   
 
 * **Establish baseline**: Measure current performance with representative queries.
-2\. **Identify bottlenecks**: Use pg_stat_statements, slow query log, or APM tools. 3\. **Analyze specific queries**: Run EXPLAIN ANALYZE with buffers enabled. 4\. **Create targeted index**: Add or modify indexes based on the plan. 5\. **Test the fix**: Re-run the query and compare execution time. 6\. **Verify no regressions**: Check that other queries did not get slower. 7\. **Repeat**: Continue with the next slowest query.   
-Summary   
+
+  
+  
+  
+  
+  
+  
+  
+
+
+2\\\\\\\\\\\\\\\\. **Identify bottlenecks**: Use pg_stat_statements, slow query log, or APM tools. 3\\\\\\\\\\\\\\\\. **Analyze specific queries**: Run EXPLAIN ANALYZE with buffers enabled. 4\\\\\\\\\\\\\\\\. **Create targeted index**: Add or modify indexes based on the plan. 5\\\\\\\\\\\\\\\\. **Test the fix**: Re-run the query and compare execution time. 6\\\\\\\\\\\\\\\\. **Verify no regressions**: Check that other queries did not get slower. 7\\\\\\\\\\\\\\\\. **Repeat**: Continue with the next slowest query. 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+Summary 
+
+  
+  
+  
+  
+  
+  
+  
+
+
 Performance tuning is a data-driven process. Start with the slow query log or pg_stat_statements to identify problematic queries, use EXPLAIN ANALYZE to understand execution plans, monitor locks and contention, and track index usage. Focus on queries with the highest total execution time, not just the slowest individual queries. Always measure before and after making changes, and automate monitoring with tools like pgBadger for continuous visibility into query performance.

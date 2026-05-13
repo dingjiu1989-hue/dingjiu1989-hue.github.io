@@ -8,138 +8,1020 @@ url: https://dingjiu1989-hue.github.io/en/security/data-classification.html
 
 # Data Classification
 
-Why Classify Data?   
-Data classification ensures sensitive information receives appropriate protection. Without classification, you either over-protect everything (wasting resources) or under-protect critical data (inviting breaches).   
-Classification Levels   
-Define clear tiers:   
-| Level | Label | Examples | Controls | |-------|-------|----------|----------| | 4 | Restricted | PII, trade secrets | Encryption, MFA, DLP | | 3 | Confidential | Financial reports | Encryption at rest | | 2 | Internal | HR policies | Access control | | 1 | Public | Marketing materials | No restrictions |   
-Automated Classification   
-Use content inspection to classify data automatically:   
+# Data Classification
 
-    import re
+  
 
-    import hashlib
 
-    class DataClassifier:
+# Data Classification
 
-        def __init__(self):
+  
+  
+  
+  
 
-            self.patterns = {
 
-                "ssn": r"\d{3}-\d{2}-\d{4}",
+# Data Classification
 
-                "email": r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}",
+  
+  
+  
+  
+  
+  
+  
 
-                "credit_card": r"\b(?:\d[ -]*?){13,16}\b"
 
-            }
+# Data Classification
 
-        def classify_document(self, content, metadata):
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            score = 0
 
-            findings = []
+Why Classify Data? 
 
-            for label, pattern in self.patterns.items():
+  
+  
+  
+  
+  
+  
+  
 
-                matches = re.findall(pattern, content)
 
-                if matches:
+Data classification ensures sensitive information receives appropriate protection. Without classification, you either over-protect everything (wasting resources) or under-protect critical data (inviting breaches). 
 
-                    score += len(matches) * 10
+  
+  
+  
+  
+  
+  
+  
 
-                    findings.append({"type": label, "count": len(matches)})
 
-            if score > 50:
+Classification Levels 
 
-                return "restricted", findings
+  
+  
+  
+  
+  
+  
+  
 
-            elif score > 10:
 
-                return "confidential", findings
+Define clear tiers: 
 
-            elif metadata.get("internal"):
+  
+  
+  
+  
+  
+  
+  
 
-                return "internal", findings
 
-            return "public", findings
+| Level | Label | Examples | Controls | |-------|-------|----------|----------| | 4 | Restricted | PII, trade secrets | Encryption, MFA, DLP | | 3 | Confidential | Financial reports | Encryption at rest | | 2 | Internal | HR policies | Access control | | 1 | Public | Marketing materials | No restrictions | 
 
-Handling Procedures   
-Define procedures for each classification level:   
+  
+  
+  
+  
+  
+  
+  
 
-    # handling-policies.yaml
 
-    restricted:
+Automated Classification 
 
-      storage: encrypted_bucket_kms
+  
+  
+  
+  
+  
+  
+  
 
-      transmission: require_tls_1.3
 
-      retention: 7_years
+Use content inspection to classify data automatically: 
 
-      destruction: shred_and_degauss
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      sharing: require_nda_and_approval
 
-    confidential:
+import re
 
-      storage: encrypted_bucket
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      transmission: require_tls_1.2
 
-      retention: 3_years
+import hashlib
 
-      destruction: shred
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      sharing: require_approval
 
-Labeling Implementation   
-Apply labels at multiple layers:   
+class DataClassifier:
 
-    // S3 object tagging for classification
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    const AWS = require("aws-sdk");
 
-    const s3 = new AWS.S3();
+def __init__(self):
 
-    async function tagObject(bucket, key, classification) {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      await s3.putObjectTagging({
 
-        Bucket: bucket,
+self.patterns = {
 
-        Key: key,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        Tagging: {
 
-          TagSet: [
+"ssn": r"\d{3}-\d{2}-\d{4}",
 
-            { Key: "classification", Value: classification },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            { Key: "classified-by", Value: "auto-classifier-v2" },
 
-            { Key: "classified-at", Value: new Date().toISOString() }
+"email": r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\\\\\\\\\\\\\.[a-zA-Z]{2,}",
 
-          ]
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        }
 
-      }).promise();
+"credit_card": r"\b(?:\d[ -]*?){13,16}\b"
 
-    }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-Integration with DLP   
-Classification feeds directly into DLP policies:   
 
-    -- Block restricted data leaving the network
+}
 
-    CREATE DLP POLICY block_restricted_exfiltration
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    MATCHES classification = 'restricted'
 
-      AND operation IN ('email.send', 'usb.copy', 'cloud.upload')
+def classify_document(self, content, metadata):
 
-    ACTION block;
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-Conclusion   
+
+score = 0
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+findings = []
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+for label, pattern in self.patterns.items():
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+matches = re.findall(pattern, content)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if matches:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+score += len(matches) * 10
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+findings.append({"type": label, "count": len(matches)})
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if score > 50:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return "restricted", findings
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+elif score > 10:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return "confidential", findings
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+elif metadata.get("internal"):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return "internal", findings
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return "public", findings
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Handling Procedures 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+Define procedures for each classification level: 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# handling-policies.yaml
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+restricted:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+storage: encrypted_bucket_kms
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+transmission: require_tls_1.3
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+retention: 7_years
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+destruction: shred_and_degauss
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+sharing: require_nda_and_approval
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+confidential:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+storage: encrypted_bucket
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+transmission: require_tls_1.2
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+retention: 3_years
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+destruction: shred
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+sharing: require_approval
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Labeling Implementation 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+Apply labels at multiple layers: 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+// S3 object tagging for classification
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+const AWS = require("aws-sdk");
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+const s3 = new AWS.S3();
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+async function tagObject(bucket, key, classification) {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+await s3.putObjectTagging({
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Bucket: bucket,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Key: key,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Tagging: {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+TagSet: [
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+{ Key: "classification", Value: classification },
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+{ Key: "classified-by", Value: "auto-classifier-v2" },
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+{ Key: "classified-at", Value: new Date().toISOString() }
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+]
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}).promise();
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Integration with DLP 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+Classification feeds directly into DLP policies: 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\-- Block restricted data leaving the network
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+CREATE DLP POLICY block_restricted_exfiltration
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+MATCHES classification = 'restricted'
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+AND operation IN ('email.send', 'usb.copy', 'cloud.upload')
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+ACTION block;
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Conclusion 
+
+  
+  
+  
+  
+  
+  
+  
+
+
 Data classification is foundational to information security. Automate where possible, define clear handling procedures, and integrate classification labels across your data protection stack. Start with the most sensitive data and expand coverage iteratively.

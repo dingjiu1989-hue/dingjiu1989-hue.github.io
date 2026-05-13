@@ -21,7 +21,7 @@ Section| Purpose| Developer-Specific Advice
 5\. Social Proof| "People like me use this"| GitHub stars, used-by logos, testimonials from developers (with photo + title), "Works with" logos  
 6\. Pricing| Make the decision easy| Clear Free tier (generous), transparent pricing, no "Contact Sales" for solo devs  
 7\. CTA| One clear action| "npm install x" or "Get started — free" — not "Request a demo"  
-
+  
 ## Developer-Specific Conversion Killers
 
 Anti-Pattern| Why Developers Hate It| Fix  
@@ -32,7 +32,7 @@ Marketing-speak ("synergistic," "best-in-class")| Triggers bullshit detector; er
 Requiring sign-up before trying| Zero trust that the product is worth the email address| Interactive demo, playground, or open source repo first  
 Stock photos of smiling people with laptops| Generic, untrustworthy for technical audiences| Actual product screenshots, code snippets, terminal recordings  
 Hiding open source status| Suggests you are not really open source| GitHub link in nav, star count visible, license clear  
-
+  
 ## A/B Testing for Developer Products
 
 What to Test| Expected Impact| How to Measure  
@@ -42,5 +42,5 @@ Code snippet visibility (above vs below fold)| High — developers scan code fir
 Free tier limits (100 vs 1,000 vs 10,000)| Medium — too low = no adoption; too high = no conversion| Sign-up rate, conversion to paid after 30 days  
 Social proof placement (above vs below fold)| Medium — developers value peer opinions| Sign-up rate, scroll depth to pricing section  
 CTA text ("Start free" vs "View docs" vs "npm install")| Low-Medium| CTA click rate  
-
+  
 **Bottom line:** The #1 rule for developer landing pages: show the product immediately. A code snippet above the fold, an interactive demo, or a terminal recording tells developers more in 5 seconds than 500 words of copy ever will. Be specific, be honest (especially in comparisons with competitors), and make the free tier generous enough that developers can build something real before needing to pay. See also: [SaaS Bootstrapping Guide](</en/sidehustle/saas-bootstrapping-guide.html>) and [Selling Digital Products](</en/sidehustle/sell-digital-products.html>).

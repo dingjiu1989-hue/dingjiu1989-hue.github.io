@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-containerization.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1740",
+      "wordCount": "3187",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-containerization.html"},
-      "articleBody": "Databases in Containers: StatefulSets, Persistent Volumes, and Backup Databases in Containers: StatefulSets, Persistent Volumes, and Backup Running databases in containers was once considered an anti-pattern, but modern orchestration and storage primitives have made it viable for many production workloads. This article covers Kubernetes patterns for stateful databases, storage management, and operational considerations. StatefulSets vs Deployments Kubernetes Deployments are designed for stateless applications. StatefulSets are the correct primitive for databases: apiVersion: apps/v1 kind: StatefulSet metadata: name: postgres spec: serviceName: postgres replicas: 3 selector: matchLabels: app: postgres template: metadata: labels: app: postgres spec: containers: - name: postgres image: postgres:16 ports: - containerPort: 5432 env: - name: POSTGRES_PASSWORD valueFrom: secretKeyRef: name: pg-secret key: password volumeMounts: - name: data mountPath: /var/lib/postgresql/data volumeClaimTemplates: - metadata: name: data spec: accessModes: [ \"ReadWriteOnce\" ] storageClassName: \"fast-ssd\" resources: requests: storage: 100Gi StatefulSets provide: * Stable, unique network identities (`pod-name-0`, `pod-name-1`). * Ordered, graceful deployment and scaling. * Stable storage with PersistentVolumeClaim templates. PersistentVolumes and Storage Classes Database storage requires careful configuration of PersistentVolumes: apiVersion: storage.k8s.io/v1 kind: StorageClass metadata: name: fast-ssd provisioner: ebs.csi.aws.com parameters: type: gp3 iops: \"3000\" throughput: \"125\" reclaimPolicy: Retain Access Modes | Mode | Description | Database Use Case | |------|-------------|-------------------| | ReadWriteOnce | Single node read-write | Primary database | | ReadOnlyMany | Many nodes read-only | Read replicas | | ReadWriteMany | Many nodes read-write | Shared storage (avoid for PostgreSQL) | CloudNativePG Operator The CloudNativePG operator is the most mature Kubernetes operator for PostgreSQL: apiVersion: postgresql.cnpg.io/v1 kind: Cluster metadata: name: myapp-db spec: instances: 3 imageName: ghcr.io/cloudnative-pg/postgresql:16 storage: size: 100Gi storageClass: fast-ssd backup: barmanObjectStore: destinationPath: s3://myapp-backups/ s3Credentials: accessKeyId: name: aws-creds key: access-key secretAccessKey: name: aws-creds key: secret-key wal: compression: gzip retentionPolicy: \"30d\" monitoring: enablePodMonitor: true resources: requests: memory: \"4Gi\" cpu: \"2\" limits: memory: \"8Gi\" cpu: \"4\" Automated Failover # Simulate pod failure to test failover kubectl delete pod myapp-db-0 # Operator automatically: # 1. Detects primary is gone # 2. Promotes the most advanced replica # 3. Updates the service to point to new primary # Typical failover time: 15-30 seconds Backup in Containers Volume Snapshots apiVersion: snapshot.storage.k8s.io/v1 kind: VolumeSnapshot metadata: name: postgres-weekly-snapshot spec: volumeSnapshotClassName: csi-aws-vsc source: persistentVolumeClaimName: data-myapp-db-0 WAL Archiving to S3 apiVersion: postgresql.cnpg.io/v1 kind: ScheduledBackup metadata: name: myapp-db-backup spec: schedule: \"0 0 * * *\" backupOwnerReference: self cluster: name: myapp-db Performance Considerations Network Overhead Container networking adds latency vs bare metal: # Use hostNetwork for lowest latency spec: template: spec: hostNetwork: true dnsPolicy: ClusterFirstWithHostNet Resource Limits Setting proper resource limits prevents CPU throttling: resources: requests: cpu: \"4\" memory: \"16Gi\" limits: cpu: \"8\" # PostgreSQL bursts here normally memory: \"24Gi\" # Allocate extra for OS cache (effective_cache_size) Tuning for Kubernetes # postgresql.conf tuned for container environments shared_buffers = '4GB' # 25% of container memory limit effective_cache_size = '12GB' # 75% of container memory limit work_mem = '64MB' maintenance_work_mem = '1GB' wal_buffers = '64MB' random_page_cost = 1.1 # SSD in containers Anti-Patterns to Avoid EmptyDir for Data # WRONG: data lost on pod restart volumes: - name: data emptyDir: {} Always use PersistentVolumeClaims. Multiple Writable Replicas Without proper clustering (Patroni, Stolon, CNPG), multiple replicas with the same PVC cause data corruption. Using Deployments # WRONG: Deployments do not guarantee stable identity or storage apiVersion: apps/v1 kind: Deployment Always use StatefulSets for databases. Monitoring # Check pod status kubectl get pods -l app=postgres # Check PVC status kubectl get pvc -l app=postgres # Check WAL archiving status kubectl exec myapp-db-1 -- psql -c \"SELECT * FROM pg_stat_archiver;\" # View operator logs kubectl logs -n postgres-operator deployment/postgres-operator When to Containerize **Containerize your database when**: * You already run everything else in Kubernetes. * You need environment parity and GitOps workflows. * You value automated operations provided by operators. * Your team has Kubernetes expertise. **Do not containerize when**: * You lack operational Kubernetes expertise. * Your database requires specialized hardware or kernel tuning. * You need the simplicity of managed services (RDS, Cloud SQL). * Your team prefers a dedicated DBA toolset. Databases in containers are production-viable with the right operator, storage class, and backup strategy. For most teams, a managed database service is simpler and more cost-effective. Containerization makes sense when you need portability, GitOps-driven management, and full control over the database configuration."
+      "articleBody": "Databases in Containers: StatefulSets, Persistent Volumes, and Backup Databases in Containers: StatefulSets, Persistent Volumes, and Backup Databases in Containers: StatefulSets, Persistent Volumes, and Backup Databases in Containers: StatefulSets, Persistent Volumes, and Backup Databases in Containers: StatefulSets, Persistent Volumes, and Backup Running databases in containers was once considered an anti-pattern, but modern orchestration and storage primitives have made it viable for many production workloads. This article covers Kubernetes patterns for stateful databases, storage management, and operational considerations. StatefulSets vs Deployments Kubernetes Deployments are designed for stateless applications. StatefulSets are the correct primitive for databases: apiVersion: apps/v1 kind: StatefulSet metadata: name: postgres spec: serviceName: postgres replicas: 3 selector: matchLabels: app: postgres template: metadata: labels: app: postgres spec: containers: \\\\\\\\- name: postgres image: postgres:16 ports: \\\\\\\\- containerPort: 5432 env: \\\\\\\\- name: POSTGRES_PASSWORD valueFrom: secretKeyRef: name: pg-secret key: password volumeMounts: \\\\\\\\- name: data mountPath: /var/lib/postgresql/data volumeClaimTemplates: \\\\\\\\- metadata: name: data spec: accessModes: [ \"ReadWriteOnce\" ] storageClassName: \"fast-ssd\" resources: requests: storage: 100Gi StatefulSets provide: * Stable, unique network identities (`pod-name-0`, `pod-name-1`). * Ordered, graceful deployment and scaling. * Stable storage with PersistentVolumeClaim templates. PersistentVolumes and Storage Classes Database storage requires careful configuration of PersistentVolumes: apiVersion: storage.k8s.io/v1 kind: StorageClass metadata: name: fast-ssd provisioner: ebs.csi.aws.com parameters: type: gp3 iops: \"3000\" throughput: \"125\" reclaimPolicy: Retain Access Modes | Mode | Description | Database Use Case | |------|-------------|-------------------| | ReadWriteOnce | Single node read-write | Primary database | | ReadOnlyMany | Many nodes read-only | Read replicas | | ReadWriteMany | Many nodes read-write | Shared storage (avoid for PostgreSQL) | CloudNativePG Operator The CloudNativePG operator is the most mature Kubernetes operator for PostgreSQL: apiVersion: postgresql.cnpg.io/v1 kind: Cluster metadata: name: myapp-db spec: instances: 3 imageName: ghcr.io/cloudnative-pg/postgresql:16 storage: size: 100Gi storageClass: fast-ssd backup: barmanObjectStore: destinationPath: s3://myapp-backups/ s3Credentials: accessKeyId: name: aws-creds key: access-key secretAccessKey: name: aws-creds key: secret-key wal: compression: gzip retentionPolicy: \"30d\" monitoring: enablePodMonitor: true resources: requests: memory: \"4Gi\" cpu: \"2\" limits: memory: \"8Gi\" cpu: \"4\" Automated Failover Simulate pod failure to test failover kubectl delete pod myapp-db-0 Operator automatically: 1\\\\. Detects primary is gone 2\\\\. Promotes the most advanced replica 3\\\\. Updates the service to point to new primary Typical failover time: 15-30 seconds Backup in Containers Volume Snapshots apiVersion: snapshot.storage.k8s.io/v1 kind: VolumeSnapshot metadata: name: postgres-weekly-snapshot spec: volumeSnapshotClassName: csi-aws-vsc source: persistentVolumeClaimName: data-myapp-db-0 WAL Archiving to S3 apiVersion: postgresql.cnpg.io/v1 kind: ScheduledBackup metadata: name: myapp-db-backup spec: schedule: \"0 0 * * *\" backupOwnerReference: self cluster: name: myapp-db Performance Considerations Network Overhead Container networking adds latency vs bare metal: Use hostNetwork for lowest latency spec: template: spec: hostNetwork: true dnsPolicy: ClusterFirstWithHostNet Resource Limits Setting proper resource limits prevents CPU throttling: resources: requests: cpu: \"4\" memory: \"16Gi\" limits: cpu: \"8\" # PostgreSQL bursts here normally memory: \"24Gi\" # Allocate extra for OS cache (effective_cache_size) Tuning for Kubernetes postgresql.conf tuned for container environments shared_buffers = '4GB' # 25% of container memory limit effective_cache_size = '12GB' # 75% of container memory limit work_mem = '64MB' maintenance_work_mem = '1GB' wal_buffers = '64MB' random_page_cost = 1.1 # SSD in containers Anti-Patterns to Avoid EmptyDir for Data WRONG: data lost on pod restart volumes: \\\\\\\\- name: data emptyDir: {} Always use PersistentVolumeClaims. Multiple Writable Replicas Without proper clustering (Patroni, Stolon, CNPG), multiple replicas with the same PVC cause data corruption. Using Deployments WRONG: Deployments do not guarantee stable identity or storage apiVersion: apps/v1 kind: Deployment Always use StatefulSets for databases. Monitoring Check pod status kubectl get pods -l app=postgres Check PVC status kubectl get pvc -l app=postgres Check WAL archiving status kubectl exec myapp-db-1 -- psql -c \"SELECT * FROM pg_stat_archiver;\" View operator logs kubectl logs -n postgres-operator deployment/postgres-operator When to Containerize **Containerize your database when**: * You already run everything else in Kubernetes. * You need environment parity and GitOps workflows. * You value automated operations provided by operators. * Your team has Kubernetes expertise. **Do not containerize when**: * You lack operational Kubernetes expertise. * Your database requires specialized hardware or kernel tuning. * You need the simplicity of managed services (RDS, Cloud SQL). * Your team prefers a dedicated DBA toolset. Databases in containers are production-viable with the right operator, storage class, and backup strategy. For most teams, a managed database service is simpler and more cost-effective. Containerization makes sense when you need portability, GitOps-driven management, and full control over the database configuration."
     }
     </script>
     <script type="application/ld+json">
@@ -78,344 +78,1956 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-containerization.png" alt="Databases in Containers: StatefulSets, Persistent Volumes, and Backup" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h1>
 <br>
-<p>Databases in Containers: StatefulSets, Persistent Volumes, and Backup   </p>
-<p>Running databases in containers was once considered an anti-pattern, but modern orchestration and storage primitives have made it viable for many production workloads. This article covers Kubernetes patterns for stateful databases, storage management, and operational considerations.   </p>
-<p>StatefulSets vs Deployments   </p>
-<p>Kubernetes Deployments are designed for stateless applications. StatefulSets are the correct primitive for databases:   </p>
+<h1>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h1>
 <br>
-<p>    apiVersion: apps/v1</p>
 <br>
-<p>    kind: StatefulSet</p>
 <br>
-<p>    metadata:</p>
 <br>
-<p>      name: postgres</p>
+<h1>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h1>
 <br>
-<p>    spec:</p>
 <br>
-<p>      serviceName: postgres</p>
 <br>
-<p>      replicas: 3</p>
 <br>
-<p>      selector:</p>
 <br>
-<p>        matchLabels:</p>
 <br>
-<p>          app: postgres</p>
 <br>
-<p>      template:</p>
+<h1>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h1>
 <br>
-<p>        metadata:</p>
 <br>
-<p>          labels:</p>
 <br>
-<p>            app: postgres</p>
 <br>
-<p>        spec:</p>
 <br>
-<p>          containers:</p>
 <br>
-<p>          - name: postgres</p>
 <br>
-<p>            image: postgres:16</p>
 <br>
-<p>            ports:</p>
 <br>
-<p>            - containerPort: 5432</p>
 <br>
-<p>            env:</p>
+<p>Databases in Containers: StatefulSets, Persistent Volumes, and Backup </p>
 <br>
-<p>            - name: POSTGRES_PASSWORD</p>
 <br>
-<p>              valueFrom:</p>
 <br>
-<p>                secretKeyRef:</p>
 <br>
-<p>                  name: pg-secret</p>
 <br>
-<p>                  key: password</p>
 <br>
-<p>            volumeMounts:</p>
 <br>
-<p>            - name: data</p>
+<p>Running databases in containers was once considered an anti-pattern, but modern orchestration and storage primitives have made it viable for many production workloads. This article covers Kubernetes patterns for stateful databases, storage management, and operational considerations. </p>
 <br>
-<p>              mountPath: /var/lib/postgresql/data</p>
 <br>
-<p>      volumeClaimTemplates:</p>
 <br>
-<p>      - metadata:</p>
 <br>
-<p>          name: data</p>
 <br>
-<p>        spec:</p>
 <br>
-<p>          accessModes: [ "ReadWriteOnce" ]</p>
 <br>
-<p>          storageClassName: "fast-ssd"</p>
+<p>StatefulSets vs Deployments </p>
 <br>
-<p>          resources:</p>
 <br>
-<p>            requests:</p>
 <br>
-<p>              storage: 100Gi</p>
 <br>
-<p>StatefulSets provide:   </p>
+<br>
+<br>
+<br>
+<p>Kubernetes Deployments are designed for stateless applications. StatefulSets are the correct primitive for databases: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>apiVersion: apps/v1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kind: StatefulSet</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>metadata:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: postgres</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>serviceName: postgres</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>replicas: 3</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>selector:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>matchLabels:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>app: postgres</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>template:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>metadata:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>labels:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>app: postgres</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>containers:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- name: postgres</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>image: postgres:16</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ports:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- containerPort: 5432</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>env:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- name: POSTGRES_PASSWORD</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>valueFrom:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>secretKeyRef:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: pg-secret</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>key: password</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>volumeMounts:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- name: data</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>mountPath: /var/lib/postgresql/data</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>volumeClaimTemplates:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- metadata:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: data</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>accessModes: [ "ReadWriteOnce" ]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>storageClassName: "fast-ssd"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>resources:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>requests:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>storage: 100Gi</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>StatefulSets provide: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>* Stable, unique network identities (`pod-name-0`, `pod-name-1`).</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Ordered, graceful deployment and scaling.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Stable storage with PersistentVolumeClaim templates.</p>
 <br>
-<p>PersistentVolumes and Storage Classes   </p>
-<p>Database storage requires careful configuration of PersistentVolumes:   </p>
 <br>
-<p>    apiVersion: storage.k8s.io/v1</p>
 <br>
-<p>    kind: StorageClass</p>
 <br>
-<p>    metadata:</p>
 <br>
-<p>      name: fast-ssd</p>
 <br>
-<p>    provisioner: ebs.csi.aws.com</p>
 <br>
-<p>    parameters:</p>
 <br>
-<p>      type: gp3</p>
 <br>
-<p>      iops: "3000"</p>
 <br>
-<p>      throughput: "125"</p>
+<p>PersistentVolumes and Storage Classes </p>
 <br>
-<p>    reclaimPolicy: Retain</p>
 <br>
-<p>Access Modes   </p>
-<p>| Mode | Description | Database Use Case | |------|-------------|-------------------| | ReadWriteOnce | Single node read-write | Primary database | | ReadOnlyMany | Many nodes read-only | Read replicas | | ReadWriteMany | Many nodes read-write | Shared storage (avoid for PostgreSQL) |   </p>
-<p>CloudNativePG Operator   </p>
-<p>The CloudNativePG operator is the most mature Kubernetes operator for PostgreSQL:   </p>
 <br>
-<p>    apiVersion: postgresql.cnpg.io/v1</p>
 <br>
-<p>    kind: Cluster</p>
 <br>
-<p>    metadata:</p>
 <br>
-<p>      name: myapp-db</p>
 <br>
-<p>    spec:</p>
+<p>Database storage requires careful configuration of PersistentVolumes: </p>
 <br>
-<p>      instances: 3</p>
 <br>
-<p>      imageName: ghcr.io/cloudnative-pg/postgresql:16</p>
 <br>
-<p>      storage:</p>
 <br>
-<p>        size: 100Gi</p>
 <br>
-<p>        storageClass: fast-ssd</p>
 <br>
-<p>      backup:</p>
 <br>
-<p>        barmanObjectStore:</p>
 <br>
-<p>          destinationPath: s3://myapp-backups/</p>
 <br>
-<p>          s3Credentials:</p>
 <br>
-<p>            accessKeyId:</p>
+<p>apiVersion: storage.k8s.io/v1</p>
 <br>
-<p>              name: aws-creds</p>
 <br>
-<p>              key: access-key</p>
 <br>
-<p>            secretAccessKey:</p>
 <br>
-<p>              name: aws-creds</p>
 <br>
-<p>              key: secret-key</p>
 <br>
-<p>          wal:</p>
 <br>
-<p>            compression: gzip</p>
 <br>
-<p>        retentionPolicy: "30d"</p>
 <br>
-<p>      monitoring:</p>
 <br>
-<p>        enablePodMonitor: true</p>
+<p>kind: StorageClass</p>
 <br>
-<p>      resources:</p>
 <br>
-<p>        requests:</p>
 <br>
-<p>          memory: "4Gi"</p>
 <br>
-<p>          cpu: "2"</p>
 <br>
-<p>        limits:</p>
 <br>
-<p>          memory: "8Gi"</p>
 <br>
-<p>          cpu: "4"</p>
 <br>
-<p>Automated Failover   </p>
 <br>
-<p>    # Simulate pod failure to test failover</p>
 <br>
-<p>    kubectl delete pod myapp-db-0</p>
+<p>metadata:</p>
 <br>
-<p>    # Operator automatically:</p>
 <br>
-<p>    # 1. Detects primary is gone</p>
 <br>
-<p>    # 2. Promotes the most advanced replica</p>
 <br>
-<p>    # 3. Updates the service to point to new primary</p>
 <br>
-<p>    # Typical failover time: 15-30 seconds</p>
 <br>
-<p>Backup in Containers   </p>
-<p>Volume Snapshots   </p>
 <br>
-<p>    apiVersion: snapshot.storage.k8s.io/v1</p>
 <br>
-<p>    kind: VolumeSnapshot</p>
 <br>
-<p>    metadata:</p>
 <br>
-<p>      name: postgres-weekly-snapshot</p>
+<p>name: fast-ssd</p>
 <br>
-<p>    spec:</p>
 <br>
-<p>      volumeSnapshotClassName: csi-aws-vsc</p>
 <br>
-<p>      source:</p>
 <br>
-<p>        persistentVolumeClaimName: data-myapp-db-0</p>
 <br>
-<p>WAL Archiving to S3   </p>
 <br>
-<p>    apiVersion: postgresql.cnpg.io/v1</p>
 <br>
-<p>    kind: ScheduledBackup</p>
 <br>
-<p>    metadata:</p>
 <br>
-<p>      name: myapp-db-backup</p>
 <br>
-<p>    spec:</p>
+<p>provisioner: ebs.csi.aws.com</p>
 <br>
-<p>      schedule: "0 0 * * *"</p>
 <br>
-<p>      backupOwnerReference: self</p>
 <br>
-<p>      cluster:</p>
 <br>
-<p>        name: myapp-db</p>
 <br>
-<p>Performance Considerations   </p>
-<p>Network Overhead   </p>
-<p>Container networking adds latency vs bare metal:   </p>
 <br>
-<p>    # Use hostNetwork for lowest latency</p>
 <br>
-<p>    spec:</p>
 <br>
-<p>      template:</p>
 <br>
-<p>        spec:</p>
 <br>
-<p>          hostNetwork: true</p>
+<p>parameters:</p>
 <br>
-<p>          dnsPolicy: ClusterFirstWithHostNet</p>
 <br>
-<p>Resource Limits   </p>
-<p>Setting proper resource limits prevents CPU throttling:   </p>
 <br>
-<p>    resources:</p>
 <br>
-<p>      requests:</p>
 <br>
-<p>        cpu: "4"</p>
 <br>
-<p>        memory: "16Gi"</p>
 <br>
-<p>      limits:</p>
 <br>
-<p>        cpu: "8"        # PostgreSQL bursts here normally</p>
 <br>
-<p>        memory: "24Gi"  # Allocate extra for OS cache (effective_cache_size)</p>
 <br>
-<p>Tuning for Kubernetes   </p>
+<p>type: gp3</p>
 <br>
-<p>    # postgresql.conf tuned for container environments</p>
 <br>
-<p>    shared_buffers = '4GB'        # 25% of container memory limit</p>
 <br>
-<p>    effective_cache_size = '12GB' # 75% of container memory limit</p>
 <br>
-<p>    work_mem = '64MB'</p>
 <br>
-<p>    maintenance_work_mem = '1GB'</p>
 <br>
-<p>    wal_buffers = '64MB'</p>
 <br>
-<p>    random_page_cost = 1.1       # SSD in containers</p>
 <br>
-<p>Anti-Patterns to Avoid   </p>
-<p>EmptyDir for Data   </p>
 <br>
-<p>    # WRONG: data lost on pod restart</p>
 <br>
-<p>    volumes:</p>
+<p>iops: "3000"</p>
 <br>
-<p>    - name: data</p>
 <br>
-<p>      emptyDir: {}</p>
 <br>
-<p>Always use PersistentVolumeClaims.   </p>
-<p>Multiple Writable Replicas   </p>
-<p>Without proper clustering (Patroni, Stolon, CNPG), multiple replicas with the same PVC cause data corruption.   </p>
-<p>Using Deployments   </p>
 <br>
-<p>    # WRONG: Deployments do not guarantee stable identity or storage</p>
 <br>
-<p>    apiVersion: apps/v1</p>
 <br>
-<p>    kind: Deployment</p>
 <br>
-<p>Always use StatefulSets for databases.   </p>
-<p>Monitoring   </p>
 <br>
-<p>    # Check pod status</p>
 <br>
-<p>    kubectl get pods -l app=postgres</p>
 <br>
-<p>    # Check PVC status</p>
+<p>throughput: "125"</p>
 <br>
-<p>    kubectl get pvc -l app=postgres</p>
 <br>
-<p>    # Check WAL archiving status</p>
 <br>
-<p>    kubectl exec myapp-db-1 -- psql -c "SELECT * FROM pg_stat_archiver;"</p>
 <br>
-<p>    # View operator logs</p>
 <br>
-<p>    kubectl logs -n postgres-operator deployment/postgres-operator</p>
 <br>
-<p>When to Containerize   </p>
-<p>**Containerize your database when**:   </p>
+<br>
+<br>
+<br>
+<br>
+<p>reclaimPolicy: Retain</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Access Modes </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>| Mode | Description | Database Use Case | |------|-------------|-------------------| | ReadWriteOnce | Single node read-write | Primary database | | ReadOnlyMany | Many nodes read-only | Read replicas | | ReadWriteMany | Many nodes read-write | Shared storage (avoid for PostgreSQL) | </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CloudNativePG Operator </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The CloudNativePG operator is the most mature Kubernetes operator for PostgreSQL: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>apiVersion: postgresql.cnpg.io/v1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kind: Cluster</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>metadata:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: myapp-db</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>instances: 3</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>imageName: ghcr.io/cloudnative-pg/postgresql:16</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>storage:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>size: 100Gi</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>storageClass: fast-ssd</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>backup:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>barmanObjectStore:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>destinationPath: s3://myapp-backups/</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>s3Credentials:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>accessKeyId:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: aws-creds</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>key: access-key</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>secretAccessKey:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: aws-creds</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>key: secret-key</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>wal:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>compression: gzip</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>retentionPolicy: "30d"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>monitoring:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>enablePodMonitor: true</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>resources:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>requests:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>memory: "4Gi"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cpu: "2"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>limits:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>memory: "8Gi"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cpu: "4"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Automated Failover </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Simulate pod failure to test failover</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kubectl delete pod myapp-db-0</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Operator automatically:</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>1\\. Detects primary is gone</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>2\\. Promotes the most advanced replica</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>3\\. Updates the service to point to new primary</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Typical failover time: 15-30 seconds</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Backup in Containers </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Volume Snapshots </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>apiVersion: snapshot.storage.k8s.io/v1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kind: VolumeSnapshot</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>metadata:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: postgres-weekly-snapshot</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>volumeSnapshotClassName: csi-aws-vsc</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>source:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>persistentVolumeClaimName: data-myapp-db-0</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>WAL Archiving to S3 </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>apiVersion: postgresql.cnpg.io/v1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kind: ScheduledBackup</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>metadata:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: myapp-db-backup</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>schedule: "0 0 * * *"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>backupOwnerReference: self</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cluster:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: myapp-db</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Performance Considerations </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Network Overhead </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Container networking adds latency vs bare metal: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Use hostNetwork for lowest latency</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>template:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>hostNetwork: true</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>dnsPolicy: ClusterFirstWithHostNet</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Resource Limits </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Setting proper resource limits prevents CPU throttling: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>resources:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>requests:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cpu: "4"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>memory: "16Gi"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>limits:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cpu: "8" # PostgreSQL bursts here normally</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>memory: "24Gi" # Allocate extra for OS cache (effective_cache_size)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Tuning for Kubernetes </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>postgresql.conf tuned for container environments</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>shared_buffers = '4GB' # 25% of container memory limit</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>effective_cache_size = '12GB' # 75% of container memory limit</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>work_mem = '64MB'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>maintenance_work_mem = '1GB'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>wal_buffers = '64MB'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>random_page_cost = 1.1 # SSD in containers</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Anti-Patterns to Avoid </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>EmptyDir for Data </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>WRONG: data lost on pod restart</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>volumes:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- name: data</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>emptyDir: {}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Always use PersistentVolumeClaims. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Multiple Writable Replicas </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Without proper clustering (Patroni, Stolon, CNPG), multiple replicas with the same PVC cause data corruption. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Using Deployments </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>WRONG: Deployments do not guarantee stable identity or storage</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>apiVersion: apps/v1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kind: Deployment</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Always use StatefulSets for databases. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Monitoring </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Check pod status</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kubectl get pods -l app=postgres</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Check PVC status</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kubectl get pvc -l app=postgres</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Check WAL archiving status</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kubectl exec myapp-db-1 -- psql -c "SELECT * FROM pg_stat_archiver;"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>View operator logs</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kubectl logs -n postgres-operator deployment/postgres-operator</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>When to Containerize </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Containerize your database when**: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>* You already run everything else in Kubernetes.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* You need environment parity and GitOps workflows.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* You value automated operations provided by operators.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Your team has Kubernetes expertise.</p>
 <br>
-<p>**Do not containerize when**:   </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Do not containerize when**: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>* You lack operational Kubernetes expertise.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Your database requires specialized hardware or kernel tuning.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* You need the simplicity of managed services (RDS, Cloud SQL).</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Your team prefers a dedicated DBA toolset.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Databases in containers are production-viable with the right operator, storage class, and backup strategy. For most teams, a managed database service is simpler and more cost-effective. Containerization makes sense when you need portability, GitOps-driven management, and full control over the database configuration.</p></div>
     </article>
@@ -433,6 +2045,7 @@
       <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

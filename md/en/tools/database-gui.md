@@ -8,199 +8,1744 @@ url: https://dingjiu1989-hue.github.io/en/tools/database-gui.html
 
 # Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio
 
+# Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio
+
+  
+
+
+# Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio
+
+  
+  
+  
+  
+
+
+# Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio
+
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 A good database GUI makes the difference between a pleasant querying experience and a frustrating one. The right tool depends on your database stack, platform, and workflow preferences. This article compares four leading database GUIs: TablePlus, DBeaver, DataGrip, and Beekeeper Studio.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  TablePlus
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 A native macOS database client with a clean, modern interface:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 **Supported databases**: PostgreSQL, MySQL, Redis, SQLite, SQL Server, MariaDB, Amazon Redshift, CockroachDB
 
-    -- TablePlus built-in features:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    -- Query history with search and favorites
 
-    -- Filter and sort by columns directly
+\\\\\\\\\\\\\\\\-- TablePlus built-in features:
 
-    -- Multiple tabs with connection grouping
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    -- SQL editor with autocomplete and syntax highlighting
 
-    -- Import/export CSV, JSON, Excel
+\\\\\\\\\\\\\\\\-- Query history with search and favorites
 
-    -- SSH tunneling
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    -- Quick filter: select table row and type column:value
 
-    -- Example: status:active name:john
+\\\\\\\\\\\\\\\\-- Filter and sort by columns directly
 
-    -- This converts to: WHERE status = 'active' AND name LIKE '%john%'
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Multiple tabs with connection grouping
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- SQL editor with autocomplete and syntax highlighting
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Import/export CSV, JSON, Excel
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- SSH tunneling
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Quick filter: select table row and type column:value
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Example: status:active name:john
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- This converts to: WHERE status = 'active' AND name LIKE '%john%'
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 **Strengths**: Beautiful native macOS UI, fast startup and query execution, excellent keyboard shortcuts, inline editing, multi-tab connections, SSH tunneling built-in.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 **Weaknesses**: macOS only (no Linux/Windows), fewer advanced features than DBeaver, paid for full features (one-time purchase).
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  DBeaver
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The most comprehensive cross-platform database tool:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 **Supported databases**: 80+ including PostgreSQL, MySQL, Oracle, SQL Server, SQLite, MongoDB, Cassandra, Redis, DynamoDB, Snowflake, BigQuery
 
-    -- DBeaver advanced features:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    -- ER diagram generation from database schema
 
-    -- Compare and sync database structures
+\\\\\\\\\\\\\\\\-- DBeaver advanced features:
 
-    -- Data export in 20+ formats
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    -- Schema export as SQL scripts
 
-    -- Script execution with variable substitution
+\\\\\\\\\\\\\\\\-- ER diagram generation from database schema
 
-    -- SQL query plan visualization
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    -- Mock data generation
 
-    -- ER diagram generation
+\\\\\\\\\\\\\\\\-- Compare and sync database structures
 
-    -- Right-click database -> View Diagram
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    -- Automatically generates relationships from foreign keys
 
-    -- Export as PNG, SVG, or print
+\\\\\\\\\\\\\\\\-- Data export in 20+ formats
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Schema export as SQL scripts
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Script execution with variable substitution
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- SQL query plan visualization
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Mock data generation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- ER diagram generation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Right-click database -> View Diagram
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Automatically generates relationships from foreign keys
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Export as PNG, SVG, or print
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 **Strengths**: Most database support, free and open-source (Community Edition), ER diagrams, data export tools, SQL editor with execution plan visualization, cross-platform.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 **Weaknesses**: Java-based (heavier resource usage), UI can feel cluttered, slower startup than native tools, occasional instability with large datasets.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  DataGrip
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 JetBrains' database IDE, integrated with the IntelliJ ecosystem:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 **Supported databases**: PostgreSQL, MySQL, SQL Server, Oracle, SQLite, MariaDB, MongoDB, Cassandra, Redis, Snowflake, ClickHouse, CockroachDB
 
-    -- DataGrip unique features:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    -- Context-aware code completion
 
-    -- Detect potential SQL errors before execution
+\\\\\\\\\\\\\\\\-- DataGrip unique features:
 
-    -- Version-controlled database objects
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    -- Integrated with VCS (Git)
 
-    -- Database diff and migration tools
+\\\\\\\\\\\\\\\\-- Context-aware code completion
 
-    -- SQL formatting (configurable)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    -- Intelligent code completion:
 
-    -- Ctrl+Space: table names, column names, functions
+\\\\\\\\\\\\\\\\-- Detect potential SQL errors before execution
 
-    -- Alt+Enter: quick fixes for SQL issues
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    -- Ctrl+Shift+Enter: complete statement
 
-    -- Version control for schemas
+\\\\\\\\\\\\\\\\-- Version-controlled database objects
 
-    -- Tools -> Migrations -> Compare with database
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    -- Generates migration scripts automatically
+
+\\\\\\\\\\\\\\\\-- Integrated with VCS (Git)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Database diff and migration tools
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- SQL formatting (configurable)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Intelligent code completion:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Ctrl+Space: table names, column names, functions
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Alt+Enter: quick fixes for SQL issues
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Ctrl+Shift+Enter: complete statement
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Version control for schemas
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Tools -> Migrations -> Compare with database
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Generates migration scripts automatically
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 **Strengths**: Deep JetBrains integration, best-in-class SQL editor, refactoring tools (rename column across all queries), intelligent code completion, database diff and migration generation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 **Weaknesses**: Requires JetBrains subscription, heavier resource usage, overkill for simple queries, not as many databases supported as DBeaver.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Beekeeper Studio
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 A lightweight, open-source SQL editor and database manager:
 
-    -- Beekeeper Studio features:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    -- Tab-based query editing
 
-    -- Query history with search
+\\\\\\\\\\\\\\\\-- Beekeeper Studio features:
 
-    -- Save and organize queries in folders
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    -- Dark and light themes
 
-    -- Keyboard shortcuts
+\\\\\\\\\\\\\\\\-- Tab-based query editing
 
-    -- Native desktop app (Electron-based)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    -- Supported databases:
 
-    -- PostgreSQL, MySQL, SQLite, SQL Server
+\\\\\\\\\\\\\\\\-- Query history with search
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Save and organize queries in folders
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Dark and light themes
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Keyboard shortcuts
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Native desktop app (Electron-based)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- Supported databases:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\-- PostgreSQL, MySQL, SQLite, SQL Server
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 **Beekeeper configuration**:
 
-    {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      "editor": {
 
-        "fontSize": 14,
+{
 
-        "fontFamily": "'JetBrains Mono', 'Fira Code', monospace",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        "tabSize": 2,
 
-        "autoSave": true
+"editor": {
 
-      },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      "sidebar": {
 
-        "showTableStats": true,
+"fontSize": 14,
 
-        "showColumnComments": true
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      },
 
-      "results": {
+"fontFamily": "'JetBrains Mono', 'Fira Code', monospace",
 
-        "limitDefault": 500,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        "showRowCount": true
 
-      }
+"tabSize": 2,
 
-    }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"autoSave": true
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"sidebar": {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"showTableStats": true,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"showColumnComments": true
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"results": {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"limitDefault": 500,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"showRowCount": true
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 **Strengths**: Lightweight and fast, open source, clean simple UI, good for basic CRUD and querying, easy connection management.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 **Weaknesses**: Fewer features than competitors, limited database support, no ER diagrams, Electron-based (more RAM than TablePlus), smaller community.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Comparison
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Feature | TablePlus | DBeaver | DataGrip | Beekeeper |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 |---------|----------|---------|----------|-----------|
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Platform | macOS | Cross-platform | Cross-platform | Cross-platform |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 | Database support | 8+ | 80+ | 15+ | 4 |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Startup speed | Fast | Slow (Java) | Slow (JVM) | Moderate |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 | ER diagrams | No | Yes | No | No |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | SSH tunneling | Built-in | Built-in | Built-in | Built-in |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 | Price | $49 (one-time) | Free | Included with IntelliJ | Free/Paid |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Code completion | Basic | Good | Excellent | Basic |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Recommendations
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * **macOS user**: TablePlus for the best native experience and speed.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * **Need many databases**: DBeaver for the widest database support.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * **IntelliJ user**: DataGrip for seamless JetBrains integration (especially with IDEA Ultimate).
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * **Lightweight needs**: Beekeeper Studio for a simple, free, open-source option.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * **Database administration**: DBeaver for schema comparison, migration scripts, and ER diagrams.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * **Daily querying**: TablePlus for fast, developer-friendly query execution.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Many developers use a combination: TablePlus for daily PostgreSQL/MySQL work, DBeaver for database administration tasks, and DataGrip when already working in an IntelliJ project.

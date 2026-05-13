@@ -21,32 +21,34 @@ Adding AI to your app means calling an API. OpenAI, Anthropic, and Google AI eac
 **Image input**|  Yes (GPT-4o)| Yes| Yes  
 **Image output**|  Yes (DALL-E)| No| Yes (Imagen)  
 **Streaming**|  Yes (SSE)| Yes (SSE + streaming text)| Yes  
-
+  
 ## 1\. Streaming Responses
 
 Streaming shows tokens as they're generated — critical for good UX. All three APIs support it:
-
+    
+    
     // Anthropic streaming example
     import Anthropic from "@anthropic-ai/sdk";
-
+    
     const client = new Anthropic();
-
+    
     const stream = client.messages.stream({
       model: "claude-sonnet-4-20250514",
       max_tokens: 4096,
       messages: [{ role: "user", content: "Write a function to..." }],
     });
-
+    
     stream.on("text", (text) => {
       process.stdout.write(text);  // Show tokens as they arrive
     });
-
+    
     const finalMessage = await stream.finalMessage();
 
 ## 2\. Function Calling (Tool Use)
 
 Function calling lets the AI call your APIs. Define the tools, and the AI decides when to use them:
-
+    
+    
     // Define a tool
     const tools = [{
       name: "search_database",
@@ -60,20 +62,21 @@ Function calling lets the AI call your APIs. Define the tools, and the AI decide
         required: ["query"]
       }
     }];
-
+    
     // The AI can now call search_database() when needed
     // Your code executes the function and sends the result back
 
 ## 3\. Embeddings for Semantic Search
 
 Embeddings convert text into vectors for semantic search. OpenAI and Google both offer embedding APIs:
-
+    
+    
     // OpenAI embeddings
     const embedding = await openai.embeddings.create({
       model: "text-embedding-3-small",  // $0.02/1M tokens — cheapest
       input: "How to deploy Next.js to Vercel",
     });
-
+    
     // Store in vector DB (pgvector, Pinecone, Chroma)
     // Query: find similar docs by cosine similarity
 
@@ -87,9 +90,10 @@ Strategy| Savings| How
 **Batch processing**|  50%| OpenAI batch API is 50% cheaper (24h turnaround).  
 **Token limits**|  Variable| Set max_tokens to prevent runaway costs.  
 **Self-host small models**|  90%+| Use local models for classification/summarization tasks.  
-
+  
 ## 5\. Error Handling Pattern
-
+    
+    
     async function callAI(prompt: string): Promise<string> {
       const maxRetries = 3;
       for (let i = 0; i < maxRetries; i++) {

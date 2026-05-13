@@ -23,7 +23,7 @@ Observability| Excellent (built-in dashboard, tracing)| Good (dashboard, logs)| 
 Self-Hosted| Yes (open source, BSL license)| Yes (open source, MIT)| No (SaaS only)| Yes (open source, Apache 2.0)  
 Pricing (Free Tier)| $0 (up to 1M steps/mo)| $0 (up to 100 jobs/mo)| $0 (up to 500K messages/mo)| Free (self-hosted, your infra)  
 Complexity| Low-Medium| Low| Very Low| High  
-
+  
 ## When to Choose Each Tool
 
 **Inngest — Best for:** Event-driven applications where you need durable execution — functions that survive crashes, automatically retry, and are replayable. Inngest's step functions approach makes complex workflows manageable. **Weak spot:** BSL license (not fully open source); Go/Python SDKs are newer than JS.
@@ -43,5 +43,5 @@ JS/TS background jobs, minimal setup| Trigger.dev| Simplest setup for JS ecosyst
 Simple HTTP callbacks, serverless| QStash| Lightweight, no SDK needed  
 ETL pipelines, data engineering| Airflow| Industry standard for DAGs  
 Simple cron jobs, low volume| QStash or Trigger.dev| Lowest complexity, cheapest  
-
+  
 **Bottom line:** For most web applications, Trigger.dev or Inngest is the modern replacement for cron. Trigger.dev is simpler for JS-only stacks; Inngest is more powerful for complex workflows. QStash is the simplest option — just HTTP and a schedule. Airflow is the pick for data engineering pipelines. See also: [Event-Driven Architecture Guide](</en/tech/event-driven-architecture-guide.html>) and [CI/CD Pipeline Guide](</en/tech/ci-cd-pipeline-guide.html>).

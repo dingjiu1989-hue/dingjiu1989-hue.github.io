@@ -22,26 +22,27 @@ Async| async/await, Promises, event loop| async/await, Futures, tokio runtime| N
 Type System| Dynamic (with optional TS types)| Static, algebraic data types (enums with data)| Rust's enums are more powerful than TS discriminated unions  
 Package Manager| npm, yarn, pnpm| cargo (build + test + publish + docs)| cargo is an all-in-one tool; Cargo.toml = package.json  
 Modules| import/export (ESM), require (CJS)| mod, use, pub (explicit visibility)| Everything is private by default; must explicitly declare pub  
-
+  
 ## Ownership: The One Concept That Unlocks Rust
-
+    
+    
     // JavaScript: no ownership concept — values are shared freely
     let a = "hello";
     let b = a;  // b gets a copy (for primitives) or shared reference (for objects)
     console.log(a);  // "hello" — a is still valid
-
+    
     // Rust: ownership means only one owner at a time
     let a = String::from("hello");
     let b = a;  // a MOVES to b — a is no longer valid
     // println!("{}", a);  // COMPILE ERROR: a was moved
     println!("{}", b);  // "hello"
-
+    
     // To use a without moving: borrow with &
     let a = String::from("hello");
     let b = &a;  // b borrows a — a is still valid
     println!("{}", a);  // "hello" — works fine
     println!("{}", b);  // "hello"
-
+    
     // The mental model: Rust is like passing objects in JS —
     // there's only one true copy, and you must know who owns it.
     // The difference: Rust enforces this at compile time, not runtime.
@@ -55,18 +56,19 @@ WebAssembly| Smallest WASM footprint, zero-cost JS interop| SWC (20x faster than
 Networking / Infrastructure| Memory safety without GC pauses| Cloudflare Pingora (replaced Nginx), AWS Firecracker (Lambda VMs)  
 Embedded / IoT| No runtime, tiny binary, no GC| Embedded sensors, microcontroller firmware  
 NPM Package Optimization| Replace slow JS build tools with Rust| Use napi-rs to write NPM packages in Rust for 10-100x speedups  
-
+  
 ## Rust-to-JS Interop: Use Rust in Your Node.js Project
-
+    
+    
     // Using napi-rs: write performance-critical code in Rust, call from Node.js
     // Cargo.toml
     // [dependencies]
     // napi = { version = "2", features = ["full"] }
     // napi-derive = "2"
-
+    
     // src/lib.rs
     use napi_derive::napi;
-
+    
     #[napi]
     pub fn fibonacci(n: u32) -> u32 {
         match n {
@@ -75,7 +77,7 @@ NPM Package Optimization| Replace slow JS build tools with Rust| Use napi-rs to 
             _ => fibonacci(n - 1) + fibonacci(n - 2),
         }
     }
-
+    
     // JavaScript: const { fibonacci } = require('./rust-module');
     // console.log(fibonacci(40)); // Instant — runs native Rust speed
 

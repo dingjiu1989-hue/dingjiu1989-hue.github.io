@@ -22,11 +22,12 @@ Layer| Tool| Why It's Worth Learning
 **Logging**|  Pino (structured) → Loki/Grafana| Structured JSON logs. Centralized querying.  
 **Secrets**|  Infisical / Doppler| Sync .env across devs, CI, and production. Encrypted, audited.  
 **Deploy**|  Coolify / Railway| Self-hosted Vercel or managed PaaS. Dockerfile → URL.  
-
+  
 ## 1\. CI/CD with GitHub Actions
 
 A good CI/CD pipeline tests, builds, and deploys on every push. Here's a minimal but complete workflow:
-
+    
+    
     # .github/workflows/ci.yml
     name: CI
     on: [push, pull_request]
@@ -55,7 +56,8 @@ A good CI/CD pipeline tests, builds, and deploys on every push. Here's a minimal
             run: curl -X POST $DEPLOY_WEBHOOK
 
 ## 2\. Docker for Containers
-
+    
+    
     # Multi-stage Dockerfile for a Node.js app
     FROM node:22-alpine AS builder
     WORKDIR /app
@@ -63,7 +65,7 @@ A good CI/CD pipeline tests, builds, and deploys on every push. Here's a minimal
     RUN npm ci
     COPY . .
     RUN npm run build
-
+    
     FROM node:22-alpine AS runner
     WORKDIR /app
     COPY --from=builder /app/dist ./dist
@@ -74,7 +76,8 @@ A good CI/CD pipeline tests, builds, and deploys on every push. Here's a minimal
 ## 3\. Infrastructure as Code (Terraform)
 
 Terraform lets you declare infrastructure in code. No more clicking in cloud consoles — your infra is version-controlled and repeatable.
-
+    
+    
     # main.tf — Deploy a Next.js app to Vercel
     resource "vercel_project" "web" {
       name      = "my-app"
@@ -84,7 +87,7 @@ Terraform lets you declare infrastructure in code. No more clicking in cloud con
         repo = "my-org/my-app"
       }
     }
-
+    
     resource "vercel_project_environment_variable" "db_url" {
       project_id = vercel_project.web.id
       key        = "DATABASE_URL"
@@ -94,20 +97,21 @@ Terraform lets you declare infrastructure in code. No more clicking in cloud con
 ## 4\. Monitoring with Grafana + Prometheus
 
 Prometheus scrapes metrics from your app (CPU, memory, request latency, error rate). Grafana visualizes them in dashboards. For Node.js apps, use prom-client to expose custom metrics:
-
+    
+    
     import client from "prom-client";
     import express from "express";
-
+    
     const app = express();
     const collectDefaultMetrics = client.collectDefaultMetrics;
     collectDefaultMetrics();
-
+    
     const httpRequestDuration = new client.Histogram({
       name: "http_request_duration_seconds",
       help: "Duration of HTTP requests in seconds",
       labelNames: ["method", "route", "status"],
     });
-
+    
     app.use((req, res, next) => {
       const end = httpRequestDuration.startTimer();
       res.on("finish", () => {
@@ -115,7 +119,7 @@ Prometheus scrapes metrics from your app (CPU, memory, request latency, error ra
       });
       next();
     });
-
+    
     app.get("/metrics", async (req, res) => {
       res.set("Content-Type", client.register.contentType);
       res.end(await client.register.metrics());
@@ -128,5 +132,7 @@ Not every project needs the full DevOps stack:
   * **Side project / MVP:** GitHub Actions → Coolify on a $20 VPS. Skip K8s, skip Terraform.
   * **Growing startup:** GitHub Actions → Railway or Render. Add Sentry for errors.
   * **Scaling product:** GitHub Actions → K8s (or ECS). Terraform for infra. Full monitoring stack.
+
+
 
 **Bottom line:** Learn CI/CD and Docker first — they're universally useful. Add Terraform when your infra has 5+ resources. Add K8s only when you have 10+ containers and need orchestration. The best operations is the one you don't have to think about. See also: [CI/CD tools comparison](</en/tools/best-cicd-tools-2026.html>) and [Docker vs Podman](</en/compare/docker-vs-podman.html>).

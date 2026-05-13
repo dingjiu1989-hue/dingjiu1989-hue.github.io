@@ -24,7 +24,7 @@ The JavaScript runtime you pick affects install speed, testing, and production p
 **npm compat**|  90%+| 100% (the original)| 90%+  
 **Single binary**|  Yes (bun build)| Yes (node --compile)| Yes (deno compile)  
 **Ecosystem**|  Growing (npm compat helps)| Largest (3M+ packages)| Growing (npm compat helps)  
-
+  
 ## Bun — The Speed Demon
 
 Bun is designed for speed above all else. `bun install` is dramatically faster than npm or yarn. It ships as a single binary with a bundler, test runner, and package manager included. If you value iteration speed, Bun is compelling.
@@ -65,5 +65,5 @@ Edge/serverless functions| **Deno** — Deno Deploy
 New side project, fast iteration| **Bun** — fastest DX  
 Enterprise, large team| **Node.js** — stability, ecosystem  
 Security-sensitive environment| **Deno** — permissions model  
-
+  
 **Bottom line:** Node.js for production — it's the safe choice with universal support. Bun for CLI tools and side projects where speed matters. Deno for edge deployments and security-conscious environments. See also: [build tools comparison](</en/compare/vite-vs-webpack-vs-turbopack.html>) and [hosting comparison](</en/compare/vercel-vs-netlify-vs-cloudflare.html>).

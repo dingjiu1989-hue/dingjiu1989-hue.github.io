@@ -19,7 +19,7 @@ Tool| Strengths| Best For| Price
 **Claude Code**|  Terminal-based agent, understands entire repos, runs commands| Complex refactoring, debugging, PR reviews.| API usage / $20/mo (Pro)  
 **ChatGPT Code Interpreter**|  Data analysis, visualization, file processing| Data science, CSV/JSON manipulation.| Free / $20/mo  
 **Continue.dev**|  Open-source, bring-your-own-model| Privacy-focused, custom models.| Free  
-
+  
 ## How to Actually Use AI When Coding
 
 ### 1\. Use AI for Boilerplate and Repetition
@@ -44,6 +44,8 @@ AI can explain trade-offs between approaches, but it shouldn't make the final ca
   * **Letting AI write tests for code it also wrote.** If the AI misunderstood the requirement, the test will encode the same misunderstanding. Write the test yourself for critical business logic.
   * **Pasting entire files into chat.** This is slow and error-prone. Use tools that read your codebase directly (Claude Code, Cursor).
   * **Over-relying on AI as a beginner.** If you're learning, write the code yourself first. Use AI to explain concepts and review your work, not to do the work for you.
+
+
 
 ## Building a Productive Workflow
 

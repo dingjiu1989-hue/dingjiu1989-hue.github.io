@@ -21,7 +21,7 @@ Mid-Level| 2-5| $130K-220K| $60K-130K
 Senior| 5-10| $180K-400K| $100K-200K  
 Staff / Principal| 10+| $350K-800K+| $150K-350K  
 FAANG / Big Tech Senior+| 5+| $350K-1M+ (stock-heavy)| N/A (usually requires US presence)  
-
+  
 _Note: These are 2026 ranges. The high end includes equity appreciation. Many engineers earn below these ranges outside tech hubs._
 
 ## The Engineer's Financial Order of Operations
@@ -46,7 +46,7 @@ Keeping too much cash (no investing)| $300K-800K+ (inflation + lost compounding)
 Lifestyle inflation (upgrading car/apartment with every raise)| $200K-500K+ (lifetime savings gap)| Keep living like a mid-level engineer on a staff salary  
 Picking individual stocks / crypto speculation| $50K-300K+ (underperformance vs index)| 90% index funds, 10% "fun money" max  
 Not negotiating salary / equity| $50K-200K+ (per job change)| Always negotiate; 10 minutes = potentially $20K+  
-
+  
 ## Equity Compensation Decoded
 
 **RSUs (Restricted Stock Units):** Company gives you shares that vest over time (typically 4 years with a 1-year cliff). At vesting, the value is treated as ordinary income (taxed at your marginal rate). **Strategy:** sell immediately on vesting. The shares are taxed the same whether you sell or hold, so holding is equivalent to taking a cash bonus and choosing to buy company stock — would you do that?

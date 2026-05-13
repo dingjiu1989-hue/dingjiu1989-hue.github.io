@@ -8,22 +8,212 @@ url: https://dingjiu1989-hue.github.io/en/tools/productivity-tracking.html
 
 # Developer Productivity Tracking Tools
 
+# Developer Productivity Tracking Tools
+
+  
+
+
+# Developer Productivity Tracking Tools
+
+  
+  
+  
+  
+
+
+# Developer Productivity Tracking Tools
+
+  
+  
+  
+  
+  
+  
+  
+
+
+# Developer Productivity Tracking Tools
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Developer Productivity Tracking Tools
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Why Track Productivity?
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Measuring coding activity provides insights into work patterns, helps identify distractions, and supports data-driven improvements to your workflow.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  WakaTime
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 WakaTime is the most popular code time tracker with IDE plugins for VS Code, JetBrains, Vim, and 40+ other editors. It tracks time automatically by language, project, and file. Features include weekly reports, leaderboards, and goal setting. It integrates with GitHub, GitLab, and project management tools.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  CodeTime
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 CodeTime offers similar functionality with a focus on team metrics. Managers can see coding activity across the team, while individuals get personal dashboards with daily goals and streaks. It also provides music recommendations based on coding intensity.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  ActivityWatch
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ActivityWatch is an open-source alternative that runs locally. It tracks window titles, application usage, and editor time. All data stays on your machine, making it suitable for privacy-conscious developers. It has fewer integrations but full data ownership.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Choosing
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 WakaTime for comprehensive personal tracking, CodeTime for team visibility, ActivityWatch for privacy. Start with WakaTime's free tier—most developers find the weekly reports eye-opening.

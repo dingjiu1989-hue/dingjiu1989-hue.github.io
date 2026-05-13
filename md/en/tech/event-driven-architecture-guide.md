@@ -19,7 +19,7 @@ Event-Carried State Transfer| Events contain all data subscribers need (no callb
 Event Sourcing| State is derived from a sequence of events (not a current snapshot)| Banking transactions, audit logs, undo/redo functionality| High  
 CQRS (Command Query Responsibility Segregation)| Separate read and write models — writes go through events, reads from materialized views| High-read, complex-query applications (e-commerce product search)| High  
 Saga (Distributed Transaction)| A sequence of local transactions, each compensated if a later step fails| Order fulfillment: reserve inventory → charge payment → schedule shipping| High  
-
+  
 ## Message Broker Comparison
 
 Broker| Type| Throughput| Latency| Best For  
@@ -30,7 +30,7 @@ Amazon SQS| Managed message queue| Unlimited (AWS scaling)| 1-50ms| AWS-native, 
 Google Pub/Sub| Managed pub/sub| Unlimited (GCP scaling)| 1-10ms| GCP-native, push subscriptions, global by default  
 Redis Streams| In-memory event log| 100K msg/s| <1ms| Lightweight event streaming, already have Redis  
 NATS| Lightweight pub/sub| 1M+ msg/s| <1ms| Low-latency, edge, IoT, microservices  
-
+  
 ## When to Go Event-Driven
 
 Situation| Event-Driven?| Why  
@@ -41,24 +41,25 @@ Simple CRUD app, single database| No — request-response is fine| EDA adds comp
 Need audit trail of all state changes| Yes — event sourcing| Events ARE the audit trail  
 Data analytics / real-time dashboards| Yes — event streaming| Kafka → stream processing → real-time views  
 Two services need a synchronous response| No — use REST/gRPC| Events are async; request-response is simpler for sync needs  
-
+  
 ## Implementing a Saga: Order Fulfillment Example
-
+    
+    
     # Saga pattern: orchestration-based (orchestrator coordinates the steps)
     # Each step is a local transaction; each has a compensating action
-
+    
     # Step 1: Create order (reserve inventory)
     POST /orders {status: PENDING, items: [...]}
       → Event: "OrderCreated" {order_id: 123}
       → Inventory Service reserves stock
-
+    
     # Step 2: Process payment
       → Event: "InventoryReserved" {order_id: 123}
       → Payment Service charges customer
       → Success: "PaymentProcessed" {order_id: 123}
       → Failure: "PaymentFailed" {order_id: 123}
         → Compensate: Inventory Service releases stock
-
+    
     # Step 3: Schedule shipping
       → Event: "PaymentProcessed" {order_id: 123}
       → Shipping Service creates label
@@ -66,7 +67,7 @@ Two services need a synchronous response| No — use REST/gRPC| Events are async
       → Failure: "ShippingFailed" {order_id: 123}
         → Compensate: Payment Service refunds
         → Compensate: Inventory Service releases stock
-
+    
     # Key: each compensating action must be idempotent
     # (refunding twice = bad; but idempotent refund = safe to retry)
 

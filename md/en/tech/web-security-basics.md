@@ -19,14 +19,15 @@ SQL Injection| Critical| #3| Executes arbitrary SQL on your database
 CSRF (Cross-Site Request Forgery)| High| Dropped| Tricks users into performing unwanted actions  
 CORS Misconfiguration| High| #5| Allows unauthorized cross-origin access  
 Insecure Authentication| Critical| #1| Weak auth allows account takeover  
-
+  
 ## 1\. Cross-Site Scripting (XSS)
 
 XSS happens when user input is rendered as HTML without sanitization. An attacker who can inject <script> tags can steal cookies, session tokens, and sensitive data.
-
+    
+    
     // ❌ Vulnerable:
     div.innerHTML = userComment;  // Attacker: <img src=x onerror="stealCookies()">
-
+    
     // ✅ Safe:
     div.textContent = userComment;      // Escapes HTML automatically
     // Or sanitize:
@@ -38,10 +39,11 @@ XSS happens when user input is rendered as HTML without sanitization. An attacke
 ## 2\. SQL Injection
 
 Concatenating user input into SQL queries gives attackers full database access. Parameterized queries are the fix — use them 100% of the time.
-
+    
+    
     // ❌ Vulnerable — attacker input: "1; DROP TABLE users;"
     const query = `SELECT * FROM users WHERE id = ${userId}`;
-
+    
     // ✅ Safe — parameterized query
     const query = "SELECT * FROM users WHERE id = $1";
     const result = await db.query(query, [userId]);
@@ -50,15 +52,16 @@ Concatenating user input into SQL queries gives attackers full database access. 
 ## 3\. Cross-Site Request Forgery (CSRF)
 
 An attacker's site makes a request to your API using the victim's cookies. CSRF tokens ensure the request originated from your own frontend.
-
+    
+    
     // Mitigation strategies:
     // 1. SameSite cookies (simplest, best):
     Set-Cookie: session=abc123; SameSite=Strict; HttpOnly; Secure
-
+    
     // 2. CSRF token (additional layer):
     // Server sends a unique token; client includes it in requests
     // Modern frameworks (Next.js, Remix) handle this automatically
-
+    
     // 3. Custom header requirement:
     // Browsers don't allow custom headers cross-origin
     // Require X-Requested-With or similar
@@ -66,14 +69,15 @@ An attacker's site makes a request to your API using the victim's cookies. CSRF 
 ## 4\. CORS Misconfiguration
 
 CORS (Cross-Origin Resource Sharing) controls which origins can access your API. The most common mistake: using a wildcard or reflecting the Origin header blindly.
-
+    
+    
     // ❌ Vulnerable — allows any origin:
     Access-Control-Allow-Origin: *
     Access-Control-Allow-Credentials: true  // Can't use with *
-
+    
     // ❌ Vulnerable — reflects origin blindly:
     // If your server echoes back the request's Origin header, any domain can access
-
+    
     // ✅ Safe — explicit allowlist:
     const allowedOrigins = ["https://myapp.com", "https://admin.myapp.com"];
     const origin = req.headers.origin;
@@ -84,7 +88,8 @@ CORS (Cross-Origin Resource Sharing) controls which origins can access your API.
 ## 5\. Content Security Policy (CSP)
 
 CSP is your last line of defense. It tells the browser what sources of scripts, styles, and other resources are allowed. A well-configured CSP makes XSS exploitation nearly impossible.
-
+    
+    
     // Recommended CSP header:
     Content-Security-Policy:
       default-src 'self';
@@ -105,5 +110,7 @@ CSP is your last line of defense. It tells the browser what sources of scripts, 
   * **Environment variables:** Never commit .env files. Inject at runtime.
   * **Rate limiting:** Protect login and API endpoints from brute force.
   * **Logging:** Log auth events. Never log passwords or tokens.
+
+
 
 **Bottom line:** Use parameterized queries, auto-escaping frameworks, SameSite cookies, CSP headers, and explicit CORS allowlists. Security is layers — implement them all, and a single failure won't compromise you. See also: [REST API Best Practices](</en/tech/rest-api-best-practices.html>) and [API Design Patterns](</en/tech/api-design-patterns.html>).

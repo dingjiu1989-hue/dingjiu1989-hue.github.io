@@ -23,7 +23,7 @@ Your ORM shapes how you interact with your database — every query, migration, 
 **Edge runtime**|  Limited (proxy required)| Native support| Limited  
 **Bundle size**|  Large (generated client)| Small| Large  
 **Database support**|  Postgres, MySQL, SQLite, MongoDB, SQL Server| Postgres, MySQL, SQLite, Turso, Planetscale| 10+ databases  
-
+  
 ## Prisma — The Developer Experience King
 
 Prisma's declarative schema file is a joy to work with. Define your models in Prisma Schema Language, run `prisma migrate dev`, and get a fully typed client. The generated types flow through your entire application. It's the most polished ORM experience available.
@@ -64,5 +64,5 @@ SQL-first developer, loves raw queries| **Drizzle**
 Enterprise with Oracle/MSSQL| **TypeORM**  
 NestJS application| **TypeORM** (native integration)  
 Side project, fastest to ship| **Prisma**  
-
+  
 **Bottom line:** Prisma for the best DX and fastest time-to-ship. Drizzle for performance and SQL purists. TypeORM for enterprise NestJS projects. In 2026, the Prisma vs Drizzle debate is the new "tabs vs spaces" — both are excellent, pick one and build. See also: [Database comparison guide](</en/compare/postgresql-vs-mysql-vs-sqlite.html>) and [Supabase vs Firebase vs Neon](</en/compare/supabase-vs-firebase-vs-neon.html>) for backend infrastructure.

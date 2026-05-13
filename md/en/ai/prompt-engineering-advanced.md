@@ -20,27 +20,28 @@ Chain-of-thought orchestration| +20-40%| +30-80% output tokens| Complex reasonin
 Multi-turn refinement| +15-25%| +50-200% total tokens| Iterative code reviews, design refinement  
 System prompt engineering| +10-20%| Negligible| Consistent behavior across sessions  
 Self-consistency (multiple samples)| +5-15%| 3-5x cost| High-stakes decisions, critical code  
-
+  
 ## XML-Structured Prompts
 
 **Best for:** Separating instructions, context, examples, and output format when the LLM needs to process multiple types of information. **Why it works:** LLMs trained on HTML/XML data treat XML tags as structural delimiters, reducing confusion between different prompt components.
-
+    
+    
     <system>
     You are an expert code reviewer specializing in security vulnerabilities.
     </system>
-
+    
     <context>
     The codebase is a Next.js 15 SaaS app handling payment processing.
     </context>
-
+    
     <task>
     Review this code for security issues. Focus on: SQL injection, XSS, auth bypass, CSRF.
     </task>
-
+    
     <code>
     {todo: paste_code_here}
     </code>
-
+    
     <output_format>
     For each vulnerability:
     - SEVERITY: Critical/High/Medium/Low
@@ -58,17 +59,20 @@ The quality of few-shot examples matters more than quantity. 3 perfect examples 
   * **Show your formatting in examples:** If you want code blocks with language tags, your examples must include them
   * **Progressive complexity:** Order examples from simple to complex — LLMs pay more attention to the last example
 
+
+
 ## Chain-of-Thought for Code Generation
 
 For complex coding tasks, explicitly ask the model to plan before writing:
-
+    
+    
     Before writing any code, first output a plan with:
     1. What files need to be created or modified
     2. What libraries/dependencies are needed
     3. The data flow from request to response
     4. Error states to handle
     5. Testing approach
-
+    
     Then write the code. For each file, explain:
     - Why this file exists (its responsibility)
     - What it depends on

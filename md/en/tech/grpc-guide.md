@@ -22,19 +22,20 @@ Browser Support| Limited (needs gRPC-Web proxy)| Native (fetch, XMLHttpRequest)
 Debugging| Harder (binary, needs grpcurl or BloomRPC)| Easy (curl, browser DevTools, Postman)  
 Performance| 3-10x faster, 3-10x smaller payload| Good enough for most use cases  
 Best For| Internal microservices, high-throughput RPC| Public APIs, browser-to-server communication  
-
+  
 ## Defining a gRPC Service in Protobuf
-
+    
+    
     // users.proto — a complete gRPC service definition
     syntax = "proto3";
-
+    
     package users.v1;
-
+    
     // Request/Response messages
     message GetUserRequest {
       string user_id = 1;  // Field numbers (1, 2, 3...) determine wire format
     }
-
+    
     message User {
       string user_id = 1;
       string email = 2;
@@ -42,32 +43,32 @@ Best For| Internal microservices, high-throughput RPC| Public APIs, browser-to-s
       repeated string roles = 4;  // repeated = array/list
       optional string avatar_url = 5;  // optional = can be unset
     }
-
+    
     message ListUsersRequest {
       int32 page_size = 1;
       string page_token = 2;
     }
-
+    
     message ListUsersResponse {
       repeated User users = 1;
       string next_page_token = 2;
     }
-
+    
     // The service: what RPCs are available
     service UserService {
       // Unary: one request → one response
       rpc GetUser(GetUserRequest) returns (User);
-
+    
       // Server streaming: one request → many responses
       rpc ListUsers(ListUsersRequest) returns (stream User);
-
+    
       // Client streaming: many requests → one response
       rpc BatchCreateUsers(stream CreateUserRequest) returns (BatchCreateUsersResponse);
-
+    
       // Bidirectional streaming: many ↔ many
       rpc Chat(stream ChatMessage) returns (stream ChatMessage);
     }
-
+    
     // Generate code: protoc --go_out=. --go-grpc_out=. users.proto
     // For Node.js: @grpc/grpc-js + @grpc/proto-loader
 
@@ -79,7 +80,7 @@ Unary (1 req → 1 resp)| Standard API calls| GetUser(id), CreateOrder(order)
 Server Streaming (1 req → N resp)| Large result sets, real-time feeds| ListUsers (stream results), SubscribeToEvents  
 Client Streaming (N req → 1 resp)| Uploading data, batching| UploadFile (stream chunks), BatchImport  
 Bidirectional (N ↔ N)| Real-time two-way communication| Chat, collaborative editing, game state sync  
-
+  
 ## gRPC in Production: Essential Patterns
 
 Pattern| Why| Implementation  
@@ -90,5 +91,5 @@ Interceptors (Middleware)| Auth, logging, tracing, rate limiting| UnaryServerInt
 Load Balancing| Distribute traffic across gRPC backends| Client-side (gRPC resolver) or proxy-based (Envoy, Linkerd)  
 Health Checking| K8s/load balancer needs to know service is healthy| Implement grpc.health.v1.Health service  
 Reflection| Enable grpcurl and debugging tools| Register reflection service in server  
-
+  
 **Bottom line:** Use gRPC for internal service-to-service communication where performance matters — microservices, data-intensive backends, and real-time streaming. Use REST for public APIs, browser-facing endpoints, and when broad ecosystem compatibility (curl, Postman, web browsers) is needed. The two are not mutually exclusive — many teams use gRPC internally and expose REST externally via an API gateway (gRPC-gateway or Envoy). See also: [tRPC vs GraphQL vs REST](</en/compare/trpc-vs-graphql-vs-rest.html>) and [API Design Patterns](</en/tech/api-design-patterns.html>).

@@ -25,7 +25,7 @@ Memory Usage (idle, 1 window)| ~200-300MB (Rust runtime + AI features)| ~100-150
 Terminal Output Performance| Very Good (GPU-accelerated)| Very Good (GPU-accelerated)| Excellent (GPU-first, best raw throughput)  
 Open Source| No (proprietary, free for individual)| Yes (GPL v2)| Yes (GPL v3)  
 Pricing| Free (individual), $18/mo Team| Free| Free  
-
+  
 ## When Each Terminal Wins
 
 **Warp — Best for:** Developers who want a modern, IDE-like terminal experience. Warp's standout features: (1) AI-powered natural language → command translation ("convert this video to webp" → ffmpeg command), (2) output is grouped into blocks you can copy/scroll/save independently, (3) shared workflows for your team. **Weak spot:** Proprietary; requires login; higher memory usage; some advanced terminal features (like remote ssh multiplexing) are less mature.
@@ -44,7 +44,7 @@ Remote / SSH| ★★★ (basic)| ★★★★★ (profiles, tmux integration)| �
 Image Display (in terminal)| ★★★★ (inline)| ★★★★ (imgcat)| ★★★★★ (icat kitten, best)  
 Performance (large output)| ★★★★| ★★★★| ★★★★★  
 Customization| ★★★| ★★★★★| ★★★★  
-
+  
 ## Decision Matrix
 
 Scenario| Best Terminal| Why  
@@ -54,5 +54,5 @@ macOS power user, want max features| iTerm2| Most mature, most features, most co
 Cross-platform (macOS + Linux), performance| Kitty| Fastest, GPU-first, keyboard-driven, works on both  
 Minimal, memory-efficient, pure speed| Kitty| 50MB idle, best raw throughput  
 Heavy SSH user, tmux workflows| iTerm2| Best tmux integration, profiles system  
-
+  
 **Bottom line:** Warp is the most exciting terminal innovation in a decade — AI command generation, block-based output, and a modern UI make it the best choice for most developers. iTerm2 remains the safe, feature-complete choice for macOS users. Kitty is the pick for performance purists and cross-platform users. Try all three — the terminal is too personal a tool to choose based on someone else's comparison. See also: [Best Terminal Emulators](</en/tools/best-terminal-emulators.html>) and [Code Editor Comparison](</en/tools/editor-comparison-2026.html>).

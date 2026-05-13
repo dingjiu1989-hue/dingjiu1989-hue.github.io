@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/testing-frameworks.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1678",
+      "wordCount": "3530",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/testing-frameworks.html"},
-      "articleBody": "Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest Introduction Testing frameworks have evolved significantly. Vitest has become the dominant choice for JavaScript unit testing, Playwright leads browser testing, and pytest remains the Python standard. This comparison covers the frameworks you need in your testing toolbox, with setup examples and best practices. Vitest Vitest is the modern JavaScript test runner, native ESM, and Vite-integrated: // vitest.config.ts import { defineConfig } from \"vitest/config\"; export default defineConfig({ test: { globals: true, environment: \"jsdom\", setupFiles: [\"./test/setup.ts\"], coverage: { provider: \"v8\", reporter: [\"text\", \"json\", \"html\"], exclude: [\"src/types/**\"], }, include: [\"src/**/*.{test,spec}.{ts,tsx}\"], mockReset: true, testTimeout: 10000, }, }); // counter.test.ts import { describe, it, expect, vi, beforeEach } from \"vitest\"; import { increment, decrement } from \"./counter\"; // Mock a module vi.mock(\"./api\", () => ({ fetchCount: vi.fn().mockResolvedValue(42), })); describe(\"counter\", () => { beforeEach(() => { vi.clearAllMocks(); }); it(\"increments correctly\", () => { expect(increment(5)).toBe(6); }); it(\"decrements correctly\", () => { expect(decrement(5)).toBe(4); }); it(\"handles edge cases\", () => { expect(increment(Infinity)).toBe(Infinity); }); }); **Strengths**: Near-instant watch mode (HMR for tests), Jest-compatible API, native TypeScript, ESM support, excellent performance, built-in coverage and mocking. Jest The established standard, still widely used in older projects: // jest.config.js module.exports = { testEnvironment: \"jsdom\", transform: { \"^.+\\\\.tsx?$\": \"ts-jest\", }, moduleNameMapper: { \"\\\\.(css|less)$\": \"/__mocks__/styleMock.js\", }, setupFilesAfterSetup: [\"./jest.setup.js\"], collectCoverageFrom: [\"src/**/*.{ts,tsx}\"], }; **Strengths**: Mature ecosystem, extensive documentation, stable API. **Weaknesses**: Slower than Vitest, CJS-focused, heavier configuration, ts-jest is slower than Vitest's esbuild transpilation. Playwright The leading browser testing framework by Microsoft: // playwright.config.ts import { defineConfig } from \"@playwright/test\"; export default defineConfig({ testDir: \"./e2e\", fullyParallel: true, retries: 2, workers: 4, reporter: [[\"html\"], [\"list\"]], use: { baseURL: \"http://localhost:3000\", trace: \"on-first-retry\", screenshot: \"only-on-failure\", video: \"retain-on-failure\", }, projects: [ { name: \"chromium\", use: { browserName: \"chromium\" } }, { name: \"firefox\", use: { browserName: \"firefox\" } }, { name: \"webkit\", use: { browserName: \"webkit\" } }, ], }); // login.spec.ts import { test, expect } from \"@playwright/test\"; test(\"user can log in\", async ({ page }) => { await page.goto(\"/login\"); await page.fill(\"#email\", \"user@example.com\"); await page.fill(\"#password\", \"password123\"); await page.click(\"button[type='submit']\"); await expect(page.locator(\".welcome\")).toHaveText(\"Welcome back!\"); await expect(page).toHaveURL(\"/dashboard\"); }); **Strengths**: Cross-browser, fast execution, auto-waiting, network interception, debugging tools, component testing. Cypress An alternative browser testing framework with a unique architecture: // cypress.config.js const { defineConfig } = require(\"cypress\"); module.exports = defineConfig({ e2e: { baseUrl: \"http://localhost:3000\", specPattern: \"cypress/e2e/**/*.cy.js\", video: false, screenshotOnRunFailure: true, }, component: { devServer: { framework: \"react\", bundler: \"vite\", }, }, }); **Strengths**: Excellent debugging with time-travel, real-time reloading, great documentation, network stubbing. **Weaknesses**: Slower than Playwright, limited to Chromium-based browsers, less ideal for parallel execution. pytest The standard Python testing framework: # conftest.py import pytest import pytest_asyncio @pytest.fixture def database(): db = create_test_database() yield db cleanup_database(db) @pytest_asyncio.fixture async def async_client(): client = await create_async_client() yield client await client.close() # test_api.py import pytest from httpx import AsyncClient class TestUserAPI: @pytest.mark.asyncio async def test_create_user(self, async_client): response = await async_client.post(\"/users\", json={ \"name\": \"Alice\", \"email\": \"alice@example.com\", }) assert response.status_code == 201 assert response.json()[\"name\"] == \"Alice\" @pytest.mark.parametrize(\"email,expected\", [ (\"invalid\", 422), (\"\", 422), (\"valid@example.com\", 201), ]) async def test_email_validation(self, async_client, email, expected): response = await async_client.post(\"/users\", json={\"email\": email}) assert response.status_code == expected Comparison | Feature | Vitest | Jest | Playwright | Cypress | pytest | |---------|--------|------|-----------|---------|--------| | Type | Unit/Integration | Unit/Integration | Browser E2E | Browser E2E | Unit/Integration | | Speed | Fast | Moderate | Fast | Moderate | Fast | | Language | TS/JS | TS/JS | TS/JS | JS | Python | | Configuration | Simple | Moderate | Simple | Simple | Simple | | Watch mode | Instant | Good | N/A | N/A | pytest-watch | Recommendations * **JavaScript unit tests**: Vitest is the default choice for new projects. * **Existing Jest projects**: Not urgent to migrate, but consider Vitest for new test files. * **Browser testing**: Playwright for cross-browser E2E tests. * **Component testing**: Playwright or Vitest (with JSDOM). * **Python testing**: pytest with pytest-asyncio for async code. The ideal testing stack in 2026: Vitest for unit tests, Playwright for E2E tests, pytest for Python services."
+      "articleBody": "Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest Introduction Testing frameworks have evolved significantly. Vitest has become the dominant choice for JavaScript unit testing, Playwright leads browser testing, and pytest remains the Python standard. This comparison covers the frameworks you need in your testing toolbox, with setup examples and best practices. Vitest Vitest is the modern JavaScript test runner, native ESM, and Vite-integrated: // vitest.config.ts import { defineConfig } from \"vitest/config\"; export default defineConfig({ test: { globals: true, environment: \"jsdom\", setupFiles: [\"./test/setup.ts\"], coverage: { provider: \"v8\", reporter: [\"text\", \"json\", \"html\"], exclude: [\"src/types/**\"], }, include: [\"src/**/*.{test,spec}.{ts,tsx}\"], mockReset: true, testTimeout: 10000, }, }); // counter.test.ts import { describe, it, expect, vi, beforeEach } from \"vitest\"; import { increment, decrement } from \"./counter\"; // Mock a module vi.mock(\"./api\", () => ({ fetchCount: vi.fn().mockResolvedValue(42), })); describe(\"counter\", () => { beforeEach(() => { vi.clearAllMocks(); }); it(\"increments correctly\", () => { expect(increment(5)).toBe(6); }); it(\"decrements correctly\", () => { expect(decrement(5)).toBe(4); }); it(\"handles edge cases\", () => { expect(increment(Infinity)).toBe(Infinity); }); }); **Strengths**: Near-instant watch mode (HMR for tests), Jest-compatible API, native TypeScript, ESM support, excellent performance, built-in coverage and mocking. Jest The established standard, still widely used in older projects: // jest.config.js module.exports = { testEnvironment: \"jsdom\", transform: { \"^.+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.tsx?$\": \"ts-jest\", }, moduleNameMapper: { \"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.(css|less)$\": \"/__mocks__/styleMock.js\", }, setupFilesAfterSetup: [\"./jest.setup.js\"], collectCoverageFrom: [\"src/**/*.{ts,tsx}\"], }; **Strengths**: Mature ecosystem, extensive documentation, stable API. **Weaknesses**: Slower than Vitest, CJS-focused, heavier configuration, ts-jest is slower than Vitest's esbuild transpilation. Playwright The leading browser testing framework by Microsoft: // playwright.config.ts import { defineConfig } from \"@playwright/test\"; export default defineConfig({ testDir: \"./e2e\", fullyParallel: true, retries: 2, workers: 4, reporter: [[\"html\"], [\"list\"]], use: { baseURL: \"http://localhost:3000\", trace: \"on-first-retry\", screenshot: \"only-on-failure\", video: \"retain-on-failure\", }, projects: [ { name: \"chromium\", use: { browserName: \"chromium\" } }, { name: \"firefox\", use: { browserName: \"firefox\" } }, { name: \"webkit\", use: { browserName: \"webkit\" } }, ], }); // login.spec.ts import { test, expect } from \"@playwright/test\"; test(\"user can log in\", async ({ page }) => { await page.goto(\"/login\"); await page.fill(\"#email\", \"user@example.com\"); await page.fill(\"#password\", \"password123\"); await page.click(\"button[type='submit']\"); await expect(page.locator(\".welcome\")).toHaveText(\"Welcome back!\"); await expect(page).toHaveURL(\"/dashboard\"); }); **Strengths**: Cross-browser, fast execution, auto-waiting, network interception, debugging tools, component testing. Cypress An alternative browser testing framework with a unique architecture: // cypress.config.js const { defineConfig } = require(\"cypress\"); module.exports = defineConfig({ e2e: { baseUrl: \"http://localhost:3000\", specPattern: \"cypress/e2e/**/*.cy.js\", video: false, screenshotOnRunFailure: true, }, component: { devServer: { framework: \"react\", bundler: \"vite\", }, }, }); **Strengths**: Excellent debugging with time-travel, real-time reloading, great documentation, network stubbing. **Weaknesses**: Slower than Playwright, limited to Chromium-based browsers, less ideal for parallel execution. pytest The standard Python testing framework: conftest.py import pytest import pytest_asyncio @pytest.fixture def database(): db = create_test_database() yield db cleanup_database(db) @pytest_asyncio.fixture async def async_client(): client = await create_async_client() yield client await client.close() test_api.py import pytest from httpx import AsyncClient class TestUserAPI: @pytest.mark.asyncio async def test_create_user(self, async_client): response = await async_client.post(\"/users\", json={ \"name\": \"Alice\", \"email\": \"alice@example.com\", }) assert response.status_code == 201 assert response.json()[\"name\"] == \"Alice\" @pytest.mark.parametrize(\"email,expected\", [ (\"invalid\", 422), (\"\", 422), (\"valid@example.com\", 201), ]) async def test_email_validation(self, async_client, email, expected): response = await async_client.post(\"/users\", json={\"email\": email}) assert response.status_code == expected Comparison | Feature | Vitest | Jest | Playwright | Cypress | pytest | |---------|--------|------|-----------|---------|--------| | Type | Unit/Integration | Unit/Integration | Browser E2E | Browser E2E | Unit/Integration | | Speed | Fast | Moderate | Fast | Moderate | Fast | | Language | TS/JS | TS/JS | TS/JS | JS | Python | | Configuration | Simple | Moderate | Simple | Simple | Simple | | Watch mode | Instant | Good | N/A | N/A | pytest-watch | Recommendations * **JavaScript unit tests**: Vitest is the default choice for new projects. * **Existing Jest projects**: Not urgent to migrate, but consider Vitest for new test files. * **Browser testing**: Playwright for cross-browser E2E tests. * **Component testing**: Playwright or Vitest (with JSDOM). * **Python testing**: pytest with pytest-asyncio for async code. The ideal testing stack in 2026: Vitest for unit tests, Playwright for E2E tests, pytest for Python services."
     }
     </script>
     <script type="application/ld+json">
@@ -78,323 +78,2285 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/testing-frameworks.png" alt="Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</h1>
 <br>
+<h1>Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Testing frameworks have evolved significantly. Vitest has become the dominant choice for JavaScript unit testing, Playwright leads browser testing, and pytest remains the Python standard. This comparison covers the frameworks you need in your testing toolbox, with setup examples and best practices.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Vitest</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Vitest is the modern JavaScript test runner, native ESM, and Vite-integrated:</p>
 <br>
-<p>    // vitest.config.ts</p>
 <br>
-<p>    import { defineConfig } from "vitest/config";</p>
 <br>
-<p>    export default defineConfig({</p>
 <br>
-<p>      test: {</p>
 <br>
-<p>        globals: true,</p>
 <br>
-<p>        environment: "jsdom",</p>
 <br>
-<p>        setupFiles: ["./test/setup.ts"],</p>
 <br>
-<p>        coverage: {</p>
 <br>
-<p>          provider: "v8",</p>
 <br>
-<p>          reporter: ["text", "json", "html"],</p>
 <br>
-<p>          exclude: ["src/types/**"],</p>
 <br>
-<p>        },</p>
 <br>
-<p>        include: ["src/**/*.{test,spec}.{ts,tsx}"],</p>
+<p>// vitest.config.ts</p>
 <br>
-<p>        mockReset: true,</p>
 <br>
-<p>        testTimeout: 10000,</p>
 <br>
-<p>      },</p>
 <br>
-<p>    });</p>
 <br>
-<p>    // counter.test.ts</p>
 <br>
-<p>    import { describe, it, expect, vi, beforeEach } from "vitest";</p>
 <br>
-<p>    import { increment, decrement } from "./counter";</p>
 <br>
-<p>    // Mock a module</p>
 <br>
-<p>    vi.mock("./api", () => ({</p>
 <br>
-<p>      fetchCount: vi.fn().mockResolvedValue(42),</p>
 <br>
-<p>    }));</p>
 <br>
-<p>    describe("counter", () => {</p>
 <br>
-<p>      beforeEach(() => {</p>
+<p>import { defineConfig } from "vitest/config";</p>
 <br>
-<p>        vi.clearAllMocks();</p>
 <br>
-<p>      });</p>
 <br>
-<p>      it("increments correctly", () => {</p>
 <br>
-<p>        expect(increment(5)).toBe(6);</p>
 <br>
-<p>      });</p>
 <br>
-<p>      it("decrements correctly", () => {</p>
 <br>
-<p>        expect(decrement(5)).toBe(4);</p>
 <br>
-<p>      });</p>
 <br>
-<p>      it("handles edge cases", () => {</p>
 <br>
-<p>        expect(increment(Infinity)).toBe(Infinity);</p>
 <br>
-<p>      });</p>
 <br>
-<p>    });</p>
+<br>
+<p>export default defineConfig({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>test: {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>globals: true,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>environment: "jsdom",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>setupFiles: ["./test/setup.ts"],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>coverage: {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>provider: "v8",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>reporter: ["text", "json", "html"],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>exclude: ["src/types/**"],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>include: ["src/**/*.{test,spec}.{ts,tsx}"],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>mockReset: true,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>testTimeout: 10000,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// counter.test.ts</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import { describe, it, expect, vi, beforeEach } from "vitest";</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import { increment, decrement } from "./counter";</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Mock a module</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>vi.mock("./api", () => ({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>fetchCount: vi.fn().mockResolvedValue(42),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}));</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>describe("counter", () => {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>beforeEach(() => {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>vi.clearAllMocks();</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>it("increments correctly", () => {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>expect(increment(5)).toBe(6);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>it("decrements correctly", () => {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>expect(decrement(5)).toBe(4);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>it("handles edge cases", () => {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>expect(increment(Infinity)).toBe(Infinity);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Strengths**: Near-instant watch mode (HMR for tests), Jest-compatible API, native TypeScript, ESM support, excellent performance, built-in coverage and mocking.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Jest</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>The established standard, still widely used in older projects:</p>
 <br>
-<p>    // jest.config.js</p>
 <br>
-<p>    module.exports = {</p>
 <br>
-<p>      testEnvironment: "jsdom",</p>
 <br>
-<p>      transform: {</p>
 <br>
-<p>        "^.+\\.tsx?$": "ts-jest",</p>
 <br>
-<p>      },</p>
 <br>
-<p>      moduleNameMapper: {</p>
 <br>
-<p>        "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",</p>
 <br>
-<p>      },</p>
 <br>
-<p>      setupFilesAfterSetup: ["./jest.setup.js"],</p>
 <br>
-<p>      collectCoverageFrom: ["src/**/*.{ts,tsx}"],</p>
 <br>
-<p>    };</p>
+<br>
+<p>// jest.config.js</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>module.exports = {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>testEnvironment: "jsdom",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>transform: {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"^.+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.tsx?$": "ts-jest",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>moduleNameMapper: {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.(css|less)$": "/__mocks__/styleMock.js",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>setupFilesAfterSetup: ["./jest.setup.js"],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>collectCoverageFrom: ["src/**/*.{ts,tsx}"],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>};</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Strengths**: Mature ecosystem, extensive documentation, stable API.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>**Weaknesses**: Slower than Vitest, CJS-focused, heavier configuration, ts-jest is slower than Vitest's esbuild transpilation.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Playwright</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>The leading browser testing framework by Microsoft:</p>
 <br>
-<p>    // playwright.config.ts</p>
 <br>
-<p>    import { defineConfig } from "@playwright/test";</p>
 <br>
-<p>    export default defineConfig({</p>
 <br>
-<p>      testDir: "./e2e",</p>
 <br>
-<p>      fullyParallel: true,</p>
 <br>
-<p>      retries: 2,</p>
 <br>
-<p>      workers: 4,</p>
 <br>
-<p>      reporter: [["html"], ["list"]],</p>
 <br>
-<p>      use: {</p>
 <br>
-<p>        baseURL: "http://localhost:3000",</p>
 <br>
-<p>        trace: "on-first-retry",</p>
 <br>
-<p>        screenshot: "only-on-failure",</p>
 <br>
-<p>        video: "retain-on-failure",</p>
+<p>// playwright.config.ts</p>
 <br>
-<p>      },</p>
 <br>
-<p>      projects: [</p>
 <br>
-<p>        { name: "chromium", use: { browserName: "chromium" } },</p>
 <br>
-<p>        { name: "firefox", use: { browserName: "firefox" } },</p>
 <br>
-<p>        { name: "webkit", use: { browserName: "webkit" } },</p>
 <br>
-<p>      ],</p>
 <br>
-<p>    });</p>
 <br>
-<p>    // login.spec.ts</p>
 <br>
-<p>    import { test, expect } from "@playwright/test";</p>
 <br>
-<p>    test("user can log in", async ({ page }) => {</p>
 <br>
-<p>      await page.goto("/login");</p>
 <br>
-<p>      await page.fill("#email", "user@example.com");</p>
 <br>
-<p>      await page.fill("#password", "password123");</p>
+<p>import { defineConfig } from "@playwright/test";</p>
 <br>
-<p>      await page.click("button[type='submit']");</p>
 <br>
-<p>      await expect(page.locator(".welcome")).toHaveText("Welcome back!");</p>
 <br>
-<p>      await expect(page).toHaveURL("/dashboard");</p>
 <br>
-<p>    });</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>export default defineConfig({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>testDir: "./e2e",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>fullyParallel: true,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>retries: 2,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>workers: 4,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>reporter: [["html"], ["list"]],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>use: {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>baseURL: "http://localhost:3000",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>trace: "on-first-retry",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>screenshot: "only-on-failure",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>video: "retain-on-failure",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>projects: [</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{ name: "chromium", use: { browserName: "chromium" } },</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{ name: "firefox", use: { browserName: "firefox" } },</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{ name: "webkit", use: { browserName: "webkit" } },</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// login.spec.ts</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import { test, expect } from "@playwright/test";</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>test("user can log in", async ({ page }) => {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await page.goto("/login");</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await page.fill("#email", "user@example.com");</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await page.fill("#password", "password123");</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await page.click("button[type='submit']");</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await expect(page.locator(".welcome")).toHaveText("Welcome back!");</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await expect(page).toHaveURL("/dashboard");</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Strengths**: Cross-browser, fast execution, auto-waiting, network interception, debugging tools, component testing. </p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Cypress</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>An alternative browser testing framework with a unique architecture:</p>
 <br>
-<p>    // cypress.config.js</p>
 <br>
-<p>    const { defineConfig } = require("cypress");</p>
 <br>
-<p>    module.exports = defineConfig({</p>
 <br>
-<p>      e2e: {</p>
 <br>
-<p>        baseUrl: "http://localhost:3000",</p>
 <br>
-<p>        specPattern: "cypress/e2e/**/*.cy.js",</p>
 <br>
-<p>        video: false,</p>
 <br>
-<p>        screenshotOnRunFailure: true,</p>
 <br>
-<p>      },</p>
 <br>
-<p>      component: {</p>
 <br>
-<p>        devServer: {</p>
 <br>
-<p>          framework: "react",</p>
 <br>
-<p>          bundler: "vite",</p>
+<p>// cypress.config.js</p>
 <br>
-<p>        },</p>
 <br>
-<p>      },</p>
 <br>
-<p>    });</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const { defineConfig } = require("cypress");</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>module.exports = defineConfig({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>e2e: {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>baseUrl: "http://localhost:3000",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>specPattern: "cypress/e2e/**/*.cy.js",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>video: false,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>screenshotOnRunFailure: true,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>component: {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>devServer: {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>framework: "react",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>bundler: "vite",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Strengths**: Excellent debugging with time-travel, real-time reloading, great documentation, network stubbing.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>**Weaknesses**: Slower than Playwright, limited to Chromium-based browsers, less ideal for parallel execution.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  pytest</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>The standard Python testing framework:</p>
 <br>
-<p>    # conftest.py</p>
 <br>
-<p>    import pytest</p>
 <br>
-<p>    import pytest_asyncio</p>
 <br>
-<p>    @pytest.fixture</p>
 <br>
-<p>    def database():</p>
 <br>
-<p>        db = create_test_database()</p>
 <br>
-<p>        yield db</p>
 <br>
-<p>        cleanup_database(db)</p>
 <br>
-<p>    @pytest_asyncio.fixture</p>
 <br>
-<p>    async def async_client():</p>
 <br>
-<p>        client = await create_async_client()</p>
 <br>
-<p>        yield client</p>
 <br>
-<p>        await client.close()</p>
+<h1>conftest.py</h1>
 <br>
-<p>    # test_api.py</p>
 <br>
-<p>    import pytest</p>
 <br>
-<p>    from httpx import AsyncClient</p>
 <br>
-<p>    class TestUserAPI:</p>
 <br>
-<p>        @pytest.mark.asyncio</p>
 <br>
-<p>        async def test_create_user(self, async_client):</p>
 <br>
-<p>            response = await async_client.post("/users", json={</p>
 <br>
-<p>                "name": "Alice",</p>
 <br>
-<p>                "email": "alice@example.com",</p>
 <br>
-<p>            })</p>
 <br>
-<p>            assert response.status_code == 201</p>
 <br>
-<p>            assert response.json()["name"] == "Alice"</p>
 <br>
-<p>        @pytest.mark.parametrize("email,expected", [</p>
+<p>import pytest</p>
 <br>
-<p>            ("invalid", 422),</p>
 <br>
-<p>            ("", 422),</p>
 <br>
-<p>            ("valid@example.com", 201),</p>
 <br>
-<p>        ])</p>
 <br>
-<p>        async def test_email_validation(self, async_client, email, expected):</p>
 <br>
-<p>            response = await async_client.post("/users", json={"email": email})</p>
 <br>
-<p>            assert response.status_code == expected</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import pytest_asyncio</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@pytest.fixture</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def database():</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>db = create_test_database()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>yield db</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cleanup_database(db)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@pytest_asyncio.fixture</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def async_client():</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>client = await create_async_client()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>yield client</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await client.close()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>test_api.py</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import pytest</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from httpx import AsyncClient</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class TestUserAPI:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@pytest.mark.asyncio</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def test_create_user(self, async_client):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response = await async_client.post("/users", json={</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"name": "Alice",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"email": "alice@example.com",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>})</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>assert response.status_code == 201</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>assert response.json()["name"] == "Alice"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@pytest.mark.parametrize("email,expected", [</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>("invalid", 422),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>("", 422),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>("valid@example.com", 201),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def test_email_validation(self, async_client, email, expected):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response = await async_client.post("/users", json={"email": email})</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>assert response.status_code == expected</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Comparison</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Feature | Vitest | Jest | Playwright | Cypress | pytest |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>|---------|--------|------|-----------|---------|--------|</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Type | Unit/Integration | Unit/Integration | Browser E2E | Browser E2E | Unit/Integration |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Speed | Fast | Moderate | Fast | Moderate | Fast |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Language | TS/JS | TS/JS | TS/JS | JS | Python |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Configuration | Simple | Moderate | Simple | Simple | Simple |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Watch mode | Instant | Good | N/A | N/A | pytest-watch |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Recommendations</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **JavaScript unit tests**: Vitest is the default choice for new projects.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Existing Jest projects**: Not urgent to migrate, but consider Vitest for new test files.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Browser testing**: Playwright for cross-browser E2E tests.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Component testing**: Playwright or Vitest (with JSDOM).</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Python testing**: pytest with pytest-asyncio for async code.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>The ideal testing stack in 2026: Vitest for unit tests, Playwright for E2E tests, pytest for Python services.</p></div>
     </article>
@@ -412,6 +2374,7 @@
       <noscript><div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

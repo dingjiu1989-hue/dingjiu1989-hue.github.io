@@ -22,7 +22,7 @@ Backend-as-a-Service changed the game for solo developers and small teams. You n
 **Free tier**|  2 projects, 500MB DB| 1GB storage, 50K reads/day| 0.5GB storage, 100h compute  
 **Pricing model**|  Per project + usage| Per operation| Per compute hour  
 **Vendor lock-in risk**|  Low (standard Postgres)| High (proprietary)| Low (standard Postgres)  
-
+  
 ## Supabase — The Open-Source Firebase Alternative
 
 Supabase brands itself as "the open-source Firebase alternative." It wraps PostgreSQL with a Firebase-like developer experience: instant APIs, real-time subscriptions, and built-in auth. Because it's standard Postgres underneath, you can always migrate away.
@@ -62,5 +62,5 @@ Building a mobile app with real-time needs| **Firebase**
 Already have auth and API, just need Postgres| **Neon**  
 Want open source and no lock-in| **Supabase or Neon**  
 Quickest from zero to working MVP| **Supabase** (most built-in features)  
-
+  
 For most web apps in 2026, **Supabase is the best starting point.** It gives you the most features out of the box while keeping the escape hatch open. See our [SaaS Bootstrapping Guide](</en/sidehustle/saas-bootstrapping-guide.html>) for the full tech stack.

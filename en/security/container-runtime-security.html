@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/container-runtime-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1238",
+      "wordCount": "2309",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/container-runtime-security.html"},
-      "articleBody": "Container Runtime Security Runtime Security Fundamentals Container runtime security monitors and restricts container behavior during execution. It prevents attackers who gain container access from breaking out or causing damage. seccomp Profiles seccomp (Secure Computing Mode) restricts system calls: { \"defaultAction\": \"SCMP_ACT_ERRNO\", \"architectures\": [\"SCMP_ARCH_X86_64\"], \"syscalls\": [ { \"names\": [ \"accept4\", \"bind\", \"connect\", \"listen\", \"read\", \"write\", \"open\", \"close\", \"mmap\", \"munmap\", \"brk\", \"exit\", \"exit_group\", \"getpid\" ], \"action\": \"SCMP_ACT_ALLOW\" } ] } Apply profiles in Kubernetes: apiVersion: v1 kind: Pod metadata: name: secure-app spec: securityContext: seccompProfile: type: Localhost localhostProfile: profiles/audit.json containers: - name: app image: myapp:latest securityContext: seccompProfile: type: Localhost localhostProfile: profiles/strict.json AppArmor AppArmor uses path-based access control: # AppArmor profile for container #include profile container-strict flags=(attach_disconnected) { #include # Network network inet tcp, network inet udp, # Filesystem / r, /proc/*/status r, /etc/resolv.conf r, /app/** r, /app/bin ix, # Deny everything else deny /etc/shadow r, deny /sys/** r, deny /proc/** w, } SELinux for Containers SELinux provides mandatory access control: # Enable SELinux for container runtime sudo setenforce 1 sudo semanage permissive -a container_t # Apply SELinux context to container podman run \\ --security-opt label=type:container_t \\ --security-opt label=level:s0:c1,c2 \\ nginx # Check SELinux context ps -eZ | grep container Falco Runtime Detection Falco detects anomalous behavior: # falco-rules.yaml - rule: Terminal shell in container desc: Detect shell spawn in container condition: > spawned_process and container and proc.name in (bash, zsh, sh, dash) and not proc.pname in (docker, kubectl) output: > Shell spawned in container (%user_name %container_name) priority: WARNING - rule: Unexpected outbound connection desc: Detect reverse shell or data exfiltration condition: > outbound and container and not allowed_outbound_destination output: > Unexpected outbound connection from container priority: CRITICAL - rule: Write to sensitive path desc: Detect attempts to write to host filesystem condition: > open_write and container and fd.name startswith /etc/cron output: > Write to sensitive host path from container priority: CRITICAL # Falco event consumer import json import requests def handle_falco_events(): resp = requests.get( \"http://localhost:8765/events\", stream=True ) for line in resp.iter_lines(): if line: event = json.loads(line) priority = event.get(\"priority\") rule = event.get(\"rule\") output = event.get(\"output\") if priority in [\"CRITICAL\", \"EMERGENCY\"]: trigger_incident_response(rule, output) elif priority in [\"WARNING\", \"ERROR\"]: alert_security_team(rule, output) Runtime Security Best Practices runtime_security: images: - scan_before_run - block_known_vulnerable - enforce_signing containers: - read_only_root_filesystem: true - drop_all_capabilities - add_capabilities_selectively - run_as_non_root - seccomp: custom_profile - apparmor: enforced - no_new_privileges: true monitoring: - falco_runtime_detection - audit_log_collection - behavioral_baselining Conclusion Container runtime security requires multiple layers. Use seccomp to restrict system calls, AppArmor for path-based controls, and SELinux for mandatory access. Deploy Falco for runtime threat detection. Run containers with the minimum capabilities required. Monitor and alert on suspicious behavior in real time."
+      "articleBody": "Container Runtime Security Container Runtime Security Container Runtime Security Container Runtime Security Runtime Security Fundamentals Container runtime security monitors and restricts container behavior during execution. It prevents attackers who gain container access from breaking out or causing damage. seccomp Profiles seccomp (Secure Computing Mode) restricts system calls: { \"defaultAction\": \"SCMP_ACT_ERRNO\", \"architectures\": [\"SCMP_ARCH_X86_64\"], \"syscalls\": [ { \"names\": [ \"accept4\", \"bind\", \"connect\", \"listen\", \"read\", \"write\", \"open\", \"close\", \"mmap\", \"munmap\", \"brk\", \"exit\", \"exit_group\", \"getpid\" ], \"action\": \"SCMP_ACT_ALLOW\" } ] } Apply profiles in Kubernetes: apiVersion: v1 kind: Pod metadata: name: secure-app spec: securityContext: seccompProfile: type: Localhost localhostProfile: profiles/audit.json containers: \\\\\\\\- name: app image: myapp:latest securityContext: seccompProfile: type: Localhost localhostProfile: profiles/strict.json AppArmor AppArmor uses path-based access control: AppArmor profile for container #include profile container-strict flags=(attach_disconnected) { #include Network network inet tcp, network inet udp, Filesystem / r, /proc/*/status r, /etc/resolv.conf r, /app/** r, /app/bin ix, Deny everything else deny /etc/shadow r, deny /sys/** r, deny /proc/** w, } SELinux for Containers SELinux provides mandatory access control: Enable SELinux for container runtime sudo setenforce 1 sudo semanage permissive -a container_t Apply SELinux context to container podman run \\ \\\\\\\\--security-opt label=type:container_t \\ \\\\\\\\--security-opt label=level:s0:c1,c2 \\ nginx Check SELinux context ps -eZ | grep container Falco Runtime Detection Falco detects anomalous behavior: falco-rules.yaml \\\\\\\\- rule: Terminal shell in container desc: Detect shell spawn in container condition: > spawned_process and container and proc.name in (bash, zsh, sh, dash) and not proc.pname in (docker, kubectl) output: > Shell spawned in container (%user_name %container_name) priority: WARNING \\\\\\\\- rule: Unexpected outbound connection desc: Detect reverse shell or data exfiltration condition: > outbound and container and not allowed_outbound_destination output: > Unexpected outbound connection from container priority: CRITICAL \\\\\\\\- rule: Write to sensitive path desc: Detect attempts to write to host filesystem condition: > open_write and container and fd.name startswith /etc/cron output: > Write to sensitive host path from container priority: CRITICAL Falco event consumer import json import requests def handle_falco_events(): resp = requests.get( \"http://localhost:8765/events\", stream=True ) for line in resp.iter_lines(): if line: event = json.loads(line) priority = event.get(\"priority\") rule = event.get(\"rule\") output = event.get(\"output\") if priority in [\"CRITICAL\", \"EMERGENCY\"]: trigger_incident_response(rule, output) elif priority in [\"WARNING\", \"ERROR\"]: alert_security_team(rule, output) Runtime Security Best Practices runtime_security: images: \\\\\\\\- scan_before_run \\\\\\\\- block_known_vulnerable \\\\\\\\- enforce_signing containers: \\\\\\\\- read_only_root_filesystem: true \\\\\\\\- drop_all_capabilities \\\\\\\\- add_capabilities_selectively \\\\\\\\- run_as_non_root \\\\\\\\- seccomp: custom_profile \\\\\\\\- apparmor: enforced \\\\\\\\- no_new_privileges: true monitoring: \\\\\\\\- falco_runtime_detection \\\\\\\\- audit_log_collection \\\\\\\\- behavioral_baselining Conclusion Container runtime security requires multiple layers. Use seccomp to restrict system calls, AppArmor for path-based controls, and SELinux for mandatory access. Deploy Falco for runtime threat detection. Run containers with the minimum capabilities required. Monitor and alert on suspicious behavior in real time."
     }
     </script>
     <script type="application/ld+json">
@@ -78,271 +78,1505 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/container-runtime-security.png" alt="Container Runtime Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Container Runtime Security</h1>
 <br>
-<p>Runtime Security Fundamentals   </p>
-<p>Container runtime security monitors and restricts container behavior during execution. It prevents attackers who gain container access from breaking out or causing damage.   </p>
-<p>seccomp Profiles   </p>
-<p>seccomp (Secure Computing Mode) restricts system calls:   </p>
+<h1>Container Runtime Security</h1>
 <br>
-<p>    {</p>
 <br>
-<p>      "defaultAction": "SCMP_ACT_ERRNO",</p>
 <br>
-<p>      "architectures": ["SCMP_ARCH_X86_64"],</p>
 <br>
-<p>      "syscalls": [</p>
+<h1>Container Runtime Security</h1>
 <br>
-<p>        {</p>
 <br>
-<p>          "names": [</p>
 <br>
-<p>            "accept4", "bind", "connect", "listen",</p>
 <br>
-<p>            "read", "write", "open", "close",</p>
 <br>
-<p>            "mmap", "munmap", "brk",</p>
 <br>
-<p>            "exit", "exit_group", "getpid"</p>
 <br>
-<p>          ],</p>
+<h1>Container Runtime Security</h1>
 <br>
-<p>          "action": "SCMP_ACT_ALLOW"</p>
 <br>
-<p>        }</p>
 <br>
-<p>      ]</p>
 <br>
-<p>    }</p>
 <br>
-<p>Apply profiles in Kubernetes:   </p>
 <br>
-<p>    apiVersion: v1</p>
 <br>
-<p>    kind: Pod</p>
 <br>
-<p>    metadata:</p>
 <br>
-<p>      name: secure-app</p>
 <br>
-<p>    spec:</p>
+<p>Runtime Security Fundamentals </p>
 <br>
-<p>      securityContext:</p>
 <br>
-<p>        seccompProfile:</p>
 <br>
-<p>          type: Localhost</p>
 <br>
-<p>          localhostProfile: profiles/audit.json</p>
 <br>
-<p>      containers:</p>
 <br>
-<p>      - name: app</p>
 <br>
-<p>        image: myapp:latest</p>
+<p>Container runtime security monitors and restricts container behavior during execution. It prevents attackers who gain container access from breaking out or causing damage. </p>
 <br>
-<p>        securityContext:</p>
 <br>
-<p>          seccompProfile:</p>
 <br>
-<p>            type: Localhost</p>
 <br>
-<p>            localhostProfile: profiles/strict.json</p>
 <br>
-<p>AppArmor   </p>
-<p>AppArmor uses path-based access control:   </p>
 <br>
-<p>    # AppArmor profile for container</p>
 <br>
-<p>    #include <tunables/global></p>
+<p>seccomp Profiles </p>
 <br>
-<p>    profile container-strict flags=(attach_disconnected) {</p>
 <br>
-<p>      #include <abstractions/base></p>
 <br>
-<p>      # Network</p>
 <br>
-<p>      network inet tcp,</p>
 <br>
-<p>      network inet udp,</p>
 <br>
-<p>      # Filesystem</p>
 <br>
-<p>      / r,</p>
+<p>seccomp (Secure Computing Mode) restricts system calls: </p>
 <br>
-<p>      /proc/*/status r,</p>
 <br>
-<p>      /etc/resolv.conf r,</p>
 <br>
-<p>      /app/** r,</p>
 <br>
-<p>      /app/bin ix,</p>
 <br>
-<p>      # Deny everything else</p>
 <br>
-<p>      deny /etc/shadow r,</p>
 <br>
-<p>      deny /sys/** r,</p>
 <br>
-<p>      deny /proc/** w,</p>
 <br>
-<p>    }</p>
 <br>
-<p>SELinux for Containers   </p>
-<p>SELinux provides mandatory access control:   </p>
+<p>{</p>
 <br>
-<p>    # Enable SELinux for container runtime</p>
 <br>
-<p>    sudo setenforce 1</p>
 <br>
-<p>    sudo semanage permissive -a container_t</p>
 <br>
-<p>    # Apply SELinux context to container</p>
 <br>
-<p>    podman run \</p>
 <br>
-<p>      --security-opt label=type:container_t \</p>
 <br>
-<p>      --security-opt label=level:s0:c1,c2 \</p>
 <br>
-<p>      nginx</p>
 <br>
-<p>    # Check SELinux context</p>
 <br>
-<p>    ps -eZ | grep container</p>
+<p>"defaultAction": "SCMP_ACT_ERRNO",</p>
 <br>
-<p>Falco Runtime Detection   </p>
-<p>Falco detects anomalous behavior:   </p>
 <br>
-<p>    # falco-rules.yaml</p>
 <br>
-<p>    - rule: Terminal shell in container</p>
 <br>
-<p>      desc: Detect shell spawn in container</p>
 <br>
-<p>      condition: ></p>
 <br>
-<p>        spawned_process </p>
 <br>
-<p>        and container </p>
 <br>
-<p>        and proc.name in (bash, zsh, sh, dash)</p>
 <br>
-<p>        and not proc.pname in (docker, kubectl)</p>
 <br>
-<p>      output: ></p>
+<p>"architectures": ["SCMP_ARCH_X86_64"],</p>
 <br>
-<p>        Shell spawned in container (%user_name %container_name)</p>
 <br>
-<p>      priority: WARNING</p>
 <br>
-<p>    - rule: Unexpected outbound connection</p>
 <br>
-<p>      desc: Detect reverse shell or data exfiltration</p>
 <br>
-<p>      condition: ></p>
 <br>
-<p>        outbound </p>
 <br>
-<p>        and container </p>
 <br>
-<p>        and not allowed_outbound_destination</p>
 <br>
-<p>      output: ></p>
 <br>
-<p>        Unexpected outbound connection from container</p>
+<p>"syscalls": [</p>
 <br>
-<p>      priority: CRITICAL</p>
 <br>
-<p>    - rule: Write to sensitive path</p>
 <br>
-<p>      desc: Detect attempts to write to host filesystem</p>
 <br>
-<p>      condition: ></p>
 <br>
-<p>        open_write </p>
 <br>
-<p>        and container </p>
 <br>
-<p>        and fd.name startswith /etc/cron</p>
 <br>
-<p>      output: ></p>
 <br>
-<p>        Write to sensitive host path from container</p>
 <br>
-<p>      priority: CRITICAL</p>
+<p>{</p>
 <br>
-<p>    # Falco event consumer</p>
 <br>
-<p>    import json</p>
 <br>
-<p>    import requests</p>
 <br>
-<p>    def handle_falco_events():</p>
 <br>
-<p>        resp = requests.get(</p>
 <br>
-<p>            "http://localhost:8765/events",</p>
 <br>
-<p>            stream=True</p>
 <br>
-<p>        )</p>
 <br>
-<p>        for line in resp.iter_lines():</p>
 <br>
-<p>            if line:</p>
+<p>"names": [</p>
 <br>
-<p>                event = json.loads(line)</p>
 <br>
-<p>                priority = event.get("priority")</p>
 <br>
-<p>                rule = event.get("rule")</p>
 <br>
-<p>                output = event.get("output")</p>
 <br>
-<p>                if priority in ["CRITICAL", "EMERGENCY"]:</p>
 <br>
-<p>                    trigger_incident_response(rule, output)</p>
 <br>
-<p>                elif priority in ["WARNING", "ERROR"]:</p>
 <br>
-<p>                    alert_security_team(rule, output)</p>
 <br>
-<p>Runtime Security Best Practices   </p>
 <br>
-<p>    runtime_security:</p>
+<p>"accept4", "bind", "connect", "listen",</p>
 <br>
-<p>      images:</p>
 <br>
-<p>        - scan_before_run</p>
 <br>
-<p>        - block_known_vulnerable</p>
 <br>
-<p>        - enforce_signing</p>
 <br>
-<p>      containers:</p>
 <br>
-<p>        - read_only_root_filesystem: true</p>
 <br>
-<p>        - drop_all_capabilities</p>
 <br>
-<p>        - add_capabilities_selectively</p>
 <br>
-<p>        - run_as_non_root</p>
 <br>
-<p>        - seccomp: custom_profile</p>
+<p>"read", "write", "open", "close",</p>
 <br>
-<p>        - apparmor: enforced</p>
 <br>
-<p>        - no_new_privileges: true</p>
 <br>
-<p>      monitoring:</p>
 <br>
-<p>        - falco_runtime_detection</p>
 <br>
-<p>        - audit_log_collection</p>
 <br>
-<p>        - behavioral_baselining</p>
 <br>
-<p>Conclusion   </p>
+<br>
+<br>
+<br>
+<p>"mmap", "munmap", "brk",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"exit", "exit_group", "getpid"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"action": "SCMP_ACT_ALLOW"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Apply profiles in Kubernetes: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>apiVersion: v1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kind: Pod</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>metadata:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: secure-app</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>securityContext:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>seccompProfile:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>type: Localhost</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>localhostProfile: profiles/audit.json</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>containers:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- name: app</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>image: myapp:latest</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>securityContext:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>seccompProfile:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>type: Localhost</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>localhostProfile: profiles/strict.json</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>AppArmor </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>AppArmor uses path-based access control: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>AppArmor profile for container</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>#include </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>profile container-strict flags=(attach_disconnected) {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>#include </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Network</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>network inet tcp,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>network inet udp,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Filesystem</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>/ r,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>/proc/*/status r,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>/etc/resolv.conf r,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>/app/** r,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>/app/bin ix,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Deny everything else</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>deny /etc/shadow r,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>deny /sys/** r,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>deny /proc/** w,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELinux for Containers </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELinux provides mandatory access control: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Enable SELinux for container runtime</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>sudo setenforce 1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>sudo semanage permissive -a container_t</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Apply SELinux context to container</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>podman run \</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\--security-opt label=type:container_t \</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\--security-opt label=level:s0:c1,c2 \</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>nginx</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Check SELinux context</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ps -eZ | grep container</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Falco Runtime Detection </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Falco detects anomalous behavior: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>falco-rules.yaml</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- rule: Terminal shell in container</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>desc: Detect shell spawn in container</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>condition: ></p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spawned_process </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>and container </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>and proc.name in (bash, zsh, sh, dash)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>and not proc.pname in (docker, kubectl)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>output: ></p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Shell spawned in container (%user_name %container_name)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>priority: WARNING</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- rule: Unexpected outbound connection</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>desc: Detect reverse shell or data exfiltration</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>condition: ></p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>outbound </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>and container </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>and not allowed_outbound_destination</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>output: ></p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Unexpected outbound connection from container</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>priority: CRITICAL</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- rule: Write to sensitive path</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>desc: Detect attempts to write to host filesystem</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>condition: ></p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>open_write </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>and container </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>and fd.name startswith /etc/cron</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>output: ></p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Write to sensitive host path from container</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>priority: CRITICAL</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Falco event consumer</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import json</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import requests</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def handle_falco_events():</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>resp = requests.get(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"http://localhost:8765/events",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>stream=True</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for line in resp.iter_lines():</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if line:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>event = json.loads(line)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>priority = event.get("priority")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>rule = event.get("rule")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>output = event.get("output")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if priority in ["CRITICAL", "EMERGENCY"]:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>trigger_incident_response(rule, output)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>elif priority in ["WARNING", "ERROR"]:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>alert_security_team(rule, output)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Runtime Security Best Practices </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>runtime_security:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>images:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- scan_before_run</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- block_known_vulnerable</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- enforce_signing</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>containers:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- read_only_root_filesystem: true</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- drop_all_capabilities</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- add_capabilities_selectively</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- run_as_non_root</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- seccomp: custom_profile</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- apparmor: enforced</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- no_new_privileges: true</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>monitoring:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- falco_runtime_detection</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- audit_log_collection</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- behavioral_baselining</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Container runtime security requires multiple layers. Use seccomp to restrict system calls, AppArmor for path-based controls, and SELinux for mandatory access. Deploy Falco for runtime threat detection. Run containers with the minimum capabilities required. Monitor and alert on suspicious behavior in real time.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -359,6 +1593,7 @@
       <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

@@ -20,7 +20,7 @@ Locust| Python| Python| Python-native, distributed by design| Free (OSS)
 wrk2| C| Lua scripting| Maximum raw throughput, micro-benchmarks| Free (OSS)  
 Vegeta| Go| CLI + targets file| Simple HTTP load generation, pipelining| Free (OSS)  
 Hey| Go| CLI only| Quick one-liner load tests| Free (OSS)  
-
+  
 ## Designing a Realistic Load Test
 
 Element| Bad (Unrealistic)| Good (Realistic)  
@@ -30,7 +30,7 @@ Request Paths| 100% on /api/health (simple endpoint)| Traffic distributed across
 Think Time| 0ms between requests (robot behavior)| 1-5s pauses between actions (human behavior)  
 Ramp Pattern| Instant 10,000 concurrent users| Ramp from 0 → 1,000 → 5,000 → 10,000 over 10 minutes  
 Assertions| Only check HTTP 200| Check: status code, response time < 200ms, body contains expected data, no errors in response  
-
+  
 ## Key Load Testing Metrics
 
 Metric| What It Means| Red Flag  
@@ -41,17 +41,18 @@ P99 Latency| 99% tail latency — worst-case users| P99 > 1s for any endpoint
 Throughput (RPS)| Requests per second the system can handle| Throughput plateaus while RPS increases (saturation)  
 Error Rate| % of requests that fail| >0.1% for production-critical paths  
 Concurrent Users| Simultaneous virtual users| System crashes before reaching target concurrency  
-
+  
 ## k6 Example: Production-Ready Load Test
-
+    
+    
     // load-test.js — realistic e-commerce load test
     import http from 'k6/http';
     import { check, sleep, group } from 'k6';
     import { Rate, Trend } from 'k6/metrics';
-
+    
     const errorRate = new Rate('errors');
     const checkoutTime = new Trend('checkout_time');
-
+    
     export const options = {
       stages: [
         { duration: '2m', target: 100 },   // Ramp to 100 users
@@ -65,25 +66,25 @@ Concurrent Users| Simultaneous virtual users| System crashes before reaching tar
         errors: ['rate<0.01'],             // Error rate < 1%
       },
     };
-
+    
     export default function () {
       // Browse products
       const browse = http.get('https://api.example.com/products?page=1');
       check(browse, { 'browse OK': (r) => r.status === 200 });
       sleep(2);
-
+    
       // Search
       const search = http.get('https://api.example.com/search?q=laptop');
       check(search, { 'search OK': (r) => r.status === 200 });
       sleep(1);
-
+    
       // View product detail (10% of users)
       if (Math.random() < 0.1) {
         const detail = http.get('https://api.example.com/products/42');
         check(detail, { 'detail OK': (r) => r.status === 200 });
         sleep(1);
       }
-
+    
       // Checkout (2% of users)
       if (Math.random() < 0.02) {
         const checkout = http.post('https://api.example.com/checkout', JSON.stringify({

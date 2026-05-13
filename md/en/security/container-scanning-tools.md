@@ -7,22 +7,166 @@ url: https://dingjiu1989-hue.github.io/en/security/container-scanning-tools.html
 ---
 
 # Container Scanning Tools: Securing Images in CI/CD
+
+# Container Scanning Tools: Securing Images in CI/CD
+
+  
+
+
+# Container Scanning Tools: Securing Images in CI/CD
+
+  
+  
+  
+  
+
+
+# Container Scanning Tools: Securing Images in CI/CD
+
+  
+  
+  
+  
+  
+  
+  
+
+
+# Container Scanning Tools: Securing Images in CI/CD
+
+  
+  
+  
+  
+  
+  
+  
+
+
 Container image scanning identifies vulnerabilities in container images before deployment. Scanning integrates into CI/CD pipelines to prevent vulnerable images from reaching production.
 
-## Tools
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+##  Tools
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Trivy is open-source and covers OS packages and language dependencies. Fast scanning with comprehensive vulnerability database. Integrates with CI/CD and Kubernetes. Free for all use cases.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Snyk provides developer-friendly scanning with fix suggestions. Supports container images and IaC scanning. Commercial product with per-developer pricing. Good reporting and policy management.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Clair is CoreOS's open-source scanner. Static analysis of container layers. Good for self-hosted scanning infrastructure. Limited language-specific scanning.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Docker Scout integrates with Docker Desktop and Hub. Provides contextual vulnerability analysis based on usage. Good for teams already using Docker ecosystem.
 
-## CI/CD Integration
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+##  CI/CD Integration
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Scan images after build, before push to registry. Gate deployments on scan results. Fail builds on critical vulnerabilities. Allowlist known acceptable vulnerabilities. Schedule regular scanning for deployed images.
 
-## Best Practices
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+##  Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Scan early and often. Use minimal base images (distroless, Alpine). Pin base image versions. Subscribe to vulnerability notifications. Maintain a vulnerability management policy. Regularly update base images.

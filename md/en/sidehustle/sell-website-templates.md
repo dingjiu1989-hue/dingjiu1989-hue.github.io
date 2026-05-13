@@ -22,7 +22,7 @@ Webflow Templates| 30% (author gets 70%)| Webflow designers| Webflow templates (
 Framer Templates| 30% (author gets 70%)| Framer designers| Framer templates, interactive portfolios| Exclusive to Framer  
 Tailwind UI / Cruip| Your own pricing (direct sales)| Developers (framework-specific)| Tailwind, Next.js, Vue, React templates| Your own site = 100% revenue  
 Gumroad / LemonSqueezy| 5-10%| Your marketing drives traffic| Any digital product, own brand, own audience| Non-exclusive  
-
+  
 ## What Sells in 2026
 
 **Framework-specific starter kits (highest value):** The most lucrative segment is paid boilerplates and starter kits for popular frameworks. Examples: SaaS boilerplates (Next.js + Supabase + Stripe), Astro themes with built-in SEO, and Remix/React Router admin dashboards. These sell for $79-299 and have a self-selecting audience (developers who value their time). Unlike generic HTML templates ($15-30), framework-specific kits command higher prices because they save developers 20-40 hours of setup. The Tailwind UI model ($299 for lifetime access to all components) is the gold standard.
@@ -40,7 +40,7 @@ Framework starter kit (direct sales)| $79-299| 20-100+| $2,000-15,000
 UI Kit (Figma + code, Creative Market)| $39-89| 30-150+| $800-6,000  
 Comprehensive design system| $199-499| 10-50+| $2,000-12,000  
 SaaS boilerplate (direct)| $149-299| 30-150+| $4,500-30,000  
-
+  
 _Note: These are realistic ranges from successful authors — not "get rich quick" numbers. Most template authors make $0-500/mo for their first year._
 
 ## The Playbook

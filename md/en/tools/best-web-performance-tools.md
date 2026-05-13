@@ -20,7 +20,7 @@ Slow sites lose users. But "performance" isn't one thing — it's lab testing, f
 **Core Web Vitals**|  Yes (lab only)| Yes (lab + field)| Yes (RUM — real users)| Yes (synthetic)  
 **Free tier**|  Free (open source)| Free (public tests)| Free (5K errors/mo)| Free (50K checks/mo)  
 **CI/CD**|  Lighthouse CI| WebPageTest API| Release tracking| Playwright-based checks  
-
+  
 ## Lighthouse — The First Line of Defense
 
 Lighthouse is built into Chrome DevTools and runs simulated audits for performance, accessibility, SEO, and best practices. Lighthouse CI lets you set performance budgets and fail builds that regress. It's the starting point for any performance effort.
@@ -70,5 +70,5 @@ CI performance budget| Lighthouse CI| Every build
 Deep performance debug| WebPageTest| Before/after optimizations  
 Real user errors + perf| Sentry| Continuous (production)  
 Synthetic monitoring| Checkly| Every 5-15 min (production)  
-
+  
 **Bottom line:** Lighthouse for dev and CI, Sentry for production errors and real-user performance, Checkly for synthetic uptime/flow monitoring, WebPageTest for deep dives. These four tools together cost $0 for small projects and give you complete visibility. See our [hosting comparison](</en/compare/vercel-vs-netlify-vs-cloudflare.html>) — good hosting makes performance easier.

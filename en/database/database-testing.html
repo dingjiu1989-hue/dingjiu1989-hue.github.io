@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-testing.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "454",
+      "wordCount": "785",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-testing.html"},
-      "articleBody": "Database Testing Strategies for Developers Database Testing Strategies Database testing is often the weakest part of test suites. Effective strategies catch issues before production. Unit Tests with In-Memory DB In-memory databases provide fast feedback during development: @pytest.fixture def repo(): conn = sqlite3.connect(':memory:') conn.execute(\"CREATE TABLE users (id INTEGER PRIMARY KEY, email TEXT)\") return UserRepository(conn) def test_find_by_email(repo): repo.create(\"alice@example.com\", \"Alice\") user = repo.find_by_email(\"alice@example.com\") assert user is not None Integration Tests with Testcontainers Testcontainers spins up disposable database containers: @pytest.fixture(scope=\"module\") def postgres(): with PostgresContainer(\"postgres:16\") as pg: yield pg def test_order_total(repo): repo.create(\"2026-01-01\", 100.00) total = repo.total_sales_between(\"2026-01-01\", \"2026-01-31\") assert total == 100.00 Migration Testing Test that migrations are backward-compatible and rollbacks work: def test_rollback(): apply_migration(\"V1__initial.sql\") apply_migration(\"V2__add_column.sql\") rollback_migration(\"V2__add_column.sql\") columns = get_table_columns(\"users\") assert \"new_column\" not in columns Data Fixtures Use factory patterns for test data: class UserFactory: email = factory.Sequence(lambda n: f\"user{n}@example.com\") name = factory.Faker('name') Conclusion Use in-memory databases for fast unit tests. Use Testcontainers for integration tests against real databases. Test migrations for backward compatibility. Use factory patterns for data fixtures. The most valuable test is one that uses a real database."
+      "articleBody": "Database Testing Strategies for Developers Database Testing Strategies for Developers Database Testing Strategies for Developers Database Testing Strategies for Developers Database Testing Strategies Database testing is often the weakest part of test suites. Effective strategies catch issues before production. Unit Tests with In-Memory DB In-memory databases provide fast feedback during development: @pytest.fixture def repo(): conn = sqlite3.connect(':memory:') conn.execute(\"CREATE TABLE users (id INTEGER PRIMARY KEY, email TEXT)\") return UserRepository(conn) def test_find_by_email(repo): repo.create(\"alice@example.com\", \"Alice\") user = repo.find_by_email(\"alice@example.com\") assert user is not None Integration Tests with Testcontainers Testcontainers spins up disposable database containers: @pytest.fixture(scope=\"module\") def postgres(): with PostgresContainer(\"postgres:16\") as pg: yield pg def test_order_total(repo): repo.create(\"2026-01-01\", 100.00) total = repo.total_sales_between(\"2026-01-01\", \"2026-01-31\") assert total == 100.00 Migration Testing Test that migrations are backward-compatible and rollbacks work: def test_rollback(): apply_migration(\"V1__initial.sql\") apply_migration(\"V2__add_column.sql\") rollback_migration(\"V2__add_column.sql\") columns = get_table_columns(\"users\") assert \"new_column\" not in columns Data Fixtures Use factory patterns for test data: class UserFactory: email = factory.Sequence(lambda n: f\"user{n}@example.com\") name = factory.Faker('name') Conclusion Use in-memory databases for fast unit tests. Use Testcontainers for integration tests against real databases. Test migrations for backward compatibility. Use factory patterns for data fixtures. The most valuable test is one that uses a real database."
     }
     </script>
     <script type="application/ld+json">
@@ -77,73 +77,416 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-testing.png" alt="Database Testing Strategies for Developers" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Testing Strategies for Developers</h1>
 <br>
-<p>Database Testing Strategies   </p>
-<p>Database testing is often the weakest part of test suites. Effective strategies catch issues before production.   </p>
-<p>Unit Tests with In-Memory DB   </p>
-<p>In-memory databases provide fast feedback during development:   </p>
+<h1>Database Testing Strategies for Developers</h1>
 <br>
-<p>    @pytest.fixture</p>
 <br>
-<p>    def repo():</p>
 <br>
-<p>        conn = sqlite3.connect(':memory:')</p>
 <br>
-<p>        conn.execute("CREATE TABLE users (id INTEGER PRIMARY KEY, email TEXT)")</p>
+<h1>Database Testing Strategies for Developers</h1>
 <br>
-<p>        return UserRepository(conn)</p>
 <br>
-<p>    def test_find_by_email(repo):</p>
 <br>
-<p>        repo.create("alice@example.com", "Alice")</p>
 <br>
-<p>        user = repo.find_by_email("alice@example.com")</p>
 <br>
-<p>        assert user is not None</p>
 <br>
-<p>Integration Tests with Testcontainers   </p>
-<p>Testcontainers spins up disposable database containers:   </p>
 <br>
-<p>    @pytest.fixture(scope="module")</p>
+<h1>Database Testing Strategies for Developers</h1>
 <br>
-<p>    def postgres():</p>
 <br>
-<p>        with PostgresContainer("postgres:16") as pg:</p>
 <br>
-<p>            yield pg</p>
 <br>
-<p>    def test_order_total(repo):</p>
 <br>
-<p>        repo.create("2026-01-01", 100.00)</p>
 <br>
-<p>        total = repo.total_sales_between("2026-01-01", "2026-01-31")</p>
 <br>
-<p>        assert total == 100.00</p>
 <br>
-<p>Migration Testing   </p>
-<p>Test that migrations are backward-compatible and rollbacks work:   </p>
 <br>
-<p>    def test_rollback():</p>
 <br>
-<p>        apply_migration("V1__initial.sql")</p>
+<p>Database Testing Strategies </p>
 <br>
-<p>        apply_migration("V2__add_column.sql")</p>
 <br>
-<p>        rollback_migration("V2__add_column.sql")</p>
 <br>
-<p>        columns = get_table_columns("users")</p>
 <br>
-<p>        assert "new_column" not in columns</p>
 <br>
-<p>Data Fixtures   </p>
-<p>Use factory patterns for test data:   </p>
 <br>
-<p>    class UserFactory:</p>
 <br>
-<p>        email = factory.Sequence(lambda n: f"user{n}@example.com")</p>
+<p>Database testing is often the weakest part of test suites. Effective strategies catch issues before production. </p>
 <br>
-<p>        name = factory.Faker('name')</p>
 <br>
-<p>Conclusion   </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Unit Tests with In-Memory DB </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>In-memory databases provide fast feedback during development: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@pytest.fixture</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def repo():</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>conn = sqlite3.connect(':memory:')</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>conn.execute("CREATE TABLE users (id INTEGER PRIMARY KEY, email TEXT)")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return UserRepository(conn)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def test_find_by_email(repo):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>repo.create("alice@example.com", "Alice")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>user = repo.find_by_email("alice@example.com")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>assert user is not None</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Integration Tests with Testcontainers </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Testcontainers spins up disposable database containers: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@pytest.fixture(scope="module")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def postgres():</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>with PostgresContainer("postgres:16") as pg:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>yield pg</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def test_order_total(repo):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>repo.create("2026-01-01", 100.00)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>total = repo.total_sales_between("2026-01-01", "2026-01-31")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>assert total == 100.00</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Migration Testing </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Test that migrations are backward-compatible and rollbacks work: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def test_rollback():</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>apply_migration("V1__initial.sql")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>apply_migration("V2__add_column.sql")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>rollback_migration("V2__add_column.sql")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>columns = get_table_columns("users")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>assert "new_column" not in columns</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Data Fixtures </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Use factory patterns for test data: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class UserFactory:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>email = factory.Sequence(lambda n: f"user{n}@example.com")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name = factory.Faker('name')</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Use in-memory databases for fast unit tests. Use Testcontainers for integration tests against real databases. Test migrations for backward compatibility. Use factory patterns for data fixtures. The most valuable test is one that uses a real database.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -160,6 +503,7 @@
       <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

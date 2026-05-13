@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/rest-api-design.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1266",
+      "wordCount": "1902",
       "keywords": "Architecture, System Design",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/rest-api-design.html"},
-      "articleBody": "REST API Design Best Practices REST (Representational State Transfer) remains the dominant architectural style for web APIs. A well-designed REST API is intuitive, consistent, and easy to maintain. This article covers the core principles and practical guidelines for designing REST APIs that developers love to use. Use Consistent Resource Naming Your API endpoints represent resources. Use nouns, not verbs, and stick to a consistent naming convention. GET /users # Good GET /getUsers # Bad POST /createUser # Bad Use plural nouns for collections (`/users`, `/orders`) and nest resources to express relationships (`/users/123/orders`). Avoid deep nesting beyond two or three levels. If you find yourself nesting four levels deep, consider flattening the structure or using query parameters. Leverage HTTP Methods Correctly Each HTTP method has a specific semantic meaning. Use them correctly: * `GET` \u2014 Retrieve a resource or collection. Idempotent and safe. * `POST` \u2014 Create a new resource. Not idempotent. * `PUT` \u2014 Replace an entire resource. Idempotent. * `PATCH` \u2014 Partially update a resource. Idempotent when used with merge-style patches. * `DELETE` \u2014 Remove a resource. Idempotent. A common mistake is using POST for everything. Proper method usage makes your API self-documenting and allows HTTP clients to make intelligent caching and retry decisions. Use Proper HTTP Status Codes Your API should return meaningful status codes. Group them logically: * **2xx Success**: `200 OK` for successful GET/PUT/PATCH, `201 Created` for POST, `204 No Content` for DELETE. * **3xx Redirection**: `301 Moved Permanently`, `303 See Other` for redirecting after a POST. * **4xx Client Error**: `400 Bad Request` for malformed input, `401 Unauthorized` when authentication is missing, `403 Forbidden` when the user lacks permission, `404 Not Found`, `409 Conflict` for duplicate resources, `422 Unprocessable Entity` for validation errors. * **5xx Server Error**: `500 Internal Server Error`, `502 Bad Gateway`, `503 Service Unavailable`. Returning `200 OK` for everything forces API consumers to inspect the response body to determine success or failure. This defeats the purpose of HTTP status codes. Pagination, Filtering, and Sorting Collections should always support pagination, filtering, and sorting. GET /users?page=2&per_page=20 GET /users?sort=created_at&order=desc GET /users?filter[status]=active Return pagination metadata in the response: { \"data\": [...], \"pagination\": { \"page\": 2, \"per_page\": 20, \"total\": 153, \"total_pages\": 8 } } Using cursor-based pagination is recommended for large, frequently updated datasets, as it is more performant than offset-based pagination. Consistent Error Responses Design a standard error response format and use it everywhere: { \"error\": { \"code\": \"VALIDATION_ERROR\", \"message\": \"Validation failed\", \"details\": [ { \"field\": \"email\", \"message\": \"Must be a valid email address\" } ] } } Include a machine-readable error code, a human-readable message, and detailed validation errors when appropriate. This allows clients to handle errors programmatically. Versioning APIs evolve. Plan for it from day one. The simplest approach is URL-based versioning: /api/v1/users /api/v2/users Header-based versioning (e.g., `Accept: application/vnd.myapi.v1+json`) is more RESTful but harder for clients to discover. Choose whichever approach your consumers will find more intuitive. Use HATEOAS for Discoverability HATEOAS (Hypermedia as the Engine of Application State) includes links in responses to guide clients: { \"id\": 123, \"name\": \"John Doe\", \"_links\": { \"self\": { \"href\": \"/users/123\" }, \"orders\": { \"href\": \"/users/123/orders\" } } } While many APIs skip HATEOAS, it significantly improves discoverability and reduces the need for external documentation for navigating resource relationships. Authentication and Authorization Use industry-standard authentication mechanisms. Token-based auth (JWT) is the most common choice for REST APIs. Include tokens in the `Authorization` header: Authorization: Bearer Use scopes or claims within the token to implement fine-grained authorization. Always use HTTPS in production to protect tokens and data in transit. Rate Limiting Protect your API from abuse by implementing rate limiting. Return rate limit information in response headers: X-RateLimit-Limit: 100 X-RateLimit-Remaining: 42 X-RateLimit-Reset: 1640995200 When a client exceeds the limit, return `429 Too Many Requests` with a `Retry-After` header. Documentation An API is only as good as its documentation. Use OpenAPI/Swagger to document your API. Generate interactive documentation that allows developers to test endpoints directly from the browser. Keep your documentation in sync with your implementation by using a code-first approach where the OpenAPI spec is generated from annotations in your code. Summary Great REST API design comes down to consistency and following conventions. Use proper HTTP methods and status codes, name resources with plural nouns, version your API, and document it thoroughly. When in doubt, follow the principle of least surprise -- your API should work the way developers expect it to."
+      "articleBody": "REST API Design Best Practices REST API Design Best Practices REST API Design Best Practices REST API Design Best Practices REST (Representational State Transfer) remains the dominant architectural style for web APIs. A well-designed REST API is intuitive, consistent, and easy to maintain. This article covers the core principles and practical guidelines for designing REST APIs that developers love to use. Use Consistent Resource Naming Your API endpoints represent resources. Use nouns, not verbs, and stick to a consistent naming convention. GET /users # Good GET /getUsers # Bad POST /createUser # Bad Use plural nouns for collections (`/users`, `/orders`) and nest resources to express relationships (`/users/123/orders`). Avoid deep nesting beyond two or three levels. If you find yourself nesting four levels deep, consider flattening the structure or using query parameters. Leverage HTTP Methods Correctly Each HTTP method has a specific semantic meaning. Use them correctly: * `GET` \u2014 Retrieve a resource or collection. Idempotent and safe. * `POST` \u2014 Create a new resource. Not idempotent. * `PUT` \u2014 Replace an entire resource. Idempotent. * `PATCH` \u2014 Partially update a resource. Idempotent when used with merge-style patches. * `DELETE` \u2014 Remove a resource. Idempotent. A common mistake is using POST for everything. Proper method usage makes your API self-documenting and allows HTTP clients to make intelligent caching and retry decisions. Use Proper HTTP Status Codes Your API should return meaningful status codes. Group them logically: * **2xx Success**: `200 OK` for successful GET/PUT/PATCH, `201 Created` for POST, `204 No Content` for DELETE. * **3xx Redirection**: `301 Moved Permanently`, `303 See Other` for redirecting after a POST. * **4xx Client Error**: `400 Bad Request` for malformed input, `401 Unauthorized` when authentication is missing, `403 Forbidden` when the user lacks permission, `404 Not Found`, `409 Conflict` for duplicate resources, `422 Unprocessable Entity` for validation errors. * **5xx Server Error**: `500 Internal Server Error`, `502 Bad Gateway`, `503 Service Unavailable`. Returning `200 OK` for everything forces API consumers to inspect the response body to determine success or failure. This defeats the purpose of HTTP status codes. Pagination, Filtering, and Sorting Collections should always support pagination, filtering, and sorting. GET /users?page=2&per;_page=20 GET /users?sort=created_at\u2134=desc GET /users?filter[status]=active Return pagination metadata in the response: { \"data\": [...], \"pagination\": { \"page\": 2, \"per_page\": 20, \"total\": 153, \"total_pages\": 8 } } Using cursor-based pagination is recommended for large, frequently updated datasets, as it is more performant than offset-based pagination. Consistent Error Responses Design a standard error response format and use it everywhere: { \"error\": { \"code\": \"VALIDATION_ERROR\", \"message\": \"Validation failed\", \"details\": [ { \"field\": \"email\", \"message\": \"Must be a valid email address\" } ] } } Include a machine-readable error code, a human-readable message, and detailed validation errors when appropriate. This allows clients to handle errors programmatically. Versioning APIs evolve. Plan for it from day one. The simplest approach is URL-based versioning: /api/v1/users /api/v2/users Header-based versioning (e.g., `Accept: application/vnd.myapi.v1+json`) is more RESTful but harder for clients to discover. Choose whichever approach your consumers will find more intuitive. Use HATEOAS for Discoverability HATEOAS (Hypermedia as the Engine of Application State) includes links in responses to guide clients: { \"id\": 123, \"name\": \"John Doe\", \"_links\": { \"self\": { \"href\": \"/users/123\" }, \"orders\": { \"href\": \"/users/123/orders\" } } } While many APIs skip HATEOAS, it significantly improves discoverability and reduces the need for external documentation for navigating resource relationships. Authentication and Authorization Use industry-standard authentication mechanisms. Token-based auth (JWT) is the most common choice for REST APIs. Include tokens in the `Authorization` header: Authorization: Bearer Use scopes or claims within the token to implement fine-grained authorization. Always use HTTPS in production to protect tokens and data in transit. Rate Limiting Protect your API from abuse by implementing rate limiting. Return rate limit information in response headers: X-RateLimit-Limit: 100 X-RateLimit-Remaining: 42 X-RateLimit-Reset: 1640995200 When a client exceeds the limit, return `429 Too Many Requests` with a `Retry-After` header. Documentation An API is only as good as its documentation. Use OpenAPI/Swagger to document your API. Generate interactive documentation that allows developers to test endpoints directly from the browser. Keep your documentation in sync with your implementation by using a code-first approach where the OpenAPI spec is generated from annotations in your code. Summary Great REST API design comes down to consistency and following conventions. Use proper HTTP methods and status codes, name resources with plural nouns, version your API, and document it thoroughly. When in doubt, follow the principle of least surprise -- your API should work the way developers expect it to."
     }
     </script>
     <script type="application/ld+json">
@@ -77,135 +77,812 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/rest-api-design.png" alt="REST API Design Best Practices" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>REST API Design Best Practices</h1>
 <br>
-<p>REST (Representational State Transfer) remains the dominant architectural style for web APIs. A well-designed REST API is intuitive, consistent, and easy to maintain. This article covers the core principles and practical guidelines for designing REST APIs that developers love to use.   </p>
-<p>Use Consistent Resource Naming   </p>
-<p>Your API endpoints represent resources. Use nouns, not verbs, and stick to a consistent naming convention.   </p>
+<h1>REST API Design Best Practices</h1>
 <br>
-<p>    GET /users          # Good</p>
 <br>
-<p>    GET /getUsers       # Bad</p>
 <br>
-<p>    POST /createUser    # Bad</p>
 <br>
-<p>Use plural nouns for collections (`/users`, `/orders`) and nest resources to express relationships (`/users/123/orders`). Avoid deep nesting beyond two or three levels. If you find yourself nesting four levels deep, consider flattening the structure or using query parameters.   </p>
-<p>Leverage HTTP Methods Correctly   </p>
-<p>Each HTTP method has a specific semantic meaning. Use them correctly:   </p>
+<h1>REST API Design Best Practices</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>REST API Design Best Practices</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>REST (Representational State Transfer) remains the dominant architectural style for web APIs. A well-designed REST API is intuitive, consistent, and easy to maintain. This article covers the core principles and practical guidelines for designing REST APIs that developers love to use. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Use Consistent Resource Naming </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Your API endpoints represent resources. Use nouns, not verbs, and stick to a consistent naming convention. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>GET /users # Good</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>GET /getUsers # Bad</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>POST /createUser # Bad</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Use plural nouns for collections (`/users`, `/orders`) and nest resources to express relationships (`/users/123/orders`). Avoid deep nesting beyond two or three levels. If you find yourself nesting four levels deep, consider flattening the structure or using query parameters. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Leverage HTTP Methods Correctly </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Each HTTP method has a specific semantic meaning. Use them correctly: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>* `GET` — Retrieve a resource or collection. Idempotent and safe.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* `POST` — Create a new resource. Not idempotent.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* `PUT` — Replace an entire resource. Idempotent.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* `PATCH` — Partially update a resource. Idempotent when used with merge-style patches.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* `DELETE` — Remove a resource. Idempotent.</p>
 <br>
-<p>A common mistake is using POST for everything. Proper method usage makes your API self-documenting and allows HTTP clients to make intelligent caching and retry decisions.   </p>
-<p>Use Proper HTTP Status Codes   </p>
-<p>Your API should return meaningful status codes. Group them logically:   </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>A common mistake is using POST for everything. Proper method usage makes your API self-documenting and allows HTTP clients to make intelligent caching and retry decisions. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Use Proper HTTP Status Codes </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Your API should return meaningful status codes. Group them logically: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>* **2xx Success**: `200 OK` for successful GET/PUT/PATCH, `201 Created` for POST, `204 No Content` for DELETE.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **3xx Redirection**: `301 Moved Permanently`, `303 See Other` for redirecting after a POST.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **4xx Client Error**: `400 Bad Request` for malformed input, `401 Unauthorized` when authentication is missing, `403 Forbidden` when the user lacks permission, `404 Not Found`, `409 Conflict` for duplicate resources, `422 Unprocessable Entity` for validation errors.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **5xx Server Error**: `500 Internal Server Error`, `502 Bad Gateway`, `503 Service Unavailable`.</p>
 <br>
-<p>Returning `200 OK` for everything forces API consumers to inspect the response body to determine success or failure. This defeats the purpose of HTTP status codes.   </p>
-<p>Pagination, Filtering, and Sorting   </p>
-<p>Collections should always support pagination, filtering, and sorting.   </p>
 <br>
-<p>    GET /users?page=2&per_page=20</p>
 <br>
-<p>    GET /users?sort=created_at&order=desc</p>
 <br>
-<p>    GET /users?filter[status]=active</p>
 <br>
-<p>Return pagination metadata in the response:   </p>
 <br>
-<p>    {</p>
 <br>
-<p>      "data": [...],</p>
 <br>
-<p>      "pagination": {</p>
 <br>
-<p>        "page": 2,</p>
 <br>
-<p>        "per_page": 20,</p>
+<p>Returning `200 OK` for everything forces API consumers to inspect the response body to determine success or failure. This defeats the purpose of HTTP status codes. </p>
 <br>
-<p>        "total": 153,</p>
 <br>
-<p>        "total_pages": 8</p>
 <br>
-<p>      }</p>
 <br>
-<p>    }</p>
 <br>
-<p>Using cursor-based pagination is recommended for large, frequently updated datasets, as it is more performant than offset-based pagination.   </p>
-<p>Consistent Error Responses   </p>
-<p>Design a standard error response format and use it everywhere:   </p>
 <br>
-<p>    {</p>
 <br>
-<p>      "error": {</p>
+<p>Pagination, Filtering, and Sorting </p>
 <br>
-<p>        "code": "VALIDATION_ERROR",</p>
 <br>
-<p>        "message": "Validation failed",</p>
 <br>
-<p>        "details": [</p>
 <br>
-<p>          { "field": "email", "message": "Must be a valid email address" }</p>
 <br>
-<p>        ]</p>
 <br>
-<p>      }</p>
 <br>
-<p>    }</p>
+<p>Collections should always support pagination, filtering, and sorting. </p>
 <br>
-<p>Include a machine-readable error code, a human-readable message, and detailed validation errors when appropriate. This allows clients to handle errors programmatically.   </p>
-<p>Versioning   </p>
-<p>APIs evolve. Plan for it from day one. The simplest approach is URL-based versioning:   </p>
 <br>
-<p>    /api/v1/users</p>
 <br>
-<p>    /api/v2/users</p>
 <br>
-<p>Header-based versioning (e.g., `Accept: application/vnd.myapi.v1+json`) is more RESTful but harder for clients to discover. Choose whichever approach your consumers will find more intuitive.   </p>
-<p>Use HATEOAS for Discoverability   </p>
-<p>HATEOAS (Hypermedia as the Engine of Application State) includes links in responses to guide clients:   </p>
 <br>
-<p>    {</p>
 <br>
-<p>      "id": 123,</p>
 <br>
-<p>      "name": "John Doe",</p>
 <br>
-<p>      "_links": {</p>
 <br>
-<p>        "self": { "href": "/users/123" },</p>
 <br>
-<p>        "orders": { "href": "/users/123/orders" }</p>
+<p>GET /users?page=2&per;_page=20</p>
 <br>
-<p>      }</p>
 <br>
-<p>    }</p>
 <br>
-<p>While many APIs skip HATEOAS, it significantly improves discoverability and reduces the need for external documentation for navigating resource relationships.   </p>
-<p>Authentication and Authorization   </p>
-<p>Use industry-standard authentication mechanisms. Token-based auth (JWT) is the most common choice for REST APIs. Include tokens in the `Authorization` header:   </p>
 <br>
-<p>    Authorization: Bearer <token></p>
 <br>
-<p>Use scopes or claims within the token to implement fine-grained authorization. Always use HTTPS in production to protect tokens and data in transit.   </p>
-<p>Rate Limiting   </p>
-<p>Protect your API from abuse by implementing rate limiting. Return rate limit information in response headers:   </p>
 <br>
-<p>    X-RateLimit-Limit: 100</p>
 <br>
-<p>    X-RateLimit-Remaining: 42</p>
 <br>
-<p>    X-RateLimit-Reset: 1640995200</p>
 <br>
-<p>When a client exceeds the limit, return `429 Too Many Requests` with a `Retry-After` header.   </p>
-<p>Documentation   </p>
-<p>An API is only as good as its documentation. Use OpenAPI/Swagger to document your API. Generate interactive documentation that allows developers to test endpoints directly from the browser. Keep your documentation in sync with your implementation by using a code-first approach where the OpenAPI spec is generated from annotations in your code.   </p>
-<p>Summary   </p>
+<br>
+<p>GET /users?sort=created_atℴ=desc</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>GET /users?filter[status]=active</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Return pagination metadata in the response: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"data": [...],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"pagination": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"page": 2,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"per_page": 20,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"total": 153,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"total_pages": 8</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Using cursor-based pagination is recommended for large, frequently updated datasets, as it is more performant than offset-based pagination. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Consistent Error Responses </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Design a standard error response format and use it everywhere: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"error": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"code": "VALIDATION_ERROR",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"message": "Validation failed",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"details": [</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{ "field": "email", "message": "Must be a valid email address" }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Include a machine-readable error code, a human-readable message, and detailed validation errors when appropriate. This allows clients to handle errors programmatically. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Versioning </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>APIs evolve. Plan for it from day one. The simplest approach is URL-based versioning: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>/api/v1/users</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>/api/v2/users</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Header-based versioning (e.g., `Accept: application/vnd.myapi.v1+json`) is more RESTful but harder for clients to discover. Choose whichever approach your consumers will find more intuitive. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Use HATEOAS for Discoverability </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>HATEOAS (Hypermedia as the Engine of Application State) includes links in responses to guide clients: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"id": 123,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"name": "John Doe",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"_links": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"self": { "href": "/users/123" },</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"orders": { "href": "/users/123/orders" }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>While many APIs skip HATEOAS, it significantly improves discoverability and reduces the need for external documentation for navigating resource relationships. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Authentication and Authorization </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Use industry-standard authentication mechanisms. Token-based auth (JWT) is the most common choice for REST APIs. Include tokens in the `Authorization` header: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Authorization: Bearer </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Use scopes or claims within the token to implement fine-grained authorization. Always use HTTPS in production to protect tokens and data in transit. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Rate Limiting </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Protect your API from abuse by implementing rate limiting. Return rate limit information in response headers: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>X-RateLimit-Limit: 100</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>X-RateLimit-Remaining: 42</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>X-RateLimit-Reset: 1640995200</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>When a client exceeds the limit, return `429 Too Many Requests` with a `Retry-After` header. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Documentation </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>An API is only as good as its documentation. Use OpenAPI/Swagger to document your API. Generate interactive documentation that allows developers to test endpoints directly from the browser. Keep your documentation in sync with your implementation by using a code-first approach where the OpenAPI spec is generated from annotations in your code. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Summary </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Great REST API design comes down to consistency and following conventions. Use proper HTTP methods and status codes, name resources with plural nouns, version your API, and document it thoroughly. When in doubt, follow the principle of least surprise -- your API should work the way developers expect it to.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -222,6 +899,7 @@
       <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

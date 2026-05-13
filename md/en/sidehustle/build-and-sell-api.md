@@ -19,7 +19,7 @@ Advantage| Detail
 **Developer audience**|  Developers are willing to pay for tools that save them time.  
 **Scalable**|  One server serves thousands of customers (up to a point).  
 **No UI needed**|  Just build the API. Docs and a landing page are enough.  
-
+  
 ## API Ideas That Actually Make Money
 
 Category| Example APIs| Revenue Potential  
@@ -29,9 +29,10 @@ Category| Example APIs| Revenue Potential
 **Developer tools**|  Code formatting, screenshot generation, PDF generation| $2K-30K/mo  
 **Automation connectors**|  Unified APIs (chat, payments, shipping), webhook relays| $5K-50K/mo  
 **Niche data**|  Financial data, sports stats, weather, regulatory data| $10K-100K+/mo  
-
+  
 ## Building Your API — The Stack
-
+    
+    
     # Recommended API stack:
     Backend: Hono (fast, edge-native) or FastAPI (Python)
     Database: PostgreSQL (Supabase or Neon for managed)
@@ -51,7 +52,7 @@ Tier| Price| Requests/Month| Who It's For
 **Pro**|  $79-99/mo| 100,000| Startups, growing products  
 **Business**|  $299-499/mo| 1,000,000| Companies with production traffic  
 **Enterprise**|  Custom| Custom| High volume, SLA, dedicated support  
-
+  
 **Pricing tip:** Always have a free tier. Developers won't pay for an API they can't test first. The free tier is your marketing.
 
 ## Launch Strategy
@@ -61,6 +62,8 @@ Tier| Price| Requests/Month| Who It's For
   3. **Launch on Dev.to, Hacker News, Reddit, Product Hunt** — developer audiences.
   4. **Create SDKs** for popular languages (at minimum: Node.js, Python).
   5. **List on API marketplaces:** RapidAPI, API Layer, GitHub Marketplace.
+
+
 
 **Real examples:** ScreenshotAPI ($30K+/mo, screenshot generation), Bannerbear ($25K+/mo, image generation API), Geocodio ($15K+/mo, geocoding). All built by solo developers or tiny teams.
 

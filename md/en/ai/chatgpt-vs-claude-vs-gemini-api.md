@@ -26,7 +26,7 @@ Streaming| Yes| Yes| Yes
 JSON Mode| Yes (strict JSON mode)| Yes (structured output)| Yes (response schema)  
 Fine-Tuning| Yes (GPT-4o mini)| In preview| Yes  
 Caching| Automatic (50% discount)| Prompt caching (90% discount)| Context caching  
-
+  
 ## Best Use Cases Per API
 
 **ChatGPT API — Best for:** Broad general-purpose tasks, applications needing image generation alongside text, and projects where ecosystem maturity matters most (SDKs, community, tooling). **Weak spot:** Claude's larger context window often produces better results for long-document tasks.
@@ -45,7 +45,7 @@ BigCodeBench (complete)| 74.3%| 78.9%| 71.5%
 Multi-language Code| Excellent| Excellent| Good  
 Debugging| Very Good| Best in class| Good  
 Refactoring| Good| Excellent| Good  
-
+  
 ## Monthly Cost Calculator (per 1M input + 500K output tokens/day)
 
 API| Model| Daily Cost| Monthly Cost  
@@ -54,5 +54,5 @@ ChatGPT| GPT-4o| $7.50| $225
 Claude| Opus 4.7| $45.00| $1,350  
 Claude| Sonnet 4.6| $7.50| $225  
 Gemini| 2.5 Pro| $6.25| $188  
-
+  
 **Bottom line:** For most developer tools, Claude Sonnet 4.6 offers the best quality-to-cost ratio. Use Gemini for ultra-large document processing, ChatGPT when you need the broadest feature set, and Claude Opus 4.7 when coding quality is the absolute priority. The smartest strategy: implement a routing layer that sends tasks to the best model for each job. See also: [Best LLMs for Coding](</en/ai/best-llms-for-coding-2026.html>) and [AI API Integration Guide](</en/ai/ai-api-integration-guide.html>).

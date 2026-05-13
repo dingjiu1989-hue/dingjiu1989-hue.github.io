@@ -21,7 +21,7 @@ Code formatting shouldn't be a debate. But in 2026, there's a real choice: Prett
 **Languages supported**|  JS, TS, JSX, JSON, CSS, HTML, MD, YAML, GraphQL, etc.| JS, TS, JSX, JSON, CSS (growing)  
 **Editor integration**|  Every editor| VS Code, IntelliJ, Zed (fewer)  
 **Configuration**| .prettierrc| biome.json  
-
+  
 ## Prettier — The Safe, Universal Default
 
 Prettier ended the "tabs vs spaces" debate by being aggressively opinionated. It works with every editor, every CI pipeline, and every language you throw at it. The ecosystem is so dominant that "prettier" is synonymous with "auto-formatting."
@@ -47,7 +47,7 @@ Step| What to Do
 3\. Add linting| Enable Biome lint rules. Disable matching ESLint rules.  
 4\. Update CI| Replace `prettier --check` with `biome check`  
 5\. Update editor| Install Biome extension, disable Prettier for the project  
-
+  
 ## Decision Matrix
 
 Scenario| Best Formatter  
@@ -57,5 +57,5 @@ Large monorepo (slow Prettier)| **Biome**
 Need HTML, YAML, MD formatting| **Prettier**  
 Maximum editor/CI compatibility| **Prettier**  
 Want formatting + linting in one tool| **Biome**  
-
+  
 **Bottom line:** Biome is ready for new JavaScript/TypeScript projects — the speed difference is real, and replacing two tools with one is a win. Prettier remains the safe universal default, especially for mixed-language projects. The 97% compatibility means migration costs are low. See also: [Package Manager Comparison](</en/compare/pnpm-vs-npm-vs-yarn.html>) and [CI/CD Tools](</en/tools/best-cicd-tools-2026.html>).

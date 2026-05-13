@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/infrastructure-scanners-2026.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1955",
+      "wordCount": "4208",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/infrastructure-scanners-2026.html"},
-      "articleBody": "Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench Introduction Infrastructure security scanning is essential for catching misconfigurations before they reach production. The landscape of scanners in 2026 offers specialized tools for different layers: container images and filesystems, IaC templates, Kubernetes configurations, and runtime posture. This article covers Trivy, Checkov, Terrascan, and kube-bench. Trivy Aqua Security's comprehensive vulnerability scanner covering containers, filesystems, repositories, and IaC: # Installation brew install trivy # Scan container images trivy image nginx:latest trivy image --severity HIGH,CRITICAL my-app:latest # Scan filesystem trivy fs . # Scan git repository trivy repo https://github.com/org/my-repo # Scan IaC configurations trivy config ./terraform/ trivy config --severity CRITICAL ./kubernetes/ # Scan Kubernetes cluster trivy k8s cluster --report summary # Output formats trivy image my-app --format json --output results.json trivy image my-app --format sarif --output results.sarif trivy image my-app --format html --output report.html # In CI, fail on critical issues trivy image --exit-code 1 --severity CRITICAL my-app # trivy.yaml \u2014 configuration file severity: HIGH,CRITICAL format: table exit-code: 1 vulnerability: ignore-unfixed: true type: [os, library] scan: skip-dirs: - node_modules - .git scanners: - vuln - secret - misconfig **Key features**: Single binary, comprehensive vulnerability database, IaC scanning (Terraform, K8s, Dockerfile), secret detection, SBOM generation. The most versatile scanner in the ecosystem. Checkov Bridgecrew's policy-as-code scanner for IaC: # Installation pip install checkov # Scan Terraform checkov --directory terraform/ # Scan CloudFormation checkov -f cloudformation/template.yaml # Scan Kubernetes manifests checkov --directory k8s/ # Scan multiple frameworks checkov --directory . --framework terraform,kubernetes,helm # Output formats checkov -d . --output json > results.json checkov -d . --output junitxml > checkov-junit.xml # Soft fail (don't exit with error) checkov -d . --soft-fail # Skip specific checks checkov -d . --skip-check CKV_AWS_52,CKV_AWS_79 # External checks directory checkov -d . --external-checks-dir custom-checks/ # .checkov.yaml quiet: true compact: true skip-check: - CKV_AWS_52 # S3 bucket encryption (if using external KMS) - CKV2_AWS_6 # VPC flow logs (if not required) soft-fail: true framework: - terraform - kubernetes output: cli **Custom policies** in YAML: # custom-checks/custom_policy.yaml metadata: id: CUSTOM_AWS_001 name: \"EC2 instances must have detailed monitoring\" category: \"LOGGING\" definition: and: - cond: \"not_equals\" resource: \"aws_instance\" key: \"monitoring[0].enabled\" value: false - cond: \"not_equals\" resource: \"aws_launch_template\" key: \"monitoring[0].enabled\" value: false Terrascan Accurant's static code analyzer for IaC: # Installation brew install terrascan # Scan directory terrascan scan -d terraform/ # Scan specific IaC type terrascan scan -d . -i terraform # Scan Kubernetes terrascan scan -d k8s/ -i k8s # Policy categories terrascan scan -d . --policy-type aws,gcp # Output formats terrascan scan -d . -o json terrascan scan -d . -o yaml terrascan scan -d . -o sarif # Use specific policy set terrascan scan -d . --categories \"network,logging\" # Non-recursive scan terrascan scan -d . --non-recursive kube-bench CIS Kubernetes Benchmark validator: # Installation # Run as a job in the cluster kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml # Or install locally curl -L https://github.com/aquasecurity/kube-bench/releases/download/v0.9.0/kube-bench_0.9.0_linux_amd64.tar.gz | tar xz # Run benchmark ./kube-bench ./kube-bench --version 1.28 # Specify K8s version # Run specific checks ./kube-bench --check 1.1.1,1.1.2,1.2.1 # As a Kubernetes job kubectl get jobs kubectl logs job/kube-bench # kube-bench job apiVersion: batch/v1 kind: Job metadata: name: kube-bench spec: template: spec: hostPID: true containers: - name: kube-bench image: aquasec/kube-bench:latest command: [\"kube-bench\"] volumeMounts: - name: var-lib mountPath: /var/lib/etcd readOnly: true - name: etc-kubernetes mountPath: /etc/kubernetes readOnly: true restartPolicy: Never volumes: - name: var-lib hostPath: path: /var/lib/etcd - name: etc-kubernetes hostPath: path: /etc/kubernetes CI Integration # .github/workflows/infra-scan.yml name: Infrastructure Security Scan on: pull_request: paths: - 'terraform/**' - 'k8s/**' - 'Dockerfile' jobs: scan: runs-on: ubuntu-latest steps: - uses: actions/checkout@v4 - name: Run Trivy IaC scan uses: aquasecurity/trivy-action@master with: scan-type: 'config' scan-ref: '.' exit-code: '1' severity: 'HIGH,CRITICAL' - name: Run Checkov uses: bridgecrewio/checkov-action@master with: directory: terraform/ soft_fail: false framework: terraform - name: Run Terrascan uses: tenable/terrascan-action@main with: iac_type: 'terraform' iac_dir: 'terraform' Comparison | Feature | Trivy | Checkov | Terrascan | kube-bench | |---------|-------|---------|-----------|------------| | Scope | Containers, FS, IaC, K8s | IaC only (multi-cloud) | IaC only | K8s CIS only | | IaC support | TF, K8s, Dockerfile | TF, CF, K8s, ARM, Helm | TF, K8s, CF | N/A | | Policy engine | Built-in | Rego + custom YAML | Rego | CIS benchmark | | Speed | Fast | Moderate | Moderate | Fast | | False positives | Low | Medium | Medium | Low | Recommendations * **Comprehensive scanning**: Use Trivy as your primary scanner covering containers, IaC, and secrets. * **IaC policy enforcement**: Use Checkov with custom policies for organizational compliance requirements. * **Multi-cloud IaC**: Use Terrascan for its strong Rego-based policy engine across cloud providers. * **Kubernetes audit**: Run kube-bench regularly against every cluster for CIS compliance. * **CI pipeline**: Run all scanners in CI with appropriate severity thresholds. Fail on CRITICAL issues. The most robust approach runs all four scanners at different points: Trivy on every container build and IaC change, Checkov on Terraform PRs, Terrascan as a compliance check, and kube-bench as a scheduled cluster audit."
+      "articleBody": "Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench Introduction Infrastructure security scanning is essential for catching misconfigurations before they reach production. The landscape of scanners in 2026 offers specialized tools for different layers: container images and filesystems, IaC templates, Kubernetes configurations, and runtime posture. This article covers Trivy, Checkov, Terrascan, and kube-bench. Trivy Aqua Security's comprehensive vulnerability scanner covering containers, filesystems, repositories, and IaC: Installation brew install trivy Scan container images trivy image nginx:latest trivy image --severity HIGH,CRITICAL my-app:latest Scan filesystem trivy fs . Scan git repository trivy repo https://github.com/org/my-repo Scan IaC configurations trivy config ./terraform/ trivy config --severity CRITICAL ./kubernetes/ Scan Kubernetes cluster trivy k8s cluster --report summary Output formats trivy image my-app --format json --output results.json trivy image my-app --format sarif --output results.sarif trivy image my-app --format html --output report.html In CI, fail on critical issues trivy image --exit-code 1 --severity CRITICAL my-app trivy.yaml \u2014 configuration file severity: HIGH,CRITICAL format: table exit-code: 1 vulnerability: ignore-unfixed: true type: [os, library] scan: skip-dirs: \\\\\\\\\\\\\\\\- node_modules \\\\\\\\\\\\\\\\- .git scanners: \\\\\\\\\\\\\\\\- vuln \\\\\\\\\\\\\\\\- secret \\\\\\\\\\\\\\\\- misconfig **Key features**: Single binary, comprehensive vulnerability database, IaC scanning (Terraform, K8s, Dockerfile), secret detection, SBOM generation. The most versatile scanner in the ecosystem. Checkov Bridgecrew's policy-as-code scanner for IaC: Installation pip install checkov Scan Terraform checkov --directory terraform/ Scan CloudFormation checkov -f cloudformation/template.yaml Scan Kubernetes manifests checkov --directory k8s/ Scan multiple frameworks checkov --directory . --framework terraform,kubernetes,helm Output formats checkov -d . --output json > results.json checkov -d . --output junitxml > checkov-junit.xml Soft fail (don't exit with error) checkov -d . --soft-fail Skip specific checks checkov -d . --skip-check CKV_AWS_52,CKV_AWS_79 External checks directory checkov -d . --external-checks-dir custom-checks/ .checkov.yaml quiet: true compact: true skip-check: \\\\\\\\\\\\\\\\- CKV_AWS_52 # S3 bucket encryption (if using external KMS) \\\\\\\\\\\\\\\\- CKV2_AWS_6 # VPC flow logs (if not required) soft-fail: true framework: \\\\\\\\\\\\\\\\- terraform \\\\\\\\\\\\\\\\- kubernetes output: cli **Custom policies** in YAML: custom-checks/custom_policy.yaml metadata: id: CUSTOM_AWS_001 name: \"EC2 instances must have detailed monitoring\" category: \"LOGGING\" definition: and: \\\\\\\\\\\\\\\\- cond: \"not_equals\" resource: \"aws_instance\" key: \"monitoring[0].enabled\" value: false \\\\\\\\\\\\\\\\- cond: \"not_equals\" resource: \"aws_launch_template\" key: \"monitoring[0].enabled\" value: false Terrascan Accurant's static code analyzer for IaC: Installation brew install terrascan Scan directory terrascan scan -d terraform/ Scan specific IaC type terrascan scan -d . -i terraform Scan Kubernetes terrascan scan -d k8s/ -i k8s Policy categories terrascan scan -d . --policy-type aws,gcp Output formats terrascan scan -d . -o json terrascan scan -d . -o yaml terrascan scan -d . -o sarif Use specific policy set terrascan scan -d . --categories \"network,logging\" Non-recursive scan terrascan scan -d . --non-recursive kube-bench CIS Kubernetes Benchmark validator: Installation Run as a job in the cluster kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml Or install locally curl -L https://github.com/aquasecurity/kube-bench/releases/download/v0.9.0/kube-bench_0.9.0_linux_amd64.tar.gz | tar xz Run benchmark ./kube-bench ./kube-bench --version 1.28 # Specify K8s version Run specific checks ./kube-bench --check 1.1.1,1.1.2,1.2.1 As a Kubernetes job kubectl get jobs kubectl logs job/kube-bench kube-bench job apiVersion: batch/v1 kind: Job metadata: name: kube-bench spec: template: spec: hostPID: true containers: \\\\\\\\\\\\\\\\- name: kube-bench image: aquasec/kube-bench:latest command: [\"kube-bench\"] volumeMounts: \\\\\\\\\\\\\\\\- name: var-lib mountPath: /var/lib/etcd readOnly: true \\\\\\\\\\\\\\\\- name: etc-kubernetes mountPath: /etc/kubernetes readOnly: true restartPolicy: Never volumes: \\\\\\\\\\\\\\\\- name: var-lib hostPath: path: /var/lib/etcd \\\\\\\\\\\\\\\\- name: etc-kubernetes hostPath: path: /etc/kubernetes CI Integration .github/workflows/infra-scan.yml name: Infrastructure Security Scan on: pull_request: paths: \\\\\\\\\\\\\\\\- 'terraform/**' \\\\\\\\\\\\\\\\- 'k8s/**' \\\\\\\\\\\\\\\\- 'Dockerfile' jobs: scan: runs-on: ubuntu-latest steps: \\\\\\\\\\\\\\\\- uses: actions/checkout@v4 \\\\\\\\\\\\\\\\- name: Run Trivy IaC scan uses: aquasecurity/trivy-action@master with: scan-type: 'config' scan-ref: '.' exit-code: '1' severity: 'HIGH,CRITICAL' \\\\\\\\\\\\\\\\- name: Run Checkov uses: bridgecrewio/checkov-action@master with: directory: terraform/ soft_fail: false framework: terraform \\\\\\\\\\\\\\\\- name: Run Terrascan uses: tenable/terrascan-action@main with: iac_type: 'terraform' iac_dir: 'terraform' Comparison | Feature | Trivy | Checkov | Terrascan | kube-bench | |---------|-------|---------|-----------|------------| | Scope | Containers, FS, IaC, K8s | IaC only (multi-cloud) | IaC only | K8s CIS only | | IaC support | TF, K8s, Dockerfile | TF, CF, K8s, ARM, Helm | TF, K8s, CF | N/A | | Policy engine | Built-in | Rego + custom YAML | Rego | CIS benchmark | | Speed | Fast | Moderate | Moderate | Fast | | False positives | Low | Medium | Medium | Low | Recommendations * **Comprehensive scanning**: Use Trivy as your primary scanner covering containers, IaC, and secrets. * **IaC policy enforcement**: Use Checkov with custom policies for organizational compliance requirements. * **Multi-cloud IaC**: Use Terrascan for its strong Rego-based policy engine across cloud providers. * **Kubernetes audit**: Run kube-bench regularly against every cluster for CIS compliance. * **CI pipeline**: Run all scanners in CI with appropriate severity thresholds. Fail on CRITICAL issues. The most robust approach runs all four scanners at different points: Trivy on every container build and IaC change, Checkov on Terraform PRs, Terrascan as a compliance check, and kube-bench as a scheduled cluster audit."
     }
     </script>
     <script type="application/ld+json">
@@ -78,395 +78,2789 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/infrastructure-scanners-2026.png" alt="Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench</h1>
 <br>
+<h1>Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Infrastructure security scanning is essential for catching misconfigurations before they reach production. The landscape of scanners in 2026 offers specialized tools for different layers: container images and filesystems, IaC templates, Kubernetes configurations, and runtime posture. This article covers Trivy, Checkov, Terrascan, and kube-bench.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Trivy</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Aqua Security's comprehensive vulnerability scanner covering containers, filesystems, repositories, and IaC:</p>
 <br>
-<p>    # Installation</p>
 <br>
-<p>    brew install trivy</p>
 <br>
-<p>    # Scan container images</p>
 <br>
-<p>    trivy image nginx:latest</p>
 <br>
-<p>    trivy image --severity HIGH,CRITICAL my-app:latest</p>
 <br>
-<p>    # Scan filesystem</p>
 <br>
-<p>    trivy fs .</p>
 <br>
-<p>    # Scan git repository</p>
 <br>
-<p>    trivy repo https://github.com/org/my-repo</p>
 <br>
-<p>    # Scan IaC configurations</p>
 <br>
-<p>    trivy config ./terraform/</p>
 <br>
-<p>    trivy config --severity CRITICAL ./kubernetes/</p>
 <br>
-<p>    # Scan Kubernetes cluster</p>
+<h1>Installation</h1>
 <br>
-<p>    trivy k8s cluster --report summary</p>
 <br>
-<p>    # Output formats</p>
 <br>
-<p>    trivy image my-app --format json --output results.json</p>
 <br>
-<p>    trivy image my-app --format sarif --output results.sarif</p>
 <br>
-<p>    trivy image my-app --format html --output report.html</p>
 <br>
-<p>    # In CI, fail on critical issues</p>
 <br>
-<p>    trivy image --exit-code 1 --severity CRITICAL my-app</p>
 <br>
-<p>    # trivy.yaml — configuration file</p>
 <br>
-<p>    severity: HIGH,CRITICAL</p>
 <br>
-<p>    format: table</p>
 <br>
-<p>    exit-code: 1</p>
 <br>
-<p>    vulnerability:</p>
 <br>
-<p>      ignore-unfixed: true</p>
+<p>brew install trivy</p>
 <br>
-<p>      type: [os, library]</p>
 <br>
-<p>    scan:</p>
 <br>
-<p>      skip-dirs:</p>
 <br>
-<p>        - node_modules</p>
 <br>
-<p>        - .git</p>
 <br>
-<p>      scanners:</p>
 <br>
-<p>        - vuln</p>
 <br>
-<p>        - secret</p>
 <br>
-<p>        - misconfig</p>
+<br>
+<br>
+<br>
+<br>
+<h1>Scan container images</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>trivy image nginx:latest</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>trivy image --severity HIGH,CRITICAL my-app:latest</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Scan filesystem</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>trivy fs .</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Scan git repository</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>trivy repo https://github.com/org/my-repo</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Scan IaC configurations</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>trivy config ./terraform/</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>trivy config --severity CRITICAL ./kubernetes/</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Scan Kubernetes cluster</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>trivy k8s cluster --report summary</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Output formats</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>trivy image my-app --format json --output results.json</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>trivy image my-app --format sarif --output results.sarif</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>trivy image my-app --format html --output report.html</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>In CI, fail on critical issues</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>trivy image --exit-code 1 --severity CRITICAL my-app</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>trivy.yaml — configuration file</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>severity: HIGH,CRITICAL</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>format: table</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>exit-code: 1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>vulnerability:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ignore-unfixed: true</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>type: [os, library]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>scan:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>skip-dirs:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- node_modules</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- .git</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>scanners:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- vuln</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- secret</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- misconfig</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Key features**: Single binary, comprehensive vulnerability database, IaC scanning (Terraform, K8s, Dockerfile), secret detection, SBOM generation. The most versatile scanner in the ecosystem.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Checkov</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Bridgecrew's policy-as-code scanner for IaC:</p>
 <br>
-<p>    # Installation</p>
 <br>
-<p>    pip install checkov</p>
 <br>
-<p>    # Scan Terraform</p>
 <br>
-<p>    checkov --directory terraform/</p>
 <br>
-<p>    # Scan CloudFormation</p>
 <br>
-<p>    checkov -f cloudformation/template.yaml</p>
 <br>
-<p>    # Scan Kubernetes manifests</p>
 <br>
-<p>    checkov --directory k8s/</p>
 <br>
-<p>    # Scan multiple frameworks</p>
 <br>
-<p>    checkov --directory . --framework terraform,kubernetes,helm</p>
 <br>
-<p>    # Output formats</p>
 <br>
-<p>    checkov -d . --output json > results.json</p>
 <br>
-<p>    checkov -d . --output junitxml > checkov-junit.xml</p>
+<h1>Installation</h1>
 <br>
-<p>    # Soft fail (don't exit with error)</p>
 <br>
-<p>    checkov -d . --soft-fail</p>
 <br>
-<p>    # Skip specific checks</p>
 <br>
-<p>    checkov -d . --skip-check CKV_AWS_52,CKV_AWS_79</p>
 <br>
-<p>    # External checks directory</p>
 <br>
-<p>    checkov -d . --external-checks-dir custom-checks/</p>
 <br>
-<p>    # .checkov.yaml</p>
 <br>
-<p>    quiet: true</p>
 <br>
-<p>    compact: true</p>
 <br>
-<p>    skip-check:</p>
 <br>
-<p>      - CKV_AWS_52  # S3 bucket encryption (if using external KMS)</p>
 <br>
-<p>      - CKV2_AWS_6  # VPC flow logs (if not required)</p>
 <br>
-<p>    soft-fail: true</p>
+<p>pip install checkov</p>
 <br>
-<p>    framework:</p>
 <br>
-<p>      - terraform</p>
 <br>
-<p>      - kubernetes</p>
 <br>
-<p>    output: cli</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Scan Terraform</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>checkov --directory terraform/</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Scan CloudFormation</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>checkov -f cloudformation/template.yaml</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Scan Kubernetes manifests</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>checkov --directory k8s/</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Scan multiple frameworks</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>checkov --directory . --framework terraform,kubernetes,helm</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Output formats</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>checkov -d . --output json > results.json</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>checkov -d . --output junitxml > checkov-junit.xml</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Soft fail (don't exit with error)</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>checkov -d . --soft-fail</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Skip specific checks</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>checkov -d . --skip-check CKV_AWS_52,CKV_AWS_79</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>External checks directory</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>checkov -d . --external-checks-dir custom-checks/</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>.checkov.yaml</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>quiet: true</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>compact: true</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>skip-check:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- CKV_AWS_52 # S3 bucket encryption (if using external KMS)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- CKV2_AWS_6 # VPC flow logs (if not required)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>soft-fail: true</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>framework:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- terraform</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- kubernetes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>output: cli</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Custom policies** in YAML:</p>
 <br>
-<p>    # custom-checks/custom_policy.yaml</p>
 <br>
-<p>    metadata:</p>
 <br>
-<p>      id: CUSTOM_AWS_001</p>
 <br>
-<p>      name: "EC2 instances must have detailed monitoring"</p>
 <br>
-<p>      category: "LOGGING"</p>
 <br>
-<p>    definition:</p>
 <br>
-<p>      and:</p>
 <br>
-<p>        - cond: "not_equals"</p>
 <br>
-<p>          resource: "aws_instance"</p>
 <br>
-<p>          key: "monitoring[0].enabled"</p>
 <br>
-<p>          value: false</p>
 <br>
-<p>        - cond: "not_equals"</p>
 <br>
-<p>          resource: "aws_launch_template"</p>
+<h1>custom-checks/custom_policy.yaml</h1>
 <br>
-<p>          key: "monitoring[0].enabled"</p>
 <br>
-<p>          value: false</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>metadata:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>id: CUSTOM_AWS_001</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: "EC2 instances must have detailed monitoring"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>category: "LOGGING"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>definition:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>and:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- cond: "not_equals"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>resource: "aws_instance"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>key: "monitoring[0].enabled"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>value: false</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- cond: "not_equals"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>resource: "aws_launch_template"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>key: "monitoring[0].enabled"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>value: false</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Terrascan</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Accurant's static code analyzer for IaC:</p>
 <br>
-<p>    # Installation</p>
 <br>
-<p>    brew install terrascan</p>
 <br>
-<p>    # Scan directory</p>
 <br>
-<p>    terrascan scan -d terraform/</p>
 <br>
-<p>    # Scan specific IaC type</p>
 <br>
-<p>    terrascan scan -d . -i terraform</p>
 <br>
-<p>    # Scan Kubernetes</p>
 <br>
-<p>    terrascan scan -d k8s/ -i k8s</p>
 <br>
-<p>    # Policy categories</p>
 <br>
-<p>    terrascan scan -d . --policy-type aws,gcp</p>
 <br>
-<p>    # Output formats</p>
 <br>
-<p>    terrascan scan -d . -o json</p>
 <br>
-<p>    terrascan scan -d . -o yaml</p>
+<h1>Installation</h1>
 <br>
-<p>    terrascan scan -d . -o sarif</p>
 <br>
-<p>    # Use specific policy set</p>
 <br>
-<p>    terrascan scan -d . --categories "network,logging"</p>
 <br>
-<p>    # Non-recursive scan</p>
 <br>
-<p>    terrascan scan -d . --non-recursive</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>brew install terrascan</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Scan directory</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>terrascan scan -d terraform/</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Scan specific IaC type</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>terrascan scan -d . -i terraform</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Scan Kubernetes</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>terrascan scan -d k8s/ -i k8s</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Policy categories</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>terrascan scan -d . --policy-type aws,gcp</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Output formats</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>terrascan scan -d . -o json</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>terrascan scan -d . -o yaml</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>terrascan scan -d . -o sarif</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Use specific policy set</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>terrascan scan -d . --categories "network,logging"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Non-recursive scan</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>terrascan scan -d . --non-recursive</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  kube-bench</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>CIS Kubernetes Benchmark validator:</p>
 <br>
-<p>    # Installation</p>
 <br>
-<p>    # Run as a job in the cluster</p>
 <br>
-<p>    kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml</p>
 <br>
-<p>    # Or install locally</p>
 <br>
-<p>    curl -L https://github.com/aquasecurity/kube-bench/releases/download/v0.9.0/kube-bench_0.9.0_linux_amd64.tar.gz | tar xz</p>
 <br>
-<p>    # Run benchmark</p>
 <br>
-<p>    ./kube-bench</p>
 <br>
-<p>    ./kube-bench --version 1.28  # Specify K8s version</p>
 <br>
-<p>    # Run specific checks</p>
 <br>
-<p>    ./kube-bench --check 1.1.1,1.1.2,1.2.1</p>
 <br>
-<p>    # As a Kubernetes job</p>
 <br>
-<p>    kubectl get jobs</p>
 <br>
-<p>    kubectl logs job/kube-bench</p>
+<h1>Installation</h1>
 <br>
-<p>    # kube-bench job</p>
 <br>
-<p>    apiVersion: batch/v1</p>
 <br>
-<p>    kind: Job</p>
 <br>
-<p>    metadata:</p>
 <br>
-<p>      name: kube-bench</p>
 <br>
-<p>    spec:</p>
 <br>
-<p>      template:</p>
 <br>
-<p>        spec:</p>
 <br>
-<p>          hostPID: true</p>
 <br>
-<p>          containers:</p>
 <br>
-<p>            - name: kube-bench</p>
 <br>
-<p>              image: aquasec/kube-bench:latest</p>
 <br>
-<p>              command: ["kube-bench"]</p>
+<h1>Run as a job in the cluster</h1>
 <br>
-<p>              volumeMounts:</p>
 <br>
-<p>                - name: var-lib</p>
 <br>
-<p>                  mountPath: /var/lib/etcd</p>
 <br>
-<p>                  readOnly: true</p>
 <br>
-<p>                - name: etc-kubernetes</p>
 <br>
-<p>                  mountPath: /etc/kubernetes</p>
 <br>
-<p>                  readOnly: true</p>
 <br>
-<p>          restartPolicy: Never</p>
 <br>
-<p>          volumes:</p>
 <br>
-<p>            - name: var-lib</p>
 <br>
-<p>              hostPath:</p>
 <br>
-<p>                path: /var/lib/etcd</p>
 <br>
-<p>            - name: etc-kubernetes</p>
+<p>kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml</p>
 <br>
-<p>              hostPath:</p>
 <br>
-<p>                path: /etc/kubernetes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Or install locally</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>curl -L https://github.com/aquasecurity/kube-bench/releases/download/v0.9.0/kube-bench_0.9.0_linux_amd64.tar.gz | tar xz</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Run benchmark</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>./kube-bench</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>./kube-bench --version 1.28 # Specify K8s version</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Run specific checks</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>./kube-bench --check 1.1.1,1.1.2,1.2.1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>As a Kubernetes job</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kubectl get jobs</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kubectl logs job/kube-bench</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>kube-bench job</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>apiVersion: batch/v1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kind: Job</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>metadata:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: kube-bench</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>template:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>hostPID: true</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>containers:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: kube-bench</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>image: aquasec/kube-bench:latest</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>command: ["kube-bench"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>volumeMounts:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: var-lib</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>mountPath: /var/lib/etcd</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>readOnly: true</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: etc-kubernetes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>mountPath: /etc/kubernetes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>readOnly: true</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>restartPolicy: Never</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>volumes:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: var-lib</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>hostPath:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>path: /var/lib/etcd</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: etc-kubernetes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>hostPath:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>path: /etc/kubernetes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  CI Integration</h2>
 <br>
-<p>    # .github/workflows/infra-scan.yml</p>
 <br>
-<p>    name: Infrastructure Security Scan</p>
 <br>
-<p>    on:</p>
 <br>
-<p>      pull_request:</p>
 <br>
-<p>        paths:</p>
 <br>
-<p>          - 'terraform/**'</p>
 <br>
-<p>          - 'k8s/**'</p>
 <br>
-<p>          - 'Dockerfile'</p>
 <br>
-<p>    jobs:</p>
 <br>
-<p>      scan:</p>
 <br>
-<p>        runs-on: ubuntu-latest</p>
 <br>
-<p>        steps:</p>
 <br>
-<p>          - uses: actions/checkout@v4</p>
+<h1>.github/workflows/infra-scan.yml</h1>
 <br>
-<p>          - name: Run Trivy IaC scan</p>
 <br>
-<p>            uses: aquasecurity/trivy-action@master</p>
 <br>
-<p>            with:</p>
 <br>
-<p>              scan-type: 'config'</p>
 <br>
-<p>              scan-ref: '.'</p>
 <br>
-<p>              exit-code: '1'</p>
 <br>
-<p>              severity: 'HIGH,CRITICAL'</p>
 <br>
-<p>          - name: Run Checkov</p>
 <br>
-<p>            uses: bridgecrewio/checkov-action@master</p>
 <br>
-<p>            with:</p>
 <br>
-<p>              directory: terraform/</p>
 <br>
-<p>              soft_fail: false</p>
 <br>
-<p>              framework: terraform</p>
+<p>name: Infrastructure Security Scan</p>
 <br>
-<p>          - name: Run Terrascan</p>
 <br>
-<p>            uses: tenable/terrascan-action@main</p>
 <br>
-<p>            with:</p>
 <br>
-<p>              iac_type: 'terraform'</p>
 <br>
-<p>              iac_dir: 'terraform'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>on:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pull_request:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>paths:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- 'terraform/**'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- 'k8s/**'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- 'Dockerfile'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>jobs:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>scan:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>runs-on: ubuntu-latest</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>steps:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- uses: actions/checkout@v4</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: Run Trivy IaC scan</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>uses: aquasecurity/trivy-action@master</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>with:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>scan-type: 'config'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>scan-ref: '.'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>exit-code: '1'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>severity: 'HIGH,CRITICAL'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: Run Checkov</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>uses: bridgecrewio/checkov-action@master</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>with:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>directory: terraform/</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>soft_fail: false</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>framework: terraform</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: Run Terrascan</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>uses: tenable/terrascan-action@main</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>with:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>iac_type: 'terraform'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>iac_dir: 'terraform'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Comparison</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Feature | Trivy | Checkov | Terrascan | kube-bench |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>|---------|-------|---------|-----------|------------|</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Scope | Containers, FS, IaC, K8s | IaC only (multi-cloud) | IaC only | K8s CIS only |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| IaC support | TF, K8s, Dockerfile | TF, CF, K8s, ARM, Helm | TF, K8s, CF | N/A |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Policy engine | Built-in | Rego + custom YAML | Rego | CIS benchmark |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Speed | Fast | Moderate | Moderate | Fast |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| False positives | Low | Medium | Medium | Low |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Recommendations</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Comprehensive scanning**: Use Trivy as your primary scanner covering containers, IaC, and secrets.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **IaC policy enforcement**: Use Checkov with custom policies for organizational compliance requirements.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Multi-cloud IaC**: Use Terrascan for its strong Rego-based policy engine across cloud providers.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Kubernetes audit**: Run kube-bench regularly against every cluster for CIS compliance.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **CI pipeline**: Run all scanners in CI with appropriate severity thresholds. Fail on CRITICAL issues.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>The most robust approach runs all four scanners at different points: Trivy on every container build and IaC change, Checkov on Terraform PRs, Terrascan as a compliance check, and kube-bench as a scheduled cluster audit.</p></div>
     </article>
@@ -484,6 +2878,7 @@
       <noscript><div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

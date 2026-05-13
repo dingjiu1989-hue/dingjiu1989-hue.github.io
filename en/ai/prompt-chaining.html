@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/prompt-chaining.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1556",
+      "wordCount": "2770",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/prompt-chaining.html"},
-      "articleBody": "Prompt Chaining: Decomposition, Parallel Execution, State Management Introduction Prompt chaining connects multiple LLM calls into pipelines where each step refines, validates, or transforms the output of the previous one. This pattern is essential for tasks too complex for a single prompt: multi-page document generation, multi-step analysis, and workflows requiring both creativity and precision. This article covers decomposition strategies, parallel execution, and state management across chain steps. Task Decomposition The first step in prompt chaining is breaking a complex task into discrete, independently verifiable steps: def decompose_task(complex_request: str) -> list[dict]: \"\"\"Use an LLM to plan the decomposition.\"\"\" plan = call_llm(\"\"\" Break this request into sequential steps. For each step, specify: - step_name: short description - input_description: what this step needs - output_format: what this step produces - validation_criteria: how to verify correctness Request: \"\"\" + complex_request) return parse_steps(plan) # Example decomposition for \"write a product page\" steps = [ {\"name\": \"extract_keywords\", \"input\": \"product_brief\", \"output\": \"keyword_list\"}, {\"name\": \"write_headline\", \"input\": \"keyword_list\", \"output\": \"headline\"}, {\"name\": \"write_description\", \"input\": \"keyword_list+headline\", \"output\": \"description\"}, {\"name\": \"write_cta\", \"input\": \"description\", \"output\": \"cta_text\"}, {\"name\": \"validate_tone\", \"input\": \"all_outputs\", \"output\": \"tone_feedback\"}, ] Each step has a narrow focus. Narrow prompts produce more reliable outputs than monolithic ones because the model can concentrate its attention on one objective at a time. Sequential Chain Execution Once decomposed, execute steps in order, passing outputs as inputs: class ChainStep: def __init__(self, name: str, prompt_template: str, inputs: list[str]): self.name = name self.prompt_template = prompt_template self.inputs = inputs class SequentialChain: def __init__(self, steps: list[ChainStep]): self.steps = steps async def execute(self, initial_inputs: dict) -> dict: state = dict(initial_inputs) for step in self.steps: resolved = {name: state[name] for name in step.inputs} prompt = step.prompt_template.format(**resolved) output = await call_llm_async(prompt) state[step.name] = output await self.validate_step(step, output) return state async def validate_step(self, step: ChainStep, output: str): validation = call_llm(f\"Validate this {step.name} output: {output}\") if \"FAIL\" in validation: raise ChainValidationError(f\"Step {step.name} failed validation: {validation}\") Parallel Execution When steps are independent, execute them concurrently to reduce wall-clock time: import asyncio async def parallel_chain(initial_inputs: dict, parallel_groups: list[list[ChainStep]]): state = dict(initial_inputs) for group in parallel_groups: results = await asyncio.gather( *[execute_single_step(step, state) for step in group], return_exceptions=True, ) for step, result in zip(group, results): if isinstance(result, Exception): raise ChainError(f\"Step {step.name} failed: {result}\") state[step.name] = result return state # Example: generate three sections of a report simultaneously parallel_groups = [ [ ChainStep(\"market_analysis\", market_template, [\"industry\"]), ChainStep(\"financial_analysis\", financial_template, [\"industry\"]), ChainStep(\"competitive_analysis\", competitive_template, [\"industry\"]), ], [ ChainStep(\"executive_summary\", summary_template, [\"market_analysis\", \"financial_analysis\", \"competitive_analysis\"]), ], ] State Management Chains accumulate state as they execute. A formal state machine approach prevents data loss and enables error recovery: from dataclasses import dataclass, field from typing import Any, Optional @dataclass class ChainState: inputs: dict[str, Any] = field(default_factory=dict) outputs: dict[str, Any] = field(default_factory=dict) errors: dict[str, str] = field(default_factory=dict) metadata: dict[str, Any] = field(default_factory=dict) def set_output(self, step: str, value: Any): self.outputs[step] = value self.metadata[f\"{step}_completed_at\"] = time.time() def get(self, key: str) -> Optional[Any]: return self.outputs.get(key) or self.inputs.get(key) def snapshot(self) -> dict: return {\"outputs\": self.outputs, \"errors\": self.errors} def restore(self, snapshot: dict): self.outputs.update(snapshot.get(\"outputs\", {})) self.errors.update(snapshot.get(\"errors\", {})) Error Recovery Chains When a step fails, the chain should attempt recovery rather than aborting entirely: async def execute_with_recovery(step: ChainStep, state: ChainState, max_retries=2): for attempt in range(max_retries + 1): try: result = await execute_single_step(step, state.outputs) state.set_output(step.name, result) return result except ValidationError as e: if attempt == max_retries: # Fallback: try a simpler version fallback = await execute_fallback(step, state) state.set_output(step.name, fallback) state.errors[step.name] = f\"Used fallback after {attempt} retries\" return fallback state.metadata[f\"{step.name}_retry_{attempt}\"] = str(e) Conclusion Prompt chaining transforms unreliable single-shot generation into reliable multi-step pipelines. Decompose complex tasks into narrow steps, execute independent steps in parallel, maintain state explicitly, and implement recovery logic for each failure mode. The result is LLM-powered workflows that match the reliability of traditional software pipelines."
+      "articleBody": "Prompt Chaining: Decomposition, Parallel Execution, State Management Prompt Chaining: Decomposition, Parallel Execution, State Management Prompt Chaining: Decomposition, Parallel Execution, State Management Prompt Chaining: Decomposition, Parallel Execution, State Management Prompt Chaining: Decomposition, Parallel Execution, State Management Introduction Prompt chaining connects multiple LLM calls into pipelines where each step refines, validates, or transforms the output of the previous one. This pattern is essential for tasks too complex for a single prompt: multi-page document generation, multi-step analysis, and workflows requiring both creativity and precision. This article covers decomposition strategies, parallel execution, and state management across chain steps. Task Decomposition The first step in prompt chaining is breaking a complex task into discrete, independently verifiable steps: def decompose_task(complex_request: str) -> list[dict]: \"\"\"Use an LLM to plan the decomposition.\"\"\" plan = call_llm(\"\"\" Break this request into sequential steps. For each step, specify: \\\\\\\\\\\\\\\\- step_name: short description \\\\\\\\\\\\\\\\- input_description: what this step needs \\\\\\\\\\\\\\\\- output_format: what this step produces \\\\\\\\\\\\\\\\- validation_criteria: how to verify correctness Request: \"\"\" + complex_request) return parse_steps(plan) Example decomposition for \"write a product page\" steps = [ {\"name\": \"extract_keywords\", \"input\": \"product_brief\", \"output\": \"keyword_list\"}, {\"name\": \"write_headline\", \"input\": \"keyword_list\", \"output\": \"headline\"}, {\"name\": \"write_description\", \"input\": \"keyword_list+headline\", \"output\": \"description\"}, {\"name\": \"write_cta\", \"input\": \"description\", \"output\": \"cta_text\"}, {\"name\": \"validate_tone\", \"input\": \"all_outputs\", \"output\": \"tone_feedback\"}, ] Each step has a narrow focus. Narrow prompts produce more reliable outputs than monolithic ones because the model can concentrate its attention on one objective at a time. Sequential Chain Execution Once decomposed, execute steps in order, passing outputs as inputs: class ChainStep: def __init__(self, name: str, prompt_template: str, inputs: list[str]): self.name = name self.prompt_template = prompt_template self.inputs = inputs class SequentialChain: def __init__(self, steps: list[ChainStep]): self.steps = steps async def execute(self, initial_inputs: dict) -> dict: state = dict(initial_inputs) for step in self.steps: resolved = {name: state[name] for name in step.inputs} prompt = step.prompt_template.format(**resolved) output = await call_llm_async(prompt) state[step.name] = output await self.validate_step(step, output) return state async def validate_step(self, step: ChainStep, output: str): validation = call_llm(f\"Validate this {step.name} output: {output}\") if \"FAIL\" in validation: raise ChainValidationError(f\"Step {step.name} failed validation: {validation}\") Parallel Execution When steps are independent, execute them concurrently to reduce wall-clock time: import asyncio async def parallel_chain(initial_inputs: dict, parallel_groups: list[list[ChainStep]]): state = dict(initial_inputs) for group in parallel_groups: results = await asyncio.gather( *[execute_single_step(step, state) for step in group], return_exceptions=True, ) for step, result in zip(group, results): if isinstance(result, Exception): raise ChainError(f\"Step {step.name} failed: {result}\") state[step.name] = result return state Example: generate three sections of a report simultaneously parallel_groups = [ [ ChainStep(\"market_analysis\", market_template, [\"industry\"]), ChainStep(\"financial_analysis\", financial_template, [\"industry\"]), ChainStep(\"competitive_analysis\", competitive_template, [\"industry\"]), ], [ ChainStep(\"executive_summary\", summary_template, [\"market_analysis\", \"financial_analysis\", \"competitive_analysis\"]), ], ] State Management Chains accumulate state as they execute. A formal state machine approach prevents data loss and enables error recovery: from dataclasses import dataclass, field from typing import Any, Optional @dataclass class ChainState: inputs: dict[str, Any] = field(default_factory=dict) outputs: dict[str, Any] = field(default_factory=dict) errors: dict[str, str] = field(default_factory=dict) metadata: dict[str, Any] = field(default_factory=dict) def set_output(self, step: str, value: Any): self.outputs[step] = value self.metadata[f\"{step}_completed_at\"] = time.time() def get(self, key: str) -> Optional[Any]: return self.outputs.get(key) or self.inputs.get(key) def snapshot(self) -> dict: return {\"outputs\": self.outputs, \"errors\": self.errors} def restore(self, snapshot: dict): self.outputs.update(snapshot.get(\"outputs\", {})) self.errors.update(snapshot.get(\"errors\", {})) Error Recovery Chains When a step fails, the chain should attempt recovery rather than aborting entirely: async def execute_with_recovery(step: ChainStep, state: ChainState, max_retries=2): for attempt in range(max_retries + 1): try: result = await execute_single_step(step, state.outputs) state.set_output(step.name, result) return result except ValidationError as e: if attempt == max_retries: Fallback: try a simpler version fallback = await execute_fallback(step, state) state.set_output(step.name, fallback) state.errors[step.name] = f\"Used fallback after {attempt} retries\" return fallback state.metadata[f\"{step.name}_retry_{attempt}\"] = str(e) Conclusion Prompt chaining transforms unreliable single-shot generation into reliable multi-step pipelines. Decompose complex tasks into narrow steps, execute independent steps in parallel, maintain state explicitly, and implement recovery logic for each failure mode. The result is LLM-powered workflows that match the reliability of traditional software pipelines."
     }
     </script>
     <script type="application/ld+json">
@@ -78,223 +78,1569 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/prompt-chaining.png" alt="Prompt Chaining: Decomposition, Parallel Execution, State Management" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Prompt Chaining: Decomposition, Parallel Execution, State Management</h1>
 <br>
+<h1>Prompt Chaining: Decomposition, Parallel Execution, State Management</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>Prompt Chaining: Decomposition, Parallel Execution, State Management</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Prompt Chaining: Decomposition, Parallel Execution, State Management</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Prompt Chaining: Decomposition, Parallel Execution, State Management</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Prompt chaining connects multiple LLM calls into pipelines where each step refines, validates, or transforms the output of the previous one. This pattern is essential for tasks too complex for a single prompt: multi-page document generation, multi-step analysis, and workflows requiring both creativity and precision. This article covers decomposition strategies, parallel execution, and state management across chain steps.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Task Decomposition</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>The first step in prompt chaining is breaking a complex task into discrete, independently verifiable steps:</p>
 <br>
-<p>    def decompose_task(complex_request: str) -> list[dict]:</p>
 <br>
-<p>        """Use an LLM to plan the decomposition."""</p>
 <br>
-<p>        plan = call_llm("""</p>
 <br>
-<p>        Break this request into sequential steps. For each step, specify:</p>
 <br>
-<p>        - step_name: short description</p>
 <br>
-<p>        - input_description: what this step needs</p>
 <br>
-<p>        - output_format: what this step produces</p>
 <br>
-<p>        - validation_criteria: how to verify correctness</p>
 <br>
-<p>        Request: """ + complex_request)</p>
 <br>
-<p>        return parse_steps(plan)</p>
 <br>
-<p>    # Example decomposition for "write a product page"</p>
 <br>
-<p>    steps = [</p>
 <br>
-<p>        {"name": "extract_keywords", "input": "product_brief", "output": "keyword_list"},</p>
+<p>def decompose_task(complex_request: str) -> list[dict]:</p>
 <br>
-<p>        {"name": "write_headline", "input": "keyword_list", "output": "headline"},</p>
 <br>
-<p>        {"name": "write_description", "input": "keyword_list+headline", "output": "description"},</p>
 <br>
-<p>        {"name": "write_cta", "input": "description", "output": "cta_text"},</p>
 <br>
-<p>        {"name": "validate_tone", "input": "all_outputs", "output": "tone_feedback"},</p>
 <br>
-<p>    ]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"""Use an LLM to plan the decomposition."""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>plan = call_llm("""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Break this request into sequential steps. For each step, specify:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- step_name: short description</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- input_description: what this step needs</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- output_format: what this step produces</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- validation_criteria: how to verify correctness</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Request: """ + complex_request)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return parse_steps(plan)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Example decomposition for "write a product page"</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>steps = [</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{"name": "extract_keywords", "input": "product_brief", "output": "keyword_list"},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{"name": "write_headline", "input": "keyword_list", "output": "headline"},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{"name": "write_description", "input": "keyword_list+headline", "output": "description"},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{"name": "write_cta", "input": "description", "output": "cta_text"},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{"name": "validate_tone", "input": "all_outputs", "output": "tone_feedback"},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Each step has a narrow focus. Narrow prompts produce more reliable outputs than monolithic ones because the model can concentrate its attention on one objective at a time.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Sequential Chain Execution</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Once decomposed, execute steps in order, passing outputs as inputs:</p>
 <br>
-<p>    class ChainStep:</p>
 <br>
-<p>        def __init__(self, name: str, prompt_template: str, inputs: list[str]):</p>
 <br>
-<p>            self.name = name</p>
 <br>
-<p>            self.prompt_template = prompt_template</p>
 <br>
-<p>            self.inputs = inputs</p>
 <br>
-<p>    class SequentialChain:</p>
 <br>
-<p>        def __init__(self, steps: list[ChainStep]):</p>
 <br>
-<p>            self.steps = steps</p>
 <br>
-<p>        async def execute(self, initial_inputs: dict) -> dict:</p>
 <br>
-<p>            state = dict(initial_inputs)</p>
 <br>
-<p>            for step in self.steps:</p>
 <br>
-<p>                resolved = {name: state[name] for name in step.inputs}</p>
 <br>
-<p>                prompt = step.prompt_template.format(**resolved)</p>
+<p>class ChainStep:</p>
 <br>
-<p>                output = await call_llm_async(prompt)</p>
 <br>
-<p>                state[step.name] = output</p>
 <br>
-<p>                await self.validate_step(step, output)</p>
 <br>
-<p>            return state</p>
 <br>
-<p>        async def validate_step(self, step: ChainStep, output: str):</p>
 <br>
-<p>            validation = call_llm(f"Validate this {step.name} output: {output}")</p>
 <br>
-<p>            if "FAIL" in validation:</p>
 <br>
-<p>                raise ChainValidationError(f"Step {step.name} failed validation: {validation}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def __init__(self, name: str, prompt_template: str, inputs: list[str]):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.name = name</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.prompt_template = prompt_template</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.inputs = inputs</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class SequentialChain:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def __init__(self, steps: list[ChainStep]):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.steps = steps</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def execute(self, initial_inputs: dict) -> dict:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>state = dict(initial_inputs)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for step in self.steps:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>resolved = {name: state[name] for name in step.inputs}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>prompt = step.prompt_template.format(**resolved)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>output = await call_llm_async(prompt)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>state[step.name] = output</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await self.validate_step(step, output)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return state</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def validate_step(self, step: ChainStep, output: str):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>validation = call_llm(f"Validate this {step.name} output: {output}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if "FAIL" in validation:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise ChainValidationError(f"Step {step.name} failed validation: {validation}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Parallel Execution</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>When steps are independent, execute them concurrently to reduce wall-clock time:</p>
 <br>
-<p>    import asyncio</p>
 <br>
-<p>    async def parallel_chain(initial_inputs: dict, parallel_groups: list[list[ChainStep]]):</p>
 <br>
-<p>        state = dict(initial_inputs)</p>
 <br>
-<p>        for group in parallel_groups:</p>
 <br>
-<p>            results = await asyncio.gather(</p>
 <br>
-<p>                *[execute_single_step(step, state) for step in group],</p>
 <br>
-<p>                return_exceptions=True,</p>
 <br>
-<p>            )</p>
 <br>
-<p>            for step, result in zip(group, results):</p>
 <br>
-<p>                if isinstance(result, Exception):</p>
 <br>
-<p>                    raise ChainError(f"Step {step.name} failed: {result}")</p>
 <br>
-<p>                state[step.name] = result</p>
 <br>
-<p>        return state</p>
+<p>import asyncio</p>
 <br>
-<p>    # Example: generate three sections of a report simultaneously</p>
 <br>
-<p>    parallel_groups = [</p>
 <br>
-<p>        [</p>
 <br>
-<p>            ChainStep("market_analysis", market_template, ["industry"]),</p>
 <br>
-<p>            ChainStep("financial_analysis", financial_template, ["industry"]),</p>
 <br>
-<p>            ChainStep("competitive_analysis", competitive_template, ["industry"]),</p>
 <br>
-<p>        ],</p>
 <br>
-<p>        [</p>
 <br>
-<p>            ChainStep("executive_summary", summary_template, ["market_analysis", "financial_analysis", "competitive_analysis"]),</p>
 <br>
-<p>        ],</p>
 <br>
-<p>    ]</p>
+<br>
+<br>
+<p>async def parallel_chain(initial_inputs: dict, parallel_groups: list[list[ChainStep]]):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>state = dict(initial_inputs)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for group in parallel_groups:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>results = await asyncio.gather(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>*[execute_single_step(step, state) for step in group],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return_exceptions=True,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for step, result in zip(group, results):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if isinstance(result, Exception):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise ChainError(f"Step {step.name} failed: {result}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>state[step.name] = result</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return state</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Example: generate three sections of a report simultaneously</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>parallel_groups = [</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>[</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ChainStep("market_analysis", market_template, ["industry"]),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ChainStep("financial_analysis", financial_template, ["industry"]),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ChainStep("competitive_analysis", competitive_template, ["industry"]),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>[</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ChainStep("executive_summary", summary_template, ["market_analysis", "financial_analysis", "competitive_analysis"]),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  State Management</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Chains accumulate state as they execute. A formal state machine approach prevents data loss and enables error recovery:</p>
 <br>
-<p>    from dataclasses import dataclass, field</p>
 <br>
-<p>    from typing import Any, Optional</p>
 <br>
-<p>    @dataclass</p>
 <br>
-<p>    class ChainState:</p>
 <br>
-<p>        inputs: dict[str, Any] = field(default_factory=dict)</p>
 <br>
-<p>        outputs: dict[str, Any] = field(default_factory=dict)</p>
 <br>
-<p>        errors: dict[str, str] = field(default_factory=dict)</p>
 <br>
-<p>        metadata: dict[str, Any] = field(default_factory=dict)</p>
 <br>
-<p>        def set_output(self, step: str, value: Any):</p>
 <br>
-<p>            self.outputs[step] = value</p>
 <br>
-<p>            self.metadata[f"{step}_completed_at"] = time.time()</p>
 <br>
-<p>        def get(self, key: str) -> Optional[Any]:</p>
 <br>
-<p>            return self.outputs.get(key) or self.inputs.get(key)</p>
+<p>from dataclasses import dataclass, field</p>
 <br>
-<p>        def snapshot(self) -> dict:</p>
 <br>
-<p>            return {"outputs": self.outputs, "errors": self.errors}</p>
 <br>
-<p>        def restore(self, snapshot: dict):</p>
 <br>
-<p>            self.outputs.update(snapshot.get("outputs", {}))</p>
 <br>
-<p>            self.errors.update(snapshot.get("errors", {}))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from typing import Any, Optional</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@dataclass</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class ChainState:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>inputs: dict[str, Any] = field(default_factory=dict)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>outputs: dict[str, Any] = field(default_factory=dict)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>errors: dict[str, str] = field(default_factory=dict)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>metadata: dict[str, Any] = field(default_factory=dict)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def set_output(self, step: str, value: Any):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.outputs[step] = value</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.metadata[f"{step}_completed_at"] = time.time()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def get(self, key: str) -> Optional[Any]:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return self.outputs.get(key) or self.inputs.get(key)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def snapshot(self) -> dict:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return {"outputs": self.outputs, "errors": self.errors}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def restore(self, snapshot: dict):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.outputs.update(snapshot.get("outputs", {}))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.errors.update(snapshot.get("errors", {}))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Error Recovery Chains</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>When a step fails, the chain should attempt recovery rather than aborting entirely:</p>
 <br>
-<p>    async def execute_with_recovery(step: ChainStep, state: ChainState, max_retries=2):</p>
 <br>
-<p>        for attempt in range(max_retries + 1):</p>
 <br>
-<p>            try:</p>
 <br>
-<p>                result = await execute_single_step(step, state.outputs)</p>
 <br>
-<p>                state.set_output(step.name, result)</p>
 <br>
-<p>                return result</p>
 <br>
-<p>            except ValidationError as e:</p>
 <br>
-<p>                if attempt == max_retries:</p>
 <br>
-<p>                    # Fallback: try a simpler version</p>
 <br>
-<p>                    fallback = await execute_fallback(step, state)</p>
 <br>
-<p>                    state.set_output(step.name, fallback)</p>
 <br>
-<p>                    state.errors[step.name] = f"Used fallback after {attempt} retries"</p>
 <br>
-<p>                    return fallback</p>
+<p>async def execute_with_recovery(step: ChainStep, state: ChainState, max_retries=2):</p>
 <br>
-<p>                state.metadata[f"{step.name}_retry_{attempt}"] = str(e)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for attempt in range(max_retries + 1):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>try:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>result = await execute_single_step(step, state.outputs)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>state.set_output(step.name, result)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return result</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except ValidationError as e:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if attempt == max_retries:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Fallback: try a simpler version</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>fallback = await execute_fallback(step, state)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>state.set_output(step.name, fallback)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>state.errors[step.name] = f"Used fallback after {attempt} retries"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return fallback</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>state.metadata[f"{step.name}_retry_{attempt}"] = str(e)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Conclusion</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Prompt chaining transforms unreliable single-shot generation into reliable multi-step pipelines. Decompose complex tasks into narrow steps, execute independent steps in parallel, maintain state explicitly, and implement recovery logic for each failure mode. The result is LLM-powered workflows that match the reliability of traditional software pipelines.</p></div>
     </article>
@@ -308,9 +1654,15 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
-      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
+    </section>
+    
+    <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
+      <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
+      <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
+      <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
   </div>
 </main>

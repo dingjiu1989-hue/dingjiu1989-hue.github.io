@@ -8,345 +8,2457 @@ url: https://dingjiu1989-hue.github.io/en/security/patching-strategy.html
 
 # Patching Strategy
 
-Introduction   
-Patching is the most fundamental security practice, yet organizations consistently struggle with timely patch deployment. The challenge is balancing speed against stability — deploying patches too slowly leaves systems vulnerable, while deploying too quickly risks breaking critical applications. A mature patching strategy addresses both sides of this equation.   
-Vulnerability Prioritization   
-Not all vulnerabilities are equal. Prioritize based on exploitability, asset criticality, and threat intelligence.   
+# Patching Strategy
 
-    from dataclasses import dataclass
+  
 
-    from enum import Enum
 
-    class Severity(Enum):
+# Patching Strategy
 
-        CRITICAL = 1
+  
+  
+  
+  
 
-        HIGH = 2
 
-        MEDIUM = 3
+# Patching Strategy
 
-        LOW = 4
+  
+  
+  
+  
+  
+  
+  
 
-    @dataclass
 
-    class Vulnerability:
+# Patching Strategy
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        cve_id: str
+
+Introduction 
+
+  
+  
+  
+  
+  
+  
+  
 
-        cvss_score: float
 
-        asset_criticality: int  # 1-5
+Patching is the most fundamental security practice, yet organizations consistently struggle with timely patch deployment. The challenge is balancing speed against stability — deploying patches too slowly leaves systems vulnerable, while deploying too quickly risks breaking critical applications. A mature patching strategy addresses both sides of this equation. 
+
+  
+  
+  
+  
+  
+  
+  
 
-        exploit_available: bool
 
-        in_wild: bool
+Vulnerability Prioritization 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+Not all vulnerabilities are equal. Prioritize based on exploitability, asset criticality, and threat intelligence. 
 
-        affected_systems: int
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+from dataclasses import dataclass
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+from enum import Enum
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+class Severity(Enum):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+CRITICAL = 1
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+HIGH = 2
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+MEDIUM = 3
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+LOW = 4
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+@dataclass
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+class Vulnerability:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+cve_id: str
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+cvss_score: float
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+asset_criticality: int # 1-5
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+exploit_available: bool
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+in_wild: bool
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+affected_systems: int
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def prioritize(vuln: Vulnerability) -> int:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+score = vuln.cvss_score
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Asset criticality multiplier
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+score *= (vuln.asset_criticality / 3)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Exploit availability
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if vuln.exploit_available:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+score *= 1.5
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if vuln.in_wild:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+score *= 2.0
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Reachability
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if vuln.affected_systems > 100:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+score *= 1.3
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return round(score, 1)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Prioritization Matrix 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+patch_priority:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+critical:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- cvss_score: ">= 9.0"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- exploit_in_wild: true
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- sla_hours: 24
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- process: emergency_change
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+high:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- cvss_score: "7.0 - 8.9"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- exploit_available: true
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- sla_days: 7
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- process: standard_change_fast_track
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+medium:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- cvss_score: "4.0 - 6.9"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- sla_days: 30
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- process: standard_change
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+low:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- cvss_score: "< 4.0"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- sla_days: 90
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- process: next_maintenance_window
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Patch Testing Pipeline 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+Test patches in a progressive environment chain before production deployment. 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+patch_pipeline:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+stages:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- environment: development
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+validation:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- automated_tests_pass
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- integration_tests_pass
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+rollback: immediate_redeploy
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- environment: staging
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+validation:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- regression_tests_pass
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- performance_tests_pass
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- security_scan_pass
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+duration: 24_hours
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- environment: canary
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+validation:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- error_rate_below_baseline
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- latency_below_baseline
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- no_critical_alerts
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+duration: 4_hours
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+percentage: 10%
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- environment: production
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+strategy: rolling_update
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+max_surge: 25%
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+max_unavailable: 0
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+#!/bin/bash
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Automated patch testing script
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+set -euo pipefail
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+PATCH_ID="$1"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+ENVIRONMENTS=("dev" "staging" "canary" "prod")
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+for env in "${ENVIRONMENTS[@]}"; do
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+echo "=== Deploying patch $PATCH_ID to $env ==="
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Apply patch
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if ! ansible-playbook -i inventories/$env patch-playbook.yml \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+-e patch_id=$PATCH_ID; then
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+echo "FAILED: Patch deployment to $env"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+rollback_patch $env $PATCH_ID
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+exit 1
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+fi
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Run validation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if ! run_validation_tests $env; then
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+echo "FAILED: Validation in $env"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+rollback_patch $env $PATCH_ID
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+exit 1
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+fi
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Monitor for issues
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+sleep $([ "$env" == "production" ] && echo 3600 || echo 300)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if check_alerts $env; then
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+echo "ALERTS detected in $env after patch"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+rollback_patch $env $PATCH_ID
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+exit 1
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+fi
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+echo "=== Patch $PATCH_ID passed in $env ==="
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+done
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Emergency Patches 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+Zero-day exploits require immediate action, bypassing normal testing cycles. 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+emergency_patch_workflow:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+trigger: active_exploitation_of_critical_vulnerability
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+steps:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- phase: assessment
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+duration: 1_hour
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+actions:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- confirm_exploit_activity
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- identify_affected_systems
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- assess_business_impact
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- phase: decision
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+duration: 30_minutes
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+actions:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- ciso_approval
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- change_advisory_board_notification
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- communication_plan_activation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- phase: deployment
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+duration: 2_hours
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+actions:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- deploy_workaround_virtual_patch
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- deploy_vendor_patch_to_staging
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- fast_track_testing
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- deploy_to_production
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- monitor_for_side_effects
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- phase: recovery
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+duration: 24_hours
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+actions:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- continuous_monitoring
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- post_incident_review
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\- remove_virtual_patches_if_applicable
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Virtual patching via WAF as immediate stopgap
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Deploy WAF rule to block exploit attempts
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+cat > /etc/modsecurity/crs/custom/emergency-sqli.conf << 'EOF'
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+SecRule REQUEST_FILENAME "@contains /api/endpoint" \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"id:9999999,phase:2,deny,status:403,\
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+msg:'Emergency patch: CVE-2026-1234 exploitation attempt blocked'"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+EOF
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+nginx -t && systemctl reload nginx
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Rollback Planning 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+Every patch must have a tested rollback procedure. 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+class PatchRollbackPlan:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def __init__(self, patch_id, system, version_before, version_after):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+self.patch_id = patch_id
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+self.system = system
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+self.version_before = version_before
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+self.version_after = version_after
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+self.rollback_commands = []
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+self.validation_commands = []
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def add_rollback_step(self, command):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+self.rollback_commands.append(command)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def execute_rollback(self):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"""Execute rollback if patch causes issues."""
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+for cmd in self.rollback_commands:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+result = subprocess.run(cmd, shell=True, capture_output=True)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if result.returncode != 0:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+raise Exception(f"Rollback failed: {cmd}")
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return False
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return True
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def validate_rollback(self):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"""Verify system is back to pre-patch state."""
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+for cmd in self.validation_commands:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+result = subprocess.run(cmd, shell=True, capture_output=True)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if not self._check_expected(result):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return False
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return True
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Conclusion 
+
+  
+  
+  
+  
+  
+  
+  
 
-    def prioritize(vuln: Vulnerability) -> int:
 
-        score = vuln.cvss_score
-
-        # Asset criticality multiplier
-
-        score *= (vuln.asset_criticality / 3)
-
-        # Exploit availability
-
-        if vuln.exploit_available:
-
-            score *= 1.5
-
-        if vuln.in_wild:
-
-            score *= 2.0
-
-        # Reachability
-
-        if vuln.affected_systems > 100:
-
-            score *= 1.3
-
-        return round(score, 1)
-
-Prioritization Matrix   
-
-    patch_priority:
-
-      critical:
-
-        - cvss_score: ">= 9.0"
-
-        - exploit_in_wild: true
-
-        - sla_hours: 24
-
-        - process: emergency_change
-
-      high:
-
-        - cvss_score: "7.0 - 8.9"
-
-        - exploit_available: true
-
-        - sla_days: 7
-
-        - process: standard_change_fast_track
-
-      medium:
-
-        - cvss_score: "4.0 - 6.9"
-
-        - sla_days: 30
-
-        - process: standard_change
-
-      low:
-
-        - cvss_score: "< 4.0"
-
-        - sla_days: 90
-
-        - process: next_maintenance_window
-
-Patch Testing Pipeline   
-Test patches in a progressive environment chain before production deployment.   
-
-    patch_pipeline:
-
-      stages:
-
-        - environment: development
-
-          validation:
-
-            - automated_tests_pass
-
-            - integration_tests_pass
-
-          rollback: immediate_redeploy
-
-        - environment: staging
-
-          validation:
-
-            - regression_tests_pass
-
-            - performance_tests_pass
-
-            - security_scan_pass
-
-          duration: 24_hours
-
-        - environment: canary
-
-          validation:
-
-            - error_rate_below_baseline
-
-            - latency_below_baseline
-
-            - no_critical_alerts
-
-          duration: 4_hours
-
-          percentage: 10%
-
-        - environment: production
-
-          strategy: rolling_update
-
-          max_surge: 25%
-
-          max_unavailable: 0
-
-    #!/bin/bash
-
-    # Automated patch testing script
-
-    set -euo pipefail
-
-    PATCH_ID="$1"
-
-    ENVIRONMENTS=("dev" "staging" "canary" "prod")
-
-    for env in "${ENVIRONMENTS[@]}"; do
-
-        echo "=== Deploying patch $PATCH_ID to $env ==="
-
-        # Apply patch
-
-        if ! ansible-playbook -i inventories/$env patch-playbook.yml \
-
-             -e patch_id=$PATCH_ID; then
-
-            echo "FAILED: Patch deployment to $env"
-
-            rollback_patch $env $PATCH_ID
-
-            exit 1
-
-        fi
-
-        # Run validation
-
-        if ! run_validation_tests $env; then
-
-            echo "FAILED: Validation in $env"
-
-            rollback_patch $env $PATCH_ID
-
-            exit 1
-
-        fi
-
-        # Monitor for issues
-
-        sleep $([ "$env" == "production" ] && echo 3600 || echo 300)
-
-        if check_alerts $env; then
-
-            echo "ALERTS detected in $env after patch"
-
-            rollback_patch $env $PATCH_ID
-
-            exit 1
-
-        fi
-
-        echo "=== Patch $PATCH_ID passed in $env ==="
-
-    done
-
-Emergency Patches   
-Zero-day exploits require immediate action, bypassing normal testing cycles.   
-
-    emergency_patch_workflow:
-
-      trigger: active_exploitation_of_critical_vulnerability
-
-      steps:
-
-        - phase: assessment
-
-          duration: 1_hour
-
-          actions:
-
-            - confirm_exploit_activity
-
-            - identify_affected_systems
-
-            - assess_business_impact
-
-        - phase: decision
-
-          duration: 30_minutes
-
-          actions:
-
-            - ciso_approval
-
-            - change_advisory_board_notification
-
-            - communication_plan_activation
-
-        - phase: deployment
-
-          duration: 2_hours
-
-          actions:
-
-            - deploy_workaround_virtual_patch
-
-            - deploy_vendor_patch_to_staging
-
-            - fast_track_testing
-
-            - deploy_to_production
-
-            - monitor_for_side_effects
-
-        - phase: recovery
-
-          duration: 24_hours
-
-          actions:
-
-            - continuous_monitoring
-
-            - post_incident_review
-
-            - remove_virtual_patches_if_applicable
-
-    # Virtual patching via WAF as immediate stopgap
-
-    # Deploy WAF rule to block exploit attempts
-
-    cat > /etc/modsecurity/crs/custom/emergency-sqli.conf << 'EOF'
-
-    SecRule REQUEST_FILENAME "@contains /api/endpoint" \
-
-        "id:9999999,phase:2,deny,status:403,\
-
-         msg:'Emergency patch: CVE-2026-1234 exploitation attempt blocked'"
-
-    EOF
-
-    nginx -t && systemctl reload nginx
-
-Rollback Planning   
-Every patch must have a tested rollback procedure.   
-
-    class PatchRollbackPlan:
-
-        def __init__(self, patch_id, system, version_before, version_after):
-
-            self.patch_id = patch_id
-
-            self.system = system
-
-            self.version_before = version_before
-
-            self.version_after = version_after
-
-            self.rollback_commands = []
-
-            self.validation_commands = []
-
-        def add_rollback_step(self, command):
-
-            self.rollback_commands.append(command)
-
-        def execute_rollback(self):
-
-            """Execute rollback if patch causes issues."""
-
-            for cmd in self.rollback_commands:
-
-                result = subprocess.run(cmd, shell=True, capture_output=True)
-
-                if result.returncode != 0:
-
-                    raise Exception(f"Rollback failed: {cmd}")
-
-                    return False
-
-            return True
-
-        def validate_rollback(self):
-
-            """Verify system is back to pre-patch state."""
-
-            for cmd in self.validation_commands:
-
-                result = subprocess.run(cmd, shell=True, capture_output=True)
-
-                if not self._check_expected(result):
-
-                    return False
-
-            return True
-
-Conclusion   
 A mature patching strategy prioritizes based on exploitability and asset criticality, tests patches in progressive environments, maintains emergency procedures for zero-day vulnerabilities, and always plans for rollback. Automate as much of the pipeline as possible — manual patching does not scale and is prone to error in high-pressure situations.

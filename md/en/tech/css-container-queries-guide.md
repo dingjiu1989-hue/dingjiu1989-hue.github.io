@@ -1,7 +1,7 @@
 ---
 title: "CSS Container Queries Guide: Component-Based Responsive Design Without Media Queries"
 description: "Complete guide to CSS container queries — syntax, real-world patterns, container query units, style queries, and when to still use media queries."
-date: 2026-05-08
+date: 2026-05-12
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/css-container-queries-guide.html
 ---
@@ -20,15 +20,16 @@ Queries the viewport width/height| Queries a parent container's width/height/inl
 Good for: page-level layout (header, sidebar, grid)| Good for: component-level adaptation (cards, forms, lists)  
 Component must know about the page structure| Component is self-contained; works in any layout context  
 Available since 2012 (IE9+)| Available since 2023 (all modern browsers, 95%+ support)  
-
+  
 ## The Syntax
-
+    
+    
     /* 1. Define a containment context */
     .card-wrapper {
         container-type: inline-size;  /* enables container queries on this element */
         container-name: card;         /* optional: name for targeting specific containers */
     }
-
+    
     /* 2. Query the container */
     @container card (min-width: 400px) {
         .card {
@@ -37,7 +38,7 @@ Available since 2012 (IE9+)| Available since 2023 (all modern browsers, 95%+ sup
             gap: 1rem;
         }
     }
-
+    
     @container (max-width: 300px) {
         .card {
             display: block;
@@ -56,15 +57,16 @@ cqh| 1% of container height| Element height proportional to container
 cqi| 1% of container inline size| Logical property: 1% of width in LTR, height in vertical writing modes  
 cqb| 1% of container block size| Logical property: 1% of height in LTR  
 cqmin / cqmax| min/max of cqi and cqb| Ensure elements fit in either dimension  
-
+  
 ## Real-World Patterns
 
 **Pattern 1: Adaptive Card Layout.** The classic container query use case. A card displays vertically in a narrow container (sidebar) and horizontally in a wide container (main content). The card doesn't need to know where it is — it adapts to the space it's given.
-
+    
+    
     .card-container {
         container-type: inline-size;
     }
-
+    
     @container (min-width: 350px) {
         .card {
             flex-direction: row;
@@ -77,7 +79,8 @@ cqmin / cqmax| min/max of cqi and cqb| Ensure elements fit in either dimension
     }
 
 **Pattern 2: Responsive Typography Inside Components.** Use cqw units to scale text proportionally within a card, so a card in a wide column has larger text than the same card in a narrow sidebar.
-
+    
+    
     .widget {
         container-type: inline-size;
     }
@@ -89,7 +92,8 @@ cqmin / cqmax| min/max of cqi and cqb| Ensure elements fit in either dimension
     }
 
 **Pattern 3: Grid Columns Based on Container Width.** Change the number of columns based on container width, not viewport width. A grid of items in a 600px sidebar shows 2 columns; the same grid in a 900px main area shows 3 columns.
-
+    
+    
     .grid-container {
         container-type: inline-size;
     }
@@ -105,7 +109,8 @@ cqmin / cqmax| min/max of cqi and cqb| Ensure elements fit in either dimension
     }
 
 **Pattern 4: Container Queries + CSS Grid for Page Layouts.** Combine container queries with CSS Grid's auto-fit/minmax for truly responsive layouts without media queries. The grid places as many columns as fit; container queries handle the styling inside each grid cell.
-
+    
+    
     .page-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -118,7 +123,8 @@ cqmin / cqmax| min/max of cqi and cqb| Ensure elements fit in either dimension
 ## Style Queries (The Next Frontier)
 
 Beyond container size queries, CSS now supports style queries — querying CSS custom property values:
-
+    
+    
     @container style(--theme: dark) {
         .card {
             background: #1a1a2e;

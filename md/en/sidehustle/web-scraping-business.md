@@ -19,7 +19,7 @@ Lead Generation| $3,000–$20,000/mo| Medium| Scraping business directories, sel
 Price Monitoring API| $5,000–$30,000/mo| Medium-High| Real-time competitor price tracking for e-commerce  
 Market Research Reports| $2,000–$15,000/mo| Medium| Aggregated industry trends from public data  
 SEO Monitoring| $3,000–$25,000/mo| Medium| SERP tracking, content gap analysis  
-
+  
 ## Technical Stack Comparison
 
 Tool| Best For| Language| Strengths| Weaknesses  
@@ -29,7 +29,7 @@ Puppeteer| Chrome-specific scraping| JS| Lightweight (compared to Playwright), C
 Scrapy| Large-scale scraping, data pipelines| Python| Middleware, built-in export pipelines, fastest for HTTP| No JavaScript rendering (needs Splash or Playwright plugin)  
 Cheerio + Axios| Simple HTML parsing, maximum speed| JS| Extremely fast, low resource usage| No JavaScript rendering, manual everything  
 Crawlee (Apify)| Production scraping with anti-blocking| JS/Python| Auto-rotating proxies, fingerprint rotation, queue management| Vendor lock-in risk (Apify platform)  
-
+  
 ## Legal and Ethical Boundaries
 
 Factor| Safe Zone| Danger Zone  
@@ -39,16 +39,17 @@ Rate| Respectful delays (1-5 seconds between requests)| Aggressive crawling that
 robots.txt| Honor it — disallowed paths are off-limits| Ignoring robots.txt (may constitute unauthorized access)  
 Terms of Service| Review before scraping; prefer sites that don't prohibit it| Violating ToS that explicitly prohibit scraping (legal risk varies by jurisdiction)  
 Identifier| Clear user agent, contact info in requests| Spoofing user agents to evade detection  
-
+  
 ## Proxy Infrastructure
-
+    
+    
     # Production scraping architecture
     # Layer 1: Rotating residential proxies (Bright Data, Oxylabs)
     # Layer 2: Request throttling (exponential backoff)
     # Layer 3: Fingerprint rotation (Playwright with stealth plugin)
     # Layer 4: CAPTCHA solving (2Captcha integration for tough blocks)
     # Layer 5: Retry + queue management (Redis-backed task queue)
-
+    
     # Key metric: success rate > 95% for target sites
     # If success rate < 90%, your proxy pool or fingerprinting needs work
 

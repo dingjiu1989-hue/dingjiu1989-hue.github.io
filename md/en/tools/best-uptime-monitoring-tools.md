@@ -23,7 +23,7 @@ Synthetic Monitoring| Basic (API endpoint checks)| Transaction monitoring| No| Y
 Free Tier| 10 monitors, 3-min checks| None (14-day trial)| 50 monitors, 5-min checks| 50 API checks, 5K browser runs/mo  
 Paid Starting Price| $24/mo| $10/mo| $8/mo| $16/mo  
 Best For| Modern teams, status pages| Enterprise, global coverage| Simple HTTP monitoring, budget| Browser-based synthetic checks  
-
+  
 ## Uptime Monitoring Features That Matter
 
 Feature| Why It Matters  
@@ -34,7 +34,7 @@ Keyword Assertions| Check that the response body contains expected content — a
 Escalation Policies| If the primary on-call doesn't respond, automatically escalate to the next person after N minutes.  
 Maintenance Windows| Suppress alerts during planned maintenance to avoid false alarms.  
 Status Pages| Publicly communicate uptime and incidents to your users — builds trust.  
-
+  
 ## Decision Matrix
 
 Scenario| Best Tool| Why  
@@ -44,5 +44,5 @@ Enterprise, need global coverage (100+ locations)| Pingdom| Most check locations
 Budget-constrained, many endpoints to monitor| UptimeRobot| 50 free monitors, cheapest paid plans  
 Browser-based testing (login flows, form submits)| Checkly| Playwright-based synthetic checks, best for browser  
 Simple health checks for side projects| UptimeRobot (free)| 50 free monitors, good enough for most projects  
-
+  
 **Bottom line:** Start with UptimeRobot's free tier — 50 monitors at 5-minute intervals is generous. Upgrade to Better Uptime when you need a status page and faster checks (3-min). Add Checkly when you need browser-based synthetic monitoring for critical user flows. Pingdom is the enterprise choice with the most global check locations. See also: [Best Monitoring Tools](</en/tools/best-monitoring-tools.html>) and [Best Log Management Tools](</en/tools/best-log-management-tools.html>).

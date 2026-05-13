@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/attention-mechanisms.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "587",
+      "wordCount": "827",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/attention-mechanisms.html"},
-      "articleBody": "Attention Mechanisms in Neural Networks Attention mechanisms allow neural networks to focus on relevant parts of input when producing output. Since the original transformer, numerous attention variants have improved efficiency, quality, and scalability. From Additive to Dot-Product Bahdanau attention (additive attention) uses a small feed-forward network to compute attention scores. It introduced attention to neural machine translation but is computationally expensive. Luong attention (multiplicative/dot-product) computes scores as a dot product, enabling efficient matrix multiplication. Scaled dot-product attention (transformer) divides scores by sqrt(d_k) to prevent softmax saturation at high dimensions. This simple scaling stabilizes training and enables parallel computation. Modern LLMs universally use scaled dot-product attention. Causal Attention Causal (masked) attention prevents tokens from attending to future tokens. The attention mask sets future token scores to -infinity before softmax, ensuring predictions depend only on previous tokens. This is essential for autoregressive language models. Causal attention introduces a triangular mask. During training, teacher forcing uses the mask to predict each token given only previous tokens. During inference, the mask prevents looking ahead. PrefixLM uses a bidirectional prefix followed by causal attention for the generation part. Multi-Query and Grouped-Query Attention Multi-Query Attention (MQA) shares key-value heads across all query heads, dramatically reducing KV cache memory. MQA reduces memory by 4-8x with minimal quality loss. It is used in PaLM and Falcon. Grouped-Query Attention (GQA) is a middle ground between MHA and MQA. Query heads are divided into groups sharing key-value heads. GQA with 8 key-value groups for 32 query heads offers better quality than MQA with similar memory savings. GQA is used in Llama 2/3 and Mistral. FlashAttention FlashAttention computes attention without materializing the full N\u00d7N attention matrix, reducing memory from O(N\u00b2) to O(N). It uses tiling to process attention in blocks that fit in fast on-chip SRAM. IO-aware algorithms minimize slow HBM accesses. FlashAttention 2 improves parallelism and reduces non-matmul operations. FlashAttention 3 adds FP8 support and asynchronous processing. These optimizations make long-context transformers practical\u2014enabling 128K+ token contexts by reducing attention memory overhead. Sparse Attention Sparse attention patterns reduce computation by only attending to a subset of tokens. Sliding window attention attends to local tokens. Global tokens attend to all tokens. BigBird and Longformer combine local, global, and random attention patterns for linear complexity."
+      "articleBody": "Attention Mechanisms in Neural Networks Attention Mechanisms in Neural Networks Attention Mechanisms in Neural Networks Attention Mechanisms in Neural Networks Attention Mechanisms in Neural Networks Attention mechanisms allow neural networks to focus on relevant parts of input when producing output. Since the original transformer, numerous attention variants have improved efficiency, quality, and scalability. From Additive to Dot-Product Bahdanau attention (additive attention) uses a small feed-forward network to compute attention scores. It introduced attention to neural machine translation but is computationally expensive. Luong attention (multiplicative/dot-product) computes scores as a dot product, enabling efficient matrix multiplication. Scaled dot-product attention (transformer) divides scores by sqrt(d_k) to prevent softmax saturation at high dimensions. This simple scaling stabilizes training and enables parallel computation. Modern LLMs universally use scaled dot-product attention. Causal Attention Causal (masked) attention prevents tokens from attending to future tokens. The attention mask sets future token scores to -infinity before softmax, ensuring predictions depend only on previous tokens. This is essential for autoregressive language models. Causal attention introduces a triangular mask. During training, teacher forcing uses the mask to predict each token given only previous tokens. During inference, the mask prevents looking ahead. PrefixLM uses a bidirectional prefix followed by causal attention for the generation part. Multi-Query and Grouped-Query Attention Multi-Query Attention (MQA) shares key-value heads across all query heads, dramatically reducing KV cache memory. MQA reduces memory by 4-8x with minimal quality loss. It is used in PaLM and Falcon. Grouped-Query Attention (GQA) is a middle ground between MHA and MQA. Query heads are divided into groups sharing key-value heads. GQA with 8 key-value groups for 32 query heads offers better quality than MQA with similar memory savings. GQA is used in Llama 2/3 and Mistral. FlashAttention FlashAttention computes attention without materializing the full N\u00d7N attention matrix, reducing memory from O(N\u00b2) to O(N). It uses tiling to process attention in blocks that fit in fast on-chip SRAM. IO-aware algorithms minimize slow HBM accesses. FlashAttention 2 improves parallelism and reduces non-matmul operations. FlashAttention 3 adds FP8 support and asynchronous processing. These optimizations make long-context transformers practical\u2014enabling 128K+ token contexts by reducing attention memory overhead. Sparse Attention Sparse attention patterns reduce computation by only attending to a subset of tokens. Sliding window attention attends to local tokens. Global tokens attend to all tokens. BigBird and Longformer combine local, global, and random attention patterns for linear complexity."
     }
     </script>
     <script type="application/ld+json">
@@ -77,33 +77,237 @@
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/attention-mechanisms.png" alt="Attention Mechanisms in Neural Networks" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Attention Mechanisms in Neural Networks</h1>
+<br>
+<h1>Attention Mechanisms in Neural Networks</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>Attention Mechanisms in Neural Networks</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Attention Mechanisms in Neural Networks</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Attention Mechanisms in Neural Networks</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Attention mechanisms allow neural networks to focus on relevant parts of input when producing output. Since the original transformer, numerous attention variants have improved efficiency, quality, and scalability.</p>
 <br>
-<h2> From Additive to Dot-Product</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  From Additive to Dot-Product</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Bahdanau attention (additive attention) uses a small feed-forward network to compute attention scores. It introduced attention to neural machine translation but is computationally expensive. Luong attention (multiplicative/dot-product) computes scores as a dot product, enabling efficient matrix multiplication.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Scaled dot-product attention (transformer) divides scores by sqrt(d_k) to prevent softmax saturation at high dimensions. This simple scaling stabilizes training and enables parallel computation. Modern LLMs universally use scaled dot-product attention.</p>
 <br>
-<h2> Causal Attention</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Causal Attention</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Causal (masked) attention prevents tokens from attending to future tokens. The attention mask sets future token scores to -infinity before softmax, ensuring predictions depend only on previous tokens. This is essential for autoregressive language models.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Causal attention introduces a triangular mask. During training, teacher forcing uses the mask to predict each token given only previous tokens. During inference, the mask prevents looking ahead. PrefixLM uses a bidirectional prefix followed by causal attention for the generation part.</p>
 <br>
-<h2> Multi-Query and Grouped-Query Attention</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Multi-Query and Grouped-Query Attention</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Multi-Query Attention (MQA) shares key-value heads across all query heads, dramatically reducing KV cache memory. MQA reduces memory by 4-8x with minimal quality loss. It is used in PaLM and Falcon.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Grouped-Query Attention (GQA) is a middle ground between MHA and MQA. Query heads are divided into groups sharing key-value heads. GQA with 8 key-value groups for 32 query heads offers better quality than MQA with similar memory savings. GQA is used in Llama 2/3 and Mistral.</p>
 <br>
-<h2> FlashAttention</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  FlashAttention</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>FlashAttention computes attention without materializing the full N×N attention matrix, reducing memory from O(N²) to O(N). It uses tiling to process attention in blocks that fit in fast on-chip SRAM. IO-aware algorithms minimize slow HBM accesses.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>FlashAttention 2 improves parallelism and reduces non-matmul operations. FlashAttention 3 adds FP8 support and asynchronous processing. These optimizations make long-context transformers practical—enabling 128K+ token contexts by reducing attention memory overhead.</p>
 <br>
-<h2> Sparse Attention</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Sparse Attention</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Sparse attention patterns reduce computation by only attending to a subset of tokens. Sliding window attention attends to local tokens. Global tokens attend to all tokens. BigBird and Longformer combine local, global, and random attention patterns for linear complexity.</p></div>
     </article>
@@ -117,9 +321,15 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
-      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
+    </section>
+    
+    <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
+      <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
+      <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
+      <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
   </div>
 </main>

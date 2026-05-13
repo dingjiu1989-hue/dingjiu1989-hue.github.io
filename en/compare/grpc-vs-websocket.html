@@ -41,7 +41,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/compare/grpc-vs-websocket.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "3137",
+      "wordCount": "6269",
       "keywords": "Comparison, Technology",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +49,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/grpc-vs-websocket-real-time-communication-490c"
       ],
-      "articleBody": "gRPC vs WebSocket: Real-Time Communication Introduction Real-time communication is essential for modern applications--from chat and live dashboards to multiplayer gaming and financial trading platforms. gRPC and WebSocket represent two fundamentally different approaches to bidirectional streaming. gRPC builds on HTTP/2 with Protocol Buffers for typed, efficient RPCs. WebSocket provides a message-oriented protocol over a single TCP connection. This article compares them across the dimensions that matter for real-time application design. Protocol Fundamentals gRPC: HTTP/2 + Protocol Buffers gRPC leverages HTTP/2 multiplexing and Protocol Buffers for typed, efficient communication: // order.proto syntax = \"proto3\"; package order; service OrderService { // Unary RPC (request-response) rpc CreateOrder(CreateOrderRequest) returns (Order); // Server streaming (push events to client) rpc SubscribeOrders(OrderFilter) returns (stream Order); // Client streaming (upload batch) rpc BulkCreateOrders(stream CreateOrderRequest) returns (BulkResponse); // Bidirectional streaming (full duplex) rpc ProcessOrders(stream OrderAction) returns (stream OrderResult); } message Order { string id = 1; string user_id = 2; repeated LineItem items = 3; double total = 4; OrderStatus status = 5; google.protobuf.Timestamp created_at = 6; } message CreateOrderRequest { string user_id = 1; repeated LineItem items = 2; } message OrderFilter { repeated string statuses = 1; } message LineItem { string product_id = 1; int32 quantity = 2; double price = 3; } enum OrderStatus { PENDING = 0; CONFIRMED = 1; PROCESSING = 2; SHIPPED = 3; DELIVERED = 4; CANCELLED = 5; } Server implementation in Go: package main import ( \"context\" \"log\" \"net\" \"google.golang.org/grpc\" pb \"path/to/proto/order\" ) type orderServer struct { pb.UnimplementedOrderServiceServer } // Bidirectional streaming func (s *orderServer) ProcessOrders( stream pb.OrderService_ProcessOrdersServer, ) error { for { action, err := stream.Recv() if err != nil { return err } // Process order action result := &pb.OrderResult{ OrderId: action.OrderId, Status: pb.OrderStatus_PROCESSING, Message: \"Order received and processing\", } if err := stream.Send(result); err != nil { return err } } } func main() { lis, _ := net.Listen(\"tcp\", \":50051\") s := grpc.NewServer( grpc.MaxRecvMsgSize(4 * 1024 * 1024), // 4MB grpc.MaxSendMsgSize(4 * 1024 * 1024), // 4MB grpc.InitialWindowSize(1 grpc.InitialConnWindowSize(1 ) pb.RegisterOrderServiceServer(s, &orderServer{}) log.Fatal(s.Serve(lis)) } Client in Python: import grpc import order_pb2 import order_pb2_grpc async def process_orders(): async with grpc.aio.insecure_channel('localhost:50051') as channel: stub = order_pb2_grpc.OrderServiceStub(channel) async def generate_actions(): for i in range(100): yield order_pb2.OrderAction( order_id=f\"ord-{i}\", action=\"process\", payload=b\"{}\", ) async for result in stub.ProcessOrders(generate_actions()): print(f\"Order {result.order_id}: {result.status}\") WebSocket: Message-Based Protocol WebSocket provides a simpler, message-oriented protocol over TCP: // WebSocket client (browser) const ws = new WebSocket('wss://api.example.com/orders'); // Connection lifecycle ws.onopen = () => { console.log('Connected to order service'); ws.send(JSON.stringify({ type: 'subscribe', channels: ['orders.created', 'orders.status'], })); }; ws.onmessage = (event) => { const message = JSON.parse(event.data); switch (message.type) { case 'order.created': displayNewOrder(message.data); break; case 'order.status': updateOrderStatus(message.data); break; case 'error': handleError(message.error); break; } }; ws.onclose = (event) => { if (event.code !== 1000) { // Unexpected close, reconnect with exponential backoff scheduleReconnect(event.code); } }; ws.onerror = (error) => { console.error('WebSocket error:', error); }; // Send action function processOrder(orderId) { if (ws.readyState === WebSocket.OPEN) { ws.send(JSON.stringify({ type: 'process_order', order_id: orderId, timestamp: Date.now(), })); } } Server in Node.js: import { WebSocketServer } from 'ws'; const wss = new WebSocketServer({ port: 8080, maxPayload: 1024 * 1024, // 1MB perMessageDeflate: true, // Compression }); wss.on('connection', (ws, req) => { const clientId = getClientId(req); ws.on('message', async (data) => { try { const message = JSON.parse(data.toString()); switch (message.type) { case 'subscribe': // Add client to topic subscriptions channelManager.subscribe(clientId, message.channels); ws.send(JSON.stringify({ type: 'subscribed', channels: message.channels, })); break; case 'process_order': // Process order and push status updates await processAndStreamUpdates(ws, message.order_id); break; } } catch (error) { ws.send(JSON.stringify({ type: 'error', error: error.message, })); } }); ws.on('close', () => { channelManager.unsubscribe(clientId); }); }); Streaming Patterns | Pattern | gRPC | WebSocket | |---|---|---| | Unary (request-response) | Native RPC | Wrapper over messages | | Server streaming | Native (server pushes multiple responses) | Manual (loop sending) | | Client streaming | Native (client sends multiple requests) | Manual (loop sending) | | Bidirectional | Native (full duplex) | Native (full duplex) | | Pub/Sub | Requires external broker | Manual topics | | Request-reply patterns | Natural | Natural | Protocol Buffers vs Raw Messages # Size comparison: gRPC (Protobuf) vs WebSocket (JSON) example_message: | Order with 3 items, totals 200 bytes gRPC (binary Protobuf): encoded_size: ~85 bytes + HTTP/2 framing: ~9 bytes Total: ~94 bytes WebSocket (JSON): encoded_size: ~320 bytes + WebSocket framing: ~6 bytes Total: ~326 bytes Savings: gRPC is ~3.5x more efficient per message # at 1000 messages/second: # gRPC: ~94 KB/s + ~30 KB/s header overhead # WebSocket (JSON): ~326 KB/s + ~30 KB/s header overhead # Daily savings: ~20 GB Type safety comparison: # gRPC: Compile-time type checking # Client gets typed stubs from proto definition request = order_pb2.CreateOrderRequest( user_id=\"user-123\", items=[ order_pb2.LineItem(product_id=\"prod-1\", quantity=2, price=29.99) ], ) response = stub.CreateOrder(request) # WebSocket: Runtime parsing # No compile-time type checking message = json.loads(data) # Must validate fields manually if not isinstance(message.get('user_id'), str): raise ValueError(\"Invalid user_id\") Browser Support | Factor | gRPC | WebSocket | |---|---|---| | Native browser support | gRPC-Web (with Envoy proxy) | Native | | HTTP/2 browser APIs | Limited | Not needed | | Streaming in browser | gRPC-Web (limited) | Full support | | Headers and cookies | Via Envoy proxy | Standard HTTP upgrade | | Fallback transport | WebSocket transport available | HTTP long-polling | # Envoy configuration for gRPC-Web static_resources: listeners: - address: socket_address: address: 0.0.0.0 port_value: 443 filter_chains: - filters: - name: envoy.filters.network.http_connection_manager typed_config: \"@type\": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager codec_type: AUTO stat_prefix: ingress_http route_config: virtual_hosts: - name: backend domains: [\"*\"] routes: - match: prefix: \"/order.OrderService/\" route: cluster: grpc-backend http_filters: - name: envoy.filters.http.grpc_web - name: envoy.filters.http.router clusters: - name: grpc-backend type: LOGICAL_DNS typed_extension_protocol_options: envoy.extensions.upstreams.http.v3.HttpProtocolOptions: \"@type\": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions explicit_http_config: http2_protocol_options: {} Use Cases | Use Case | Preferred | Reason | |---|---|---| | Microservice-to-microservice | gRPC | Typed contracts, efficient binary, built-in streaming | | Browser real-time UI | WebSocket | Native browser support, simpler API | | Mobile app real-time | WebSocket | Better battery, simpler to implement | | Internal API gateway | gRPC | Strong typing, load balancing, authentication | | Chat application | WebSocket | Message-oriented, pub/sub patterns | | Financial ticker | gRPC streaming | Lower latency, smaller payloads | | Live dashboards | WebSocket | Browser-side simplicity | | IoT device communication | gRPC | Small binary, resource efficient, bi-directional | Performance Comparison | Metric | gRPC | WebSocket | |---|---|---| | Latency (p50) | ~0.5ms | ~1ms | | Latency (p99) | ~5ms | ~10ms | | Throughput (single connection) | 10,000 msg/s | 8,000 msg/s | | Message size overhead | ~9 bytes | ~6 bytes | | Compression | Automatic (HTTP/2 HPACK) | Optional (permessage-deflate) | | Connection setup | 1 RTT (HTTP/2) | 1 RTT (HTTP upgrade) | Both protocols are fast enough for most use cases. gRPC's advantages compound at high throughput due to binary encoding and HTTP/2 multiplexing. Decision Framework * **Choose gRPC** for server-to-server communication, microservice APIs, IoT backends, or any system where strong typing, efficiency, and streaming matter more than browser compatibility. * **Choose WebSocket** for browser-based real-time applications, simple message passing, pub/sub patterns, or when you need universal protocol support without proxies. * **Use both** when your architecture needs gRPC for internal service communication and WebSocket for browser clients, with a gateway translating between them. For modern applications, gRPC is the better choice for service-to-service communication, while WebSocket remains the practical standard for browser-based real-time features."
+      "articleBody": "gRPC vs WebSocket: Real-Time Communication gRPC vs WebSocket: Real-Time Communication gRPC vs WebSocket: Real-Time Communication gRPC vs WebSocket: Real-Time Communication gRPC vs WebSocket: Real-Time Communication Introduction Real-time communication is essential for modern applications--from chat and live dashboards to multiplayer gaming and financial trading platforms. gRPC and WebSocket represent two fundamentally different approaches to bidirectional streaming. gRPC builds on HTTP/2 with Protocol Buffers for typed, efficient RPCs. WebSocket provides a message-oriented protocol over a single TCP connection. This article compares them across the dimensions that matter for real-time application design. Protocol Fundamentals gRPC: HTTP/2 + Protocol Buffers gRPC leverages HTTP/2 multiplexing and Protocol Buffers for typed, efficient communication: // order.proto syntax = \"proto3\"; package order; service OrderService { // Unary RPC (request-response) rpc CreateOrder(CreateOrderRequest) returns (Order); // Server streaming (push events to client) rpc SubscribeOrders(OrderFilter) returns (stream Order); // Client streaming (upload batch) rpc BulkCreateOrders(stream CreateOrderRequest) returns (BulkResponse); // Bidirectional streaming (full duplex) rpc ProcessOrders(stream OrderAction) returns (stream OrderResult); } message Order { string id = 1; string user_id = 2; repeated LineItem items = 3; double total = 4; OrderStatus status = 5; google.protobuf.Timestamp created_at = 6; } message CreateOrderRequest { string user_id = 1; repeated LineItem items = 2; } message OrderFilter { repeated string statuses = 1; } message LineItem { string product_id = 1; int32 quantity = 2; double price = 3; } enum OrderStatus { PENDING = 0; CONFIRMED = 1; PROCESSING = 2; SHIPPED = 3; DELIVERED = 4; CANCELLED = 5; } Server implementation in Go: package main import ( \"context\" \"log\" \"net\" \"google.golang.org/grpc\" pb \"path/to/proto/order\" ) type orderServer struct { pb.UnimplementedOrderServiceServer } // Bidirectional streaming func (s *orderServer) ProcessOrders( stream pb.OrderService_ProcessOrdersServer, ) error { for { action, err := stream.Recv() if err != nil { return err } // Process order action result := &pb.OrderResult;{ OrderId: action.OrderId, Status: pb.OrderStatus_PROCESSING, Message: \"Order received and processing\", } if err := stream.Send(result); err != nil { return err } } } func main() { lis, _ := net.Listen(\"tcp\", \":50051\") s := grpc.NewServer( grpc.MaxRecvMsgSize(4 * 1024 * 1024), // 4MB grpc.MaxSendMsgSize(4 * 1024 * 1024), // 4MB grpc.InitialWindowSize(1 grpc.InitialConnWindowSize(1 ) pb.RegisterOrderServiceServer(s, &orderServer;{}) log.Fatal(s.Serve(lis)) } Client in Python: import grpc import order_pb2 import order_pb2_grpc async def process_orders(): async with grpc.aio.insecure_channel('localhost:50051') as channel: stub = order_pb2_grpc.OrderServiceStub(channel) async def generate_actions(): for i in range(100): yield order_pb2.OrderAction( order_id=f\"ord-{i}\", action=\"process\", payload=b\"{}\", ) async for result in stub.ProcessOrders(generate_actions()): print(f\"Order {result.order_id}: {result.status}\") WebSocket: Message-Based Protocol WebSocket provides a simpler, message-oriented protocol over TCP: // WebSocket client (browser) const ws = new WebSocket('wss://api.example.com/orders'); // Connection lifecycle ws.onopen = () => { console.log('Connected to order service'); ws.send(JSON.stringify({ type: 'subscribe', channels: ['orders.created', 'orders.status'], })); }; ws.onmessage = (event) => { const message = JSON.parse(event.data); switch (message.type) { case 'order.created': displayNewOrder(message.data); break; case 'order.status': updateOrderStatus(message.data); break; case 'error': handleError(message.error); break; } }; ws.onclose = (event) => { if (event.code !== 1000) { // Unexpected close, reconnect with exponential backoff scheduleReconnect(event.code); } }; ws.onerror = (error) => { console.error('WebSocket error:', error); }; // Send action function processOrder(orderId) { if (ws.readyState === WebSocket.OPEN) { ws.send(JSON.stringify({ type: 'process_order', order_id: orderId, timestamp: Date.now(), })); } } Server in Node.js: import { WebSocketServer } from 'ws'; const wss = new WebSocketServer({ port: 8080, maxPayload: 1024 * 1024, // 1MB perMessageDeflate: true, // Compression }); wss.on('connection', (ws, req) => { const clientId = getClientId(req); ws.on('message', async (data) => { try { const message = JSON.parse(data.toString()); switch (message.type) { case 'subscribe': // Add client to topic subscriptions channelManager.subscribe(clientId, message.channels); ws.send(JSON.stringify({ type: 'subscribed', channels: message.channels, })); break; case 'process_order': // Process order and push status updates await processAndStreamUpdates(ws, message.order_id); break; } } catch (error) { ws.send(JSON.stringify({ type: 'error', error: error.message, })); } }); ws.on('close', () => { channelManager.unsubscribe(clientId); }); }); Streaming Patterns | Pattern | gRPC | WebSocket | |---|---|---| | Unary (request-response) | Native RPC | Wrapper over messages | | Server streaming | Native (server pushes multiple responses) | Manual (loop sending) | | Client streaming | Native (client sends multiple requests) | Manual (loop sending) | | Bidirectional | Native (full duplex) | Native (full duplex) | | Pub/Sub | Requires external broker | Manual topics | | Request-reply patterns | Natural | Natural | Protocol Buffers vs Raw Messages Size comparison: gRPC (Protobuf) vs WebSocket (JSON) example_message: | Order with 3 items, totals 200 bytes gRPC (binary Protobuf): encoded_size: ~85 bytes \\\\\\\\\\\\\\\\+ HTTP/2 framing: ~9 bytes Total: ~94 bytes WebSocket (JSON): encoded_size: ~320 bytes \\\\\\\\\\\\\\\\+ WebSocket framing: ~6 bytes Total: ~326 bytes Savings: gRPC is ~3.5x more efficient per message at 1000 messages/second: gRPC: ~94 KB/s + ~30 KB/s header overhead WebSocket (JSON): ~326 KB/s + ~30 KB/s header overhead Daily savings: ~20 GB Type safety comparison: gRPC: Compile-time type checking Client gets typed stubs from proto definition request = order_pb2.CreateOrderRequest( user_id=\"user-123\", items=[ order_pb2.LineItem(product_id=\"prod-1\", quantity=2, price=29.99) ], ) response = stub.CreateOrder(request) WebSocket: Runtime parsing No compile-time type checking message = json.loads(data) Must validate fields manually if not isinstance(message.get('user_id'), str): raise ValueError(\"Invalid user_id\") Browser Support | Factor | gRPC | WebSocket | |---|---|---| | Native browser support | gRPC-Web (with Envoy proxy) | Native | | HTTP/2 browser APIs | Limited | Not needed | | Streaming in browser | gRPC-Web (limited) | Full support | | Headers and cookies | Via Envoy proxy | Standard HTTP upgrade | | Fallback transport | WebSocket transport available | HTTP long-polling | Envoy configuration for gRPC-Web static_resources: listeners: \\\\\\\\\\\\\\\\- address: socket_address: address: 0.0.0.0 port_value: 443 filter_chains: \\\\\\\\\\\\\\\\- filters: \\\\\\\\\\\\\\\\- name: envoy.filters.network.http_connection_manager typed_config: \"@type\": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager codec_type: AUTO stat_prefix: ingress_http route_config: virtual_hosts: \\\\\\\\\\\\\\\\- name: backend domains: [\"*\"] routes: \\\\\\\\\\\\\\\\- match: prefix: \"/order.OrderService/\" route: cluster: grpc-backend http_filters: \\\\\\\\\\\\\\\\- name: envoy.filters.http.grpc_web \\\\\\\\\\\\\\\\- name: envoy.filters.http.router clusters: \\\\\\\\\\\\\\\\- name: grpc-backend type: LOGICAL_DNS typed_extension_protocol_options: envoy.extensions.upstreams.http.v3.HttpProtocolOptions: \"@type\": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions explicit_http_config: http2_protocol_options: {} Use Cases | Use Case | Preferred | Reason | |---|---|---| | Microservice-to-microservice | gRPC | Typed contracts, efficient binary, built-in streaming | | Browser real-time UI | WebSocket | Native browser support, simpler API | | Mobile app real-time | WebSocket | Better battery, simpler to implement | | Internal API gateway | gRPC | Strong typing, load balancing, authentication | | Chat application | WebSocket | Message-oriented, pub/sub patterns | | Financial ticker | gRPC streaming | Lower latency, smaller payloads | | Live dashboards | WebSocket | Browser-side simplicity | | IoT device communication | gRPC | Small binary, resource efficient, bi-directional | Performance Comparison | Metric | gRPC | WebSocket | |---|---|---| | Latency (p50) | ~0.5ms | ~1ms | | Latency (p99) | ~5ms | ~10ms | | Throughput (single connection) | 10,000 msg/s | 8,000 msg/s | | Message size overhead | ~9 bytes | ~6 bytes | | Compression | Automatic (HTTP/2 HPACK) | Optional (permessage-deflate) | | Connection setup | 1 RTT (HTTP/2) | 1 RTT (HTTP upgrade) | Both protocols are fast enough for most use cases. gRPC's advantages compound at high throughput due to binary encoding and HTTP/2 multiplexing. Decision Framework * **Choose gRPC** for server-to-server communication, microservice APIs, IoT backends, or any system where strong typing, efficiency, and streaming matter more than browser compatibility. * **Choose WebSocket** for browser-based real-time applications, simple message passing, pub/sub patterns, or when you need universal protocol support without proxies. * **Use both** when your architecture needs gRPC for internal service communication and WebSocket for browser clients, with a gateway translating between them. For modern applications, gRPC is the better choice for service-to-service communication, while WebSocket remains the practical standard for browser-based real-time features."
     }
     </script>
     <script type="application/ld+json">
@@ -80,595 +80,4181 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/compare/grpc-vs-websocket.png" alt="gRPC vs WebSocket: Real-Time Communication" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>gRPC vs WebSocket: Real-Time Communication</h1>
 <br>
+<h1>gRPC vs WebSocket: Real-Time Communication</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>gRPC vs WebSocket: Real-Time Communication</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>gRPC vs WebSocket: Real-Time Communication</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>gRPC vs WebSocket: Real-Time Communication</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Real-time communication is essential for modern applications--from chat and live dashboards to multiplayer gaming and financial trading platforms. gRPC and WebSocket represent two fundamentally different approaches to bidirectional streaming. gRPC builds on HTTP/2 with Protocol Buffers for typed, efficient RPCs. WebSocket provides a message-oriented protocol over a single TCP connection. This article compares them across the dimensions that matter for real-time application design.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Protocol Fundamentals</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>gRPC: HTTP/2 + Protocol Buffers</h3>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>gRPC leverages HTTP/2 multiplexing and Protocol Buffers for typed, efficient communication:</p>
 <br>
-<p>    // order.proto</p>
 <br>
-<p>    syntax = "proto3";</p>
 <br>
-<p>    package order;</p>
 <br>
-<p>    service OrderService {</p>
 <br>
-<p>        // Unary RPC (request-response)</p>
 <br>
-<p>        rpc CreateOrder(CreateOrderRequest) returns (Order);</p>
 <br>
-<p>        // Server streaming (push events to client)</p>
 <br>
-<p>        rpc SubscribeOrders(OrderFilter) returns (stream Order);</p>
 <br>
-<p>        // Client streaming (upload batch)</p>
 <br>
-<p>        rpc BulkCreateOrders(stream CreateOrderRequest) returns (BulkResponse);</p>
 <br>
-<p>        // Bidirectional streaming (full duplex)</p>
 <br>
-<p>        rpc ProcessOrders(stream OrderAction) returns (stream OrderResult);</p>
 <br>
-<p>    }</p>
+<p>// order.proto</p>
 <br>
-<p>    message Order {</p>
 <br>
-<p>        string id = 1;</p>
 <br>
-<p>        string user_id = 2;</p>
 <br>
-<p>        repeated LineItem items = 3;</p>
 <br>
-<p>        double total = 4;</p>
 <br>
-<p>        OrderStatus status = 5;</p>
 <br>
-<p>        google.protobuf.Timestamp created_at = 6;</p>
 <br>
-<p>    }</p>
 <br>
-<p>    message CreateOrderRequest {</p>
 <br>
-<p>        string user_id = 1;</p>
 <br>
-<p>        repeated LineItem items = 2;</p>
 <br>
-<p>    }</p>
 <br>
-<p>    message OrderFilter {</p>
+<p>syntax = "proto3";</p>
 <br>
-<p>        repeated string statuses = 1;</p>
 <br>
-<p>    }</p>
 <br>
-<p>    message LineItem {</p>
 <br>
-<p>        string product_id = 1;</p>
 <br>
-<p>        int32 quantity = 2;</p>
 <br>
-<p>        double price = 3;</p>
 <br>
-<p>    }</p>
 <br>
-<p>    enum OrderStatus {</p>
 <br>
-<p>        PENDING = 0;</p>
 <br>
-<p>        CONFIRMED = 1;</p>
 <br>
-<p>        PROCESSING = 2;</p>
 <br>
-<p>        SHIPPED = 3;</p>
 <br>
-<p>        DELIVERED = 4;</p>
+<p>package order;</p>
 <br>
-<p>        CANCELLED = 5;</p>
 <br>
-<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>service OrderService {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Unary RPC (request-response)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>rpc CreateOrder(CreateOrderRequest) returns (Order);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Server streaming (push events to client)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>rpc SubscribeOrders(OrderFilter) returns (stream Order);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Client streaming (upload batch)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>rpc BulkCreateOrders(stream CreateOrderRequest) returns (BulkResponse);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Bidirectional streaming (full duplex)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>rpc ProcessOrders(stream OrderAction) returns (stream OrderResult);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>message Order {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>string id = 1;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>string user_id = 2;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>repeated LineItem items = 3;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>double total = 4;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>OrderStatus status = 5;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>google.protobuf.Timestamp created_at = 6;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>message CreateOrderRequest {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>string user_id = 1;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>repeated LineItem items = 2;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>message OrderFilter {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>repeated string statuses = 1;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>message LineItem {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>string product_id = 1;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>int32 quantity = 2;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>double price = 3;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>enum OrderStatus {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>PENDING = 0;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CONFIRMED = 1;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>PROCESSING = 2;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SHIPPED = 3;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>DELIVERED = 4;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CANCELLED = 5;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Server implementation in Go:</p>
 <br>
-<p>    package main</p>
 <br>
-<p>    import (</p>
 <br>
-<p>        "context"</p>
 <br>
-<p>        "log"</p>
 <br>
-<p>        "net"</p>
 <br>
-<p>        "google.golang.org/grpc"</p>
 <br>
-<p>        pb "path/to/proto/order"</p>
 <br>
-<p>    )</p>
 <br>
-<p>    type orderServer struct {</p>
 <br>
-<p>        pb.UnimplementedOrderServiceServer</p>
 <br>
-<p>    }</p>
 <br>
-<p>    // Bidirectional streaming</p>
 <br>
-<p>    func (s *orderServer) ProcessOrders(</p>
+<p>package main</p>
 <br>
-<p>        stream pb.OrderService_ProcessOrdersServer,</p>
 <br>
-<p>    ) error {</p>
 <br>
-<p>        for {</p>
 <br>
-<p>            action, err := stream.Recv()</p>
 <br>
-<p>            if err != nil {</p>
 <br>
-<p>                return err</p>
 <br>
-<p>            }</p>
 <br>
-<p>            // Process order action</p>
 <br>
-<p>            result := &pb.OrderResult{</p>
 <br>
-<p>                OrderId: action.OrderId,</p>
 <br>
-<p>                Status:  pb.OrderStatus_PROCESSING,</p>
 <br>
-<p>                Message: "Order received and processing",</p>
 <br>
-<p>            }</p>
+<p>import (</p>
 <br>
-<p>            if err := stream.Send(result); err != nil {</p>
 <br>
-<p>                return err</p>
 <br>
-<p>            }</p>
 <br>
-<p>        }</p>
 <br>
-<p>    }</p>
 <br>
-<p>    func main() {</p>
 <br>
-<p>        lis, _ := net.Listen("tcp", ":50051")</p>
 <br>
-<p>        s := grpc.NewServer(</p>
 <br>
-<p>            grpc.MaxRecvMsgSize(4 * 1024 * 1024),    // 4MB</p>
 <br>
-<p>            grpc.MaxSendMsgSize(4 * 1024 * 1024),    // 4MB</p>
 <br>
-<p>            grpc.InitialWindowSize(1<<31 - 1),        // Flow control</p>
 <br>
-<p>            grpc.InitialConnWindowSize(1<<31 - 1),</p>
 <br>
-<p>        )</p>
+<p>"context"</p>
 <br>
-<p>        pb.RegisterOrderServiceServer(s, &orderServer{})</p>
 <br>
-<p>        log.Fatal(s.Serve(lis))</p>
 <br>
-<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"log"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"net"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"google.golang.org/grpc"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pb "path/to/proto/order"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>type orderServer struct {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pb.UnimplementedOrderServiceServer</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Bidirectional streaming</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>func (s *orderServer) ProcessOrders(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>stream pb.OrderService_ProcessOrdersServer,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>) error {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>action, err := stream.Recv()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if err != nil {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return err</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Process order action</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>result := &pb.OrderResult;{</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>OrderId: action.OrderId,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Status: pb.OrderStatus_PROCESSING,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Message: "Order received and processing",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if err := stream.Send(result); err != nil {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return err</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>func main() {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>lis, _ := net.Listen("tcp", ":50051")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>s := grpc.NewServer(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>grpc.MaxRecvMsgSize(4 * 1024 * 1024), // 4MB</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>grpc.MaxSendMsgSize(4 * 1024 * 1024), // 4MB</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>grpc.InitialWindowSize(1<<31 - 1), // Flow control</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>grpc.InitialConnWindowSize(1<<31 - 1),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pb.RegisterOrderServiceServer(s, &orderServer;{})</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>log.Fatal(s.Serve(lis))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Client in Python:</p>
 <br>
-<p>    import grpc</p>
 <br>
-<p>    import order_pb2</p>
 <br>
-<p>    import order_pb2_grpc</p>
 <br>
-<p>    async def process_orders():</p>
 <br>
-<p>        async with grpc.aio.insecure_channel('localhost:50051') as channel:</p>
 <br>
-<p>            stub = order_pb2_grpc.OrderServiceStub(channel)</p>
 <br>
-<p>            async def generate_actions():</p>
 <br>
-<p>                for i in range(100):</p>
 <br>
-<p>                    yield order_pb2.OrderAction(</p>
 <br>
-<p>                        order_id=f"ord-{i}",</p>
 <br>
-<p>                        action="process",</p>
 <br>
-<p>                        payload=b"{}",</p>
 <br>
-<p>                    )</p>
+<p>import grpc</p>
 <br>
-<p>            async for result in stub.ProcessOrders(generate_actions()):</p>
 <br>
-<p>                print(f"Order {result.order_id}: {result.status}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import order_pb2</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import order_pb2_grpc</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def process_orders():</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async with grpc.aio.insecure_channel('localhost:50051') as channel:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>stub = order_pb2_grpc.OrderServiceStub(channel)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def generate_actions():</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for i in range(100):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>yield order_pb2.OrderAction(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>order_id=f"ord-{i}",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>action="process",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>payload=b"{}",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async for result in stub.ProcessOrders(generate_actions()):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>print(f"Order {result.order_id}: {result.status}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>WebSocket: Message-Based Protocol</h3>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>WebSocket provides a simpler, message-oriented protocol over TCP:</p>
 <br>
-<p>    // WebSocket client (browser)</p>
 <br>
-<p>    const ws = new WebSocket('wss://api.example.com/orders');</p>
 <br>
-<p>    // Connection lifecycle</p>
 <br>
-<p>    ws.onopen = () => {</p>
 <br>
-<p>        console.log('Connected to order service');</p>
 <br>
-<p>        ws.send(JSON.stringify({</p>
 <br>
-<p>            type: 'subscribe',</p>
 <br>
-<p>            channels: ['orders.created', 'orders.status'],</p>
 <br>
-<p>        }));</p>
 <br>
-<p>    };</p>
 <br>
-<p>    ws.onmessage = (event) => {</p>
 <br>
-<p>        const message = JSON.parse(event.data);</p>
 <br>
-<p>        switch (message.type) {</p>
+<p>// WebSocket client (browser)</p>
 <br>
-<p>            case 'order.created':</p>
 <br>
-<p>                displayNewOrder(message.data);</p>
 <br>
-<p>                break;</p>
 <br>
-<p>            case 'order.status':</p>
 <br>
-<p>                updateOrderStatus(message.data);</p>
 <br>
-<p>                break;</p>
 <br>
-<p>            case 'error':</p>
 <br>
-<p>                handleError(message.error);</p>
 <br>
-<p>                break;</p>
 <br>
-<p>        }</p>
 <br>
-<p>    };</p>
 <br>
-<p>    ws.onclose = (event) => {</p>
 <br>
-<p>        if (event.code !== 1000) {</p>
+<p>const ws = new WebSocket('wss://api.example.com/orders');</p>
 <br>
-<p>            // Unexpected close, reconnect with exponential backoff</p>
 <br>
-<p>            scheduleReconnect(event.code);</p>
 <br>
-<p>        }</p>
 <br>
-<p>    };</p>
 <br>
-<p>    ws.onerror = (error) => {</p>
 <br>
-<p>        console.error('WebSocket error:', error);</p>
 <br>
-<p>    };</p>
 <br>
-<p>    // Send action</p>
 <br>
-<p>    function processOrder(orderId) {</p>
 <br>
-<p>        if (ws.readyState === WebSocket.OPEN) {</p>
 <br>
-<p>            ws.send(JSON.stringify({</p>
 <br>
-<p>                type: 'process_order',</p>
 <br>
-<p>                order_id: orderId,</p>
+<p>// Connection lifecycle</p>
 <br>
-<p>                timestamp: Date.now(),</p>
 <br>
-<p>            }));</p>
 <br>
-<p>        }</p>
 <br>
-<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ws.onopen = () => {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>console.log('Connected to order service');</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ws.send(JSON.stringify({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>type: 'subscribe',</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>channels: ['orders.created', 'orders.status'],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}));</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>};</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ws.onmessage = (event) => {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const message = JSON.parse(event.data);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>switch (message.type) {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>case 'order.created':</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>displayNewOrder(message.data);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>break;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>case 'order.status':</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>updateOrderStatus(message.data);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>break;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>case 'error':</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>handleError(message.error);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>break;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>};</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ws.onclose = (event) => {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if (event.code !== 1000) {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Unexpected close, reconnect with exponential backoff</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>scheduleReconnect(event.code);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>};</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ws.onerror = (error) => {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>console.error('WebSocket error:', error);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>};</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Send action</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>function processOrder(orderId) {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if (ws.readyState === WebSocket.OPEN) {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ws.send(JSON.stringify({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>type: 'process_order',</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>order_id: orderId,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>timestamp: Date.now(),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}));</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Server in Node.js:</p>
 <br>
-<p>    import { WebSocketServer } from 'ws';</p>
 <br>
-<p>    const wss = new WebSocketServer({</p>
 <br>
-<p>        port: 8080,</p>
 <br>
-<p>        maxPayload: 1024 * 1024,  // 1MB</p>
 <br>
-<p>        perMessageDeflate: true,   // Compression</p>
 <br>
-<p>    });</p>
 <br>
-<p>    wss.on('connection', (ws, req) => {</p>
 <br>
-<p>        const clientId = getClientId(req);</p>
 <br>
-<p>        ws.on('message', async (data) => {</p>
 <br>
-<p>            try {</p>
 <br>
-<p>                const message = JSON.parse(data.toString());</p>
 <br>
-<p>                switch (message.type) {</p>
 <br>
-<p>                    case 'subscribe':</p>
+<p>import { WebSocketServer } from 'ws';</p>
 <br>
-<p>                        // Add client to topic subscriptions</p>
 <br>
-<p>                        channelManager.subscribe(clientId, message.channels);</p>
 <br>
-<p>                        ws.send(JSON.stringify({</p>
 <br>
-<p>                            type: 'subscribed',</p>
 <br>
-<p>                            channels: message.channels,</p>
 <br>
-<p>                        }));</p>
 <br>
-<p>                        break;</p>
 <br>
-<p>                    case 'process_order':</p>
 <br>
-<p>                        // Process order and push status updates</p>
 <br>
-<p>                        await processAndStreamUpdates(ws, message.order_id);</p>
 <br>
-<p>                        break;</p>
 <br>
-<p>                }</p>
 <br>
-<p>            } catch (error) {</p>
+<p>const wss = new WebSocketServer({</p>
 <br>
-<p>                ws.send(JSON.stringify({</p>
 <br>
-<p>                    type: 'error',</p>
 <br>
-<p>                    error: error.message,</p>
 <br>
-<p>                }));</p>
 <br>
-<p>            }</p>
 <br>
-<p>        });</p>
 <br>
-<p>        ws.on('close', () => {</p>
 <br>
-<p>            channelManager.unsubscribe(clientId);</p>
 <br>
-<p>        });</p>
 <br>
-<p>    });</p>
+<br>
+<br>
+<br>
+<p>port: 8080,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>maxPayload: 1024 * 1024, // 1MB</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>perMessageDeflate: true, // Compression</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>wss.on('connection', (ws, req) => {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const clientId = getClientId(req);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ws.on('message', async (data) => {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>try {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const message = JSON.parse(data.toString());</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>switch (message.type) {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>case 'subscribe':</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Add client to topic subscriptions</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>channelManager.subscribe(clientId, message.channels);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ws.send(JSON.stringify({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>type: 'subscribed',</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>channels: message.channels,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}));</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>break;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>case 'process_order':</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Process order and push status updates</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await processAndStreamUpdates(ws, message.order_id);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>break;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>} catch (error) {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ws.send(JSON.stringify({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>type: 'error',</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>error: error.message,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}));</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ws.on('close', () => {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>channelManager.unsubscribe(clientId);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Streaming Patterns</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Pattern | gRPC | WebSocket |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>|---|---|---|</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Unary (request-response) | Native RPC | Wrapper over messages |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Server streaming | Native (server pushes multiple responses) | Manual (loop sending) |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Client streaming | Native (client sends multiple requests) | Manual (loop sending) |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Bidirectional | Native (full duplex) | Native (full duplex) |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Pub/Sub | Requires external broker | Manual topics |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Request-reply patterns | Natural | Natural |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Protocol Buffers vs Raw Messages</h2>
 <br>
-<p>    # Size comparison: gRPC (Protobuf) vs WebSocket (JSON)</p>
 <br>
-<p>    example_message: |</p>
 <br>
-<p>      Order with 3 items, totals 200 bytes</p>
 <br>
-<p>    gRPC (binary Protobuf):</p>
 <br>
-<p>      encoded_size: ~85 bytes</p>
 <br>
-<p>      + HTTP/2 framing: ~9 bytes</p>
 <br>
-<p>      Total: ~94 bytes</p>
 <br>
-<p>    WebSocket (JSON):</p>
 <br>
-<p>      encoded_size: ~320 bytes</p>
 <br>
-<p>      + WebSocket framing: ~6 bytes</p>
 <br>
-<p>      Total: ~326 bytes</p>
 <br>
-<p>    Savings: gRPC is ~3.5x more efficient per message</p>
 <br>
-<p>    # at 1000 messages/second:</p>
+<h1>Size comparison: gRPC (Protobuf) vs WebSocket (JSON)</h1>
 <br>
-<p>    # gRPC: ~94 KB/s + ~30 KB/s header overhead</p>
 <br>
-<p>    # WebSocket (JSON): ~326 KB/s + ~30 KB/s header overhead</p>
 <br>
-<p>    # Daily savings: ~20 GB</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>example_message: |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Order with 3 items, totals 200 bytes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>gRPC (binary Protobuf):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>encoded_size: ~85 bytes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\+ HTTP/2 framing: ~9 bytes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Total: ~94 bytes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>WebSocket (JSON):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>encoded_size: ~320 bytes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\+ WebSocket framing: ~6 bytes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Total: ~326 bytes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Savings: gRPC is ~3.5x more efficient per message</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>at 1000 messages/second:</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>gRPC: ~94 KB/s + ~30 KB/s header overhead</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>WebSocket (JSON): ~326 KB/s + ~30 KB/s header overhead</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Daily savings: ~20 GB</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Type safety comparison:</p>
 <br>
-<p>    # gRPC: Compile-time type checking</p>
 <br>
-<p>    # Client gets typed stubs from proto definition</p>
 <br>
-<p>    request = order_pb2.CreateOrderRequest(</p>
 <br>
-<p>        user_id="user-123",</p>
 <br>
-<p>        items=[</p>
 <br>
-<p>            order_pb2.LineItem(product_id="prod-1", quantity=2, price=29.99)</p>
 <br>
-<p>        ],</p>
 <br>
-<p>    )</p>
 <br>
-<p>    response = stub.CreateOrder(request)</p>
 <br>
-<p>    # WebSocket: Runtime parsing</p>
 <br>
-<p>    # No compile-time type checking</p>
 <br>
-<p>    message = json.loads(data)</p>
 <br>
-<p>    # Must validate fields manually</p>
+<h1>gRPC: Compile-time type checking</h1>
 <br>
-<p>    if not isinstance(message.get('user_id'), str):</p>
 <br>
-<p>        raise ValueError("Invalid user_id")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Client gets typed stubs from proto definition</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>request = order_pb2.CreateOrderRequest(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>user_id="user-123",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>items=[</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>order_pb2.LineItem(product_id="prod-1", quantity=2, price=29.99)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response = stub.CreateOrder(request)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>WebSocket: Runtime parsing</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>No compile-time type checking</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>message = json.loads(data)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Must validate fields manually</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if not isinstance(message.get('user_id'), str):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise ValueError("Invalid user_id")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Browser Support</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Factor | gRPC | WebSocket |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>|---|---|---|</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Native browser support | gRPC-Web (with Envoy proxy) | Native |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| HTTP/2 browser APIs | Limited | Not needed |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Streaming in browser | gRPC-Web (limited) | Full support |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Headers and cookies | Via Envoy proxy | Standard HTTP upgrade |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Fallback transport | WebSocket transport available | HTTP long-polling |</p>
 <br>
-<p>    # Envoy configuration for gRPC-Web</p>
 <br>
-<p>    static_resources:</p>
 <br>
-<p>      listeners:</p>
 <br>
-<p>        - address:</p>
 <br>
-<p>            socket_address:</p>
 <br>
-<p>              address: 0.0.0.0</p>
 <br>
-<p>              port_value: 443</p>
 <br>
-<p>          filter_chains:</p>
 <br>
-<p>            - filters:</p>
 <br>
-<p>                - name: envoy.filters.network.http_connection_manager</p>
 <br>
-<p>                  typed_config:</p>
 <br>
-<p>                    "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager</p>
 <br>
-<p>                    codec_type: AUTO</p>
+<h1>Envoy configuration for gRPC-Web</h1>
 <br>
-<p>                    stat_prefix: ingress_http</p>
 <br>
-<p>                    route_config:</p>
 <br>
-<p>                      virtual_hosts:</p>
 <br>
-<p>                        - name: backend</p>
 <br>
-<p>                          domains: ["*"]</p>
 <br>
-<p>                          routes:</p>
 <br>
-<p>                            - match:</p>
 <br>
-<p>                                prefix: "/order.OrderService/"</p>
 <br>
-<p>                              route:</p>
 <br>
-<p>                                cluster: grpc-backend</p>
 <br>
-<p>                    http_filters:</p>
 <br>
-<p>                      - name: envoy.filters.http.grpc_web</p>
 <br>
-<p>                      - name: envoy.filters.http.router</p>
+<p>static_resources:</p>
 <br>
-<p>      clusters:</p>
 <br>
-<p>        - name: grpc-backend</p>
 <br>
-<p>          type: LOGICAL_DNS</p>
 <br>
-<p>          typed_extension_protocol_options:</p>
 <br>
-<p>            envoy.extensions.upstreams.http.v3.HttpProtocolOptions:</p>
 <br>
-<p>              "@type": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions</p>
 <br>
-<p>              explicit_http_config:</p>
 <br>
-<p>                http2_protocol_options: {}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>listeners:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- address:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>socket_address:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>address: 0.0.0.0</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>port_value: 443</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>filter_chains:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- filters:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: envoy.filters.network.http_connection_manager</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>typed_config:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>codec_type: AUTO</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>stat_prefix: ingress_http</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>route_config:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>virtual_hosts:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: backend</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>domains: ["*"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>routes:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- match:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>prefix: "/order.OrderService/"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>route:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cluster: grpc-backend</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>http_filters:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: envoy.filters.http.grpc_web</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: envoy.filters.http.router</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>clusters:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: grpc-backend</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>type: LOGICAL_DNS</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>typed_extension_protocol_options:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>envoy.extensions.upstreams.http.v3.HttpProtocolOptions:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"@type": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>explicit_http_config:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>http2_protocol_options: {}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Use Cases</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Use Case | Preferred | Reason |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>|---|---|---|</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Microservice-to-microservice | gRPC | Typed contracts, efficient binary, built-in streaming |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Browser real-time UI | WebSocket | Native browser support, simpler API |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Mobile app real-time | WebSocket | Better battery, simpler to implement |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Internal API gateway | gRPC | Strong typing, load balancing, authentication |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Chat application | WebSocket | Message-oriented, pub/sub patterns |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Financial ticker | gRPC streaming | Lower latency, smaller payloads |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Live dashboards | WebSocket | Browser-side simplicity |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| IoT device communication | gRPC | Small binary, resource efficient, bi-directional |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Performance Comparison</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Metric | gRPC | WebSocket |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>|---|---|---|</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Latency (p50) | ~0.5ms | ~1ms |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Latency (p99) | ~5ms | ~10ms |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Throughput (single connection) | 10,000 msg/s | 8,000 msg/s |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Message size overhead | ~9 bytes | ~6 bytes |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Compression | Automatic (HTTP/2 HPACK) | Optional (permessage-deflate) |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Connection setup | 1 RTT (HTTP/2) | 1 RTT (HTTP upgrade) |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Both protocols are fast enough for most use cases. gRPC's advantages compound at high throughput due to binary encoding and HTTP/2 multiplexing.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Decision Framework</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Choose gRPC** for server-to-server communication, microservice APIs, IoT backends, or any system where strong typing, efficiency, and streaming matter more than browser compatibility.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Choose WebSocket** for browser-based real-time applications, simple message passing, pub/sub patterns, or when you need universal protocol support without proxies.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Use both** when your architecture needs gRPC for internal service communication and WebSocket for browser clients, with a gateway translating between them.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>For modern applications, gRPC is the better choice for service-to-service communication, while WebSocket remains the practical standard for browser-based real-time features.</p></div>
     </article>
@@ -685,6 +4271,12 @@
       <div class="related-grid"><a href="/en/compare/kafka-vs-rabbitmq.html" class="related-card">Kafka vs RabbitMQ vs Apache Pulsar</a><a href="/en/compare/mysql-vs-mariadb.html" class="related-card">MySQL vs MariaDB: The Complete Comparison</a><a href="/en/compare/redis-vs-memcached.html" class="related-card">Redis vs Memcached: Caching Solution Comparison</a><a href="/en/compare/rust-go-zig-comparison.html" class="related-card">Rust vs Go vs Zig in 2026: A Complete Comparison for Systems Programming</a></div>
       <noscript><div class="related-grid"><a href="/en/compare/kafka-vs-rabbitmq.html" class="related-card">Kafka vs RabbitMQ vs Apache Pulsar</a><a href="/en/compare/mysql-vs-mariadb.html" class="related-card">MySQL vs MariaDB: The Complete Comparison</a><a href="/en/compare/redis-vs-memcached.html" class="related-card">Redis vs Memcached: Caching Solution Comparison</a><a href="/en/compare/rust-go-zig-comparison.html" class="related-card">Rust vs Go vs Zig in 2026: A Complete Comparison for Systems Programming</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
+    </section>
+    
+    <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#f0fdf4;border-radius:12px;border:1px solid #bbf7d0;">
+      <h3 style="margin-top:0;font-size:1.1rem;">🧩 Which Framework Should You Use?</h3>
+      <p style="margin:0.5rem 0;color:#475569;">Not sure which frontend framework fits your project? Answer 5 questions and get a data-driven recommendation.</p>
+      <a href="/tools/framework-decision-wizard.html" style="display:inline-block;padding:0.5rem 1rem;background:#22c55e;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Try Decision Wizard →</a>
     </section>
   </div>
 </main>

@@ -10,94 +10,839 @@ url: https://dingjiu1989-hue.github.io/en/tech/on-call-best-practices.html
 
 # On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention
 
+  
+
+
+# On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention
+
+  
+  
+  
+  
+
+
+# On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention
+
+  
+  
+  
+  
+  
+  
+  
+
+
+# On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Being on-call is one of the most stressful responsibilities in engineering operations. Poor on-call practices lead to burned-out engineers, high turnover, slow incident response, and reduced system reliability. Conversely, well-designed on-call programs improve incident response times, build shared operational knowledge, and create a culture of reliability ownership.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 This article covers on-call rotation models, escalation policies, runbook creation, alert fatigue prevention, and tooling.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Rotation Models
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The primary rotation models balance coverage, fairness, and expertise distribution.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 The weekly rotation is the most common: one engineer handles alerts for a full week. This provides continuity during incidents but causes significant context-switching and burnout. Weekly rotations work best for mature services with low alert volumes.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The daily rotation shifts responsibility every 24 hours, reducing individual burden. A primary handles daytime alerts, while a secondary covers overnight with the primary only called for SEV1 escalations. This works well for global teams in different time zones.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 The follow-the-sun rotation passes responsibility across geographic regions. The APAC team carries the pager during APAC business hours, EMEA during EMEA hours, and AMER during AMER hours. This provides 24-hour coverage without overnight paging. It requires teams in at least three regions.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Pool sizing matters. The recommended minimum is four engineers per rotation. Fewer leads to burnout from frequent rotations. More than eight dilutes operational knowledge and increases time between rotations, reducing familiarity with current system state.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Escalation Policies
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Escalation policies ensure incidents are handled even when primary responders are unavailable. A typical policy has three levels:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Level 1 (Primary): The first responder for incoming alerts. Must acknowledge within the defined SLA (typically 5-15 minutes depending on severity). If unacknowledged, the alert escalates.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Level 2 (Secondary): Receives alerts if the primary does not acknowledge within the timeout. The secondary also handles overflow during multiple simultaneous incidents.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Level 3 (Engineering Manager): Escalated if both primary and secondary are unavailable. The manager coordinates broader team involvement or makes decisions about extended response.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Escalation policies should be automatic, not manual. Incident management tools like PagerDuty, Opsgenie, or Grafana OnCall automatically escalate based on acknowledgment timeouts.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Runbooks: The Essential On-Call Tool
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Runbooks are step-by-step guides for handling common incidents. Every documented runbook reduces time-to-mitigation and lowers the cognitive load on the on-call engineer. A good runbook includes:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 * Symptoms: How to recognize this alert. What dashboards or commands confirm it.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * Severity guidance: When to escalate versus handle independently.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 * Investigation steps: Specific queries, log searches, and diagnostic commands.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * Mitigation steps: Concrete actions to reduce or eliminate impact.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 * Resolution steps: Permanent fix or workaround instructions.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * Verification: How to confirm the fix is working.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 * Contact information: Subject matter experts for this component.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Runbooks should be version-controlled alongside application code in a `runbooks/` directory at the repository root. They should be tested periodically during game days or chaos engineering exercises.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Alert Fatigue Prevention
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Alert fatigue occurs when engineers receive too many alerts, causing them to ignore or dismiss notifications. The result is missed critical alerts and delayed incident response.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 The key metric is the alert-to-incident conversion rate. If fewer than 10% of alerts lead to actionable incidents, alerts are too noisy. Each alert should be evaluated against these criteria:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * Is the alert actionable? Can the engineer do something about it now?
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 * Is the alert urgent? Does it require immediate attention, or can it wait until business hours?
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * Is the alert accurate? Does it correlate with actual customer impact?
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 * Is the alert specific? Does it identify the relevant service and symptom?
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Tiered alerting routes different severity levels through different notification channels. Critical alerts page via phone call. Warning alerts send push notifications. Informational alerts go to Slack or email — during business hours only.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Tools for On-Call Management
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 PagerDuty and Opsgenie are the established leaders for on-call scheduling, escalation, and notification. Grafana OnCall (now included with Grafana Cloud) provides integrated alerting and on-call management for organizations already using Grafana.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Key features to evaluate include:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * Calendar integration for scheduling and override management.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 * Automatic escalation with customizable timeouts.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * Support for multiple notification channels (phone, SMS, push, email).
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 * Reporting on response times, incident counts, and overrides.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * Vacation and swap management.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  On-Call Culture and Quality of Life
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Technical processes mean nothing without cultural support. Compensation for on-call responsibility acknowledges its impact. Time-off after incidents prevents burnout. Regular retrospection on on-call quality identifies improvement areas.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 The best measure of on-call health is the team's willingness to participate. When engineers dread on-call weeks, it is a signal that rotation is too frequent, alerts are too noisy, or runbooks are insufficient.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Conclusion
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Effective on-call practices combine thoughtful rotation design, clear escalation policies, comprehensive runbooks, and aggressive alert noise reduction. The goal is making on-coll sustainable and predictable rather than chaotic. Organizations that invest in on-call quality see faster incident response, lower engineer burnout, and increased system reliability.

@@ -19,7 +19,7 @@ Mixpanel / Amplitude| **PostHog**|  Product analytics + session replays + featur
 Sentry| **Sentry** (self-hosted)| Sentry IS open source. Self-host for unlimited events.  
 Datadog| **Grafana** \+ **Prometheus**|  Industry-standard monitoring stack. Dashboards + alerts + metrics.  
 Statuspage| **Upptime**|  GitHub Actions-powered status page. Free monitoring every 5 min.  
-
+  
 ## Communication & Collaboration
 
 SaaS You Pay For| Open Source Alternative| One-Line Pitch  
@@ -29,7 +29,7 @@ Notion / Confluence| **Outline**|  Beautiful, fast wiki. Markdown-native, real-t
 Zoom| **Jitsi Meet**|  One-click video calls. No accounts, no limits.  
 Linear / Jira| **Plane** / **Taiga**|  Linear-style issue tracking. Open source, self-hostable.  
 Intercom / Crisp| **Chatwoot**|  Omnichannel customer support. Live chat + email + social.  
-
+  
 ## Development & Infrastructure
 
 SaaS You Pay For| Open Source Alternative| One-Line Pitch  
@@ -39,7 +39,7 @@ Firebase / Supabase Cloud| **Supabase** (self-hosted) / **Appwrite**|  Self-host
 GitHub| **Gitea** / **Forgejo**|  Lightweight, self-hosted Git service. 100MB binary, runs on a Pi.  
 AWS S3| **MinIO**|  S3-compatible object storage. High performance, K8s-native.  
 Cloudflare Tunnels| **Pangolin**|  Self-hosted Cloudflare Tunnel alternative. Expose services securely.  
-
+  
 ## Marketing & Design
 
 SaaS You Pay For| Open Source Alternative| One-Line Pitch  
@@ -49,7 +49,7 @@ Figma| **Penpot**|  Open-source design & prototyping. Native SVG, developer hand
 Canva| **Inkscape** (vector) / **Krita** (raster)| Professional open-source design tools.  
 Ghost / Medium| **Ghost** (self-hosted)| Ghost IS open source. Self-host on a $5 VPS.  
 Typeform| **Formbricks**|  Open-source survey + form builder. Looks beautiful.  
-
+  
 ## Back Office
 
 SaaS You Pay For| Open Source Alternative| One-Line Pitch  
@@ -59,7 +59,7 @@ Calendly| **Cal.com**|  Open-source scheduling. Same UX, self-hostable.
 Auth0 / Clerk| **Keycloak** / **Logto**|  Enterprise SSO. OIDC/SAML. Used by Fortune 500.  
 n8n / Zapier| **n8n** (self-hosted)| n8n IS open source. Self-hosted workflow automation.  
 DocuSign| **Docuseal**|  Open-source document signing. PDF e-signatures.  
-
+  
 ## The $0/Month Stack
 
 Replace your entire SaaS stack with open-source alternatives on a single $20/month VPS:
@@ -69,6 +69,8 @@ Replace your entire SaaS stack with open-source alternatives on a single $20/mon
   * **Infrastructure:** Coolify (deploys) + Gitea (code) + MinIO (storage)
   * **Marketing:** Listmonk + Ghost
   * **Productivity:** Cal.com + Docuseal
+
+
 
 Estimated savings vs SaaS equivalents: **$500-2,000/month** for a small team. You trade ops time for cash — the tradeoff gets better the more tools you self-host.
 

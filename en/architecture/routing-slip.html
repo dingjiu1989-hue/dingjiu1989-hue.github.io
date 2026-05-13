@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/routing-slip.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "524",
+      "wordCount": "706",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/routing-slip.html"},
-      "articleBody": "Routing Slip Pattern for Dynamic Message Processing The routing slip pattern processes a message through a predefined sequence of processing steps, where the path is determined at runtime. Think of it as a delivery route for messages\u2014each stop adds value or transformation before sending the message to the next destination. How Routing Slips Work The routing slip is attached to the message as metadata. It contains an ordered list of processing steps. After each step completes, the processing component reads the next destination from the routing slip and forwards the message. When all steps are complete, the message reaches its final destination. Implementation The routing slip is typically implemented as a JSON array or a comma-separated list of endpoint addresses. Each processing step inspects the slip, performs its operation, removes the current step from the list, and forwards the message to the next address. In Apache Camel, routing slips are a built-in Enterprise Integration Pattern (EIP). Camel reads the slip from a message header and routes dynamically. Spring Integration and Mule also support routing slips natively. Dynamic Routing vs Static Pipelines Static processing pipelines hardcode the sequence of steps. Every message follows the same path. Routing slips allow each message to have a unique path based on its content or type. This flexibility is valuable when different message types require different processing. For example, a payment message might follow the path: validate \u2192 enrich \u2192 fraud check \u2192 process. A simple status check message might skip enrichment and fraud check entirely. Use Cases Data transformation pipelines where different data sources need different enrichment steps. Document approval workflows where the approval chain depends on document type and value. Multi-step provisioning processes where the required steps depend on the requested resources. Error Handling If a step fails, the message should go to a dead letter queue with its routing slip intact. The failure context includes which step failed and what steps remain. After fixing the issue, operators can resume processing from the failed step by modifying the routing slip. Monitoring Track metrics per step: processing time, success rate, and queue depth. A routing slip dashboard should show the distribution of message paths\u2014which combinations of steps are most common and where bottlenecks occur."
+      "articleBody": "Routing Slip Pattern for Dynamic Message Processing Routing Slip Pattern for Dynamic Message Processing Routing Slip Pattern for Dynamic Message Processing Routing Slip Pattern for Dynamic Message Processing The routing slip pattern processes a message through a predefined sequence of processing steps, where the path is determined at runtime. Think of it as a delivery route for messages\u2014each stop adds value or transformation before sending the message to the next destination. How Routing Slips Work The routing slip is attached to the message as metadata. It contains an ordered list of processing steps. After each step completes, the processing component reads the next destination from the routing slip and forwards the message. When all steps are complete, the message reaches its final destination. Implementation The routing slip is typically implemented as a JSON array or a comma-separated list of endpoint addresses. Each processing step inspects the slip, performs its operation, removes the current step from the list, and forwards the message to the next address. In Apache Camel, routing slips are a built-in Enterprise Integration Pattern (EIP). Camel reads the slip from a message header and routes dynamically. Spring Integration and Mule also support routing slips natively. Dynamic Routing vs Static Pipelines Static processing pipelines hardcode the sequence of steps. Every message follows the same path. Routing slips allow each message to have a unique path based on its content or type. This flexibility is valuable when different message types require different processing. For example, a payment message might follow the path: validate \u2192 enrich \u2192 fraud check \u2192 process. A simple status check message might skip enrichment and fraud check entirely. Use Cases Data transformation pipelines where different data sources need different enrichment steps. Document approval workflows where the approval chain depends on document type and value. Multi-step provisioning processes where the required steps depend on the requested resources. Error Handling If a step fails, the message should go to a dead letter queue with its routing slip intact. The failure context includes which step failed and what steps remain. After fixing the issue, operators can resume processing from the failed step by modifying the routing slip. Monitoring Track metrics per step: processing time, success rate, and queue depth. A routing slip dashboard should show the distribution of message paths\u2014which combinations of steps are most common and where bottlenecks occur."
     }
     </script>
     <script type="application/ld+json">
@@ -77,33 +77,181 @@
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/routing-slip.png" alt="Routing Slip Pattern for Dynamic Message Processing" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Routing Slip Pattern for Dynamic Message Processing</h1>
+<br>
+<h1>Routing Slip Pattern for Dynamic Message Processing</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>Routing Slip Pattern for Dynamic Message Processing</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Routing Slip Pattern for Dynamic Message Processing</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>The routing slip pattern processes a message through a predefined sequence of processing steps, where the path is determined at runtime. Think of it as a delivery route for messages—each stop adds value or transformation before sending the message to the next destination.</p>
 <br>
-<h2> How Routing Slips Work</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  How Routing Slips Work</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>The routing slip is attached to the message as metadata. It contains an ordered list of processing steps. After each step completes, the processing component reads the next destination from the routing slip and forwards the message. When all steps are complete, the message reaches its final destination.</p>
 <br>
-<h2> Implementation</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Implementation</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>The routing slip is typically implemented as a JSON array or a comma-separated list of endpoint addresses. Each processing step inspects the slip, performs its operation, removes the current step from the list, and forwards the message to the next address.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>In Apache Camel, routing slips are a built-in Enterprise Integration Pattern (EIP). Camel reads the slip from a message header and routes dynamically. Spring Integration and Mule also support routing slips natively.</p>
 <br>
-<h2> Dynamic Routing vs Static Pipelines</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Dynamic Routing vs Static Pipelines</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Static processing pipelines hardcode the sequence of steps. Every message follows the same path. Routing slips allow each message to have a unique path based on its content or type. This flexibility is valuable when different message types require different processing.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>For example, a payment message might follow the path: validate → enrich → fraud check → process. A simple status check message might skip enrichment and fraud check entirely.</p>
 <br>
-<h2> Use Cases</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Use Cases</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Data transformation pipelines where different data sources need different enrichment steps. Document approval workflows where the approval chain depends on document type and value. Multi-step provisioning processes where the required steps depend on the requested resources.</p>
 <br>
-<h2> Error Handling</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Error Handling</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>If a step fails, the message should go to a dead letter queue with its routing slip intact. The failure context includes which step failed and what steps remain. After fixing the issue, operators can resume processing from the failed step by modifying the routing slip.</p>
 <br>
-<h2> Monitoring</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Monitoring</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Track metrics per step: processing time, success rate, and queue depth. A routing slip dashboard should show the distribution of message paths—which combinations of steps are most common and where bottlenecks occur.</p></div>
     </article>
@@ -121,6 +269,7 @@
       <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

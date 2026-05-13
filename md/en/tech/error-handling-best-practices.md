@@ -21,9 +21,10 @@ Error Type| HTTP Status| Retry?| Show User?| Notify Dev?
 **Rate limit**|  429| Yes (with backoff)| Yes ("too many requests")| No  
 **External service failure**|  502| Yes (with backoff)| No (mask it)| Yes (oncall)  
 **Internal error (unexpected)**|  500| Maybe| No (mask it)| Yes (immediately)  
-
+  
 ## Structured Error Handling Pattern
-
+    
+    
     // 1. Define error hierarchy
     class AppError extends Error {
       constructor(
@@ -37,13 +38,13 @@ Error Type| HTTP Status| Retry?| Show User?| Notify Dev?
         this.name = "AppError";
       }
     }
-
+    
     class ValidationError extends AppError {
       constructor(message: string, public fields: Record<string, string>) {
         super(message, 400, "VALIDATION_ERROR", false, message);
       }
     }
-
+    
     class ExternalServiceError extends AppError {
       constructor(service: string, cause: Error) {
         super(
@@ -56,7 +57,7 @@ Error Type| HTTP Status| Retry?| Show User?| Notify Dev?
         this.cause = cause;
       }
     }
-
+    
     // 2. Use in your code
     async function chargeCustomer(amount: number, token: string) {
       try {
@@ -67,7 +68,8 @@ Error Type| HTTP Status| Retry?| Show User?| Notify Dev?
     }
 
 ## Global Error Handler (Express/Fastify)
-
+    
+    
     // 3. Global error handler — consistent responses
     app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
       if (err instanceof AppError) {
@@ -79,11 +81,11 @@ Error Type| HTTP Status| Retry?| Show User?| Notify Dev?
           },
         });
       }
-
+    
       // Unexpected error — log and mask
       logger.error({ err, path: req.path, method: req.method });
       Sentry.captureException(err);
-
+    
       return res.status(500).json({
         error: {
           code: "INTERNAL_ERROR",
@@ -93,12 +95,13 @@ Error Type| HTTP Status| Retry?| Show User?| Notify Dev?
     });
 
 ## Async Error Handling in Express
-
+    
+    
     // Express 4 doesn't catch async errors — use a wrapper
     const asyncHandler = (fn: Function) =>
       (req: Request, res: Response, next: NextFunction) =>
         Promise.resolve(fn(req, res, next)).catch(next);
-
+    
     app.get("/users/:id", asyncHandler(async (req, res) => {
       const user = await db.users.findById(req.params.id);
       if (!user) throw new AppError("User not found", 404, "NOT_FOUND");
@@ -107,7 +110,8 @@ Error Type| HTTP Status| Retry?| Show User?| Notify Dev?
     // Express 5 (beta) handles async errors natively
 
 ## Client-Side Error Handling
-
+    
+    
     // React Error Boundary + toast
     function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
       return (
@@ -118,7 +122,7 @@ Error Type| HTTP Status| Retry?| Show User?| Notify Dev?
         </div>
       );
     }
-
+    
     // Wrap sections, not the whole app
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <CheckoutForm />
@@ -131,5 +135,7 @@ Error Type| HTTP Status| Retry?| Show User?| Notify Dev?
   * Mask internal errors from users. Log the real error, show a generic message.
   * Add a request ID to every error log. Makes debugging across services possible.
   * Alert on 5xx spike, not every 5xx. A single 500 might be a blip. 50 in a minute is an incident.
+
+
 
 **Bottom line:** Structured errors + global handler + external service retries + proper logging = an error system that helps you fix bugs instead of hiding them. See also: [Testing Strategies](</en/tech/testing-strategies-web-apps.html>) and [CI/CD Tools](</en/tools/best-cicd-tools-2026.html>).

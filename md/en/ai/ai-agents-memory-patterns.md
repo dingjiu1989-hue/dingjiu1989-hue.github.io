@@ -21,7 +21,7 @@ Episodic Memory| User/agent history| Days to months| Vector DB + metadata| Seman
 Semantic Memory| Facts, knowledge| Persistent| Vector DB / Graph DB / Document store| Semantic search + structured queries| User preferences, learned procedures  
 Procedural Memory| How to do things| Persistent| Code / workflows / prompts| Routed by task type| Agent tool definitions, SOPs  
 Reflective Memory| Meta-cognition| Persistent| Summarized insights| Triggered by patterns| "User prefers concise answers on weekdays"  
-
+  
 ## Pattern 1: Summarization + Sliding Window (Basic)
 
 The simplest pattern that works. Keep the last N messages (sliding window) plus a running summary of everything before that. When the conversation exceeds context limits, summarize the oldest messages and prepend to the context. Implementation: after every K messages, call the LLM to update the summary: "Here's the previous summary and new messages. Produce an updated summary that captures key decisions, facts, and context." This pattern alone handles 80% of agent memory needs. Tools like MemGPT (now Letta) use this pattern with automatic context management.
@@ -47,5 +47,5 @@ Privacy / sensitive data| Filter PII before storing. Allow users to view/delete 
 Cost (embedding and storing every interaction)| Batch embedding. Only store "significant" interactions (decisions made, preferences stated, errors encountered). Skip routine exchanges.  
 Hallucinated memories (agent "remembers" something incorrectly)| Store original interaction alongside summarized memory. Periodically audit memory accuracy with spot checks.  
 Latency (retrieval takes time)| Cache recent memories in-process. Async retrieval for non-critical context. Two-stage: fast vector search → rerank.  
-
+  
 **Starting point for 2026:** Implement Pattern 1 (summarization + sliding window) first — it solves the immediate problem of context limits and handles most use cases. Add Pattern 2 (vector episodic memory) when users say "you don't remember our previous conversations." Add Pattern 3 (knowledge graph) when you need precise fact recall about entities. Add Pattern 4 (reflection) when you want the agent to improve over time. Don't over-engineer memory — a simple summary + sliding window beats a complex multi-tier memory system that's buggy and slow. See also: [AI Agents Guide](</en/ai/ai-agents-guide.html>) and [Function Calling Guide](</en/ai/function-calling-guide.html>).

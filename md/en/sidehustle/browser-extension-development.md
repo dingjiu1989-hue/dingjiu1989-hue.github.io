@@ -20,9 +20,10 @@ Host Permissions| All at install time| Optional, can be granted at runtime
 Remotely Hosted Code| Allowed| Not allowed (all code must be in the extension package)  
 Content Security Policy| Optional| Enforced (no inline scripts, no eval)  
 Cross-Browser Compatibility| Chrome-specific| Better alignment with Firefox/Safari (but not perfect)  
-
+  
 ## Extension Architecture Patterns
-
+    
+    
     // manifest.json — the heart of a Manifest V3 extension
     {
       "manifest_version": 3,
@@ -44,7 +45,7 @@ Cross-Browser Compatibility| Chrome-specific| Better alignment with Firefox/Safa
       },
       "options_page": "options.html"
     }
-
+    
     // Cross-browser compatibility tips:
     // - Use chrome.* APIs (Edge/Brave/Opera are Chromium-based)
     // - For Firefox: browser.* APIs are nearly identical (use webextension-polyfill)
@@ -61,7 +62,7 @@ chrome.runtime.onMessage| Pass messages between content scripts and service work
 chrome.alarms| Schedule periodic tasks (replaces setInterval in service workers)| alarms  
 chrome.sidePanel| Add a persistent side panel (Chrome 114+)| sidePanel  
 chrome.offscreen| Play audio, access DOM APIs from service worker| offscreen  
-
+  
 ## Choosing Your Tech Stack
 
 Stack| Best For| Pros| Cons  
@@ -71,7 +72,7 @@ React + Vite + CRXJS| Complex popup UIs, SPAs| Component model, HMR in developme
 Svelte + Vite| Minimal bundle, reactive UIs| Tiny bundle (~3KB), no virtual DOM| Smaller ecosystem than React  
 Plasmo (Framework)| Full-featured extensions, rapid development| Manifest generation, HMR, cross-browser, built-in messaging| Abstraction overhead, less control  
 WXT (Framework)| Type-safe extensions, modern DX| TypeScript-first, cross-browser (Chrome + Firefox), auto-reload| Newer framework, smaller community  
-
+  
 ## Chrome Web Store Submission Checklist
 
   1. **Manifest:** V3 only. V2 extensions are rejected.
@@ -81,5 +82,7 @@ WXT (Framework)| Type-safe extensions, modern DX| TypeScript-first, cross-browse
   5. **Screenshots:** At least 1 (1280x800), best practice 5+. Show the UI and the benefit.
   6. **Promotional images:** Small tile (440x280), large tile (920x680), marquee (1400x560).
   7. **Review time:** 1-5 business days for initial review, 1-3 days for updates.
+
+
 
 **Bottom line:** Browser extensions are a $2B+ market that most developers ignore. Manifest V3 has raised the technical bar (disqualifying amateurs) while improving security for users. Start with Plasmo or WXT for the best developer experience, target Chrome first (80%+ market share), and submit early — the CWS review process often finds issues you will miss. See also: [Chrome Extension Monetization](</en/sidehustle/chrome-extension-monetization.html>) and [Web Security Basics](</en/tech/web-security-basics.html>).

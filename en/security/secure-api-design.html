@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/secure-api-design.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2025",
+      "wordCount": "3312",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/secure-api-design.html"},
-      "articleBody": "Secure API Design Principles Introduction APIs are the backbone of modern application architecture. A well-designed API considers security at every layer, from request validation to response handling. Security must be built into the API contract \u2014 it cannot be bolted on afterward. Input Validation Validate all input at the API boundary before processing. Never trust client-provided data. from pydantic import BaseModel, Field, validator from fastapi import FastAPI, HTTPException from typing import Optional import re app = FastAPI() class CreateUserRequest(BaseModel): username: str = Field(..., min_length=3, max_length=32) email: str = Field(..., max_length=255) age: int = Field(..., ge=0, le=150) @validator('username') def validate_username(cls, v): if not re.match(r'^[a-zA-Z0-9_-]+$', v): raise ValueError('Username must be alphanumeric') # Blocklist certain patterns blocklist = ['admin', 'root', 'null', 'undefined'] if v.lower() in blocklist: raise ValueError('Username not allowed') return v.lower() @validator('email') def validate_email(cls, v): if not re.match(r'^[\\w\\.-]+@[\\w\\.-]+\\.\\w+$', v): raise ValueError('Invalid email format') return v.lower() @app.post(\"/api/users\") def create_user(user: CreateUserRequest): return {\"user\": user.username, \"email\": user.email} Rate Limiting Rate limiting prevents abuse, brute force attacks, and resource exhaustion. import time from collections import defaultdict from functools import wraps class RateLimiter: def __init__(self): self.requests = defaultdict(list) def check(self, key: str, max_requests: int, window_seconds: int) -> bool: now = time.time() window_start = now - window_seconds # Clean old entries self.requests[key] = [ t for t in self.requests[key] if t > window_start ] # Check limit if len(self.requests[key]) >= max_requests: return False self.requests[key].append(now) return True # Token bucket algorithm class TokenBucket: def __init__(self, capacity: int, refill_rate: float): self.capacity = capacity self.tokens = capacity self.refill_rate = refill_rate self.last_refill = time.time() def consume(self, tokens: int = 1) -> bool: self._refill() if self.tokens >= tokens: self.tokens -= tokens return True return False def _refill(self): now = time.time() elapsed = now - self.last_refill self.tokens = min(self.capacity, self.tokens + elapsed * self.refill_rate) self.last_refill = now # Apply rate limiting via middleware from fastapi import Request, HTTPException RATE_LIMITER = TokenBucket(capacity=100, refill_rate=10) @app.middleware(\"http\") async def rate_limit_middleware(request: Request, call_next): client_ip = request.client.host if not RATE_LIMITER.consume(): raise HTTPException(status_code=429, detail=\"Rate limit exceeded\") return await call_next(request) Idempotency Idempotent APIs prevent duplicate operations when clients retry requests. import uuid from datetime import datetime, timedelta class IdempotencyMiddleware: def __init__(self, redis_client, ttl_hours=24): self.redis = redis_client self.ttl = timedelta(hours=ttl_hours) async def process_request(self, request): # Check for idempotency key on mutating requests if request.method in ('POST', 'PATCH', 'PUT', 'DELETE'): idempotency_key = request.headers.get('Idempotency-Key') if not idempotency_key: raise HTTPException( status_code=400, detail=\"Idempotency-Key header required for mutating requests\" ) # Check for existing result cache_key = f\"idempotency:{idempotency_key}\" existing = await self.redis.get(cache_key) if existing: # Return cached response (idempotent replay) return json.loads(existing) # Process request and cache result response = await self.process_request_internal(request) await self.redis.setex( cache_key, self.ttl.seconds, json.dumps(response) ) return response Error Handling Secure error handling reveals minimal information while providing useful feedback to legitimate clients. from fastapi import Request, HTTPException from fastapi.responses import JSONResponse class SecureExceptionHandler: @staticmethod def handle_validation_error(request: Request, exc: Exception): # Generic message, don't reveal internal details return JSONResponse( status_code=422, content={ \"error\": \"validation_error\", \"message\": \"The request contains invalid data\" } ) @staticmethod def handle_auth_error(request: Request, exc: Exception): # Don't distinguish between \"user not found\" and \"wrong password\" return JSONResponse( status_code=401, content={ \"error\": \"authentication_failed\", \"message\": \"Invalid credentials\" } ) @staticmethod def handle_internal_error(request: Request, exc: Exception): # Log full details internally import logging logger = logging.getLogger(__name__) logger.error(f\"Internal error: {exc}\", exc_info=True) # Return minimal info to client error_id = str(uuid.uuid4()) return JSONResponse( status_code=500, content={ \"error\": \"internal_error\", \"message\": \"An unexpected error occurred\", \"error_id\": error_id } ) app.add_exception_handler(ValueError, SecureExceptionHandler.handle_validation_error) app.add_exception_handler(HTTPException, SecureExceptionHandler.handle_auth_error) API Security Checklist api_security: authentication: - use_jwt_or_oauth2_not_basic_auth - enforce_short_token_expiry: 15_minutes - implement_token_rotation authorization: - enforce_least_privilege - validate_permissions_on_every_request - never_trust_url_parameters_for_authz input_validation: - validate_all_input_at_boundary - use_schema_validation_framework - enforce_strict_data_types rate_limiting: - per_client_rate_limits - tiered_throttling - ip_based_fallback error_handling: - consistent_error_format - no_stack_traces_in_production - log_all_errors_internally headers: - enforce_strict_transport_security - set_x_content_type_options: nosniff - set_x_frame_options: DENY Conclusion Secure API design integrates security into every layer: validate and sanitize all input, apply rate limiting to prevent abuse, implement idempotency for reliable retries, handle errors without leaking information, and enforce authentication and authorization on every endpoint. Security is not an endpoint feature \u2014 it is a design property."
+      "articleBody": "Secure API Design Principles Secure API Design Principles Secure API Design Principles Secure API Design Principles Introduction APIs are the backbone of modern application architecture. A well-designed API considers security at every layer, from request validation to response handling. Security must be built into the API contract \u2014 it cannot be bolted on afterward. Input Validation Validate all input at the API boundary before processing. Never trust client-provided data. from pydantic import BaseModel, Field, validator from fastapi import FastAPI, HTTPException from typing import Optional import re app = FastAPI() class CreateUserRequest(BaseModel): username: str = Field(..., min_length=3, max_length=32) email: str = Field(..., max_length=255) age: int = Field(..., ge=0, le=150) @validator('username') def validate_username(cls, v): if not re.match(r'^[a-zA-Z0-9_-]+$', v): raise ValueError('Username must be alphanumeric') Blocklist certain patterns blocklist = ['admin', 'root', 'null', 'undefined'] if v.lower() in blocklist: raise ValueError('Username not allowed') return v.lower() @validator('email') def validate_email(cls, v): if not re.match(r'^[\\w\\\\\\\\\\\\\\\\.-]+@[\\w\\\\\\\\\\\\\\\\.-]+\\\\\\\\\\\\\\\\.\\w+$', v): raise ValueError('Invalid email format') return v.lower() @app.post(\"/api/users\") def create_user(user: CreateUserRequest): return {\"user\": user.username, \"email\": user.email} Rate Limiting Rate limiting prevents abuse, brute force attacks, and resource exhaustion. import time from collections import defaultdict from functools import wraps class RateLimiter: def __init__(self): self.requests = defaultdict(list) def check(self, key: str, max_requests: int, window_seconds: int) -> bool: now = time.time() window_start = now - window_seconds Clean old entries self.requests[key] = [ t for t in self.requests[key] if t > window_start ] Check limit if len(self.requests[key]) >= max_requests: return False self.requests[key].append(now) return True Token bucket algorithm class TokenBucket: def __init__(self, capacity: int, refill_rate: float): self.capacity = capacity self.tokens = capacity self.refill_rate = refill_rate self.last_refill = time.time() def consume(self, tokens: int = 1) -> bool: self._refill() if self.tokens >= tokens: self.tokens -= tokens return True return False def _refill(self): now = time.time() elapsed = now - self.last_refill self.tokens = min(self.capacity, self.tokens + elapsed * self.refill_rate) self.last_refill = now Apply rate limiting via middleware from fastapi import Request, HTTPException RATE_LIMITER = TokenBucket(capacity=100, refill_rate=10) @app.middleware(\"http\") async def rate_limit_middleware(request: Request, call_next): client_ip = request.client.host if not RATE_LIMITER.consume(): raise HTTPException(status_code=429, detail=\"Rate limit exceeded\") return await call_next(request) Idempotency Idempotent APIs prevent duplicate operations when clients retry requests. import uuid from datetime import datetime, timedelta class IdempotencyMiddleware: def __init__(self, redis_client, ttl_hours=24): self.redis = redis_client self.ttl = timedelta(hours=ttl_hours) async def process_request(self, request): Check for idempotency key on mutating requests if request.method in ('POST', 'PATCH', 'PUT', 'DELETE'): idempotency_key = request.headers.get('Idempotency-Key') if not idempotency_key: raise HTTPException( status_code=400, detail=\"Idempotency-Key header required for mutating requests\" ) Check for existing result cache_key = f\"idempotency:{idempotency_key}\" existing = await self.redis.get(cache_key) if existing: Return cached response (idempotent replay) return json.loads(existing) Process request and cache result response = await self.process_request_internal(request) await self.redis.setex( cache_key, self.ttl.seconds, json.dumps(response) ) return response Error Handling Secure error handling reveals minimal information while providing useful feedback to legitimate clients. from fastapi import Request, HTTPException from fastapi.responses import JSONResponse class SecureExceptionHandler: @staticmethod def handle_validation_error(request: Request, exc: Exception): Generic message, don't reveal internal details return JSONResponse( status_code=422, content={ \"error\": \"validation_error\", \"message\": \"The request contains invalid data\" } ) @staticmethod def handle_auth_error(request: Request, exc: Exception): Don't distinguish between \"user not found\" and \"wrong password\" return JSONResponse( status_code=401, content={ \"error\": \"authentication_failed\", \"message\": \"Invalid credentials\" } ) @staticmethod def handle_internal_error(request: Request, exc: Exception): Log full details internally import logging logger = logging.getLogger(__name__) logger.error(f\"Internal error: {exc}\", exc_info=True) Return minimal info to client error_id = str(uuid.uuid4()) return JSONResponse( status_code=500, content={ \"error\": \"internal_error\", \"message\": \"An unexpected error occurred\", \"error_id\": error_id } ) app.add_exception_handler(ValueError, SecureExceptionHandler.handle_validation_error) app.add_exception_handler(HTTPException, SecureExceptionHandler.handle_auth_error) API Security Checklist api_security: authentication: \\\\\\\\- use_jwt_or_oauth2_not_basic_auth \\\\\\\\- enforce_short_token_expiry: 15_minutes \\\\\\\\- implement_token_rotation authorization: \\\\\\\\- enforce_least_privilege \\\\\\\\- validate_permissions_on_every_request \\\\\\\\- never_trust_url_parameters_for_authz input_validation: \\\\\\\\- validate_all_input_at_boundary \\\\\\\\- use_schema_validation_framework \\\\\\\\- enforce_strict_data_types rate_limiting: \\\\\\\\- per_client_rate_limits \\\\\\\\- tiered_throttling \\\\\\\\- ip_based_fallback error_handling: \\\\\\\\- consistent_error_format \\\\\\\\- no_stack_traces_in_production \\\\\\\\- log_all_errors_internally headers: \\\\\\\\- enforce_strict_transport_security \\\\\\\\- set_x_content_type_options: nosniff \\\\\\\\- set_x_frame_options: DENY Conclusion Secure API design integrates security into every layer: validate and sanitize all input, apply rate limiting to prevent abuse, implement idempotency for reliable retries, handle errors without leaking information, and enforce authentication and authorization on every endpoint. Security is not an endpoint feature \u2014 it is a design property."
     }
     </script>
     <script type="application/ld+json">
@@ -78,357 +78,1978 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-api-design.png" alt="Secure API Design Principles" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Secure API Design Principles</h1>
 <br>
-<p>Introduction   </p>
-<p>APIs are the backbone of modern application architecture. A well-designed API considers security at every layer, from request validation to response handling. Security must be built into the API contract — it cannot be bolted on afterward.   </p>
-<p>Input Validation   </p>
-<p>Validate all input at the API boundary before processing. Never trust client-provided data.   </p>
+<h1>Secure API Design Principles</h1>
 <br>
-<p>    from pydantic import BaseModel, Field, validator</p>
 <br>
-<p>    from fastapi import FastAPI, HTTPException</p>
 <br>
-<p>    from typing import Optional</p>
 <br>
-<p>    import re</p>
+<h1>Secure API Design Principles</h1>
 <br>
-<p>    app = FastAPI()</p>
 <br>
-<p>    class CreateUserRequest(BaseModel):</p>
 <br>
-<p>        username: str = Field(..., min_length=3, max_length=32)</p>
 <br>
-<p>        email: str = Field(..., max_length=255)</p>
 <br>
-<p>        age: int = Field(..., ge=0, le=150)</p>
 <br>
-<p>        @validator('username')</p>
 <br>
-<p>        def validate_username(cls, v):</p>
+<h1>Secure API Design Principles</h1>
 <br>
-<p>            if not re.match(r'^[a-zA-Z0-9_-]+$', v):</p>
 <br>
-<p>                raise ValueError('Username must be alphanumeric')</p>
 <br>
-<p>            # Blocklist certain patterns</p>
 <br>
-<p>            blocklist = ['admin', 'root', 'null', 'undefined']</p>
 <br>
-<p>            if v.lower() in blocklist:</p>
 <br>
-<p>                raise ValueError('Username not allowed')</p>
 <br>
-<p>            return v.lower()</p>
 <br>
-<p>        @validator('email')</p>
 <br>
-<p>        def validate_email(cls, v):</p>
 <br>
-<p>            if not re.match(r'^[\w\.-]+@[\w\.-]+\.\w+$', v):</p>
+<p>Introduction </p>
 <br>
-<p>                raise ValueError('Invalid email format')</p>
 <br>
-<p>            return v.lower()</p>
 <br>
-<p>    @app.post("/api/users")</p>
 <br>
-<p>    def create_user(user: CreateUserRequest):</p>
 <br>
-<p>        return {"user": user.username, "email": user.email}</p>
 <br>
-<p>Rate Limiting   </p>
-<p>Rate limiting prevents abuse, brute force attacks, and resource exhaustion.   </p>
 <br>
-<p>    import time</p>
+<p>APIs are the backbone of modern application architecture. A well-designed API considers security at every layer, from request validation to response handling. Security must be built into the API contract — it cannot be bolted on afterward. </p>
 <br>
-<p>    from collections import defaultdict</p>
 <br>
-<p>    from functools import wraps</p>
 <br>
-<p>    class RateLimiter:</p>
 <br>
-<p>        def __init__(self):</p>
 <br>
-<p>            self.requests = defaultdict(list)</p>
 <br>
-<p>        def check(self, key: str, max_requests: int, window_seconds: int) -> bool:</p>
 <br>
-<p>            now = time.time()</p>
+<p>Input Validation </p>
 <br>
-<p>            window_start = now - window_seconds</p>
 <br>
-<p>            # Clean old entries</p>
 <br>
-<p>            self.requests[key] = [</p>
 <br>
-<p>                t for t in self.requests[key] if t > window_start</p>
 <br>
-<p>            ]</p>
 <br>
-<p>            # Check limit</p>
 <br>
-<p>            if len(self.requests[key]) >= max_requests:</p>
+<p>Validate all input at the API boundary before processing. Never trust client-provided data. </p>
 <br>
-<p>                return False</p>
 <br>
-<p>            self.requests[key].append(now)</p>
 <br>
-<p>            return True</p>
 <br>
-<p>    # Token bucket algorithm</p>
 <br>
-<p>    class TokenBucket:</p>
 <br>
-<p>        def __init__(self, capacity: int, refill_rate: float):</p>
 <br>
-<p>            self.capacity = capacity</p>
 <br>
-<p>            self.tokens = capacity</p>
 <br>
-<p>            self.refill_rate = refill_rate</p>
 <br>
-<p>            self.last_refill = time.time()</p>
+<p>from pydantic import BaseModel, Field, validator</p>
 <br>
-<p>        def consume(self, tokens: int = 1) -> bool:</p>
 <br>
-<p>            self._refill()</p>
 <br>
-<p>            if self.tokens >= tokens:</p>
 <br>
-<p>                self.tokens -= tokens</p>
 <br>
-<p>                return True</p>
 <br>
-<p>            return False</p>
 <br>
-<p>        def _refill(self):</p>
 <br>
-<p>            now = time.time()</p>
 <br>
-<p>            elapsed = now - self.last_refill</p>
 <br>
-<p>            self.tokens = min(self.capacity, </p>
+<p>from fastapi import FastAPI, HTTPException</p>
 <br>
-<p>                             self.tokens + elapsed * self.refill_rate)</p>
 <br>
-<p>            self.last_refill = now</p>
 <br>
-<p>    # Apply rate limiting via middleware</p>
 <br>
-<p>    from fastapi import Request, HTTPException</p>
 <br>
-<p>    RATE_LIMITER = TokenBucket(capacity=100, refill_rate=10)</p>
 <br>
-<p>    @app.middleware("http")</p>
 <br>
-<p>    async def rate_limit_middleware(request: Request, call_next):</p>
 <br>
-<p>        client_ip = request.client.host</p>
 <br>
-<p>        if not RATE_LIMITER.consume():</p>
 <br>
-<p>            raise HTTPException(status_code=429, detail="Rate limit exceeded")</p>
+<p>from typing import Optional</p>
 <br>
-<p>        return await call_next(request)</p>
 <br>
-<p>Idempotency   </p>
-<p>Idempotent APIs prevent duplicate operations when clients retry requests.   </p>
 <br>
-<p>    import uuid</p>
 <br>
-<p>    from datetime import datetime, timedelta</p>
 <br>
-<p>    class IdempotencyMiddleware:</p>
 <br>
-<p>        def __init__(self, redis_client, ttl_hours=24):</p>
 <br>
-<p>            self.redis = redis_client</p>
 <br>
-<p>            self.ttl = timedelta(hours=ttl_hours)</p>
 <br>
-<p>        async def process_request(self, request):</p>
 <br>
-<p>            # Check for idempotency key on mutating requests</p>
+<p>import re</p>
 <br>
-<p>            if request.method in ('POST', 'PATCH', 'PUT', 'DELETE'):</p>
 <br>
-<p>                idempotency_key = request.headers.get('Idempotency-Key')</p>
 <br>
-<p>                if not idempotency_key:</p>
 <br>
-<p>                    raise HTTPException(</p>
 <br>
-<p>                        status_code=400,</p>
 <br>
-<p>                        detail="Idempotency-Key header required for mutating requests"</p>
 <br>
-<p>                    )</p>
 <br>
-<p>                # Check for existing result</p>
 <br>
-<p>                cache_key = f"idempotency:{idempotency_key}"</p>
 <br>
-<p>                existing = await self.redis.get(cache_key)</p>
+<p>app = FastAPI()</p>
 <br>
-<p>                if existing:</p>
 <br>
-<p>                    # Return cached response (idempotent replay)</p>
 <br>
-<p>                    return json.loads(existing)</p>
 <br>
-<p>                # Process request and cache result</p>
 <br>
-<p>                response = await self.process_request_internal(request)</p>
 <br>
-<p>                await self.redis.setex(</p>
 <br>
-<p>                    cache_key,</p>
 <br>
-<p>                    self.ttl.seconds,</p>
 <br>
-<p>                    json.dumps(response)</p>
 <br>
-<p>                )</p>
+<p>class CreateUserRequest(BaseModel):</p>
 <br>
-<p>                return response</p>
 <br>
-<p>Error Handling   </p>
-<p>Secure error handling reveals minimal information while providing useful feedback to legitimate clients.   </p>
 <br>
-<p>    from fastapi import Request, HTTPException</p>
 <br>
-<p>    from fastapi.responses import JSONResponse</p>
 <br>
-<p>    class SecureExceptionHandler:</p>
 <br>
-<p>        @staticmethod</p>
 <br>
-<p>        def handle_validation_error(request: Request, exc: Exception):</p>
 <br>
-<p>            # Generic message, don't reveal internal details</p>
 <br>
-<p>            return JSONResponse(</p>
 <br>
-<p>                status_code=422,</p>
+<p>username: str = Field(..., min_length=3, max_length=32)</p>
 <br>
-<p>                content={</p>
 <br>
-<p>                    "error": "validation_error",</p>
 <br>
-<p>                    "message": "The request contains invalid data"</p>
 <br>
-<p>                }</p>
 <br>
-<p>            )</p>
 <br>
-<p>        @staticmethod</p>
 <br>
-<p>        def handle_auth_error(request: Request, exc: Exception):</p>
 <br>
-<p>            # Don't distinguish between "user not found" and "wrong password"</p>
 <br>
-<p>            return JSONResponse(</p>
 <br>
-<p>                status_code=401,</p>
+<p>email: str = Field(..., max_length=255)</p>
 <br>
-<p>                content={</p>
 <br>
-<p>                    "error": "authentication_failed",</p>
 <br>
-<p>                    "message": "Invalid credentials"</p>
 <br>
-<p>                }</p>
 <br>
-<p>            )</p>
 <br>
-<p>        @staticmethod</p>
 <br>
-<p>        def handle_internal_error(request: Request, exc: Exception):</p>
 <br>
-<p>            # Log full details internally</p>
 <br>
-<p>            import logging</p>
 <br>
-<p>            logger = logging.getLogger(__name__)</p>
+<p>age: int = Field(..., ge=0, le=150)</p>
 <br>
-<p>            logger.error(f"Internal error: {exc}", exc_info=True)</p>
 <br>
-<p>            # Return minimal info to client</p>
 <br>
-<p>            error_id = str(uuid.uuid4())</p>
 <br>
-<p>            return JSONResponse(</p>
 <br>
-<p>                status_code=500,</p>
 <br>
-<p>                content={</p>
 <br>
-<p>                    "error": "internal_error",</p>
 <br>
-<p>                    "message": "An unexpected error occurred",</p>
 <br>
-<p>                    "error_id": error_id</p>
 <br>
-<p>                }</p>
+<p>@validator('username')</p>
 <br>
-<p>            )</p>
 <br>
-<p>    app.add_exception_handler(ValueError, SecureExceptionHandler.handle_validation_error)</p>
 <br>
-<p>    app.add_exception_handler(HTTPException, SecureExceptionHandler.handle_auth_error)</p>
 <br>
-<p>API Security Checklist   </p>
 <br>
-<p>    api_security:</p>
 <br>
-<p>      authentication:</p>
 <br>
-<p>        - use_jwt_or_oauth2_not_basic_auth</p>
 <br>
-<p>        - enforce_short_token_expiry: 15_minutes</p>
 <br>
-<p>        - implement_token_rotation</p>
 <br>
-<p>      authorization:</p>
+<p>def validate_username(cls, v):</p>
 <br>
-<p>        - enforce_least_privilege</p>
 <br>
-<p>        - validate_permissions_on_every_request</p>
 <br>
-<p>        - never_trust_url_parameters_for_authz</p>
 <br>
-<p>      input_validation:</p>
 <br>
-<p>        - validate_all_input_at_boundary</p>
 <br>
-<p>        - use_schema_validation_framework</p>
 <br>
-<p>        - enforce_strict_data_types</p>
 <br>
-<p>      rate_limiting:</p>
 <br>
-<p>        - per_client_rate_limits</p>
 <br>
-<p>        - tiered_throttling</p>
+<p>if not re.match(r'^[a-zA-Z0-9_-]+$', v):</p>
 <br>
-<p>        - ip_based_fallback</p>
 <br>
-<p>      error_handling:</p>
 <br>
-<p>        - consistent_error_format</p>
 <br>
-<p>        - no_stack_traces_in_production</p>
 <br>
-<p>        - log_all_errors_internally</p>
 <br>
-<p>      headers:</p>
 <br>
-<p>        - enforce_strict_transport_security</p>
 <br>
-<p>        - set_x_content_type_options: nosniff</p>
 <br>
-<p>        - set_x_frame_options: DENY</p>
 <br>
-<p>Conclusion   </p>
+<p>raise ValueError('Username must be alphanumeric')</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Blocklist certain patterns</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>blocklist = ['admin', 'root', 'null', 'undefined']</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if v.lower() in blocklist:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise ValueError('Username not allowed')</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return v.lower()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@validator('email')</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def validate_email(cls, v):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if not re.match(r'^[\w\\\\\\\\.-]+@[\w\\\\\\\\.-]+\\\\\\\\.\w+$', v):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise ValueError('Invalid email format')</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return v.lower()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@app.post("/api/users")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def create_user(user: CreateUserRequest):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return {"user": user.username, "email": user.email}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Rate Limiting </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Rate limiting prevents abuse, brute force attacks, and resource exhaustion. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import time</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from collections import defaultdict</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from functools import wraps</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class RateLimiter:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def __init__(self):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.requests = defaultdict(list)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def check(self, key: str, max_requests: int, window_seconds: int) -> bool:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>now = time.time()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>window_start = now - window_seconds</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Clean old entries</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.requests[key] = [</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>t for t in self.requests[key] if t > window_start</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Check limit</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if len(self.requests[key]) >= max_requests:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return False</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.requests[key].append(now)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return True</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Token bucket algorithm</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class TokenBucket:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def __init__(self, capacity: int, refill_rate: float):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.capacity = capacity</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.tokens = capacity</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.refill_rate = refill_rate</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.last_refill = time.time()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def consume(self, tokens: int = 1) -> bool:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self._refill()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if self.tokens >= tokens:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.tokens -= tokens</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return True</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return False</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def _refill(self):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>now = time.time()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>elapsed = now - self.last_refill</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.tokens = min(self.capacity, </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.tokens + elapsed * self.refill_rate)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.last_refill = now</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Apply rate limiting via middleware</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from fastapi import Request, HTTPException</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>RATE_LIMITER = TokenBucket(capacity=100, refill_rate=10)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@app.middleware("http")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def rate_limit_middleware(request: Request, call_next):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>client_ip = request.client.host</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if not RATE_LIMITER.consume():</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise HTTPException(status_code=429, detail="Rate limit exceeded")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return await call_next(request)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Idempotency </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Idempotent APIs prevent duplicate operations when clients retry requests. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import uuid</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from datetime import datetime, timedelta</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class IdempotencyMiddleware:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def __init__(self, redis_client, ttl_hours=24):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.redis = redis_client</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.ttl = timedelta(hours=ttl_hours)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def process_request(self, request):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Check for idempotency key on mutating requests</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if request.method in ('POST', 'PATCH', 'PUT', 'DELETE'):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>idempotency_key = request.headers.get('Idempotency-Key')</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if not idempotency_key:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise HTTPException(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>status_code=400,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>detail="Idempotency-Key header required for mutating requests"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Check for existing result</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cache_key = f"idempotency:{idempotency_key}"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>existing = await self.redis.get(cache_key)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if existing:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Return cached response (idempotent replay)</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return json.loads(existing)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Process request and cache result</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response = await self.process_request_internal(request)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await self.redis.setex(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cache_key,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.ttl.seconds,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>json.dumps(response)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return response</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Error Handling </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Secure error handling reveals minimal information while providing useful feedback to legitimate clients. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from fastapi import Request, HTTPException</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from fastapi.responses import JSONResponse</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class SecureExceptionHandler:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@staticmethod</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def handle_validation_error(request: Request, exc: Exception):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Generic message, don't reveal internal details</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return JSONResponse(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>status_code=422,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>content={</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"error": "validation_error",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"message": "The request contains invalid data"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@staticmethod</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def handle_auth_error(request: Request, exc: Exception):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Don't distinguish between "user not found" and "wrong password"</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return JSONResponse(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>status_code=401,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>content={</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"error": "authentication_failed",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"message": "Invalid credentials"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@staticmethod</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def handle_internal_error(request: Request, exc: Exception):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Log full details internally</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import logging</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>logger = logging.getLogger(__name__)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>logger.error(f"Internal error: {exc}", exc_info=True)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Return minimal info to client</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>error_id = str(uuid.uuid4())</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return JSONResponse(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>status_code=500,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>content={</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"error": "internal_error",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"message": "An unexpected error occurred",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"error_id": error_id</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>app.add_exception_handler(ValueError, SecureExceptionHandler.handle_validation_error)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>app.add_exception_handler(HTTPException, SecureExceptionHandler.handle_auth_error)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>API Security Checklist </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>api_security:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>authentication:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- use_jwt_or_oauth2_not_basic_auth</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- enforce_short_token_expiry: 15_minutes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- implement_token_rotation</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>authorization:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- enforce_least_privilege</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- validate_permissions_on_every_request</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- never_trust_url_parameters_for_authz</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>input_validation:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- validate_all_input_at_boundary</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- use_schema_validation_framework</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- enforce_strict_data_types</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>rate_limiting:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- per_client_rate_limits</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- tiered_throttling</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- ip_based_fallback</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>error_handling:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- consistent_error_format</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- no_stack_traces_in_production</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- log_all_errors_internally</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>headers:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- enforce_strict_transport_security</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- set_x_content_type_options: nosniff</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- set_x_frame_options: DENY</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Secure API design integrates security into every layer: validate and sanitize all input, apply rate limiting to prevent abuse, implement idempotency for reliable retries, handle errors without leaking information, and enforce authentication and authorization on every endpoint. Security is not an endpoint feature — it is a design property.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -445,6 +2066,7 @@
       <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

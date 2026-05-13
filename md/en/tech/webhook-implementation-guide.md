@@ -11,7 +11,8 @@ url: https://dingjiu1989-hue.github.io/en/tech/webhook-implementation-guide.html
 Webhooks are the backbone of event-driven architectures — they power payment notifications, CI/CD triggers, and SaaS integrations. But implementing webhooks reliably is harder than it looks: you need retry logic, idempotency, security, and monitoring. This guide covers the complete production-grade webhook implementation, both as a sender and a receiver.
 
 ## Webhook Architecture Overview
-
+    
+    
     Sender (You)                          Receiver (Third-Party)
          |                                      |
          | 1. Event occurs (payment.created)    |
@@ -37,12 +38,13 @@ Retry with Backoff| Handles transient failures| Exponential backoff: 5s, 25s, 12
 Delivery Logging| Debugging failed deliveries| Store: event_id, URL, status_code, request_body, response_body, duration_ms  
 Manual Retry UI| Let users re-trigger failed deliveries| Admin panel showing failed deliveries with "Retry" button  
 Timeout| Don't hang your workers| 30 second timeout (most webhook handlers complete in <5s)  
-
+  
 ## Webhook Security: Signature Verification
-
+    
+    
     # Python: Webhook sender (generate signature)
     import hmac, hashlib, time, json
-
+    
     def sign_webhook(secret: str, body: dict) -> dict:
         timestamp = str(int(time.time()))
         payload = json.dumps(body)
@@ -56,7 +58,7 @@ Timeout| Don't hang your workers| 30 second timeout (most webhook handlers compl
             "X-Webhook-Signature": f"t={timestamp},v1={signed}",
             "body": payload
         }
-
+    
     # Python: Webhook receiver (verify signature)
     def verify_webhook(secret: str, signature: str, raw_body: bytes) -> bool:
         # Parse: "t=1234567890,v1=abc123..."
@@ -81,7 +83,7 @@ Idempotency| Handle retries safely| Store processed event_ids, return 200 for du
 Fast 200 Response| Sender knows delivery succeeded| Respond 200 immediately, process asynchronously (job queue)  
 Event Ordering| Handle out-of-order delivery| Use event version/sequence number; ignore stale events  
 IP Allowlisting| Additional security layer| Only accept webhooks from known sender IPs  
-
+  
 ## Common Webhook Pitfalls
 
 Pitfall| Problem| Solution  
@@ -91,5 +93,5 @@ No idempotency| Retries create duplicate orders/transactions| Store event_id, sk
 Ignoring signature| Anyone can POST fake events| Always verify signature before processing  
 No delivery monitoring| Failed deliveries go unnoticed for days| Alert when delivery rate < 95%  
 Hardcoded URLs| Cannot update endpoints without deploy| Store webhook endpoints in database, with UI for management  
-
+  
 **Bottom line:** A production-grade webhook system needs four things: HMAC signatures (security), idempotency keys (reliability), exponential backoff retries (deliverability), and a delivery log (debugging). The most common mistake is processing webhooks synchronously in the request handler — always accept, enqueue, and return 200 immediately. See also: [Rate Limiting Strategies](</en/tech/rate-limiting-strategies.html>) and [CI/CD Pipeline Guide](</en/tech/ci-cd-pipeline-guide.html>).

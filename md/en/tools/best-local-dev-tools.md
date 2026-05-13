@@ -21,7 +21,7 @@ Colima| Lima VM + containerd/docker| ★★★★| ★★★★ (native, minimal
 Rancher Desktop| Lima VM + containerd/docker| ★★★★| ★★★★★| Built-in (k3s, primary focus)| ~500 MB idle| Virtiofs| Free (Apache 2.0)  
 Finch| Lima VM + containerd + nerdctl| ★★★★| ★★★ (Linux via Lima)| No built-in| ~300 MB idle| Virtiofs| Free (Apache 2.0)  
 Docker Desktop| Custom VM| ★★★| ★★★★| Built-in| ~1 GB idle| gRPC FUSE / Virtiofs| Free (personal) / $9-24/mo (business)  
-
+  
 ## Deep Dive
 
 **OrbStack — The macOS king.** OrbStack is a native macOS app that runs containers and Linux machines with near-native performance. It's what Docker Desktop should have been on macOS: 200MB idle RAM (vs Docker's 1GB+), instant startup, native file sharing via Virtiofs (no more slow mounted volumes), and built-in Kubernetes (k3s). It supports Docker API, so `docker compose up` works exactly the same. The Rosetta x86 emulation is fast enough for most images. The only downside: it's macOS-only. _Best for:_ Mac developers who want Docker compatibility without Docker Desktop's resource hunger, anyone who runs multiple containers daily on macOS.
@@ -44,5 +44,5 @@ Local Kubernetes is your primary need| Rancher Desktop| Best k3s integration, GU
 AWS shop, deploying to ECS/EKS| Finch| AWS tooling alignment, nerdctl, fully open-source  
 Just want Docker to work, don't care about RAM| Docker Desktop| Most polished, guaranteed compatibility, Docker Extensions  
 Linux desktop| Native Docker or Colima| Docker runs natively on Linux — no VM needed; Colima for isolation  
-
+  
 **What I actually use:** OrbStack on macOS for daily development — it's genuinely faster than Docker Desktop, and the 800MB RAM savings means I can run more services without swapping. Colima on any machine I don't control (CI, ephemeral VMs). Docker Desktop when I need to reproduce a bug that only happens in Docker Desktop's VM (rare but real). If I were on Linux, I'd run native Docker Engine with no VM layer — it's still the fastest way to run containers.

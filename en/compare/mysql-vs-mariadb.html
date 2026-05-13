@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/compare/mysql-vs-mariadb.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2172",
+      "wordCount": "4384",
       "keywords": "Comparison, Technology",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/compare/mysql-vs-mariadb.html"},
-      "articleBody": "MySQL vs MariaDB: The Complete Comparison Introduction MySQL and MariaDB share a common origin but have diverged significantly since MariaDB was forked from MySQL in 2009. While both systems remain largely compatible at the SQL level, their storage engines, optimization strategies, and feature sets have evolved in different directions. Understanding these differences is critical for migration decisions and new project planning. Divergence History # Timeline of divergence timeline: - year: 1995 event: \"MySQL 1.0 released by TCX DataKonsult AB\" - year: 2008 event: \"Sun Microsystems acquires MySQL AB for $1B\" - year: 2009 event: \"Oracle acquires Sun; MariaDB forked by MySQL founder Monty Widenius\" - year: 2013 event: \"MySQL 5.6 (Oracle) diverges further from MariaDB 10.0\" - year: 2018 event: \"MySQL 8.0 released with data dictionary rewrite, roles, CTE\" - year: 2024 event: \"MariaDB 11.x and MySQL 8.4 LTS diverge on optimizer and engine features\" Key fork motivations: * **License concerns**: MySQL moved toward Oracle-controlled development; MariaDB remains fully GPL with a community-driven governance model * **Feature inclusion**: Oracle rejected some community patches that MariaDB adopted * **Storage engine philosophy**: MariaDB encourages engine diversity; MySQL centralizes around InnoDB Storage Engine Differences InnoDB (Both) vs Aria (MariaDB) -- MySQL/MariaDB: InnoDB configuration -- Both support this, but default settings differ -- MySQL default: innodb_buffer_pool_size = 70% of RAM innodb_log_file_size = 2GB innodb_flush_log_at_trx_commit = 1 -- ACID compliant innodb_io_capacity = 2000 innodb_autoinc_lock_mode = 2 -- Interleaved (MySQL 8+) -- MariaDB default: innodb_buffer_pool_size = 50% of RAM innodb_log_file_size = 512MB innodb_flush_log_at_trx_commit = 1 innodb_io_capacity = 200 -- MariaDB also defaults to InnoDB for transactional tables MariaDB's Aria engine (fork of MyISAM): -- Create Aria table (MariaDB only) CREATE TABLE analytics_events ( event_id BIGINT AUTO_INCREMENT, user_id INT NOT NULL, event_type VARCHAR(50), event_data JSON, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (event_id), INDEX idx_user (user_id), INDEX idx_type (event_type) ) ENGINE=Aria TRANSACTIONAL=1 PAGE_CHECKSUM=1; -- Aria advantages: -- 1. Crash-safe (unlike MyISAM) without full InnoDB overhead -- 2. Better performance for read-heavy analytics workloads -- 3. Lower memory footprint for large tables -- 4. Supports FULLTEXT indexes -- MariaDB: ColumnStore for analytical queries -- Install ColumnStore for columnar storage -- CREATE TABLE sales_analytics (...) ENGINE=ColumnStore; -- Optimized for large-scale aggregations Feature Comparison Common Features (Both) -- Both MySQL 8.x and MariaDB 11.x support: -- Common Table Expressions (CTE) WITH RECURSIVE org_tree AS ( SELECT id, name, manager_id, 1 AS level FROM employees WHERE manager_id IS NULL UNION ALL SELECT e.id, e.name, e.manager_id, ot.level + 1 FROM employees e JOIN org_tree ot ON e.manager_id = ot.id ) SELECT * FROM org_tree ORDER BY level, name; -- Window functions SELECT department, employee_name, salary, RANK() OVER (PARTITION BY department ORDER BY salary DESC) as rank, AVG(salary) OVER (PARTITION BY department) as dept_avg FROM employees; -- JSON functions SELECT JSON_EXTRACT(data, '$.address.city') as city FROM users WHERE JSON_CONTAINS(data, '{\"active\": true}'); MariaDB-Only Features -- Temporal tables (system-versioned) CREATE TABLE customer_audit ( id INT PRIMARY KEY, name VARCHAR(100), email VARCHAR(200), credit_limit DECIMAL(10,2), -- Automatic versioning ROW_START TIMESTAMP(6) GENERATED ALWAYS AS ROW START, ROW_END TIMESTAMP(6) GENERATED ALWAYS AS ROW END, PERIOD FOR SYSTEM_TIME (ROW_START, ROW_END) ) WITH SYSTEM VERSIONING; -- Query historical state SELECT * FROM customer_audit FOR SYSTEM_TIME AS OF '2026-01-15 10:00:00' WHERE id = 42; -- Dynamic columns (schema-less within column) CREATE TABLE product_metadata ( product_id INT PRIMARY KEY, attributes BLOB -- Dynamic columns ); INSERT INTO product_metadata VALUES ( 1, COLUMN_CREATE('color', 'red', 'weight', 150, 'material', 'steel') ); SELECT COLUMN_GET(attributes, 'weight' AS INT) as weight FROM product_metadata WHERE product_id = 1; MySQL-Only Features -- MySQL 8.4: Histogram-based optimizer stats ANALYZE TABLE orders UPDATE HISTOGRAM ON status, customer_id; -- MySQL: Invisible indexes ALTER TABLE orders ALTER INDEX idx_order_date INVISIBLE; -- Test query performance without removing the index -- MySQL: VECTOR type (MySQL 9.0+) CREATE TABLE embeddings ( id INT PRIMARY KEY, embedding VECTOR(1536) ); CREATE VECTOR INDEX idx_embed ON embeddings ((VECTOR_DISTANCE(embedding, '[...]'))); -- MySQL: Resource groups CREATE RESOURCE GROUP reporting_group TYPE = USER VCPU = 2-3 THREAD_PRIORITY = 5; SET RESOURCE GROUP reporting_group; -- Limit analytics queries to specific CPU cores Performance and Optimization -- Benchmark: Concurrent OLTP workload -- Similar performance for basic queries -- MariaDB thread pool (default in 11.x) -- Better scalability for high-connection workloads thread_pool_size = 16 thread_pool_max_threads = 500 thread_pool_idle_timeout = 60 -- MySQL: Connection handling -- Dedicated thread per connection (default) -- Or Thread Pool plugin (Enterprise only) thread_handling = one-thread-per-connection -- MariaDB includes thread pool free (MySQL charges for it) -- Query optimizer differences: -- MySQL 8.4: Cost-based, uses histograms -- MariaDB 11.x: Cost-based with table statistics feedback loop -- EXPLAIN output differences EXPLAIN FORMAT=JSON SELECT * FROM orders WHERE status = 'pending'; -- MySQL: JSON plan with cost breakdown -- MariaDB: JSON plan with optimization trace Compatibility and Migration Application Compatibility | Feature | MySQL 8.4 | MariaDB 11.x | |---|---|---| | SQL syntax | 99% compatible | 99% compatible | | Data types | 100% compatible (basic) | +Dynamic columns, +INET6 | | Stored procedures | Compatible | Compatible | | Triggers | Compatible | Compatible | | Sequences | Yes (auto_increment) | Yes (SEQUENCE engine) | | JSON | Native type | LONGTEXT + JSON functions | Data Replication Between MySQL and MariaDB # MariaDB as replica of MySQL [mysqld] server-id = 2 replicate-do-db = production binlog_format = ROW slave_parallel_threads = 4 # Known limitations: # - GTID formats differ (MariaDB uses own format) # - Use binlog_checksum = NONE for cross-compatibility # - Some DDL may not replicate correctly Migration Steps # Option 1: Logical dump (most compatible) mysqldump --compatible=ansi --skip-definer \\ --routines --triggers --events \\ production_db > backup.sql # Option 2: Percona XtraBackup (physical) xtrabackup --backup --target-dir=/backup/mysql # Option 3: Replication-based (zero-downtime) # 1. Set up MySQL as master # 2. Configure MariaDB as replica # 3. Verify data consistency # 4. Promote MariaDB to master Decision Guide * **Choose MySQL** if you rely on Oracle ecosystem compatibility, need MySQL HeatWave for analytics, require MySQL Enterprise support, or need the VECTOR data type for AI/ML embeddings. * **Choose MariaDB** if you want fully open-source (no Oracle licensing), need thread pool performance (free), require temporal tables or dynamic columns, prefer a community-governed project, or want storage engine diversity (Aria, ColumnStore, Spider). * **Stay on current** if you already run either in production without migration pain; the differences are rarely worth a migration for existing deployments. For new projects starting in 2026, MariaDB offers the better value proposition for most use cases due to its open governance and free enterprise features, while MySQL remains the safer choice for organizations that already have Oracle relationships or need its specific enterprise integrations."
+      "articleBody": "MySQL vs MariaDB: The Complete Comparison MySQL vs MariaDB: The Complete Comparison MySQL vs MariaDB: The Complete Comparison MySQL vs MariaDB: The Complete Comparison MySQL vs MariaDB: The Complete Comparison Introduction MySQL and MariaDB share a common origin but have diverged significantly since MariaDB was forked from MySQL in 2009. While both systems remain largely compatible at the SQL level, their storage engines, optimization strategies, and feature sets have evolved in different directions. Understanding these differences is critical for migration decisions and new project planning. Divergence History Timeline of divergence timeline: \\\\\\\\\\\\\\\\- year: 1995 event: \"MySQL 1.0 released by TCX DataKonsult AB\" \\\\\\\\\\\\\\\\- year: 2008 event: \"Sun Microsystems acquires MySQL AB for $1B\" \\\\\\\\\\\\\\\\- year: 2009 event: \"Oracle acquires Sun; MariaDB forked by MySQL founder Monty Widenius\" \\\\\\\\\\\\\\\\- year: 2013 event: \"MySQL 5.6 (Oracle) diverges further from MariaDB 10.0\" \\\\\\\\\\\\\\\\- year: 2018 event: \"MySQL 8.0 released with data dictionary rewrite, roles, CTE\" \\\\\\\\\\\\\\\\- year: 2024 event: \"MariaDB 11.x and MySQL 8.4 LTS diverge on optimizer and engine features\" Key fork motivations: * **License concerns**: MySQL moved toward Oracle-controlled development; MariaDB remains fully GPL with a community-driven governance model * **Feature inclusion**: Oracle rejected some community patches that MariaDB adopted * **Storage engine philosophy**: MariaDB encourages engine diversity; MySQL centralizes around InnoDB Storage Engine Differences InnoDB (Both) vs Aria (MariaDB) \\\\\\\\\\\\\\\\-- MySQL/MariaDB: InnoDB configuration \\\\\\\\\\\\\\\\-- Both support this, but default settings differ \\\\\\\\\\\\\\\\-- MySQL default: innodb_buffer_pool_size = 70% of RAM innodb_log_file_size = 2GB innodb_flush_log_at_trx_commit = 1 -- ACID compliant innodb_io_capacity = 2000 innodb_autoinc_lock_mode = 2 -- Interleaved (MySQL 8+) \\\\\\\\\\\\\\\\-- MariaDB default: innodb_buffer_pool_size = 50% of RAM innodb_log_file_size = 512MB innodb_flush_log_at_trx_commit = 1 innodb_io_capacity = 200 \\\\\\\\\\\\\\\\-- MariaDB also defaults to InnoDB for transactional tables MariaDB's Aria engine (fork of MyISAM): \\\\\\\\\\\\\\\\-- Create Aria table (MariaDB only) CREATE TABLE analytics_events ( event_id BIGINT AUTO_INCREMENT, user_id INT NOT NULL, event_type VARCHAR(50), event_data JSON, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (event_id), INDEX idx_user (user_id), INDEX idx_type (event_type) ) ENGINE=Aria TRANSACTIONAL=1 PAGE_CHECKSUM=1; \\\\\\\\\\\\\\\\-- Aria advantages: \\\\\\\\\\\\\\\\-- 1. Crash-safe (unlike MyISAM) without full InnoDB overhead \\\\\\\\\\\\\\\\-- 2. Better performance for read-heavy analytics workloads \\\\\\\\\\\\\\\\-- 3. Lower memory footprint for large tables \\\\\\\\\\\\\\\\-- 4. Supports FULLTEXT indexes \\\\\\\\\\\\\\\\-- MariaDB: ColumnStore for analytical queries \\\\\\\\\\\\\\\\-- Install ColumnStore for columnar storage \\\\\\\\\\\\\\\\-- CREATE TABLE sales_analytics (...) ENGINE=ColumnStore; \\\\\\\\\\\\\\\\-- Optimized for large-scale aggregations Feature Comparison Common Features (Both) \\\\\\\\\\\\\\\\-- Both MySQL 8.x and MariaDB 11.x support: \\\\\\\\\\\\\\\\-- Common Table Expressions (CTE) WITH RECURSIVE org_tree AS ( SELECT id, name, manager_id, 1 AS level FROM employees WHERE manager_id IS NULL UNION ALL SELECT e.id, e.name, e.manager_id, ot.level + 1 FROM employees e JOIN org_tree ot ON e.manager_id = ot.id ) SELECT * FROM org_tree ORDER BY level, name; \\\\\\\\\\\\\\\\-- Window functions SELECT department, employee_name, salary, RANK() OVER (PARTITION BY department ORDER BY salary DESC) as rank, AVG(salary) OVER (PARTITION BY department) as dept_avg FROM employees; \\\\\\\\\\\\\\\\-- JSON functions SELECT JSON_EXTRACT(data, '$.address.city') as city FROM users WHERE JSON_CONTAINS(data, '{\"active\": true}'); MariaDB-Only Features \\\\\\\\\\\\\\\\-- Temporal tables (system-versioned) CREATE TABLE customer_audit ( id INT PRIMARY KEY, name VARCHAR(100), email VARCHAR(200), credit_limit DECIMAL(10,2), \\\\\\\\\\\\\\\\-- Automatic versioning ROW_START TIMESTAMP(6) GENERATED ALWAYS AS ROW START, ROW_END TIMESTAMP(6) GENERATED ALWAYS AS ROW END, PERIOD FOR SYSTEM_TIME (ROW_START, ROW_END) ) WITH SYSTEM VERSIONING; \\\\\\\\\\\\\\\\-- Query historical state SELECT * FROM customer_audit FOR SYSTEM_TIME AS OF '2026-01-15 10:00:00' WHERE id = 42; \\\\\\\\\\\\\\\\-- Dynamic columns (schema-less within column) CREATE TABLE product_metadata ( product_id INT PRIMARY KEY, attributes BLOB -- Dynamic columns ); INSERT INTO product_metadata VALUES ( 1, COLUMN_CREATE('color', 'red', 'weight', 150, 'material', 'steel') ); SELECT COLUMN_GET(attributes, 'weight' AS INT) as weight FROM product_metadata WHERE product_id = 1; MySQL-Only Features \\\\\\\\\\\\\\\\-- MySQL 8.4: Histogram-based optimizer stats ANALYZE TABLE orders UPDATE HISTOGRAM ON status, customer_id; \\\\\\\\\\\\\\\\-- MySQL: Invisible indexes ALTER TABLE orders ALTER INDEX idx_order_date INVISIBLE; \\\\\\\\\\\\\\\\-- Test query performance without removing the index \\\\\\\\\\\\\\\\-- MySQL: VECTOR type (MySQL 9.0+) CREATE TABLE embeddings ( id INT PRIMARY KEY, embedding VECTOR(1536) ); CREATE VECTOR INDEX idx_embed ON embeddings ((VECTOR_DISTANCE(embedding, '[...]'))); \\\\\\\\\\\\\\\\-- MySQL: Resource groups CREATE RESOURCE GROUP reporting_group TYPE = USER VCPU = 2-3 THREAD_PRIORITY = 5; SET RESOURCE GROUP reporting_group; \\\\\\\\\\\\\\\\-- Limit analytics queries to specific CPU cores Performance and Optimization \\\\\\\\\\\\\\\\-- Benchmark: Concurrent OLTP workload \\\\\\\\\\\\\\\\-- Similar performance for basic queries \\\\\\\\\\\\\\\\-- MariaDB thread pool (default in 11.x) \\\\\\\\\\\\\\\\-- Better scalability for high-connection workloads thread_pool_size = 16 thread_pool_max_threads = 500 thread_pool_idle_timeout = 60 \\\\\\\\\\\\\\\\-- MySQL: Connection handling \\\\\\\\\\\\\\\\-- Dedicated thread per connection (default) \\\\\\\\\\\\\\\\-- Or Thread Pool plugin (Enterprise only) thread_handling = one-thread-per-connection \\\\\\\\\\\\\\\\-- MariaDB includes thread pool free (MySQL charges for it) \\\\\\\\\\\\\\\\-- Query optimizer differences: \\\\\\\\\\\\\\\\-- MySQL 8.4: Cost-based, uses histograms \\\\\\\\\\\\\\\\-- MariaDB 11.x: Cost-based with table statistics feedback loop \\\\\\\\\\\\\\\\-- EXPLAIN output differences EXPLAIN FORMAT=JSON SELECT * FROM orders WHERE status = 'pending'; \\\\\\\\\\\\\\\\-- MySQL: JSON plan with cost breakdown \\\\\\\\\\\\\\\\-- MariaDB: JSON plan with optimization trace Compatibility and Migration Application Compatibility | Feature | MySQL 8.4 | MariaDB 11.x | |---|---|---| | SQL syntax | 99% compatible | 99% compatible | | Data types | 100% compatible (basic) | +Dynamic columns, +INET6 | | Stored procedures | Compatible | Compatible | | Triggers | Compatible | Compatible | | Sequences | Yes (auto_increment) | Yes (SEQUENCE engine) | | JSON | Native type | LONGTEXT + JSON functions | Data Replication Between MySQL and MariaDB MariaDB as replica of MySQL [mysqld] server-id = 2 replicate-do-db = production binlog_format = ROW slave_parallel_threads = 4 Known limitations: \\\\\\\\- GTID formats differ (MariaDB uses own format) \\\\\\\\- Use binlog_checksum = NONE for cross-compatibility \\\\\\\\- Some DDL may not replicate correctly Migration Steps Option 1: Logical dump (most compatible) mysqldump --compatible=ansi --skip-definer \\ \\\\\\\\\\\\\\\\--routines --triggers --events \\ production_db > backup.sql Option 2: Percona XtraBackup (physical) xtrabackup --backup --target-dir=/backup/mysql Option 3: Replication-based (zero-downtime) 1\\\\\\\\. Set up MySQL as master 2\\\\\\\\. Configure MariaDB as replica 3\\\\\\\\. Verify data consistency 4\\\\\\\\. Promote MariaDB to master Decision Guide * **Choose MySQL** if you rely on Oracle ecosystem compatibility, need MySQL HeatWave for analytics, require MySQL Enterprise support, or need the VECTOR data type for AI/ML embeddings. * **Choose MariaDB** if you want fully open-source (no Oracle licensing), need thread pool performance (free), require temporal tables or dynamic columns, prefer a community-governed project, or want storage engine diversity (Aria, ColumnStore, Spider). * **Stay on current** if you already run either in production without migration pain; the differences are rarely worth a migration for existing deployments. For new projects starting in 2026, MariaDB offers the better value proposition for most use cases due to its open governance and free enterprise features, while MySQL remains the safer choice for organizations that already have Oracle relationships or need its specific enterprise integrations."
     }
     </script>
     <script type="application/ld+json">
@@ -77,371 +77,2621 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/compare/mysql-vs-mariadb.png" alt="MySQL vs MariaDB: The Complete Comparison" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>MySQL vs MariaDB: The Complete Comparison</h1>
 <br>
+<h1>MySQL vs MariaDB: The Complete Comparison</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>MySQL vs MariaDB: The Complete Comparison</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>MySQL vs MariaDB: The Complete Comparison</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>MySQL vs MariaDB: The Complete Comparison</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>MySQL and MariaDB share a common origin but have diverged significantly since MariaDB was forked from MySQL in 2009. While both systems remain largely compatible at the SQL level, their storage engines, optimization strategies, and feature sets have evolved in different directions. Understanding these differences is critical for migration decisions and new project planning.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Divergence History</h2>
 <br>
-<p>    # Timeline of divergence</p>
 <br>
-<p>    timeline:</p>
 <br>
-<p>      - year: 1995</p>
 <br>
-<p>        event: "MySQL 1.0 released by TCX DataKonsult AB"</p>
 <br>
-<p>      - year: 2008</p>
 <br>
-<p>        event: "Sun Microsystems acquires MySQL AB for $1B"</p>
 <br>
-<p>      - year: 2009</p>
 <br>
-<p>        event: "Oracle acquires Sun; MariaDB forked by MySQL founder Monty Widenius"</p>
 <br>
-<p>      - year: 2013</p>
 <br>
-<p>        event: "MySQL 5.6 (Oracle) diverges further from MariaDB 10.0"</p>
 <br>
-<p>      - year: 2018</p>
 <br>
-<p>        event: "MySQL 8.0 released with data dictionary rewrite, roles, CTE"</p>
 <br>
-<p>      - year: 2024</p>
+<h1>Timeline of divergence</h1>
 <br>
-<p>        event: "MariaDB 11.x and MySQL 8.4 LTS diverge on optimizer and engine features"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>timeline:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- year: 1995</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>event: "MySQL 1.0 released by TCX DataKonsult AB"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- year: 2008</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>event: "Sun Microsystems acquires MySQL AB for $1B"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- year: 2009</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>event: "Oracle acquires Sun; MariaDB forked by MySQL founder Monty Widenius"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- year: 2013</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>event: "MySQL 5.6 (Oracle) diverges further from MariaDB 10.0"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- year: 2018</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>event: "MySQL 8.0 released with data dictionary rewrite, roles, CTE"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- year: 2024</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>event: "MariaDB 11.x and MySQL 8.4 LTS diverge on optimizer and engine features"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Key fork motivations:</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **License concerns**: MySQL moved toward Oracle-controlled development; MariaDB remains fully GPL with a community-driven governance model</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Feature inclusion**: Oracle rejected some community patches that MariaDB adopted</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Storage engine philosophy**: MariaDB encourages engine diversity; MySQL centralizes around InnoDB</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Storage Engine Differences</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h3>InnoDB (Both) vs Aria (MariaDB)</h3>
 <br>
-<p>    -- MySQL/MariaDB: InnoDB configuration</p>
 <br>
-<p>    -- Both support this, but default settings differ</p>
 <br>
-<p>    -- MySQL default:</p>
 <br>
-<p>    innodb_buffer_pool_size = 70% of RAM</p>
 <br>
-<p>    innodb_log_file_size = 2GB</p>
 <br>
-<p>    innodb_flush_log_at_trx_commit = 1  -- ACID compliant</p>
 <br>
-<p>    innodb_io_capacity = 2000</p>
 <br>
-<p>    innodb_autoinc_lock_mode = 2  -- Interleaved (MySQL 8+)</p>
 <br>
-<p>    -- MariaDB default:</p>
 <br>
-<p>    innodb_buffer_pool_size = 50% of RAM</p>
 <br>
-<p>    innodb_log_file_size = 512MB</p>
 <br>
-<p>    innodb_flush_log_at_trx_commit = 1</p>
 <br>
-<p>    innodb_io_capacity = 200</p>
+<p>\\\\\\\\-- MySQL/MariaDB: InnoDB configuration</p>
 <br>
-<p>    -- MariaDB also defaults to InnoDB for transactional tables</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- Both support this, but default settings differ</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- MySQL default:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>innodb_buffer_pool_size = 70% of RAM</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>innodb_log_file_size = 2GB</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>innodb_flush_log_at_trx_commit = 1 -- ACID compliant</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>innodb_io_capacity = 2000</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>innodb_autoinc_lock_mode = 2 -- Interleaved (MySQL 8+)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- MariaDB default:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>innodb_buffer_pool_size = 50% of RAM</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>innodb_log_file_size = 512MB</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>innodb_flush_log_at_trx_commit = 1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>innodb_io_capacity = 200</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- MariaDB also defaults to InnoDB for transactional tables</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>MariaDB's Aria engine (fork of MyISAM):</p>
 <br>
-<p>    -- Create Aria table (MariaDB only)</p>
 <br>
-<p>    CREATE TABLE analytics_events (</p>
 <br>
-<p>        event_id BIGINT AUTO_INCREMENT,</p>
 <br>
-<p>        user_id INT NOT NULL,</p>
 <br>
-<p>        event_type VARCHAR(50),</p>
 <br>
-<p>        event_data JSON,</p>
 <br>
-<p>        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,</p>
 <br>
-<p>        PRIMARY KEY (event_id),</p>
 <br>
-<p>        INDEX idx_user (user_id),</p>
 <br>
-<p>        INDEX idx_type (event_type)</p>
 <br>
-<p>    ) ENGINE=Aria TRANSACTIONAL=1 PAGE_CHECKSUM=1;</p>
 <br>
-<p>    -- Aria advantages:</p>
 <br>
-<p>    -- 1. Crash-safe (unlike MyISAM) without full InnoDB overhead</p>
+<p>\\\\\\\\-- Create Aria table (MariaDB only)</p>
 <br>
-<p>    -- 2. Better performance for read-heavy analytics workloads</p>
 <br>
-<p>    -- 3. Lower memory footprint for large tables</p>
 <br>
-<p>    -- 4. Supports FULLTEXT indexes</p>
 <br>
-<p>    -- MariaDB: ColumnStore for analytical queries</p>
 <br>
-<p>    -- Install ColumnStore for columnar storage</p>
 <br>
-<p>    -- CREATE TABLE sales_analytics (...) ENGINE=ColumnStore;</p>
 <br>
-<p>    -- Optimized for large-scale aggregations</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE TABLE analytics_events (</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>event_id BIGINT AUTO_INCREMENT,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>user_id INT NOT NULL,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>event_type VARCHAR(50),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>event_data JSON,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>PRIMARY KEY (event_id),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>INDEX idx_user (user_id),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>INDEX idx_type (event_type)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>) ENGINE=Aria TRANSACTIONAL=1 PAGE_CHECKSUM=1;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- Aria advantages:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- 1. Crash-safe (unlike MyISAM) without full InnoDB overhead</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- 2. Better performance for read-heavy analytics workloads</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- 3. Lower memory footprint for large tables</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- 4. Supports FULLTEXT indexes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- MariaDB: ColumnStore for analytical queries</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- Install ColumnStore for columnar storage</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- CREATE TABLE sales_analytics (...) ENGINE=ColumnStore;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- Optimized for large-scale aggregations</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Feature Comparison</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h3>Common Features (Both)</h3>
 <br>
-<p>    -- Both MySQL 8.x and MariaDB 11.x support:</p>
 <br>
-<p>    -- Common Table Expressions (CTE)</p>
 <br>
-<p>    WITH RECURSIVE org_tree AS (</p>
 <br>
-<p>        SELECT id, name, manager_id, 1 AS level</p>
 <br>
-<p>        FROM employees WHERE manager_id IS NULL</p>
 <br>
-<p>        UNION ALL</p>
 <br>
-<p>        SELECT e.id, e.name, e.manager_id, ot.level + 1</p>
 <br>
-<p>        FROM employees e</p>
 <br>
-<p>        JOIN org_tree ot ON e.manager_id = ot.id</p>
 <br>
-<p>    )</p>
 <br>
-<p>    SELECT * FROM org_tree ORDER BY level, name;</p>
 <br>
-<p>    -- Window functions</p>
 <br>
-<p>    SELECT</p>
+<p>\\\\\\\\-- Both MySQL 8.x and MariaDB 11.x support:</p>
 <br>
-<p>        department,</p>
 <br>
-<p>        employee_name,</p>
 <br>
-<p>        salary,</p>
 <br>
-<p>        RANK() OVER (PARTITION BY department ORDER BY salary DESC) as rank,</p>
 <br>
-<p>        AVG(salary) OVER (PARTITION BY department) as dept_avg</p>
 <br>
-<p>    FROM employees;</p>
 <br>
-<p>    -- JSON functions</p>
 <br>
-<p>    SELECT JSON_EXTRACT(data, '$.address.city') as city</p>
 <br>
-<p>    FROM users WHERE JSON_CONTAINS(data, '{"active": true}');</p>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- Common Table Expressions (CTE)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>WITH RECURSIVE org_tree AS (</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT id, name, manager_id, 1 AS level</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>FROM employees WHERE manager_id IS NULL</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>UNION ALL</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT e.id, e.name, e.manager_id, ot.level + 1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>FROM employees e</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>JOIN org_tree ot ON e.manager_id = ot.id</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT * FROM org_tree ORDER BY level, name;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- Window functions</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>department,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>employee_name,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>salary,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>RANK() OVER (PARTITION BY department ORDER BY salary DESC) as rank,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>AVG(salary) OVER (PARTITION BY department) as dept_avg</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>FROM employees;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- JSON functions</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT JSON_EXTRACT(data, '$.address.city') as city</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>FROM users WHERE JSON_CONTAINS(data, '{"active": true}');</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>MariaDB-Only Features</h3>
 <br>
-<p>    -- Temporal tables (system-versioned)</p>
 <br>
-<p>    CREATE TABLE customer_audit (</p>
 <br>
-<p>        id INT PRIMARY KEY,</p>
 <br>
-<p>        name VARCHAR(100),</p>
 <br>
-<p>        email VARCHAR(200),</p>
 <br>
-<p>        credit_limit DECIMAL(10,2),</p>
 <br>
-<p>        -- Automatic versioning</p>
 <br>
-<p>        ROW_START TIMESTAMP(6) GENERATED ALWAYS AS ROW START,</p>
 <br>
-<p>        ROW_END TIMESTAMP(6) GENERATED ALWAYS AS ROW END,</p>
 <br>
-<p>        PERIOD FOR SYSTEM_TIME (ROW_START, ROW_END)</p>
 <br>
-<p>    ) WITH SYSTEM VERSIONING;</p>
 <br>
-<p>    -- Query historical state</p>
 <br>
-<p>    SELECT * FROM customer_audit</p>
+<p>\\\\\\\\-- Temporal tables (system-versioned)</p>
 <br>
-<p>    FOR SYSTEM_TIME AS OF '2026-01-15 10:00:00'</p>
 <br>
-<p>    WHERE id = 42;</p>
 <br>
-<p>    -- Dynamic columns (schema-less within column)</p>
 <br>
-<p>    CREATE TABLE product_metadata (</p>
 <br>
-<p>        product_id INT PRIMARY KEY,</p>
 <br>
-<p>        attributes BLOB  -- Dynamic columns</p>
 <br>
-<p>    );</p>
 <br>
-<p>    INSERT INTO product_metadata VALUES (</p>
 <br>
-<p>        1,</p>
 <br>
-<p>        COLUMN_CREATE('color', 'red', 'weight', 150, 'material', 'steel')</p>
 <br>
-<p>    );</p>
 <br>
-<p>    SELECT COLUMN_GET(attributes, 'weight' AS INT) as weight</p>
 <br>
-<p>    FROM product_metadata WHERE product_id = 1;</p>
+<p>CREATE TABLE customer_audit (</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>id INT PRIMARY KEY,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name VARCHAR(100),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>email VARCHAR(200),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>credit_limit DECIMAL(10,2),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- Automatic versioning</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ROW_START TIMESTAMP(6) GENERATED ALWAYS AS ROW START,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ROW_END TIMESTAMP(6) GENERATED ALWAYS AS ROW END,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>PERIOD FOR SYSTEM_TIME (ROW_START, ROW_END)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>) WITH SYSTEM VERSIONING;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- Query historical state</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT * FROM customer_audit</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>FOR SYSTEM_TIME AS OF '2026-01-15 10:00:00'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>WHERE id = 42;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- Dynamic columns (schema-less within column)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE TABLE product_metadata (</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>product_id INT PRIMARY KEY,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>attributes BLOB -- Dynamic columns</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>INSERT INTO product_metadata VALUES (</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>1,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>COLUMN_CREATE('color', 'red', 'weight', 150, 'material', 'steel')</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT COLUMN_GET(attributes, 'weight' AS INT) as weight</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>FROM product_metadata WHERE product_id = 1;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>MySQL-Only Features</h3>
 <br>
-<p>    -- MySQL 8.4: Histogram-based optimizer stats</p>
 <br>
-<p>    ANALYZE TABLE orders UPDATE HISTOGRAM ON status, customer_id;</p>
 <br>
-<p>    -- MySQL: Invisible indexes</p>
 <br>
-<p>    ALTER TABLE orders ALTER INDEX idx_order_date INVISIBLE;</p>
 <br>
-<p>    -- Test query performance without removing the index</p>
 <br>
-<p>    -- MySQL: VECTOR type (MySQL 9.0+)</p>
 <br>
-<p>    CREATE TABLE embeddings (</p>
 <br>
-<p>        id INT PRIMARY KEY,</p>
 <br>
-<p>        embedding VECTOR(1536)</p>
 <br>
-<p>    );</p>
 <br>
-<p>    CREATE VECTOR INDEX idx_embed ON embeddings ((VECTOR_DISTANCE(embedding, '[...]')));</p>
 <br>
-<p>    -- MySQL: Resource groups</p>
 <br>
-<p>    CREATE RESOURCE GROUP reporting_group</p>
+<p>\\\\\\\\-- MySQL 8.4: Histogram-based optimizer stats</p>
 <br>
-<p>        TYPE = USER</p>
 <br>
-<p>        VCPU = 2-3</p>
 <br>
-<p>        THREAD_PRIORITY = 5;</p>
 <br>
-<p>    SET RESOURCE GROUP reporting_group;</p>
 <br>
-<p>    -- Limit analytics queries to specific CPU cores</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ANALYZE TABLE orders UPDATE HISTOGRAM ON status, customer_id;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- MySQL: Invisible indexes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ALTER TABLE orders ALTER INDEX idx_order_date INVISIBLE;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- Test query performance without removing the index</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- MySQL: VECTOR type (MySQL 9.0+)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE TABLE embeddings (</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>id INT PRIMARY KEY,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>embedding VECTOR(1536)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE VECTOR INDEX idx_embed ON embeddings ((VECTOR_DISTANCE(embedding, '[...]')));</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- MySQL: Resource groups</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE RESOURCE GROUP reporting_group</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>TYPE = USER</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>VCPU = 2-3</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>THREAD_PRIORITY = 5;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SET RESOURCE GROUP reporting_group;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- Limit analytics queries to specific CPU cores</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Performance and Optimization</h2>
 <br>
-<p>    -- Benchmark: Concurrent OLTP workload</p>
 <br>
-<p>    -- Similar performance for basic queries</p>
 <br>
-<p>    -- MariaDB thread pool (default in 11.x)</p>
 <br>
-<p>    -- Better scalability for high-connection workloads</p>
 <br>
-<p>    thread_pool_size = 16</p>
 <br>
-<p>    thread_pool_max_threads = 500</p>
 <br>
-<p>    thread_pool_idle_timeout = 60</p>
 <br>
-<p>    -- MySQL: Connection handling</p>
 <br>
-<p>    -- Dedicated thread per connection (default)</p>
 <br>
-<p>    -- Or Thread Pool plugin (Enterprise only)</p>
 <br>
-<p>    thread_handling = one-thread-per-connection</p>
 <br>
-<p>    -- MariaDB includes thread pool free (MySQL charges for it)</p>
 <br>
-<p>    -- Query optimizer differences:</p>
+<p>\\\\\\\\-- Benchmark: Concurrent OLTP workload</p>
 <br>
-<p>    -- MySQL 8.4: Cost-based, uses histograms</p>
 <br>
-<p>    -- MariaDB 11.x: Cost-based with table statistics feedback loop</p>
 <br>
-<p>    -- EXPLAIN output differences</p>
 <br>
-<p>    EXPLAIN FORMAT=JSON SELECT * FROM orders WHERE status = 'pending';</p>
 <br>
-<p>    -- MySQL: JSON plan with cost breakdown</p>
 <br>
-<p>    -- MariaDB: JSON plan with optimization trace</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- Similar performance for basic queries</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- MariaDB thread pool (default in 11.x)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- Better scalability for high-connection workloads</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>thread_pool_size = 16</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>thread_pool_max_threads = 500</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>thread_pool_idle_timeout = 60</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- MySQL: Connection handling</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- Dedicated thread per connection (default)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- Or Thread Pool plugin (Enterprise only)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>thread_handling = one-thread-per-connection</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- MariaDB includes thread pool free (MySQL charges for it)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- Query optimizer differences:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- MySQL 8.4: Cost-based, uses histograms</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- MariaDB 11.x: Cost-based with table statistics feedback loop</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- EXPLAIN output differences</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>EXPLAIN FORMAT=JSON SELECT * FROM orders WHERE status = 'pending';</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- MySQL: JSON plan with cost breakdown</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\-- MariaDB: JSON plan with optimization trace</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Compatibility and Migration</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h3>Application Compatibility</h3>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Feature | MySQL 8.4 | MariaDB 11.x |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>|---|---|---|</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| SQL syntax | 99% compatible | 99% compatible |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Data types | 100% compatible (basic) | +Dynamic columns, +INET6 |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Stored procedures | Compatible | Compatible |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Triggers | Compatible | Compatible |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Sequences | Yes (auto_increment) | Yes (SEQUENCE engine) |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| JSON | Native type | LONGTEXT + JSON functions |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Data Replication Between MySQL and MariaDB</h3>
 <br>
-<p>    # MariaDB as replica of MySQL</p>
 <br>
-<p>    [mysqld]</p>
 <br>
-<p>    server-id = 2</p>
 <br>
-<p>    replicate-do-db = production</p>
 <br>
-<p>    binlog_format = ROW</p>
 <br>
-<p>    slave_parallel_threads = 4</p>
 <br>
-<p>    # Known limitations:</p>
 <br>
-<p>    # - GTID formats differ (MariaDB uses own format)</p>
 <br>
-<p>    # - Use binlog_checksum = NONE for cross-compatibility</p>
 <br>
-<p>    # - Some DDL may not replicate correctly</p>
+<br>
+<br>
+<br>
+<h1>MariaDB as replica of MySQL</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>[mysqld]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>server-id = 2</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>replicate-do-db = production</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>binlog_format = ROW</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>slave_parallel_threads = 4</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Known limitations:</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>\\\\- GTID formats differ (MariaDB uses own format)</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>\\\\- Use binlog_checksum = NONE for cross-compatibility</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>\\\\- Some DDL may not replicate correctly</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Migration Steps</h3>
 <br>
-<p>    # Option 1: Logical dump (most compatible)</p>
 <br>
-<p>    mysqldump --compatible=ansi --skip-definer \</p>
 <br>
-<p>      --routines --triggers --events \</p>
 <br>
-<p>      production_db > backup.sql</p>
 <br>
-<p>    # Option 2: Percona XtraBackup (physical)</p>
 <br>
-<p>    xtrabackup --backup --target-dir=/backup/mysql</p>
 <br>
-<p>    # Option 3: Replication-based (zero-downtime)</p>
 <br>
-<p>    # 1. Set up MySQL as master</p>
 <br>
-<p>    # 2. Configure MariaDB as replica</p>
 <br>
-<p>    # 3. Verify data consistency</p>
 <br>
-<p>    # 4. Promote MariaDB to master</p>
+<br>
+<br>
+<h1>Option 1: Logical dump (most compatible)</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>mysqldump --compatible=ansi --skip-definer \</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\--routines --triggers --events \</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>production_db > backup.sql</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Option 2: Percona XtraBackup (physical)</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>xtrabackup --backup --target-dir=/backup/mysql</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Option 3: Replication-based (zero-downtime)</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>1\\\\. Set up MySQL as master</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>2\\\\. Configure MariaDB as replica</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>3\\\\. Verify data consistency</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>4\\\\. Promote MariaDB to master</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Decision Guide</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Choose MySQL** if you rely on Oracle ecosystem compatibility, need MySQL HeatWave for analytics, require MySQL Enterprise support, or need the VECTOR data type for AI/ML embeddings.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Choose MariaDB** if you want fully open-source (no Oracle licensing), need thread pool performance (free), require temporal tables or dynamic columns, prefer a community-governed project, or want storage engine diversity (Aria, ColumnStore, Spider).</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Stay on current** if you already run either in production without migration pain; the differences are rarely worth a migration for existing deployments.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>For new projects starting in 2026, MariaDB offers the better value proposition for most use cases due to its open governance and free enterprise features, while MySQL remains the safer choice for organizations that already have Oracle relationships or need its specific enterprise integrations.</p></div>
     </article>
@@ -458,6 +2708,12 @@
       <div class="related-grid"><a href="/en/compare/grpc-vs-websocket.html" class="related-card">gRPC vs WebSocket: Real-Time Communication</a><a href="/en/compare/kafka-vs-rabbitmq.html" class="related-card">Kafka vs RabbitMQ vs Apache Pulsar</a><a href="/en/compare/redis-vs-memcached.html" class="related-card">Redis vs Memcached: Caching Solution Comparison</a><a href="/en/compare/rust-go-zig-comparison.html" class="related-card">Rust vs Go vs Zig in 2026: A Complete Comparison for Systems Programming</a></div>
       <noscript><div class="related-grid"><a href="/en/compare/grpc-vs-websocket.html" class="related-card">gRPC vs WebSocket: Real-Time Communication</a><a href="/en/compare/kafka-vs-rabbitmq.html" class="related-card">Kafka vs RabbitMQ vs Apache Pulsar</a><a href="/en/compare/redis-vs-memcached.html" class="related-card">Redis vs Memcached: Caching Solution Comparison</a><a href="/en/compare/rust-go-zig-comparison.html" class="related-card">Rust vs Go vs Zig in 2026: A Complete Comparison for Systems Programming</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
+    </section>
+    
+    <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#f0fdf4;border-radius:12px;border:1px solid #bbf7d0;">
+      <h3 style="margin-top:0;font-size:1.1rem;">🧩 Which Framework Should You Use?</h3>
+      <p style="margin:0.5rem 0;color:#475569;">Not sure which frontend framework fits your project? Answer 5 questions and get a data-driven recommendation.</p>
+      <a href="/tools/framework-decision-wizard.html" style="display:inline-block;padding:0.5rem 1rem;background:#22c55e;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Try Decision Wizard →</a>
     </section>
   </div>
 </main>

@@ -20,7 +20,7 @@ Modern PaaS platforms make deploying apps dramatically simpler than AWS. Fly.io,
 **Global regions**|  35+ regions| 4 regions| 4 regions  
 **GPU support**|  Yes (L40S, A100)| No| No  
 **CLI**|  Excellent (flyctl)| Good (railway CLI)| Minimal (render CLI)  
-
+  
 ## Fly.io — Docker-Native, Globally Distributed
 
 Fly.io converts Docker containers into micro-VMs and deploys them to 35+ regions worldwide. If you can dockerize it, Fly.io can run it. The CLI is excellent (flyctl launch auto-detects your framework). GPU support (L40S, A100) makes it unique for AI workloads.
@@ -54,5 +54,5 @@ Fastest deploy, simplest experience| **Railway**
 Static site + API + managed DB| **Render**  
 AI/ML inference, GPU required| **Fly.io**  
 Zero config, template-driven| **Railway**  
-
+  
 **Bottom line:** Railway for the best developer experience (auto-detect, one-click templates). Fly.io for global distribution and Docker control. Render for simple static + API setups. All three beat AWS for developer experience. See also: [Frontend Hosting Comparison](</en/compare/vercel-vs-netlify-vs-cloudflare.html>) and [Edge Functions Comparison](</en/compare/cloudflare-workers-vs-lambda-vs-deno-deploy.html>).

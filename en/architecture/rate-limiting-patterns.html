@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-patterns.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1322",
+      "wordCount": "1845",
       "keywords": "Architecture, System Design",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/rate-limiting-patterns.html"},
-      "articleBody": "Rate Limiting Patterns Rate limiting is a critical component of any production API or service. It protects your system from abuse, ensures fair usage among consumers, and maintains service quality under load. This article explores the most common rate limiting algorithms and how to choose the right one for your use case. Why Rate Limiting Matters Rate limiting prevents a single client from consuming an unfair share of resources. Without it, a misbehaving client or an accidental infinite loop can degrade service for all users. Rate limiting also helps: * Protect against DDoS attacks. * Control costs in metered infrastructure. * Enforce service level agreements (SLAs). * Prevent cascading failures in distributed systems. Token Bucket Algorithm The token bucket is one of the most popular rate limiting algorithms. A bucket holds a fixed number of tokens. Tokens are added at a steady rate. Each request consumes one token. If the bucket is empty, the request is denied. Capacity: 100 tokens Refill rate: 10 tokens/second Request at t=0: 100 tokens available -> success, 99 remaining Request at t=1: 99 + 10 = 100 -> success, 99 remaining Request at t=0.5: 99 + 5 = 100 -> success, 99 remaining **Pros:** Allows bursts up to the bucket capacity. Memory efficient -- you only need to store the token count and last refill timestamp. **Cons:** The burst behavior may not suit all use cases. With a large bucket, a client can send an entire day's worth of requests in a few seconds. The token bucket is used by Amazon (AWS API Gateway), Stripe, and GitHub. Leaky Bucket Algorithm The leaky bucket is similar to the token bucket but processes requests at a fixed rate. Think of a bucket with a hole in the bottom. Requests are poured into the top. They leak out of the bottom at a constant rate. If the bucket overflows, excess requests are rejected. **Pros:** Smooths out traffic perfectly. No bursts at all. Predictable processing rate. **Cons:** Cannot handle any bursts, even legitimate ones. A client that occasionally needs to send 10 requests at once will be penalized. Leaky bucket is ideal for scenarios where a steady processing rate is critical, such as database connection pooling or queue workers. Fixed Window Counter Divide time into fixed windows (e.g., 1 minute). Count requests in each window. If the count exceeds the limit, reject further requests until the next window. Limit: 100 requests per minute Window: 00:00:00 to 00:01:00 95 requests at 00:00:45 -> allowed 6 requests at 00:00:55 -> 5 allowed, 1 rejected (exceeds 100) Window resets at 00:01:00 **Pros:** Extremely simple to implement. Only requires a counter per window per client. **Cons:** The \"boundary problem.\" At the edge of a window, a client can send 100 requests at 00:00:59 and another 100 at 00:01:01, effectively 200 requests in 2 seconds. This can overwhelm your system. Sliding Window Log Instead of fixed windows, track a timestamp for each request. Count requests within the last N seconds. **Pros:** Eliminates the boundary problem. Perfectly accurate rate limiting. **Cons:** Memory intensive. You need to store a timestamp for every request. For high-traffic APIs, this can require significant storage. Sliding Window Counter A hybrid approach combining fixed windows with sliding precision. Track counters for the current and previous windows. Approximate the count for the sliding window using weighted averages. Limit: 100 requests per minute Current 1-minute window: 80 requests Previous 1-minute window: 40 requests At 30 seconds into the current window: Estimated count = 40 * (30/60) + 80 = 100 **Pros:** Smooths out the boundary problem with minimal memory (just two counters per client). Good enough for most use cases. **Cons:** Not perfectly accurate. The approximation error varies but is typically acceptable for rate limiting purposes. This is the algorithm used by Cloudflare and many CDN-based rate limiters. Distributed Rate Limiting In a distributed system with multiple application instances, rate limiting becomes more complex. Each instance cannot track limits independently, or the combined traffic might exceed the limit. **Centralized approach:** Use a shared data store like Redis to maintain counters. The `INCR` and `EXPIRE` commands make Redis ideal for rate limiting. This gives global accuracy but adds latency for every request. **Local approach:** Each instance independently tracks its share of the limit (e.g., if there are 3 instances and the limit is 300, each instance limits to 100). This is fast but can exceed the limit if traffic distribution is uneven. **Hybrid approach:** Use local rate limiting for fast checks and periodic synchronization to a central store. This balances performance and accuracy. Response Headers Tell clients about their rate limit status through response headers: X-RateLimit-Limit: 100 X-RateLimit-Remaining: 42 X-RateLimit-Reset: 1640995200 When a client exceeds the limit, return `429 Too Many Requests` with a `Retry-After` header: HTTP/1.1 429 Too Many Requests Retry-After: 30 Choosing the Right Algorithm * **Token bucket** is a good default choice. It handles bursts and is memory efficient. * **Fixed window** works for simple scenarios where occasional bursts are acceptable. * **Sliding window log** is best for strict, precise rate limiting. * **Sliding window counter** is a good compromise between accuracy and efficiency. * **Leaky bucket** works when you need a constant processing rate. Summary Rate limiting is essential for production APIs. Start with the token bucket algorithm for general-purpose rate limiting. Use Redis for distributed scenarios. Always return descriptive headers so clients can adjust their behavior. Monitor your rate limiting effectiveness and adjust thresholds based on real traffic patterns."
+      "articleBody": "Rate Limiting Patterns Rate Limiting Patterns Rate Limiting Patterns Rate Limiting Patterns Rate limiting is a critical component of any production API or service. It protects your system from abuse, ensures fair usage among consumers, and maintains service quality under load. This article explores the most common rate limiting algorithms and how to choose the right one for your use case. Why Rate Limiting Matters Rate limiting prevents a single client from consuming an unfair share of resources. Without it, a misbehaving client or an accidental infinite loop can degrade service for all users. Rate limiting also helps: * Protect against DDoS attacks. * Control costs in metered infrastructure. * Enforce service level agreements (SLAs). * Prevent cascading failures in distributed systems. Token Bucket Algorithm The token bucket is one of the most popular rate limiting algorithms. A bucket holds a fixed number of tokens. Tokens are added at a steady rate. Each request consumes one token. If the bucket is empty, the request is denied. Capacity: 100 tokens Refill rate: 10 tokens/second Request at t=0: 100 tokens available -> success, 99 remaining Request at t=1: 99 + 10 = 100 -> success, 99 remaining Request at t=0.5: 99 + 5 = 100 -> success, 99 remaining **Pros:** Allows bursts up to the bucket capacity. Memory efficient -- you only need to store the token count and last refill timestamp. **Cons:** The burst behavior may not suit all use cases. With a large bucket, a client can send an entire day's worth of requests in a few seconds. The token bucket is used by Amazon (AWS API Gateway), Stripe, and GitHub. Leaky Bucket Algorithm The leaky bucket is similar to the token bucket but processes requests at a fixed rate. Think of a bucket with a hole in the bottom. Requests are poured into the top. They leak out of the bottom at a constant rate. If the bucket overflows, excess requests are rejected. **Pros:** Smooths out traffic perfectly. No bursts at all. Predictable processing rate. **Cons:** Cannot handle any bursts, even legitimate ones. A client that occasionally needs to send 10 requests at once will be penalized. Leaky bucket is ideal for scenarios where a steady processing rate is critical, such as database connection pooling or queue workers. Fixed Window Counter Divide time into fixed windows (e.g., 1 minute). Count requests in each window. If the count exceeds the limit, reject further requests until the next window. Limit: 100 requests per minute Window: 00:00:00 to 00:01:00 95 requests at 00:00:45 -> allowed 6 requests at 00:00:55 -> 5 allowed, 1 rejected (exceeds 100) Window resets at 00:01:00 **Pros:** Extremely simple to implement. Only requires a counter per window per client. **Cons:** The \"boundary problem.\" At the edge of a window, a client can send 100 requests at 00:00:59 and another 100 at 00:01:01, effectively 200 requests in 2 seconds. This can overwhelm your system. Sliding Window Log Instead of fixed windows, track a timestamp for each request. Count requests within the last N seconds. **Pros:** Eliminates the boundary problem. Perfectly accurate rate limiting. **Cons:** Memory intensive. You need to store a timestamp for every request. For high-traffic APIs, this can require significant storage. Sliding Window Counter A hybrid approach combining fixed windows with sliding precision. Track counters for the current and previous windows. Approximate the count for the sliding window using weighted averages. Limit: 100 requests per minute Current 1-minute window: 80 requests Previous 1-minute window: 40 requests At 30 seconds into the current window: Estimated count = 40 * (30/60) + 80 = 100 **Pros:** Smooths out the boundary problem with minimal memory (just two counters per client). Good enough for most use cases. **Cons:** Not perfectly accurate. The approximation error varies but is typically acceptable for rate limiting purposes. This is the algorithm used by Cloudflare and many CDN-based rate limiters. Distributed Rate Limiting In a distributed system with multiple application instances, rate limiting becomes more complex. Each instance cannot track limits independently, or the combined traffic might exceed the limit. **Centralized approach:** Use a shared data store like Redis to maintain counters. The `INCR` and `EXPIRE` commands make Redis ideal for rate limiting. This gives global accuracy but adds latency for every request. **Local approach:** Each instance independently tracks its share of the limit (e.g., if there are 3 instances and the limit is 300, each instance limits to 100). This is fast but can exceed the limit if traffic distribution is uneven. **Hybrid approach:** Use local rate limiting for fast checks and periodic synchronization to a central store. This balances performance and accuracy. Response Headers Tell clients about their rate limit status through response headers: X-RateLimit-Limit: 100 X-RateLimit-Remaining: 42 X-RateLimit-Reset: 1640995200 When a client exceeds the limit, return `429 Too Many Requests` with a `Retry-After` header: HTTP/1.1 429 Too Many Requests Retry-After: 30 Choosing the Right Algorithm * **Token bucket** is a good default choice. It handles bursts and is memory efficient. * **Fixed window** works for simple scenarios where occasional bursts are acceptable. * **Sliding window log** is best for strict, precise rate limiting. * **Sliding window counter** is a good compromise between accuracy and efficiency. * **Leaky bucket** works when you need a constant processing rate. Summary Rate limiting is essential for production APIs. Start with the token bucket algorithm for general-purpose rate limiting. Use Redis for distributed scenarios. Always return descriptive headers so clients can adjust their behavior. Monitor your rate limiting effectiveness and adjust thresholds based on real traffic patterns."
     }
     </script>
     <script type="application/ld+json">
@@ -77,100 +77,637 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-patterns.png" alt="Rate Limiting Patterns" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Rate Limiting Patterns</h1>
 <br>
-<p>Rate limiting is a critical component of any production API or service. It protects your system from abuse, ensures fair usage among consumers, and maintains service quality under load. This article explores the most common rate limiting algorithms and how to choose the right one for your use case.   </p>
-<p>Why Rate Limiting Matters   </p>
-<p>Rate limiting prevents a single client from consuming an unfair share of resources. Without it, a misbehaving client or an accidental infinite loop can degrade service for all users. Rate limiting also helps:   </p>
+<h1>Rate Limiting Patterns</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>Rate Limiting Patterns</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Rate Limiting Patterns</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Rate limiting is a critical component of any production API or service. It protects your system from abuse, ensures fair usage among consumers, and maintains service quality under load. This article explores the most common rate limiting algorithms and how to choose the right one for your use case. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Why Rate Limiting Matters </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Rate limiting prevents a single client from consuming an unfair share of resources. Without it, a misbehaving client or an accidental infinite loop can degrade service for all users. Rate limiting also helps: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>* Protect against DDoS attacks.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Control costs in metered infrastructure.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Enforce service level agreements (SLAs).</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Prevent cascading failures in distributed systems.</p>
 <br>
-<p>Token Bucket Algorithm   </p>
-<p>The token bucket is one of the most popular rate limiting algorithms. A bucket holds a fixed number of tokens. Tokens are added at a steady rate. Each request consumes one token. If the bucket is empty, the request is denied.   </p>
 <br>
-<p>    Capacity: 100 tokens</p>
 <br>
-<p>    Refill rate: 10 tokens/second</p>
 <br>
-<p>    Request at t=0: 100 tokens available -> success, 99 remaining</p>
 <br>
-<p>    Request at t=1: 99 + 10 = 100 -> success, 99 remaining</p>
 <br>
-<p>    Request at t=0.5: 99 + 5 = 100 -> success, 99 remaining</p>
 <br>
-<p>**Pros:** Allows bursts up to the bucket capacity. Memory efficient -- you only need to store the token count and last refill timestamp.   </p>
-<p>**Cons:** The burst behavior may not suit all use cases. With a large bucket, a client can send an entire day's worth of requests in a few seconds.   </p>
-<p>The token bucket is used by Amazon (AWS API Gateway), Stripe, and GitHub.   </p>
-<p>Leaky Bucket Algorithm   </p>
-<p>The leaky bucket is similar to the token bucket but processes requests at a fixed rate. Think of a bucket with a hole in the bottom. Requests are poured into the top. They leak out of the bottom at a constant rate. If the bucket overflows, excess requests are rejected.   </p>
-<p>**Pros:** Smooths out traffic perfectly. No bursts at all. Predictable processing rate.   </p>
-<p>**Cons:** Cannot handle any bursts, even legitimate ones. A client that occasionally needs to send 10 requests at once will be penalized.   </p>
-<p>Leaky bucket is ideal for scenarios where a steady processing rate is critical, such as database connection pooling or queue workers.   </p>
-<p>Fixed Window Counter   </p>
-<p>Divide time into fixed windows (e.g., 1 minute). Count requests in each window. If the count exceeds the limit, reject further requests until the next window.   </p>
 <br>
-<p>    Limit: 100 requests per minute</p>
 <br>
-<p>    Window: 00:00:00 to 00:01:00</p>
 <br>
-<p>    95 requests at 00:00:45 -> allowed</p>
+<p>Token Bucket Algorithm </p>
 <br>
-<p>    6 requests at 00:00:55 -> 5 allowed, 1 rejected (exceeds 100)</p>
 <br>
-<p>    Window resets at 00:01:00</p>
 <br>
-<p>**Pros:** Extremely simple to implement. Only requires a counter per window per client.   </p>
-<p>**Cons:** The "boundary problem." At the edge of a window, a client can send 100 requests at 00:00:59 and another 100 at 00:01:01, effectively 200 requests in 2 seconds. This can overwhelm your system.   </p>
-<p>Sliding Window Log   </p>
-<p>Instead of fixed windows, track a timestamp for each request. Count requests within the last N seconds.   </p>
-<p>**Pros:** Eliminates the boundary problem. Perfectly accurate rate limiting.   </p>
-<p>**Cons:** Memory intensive. You need to store a timestamp for every request. For high-traffic APIs, this can require significant storage.   </p>
-<p>Sliding Window Counter   </p>
-<p>A hybrid approach combining fixed windows with sliding precision. Track counters for the current and previous windows. Approximate the count for the sliding window using weighted averages.   </p>
 <br>
-<p>    Limit: 100 requests per minute</p>
 <br>
-<p>    Current 1-minute window: 80 requests</p>
 <br>
-<p>    Previous 1-minute window: 40 requests</p>
 <br>
-<p>    At 30 seconds into the current window:</p>
+<p>The token bucket is one of the most popular rate limiting algorithms. A bucket holds a fixed number of tokens. Tokens are added at a steady rate. Each request consumes one token. If the bucket is empty, the request is denied. </p>
 <br>
-<p>    Estimated count = 40 * (30/60) + 80 = 100</p>
 <br>
-<p>**Pros:** Smooths out the boundary problem with minimal memory (just two counters per client). Good enough for most use cases.   </p>
-<p>**Cons:** Not perfectly accurate. The approximation error varies but is typically acceptable for rate limiting purposes.   </p>
-<p>This is the algorithm used by Cloudflare and many CDN-based rate limiters.   </p>
-<p>Distributed Rate Limiting   </p>
-<p>In a distributed system with multiple application instances, rate limiting becomes more complex. Each instance cannot track limits independently, or the combined traffic might exceed the limit.   </p>
-<p>**Centralized approach:** Use a shared data store like Redis to maintain counters. The `INCR` and `EXPIRE` commands make Redis ideal for rate limiting. This gives global accuracy but adds latency for every request.   </p>
-<p>**Local approach:** Each instance independently tracks its share of the limit (e.g., if there are 3 instances and the limit is 300, each instance limits to 100). This is fast but can exceed the limit if traffic distribution is uneven.   </p>
-<p>**Hybrid approach:** Use local rate limiting for fast checks and periodic synchronization to a central store. This balances performance and accuracy.   </p>
-<p>Response Headers   </p>
-<p>Tell clients about their rate limit status through response headers:   </p>
 <br>
-<p>    X-RateLimit-Limit: 100</p>
 <br>
-<p>    X-RateLimit-Remaining: 42</p>
 <br>
-<p>    X-RateLimit-Reset: 1640995200</p>
 <br>
-<p>When a client exceeds the limit, return `429 Too Many Requests` with a `Retry-After` header:   </p>
 <br>
-<p>    HTTP/1.1 429 Too Many Requests</p>
 <br>
-<p>    Retry-After: 30</p>
 <br>
-<p>Choosing the Right Algorithm   </p>
+<br>
+<p>Capacity: 100 tokens</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Refill rate: 10 tokens/second</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Request at t=0: 100 tokens available -> success, 99 remaining</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Request at t=1: 99 + 10 = 100 -> success, 99 remaining</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Request at t=0.5: 99 + 5 = 100 -> success, 99 remaining</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Pros:** Allows bursts up to the bucket capacity. Memory efficient -- you only need to store the token count and last refill timestamp. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Cons:** The burst behavior may not suit all use cases. With a large bucket, a client can send an entire day's worth of requests in a few seconds. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The token bucket is used by Amazon (AWS API Gateway), Stripe, and GitHub. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Leaky Bucket Algorithm </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The leaky bucket is similar to the token bucket but processes requests at a fixed rate. Think of a bucket with a hole in the bottom. Requests are poured into the top. They leak out of the bottom at a constant rate. If the bucket overflows, excess requests are rejected. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Pros:** Smooths out traffic perfectly. No bursts at all. Predictable processing rate. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Cons:** Cannot handle any bursts, even legitimate ones. A client that occasionally needs to send 10 requests at once will be penalized. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Leaky bucket is ideal for scenarios where a steady processing rate is critical, such as database connection pooling or queue workers. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Fixed Window Counter </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Divide time into fixed windows (e.g., 1 minute). Count requests in each window. If the count exceeds the limit, reject further requests until the next window. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Limit: 100 requests per minute</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Window: 00:00:00 to 00:01:00</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>95 requests at 00:00:45 -> allowed</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>6 requests at 00:00:55 -> 5 allowed, 1 rejected (exceeds 100)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Window resets at 00:01:00</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Pros:** Extremely simple to implement. Only requires a counter per window per client. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Cons:** The "boundary problem." At the edge of a window, a client can send 100 requests at 00:00:59 and another 100 at 00:01:01, effectively 200 requests in 2 seconds. This can overwhelm your system. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Sliding Window Log </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Instead of fixed windows, track a timestamp for each request. Count requests within the last N seconds. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Pros:** Eliminates the boundary problem. Perfectly accurate rate limiting. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Cons:** Memory intensive. You need to store a timestamp for every request. For high-traffic APIs, this can require significant storage. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Sliding Window Counter </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>A hybrid approach combining fixed windows with sliding precision. Track counters for the current and previous windows. Approximate the count for the sliding window using weighted averages. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Limit: 100 requests per minute</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Current 1-minute window: 80 requests</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Previous 1-minute window: 40 requests</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>At 30 seconds into the current window:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Estimated count = 40 * (30/60) + 80 = 100</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Pros:** Smooths out the boundary problem with minimal memory (just two counters per client). Good enough for most use cases. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Cons:** Not perfectly accurate. The approximation error varies but is typically acceptable for rate limiting purposes. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>This is the algorithm used by Cloudflare and many CDN-based rate limiters. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Distributed Rate Limiting </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>In a distributed system with multiple application instances, rate limiting becomes more complex. Each instance cannot track limits independently, or the combined traffic might exceed the limit. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Centralized approach:** Use a shared data store like Redis to maintain counters. The `INCR` and `EXPIRE` commands make Redis ideal for rate limiting. This gives global accuracy but adds latency for every request. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Local approach:** Each instance independently tracks its share of the limit (e.g., if there are 3 instances and the limit is 300, each instance limits to 100). This is fast but can exceed the limit if traffic distribution is uneven. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Hybrid approach:** Use local rate limiting for fast checks and periodic synchronization to a central store. This balances performance and accuracy. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Response Headers </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Tell clients about their rate limit status through response headers: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>X-RateLimit-Limit: 100</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>X-RateLimit-Remaining: 42</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>X-RateLimit-Reset: 1640995200</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>When a client exceeds the limit, return `429 Too Many Requests` with a `Retry-After` header: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>HTTP/1.1 429 Too Many Requests</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Retry-After: 30</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Choosing the Right Algorithm </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>* **Token bucket** is a good default choice. It handles bursts and is memory efficient.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Fixed window** works for simple scenarios where occasional bursts are acceptable.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Sliding window log** is best for strict, precise rate limiting.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Sliding window counter** is a good compromise between accuracy and efficiency.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Leaky bucket** works when you need a constant processing rate.</p>
 <br>
-<p>Summary   </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Summary </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Rate limiting is essential for production APIs. Start with the token bucket algorithm for general-purpose rate limiting. Use Redis for distributed scenarios. Always return descriptive headers so clients can adjust their behavior. Monitor your rate limiting effectiveness and adjust thresholds based on real traffic patterns.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -187,6 +724,7 @@
       <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

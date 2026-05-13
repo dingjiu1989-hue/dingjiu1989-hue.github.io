@@ -1,7 +1,7 @@
 ---
 title: "Best Diagram and Architecture Tools 2026: Excalidraw vs Draw.io vs Mermaid vs Eraser"
 description: "Compare diagramming tools for system architecture, flowcharts, and technical documentation — handwritten feel vs UML precision vs code-generated."
-date: 2026-05-08
+date: 2026-05-12
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-diagram-tools.html
 ---
@@ -23,7 +23,7 @@ Version Control Friendly| Limited (JSON, but diff is messy)| Limited (XML)| Exce
 Icon / Shape Libraries| Limited (basic shapes + community library)| Large (AWS, GCP, Azure, Kubernetes, etc.)| Limited (flowchart, sequence, class, ER, Gantt)| Good (AWS, GCP, Azure, K8s, etc.)  
 Free / Open Source| Yes (MIT, self-hostable)| Yes (Apache 2.0, self-hostable)| Yes (MIT, open source)| Free tier + Pro ($10/mo)  
 Pricing| Free (Excalidraw+ $7/mo for teams)| Free| Free| Free (5 diagrams), Pro $10/mo  
-
+  
 ## When to Choose Each Tool
 
 **Excalidraw — Best for:** Brainstorming sessions, whiteboarding, and diagrams you want to look approachable (not formal). The hand-drawn style signals "this is a draft, let's discuss" rather than "this is the final architecture." **Weak spot:** Not ideal for formal documentation; limited shape libraries; no diagrams-as-code.
@@ -35,7 +35,8 @@ Pricing| Free (Excalidraw+ $7/mo for teams)| Free| Free| Free (5 diagrams), Pro 
 **Eraser — Best for:** Developer teams that want beautiful diagrams with minimal effort. Eraser combines diagramming with documentation — the "docs + diagrams in one canvas" model is genuinely useful for design docs. **Weak spot:** Free tier limited to 5 diagrams; newer tool (smaller community).
 
 ## Mermaid: Diagrams as Code (The Developer's Choice)
-
+    
+    
     ```mermaid
     sequenceDiagram
         Client->>API Gateway: POST /orders (JWT)
@@ -59,5 +60,5 @@ Formal architecture diagrams (enterprise)| Draw.io| Most shape libraries, profes
 Version-controlled docs, Git-native flow| Mermaid| Code-defined, git-diffable, renders in GitHub  
 Design docs + diagrams combined| Eraser| Best for writing design docs with embedded diagrams  
 Quick flowchart or sequence for a PR description| Mermaid| Write in PR, renders automatically on GitHub  
-
+  
 **Bottom line:** For most developers, the optimal workflow is Mermaid (for diagrams that go in docs, PRs, and READMEs — version-controlled and auto-rendered) + Excalidraw (for brainstorming and whiteboarding). Mermaid's text-based approach means diagrams live alongside code in Git, can be reviewed in PRs, and never go out of sync with documentation. See also: [Best API Documentation Tools](</en/tools/best-api-documentation-tools.html>) and [Design Tools for Developers](</en/tools/design-tools-for-developers.html>).

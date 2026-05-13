@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/tool-use-patterns.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1565",
+      "wordCount": "2851",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/tool-use-patterns.html"},
-      "articleBody": "Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning Introduction Tool use, or function calling, enables LLMs to interact with external systems: query databases, call APIs, execute code, and retrieve information. This capability transforms LLMs from text generators into autonomous agents. This article covers the essential patterns for defining, invoking, and chaining tool calls in production systems. Defining Tools Every tool needs a clear schema that the LLM can understand and the application can execute: from openai import OpenAI from pydantic import BaseModel client = OpenAI() tools = [ { \"type\": \"function\", \"function\": { \"name\": \"search_documents\", \"description\": \"Search internal documents by keyword. Returns relevant snippets with metadata.\", \"parameters\": { \"type\": \"object\", \"properties\": { \"query\": { \"type\": \"string\", \"description\": \"Search query, use specific terms for better results\", }, \"max_results\": { \"type\": \"integer\", \"description\": \"Number of results to return (1-20)\", \"minimum\": 1, \"maximum\": 20, }, \"filters\": { \"type\": \"object\", \"properties\": { \"date_from\": {\"type\": \"string\", \"format\": \"date\"}, \"department\": {\"type\": \"string\"}, }, }, }, \"required\": [\"query\"], }, }, } ] Key principles: use descriptive parameter names with clear descriptions, set proper type constraints, and provide defaults for optional parameters. The LLM uses these descriptions to decide which tool to call and with what arguments. Function Calling Loop The standard pattern is a loop: generate, check for tool calls, execute, and feed results back: def tool_use_loop(messages: list, tools: list, max_turns=10): for turn in range(max_turns): response = client.chat.completions.create( model=\"gpt-4o\", messages=messages, tools=tools, tool_choice=\"auto\", ) message = response.choices[0].message messages.append(message) if not message.tool_calls: return message.content for tool_call in message.tool_calls: result = execute_tool(tool_call.function.name, tool_call.function.arguments) messages.append({ \"tool_call_id\": tool_call.id, \"role\": \"tool\", \"content\": str(result), }) return \"Max turns reached\" def execute_tool(name: str, args_json: str): args = json.loads(args_json) if name == \"search_documents\": return search_documents(**args) elif name == \"calculate\": return calculate(**args) raise ValueError(f\"Unknown tool: {name}\") The LLM sees the tool result as new context and decides whether to call another tool or produce a final answer. Multi-Step Reasoning with Tools Complex tasks require multiple tool calls where later calls depend on earlier results: def research_workflow(topic: str): messages = [{\"role\": \"user\", \"content\": f\"Research {topic} and write a comprehensive summary.\"}] # Step 1: Search for information response = client.chat.completions.create( model=\"gpt-4o\", messages=messages, tools=research_tools, tool_choice=\"auto\" ) # Execute search, get results # Step 2: Verify facts using a different source # Step 3: Structure the findings # Step 4: Generate the summary return final_summary Structured Tools with Validation Anthropic's tool use API supports structured tool definitions with JSON Schema and strict mode: import anthropic client = anthropic.Anthropic() response = client.messages.create( model=\"claude-sonnet-4-20260512\", max_tokens=1024, tools=[ { \"name\": \"get_weather\", \"description\": \"Get current weather for a location\", \"input_schema\": { \"type\": \"object\", \"properties\": { \"location\": {\"type\": \"string\", \"description\": \"City name\"}, \"units\": {\"type\": \"string\", \"enum\": [\"celsius\", \"fahrenheit\"]}, }, \"required\": [\"location\"], }, } ], messages=[{\"role\": \"user\", \"content\": \"What is the weather in Tokyo?\"}], ) for block in response.content: if block.type == \"tool_use\": print(f\"Calling {block.name} with {block.input}\") Error Handling in Tool Calls Tools fail. Plan for timeouts, invalid arguments, and unexpected responses: def safe_tool_execution(tool_call, timeout=10): try: with Timeout(timeout): result = execute_tool(tool_call.function.name, tool_call.function.arguments) return {\"success\": True, \"result\": result} except TimeoutError: return {\"success\": False, \"error\": \"Tool execution timed out\"} except ValueError as e: return {\"success\": False, \"error\": f\"Invalid arguments: {e}\"} except Exception as e: return {\"success\": False, \"error\": f\"Unexpected error: {e}\"} When a tool fails, pass the error message back to the LLM so it can retry with corrected arguments or choose a different approach. Conclusion Tool use transforms LLMs from passive text generators into active problem-solvers. Define tools with clear schemas, implement a robust function-calling loop, chain tool calls for multi-step tasks, and always handle errors gracefully by feeding failures back into the conversation context."
+      "articleBody": "Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning Introduction Tool use, or function calling, enables LLMs to interact with external systems: query databases, call APIs, execute code, and retrieve information. This capability transforms LLMs from text generators into autonomous agents. This article covers the essential patterns for defining, invoking, and chaining tool calls in production systems. Defining Tools Every tool needs a clear schema that the LLM can understand and the application can execute: from openai import OpenAI from pydantic import BaseModel client = OpenAI() tools = [ { \"type\": \"function\", \"function\": { \"name\": \"search_documents\", \"description\": \"Search internal documents by keyword. Returns relevant snippets with metadata.\", \"parameters\": { \"type\": \"object\", \"properties\": { \"query\": { \"type\": \"string\", \"description\": \"Search query, use specific terms for better results\", }, \"max_results\": { \"type\": \"integer\", \"description\": \"Number of results to return (1-20)\", \"minimum\": 1, \"maximum\": 20, }, \"filters\": { \"type\": \"object\", \"properties\": { \"date_from\": {\"type\": \"string\", \"format\": \"date\"}, \"department\": {\"type\": \"string\"}, }, }, }, \"required\": [\"query\"], }, }, } ] Key principles: use descriptive parameter names with clear descriptions, set proper type constraints, and provide defaults for optional parameters. The LLM uses these descriptions to decide which tool to call and with what arguments. Function Calling Loop The standard pattern is a loop: generate, check for tool calls, execute, and feed results back: def tool_use_loop(messages: list, tools: list, max_turns=10): for turn in range(max_turns): response = client.chat.completions.create( model=\"gpt-4o\", messages=messages, tools=tools, tool_choice=\"auto\", ) message = response.choices[0].message messages.append(message) if not message.tool_calls: return message.content for tool_call in message.tool_calls: result = execute_tool(tool_call.function.name, tool_call.function.arguments) messages.append({ \"tool_call_id\": tool_call.id, \"role\": \"tool\", \"content\": str(result), }) return \"Max turns reached\" def execute_tool(name: str, args_json: str): args = json.loads(args_json) if name == \"search_documents\": return search_documents(**args) elif name == \"calculate\": return calculate(**args) raise ValueError(f\"Unknown tool: {name}\") The LLM sees the tool result as new context and decides whether to call another tool or produce a final answer. Multi-Step Reasoning with Tools Complex tasks require multiple tool calls where later calls depend on earlier results: def research_workflow(topic: str): messages = [{\"role\": \"user\", \"content\": f\"Research {topic} and write a comprehensive summary.\"}] Step 1: Search for information response = client.chat.completions.create( model=\"gpt-4o\", messages=messages, tools=research_tools, tool_choice=\"auto\" ) Execute search, get results Step 2: Verify facts using a different source Step 3: Structure the findings Step 4: Generate the summary return final_summary Structured Tools with Validation Anthropic's tool use API supports structured tool definitions with JSON Schema and strict mode: import anthropic client = anthropic.Anthropic() response = client.messages.create( model=\"claude-sonnet-4-20260512\", max_tokens=1024, tools=[ { \"name\": \"get_weather\", \"description\": \"Get current weather for a location\", \"input_schema\": { \"type\": \"object\", \"properties\": { \"location\": {\"type\": \"string\", \"description\": \"City name\"}, \"units\": {\"type\": \"string\", \"enum\": [\"celsius\", \"fahrenheit\"]}, }, \"required\": [\"location\"], }, } ], messages=[{\"role\": \"user\", \"content\": \"What is the weather in Tokyo?\"}], ) for block in response.content: if block.type == \"tool_use\": print(f\"Calling {block.name} with {block.input}\") Error Handling in Tool Calls Tools fail. Plan for timeouts, invalid arguments, and unexpected responses: def safe_tool_execution(tool_call, timeout=10): try: with Timeout(timeout): result = execute_tool(tool_call.function.name, tool_call.function.arguments) return {\"success\": True, \"result\": result} except TimeoutError: return {\"success\": False, \"error\": \"Tool execution timed out\"} except ValueError as e: return {\"success\": False, \"error\": f\"Invalid arguments: {e}\"} except Exception as e: return {\"success\": False, \"error\": f\"Unexpected error: {e}\"} When a tool fails, pass the error message back to the LLM so it can retry with corrected arguments or choose a different approach. Conclusion Tool use transforms LLMs from passive text generators into active problem-solvers. Define tools with clear schemas, implement a robust function-calling loop, chain tool calls for multi-step tasks, and always handle errors gracefully by feeding failures back into the conversation context."
     }
     </script>
     <script type="application/ld+json">
@@ -78,253 +78,1779 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/tool-use-patterns.png" alt="Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h1>
 <br>
+<h1>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Tool use, or function calling, enables LLMs to interact with external systems: query databases, call APIs, execute code, and retrieve information. This capability transforms LLMs from text generators into autonomous agents. This article covers the essential patterns for defining, invoking, and chaining tool calls in production systems.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Defining Tools</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Every tool needs a clear schema that the LLM can understand and the application can execute:</p>
 <br>
-<p>    from openai import OpenAI</p>
 <br>
-<p>    from pydantic import BaseModel</p>
 <br>
-<p>    client = OpenAI()</p>
 <br>
-<p>    tools = [</p>
 <br>
-<p>        {</p>
 <br>
-<p>            "type": "function",</p>
 <br>
-<p>            "function": {</p>
 <br>
-<p>                "name": "search_documents",</p>
 <br>
-<p>                "description": "Search internal documents by keyword. Returns relevant snippets with metadata.",</p>
 <br>
-<p>                "parameters": {</p>
 <br>
-<p>                    "type": "object",</p>
 <br>
-<p>                    "properties": {</p>
 <br>
-<p>                        "query": {</p>
+<p>from openai import OpenAI</p>
 <br>
-<p>                            "type": "string",</p>
 <br>
-<p>                            "description": "Search query, use specific terms for better results",</p>
 <br>
-<p>                        },</p>
 <br>
-<p>                        "max_results": {</p>
 <br>
-<p>                            "type": "integer",</p>
 <br>
-<p>                            "description": "Number of results to return (1-20)",</p>
 <br>
-<p>                            "minimum": 1,</p>
 <br>
-<p>                            "maximum": 20,</p>
 <br>
-<p>                        },</p>
 <br>
-<p>                        "filters": {</p>
 <br>
-<p>                            "type": "object",</p>
 <br>
-<p>                            "properties": {</p>
 <br>
-<p>                                "date_from": {"type": "string", "format": "date"},</p>
+<p>from pydantic import BaseModel</p>
 <br>
-<p>                                "department": {"type": "string"},</p>
 <br>
-<p>                            },</p>
 <br>
-<p>                        },</p>
 <br>
-<p>                    },</p>
 <br>
-<p>                    "required": ["query"],</p>
 <br>
-<p>                },</p>
 <br>
-<p>            },</p>
 <br>
-<p>        }</p>
 <br>
-<p>    ]</p>
+<br>
+<br>
+<br>
+<br>
+<p>client = OpenAI()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tools = [</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"type": "function",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"function": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"name": "search_documents",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"description": "Search internal documents by keyword. Returns relevant snippets with metadata.",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"parameters": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"type": "object",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"properties": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"query": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"type": "string",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"description": "Search query, use specific terms for better results",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"max_results": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"type": "integer",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"description": "Number of results to return (1-20)",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"minimum": 1,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"maximum": 20,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"filters": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"type": "object",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"properties": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"date_from": {"type": "string", "format": "date"},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"department": {"type": "string"},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"required": ["query"],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Key principles: use descriptive parameter names with clear descriptions, set proper type constraints, and provide defaults for optional parameters. The LLM uses these descriptions to decide which tool to call and with what arguments.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Function Calling Loop</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>The standard pattern is a loop: generate, check for tool calls, execute, and feed results back:</p>
 <br>
-<p>    def tool_use_loop(messages: list, tools: list, max_turns=10):</p>
 <br>
-<p>        for turn in range(max_turns):</p>
 <br>
-<p>            response = client.chat.completions.create(</p>
 <br>
-<p>                model="gpt-4o",</p>
 <br>
-<p>                messages=messages,</p>
 <br>
-<p>                tools=tools,</p>
 <br>
-<p>                tool_choice="auto",</p>
 <br>
-<p>            )</p>
 <br>
-<p>            message = response.choices[0].message</p>
 <br>
-<p>            messages.append(message)</p>
 <br>
-<p>            if not message.tool_calls:</p>
 <br>
-<p>                return message.content</p>
 <br>
-<p>            for tool_call in message.tool_calls:</p>
+<p>def tool_use_loop(messages: list, tools: list, max_turns=10):</p>
 <br>
-<p>                result = execute_tool(tool_call.function.name, tool_call.function.arguments)</p>
 <br>
-<p>                messages.append({</p>
 <br>
-<p>                    "tool_call_id": tool_call.id,</p>
 <br>
-<p>                    "role": "tool",</p>
 <br>
-<p>                    "content": str(result),</p>
 <br>
-<p>                })</p>
 <br>
-<p>        return "Max turns reached"</p>
 <br>
-<p>    def execute_tool(name: str, args_json: str):</p>
 <br>
-<p>        args = json.loads(args_json)</p>
 <br>
-<p>        if name == "search_documents":</p>
 <br>
-<p>            return search_documents(**args)</p>
 <br>
-<p>        elif name == "calculate":</p>
 <br>
-<p>            return calculate(**args)</p>
+<p>for turn in range(max_turns):</p>
 <br>
-<p>        raise ValueError(f"Unknown tool: {name}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response = client.chat.completions.create(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model="gpt-4o",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages=messages,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tools=tools,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tool_choice="auto",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>message = response.choices[0].message</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages.append(message)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if not message.tool_calls:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return message.content</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for tool_call in message.tool_calls:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>result = execute_tool(tool_call.function.name, tool_call.function.arguments)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages.append({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"tool_call_id": tool_call.id,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"role": "tool",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"content": str(result),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>})</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return "Max turns reached"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def execute_tool(name: str, args_json: str):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>args = json.loads(args_json)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if name == "search_documents":</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return search_documents(**args)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>elif name == "calculate":</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return calculate(**args)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise ValueError(f"Unknown tool: {name}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>The LLM sees the tool result as new context and decides whether to call another tool or produce a final answer.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Multi-Step Reasoning with Tools</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Complex tasks require multiple tool calls where later calls depend on earlier results:</p>
 <br>
-<p>    def research_workflow(topic: str):</p>
 <br>
-<p>        messages = [{"role": "user", "content": f"Research {topic} and write a comprehensive summary."}]</p>
 <br>
-<p>        # Step 1: Search for information</p>
 <br>
-<p>        response = client.chat.completions.create(</p>
 <br>
-<p>            model="gpt-4o", messages=messages, tools=research_tools, tool_choice="auto"</p>
 <br>
-<p>        )</p>
 <br>
-<p>        # Execute search, get results</p>
 <br>
-<p>        # Step 2: Verify facts using a different source</p>
 <br>
-<p>        # Step 3: Structure the findings</p>
 <br>
-<p>        # Step 4: Generate the summary</p>
 <br>
-<p>        return final_summary</p>
+<br>
+<br>
+<p>def research_workflow(topic: str):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages = [{"role": "user", "content": f"Research {topic} and write a comprehensive summary."}]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Step 1: Search for information</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response = client.chat.completions.create(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model="gpt-4o", messages=messages, tools=research_tools, tool_choice="auto"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Execute search, get results</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Step 2: Verify facts using a different source</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Step 3: Structure the findings</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Step 4: Generate the summary</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return final_summary</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Structured Tools with Validation</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Anthropic's tool use API supports structured tool definitions with JSON Schema and strict mode:</p>
 <br>
-<p>    import anthropic</p>
 <br>
-<p>    client = anthropic.Anthropic()</p>
 <br>
-<p>    response = client.messages.create(</p>
 <br>
-<p>        model="claude-sonnet-4-20260512",</p>
 <br>
-<p>        max_tokens=1024,</p>
 <br>
-<p>        tools=[</p>
 <br>
-<p>            {</p>
 <br>
-<p>                "name": "get_weather",</p>
 <br>
-<p>                "description": "Get current weather for a location",</p>
 <br>
-<p>                "input_schema": {</p>
 <br>
-<p>                    "type": "object",</p>
 <br>
-<p>                    "properties": {</p>
 <br>
-<p>                        "location": {"type": "string", "description": "City name"},</p>
+<p>import anthropic</p>
 <br>
-<p>                        "units": {"type": "string", "enum": ["celsius", "fahrenheit"]},</p>
 <br>
-<p>                    },</p>
 <br>
-<p>                    "required": ["location"],</p>
 <br>
-<p>                },</p>
 <br>
-<p>            }</p>
 <br>
-<p>        ],</p>
 <br>
-<p>        messages=[{"role": "user", "content": "What is the weather in Tokyo?"}],</p>
 <br>
-<p>    )</p>
 <br>
-<p>    for block in response.content:</p>
 <br>
-<p>        if block.type == "tool_use":</p>
 <br>
-<p>            print(f"Calling {block.name} with {block.input}")</p>
+<br>
+<br>
+<p>client = anthropic.Anthropic()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response = client.messages.create(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model="claude-sonnet-4-20260512",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>max_tokens=1024,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tools=[</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"name": "get_weather",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"description": "Get current weather for a location",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"input_schema": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"type": "object",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"properties": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"location": {"type": "string", "description": "City name"},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"units": {"type": "string", "enum": ["celsius", "fahrenheit"]},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"required": ["location"],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages=[{"role": "user", "content": "What is the weather in Tokyo?"}],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for block in response.content:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if block.type == "tool_use":</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>print(f"Calling {block.name} with {block.input}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Error Handling in Tool Calls</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Tools fail. Plan for timeouts, invalid arguments, and unexpected responses:</p>
 <br>
-<p>    def safe_tool_execution(tool_call, timeout=10):</p>
 <br>
-<p>        try:</p>
 <br>
-<p>            with Timeout(timeout):</p>
 <br>
-<p>                result = execute_tool(tool_call.function.name, tool_call.function.arguments)</p>
 <br>
-<p>                return {"success": True, "result": result}</p>
 <br>
-<p>        except TimeoutError:</p>
 <br>
-<p>            return {"success": False, "error": "Tool execution timed out"}</p>
 <br>
-<p>        except ValueError as e:</p>
 <br>
-<p>            return {"success": False, "error": f"Invalid arguments: {e}"}</p>
 <br>
-<p>        except Exception as e:</p>
 <br>
-<p>            return {"success": False, "error": f"Unexpected error: {e}"}</p>
+<br>
+<br>
+<p>def safe_tool_execution(tool_call, timeout=10):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>try:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>with Timeout(timeout):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>result = execute_tool(tool_call.function.name, tool_call.function.arguments)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return {"success": True, "result": result}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except TimeoutError:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return {"success": False, "error": "Tool execution timed out"}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except ValueError as e:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return {"success": False, "error": f"Invalid arguments: {e}"}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except Exception as e:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return {"success": False, "error": f"Unexpected error: {e}"}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>When a tool fails, pass the error message back to the LLM so it can retry with corrected arguments or choose a different approach.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Conclusion</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Tool use transforms LLMs from passive text generators into active problem-solvers. Define tools with clear schemas, implement a robust function-calling loop, chain tool calls for multi-step tasks, and always handle errors gracefully by feeding failures back into the conversation context.</p></div>
     </article>
@@ -338,9 +1864,15 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
-      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
+    </section>
+    
+    <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
+      <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
+      <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
+      <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
   </div>
 </main>

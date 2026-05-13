@@ -20,7 +20,7 @@ A binary instruction format that runs at near-native speed in a sandboxed VM| A 
 A compile target for C, C++, Rust, Go, Zig, and 40+ other languages| A language you write directly (you write Rust/C/etc., compile to Wasm)  
 Available in all modern browsers (97%+ support) and outside the browser (WASI)| A DOM manipulation tool (Wasm can't touch the DOM; it calls JS to do that)  
 Memory-safe by design (sandboxed, linear memory model)| Slower than native (typically 10-30% overhead vs native, improving with each engine update)  
-
+  
 ## When WebAssembly Makes Sense
 
 **Excellent use cases:** computationally intensive tasks (image/video processing, 3D rendering, scientific simulation), porting existing C/C++/Rust codebases to the web (game engines, CAD tools, ML inference), performance-critical libraries used by JavaScript (encryption, compression, parsing, search), and edge computing (Cloudflare Workers, Fastly Compute@Edge).
@@ -36,19 +36,20 @@ C/C++ (Emscripten)| ★★★★★ (most mature, 10+ years)| Small-Medium| Port
 Go| ★★★★ (syscall/js, tinygo)| Medium-Large (Go runtime)| Go developers wanting Wasm without learning a new language| Low (if you know Go)  
 AssemblyScript| ★★★★ (TypeScript-like syntax)| Very Small| JavaScript/TypeScript developers, quick adoption| Very Low (TS-like)  
 Zig| ★★★★ (native wasm target)| Very Small (no runtime)| Systems-level Wasm with excellent C interop| Medium  
-
+  
 ## Getting Started: Rust + wasm-pack (Most Common Path)
-
+    
+    
     # Install wasm-pack
     curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
-
+    
     # Create a new Rust-Wasm project
     wasm-pack new hello-wasm
     cd hello-wasm
-
+    
     # src/lib.rs — a simple image processing function
     use wasm_bindgen::prelude::*;
-
+    
     #[wasm_bindgen]
     pub fn grayscale(pixels: &[u8], width: u32, height: u32) -> Vec {
         let mut result = Vec::with_capacity(pixels.len());
@@ -64,13 +65,14 @@ Zig| ★★★★ (native wasm target)| Very Small (no runtime)| Systems-level W
         }
         result
     }
-
+    
     # Build
     wasm-pack build --target web
-
+    
+    
     // On the JavaScript side
     import init, { grayscale } from './pkg/hello_wasm.js';
-
+    
     async function run() {
         await init();
         const canvas = document.getElementById('canvas');
@@ -93,7 +95,7 @@ JSON parsing (large file)| 45ms| 30ms (1.5x faster)| 25ms
 Image grayscale (8MP)| 200ms| 35ms (5.7x faster)| 28ms  
 SHA-256 hash (1MB)| 8ms| 2ms (4x faster)| 1.5ms  
 DOM manipulation (10K elements)| 15ms| 25ms (slower — JS→Wasm→JS boundary cost)| N/A  
-
+  
 _Benchmarks from real-world tests on Chrome 130, M2 Mac. Wasm wins on CPU-bound work; loses when crossing the JS boundary too often._
 
 ## When Not to Use Wasm

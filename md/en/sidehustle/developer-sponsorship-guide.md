@@ -22,7 +22,7 @@ Patreon| 5-12%| Content creators, tutorial authors| Tiered memberships, communit
 Buy Me a Coffee| 5%| Individual developers, bloggers| Simple one-time or recurring, low friction  
 Polar| 5% + Stripe fees| Open-source developers on GitHub| GitHub integration, fund specific issues/features  
 Thanks.dev| 0% (direct to maintainer)| Open-source maintainers| Companies fund dependencies; you claim your project  
-
+  
 ## What Sponsors Actually Pay For
 
 **1\. Open-source maintenance (most established path):** Companies that depend on your open-source project sponsor you to ensure its continued maintenance. This is the most sustainable form of sponsorship because it's aligned with business value: they're not donating, they're investing in infrastructure they depend on. Examples: esbuild (Evan Wallace, sponsored by Vercel), Vue.js (Evan You, sponsored via Patreon/GitHub), curl (Daniel Stenberg, sponsored via GitHub + direct contracts). _Key metric:_ 1,000+ GitHub stars and 50+ dependent companies is typically the threshold where meaningful sponsorship starts.
@@ -41,7 +41,7 @@ Stage| What You Have| What to Expect
 1 to 100| Growing usage (100+ stars, 500+ weekly downloads, or 1K newsletter subs)| $100-500/mo (individuals + first small companies)  
 100 to 1K| Proven value (1K+ stars, 50+ dependents, or 5K+ blog subscribers)| $1,000-5,000/mo (multiple companies, corporate tiers appearing)  
 1K to 10K| Infrastructure dependency (5K+ stars, 500+ dependents, mission-critical to companies)| $5,000-30,000+/mo (corporate retainers, speaking fees, consulting)  
-
+  
 ## What Sponsors Expect in Return
 
 Sponsorship is not charity — companies have marketing KPIs. For content sponsorships, expect to deliver: a specific number of posts/videos with the sponsor's tool featured, disclosure (FTC/legal compliance: "Sponsored by X" must be clear), metrics reporting (views, engagement, click-throughs), and exclusivity windows (can't promote a competitor during the sponsorship period). For open-source sponsorships: responsive issue triage, security fixes within SLA timeframes, roadmap alignment with sponsor needs, and regular updates on project health and direction.

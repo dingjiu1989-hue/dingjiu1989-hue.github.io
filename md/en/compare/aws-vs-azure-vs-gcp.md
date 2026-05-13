@@ -23,7 +23,7 @@ Cloud providers compete on hundreds of services, but most developers use the sam
 **Deploy UX**|  Complex (many services)| Moderate (Portal-based)| Best (Cloud Run is magic)  
 **CLI experience**|  awscli (verbose)| az (verbose)| gcloud (best CLI)  
 **Pricing model**|  Pay-per-use (complex)| Pay-per-use| Pay-per-use (simplest)  
-
+  
 ## AWS — The Everything Store of Cloud
 
 AWS has the most services (200+) and the largest market share. For any use case, AWS has a service for it — probably three. The downside is complexity: the console is overwhelming, IAM is infamously confusing, and cost management requires active monitoring.
@@ -64,5 +64,5 @@ AI-first application| **Azure** (OpenAI Service) or **GCP** (Gemini)
 Maximum free tier| **GCP** Always Free  
 .NET / C# / Microsoft stack| **Azure**  
 Maximum services, large scale| **AWS**  
-
+  
 **Bottom line:** For most side projects, you don't need AWS/Azure/GCP — Vercel + Supabase covers 90% of use cases. If you need cloud: GCP for the best developer experience, AWS for maximum capabilities, Azure for Microsoft shops and OpenAI access. See our [hosting comparison](</en/compare/vercel-vs-netlify-vs-cloudflare.html>) and [backend comparison](</en/compare/supabase-vs-firebase-vs-neon.html>) for lighter alternatives.

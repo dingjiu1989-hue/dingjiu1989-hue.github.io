@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/timeout-retry-patterns.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1055",
+      "wordCount": "1164",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/timeout-retry-patterns.html"},
-      "articleBody": "Timeout and Retry Patterns Timeouts and retries are the most basic building blocks of resilient distributed systems, yet they are among the most commonly misconfigured. A timeout that is too short causes unnecessary failures under normal load spikes. A timeout that is too long causes cascading resource exhaustion. Retries without backpressure amplify failure. Getting these patterns right requires understanding the tradeoffs and the interactions between them. Timeouts define the maximum time a caller waits for a response. Every remote call must have a timeout \u2014 without one, a hung dependency can hold open resources indefinitely, eventually exhausting connection pools and thread pools. The timeout should be set per operation type: a simple key-value lookup may have a 100ms timeout, while a complex report generation may have 30 seconds. The timeout should be based on the operation's p99.9 latency plus a safety margin. Deadline propagation extends timeout semantics across the call graph. Instead of each service independently timing out, the remaining deadline is propagated from caller to callee. If Service A has 2 seconds to respond and spends 1 second processing, it passes a 1-second deadline to Service B. This prevents the thundering herd problem where all downstream services receive requests that are already expired from the caller's perspective. gRPC supports deadline propagation natively through the context. Exponential backoff spaces retries with progressively longer delays. After the first failure, wait 100ms. After the second, 200ms. After the third, 400ms, and so on. The exponential growth prevents synchronized retries from overwhelming the recovering service. The base delay should be long enough to allow transient failures to resolve \u2014 typically 50-200ms for network-level retries, 1-10 seconds for service-level retries. Jitter adds randomness to the backoff to prevent the thundering herd problem. Without jitter, when a service recovers, all clients retry simultaneously, creating a new spike that re-overwhelms the service. Full jitter randomizes the delay between 0 and the current backoff value. Equal jitter randomizes the delay between half and the full backoff value. Full jitter is generally preferred for distributed systems \u2014 it provides the best distribution of retry attempts. The maximum retry count prevents indefinite retries. Three retries is a common starting point. More than five retries risks creating unacceptable latency spikes \u2014 three retries with 100ms, 200ms, 400ms backoff add a maximum of 700ms. Five retries add 3100ms. The retry budget should be negotiated with the caller's total timeout \u2014 if the caller has a 5-second timeout, the service should not consume 4 seconds of that on retries before the callee even processes the request. Retry amplification is the hidden danger of retries in distributed systems. When Service A retries a call to Service B, which itself calls Service C and Service D, a single failed request can generate multiple retries at each level. In the worst case, retries are multiplicative \u2014 a 3-level call graph with 3 retries at each level can generate 27 total calls for one original request. The solution is to retry only at the outermost layer or use exponential backoff with jitter at each level. Retry with circuit breaker integration prevents retrying a failing service. Once the circuit breaker opens, retries should stop. The retry logic should check the circuit breaker state before each attempt. If the circuit is open, the retry should fail fast rather than attempt the call. When the circuit is half-open, a single retry is allowed as a probe. This integration is built into most resilience frameworks (Resilience4j, Polly) but requires explicit configuration. Selective retry categorizes failures into retriable and non-retriable. Network timeouts, 503 Service Unavailable, and 429 Too Many Requests are retriable \u2014 they indicate transient issues that may resolve. 400 Bad Request and 404 Not Found are not retriable \u2014 they will always fail. 500 Internal Server Error may or may not be retriable depending on whether the error is idempotent. The retry logic must distinguish these cases to avoid wasting effort on certain-failure retries. Retry budgets limit total retry volume over time. A budget of 5% means that at most 5% of calls to a dependency are retries. If the normal call rate is 1000/s, the retry budget is 50/s. This prevents retries from dominating traffic during extended failures. Retry budgets are adaptive \u2014 as failures increase, the budget limits the system's self-inflicted load. Google's gRPC retry implementation supports retry budgets natively. Consistent configuration across services is essential but elusive. Timeout and retry policies should be documented, standardized, and enforced through shared infrastructure libraries rather than reimplemented in each service. A platform team should own the shared resilience library and maintain it across languages as the organization grows. The configuration should be visible as metrics \u2014 track retry counts, backoff durations, and timeout rates to identify misconfigured services."
+      "articleBody": "Timeout and Retry Patterns Timeout and Retry Patterns Timeout and Retry Patterns Timeout and Retry Patterns Timeouts and retries are the most basic building blocks of resilient distributed systems, yet they are among the most commonly misconfigured. A timeout that is too short causes unnecessary failures under normal load spikes. A timeout that is too long causes cascading resource exhaustion. Retries without backpressure amplify failure. Getting these patterns right requires understanding the tradeoffs and the interactions between them. Timeouts define the maximum time a caller waits for a response. Every remote call must have a timeout \u2014 without one, a hung dependency can hold open resources indefinitely, eventually exhausting connection pools and thread pools. The timeout should be set per operation type: a simple key-value lookup may have a 100ms timeout, while a complex report generation may have 30 seconds. The timeout should be based on the operation's p99.9 latency plus a safety margin. Deadline propagation extends timeout semantics across the call graph. Instead of each service independently timing out, the remaining deadline is propagated from caller to callee. If Service A has 2 seconds to respond and spends 1 second processing, it passes a 1-second deadline to Service B. This prevents the thundering herd problem where all downstream services receive requests that are already expired from the caller's perspective. gRPC supports deadline propagation natively through the context. Exponential backoff spaces retries with progressively longer delays. After the first failure, wait 100ms. After the second, 200ms. After the third, 400ms, and so on. The exponential growth prevents synchronized retries from overwhelming the recovering service. The base delay should be long enough to allow transient failures to resolve \u2014 typically 50-200ms for network-level retries, 1-10 seconds for service-level retries. Jitter adds randomness to the backoff to prevent the thundering herd problem. Without jitter, when a service recovers, all clients retry simultaneously, creating a new spike that re-overwhelms the service. Full jitter randomizes the delay between 0 and the current backoff value. Equal jitter randomizes the delay between half and the full backoff value. Full jitter is generally preferred for distributed systems \u2014 it provides the best distribution of retry attempts. The maximum retry count prevents indefinite retries. Three retries is a common starting point. More than five retries risks creating unacceptable latency spikes \u2014 three retries with 100ms, 200ms, 400ms backoff add a maximum of 700ms. Five retries add 3100ms. The retry budget should be negotiated with the caller's total timeout \u2014 if the caller has a 5-second timeout, the service should not consume 4 seconds of that on retries before the callee even processes the request. Retry amplification is the hidden danger of retries in distributed systems. When Service A retries a call to Service B, which itself calls Service C and Service D, a single failed request can generate multiple retries at each level. In the worst case, retries are multiplicative \u2014 a 3-level call graph with 3 retries at each level can generate 27 total calls for one original request. The solution is to retry only at the outermost layer or use exponential backoff with jitter at each level. Retry with circuit breaker integration prevents retrying a failing service. Once the circuit breaker opens, retries should stop. The retry logic should check the circuit breaker state before each attempt. If the circuit is open, the retry should fail fast rather than attempt the call. When the circuit is half-open, a single retry is allowed as a probe. This integration is built into most resilience frameworks (Resilience4j, Polly) but requires explicit configuration. Selective retry categorizes failures into retriable and non-retriable. Network timeouts, 503 Service Unavailable, and 429 Too Many Requests are retriable \u2014 they indicate transient issues that may resolve. 400 Bad Request and 404 Not Found are not retriable \u2014 they will always fail. 500 Internal Server Error may or may not be retriable depending on whether the error is idempotent. The retry logic must distinguish these cases to avoid wasting effort on certain-failure retries. Retry budgets limit total retry volume over time. A budget of 5% means that at most 5% of calls to a dependency are retries. If the normal call rate is 1000/s, the retry budget is 50/s. This prevents retries from dominating traffic during extended failures. Retry budgets are adaptive \u2014 as failures increase, the budget limits the system's self-inflicted load. Google's gRPC retry implementation supports retry budgets natively. Consistent configuration across services is essential but elusive. Timeout and retry policies should be documented, standardized, and enforced through shared infrastructure libraries rather than reimplemented in each service. A platform team should own the shared resilience library and maintain it across languages as the organization grows. The configuration should be visible as metrics \u2014 track retry counts, backoff durations, and timeout rates to identify misconfigured services."
     }
     </script>
     <script type="application/ld+json">
@@ -78,16 +78,110 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/timeout-retry-patterns.png" alt="Timeout and Retry Patterns" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Timeout and Retry Patterns</h1>
 <br>
-<p>Timeouts and retries are the most basic building blocks of resilient distributed systems, yet they are among the most commonly misconfigured. A timeout that is too short causes unnecessary failures under normal load spikes. A timeout that is too long causes cascading resource exhaustion. Retries without backpressure amplify failure. Getting these patterns right requires understanding the tradeoffs and the interactions between them.   </p>
-<p>Timeouts define the maximum time a caller waits for a response. Every remote call must have a timeout — without one, a hung dependency can hold open resources indefinitely, eventually exhausting connection pools and thread pools. The timeout should be set per operation type: a simple key-value lookup may have a 100ms timeout, while a complex report generation may have 30 seconds. The timeout should be based on the operation's p99.9 latency plus a safety margin.   </p>
-<p>Deadline propagation extends timeout semantics across the call graph. Instead of each service independently timing out, the remaining deadline is propagated from caller to callee. If Service A has 2 seconds to respond and spends 1 second processing, it passes a 1-second deadline to Service B. This prevents the thundering herd problem where all downstream services receive requests that are already expired from the caller's perspective. gRPC supports deadline propagation natively through the context.   </p>
-<p>Exponential backoff spaces retries with progressively longer delays. After the first failure, wait 100ms. After the second, 200ms. After the third, 400ms, and so on. The exponential growth prevents synchronized retries from overwhelming the recovering service. The base delay should be long enough to allow transient failures to resolve — typically 50-200ms for network-level retries, 1-10 seconds for service-level retries.   </p>
-<p>Jitter adds randomness to the backoff to prevent the thundering herd problem. Without jitter, when a service recovers, all clients retry simultaneously, creating a new spike that re-overwhelms the service. Full jitter randomizes the delay between 0 and the current backoff value. Equal jitter randomizes the delay between half and the full backoff value. Full jitter is generally preferred for distributed systems — it provides the best distribution of retry attempts.   </p>
-<p>The maximum retry count prevents indefinite retries. Three retries is a common starting point. More than five retries risks creating unacceptable latency spikes — three retries with 100ms, 200ms, 400ms backoff add a maximum of 700ms. Five retries add 3100ms. The retry budget should be negotiated with the caller's total timeout — if the caller has a 5-second timeout, the service should not consume 4 seconds of that on retries before the callee even processes the request.   </p>
-<p>Retry amplification is the hidden danger of retries in distributed systems. When Service A retries a call to Service B, which itself calls Service C and Service D, a single failed request can generate multiple retries at each level. In the worst case, retries are multiplicative — a 3-level call graph with 3 retries at each level can generate 27 total calls for one original request. The solution is to retry only at the outermost layer or use exponential backoff with jitter at each level.   </p>
-<p>Retry with circuit breaker integration prevents retrying a failing service. Once the circuit breaker opens, retries should stop. The retry logic should check the circuit breaker state before each attempt. If the circuit is open, the retry should fail fast rather than attempt the call. When the circuit is half-open, a single retry is allowed as a probe. This integration is built into most resilience frameworks (Resilience4j, Polly) but requires explicit configuration.   </p>
-<p>Selective retry categorizes failures into retriable and non-retriable. Network timeouts, 503 Service Unavailable, and 429 Too Many Requests are retriable — they indicate transient issues that may resolve. 400 Bad Request and 404 Not Found are not retriable — they will always fail. 500 Internal Server Error may or may not be retriable depending on whether the error is idempotent. The retry logic must distinguish these cases to avoid wasting effort on certain-failure retries.   </p>
-<p>Retry budgets limit total retry volume over time. A budget of 5% means that at most 5% of calls to a dependency are retries. If the normal call rate is 1000/s, the retry budget is 50/s. This prevents retries from dominating traffic during extended failures. Retry budgets are adaptive — as failures increase, the budget limits the system's self-inflicted load. Google's gRPC retry implementation supports retry budgets natively.   </p>
+<h1>Timeout and Retry Patterns</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>Timeout and Retry Patterns</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Timeout and Retry Patterns</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Timeouts and retries are the most basic building blocks of resilient distributed systems, yet they are among the most commonly misconfigured. A timeout that is too short causes unnecessary failures under normal load spikes. A timeout that is too long causes cascading resource exhaustion. Retries without backpressure amplify failure. Getting these patterns right requires understanding the tradeoffs and the interactions between them. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Timeouts define the maximum time a caller waits for a response. Every remote call must have a timeout — without one, a hung dependency can hold open resources indefinitely, eventually exhausting connection pools and thread pools. The timeout should be set per operation type: a simple key-value lookup may have a 100ms timeout, while a complex report generation may have 30 seconds. The timeout should be based on the operation's p99.9 latency plus a safety margin. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Deadline propagation extends timeout semantics across the call graph. Instead of each service independently timing out, the remaining deadline is propagated from caller to callee. If Service A has 2 seconds to respond and spends 1 second processing, it passes a 1-second deadline to Service B. This prevents the thundering herd problem where all downstream services receive requests that are already expired from the caller's perspective. gRPC supports deadline propagation natively through the context. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Exponential backoff spaces retries with progressively longer delays. After the first failure, wait 100ms. After the second, 200ms. After the third, 400ms, and so on. The exponential growth prevents synchronized retries from overwhelming the recovering service. The base delay should be long enough to allow transient failures to resolve — typically 50-200ms for network-level retries, 1-10 seconds for service-level retries. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Jitter adds randomness to the backoff to prevent the thundering herd problem. Without jitter, when a service recovers, all clients retry simultaneously, creating a new spike that re-overwhelms the service. Full jitter randomizes the delay between 0 and the current backoff value. Equal jitter randomizes the delay between half and the full backoff value. Full jitter is generally preferred for distributed systems — it provides the best distribution of retry attempts. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The maximum retry count prevents indefinite retries. Three retries is a common starting point. More than five retries risks creating unacceptable latency spikes — three retries with 100ms, 200ms, 400ms backoff add a maximum of 700ms. Five retries add 3100ms. The retry budget should be negotiated with the caller's total timeout — if the caller has a 5-second timeout, the service should not consume 4 seconds of that on retries before the callee even processes the request. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Retry amplification is the hidden danger of retries in distributed systems. When Service A retries a call to Service B, which itself calls Service C and Service D, a single failed request can generate multiple retries at each level. In the worst case, retries are multiplicative — a 3-level call graph with 3 retries at each level can generate 27 total calls for one original request. The solution is to retry only at the outermost layer or use exponential backoff with jitter at each level. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Retry with circuit breaker integration prevents retrying a failing service. Once the circuit breaker opens, retries should stop. The retry logic should check the circuit breaker state before each attempt. If the circuit is open, the retry should fail fast rather than attempt the call. When the circuit is half-open, a single retry is allowed as a probe. This integration is built into most resilience frameworks (Resilience4j, Polly) but requires explicit configuration. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Selective retry categorizes failures into retriable and non-retriable. Network timeouts, 503 Service Unavailable, and 429 Too Many Requests are retriable — they indicate transient issues that may resolve. 400 Bad Request and 404 Not Found are not retriable — they will always fail. 500 Internal Server Error may or may not be retriable depending on whether the error is idempotent. The retry logic must distinguish these cases to avoid wasting effort on certain-failure retries. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Retry budgets limit total retry volume over time. A budget of 5% means that at most 5% of calls to a dependency are retries. If the normal call rate is 1000/s, the retry budget is 50/s. This prevents retries from dominating traffic during extended failures. Retry budgets are adaptive — as failures increase, the budget limits the system's self-inflicted load. Google's gRPC retry implementation supports retry budgets natively. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Consistent configuration across services is essential but elusive. Timeout and retry policies should be documented, standardized, and enforced through shared infrastructure libraries rather than reimplemented in each service. A platform team should own the shared resilience library and maintain it across languages as the organization grows. The configuration should be visible as metrics — track retry counts, backoff durations, and timeout rates to identify misconfigured services.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -104,6 +198,7 @@
       <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

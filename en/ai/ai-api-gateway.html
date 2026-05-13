@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-api-gateway.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2213",
+      "wordCount": "4107",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-api-gateway.html"},
-      "articleBody": "AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability Introduction As organizations adopt multiple LLM providers (Anthropic, OpenAI, Google, open-source self-hosted), managing each directly from application code becomes unsustainable. An AI API gateway provides a unified interface for routing requests across providers, handling failures, tracking costs, and monitoring usage. This article covers the design of a production-grade AI gateway. Unified API Layer The gateway presents a single API that abstracts provider differences: from abc import ABC, abstractmethod from dataclasses import dataclass from typing import Optional import time @dataclass class LLMRequest: model: str messages: list[dict] max_tokens: int = 1024 temperature: float = 0.7 stream: bool = False @dataclass class LLMResponse: content: str model: str provider: str latency_ms: float tokens_in: int tokens_out: int cost: float class LLMProvider(ABC): @abstractmethod async def complete(self, request: LLMRequest) -> LLMResponse: pass @abstractmethod def get_cost_per_token(self, model: str) -> tuple[float, float]: pass class AnthropicProvider(LLMProvider): def __init__(self, api_key: str): self.client = Anthropic(api_key=api_key) async def complete(self, request: LLMRequest) -> LLMResponse: start = time.time() response = await self.client.messages.create( model=request.model, max_tokens=request.max_tokens, temperature=request.temperature, messages=request.messages, ) latency = (time.time() - start) * 1000 return LLMResponse( content=response.content[0].text, model=request.model, provider=\"anthropic\", latency_ms=latency, tokens_in=response.usage.input_tokens, tokens_out=response.usage.output_tokens, cost=self._calculate_cost(response.usage), ) class OpenAIProvider(LLMProvider): def __init__(self, api_key: str): self.client = OpenAI(api_key=api_key) async def complete(self, request: LLMRequest) -> LLMResponse: start = time.time() response = await self.client.chat.completions.create( model=request.model, max_tokens=request.max_tokens, temperature=request.temperature, messages=request.messages, ) latency = (time.time() - start) * 1000 return LLMResponse( content=response.choices[0].message.content, model=request.model, provider=\"openai\", latency_ms=latency, tokens_in=response.usage.prompt_tokens, tokens_out=response.usage.completion_tokens, cost=self._calculate_cost(response.usage), ) Load Balancing Distribute requests across providers based on strategy: class LoadBalancer: def __init__(self, providers: dict[str, LLMProvider]): self.providers = providers self.round_robin_index = 0 async def route(self, request: LLMRequest, strategy: str = \"priority\") -> LLMResponse: if strategy == \"cheapest\": return await self._route_cheapest(request) elif strategy == \"fastest\": return await self._route_fastest(request) elif strategy == \"round_robin\": return await self._route_round_robin(request) else: return await self._route_priority(request) async def _route_priority(self, request: LLMRequest) -> LLMResponse: # Try primary provider first, fall back to secondary for name in [\"primary\", \"secondary\", \"fallback\"]: if name in self.providers: try: return await self.providers[name].complete(request) except Exception: continue raise AllProvidersExhausted(\"All providers failed\") async def _route_cheapest(self, request: LLMRequest) -> LLMResponse: # Route to the provider with lowest cost for comparable quality cheap_providers = sorted( self.providers.items(), key=lambda p: p[1].get_cost_per_token(request.model)[0], ) for name, provider in cheap_providers: try: return await provider.complete(request) except Exception: continue raise AllProvidersExhausted(\"All providers failed\") Fallback and Retry When a provider fails, automatically switch to alternatives: class FallbackHandler: def __init__(self, load_balancer: LoadBalancer): self.balancer = load_balancer async def execute_with_fallback(self, request: LLMRequest, max_retries: int = 3) -> LLMResponse: last_error = None for attempt in range(max_retries): try: return await self.balancer.route(request) except RateLimitError: await asyncio.sleep(2 ** attempt * 2) # Fallback to different provider request.model = self._map_to_alternative(request.model) except ProviderTimeoutError: await asyncio.sleep(1) continue except ProviderError as e: last_error = e continue raise FallbackExhausted(f\"All fallbacks failed: {last_error}\") def _map_to_alternative(self, model: str) -> str: mapping = { \"claude-sonnet-4-20260512\": \"gpt-4o\", \"gpt-4o\": \"claude-sonnet-4-20260512\", \"claude-haiku-20260512\": \"gpt-4o-mini\", } return mapping.get(model, model) Cost Tracking Track costs per user, per feature, and per request: class CostTracker: def __init__(self, db): self.db = db async def record_usage(self, response: LLMResponse, user_id: str, feature: str): entry = { \"user_id\": user_id, \"feature\": feature, \"provider\": response.provider, \"model\": response.model, \"tokens_in\": response.tokens_in, \"tokens_out\": response.tokens_out, \"cost\": response.cost, \"latency_ms\": response.latency_ms, \"timestamp\": time.time(), } await self.db.insert(\"usage_log\", entry) async def get_user_cost(self, user_id: str, period_days: int = 30) -> dict: costs = await self.db.query( \"SELECT SUM(cost) as total, SUM(tokens_in) as in_tokens, \" \"SUM(tokens_out) as out_tokens FROM usage_log \" \"WHERE user_id = $1 AND timestamp > $2\", user_id, time.time() - period_days * 86400, ) return costs[0] if costs else {\"total\": 0, \"in_tokens\": 0, \"out_tokens\": 0} Observability Every request should produce structured telemetry: class GatewayObservability: def __init__(self): self.metrics = { \"requests_total\": 0, \"errors_total\": 0, \"latency_histogram\": [], \"cost_total\": 0.0, } def instrument(self, handler): async def wrapped(request: LLMRequest): self.metrics[\"requests_total\"] += 1 start = time.time() try: response = await handler(request) self.metrics[\"latency_histogram\"].append((time.time() - start) * 1000) self.metrics[\"cost_total\"] += response.cost return response except Exception as e: self.metrics[\"errors_total\"] += 1 raise return wrapped Conclusion An AI API gateway provides provider abstraction, load balancing, automatic fallback, cost tracking, and observability in a single layer. Route requests based on cost, latency, or priority. Fail over between providers transparently. Track costs per user and feature to prevent budget surprises. Expose latency, error rate, and cost metrics for dashboards. A gateway is essential for any organization using multiple LLM providers in production."
+      "articleBody": "AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability Introduction As organizations adopt multiple LLM providers (Anthropic, OpenAI, Google, open-source self-hosted), managing each directly from application code becomes unsustainable. An AI API gateway provides a unified interface for routing requests across providers, handling failures, tracking costs, and monitoring usage. This article covers the design of a production-grade AI gateway. Unified API Layer The gateway presents a single API that abstracts provider differences: from abc import ABC, abstractmethod from dataclasses import dataclass from typing import Optional import time @dataclass class LLMRequest: model: str messages: list[dict] max_tokens: int = 1024 temperature: float = 0.7 stream: bool = False @dataclass class LLMResponse: content: str model: str provider: str latency_ms: float tokens_in: int tokens_out: int cost: float class LLMProvider(ABC): @abstractmethod async def complete(self, request: LLMRequest) -> LLMResponse: pass @abstractmethod def get_cost_per_token(self, model: str) -> tuple[float, float]: pass class AnthropicProvider(LLMProvider): def __init__(self, api_key: str): self.client = Anthropic(api_key=api_key) async def complete(self, request: LLMRequest) -> LLMResponse: start = time.time() response = await self.client.messages.create( model=request.model, max_tokens=request.max_tokens, temperature=request.temperature, messages=request.messages, ) latency = (time.time() - start) * 1000 return LLMResponse( content=response.content[0].text, model=request.model, provider=\"anthropic\", latency_ms=latency, tokens_in=response.usage.input_tokens, tokens_out=response.usage.output_tokens, cost=self._calculate_cost(response.usage), ) class OpenAIProvider(LLMProvider): def __init__(self, api_key: str): self.client = OpenAI(api_key=api_key) async def complete(self, request: LLMRequest) -> LLMResponse: start = time.time() response = await self.client.chat.completions.create( model=request.model, max_tokens=request.max_tokens, temperature=request.temperature, messages=request.messages, ) latency = (time.time() - start) * 1000 return LLMResponse( content=response.choices[0].message.content, model=request.model, provider=\"openai\", latency_ms=latency, tokens_in=response.usage.prompt_tokens, tokens_out=response.usage.completion_tokens, cost=self._calculate_cost(response.usage), ) Load Balancing Distribute requests across providers based on strategy: class LoadBalancer: def __init__(self, providers: dict[str, LLMProvider]): self.providers = providers self.round_robin_index = 0 async def route(self, request: LLMRequest, strategy: str = \"priority\") -> LLMResponse: if strategy == \"cheapest\": return await self._route_cheapest(request) elif strategy == \"fastest\": return await self._route_fastest(request) elif strategy == \"round_robin\": return await self._route_round_robin(request) else: return await self._route_priority(request) async def _route_priority(self, request: LLMRequest) -> LLMResponse: Try primary provider first, fall back to secondary for name in [\"primary\", \"secondary\", \"fallback\"]: if name in self.providers: try: return await self.providers[name].complete(request) except Exception: continue raise AllProvidersExhausted(\"All providers failed\") async def _route_cheapest(self, request: LLMRequest) -> LLMResponse: Route to the provider with lowest cost for comparable quality cheap_providers = sorted( self.providers.items(), key=lambda p: p[1].get_cost_per_token(request.model)[0], ) for name, provider in cheap_providers: try: return await provider.complete(request) except Exception: continue raise AllProvidersExhausted(\"All providers failed\") Fallback and Retry When a provider fails, automatically switch to alternatives: class FallbackHandler: def __init__(self, load_balancer: LoadBalancer): self.balancer = load_balancer async def execute_with_fallback(self, request: LLMRequest, max_retries: int = 3) -> LLMResponse: last_error = None for attempt in range(max_retries): try: return await self.balancer.route(request) except RateLimitError: await asyncio.sleep(2 ** attempt * 2) Fallback to different provider request.model = self._map_to_alternative(request.model) except ProviderTimeoutError: await asyncio.sleep(1) continue except ProviderError as e: last_error = e continue raise FallbackExhausted(f\"All fallbacks failed: {last_error}\") def _map_to_alternative(self, model: str) -> str: mapping = { \"claude-sonnet-4-20260512\": \"gpt-4o\", \"gpt-4o\": \"claude-sonnet-4-20260512\", \"claude-haiku-20260512\": \"gpt-4o-mini\", } return mapping.get(model, model) Cost Tracking Track costs per user, per feature, and per request: class CostTracker: def __init__(self, db): self.db = db async def record_usage(self, response: LLMResponse, user_id: str, feature: str): entry = { \"user_id\": user_id, \"feature\": feature, \"provider\": response.provider, \"model\": response.model, \"tokens_in\": response.tokens_in, \"tokens_out\": response.tokens_out, \"cost\": response.cost, \"latency_ms\": response.latency_ms, \"timestamp\": time.time(), } await self.db.insert(\"usage_log\", entry) async def get_user_cost(self, user_id: str, period_days: int = 30) -> dict: costs = await self.db.query( \"SELECT SUM(cost) as total, SUM(tokens_in) as in_tokens, \" \"SUM(tokens_out) as out_tokens FROM usage_log \" \"WHERE user_id = $1 AND timestamp > $2\", user_id, time.time() - period_days * 86400, ) return costs[0] if costs else {\"total\": 0, \"in_tokens\": 0, \"out_tokens\": 0} Observability Every request should produce structured telemetry: class GatewayObservability: def __init__(self): self.metrics = { \"requests_total\": 0, \"errors_total\": 0, \"latency_histogram\": [], \"cost_total\": 0.0, } def instrument(self, handler): async def wrapped(request: LLMRequest): self.metrics[\"requests_total\"] += 1 start = time.time() try: response = await handler(request) self.metrics[\"latency_histogram\"].append((time.time() - start) * 1000) self.metrics[\"cost_total\"] += response.cost return response except Exception as e: self.metrics[\"errors_total\"] += 1 raise return wrapped Conclusion An AI API gateway provides provider abstraction, load balancing, automatic fallback, cost tracking, and observability in a single layer. Route requests based on cost, latency, or priority. Fail over between providers transparently. Track costs per user and feature to prevent budget surprises. Expose latency, error rate, and cost metrics for dashboards. A gateway is essential for any organization using multiple LLM providers in production."
     }
     </script>
     <script type="application/ld+json">
@@ -78,379 +78,2661 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-api-gateway.png" alt="AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h1>
 <br>
+<h1>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>As organizations adopt multiple LLM providers (Anthropic, OpenAI, Google, open-source self-hosted), managing each directly from application code becomes unsustainable. An AI API gateway provides a unified interface for routing requests across providers, handling failures, tracking costs, and monitoring usage. This article covers the design of a production-grade AI gateway.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Unified API Layer</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>The gateway presents a single API that abstracts provider differences:</p>
 <br>
-<p>    from abc import ABC, abstractmethod</p>
 <br>
-<p>    from dataclasses import dataclass</p>
 <br>
-<p>    from typing import Optional</p>
 <br>
-<p>    import time</p>
 <br>
-<p>    @dataclass</p>
 <br>
-<p>    class LLMRequest:</p>
 <br>
-<p>        model: str</p>
 <br>
-<p>        messages: list[dict]</p>
 <br>
-<p>        max_tokens: int = 1024</p>
 <br>
-<p>        temperature: float = 0.7</p>
 <br>
-<p>        stream: bool = False</p>
 <br>
-<p>    @dataclass</p>
 <br>
-<p>    class LLMResponse:</p>
+<p>from abc import ABC, abstractmethod</p>
 <br>
-<p>        content: str</p>
 <br>
-<p>        model: str</p>
 <br>
-<p>        provider: str</p>
 <br>
-<p>        latency_ms: float</p>
 <br>
-<p>        tokens_in: int</p>
 <br>
-<p>        tokens_out: int</p>
 <br>
-<p>        cost: float</p>
 <br>
-<p>    class LLMProvider(ABC):</p>
 <br>
-<p>        @abstractmethod</p>
 <br>
-<p>        async def complete(self, request: LLMRequest) -> LLMResponse:</p>
 <br>
-<p>            pass</p>
 <br>
-<p>        @abstractmethod</p>
 <br>
-<p>        def get_cost_per_token(self, model: str) -> tuple[float, float]:</p>
+<p>from dataclasses import dataclass</p>
 <br>
-<p>            pass</p>
 <br>
-<p>    class AnthropicProvider(LLMProvider):</p>
 <br>
-<p>        def __init__(self, api_key: str):</p>
 <br>
-<p>            self.client = Anthropic(api_key=api_key)</p>
 <br>
-<p>        async def complete(self, request: LLMRequest) -> LLMResponse:</p>
 <br>
-<p>            start = time.time()</p>
 <br>
-<p>            response = await self.client.messages.create(</p>
 <br>
-<p>                model=request.model,</p>
 <br>
-<p>                max_tokens=request.max_tokens,</p>
 <br>
-<p>                temperature=request.temperature,</p>
 <br>
-<p>                messages=request.messages,</p>
 <br>
-<p>            )</p>
 <br>
-<p>            latency = (time.time() - start) * 1000</p>
+<p>from typing import Optional</p>
 <br>
-<p>            return LLMResponse(</p>
 <br>
-<p>                content=response.content[0].text,</p>
 <br>
-<p>                model=request.model,</p>
 <br>
-<p>                provider="anthropic",</p>
 <br>
-<p>                latency_ms=latency,</p>
 <br>
-<p>                tokens_in=response.usage.input_tokens,</p>
 <br>
-<p>                tokens_out=response.usage.output_tokens,</p>
 <br>
-<p>                cost=self._calculate_cost(response.usage),</p>
 <br>
-<p>            )</p>
 <br>
-<p>    class OpenAIProvider(LLMProvider):</p>
 <br>
-<p>        def __init__(self, api_key: str):</p>
 <br>
-<p>            self.client = OpenAI(api_key=api_key)</p>
 <br>
-<p>        async def complete(self, request: LLMRequest) -> LLMResponse:</p>
+<p>import time</p>
 <br>
-<p>            start = time.time()</p>
 <br>
-<p>            response = await self.client.chat.completions.create(</p>
 <br>
-<p>                model=request.model,</p>
 <br>
-<p>                max_tokens=request.max_tokens,</p>
 <br>
-<p>                temperature=request.temperature,</p>
 <br>
-<p>                messages=request.messages,</p>
 <br>
-<p>            )</p>
 <br>
-<p>            latency = (time.time() - start) * 1000</p>
 <br>
-<p>            return LLMResponse(</p>
 <br>
-<p>                content=response.choices[0].message.content,</p>
 <br>
-<p>                model=request.model,</p>
 <br>
-<p>                provider="openai",</p>
 <br>
-<p>                latency_ms=latency,</p>
+<p>@dataclass</p>
 <br>
-<p>                tokens_in=response.usage.prompt_tokens,</p>
 <br>
-<p>                tokens_out=response.usage.completion_tokens,</p>
 <br>
-<p>                cost=self._calculate_cost(response.usage),</p>
 <br>
-<p>            )</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class LLMRequest:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model: str</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages: list[dict]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>max_tokens: int = 1024</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>temperature: float = 0.7</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>stream: bool = False</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@dataclass</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class LLMResponse:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>content: str</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model: str</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>provider: str</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>latency_ms: float</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tokens_in: int</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tokens_out: int</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cost: float</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class LLMProvider(ABC):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@abstractmethod</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def complete(self, request: LLMRequest) -> LLMResponse:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pass</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@abstractmethod</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def get_cost_per_token(self, model: str) -> tuple[float, float]:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pass</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class AnthropicProvider(LLMProvider):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def __init__(self, api_key: str):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.client = Anthropic(api_key=api_key)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def complete(self, request: LLMRequest) -> LLMResponse:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>start = time.time()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response = await self.client.messages.create(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model=request.model,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>max_tokens=request.max_tokens,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>temperature=request.temperature,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages=request.messages,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>latency = (time.time() - start) * 1000</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return LLMResponse(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>content=response.content[0].text,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model=request.model,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>provider="anthropic",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>latency_ms=latency,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tokens_in=response.usage.input_tokens,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tokens_out=response.usage.output_tokens,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cost=self._calculate_cost(response.usage),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class OpenAIProvider(LLMProvider):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def __init__(self, api_key: str):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.client = OpenAI(api_key=api_key)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def complete(self, request: LLMRequest) -> LLMResponse:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>start = time.time()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response = await self.client.chat.completions.create(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model=request.model,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>max_tokens=request.max_tokens,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>temperature=request.temperature,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages=request.messages,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>latency = (time.time() - start) * 1000</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return LLMResponse(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>content=response.choices[0].message.content,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model=request.model,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>provider="openai",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>latency_ms=latency,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tokens_in=response.usage.prompt_tokens,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tokens_out=response.usage.completion_tokens,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cost=self._calculate_cost(response.usage),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Load Balancing</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Distribute requests across providers based on strategy:</p>
 <br>
-<p>    class LoadBalancer:</p>
 <br>
-<p>        def __init__(self, providers: dict[str, LLMProvider]):</p>
 <br>
-<p>            self.providers = providers</p>
 <br>
-<p>            self.round_robin_index = 0</p>
 <br>
-<p>        async def route(self, request: LLMRequest, strategy: str = "priority") -> LLMResponse:</p>
 <br>
-<p>            if strategy == "cheapest":</p>
 <br>
-<p>                return await self._route_cheapest(request)</p>
 <br>
-<p>            elif strategy == "fastest":</p>
 <br>
-<p>                return await self._route_fastest(request)</p>
 <br>
-<p>            elif strategy == "round_robin":</p>
 <br>
-<p>                return await self._route_round_robin(request)</p>
 <br>
-<p>            else:</p>
 <br>
-<p>                return await self._route_priority(request)</p>
+<p>class LoadBalancer:</p>
 <br>
-<p>        async def _route_priority(self, request: LLMRequest) -> LLMResponse:</p>
 <br>
-<p>            # Try primary provider first, fall back to secondary</p>
 <br>
-<p>            for name in ["primary", "secondary", "fallback"]:</p>
 <br>
-<p>                if name in self.providers:</p>
 <br>
-<p>                    try:</p>
 <br>
-<p>                        return await self.providers[name].complete(request)</p>
 <br>
-<p>                    except Exception:</p>
 <br>
-<p>                        continue</p>
 <br>
-<p>            raise AllProvidersExhausted("All providers failed")</p>
 <br>
-<p>        async def _route_cheapest(self, request: LLMRequest) -> LLMResponse:</p>
 <br>
-<p>            # Route to the provider with lowest cost for comparable quality</p>
 <br>
-<p>            cheap_providers = sorted(</p>
 <br>
-<p>                self.providers.items(),</p>
+<p>def __init__(self, providers: dict[str, LLMProvider]):</p>
 <br>
-<p>                key=lambda p: p[1].get_cost_per_token(request.model)[0],</p>
 <br>
-<p>            )</p>
 <br>
-<p>            for name, provider in cheap_providers:</p>
 <br>
-<p>                try:</p>
 <br>
-<p>                    return await provider.complete(request)</p>
 <br>
-<p>                except Exception:</p>
 <br>
-<p>                    continue</p>
 <br>
-<p>            raise AllProvidersExhausted("All providers failed")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.providers = providers</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.round_robin_index = 0</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def route(self, request: LLMRequest, strategy: str = "priority") -> LLMResponse:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if strategy == "cheapest":</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return await self._route_cheapest(request)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>elif strategy == "fastest":</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return await self._route_fastest(request)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>elif strategy == "round_robin":</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return await self._route_round_robin(request)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>else:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return await self._route_priority(request)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def _route_priority(self, request: LLMRequest) -> LLMResponse:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Try primary provider first, fall back to secondary</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for name in ["primary", "secondary", "fallback"]:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if name in self.providers:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>try:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return await self.providers[name].complete(request)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except Exception:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>continue</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise AllProvidersExhausted("All providers failed")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def _route_cheapest(self, request: LLMRequest) -> LLMResponse:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Route to the provider with lowest cost for comparable quality</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cheap_providers = sorted(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.providers.items(),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>key=lambda p: p[1].get_cost_per_token(request.model)[0],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for name, provider in cheap_providers:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>try:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return await provider.complete(request)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except Exception:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>continue</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise AllProvidersExhausted("All providers failed")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Fallback and Retry</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>When a provider fails, automatically switch to alternatives:</p>
 <br>
-<p>    class FallbackHandler:</p>
 <br>
-<p>        def __init__(self, load_balancer: LoadBalancer):</p>
 <br>
-<p>            self.balancer = load_balancer</p>
 <br>
-<p>        async def execute_with_fallback(self, request: LLMRequest, max_retries: int = 3) -> LLMResponse:</p>
 <br>
-<p>            last_error = None</p>
 <br>
-<p>            for attempt in range(max_retries):</p>
 <br>
-<p>                try:</p>
 <br>
-<p>                    return await self.balancer.route(request)</p>
 <br>
-<p>                except RateLimitError:</p>
 <br>
-<p>                    await asyncio.sleep(2 ** attempt * 2)</p>
 <br>
-<p>                    # Fallback to different provider</p>
 <br>
-<p>                    request.model = self._map_to_alternative(request.model)</p>
 <br>
-<p>                except ProviderTimeoutError:</p>
+<p>class FallbackHandler:</p>
 <br>
-<p>                    await asyncio.sleep(1)</p>
 <br>
-<p>                    continue</p>
 <br>
-<p>                except ProviderError as e:</p>
 <br>
-<p>                    last_error = e</p>
 <br>
-<p>                    continue</p>
 <br>
-<p>            raise FallbackExhausted(f"All fallbacks failed: {last_error}")</p>
 <br>
-<p>        def _map_to_alternative(self, model: str) -> str:</p>
 <br>
-<p>            mapping = {</p>
 <br>
-<p>                "claude-sonnet-4-20260512": "gpt-4o",</p>
 <br>
-<p>                "gpt-4o": "claude-sonnet-4-20260512",</p>
 <br>
-<p>                "claude-haiku-20260512": "gpt-4o-mini",</p>
 <br>
-<p>            }</p>
 <br>
-<p>            return mapping.get(model, model)</p>
+<p>def __init__(self, load_balancer: LoadBalancer):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.balancer = load_balancer</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def execute_with_fallback(self, request: LLMRequest, max_retries: int = 3) -> LLMResponse:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>last_error = None</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for attempt in range(max_retries):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>try:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return await self.balancer.route(request)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except RateLimitError:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await asyncio.sleep(2 ** attempt * 2)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Fallback to different provider</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>request.model = self._map_to_alternative(request.model)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except ProviderTimeoutError:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await asyncio.sleep(1)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>continue</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except ProviderError as e:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>last_error = e</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>continue</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise FallbackExhausted(f"All fallbacks failed: {last_error}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def _map_to_alternative(self, model: str) -> str:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>mapping = {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"claude-sonnet-4-20260512": "gpt-4o",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"gpt-4o": "claude-sonnet-4-20260512",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"claude-haiku-20260512": "gpt-4o-mini",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return mapping.get(model, model)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Cost Tracking</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Track costs per user, per feature, and per request:</p>
 <br>
-<p>    class CostTracker:</p>
 <br>
-<p>        def __init__(self, db):</p>
 <br>
-<p>            self.db = db</p>
 <br>
-<p>        async def record_usage(self, response: LLMResponse, user_id: str, feature: str):</p>
 <br>
-<p>            entry = {</p>
 <br>
-<p>                "user_id": user_id,</p>
 <br>
-<p>                "feature": feature,</p>
 <br>
-<p>                "provider": response.provider,</p>
 <br>
-<p>                "model": response.model,</p>
 <br>
-<p>                "tokens_in": response.tokens_in,</p>
 <br>
-<p>                "tokens_out": response.tokens_out,</p>
 <br>
-<p>                "cost": response.cost,</p>
 <br>
-<p>                "latency_ms": response.latency_ms,</p>
+<p>class CostTracker:</p>
 <br>
-<p>                "timestamp": time.time(),</p>
 <br>
-<p>            }</p>
 <br>
-<p>            await self.db.insert("usage_log", entry)</p>
 <br>
-<p>        async def get_user_cost(self, user_id: str, period_days: int = 30) -> dict:</p>
 <br>
-<p>            costs = await self.db.query(</p>
 <br>
-<p>                "SELECT SUM(cost) as total, SUM(tokens_in) as in_tokens, "</p>
 <br>
-<p>                "SUM(tokens_out) as out_tokens FROM usage_log "</p>
 <br>
-<p>                "WHERE user_id = $1 AND timestamp > $2",</p>
 <br>
-<p>                user_id, time.time() - period_days * 86400,</p>
 <br>
-<p>            )</p>
 <br>
-<p>            return costs[0] if costs else {"total": 0, "in_tokens": 0, "out_tokens": 0}</p>
+<br>
+<br>
+<p>def __init__(self, db):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.db = db</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def record_usage(self, response: LLMResponse, user_id: str, feature: str):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>entry = {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"user_id": user_id,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"feature": feature,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"provider": response.provider,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"model": response.model,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"tokens_in": response.tokens_in,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"tokens_out": response.tokens_out,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"cost": response.cost,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"latency_ms": response.latency_ms,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"timestamp": time.time(),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await self.db.insert("usage_log", entry)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def get_user_cost(self, user_id: str, period_days: int = 30) -> dict:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>costs = await self.db.query(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"SELECT SUM(cost) as total, SUM(tokens_in) as in_tokens, "</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"SUM(tokens_out) as out_tokens FROM usage_log "</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"WHERE user_id = $1 AND timestamp > $2",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>user_id, time.time() - period_days * 86400,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return costs[0] if costs else {"total": 0, "in_tokens": 0, "out_tokens": 0}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Observability</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Every request should produce structured telemetry:</p>
 <br>
-<p>    class GatewayObservability:</p>
 <br>
-<p>        def __init__(self):</p>
 <br>
-<p>            self.metrics = {</p>
 <br>
-<p>                "requests_total": 0,</p>
 <br>
-<p>                "errors_total": 0,</p>
 <br>
-<p>                "latency_histogram": [],</p>
 <br>
-<p>                "cost_total": 0.0,</p>
 <br>
-<p>            }</p>
 <br>
-<p>        def instrument(self, handler):</p>
 <br>
-<p>            async def wrapped(request: LLMRequest):</p>
 <br>
-<p>                self.metrics["requests_total"] += 1</p>
 <br>
-<p>                start = time.time()</p>
 <br>
-<p>                try:</p>
+<p>class GatewayObservability:</p>
 <br>
-<p>                    response = await handler(request)</p>
 <br>
-<p>                    self.metrics["latency_histogram"].append((time.time() - start) * 1000)</p>
 <br>
-<p>                    self.metrics["cost_total"] += response.cost</p>
 <br>
-<p>                    return response</p>
 <br>
-<p>                except Exception as e:</p>
 <br>
-<p>                    self.metrics["errors_total"] += 1</p>
 <br>
-<p>                    raise</p>
 <br>
-<p>            return wrapped</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def __init__(self):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.metrics = {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"requests_total": 0,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"errors_total": 0,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"latency_histogram": [],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"cost_total": 0.0,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def instrument(self, handler):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def wrapped(request: LLMRequest):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.metrics["requests_total"] += 1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>start = time.time()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>try:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response = await handler(request)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.metrics["latency_histogram"].append((time.time() - start) * 1000)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.metrics["cost_total"] += response.cost</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return response</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except Exception as e:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.metrics["errors_total"] += 1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return wrapped</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Conclusion</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>An AI API gateway provides provider abstraction, load balancing, automatic fallback, cost tracking, and observability in a single layer. Route requests based on cost, latency, or priority. Fail over between providers transparently. Track costs per user and feature to prevent budget surprises. Expose latency, error rate, and cost metrics for dashboards. A gateway is essential for any organization using multiple LLM providers in production.</p></div>
     </article>
@@ -464,9 +2746,15 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
-      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
+    </section>
+    
+    <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
+      <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
+      <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
+      <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
   </div>
 </main>

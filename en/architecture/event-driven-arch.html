@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-driven-arch.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "948",
+      "wordCount": "1122",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/event-driven-arch.html"},
-      "articleBody": "Event-Driven Architecture Event-driven architecture (EDA) is an architectural style in which services communicate through the production, detection, and consumption of events. Unlike request-driven architectures where a service explicitly calls another, EDA enables services to react to state changes throughout the system. This decoupling provides scalability, flexibility, and resilience that are difficult to achieve with synchronous communication. Core Concepts An event is a record of something that happened in the system: \"Order Placed\", \"Payment Received\", \"Inventory Updated\". Events are immutable facts\u2014they describe what occurred, not what to do. Services produce events when their state changes, and other services consume events they are interested in. The event bus (or event broker) is the infrastructure that transports events from producers to consumers. Kafka, EventBridge, RabbitMQ, and Pulsar are common event bus implementations. The event bus provides durability, ordering guarantees, and delivery semantics that determine how events travel from producers to consumers. Event Schema Every event has a schema that defines its structure: the event type, version, timestamp, producer identity, and payload fields. Event schemas must evolve over time as business requirements change. Schema management is critical because producers and consumers may be on different versions. A schema registry centralizes schema storage and enforces compatibility rules. When a producer publishes an event, the registry validates the schema against the registered version. Consumers can discover available schemas and understand the event structure. Schema registries support Avro, Protobuf, and JSON Schema, each with different compatibility modes. Event Versioning Events are long-lived data. An event published today may be consumed by a service deployed months later. Event versioning strategies ensure that old events remain interpretable. Backward compatibility ensures that newer consumers can read events produced with older schemas. Forward compatibility ensures that older consumers can read events produced with newer schemas. Full compatibility requires both. The schema registry's compatibility mode determines which changes are allowed. Common versioning practices include adding new fields as optional, never removing fields, using default values for new fields, and creating new event types for fundamentally different schemas. Upcasting transforms old event versions to the current version during consumption. Event Processing Patterns Events can be processed in several ways: stream processing processes each event individually, complex event processing identifies patterns across multiple events, and event sourcing uses events as the primary data store. Stream processing frameworks like Kafka Streams, Apache Flink, and Spark Streaming process events in real-time. They support stateful operations like aggregations, joins, and windowed computations. These frameworks are used for real-time analytics, monitoring, and automated reactions. Complex event processing detects patterns across multiple events: \"If a customer places three orders in one hour and then requests a refund, flag for review.\" CEP engines like Esper and Flink CEP evaluate event patterns against temporal and logical conditions. Challenges Event-driven architecture introduces challenges. Eventual consistency means that services may have slightly outdated views of the system state. Monitoring becomes more complex because there is no single request to trace\u2014events flow asynchronously across services. Schema evolution requires coordination even with schema registries. Event ordering across partitions is not guaranteed without careful design. Event duplication is possible with at-least-once delivery. Idempotent event handlers are essential to handle duplicates safely. When to Use EDA Event-driven architecture excels in systems with many loosely coupled services, complex workflows spanning multiple services, real-time processing requirements, and polyglot persistence. It is less suitable for simple CRUD applications, systems requiring strict consistency guarantees, or scenarios where request-response semantics are natural. The decision to adopt EDA should be driven by concrete requirements for decoupling, scalability, or real-time processing. For many systems, a hybrid approach\u2014using events for specific workflows while keeping request-response for others\u2014provides the right balance of decoupling and simplicity."
+      "articleBody": "Event-Driven Architecture Event-Driven Architecture Event-Driven Architecture Event-Driven Architecture Event-driven architecture (EDA) is an architectural style in which services communicate through the production, detection, and consumption of events. Unlike request-driven architectures where a service explicitly calls another, EDA enables services to react to state changes throughout the system. This decoupling provides scalability, flexibility, and resilience that are difficult to achieve with synchronous communication. Core Concepts An event is a record of something that happened in the system: \"Order Placed\", \"Payment Received\", \"Inventory Updated\". Events are immutable facts\u2014they describe what occurred, not what to do. Services produce events when their state changes, and other services consume events they are interested in. The event bus (or event broker) is the infrastructure that transports events from producers to consumers. Kafka, EventBridge, RabbitMQ, and Pulsar are common event bus implementations. The event bus provides durability, ordering guarantees, and delivery semantics that determine how events travel from producers to consumers. Event Schema Every event has a schema that defines its structure: the event type, version, timestamp, producer identity, and payload fields. Event schemas must evolve over time as business requirements change. Schema management is critical because producers and consumers may be on different versions. A schema registry centralizes schema storage and enforces compatibility rules. When a producer publishes an event, the registry validates the schema against the registered version. Consumers can discover available schemas and understand the event structure. Schema registries support Avro, Protobuf, and JSON Schema, each with different compatibility modes. Event Versioning Events are long-lived data. An event published today may be consumed by a service deployed months later. Event versioning strategies ensure that old events remain interpretable. Backward compatibility ensures that newer consumers can read events produced with older schemas. Forward compatibility ensures that older consumers can read events produced with newer schemas. Full compatibility requires both. The schema registry's compatibility mode determines which changes are allowed. Common versioning practices include adding new fields as optional, never removing fields, using default values for new fields, and creating new event types for fundamentally different schemas. Upcasting transforms old event versions to the current version during consumption. Event Processing Patterns Events can be processed in several ways: stream processing processes each event individually, complex event processing identifies patterns across multiple events, and event sourcing uses events as the primary data store. Stream processing frameworks like Kafka Streams, Apache Flink, and Spark Streaming process events in real-time. They support stateful operations like aggregations, joins, and windowed computations. These frameworks are used for real-time analytics, monitoring, and automated reactions. Complex event processing detects patterns across multiple events: \"If a customer places three orders in one hour and then requests a refund, flag for review.\" CEP engines like Esper and Flink CEP evaluate event patterns against temporal and logical conditions. Challenges Event-driven architecture introduces challenges. Eventual consistency means that services may have slightly outdated views of the system state. Monitoring becomes more complex because there is no single request to trace\u2014events flow asynchronously across services. Schema evolution requires coordination even with schema registries. Event ordering across partitions is not guaranteed without careful design. Event duplication is possible with at-least-once delivery. Idempotent event handlers are essential to handle duplicates safely. When to Use EDA Event-driven architecture excels in systems with many loosely coupled services, complex workflows spanning multiple services, real-time processing requirements, and polyglot persistence. It is less suitable for simple CRUD applications, systems requiring strict consistency guarantees, or scenarios where request-response semantics are natural. The decision to adopt EDA should be driven by concrete requirements for decoupling, scalability, or real-time processing. For many systems, a hybrid approach\u2014using events for specific workflows while keeping request-response for others\u2014provides the right balance of decoupling and simplicity."
     }
     </script>
     <script type="application/ld+json">
@@ -78,26 +78,190 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-driven-arch.png" alt="Event-Driven Architecture" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Event-Driven Architecture</h1>
 <br>
-<p>Event-driven architecture (EDA) is an architectural style in which services communicate through the production, detection, and consumption of events. Unlike request-driven architectures where a service explicitly calls another, EDA enables services to react to state changes throughout the system. This decoupling provides scalability, flexibility, and resilience that are difficult to achieve with synchronous communication.   </p>
-<p>Core Concepts   </p>
-<p>An event is a record of something that happened in the system: "Order Placed", "Payment Received", "Inventory Updated". Events are immutable facts—they describe what occurred, not what to do. Services produce events when their state changes, and other services consume events they are interested in.   </p>
-<p>The event bus (or event broker) is the infrastructure that transports events from producers to consumers. Kafka, EventBridge, RabbitMQ, and Pulsar are common event bus implementations. The event bus provides durability, ordering guarantees, and delivery semantics that determine how events travel from producers to consumers.   </p>
-<p>Event Schema   </p>
-<p>Every event has a schema that defines its structure: the event type, version, timestamp, producer identity, and payload fields. Event schemas must evolve over time as business requirements change. Schema management is critical because producers and consumers may be on different versions.   </p>
-<p>A schema registry centralizes schema storage and enforces compatibility rules. When a producer publishes an event, the registry validates the schema against the registered version. Consumers can discover available schemas and understand the event structure. Schema registries support Avro, Protobuf, and JSON Schema, each with different compatibility modes.   </p>
-<p>Event Versioning   </p>
-<p>Events are long-lived data. An event published today may be consumed by a service deployed months later. Event versioning strategies ensure that old events remain interpretable.   </p>
-<p>Backward compatibility ensures that newer consumers can read events produced with older schemas. Forward compatibility ensures that older consumers can read events produced with newer schemas. Full compatibility requires both. The schema registry's compatibility mode determines which changes are allowed.   </p>
-<p>Common versioning practices include adding new fields as optional, never removing fields, using default values for new fields, and creating new event types for fundamentally different schemas. Upcasting transforms old event versions to the current version during consumption.   </p>
-<p>Event Processing Patterns   </p>
-<p>Events can be processed in several ways: stream processing processes each event individually, complex event processing identifies patterns across multiple events, and event sourcing uses events as the primary data store.   </p>
-<p>Stream processing frameworks like Kafka Streams, Apache Flink, and Spark Streaming process events in real-time. They support stateful operations like aggregations, joins, and windowed computations. These frameworks are used for real-time analytics, monitoring, and automated reactions.   </p>
-<p>Complex event processing detects patterns across multiple events: "If a customer places three orders in one hour and then requests a refund, flag for review." CEP engines like Esper and Flink CEP evaluate event patterns against temporal and logical conditions.   </p>
-<p>Challenges   </p>
-<p>Event-driven architecture introduces challenges. Eventual consistency means that services may have slightly outdated views of the system state. Monitoring becomes more complex because there is no single request to trace—events flow asynchronously across services. Schema evolution requires coordination even with schema registries.   </p>
-<p>Event ordering across partitions is not guaranteed without careful design. Event duplication is possible with at-least-once delivery. Idempotent event handlers are essential to handle duplicates safely.   </p>
-<p>When to Use EDA   </p>
-<p>Event-driven architecture excels in systems with many loosely coupled services, complex workflows spanning multiple services, real-time processing requirements, and polyglot persistence. It is less suitable for simple CRUD applications, systems requiring strict consistency guarantees, or scenarios where request-response semantics are natural.   </p>
+<h1>Event-Driven Architecture</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>Event-Driven Architecture</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Event-Driven Architecture</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Event-driven architecture (EDA) is an architectural style in which services communicate through the production, detection, and consumption of events. Unlike request-driven architectures where a service explicitly calls another, EDA enables services to react to state changes throughout the system. This decoupling provides scalability, flexibility, and resilience that are difficult to achieve with synchronous communication. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Core Concepts </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>An event is a record of something that happened in the system: "Order Placed", "Payment Received", "Inventory Updated". Events are immutable facts—they describe what occurred, not what to do. Services produce events when their state changes, and other services consume events they are interested in. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The event bus (or event broker) is the infrastructure that transports events from producers to consumers. Kafka, EventBridge, RabbitMQ, and Pulsar are common event bus implementations. The event bus provides durability, ordering guarantees, and delivery semantics that determine how events travel from producers to consumers. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Event Schema </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Every event has a schema that defines its structure: the event type, version, timestamp, producer identity, and payload fields. Event schemas must evolve over time as business requirements change. Schema management is critical because producers and consumers may be on different versions. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>A schema registry centralizes schema storage and enforces compatibility rules. When a producer publishes an event, the registry validates the schema against the registered version. Consumers can discover available schemas and understand the event structure. Schema registries support Avro, Protobuf, and JSON Schema, each with different compatibility modes. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Event Versioning </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Events are long-lived data. An event published today may be consumed by a service deployed months later. Event versioning strategies ensure that old events remain interpretable. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Backward compatibility ensures that newer consumers can read events produced with older schemas. Forward compatibility ensures that older consumers can read events produced with newer schemas. Full compatibility requires both. The schema registry's compatibility mode determines which changes are allowed. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Common versioning practices include adding new fields as optional, never removing fields, using default values for new fields, and creating new event types for fundamentally different schemas. Upcasting transforms old event versions to the current version during consumption. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Event Processing Patterns </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Events can be processed in several ways: stream processing processes each event individually, complex event processing identifies patterns across multiple events, and event sourcing uses events as the primary data store. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Stream processing frameworks like Kafka Streams, Apache Flink, and Spark Streaming process events in real-time. They support stateful operations like aggregations, joins, and windowed computations. These frameworks are used for real-time analytics, monitoring, and automated reactions. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Complex event processing detects patterns across multiple events: "If a customer places three orders in one hour and then requests a refund, flag for review." CEP engines like Esper and Flink CEP evaluate event patterns against temporal and logical conditions. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Challenges </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Event-driven architecture introduces challenges. Eventual consistency means that services may have slightly outdated views of the system state. Monitoring becomes more complex because there is no single request to trace—events flow asynchronously across services. Schema evolution requires coordination even with schema registries. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Event ordering across partitions is not guaranteed without careful design. Event duplication is possible with at-least-once delivery. Idempotent event handlers are essential to handle duplicates safely. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>When to Use EDA </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Event-driven architecture excels in systems with many loosely coupled services, complex workflows spanning multiple services, real-time processing requirements, and polyglot persistence. It is less suitable for simple CRUD applications, systems requiring strict consistency guarantees, or scenarios where request-response semantics are natural. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>The decision to adopt EDA should be driven by concrete requirements for decoupling, scalability, or real-time processing. For many systems, a hybrid approach—using events for specific workflows while keeping request-response for others—provides the right balance of decoupling and simplicity.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -114,6 +278,7 @@
       <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

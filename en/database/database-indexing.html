@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-indexing.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1298",
+      "wordCount": "2029",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-indexing.html"},
-      "articleBody": "Database Indexing Strategies What Is Database Indexing? A database index is a data structure that improves the speed of data retrieval operations on a table at the cost of additional writes and storage space. Think of it like a book's index: instead of flipping through every page to find a topic, you look up the topic in the index and go directly to the right page. How Indexes Work Without an index, the database performs a sequential scan, reading every row until it finds matches. With an index, the database navigates a balanced tree structure to locate data in O(log n) time instead of O(n). Sequential Scan: [Row1] [Row2] [Row3] ... [Row1M] = 1,000,000 reads B-Tree Index: [Root] -> [Branch] -> [Leaf] -> [Row] = 3-4 reads Index Types B-Tree Index The default and most common index type. Works well for equality and range queries. CREATE INDEX idx_users_email ON users(email); CREATE INDEX idx_users_created ON users(created_at); -- Used for: SELECT * FROM users WHERE email = 'alice@example.com'; SELECT * FROM users WHERE created_at > '2026-01-01'; SELECT * FROM users WHERE email LIKE 'alice%'; Hash Index Optimized for equality comparisons. Not suitable for range queries or sorting. CREATE INDEX idx_sessions_token ON sessions USING HASH(session_token); -- Good for: SELECT * FROM sessions WHERE session_token = 'abc123'; GiST Index Generalized Search Tree, useful for full-text search and geometric data. CREATE INDEX idx_posts_content ON posts USING GIST(to_tsvector('english', content)); -- Used for: SELECT * FROM posts WHERE to_tsvector('english', content) @@ to_tsquery('database & indexing'); GIN Index Generalized Inverted Index, optimized for composite types and arrays. CREATE INDEX idx_article_tags ON articles USING GIN(tags); -- Used for: SELECT * FROM articles WHERE tags @> ARRAY['postgresql']; SELECT * FROM articles WHERE tags && ARRAY['database', 'sql']; BRIN Index Block Range INdex, efficient for very large tables with naturally ordered data. CREATE INDEX idx_logs_created ON logs USING BRIN(created_at) WITH (pages_per_range = 32); -- Best for: -- Time-series data where rows are inserted in order Composite Indexes Indexes on multiple columns. Column order matters significantly. -- Composite index CREATE INDEX idx_users_status_created ON users(status, created_at); -- This index can serve: -- 1. WHERE status = 'active' -- 2. WHERE status = 'active' AND created_at > '2026-01-01' -- 3. WHERE status IN ('active', 'pending') ORDER BY created_at -- But NOT: -- WHERE created_at > '2026-01-01' (status is leading column) Column Order Rules | Rule | Example | |------|---------| | Equality conditions first | `WHERE status = 'active' AND created_at > '2026-01-01'` -> index on `(status, created_at)` | | High cardinality columns first for range | `WHERE type = 'user' AND email LIKE 'a%'` -> index on `(type, email)` | | Most selective column first | `WHERE country = 'US' AND status = 'active'` \u2014 US is 10% of data, active is 90% -> index on `(country, status)` | Index Scan Types | Scan Type | When Used | Performance | |-----------|-----------|-------------| | Sequential Scan | No index, or query returns large percentage of table | Full table read | | Index Scan | Index lookup + heap access | Fast for selective queries | | Index Only Scan | All needed columns are in the index | Fastest, no heap access | | Bitmap Scan | Combines multiple indexes, returns moderate row count | Good for multi-condition queries | Monitoring Index Usage -- PostgreSQL: Find unused indexes SELECT schemaname || '.' || relname AS table, indexrelname AS index, idx_scan AS index_scans FROM pg_stat_user_indexes WHERE idx_scan AND indexrelname NOT LIKE '%_pkey' ORDER BY idx_scan ASC; -- Find missing indexes SELECT relname AS table, seq_scan - idx_scan AS too_much_seq, seq_scan, idx_scan FROM pg_stat_user_tables WHERE seq_scan > idx_scan AND seq_scan > 1000 ORDER BY seq_scan DESC; Index Maintenance -- Rebuild indexes to reclaim space (PostgreSQL) REINDEX INDEX idx_users_email; REINDEX TABLE users; -- Update statistics for query planner ANALYZE users; -- Check index size SELECT pg_size_pretty(pg_indexes_size('users')) AS total_index_size, pg_size_pretty(pg_total_relation_size('users')) AS total_size; Common Anti-Patterns | Anti-Pattern | Why It Hurts | |--------------|--------------| | Indexing every column | Writes become slow, storage bloats | | Forgetting composite indexes | Query uses multiple single-column indexes inefficiently | | Indexing boolean columns | Very low cardinality, rarely useful | | Not indexing foreign keys | JOIN queries perform sequential scans | | Over-indexing small tables | Tables under 1000 rows are faster to scan sequentially | Summary Indexes are the most impactful performance optimization for database queries. Use B-tree indexes as the default for most workloads, composite indexes with carefully ordered columns for multi-condition queries, and specialized types (GIN, GiST, BRIN) for specific use cases. Monitor index usage and remove unused indexes to keep write performance optimal. Always run queries through EXPLAIN ANALYZE to verify the planner is using your indexes effectively."
+      "articleBody": "Database Indexing Strategies Database Indexing Strategies Database Indexing Strategies Database Indexing Strategies What Is Database Indexing? A database index is a data structure that improves the speed of data retrieval operations on a table at the cost of additional writes and storage space. Think of it like a book's index: instead of flipping through every page to find a topic, you look up the topic in the index and go directly to the right page. How Indexes Work Without an index, the database performs a sequential scan, reading every row until it finds matches. With an index, the database navigates a balanced tree structure to locate data in O(log n) time instead of O(n). Sequential Scan: [Row1] [Row2] [Row3] ... [Row1M] = 1,000,000 reads B-Tree Index: [Root] -> [Branch] -> [Leaf] -> [Row] = 3-4 reads Index Types B-Tree Index The default and most common index type. Works well for equality and range queries. CREATE INDEX idx_users_email ON users(email); CREATE INDEX idx_users_created ON users(created_at); \\\\\\\\-- Used for: SELECT * FROM users WHERE email = 'alice@example.com'; SELECT * FROM users WHERE created_at > '2026-01-01'; SELECT * FROM users WHERE email LIKE 'alice%'; Hash Index Optimized for equality comparisons. Not suitable for range queries or sorting. CREATE INDEX idx_sessions_token ON sessions USING HASH(session_token); \\\\\\\\-- Good for: SELECT * FROM sessions WHERE session_token = 'abc123'; GiST Index Generalized Search Tree, useful for full-text search and geometric data. CREATE INDEX idx_posts_content ON posts USING GIST(to_tsvector('english', content)); \\\\\\\\-- Used for: SELECT * FROM posts WHERE to_tsvector('english', content) @@ to_tsquery('database & indexing'); GIN Index Generalized Inverted Index, optimized for composite types and arrays. CREATE INDEX idx_article_tags ON articles USING GIN(tags); \\\\\\\\-- Used for: SELECT * FROM articles WHERE tags @> ARRAY['postgresql']; SELECT * FROM articles WHERE tags && ARRAY['database', 'sql']; BRIN Index Block Range INdex, efficient for very large tables with naturally ordered data. CREATE INDEX idx_logs_created ON logs USING BRIN(created_at) WITH (pages_per_range = 32); \\\\\\\\-- Best for: \\\\\\\\-- Time-series data where rows are inserted in order Composite Indexes Indexes on multiple columns. Column order matters significantly. \\\\\\\\-- Composite index CREATE INDEX idx_users_status_created ON users(status, created_at); \\\\\\\\-- This index can serve: \\\\\\\\-- 1. WHERE status = 'active' \\\\\\\\-- 2. WHERE status = 'active' AND created_at > '2026-01-01' \\\\\\\\-- 3. WHERE status IN ('active', 'pending') ORDER BY created_at \\\\\\\\-- But NOT: \\\\\\\\-- WHERE created_at > '2026-01-01' (status is leading column) Column Order Rules | Rule | Example | |------|---------| | Equality conditions first | `WHERE status = 'active' AND created_at > '2026-01-01'` -> index on `(status, created_at)` | | High cardinality columns first for range | `WHERE type = 'user' AND email LIKE 'a%'` -> index on `(type, email)` | | Most selective column first | `WHERE country = 'US' AND status = 'active'` \u2014 US is 10% of data, active is 90% -> index on `(country, status)` | Index Scan Types | Scan Type | When Used | Performance | |-----------|-----------|-------------| | Sequential Scan | No index, or query returns large percentage of table | Full table read | | Index Scan | Index lookup + heap access | Fast for selective queries | | Index Only Scan | All needed columns are in the index | Fastest, no heap access | | Bitmap Scan | Combines multiple indexes, returns moderate row count | Good for multi-condition queries | Monitoring Index Usage \\\\\\\\-- PostgreSQL: Find unused indexes SELECT schemaname || '.' || relname AS table, indexrelname AS index, idx_scan AS index_scans FROM pg_stat_user_indexes WHERE idx_scan AND indexrelname NOT LIKE '%_pkey' ORDER BY idx_scan ASC; \\\\\\\\-- Find missing indexes SELECT relname AS table, seq_scan - idx_scan AS too_much_seq, seq_scan, idx_scan FROM pg_stat_user_tables WHERE seq_scan > idx_scan AND seq_scan > 1000 ORDER BY seq_scan DESC; Index Maintenance \\\\\\\\-- Rebuild indexes to reclaim space (PostgreSQL) REINDEX INDEX idx_users_email; REINDEX TABLE users; \\\\\\\\-- Update statistics for query planner ANALYZE users; \\\\\\\\-- Check index size SELECT pg_size_pretty(pg_indexes_size('users')) AS total_index_size, pg_size_pretty(pg_total_relation_size('users')) AS total_size; Common Anti-Patterns | Anti-Pattern | Why It Hurts | |--------------|--------------| | Indexing every column | Writes become slow, storage bloats | | Forgetting composite indexes | Query uses multiple single-column indexes inefficiently | | Indexing boolean columns | Very low cardinality, rarely useful | | Not indexing foreign keys | JOIN queries perform sequential scans | | Over-indexing small tables | Tables under 1000 rows are faster to scan sequentially | Summary Indexes are the most impactful performance optimization for database queries. Use B-tree indexes as the default for most workloads, composite indexes with carefully ordered columns for multi-condition queries, and specialized types (GIN, GiST, BRIN) for specific use cases. Monitor index usage and remove unused indexes to keep write performance optimal. Always run queries through EXPLAIN ANALYZE to verify the planner is using your indexes effectively."
     }
     </script>
     <script type="application/ld+json">
@@ -77,161 +77,925 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-indexing.png" alt="Database Indexing Strategies" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Indexing Strategies</h1>
 <br>
-<p>What Is Database Indexing?   </p>
-<p>A database index is a data structure that improves the speed of data retrieval operations on a table at the cost of additional writes and storage space. Think of it like a book's index: instead of flipping through every page to find a topic, you look up the topic in the index and go directly to the right page.   </p>
-<p>How Indexes Work   </p>
-<p>Without an index, the database performs a sequential scan, reading every row until it finds matches. With an index, the database navigates a balanced tree structure to locate data in O(log n) time instead of O(n).   </p>
+<h1>Database Indexing Strategies</h1>
 <br>
-<p>    Sequential Scan:  [Row1] [Row2] [Row3] ... [Row1M]  = 1,000,000 reads</p>
 <br>
-<p>    B-Tree Index:     [Root] -> [Branch] -> [Leaf] -> [Row] = 3-4 reads</p>
 <br>
-<p>Index Types   </p>
-<p>B-Tree Index   </p>
-<p>The default and most common index type. Works well for equality and range queries.   </p>
 <br>
-<p>    CREATE INDEX idx_users_email ON users(email);</p>
+<h1>Database Indexing Strategies</h1>
 <br>
-<p>    CREATE INDEX idx_users_created ON users(created_at);</p>
 <br>
-<p>    -- Used for:</p>
 <br>
-<p>    SELECT * FROM users WHERE email = 'alice@example.com';</p>
 <br>
-<p>    SELECT * FROM users WHERE created_at > '2026-01-01';</p>
 <br>
-<p>    SELECT * FROM users WHERE email LIKE 'alice%';</p>
 <br>
-<p>Hash Index   </p>
-<p>Optimized for equality comparisons. Not suitable for range queries or sorting.   </p>
 <br>
-<p>    CREATE INDEX idx_sessions_token ON sessions USING HASH(session_token);</p>
+<h1>Database Indexing Strategies</h1>
 <br>
-<p>    -- Good for:</p>
 <br>
-<p>    SELECT * FROM sessions WHERE session_token = 'abc123';</p>
 <br>
-<p>GiST Index   </p>
-<p>Generalized Search Tree, useful for full-text search and geometric data.   </p>
 <br>
-<p>    CREATE INDEX idx_posts_content ON posts USING GIST(to_tsvector('english', content));</p>
 <br>
-<p>    -- Used for:</p>
 <br>
-<p>    SELECT * FROM posts</p>
 <br>
-<p>    WHERE to_tsvector('english', content) @@ to_tsquery('database & indexing');</p>
 <br>
-<p>GIN Index   </p>
-<p>Generalized Inverted Index, optimized for composite types and arrays.   </p>
 <br>
-<p>    CREATE INDEX idx_article_tags ON articles USING GIN(tags);</p>
 <br>
-<p>    -- Used for:</p>
+<p>What Is Database Indexing? </p>
 <br>
-<p>    SELECT * FROM articles WHERE tags @> ARRAY['postgresql'];</p>
 <br>
-<p>    SELECT * FROM articles WHERE tags && ARRAY['database', 'sql'];</p>
 <br>
-<p>BRIN Index   </p>
-<p>Block Range INdex, efficient for very large tables with naturally ordered data.   </p>
 <br>
-<p>    CREATE INDEX idx_logs_created ON logs USING BRIN(created_at)</p>
 <br>
-<p>    WITH (pages_per_range = 32);</p>
 <br>
-<p>    -- Best for:</p>
 <br>
-<p>    -- Time-series data where rows are inserted in order</p>
+<p>A database index is a data structure that improves the speed of data retrieval operations on a table at the cost of additional writes and storage space. Think of it like a book's index: instead of flipping through every page to find a topic, you look up the topic in the index and go directly to the right page. </p>
 <br>
-<p>Composite Indexes   </p>
-<p>Indexes on multiple columns. Column order matters significantly.   </p>
 <br>
-<p>    -- Composite index</p>
 <br>
-<p>    CREATE INDEX idx_users_status_created</p>
 <br>
-<p>    ON users(status, created_at);</p>
 <br>
-<p>    -- This index can serve:</p>
 <br>
-<p>    -- 1. WHERE status = 'active'</p>
 <br>
-<p>    -- 2. WHERE status = 'active' AND created_at > '2026-01-01'</p>
+<p>How Indexes Work </p>
 <br>
-<p>    -- 3. WHERE status IN ('active', 'pending') ORDER BY created_at</p>
 <br>
-<p>    -- But NOT:</p>
 <br>
-<p>    -- WHERE created_at > '2026-01-01'  (status is leading column)</p>
 <br>
-<p>Column Order Rules   </p>
-<p>| Rule | Example | |------|---------| | Equality conditions first | `WHERE status = 'active' AND created_at > '2026-01-01'` -> index on `(status, created_at)` | | High cardinality columns first for range | `WHERE type = 'user' AND email LIKE 'a%'` -> index on `(type, email)` | | Most selective column first | `WHERE country = 'US' AND status = 'active'` — US is 10% of data, active is 90% -> index on `(country, status)` |   </p>
-<p>Index Scan Types   </p>
-<p>| Scan Type | When Used | Performance | |-----------|-----------|-------------| | Sequential Scan | No index, or query returns large percentage of table | Full table read | | Index Scan | Index lookup + heap access | Fast for selective queries | | Index Only Scan | All needed columns are in the index | Fastest, no heap access | | Bitmap Scan | Combines multiple indexes, returns moderate row count | Good for multi-condition queries |   </p>
-<p>Monitoring Index Usage   </p>
 <br>
-<p>    -- PostgreSQL: Find unused indexes</p>
 <br>
-<p>    SELECT</p>
 <br>
-<p>        schemaname || '.' || relname AS table,</p>
+<p>Without an index, the database performs a sequential scan, reading every row until it finds matches. With an index, the database navigates a balanced tree structure to locate data in O(log n) time instead of O(n). </p>
 <br>
-<p>        indexrelname AS index,</p>
 <br>
-<p>        idx_scan AS index_scans</p>
 <br>
-<p>    FROM pg_stat_user_indexes</p>
 <br>
-<p>    WHERE idx_scan < 100</p>
 <br>
-<p>      AND indexrelname NOT LIKE '%_pkey'</p>
 <br>
-<p>    ORDER BY idx_scan ASC;</p>
 <br>
-<p>    -- Find missing indexes</p>
 <br>
-<p>    SELECT</p>
 <br>
-<p>        relname AS table,</p>
 <br>
-<p>        seq_scan - idx_scan AS too_much_seq,</p>
+<p>Sequential Scan: [Row1] [Row2] [Row3] ... [Row1M] = 1,000,000 reads</p>
 <br>
-<p>        seq_scan,</p>
 <br>
-<p>        idx_scan</p>
 <br>
-<p>    FROM pg_stat_user_tables</p>
 <br>
-<p>    WHERE seq_scan > idx_scan</p>
 <br>
-<p>      AND seq_scan > 1000</p>
 <br>
-<p>    ORDER BY seq_scan DESC;</p>
 <br>
-<p>Index Maintenance   </p>
 <br>
-<p>    -- Rebuild indexes to reclaim space (PostgreSQL)</p>
 <br>
-<p>    REINDEX INDEX idx_users_email;</p>
 <br>
-<p>    REINDEX TABLE users;</p>
+<p>B-Tree Index: [Root] -> [Branch] -> [Leaf] -> [Row] = 3-4 reads</p>
 <br>
-<p>    -- Update statistics for query planner</p>
 <br>
-<p>    ANALYZE users;</p>
 <br>
-<p>    -- Check index size</p>
 <br>
-<p>    SELECT</p>
 <br>
-<p>        pg_size_pretty(pg_indexes_size('users')) AS total_index_size,</p>
 <br>
-<p>        pg_size_pretty(pg_total_relation_size('users')) AS total_size;</p>
 <br>
-<p>Common Anti-Patterns   </p>
-<p>| Anti-Pattern | Why It Hurts | |--------------|--------------| | Indexing every column | Writes become slow, storage bloats | | Forgetting composite indexes | Query uses multiple single-column indexes inefficiently | | Indexing boolean columns | Very low cardinality, rarely useful | | Not indexing foreign keys | JOIN queries perform sequential scans | | Over-indexing small tables | Tables under 1000 rows are faster to scan sequentially |   </p>
-<p>Summary   </p>
+<br>
+<br>
+<br>
+<p>Index Types </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>B-Tree Index </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The default and most common index type. Works well for equality and range queries. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE INDEX idx_users_email ON users(email);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE INDEX idx_users_created ON users(created_at);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Used for:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT * FROM users WHERE email = 'alice@example.com';</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT * FROM users WHERE created_at > '2026-01-01';</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT * FROM users WHERE email LIKE 'alice%';</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Hash Index </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Optimized for equality comparisons. Not suitable for range queries or sorting. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE INDEX idx_sessions_token ON sessions USING HASH(session_token);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Good for:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT * FROM sessions WHERE session_token = 'abc123';</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>GiST Index </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Generalized Search Tree, useful for full-text search and geometric data. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE INDEX idx_posts_content ON posts USING GIST(to_tsvector('english', content));</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Used for:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT * FROM posts</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>WHERE to_tsvector('english', content) @@ to_tsquery('database & indexing');</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>GIN Index </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Generalized Inverted Index, optimized for composite types and arrays. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE INDEX idx_article_tags ON articles USING GIN(tags);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Used for:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT * FROM articles WHERE tags @> ARRAY['postgresql'];</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT * FROM articles WHERE tags && ARRAY['database', 'sql'];</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>BRIN Index </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Block Range INdex, efficient for very large tables with naturally ordered data. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE INDEX idx_logs_created ON logs USING BRIN(created_at)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>WITH (pages_per_range = 32);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Best for:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Time-series data where rows are inserted in order</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Composite Indexes </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Indexes on multiple columns. Column order matters significantly. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Composite index</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE INDEX idx_users_status_created</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ON users(status, created_at);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- This index can serve:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- 1. WHERE status = 'active'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- 2. WHERE status = 'active' AND created_at > '2026-01-01'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- 3. WHERE status IN ('active', 'pending') ORDER BY created_at</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- But NOT:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- WHERE created_at > '2026-01-01' (status is leading column)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Column Order Rules </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>| Rule | Example | |------|---------| | Equality conditions first | `WHERE status = 'active' AND created_at > '2026-01-01'` -> index on `(status, created_at)` | | High cardinality columns first for range | `WHERE type = 'user' AND email LIKE 'a%'` -> index on `(type, email)` | | Most selective column first | `WHERE country = 'US' AND status = 'active'` — US is 10% of data, active is 90% -> index on `(country, status)` | </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Index Scan Types </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>| Scan Type | When Used | Performance | |-----------|-----------|-------------| | Sequential Scan | No index, or query returns large percentage of table | Full table read | | Index Scan | Index lookup + heap access | Fast for selective queries | | Index Only Scan | All needed columns are in the index | Fastest, no heap access | | Bitmap Scan | Combines multiple indexes, returns moderate row count | Good for multi-condition queries | </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Monitoring Index Usage </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- PostgreSQL: Find unused indexes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>schemaname || '.' || relname AS table,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>indexrelname AS index,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>idx_scan AS index_scans</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>FROM pg_stat_user_indexes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>WHERE idx_scan < 100</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>AND indexrelname NOT LIKE '%_pkey'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ORDER BY idx_scan ASC;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Find missing indexes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>relname AS table,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>seq_scan - idx_scan AS too_much_seq,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>seq_scan,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>idx_scan</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>FROM pg_stat_user_tables</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>WHERE seq_scan > idx_scan</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>AND seq_scan > 1000</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ORDER BY seq_scan DESC;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Index Maintenance </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Rebuild indexes to reclaim space (PostgreSQL)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>REINDEX INDEX idx_users_email;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>REINDEX TABLE users;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Update statistics for query planner</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ANALYZE users;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Check index size</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pg_size_pretty(pg_indexes_size('users')) AS total_index_size,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pg_size_pretty(pg_total_relation_size('users')) AS total_size;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Common Anti-Patterns </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>| Anti-Pattern | Why It Hurts | |--------------|--------------| | Indexing every column | Writes become slow, storage bloats | | Forgetting composite indexes | Query uses multiple single-column indexes inefficiently | | Indexing boolean columns | Very low cardinality, rarely useful | | Not indexing foreign keys | JOIN queries perform sequential scans | | Over-indexing small tables | Tables under 1000 rows are faster to scan sequentially | </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Summary </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Indexes are the most impactful performance optimization for database queries. Use B-tree indexes as the default for most workloads, composite indexes with carefully ordered columns for multi-condition queries, and specialized types (GIN, GiST, BRIN) for specific use cases. Monitor index usage and remove unused indexes to keep write performance optimal. Always run queries through EXPLAIN ANALYZE to verify the planner is using your indexes effectively.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -248,6 +1012,7 @@
       <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

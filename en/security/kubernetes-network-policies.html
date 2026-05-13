@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-network-policies.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1752",
+      "wordCount": "3886",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/kubernetes-network-policies.html"},
-      "articleBody": "Kubernetes Network Policies Introduction Kubernetes by default allows all pod-to-pod communication \u2014 a flat network model that is convenient but insecure. Network policies provide pod-level firewalling, enabling micro-segmentation and zero-trust networking within the cluster. Understanding Network Policies A NetworkPolicy is a Kubernetes resource that specifies how groups of pods communicate with each other and with external endpoints. Policies are selector-based, namespace-scoped, and implemented by a Container Network Interface (CNI) plugin. apiVersion: networking.k8s.io/v1 kind: NetworkPolicy metadata: name: api-policy namespace: production spec: podSelector: matchLabels: app: api-server policyTypes: - Ingress - Egress ingress: - from: - namespaceSelector: matchLabels: name: ingress-nginx - podSelector: matchLabels: app: api-gateway ports: - protocol: TCP port: 8080 egress: - to: - podSelector: matchLabels: app: database ports: - protocol: TCP port: 5432 - to: - ipBlock: cidr: 0.0.0.0/0 except: - 10.0.0.0/8 - 172.16.0.0/12 - 192.168.0.0/16 ports: - protocol: TCP port: 443 Default Deny Policies Start with default deny policies and explicitly allow required traffic. This enforces least-privilege networking. --- # Default deny all ingress apiVersion: networking.k8s.io/v1 kind: NetworkPolicy metadata: name: default-deny-ingress spec: podSelector: {} policyTypes: - Ingress --- # Default deny all egress apiVersion: networking.k8s.io/v1 kind: NetworkPolicy metadata: name: default-deny-egress spec: podSelector: {} policyTypes: - Egress Cilium: eBPF-Based Networking Cilium leverages eBPF to provide network policies with identity-based security, HTTP-aware rules, and cluster mesh capabilities. # CiliumNetworkPolicy with HTTP-aware filtering apiVersion: cilium.io/v2 kind: CiliumNetworkPolicy metadata: name: api-http-policy spec: endpointSelector: matchLabels: app: api-server ingress: - fromEndpoints: - matchLabels: app: frontend toPorts: - ports: - port: \"8080\" protocol: TCP rules: http: - method: \"GET\" path: \"/api/v1/public/.*\" - method: \"POST\" path: \"/api/v1/orders\" headers: - \"X-API-Version: 2\" # DNS-aware egress policy with Cilium apiVersion: cilium.io/v2 kind: CiliumNetworkPolicy metadata: name: dns-egress spec: endpointSelector: matchLabels: app: api-server egress: - toEndpoints: - matchLabels: io.kubernetes.pod.namespace: kube-system k8s-app: kube-dns toPorts: - ports: - port: \"53\" protocol: UDP rules: dns: - matchPattern: \"*\" Calico: Policy-First Networking Calico provides a rich policy model with both Kubernetes-native and extended policy resources. # Calico network policy with advanced features apiVersion: projectcalico.org/v3 kind: NetworkPolicy metadata: name: payment-service namespace: production spec: selector: app == 'payment-service' ingress: - action: Allow protocol: TCP source: selector: app == 'order-service' namespaceSelector: project == 'production' destination: ports: - 8443 - action: Allow source: serviceAccounts: - name: payment-processor egress: - action: Allow protocol: TLS destination: domains: - \"*.payment-gateway.com\" ports: - 443 # Calico policy enforcement and troubleshooting calicoctl get networkpolicy -n production calicoctl get workloadendpoint -n production calicoctl get profiles # Test connectivity calicoctl policy test --pod production/payment-pod-xyz \\ --to-pod production/database-pod-abc --port 5432 Zero-Trust for Pods Zero-trust networking assumes no pod is inherently trusted. Every connection must be authenticated and authorized. # Zero-trust: identity-aware policy with SPIFFE apiVersion: spiffe.io/v1beta1 kind: SPIREIdentity metadata: name: api-server spec: selector: matchLabels: app: api-server dnsNames: - api-server.production.svc.cluster.local --- apiVersion: networking.k8s.io/v1 kind: NetworkPolicy metadata: name: zero-trust-api spec: podSelector: matchLabels: app: api-server ingress: - from: - podSelector: matchLabels: spiffe-id: \"spiffe://cluster.local/ns/production/sa/api-gateway\" ports: - protocol: TCP port: 8443 Policy Testing and Validation # Test network policies before deployment netcheck \\ --kubeconfig ~/.kube/config \\ --namespace production \\ --test-policy policy.yaml \\ --output detailed # Monitor policy decisions cilium monitor -v --type drop | grep policy # Policy audit mode (log without enforcing) kubectl annotate ns production \"projectcalico.org/policy-audit-mode=enabled\" Conclusion Kubernetes network policies are essential for cluster security. Start with default-deny, use namespace isolation, leverage CNI-specific features like HTTP-aware filtering with Cilium or service-account policies with Calico, and adopt zero-trust principles where every connection is explicitly authorized. Always test policies in audit mode before enforcement."
+      "articleBody": "Kubernetes Network Policies Kubernetes Network Policies Kubernetes Network Policies Kubernetes Network Policies Kubernetes Network Policies Introduction Kubernetes by default allows all pod-to-pod communication \u2014 a flat network model that is convenient but insecure. Network policies provide pod-level firewalling, enabling micro-segmentation and zero-trust networking within the cluster. Understanding Network Policies A NetworkPolicy is a Kubernetes resource that specifies how groups of pods communicate with each other and with external endpoints. Policies are selector-based, namespace-scoped, and implemented by a Container Network Interface (CNI) plugin. apiVersion: networking.k8s.io/v1 kind: NetworkPolicy metadata: name: api-policy namespace: production spec: podSelector: matchLabels: app: api-server policyTypes: \\\\\\\\\\\\\\\\- Ingress \\\\\\\\\\\\\\\\- Egress ingress: \\\\\\\\\\\\\\\\- from: \\\\\\\\\\\\\\\\- namespaceSelector: matchLabels: name: ingress-nginx \\\\\\\\\\\\\\\\- podSelector: matchLabels: app: api-gateway ports: \\\\\\\\\\\\\\\\- protocol: TCP port: 8080 egress: \\\\\\\\\\\\\\\\- to: \\\\\\\\\\\\\\\\- podSelector: matchLabels: app: database ports: \\\\\\\\\\\\\\\\- protocol: TCP port: 5432 \\\\\\\\\\\\\\\\- to: \\\\\\\\\\\\\\\\- ipBlock: cidr: 0.0.0.0/0 except: \\\\\\\\\\\\\\\\- 10.0.0.0/8 \\\\\\\\\\\\\\\\- 172.16.0.0/12 \\\\\\\\\\\\\\\\- 192.168.0.0/16 ports: \\\\\\\\\\\\\\\\- protocol: TCP port: 443 Default Deny Policies Start with default deny policies and explicitly allow required traffic. This enforces least-privilege networking. \\\\\\\\\\\\\\\\--- Default deny all ingress apiVersion: networking.k8s.io/v1 kind: NetworkPolicy metadata: name: default-deny-ingress spec: podSelector: {} policyTypes: \\\\\\\\\\\\\\\\- Ingress \\\\\\\\\\\\\\\\--- Default deny all egress apiVersion: networking.k8s.io/v1 kind: NetworkPolicy metadata: name: default-deny-egress spec: podSelector: {} policyTypes: \\\\\\\\\\\\\\\\- Egress Cilium: eBPF-Based Networking Cilium leverages eBPF to provide network policies with identity-based security, HTTP-aware rules, and cluster mesh capabilities. CiliumNetworkPolicy with HTTP-aware filtering apiVersion: cilium.io/v2 kind: CiliumNetworkPolicy metadata: name: api-http-policy spec: endpointSelector: matchLabels: app: api-server ingress: \\\\\\\\\\\\\\\\- fromEndpoints: \\\\\\\\\\\\\\\\- matchLabels: app: frontend toPorts: \\\\\\\\\\\\\\\\- ports: \\\\\\\\\\\\\\\\- port: \"8080\" protocol: TCP rules: http: \\\\\\\\\\\\\\\\- method: \"GET\" path: \"/api/v1/public/.*\" \\\\\\\\\\\\\\\\- method: \"POST\" path: \"/api/v1/orders\" headers: \\\\\\\\\\\\\\\\- \"X-API-Version: 2\" DNS-aware egress policy with Cilium apiVersion: cilium.io/v2 kind: CiliumNetworkPolicy metadata: name: dns-egress spec: endpointSelector: matchLabels: app: api-server egress: \\\\\\\\\\\\\\\\- toEndpoints: \\\\\\\\\\\\\\\\- matchLabels: io.kubernetes.pod.namespace: kube-system k8s-app: kube-dns toPorts: \\\\\\\\\\\\\\\\- ports: \\\\\\\\\\\\\\\\- port: \"53\" protocol: UDP rules: dns: \\\\\\\\\\\\\\\\- matchPattern: \"*\" Calico: Policy-First Networking Calico provides a rich policy model with both Kubernetes-native and extended policy resources. Calico network policy with advanced features apiVersion: projectcalico.org/v3 kind: NetworkPolicy metadata: name: payment-service namespace: production spec: selector: app == 'payment-service' ingress: \\\\\\\\\\\\\\\\- action: Allow protocol: TCP source: selector: app == 'order-service' namespaceSelector: project == 'production' destination: ports: \\\\\\\\\\\\\\\\- 8443 \\\\\\\\\\\\\\\\- action: Allow source: serviceAccounts: \\\\\\\\\\\\\\\\- name: payment-processor egress: \\\\\\\\\\\\\\\\- action: Allow protocol: TLS destination: domains: \\\\\\\\\\\\\\\\- \"*.payment-gateway.com\" ports: \\\\\\\\\\\\\\\\- 443 Calico policy enforcement and troubleshooting calicoctl get networkpolicy -n production calicoctl get workloadendpoint -n production calicoctl get profiles Test connectivity calicoctl policy test --pod production/payment-pod-xyz \\ \\\\\\\\\\\\\\\\--to-pod production/database-pod-abc --port 5432 Zero-Trust for Pods Zero-trust networking assumes no pod is inherently trusted. Every connection must be authenticated and authorized. Zero-trust: identity-aware policy with SPIFFE apiVersion: spiffe.io/v1beta1 kind: SPIREIdentity metadata: name: api-server spec: selector: matchLabels: app: api-server dnsNames: \\\\\\\\\\\\\\\\- api-server.production.svc.cluster.local \\\\\\\\\\\\\\\\--- apiVersion: networking.k8s.io/v1 kind: NetworkPolicy metadata: name: zero-trust-api spec: podSelector: matchLabels: app: api-server ingress: \\\\\\\\\\\\\\\\- from: \\\\\\\\\\\\\\\\- podSelector: matchLabels: spiffe-id: \"spiffe://cluster.local/ns/production/sa/api-gateway\" ports: \\\\\\\\\\\\\\\\- protocol: TCP port: 8443 Policy Testing and Validation Test network policies before deployment netcheck \\ \\\\\\\\\\\\\\\\--kubeconfig ~/.kube/config \\ \\\\\\\\\\\\\\\\--namespace production \\ \\\\\\\\\\\\\\\\--test-policy policy.yaml \\ \\\\\\\\\\\\\\\\--output detailed Monitor policy decisions cilium monitor -v --type drop | grep policy Policy audit mode (log without enforcing) kubectl annotate ns production \"projectcalico.org/policy-audit-mode=enabled\" Conclusion Kubernetes network policies are essential for cluster security. Start with default-deny, use namespace isolation, leverage CNI-specific features like HTTP-aware filtering with Cilium or service-account policies with Calico, and adopt zero-trust principles where every connection is explicitly authorized. Always test policies in audit mode before enforcement."
     }
     </script>
     <script type="application/ld+json">
@@ -74,392 +74,2754 @@
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Kubernetes Network Policies</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · 120 views · 1 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-network-policies.png" alt="Kubernetes Network Policies" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Kubernetes Network Policies</h1>
 <br>
-<p>Introduction   </p>
-<p>Kubernetes by default allows all pod-to-pod communication — a flat network model that is convenient but insecure. Network policies provide pod-level firewalling, enabling micro-segmentation and zero-trust networking within the cluster.   </p>
-<p>Understanding Network Policies   </p>
-<p>A NetworkPolicy is a Kubernetes resource that specifies how groups of pods communicate with each other and with external endpoints. Policies are selector-based, namespace-scoped, and implemented by a Container Network Interface (CNI) plugin.   </p>
+<h1>Kubernetes Network Policies</h1>
 <br>
-<p>    apiVersion: networking.k8s.io/v1</p>
 <br>
-<p>    kind: NetworkPolicy</p>
 <br>
-<p>    metadata:</p>
 <br>
-<p>      name: api-policy</p>
+<h1>Kubernetes Network Policies</h1>
 <br>
-<p>      namespace: production</p>
 <br>
-<p>    spec:</p>
 <br>
-<p>      podSelector:</p>
 <br>
-<p>        matchLabels:</p>
 <br>
-<p>          app: api-server</p>
 <br>
-<p>      policyTypes:</p>
 <br>
-<p>        - Ingress</p>
+<h1>Kubernetes Network Policies</h1>
 <br>
-<p>        - Egress</p>
 <br>
-<p>      ingress:</p>
 <br>
-<p>        - from:</p>
 <br>
-<p>            - namespaceSelector:</p>
 <br>
-<p>                matchLabels:</p>
 <br>
-<p>                  name: ingress-nginx</p>
 <br>
-<p>            - podSelector:</p>
 <br>
-<p>                matchLabels:</p>
 <br>
-<p>                  app: api-gateway</p>
 <br>
-<p>          ports:</p>
+<h1>Kubernetes Network Policies</h1>
 <br>
-<p>            - protocol: TCP</p>
 <br>
-<p>              port: 8080</p>
 <br>
-<p>      egress:</p>
 <br>
-<p>        - to:</p>
 <br>
-<p>            - podSelector:</p>
 <br>
-<p>                matchLabels:</p>
 <br>
-<p>                  app: database</p>
 <br>
-<p>          ports:</p>
 <br>
-<p>            - protocol: TCP</p>
 <br>
-<p>              port: 5432</p>
 <br>
-<p>        - to:</p>
 <br>
-<p>            - ipBlock:</p>
 <br>
-<p>                cidr: 0.0.0.0/0</p>
+<p>Introduction </p>
 <br>
-<p>                except:</p>
 <br>
-<p>                  - 10.0.0.0/8</p>
 <br>
-<p>                  - 172.16.0.0/12</p>
 <br>
-<p>                  - 192.168.0.0/16</p>
 <br>
-<p>          ports:</p>
 <br>
-<p>            - protocol: TCP</p>
 <br>
-<p>              port: 443</p>
 <br>
-<p>Default Deny Policies   </p>
-<p>Start with default deny policies and explicitly allow required traffic. This enforces least-privilege networking.   </p>
 <br>
-<p>    ---</p>
 <br>
-<p>    # Default deny all ingress</p>
+<p>Kubernetes by default allows all pod-to-pod communication — a flat network model that is convenient but insecure. Network policies provide pod-level firewalling, enabling micro-segmentation and zero-trust networking within the cluster. </p>
 <br>
-<p>    apiVersion: networking.k8s.io/v1</p>
 <br>
-<p>    kind: NetworkPolicy</p>
 <br>
-<p>    metadata:</p>
 <br>
-<p>      name: default-deny-ingress</p>
 <br>
-<p>    spec:</p>
 <br>
-<p>      podSelector: {}</p>
 <br>
-<p>      policyTypes:</p>
 <br>
-<p>        - Ingress</p>
 <br>
-<p>    ---</p>
 <br>
-<p>    # Default deny all egress</p>
+<p>Understanding Network Policies </p>
 <br>
-<p>    apiVersion: networking.k8s.io/v1</p>
 <br>
-<p>    kind: NetworkPolicy</p>
 <br>
-<p>    metadata:</p>
 <br>
-<p>      name: default-deny-egress</p>
 <br>
-<p>    spec:</p>
 <br>
-<p>      podSelector: {}</p>
 <br>
-<p>      policyTypes:</p>
 <br>
-<p>        - Egress</p>
 <br>
-<p>Cilium: eBPF-Based Networking   </p>
-<p>Cilium leverages eBPF to provide network policies with identity-based security, HTTP-aware rules, and cluster mesh capabilities.   </p>
 <br>
-<p>    # CiliumNetworkPolicy with HTTP-aware filtering</p>
+<p>A NetworkPolicy is a Kubernetes resource that specifies how groups of pods communicate with each other and with external endpoints. Policies are selector-based, namespace-scoped, and implemented by a Container Network Interface (CNI) plugin. </p>
 <br>
-<p>    apiVersion: cilium.io/v2</p>
 <br>
-<p>    kind: CiliumNetworkPolicy</p>
 <br>
-<p>    metadata:</p>
 <br>
-<p>      name: api-http-policy</p>
 <br>
-<p>    spec:</p>
 <br>
-<p>      endpointSelector:</p>
 <br>
-<p>        matchLabels:</p>
 <br>
-<p>          app: api-server</p>
 <br>
-<p>      ingress:</p>
 <br>
-<p>        - fromEndpoints:</p>
 <br>
-<p>            - matchLabels:</p>
 <br>
-<p>                app: frontend</p>
 <br>
-<p>          toPorts:</p>
+<p>apiVersion: networking.k8s.io/v1</p>
 <br>
-<p>            - ports:</p>
 <br>
-<p>                - port: "8080"</p>
 <br>
-<p>                  protocol: TCP</p>
 <br>
-<p>              rules:</p>
 <br>
-<p>                http:</p>
 <br>
-<p>                  - method: "GET"</p>
 <br>
-<p>                    path: "/api/v1/public/.*"</p>
 <br>
-<p>                  - method: "POST"</p>
 <br>
-<p>                    path: "/api/v1/orders"</p>
 <br>
-<p>                    headers:</p>
 <br>
-<p>                      - "X-API-Version: 2"</p>
 <br>
-<p>    # DNS-aware egress policy with Cilium</p>
 <br>
-<p>    apiVersion: cilium.io/v2</p>
+<p>kind: NetworkPolicy</p>
 <br>
-<p>    kind: CiliumNetworkPolicy</p>
 <br>
-<p>    metadata:</p>
 <br>
-<p>      name: dns-egress</p>
 <br>
-<p>    spec:</p>
 <br>
-<p>      endpointSelector:</p>
 <br>
-<p>        matchLabels:</p>
 <br>
-<p>          app: api-server</p>
 <br>
-<p>      egress:</p>
 <br>
-<p>        - toEndpoints:</p>
 <br>
-<p>            - matchLabels:</p>
 <br>
-<p>                io.kubernetes.pod.namespace: kube-system</p>
 <br>
-<p>                k8s-app: kube-dns</p>
 <br>
-<p>          toPorts:</p>
+<p>metadata:</p>
 <br>
-<p>            - ports:</p>
 <br>
-<p>                - port: "53"</p>
 <br>
-<p>                  protocol: UDP</p>
 <br>
-<p>              rules:</p>
 <br>
-<p>                dns:</p>
 <br>
-<p>                  - matchPattern: "*"</p>
 <br>
-<p>Calico: Policy-First Networking   </p>
-<p>Calico provides a rich policy model with both Kubernetes-native and extended policy resources.   </p>
 <br>
-<p>    # Calico network policy with advanced features</p>
 <br>
-<p>    apiVersion: projectcalico.org/v3</p>
 <br>
-<p>    kind: NetworkPolicy</p>
 <br>
-<p>    metadata:</p>
 <br>
-<p>      name: payment-service</p>
 <br>
-<p>      namespace: production</p>
+<p>name: api-policy</p>
 <br>
-<p>    spec:</p>
 <br>
-<p>      selector: app == 'payment-service'</p>
 <br>
-<p>      ingress:</p>
 <br>
-<p>        - action: Allow</p>
 <br>
-<p>          protocol: TCP</p>
 <br>
-<p>          source:</p>
 <br>
-<p>            selector: app == 'order-service'</p>
 <br>
-<p>            namespaceSelector: project == 'production'</p>
 <br>
-<p>          destination:</p>
 <br>
-<p>            ports:</p>
 <br>
-<p>              - 8443</p>
 <br>
-<p>        - action: Allow</p>
 <br>
-<p>          source:</p>
+<p>namespace: production</p>
 <br>
-<p>            serviceAccounts:</p>
 <br>
-<p>              - name: payment-processor</p>
 <br>
-<p>      egress:</p>
 <br>
-<p>        - action: Allow</p>
 <br>
-<p>          protocol: TLS</p>
 <br>
-<p>          destination:</p>
 <br>
-<p>            domains:</p>
 <br>
-<p>              - "*.payment-gateway.com"</p>
 <br>
-<p>            ports:</p>
 <br>
-<p>              - 443</p>
 <br>
-<p>    # Calico policy enforcement and troubleshooting</p>
 <br>
-<p>    calicoctl get networkpolicy -n production</p>
 <br>
-<p>    calicoctl get workloadendpoint -n production</p>
+<p>spec:</p>
 <br>
-<p>    calicoctl get profiles</p>
 <br>
-<p>    # Test connectivity</p>
 <br>
-<p>    calicoctl policy test --pod production/payment-pod-xyz \</p>
 <br>
-<p>        --to-pod production/database-pod-abc --port 5432</p>
 <br>
-<p>Zero-Trust for Pods   </p>
-<p>Zero-trust networking assumes no pod is inherently trusted. Every connection must be authenticated and authorized.   </p>
 <br>
-<p>    # Zero-trust: identity-aware policy with SPIFFE</p>
 <br>
-<p>    apiVersion: spiffe.io/v1beta1</p>
 <br>
-<p>    kind: SPIREIdentity</p>
 <br>
-<p>    metadata:</p>
 <br>
-<p>      name: api-server</p>
 <br>
-<p>    spec:</p>
 <br>
-<p>      selector:</p>
 <br>
-<p>        matchLabels:</p>
+<p>podSelector:</p>
 <br>
-<p>          app: api-server</p>
 <br>
-<p>      dnsNames:</p>
 <br>
-<p>        - api-server.production.svc.cluster.local</p>
 <br>
-<p>    ---</p>
 <br>
-<p>    apiVersion: networking.k8s.io/v1</p>
 <br>
-<p>    kind: NetworkPolicy</p>
 <br>
-<p>    metadata:</p>
 <br>
-<p>      name: zero-trust-api</p>
 <br>
-<p>    spec:</p>
 <br>
-<p>      podSelector:</p>
 <br>
-<p>        matchLabels:</p>
 <br>
-<p>          app: api-server</p>
 <br>
-<p>      ingress:</p>
+<p>matchLabels:</p>
 <br>
-<p>        - from:</p>
 <br>
-<p>            - podSelector:</p>
 <br>
-<p>                matchLabels:</p>
 <br>
-<p>                  spiffe-id: "spiffe://cluster.local/ns/production/sa/api-gateway"</p>
 <br>
-<p>          ports:</p>
 <br>
-<p>            - protocol: TCP</p>
 <br>
-<p>              port: 8443</p>
 <br>
-<p>Policy Testing and Validation   </p>
 <br>
-<p>    # Test network policies before deployment</p>
 <br>
-<p>    netcheck \</p>
 <br>
-<p>        --kubeconfig ~/.kube/config \</p>
 <br>
-<p>        --namespace production \</p>
 <br>
-<p>        --test-policy policy.yaml \</p>
+<p>app: api-server</p>
 <br>
-<p>        --output detailed</p>
 <br>
-<p>    # Monitor policy decisions</p>
 <br>
-<p>    cilium monitor -v --type drop | grep policy</p>
 <br>
-<p>    # Policy audit mode (log without enforcing)</p>
 <br>
-<p>    kubectl annotate ns production "projectcalico.org/policy-audit-mode=enabled"</p>
 <br>
-<p>Conclusion   </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>policyTypes:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- Ingress</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- Egress</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ingress:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- from:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- namespaceSelector:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>matchLabels:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: ingress-nginx</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- podSelector:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>matchLabels:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>app: api-gateway</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ports:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- protocol: TCP</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>port: 8080</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>egress:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- to:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- podSelector:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>matchLabels:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>app: database</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ports:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- protocol: TCP</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>port: 5432</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- to:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- ipBlock:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cidr: 0.0.0.0/0</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- 10.0.0.0/8</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- 172.16.0.0/12</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- 192.168.0.0/16</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ports:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- protocol: TCP</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>port: 443</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Default Deny Policies </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Start with default deny policies and explicitly allow required traffic. This enforces least-privilege networking. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\---</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Default deny all ingress</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>apiVersion: networking.k8s.io/v1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kind: NetworkPolicy</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>metadata:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: default-deny-ingress</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>podSelector: {}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>policyTypes:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- Ingress</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\---</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Default deny all egress</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>apiVersion: networking.k8s.io/v1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kind: NetworkPolicy</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>metadata:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: default-deny-egress</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>podSelector: {}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>policyTypes:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- Egress</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Cilium: eBPF-Based Networking </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Cilium leverages eBPF to provide network policies with identity-based security, HTTP-aware rules, and cluster mesh capabilities. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>CiliumNetworkPolicy with HTTP-aware filtering</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>apiVersion: cilium.io/v2</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kind: CiliumNetworkPolicy</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>metadata:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: api-http-policy</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>endpointSelector:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>matchLabels:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>app: api-server</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ingress:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- fromEndpoints:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- matchLabels:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>app: frontend</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>toPorts:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- ports:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- port: "8080"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>protocol: TCP</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>rules:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>http:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- method: "GET"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>path: "/api/v1/public/.*"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- method: "POST"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>path: "/api/v1/orders"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>headers:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- "X-API-Version: 2"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>DNS-aware egress policy with Cilium</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>apiVersion: cilium.io/v2</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kind: CiliumNetworkPolicy</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>metadata:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: dns-egress</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>endpointSelector:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>matchLabels:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>app: api-server</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>egress:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- toEndpoints:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- matchLabels:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>io.kubernetes.pod.namespace: kube-system</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>k8s-app: kube-dns</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>toPorts:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- ports:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- port: "53"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>protocol: UDP</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>rules:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>dns:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- matchPattern: "*"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Calico: Policy-First Networking </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Calico provides a rich policy model with both Kubernetes-native and extended policy resources. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Calico network policy with advanced features</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>apiVersion: projectcalico.org/v3</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kind: NetworkPolicy</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>metadata:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: payment-service</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>namespace: production</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>selector: app == 'payment-service'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ingress:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- action: Allow</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>protocol: TCP</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>source:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>selector: app == 'order-service'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>namespaceSelector: project == 'production'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>destination:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ports:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- 8443</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- action: Allow</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>source:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>serviceAccounts:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: payment-processor</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>egress:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- action: Allow</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>protocol: TLS</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>destination:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>domains:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- "*.payment-gateway.com"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ports:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- 443</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Calico policy enforcement and troubleshooting</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>calicoctl get networkpolicy -n production</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>calicoctl get workloadendpoint -n production</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>calicoctl get profiles</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Test connectivity</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>calicoctl policy test --pod production/payment-pod-xyz \</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\--to-pod production/database-pod-abc --port 5432</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Zero-Trust for Pods </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Zero-trust networking assumes no pod is inherently trusted. Every connection must be authenticated and authorized. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Zero-trust: identity-aware policy with SPIFFE</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>apiVersion: spiffe.io/v1beta1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kind: SPIREIdentity</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>metadata:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: api-server</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>selector:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>matchLabels:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>app: api-server</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>dnsNames:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- api-server.production.svc.cluster.local</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\---</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>apiVersion: networking.k8s.io/v1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kind: NetworkPolicy</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>metadata:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: zero-trust-api</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spec:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>podSelector:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>matchLabels:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>app: api-server</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ingress:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- from:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- podSelector:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>matchLabels:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>spiffe-id: "spiffe://cluster.local/ns/production/sa/api-gateway"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ports:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- protocol: TCP</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>port: 8443</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Policy Testing and Validation </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Test network policies before deployment</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>netcheck \</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\--kubeconfig ~/.kube/config \</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\--namespace production \</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\--test-policy policy.yaml \</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\--output detailed</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Monitor policy decisions</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cilium monitor -v --type drop | grep policy</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Policy audit mode (log without enforcing)</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kubectl annotate ns production "projectcalico.org/policy-audit-mode=enabled"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Kubernetes network policies are essential for cluster security. Start with default-deny, use namespace isolation, leverage CNI-specific features like HTTP-aware filtering with Cilium or service-account policies with Calico, and adopt zero-trust principles where every connection is explicitly authorized. Always test policies in audit mode before enforcement.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -476,6 +2838,7 @@
       <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

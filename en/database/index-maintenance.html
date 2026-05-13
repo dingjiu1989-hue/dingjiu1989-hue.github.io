@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/index-maintenance.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1626",
+      "wordCount": "2696",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/index-maintenance.html"},
-      "articleBody": "Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning Indexes degrade over time. PostgreSQL's MVCC architecture creates dead index entries that waste space and slow down scans. Regular maintenance keeps indexes healthy and query performance predictable. Index Bloat Index bloat occurs when dead tuples leave empty space in index pages. Unlike tables, PostgreSQL does not automatically reuse index page space aggressively. Measuring Bloat -- Quick bloat estimation using pg_stat_user_indexes SELECT indexrelname AS index_name, relname AS table_name, idx_scan, idx_tup_read, idx_tup_fetch, pg_size_pretty(pg_relation_size(indexrelid)) AS index_size FROM pg_stat_user_indexes WHERE schemaname = 'public' ORDER BY pg_relation_size(indexrelid) DESC; For detailed bloat estimation, the `pgstattuple` extension provides accurate measurements: CREATE EXTENSION IF NOT EXISTS pgstattuple; SELECT * FROM pgstatindex('idx_orders_user_id'); -- version, tree_level, index_size, root_block_no, internal_pages, leaf_pages, -- empty_pages, deleted_pages, avg_leaf_density, leaf_fragmentation Key metrics: * `avg_leaf_density`: Below 50% indicates significant bloat. * `leaf_fragmentation`: High fragmentation slows sequential index scans. * `empty_pages + deleted_pages`: Pages that are allocated but useless. External Tools `pg_repack` rebuilds indexes without locks: # Rebuild all indexes on a table without blocking writes pg_repack -h localhost -d mydb --table orders -o idx_orders_user_id REINDEX `REINDEX` rebuilds an index from scratch, eliminating bloat and restoring optimal structure: -- Rebuild a single index REINDEX INDEX idx_orders_user_id; -- Rebuild all indexes on a table REINDEX TABLE orders; -- Rebuild all indexes in a schema REINDEX SCHEMA public; -- Rebuild all indexes in a database (offline) REINDEX DATABASE mydb; CONCURRENTLY `REINDEX` by default takes an `ACCESS EXCLUSIVE` lock, blocking reads and writes. The `CONCURRENTLY` option avoids this: REINDEX INDEX CONCURRENTLY idx_orders_user_id; Concurrent reindexing creates a new index, starts a new transaction, and drops the old index when complete. It uses more resources (CPU, I/O, temporary disk space) but does not block queries. -- For production systems, always use CONCURRENTLY -- But monitor for failure: REINDEX INDEX CONCURRENTLY idx_orders_user_id; -- If the process fails, an \"invalid\" index remains: SELECT indexrelid::regclass, indisvalid FROM pg_index WHERE indisvalid = false; -- Drop and retry the invalid index DROP INDEX IF EXISTS idx_orders_user_id_ccnew; Fillfactor Tuning Fillfactor controls how full each index page is when it is first built. The default is 90% for B-tree indexes (10% free space per page). -- Create index with 70% fillfactor (30% free space) CREATE INDEX idx_orders_user_id ON orders (user_id) WITH (fillfactor = 70); -- Alter existing index (only affects future page splits) ALTER INDEX idx_orders_user_id SET (fillfactor = 80); When to Adjust Fillfactor | Workload | Recommended Fillfactor | Reason | |----------|----------------------|--------| | Read-only, bulk-loaded | 100 | No updates expected | | Standard OLTP (default) | 90 | Balance reads and writes | | Write-heavy (updates) | 70-80 | Reduce page splits | | HOT updates via fillfactor | 50-60 | Maximize HOT update ratio | Heap-Only Tuples (HOT) optimization occurs when updated row versions fit in the same page. Lower fillfactor means more page space for HOT updates: -- Increase HOT update ratio with lower fillfactor CREATE TABLE frequently_updated ( id INTEGER PRIMARY KEY, status TEXT, counter INTEGER ) WITH (fillfactor = 70); Monitor HOT update ratio: SELECT relname, n_tup_upd, n_tup_hot_upd, ROUND(n_tup_hot_upd * 100.0 / NULLIF(n_tup_upd, 0), 2) AS hot_pct FROM pg_stat_user_tables WHERE n_tup_upd > 0 ORDER BY hot_pct; A low HOT ratio (below 50%) indicates many index-only updates that cause index bloat. Lowering fillfactor or adding INCLUDE columns to avoid index updates can help. Automated Maintenance Autovacuum Configuration Autovacuum manages both table and index cleanup: # postgresql.conf autovacuum = on autovacuum_naptime = 1min autovacuum_vacuum_scale_factor = 0.01 autovacuum_vacuum_threshold = 1000 autovacuum_vacuum_cost_limit = 1000 autovacuum_vacuum_cost_delay = 5ms For write-heavy tables, configure per-table autovacuum: ALTER TABLE orders SET ( autovacuum_vacuum_scale_factor = 0.005, autovacuum_vacuum_threshold = 1000, autovacuum_vacuum_cost_limit = 2000 ); Scheduled REINDEX For tables with regular bloat patterns, schedule REINDEX: -- Using pg_cron extension SELECT cron.schedule('reindex-orders', '0 3 * * 0', 'REINDEX INDEX CONCURRENTLY idx_orders_user_id' ); Monitoring Index Health -- Index size trends SELECT indexrelid::regclass, pg_size_pretty(pg_relation_size(indexrelid)) AS current_size, pg_size_pretty(pg_relation_size(indexrelid) - pg_indexes_size(indexrelid::regclass::text::regclass)) AS estimated_bloat FROM pg_stat_user_indexes; -- Top 10 largest indexes SELECT indexrelid::regclass, pg_size_pretty(sum(pg_relation_size(indexrelid))) AS total_size FROM pg_stat_user_indexes GROUP BY indexrelid ORDER BY sum(pg_relation_size(indexrelid)) DESC LIMIT 10; -- Index scan frequency vs bloat SELECT indexrelid::regclass, idx_scan, idx_tup_read, idx_tup_fetch, pg_size_pretty(pg_relation_size(indexrelid)) FROM pg_stat_user_indexes WHERE idx_scan = 0 ORDER BY pg_relation_size(indexrelid) DESC; Best Practices * **Set up bloat monitoring** with thresholds (e.g., alert when avg_leaf_density 2\\. **Use CONCURRENTLY** for all production REINDEX operations. 3\\. **Tune fillfactor** per table based on update frequency. 4\\. **Schedule index maintenance** during low-traffic periods using pg_cron. 5\\. **Drop unused indexes** identified by `pg_stat_user_indexes` with `idx_scan = 0`. 6\\. **Consider BRIN indexes** for append-only tables to avoid B-tree bloat entirely. Index maintenance is not a one-time activity. Build monitoring and automation into your database operations, and check index health as part of your regular performance review cycle."
+      "articleBody": "Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning Indexes degrade over time. PostgreSQL's MVCC architecture creates dead index entries that waste space and slow down scans. Regular maintenance keeps indexes healthy and query performance predictable. Index Bloat Index bloat occurs when dead tuples leave empty space in index pages. Unlike tables, PostgreSQL does not automatically reuse index page space aggressively. Measuring Bloat \\\\\\\\-- Quick bloat estimation using pg_stat_user_indexes SELECT indexrelname AS index_name, relname AS table_name, idx_scan, idx_tup_read, idx_tup_fetch, pg_size_pretty(pg_relation_size(indexrelid)) AS index_size FROM pg_stat_user_indexes WHERE schemaname = 'public' ORDER BY pg_relation_size(indexrelid) DESC; For detailed bloat estimation, the `pgstattuple` extension provides accurate measurements: CREATE EXTENSION IF NOT EXISTS pgstattuple; SELECT * FROM pgstatindex('idx_orders_user_id'); \\\\\\\\-- version, tree_level, index_size, root_block_no, internal_pages, leaf_pages, \\\\\\\\-- empty_pages, deleted_pages, avg_leaf_density, leaf_fragmentation Key metrics: * `avg_leaf_density`: Below 50% indicates significant bloat. * `leaf_fragmentation`: High fragmentation slows sequential index scans. * `empty_pages + deleted_pages`: Pages that are allocated but useless. External Tools `pg_repack` rebuilds indexes without locks: Rebuild all indexes on a table without blocking writes pg_repack -h localhost -d mydb --table orders -o idx_orders_user_id REINDEX `REINDEX` rebuilds an index from scratch, eliminating bloat and restoring optimal structure: \\\\\\\\-- Rebuild a single index REINDEX INDEX idx_orders_user_id; \\\\\\\\-- Rebuild all indexes on a table REINDEX TABLE orders; \\\\\\\\-- Rebuild all indexes in a schema REINDEX SCHEMA public; \\\\\\\\-- Rebuild all indexes in a database (offline) REINDEX DATABASE mydb; CONCURRENTLY `REINDEX` by default takes an `ACCESS EXCLUSIVE` lock, blocking reads and writes. The `CONCURRENTLY` option avoids this: REINDEX INDEX CONCURRENTLY idx_orders_user_id; Concurrent reindexing creates a new index, starts a new transaction, and drops the old index when complete. It uses more resources (CPU, I/O, temporary disk space) but does not block queries. \\\\\\\\-- For production systems, always use CONCURRENTLY \\\\\\\\-- But monitor for failure: REINDEX INDEX CONCURRENTLY idx_orders_user_id; \\\\\\\\-- If the process fails, an \"invalid\" index remains: SELECT indexrelid::regclass, indisvalid FROM pg_index WHERE indisvalid = false; \\\\\\\\-- Drop and retry the invalid index DROP INDEX IF EXISTS idx_orders_user_id_ccnew; Fillfactor Tuning Fillfactor controls how full each index page is when it is first built. The default is 90% for B-tree indexes (10% free space per page). \\\\\\\\-- Create index with 70% fillfactor (30% free space) CREATE INDEX idx_orders_user_id ON orders (user_id) WITH (fillfactor = 70); \\\\\\\\-- Alter existing index (only affects future page splits) ALTER INDEX idx_orders_user_id SET (fillfactor = 80); When to Adjust Fillfactor | Workload | Recommended Fillfactor | Reason | |----------|----------------------|--------| | Read-only, bulk-loaded | 100 | No updates expected | | Standard OLTP (default) | 90 | Balance reads and writes | | Write-heavy (updates) | 70-80 | Reduce page splits | | HOT updates via fillfactor | 50-60 | Maximize HOT update ratio | Heap-Only Tuples (HOT) optimization occurs when updated row versions fit in the same page. Lower fillfactor means more page space for HOT updates: \\\\\\\\-- Increase HOT update ratio with lower fillfactor CREATE TABLE frequently_updated ( id INTEGER PRIMARY KEY, status TEXT, counter INTEGER ) WITH (fillfactor = 70); Monitor HOT update ratio: SELECT relname, n_tup_upd, n_tup_hot_upd, ROUND(n_tup_hot_upd * 100.0 / NULLIF(n_tup_upd, 0), 2) AS hot_pct FROM pg_stat_user_tables WHERE n_tup_upd > 0 ORDER BY hot_pct; A low HOT ratio (below 50%) indicates many index-only updates that cause index bloat. Lowering fillfactor or adding INCLUDE columns to avoid index updates can help. Automated Maintenance Autovacuum Configuration Autovacuum manages both table and index cleanup: postgresql.conf autovacuum = on autovacuum_naptime = 1min autovacuum_vacuum_scale_factor = 0.01 autovacuum_vacuum_threshold = 1000 autovacuum_vacuum_cost_limit = 1000 autovacuum_vacuum_cost_delay = 5ms For write-heavy tables, configure per-table autovacuum: ALTER TABLE orders SET ( autovacuum_vacuum_scale_factor = 0.005, autovacuum_vacuum_threshold = 1000, autovacuum_vacuum_cost_limit = 2000 ); Scheduled REINDEX For tables with regular bloat patterns, schedule REINDEX: \\\\\\\\-- Using pg_cron extension SELECT cron.schedule('reindex-orders', '0 3 * * 0', 'REINDEX INDEX CONCURRENTLY idx_orders_user_id' ); Monitoring Index Health \\\\\\\\-- Index size trends SELECT indexrelid::regclass, pg_size_pretty(pg_relation_size(indexrelid)) AS current_size, pg_size_pretty(pg_relation_size(indexrelid) - pg_indexes_size(indexrelid::regclass::text::regclass)) AS estimated_bloat FROM pg_stat_user_indexes; \\\\\\\\-- Top 10 largest indexes SELECT indexrelid::regclass, pg_size_pretty(sum(pg_relation_size(indexrelid))) AS total_size FROM pg_stat_user_indexes GROUP BY indexrelid ORDER BY sum(pg_relation_size(indexrelid)) DESC LIMIT 10; \\\\\\\\-- Index scan frequency vs bloat SELECT indexrelid::regclass, idx_scan, idx_tup_read, idx_tup_fetch, pg_size_pretty(pg_relation_size(indexrelid)) FROM pg_stat_user_indexes WHERE idx_scan = 0 ORDER BY pg_relation_size(indexrelid) DESC; Best Practices * **Set up bloat monitoring** with thresholds (e.g., alert when avg_leaf_density 2\\\\\\\\\\\\\\\\. **Use CONCURRENTLY** for all production REINDEX operations. 3\\\\\\\\\\\\\\\\. **Tune fillfactor** per table based on update frequency. 4\\\\\\\\\\\\\\\\. **Schedule index maintenance** during low-traffic periods using pg_cron. 5\\\\\\\\\\\\\\\\. **Drop unused indexes** identified by `pg_stat_user_indexes` with `idx_scan = 0`. 6\\\\\\\\\\\\\\\\. **Consider BRIN indexes** for append-only tables to avoid B-tree bloat entirely. Index maintenance is not a one-time activity. Build monitoring and automation into your database operations, and check index health as part of your regular performance review cycle."
     }
     </script>
     <script type="application/ld+json">
@@ -78,238 +78,1351 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/index-maintenance.png" alt="Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h1>
 <br>
-<p>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning   </p>
-<p>Indexes degrade over time. PostgreSQL's MVCC architecture creates dead index entries that waste space and slow down scans. Regular maintenance keeps indexes healthy and query performance predictable.   </p>
-<p>Index Bloat   </p>
-<p>Index bloat occurs when dead tuples leave empty space in index pages. Unlike tables, PostgreSQL does not automatically reuse index page space aggressively.   </p>
-<p>Measuring Bloat   </p>
+<h1>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h1>
 <br>
-<p>    -- Quick bloat estimation using pg_stat_user_indexes</p>
 <br>
-<p>    SELECT</p>
 <br>
-<p>        indexrelname AS index_name,</p>
 <br>
-<p>        relname AS table_name,</p>
+<h1>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h1>
 <br>
-<p>        idx_scan,</p>
 <br>
-<p>        idx_tup_read,</p>
 <br>
-<p>        idx_tup_fetch,</p>
 <br>
-<p>        pg_size_pretty(pg_relation_size(indexrelid)) AS index_size</p>
 <br>
-<p>    FROM pg_stat_user_indexes</p>
 <br>
-<p>    WHERE schemaname = 'public'</p>
 <br>
-<p>    ORDER BY pg_relation_size(indexrelid) DESC;</p>
+<h1>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h1>
 <br>
-<p>For detailed bloat estimation, the `pgstattuple` extension provides accurate measurements:   </p>
 <br>
-<p>    CREATE EXTENSION IF NOT EXISTS pgstattuple;</p>
 <br>
-<p>    SELECT * FROM pgstatindex('idx_orders_user_id');</p>
 <br>
-<p>    -- version, tree_level, index_size, root_block_no, internal_pages, leaf_pages,</p>
 <br>
-<p>    -- empty_pages, deleted_pages, avg_leaf_density, leaf_fragmentation</p>
 <br>
-<p>Key metrics:   </p>
+<br>
+<br>
+<br>
+<br>
+<p>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Indexes degrade over time. PostgreSQL's MVCC architecture creates dead index entries that waste space and slow down scans. Regular maintenance keeps indexes healthy and query performance predictable. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Index Bloat </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Index bloat occurs when dead tuples leave empty space in index pages. Unlike tables, PostgreSQL does not automatically reuse index page space aggressively. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Measuring Bloat </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Quick bloat estimation using pg_stat_user_indexes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>indexrelname AS index_name,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>relname AS table_name,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>idx_scan,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>idx_tup_read,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>idx_tup_fetch,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pg_size_pretty(pg_relation_size(indexrelid)) AS index_size</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>FROM pg_stat_user_indexes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>WHERE schemaname = 'public'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ORDER BY pg_relation_size(indexrelid) DESC;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>For detailed bloat estimation, the `pgstattuple` extension provides accurate measurements: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE EXTENSION IF NOT EXISTS pgstattuple;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT * FROM pgstatindex('idx_orders_user_id');</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- version, tree_level, index_size, root_block_no, internal_pages, leaf_pages,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- empty_pages, deleted_pages, avg_leaf_density, leaf_fragmentation</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Key metrics: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>* `avg_leaf_density`: Below 50% indicates significant bloat.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* `leaf_fragmentation`: High fragmentation slows sequential index scans.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* `empty_pages + deleted_pages`: Pages that are allocated but useless.</p>
 <br>
-<p>External Tools   </p>
-<p>`pg_repack` rebuilds indexes without locks:   </p>
 <br>
-<p>    # Rebuild all indexes on a table without blocking writes</p>
 <br>
-<p>    pg_repack -h localhost -d mydb --table orders -o idx_orders_user_id</p>
 <br>
-<p>REINDEX   </p>
-<p>`REINDEX` rebuilds an index from scratch, eliminating bloat and restoring optimal structure:   </p>
 <br>
-<p>    -- Rebuild a single index</p>
 <br>
-<p>    REINDEX INDEX idx_orders_user_id;</p>
 <br>
-<p>    -- Rebuild all indexes on a table</p>
 <br>
-<p>    REINDEX TABLE orders;</p>
 <br>
-<p>    -- Rebuild all indexes in a schema</p>
 <br>
-<p>    REINDEX SCHEMA public;</p>
+<p>External Tools </p>
 <br>
-<p>    -- Rebuild all indexes in a database (offline)</p>
 <br>
-<p>    REINDEX DATABASE mydb;</p>
 <br>
-<p>CONCURRENTLY   </p>
-<p>`REINDEX` by default takes an `ACCESS EXCLUSIVE` lock, blocking reads and writes. The `CONCURRENTLY` option avoids this:   </p>
 <br>
-<p>    REINDEX INDEX CONCURRENTLY idx_orders_user_id;</p>
 <br>
-<p>Concurrent reindexing creates a new index, starts a new transaction, and drops the old index when complete. It uses more resources (CPU, I/O, temporary disk space) but does not block queries.   </p>
 <br>
-<p>    -- For production systems, always use CONCURRENTLY</p>
 <br>
-<p>    -- But monitor for failure:</p>
+<p>`pg_repack` rebuilds indexes without locks: </p>
 <br>
-<p>    REINDEX INDEX CONCURRENTLY idx_orders_user_id;</p>
 <br>
-<p>    -- If the process fails, an "invalid" index remains:</p>
 <br>
-<p>    SELECT indexrelid::regclass, indisvalid</p>
 <br>
-<p>    FROM pg_index</p>
 <br>
-<p>    WHERE indisvalid = false;</p>
 <br>
-<p>    -- Drop and retry the invalid index</p>
 <br>
-<p>    DROP INDEX IF EXISTS idx_orders_user_id_ccnew;</p>
 <br>
-<p>Fillfactor Tuning   </p>
-<p>Fillfactor controls how full each index page is when it is first built. The default is 90% for B-tree indexes (10% free space per page).   </p>
 <br>
-<p>    -- Create index with 70% fillfactor (30% free space)</p>
 <br>
-<p>    CREATE INDEX idx_orders_user_id ON orders (user_id) WITH (fillfactor = 70);</p>
+<h1>Rebuild all indexes on a table without blocking writes</h1>
 <br>
-<p>    -- Alter existing index (only affects future page splits)</p>
 <br>
-<p>    ALTER INDEX idx_orders_user_id SET (fillfactor = 80);</p>
 <br>
-<p>When to Adjust Fillfactor   </p>
-<p>| Workload | Recommended Fillfactor | Reason | |----------|----------------------|--------| | Read-only, bulk-loaded | 100 | No updates expected | | Standard OLTP (default) | 90 | Balance reads and writes | | Write-heavy (updates) | 70-80 | Reduce page splits | | HOT updates via fillfactor | 50-60 | Maximize HOT update ratio |   </p>
-<p>Heap-Only Tuples (HOT) optimization occurs when updated row versions fit in the same page. Lower fillfactor means more page space for HOT updates:   </p>
 <br>
-<p>    -- Increase HOT update ratio with lower fillfactor</p>
 <br>
-<p>    CREATE TABLE frequently_updated (</p>
 <br>
-<p>        id INTEGER PRIMARY KEY,</p>
 <br>
-<p>        status TEXT,</p>
 <br>
-<p>        counter INTEGER</p>
 <br>
-<p>    ) WITH (fillfactor = 70);</p>
 <br>
-<p>Monitor HOT update ratio:   </p>
+<p>pg_repack -h localhost -d mydb --table orders -o idx_orders_user_id</p>
 <br>
-<p>    SELECT relname, n_tup_upd, n_tup_hot_upd,</p>
 <br>
-<p>           ROUND(n_tup_hot_upd * 100.0 / NULLIF(n_tup_upd, 0), 2) AS hot_pct</p>
 <br>
-<p>    FROM pg_stat_user_tables</p>
 <br>
-<p>    WHERE n_tup_upd > 0</p>
 <br>
-<p>    ORDER BY hot_pct;</p>
 <br>
-<p>A low HOT ratio (below 50%) indicates many index-only updates that cause index bloat. Lowering fillfactor or adding INCLUDE columns to avoid index updates can help.   </p>
-<p>Automated Maintenance   </p>
-<p>Autovacuum Configuration   </p>
-<p>Autovacuum manages both table and index cleanup:   </p>
 <br>
-<p>    # postgresql.conf</p>
 <br>
-<p>    autovacuum = on</p>
 <br>
-<p>    autovacuum_naptime = 1min</p>
 <br>
-<p>    autovacuum_vacuum_scale_factor = 0.01</p>
+<p>REINDEX </p>
 <br>
-<p>    autovacuum_vacuum_threshold = 1000</p>
 <br>
-<p>    autovacuum_vacuum_cost_limit = 1000</p>
 <br>
-<p>    autovacuum_vacuum_cost_delay = 5ms</p>
 <br>
-<p>For write-heavy tables, configure per-table autovacuum:   </p>
 <br>
-<p>    ALTER TABLE orders SET (</p>
 <br>
-<p>        autovacuum_vacuum_scale_factor = 0.005,</p>
 <br>
-<p>        autovacuum_vacuum_threshold = 1000,</p>
+<p>`REINDEX` rebuilds an index from scratch, eliminating bloat and restoring optimal structure: </p>
 <br>
-<p>        autovacuum_vacuum_cost_limit = 2000</p>
 <br>
-<p>    );</p>
 <br>
-<p>Scheduled REINDEX   </p>
-<p>For tables with regular bloat patterns, schedule REINDEX:   </p>
 <br>
-<p>    -- Using pg_cron extension</p>
 <br>
-<p>    SELECT cron.schedule('reindex-orders', '0 3 * * 0',</p>
 <br>
-<p>        'REINDEX INDEX CONCURRENTLY idx_orders_user_id'</p>
 <br>
-<p>    );</p>
 <br>
-<p>Monitoring Index Health   </p>
 <br>
-<p>    -- Index size trends</p>
 <br>
-<p>    SELECT</p>
+<p>\\\\-- Rebuild a single index</p>
 <br>
-<p>        indexrelid::regclass,</p>
 <br>
-<p>        pg_size_pretty(pg_relation_size(indexrelid)) AS current_size,</p>
 <br>
-<p>        pg_size_pretty(pg_relation_size(indexrelid) -</p>
 <br>
-<p>            pg_indexes_size(indexrelid::regclass::text::regclass)) AS estimated_bloat</p>
 <br>
-<p>    FROM pg_stat_user_indexes;</p>
 <br>
-<p>    -- Top 10 largest indexes</p>
 <br>
-<p>    SELECT</p>
 <br>
-<p>        indexrelid::regclass,</p>
 <br>
-<p>        pg_size_pretty(sum(pg_relation_size(indexrelid))) AS total_size</p>
 <br>
-<p>    FROM pg_stat_user_indexes</p>
+<p>REINDEX INDEX idx_orders_user_id;</p>
 <br>
-<p>    GROUP BY indexrelid</p>
 <br>
-<p>    ORDER BY sum(pg_relation_size(indexrelid)) DESC</p>
 <br>
-<p>    LIMIT 10;</p>
 <br>
-<p>    -- Index scan frequency vs bloat</p>
 <br>
-<p>    SELECT</p>
 <br>
-<p>        indexrelid::regclass,</p>
 <br>
-<p>        idx_scan,</p>
 <br>
-<p>        idx_tup_read,</p>
 <br>
-<p>        idx_tup_fetch,</p>
 <br>
-<p>        pg_size_pretty(pg_relation_size(indexrelid))</p>
+<p>\\\\-- Rebuild all indexes on a table</p>
 <br>
-<p>    FROM pg_stat_user_indexes</p>
 <br>
-<p>    WHERE idx_scan = 0</p>
 <br>
-<p>    ORDER BY pg_relation_size(indexrelid) DESC;</p>
 <br>
-<p>Best Practices   </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>REINDEX TABLE orders;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Rebuild all indexes in a schema</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>REINDEX SCHEMA public;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Rebuild all indexes in a database (offline)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>REINDEX DATABASE mydb;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CONCURRENTLY </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>`REINDEX` by default takes an `ACCESS EXCLUSIVE` lock, blocking reads and writes. The `CONCURRENTLY` option avoids this: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>REINDEX INDEX CONCURRENTLY idx_orders_user_id;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Concurrent reindexing creates a new index, starts a new transaction, and drops the old index when complete. It uses more resources (CPU, I/O, temporary disk space) but does not block queries. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- For production systems, always use CONCURRENTLY</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- But monitor for failure:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>REINDEX INDEX CONCURRENTLY idx_orders_user_id;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- If the process fails, an "invalid" index remains:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT indexrelid::regclass, indisvalid</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>FROM pg_index</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>WHERE indisvalid = false;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Drop and retry the invalid index</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>DROP INDEX IF EXISTS idx_orders_user_id_ccnew;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Fillfactor Tuning </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Fillfactor controls how full each index page is when it is first built. The default is 90% for B-tree indexes (10% free space per page). </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Create index with 70% fillfactor (30% free space)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE INDEX idx_orders_user_id ON orders (user_id) WITH (fillfactor = 70);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Alter existing index (only affects future page splits)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ALTER INDEX idx_orders_user_id SET (fillfactor = 80);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>When to Adjust Fillfactor </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>| Workload | Recommended Fillfactor | Reason | |----------|----------------------|--------| | Read-only, bulk-loaded | 100 | No updates expected | | Standard OLTP (default) | 90 | Balance reads and writes | | Write-heavy (updates) | 70-80 | Reduce page splits | | HOT updates via fillfactor | 50-60 | Maximize HOT update ratio | </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Heap-Only Tuples (HOT) optimization occurs when updated row versions fit in the same page. Lower fillfactor means more page space for HOT updates: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Increase HOT update ratio with lower fillfactor</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE TABLE frequently_updated (</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>id INTEGER PRIMARY KEY,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>status TEXT,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>counter INTEGER</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>) WITH (fillfactor = 70);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Monitor HOT update ratio: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT relname, n_tup_upd, n_tup_hot_upd,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ROUND(n_tup_hot_upd * 100.0 / NULLIF(n_tup_upd, 0), 2) AS hot_pct</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>FROM pg_stat_user_tables</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>WHERE n_tup_upd > 0</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ORDER BY hot_pct;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>A low HOT ratio (below 50%) indicates many index-only updates that cause index bloat. Lowering fillfactor or adding INCLUDE columns to avoid index updates can help. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Automated Maintenance </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Autovacuum Configuration </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Autovacuum manages both table and index cleanup: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>postgresql.conf</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>autovacuum = on</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>autovacuum_naptime = 1min</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>autovacuum_vacuum_scale_factor = 0.01</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>autovacuum_vacuum_threshold = 1000</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>autovacuum_vacuum_cost_limit = 1000</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>autovacuum_vacuum_cost_delay = 5ms</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>For write-heavy tables, configure per-table autovacuum: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ALTER TABLE orders SET (</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>autovacuum_vacuum_scale_factor = 0.005,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>autovacuum_vacuum_threshold = 1000,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>autovacuum_vacuum_cost_limit = 2000</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Scheduled REINDEX </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>For tables with regular bloat patterns, schedule REINDEX: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Using pg_cron extension</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT cron.schedule('reindex-orders', '0 3 * * 0',</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>'REINDEX INDEX CONCURRENTLY idx_orders_user_id'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Monitoring Index Health </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Index size trends</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>indexrelid::regclass,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pg_size_pretty(pg_relation_size(indexrelid)) AS current_size,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pg_size_pretty(pg_relation_size(indexrelid) -</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pg_indexes_size(indexrelid::regclass::text::regclass)) AS estimated_bloat</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>FROM pg_stat_user_indexes;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Top 10 largest indexes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>indexrelid::regclass,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pg_size_pretty(sum(pg_relation_size(indexrelid))) AS total_size</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>FROM pg_stat_user_indexes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>GROUP BY indexrelid</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ORDER BY sum(pg_relation_size(indexrelid)) DESC</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>LIMIT 10;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Index scan frequency vs bloat</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>indexrelid::regclass,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>idx_scan,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>idx_tup_read,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>idx_tup_fetch,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pg_size_pretty(pg_relation_size(indexrelid))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>FROM pg_stat_user_indexes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>WHERE idx_scan = 0</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ORDER BY pg_relation_size(indexrelid) DESC;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Best Practices </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>* **Set up bloat monitoring** with thresholds (e.g., alert when avg_leaf_density < 60%).</p>
-<p>2\. **Use CONCURRENTLY** for all production REINDEX operations. 3\. **Tune fillfactor** per table based on update frequency. 4\. **Schedule index maintenance** during low-traffic periods using pg_cron. 5\. **Drop unused indexes** identified by `pg_stat_user_indexes` with `idx_scan = 0`. 6\. **Consider BRIN indexes** for append-only tables to avoid B-tree bloat entirely.   </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>2\\\\\\\\. **Use CONCURRENTLY** for all production REINDEX operations. 3\\\\\\\\. **Tune fillfactor** per table based on update frequency. 4\\\\\\\\. **Schedule index maintenance** during low-traffic periods using pg_cron. 5\\\\\\\\. **Drop unused indexes** identified by `pg_stat_user_indexes` with `idx_scan = 0`. 6\\\\\\\\. **Consider BRIN indexes** for append-only tables to avoid B-tree bloat entirely. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Index maintenance is not a one-time activity. Build monitoring and automation into your database operations, and check index health as part of your regular performance review cycle.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -326,6 +1439,7 @@
       <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

@@ -19,7 +19,8 @@ The xz utils backdoor (2024), the Polyfill.io attack (2024), and the MavenGate h
 **Best for:** End-to-end developer security platform with supply chain features.
 
 Snyk started as a vulnerability scanner and grew into a full platform. Its supply chain module includes: dependency vulnerability scanning (with reachability analysis — does the vulnerable function actually get called?), license compliance management, SBOM generation (SPDX and CycloneDX), and container image scanning integrated with the same policy engine. **Pricing:** Free for individual developers and open-source projects. Team plans from $25/dev/month. **Standout:** Snyk's vulnerability database is hand-curated, not just CVE mirrors, which means fewer false positives. The reachability analysis is genuinely useful — it tells you not just that a dependency has a CVE, but whether your code path hits the vulnerable function. **Limitations:** Can be noisy on large monorepos; the UI gets slow with 1,000+ projects; some advanced supply chain features (SBOM attestation, SLSA provenance) are enterprise-only.
-
+    
+    
     snyk test           # scan your project
     snyk monitor        # continuous monitoring
     snyk sbom           # generate SBOM
@@ -42,7 +43,8 @@ Chainguard builds the smallest possible container images — their Python image 
 **Best for:** Open-source SBOM generation and vulnerability scanning.
 
 Anchore's open-source tools Syft (SBOM generation) and Grype (vulnerability scanning) are the de facto standards for supply chain security in CI/CD pipelines. Syft generates SBOMs in SPDX or CycloneDX format from container images, filesystems, and archives. Grype consumes those SBOMs and cross-references against multiple vulnerability databases (NVD, GitHub Advisory, Anchore's own DB). **Pricing:** Syft and Grype are free and open source. Anchore Enterprise (with policy engine and UI) starts at $1,000/month. **Standout:** Blazing fast — Syft scans a container image in under 2 seconds. The tools are designed for CI/CD: they produce machine-readable JSON that's easy to pipe into other tools. Grype's false positive rate is notably lower than Trivy's because Anchore's vulnerability database includes fix version information and uses more precise package matching. **Limitations:** The CLI tools have a learning curve; enterprise features (policy-as-code, centralized reporting) require the paid platform; the OSS tools don't include runtime protection.
-
+    
+    
     syft nginx:latest -o json > sbom.json
     grype sbom:sbom.json
     grype nginx:latest  # scan directly
@@ -52,7 +54,8 @@ Anchore's open-source tools Syft (SBOM generation) and Grype (vulnerability scan
 **Best for:** Keyless signing and verification of artifacts.
 
 Sigstore is a Linux Foundation project that makes code signing accessible to everyone. Traditional code signing requires managing private keys — a nightmare at scale. Sigstore uses OpenID Connect (your Google/GitHub/Microsoft account) to generate short-lived signing keys, with the signature recorded in Rekor (a public, immutable transparency log). **Pricing:** Free and open source. **Standout:** The "keyless" model eliminates the #1 reason developers skip signing: key management overhead. Cosign integrates with Kubernetes (verify images at admission control), GitHub Actions, and most CI/CD systems. **Limitations:** The ecosystem is still maturing; some enterprises are uncomfortable with OIDC-based signing; transparency log queries can be slow.
-
+    
+    
     cosign sign ghcr.io/myorg/myimage:v1
     cosign verify ghcr.io/myorg/myimage:v1   --certificate-oidc-issuer=https://token.actions.githubusercontent.com
 
@@ -65,7 +68,7 @@ Socket| Dependency behavior| Behavioral analysis| Partial| Free / $20/dev/mo
 Chainguard| Minimal containers| Distroless + SLSA| No| Free / $100/mo  
 Anchore/Syft/Grype| SBOM + CVE scanning| CVE databases| Yes| Free / $1,000/mo  
 Sigstore/Cosign| Artifact signing| Keyless OIDC| Yes| Free  
-
+  
 ## How to Build Your Supply Chain Security Stack
 
 **Start here (free, immediate impact):**
@@ -74,6 +77,8 @@ Sigstore/Cosign| Artifact signing| Keyless OIDC| Yes| Free
   2. Enable Socket on your GitHub repos. It catches malicious packages before they're installed — no configuration needed.
   3. Switch to Chainguard base images for your Docker builds. This single change eliminates 80%+ of CVEs from your images.
   4. Sign your releases with Cosign. It takes 5 minutes to set up in GitHub Actions and proves your artifacts haven't been tampered with.
+
+
 
 **When you have budget:** Add Snyk for reachability analysis and license compliance. Add Chainguard Enterprise for policy enforcement and centralized visibility.
 

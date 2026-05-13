@@ -25,7 +25,7 @@ Auto-Scaling| Yes (horizontal, on-demand)| Yes (horizontal, manual + auto)| No (
 Docker Support| Yes (Native + Dockerfile)| Yes (Dockerfile required)| Yes (Dockerfile or Nixpacks auto-detect)  
 Private Networking| Yes (within same account)| Yes (WireGuard mesh)| Yes (private network)  
 Cron Jobs / Background Workers| Yes (Cron Jobs, Workers)| Via Fly Machines (API-driven)| Services + cron triggers  
-
+  
 ## When Each Platform Wins
 
 **Render — Best for:** Teams that want the simplest possible deploy experience — Git push, and Render handles the rest. No Docker knowledge required. The managed PostgreSQL is solid and well-priced. **Weak spot:** Only 4 regions; no edge/global deployment story; slower feature development pace.
@@ -43,5 +43,5 @@ Global latency matters (game, real-time, API)| Fly.io| 30+ regions, runs close t
 Rapid prototyping, side project, hackathon| Railway| Fastest to deploy, template-driven, pay-per-use  
 Need managed database + web service together| Render or Railway| Both offer integrated managed PostgreSQL  
 Dockerized app that needs complex networking| Fly.io| WireGuard mesh, advanced networking  
-
+  
 **Bottom line:** For most side projects and early startups, Render is the best default — Git push deploy, managed PostgreSQL, fair pricing, and the simplest experience. Fly.io wins when global latency matters — the edge deployment model is unique and powerful. Railway is the fastest from idea to deployed, perfect for prototyping and hackathons. See also: [Vercel vs Netlify vs Cloudflare](</en/compare/vercel-vs-netlify-vs-cloudflare.html>) and [Fly.io vs Railway vs Render](</en/compare/fly-io-vs-railway-vs-render.html>).

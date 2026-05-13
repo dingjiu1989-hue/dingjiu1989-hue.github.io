@@ -22,7 +22,7 @@ Browser automation frameworks have evolved rapidly. Playwright is the new king, 
 **Network interception**|  Excellent (route API)| Excellent (cy.intercept)| Moderate (proxy-based)  
 **Multi-tab / multi-origin**|  Excellent| Limited (cy.origin workaround)| Moderate  
 **Debugging**|  Trace Viewer, VS Code extension| Time travel, screenshots, videos| Screenshots, logs  
-
+  
 ## Playwright — The New Standard
 
 Playwright (by Microsoft) is the best E2E testing framework in 2026. It auto-waits for elements to be actionable, runs tests in parallel with zero configuration, and its Trace Viewer makes debugging a pleasure. Multi-browser support (Chromium, Firefox, WebKit) is built-in.
@@ -57,5 +57,5 @@ Java/Python shop, existing Selenium| **Stay on Selenium** or evaluate Playwright
 Multi-browser testing required| **Playwright**  
 Best free CI parallelism| **Playwright** (sharding is free)  
 Fastest authoring experience| **Playwright** (codegen + VS Code + Trace Viewer)  
-
+  
 **Bottom line:** Playwright is the default for any new E2E testing project in 2026. Cypress for existing suites. Selenium only if your organization requires a specific language Playwright doesn't support well. See also: [Testing Strategies Guide](</en/tech/testing-strategies-web-apps.html>) and [CI/CD Tools Comparison](</en/tools/best-cicd-tools-2026.html>).

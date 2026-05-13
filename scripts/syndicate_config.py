@@ -12,7 +12,7 @@ ARTICLES_PER_RUN = 3          # Max articles per script execution
 SLEEP_BETWEEN_ARTICLES = 120  # Seconds between posts (natural pacing)
 
 # ── Daily global cap (across all platforms) ─────────────
-DAILY_MAX = 30                # Total articles per day across all platforms
+DAILY_MAX = 200               # Total articles per day across all platforms
 LOG_PATH = ROOT / "data" / "syndication-log.json"
 
 def get_daily_count():

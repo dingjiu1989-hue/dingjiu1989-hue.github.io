@@ -41,7 +41,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/ai-cli-tools-guide.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "6306",
+      "wordCount": "11545",
       "keywords": "CLI, AI, Python, Node.js, LLM, Developer Tools, Automation",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +49,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/building-ai-powered-cli-tools-a-complete-guide-for-developers-1a0l"
       ],
-      "articleBody": "Building AI-Powered CLI Tools: A Complete Guide for Developers Building AI-Powered CLI Tools: A Complete Guide for Developers The terminal is having a renaissance. Developers spend hours in it every day \u2014 and LLMs have turned it from a read-only window into something that can understand, generate, and transform code and text. An AI-powered CLI tool isn't just an API wrapper with a flag parser. It's a new kind of interface: one where the computer can *interpret intent, reason about context, and take action*. This guide covers how to build these tools end-to-end: architecture patterns, Python and Node.js implementations, streaming, interactive flows, file-aware agents, packaging, and two real-world examples you can adapt right now. Why AI CLI Tools Are Different A traditional CLI tool maps flags to function calls. An AI CLI tool does something fundamentally different: * **It interprets natural language.** `tldr docker-compose` searches a cheat sheet. `gpt \"explain docker-compose networking\"` understands intent. * **It has context.** File-aware tools read your codebase before answering. * **It can take multi-step actions.** Not just \"output text\" but \"read files, plan, execute, verify.\" * **It streams reasoning.** Users see the model think, which builds trust and lets them cancel early. The architecture looks like this: User Input (args, stdin, interactive) \u2192 CLI Framework (Click/Commander) \u2192 Orchestrator (prompt construction, tool management) \u2192 LLM SDK (OpenAI/Anthropic/Claude) \u2192 Streaming stdout / file writes / git commits / API calls The CLI framework handles input parsing and help text. The orchestrator constructs prompts, manages conversation history, and decides when to call tools. The LLM SDK is a thin wrapper \u2014 the real work is in prompt engineering and tool orchestration. Architecture of AI CLI Tools Every AI CLI tool shares these layers: **Input Layer.** Accepts flags, arguments, stdin, and interactive input. This is where you decide between `tool ask \"question\"`, `cat file | tool`, and `tool --interactive`. **Context Layer.** Gathers information the model needs: file contents, git diff output, directory listings, environment variables, previous conversation turns. **Orchestration Layer.** Manages the conversation loop. For simple tools this is one request/response. For agents, it's a loop: model responds, you execute tool calls, you feed results back, model responds again. **Output Layer.** Streams tokens to stdout, formats structured output (JSON, markdown), and handles errors gracefully. The key design decision is **stateless vs. stateful**. Stateless tools (one question, one answer) are simpler. Stateful tools (multi-turn conversations, file edits, undo) require persistence \u2014 typically a session file or a temp directory. Python: Click + LLM SDK Python is the most popular language for CLI tools, and [Click](https://click.palletsprojects.com/) is the standard framework. Pair it with the `openai` or `anthropic` SDK. import click from openai import OpenAI client = OpenAI() @click.command() @click.argument(\"prompt\", required=False) @click.option(\"--model\", default=\"gpt-4o\", help=\"Model to use\") @click.option(\"--system\", default=\"You are a helpful assistant.\") def ask(prompt, model, system): \"\"\"Ask an LLM a question from the command line.\"\"\" if not prompt and not click.get_text_stream(\"stdin\").isatty(): prompt = click.get_text_stream(\"stdin\").read().strip() if not prompt: click.echo(\"Usage: ask PROMPT or pipe input\") return stream = client.chat.completions.create( model=model, messages=[ {\"role\": \"system\", \"content\": system}, {\"role\": \"user\", \"content\": prompt}, ], stream=True, ) for chunk in stream: content = chunk.choices[0].delta.content or \"\" click.echo(content, nl=False) click.echo() if __name__ == \"__main__\": ask() This tool accepts input as an argument or via stdin pipe, streams the response character by character, and uses Click's built-in help formatting. The streaming loop is the critical difference from a non-AI CLI \u2014 users expect to see output appear incrementally, not wait for a full response. For a richer experience with [Typer](https://typer.tiangolo.com/) (Click with type hints): import typer from rich.console import Console from rich.live import Live from rich.markdown import Markdown from anthropic import Anthropic app = typer.Typer() console = Console() client = Anthropic() @app.command() def chat( prompt: str = typer.Argument(None, help=\"Your question\"), model: str = \"claude-sonnet-4-20250514\", ): \"\"\"Chat with Claude from the terminal.\"\"\" if not prompt: import sys prompt = sys.stdin.read().strip() with client.messages.stream( model=model, max_tokens=4096, messages=[{\"role\": \"user\", \"content\": prompt}], ) as stream: with Live(refresh_per_second=15) as live: collected = \"\" for text in stream.text_stream: collected += text live.update(Markdown(collected)) if __name__ == \"__main__\": app() Rich's `Live` display with Markdown rendering makes the terminal feel like a chat UI. The `stream.text_stream` pattern gives you tokens as they arrive. Node.js: Commander + LangChain In the Node.js ecosystem, [Commander](https://github.com/tj/commander.js) is the standard CLI framework. [LangChain](https://js.langchain.com/) adds LLM orchestration, or you can use the SDK directly. #!/usr/bin/env node import { Command } from 'commander'; import Anthropic from '@anthropic-ai/sdk'; const client = new Anthropic(); const program = new Command() .name('ask') .description('Ask Claude a question') .argument('[prompt]', 'Your question') .option('-m, --model ', 'Model to use', 'claude-sonnet-4-20250514') .option('-s, --system ', 'System prompt') .action(async (prompt, options) => { if (!prompt) { const stdin = process.stdin.read(); prompt = stdin?.toString().trim(); } if (!prompt) { console.error('Usage: ask PROMPT or pipe input'); process.exit(1); } const stream = await client.messages.stream({ model: options.model, max_tokens: 4096, system: options.system, messages: [{ role: 'user', content: prompt }], }).on('text', (text) => process.stdout.write(text)); console.log(); }); program.parse(); The `@anthropic-ai/sdk` Node.js streaming API emits `text` events. Write each chunk to `process.stdout` for that real-time feel. For more complex tools, LangChain's `RunnableSequence` lets you chain prompts, tools, and output parsers: import { Command } from 'commander'; import { ChatOpenAI } from '@langchain/openai'; import { StringOutputParser } from '@langchain/core/output_parsers'; import { ChatPromptTemplate } from '@langchain/core/prompts'; const model = new ChatOpenAI({ model: 'gpt-4o', streaming: true }); const parser = new StringOutputParser(); const prompt = ChatPromptTemplate.fromMessages([ ['system', 'You are a technical writer.'], ['user', 'Explain {topic} in one paragraph.'], ]); const chain = prompt.pipe(model).pipe(parser); const program = new Command() .argument('') .action(async (topic) => { const stream = await chain.stream({ topic }); for await (const chunk of stream) { process.stdout.write(chunk); } console.log(); }); program.parse(); LangChain shines when you need tool-calling agents (reading files, running commands, browsing the web). The chain abstraction keeps the orchestration readable. Pattern: Streaming Responses to stdout Streaming is table stakes. Users won't wait 10 seconds for a full response. Here's the pattern that works across languages: * **Open a streaming connection** to the LLM API. 2\\. **Write each token** to stdout as it arrives \u2014 no buffering. 3\\. **Handle backpressure.** If the terminal is slow, don't drop tokens; let the OS buffer. 4\\. **Support Ctrl+C.** Trap SIGINT to print a clean exit, not a traceback. In Python with Click: import signal import sys def handle_interrupt(sig, frame): click.echo(\"\\n[Interrupted]\", err=True) sys.exit(130) signal.signal(signal.SIGINT, handle_interrupt) In Node.js with Commander: process.on('SIGINT', () => { console.error('\\n[Interrupted]'); process.exit(130); }); Rich formatting (Markdown, syntax highlighting) makes streaming output readable. But be careful with Rich's `Live` \u2014 it re-renders the entire output on each frame, which can be slow for long streams. For long outputs, raw `click.echo` or `process.stdout.write` is more performant. Pattern: Interactive Multi-Step Tools Not every tool is a single query. Interactive tools maintain state across turns. The pattern is a **REPL loop** with AI-generated responses. import click from openai import OpenAI client = OpenAI() @click.command() @click.option(\"--model\", default=\"gpt-4o\") def chat(model): \"\"\"Interactive chat session.\"\"\" click.echo(\"Chat session started. Type /exit to quit.\", err=True) messages = [{\"role\": \"system\", \"content\": \"You are a helpful assistant.\"}] while True: user_input = click.prompt(\"You\", prompt_suffix=\"> \") if user_input.strip() == \"/exit\": break messages.append({\"role\": \"user\", \"content\": user_input}) stream = client.chat.completions.create( model=model, messages=messages, stream=True ) click.echo(\"AI: \", nl=False) collected = \"\" for chunk in stream: content = chunk.choices[0].delta.content or \"\" collected += content click.echo(content, nl=False) click.echo() messages.append({\"role\": \"assistant\", \"content\": collected}) For **tool-using agents**, the pattern extends to a loop: the model requests a tool call, your code executes it and feeds the result back, the model continues: while True: response = client.responses.create( model=\"gpt-4o\", input=messages, tools=[{ \"type\": \"function\", \"function\": { \"name\": \"read_file\", \"description\": \"Read a file from disk\", \"parameters\": { \"type\": \"object\", \"properties\": { \"path\": {\"type\": \"string\"} } } } }] ) if response.output[0].type == \"function_call\": fn = response.output[0] result = execute_tool(fn.name, json.loads(fn.arguments)) messages.append({\"role\": \"tool\", \"content\": str(result), \"tool_call_id\": fn.id}) else: click.echo(response.output_text) break This is the same pattern powering Claude Code and similar AI coding agents. The complexity is in which tools you expose (file read/write, git, shell, search) and how much context you pack into the system prompt. Pattern: File-Aware Tools File-aware tools read the user's working directory before generating responses. This is the most useful pattern for developer tools. import os import click from anthropic import Anthropic client = Anthropic() @click.command() @click.argument(\"files\", nargs=-1, type=click.Path(exists=True)) @click.option(\"--recursive/--no-recursive\", default=True) def analyze(files, recursive): \"\"\"Analyze files with AI assistance.\"\"\" contents = [] for f in files: if os.path.isfile(f): with open(f) as fh: contents.append(f\"### {f}\\n\\n```\\n{fh.read()}\\n```\") elif os.path.isdir(f) and recursive: for root, _, filenames in os.walk(f): for fn in filenames: path = os.path.join(root, fn) try: with open(path) as fh: contents.append(f\"### {path}\\n\\n```\\n{fh.read()}\\n```\") except Exception: pass context = \"\\n\\n\".join(contents[:20]) # limit context size prompt = f\"The user wants to understand these files:\\n\\n{context}\" with client.messages.stream( model=\"claude-sonnet-4-20250514\", max_tokens=4096, messages=[{\"role\": \"user\", \"content\": prompt}], ) as stream: for text in stream.text_stream: click.echo(text, nl=False) click.echo() The key challenge is **context window management**. You can't dump every file in a monorepo into the prompt. Strategies: * **Token counting.** Use `tiktoken` (Python) or `gpt-tokenizer` (Node.js) to count tokens before sending. Truncate when approaching the model's limit. * **File globbing.** Let users specify patterns: `analyze src/**/*.py`. * **Smart filtering.** Skip binary files, node_modules, .git, and other non-text directories automatically. * **Chunking.** For large files, send only relevant sections (first 50 lines, function signatures, recent git changes). CLI Framework Comparison | Feature | Click | Typer | Commander | Clack | |---|---|---|---|---| | **Language** | Python | Python | Node.js | Node.js | | **Type hints** | Decorators | Type-annotated | Methods | Methods | | **Help text** | Auto (good) | Auto (excellent) | Auto | Auto | | **Subcommands**| Yes (groups) | Yes | Yes | No (single command) | | **Interactive prompts** | Yes (click.prompt) | Yes | Manual | Rich (native) | | **Autocomplete**| Shell completion | Shell completion | Manual | Built-in | | **Spinner/progress** | No | Rich integration | No | Built-in spinners | | **Best for** | Any Python CLI | Python CLI + type safety | Any Node.js CLI | Interactive Node.js CLIs | **Click** is the battle-tested Python standard. It handles argument parsing, help text formatting, subcommands, and shell completion. The decorator API is clean and composable. **Typer** wraps Click with Python type hints. Less boilerplate, better autocomplete in IDEs, and built-in Rich integration for colored output and spinners. **Commander** is Click's Node.js equivalent. It's minimal, widely used, and easy to extend. You handle streaming and spinners yourself. **Clack** is newer and focused on *interactive* CLIs \u2014 prompts with autocomplete, multiselect, spinners, and cancel handling. It's not great for traditional flag-based tools, but excellent for `npm init`-style interactive setups. For AI CLI tools, Typer + Rich (Python) or Commander + `@clack/prompt` (Node.js) are the most productive combinations. Real Example: AI Code Review CLI This tool runs `git diff` against the staging area, sends the diff to an LLM for review, and outputs structured feedback. #!/usr/bin/env python3 import subprocess import click from anthropic import Anthropic client = Anthropic() @click.command() @click.option(\"--diff\", is_flag=True, help=\"Review unstaged changes too\") @click.option(\"--model\", default=\"claude-sonnet-4-20250514\") @click.option(\"--output\", type=click.Choice([\"text\", \"markdown\", \"json\"]), default=\"markdown\") def review(diff, model, output): \"\"\"Review staged git changes with AI.\"\"\" # Get git diff cmd = [\"git\", \"diff\", \"--cached\"] if diff: cmd = [\"git\", \"diff\"] result = subprocess.run(cmd, capture_output=True, text=True) if not result.stdout.strip(): click.echo(\"No changes to review.\", err=True) raise click.Abort() # Count lines and warn lines = result.stdout.count(\"\\n\") if lines > 2000: click.echo(f\"Diff is {lines} lines, will review first 2000.\", err=True) system = \"\"\"You are a senior code reviewer. Review the git diff below. Focus on: logic errors, security issues, performance problems, style violations. For each issue, include: file, line, severity (critical/warning/nit), and suggestion. Output in the format requested.\"\"\" prompt = f\"Review this git diff:\\n\\n```diff\\n{result.stdout[:50000]}\\n```\" if output == \"json\": response = client.messages.create( model=model, max_tokens=4096, system=system, messages=[{\"role\": \"user\", \"content\": prompt + \"\\n\\nRespond in JSON format.\"}], ) print(response.content[0].text) else: with client.messages.stream( model=model, max_tokens=4096, system=system, messages=[{\"role\": \"user\", \"content\": prompt}], ) as stream: for text in stream.text_stream: click.echo(text, nl=False) click.echo() if __name__ == \"__main__\": review() The code review tool is a good example of the **file-aware + git-aware** pattern. It captures context (the diff) without needing file I/O itself. The key design choices: * **Git integration** via `subprocess` \u2014 no git library dependency. * **Size limits** \u2014 warns if the diff is too large. * **Output format selection** \u2014 text/markdown for human reading, JSON for CI pipeline consumption. * **Streaming** for interactive use, full response for JSON mode. Real Example: AI Git Commit Message Generator This is the most common AI CLI tool in the wild. It reads staged changes and generates a conventional commit message. #!/usr/bin/env python3 import subprocess import json import click from anthropic import Anthropic client = Anthropic() @click.command() @click.option(\"--model\", default=\"claude-sonnet-4-20250514\") @click.option(\"--type\", \"commit_type\", help=\"Conventional commit type (feat, fix, etc.)\") @click.option(\"--scope\", help=\"Commit scope\") def commit(model, commit_type, scope): \"\"\"Generate a commit message from staged changes.\"\"\" result = subprocess.run( [\"git\", \"diff\", \"--cached\"], capture_output=True, text=True ) if not result.stdout.strip(): click.echo(\"No staged changes. Stage files with `git add` first.\", err=True) raise click.Abort() prompt = f\"\"\"Generate a conventional commit message for this diff. Format: {commit_type or ''}({scope or ''}): Rules: - First line max 72 characters - Use imperative mood - Body wraps at 72 characters - Focus on WHAT and WHY, not HOW Diff: {result.stdout[:20000]} with client.messages.stream( model=model, max_tokens=500, system=\"You generate concise, structured git commit messages.\", messages=[{\"role\": \"user\", \"content\": prompt}], ) as stream: for text in stream.text_stream: click.echo(text, nl=False) click.echo(\"\\n\") Extended versions of this tool: * **Interactive mode** \u2014 preview the message, accept/edit/reject. * **Multiple suggestions** \u2014 generate 3 options, let the user pick. * **Template support** \u2014 read `.gitmessage` templates. * **AI commit body generation** \u2014 expand the body with detailed reasoning. Error Handling for LLM Calls in CLI LLM calls fail in ways normal API calls don't. Your CLI must handle: **Rate limits.** The API returns 429. Handle with exponential backoff plus jitter: import time import random def call_with_retry(client, max_retries=3, **kwargs): for attempt in range(max_retries): try: return client.messages.create(**kwargs) except Exception as e: if \"429\" in str(e) and attempt sleep = (2 ** attempt) + random.random() click.echo(f\"Rate limited, retrying in {sleep:.0f}s...\", err=True) time.sleep(sleep) else: raise **Context overflow.** The prompt exceeds the model's context window. Pre-count tokens and truncate: import tiktoken def truncate(text, model=\"claude-sonnet-4-20250514\", max_tokens=80000): enc = tiktoken.encoding_for_model(\"gpt-4\") # approximates well enough tokens = enc.encode(text) if len(tokens) > max_tokens: click.echo(f\"Truncating {len(tokens)} tokens to {max_tokens}\", err=True) return enc.decode(tokens[:max_tokens]) return text **Network errors.** `ConnectionError`, `Timeout` \u2014 catch these specifically and give actionable messages: try: response = client.messages.create(...) except ConnectionError: click.echo(\"Error: Cannot reach the API. Check your internet connection.\", err=True) raise click.Abort() except Exception as e: click.echo(f\"API error: {e}\", err=True) raise click.Abort() **Structured error output.** For JSON mode, errors should also be JSON: @click.command() @click.option(\"--json-output\", is_flag=True) def tool(json_output): try: # ... except Exception as e: if json_output: click.echo(json.dumps({\"error\": str(e), \"success\": False})) else: click.echo(f\"Error: {e}\", err=True) raise click.Abort() Packaging and Distribution PyPI (Python) # pyproject.toml [build-system] requires = [\"setuptools\", \"wheel\"] build-backend = \"setuptools.build_meta\" [project] name = \"my-ai-tool\" version = \"0.1.0\" dependencies = [ \"click>=8.0\", \"anthropic>=0.30.0\", \"tiktoken>=0.5.0\", ] [project.scripts] my-ai-tool = \"my_ai_tool.cli:main\" Install with `pip install my-ai-tool` or publish with `flit publish`. npm (Node.js) { \"name\": \"my-ai-tool\", \"version\": \"0.1.0\", \"bin\": { \"my-ai-tool\": \"./bin/cli.js\" }, \"dependencies\": { \"commander\": \"^12.0.0\", \"@anthropic-ai/sdk\": \"^0.30.0\" } } Publish with `npm publish`. Homebrew (macOS/Linux) For a Go or compiled binary, a Homebrew tap is the standard distribution channel: class MyAiTool desc \"AI-powered CLI tool\" homepage \"https://github.com/you/my-ai-tool\" url \"https://github.com/you/my-ai-tool/archive/v0.1.0.tar.gz\" sha256 \"...\" depends_on \"python@3.12\" def install bin.install \"my-ai-tool\" end end For interpreted languages (Python, Node.js), PyPI and npm are better distribution channels. Homebrew makes sense for compiled binaries (Rust, Go, Zig) that embed the LLM client. Environment and Configuration AI CLI tools need API keys. Best practices: * **Read `ANTHROPIC_API_KEY` or `OPENAI_API_KEY`** from environment variables by default. * **Support `.env` files** in the working directory. * **Store preferences** in `~/.config/my-tool/config.toml`. * **Never hardcode keys** \u2014 not even for testing. Use environment variables in CI too. import os from dotenv import load_dotenv load_dotenv() # load .env file api_key = os.environ.get(\"ANTHROPIC_API_KEY\") or os.environ.get(\"OPENAI_API_KEY\") if not api_key: click.echo(\"Error: Set ANTHROPIC_API_KEY or OPENAI_API_KEY\", err=True) raise click.Abort() Putting It All Together: Architecture Checklist When designing a new AI CLI tool, run through these questions: * **Input:** Arguments, flags, stdin, or interactive? What's the primary interface? 2\\. **Context:** What files, commands, or environment state does the model need to see? 3\\. **Stateless or stateful?** A single Q&A;, or a session with history and state? 4\\. **Streaming:** Are you writing tokens to stdout as they arrive? 5\\. **Tools:** Can the model read files, run commands, make API calls, or edit files? 6\\. **Error recovery:** What happens on 429, context overflow, or network failure? 7\\. **Output format:** Plain text, markdown, JSON, or structured data for piping? 8\\. **Distribution:** PyPI, npm, Homebrew, or a single binary? The answers define your architecture. A simple \"explain this error\" tool needs only streaming Q&A.; A \"refactor this codebase\" tool needs file I/O, git integration, multi-step planning, and undo support. Beyond Simple Wrappers The tools described here are the foundation. The next generation of AI CLI tools will: * **Watch files and react** (like `entr` or `watchexec`, but with AI analysis). * **Run as daemons** with persistent context (think `tmux` for AI sessions). * **Collaborate** \u2014 multiple users share an AI CLI session. * **Cache aggressively** \u2014 prompt caching cuts latency 2-3x and cost in half. * **Use local models** \u2014 `llama.cpp` and `mlx` make local LLMs viable for many CLI tasks. The pattern is always the same: CLI framework handles input, LLM SDK handles generation, your orchestration code connects them. Get the streaming right, handle errors gracefully, and you have a tool that feels like magic in the terminal. See also: [Click vs Typer vs argparse](), [Best Terminal Emulators 2026](), [Best Local Dev Tools]()."
+      "articleBody": "Building AI-Powered CLI Tools: A Complete Guide for Developers Building AI-Powered CLI Tools: A Complete Guide for Developers Building AI-Powered CLI Tools: A Complete Guide for Developers Building AI-Powered CLI Tools: A Complete Guide for Developers Building AI-Powered CLI Tools: A Complete Guide for Developers Building AI-Powered CLI Tools: A Complete Guide for Developers The terminal is having a renaissance. Developers spend hours in it every day \u2014 and LLMs have turned it from a read-only window into something that can understand, generate, and transform code and text. An AI-powered CLI tool isn't just an API wrapper with a flag parser. It's a new kind of interface: one where the computer can *interpret intent, reason about context, and take action*. This guide covers how to build these tools end-to-end: architecture patterns, Python and Node.js implementations, streaming, interactive flows, file-aware agents, packaging, and two real-world examples you can adapt right now. Why AI CLI Tools Are Different A traditional CLI tool maps flags to function calls. An AI CLI tool does something fundamentally different: * **It interprets natural language.** `tldr docker-compose` searches a cheat sheet. `gpt \"explain docker-compose networking\"` understands intent. * **It has context.** File-aware tools read your codebase before answering. * **It can take multi-step actions.** Not just \"output text\" but \"read files, plan, execute, verify.\" * **It streams reasoning.** Users see the model think, which builds trust and lets them cancel early. The architecture looks like this: User Input (args, stdin, interactive) \u2192 CLI Framework (Click/Commander) \u2192 Orchestrator (prompt construction, tool management) \u2192 LLM SDK (OpenAI/Anthropic/Claude) \u2192 Streaming stdout / file writes / git commits / API calls The CLI framework handles input parsing and help text. The orchestrator constructs prompts, manages conversation history, and decides when to call tools. The LLM SDK is a thin wrapper \u2014 the real work is in prompt engineering and tool orchestration. Architecture of AI CLI Tools Every AI CLI tool shares these layers: **Input Layer.** Accepts flags, arguments, stdin, and interactive input. This is where you decide between `tool ask \"question\"`, `cat file | tool`, and `tool --interactive`. **Context Layer.** Gathers information the model needs: file contents, git diff output, directory listings, environment variables, previous conversation turns. **Orchestration Layer.** Manages the conversation loop. For simple tools this is one request/response. For agents, it's a loop: model responds, you execute tool calls, you feed results back, model responds again. **Output Layer.** Streams tokens to stdout, formats structured output (JSON, markdown), and handles errors gracefully. The key design decision is **stateless vs. stateful**. Stateless tools (one question, one answer) are simpler. Stateful tools (multi-turn conversations, file edits, undo) require persistence \u2014 typically a session file or a temp directory. Python: Click + LLM SDK Python is the most popular language for CLI tools, and [Click](https://click.palletsprojects.com/) is the standard framework. Pair it with the `openai` or `anthropic` SDK. import click from openai import OpenAI client = OpenAI() @click.command() @click.argument(\"prompt\", required=False) @click.option(\"--model\", default=\"gpt-4o\", help=\"Model to use\") @click.option(\"--system\", default=\"You are a helpful assistant.\") def ask(prompt, model, system): \"\"\"Ask an LLM a question from the command line.\"\"\" if not prompt and not click.get_text_stream(\"stdin\").isatty(): prompt = click.get_text_stream(\"stdin\").read().strip() if not prompt: click.echo(\"Usage: ask PROMPT or pipe input\") return stream = client.chat.completions.create( model=model, messages=[ {\"role\": \"system\", \"content\": system}, {\"role\": \"user\", \"content\": prompt}, ], stream=True, ) for chunk in stream: content = chunk.choices[0].delta.content or \"\" click.echo(content, nl=False) click.echo() if __name__ == \"__main__\": ask() This tool accepts input as an argument or via stdin pipe, streams the response character by character, and uses Click's built-in help formatting. The streaming loop is the critical difference from a non-AI CLI \u2014 users expect to see output appear incrementally, not wait for a full response. For a richer experience with [Typer](https://typer.tiangolo.com/) (Click with type hints): import typer from rich.console import Console from rich.live import Live from rich.markdown import Markdown from anthropic import Anthropic app = typer.Typer() console = Console() client = Anthropic() @app.command() def chat( prompt: str = typer.Argument(None, help=\"Your question\"), model: str = \"claude-sonnet-4-20250514\", ): \"\"\"Chat with Claude from the terminal.\"\"\" if not prompt: import sys prompt = sys.stdin.read().strip() with client.messages.stream( model=model, max_tokens=4096, messages=[{\"role\": \"user\", \"content\": prompt}], ) as stream: with Live(refresh_per_second=15) as live: collected = \"\" for text in stream.text_stream: collected += text live.update(Markdown(collected)) if __name__ == \"__main__\": app() Rich's `Live` display with Markdown rendering makes the terminal feel like a chat UI. The `stream.text_stream` pattern gives you tokens as they arrive. Node.js: Commander + LangChain In the Node.js ecosystem, [Commander](https://github.com/tj/commander.js) is the standard CLI framework. [LangChain](https://js.langchain.com/) adds LLM orchestration, or you can use the SDK directly. #!/usr/bin/env node import { Command } from 'commander'; import Anthropic from '@anthropic-ai/sdk'; const client = new Anthropic(); const program = new Command() .name('ask') .description('Ask Claude a question') .argument('[prompt]', 'Your question') .option('-m, --model ', 'Model to use', 'claude-sonnet-4-20250514') .option('-s, --system ', 'System prompt') .action(async (prompt, options) => { if (!prompt) { const stdin = process.stdin.read(); prompt = stdin?.toString().trim(); } if (!prompt) { console.error('Usage: ask PROMPT or pipe input'); process.exit(1); } const stream = await client.messages.stream({ model: options.model, max_tokens: 4096, system: options.system, messages: [{ role: 'user', content: prompt }], }).on('text', (text) => process.stdout.write(text)); console.log(); }); program.parse(); The `@anthropic-ai/sdk` Node.js streaming API emits `text` events. Write each chunk to `process.stdout` for that real-time feel. For more complex tools, LangChain's `RunnableSequence` lets you chain prompts, tools, and output parsers: import { Command } from 'commander'; import { ChatOpenAI } from '@langchain/openai'; import { StringOutputParser } from '@langchain/core/output_parsers'; import { ChatPromptTemplate } from '@langchain/core/prompts'; const model = new ChatOpenAI({ model: 'gpt-4o', streaming: true }); const parser = new StringOutputParser(); const prompt = ChatPromptTemplate.fromMessages([ ['system', 'You are a technical writer.'], ['user', 'Explain {topic} in one paragraph.'], ]); const chain = prompt.pipe(model).pipe(parser); const program = new Command() .argument('') .action(async (topic) => { const stream = await chain.stream({ topic }); for await (const chunk of stream) { process.stdout.write(chunk); } console.log(); }); program.parse(); LangChain shines when you need tool-calling agents (reading files, running commands, browsing the web). The chain abstraction keeps the orchestration readable. Pattern: Streaming Responses to stdout Streaming is table stakes. Users won't wait 10 seconds for a full response. Here's the pattern that works across languages: * **Open a streaming connection** to the LLM API. 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Write each token** to stdout as it arrives \u2014 no buffering. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Handle backpressure.** If the terminal is slow, don't drop tokens; let the OS buffer. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Support Ctrl+C.** Trap SIGINT to print a clean exit, not a traceback. In Python with Click: import signal import sys def handle_interrupt(sig, frame): click.echo(\"\\n[Interrupted]\", err=True) sys.exit(130) signal.signal(signal.SIGINT, handle_interrupt) In Node.js with Commander: process.on('SIGINT', () => { console.error('\\n[Interrupted]'); process.exit(130); }); Rich formatting (Markdown, syntax highlighting) makes streaming output readable. But be careful with Rich's `Live` \u2014 it re-renders the entire output on each frame, which can be slow for long streams. For long outputs, raw `click.echo` or `process.stdout.write` is more performant. Pattern: Interactive Multi-Step Tools Not every tool is a single query. Interactive tools maintain state across turns. The pattern is a **REPL loop** with AI-generated responses. import click from openai import OpenAI client = OpenAI() @click.command() @click.option(\"--model\", default=\"gpt-4o\") def chat(model): \"\"\"Interactive chat session.\"\"\" click.echo(\"Chat session started. Type /exit to quit.\", err=True) messages = [{\"role\": \"system\", \"content\": \"You are a helpful assistant.\"}] while True: user_input = click.prompt(\"You\", prompt_suffix=\"> \") if user_input.strip() == \"/exit\": break messages.append({\"role\": \"user\", \"content\": user_input}) stream = client.chat.completions.create( model=model, messages=messages, stream=True ) click.echo(\"AI: \", nl=False) collected = \"\" for chunk in stream: content = chunk.choices[0].delta.content or \"\" collected += content click.echo(content, nl=False) click.echo() messages.append({\"role\": \"assistant\", \"content\": collected}) For **tool-using agents**, the pattern extends to a loop: the model requests a tool call, your code executes it and feeds the result back, the model continues: while True: response = client.responses.create( model=\"gpt-4o\", input=messages, tools=[{ \"type\": \"function\", \"function\": { \"name\": \"read_file\", \"description\": \"Read a file from disk\", \"parameters\": { \"type\": \"object\", \"properties\": { \"path\": {\"type\": \"string\"} } } } }] ) if response.output[0].type == \"function_call\": fn = response.output[0] result = execute_tool(fn.name, json.loads(fn.arguments)) messages.append({\"role\": \"tool\", \"content\": str(result), \"tool_call_id\": fn.id}) else: click.echo(response.output_text) break This is the same pattern powering Claude Code and similar AI coding agents. The complexity is in which tools you expose (file read/write, git, shell, search) and how much context you pack into the system prompt. Pattern: File-Aware Tools File-aware tools read the user's working directory before generating responses. This is the most useful pattern for developer tools. import os import click from anthropic import Anthropic client = Anthropic() @click.command() @click.argument(\"files\", nargs=-1, type=click.Path(exists=True)) @click.option(\"--recursive/--no-recursive\", default=True) def analyze(files, recursive): \"\"\"Analyze files with AI assistance.\"\"\" contents = [] for f in files: if os.path.isfile(f): with open(f) as fh: contents.append(f\"### {f}\\n\\n```\\n{fh.read()}\\n```\") elif os.path.isdir(f) and recursive: for root, _, filenames in os.walk(f): for fn in filenames: path = os.path.join(root, fn) try: with open(path) as fh: contents.append(f\"### {path}\\n\\n```\\n{fh.read()}\\n```\") except Exception: pass context = \"\\n\\n\".join(contents[:20]) # limit context size prompt = f\"The user wants to understand these files:\\n\\n{context}\" with client.messages.stream( model=\"claude-sonnet-4-20250514\", max_tokens=4096, messages=[{\"role\": \"user\", \"content\": prompt}], ) as stream: for text in stream.text_stream: click.echo(text, nl=False) click.echo() The key challenge is **context window management**. You can't dump every file in a monorepo into the prompt. Strategies: * **Token counting.** Use `tiktoken` (Python) or `gpt-tokenizer` (Node.js) to count tokens before sending. Truncate when approaching the model's limit. * **File globbing.** Let users specify patterns: `analyze src/**/*.py`. * **Smart filtering.** Skip binary files, node_modules, .git, and other non-text directories automatically. * **Chunking.** For large files, send only relevant sections (first 50 lines, function signatures, recent git changes). CLI Framework Comparison | Feature | Click | Typer | Commander | Clack | |---|---|---|---|---| | **Language** | Python | Python | Node.js | Node.js | | **Type hints** | Decorators | Type-annotated | Methods | Methods | | **Help text** | Auto (good) | Auto (excellent) | Auto | Auto | | **Subcommands**| Yes (groups) | Yes | Yes | No (single command) | | **Interactive prompts** | Yes (click.prompt) | Yes | Manual | Rich (native) | | **Autocomplete**| Shell completion | Shell completion | Manual | Built-in | | **Spinner/progress** | No | Rich integration | No | Built-in spinners | | **Best for** | Any Python CLI | Python CLI + type safety | Any Node.js CLI | Interactive Node.js CLIs | **Click** is the battle-tested Python standard. It handles argument parsing, help text formatting, subcommands, and shell completion. The decorator API is clean and composable. **Typer** wraps Click with Python type hints. Less boilerplate, better autocomplete in IDEs, and built-in Rich integration for colored output and spinners. **Commander** is Click's Node.js equivalent. It's minimal, widely used, and easy to extend. You handle streaming and spinners yourself. **Clack** is newer and focused on *interactive* CLIs \u2014 prompts with autocomplete, multiselect, spinners, and cancel handling. It's not great for traditional flag-based tools, but excellent for `npm init`-style interactive setups. For AI CLI tools, Typer + Rich (Python) or Commander + `@clack/prompt` (Node.js) are the most productive combinations. Real Example: AI Code Review CLI This tool runs `git diff` against the staging area, sends the diff to an LLM for review, and outputs structured feedback. #!/usr/bin/env python3 import subprocess import click from anthropic import Anthropic client = Anthropic() @click.command() @click.option(\"--diff\", is_flag=True, help=\"Review unstaged changes too\") @click.option(\"--model\", default=\"claude-sonnet-4-20250514\") @click.option(\"--output\", type=click.Choice([\"text\", \"markdown\", \"json\"]), default=\"markdown\") def review(diff, model, output): \"\"\"Review staged git changes with AI.\"\"\" Get git diff cmd = [\"git\", \"diff\", \"--cached\"] if diff: cmd = [\"git\", \"diff\"] result = subprocess.run(cmd, capture_output=True, text=True) if not result.stdout.strip(): click.echo(\"No changes to review.\", err=True) raise click.Abort() Count lines and warn lines = result.stdout.count(\"\\n\") if lines > 2000: click.echo(f\"Diff is {lines} lines, will review first 2000.\", err=True) system = \"\"\"You are a senior code reviewer. Review the git diff below. Focus on: logic errors, security issues, performance problems, style violations. For each issue, include: file, line, severity (critical/warning/nit), and suggestion. Output in the format requested.\"\"\" prompt = f\"Review this git diff:\\n\\n```diff\\n{result.stdout[:50000]}\\n```\" if output == \"json\": response = client.messages.create( model=model, max_tokens=4096, system=system, messages=[{\"role\": \"user\", \"content\": prompt + \"\\n\\nRespond in JSON format.\"}], ) print(response.content[0].text) else: with client.messages.stream( model=model, max_tokens=4096, system=system, messages=[{\"role\": \"user\", \"content\": prompt}], ) as stream: for text in stream.text_stream: click.echo(text, nl=False) click.echo() if __name__ == \"__main__\": review() The code review tool is a good example of the **file-aware + git-aware** pattern. It captures context (the diff) without needing file I/O itself. The key design choices: * **Git integration** via `subprocess` \u2014 no git library dependency. * **Size limits** \u2014 warns if the diff is too large. * **Output format selection** \u2014 text/markdown for human reading, JSON for CI pipeline consumption. * **Streaming** for interactive use, full response for JSON mode. Real Example: AI Git Commit Message Generator This is the most common AI CLI tool in the wild. It reads staged changes and generates a conventional commit message. #!/usr/bin/env python3 import subprocess import json import click from anthropic import Anthropic client = Anthropic() @click.command() @click.option(\"--model\", default=\"claude-sonnet-4-20250514\") @click.option(\"--type\", \"commit_type\", help=\"Conventional commit type (feat, fix, etc.)\") @click.option(\"--scope\", help=\"Commit scope\") def commit(model, commit_type, scope): \"\"\"Generate a commit message from staged changes.\"\"\" result = subprocess.run( [\"git\", \"diff\", \"--cached\"], capture_output=True, text=True ) if not result.stdout.strip(): click.echo(\"No staged changes. Stage files with `git add` first.\", err=True) raise click.Abort() prompt = f\"\"\"Generate a conventional commit message for this diff. Format: {commit_type or ''}({scope or ''}): Rules: \\\\\\\\\\\\\\\\- First line max 72 characters \\\\\\\\\\\\\\\\- Use imperative mood \\\\\\\\\\\\\\\\- Body wraps at 72 characters \\\\\\\\\\\\\\\\- Focus on WHAT and WHY, not HOW Diff: {result.stdout[:20000]} with client.messages.stream( model=model, max_tokens=500, system=\"You generate concise, structured git commit messages.\", messages=[{\"role\": \"user\", \"content\": prompt}], ) as stream: for text in stream.text_stream: click.echo(text, nl=False) click.echo(\"\\n\") Extended versions of this tool: * **Interactive mode** \u2014 preview the message, accept/edit/reject. * **Multiple suggestions** \u2014 generate 3 options, let the user pick. * **Template support** \u2014 read `.gitmessage` templates. * **AI commit body generation** \u2014 expand the body with detailed reasoning. Error Handling for LLM Calls in CLI LLM calls fail in ways normal API calls don't. Your CLI must handle: **Rate limits.** The API returns 429. Handle with exponential backoff plus jitter: import time import random def call_with_retry(client, max_retries=3, **kwargs): for attempt in range(max_retries): try: return client.messages.create(**kwargs) except Exception as e: if \"429\" in str(e) and attempt sleep = (2 ** attempt) + random.random() click.echo(f\"Rate limited, retrying in {sleep:.0f}s...\", err=True) time.sleep(sleep) else: raise **Context overflow.** The prompt exceeds the model's context window. Pre-count tokens and truncate: import tiktoken def truncate(text, model=\"claude-sonnet-4-20250514\", max_tokens=80000): enc = tiktoken.encoding_for_model(\"gpt-4\") # approximates well enough tokens = enc.encode(text) if len(tokens) > max_tokens: click.echo(f\"Truncating {len(tokens)} tokens to {max_tokens}\", err=True) return enc.decode(tokens[:max_tokens]) return text **Network errors.** `ConnectionError`, `Timeout` \u2014 catch these specifically and give actionable messages: try: response = client.messages.create(...) except ConnectionError: click.echo(\"Error: Cannot reach the API. Check your internet connection.\", err=True) raise click.Abort() except Exception as e: click.echo(f\"API error: {e}\", err=True) raise click.Abort() **Structured error output.** For JSON mode, errors should also be JSON: @click.command() @click.option(\"--json-output\", is_flag=True) def tool(json_output): try: ... except Exception as e: if json_output: click.echo(json.dumps({\"error\": str(e), \"success\": False})) else: click.echo(f\"Error: {e}\", err=True) raise click.Abort() Packaging and Distribution PyPI (Python) pyproject.toml [build-system] requires = [\"setuptools\", \"wheel\"] build-backend = \"setuptools.build_meta\" [project] name = \"my-ai-tool\" version = \"0.1.0\" dependencies = [ \"click>=8.0\", \"anthropic>=0.30.0\", \"tiktoken>=0.5.0\", ] [project.scripts] my-ai-tool = \"my_ai_tool.cli:main\" Install with `pip install my-ai-tool` or publish with `flit publish`. npm (Node.js) { \"name\": \"my-ai-tool\", \"version\": \"0.1.0\", \"bin\": { \"my-ai-tool\": \"./bin/cli.js\" }, \"dependencies\": { \"commander\": \"^12.0.0\", \"@anthropic-ai/sdk\": \"^0.30.0\" } } Publish with `npm publish`. Homebrew (macOS/Linux) For a Go or compiled binary, a Homebrew tap is the standard distribution channel: class MyAiTool desc \"AI-powered CLI tool\" homepage \"https://github.com/you/my-ai-tool\" url \"https://github.com/you/my-ai-tool/archive/v0.1.0.tar.gz\" sha256 \"...\" depends_on \"python@3.12\" def install bin.install \"my-ai-tool\" end end For interpreted languages (Python, Node.js), PyPI and npm are better distribution channels. Homebrew makes sense for compiled binaries (Rust, Go, Zig) that embed the LLM client. Environment and Configuration AI CLI tools need API keys. Best practices: * **Read `ANTHROPIC_API_KEY` or `OPENAI_API_KEY`** from environment variables by default. * **Support `.env` files** in the working directory. * **Store preferences** in `~/.config/my-tool/config.toml`. * **Never hardcode keys** \u2014 not even for testing. Use environment variables in CI too. import os from dotenv import load_dotenv load_dotenv() # load .env file api_key = os.environ.get(\"ANTHROPIC_API_KEY\") or os.environ.get(\"OPENAI_API_KEY\") if not api_key: click.echo(\"Error: Set ANTHROPIC_API_KEY or OPENAI_API_KEY\", err=True) raise click.Abort() Putting It All Together: Architecture Checklist When designing a new AI CLI tool, run through these questions: * **Input:** Arguments, flags, stdin, or interactive? What's the primary interface? 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Context:** What files, commands, or environment state does the model need to see? 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Stateless or stateful?** A single Q&A;, or a session with history and state? 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Streaming:** Are you writing tokens to stdout as they arrive? 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Tools:** Can the model read files, run commands, make API calls, or edit files? 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Error recovery:** What happens on 429, context overflow, or network failure? 7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Output format:** Plain text, markdown, JSON, or structured data for piping? 8\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Distribution:** PyPI, npm, Homebrew, or a single binary? The answers define your architecture. A simple \"explain this error\" tool needs only streaming Q&A.; A \"refactor this codebase\" tool needs file I/O, git integration, multi-step planning, and undo support. Beyond Simple Wrappers The tools described here are the foundation. The next generation of AI CLI tools will: * **Watch files and react** (like `entr` or `watchexec`, but with AI analysis). * **Run as daemons** with persistent context (think `tmux` for AI sessions). * **Collaborate** \u2014 multiple users share an AI CLI session. * **Cache aggressively** \u2014 prompt caching cuts latency 2-3x and cost in half. * **Use local models** \u2014 `llama.cpp` and `mlx` make local LLMs viable for many CLI tasks. The pattern is always the same: CLI framework handles input, LLM SDK handles generation, your orchestration code connects them. Get the streaming right, handle errors gracefully, and you have a tool that feels like magic in the terminal. See also: [Click vs Typer vs argparse](), [Best Terminal Emulators 2026](), [Best Local Dev Tools]()."
     }
     </script>
     <script type="application/ld+json">
@@ -88,954 +88,6763 @@
 <br>
 <h1>Building AI-Powered CLI Tools: A Complete Guide for Developers</h1>
 <br>
+<br>
+<br>
+<br>
+<h1>Building AI-Powered CLI Tools: A Complete Guide for Developers</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Building AI-Powered CLI Tools: A Complete Guide for Developers</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Building AI-Powered CLI Tools: A Complete Guide for Developers</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Building AI-Powered CLI Tools: A Complete Guide for Developers</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>The terminal is having a renaissance. Developers spend hours in it every day — and LLMs have turned it from a read-only window into something that can understand, generate, and transform code and text. An AI-powered CLI tool isn't just an API wrapper with a flag parser. It's a new kind of interface: one where the computer can *interpret intent, reason about context, and take action*.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>This guide covers how to build these tools end-to-end: architecture patterns, Python and Node.js implementations, streaming, interactive flows, file-aware agents, packaging, and two real-world examples you can adapt right now.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Why AI CLI Tools Are Different</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>A traditional CLI tool maps flags to function calls. An AI CLI tool does something fundamentally different:</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **It interprets natural language.** `tldr docker-compose` searches a cheat sheet. `gpt "explain docker-compose networking"` understands intent.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **It has context.** File-aware tools read your codebase before answering.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **It can take multi-step actions.** Not just "output text" but "read files, plan, execute, verify."</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **It streams reasoning.** Users see the model think, which builds trust and lets them cancel early.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>The architecture looks like this:</p>
 <br>
-<p>    User Input (args, stdin, interactive) → CLI Framework (Click/Commander)</p>
 <br>
-<p>      → Orchestrator (prompt construction, tool management)</p>
 <br>
-<p>        → LLM SDK (OpenAI/Anthropic/Claude)</p>
 <br>
-<p>          → Streaming stdout / file writes / git commits / API calls</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>User Input (args, stdin, interactive) → CLI Framework (Click/Commander)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>→ Orchestrator (prompt construction, tool management)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>→ LLM SDK (OpenAI/Anthropic/Claude)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>→ Streaming stdout / file writes / git commits / API calls</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>The CLI framework handles input parsing and help text. The orchestrator constructs prompts, manages conversation history, and decides when to call tools. The LLM SDK is a thin wrapper — the real work is in prompt engineering and tool orchestration.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Architecture of AI CLI Tools</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Every AI CLI tool shares these layers:</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>**Input Layer.** Accepts flags, arguments, stdin, and interactive input. This is where you decide between `tool ask "question"`, `cat file | tool`, and `tool --interactive`.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Context Layer.** Gathers information the model needs: file contents, git diff output, directory listings, environment variables, previous conversation turns.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>**Orchestration Layer.** Manages the conversation loop. For simple tools this is one request/response. For agents, it's a loop: model responds, you execute tool calls, you feed results back, model responds again.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Output Layer.** Streams tokens to stdout, formats structured output (JSON, markdown), and handles errors gracefully.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>The key design decision is **stateless vs. stateful**. Stateless tools (one question, one answer) are simpler. Stateful tools (multi-turn conversations, file edits, undo) require persistence — typically a session file or a temp directory.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Python: Click + LLM SDK</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Python is the most popular language for CLI tools, and [Click](https://click.palletsprojects.com/) is the standard framework. Pair it with the `openai` or `anthropic` SDK.</p>
 <br>
-<p>    import click</p>
 <br>
-<p>    from openai import OpenAI</p>
 <br>
-<p>    client = OpenAI()</p>
 <br>
-<p>    @click.command()</p>
 <br>
-<p>    @click.argument("prompt", required=False)</p>
 <br>
-<p>    @click.option("--model", default="gpt-4o", help="Model to use")</p>
 <br>
-<p>    @click.option("--system", default="You are a helpful assistant.")</p>
 <br>
-<p>    def ask(prompt, model, system):</p>
 <br>
-<p>        """Ask an LLM a question from the command line."""</p>
 <br>
-<p>        if not prompt and not click.get_text_stream("stdin").isatty():</p>
 <br>
-<p>            prompt = click.get_text_stream("stdin").read().strip()</p>
 <br>
-<p>        if not prompt:</p>
 <br>
-<p>            click.echo("Usage: ask PROMPT or pipe input")</p>
+<p>import click</p>
 <br>
-<p>            return</p>
 <br>
-<p>        stream = client.chat.completions.create(</p>
 <br>
-<p>            model=model,</p>
 <br>
-<p>            messages=[</p>
 <br>
-<p>                {"role": "system", "content": system},</p>
 <br>
-<p>                {"role": "user", "content": prompt},</p>
 <br>
-<p>            ],</p>
 <br>
-<p>            stream=True,</p>
 <br>
-<p>        )</p>
 <br>
-<p>        for chunk in stream:</p>
 <br>
-<p>            content = chunk.choices[0].delta.content or ""</p>
 <br>
-<p>            click.echo(content, nl=False)</p>
 <br>
-<p>        click.echo()</p>
+<p>from openai import OpenAI</p>
 <br>
-<p>    if __name__ == "__main__":</p>
 <br>
-<p>        ask()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>client = OpenAI()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@click.command()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@click.argument("prompt", required=False)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@click.option("--model", default="gpt-4o", help="Model to use")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@click.option("--system", default="You are a helpful assistant.")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def ask(prompt, model, system):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"""Ask an LLM a question from the command line."""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if not prompt and not click.get_text_stream("stdin").isatty():</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>prompt = click.get_text_stream("stdin").read().strip()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if not prompt:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo("Usage: ask PROMPT or pipe input")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>stream = client.chat.completions.create(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model=model,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages=[</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{"role": "system", "content": system},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{"role": "user", "content": prompt},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>stream=True,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for chunk in stream:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>content = chunk.choices[0].delta.content or ""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo(content, nl=False)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if __name__ == "__main__":</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ask()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>This tool accepts input as an argument or via stdin pipe, streams the response character by character, and uses Click's built-in help formatting. The streaming loop is the critical difference from a non-AI CLI — users expect to see output appear incrementally, not wait for a full response.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>For a richer experience with [Typer](https://typer.tiangolo.com/) (Click with type hints):</p>
 <br>
-<p>    import typer</p>
 <br>
-<p>    from rich.console import Console</p>
 <br>
-<p>    from rich.live import Live</p>
 <br>
-<p>    from rich.markdown import Markdown</p>
 <br>
-<p>    from anthropic import Anthropic</p>
 <br>
-<p>    app = typer.Typer()</p>
 <br>
-<p>    console = Console()</p>
 <br>
-<p>    client = Anthropic()</p>
 <br>
-<p>    @app.command()</p>
 <br>
-<p>    def chat(</p>
 <br>
-<p>        prompt: str = typer.Argument(None, help="Your question"),</p>
 <br>
-<p>        model: str = "claude-sonnet-4-20250514",</p>
 <br>
-<p>    ):</p>
+<p>import typer</p>
 <br>
-<p>        """Chat with Claude from the terminal."""</p>
 <br>
-<p>        if not prompt:</p>
 <br>
-<p>            import sys</p>
 <br>
-<p>            prompt = sys.stdin.read().strip()</p>
 <br>
-<p>        with client.messages.stream(</p>
 <br>
-<p>            model=model,</p>
 <br>
-<p>            max_tokens=4096,</p>
 <br>
-<p>            messages=[{"role": "user", "content": prompt}],</p>
 <br>
-<p>        ) as stream:</p>
 <br>
-<p>            with Live(refresh_per_second=15) as live:</p>
 <br>
-<p>                collected = ""</p>
 <br>
-<p>                for text in stream.text_stream:</p>
 <br>
-<p>                    collected += text</p>
+<p>from rich.console import Console</p>
 <br>
-<p>                    live.update(Markdown(collected))</p>
 <br>
-<p>    if __name__ == "__main__":</p>
 <br>
-<p>        app()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from rich.live import Live</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from rich.markdown import Markdown</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from anthropic import Anthropic</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>app = typer.Typer()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>console = Console()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>client = Anthropic()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@app.command()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def chat(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>prompt: str = typer.Argument(None, help="Your question"),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model: str = "claude-sonnet-4-20250514",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"""Chat with Claude from the terminal."""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if not prompt:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import sys</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>prompt = sys.stdin.read().strip()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>with client.messages.stream(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model=model,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>max_tokens=4096,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages=[{"role": "user", "content": prompt}],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>) as stream:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>with Live(refresh_per_second=15) as live:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>collected = ""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for text in stream.text_stream:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>collected += text</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>live.update(Markdown(collected))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if __name__ == "__main__":</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>app()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Rich's `Live` display with Markdown rendering makes the terminal feel like a chat UI. The `stream.text_stream` pattern gives you tokens as they arrive.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Node.js: Commander + LangChain</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>In the Node.js ecosystem, [Commander](https://github.com/tj/commander.js) is the standard CLI framework. [LangChain](https://js.langchain.com/) adds LLM orchestration, or you can use the SDK directly.</p>
 <br>
-<p>    #!/usr/bin/env node</p>
 <br>
-<p>    import { Command } from 'commander';</p>
 <br>
-<p>    import Anthropic from '@anthropic-ai/sdk';</p>
 <br>
-<p>    const client = new Anthropic();</p>
 <br>
-<p>    const program = new Command()</p>
 <br>
-<p>      .name('ask')</p>
 <br>
-<p>      .description('Ask Claude a question')</p>
 <br>
-<p>      .argument('[prompt]', 'Your question')</p>
 <br>
-<p>      .option('-m, --model <model>', 'Model to use', 'claude-sonnet-4-20250514')</p>
 <br>
-<p>      .option('-s, --system <prompt>', 'System prompt')</p>
 <br>
-<p>      .action(async (prompt, options) => {</p>
 <br>
-<p>        if (!prompt) {</p>
 <br>
-<p>          const stdin = process.stdin.read();</p>
+<p>#!/usr/bin/env node</p>
 <br>
-<p>          prompt = stdin?.toString().trim();</p>
 <br>
-<p>        }</p>
 <br>
-<p>        if (!prompt) {</p>
 <br>
-<p>          console.error('Usage: ask PROMPT or pipe input');</p>
 <br>
-<p>          process.exit(1);</p>
 <br>
-<p>        }</p>
 <br>
-<p>        const stream = await client.messages.stream({</p>
 <br>
-<p>          model: options.model,</p>
 <br>
-<p>          max_tokens: 4096,</p>
 <br>
-<p>          system: options.system,</p>
 <br>
-<p>          messages: [{ role: 'user', content: prompt }],</p>
 <br>
-<p>        }).on('text', (text) => process.stdout.write(text));</p>
 <br>
-<p>        console.log();</p>
+<p>import { Command } from 'commander';</p>
 <br>
-<p>      });</p>
 <br>
-<p>    program.parse();</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import Anthropic from '@anthropic-ai/sdk';</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const client = new Anthropic();</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const program = new Command()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.name('ask')</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.description('Ask Claude a question')</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.argument('[prompt]', 'Your question')</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.option('-m, --model ', 'Model to use', 'claude-sonnet-4-20250514')</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.option('-s, --system ', 'System prompt')</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.action(async (prompt, options) => {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if (!prompt) {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const stdin = process.stdin.read();</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>prompt = stdin?.toString().trim();</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if (!prompt) {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>console.error('Usage: ask PROMPT or pipe input');</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>process.exit(1);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const stream = await client.messages.stream({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model: options.model,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>max_tokens: 4096,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>system: options.system,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages: [{ role: 'user', content: prompt }],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}).on('text', (text) => process.stdout.write(text));</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>console.log();</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>program.parse();</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>The `@anthropic-ai/sdk` Node.js streaming API emits `text` events. Write each chunk to `process.stdout` for that real-time feel. For more complex tools, LangChain's `RunnableSequence` lets you chain prompts, tools, and output parsers:</p>
 <br>
-<p>    import { Command } from 'commander';</p>
 <br>
-<p>    import { ChatOpenAI } from '@langchain/openai';</p>
 <br>
-<p>    import { StringOutputParser } from '@langchain/core/output_parsers';</p>
 <br>
-<p>    import { ChatPromptTemplate } from '@langchain/core/prompts';</p>
 <br>
-<p>    const model = new ChatOpenAI({ model: 'gpt-4o', streaming: true });</p>
 <br>
-<p>    const parser = new StringOutputParser();</p>
 <br>
-<p>    const prompt = ChatPromptTemplate.fromMessages([</p>
 <br>
-<p>      ['system', 'You are a technical writer.'],</p>
 <br>
-<p>      ['user', 'Explain {topic} in one paragraph.'],</p>
 <br>
-<p>    ]);</p>
 <br>
-<p>    const chain = prompt.pipe(model).pipe(parser);</p>
 <br>
-<p>    const program = new Command()</p>
 <br>
-<p>      .argument('<topic>')</p>
+<p>import { Command } from 'commander';</p>
 <br>
-<p>      .action(async (topic) => {</p>
 <br>
-<p>        const stream = await chain.stream({ topic });</p>
 <br>
-<p>        for await (const chunk of stream) {</p>
 <br>
-<p>          process.stdout.write(chunk);</p>
 <br>
-<p>        }</p>
 <br>
-<p>        console.log();</p>
 <br>
-<p>      });</p>
 <br>
-<p>    program.parse();</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import { ChatOpenAI } from '@langchain/openai';</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import { StringOutputParser } from '@langchain/core/output_parsers';</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import { ChatPromptTemplate } from '@langchain/core/prompts';</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const model = new ChatOpenAI({ model: 'gpt-4o', streaming: true });</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const parser = new StringOutputParser();</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const prompt = ChatPromptTemplate.fromMessages([</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>['system', 'You are a technical writer.'],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>['user', 'Explain {topic} in one paragraph.'],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>]);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const chain = prompt.pipe(model).pipe(parser);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const program = new Command()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.argument('')</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.action(async (topic) => {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const stream = await chain.stream({ topic });</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for await (const chunk of stream) {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>process.stdout.write(chunk);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>console.log();</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>program.parse();</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>LangChain shines when you need tool-calling agents (reading files, running commands, browsing the web). The chain abstraction keeps the orchestration readable.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Pattern: Streaming Responses to stdout</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Streaming is table stakes. Users won't wait 10 seconds for a full response. Here's the pattern that works across languages:</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Open a streaming connection** to the LLM API.</p>
 <br>
-<p>2\. **Write each token** to stdout as it arrives — no buffering.</p>
 <br>
-<p>3\. **Handle backpressure.** If the terminal is slow, don't drop tokens; let the OS buffer.</p>
 <br>
-<p>4\. **Support Ctrl+C.** Trap SIGINT to print a clean exit, not a traceback.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>2\\\\\\\\\\\\\\\\. **Write each token** to stdout as it arrives — no buffering.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>3\\\\\\\\\\\\\\\\. **Handle backpressure.** If the terminal is slow, don't drop tokens; let the OS buffer.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>4\\\\\\\\\\\\\\\\. **Support Ctrl+C.** Trap SIGINT to print a clean exit, not a traceback.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>In Python with Click:</p>
 <br>
-<p>    import signal</p>
 <br>
-<p>    import sys</p>
 <br>
-<p>    def handle_interrupt(sig, frame):</p>
 <br>
-<p>        click.echo("\n[Interrupted]", err=True)</p>
 <br>
-<p>        sys.exit(130)</p>
 <br>
-<p>    signal.signal(signal.SIGINT, handle_interrupt)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import signal</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import sys</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def handle_interrupt(sig, frame):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo("\n[Interrupted]", err=True)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>sys.exit(130)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>signal.signal(signal.SIGINT, handle_interrupt)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>In Node.js with Commander:</p>
 <br>
-<p>    process.on('SIGINT', () => {</p>
 <br>
-<p>      console.error('\n[Interrupted]');</p>
 <br>
-<p>      process.exit(130);</p>
 <br>
-<p>    });</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>process.on('SIGINT', () => {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>console.error('\n[Interrupted]');</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>process.exit(130);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Rich formatting (Markdown, syntax highlighting) makes streaming output readable. But be careful with Rich's `Live` — it re-renders the entire output on each frame, which can be slow for long streams. For long outputs, raw `click.echo` or `process.stdout.write` is more performant.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Pattern: Interactive Multi-Step Tools</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Not every tool is a single query. Interactive tools maintain state across turns. The pattern is a **REPL loop** with AI-generated responses.</p>
 <br>
-<p>    import click</p>
 <br>
-<p>    from openai import OpenAI</p>
 <br>
-<p>    client = OpenAI()</p>
 <br>
-<p>    @click.command()</p>
 <br>
-<p>    @click.option("--model", default="gpt-4o")</p>
 <br>
-<p>    def chat(model):</p>
 <br>
-<p>        """Interactive chat session."""</p>
 <br>
-<p>        click.echo("Chat session started. Type /exit to quit.", err=True)</p>
 <br>
-<p>        messages = [{"role": "system", "content": "You are a helpful assistant."}]</p>
 <br>
-<p>        while True:</p>
 <br>
-<p>            user_input = click.prompt("You", prompt_suffix="> ")</p>
 <br>
-<p>            if user_input.strip() == "/exit":</p>
 <br>
-<p>                break</p>
+<p>import click</p>
 <br>
-<p>            messages.append({"role": "user", "content": user_input})</p>
 <br>
-<p>            stream = client.chat.completions.create(</p>
 <br>
-<p>                model=model, messages=messages, stream=True</p>
 <br>
-<p>            )</p>
 <br>
-<p>            click.echo("AI: ", nl=False)</p>
 <br>
-<p>            collected = ""</p>
 <br>
-<p>            for chunk in stream:</p>
 <br>
-<p>                content = chunk.choices[0].delta.content or ""</p>
 <br>
-<p>                collected += content</p>
 <br>
-<p>                click.echo(content, nl=False)</p>
 <br>
-<p>            click.echo()</p>
 <br>
-<p>            messages.append({"role": "assistant", "content": collected})</p>
+<br>
+<p>from openai import OpenAI</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>client = OpenAI()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@click.command()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@click.option("--model", default="gpt-4o")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def chat(model):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"""Interactive chat session."""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo("Chat session started. Type /exit to quit.", err=True)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages = [{"role": "system", "content": "You are a helpful assistant."}]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>while True:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>user_input = click.prompt("You", prompt_suffix="> ")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if user_input.strip() == "/exit":</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>break</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages.append({"role": "user", "content": user_input})</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>stream = client.chat.completions.create(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model=model, messages=messages, stream=True</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo("AI: ", nl=False)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>collected = ""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for chunk in stream:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>content = chunk.choices[0].delta.content or ""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>collected += content</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo(content, nl=False)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages.append({"role": "assistant", "content": collected})</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>For **tool-using agents**, the pattern extends to a loop: the model requests a tool call, your code executes it and feeds the result back, the model continues:</p>
 <br>
-<p>    while True:</p>
 <br>
-<p>        response = client.responses.create(</p>
 <br>
-<p>            model="gpt-4o",</p>
 <br>
-<p>            input=messages,</p>
 <br>
-<p>            tools=[{</p>
 <br>
-<p>                "type": "function",</p>
 <br>
-<p>                "function": {</p>
 <br>
-<p>                    "name": "read_file",</p>
 <br>
-<p>                    "description": "Read a file from disk",</p>
 <br>
-<p>                    "parameters": {</p>
 <br>
-<p>                        "type": "object",</p>
 <br>
-<p>                        "properties": {</p>
 <br>
-<p>                            "path": {"type": "string"}</p>
+<p>while True:</p>
 <br>
-<p>                        }</p>
 <br>
-<p>                    }</p>
 <br>
-<p>                }</p>
 <br>
-<p>            }]</p>
 <br>
-<p>        )</p>
 <br>
-<p>        if response.output[0].type == "function_call":</p>
 <br>
-<p>            fn = response.output[0]</p>
 <br>
-<p>            result = execute_tool(fn.name, json.loads(fn.arguments))</p>
 <br>
-<p>            messages.append({"role": "tool", "content": str(result), "tool_call_id": fn.id})</p>
 <br>
-<p>        else:</p>
 <br>
-<p>            click.echo(response.output_text)</p>
 <br>
-<p>            break</p>
+<br>
+<p>response = client.responses.create(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model="gpt-4o",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>input=messages,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tools=[{</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"type": "function",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"function": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"name": "read_file",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"description": "Read a file from disk",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"parameters": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"type": "object",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"properties": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"path": {"type": "string"}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if response.output[0].type == "function_call":</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>fn = response.output[0]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>result = execute_tool(fn.name, json.loads(fn.arguments))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages.append({"role": "tool", "content": str(result), "tool_call_id": fn.id})</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>else:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo(response.output_text)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>break</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>This is the same pattern powering Claude Code and similar AI coding agents. The complexity is in which tools you expose (file read/write, git, shell, search) and how much context you pack into the system prompt.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Pattern: File-Aware Tools</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>File-aware tools read the user's working directory before generating responses. This is the most useful pattern for developer tools.</p>
 <br>
-<p>    import os</p>
 <br>
-<p>    import click</p>
 <br>
-<p>    from anthropic import Anthropic</p>
 <br>
-<p>    client = Anthropic()</p>
 <br>
-<p>    @click.command()</p>
 <br>
-<p>    @click.argument("files", nargs=-1, type=click.Path(exists=True))</p>
 <br>
-<p>    @click.option("--recursive/--no-recursive", default=True)</p>
 <br>
-<p>    def analyze(files, recursive):</p>
 <br>
-<p>        """Analyze files with AI assistance."""</p>
 <br>
-<p>        contents = []</p>
 <br>
-<p>        for f in files:</p>
 <br>
-<p>            if os.path.isfile(f):</p>
 <br>
-<p>                with open(f) as fh:</p>
+<p>import os</p>
 <br>
-<p>                    contents.append(f"### {f}\n\n```\n{fh.read()}\n```")</p>
 <br>
-<p>            elif os.path.isdir(f) and recursive:</p>
 <br>
-<p>                for root, _, filenames in os.walk(f):</p>
 <br>
-<p>                    for fn in filenames:</p>
 <br>
-<p>                        path = os.path.join(root, fn)</p>
 <br>
-<p>                        try:</p>
 <br>
-<p>                            with open(path) as fh:</p>
 <br>
-<p>                                contents.append(f"### {path}\n\n```\n{fh.read()}\n```")</p>
 <br>
-<p>                        except Exception:</p>
 <br>
-<p>                            pass</p>
 <br>
-<p>        context = "\n\n".join(contents[:20])  # limit context size</p>
 <br>
-<p>        prompt = f"The user wants to understand these files:\n\n{context}"</p>
 <br>
-<p>        with client.messages.stream(</p>
+<p>import click</p>
 <br>
-<p>            model="claude-sonnet-4-20250514",</p>
 <br>
-<p>            max_tokens=4096,</p>
 <br>
-<p>            messages=[{"role": "user", "content": prompt}],</p>
 <br>
-<p>        ) as stream:</p>
 <br>
-<p>            for text in stream.text_stream:</p>
 <br>
-<p>                click.echo(text, nl=False)</p>
 <br>
-<p>        click.echo()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from anthropic import Anthropic</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>client = Anthropic()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@click.command()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@click.argument("files", nargs=-1, type=click.Path(exists=True))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@click.option("--recursive/--no-recursive", default=True)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def analyze(files, recursive):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"""Analyze files with AI assistance."""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>contents = []</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for f in files:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if os.path.isfile(f):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>with open(f) as fh:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>contents.append(f"### {f}\n\n```\n{fh.read()}\n```")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>elif os.path.isdir(f) and recursive:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for root, _, filenames in os.walk(f):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for fn in filenames:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>path = os.path.join(root, fn)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>try:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>with open(path) as fh:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>contents.append(f"### {path}\n\n```\n{fh.read()}\n```")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except Exception:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pass</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>context = "\n\n".join(contents[:20]) # limit context size</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>prompt = f"The user wants to understand these files:\n\n{context}"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>with client.messages.stream(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model="claude-sonnet-4-20250514",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>max_tokens=4096,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages=[{"role": "user", "content": prompt}],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>) as stream:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for text in stream.text_stream:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo(text, nl=False)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>The key challenge is **context window management**. You can't dump every file in a monorepo into the prompt. Strategies:</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Token counting.** Use `tiktoken` (Python) or `gpt-tokenizer` (Node.js) to count tokens before sending. Truncate when approaching the model's limit.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **File globbing.** Let users specify patterns: `analyze src/**/*.py`.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Smart filtering.** Skip binary files, node_modules, .git, and other non-text directories automatically.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Chunking.** For large files, send only relevant sections (first 50 lines, function signatures, recent git changes).</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  CLI Framework Comparison</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Feature | Click | Typer | Commander | Clack |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>|---|---|---|---|---|</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| **Language** | Python | Python | Node.js | Node.js |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| **Type hints** | Decorators | Type-annotated | Methods | Methods |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| **Help text** | Auto (good) | Auto (excellent) | Auto | Auto |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| **Subcommands**| Yes (groups) | Yes | Yes | No (single command) |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| **Interactive prompts** | Yes (click.prompt) | Yes | Manual | Rich (native) |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| **Autocomplete**| Shell completion | Shell completion | Manual | Built-in |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| **Spinner/progress** | No | Rich integration | No | Built-in spinners |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| **Best for** | Any Python CLI | Python CLI + type safety | Any Node.js CLI | Interactive Node.js CLIs |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>**Click** is the battle-tested Python standard. It handles argument parsing, help text formatting, subcommands, and shell completion. The decorator API is clean and composable.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Typer** wraps Click with Python type hints. Less boilerplate, better autocomplete in IDEs, and built-in Rich integration for colored output and spinners.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>**Commander** is Click's Node.js equivalent. It's minimal, widely used, and easy to extend. You handle streaming and spinners yourself.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Clack** is newer and focused on *interactive* CLIs — prompts with autocomplete, multiselect, spinners, and cancel handling. It's not great for traditional flag-based tools, but excellent for `npm init`-style interactive setups.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>For AI CLI tools, Typer + Rich (Python) or Commander + `@clack/prompt` (Node.js) are the most productive combinations.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Real Example: AI Code Review CLI</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>This tool runs `git diff` against the staging area, sends the diff to an LLM for review, and outputs structured feedback.</p>
 <br>
-<p>    #!/usr/bin/env python3</p>
 <br>
-<p>    import subprocess</p>
 <br>
-<p>    import click</p>
 <br>
-<p>    from anthropic import Anthropic</p>
 <br>
-<p>    client = Anthropic()</p>
 <br>
-<p>    @click.command()</p>
 <br>
-<p>    @click.option("--diff", is_flag=True, help="Review unstaged changes too")</p>
 <br>
-<p>    @click.option("--model", default="claude-sonnet-4-20250514")</p>
 <br>
-<p>    @click.option("--output", type=click.Choice(["text", "markdown", "json"]), default="markdown")</p>
 <br>
-<p>    def review(diff, model, output):</p>
 <br>
-<p>        """Review staged git changes with AI."""</p>
 <br>
-<p>        # Get git diff</p>
 <br>
-<p>        cmd = ["git", "diff", "--cached"]</p>
+<p>#!/usr/bin/env python3</p>
 <br>
-<p>        if diff:</p>
 <br>
-<p>            cmd = ["git", "diff"]</p>
 <br>
-<p>        result = subprocess.run(cmd, capture_output=True, text=True)</p>
 <br>
-<p>        if not result.stdout.strip():</p>
 <br>
-<p>            click.echo("No changes to review.", err=True)</p>
 <br>
-<p>            raise click.Abort()</p>
 <br>
-<p>        # Count lines and warn</p>
 <br>
-<p>        lines = result.stdout.count("\n")</p>
 <br>
-<p>        if lines > 2000:</p>
 <br>
-<p>            click.echo(f"Diff is {lines} lines, will review first 2000.", err=True)</p>
 <br>
-<p>        system = """You are a senior code reviewer. Review the git diff below.</p>
 <br>
-<p>    Focus on: logic errors, security issues, performance problems, style violations.</p>
 <br>
-<p>    For each issue, include: file, line, severity (critical/warning/nit), and suggestion.</p>
+<p>import subprocess</p>
 <br>
-<p>    Output in the format requested."""</p>
 <br>
-<p>        prompt = f"Review this git diff:\n\n```diff\n{result.stdout[:50000]}\n```"</p>
 <br>
-<p>        if output == "json":</p>
 <br>
-<p>            response = client.messages.create(</p>
 <br>
-<p>                model=model,</p>
 <br>
-<p>                max_tokens=4096,</p>
 <br>
-<p>                system=system,</p>
 <br>
-<p>                messages=[{"role": "user", "content": prompt + "\n\nRespond in JSON format."}],</p>
 <br>
-<p>            )</p>
 <br>
-<p>            print(response.content[0].text)</p>
 <br>
-<p>        else:</p>
 <br>
-<p>            with client.messages.stream(</p>
 <br>
-<p>                model=model, max_tokens=4096, system=system,</p>
+<p>import click</p>
 <br>
-<p>                messages=[{"role": "user", "content": prompt}],</p>
 <br>
-<p>            ) as stream:</p>
 <br>
-<p>                for text in stream.text_stream:</p>
 <br>
-<p>                    click.echo(text, nl=False)</p>
 <br>
-<p>            click.echo()</p>
 <br>
-<p>    if __name__ == "__main__":</p>
 <br>
-<p>        review()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from anthropic import Anthropic</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>client = Anthropic()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@click.command()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@click.option("--diff", is_flag=True, help="Review unstaged changes too")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@click.option("--model", default="claude-sonnet-4-20250514")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@click.option("--output", type=click.Choice(["text", "markdown", "json"]), default="markdown")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def review(diff, model, output):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"""Review staged git changes with AI."""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Get git diff</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cmd = ["git", "diff", "--cached"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if diff:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cmd = ["git", "diff"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>result = subprocess.run(cmd, capture_output=True, text=True)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if not result.stdout.strip():</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo("No changes to review.", err=True)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise click.Abort()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Count lines and warn</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>lines = result.stdout.count("\n")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if lines > 2000:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo(f"Diff is {lines} lines, will review first 2000.", err=True)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>system = """You are a senior code reviewer. Review the git diff below.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Focus on: logic errors, security issues, performance problems, style violations.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>For each issue, include: file, line, severity (critical/warning/nit), and suggestion.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Output in the format requested."""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>prompt = f"Review this git diff:\n\n```diff\n{result.stdout[:50000]}\n```"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if output == "json":</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response = client.messages.create(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model=model,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>max_tokens=4096,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>system=system,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages=[{"role": "user", "content": prompt + "\n\nRespond in JSON format."}],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>print(response.content[0].text)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>else:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>with client.messages.stream(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model=model, max_tokens=4096, system=system,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages=[{"role": "user", "content": prompt}],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>) as stream:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for text in stream.text_stream:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo(text, nl=False)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if __name__ == "__main__":</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>review()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>The code review tool is a good example of the **file-aware + git-aware** pattern. It captures context (the diff) without needing file I/O itself. The key design choices:</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Git integration** via `subprocess` — no git library dependency.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Size limits** — warns if the diff is too large.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Output format selection** — text/markdown for human reading, JSON for CI pipeline consumption.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Streaming** for interactive use, full response for JSON mode.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Real Example: AI Git Commit Message Generator</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>This is the most common AI CLI tool in the wild. It reads staged changes and generates a conventional commit message.</p>
 <br>
-<p>    #!/usr/bin/env python3</p>
 <br>
-<p>    import subprocess</p>
 <br>
-<p>    import json</p>
 <br>
-<p>    import click</p>
 <br>
-<p>    from anthropic import Anthropic</p>
 <br>
-<p>    client = Anthropic()</p>
 <br>
-<p>    @click.command()</p>
 <br>
-<p>    @click.option("--model", default="claude-sonnet-4-20250514")</p>
 <br>
-<p>    @click.option("--type", "commit_type", help="Conventional commit type (feat, fix, etc.)")</p>
 <br>
-<p>    @click.option("--scope", help="Commit scope")</p>
 <br>
-<p>    def commit(model, commit_type, scope):</p>
 <br>
-<p>        """Generate a commit message from staged changes."""</p>
 <br>
-<p>        result = subprocess.run(</p>
+<p>#!/usr/bin/env python3</p>
 <br>
-<p>            ["git", "diff", "--cached"],</p>
 <br>
-<p>            capture_output=True, text=True</p>
 <br>
-<p>        )</p>
 <br>
-<p>        if not result.stdout.strip():</p>
 <br>
-<p>            click.echo("No staged changes. Stage files with `git add` first.", err=True)</p>
 <br>
-<p>            raise click.Abort()</p>
 <br>
-<p>        prompt = f"""Generate a conventional commit message for this diff.</p>
 <br>
-<p>    Format: {commit_type or '<type>'}({scope or '<scope>'}): <description></p>
 <br>
-<p>    <body></p>
 <br>
-<p>    Rules:</p>
 <br>
-<p>    - First line max 72 characters</p>
 <br>
-<p>    - Use imperative mood</p>
 <br>
-<p>    - Body wraps at 72 characters</p>
+<p>import subprocess</p>
 <br>
-<p>    - Focus on WHAT and WHY, not HOW</p>
 <br>
-<p>    Diff:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import json</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import click</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from anthropic import Anthropic</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>client = Anthropic()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@click.command()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@click.option("--model", default="claude-sonnet-4-20250514")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@click.option("--type", "commit_type", help="Conventional commit type (feat, fix, etc.)")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@click.option("--scope", help="Commit scope")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def commit(model, commit_type, scope):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"""Generate a commit message from staged changes."""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>result = subprocess.run(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>["git", "diff", "--cached"],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>capture_output=True, text=True</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if not result.stdout.strip():</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo("No staged changes. Stage files with `git add` first.", err=True)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise click.Abort()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>prompt = f"""Generate a conventional commit message for this diff.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Format: {commit_type or ''}({scope or ''}): </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Rules:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- First line max 72 characters</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- Use imperative mood</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- Body wraps at 72 characters</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- Focus on WHAT and WHY, not HOW</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Diff:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>{result.stdout[:20000]}</p>
 <br>
-<p>        with client.messages.stream(</p>
 <br>
-<p>            model=model,</p>
 <br>
-<p>            max_tokens=500,</p>
 <br>
-<p>            system="You generate concise, structured git commit messages.",</p>
 <br>
-<p>            messages=[{"role": "user", "content": prompt}],</p>
 <br>
-<p>        ) as stream:</p>
 <br>
-<p>            for text in stream.text_stream:</p>
 <br>
-<p>                click.echo(text, nl=False)</p>
 <br>
-<p>        click.echo("\n")</p>
+<br>
+<br>
+<br>
+<br>
+<p>with client.messages.stream(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model=model,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>max_tokens=500,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>system="You generate concise, structured git commit messages.",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>messages=[{"role": "user", "content": prompt}],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>) as stream:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for text in stream.text_stream:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo(text, nl=False)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo("\n")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Extended versions of this tool:</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Interactive mode** — preview the message, accept/edit/reject.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Multiple suggestions** — generate 3 options, let the user pick.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Template support** — read `.gitmessage` templates.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **AI commit body generation** — expand the body with detailed reasoning.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Error Handling for LLM Calls in CLI</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>LLM calls fail in ways normal API calls don't. Your CLI must handle:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Rate limits.** The API returns 429. Handle with exponential backoff plus jitter:</p>
 <br>
-<p>    import time</p>
 <br>
-<p>    import random</p>
 <br>
-<p>    def call_with_retry(client, max_retries=3, **kwargs):</p>
 <br>
-<p>        for attempt in range(max_retries):</p>
 <br>
-<p>            try:</p>
 <br>
-<p>                return client.messages.create(**kwargs)</p>
 <br>
-<p>            except Exception as e:</p>
 <br>
-<p>                if "429" in str(e) and attempt < max_retries - 1:</p>
 <br>
-<p>                    sleep = (2 ** attempt) + random.random()</p>
 <br>
-<p>                    click.echo(f"Rate limited, retrying in {sleep:.0f}s...", err=True)</p>
 <br>
-<p>                    time.sleep(sleep)</p>
 <br>
-<p>                else:</p>
 <br>
-<p>                    raise</p>
+<p>import time</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import random</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def call_with_retry(client, max_retries=3, **kwargs):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for attempt in range(max_retries):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>try:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return client.messages.create(**kwargs)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except Exception as e:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if "429" in str(e) and attempt < max_retries - 1:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>sleep = (2 ** attempt) + random.random()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo(f"Rate limited, retrying in {sleep:.0f}s...", err=True)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>time.sleep(sleep)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>else:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Context overflow.** The prompt exceeds the model's context window. Pre-count tokens and truncate:</p>
 <br>
-<p>    import tiktoken</p>
 <br>
-<p>    def truncate(text, model="claude-sonnet-4-20250514", max_tokens=80000):</p>
 <br>
-<p>        enc = tiktoken.encoding_for_model("gpt-4")  # approximates well enough</p>
 <br>
-<p>        tokens = enc.encode(text)</p>
 <br>
-<p>        if len(tokens) > max_tokens:</p>
 <br>
-<p>            click.echo(f"Truncating {len(tokens)} tokens to {max_tokens}", err=True)</p>
 <br>
-<p>            return enc.decode(tokens[:max_tokens])</p>
 <br>
-<p>        return text</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import tiktoken</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def truncate(text, model="claude-sonnet-4-20250514", max_tokens=80000):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>enc = tiktoken.encoding_for_model("gpt-4") # approximates well enough</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tokens = enc.encode(text)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if len(tokens) > max_tokens:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo(f"Truncating {len(tokens)} tokens to {max_tokens}", err=True)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return enc.decode(tokens[:max_tokens])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return text</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Network errors.** `ConnectionError`, `Timeout` — catch these specifically and give actionable messages:</p>
 <br>
-<p>    try:</p>
 <br>
-<p>        response = client.messages.create(...)</p>
 <br>
-<p>    except ConnectionError:</p>
 <br>
-<p>        click.echo("Error: Cannot reach the API. Check your internet connection.", err=True)</p>
 <br>
-<p>        raise click.Abort()</p>
 <br>
-<p>    except Exception as e:</p>
 <br>
-<p>        click.echo(f"API error: {e}", err=True)</p>
 <br>
-<p>        raise click.Abort()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>try:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response = client.messages.create(...)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except ConnectionError:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo("Error: Cannot reach the API. Check your internet connection.", err=True)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise click.Abort()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except Exception as e:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo(f"API error: {e}", err=True)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise click.Abort()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Structured error output.** For JSON mode, errors should also be JSON:</p>
 <br>
-<p>    @click.command()</p>
 <br>
-<p>    @click.option("--json-output", is_flag=True)</p>
 <br>
-<p>    def tool(json_output):</p>
 <br>
-<p>        try:</p>
 <br>
-<p>            # ...</p>
 <br>
-<p>        except Exception as e:</p>
 <br>
-<p>            if json_output:</p>
 <br>
-<p>                click.echo(json.dumps({"error": str(e), "success": False}))</p>
 <br>
-<p>            else:</p>
 <br>
-<p>                click.echo(f"Error: {e}", err=True)</p>
 <br>
-<p>            raise click.Abort()</p>
+<br>
+<br>
+<p>@click.command()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@click.option("--json-output", is_flag=True)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def tool(json_output):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>try:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>...</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except Exception as e:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if json_output:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo(json.dumps({"error": str(e), "success": False}))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>else:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo(f"Error: {e}", err=True)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise click.Abort()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Packaging and Distribution</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h3>PyPI (Python)</h3>
 <br>
-<p>    # pyproject.toml</p>
 <br>
-<p>    [build-system]</p>
 <br>
-<p>    requires = ["setuptools", "wheel"]</p>
 <br>
-<p>    build-backend = "setuptools.build_meta"</p>
 <br>
-<p>    [project]</p>
 <br>
-<p>    name = "my-ai-tool"</p>
 <br>
-<p>    version = "0.1.0"</p>
 <br>
-<p>    dependencies = [</p>
 <br>
-<p>        "click>=8.0",</p>
 <br>
-<p>        "anthropic>=0.30.0",</p>
 <br>
-<p>        "tiktoken>=0.5.0",</p>
 <br>
-<p>    ]</p>
 <br>
-<p>    [project.scripts]</p>
+<h1>pyproject.toml</h1>
 <br>
-<p>    my-ai-tool = "my_ai_tool.cli:main"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>[build-system]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>requires = ["setuptools", "wheel"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>build-backend = "setuptools.build_meta"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>[project]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name = "my-ai-tool"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>version = "0.1.0"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>dependencies = [</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"click>=8.0",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"anthropic>=0.30.0",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"tiktoken>=0.5.0",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>[project.scripts]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>my-ai-tool = "my_ai_tool.cli:main"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Install with `pip install my-ai-tool` or publish with `flit publish`.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h3>npm (Node.js)</h3>
 <br>
-<p>    {</p>
 <br>
-<p>      "name": "my-ai-tool",</p>
 <br>
-<p>      "version": "0.1.0",</p>
 <br>
-<p>      "bin": {</p>
 <br>
-<p>        "my-ai-tool": "./bin/cli.js"</p>
 <br>
-<p>      },</p>
 <br>
-<p>      "dependencies": {</p>
 <br>
-<p>        "commander": "^12.0.0",</p>
 <br>
-<p>        "@anthropic-ai/sdk": "^0.30.0"</p>
 <br>
-<p>      }</p>
 <br>
-<p>    }</p>
+<br>
+<br>
+<p>{</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"name": "my-ai-tool",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"version": "0.1.0",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"bin": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"my-ai-tool": "./bin/cli.js"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"dependencies": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"commander": "^12.0.0",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"@anthropic-ai/sdk": "^0.30.0"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Publish with `npm publish`.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h3>Homebrew (macOS/Linux)</h3>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>For a Go or compiled binary, a Homebrew tap is the standard distribution channel:</p>
 <br>
-<p>    class MyAiTool < Formula</p>
 <br>
-<p>      desc "AI-powered CLI tool"</p>
 <br>
-<p>      homepage "https://github.com/you/my-ai-tool"</p>
 <br>
-<p>      url "https://github.com/you/my-ai-tool/archive/v0.1.0.tar.gz"</p>
 <br>
-<p>      sha256 "..."</p>
 <br>
-<p>      depends_on "python@3.12"</p>
 <br>
-<p>      def install</p>
 <br>
-<p>        bin.install "my-ai-tool"</p>
 <br>
-<p>      end</p>
 <br>
-<p>    end</p>
+<br>
+<br>
+<br>
+<p>class MyAiTool < Formula</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>desc "AI-powered CLI tool"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>homepage "https://github.com/you/my-ai-tool"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>url "https://github.com/you/my-ai-tool/archive/v0.1.0.tar.gz"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>sha256 "..."</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>depends_on "python@3.12"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def install</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>bin.install "my-ai-tool"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>end</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>end</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>For interpreted languages (Python, Node.js), PyPI and npm are better distribution channels. Homebrew makes sense for compiled binaries (Rust, Go, Zig) that embed the LLM client.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h3>Environment and Configuration</h3>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>AI CLI tools need API keys. Best practices:</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Read `ANTHROPIC_API_KEY` or `OPENAI_API_KEY`** from environment variables by default.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Support `.env` files** in the working directory.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Store preferences** in `~/.config/my-tool/config.toml`.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Never hardcode keys** — not even for testing. Use environment variables in CI too.</p>
 <br>
-<p>    import os</p>
 <br>
-<p>    from dotenv import load_dotenv</p>
 <br>
-<p>    load_dotenv()  # load .env file</p>
 <br>
-<p>    api_key = os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("OPENAI_API_KEY")</p>
 <br>
-<p>    if not api_key:</p>
 <br>
-<p>        click.echo("Error: Set ANTHROPIC_API_KEY or OPENAI_API_KEY", err=True)</p>
 <br>
-<p>        raise click.Abort()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import os</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from dotenv import load_dotenv</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>load_dotenv() # load .env file</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>api_key = os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("OPENAI_API_KEY")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if not api_key:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>click.echo("Error: Set ANTHROPIC_API_KEY or OPENAI_API_KEY", err=True)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>raise click.Abort()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Putting It All Together: Architecture Checklist</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>When designing a new AI CLI tool, run through these questions:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>* **Input:** Arguments, flags, stdin, or interactive? What's the primary interface?</p>
 <br>
-<p>2\. **Context:** What files, commands, or environment state does the model need to see?</p>
 <br>
-<p>3\. **Stateless or stateful?** A single Q&A;, or a session with history and state?</p>
 <br>
-<p>4\. **Streaming:** Are you writing tokens to stdout as they arrive?</p>
 <br>
-<p>5\. **Tools:** Can the model read files, run commands, make API calls, or edit files?</p>
 <br>
-<p>6\. **Error recovery:** What happens on 429, context overflow, or network failure?</p>
 <br>
-<p>7\. **Output format:** Plain text, markdown, JSON, or structured data for piping?</p>
 <br>
-<p>8\. **Distribution:** PyPI, npm, Homebrew, or a single binary?</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>2\\\\\\\\\\\\\\\\. **Context:** What files, commands, or environment state does the model need to see?</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>3\\\\\\\\\\\\\\\\. **Stateless or stateful?** A single Q&A;, or a session with history and state?</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>4\\\\\\\\\\\\\\\\. **Streaming:** Are you writing tokens to stdout as they arrive?</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>5\\\\\\\\\\\\\\\\. **Tools:** Can the model read files, run commands, make API calls, or edit files?</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>6\\\\\\\\\\\\\\\\. **Error recovery:** What happens on 429, context overflow, or network failure?</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>7\\\\\\\\\\\\\\\\. **Output format:** Plain text, markdown, JSON, or structured data for piping?</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>8\\\\\\\\\\\\\\\\. **Distribution:** PyPI, npm, Homebrew, or a single binary?</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>The answers define your architecture. A simple "explain this error" tool needs only streaming Q&A.; A "refactor this codebase" tool needs file I/O, git integration, multi-step planning, and undo support.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Beyond Simple Wrappers</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>The tools described here are the foundation. The next generation of AI CLI tools will:</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Watch files and react** (like `entr` or `watchexec`, but with AI analysis).</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Run as daemons** with persistent context (think `tmux` for AI sessions).</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Collaborate** — multiple users share an AI CLI session.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Cache aggressively** — prompt caching cuts latency 2-3x and cost in half.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Use local models** — `llama.cpp` and `mlx` make local LLMs viable for many CLI tasks.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>The pattern is always the same: CLI framework handles input, LLM SDK handles generation, your orchestration code connects them. Get the streaming right, handle errors gracefully, and you have a tool that feels like magic in the terminal.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>See also: [Click vs Typer vs argparse](), [Best Terminal Emulators 2026](), [Best Local Dev Tools]().</p></div>
     </article>
@@ -1053,6 +6862,7 @@
       <noscript><div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

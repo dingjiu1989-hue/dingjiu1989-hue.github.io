@@ -8,271 +8,2345 @@ url: https://dingjiu1989-hue.github.io/en/ai/llm-chaining-patterns.html
 
 # LLM Chaining and Pipeline Patterns
 
+# LLM Chaining and Pipeline Patterns
+
+  
+
+
+# LLM Chaining and Pipeline Patterns
+
+  
+  
+  
+  
+
+
+# LLM Chaining and Pipeline Patterns
+
+  
+  
+  
+  
+  
+  
+  
+
+
+# LLM Chaining and Pipeline Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# LLM Chaining and Pipeline Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Single LLM calls are rarely sufficient for complex tasks. Chaining — connecting multiple LLM calls in a pipeline — enables sophisticated workflows where each step builds on or refines the output of the previous one. This guide covers the essential chaining patterns used in production AI systems.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Why Chain?
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 A single LLM call has limitations:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * **Attention dilution**: Long, complex prompts dilute attention across too many requirements
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * **Error compounding**: A single ambiguous instruction can produce incorrect output
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * **Token waste**: Including all context and instructions in one call is inefficient
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * **Debugging difficulty**: When output is wrong, isolating which instruction caused the problem is hard
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Chaining addresses these by decomposing complex tasks into focused steps, each with a clear objective and validation criteria.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Core Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ### Sequential Chain
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The simplest pattern: output of step N becomes input to step N+1.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 **Use case**: Multi-stage content processing
 
-    Raw text → Extract key facts → Verify facts → Format output
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    def sequential_chain(text):
 
-        facts = extract_facts(text)
+Raw text → Extract key facts → Verify facts → Format output
 
-        verified = verify_facts(facts)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        formatted = format_output(verified)
 
-        return formatted
+def sequential_chain(text):
 
-    def extract_facts(text):
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        return call_llm("Extract all factual claims from this text:", text)
 
-    def verify_facts(claims):
+facts = extract_facts(text)
 
-        return call_llm("Verify each claim. Mark as VERIFIED, QUESTIONABLE, or FALSE:", claims)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    def format_output(verified):
 
-        return call_llm("Format the verified claims as a clean bullet list:", verified)
+verified = verify_facts(facts)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+formatted = format_output(verified)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return formatted
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def extract_facts(text):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return call_llm("Extract all factual claims from this text:", text)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def verify_facts(claims):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return call_llm("Verify each claim. Mark as VERIFIED, QUESTIONABLE, or FALSE:", claims)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def format_output(verified):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return call_llm("Format the verified claims as a clean bullet list:", verified)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ### Map-Reduce Chain
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Process multiple items independently, then combine results.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 **Use case**: Summarizing many documents, analyzing multiple customer reviews
 
-    def map_reduce(items, map_prompt, reduce_prompt):
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        # Map: process each item independently
 
-        intermediate = []
+def map_reduce(items, map_prompt, reduce_prompt):
 
-        for item in items:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            result = call_llm(map_prompt, item)
 
-            intermediate.append(result)
+# Map: process each item independently
 
-        # Reduce: combine all intermediate results
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        combined = "\n---\n".join(intermediate)
 
-        final = call_llm(reduce_prompt, combined)
+intermediate = []
 
-        return final
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    # Example: summarize 50 customer reviews
 
-    reviews = load_reviews()
+for item in items:
 
-    map_prompt = "Summarize this customer review in one sentence, focusing on sentiment and key points:"
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    reduce_prompt = "Combine these review summaries into an overall analysis with common themes:"
 
-    analysis = map_reduce(reviews, map_prompt, reduce_prompt)
+result = call_llm(map_prompt, item)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+intermediate.append(result)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Reduce: combine all intermediate results
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+combined = "\n---\n".join(intermediate)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+final = call_llm(reduce_prompt, combined)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return final
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Example: summarize 50 customer reviews
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+reviews = load_reviews()
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+map_prompt = "Summarize this customer review in one sentence, focusing on sentiment and key points:"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+reduce_prompt = "Combine these review summaries into an overall analysis with common themes:"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+analysis = map_reduce(reviews, map_prompt, reduce_prompt)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ### Parallel Processing
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Run multiple independent chains simultaneously, then merge results.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 **Use case**: Generating different sections of a document simultaneously
 
-    import asyncio
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    async def parallel_chain(topic):
 
-        intro, specs, pricing, conclusion = await asyncio.gather(
+import asyncio
 
-            generate_intro(topic),
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            generate_specs(topic),
 
-            generate_pricing(topic),
+async def parallel_chain(topic):
 
-            generate_conclusion(topic)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        )
 
-        return assemble_document(intro, specs, pricing, conclusion)
+intro, specs, pricing, conclusion = await asyncio.gather(
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+generate_intro(topic),
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+generate_specs(topic),
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+generate_pricing(topic),
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+generate_conclusion(topic)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return assemble_document(intro, specs, pricing, conclusion)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Parallel processing reduces wall-clock time significantly when chains are independent.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ### Routing Chain
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Route input to different sub-chains based on classification.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 **Use case**: Customer support ticket routing
 
-    def routing_chain(query):
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        # First, classify the query type
 
-        category = classify_query(query)
+def routing_chain(query):
 
-        # Route to specialized handler
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        if category == "billing":
 
-            return billing_chain(query)
+# First, classify the query type
 
-        elif category == "technical":
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            return technical_support_chain(query)
 
-        elif category == "account":
+category = classify_query(query)
 
-            return account_management_chain(query)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        else:
 
-            return general_inquiry_chain(query)
+# Route to specialized handler
 
-    def classify_query(query):
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        categories = call_llm("""
 
-        Classify this customer query into one of: billing, technical, account, general
+if category == "billing":
 
-        Respond with only the category name.
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        """, query)
 
-        return categories.strip().lower()
+return billing_chain(query)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+elif category == "technical":
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return technical_support_chain(query)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+elif category == "account":
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return account_management_chain(query)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+else:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return general_inquiry_chain(query)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def classify_query(query):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+categories = call_llm("""
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Classify this customer query into one of: billing, technical, account, general
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Respond with only the category name.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+""", query)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return categories.strip().lower()
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ### Branching Chain
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Pursue multiple investigation paths from a single input, then synthesize.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 **Use case**: Research and analysis
 
-    Query
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-     ├→ Factual research chain (what are the known facts?)
 
-     ├→ Analysis chain (what does this mean?)
+Query
 
-     ├→ Stakeholder chain (who is affected?)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-     └→ Timeline chain (when did events occur?)
 
-           └→ Synthesis: combine all branches into comprehensive report
+├→ Factual research chain (what are the known facts?)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+├→ Analysis chain (what does this mean?)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+├→ Stakeholder chain (who is affected?)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+└→ Timeline chain (when did events occur?)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+└→ Synthesis: combine all branches into comprehensive report
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ### Validation Chain
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Add verification steps between generation steps to catch errors early.
 
-    def generate_with_validation(topic):
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        draft = generate_draft(topic)
 
-        # Validation gate
+def generate_with_validation(topic):
 
-        issues = validate_draft(draft)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        if issues:
 
-            draft = revise_draft(draft, issues)
+draft = generate_draft(topic)
 
-            # Re-validate
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            issues = validate_draft(draft)
 
-        if not issues:
+# Validation gate
 
-            return draft
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        # If still has issues after revision, flag for human review
 
-        return {"draft": draft, "issues": issues, "needs_review": True}
+issues = validate_draft(draft)
 
-    def validate_draft(draft):
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        return call_llm("""
 
-        Check this draft for:
+if issues:
 
-        1. Factual accuracy
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        2. Internal consistency
 
-        3. Tone appropriateness
+draft = revise_draft(draft, issues)
 
-        4. Completeness
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        List any issues found. If none, respond with "NO ISSUES".
 
-        """, draft)
+# Re-validate
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+issues = validate_draft(draft)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if not issues:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return draft
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# If still has issues after revision, flag for human review
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return {"draft": draft, "issues": issues, "needs_review": True}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def validate_draft(draft):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return call_llm("""
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Check this draft for:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+1\\\\\\\\\\\\\\\\. Factual accuracy
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+2\\\\\\\\\\\\\\\\. Internal consistency
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+3\\\\\\\\\\\\\\\\. Tone appropriateness
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\. Completeness
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+List any issues found. If none, respond with "NO ISSUES".
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+""", draft)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Advanced Patterns
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ### Recursive Chain
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Apply the same chain repeatedly until a condition is met:
 
-    def recursive_refine(text, max_iterations=5):
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        for i in range(max_iterations):
 
-            improved = call_llm("Improve this text: make it clearer and more concise:", text)
+def recursive_refine(text, max_iterations=5):
 
-            quality_score = evaluate_quality(improved)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            if quality_score >= 0.9:
 
-                return improved
+for i in range(max_iterations):
 
-            text = improved
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        return text
+
+improved = call_llm("Improve this text: make it clearer and more concise:", text)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+quality_score = evaluate_quality(improved)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if quality_score >= 0.9:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return improved
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+text = improved
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return text
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ### Feedback Loop Chain
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Use the model's own output to identify and correct its mistakes:
 
-    def self_correcting_generation(task):
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        output = generate(task)
 
-        critique = call_llm("Critique this output. What's wrong or missing?", output)
+def self_correcting_generation(task):
 
-        if "nothing wrong" in critique.lower():
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            return output
 
-        revision = call_llm(f"Revise this output based on this feedback: {critique}", output)
+output = generate(task)
 
-        return revision
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+critique = call_llm("Critique this output. What's wrong or missing?", output)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if "nothing wrong" in critique.lower():
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return output
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+revision = call_llm(f"Revise this output based on this feedback: {critique}", output)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return revision
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Production Considerations
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 **Error handling**: Each chain step should have a timeout, retry logic, and fallback behavior.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 **Observability**: Log inputs, outputs, latency, and token usage at each chain step. This is essential for debugging and cost optimization.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 **Caching**: Cache results of deterministic chain steps (classification, extraction) to avoid redundant LLM calls.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 **Human escalation**: Design chains so that when confidence is low or validation fails, the task escalates to a human operator.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Conclusion
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 LLM chaining transforms unreliable single-shot generation into reliable multi-step pipelines. Start with sequential chains for simple transformations, add map-reduce for batch processing, and incorporate routing and branching for complex workflows. The key principle: each step should do one thing well, with clear inputs, outputs, and validation criteria.

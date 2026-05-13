@@ -8,96 +8,742 @@ url: https://dingjiu1989-hue.github.io/en/database/database-caching.html
 
 # Database Caching
 
-Why Cache?   
-Caching reduces database load and improves response times. A good caching strategy can reduce database queries by 90% or more.   
-Caching Strategies   
-Cache-Aside   
-Application checks cache first, loads from database on miss:   
+# Database Caching
 
-    def get_user(user_id):
+  
 
-        cache_key = f"user:{user_id}"
 
-        cached = redis.get(cache_key)
+# Database Caching
 
-        if cached:
+  
+  
+  
+  
 
-            return json.loads(cached)
 
-        user = db.query("SELECT * FROM users WHERE id = %s", [user_id])
+# Database Caching
 
-        if user:
+  
+  
+  
+  
+  
+  
+  
 
-            redis.setex(cache_key, 3600, json.dumps(user))
 
-        return user
+# Database Caching
 
-Read-Through   
-Cache sits between application and database. The cache itself loads from the database on miss.   
-Write-Through   
-Data is written to cache first, then to database. Ensures cache is always consistent.   
-Write-Behind   
-Data is written to cache and asynchronously batched to database. Fastest writes but risk of data loss.   
-Cache Invalidation   
-| Strategy | Description | Best For | |----------|-------------|----------| | TTL | Automatic expiry | Most cases | | Key deletion | Delete on update | Write-through | | Versioned keys | Include version | Schema changes |   
-Redis Integration   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    import redis
 
-    class CacheManager:
+Why Cache? 
 
-        def __init__(self):
+  
+  
+  
+  
+  
+  
+  
 
-            self.redis = redis.Redis(host='localhost', port=6379, decode_responses=True)
 
-        def get_or_compute(self, key, compute_func, ttl=3600):
+Caching reduces database load and improves response times. A good caching strategy can reduce database queries by 90% or more. 
 
-            cached = self.redis.get(key)
+  
+  
+  
+  
+  
+  
+  
 
-            if cached:
 
-                return json.loads(cached)
+Caching Strategies 
 
-            value = compute_func()
+  
+  
+  
+  
+  
+  
+  
 
-            self.redis.setex(key, ttl, json.dumps(value))
 
-            return value
+Cache-Aside 
 
-Cache Stampede Prevention   
-When a popular key expires, many requests may try to recompute simultaneously:   
+  
+  
+  
+  
+  
+  
+  
 
-    def get_with_mutex(key, compute_func, ttl=3600):
 
-        value = redis.get(key)
+Application checks cache first, loads from database on miss: 
 
-        if value:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            return json.loads(value)
 
-        # Try to acquire lock
+def get_user(user_id):
 
-        lock_key = f"lock:{key}"
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        if redis.setnx(lock_key, "1"):
 
-            redis.expire(lock_key, 10)
+cache_key = f"user:{user_id}"
 
-            value = compute_func()
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            redis.setex(key, ttl, json.dumps(value))
 
-            redis.delete(lock_key)
+cached = redis.get(cache_key)
 
-            return value
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        # Wait for the other thread
 
-        import time
+if cached:
 
-        time.sleep(0.1)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        return json.loads(redis.get(key))
 
-Conclusion   
+return json.loads(cached)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+user = db.query("SELECT * FROM users WHERE id = %s", [user_id])
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if user:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+redis.setex(cache_key, 3600, json.dumps(user))
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return user
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Read-Through 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+Cache sits between application and database. The cache itself loads from the database on miss. 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+Write-Through 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+Data is written to cache first, then to database. Ensures cache is always consistent. 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+Write-Behind 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+Data is written to cache and asynchronously batched to database. Fastest writes but risk of data loss. 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+Cache Invalidation 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+| Strategy | Description | Best For | |----------|-------------|----------| | TTL | Automatic expiry | Most cases | | Key deletion | Delete on update | Write-through | | Versioned keys | Include version | Schema changes | 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+Redis Integration 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+import redis
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+class CacheManager:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def __init__(self):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+self.redis = redis.Redis(host='localhost', port=6379, decode_responses=True)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def get_or_compute(self, key, compute_func, ttl=3600):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+cached = self.redis.get(key)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if cached:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return json.loads(cached)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+value = compute_func()
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+self.redis.setex(key, ttl, json.dumps(value))
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return value
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Cache Stampede Prevention 
+
+  
+  
+  
+  
+  
+  
+  
+
+
+When a popular key expires, many requests may try to recompute simultaneously: 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def get_with_mutex(key, compute_func, ttl=3600):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+value = redis.get(key)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if value:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return json.loads(value)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Try to acquire lock
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+lock_key = f"lock:{key}"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if redis.setnx(lock_key, "1"):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+redis.expire(lock_key, 10)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+value = compute_func()
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+redis.setex(key, ttl, json.dumps(value))
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+redis.delete(lock_key)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return value
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Wait for the other thread
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+import time
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+time.sleep(0.1)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return json.loads(redis.get(key))
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Conclusion 
+
+  
+  
+  
+  
+  
+  
+  
+
+
 Use cache-aside as the default pattern. Set appropriate TTLs. Implement mutex locking for cache stampede prevention. Monitor cache hit rates. Always have a fallback when cache is unavailable.

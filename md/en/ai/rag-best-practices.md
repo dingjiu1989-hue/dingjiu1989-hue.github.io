@@ -19,7 +19,7 @@ Sentence-Aware (split on sentence boundaries)| Articles, documentation| Semantic
 Recursive (split on paragraph, then sentence, then token)| Mixed content types| Balanced approach| Slightly more complex to implement  
 Semantic (split on topic boundaries via embedding similarity)| Long, multi-topic documents| Best semantic coherence| Slower, requires LLM or embedding model  
 Agentic (LLM decides chunk boundaries)| Complex, unstructured documents| Best quality| Expensive, slow, LLM cost per chunk  
-
+  
 **The optimal chunk size in 2026:** 256-512 tokens with 10-20% overlap. Larger chunks (1,024+) improve context but dilute retrieval precision. The overlap ensures no answer straddles a chunk boundary.
 
 ## Embedding Model Selection
@@ -30,7 +30,7 @@ OpenAI text-embedding-3-large| 256-3,072 (Matryoshka)| 64.6| $0.13| General purp
 Cohere Embed v4| 1,024| 65.2| $0.10| Multilingual, long documents  
 BGE-M3 (BAAI)| 1,024| 63.8| Free (OSS)| Self-hosted, multilingual, dense+sparse hybrid  
 Jina embeddings v3| 1,024| 62.4| Free (up to 1M tokens/day)| Long context (8K token input), task-specific  
-
+  
 ## Advanced Retrieval Techniques
 
   * **Hybrid search (dense + sparse):** Combine vector similarity (semantic meaning) with BM25 keyword matching (exact terms). Critical for code search, legal docs, and any domain with precise terminology.
@@ -38,8 +38,11 @@ Jina embeddings v3| 1,024| 62.4| Free (up to 1M tokens/day)| Long context (8K to
   * **Re-ranking:** Retrieve 20-50 chunks, then use a cross-encoder (Cohere Rerank, BGE-Reranker) to score relevance and keep the top 3-5. Adds ~100ms latency but dramatically improves precision.
   * **Query transformation:** Rewrite user queries before retrieval — decompose complex questions into sub-questions, or generate hypothetical answers to use as search queries.
 
-## RAG Architecture Pattern
 
+
+## RAG Architecture Pattern
+    
+    
     User Query
       -> Query Rewriting (decompose, expand)
       -> Hybrid Retrieval (vector + keyword, 50 candidates)

@@ -23,7 +23,7 @@ Content Sources| Markdown, MDX, CMS (Content Collections API)| Markdown, MDX, CM
 UI Frameworks| React, Vue, Svelte, Solid, Preact, Lit — choose per page/component| React (primary), any framework via plugins| None (templates in Go's html/template)  
 Image Optimization| Built-in (sharp, Astro Image)| Built-in (gatsby-plugin-image)| Built-in (Hugo Image Processing)  
 Data Layer| Content Collections (type-safe, Zod schemas)| GraphQL data layer (gatsby-source-*)| Front matter + taxonomies (built-in)  
-
+  
 ## When Each SSG Wins
 
 **Astro — Best for:** Content sites where most pages are static but you want the option to sprinkle in interactive React/Vue/Svelte components. Astro's "zero JS by default, add interactivity only where needed" philosophy produces the smallest page bundles. **Weak spot:** Not designed for highly interactive SPAs — if every page needs a React app, use Next.js instead.
@@ -41,5 +41,5 @@ Large docs site (1,000+ pages)| Hugo| Build speed is unmatched; docs sites rarel
 Content site with complex data relationships| Gatsby| GraphQL data layer excels at combining data from multiple sources  
 Portfolio or personal site| Astro| Easy to start, beautiful templates, great DX  
 eCommerce content pages (non-interactive)| Astro or Hugo| Fast builds, zero JS default, excellent Core Web Vitals  
-
+  
 **Bottom line:** Astro is the best SSG for most projects in 2026 — the zero-JS default, multi-framework support, and Content Collections API make it the most productive choice. Hugo remains king for build speed on very large sites. Gatsby is declining — its GraphQL data layer, once innovative, now adds complexity that newer tools avoid. See also: [Best Static Site Generators](</en/tools/best-static-site-generators-2026.html>) and [Next.js vs Nuxt vs SvelteKit](</en/compare/nextjs-vs-nuxt-vs-sveltekit.html>).

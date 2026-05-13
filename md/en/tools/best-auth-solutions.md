@@ -19,7 +19,7 @@ Authentication is the last thing you should build from scratch. Clerk, Auth0, Su
 **Free tier**|  10K MAU, unlimited projects| 7.5K MAU (B2C), 500 (B2B)| 50K MAU| Free (open source)| Free (open source, unmaintained)  
 **Social login**|  Google, GitHub, Apple, 20+ more| 40+ providers| Google, GitHub, Apple, 10+| 50+ providers (configure yourself)| Manual (configure yourself)  
 **Multi-tenancy**|  Excellent (organizations API)| Excellent (organizations)| No (single project)| No (you build it)| No (you build it)  
-
+  
 ## Clerk — The Developer Experience Gold Standard
 
 Clerk provides drop-in React components (<SignIn />, <UserButton />) that look polished and handle the entire auth flow. The dashboard shows active users, sign-up sources, and suspicious activity. It's the fastest way to add auth to a Next.js app — literally 10 minutes from zero to working login.
@@ -57,5 +57,5 @@ Enterprise, SAML/LDAP, B2B| **Auth0**
 Supabase stack, side project| **Supabase Auth**  
 Full control, open source, no vendor lock-in| **NextAuth.js**  
 Best free tier for scale (50K MAU)| **Supabase Auth**  
-
+  
 **Bottom line:** Clerk for Next.js apps — the best DX by far. Auth0 for enterprise. Supabase Auth if you already use Supabase. NextAuth for full control. Don't build auth from scratch — the security risks aren't worth it. See also: [Backend Comparison](</en/compare/supabase-vs-firebase-vs-neon.html>) and [Web Security Basics](</en/tech/web-security-basics.html>).

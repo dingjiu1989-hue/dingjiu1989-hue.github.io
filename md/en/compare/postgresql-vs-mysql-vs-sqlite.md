@@ -24,7 +24,7 @@ Choosing a database is one of the hardest decisions to reverse. PostgreSQL, MySQ
 **Scaling**|  Vertical + read replicas| Vertical + read replicas| Not designed to scale  
 **Setup**|  Separate server| Separate server| File-based (zero config)  
 **License**|  PostgreSQL License| GPL (Oracle)| Public Domain  
-
+  
 ## PostgreSQL — The Power User's Database
 
 PostgreSQL (Postgres) is the most capable open-source relational database. It's the default choice for new projects in 2026 for good reason: unmatched feature set, strict SQL compliance, and an extension ecosystem (PostGIS, pgvector, TimescaleDB) that turns it into a specialized engine for any workload.
@@ -66,5 +66,5 @@ AI/vector search| **PostgreSQL + pgvector**
 Single-server side project| **SQLite** (zero ops)  
 Geospatial (maps, locations)| **PostgreSQL + PostGIS**  
 Maximum managed service options| **PostgreSQL** (RDS, Supabase, Neon, etc.)  
-
+  
 **Bottom line:** Default to PostgreSQL for any web application. Use SQLite for mobile apps, side projects, and when you want zero operations overhead. MySQL if you're in the PHP/WordPress ecosystem. See our [Supabase vs Firebase vs Neon](</en/compare/supabase-vs-firebase-vs-neon.html>) guide for managed database services.

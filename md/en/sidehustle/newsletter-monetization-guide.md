@@ -19,7 +19,7 @@ Bytes.dev (Ty Magnin)| 100K+| Sponsorships| $500K+/yr
 Frontend Focus (Cooper Press)| 180K+| Sponsorships| $1M+/yr  
 Pragmatic Engineer (Gergely Orosz)| 150K+| Paid + sponsors| $1M+/yr  
 Solo dev newsletter (niche, 5K subs)| 5K| Sponsorships| $20-60K/yr  
-
+  
 ## Step 1: Pick a Platform
 
 Platform| Cost| Best For  
@@ -29,7 +29,7 @@ Platform| Cost| Best For
 **Buttondown**|  $9/mo| Minimalist, developer-friendly, API  
 **Substack**|  Free (10% cut of paid)| Paid newsletters, least technical setup  
 **Self-hosted (Ghost)**|  $9-31/mo| Maximum control, blog + newsletter  
-
+  
 **Recommendation for developers:** Buttondown (minimalist, Markdown, API) or Ghost (full control, blog + newsletter).
 
 ## Step 2: Grow to Your First 1,000 Subscribers
@@ -40,6 +40,8 @@ Platform| Cost| Best For
   4. **Add a CTA to every article you write:** "Enjoyed this? I write a weekly newsletter about [topic]. Join 2,500 developers here."
   5. **Engage in communities:** Answer questions on Reddit, Discord, Stack Overflow. Signature links add up.
 
+
+
 ## Step 3: Monetize
 
 Method| When| Revenue per 1,000 subs  
@@ -49,17 +51,18 @@ Method| When| Revenue per 1,000 subs
 **Job board**|  5,000+ subs| $200-500/posting  
 **Digital products (to your list)**|  Any size| $500-5,000/product launch  
 **Affiliate links**|  Any size| $50-500/mo  
-
+  
 ## Sponsorship Pricing Formula
-
+    
+    
     # Standard formula:
     Sponsorship Price = (Subscribers × CPM × Placement Factor) / 1000
-
+    
     Example:
     5,000 subs × $30 CPM × 1.0 (primary spot) = $150/issue
     3 sponsors per issue = $450/issue
     Weekly = $1,800/month
-
+    
     # As you grow:
     10,000 subs × $40 CPM × 1.0 = $400/issue
     3 sponsors × $400 = $1,200/issue
@@ -72,5 +75,7 @@ General "web development" newsletters compete with everyone. Narrower wins:
   * "TypeScript Tips" — too narrow? "Modern TypeScript" — just right.
   * "React Weekly" — too broad. "Next.js & React Server Components" — differentiated.
   * "DevOps" — saturated. "Platform Engineering for Startups" — niche and valuable.
+
+
 
 **Bottom line:** Pick a focused developer niche. Write consistently for 6 months before worrying about revenue. Cross-promote with other newsletters. Sponsorships kick in at ~1,000 engaged subscribers. Four sponsors per issue at 10K subs = comfortable full-time income. See also: [Technical Writing Income](</en/sidehustle/technical-writing-income.html>) and [Selling Digital Products](</en/sidehustle/sell-digital-products.html>).

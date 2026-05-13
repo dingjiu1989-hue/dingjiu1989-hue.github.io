@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/helm-tools.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1777",
+      "wordCount": "3863",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/helm-tools.html"},
-      "articleBody": "Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing Introduction Helm is the standard package manager for Kubernetes, but managing Helm charts at scale requires additional tooling. Helmfile provides declarative chart management across environments. helm-docs generates README documentation from chart metadata. helm-secrets securely manages sensitive values. Chart-testing validates charts in CI pipelines. This article covers each tool with practical examples. Helmfile Declarative management of Helm releases across environments: # helmfile.yaml repositories: - name: bitnami url: https://charts.bitnami.com/bitnami - name: prometheus-community url: https://prometheus-community.github.io/helm-charts environments: development: values: - env/development.yaml production: values: - env/production.yaml - env/secrets.yaml # Encrypted values releases: # Core infrastructure - name: prometheus-stack namespace: monitoring chart: prometheus-community/kube-prometheus-stack version: 62.0.0 values: - values/prometheus.yaml - {{ env \"PROMETHEUS_VALUES\" | default \"values/prometheus-default.yaml\" }} - name: ingress-nginx namespace: ingress chart: ingress-nginx/ingress-nginx version: 4.11.0 values: - values/ingress-{{ .Environment.Name }}.yaml set: - name: controller.replicaCount value: {{ .Values.ingress.replicas }} installed: true wait: true # Application charts - name: my-app namespace: {{ .Values.app.namespace }} chart: ./charts/my-app version: 0.2.0 values: - values/app-{{ .Environment.Name }}.yaml labels: app: my-app env: {{ .Environment.Name }} hooks: - events: [\"presync\", \"postsync\"] command: \"helm test {{ .Release.Name }}\" # Apply environment helmfile -e production apply # Diff changes before applying helmfile -e development diff # Sync specific releases helmfile -e staging -l app=my-app sync # Destroy releases helmfile -e development destroy helm-docs Automatically generate README documentation from chart metadata: # Install go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest brew install helm-docs # Generate README for all charts in repo helm-docs # Or for a specific chart helm-docs --chart-search-root ./charts/my-app # charts/my-app/values.yaml # -- Number of replicas to run replicaCount: 3 image: # -- Container image repository repository: my-app # -- Image tag tag: \"latest\" # -- Image pull policy pullPolicy: Always # -- Resource limits and requests resources: limits: # -- CPU limit cpu: \"1\" # -- Memory limit memory: 512Mi requests: cpu: 250m memory: 256Mi # {{ .Name }} {{ .Description }} ## Installation helm repo add myrepo https://charts.example.com helm install myrepo/{{ .Name }} ## Parameters | Name | Description | Default | |------|-------------|---------| {{- range .Values }} | {{ .Key }} | {{ .Description }} | {{ .Default }} | {{- end }} helm-secrets Encrypt sensitive values using SOPS with various backends: # Install helm plugin install https://github.com/jkroepke/helm-secrets # Encrypt values file helm secrets encrypt secrets.yaml > secrets.enc.yaml # Decrypt and use with Helm helm secrets install my-app ./chart -f secrets.enc.yaml # With helmfile # helmfile.yaml references secrets.enc.yaml helmfile -e production apply # .sops.yaml \u2014 SOPS configuration creation_rules: - path_regex: secrets\\.yaml age: age1abc123... - path_regex: production/.*\\.yaml pgp: \"FINGERPRINT\" encrypted_regex: \"^(password|token|key|secret)$\" Chart Testing (ct) Validate charts in CI pipelines: # ct.yaml \u2014 chart testing configuration chart-dirs: - charts chart-repos: - bitnami=https://charts.bitnami.com/bitnami helm-extra-args: --timeout 600s validate-maintainers: true # Linting options lint-conf: | --strict --namespace default # Test installation # ct install --charts charts/my-app # .github/workflows/helm-ci.yml name: Helm Chart CI on: pull_request: paths: - \"charts/**\" jobs: lint-test: runs-on: ubuntu-latest steps: - uses: actions/checkout@v4 - uses: helm/chart-testing-action@v2 - name: Lint charts run: ct lint --all --check-version-increment - name: Create kind cluster uses: helm/kind-action@v1 - name: Install and test charts run: ct install --all Essential Helm CLI Tips # Template rendering (debugging) helm template my-app ./chart --values values.yaml # Dry-run install helm install my-app ./chart --dry-run --debug # Rollback helm rollback my-app 2 # Get notes helm get notes my-app # View release history helm history my-app # Plugin management helm plugin list helm plugin install https://github.com/databus23/helm-diff helm diff release my-app ./chart Comparison | Tool | Purpose | Essential For | |------|---------|---------------| | Helmfile | Declarative release management | Managing multiple charts across environments | | helm-docs | Documentation generation | Keeping chart docs in sync with values | | helm-secrets | Secret encryption | Securely managing sensitive values | | chart-testing | CI validation | Automated chart linting and testing | | helm-diff | Change preview | Reviewing changes before apply | Recommendations * **Multi-environment deployments**: Helmfile is essential for managing differences across dev, staging, and production. * **Public or shared charts**: Use helm-docs to maintain README documentation automatically. * **Production deployments**: Use helm-secrets with SOPS and age/PGP for encrypted values. * **CI/CD pipeline**: Use chart-testing to validate chart changes before merging. * **Review before apply**: Use helm-diff to preview changes without actually applying them. The most complete Helm workflow combines all these tools: Helmfile for release management, helm-secrets for secure values, helm-docs for documentation, chart-testing for CI validation, and helm-diff for change preview."
+      "articleBody": "Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing Introduction Helm is the standard package manager for Kubernetes, but managing Helm charts at scale requires additional tooling. Helmfile provides declarative chart management across environments. helm-docs generates README documentation from chart metadata. helm-secrets securely manages sensitive values. Chart-testing validates charts in CI pipelines. This article covers each tool with practical examples. Helmfile Declarative management of Helm releases across environments: helmfile.yaml repositories: \\\\\\\\\\\\\\\\- name: bitnami url: https://charts.bitnami.com/bitnami \\\\\\\\\\\\\\\\- name: prometheus-community url: https://prometheus-community.github.io/helm-charts environments: development: values: \\\\\\\\\\\\\\\\- env/development.yaml production: values: \\\\\\\\\\\\\\\\- env/production.yaml \\\\\\\\\\\\\\\\- env/secrets.yaml # Encrypted values releases: Core infrastructure \\\\\\\\\\\\\\\\- name: prometheus-stack namespace: monitoring chart: prometheus-community/kube-prometheus-stack version: 62.0.0 values: \\\\\\\\\\\\\\\\- values/prometheus.yaml \\\\\\\\\\\\\\\\- {{ env \"PROMETHEUS_VALUES\" | default \"values/prometheus-default.yaml\" }} \\\\\\\\\\\\\\\\- name: ingress-nginx namespace: ingress chart: ingress-nginx/ingress-nginx version: 4.11.0 values: \\\\\\\\\\\\\\\\- values/ingress-{{ .Environment.Name }}.yaml set: \\\\\\\\\\\\\\\\- name: controller.replicaCount value: {{ .Values.ingress.replicas }} installed: true wait: true Application charts \\\\\\\\\\\\\\\\- name: my-app namespace: {{ .Values.app.namespace }} chart: ./charts/my-app version: 0.2.0 values: \\\\\\\\\\\\\\\\- values/app-{{ .Environment.Name }}.yaml labels: app: my-app env: {{ .Environment.Name }} hooks: \\\\\\\\\\\\\\\\- events: [\"presync\", \"postsync\"] command: \"helm test {{ .Release.Name }}\" Apply environment helmfile -e production apply Diff changes before applying helmfile -e development diff Sync specific releases helmfile -e staging -l app=my-app sync Destroy releases helmfile -e development destroy helm-docs Automatically generate README documentation from chart metadata: Install go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest brew install helm-docs Generate README for all charts in repo helm-docs Or for a specific chart helm-docs --chart-search-root ./charts/my-app charts/my-app/values.yaml \\\\\\\\-- Number of replicas to run replicaCount: 3 image: \\\\\\\\-- Container image repository repository: my-app \\\\\\\\-- Image tag tag: \"latest\" \\\\\\\\-- Image pull policy pullPolicy: Always \\\\\\\\-- Resource limits and requests resources: limits: \\\\\\\\-- CPU limit cpu: \"1\" \\\\\\\\-- Memory limit memory: 512Mi requests: cpu: 250m memory: 256Mi {{ .Name }} {{ .Description }} Installation helm repo add myrepo https://charts.example.com helm install myrepo/{{ .Name }} Parameters | Name | Description | Default | |------|-------------|---------| {{- range .Values }} | {{ .Key }} | {{ .Description }} | {{ .Default }} | {{- end }} helm-secrets Encrypt sensitive values using SOPS with various backends: Install helm plugin install https://github.com/jkroepke/helm-secrets Encrypt values file helm secrets encrypt secrets.yaml > secrets.enc.yaml Decrypt and use with Helm helm secrets install my-app ./chart -f secrets.enc.yaml With helmfile helmfile.yaml references secrets.enc.yaml helmfile -e production apply .sops.yaml \u2014 SOPS configuration creation_rules: \\\\\\\\\\\\\\\\- path_regex: secrets\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.yaml age: age1abc123... \\\\\\\\\\\\\\\\- path_regex: production/.*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.yaml pgp: \"FINGERPRINT\" encrypted_regex: \"^(password|token|key|secret)$\" Chart Testing (ct) Validate charts in CI pipelines: ct.yaml \u2014 chart testing configuration chart-dirs: \\\\\\\\\\\\\\\\- charts chart-repos: \\\\\\\\\\\\\\\\- bitnami=https://charts.bitnami.com/bitnami helm-extra-args: --timeout 600s validate-maintainers: true Linting options lint-conf: | \\\\\\\\\\\\\\\\--strict \\\\\\\\\\\\\\\\--namespace default Test installation ct install --charts charts/my-app .github/workflows/helm-ci.yml name: Helm Chart CI on: pull_request: paths: \\\\\\\\\\\\\\\\- \"charts/**\" jobs: lint-test: runs-on: ubuntu-latest steps: \\\\\\\\\\\\\\\\- uses: actions/checkout@v4 \\\\\\\\\\\\\\\\- uses: helm/chart-testing-action@v2 \\\\\\\\\\\\\\\\- name: Lint charts run: ct lint --all --check-version-increment \\\\\\\\\\\\\\\\- name: Create kind cluster uses: helm/kind-action@v1 \\\\\\\\\\\\\\\\- name: Install and test charts run: ct install --all Essential Helm CLI Tips Template rendering (debugging) helm template my-app ./chart --values values.yaml Dry-run install helm install my-app ./chart --dry-run --debug Rollback helm rollback my-app 2 Get notes helm get notes my-app View release history helm history my-app Plugin management helm plugin list helm plugin install https://github.com/databus23/helm-diff helm diff release my-app ./chart Comparison | Tool | Purpose | Essential For | |------|---------|---------------| | Helmfile | Declarative release management | Managing multiple charts across environments | | helm-docs | Documentation generation | Keeping chart docs in sync with values | | helm-secrets | Secret encryption | Securely managing sensitive values | | chart-testing | CI validation | Automated chart linting and testing | | helm-diff | Change preview | Reviewing changes before apply | Recommendations * **Multi-environment deployments**: Helmfile is essential for managing differences across dev, staging, and production. * **Public or shared charts**: Use helm-docs to maintain README documentation automatically. * **Production deployments**: Use helm-secrets with SOPS and age/PGP for encrypted values. * **CI/CD pipeline**: Use chart-testing to validate chart changes before merging. * **Review before apply**: Use helm-diff to preview changes without actually applying them. The most complete Helm workflow combines all these tools: Helmfile for release management, helm-secrets for secure values, helm-docs for documentation, chart-testing for CI validation, and helm-diff for change preview."
     }
     </script>
     <script type="application/ld+json">
@@ -78,361 +78,2540 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/helm-tools.png" alt="Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</h1>
 <br>
+<h1>Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Helm is the standard package manager for Kubernetes, but managing Helm charts at scale requires additional tooling. Helmfile provides declarative chart management across environments. helm-docs generates README documentation from chart metadata. helm-secrets securely manages sensitive values. Chart-testing validates charts in CI pipelines. This article covers each tool with practical examples.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Helmfile</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Declarative management of Helm releases across environments:</p>
 <br>
-<p>    # helmfile.yaml</p>
 <br>
-<p>    repositories:</p>
 <br>
-<p>      - name: bitnami</p>
 <br>
-<p>        url: https://charts.bitnami.com/bitnami</p>
 <br>
-<p>      - name: prometheus-community</p>
 <br>
-<p>        url: https://prometheus-community.github.io/helm-charts</p>
 <br>
-<p>    environments:</p>
 <br>
-<p>      development:</p>
 <br>
-<p>        values:</p>
 <br>
-<p>          - env/development.yaml</p>
 <br>
-<p>      production:</p>
 <br>
-<p>        values:</p>
 <br>
-<p>          - env/production.yaml</p>
+<h1>helmfile.yaml</h1>
 <br>
-<p>          - env/secrets.yaml  # Encrypted values</p>
 <br>
-<p>    releases:</p>
 <br>
-<p>      # Core infrastructure</p>
 <br>
-<p>      - name: prometheus-stack</p>
 <br>
-<p>        namespace: monitoring</p>
 <br>
-<p>        chart: prometheus-community/kube-prometheus-stack</p>
 <br>
-<p>        version: 62.0.0</p>
 <br>
-<p>        values:</p>
 <br>
-<p>          - values/prometheus.yaml</p>
 <br>
-<p>          - {{ env "PROMETHEUS_VALUES" | default "values/prometheus-default.yaml" }}</p>
 <br>
-<p>      - name: ingress-nginx</p>
 <br>
-<p>        namespace: ingress</p>
 <br>
-<p>        chart: ingress-nginx/ingress-nginx</p>
+<p>repositories:</p>
 <br>
-<p>        version: 4.11.0</p>
 <br>
-<p>        values:</p>
 <br>
-<p>          - values/ingress-{{ .Environment.Name }}.yaml</p>
 <br>
-<p>        set:</p>
 <br>
-<p>          - name: controller.replicaCount</p>
 <br>
-<p>            value: {{ .Values.ingress.replicas }}</p>
 <br>
-<p>        installed: true</p>
 <br>
-<p>        wait: true</p>
 <br>
-<p>      # Application charts</p>
 <br>
-<p>      - name: my-app</p>
 <br>
-<p>        namespace: {{ .Values.app.namespace }}</p>
 <br>
-<p>        chart: ./charts/my-app</p>
 <br>
-<p>        version: 0.2.0</p>
+<p>\\\\\\\\- name: bitnami</p>
 <br>
-<p>        values:</p>
 <br>
-<p>          - values/app-{{ .Environment.Name }}.yaml</p>
 <br>
-<p>        labels:</p>
 <br>
-<p>          app: my-app</p>
 <br>
-<p>          env: {{ .Environment.Name }}</p>
 <br>
-<p>        hooks:</p>
 <br>
-<p>          - events: ["presync", "postsync"]</p>
 <br>
-<p>            command: "helm test {{ .Release.Name }}"</p>
 <br>
-<p>    # Apply environment</p>
 <br>
-<p>    helmfile -e production apply</p>
 <br>
-<p>    # Diff changes before applying</p>
 <br>
-<p>    helmfile -e development diff</p>
 <br>
-<p>    # Sync specific releases</p>
+<p>url: https://charts.bitnami.com/bitnami</p>
 <br>
-<p>    helmfile -e staging -l app=my-app sync</p>
 <br>
-<p>    # Destroy releases</p>
 <br>
-<p>    helmfile -e development destroy</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: prometheus-community</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>url: https://prometheus-community.github.io/helm-charts</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>environments:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>development:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>values:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- env/development.yaml</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>production:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>values:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- env/production.yaml</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- env/secrets.yaml # Encrypted values</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>releases:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Core infrastructure</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: prometheus-stack</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>namespace: monitoring</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>chart: prometheus-community/kube-prometheus-stack</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>version: 62.0.0</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>values:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- values/prometheus.yaml</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- {{ env "PROMETHEUS_VALUES" | default "values/prometheus-default.yaml" }}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: ingress-nginx</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>namespace: ingress</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>chart: ingress-nginx/ingress-nginx</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>version: 4.11.0</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>values:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- values/ingress-{{ .Environment.Name }}.yaml</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>set:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: controller.replicaCount</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>value: {{ .Values.ingress.replicas }}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>installed: true</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>wait: true</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Application charts</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: my-app</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>namespace: {{ .Values.app.namespace }}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>chart: ./charts/my-app</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>version: 0.2.0</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>values:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- values/app-{{ .Environment.Name }}.yaml</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>labels:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>app: my-app</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>env: {{ .Environment.Name }}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>hooks:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- events: ["presync", "postsync"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>command: "helm test {{ .Release.Name }}"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Apply environment</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>helmfile -e production apply</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Diff changes before applying</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>helmfile -e development diff</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Sync specific releases</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>helmfile -e staging -l app=my-app sync</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Destroy releases</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>helmfile -e development destroy</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  helm-docs</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Automatically generate README documentation from chart metadata:</p>
 <br>
-<p>    # Install</p>
 <br>
-<p>    go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest</p>
 <br>
-<p>    brew install helm-docs</p>
 <br>
-<p>    # Generate README for all charts in repo</p>
 <br>
-<p>    helm-docs</p>
 <br>
-<p>    # Or for a specific chart</p>
 <br>
-<p>    helm-docs --chart-search-root ./charts/my-app</p>
 <br>
-<p>    # charts/my-app/values.yaml</p>
 <br>
-<p>    # -- Number of replicas to run</p>
 <br>
-<p>    replicaCount: 3</p>
 <br>
-<p>    image:</p>
 <br>
-<p>      # -- Container image repository</p>
 <br>
-<p>      repository: my-app</p>
+<h1>Install</h1>
 <br>
-<p>      # -- Image tag</p>
 <br>
-<p>      tag: "latest"</p>
 <br>
-<p>      # -- Image pull policy</p>
 <br>
-<p>      pullPolicy: Always</p>
 <br>
-<p>    # -- Resource limits and requests</p>
 <br>
-<p>    resources:</p>
 <br>
-<p>      limits:</p>
 <br>
-<p>        # -- CPU limit</p>
 <br>
-<p>        cpu: "1"</p>
 <br>
-<p>        # -- Memory limit</p>
 <br>
-<p>        memory: 512Mi</p>
 <br>
-<p>      requests:</p>
 <br>
-<p>        cpu: 250m</p>
+<p>go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest</p>
 <br>
-<p>        memory: 256Mi</p>
 <br>
-<p>    <!-- README.md.gotmpl — template for helm-docs --></p>
 <br>
-<p>    # {{ .Name }}</p>
 <br>
-<p>    {{ .Description }}</p>
 <br>
-<p>    ## Installation</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>brew install helm-docs</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Generate README for all charts in repo</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>helm-docs</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Or for a specific chart</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>helm-docs --chart-search-root ./charts/my-app</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>charts/my-app/values.yaml</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>\\\\-- Number of replicas to run</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>replicaCount: 3</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>image:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>\\\\-- Container image repository</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>repository: my-app</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>\\\\-- Image tag</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tag: "latest"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>\\\\-- Image pull policy</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pullPolicy: Always</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>\\\\-- Resource limits and requests</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>resources:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>limits:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>\\\\-- CPU limit</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cpu: "1"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>\\\\-- Memory limit</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>memory: 512Mi</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>requests:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cpu: 250m</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>memory: 256Mi</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>{{ .Name }}</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{{ .Description }}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Installation</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>helm repo add myrepo https://charts.example.com</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>helm install myrepo/{{ .Name }}</p>
 <br>
-<p>    ## Parameters</p>
 <br>
-<p>    | Name | Description | Default |</p>
 <br>
-<p>    |------|-------------|---------|</p>
 <br>
-<p>    {{- range .Values }}</p>
 <br>
-<p>    | {{ .Key }} | {{ .Description }} | {{ .Default }} |</p>
 <br>
-<p>    {{- end }}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Parameters</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>| Name | Description | Default |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>|------|-------------|---------|</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{{- range .Values }}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>| {{ .Key }} | {{ .Description }} | {{ .Default }} |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{{- end }}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  helm-secrets</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Encrypt sensitive values using SOPS with various backends:</p>
 <br>
-<p>    # Install</p>
 <br>
-<p>    helm plugin install https://github.com/jkroepke/helm-secrets</p>
 <br>
-<p>    # Encrypt values file</p>
 <br>
-<p>    helm secrets encrypt secrets.yaml > secrets.enc.yaml</p>
 <br>
-<p>    # Decrypt and use with Helm</p>
 <br>
-<p>    helm secrets install my-app ./chart -f secrets.enc.yaml</p>
 <br>
-<p>    # With helmfile</p>
 <br>
-<p>    # helmfile.yaml references secrets.enc.yaml</p>
 <br>
-<p>    helmfile -e production apply</p>
 <br>
-<p>    # .sops.yaml — SOPS configuration</p>
 <br>
-<p>    creation_rules:</p>
 <br>
-<p>      - path_regex: secrets\.yaml</p>
 <br>
-<p>        age: age1abc123...</p>
+<h1>Install</h1>
 <br>
-<p>      - path_regex: production/.*\.yaml</p>
 <br>
-<p>        pgp: "FINGERPRINT"</p>
 <br>
-<p>        encrypted_regex: "^(password|token|key|secret)$"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>helm plugin install https://github.com/jkroepke/helm-secrets</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Encrypt values file</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>helm secrets encrypt secrets.yaml > secrets.enc.yaml</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Decrypt and use with Helm</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>helm secrets install my-app ./chart -f secrets.enc.yaml</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>With helmfile</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>helmfile.yaml references secrets.enc.yaml</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>helmfile -e production apply</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>.sops.yaml — SOPS configuration</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>creation_rules:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- path_regex: secrets\\\\\\\\\\\\\\\\.yaml</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>age: age1abc123...</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- path_regex: production/.*\\\\\\\\\\\\\\\\.yaml</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pgp: "FINGERPRINT"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>encrypted_regex: "^(password|token|key|secret)$"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Chart Testing (ct)</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Validate charts in CI pipelines:</p>
 <br>
-<p>    # ct.yaml — chart testing configuration</p>
 <br>
-<p>    chart-dirs:</p>
 <br>
-<p>      - charts</p>
 <br>
-<p>    chart-repos:</p>
 <br>
-<p>      - bitnami=https://charts.bitnami.com/bitnami</p>
 <br>
-<p>    helm-extra-args: --timeout 600s</p>
 <br>
-<p>    validate-maintainers: true</p>
 <br>
-<p>    # Linting options</p>
 <br>
-<p>    lint-conf: |</p>
 <br>
-<p>      --strict</p>
 <br>
-<p>      --namespace default</p>
 <br>
-<p>    # Test installation</p>
 <br>
-<p>    # ct install --charts charts/my-app</p>
+<h1>ct.yaml — chart testing configuration</h1>
 <br>
-<p>    # .github/workflows/helm-ci.yml</p>
 <br>
-<p>    name: Helm Chart CI</p>
 <br>
-<p>    on:</p>
 <br>
-<p>      pull_request:</p>
 <br>
-<p>        paths:</p>
 <br>
-<p>          - "charts/**"</p>
 <br>
-<p>    jobs:</p>
 <br>
-<p>      lint-test:</p>
 <br>
-<p>        runs-on: ubuntu-latest</p>
 <br>
-<p>        steps:</p>
 <br>
-<p>          - uses: actions/checkout@v4</p>
 <br>
-<p>          - uses: helm/chart-testing-action@v2</p>
 <br>
-<p>          - name: Lint charts</p>
+<p>chart-dirs:</p>
 <br>
-<p>            run: ct lint --all --check-version-increment</p>
 <br>
-<p>          - name: Create kind cluster</p>
 <br>
-<p>            uses: helm/kind-action@v1</p>
 <br>
-<p>          - name: Install and test charts</p>
 <br>
-<p>            run: ct install --all</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- charts</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>chart-repos:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- bitnami=https://charts.bitnami.com/bitnami</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>helm-extra-args: --timeout 600s</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>validate-maintainers: true</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Linting options</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>lint-conf: |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\--strict</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\--namespace default</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Test installation</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>ct install --charts charts/my-app</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>.github/workflows/helm-ci.yml</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: Helm Chart CI</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>on:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pull_request:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>paths:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- "charts/**"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>jobs:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>lint-test:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>runs-on: ubuntu-latest</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>steps:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- uses: actions/checkout@v4</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- uses: helm/chart-testing-action@v2</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: Lint charts</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>run: ct lint --all --check-version-increment</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: Create kind cluster</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>uses: helm/kind-action@v1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: Install and test charts</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>run: ct install --all</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Essential Helm CLI Tips</h2>
 <br>
-<p>    # Template rendering (debugging)</p>
 <br>
-<p>    helm template my-app ./chart --values values.yaml</p>
 <br>
-<p>    # Dry-run install</p>
 <br>
-<p>    helm install my-app ./chart --dry-run --debug</p>
 <br>
-<p>    # Rollback</p>
 <br>
-<p>    helm rollback my-app 2</p>
 <br>
-<p>    # Get notes</p>
 <br>
-<p>    helm get notes my-app</p>
 <br>
-<p>    # View release history</p>
 <br>
-<p>    helm history my-app</p>
 <br>
-<p>    # Plugin management</p>
 <br>
-<p>    helm plugin list</p>
 <br>
-<p>    helm plugin install https://github.com/databus23/helm-diff</p>
+<h1>Template rendering (debugging)</h1>
 <br>
-<p>    helm diff release my-app ./chart</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>helm template my-app ./chart --values values.yaml</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Dry-run install</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>helm install my-app ./chart --dry-run --debug</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Rollback</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>helm rollback my-app 2</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Get notes</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>helm get notes my-app</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>View release history</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>helm history my-app</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Plugin management</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>helm plugin list</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>helm plugin install https://github.com/databus23/helm-diff</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>helm diff release my-app ./chart</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Comparison</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Tool | Purpose | Essential For |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>|------|---------|---------------|</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Helmfile | Declarative release management | Managing multiple charts across environments |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| helm-docs | Documentation generation | Keeping chart docs in sync with values |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| helm-secrets | Secret encryption | Securely managing sensitive values |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| chart-testing | CI validation | Automated chart linting and testing |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| helm-diff | Change preview | Reviewing changes before apply |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Recommendations</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Multi-environment deployments**: Helmfile is essential for managing differences across dev, staging, and production.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Public or shared charts**: Use helm-docs to maintain README documentation automatically.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Production deployments**: Use helm-secrets with SOPS and age/PGP for encrypted values.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **CI/CD pipeline**: Use chart-testing to validate chart changes before merging.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Review before apply**: Use helm-diff to preview changes without actually applying them.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>The most complete Helm workflow combines all these tools: Helmfile for release management, helm-secrets for secure values, helm-docs for documentation, chart-testing for CI validation, and helm-diff for change preview.</p></div>
     </article>
@@ -450,6 +2629,7 @@
       <noscript><div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

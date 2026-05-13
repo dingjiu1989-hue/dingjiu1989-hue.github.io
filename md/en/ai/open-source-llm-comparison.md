@@ -22,7 +22,7 @@ Hardware (8B inference)| RTX 4090 (24GB) — 4-bit quantized| RTX 4090 (24GB) �
 Multimodal| Llama 3.2 Vision (11B, 90B)| Pixtral (12B, vision)| Qwen-VL, Qwen-Audio| Gemma 3 Vision  
 Code Generation| Excellent (top-tier for open models)| Excellent (Codestral variant)| Very Good (CodeQwen variant)| Good  
 Fine-Tuning| LoRA/QLoRA, FSDP, Megatron ecosystem| LoRA/QLoRA, active community| LoRA/QLoRA, QLoRA-friendly| LoRA (Keras + JAX)  
-
+  
 ## Coding Benchmarks
 
 Benchmark| Llama 3.1 70B| Mistral Large 2| Qwen 2.5 72B| Gemma 3 27B  
@@ -31,7 +31,7 @@ HumanEval (Python)| 88.4%| 92.1%| 86.7%| 79.2%
 MBPP| 87.2%| 89.5%| 85.9%| 76.5%  
 MultiPL-E (avg across 7 langs)| 75.8%| 78.3%| 72.1%| 65.4%  
 SWE-bench Verified| 34.6%| 40.2%| 29.8%| 22.1%  
-
+  
 ## When to Choose Each Model
 
 **Llama 3.1 — Best for:** The safest open source choice — largest ecosystem, best documentation, most community support. The 8B model runs on a laptop, the 70B rivals GPT-4o on many tasks. **Weak spot:** The 405B model is impractical for most teams (requires 8x H100s); licensing restrictions at 700M+ MAU may concern large companies.

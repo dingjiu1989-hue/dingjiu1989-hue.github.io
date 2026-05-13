@@ -19,7 +19,7 @@ GitHub Copilot Code Review| Included in Copilot ($10/mo)| GitHub only| Native Gi
 Codacy AI| Free (Pro $15/user/mo)| Both| Combines static analysis + AI, security pattern detection  
 Reviewpad| Free (Pro $8/user/mo)| GitHub| AI + policy-based review, auto-merge when conditions met  
 CodeGuru (AWS)| $0.01/100 LOC reviewed| GitHub, Bitbucket| Deep AWS knowledge, performance profiling suggestions  
-
+  
 ## What AI Code Review Actually Catches
 
 Category| AI Detection Rate| Example  
@@ -30,9 +30,10 @@ Style/convention violations| High (90%+)| Naming conventions, missing types, inc
 Performance anti-patterns| Medium (50-65%)| N+1 queries, missing index, unnecessary re-renders  
 Architectural issues| Low (20-35%)| Wrong abstraction, tight coupling, missing error boundaries  
 Business logic errors| Very Low (5-15%)| Wrong discount calculation, incorrect state transitions  
-
+  
 ## Setting Up AI Code Review (CodeRabbit Example)
-
+    
+    
     # .coderabbit.yaml — customize AI review behavior
     reviews:
       auto_review:

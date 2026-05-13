@@ -13,7 +13,8 @@ AI agents are the next evolution beyond simple chat — they can plan, use tools
 ## What Is an AI Agent?
 
 An AI agent is an LLM with a control loop: think → act → observe → repeat. Unlike a chatbot that responds once, an agent can use tools (APIs, file system, web search), maintain memory, plan multi-step tasks, and self-correct when things go wrong.
-
+    
+    
     // Simple agent loop pseudocode:
     while (task_not_done) {
       thought = llm.think(context, tools, memory);
@@ -31,7 +32,7 @@ An AI agent is an LLM with a control loop: think → act → observe → repeat.
 **Complexity**|  High| Moderate| Moderate| Low (but you write more)  
 **Flexibility**|  Very high| Moderate (opinionated)| Low (opinionated)| Maximum  
 **Lock-in risk**|  High| Moderate| High| None  
-
+  
 ## LangChain — The Swiss Army Knife
 
 LangChain is the most comprehensive agent framework. It has pre-built components for everything: RAG, memory, tools, streaming, evaluation. The downside is complexity — simple things can require understanding many abstractions.
@@ -47,9 +48,10 @@ CrewAI lets you define multiple agents with different roles, tools, and goals, t
 ## Custom Agent (SDK-native) — For Most Use Cases
 
 For most developer needs, a simple agent loop using the OpenAI or Anthropic SDK directly is clearer and more maintainable than a framework:
-
+    
+    
     import anthropic
-
+    
     def agent(task, tools):
         messages = [{"role": "user", "content": task}]
         while True:
@@ -77,5 +79,5 @@ Research assistant (question → web search → summary)| LangChain with Tavily 
 Multi-agent development team| CrewAI  
 Customer support bot (knowledge base + tickets)| LangChain RAG + tools  
 Bug triage (error logs → root cause → fix)| Custom agent + Sentry/GitHub APIs  
-
+  
 **Bottom line:** Start with a custom agent loop using the SDK directly — it's 50 lines of code and you understand everything. Add LangChain only when you need RAG, complex memory, or 5+ tool types. CrewAI for multi-agent orchestration. The agent hype is real, but the simplest approach usually works best. See also: [AI API Integration Guide](</en/ai/ai-api-integration-guide.html>) and [Prompt Engineering Guide](</en/ai/prompt-engineering.html>).

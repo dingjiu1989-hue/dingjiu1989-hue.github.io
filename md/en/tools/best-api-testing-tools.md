@@ -23,7 +23,7 @@ API testing tools range from GUI-heavy collaboration platforms to CLI-native tex
 **gRPC**|  Yes (beta)| Yes| No| No  
 **Scripting**|  JavaScript (pre/post scripts)| Plugins (JS)| Scripting (JS)| Assertions in .hurl  
 **CI/CD integration**|  Newman (CLI runner)| Inso (CLI)| Bruno CLI| Native CLI (single binary)  
-
+  
 ## Postman — The Industry Standard (With Strings Attached)
 
 Postman is the most popular API testing tool with 30M+ users. Its GUI is polished, collaboration features are excellent, and it supports every API protocol. The downside: collections live in Postman's cloud, and the free tier has been steadily shrinking.
@@ -73,5 +73,5 @@ GraphQL development| **Insomnia**
 Git-native, no vendor lock-in| **Bruno**  
 CI/CD automation and smoke tests| **Hurl**  
 Solo developer, quick testing| **Bruno or Insomnia**  
-
+  
 **Bottom line:** Bruno + Hurl is the modern, Git-friendly stack — design requests in Bruno, automate in Hurl. Postman is still the default for team collaboration but comes with lock-in. Insomnia for GraphQL. See also: [REST API Best Practices](</en/tech/rest-api-best-practices.html>) and [tRPC vs GraphQL vs REST](</en/compare/trpc-vs-graphql-vs-rest.html>).

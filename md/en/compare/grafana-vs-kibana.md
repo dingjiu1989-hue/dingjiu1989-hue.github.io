@@ -7,32 +7,295 @@ url: https://dingjiu1989-hue.github.io/en/compare/grafana-vs-kibana.html
 ---
 
 # Grafana vs Kibana: Dashboard and Visualization Comparison
+
+# Grafana vs Kibana: Dashboard and Visualization Comparison
+
+  
+
+
+# Grafana vs Kibana: Dashboard and Visualization Comparison
+
+  
+  
+  
+  
+
+
+# Grafana vs Kibana: Dashboard and Visualization Comparison
+
+  
+  
+  
+  
+  
+  
+  
+
+
+# Grafana vs Kibana: Dashboard and Visualization Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Grafana vs Kibana: Dashboard and Visualization Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Grafana and Kibana are the leading dashboard and visualization tools for observability data. Grafana focuses on time-series data and metrics monitoring. Kibana is the visualization layer for the Elastic Stack (Elasticsearch, Logstash, Kibana).
 
-## Data Sources
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+##  Data Sources
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Grafana supports the widest range of data sources: Prometheus, Graphite, InfluxDB, PostgreSQL, MySQL, AWS CloudWatch, Azure Monitor, Google Cloud Monitoring, Elasticsearch, and many more through plugins. This flexibility makes Grafana the universal dashboard tool for heterogeneous environments.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Kibana primarily works with Elasticsearch. This tight integration is a strength and a limitation. Kibana query capabilities are unmatched for Elasticsearch data but do not extend to other data sources without Elasticsearch ingestion pipelines.
 
-## Visualization
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+##  Visualization
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Grafana provides highly customizable time-series panels, graphs, heatmaps, and gauges. The panel editor supports transformations, field overrides, and threshold configuration. Grafana's alerting system evaluates queries and sends notifications through multiple channels.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Kibana provides Lens (drag-and-drop visualizations), Vega-based custom visualizations, and Maps (geospatial analytics). The Discover interface enables ad-hoc log exploration. Kibana's dashboard sharing and embedding options are more limited than Grafana's.
 
-## Observability Integration
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+##  Observability Integration
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Grafana integrates deeply with the LGTM stack (Loki for logs, Grafana Tempo for traces, Grafana Mimir for metrics). The Explore interface provides unified log, metric, and trace querying. Grafana Cloud offers managed observability.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Kibana excels in the Elastic ecosystem. Application Performance Monitoring (APM) traces requests across services. Machine Learning features detect anomalies. The Security app provides SIEM capabilities. Kibana's integration with Elasticsearch provides powerful full-text search across observability data.
 
-## Deployment
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+##  Deployment
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Grafana is available as open source, Grafana Cloud (managed), or Grafana Enterprise. Deployment options include Docker, Kubernetes, and traditional package managers. Grafana provisioning supports dashboard-as-code.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Kibana is included with the Elastic Stack. Deployment options include Elastic Cloud (managed), self-hosted, or Docker. Kibana configuration is tightly coupled to Elasticsearch cluster topology.
 
-## Recommendation
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+##  Recommendation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Choose Grafana for multi-source dashboards, Prometheus-based monitoring, and the LGTM observability stack. Choose Kibana for Elasticsearch-centric observability, log analytics with full-text search, and existing Elastic Stack investments. For organizations using both, Grafana's multi-source support makes it the better dashboarding layer while Kibana serves as the Elasticsearch query interface.

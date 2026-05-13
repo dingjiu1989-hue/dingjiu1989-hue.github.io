@@ -21,7 +21,7 @@ Your Git hosting platform shapes everything: CI/CD, code review, project managem
 **AI coding**|  Copilot (native integration)| GitLab Duo| None  
 **Project mgmt**|  GitHub Projects + Issues| Epics, Roadmaps, Boards| Jira integration  
 **Community**|  100M+ developers| 30M+ users| 10M+ users  
-
+  
 ## GitHub — The Industry Standard
 
 GitHub is where open source lives. With 100M+ developers, it's the default for collaboration, portfolio hosting, and community-driven development. GitHub Actions is the most popular CI/CD platform, and Copilot integration makes it the most AI-native Git host.
@@ -62,5 +62,5 @@ Self-hosted, compliance-first| **GitLab CE** — free and complete
 Jira-based team| **Bitbucket** — integration is the whole point  
 Full DevOps in one tool| **GitLab** — no assembly required  
 Maximum AI assistance| **GitHub + Copilot**  
-
+  
 **Bottom line:** GitHub for community and collaboration, GitLab for integrated DevOps, Bitbucket only if you live in Jira. Most developers should start with GitHub and only switch if they need something GitHub doesn't offer. See also: [Git Cheatsheet](</en/tech/git-cheatsheet.html>) and [Advanced Git Guide](</en/tech/git-advanced.html>).

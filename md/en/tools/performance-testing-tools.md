@@ -8,450 +8,3469 @@ url: https://dingjiu1989-hue.github.io/en/tools/performance-testing-tools.html
 
 # Performance Testing Tools: k6 vs Locust vs JMeter
 
+# Performance Testing Tools: k6 vs Locust vs JMeter
+
+  
+
+
+# Performance Testing Tools: k6 vs Locust vs JMeter
+
+  
+  
+  
+  
+
+
+# Performance Testing Tools: k6 vs Locust vs JMeter
+
+  
+  
+  
+  
+  
+  
+  
+
+
+# Performance Testing Tools: k6 vs Locust vs JMeter
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Performance Testing Tools: k6 vs Locust vs JMeter
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Performance testing is not optional for production services. Without it, you discover scaling bottlenecks during traffic spikes or product launches. The three leading open-source tools--k6, Locust, and JMeter--each approach load testing from different angles. This article compares their scripting models, distributed testing capabilities, CI integration, and reporting to help you choose the right tool for your use case.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  k6
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 k6 is a modern load testing tool built with JavaScript/Go, designed for developer workflows and CI integration:
 
-    // k6 test script
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    import http from 'k6/http';
 
-    import { check, sleep, group } from 'k6';
+// k6 test script
 
-    import { Rate, Trend, Counter } from 'k6/metrics';
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    // Custom metrics
 
-    const errorRate = new Rate('errors');
+import http from 'k6/http';
 
-    const paymentLatency = new Trend('payment_latency');
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    const successCount = new Counter('successful_payments');
 
-    // Test configuration
+import { check, sleep, group } from 'k6';
 
-    export const options = {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      stages: [
 
-        { duration: '2m', target: 50 },   // Ramp up to 50 users
+import { Rate, Trend, Counter } from 'k6/metrics';
 
-        { duration: '5m', target: 100 },  // Stay at 100 users
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        { duration: '2m', target: 200 },  // Spike to 200
 
-        { duration: '2m', target: 0 },    // Ramp down
+// Custom metrics
 
-      ],
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      thresholds: {
 
-        http_req_duration: ['p(95)<500', 'p(99)<1000'],
+const errorRate = new Rate('errors');
 
-        errors: ['rate<0.05'],
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        'payment_latency': ['p(99)<2000'],
 
-      },
+const paymentLatency = new Trend('payment_latency');
 
-    };
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    export default function () {
 
-      group('Payment Flow', () => {
+const successCount = new Counter('successful_payments');
 
-        const payload = JSON.stringify({
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          amount: 49.99,
 
-          currency: 'USD',
+// Test configuration
 
-          token: 'tok_test_123',
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        });
 
-        const params = {
+export const options = {
 
-          headers: { 'Content-Type': 'application/json' },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          tags: { endpoint: 'charge' },
 
-        };
+stages: [
 
-        const response = http.post(
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          'https://api.example.com/v1/charges',
 
-          payload,
+{ duration: '2m', target: 50 }, // Ramp up to 50 users
 
-          params
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        );
 
-        check(response, {
+{ duration: '5m', target: 100 }, // Stay at 100 users
 
-          'status is 200': (r) => r.status === 200,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          'response time < 300ms': (r) => r.timings.duration < 300,
 
-          'has transaction id': (r) => r.json('id') !== undefined,
+{ duration: '2m', target: 200 }, // Spike to 200
 
-        });
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        paymentLatency.add(response.timings.duration);
 
-        errorRate.add(response.status !== 200);
+{ duration: '2m', target: 0 }, // Ramp down
 
-        if (response.status === 200) successCount.add(1);
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        sleep(1);
 
-      });
+],
 
-    }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+thresholds: {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+http_req_duration: ['p(95)<500', 'p(99)<1000'],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+errors: ['rate<0.05'],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+'payment_latency': ['p(99)<2000'],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+};
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+export default function () {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+group('Payment Flow', () => {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+const payload = JSON.stringify({
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+amount: 49.99,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+currency: 'USD',
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+token: 'tok_test_123',
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+});
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+const params = {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+headers: { 'Content-Type': 'application/json' },
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+tags: { endpoint: 'charge' },
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+};
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+const response = http.post(
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+'https://api.example.com/v1/charges',
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+payload,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+params
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+);
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+check(response, {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+'status is 200': (r) => r.status === 200,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+'response time < 300ms': (r) => r.timings.duration < 300,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+'has transaction id': (r) => r.json('id') !== undefined,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+});
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+paymentLatency.add(response.timings.duration);
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+errorRate.add(response.status !== 200);
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if (response.status === 200) successCount.add(1);
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+sleep(1);
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+});
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ### CI Integration
 
-    # .github/workflows/performance-test.yml
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    name: Performance Test
 
-    on:
+# .github/workflows/performance-test.yml
 
-      push:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        branches: [main]
 
-      schedule:
+name: Performance Test
 
-        - cron: '0 6 * * 1-5'  # Weekdays at 6 AM
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    jobs:
 
-      load-test:
+on:
 
-        runs-on: ubuntu-latest
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        steps:
 
-          - uses: actions/checkout@v4
+push:
 
-          - name: Run k6 test
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            uses: grafana/k6-action@v0.3.0
 
-            with:
+branches: [main]
 
-              filename: tests/performance/payment-flow.js
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-              flags: --out json=results.json
 
-          - name: Upload results
+schedule:
 
-            uses: actions/upload-artifact@v4
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            with:
 
-              name: k6-results
+\\\\\\\\\\\\\\\\- cron: '0 6 * * 1-5' # Weekdays at 6 AM
 
-              path: results.json
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          - name: Compare thresholds
 
-            run: |
+jobs:
 
-              if grep -q '"thresholds": {"failed":' results.json; then
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                echo "Performance thresholds exceeded!"
 
-                exit 1
+load-test:
 
-              fi
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+runs-on: ubuntu-latest
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+steps:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- name: Run k6 test
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+uses: grafana/k6-action@v0.3.0
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+with:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+filename: tests/performance/payment-flow.js
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+flags: --out json=results.json
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- name: Upload results
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+uses: actions/upload-artifact@v4
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+with:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+name: k6-results
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+path: results.json
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- name: Compare thresholds
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+run: |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if grep -q '"thresholds": {"failed":' results.json; then
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+echo "Performance thresholds exceeded!"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+exit 1
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+fi
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Locust
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Locust uses Python for test scenarios, making it ideal for teams already in the Python ecosystem:
 
-    # locustfile.py
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    from locust import HttpUser, task, between, events
 
-    from locust.runners import MasterRunner
+# locustfile.py
 
-    import json
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    import logging
 
-    class PaymentUser(HttpUser):
+from locust import HttpUser, task, between, events
 
-        wait_time = between(0.5, 2.5)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        def on_start(self):
 
-            """Login before starting tasks"""
+from locust.runners import MasterRunner
 
-            response = self.client.post("/auth/login", json={
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                "username": f"test_user_{self.id}",
 
-                "password": "test_password",
+import json
 
-            })
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            self.token = response.json().get("token")
 
-            self.client.headers.update({
+import logging
 
-                "Authorization": f"Bearer {self.token}"
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            })
 
-        @task(3)
+class PaymentUser(HttpUser):
 
-        def create_payment(self):
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            """Create a payment - weight 3"""
 
-            payload = {
+wait_time = between(0.5, 2.5)
 
-                "amount": 99.99,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                "currency": "USD",
 
-                "description": "Load test payment",
+def on_start(self):
 
-            }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            with self.client.post(
 
-                "/api/v1/charges",
+"""Login before starting tasks"""
 
-                json=payload,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                catch_response=True,
 
-                name="/api/v1/charges [POST]",
+response = self.client.post("/auth/login", json={
 
-            ) as response:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                if response.status_code != 201:
 
-                    response.failure(f"Unexpected status: {response.status_code}")
+"username": f"test_user_{self.id}",
 
-                elif response.elapsed.total_seconds() > 2.0:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                    response.failure("Request took too long")
 
-        @task(1)
+"password": "test_password",
 
-        def get_balance(self):
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            """Check balance - weight 1"""
 
-            self.client.get("/api/v1/balance", name="/api/v1/balance [GET]")
+})
 
-        @task(1)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        def list_transactions(self):
 
-            """List recent transactions"""
+self.token = response.json().get("token")
 
-            self.client.get(
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                "/api/v1/transactions?limit=10",
 
-                name="/api/v1/transactions [GET]",
+self.client.headers.update({
 
-            )
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    # Distributed testing hook
 
-    @events.init.add_listener
+"Authorization": f"Bearer {self.token}"
 
-    def on_locust_init(environment, **kwargs):
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        if isinstance(environment.runner, MasterRunner):
 
-            print("Starting distributed load test with master node")
+})
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+@task(3)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def create_payment(self):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"""Create a payment - weight 3"""
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+payload = {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"amount": 99.99,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"currency": "USD",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"description": "Load test payment",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+with self.client.post(
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"/api/v1/charges",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+json=payload,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+catch_response=True,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+name="/api/v1/charges [POST]",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+) as response:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if response.status_code != 201:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+response.failure(f"Unexpected status: {response.status_code}")
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+elif response.elapsed.total_seconds() > 2.0:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+response.failure("Request took too long")
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+@task(1)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def get_balance(self):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"""Check balance - weight 1"""
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+self.client.get("/api/v1/balance", name="/api/v1/balance [GET]")
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+@task(1)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def list_transactions(self):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"""List recent transactions"""
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+self.client.get(
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"/api/v1/transactions?limit=10",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+name="/api/v1/transactions [GET]",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Distributed testing hook
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+@events.init.add_listener
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def on_locust_init(environment, **kwargs):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if isinstance(environment.runner, MasterRunner):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+print("Starting distributed load test with master node")
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  JMeter
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 JMeter provides a GUI for test plan creation, useful for non-developer team members:
 
-    <!-- JMeter test plan (exported XML) -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    <?xml version="1.0" encoding="UTF-8"?>
 
-    <jmeterTestPlan version="1.2">
+https://api.example.com
 
-      <hashTree>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        <TestPlan guiclass="TestPlanGui" testclass="TestPlan">
 
-          <elementProp name="TestPlan.user_defined_variables">
+100
 
-            <collectionProp>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-              <elementProp name="base_url">
 
-                <stringProp name="value">https://api.example.com</stringProp>
+60
 
-              </elementProp>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            </collectionProp>
 
-          </elementProp>
+true
 
-        </TestPlan>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        <hashTree>
 
-          <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup">
+600
 
-            <intProp name="ThreadGroup.num_threads">100</intProp>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            <intProp name="ThreadGroup.ramp_time">60</intProp>
 
-            <boolProp name="ThreadGroup.scheduler">true</boolProp>
+testclass="HTTPSamplerProxy">
 
-            <stringProp name="ThreadGroup.duration">600</stringProp>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          </ThreadGroup>
 
-          <hashTree>
+${base_url}
 
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui"
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                              testclass="HTTPSamplerProxy">
 
-              <stringProp name="HTTPSampler.domain">${base_url}</stringProp>
+/api/v1/charges
 
-              <stringProp name="HTTPSampler.path">/api/v1/charges</stringProp>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-              <stringProp name="HTTPSampler.method">POST</stringProp>
 
-              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+POST
 
-              <stringProp name="HTTPSampler.protocol">https</stringProp>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            </HTTPSamplerProxy>
 
-            <hashTree>
+true
 
-              <ResponseAssertion guiclass="AssertionGui"
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                                 testclass="ResponseAssertion">
 
-                <intProp name="Assertion.test_field">806856195</intProp>
+https
 
-                <stringProp name="Assertion.assume_success">false</stringProp>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                <collectionProp name="Asserion.test_strings">
 
-                  <stringProp name="1242958654">"status": "success"</stringProp>
+testclass="ResponseAssertion">
 
-                </collectionProp>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-              </ResponseAssertion>
 
-            </hashTree>
+806856195
 
-          </hashTree>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        </hashTree>
 
-      </hashTree>
+false
 
-    </jmeterTestPlan>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"status": "success"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Distributed Testing
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Feature | k6 | Locust | JMeter |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 |---|---|---|---|
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 | Distributed mode | k6-operator (K8s) | Master/worker (built-in) | Master/slave (built-in) |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Cloud execution | Grafana Cloud k6 | Locust Cloud | BlazeMeter |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 | Scaling | Horizontal via K8s | Built-in RPC | CLI parameters |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 k6 distributed testing with Kubernetes:
 
-    # k6-operator CRD for distributed tests
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    apiVersion: k6.io/v1alpha1
 
-    kind: TestRun
+# k6-operator CRD for distributed tests
 
-    metadata:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      name: payment-load-test
 
-    spec:
+apiVersion: k6.io/v1alpha1
 
-      parallelism: 6
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      script:
 
-        configMap:
+kind: TestRun
 
-          name: k6-test-scripts
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          file: payment-flow.js
 
-      runner:
+metadata:
 
-        image: grafana/k6:latest
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        env:
 
-          - name: TARGET_URL
+name: payment-load-test
 
-            value: "https://api.example.com"
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        resources:
 
-          limits:
+spec:
 
-            cpu: "1"
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            memory: 512Mi
 
-          requests:
+parallelism: 6
 
-            cpu: 500m
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            memory: 256Mi
+
+script:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+configMap:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+name: k6-test-scripts
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+file: payment-flow.js
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+runner:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+image: grafana/k6:latest
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+env:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- name: TARGET_URL
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+value: "https://api.example.com"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+resources:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+limits:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+cpu: "1"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+memory: 512Mi
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+requests:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+cpu: 500m
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+memory: 256Mi
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Protocol Support
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Protocol | k6 | Locust | JMeter |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 |---|---|---|---|
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | HTTP/1.1 | Native | Native | Native |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 | HTTP/2 | Native | Extension | Native |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | gRPC | Extension | Extension | Native |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 | WebSocket | Extension | Extension | Native |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | JDBC | No | No | Native |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 | JMS | No | No | Native |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | MQTT | Extension | Extension | Plugin |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  When to Use Which
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * **k6**: Best for developer-led teams wanting CI-native load testing with JavaScript. Excellent for REST API and microservice testing.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * **Locust**: Best for Python-centric teams who need complex test scenarios and real-time monitoring. Ideal for behavioral load testing.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * **JMeter**: Best for organizations requiring broad protocol support, GUI-based test creation, or integration with legacy performance testing workflows.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 For most modern web applications, k6 provides the best developer experience and CI integration. Choose Locust when your test scenarios require complex Python logic. Reserve JMeter for situations requiring its broad protocol support or when non-developers need to create and modify test plans.

@@ -20,18 +20,19 @@ Finding a specific website or product| OK| ✅
 Shopping for the best price| OK| ✅  
 Checking real-time news/sports/weather| ✅| ✅  
 Deep academic literature review| ✅ with Pro Search| ✅ with Scholar  
-
+  
 ## Core Features
 
 ### Pro Search
 
 The free version uses a quick model that's fine for simple questions. **Pro Search** (Pro plan, $20/mo) does multi-step reasoning: it breaks your question into sub-questions, searches each one, synthesizes the findings, and delivers a comprehensive answer with 20+ citations. For research, competitive analysis, or learning a new topic, it's worth the upgrade.
-
+    
+    
     Pro Search query example:
     "What are the key differences between Rust's ownership model and
     Go's garbage collection, and which performs better for a real-time
     data processing pipeline?"
-
+    
     The AI will:
     1. Research Rust ownership model
     2. Research Go garbage collection
@@ -53,6 +54,8 @@ Focus lets you scope searches to specific sources:
   * **Wolfram Alpha** — computational and mathematical queries
   * **YouTube** — search video transcripts
   * **Reddit** — search Reddit discussions
+
+
 
 ### Pages
 

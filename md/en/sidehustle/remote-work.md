@@ -18,7 +18,7 @@ Platform| Best For| Fee| Notes
 **Fiverr**|  Defined services (gigs)| 20%| You define packages at fixed prices. Works well for design, writing, and quick coding tasks. Less back-and-forth than Upwork.  
 **Toptal**|  Elite developers| Varies| Claims to accept top 3%. Rigorous screening process, but the rates reflect it. If you pass, you'll work with serious clients.  
 **Freelancer**|  Contest-based work| 10%+| Similar to Upwork but with a contest system. Good for design portfolios.  
-
+  
 ## Developer-Specific Platforms
 
 Platform| Best For| Model  
@@ -26,7 +26,7 @@ Platform| Best For| Model
 **Gun.io**|  Senior devs, US-based| Vetted, direct hire focus  
 **Arc.dev**|  Remote dev jobs| Apply once, companies reach out  
 **Hired.com**|  Tech salaries > $100K| Reverse marketplace — companies apply to you  
-
+  
 ## Remote-First Job Boards
 
 Site| Focus| Frequency  
@@ -35,12 +35,14 @@ Site| Focus| Frequency
 **Remote OK**|  Tech-heavy remote jobs| Aggregated, high volume  
 **Remotive**|  Curated remote jobs| Hand-picked, quality over quantity  
 **JS Remotely**|  JavaScript/TypeScript only| Niche but focused  
-
+  
 ## Niche Platforms
 
   * **YunoJuno** — UK/EU creative and tech freelancers. Good rates, less competition than US platforms.
   * **CodeMentor** — Get paid to do code reviews and mentoring. Lower volume but high hourly rates.
   * **Working Nomads** — Curated remote job newsletter. Subscribe and get filtered jobs in your inbox.
+
+
 
 ## How to Stand Out
 

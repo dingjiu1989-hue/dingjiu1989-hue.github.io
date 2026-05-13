@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/load-testing-tools.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2014",
+      "wordCount": "4096",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/load-testing-tools.html"},
-      "articleBody": "Load Testing Tools: k6, Locust, Gatling, Artillery Introduction Load testing ensures your application handles expected traffic without degradation. Modern load testing tools use real programming languages instead of XML/JSON configuration, making tests maintainable, version-controllable, and integrable with CI/CD pipelines. This article compares k6, Locust, Gatling, and Artillery. k6 Grafana k6 is a JavaScript-based load testing tool with excellent performance metrics: // load-test.js import http from \"k6/http\"; import { check, sleep, group } from \"k6\"; import { Rate, Trend, Counter } from \"k6/metrics\"; // Custom metrics const errorRate = new Rate(\"errors\"); const responseTime = new Trend(\"response_time\"); // Test configuration export const options = { stages: [ { duration: \"2m\", target: 50 }, // Ramp up { duration: \"5m\", target: 50 }, // Stay at 50 users { duration: \"2m\", target: 100 }, // Ramp up { duration: \"5m\", target: 100 }, // Stay at 100 { duration: \"2m\", target: 0 }, // Ramp down ], thresholds: { http_req_duration: [\"p(95) errors: [\"rate http_req_failed: [\"rate }, }; export default function () { group(\"User API endpoints\", () => { // GET request const getRes = http.get(\"https://api.example.com/users\", { headers: { Authorization: \"Bearer test-token\" }, }); check(getRes, { \"status is 200\": (r) => r.status === 200, \"response time r.timings.duration }); errorRate.add(getRes.status !== 200); responseTime.add(getRes.timings.duration); // POST request const payload = JSON.stringify({ name: \"Test User\" }); const postRes = http.post(\"https://api.example.com/users\", payload, { headers: { \"Content-Type\": \"application/json\" }, }); check(postRes, { \"created status is 201\": (r) => r.status === 201, }); sleep(1); }); } # Run test k6 run load-test.js # With HTML report k6 run load-test.js --out json=results.json --out html=report.html **Strengths**: Go-based (efficient), JavaScript scripting, rich metrics, threshold system, extensive protocol support (HTTP, gRPC, WebSocket, browser), cloud integration. Locust Python-based load testing with a web UI for real-time monitoring: # locustfile.py from locust import HttpUser, task, between, tag import json class WebsiteUser(HttpUser): wait_time = between(1, 5) # Simulate user think time def on_start(self): \"\"\"Login before starting tasks.\"\"\" response = self.client.post(\"/login\", json={ \"username\": \"testuser\", \"password\": \"testpass\", }) self.token = response.json().get(\"token\") @task(3) # Weight: 3x more likely @tag(\"read\") def view_users(self): headers = {\"Authorization\": f\"Bearer {self.token}\"} with self.client.get( \"/users\", headers=headers, catch_response=True, name=\"/users\" # Group in reports ) as response: if response.status_code == 200: response.success() else: response.failure(f\"Got status {response.status_code}\") @task(1) @tag(\"write\") def create_user(self): payload = { \"name\": f\"user_{self.id}\", \"email\": f\"user_{self.id}@example.com\", } self.client.post(\"/users\", json=payload) # Run: locust -f locustfile.py --headless -u 100 -r 10 -t 10m # Web UI: locust -f locustfile.py (then open http://localhost:8089) **Strengths**: Python scripting (familiar for data teams), distributed execution, web UI for live monitoring, extensible with custom event hooks. Gatling High-performance Scala/Java load testing with detailed HTML reports: // BasicSimulation.scala import io.gatling.core.Predef._ import io.gatling.http.Predef._ import scala.concurrent.duration._ class BasicSimulation extends Simulation { val httpProtocol = http .baseUrl(\"https://api.example.com\") .acceptHeader(\"application/json\") .contentTypeHeader(\"application/json\") .userAgentHeader(\"Gatling\") val feeder = csv(\"users.csv\").circular val scn = scenario(\"User API Test\") .feed(feeder) .exec(http(\"List Users\") .get(\"/users\") .check(status.is(200)) .check(jsonPath(\"$.users[*].id\").exists)) .pause(1) .exec(http(\"Create User\") .post(\"/users\") .body(StringBody(\"\"\"{\"name\": \"${name}\", \"email\": \"${email}\"}\"\"\")) .asJson .check(status.is(201)) .check(jsonPath(\"$.id\").saveAs(\"userId\"))) .exec(http(\"Get User\") .get(\"/users/${userId}\") .check(status.is(200))) setUp( scn.inject( nothingFor(10.seconds), rampUsers(50).during(2.minutes), constantUsersPerSec(20).during(5.minutes), rampUsers(100).during(2.minutes), ) ).protocols(httpProtocol) } # Run gatling.sh -s BasicSimulation -rf results/ **Strengths**: Best performance (Akka-based), richest HTML reports, powerful DSL, excellent for high-throughput testing. Artillery Node.js-based load testing focused on developer experience: # artillery.yml config: target: \"https://api.example.com\" phases: - duration: 60 arrivalRate: 5 rampTo: 50 name: \"Warm up\" - duration: 300 arrivalRate: 50 name: \"Sustained load\" defaults: headers: Authorization: \"Bearer {{ token }}\" scenarios: - name: \"Browse and purchase\" flow: - get: url: \"/products\" - think: 2 - get: url: \"/products/{{ $randomString }}\" - post: url: \"/cart\" json: product_id: \"{{ $randomString }}\" quantity: 1 - think: 1 - post: url: \"/checkout\" json: payment_method: \"card\" # Run npx artillery run artillery.yml # Report natsby art run artillery.yml --output report.json npx artillery report report.json Comparison | Feature | k6 | Locust | Gatling | Artillery | |---------|-----|--------|---------|-----------| | Language | JavaScript | Python | Scala/Java | YAML + JS | | Performance | Excellent | Good | Excellent | Good | | Web UI | Cloud only | Built-in | Built-in | No | | CI integration | Excellent | Good | Good | Good | | Protocol support | HTTP/2, gRPC, WS | HTTP | HTTP, JMS, MQTT | HTTP, Socket.io | | Learning curve | Low | Low | Medium | Low | | Reports | JSON/HTML | CSV/HTML | HTML (excellent) | JSON/HTML | Recommendations * **JavaScript teams**: k6 for the best balance of scripting ease and performance. * **Python teams**: Locust for familiar Python scripting with live web monitoring. * **High-throughput testing**: Gatling for the most detailed performance analysis. * **Quick setup**: Artillery for YAML-based configuration without coding. * **CI/CD integration**: k6 with Grafana dashboards for production load testing. All four tools support CI integration. k6 has the strongest Grafana ecosystem. Locust excels for teams already using Python data tools. Gatling produces the most detailed HTML reports. Artillery is the fastest to set up for simple tests."
+      "articleBody": "Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Introduction Load testing ensures your application handles expected traffic without degradation. Modern load testing tools use real programming languages instead of XML/JSON configuration, making tests maintainable, version-controllable, and integrable with CI/CD pipelines. This article compares k6, Locust, Gatling, and Artillery. k6 Grafana k6 is a JavaScript-based load testing tool with excellent performance metrics: // load-test.js import http from \"k6/http\"; import { check, sleep, group } from \"k6\"; import { Rate, Trend, Counter } from \"k6/metrics\"; // Custom metrics const errorRate = new Rate(\"errors\"); const responseTime = new Trend(\"response_time\"); // Test configuration export const options = { stages: [ { duration: \"2m\", target: 50 }, // Ramp up { duration: \"5m\", target: 50 }, // Stay at 50 users { duration: \"2m\", target: 100 }, // Ramp up { duration: \"5m\", target: 100 }, // Stay at 100 { duration: \"2m\", target: 0 }, // Ramp down ], thresholds: { http_req_duration: [\"p(95) errors: [\"rate http_req_failed: [\"rate }, }; export default function () { group(\"User API endpoints\", () => { // GET request const getRes = http.get(\"https://api.example.com/users\", { headers: { Authorization: \"Bearer test-token\" }, }); check(getRes, { \"status is 200\": (r) => r.status === 200, \"response time r.timings.duration }); errorRate.add(getRes.status !== 200); responseTime.add(getRes.timings.duration); // POST request const payload = JSON.stringify({ name: \"Test User\" }); const postRes = http.post(\"https://api.example.com/users\", payload, { headers: { \"Content-Type\": \"application/json\" }, }); check(postRes, { \"created status is 201\": (r) => r.status === 201, }); sleep(1); }); } Run test k6 run load-test.js With HTML report k6 run load-test.js --out json=results.json --out html=report.html **Strengths**: Go-based (efficient), JavaScript scripting, rich metrics, threshold system, extensive protocol support (HTTP, gRPC, WebSocket, browser), cloud integration. Locust Python-based load testing with a web UI for real-time monitoring: locustfile.py from locust import HttpUser, task, between, tag import json class WebsiteUser(HttpUser): wait_time = between(1, 5) # Simulate user think time def on_start(self): \"\"\"Login before starting tasks.\"\"\" response = self.client.post(\"/login\", json={ \"username\": \"testuser\", \"password\": \"testpass\", }) self.token = response.json().get(\"token\") @task(3) # Weight: 3x more likely @tag(\"read\") def view_users(self): headers = {\"Authorization\": f\"Bearer {self.token}\"} with self.client.get( \"/users\", headers=headers, catch_response=True, name=\"/users\" # Group in reports ) as response: if response.status_code == 200: response.success() else: response.failure(f\"Got status {response.status_code}\") @task(1) @tag(\"write\") def create_user(self): payload = { \"name\": f\"user_{self.id}\", \"email\": f\"user_{self.id}@example.com\", } self.client.post(\"/users\", json=payload) Run: locust -f locustfile.py --headless -u 100 -r 10 -t 10m Web UI: locust -f locustfile.py (then open http://localhost:8089) **Strengths**: Python scripting (familiar for data teams), distributed execution, web UI for live monitoring, extensible with custom event hooks. Gatling High-performance Scala/Java load testing with detailed HTML reports: // BasicSimulation.scala import io.gatling.core.Predef._ import io.gatling.http.Predef._ import scala.concurrent.duration._ class BasicSimulation extends Simulation { val httpProtocol = http .baseUrl(\"https://api.example.com\") .acceptHeader(\"application/json\") .contentTypeHeader(\"application/json\") .userAgentHeader(\"Gatling\") val feeder = csv(\"users.csv\").circular val scn = scenario(\"User API Test\") .feed(feeder) .exec(http(\"List Users\") .get(\"/users\") .check(status.is(200)) .check(jsonPath(\"$.users[*].id\").exists)) .pause(1) .exec(http(\"Create User\") .post(\"/users\") .body(StringBody(\"\"\"{\"name\": \"${name}\", \"email\": \"${email}\"}\"\"\")) .asJson .check(status.is(201)) .check(jsonPath(\"$.id\").saveAs(\"userId\"))) .exec(http(\"Get User\") .get(\"/users/${userId}\") .check(status.is(200))) setUp( scn.inject( nothingFor(10.seconds), rampUsers(50).during(2.minutes), constantUsersPerSec(20).during(5.minutes), rampUsers(100).during(2.minutes), ) ).protocols(httpProtocol) } Run gatling.sh -s BasicSimulation -rf results/ **Strengths**: Best performance (Akka-based), richest HTML reports, powerful DSL, excellent for high-throughput testing. Artillery Node.js-based load testing focused on developer experience: artillery.yml config: target: \"https://api.example.com\" phases: \\\\\\\\\\\\\\\\- duration: 60 arrivalRate: 5 rampTo: 50 name: \"Warm up\" \\\\\\\\\\\\\\\\- duration: 300 arrivalRate: 50 name: \"Sustained load\" defaults: headers: Authorization: \"Bearer {{ token }}\" scenarios: \\\\\\\\\\\\\\\\- name: \"Browse and purchase\" flow: \\\\\\\\\\\\\\\\- get: url: \"/products\" \\\\\\\\\\\\\\\\- think: 2 \\\\\\\\\\\\\\\\- get: url: \"/products/{{ $randomString }}\" \\\\\\\\\\\\\\\\- post: url: \"/cart\" json: product_id: \"{{ $randomString }}\" quantity: 1 \\\\\\\\\\\\\\\\- think: 1 \\\\\\\\\\\\\\\\- post: url: \"/checkout\" json: payment_method: \"card\" Run npx artillery run artillery.yml Report natsby art run artillery.yml --output report.json npx artillery report report.json Comparison | Feature | k6 | Locust | Gatling | Artillery | |---------|-----|--------|---------|-----------| | Language | JavaScript | Python | Scala/Java | YAML + JS | | Performance | Excellent | Good | Excellent | Good | | Web UI | Cloud only | Built-in | Built-in | No | | CI integration | Excellent | Good | Good | Good | | Protocol support | HTTP/2, gRPC, WS | HTTP | HTTP, JMS, MQTT | HTTP, Socket.io | | Learning curve | Low | Low | Medium | Low | | Reports | JSON/HTML | CSV/HTML | HTML (excellent) | JSON/HTML | Recommendations * **JavaScript teams**: k6 for the best balance of scripting ease and performance. * **Python teams**: Locust for familiar Python scripting with live web monitoring. * **High-throughput testing**: Gatling for the most detailed performance analysis. * **Quick setup**: Artillery for YAML-based configuration without coding. * **CI/CD integration**: k6 with Grafana dashboards for production load testing. All four tools support CI integration. k6 has the strongest Grafana ecosystem. Locust excels for teams already using Python data tools. Gatling produces the most detailed HTML reports. Artillery is the fastest to set up for simple tests."
     }
     </script>
     <script type="application/ld+json">
@@ -78,379 +78,2677 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/load-testing-tools.png" alt="Load Testing Tools: k6, Locust, Gatling, Artillery" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Load Testing Tools: k6, Locust, Gatling, Artillery</h1>
 <br>
+<h1>Load Testing Tools: k6, Locust, Gatling, Artillery</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>Load Testing Tools: k6, Locust, Gatling, Artillery</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Load Testing Tools: k6, Locust, Gatling, Artillery</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Load Testing Tools: k6, Locust, Gatling, Artillery</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Load testing ensures your application handles expected traffic without degradation. Modern load testing tools use real programming languages instead of XML/JSON configuration, making tests maintainable, version-controllable, and integrable with CI/CD pipelines. This article compares k6, Locust, Gatling, and Artillery.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  k6</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Grafana k6 is a JavaScript-based load testing tool with excellent performance metrics:</p>
 <br>
-<p>    // load-test.js</p>
 <br>
-<p>    import http from "k6/http";</p>
 <br>
-<p>    import { check, sleep, group } from "k6";</p>
 <br>
-<p>    import { Rate, Trend, Counter } from "k6/metrics";</p>
 <br>
-<p>    // Custom metrics</p>
 <br>
-<p>    const errorRate = new Rate("errors");</p>
 <br>
-<p>    const responseTime = new Trend("response_time");</p>
 <br>
-<p>    // Test configuration</p>
 <br>
-<p>    export const options = {</p>
 <br>
-<p>      stages: [</p>
 <br>
-<p>        { duration: "2m", target: 50 },   // Ramp up</p>
 <br>
-<p>        { duration: "5m", target: 50 },   // Stay at 50 users</p>
 <br>
-<p>        { duration: "2m", target: 100 },  // Ramp up</p>
+<p>// load-test.js</p>
 <br>
-<p>        { duration: "5m", target: 100 },  // Stay at 100</p>
 <br>
-<p>        { duration: "2m", target: 0 },    // Ramp down</p>
 <br>
-<p>      ],</p>
 <br>
-<p>      thresholds: {</p>
 <br>
-<p>        http_req_duration: ["p(95)<500", "p(99)<1500"],</p>
 <br>
-<p>        errors: ["rate<0.05"],</p>
 <br>
-<p>        http_req_failed: ["rate<0.01"],</p>
 <br>
-<p>      },</p>
 <br>
-<p>    };</p>
 <br>
-<p>    export default function () {</p>
 <br>
-<p>      group("User API endpoints", () => {</p>
 <br>
-<p>        // GET request</p>
 <br>
-<p>        const getRes = http.get("https://api.example.com/users", {</p>
+<p>import http from "k6/http";</p>
 <br>
-<p>          headers: { Authorization: "Bearer test-token" },</p>
 <br>
-<p>        });</p>
 <br>
-<p>        check(getRes, {</p>
 <br>
-<p>          "status is 200": (r) => r.status === 200,</p>
 <br>
-<p>          "response time < 500ms": (r) => r.timings.duration < 500,</p>
 <br>
-<p>        });</p>
 <br>
-<p>        errorRate.add(getRes.status !== 200);</p>
 <br>
-<p>        responseTime.add(getRes.timings.duration);</p>
 <br>
-<p>        // POST request</p>
 <br>
-<p>        const payload = JSON.stringify({ name: "Test User" });</p>
 <br>
-<p>        const postRes = http.post("https://api.example.com/users", payload, {</p>
 <br>
-<p>          headers: { "Content-Type": "application/json" },</p>
 <br>
-<p>        });</p>
+<p>import { check, sleep, group } from "k6";</p>
 <br>
-<p>        check(postRes, {</p>
 <br>
-<p>          "created status is 201": (r) => r.status === 201,</p>
 <br>
-<p>        });</p>
 <br>
-<p>        sleep(1);</p>
 <br>
-<p>      });</p>
 <br>
-<p>    }</p>
 <br>
-<p>    # Run test</p>
 <br>
-<p>    k6 run load-test.js</p>
 <br>
-<p>    # With HTML report</p>
 <br>
-<p>    k6 run load-test.js --out json=results.json --out html=report.html</p>
+<br>
+<br>
+<br>
+<p>import { Rate, Trend, Counter } from "k6/metrics";</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Custom metrics</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const errorRate = new Rate("errors");</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const responseTime = new Trend("response_time");</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Test configuration</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>export const options = {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>stages: [</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{ duration: "2m", target: 50 }, // Ramp up</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{ duration: "5m", target: 50 }, // Stay at 50 users</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{ duration: "2m", target: 100 }, // Ramp up</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{ duration: "5m", target: 100 }, // Stay at 100</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{ duration: "2m", target: 0 }, // Ramp down</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>thresholds: {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>http_req_duration: ["p(95)<500", "p(99)<1500"],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>errors: ["rate<0.05"],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>http_req_failed: ["rate<0.01"],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>};</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>export default function () {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>group("User API endpoints", () => {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// GET request</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const getRes = http.get("https://api.example.com/users", {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>headers: { Authorization: "Bearer test-token" },</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>check(getRes, {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"status is 200": (r) => r.status === 200,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"response time < 500ms": (r) => r.timings.duration < 500,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>errorRate.add(getRes.status !== 200);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>responseTime.add(getRes.timings.duration);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// POST request</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const payload = JSON.stringify({ name: "Test User" });</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const postRes = http.post("https://api.example.com/users", payload, {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>headers: { "Content-Type": "application/json" },</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>check(postRes, {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"created status is 201": (r) => r.status === 201,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>sleep(1);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Run test</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>k6 run load-test.js</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>With HTML report</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>k6 run load-test.js --out json=results.json --out html=report.html</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Strengths**: Go-based (efficient), JavaScript scripting, rich metrics, threshold system, extensive protocol support (HTTP, gRPC, WebSocket, browser), cloud integration.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Locust</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Python-based load testing with a web UI for real-time monitoring:</p>
 <br>
-<p>    # locustfile.py</p>
 <br>
-<p>    from locust import HttpUser, task, between, tag</p>
 <br>
-<p>    import json</p>
 <br>
-<p>    class WebsiteUser(HttpUser):</p>
 <br>
-<p>        wait_time = between(1, 5)  # Simulate user think time</p>
 <br>
-<p>        def on_start(self):</p>
 <br>
-<p>            """Login before starting tasks."""</p>
 <br>
-<p>            response = self.client.post("/login", json={</p>
 <br>
-<p>                "username": "testuser",</p>
 <br>
-<p>                "password": "testpass",</p>
 <br>
-<p>            })</p>
 <br>
-<p>            self.token = response.json().get("token")</p>
 <br>
-<p>        @task(3)  # Weight: 3x more likely</p>
+<h1>locustfile.py</h1>
 <br>
-<p>        @tag("read")</p>
 <br>
-<p>        def view_users(self):</p>
 <br>
-<p>            headers = {"Authorization": f"Bearer {self.token}"}</p>
 <br>
-<p>            with self.client.get(</p>
 <br>
-<p>                "/users",</p>
 <br>
-<p>                headers=headers,</p>
 <br>
-<p>                catch_response=True,</p>
 <br>
-<p>                name="/users"  # Group in reports</p>
 <br>
-<p>            ) as response:</p>
 <br>
-<p>                if response.status_code == 200:</p>
 <br>
-<p>                    response.success()</p>
 <br>
-<p>                else:</p>
 <br>
-<p>                    response.failure(f"Got status {response.status_code}")</p>
+<p>from locust import HttpUser, task, between, tag</p>
 <br>
-<p>        @task(1)</p>
 <br>
-<p>        @tag("write")</p>
 <br>
-<p>        def create_user(self):</p>
 <br>
-<p>            payload = {</p>
 <br>
-<p>                "name": f"user_{self.id}",</p>
 <br>
-<p>                "email": f"user_{self.id}@example.com",</p>
 <br>
-<p>            }</p>
 <br>
-<p>            self.client.post("/users", json=payload)</p>
 <br>
-<p>    # Run: locust -f locustfile.py --headless -u 100 -r 10 -t 10m</p>
 <br>
-<p>    # Web UI: locust -f locustfile.py (then open http://localhost:8089)</p>
+<br>
+<br>
+<br>
+<p>import json</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class WebsiteUser(HttpUser):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>wait_time = between(1, 5) # Simulate user think time</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def on_start(self):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"""Login before starting tasks."""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response = self.client.post("/login", json={</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"username": "testuser",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"password": "testpass",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>})</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.token = response.json().get("token")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@task(3) # Weight: 3x more likely</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@tag("read")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def view_users(self):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>headers = {"Authorization": f"Bearer {self.token}"}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>with self.client.get(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"/users",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>headers=headers,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>catch_response=True,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name="/users" # Group in reports</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>) as response:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if response.status_code == 200:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response.success()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>else:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response.failure(f"Got status {response.status_code}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@task(1)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>@tag("write")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def create_user(self):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>payload = {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"name": f"user_{self.id}",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"email": f"user_{self.id}@example.com",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.client.post("/users", json=payload)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Run: locust -f locustfile.py --headless -u 100 -r 10 -t 10m</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Web UI: locust -f locustfile.py (then open http://localhost:8089)</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Strengths**: Python scripting (familiar for data teams), distributed execution, web UI for live monitoring, extensible with custom event hooks.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Gatling</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>High-performance Scala/Java load testing with detailed HTML reports:</p>
 <br>
-<p>    // BasicSimulation.scala</p>
 <br>
-<p>    import io.gatling.core.Predef._</p>
 <br>
-<p>    import io.gatling.http.Predef._</p>
 <br>
-<p>    import scala.concurrent.duration._</p>
 <br>
-<p>    class BasicSimulation extends Simulation {</p>
 <br>
-<p>      val httpProtocol = http</p>
 <br>
-<p>        .baseUrl("https://api.example.com")</p>
 <br>
-<p>        .acceptHeader("application/json")</p>
 <br>
-<p>        .contentTypeHeader("application/json")</p>
 <br>
-<p>        .userAgentHeader("Gatling")</p>
 <br>
-<p>      val feeder = csv("users.csv").circular</p>
 <br>
-<p>      val scn = scenario("User API Test")</p>
 <br>
-<p>        .feed(feeder)</p>
+<p>// BasicSimulation.scala</p>
 <br>
-<p>        .exec(http("List Users")</p>
 <br>
-<p>          .get("/users")</p>
 <br>
-<p>          .check(status.is(200))</p>
 <br>
-<p>          .check(jsonPath("$.users[*].id").exists))</p>
 <br>
-<p>        .pause(1)</p>
 <br>
-<p>        .exec(http("Create User")</p>
 <br>
-<p>          .post("/users")</p>
 <br>
-<p>          .body(StringBody("""{"name": "${name}", "email": "${email}"}"""))</p>
 <br>
-<p>          .asJson</p>
 <br>
-<p>          .check(status.is(201))</p>
 <br>
-<p>          .check(jsonPath("$.id").saveAs("userId")))</p>
 <br>
-<p>        .exec(http("Get User")</p>
 <br>
-<p>          .get("/users/${userId}")</p>
+<p>import io.gatling.core.Predef._</p>
 <br>
-<p>          .check(status.is(200)))</p>
 <br>
-<p>      setUp(</p>
 <br>
-<p>        scn.inject(</p>
 <br>
-<p>          nothingFor(10.seconds),</p>
 <br>
-<p>          rampUsers(50).during(2.minutes),</p>
 <br>
-<p>          constantUsersPerSec(20).during(5.minutes),</p>
 <br>
-<p>          rampUsers(100).during(2.minutes),</p>
 <br>
-<p>        )</p>
 <br>
-<p>      ).protocols(httpProtocol)</p>
 <br>
-<p>    }</p>
 <br>
-<p>    # Run</p>
 <br>
-<p>    gatling.sh -s BasicSimulation -rf results/</p>
+<br>
+<p>import io.gatling.http.Predef._</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import scala.concurrent.duration._</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class BasicSimulation extends Simulation {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>val httpProtocol = http</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.baseUrl("https://api.example.com")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.acceptHeader("application/json")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.contentTypeHeader("application/json")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.userAgentHeader("Gatling")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>val feeder = csv("users.csv").circular</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>val scn = scenario("User API Test")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.feed(feeder)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.exec(http("List Users")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.get("/users")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.check(status.is(200))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.check(jsonPath("$.users[*].id").exists))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.pause(1)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.exec(http("Create User")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.post("/users")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.body(StringBody("""{"name": "${name}", "email": "${email}"}"""))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.asJson</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.check(status.is(201))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.check(jsonPath("$.id").saveAs("userId")))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.exec(http("Get User")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.get("/users/${userId}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>.check(status.is(200)))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>setUp(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>scn.inject(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>nothingFor(10.seconds),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>rampUsers(50).during(2.minutes),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>constantUsersPerSec(20).during(5.minutes),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>rampUsers(100).during(2.minutes),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>).protocols(httpProtocol)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Run</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>gatling.sh -s BasicSimulation -rf results/</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Strengths**: Best performance (Akka-based), richest HTML reports, powerful DSL, excellent for high-throughput testing.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Artillery</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Node.js-based load testing focused on developer experience:</p>
 <br>
-<p>    # artillery.yml</p>
 <br>
-<p>    config:</p>
 <br>
-<p>      target: "https://api.example.com"</p>
 <br>
-<p>      phases:</p>
 <br>
-<p>        - duration: 60</p>
 <br>
-<p>          arrivalRate: 5</p>
 <br>
-<p>          rampTo: 50</p>
 <br>
-<p>          name: "Warm up"</p>
 <br>
-<p>        - duration: 300</p>
 <br>
-<p>          arrivalRate: 50</p>
 <br>
-<p>          name: "Sustained load"</p>
 <br>
-<p>      defaults:</p>
 <br>
-<p>        headers:</p>
+<h1>artillery.yml</h1>
 <br>
-<p>          Authorization: "Bearer {{ token }}"</p>
 <br>
-<p>    scenarios:</p>
 <br>
-<p>      - name: "Browse and purchase"</p>
 <br>
-<p>        flow:</p>
 <br>
-<p>          - get:</p>
 <br>
-<p>              url: "/products"</p>
 <br>
-<p>          - think: 2</p>
 <br>
-<p>          - get:</p>
 <br>
-<p>              url: "/products/{{ $randomString }}"</p>
 <br>
-<p>          - post:</p>
 <br>
-<p>              url: "/cart"</p>
 <br>
-<p>              json:</p>
 <br>
-<p>                product_id: "{{ $randomString }}"</p>
+<p>config:</p>
 <br>
-<p>                quantity: 1</p>
 <br>
-<p>          - think: 1</p>
 <br>
-<p>          - post:</p>
 <br>
-<p>              url: "/checkout"</p>
 <br>
-<p>              json:</p>
 <br>
-<p>                payment_method: "card"</p>
 <br>
-<p>    # Run</p>
 <br>
-<p>    npx artillery run artillery.yml</p>
 <br>
-<p>    # Report</p>
 <br>
-<p>    natsby art run artillery.yml --output report.json</p>
 <br>
-<p>    npx artillery report report.json</p>
+<br>
+<br>
+<p>target: "https://api.example.com"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>phases:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- duration: 60</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>arrivalRate: 5</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>rampTo: 50</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: "Warm up"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- duration: 300</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>arrivalRate: 50</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: "Sustained load"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>defaults:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>headers:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Authorization: "Bearer {{ token }}"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>scenarios:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: "Browse and purchase"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>flow:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- get:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>url: "/products"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- think: 2</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- get:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>url: "/products/{{ $randomString }}"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- post:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>url: "/cart"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>json:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>product_id: "{{ $randomString }}"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>quantity: 1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- think: 1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- post:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>url: "/checkout"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>json:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>payment_method: "card"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Run</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>npx artillery run artillery.yml</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Report</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>natsby art run artillery.yml --output report.json</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>npx artillery report report.json</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Comparison</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Feature | k6 | Locust | Gatling | Artillery |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>|---------|-----|--------|---------|-----------|</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Language | JavaScript | Python | Scala/Java | YAML + JS |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Performance | Excellent | Good | Excellent | Good |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Web UI | Cloud only | Built-in | Built-in | No |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| CI integration | Excellent | Good | Good | Good |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Protocol support | HTTP/2, gRPC, WS | HTTP | HTTP, JMS, MQTT | HTTP, Socket.io |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Learning curve | Low | Low | Medium | Low |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Reports | JSON/HTML | CSV/HTML | HTML (excellent) | JSON/HTML |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Recommendations</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **JavaScript teams**: k6 for the best balance of scripting ease and performance.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Python teams**: Locust for familiar Python scripting with live web monitoring.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **High-throughput testing**: Gatling for the most detailed performance analysis.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Quick setup**: Artillery for YAML-based configuration without coding.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **CI/CD integration**: k6 with Grafana dashboards for production load testing.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>All four tools support CI integration. k6 has the strongest Grafana ecosystem. Locust excels for teams already using Python data tools. Gatling produces the most detailed HTML reports. Artillery is the fastest to set up for simple tests.</p></div>
     </article>
@@ -468,6 +2766,7 @@
       <noscript><div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

@@ -20,13 +20,14 @@ Schema validation libraries ensure your runtime data matches your TypeScript typ
 **Tree-shakable**|  Limited| No| Yes (every function is a named export)  
 **Ecosystem size**|  Largest (tRPC, react-hook-form, etc.)| Large (Formik, RHF)| Growing  
 **Async validation**|  Yes (z.string().refine(async))| Yes| Yes  
-
+  
 ## Zod — The Ecosystem Standard
 
 Zod is the most popular schema validation library by a wide margin. tRPC, react-hook-form, Conform, and countless other tools have first-class Zod integration. Its API is intuitive, TypeScript inference is excellent, and the community is massive.
-
+    
+    
     import { z } from "zod";
-
+    
     const UserSchema = z.object({
       name: z.string().min(2).max(50),
       email: z.string().email(),
@@ -46,9 +47,10 @@ Yup was the standard before Zod and still validates millions of forms in product
 ## Valibot — Modular, Tiny, Fast
 
 Valibot offers Zod-like features at a fraction of the bundle size. Every validation function is a named export — unused functions are tree-shaken away. For edge deployments or performance-sensitive apps, Valibot's 2KB footprint is compelling.
-
+    
+    
     import * as v from "valibot";
-
+    
     const UserSchema = v.object({
       name: v.pipe(v.string(), v.minLength(2), v.maxLength(50)),
       email: v.pipe(v.string(), v.email()),
@@ -67,5 +69,5 @@ New project, best ecosystem| **Zod**
 Edge/serverless, bundle-conscious| **Valibot**  
 Existing Formik/Yup project| **Stay on Yup**  
 tRPC stack (automatic integration)| **Zod**  
-
+  
 **Bottom line:** Zod is the default — the ecosystem support alone is worth the bundle size for most projects. Valibot for edge/serverless where every KB counts. Yup only if it's already in your codebase. See also: [TypeScript Patterns](</en/tech/typescript-advanced-patterns.html>) and [API Architecture Comparison](</en/compare/trpc-vs-graphql-vs-rest.html>).

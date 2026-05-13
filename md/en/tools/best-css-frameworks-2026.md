@@ -21,7 +21,7 @@ UnoCSS| Atomic CSS engine (on-demand)| Custom (regex-based, instant)| 0 KB (or m
 Panda CSS| Compile-time CSS-in-JS| Custom (static analysis)| 0 KB runtime| ~5-15 KB (tree-shaken)| Type-safe recipes and variants| Medium-High (new mental model)  
 Vanilla Extract| Zero-runtime CSS-in-JS| esbuild / webpack plugin| 0 KB runtime| Static CSS files (per-component)| Full type-safety, CSS modules| Medium (CSS-in-JS devs adapt fast)  
 Open Props| Design tokens as CSS custom properties| None (just import CSS)| 0 KB runtime| ~20 KB (design tokens only)| N/A (pure CSS)| Low (standard CSS, supercharged)  
-
+  
 ## Deep Dive
 
 **Tailwind CSS v4 — The industry standard.** Tailwind's `class="flex items-center gap-2 text-sm font-medium"` has become the dominant way developers write CSS. Version 4 (2025) rewrote the engine in Rust (Lightning CSS) for near-instant builds, added CSS-first configuration (no more `tailwind.config.js` in simple cases), and improved the cascade layers system. The ecosystem is unmatched: Tailwind UI (paid component library), shadcn/ui (free React components built on Tailwind), Headless UI, and thousands of community templates. **The criticism:** verbose HTML, "className soup," and the learning curve of memorizing utility names. But the productivity gain — never leaving your HTML, no naming things, instant visual feedback — wins for most teams. _Best for:_ Teams that want the largest ecosystem, shadcn/ui users, rapid prototyping, design-system-driven organizations.
@@ -44,5 +44,5 @@ TypeScript-first team building a design system| Panda CSS| Type-safe recipes, st
 Migrating from styled-components, want zero-runtime| Vanilla Extract| Familiar CSS-in-JS DX, compiles to static CSS, full type safety  
 Prefer standard CSS, want minimal tooling| Open Props| Pure CSS custom properties, no build step, easy to adopt incrementally  
 Performance-critical app (every KB counts)| UnoCSS or Panda CSS| Both output minimal atomic CSS with zero runtime  
-
+  
 **My take for 2026:** **Tailwind CSS v4** is still the default choice for most projects — the ecosystem, documentation, and developer availability are unmatched. But **UnoCSS** is the dark horse worth watching: it's faster, more flexible, and eating Tailwind's lunch in the Vite ecosystem. If you're starting a greenfield project in 2026 and don't need Tailwind UI, try UnoCSS — the attribute mode alone makes your templates more readable. For teams building their own design system, **Panda CSS** is the most forward-thinking choice: type-safe, compile-time, and the recipe pattern is genuinely better than utility classes for component variants.

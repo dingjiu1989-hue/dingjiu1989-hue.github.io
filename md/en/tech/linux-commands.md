@@ -11,7 +11,8 @@ url: https://dingjiu1989-hue.github.io/en/tech/linux-commands.html
 A good Linux command-line reference isn't nice to have — it's essential. This cheatsheet covers 50 commands organized by what you're actually trying to do, from file navigation to process management to networking.
 
 ## File Navigation
-
+    
+    
     pwd                     # print working directory
     ls -la                  # list all files with details
     cd /path/to/dir         # change directory
@@ -21,7 +22,8 @@ A good Linux command-line reference isn't nice to have — it's essential. This 
     locate filename         # find file quickly (uses indexed db)
 
 ## File Operations
-
+    
+    
     cp source dest          # copy file
     cp -r source dest       # copy directory recursively
     mv source dest          # move or rename
@@ -32,7 +34,8 @@ A good Linux command-line reference isn't nice to have — it's essential. This 
     ln -s target link       # create symbolic link
 
 ## Viewing and Editing Files
-
+    
+    
     cat file                # print entire file
     less file               # scroll through file (q to quit)
     head -20 file           # first 20 lines
@@ -44,14 +47,16 @@ A good Linux command-line reference isn't nice to have — it's essential. This 
     vim file                # advanced editor (:q! to quit)
 
 ## Permissions
-
+    
+    
     chmod 755 script.sh     # rwxr-xr-x (owner full, others read+execute)
     chmod +x script.sh      # make executable
     chown user:group file   # change owner and group
     umask 022               # set default permissions mask
 
 ## Process Management
-
+    
+    
     ps aux                  # list all running processes
     ps aux | grep nginx     # find specific process
     top                     # real-time process monitor (q to quit)
@@ -64,7 +69,8 @@ A good Linux command-line reference isn't nice to have — it's essential. This 
     jobs                    # list background jobs
 
 ## Disk and Storage
-
+    
+    
     df -h                   # disk free (human-readable)
     du -sh dir              # directory size summary
     du -sh * | sort -h      # size of each item, sorted
@@ -72,7 +78,8 @@ A good Linux command-line reference isn't nice to have — it's essential. This 
     lsblk                   # list block devices
 
 ## Networking
-
+    
+    
     ping host               # test connectivity
     curl -I url             # fetch headers only
     curl -s url | jq        # fetch JSON and pretty-print
@@ -84,7 +91,8 @@ A good Linux command-line reference isn't nice to have — it's essential. This 
     lsof -i :3000           # what's using port 3000
 
 ## Text Processing
-
+    
+    
     sed 's/old/new/g' file  # replace all occurrences
     awk '{{print $1}}' file  # print first column
     sort file               # sort lines
@@ -94,7 +102,8 @@ A good Linux command-line reference isn't nice to have — it's essential. This 
     tr '[:lower:]' '[:upper:]' # convert case
 
 ## Compression and Archives
-
+    
+    
     tar -czf archive.tar.gz dir   # create gzipped tarball
     tar -xzf archive.tar.gz       # extract gzipped tarball
     gzip file                     # compress single file
@@ -102,7 +111,8 @@ A good Linux command-line reference isn't nice to have — it's essential. This 
     zip -r archive.zip dir        # create zip
 
 ## System Info
-
+    
+    
     uname -a                # kernel info
     whoami                  # current user
     who                     # who is logged in

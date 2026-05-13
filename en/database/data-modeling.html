@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/data-modeling.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "383",
+      "wordCount": "658",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/data-modeling.html"},
-      "articleBody": "Data Modeling Best Practices Data Modeling Fundamentals Data modeling defines and organizes data structures to represent real-world entities and their relationships. Entity-Relationship Diagrams ER diagrams map entities (nouns) and relationships (verbs). Key cardinalities: one-to-one, one-to-many, many-to-many. Customer: attributes: id, email, name, created_at relationships: has_many Order Order: attributes: id, customer_id, status, total, created_at relationships: belongs_to Customer, has_many OrderItem Normalization Aim for third normal form (3NF) in transactional systems: * 1NF: Atomic columns, unique rows * 2NF: Full PK dependency * 3NF: No transitive dependencies -- 3NF design CREATE TABLE customers (id SERIAL PRIMARY KEY, name TEXT); CREATE TABLE orders (id SERIAL PRIMARY KEY, customer_id INT REFERENCES customers(id)); CREATE TABLE order_items (id SERIAL PRIMARY KEY, order_id INT REFERENCES orders(id), product_id INT, quantity INT); Denormalization Denormalize selectively for read performance. Common cases: reporting tables, cached aggregates, distributed databases avoiding joins. NoSQL Modeling Model for access patterns first: // Embed for co-accessed data { _id: \"...\", customer: { id: \"c123\", name: \"Alice\" }, items: [{ product_id: \"p1\", qty: 2 }] } Conclusion Start with 3NF for data integrity. Denormalize for performance when needed. For NoSQL, design your schema around your query patterns. Document all denormalization decisions with rationale."
+      "articleBody": "Data Modeling Best Practices Data Modeling Best Practices Data Modeling Best Practices Data Modeling Best Practices Data Modeling Fundamentals Data modeling defines and organizes data structures to represent real-world entities and their relationships. Entity-Relationship Diagrams ER diagrams map entities (nouns) and relationships (verbs). Key cardinalities: one-to-one, one-to-many, many-to-many. Customer: attributes: id, email, name, created_at relationships: has_many Order Order: attributes: id, customer_id, status, total, created_at relationships: belongs_to Customer, has_many OrderItem Normalization Aim for third normal form (3NF) in transactional systems: * 1NF: Atomic columns, unique rows * 2NF: Full PK dependency * 3NF: No transitive dependencies \\\\\\\\-- 3NF design CREATE TABLE customers (id SERIAL PRIMARY KEY, name TEXT); CREATE TABLE orders (id SERIAL PRIMARY KEY, customer_id INT REFERENCES customers(id)); CREATE TABLE order_items (id SERIAL PRIMARY KEY, order_id INT REFERENCES orders(id), product_id INT, quantity INT); Denormalization Denormalize selectively for read performance. Common cases: reporting tables, cached aggregates, distributed databases avoiding joins. NoSQL Modeling Model for access patterns first: // Embed for co-accessed data { _id: \"...\", customer: { id: \"c123\", name: \"Alice\" }, items: [{ product_id: \"p1\", qty: 2 }] } Conclusion Start with 3NF for data integrity. Denormalize for performance when needed. For NoSQL, design your schema around your query patterns. Document all denormalization decisions with rationale."
     }
     </script>
     <script type="application/ld+json">
@@ -77,56 +77,330 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/data-modeling.png" alt="Data Modeling Best Practices" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Data Modeling Best Practices</h1>
 <br>
-<p>Data Modeling Fundamentals   </p>
-<p>Data modeling defines and organizes data structures to represent real-world entities and their relationships.   </p>
-<p>Entity-Relationship Diagrams   </p>
-<p>ER diagrams map entities (nouns) and relationships (verbs). Key cardinalities: one-to-one, one-to-many, many-to-many.   </p>
+<h1>Data Modeling Best Practices</h1>
 <br>
-<p>    Customer:</p>
 <br>
-<p>      attributes: id, email, name, created_at</p>
 <br>
-<p>      relationships: has_many Order</p>
 <br>
-<p>    Order:</p>
+<h1>Data Modeling Best Practices</h1>
 <br>
-<p>      attributes: id, customer_id, status, total, created_at</p>
 <br>
-<p>      relationships: belongs_to Customer, has_many OrderItem</p>
 <br>
-<p>Normalization   </p>
-<p>Aim for third normal form (3NF) in transactional systems:   </p>
+<br>
+<br>
+<br>
+<br>
+<h1>Data Modeling Best Practices</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Data Modeling Fundamentals </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Data modeling defines and organizes data structures to represent real-world entities and their relationships. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Entity-Relationship Diagrams </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ER diagrams map entities (nouns) and relationships (verbs). Key cardinalities: one-to-one, one-to-many, many-to-many. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Customer:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>attributes: id, email, name, created_at</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>relationships: has_many Order</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Order:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>attributes: id, customer_id, status, total, created_at</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>relationships: belongs_to Customer, has_many OrderItem</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Normalization </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Aim for third normal form (3NF) in transactional systems: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>* 1NF: Atomic columns, unique rows</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* 2NF: Full PK dependency</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* 3NF: No transitive dependencies</p>
 <br>
-<p>    -- 3NF design</p>
 <br>
-<p>    CREATE TABLE customers (id SERIAL PRIMARY KEY, name TEXT);</p>
 <br>
-<p>    CREATE TABLE orders (id SERIAL PRIMARY KEY, customer_id INT REFERENCES customers(id));</p>
 <br>
-<p>    CREATE TABLE order_items (id SERIAL PRIMARY KEY, order_id INT REFERENCES orders(id), product_id INT, quantity INT);</p>
 <br>
-<p>Denormalization   </p>
-<p>Denormalize selectively for read performance. Common cases: reporting tables, cached aggregates, distributed databases avoiding joins.   </p>
-<p>NoSQL Modeling   </p>
-<p>Model for access patterns first:   </p>
 <br>
-<p>    // Embed for co-accessed data</p>
 <br>
-<p>    {</p>
 <br>
-<p>      _id: "...",</p>
 <br>
-<p>      customer: { id: "c123", name: "Alice" },</p>
 <br>
-<p>      items: [{ product_id: "p1", qty: 2 }]</p>
+<p>\\\\-- 3NF design</p>
 <br>
-<p>    }</p>
 <br>
-<p>Conclusion   </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE TABLE customers (id SERIAL PRIMARY KEY, name TEXT);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE TABLE orders (id SERIAL PRIMARY KEY, customer_id INT REFERENCES customers(id));</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE TABLE order_items (id SERIAL PRIMARY KEY, order_id INT REFERENCES orders(id), product_id INT, quantity INT);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Denormalization </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Denormalize selectively for read performance. Common cases: reporting tables, cached aggregates, distributed databases avoiding joins. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>NoSQL Modeling </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Model for access patterns first: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Embed for co-accessed data</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>_id: "...",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>customer: { id: "c123", name: "Alice" },</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>items: [{ product_id: "p1", qty: 2 }]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Start with 3NF for data integrity. Denormalize for performance when needed. For NoSQL, design your schema around your query patterns. Document all denormalization decisions with rationale.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -143,6 +417,7 @@
       <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

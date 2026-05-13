@@ -24,7 +24,7 @@ Database| PostgreSQL, MySQL, SQLite, MariaDB| Managed (proprietary)| Managed (pr
 Real-Time Collaboration| No| Yes (real-time editing)| Limited| No (roadmap)  
 Localization| Built-in (i18n plugin)| Built-in (excellent i18n)| Built-in (locales)| Built-in (localization API)  
 Image/Media| Built-in media library| Sanity Image (on-the-fly transforms)| Built-in media + Images API| Built-in upload + external storage  
-
+  
 ## When to Choose Each Platform
 
 **Strapi — Best for:** Teams that want full control of their CMS infrastructure. Strapi is the most popular open source headless CMS — self-host on your own server, customize everything, and never pay a platform fee. **Weak spot:** Upgrades between major versions can be painful; admin UI customization is limited without plugin development.
@@ -44,5 +44,5 @@ Real-time collaboration for editorial teams| Sanity| Only platform with real-tim
 Enterprise, managed, compliance requirements| Contentful| Most mature SaaS, best SLAs  
 TypeScript-first, code-first CMS| Payload CMS| Best TypeScript DX, local API  
 Marketing site + blog, simple needs| Strapi (self-hosted)| Free, good enough for most content sites  
-
+  
 **Bottom line:** Strapi is the safe default for self-hosted projects — it is free, mature, and has the largest community. Sanity is the pick for teams that want the best editing experience and real-time collaboration. Payload CMS is the rising star for TypeScript-native teams. Contentful is the enterprise choice when you need a managed platform. See also: [Best Static Site Generators](</en/tools/best-static-site-generators-2026.html>) and [Astro vs Gatsby vs Hugo](</en/compare/astro-vs-gatsby-vs-hugo.html>).

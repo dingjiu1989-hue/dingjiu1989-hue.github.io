@@ -21,7 +21,7 @@ Doppler| Secrets platform| Free / $5/seat/mo| Encrypted (AES-256)| Node, Python,
 HashiCorp Vault| Enterprise secrets engine| Free (OSS) / $1.58/hr (HCP)| Encrypted (plugin storage backends)| All major languages (REST API + SDKs)| Yes (primary mode)| Dynamic DB creds, PKI, cloud IAM  
 SOPS (Mozilla)| File-level encryption| Free (OSS)| Encrypted YAML/JSON/ENV files (KMS, PGP, age)| CLI + Go library| Fully self-managed| Manual (re-encrypt with new key)  
 1Password CLI| Password manager + secrets| $8/user/mo (1Password Teams)| 1Password vaults (end-to-end encrypted)| CLI + op inject, SDKs limited| No (cloud vaults)| Manual via UI/CLI  
-
+  
 ## Deep Dive
 
 **Infisical — The developer-first platform.** Infisical has grown rapidly since 2023 and is now the strongest all-around secrets platform for development teams. Its killer feature is the dashboard that mirrors your project structure — dev/staging/prod environments, folders, and granular access per secret. The CLI (`infisical run -- npm start`) injects secrets at runtime without touching disk. Automatic secret rotation works for databases, API keys, and OAuth credentials. It integrates natively with Vercel, Railway, Render, and GitHub Actions. The open-source self-hosted option is actually maintained (not a gimped enterprise-only fork). _Best for:_ Teams that want a modern, developer-friendly secrets platform without Vault's complexity.
@@ -44,5 +44,5 @@ Large org, Kubernetes, compliance (SOC2/HIPAA)| HashiCorp Vault| Most powerful, 
 GitOps, everything-in-git philosophy| SOPS| Encrypted files in git, zero servers, KMS/age encryption  
 Small team, already use 1Password| 1Password CLI| No new tool, works with existing vaults, op inject is solid  
 Open-source project with zero budget| Infisical (self-hosted)| Full-featured OSS, Docker deploy, free forever  
-
+  
 **Bottom line:** If you're starting fresh in 2026, pick **Infisical**. It hits the sweet spot: developer-friendly, open-source option, automatic rotation, and a free tier generous enough for most teams. If you're at enterprise scale with compliance requirements, Vault is the mature standard. If everything you do is in git already, SOPS is the beautiful simple thing. And for heaven's sake, stop putting secrets in `.env` files that 7 people have copies of on their laptops.

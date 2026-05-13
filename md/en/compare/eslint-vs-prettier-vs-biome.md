@@ -24,7 +24,7 @@ Config Format| JS, JSON, YAML, eslint.config.js| .prettierrc (JSON/YAML/JS)| bio
 VSCode Integration| Excellent| Excellent| Excellent (one extension for both)  
 CI/CD| eslint CLI, reviewdog| prettier --check| biome ci (combined lint + format check)  
 Auto-Fix| Yes (--fix)| Yes (--write)| Yes (biome check --write, both lint + format)  
-
+  
 ## ESLint — The Incumbent
 
 **Best for:** Projects that need highly customized linting rules, TypeScript-specific checks, or framework-specific rules (React, Vue, Svelte). The plugin ecosystem is the moat — eslint-plugin-import, eslint-plugin-unicorn, and @typescript-eslint cover edge cases Biome cannot yet touch. **Weak spot:** Slow on large codebases; configuration sprawl; requires separate Prettier setup for formatting.
@@ -45,5 +45,5 @@ New project, fresh start| Biome| Fast, unified, modern, no legacy config
 Large monorepo, slow CI| Biome| 25x speed improvement in lint/format CI step  
 Heavy ESLint plugin usage| ESLint + Prettier| Biome cannot replace custom ESLint plugins yet  
 Maximum consistency| Prettier + Biome (linter)| Prettier for formatting, Biome for linting (faster than ESLint)  
-
+  
 **Bottom line:** Biome is ready for production in 2026 — for most projects, the speed win alone justifies the switch. The main blocker is plugin dependencies. If your ESLint setup is "eslint:recommended + @typescript-eslint + prettier," Biome can replace all of it today. See also: [Prettier vs Biome](</en/compare/prettier-vs-biome.html>) and [TypeScript Advanced Patterns](</en/tech/typescript-advanced-patterns.html>).

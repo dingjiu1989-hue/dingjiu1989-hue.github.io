@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/database-encryption.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1235",
+      "wordCount": "2184",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/database-encryption.html"},
-      "articleBody": "Database Encryption Database Encryption Layers Database encryption protects data at rest and in transit. Multiple layers provide defense in depth. Transparent Data Encryption (TDE) TDE encrypts the entire database at the storage layer: -- SQL Server TDE CREATE DATABASE ENCRYPTION KEY WITH ALGORITHM = AES_256 ENCRYPTION BY SERVER CERTIFICATE DatabaseCert; ALTER DATABASE ProductionDB SET ENCRYPTION ON; -- Check encryption status SELECT DB_NAME(database_id) as DatabaseName, encryption_state_desc, percent_complete FROM sys.dm_database_encryption_keys; -- PostgreSQL TDE (with pg_tde extension) CREATE EXTENSION pg_tde; SELECT pg_tde_add_database_key_provider( 'file-vault', '{\"type\":\"file\",\"path\":\"/etc/postgresql/keys.json\"}' ); SELECT pg_tde_set_principal_key('production-db-key', 'file-vault'); Column-Level Encryption Encrypt specific sensitive columns: from cryptography.fernet import Fernet import base64 class ColumnEncryptor: def __init__(self, master_key): self.fernet = Fernet(master_key) def encrypt_column(self, value): if value is None: return None return self.fernet.encrypt(value.encode()).decode() def decrypt_column(self, encrypted_value): if encrypted_value is None: return None return self.fernet.decrypt(encrypted_value.encode()).decode() def searchable_encryption(self, value): \"\"\"Deterministic encryption for searchable columns\"\"\" from cryptography.hazmat.primitives import hashes digest = hashes.Hash(hashes.SHA256()) digest.update(value.encode()) digest.update(b\"deterministic_salt\") return digest.finalize().hex()[:32] # Usage encryptor = ColumnEncryptor(os.environ[\"COLUMN_ENCRYPTION_KEY\"]) # Encrypt PII before storage cursor.execute(\"\"\" INSERT INTO users (email, ssn, name) VALUES (%s, %s, %s) \"\"\", ( encryptor.encrypt_column(\"alice@example.com\"), encryptor.encrypt_column(\"123-45-6789\"), \"Alice\" )) Application-Level Encryption Encrypt data before it reaches the database: // Node.js application-level encryption const crypto = require(\"crypto\"); class ApplicationEncryptor { constructor(encryptionKey) { this.algorithm = \"aes-256-gcm\"; this.key = crypto.scryptSync(encryptionKey, \"salt\", 32); } encrypt(plaintext) { const iv = crypto.randomBytes(12); const cipher = crypto.createCipheriv(this.algorithm, this.key, iv); let encrypted = cipher.update(plaintext, \"utf8\", \"hex\"); encrypted += cipher.final(\"hex\"); const authTag = cipher.getAuthTag().toString(\"hex\"); return JSON.stringify({ iv: iv.toString(\"hex\"), data: encrypted, tag: authTag, version: 1 }); } decrypt(encrypted) { const { iv, data, tag } = JSON.parse(encrypted); const decipher = crypto.createDecipheriv( this.algorithm, this.key, Buffer.from(iv, \"hex\") ); decipher.setAuthTag(Buffer.from(tag, \"hex\")); let decrypted = decipher.update(data, \"hex\", \"utf8\"); decrypted += decipher.final(\"utf8\"); return decrypted; } } Key Management key_management: key_hierarchy: master_key: aws_kms / hsm database_key: encrypted_by_master_key column_keys: encrypted_by_database_key rotation: master_key: yearly database_key: monthly column_keys: on_demand access_control: - kms:key_owner - kms:encrypt - kms:decrypt audit: - all_key_usage_logged - key_access_alerting - unauthorized_access_blocked Performance Considerations -- Benchmark: Column-level vs TDE -- TDE overhead: 1-3% performance impact -- Column-level overhead: 5-15% per encrypted column -- Indexes on encrypted columns -- Deterministic encryption allows exact match -- Order-preserving encryption allows range queries -- Homomorphic encryption allows computations (slow) CREATE INDEX idx_email_hash ON users (sha2(email, 256)); -- Searchable hash Conclusion Layer your database encryption strategy. Use TDE for bulk encryption with minimal performance impact. Use column-level encryption for specific PII fields. Use application-level encryption for the strongest protection. Manage keys carefully with a hierarchical key system and rotate regularly. Always encrypt data in transit with TLS."
+      "articleBody": "Database Encryption Database Encryption Database Encryption Database Encryption Database Encryption Layers Database encryption protects data at rest and in transit. Multiple layers provide defense in depth. Transparent Data Encryption (TDE) TDE encrypts the entire database at the storage layer: \\\\\\\\-- SQL Server TDE CREATE DATABASE ENCRYPTION KEY WITH ALGORITHM = AES_256 ENCRYPTION BY SERVER CERTIFICATE DatabaseCert; ALTER DATABASE ProductionDB SET ENCRYPTION ON; \\\\\\\\-- Check encryption status SELECT DB_NAME(database_id) as DatabaseName, encryption_state_desc, percent_complete FROM sys.dm_database_encryption_keys; \\\\\\\\-- PostgreSQL TDE (with pg_tde extension) CREATE EXTENSION pg_tde; SELECT pg_tde_add_database_key_provider( 'file-vault', '{\"type\":\"file\",\"path\":\"/etc/postgresql/keys.json\"}' ); SELECT pg_tde_set_principal_key('production-db-key', 'file-vault'); Column-Level Encryption Encrypt specific sensitive columns: from cryptography.fernet import Fernet import base64 class ColumnEncryptor: def __init__(self, master_key): self.fernet = Fernet(master_key) def encrypt_column(self, value): if value is None: return None return self.fernet.encrypt(value.encode()).decode() def decrypt_column(self, encrypted_value): if encrypted_value is None: return None return self.fernet.decrypt(encrypted_value.encode()).decode() def searchable_encryption(self, value): \"\"\"Deterministic encryption for searchable columns\"\"\" from cryptography.hazmat.primitives import hashes digest = hashes.Hash(hashes.SHA256()) digest.update(value.encode()) digest.update(b\"deterministic_salt\") return digest.finalize().hex()[:32] Usage encryptor = ColumnEncryptor(os.environ[\"COLUMN_ENCRYPTION_KEY\"]) Encrypt PII before storage cursor.execute(\"\"\" INSERT INTO users (email, ssn, name) VALUES (%s, %s, %s) \"\"\", ( encryptor.encrypt_column(\"alice@example.com\"), encryptor.encrypt_column(\"123-45-6789\"), \"Alice\" )) Application-Level Encryption Encrypt data before it reaches the database: // Node.js application-level encryption const crypto = require(\"crypto\"); class ApplicationEncryptor { constructor(encryptionKey) { this.algorithm = \"aes-256-gcm\"; this.key = crypto.scryptSync(encryptionKey, \"salt\", 32); } encrypt(plaintext) { const iv = crypto.randomBytes(12); const cipher = crypto.createCipheriv(this.algorithm, this.key, iv); let encrypted = cipher.update(plaintext, \"utf8\", \"hex\"); encrypted += cipher.final(\"hex\"); const authTag = cipher.getAuthTag().toString(\"hex\"); return JSON.stringify({ iv: iv.toString(\"hex\"), data: encrypted, tag: authTag, version: 1 }); } decrypt(encrypted) { const { iv, data, tag } = JSON.parse(encrypted); const decipher = crypto.createDecipheriv( this.algorithm, this.key, Buffer.from(iv, \"hex\") ); decipher.setAuthTag(Buffer.from(tag, \"hex\")); let decrypted = decipher.update(data, \"hex\", \"utf8\"); decrypted += decipher.final(\"utf8\"); return decrypted; } } Key Management key_management: key_hierarchy: master_key: aws_kms / hsm database_key: encrypted_by_master_key column_keys: encrypted_by_database_key rotation: master_key: yearly database_key: monthly column_keys: on_demand access_control: \\\\\\\\- kms:key_owner \\\\\\\\- kms:encrypt \\\\\\\\- kms:decrypt audit: \\\\\\\\- all_key_usage_logged \\\\\\\\- key_access_alerting \\\\\\\\- unauthorized_access_blocked Performance Considerations \\\\\\\\-- Benchmark: Column-level vs TDE \\\\\\\\-- TDE overhead: 1-3% performance impact \\\\\\\\-- Column-level overhead: 5-15% per encrypted column \\\\\\\\-- Indexes on encrypted columns \\\\\\\\-- Deterministic encryption allows exact match \\\\\\\\-- Order-preserving encryption allows range queries \\\\\\\\-- Homomorphic encryption allows computations (slow) CREATE INDEX idx_email_hash ON users (sha2(email, 256)); -- Searchable hash Conclusion Layer your database encryption strategy. Use TDE for bulk encryption with minimal performance impact. Use column-level encryption for specific PII fields. Use application-level encryption for the strongest protection. Manage keys carefully with a hierarchical key system and rotate regularly. Always encrypt data in transit with TLS."
     }
     </script>
     <script type="application/ld+json">
@@ -78,238 +78,1321 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/database-encryption.png" alt="Database Encryption" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Encryption</h1>
 <br>
-<p>Database Encryption Layers   </p>
-<p>Database encryption protects data at rest and in transit. Multiple layers provide defense in depth.   </p>
-<p>Transparent Data Encryption (TDE)   </p>
-<p>TDE encrypts the entire database at the storage layer:   </p>
+<h1>Database Encryption</h1>
 <br>
-<p>    -- SQL Server TDE</p>
 <br>
-<p>    CREATE DATABASE ENCRYPTION KEY</p>
 <br>
-<p>      WITH ALGORITHM = AES_256</p>
 <br>
-<p>      ENCRYPTION BY SERVER CERTIFICATE DatabaseCert;</p>
+<h1>Database Encryption</h1>
 <br>
-<p>    ALTER DATABASE ProductionDB</p>
 <br>
-<p>      SET ENCRYPTION ON;</p>
 <br>
-<p>    -- Check encryption status</p>
 <br>
-<p>    SELECT DB_NAME(database_id) as DatabaseName,</p>
 <br>
-<p>           encryption_state_desc,</p>
 <br>
-<p>           percent_complete</p>
 <br>
-<p>    FROM sys.dm_database_encryption_keys;</p>
+<h1>Database Encryption</h1>
 <br>
-<p>    -- PostgreSQL TDE (with pg_tde extension)</p>
 <br>
-<p>    CREATE EXTENSION pg_tde;</p>
 <br>
-<p>    SELECT pg_tde_add_database_key_provider(</p>
 <br>
-<p>        'file-vault',</p>
 <br>
-<p>        '{"type":"file","path":"/etc/postgresql/keys.json"}'</p>
 <br>
-<p>    );</p>
 <br>
-<p>    SELECT pg_tde_set_principal_key('production-db-key', 'file-vault');</p>
 <br>
-<p>Column-Level Encryption   </p>
-<p>Encrypt specific sensitive columns:   </p>
 <br>
-<p>    from cryptography.fernet import Fernet</p>
 <br>
-<p>    import base64</p>
+<p>Database Encryption Layers </p>
 <br>
-<p>    class ColumnEncryptor:</p>
 <br>
-<p>        def __init__(self, master_key):</p>
 <br>
-<p>            self.fernet = Fernet(master_key)</p>
 <br>
-<p>        def encrypt_column(self, value):</p>
 <br>
-<p>            if value is None:</p>
 <br>
-<p>                return None</p>
 <br>
-<p>            return self.fernet.encrypt(value.encode()).decode()</p>
+<p>Database encryption protects data at rest and in transit. Multiple layers provide defense in depth. </p>
 <br>
-<p>        def decrypt_column(self, encrypted_value):</p>
 <br>
-<p>            if encrypted_value is None:</p>
 <br>
-<p>                return None</p>
 <br>
-<p>            return self.fernet.decrypt(encrypted_value.encode()).decode()</p>
 <br>
-<p>        def searchable_encryption(self, value):</p>
 <br>
-<p>            """Deterministic encryption for searchable columns"""</p>
 <br>
-<p>            from cryptography.hazmat.primitives import hashes</p>
+<p>Transparent Data Encryption (TDE) </p>
 <br>
-<p>            digest = hashes.Hash(hashes.SHA256())</p>
 <br>
-<p>            digest.update(value.encode())</p>
 <br>
-<p>            digest.update(b"deterministic_salt")</p>
 <br>
-<p>            return digest.finalize().hex()[:32]</p>
 <br>
-<p>    # Usage</p>
 <br>
-<p>    encryptor = ColumnEncryptor(os.environ["COLUMN_ENCRYPTION_KEY"])</p>
 <br>
-<p>    # Encrypt PII before storage</p>
+<p>TDE encrypts the entire database at the storage layer: </p>
 <br>
-<p>    cursor.execute("""</p>
 <br>
-<p>        INSERT INTO users (email, ssn, name)</p>
 <br>
-<p>        VALUES (%s, %s, %s)</p>
 <br>
-<p>    """, (</p>
 <br>
-<p>        encryptor.encrypt_column("alice@example.com"),</p>
 <br>
-<p>        encryptor.encrypt_column("123-45-6789"),</p>
 <br>
-<p>        "Alice"</p>
 <br>
-<p>    ))</p>
 <br>
-<p>Application-Level Encryption   </p>
-<p>Encrypt data before it reaches the database:   </p>
 <br>
-<p>    // Node.js application-level encryption</p>
+<p>\\\\-- SQL Server TDE</p>
 <br>
-<p>    const crypto = require("crypto");</p>
 <br>
-<p>    class ApplicationEncryptor {</p>
 <br>
-<p>      constructor(encryptionKey) {</p>
 <br>
-<p>        this.algorithm = "aes-256-gcm";</p>
 <br>
-<p>        this.key = crypto.scryptSync(encryptionKey, "salt", 32);</p>
 <br>
-<p>      }</p>
 <br>
-<p>      encrypt(plaintext) {</p>
 <br>
-<p>        const iv = crypto.randomBytes(12);</p>
 <br>
-<p>        const cipher = crypto.createCipheriv(this.algorithm, this.key, iv);</p>
 <br>
-<p>        let encrypted = cipher.update(plaintext, "utf8", "hex");</p>
+<p>CREATE DATABASE ENCRYPTION KEY</p>
 <br>
-<p>        encrypted += cipher.final("hex");</p>
 <br>
-<p>        const authTag = cipher.getAuthTag().toString("hex");</p>
 <br>
-<p>        return JSON.stringify({</p>
 <br>
-<p>          iv: iv.toString("hex"),</p>
 <br>
-<p>          data: encrypted,</p>
 <br>
-<p>          tag: authTag,</p>
 <br>
-<p>          version: 1</p>
 <br>
-<p>        });</p>
 <br>
-<p>      }</p>
 <br>
-<p>      decrypt(encrypted) {</p>
+<p>WITH ALGORITHM = AES_256</p>
 <br>
-<p>        const { iv, data, tag } = JSON.parse(encrypted);</p>
 <br>
-<p>        const decipher = crypto.createDecipheriv(</p>
 <br>
-<p>          this.algorithm,</p>
 <br>
-<p>          this.key,</p>
 <br>
-<p>          Buffer.from(iv, "hex")</p>
 <br>
-<p>        );</p>
 <br>
-<p>        decipher.setAuthTag(Buffer.from(tag, "hex"));</p>
 <br>
-<p>        let decrypted = decipher.update(data, "hex", "utf8");</p>
 <br>
-<p>        decrypted += decipher.final("utf8");</p>
 <br>
-<p>        return decrypted;</p>
+<p>ENCRYPTION BY SERVER CERTIFICATE DatabaseCert;</p>
 <br>
-<p>      }</p>
 <br>
-<p>    }</p>
 <br>
-<p>Key Management   </p>
 <br>
-<p>    key_management:</p>
 <br>
-<p>      key_hierarchy:</p>
 <br>
-<p>        master_key: aws_kms / hsm</p>
 <br>
-<p>        database_key: encrypted_by_master_key</p>
 <br>
-<p>        column_keys: encrypted_by_database_key</p>
 <br>
-<p>      rotation:</p>
 <br>
-<p>        master_key: yearly</p>
+<p>ALTER DATABASE ProductionDB</p>
 <br>
-<p>        database_key: monthly</p>
 <br>
-<p>        column_keys: on_demand</p>
 <br>
-<p>      access_control:</p>
 <br>
-<p>        - kms:key_owner</p>
 <br>
-<p>        - kms:encrypt</p>
 <br>
-<p>        - kms:decrypt</p>
 <br>
-<p>      audit:</p>
 <br>
-<p>        - all_key_usage_logged</p>
 <br>
-<p>        - key_access_alerting</p>
 <br>
-<p>        - unauthorized_access_blocked</p>
+<p>SET ENCRYPTION ON;</p>
 <br>
-<p>Performance Considerations   </p>
 <br>
-<p>    -- Benchmark: Column-level vs TDE</p>
 <br>
-<p>    -- TDE overhead: 1-3% performance impact</p>
 <br>
-<p>    -- Column-level overhead: 5-15% per encrypted column</p>
 <br>
-<p>    -- Indexes on encrypted columns</p>
 <br>
-<p>    -- Deterministic encryption allows exact match</p>
 <br>
-<p>    -- Order-preserving encryption allows range queries</p>
 <br>
-<p>    -- Homomorphic encryption allows computations (slow)</p>
 <br>
-<p>    CREATE INDEX idx_email_hash </p>
 <br>
-<p>      ON users (sha2(email, 256));  -- Searchable hash</p>
+<p>\\\\-- Check encryption status</p>
 <br>
-<p>Conclusion   </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT DB_NAME(database_id) as DatabaseName,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>encryption_state_desc,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>percent_complete</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>FROM sys.dm_database_encryption_keys;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- PostgreSQL TDE (with pg_tde extension)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE EXTENSION pg_tde;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT pg_tde_add_database_key_provider(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>'file-vault',</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>'{"type":"file","path":"/etc/postgresql/keys.json"}'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT pg_tde_set_principal_key('production-db-key', 'file-vault');</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Column-Level Encryption </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Encrypt specific sensitive columns: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from cryptography.fernet import Fernet</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import base64</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class ColumnEncryptor:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def __init__(self, master_key):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.fernet = Fernet(master_key)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def encrypt_column(self, value):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if value is None:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return None</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return self.fernet.encrypt(value.encode()).decode()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def decrypt_column(self, encrypted_value):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if encrypted_value is None:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return None</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return self.fernet.decrypt(encrypted_value.encode()).decode()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def searchable_encryption(self, value):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"""Deterministic encryption for searchable columns"""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from cryptography.hazmat.primitives import hashes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>digest = hashes.Hash(hashes.SHA256())</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>digest.update(value.encode())</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>digest.update(b"deterministic_salt")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return digest.finalize().hex()[:32]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Usage</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>encryptor = ColumnEncryptor(os.environ["COLUMN_ENCRYPTION_KEY"])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Encrypt PII before storage</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cursor.execute("""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>INSERT INTO users (email, ssn, name)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>VALUES (%s, %s, %s)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>""", (</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>encryptor.encrypt_column("alice@example.com"),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>encryptor.encrypt_column("123-45-6789"),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"Alice"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Application-Level Encryption </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Encrypt data before it reaches the database: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Node.js application-level encryption</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const crypto = require("crypto");</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class ApplicationEncryptor {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>constructor(encryptionKey) {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>this.algorithm = "aes-256-gcm";</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>this.key = crypto.scryptSync(encryptionKey, "salt", 32);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>encrypt(plaintext) {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const iv = crypto.randomBytes(12);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const cipher = crypto.createCipheriv(this.algorithm, this.key, iv);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>let encrypted = cipher.update(plaintext, "utf8", "hex");</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>encrypted += cipher.final("hex");</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const authTag = cipher.getAuthTag().toString("hex");</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return JSON.stringify({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>iv: iv.toString("hex"),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>data: encrypted,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tag: authTag,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>version: 1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>decrypt(encrypted) {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const { iv, data, tag } = JSON.parse(encrypted);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const decipher = crypto.createDecipheriv(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>this.algorithm,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>this.key,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Buffer.from(iv, "hex")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>decipher.setAuthTag(Buffer.from(tag, "hex"));</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>let decrypted = decipher.update(data, "hex", "utf8");</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>decrypted += decipher.final("utf8");</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return decrypted;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Key Management </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>key_management:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>key_hierarchy:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>master_key: aws_kms / hsm</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>database_key: encrypted_by_master_key</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>column_keys: encrypted_by_database_key</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>rotation:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>master_key: yearly</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>database_key: monthly</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>column_keys: on_demand</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>access_control:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- kms:key_owner</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- kms:encrypt</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- kms:decrypt</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>audit:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- all_key_usage_logged</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- key_access_alerting</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\- unauthorized_access_blocked</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Performance Considerations </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Benchmark: Column-level vs TDE</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- TDE overhead: 1-3% performance impact</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Column-level overhead: 5-15% per encrypted column</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Indexes on encrypted columns</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Deterministic encryption allows exact match</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Order-preserving encryption allows range queries</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\-- Homomorphic encryption allows computations (slow)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE INDEX idx_email_hash </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ON users (sha2(email, 256)); -- Searchable hash</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Layer your database encryption strategy. Use TDE for bulk encryption with minimal performance impact. Use column-level encryption for specific PII fields. Use application-level encryption for the strongest protection. Manage keys carefully with a hierarchical key system and rotate regularly. Always encrypt data in transit with TLS.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -326,6 +1409,7 @@
       <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

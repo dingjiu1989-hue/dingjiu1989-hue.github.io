@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/nosql-databases-guide.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1443",
+      "wordCount": "2408",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/nosql-databases-guide.html"},
-      "articleBody": "NoSQL Databases Guide (MongoDB, DynamoDB, Firestore) What Are NoSQL Databases? NoSQL databases are non-relational data stores designed for specific data models and access patterns that do not fit well in the relational paradigm. They trade strict ACID guarantees for scalability, flexibility, and performance at scale. NoSQL Database Types | Type | Examples | Best For | Avoid For | |------|----------|----------|-----------| | Document | MongoDB, Firestore | JSON-like data, flexible schemas | Complex joins | | Key-Value | Redis, DynamoDB | Simple lookups, caching | Multi-key queries | | Wide-Column | Cassandra, Bigtable | Time-series, write-heavy | Ad-hoc queries | | Graph | Neo4j, Dgraph | Relationships, recommendations | Simple CRUD | MongoDB MongoDB stores data as flexible JSON-like documents in collections. It is schema-less by design. Data Modeling // MongoDB document (embedded) { \"_id\": ObjectId(\"5f8c...\"), \"username\": \"alice\", \"email\": \"alice@example.com\", \"profile\": { \"display_name\": \"Alice\", \"avatar_url\": \"https://...\", \"bio\": \"Software engineer\" }, \"addresses\": [ { \"type\": \"home\", \"street\": \"123 Main St\", \"city\": \"San Francisco\" } ], \"created_at\": ISODate(\"2026-01-15T10:30:00Z\") } Query Examples // Basic queries db.users.find({ email: \"alice@example.com\" }) db.users.find({ \"addresses.city\": \"San Francisco\" }) db.users.find({ created_at: { $gte: ISODate(\"2026-01-01\") } }) // Aggregation pipeline db.orders.aggregate([ { $match: { status: \"completed\" } }, { $group: { _id: \"$customer_id\", total: { $sum: \"$amount\" } } }, { $sort: { total: -1 } }, { $limit: 10 } ]) // Index creation db.users.createIndex({ email: 1 }, { unique: true }) db.orders.createIndex({ customer_id: 1, created_at: -1 }) When to Use MongoDB * Flexible or evolving schemas * Embedded data relationships (one-to-few) * Rapid prototyping * Document-oriented data (catalogs, content management) DynamoDB DynamoDB is AWS's managed key-value and document database. It requires careful up-front schema design. Table Design // DynamoDB table with single-table design // Partition Key: PK (string) // Sort Key: SK (string) // User entity { PK: \"USER#alice\", SK: \"PROFILE\", email: \"alice@example.com\", name: \"Alice\" } // Order entity (access pattern: all orders for a user) { PK: \"USER#alice\", SK: \"ORDER#2026-05-01#ORD001\", amount: 100, status: \"completed\" } { PK: \"USER#alice\", SK: \"ORDER#2026-05-15#ORD002\", amount: 250, status: \"pending\" } // Product entity (access pattern: get product by ID) { PK: \"PROD#001\", SK: \"META\", name: \"Laptop\", price: 1200 } Query Patterns // AWS SDK v3 import { DynamoDBClient } from \"@aws-sdk/client-dynamodb\"; import { QueryCommand } from \"@aws-sdk/lib-dynamodb\"; const client = new DynamoDBClient({ region: \"us-east-1\" }); // Get user with all related data (single query) const result = await client.send(new QueryCommand({ TableName: \"AppTable\", KeyConditionExpression: \"PK = :pk\", ExpressionAttributeValues: { \":pk\": \"USER#alice\" } })); // Query specific entity type const orders = await client.send(new QueryCommand({ TableName: \"AppTable\", KeyConditionExpression: \"PK = :pk AND begins_with(SK, :sk)\", ExpressionAttributeValues: { \":pk\": \"USER#alice\", \":sk\": \"ORDER#\" } })); When to Use DynamoDB * Serverless applications * Predictable access patterns * High-scale workloads (millions of requests/second) * AWS-native architectures Firestore Firestore is Google Cloud's NoSQL document database with real-time synchronization. Data Model import firebase_admin from firebase_admin import firestore db = firestore.client() # Document reference user_ref = db.collection('users').document('alice') user_ref.set({ 'email': 'alice@example.com', 'name': 'Alice', 'roles': ['admin', 'editor'], 'created_at': firestore.SERVER_TIMESTAMP }) # Subcollection for hierarchical data orders_ref = user_ref.collection('orders') orders_ref.add({ 'product': 'Laptop', 'amount': 1200, 'status': 'completed' }) # Real-time listener def on_snapshot(doc_snapshot, changes, read_time): for change in changes: print(f\"Order changed: {change.document.id}\") user_ref.collection('orders').on_snapshot(on_snapshot) When to Use Firestore * Real-time applications (chat, live updates) * Mobile backends (offline support) * Google Cloud ecosystem Decision Matrix | Factor | MongoDB | DynamoDB | Firestore | |--------|---------|----------|-----------| | Query flexibility | Excellent | Limited to key/GSI | Moderate | | Scalability | Manual sharding | Automatic | Automatic | | Consistency | Configurable | Eventual (default) | Strong | | Hosting | Self-managed or Atlas | AWS-managed | GCP-managed | | Real-time | Change streams | DynamoDB Streams | Native real-time | | Offline support | Limited | Limited | Excellent | | Pricing | Instance-based | Pay per request | Pay per read/write | Summary NoSQL databases excel at scale and flexibility but require different design thinking than relational databases. MongoDB offers the most flexible querying with embedded documents, DynamoDB provides unparalleled scalability with single-table design, and Firestore offers the best real-time and offline support. Choose based on your access patterns, scalability needs, and cloud ecosystem rather than treating NoSQL as a one-size-fits-all solution."
+      "articleBody": "NoSQL Databases Guide (MongoDB, DynamoDB, Firestore) NoSQL Databases Guide (MongoDB, DynamoDB, Firestore) NoSQL Databases Guide (MongoDB, DynamoDB, Firestore) NoSQL Databases Guide (MongoDB, DynamoDB, Firestore) What Are NoSQL Databases? NoSQL databases are non-relational data stores designed for specific data models and access patterns that do not fit well in the relational paradigm. They trade strict ACID guarantees for scalability, flexibility, and performance at scale. NoSQL Database Types | Type | Examples | Best For | Avoid For | |------|----------|----------|-----------| | Document | MongoDB, Firestore | JSON-like data, flexible schemas | Complex joins | | Key-Value | Redis, DynamoDB | Simple lookups, caching | Multi-key queries | | Wide-Column | Cassandra, Bigtable | Time-series, write-heavy | Ad-hoc queries | | Graph | Neo4j, Dgraph | Relationships, recommendations | Simple CRUD | MongoDB MongoDB stores data as flexible JSON-like documents in collections. It is schema-less by design. Data Modeling // MongoDB document (embedded) { \"_id\": ObjectId(\"5f8c...\"), \"username\": \"alice\", \"email\": \"alice@example.com\", \"profile\": { \"display_name\": \"Alice\", \"avatar_url\": \"https://...\", \"bio\": \"Software engineer\" }, \"addresses\": [ { \"type\": \"home\", \"street\": \"123 Main St\", \"city\": \"San Francisco\" } ], \"created_at\": ISODate(\"2026-01-15T10:30:00Z\") } Query Examples // Basic queries db.users.find({ email: \"alice@example.com\" }) db.users.find({ \"addresses.city\": \"San Francisco\" }) db.users.find({ created_at: { $gte: ISODate(\"2026-01-01\") } }) // Aggregation pipeline db.orders.aggregate([ { $match: { status: \"completed\" } }, { $group: { _id: \"$customer_id\", total: { $sum: \"$amount\" } } }, { $sort: { total: -1 } }, { $limit: 10 } ]) // Index creation db.users.createIndex({ email: 1 }, { unique: true }) db.orders.createIndex({ customer_id: 1, created_at: -1 }) When to Use MongoDB * Flexible or evolving schemas * Embedded data relationships (one-to-few) * Rapid prototyping * Document-oriented data (catalogs, content management) DynamoDB DynamoDB is AWS's managed key-value and document database. It requires careful up-front schema design. Table Design // DynamoDB table with single-table design // Partition Key: PK (string) // Sort Key: SK (string) // User entity { PK: \"USER#alice\", SK: \"PROFILE\", email: \"alice@example.com\", name: \"Alice\" } // Order entity (access pattern: all orders for a user) { PK: \"USER#alice\", SK: \"ORDER#2026-05-01#ORD001\", amount: 100, status: \"completed\" } { PK: \"USER#alice\", SK: \"ORDER#2026-05-15#ORD002\", amount: 250, status: \"pending\" } // Product entity (access pattern: get product by ID) { PK: \"PROD#001\", SK: \"META\", name: \"Laptop\", price: 1200 } Query Patterns // AWS SDK v3 import { DynamoDBClient } from \"@aws-sdk/client-dynamodb\"; import { QueryCommand } from \"@aws-sdk/lib-dynamodb\"; const client = new DynamoDBClient({ region: \"us-east-1\" }); // Get user with all related data (single query) const result = await client.send(new QueryCommand({ TableName: \"AppTable\", KeyConditionExpression: \"PK = :pk\", ExpressionAttributeValues: { \":pk\": \"USER#alice\" } })); // Query specific entity type const orders = await client.send(new QueryCommand({ TableName: \"AppTable\", KeyConditionExpression: \"PK = :pk AND begins_with(SK, :sk)\", ExpressionAttributeValues: { \":pk\": \"USER#alice\", \":sk\": \"ORDER#\" } })); When to Use DynamoDB * Serverless applications * Predictable access patterns * High-scale workloads (millions of requests/second) * AWS-native architectures Firestore Firestore is Google Cloud's NoSQL document database with real-time synchronization. Data Model import firebase_admin from firebase_admin import firestore db = firestore.client() Document reference user_ref = db.collection('users').document('alice') user_ref.set({ 'email': 'alice@example.com', 'name': 'Alice', 'roles': ['admin', 'editor'], 'created_at': firestore.SERVER_TIMESTAMP }) Subcollection for hierarchical data orders_ref = user_ref.collection('orders') orders_ref.add({ 'product': 'Laptop', 'amount': 1200, 'status': 'completed' }) Real-time listener def on_snapshot(doc_snapshot, changes, read_time): for change in changes: print(f\"Order changed: {change.document.id}\") user_ref.collection('orders').on_snapshot(on_snapshot) When to Use Firestore * Real-time applications (chat, live updates) * Mobile backends (offline support) * Google Cloud ecosystem Decision Matrix | Factor | MongoDB | DynamoDB | Firestore | |--------|---------|----------|-----------| | Query flexibility | Excellent | Limited to key/GSI | Moderate | | Scalability | Manual sharding | Automatic | Automatic | | Consistency | Configurable | Eventual (default) | Strong | | Hosting | Self-managed or Atlas | AWS-managed | GCP-managed | | Real-time | Change streams | DynamoDB Streams | Native real-time | | Offline support | Limited | Limited | Excellent | | Pricing | Instance-based | Pay per request | Pay per read/write | Summary NoSQL databases excel at scale and flexibility but require different design thinking than relational databases. MongoDB offers the most flexible querying with embedded documents, DynamoDB provides unparalleled scalability with single-table design, and Firestore offers the best real-time and offline support. Choose based on your access patterns, scalability needs, and cloud ecosystem rather than treating NoSQL as a one-size-fits-all solution."
     }
     </script>
     <script type="application/ld+json">
@@ -77,223 +77,1276 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/nosql-databases-guide.png" alt="NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
 <br>
-<p>What Are NoSQL Databases?   </p>
-<p>NoSQL databases are non-relational data stores designed for specific data models and access patterns that do not fit well in the relational paradigm. They trade strict ACID guarantees for scalability, flexibility, and performance at scale.   </p>
-<p>NoSQL Database Types   </p>
-<p>| Type | Examples | Best For | Avoid For | |------|----------|----------|-----------| | Document | MongoDB, Firestore | JSON-like data, flexible schemas | Complex joins | | Key-Value | Redis, DynamoDB | Simple lookups, caching | Multi-key queries | | Wide-Column | Cassandra, Bigtable | Time-series, write-heavy | Ad-hoc queries | | Graph | Neo4j, Dgraph | Relationships, recommendations | Simple CRUD |   </p>
-<p>MongoDB   </p>
-<p>MongoDB stores data as flexible JSON-like documents in collections. It is schema-less by design.   </p>
-<p>Data Modeling   </p>
+<h1>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
 <br>
-<p>    // MongoDB document (embedded)</p>
 <br>
-<p>    {</p>
 <br>
-<p>        "_id": ObjectId("5f8c..."),</p>
 <br>
-<p>        "username": "alice",</p>
+<h1>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
 <br>
-<p>        "email": "alice@example.com",</p>
 <br>
-<p>        "profile": {</p>
 <br>
-<p>            "display_name": "Alice",</p>
 <br>
-<p>            "avatar_url": "https://...",</p>
 <br>
-<p>            "bio": "Software engineer"</p>
 <br>
-<p>        },</p>
 <br>
-<p>        "addresses": [</p>
+<h1>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
 <br>
-<p>            {</p>
 <br>
-<p>                "type": "home",</p>
 <br>
-<p>                "street": "123 Main St",</p>
 <br>
-<p>                "city": "San Francisco"</p>
 <br>
-<p>            }</p>
 <br>
-<p>        ],</p>
 <br>
-<p>        "created_at": ISODate("2026-01-15T10:30:00Z")</p>
 <br>
-<p>    }</p>
 <br>
-<p>Query Examples   </p>
 <br>
-<p>    // Basic queries</p>
+<p>What Are NoSQL Databases? </p>
 <br>
-<p>    db.users.find({ email: "alice@example.com" })</p>
 <br>
-<p>    db.users.find({ "addresses.city": "San Francisco" })</p>
 <br>
-<p>    db.users.find({ created_at: { $gte: ISODate("2026-01-01") } })</p>
 <br>
-<p>    // Aggregation pipeline</p>
 <br>
-<p>    db.orders.aggregate([</p>
 <br>
-<p>        { $match: { status: "completed" } },</p>
 <br>
-<p>        { $group: { _id: "$customer_id", total: { $sum: "$amount" } } },</p>
+<p>NoSQL databases are non-relational data stores designed for specific data models and access patterns that do not fit well in the relational paradigm. They trade strict ACID guarantees for scalability, flexibility, and performance at scale. </p>
 <br>
-<p>        { $sort: { total: -1 } },</p>
 <br>
-<p>        { $limit: 10 }</p>
 <br>
-<p>    ])</p>
 <br>
-<p>    // Index creation</p>
 <br>
-<p>    db.users.createIndex({ email: 1 }, { unique: true })</p>
 <br>
-<p>    db.orders.createIndex({ customer_id: 1, created_at: -1 })</p>
 <br>
-<p>When to Use MongoDB   </p>
+<p>NoSQL Database Types </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>| Type | Examples | Best For | Avoid For | |------|----------|----------|-----------| | Document | MongoDB, Firestore | JSON-like data, flexible schemas | Complex joins | | Key-Value | Redis, DynamoDB | Simple lookups, caching | Multi-key queries | | Wide-Column | Cassandra, Bigtable | Time-series, write-heavy | Ad-hoc queries | | Graph | Neo4j, Dgraph | Relationships, recommendations | Simple CRUD | </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>MongoDB </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>MongoDB stores data as flexible JSON-like documents in collections. It is schema-less by design. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Data Modeling </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// MongoDB document (embedded)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"_id": ObjectId("5f8c..."),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"username": "alice",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"email": "alice@example.com",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"profile": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"display_name": "Alice",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"avatar_url": "https://...",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"bio": "Software engineer"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"addresses": [</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"type": "home",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"street": "123 Main St",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"city": "San Francisco"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"created_at": ISODate("2026-01-15T10:30:00Z")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Query Examples </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Basic queries</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>db.users.find({ email: "alice@example.com" })</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>db.users.find({ "addresses.city": "San Francisco" })</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>db.users.find({ created_at: { $gte: ISODate("2026-01-01") } })</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Aggregation pipeline</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>db.orders.aggregate([</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{ $match: { status: "completed" } },</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{ $group: { _id: "$customer_id", total: { $sum: "$amount" } } },</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{ $sort: { total: -1 } },</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{ $limit: 10 }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Index creation</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>db.users.createIndex({ email: 1 }, { unique: true })</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>db.orders.createIndex({ customer_id: 1, created_at: -1 })</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>When to Use MongoDB </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>* Flexible or evolving schemas</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Embedded data relationships (one-to-few)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Rapid prototyping</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Document-oriented data (catalogs, content management)</p>
 <br>
-<p>DynamoDB   </p>
-<p>DynamoDB is AWS's managed key-value and document database. It requires careful up-front schema design.   </p>
-<p>Table Design   </p>
 <br>
-<p>    // DynamoDB table with single-table design</p>
 <br>
-<p>    // Partition Key: PK (string)</p>
 <br>
-<p>    // Sort Key: SK (string)</p>
 <br>
-<p>    // User entity</p>
 <br>
-<p>    { PK: "USER#alice", SK: "PROFILE", email: "alice@example.com", name: "Alice" }</p>
 <br>
-<p>    // Order entity (access pattern: all orders for a user)</p>
 <br>
-<p>    { PK: "USER#alice", SK: "ORDER#2026-05-01#ORD001", amount: 100, status: "completed" }</p>
 <br>
-<p>    { PK: "USER#alice", SK: "ORDER#2026-05-15#ORD002", amount: 250, status: "pending" }</p>
 <br>
-<p>    // Product entity (access pattern: get product by ID)</p>
+<p>DynamoDB </p>
 <br>
-<p>    { PK: "PROD#001", SK: "META", name: "Laptop", price: 1200 }</p>
 <br>
-<p>Query Patterns   </p>
 <br>
-<p>    // AWS SDK v3</p>
 <br>
-<p>    import { DynamoDBClient } from "@aws-sdk/client-dynamodb";</p>
 <br>
-<p>    import { QueryCommand } from "@aws-sdk/lib-dynamodb";</p>
 <br>
-<p>    const client = new DynamoDBClient({ region: "us-east-1" });</p>
 <br>
-<p>    // Get user with all related data (single query)</p>
+<p>DynamoDB is AWS's managed key-value and document database. It requires careful up-front schema design. </p>
 <br>
-<p>    const result = await client.send(new QueryCommand({</p>
 <br>
-<p>        TableName: "AppTable",</p>
 <br>
-<p>        KeyConditionExpression: "PK = :pk",</p>
 <br>
-<p>        ExpressionAttributeValues: {</p>
 <br>
-<p>            ":pk": "USER#alice"</p>
 <br>
-<p>        }</p>
 <br>
-<p>    }));</p>
+<p>Table Design </p>
 <br>
-<p>    // Query specific entity type</p>
 <br>
-<p>    const orders = await client.send(new QueryCommand({</p>
 <br>
-<p>        TableName: "AppTable",</p>
 <br>
-<p>        KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",</p>
 <br>
-<p>        ExpressionAttributeValues: {</p>
 <br>
-<p>            ":pk": "USER#alice",</p>
 <br>
-<p>            ":sk": "ORDER#"</p>
 <br>
-<p>        }</p>
 <br>
-<p>    }));</p>
 <br>
-<p>When to Use DynamoDB   </p>
+<p>// DynamoDB table with single-table design</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Partition Key: PK (string)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Sort Key: SK (string)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// User entity</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{ PK: "USER#alice", SK: "PROFILE", email: "alice@example.com", name: "Alice" }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Order entity (access pattern: all orders for a user)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{ PK: "USER#alice", SK: "ORDER#2026-05-01#ORD001", amount: 100, status: "completed" }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{ PK: "USER#alice", SK: "ORDER#2026-05-15#ORD002", amount: 250, status: "pending" }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Product entity (access pattern: get product by ID)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{ PK: "PROD#001", SK: "META", name: "Laptop", price: 1200 }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Query Patterns </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// AWS SDK v3</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import { DynamoDBClient } from "@aws-sdk/client-dynamodb";</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import { QueryCommand } from "@aws-sdk/lib-dynamodb";</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const client = new DynamoDBClient({ region: "us-east-1" });</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Get user with all related data (single query)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const result = await client.send(new QueryCommand({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>TableName: "AppTable",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>KeyConditionExpression: "PK = :pk",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ExpressionAttributeValues: {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>":pk": "USER#alice"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}));</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>// Query specific entity type</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>const orders = await client.send(new QueryCommand({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>TableName: "AppTable",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ExpressionAttributeValues: {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>":pk": "USER#alice",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>":sk": "ORDER#"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}));</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>When to Use DynamoDB </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>* Serverless applications</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Predictable access patterns</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* High-scale workloads (millions of requests/second)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* AWS-native architectures</p>
 <br>
-<p>Firestore   </p>
-<p>Firestore is Google Cloud's NoSQL document database with real-time synchronization.   </p>
-<p>Data Model   </p>
 <br>
-<p>    import firebase_admin</p>
 <br>
-<p>    from firebase_admin import firestore</p>
 <br>
-<p>    db = firestore.client()</p>
 <br>
-<p>    # Document reference</p>
 <br>
-<p>    user_ref = db.collection('users').document('alice')</p>
 <br>
-<p>    user_ref.set({</p>
 <br>
-<p>        'email': 'alice@example.com',</p>
 <br>
-<p>        'name': 'Alice',</p>
 <br>
-<p>        'roles': ['admin', 'editor'],</p>
+<p>Firestore </p>
 <br>
-<p>        'created_at': firestore.SERVER_TIMESTAMP</p>
 <br>
-<p>    })</p>
 <br>
-<p>    # Subcollection for hierarchical data</p>
 <br>
-<p>    orders_ref = user_ref.collection('orders')</p>
 <br>
-<p>    orders_ref.add({</p>
 <br>
-<p>        'product': 'Laptop',</p>
 <br>
-<p>        'amount': 1200,</p>
+<p>Firestore is Google Cloud's NoSQL document database with real-time synchronization. </p>
 <br>
-<p>        'status': 'completed'</p>
 <br>
-<p>    })</p>
 <br>
-<p>    # Real-time listener</p>
 <br>
-<p>    def on_snapshot(doc_snapshot, changes, read_time):</p>
 <br>
-<p>        for change in changes:</p>
 <br>
-<p>            print(f"Order changed: {change.document.id}")</p>
 <br>
-<p>    user_ref.collection('orders').on_snapshot(on_snapshot)</p>
+<p>Data Model </p>
 <br>
-<p>When to Use Firestore   </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>import firebase_admin</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from firebase_admin import firestore</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>db = firestore.client()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Document reference</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>user_ref = db.collection('users').document('alice')</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>user_ref.set({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>'email': 'alice@example.com',</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>'name': 'Alice',</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>'roles': ['admin', 'editor'],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>'created_at': firestore.SERVER_TIMESTAMP</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>})</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Subcollection for hierarchical data</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>orders_ref = user_ref.collection('orders')</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>orders_ref.add({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>'product': 'Laptop',</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>'amount': 1200,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>'status': 'completed'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>})</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Real-time listener</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def on_snapshot(doc_snapshot, changes, read_time):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for change in changes:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>print(f"Order changed: {change.document.id}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>user_ref.collection('orders').on_snapshot(on_snapshot)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>When to Use Firestore </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>* Real-time applications (chat, live updates)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Mobile backends (offline support)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Google Cloud ecosystem</p>
 <br>
-<p>Decision Matrix   </p>
-<p>| Factor | MongoDB | DynamoDB | Firestore | |--------|---------|----------|-----------| | Query flexibility | Excellent | Limited to key/GSI | Moderate | | Scalability | Manual sharding | Automatic | Automatic | | Consistency | Configurable | Eventual (default) | Strong | | Hosting | Self-managed or Atlas | AWS-managed | GCP-managed | | Real-time | Change streams | DynamoDB Streams | Native real-time | | Offline support | Limited | Limited | Excellent | | Pricing | Instance-based | Pay per request | Pay per read/write |   </p>
-<p>Summary   </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Decision Matrix </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>| Factor | MongoDB | DynamoDB | Firestore | |--------|---------|----------|-----------| | Query flexibility | Excellent | Limited to key/GSI | Moderate | | Scalability | Manual sharding | Automatic | Automatic | | Consistency | Configurable | Eventual (default) | Strong | | Hosting | Self-managed or Atlas | AWS-managed | GCP-managed | | Real-time | Change streams | DynamoDB Streams | Native real-time | | Offline support | Limited | Limited | Excellent | | Pricing | Instance-based | Pay per request | Pay per read/write | </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Summary </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>NoSQL databases excel at scale and flexibility but require different design thinking than relational databases. MongoDB offers the most flexible querying with embedded documents, DynamoDB provides unparalleled scalability with single-table design, and Firestore offers the best real-time and offline support. Choose based on your access patterns, scalability needs, and cloud ecosystem rather than treating NoSQL as a one-size-fits-all solution.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -310,6 +1363,7 @@
       <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

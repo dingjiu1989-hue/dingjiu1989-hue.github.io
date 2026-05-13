@@ -40,7 +40,25 @@ def extract_body(html):
 
 
 def gen_markdown_copies():
-    """Generate /md/en/board/slug.md for every article."""
+    """Generate /md/en/board/slug.md for every article.
+    Uses a FRESH html2text instance (not the shared global) to avoid corruption
+    from processing 850 articles sequentially.
+    """
+    import html2text as ht
+    local_h = ht.HTML2Text()
+    local_h.body_width = 0
+    local_h.ignore_emphasis = False
+    local_h.ignore_links = False
+    local_h.ignore_images = True
+    local_h.protect_links = True
+    local_h.unicode_snob = True
+
+    def _extract(html):
+        m = re.search(r'<div class="article-body">(.*?)</article>', html, re.DOTALL)
+        if not m:
+            return None
+        return local_h.handle(m.group(1)).strip()
+
     MD_DIR.mkdir(exist_ok=True)
     (MD_DIR / "en").mkdir(exist_ok=True)
 
@@ -54,7 +72,7 @@ def gen_markdown_copies():
             if not html_path.exists():
                 continue
             html = html_path.read_text(encoding="utf-8")
-            md_body = extract_body(html)
+            md_body = _extract(html)
             if not md_body:
                 continue
 
@@ -73,35 +91,17 @@ url: {BASE}/en/{board['id']}/{art['slug']}.html
             (MD_DIR / "en" / board["id"] / f'{art["slug"]}.md').write_text(md, encoding="utf-8")
             total += 1
 
-    # Chinese articles
-    (MD_DIR / "zh").mkdir(exist_ok=True)
+    # Chinese articles (count existing markdown files — no ZH HTML generated)
+    cn_md_dir = MD_DIR / "zh"
+    cn_md_dir.mkdir(exist_ok=True)
     if CN_ARTICLES.exists():
         cn_data = json.loads(CN_ARTICLES.read_text(encoding="utf-8"))
         for board in cn_data.get("boards", []):
-            (MD_DIR / "zh" / board["id"]).mkdir(exist_ok=True)
+            (cn_md_dir / board["id"]).mkdir(exist_ok=True)
             for art in board.get("posts", []):
-                html_path = ROOT / board["id"] / f'{art["slug"]}.html'
-                if not html_path.exists():
-                    continue
-                html = html_path.read_text(encoding="utf-8")
-                md_body = extract_body(html)
-                if not md_body:
-                    continue
-
-                md = f"""---
-title: "{art['title']}"
-description: "{art.get('description', '')}"
-date: {art['date']}
-board: {board['id']}
-url: {BASE}/{board['id']}/{art['slug']}.html
----
-
-# {art['title']}
-
-{md_body}
-"""
-                (MD_DIR / "zh" / board["id"] / f'{art["slug"]}.md').write_text(md, encoding="utf-8")
-                total += 1
+                path = cn_md_dir / board["id"] / f'{art["slug"]}.md'
+                if path.exists():
+                    total += 1
 
     print(f"  Markdown copies: {total} articles -> /md/")
     return total
@@ -238,7 +238,25 @@ def gen_llms_full():
     """Generate /llms-full.txt — all English article bodies in one Markdown file.
     This is used by AI training pipelines (they prefer one big file over crawling
     hundreds of small ones).
+
+    Uses a FRESH html2text instance (not the shared global) to avoid corruption
+    from processing 850 articles through gen_markdown_copies() first.
     """
+    import html2text as ht
+    local_h = ht.HTML2Text()
+    local_h.body_width = 0
+    local_h.ignore_emphasis = False
+    local_h.ignore_links = False
+    local_h.ignore_images = True
+    local_h.protect_links = True
+    local_h.unicode_snob = True
+
+    def _extract(html):
+        m = re.search(r'<div class="article-body">(.*?)</article>', html, re.DOTALL)
+        if not m:
+            return None
+        return local_h.handle(m.group(1)).strip()
+
     en_data = json.loads(EN_ARTICLES.read_text(encoding="utf-8"))
     full_lines = [
         "# AI Study Room — Full Content (English)",
@@ -255,7 +273,7 @@ def gen_llms_full():
             if not html_path.exists():
                 continue
             html = html_path.read_text(encoding="utf-8")
-            body = extract_body(html)
+            body = _extract(html)
             if not body:
                 continue
             full_lines.append(f"## {art['title']}")
@@ -278,27 +296,31 @@ def gen_llms_full():
     (ROOT / "en" / "llms-full.txt").write_text(content, encoding="utf-8")
     print(f"  en/llms-full.txt: {size_kb:.0f} KB written")
 
-    # Chinese full content
+    # Chinese full content (read from markdown source — no ZH HTML generated)
     if CN_ARTICLES.exists():
         cn_data = json.loads(CN_ARTICLES.read_text(encoding="utf-8"))
         cn_lines = [
             "# AI自习室 — 全部内容 (中文)",
             f"Generated: {TODAY}",
+            f"Total articles: {sum(len(b.get('posts', [])) for b in cn_data.get('boards', []))}",
             "",
             "---",
             "",
         ]
         for board in cn_data.get("boards", []):
             for art in board.get("posts", []):
-                html_path = ROOT / board["id"] / f'{art["slug"]}.html'
-                if not html_path.exists():
-                    continue
-                html = html_path.read_text(encoding="utf-8")
-                body = extract_body(html)
-                if not body:
+                md_path = MD_DIR / "zh" / board["id"] / f'{art["slug"]}.md'
+                if md_path.exists():
+                    body = md_path.read_text(encoding="utf-8")
+                    # Remove frontmatter
+                    if body.startswith("---"):
+                        end = body.find("---", 3)
+                        if end > 0:
+                            body = body[end + 3:].strip()
+                else:
                     continue
                 cn_lines.append(f"## {art['title']}")
-                cn_lines.append(f"URL: {BASE}/{board['id']}/{art['slug']}.html")
+                cn_lines.append(f"URL: {BASE}/zh/{board['id']}/{art['slug']}.html")
                 cn_lines.append("")
                 cn_lines.append(body)
                 cn_lines.append("")

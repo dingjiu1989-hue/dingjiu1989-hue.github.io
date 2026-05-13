@@ -10,304 +10,2624 @@ url: https://dingjiu1989-hue.github.io/en/security/encryption-at-rest.html
 
 # Encryption at Rest Guide
 
+  
+
+
+# Encryption at Rest Guide
+
+  
+  
+  
+  
+
+
+# Encryption at Rest Guide
+
+  
+  
+  
+  
+  
+  
+  
+
+
+# Encryption at Rest Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Encryption at Rest Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Encryption at Rest Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 What Is Encryption at Rest? 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Encryption at rest protects data stored on disk or in databases by making it unreadable without the correct decryption key. If an attacker gains physical access to storage media or bypasses access controls, encrypted data remains confidential. This is a fundamental security control required by compliance frameworks including PCI DSS, HIPAA, SOC 2, and GDPR. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Encryption Layers 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 | Layer | What It Protects | When to Use | |-------|------------------|-------------| | Disk encryption | Entire storage volume | Always | | Database encryption | Specific tables or columns | Sensitive PII data | | File-level encryption | Individual files | Shared storage, backups | | Application-level encryption | Specific data fields | End-to-end data protection | | Backup encryption | Backup archives | All offsite storage | 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Disk-Level Encryption 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 LUKS (Linux Unified Key Setup) 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 # Encrypt a disk with LUKS
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 sudo cryptsetup luksFormat /dev/sdb1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 sudo cryptsetup luksOpen /dev/sdb1 encrypted_volume
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 sudo mkfs.ext4 /dev/mapper/encrypted_volume
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 sudo mount /dev/mapper/encrypted_volume /mnt/secure
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 AWS EBS Encryption 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 # Enable default EBS encryption
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 aws ec2 enable-ebs-encryption-by-default --region us-east-1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 # Create an encrypted volume with a custom KMS key
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 aws ec2 create-volume \
 
-\--size 100 \
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-\--region us-east-1 \
 
-\--availability-zone us-east-1a \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--size 100 \
 
-\--encrypted \
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-\--kms-key-id alias/my-app-key
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--region us-east-1 \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--availability-zone us-east-1a \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--encrypted \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--kms-key-id alias/my-app-key
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 GCE Persistent Disk Encryption 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 # Google Cloud uses AES-256 by default (CSEK for customer-managed)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 # Create and apply a CSEK
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 gcloud compute disks create secure-disk \
 
-\--size 100GB \
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-\--zone us-central1-a \
 
-\--csek-key-file ./key.json
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--size 100GB \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--zone us-central1-a \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--csek-key-file ./key.json
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 gcloud compute instances attach-disk my-instance \
 
-\--disk secure-disk \
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-\--zone us-central1-a \
 
-\--csek-key-file ./key.json
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--disk secure-disk \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--zone us-central1-a \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--csek-key-file ./key.json
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Database Encryption 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Transparent Data Encryption (TDE) 
 
-\-- PostgreSQL with pg_tde extension
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL with pg_tde extension
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 CREATE EXTENSION pg_tde;
 
-\-- Initialize encryption key
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Initialize encryption key
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 SELECT pg_tde_add_key_provider_file('file-vault', '/etc/postgresql/key.file');
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 SELECT pg_tde_set_key('my-db-key', 'file-vault');
 
-\-- Encrypt a table
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Encrypt a table
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 CREATE TABLE users (
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 id SERIAL PRIMARY KEY,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 email TEXT,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ssn TEXT
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ) USING TDE;
 
-\-- Or encrypt existing table
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Or encrypt existing table
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ALTER TABLE users SET ACCESS METHOD TDE;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Column-Level Encryption 
 
-\-- PostgreSQL with pgcrypto
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL with pgcrypto
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 CREATE EXTENSION pgcrypto;
 
-\-- Encrypt specific columns
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Encrypt specific columns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 CREATE TABLE patients (
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 id SERIAL PRIMARY KEY,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 name TEXT NOT NULL,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ssn BYTEA, -- Encrypted
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 diagnosis BYTEA, -- Encrypted
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 created_at TIMESTAMP DEFAULT NOW()
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 );
 
-\-- Insert with encryption
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Insert with encryption
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 INSERT INTO patients (name, ssn, diagnosis)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 VALUES (
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 'John Doe',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 pgp_sym_encrypt('123-45-6789', 'encryption-key'),
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 pgp_sym_encrypt('Diabetes Type 2', 'encryption-key')
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 );
 
-\-- Decrypt when needed (with proper access control)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Decrypt when needed (with proper access control)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 SELECT
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 name,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 pgp_sym_decrypt(ssn, 'encryption-key') AS ssn
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 FROM patients
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 WHERE id = 1;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 MongoDB Field-Level Encryption 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 const client = new MongoClient(uri, {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 autoEncryption: {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 keyVaultNamespace: 'encryption.__keyVault',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 kmsProviders: {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 aws: {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 accessKeyId: process.env.AWS_ACCESS_KEY,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 secretAccessKey: process.env.AWS_SECRET_KEY
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 },
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 schemaMap: {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 'test.users': {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 bsonType: 'object',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 encryptMetadata: {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 keyId: [UUID('...')],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 algorithm: 'AEAD_AES_256_CBC_HMAC_SHA_512-Deterministic'
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 properties: {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ssn: { encrypt: { bsonType: 'string' } },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 creditCard: { encrypt: { bsonType: 'string' } }
 
-}
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 }
 
-}
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 }
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Application-Level Encryption 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 For end-to-end protection where even the database administrator should not see plaintext: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 from cryptography.fernet import Fernet
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 class FieldEncryptor:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 def __init__(self, key):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 self.cipher = Fernet(key)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 def encrypt_field(self, plaintext):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 """Encrypt a single field."""
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 return self.cipher.encrypt(plaintext.encode())
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 def decrypt_field(self, ciphertext):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 """Decrypt a single field."""
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 return self.cipher.decrypt(ciphertext).decode()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 # Usage
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 key = Fernet.generate_key() # Store this securely in a vault
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 encryptor = FieldEncryptor(key)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 user_data = {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 'email': 'user@example.com',
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 'ssn': encryptor.encrypt_field('123-45-6789'),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 'medical_record': encryptor.encrypt_field('Sensitive diagnosis data')
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 # Store user_data in database
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 db.users.insert_one(user_data)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Key Management 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Key Hierarchy 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Master Key (HSM or KMS)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ├── Key Encryption Key (KEK)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 │ └── Data Encryption Keys (DEK)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 └── Key Encryption Key (KEK)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 └── Data Encryption Keys (DEK)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 AWS KMS 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 import boto3
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 kms = boto3.client('kms')
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 def create_encryption_key():
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 response = kms.create_key(
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Description='Application data encryption key',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 KeyUsage='ENCRYPT_DECRYPT',
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 CustomerMasterKeySpec='SYMMETRIC_DEFAULT'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 )
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 return response['KeyMetadata']['KeyId']
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 def encrypt_data(plaintext, key_id):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 response = kms.encrypt(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 KeyId=key_id,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Plaintext=plaintext.encode()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 )
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 return response['CiphertextBlob']
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 def decrypt_data(ciphertext):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 response = kms.decrypt(CiphertextBlob=ciphertext)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 return response['Plaintext'].decode()
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Key Rotation 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Key Type | Rotation Frequency | Method | |----------|-------------------|--------| | Master key | Annually (manual) | Create new, re-wrap DEKs | | Data encryption key | Per-encryption | Generate new per operation | | Database password | 90 days | Automated via secrets manager | | TLS certificate | 90 days | cert-manager / ACM | 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Compliance Requirements 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Standard | Encryption Requirement | |----------|----------------------| | PCI DSS 4.0 | All cardholder data encrypted at rest | | HIPAA | ePHI encrypted at rest | | SOC 2 | Encryption controls for sensitive data | | GDPR | Appropriate technical measures (encryption) | | FedRAMP | FIPS 140-2 validated encryption | 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Summary 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Encryption at rest is a non-negotiable security control for any application handling sensitive data. Implement defense in depth: disk encryption for the entire volume, transparent database encryption for tables, column-level encryption for the most sensitive fields, and application-level encryption for end-to-end protection. Use AWS KMS or similar managed services for key management with automatic rotation, and always encrypt backups before storing them offsite.

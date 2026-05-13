@@ -46,31 +46,20 @@ def generate_readme():
     lines.append(f'- **AI crawler optimized:** Yes (llms.txt, structured data, sitemap)')
     lines.append('')
 
-    # Article index by category
-    lines.append('## 📚 Article Index')
+    # Article index by category (concise — full list lives on the live site)
+    lines.append('## 📚 Content by Category')
     lines.append('')
+    lines.append(f'| Category | Articles | Link |')
+    lines.append(f'|----------|----------|------|')
 
     for board in boards:
         board_name = board.get('name', board['id'])
         icon = board.get('icon', '📄')
-        desc = board.get('desc', '')
-        posts = board['posts']
+        count = len(board['posts'])
+        url = f'{BASE}/en/{board["id"]}/'
+        lines.append(f'| {icon} {board_name} | {count} | [Browse]({url}) |')
 
-        lines.append(f'### {icon} {board_name}')
-        if desc:
-            lines.append(f'*{desc}*')
-        lines.append('')
-        lines.append(f'| # | Article | Date |')
-        lines.append(f'|---|---------|------|')
-
-        for i, art in enumerate(posts, 1):
-            slug = art['slug']
-            title = art['title']
-            date = art.get('date', '')
-            url = f'{BASE}/en/{board["id"]}/{slug}.html'
-            lines.append(f'| {i} | [{title}]({url}) | {date} |')
-
-        lines.append('')
+    lines.append('')
 
     # Cross-platform
     lines.append('## 🔗 Cross-Platform')

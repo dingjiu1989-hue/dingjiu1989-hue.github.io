@@ -24,7 +24,7 @@ Sprint Planning| Good — cycles, estimates, velocity| Excellent — scrum + kan
 Markdown Support| Yes — full markdown in descriptions| Limited — Atlassian markup, some markdown| Yes — markdown with rich editing| Yes — full markdown + slash commands  
 Performance| Excellent — instant, native-feel| Slow — especially Cloud version| Good — can slow with large workspaces| Good — can lag with large databases  
 Best Team Size| 2-50 developers| 20-500+ (especially enterprise)| 5-100 (all departments)| Flexible — personal to large team  
-
+  
 ## What Each Tool Excels At
 
 **Linear — Best for:** Startup and mid-size engineering teams who want the tool to get out of their way. Linear is opinionated about workflow (in a good way) — cycles instead of sprints, T-shirt sizing instead of story points. The UI is the fastest among all options. **Weak spot:** Not built for non-engineering teams (product, design, marketing) — you will need another tool for cross-functional work.
@@ -44,5 +44,5 @@ Enterprise (50+ devs), complex workflows| Jira| Scalable, customizable, extensiv
 Cross-functional (dev + product + design)| Linear + Notion| Linear for engineering, Notion for product specs and design docs  
 All-in-one preference, smaller team| ClickUp| Replace 3-4 tools with one; cost-effective  
 Docs-first culture, flexible workflows| Notion| Documentation + lightweight project tracking in one place  
-
+  
 **Bottom line:** Linear wins for pure engineering teams — the speed, keyboard shortcuts, and Git integration are best in class. Jira is inevitable at enterprise scale but avoid it if you can. Notion is the best complement to Linear for non-engineering documentation. The true cost of a PM tool is not the subscription — it is the hours your team spends interacting with it. Linear minimizes that overhead. See also: [Best Note-Taking Apps](</en/tools/best-note-taking-apps-developers.html>) and [Best Code Review Tools](</en/tools/best-code-review-tools.html>).

@@ -23,7 +23,7 @@ Kubernetes Integration| Excellent (auto-discovery)| Excellent (native, label-bas
 Pricing Model| Per GB ingested + per host| Self-hosted: free (your infra) / Cloud: per GB| Per GB ingested| Per GB ingested  
 Approx. Cost (100GB/mo)| ~$150-300/mo| $0 (self-hosted) / ~$50-100/mo Cloud| ~$60-120/mo| ~$50-150/mo  
 Best For| Enterprise, unified observability| K8s-native, Grafana users, self-hosting| Small-medium teams, simplicity| High-cardinality data, event-driven  
-
+  
 ## When to Choose Each Tool
 
 **Datadog Logs — Best for:** Large enterprises that want one platform for metrics, traces, and logs. Datadog's unification means you can jump from a metric spike to relevant logs in one click. **Weak spot:** Expensive at scale; complex pricing; vendor lock-in.
@@ -43,5 +43,5 @@ Kubernetes-native, already use Grafana| Grafana Loki| Native K8s integration, Gr
 Small-medium team, want best UX| Better Stack| Best developer experience, fair pricing  
 High-cardinality event data, analytics-heavy| Axiom| Structured event model, fast aggregation  
 Budget-constrained, self-hosting capable| Grafana Loki| Free and open source, object storage backed  
-
+  
 **Bottom line:** Grafana Loki is the best value — free if self-hosted, K8s-native, and integrates with the Grafana ecosystem you likely already use. Better Stack is the best experience for smaller teams. Datadog wins for enterprise unification. Start with Loki (free), move to Better Stack if you need better UX, and to Datadog when you need full observability. See also: [Best Monitoring Tools](</en/tools/best-monitoring-tools.html>) and [Best Error Tracking Tools](</en/tools/best-error-tracking-tools.html>).

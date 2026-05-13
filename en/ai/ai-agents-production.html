@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-agents-production.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2580",
+      "wordCount": "4721",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-agents-production.html"},
-      "articleBody": "Deploying AI Agents to Production Introduction AI agents that autonomously execute multi-step tasks are transitioning from experimental prototypes to production systems. Unlike traditional API calls, agents make decisions, use tools, and interact with external systems--introducing new challenges around reliability, cost, safety, and observability. This article covers the patterns and practices needed to deploy AI agents safely and efficiently. Agent Orchestration Production agents typically follow a structured execution loop: import asyncio from typing import List, Optional from dataclasses import dataclass, field @dataclass class AgentContext: task: str max_steps: int = 20 current_step: int = 0 history: List[dict] = field(default_factory=list) tools_used: List[str] = field(default_factory=list) total_cost: float = 0.0 class AgentOrchestrator: def __init__(self, model: str = \"claude-sonnet-4-20260512\"): self.model = model self.max_retries = 3 self.cost_per_token = {\"input\": 0.000003, \"output\": 0.000015} async def run(self, task: str) -> dict: ctx = AgentContext(task=task) while ctx.current_step ctx.current_step += 1 try: # 1. Think: decide next action action = await self.think(ctx) # 2. Act: execute tool or respond if action[\"type\"] == \"tool_call\": result = await self.execute_tool(action[\"tool\"], action[\"args\"]) ctx.tools_used.append(action[\"tool\"][\"name\"]) elif action[\"type\"] == \"final_answer\": return { \"status\": \"success\", \"answer\": action[\"content\"], \"steps\": ctx.current_step, \"tools_used\": ctx.tools_used, \"total_cost\": ctx.total_cost, } # 3. Observe: store result ctx.history.append({ \"step\": ctx.current_step, \"action\": action, \"observation\": result, }) # 4. Cost tracking ctx.total_cost += self._calculate_cost(action) except ToolError as e: # Handle tool failures with retry await self.handle_tool_error(ctx, e) except Exception as e: # Catch-all for unexpected errors await self.handle_unexpected_error(ctx, e) return {\"status\": \"max_steps_exceeded\", \"steps\": ctx.max_steps} Error Handling and Retry Logic Agents must gracefully handle failures across multiple dimensions: class AgentErrorHandler: def __init__(self): self.retry_policies = { \"rate_limit\": RetryPolicy(max_retries=5, backoff=\"exponential\"), \"timeout\": RetryPolicy(max_retries=3, backoff=\"linear\"), \"auth_error\": RetryPolicy(max_retries=1, backoff=\"none\"), \"tool_crash\": RetryPolicy(max_retries=2, backoff=\"constant\"), } async def execute_with_retry(self, tool_call: dict) -> dict: policy = self._get_policy(tool_call[\"tool\"][\"name\"]) for attempt in range(policy.max_retries): try: return await self._execute_tool(tool_call) except RateLimitError as e: wait = self._calculate_backoff(attempt, policy.backoff, e.reset_at) await self._log_retry(tool_call, attempt, wait) await asyncio.sleep(wait) except TimeoutError: if attempt == policy.max_retries - 1: return self._graceful_degradation(tool_call) await asyncio.sleep(policy.backoff_delay * (attempt + 1)) except AuthError: await self._refresh_credentials(tool_call[\"tool\"][\"name\"]) continue return {\"error\": \"max_retries_exceeded\", \"tool\": tool_call[\"tool\"][\"name\"]} def _graceful_degradation(self, tool_call: dict) -> dict: \"\"\"Return a safe default when a tool is unavailable.\"\"\" return { \"status\": \"unavailable\", \"message\": f\"{tool_call['tool']['name']} is temporarily unavailable\", \"suggestion\": \"Try again later or use an alternative approach\", } Human-in-the-Loop Critical agent actions require human approval before execution: class HumanInTheLoop: def __init__(self, approval_thresholds: dict): self.thresholds = approval_thresholds self.pending_approvals = {} async def request_approval( self, action: dict, context: AgentContext ) -> bool: # Determine if approval is needed if not self._requires_approval(action): return True approval_id = str(uuid.uuid4()) self.pending_approvals[approval_id] = { \"action\": action, \"context\": context, \"status\": \"pending\", \"created_at\": datetime.utcnow(), } # Notify human reviewer await self._notify_reviewer( approval_id=approval_id, action_description=action[\"description\"], risk_level=action.get(\"risk\", \"low\"), current_state=context.history[-3:], ) # Wait for approval (with timeout) try: approved = await self._wait_for_approval(approval_id, timeout=300) self.pending_approvals[approval_id][\"status\"] = ( \"approved\" if approved else \"rejected\" ) return approved except TimeoutError: self.pending_approvals[approval_id][\"status\"] = \"timed_out\" return False def _requires_approval(self, action: dict) -> bool: return any([ action.get(\"risk\") in self.thresholds.get(\"high_risk_actions\", []), action[\"tool\"].get(\"name\") in self.thresholds.get(\"protected_tools\", []), action.get(\"amount\", 0) > self.thresholds.get(\"max_amount\", 1000), action.get(\"destructive\", False), ]) Monitoring Agent Behavior Track agent decisions and outcomes with structured telemetry: class AgentTelemetry: def __init__(self): self.metrics = MetricsClient() self.tracer = Tracer() def record_step(self, ctx: AgentContext, action: dict, observation: dict): span = self.tracer.start_span(\"agent_step\") span.set_attributes({ \"agent.step\": ctx.current_step, \"agent.task_hash\": hash(ctx.task), \"action.type\": action[\"type\"], \"action.tool\": action.get(\"tool\", {}).get(\"name\", \"none\"), \"action.duration_ms\": action.get(\"duration_ms\", 0), \"observation.status\": observation.get(\"status\", \"unknown\"), }) self.metrics.histogram( \"agent.step.duration\", value=action.get(\"duration_ms\", 0), tags={ \"tool\": action.get(\"tool\", {}).get(\"name\", \"none\"), \"status\": observation.get(\"status\", \"unknown\"), }, ) span.end() def detect_anomalies(self, ctx: AgentContext) -> List[str]: warnings = [] # Looping detection recent_actions = [h[\"action\"][\"tool\"][\"name\"] for h in ctx.history[-10:]] if len(set(recent_actions)) = 5: warnings.append(\"POSSIBLE_LOOP\") # Cost anomaly if ctx.total_cost > 0.50: warnings.append(\"HIGH_COST\") # Token usage total_tokens = sum( h[\"action\"].get(\"tokens\", 0) for h in ctx.history ) if total_tokens > 50000: warnings.append(\"HIGH_TOKEN_USAGE\") return warnings Cost Tracking and Rate Limiting class AgentCostManager: def __init__(self, daily_budget: float = 10.0): self.daily_budget = daily_budget self.daily_spend = 0.0 self.token_buckets = {} async def check_budget(self, estimated_cost: float) -> bool: # Reset daily counter if self._is_new_day(): self.daily_spend = 0.0 if self.daily_spend + estimated_cost > self.daily_budget: return False # Budget exceeded self.daily_spend += estimated_cost return True async def rate_limit_check(self, tool: str) -> bool: bucket = self.token_buckets.get(tool, TokenBucket( capacity=10, refill_rate=1, refill_interval=60 )) return bucket.consume() Observability Log agent decision traces for debugging and audit: { \"timestamp\": \"2026-05-12T10:30:00Z\", \"agent_id\": \"agent-payment-v3\", \"session_id\": \"sess_abc123\", \"step\": 4, \"action\": { \"type\": \"tool_call\", \"tool\": \"stripe_charge\", \"args\": {\"amount\": 49.99, \"currency\": \"usd\"}, \"reasoning\": \"Customer requested payment for order ord-789\" }, \"observation\": { \"status\": \"success\", \"charge_id\": \"ch_xyz456\", \"duration_ms\": 234 }, \"cost\": { \"input_tokens\": 1245, \"output_tokens\": 89, \"estimated_cost\": 0.005 }, \"warnings\": [] } Deploy agents incrementally: start with read-only tools, add human-in-the-loop for destructive actions, and only move to fully autonomous mode after extensive monitoring and failure mode analysis."
+      "articleBody": "Deploying AI Agents to Production Deploying AI Agents to Production Deploying AI Agents to Production Deploying AI Agents to Production Deploying AI Agents to Production Introduction AI agents that autonomously execute multi-step tasks are transitioning from experimental prototypes to production systems. Unlike traditional API calls, agents make decisions, use tools, and interact with external systems--introducing new challenges around reliability, cost, safety, and observability. This article covers the patterns and practices needed to deploy AI agents safely and efficiently. Agent Orchestration Production agents typically follow a structured execution loop: import asyncio from typing import List, Optional from dataclasses import dataclass, field @dataclass class AgentContext: task: str max_steps: int = 20 current_step: int = 0 history: List[dict] = field(default_factory=list) tools_used: List[str] = field(default_factory=list) total_cost: float = 0.0 class AgentOrchestrator: def __init__(self, model: str = \"claude-sonnet-4-20260512\"): self.model = model self.max_retries = 3 self.cost_per_token = {\"input\": 0.000003, \"output\": 0.000015} async def run(self, task: str) -> dict: ctx = AgentContext(task=task) while ctx.current_step ctx.current_step += 1 try: 1\\\\\\\\. Think: decide next action action = await self.think(ctx) 2\\\\\\\\. Act: execute tool or respond if action[\"type\"] == \"tool_call\": result = await self.execute_tool(action[\"tool\"], action[\"args\"]) ctx.tools_used.append(action[\"tool\"][\"name\"]) elif action[\"type\"] == \"final_answer\": return { \"status\": \"success\", \"answer\": action[\"content\"], \"steps\": ctx.current_step, \"tools_used\": ctx.tools_used, \"total_cost\": ctx.total_cost, } 3\\\\\\\\. Observe: store result ctx.history.append({ \"step\": ctx.current_step, \"action\": action, \"observation\": result, }) 4\\\\\\\\. Cost tracking ctx.total_cost += self._calculate_cost(action) except ToolError as e: Handle tool failures with retry await self.handle_tool_error(ctx, e) except Exception as e: Catch-all for unexpected errors await self.handle_unexpected_error(ctx, e) return {\"status\": \"max_steps_exceeded\", \"steps\": ctx.max_steps} Error Handling and Retry Logic Agents must gracefully handle failures across multiple dimensions: class AgentErrorHandler: def __init__(self): self.retry_policies = { \"rate_limit\": RetryPolicy(max_retries=5, backoff=\"exponential\"), \"timeout\": RetryPolicy(max_retries=3, backoff=\"linear\"), \"auth_error\": RetryPolicy(max_retries=1, backoff=\"none\"), \"tool_crash\": RetryPolicy(max_retries=2, backoff=\"constant\"), } async def execute_with_retry(self, tool_call: dict) -> dict: policy = self._get_policy(tool_call[\"tool\"][\"name\"]) for attempt in range(policy.max_retries): try: return await self._execute_tool(tool_call) except RateLimitError as e: wait = self._calculate_backoff(attempt, policy.backoff, e.reset_at) await self._log_retry(tool_call, attempt, wait) await asyncio.sleep(wait) except TimeoutError: if attempt == policy.max_retries - 1: return self._graceful_degradation(tool_call) await asyncio.sleep(policy.backoff_delay * (attempt + 1)) except AuthError: await self._refresh_credentials(tool_call[\"tool\"][\"name\"]) continue return {\"error\": \"max_retries_exceeded\", \"tool\": tool_call[\"tool\"][\"name\"]} def _graceful_degradation(self, tool_call: dict) -> dict: \"\"\"Return a safe default when a tool is unavailable.\"\"\" return { \"status\": \"unavailable\", \"message\": f\"{tool_call['tool']['name']} is temporarily unavailable\", \"suggestion\": \"Try again later or use an alternative approach\", } Human-in-the-Loop Critical agent actions require human approval before execution: class HumanInTheLoop: def __init__(self, approval_thresholds: dict): self.thresholds = approval_thresholds self.pending_approvals = {} async def request_approval( self, action: dict, context: AgentContext ) -> bool: Determine if approval is needed if not self._requires_approval(action): return True approval_id = str(uuid.uuid4()) self.pending_approvals[approval_id] = { \"action\": action, \"context\": context, \"status\": \"pending\", \"created_at\": datetime.utcnow(), } Notify human reviewer await self._notify_reviewer( approval_id=approval_id, action_description=action[\"description\"], risk_level=action.get(\"risk\", \"low\"), current_state=context.history[-3:], ) Wait for approval (with timeout) try: approved = await self._wait_for_approval(approval_id, timeout=300) self.pending_approvals[approval_id][\"status\"] = ( \"approved\" if approved else \"rejected\" ) return approved except TimeoutError: self.pending_approvals[approval_id][\"status\"] = \"timed_out\" return False def _requires_approval(self, action: dict) -> bool: return any([ action.get(\"risk\") in self.thresholds.get(\"high_risk_actions\", []), action[\"tool\"].get(\"name\") in self.thresholds.get(\"protected_tools\", []), action.get(\"amount\", 0) > self.thresholds.get(\"max_amount\", 1000), action.get(\"destructive\", False), ]) Monitoring Agent Behavior Track agent decisions and outcomes with structured telemetry: class AgentTelemetry: def __init__(self): self.metrics = MetricsClient() self.tracer = Tracer() def record_step(self, ctx: AgentContext, action: dict, observation: dict): span = self.tracer.start_span(\"agent_step\") span.set_attributes({ \"agent.step\": ctx.current_step, \"agent.task_hash\": hash(ctx.task), \"action.type\": action[\"type\"], \"action.tool\": action.get(\"tool\", {}).get(\"name\", \"none\"), \"action.duration_ms\": action.get(\"duration_ms\", 0), \"observation.status\": observation.get(\"status\", \"unknown\"), }) self.metrics.histogram( \"agent.step.duration\", value=action.get(\"duration_ms\", 0), tags={ \"tool\": action.get(\"tool\", {}).get(\"name\", \"none\"), \"status\": observation.get(\"status\", \"unknown\"), }, ) span.end() def detect_anomalies(self, ctx: AgentContext) -> List[str]: warnings = [] Looping detection recent_actions = [h[\"action\"][\"tool\"][\"name\"] for h in ctx.history[-10:]] if len(set(recent_actions)) = 5: warnings.append(\"POSSIBLE_LOOP\") Cost anomaly if ctx.total_cost > 0.50: warnings.append(\"HIGH_COST\") Token usage total_tokens = sum( h[\"action\"].get(\"tokens\", 0) for h in ctx.history ) if total_tokens > 50000: warnings.append(\"HIGH_TOKEN_USAGE\") return warnings Cost Tracking and Rate Limiting class AgentCostManager: def __init__(self, daily_budget: float = 10.0): self.daily_budget = daily_budget self.daily_spend = 0.0 self.token_buckets = {} async def check_budget(self, estimated_cost: float) -> bool: Reset daily counter if self._is_new_day(): self.daily_spend = 0.0 if self.daily_spend + estimated_cost > self.daily_budget: return False # Budget exceeded self.daily_spend += estimated_cost return True async def rate_limit_check(self, tool: str) -> bool: bucket = self.token_buckets.get(tool, TokenBucket( capacity=10, refill_rate=1, refill_interval=60 )) return bucket.consume() Observability Log agent decision traces for debugging and audit: { \"timestamp\": \"2026-05-12T10:30:00Z\", \"agent_id\": \"agent-payment-v3\", \"session_id\": \"sess_abc123\", \"step\": 4, \"action\": { \"type\": \"tool_call\", \"tool\": \"stripe_charge\", \"args\": {\"amount\": 49.99, \"currency\": \"usd\"}, \"reasoning\": \"Customer requested payment for order ord-789\" }, \"observation\": { \"status\": \"success\", \"charge_id\": \"ch_xyz456\", \"duration_ms\": 234 }, \"cost\": { \"input_tokens\": 1245, \"output_tokens\": 89, \"estimated_cost\": 0.005 }, \"warnings\": [] } Deploy agents incrementally: start with read-only tools, add human-in-the-loop for destructive actions, and only move to fully autonomous mode after extensive monitoring and failure mode analysis."
     }
     </script>
     <script type="application/ld+json">
@@ -77,443 +77,3109 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-agents-production.png" alt="Deploying AI Agents to Production" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Deploying AI Agents to Production</h1>
 <br>
+<h1>Deploying AI Agents to Production</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>Deploying AI Agents to Production</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Deploying AI Agents to Production</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Deploying AI Agents to Production</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>AI agents that autonomously execute multi-step tasks are transitioning from experimental prototypes to production systems. Unlike traditional API calls, agents make decisions, use tools, and interact with external systems--introducing new challenges around reliability, cost, safety, and observability. This article covers the patterns and practices needed to deploy AI agents safely and efficiently.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Agent Orchestration</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Production agents typically follow a structured execution loop:</p>
 <br>
-<p>    import asyncio</p>
 <br>
-<p>    from typing import List, Optional</p>
 <br>
-<p>    from dataclasses import dataclass, field</p>
 <br>
-<p>    @dataclass</p>
 <br>
-<p>    class AgentContext:</p>
 <br>
-<p>        task: str</p>
 <br>
-<p>        max_steps: int = 20</p>
 <br>
-<p>        current_step: int = 0</p>
 <br>
-<p>        history: List[dict] = field(default_factory=list)</p>
 <br>
-<p>        tools_used: List[str] = field(default_factory=list)</p>
 <br>
-<p>        total_cost: float = 0.0</p>
 <br>
-<p>    class AgentOrchestrator:</p>
 <br>
-<p>        def __init__(self, model: str = "claude-sonnet-4-20260512"):</p>
+<p>import asyncio</p>
 <br>
-<p>            self.model = model</p>
 <br>
-<p>            self.max_retries = 3</p>
 <br>
-<p>            self.cost_per_token = {"input": 0.000003, "output": 0.000015}</p>
 <br>
-<p>        async def run(self, task: str) -> dict:</p>
 <br>
-<p>            ctx = AgentContext(task=task)</p>
 <br>
-<p>            while ctx.current_step < ctx.max_steps:</p>
 <br>
-<p>                ctx.current_step += 1</p>
 <br>
-<p>                try:</p>
 <br>
-<p>                    # 1. Think: decide next action</p>
 <br>
-<p>                    action = await self.think(ctx)</p>
 <br>
-<p>                    # 2. Act: execute tool or respond</p>
 <br>
-<p>                    if action["type"] == "tool_call":</p>
 <br>
-<p>                        result = await self.execute_tool(action["tool"], action["args"])</p>
+<p>from typing import List, Optional</p>
 <br>
-<p>                        ctx.tools_used.append(action["tool"]["name"])</p>
 <br>
-<p>                    elif action["type"] == "final_answer":</p>
 <br>
-<p>                        return {</p>
 <br>
-<p>                            "status": "success",</p>
 <br>
-<p>                            "answer": action["content"],</p>
 <br>
-<p>                            "steps": ctx.current_step,</p>
 <br>
-<p>                            "tools_used": ctx.tools_used,</p>
 <br>
-<p>                            "total_cost": ctx.total_cost,</p>
 <br>
-<p>                        }</p>
 <br>
-<p>                    # 3. Observe: store result</p>
 <br>
-<p>                    ctx.history.append({</p>
 <br>
-<p>                        "step": ctx.current_step,</p>
 <br>
-<p>                        "action": action,</p>
+<p>from dataclasses import dataclass, field</p>
 <br>
-<p>                        "observation": result,</p>
 <br>
-<p>                    })</p>
 <br>
-<p>                    # 4. Cost tracking</p>
 <br>
-<p>                    ctx.total_cost += self._calculate_cost(action)</p>
 <br>
-<p>                except ToolError as e:</p>
 <br>
-<p>                    # Handle tool failures with retry</p>
 <br>
-<p>                    await self.handle_tool_error(ctx, e)</p>
 <br>
-<p>                except Exception as e:</p>
 <br>
-<p>                    # Catch-all for unexpected errors</p>
 <br>
-<p>                    await self.handle_unexpected_error(ctx, e)</p>
 <br>
-<p>            return {"status": "max_steps_exceeded", "steps": ctx.max_steps}</p>
+<br>
+<br>
+<p>@dataclass</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class AgentContext:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>task: str</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>max_steps: int = 20</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>current_step: int = 0</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>history: List[dict] = field(default_factory=list)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tools_used: List[str] = field(default_factory=list)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>total_cost: float = 0.0</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class AgentOrchestrator:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def __init__(self, model: str = "claude-sonnet-4-20260512"):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.model = model</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.max_retries = 3</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.cost_per_token = {"input": 0.000003, "output": 0.000015}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def run(self, task: str) -> dict:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ctx = AgentContext(task=task)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>while ctx.current_step < ctx.max_steps:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ctx.current_step += 1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>try:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>1\\\\. Think: decide next action</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>action = await self.think(ctx)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>2\\\\. Act: execute tool or respond</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if action["type"] == "tool_call":</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>result = await self.execute_tool(action["tool"], action["args"])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ctx.tools_used.append(action["tool"]["name"])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>elif action["type"] == "final_answer":</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"status": "success",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"answer": action["content"],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"steps": ctx.current_step,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"tools_used": ctx.tools_used,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"total_cost": ctx.total_cost,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>3\\\\. Observe: store result</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ctx.history.append({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"step": ctx.current_step,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"action": action,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"observation": result,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>})</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>4\\\\. Cost tracking</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ctx.total_cost += self._calculate_cost(action)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except ToolError as e:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Handle tool failures with retry</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await self.handle_tool_error(ctx, e)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except Exception as e:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Catch-all for unexpected errors</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await self.handle_unexpected_error(ctx, e)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return {"status": "max_steps_exceeded", "steps": ctx.max_steps}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Error Handling and Retry Logic</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Agents must gracefully handle failures across multiple dimensions:</p>
 <br>
-<p>    class AgentErrorHandler:</p>
 <br>
-<p>        def __init__(self):</p>
 <br>
-<p>            self.retry_policies = {</p>
 <br>
-<p>                "rate_limit": RetryPolicy(max_retries=5, backoff="exponential"),</p>
 <br>
-<p>                "timeout": RetryPolicy(max_retries=3, backoff="linear"),</p>
 <br>
-<p>                "auth_error": RetryPolicy(max_retries=1, backoff="none"),</p>
 <br>
-<p>                "tool_crash": RetryPolicy(max_retries=2, backoff="constant"),</p>
 <br>
-<p>            }</p>
 <br>
-<p>        async def execute_with_retry(self, tool_call: dict) -> dict:</p>
 <br>
-<p>            policy = self._get_policy(tool_call["tool"]["name"])</p>
 <br>
-<p>            for attempt in range(policy.max_retries):</p>
 <br>
-<p>                try:</p>
 <br>
-<p>                    return await self._execute_tool(tool_call)</p>
+<p>class AgentErrorHandler:</p>
 <br>
-<p>                except RateLimitError as e:</p>
 <br>
-<p>                    wait = self._calculate_backoff(attempt, policy.backoff, e.reset_at)</p>
 <br>
-<p>                    await self._log_retry(tool_call, attempt, wait)</p>
 <br>
-<p>                    await asyncio.sleep(wait)</p>
 <br>
-<p>                except TimeoutError:</p>
 <br>
-<p>                    if attempt == policy.max_retries - 1:</p>
 <br>
-<p>                        return self._graceful_degradation(tool_call)</p>
 <br>
-<p>                    await asyncio.sleep(policy.backoff_delay * (attempt + 1))</p>
 <br>
-<p>                except AuthError:</p>
 <br>
-<p>                    await self._refresh_credentials(tool_call["tool"]["name"])</p>
 <br>
-<p>                    continue</p>
 <br>
-<p>            return {"error": "max_retries_exceeded", "tool": tool_call["tool"]["name"]}</p>
 <br>
-<p>        def _graceful_degradation(self, tool_call: dict) -> dict:</p>
+<p>def __init__(self):</p>
 <br>
-<p>            """Return a safe default when a tool is unavailable."""</p>
 <br>
-<p>            return {</p>
 <br>
-<p>                "status": "unavailable",</p>
 <br>
-<p>                "message": f"{tool_call['tool']['name']} is temporarily unavailable",</p>
 <br>
-<p>                "suggestion": "Try again later or use an alternative approach",</p>
 <br>
-<p>            }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.retry_policies = {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"rate_limit": RetryPolicy(max_retries=5, backoff="exponential"),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"timeout": RetryPolicy(max_retries=3, backoff="linear"),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"auth_error": RetryPolicy(max_retries=1, backoff="none"),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"tool_crash": RetryPolicy(max_retries=2, backoff="constant"),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def execute_with_retry(self, tool_call: dict) -> dict:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>policy = self._get_policy(tool_call["tool"]["name"])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for attempt in range(policy.max_retries):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>try:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return await self._execute_tool(tool_call)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except RateLimitError as e:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>wait = self._calculate_backoff(attempt, policy.backoff, e.reset_at)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await self._log_retry(tool_call, attempt, wait)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await asyncio.sleep(wait)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except TimeoutError:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if attempt == policy.max_retries - 1:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return self._graceful_degradation(tool_call)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await asyncio.sleep(policy.backoff_delay * (attempt + 1))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except AuthError:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await self._refresh_credentials(tool_call["tool"]["name"])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>continue</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return {"error": "max_retries_exceeded", "tool": tool_call["tool"]["name"]}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def _graceful_degradation(self, tool_call: dict) -> dict:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"""Return a safe default when a tool is unavailable."""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"status": "unavailable",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"message": f"{tool_call['tool']['name']} is temporarily unavailable",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"suggestion": "Try again later or use an alternative approach",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Human-in-the-Loop</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Critical agent actions require human approval before execution:</p>
 <br>
-<p>    class HumanInTheLoop:</p>
 <br>
-<p>        def __init__(self, approval_thresholds: dict):</p>
 <br>
-<p>            self.thresholds = approval_thresholds</p>
 <br>
-<p>            self.pending_approvals = {}</p>
 <br>
-<p>        async def request_approval(</p>
 <br>
-<p>            self, action: dict, context: AgentContext</p>
 <br>
-<p>        ) -> bool:</p>
 <br>
-<p>            # Determine if approval is needed</p>
 <br>
-<p>            if not self._requires_approval(action):</p>
 <br>
-<p>                return True</p>
 <br>
-<p>            approval_id = str(uuid.uuid4())</p>
 <br>
-<p>            self.pending_approvals[approval_id] = {</p>
 <br>
-<p>                "action": action,</p>
+<p>class HumanInTheLoop:</p>
 <br>
-<p>                "context": context,</p>
 <br>
-<p>                "status": "pending",</p>
 <br>
-<p>                "created_at": datetime.utcnow(),</p>
 <br>
-<p>            }</p>
 <br>
-<p>            # Notify human reviewer</p>
 <br>
-<p>            await self._notify_reviewer(</p>
 <br>
-<p>                approval_id=approval_id,</p>
 <br>
-<p>                action_description=action["description"],</p>
 <br>
-<p>                risk_level=action.get("risk", "low"),</p>
 <br>
-<p>                current_state=context.history[-3:],</p>
 <br>
-<p>            )</p>
 <br>
-<p>            # Wait for approval (with timeout)</p>
 <br>
-<p>            try:</p>
+<p>def __init__(self, approval_thresholds: dict):</p>
 <br>
-<p>                approved = await self._wait_for_approval(approval_id, timeout=300)</p>
 <br>
-<p>                self.pending_approvals[approval_id]["status"] = (</p>
 <br>
-<p>                    "approved" if approved else "rejected"</p>
 <br>
-<p>                )</p>
 <br>
-<p>                return approved</p>
 <br>
-<p>            except TimeoutError:</p>
 <br>
-<p>                self.pending_approvals[approval_id]["status"] = "timed_out"</p>
 <br>
-<p>                return False</p>
 <br>
-<p>        def _requires_approval(self, action: dict) -> bool:</p>
 <br>
-<p>            return any([</p>
 <br>
-<p>                action.get("risk") in self.thresholds.get("high_risk_actions", []),</p>
 <br>
-<p>                action["tool"].get("name") in self.thresholds.get("protected_tools", []),</p>
 <br>
-<p>                action.get("amount", 0) > self.thresholds.get("max_amount", 1000),</p>
+<p>self.thresholds = approval_thresholds</p>
 <br>
-<p>                action.get("destructive", False),</p>
 <br>
-<p>            ])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.pending_approvals = {}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def request_approval(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self, action: dict, context: AgentContext</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>) -> bool:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Determine if approval is needed</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if not self._requires_approval(action):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return True</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>approval_id = str(uuid.uuid4())</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.pending_approvals[approval_id] = {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"action": action,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"context": context,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"status": "pending",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"created_at": datetime.utcnow(),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Notify human reviewer</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>await self._notify_reviewer(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>approval_id=approval_id,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>action_description=action["description"],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>risk_level=action.get("risk", "low"),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>current_state=context.history[-3:],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Wait for approval (with timeout)</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>try:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>approved = await self._wait_for_approval(approval_id, timeout=300)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.pending_approvals[approval_id]["status"] = (</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"approved" if approved else "rejected"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return approved</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>except TimeoutError:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.pending_approvals[approval_id]["status"] = "timed_out"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return False</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def _requires_approval(self, action: dict) -> bool:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return any([</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>action.get("risk") in self.thresholds.get("high_risk_actions", []),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>action["tool"].get("name") in self.thresholds.get("protected_tools", []),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>action.get("amount", 0) > self.thresholds.get("max_amount", 1000),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>action.get("destructive", False),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Monitoring Agent Behavior</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Track agent decisions and outcomes with structured telemetry:</p>
 <br>
-<p>    class AgentTelemetry:</p>
 <br>
-<p>        def __init__(self):</p>
 <br>
-<p>            self.metrics = MetricsClient()</p>
 <br>
-<p>            self.tracer = Tracer()</p>
 <br>
-<p>        def record_step(self, ctx: AgentContext, action: dict, observation: dict):</p>
 <br>
-<p>            span = self.tracer.start_span("agent_step")</p>
 <br>
-<p>            span.set_attributes({</p>
 <br>
-<p>                "agent.step": ctx.current_step,</p>
 <br>
-<p>                "agent.task_hash": hash(ctx.task),</p>
 <br>
-<p>                "action.type": action["type"],</p>
 <br>
-<p>                "action.tool": action.get("tool", {}).get("name", "none"),</p>
 <br>
-<p>                "action.duration_ms": action.get("duration_ms", 0),</p>
 <br>
-<p>                "observation.status": observation.get("status", "unknown"),</p>
+<p>class AgentTelemetry:</p>
 <br>
-<p>            })</p>
 <br>
-<p>            self.metrics.histogram(</p>
 <br>
-<p>                "agent.step.duration",</p>
 <br>
-<p>                value=action.get("duration_ms", 0),</p>
 <br>
-<p>                tags={</p>
 <br>
-<p>                    "tool": action.get("tool", {}).get("name", "none"),</p>
 <br>
-<p>                    "status": observation.get("status", "unknown"),</p>
 <br>
-<p>                },</p>
 <br>
-<p>            )</p>
 <br>
-<p>            span.end()</p>
 <br>
-<p>        def detect_anomalies(self, ctx: AgentContext) -> List[str]:</p>
 <br>
-<p>            warnings = []</p>
 <br>
-<p>            # Looping detection</p>
+<p>def __init__(self):</p>
 <br>
-<p>            recent_actions = [h["action"]["tool"]["name"]</p>
 <br>
-<p>                              for h in ctx.history[-10:]]</p>
 <br>
-<p>            if len(set(recent_actions)) < 3 and len(recent_actions) >= 5:</p>
 <br>
-<p>                warnings.append("POSSIBLE_LOOP")</p>
 <br>
-<p>            # Cost anomaly</p>
 <br>
-<p>            if ctx.total_cost > 0.50:</p>
 <br>
-<p>                warnings.append("HIGH_COST")</p>
 <br>
-<p>            # Token usage</p>
 <br>
-<p>            total_tokens = sum(</p>
 <br>
-<p>                h["action"].get("tokens", 0) for h in ctx.history</p>
 <br>
-<p>            )</p>
 <br>
-<p>            if total_tokens > 50000:</p>
 <br>
-<p>                warnings.append("HIGH_TOKEN_USAGE")</p>
+<p>self.metrics = MetricsClient()</p>
 <br>
-<p>            return warnings</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.tracer = Tracer()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def record_step(self, ctx: AgentContext, action: dict, observation: dict):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>span = self.tracer.start_span("agent_step")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>span.set_attributes({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"agent.step": ctx.current_step,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"agent.task_hash": hash(ctx.task),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"action.type": action["type"],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"action.tool": action.get("tool", {}).get("name", "none"),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"action.duration_ms": action.get("duration_ms", 0),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"observation.status": observation.get("status", "unknown"),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>})</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.metrics.histogram(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"agent.step.duration",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>value=action.get("duration_ms", 0),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tags={</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"tool": action.get("tool", {}).get("name", "none"),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"status": observation.get("status", "unknown"),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>span.end()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def detect_anomalies(self, ctx: AgentContext) -> List[str]:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>warnings = []</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Looping detection</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>recent_actions = [h["action"]["tool"]["name"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for h in ctx.history[-10:]]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if len(set(recent_actions)) < 3 and len(recent_actions) >= 5:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>warnings.append("POSSIBLE_LOOP")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Cost anomaly</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if ctx.total_cost > 0.50:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>warnings.append("HIGH_COST")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Token usage</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>total_tokens = sum(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>h["action"].get("tokens", 0) for h in ctx.history</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if total_tokens > 50000:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>warnings.append("HIGH_TOKEN_USAGE")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return warnings</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Cost Tracking and Rate Limiting</h2>
 <br>
-<p>    class AgentCostManager:</p>
 <br>
-<p>        def __init__(self, daily_budget: float = 10.0):</p>
 <br>
-<p>            self.daily_budget = daily_budget</p>
 <br>
-<p>            self.daily_spend = 0.0</p>
 <br>
-<p>            self.token_buckets = {}</p>
 <br>
-<p>        async def check_budget(self, estimated_cost: float) -> bool:</p>
 <br>
-<p>            # Reset daily counter</p>
 <br>
-<p>            if self._is_new_day():</p>
 <br>
-<p>                self.daily_spend = 0.0</p>
 <br>
-<p>            if self.daily_spend + estimated_cost > self.daily_budget:</p>
 <br>
-<p>                return False  # Budget exceeded</p>
 <br>
-<p>            self.daily_spend += estimated_cost</p>
 <br>
-<p>            return True</p>
+<p>class AgentCostManager:</p>
 <br>
-<p>        async def rate_limit_check(self, tool: str) -> bool:</p>
 <br>
-<p>            bucket = self.token_buckets.get(tool, TokenBucket(</p>
 <br>
-<p>                capacity=10,</p>
 <br>
-<p>                refill_rate=1,</p>
 <br>
-<p>                refill_interval=60</p>
 <br>
-<p>            ))</p>
 <br>
-<p>            return bucket.consume()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def __init__(self, daily_budget: float = 10.0):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.daily_budget = daily_budget</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.daily_spend = 0.0</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.token_buckets = {}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def check_budget(self, estimated_cost: float) -> bool:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Reset daily counter</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if self._is_new_day():</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.daily_spend = 0.0</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if self.daily_spend + estimated_cost > self.daily_budget:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return False # Budget exceeded</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.daily_spend += estimated_cost</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return True</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def rate_limit_check(self, tool: str) -> bool:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>bucket = self.token_buckets.get(tool, TokenBucket(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>capacity=10,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>refill_rate=1,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>refill_interval=60</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return bucket.consume()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Observability</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Log agent decision traces for debugging and audit:</p>
 <br>
-<p>    {</p>
 <br>
-<p>      "timestamp": "2026-05-12T10:30:00Z",</p>
 <br>
-<p>      "agent_id": "agent-payment-v3",</p>
 <br>
-<p>      "session_id": "sess_abc123",</p>
 <br>
-<p>      "step": 4,</p>
 <br>
-<p>      "action": {</p>
 <br>
-<p>        "type": "tool_call",</p>
 <br>
-<p>        "tool": "stripe_charge",</p>
 <br>
-<p>        "args": {"amount": 49.99, "currency": "usd"},</p>
 <br>
-<p>        "reasoning": "Customer requested payment for order ord-789"</p>
 <br>
-<p>      },</p>
 <br>
-<p>      "observation": {</p>
 <br>
-<p>        "status": "success",</p>
+<p>{</p>
 <br>
-<p>        "charge_id": "ch_xyz456",</p>
 <br>
-<p>        "duration_ms": 234</p>
 <br>
-<p>      },</p>
 <br>
-<p>      "cost": {</p>
 <br>
-<p>        "input_tokens": 1245,</p>
 <br>
-<p>        "output_tokens": 89,</p>
 <br>
-<p>        "estimated_cost": 0.005</p>
 <br>
-<p>      },</p>
 <br>
-<p>      "warnings": []</p>
 <br>
-<p>    }</p>
+<br>
+<br>
+<br>
+<p>"timestamp": "2026-05-12T10:30:00Z",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"agent_id": "agent-payment-v3",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"session_id": "sess_abc123",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"step": 4,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"action": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"type": "tool_call",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"tool": "stripe_charge",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"args": {"amount": 49.99, "currency": "usd"},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"reasoning": "Customer requested payment for order ord-789"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"observation": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"status": "success",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"charge_id": "ch_xyz456",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"duration_ms": 234</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"cost": {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"input_tokens": 1245,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"output_tokens": 89,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"estimated_cost": 0.005</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"warnings": []</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Deploy agents incrementally: start with read-only tools, add human-in-the-loop for destructive actions, and only move to fully autonomous mode after extensive monitoring and failure mode analysis.</p></div>
     </article>
@@ -527,9 +3193,15 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a><a href="/en/ai/ai-security-complete-guide.html" class="related-card">AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026</a></div>
-      <noscript><div class="related-grid"><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a><a href="/en/ai/ai-security-complete-guide.html" class="related-card">AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026</a></div></noscript>
+      <div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
+    </section>
+    
+    <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
+      <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
+      <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
+      <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
   </div>
 </main>

@@ -22,7 +22,7 @@ How you style your app affects development speed, bundle size, and long-term mai
 **Pre-built components**|  None (buy or build)| Yes (basic set)| Yes (comprehensive)  
 **Design consistency**|  Your responsibility| Built-in (looks like Bootstrap)| Built-in (Material Design)  
 **Ecosystem**|  Headless UI, shadcn/ui, daisyUI| Bootstrap themes, snippets| MUI X (advanced components)  
-
+  
 ## Tailwind CSS — Maximum Control, Zero Opinion
 
 Tailwind gives you atomic utility classes (flex, pt-4, text-lg) instead of pre-built components. The result is complete design freedom with less CSS. Combined with component libraries like shadcn/ui, you get beautifully designed, copy-paste React components built on Tailwind primitives.
@@ -63,5 +63,5 @@ Data-heavy React dashboard| **MUI**
 Framework-agnostic, clean sites| **Bootstrap**  
 Modern component architecture| **shadcn/ui (on Tailwind)**  
 Maximum performance| **Tailwind CSS** (smallest bundle)  
-
+  
 **Bottom line:** In 2026, Tailwind CSS + shadcn/ui is the dominant stack for new projects — it gives you custom design with copy-paste components. Bootstrap is still king for quick internal tools. MUI for React data-heavy apps. See our [design tools guide](</en/tools/design-tools-for-developers.html>) for the full visual stack.

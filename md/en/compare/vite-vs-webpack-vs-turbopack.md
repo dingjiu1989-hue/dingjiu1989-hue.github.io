@@ -22,7 +22,7 @@ Your build tool directly affects how fast you iterate. Slow builds kill develope
 **Plugin ecosystem**|  Large (growing daily)| Massive (most mature)| Small (compatible with Webpack?)  
 **Framework support**|  Vue, React, Svelte, Solid, etc.| Everything| Next.js (only, currently)  
 **CSS**|  PostCSS, CSS Modules| Everything| CSS Modules, PostCSS  
-
+  
 ## Vite — The Modern Default
 
 Vite leverages native ES modules during development: the dev server starts instantly (no bundling), and HMR is near-instant even on large projects. For production, it uses Rollup. Created by Vue's Evan You, Vite has become the default build tool for most new frontend projects.
@@ -63,5 +63,5 @@ Next.js project (new)| **Turbopack** (built-in)
 Highly customized build| **Webpack**  
 Fastest possible dev experience| **Vite**  
 Maximum framework/framework-agnostic| **Vite**  
-
+  
 **Bottom line:** Vite is the default for any new project in 2026. Webpack for existing projects where migration isn't worth it. Turbopack if you're on Next.js and want the fastest builds. See also: [framework comparison](</en/compare/react-vs-vue-vs-angular-vs-svelte.html>) and [meta-framework comparison](</en/compare/nextjs-vs-nuxt-vs-sveltekit.html>).

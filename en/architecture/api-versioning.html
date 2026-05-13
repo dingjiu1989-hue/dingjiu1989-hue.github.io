@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/api-versioning.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1461",
+      "wordCount": "2176",
       "keywords": "Architecture, System Design",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/api-versioning.html"},
-      "articleBody": "API Versioning Strategies APIs evolve. New features are added, existing endpoints change, and eventually, breaking changes are unavoidable. API versioning is the practice of managing these changes without breaking existing clients. This article covers the major versioning strategies and when to use each. The Core Challenge Once an API is public, changing it is risky. A client might depend on the current response format, and changing it could break the client's application. Versioning gives clients a choice: stay on the old version or upgrade to the new one. Ideally, changes are backward compatible -- adding fields, relaxing validation, or extending functionality. But sometimes breaking changes are necessary: removing a field, changing a data type, or restructuring an endpoint. URL Path Versioning The most common and straightforward approach: /api/v1/users /api/v2/users **Pros:** * Extremely simple to implement and understand. * Easy to route at the proxy or load balancer level. * Visible and explicit -- clients can see the version they are using. * Easy to test different versions. **Cons:** * URL pollution -- the version is part of the resource identifier, which some argue violates REST principles. * Difficult to manage granular versioning (versioning one endpoint without versioning others). * Clients tend to hardcode the version in URLs, making upgrades less frequent. **Best for:** Public APIs where simplicity and discoverability are priorities. Used by Twitter, Stripe, and GitHub. Query Parameter Versioning Include the version as a query parameter: /api/users?version=1 /api/users?version=2 **Pros:** * Keeps the URL structure clean. * The default (no version) can be the latest version. * Easy to implement on the server side. **Cons:** * Pollutes query parameters. * Easily overlooked by developers. * Caching becomes more complex since the same URL with different query parameters may produce different responses. * Not suitable for proxy-level routing. **Best for:** Internal APIs or APIs where URL cleanliness is a priority over visibility. Header Versioning Include the version in an HTTP header: GET /api/users Accept: application/vnd.myapi.v1+json Or a custom header: GET /api/users X-API-Version: 1 **Pros:** * Keeps URLs clean and RESTful. * The resource is identified by URL, and the representation is negotiated via headers. * Content negotiation is a standard HTTP mechanism. **Cons:** * Hidden -- developers cannot see the version just by looking at the URL. * Harder to test and debug (need to set headers in tools like cURL). * More complex routing at the proxy level. * Web browsers and simple HTTP clients may not support custom headers well. **Best for:** REST purists who want to follow HTTP semantics strictly. Used by GitHub (in the past) and Twilio. Choosing a Strategy | Strategy | Visibility | Complexity | RESTful | Caching | Routing | |----------|------------|------------|---------|---------|---------| | URL Path | High | Low | Moderate | Simple | Simple | | Query Param | Medium | Low | Moderate | Complex | Complex | | Header | Low | Medium | High | Simple | Complex | There is no universally correct choice. Consider your audience: * For public APIs with a broad developer audience, URL path versioning is the safest bet. It is simple, visible, and well-understood. * For internal APIs, any approach works. Query parameter versioning is the simplest to implement. * For RESTful APIs where HTTP semantics matter, header-based versioning aligns with the principles of content negotiation. Semantic Versioning for APIs Apply semantic versioning principles to your API: * **Major version** (v1, v2): Breaking changes that require client updates. * **Minor version** (v1.1): Backward-compatible additions (new endpoints, new optional fields). * **Patch version** (v1.1.1): Bug fixes that do not change the API contract. In practice, most APIs only expose the major version and use minor/patch versions internally for documentation purposes. Supporting Multiple Versions When you support multiple API versions, you need a strategy for maintaining old versions: **Deprecation policy.** Announce deprecation well in advance. Give clients at least 6-12 months to migrate. Include deprecation warnings in response headers: Sunset: Sat, 31 Dec 2026 23:59:59 GMT Deprecation: true **Minimum version support.** Support a minimum number of active versions (typically 2-3). Drop the oldest when a new one is introduced. **Version sunset.** Actually retire old versions. Maintaining versions indefinitely is expensive. Be clear about your timeline and enforce it. Implementation Patterns **Code branching.** Maintain separate code for each version. Simple but leads to code duplication. Use only for small, stable APIs. **Conditional logic.** Single codebase with version checks. More maintainable but can become complex: if version == 1: return serialize_v1(data) elif version == 2: return serialize_v2(data) **Interceptor/middleware.** Transform responses between versions at the middleware layer. Keeps core logic version-agnostic: if request_version == 1: response = transform_to_v1(handler.handle(request)) elif request_version == 2: response = transform_to_v2(handler.handle(request)) **Adapter layer.** Use the adapter pattern to translate between internal models and versioned API responses. The cleanest approach for complex APIs. Avoiding Versioning Altogether The best versioning strategy is not needing one. Design your API to be extensible from the start: * Include optional fields rather than creating new endpoints. * Use field selection (GraphQL or query parameter filters). * Add new endpoints without modifying existing ones. * Return more data than clients need (clients can ignore extra fields). * Use wire-format tolerant data structures (maps instead of fixed objects). GraphQL eliminates many versioning concerns by letting clients specify exactly what they need. Summary API versioning is a practical necessity for evolving APIs. URL path versioning is the most common and practical approach. Support a limited number of versions and communicate deprecation timelines clearly. Design your API to minimize breaking changes through extensibility. When possible, prefer backward-compatible additions over new versions."
+      "articleBody": "API Versioning Strategies API Versioning Strategies API Versioning Strategies API Versioning Strategies APIs evolve. New features are added, existing endpoints change, and eventually, breaking changes are unavoidable. API versioning is the practice of managing these changes without breaking existing clients. This article covers the major versioning strategies and when to use each. The Core Challenge Once an API is public, changing it is risky. A client might depend on the current response format, and changing it could break the client's application. Versioning gives clients a choice: stay on the old version or upgrade to the new one. Ideally, changes are backward compatible -- adding fields, relaxing validation, or extending functionality. But sometimes breaking changes are necessary: removing a field, changing a data type, or restructuring an endpoint. URL Path Versioning The most common and straightforward approach: /api/v1/users /api/v2/users **Pros:** * Extremely simple to implement and understand. * Easy to route at the proxy or load balancer level. * Visible and explicit -- clients can see the version they are using. * Easy to test different versions. **Cons:** * URL pollution -- the version is part of the resource identifier, which some argue violates REST principles. * Difficult to manage granular versioning (versioning one endpoint without versioning others). * Clients tend to hardcode the version in URLs, making upgrades less frequent. **Best for:** Public APIs where simplicity and discoverability are priorities. Used by Twitter, Stripe, and GitHub. Query Parameter Versioning Include the version as a query parameter: /api/users?version=1 /api/users?version=2 **Pros:** * Keeps the URL structure clean. * The default (no version) can be the latest version. * Easy to implement on the server side. **Cons:** * Pollutes query parameters. * Easily overlooked by developers. * Caching becomes more complex since the same URL with different query parameters may produce different responses. * Not suitable for proxy-level routing. **Best for:** Internal APIs or APIs where URL cleanliness is a priority over visibility. Header Versioning Include the version in an HTTP header: GET /api/users Accept: application/vnd.myapi.v1+json Or a custom header: GET /api/users X-API-Version: 1 **Pros:** * Keeps URLs clean and RESTful. * The resource is identified by URL, and the representation is negotiated via headers. * Content negotiation is a standard HTTP mechanism. **Cons:** * Hidden -- developers cannot see the version just by looking at the URL. * Harder to test and debug (need to set headers in tools like cURL). * More complex routing at the proxy level. * Web browsers and simple HTTP clients may not support custom headers well. **Best for:** REST purists who want to follow HTTP semantics strictly. Used by GitHub (in the past) and Twilio. Choosing a Strategy | Strategy | Visibility | Complexity | RESTful | Caching | Routing | |----------|------------|------------|---------|---------|---------| | URL Path | High | Low | Moderate | Simple | Simple | | Query Param | Medium | Low | Moderate | Complex | Complex | | Header | Low | Medium | High | Simple | Complex | There is no universally correct choice. Consider your audience: * For public APIs with a broad developer audience, URL path versioning is the safest bet. It is simple, visible, and well-understood. * For internal APIs, any approach works. Query parameter versioning is the simplest to implement. * For RESTful APIs where HTTP semantics matter, header-based versioning aligns with the principles of content negotiation. Semantic Versioning for APIs Apply semantic versioning principles to your API: * **Major version** (v1, v2): Breaking changes that require client updates. * **Minor version** (v1.1): Backward-compatible additions (new endpoints, new optional fields). * **Patch version** (v1.1.1): Bug fixes that do not change the API contract. In practice, most APIs only expose the major version and use minor/patch versions internally for documentation purposes. Supporting Multiple Versions When you support multiple API versions, you need a strategy for maintaining old versions: **Deprecation policy.** Announce deprecation well in advance. Give clients at least 6-12 months to migrate. Include deprecation warnings in response headers: Sunset: Sat, 31 Dec 2026 23:59:59 GMT Deprecation: true **Minimum version support.** Support a minimum number of active versions (typically 2-3). Drop the oldest when a new one is introduced. **Version sunset.** Actually retire old versions. Maintaining versions indefinitely is expensive. Be clear about your timeline and enforce it. Implementation Patterns **Code branching.** Maintain separate code for each version. Simple but leads to code duplication. Use only for small, stable APIs. **Conditional logic.** Single codebase with version checks. More maintainable but can become complex: if version == 1: return serialize_v1(data) elif version == 2: return serialize_v2(data) **Interceptor/middleware.** Transform responses between versions at the middleware layer. Keeps core logic version-agnostic: if request_version == 1: response = transform_to_v1(handler.handle(request)) elif request_version == 2: response = transform_to_v2(handler.handle(request)) **Adapter layer.** Use the adapter pattern to translate between internal models and versioned API responses. The cleanest approach for complex APIs. Avoiding Versioning Altogether The best versioning strategy is not needing one. Design your API to be extensible from the start: * Include optional fields rather than creating new endpoints. * Use field selection (GraphQL or query parameter filters). * Add new endpoints without modifying existing ones. * Return more data than clients need (clients can ignore extra fields). * Use wire-format tolerant data structures (maps instead of fixed objects). GraphQL eliminates many versioning concerns by letting clients specify exactly what they need. Summary API versioning is a practical necessity for evolving APIs. URL path versioning is the most common and practical approach. Support a limited number of versions and communicate deprecation timelines clearly. Design your API to minimize breaking changes through extensibility. When possible, prefer backward-compatible additions over new versions."
     }
     </script>
     <script type="application/ld+json">
@@ -77,133 +77,861 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/api-versioning.png" alt="API Versioning Strategies" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>API Versioning Strategies</h1>
 <br>
-<p>APIs evolve. New features are added, existing endpoints change, and eventually, breaking changes are unavoidable. API versioning is the practice of managing these changes without breaking existing clients. This article covers the major versioning strategies and when to use each.   </p>
-<p>The Core Challenge   </p>
-<p>Once an API is public, changing it is risky. A client might depend on the current response format, and changing it could break the client's application. Versioning gives clients a choice: stay on the old version or upgrade to the new one.   </p>
-<p>Ideally, changes are backward compatible -- adding fields, relaxing validation, or extending functionality. But sometimes breaking changes are necessary: removing a field, changing a data type, or restructuring an endpoint.   </p>
-<p>URL Path Versioning   </p>
-<p>The most common and straightforward approach:   </p>
+<h1>API Versioning Strategies</h1>
 <br>
-<p>    /api/v1/users</p>
 <br>
-<p>    /api/v2/users</p>
+<br>
+<br>
+<h1>API Versioning Strategies</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>API Versioning Strategies</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>APIs evolve. New features are added, existing endpoints change, and eventually, breaking changes are unavoidable. API versioning is the practice of managing these changes without breaking existing clients. This article covers the major versioning strategies and when to use each. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The Core Challenge </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Once an API is public, changing it is risky. A client might depend on the current response format, and changing it could break the client's application. Versioning gives clients a choice: stay on the old version or upgrade to the new one. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Ideally, changes are backward compatible -- adding fields, relaxing validation, or extending functionality. But sometimes breaking changes are necessary: removing a field, changing a data type, or restructuring an endpoint. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>URL Path Versioning </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The most common and straightforward approach: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>/api/v1/users</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>/api/v2/users</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Pros:**</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Extremely simple to implement and understand.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Easy to route at the proxy or load balancer level.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Visible and explicit -- clients can see the version they are using.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Easy to test different versions.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>**Cons:**</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* URL pollution -- the version is part of the resource identifier, which some argue violates REST principles.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Difficult to manage granular versioning (versioning one endpoint without versioning others).</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Clients tend to hardcode the version in URLs, making upgrades less frequent.</p>
 <br>
-<p>**Best for:** Public APIs where simplicity and discoverability are priorities. Used by Twitter, Stripe, and GitHub.   </p>
-<p>Query Parameter Versioning   </p>
-<p>Include the version as a query parameter:   </p>
 <br>
-<p>    /api/users?version=1</p>
 <br>
-<p>    /api/users?version=2</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Best for:** Public APIs where simplicity and discoverability are priorities. Used by Twitter, Stripe, and GitHub. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Query Parameter Versioning </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Include the version as a query parameter: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>/api/users?version=1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>/api/users?version=2</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Pros:**</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Keeps the URL structure clean.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* The default (no version) can be the latest version.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Easy to implement on the server side.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>**Cons:**</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Pollutes query parameters.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Easily overlooked by developers.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Caching becomes more complex since the same URL with different query parameters may produce different responses.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Not suitable for proxy-level routing.</p>
 <br>
-<p>**Best for:** Internal APIs or APIs where URL cleanliness is a priority over visibility.   </p>
-<p>Header Versioning   </p>
-<p>Include the version in an HTTP header:   </p>
 <br>
-<p>    GET /api/users</p>
 <br>
-<p>    Accept: application/vnd.myapi.v1+json</p>
 <br>
-<p>Or a custom header:   </p>
 <br>
-<p>    GET /api/users</p>
 <br>
-<p>    X-API-Version: 1</p>
+<br>
+<br>
+<br>
+<br>
+<p>**Best for:** Internal APIs or APIs where URL cleanliness is a priority over visibility. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Header Versioning </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Include the version in an HTTP header: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>GET /api/users</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Accept: application/vnd.myapi.v1+json</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Or a custom header: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>GET /api/users</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>X-API-Version: 1</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Pros:**</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Keeps URLs clean and RESTful.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* The resource is identified by URL, and the representation is negotiated via headers.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Content negotiation is a standard HTTP mechanism.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>**Cons:**</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Hidden -- developers cannot see the version just by looking at the URL.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Harder to test and debug (need to set headers in tools like cURL).</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* More complex routing at the proxy level.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Web browsers and simple HTTP clients may not support custom headers well.</p>
 <br>
-<p>**Best for:** REST purists who want to follow HTTP semantics strictly. Used by GitHub (in the past) and Twilio.   </p>
-<p>Choosing a Strategy   </p>
-<p>| Strategy | Visibility | Complexity | RESTful | Caching | Routing | |----------|------------|------------|---------|---------|---------| | URL Path | High | Low | Moderate | Simple | Simple | | Query Param | Medium | Low | Moderate | Complex | Complex | | Header | Low | Medium | High | Simple | Complex |   </p>
-<p>There is no universally correct choice. Consider your audience:   </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Best for:** REST purists who want to follow HTTP semantics strictly. Used by GitHub (in the past) and Twilio. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Choosing a Strategy </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>| Strategy | Visibility | Complexity | RESTful | Caching | Routing | |----------|------------|------------|---------|---------|---------| | URL Path | High | Low | Moderate | Simple | Simple | | Query Param | Medium | Low | Moderate | Complex | Complex | | Header | Low | Medium | High | Simple | Complex | </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>There is no universally correct choice. Consider your audience: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>* For public APIs with a broad developer audience, URL path versioning is the safest bet. It is simple, visible, and well-understood.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* For internal APIs, any approach works. Query parameter versioning is the simplest to implement.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* For RESTful APIs where HTTP semantics matter, header-based versioning aligns with the principles of content negotiation.</p>
 <br>
-<p>Semantic Versioning for APIs   </p>
-<p>Apply semantic versioning principles to your API:   </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Semantic Versioning for APIs </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Apply semantic versioning principles to your API: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>* **Major version** (v1, v2): Breaking changes that require client updates.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Minor version** (v1.1): Backward-compatible additions (new endpoints, new optional fields).</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Patch version** (v1.1.1): Bug fixes that do not change the API contract.</p>
 <br>
-<p>In practice, most APIs only expose the major version and use minor/patch versions internally for documentation purposes.   </p>
-<p>Supporting Multiple Versions   </p>
-<p>When you support multiple API versions, you need a strategy for maintaining old versions:   </p>
-<p>**Deprecation policy.** Announce deprecation well in advance. Give clients at least 6-12 months to migrate. Include deprecation warnings in response headers:   </p>
 <br>
-<p>    Sunset: Sat, 31 Dec 2026 23:59:59 GMT</p>
 <br>
-<p>    Deprecation: true</p>
 <br>
-<p>**Minimum version support.** Support a minimum number of active versions (typically 2-3). Drop the oldest when a new one is introduced.   </p>
-<p>**Version sunset.** Actually retire old versions. Maintaining versions indefinitely is expensive. Be clear about your timeline and enforce it.   </p>
-<p>Implementation Patterns   </p>
-<p>**Code branching.** Maintain separate code for each version. Simple but leads to code duplication. Use only for small, stable APIs.   </p>
-<p>**Conditional logic.** Single codebase with version checks. More maintainable but can become complex:   </p>
 <br>
-<p>    if version == 1:</p>
 <br>
-<p>        return serialize_v1(data)</p>
 <br>
-<p>    elif version == 2:</p>
 <br>
-<p>        return serialize_v2(data)</p>
 <br>
-<p>**Interceptor/middleware.** Transform responses between versions at the middleware layer. Keeps core logic version-agnostic:   </p>
 <br>
-<p>    if request_version == 1:</p>
+<p>In practice, most APIs only expose the major version and use minor/patch versions internally for documentation purposes. </p>
 <br>
-<p>        response = transform_to_v1(handler.handle(request))</p>
 <br>
-<p>    elif request_version == 2:</p>
 <br>
-<p>        response = transform_to_v2(handler.handle(request))</p>
 <br>
-<p>**Adapter layer.** Use the adapter pattern to translate between internal models and versioned API responses. The cleanest approach for complex APIs.   </p>
-<p>Avoiding Versioning Altogether   </p>
-<p>The best versioning strategy is not needing one. Design your API to be extensible from the start:   </p>
+<br>
+<br>
+<br>
+<p>Supporting Multiple Versions </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>When you support multiple API versions, you need a strategy for maintaining old versions: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Deprecation policy.** Announce deprecation well in advance. Give clients at least 6-12 months to migrate. Include deprecation warnings in response headers: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Sunset: Sat, 31 Dec 2026 23:59:59 GMT</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Deprecation: true</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Minimum version support.** Support a minimum number of active versions (typically 2-3). Drop the oldest when a new one is introduced. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Version sunset.** Actually retire old versions. Maintaining versions indefinitely is expensive. Be clear about your timeline and enforce it. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Implementation Patterns </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Code branching.** Maintain separate code for each version. Simple but leads to code duplication. Use only for small, stable APIs. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Conditional logic.** Single codebase with version checks. More maintainable but can become complex: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if version == 1:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return serialize_v1(data)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>elif version == 2:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return serialize_v2(data)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Interceptor/middleware.** Transform responses between versions at the middleware layer. Keeps core logic version-agnostic: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if request_version == 1:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response = transform_to_v1(handler.handle(request))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>elif request_version == 2:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>response = transform_to_v2(handler.handle(request))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>**Adapter layer.** Use the adapter pattern to translate between internal models and versioned API responses. The cleanest approach for complex APIs. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Avoiding Versioning Altogether </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The best versioning strategy is not needing one. Design your API to be extensible from the start: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>* Include optional fields rather than creating new endpoints.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Use field selection (GraphQL or query parameter filters).</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Add new endpoints without modifying existing ones.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Return more data than clients need (clients can ignore extra fields).</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Use wire-format tolerant data structures (maps instead of fixed objects).</p>
 <br>
-<p>GraphQL eliminates many versioning concerns by letting clients specify exactly what they need.   </p>
-<p>Summary   </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>GraphQL eliminates many versioning concerns by letting clients specify exactly what they need. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Summary </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>API versioning is a practical necessity for evolving APIs. URL path versioning is the most common and practical approach. Support a limited number of versions and communicate deprecation timelines clearly. Design your API to minimize breaking changes through extensibility. When possible, prefer backward-compatible additions over new versions.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -220,6 +948,7 @@
       <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

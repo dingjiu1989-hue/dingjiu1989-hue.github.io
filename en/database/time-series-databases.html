@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/time-series-databases.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "390",
+      "wordCount": "647",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/time-series-databases.html"},
-      "articleBody": "Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time-Series Data Time-series data is a sequence of data points indexed by time. Examples include server metrics, IoT sensor readings, and financial tick data. Database Comparison | Feature | InfluxDB | TimescaleDB | QuestDB | |---------|----------|-------------|---------| | Architecture | Custom TS engine | PostgreSQL extension | Columnar | | SQL | Flux / SQL | Full SQL | SQL | | Write throughput | Very high | High | Very high | | Compression | Excellent | Good | Excellent | InfluxDB Purpose-built time-series with automatic downsampling: from influxdb_client import InfluxDBClient client = InfluxDBClient(url=\"http://localhost:8086\", token=\"my-token\") write_api = client.write_api() p = Point(\"cpu\").tag(\"host\", \"server01\").field(\"usage_user\", 45.2) write_api.write(bucket=\"metrics\", record=p) TimescaleDB PostgreSQL extension with hypertables: CREATE TABLE sensor_data ( time TIMESTAMPTZ NOT NULL, device_id INTEGER, temperature DOUBLE PRECISION ); SELECT create_hypertable('sensor_data', 'time'); SELECT time_bucket('5m', time) AS bucket, AVG(temperature) FROM sensor_data WHERE time > NOW() - INTERVAL '24h' GROUP BY bucket; Performance For 1 billion rows, QuestDB and InfluxDB lead on write throughput. TimescaleDB wins on SQL compatibility. Choose based on your query patterns and ecosystem requirements. Conclusion Choose InfluxDB for purpose-built time-series, TimescaleDB for SQL compatibility, and QuestDB for maximum performance. All support downsampling and retention policies."
+      "articleBody": "Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time-Series Data Time-series data is a sequence of data points indexed by time. Examples include server metrics, IoT sensor readings, and financial tick data. Database Comparison | Feature | InfluxDB | TimescaleDB | QuestDB | |---------|----------|-------------|---------| | Architecture | Custom TS engine | PostgreSQL extension | Columnar | | SQL | Flux / SQL | Full SQL | SQL | | Write throughput | Very high | High | Very high | | Compression | Excellent | Good | Excellent | InfluxDB Purpose-built time-series with automatic downsampling: from influxdb_client import InfluxDBClient client = InfluxDBClient(url=\"http://localhost:8086\", token=\"my-token\") write_api = client.write_api() p = Point(\"cpu\").tag(\"host\", \"server01\").field(\"usage_user\", 45.2) write_api.write(bucket=\"metrics\", record=p) TimescaleDB PostgreSQL extension with hypertables: CREATE TABLE sensor_data ( time TIMESTAMPTZ NOT NULL, device_id INTEGER, temperature DOUBLE PRECISION ); SELECT create_hypertable('sensor_data', 'time'); SELECT time_bucket('5m', time) AS bucket, AVG(temperature) FROM sensor_data WHERE time > NOW() - INTERVAL '24h' GROUP BY bucket; Performance For 1 billion rows, QuestDB and InfluxDB lead on write throughput. TimescaleDB wins on SQL compatibility. Choose based on your query patterns and ecosystem requirements. Conclusion Choose InfluxDB for purpose-built time-series, TimescaleDB for SQL compatibility, and QuestDB for maximum performance. All support downsampling and retention policies."
     }
     </script>
     <script type="application/ld+json">
@@ -77,49 +77,289 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/time-series-databases.png" alt="Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)</h1>
 <br>
-<p>Time-Series Data   </p>
-<p>Time-series data is a sequence of data points indexed by time. Examples include server metrics, IoT sensor readings, and financial tick data.   </p>
-<p>Database Comparison   </p>
-<p>| Feature | InfluxDB | TimescaleDB | QuestDB | |---------|----------|-------------|---------| | Architecture | Custom TS engine | PostgreSQL extension | Columnar | | SQL | Flux / SQL | Full SQL | SQL | | Write throughput | Very high | High | Very high | | Compression | Excellent | Good | Excellent |   </p>
-<p>InfluxDB   </p>
-<p>Purpose-built time-series with automatic downsampling:   </p>
+<h1>Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)</h1>
 <br>
-<p>    from influxdb_client import InfluxDBClient</p>
 <br>
-<p>    client = InfluxDBClient(url="http://localhost:8086", token="my-token")</p>
 <br>
-<p>    write_api = client.write_api()</p>
 <br>
-<p>    p = Point("cpu").tag("host", "server01").field("usage_user", 45.2)</p>
+<h1>Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)</h1>
 <br>
-<p>    write_api.write(bucket="metrics", record=p)</p>
 <br>
-<p>TimescaleDB   </p>
-<p>PostgreSQL extension with hypertables:   </p>
 <br>
-<p>    CREATE TABLE sensor_data (</p>
 <br>
-<p>        time TIMESTAMPTZ NOT NULL,</p>
 <br>
-<p>        device_id INTEGER,</p>
 <br>
-<p>        temperature DOUBLE PRECISION</p>
 <br>
-<p>    );</p>
+<h1>Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)</h1>
 <br>
-<p>    SELECT create_hypertable('sensor_data', 'time');</p>
 <br>
-<p>    SELECT time_bucket('5m', time) AS bucket,</p>
 <br>
-<p>           AVG(temperature) FROM sensor_data</p>
 <br>
-<p>    WHERE time > NOW() - INTERVAL '24h'</p>
 <br>
-<p>    GROUP BY bucket;</p>
 <br>
-<p>Performance   </p>
-<p>For 1 billion rows, QuestDB and InfluxDB lead on write throughput. TimescaleDB wins on SQL compatibility. Choose based on your query patterns and ecosystem requirements.   </p>
-<p>Conclusion   </p>
+<br>
+<br>
+<br>
+<br>
+<p>Time-Series Data </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Time-series data is a sequence of data points indexed by time. Examples include server metrics, IoT sensor readings, and financial tick data. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Database Comparison </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>| Feature | InfluxDB | TimescaleDB | QuestDB | |---------|----------|-------------|---------| | Architecture | Custom TS engine | PostgreSQL extension | Columnar | | SQL | Flux / SQL | Full SQL | SQL | | Write throughput | Very high | High | Very high | | Compression | Excellent | Good | Excellent | </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>InfluxDB </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Purpose-built time-series with automatic downsampling: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>from influxdb_client import InfluxDBClient</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>client = InfluxDBClient(url="http://localhost:8086", token="my-token")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>write_api = client.write_api()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>p = Point("cpu").tag("host", "server01").field("usage_user", 45.2)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>write_api.write(bucket="metrics", record=p)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>TimescaleDB </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>PostgreSQL extension with hypertables: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE TABLE sensor_data (</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>time TIMESTAMPTZ NOT NULL,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>device_id INTEGER,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>temperature DOUBLE PRECISION</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT create_hypertable('sensor_data', 'time');</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT time_bucket('5m', time) AS bucket,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>AVG(temperature) FROM sensor_data</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>WHERE time > NOW() - INTERVAL '24h'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>GROUP BY bucket;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Performance </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>For 1 billion rows, QuestDB and InfluxDB lead on write throughput. TimescaleDB wins on SQL compatibility. Choose based on your query patterns and ecosystem requirements. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Choose InfluxDB for purpose-built time-series, TimescaleDB for SQL compatibility, and QuestDB for maximum performance. All support downsampling and retention policies.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -136,6 +376,7 @@
       <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

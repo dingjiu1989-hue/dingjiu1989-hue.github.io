@@ -29,31 +29,33 @@ useInsertionEffect| CSS-in-JS library hook| Inject styles before layout effects 
 useOptimistic| Optimistic UI updates| Show a value before the server confirms it| React 19/20  
 useFormStatus| Form submission status| Disable submit button while form is submitting| React 19/20  
 useActionState| Form action with state| Server Action form handling with error states| React 19/20  
-
+  
 ## useState: The Foundation
 
 **Best for:** Simple values that change over time — form inputs, toggle states, counters. **Key rule:** Never call setState during render (except for derived state with useMemo or useReducer).
-
+    
+    
     // Basic usage
     const [count, setCount] = useState(0);
-
+    
     // Functional update (when new state depends on old)
     setCount(prev => prev + 1);
-
+    
     // Lazy initializer (expensive computation, runs once)
     const [data, setData] = useState(() => expensiveComputation());
 
 ## useEffect: The Most Misused Hook
 
 **Best for:** Synchronizing with external systems (browser APIs, third-party libraries, network). **Common mistake:** Using useEffect for derived state or event handling, which should be done in event handlers or during render.
-
+    
+    
     // Good: connect to external system
     useEffect(() => {
       const connection = createConnection(serverUrl);
       connection.connect();
       return () => connection.disconnect();
     }, [serverUrl]);
-
+    
     // Bad: setting state from props (do this during render instead)
     useEffect(() => {
       setFullName(firstName + ' ' + lastName); // Unnecessary!
@@ -62,12 +64,13 @@ useActionState| Form action with state| Server Action form handling with error s
 ## useMemo and useCallback: Performance Hooks
 
 **Best for:** Preventing unnecessary re-renders of memoized child components. **Key rule:** Do not wrap everything in useMemo/useCallback — only use them when you have measured a performance problem.
-
+    
+    
     // useMemo: cache an expensive computed value
     const sortedList = useMemo(() => {
       return items.sort((a, b) => a.name.localeCompare(b.name));
     }, [items]);
-
+    
     // useCallback: stabilize a function reference
     const handleClick = useCallback((id: string) => {
       setSelectedId(id);
@@ -76,12 +79,13 @@ useActionState| Form action with state| Server Action form handling with error s
 ## useOptimistic: Optimistic UI in 2026
 
 **Best for:** Instant UI feedback while a server action is in flight — like liking a post, toggling a todo, or sending a message.
-
+    
+    
     const [optimisticMessages, addOptimisticMessage] = useOptimistic(
       messages,
       (state, newMessage) => [...state, { ...newMessage, sending: true }]
     );
-
+    
     async function sendMessage(formData: FormData) {
       const message = formData.get('message');
       addOptimisticMessage({ text: message, id: crypto.randomUUID() });

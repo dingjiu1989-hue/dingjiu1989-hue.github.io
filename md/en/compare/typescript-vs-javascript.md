@@ -22,7 +22,7 @@ The TypeScript vs JavaScript debate has a clear winner in 2026: TypeScript is th
 **Build step**|  Required (tsc, esbuild, swc)| Optional (Node.js runs JS natively)  
 **npm packages**|  Most have types (DefinitelyTyped or built-in)| 100% compatibility (it IS JS)  
 **Adoption**|  ~85% of new projects| ~15% (scripts, legacy, quick prototypes)  
-
+  
 ## TypeScript — The Modern Standard
 
 TypeScript has won. In 2026, ~85% of new Node.js and frontend projects start with TypeScript. The type system catches entire categories of bugs before they reach production. Refactoring that used to take hours (rename a function across 50 files) takes seconds. Editor autocomplete knows exactly what properties exist on every object.
@@ -47,5 +47,5 @@ Active production app (10K+ lines)| **Gradually migrate** — rename .js to .ts,
 Small app / side project| **Rewrite** in TS. The overhead is minimal and the benefits compound.  
 Stable legacy app (minimal changes)| **Don't bother.** Add .d.ts files for new modules, leave old code as JS.  
 Open source library| **Migrate now.** Types are the #1 feature request for any JS library.  
-
+  
 **Bottom line:** Start new projects in TypeScript. Period. JavaScript for quick scripts and learning. The question isn't "should I use TS?" — it's "is there a good reason NOT to?" See also: [Advanced TypeScript Patterns](</en/tech/typescript-advanced-patterns.html>) and [Frontend Framework Comparison](</en/compare/react-vs-vue-vs-angular-vs-svelte.html>).

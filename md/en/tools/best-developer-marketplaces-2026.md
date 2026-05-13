@@ -20,7 +20,7 @@ Gumroad| Marketplace + storefront| 10% flat (free plan)| Yes| Weekly (Fri), inst
 LemonSqueezy| MoR + storefront| 5% + 50¢ per transaction| Yes (global + EU VAT IOSS)| Weekly (Mon)| Yes (full customization)| Developer-focused, lowest fees, license keys, affiliates  
 Polar| Open-source monetization| 5% + payment processor (Stripe ~2.9%)| No (you handle tax)| Via Stripe (your account)| Yes (embeddable on your site)| Open-source funding, GitHub integration, memberships  
 Paddle| MoR (enterprise)| 5% + 50¢ (up to $50K ARR)| Yes (global, best-in-class)| Monthly| Yes (checkout overlay or full page)| SaaS businesses, $50K+ ARR, complex tax compliance  
-
+  
 ## Deep Dive
 
 **Gumroad — The largest audience, the highest fees.** Gumroad is the most well-known digital product marketplace. Its advantage: built-in discovery — Gumroad users browse the marketplace and discover products. The 10% fee is the highest among the options, but it includes payment processing and tax handling. The platform handles everything: file delivery, license key generation, email marketing to your customers, affiliate payouts, and a basic course player. The editor is simple but limited — you get a product page with markdown, images, and video embeds. _Best for:_ Creators who want the simplest possible setup, those who benefit from marketplace discovery, first-time sellers who don't want to think about tax compliance.
@@ -45,5 +45,5 @@ Open-source project, monetize GitHub| Polar| GitHub-native, embed on own site, k
 SaaS with recurring subscriptions, $50K+ ARR| Paddle| Enterprise MoR, B2B invoicing, best fraud protection, compliance  
 Maximize revenue, minimize fees| LemonSqueezy| 5% + 50¢ is the lowest all-in MoR fee  
 Want to own customer relationship, custom checkout| Paddle or Polar| Paddle for MoR + custom checkout; Polar for Stripe + GitHub integration  
-
+  
 **My recommendation:** Start with **LemonSqueezy** — lowest fees, best developer experience, full MoR (tax handled), and the API/webhook support means you can automate everything. If your product is open-source, add **Polar** as a second channel via GitHub. Graduate to **Paddle** once you're past $50K ARR and need B2B invoicing and dedicated support. Gumroad is fine for your first $1,000 in sales, but the 10% fee adds up fast — at $50K in annual sales, that's $2,500 more in fees vs LemonSqueezy.

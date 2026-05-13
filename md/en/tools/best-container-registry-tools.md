@@ -15,7 +15,8 @@ Every developer pushes and pulls container images. But where you store those ima
 **Best for:** Public open-source images and individual developers.
 
 Docker Hub remains the default registry. It hosts millions of public images and integrates seamlessly with Docker CLI. Free tier: unlimited public repos, 1 private repo, 200 pulls/6 hours. Paid: $9/month for unlimited private repos and 5,000 pulls/day. **Limitations:** Rate limiting on free tier is aggressive (especially for CI/CD); image scanning requires Pro plan; no on-prem option.
-
+    
+    
     docker pull nginx:latest          # pulls from Docker Hub by default
     docker tag myapp:latest myuser/myapp:v1
     docker push myuser/myapp:v1
@@ -25,7 +26,8 @@ Docker Hub remains the default registry. It hosts millions of public images and 
 **Best for:** Teams already on GitHub Actions and GitHub Packages.
 
 GHCR is deeply integrated with GitHub: store container images alongside your code, manage access via GitHub teams, and pull images in GitHub Actions without authentication headaches. Free for public repos; private repos get 2GB free storage + data transfer within Actions. **Standout features:** Anonymous pulls for public images (no rate limits like Docker Hub), granular RBAC via teams, and built-in vulnerability scanning powered by GitHub's advisory database. **Limitations:** Less mature ecosystem than Docker Hub; no Helm chart support natively; storage costs add up for image-heavy projects beyond the free tier.
-
+    
+    
     echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
     docker tag myapp ghcr.io/myorg/myapp:v1
     docker push ghcr.io/myorg/myapp:v1
@@ -64,7 +66,7 @@ AWS ECR| AWS deployments| 500MB/month| No| No
 Google GAR| GCP + multi-format| 500MB/month| No| Maven, npm, PyPI, Apt  
 Harbor| Security/compliance| Free (OSS)| Yes| Helm, CNAB  
 JFrog Artifactory| Enterprise universal| None| Yes| 30+ formats  
-
+  
 ## Which One Should You Choose?
 
   * **Solo developer or small team on GitHub:** GHCR — zero config, no rate limits on public pulls, tight GitHub integration.
@@ -73,5 +75,7 @@ JFrog Artifactory| Enterprise universal| None| Yes| 30+ formats
   * **Security-conscious enterprise or air-gapped environment:** Harbor — open source, full control, CIS benchmarks.
   * **Large org with diverse artifact types:** JFrog Artifactory — universal, but you'll pay for it.
   * **Just starting out:** Docker Hub free tier + GHCR for private images. You can always migrate later.
+
+
 
 Most teams end up using two registries: one cloud-native (ECR/GAR) for production and GHCR or Docker Hub for development and public images.

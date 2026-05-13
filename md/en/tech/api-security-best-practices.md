@@ -13,9 +13,10 @@ APIs are the front door to your application — and the #1 attack surface in 202
 ## 1\. Authentication: JWT Done Right
 
 JWTs are ubiquitous, but most implementations are vulnerable. Here are the rules: always set an expiration (`exp`) claim — never issue eternal tokens; always validate the `iss` (issuer) and `aud` (audience) claims — don't accept tokens issued for other services; never accept `alg: none` — explicitly whitelist your signing algorithm; use RS256 or ES256, not HS256 with a weak secret; store refresh tokens in an httpOnly, Secure, SameSite=Strict cookie, never in localStorage.
-
+    
+    
     const jwt = require('jsonwebtoken');
-
+    
     function createToken(user) {
       return jwt.sign(
         { sub: user.id, role: user.role },
@@ -23,7 +24,7 @@ JWTs are ubiquitous, but most implementations are vulnerable. Here are the rules
         { algorithm: 'RS256', expiresIn: '15m', issuer: 'api.example.com', audience: 'app.example.com' }
       );
     }
-
+    
     function verifyToken(token) {
       return jwt.verify(token, process.env.JWT_PUBLIC_KEY, {
         algorithms: ['RS256'],
@@ -35,7 +36,8 @@ JWTs are ubiquitous, but most implementations are vulnerable. Here are the rules
 ## 2\. Authorization: RBAC and ABAC
 
 Never trust the client to enforce authorization. Every API endpoint must verify: is this user authenticated? Does this user have permission for this action on this resource? Implement role-based access control (RBAC) for simple cases: admin, editor, viewer. For complex cases, use attribute-based access control (ABAC): "Can this user edit this document if the document is in draft status and the user is in the same department?"
-
+    
+    
     function authorize(user, action, resource) {
       if (user.role === 'admin') return true;
       if (action === 'read' && resource.public) return true;
@@ -47,10 +49,11 @@ Never trust the client to enforce authorization. Every API endpoint must verify:
 ## 3\. Rate Limiting: Stop Abuse Before It Starts
 
 Every public API endpoint needs rate limiting. Without it, a single misconfigured client can take down your service. Use the token bucket or sliding window algorithm — fixed window is too bursty. Rate limit by: IP address (basic), API key (better), user ID + endpoint (best). Return standard headers: `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset`, and `Retry-After` when throttled. Return HTTP 429 (Too Many Requests), not 200 with an error body.
-
+    
+    
     const rateLimit = require('express-rate-limit');
     const RedisStore = require('rate-limit-redis');
-
+    
     const limiter = rateLimit({
       store: new RedisStore({ client: redisClient }),
       windowMs: 60 * 1000,
@@ -69,9 +72,10 @@ Every public API endpoint needs rate limiting. Without it, a single misconfigure
 ## 4\. Input Validation: Never Trust the Client
 
 The #1 cause of API vulnerabilities is trusting user input. Validate everything: type (is this a string? number?), format (is this a valid email? UUID?), length (is this under the max?), range (is this number between 1 and 100?), and business rules (is this status transition allowed?). Use a schema validation library — never write validation by hand. Zod (TypeScript), Pydantic (Python), or Joi (Node.js) — pick one and use it on every endpoint.
-
+    
+    
     import { z } from 'zod';
-
+    
     const CreateUserSchema = z.object({
       email: z.string().email().max(255),
       name: z.string().min(1).max(100).regex(/^[a-zA-Z\s-]+$/),
@@ -79,7 +83,7 @@ The #1 cause of API vulnerabilities is trusting user input. Validate everything:
       role: z.enum(['user', 'editor', 'admin']),
       website: z.string().url().optional()
     });
-
+    
     function createUser(req, res) {
       const result = CreateUserSchema.safeParse(req.body);
       if (!result.success) {
@@ -98,14 +102,15 @@ Never use `Access-Control-Allow-Origin: *` on an API that uses cookies or tokens
 ## 6\. SQL Injection: Still Relevant in 2026
 
 Parameterized queries eliminate SQL injection. Never concatenate user input into SQL strings. ORMs help but aren't foolproof — raw queries with string interpolation are still common in ORM codebases. Always use parameterized queries or the ORM's safe query builder.
-
+    
+    
     // BAD - SQL injection vulnerable
     const query = `SELECT * FROM users WHERE email = '${req.body.email}'`;
-
+    
     // GOOD - Parameterized query
     const query = 'SELECT * FROM users WHERE email = $1';
     const result = await db.query(query, [req.body.email]);
-
+    
     // GOOD - ORM safe query (Prisma)
     const user = await prisma.user.findUnique({ where: { email: req.body.email } });
 
@@ -135,5 +140,5 @@ TLS| HTTPS only, HSTS| mTLS for service-to-service
 Secrets| Never in code, env vars only| Secrets manager with rotation  
 Logging| Auth/authZ failures logged| Anomaly detection alerts  
 Headers| CSP, X-Content-Type-Options| Permissions-Policy  
-
+  
 Security is not a feature you add — it's a property every endpoint must have. Start with the checklist above. Implement one item per sprint until they're all covered. The time to think about API security is before the breach, not after.

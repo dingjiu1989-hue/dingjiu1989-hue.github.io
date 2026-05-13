@@ -8,284 +8,2461 @@ url: https://dingjiu1989-hue.github.io/en/tools/build-tools.html
 
 # Build Tools: esbuild, swc, turbopack, vite — Speed Comparison
 
+# Build Tools: esbuild, swc, turbopack, vite — Speed Comparison
+
+  
+
+
+# Build Tools: esbuild, swc, turbopack, vite — Speed Comparison
+
+  
+  
+  
+  
+
+
+# Build Tools: esbuild, swc, turbopack, vite — Speed Comparison
+
+  
+  
+  
+  
+  
+  
+  
+
+
+# Build Tools: esbuild, swc, turbopack, vite — Speed Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Build Tools: esbuild, swc, turbopack, vite — Speed Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 JavaScript build tooling has undergone a revolution. Webpack-era builds that took minutes are now replaced by tools that bundle in milliseconds. The new generation — esbuild, swc, turbopack, and vite — leverage native code (Go, Rust) and modern architectures to deliver dramatically faster builds.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  esbuild
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 esbuild is an extremely fast bundler written in Go:
 
-    // build.js
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    const esbuild = require("esbuild");
 
-    esbuild.build({
+// build.js
 
-      entryPoints: ["src/index.tsx"],
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      bundle: true,
 
-      outfile: "dist/bundle.js",
+const esbuild = require("esbuild");
 
-      minify: true,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      sourcemap: true,
 
-      target: ["es2020"],
+esbuild.build({
 
-      loader: {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        ".tsx": "tsx",
 
-        ".png": "dataurl",
+entryPoints: ["src/index.tsx"],
 
-        ".svg": "text",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      },
 
-      define: {
+bundle: true,
 
-        "process.env.NODE_ENV": '"production"',
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      },
 
-      plugins: [],
+outfile: "dist/bundle.js",
 
-    }).catch(() => process.exit(1));
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    // Watch mode
 
-    esbuild.context({
+minify: true,
 
-      entryPoints: ["src/index.tsx"],
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      bundle: true,
 
-      outfile: "dist/bundle.js",
+sourcemap: true,
 
-    }).then(ctx => ctx.watch());
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    // v0.24+ supports CSS bundling and bundling
 
-    # Command line
+target: ["es2020"],
 
-    esbuild src/index.tsx --bundle --outfile=dist/bundle.js --minify
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+loader: {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+".tsx": "tsx",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+".png": "dataurl",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+".svg": "text",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+define: {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"process.env.NODE_ENV": '"production"',
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+plugins: [],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}).catch(() => process.exit(1));
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+// Watch mode
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+esbuild.context({
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+entryPoints: ["src/index.tsx"],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+bundle: true,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+outfile: "dist/bundle.js",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}).then(ctx => ctx.watch());
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+// v0.24+ supports CSS bundling and bundling
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Command line
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+esbuild src/index.tsx --bundle --outfile=dist/bundle.js --minify
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 **Speed**: 10-100x faster than Webpack on equivalent bundles. A 1000-module TypeScript project bundles in ~100ms. Builds are CPU-bound on Go's efficient parallelism.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 **Limitations**: No native TypeScript type checking (delegates to tsc separately). Plugin ecosystem is smaller. Code splitting is less sophisticated than Webpack's.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  swc
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 swc is a Rust-based compiler and bundler:
 
-    // .swcrc
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    {
 
-      "jsc": {
+// .swcrc
 
-        "parser": {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          "syntax": "typescript",
 
-          "tsx": true,
+{
 
-          "decorators": true
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        },
 
-        "target": "es2020",
+"jsc": {
 
-        "transform": {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          "react": {
 
-            "runtime": "automatic"
+"parser": {
 
-          }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        },
 
-        "minify": {
+"syntax": "typescript",
 
-          "compress": true,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          "mangle": true
 
-        }
+"tsx": true,
 
-      },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      "module": {
 
-        "type": "es6"
+"decorators": true
 
-      },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      "minify": true
 
-    }
+},
 
-    # Transpile a file
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    swc src/index.ts -o dist/index.js
 
-    # Bundle entry points
+"target": "es2020",
 
-    swc src/index.ts --out-dir dist --config-file .swcrc
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"transform": {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"react": {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"runtime": "automatic"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"minify": {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"compress": true,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"mangle": true
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"module": {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"type": "es6"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"minify": true
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Transpile a file
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+swc src/index.ts -o dist/index.js
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Bundle entry points
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+swc src/index.ts --out-dir dist --config-file .swcrc
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 swc is commonly used as a compiler replacement within Webpack (via swc-loader) or as a standalone for TypeScript transpilation. Its bundler is newer than esbuild's but benefits from Rust's memory safety and parallelism.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 **Speed**: Comparable to esbuild for transpilation. Slightly slower for bundling due to more conservative AST handling. The `minify` pass is very fast.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Turbopack
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Vercel's Rust-based incremental bundler, designed as a Webpack successor:
 
-    // next.config.js — Turbopack in Next.js
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    const nextConfig = {
 
-      experimental: {
+// next.config.js — Turbopack in Next.js
 
-        turbo: {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          rules: {
 
-            "*.svg": ["@svgr/webpack"],
+const nextConfig = {
 
-          },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          resolveAlias: {
 
-            underscore: "lodash",
+experimental: {
 
-          },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          treeShaking: true,
 
-          minify: "esbuild", // Use esbuild for minification
+turbo: {
 
-        },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      },
 
-    };
+rules: {
 
-    module.exports = nextConfig;
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    # Start Next.js with Turbopack
 
-    next dev --turbo
+"*.svg": ["@svgr/webpack"],
 
-    # Build with Turbopack (Next.js 15+)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    next build --turbo
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+resolveAlias: {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+underscore: "lodash",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+treeShaking: true,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+minify: "esbuild", // Use esbuild for minification
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+};
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+module.exports = nextConfig;
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Start Next.js with Turbopack
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+next dev --turbo
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Build with Turbopack (Next.js 15+)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+next build --turbo
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Turbopack is deeply integrated with Next.js. As a standalone bundler, it is less mature. Its key innovation is function-level caching: it tracks changes at the function granularity and only rebuilds affected functions.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 **Speed**: Up to 10x faster than Webpack in development. Cold builds are comparable to esbuild. Hot module replacement is near-instant with function-level granularity.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Vite
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Vite uses esbuild for dependencies and Rollup for production builds:
 
-    // vite.config.ts
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    import { defineConfig } from "vite";
 
-    import react from "@vitejs/plugin-react";
+// vite.config.ts
 
-    import path from "path";
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    export default defineConfig({
 
-      plugins: [react()],
+import { defineConfig } from "vite";
 
-      resolve: {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        alias: {
 
-          "@": path.resolve(__dirname, "./src"),
+import react from "@vitejs/plugin-react";
 
-        },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      },
 
-      build: {
+import path from "path";
 
-        rollupOptions: {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          output: {
 
-            manualChunks: {
+export default defineConfig({
 
-              vendor: ["react", "react-dom"],
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-              utils: ["lodash", "date-fns"],
 
-            },
+plugins: [react()],
 
-          },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        },
 
-        target: "es2020",
+resolve: {
 
-        minify: "esbuild",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        cssCodeSplit: true,
 
-      },
+alias: {
 
-      server: {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        hmr: true,
 
-        watch: {
+"@": path.resolve(__dirname, "./src"),
 
-          usePolling: false,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        },
 
-      },
+},
 
-    });
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    # Development
 
-    vite dev    # Near-instant start, uses esbuild for pre-bundling
+},
 
-    # Production build
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    vite build  # Uses Rollup for optimal production output
+
+build: {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+rollupOptions: {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+output: {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+manualChunks: {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+vendor: ["react", "react-dom"],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+utils: ["lodash", "date-fns"],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+target: "es2020",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+minify: "esbuild",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+cssCodeSplit: true,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+server: {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+hmr: true,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+watch: {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+usePolling: false,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+});
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Development
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+vite dev # Near-instant start, uses esbuild for pre-bundling
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Production build
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+vite build # Uses Rollup for optimal production output
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 **Speed**: Development server starts in <50ms regardless of project size. Native ESM in dev means no bundling needed. Pre-bundling dependencies with esbuild only happens once. Production builds are slower (Rollup) but produce optimized output.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Benchmarks
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 | Task | esbuild | swc | Turbopack | Vite |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 |------|---------|-----|-----------|------|
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 | Bundle 500KB TS project | 45ms | 60ms | 50ms | 80ms (pre-bundle) |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Bundle 10MB TS project | 520ms | 680ms | N/A | 1200ms |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 | Production build (large) | 2.1s | 2.8s | 1.5s (Next.js) | 4.5s |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Hot module reload | 5-10ms | 5-10ms | <5ms | <10ms |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 | Cold start (dev) | N/A | N/A | 300ms | <50ms |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Recommendations
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * **Fastest bundling**: esbuild for raw speed in CI or custom build pipelines.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * **TypeScript transpilation**: swc as a drop-in replacement for tsc (10-20x faster).
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * **Next.js projects**: Use Turbopack built-in with Next.js 15+ for zero-config speed.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * **Framework-agnostic dev**: Vite for the best development HMR experience with any framework.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 * **Production builds**: Vite + Rollup for optimal tree-shaking and code-splitting. Combine with esbuild for minification.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Many teams use a combination: esbuild for dependencies, Vite for development, and esbuild or swc for CI compilation without type checking, with a separate `tsc --noEmit` step for type safety.

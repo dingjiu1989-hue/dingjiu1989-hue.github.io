@@ -23,7 +23,7 @@ How your frontend talks to your backend is one of the most consequential archite
 **Public API**|  No (internal only)| Good| Best (standardized)  
 **Learning curve**|  Low| High| Low  
 **Ecosystem**|  TypeScript-only| Multi-language| Universal  
-
+  
 ## tRPC — Typesafe RPC for TypeScript Monorepos
 
 tRPC gives you end-to-end type safety without code generation. Define a procedure on the server, call it like a typed function on the client. The types flow automatically. If you change the server, the client gets type errors at compile time — no runtime surprises.
@@ -64,5 +64,5 @@ Public API for third-party devs| **REST + OpenAPI**
 Mobile + web with different data needs| **GraphQL**  
 Simple CRUD, file uploads, or CDN caching| **REST**  
 Internal tool or admin panel (TS stack)| **tRPC**  
-
+  
 **Bottom line:** tRPC for TypeScript monoliths where development speed matters. GraphQL for complex data models with multiple clients. REST for public APIs and when you need universal compatibility. See our [REST API Best Practices](</en/tech/rest-api-best-practices.html>) guide for implementation details.

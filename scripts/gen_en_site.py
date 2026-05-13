@@ -13410,6 +13410,24 @@ def make_article_html(art, board_id, board_name, all_posts):
     <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
     </div>'''
 
+    # Interactive tool cross-links — only for relevant boards
+    if board_id == 'ai':
+        tools_html = '''
+    <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
+      <h3 style="margin-top:0;font-size:1.1rem;">\U0001f916 AI Model Cost Calculator</h3>
+      <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
+      <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
+    </section>'''
+    elif board_id == 'compare':
+        tools_html = '''
+    <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#f0fdf4;border-radius:12px;border:1px solid #bbf7d0;">
+      <h3 style="margin-top:0;font-size:1.1rem;">\U0001f9e9 Which Framework Should You Use?</h3>
+      <p style="margin:0.5rem 0;color:#475569;">Not sure which frontend framework fits your project? Answer 5 questions and get a data-driven recommendation.</p>
+      <a href="/tools/framework-decision-wizard.html" style="display:inline-block;padding:0.5rem 1rem;background:#22c55e;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Try Decision Wizard →</a>
+    </section>'''
+    else:
+        tools_html = ''
+
     return f'''<!DOCTYPE html>
 <html lang="en" data-render="related" data-board="{board_id}" data-exclude="{slug}">
 <head>
@@ -13440,7 +13458,7 @@ def make_article_html(art, board_id, board_name, all_posts):
       "description": "{art['description']}",
       "image": "{cover_url}",
       "datePublished": "{art['date']}",
-      "dateModified": "{art['date']}",
+      "dateModified": "{art.get('lastActive', art['date'])}",
       "wordCount": "{word_est}",
       "keywords": "{tags_str}",
       "author": {{"@type": "Person", "name": "SourceHub"}},
@@ -13472,7 +13490,7 @@ def make_article_html(art, board_id, board_name, all_posts):
     <article>
       <div class="article-tags">{pin_h}{tags_h}</div>
       <h1 class="article-title">{art['title']}</h1>
-      <div class="article-meta">Published {art['date']} · {art['replies'] * 120} views · {art['replies']} replies</div>
+      <div class="article-meta">Published {art['date']}{' · Last active ' + art['lastActive'] if art.get('lastActive') and art['lastActive'] != art['date'] else ''} · {art['replies'] * 120} views · {art['replies']} replies</div>
       <img class="article-cover" src="{cover_url}" alt="{art['title']}" width="1200" height="630" loading="lazy">
       <div class="article-body">{get_body(art['slug'], board_id)}</div>
     </article>
@@ -13483,6 +13501,7 @@ def make_article_html(art, board_id, board_name, all_posts):
       <noscript><div class="related-grid">{related_html}</div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    {tools_html}
   </div>
 </main>
 <div id="footer-placeholder"></div>
@@ -13644,6 +13663,21 @@ def make_category(data, board_id):
         for p in board['posts']
     )
 
+    # Featured interactive tools section (only on tools category page)
+    tools_featured_html = '''<div class="featured-tools" style="margin:1.5rem 0;padding:1.5rem;background:linear-gradient(135deg,#eef2ff,#f0fdf4);border-radius:12px;border:1px solid #e0e7ff;">
+  <h3 style="margin:0 0 1rem;">Featured Interactive Tools</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+    <a href="/tools/ai-model-cost-calculator.html" style="display:block;padding:1rem;background:#fff;border-radius:8px;text-decoration:none;border:1px solid #e2e8f0;">
+      <strong style="color:#6366f1;">\U0001f916 AI Model Cost Calculator</strong>
+      <p style="margin:0.25rem 0 0;font-size:0.85rem;color:#64748b;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time.</p>
+    </a>
+    <a href="/tools/framework-decision-wizard.html" style="display:block;padding:1rem;background:#fff;border-radius:8px;text-decoration:none;border:1px solid #e2e8f0;">
+      <strong style="color:#22c55e;">\U0001f9e9 Framework Decision Wizard</strong>
+      <p style="margin:0.25rem 0 0;font-size:0.85rem;color:#64748b;">Answer 5 questions and get a data-driven framework recommendation.</p>
+    </a>
+  </div>
+</div>'''
+
     return f'''<!DOCTYPE html>
 <html lang="en" data-render="category" data-board="{board_id}">
 <head>
@@ -13708,6 +13742,8 @@ def make_category(data, board_id):
     <div class="breadcrumb">
       <a href="/en/">Home</a> › {title}
     </div>
+
+    {tools_featured_html if board_id == 'tools' else ''}
 
     <div class="page-header">
       <div>

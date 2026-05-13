@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/kafka-tools.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1721",
+      "wordCount": "3424",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/kafka-tools.html"},
-      "articleBody": "Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer Introduction Apache Kafka's distributed architecture makes it powerful but complex to manage. The right tooling is essential for monitoring consumer lag, inspecting messages, managing topics, and debugging production issues. This article covers four Kafka management tools: AKHQ, Kafka UI, Kowl, and Offset Explorer. AKHQ (formerly KafkaHQ) A comprehensive Kafka web UI with topic management, consumer group monitoring, and schema registry support: # docker-compose.yml version: \"3.8\" services: akhq: image: tchiotludo/akhq:latest environment: AKHQ_CONFIGURATION: | akhq: connections: local: properties: bootstrap.servers: \"kafka:9092\" schema-registry: url: \"http://schema-registry:8081\" connect: - name: connect url: \"http://kafka-connect:8083\" ports: - \"8080:8080\" depends_on: - kafka **Key features**: * Topic browser with search and filter * Consumer group monitoring with lag visualization * Schema registry viewer (Avro, Protobuf, JSON Schema) * Kafka Connect management * Message producer (publish test messages) * Partition reassignment viewer * Node and broker monitoring # AKHQ advanced configuration akhq: connections: production: properties: bootstrap.servers: \"broker1:9092,broker2:9092,broker3:9092\" security.protocol: SASL_SSL sasl.mechanism: SCRAM-SHA-512 sasl.jaas.config: \"org.apache.kafka.common.security.scram.ScramLoginModule required username='admin' password='${SECRET_AKHQ_PASSWORD}';\" schema-registry: url: \"https://schema-registry:8081\" basic-auth-username: admin basic-auth-password: \"${SECRET_SCHEMA_REGISTRY_PASSWORD}\" Kafka UI (by Provectus) A lightweight, open-source Kafka web UI: # docker-compose.yml services: kafka-ui: image: provectuslabs/kafka-ui:latest ports: - \"8081:8080\" environment: KAFKA_CLUSTERS_0_NAME: local KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092 KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://schema-registry:8081 KAFKA_CLUSTERS_0_KAFKACONNECT_0_NAME: connect KAFKA_CLUSTERS_0_KAFKACONNECT_0_ADDRESS: http://kafka-connect:8083 SERVER_PORT: 8080 **Key features**: * Dashboard with cluster overview and broker health * Topic browser with partition visualization * Consumer groups with lag chart * Schema registry viewer * Kafka Connect management * Message filtering with custom predicates * Dark and light themes # Multi-cluster configuration KAFKA_CLUSTERS_0_NAME: staging KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: staging-kafka:9092 KAFKA_CLUSTERS_0_PROPERTIES_SECURITY_PROTOCOL: SASL_SSL KAFKA_CLUSTERS_0_PROPERTIES_SASL_MECHANISM: SCRAM-SHA-512 KAFKA_CLUSTERS_0_PROPERTIES_SASL_JAAS_CONFIG: \"org.apache.kafka.common.security.scram.ScramLoginModule required username='user' password='pass';\" KAFKA_CLUSTERS_1_NAME: production KAFKA_CLUSTERS_1_BOOTSTRAPSERVERS: prod-kafka:9092 Kowl (now Redpanda Console) Developer-friendly Kafka browser with a focus on data exploration: # docker-compose.yml services: redpanda-console: image: docker.redpanda.com/redpandadata/console:latest ports: - \"8082:8080\" environment: KAFKA_BROKERS: kafka:9092 SCHEMA_REGISTRY_ENABLED: \"true\" SCHEMA_REGISTRY_URLS: \"http://schema-registry:8081\" **Key features**: * Fast message search and filtering with custom predicates * Consumer group monitoring with lag alerts * Schema registry with compatibility checking * Message publish with schema validation * Kafka Connect management * Data masking for sensitive fields * Role-based access control # Data masking configuration server: maskedFields: - fieldName: \"password\" maskingStrategy: \"redact\" - fieldName: \"email\" maskingStrategy: \"hash\" - fieldName: \"ssn\" maskingStrategy: \"hash_last_four\" # Message search predicate examples # Find messages with specific JSON field: # $.user.email == \"test@example.com\" # $.order.total > 100.0 # $.status in [\"pending\", \"processing\"] Offset Explorer (formerly Kafka Tool) A desktop GUI application for Kafka (Windows/macOS/Linux): **Key features**: * Tree-based cluster browser * Topic partition viewer with message content * Consumer group offset management * Message producer * Import/export topics * SSL/SASL authentication support * Time-based message search CLI Tools The Kafka distribution includes essential CLI tools: # Topic management kafka-topics.sh --bootstrap-server localhost:9092 --list kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic orders kafka-topics.sh --bootstrap-server localhost:9092 --create --topic events --partitions 6 --replication-factor 3 --config retention.ms=604800000 # Consumer group monitoring kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group order-processor # Message inspection kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic orders --from-beginning --max-messages 10 # Performance testing kafka-producer-perf-test.sh --topic test --num-records 100000 --record-size 1024 --throughput 10000 --producer-props bootstrap.servers=localhost:9092 kafka-consumer-perf-test.sh --broker-list localhost:9092 --topic test --messages 50000 Comparison | Feature | AKHQ | Kafka UI | Kowl (Console) | Offset Explorer | |---------|------|----------|----------------|-----------------| | Type | Web UI | Web UI | Web UI | Desktop | | Message search | Basic | Basic | Advanced | Basic | | Schema registry | Yes | Yes | Yes | No | | Kafka Connect | Yes | Yes | Yes | No | | Data masking | No | No | Yes | No | | RBAC | No | No | Yes | No | | Multi-cluster | Yes | Yes | Yes | Yes | Recommendations * **Full-featured management**: AKHQ for comprehensive cluster administration. * **Quick monitoring**: Kafka UI for lightweight cluster health checks. * **Message debugging**: Kowl (Redpanda Console) for powerful message search and filtering. * **Desktop preference**: Offset Explorer for a native desktop experience. * **Scripting**: Kafka CLI tools for automation and CI/CD tasks. For development and staging environments, Kafka UI or Kowl provide excellent web-based management with minimal setup. For production, AKHQ offers the most comprehensive feature set, while Redpanda Console provides the best message debugging experience."
+      "articleBody": "Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer Introduction Apache Kafka's distributed architecture makes it powerful but complex to manage. The right tooling is essential for monitoring consumer lag, inspecting messages, managing topics, and debugging production issues. This article covers four Kafka management tools: AKHQ, Kafka UI, Kowl, and Offset Explorer. AKHQ (formerly KafkaHQ) A comprehensive Kafka web UI with topic management, consumer group monitoring, and schema registry support: docker-compose.yml version: \"3.8\" services: akhq: image: tchiotludo/akhq:latest environment: AKHQ_CONFIGURATION: | akhq: connections: local: properties: bootstrap.servers: \"kafka:9092\" schema-registry: url: \"http://schema-registry:8081\" connect: \\\\\\\\\\\\\\\\- name: connect url: \"http://kafka-connect:8083\" ports: \\\\\\\\\\\\\\\\- \"8080:8080\" depends_on: \\\\\\\\\\\\\\\\- kafka **Key features**: * Topic browser with search and filter * Consumer group monitoring with lag visualization * Schema registry viewer (Avro, Protobuf, JSON Schema) * Kafka Connect management * Message producer (publish test messages) * Partition reassignment viewer * Node and broker monitoring AKHQ advanced configuration akhq: connections: production: properties: bootstrap.servers: \"broker1:9092,broker2:9092,broker3:9092\" security.protocol: SASL_SSL sasl.mechanism: SCRAM-SHA-512 sasl.jaas.config: \"org.apache.kafka.common.security.scram.ScramLoginModule required username='admin' password='${SECRET_AKHQ_PASSWORD}';\" schema-registry: url: \"https://schema-registry:8081\" basic-auth-username: admin basic-auth-password: \"${SECRET_SCHEMA_REGISTRY_PASSWORD}\" Kafka UI (by Provectus) A lightweight, open-source Kafka web UI: docker-compose.yml services: kafka-ui: image: provectuslabs/kafka-ui:latest ports: \\\\\\\\\\\\\\\\- \"8081:8080\" environment: KAFKA_CLUSTERS_0_NAME: local KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092 KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://schema-registry:8081 KAFKA_CLUSTERS_0_KAFKACONNECT_0_NAME: connect KAFKA_CLUSTERS_0_KAFKACONNECT_0_ADDRESS: http://kafka-connect:8083 SERVER_PORT: 8080 **Key features**: * Dashboard with cluster overview and broker health * Topic browser with partition visualization * Consumer groups with lag chart * Schema registry viewer * Kafka Connect management * Message filtering with custom predicates * Dark and light themes Multi-cluster configuration KAFKA_CLUSTERS_0_NAME: staging KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: staging-kafka:9092 KAFKA_CLUSTERS_0_PROPERTIES_SECURITY_PROTOCOL: SASL_SSL KAFKA_CLUSTERS_0_PROPERTIES_SASL_MECHANISM: SCRAM-SHA-512 KAFKA_CLUSTERS_0_PROPERTIES_SASL_JAAS_CONFIG: \"org.apache.kafka.common.security.scram.ScramLoginModule required username='user' password='pass';\" KAFKA_CLUSTERS_1_NAME: production KAFKA_CLUSTERS_1_BOOTSTRAPSERVERS: prod-kafka:9092 Kowl (now Redpanda Console) Developer-friendly Kafka browser with a focus on data exploration: docker-compose.yml services: redpanda-console: image: docker.redpanda.com/redpandadata/console:latest ports: \\\\\\\\\\\\\\\\- \"8082:8080\" environment: KAFKA_BROKERS: kafka:9092 SCHEMA_REGISTRY_ENABLED: \"true\" SCHEMA_REGISTRY_URLS: \"http://schema-registry:8081\" **Key features**: * Fast message search and filtering with custom predicates * Consumer group monitoring with lag alerts * Schema registry with compatibility checking * Message publish with schema validation * Kafka Connect management * Data masking for sensitive fields * Role-based access control Data masking configuration server: maskedFields: \\\\\\\\\\\\\\\\- fieldName: \"password\" maskingStrategy: \"redact\" \\\\\\\\\\\\\\\\- fieldName: \"email\" maskingStrategy: \"hash\" \\\\\\\\\\\\\\\\- fieldName: \"ssn\" maskingStrategy: \"hash_last_four\" Message search predicate examples Find messages with specific JSON field: $.user.email == \"test@example.com\" $.order.total > 100.0 $.status in [\"pending\", \"processing\"] Offset Explorer (formerly Kafka Tool) A desktop GUI application for Kafka (Windows/macOS/Linux): **Key features**: * Tree-based cluster browser * Topic partition viewer with message content * Consumer group offset management * Message producer * Import/export topics * SSL/SASL authentication support * Time-based message search CLI Tools The Kafka distribution includes essential CLI tools: Topic management kafka-topics.sh --bootstrap-server localhost:9092 --list kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic orders kafka-topics.sh --bootstrap-server localhost:9092 --create --topic events --partitions 6 --replication-factor 3 --config retention.ms=604800000 Consumer group monitoring kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group order-processor Message inspection kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic orders --from-beginning --max-messages 10 Performance testing kafka-producer-perf-test.sh --topic test --num-records 100000 --record-size 1024 --throughput 10000 --producer-props bootstrap.servers=localhost:9092 kafka-consumer-perf-test.sh --broker-list localhost:9092 --topic test --messages 50000 Comparison | Feature | AKHQ | Kafka UI | Kowl (Console) | Offset Explorer | |---------|------|----------|----------------|-----------------| | Type | Web UI | Web UI | Web UI | Desktop | | Message search | Basic | Basic | Advanced | Basic | | Schema registry | Yes | Yes | Yes | No | | Kafka Connect | Yes | Yes | Yes | No | | Data masking | No | No | Yes | No | | RBAC | No | No | Yes | No | | Multi-cluster | Yes | Yes | Yes | Yes | Recommendations * **Full-featured management**: AKHQ for comprehensive cluster administration. * **Quick monitoring**: Kafka UI for lightweight cluster health checks. * **Message debugging**: Kowl (Redpanda Console) for powerful message search and filtering. * **Desktop preference**: Offset Explorer for a native desktop experience. * **Scripting**: Kafka CLI tools for automation and CI/CD tasks. For development and staging environments, Kafka UI or Kowl provide excellent web-based management with minimal setup. For production, AKHQ offers the most comprehensive feature set, while Redpanda Console provides the best message debugging experience."
     }
     </script>
     <script type="application/ld+json">
@@ -78,279 +78,2073 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/kafka-tools.png" alt="Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</h1>
 <br>
+<h1>Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Apache Kafka's distributed architecture makes it powerful but complex to manage. The right tooling is essential for monitoring consumer lag, inspecting messages, managing topics, and debugging production issues. This article covers four Kafka management tools: AKHQ, Kafka UI, Kowl, and Offset Explorer.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  AKHQ (formerly KafkaHQ)</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>A comprehensive Kafka web UI with topic management, consumer group monitoring, and schema registry support:</p>
 <br>
-<p>    # docker-compose.yml</p>
 <br>
-<p>    version: "3.8"</p>
 <br>
-<p>    services:</p>
 <br>
-<p>      akhq:</p>
 <br>
-<p>        image: tchiotludo/akhq:latest</p>
 <br>
-<p>        environment:</p>
 <br>
-<p>          AKHQ_CONFIGURATION: |</p>
 <br>
-<p>            akhq:</p>
 <br>
-<p>              connections:</p>
 <br>
-<p>                local:</p>
 <br>
-<p>                  properties:</p>
 <br>
-<p>                    bootstrap.servers: "kafka:9092"</p>
 <br>
-<p>                  schema-registry:</p>
+<h1>docker-compose.yml</h1>
 <br>
-<p>                    url: "http://schema-registry:8081"</p>
 <br>
-<p>                  connect:</p>
 <br>
-<p>                    - name: connect</p>
 <br>
-<p>                      url: "http://kafka-connect:8083"</p>
 <br>
-<p>        ports:</p>
 <br>
-<p>          - "8080:8080"</p>
 <br>
-<p>        depends_on:</p>
 <br>
-<p>          - kafka</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>version: "3.8"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>services:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>akhq:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>image: tchiotludo/akhq:latest</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>environment:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>AKHQ_CONFIGURATION: |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>akhq:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>connections:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>local:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>properties:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>bootstrap.servers: "kafka:9092"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>schema-registry:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>url: "http://schema-registry:8081"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>connect:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- name: connect</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>url: "http://kafka-connect:8083"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ports:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- "8080:8080"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>depends_on:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- kafka</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Key features**:</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Topic browser with search and filter</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Consumer group monitoring with lag visualization</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Schema registry viewer (Avro, Protobuf, JSON Schema)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Kafka Connect management</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Message producer (publish test messages)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Partition reassignment viewer</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Node and broker monitoring</p>
 <br>
-<p>    # AKHQ advanced configuration</p>
 <br>
-<p>    akhq:</p>
 <br>
-<p>      connections:</p>
 <br>
-<p>        production:</p>
 <br>
-<p>          properties:</p>
 <br>
-<p>            bootstrap.servers: "broker1:9092,broker2:9092,broker3:9092"</p>
 <br>
-<p>            security.protocol: SASL_SSL</p>
 <br>
-<p>            sasl.mechanism: SCRAM-SHA-512</p>
 <br>
-<p>            sasl.jaas.config: "org.apache.kafka.common.security.scram.ScramLoginModule required username='admin' password='${SECRET_AKHQ_PASSWORD}';"</p>
 <br>
-<p>          schema-registry:</p>
 <br>
-<p>            url: "https://schema-registry:8081"</p>
 <br>
-<p>            basic-auth-username: admin</p>
 <br>
-<p>            basic-auth-password: "${SECRET_SCHEMA_REGISTRY_PASSWORD}"</p>
+<h1>AKHQ advanced configuration</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>akhq:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>connections:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>production:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>properties:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>bootstrap.servers: "broker1:9092,broker2:9092,broker3:9092"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>security.protocol: SASL_SSL</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>sasl.mechanism: SCRAM-SHA-512</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>sasl.jaas.config: "org.apache.kafka.common.security.scram.ScramLoginModule required username='admin' password='${SECRET_AKHQ_PASSWORD}';"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>schema-registry:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>url: "https://schema-registry:8081"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>basic-auth-username: admin</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>basic-auth-password: "${SECRET_SCHEMA_REGISTRY_PASSWORD}"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Kafka UI (by Provectus)</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>A lightweight, open-source Kafka web UI:</p>
 <br>
-<p>    # docker-compose.yml</p>
 <br>
-<p>    services:</p>
 <br>
-<p>      kafka-ui:</p>
 <br>
-<p>        image: provectuslabs/kafka-ui:latest</p>
 <br>
-<p>        ports:</p>
 <br>
-<p>          - "8081:8080"</p>
 <br>
-<p>        environment:</p>
 <br>
-<p>          KAFKA_CLUSTERS_0_NAME: local</p>
 <br>
-<p>          KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092</p>
 <br>
-<p>          KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://schema-registry:8081</p>
 <br>
-<p>          KAFKA_CLUSTERS_0_KAFKACONNECT_0_NAME: connect</p>
 <br>
-<p>          KAFKA_CLUSTERS_0_KAFKACONNECT_0_ADDRESS: http://kafka-connect:8083</p>
 <br>
-<p>          SERVER_PORT: 8080</p>
+<h1>docker-compose.yml</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>services:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kafka-ui:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>image: provectuslabs/kafka-ui:latest</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ports:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- "8081:8080"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>environment:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>KAFKA_CLUSTERS_0_NAME: local</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://schema-registry:8081</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>KAFKA_CLUSTERS_0_KAFKACONNECT_0_NAME: connect</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>KAFKA_CLUSTERS_0_KAFKACONNECT_0_ADDRESS: http://kafka-connect:8083</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SERVER_PORT: 8080</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Key features**:</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Dashboard with cluster overview and broker health</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Topic browser with partition visualization</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Consumer groups with lag chart</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Schema registry viewer</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Kafka Connect management</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Message filtering with custom predicates</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Dark and light themes</p>
 <br>
-<p>    # Multi-cluster configuration</p>
 <br>
-<p>    KAFKA_CLUSTERS_0_NAME: staging</p>
 <br>
-<p>    KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: staging-kafka:9092</p>
 <br>
-<p>    KAFKA_CLUSTERS_0_PROPERTIES_SECURITY_PROTOCOL: SASL_SSL</p>
 <br>
-<p>    KAFKA_CLUSTERS_0_PROPERTIES_SASL_MECHANISM: SCRAM-SHA-512</p>
 <br>
-<p>    KAFKA_CLUSTERS_0_PROPERTIES_SASL_JAAS_CONFIG: "org.apache.kafka.common.security.scram.ScramLoginModule required username='user' password='pass';"</p>
 <br>
-<p>    KAFKA_CLUSTERS_1_NAME: production</p>
 <br>
-<p>    KAFKA_CLUSTERS_1_BOOTSTRAPSERVERS: prod-kafka:9092</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Multi-cluster configuration</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>KAFKA_CLUSTERS_0_NAME: staging</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: staging-kafka:9092</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>KAFKA_CLUSTERS_0_PROPERTIES_SECURITY_PROTOCOL: SASL_SSL</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>KAFKA_CLUSTERS_0_PROPERTIES_SASL_MECHANISM: SCRAM-SHA-512</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>KAFKA_CLUSTERS_0_PROPERTIES_SASL_JAAS_CONFIG: "org.apache.kafka.common.security.scram.ScramLoginModule required username='user' password='pass';"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>KAFKA_CLUSTERS_1_NAME: production</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>KAFKA_CLUSTERS_1_BOOTSTRAPSERVERS: prod-kafka:9092</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Kowl (now Redpanda Console)</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Developer-friendly Kafka browser with a focus on data exploration:</p>
 <br>
-<p>    # docker-compose.yml</p>
 <br>
-<p>    services:</p>
 <br>
-<p>      redpanda-console:</p>
 <br>
-<p>        image: docker.redpanda.com/redpandadata/console:latest</p>
 <br>
-<p>        ports:</p>
 <br>
-<p>          - "8082:8080"</p>
 <br>
-<p>        environment:</p>
 <br>
-<p>          KAFKA_BROKERS: kafka:9092</p>
 <br>
-<p>          SCHEMA_REGISTRY_ENABLED: "true"</p>
 <br>
-<p>          SCHEMA_REGISTRY_URLS: "http://schema-registry:8081"</p>
+<br>
+<br>
+<br>
+<h1>docker-compose.yml</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>services:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>redpanda-console:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>image: docker.redpanda.com/redpandadata/console:latest</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ports:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- "8082:8080"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>environment:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>KAFKA_BROKERS: kafka:9092</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SCHEMA_REGISTRY_ENABLED: "true"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SCHEMA_REGISTRY_URLS: "http://schema-registry:8081"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Key features**:</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Fast message search and filtering with custom predicates</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Consumer group monitoring with lag alerts</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Schema registry with compatibility checking</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Message publish with schema validation</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Kafka Connect management</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Data masking for sensitive fields</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Role-based access control</p>
 <br>
-<p>    # Data masking configuration</p>
 <br>
-<p>    server:</p>
 <br>
-<p>      maskedFields:</p>
 <br>
-<p>        - fieldName: "password"</p>
 <br>
-<p>          maskingStrategy: "redact"</p>
 <br>
-<p>        - fieldName: "email"</p>
 <br>
-<p>          maskingStrategy: "hash"</p>
 <br>
-<p>        - fieldName: "ssn"</p>
 <br>
-<p>          maskingStrategy: "hash_last_four"</p>
 <br>
-<p>    # Message search predicate examples</p>
 <br>
-<p>    # Find messages with specific JSON field:</p>
 <br>
-<p>    # $.user.email == "test@example.com"</p>
 <br>
-<p>    # $.order.total > 100.0</p>
+<h1>Data masking configuration</h1>
 <br>
-<p>    # $.status in ["pending", "processing"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>server:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>maskedFields:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- fieldName: "password"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>maskingStrategy: "redact"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- fieldName: "email"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>maskingStrategy: "hash"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- fieldName: "ssn"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>maskingStrategy: "hash_last_four"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Message search predicate examples</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Find messages with specific JSON field:</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>$.user.email == "test@example.com"</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>$.order.total > 100.0</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>$.status in ["pending", "processing"]</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Offset Explorer (formerly Kafka Tool)</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>A desktop GUI application for Kafka (Windows/macOS/Linux):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Key features**:</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Tree-based cluster browser</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Topic partition viewer with message content</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Consumer group offset management</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Message producer</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Import/export topics</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* SSL/SASL authentication support</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Time-based message search</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  CLI Tools</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>The Kafka distribution includes essential CLI tools:</p>
 <br>
-<p>    # Topic management</p>
 <br>
-<p>    kafka-topics.sh --bootstrap-server localhost:9092 --list</p>
 <br>
-<p>    kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic orders</p>
 <br>
-<p>    kafka-topics.sh --bootstrap-server localhost:9092 --create --topic events --partitions 6 --replication-factor 3 --config retention.ms=604800000</p>
 <br>
-<p>    # Consumer group monitoring</p>
 <br>
-<p>    kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list</p>
 <br>
-<p>    kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group order-processor</p>
 <br>
-<p>    # Message inspection</p>
 <br>
-<p>    kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic orders --from-beginning --max-messages 10</p>
 <br>
-<p>    # Performance testing</p>
 <br>
-<p>    kafka-producer-perf-test.sh --topic test --num-records 100000 --record-size 1024 --throughput 10000 --producer-props bootstrap.servers=localhost:9092</p>
 <br>
-<p>    kafka-consumer-perf-test.sh --broker-list localhost:9092 --topic test --messages 50000</p>
+<br>
+<h1>Topic management</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kafka-topics.sh --bootstrap-server localhost:9092 --list</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic orders</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kafka-topics.sh --bootstrap-server localhost:9092 --create --topic events --partitions 6 --replication-factor 3 --config retention.ms=604800000</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Consumer group monitoring</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group order-processor</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Message inspection</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic orders --from-beginning --max-messages 10</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Performance testing</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kafka-producer-perf-test.sh --topic test --num-records 100000 --record-size 1024 --throughput 10000 --producer-props bootstrap.servers=localhost:9092</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>kafka-consumer-perf-test.sh --broker-list localhost:9092 --topic test --messages 50000</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Comparison</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Feature | AKHQ | Kafka UI | Kowl (Console) | Offset Explorer |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>|---------|------|----------|----------------|-----------------|</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Type | Web UI | Web UI | Web UI | Desktop |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Message search | Basic | Basic | Advanced | Basic |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Schema registry | Yes | Yes | Yes | No |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| Kafka Connect | Yes | Yes | Yes | No |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Data masking | No | No | Yes | No |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>| RBAC | No | No | Yes | No |</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Multi-cluster | Yes | Yes | Yes | Yes |</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Recommendations</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Full-featured management**: AKHQ for comprehensive cluster administration.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Quick monitoring**: Kafka UI for lightweight cluster health checks.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Message debugging**: Kowl (Redpanda Console) for powerful message search and filtering.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Desktop preference**: Offset Explorer for a native desktop experience.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Scripting**: Kafka CLI tools for automation and CI/CD tasks.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>For development and staging environments, Kafka UI or Kowl provide excellent web-based management with minimal setup. For production, AKHQ offers the most comprehensive feature set, while Redpanda Console provides the best message debugging experience.</p></div>
     </article>
@@ -368,6 +2162,7 @@
       <noscript><div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

@@ -8,482 +8,4122 @@ url: https://dingjiu1989-hue.github.io/en/ai/multimodal-ai.html
 
 # Multimodal AI Applications in 2026
 
+# Multimodal AI Applications in 2026
+
+  
+
+
+# Multimodal AI Applications in 2026
+
+  
+  
+  
+  
+
+
+# Multimodal AI Applications in 2026
+
+  
+  
+  
+  
+  
+  
+  
+
+
+# Multimodal AI Applications in 2026
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Multimodal AI Applications in 2026
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Multimodal AI models that understand and generate across text, images, audio, and video have moved from research papers to production APIs. By 2026, models like GPT-4o, Claude 3.5 Sonnet, Gemini 2.0, and open-source alternatives support native multimodal inputs, enabling applications that were impractical with separate unimodal pipelines. This article covers current capabilities, architectures, and production patterns for multimodal AI applications.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Vision-Language Models
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Modern vision-language models (VLMs) accept images and text together in a single context window:
 
-    from anthropic import Anthropic
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    client = Anthropic(api_key="sk-...")
 
-    # Analyze an image with text instructions
+from anthropic import Anthropic
 
-    response = client.messages.create(
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        model="claude-sonnet-4-20260512",
 
-        max_tokens=1024,
+client = Anthropic(api_key="sk-...")
 
-        messages=[{
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            "role": "user",
 
-            "content": [
+# Analyze an image with text instructions
 
-                {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                    "type": "image",
 
-                    "source": {
+response = client.messages.create(
 
-                        "type": "base64",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                        "media_type": "image/png",
 
-                        "data": screenshot_b64,
+model="claude-sonnet-4-20260512",
 
-                    },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                },
 
-                {
+max_tokens=1024,
 
-                    "type": "text",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                    "text": (
 
-                        "Analyze this UI screenshot. Identify: "
+messages=[{
 
-                        "1. All interactive elements "
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                        "2. Accessibility issues "
 
-                        "3. Loading states "
+"role": "user",
 
-                        "4. Error handling patterns "
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                    ),
 
-                },
+"content": [
 
-            ],
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        }],
 
-    )
+{
 
-    # The model "sees" the image and processes it jointly with text
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    analysis = response.content[0].text
+
+"type": "image",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"source": {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"type": "base64",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"media_type": "image/png",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"data": screenshot_b64,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+{
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"type": "text",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"text": (
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"Analyze this UI screenshot. Identify: "
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"1. All interactive elements "
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"2. Accessibility issues "
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"3. Loading states "
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"4. Error handling patterns "
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+),
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# The model "sees" the image and processes it jointly with text
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+analysis = response.content[0].text
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ### Document AI and OCR
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Extract structured data from complex documents:
 
-    async def process_invoice(invoice_path: str) -> dict:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        """Extract structured data from invoice images/PDFs."""
 
-        import base64
+async def process_invoice(invoice_path: str) -> dict:
 
-        with open(invoice_path, "rb") as f:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            image_data = base64.b64encode(f.read()).decode("utf-8")
 
-        response = client.messages.create(
+"""Extract structured data from invoice images/PDFs."""
 
-            model="claude-sonnet-4-20260512",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            max_tokens=2048,
 
-            messages=[{
+import base64
 
-                "role": "user",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                "content": [
 
-                    {"type": "image", "source": {
+with open(invoice_path, "rb") as f:
 
-                        "type": "base64",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                        "media_type": "application/pdf",
 
-                        "data": image_data,
+image_data = base64.b64encode(f.read()).decode("utf-8")
 
-                    }},
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                    {"type": "text", "text": """
 
-    Extract the following fields from this invoice as JSON:
+response = client.messages.create(
 
-    - invoice_number
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    - vendor_name
 
-    - vendor_address
+model="claude-sonnet-4-20260512",
 
-    - invoice_date
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    - due_date
 
-    - line_items (array of {description, quantity, unit_price, total})
+max_tokens=2048,
 
-    - subtotal
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    - tax_amount
 
-    - total_amount
+messages=[{
 
-    - currency
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    """},
 
-                ],
+"role": "user",
 
-            }],
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            response_format={"type": "json_object"},
 
-        )
+"content": [
 
-        return json.loads(response.content[0].text)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+{"type": "image", "source": {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"type": "base64",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"media_type": "application/pdf",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"data": image_data,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+{"type": "text", "text": """
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Extract the following fields from this invoice as JSON:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- invoice_number
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- vendor_name
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- vendor_address
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- invoice_date
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- due_date
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- line_items (array of {description, quantity, unit_price, total})
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- subtotal
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- tax_amount
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- total_amount
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- currency
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"""},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+response_format={"type": "json_object"},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return json.loads(response.content[0].text)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Speech-to-Text and Audio Understanding
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Multimodal models now handle audio directly without separate ASR pipelines:
 
-    import asyncio
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    async def analyze_call_recording(audio_path: str) -> dict:
 
-        """Analyze a customer support call recording."""
+import asyncio
 
-        import base64
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        with open(audio_path, "rb") as f:
 
-            audio_data = base64.b64encode(f.read()).decode("utf-8")
+async def analyze_call_recording(audio_path: str) -> dict:
 
-        response = client.messages.create(
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            model="claude-sonnet-4-20260512",
 
-            max_tokens=2048,
+"""Analyze a customer support call recording."""
 
-            messages=[{
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                "role": "user",
 
-                "content": [
+import base64
 
-                    {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                        "type": "audio",
 
-                        "source": {
+with open(audio_path, "rb") as f:
 
-                            "type": "base64",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                            "media_type": "audio/mp3",
 
-                            "data": audio_data,
+audio_data = base64.b64encode(f.read()).decode("utf-8")
 
-                        },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                    },
 
-                    {
+response = client.messages.create(
 
-                        "type": "text",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                        "text": """
 
-    Analyze this customer support call:
+model="claude-sonnet-4-20260512",
 
-    1. Transcribe the conversation
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    2. Identify the customer's issue
 
-    3. Was the issue resolved? (yes/no/partial)
+max_tokens=2048,
 
-    4. Sentiment analysis (customer + agent)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    5. Compliance issues (did agent disclose required info?)
 
-    6. Suggested improvements
+messages=[{
 
-    """,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                    },
 
-                ],
+"role": "user",
 
-            }],
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        )
 
-        return parse_analysis(response.content[0].text)
+"content": [
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+{
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"type": "audio",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"source": {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"type": "base64",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"media_type": "audio/mp3",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"data": audio_data,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+{
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"type": "text",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"text": """
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Analyze this customer support call:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+1\\\\\\\\\\\\\\\\. Transcribe the conversation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+2\\\\\\\\\\\\\\\\. Identify the customer's issue
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+3\\\\\\\\\\\\\\\\. Was the issue resolved? (yes/no/partial)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\. Sentiment analysis (customer + agent)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+5\\\\\\\\\\\\\\\\. Compliance issues (did agent disclose required info?)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+6\\\\\\\\\\\\\\\\. Suggested improvements
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+""",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return parse_analysis(response.content[0].text)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Multimodal RAG
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Traditional RAG is text-only. Multimodal RAG retrieves and reasons across images, diagrams, and tables:
 
-    import chromadb
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    from sentence_transformers import SentenceTransformer
 
-    import numpy as np
+import chromadb
 
-    class MultimodalRAG:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        def __init__(self):
 
-            self.text_encoder = SentenceTransformer("all-MiniLM-L6-v2")
+from sentence_transformers import SentenceTransformer
 
-            self.image_encoder = SentenceTransformer(
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                "clip-ViT-B-32-multilingual-v1"
 
-            )
+import numpy as np
 
-            self.collection = chromadb.Client().create_collection(
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                "multimodal_knowledge_base"
 
-            )
+class MultimodalRAG:
 
-        def index_document(
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            self,
 
-            doc_id: str,
+def __init__(self):
 
-            text: str,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            images: List[np.ndarray],
 
-            tables: List[dict],
+self.text_encoder = SentenceTransformer("all-MiniLM-L6-v2")
 
-        ):
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            embeddings = []
 
-            # Index text chunks
+self.image_encoder = SentenceTransformer(
 
-            text_chunks = self._chunk_text(text)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            text_embeddings = self.text_encoder.encode(text_chunks)
 
-            embeddings.extend(text_embeddings)
+"clip-ViT-B-32-multilingual-v1"
 
-            # Index images
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            for img in images:
 
-                img_embedding = self.image_encoder.encode(img)
+)
 
-                embeddings.append(img_embedding)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            # Index with metadata about modality
 
-            self.collection.add(
+self.collection = chromadb.Client().create_collection(
 
-                embeddings=embeddings,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                ids=[f"{doc_id}_{i}" for i in range(len(embeddings))],
 
-                metadatas=[
+"multimodal_knowledge_base"
 
-                    {"modality": "text", "doc_id": doc_id},
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                    *[{"modality": "image", "doc_id": doc_id}
 
-                      for _ in images],
+)
 
-                ],
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            )
 
-        def query(self, question: str, top_k: int = 5) -> List[dict]:
+def index_document(
 
-            # Encode query
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            query_embedding = self.text_encoder.encode(question)
 
-            # Retrieve across all modalities
+self,
 
-            results = self.collection.query(
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                query_embeddings=[query_embedding],
 
-                n_results=top_k,
+doc_id: str,
 
-            )
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            return results
+
+text: str,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+images: List[np.ndarray],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+tables: List[dict],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+embeddings = []
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Index text chunks
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+text_chunks = self._chunk_text(text)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+text_embeddings = self.text_encoder.encode(text_chunks)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+embeddings.extend(text_embeddings)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Index images
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+for img in images:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+img_embedding = self.image_encoder.encode(img)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+embeddings.append(img_embedding)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Index with metadata about modality
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+self.collection.add(
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+embeddings=embeddings,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+ids=[f"{doc_id}_{i}" for i in range(len(embeddings))],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+metadatas=[
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+{"modality": "text", "doc_id": doc_id},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+*[{"modality": "image", "doc_id": doc_id}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+for _ in images],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def query(self, question: str, top_k: int = 5) -> List[dict]:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Encode query
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+query_embedding = self.text_encoder.encode(question)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Retrieve across all modalities
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+results = self.collection.query(
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+query_embeddings=[query_embedding],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+n_results=top_k,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return results
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Audio Transcription and Analysis Pipeline
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 For production audio processing, combine streaming with multimodal analysis:
 
-    class AudioProcessingPipeline:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        def __init__(self):
 
-            self.buffer_duration = 300  # 5-minute chunks
+class AudioProcessingPipeline:
 
-            self.overlap = 30  # 30-second overlap for continuity
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        async def process_stream(self, audio_stream: AsyncGenerator[bytes]):
 
-            buffer = []
+def __init__(self):
 
-            buffer_duration = 0
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            async for chunk in audio_stream:
 
-                buffer.append(chunk)
+self.buffer_duration = 300 # 5-minute chunks
 
-                buffer_duration += self._chunk_duration(chunk)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                if buffer_duration >= self.buffer_duration:
 
-                    # Process buffer
+self.overlap = 30 # 30-second overlap for continuity
 
-                    segment = b"".join(buffer)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                    # Real-time transcription + analysis
 
-                    result = await self._analyze_segment(segment)
+async def process_stream(self, audio_stream: AsyncGenerator[bytes]):
 
-                    # Extract action items, sentiment, entities
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                    actions = self._extract_actions(result)
 
-                    if actions:
+buffer = []
 
-                        await self._route_actions(actions)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                    # Keep overlap for continuity
 
-                    overlap_bytes = int(
+buffer_duration = 0
 
-                        len(segment) * (self.overlap / buffer_duration)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                    )
 
-                    buffer = [segment[-overlap_bytes:]]
+async for chunk in audio_stream:
 
-                    buffer_duration = self.overlap
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        async def _analyze_segment(self, audio_bytes: bytes) -> dict:
 
-            response = client.messages.create(
+buffer.append(chunk)
 
-                model="claude-sonnet-4-20260512",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                messages=[{
 
-                    "role": "user",
+buffer_duration += self._chunk_duration(chunk)
 
-                    "content": [
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                        {"type": "audio", "source": {
 
-                            "type": "base64",
+if buffer_duration >= self.buffer_duration:
 
-                            "media_type": "audio/wav",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                            "data": base64.b64encode(audio_bytes).decode(),
 
-                        }},
+# Process buffer
 
-                        {"type": "text", "text": """
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    Transcribe and analyze this audio segment:
 
-    - Full transcript with speaker diarization
+segment = b"".join(buffer)
 
-    - Key action items
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    - Decisions made
 
-    - Sentiment trend
+# Real-time transcription + analysis
 
-    - Urgent issues requiring immediate attention
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    """},
 
-                    ],
+result = await self._analyze_segment(segment)
 
-                }],
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            )
 
-            return response
+# Extract action items, sentiment, entities
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+actions = self._extract_actions(result)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if actions:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+await self._route_actions(actions)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Keep overlap for continuity
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+overlap_bytes = int(
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+len(segment) * (self.overlap / buffer_duration)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+buffer = [segment[-overlap_bytes:]]
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+buffer_duration = self.overlap
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+async def _analyze_segment(self, audio_bytes: bytes) -> dict:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+response = client.messages.create(
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+model="claude-sonnet-4-20260512",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+messages=[{
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"role": "user",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"content": [
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+{"type": "audio", "source": {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"type": "base64",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"media_type": "audio/wav",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"data": base64.b64encode(audio_bytes).decode(),
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+{"type": "text", "text": """
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+Transcribe and analyze this audio segment:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- Full transcript with speaker diarization
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- Key action items
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- Decisions made
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- Sentiment trend
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- Urgent issues requiring immediate attention
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"""},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return response
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Use Cases and Limitations
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Use Case | Capability | Current Limitations |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 |---|---|---|
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Document processing | Extract data from receipts, invoices, forms | Handwriting recognition accuracy |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 | UI testing | Visual regression + semantic understanding | Dynamic content handling |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Content moderation | Analyze text + images together | Cultural context subtlety |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 | Accessibility | Generate alt text, describe scenes | Real-time video processing latency |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Medical imaging | Analyze X-rays, MRIs with clinical notes | Regulatory approval, hallucination risk |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 | Video understanding | Summarize meetings, detect events | Long video context limits |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Production Considerations
 
-    # Multimodal model selection criteria
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    selection:
 
-      latency:
+# Multimodal model selection criteria
 
-        text_only: "< 500ms"
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        text+image: "< 2s"
 
-        audio_input: "< 5s"
+selection:
 
-        video_analysis: "< 30s (batch)"
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      cost:
 
-        text: "Baseline"
+latency:
 
-        text+image: "3-5x text cost"
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        audio: "5-10x text cost (per minute)"
 
-        video: "10-20x text cost (per minute)"
+text_only: "< 500ms"
 
-      context_window:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        text: "200K tokens"
 
-        text+image: "~100 images or 1 hour audio"
+text+image: "< 2s"
 
-        video: "Limited by token count (~10-15 min)"
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      accuracy:
 
-        OCR: ">99% on printed, >90% on handwriting"
+audio_input: "< 5s"
 
-        scene_description: "Good on common scenes, poor on niche domains"
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        audio_transcription: ">95% WER on clean speech, >80% on accented"
+
+video_analysis: "< 30s (batch)"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+cost:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+text: "Baseline"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+text+image: "3-5x text cost"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+audio: "5-10x text cost (per minute)"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+video: "10-20x text cost (per minute)"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+context_window:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+text: "200K tokens"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+text+image: "~100 images or 1 hour audio"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+video: "Limited by token count (~10-15 min)"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+accuracy:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+OCR: ">99% on printed, >90% on handwriting"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+scene_description: "Good on common scenes, poor on niche domains"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+audio_transcription: ">95% WER on clean speech, >80% on accented"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Multimodal AI is rapidly maturing but still requires careful evaluation for each use case. Start with well-scoped document processing or image analysis tasks before expanding to real-time audio or video pipelines.

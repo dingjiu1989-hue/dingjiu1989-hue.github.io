@@ -23,7 +23,7 @@ Open Source| Yes (Apache 2.0)| Yes (BSD-3)| No (proprietary)| No (Google proprie
 Self-Hosted| Yes (Docker, K8s)| Yes (Docker, 1-click DO)| No| No (emulator only for dev)  
 Generous Free Tier| Yes (50K MAU, 500MB DB, 1GB storage)| Yes (75K MAU, 2GB DB, 5GB storage)| Yes (1M rows, 1GB storage)| Yes (50K MAU, 1GB Firestore, 10GB storage)  
 Pricing Start| $25/mo Pro| $15/mo Pro| $25/mo Pro| $25/mo (Blaze — PAYG)  
-
+  
 ## When to Choose Each Platform
 
 **Supabase — Best for:** Most projects. PostgreSQL is the killer feature — you get a real database with SQL, joins, migrations, and the entire Postgres extension ecosystem (PostGIS, pgvector, full-text search). Row Level Security (RLS) is a genuinely innovative approach to authorization. **Weak spot:** Real-time subscriptions are built on PostgreSQL replication (not WebSocket-first); complex real-time apps may feel less responsive than Firebase or Convex.
@@ -43,5 +43,5 @@ Firebase-style but open source + self-hosted| Appwrite| Most Firebase-like, gene
 Real-time-first app (chat, collaboration)| Convex| Best reactive model, automatic cache invalidation  
 Google ecosystem, want most mature platform| Firebase| Most mature, deepest Google integration  
 Self-hosted, full control, SQL essential| Supabase (self-hosted)| Apache 2.0, Docker deploy, full Postgres  
-
+  
 **Bottom line:** Supabase is the best BaaS for 80% of projects — PostgreSQL alone makes it worth choosing (you can always migrate to your own Postgres later), the free tier is generous, and the open source model means no lock-in. Convex is the pick for real-time-first applications. Firebase is still solid but the NoSQL-only approach and vendor lock-in are real concerns in 2026. See also: [Supabase vs Firebase vs Neon](</en/compare/supabase-vs-firebase-vs-neon.html>) and [Best Open Source SaaS Alternatives](</en/tools/best-open-source-saas-alternatives.html>).

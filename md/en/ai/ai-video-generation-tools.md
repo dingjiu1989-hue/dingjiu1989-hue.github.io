@@ -22,7 +22,7 @@ Video-to-Video (edit/style)| Yes (Gen-4 motion brush)| Limited| Yes (style trans
 Pricing (API)| $0.05/video second| $0.03/video second| TBD (API not public)| $0.025/video second  
 Resolution| Up to 4K| Up to 1080p| Up to 1080p (4K planned)| Up to 1080p  
 Best Use Case| Professional video production, VFX| Social media content, quick demos| Complex scenes with physics| Rapid prototyping, concept videos  
-
+  
 ## Developer Use Cases for AI Video
 
 Use Case| Recommended Tool| Why  
@@ -32,16 +32,17 @@ Social media content automation| Pika 2.0| Fast, affordable, creative outputs
 Educational/tutorial content| Runway or Luma| Image-to-video for diagram animations  
 Game asset trailers| Sora| Best physics simulation for game-like scenes  
 Marketing A/B testing| Luma| Cheapest per-second, good for testing  
-
+  
 ## Integration Code Example (Runway API)
-
+    
+    
     # Generate and download an AI video via Runway API
     import requests
     import time
-
+    
     API_KEY = "your_runway_api_key"
     headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
-
+    
     # Start generation
     resp = requests.post("https://api.runwayml.com/v1/generations", json={
         "prompt": "Drone shot of a developer typing code in a modern office, natural lighting",
@@ -50,7 +51,7 @@ Marketing A/B testing| Luma| Cheapest per-second, good for testing
         "watermark": False,
     }, headers=headers)
     gen_id = resp.json()["id"]
-
+    
     # Poll until complete
     while True:
         status = requests.get(f"https://api.runwayml.com/v1/generations/{gen_id}", headers=headers).json()
@@ -58,7 +59,7 @@ Marketing A/B testing| Luma| Cheapest per-second, good for testing
             video_url = status["output"]["video_url"]
             break
         time.sleep(5)
-
+    
     # Download video
     with open("demo_video.mp4", "wb") as f:
         f.write(requests.get(video_url).content)

@@ -20,7 +20,7 @@ OAuth 2.1 + OIDC| High| Good (redirect flow)| Medium-High| Third-party login, en
 Passkeys (WebAuthn)| Highest (phishing-resistant)| Excellent (biometric)| Medium| Consumer apps, replacing passwords  
 Magic Links| Medium| Good (email-based)| Low| Low-security apps, quick onboarding  
 API Keys| Medium (if stored properly)| N/A (machine-to-machine)| Low| Server-to-server APIs, CI/CD, SDKs  
-
+  
 ## Session Tokens: The Gold Standard for Web Apps
 
 **Best for:** Server-rendered web applications where the same origin serves both frontend and API. **Key rules:**
@@ -31,10 +31,13 @@ API Keys| Medium (if stored properly)| N/A (machine-to-machine)| Low| Server-to-
   * Implement CSRF protection for cookie-based sessions (double-submit cookie pattern or Synchronizer Token)
   * Set reasonable session duration: 15 minutes idle timeout, 8 hours absolute max
 
+
+
 ## JWT: When and How to Use Safely
 
 **Best for:** APIs consumed by multiple client types (web, mobile, third-party). **Critical rules:** Never store sensitive data in JWT payload (it is base64-encoded, not encrypted). Always set short expiration (15-60 min) and use refresh tokens for renewal. Maintain a server-side token denylist for revoked tokens.
-
+    
+    
     // Node.js: Signing a JWT securely
     const jwt = require('jsonwebtoken');
     const token = jwt.sign(
@@ -42,7 +45,7 @@ API Keys| Medium (if stored properly)| N/A (machine-to-machine)| Low| Server-to-
       process.env.JWT_SECRET, // >= 256-bit random string, stored in env
       { expiresIn: '15m', algorithm: 'HS256' } // Never use 'none' algorithm
     );
-
+    
     // Refresh token rotation: issue a new refresh token each time
     // and invalidate the old one (maintain a family of refresh tokens)
 
@@ -57,6 +60,8 @@ API Keys| Medium (if stored properly)| N/A (machine-to-machine)| Low| Server-to-
   * The Resource Owner Password Credentials grant is removed (never send username/password to an authorization server)
   * Bearer tokens must not be passed in URL query strings
 
+
+
 ## Password Storage: Non-Negotiable Rules
 
 Rule| Correct| Wrong  
@@ -64,5 +69,5 @@ Rule| Correct| Wrong
 Hash algorithm| bcrypt (cost 12+), argon2id| SHA-256, MD5, bcrypt with cost < 10  
 Pepper| 32-byte random pepper stored in HSM or env var, separate from DB| No pepper, or pepper stored in same DB column  
 Password requirements| Minimum 8 chars, check against haveibeenpwned API| Requiring special chars that users forget; max length limits  
-
+  
 **Bottom line:** Use session tokens for web apps and JWTs for APIs — do not use JWTs for web app sessions. Implement passkeys as your primary auth method if possible (highest security + best UX). Never roll your own crypto — use well-tested libraries (bcrypt, @simplewebauthn, jose, node-crypto). See also: [Clerk vs Auth0 vs Lucia](</en/compare/clerk-vs-auth0-vs-lucia.html>) and [Web Security Basics](</en/tech/web-security-basics.html>).

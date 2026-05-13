@@ -8,304 +8,2609 @@ url: https://dingjiu1989-hue.github.io/en/ai/llm-version-management.html
 
 # LLM Version Management: Model Registry, A/B Testing, Rollback
 
+# LLM Version Management: Model Registry, A/B Testing, Rollback
+
+  
+
+
+# LLM Version Management: Model Registry, A/B Testing, Rollback
+
+  
+  
+  
+  
+
+
+# LLM Version Management: Model Registry, A/B Testing, Rollback
+
+  
+  
+  
+  
+  
+  
+  
+
+
+# LLM Version Management: Model Registry, A/B Testing, Rollback
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# LLM Version Management: Model Registry, A/B Testing, Rollback
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 LLMs change frequently: new model releases, fine-tuned versions, updated system prompts, and modified retrieval pipelines all constitute "versions" of your AI system. Unlike traditional software where you can pin a dependency version, LLM behavior shifts with each API update. This article covers the tools and practices for managing LLM versions in production.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Model Registry
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 A model registry tracks metadata for every deployed model version:
 
-    from datetime import datetime
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    from enum import Enum
 
-    import json
+from datetime import datetime
 
-    class ModelStatus(Enum):
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        STAGING = "staging"
 
-        CANARY = "canary"
+from enum import Enum
 
-        PRODUCTION = "production"
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        ROLLED_BACK = "rolled_back"
 
-        DEPRECATED = "deprecated"
+import json
 
-    class ModelRegistry:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        def __init__(self, storage_backend):
 
-            self.storage = storage_backend
+class ModelStatus(Enum):
 
-        def register_model(self, model_id: str, metadata: dict) -> dict:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            entry = {
 
-                "model_id": model_id,
+STAGING = "staging"
 
-                "provider": metadata.get("provider"),
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                "version": metadata.get("version"),
 
-                "description": metadata.get("description"),
+CANARY = "canary"
 
-                "parameters": metadata.get("parameters", {}),
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                "system_prompt_hash": metadata.get("system_prompt_hash"),
 
-                "registered_at": datetime.now().isoformat(),
+PRODUCTION = "production"
 
-                "status": ModelStatus.STAGING.value,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                "evaluation_scores": {},
 
-                "deployment_history": [],
+ROLLED_BACK = "rolled_back"
 
-            }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            self.storage.save(f"models/{model_id}", entry)
 
-            return entry
+DEPRECATED = "deprecated"
 
-        def promote(self, model_id: str, target_status: ModelStatus):
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            entry = self.storage.load(f"models/{model_id}")
 
-            entry["status"] = target_status.value
+class ModelRegistry:
 
-            entry["deployment_history"].append({
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                "action": f"promoted_to_{target_status.value}",
 
-                "timestamp": datetime.now().isoformat(),
+def __init__(self, storage_backend):
 
-            })
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            self.storage.save(f"models/{model_id}", entry)
 
-        def get_active_model(self) -> dict:
+self.storage = storage_backend
 
-            """Get the current production model."""
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            all_models = self.storage.load_all("models/*")
 
-            for model in sorted(all_models, key=lambda m: m["registered_at"], reverse=True):
+def register_model(self, model_id: str, metadata: dict) -> dict:
 
-                if model["status"] == ModelStatus.PRODUCTION.value:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                    return model
 
-            return None
+entry = {
 
-    # Usage
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    registry = ModelRegistry(redis_client)
 
-    registry.register_model("claude-sonnet-v4-1", {
+"model_id": model_id,
 
-        "provider": "anthropic",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        "version": "claude-sonnet-4-20260512",
 
-        "parameters": {"temperature": 0.7, "max_tokens": 4096},
+"provider": metadata.get("provider"),
 
-    })
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"version": metadata.get("version"),
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"description": metadata.get("description"),
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"parameters": metadata.get("parameters", {}),
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"system_prompt_hash": metadata.get("system_prompt_hash"),
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"registered_at": datetime.now().isoformat(),
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"status": ModelStatus.STAGING.value,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"evaluation_scores": {},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"deployment_history": [],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+self.storage.save(f"models/{model_id}", entry)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return entry
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def promote(self, model_id: str, target_status: ModelStatus):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+entry = self.storage.load(f"models/{model_id}")
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+entry["status"] = target_status.value
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+entry["deployment_history"].append({
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"action": f"promoted_to_{target_status.value}",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"timestamp": datetime.now().isoformat(),
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+})
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+self.storage.save(f"models/{model_id}", entry)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def get_active_model(self) -> dict:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"""Get the current production model."""
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+all_models = self.storage.load_all("models/*")
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+for model in sorted(all_models, key=lambda m: m["registered_at"], reverse=True):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if model["status"] == ModelStatus.PRODUCTION.value:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return model
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return None
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Usage
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+registry = ModelRegistry(redis_client)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+registry.register_model("claude-sonnet-v4-1", {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"provider": "anthropic",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"version": "claude-sonnet-4-20260512",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"parameters": {"temperature": 0.7, "max_tokens": 4096},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+})
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  A/B Testing Framework
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Compare model versions on live traffic with statistical significance:
 
-    import random
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    import hashlib
 
-    class ModelABTest:
+import random
 
-        def __init__(self, registry: ModelRegistry):
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            self.registry = registry
 
-            self.experiments = {}
+import hashlib
 
-        def start_experiment(self, name: str, model_a: str, model_b: str, traffic_split: float = 0.5):
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            self.experiments[name] = {
 
-                "model_a": model_a,
+class ModelABTest:
 
-                "model_b": model_b,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                "traffic_split": traffic_split,
 
-                "started_at": datetime.now().isoformat(),
+def __init__(self, registry: ModelRegistry):
 
-                "results": {"a": {"calls": 0, "errors": 0, "latency_ms": []},
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                            "b": {"calls": 0, "errors": 0, "latency_ms": []}},
 
-            }
+self.registry = registry
 
-        def select_model(self, experiment: str, user_id: str) -> str:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            exp = self.experiments[experiment]
 
-            # Deterministic assignment based on user_id hash
+self.experiments = {}
 
-            hash_val = int(hashlib.md5(f"{experiment}:{user_id}".encode()).hexdigest(), 16)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            if (hash_val % 1000) / 1000 < exp["traffic_split"]:
 
-                return exp["model_a"], "a"
+def start_experiment(self, name: str, model_a: str, model_b: str, traffic_split: float = 0.5):
 
-            return exp["model_b"], "b"
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        def record_result(self, experiment: str, variant: str, latency_ms: float, error: bool = False):
 
-            exp = self.experiments[experiment]
+self.experiments[name] = {
 
-            exp["results"][variant]["calls"] += 1
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            exp["results"][variant]["latency_ms"].append(latency_ms)
 
-            if error:
+"model_a": model_a,
 
-                exp["results"][variant]["errors"] += 1
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        def get_winner(self, experiment: str) -> str | None:
 
-            exp = self.experiments[experiment]
+"model_b": model_b,
 
-            results = exp["results"]
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            if results["a"]["calls"] < 100 or results["b"]["calls"] < 100:
 
-                return None  # Not enough data
+"traffic_split": traffic_split,
 
-            error_rate_a = results["a"]["errors"] / results["a"]["calls"]
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            error_rate_b = results["b"]["errors"] / results["b"]["calls"]
 
-            # Simple decision: lower error rate wins
+"started_at": datetime.now().isoformat(),
 
-            if error_rate_a < error_rate_b:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                return exp["model_a"]
 
-            return exp["model_b"]
+"results": {"a": {"calls": 0, "errors": 0, "latency_ms": []},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"b": {"calls": 0, "errors": 0, "latency_ms": []}},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def select_model(self, experiment: str, user_id: str) -> str:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+exp = self.experiments[experiment]
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Deterministic assignment based on user_id hash
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+hash_val = int(hashlib.md5(f"{experiment}:{user_id}".encode()).hexdigest(), 16)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if (hash_val % 1000) / 1000 < exp["traffic_split"]:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return exp["model_a"], "a"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return exp["model_b"], "b"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def record_result(self, experiment: str, variant: str, latency_ms: float, error: bool = False):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+exp = self.experiments[experiment]
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+exp["results"][variant]["calls"] += 1
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+exp["results"][variant]["latency_ms"].append(latency_ms)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if error:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+exp["results"][variant]["errors"] += 1
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def get_winner(self, experiment: str) -> str | None:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+exp = self.experiments[experiment]
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+results = exp["results"]
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if results["a"]["calls"] < 100 or results["b"]["calls"] < 100:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return None # Not enough data
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+error_rate_a = results["a"]["errors"] / results["a"]["calls"]
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+error_rate_b = results["b"]["errors"] / results["b"]["calls"]
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Simple decision: lower error rate wins
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if error_rate_a < error_rate_b:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return exp["model_a"]
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return exp["model_b"]
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Gradual Rollout
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Deploy new models incrementally with automatic rollback:
 
-    class GradualRollout:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        def __init__(self, registry: ModelRegistry, evaluation_fn):
 
-            self.registry = registry
+class GradualRollout:
 
-            self.evaluate = evaluation_fn
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        async def deploy(self, model_id: str, stages: list[dict] = None):
 
-            if stages is None:
+def __init__(self, registry: ModelRegistry, evaluation_fn):
 
-                stages = [
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                    {"name": "canary", "traffic": 0.01, "duration_min": 30, "eval_threshold": 0.9},
 
-                    {"name": "small", "traffic": 0.10, "duration_min": 120, "eval_threshold": 0.95},
+self.registry = registry
 
-                    {"name": "medium", "traffic": 0.25, "duration_min": 360, "eval_threshold": 0.95},
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                    {"name": "large", "traffic": 0.50, "duration_min": 720, "eval_threshold": 0.95},
 
-                    {"name": "full", "traffic": 1.00, "duration_min": 0, "eval_threshold": 0.0},
+self.evaluate = evaluation_fn
 
-                ]
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            for stage in stages:
 
-                print(f"Deploying to stage: {stage['name']} ({stage['traffic']*100}% traffic)")
+async def deploy(self, model_id: str, stages: list[dict] = None):
 
-                self.registry.promote(model_id, ModelStatus.CANARY)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                await self._route_traffic(model_id, stage["traffic"])
 
-                # Wait for evaluation period
+if stages is None:
 
-                await asyncio.sleep(stage["duration_min"] * 60)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                # Evaluate performance
 
-                scores = await self.evaluate(model_id)
+stages = [
 
-                if scores.get("overall", 0) < stage["eval_threshold"]:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                    print(f"Stage {stage['name']} failed evaluation. Rolling back.")
 
-                    await self.rollback(model_id)
+{"name": "canary", "traffic": 0.01, "duration_min": 30, "eval_threshold": 0.9},
 
-                    return False
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            self.registry.promote(model_id, ModelStatus.PRODUCTION)
 
-            return True
+{"name": "small", "traffic": 0.10, "duration_min": 120, "eval_threshold": 0.95},
 
-        async def rollback(self, model_id: str):
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            previous_model = self.registry.get_active_model()
 
-            self.registry.promote(previous_model["model_id"], ModelStatus.PRODUCTION)
+{"name": "medium", "traffic": 0.25, "duration_min": 360, "eval_threshold": 0.95},
 
-            self.registry.promote(model_id, ModelStatus.ROLLED_BACK)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            print(f"Rolled back to {previous_model['model_id']}")
+
+{"name": "large", "traffic": 0.50, "duration_min": 720, "eval_threshold": 0.95},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+{"name": "full", "traffic": 1.00, "duration_min": 0, "eval_threshold": 0.0},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+]
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+for stage in stages:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+print(f"Deploying to stage: {stage['name']} ({stage['traffic']*100}% traffic)")
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+self.registry.promote(model_id, ModelStatus.CANARY)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+await self._route_traffic(model_id, stage["traffic"])
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Wait for evaluation period
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+await asyncio.sleep(stage["duration_min"] * 60)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Evaluate performance
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+scores = await self.evaluate(model_id)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if scores.get("overall", 0) < stage["eval_threshold"]:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+print(f"Stage {stage['name']} failed evaluation. Rolling back.")
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+await self.rollback(model_id)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return False
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+self.registry.promote(model_id, ModelStatus.PRODUCTION)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return True
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+async def rollback(self, model_id: str):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+previous_model = self.registry.get_active_model()
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+self.registry.promote(previous_model["model_id"], ModelStatus.PRODUCTION)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+self.registry.promote(model_id, ModelStatus.ROLLED_BACK)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+print(f"Rolled back to {previous_model['model_id']}")
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Evaluation Gate
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Automated evaluation runs before any model promotion:
 
-    class EvaluationGate:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        def __init__(self, test_suite: list[dict]):
 
-            self.test_suite = test_suite  # [{input, expected_output, metrics}]
+class EvaluationGate:
 
-        async def evaluate_model(self, model_fn) -> dict:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            results = {"passed": 0, "failed": 0, "details": []}
 
-            for test in self.test_suite:
+def __init__(self, test_suite: list[dict]):
 
-                output = await model_fn(test["input"])
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                score = self._score_output(output, test)
 
-                if score >= test.get("threshold", 0.8):
+self.test_suite = test_suite # [{input, expected_output, metrics}]
 
-                    results["passed"] += 1
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                else:
 
-                    results["failed"] += 1
+async def evaluate_model(self, model_fn) -> dict:
 
-                results["details"].append({"test": test["input"], "score": score})
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            results["pass_rate"] = results["passed"] / len(self.test_suite)
 
-            return results
+results = {"passed": 0, "failed": 0, "details": []}
 
-        def _score_output(self, output: str, test: dict) -> float:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            if "expected_output" in test:
 
-                return self._similarity(output, test["expected_output"])
+for test in self.test_suite:
 
-            return 0.0
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+output = await model_fn(test["input"])
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+score = self._score_output(output, test)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if score >= test.get("threshold", 0.8):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+results["passed"] += 1
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+else:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+results["failed"] += 1
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+results["details"].append({"test": test["input"], "score": score})
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+results["pass_rate"] = results["passed"] / len(self.test_suite)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return results
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+def _score_output(self, output: str, test: dict) -> float:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if "expected_output" in test:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return self._similarity(output, test["expected_output"])
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return 0.0
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Conclusion
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Treat LLM versions as managed artifacts, not API parameters. Use a model registry to track every version with its metadata, system prompt, and evaluation scores. Implement A/B testing to compare versions on live traffic. Deploy new models gradually through canary, small, medium, and full rollout stages with automated evaluation gates at each stage. Maintain the ability to roll back instantly when metrics degrade. This discipline makes LLM version management as reliable as traditional software deployment.

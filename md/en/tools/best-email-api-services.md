@@ -24,7 +24,7 @@ React Email Support| Yes (first-class, built by same team)| No (HTML templates)|
 Email Builder / Templates| React Email (code-based)| Dynamic Templates (WYSIWYG + code)| Templates (code-based)| None (send raw HTML)  
 Analytics / Tracking| Opens, clicks, bounces, complaints| Opens, clicks, bounces, unsubscribe| Opens, clicks, bounces, spam score| Opens, clicks (via SNS + custom code)  
 Best For| Modern dev stack, React Email users| Marketing + transactional combined| Transactional email, fast delivery| High volume, lowest cost  
-
+  
 ## When to Choose Each Service
 
 **Resend — Best for:** Modern JavaScript/TypeScript stacks. Resend is the newest entrant with the best developer experience — built by the React Email team, first-class React Email support, and a clean API. **Weak spot:** Newer (fewer production track records); free tier is limited (100/day).
@@ -44,5 +44,5 @@ Marketing + transactional combined| SendGrid| Templates + marketing automation b
 Transactional only, need fast reliable delivery| Postmark| Fastest delivery, best deliverability  
 High volume (>100K/month), cost matters| Amazon SES| 10x cheaper, reliable at scale  
 Newsletter or marketing automation| SendGrid or dedicated ESP| SendGrid for simplicity, dedicated ESP for advanced  
-
+  
 **Bottom line:** Resend is the best default for new projects — modern API, React Email support, and great DX. Postmark wins when deliverability is the #1 priority. SES is the cost leader for high volume. SendGrid bridges transactional and marketing — useful if you need both but don't want two vendors. See also: [Best Log Management Tools](</en/tools/best-log-management-tools.html>) and [Webhook Implementation Guide](</en/tech/webhook-implementation-guide.html>).

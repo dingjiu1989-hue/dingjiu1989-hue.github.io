@@ -21,7 +21,7 @@ Ongoing maintenance?| Minimal after initial build| Constant updates, security pa
 Available solutions?| Nothing good exists| Multiple excellent, affordable options  
 Your expertise?| You're an expert in this area| You'd be learning from scratch  
 Cost of buying?| Prohibitively expensive at your scale| Affordable, scales linearly with usage  
-
+  
 ## Common Build vs Buy Decisions for SaaS
 
 Component| Verdict| Recommended Solution| Why  
@@ -36,7 +36,7 @@ Admin Panel| **BUY**|  Retool, refine.dev, react-admin| Internal tool — not yo
 Your Core Feature| **BUILD**|  Your code here| This is what users pay for; this must be unique  
 Custom Integrations| **BUILD**|  n8n + custom nodes, custom code| Integrations with customer systems are often your moat  
 Analytics Dashboard| **BUY**|  PostHog, Plausible, Umami| Excellent free options; building analytics is a distraction  
-
+  
 ## The Real Cost of "Build"
 
 Cost Category| Initial Build| Year 1 Maintenance| Year 2+ Maintenance  
@@ -45,7 +45,7 @@ Authentication| 40-80 hours| 20-40 hours (OAuth changes, security patches)| 20-4
 Payments| 80-160 hours| 40-80 hours (tax law changes, new payment methods)| 40-80 hours/year  
 Admin Panel| 80-200 hours| 40-100 hours (new features, permissions changes)| 40-100 hours/year  
 Email System| 20-40 hours| 10-20 hours (deliverability, templates)| 20-40 hours/year  
-
+  
 At a developer's opportunity cost of $100-150/hour, building auth alone "costs" $4,000-$12,000 in time — while Clerk costs $25/mo at launch scale. The math is clear: buy everything except your core differentiator.
 
 **Bottom line:** Rule of thumb for side projects and bootstrapped SaaS: buy everything that is not your core differentiator. Auth, payments, email, hosting, CI/CD, analytics — all buy. Your limited time and energy should go into the ONE thing users pay you for. The companies that win are not the ones that built the best auth system — they are the ones that solved a unique problem better than anyone else. See also: [SaaS Bootstrapping Guide](</en/sidehustle/saas-bootstrapping-guide.html>) and [Micro SaaS Ideas 2026](</en/sidehustle/micro-saas-ideas-2026.html>).

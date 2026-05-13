@@ -19,7 +19,7 @@ RAG (Retrieval-Augmented Generation)| $0-50/mo (vector DB)| Medium| Knowledge re
 Full Fine-Tuning| $20-500 (one-time)| High| Custom behaviors, domain adaptation| Frequently changing data  
 LoRA (Low-Rank Adaptation)| $10-100 (one-time)| Medium| Cost-effective fine-tuning, smaller datasets| Teaching entirely new knowledge  
 RLHF / DPO| $100-1,000 (one-time)| Very High| Aligning model to human preferences| Simple format/template changes  
-
+  
 ## When Fine-Tuning Is Worth It
 
 **Best for:** Consistent output formatting, domain-specific terminology, teaching a specific "voice," and reducing prompt length (baking instructions into weights). **Weak spot:** Fine-tuning teaches style and format, not new facts — for factual knowledge, use RAG.
@@ -29,6 +29,8 @@ RLHF / DPO| $100-1,000 (one-time)| Very High| Aligning model to human preference
   * **Bad use case:** "Answer questions about our internal docs" — use RAG, not fine-tuning, for factual retrieval
   * **Bad use case:** "Generate product descriptions from our catalog" — use RAG + templates, since your catalog changes
 
+
+
 ## Data Preparation: The Most Important Step
 
 Format| Example| Use Case  
@@ -36,7 +38,7 @@ Format| Example| Use Case
 Instruction-Response (JSONL)| `{"messages": [{"role":"user","content":"..."},{"role":"assistant","content":"..."}]}`| Chat models, instruction following  
 Completion (JSONL)| `{"prompt":"...","completion":"..."}`| Code completion, autocomplete  
 Preference Pairs| `{"chosen":[...],"rejected":[...]}`| DPO/RLHF training  
-
+  
 **Data quality rules:**
 
   * **50-100 examples** is the minimum for LoRA fine-tuning
@@ -44,6 +46,8 @@ Preference Pairs| `{"chosen":[...],"rejected":[...]}`| DPO/RLHF training
   * **Diversity > quantity:** 200 diverse, high-quality examples outperform 2,000 similar ones
   * **Validate manually:** Spot-check every example — one bad example poisons the output more than ten good ones fix it
   * **Include edge cases:** Empty inputs, very long inputs, multi-turn conversations
+
+
 
 ## Fine-Tuning Platforms Compared
 
@@ -54,5 +58,5 @@ Fireworks AI| ~$0.50/1M tokens| Production inference + fine-tuning| Low-latency 
 Modal| ~$1.50/hr (A100 GPU)| Full control, custom training loops| Serverless GPUs, Python SDK  
 Replicate| ~$0.002/sec (A100)| Fine-tune + deploy in one platform| Community fine-tunes, Cog packaging  
 Local (RTX 4090)| $0 (after hardware)| Privacy, iteration speed| No data leaves your machine  
-
+  
 **Bottom line:** LoRA fine-tuning on Together AI is the fastest path from "I have data" to "I have a fine-tuned model." Start with 100 high-quality examples, use Together AI's one-click LoRA, and evaluate the model on a held-out test set before deploying. For most developer tools, a fine-tuned Llama 3 8B model costs $15-50 to train and $0.20/hour to run — 10-50x cheaper than GPT-4o API calls. See also: [Run Local AI Models](</en/ai/run-local-ai-models.html>) and [Best LLMs for Coding](</en/ai/best-llms-for-coding-2026.html>).

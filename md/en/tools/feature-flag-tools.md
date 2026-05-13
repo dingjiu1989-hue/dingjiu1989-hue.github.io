@@ -8,470 +8,4020 @@ url: https://dingjiu1989-hue.github.io/en/tools/feature-flag-tools.html
 
 # Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith
 
+# Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith
+
+  
+
+
+# Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith
+
+  
+  
+  
+  
+
+
+# Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith
+
+  
+  
+  
+  
+  
+  
+  
+
+
+# Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Feature flags enable teams to deploy code independently of releasing features, reducing deployment risk and enabling progressive delivery. The feature flag management platform you choose affects everything from latency to compliance. This article compares LaunchDarkly, Unleash, and Flagsmith across technical and operational dimensions.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  LaunchDarkly
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 LaunchDarkly is the market leader with enterprise-grade targeting and experimentation:
 
-    // LaunchDarkly JavaScript SDK
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    import { init } from 'launchdarkly-js-client-sdk';
 
-    const ldClient = init('client-side-id-123', {
+// LaunchDarkly JavaScript SDK
 
-      key: user.id,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      anonymous: !user.isAuthenticated,
 
-      custom: {
+import { init } from 'launchdarkly-js-client-sdk';
 
-        plan: user.plan,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        beta: user.betaProgram,
 
-        region: user.region,
+const ldClient = init('client-side-id-123', {
 
-      },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    });
 
-    // Evaluate a flag with fallback
+key: user.id,
 
-    const showNewCheckout = await ldClient.variation(
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      'new-checkout-flow',
 
-      false  // default value
+anonymous: !user.isAuthenticated,
 
-    );
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    // Listen for real-time flag changes
 
-    ldClient.on('change:new-checkout-flow', (value) => {
+custom: {
 
-      console.log('Flag changed to:', value);
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      updateUI(value);
 
-    });
+plan: user.plan,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+beta: user.betaProgram,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+region: user.region,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+});
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+// Evaluate a flag with fallback
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+const showNewCheckout = await ldClient.variation(
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+'new-checkout-flow',
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+false // default value
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+);
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+// Listen for real-time flag changes
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+ldClient.on('change:new-checkout-flow', (value) => {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+console.log('Flag changed to:', value);
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+updateUI(value);
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+});
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ### Targeting Rules
 
-    {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      "flags": {
 
-        "new-checkout-flow": {
+{
 
-          "on": true,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          "targets": [
 
-            { "values": ["user-123", "user-456"], "variation": 0 },
+"flags": {
 
-            { "values": ["internal-team"], "variation": 1 }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          ],
 
-          "rules": [
+"new-checkout-flow": {
 
-            {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-              "clauses": [
 
-                {
+"on": true,
 
-                  "attribute": "plan",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                  "op": "in",
 
-                  "values": ["enterprise", "beta"],
+"targets": [
 
-                  "negate": false
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                },
 
-                {
+{ "values": ["user-123", "user-456"], "variation": 0 },
 
-                  "attribute": "region",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                  "op": "in",
 
-                  "values": ["us-east-1", "eu-west-1"],
+{ "values": ["internal-team"], "variation": 1 }
 
-                  "negate": false
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                }
 
-              ],
+],
 
-              "variation": 1
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            }
 
-          ],
+"rules": [
 
-          "variations": [
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            { "name": "Control", "description": "Current checkout" },
 
-            { "name": "Treatment", "description": "New checkout flow" }
+{
 
-          ],
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          "prerequisites": [
 
-            { "key": "payment-v2", "variation": 1 }
+"clauses": [
 
-          ]
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        }
 
-      }
+{
 
-    }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"attribute": "plan",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"op": "in",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"values": ["enterprise", "beta"],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"negate": false
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+{
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"attribute": "region",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"op": "in",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"values": ["us-east-1", "eu-west-1"],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"negate": false
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"variation": 1
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"variations": [
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+{ "name": "Control", "description": "Current checkout" },
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+{ "name": "Treatment", "description": "New checkout flow" }
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+],
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"prerequisites": [
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+{ "key": "payment-v2", "variation": 1 }
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+]
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Unleash
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Unleash is open-source with a focus on simplicity and self-hosting:
 
-    // Unleash TypeScript SDK
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    import { Unleash } from 'unleash-client';
 
-    const unleash = new Unleash({
+// Unleash TypeScript SDK
 
-      url: 'https://unleash.example.com/api',
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      appName: 'payment-service',
 
-      instanceId: 'payment-01',
+import { Unleash } from 'unleash-client';
 
-      environment: 'production',
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      customHeaders: { Authorization: process.env.UNLEASH_API_TOKEN },
 
-    });
+const unleash = new Unleash({
 
-    unleash.on('synchronized', () => {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      const isEnabled = unleash.isEnabled('new-payment-flow', {
 
-        userId: 'user-456',
+url: 'https://unleash.example.com/api',
 
-        sessionId: 'sess-789',
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        remoteAddress: '203.0.113.42',
 
-        properties: {
+appName: 'payment-service',
 
-          plan: 'enterprise',
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          region: 'us-east-1',
 
-        },
+instanceId: 'payment-01',
 
-      });
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    });
 
-    // Strategies for advanced targeting
+environment: 'production',
 
-    // Define a custom activation strategy
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    class RegionStrategy extends Strategy {
 
-      constructor() {
+customHeaders: { Authorization: process.env.UNLEASH_API_TOKEN },
 
-        super('region');
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      }
 
-      isEnabled(parameters: { regions: string }, context: Context): boolean {
+});
 
-        const allowedRegions = parameters.regions.split(',').map(r => r.trim());
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        return allowedRegions.includes(context.properties.region);
 
-      }
+unleash.on('synchronized', () => {
 
-    }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    unleash.registerStrategy(new RegionStrategy());
+
+const isEnabled = unleash.isEnabled('new-payment-flow', {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+userId: 'user-456',
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+sessionId: 'sess-789',
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+remoteAddress: '203.0.113.42',
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+properties: {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+plan: 'enterprise',
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+region: 'us-east-1',
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+});
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+});
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+// Strategies for advanced targeting
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+// Define a custom activation strategy
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+class RegionStrategy extends Strategy {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+constructor() {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+super('region');
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+isEnabled(parameters: { regions: string }, context: Context): boolean {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+const allowedRegions = parameters.regions.split(',').map(r => r.trim());
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return allowedRegions.includes(context.properties.region);
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+unleash.registerStrategy(new RegionStrategy());
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ### Self-Hosted Deployment
 
-    # docker-compose.yml for Unleash
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    version: '3.8'
 
-    services:
+# docker-compose.yml for Unleash
 
-      unleash:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        image: unleashorg/unleash-server:latest
 
-        environment:
+version: '3.8'
 
-          DATABASE_URL: postgres://unleash:password@db:5432/unleash
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          UNLEASH_SECRET: ${UNLEASH_SECRET}
 
-          LOG_LEVEL: warn
+services:
 
-        depends_on:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          - db
 
-      db:
+unleash:
 
-        image: postgres:16-alpine
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        environment:
 
-          POSTGRES_DB: unleash
+image: unleashorg/unleash-server:latest
 
-          POSTGRES_USER: unleash
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          POSTGRES_PASSWORD: password
 
-        volumes:
+environment:
 
-          - pgdata:/var/lib/postgresql/data
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        healthcheck:
 
-          test: ["CMD-SHELL", "pg_isready -U unleash"]
+DATABASE_URL: postgres://unleash:password@db:5432/unleash
 
-          interval: 10s
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+UNLEASH_SECRET: ${UNLEASH_SECRET}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+LOG_LEVEL: warn
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+depends_on:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- db
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+db:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+image: postgres:16-alpine
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+environment:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+POSTGRES_DB: unleash
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+POSTGRES_USER: unleash
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+POSTGRES_PASSWORD: password
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+volumes:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- pgdata:/var/lib/postgresql/data
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+healthcheck:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+test: ["CMD-SHELL", "pg_isready -U unleash"]
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+interval: 10s
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  Flagsmith
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Flagsmith provides a clean API with identity-based flag management:
 
-    # Flagsmith Python SDK
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    import flagsmith
 
-    client = flagsmith.Flagsmith(
+# Flagsmith Python SDK
 
-        environment_key=os.environ["FLAGSMITH_ENV_KEY"],
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        enable_local_evaluation=True,
 
-        environment_refresh_interval_seconds=60,
+import flagsmith
 
-    )
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    # Get flags for a user
 
-    identity = client.get_identity_flags(
+client = flagsmith.Flagsmith(
 
-        identifier="user-789",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        traits={
 
-            "plan": "enterprise",
+environment_key=os.environ["FLAGSMITH_ENV_KEY"],
 
-            "signup_date": "2025-06-01",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            "company_size": 500,
 
-        },
+enable_local_evaluation=True,
 
-    )
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    if identity.is_feature_enabled("dark_mode"):
 
-        apply_dark_mode()
+environment_refresh_interval_seconds=60,
 
-    checkout_version = identity.get_feature_value("checkout_version")
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Get flags for a user
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+identity = client.get_identity_flags(
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+identifier="user-789",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+traits={
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"plan": "enterprise",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"signup_date": "2025-06-01",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+"company_size": 500,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if identity.is_feature_enabled("dark_mode"):
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+apply_dark_mode()
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+checkout_version = identity.get_feature_value("checkout_version")
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ### Feature State as Code
 
-    # flagsmith.yml - project configuration as code
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    environment: production
 
-    features:
+# flagsmith.yml - project configuration as code
 
-      - name: new_checkout
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        enabled: true
 
-        segment: enterprise_users
+environment: production
 
-        value:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          version: 2
 
-          timeout_ms: 5000
+features:
 
-      - name: payment_provider_v2
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        enabled: true
 
-        percentage: 25
+\\\\\\\\\\\\\\\\- name: new_checkout
 
-        multivariate:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          - value: stripe_v2
 
-            percentage: 50
+enabled: true
 
-          - value: stripe_v1
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            percentage: 50
 
-    segments:
+segment: enterprise_users
 
-      - name: enterprise_users
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        rules:
 
-          - type: ALL
+value:
 
-            conditions:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-              - trait: plan
 
-                operator: EQUAL
+version: 2
 
-                value: enterprise
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      - name: internal_team
 
-        rules:
+timeout_ms: 5000
 
-          - type: ANY
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            conditions:
 
-              - trait: email
+\\\\\\\\\\\\\\\\- name: payment_provider_v2
 
-                operator: CONTAINS
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-                value: "@company.com"
+
+enabled: true
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+percentage: 25
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+multivariate:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- value: stripe_v2
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+percentage: 50
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- value: stripe_v1
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+percentage: 50
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+segments:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- name: enterprise_users
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+rules:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- type: ALL
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+conditions:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- trait: plan
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+operator: EQUAL
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+value: enterprise
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- name: internal_team
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+rules:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- type: ANY
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+conditions:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\- trait: email
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+operator: CONTAINS
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+value: "@company.com"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  A/B Testing and Experimentation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Feature | LaunchDarkly | Unleash | Flagsmith |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 |---|---|---|---|
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 | Multivariate flags | Yes | Yes (custom strategies) | Yes |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Metric tracking | Built-in | External (PostHog, etc.) | Basic |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 | Statistical analysis | Built-in | External | External |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Sample size calculator | Yes | No | No |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 LaunchDarkly's experimentation capabilities are significantly more mature, with built-in statistical analysis and Bayesian A/B testing. Unleash and Flagsmith require integration with external analytics tools for proper experimentation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Kill Switch Pattern
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Feature flags shine for emergency kill switches:
 
-    package main
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    // Global kill switch for payment processing
 
-    func processPayment(ctx context.Context, order Order) error {
+package main
 
-        // First check: is payment processing globally disabled?
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        if ldClient.BoolVariation("payments-enabled", false) {
 
-            return fmt.Errorf("payment processing is globally disabled")
+// Global kill switch for payment processing
 
-        }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        // Second check: per-provider kill switch
 
-        provider := detectProvider(order)
+func processPayment(ctx context.Context, order Order) error {
 
-        if ldClient.BoolVariation(
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            fmt.Sprintf("payment-provider-%s-enabled", provider),
 
-            true,
+// First check: is payment processing globally disabled?
 
-        ) {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-            return fmt.Errorf("%s provider is disabled", provider)
 
-        }
+if ldClient.BoolVariation("payments-enabled", false) {
 
-        // Proceed with payment
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        return nil
 
-    }
+return fmt.Errorf("payment processing is globally disabled")
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+// Second check: per-provider kill switch
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+provider := detectProvider(order)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+if ldClient.BoolVariation(
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+fmt.Sprintf("payment-provider-%s-enabled", provider),
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+true,
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+) {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return fmt.Errorf("%s provider is disabled", provider)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+// Proceed with payment
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return nil
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 ##  SDK Comparison
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Feature | LaunchDarkly | Unleash | Flagsmith |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 |---|---|---|---|
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | SDK languages | 30+ | 15+ | 20+ |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 | Streaming updates | Yes (server-sent) | Yes (polling + webhook) | Polling |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Client-side | Yes | Yes | Yes |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 | Server-side | Yes | Yes | Yes |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 | Edge caching | Relay proxy | K6s-sidecar | None |
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 LaunchDarkly's streaming updates provide sub-second flag propagation but increase network overhead. Unleash's polling approach is simpler and more bandwidth-efficient for edge deployments.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Migration Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Migrating between platforms requires careful planning:
 
-    // Wrapper for multi-provider migration
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    class FeatureFlagManager {
 
-      constructor(primary, fallback) {
+// Wrapper for multi-provider migration
 
-        this.primary = primary;   // New platform
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        this.fallback = fallback; // Old platform
 
-      }
+class FeatureFlagManager {
 
-      async variation(key, defaultValue) {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        try {
 
-          return await this.primary.variation(key, defaultValue);
+constructor(primary, fallback) {
 
-        } catch (err) {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-          console.warn(`Primary failed for ${key}, using fallback`);
 
-          return this.fallback.variation(key, defaultValue);
+this.primary = primary; // New platform
 
-        }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-      }
 
-    }
+this.fallback = fallback; // Old platform
 
-    // Use during migration window
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    const flags = new FeatureFlagManager(
 
-      new FlagsmithClient(env),
+}
 
-      new LaunchDarklyClient(env)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-    );
+
+async variation(key, defaultValue) {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+try {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return await this.primary.variation(key, defaultValue);
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+} catch (err) {
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+console.warn(`Primary failed for ${key}, using fallback`);
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+return this.fallback.variation(key, defaultValue);
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+// Use during migration window
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+const flags = new FeatureFlagManager(
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+new FlagsmithClient(env),
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+new LaunchDarklyClient(env)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+);
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
 Choose LaunchDarkly for enterprise experimentation needs, Unleash for cost-effective self-hosted deployments, and Flagsmith for simple projects that benefit from its API-first design.

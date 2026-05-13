@@ -24,7 +24,7 @@ Containers are how modern applications ship. Docker has dominated for a decade, 
 **macOS support**|  Native (via VM)| Native (podman machine)  
 **Windows support**|  WSL2 + Docker Desktop| Podman Desktop + WSL2  
 **Licensing**|  Docker Desktop requires paid| Fully open source (Apache 2.0)  
-
+  
 ## Docker — The Industry Standard
 
 Docker made containers accessible. Every CI/CD platform, cloud provider, and hosting service supports Docker images. Docker Compose is the universal language for multi-container applications. The ecosystem is so dominant that "container image" = "Docker image" in most developers' minds.
@@ -55,5 +55,5 @@ CI/CD pipelines| **Podman** (daemonless is cleaner)
 Kubernetes-native development| **Podman** (pod concept)  
 Community support and docs| **Docker**  
 Cost-sensitive (avoid Docker Desktop fees)| **Podman**  
-
+  
 **Bottom line:** Docker is still the default for most developers — everything supports it, Compose is excellent, and the ecosystem is unmatched. Podman is the pick for security, Kubernetes-focused workflows, and avoiding Docker Desktop licensing. `alias docker=podman` works for 90% of commands. See also: [Docker Quickstart Guide](</en/tech/docker-quickstart.html>) and [hosting comparison](</en/compare/vercel-vs-netlify-vs-cloudflare.html>).

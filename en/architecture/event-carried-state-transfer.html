@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-carried-state-transfer.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "481",
+      "wordCount": "646",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/event-carried-state-transfer.html"},
-      "articleBody": "Event-Carried State Transfer Pattern Event-carried state transfer is a messaging pattern where events include the full state needed by consumers, eliminating the need for consumers to query the producer for additional data. This reduces synchronous dependencies and improves system resilience. How It Works When a service publishes an event about a domain entity, it includes all relevant state in the event payload. A UserCreated event contains the user's name, email, role, and other attributes. The consumer that needs this information has it immediately without making an additional API call. This is a departure from traditional event design, where events contain only identifiers and consumers query the producer for details. That approach creates synchronous coupling and single points of failure. Benefits Event-carried state transfer eliminates synchronous dependencies. If the producer is down, consumers can still process events using the embedded state. It also reduces latency\u2014consumers save the round-trip time of querying the producer. System resilience improves because consumers are self-sufficient. A consumer can rebuild its state entirely from the event stream without accessing the producer's API. Drawbacks Events become larger, increasing message broker storage and network bandwidth. Schema evolution is more complex because event payloads now contain more fields. Event producers must anticipate what consumers need, which requires coordination. Stale data is a concern. If the producer updates its internal state after publishing the event, consumers have the old state. This is acceptable in eventually consistent systems but requires careful design. When to Use Use event-carried state transfer when consumer independence is a priority, when the producer is likely to experience high load from consumer queries, and when eventual consistency is acceptable. Avoid it when event payload size is constrained or when consumers need absolutely current data. Best Practices Include only the state that consumers need, not the producer's entire internal model. Version event schemas to manage payload evolution. Document which fields each consumer uses so producers understand the impact of changes."
+      "articleBody": "Event-Carried State Transfer Pattern Event-Carried State Transfer Pattern Event-Carried State Transfer Pattern Event-Carried State Transfer Pattern Event-carried state transfer is a messaging pattern where events include the full state needed by consumers, eliminating the need for consumers to query the producer for additional data. This reduces synchronous dependencies and improves system resilience. How It Works When a service publishes an event about a domain entity, it includes all relevant state in the event payload. A UserCreated event contains the user's name, email, role, and other attributes. The consumer that needs this information has it immediately without making an additional API call. This is a departure from traditional event design, where events contain only identifiers and consumers query the producer for details. That approach creates synchronous coupling and single points of failure. Benefits Event-carried state transfer eliminates synchronous dependencies. If the producer is down, consumers can still process events using the embedded state. It also reduces latency\u2014consumers save the round-trip time of querying the producer. System resilience improves because consumers are self-sufficient. A consumer can rebuild its state entirely from the event stream without accessing the producer's API. Drawbacks Events become larger, increasing message broker storage and network bandwidth. Schema evolution is more complex because event payloads now contain more fields. Event producers must anticipate what consumers need, which requires coordination. Stale data is a concern. If the producer updates its internal state after publishing the event, consumers have the old state. This is acceptable in eventually consistent systems but requires careful design. When to Use Use event-carried state transfer when consumer independence is a priority, when the producer is likely to experience high load from consumer queries, and when eventual consistency is acceptable. Avoid it when event payload size is constrained or when consumers need absolutely current data. Best Practices Include only the state that consumers need, not the producer's entire internal model. Version event schemas to manage payload evolution. Document which fields each consumer uses so producers understand the impact of changes."
     }
     </script>
     <script type="application/ld+json">
@@ -77,31 +77,170 @@
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-carried-state-transfer.png" alt="Event-Carried State Transfer Pattern" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Event-Carried State Transfer Pattern</h1>
+<br>
+<h1>Event-Carried State Transfer Pattern</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>Event-Carried State Transfer Pattern</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Event-Carried State Transfer Pattern</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Event-carried state transfer is a messaging pattern where events include the full state needed by consumers, eliminating the need for consumers to query the producer for additional data. This reduces synchronous dependencies and improves system resilience.</p>
 <br>
-<h2> How It Works</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  How It Works</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>When a service publishes an event about a domain entity, it includes all relevant state in the event payload. A UserCreated event contains the user's name, email, role, and other attributes. The consumer that needs this information has it immediately without making an additional API call.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>This is a departure from traditional event design, where events contain only identifiers and consumers query the producer for details. That approach creates synchronous coupling and single points of failure.</p>
 <br>
-<h2> Benefits</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Benefits</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Event-carried state transfer eliminates synchronous dependencies. If the producer is down, consumers can still process events using the embedded state. It also reduces latency—consumers save the round-trip time of querying the producer.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>System resilience improves because consumers are self-sufficient. A consumer can rebuild its state entirely from the event stream without accessing the producer's API.</p>
 <br>
-<h2> Drawbacks</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Drawbacks</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Events become larger, increasing message broker storage and network bandwidth. Schema evolution is more complex because event payloads now contain more fields. Event producers must anticipate what consumers need, which requires coordination.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Stale data is a concern. If the producer updates its internal state after publishing the event, consumers have the old state. This is acceptable in eventually consistent systems but requires careful design.</p>
 <br>
-<h2> When to Use</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  When to Use</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Use event-carried state transfer when consumer independence is a priority, when the producer is likely to experience high load from consumer queries, and when eventual consistency is acceptable. Avoid it when event payload size is constrained or when consumers need absolutely current data.</p>
 <br>
-<h2> Best Practices</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>  Best Practices</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Include only the state that consumers need, not the producer's entire internal model. Version event schemas to manage payload evolution. Document which fields each consumer uses so producers understand the impact of changes.</p></div>
     </article>
@@ -119,6 +258,7 @@
       <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

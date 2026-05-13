@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-fine-tuning.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1300",
+      "wordCount": "2365",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/llm-fine-tuning.html"},
-      "articleBody": "LLM Fine-Tuning Guide Introduction Fine-tuning adapts a pre-trained language model to a specific task or domain. While prompt engineering and RAG handle many use cases out of the box, fine-tuning is essential when you need consistent formatting, domain-specific knowledge, or behavior that base models cannot achieve through prompting alone. This guide covers the full spectrum of fine-tuning approaches. When to Fine-Tune Before investing in fine-tuning, consider whether simpler approaches suffice: * **Prompt engineering**: Good for simple formatting changes and basic instructions * **RAG**: Ideal for knowledge-intensive tasks with verifiable sources * **Fine-tuning**: Necessary for specialized output formats, tone adaptation, and consistent behavior patterns Fine-tuning becomes cost-effective when you need to run many similar queries and can amortize the training cost over thousands or millions of inference calls. Fine-Tuning Approaches Full Fine-Tuning Full fine-tuning updates all model parameters on a target dataset. This approach achieves the highest quality but requires substantial compute \u2014 full fine-tuning of a 7B parameter model requires approximately 56 GB of GPU memory per batch. **When to use full fine-tuning:** * You have access to high-memory GPUs (A100 80GB or H100) * Your dataset is large and diverse (10,000+ examples) * The domain shift from pre-training data is significant * Maximum quality is critical LoRA (Low-Rank Adaptation) LoRA injects trainable rank-decomposition matrices into the model's attention layers, reducing the number of trainable parameters by 10,000x. A 7B model can be fine-tuned with LoRA on a single consumer GPU with 24 GB memory. from peft import LoraConfig, get_peft_model lora_config = LoraConfig( r=16, # Rank of the update matrices lora_alpha=32, # Scaling factor target_modules=[\"q_proj\", \"v_proj\", \"k_proj\", \"o_proj\"], lora_dropout=0.05, bias=\"none\", task_type=\"CAUSAL_LM\" ) model = get_peft_model(base_model, lora_config) print(f\"Trainable params: {model.num_parameters(only_trainable=True):,}\") # Output for Llama 2 7B: ~4,194,304 params (0.06% of total) **Key hyperparameters:** * **r (rank)**: Higher values (16-64) for complex tasks, lower (4-8) for simpler formatting. Rank 16 works well for most use cases * **alpha**: Typically double the rank value (alpha = 2 * r) * **Target modules**: Include all attention projection matrices for best results QLoRA (Quantized LoRA) QLoRA combines 4-bit quantization with LoRA, enabling fine-tuning of 65B models on a single 48GB GPU. The model weights are quantized to 4-bit while LoRA adapters remain in full precision. from transformers import BitsAndBytesConfig bnb_config = BitsAndBytesConfig( load_in_4bit=True, bnb_4bit_use_double_quant=True, bnb_4bit_quant_type=\"nf4\", bnb_4bit_compute_dtype=torch.bfloat16 ) model = AutoModelForCausalLM.from_pretrained( \"meta-llama/Llama-2-7b-hf\", quantization_config=bnb_config, device_map=\"auto\" ) QLoRA achieves approximately 99% of full fine-tuning performance while reducing memory requirements by 4x. Dataset Preparation Dataset quality matters more than quantity. A well-curated 1,000-example dataset outperforms a noisy 10,000-example one. **Guidelines for instruction tuning datasets:** * **Diverse prompts**: Cover all edge cases your system will encounter 2\\. **Correct responses**: Each response must be factually accurate and follow the desired format 3\\. **Consistent formatting**: Use the same chat template throughout 4\\. **Balanced distribution**: Avoid over-representing common patterns 5\\. **Validation split**: Hold out 5-10% for evaluation **Format example:** { \"instruction\": \"Summarize the following meeting notes in 2-3 bullet points.\", \"input\": \"Team discussed Q1 results. Revenue grew 15%. Engineering shipped 3 features. Marketing launched new campaign.\", \"output\": \"- Q1 revenue grew 15%\\n- Engineering shipped 3 new features\\n- Marketing launched a new campaign\" } Training Process Modern fine-tuning uses the SFT (Supervised Fine-Tuning) trainer: from trl import SFTTrainer trainer = SFTTrainer( model=model, train_dataset=train_dataset, eval_dataset=eval_dataset, dataset_text_field=\"text\", max_seq_length=2048, args=TrainingArguments( per_device_train_batch_size=4, gradient_accumulation_steps=4, learning_rate=2e-4, num_train_epochs=3, logging_steps=10, save_strategy=\"epoch\", ) ) trainer.train() Evaluation Evaluate fine-tuned models on: * **Task accuracy**: Does the model produce correct outputs? * **Format compliance**: Does it follow the required structure? * **Hallucination rate**: Does it invent facts? * **Regression**: Has performance degraded on unrelated tasks? Use an automated evaluation harness comparing the fine-tuned model against the base model on a held-out test set. Conclusion Fine-tuning remains the most powerful tool for adapting LLMs to specific domains and tasks. Start with QLoRA for cost-effective experimentation, scale to full fine-tuning only when quality demands it. Focus on dataset quality over quantity, and always measure performance against a clear baseline."
+      "articleBody": "LLM Fine-Tuning Guide LLM Fine-Tuning Guide LLM Fine-Tuning Guide LLM Fine-Tuning Guide LLM Fine-Tuning Guide Introduction Fine-tuning adapts a pre-trained language model to a specific task or domain. While prompt engineering and RAG handle many use cases out of the box, fine-tuning is essential when you need consistent formatting, domain-specific knowledge, or behavior that base models cannot achieve through prompting alone. This guide covers the full spectrum of fine-tuning approaches. When to Fine-Tune Before investing in fine-tuning, consider whether simpler approaches suffice: * **Prompt engineering**: Good for simple formatting changes and basic instructions * **RAG**: Ideal for knowledge-intensive tasks with verifiable sources * **Fine-tuning**: Necessary for specialized output formats, tone adaptation, and consistent behavior patterns Fine-tuning becomes cost-effective when you need to run many similar queries and can amortize the training cost over thousands or millions of inference calls. Fine-Tuning Approaches Full Fine-Tuning Full fine-tuning updates all model parameters on a target dataset. This approach achieves the highest quality but requires substantial compute \u2014 full fine-tuning of a 7B parameter model requires approximately 56 GB of GPU memory per batch. **When to use full fine-tuning:** * You have access to high-memory GPUs (A100 80GB or H100) * Your dataset is large and diverse (10,000+ examples) * The domain shift from pre-training data is significant * Maximum quality is critical LoRA (Low-Rank Adaptation) LoRA injects trainable rank-decomposition matrices into the model's attention layers, reducing the number of trainable parameters by 10,000x. A 7B model can be fine-tuned with LoRA on a single consumer GPU with 24 GB memory. from peft import LoraConfig, get_peft_model lora_config = LoraConfig( r=16, # Rank of the update matrices lora_alpha=32, # Scaling factor target_modules=[\"q_proj\", \"v_proj\", \"k_proj\", \"o_proj\"], lora_dropout=0.05, bias=\"none\", task_type=\"CAUSAL_LM\" ) model = get_peft_model(base_model, lora_config) print(f\"Trainable params: {model.num_parameters(only_trainable=True):,}\") Output for Llama 2 7B: ~4,194,304 params (0.06% of total) **Key hyperparameters:** * **r (rank)**: Higher values (16-64) for complex tasks, lower (4-8) for simpler formatting. Rank 16 works well for most use cases * **alpha**: Typically double the rank value (alpha = 2 * r) * **Target modules**: Include all attention projection matrices for best results QLoRA (Quantized LoRA) QLoRA combines 4-bit quantization with LoRA, enabling fine-tuning of 65B models on a single 48GB GPU. The model weights are quantized to 4-bit while LoRA adapters remain in full precision. from transformers import BitsAndBytesConfig bnb_config = BitsAndBytesConfig( load_in_4bit=True, bnb_4bit_use_double_quant=True, bnb_4bit_quant_type=\"nf4\", bnb_4bit_compute_dtype=torch.bfloat16 ) model = AutoModelForCausalLM.from_pretrained( \"meta-llama/Llama-2-7b-hf\", quantization_config=bnb_config, device_map=\"auto\" ) QLoRA achieves approximately 99% of full fine-tuning performance while reducing memory requirements by 4x. Dataset Preparation Dataset quality matters more than quantity. A well-curated 1,000-example dataset outperforms a noisy 10,000-example one. **Guidelines for instruction tuning datasets:** * **Diverse prompts**: Cover all edge cases your system will encounter 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Correct responses**: Each response must be factually accurate and follow the desired format 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Consistent formatting**: Use the same chat template throughout 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Balanced distribution**: Avoid over-representing common patterns 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Validation split**: Hold out 5-10% for evaluation **Format example:** { \"instruction\": \"Summarize the following meeting notes in 2-3 bullet points.\", \"input\": \"Team discussed Q1 results. Revenue grew 15%. Engineering shipped 3 features. Marketing launched new campaign.\", \"output\": \"- Q1 revenue grew 15%\\n- Engineering shipped 3 new features\\n- Marketing launched a new campaign\" } Training Process Modern fine-tuning uses the SFT (Supervised Fine-Tuning) trainer: from trl import SFTTrainer trainer = SFTTrainer( model=model, train_dataset=train_dataset, eval_dataset=eval_dataset, dataset_text_field=\"text\", max_seq_length=2048, args=TrainingArguments( per_device_train_batch_size=4, gradient_accumulation_steps=4, learning_rate=2e-4, num_train_epochs=3, logging_steps=10, save_strategy=\"epoch\", ) ) trainer.train() Evaluation Evaluate fine-tuned models on: * **Task accuracy**: Does the model produce correct outputs? * **Format compliance**: Does it follow the required structure? * **Hallucination rate**: Does it invent facts? * **Regression**: Has performance degraded on unrelated tasks? Use an automated evaluation harness comparing the fine-tuned model against the base model on a held-out test set. Conclusion Fine-tuning remains the most powerful tool for adapting LLMs to specific domains and tasks. Start with QLoRA for cost-effective experimentation, scale to full fine-tuning only when quality demands it. Focus on dataset quality over quantity, and always measure performance against a clear baseline."
     }
     </script>
     <script type="application/ld+json">
@@ -77,175 +77,1273 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-fine-tuning.png" alt="LLM Fine-Tuning Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>LLM Fine-Tuning Guide</h1>
 <br>
+<h1>LLM Fine-Tuning Guide</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>LLM Fine-Tuning Guide</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>LLM Fine-Tuning Guide</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>LLM Fine-Tuning Guide</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Fine-tuning adapts a pre-trained language model to a specific task or domain. While prompt engineering and RAG handle many use cases out of the box, fine-tuning is essential when you need consistent formatting, domain-specific knowledge, or behavior that base models cannot achieve through prompting alone. This guide covers the full spectrum of fine-tuning approaches.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  When to Fine-Tune</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Before investing in fine-tuning, consider whether simpler approaches suffice:</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Prompt engineering**: Good for simple formatting changes and basic instructions</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **RAG**: Ideal for knowledge-intensive tasks with verifiable sources</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Fine-tuning**: Necessary for specialized output formats, tone adaptation, and consistent behavior patterns</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Fine-tuning becomes cost-effective when you need to run many similar queries and can amortize the training cost over thousands or millions of inference calls.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Fine-Tuning Approaches</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>Full Fine-Tuning</h3>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Full fine-tuning updates all model parameters on a target dataset. This approach achieves the highest quality but requires substantial compute — full fine-tuning of a 7B parameter model requires approximately 56 GB of GPU memory per batch.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**When to use full fine-tuning:**</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* You have access to high-memory GPUs (A100 80GB or H100)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Your dataset is large and diverse (10,000+ examples)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* The domain shift from pre-training data is significant</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Maximum quality is critical</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>LoRA (Low-Rank Adaptation)</h3>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>LoRA injects trainable rank-decomposition matrices into the model's attention layers, reducing the number of trainable parameters by 10,000x. A 7B model can be fine-tuned with LoRA on a single consumer GPU with 24 GB memory.</p>
 <br>
-<p>    from peft import LoraConfig, get_peft_model</p>
 <br>
-<p>    lora_config = LoraConfig(</p>
 <br>
-<p>        r=16,           # Rank of the update matrices</p>
 <br>
-<p>        lora_alpha=32,  # Scaling factor</p>
 <br>
-<p>        target_modules=["q_proj", "v_proj", "k_proj", "o_proj"],</p>
 <br>
-<p>        lora_dropout=0.05,</p>
 <br>
-<p>        bias="none",</p>
 <br>
-<p>        task_type="CAUSAL_LM"</p>
 <br>
-<p>    )</p>
 <br>
-<p>    model = get_peft_model(base_model, lora_config)</p>
 <br>
-<p>    print(f"Trainable params: {model.num_parameters(only_trainable=True):,}")</p>
 <br>
-<p>    # Output for Llama 2 7B: ~4,194,304 params (0.06% of total)</p>
+<br>
+<p>from peft import LoraConfig, get_peft_model</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>lora_config = LoraConfig(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>r=16, # Rank of the update matrices</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>lora_alpha=32, # Scaling factor</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>target_modules=["q_proj", "v_proj", "k_proj", "o_proj"],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>lora_dropout=0.05,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>bias="none",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>task_type="CAUSAL_LM"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model = get_peft_model(base_model, lora_config)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>print(f"Trainable params: {model.num_parameters(only_trainable=True):,}")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Output for Llama 2 7B: ~4,194,304 params (0.06% of total)</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Key hyperparameters:**</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **r (rank)**: Higher values (16-64) for complex tasks, lower (4-8) for simpler formatting. Rank 16 works well for most use cases</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **alpha**: Typically double the rank value (alpha = 2 * r)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Target modules**: Include all attention projection matrices for best results</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>QLoRA (Quantized LoRA)</h3>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>QLoRA combines 4-bit quantization with LoRA, enabling fine-tuning of 65B models on a single 48GB GPU. The model weights are quantized to 4-bit while LoRA adapters remain in full precision.</p>
 <br>
-<p>    from transformers import BitsAndBytesConfig</p>
 <br>
-<p>    bnb_config = BitsAndBytesConfig(</p>
 <br>
-<p>        load_in_4bit=True,</p>
 <br>
-<p>        bnb_4bit_use_double_quant=True,</p>
 <br>
-<p>        bnb_4bit_quant_type="nf4",</p>
 <br>
-<p>        bnb_4bit_compute_dtype=torch.bfloat16</p>
 <br>
-<p>    )</p>
 <br>
-<p>    model = AutoModelForCausalLM.from_pretrained(</p>
 <br>
-<p>        "meta-llama/Llama-2-7b-hf",</p>
 <br>
-<p>        quantization_config=bnb_config,</p>
 <br>
-<p>        device_map="auto"</p>
 <br>
-<p>    )</p>
+<br>
+<p>from transformers import BitsAndBytesConfig</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>bnb_config = BitsAndBytesConfig(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>load_in_4bit=True,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>bnb_4bit_use_double_quant=True,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>bnb_4bit_quant_type="nf4",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>bnb_4bit_compute_dtype=torch.bfloat16</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model = AutoModelForCausalLM.from_pretrained(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"meta-llama/Llama-2-7b-hf",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>quantization_config=bnb_config,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>device_map="auto"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>QLoRA achieves approximately 99% of full fine-tuning performance while reducing memory requirements by 4x.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Dataset Preparation</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Dataset quality matters more than quantity. A well-curated 1,000-example dataset outperforms a noisy 10,000-example one.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>**Guidelines for instruction tuning datasets:**</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>* **Diverse prompts**: Cover all edge cases your system will encounter</p>
 <br>
-<p>2\. **Correct responses**: Each response must be factually accurate and follow the desired format</p>
 <br>
-<p>3\. **Consistent formatting**: Use the same chat template throughout</p>
 <br>
-<p>4\. **Balanced distribution**: Avoid over-representing common patterns</p>
 <br>
-<p>5\. **Validation split**: Hold out 5-10% for evaluation</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>2\\\\\\\\\\\\\\\\. **Correct responses**: Each response must be factually accurate and follow the desired format</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>3\\\\\\\\\\\\\\\\. **Consistent formatting**: Use the same chat template throughout</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>4\\\\\\\\\\\\\\\\. **Balanced distribution**: Avoid over-representing common patterns</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>5\\\\\\\\\\\\\\\\. **Validation split**: Hold out 5-10% for evaluation</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>**Format example:**</p>
 <br>
-<p>    {</p>
 <br>
-<p>      "instruction": "Summarize the following meeting notes in 2-3 bullet points.",</p>
 <br>
-<p>      "input": "Team discussed Q1 results. Revenue grew 15%. Engineering shipped 3 features. Marketing launched new campaign.",</p>
 <br>
-<p>      "output": "- Q1 revenue grew 15%\n- Engineering shipped 3 new features\n- Marketing launched a new campaign"</p>
 <br>
-<p>    }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"instruction": "Summarize the following meeting notes in 2-3 bullet points.",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"input": "Team discussed Q1 results. Revenue grew 15%. Engineering shipped 3 features. Marketing launched new campaign.",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"output": "- Q1 revenue grew 15%\n- Engineering shipped 3 new features\n- Marketing launched a new campaign"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Training Process</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Modern fine-tuning uses the SFT (Supervised Fine-Tuning) trainer:</p>
 <br>
-<p>    from trl import SFTTrainer</p>
 <br>
-<p>    trainer = SFTTrainer(</p>
 <br>
-<p>        model=model,</p>
 <br>
-<p>        train_dataset=train_dataset,</p>
 <br>
-<p>        eval_dataset=eval_dataset,</p>
 <br>
-<p>        dataset_text_field="text",</p>
 <br>
-<p>        max_seq_length=2048,</p>
 <br>
-<p>        args=TrainingArguments(</p>
 <br>
-<p>            per_device_train_batch_size=4,</p>
 <br>
-<p>            gradient_accumulation_steps=4,</p>
 <br>
-<p>            learning_rate=2e-4,</p>
 <br>
-<p>            num_train_epochs=3,</p>
 <br>
-<p>            logging_steps=10,</p>
+<p>from trl import SFTTrainer</p>
 <br>
-<p>            save_strategy="epoch",</p>
 <br>
-<p>        )</p>
 <br>
-<p>    )</p>
 <br>
-<p>    trainer.train()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>trainer = SFTTrainer(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model=model,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>train_dataset=train_dataset,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>eval_dataset=eval_dataset,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>dataset_text_field="text",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>max_seq_length=2048,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>args=TrainingArguments(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>per_device_train_batch_size=4,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>gradient_accumulation_steps=4,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>learning_rate=2e-4,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>num_train_epochs=3,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>logging_steps=10,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>save_strategy="epoch",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>trainer.train()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Evaluation</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Evaluate fine-tuned models on:</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Task accuracy**: Does the model produce correct outputs?</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Format compliance**: Does it follow the required structure?</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Hallucination rate**: Does it invent facts?</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* **Regression**: Has performance degraded on unrelated tasks?</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Use an automated evaluation harness comparing the fine-tuned model against the base model on a held-out test set.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Conclusion</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Fine-tuning remains the most powerful tool for adapting LLMs to specific domains and tasks. Start with QLoRA for cost-effective experimentation, scale to full fine-tuning only when quality demands it. Focus on dataset quality over quantity, and always measure performance against a clear baseline.</p></div>
     </article>
@@ -259,9 +1357,15 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div>
-      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a></div></noscript>
+      <div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
+    </section>
+    
+    <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
+      <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
+      <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
+      <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
   </div>
 </main>

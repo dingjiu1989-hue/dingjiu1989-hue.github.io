@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/strangler-fig.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "794",
+      "wordCount": "946",
       "keywords": "Architecture, System Design",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/strangler-fig.html"},
-      "articleBody": "Strangler Fig Pattern for Legacy Migration The Strangler Fig pattern, named after the tropical plant that gradually envelops its host tree, is a strategy for incrementally replacing a legacy system with a new one. Rather than undertaking a high-risk big-bang rewrite, the Strangler Fig pattern allows teams to replace functionality piece by piece, routing traffic to the new system while the legacy system remains operational. This approach dramatically reduces risk and allows continuous delivery of value. Core Mechanism The pattern works by intercepting calls to the legacy system and routing them to either the legacy implementation or the new implementation. A routing layer\u2014typically an API gateway, reverse proxy, or application-level router\u2014determines which version handles each request. Over time, more features are routed to the new system until the legacy system is entirely unused. The routing decision can be based on URL paths, HTTP headers, feature flags, user segments, or any other request attribute. This flexibility allows teams to test new implementations with internal users before expanding to broader audiences. Feature Toggle Integration Strangler Fig implementations often use feature toggles to control migration. A feature toggle can route a specific function\u2014say, user authentication\u2014to either the legacy or new system. As the new implementation matures, the toggle is flipped for increasingly large user segments until the legacy path is fully decommissioned. This approach enables canary releasing of new implementations. A team can start with 1% of traffic going to the new system, monitor for errors and performance regressions, and gradually increase the percentage. If issues arise, the toggle is simply flipped back, instantly restoring the legacy behavior. Routing Strategies Several routing strategies support the Strangler Fig pattern. The simplest is URL-based routing, where specific endpoints are redirected to the new system. More sophisticated approaches use a reverse proxy like Nginx, HAProxy, or Envoy that inspects request attributes and routes accordingly. Application-level routers can make routing decisions based on business logic, user attributes, or experimental conditions. For database-level strangulation, the new system may start by owning new data while the legacy system serves existing data. As features migrate, the new system takes over more data responsibilities, eventually becoming the system of record for all data. Dual-write patterns can keep both systems synchronized during the transition. Challenges and Mitigations The Strangler Fig pattern introduces operational complexity. The routing layer must be maintained, and teams must coordinate migration activities to avoid conflicts. Data synchronization between legacy and new systems is often the hardest part, especially when the legacy system has accumulated years of implicit business rules. Incremental strangulation also requires disciplined interface design. Each piece of extracted functionality must have a well-defined boundary, which often reveals hidden coupling in the legacy system. This discovery process is valuable but can slow migration timelines. When to Use The Strangler Fig pattern is ideal for replacing monolithic applications that cannot be rewritten quickly, systems with high business risk where downtime is unacceptable, and scenarios where the legacy system lacks automated tests. It is less suited to small, well-understood systems where a rewrite is faster and cheaper. Ultimately, the Strangler Fig pattern is the safest path to modernizing critical legacy systems, prioritizing risk reduction over speed. It has been successfully used by organizations including Amazon, Microsoft, and countless enterprises to migrate from monoliths to microservices."
+      "articleBody": "Strangler Fig Pattern for Legacy Migration Strangler Fig Pattern for Legacy Migration Strangler Fig Pattern for Legacy Migration Strangler Fig Pattern for Legacy Migration The Strangler Fig pattern, named after the tropical plant that gradually envelops its host tree, is a strategy for incrementally replacing a legacy system with a new one. Rather than undertaking a high-risk big-bang rewrite, the Strangler Fig pattern allows teams to replace functionality piece by piece, routing traffic to the new system while the legacy system remains operational. This approach dramatically reduces risk and allows continuous delivery of value. Core Mechanism The pattern works by intercepting calls to the legacy system and routing them to either the legacy implementation or the new implementation. A routing layer\u2014typically an API gateway, reverse proxy, or application-level router\u2014determines which version handles each request. Over time, more features are routed to the new system until the legacy system is entirely unused. The routing decision can be based on URL paths, HTTP headers, feature flags, user segments, or any other request attribute. This flexibility allows teams to test new implementations with internal users before expanding to broader audiences. Feature Toggle Integration Strangler Fig implementations often use feature toggles to control migration. A feature toggle can route a specific function\u2014say, user authentication\u2014to either the legacy or new system. As the new implementation matures, the toggle is flipped for increasingly large user segments until the legacy path is fully decommissioned. This approach enables canary releasing of new implementations. A team can start with 1% of traffic going to the new system, monitor for errors and performance regressions, and gradually increase the percentage. If issues arise, the toggle is simply flipped back, instantly restoring the legacy behavior. Routing Strategies Several routing strategies support the Strangler Fig pattern. The simplest is URL-based routing, where specific endpoints are redirected to the new system. More sophisticated approaches use a reverse proxy like Nginx, HAProxy, or Envoy that inspects request attributes and routes accordingly. Application-level routers can make routing decisions based on business logic, user attributes, or experimental conditions. For database-level strangulation, the new system may start by owning new data while the legacy system serves existing data. As features migrate, the new system takes over more data responsibilities, eventually becoming the system of record for all data. Dual-write patterns can keep both systems synchronized during the transition. Challenges and Mitigations The Strangler Fig pattern introduces operational complexity. The routing layer must be maintained, and teams must coordinate migration activities to avoid conflicts. Data synchronization between legacy and new systems is often the hardest part, especially when the legacy system has accumulated years of implicit business rules. Incremental strangulation also requires disciplined interface design. Each piece of extracted functionality must have a well-defined boundary, which often reveals hidden coupling in the legacy system. This discovery process is valuable but can slow migration timelines. When to Use The Strangler Fig pattern is ideal for replacing monolithic applications that cannot be rewritten quickly, systems with high business risk where downtime is unacceptable, and scenarios where the legacy system lacks automated tests. It is less suited to small, well-understood systems where a rewrite is faster and cheaper. Ultimately, the Strangler Fig pattern is the safest path to modernizing critical legacy systems, prioritizing risk reduction over speed. It has been successfully used by organizations including Amazon, Microsoft, and countless enterprises to migrate from monoliths to microservices."
     }
     </script>
     <script type="application/ld+json">
@@ -77,21 +77,150 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/strangler-fig.png" alt="Strangler Fig Pattern for Legacy Migration" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Strangler Fig Pattern for Legacy Migration</h1>
 <br>
-<p>The Strangler Fig pattern, named after the tropical plant that gradually envelops its host tree, is a strategy for incrementally replacing a legacy system with a new one. Rather than undertaking a high-risk big-bang rewrite, the Strangler Fig pattern allows teams to replace functionality piece by piece, routing traffic to the new system while the legacy system remains operational. This approach dramatically reduces risk and allows continuous delivery of value.   </p>
-<p>Core Mechanism   </p>
-<p>The pattern works by intercepting calls to the legacy system and routing them to either the legacy implementation or the new implementation. A routing layer—typically an API gateway, reverse proxy, or application-level router—determines which version handles each request. Over time, more features are routed to the new system until the legacy system is entirely unused.   </p>
-<p>The routing decision can be based on URL paths, HTTP headers, feature flags, user segments, or any other request attribute. This flexibility allows teams to test new implementations with internal users before expanding to broader audiences.   </p>
-<p>Feature Toggle Integration   </p>
-<p>Strangler Fig implementations often use feature toggles to control migration. A feature toggle can route a specific function—say, user authentication—to either the legacy or new system. As the new implementation matures, the toggle is flipped for increasingly large user segments until the legacy path is fully decommissioned.   </p>
-<p>This approach enables canary releasing of new implementations. A team can start with 1% of traffic going to the new system, monitor for errors and performance regressions, and gradually increase the percentage. If issues arise, the toggle is simply flipped back, instantly restoring the legacy behavior.   </p>
-<p>Routing Strategies   </p>
-<p>Several routing strategies support the Strangler Fig pattern. The simplest is URL-based routing, where specific endpoints are redirected to the new system. More sophisticated approaches use a reverse proxy like Nginx, HAProxy, or Envoy that inspects request attributes and routes accordingly. Application-level routers can make routing decisions based on business logic, user attributes, or experimental conditions.   </p>
-<p>For database-level strangulation, the new system may start by owning new data while the legacy system serves existing data. As features migrate, the new system takes over more data responsibilities, eventually becoming the system of record for all data. Dual-write patterns can keep both systems synchronized during the transition.   </p>
-<p>Challenges and Mitigations   </p>
-<p>The Strangler Fig pattern introduces operational complexity. The routing layer must be maintained, and teams must coordinate migration activities to avoid conflicts. Data synchronization between legacy and new systems is often the hardest part, especially when the legacy system has accumulated years of implicit business rules.   </p>
-<p>Incremental strangulation also requires disciplined interface design. Each piece of extracted functionality must have a well-defined boundary, which often reveals hidden coupling in the legacy system. This discovery process is valuable but can slow migration timelines.   </p>
-<p>When to Use   </p>
-<p>The Strangler Fig pattern is ideal for replacing monolithic applications that cannot be rewritten quickly, systems with high business risk where downtime is unacceptable, and scenarios where the legacy system lacks automated tests. It is less suited to small, well-understood systems where a rewrite is faster and cheaper.   </p>
+<h1>Strangler Fig Pattern for Legacy Migration</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>Strangler Fig Pattern for Legacy Migration</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Strangler Fig Pattern for Legacy Migration</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The Strangler Fig pattern, named after the tropical plant that gradually envelops its host tree, is a strategy for incrementally replacing a legacy system with a new one. Rather than undertaking a high-risk big-bang rewrite, the Strangler Fig pattern allows teams to replace functionality piece by piece, routing traffic to the new system while the legacy system remains operational. This approach dramatically reduces risk and allows continuous delivery of value. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Core Mechanism </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The pattern works by intercepting calls to the legacy system and routing them to either the legacy implementation or the new implementation. A routing layer—typically an API gateway, reverse proxy, or application-level router—determines which version handles each request. Over time, more features are routed to the new system until the legacy system is entirely unused. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The routing decision can be based on URL paths, HTTP headers, feature flags, user segments, or any other request attribute. This flexibility allows teams to test new implementations with internal users before expanding to broader audiences. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Feature Toggle Integration </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Strangler Fig implementations often use feature toggles to control migration. A feature toggle can route a specific function—say, user authentication—to either the legacy or new system. As the new implementation matures, the toggle is flipped for increasingly large user segments until the legacy path is fully decommissioned. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>This approach enables canary releasing of new implementations. A team can start with 1% of traffic going to the new system, monitor for errors and performance regressions, and gradually increase the percentage. If issues arise, the toggle is simply flipped back, instantly restoring the legacy behavior. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Routing Strategies </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Several routing strategies support the Strangler Fig pattern. The simplest is URL-based routing, where specific endpoints are redirected to the new system. More sophisticated approaches use a reverse proxy like Nginx, HAProxy, or Envoy that inspects request attributes and routes accordingly. Application-level routers can make routing decisions based on business logic, user attributes, or experimental conditions. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>For database-level strangulation, the new system may start by owning new data while the legacy system serves existing data. As features migrate, the new system takes over more data responsibilities, eventually becoming the system of record for all data. Dual-write patterns can keep both systems synchronized during the transition. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Challenges and Mitigations </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The Strangler Fig pattern introduces operational complexity. The routing layer must be maintained, and teams must coordinate migration activities to avoid conflicts. Data synchronization between legacy and new systems is often the hardest part, especially when the legacy system has accumulated years of implicit business rules. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Incremental strangulation also requires disciplined interface design. Each piece of extracted functionality must have a well-defined boundary, which often reveals hidden coupling in the legacy system. This discovery process is valuable but can slow migration timelines. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>When to Use </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The Strangler Fig pattern is ideal for replacing monolithic applications that cannot be rewritten quickly, systems with high business risk where downtime is unacceptable, and scenarios where the legacy system lacks automated tests. It is less suited to small, well-understood systems where a rewrite is faster and cheaper. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Ultimately, the Strangler Fig pattern is the safest path to modernizing critical legacy systems, prioritizing risk reduction over speed. It has been successfully used by organizations including Amazon, Microsoft, and countless enterprises to migrate from monoliths to microservices.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -108,6 +237,7 @@
       <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

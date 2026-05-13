@@ -22,11 +22,12 @@ The classic testing pyramid said "lots of unit, some integration, few E2E." The 
 **Flakiness**|  None| Low| High (network, timing)  
 **Debugging**|  Easiest| Moderate| Hardest  
 **Recommended ratio**|  20%| 60%| 20%  
-
+  
 ## Unit Tests — Test Pure Logic Exhaustively
 
 Unit tests shine for pure functions: validation logic, data transformation, utility functions, and business rules. Don't unit test React components in isolation — that's what integration tests are for. Don't test implementation details (test behavior, not methods).
-
+    
+    
     // Good unit test: pure business logic
     describe("calculateDiscount", () => {
       it("gives 20% off orders over $100", () => {
@@ -40,7 +41,8 @@ Unit tests shine for pure functions: validation logic, data transformation, util
 ## Integration Tests — The Confidence Backbone
 
 Integration tests verify that multiple units work together. For frontend: render a component with real state, click something, assert the DOM. For backend: hit an endpoint, verify the database state. These catch the bugs unit tests miss.
-
+    
+    
     // Frontend integration test: render + interact + assert
     test("submits form and shows success", async () => {
       render(<SignupForm />);
@@ -48,7 +50,7 @@ Integration tests verify that multiple units work together. For frontend: render
       await user.click(screen.getByText("Sign Up"));
       expect(await screen.findByText("Check your email")).toBeVisible();
     });
-
+    
     // Backend integration test: request → response
     test("POST /api/users creates user in DB", async () => {
       const res = await request(app)
@@ -62,7 +64,8 @@ Integration tests verify that multiple units work together. For frontend: render
 ## E2E Tests — Validate Critical User Flows
 
 E2E tests drive a real browser through your most important flows: signup, login, purchase, onboarding. Keep these to critical paths only — they're slow and can be flaky. Playwright is the best E2E tool in 2026.
-
+    
+    
     // E2E: only critical paths
     test("user can complete purchase", async ({ page }) => {
       await page.goto("/products/widget");
@@ -82,5 +85,5 @@ Component Integration| Vitest + Testing Library| Any component with user interac
 Backend Integration| Vitest + Supertest| API endpoints, DB writes  
 E2E| Playwright| Signup, login, purchase, onboarding  
 Visual Regression| Chromatic / Percy| Design system components  
-
+  
 **Bottom line:** Write mostly integration tests. They provide the best confidence-to-effort ratio. Unit test pure logic. E2E test only critical flows (max 20 scenarios). A slow CI pipeline is a broken one — keep E2E count low. See also: [build tools](</en/compare/vite-vs-webpack-vs-turbopack.html>) (Vitest is built on Vite) and [CI/CD tools comparison](</en/tools/best-cicd-tools-2026.html>).

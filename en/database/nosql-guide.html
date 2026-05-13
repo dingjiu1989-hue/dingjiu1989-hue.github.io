@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/nosql-guide.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "389",
+      "wordCount": "630",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/nosql-guide.html"},
-      "articleBody": "NoSQL Databases Guide NoSQL Database Types NoSQL databases are non-relational stores designed for specific data models. Four major types exist. Document Databases (MongoDB) Store data as JSON-like documents. Flexible schema, nested data: db.users.insertOne({ name: \"Alice\", email: \"alice@example.com\", addresses: [{ city: \"San Francisco\" }] }); Best for: flexible schemas, embedded data, rapid prototyping. Key-Value Stores (Redis, DynamoDB) Simple key-value pairs for fast lookups: cache.set(\"user:123\", json.dumps(user_data)) user = json.loads(cache.get(\"user:123\")) Best for: caching, session storage, simple lookups. Wide-Column Stores (Cassandra, Bigtable) Column-oriented with flexible schema per row key: CREATE TABLE users (user_id UUID PRIMARY KEY, name TEXT, email TEXT); Best for: time-series, write-heavy workloads, high scalability. Graph Databases (Neo4j) Nodes and edges representing entities and relationships: MATCH (alice:Person)-[:FOLLOWS]->(friend)-[:PURCHASED]->(product) RETURN product.name Best for: social networks, recommendations, fraud detection. Choosing a NoSQL Database | Type | When to Use | Avoid For | |------|-------------|-----------| | Document | Flexible schemas | Complex joins | | Key-Value | Simple lookups | Multi-key queries | | Wide-Column | High-scale writes | Ad-hoc queries | | Graph | Connected data | Simple CRUD | Conclusion Match the NoSQL type to your data model. Document for nested data, key-value for caching, wide-column for scale, graph for relationships. Consider using multiple databases for different workloads."
+      "articleBody": "NoSQL Databases Guide NoSQL Databases Guide NoSQL Databases Guide NoSQL Databases Guide NoSQL Database Types NoSQL databases are non-relational stores designed for specific data models. Four major types exist. Document Databases (MongoDB) Store data as JSON-like documents. Flexible schema, nested data: db.users.insertOne({ name: \"Alice\", email: \"alice@example.com\", addresses: [{ city: \"San Francisco\" }] }); Best for: flexible schemas, embedded data, rapid prototyping. Key-Value Stores (Redis, DynamoDB) Simple key-value pairs for fast lookups: cache.set(\"user:123\", json.dumps(user_data)) user = json.loads(cache.get(\"user:123\")) Best for: caching, session storage, simple lookups. Wide-Column Stores (Cassandra, Bigtable) Column-oriented with flexible schema per row key: CREATE TABLE users (user_id UUID PRIMARY KEY, name TEXT, email TEXT); Best for: time-series, write-heavy workloads, high scalability. Graph Databases (Neo4j) Nodes and edges representing entities and relationships: MATCH (alice:Person)-[:FOLLOWS]->(friend)-[:PURCHASED]->(product) RETURN product.name Best for: social networks, recommendations, fraud detection. Choosing a NoSQL Database | Type | When to Use | Avoid For | |------|-------------|-----------| | Document | Flexible schemas | Complex joins | | Key-Value | Simple lookups | Multi-key queries | | Wide-Column | High-scale writes | Ad-hoc queries | | Graph | Connected data | Simple CRUD | Conclusion Match the NoSQL type to your data model. Document for nested data, key-value for caching, wide-column for scale, graph for relationships. Consider using multiple databases for different workloads."
     }
     </script>
     <script type="application/ld+json">
@@ -78,47 +78,288 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/nosql-guide.png" alt="NoSQL Databases Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>NoSQL Databases Guide</h1>
 <br>
-<p>NoSQL Database Types   </p>
-<p>NoSQL databases are non-relational stores designed for specific data models. Four major types exist.   </p>
-<p>Document Databases (MongoDB)   </p>
-<p>Store data as JSON-like documents. Flexible schema, nested data:   </p>
+<h1>NoSQL Databases Guide</h1>
 <br>
-<p>    db.users.insertOne({</p>
 <br>
-<p>      name: "Alice",</p>
 <br>
-<p>      email: "alice@example.com",</p>
 <br>
-<p>      addresses: [{ city: "San Francisco" }]</p>
+<h1>NoSQL Databases Guide</h1>
 <br>
-<p>    });</p>
 <br>
-<p>Best for: flexible schemas, embedded data, rapid prototyping.   </p>
-<p>Key-Value Stores (Redis, DynamoDB)   </p>
-<p>Simple key-value pairs for fast lookups:   </p>
 <br>
-<p>    cache.set("user:123", json.dumps(user_data))</p>
 <br>
-<p>    user = json.loads(cache.get("user:123"))</p>
 <br>
-<p>Best for: caching, session storage, simple lookups.   </p>
-<p>Wide-Column Stores (Cassandra, Bigtable)   </p>
-<p>Column-oriented with flexible schema per row key:   </p>
 <br>
-<p>    CREATE TABLE users (user_id UUID PRIMARY KEY, name TEXT, email TEXT);</p>
 <br>
-<p>Best for: time-series, write-heavy workloads, high scalability.   </p>
-<p>Graph Databases (Neo4j)   </p>
-<p>Nodes and edges representing entities and relationships:   </p>
+<h1>NoSQL Databases Guide</h1>
 <br>
-<p>    MATCH (alice:Person)-[:FOLLOWS]->(friend)-[:PURCHASED]->(product)</p>
 <br>
-<p>    RETURN product.name</p>
 <br>
-<p>Best for: social networks, recommendations, fraud detection.   </p>
-<p>Choosing a NoSQL Database   </p>
-<p>| Type | When to Use | Avoid For | |------|-------------|-----------| | Document | Flexible schemas | Complex joins | | Key-Value | Simple lookups | Multi-key queries | | Wide-Column | High-scale writes | Ad-hoc queries | | Graph | Connected data | Simple CRUD |   </p>
-<p>Conclusion   </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>NoSQL Database Types </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>NoSQL databases are non-relational stores designed for specific data models. Four major types exist. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Document Databases (MongoDB) </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Store data as JSON-like documents. Flexible schema, nested data: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>db.users.insertOne({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: "Alice",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>email: "alice@example.com",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>addresses: [{ city: "San Francisco" }]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Best for: flexible schemas, embedded data, rapid prototyping. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Key-Value Stores (Redis, DynamoDB) </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Simple key-value pairs for fast lookups: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>cache.set("user:123", json.dumps(user_data))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>user = json.loads(cache.get("user:123"))</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Best for: caching, session storage, simple lookups. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Wide-Column Stores (Cassandra, Bigtable) </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Column-oriented with flexible schema per row key: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE TABLE users (user_id UUID PRIMARY KEY, name TEXT, email TEXT);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Best for: time-series, write-heavy workloads, high scalability. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Graph Databases (Neo4j) </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Nodes and edges representing entities and relationships: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>MATCH (alice:Person)-[:FOLLOWS]->(friend)-[:PURCHASED]->(product)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>RETURN product.name</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Best for: social networks, recommendations, fraud detection. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Choosing a NoSQL Database </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>| Type | When to Use | Avoid For | |------|-------------|-----------| | Document | Flexible schemas | Complex joins | | Key-Value | Simple lookups | Multi-key queries | | Wide-Column | High-scale writes | Ad-hoc queries | | Graph | Connected data | Simple CRUD | </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Match the NoSQL type to your data model. Document for nested data, key-value for caching, wide-column for scale, graph for relationships. Consider using multiple databases for different workloads.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -135,6 +376,7 @@
       <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

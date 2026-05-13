@@ -11,20 +11,23 @@ url: https://dingjiu1989-hue.github.io/en/tech/git-cheatsheet.html
 Git is the backbone of modern software development. This cheat sheet covers every command you'll need in daily work — from basic commits to hairy rebase scenarios.
 
 ## Setup & Configuration
-
+    
+    
     git config --global user.name "Your Name"
     git config --global user.email "you@example.com"
     git config --global init.defaultBranch main
     git config --list  # show all settings
 
 ## Starting a Repository
-
+    
+    
     git init                    # create a new repo
     git clone <url>             # clone an existing repo
     git clone -b <branch> <url> # clone a specific branch
 
 ## Staging & Committing
-
+    
+    
     git status                  # what changed?
     git add <file>              # stage a file
     git add -p                  # stage interactively (hunks)
@@ -33,7 +36,8 @@ Git is the backbone of modern software development. This cheat sheet covers ever
     git commit --amend          # fix the last commit message
 
 ## Branching
-
+    
+    
     git branch                  # list local branches
     git branch <name>           # create a branch
     git checkout <name>         # switch to a branch
@@ -45,7 +49,8 @@ Git is the backbone of modern software development. This cheat sheet covers ever
     git branch -D <name>        # force delete
 
 ## Undoing Things
-
+    
+    
     git restore <file>          # discard working changes
     git restore --staged <file> # unstage a file
     git reset --soft HEAD~1     # undo last commit, keep changes staged
@@ -55,7 +60,8 @@ Git is the backbone of modern software development. This cheat sheet covers ever
     git stash pop                # restore stashed changes
 
 ## Remote Repositories
-
+    
+    
     git remote -v                        # list remotes
     git remote add origin <url>          # add a remote
     git push origin main                 # push to remote
@@ -65,7 +71,8 @@ Git is the backbone of modern software development. This cheat sheet covers ever
     git push origin --delete <branch>    # delete remote branch
 
 ## Log & History
-
+    
+    
     git log --oneline --graph --all      # pretty history graph
     git log -p <file>                    # see changes to a file
     git blame <file>                     # who changed what line
@@ -74,7 +81,8 @@ Git is the backbone of modern software development. This cheat sheet covers ever
     git show <commit>                    # details of a commit
 
 ## Advanced: Interactive Rebase
-
+    
+    
     git rebase -i HEAD~3                 # squash/reword last 3 commits
     git rebase -i --autosquash           # auto-squash fixup commits
     git rebase --continue | --abort | --skip
@@ -89,5 +97,5 @@ Undo last commit| `git reset --soft HEAD~1`
 Discard file changes| `git restore file.txt`  
 See what you did| `git log --oneline -10`  
 Sync with remote| `git pull --rebase`  
-
+  
 Bookmark this page. You'll be back.

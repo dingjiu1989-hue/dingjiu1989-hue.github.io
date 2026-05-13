@@ -23,7 +23,7 @@ Web search| ✅ Built-in browsing| ❌ Not natively supported
 Multimodal input| Image understanding + generation| Image understanding (no generation)  
 Speed| Fast (especially 4o mini)| Slightly slower but more thorough  
 Cost (Pro tier)| Free / Plus $20 / Pro $200| Free / Pro $20 / Team $25  
-
+  
 ## Scenario-by-Scenario Best Pick
 
 ### Writing Code

@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/responsible-ai.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2837",
+      "wordCount": "5337",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/responsible-ai.html"},
-      "articleBody": "Responsible AI Development Practices Introduction As AI systems make increasingly consequential decisions--from loan approvals to medical diagnoses--responsible AI development is no longer optional. Regulations like the EU AI Act, emerging AI liability frameworks, and growing public scrutiny demand that developers implement systematic fairness, transparency, and safety practices. This article covers practical techniques for building responsible AI applications. Bias Detection and Fairness Metrics Quantify bias across demographic groups using standard fairness metrics: import numpy as np from sklearn.metrics import confusion_matrix from dataclasses import dataclass from typing import Dict, List @dataclass class FairnessReport: group: str sample_size: int positive_rate: float true_positive_rate: float false_positive_rate: float false_negative_rate: float demographic_parity: float # Difference from overall positive rate class BiasAuditor: def __init__(self, protected_attributes: List[str]): self.protected_attributes = protected_attributes def evaluate_fairness( self, y_true: np.ndarray, y_pred: np.ndarray, groups: Dict[str, np.ndarray], ) -> Dict[str, FairnessReport]: \"\"\"Evaluate fairness metrics across all groups.\"\"\" overall_positive_rate = y_pred.mean() reports = {} for group_name, group_mask in groups.items(): group_pred = y_pred[group_mask] group_true = y_true[group_mask] tn, fp, fn, tp = confusion_matrix( group_true, group_pred ).ravel() reports[group_name] = FairnessReport( group=group_name, sample_size=int(group_mask.sum()), positive_rate=group_pred.mean(), true_positive_rate=tp / (tp + fn) if (tp + fn) > 0 else 0, false_positive_rate=fp / (fp + tn) if (fp + tn) > 0 else 0, false_negative_rate=fn / (fn + tp) if (fn + tp) > 0 else 0, demographic_parity=abs( group_pred.mean() - overall_positive_rate ), ) return reports def check_thresholds( self, reports: Dict[str, FairnessReport] ) -> List[str]: \"\"\"Check fairness metrics against thresholds.\"\"\" violations = [] # Demographic parity: max difference max_parity = max(r.demographic_parity for r in reports.values()) if max_parity > 0.1: violations.append( f\"Demographic parity violation: {max_parity:.3f} > 0.1\" ) # Equal opportunity: TPR difference tpr_values = [r.true_positive_rate for r in reports.values()] if max(tpr_values) - min(tpr_values) > 0.1: violations.append(\"Equal opportunity violation: TPR gap > 0.1\") # Equalized odds: FPR difference fpr_values = [r.false_positive_rate for r in reports.values()] if max(fpr_values) - min(fpr_values) > 0.1: violations.append(\"Equalized odds violation: FPR gap > 0.1\") return violations Model Explainability SHAP (SHapley Additive exPlanations) SHAP explains individual predictions by computing feature contributions: import shap import xgboost as xgb import matplotlib.pyplot as plt class ModelExplainer: def __init__(self, model, feature_names: List[str]): self.model = model self.feature_names = feature_names self.explainer = shap.TreeExplainer(model) def explain_prediction(self, instance: np.ndarray) -> dict: \"\"\"Generate SHAP explanation for a single prediction.\"\"\" shap_values = self.explainer.shap_values(instance) explanation = { \"prediction\": float(self.model.predict(instance.reshape(1, -1))[0]), \"base_value\": float(self.explainer.expected_value), \"feature_contributions\": [], } # Sort features by absolute contribution for i, (name, value) in enumerate( sorted( zip(self.feature_names, shap_values[0]), key=lambda x: abs(x[1]), reverse=True, ) ): explanation[\"feature_contributions\"].append({ \"feature\": name, \"value\": float(value), \"direction\": \"positive\" if value > 0 else \"negative\", \"magnitude\": \"high\" if abs(value) > 0.1 else \"low\", }) return explanation def generate_report(self, X: np.ndarray) -> dict: \"\"\"Generate global feature importance summary.\"\"\" shap_values = self.explainer.shap_values(X) # Mean absolute SHAP values mean_shap = np.abs(shap_values).mean(axis=0) feature_importance = sorted( zip(self.feature_names, mean_shap), key=lambda x: x[1], reverse=True, ) return { \"global_importance\": [ {\"feature\": name, \"importance\": float(imp)} for name, imp in feature_importance ], \"top_features\": [ name for name, _ in feature_importance[:5] ], } LIME (Local Interpretable Model-agnostic Explanations) LIME provides model-agnostic local explanations: import lime import lime.lime_tabular class LIMEExplainer: def __init__(self, training_data: np.ndarray, feature_names: List[str]): self.explainer = lime.lime_tabular.LimeTabularExplainer( training_data, feature_names=feature_names, mode=\"classification\", discretize_continuous=True, ) def explain_instance( self, model_predict_fn: Callable, instance: np.ndarray, num_features: int = 10, ) -> dict: \"\"\"Generate LIME explanation for an instance.\"\"\" explanation = self.explainer.explain_instance( instance, model_predict_fn, num_features=num_features, top_labels=1, ) # Format as structured output label, contributions = explanation.as_list(label=1) return { \"predicted_class\": label, \"contributions\": [ { \"feature\": feature, \"weight\": float(weight), \"direction\": ( \"supports\" if weight > 0 else \"opposes\" ), } for feature, weight in contributions ], } Transparency Documentation Maintain model documentation using standardized frameworks: # Model Card: Credit Scoring Model v2.1 model_card: model_details: name: \"CreditRisk-Classifier-v2\" version: \"2.1.0\" type: \"Gradient Boosted Decision Tree\" developer: \"AI Lending Team\" training_date: \"2026-04-15\" intended_use: \"Credit risk assessment for personal loans data: training_dataset: name: \"LoanApplications_2024_2025\" size: \"500,000 records\" features: 45 date_range: \"2024-01 to 2025-12\" demographics: age_range: \"18-85\" income_range: \"$0-$500K\" geographic_distribution: urban: 60% suburban: 30% rural: 10% evaluation_dataset: name: \"LoanApplications_2026_Q1\" size: \"50,000 records\" date_range: \"2026-01 to 2026-03\" performance: overall: accuracy: 0.87 precision: 0.82 recall: 0.79 f1: 0.80 auc_roc: 0.91 fairness_metrics: demographic_parity_difference: 0.03 # Well below 0.1 threshold equal_opportunity_difference: 0.04 evaluated_groups: - gender: [male, female, non-binary] - age: [18-30, 31-50, 51-70, 71+] limitations: - \"Performance degrades for self-employed income types\" - \"Not validated for loans > $50K\" - \"Requires regular retraining (quarterly)\" - \"Does not consider alternative credit data\" ethical_considerations: - \"Model includes explainability override for adverse actions\" - \"Human review required for all rejections\" - \"Monthly bias monitoring in production\" - \"Quarterly fairness audit by external reviewer\" regulatory_compliance: - \"ECOA (Equal Credit Opportunity Act)\" - \"FCRA (Fair Credit Reporting Act)\" - \"EU AI Act (proposed, risk category: limited)\" Safety Guardrails Implement runtime safety checks for LLM applications: class SafetyGuardrails: def __init__(self, config: dict): self.content_filter = ContentFilter( blocked_categories=config.get(\"blocked_categories\", [ \"hate_speech\", \"violence\", \"self_harm\", ]) ) self.prompt_injection_detector = PromptInjectionDetector( sensitivity=config.get(\"sensitivity\", 0.8) ) self.pii_redactor = PIIRedactor( entity_types=[\"EMAIL\", \"PHONE\", \"SSN\", \"CREDIT_CARD\"] ) self.output_validator = OutputValidator( schema=config.get(\"output_schema\") ) async def process_request(self, user_input: str) -> dict: # 1. Input check: detect prompt injection injection_risk = self.prompt_injection_detector.analyze(user_input) if injection_risk.score > 0.85: return {\"blocked\": True, \"reason\": \"prompt_injection\"} # 2. Content filter filtered_input = self.pii_redactor.redact(user_input) if self.content_filter.is_blocked(filtered_input): return {\"blocked\": True, \"reason\": \"blocked_content\"} # 3. Process through model output = await self._invoke_model(filtered_input) # 4. Output validation validated = self.output_validator.validate(output) if not valid: return {\"blocked\": True, \"reason\": \"invalid_output\"} return {\"blocked\": False, \"output\": output} Building responsible AI requires ongoing commitment, not a one-time checklist. Integrate bias audits into CI/CD, maintain model documentation as living documents, and continuously monitor production behavior for drift or emerging fairness issues."
+      "articleBody": "Responsible AI Development Practices Responsible AI Development Practices Responsible AI Development Practices Responsible AI Development Practices Responsible AI Development Practices Introduction As AI systems make increasingly consequential decisions--from loan approvals to medical diagnoses--responsible AI development is no longer optional. Regulations like the EU AI Act, emerging AI liability frameworks, and growing public scrutiny demand that developers implement systematic fairness, transparency, and safety practices. This article covers practical techniques for building responsible AI applications. Bias Detection and Fairness Metrics Quantify bias across demographic groups using standard fairness metrics: import numpy as np from sklearn.metrics import confusion_matrix from dataclasses import dataclass from typing import Dict, List @dataclass class FairnessReport: group: str sample_size: int positive_rate: float true_positive_rate: float false_positive_rate: float false_negative_rate: float demographic_parity: float # Difference from overall positive rate class BiasAuditor: def __init__(self, protected_attributes: List[str]): self.protected_attributes = protected_attributes def evaluate_fairness( self, y_true: np.ndarray, y_pred: np.ndarray, groups: Dict[str, np.ndarray], ) -> Dict[str, FairnessReport]: \"\"\"Evaluate fairness metrics across all groups.\"\"\" overall_positive_rate = y_pred.mean() reports = {} for group_name, group_mask in groups.items(): group_pred = y_pred[group_mask] group_true = y_true[group_mask] tn, fp, fn, tp = confusion_matrix( group_true, group_pred ).ravel() reports[group_name] = FairnessReport( group=group_name, sample_size=int(group_mask.sum()), positive_rate=group_pred.mean(), true_positive_rate=tp / (tp + fn) if (tp + fn) > 0 else 0, false_positive_rate=fp / (fp + tn) if (fp + tn) > 0 else 0, false_negative_rate=fn / (fn + tp) if (fn + tp) > 0 else 0, demographic_parity=abs( group_pred.mean() - overall_positive_rate ), ) return reports def check_thresholds( self, reports: Dict[str, FairnessReport] ) -> List[str]: \"\"\"Check fairness metrics against thresholds.\"\"\" violations = [] Demographic parity: max difference max_parity = max(r.demographic_parity for r in reports.values()) if max_parity > 0.1: violations.append( f\"Demographic parity violation: {max_parity:.3f} > 0.1\" ) Equal opportunity: TPR difference tpr_values = [r.true_positive_rate for r in reports.values()] if max(tpr_values) - min(tpr_values) > 0.1: violations.append(\"Equal opportunity violation: TPR gap > 0.1\") Equalized odds: FPR difference fpr_values = [r.false_positive_rate for r in reports.values()] if max(fpr_values) - min(fpr_values) > 0.1: violations.append(\"Equalized odds violation: FPR gap > 0.1\") return violations Model Explainability SHAP (SHapley Additive exPlanations) SHAP explains individual predictions by computing feature contributions: import shap import xgboost as xgb import matplotlib.pyplot as plt class ModelExplainer: def __init__(self, model, feature_names: List[str]): self.model = model self.feature_names = feature_names self.explainer = shap.TreeExplainer(model) def explain_prediction(self, instance: np.ndarray) -> dict: \"\"\"Generate SHAP explanation for a single prediction.\"\"\" shap_values = self.explainer.shap_values(instance) explanation = { \"prediction\": float(self.model.predict(instance.reshape(1, -1))[0]), \"base_value\": float(self.explainer.expected_value), \"feature_contributions\": [], } Sort features by absolute contribution for i, (name, value) in enumerate( sorted( zip(self.feature_names, shap_values[0]), key=lambda x: abs(x[1]), reverse=True, ) ): explanation[\"feature_contributions\"].append({ \"feature\": name, \"value\": float(value), \"direction\": \"positive\" if value > 0 else \"negative\", \"magnitude\": \"high\" if abs(value) > 0.1 else \"low\", }) return explanation def generate_report(self, X: np.ndarray) -> dict: \"\"\"Generate global feature importance summary.\"\"\" shap_values = self.explainer.shap_values(X) Mean absolute SHAP values mean_shap = np.abs(shap_values).mean(axis=0) feature_importance = sorted( zip(self.feature_names, mean_shap), key=lambda x: x[1], reverse=True, ) return { \"global_importance\": [ {\"feature\": name, \"importance\": float(imp)} for name, imp in feature_importance ], \"top_features\": [ name for name, _ in feature_importance[:5] ], } LIME (Local Interpretable Model-agnostic Explanations) LIME provides model-agnostic local explanations: import lime import lime.lime_tabular class LIMEExplainer: def __init__(self, training_data: np.ndarray, feature_names: List[str]): self.explainer = lime.lime_tabular.LimeTabularExplainer( training_data, feature_names=feature_names, mode=\"classification\", discretize_continuous=True, ) def explain_instance( self, model_predict_fn: Callable, instance: np.ndarray, num_features: int = 10, ) -> dict: \"\"\"Generate LIME explanation for an instance.\"\"\" explanation = self.explainer.explain_instance( instance, model_predict_fn, num_features=num_features, top_labels=1, ) Format as structured output label, contributions = explanation.as_list(label=1) return { \"predicted_class\": label, \"contributions\": [ { \"feature\": feature, \"weight\": float(weight), \"direction\": ( \"supports\" if weight > 0 else \"opposes\" ), } for feature, weight in contributions ], } Transparency Documentation Maintain model documentation using standardized frameworks: Model Card: Credit Scoring Model v2.1 model_card: model_details: name: \"CreditRisk-Classifier-v2\" version: \"2.1.0\" type: \"Gradient Boosted Decision Tree\" developer: \"AI Lending Team\" training_date: \"2026-04-15\" intended_use: \"Credit risk assessment for personal loans data: training_dataset: name: \"LoanApplications_2024_2025\" size: \"500,000 records\" features: 45 date_range: \"2024-01 to 2025-12\" demographics: age_range: \"18-85\" income_range: \"$0-$500K\" geographic_distribution: urban: 60% suburban: 30% rural: 10% evaluation_dataset: name: \"LoanApplications_2026_Q1\" size: \"50,000 records\" date_range: \"2026-01 to 2026-03\" performance: overall: accuracy: 0.87 precision: 0.82 recall: 0.79 f1: 0.80 auc_roc: 0.91 fairness_metrics: demographic_parity_difference: 0.03 # Well below 0.1 threshold equal_opportunity_difference: 0.04 evaluated_groups: \\\\\\\\\\\\\\\\- gender: [male, female, non-binary] \\\\\\\\\\\\\\\\- age: [18-30, 31-50, 51-70, 71+] limitations: \\\\\\\\\\\\\\\\- \"Performance degrades for self-employed income types\" \\\\\\\\\\\\\\\\- \"Not validated for loans > $50K\" \\\\\\\\\\\\\\\\- \"Requires regular retraining (quarterly)\" \\\\\\\\\\\\\\\\- \"Does not consider alternative credit data\" ethical_considerations: \\\\\\\\\\\\\\\\- \"Model includes explainability override for adverse actions\" \\\\\\\\\\\\\\\\- \"Human review required for all rejections\" \\\\\\\\\\\\\\\\- \"Monthly bias monitoring in production\" \\\\\\\\\\\\\\\\- \"Quarterly fairness audit by external reviewer\" regulatory_compliance: \\\\\\\\\\\\\\\\- \"ECOA (Equal Credit Opportunity Act)\" \\\\\\\\\\\\\\\\- \"FCRA (Fair Credit Reporting Act)\" \\\\\\\\\\\\\\\\- \"EU AI Act (proposed, risk category: limited)\" Safety Guardrails Implement runtime safety checks for LLM applications: class SafetyGuardrails: def __init__(self, config: dict): self.content_filter = ContentFilter( blocked_categories=config.get(\"blocked_categories\", [ \"hate_speech\", \"violence\", \"self_harm\", ]) ) self.prompt_injection_detector = PromptInjectionDetector( sensitivity=config.get(\"sensitivity\", 0.8) ) self.pii_redactor = PIIRedactor( entity_types=[\"EMAIL\", \"PHONE\", \"SSN\", \"CREDIT_CARD\"] ) self.output_validator = OutputValidator( schema=config.get(\"output_schema\") ) async def process_request(self, user_input: str) -> dict: 1\\\\\\\\. Input check: detect prompt injection injection_risk = self.prompt_injection_detector.analyze(user_input) if injection_risk.score > 0.85: return {\"blocked\": True, \"reason\": \"prompt_injection\"} 2\\\\\\\\. Content filter filtered_input = self.pii_redactor.redact(user_input) if self.content_filter.is_blocked(filtered_input): return {\"blocked\": True, \"reason\": \"blocked_content\"} 3\\\\\\\\. Process through model output = await self._invoke_model(filtered_input) 4\\\\\\\\. Output validation validated = self.output_validator.validate(output) if not valid: return {\"blocked\": True, \"reason\": \"invalid_output\"} return {\"blocked\": False, \"output\": output} Building responsible AI requires ongoing commitment, not a one-time checklist. Integrate bias audits into CI/CD, maintain model documentation as living documents, and continuously monitor production behavior for drift or emerging fairness issues."
     }
     </script>
     <script type="application/ld+json">
@@ -77,503 +77,3529 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/responsible-ai.png" alt="Responsible AI Development Practices" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Responsible AI Development Practices</h1>
 <br>
+<h1>Responsible AI Development Practices</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>Responsible AI Development Practices</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Responsible AI Development Practices</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Responsible AI Development Practices</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>As AI systems make increasingly consequential decisions--from loan approvals to medical diagnoses--responsible AI development is no longer optional. Regulations like the EU AI Act, emerging AI liability frameworks, and growing public scrutiny demand that developers implement systematic fairness, transparency, and safety practices. This article covers practical techniques for building responsible AI applications.</p>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Bias Detection and Fairness Metrics</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Quantify bias across demographic groups using standard fairness metrics:</p>
 <br>
-<p>    import numpy as np</p>
 <br>
-<p>    from sklearn.metrics import confusion_matrix</p>
 <br>
-<p>    from dataclasses import dataclass</p>
 <br>
-<p>    from typing import Dict, List</p>
 <br>
-<p>    @dataclass</p>
 <br>
-<p>    class FairnessReport:</p>
 <br>
-<p>        group: str</p>
 <br>
-<p>        sample_size: int</p>
 <br>
-<p>        positive_rate: float</p>
 <br>
-<p>        true_positive_rate: float</p>
 <br>
-<p>        false_positive_rate: float</p>
 <br>
-<p>        false_negative_rate: float</p>
 <br>
-<p>        demographic_parity: float  # Difference from overall positive rate</p>
+<p>import numpy as np</p>
 <br>
-<p>    class BiasAuditor:</p>
 <br>
-<p>        def __init__(self, protected_attributes: List[str]):</p>
 <br>
-<p>            self.protected_attributes = protected_attributes</p>
 <br>
-<p>        def evaluate_fairness(</p>
 <br>
-<p>            self,</p>
 <br>
-<p>            y_true: np.ndarray,</p>
 <br>
-<p>            y_pred: np.ndarray,</p>
 <br>
-<p>            groups: Dict[str, np.ndarray],</p>
 <br>
-<p>        ) -> Dict[str, FairnessReport]:</p>
 <br>
-<p>            """Evaluate fairness metrics across all groups."""</p>
 <br>
-<p>            overall_positive_rate = y_pred.mean()</p>
 <br>
-<p>            reports = {}</p>
 <br>
-<p>            for group_name, group_mask in groups.items():</p>
+<p>from sklearn.metrics import confusion_matrix</p>
 <br>
-<p>                group_pred = y_pred[group_mask]</p>
 <br>
-<p>                group_true = y_true[group_mask]</p>
 <br>
-<p>                tn, fp, fn, tp = confusion_matrix(</p>
 <br>
-<p>                    group_true, group_pred</p>
 <br>
-<p>                ).ravel()</p>
 <br>
-<p>                reports[group_name] = FairnessReport(</p>
 <br>
-<p>                    group=group_name,</p>
 <br>
-<p>                    sample_size=int(group_mask.sum()),</p>
 <br>
-<p>                    positive_rate=group_pred.mean(),</p>
 <br>
-<p>                    true_positive_rate=tp / (tp + fn) if (tp + fn) > 0 else 0,</p>
 <br>
-<p>                    false_positive_rate=fp / (fp + tn) if (fp + tn) > 0 else 0,</p>
 <br>
-<p>                    false_negative_rate=fn / (fn + tp) if (fn + tp) > 0 else 0,</p>
 <br>
-<p>                    demographic_parity=abs(</p>
+<p>from dataclasses import dataclass</p>
 <br>
-<p>                        group_pred.mean() - overall_positive_rate</p>
 <br>
-<p>                    ),</p>
 <br>
-<p>                )</p>
 <br>
-<p>            return reports</p>
 <br>
-<p>        def check_thresholds(</p>
 <br>
-<p>            self, reports: Dict[str, FairnessReport]</p>
 <br>
-<p>        ) -> List[str]:</p>
 <br>
-<p>            """Check fairness metrics against thresholds."""</p>
 <br>
-<p>            violations = []</p>
 <br>
-<p>            # Demographic parity: max difference < 0.1</p>
 <br>
-<p>            max_parity = max(r.demographic_parity for r in reports.values())</p>
 <br>
-<p>            if max_parity > 0.1:</p>
 <br>
-<p>                violations.append(</p>
+<p>from typing import Dict, List</p>
 <br>
-<p>                    f"Demographic parity violation: {max_parity:.3f} > 0.1"</p>
 <br>
-<p>                )</p>
 <br>
-<p>            # Equal opportunity: TPR difference < 0.1</p>
 <br>
-<p>            tpr_values = [r.true_positive_rate for r in reports.values()]</p>
 <br>
-<p>            if max(tpr_values) - min(tpr_values) > 0.1:</p>
 <br>
-<p>                violations.append("Equal opportunity violation: TPR gap > 0.1")</p>
 <br>
-<p>            # Equalized odds: FPR difference < 0.1</p>
 <br>
-<p>            fpr_values = [r.false_positive_rate for r in reports.values()]</p>
 <br>
-<p>            if max(fpr_values) - min(fpr_values) > 0.1:</p>
 <br>
-<p>                violations.append("Equalized odds violation: FPR gap > 0.1")</p>
 <br>
-<p>            return violations</p>
+<br>
+<br>
+<p>@dataclass</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class FairnessReport:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>group: str</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>sample_size: int</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>positive_rate: float</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>true_positive_rate: float</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>false_positive_rate: float</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>false_negative_rate: float</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>demographic_parity: float # Difference from overall positive rate</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class BiasAuditor:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def __init__(self, protected_attributes: List[str]):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.protected_attributes = protected_attributes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def evaluate_fairness(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>y_true: np.ndarray,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>y_pred: np.ndarray,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>groups: Dict[str, np.ndarray],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>) -> Dict[str, FairnessReport]:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"""Evaluate fairness metrics across all groups."""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>overall_positive_rate = y_pred.mean()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>reports = {}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for group_name, group_mask in groups.items():</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>group_pred = y_pred[group_mask]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>group_true = y_true[group_mask]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tn, fp, fn, tp = confusion_matrix(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>group_true, group_pred</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>).ravel()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>reports[group_name] = FairnessReport(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>group=group_name,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>sample_size=int(group_mask.sum()),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>positive_rate=group_pred.mean(),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>true_positive_rate=tp / (tp + fn) if (tp + fn) > 0 else 0,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>false_positive_rate=fp / (fp + tn) if (fp + tn) > 0 else 0,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>false_negative_rate=fn / (fn + tp) if (fn + tp) > 0 else 0,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>demographic_parity=abs(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>group_pred.mean() - overall_positive_rate</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return reports</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def check_thresholds(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self, reports: Dict[str, FairnessReport]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>) -> List[str]:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"""Check fairness metrics against thresholds."""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>violations = []</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Demographic parity: max difference < 0.1</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>max_parity = max(r.demographic_parity for r in reports.values())</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if max_parity > 0.1:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>violations.append(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>f"Demographic parity violation: {max_parity:.3f} > 0.1"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Equal opportunity: TPR difference < 0.1</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>tpr_values = [r.true_positive_rate for r in reports.values()]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if max(tpr_values) - min(tpr_values) > 0.1:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>violations.append("Equal opportunity violation: TPR gap > 0.1")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Equalized odds: FPR difference < 0.1</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>fpr_values = [r.false_positive_rate for r in reports.values()]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if max(fpr_values) - min(fpr_values) > 0.1:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>violations.append("Equalized odds violation: FPR gap > 0.1")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return violations</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Model Explainability</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h3>SHAP (SHapley Additive exPlanations)</h3>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>SHAP explains individual predictions by computing feature contributions:</p>
 <br>
-<p>    import shap</p>
 <br>
-<p>    import xgboost as xgb</p>
 <br>
-<p>    import matplotlib.pyplot as plt</p>
 <br>
-<p>    class ModelExplainer:</p>
 <br>
-<p>        def __init__(self, model, feature_names: List[str]):</p>
 <br>
-<p>            self.model = model</p>
 <br>
-<p>            self.feature_names = feature_names</p>
 <br>
-<p>            self.explainer = shap.TreeExplainer(model)</p>
 <br>
-<p>        def explain_prediction(self, instance: np.ndarray) -> dict:</p>
 <br>
-<p>            """Generate SHAP explanation for a single prediction."""</p>
 <br>
-<p>            shap_values = self.explainer.shap_values(instance)</p>
 <br>
-<p>            explanation = {</p>
 <br>
-<p>                "prediction": float(self.model.predict(instance.reshape(1, -1))[0]),</p>
+<p>import shap</p>
 <br>
-<p>                "base_value": float(self.explainer.expected_value),</p>
 <br>
-<p>                "feature_contributions": [],</p>
 <br>
-<p>            }</p>
 <br>
-<p>            # Sort features by absolute contribution</p>
 <br>
-<p>            for i, (name, value) in enumerate(</p>
 <br>
-<p>                sorted(</p>
 <br>
-<p>                    zip(self.feature_names, shap_values[0]),</p>
 <br>
-<p>                    key=lambda x: abs(x[1]),</p>
 <br>
-<p>                    reverse=True,</p>
 <br>
-<p>                )</p>
 <br>
-<p>            ):</p>
 <br>
-<p>                explanation["feature_contributions"].append({</p>
 <br>
-<p>                    "feature": name,</p>
+<p>import xgboost as xgb</p>
 <br>
-<p>                    "value": float(value),</p>
 <br>
-<p>                    "direction": "positive" if value > 0 else "negative",</p>
 <br>
-<p>                    "magnitude": "high" if abs(value) > 0.1 else "low",</p>
 <br>
-<p>                })</p>
 <br>
-<p>            return explanation</p>
 <br>
-<p>        def generate_report(self, X: np.ndarray) -> dict:</p>
 <br>
-<p>            """Generate global feature importance summary."""</p>
 <br>
-<p>            shap_values = self.explainer.shap_values(X)</p>
 <br>
-<p>            # Mean absolute SHAP values</p>
 <br>
-<p>            mean_shap = np.abs(shap_values).mean(axis=0)</p>
 <br>
-<p>            feature_importance = sorted(</p>
 <br>
-<p>                zip(self.feature_names, mean_shap),</p>
 <br>
-<p>                key=lambda x: x[1],</p>
+<p>import matplotlib.pyplot as plt</p>
 <br>
-<p>                reverse=True,</p>
 <br>
-<p>            )</p>
 <br>
-<p>            return {</p>
 <br>
-<p>                "global_importance": [</p>
 <br>
-<p>                    {"feature": name, "importance": float(imp)}</p>
 <br>
-<p>                    for name, imp in feature_importance</p>
 <br>
-<p>                ],</p>
 <br>
-<p>                "top_features": [</p>
 <br>
-<p>                    name for name, _ in feature_importance[:5]</p>
 <br>
-<p>                ],</p>
 <br>
-<p>            }</p>
+<br>
+<br>
+<p>class ModelExplainer:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def __init__(self, model, feature_names: List[str]):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.model = model</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.feature_names = feature_names</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.explainer = shap.TreeExplainer(model)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def explain_prediction(self, instance: np.ndarray) -> dict:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"""Generate SHAP explanation for a single prediction."""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>shap_values = self.explainer.shap_values(instance)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>explanation = {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"prediction": float(self.model.predict(instance.reshape(1, -1))[0]),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"base_value": float(self.explainer.expected_value),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"feature_contributions": [],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Sort features by absolute contribution</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for i, (name, value) in enumerate(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>sorted(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>zip(self.feature_names, shap_values[0]),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>key=lambda x: abs(x[1]),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>reverse=True,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>explanation["feature_contributions"].append({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"feature": name,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"value": float(value),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"direction": "positive" if value > 0 else "negative",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"magnitude": "high" if abs(value) > 0.1 else "low",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>})</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return explanation</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def generate_report(self, X: np.ndarray) -> dict:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"""Generate global feature importance summary."""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>shap_values = self.explainer.shap_values(X)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Mean absolute SHAP values</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>mean_shap = np.abs(shap_values).mean(axis=0)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>feature_importance = sorted(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>zip(self.feature_names, mean_shap),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>key=lambda x: x[1],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>reverse=True,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"global_importance": [</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{"feature": name, "importance": float(imp)}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for name, imp in feature_importance</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"top_features": [</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name for name, _ in feature_importance[:5]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h3>LIME (Local Interpretable Model-agnostic Explanations)</h3>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>LIME provides model-agnostic local explanations:</p>
 <br>
-<p>    import lime</p>
 <br>
-<p>    import lime.lime_tabular</p>
 <br>
-<p>    class LIMEExplainer:</p>
 <br>
-<p>        def __init__(self, training_data: np.ndarray, feature_names: List[str]):</p>
 <br>
-<p>            self.explainer = lime.lime_tabular.LimeTabularExplainer(</p>
 <br>
-<p>                training_data,</p>
 <br>
-<p>                feature_names=feature_names,</p>
 <br>
-<p>                mode="classification",</p>
 <br>
-<p>                discretize_continuous=True,</p>
 <br>
-<p>            )</p>
 <br>
-<p>        def explain_instance(</p>
 <br>
-<p>            self,</p>
 <br>
-<p>            model_predict_fn: Callable,</p>
+<p>import lime</p>
 <br>
-<p>            instance: np.ndarray,</p>
 <br>
-<p>            num_features: int = 10,</p>
 <br>
-<p>        ) -> dict:</p>
 <br>
-<p>            """Generate LIME explanation for an instance."""</p>
 <br>
-<p>            explanation = self.explainer.explain_instance(</p>
 <br>
-<p>                instance,</p>
 <br>
-<p>                model_predict_fn,</p>
 <br>
-<p>                num_features=num_features,</p>
 <br>
-<p>                top_labels=1,</p>
 <br>
-<p>            )</p>
 <br>
-<p>            # Format as structured output</p>
 <br>
-<p>            label, contributions = explanation.as_list(label=1)</p>
 <br>
-<p>            return {</p>
+<p>import lime.lime_tabular</p>
 <br>
-<p>                "predicted_class": label,</p>
 <br>
-<p>                "contributions": [</p>
 <br>
-<p>                    {</p>
 <br>
-<p>                        "feature": feature,</p>
 <br>
-<p>                        "weight": float(weight),</p>
 <br>
-<p>                        "direction": (</p>
 <br>
-<p>                            "supports" if weight > 0 else "opposes"</p>
 <br>
-<p>                        ),</p>
 <br>
-<p>                    }</p>
 <br>
-<p>                    for feature, weight in contributions</p>
 <br>
-<p>                ],</p>
 <br>
-<p>            }</p>
+<br>
+<p>class LIMEExplainer:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def __init__(self, training_data: np.ndarray, feature_names: List[str]):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.explainer = lime.lime_tabular.LimeTabularExplainer(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>training_data,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>feature_names=feature_names,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>mode="classification",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>discretize_continuous=True,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def explain_instance(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model_predict_fn: Callable,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>instance: np.ndarray,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>num_features: int = 10,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>) -> dict:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"""Generate LIME explanation for an instance."""</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>explanation = self.explainer.explain_instance(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>instance,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>model_predict_fn,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>num_features=num_features,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>top_labels=1,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Format as structured output</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>label, contributions = explanation.as_list(label=1)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return {</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"predicted_class": label,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"contributions": [</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"feature": feature,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"weight": float(weight),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"direction": (</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"supports" if weight > 0 else "opposes"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>for feature, weight in contributions</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Transparency Documentation</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Maintain model documentation using standardized frameworks:</p>
 <br>
-<p>    # Model Card: Credit Scoring Model v2.1</p>
 <br>
-<p>    model_card:</p>
 <br>
-<p>      model_details:</p>
 <br>
-<p>        name: "CreditRisk-Classifier-v2"</p>
 <br>
-<p>        version: "2.1.0"</p>
 <br>
-<p>        type: "Gradient Boosted Decision Tree"</p>
 <br>
-<p>        developer: "AI Lending Team"</p>
 <br>
-<p>        training_date: "2026-04-15"</p>
 <br>
-<p>        intended_use: "Credit risk assessment for personal loans < $50K"</p>
 <br>
-<p>      data:</p>
 <br>
-<p>        training_dataset:</p>
 <br>
-<p>          name: "LoanApplications_2024_2025"</p>
 <br>
-<p>          size: "500,000 records"</p>
+<h1>Model Card: Credit Scoring Model v2.1</h1>
 <br>
-<p>          features: 45</p>
 <br>
-<p>          date_range: "2024-01 to 2025-12"</p>
 <br>
-<p>          demographics:</p>
 <br>
-<p>            age_range: "18-85"</p>
 <br>
-<p>            income_range: "$0-$500K"</p>
 <br>
-<p>            geographic_distribution:</p>
 <br>
-<p>              urban: 60%</p>
 <br>
-<p>              suburban: 30%</p>
 <br>
-<p>              rural: 10%</p>
 <br>
-<p>        evaluation_dataset:</p>
 <br>
-<p>          name: "LoanApplications_2026_Q1"</p>
 <br>
-<p>          size: "50,000 records"</p>
 <br>
-<p>          date_range: "2026-01 to 2026-03"</p>
+<p>model_card:</p>
 <br>
-<p>      performance:</p>
 <br>
-<p>        overall:</p>
 <br>
-<p>          accuracy: 0.87</p>
 <br>
-<p>          precision: 0.82</p>
 <br>
-<p>          recall: 0.79</p>
 <br>
-<p>          f1: 0.80</p>
 <br>
-<p>          auc_roc: 0.91</p>
 <br>
-<p>        fairness_metrics:</p>
 <br>
-<p>          demographic_parity_difference: 0.03  # Well below 0.1 threshold</p>
 <br>
-<p>          equal_opportunity_difference: 0.04</p>
 <br>
-<p>          evaluated_groups:</p>
 <br>
-<p>            - gender: [male, female, non-binary]</p>
 <br>
-<p>            - age: [18-30, 31-50, 51-70, 71+]</p>
+<p>model_details:</p>
 <br>
-<p>      limitations:</p>
 <br>
-<p>        - "Performance degrades for self-employed income types"</p>
 <br>
-<p>        - "Not validated for loans > $50K"</p>
 <br>
-<p>        - "Requires regular retraining (quarterly)"</p>
 <br>
-<p>        - "Does not consider alternative credit data"</p>
 <br>
-<p>      ethical_considerations:</p>
 <br>
-<p>        - "Model includes explainability override for adverse actions"</p>
 <br>
-<p>        - "Human review required for all rejections"</p>
 <br>
-<p>        - "Monthly bias monitoring in production"</p>
 <br>
-<p>        - "Quarterly fairness audit by external reviewer"</p>
 <br>
-<p>      regulatory_compliance:</p>
 <br>
-<p>        - "ECOA (Equal Credit Opportunity Act)"</p>
 <br>
-<p>        - "FCRA (Fair Credit Reporting Act)"</p>
+<p>name: "CreditRisk-Classifier-v2"</p>
 <br>
-<p>        - "EU AI Act (proposed, risk category: limited)"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>version: "2.1.0"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>type: "Gradient Boosted Decision Tree"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>developer: "AI Lending Team"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>training_date: "2026-04-15"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>intended_use: "Credit risk assessment for personal loans < $50K"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>data:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>training_dataset:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: "LoanApplications_2024_2025"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>size: "500,000 records"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>features: 45</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>date_range: "2024-01 to 2025-12"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>demographics:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>age_range: "18-85"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>income_range: "$0-$500K"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>geographic_distribution:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>urban: 60%</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>suburban: 30%</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>rural: 10%</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>evaluation_dataset:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>name: "LoanApplications_2026_Q1"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>size: "50,000 records"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>date_range: "2026-01 to 2026-03"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>performance:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>overall:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>accuracy: 0.87</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>precision: 0.82</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>recall: 0.79</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>f1: 0.80</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>auc_roc: 0.91</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>fairness_metrics:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>demographic_parity_difference: 0.03 # Well below 0.1 threshold</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>equal_opportunity_difference: 0.04</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>evaluated_groups:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- gender: [male, female, non-binary]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- age: [18-30, 31-50, 51-70, 71+]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>limitations:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- "Performance degrades for self-employed income types"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- "Not validated for loans > $50K"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- "Requires regular retraining (quarterly)"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- "Does not consider alternative credit data"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ethical_considerations:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- "Model includes explainability override for adverse actions"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- "Human review required for all rejections"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- "Monthly bias monitoring in production"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- "Quarterly fairness audit by external reviewer"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>regulatory_compliance:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- "ECOA (Equal Credit Opportunity Act)"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- "FCRA (Fair Credit Reporting Act)"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\- "EU AI Act (proposed, risk category: limited)"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <h2>  Safety Guardrails</h2>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Implement runtime safety checks for LLM applications:</p>
 <br>
-<p>    class SafetyGuardrails:</p>
 <br>
-<p>        def __init__(self, config: dict):</p>
 <br>
-<p>            self.content_filter = ContentFilter(</p>
 <br>
-<p>                blocked_categories=config.get("blocked_categories", [</p>
 <br>
-<p>                    "hate_speech", "violence", "self_harm",</p>
 <br>
-<p>                ])</p>
 <br>
-<p>            )</p>
 <br>
-<p>            self.prompt_injection_detector = PromptInjectionDetector(</p>
 <br>
-<p>                sensitivity=config.get("sensitivity", 0.8)</p>
 <br>
-<p>            )</p>
 <br>
-<p>            self.pii_redactor = PIIRedactor(</p>
 <br>
-<p>                entity_types=["EMAIL", "PHONE", "SSN", "CREDIT_CARD"]</p>
 <br>
-<p>            )</p>
+<p>class SafetyGuardrails:</p>
 <br>
-<p>            self.output_validator = OutputValidator(</p>
 <br>
-<p>                schema=config.get("output_schema")</p>
 <br>
-<p>            )</p>
 <br>
-<p>        async def process_request(self, user_input: str) -> dict:</p>
 <br>
-<p>            # 1. Input check: detect prompt injection</p>
 <br>
-<p>            injection_risk = self.prompt_injection_detector.analyze(user_input)</p>
 <br>
-<p>            if injection_risk.score > 0.85:</p>
 <br>
-<p>                return {"blocked": True, "reason": "prompt_injection"}</p>
 <br>
-<p>            # 2. Content filter</p>
 <br>
-<p>            filtered_input = self.pii_redactor.redact(user_input)</p>
 <br>
-<p>            if self.content_filter.is_blocked(filtered_input):</p>
 <br>
-<p>                return {"blocked": True, "reason": "blocked_content"}</p>
 <br>
-<p>            # 3. Process through model</p>
+<p>def __init__(self, config: dict):</p>
 <br>
-<p>            output = await self._invoke_model(filtered_input)</p>
 <br>
-<p>            # 4. Output validation</p>
 <br>
-<p>            validated = self.output_validator.validate(output)</p>
 <br>
-<p>            if not valid:</p>
 <br>
-<p>                return {"blocked": True, "reason": "invalid_output"}</p>
 <br>
-<p>            return {"blocked": False, "output": output}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.content_filter = ContentFilter(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>blocked_categories=config.get("blocked_categories", [</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>"hate_speech", "violence", "self_harm",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>])</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.prompt_injection_detector = PromptInjectionDetector(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>sensitivity=config.get("sensitivity", 0.8)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.pii_redactor = PIIRedactor(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>entity_types=["EMAIL", "PHONE", "SSN", "CREDIT_CARD"]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.output_validator = OutputValidator(</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>schema=config.get("output_schema")</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>async def process_request(self, user_input: str) -> dict:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>1\\\\. Input check: detect prompt injection</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>injection_risk = self.prompt_injection_detector.analyze(user_input)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if injection_risk.score > 0.85:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return {"blocked": True, "reason": "prompt_injection"}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>2\\\\. Content filter</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>filtered_input = self.pii_redactor.redact(user_input)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if self.content_filter.is_blocked(filtered_input):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return {"blocked": True, "reason": "blocked_content"}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>3\\\\. Process through model</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>output = await self._invoke_model(filtered_input)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>4\\\\. Output validation</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>validated = self.output_validator.validate(output)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>if not valid:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return {"blocked": True, "reason": "invalid_output"}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return {"blocked": False, "output": output}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <p>Building responsible AI requires ongoing commitment, not a one-time checklist. Integrate bias audits into CI/CD, maintain model documentation as living documents, and continuously monitor production behavior for drift or emerging fairness issues.</p></div>
     </article>
@@ -587,9 +3613,15 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/ai-security-complete-guide.html" class="related-card">AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026</a></div>
-      <noscript><div class="related-grid"><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/multimodal-ai.html" class="related-card">Multimodal AI Applications in 2026</a><a href="/en/ai/ai-security-complete-guide.html" class="related-card">AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026</a></div></noscript>
+      <div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div>
+      <noscript><div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
+    </section>
+    
+    <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
+      <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
+      <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
+      <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
   </div>
 </main>

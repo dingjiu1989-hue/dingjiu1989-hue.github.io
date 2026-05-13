@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-strategies.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "417",
+      "wordCount": "709",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-backup-strategies.html"},
-      "articleBody": "Database Backup and Recovery Strategies RPO and RTO RPO (Recovery Point Objective): Maximum acceptable data loss. RTO (Recovery Time Objective): Maximum acceptable downtime. | System | RPO | RTO | |--------|-----|-----| | Banking | Backup Types | Type | Size | Speed | Restore | |------|------|-------|---------| | Full | Largest | Slowest | Fastest | | Incremental | Smallest | Fastest | Slowest | | Differential | Medium | Medium | Medium | Point-in-Time Recovery (WAL Archiving) # postgresql.conf wal_level = replica archive_mode = on archive_command = 'cp %p /backups/wal/%f' archive_timeout = 60 # Full base backup pg_basebackup -h localhost -D /backups/base/$(date +%Y%m%d) -X stream -P # Restore to point in time # recovery.conf restore_command = 'cp /backups/wal/%f %p' recovery_target_time = '2026-05-11 14:23:45' Cloud Backups # AWS RDS aws rds create-db-snapshot --db-instance-identifier mydb aws rds restore-db-instance-from-db-snapshot \\ --db-instance-identifier mydb-restored \\ --db-snapshot-identifier mydb-snapshot # Point-in-time restore aws rds restore-db-instance-to-point-in-time \\ --source-db-instance-identifier mydb \\ --target-db-instance-identifier mydb-restored \\ --restore-time \"2026-05-11T14:23:45Z\" The 3-2-1 Rule 3 copies of data, 2 different media types, 1 off-site copy. Test restores regularly. Conclusion Define RPO/RTO before designing backup strategy. Use continuous WAL archiving for PITR. Follow the 3-2-1 rule. Test restores regularly. Automate the entire process."
+      "articleBody": "Database Backup and Recovery Strategies Database Backup and Recovery Strategies Database Backup and Recovery Strategies Database Backup and Recovery Strategies RPO and RTO RPO (Recovery Point Objective): Maximum acceptable data loss. RTO (Recovery Time Objective): Maximum acceptable downtime. | System | RPO | RTO | |--------|-----|-----| | Banking | Backup Types | Type | Size | Speed | Restore | |------|------|-------|---------| | Full | Largest | Slowest | Fastest | | Incremental | Smallest | Fastest | Slowest | | Differential | Medium | Medium | Medium | Point-in-Time Recovery (WAL Archiving) postgresql.conf wal_level = replica archive_mode = on archive_command = 'cp %p /backups/wal/%f' archive_timeout = 60 Full base backup pg_basebackup -h localhost -D /backups/base/$(date +%Y%m%d) -X stream -P Restore to point in time recovery.conf restore_command = 'cp /backups/wal/%f %p' recovery_target_time = '2026-05-11 14:23:45' Cloud Backups AWS RDS aws rds create-db-snapshot --db-instance-identifier mydb aws rds restore-db-instance-from-db-snapshot \\ \\\\\\\\--db-instance-identifier mydb-restored \\ \\\\\\\\--db-snapshot-identifier mydb-snapshot Point-in-time restore aws rds restore-db-instance-to-point-in-time \\ \\\\\\\\--source-db-instance-identifier mydb \\ \\\\\\\\--target-db-instance-identifier mydb-restored \\ \\\\\\\\--restore-time \"2026-05-11T14:23:45Z\" The 3-2-1 Rule 3 copies of data, 2 different media types, 1 off-site copy. Test restores regularly. Conclusion Define RPO/RTO before designing backup strategy. Use continuous WAL archiving for PITR. Follow the 3-2-1 rule. Test restores regularly. Automate the entire process."
     }
     </script>
     <script type="application/ld+json">
@@ -77,60 +77,347 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-strategies.png" alt="Database Backup and Recovery Strategies" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Backup and Recovery Strategies</h1>
 <br>
-<p>RPO and RTO   </p>
-<p>RPO (Recovery Point Objective): Maximum acceptable data loss. RTO (Recovery Time Objective): Maximum acceptable downtime.   </p>
-<p>| System | RPO | RTO | |--------|-----|-----| | Banking | < 1 min | < 5 min | | E-commerce | < 5 min | < 1 hour | | Analytics | < 24 hours | < 24 hours |   </p>
-<p>Backup Types   </p>
-<p>| Type | Size | Speed | Restore | |------|------|-------|---------| | Full | Largest | Slowest | Fastest | | Incremental | Smallest | Fastest | Slowest | | Differential | Medium | Medium | Medium |   </p>
-<p>Point-in-Time Recovery (WAL Archiving)   </p>
+<h1>Database Backup and Recovery Strategies</h1>
 <br>
-<p>    # postgresql.conf</p>
 <br>
-<p>    wal_level = replica</p>
 <br>
-<p>    archive_mode = on</p>
 <br>
-<p>    archive_command = 'cp %p /backups/wal/%f'</p>
+<h1>Database Backup and Recovery Strategies</h1>
 <br>
-<p>    archive_timeout = 60</p>
 <br>
-<p>    # Full base backup</p>
 <br>
-<p>    pg_basebackup -h localhost -D /backups/base/$(date +%Y%m%d) -X stream -P</p>
 <br>
-<p>    # Restore to point in time</p>
 <br>
-<p>    # recovery.conf</p>
 <br>
-<p>    restore_command = 'cp /backups/wal/%f %p'</p>
 <br>
-<p>    recovery_target_time = '2026-05-11 14:23:45'</p>
+<h1>Database Backup and Recovery Strategies</h1>
 <br>
-<p>Cloud Backups   </p>
 <br>
-<p>    # AWS RDS</p>
 <br>
-<p>    aws rds create-db-snapshot --db-instance-identifier mydb</p>
 <br>
-<p>    aws rds restore-db-instance-from-db-snapshot \</p>
 <br>
-<p>        --db-instance-identifier mydb-restored \</p>
 <br>
-<p>        --db-snapshot-identifier mydb-snapshot</p>
 <br>
-<p>    # Point-in-time restore</p>
 <br>
-<p>    aws rds restore-db-instance-to-point-in-time \</p>
 <br>
-<p>        --source-db-instance-identifier mydb \</p>
 <br>
-<p>        --target-db-instance-identifier mydb-restored \</p>
+<p>RPO and RTO </p>
 <br>
-<p>        --restore-time "2026-05-11T14:23:45Z"</p>
 <br>
-<p>The 3-2-1 Rule   </p>
-<p>3 copies of data, 2 different media types, 1 off-site copy. Test restores regularly.   </p>
-<p>Conclusion   </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>RPO (Recovery Point Objective): Maximum acceptable data loss. RTO (Recovery Time Objective): Maximum acceptable downtime. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>| System | RPO | RTO | |--------|-----|-----| | Banking | < 1 min | < 5 min | | E-commerce | < 5 min | < 1 hour | | Analytics | < 24 hours | < 24 hours | </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Backup Types </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>| Type | Size | Speed | Restore | |------|------|-------|---------| | Full | Largest | Slowest | Fastest | | Incremental | Smallest | Fastest | Slowest | | Differential | Medium | Medium | Medium | </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Point-in-Time Recovery (WAL Archiving) </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>postgresql.conf</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>wal_level = replica</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>archive_mode = on</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>archive_command = 'cp %p /backups/wal/%f'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>archive_timeout = 60</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Full base backup</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>pg_basebackup -h localhost -D /backups/base/$(date +%Y%m%d) -X stream -P</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Restore to point in time</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>recovery.conf</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>restore_command = 'cp /backups/wal/%f %p'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>recovery_target_time = '2026-05-11 14:23:45'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Cloud Backups </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>AWS RDS</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>aws rds create-db-snapshot --db-instance-identifier mydb</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>aws rds restore-db-instance-from-db-snapshot \</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\--db-instance-identifier mydb-restored \</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\--db-snapshot-identifier mydb-snapshot</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Point-in-time restore</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>aws rds restore-db-instance-to-point-in-time \</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\--source-db-instance-identifier mydb \</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\--target-db-instance-identifier mydb-restored \</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\--restore-time "2026-05-11T14:23:45Z"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>The 3-2-1 Rule </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>3 copies of data, 2 different media types, 1 off-site copy. Test restores regularly. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Define RPO/RTO before designing backup strategy. Use continuous WAL archiving for PITR. Follow the 3-2-1 rule. Test restores regularly. Automate the entire process.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -147,6 +434,7 @@
       <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

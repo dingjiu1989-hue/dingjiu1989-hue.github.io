@@ -23,7 +23,7 @@ Type Safety| Good (improving)| Good (loader/action types)| Excellent (end-to-end
 Caching| Extensive (4 caching layers)| Minimal (CDN caching headers)| Minimal (TanStack Query client cache)  
 Streaming| Yes (Suspense + streaming SSR)| Yes (defer + Await)| Yes (Suspense + streaming)  
 Deployment| Vercel (best), Node.js, Docker| Any Node.js/Fetch runtime| Node.js, Bun, Deno, Cloudflare  
-
+  
 ## When Each Framework Wins
 
 **Next.js 15 — Best for:** Teams that want one framework for everything: marketing pages (SSG), dashboards (SSR), and e-commerce (ISR). The Vercel ecosystem (Analytics, Speed Insights, KV) is a force multiplier. **Weak spot:** Caching complexity — Next.js has 4 caching layers that interact in surprising ways. The mental model is heavy.
@@ -41,5 +41,5 @@ Dashboard or SaaS app (mostly dynamic)| Remix or TanStack Start| Better data mut
 Type-safety obsessed team| TanStack Start| End-to-end type-safe routing is unmatched  
 Deploy to non-Vercel (Cloudflare, Deno)| Remix or TanStack Start| Run anywhere with Fetch API  
 Already use TanStack ecosystem| TanStack Start| TanStack Query, Router, Table — all first-class  
-
+  
 **Bottom line:** Next.js is the safe default with the largest ecosystem. Remix is better for mostly-dynamic apps where you value web standards. TanStack Start is the rising star for type-safety enthusiasts. Pick the philosophy that matches your team. See also: [Next.js vs Nuxt vs SvelteKit](</en/compare/nextjs-vs-nuxt-vs-sveltekit.html>) and [React vs Vue vs Angular vs Svelte](</en/compare/react-vs-vue-vs-angular-vs-svelte.html>).

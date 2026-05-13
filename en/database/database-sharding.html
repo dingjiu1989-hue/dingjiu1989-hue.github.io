@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-sharding.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "433",
+      "wordCount": "718",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-sharding.html"},
-      "articleBody": "Database Sharding: Strategies and Trade-offs What is Sharding? Sharding splits a database across multiple servers horizontally. Each shard holds a subset of data, allowing linear scalability. Key-Based Sharding Hash the shard key to determine the target shard: class KeyBasedShardManager: def __init__(self, num_shards=4): self.num_shards = num_shards self.shards = [Shard(i) for i in range(num_shards)] def get_shard(self, shard_key): hash_val = int(hashlib.sha256(str(shard_key).encode()).hexdigest(), 16) shard_id = hash_val % self.num_shards return self.shards[shard_id] Range-Based Sharding Partition by value ranges: CREATE TABLE orders ( id BIGSERIAL, order_date DATE, total DECIMAL(10,2), PRIMARY KEY (id, order_date) ) PARTITION BY RANGE (order_date); CREATE TABLE orders_2026_01 PARTITION OF orders FOR VALUES FROM ('2026-01-01') TO ('2026-02-01'); Directory-Based Sharding Use a lookup table for shard mapping: class DirectoryShardManager: def __init__(self): self.directory = {} def map_key_to_shard(self, shard_key, shard_id): self.directory[shard_key] = shard_id def get_shard(self, shard_key): return self.directory.get(shard_key) Rebalancing When adding or removing shards, data must be redistributed. Use consistent hashing to minimize data movement. Tools like Vitess and Citus automate this process. Conclusion Choose key-based sharding for even distribution, range-based for time-series data, and directory-based for maximum flexibility. Design shard keys carefully for even distribution. Plan for rebalancing from the start. Avoid cross-shard queries where possible."
+      "articleBody": "Database Sharding: Strategies and Trade-offs Database Sharding: Strategies and Trade-offs Database Sharding: Strategies and Trade-offs Database Sharding: Strategies and Trade-offs What is Sharding? Sharding splits a database across multiple servers horizontally. Each shard holds a subset of data, allowing linear scalability. Key-Based Sharding Hash the shard key to determine the target shard: class KeyBasedShardManager: def __init__(self, num_shards=4): self.num_shards = num_shards self.shards = [Shard(i) for i in range(num_shards)] def get_shard(self, shard_key): hash_val = int(hashlib.sha256(str(shard_key).encode()).hexdigest(), 16) shard_id = hash_val % self.num_shards return self.shards[shard_id] Range-Based Sharding Partition by value ranges: CREATE TABLE orders ( id BIGSERIAL, order_date DATE, total DECIMAL(10,2), PRIMARY KEY (id, order_date) ) PARTITION BY RANGE (order_date); CREATE TABLE orders_2026_01 PARTITION OF orders FOR VALUES FROM ('2026-01-01') TO ('2026-02-01'); Directory-Based Sharding Use a lookup table for shard mapping: class DirectoryShardManager: def __init__(self): self.directory = {} def map_key_to_shard(self, shard_key, shard_id): self.directory[shard_key] = shard_id def get_shard(self, shard_key): return self.directory.get(shard_key) Rebalancing When adding or removing shards, data must be redistributed. Use consistent hashing to minimize data movement. Tools like Vitess and Citus automate this process. Conclusion Choose key-based sharding for even distribution, range-based for time-series data, and directory-based for maximum flexibility. Design shard keys carefully for even distribution. Plan for rebalancing from the start. Avoid cross-shard queries where possible."
     }
     </script>
     <script type="application/ld+json">
@@ -77,62 +77,358 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-sharding.png" alt="Database Sharding: Strategies and Trade-offs" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Sharding: Strategies and Trade-offs</h1>
 <br>
-<p>What is Sharding?   </p>
-<p>Sharding splits a database across multiple servers horizontally. Each shard holds a subset of data, allowing linear scalability.   </p>
-<p>Key-Based Sharding   </p>
-<p>Hash the shard key to determine the target shard:   </p>
+<h1>Database Sharding: Strategies and Trade-offs</h1>
 <br>
-<p>    class KeyBasedShardManager:</p>
 <br>
-<p>        def __init__(self, num_shards=4):</p>
 <br>
-<p>            self.num_shards = num_shards</p>
 <br>
-<p>            self.shards = [Shard(i) for i in range(num_shards)]</p>
+<h1>Database Sharding: Strategies and Trade-offs</h1>
 <br>
-<p>        def get_shard(self, shard_key):</p>
 <br>
-<p>            hash_val = int(hashlib.sha256(str(shard_key).encode()).hexdigest(), 16)</p>
 <br>
-<p>            shard_id = hash_val % self.num_shards</p>
 <br>
-<p>            return self.shards[shard_id]</p>
 <br>
-<p>Range-Based Sharding   </p>
-<p>Partition by value ranges:   </p>
 <br>
-<p>    CREATE TABLE orders (</p>
 <br>
-<p>        id BIGSERIAL, order_date DATE, total DECIMAL(10,2),</p>
+<h1>Database Sharding: Strategies and Trade-offs</h1>
 <br>
-<p>        PRIMARY KEY (id, order_date)</p>
 <br>
-<p>    ) PARTITION BY RANGE (order_date);</p>
 <br>
-<p>    CREATE TABLE orders_2026_01 PARTITION OF orders</p>
 <br>
-<p>        FOR VALUES FROM ('2026-01-01') TO ('2026-02-01');</p>
 <br>
-<p>Directory-Based Sharding   </p>
-<p>Use a lookup table for shard mapping:   </p>
 <br>
-<p>    class DirectoryShardManager:</p>
 <br>
-<p>        def __init__(self):</p>
 <br>
-<p>            self.directory = {}</p>
 <br>
-<p>        def map_key_to_shard(self, shard_key, shard_id):</p>
 <br>
-<p>            self.directory[shard_key] = shard_id</p>
+<p>What is Sharding? </p>
 <br>
-<p>        def get_shard(self, shard_key):</p>
 <br>
-<p>            return self.directory.get(shard_key)</p>
 <br>
-<p>Rebalancing   </p>
-<p>When adding or removing shards, data must be redistributed. Use consistent hashing to minimize data movement. Tools like Vitess and Citus automate this process.   </p>
-<p>Conclusion   </p>
+<br>
+<br>
+<br>
+<br>
+<p>Sharding splits a database across multiple servers horizontally. Each shard holds a subset of data, allowing linear scalability. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Key-Based Sharding </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Hash the shard key to determine the target shard: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class KeyBasedShardManager:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def __init__(self, num_shards=4):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.num_shards = num_shards</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.shards = [Shard(i) for i in range(num_shards)]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def get_shard(self, shard_key):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>hash_val = int(hashlib.sha256(str(shard_key).encode()).hexdigest(), 16)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>shard_id = hash_val % self.num_shards</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return self.shards[shard_id]</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Range-Based Sharding </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Partition by value ranges: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE TABLE orders (</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>id BIGSERIAL, order_date DATE, total DECIMAL(10,2),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>PRIMARY KEY (id, order_date)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>) PARTITION BY RANGE (order_date);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>CREATE TABLE orders_2026_01 PARTITION OF orders</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>FOR VALUES FROM ('2026-01-01') TO ('2026-02-01');</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Directory-Based Sharding </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Use a lookup table for shard mapping: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>class DirectoryShardManager:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def __init__(self):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.directory = {}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def map_key_to_shard(self, shard_key, shard_id):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>self.directory[shard_key] = shard_id</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>def get_shard(self, shard_key):</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>return self.directory.get(shard_key)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Rebalancing </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>When adding or removing shards, data must be redistributed. Use consistent hashing to minimize data movement. Tools like Vitess and Citus automate this process. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Choose key-based sharding for even distribution, range-based for time-series data, and directory-based for maximum flexibility. Design shard keys carefully for even distribution. Plan for rebalancing from the start. Avoid cross-shard queries where possible.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -149,6 +445,7 @@
       <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

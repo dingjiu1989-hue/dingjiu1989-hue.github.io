@@ -19,7 +19,7 @@ Wyant| $30-$100/hr| 25%| Long-term tutoring, structured curriculum
 MentorCruise| $100-$600/mo (per mentee)| 8-15%| Long-term mentoring relationships (3-6 months)  
 Pluralsight / Udemy| $3-$50/course sale| 50-97% (depending on source)| Pre-recorded courses, one-to-many  
 Independent (own website)| $50-$300/hr| 0%| Maximum earnings, but you handle marketing  
-
+  
 ## Pricing Guide: What Developers Can Charge
 
 Experience Level| Tutoring Rate| Mentoring Rate (long-term)| Best Topics  
@@ -28,7 +28,7 @@ Junior (1-3 years)| $30-$50/hr| $100-$200/mo| Basic programming, HTML/CSS, intro
 Mid-Level (3-7 years)| $50-$100/hr| $200-$400/mo| React, Node.js, Python, system design basics  
 Senior (7+ years)| $100-$200/hr| $400-$800/mo| Architecture, career coaching, FAANG interview prep  
 Specialist (niche expertise)| $150-$300/hr| $600-$1,500/mo| Rust, ML engineering, blockchain, security, devops  
-
+  
 ## How to Get Your First Students
 
   1. **Start on Codementor:** Create a profile with your real experience, set a competitive rate ($30-50/hr initially), and respond quickly to live requests. The first 5 reviews are the hardest to get.
@@ -36,6 +36,8 @@ Specialist (niche expertise)| $150-$300/hr| $600-$1,500/mo| Rust, ML engineering
   3. **Niche down:** "I teach React" gets lost. "I help mid-level developers crack FAANG frontend interviews" attracts specific clients willing to pay premium rates.
   4. **Free intro sessions:** Offer a free 15-minute intro call. Converts 30-50% of prospects into paying students.
   5. **Ask for testimonials:** After 5+ sessions, ask for LinkedIn recommendations or video testimonials. Social proof is the #1 conversion factor.
+
+
 
 ## Independent vs Platform: The Trade-Off
 
@@ -46,5 +48,5 @@ Commission| 8-25%| 0%
 Payment Handling| Platform handles it| Stripe + invoicing yourself  
 Scheduling| Built-in calendar| Calendly or similar  
 Best Strategy| Start here, build reputation| Transition once you have a waitlist  
-
+  
 **Bottom line:** Start on Codementor to get your first students and reviews — the platform fee is worth the client acquisition. Once you have a steady stream of referrals and testimonials, transition to independent mentoring (via Calendly + Stripe) and keep 100%. The most profitable niche is FAANG interview prep — developers will pay $100-200/hour to prepare for a $300K+ job. See also: [Developer Consulting Guide](</en/sidehustle/developer-consulting-guide.html>) and [Create an Online Course](</en/sidehustle/create-online-course.html>).

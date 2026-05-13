@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/mongodb-vs-postgresql.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "344",
+      "wordCount": "591",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/mongodb-vs-postgresql.html"},
-      "articleBody": "MongoDB vs PostgreSQL The Great Database Debate MongoDB and PostgreSQL are two of the most popular databases. Each excels in different scenarios. When to Choose MongoDB MongoDB shines with flexible schemas and nested data: db.orders.insertOne({ orderId: \"ORD-5001\", customer: { id: \"CUST-42\", name: \"Alice\", email: \"alice@example.com\" }, items: [ { productId: \"PROD-1\", name: \"Widget\", quantity: 2, price: 29.99 } ], total: 59.98, status: \"shipped\", createdAt: new Date() }); db.orders.findOne({ orderId: \"ORD-5001\" }); When to Choose PostgreSQL PostgreSQL excels with relational data and complex queries: SELECT c.name, COUNT(o.id) as order_count, SUM(o.total) as total_spent FROM customers c LEFT JOIN orders o ON c.id = o.customer_id WHERE o.created_at >= '2026-01-01' GROUP BY c.id, c.name HAVING COUNT(o.id) > 5 ORDER BY total_spent DESC; Decision Matrix | Factor | MongoDB | PostgreSQL | |--------|---------|------------| | Schema | Flexible | Fixed | | Joins | $lookup (slower) | Native (fast) | | Transactions | Multi-doc (v7+) | ACID by default | | Sharding | Native | Extensions (Citus) | Conclusion Choose MongoDB for document-shaped data and high write throughput. Choose PostgreSQL for complex queries, strict consistency, and relational integrity. Many successful systems use both."
+      "articleBody": "MongoDB vs PostgreSQL MongoDB vs PostgreSQL MongoDB vs PostgreSQL MongoDB vs PostgreSQL The Great Database Debate MongoDB and PostgreSQL are two of the most popular databases. Each excels in different scenarios. When to Choose MongoDB MongoDB shines with flexible schemas and nested data: db.orders.insertOne({ orderId: \"ORD-5001\", customer: { id: \"CUST-42\", name: \"Alice\", email: \"alice@example.com\" }, items: [ { productId: \"PROD-1\", name: \"Widget\", quantity: 2, price: 29.99 } ], total: 59.98, status: \"shipped\", createdAt: new Date() }); db.orders.findOne({ orderId: \"ORD-5001\" }); When to Choose PostgreSQL PostgreSQL excels with relational data and complex queries: SELECT c.name, COUNT(o.id) as order_count, SUM(o.total) as total_spent FROM customers c LEFT JOIN orders o ON c.id = o.customer_id WHERE o.created_at >= '2026-01-01' GROUP BY c.id, c.name HAVING COUNT(o.id) > 5 ORDER BY total_spent DESC; Decision Matrix | Factor | MongoDB | PostgreSQL | |--------|---------|------------| | Schema | Flexible | Fixed | | Joins | $lookup (slower) | Native (fast) | | Transactions | Multi-doc (v7+) | ACID by default | | Sharding | Native | Extensions (Citus) | Conclusion Choose MongoDB for document-shaped data and high write throughput. Choose PostgreSQL for complex queries, strict consistency, and relational integrity. Many successful systems use both."
     }
     </script>
     <script type="application/ld+json">
@@ -77,53 +77,306 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/mongodb-vs-postgresql.png" alt="MongoDB vs PostgreSQL" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>MongoDB vs PostgreSQL</h1>
 <br>
-<p>The Great Database Debate   </p>
-<p>MongoDB and PostgreSQL are two of the most popular databases. Each excels in different scenarios.   </p>
-<p>When to Choose MongoDB   </p>
-<p>MongoDB shines with flexible schemas and nested data:   </p>
+<h1>MongoDB vs PostgreSQL</h1>
 <br>
-<p>    db.orders.insertOne({</p>
 <br>
-<p>      orderId: "ORD-5001",</p>
 <br>
-<p>      customer: { id: "CUST-42", name: "Alice", email: "alice@example.com" },</p>
 <br>
-<p>      items: [</p>
+<h1>MongoDB vs PostgreSQL</h1>
 <br>
-<p>        { productId: "PROD-1", name: "Widget", quantity: 2, price: 29.99 }</p>
 <br>
-<p>      ],</p>
 <br>
-<p>      total: 59.98,</p>
 <br>
-<p>      status: "shipped",</p>
 <br>
-<p>      createdAt: new Date()</p>
 <br>
-<p>    });</p>
 <br>
-<p>    db.orders.findOne({ orderId: "ORD-5001" });</p>
+<h1>MongoDB vs PostgreSQL</h1>
 <br>
-<p>When to Choose PostgreSQL   </p>
-<p>PostgreSQL excels with relational data and complex queries:   </p>
 <br>
-<p>    SELECT c.name, COUNT(o.id) as order_count, SUM(o.total) as total_spent</p>
 <br>
-<p>    FROM customers c</p>
 <br>
-<p>    LEFT JOIN orders o ON c.id = o.customer_id</p>
 <br>
-<p>    WHERE o.created_at >= '2026-01-01'</p>
 <br>
-<p>    GROUP BY c.id, c.name</p>
 <br>
-<p>    HAVING COUNT(o.id) > 5</p>
 <br>
-<p>    ORDER BY total_spent DESC;</p>
 <br>
-<p>Decision Matrix   </p>
-<p>| Factor | MongoDB | PostgreSQL | |--------|---------|------------| | Schema | Flexible | Fixed | | Joins | $lookup (slower) | Native (fast) | | Transactions | Multi-doc (v7+) | ACID by default | | Sharding | Native | Extensions (Citus) |   </p>
-<p>Conclusion   </p>
+<br>
+<p>The Great Database Debate </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>MongoDB and PostgreSQL are two of the most popular databases. Each excels in different scenarios. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>When to Choose MongoDB </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>MongoDB shines with flexible schemas and nested data: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>db.orders.insertOne({</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>orderId: "ORD-5001",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>customer: { id: "CUST-42", name: "Alice", email: "alice@example.com" },</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>items: [</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>{ productId: "PROD-1", name: "Widget", quantity: 2, price: 29.99 }</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>],</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>total: 59.98,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>status: "shipped",</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>createdAt: new Date()</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>db.orders.findOne({ orderId: "ORD-5001" });</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>When to Choose PostgreSQL </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>PostgreSQL excels with relational data and complex queries: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>SELECT c.name, COUNT(o.id) as order_count, SUM(o.total) as total_spent</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>FROM customers c</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>LEFT JOIN orders o ON c.id = o.customer_id</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>WHERE o.created_at >= '2026-01-01'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>GROUP BY c.id, c.name</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>HAVING COUNT(o.id) > 5</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>ORDER BY total_spent DESC;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Decision Matrix </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>| Factor | MongoDB | PostgreSQL | |--------|---------|------------| | Schema | Flexible | Fixed | | Joins | $lookup (slower) | Native (fast) | | Transactions | Multi-doc (v7+) | ACID by default | | Sharding | Native | Extensions (Citus) | </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Conclusion </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Choose MongoDB for document-shaped data and high write throughput. Choose PostgreSQL for complex queries, strict consistency, and relational integrity. Many successful systems use both.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -140,6 +393,7 @@
       <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
       <div id="related-posts" style="display:none;"></div>
     </section>
+    
   </div>
 </main>
 <div id="footer-placeholder"></div>

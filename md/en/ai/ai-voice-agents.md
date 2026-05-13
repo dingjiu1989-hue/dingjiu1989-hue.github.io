@@ -20,17 +20,18 @@ Stage| Technology| Latency Budget| What Happens
 4\. Text-to-Speech (TTS)| ElevenLabs, OpenAI TTS, Play.ht| 100-500ms| Text converted to natural speech  
 5\. Audio Output| WebRTC (browser speaker)| ~20ms| Audio played to user  
 Total (ideal)| —| 500-1,500ms| Target: under 1 second for natural conversation  
-
+  
 ## Voice Agent Architecture
-
+    
+    
     # Simplified voice agent using OpenAI Realtime API
     # The Realtime API combines STT + LLM + TTS into one WebSocket connection
     # Latency: ~500-800ms end-to-end (much faster than chained APIs)
-
+    
     import asyncio
     import websockets
     import json
-
+    
     async def voice_agent():
         async with websockets.connect(
             "wss://api.openai.com/v1/realtime?model=gpt-4o-realtime",
@@ -48,7 +49,7 @@ Total (ideal)| —| 500-1,500ms| Target: under 1 second for natural conversation
                     "turn_detection": {"type": "server_vad"}  # Voice activity detection
                 }
             }))
-
+    
             # Stream audio from browser mic -> ws -> receive audio back
             async for message in ws:
                 event = json.loads(message)
@@ -63,7 +64,7 @@ Component| Best Options| Key Considerations
 STT (Speech-to-Text)| Deepgram (lowest latency, 100ms), Whisper v3 (best accuracy), AssemblyAI (best features)| Deepgram for real-time; Whisper for batch/offline; AssemblyAI for diarization + sentiment  
 LLM| GPT-4o Realtime (all-in-one, best latency), Claude (best reasoning), Gemini (cheapest)| Realtime API eliminates STT/TTS chaining latency; separate STT+LLM+TTS gives more control  
 TTS (Text-to-Speech)| ElevenLabs (most natural voices), OpenAI TTS (good + integrated), Play.ht (cloning + emotions)| ElevenLabs for quality; OpenAI for simplicity; Play.ht for custom voice cloning  
-
+  
 ## Interruption Handling (Barge-In)
 
 **Critical feature:** Users need to be able to interrupt the AI mid-response (like a human conversation). Implementation: monitor microphone audio level during AI playback. If sustained audio above threshold, immediately stop TTS playback, flush the LLM's partial response, and start listening for the new input. Without interruption handling, the voice agent feels robotic and frustrating.
