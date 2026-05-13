@@ -24,7 +24,7 @@ EN_ARTICLES = ROOT / "en" / "articles.json"
 CN_ARTICLES = ROOT / "articles.json"
 
 # ── Config ──────────────────────────────────────────────
-REPLIES_PER_RUN = (8, 25)       # random range of replies to distribute
+REPLIES_PER_RUN = (20, 40)       # random range of replies to distribute (min covers 8 boards x 2 + overflow)
 HOT_THRESHOLD = 5               # articles with >= this many replies get 🔥 hot tag
 STATS_TODAY = 3                 # today's new posts (looks active but not spammy)
 STATS_YESTERDAY = 570           # yesterday's activity baseline
@@ -32,7 +32,10 @@ BUMP_FRESH_COUNT = 3            # articles to date-bump per run
 
 
 def simulate_forum():
-    """Add forum activity signals — replies, hot tags, fresh dates."""
+    """Add forum activity signals — replies, hot tags, fresh dates.
+    Guarantees every board receives replies each run so no board
+    (e.g., Security, Database, Architecture) is left cold.
+    """
     changed = 0
 
     for articles_path in [EN_ARTICLES, CN_ARTICLES]:
@@ -44,35 +47,61 @@ def simulate_forum():
         data["site"]["stats"]["today"] = STATS_TODAY
         data["site"]["stats"]["yesterday"] = STATS_YESTERDAY
 
-        # Collect all articles
-        all_articles = []
-        for board in data["boards"]:
-            for art in board["posts"]:
-                all_articles.append((board, art))
-
-        # Distribute replies randomly
+        # ── Guarantee minimum replies per board ──
+        # Concentrate on fewer articles so they actually cross HOT_THRESHOLD
+        MIN_REPLIES_PER_BOARD = 3      # total replies given to each board
+        MIN_ARTICLES_PER_BOARD = 2     # spread across this many articles
         total_replies = random.randint(*REPLIES_PER_RUN)
-        num_recipients = min(total_replies, max(1, len(all_articles) // 4))
-        recipients = random.sample(all_articles, num_recipients)
         replies_left = total_replies
-        for i, (board, art) in enumerate(recipients):
-            share = replies_left // (num_recipients - i) if i < num_recipients else replies_left
-            if share > 0:
-                art["replies"] = art.get("replies", 0) + share
-                replies_left -= share
 
-        # Flag hot articles
+        for board in data["boards"]:
+            allocated = min(MIN_REPLIES_PER_BOARD, replies_left)
+            if allocated > 0 and board["posts"]:
+                # Prefer articles that already have some replies (building momentum)
+                candidates = [a for a in board["posts"] if a.get("replies", 0) > 0 and not a.get("hot")]
+                if len(candidates) < MIN_ARTICLES_PER_BOARD:
+                    candidates = board["posts"]
+                selected = random.sample(candidates, min(MIN_ARTICLES_PER_BOARD, len(candidates)))
+                share = allocated // len(selected)
+                for art in selected:
+                    art["replies"] = art.get("replies", 0) + share
+                # Any remainder goes to first selected
+                remainder = allocated - share * len(selected)
+                if remainder > 0:
+                    selected[0]["replies"] += remainder
+                replies_left -= allocated
+
+        # ── Distribute remaining replies randomly across ALL articles ──
+        if replies_left > 0:
+            all_articles = []
+            for board in data["boards"]:
+                for art in board["posts"]:
+                    all_articles.append((board, art))
+            num_recipients = min(replies_left, max(1, len(all_articles) // 4))
+            recipients = random.sample(all_articles, num_recipients)
+            for i, (board, art) in enumerate(recipients):
+                share = replies_left // (num_recipients - i) if i < num_recipients else replies_left
+                if share > 0:
+                    art["replies"] = art.get("replies", 0) + share
+                    replies_left -= share
+
+        # ── Flag hot articles ──
         for board in data["boards"]:
             for art in board["posts"]:
                 if art.get("replies", 0) >= HOT_THRESHOLD and not art.get("hot"):
                     art["hot"] = True
                     changed += 1
 
-        # Mark recently active articles (separate from publication date)
-        bumpable = [a for _, a in all_articles if a.get("replies", 0) > 0]
-        if bumpable:
+        # ── Pick bumpable from ALL articles with replies (across all boards) ──
+        all_with_replies = []
+        for board in data["boards"]:
+            for art in board["posts"]:
+                if art.get("replies", 0) > 0:
+                    all_with_replies.append(art)
+
+        if all_with_replies:
             today_str = date.today().isoformat()
-            for art in random.sample(bumpable, min(BUMP_FRESH_COUNT, len(bumpable))):
+            for art in random.sample(all_with_replies, min(BUMP_FRESH_COUNT, len(all_with_replies))):
                 art["lastActive"] = today_str
                 changed += 1
 
