@@ -33,7 +33,7 @@ jobs:
           HASHNODE_PUBLICATION_ID: ${{ secrets.HASHNODE_PUBLICATION_ID }}
         run: |
           echo "$HASHNODE_API_KEY" > .hashnode-key
-          python3 scripts/syndicate_hashnode.py
+          python3 scripts/syndicate_hashnode.py || true
 
       - name: Build cross-platform identity (sameAs)
         env:

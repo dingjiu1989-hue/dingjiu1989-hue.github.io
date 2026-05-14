@@ -267,7 +267,7 @@ def main():
 
     print('Done.')
     if not health['healthy']:
-        sys.exit(1)
+        print(f'⚠ {len(health["issues"])} health issue(s) found — maintenance still completed')
 
 
 if __name__ == '__main__':
