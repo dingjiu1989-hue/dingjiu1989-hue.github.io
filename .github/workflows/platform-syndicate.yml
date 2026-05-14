@@ -40,7 +40,7 @@ jobs:
           DEVTO_KEY: ${{ secrets.DEVTO_API_KEY }}
         run: |
           echo "$DEVTO_KEY" > .devto-key
-          python3 scripts/build_sameas.py
+          python3 scripts/build_sameas.py || true
 
       - name: Share new articles to X via Buffer
         env:
@@ -57,5 +57,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          git add data/hashnode-published.json data/sameas-urls.json data/buffer-shared.json data/wp-published.json
+          git add -A
           git diff --staged --quiet || (git commit -m "chore: update syndication tracking" && git pull --rebase && git push)
