@@ -28,6 +28,7 @@ jobs:
           git add data/weekly-report.md
           if ! git diff --cached --quiet; then
             git commit -m "chore: weekly audit report $(date +%Y-%m-%d)"
+            git pull --rebase
             git push
           else
             echo "No changes to report"
